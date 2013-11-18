@@ -1,0 +1,244 @@
+<project name="JFoto" default="build" basedir=".">
+	<property file="build.properties"/>
+	<!--<property file="/kwaqua/src/test/resources/kwaqua.properties"/>-->
+
+	<property name="app.name" value="jphoto"/>
+	<property name="app.version" value="${app.version}"/>
+
+	<property name="properties.home" value="web/WEB-INF/properties"/>
+
+	<property name="work.home" value="${basedir}/work"/>
+	<property name="dist.home" value="${basedir}/dist"/>
+	<property name="src.home" value="${basedir}/src"/>
+	<property name="web.home" value="${basedir}/web"/>
+
+	<property name="war.path" value="${dist.home}/${app.name}.war"/>
+
+	<property name="web-inf" value="${web.home}/WEB-INF"/>
+	<property name="deploy.classes" value="${web.home}/WEB-INF/classes"/>
+
+	<property name="work.classes" value="${work.home}/WEB-INF/classes"/>
+	<property name="jsp.classes" value="${work.classes}"/>
+	<property name="tests.unit.classes" value="${work.classes}"/>
+	<property name="tests.kwaqua.classes" value="${work.classes}"/>
+
+	<property name="tests.unit.src" value="${basedir}/tests/unit"/>
+	<property name="tests.unit.reports" value="${tests.unit.src}/_reports"/>
+
+	<property name="tests.kwaqua.src" value="${basedir}/tests/kwaqua"/>
+	<property name="tests.kwaqua.reports" value="${tests.kwaqua.src}/_reports"/>
+
+	<property name="tomcat.lib" value="${tomcat.home}/lib"/>
+	<property name="web-inf.lib" value="web/WEB-INF/lib"/>
+	<property name="tests.lib" value="${basedir}/tests/lib"/>
+	<property name="tests.lib.runtime" value="${basedir}/tests/lib-runtime"/>
+
+	<property name="tests.kwaqua.build" value="${basedir}/tests/kwaqua.build"/>
+
+	<!-- Define the CLASSPATH -->
+	<path id="compile.classpath">
+		<fileset dir="${tomcat.home}/bin">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${tomcat.lib}"/>
+		<fileset dir="${tomcat.lib}">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${web-inf.lib}"/>
+		<fileset dir="${web-inf.lib}">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${tests.lib}"/>
+		<fileset dir="${tests.lib}">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${properties.home}"/>
+		<pathelement location="web/WEB-INF/classes"/>
+	</path>
+
+	<target name="all" depends="clean,build,build-jsp,dist,copywar" description="Clean work dirs, then compile, create a WAR, copy it to webapp dir"/>
+
+	<target name="clean" description="Delete old work and dist directories">
+		<delete dir="${work.home}"/>
+		<delete dir="${dist.home}"/>
+	</target>
+
+	<target name="prepare" depends="clean" description="Create working dirs and copy static files to work dir">
+		<mkdir dir="${dist.home}"/>
+		<mkdir dir="${work.classes}"/>
+		<copy todir="${deploy.classes}">
+			<fileset dir="${properties.home}">
+				<include name="quartz.properties"/>
+			</fileset>
+		</copy>
+		<copy todir="${work.home}">
+			<fileset dir="${web.home}"/>
+		</copy>
+	</target>
+
+	<target name="build" depends="prepare" description="Compile Java sources and copy to WEB-INF/classes dir">
+		<javac srcdir="${src.home}" destdir="${work.classes}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<copy todir="${work.classes}">
+			<fileset dir="${src.home}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<target name="dist" depends="build" description="Create WAR file for binary distribution">
+		<jar jarfile="${war.path}" basedir="${work.home}"/>
+	</target>
+
+	<target name="copywar" description="Copies war file to ${tomcat.home}/webapps">
+		<copy todir="${tomcat.home}/webapps">
+			<fileset dir="${dist.home}" />
+		</copy>
+	</target>
+
+
+
+	<target name="build-jsp" depends="build" description="JSPs compilation">
+		<echo message="Tomcat Home: ${tomcat.home}"/>
+		<taskdef classname="org.apache.jasper.JspC" name="jasper2">
+			<classpath refid="compile.classpath"/>
+		</taskdef>
+		<echo message="Compiling JSPs"/>
+		<echo/>
+		<delete dir="${jsp.classes}"/>
+		<mkdir dir="${jsp.classes}"/>
+
+		<!--PRECOMPILATION -->
+		<echo message="JSP Translation phase..."/>
+		<jasper2 validateXml="false" uriroot="${basedir}/web/" outputDir="${jsp.classes}" compilerSourceVM="1.5" id=""/>
+
+		<!--COMPILATION-->
+		<echo message="JSP Compilation phase..."/>
+		<echo/>
+		<javac debug="false"
+			   debuglevel="0"
+			   verbose="1"
+			   nowarn="on"
+			   deprecation="false"
+			   destdir="${jsp.classes}"
+			   failonerror="yes"
+			   includes="**/*.java"
+			   excludes="**/migration/**, **/_*.java"
+			   memorymaximumsize="512m"
+			   fork="Yes"
+			   srcdir="${jsp.classes}"
+			   listfiles="Yes">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+
+
+
+
+	<target name="tests-unit-build" depends="prepare" description="Compile Test sources and copy to WEB-INF/classes dir">
+		<javac srcdir="${tests.unit.src}" destdir="${work.classes}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+		<copy todir="${work.classes}">
+			<fileset dir="${tests.unit.src}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<target name="tests-unit-run" depends="build,tests-unit-build">
+		<mkdir dir="${tests.unit.reports}"/>
+		<junit dir="${tests.unit.src}" printsummary="yes" haltonfailure="yes">
+			<classpath refid="compile.classpath"/>
+			<classpath>
+				<pathelement location="${work.classes}"/>
+				<pathelement location="${tests.unit.classes}"/>
+				<pathelement location="${tests.lib}/junit.jar"/>
+				<pathelement location="${web-inf.lib}"/>
+				<pathelement location="${tests.unit.src}/springConfigs"/>
+			</classpath>
+
+			<formatter type="plain"/>
+			<formatter type="xml"/>
+
+			<batchtest fork="yes" todir="${tests.unit.reports}">
+				<fileset dir="${tests.unit.src}">
+					<include name="**/*Test.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!--<path id="tests.kwaqua.classpath">
+		<fileset dir="${web-inf.lib}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${tests.lib}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${tests.lib.runtime}">
+			<include name="*.jar"/>
+		</fileset>
+		<pathelement location="${tests.kwaqua.build}"/>
+		&lt;!&ndash;<pathelement location="${properties.home}"/>&ndash;&gt; &lt;!&ndash; log4j.properties &ndash;&gt;
+	</path>-->
+
+	<!--<target name="tests-kwaqua-clean" description="Run kwaqua clean">
+		<delete dir="${tests.kwaqua.build}"/>
+		<delete dir="${basedir}/tests/jbehave"/>
+	</target>-->
+
+	<!--<target name="tests-kwaqua-build" description="Compile">
+		<mkdir dir="${tests.kwaqua.build}"/>
+
+		<javac srcdir="${tests.kwaqua.src}" destdir="${tests.kwaqua.build}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+
+		<mkdir dir="${tests.kwaqua.build}/stories" />
+
+		<copy todir="${tests.kwaqua.build}/stories">
+			<fileset dir="${tests.kwaqua.src}/stories" includes="**/*.story"/>
+		</copy>
+
+		<copy todir="${tests.kwaqua.build}/springConfigs">
+			<fileset dir="${tests.kwaqua.src}/springConfigs" includes="**/*.xml"/>
+		</copy>
+
+		<copy todir="${tests.kwaqua.build}/properties">
+			<fileset dir="${tests.kwaqua.src}/properties" includes="**/*.properties"/>
+		</copy>
+	</target>-->
+
+	<!--<target name="tests-kwaqua-run" depends="tests-kwaqua-clean,tests-kwaqua-build" description="Run aqua tests">
+
+		<mkdir dir="${tests.kwaqua.reports}"/>
+
+		<junit dir="${tests.kwaqua.src}" printsummary="yes" haltonerror="${tests.kwaqua.stopOnFail}" haltonfailure="${tests.kwaqua.stopOnFail}" showoutput="yes">
+
+			<sysproperty key="REMOTE_WEBDRIVER_URL" value="${tests.kwaqua.RemoteWebDriverHubUrl}"/>
+
+			<classpath refid="tests.kwaqua.classpath"/>
+
+			<formatter type="plain"/>
+			<formatter type="xml"/>
+
+			<batchtest fork="yes" todir="${tests.kwaqua.reports}">
+				<fileset dir="${tests.kwaqua.src}">
+					<include name="**/tests/*.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>-->
+
+	<!--<property name="selenium.version" value="2.32.0"/>
+	<target name="start-selenium-hub">
+		<java jar="${tests.lib.runtime}/selenium-server-standalone-${selenium.version}.jar" fork="true" spawn="true">
+			<arg line="-role hub"/>
+		</java>
+	</target>
+
+	<target name="start-selenium-node">
+		<java jar="${tests.lib.runtime}/selenium-server-standalone-${selenium.version}.jar" fork="true" spawn="true">
+			<arg line="-role node -hub ${tests.kwaqua.RemoteWebDriverRegisterUrl}"/>
+		</java>
+	</target>-->
+
+</project>  

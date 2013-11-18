@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config/>
+
+	<context:component-scan base-package="admin.controllers"/>
+
+	<bean id="genreDataValidator" class="admin.controllers.genres.edit.GenreEditDataValidator"/>
+	<bean id="votingCategoriesEditDataValidator" class="admin.controllers.votingCategories.edit.VotingCategoryEditDataValidator"/>
+	<bean id="configurationValidator" class="admin.controllers.configuration.edit.ConfigurationValidator"/>
+	<bean id="schedulerTaskEditValidator" class="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditValidator"/>
+	<bean id="previewGenerationValidator" class="admin.controllers.jobs.edit.preview.PreviewGenerationValidator"/>
+	<bean id="userGenerationValidator" class="admin.controllers.jobs.edit.users.UserGenerationValidator"/>
+	<bean id="photoActionGenerationValidator" class="admin.controllers.jobs.edit.action.PhotoActionGenerationValidator"/>
+	<bean id="genreRankRecalculationValidator" class="admin.controllers.jobs.edit.genreRank.UsersGenresRanksRecalculationValidator"/>
+	<bean id="rankVotingJobValidator" class="admin.controllers.jobs.edit.rankVoting.RankVotingJobValidator"/>
+	<bean id="membershipJobValidator" class="admin.controllers.jobs.edit.membership.MembershipJobValidator"/>
+	<bean id="favoritesJobValidator" class="admin.controllers.jobs.edit.favorites.FavoritesJobValidator"/>
+	<bean id="photoRatingJobValidator" class="admin.controllers.jobs.edit.photoRating.PhotoRatingJobValidator"/>
+	<bean id="reindexJobValidator" class="admin.controllers.jobs.edit.reindex.ReindexJobValidator"/>
+	<bean id="jobChainJobValidator" class="admin.controllers.jobs.edit.chain.JobChainJobValidator"/>
+	<bean id="photosightImportValidator" class="admin.controllers.jobs.edit.photosImport.PhotosImportValidator"/>
+	<bean id="activityStreamCleanupJobValidator" class="admin.controllers.jobs.edit.activityStream.ActivityStreamCleanupJobValidator"/>
+	<bean id="jobExecutionHistoryCleanupJobValidator" class="admin.controllers.jobs.edit.jobExecutionHistoryCleanup.JobExecutionHistoryCleanupJobValidator"/>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+</beans>

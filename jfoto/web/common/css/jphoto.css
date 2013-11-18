@@ -1,0 +1,551 @@
+body {
+	margin: 0 20px 0 0;
+	padding: 0;
+	font: normal 90% Helvetica;
+	background: #fcfcfc;
+}
+
+.base-font-color {
+	color: #888888;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-transform: uppercase;
+	color: #003366;
+}
+
+a {
+	text-decoration: none;
+	color: #003366;
+}
+
+.block-background {
+	background: #E7E4D3;
+}
+
+.block-user-photo {
+	background: #CCCC99;
+}
+
+.block-border {
+	border: solid 1px #848078;
+}
+
+.block-shadow {
+	box-shadow: 3px 3px 10px #848078;
+}
+
+.photos-by-user-by-genre-link {
+	color: #888888;
+}
+
+.page:hover {
+	background-color: #fcfcfc;
+	color: #333333;
+}
+
+.newInsertedComment {
+	color: #aa0000;
+}
+
+.small-text {
+	font-size: 70%;
+}
+
+.note-text-color {
+	color: #888888;
+}
+
+.breadcrumbs-color {
+	color: gray;
+}
+
+.photo-link {
+	font-size: 80%;
+}
+
+.member-link {
+	/*font: normal 100% "Arial Narrow";*/
+	/*font-weight: bold;*/
+}
+
+a:hover {
+	border: none;
+}
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+/* Logo */
+
+.header {
+	float: left;
+	width: 250px;
+	height: 85px;
+	padding: 10px 0 0 5px;
+	text-align: center;
+	border-left: none;
+	border-top: none;
+	border-bottom: none;
+	/*border: dotted;*/
+}
+
+.header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 3em;
+}
+
+.header h2 {
+	margin: -.75em 0 0 2px;
+	padding: 0;
+	font-size: 1em;
+}
+
+.pagehat {
+	float: left;
+	width: auto;
+	/*min-width: 800px;*/
+	height: 85px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-left: 20px;
+	/*border: dotted;*/
+}
+
+/* / Logo */
+
+.page-title {
+	margin: 0;
+	font-size: 1.8em;
+	/*border: dotted;*/
+}
+
+.breadcrumbs {
+	float: left;
+	height: 30px;
+	width: 100%;
+	font-size: 12pt;
+	font-weight: bold;
+	/*border: dotted;*/
+}
+
+.infoLayer {
+	float: left;
+	width: 100%;
+	height: 12px;
+	/*border: dotted;*/
+}
+
+/* LOGIN */
+.loginform {
+	float: right;
+	height: 80px;
+	width: 250px;
+	text-align: left;
+	/*border: dotted;*/
+}
+
+.loginFormUserCardLink {
+	float: right;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: right;
+	width: 100%;
+	font-size: 16px;
+	font-weight: bold;
+	/*border: dotted;*/
+}
+
+.loginFormLoggedUser {
+	float: left;
+	padding-bottom: 4px;
+	text-align: right;
+	width: 100%;
+}
+
+/* / LOGIN */
+
+.genreList {
+	float: left;
+	width: 100%;
+	height: 35px;
+	text-align: center;
+	float: left;
+	margin: 3px 3px 5px 7px;
+	padding: 5px;
+	border-left: none;
+	border-right: none;
+	/*border: dotted;*/
+}
+
+.jalert {
+	line-height: 20px;
+	margin-top: 10px;
+}
+
+.inputFieldHint {
+	font-size: 10pt;
+	font-weight: 100;
+}
+
+.invalid {
+	border: 1px solid #800 !important;
+	color: #800 !important;
+	background: #FFFFFF url(invalid_field.gif) repeat-x;
+}
+
+table.formtable td {
+	padding: 5px;
+}
+
+table.formtable thead {
+	text-align: center;
+}
+
+table.formtable thead tr td {
+	/*padding: 1px 1px 1px 1px;*/
+}
+
+table.formtable.oddEven tr:nth-child(even) {
+	background: #f0f0f0;
+}
+
+table.formtable tr:last-child td {
+	/*border-bottom: 3px solid #f0f0f0;*/
+}
+
+.separator {
+	font-weight: bold;
+	text-align: left;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+}
+
+.separatorInfo {
+	font-weight: bold;
+	text-align: left;
+	background-image: url('../images/info16.png');
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	padding: 2px;
+	padding-left: 25px;
+	padding-top: 2px;
+	height: 18px;
+}
+
+#trinfo td {
+	/*border-bottom: 1px solid #CDCDCD;*/
+}
+
+td.titlecolumn {
+	text-align: right;
+	width: 45%;
+}
+
+td.datacolumn {
+	text-align: left;
+}
+
+td.datanumber {
+	text-align: right;
+	width: 10px;
+}
+
+td.buttoncolumn {
+	text-align: right;
+}
+
+td.trunderlined {
+	border-bottom: solid 1px #d3d3d3;
+}
+
+/*PHOTOS*/
+
+.containerPhotoMain {
+	width: 250px;
+	text-align: center;
+	float: left;
+	margin: 5px;
+	padding: 5px;
+	height: auto;
+	min-height: 320px;
+	/*border: dotted;*/
+}
+
+.containerPhotoCkeckbox {
+	position: relative;
+	width: 110px;
+	height: 20px;
+	text-align: left;
+	float: left;
+	padding: 3px 13px 3px 3px;
+	/*border: dotted;*/
+}
+
+.containerPhotoGenre {
+	width: 100px;
+	height: 20px;
+	text-align: right;
+	float: right;
+	padding: 3px 13px 3px 3px;
+	/*border: dotted;*/
+}
+
+.containerPhotoImg {
+	width: 98%;
+	height: 200px;
+	text-align: center;
+	vertical-align: middle;
+	float: left;
+	/*border: dotted;*/
+}
+
+.containerPhotoLine {
+	width: 95%;
+	height: 13px;
+	text-align: left;
+	float: left;
+	margin: 3px 3px 3px 7px;
+	vertical-align: middle;
+	/*border: dotted;*/
+}
+
+.photoUploadDate {
+	font-size: 55%;
+	vertical-align: 3px;
+	/*border: dotted;*/
+}
+
+.photoCardPhotoName {
+	width: 99%;
+	text-align: center;
+	height: 25px;
+	font-size: 18px;
+	font-weight: bold;
+	/*border: dotted;*/
+}
+
+.paging {
+	width: 99%;
+	text-align: center;
+	float: left;
+	margin: 0 0 5px 0;
+	padding: 3px;
+	/*border: dotted;*/
+}
+
+.page {
+	padding: 3px;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin: 3px;
+	line-height: 10px;
+	border-radius: 5px 5px 5px 5px;
+	/*border: dotted;*/
+}
+
+.selectedPage {
+	background: none;
+	font-weight: bold;
+	/*padding: 5px;*/
+	/*padding-right: 12px;*/
+	/*padding-left: 12px;*/
+	box-shadow: 2px 2px 3px #848078;
+}
+
+.pagingsummary {
+	text-align: left;
+	font-size: 11pt;
+	font-family: "Bitstream Charter",serif;
+}
+
+.photocell {
+	text-align: center;
+	/*width: 25%;*/
+}
+
+.footerseparator {
+	float: left;
+	width: 100%;
+	margin: 10px 0 100px 0;
+	/*border: dotted;*/
+}
+
+.footerseparatorsmall {
+	width: 99%;
+	float: left;
+	margin: 10px 0 30px 0;
+	/*border: dotted;*/
+}
+
+.footerseparatorverysmall {
+	width: 99%;
+	float: left;
+	margin: 10px 0 15px 0;
+	/*border: dotted;*/
+}
+
+.floatleft {
+	float: left;
+	width: 100%;
+	/*border: 1px solid red;*/
+}
+
+.photoCommentForm {
+	width: 97%;
+	height: 100%;
+	margin: 10px 0 50px 0;
+	padding: 10px 0 0 0;
+	float: left;
+	/*border: dotted;*/
+}
+
+.photoCommentContainerInner {
+	margin-bottom: 10px;
+	margin-left: 10px;
+	width: 98%;
+}
+
+.photoCommentText {
+	width: 98%;
+	height: 100%;
+	text-align: justify;
+	padding: 10px 0 10px 10px;
+	float: left;
+	margin-left: 20px;
+}
+
+.centerAlign {
+	width: 99%;
+	text-align: center;
+	/*border: dotted;*/
+}
+
+.photoCardPhotoDiv {
+	width: 99%;
+	text-align: center;
+	padding: 30px 0;
+	/*border: dotted;*/
+}
+
+.commentsAndVotingDiv {
+	width: 98%;
+	height: auto;
+	float: left;
+	/*border: dotted;*/
+}
+
+.commentsDiv {
+	height: auto;
+	float: left;
+	/*border: dotted;*/
+}
+
+.photoInfoAndVotingDiv {
+	width: 28%;
+	height: auto;
+	float: right;
+	padding-bottom: 50px;
+	/*border: dotted;*/
+}
+
+.votingDiv {
+	width: 420px;
+	height: auto;
+	float: right;
+	margin: 0 0 20px 0;
+}
+
+.cannotVoteDiv {
+	width: 420px; /*sync with votingDiv.width*/
+	float: right;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	/*text-align: center;*/
+}
+
+.textcentered {
+	text-align: center;
+}
+
+.textright {
+	text-align: right;
+}
+
+.jobActive {
+	color: #2e6e9e;
+}
+
+.jobInactive {
+	color: #848078;
+}
+
+.configuration {
+	float: left;
+	margin-left: 20px;
+	/*border: dotted;*/
+}
+
+.changedConfigurationValue {
+	font-weight: bold;
+}
+
+.portalPageBestWeekMembers {
+	float: left;
+	width: 300px;
+	height: 100%;
+	margin: 10px;
+	/*border: dotted;*/
+}
+
+.redfont {
+	color: #880000;
+	/*border: dotted;*/
+}
+
+table.formtable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.errorHandlingMessage {
+	float: left;
+	text-align: center;
+	padding-top: 30px;
+	width: 100%;
+	height: auto;
+}
+
+.photoPreviewLight {
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+.tabHeader {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 40px;
+	margin-top: 10px;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	text-align: center;
+}
+
+.adminSpecialFlag {
+	float: right;
+	width: 3px;
+	height: 3px;
+	border-width: 5px;
+	border-style: solid;
+	margin: 2px;
+}
+
+.justify-font {
+	text-align: justify;
+}

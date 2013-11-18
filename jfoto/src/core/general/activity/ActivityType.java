@@ -1,0 +1,47 @@
+package core.general.activity;
+
+import admin.jobs.enums.SavedJobType;
+
+public enum ActivityType {
+
+	USER_REGISTRATION( 1, "New member registration", SavedJobType.USER_GENERATION.getIcon() )
+	, PHOTO_UPLOAD( 2, "New photo upload", SavedJobType.PREVIEW_GENERATION.getIcon() )
+	, PHOTO_VOTING( 3, "Photo voting", SavedJobType.ACTIONS_GENERATION.getIcon() )
+	, PHOTO_COMMENT( 4, "Photo comment", SavedJobType.ACTIONS_GENERATION_COMMENTS.getIcon() )
+	, PHOTO_PREVIEW( 5, "Photo preview", SavedJobType.ACTIONS_GENERATION_VIEWS.getIcon() )
+	, FAVORITE_ACTION( 6, "Favorite action", SavedJobType.FAVORITES_GENERATION.getIcon() )
+	, VOTING_FOR_USER_RANK_IN_GENRE( 7, "Voting for user rank in genre", SavedJobType.RANK_VOTING_GENERATION.getIcon() )
+	;
+
+	private final int id;
+	private final String name;
+	private final String icon;
+
+	private ActivityType( final int id, final String name, final String icon ) {
+		this.id = id;
+		this.name = name;
+		this.icon = icon;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public static ActivityType getById( final int id ) {
+		for ( final ActivityType upgradeTaskResult : ActivityType.values() ) {
+			if ( upgradeTaskResult.getId() == id ) {
+				return upgradeTaskResult;
+			}
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal ActivityType id: %d", id ) );
+	}
+}

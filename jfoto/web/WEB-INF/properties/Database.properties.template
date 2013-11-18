@@ -1,0 +1,15 @@
+
+SQLServer=localhost
+
+SQLPort=3306
+
+Database=jfoto
+
+SqlLogin=root
+
+#SqlPassword=707201
+SqlPassword=sm00hans
+
+initialSize=20
+
+maxActive=30

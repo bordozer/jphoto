@@ -1,0 +1,62 @@
+<style type="text/css">
+	.mainMenu {
+		float: left;
+		width: 100%;
+		height: 22px;
+		text-align: center;
+		float: left;
+		margin: 3px 3px 3px 7px;
+		padding: 4px;
+		border-left: none;
+		border-right: none;
+		/*border: dotted;*/
+	}
+
+	.menuItemBox {
+		padding-left: 35px;
+		/*border: dashed;*/
+	}
+
+	.menuItem {
+		float: left;
+		height: 30px;
+		text-align: center;
+		/*border: dashed;*/
+	}
+
+	.uppercase {
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+</style>
+
+
+<script type="text/javascript">
+	jQuery( document ).ready( function () {
+		jQuery( 'ul.sf-menu' ).superfish( {
+											  delay:1, // one second delay on mouseout
+											  animation:{opacity:'show', height:'show'}, // fade-in and slide-down animation
+											  speed:'fast', // faster animation speed
+											  autoArrows:false // disable generation of arrow mark-up
+										  } );
+	} );
+</script>
+
+<div class="mainMenu block-background block-border">
+	<div class="menuItemBox">
+		#foreach( $menuItem in $menuElements.entrySet() )
+			<div class="menuItem">
+				<ul id="main-menu" class="sf-menu">
+					<li class="current">
+						<a class="uppercase" href="$menuItem.key.link">$menuItem.key.caption</a>
+						<ul class="block-background block-border">
+							#foreach( $subMenuItem in $menuItem.value )
+								<li class="block-border"><a href="$subMenuItem.link">$subMenuItem.caption</a></li>
+							#end
+						</ul>
+					</li>
+				</ul>
+			</div>
+		#end
+	</div>
+</div>

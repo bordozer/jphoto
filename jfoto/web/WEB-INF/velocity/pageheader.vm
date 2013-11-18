@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>$title</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link href="/$workername/common/css/jphoto.css" rel="stylesheet" type="text/css"/>
+
+	<script type="text/javascript" src="/$workername/common/js/lib/jquery/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/jquery/jquery-ui-1.8.21.custom.min.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/jquery/jquery-ui-1.8.17.easing.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/$workername/common/js/lib/jquery/css/smootness/jquery-ui-1.8.21.custom.css"/>
+
+	#* jAlert *#
+	<script type="text/javascript" src="/$workername/common/js/lib/jalert/jquery.alerts.js"></script>
+	<link rel="stylesheet" href="/$workername/common/js/lib/jalert/jquery.alerts.css" type="text/css"/>
+	#* /jAlert *#
+
+	#* jscal2 *#
+	<script type="text/javascript" src="/$workername/common/js/lib/JSCal2-1.9/js/jscal2.js"></script>
+	<script src="/$workername/common/js/lib/JSCal2-1.9/js/unicode-letter.js"></script>
+	<script src="/$workername/common/js/lib/JSCal2-1.9/js/lang/en.js"></script>
+	<link rel="stylesheet" href="/$workername/common/js/lib/JSCal2-1.9/css/jscal2.css" type="text/css"/>
+	<link rel="stylesheet" href="/$workername/common/js/lib/JSCal2-1.9/css/border-radius.css" type="text/css"/>
+	<link rel="stylesheet" href="/$workername/common/js/lib/JSCal2-1.9/css/steel/steel.css" type="text/css"/>
+	#* /jscal2 *#
+
+	#* notify *#
+	<script type="text/javascript" src="/$workername/common/js/lib/notify/jquery.noty.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/notify/layouts/bottomRight.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/notify/layouts/center.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/notify/themes/default.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/messages.js"></script>
+	#* /notify *#
+
+	#* lightbox_me *#
+	<script type="text/javascript" src="/$workername/common/js/lib/lightbox_me/jquery.lightbox_me.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/messages.js"></script>
+	#* /lightbox_me *#
+
+	<script type="text/javascript" src="/$workername/common/js/common.js"></script>
+
+	#* superfish *#
+	<script type="text/javascript" src="/$workername/common/js/lib/superfish/js/hoverIntent.js"></script>
+	<script type="text/javascript" src="/$workername/common/js/lib/superfish/js/superfish.js"></script>
+	<link rel="stylesheet" href="/$workername/common/js/lib/superfish/css/superfish.css" type="text/css"/>
+#* / superfish *#
+
+##	fg.menu
+	<script type="text/javascript" src="/$workername/common/js/lib/fg.menu/fg.menu.js"></script>
+	<link rel="stylesheet" href="/$workername/common/js/lib/fg.menu/fg.menu.css" type="text/css"/>
+##	/ fg.menu
+
+</head>
+<body class="base-font-color">
+
+	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 3px 7px; padding: 5px; height: 90px;">
+
+		<div class="header block-border">
+			<h1><a href="$portalpageurl">$progectname</a></h1>
+			<h2><a href="$portalpageurl">$slogan</a></h2>
+		</div>
+
+		<div class="pagehat" style="max-width: $pageHatMaxWidth;">
+
+			<h2 class="page-title">$pageHeader</h2>
+
+			<div class="breadcrumbs breadcrumbs-color">$breadcrumbs</div>
+			<div class="infoLayer">
+				$unreadCommentsQtyText
+				#foreach( $newPrivateMessage in $newPrivateMessages )
+					&nbsp;&nbsp;<a href="$newPrivateMessage.link" title="$newPrivateMessage.hint"><img src="$imagePath/messages/$newPrivateMessage.privateMessageType.icon" width="16" height="16"> +$newPrivateMessage.newMessagesCount</a> &nbsp;
+				#end
+				#if ( $hiMessage )
+					<script type="text/javascript">
+						jQuery().ready( function() {
+							showInformationMessage( "$hiMessage" );
+						});
+					</script>
+				#end
+			</div>
+
+		</div>
+
+		#parse( "loginForm.vm" )
+	</div>
+
+	#parse( "menu.vm" )
+	#parse( "genrelist.vm" )
+
+	<div class="floatleft">
+		<div style="margin-bottom: 20px; padding-bottom: 20px;padding-left: 20px;">
+

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd"
+	   default-autowire="byName">
+
+	<bean id="pageTemplateService" class="core.services.system.PageTemplateServiceImpl"/>
+	<bean id="pageTitleService" class="core.services.pageTitle.PageTitleServiceImpl"/>
+	<bean id="menuService" class="core.services.system.MenuServiceImpl"/>
+
+	<bean id="services" class="core.services.security.ServicesImpl"/>
+
+	<bean id="userService" class="core.services.user.UserServiceImpl"/>
+	<bean id="usersSecurityService" class="core.services.user.UsersSecurityServiceImpl"/>
+	<bean id="genreService" class="core.services.entry.GenreServiceImpl"/>
+	<bean id="photoService" class="core.services.photo.PhotoServiceImpl"/>
+	<bean id="photoCommentService" class="core.services.photo.PhotoCommentServiceImpl"/>
+	<bean id="votingCategoryService" class="core.services.entry.VotingCategoryServiceImpl"/>
+	<bean id="votingService" class="core.services.photo.PhotoVotingServiceImpl"/>
+	<bean id="favoritesService" class="core.services.entry.FavoritesServiceImpl"/>
+	<bean id="userStatisticService" class="core.services.user.UserStatisticServiceImpl"/>
+	<bean id="previewGenerationService" class="core.services.conversion.PreviewGenerationServiceImpl"/>
+	<bean id="notificationService" class="core.services.system.NotificationServiceImpl"/>
+	<bean id="userRankService" class="core.services.user.UserRankServiceImpl"/>
+	<bean id="photoUploadService" class="core.services.photo.PhotoUploadServiceImpl"/>
+	<bean id="photoPreviewService" class="core.services.conversion.PhotoPreviewServiceImpl"/>
+	<bean id="photoRatingService" class="core.services.photo.PhotoRatingServiceImpl"/>
+	<bean id="photoAwardService" class="core.services.photo.PhotoAwardServiceImpl"/>
+	<bean id="userTeamService" class="core.services.user.UserTeamServiceImpl"/>
+	<bean id="ajaxService" class="core.services.ajax.AjaxServiceImpl"/>
+
+	<bean id="systemConfigurationLoadService" class="core.services.system.SystemConfigurationLoadServiceImpl" />
+	<bean id="configurationService" class="core.services.system.ConfigurationServiceImpl" init-method="loadSystemConfiguration" />
+	<bean id="photoListCriteriasService" class="core.services.photo.PhotoListCriteriasServiceImpl" />
+	<bean id="securityService" class="core.services.security.SecurityServiceImpl" />
+	<bean id="userPhotoAlbumService" class="core.services.user.UserPhotoAlbumServiceImpl"/>
+	<bean id="privateMessageService" class="core.services.entry.PrivateMessageServiceImpl"/>
+	<bean id="groupOperationService" class="core.services.entry.GroupOperationServiceImpl"/>
+
+	<bean id="anonymousDaysService" class="core.services.entry.AnonymousDaysServiceImpl"/>
+
+	<bean id="cacheService" class="core.services.system.CacheServiceImpl" />
+
+	<bean id="fileConversionService" class="core.services.conversion.FileConversionServiceImpl"/>
+	<bean id="userCardModelFillService" class="controllers.users.card.data.UserCardModelFillServiceImpl"/>
+	<bean id="activityStreamService" class="core.services.entry.ActivityStreamServiceImpl"/>
+
+	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>
+		<property name="velocityProperties">
+			<util:properties>
+				<prop key="resource.loader">file</prop>
+				<prop key="file.resource.loader.class">org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
+				<prop key="file.resource.loader.cache">true</prop>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="tools.toolbox">application</prop>
+				<!--<prop key="tools.application.esc">org.apache.velocity.tools.generic.EscapeTool</prop>-->
+			</util:properties>
+		</property>
+	</bean>
+
+</beans>

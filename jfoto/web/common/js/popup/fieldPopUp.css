@@ -1,0 +1,73 @@
+
+.bubbleInfo {
+	position: relative;
+	width: 500px;
+	margin: 0;
+	padding: 0;
+}
+.trigger {
+	/*position: absolute;*/
+	top: -12px;
+	margin: 0;
+	padding: 0;
+}
+
+.popup {
+	position: absolute;
+	display: none;
+	z-index: 50;
+	border-collapse: collapse;
+	font-size: .8em;
+	margin: 0;
+	padding: 0;
+}
+
+.popup td.corner {
+	height: 15px;
+	width: 19px;
+	margin: 0;
+	padding: 0;
+}
+
+.popup td#topleft {
+	background-image: url(files/bubble-1.png);
+}
+
+.popup td.top {
+	background-image: url(files/bubble-2.png);
+}
+
+.popup td#topright {
+	background-image: url(files/bubble-3.png);
+}
+
+.popup td.left {
+	background-image: url(files/bubble-4.png);
+}
+
+.popup td.right {
+	background-image: url(files/bubble-5.png);
+}
+
+.popup td#bottomleft {
+	background-image: url(files/bubble-6.png);
+}
+
+.popup td.bottom {
+	background-image: url(files/bubble-7.png);
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+.popup td.bottom img {
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+}
+
+.popup td#bottomright {
+	background-image: url(files/bubble-8.png);
+	margin: 0;
+	padding: 0;
+}

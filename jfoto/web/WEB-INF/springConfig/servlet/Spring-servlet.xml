@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config/>
+
+	<context:component-scan base-package="controllers"/>
+
+	<bean id="userEditDataValidator" class="controllers.users.edit.UserEditDataValidator"/>
+	<bean id="filterValidator" class="controllers.users.list.FilterValidator"/>
+	<bean id="userCardValidator" class="controllers.users.card.UserCardValidator"/>
+	<bean id="userLoginValidator" class="controllers.users.login.UserLoginValidator"/>
+	<bean id="userAvatarValidator" class="controllers.users.avatar.UserAvatarValidator"/>
+	<bean id="userTeamMemberEditDataValidator" class="controllers.users.team.edit.UserTeamMemberEditDataValidator"/>
+	<bean id="userPhotoAlbumEditDataValidator" class="controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataValidator"/>
+
+	<bean id="photoEditDataValidator" class="controllers.photos.edit.PhotoEditDataValidator"/>
+	<bean id="photoCommentValidator" class="controllers.comment.edit.PhotoCommentValidator"/>
+	<bean id="photoVotingValidator" class="controllers.voting.PhotoVotingValidator"/>
+	<bean id="userGenreRankVotingValidator" class="controllers.users.genreRank.UserGenreRankVotingValidator"/>
+	<bean id="photoGroupOperationValidator" class="controllers.photos.groupoperations.PhotoGroupOperationValidator"/>
+
+	<bean id="changeUserPasswordValidator" class="controllers.users.password.change.ChangeUserPasswordValidator"/>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/>
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="maxInMemorySize" value="1000"/>
+		<property name="uploadTempDir" value="#{systemFilePathUtilsService.tempDir}"/>
+	</bean>
+
+</beans>
+

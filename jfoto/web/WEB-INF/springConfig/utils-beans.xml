@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	   default-autowire="byName">
+
+	<bean id="utilsService" class="core.services.utils.UtilsServiceImpl"/>
+
+	<bean id="systemVarsService" class="core.services.utils.SystemVarsServiceImpl" init-method="initSystemVars"/>
+
+	<bean id="fakeUserService" class="core.services.user.FakeUserServiceImpl"/>
+	<bean id="randomUtilsService" class="core.services.utils.RandomUtilsServiceImpl"/>
+
+	<bean id="systemFilePathUtilsService" class="core.services.utils.SystemFilePathUtilsServiceImpl" init-method="createSystemDirectoriesOnStartup"/>
+	<bean id="userPhotoFilePathUtilsService" class="core.services.utils.UserPhotoFilePathUtilsServiceImpl"/>
+
+	<bean id="pageTitleUtilsService" class="core.services.pageTitle.PageTitleUtilsServiceImpl"/>
+	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
+	<bean id="pageTitleAdminUtilsService" class="core.services.pageTitle.PageTitleAdminUtilsServiceImpl"/>
+	<bean id="pageTitlePhotoCommentUtilsService" class="core.services.pageTitle.PageTitlePhotoCommentUtilsServiceImpl"/>
+	<bean id="pageTitlePhotoUtilsService" class="core.services.pageTitle.PageTitlePhotoUtilsServiceImpl"/>
+	<bean id="pageTitleUserUtilsService" class="core.services.pageTitle.PageTitleUserUtilsServiceImpl"/>
+	<bean id="pageTitleGenreUtilsService" class="core.services.pageTitle.PageTitleGenreUtilsServiceImpl"/>
+
+	<bean id="dateUtilsService" class="core.services.utils.DateUtilsServiceImpl"/>
+	<bean id="networkUtils" class="core.services.utils.NetworkUtilsImpl"/>
+
+	<bean id="entityLinkUtilsService" class="core.services.utils.EntityLinkUtilsServiceImpl"/>
+	<bean id="imageFileUtilsService" class="core.services.utils.ImageFileUtilsServiceImpl"/>
+	<bean id="tempFileUtilsService" class="core.services.utils.TempFileUtilsServiceImpl"/>
+	<bean id="predicateUtilsService" class="core.services.utils.PredicateUtilsServiceImpl"/>
+
+	<bean id="photoSqlHelperService" class="core.services.utils.sql.PhotoSqlHelperServiceImpl"/>
+
+	<bean id="schedulerService" class="core.services.job.SchedulerServiceImpl" />
+	<bean id="schedulerExecutorService" class="admin.services.scheduler.ScheduledTasksExecutionServiceImpl" init-method="loadSchedulerTasksAndStartScheduler"  />
+	<bean id="myScheduler" class="admin.services.scheduler.MyScheduler" />
+
+	<bean id="baseSqlUtilsService" class="core.services.utils.sql.BaseSqlUtilsServiceImpl" />
+	<bean id="userSqlUtilsService" class="core.services.utils.sql.UserSqlUtilsServiceImpl" />
+	<bean id="photoCriteriasSqlService" class="core.services.utils.sql.PhotoCriteriasSqlServiceImpl" />
+	<bean id="photoSqlFilterService" class="core.services.utils.sql.PhotoSqlFilterServiceImpl" />
+
+</beans>

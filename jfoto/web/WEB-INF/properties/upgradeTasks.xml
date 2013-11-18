@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<upgraderegistry>
+
+	<release name="1.0.0">
+		<!--<task name="admin.upgrade.tasks.example.FirstTestUpgradeTask"/>-->
+		<!--<task name="admin.upgrade.tasks.example.SecondTestUpgradeTask"/>-->
+
+		<!--<task name="admin.upgrade.tasks.PhotoCommentsReadMarkUpgradeTask"/>-->
+		<!--<task name="admin.upgrade.tasks.PhotoVotingMaxAccessibleMarkUpgradeTask"/>-->
+
+	</release>
+
+</upgraderegistry>

@@ -1,0 +1,22 @@
+# Webdriver type to be used. Supported values: firefox, chrome
+webdriver.driver=firefox
+
+# Remote hub url for webdriver.
+# Place uncommented version of this property into your
+# aqua.properties file if you want to run your tests with
+# RemoteWebDriwer (i.e. on Jenkins)
+#
+# webdriver.remote.url=http://192.168.69.77:4445/wd/hub
+
+# Base URL of worker where tested application is deployed
+webdriver.base.url=http://192.168.69.77:8083/
+
+# Default implicit timeout
+webdriver.timeouts.implicitlywait=5000
+
+# Control element search timeout, milliseconds
+webdriver.timeouts.controlwait=1000
+
+# Driver capabilities. Alerts handling strategy is necessary for firefox
+thucydides.driver.capabilities=unexpectedAlertBehaviour:ignore;
+

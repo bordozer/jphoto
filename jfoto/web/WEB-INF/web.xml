@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+		 version="3.0">
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/app/error/general/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.notFound.UserNotFoundException</exception-type>
+		<location>/app/error/notFound/user/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.notFound.PhotoNotFoundException</exception-type>
+		<location>/app/error/notFound/photo/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.notFound.GenreNotFoundException</exception-type>
+		<location>/app/error/notFound/genre/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.NotLoggedUserException</exception-type>
+		<location>/app/error/notLoggedUser/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.AccessDeniedException</exception-type>
+		<location>/app/error/accessDenied/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.NudeContentException</exception-type>
+		<location>/app/error/nudeContentWarning/</location>
+	</error-page>
+
+	<error-page>
+		<exception-type>core.exceptions.UserRequestSecurityException</exception-type>
+		<location>/app/error/userRequestSecurityException/</location>
+	</error-page>
+
+	<error-page>
+		<error-code>500</error-code>
+		<location>/app/error/general/</location>
+	</error-page>
+
+	<!--<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/app/error/general/</location>
+	</error-page>-->
+
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Device resolver -->
+	<filter>
+		<filter-name>deviceResolverRequestFilter</filter-name>
+		<filter-class>org.springframework.mobile.device.DeviceResolverRequestFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>deviceResolverRequestFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- / Device resolver -->
+
+	<!-- Context filter -->
+	<filter>
+		<filter-name>RequestContextUriFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>requestContextFilter</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>RequestContextUriFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- / Context filter -->
+
+	<!-- Admin Security filter -->
+	<filter>
+		<filter-name>AdminSecurityUriFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>adminSecurityContextFilter</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>AdminSecurityUriFilter</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
+	<!-- / Admin Security filter -->
+
+	<!-- User Security filter -->
+	<filter>
+		<filter-name>UserSecurityContextFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetBeanName</param-name>
+			<param-value>userSecurityContextFilter</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>UserSecurityContextFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- / User Security filter -->
+
+	<listener>
+		<listener-class>core.context.SessionListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/springConfig/log4j.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>Spring</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/springConfig/servlet/Spring-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Spring</servlet-name>
+		<url-pattern>/app/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Admin -->
+	<servlet>
+		<servlet-name>Admin</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/springConfig/servlet/Admin-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Admin</servlet-name>
+		<url-pattern>/admin/*</url-pattern>
+	</servlet-mapping>
+	<!-- / Admin -->
+
+	<!-- Spring context-->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/springConfig/application-context.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>core.context.WebApplicationContextSupport</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>JSONRPCServlet</servlet-name>
+		<servlet-class>org.jabsorb.JSONRPCServlet</servlet-class>
+		<init-param>
+			<param-name>gzip_threshold</param-name>
+			<param-value>200</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>JSONRPCServlet</servlet-name>
+		<url-pattern>/JSON-RPC</url-pattern>
+	</servlet-mapping>
+
+</web-app>

@@ -1,0 +1,26 @@
+#Project URL
+ProjectUrl=http://192.168.69.123:8083
+
+#home!
+#ProjectUrl=http://192.168.1.102:8083
+
+#Tomcat context
+TomcatWorkerName=jfoto
+
+#Application prefix (can't be null)
+ApplicationPrefix=app
+
+# Admin prefix
+AdminPrefix=admin
+
+# System photo path
+PhotoStoragePath=/home/blu/src/userPhotos
+
+# System temp path
+SystemTempFolder=../Files/temp
+
+## Preview folder name
+PreviewFolderName=preview
+
+#Session timeout, minutes
+SessionTimeoutInMinutes=10

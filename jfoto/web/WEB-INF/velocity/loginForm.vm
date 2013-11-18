@@ -1,0 +1,40 @@
+<div class="loginform">
+	#if ( $showLoginForm && $loggedUserId == -1 )
+		<form id="loginform" method="POST" action="$loginFormAction">
+			<table width="100%" border="0">
+				<tr>
+					<td>$loginFormLogin</td>
+					<td>
+					##							<input class="ui-state-default ui-corner-all" type="text" id="$loginFormLoginControl" name="$loginFormLoginControl" value="Zabiyaka" size="14"/>
+						<select name="$loginFormLoginControl" id="$loginFormLoginControl">
+							#foreach( $userLogin in $userLogins )
+								<option value="$userLogin.login">$userLogin.name</option>
+							#end
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>$loginFormPassword</td>
+					<td>
+						<input class="ui-state-default ui-corner-all" type="password" id="$loginFormPasswordControl" name="$loginFormPasswordControl" value="$defaultDebugPassword"
+							   size="14"/>
+						<input border="0" height="16" width="16" src="$imagePath/register-icon.png" type="image" name="image"/>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input id="$loginUserAutomaticallyControl" name="$loginUserAutomaticallyControl" type="checkbox" value="1"
+							   class="ui-state-default ui-corner-all"> $rememberMeText
+					</td>
+				</tr>
+			</table>
+		</form>
+	#end
+
+	#if ( $showLoginForm && $loggedUserId > 0 )
+		<div class="loginFormUserCardLink"><a href="$loggedUserCardUrl" title="$loggedUserCardUrlTitle">$loggedUserName</a></div>
+		<div class="loginFormLoggedUser"><a href="$siteUrlWithPrefix/photos/new/" title="$uploadPhotoText">$uploadPhotoText</a></div>
+		<div class="loginFormLoggedUser">[ <a href="$siteUrlWithPrefix/members/logout/" title="$logoutText">$logoutText</a> ]</div>
+	#end
+</div>

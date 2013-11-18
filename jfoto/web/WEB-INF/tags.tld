@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+		version="2.1">
+
+	<tlib-version>1.0</tlib-version>
+	<short-name>eco</short-name>
+	<uri>http://jfoto.dev</uri>
+
+	<tag>
+		<name>page</name>
+		<tag-class>tags.PageTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>pageModel</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>elements.PageModel</type>
+		</attribute>
+		<attribute>
+			<name>errorPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>form</name>
+		<tag-class>tags.FormTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>action</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>formName</name>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>multipartForm</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Boolean</type>
+		</attribute>
+	</tag>
+
+	<function>
+		<name>baseUrlWithPrefix</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getBaseURLWithPrefix()</function-signature>
+	</function>
+
+	<function>
+		<name>baseAdminUrlWithPrefix</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getAdminBaseURLWithPrefix()</function-signature>
+	</function>
+
+	<function>
+		<name>baseUrl</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getBaseURL()</function-signature>
+	</function>
+
+	<function>
+		<name>imageFolderURL</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getSiteImagesPath()</function-signature>
+	</function>
+
+	<function>
+		<name>translate</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translate(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>translate1</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translate(java.lang.String,java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>translate2</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translate(java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>translate3</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translate(java.lang.String,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>formatDate</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String formatDate(java.util.Date)</function-signature>
+	</function>
+
+	<function>
+		<name>formatTime</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String formatTime(java.util.Date)</function-signature>
+	</function>
+
+	<function>
+		<name>formatTimeShort</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String formatTimeShort(java.util.Date)</function-signature>
+	</function>
+
+	<function>
+		<name>formatDateTimeShort</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String formatDateTimeShort(java.util.Date)</function-signature>
+	</function>
+
+	<function>
+		<name>escapeHtml</name>
+		<function-class>utils.StringUtilities</function-class>
+		<function-signature>java.lang.String escapeHtml(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>formatPhotoCommentText</name>
+		<function-class>utils.PhotoUtils</function-class>
+		<function-signature>java.lang.String formatPhotoCommentText(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>escapeJavaScript</name>
+		<function-class>utils.StringUtilities</function-class>
+		<function-signature>java.lang.String escapeHtml(java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>floor</name>
+		<function-class>utils.NumberUtils</function-class>
+		<function-signature>int floor(double)</function-signature>
+	</function>
+
+	<function>
+		<name>ceil</name>
+		<function-class>utils.NumberUtils</function-class>
+		<function-signature>double ceil(double)</function-signature>
+	</function>
+
+	<function>
+		<name>round</name>
+		<function-class>utils.NumberUtils</function-class>
+		<function-signature>int round(float)</function-signature>
+	</function>
+
+	<function>
+		<name>fileSizeToKb</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>float getFileSizeInKb(float)</function-signature>
+	</function>
+
+	<function>
+		<name>contains</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>boolean contains(java.util.Collection,java.lang.Object)</function-signature>
+	</function>
+
+	<function>
+		<name>containsMap</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>boolean contains(java.util.Map,java.lang.Object)</function-signature>
+	</function>
+
+	<function>
+		<name>userAvatarUrl</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getUserAvatarFileUrl(int)</function-signature>
+	</function>
+
+	<function>
+		<name>userAvatarImage</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getUserAvatarImage(int,int,int,java.lang.String,java.lang.String,java.lang.String)</function-signature>
+	</function>
+
+	<function>
+		<name>photosByUserByGenreLink</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getPhotosByUserByGenreLink(core.general.user.User,core.general.genre.Genre)</function-signature>
+	</function>
+</taglib>

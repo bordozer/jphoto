@@ -1,0 +1,29 @@
+# Project name
+application.ProjectName=JPhoto
+
+#Date format
+datetime.SystemDateFormat=yyyy-MM-dd
+
+#Time Format
+datetime.SystemTimeFormat=HH:mm:ss
+
+#ShortTime Format
+datetime.SystemTimeFormatShort=HH:mm
+
+#JS Date format
+datetime.JavaScriptDateFormat=yy-mm-dd
+
+##Photos on page - default
+PhotoLines=5
+
+##Photos in line - default
+PhotosInLine=4
+
+# translated sign
+TranslatedSign=&trade;
+
+#Admin user IDs
+AdminUserIDs=6987,6306
+
+#Is dev mode
+isDevMode=true

@@ -1,0 +1,5 @@
+<div class="genreList block-border">
+	#foreach( $genreLink in $genreLinks )
+		$genreLink &nbsp; &nbsp;
+	#end
+</div>

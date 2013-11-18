@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	   default-autowire="byName">
+
+	<bean name="baseDao" class="core.services.dao.BaseDaoImpl"/>
+
+	<bean name="userDao" class="core.services.dao.UserDaoImpl"/>
+
+	<bean name="usersSecurityDao" class="core.services.dao.UsersSecurityDaoImpl"/>
+
+	<bean name="genreDao" class="core.services.dao.GenreDaoImpl"/>
+
+	<bean name="photoDao" class="core.services.dao.PhotoDaoImpl"/>
+
+	<bean id="photoCommentDao" class="core.services.dao.PhotoCommentDaoImpl"/>
+
+	<bean id="photoPreviewDao" class="core.services.dao.PhotoPreviewDaoImpl"/>
+
+	<bean name="votingCategoryDao" class="core.services.dao.PhotoVotingDaoImpl"/>
+
+	<bean name="favoritesDao" class="core.services.dao.FavoritesDaoImpl"/>
+
+	<bean name="configurationDao" class="core.services.dao.ConfigurationDaoImpl"/>
+
+	<bean name="userRankVotingService" class="core.services.dao.UserRankDaoImpl"/>
+
+	<bean name="savedJobDaoImpl" class="core.services.dao.SavedJobDaoImpl"/>
+
+	<bean name="schedulerDao" class="core.services.dao.SchedulerTasksDaoImpl"/>
+
+	<bean name="photoRatingDao" class="core.services.dao.PhotoRatingDaoImpl"/>
+
+	<bean name="photoAwardDao" class="core.services.dao.PhotoAwardDaoImpl"/>
+
+	<bean name="userTeamMemberDao" class="core.services.dao.UserTeamMemberDaoImpl"/>
+
+	<bean name="userPhotoAlbumDao" class="core.services.dao.UserPhotoAlbumDaoImpl"/>
+
+	<bean name="privateMessageDao" class="core.services.dao.PrivateMessageDaoImpl"/>
+
+	<bean name="anonymousDaysDao" class="core.services.dao.AnonymousDaysDaoImpl"/>
+
+	<bean name="restrictionDao" class="core.services.dao.RestrictionDaoImpl"/>
+
+	<bean name="activityStreamDao" class="core.services.dao.ActivityStreamDaoImpl"/>
+
+</beans>

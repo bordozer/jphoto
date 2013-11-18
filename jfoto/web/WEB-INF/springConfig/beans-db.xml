@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://${SQLServer}:${SQLPort}/${Database}"/>
+		<property name="username" value="${SqlLogin}"/>
+		<property name="password" value="${SqlPassword}"/>
+		<property name="removeAbandoned" value="true"/>
+		<property name="initialSize" value="${initialSize}"/>
+		<property name="maxActive" value="${maxActive}"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="validationQuery" value="SELECT 1"/>
+		<!--<property name="testWhileIdle" value="true" />-->
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="save"/>
+			<tx:method name="delete"/>
+			<tx:method name="saveUserPhotoVoting"/>
+			<tx:method name="recalculatePhotoRatingForPeriod"/>
+			<tx:method name="savePhotoWithTeamAndAlbums"/>
+			<tx:method name="sendPrivateMessageAjax"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="saveEntry" expression="execution(* core.interfaces.BaseEntityService.save(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="saveEntry"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="deleteEntry" expression="execution(* core.interfaces.BaseEntityService.delete(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="deleteEntry"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="saveVoting" expression="execution(* core.services.photo.PhotoVotingService.saveUserPhotoVoting(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="saveVoting"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="recalculatePhotoRatingForPeriod" expression="execution(* core.services.photo.PhotoRatingService.recalculatePhotoRatingForPeriodInDB(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="recalculatePhotoRatingForPeriod"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="savePhotoWithTeamAndAlbums" expression="execution(* core.services.photo.PhotoService.savePhotoWithTeamAndAlbums(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="savePhotoWithTeamAndAlbums"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="sendPrivateMessageAjax" expression="execution(* core.services.entry.PrivateMessageService.sendPrivateMessageAjax(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendPrivateMessageAjax"/>
+	</aop:config>
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+</beans>
