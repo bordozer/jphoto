@@ -126,14 +126,16 @@
 
 					function renderComment( index ) {
 						var commentId = rootComments[ index ];
+						if ( commentId == undefined ) {
+							return;
+						}
+
 						$.ajax( {
 									type:'GET',
 									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
 									success:function ( response ) {
 										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
-										if ( index < rootComments.length - 1 ) {
-											renderComment( index + 1 );
-										}
+										renderComment( index + 1 );
 									},
 									error:function () {
 										showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
