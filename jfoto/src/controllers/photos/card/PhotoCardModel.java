@@ -21,7 +21,6 @@ public class PhotoCardModel extends AbstractGeneralModel {
 	private User user;
 	private Genre genre;
 
-	private List<PhotoCommentInfo> photoCommentInfos;
 	private long commentDelay;
 	private Date userNextCommentTime;
 	private int usedDelayBetweenComments;
@@ -41,6 +40,8 @@ public class PhotoCardModel extends AbstractGeneralModel {
 	private VotingModel votingModel;
 
 	private EntryMenu entryMenu;
+
+	private List<Integer> rootCommentsIds;
 
 	public Photo getPhoto() {
 		return photo;
@@ -64,14 +65,6 @@ public class PhotoCardModel extends AbstractGeneralModel {
 
 	public void setGenre( final Genre genre ) {
 		this.genre = genre;
-	}
-
-	public List<PhotoCommentInfo> getPhotoCommentInfos() {
-		return photoCommentInfos;
-	}
-
-	public void setPhotoCommentInfos( final List<PhotoCommentInfo> photoCommentInfos ) {
-		this.photoCommentInfos = photoCommentInfos;
 	}
 
 	public long getCommentDelay() {
@@ -176,6 +169,14 @@ public class PhotoCardModel extends AbstractGeneralModel {
 
 	public void setEntryMenu( final EntryMenu entryMenu ) {
 		this.entryMenu = entryMenu;
+	}
+
+	public List<Integer> getRootCommentsIds() {
+		return rootCommentsIds;
+	}
+
+	public void setRootCommentsIds( final List<Integer> rootCommentsIds ) {
+		this.rootCommentsIds = rootCommentsIds;
 	}
 
 	@Override

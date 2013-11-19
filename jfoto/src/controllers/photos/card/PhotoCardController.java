@@ -1,11 +1,9 @@
 package controllers.photos.card;
 
-import controllers.comment.edit.PhotoCommentInfo;
 import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.photo.PhotoComment;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
@@ -27,10 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import utils.*;
-
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
@@ -105,8 +99,7 @@ public class PhotoCardController {
 		final Genre genre = genreService.load( photo.getGenreId() );
 		model.setGenre( genre );
 
-		final List<PhotoComment> rootComments = photoCommentService.loadAllWithoutParent( photoId );
-		model.setPhotoCommentInfos( reorganizeComments( photo, rootComments ) );
+		model.setRootCommentsIds( photoCommentService.loadCommentsWithoutParentIds( photoId ) );
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final int loggedUserId = currentUser.getId();
@@ -154,26 +147,4 @@ public class PhotoCardController {
 			}
 		}
 	}
-
-	private List<PhotoCommentInfo> reorganizeComments( final Photo photo, final List<PhotoComment> rootComments ) {
-
-		final List<PhotoCommentInfo> result = newArrayList();
-
-		for ( final PhotoComment rootComment : rootComments ) {
-
-			result.add( photoCommentService.getPhotoCommentInfoWithChild( rootComment, EnvironmentContext.getCurrentUser() ) );
-
-			markCommentAsReadIfNecessary( photo, rootComment );
-		}
-
-		return result;
-	}
-
-	private void markCommentAsReadIfNecessary( final Photo photo, final PhotoComment comment ) {
-		final User currentUser = EnvironmentContext.getCurrentUser();
-		if ( dateUtilsService.isEmptyTime(  comment.getReadTime() ) && securityService.userOwnThePhoto( currentUser, photo ) ) {
-			photoCommentService.setCommentReadTime( comment.getId(), dateUtilsService.getCurrentTime() );
-		}
-	}
-
 }

@@ -46,7 +46,6 @@
 <c:set var="photoName" value="${photo.name}"/>
 <c:set var="imageUrl" value="<%=photoCardModel.getPhotoInfo().getPhotoImgUrl()%>"/>
 
-<c:set var="commentInfos" value="<%=photoCardModel.getPhotoCommentInfos()%>"/>
 <c:set var="favoriteEntryType" value="<%=FavoriteEntryType.PHOTO%>"/>
 <c:set var="newCommentsNotificationEntryType" value="<%=FavoriteEntryType.NEW_COMMENTS_NOTIFICATION%>"/>
 <c:set var="favoriteEntryTypeBookmark" value="<%=FavoriteEntryType.BOOKMARK%>"/>
@@ -119,11 +118,31 @@
 				</div>
 			</c:if>
 
-			<c:forEach var="comment" items="${commentInfos}">
-				<comments:commentView commentInfo="${comment}" useAnimation="true" />
-			</c:forEach>
+			<div id="commentList" style="float: left; width: 90%;">
 
-			<div class="${commentsEndAnchor}"></div>
+				<script type="text/javascript">
+					<c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}">
+						renderComment( ${commentId} );
+					</c:forEach>
+
+					function renderComment( commentId ) {
+						$.ajax( {
+									type:'GET',
+									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
+									success:function ( response ) {
+//										$( '#commentList' ).append( response ); // response == /comments/view/PhotoComment.jsp
+										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
+
+									},
+									error:function () {
+										showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
+									}
+								} );
+					}
+				</script>
+
+				<div class="${commentsEndAnchor}"></div>
+			</div>
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationPassed}">
 				<comments:commentForm photo="${photo}" minCommentLength="${photoCardModel.minCommentLength}" maxCommentLength="${photoCardModel.maxCommentLength}" usedDelayBetweenComments="${photoCardModel.usedDelayBetweenComments}" />
@@ -221,7 +240,7 @@
 				}
 			</script>
 
-		</div>
+		</div> <%-- / commentsDiv --%>
 
 		<div class="photoInfoAndVotingDiv">
 			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" hideAuthorIconsAndMenu="false"/>

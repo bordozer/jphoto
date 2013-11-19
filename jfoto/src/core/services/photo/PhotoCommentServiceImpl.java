@@ -105,7 +105,12 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	}
 
 	@Override
-	public List<PhotoComment> loadAllWithoutParent( final int photoId ) {
+	public List<Integer> loadCommentsWithoutParentIds( final int photoId ) {
+		return photoCommentDao.loadCommentsWithoutParentIds( photoId );
+	}
+
+	@Override
+	public List<PhotoComment> loadCommentsWithoutParent( final int photoId ) {
 		return loadByIds( photoCommentDao.loadCommentsWithoutParentIds( photoId ) );
 	}
 
