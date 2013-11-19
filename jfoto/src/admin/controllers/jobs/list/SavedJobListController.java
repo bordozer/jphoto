@@ -13,7 +13,7 @@ import admin.jobs.loaders.SavedJobLoaderFactory;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import admin.services.jobs.SavedJobService;
-import core.services.job.SchedulerService;
+import admin.services.scheduler.SchedulerService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;

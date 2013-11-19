@@ -1,7 +1,7 @@
 package admin.controllers.scheduler.tasks.edit;
 
 import core.general.executiontasks.*;
-import core.services.job.SchedulerService;
+import admin.services.scheduler.SchedulerService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

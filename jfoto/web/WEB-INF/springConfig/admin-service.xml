@@ -4,6 +4,9 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	   default-autowire="byName">
 
+	<bean name="upgradeDao" class="admin.services.services.UpgradeDaoImpl"/>
+	<bean id="jobExecutionHistoryDao" class="admin.services.jobs.JobExecutionHistoryDaoImpl"/>
+
 	<bean id="upgradeService" class="admin.services.services.UpgradeServiceImpl"/>
 	<bean id="upgradeTaskUtilsService" class="admin.services.services.SqlUtilsServiceImpl"/>
 
@@ -13,6 +16,8 @@
 	<bean id="jobExecutionHistoryService" class="admin.services.jobs.JobExecutionHistoryServiceImpl"/>
 	<bean id="savedJobService" class="admin.services.jobs.SavedJobServiceImpl" />
 
-	<bean name="upgradeDao" class="admin.services.services.UpgradeDaoImpl"/>
-	<bean id="jobExecutionHistoryDao" class="admin.services.jobs.JobExecutionHistoryDaoImpl"/>
+	<bean id="schedulerService" class="admin.services.scheduler.SchedulerServiceImpl" />
+	<bean id="scheduledTasksExecutionService" class="admin.services.scheduler.ScheduledTasksExecutionServiceImpl" init-method="loadSchedulerTasksAndStartScheduler"  />
+	<bean id="myScheduler" class="admin.services.scheduler.MyScheduler" />
+
 </beans>

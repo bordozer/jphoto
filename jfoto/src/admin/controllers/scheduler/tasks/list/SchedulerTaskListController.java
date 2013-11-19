@@ -5,7 +5,7 @@ import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import admin.services.jobs.SavedJobService;
-import core.services.job.SchedulerService;
+import admin.services.scheduler.SchedulerService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;

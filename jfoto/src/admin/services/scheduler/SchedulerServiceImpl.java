@@ -1,6 +1,5 @@
-package core.services.job;
+package admin.services.scheduler;
 
-import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.general.executiontasks.*;

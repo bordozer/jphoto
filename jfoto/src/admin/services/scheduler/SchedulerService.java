@@ -1,4 +1,4 @@
-package core.services.job;
+package admin.services.scheduler;
 
 import core.general.scheduler.SchedulerTask;
 import core.interfaces.AllEntriesLoadable;
