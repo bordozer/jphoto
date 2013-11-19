@@ -56,8 +56,6 @@
 <c:set var="isCommentOfPhotoAuthor" value="${photoAuthorId == commentAuthorId}"/>
 <c:set var="showCommentAuthorData" value="${not commentInfo.authorNameMustBeHidden}"/>
 
-<tags:entryMenuJs />
-
 <c:set var="commentReadTime" value="${comment.readTime.time}"/>
 
 <div id="${fullCommentDivId}" class="floatleft" style="margin-bottom: 10px; ${useAnimation ? "display: none;" : ""}">

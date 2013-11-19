@@ -29,7 +29,6 @@
 	<c:set var="commentInfo" value="${photoCommentModel.photoCommentInfo}" />
 	<c:set var="comment" value="${commentInfo.photoComment}" />
 
-	<tags:entryMenuJs />
 	<comments:commentView commentInfo="${commentInfo}" useAnimation="false" />
 
 	<script type="text/javascript">

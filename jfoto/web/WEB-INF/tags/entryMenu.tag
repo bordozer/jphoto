@@ -14,7 +14,7 @@
 
 	<script type="text/javascript">
 		$( function () {
-			$( '#${menuId}' ).menuA( {
+			$( '#${menuId}' ).fgmenu( {
 										content:$( '#${menuItems}' ).html(), showSpeed:400, width:350
 									} );
 		} );
