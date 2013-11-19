@@ -11,7 +11,7 @@ import admin.services.jobs.JobExecutionService;
 import admin.services.jobs.JobHelperService;
 import core.log.LogHelper;
 import core.services.photo.PhotoService;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import core.services.security.Services;
 import core.services.user.UserService;
 import org.apache.commons.lang.StringUtils;

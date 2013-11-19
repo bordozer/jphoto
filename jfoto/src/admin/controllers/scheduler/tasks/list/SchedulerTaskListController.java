@@ -4,7 +4,7 @@ import admin.jobs.general.SavedJob;
 import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import core.services.job.SchedulerService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
@@ -17,7 +17,6 @@ import core.services.pageTitle.PageTitleAdminUtilsService;
 import utils.ListUtils;
 import utils.TranslatorUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

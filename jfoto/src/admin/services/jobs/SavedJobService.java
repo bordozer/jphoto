@@ -1,4 +1,4 @@
-package core.services.job;
+package admin.services.jobs;
 
 import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;

@@ -23,7 +23,7 @@ PhotosInLine=4
 TranslatedSign=&trade;
 
 #Admin user IDs
-AdminUserIDs=6987,6306
+SuperAdminUserIDs=6987,6306
 
 #Is dev mode
 isDevMode=true

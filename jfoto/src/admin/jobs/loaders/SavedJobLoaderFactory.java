@@ -4,7 +4,7 @@ import admin.services.jobs.JobExecutionHistoryService;
 import admin.jobs.enums.JobListTab;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.TabJobInfo;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 
 import java.util.Map;
 

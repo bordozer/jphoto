@@ -8,7 +8,7 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.enums.JobRunMode;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

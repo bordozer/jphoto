@@ -5,7 +5,7 @@ import admin.jobs.general.SavedJob;
 import admin.services.jobs.JobExecutionService;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import org.quartz.*;
 
 public class SchedulerJobRunContainer implements Job {

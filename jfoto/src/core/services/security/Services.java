@@ -8,7 +8,7 @@ import admin.services.services.SqlUtilsService;
 import core.services.conversion.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoRatingService;
 import core.services.photo.PhotoService;

@@ -1,7 +1,7 @@
 package admin.jobs.loaders;
 
 import admin.jobs.general.SavedJob;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 
 import java.util.List;
 

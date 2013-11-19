@@ -4,17 +4,15 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	   default-autowire="byName">
 
-	<bean id="jobExecutionService" class="admin.services.jobs.JobExecutionServiceImpl"/>
 	<bean id="upgradeService" class="admin.services.services.UpgradeServiceImpl"/>
 	<bean id="upgradeTaskUtilsService" class="admin.services.services.SqlUtilsServiceImpl"/>
 
+	<bean id="jobExecutionService" class="admin.services.jobs.JobExecutionServiceImpl"/>
 	<bean id="jobStatusChangeStrategyService" class="admin.services.jobs.JobStatusChangeStrategyServiceImpl" />
 	<bean id="jobHelperService" class="admin.services.jobs.JobHelperServiceImpl" />
+	<bean id="jobExecutionHistoryService" class="admin.services.jobs.JobExecutionHistoryServiceImpl"/>
+	<bean id="savedJobService" class="admin.services.jobs.SavedJobServiceImpl" />
 
 	<bean name="upgradeDao" class="admin.services.services.UpgradeDaoImpl"/>
-
-	<bean id="jobExecutionHistoryService" class="admin.services.jobs.JobExecutionHistoryServiceImpl"/>
 	<bean id="jobExecutionHistoryDao" class="admin.services.jobs.JobExecutionHistoryDaoImpl"/>
-	<bean id="savedJobServiceImpl" class="core.services.job.SavedJobServiceImpl" />
-
 </beans>

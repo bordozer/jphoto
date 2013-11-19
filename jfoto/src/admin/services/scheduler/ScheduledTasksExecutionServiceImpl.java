@@ -7,7 +7,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.executiontasks.AbstractExecutionTask;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import core.services.job.SchedulerService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;

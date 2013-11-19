@@ -3,7 +3,7 @@ package admin.jobs.loaders;
 import admin.jobs.enums.JobListTab;
 import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 

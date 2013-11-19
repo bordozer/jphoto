@@ -1,8 +1,7 @@
-package core.services.job;
+package admin.services.jobs;
 
 import admin.controllers.jobs.edit.AbstractJobController;
 import admin.jobs.entries.AbstractJob;
-import admin.services.jobs.JobExecutionService;
 import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
@@ -32,9 +31,6 @@ public class SavedJobServiceImpl implements SavedJobService {
 
 	@Autowired
 	private JobExecutionService jobExecutionService;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
 
 	private final LogHelper log = new LogHelper( SavedJobServiceImpl.class );
 

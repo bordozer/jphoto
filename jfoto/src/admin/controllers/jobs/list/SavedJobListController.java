@@ -12,7 +12,7 @@ import admin.jobs.loaders.AbstractSavedJobsLoader;
 import admin.jobs.loaders.SavedJobLoaderFactory;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import core.services.job.SchedulerService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;

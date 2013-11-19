@@ -1,8 +1,7 @@
 package admin.controllers.jobs.edit;
 
-import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.jobs.general.SavedJob;
-import core.services.job.SavedJobService;
+import admin.services.jobs.SavedJobService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
