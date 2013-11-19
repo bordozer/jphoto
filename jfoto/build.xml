@@ -7,12 +7,9 @@
 
 	<property name="properties.home" value="web/WEB-INF/properties"/>
 
-	<property name="work.home" value="${basedir}/work"/>
-	<property name="dist.home" value="${basedir}/dist"/>
-	<property name="src.home" value="${basedir}/src"/>
 	<property name="web.home" value="${basedir}/web"/>
-
-	<property name="war.path" value="${dist.home}/${app.name}.war"/>
+	<property name="work.home" value="${web.home}"/>
+	<property name="src.home" value="${basedir}/src"/>
 
 	<property name="web-inf" value="${web.home}/WEB-INF"/>
 	<property name="deploy.classes" value="${web.home}/WEB-INF/classes"/>
@@ -20,7 +17,6 @@
 	<property name="work.classes" value="${work.home}/WEB-INF/classes"/>
 	<property name="jsp.classes" value="${work.classes}"/>
 	<property name="tests.unit.classes" value="${work.classes}"/>
-	<property name="tests.kwaqua.classes" value="${work.classes}"/>
 
 	<property name="tests.unit.src" value="${basedir}/tests/unit"/>
 	<property name="tests.unit.reports" value="${tests.unit.src}/_reports"/>
@@ -56,15 +52,13 @@
 		<pathelement location="web/WEB-INF/classes"/>
 	</path>
 
-	<target name="all" depends="clean,build,build-jsp,dist,copywar" description="Clean work dirs, then compile, create a WAR, copy it to webapp dir"/>
+	<target name="all" depends="clean,build,build-jsp" description="Clean work dirs, then compile, create a WAR, copy it to webapp dir"/>
 
 	<target name="clean" description="Delete old work and dist directories">
-		<delete dir="${work.home}"/>
-		<delete dir="${dist.home}"/>
+		<delete dir="${deploy.classes}"/>
 	</target>
 
 	<target name="prepare" depends="clean" description="Create working dirs and copy static files to work dir">
-		<mkdir dir="${dist.home}"/>
 		<mkdir dir="${work.classes}"/>
 		<copy todir="${deploy.classes}">
 			<fileset dir="${properties.home}">
@@ -85,17 +79,6 @@
 		</copy>
 	</target>
 
-	<target name="dist" depends="build" description="Create WAR file for binary distribution">
-		<jar jarfile="${war.path}" basedir="${work.home}"/>
-	</target>
-
-	<target name="copywar" description="Copies war file to ${tomcat.home}/webapps">
-		<copy todir="${tomcat.home}/webapps">
-			<fileset dir="${dist.home}" />
-		</copy>
-	</target>
-
-
 
 	<target name="build-jsp" depends="build" description="JSPs compilation">
 		<echo message="Tomcat Home: ${tomcat.home}"/>
@@ -104,7 +87,6 @@
 		</taskdef>
 		<echo message="Compiling JSPs"/>
 		<echo/>
-		<delete dir="${jsp.classes}"/>
 		<mkdir dir="${jsp.classes}"/>
 
 		<!--PRECOMPILATION -->
@@ -165,80 +147,5 @@
 			</batchtest>
 		</junit>
 	</target>
-
-	<!--<path id="tests.kwaqua.classpath">
-		<fileset dir="${web-inf.lib}">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset dir="${tests.lib}">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset dir="${tests.lib.runtime}">
-			<include name="*.jar"/>
-		</fileset>
-		<pathelement location="${tests.kwaqua.build}"/>
-		&lt;!&ndash;<pathelement location="${properties.home}"/>&ndash;&gt; &lt;!&ndash; log4j.properties &ndash;&gt;
-	</path>-->
-
-	<!--<target name="tests-kwaqua-clean" description="Run kwaqua clean">
-		<delete dir="${tests.kwaqua.build}"/>
-		<delete dir="${basedir}/tests/jbehave"/>
-	</target>-->
-
-	<!--<target name="tests-kwaqua-build" description="Compile">
-		<mkdir dir="${tests.kwaqua.build}"/>
-
-		<javac srcdir="${tests.kwaqua.src}" destdir="${tests.kwaqua.build}">
-			<classpath refid="compile.classpath"/>
-		</javac>
-
-		<mkdir dir="${tests.kwaqua.build}/stories" />
-
-		<copy todir="${tests.kwaqua.build}/stories">
-			<fileset dir="${tests.kwaqua.src}/stories" includes="**/*.story"/>
-		</copy>
-
-		<copy todir="${tests.kwaqua.build}/springConfigs">
-			<fileset dir="${tests.kwaqua.src}/springConfigs" includes="**/*.xml"/>
-		</copy>
-
-		<copy todir="${tests.kwaqua.build}/properties">
-			<fileset dir="${tests.kwaqua.src}/properties" includes="**/*.properties"/>
-		</copy>
-	</target>-->
-
-	<!--<target name="tests-kwaqua-run" depends="tests-kwaqua-clean,tests-kwaqua-build" description="Run aqua tests">
-
-		<mkdir dir="${tests.kwaqua.reports}"/>
-
-		<junit dir="${tests.kwaqua.src}" printsummary="yes" haltonerror="${tests.kwaqua.stopOnFail}" haltonfailure="${tests.kwaqua.stopOnFail}" showoutput="yes">
-
-			<sysproperty key="REMOTE_WEBDRIVER_URL" value="${tests.kwaqua.RemoteWebDriverHubUrl}"/>
-
-			<classpath refid="tests.kwaqua.classpath"/>
-
-			<formatter type="plain"/>
-			<formatter type="xml"/>
-
-			<batchtest fork="yes" todir="${tests.kwaqua.reports}">
-				<fileset dir="${tests.kwaqua.src}">
-					<include name="**/tests/*.java"/>
-				</fileset>
-			</batchtest>
-		</junit>
-	</target>-->
-
-	<!--<property name="selenium.version" value="2.32.0"/>
-	<target name="start-selenium-hub">
-		<java jar="${tests.lib.runtime}/selenium-server-standalone-${selenium.version}.jar" fork="true" spawn="true">
-			<arg line="-role hub"/>
-		</java>
-	</target>
-
-	<target name="start-selenium-node">
-		<java jar="${tests.lib.runtime}/selenium-server-standalone-${selenium.version}.jar" fork="true" spawn="true">
-			<arg line="-role node -hub ${tests.kwaqua.RemoteWebDriverRegisterUrl}"/>
-		</java>
-	</target>-->
 
 </project>  

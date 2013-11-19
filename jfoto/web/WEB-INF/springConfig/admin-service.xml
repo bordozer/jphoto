@@ -8,10 +8,6 @@
 	<bean id="upgradeService" class="admin.services.services.UpgradeServiceImpl"/>
 	<bean id="upgradeTaskUtilsService" class="admin.services.services.SqlUtilsServiceImpl"/>
 
-	<!--<bean id="schedulerService" class="core.services.job.SchedulerServiceImpl" />
-	<bean id="schedulerExecutorService" class="admin.services.scheduler.ScheduledTasksExecutionServiceImpl" init-method="loadScheduledTasksAndStartScheduler"  />
-	<bean id="myScheduler" class="admin.services.scheduler.MyScheduler" />-->
-
 	<bean id="jobStatusChangeStrategyService" class="admin.services.jobs.JobStatusChangeStrategyServiceImpl" />
 	<bean id="jobHelperService" class="admin.services.jobs.JobHelperServiceImpl" />
 

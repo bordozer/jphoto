@@ -33,7 +33,7 @@
 	<bean id="photoSqlHelperService" class="core.services.utils.sql.PhotoSqlHelperServiceImpl"/>
 
 	<bean id="schedulerService" class="core.services.job.SchedulerServiceImpl" />
-	<bean id="schedulerExecutorService" class="admin.services.scheduler.ScheduledTasksExecutionServiceImpl" init-method="loadSchedulerTasksAndStartScheduler"  />
+	<bean id="scheduledTasksExecutionService" class="admin.services.scheduler.ScheduledTasksExecutionServiceImpl" init-method="loadSchedulerTasksAndStartScheduler"  />
 	<bean id="myScheduler" class="admin.services.scheduler.MyScheduler" />
 
 	<bean id="baseSqlUtilsService" class="core.services.utils.sql.BaseSqlUtilsServiceImpl" />

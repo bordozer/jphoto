@@ -3,11 +3,10 @@ SQLServer=localhost
 
 SQLPort=3306
 
-Database=jfoto
+Database=jphoto_timestamp
 
 SqlLogin=root
 
-#SqlPassword=707201
 SqlPassword=sm00hans
 
 initialSize=20
