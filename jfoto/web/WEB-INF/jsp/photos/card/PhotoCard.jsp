@@ -121,17 +121,19 @@
 			<div id="commentList" style="float: left; width: 90%;">
 
 				<script type="text/javascript">
-					<c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}">
-						renderComment( ${commentId} );
-					</c:forEach>
+					var rootComments = [ <c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}" varStatus="status">${commentId}<c:if test="${not status.last}">, </c:if></c:forEach> ];
+					renderComment( 0 );
 
-					function renderComment( commentId ) {
+					function renderComment( index ) {
+						var commentId = rootComments[ index ];
 						$.ajax( {
 									type:'GET',
 									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
 									success:function ( response ) {
 										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
-
+										if ( index < rootComments.length - 1 ) {
+											renderComment( index + 1 );
+										}
 									},
 									error:function () {
 										showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
