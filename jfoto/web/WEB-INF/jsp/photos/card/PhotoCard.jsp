@@ -130,7 +130,6 @@
 									type:'GET',
 									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
 									success:function ( response ) {
-//										$( '#commentList' ).append( response ); // response == /comments/view/PhotoComment.jsp
 										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
 
 									},
