@@ -41,6 +41,11 @@ public class SecurityServiceMock implements SecurityService {
 	}
 
 	@Override
+	public boolean userCanDeletePhotoComment( final User user, final PhotoComment photoComment ) {
+		return false;
+	}
+
+	@Override
 	public boolean userCanEditUserData( final User user, final User dataOwnerUser ) {
 		return false;
 	}

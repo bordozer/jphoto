@@ -79,6 +79,25 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
+	public void menuIsInaccessibleForDeletedComment() {
+		final int userWhoIsCallingMenuId = 7;
+		final int photoId = 123;
+		final int commentAuthorId = userWhoIsCallingMenuId;
+		final int photoCommentId = 1234;
+		final int photoAuthorId = 876;
+
+		final boolean isAnonymousPeriod = false;
+		final boolean isMenuCallerInBlackListOfCommentAuthor = false;
+		final boolean isMenuCallerSuperAdmin = true; // Super admin
+
+		final CommentInitialConditions initialConditions = new CommentInitialConditions( userWhoIsCallingMenuId, photoId, photoCommentId, commentAuthorId, photoAuthorId, isAnonymousPeriod, isMenuCallerInBlackListOfCommentAuthor, isMenuCallerSuperAdmin );
+		initialConditions.setCommentDeleted( true );
+		final CommentMenuItemAccessStrategy accessStrategy = CommentMenuItemAccessStrategy.getCommentMenuItemInaccessibleStrategy();
+
+		assertCommentMenuItemAccess( accessStrategy, new CommentMenuItemEdit(), initialConditions );
+	}
+
+	@Test
 	public void menuIsAccessibleToCommentAuthor() {
 		final int userWhoIsCallingMenuId = 7;
 		final int photoCommentId = 1234;

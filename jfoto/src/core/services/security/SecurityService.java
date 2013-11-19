@@ -23,6 +23,8 @@ public interface SecurityService {
 
 	boolean userCanDeletePhotoComment( final int userId, final int commentId );
 
+	boolean userCanDeletePhotoComment( final User user, final PhotoComment photoComment );
+
 	boolean userCanEditUserData( final User user, final User dataOwnerUser );
 
 	void assertUserExists( final String _userId );

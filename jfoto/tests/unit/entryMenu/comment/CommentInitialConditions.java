@@ -21,6 +21,7 @@ class CommentInitialConditions implements Initialable {
 	private User userWhoIsCallingMenu;
 	private int photoCommentAuthorPhotosQty;
 	private boolean showMenuGoToForOwnEntriesSettingIsSwitchedOn;
+	private boolean commentDeleted;
 
 	public CommentInitialConditions( final int userWhoIsCallingMenuId, final int photoId, final int photoCommentId, final int commentAuthorId, final int photoAuthorId, final boolean anonymousPeriod, final boolean menuCallerInBlackListOfCommentAuthor, final boolean menuCallerSuperAdmin ) {
 		this.userWhoIsCallingMenuId = userWhoIsCallingMenuId;
@@ -95,5 +96,13 @@ class CommentInitialConditions implements Initialable {
 
 	public void setShowMenuGoToForOwnEntriesSettingIsSwitchedOn( final boolean showMenuGoToForOwnEntriesSettingIsSwitchedOn ) {
 		this.showMenuGoToForOwnEntriesSettingIsSwitchedOn = showMenuGoToForOwnEntriesSettingIsSwitchedOn;
+	}
+
+	public boolean isCommentDeleted() {
+		return commentDeleted;
+	}
+
+	public void setCommentDeleted( final boolean commentDeleted ) {
+		this.commentDeleted = commentDeleted;
 	}
 }

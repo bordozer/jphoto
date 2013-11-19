@@ -34,6 +34,9 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu ) && isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu );
+		return ! photoComment.isCommentDeleted()
+			   && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
+			   && isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu )
+			;
 	}
 }

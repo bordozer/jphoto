@@ -96,6 +96,11 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public boolean userCanDeletePhotoComment( final User user, final PhotoComment photoComment ) {
+		return userCanDeletePhotoComment( user.getId(), photoComment.getId() );
+	}
+
+	@Override
 	public boolean userCanEditUserData( final User user, final User dataOwnerUser ) {
 		return ( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_USER_DATA ) && isSuperAdminUser( user.getId() ) ) || ( UserUtils.isLoggedUser( dataOwnerUser ) && UserUtils.isUsersEqual( user, dataOwnerUser ) );
 	}

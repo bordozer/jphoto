@@ -24,6 +24,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		assertCommentMenuItemAccess( accessStrategy, new CommentMenuItemDelete(), initialConditions );
 	}
 
+	@Test
 	public void menuIsInaccessibleToUsualUser() {
 		final int userWhoIsCallingMenuId = 7;
 		final int photoId = 123;
@@ -36,6 +37,25 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final boolean isMenuCallerSuperAdmin = false;
 
 		final CommentInitialConditions initialConditions = new CommentInitialConditions( userWhoIsCallingMenuId, photoId, photoCommentId, commentAuthorId, photoAuthorId, isAnonymousPeriod, isMenuCallerInBlackListOfCommentAuthor, isMenuCallerSuperAdmin );
+		final CommentMenuItemAccessStrategy accessStrategy = CommentMenuItemAccessStrategy.getCommentMenuItemInaccessibleStrategy();
+
+		assertCommentMenuItemAccess( accessStrategy, new CommentMenuItemDelete(), initialConditions );
+	}
+
+	@Test
+	public void menuIsInaccessibleForDeletedComment() {
+		final int userWhoIsCallingMenuId = 7;
+		final int photoId = 123;
+		final int commentAuthorId = 234;
+		final int photoCommentId = 1234;
+		final int photoAuthorId = 876; // any user but not who is calling menu
+
+		final boolean isAnonymousPeriod = false;
+		final boolean isMenuCallerInBlackListOfCommentAuthor = false;
+		final boolean isMenuCallerSuperAdmin = true; // Super admin
+
+		final CommentInitialConditions initialConditions = new CommentInitialConditions( userWhoIsCallingMenuId, photoId, photoCommentId, commentAuthorId, photoAuthorId, isAnonymousPeriod, isMenuCallerInBlackListOfCommentAuthor, isMenuCallerSuperAdmin );
+		initialConditions.setCommentDeleted( true );
 		final CommentMenuItemAccessStrategy accessStrategy = CommentMenuItemAccessStrategy.getCommentMenuItemInaccessibleStrategy();
 
 		assertCommentMenuItemAccess( accessStrategy, new CommentMenuItemDelete(), initialConditions );

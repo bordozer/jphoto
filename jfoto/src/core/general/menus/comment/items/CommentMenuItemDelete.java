@@ -36,12 +36,9 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		if ( ! isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu ) ) {
-			return false;
-		}
-
-		return isSuperAdminUser( userWhoIsCallingMenu.getId() )
-			   || isUserWhoIsCallingMenuOwnerOfThePhoto( photoComment, userWhoIsCallingMenu )
-			   || isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu );
+		return ! photoComment.isCommentDeleted()
+			   && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
+			   && securityService.userCanDeletePhotoComment( userWhoIsCallingMenu, photoComment )
+			;
 	}
 }

@@ -42,6 +42,7 @@ public abstract class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		photoComment.setId( initialConditions.getPhotoCommentId() );
 		photoComment.setCommentAuthor( commentAuthor );
 		photoComment.setPhotoId( initialConditions.getPhotoId() );
+		photoComment.setCommentDeleted( initialConditions.isCommentDeleted() );
 
 		final PhotoCommentService photoCommentService = EasyMock.createMock( PhotoCommentService.class );
 		EasyMock.expect( photoCommentService.load( initialConditions.getPhotoCommentId() ) ).andReturn( photoComment ).anyTimes();
@@ -78,6 +79,11 @@ public abstract class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( securityService.userOwnThePhoto( userWhoIsCallingMenu, photo ) ).andReturn( isUserWhoIsOpeningMenuOwnerOfThePhoto ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( userWhoIsCallingMenu.getId() ) ).andReturn( initialConditions.isMenuCallerSuperAdmin() ).anyTimes();
 		EasyMock.expect( securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, userWhoIsCallingMenu ) ).andReturn( initialConditions.isAnonymousPeriod() ).anyTimes();
+
+		// TODO: this should be tested in SecurityService.userCanDeletePhotoComment( final int userId, final int commentId ). Then canDelete should be set to TRUE
+		final boolean canDelete = initialConditions.isMenuCallerSuperAdmin() || isUserWhoIsOpeningMenuOwnerOfThePhoto || initialConditions.getCommentAuthorId() == userWhoIsCallingMenu.getId();
+		EasyMock.expect( securityService.userCanDeletePhotoComment( userWhoIsCallingMenu, photoComment ) ).andReturn( canDelete ).anyTimes();
+
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 		menuItem.setSecurityService( securityService );
