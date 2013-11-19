@@ -8,15 +8,13 @@
 	<property name="properties.home" value="web/WEB-INF/properties"/>
 
 	<property name="web.home" value="${basedir}/web"/>
-	<property name="work.home" value="${web.home}"/>
 	<property name="src.home" value="${basedir}/src"/>
 
 	<property name="web-inf" value="${web.home}/WEB-INF"/>
 	<property name="deploy.classes" value="${web.home}/WEB-INF/classes"/>
 
-	<property name="work.classes" value="${work.home}/WEB-INF/classes"/>
-	<property name="jsp.classes" value="${work.classes}"/>
-	<property name="tests.unit.classes" value="${work.classes}"/>
+	<property name="jsp.classes" value="${deploy.classes}"/>
+	<property name="tests.unit.classes" value="${deploy.classes}"/>
 
 	<property name="tests.unit.src" value="${basedir}/tests/unit"/>
 	<property name="tests.unit.reports" value="${tests.unit.src}/_reports"/>
@@ -59,22 +57,22 @@
 	</target>
 
 	<target name="prepare" depends="clean" description="Create working dirs and copy static files to work dir">
-		<mkdir dir="${work.classes}"/>
+		<mkdir dir="${deploy.classes}"/>
 		<copy todir="${deploy.classes}">
 			<fileset dir="${properties.home}">
 				<include name="quartz.properties"/>
 			</fileset>
 		</copy>
-		<copy todir="${work.home}">
+		<copy todir="${web.home}">
 			<fileset dir="${web.home}"/>
 		</copy>
 	</target>
 
 	<target name="build" depends="prepare" description="Compile Java sources and copy to WEB-INF/classes dir">
-		<javac srcdir="${src.home}" destdir="${work.classes}">
+		<javac srcdir="${src.home}" destdir="${deploy.classes}">
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<copy todir="${work.classes}">
+		<copy todir="${deploy.classes}">
 			<fileset dir="${src.home}" excludes="**/*.java"/>
 		</copy>
 	</target>
@@ -117,10 +115,10 @@
 
 
 	<target name="tests-unit-build" depends="prepare" description="Compile Test sources and copy to WEB-INF/classes dir">
-		<javac srcdir="${tests.unit.src}" destdir="${work.classes}">
+		<javac srcdir="${tests.unit.src}" destdir="${deploy.classes}">
 			<classpath refid="compile.classpath"/>
 		</javac>
-		<copy todir="${work.classes}">
+		<copy todir="${deploy.classes}">
 			<fileset dir="${tests.unit.src}" excludes="**/*.java"/>
 		</copy>
 	</target>
@@ -130,7 +128,7 @@
 		<junit dir="${tests.unit.src}" printsummary="yes" haltonfailure="yes">
 			<classpath refid="compile.classpath"/>
 			<classpath>
-				<pathelement location="${work.classes}"/>
+				<pathelement location="${deploy.classes}"/>
 				<pathelement location="${tests.unit.classes}"/>
 				<pathelement location="${tests.lib}/junit.jar"/>
 				<pathelement location="${web-inf.lib}"/>
