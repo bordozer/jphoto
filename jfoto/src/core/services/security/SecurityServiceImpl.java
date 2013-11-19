@@ -16,6 +16,7 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
+import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
@@ -55,6 +56,9 @@ public class SecurityServiceImpl implements SecurityService {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private PhotoCommentService photoCommentService;
+
 	@Override
 	public boolean userCanEditPhoto( final User user, final Photo photo ) {
 		return ( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_PHOTOS ) && isSuperAdminUser( user.getId() ) ) || ( UserUtils.isLoggedUser( user ) && userOwnThePhoto( user, photo ) );
@@ -78,6 +82,16 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public boolean userOwnThePhoto( final User user, final Photo photo ) {
 		return UserUtils.isUserOwnThePhoto( user, photo );
+	}
+
+	@Override
+	public boolean userCanDeletePhotoComment( final int userId, final int commentId ) {
+		final PhotoComment photoComment = photoCommentService.load( commentId );
+		final User user = userService.load( userId );
+		final User commentAuthor = photoComment.getCommentAuthor();
+		final Photo photo = photoService.load( photoComment.getPhotoId() );
+
+		return isSuperAdminUser( userId ) || UserUtils.isUserOwnThePhoto( user, photo ) || UserUtils.isUsersEqual( userId, commentAuthor.getId() );
 	}
 
 	@Override
@@ -156,6 +170,13 @@ public class SecurityServiceImpl implements SecurityService {
 		final boolean userCanDeletePhoto = userCanDeletePhoto( user, photo );
 
 		if ( ! userCanDeletePhoto ) {
+			throw new AccessDeniedException();
+		}
+	}
+
+	@Override
+	public void assertUserCanDeletePhotoComment( final int userId, final int commentId ) {
+		if ( ! userCanDeletePhotoComment( userId, commentId ) ) {
 			throw new AccessDeniedException();
 		}
 	}

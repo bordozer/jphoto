@@ -36,6 +36,11 @@ public class SecurityServiceMock implements SecurityService {
 	}
 
 	@Override
+	public boolean userCanDeletePhotoComment( final int userId, final int commentId ) {
+		return false;
+	}
+
+	@Override
 	public boolean userCanEditUserData( final User user, final User dataOwnerUser ) {
 		return false;
 	}
@@ -70,6 +75,10 @@ public class SecurityServiceMock implements SecurityService {
 
 	@Override
 	public void assertUserCanDeletePhoto( final User user, final Photo photo ) {
+	}
+
+	@Override
+	public void assertUserCanDeletePhotoComment( final int userId, final int commentId ) {
 	}
 
 	@Override

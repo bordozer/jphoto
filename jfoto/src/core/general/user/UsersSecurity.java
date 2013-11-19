@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class UsersSecurity extends AbstractBaseEntity {
 
-	public static final String DEFAULT_DEBUG_PASSWORD = "111111"; // TODO: default password
+	public static final String DEFAULT_DEBUG_PASSWORD = "eM2&gCyRuJX"; // TODO: default password
 
 	private final User user;
 	private Date lastLoginTime;

@@ -6,6 +6,7 @@ public class CommentDTO {
 
 	final private int commentId;
 	final private String commentText;
+	private String errorMessage;
 
 	public CommentDTO( final int commentId, final String commentText ) {
 		this.commentId = commentId;
@@ -22,5 +23,13 @@ public class CommentDTO {
 
 	public String getCommentText() {
 		return commentText;
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage( final String errorMessage ) {
+		this.errorMessage = errorMessage;
 	}
 }

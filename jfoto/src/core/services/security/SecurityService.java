@@ -21,6 +21,8 @@ public interface SecurityService {
 
 	boolean userOwnThePhoto( final User user, final Photo photo );
 
+	boolean userCanDeletePhotoComment( final int userId, final int commentId );
+
 	boolean userCanEditUserData( final User user, final User dataOwnerUser );
 
 	void assertUserExists( final String _userId );
@@ -38,6 +40,8 @@ public interface SecurityService {
 	void assertCurrentUserIsLogged( final String message );
 
 	void assertUserCanDeletePhoto( final User user, final Photo photo );
+
+	void assertUserCanDeletePhotoComment( final int userId, final int commentId );
 
 	void assertUserCanEditUserData( final User user, final User dataOwnerUser );
 

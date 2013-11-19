@@ -138,7 +138,7 @@
 										renderComment( index + 1 );
 									},
 									error:function () {
-										showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
+										<%--showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );--%>
 									}
 								} );
 					}

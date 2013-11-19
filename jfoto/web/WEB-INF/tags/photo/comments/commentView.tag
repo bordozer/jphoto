@@ -124,7 +124,9 @@
 			</c:if>
 
 			<div style="float: left; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
-				${eco:formatPhotoCommentText(comment.commentText)}
+				<div id="photoCommentText_${commentId}" style="float: left; width: 100%;">
+					${eco:formatPhotoCommentText(comment.commentText)}
+				</div>
 
 				<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
 					<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">

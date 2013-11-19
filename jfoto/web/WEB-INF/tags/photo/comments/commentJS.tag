@@ -83,8 +83,12 @@
 		}
 
 		if ( confirmDeletion( "${eco:translate('Delete comment?')}" ) ) {
-			var commentDTO = jsonRPC.photoCommentService.delete( commentId ); // todo: use markCommentAsDeletedAjax!!!
-			$( '#${commentDivId}' + commentId ).remove();
+			var commentDTO = jsonRPC.photoCommentService.markCommentAsDeletedAjax( ${loggedUser.id}, commentId );
+			if( commentDTO.errorMessage != undefined ) {
+				showErrorMessage( commentDTO.errorMessage );
+				return;
+			}
+			$( '#photoCommentText_' + commentId ).html( commentDTO.commentText );
 		}
 	}
 

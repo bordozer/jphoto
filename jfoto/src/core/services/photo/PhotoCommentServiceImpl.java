@@ -21,6 +21,8 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.NumberUtils;
+import utils.TranslatorUtils;
+import utils.UserUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -159,19 +161,34 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Override
 	public CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId ) { // TODO: move to AJAX service
-		// TODO: assertUserCanDeleteComment
 
-		final User currentUser = EnvironmentContext.getCurrentUser();
+		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
+			final CommentDTO commentDTO = new CommentDTO( commentId, "Deleted" );
+			commentDTO.setErrorMessage( TranslatorUtils.translate( "You do not have permission to delete this comment" ) );
+
+			return commentDTO;
+		}
+
+		final User userWhoIsDeletingComment = EnvironmentContext.getCurrentUser();
 
 		final PhotoComment comment = load( commentId );
 
 		final PhotoComment deletedComment = new PhotoComment( comment );
 		deletedComment.setId( commentId );
-		deletedComment.setCommentAuthor( currentUser );
 
-		final boolean isSuperAdminUser = securityService.isSuperAdminUser( currentUser.getId() );
+		final Photo photo = photoService.load( comment.getPhotoId() );
 
-		final String commentText = String.format( "%s ( %s ) deleted this comment", currentUser.getNameEscaped(), ( isSuperAdminUser ? "admin" : "photo author" ) ); // TODO:
+		String userRole = "";
+		if ( securityService.isSuperAdminUser( userWhoIsDeletingComment.getId() ) ) {
+			userRole = "admin";
+		} else if( UserUtils.isUserOwnThePhoto( userWhoIsDeletingComment, photo ) ) {
+			userRole = "photo author";
+		} else {
+			userRole = "comment author";
+		}
+
+		final String commentText = String.format( "%s ( %s ) deleted this comment: %s"
+			, userWhoIsDeletingComment.getNameEscaped(), userRole, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ) );
 		deletedComment.setCommentText( commentText );
 
 		save( deletedComment );
