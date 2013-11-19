@@ -123,13 +123,14 @@ CREATE TABLE `comments` (
   `commentText` text NOT NULL,
   `creationTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
   `readtime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
+  `deleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_comments_photoId_photos_id` (`photoId`),
   KEY `fk_comments_authorId_users_id` (`authorId`),
   CONSTRAINT `fk_comments_authorId_users_id` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_comments_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=465754 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
+) ENGINE=InnoDB AUTO_INCREMENT=995045 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
 
 #
 # Structure for the `favorites` table :

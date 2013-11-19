@@ -87,6 +87,7 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public boolean userCanDeletePhotoComment( final int userId, final int commentId ) {
 		final PhotoComment photoComment = photoCommentService.load( commentId );
+
 		final User user = userService.load( userId );
 		final User commentAuthor = photoComment.getCommentAuthor();
 		final Photo photo = photoService.load( photoComment.getPhotoId() );

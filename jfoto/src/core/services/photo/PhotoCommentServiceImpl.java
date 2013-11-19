@@ -163,7 +163,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	public CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId ) { // TODO: move to AJAX service
 
 		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
-			final CommentDTO commentDTO = new CommentDTO( commentId, "Deleted" );
+			final CommentDTO commentDTO = new CommentDTO( commentId );
 			commentDTO.setErrorMessage( TranslatorUtils.translate( "You do not have permission to delete this comment" ) );
 
 			return commentDTO;
@@ -173,8 +173,16 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		final PhotoComment comment = load( commentId );
 
+		if ( comment.isCommentDeleted() ) {
+			final CommentDTO commentDTO = new CommentDTO( commentId );
+			commentDTO.setErrorMessage( TranslatorUtils.translate( "The comment has already been deleted" ) );
+
+			return commentDTO;
+		}
+
 		final PhotoComment deletedComment = new PhotoComment( comment );
 		deletedComment.setId( commentId );
+		deletedComment.setCommentDeleted( true );
 
 		final Photo photo = photoService.load( comment.getPhotoId() );
 

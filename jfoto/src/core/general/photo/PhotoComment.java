@@ -14,6 +14,7 @@ public class PhotoComment extends AbstractBaseEntity implements Cacheable {
 	private String commentText;
 	private Date creationTime;
 	private Date readTime;
+	private boolean commentDeleted;
 
 	public PhotoComment() {
 	}
@@ -73,6 +74,14 @@ public class PhotoComment extends AbstractBaseEntity implements Cacheable {
 
 	public void setReadTime( final Date readTime ) {
 		this.readTime = readTime;
+	}
+
+	public boolean isCommentDeleted() {
+		return commentDeleted;
+	}
+
+	public void setCommentDeleted( final boolean commentDeleted ) {
+		this.commentDeleted = commentDeleted;
 	}
 
 	@Override

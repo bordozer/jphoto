@@ -5,8 +5,12 @@ import core.general.photo.PhotoComment;
 public class CommentDTO {
 
 	final private int commentId;
-	final private String commentText;
+	private String commentText;
 	private String errorMessage;
+
+	public CommentDTO( final int commentId ) {
+		this.commentId = commentId;
+	}
 
 	public CommentDTO( final int commentId, final String commentText ) {
 		this.commentId = commentId;
@@ -23,6 +27,10 @@ public class CommentDTO {
 
 	public String getCommentText() {
 		return commentText;
+	}
+
+	public void setCommentText( final String commentText ) {
+		this.commentText = commentText;
 	}
 
 	public String getErrorMessage() {

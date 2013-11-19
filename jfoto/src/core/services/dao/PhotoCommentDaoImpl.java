@@ -28,6 +28,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public final static String TABLE_COLUMN_COMMENT_TEXT = "commentText";
 	public final static String TABLE_COLUMN_CREATION_TIME = "creationTime";
 	public final static String TABLE_COLUMN_READ_TIME = "readtime";
+	public final static String TABLE_COLUMN_DELETED = "deleted";
 
 	@Autowired
 	private UserService userService;
@@ -46,10 +47,12 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 		fields.put( 4, TABLE_COLUMN_COMMENT_TEXT );
 		fields.put( 5, TABLE_COLUMN_CREATION_TIME );
 		fields.put( 6, TABLE_COLUMN_READ_TIME );
+		fields.put( 7, TABLE_COLUMN_DELETED );
 	}
 
 	static {
 		updatableFields.put( 4, TABLE_COLUMN_COMMENT_TEXT );
+		updatableFields.put( 7, TABLE_COLUMN_DELETED );
 	}
 
 	@Override
@@ -231,6 +234,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 		paramSource.addValue( TABLE_COLUMN_COMMENT_TEXT, entry.getCommentText() );
 		paramSource.addValue( TABLE_COLUMN_CREATION_TIME, entry.getCreationTime() );
 		paramSource.addValue( TABLE_COLUMN_READ_TIME, entry.getReadTime() );
+		paramSource.addValue( TABLE_COLUMN_DELETED, entry.isCommentDeleted() );
 
 		return paramSource;
 	}
@@ -275,6 +279,8 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 			result.setCommentText( rs.getString( TABLE_COLUMN_COMMENT_TEXT ) );
 			result.setCreationTime( rs.getTimestamp( TABLE_COLUMN_CREATION_TIME ) );
 			result.setReadTime( rs.getTimestamp( TABLE_COLUMN_READ_TIME ) );
+
+			result.setCommentDeleted( rs.getBoolean( TABLE_COLUMN_DELETED ) );
 
 			return result;
 		}
