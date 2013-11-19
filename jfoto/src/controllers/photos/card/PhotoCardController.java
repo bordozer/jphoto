@@ -99,7 +99,7 @@ public class PhotoCardController {
 		final Genre genre = genreService.load( photo.getGenreId() );
 		model.setGenre( genre );
 
-		model.setRootCommentsIds( photoCommentService.loadCommentsWithoutParentIds( photoId ) );
+		model.setRootCommentsIds( photoCommentService.loadRootCommentsIds( photoId ) );
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final int loggedUserId = currentUser.getId();

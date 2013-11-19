@@ -9,7 +9,7 @@ public interface PhotoCommentDao extends BaseEntityDao<PhotoComment> {
 
 	List<Integer> loadAllIds( final int photoId );
 
-	List<Integer> loadCommentsWithoutParentIds( final int photoId );
+	List<Integer> loadRootCommentsIds( final int photoId );
 
 	List<Integer> loadUserCommentsIds( final int userId );
 

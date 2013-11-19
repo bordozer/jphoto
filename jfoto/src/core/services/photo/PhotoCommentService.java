@@ -16,7 +16,7 @@ public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
 
 	List<PhotoComment> loadAll( final int photoId );
 
-	List<Integer> loadCommentsWithoutParentIds( final int photoId );
+	List<Integer> loadRootCommentsIds( final int photoId );
 
 	List<PhotoComment> loadCommentsWithoutParent( final int photoId );
 

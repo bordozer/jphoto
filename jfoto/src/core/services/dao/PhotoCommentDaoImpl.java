@@ -94,7 +94,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	}
 
 	@Override
-	public List<Integer> loadCommentsWithoutParentIds( final int photoId ) {
+	public List<Integer> loadRootCommentsIds( final int photoId ) {
 		final String sql = String.format( "SELECT * FROM %s WHERE %s=:photoId AND %s=0  ORDER BY %s"
 			, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, TABLE_COLUMN_REPLY_TO_COMMENT_ID, TABLE_COLUMN_CREATION_TIME );
 
