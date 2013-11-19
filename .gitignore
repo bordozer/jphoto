@@ -7,3 +7,5 @@ log4j.log
 atlassian-ide-plugin.xml
 jfoto/tests/unit/_reports/*
 jfoto/src/rebel.xml
+jfoto/web/WEB-INF/classes
+jfoto/web/WEB-INF/Files
