@@ -1,0 +1,9 @@
+*.iml
+*.ipr
+*.iws
+.idea/*
+log4j.log
+*.properties
+atlassian-ide-plugin.xml
+jfoto/tests/unit/_reports/*
+jfoto/src/rebel.xml
