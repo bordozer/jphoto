@@ -1,6 +1,5 @@
 <project name="JFoto" default="build" basedir=".">
 	<property file="build.properties"/>
-	<!--<property file="/kwaqua/src/test/resources/kwaqua.properties"/>-->
 
 	<property name="app.name" value="jphoto"/>
 	<property name="app.version" value="${app.version}"/>
