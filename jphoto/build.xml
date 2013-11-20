@@ -1,4 +1,4 @@
-<project name="JFoto" default="build" basedir=".">
+<project name="JPhoto" default="build" basedir=".">
 	<property file="build.properties"/>
 
 	<property name="app.name" value="jphoto"/>
