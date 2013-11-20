@@ -10,7 +10,7 @@
 	</appender>
 
 	<appender name="appender.file" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="/home/blu/src/JFProject/log/log4j.log"/>
+		<param name="file" value="../../../../log/log4j.log"/>
 		<param name="append" value="true"/>
 		<param name="threshold" value="WARN"/>
 		<param name="MaxFileSize" value="50MB"/>
