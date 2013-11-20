@@ -20,8 +20,8 @@
 
 <c:set var="anonymousDaysForYear" value="${anonymousDaysAdminModel.anonymousDaysForYear}" />
 <c:set var="currentYear" value="${anonymousDaysAdminModel.currentYear}" />
-<c:set var="calendarMinDate" value="${anonymousDaysAdminModel.calendarMinDate}" />
-<c:set var="calendarMaxDate" value="${anonymousDaysAdminModel.calendarMaxDate}" />
+<c:set var="calendarMinDate" value="${eco:formatDate(anonymousDaysAdminModel.calendarMinDate)}" />
+<c:set var="calendarMaxDate" value="${eco:formatDate(anonymousDaysAdminModel.calendarMaxDate)}" />
 
 <c:set var="monthCorrection" value="${(currentYear - anonymousDaysForYear ) * 12 }" />
 <c:set var="currentAtPos" value="${currentMonth + monthCorrection}" />
