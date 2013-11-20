@@ -1,7 +1,7 @@
 <%@ page import="org.springframework.validation.BindingResult" %>
 <%@ page import="controllers.comment.edit.PhotoCommentModel" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
-<%@ taglib prefix="eco" uri="http://jfoto.dev" %>
+<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>

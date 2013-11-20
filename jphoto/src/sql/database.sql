@@ -4,7 +4,7 @@ SET FOREIGN_KEY_CHECKS=0;
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306
-# Database : jfoto
+# Database : jphoto
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;

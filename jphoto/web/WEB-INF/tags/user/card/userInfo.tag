@@ -2,7 +2,7 @@
 <%@ tag import="core.services.security.SecurityService" %>
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
-<%@ taglib prefix="eco" uri="http://jfoto.dev" %>
+<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>

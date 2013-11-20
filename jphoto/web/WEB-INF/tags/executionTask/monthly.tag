@@ -2,7 +2,7 @@
 <%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ taglib prefix="eco" uri="http://jfoto.dev" %>
+<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="startTaskDate" type="java.lang.String" required="false" %>

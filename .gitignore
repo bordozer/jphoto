@@ -11,3 +11,5 @@ jfoto/web/WEB-INF/classes
 jfoto/web/WEB-INF/Files
 kwaqua/target
 rebel.xml
+log4j.log
+log4j-junit.log
