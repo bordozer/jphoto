@@ -288,7 +288,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre )
 		);
 
-		if ( strings.length > 0 ) {
+		if ( strings.length > 0 && StringUtils.isNotEmpty( strings[0] ) ) {
 			list.add( entityLinkUtilsService.getPhotoCardLink( photo ) );
 			list.addAll( Arrays.asList( strings ) );
 		} else {
