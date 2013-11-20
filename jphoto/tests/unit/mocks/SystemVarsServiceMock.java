@@ -51,11 +51,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public int getSessionTimeoutInMinutes() {
-		return 5;
-	}
-
-	@Override
 	public String getProjectName() {
 		return "Test jPhoto";
 	}

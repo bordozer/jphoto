@@ -18,6 +18,3 @@ SystemTempFolder=../Files/temp
 
 ## Preview folder name
 PreviewFolderName=preview
-
-#Session timeout, minutes
-SessionTimeoutInMinutes=10

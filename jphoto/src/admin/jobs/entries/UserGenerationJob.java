@@ -137,6 +137,9 @@ public class UserGenerationJob extends AbstractJob {
 	}
 
 	private void addUserPhotoAlbums( final User user ) {
+
+		log.debug( String.format( "Creating user photo albums: %s", user ) );
+
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
@@ -147,6 +150,8 @@ public class UserGenerationJob extends AbstractJob {
 			userphotoAlbum.setUser( user );
 			userphotoAlbum.setName( String.format( "%s - %d", randomUtilsService.getRandomStringArrayElement( albumsNames ), randomUtilsService.getRandomInt( 1000, 9999 ) ) );
 			userphotoAlbum.setDescription( String.format( "Generated automatically by User generation job, %s %s", dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ), dateUtilsService.formatTime( dateUtilsService.getCurrentTime() ) ) );
+
+			log.debug( String.format( "User %s: photo albums '%s' is about tobe created", user, userphotoAlbum ) );
 
 			services.getUserPhotoAlbumService().save( userphotoAlbum );
 		}

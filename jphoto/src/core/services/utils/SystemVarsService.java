@@ -22,8 +22,6 @@ public interface SystemVarsService {
 
 	String getPreviewFolderName();
 
-	int getSessionTimeoutInMinutes();
-
 	String getProjectName();
 
 	String getSystemDateFormat();

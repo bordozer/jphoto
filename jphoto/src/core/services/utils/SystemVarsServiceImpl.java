@@ -65,11 +65,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	public String getPreviewFolderName() {
 		return config.getString( "PreviewFolderName" );
 	}
-
-	@Override
-	public int getSessionTimeoutInMinutes() {
-		return config.getInt( "SessionTimeoutInMinutes" );
-	}
 	// Base properties <--
 
 	// Date/time format properties -->

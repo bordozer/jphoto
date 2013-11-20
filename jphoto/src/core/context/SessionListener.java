@@ -1,5 +1,6 @@
 package core.context;
 
+import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
 import core.services.utils.SystemVarsService;
 import core.services.utils.DateUtilsService;
@@ -14,11 +15,10 @@ public class SessionListener implements HttpSessionListener {
 	@Override
 	public void sessionCreated( final HttpSessionEvent httpSessionEvent ) {
 		final DateUtilsService dateUtilsService = ApplicationContextHelper.getDateUtilsService();
-		final SystemVarsService systemVarsService = ApplicationContextHelper.getSystemVarsService();
 
 		final HttpSession session = httpSessionEvent.getSession();
 
-		final int sessionTimeoutMins = systemVarsService.getSessionTimeoutInMinutes() * 60;
+		final int sessionTimeoutMins = ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_SESSION_TIMEOUT_IN_MINUTES ) * 60;
 		session.setMaxInactiveInterval( sessionTimeoutMins );
 
 		final String info = String.format( "Session is STARTED: id = '%s', creation time='%s' ( session timeout: %d minutes )"
