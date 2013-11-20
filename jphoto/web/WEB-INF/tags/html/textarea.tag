@@ -8,6 +8,7 @@
 <%@ attribute name="rows" required="false" type="java.lang.String" %>
 <%@ attribute name="cols" required="false" type="java.lang.String" %>
 <%@ attribute name="isDisabled" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="maxlength" required="false" type="java.lang.String" %>
 
 <c:if test="${empty rows}">
 	<c:set var="rows" value="4" />
@@ -17,5 +18,5 @@
 	<c:set var="cols" value="40" />
 </c:if>
 
-<textarea class="ui-widget-content ui-corner-all" id="${inputId}" name="${inputId}" rows="${rows}" cols="${cols}" <c:if test="${isDisabled}">disabled="disabled"</c:if> >${inputValue}</textarea>
+<textarea <c:if test="${not empty maxlength}">maxlength="${maxlength}"</c:if> class="ui-widget-content ui-corner-all" id="${inputId}" name="${inputId}" rows="${rows}" cols="${cols}" <c:if test="${isDisabled}">disabled="disabled"</c:if> >${inputValue}</textarea>
 <span id="textarea_${inputId}" style="width: 100%; float: left; height: auto;"></span>

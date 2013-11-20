@@ -4,6 +4,8 @@
 <%@ page import="core.enums.PhotoActionAllowance" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ page import="controllers.photos.edit.PhotoEditWizardStep" %>
+<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="core.general.configuration.ConfigurationKey" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -59,6 +61,8 @@
 <c:set var="uploadAllowance" value="${photoEditDataModel.uploadAllowance}"/>
 <c:set var="userCanUploadPhoto" value="${uploadAllowance.userCanUploadPhoto}"/>
 
+<c:set var="photoNameMaxLength" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH )%>"/>
+
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 	<c:if test="${isNew}">
@@ -89,7 +93,7 @@
 						<tags:inputHint inputId="${photoNameControl}" hintTitle_t="Genre name"
 										hint="${nameRequirement}<br /><br />${mandatoryText}" focused="true">
 							<jsp:attribute name="inputField">
-								<html:textarea inputId="${photoNameControl}" inputValue="${photoEditDataModel.name}" title="${eco:translate('Photo name')}" hint="${eco:translate('Photo name')}" cols="50" rows="2" />
+								<html:textarea inputId="${photoNameControl}" inputValue="${photoEditDataModel.name}" title="${eco:translate('Photo name')}" hint="${eco:translate('Photo name')}" cols="51" rows="2" maxlength="${photoNameMaxLength}" />
 							</jsp:attribute>
 						</tags:inputHint>
 						<br />
@@ -242,8 +246,7 @@
 						<tags:inputHint inputId="${photoKeywordsControl}" hintTitle_t="Genre name"
 										hint="${keywordsRequirement}<br /><br />${optionalText}">
 							<jsp:attribute name="inputField">
-								<html:input fieldId="${photoKeywordsControl}" fieldValue="${photoEditDataModel.keywords}" size="30"
-											maxLength="255"/>
+								<html:input fieldId="${photoKeywordsControl}" fieldValue="${photoEditDataModel.keywords}" size="30" maxLength="255"/>
 							</jsp:attribute>
 						</tags:inputHint>
 						<br />

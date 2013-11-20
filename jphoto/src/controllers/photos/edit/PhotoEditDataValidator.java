@@ -76,8 +76,8 @@ public class PhotoEditDataValidator implements Validator {
 
 		final int photoNameMaxLength = configurationService.getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH );
 		if ( name.length() > photoNameMaxLength ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s ($1) should be less then %d symbols."
-				, FormatUtils.getFormattedFieldName( "Name" ), photoNameMaxLength ), name ) );
+			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s ($1) should be less then %d symbols ( entered $2 symbols)."
+				, FormatUtils.getFormattedFieldName( "Name" ), photoNameMaxLength ), name, String.valueOf( name.length() ) ) );
 		}
 	}
 
