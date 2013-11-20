@@ -12,6 +12,7 @@ import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.*;
 
@@ -69,15 +70,15 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	}
 
 	@Override
-	public PageTitleData getPhotoCardData( final Photo photo, final User user, final Genre genre ) {
+	public PageTitleData getPhotoCardData( final Photo photo, final User user, final Genre genre, final String title ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName() );
+		final String fullTitle = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName(), title );
 
-		final List<String> baseBreadcrumbs = getPhotoBaseBreadcrumbs( photo, user, genre );
+		final List<String> baseBreadcrumbs = getPhotoBaseBreadcrumbs( photo, user, genre, title );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( baseBreadcrumbs );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( fullTitle, rootTranslated, breadcrumbs );
 	}
 
 	@Override
@@ -115,14 +116,24 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	}
 
 	@Override
-	public PageTitleData getPhotoCardForHiddenAuthor( final Photo photo, final Genre genre ) {
+	public PageTitleData getPhotoCardForHiddenAuthor( final Photo photo, final Genre genre, final String title ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String anonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, anonymousName, photo.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), anonymousName );
+		final String userAnonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
+		final String fullTitle = pageTitleUtilsService.getTitleDataString( rootTranslated, userAnonymousName, photo.getName(), title );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final List<String> breadcrumbList = newArrayList();
+		breadcrumbList.add( entityLinkUtilsService.getPhotosRootLink() );
+		breadcrumbList.add( entityLinkUtilsService.getPhotosByGenreLink( genre ) );
+		breadcrumbList.add( userAnonymousName );
+		breadcrumbList.add( StringUtils.isNotEmpty( title ) ? entityLinkUtilsService.getPhotoCardLink( photo ) : photo.getNameEscaped() );
+		if ( StringUtils.isNotEmpty( title ) ) {
+			breadcrumbList.add( title );
+		}
+
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbList );
+
+		return new PageTitleData( fullTitle, rootTranslated, breadcrumbs );
 	}
 
 	@Override

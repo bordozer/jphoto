@@ -6,11 +6,10 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
+import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.TranslatorUtils;
-
-import java.util.List;
 
 public class PageTitleServiceImpl implements PageTitleService {
 
@@ -30,11 +29,11 @@ public class PageTitleServiceImpl implements PageTitleService {
 	private PageTitleUtilsService pageTitleUtilsService;
 
 	@Override
-	public PageTitleData photoCardTitle( final Photo photo, final User accessor ) {
+	public PageTitleData photoCardTitle( final Photo photo, final User accessor, final String title ) {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoCardForHiddenAuthor( photo, genre ) : pageTitlePhotoUtilsService.getPhotoCardData( photo, photoAuthor, genre );
+		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoCardForHiddenAuthor( photo, genre, title ) : pageTitlePhotoUtilsService.getPhotoCardData( photo, photoAuthor, genre, title );
 	}
 
 	@Override
@@ -62,4 +61,25 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
+
+	/*@Override
+	public PageTitleData getPhotoActivityStreamData( final Photo photo ) {
+		final String rootTranslated = TranslatorUtils.translate( "Activity Stream" );
+
+		final User user = userService.load( photo.getUserId() );
+		final Genre genre = genreService.load( photo.getGenreId() );
+
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, photo.getNameEscaped() );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getPhotosRootLink()
+			, entityLinkUtilsService.getPhotosByGenreLink( genre )
+			, entityLinkUtilsService.getUserCardLink( user )
+			, entityLinkUtilsService.getPhotosByUserLink( user )
+			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre )
+			, entityLinkUtilsService.getPhotoCardLink( photo )
+			, rootTranslated
+		);
+
+		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}*/
 }

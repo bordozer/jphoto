@@ -19,7 +19,7 @@ public interface PageTitlePhotoUtilsService {
 
 	PageTitleData getPhotoNewData( User user, PhotoEditWizardStep wizardStep );
 
-	PageTitleData getPhotoCardData( Photo photo, User user, Genre genre );
+	PageTitleData getPhotoCardData( final Photo photo, final User user, Genre genre, final String title );
 
 	PageTitleData getPhotoEditData( Photo photo, User user, Genre genre );
 
@@ -29,7 +29,7 @@ public interface PageTitlePhotoUtilsService {
 
 	PageTitleData getUserPhotoPreviewsData( User user, Photo photo, Genre genre );
 
-	PageTitleData getPhotoCardForHiddenAuthor( Photo photo, Genre genre );
+	PageTitleData getPhotoCardForHiddenAuthor( final Photo photo, final Genre genre, final String title );
 
 	PageTitleData getPhotoTitleForHiddenAuthor( Photo photo, Genre genre, String mode_t );
 

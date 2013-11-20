@@ -227,6 +227,11 @@
 				</table:td>
 			</table:tr>
 
+			<table:tr>
+				<table:td></table:td>
+				<table:td cssClass="textsentered"><a href="${eco:baseUrlWithPrefix()}/photo/${photo.id}/activity/">${eco:translate("Photo activity stream")}</a></table:td>
+			</table:tr>
+
 		</table:table>
 	</div>
 </div>
