@@ -30,7 +30,7 @@
 
 	<div class="configuration">
 
-		<table:table border="0" width="800">
+		<table:table border="0" width="800" oddEven="true">
 
 			<c:forEach var="configurationTab" items="${configurationTabs}">
 

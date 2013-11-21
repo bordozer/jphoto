@@ -22,7 +22,7 @@
 	<br/>
 	<br/>
 
-	<table:table width="100%">
+	<table:table width="100%" oddEven="true">
 
 		<table:separatorInfo colspan="5" title="${eco:translate('Saved system configurations')}" />
 

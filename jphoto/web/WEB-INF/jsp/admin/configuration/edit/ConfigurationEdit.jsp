@@ -44,7 +44,7 @@
 
 			<c:set var="colspan" value="6"/>
 
-			<table:table border="0" width="900">
+			<table:table border="0" width="900" oddEven="true">
 
 				<table:tr>
 					<table:td colspan="${colspan}">
