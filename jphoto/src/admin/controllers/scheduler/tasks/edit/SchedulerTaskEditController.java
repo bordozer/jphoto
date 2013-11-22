@@ -74,7 +74,7 @@ public class SchedulerTaskEditController {
 
 		final ExecutionTaskType initTaskType = ExecutionTaskType.ONCE;
 
-		model.setSchedulerTaskName( StringUtils.EMPTY );
+		model.setSchedulerTaskName( TranslatorUtils.translate( "New scheduler task" ) );
 		model.setExecutionTaskTypeId( initTaskType.getId() );
 		model.setStartTaskDate( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ) );
 		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getFirstSecondOfToday() ) );
