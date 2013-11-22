@@ -1,5 +1,6 @@
 package admin.controllers.scheduler.tasks.edit;
 
+import admin.jobs.general.SavedJob;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.general.executiontasks.*;
@@ -20,8 +21,7 @@ import core.services.utils.UrlUtilsServiceImpl;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newLinkedHashMap;
@@ -77,9 +77,9 @@ public class SchedulerTaskEditController {
 		model.setSchedulerTaskName( StringUtils.EMPTY );
 		model.setExecutionTaskTypeId( initTaskType.getId() );
 		model.setStartTaskDate( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ) );
-		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getCurrentTime() ) );
+		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getFirstSecondOfToday() ) );
 		model.setSkipMissedExecutions( true );
-		model.setSavedJobs( savedJobService.loadAllActive() );
+		model.setSavedJobs( getSavedJobs() );
 		model.setSelectedTaskType( initTaskType );
 		model.setPeriodicalTaskHours( SchedulerTaskEditModel.HOURS );
 
@@ -100,7 +100,7 @@ public class SchedulerTaskEditController {
 		model.setSchedulerTaskName( schedulerTask.getName() );
 		model.setExecutionTaskTypeId( taskType.getId() );
 		model.setSavedJobId( schedulerTask.getSavedJobId() );
-		model.setSavedJobs( savedJobService.loadAllActive() );
+		model.setSavedJobs( getSavedJobs() );
 		model.setSelectedTaskType( taskType );
 
 		final Map<SchedulerTaskProperty, CommonProperty> parametersMap = schedulerTask.getExecutionTask().getParametersMap();
@@ -147,6 +147,19 @@ public class SchedulerTaskEditController {
 		}
 
 		return String.format( "redirect:%s", urlUtilsService.getAdminSchedulerTaskListLink() );
+	}
+
+	private List<SavedJob> getSavedJobs() {
+		final List<SavedJob> savedJobs = savedJobService.loadAllActive();
+
+		Collections.sort( savedJobs, new Comparator<SavedJob>() {
+			@Override
+			public int compare( final SavedJob o1, final SavedJob o2 ) {
+				return o1.getName().compareTo( o2.getName() );
+			}
+		} );
+
+		return savedJobs;
 	}
 
 	private void initModelFromExecutionTaskParameterMap( final SchedulerTaskEditModel model, final Map<SchedulerTaskProperty, CommonProperty> parametersMap ) {
