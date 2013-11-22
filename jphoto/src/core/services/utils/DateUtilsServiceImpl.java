@@ -72,6 +72,14 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 	}
 
 	@Override
+	public Date getTimeOffsetInMinutes( final Date date, final int offsetInMinutes ) {
+		final Calendar cal = getCalendar( date );
+		cal.add( Calendar.MINUTE, offsetInMinutes );
+
+		return cal.getTime();
+	}
+
+	@Override
 	public Date getDatesOffsetFromCurrentDate( final int offsetInDays ) {
 		return getDatesOffset( new Date(), offsetInDays );
 	}

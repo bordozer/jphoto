@@ -115,19 +115,12 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 			return jobDateRange.getStartDate();
 		}
 
-		final boolean actionIsGoingToHappenEarlyThenPhotoWarUpload = jobDateRange.getStartDate().getTime() < photoUploadTime.getTime();
-
-		Date actionMinimalTimeFrom = photoUploadTime;
-
-		if ( actionIsGoingToHappenEarlyThenPhotoWarUpload ) {
-			actionMinimalTimeFrom = services.getRandomUtilsService().getRandomDate( photoUploadTime, 20 );
-
-			if ( actionMinimalTimeFrom.getTime() > jobDateRange.getEndDate().getTime() ) {
-				actionMinimalTimeFrom = getDateUtilsService().getLastSecondOfDay( jobDateRange.getEndDate() );
-			}
+		Date actionTimeFrom = jobDateRange.getStartDate();
+		if ( jobDateRange.getStartDate().getTime() < photoUploadTime.getTime() ) {
+			actionTimeFrom = photoUploadTime;
 		}
 
-		return services.getRandomUtilsService().getRandomDate( actionMinimalTimeFrom, jobDateRange.getEndDate() );
+		return services.getRandomUtilsService().getRandomDate( actionTimeFrom, jobDateRange.getEndDate() );
 	}
 
 	protected boolean savePhotoPreview( final Photo photo, final User user, final Date previewTime ) {

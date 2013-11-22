@@ -26,6 +26,8 @@ public interface DateUtilsService {
 
 	Date getTimeOffsetInSeconds( final Date date, final int offsetInSeconds );
 
+	Date getTimeOffsetInMinutes( final Date date, final int offsetInMinutes );
+
 	Date getDatesOffsetFromCurrentDate( final int offsetInDays );
 
 	Date getMonthsOffset( final Date date, final int offsetInMonth );

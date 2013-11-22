@@ -19,10 +19,10 @@ public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerat
 	public boolean doPhotoAction( final Photo photo, final User user ) {
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
-			final DateUtilsService dateUtilsService = services.getDateUtilsService();
-			final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-			addJobExecutionFinalMessage( String.format( "User %s has seen photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), dateUtilsService.formatDateTime( actionTime ) ) );
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
+		addJobExecutionFinalMessage( String.format( "User %s has seen photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), dateUtilsService.formatDateTime( actionTime ) ) );
 
-			return savePhotoPreview( photo, user, actionTime );
+		return savePhotoPreview( photo, user, actionTime );
 	}
 }
