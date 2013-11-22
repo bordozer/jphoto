@@ -153,4 +153,11 @@ public class PhotosImportModel extends DateRangableModel {
 	public void setDeletePictureFromDiskAfterImport( final boolean deletePictureFromDiskAfterImport ) {
 		this.deletePictureFromDiskAfterImport = deletePictureFromDiskAfterImport;
 	}
+
+	@Override
+	public void clear() {
+		super.clear();
+
+		deletePictureFromDiskAfterImport = false;
+	}
 }
