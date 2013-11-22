@@ -20,7 +20,7 @@
 				${eco:formatTime(activity.activityTime)}
 			</table:td>
 
-			<table:td cssClass="textcentered" width="30">${activity.displayActivityPicture}</table:td>
+			<table:td cssClass="textcentered" width="30">${activity.displayActivityIcon}</table:td>
 
 			<table:tdicon><html:img16 src="jobtype/${activity.activityType.icon}" alt="${activity.activityType.name}"/></table:tdicon>
 

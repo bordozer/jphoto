@@ -67,6 +67,15 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 		return String.format( "%s added %s to %s", activityOfUserId, favoriteEntryId, favoriteType );
 	}
 
+	@Override
+	public String getDisplayActivityIcon() {
+		if ( favoriteType == FavoriteEntryType.PHOTO || favoriteType == FavoriteEntryType.BOOKMARK ) {
+			return getPhotoIcon( services.getPhotoService().load( favoriteEntryId ) );
+		}
+
+		return super.getDisplayActivityIcon();
+	}
+
 	private String getFavoriteEntry( final int favoriteEntryId, final FavoriteEntryType entryType ) {
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 

@@ -35,7 +35,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 		this.services = services;
 	}
 
-	public String getDisplayActivityPicture() {
+	public String getDisplayActivityIcon() {
 		return StringUtils.EMPTY;
 	}
 

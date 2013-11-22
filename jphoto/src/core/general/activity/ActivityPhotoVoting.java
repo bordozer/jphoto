@@ -63,7 +63,7 @@ public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityPicture() {
+	public String getDisplayActivityIcon() {
 		return getPhotoIcon( photo );
 	}
 

@@ -50,7 +50,7 @@ public class ActivityPhotoPreview extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityPicture() {
+	public String getDisplayActivityIcon() {
 		return getPhotoIcon( preview.getPhoto() );
 	}
 

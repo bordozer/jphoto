@@ -51,7 +51,7 @@ public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityPicture() {
+	public String getDisplayActivityIcon() {
 		return getPhotoIcon( services.getPhotoService().load( comment.getPhotoId() ) );
 	}
 

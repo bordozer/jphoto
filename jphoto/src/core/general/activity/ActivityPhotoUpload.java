@@ -69,7 +69,7 @@ public class ActivityPhotoUpload extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityPicture() {
+	public String getDisplayActivityIcon() {
 		return getPhotoIcon( uploadedPhoto );
 	}
 

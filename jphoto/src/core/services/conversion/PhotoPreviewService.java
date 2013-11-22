@@ -11,8 +11,6 @@ public interface PhotoPreviewService extends BaseEntityService<PhotoPreview> {
 
 	boolean hasUserAlreadySeenThisPhoto( final int photoId, final int userId );
 
-	boolean save( final PhotoPreview entry );
-
 	PhotoPreview load( final int photoId, final int userId );
 
 	void deletePreviews( final int photoId );
