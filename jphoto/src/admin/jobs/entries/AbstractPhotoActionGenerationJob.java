@@ -23,8 +23,6 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRangeableJob {
 
-	private final static Date TIME_ONE_MINUTES = new Date( 1000 * 60 );
-
 	private final static Integer MAX_ITERATIONS = 1000;
 
 	protected final SavedJobType savedJobType;
@@ -131,7 +129,7 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		}
 
 		final PhotoPreview photoPreview = new PhotoPreview( photo, user );
-		photoPreview.setPreviewTime( services.getRandomUtilsService().getRandomDate( previewTime, TIME_ONE_MINUTES ) );
+		photoPreview.setPreviewTime( previewTime );
 		photoPreviewService.save( photoPreview );
 
 		getLog().info( String.format( "User %s has seen photo %s ( time: %s )", user, photo, getDateUtilsService().formatDateTime( previewTime ) ) );
