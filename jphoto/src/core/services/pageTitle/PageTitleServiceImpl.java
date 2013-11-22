@@ -1,5 +1,6 @@
 package core.services.pageTitle;
 
+import core.general.activity.ActivityType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -28,6 +29,9 @@ public class PageTitleServiceImpl implements PageTitleService {
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
 
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
 	@Override
 	public PageTitleData photoCardTitle( final Photo photo, final User accessor, final String title ) {
 		final User photoAuthor = userService.load( photo.getUserId() );
@@ -53,11 +57,17 @@ public class PageTitleServiceImpl implements PageTitleService {
 	}
 
 	@Override
-	public PageTitleData getActivityStreamData() {
+	public PageTitleData getActivityStreamData( final ActivityType activityType ) {
 		final String rootTranslated = TranslatorUtils.translate( "Activity Stream" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
+
+		final String breadcrumbs;
+		if ( activityType != null ) {
+			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getActivityStreamRootLink(), activityType.getNameTranslated() );
+		} else {
+			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
+		}
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}

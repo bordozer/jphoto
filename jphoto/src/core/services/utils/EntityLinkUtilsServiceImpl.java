@@ -215,6 +215,12 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		return String.format( "<span style=\"text-decoration: line-through\">%s</span>", result );
 	}
 
+	@Override
+	public String getActivityStreamRootLink() {
+		final String link = String.format( "%s/activityStream/", urlUtilsService.getBaseURLWithPrefix() );
+		return String.format( "<a href=\"%s\">%s</a>", link, TranslatorUtils.translate( "Activity stream" ) );
+	}
+
 	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
 		this.urlUtilsService = urlUtilsService;
 	}

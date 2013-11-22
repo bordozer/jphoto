@@ -2,6 +2,7 @@ package core.services.utils;
 
 import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import core.general.activity.ActivityType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -68,4 +69,6 @@ public interface EntityLinkUtilsService {
 	String getAdminUpgradeLink();
 
 	String getAdminSavedJobLink( SavedJobType jobType, SavedJob savedJob );
+
+	String getActivityStreamRootLink();
 }

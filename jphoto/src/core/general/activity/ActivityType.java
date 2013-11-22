@@ -1,6 +1,7 @@
 package core.general.activity;
 
 import admin.jobs.enums.SavedJobType;
+import utils.TranslatorUtils;
 
 public enum ActivityType {
 
@@ -29,6 +30,10 @@ public enum ActivityType {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getNameTranslated() {
+		return TranslatorUtils.translate( name );
 	}
 
 	public String getIcon() {
