@@ -18,7 +18,7 @@
 
 		<c:set var="css" value=""/>
 		<c:if test="${activityStreamModel.filterActivityTypeId == 0}">
-			<c:set var="css" value="block-background"/>
+			<c:set var="css" value="block-background block-border block-shadow"/>
 		</c:if>
 
 		<a href="${eco:baseUrlWithPrefix()}/activityStream/">
@@ -31,7 +31,7 @@
 
 			<c:set var="css" value=""/>
 			<c:if test="${activityType.id == activityStreamModel.filterActivityTypeId}">
-				<c:set var="css" value="block-background"/>
+				<c:set var="css" value="block-background block-border block-shadow"/>
 			</c:if>
 
 			<a href="${eco:baseUrlWithPrefix()}/activityStream/type/${activityType.id}/">
