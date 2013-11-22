@@ -58,7 +58,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				parametersMap.put( SavedJobParameterKey.PARAM_PICTURES_DIR, new CommonProperty( SavedJobParameterKey.PARAM_PICTURES_DIR.getId(), fsParameters.getPictureDir() ) );
 				parametersMap.put( SavedJobParameterKey.PARAM_USER_ID, new CommonProperty( SavedJobParameterKey.PARAM_USER_ID.getId(), fsParameters.getAssignAllGeneratedPhotosToUserId() ) );
-				parametersMap.put( SavedJobParameterKey.PARAM_GENERATE_PREVIEW, new CommonProperty( SavedJobParameterKey.PARAM_GENERATE_PREVIEW.getId(), fsParameters.isGeneratePreview() ) );
+				parametersMap.put( SavedJobParameterKey.DELETE_PICTURE_AFTER_IMPORT, new CommonProperty( SavedJobParameterKey.DELETE_PICTURE_AFTER_IMPORT.getId(), fsParameters.isDeletePictureAfterImport() ) );
 				final int qtyLimit = fsParameters.getPhotoQtyLimit();
 				parametersMap.put( SavedJobParameterKey.PARAM_PHOTOS_QTY, new CommonProperty( SavedJobParameterKey.PARAM_PHOTOS_QTY.getId(), qtyLimit ) );
 
@@ -97,12 +97,12 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case FILE_SYSTEM:
 				final String pictureDir = jobParameters.get( SavedJobParameterKey.PARAM_PICTURES_DIR ).getValue();
 				final int assignAllGeneratedPhotosToUserId = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueInt();
-				final boolean generatePreview = jobParameters.get( SavedJobParameterKey.PARAM_GENERATE_PREVIEW ).getValueBoolean();
+				final boolean deletePictureAfterImport = jobParameters.get( SavedJobParameterKey.DELETE_PICTURE_AFTER_IMPORT ).getValueBoolean();
 				final int photoQtyLimit = jobParameters.get( SavedJobParameterKey.PARAM_PHOTOS_QTY ).getValueInt();
 
 				setDateRangeParameters( jobParameters );
 
-				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, generatePreview, assignAllGeneratedPhotosToUserId, jobDateRange );
+				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, deletePictureAfterImport, assignAllGeneratedPhotosToUserId, jobDateRange );
 
 				break;
 			case PHOTOSIGHT:
@@ -131,7 +131,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final FileSystemImportParameters fsParameters = ( FileSystemImportParameters ) importParameters;
 
 				builder.append( TranslatorUtils.translate( "Dir" ) ).append( ": " ).append( fsParameters.getPictureDir() ).append( "<br />" );
-				builder.append( TranslatorUtils.translate( "Generate preview" ) ).append( ": " ).append( TranslatorUtils.translate( fsParameters.isGeneratePreview() ? "Yes" : "No" ) ).append( "<br />" );
+				builder.append( TranslatorUtils.translate( "Generate preview" ) ).append( ": " ).append( TranslatorUtils.translate( fsParameters.isDeletePictureAfterImport() ? "Yes" : "No" ) ).append( "<br />" );
 				final int userId = fsParameters.getAssignAllGeneratedPhotosToUserId();
 				if ( userId > 0 ) {
 					final User user = services.getUserService().load( userId );

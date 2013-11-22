@@ -16,6 +16,7 @@ import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.utils.PredicateUtilsService;
+import org.apache.commons.io.FileUtils;
 import utils.*;
 
 import java.io.File;
@@ -75,6 +76,10 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			pictureIterator.remove();
 
 			createPhotoDBEntry( imageToImport );
+
+			if ( importParameters.isDeletePictureAfterImport() ) {
+				FileUtils.deleteQuietly( imageToImport.getImageDiscEntry().getImageFile() );
+			}
 
 			job.increment();
 

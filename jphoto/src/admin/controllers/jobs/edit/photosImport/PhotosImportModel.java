@@ -12,12 +12,11 @@ public class PhotosImportModel extends DateRangableModel {
 	// file system import fields -->
 	public final static String PICTURE_DIR_FORM_CONTROL = "pictureDir";
 	public final static String PHOTO_QTY_LIMIT_FORM_CONTROL = "photoQtyLimit";
-	public final static String GENERATE_PREVIEW_FORM_CONTROL = "generatePreview";
+	public final static String DELETE_PICTURE_AFTER_IMPORT_CONTROL = "deletePictureFromDiskAfterImport";
 	public final static String USER_ID_FORM_CONTROL = "assignAllGeneratedPhotosToUserId";
 
 	private String pictureDir = "/home/blu/Pictures/"; // TODO: this is default value for dev time
 	private String photoQtyLimit = "5";
-	private boolean generatePreview = true;
 	private int assignAllGeneratedPhotosToUserId;
 	private User assignAllGeneratedPhotosToUser;
 	// file system import fields<--
@@ -40,6 +39,8 @@ public class PhotosImportModel extends DateRangableModel {
 	private boolean importComments;
 	private String delayBetweenRequest;
 	// photosight import fields <--
+
+	private boolean deletePictureFromDiskAfterImport;
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -71,14 +72,6 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setPhotoQtyLimit( final String photoQtyLimit ) {
 		this.photoQtyLimit = photoQtyLimit;
-	}
-
-	public boolean isGeneratePreview() {
-		return generatePreview;
-	}
-
-	public void setGeneratePreview( final boolean generatePreview ) {
-		this.generatePreview = generatePreview;
 	}
 
 	public int getAssignAllGeneratedPhotosToUserId() {
@@ -151,5 +144,13 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setDelayBetweenRequest( final String delayBetweenRequest ) {
 		this.delayBetweenRequest = delayBetweenRequest;
+	}
+
+	public boolean isDeletePictureFromDiskAfterImport() {
+		return deletePictureFromDiskAfterImport;
+	}
+
+	public void setDeletePictureFromDiskAfterImport( final boolean deletePictureFromDiskAfterImport ) {
+		this.deletePictureFromDiskAfterImport = deletePictureFromDiskAfterImport;
 	}
 }

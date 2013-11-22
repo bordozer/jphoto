@@ -130,7 +130,7 @@ public class PhotosImportController extends DateRangableController {
 
 				final int photoQtyLimit = NumberUtils.convertToInt( aModel.getPhotoQtyLimit() );
 				final String pictureDir = aModel.getPictureDir();
-				final boolean generatePreview = aModel.isGeneratePreview();
+				final boolean deletePictureAfterImport = aModel.isDeletePictureFromDiskAfterImport();
 				final int assignAllGeneratedPhotosToUserId = aModel.getAssignAllGeneratedPhotosToUserId();
 
 				final Date dateFrom = dateUtilsService.parseDate( aModel.getDateFrom() );
@@ -139,7 +139,7 @@ public class PhotosImportController extends DateRangableController {
 				final int timePeriod = NumberUtils.convertToInt( aModel.getTimePeriod() );
 				final JobDateRange jobDateRange = new JobDateRange( dateRangeType, dateFrom, dateTo, timePeriod, dateUtilsService );
 
-				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, generatePreview, assignAllGeneratedPhotosToUserId, jobDateRange );
+				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, deletePictureAfterImport, assignAllGeneratedPhotosToUserId, jobDateRange );
 
 				job.setTotalJopOperations( photoQtyLimit > 0 ? photoQtyLimit : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;
@@ -187,12 +187,12 @@ public class PhotosImportController extends DateRangableController {
 			case FILE_SYSTEM:
 				final String pictureDir = savedJobParametersMap.get( SavedJobParameterKey.PARAM_PICTURES_DIR ).getValue();
 				final int photos = savedJobParametersMap.get( SavedJobParameterKey.PARAM_PHOTOS_QTY ).getValueInt();
-				final boolean generatePreview = savedJobParametersMap.get( SavedJobParameterKey.PARAM_GENERATE_PREVIEW ).getValueBoolean();
+				final boolean deletePictureAfterImport = savedJobParametersMap.get( SavedJobParameterKey.DELETE_PICTURE_AFTER_IMPORT ).getValueBoolean();
 				final int userId = savedJobParametersMap.get( SavedJobParameterKey.PARAM_USER_ID ).getValueInt();
 
 				aModel.setPictureDir( pictureDir );
 				aModel.setPhotoQtyLimit( photos > 0 ? String.valueOf( photos ) : StringUtils.EMPTY );
-				aModel.setGeneratePreview( generatePreview );
+				aModel.setDeletePictureFromDiskAfterImport( deletePictureAfterImport );
 				aModel.setAssignAllGeneratedPhotosToUserId( userId );
 				aModel.setAssignAllGeneratedPhotosToUser( userService.load( userId ) );
 

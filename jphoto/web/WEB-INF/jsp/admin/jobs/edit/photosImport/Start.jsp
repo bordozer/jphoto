@@ -21,7 +21,7 @@
 
 <c:set var="pictureDirFormControl" value="<%=PhotosImportModel.PICTURE_DIR_FORM_CONTROL%>" />
 <c:set var="userQtyLimitControl" value="<%=PhotosImportModel.PHOTO_QTY_LIMIT_FORM_CONTROL%>" />
-<c:set var="generatePreviewControl" value="<%=PhotosImportModel.GENERATE_PREVIEW_FORM_CONTROL%>" />
+<c:set var="deletePictureAfterImportControl" value="<%=PhotosImportModel.DELETE_PICTURE_AFTER_IMPORT_CONTROL%>" />
 <c:set var="userIdControl" value="<%=PhotosImportModel.USER_ID_FORM_CONTROL%>" />
 
 <c:set var="photosightUserIdControl" value="<%=PhotosImportModel.FORM_CONTROL_PHOTOSIGHT_USER_ID%>" />
@@ -121,11 +121,11 @@
 							</table:tr>
 
 							<table:tr>
-								<table:tdtext text_t="Generate preview" />
+								<table:tdtext text_t="Delete picture after import" />
 								<table:tddata>
-									<tags:inputHint inputId="${generatePreviewControl}" hintTitle_t="Generate preview" hint="Generate preview">
+									<tags:inputHint inputId="${deletePictureAfterImportControl}" hintTitle_t="Delete picture after import" hint="Delete picture after import">
 										<jsp:attribute name="inputField">
-											<form:checkbox path="generatePreview" value="true" />
+											<form:checkbox path="${deletePictureAfterImportControl}" value="true" />
 										</jsp:attribute>
 									</tags:inputHint>
 									<br />

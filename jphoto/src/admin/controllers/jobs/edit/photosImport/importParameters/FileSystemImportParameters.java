@@ -6,15 +6,15 @@ public class FileSystemImportParameters implements ImportParameters {
 
 	private final String pictureDir;
 	private final int photoQtyLimit;
-	private final boolean generatePreview;
+	private final boolean deletePictureAfterImport;
 	private final int assignAllGeneratedPhotosToUserId;
 
 	private final JobDateRange jobDateRange;
 
-	public FileSystemImportParameters( final String pictureDir, final int photoQtyLimit, final boolean generatePreview, final int assignAllGeneratedPhotosToUserId, final JobDateRange jobDateRange ) {
+	public FileSystemImportParameters( final String pictureDir, final int photoQtyLimit, final boolean deletePictureAfterImport, final int assignAllGeneratedPhotosToUserId, final JobDateRange jobDateRange ) {
 		this.pictureDir = pictureDir;
 		this.photoQtyLimit = photoQtyLimit;
-		this.generatePreview = generatePreview;
+		this.deletePictureAfterImport = deletePictureAfterImport;
 		this.assignAllGeneratedPhotosToUserId = assignAllGeneratedPhotosToUserId;
 		this.jobDateRange = jobDateRange;
 	}
@@ -27,8 +27,8 @@ public class FileSystemImportParameters implements ImportParameters {
 		return photoQtyLimit;
 	}
 
-	public boolean isGeneratePreview() {
-		return generatePreview;
+	public boolean isDeletePictureAfterImport() {
+		return deletePictureAfterImport;
 	}
 
 	public int getAssignAllGeneratedPhotosToUserId() {
