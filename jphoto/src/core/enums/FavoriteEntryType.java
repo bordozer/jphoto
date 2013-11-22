@@ -3,6 +3,8 @@ package core.enums;
 import core.interfaces.Identifiable;
 import utils.TranslatorUtils;
 
+import java.util.EnumSet;
+
 public enum FavoriteEntryType implements Identifiable {
 
 	USER( 1, "Favorite members", "add to favorite members", "The member is in your favorites. Click to remove.", "userAdd16x16.png", "userRemove16x16.png" )
@@ -15,6 +17,8 @@ public enum FavoriteEntryType implements Identifiable {
 	;
 
 	public static final String FAVORITES_IMAGE_FOLDER = "favorites";
+
+	private final static EnumSet RELATED_TO_PHOTO = EnumSet.of( PHOTO, BOOKMARK, NEW_COMMENTS_NOTIFICATION );
 
 	private final int id;
 
@@ -62,6 +66,10 @@ public enum FavoriteEntryType implements Identifiable {
 
 	public String getRemoveIcon() {
 		return removeIcon;
+	}
+
+	public boolean isRelatedToPhoto() {
+		return RELATED_TO_PHOTO.contains( this );
 	}
 
 	private String getIcon( final String icon) {

@@ -69,7 +69,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getDisplayActivityIcon() {
-		if ( favoriteType == FavoriteEntryType.PHOTO || favoriteType == FavoriteEntryType.BOOKMARK ) {
+		if ( favoriteType.isRelatedToPhoto() ) {
 			return getPhotoIcon( services.getPhotoService().load( favoriteEntryId ) );
 		}
 
