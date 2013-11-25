@@ -58,6 +58,8 @@ public class UserCardModel extends AbstractGeneralModel {
 
 	private List<AbstractActivityStreamEntry> userLastActivities;
 
+	private int filterActivityTypeId;
+
 	public User getUser() {
 		return user;
 	}
@@ -244,5 +246,13 @@ public class UserCardModel extends AbstractGeneralModel {
 
 	public void setUserLastActivities( final List<AbstractActivityStreamEntry> userLastActivities ) {
 		this.userLastActivities = userLastActivities;
+	}
+
+	public int getFilterActivityTypeId() {
+		return filterActivityTypeId;
+	}
+
+	public void setFilterActivityTypeId( final int filterActivityTypeId ) {
+		this.filterActivityTypeId = filterActivityTypeId;
 	}
 }

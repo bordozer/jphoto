@@ -1,6 +1,7 @@
 package controllers.users.card.data;
 
 import core.general.activity.AbstractActivityStreamEntry;
+import core.general.activity.ActivityType;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -46,5 +47,5 @@ public interface UserCardModelFillService {
 
 	EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu );
 
-	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final PagingModel pagingModel );
+	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final int activityTypeId, final PagingModel pagingModel );
 }

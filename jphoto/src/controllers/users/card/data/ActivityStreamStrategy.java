@@ -15,6 +15,6 @@ public class ActivityStreamStrategy extends AbstractUserCardModelFillStrategy {
 
 	@Override
 	public void performCustomActions() {
-		model.setUserLastActivities( userCardModelFillService.getUserLastActivities( getUserId(), pagingModel ) );
+		model.setUserLastActivities( userCardModelFillService.getUserLastActivities( getUserId(), model.getFilterActivityTypeId(), pagingModel ) );
 	}
 }

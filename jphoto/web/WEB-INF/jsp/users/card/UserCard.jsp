@@ -66,7 +66,7 @@
 
 		<c:if test="${selectedUserCardTab == 'ACTIVITY_STREAM'}">
 			<div class="divPadd">
-				<userCard:activityStream activities="${userCardModel.userLastActivities}" />
+				<userCard:userActivityStream user="${user}" activities="${userCardModel.userLastActivities}" filterActivityTypeId="${userCardModel.filterActivityTypeId}" />
 			</div>
 		</c:if>
 

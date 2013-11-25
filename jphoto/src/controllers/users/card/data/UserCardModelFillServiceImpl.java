@@ -239,13 +239,19 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	@Override
-	public List<AbstractActivityStreamEntry> getUserLastActivities( int userId, final PagingModel pagingModel ) {
+	public List<AbstractActivityStreamEntry> getUserLastActivities( int userId, final int activityTypeId, final PagingModel pagingModel ) {
 		final SqlTable activityStreamTable = new SqlTable( ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM );
 		final SqlIdsSelectQuery selectQuery = new SqlIdsSelectQuery( activityStreamTable );
 
-		final SqlColumnSelectable tActivityConUserId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_USER_ID );
-		final SqlLogicallyJoinable where = new SqlCondition( tActivityConUserId, SqlCriteriaOperator.EQUALS, userId, dateUtilsService );
-		selectQuery.addWhereAnd( where );
+		final SqlColumnSelectable tActivityColUserId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_USER_ID );
+		final SqlLogicallyJoinable whereUserId = new SqlCondition( tActivityColUserId, SqlCriteriaOperator.EQUALS, userId, dateUtilsService );
+		selectQuery.addWhereAnd( whereUserId );
+
+		if ( activityTypeId > 0 ) {
+			final SqlColumnSelectable tActivityColActivityTypeId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE );
+			final SqlLogicallyJoinable whereActivityTypeId = new SqlCondition( tActivityColActivityTypeId, SqlCriteriaOperator.EQUALS, activityTypeId, dateUtilsService );
+			selectQuery.addWhereAnd( whereActivityTypeId );
+		}
 
 		final SqlColumnSelectable timeCol = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
 		selectQuery.addSortingDesc( timeCol );

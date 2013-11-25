@@ -81,6 +81,20 @@ public class UserCardController {
 		return tab.isDefaultTab() ? VIEW_BRIEF : VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/card/activity/type/{activityTypeId}/" )
+	public String userActivityTab( final @PathVariable( "userId" ) String _userId, final @PathVariable( "activityTypeId" ) String _activityTypeId
+		, final @ModelAttribute( "userCardModel" ) UserCardModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+
+		final UserCardTab tab = UserCardTab.ACTIVITY_STREAM;
+
+		final int activityTypeId = NumberUtils.isNumeric( _activityTypeId ) ? NumberUtils.convertToInt( _activityTypeId ) : 0;
+		model.setFilterActivityTypeId( activityTypeId );
+
+		userCardTab( _userId, tab, model, pagingModel );
+
+		return tab.isDefaultTab() ? VIEW_BRIEF : VIEW;
+	}
+
 	private void userCardTab( final String _userId, final UserCardTab userCardTab, final UserCardModel model, final PagingModel pagingModel ) {
 
 		securityService.assertUserExists( _userId );

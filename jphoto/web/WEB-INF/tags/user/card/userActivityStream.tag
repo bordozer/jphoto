@@ -4,7 +4,11 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 
+<%@ attribute name="user" required="true" type="core.general.user.User" %>
 <%@ attribute name="activities" required="true" type="java.util.List" %>
+<%@ attribute name="filterActivityTypeId" required="true" type="java.lang.Integer" %>
+
+<tags:activityStreamFilter filterActivityTypeId="${filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/members/${user.id}/card/activity/" />
 
 <c:if test="${not empty activities}">
 
