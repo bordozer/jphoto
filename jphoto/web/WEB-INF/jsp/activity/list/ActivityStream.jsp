@@ -1,3 +1,4 @@
+<%@ page import="core.general.activity.ActivityType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,7 +10,7 @@
 
 <tags:page pageModel="${activityStreamModel.pageModel}">
 
-	<tags:activityStreamFilter filterActivityTypeId="${activityStreamModel.filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/activityStream/" />
+	<tags:activityStreamFilter activityTypeValues="<%=ActivityType.SYSTEM_ACTIVITIES%>" filterActivityTypeId="${activityStreamModel.filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/activityStream/" />
 
 	<tags:paging showSummary="false"/>
 

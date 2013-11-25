@@ -3,6 +3,10 @@ package core.general.activity;
 import admin.jobs.enums.SavedJobType;
 import utils.TranslatorUtils;
 
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 public enum ActivityType {
 
 	USER_REGISTRATION( 1, "New member registration", SavedJobType.USER_GENERATION.getIcon() )
@@ -13,6 +17,10 @@ public enum ActivityType {
 	, FAVORITE_ACTION( 6, "Favorite action", SavedJobType.FAVORITES_GENERATION.getIcon() )
 	, VOTING_FOR_USER_RANK_IN_GENRE( 7, "Voting for user rank in genre", SavedJobType.RANK_VOTING_GENERATION.getIcon() )
 	;
+
+	public final static List<ActivityType> SYSTEM_ACTIVITIES = newArrayList( ActivityType.values() );
+	public final static List<ActivityType> USER_ACTIVITIES = SYSTEM_ACTIVITIES;
+	public final static List<ActivityType> PHOTO_ACTIVITIES = newArrayList( PHOTO_UPLOAD, PHOTO_VOTING, PHOTO_COMMENT, PHOTO_PREVIEW );
 
 	private final int id;
 	private final String name;

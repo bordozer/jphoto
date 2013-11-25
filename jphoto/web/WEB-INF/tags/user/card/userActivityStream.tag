@@ -1,3 +1,4 @@
+<%@ tag import="core.general.activity.ActivityType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,7 +9,7 @@
 <%@ attribute name="activities" required="true" type="java.util.List" %>
 <%@ attribute name="filterActivityTypeId" required="true" type="java.lang.Integer" %>
 
-<tags:activityStreamFilter filterActivityTypeId="${filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/members/${user.id}/card/activity/" />
+<tags:activityStreamFilter activityTypeValues="<%=ActivityType.USER_ACTIVITIES%>" filterActivityTypeId="${filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/members/${user.id}/card/activity/" />
 
 <c:if test="${not empty activities}">
 

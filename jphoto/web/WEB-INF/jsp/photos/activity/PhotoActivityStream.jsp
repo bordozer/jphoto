@@ -1,3 +1,4 @@
+<%@ page import="core.general.activity.ActivityType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -8,7 +9,7 @@
 
 <tags:page pageModel="${photoActivityStreamModel.pageModel}">
 
-	<tags:activityStreamFilter filterActivityTypeId="${photoActivityStreamModel.filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/photo/${photoActivityStreamModel.photo.id}/activity/" />
+	<tags:activityStreamFilter activityTypeValues="<%=ActivityType.PHOTO_ACTIVITIES%>" filterActivityTypeId="${photoActivityStreamModel.filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/photo/${photoActivityStreamModel.photo.id}/activity/" />
 
 	<tags:paging showSummary="false"/>
 

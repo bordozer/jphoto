@@ -4,10 +4,9 @@
 
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
+<%@ attribute name="activityTypeValues" required="true" type="java.util.List" %>
 <%@ attribute name="filterActivityTypeId" required="true" type="java.lang.Integer" %>
 <%@ attribute name="url" required="true" type="java.lang.String" %>
-
-<c:set var="activityTypeValues" value="<%=ActivityType.values()%>"/>
 
 <c:set var="separator" value="&nbsp;&nbsp;&nbsp;"/>
 
