@@ -76,7 +76,19 @@ public class PhotoActivityStreamController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showActivityStream( final @ModelAttribute( MODEL_NAME ) PhotoActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return showActivity( model, pagingModel );
+	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/type/{activityTypeId}/" )
+	public String showActivityStreamFiltered( final @PathVariable( "activityTypeId" ) String _activityTypeId, final @ModelAttribute( MODEL_NAME ) PhotoActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+
+		final int activityTypeId = NumberUtils.isNumeric( _activityTypeId ) ? NumberUtils.convertToInt( _activityTypeId ) : 0;
+		model.setFilterActivityTypeId( activityTypeId );
+
+		return showActivity( model, pagingModel );
+	}
+
+	private String showActivity( final PhotoActivityStreamModel model, final PagingModel pagingModel ) {
 		final Photo photo = model.getPhoto();
 
 		final SqlTable activityStreamTable = new SqlTable( ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM );
@@ -85,6 +97,12 @@ public class PhotoActivityStreamController {
 		final SqlColumnSelectable tActivityConUserId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_PHOTO_ID );
 		final SqlLogicallyJoinable where = new SqlCondition( tActivityConUserId, SqlCriteriaOperator.EQUALS, photo.getId(), dateUtilsService );
 		selectQuery.addWhereAnd( where );
+
+		if ( model.getFilterActivityTypeId() > 0 ) {
+			final SqlColumnSelectable tActivityColActivityTypeId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE );
+			final SqlLogicallyJoinable whereActivityTypeId = new SqlCondition( tActivityColActivityTypeId, SqlCriteriaOperator.EQUALS, model.getFilterActivityTypeId(), dateUtilsService );
+			selectQuery.addWhereAnd( whereActivityTypeId );
+		}
 
 		final SqlColumnSelectable timeCol = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
 		selectQuery.addSortingDesc( timeCol );

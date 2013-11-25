@@ -8,6 +8,8 @@
 
 <tags:page pageModel="${photoActivityStreamModel.pageModel}">
 
+	<tags:activityStreamFilter filterActivityTypeId="${photoActivityStreamModel.filterActivityTypeId}" url="${eco:baseUrlWithPrefix()}/photo/${photoActivityStreamModel.photo.id}/activity/" />
+
 	<tags:paging showSummary="false"/>
 
 	<table:table width="800">
@@ -17,7 +19,6 @@
 			</table:td>
 		</table:tr>
 	</table:table>
-
 
 	<tags:paging showSummary="true"/>
 
