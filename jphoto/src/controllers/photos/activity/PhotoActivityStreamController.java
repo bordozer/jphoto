@@ -98,9 +98,10 @@ public class PhotoActivityStreamController {
 		final SqlLogicallyJoinable where = new SqlCondition( tActivityConUserId, SqlCriteriaOperator.EQUALS, photo.getId(), dateUtilsService );
 		selectQuery.addWhereAnd( where );
 
-		if ( model.getFilterActivityTypeId() > 0 ) {
+		final int filterActivityTypeId = model.getFilterActivityTypeId();
+		if ( filterActivityTypeId > 0 ) {
 			final SqlColumnSelectable tActivityColActivityTypeId = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE );
-			final SqlLogicallyJoinable whereActivityTypeId = new SqlCondition( tActivityColActivityTypeId, SqlCriteriaOperator.EQUALS, model.getFilterActivityTypeId(), dateUtilsService );
+			final SqlLogicallyJoinable whereActivityTypeId = new SqlCondition( tActivityColActivityTypeId, SqlCriteriaOperator.EQUALS, filterActivityTypeId, dateUtilsService );
 			selectQuery.addWhereAnd( whereActivityTypeId );
 		}
 
