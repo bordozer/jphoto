@@ -10,6 +10,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
@@ -30,7 +31,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class UserGenerationJob extends AbstractJob {
 
-	private final static Integer MAX_ITERATIONS = 1000;
+	private final static int MAX_ITERATIONS = 1000;
+	private final static int MAX_USER_ALBUM_QTY = 7;
 
 	private String avatarsDir;
 	public static final String AVATAR_SUBDIR_MALE = "male";
@@ -140,10 +142,12 @@ public class UserGenerationJob extends AbstractJob {
 
 		log.debug( String.format( "Creating user photo albums: %s", user ) );
 
+		final UserPhotoAlbumService userPhotoAlbumService = services.getUserPhotoAlbumService();
+
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
-		final int randomAlbumQty = randomUtilsService.getRandomInt( 0, 7 );
+		final int randomAlbumQty = randomUtilsService.getRandomInt( 0, MAX_USER_ALBUM_QTY );
 
 		for ( int i = 0; i < randomAlbumQty; i++ ) {
 			final UserPhotoAlbum userphotoAlbum = new UserPhotoAlbum();
@@ -153,7 +157,7 @@ public class UserGenerationJob extends AbstractJob {
 
 			log.debug( String.format( "User %s: photo albums '%s' is about tobe created", user, userphotoAlbum ) );
 
-			services.getUserPhotoAlbumService().save( userphotoAlbum );
+			userPhotoAlbumService.save( userphotoAlbum );
 		}
 	}
 
