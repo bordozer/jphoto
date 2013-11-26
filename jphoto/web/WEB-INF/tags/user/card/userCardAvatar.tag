@@ -19,8 +19,8 @@
 	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
 
 	final File userAvatarFile = userAvatar.getFile();
-	Dimension dimension = null;
-	Dimension resultDimension = null;
+	Dimension dimension = null; /* TODO: move to controller! */
+	Dimension resultDimension = null; /* TODO: move to controller! */
 	String userAvatarFileUrl = null;
 	final boolean userHasAvatar = userAvatar.isHasAvatar();
 	if ( userHasAvatar ) {

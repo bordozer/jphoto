@@ -22,8 +22,8 @@
 	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
 
 	final File picture = photoInfo.getPhoto().getFile();
-	final Dimension originalDimension = imageFileUtilsService.getImageDimension( picture );
-	final Dimension resizedDimension = imageFileUtilsService.resizePhotoImage( originalDimension );
+	final Dimension originalDimension = imageFileUtilsService.getImageDimension( picture ); /* TODO: move to controller! */
+	final Dimension resizedDimension = imageFileUtilsService.resizePhotoImage( originalDimension ); /* TODO: move to controller! */
 %>
 
 <c:set var="photo" value="${photoInfo.photo}" />
