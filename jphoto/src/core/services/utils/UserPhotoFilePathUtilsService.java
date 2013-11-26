@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 
 import java.io.File;
+import java.io.IOException;
 
 public interface UserPhotoFilePathUtilsService {
 
@@ -49,5 +50,5 @@ public interface UserPhotoFilePathUtilsService {
 
 	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle );
 
-	File copyFileToUserFolder( File picture, Photo photo, User user );
+	File copyFileToUserFolder( File picture, Photo photo, User user ) throws IOException;
 }

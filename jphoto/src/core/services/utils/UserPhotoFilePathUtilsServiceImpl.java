@@ -3,6 +3,7 @@ package core.services.utils;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.img.Dimension;
+import core.log.LogHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
@@ -156,7 +157,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public File copyFileToUserFolder( final File picture, final Photo photo, final User user ) {
+	public File copyFileToUserFolder( final File picture, final Photo photo, final User user ) throws IOException {
 		if ( !isUserPhotoDirExist( user.getId() ) ) {
 			createUserPhotoDirIfNeed( user.getId() );
 		}
@@ -166,9 +167,9 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		try {
 			FileUtils.copyFile( picture, destFile );
 			photo.setFile( destFile );
-		} catch ( IOException e ) {
-//			getLog().error( String.format( "Can not copy file: %s to %s", picture.getPath(), destFile.getPath() ) );
-			return null;
+		} catch ( final IOException e ) {
+			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy file: %s to %s", picture.getPath(), destFile.getPath() ), e );
+			throw e;
 		}
 
 		return destFile;
