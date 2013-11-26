@@ -93,7 +93,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final PhotoTeam photoTeam = getPhotoTeam( photo, user );
 		final List<UserPhotoAlbum> albums = getPhotoAlbums( user );
 
-		photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, albums );
+		photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, albums ); // SAVE PHOTO OR THROW EXCEPTION
 
 		final File imageFile = imageDiscEntry.getImageFile();
 		final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
@@ -107,7 +107,8 @@ public abstract class AbstractPhotoImportStrategy {
 				log.error( message );
 
 				photo.setDescription( message );
-				photoService.save( photo );
+				photoService.save( photo ); // SAVE ERROR TO DESCRIPTION
+				// TODO: delete photo from DB because is has no file
 			}
 		}
 

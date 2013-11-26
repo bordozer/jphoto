@@ -168,7 +168,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 			FileUtils.copyFile( picture, destFile );
 			photo.setFile( destFile );
 		} catch ( final IOException e ) {
-			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy file: %s to %s", picture.getPath(), destFile.getPath() ), e );
+			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy photo file: '%s' to '%s'", picture.getPath(), destFile.getPath() ), e );
 			throw e;
 		}
 
