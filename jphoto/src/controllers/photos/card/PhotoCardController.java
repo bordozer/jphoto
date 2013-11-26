@@ -3,10 +3,12 @@ package controllers.photos.card;
 import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
+import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.EntryMenuService;
 import core.services.entry.GenreService;
@@ -19,6 +21,7 @@ import core.services.pageTitle.PageTitleService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.apache.commons.lang.StringUtils;
@@ -26,6 +29,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import utils.*;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
@@ -74,6 +80,11 @@ public class PhotoCardController {
 	@Autowired
 	private EntryMenuService entryMenuService;
 
+	@Autowired
+	private ImageFileUtilsService imageFileUtilsService;
+
+	private LogHelper log = new LogHelper( PhotoCardController.class );
+
 	@ModelAttribute( PHOTO_CARD_MODEL )
 	public PhotoCardModel prepareModel() {
 		return new PhotoCardModel();
@@ -89,6 +100,8 @@ public class PhotoCardController {
 		model.clear();
 
 		final Photo photo = photoService.load( photoId );
+
+		securityService.assertPhotoFileExists( photo );
 
 		securityService.assertUserWantSeeNudeContent( EnvironmentContext.getCurrentUser(), photo, urlUtilsService.getPhotoCardLink( photoId ) );
 
@@ -130,6 +143,18 @@ public class PhotoCardController {
 		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), StringUtils.EMPTY ) );
 
 		model.setEntryMenu( entryMenuService.getPhotoMenu( photo, currentUser ) );
+
+		final File photoFile = photo.getFile();
+		Dimension originalDimension;
+		try {
+			originalDimension = imageFileUtilsService.getImageDimension( photoFile );
+		} catch ( IOException e ) {
+			log.error( String.format( "Can not get image dimension: '%s'", photoFile ) );
+			originalDimension = new Dimension( 1, 1 );
+		}
+		final Dimension dimension = imageFileUtilsService.resizePhotoImage( originalDimension );
+		model.setDimension( dimension );
+		model.setOriginalDimension( originalDimension );
 
 		return VIEW;
 	}

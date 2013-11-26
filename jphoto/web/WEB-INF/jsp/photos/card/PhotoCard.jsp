@@ -22,20 +22,12 @@
 
 <jsp:useBean id="photoCardModel" type="controllers.photos.card.PhotoCardModel" scope="request"/>
 
-<%
-	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
-
-	final File picture = photoCardModel.getPhoto().getFile();
-	final Dimension originalDimension = imageFileUtilsService.getImageDimension( picture );
-	final Dimension dimension = imageFileUtilsService.resizePhotoImage( originalDimension );
-%>
-
 <c:set var="photo" value="${photoCardModel.photo}"/>
 <c:set var="photoInfo" value="${photoCardModel.photoInfo}"/>
 <c:set var="photoInfoUrl" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoInfoLink( photoCardModel.getPhoto().getId() )%>"/>
 
-<c:set var="dimension" value="<%=dimension%>"/>
-<c:set var="originalDimension" value="<%=originalDimension%>"/>
+<c:set var="dimension" value="<%=photoCardModel.getDimension()%>"/>
+<c:set var="originalDimension" value="<%=photoCardModel.getOriginalDimension()%>"/>
 
 <c:set var="commentDelay" value="<%=photoCardModel.getCommentDelay()%>"/>
 <c:set var="nextCommentTime" value="<%=photoCardModel.getUserNextCommentTime()%>"/>

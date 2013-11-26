@@ -59,6 +59,10 @@ public class SecurityServiceMock implements SecurityService {
 	}
 
 	@Override
+	public void assertPhotoFileExists( final Photo photo ) {
+	}
+
+	@Override
 	public void assertUserCanEditPhoto( final User user, final Photo photo ) {
 	}
 

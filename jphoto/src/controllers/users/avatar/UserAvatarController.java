@@ -1,10 +1,12 @@
 package controllers.users.avatar;
 
 import core.context.EnvironmentContext;
+import core.general.img.Dimension;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
+import core.services.utils.ImageFileUtilsService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -50,6 +52,9 @@ public class UserAvatarController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
+	@Autowired
+	private ImageFileUtilsService imageFileUtilsService;
+
 	private LogHelper log = new LogHelper( UserAvatarController.class );
 
 	@InitBinder
@@ -82,6 +87,8 @@ public class UserAvatarController {
 
 		model.getPageModel().setPageTitleData( pageTitleUserUtilsService.setUserAvatarData( model.getUser() ) );
 
+		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
+
 		return VIEW;
 	}
 
@@ -100,6 +107,8 @@ public class UserAvatarController {
 		model.setBindingResult( result );
 
 		model.getPageModel().setPageTitleData( pageTitleUserUtilsService.setUserAvatarData( model.getUser() ) );
+
+		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 
 		if ( result.hasErrors() ) {
 			return VIEW;
@@ -137,5 +146,16 @@ public class UserAvatarController {
 		}
 
 		return VIEW;
+	}
+
+	private Dimension getAvatarDimension( final File avatarFile ) {
+		if ( avatarFile != null ) {
+			try {
+				return imageFileUtilsService.getImageDimension( avatarFile );
+			} catch ( IOException e ) {
+				log.error( String.format( "Error reading avatar dimension: '%s'", avatarFile ) );
+			}
+		}
+		return new Dimension( 1, 1 );
 	}
 }

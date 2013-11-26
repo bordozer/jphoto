@@ -31,6 +31,8 @@ public interface SecurityService {
 
 	void assertPhotoExists( final String _photoId );
 
+	void assertPhotoFileExists( final Photo photo );
+
 	void assertUserCanEditPhoto( final User user, final Photo photo );
 
 	void assertUserEqualsToCurrentUser( final int userId );

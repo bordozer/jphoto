@@ -17,19 +17,13 @@
 <c:set var="avatarFileControl" value="<%=UserAvatarModel.AVATAR_FILE_FORM_CONTROL%>" />
 
 <%
-	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
 	final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService = ApplicationContextHelper.getBean( UserPhotoFilePathUtilsService.BEAN_NAME );
 
-	final File currentAvatarFile = userAvatarModel.getCurrentAvatarFile();
-	Dimension dimension = null;
-	if ( currentAvatarFile != null ) {
-		dimension = imageFileUtilsService.getImageDimension( currentAvatarFile );
-	}
 	final String userAvatarFileUrl = userPhotoFilePathUtilsService.getUserAvatarFileUrl( userAvatarModel.getUser().getId() );
 %>
 
 <c:set var="user" value="<%=userAvatarModel.getUser()%>" />
-<c:set var="dimension" value="<%=dimension%>" />
+<c:set var="dimension" value="<%=userAvatarModel.getDimension()%>" />
 <c:set var="userAvatarFileUrl" value="<%=userAvatarFileUrl%>" />
 <c:set var="doesAvatarExist" value="${not empty dimension}" />
 

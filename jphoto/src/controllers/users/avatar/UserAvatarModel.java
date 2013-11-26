@@ -1,5 +1,6 @@
 package controllers.users.avatar;
 
+import core.general.img.Dimension;
 import core.general.user.User;
 import elements.PageModel;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,8 @@ public class UserAvatarModel {
 
 	private BindingResult bindingResult;
 	private PageModel pageModel = new PageModel();
+
+	private Dimension dimension;
 
 	public User getUser() {
 		return user;
@@ -56,5 +59,13 @@ public class UserAvatarModel {
 
 	public void setPageModel( final PageModel pageModel ) {
 		this.pageModel = pageModel;
+	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	public void setDimension( final Dimension dimension ) {
+		this.dimension = dimension;
 	}
 }

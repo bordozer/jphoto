@@ -3,6 +3,7 @@ package controllers.photos.card;
 import controllers.comment.edit.PhotoCommentInfo;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
+import core.general.img.Dimension;
 import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
 import core.general.photo.ValidationResult;
@@ -42,6 +43,9 @@ public class PhotoCardModel extends AbstractGeneralModel {
 	private EntryMenu entryMenu;
 
 	private List<Integer> rootCommentsIds;
+
+	private Dimension originalDimension;
+	private Dimension dimension;
 
 	public Photo getPhoto() {
 		return photo;
@@ -177,6 +181,22 @@ public class PhotoCardModel extends AbstractGeneralModel {
 
 	public void setRootCommentsIds( final List<Integer> rootCommentsIds ) {
 		this.rootCommentsIds = rootCommentsIds;
+	}
+
+	public Dimension getOriginalDimension() {
+		return originalDimension;
+	}
+
+	public void setOriginalDimension( final Dimension originalDimension ) {
+		this.originalDimension = originalDimension;
+	}
+
+	public Dimension getDimension() {
+		return dimension;
+	}
+
+	public void setDimension( final Dimension dimension ) {
+		this.dimension = dimension;
 	}
 
 	@Override

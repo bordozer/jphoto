@@ -3,10 +3,12 @@ package utils;
 import core.context.ApplicationContextHelper;
 import core.general.genre.Genre;
 import core.general.user.User;
+import core.log.LogHelper;
 import core.services.utils.PredicateUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsServiceImpl;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
@@ -66,8 +68,13 @@ public class TLD_Utils {
 
 	public static String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) {
 		final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService = ApplicationContextHelper.getBean( UserPhotoFilePathUtilsServiceImpl.BEAN_NAME );
-		return userPhotoFilePathUtilsService.getUserAvatarImage( userId, width, height, imageId, onClick, cssStyle );
+		try {
+			return userPhotoFilePathUtilsService.getUserAvatarImage( userId, width, height, imageId, onClick, cssStyle );
+		} catch ( final IOException e ) {
+			new LogHelper( TLD_Utils.class ).error( String.format( "Error getting user avatar file. UserId = %d", userId ), e );
+		}
 
+		return String.format( "<img src='%s/ooops1.jpg' width='170' height='120'/>", ApplicationContextHelper.getUrlUtilsService().getSiteImagesPath() );
 	}
 
 	public static String getPhotosByUserByGenreLink( final User user, final Genre genre ) {

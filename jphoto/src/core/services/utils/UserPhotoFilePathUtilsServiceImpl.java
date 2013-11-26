@@ -142,7 +142,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public String getUserAvatarImage( final int userId, final int width, final int height, final String imageId, final String onClick, final String cssStyle ) {
+	public String getUserAvatarImage( final int userId, final int width, final int height, final String imageId, final String onClick, final String cssStyle ) throws IOException {
 		final File userAvatarFile = getUserAvatarFile( userId );
 		final String avatarImageUrl = getUserAvatarFileUrl( userId );
 

@@ -43,28 +43,22 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	}
 
 	@Override
-	public Dimension getImageDimension( final File file ) {
+	public Dimension getImageDimension( final File file ) throws IOException {
 
 		if ( ! file.exists() ) {
 			throw new BaseRuntimeException( "Photo image file does not exist!" );
 		}
 
-		try {
-			final BufferedImage img = ImageIO.read( file );
+		final BufferedImage img = ImageIO.read( file );
 
-			if ( img == null ) {
-				return new Dimension( 200, 200 );
-			}
-
-			int width = img.getWidth();
-			int height = img.getHeight();
-
-			return new Dimension( width, height );
-		} catch ( IOException e ) {
-			e.printStackTrace();
-			log.error( e );
+		if ( img == null ) {
+			return new Dimension( 200, 200 );
 		}
-		return null;
+
+		int width = img.getWidth();
+		int height = img.getHeight();
+
+		return new Dimension( width, height );
 	}
 
 	@Override
@@ -107,13 +101,13 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	}
 
 	@Override
-	public Dimension resizePhotoFileToDimensionAndReturnResultDimension( final File photoFile ) {
+	public Dimension resizePhotoFileToDimensionAndReturnResultDimension( final File photoFile ) throws IOException {
 		final Dimension originalDimension = getImageDimension( photoFile );
 		return resizePhotoImage( originalDimension );
 	}
 
 	@Override
-	public Dimension resizeImageToDimensionAndReturnResultDimension( final File imageFile, final Dimension toDimension ) {
+	public Dimension resizeImageToDimensionAndReturnResultDimension( final File imageFile, final Dimension toDimension ) throws IOException {
 		final Dimension originalDimension = getImageDimension( imageFile );
 		return resizePhotoImage( originalDimension, toDimension );
 	}
@@ -141,24 +135,29 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 			return;
 		}
 
-		checkFileDimension( multipartFile, maxDimension, errors, fileControlName );
+		try {
+			checkFileDimension( multipartFile, maxDimension, errors, fileControlName );
+		} catch ( IOException e ) {
+			errors.rejectValue( fileControlName, TranslatorUtils.translate( "Error reading file dimension" ) );
+		}
 	}
 
-	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName ) {
-		try {
-			final File uploadedFile = new File( systemFilePathUtilsService.getTempDir().getFile().getPath(), multipartFile.getOriginalFilename() );
-			uploadedFile.createNewFile();
-			final FileOutputStream fos = new FileOutputStream( uploadedFile );
-			fos.write( multipartFile.getBytes() );
-			fos.close();
+	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName ) throws IOException {
 
-			final Dimension dimension = getImageDimension( uploadedFile );
+		final String originalFilename = multipartFile.getOriginalFilename();
+		final File uploadedFile = new File( systemFilePathUtilsService.getTempDir().getFile().getPath(), originalFilename );
+		if ( !uploadedFile.createNewFile() ) {
+			throw new IOException( String.format( "Can not create file '%s'", originalFilename ) );
+		}
 
-			if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
-				errors.rejectValue( fileControlName, TranslatorUtils.translate( String.format( "Max %s dimension is %s x %s, but uploaded file is %s x %s", FormatUtils.getFormattedFieldName( "File" ), maxDimension.getWidth(), maxDimension.getHeight(), dimension.getWidth(), dimension.getHeight() ) ) );
-			}
-		} catch ( IOException e ) {
-			log.error( e );
+		final FileOutputStream fos = new FileOutputStream( uploadedFile );
+		fos.write( multipartFile.getBytes() );
+		fos.close();
+
+		final Dimension dimension = getImageDimension( uploadedFile );
+
+		if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
+			errors.rejectValue( fileControlName, TranslatorUtils.translate( String.format( "Max %s dimension is %s x %s, but uploaded file is %s x %s", FormatUtils.getFormattedFieldName( "File" ), maxDimension.getWidth(), maxDimension.getHeight(), dimension.getWidth(), dimension.getHeight() ) ) );
 		}
 	}
 

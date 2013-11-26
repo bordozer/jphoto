@@ -48,7 +48,7 @@ public interface UserPhotoFilePathUtilsService {
 
 	boolean isUserHasAvatar( int userId );
 
-	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle );
+	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) throws IOException;
 
 	File copyFileToUserFolder( File picture, Photo photo, User user ) throws IOException;
 }

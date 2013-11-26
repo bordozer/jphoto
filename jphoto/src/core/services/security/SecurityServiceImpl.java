@@ -26,6 +26,7 @@ import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.*;
 
+import java.io.File;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -131,6 +132,14 @@ public class SecurityServiceImpl implements SecurityService {
 
 		if ( getPhoto( photoId ) == null ) {
 			throw new PhotoNotFoundException( photoId );
+		}
+	}
+
+	@Override
+	public void assertPhotoFileExists( final Photo photo ) {
+		final File photoFile = photo.getFile();
+		if ( photoFile == null || ! photoFile.isFile() || ! photoFile.exists() ) {
+			throw new PhotoNotFoundException( photo.getId() );
 		}
 	}
 
