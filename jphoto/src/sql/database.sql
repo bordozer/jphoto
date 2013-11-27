@@ -635,8 +635,9 @@ CREATE TABLE `activityStream` (
   UNIQUE KEY `id` (`id`),
   KEY `userId` (`userId`),
   KEY `photoId` (`photoId`),
-  KEY `activityTime` (`activityTime`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `activityTime` (`activityTime`),
+  CONSTRAINT `fk_activityStream_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48352 DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

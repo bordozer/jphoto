@@ -26,6 +26,7 @@ public class ActivityUserRegistration extends AbstractActivityStreamEntry {
 
 	public ActivityUserRegistration( final User registeredUser, final Services services ) {
 		super( ActivityType.USER_REGISTRATION, services );
+
 		this.registeredUser = registeredUser;
 		this.activityTime = registeredUser.getRegistrationTime();
 

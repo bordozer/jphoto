@@ -44,7 +44,13 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 			return StringUtils.EMPTY;
 		}
 
-		return services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( activityOfUserId ) );
+		final User user = services.getUserService().load( activityOfUserId );
+
+		if ( user == null ) {
+			return String.format( "<font color='red'>The member #%d does not exist</font>", activityOfUserId ); // TODO: the member MUST be n DB or there is an error otherwise
+		}
+
+		return services.getEntityLinkUtilsService().getUserCardLink( user );
 	}
 
 	public int getDisplayActivityUserId() {

@@ -51,7 +51,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		final boolean result = jdbcTemplate.update( sql.toString(), getParameters( entry ) ) > 0;
 
 		if ( ! result ) {
-			logHelper.debug( String.format( "Record is not created/updated ( %s, id=%d ). It might have been deleted", entry.getClass().getName(), entry.getId() ) );
+			logHelper.debug( String.format( "Record is not created/updated ( %s, id=%d )", entry.getClass().getName(), entry.getId() ) );
 		}
 
 		if ( result && aNew ) {
