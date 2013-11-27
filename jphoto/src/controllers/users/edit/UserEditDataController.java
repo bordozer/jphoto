@@ -85,7 +85,7 @@ public class UserEditDataController {
 		model.clear();
 
 		if( UserUtils.isCurrentUserLoggedUser() ) {
-			return String.format( "redirect:/%s/%s/%d/edit/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL, EnvironmentContext.getCurrentUserId() );
+			return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
 		}
 
 		model.setNew( true );
@@ -133,6 +133,10 @@ public class UserEditDataController {
 		final boolean isNew = model.isNew();
 		if ( !isNew ) {
 			securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), model.getBeingChangedUser() );
+		} else {
+			if( UserUtils.isCurrentUserLoggedUser() ) {
+				return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
+			}
 		}
 
 		model.setBindingResult( result );
