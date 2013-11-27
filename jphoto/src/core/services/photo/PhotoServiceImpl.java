@@ -158,15 +158,15 @@ public class PhotoServiceImpl implements PhotoService {
 	public void savePhotoWithTeamAndAlbums( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
 
 		if ( ! save( photo ) ) {
-			throw new SaveToDBException( "Can not save photo" );
+			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
 		}
 
 		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
-			throw new SaveToDBException( "Can not save photo team" );
+			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
 		}
 
 		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
-			throw new SaveToDBException( "Can not save photo albums" );
+			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
 		}
 	}
 
