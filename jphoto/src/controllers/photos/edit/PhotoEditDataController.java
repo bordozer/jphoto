@@ -273,31 +273,36 @@ public class PhotoEditDataController {
 
 		try {
 			photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, photoAlbums );
-		} catch ( SaveToDBException e ) {
+		} catch ( final SaveToDBException e ) {
+			photoService.delete( photo.getId() );
+			log.error( String.format( "Can not save photo data: %s", photo ), e );
 			result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
 			return FILE_UPLOAD_VIEW;
 		}
 
-		if ( model.getPhotoId() == 0 ) {
+		if ( model.isNew() ) {
 			try {
 				final File savedFile = saveUploadedFile( photo, model.getFile() );
 				photo.setFile( savedFile );
 
-				if ( ! photoService.updatePhotoFile( photo.getId(), savedFile ) ) {
-					FileUtils.deleteQuietly( savedFile  );
-					result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Can not update photo file's details" ) );
+				if ( ! photoService.updatePhotoFileData( photo.getId(), savedFile ) ) {
+					photoService.delete( photo.getId() );
+					log.error( String.format( "Can not update photo file data: %s", photo ), null );
+					result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Can not update photo file data" ) );
 					return FILE_UPLOAD_VIEW;
 				}
 
 				previewGenerationService.generatePreview( photo.getId() );
 
-			} catch ( IOException e ){
+			} catch ( final IOException e ){
+				photoService.delete( photo.getId() );
 				log.error( "Saving data error" );
-				result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Can not copy file" ) );
+				result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Can not copy photo #$1 file", photo.getId() ) );
 				return FILE_UPLOAD_VIEW;
-			} catch ( InterruptedException e ) {
+			} catch ( final InterruptedException e ) {
+				photoService.delete( photo.getId() );
 				log.error( "Photo preview generation failed" );
-				result.reject( TranslatorUtils.translate( "Photo preview generation" ), TranslatorUtils.translate( "Photo preview generation error" ) );
+				result.reject( TranslatorUtils.translate( "Photo preview generation" ), TranslatorUtils.translate( "Photo #$1 preview generation error", photo.getId() ) );
 				return FILE_UPLOAD_VIEW;
 			}
 		}

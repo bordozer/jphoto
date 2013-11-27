@@ -99,7 +99,7 @@ public class PhotoServiceMock implements PhotoService {
 	}
 
 	@Override
-	public boolean updatePhotoFile( final int photoId, final File file ) {
+	public boolean updatePhotoFileData( final int photoId, final File file ) {
 		return false;
 	}
 

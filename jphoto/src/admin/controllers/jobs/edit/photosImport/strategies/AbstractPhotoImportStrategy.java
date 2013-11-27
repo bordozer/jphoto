@@ -98,7 +98,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final File imageFile = imageDiscEntry.getImageFile();
 		final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
 
-		if ( photoService.updatePhotoFile( photo.getId(), photoFile ) ) {
+		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
 			try {
 				services.getPreviewGenerationService().generatePreview( photo.getId() );
 			} catch ( final InterruptedException e ) {

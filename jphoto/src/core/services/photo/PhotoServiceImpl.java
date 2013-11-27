@@ -178,7 +178,7 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public boolean delete( final int entryId ) {
 
-		final Photo photo = load( entryId );
+		final Photo photo = load( entryId ); // Must be loaded before photo photoDao.delete()
 
 		photoPreviewService.deletePreviews( entryId );
 
@@ -196,7 +196,13 @@ public class PhotoServiceImpl implements PhotoService {
 
 		final boolean isDeleted = photoDao.delete( entryId );
 
-		cacheService.expire( CacheKey.USER_GENRE_PHOTOS_QTY, new UserGenreCompositeKey( photo.getUserId(), photo.getGenreId() ) );
+		if ( isDeleted ) {
+			userPhotoFilePathUtilsService.deletePhotoFileWithPreview( photo );
+
+			cacheService.expire( CacheKey.PHOTO, entryId );
+			cacheService.expire( CacheKey.PHOTO_INFO, entryId );
+			cacheService.expire( CacheKey.USER_GENRE_PHOTOS_QTY, new UserGenreCompositeKey( photo.getUserId(), photo.getGenreId() ) );
+		}
 
 		return isDeleted;
 	}
@@ -422,7 +428,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public boolean updatePhotoFile( final int photoId, final File file ) {
+	public boolean updatePhotoFileData( final int photoId, final File file ) {
 		final PhotoFile photoFile = new PhotoFile( file );
 
 		final boolean result = photoDao.updatePhotoFile( photoId, photoFile );

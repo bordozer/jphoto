@@ -36,7 +36,7 @@ public interface UserPhotoFilePathUtilsService {
 
 	void createUserPhotoDirIfNeed( int userId );
 
-	void deletePhotoWithPreview( Photo photo );
+	void deletePhotoFileWithPreview( Photo photo );
 
 	String getUserAvatarFileName( int userId );
 

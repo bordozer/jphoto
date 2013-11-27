@@ -124,23 +124,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	}
 
 	@Override
-	public boolean delete( final int entryId ) {
-
-		final Photo photo = load( entryId ); // Must be loaded before photo deletion
-
-		final boolean isDeleted = deleteEntryById( entryId );
-
-		if ( isDeleted ) {
-			userPhotoFilePathUtilsService.deletePhotoWithPreview( photo );
-
-			cacheService.expire( CacheKey.PHOTO, entryId );
-			cacheServicePhotoInfo.expire( CacheKey.PHOTO_INFO, entryId );
-		}
-
-		return isDeleted;
-	}
-
-	@Override
 	public int getPhotoQty() {
 		final String sql = String.format( "SELECT COUNT(id) FROM %s;", TABLE_PHOTOS );
 		return jdbcTemplate.queryForInt( sql, new MapSqlParameterSource() );
