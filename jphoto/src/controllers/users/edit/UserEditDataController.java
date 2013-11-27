@@ -85,7 +85,7 @@ public class UserEditDataController {
 		model.clear();
 
 		if( UserUtils.isCurrentUserLoggedUser() ) {
-			return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
+			return getRedirectToUserListView();
 		}
 
 		model.setNew( true );
@@ -135,7 +135,7 @@ public class UserEditDataController {
 			securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), model.getBeingChangedUser() );
 		} else {
 			if( UserUtils.isCurrentUserLoggedUser() ) {
-				return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
+				return getRedirectToUserListView();
 			}
 		}
 
@@ -161,6 +161,10 @@ public class UserEditDataController {
 			return VIEW;
 		}
 
+		return getRedirectToUserListView();
+	}
+
+	private String getRedirectToUserListView() {
 		return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
 	}
 
