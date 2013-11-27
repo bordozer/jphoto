@@ -84,6 +84,10 @@ public class UserEditDataController {
 	public String newUser( final @ModelAttribute( "userEditDataModel" ) UserEditDataModel model ) {
 		model.clear();
 
+		if( UserUtils.isCurrentUserLoggedUser() ) {
+			return String.format( "redirect:/%s/%s/%d/edit/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL, EnvironmentContext.getCurrentUserId() );
+		}
+
 		model.setNew( true );
 
 		final User user = fakeUserService.getRandomUser(); // TODO: for debug only!
