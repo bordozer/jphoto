@@ -46,7 +46,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 			sql.append( " WHERE " ).append( BaseEntityDao.ENTITY_ID ).append( "=" ).append( entry.getId() );
 		}
 
-//		logHelper.debug( String.format( "SQL: %s", sql.toString() ) );
+		logHelper.debug( String.format( "SQL: %s", sql.toString() ) );
 
 		final boolean result = jdbcTemplate.update( sql.toString(), getParameters( entry ) ) > 0;
 
@@ -63,7 +63,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 			entry.setId( ( int ) newId );
 
-//			logHelper.debug( String.format( "new entry (%s) ID: %s", entity.getClass().getName(), newId ) );
+			logHelper.debug( String.format( "new entry (%s) has been creates ID: %s", entry.getClass().getName(), newId ) );
 		}
 
 		return result;
