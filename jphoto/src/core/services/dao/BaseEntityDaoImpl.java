@@ -30,7 +30,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 	private LogHelper logHelper = new LogHelper( BaseEntityDaoImpl.class );
 
-	public boolean createOrUpdateEntry( final T entry, final Map<Integer, String> fields, final Map<Integer, String> updatableFields ) {
+	public boolean createOrUpdateEntry( final T entry, final Map<Integer, String> fieldsToInsert, final Map<Integer, String> fieldsToUpdate ) {
 
 		final String tableName = getTableName();
 
@@ -39,10 +39,10 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		final boolean aNew = isNew( entry );
 		if ( aNew ) {
 			sql.append( "INSERT INTO " ).append( tableName );
-			sql.append( "( " ).append( getInsertFieldList( fields ) ).append( " )" );
-			sql.append( " VALUES ( " ).append( getValuesForInsertStatement( fields ) ).append( " )" );
+			sql.append( "( " ).append( getInsertFieldList( fieldsToInsert ) ).append( " )" );
+			sql.append( " VALUES ( " ).append( getValuesForInsertStatement( fieldsToInsert ) ).append( " )" );
 		} else {
-			sql.append( " UPDATE " ).append( tableName ).append( " SET " ).append( getUpdateFieldsAssignment( updatableFields ) );
+			sql.append( " UPDATE " ).append( tableName ).append( " SET " ).append( getUpdateFieldsAssignment( fieldsToUpdate ) );
 			sql.append( " WHERE " ).append( BaseEntityDao.ENTITY_ID ).append( "=" ).append( entry.getId() );
 		}
 
