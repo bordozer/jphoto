@@ -234,7 +234,7 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 		endTaskDate = null;
 		endTaskTime = null;
 
-		schedulerTaskActive = false;
+		schedulerTaskActive = true;
 	}
 
 	public boolean isSchedulerTaskActive() {

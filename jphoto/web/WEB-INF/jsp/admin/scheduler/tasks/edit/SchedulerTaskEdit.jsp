@@ -37,6 +37,12 @@
 
 		<table:table border="0" width="700">
 
+			<table:tr>
+			<table:td colspan="2">
+				<html:img32 src="/icons32/save32.png" onclick="saveSchedulerTask();" alt="${eco:translate('Save scheduler task')}"/>
+			</table:td>
+		</table:tr>
+
 			<table:separatorInfo colspan="2" title="${schedulerTaskEditModel.schedulerTaskName}" />
 
 			<table:tr>
@@ -69,8 +75,6 @@
 					</div>
 				</table:tddata>
 			</table:tr>
-
-			<%--<table:separator colspan="2" />--%>
 
 			<table:tr>
 				<table:td colspan="2">
@@ -110,10 +114,6 @@
 
 			<table:separator colspan="2" />
 
-			<table:trok text_t="Save" onclick="saveExecutionTask();" />
-
-			<table:separator colspan="2" />
-
 			<table:tr>
 				<table:tdtext text_t="Saved parameters"/>
 				<table:tddata>
@@ -135,7 +135,7 @@
 			submitForm( 'reload' );
 		}
 
-		function saveExecutionTask() {
+		function saveSchedulerTask() {
 			submitForm( 'save' );
 		}
 
