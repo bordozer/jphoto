@@ -70,13 +70,13 @@
 
 <table:separator colspan="2" />
 
-<table:tr>
+<%--<table:tr>
 	<table:tdtext text_t="Skip missed executions" />
 
 	<table:tddata>
 		<form:checkbox path="${skipMissedExecutions}"/>
 	</table:tddata>
-</table:tr>
+</table:tr>--%>
 
 <table:tr>
 	<table:tdtext text_t="Task suspended" labelFor="${isTaskSuspendedControl}"/>
