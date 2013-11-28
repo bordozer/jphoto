@@ -80,11 +80,13 @@
 
 			<js:confirmAction/>
 
-			<c:set var="colspan" value="13"/>
+			<c:set var="colspan" value="14"/>
 
 			<table:table border="0" width="100%">
 
 				<jsp:attribute name="thead">
+					<table:tdicon />
+
 					<table:tdicon >
 						<js:checkBoxChecker namePrefix="schedulerTaskCheckbox" />
 					</table:tdicon>
@@ -112,13 +114,21 @@
 						<c:set var="schedulerTaskType" value="${schedulerTask.taskType}"/>
 
 						<c:set var="css" value=""/>
+						<c:set var="taskIcon" value="schedulerTaskActivate.png"/>
+						<c:set var="taskIconTitle" value="${eco:translate('The task is active')}"/>
 						<c:if test="${not isTaskActive}">
 							<c:set var="css" value="inactiveTasks"/>
+							<c:set var="taskIcon" value="schedulerTaskDeactivate.png"/>
+							<c:set var="taskIconTitle" value="${eco:translate('The task is inactive')}"/>
 						</c:if>
 
 						<c:set var="schedulerTaskId" value="${schedulerTask.id}"/>
 
 						<table:tr>
+
+							<table:tdicon cssClass="${css}">
+								<html:img32 src="scheduler/${taskIcon}" alt="${taskIconTitle}" />
+							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">
 								<form:checkbox path="schedulerTaskCheckbox" value="${schedulerTaskId}" />
@@ -139,7 +149,7 @@
 							</table:tdicon>
 
 							<table:td cssClass="${css} textcentered">
-								<html:img32 src="scheduler/type//${schedulerTaskType.icon}" alt="${schedulerTaskType.nameTranslated}"/>
+								<html:img32 src="scheduler/type/${schedulerTaskType.icon}" alt="${schedulerTaskType.nameTranslated}"/>
 							</table:td>
 
 							<table:td cssClass="${css}">
