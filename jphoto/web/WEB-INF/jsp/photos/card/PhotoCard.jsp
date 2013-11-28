@@ -1,19 +1,15 @@
 <%@ page import="core.enums.FavoriteEntryType" %>
 <%@ page import="controllers.comment.edit.PhotoCommentModel" %>
-<%@ page import="java.io.File" %>
-<%@ page import="core.general.img.Dimension" %>
 <%@ page import="core.context.EnvironmentContext" %>
 <%@ page import="utils.UserUtils" %>
-<%@ page import="core.services.utils.ImageFileUtilsService" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="org.springframework.mobile.device.DeviceType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
-
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="comments" tagdir="/WEB-INF/tags/photo/comments" %>

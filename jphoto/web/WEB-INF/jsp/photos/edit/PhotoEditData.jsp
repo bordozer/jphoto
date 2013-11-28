@@ -1,7 +1,6 @@
 <%@ page import="controllers.photos.edit.PhotoEditDataModel" %>
 <%@ page import="utils.EditDataValidationUtils" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
-<%@ page import="core.enums.PhotoActionAllowance" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ page import="controllers.photos.edit.PhotoEditWizardStep" %>
 <%@ page import="core.context.ApplicationContextHelper" %>

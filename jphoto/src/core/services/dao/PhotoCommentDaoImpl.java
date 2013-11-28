@@ -138,7 +138,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public List<Integer> loadUnreadCommentsToUserIds( final int userId ) {
-		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s = 0 ORDER BY %8$s DESC;"
+		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL ORDER BY %8$s DESC;"
 			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
@@ -173,7 +173,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public int getUnreadCommentsQty( final int userId ) {
-		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s = 0;"
+		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL;"
 			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
