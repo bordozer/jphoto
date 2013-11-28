@@ -112,6 +112,15 @@
 
 			<table:trok text_t="Save" onclick="saveExecutionTask();" />
 
+			<table:separator colspan="2" />
+
+			<table:tr>
+				<table:tdtext text_t="Saved parameters"/>
+				<table:tddata>
+					${schedulerTaskEditModel.schedulerTaskSavedParameters}
+				</table:tddata>
+			</table:tr>
+
 		</table:table>
 
 	</form:form>

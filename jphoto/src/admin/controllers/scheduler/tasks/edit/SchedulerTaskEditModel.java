@@ -58,6 +58,8 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 	private boolean schedulerTaskActive;
 	private ExecutionTaskType selectedTaskType;
 
+	private String schedulerTaskSavedParameters;
+
 	public void setSchedulerTaskId( final int schedulerTaskId ) {
 		this.schedulerTaskId = schedulerTaskId;
 	}
@@ -241,5 +243,13 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 
 	public void setSchedulerTaskActive( final boolean schedulerTaskActive ) {
 		this.schedulerTaskActive = schedulerTaskActive;
+	}
+
+	public String getSchedulerTaskSavedParameters() {
+		return schedulerTaskSavedParameters;
+	}
+
+	public void setSchedulerTaskSavedParameters( final String schedulerTaskSavedParameters ) {
+		this.schedulerTaskSavedParameters = schedulerTaskSavedParameters;
 	}
 }

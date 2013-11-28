@@ -34,7 +34,7 @@ public class OnceExecutionTask extends AbstractExecutionTask {
 		final StringBuilder builder = new StringBuilder();
 
 		builder.append( String.format( "Execution time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
+//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 
 		return builder.toString();
 	}

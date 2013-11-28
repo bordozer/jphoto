@@ -75,7 +75,7 @@ public class MonthlyExecutionTask extends AbstractPeriodicalExecutionTask {
 		final StringBuilder builder = new StringBuilder();
 
 		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
+//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 		builder.append( String.format( "Day %s of %s", ( dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "Last day" ), StringUtils.join( cronMonths, "," ) ) ).append( "<br />" );
 		if ( endTaskTime != null ) {
 			builder.append( String.format( "End time: %s", dateUtilsService.formatDateTime( endTaskTime ) ) );

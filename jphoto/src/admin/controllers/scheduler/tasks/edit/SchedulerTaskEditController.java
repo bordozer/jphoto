@@ -103,6 +103,8 @@ public class SchedulerTaskEditController {
 		model.setSavedJobs( getSavedJobs() );
 		model.setSelectedTaskType( taskType );
 
+		model.setSchedulerTaskSavedParameters( schedulerTask.getDescription() );
+
 		final Map<SchedulerTaskProperty, CommonProperty> parametersMap = schedulerTask.getExecutionTask().getParametersMap();
 		initModelFromExecutionTaskParameterMap( model, parametersMap );
 

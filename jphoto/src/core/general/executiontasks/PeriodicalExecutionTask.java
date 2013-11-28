@@ -69,7 +69,7 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 		final StringBuilder builder = new StringBuilder();
 
 		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
+//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 		builder.append( String.format( "Interval: %d %s(s)", period, periodUnit.getNameTranslated() ) );
 		if ( endTaskTime != null ) {
 			builder.append( "<br />" ).append( String.format( "End time: %s", dateUtilsService.formatDateTime( endTaskTime ) ) );

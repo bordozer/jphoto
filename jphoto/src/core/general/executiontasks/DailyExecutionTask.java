@@ -58,7 +58,7 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 		final StringBuilder builder = new StringBuilder();
 
 		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
+//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 
 		builder.append( "Week days: " );
 		if ( weekdays.size() == 7 ) {
