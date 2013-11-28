@@ -30,6 +30,7 @@ public class OnceJobTrigger extends AbstractJobTrigger {
 
 	@Override
 	public boolean skipSchedulingJob() {
-		return executionTask.isSuspended() || ( executionTask.isSkipMissedExecutions() && trigger.getFinalFireTime().getTime() < new Date().getTime() );
+		return executionTask.isSuspended()
+			   || ( executionTask.isSkipMissedExecutions() && trigger.getFinalFireTime().getTime() < dateUtilsService.getCurrentTime().getTime() );
 	}
 }
