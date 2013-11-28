@@ -17,7 +17,7 @@ public abstract class AbstractExecutionTask {
 
 	protected boolean skipMissedExecutions;
 
-	protected boolean suspended; // TODO: this had better place in ScheduleTask
+	protected boolean executionTaskActive;
 
 	protected final DateUtilsService dateUtilsService;
 
@@ -33,7 +33,7 @@ public abstract class AbstractExecutionTask {
 
 		parametersMap.put( SchedulerTaskProperty.PROPERTY_START_TASK_DATE, new CommonProperty( SchedulerTaskProperty.PROPERTY_START_TASK_DATE.getId(), startTaskTime, dateUtilsService ) );
 		parametersMap.put( SchedulerTaskProperty.PROPERTY_SKIP_MISSED_EXECUTIONS, new CommonProperty( SchedulerTaskProperty.PROPERTY_SKIP_MISSED_EXECUTIONS.getId(), skipMissedExecutions ) );
-		parametersMap.put( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED, new CommonProperty( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED.getId(), suspended ) );
+		parametersMap.put( SchedulerTaskProperty.PROPERTY_IS_ACTIVE, new CommonProperty( SchedulerTaskProperty.PROPERTY_IS_ACTIVE.getId(), executionTaskActive ) );
 
 		return parametersMap;
 	}
@@ -41,7 +41,7 @@ public abstract class AbstractExecutionTask {
 	public void initTaskParameters( final Map<SchedulerTaskProperty, CommonProperty> parametersMap ) {
 		startTaskTime = parametersMap.get( SchedulerTaskProperty.PROPERTY_START_TASK_DATE ).getValueTime( dateUtilsService );
 		skipMissedExecutions = parametersMap.get( SchedulerTaskProperty.PROPERTY_SKIP_MISSED_EXECUTIONS ).getValueBoolean();
-		suspended = parametersMap.get( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED ).getValueBoolean();
+		executionTaskActive = parametersMap.get( SchedulerTaskProperty.PROPERTY_IS_ACTIVE ).getValueBoolean();
 	}
 
 	public ExecutionTaskType getTaskType() {
@@ -64,11 +64,11 @@ public abstract class AbstractExecutionTask {
 		this.startTaskTime = startTaskTime;
 	}
 
-	public boolean isSuspended() {
-		return suspended;
+	public boolean isExecutionTaskActive() {
+		return executionTaskActive;
 	}
 
-	public void setSuspended( final boolean suspended ) {
-		this.suspended = suspended;
+	public void setExecutionTaskActive( final boolean executionTaskActive ) {
+		this.executionTaskActive = executionTaskActive;
 	}
 }

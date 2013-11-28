@@ -3,8 +3,6 @@ package admin.controllers.scheduler.tasks.edit;
 import admin.jobs.general.SavedJob;
 import core.general.base.AbstractGeneralModel;
 import core.general.executiontasks.ExecutionTaskType;
-import core.general.executiontasks.PeriodUnit;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 
@@ -31,7 +29,7 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 	public static final String SCHEDULER_TASK_DAILY_TASK_WEEKDAY_IDS_CONTROL = "dailyTaskWeekdayIds";
 	public static final String SCHEDULER_TASK_MONTHLY_TASK_WEEKDAY_IDS_CONTROL = "monthlyTaskMonthIds";
 	public static final String SCHEDULER_TASK_MONTHLY_TASK_DAY_OF_MONTH_CONTROL = "monthlyDayOfMonth";
-	public static final String SCHEDULER_TASK_IS_SUSPENDED_CONTROL = "taskSuspended";
+	public static final String SCHEDULER_TASK_IS_ACTIVE_CONTROL = "schedulerTaskActive";
 
 	private String schedulerTaskName;
 	private int executionTaskTypeId;
@@ -57,7 +55,7 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 	private String formAction;
 	private int schedulerTaskId;
 
-	private boolean taskSuspended;
+	private boolean schedulerTaskActive;
 	private ExecutionTaskType selectedTaskType;
 
 	public void setSchedulerTaskId( final int schedulerTaskId ) {
@@ -234,14 +232,14 @@ public class SchedulerTaskEditModel extends AbstractGeneralModel {
 		endTaskDate = null;
 		endTaskTime = null;
 
-		taskSuspended = false;
+		schedulerTaskActive = false;
 	}
 
-	public boolean isTaskSuspended() {
-		return taskSuspended;
+	public boolean isSchedulerTaskActive() {
+		return schedulerTaskActive;
 	}
 
-	public void setTaskSuspended( final boolean taskSuspended ) {
-		this.taskSuspended = taskSuspended;
+	public void setSchedulerTaskActive( final boolean schedulerTaskActive ) {
+		this.schedulerTaskActive = schedulerTaskActive;
 	}
 }

@@ -107,7 +107,7 @@
 					<c:forEach var="scheduledTasksData" items="${schedulerTaskListModel.scheduledTasksData}">
 
 						<c:set var="schedulerTask" value="${scheduledTasksData.schedulerTasks}"/>
-						<c:set var="isTaskActive" value="${not schedulerTask.executionTask.suspended}"/>
+						<c:set var="isTaskActive" value="${schedulerTask.executionTask.executionTaskActive}"/>
 						<c:set var="savedJobId" value="${schedulerTask.savedJobId}"/>
 						<c:set var="schedulerTaskType" value="${schedulerTask.taskType}"/>
 

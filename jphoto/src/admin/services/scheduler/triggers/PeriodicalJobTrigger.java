@@ -31,11 +31,6 @@ public class PeriodicalJobTrigger extends AbstractJobTrigger {
 			.build();
 	}
 
-	@Override
-	public boolean skipSchedulingJob() {
-		return executionTask.isSuspended();
-	}
-
 	private CronScheduleBuilder getCronSchedule() {
 		final PeriodicalExecutionTask periodicalTask = ( PeriodicalExecutionTask ) executionTask;
 

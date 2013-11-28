@@ -18,14 +18,16 @@ public abstract class AbstractJobTrigger {
 
 	public abstract Trigger createTrigger();
 
-	public abstract boolean skipSchedulingJob();
-
 	protected AbstractJobTrigger( final int schedulerTaskId, final AbstractExecutionTask executionTask, final DateUtilsService dateUtilsService ) {
 		this.schedulerTaskId = schedulerTaskId;
 		this.executionTask = executionTask;
 		this.dateUtilsService = dateUtilsService;
 
 		this.trigger = createTrigger();
+	}
+
+	public boolean skipSchedulingJob() {
+		return ! executionTask.isExecutionTaskActive();
 	}
 
 	public final Trigger getTrigger() {

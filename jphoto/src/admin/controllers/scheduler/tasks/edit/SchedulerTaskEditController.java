@@ -205,8 +205,8 @@ public class SchedulerTaskEditController {
 			model.setMonthlyDayOfMonth( dayOfMonthProperty.getValue() );
 		}
 
-		final CommonProperty taskSuspendedProperty = parametersMap.get( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED );
-		model.setTaskSuspended( taskSuspendedProperty.getValueBoolean() );
+		final CommonProperty taskActiveProperty = parametersMap.get( SchedulerTaskProperty.PROPERTY_IS_ACTIVE );
+		model.setSchedulerTaskActive( taskActiveProperty.getValueBoolean() );
 	}
 
 	private SchedulerTask createSchedulerTaskFromModel( final SchedulerTaskEditModel model ) {
@@ -227,7 +227,7 @@ public class SchedulerTaskEditController {
 		parametersMap.put( SchedulerTaskProperty.PROPERTY_DAILY_TASK_WEEKDAY_IDS, new CommonProperty( SchedulerTaskProperty.PROPERTY_DAILY_TASK_WEEKDAY_IDS.getId(), model.getDailyTaskWeekdayIds() ) );
 		parametersMap.put( SchedulerTaskProperty.PROPERTY_MONTHLY_TASK_MONTH_IDS, new CommonProperty( SchedulerTaskProperty.PROPERTY_MONTHLY_TASK_MONTH_IDS.getId(), model.getMonthlyTaskMonthIds() ) );
 		parametersMap.put( SchedulerTaskProperty.PROPERTY_MONTHLY_TASK_DAY_OF_MONTH, new CommonProperty( SchedulerTaskProperty.PROPERTY_MONTHLY_TASK_DAY_OF_MONTH.getId(), model.getMonthlyDayOfMonth() ) );
-		parametersMap.put( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED, new CommonProperty( SchedulerTaskProperty.PROPERTY_IS_SUSPENDED.getId(), model.isTaskSuspended() ) );
+		parametersMap.put( SchedulerTaskProperty.PROPERTY_IS_ACTIVE, new CommonProperty( SchedulerTaskProperty.PROPERTY_IS_ACTIVE.getId(), model.isSchedulerTaskActive() ) );
 
 
 		final Date executionTime = dateUtilsService.parseDateTime( model.getStartTaskDate(), model.getSchedulerTaskTime() );

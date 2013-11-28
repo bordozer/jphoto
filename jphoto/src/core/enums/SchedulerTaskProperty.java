@@ -2,7 +2,7 @@ package core.enums;
 
 public enum SchedulerTaskProperty {
 
-	PROPERTY_IS_SUSPENDED( 1 )
+	PROPERTY_IS_ACTIVE( 1 )
 	, PROPERTY_SKIP_MISSED_EXECUTIONS( 3 )
 	, PROPERTY_TASK_PERIOD( 4 )
 	, PROPERTY_TASK_PERIOD_UNIT( 2 )

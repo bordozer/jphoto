@@ -33,11 +33,6 @@ public class MonthlyJobTrigger extends AbstractJobTrigger {
 			.build();
 	}
 
-	@Override
-	public boolean skipSchedulingJob() {
-		return executionTask.isSuspended();
-	}
-
 	private CronScheduleBuilder getCronSchedule() {
 		final MonthlyExecutionTask monthlyTask = ( MonthlyExecutionTask ) executionTask;
 

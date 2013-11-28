@@ -23,7 +23,7 @@
 <c:set var="startTaskDateControl" value="<%=SchedulerTaskEditModel.START_TASK_DATE_CONTROL%>" />
 <c:set var="endTaskTimeControl" value="<%=SchedulerTaskEditModel.END_TASK_TIME_CONTROL%>" />
 <c:set var="endTaskDateControl" value="<%=SchedulerTaskEditModel.END_TASK_DATE_CONTROL%>" />
-<c:set var="isTaskSuspendedControl" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_IS_SUSPENDED_CONTROL%>" />
+<c:set var="isTaskActiveControl" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_IS_ACTIVE_CONTROL%>" />
 
 <table:separator colspan="2" />
 
@@ -79,10 +79,10 @@
 </table:tr>--%>
 
 <table:tr>
-	<table:tdtext text_t="Task suspended" labelFor="${isTaskSuspendedControl}"/>
+	<table:tdtext text_t="Task is active" labelFor="${isTaskActiveControl}"/>
 
 	<table:tddata>
-		<form:checkbox path="${isTaskSuspendedControl}"/>
+		<form:checkbox path="${isTaskActiveControl}"/>
 	</table:tddata>
 </table:tr>
 

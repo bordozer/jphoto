@@ -32,11 +32,6 @@ public class DailyJobTrigger extends AbstractJobTrigger {
 			.build();
 	}
 
-	@Override
-	public boolean skipSchedulingJob() {
-		return executionTask.isSuspended();
-	}
-
 	private CronScheduleBuilder getCronSchedule() {
 		final DailyExecutionTask dailyTask = ( DailyExecutionTask ) executionTask;
 

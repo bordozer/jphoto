@@ -3,12 +3,8 @@ package admin.services.scheduler.triggers;
 import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.OnceExecutionTask;
 import core.services.utils.DateUtilsService;
-import org.quartz.CronScheduleBuilder;
 import org.quartz.Trigger;
 
-import java.util.Date;
-
-import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import static org.quartz.TriggerBuilder.newTrigger;
 
 public class OnceJobTrigger extends AbstractJobTrigger {
@@ -30,7 +26,7 @@ public class OnceJobTrigger extends AbstractJobTrigger {
 
 	@Override
 	public boolean skipSchedulingJob() {
-		return executionTask.isSuspended()
+		return ! executionTask.isExecutionTaskActive()
 			   || ( executionTask.isSkipMissedExecutions() && trigger.getFinalFireTime().getTime() < dateUtilsService.getCurrentTime().getTime() );
 	}
 }

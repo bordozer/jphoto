@@ -134,8 +134,8 @@ public class SchedulerServiceImpl implements SchedulerService {
 	@Override
 	public void deactivateSchedulerTask( final int schedulerTaskId ) throws SchedulerException {
 
-		if ( ! isScheduledTaskSuspended( schedulerTaskId ) ) {
-			suspendSchedulerTask( schedulerTaskId, true );
+		if ( isScheduledTaskActive( schedulerTaskId ) ) {
+			setSchedulerTaskActivity( schedulerTaskId, false );
 		}
 
 		if ( scheduledTasksExecutionService.isTaskScheduled( schedulerTaskId ) ) {
@@ -154,8 +154,8 @@ public class SchedulerServiceImpl implements SchedulerService {
 	@Override
 	public void activateSchedulerTask( final int schedulerTaskId ) throws SchedulerException {
 
-		if ( isScheduledTaskSuspended( schedulerTaskId ) ) {
-			suspendSchedulerTask( schedulerTaskId, false );
+		if ( ! isScheduledTaskActive( schedulerTaskId ) ) {
+			setSchedulerTaskActivity( schedulerTaskId, true );
 		}
 
 		if ( ! scheduledTasksExecutionService.isTaskScheduled( schedulerTaskId ) ) {
@@ -163,16 +163,16 @@ public class SchedulerServiceImpl implements SchedulerService {
 		}
 	}
 
-	private void suspendSchedulerTask( final int schedulerTaskId, final boolean isSuspended ) {
+	private void setSchedulerTaskActivity( final int schedulerTaskId, final boolean isActive ) {
 		final SchedulerTask schedulerTask = load( schedulerTaskId );
 		final AbstractExecutionTask executionTask = schedulerTask.getExecutionTask();
-		executionTask.setSuspended( isSuspended );
+		executionTask.setExecutionTaskActive( isActive );
 
 		save( schedulerTask );
 	}
 
-	private boolean isScheduledTaskSuspended( final int schedulerTaskId ) {
-		return load( schedulerTaskId ).getExecutionTask().isSuspended();
+	private boolean isScheduledTaskActive( final int schedulerTaskId ) {
+		return load( schedulerTaskId ).getExecutionTask().isExecutionTaskActive();
 	}
 
 	private Map<SchedulerTaskProperty, CommonProperty> getParametersMap( final int schedulerTaskId ) {

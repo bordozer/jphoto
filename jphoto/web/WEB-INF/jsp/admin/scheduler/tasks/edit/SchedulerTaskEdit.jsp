@@ -29,7 +29,7 @@
 	<c:set var="endTaskTime" value="${schedulerTaskEditModel.endTaskTime}"/>
 	<c:set var="endTaskDate" value="${schedulerTaskEditModel.endTaskDate}"/>
 	<c:set var="taskTime" value="${schedulerTaskEditModel.schedulerTaskTime}"/>
-	<c:set var="isTaskSuspended" value="${schedulerTaskEditModel.taskSuspended}"/>
+	<c:set var="isSchedulerTaskActive" value="${schedulerTaskEditModel.schedulerTaskActive}"/>
 
 	<form:form method="POST" action="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/submit/" modelAttribute="schedulerTaskEditModel">
 
