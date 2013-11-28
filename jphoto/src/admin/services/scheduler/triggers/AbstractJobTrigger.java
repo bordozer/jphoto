@@ -61,4 +61,8 @@ public abstract class AbstractJobTrigger {
 
 		return hh_mm_ss;
 	}
+
+	protected CronScheduleBuilder getCroneBuilder( final String cronExpression ) {
+		return CronScheduleBuilder.cronSchedule( cronExpression ).withMisfireHandlingInstructionDoNothing();
+	}
 }

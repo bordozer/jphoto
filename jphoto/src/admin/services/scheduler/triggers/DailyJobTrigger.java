@@ -48,7 +48,7 @@ public class DailyJobTrigger extends AbstractJobTrigger {
 
 		log.debug( String.format( "Cron Expression: '%s'", cronExpression ) );
 
-		return CronScheduleBuilder.cronSchedule( cronExpression );
+		return getCroneBuilder( cronExpression );
 	}
 
 	private String getCronDaysOfWeek( final DailyExecutionTask dailyTask ) {

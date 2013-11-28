@@ -69,17 +69,8 @@ public class PeriodicalJobTrigger extends AbstractJobTrigger {
 
 		log.debug( String.format( "Cron Expression: '%s'", cronExpression ) );
 
-		return CronScheduleBuilder.cronSchedule( cronExpression );
+		return getCroneBuilder( cronExpression );
 	}
-
-	/*private String getHours( final PeriodicalExecutionTask periodicalTask, final int period ) {
-		final List<String> executionHours = periodicalTask.getExecutionHours();
-		if ( executionHours.size() == 24 ) {
-			return "0/%s";
-		}
-
-		return String.format( "%s/1", StringUtils.join( executionHours, "," ) );
-	}*/
 
 	private String getHours( final PeriodicalExecutionTask periodicalTask ) {
 		final List<String> executionHours = periodicalTask.getExecutionHours();

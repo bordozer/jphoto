@@ -48,7 +48,7 @@ public class MonthlyJobTrigger extends AbstractJobTrigger {
 
 		log.debug( String.format( "Cron Expression: '%s'", cronExpression ) );
 
-		return CronScheduleBuilder.cronSchedule( cronExpression );
+		return getCroneBuilder( cronExpression );
 	}
 
 	private String getCronDay( final MonthlyExecutionTask monthlyTask ) {
