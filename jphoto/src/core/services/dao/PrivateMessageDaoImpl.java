@@ -74,7 +74,7 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 
 	@Override
 	public int getNewPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
-		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId AND %s = 0;"
+		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId AND %s IS NULL;"
 				, ENTITY_ID, TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID, TABLE_PRIVATE_MESSAGE_COL_READ_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();

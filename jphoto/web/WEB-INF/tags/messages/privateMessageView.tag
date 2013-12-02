@@ -30,7 +30,7 @@
 
 			<b>${eco:formatDate(privateMessage.creationTime)} ${eco:formatTimeShort(privateMessage.creationTime)}</b>
 
-			<c:if test="${privateMessage.readTime > 0}">
+			<c:if test="${privateMessage.readTime.time > 0}">
 				/ ${eco:translate('You read this message at ')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
 			</c:if>
 
@@ -44,11 +44,11 @@
 
 			<b>${eco:formatDate(privateMessage.creationTime)} ${eco:formatTimeShort(privateMessage.creationTime)}</b>
 
-			<c:if test="${privateMessage.readTime > 0}">
+			<c:if test="${privateMessage.readTime.time > 0}">
 				/ ${eco:translate1('$1 read this message at ', toUser.nameEscaped)} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
 			</c:if>
 
-			<c:if test="${privateMessage.readTime == 0}">
+			<c:if test="${privateMessage.readTime.time == 0}">
 				${eco:translate1('$1 has not read this message yet ', toUser.nameEscaped)}
 			</c:if>
 			/

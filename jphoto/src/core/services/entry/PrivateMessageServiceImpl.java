@@ -5,6 +5,7 @@ import core.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;
 import core.general.user.User;
 import core.general.message.PrivateMessage;
+import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
 import core.services.user.UserService;
 import org.apache.commons.lang.StringUtils;
@@ -25,6 +26,8 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	private final LogHelper log = new LogHelper( PrivateMessageServiceImpl.class );
 
 	@Override
 	public boolean save( final PrivateMessage entry ) {
@@ -64,7 +67,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	@Override
 	public AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO ) {
 
-		if ( ! UserUtils.isCurrentUserLoggedUser() ) {
+		if ( !UserUtils.isCurrentUserLoggedUser() ) {
 			return AjaxResultDTO.failResult( TranslatorUtils.translate( "You are not logged in" ) );
 		}
 
@@ -73,7 +76,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		if ( fromUser == null ) {
 			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Member FROM not found" ) );
 		}
-		if ( ! UserUtils.isUserEqualsToCurrentUser( fromUser ) ) {
+		if ( !UserUtils.isUserEqualsToCurrentUser( fromUser ) ) {
 			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?" ) );
 		}
 
@@ -104,7 +107,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		final AjaxResultDTO resultDTO = new AjaxResultDTO();
 		resultDTO.setSuccessful( isSuccessfulOut );
 
-		if ( ! isSuccessfulOut ) {
+		if ( !isSuccessfulOut ) {
 			resultDTO.setMessage( TranslatorUtils.translate( "Error saving OUT message to DB" ) );
 
 			return resultDTO;
@@ -118,7 +121,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 		resultDTO.setSuccessful( isSuccessfulIn );
 
-		if ( ! isSuccessfulIn ) {
+		if ( !isSuccessfulIn ) {
 			resultDTO.setMessage( TranslatorUtils.translate( "Error saving IN message to DB" ) );
 			privateMessageDao.delete( privateMessageOut.getId() );
 		}
@@ -127,23 +130,29 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public boolean send( final User fromUser, final User toUser, final String privateMessageText ) {
+	public boolean send( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText ) {
+
 		final PrivateMessage privateMessageOut = new PrivateMessage();
 		privateMessageOut.setFromUser( fromUser );
 		privateMessageOut.setToUser( toUser );
 		privateMessageOut.setMessageText( privateMessageText );
-		privateMessageOut.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
+		privateMessageOut.setPrivateMessageType( messageType );
 		privateMessageOut.setCreationTime( dateUtilsService.getCurrentTime() );
 
 		final boolean isSuccessfulOut = privateMessageDao.saveToDB( privateMessageOut );
 
-		final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
-		privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
-		privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
+		/*boolean isSuccessfulIn = true;
+		if ( fromUser != null ) {
+			final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
+			privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
+			privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
 
-		final boolean isSuccessfulIn = privateMessageDao.saveToDB( privateMessageIn );
+			isSuccessfulIn = privateMessageDao.saveToDB( privateMessageIn );
+		}*/
 
-		return isSuccessfulOut && isSuccessfulIn;
+		log.debug( String.format( "%s has sent to %s the text '%s'", fromUser, toUser, privateMessageText ) );
+
+		return isSuccessfulOut;
 	}
 
 	@Override

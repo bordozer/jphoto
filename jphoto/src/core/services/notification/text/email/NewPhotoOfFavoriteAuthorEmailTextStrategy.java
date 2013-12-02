@@ -16,12 +16,12 @@ public class NewPhotoOfFavoriteAuthorEmailTextStrategy extends AbstractNotificat
 
 	@Override
 	public String getNotificationSubject() {
-		return String.format( "New Photo Of Favorite Author Email - Subject: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Favorite Author - Subject: %s has uploaded new photo %s", getPhotoAuthor(), photo );
 	}
 
 	@Override
 	public String getNotificationText() {
-		return String.format( "New Photo Of Favorite Author Email - Body: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Favorite Author - Body: %s has uploaded new photo %s", getPhotoAuthor(), photo );
 	}
 
 	private User getPhotoAuthor() {

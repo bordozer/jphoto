@@ -52,8 +52,12 @@ public class MailServiceImpl implements MailService {
 		msg.setFrom( new InternetAddress( mailBean.getFromAddress(), false ) );
 		msg.setRecipients( Message.RecipientType.TO, convertToInternetAddress( mailBean.getToAddresses() ) );
 
-		if ( mailBean.getCcAddresses().length > 0 ) {
+		if ( mailBean.getCcAddresses() != null && mailBean.getCcAddresses().length > 0 ) {
 			msg.setRecipients( Message.RecipientType.CC, convertToInternetAddress( mailBean.getCcAddresses() ) );
+		}
+
+		if ( mailBean.getBccAddresses() != null && mailBean.getBccAddresses().length > 0 ) {
+			msg.setRecipients( Message.RecipientType.BCC, convertToInternetAddress( mailBean.getBccAddresses() ) );
 		}
 
 		msg.setSubject( mailBean.getSubject() );
@@ -67,6 +71,8 @@ public class MailServiceImpl implements MailService {
 		transport.connect( systemVarsService.getMailServer(), systemVarsService.getMailUser(), systemVarsService.getMailPassword() );
 		transport.sendMessage( msg, msg.getAllRecipients() );
 		transport.close();*/
+
+		log.debug( String.format( "%s has sent to %s the email '%s'", mailBean.getFromAddress(), mailBean.getToAddresses(), mailBean.getBody() ) );
 	}
 
 	@Override
