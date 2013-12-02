@@ -32,12 +32,13 @@ public class NotificationServiceImpl implements NotificationService {
 		final SendEmailStrategy sendEmailStrategy = new SendEmailStrategy( services );
 
 		final AbstractNotificationDataHolder photoOfFavoriteAuthorDataHolder = new NewPhotoOfFavoriteAuthorDataHolder( photo, services );
-		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy( photo, services ) ) );
-		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfFavoriteAuthorEmailTextStrategy( photo, services ) ) );
+
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfFavoriteAuthorEmailTextStrategy( photo, services ) ) );
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy( photo, services ) ) );
 
 		final AbstractNotificationDataHolder photoOfSignedAuthorDataHolder = new NewPhotoOfSignedAuthorDataHolder( photo, services );
-		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfSignedAuthorPrivateMessageTextStrategy( photo, services ) ) );
-		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfSignedAuthorEmailTextStrategy( photo, services ) ) );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfSignedAuthorEmailTextStrategy( photo, services ) ) );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfSignedAuthorPrivateMessageTextStrategy( photo, services ) ) );
 
 		for ( final NotificationData notification : notifications ) {
 			notification.sendNotification();
