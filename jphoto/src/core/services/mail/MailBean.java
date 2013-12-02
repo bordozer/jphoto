@@ -5,43 +5,50 @@ import java.util.List;
 
 public class MailBean {
 
-	private InternetAddress fromAddress;
-	private InternetAddress[] toAddresses;
-	private InternetAddress[] ccAddresses;
-	private InternetAddress[] bccAddresses;
+	private String fromAddress;
+	private String[] toAddresses;
+	private String[] ccAddresses;
+	private String[] bccAddresses;
 
 	private String subject;
 	private String body;
 
-	public InternetAddress getFromAddress() {
+	public String getFromAddress() {
 		return fromAddress;
 	}
 
-	public void setFromAddress( final InternetAddress fromAddress ) {
+	public void setFromAddress( final String fromAddress ) {
 		this.fromAddress = fromAddress;
 	}
 
-	public InternetAddress[] getToAddresses() {
+	public String[] getToAddresses() {
 		return toAddresses;
 	}
 
-	public void setToAddresses( final InternetAddress[] toAddresses ) {
+	public void setToAddresses( final String[] toAddresses ) {
 		this.toAddresses = toAddresses;
 	}
 
-	public InternetAddress[] getCcAddresses() {
+	public void setToAddress( final String toAddress ) {
+		final String[] strings = new String[1];
+		strings[ 0 ] = toAddress;
+
+		this.toAddresses = strings;
+	}
+
+	public String[] getCcAddresses() {
 		return ccAddresses;
 	}
 
-	public void setCcAddresses( final InternetAddress[] ccAddresses ) {
+	public void setCcAddresses( final String[] ccAddresses ) {
 		this.ccAddresses = ccAddresses;
 	}
 
-	public InternetAddress[] getBccAddresses() {
+	public String[] getBccAddresses() {
 		return bccAddresses;
 	}
 
-	public void setBccAddresses( final InternetAddress[] bccAddresses ) {
+	public void setBccAddresses( final String[] bccAddresses ) {
 		this.bccAddresses = bccAddresses;
 	}
 

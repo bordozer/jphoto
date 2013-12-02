@@ -135,6 +135,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
+	public String getEmailNoReply() {
+		return config.getString( "mail.email.no.reply" );
+	}
+
+	@Override
 	public String getMailServer() {
 		return config.getString( "mail.smtp.server" );
 	}

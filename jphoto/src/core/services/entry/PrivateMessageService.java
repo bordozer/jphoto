@@ -4,6 +4,7 @@ import core.dtos.AjaxResultDTO;
 import core.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;
 import core.general.message.PrivateMessage;
+import core.general.user.User;
 import core.interfaces.BaseEntityService;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 	int markPrivateMessageAsRead( final int privateMessageId );
 
 	AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO );
+
+	boolean send( User fromUser, User toUser, String privateMessageText );
 }

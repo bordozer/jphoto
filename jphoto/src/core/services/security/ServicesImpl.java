@@ -9,6 +9,7 @@ import core.services.conversion.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import admin.services.jobs.SavedJobService;
+import core.services.mail.MailService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoRatingService;
 import core.services.photo.PhotoService;
@@ -141,6 +142,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private MailService mailService;
 
 	@Override
 	public UserService getUserService() {
@@ -335,5 +339,10 @@ public class ServicesImpl implements Services {
 	@Override
 	public ActivityStreamService getActivityStreamService() {
 		return activityStreamService;
+	}
+
+	@Override
+	public MailService getMailService() {
+		return mailService;
 	}
 }

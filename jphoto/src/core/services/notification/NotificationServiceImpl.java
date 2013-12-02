@@ -1,53 +1,43 @@
 package core.services.notification;
 
-import core.enums.FavoriteEntryType;
-import core.enums.PrivateMessageType;
-import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
-import core.general.user.EmailNotificationType;
-import core.general.user.User;
-import core.services.entry.FavoritesService;
-import core.services.entry.PrivateMessageService;
-import core.services.mail.MailService;
-import core.services.photo.PhotoCommentService;
-import core.services.photo.PhotoService;
-import core.services.user.UserService;
+import core.services.notification.strategy.email.NewPhotoOfFavoriteAuthorEmailStrategy;
+import core.services.notification.strategy.email.NewPhotoOfSignedAuthorEmailStrategy;
+import core.services.notification.strategy.message.NewPhotoOfFavoriteAuthorPrivateMessageStrategy;
+import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
 public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private PhotoService photoService;
-
-	@Autowired
-	private PhotoCommentService photoCommentService;
-
-	@Autowired
-	private FavoritesService favoritesService;
-
-	@Autowired
-	private PrivateMessageService privateMessageService;
-
-	@Autowired
-	private MailService mailService;
+	private Services services;
 
 	@Override
 	public void newPhotoNotification( final Photo photo ) {
 
+		new NewPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ).sendNotifications();
+		new NewPhotoOfFavoriteAuthorEmailStrategy( photo, services ).sendNotifications();
+		new NewPhotoOfSignedAuthorEmailStrategy( photo, services ).sendNotifications();
 	}
 
 	@Override
 	public void newCommentNotification( final PhotoComment comment ) {
 
 	}
+
+	/*private void sendNotifications( final List<AbstractNotificationStrategy> notificationStrategies ) {
+
+		for ( final AbstractNotificationStrategy notificationStrategy : notificationStrategies ) {
+			notificationStrategy.sendNotification();
+			for ( final User user : notificationStrategy.getUsersSendNotificationTo() ) {
+				final AbstractNotificationTextStrategy textStrategy = notificationStrategy.getNotificationTextStrategy();
+				privateMessageService.send( user, user, textStrategy.getNotificationText() );
+			}
+		}
+	}*/
 
 
 	/*public void newPhotoNotification1( final Photo photo ) {

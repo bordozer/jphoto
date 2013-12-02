@@ -127,6 +127,26 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
+	public boolean send( final User fromUser, final User toUser, final String privateMessageText ) {
+		final PrivateMessage privateMessageOut = new PrivateMessage();
+		privateMessageOut.setFromUser( fromUser );
+		privateMessageOut.setToUser( toUser );
+		privateMessageOut.setMessageText( privateMessageText );
+		privateMessageOut.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
+		privateMessageOut.setCreationTime( dateUtilsService.getCurrentTime() );
+
+		final boolean isSuccessfulOut = privateMessageDao.saveToDB( privateMessageOut );
+
+		final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
+		privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
+		privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
+
+		final boolean isSuccessfulIn = privateMessageDao.saveToDB( privateMessageIn );
+
+		return isSuccessfulOut && isSuccessfulIn;
+	}
+
+	@Override
 	public boolean exists( final int entryId ) {
 		return privateMessageDao.exists( entryId );
 	}

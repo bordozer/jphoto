@@ -124,4 +124,9 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	public boolean isDevMode() {
 		return true;
 	}
+
+	@Override
+	public String getEmailNoReply() {
+		return null;
+	}
 }

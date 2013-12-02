@@ -1,16 +1,22 @@
 package core.services.mail;
 
 import com.sun.mail.smtp.SMTPTransport;
+import core.log.LogHelper;
 import core.services.utils.DateUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.security.Security;
 import java.util.Properties;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class MailServiceImpl implements MailService {
 
@@ -19,6 +25,8 @@ public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private SystemVarsService systemVarsService;
+
+	protected final LogHelper log = new LogHelper( MailServiceImpl.class );
 
 	@Override
 	public void send( final MailBean mailBean ) throws MessagingException {
@@ -41,21 +49,42 @@ public class MailServiceImpl implements MailService {
 
 		final MimeMessage msg = new MimeMessage( session );
 
-		msg.setFrom( mailBean.getFromAddress() );
-		msg.setRecipients( Message.RecipientType.TO, mailBean.getToAddresses() );
+		msg.setFrom( new InternetAddress( mailBean.getFromAddress(), false ) );
+		msg.setRecipients( Message.RecipientType.TO, convertToInternetAddress( mailBean.getToAddresses() ) );
 
 		if ( mailBean.getCcAddresses().length > 0 ) {
-			msg.setRecipients( Message.RecipientType.CC, mailBean.getCcAddresses() );
+			msg.setRecipients( Message.RecipientType.CC, convertToInternetAddress( mailBean.getCcAddresses() ) );
 		}
 
 		msg.setSubject( mailBean.getSubject() );
 		msg.setText( mailBean.getBody(), "utf-8" );
 		msg.setSentDate( dateUtilsService.getCurrentTime() );
 
+		/*
+		// TODO: switch on!!!
 		final SMTPTransport transport = ( SMTPTransport ) session.getTransport( "smtps" );
 
 		transport.connect( systemVarsService.getMailServer(), systemVarsService.getMailUser(), systemVarsService.getMailPassword() );
 		transport.sendMessage( msg, msg.getAllRecipients() );
-		transport.close();
+		transport.close();*/
+	}
+
+	@Override
+	public void sendNoException( final MailBean mailBean ) {
+		try {
+			send( mailBean );
+		} catch ( MessagingException e ) {
+			log.error( String.format( "Can not send email: %s", mailBean ), e );
+		}
+	}
+
+	private InternetAddress[] convertToInternetAddress( final String[] addresses ) throws AddressException {
+		final InternetAddress[] result = new InternetAddress[ addresses.length ];
+
+		for ( int i = 0; i < addresses.length; i++ ) {
+			result[i] = new InternetAddress( addresses[i], false );
+		}
+
+		return result;
 	}
 }
