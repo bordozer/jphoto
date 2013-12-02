@@ -1,0 +1,8 @@
+
+mail.email=jphoto@pop3.ru
+
+mail.smtp.server=gmail.com
+
+mail.smtp.server.user=jphoto
+
+mail.smtp.server.password=jphoto2003

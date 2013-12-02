@@ -43,4 +43,14 @@ public interface SystemVarsService {
 	boolean isDevMode();
 
 	String getDatabaseName();
+
+	// mail properties -->
+	String getMailServer();
+
+	String getMailUser();
+
+	String getMailPassword();
+
+	// mail properties -->
+	String getEmail();
 }

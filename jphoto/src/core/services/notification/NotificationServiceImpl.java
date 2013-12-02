@@ -1,13 +1,21 @@
-package core.services.system;
+package core.services.notification;
 
+import core.enums.FavoriteEntryType;
+import core.enums.PrivateMessageType;
+import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
+import core.general.user.EmailNotificationType;
+import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.entry.PrivateMessageService;
+import core.services.mail.MailService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -28,37 +36,49 @@ public class NotificationServiceImpl implements NotificationService {
 	@Autowired
 	private PrivateMessageService privateMessageService;
 
+	@Autowired
+	private MailService mailService;
+
 	@Override
 	public void newPhotoNotification( final Photo photo ) {
-		/*final List<PrivateMessage> emailMessages = newArrayList();
+
+	}
+
+	@Override
+	public void newCommentNotification( final PhotoComment comment ) {
+
+	}
+
+
+	/*public void newPhotoNotification1( final Photo photo ) {
+		final List<PrivateMessage> emailMessages = newArrayList();
 		final List<PrivateMessage> privateMessages = newArrayList();
 
 		addNotificationsAboutNewPhotoToUsersWhoHasAuthorInFavorites( photo, emailMessages, privateMessages );
 
 		addNotificationsAboutNewPhotoToUsersWhoIsTrackingAuthorNewPhotos( photo, emailMessages );
 
-		sendNotification( emailMessages );*/
+		sendNotification( emailMessages );
+	}*/
+
+	/*public void newCommentNotification1( final PhotoComment comment ) {
+
+		final List<PrivateMessage> emailMessages = newArrayList();
+
+//		addNotificationsToPhotoAuthorAboutNewCommentToHisPhoto( comment, emailMessages );
+
+//		addNotificationsToUsersWhoAreTrackingNewCommentsToThisPhoto( comment, emailMessages );
+
+		sendNotification( emailMessages );
 	}
 
-	@Override
-	public void newCommentNotification( final PhotoComment comment ) {
-
-		/*final List<PrivateMessage> emailMessages = newArrayList();
-
-		addNotificationsToPhotoAuthorAboutNewCommentToHisPhoto( comment, emailMessages );
-
-		addNotificationsToUsersWhoAreTrackingNewCommentsToThisPhoto( comment, emailMessages );
-
-		sendNotification( emailMessages );*/
-	}
-
-/*	private void sendNotification( final List<PrivateMessage> emailMessages ) {
+	private void sendNotification( final List<PrivateMessage> emailMessages ) {
 		for ( final PrivateMessage message : emailMessages ) {
 			// TODO: send email
 		}
-	}
+	}*/
 
-	private void addNotificationsToPhotoAuthorAboutNewCommentToHisPhoto( final PhotoComment comment, final List<PrivateMessage> emailMessages ) {
+	/*private void addNotificationsToPhotoAuthorAboutNewCommentToHisPhoto( final PhotoComment comment, final List<PrivateMessage> emailMessages ) {
 
 		final Photo photo = photoService.load( comment.getPhotoId() );
 
@@ -120,9 +140,9 @@ public class NotificationServiceImpl implements NotificationService {
 				addToListIfEntryDoesNotExist( emailMessages, message );
 			}
 		}
-	}
+	}*/
 
-	private void addNotificationsAboutNewPhotoToUsersWhoHasAuthorInFavorites( final Photo photo, final List<PrivateMessage> emailMessages, final List<PrivateMessage> privateMessages ) {
+	/*private void addNotificationsAboutNewPhotoToUsersWhoHasAuthorInFavorites( final Photo photo, final List<PrivateMessage> emailMessages, final List<PrivateMessage> privateMessages ) {
 		final FavoriteEntryType favoriteEntryType = FavoriteEntryType.USER;
 		final EmailNotificationType emailNotificationType = EmailNotificationType.PHOTO_OF_FAVORITE_MEMBER;
 		final EmailNotificationType privateMessageType = EmailNotificationType.PHOTO_OF_FAVORITE_MEMBER;
@@ -138,7 +158,9 @@ public class NotificationServiceImpl implements NotificationService {
 		addNotificationsAboutNewPhoto( photo, favoriteEntryType, emailNotificationType, emailMessages, privateMessageType );
 	}
 
-	private void addNotificationsAboutNewPhoto( final Photo photo, final FavoriteEntryType favoriteEntryType, final EmailNotificationType emailNotificationType, final List<PrivateMessage> emailMessages, final EmailNotificationType privateMessageType ) {
+	private void addNotificationsAboutNewPhoto( final Photo photo, final FavoriteEntryType favoriteEntryType, final EmailNotificationType emailNotificationType
+		, final List<PrivateMessage> emailMessages, final PrivateMessageType privateMessageType ) {
+
 		final User photoAuthor = userService.load( photo.getUserId() );
 
 		final List<Integer> usersWhoHasPhotoAuthorInFavorites = favoritesService.getAllUsersIdsWhoHasThisEntryInFavorites( photoAuthor.getId(), favoriteEntryType );
@@ -151,14 +173,8 @@ public class NotificationServiceImpl implements NotificationService {
 			}
 
 			final PrivateMessage message = new PrivateMessage();
-			message.setUser( user );
 			message.setToUser( user );
-
-			message.setAboutUser( photoAuthor );
-			message.setAboutPhoto( photo );
-
 			message.setPrivateMessageType( privateMessageType );
-
 
 			if ( isEmailNotification( user, emailNotificationType ) ) {
 				addToListIfEntryDoesNotExist( emailMessages, message );

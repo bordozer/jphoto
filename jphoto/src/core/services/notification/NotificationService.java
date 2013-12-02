@@ -1,4 +1,4 @@
-package core.services.system;
+package core.services.notification;
 
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;

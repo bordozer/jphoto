@@ -20,7 +20,7 @@
 	<bean id="favoritesService" class="core.services.entry.FavoritesServiceImpl"/>
 	<bean id="userStatisticService" class="core.services.user.UserStatisticServiceImpl"/>
 	<bean id="previewGenerationService" class="core.services.conversion.PreviewGenerationServiceImpl"/>
-	<bean id="notificationService" class="core.services.system.NotificationServiceImpl"/>
+	<bean id="notificationService" class="core.services.notification.NotificationServiceImpl"/>
 	<bean id="userRankService" class="core.services.user.UserRankServiceImpl"/>
 	<bean id="photoUploadService" class="core.services.photo.PhotoUploadServiceImpl"/>
 	<bean id="photoPreviewService" class="core.services.conversion.PhotoPreviewServiceImpl"/>
@@ -44,6 +44,8 @@
 	<bean id="fileConversionService" class="core.services.conversion.FileConversionServiceImpl"/>
 	<bean id="userCardModelFillService" class="controllers.users.card.data.UserCardModelFillServiceImpl"/>
 	<bean id="activityStreamService" class="core.services.entry.ActivityStreamServiceImpl"/>
+
+	<bean id="mailService" class="core.services.mail.MailServiceImpl"/>
 
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>

@@ -13,7 +13,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.entry.EntryMenuService;
 import core.services.system.ConfigurationService;
 import core.services.entry.GenreService;
-import core.services.system.NotificationService;
+import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.dao.PhotoCommentDao;
 import core.services.user.UserRankService;

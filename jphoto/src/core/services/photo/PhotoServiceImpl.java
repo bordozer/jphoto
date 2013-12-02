@@ -29,7 +29,7 @@ import core.services.entry.GenreService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import core.services.system.NotificationService;
+import core.services.notification.NotificationService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
