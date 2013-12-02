@@ -5,7 +5,7 @@ import core.general.photo.Photo;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.services.notification.send.AbstractSendStrategy;
-import core.services.notification.text.email.NewPhotoOfFavoriteAuthorEmailTextStrategy;
+import core.services.notification.text.AbstractNotificationTextStrategy;
 import core.services.security.Services;
 import core.services.user.UserService;
 
@@ -24,7 +24,7 @@ public class NewPhotoOfFavoriteAuthorDataHolder extends AbstractNotificationData
 	}
 
 	@Override
-	public List<NotificationData> getNotificationsData( final AbstractSendStrategy sendStrategy ) {
+	public List<NotificationData> getNotificationsData( final AbstractSendStrategy sendStrategy, final AbstractNotificationTextStrategy notificationTextStrategy ) {
 		final UserService userService = services.getUserService();
 
 		final ArrayList<NotificationData> result = newArrayList();
@@ -34,7 +34,7 @@ public class NewPhotoOfFavoriteAuthorDataHolder extends AbstractNotificationData
 			final User user = userService.load( userId );
 
 			if( user.getEmailNotificationTypes().contains( EmailNotificationType.PHOTO_OF_FAVORITE_MEMBER ) ) {
-				result.add( new NotificationData( user, new NewPhotoOfFavoriteAuthorEmailTextStrategy( photo, services ), sendStrategy ) );
+				result.add( new NotificationData( user, notificationTextStrategy, sendStrategy ) );
 			}
 		}
 

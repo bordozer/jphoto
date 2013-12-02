@@ -2,6 +2,7 @@ package core.services.notification.data;
 
 import core.log.LogHelper;
 import core.services.notification.send.AbstractSendStrategy;
+import core.services.notification.text.AbstractNotificationTextStrategy;
 import core.services.security.Services;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public abstract class AbstractNotificationDataHolder {
 		this.services = services;
 	}
 
-	public abstract List<NotificationData> getNotificationsData( final AbstractSendStrategy sendStrategy );
+	public abstract List<NotificationData> getNotificationsData( final AbstractSendStrategy sendStrategy, final AbstractNotificationTextStrategy notificationTextStrategy );
 }

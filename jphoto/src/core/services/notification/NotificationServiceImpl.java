@@ -7,6 +7,10 @@ import core.services.notification.data.AbstractNotificationDataHolder;
 import core.services.notification.data.NewPhotoOfSignedAuthorDataHolder;
 import core.services.notification.send.SendEmailStrategy;
 import core.services.notification.send.SendPrivateMessageStrategy;
+import core.services.notification.text.email.NewPhotoOfFavoriteAuthorEmailTextStrategy;
+import core.services.notification.text.email.NewPhotoOfSignedAuthorEmailTextStrategy;
+import core.services.notification.text.message.NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy;
+import core.services.notification.text.message.NewPhotoOfSignedAuthorPrivateMessageTextStrategy;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,12 +32,12 @@ public class NotificationServiceImpl implements NotificationService {
 		final SendEmailStrategy sendEmailStrategy = new SendEmailStrategy( services );
 
 		final AbstractNotificationDataHolder photoOfFavoriteAuthorDataHolder = new NewPhotoOfFavoriteAuthorDataHolder( photo, services );
-		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy ) );
-		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendEmailStrategy ) );
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy( photo, services ) ) );
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfFavoriteAuthorEmailTextStrategy( photo, services ) ) );
 
 		final AbstractNotificationDataHolder photoOfSignedAuthorDataHolder = new NewPhotoOfSignedAuthorDataHolder( photo, services );
-		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy ) );
-		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendEmailStrategy ) );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendEmailStrategy, new NewPhotoOfSignedAuthorPrivateMessageTextStrategy( photo, services ) ) );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy, new NewPhotoOfSignedAuthorEmailTextStrategy( photo, services ) ) );
 
 		for ( final NotificationData notification : notifications ) {
 			notification.sendNotification();

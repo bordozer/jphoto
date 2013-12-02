@@ -16,12 +16,12 @@ public class NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy extends Abstract
 
 	@Override
 	public String getNotificationSubject() {
-		return String.format( "New Photo Of Favorite Author Private message - Subject: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Favorite Author - Private message Subject: %s has uploaded new photo '%s'", getPhotoAuthor(), services.getEntityLinkUtilsService().getPhotoCardLink( photo ) );
 	}
 
 	@Override
 	public String getNotificationText() {
-		return String.format( "New Photo Of Favorite Author Private message - Body: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Favorite Author - Private message Body: %s has uploaded new photo '%s'", getPhotoAuthor(), services.getEntityLinkUtilsService().getPhotoCardLink( photo ) );
 	}
 
 	private User getPhotoAuthor() {
