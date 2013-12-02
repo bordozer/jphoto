@@ -2,11 +2,15 @@ package core.services.notification;
 
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
-import core.services.notification.strategy.email.NewPhotoOfFavoriteAuthorEmailStrategy;
-import core.services.notification.strategy.email.NewPhotoOfSignedAuthorEmailStrategy;
-import core.services.notification.strategy.message.NewPhotoOfFavoriteAuthorPrivateMessageStrategy;
+import core.services.notification.data.*;
+import core.services.notification.data.AbstractNotificationDataHolder;
+import core.services.notification.data.NewPhotoOfSignedAuthorDataHolder;
+import core.services.notification.send.SendEmailStrategy;
+import core.services.notification.send.SendPrivateMessageStrategy;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -18,9 +22,22 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public void newPhotoNotification( final Photo photo ) {
 
-		new NewPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ).sendNotifications();
-		new NewPhotoOfFavoriteAuthorEmailStrategy( photo, services ).sendNotifications();
-		new NewPhotoOfSignedAuthorEmailStrategy( photo, services ).sendNotifications();
+		final List<NotificationData> notifications = newArrayList();
+
+		final SendPrivateMessageStrategy sendPrivateMessageStrategy = new SendPrivateMessageStrategy( services );
+		final SendEmailStrategy sendEmailStrategy = new SendEmailStrategy( services );
+
+		final AbstractNotificationDataHolder photoOfFavoriteAuthorDataHolder = new NewPhotoOfFavoriteAuthorDataHolder( photo, services );
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy ) );
+		notifications.addAll( photoOfFavoriteAuthorDataHolder.getNotificationsData( sendEmailStrategy ) );
+
+		final AbstractNotificationDataHolder photoOfSignedAuthorDataHolder = new NewPhotoOfSignedAuthorDataHolder( photo, services );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendPrivateMessageStrategy ) );
+		notifications.addAll( photoOfSignedAuthorDataHolder.getNotificationsData( sendEmailStrategy ) );
+
+		for ( final NotificationData notification : notifications ) {
+			notification.sendNotification();
+		}
 	}
 
 	@Override
@@ -28,11 +45,11 @@ public class NotificationServiceImpl implements NotificationService {
 
 	}
 
-	/*private void sendNotifications( final List<AbstractNotificationStrategy> notificationStrategies ) {
+	/*private void sendNotifications( final List<AbstractNotificationDataHolder> notificationStrategies ) {
 
-		for ( final AbstractNotificationStrategy notificationStrategy : notificationStrategies ) {
+		for ( final AbstractNotificationDataHolder notificationStrategy : notificationStrategies ) {
 			notificationStrategy.sendNotification();
-			for ( final User user : notificationStrategy.getUsersSendNotificationTo() ) {
+			for ( final User user : notificationStrategy.getNotificationsData() ) {
 				final AbstractNotificationTextStrategy textStrategy = notificationStrategy.getNotificationTextStrategy();
 				privateMessageService.send( user, user, textStrategy.getNotificationText() );
 			}

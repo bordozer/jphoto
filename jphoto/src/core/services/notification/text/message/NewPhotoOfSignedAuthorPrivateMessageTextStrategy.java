@@ -5,23 +5,23 @@ import core.general.user.User;
 import core.services.notification.text.AbstractNotificationTextStrategy;
 import core.services.security.Services;
 
-public class NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy extends AbstractNotificationTextStrategy {
+public class NewPhotoOfSignedAuthorPrivateMessageTextStrategy extends AbstractNotificationTextStrategy {
 
 	private final Photo photo;
 
-	public NewPhotoOfFavoriteAuthorPrivateMessageTextStrategy( final Photo photo, final Services services ) {
+	public NewPhotoOfSignedAuthorPrivateMessageTextStrategy( final Photo photo, final Services services ) {
 		super( services );
 		this.photo = photo;
 	}
 
 	@Override
 	public String getNotificationSubject() {
-		return String.format( "New Photo Of Favorite Author Private message - Subject: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Signed Author Private Message - Subject: %s has uploaded new photo %s", getPhotoAuthor(), photo );
 	}
 
 	@Override
 	public String getNotificationText() {
-		return String.format( "New Photo Of Favorite Author Private message - Body: %s has uploaded new photo %s", getPhotoAuthor(), photo );
+		return String.format( "New Photo Of Signed Author Private Message - Body: %s has uploaded new photo %s", getPhotoAuthor(), photo );
 	}
 
 	private User getPhotoAuthor() {
