@@ -32,12 +32,20 @@ public abstract class UserNotificationsCollector {
 		return newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfFavoriteAuthorEmail( final Photo photo, final Services services ) {
-		return newPhotoOfFavoriteAuthorEmailStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> newPhotoOfFriendPrivateMessage( final Photo photo, final Services services ) {
+		return newPhotoOfFriendPrivateMessageStrategy( photo, services ).getUserNotifications();
 	}
 
 	public static List<UserNotification> newPhotoOfSignedAuthorPrivateMessage( final Photo photo, final Services services ) {
 		return newPhotoOfSignedAuthorPrivateMessageStrategy( photo, services ).getUserNotifications();
+	}
+
+	public static List<UserNotification> newPhotoOfFavoriteAuthorEmail( final Photo photo, final Services services ) {
+		return newPhotoOfFavoriteAuthorEmailStrategy( photo, services ).getUserNotifications();
+	}
+
+	public static List<UserNotification> newPhotoOfFriendEmail( final Photo photo, final Services services ) {
+		return newPhotoOfFriendEmailStrategy( photo, services ).getUserNotifications();
 	}
 
 	public static List<UserNotification> newPhotoOfSignedAuthorEmail( final Photo photo, final Services services ) {
@@ -80,6 +88,27 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* All users get Private message about event */
+	private static UserNotificationsCollector newPhotoOfFriendPrivateMessageStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				return getNewPhotoUserNotificationForFavoriteType( photo, FavoriteEntryType.FRIEND );
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User photoAuthor = getPhotoAuthor( photo );
+
+				final String subject = String.format( "New Photo Of Friend - Private Message Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String message = String.format( "New Photo Of Friend - Private Message Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	/* All users get Private message about event */
 	private static UserNotificationsCollector newPhotoOfSignedAuthorPrivateMessageStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
@@ -106,7 +135,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.PHOTO_OF_FAVORITE_MEMBER );
+				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
 			}
 
 			@Override
@@ -122,11 +151,33 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector newPhotoOfSignedAuthorEmailStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector newPhotoOfFriendEmailStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
+
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.PHOTO_OF_TRACKING_MEMBER );
+				return filterByEmailNotificationType( newPhotoOfFriendPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User photoAuthor = getPhotoAuthor( photo );
+
+				final String subject = String.format( "New Photo Of Friend - Email Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String message = String.format( "New Photo Of Friend - Email Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	/* Only users set corresponding option get Email about event */
+	private static UserNotificationsCollector newPhotoOfSignedAuthorEmailStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
 			}
 
 			@Override
