@@ -196,7 +196,7 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void setNextPhotoUploadTime( final Date nextTime ) {
-		if ( nextPhotoUploadTime.getTime() < nextTime.getTime() ) {
+		if ( nextPhotoUploadTime == null || nextPhotoUploadTime.getTime() < nextTime.getTime() ) {
 			nextPhotoUploadTime = nextTime;
 		}
 	}
