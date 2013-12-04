@@ -12,16 +12,18 @@ public abstract class AbstractSendNotificationStrategy {
 		this.services = services;
 	}
 
-	public abstract void sendNotifications( final UserNotification userNotification, final NotificationData notificationData );
+	public abstract void sendNotifications( final UserNotification userNotification );
 
 	public static AbstractSendNotificationStrategy getSendEmailStrategy( final Services services ) {
 		return new AbstractSendNotificationStrategy( services ) {
 			@Override
-			public void sendNotifications( final UserNotification userNotification, final NotificationData notificationData ) {
+			public void sendNotifications( final UserNotification userNotification ) {
 				final MailBean mail = new MailBean();
 
 				mail.setToAddress( services.getSystemVarsService().getEmailNoReply() ); // TODO: userNotification.getUser().getEmail()
 				mail.setFromAddress( services.getSystemVarsService().getEmailNoReply() );
+
+				final NotificationData notificationData = userNotification.getNotificationData();
 
 				mail.setSubject( notificationData.getSubject() );
 				mail.setBody( notificationData.getMessage() );
@@ -34,8 +36,8 @@ public abstract class AbstractSendNotificationStrategy {
 	public static AbstractSendNotificationStrategy getSendPrivateMessageStrategy( final Services services ) {
 		return new AbstractSendNotificationStrategy( services ) {
 			@Override
-			public void sendNotifications( final UserNotification userNotification, final NotificationData notificationData ) {
-				services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, notificationData.getMessage() );
+			public void sendNotifications( final UserNotification userNotification ) {
+				services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, userNotification.getNotificationData().getMessage() );
 			}
 		};
 	}

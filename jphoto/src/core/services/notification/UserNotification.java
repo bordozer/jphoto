@@ -22,7 +22,7 @@ public class UserNotification {
 		return sendNotificationStrategy;
 	}
 
-	public NotificationData getNotificationTextStrategy() {
+	public NotificationData getNotificationData() {
 		return notificationData;
 	}
 
@@ -32,6 +32,6 @@ public class UserNotification {
 	}
 
 	public void sendNotifications() {
-		sendNotificationStrategy.sendNotifications( this, notificationData );
+		sendNotificationStrategy.sendNotifications( this );
 	}
 }

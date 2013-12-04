@@ -18,10 +18,11 @@ public class NotificationServiceImpl implements NotificationService {
 	public void newPhotoNotification( final Photo photo ) {
 
 		final List<UserNotification> userNotifications = newArrayList();
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorEmail( photo, services ) );
+
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorPrivateMessage( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorEmail( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorEmail( photo, services ) );
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorPrivateMessage( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorEmail( photo, services ) );
 
 		for ( final UserNotification userNotification : userNotifications ) {
 			userNotification.sendNotifications();
