@@ -26,6 +26,8 @@ public abstract class UserNotificationsCollector {
 
 	public abstract List<UserNotification> getUserNotifications();
 
+	public abstract AbstractSendNotificationStrategy getSendNotificationStrategy();
+
 	public abstract NotificationData getNotificationData();
 
 	public static List<UserNotification> newPhotoOfFavoriteAuthorPrivateMessage( final Photo photo, final Services services ) {
@@ -62,6 +64,11 @@ public abstract class UserNotificationsCollector {
 			}
 
 			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
+			}
+
+			@Override
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
@@ -83,6 +90,11 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public List<UserNotification> getUserNotifications() {
 				return getNewPhotoUserNotificationForFavoriteType( photo, FavoriteEntryType.FRIEND );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
 			}
 
 			@Override
@@ -110,6 +122,11 @@ public abstract class UserNotificationsCollector {
 			}
 
 			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
+			}
+
+			@Override
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
@@ -131,6 +148,11 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public List<UserNotification> getUserNotifications() {
 				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY;
 			}
 
 			@Override
@@ -158,6 +180,11 @@ public abstract class UserNotificationsCollector {
 			}
 
 			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY;
+			}
+
+			@Override
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
@@ -179,6 +206,11 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public List<UserNotification> getUserNotifications() {
 				return filterByEmailNotificationType( newPhotoOfFavoriteAuthorPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY;
 			}
 
 			@Override
@@ -204,7 +236,7 @@ public abstract class UserNotificationsCollector {
 		final List<Integer> notificationReceiverIds = services.getFavoritesService().getAllUsersIdsWhoHasThisEntryInFavorites( photo.getUserId(), favoriteEntryType );
 		for ( final int userId : notificationReceiverIds ) {
 			final User user = userService.load( userId );
-			result.add( new UserNotification( user, AbstractSendNotificationStrategy.getSendPrivateMessageStrategy( services ), getNotificationData() ) );
+			result.add( new UserNotification( user, getSendNotificationStrategy(), getNotificationData() ) );
 		}
 
 		return result;

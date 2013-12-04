@@ -5,9 +5,9 @@ import core.general.photo.PhotoComment;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import java.util.Set;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newLinkedHashSet;
 
 public class NotificationServiceImpl implements NotificationService {
 
@@ -17,7 +17,7 @@ public class NotificationServiceImpl implements NotificationService {
 	@Override
 	public void newPhotoNotification( final Photo photo ) {
 
-		final List<UserNotification> userNotifications = newArrayList();
+		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorPrivateMessage( photo, services ) );
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendPrivateMessage( photo, services ) );
@@ -28,7 +28,7 @@ public class NotificationServiceImpl implements NotificationService {
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorEmail( photo, services ) );
 
 		for ( final UserNotification userNotification : userNotifications ) {
-			userNotification.sendNotifications();
+			userNotification.sendNotifications( services );
 		}
 	}
 

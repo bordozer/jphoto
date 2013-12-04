@@ -6,39 +6,29 @@ import core.services.security.Services;
 
 public abstract class AbstractSendNotificationStrategy {
 
-	protected final Services services;
+	public abstract void sendNotifications( final UserNotification userNotification, final Services services );
 
-	protected AbstractSendNotificationStrategy( final Services services ) {
-		this.services = services;
-	}
+	public static final AbstractSendNotificationStrategy SEND_EMAIL_STRATEGY = new AbstractSendNotificationStrategy() {
+		@Override
+		public void sendNotifications( final UserNotification userNotification, final Services services ) {
+			final MailBean mail = new MailBean();
 
-	public abstract void sendNotifications( final UserNotification userNotification );
+			mail.setToAddress( services.getSystemVarsService().getEmailNoReply() ); // TODO: userNotification.getUser().getEmail()
+			mail.setFromAddress( services.getSystemVarsService().getEmailNoReply() );
 
-	public static AbstractSendNotificationStrategy getSendEmailStrategy( final Services services ) {
-		return new AbstractSendNotificationStrategy( services ) {
-			@Override
-			public void sendNotifications( final UserNotification userNotification ) {
-				final MailBean mail = new MailBean();
+			final NotificationData notificationData = userNotification.getNotificationData();
 
-				mail.setToAddress( services.getSystemVarsService().getEmailNoReply() ); // TODO: userNotification.getUser().getEmail()
-				mail.setFromAddress( services.getSystemVarsService().getEmailNoReply() );
+			mail.setSubject( notificationData.getSubject() );
+			mail.setBody( notificationData.getMessage() );
 
-				final NotificationData notificationData = userNotification.getNotificationData();
+			services.getMailService().sendNoException( mail );
+		}
+	};
 
-				mail.setSubject( notificationData.getSubject() );
-				mail.setBody( notificationData.getMessage() );
-
-				services.getMailService().sendNoException( mail );
-			}
-		};
-	}
-
-	public static AbstractSendNotificationStrategy getSendPrivateMessageStrategy( final Services services ) {
-		return new AbstractSendNotificationStrategy( services ) {
-			@Override
-			public void sendNotifications( final UserNotification userNotification ) {
-				services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, userNotification.getNotificationData().getMessage() );
-			}
-		};
-	}
+	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
+		@Override
+		public void sendNotifications( final UserNotification userNotification, final Services services ) {
+			services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, userNotification.getNotificationData().getMessage() );
+		}
+	};
 }

@@ -64,6 +64,7 @@
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
+<div style="float: left; width: 98%;">
 	<c:if test="${isNew}">
 		<h3>${eco:translate(photoEditDataModel.currentStep.stepDescription)}</h3>
 
@@ -381,7 +382,7 @@
 			<h3>${eco:translate2('You can upload new photo at $1 $2', eco:formatDate(photoEditDataModel.nextPhotoUploadTime), eco:formatTimeShort(photoEditDataModel.nextPhotoUploadTime))}</h3>
 		</div>
 	</c:if>
-
+</div>
 	<div class="footerseparator"></div>
 
 </tags:page>

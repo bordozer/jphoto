@@ -17,4 +17,9 @@ public class NotificationData {
 	public String getMessage() {
 		return message;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s", subject, message );
+	}
 }

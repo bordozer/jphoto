@@ -7,7 +7,7 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 
-<div style="float: left; width: 100%;">
+<%--<div style="float: left; width: 100%;">--%>
 
 	<table:table width="800">
 
@@ -42,4 +42,4 @@
 			</table:tr>
 		</c:forEach>
 	</table:table>
-</div>
+<%--</div>--%>
