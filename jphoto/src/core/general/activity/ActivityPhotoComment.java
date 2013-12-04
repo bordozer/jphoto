@@ -15,6 +15,7 @@ import utils.TranslatorUtils;
 public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 
 	private PhotoComment comment;
+	private Photo photo;
 
 	public ActivityPhotoComment( final String activityXML, final Services services ) throws DocumentException {
 		super( ActivityType.PHOTO_COMMENT, services );
@@ -23,7 +24,16 @@ public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 
 		final Element rootElement = document.getRootElement();
 		final int commentId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_ID ).getText() );
+
 		comment = services.getPhotoCommentService().load( commentId );
+		if ( comment == null ) {
+			registerActivityEntryAsInvisibleForActivityStream();
+		} else {
+			photo = services.getPhotoService().load( comment.getPhotoId() );
+			if ( photo == null ) {
+				registerActivityEntryAsInvisibleForActivityStream();
+			}
+		}
 	}
 
 	public ActivityPhotoComment( final PhotoComment comment, final Services services ) {
@@ -42,7 +52,6 @@ public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getActivityDescription() {
-		final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
 		return TranslatorUtils.translate( "commented photo $1"
@@ -52,7 +61,7 @@ public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getDisplayActivityIcon() {
-		return getPhotoIcon( services.getPhotoService().load( comment.getPhotoId() ) );
+		return getPhotoIcon( photo );
 	}
 
 	@Override

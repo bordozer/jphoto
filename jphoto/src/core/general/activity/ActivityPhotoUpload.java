@@ -25,11 +25,16 @@ public class ActivityPhotoUpload extends AbstractActivityStreamEntry {
 
 		final Element rootElement = document.getRootElement();
 		activityOfPhotoId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_ID ).getText() );
+
 		uploadedPhoto = services.getPhotoService().load( activityOfPhotoId );
+		if ( uploadedPhoto == null ) {
+			registerActivityEntryAsInvisibleForActivityStream();
+		}
 	}
 
 	public ActivityPhotoUpload( final Photo photo, final Services services ) {
 		super( ActivityType.PHOTO_UPLOAD, services );
+
 		this.uploadedPhoto = photo;
 
 		activityTime = photo.getUploadTime();

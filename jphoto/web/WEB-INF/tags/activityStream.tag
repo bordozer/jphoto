@@ -13,33 +13,38 @@
 
 	<c:forEach var="activity" items="${activities}">
 
-		<table:tr>
-			<table:td width="100" cssClass="small-text textcentered">
-				${eco:formatDate(activity.activityTime)}
-				<br />
-				${eco:formatTime(activity.activityTime)}
-			</table:td>
+		<c:if test="${not activity.activityOfDeletedEntry}">
 
-			<table:td cssClass="textcentered" width="30">${activity.displayActivityIcon}</table:td>
+			<table:tr>
+				<table:td width="100" cssClass="small-text textcentered">
+					${eco:formatDate(activity.activityTime)}
+					<br/>
+					${eco:formatTime(activity.activityTime)}
+				</table:td>
 
-			<table:tdicon><html:img16 src="jobtype/${activity.activityType.icon}" alt="${activity.activityType.name}"/></table:tdicon>
+				<table:td cssClass="textcentered" width="30">${activity.displayActivityIcon}</table:td>
 
-			<table:td>
+				<table:tdicon><html:img16 src="jobtype/${activity.activityType.icon}" alt="${activity.activityType.name}"/></table:tdicon>
 
-				<c:if test="${not hideUser}">
-					${activity.displayActivityUserLink}
+				<table:td>
+
+					<c:if test="${not hideUser}">
+						${activity.displayActivityUserLink}
+					</c:if>
+
+					${activity.activityDescription}
+				</table:td>
+
+				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">
+					<table:td cssClass="textcentered" width="20">
+						<a href="${eco:baseUrlWithPrefix()}/members/${activity.displayActivityUserId}/card/activity/"
+						   title="${eco:translate('Show member activity stream')}">${eco:translate('all')}</a>
+					</table:td>
 				</c:if>
 
-				${activity.activityDescription}
-			</table:td>
+			</table:tr>
 
-			<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">
-				<table:td cssClass="textcentered" width="20">
-					<a href="${eco:baseUrlWithPrefix()}/members/${activity.displayActivityUserId}/card/activity/" title="${eco:translate('Show member activity stream')}">${eco:translate('all')}</a>
-				</table:td>
-			</c:if>
-
-		</table:tr>
+		</c:if>
 
 	</c:forEach>
 

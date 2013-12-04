@@ -24,6 +24,9 @@ public class ActivityPhotoPreview extends AbstractActivityStreamEntry {
 		final Element rootElement = document.getRootElement();
 		final int previewId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_ID ).getText() );
 		preview = services.getPhotoPreviewService().load( previewId );
+		if ( preview == null ) {
+			registerActivityEntryAsInvisibleForActivityStream();
+		}
 	}
 
 	public ActivityPhotoPreview( final PhotoPreview preview, final Services services ) {
@@ -42,6 +45,10 @@ public class ActivityPhotoPreview extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getActivityDescription() {
+		if ( preview == null ) {
+			return StringUtils.EMPTY;
+		}
+
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
 		return TranslatorUtils.translate( "viewed photo $1"
@@ -51,6 +58,10 @@ public class ActivityPhotoPreview extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getDisplayActivityIcon() {
+		if ( preview == null ) {
+			return StringUtils.EMPTY;
+		}
+
 		return getPhotoIcon( preview.getPhoto() );
 	}
 

@@ -24,12 +24,15 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 	protected int activityOfUserId;
 	protected int activityOfPhotoId;
 
+	protected boolean activityOfDeletedEntry;
+
 	protected final Services services;
 
 	public abstract String buildActivityXML();
 
 	public abstract String getActivityDescription();
 
+	/* Loading from DB */
 	protected AbstractActivityStreamEntry( final ActivityType activityType, final Services services ) {
 		this.activityType = activityType;
 		this.services = services;
@@ -85,6 +88,14 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 		this.activityOfPhotoId = activityOfPhotoId;
 	}
 
+	public boolean isActivityOfDeletedEntry() {
+		return activityOfDeletedEntry;
+	}
+
+	public void setActivityOfDeletedEntry( final boolean activityOfDeletedEntry ) {
+		this.activityOfDeletedEntry = activityOfDeletedEntry;
+	}
+
 	protected String getXML( final String xmlTagPhotoId, final int id ) {
 		final Document document = DocumentHelper.createDocument();
 
@@ -95,10 +106,18 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 	}
 
 	protected String getPhotoIcon( final Photo photo ) {
+		if( photo == null ) {
+			return StringUtils.EMPTY;
+		}
+
 		return String.format( "<a href='%1$s'><img src='%2$s' height='30' alt='%3$s' title='%3$s'/></a>"
 			, services.getUrlUtilsService().getPhotoCardLink( photo.getId() )
 			, services.getUserPhotoFilePathUtilsService().getPhotoUrl( photo )
 			, photo.getNameEscaped()
 		);
+	}
+
+	protected void registerActivityEntryAsInvisibleForActivityStream() {
+		activityOfDeletedEntry = true;
 	}
 }

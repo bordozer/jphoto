@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;
+import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -32,6 +33,10 @@ public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
 
 		voter = services.getUserService().load( voterId );
 		photo = services.getPhotoService().load( photoId );
+
+		if ( photo == null ) {
+			registerActivityEntryAsInvisibleForActivityStream();
+		}
 	}
 
 	public ActivityPhotoVoting( final User voter, final Photo photo, final Date activityTime, final Services services ) {
@@ -57,6 +62,7 @@ public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getActivityDescription() {
+
 		return TranslatorUtils.translate( "voted for photo $1"
 			, services.getEntityLinkUtilsService().getPhotoCardLink( photo )
 		);
