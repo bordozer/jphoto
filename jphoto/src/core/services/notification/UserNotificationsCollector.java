@@ -52,20 +52,6 @@ public abstract class UserNotificationsCollector {
 		return newPhotoOfSignedAuthorEmailStrategy( photo, services ).getUserNotifications();
 	}
 
-	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final Photo photo, final FavoriteEntryType favoriteEntryType ) {
-		final UserService userService = services.getUserService();
-
-		final List<UserNotification> result = newArrayList();
-
-		final List<Integer> notificationReceiverIds = services.getFavoritesService().getAllUsersIdsWhoHasThisEntryInFavorites( photo.getUserId(), favoriteEntryType );
-		for ( final int userId : notificationReceiverIds ) {
-			final User user = userService.load( userId );
-			result.add( new UserNotification( user, AbstractSendNotificationStrategy.getSendPrivateMessageStrategy( services ), getNotificationData() ) );
-		}
-
-		return result;
-	}
-
 	/* All users get Private message about event */
 	private static UserNotificationsCollector newPhotoOfFavoriteAuthorPrivateMessageStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
@@ -190,6 +176,20 @@ public abstract class UserNotificationsCollector {
 				return new NotificationData( subject, message );
 			}
 		};
+	}
+
+	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final Photo photo, final FavoriteEntryType favoriteEntryType ) {
+		final UserService userService = services.getUserService();
+
+		final List<UserNotification> result = newArrayList();
+
+		final List<Integer> notificationReceiverIds = services.getFavoritesService().getAllUsersIdsWhoHasThisEntryInFavorites( photo.getUserId(), favoriteEntryType );
+		for ( final int userId : notificationReceiverIds ) {
+			final User user = userService.load( userId );
+			result.add( new UserNotification( user, AbstractSendNotificationStrategy.getSendPrivateMessageStrategy( services ), getNotificationData() ) );
+		}
+
+		return result;
 	}
 
 	private static List<UserNotification> filterByEmailNotificationType( final UserNotificationsCollector collector, final EmailNotificationType emailNotificationType ) {
