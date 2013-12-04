@@ -65,8 +65,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Favorite Author - Private Message Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Favorite Author - Private Message Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Favorite Author - Private Message Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Favorite Author - Private Message Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -86,8 +89,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Private Message Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Friend - Private Message Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Friend - Private Message Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Friend - Private Message Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -107,8 +113,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Signed Author - Private Message Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Signed Author - Private Message Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Signed Author - Private Message Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Signed Author - Private Message Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -128,8 +137,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Favorite Author - Email Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Favorite Author - Email Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Favorite Author - Email Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Favorite Author - Email Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -149,8 +161,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Email Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Friend - Email Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Friend - Email Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Friend - Email Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -170,8 +185,11 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String subject = String.format( "New Photo Of Signed Author - Email Subject: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
-				final String message = String.format( "New Photo Of Signed Author - Email Body: %s has uploaded new photo '%s'", services.getEntityLinkUtilsService().getUserCardLink( photoAuthor ), getPhotoCardLink( photo ) );
+				final String userCardLink = getUserCardLink( photoAuthor );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New Photo Of Signed Author - Email Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String message = String.format( "New Photo Of Signed Author - Email Body: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -206,11 +224,15 @@ public abstract class UserNotificationsCollector {
 		return result;
 	}
 
+	protected User getPhotoAuthor( final Photo photo ) {
+		return services.getUserService().load( photo.getUserId() );
+	}
+
 	protected String getPhotoCardLink( final Photo photo ) {
 		return services.getEntityLinkUtilsService().getPhotoCardLink( photo );
 	}
 
-	protected User getPhotoAuthor( final Photo photo ) {
-		return services.getUserService().load( photo.getUserId() );
+	protected String getUserCardLink( final User photoAuthor ) {
+		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor );
 	}
 }
