@@ -304,12 +304,7 @@ public abstract class UserNotificationsCollector {
 			public List<UserNotification> getUserNotifications() {
 				final List<UserNotification> userNotifications = getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
 
-				CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
-					@Override
-					public boolean evaluate( final UserNotification userNotification ) {
-						return ! UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
-					}
-				} );
+				removeNotificationsAboutOwnComments( userNotifications, comment );
 
 				return userNotifications;
 			}
@@ -347,12 +342,7 @@ public abstract class UserNotificationsCollector {
 			public List<UserNotification> getUserNotifications() {
 				final List<UserNotification> userNotifications = filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
 
-				CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
-					@Override
-					public boolean evaluate( final UserNotification userNotification ) {
-						return ! UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
-					}
-				} );
+				removeNotificationsAboutOwnComments( userNotifications, comment );
 
 				return userNotifications;
 			}
@@ -380,6 +370,15 @@ public abstract class UserNotificationsCollector {
 				return new NotificationData( subject, message );
 			}
 		};
+	}
+
+	protected void removeNotificationsAboutOwnComments( final List<UserNotification> userNotifications, final PhotoComment comment ) {
+		CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
+			@Override
+			public boolean evaluate( final UserNotification userNotification ) {
+				return !UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
+			}
+		} );
 	}
 
 	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final FavoriteEntryType favoriteEntryType, final int userId ) {
