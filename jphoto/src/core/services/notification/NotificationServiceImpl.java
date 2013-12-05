@@ -34,10 +34,10 @@ public class NotificationServiceImpl implements NotificationService {
 	public void newCommentNotification( final PhotoComment comment ) {
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( comment, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, services ) );
 
 		userNotifications.addAll( UserNotificationsCollector.emailToPhotoAuthorAboutNewCommentToHisPhoto( comment, services ) );
-		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( comment, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, services ) );
 
 		sendNotifications( userNotifications );
 	}

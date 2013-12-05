@@ -59,12 +59,12 @@ public abstract class UserNotificationsCollector {
 		return emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( final PhotoComment comment, final Services services ) {
-		return privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Services services ) {
+		return privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( final PhotoComment comment, final Services services ) {
-		return emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Services services ) {
+		return emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
 	/* All users get Private message about event */
@@ -287,7 +287,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( final PhotoComment comment, final Services services ) {
+	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
@@ -321,12 +321,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( final PhotoComment comment, final Services services ) {
+	private static UserNotificationsCollector emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+				return filterByEmailNotificationType( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
 			}
 
 			@Override
