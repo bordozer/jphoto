@@ -27,13 +27,21 @@ public class NotificationServiceImpl implements NotificationService {
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendEmail( photo, services ) );
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedMemberEmail( photo, services ) );
 
-		for ( final UserNotification userNotification : userNotifications ) {
-			userNotification.sendNotifications( services );
-		}
+		sendNotifications( userNotifications );
 	}
 
 	@Override
 	public void newCommentNotification( final PhotoComment comment ) {
+		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
+		userNotifications.addAll( UserNotificationsCollector.newCommentToThePhotoAuthorEmail( comment, services ) );
+
+		sendNotifications( userNotifications );
+	}
+
+	private void sendNotifications( final Set<UserNotification> userNotifications ) {
+		for ( final UserNotification userNotification : userNotifications ) {
+			userNotification.sendNotifications( services );
+		}
 	}
 }

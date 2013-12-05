@@ -2,6 +2,7 @@ package core.services.notification;
 
 import core.enums.FavoriteEntryType;
 import core.general.photo.Photo;
+import core.general.photo.PhotoComment;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.log.LogHelper;
@@ -54,13 +55,17 @@ public abstract class UserNotificationsCollector {
 		return newPhotoOfSignedMemberEmailStrategy( photo, services ).getUserNotifications();
 	}
 
+	public static List<UserNotification> newCommentToThePhotoAuthorEmail( final PhotoComment comment, final Services services ) {
+		return newCommentToThePhotoAuthorEmailStrategy( comment, services ).getUserNotifications();
+	}
+
 	/* All users get Private message about event */
 	private static UserNotificationsCollector newPhotoOfFavoriteMemberPrivateMessageStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( photo, FavoriteEntryType.USER );
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.USER, photo.getUserId() );
 			}
 
 			@Override
@@ -75,8 +80,10 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Favorite members - Private Message Subject: One of your favorite members %s has uploaded new photo '%s'", userCardLink, photoCardLink );
-				final String message = String.format( "New Photo Of Favorite members - Private Message Body: One of your favorite members %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Favorite members - Private Message Subject: One of your favorite members %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New Photo Of Favorite members - Private Message Body: One of your favorite members %s has uploaded new photo '%s'"
+					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -89,7 +96,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( photo, FavoriteEntryType.FRIEND );
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.FRIEND, photo.getUserId() );
 			}
 
 			@Override
@@ -104,8 +111,10 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Private Message Subject: One of your friends %s has uploaded new photo '%s'", userCardLink, photoCardLink );
-				final String message = String.format( "New Photo Of Friend - Private Message Body: One of your friends %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Friend - Private Message Subject: One of your friends %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New Photo Of Friend - Private Message Body: One of your friends %s has uploaded new photo '%s'"
+					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -118,7 +127,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( photo, FavoriteEntryType.NEW_PHOTO_NOTIFICATION );
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_PHOTO_NOTIFICATION, photo.getUserId() );
 			}
 
 			@Override
@@ -133,7 +142,8 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Signed members - Private Message Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Signed members - Private Message Subject: %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "New Photo Of Signed members - Private Message Body: %s has uploaded new photo '%s'."
 													  + " You signed on new photos of this member.", userCardLink, photoCardLink );
 
@@ -163,8 +173,10 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Favorite member - Email Subject: One of your favorite member %s has uploaded new photo '%s'", userCardLink, photoCardLink );
-				final String message = String.format( "New Photo Of Favorite member - Email Body: One of your favorite member %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Favorite member - Email Subject: One of your favorite member %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New Photo Of Favorite member - Email Body: One of your favorite member %s has uploaded new photo '%s'"
+					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -192,8 +204,10 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Email Subject: One of your friend %s has uploaded new photo '%s'", userCardLink, photoCardLink );
-				final String message = String.format( "New Photo Of Friend - Email Body: One of your friend %s has uploaded new photo '%s'", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Friend - Email Subject: One of your friend %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New Photo Of Friend - Email Body: One of your friend %s has uploaded new photo '%s'"
+					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -221,23 +235,58 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Signed members - Email Subject: %s has uploaded new photo '%s'", userCardLink, photoCardLink );
-				final String message = String.format( "New Photo Of Signed members - Email Body: %s has uploaded new photo '%s'. You signed on new photos of this member.", userCardLink, photoCardLink );
+				final String subject = String.format( "New Photo Of Signed members - Email Subject: %s has uploaded new photo '%s'"
+					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New Photo Of Signed members - Email Body: %s has uploaded new photo '%s'. You signed on new photos of this member."
+					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
 		};
 	}
 
-	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final Photo photo, final FavoriteEntryType favoriteEntryType ) {
+	/* Only users set corresponding option get Email about event */
+	private static UserNotificationsCollector newCommentToThePhotoAuthorEmailStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				return newArrayList( new UserNotification( comment.getCommentAuthor(), getSendNotificationStrategy(), getNotificationData() ) );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY;
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User commentAuthor = comment.getCommentAuthor();
+
+				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
+
+				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New comment to your photo - Subject: %s has commenter your photo '%s'"
+					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New comment to your photo - Body: %s has commenter your photo '%s'"
+					, commentAuthorCardLink, photoCardLink );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final FavoriteEntryType favoriteEntryType, final int userId ) {
 		final UserService userService = services.getUserService();
 
 		final List<UserNotification> result = newArrayList();
 
-		final List<Integer> notificationReceiverIds = services.getFavoritesService().getAllUsersIdsWhoHasThisEntryInFavorites( photo.getUserId(), favoriteEntryType );
-		for ( final int userId : notificationReceiverIds ) {
-			final User user = userService.load( userId );
-			result.add( new UserNotification( user, getSendNotificationStrategy(), getNotificationData() ) );
+		final List<Integer> notificationReceiverIds = services.getFavoritesService().getAllUsersIdsWhoHasThisEntryInFavorites( userId, favoriteEntryType );
+		for ( final int userIdToNotice : notificationReceiverIds ) {
+			final User userToNotice = userService.load( userIdToNotice );
+			result.add( new UserNotification( userToNotice, getSendNotificationStrategy(), getNotificationData() ) );
 		}
 
 		return result;
