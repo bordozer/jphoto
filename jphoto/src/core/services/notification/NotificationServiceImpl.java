@@ -19,13 +19,13 @@ public class NotificationServiceImpl implements NotificationService {
 
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorPrivateMessage( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteMemberPrivateMessage( photo, services ) );
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendPrivateMessage( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorPrivateMessage( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedMemberPrivateMessage( photo, services ) );
 
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteAuthorEmail( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteMemberEmail( photo, services ) );
 		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendEmail( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedAuthorEmail( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedMemberEmail( photo, services ) );
 
 		for ( final UserNotification userNotification : userNotifications ) {
 			userNotification.sendNotifications( services );
