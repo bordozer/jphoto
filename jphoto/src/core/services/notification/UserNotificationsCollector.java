@@ -19,6 +19,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class UserNotificationsCollector {
 
+	private static final String CONTROL_EMAIL_NOTIFICATIONS_HINT = "You can control email notifications in the settings of your profile.";
+
 	protected Services services;
 
 	protected final LogHelper log = new LogHelper( this.getClass() );
@@ -90,9 +92,8 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Favorite members - Private Message Subject: One of your favorite members %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Favorite members - Private Message Body: One of your favorite members %s has uploaded new photo '%s'"
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "One of your favorite members %s has uploaded new photo '%s'."
 					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
@@ -121,9 +122,8 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Private Message Subject: One of your friends %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Friend - Private Message Body: One of your friends %s has uploaded new photo '%s'"
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "One of your friends %s has uploaded new photo '%s'"
 					, userCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
@@ -152,10 +152,45 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Signed members - Private Message Subject: %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Signed members - Private Message Body: %s has uploaded new photo '%s'."
-													  + " You signed on new photos of this member.", userCardLink, photoCardLink );
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of %s."
+					, userCardLink, photoCardLink, photoAuthor.getNameEscaped() );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	/* Only users set corresponding option get Email about event */
+	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				final List<UserNotification> userNotifications = getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
+
+				removeNotificationsAboutOwnComments( userNotifications, comment );
+
+				return userNotifications;
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User commentAuthor = comment.getCommentAuthor();
+
+				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
+
+				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "%s has commented photo '%s'.", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "%s has commented photo '%s'. You got this message because you are tracking new comments to the photo."
+					, commentAuthorCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
 			}
@@ -183,10 +218,9 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Favorite member - Email Subject: One of your favorite member %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Favorite member - Email Body: One of your favorite member %s has uploaded new photo '%s'"
-					, userCardLink, photoCardLink );
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "One of your favorite member %s has uploaded new photo '%s'. %s"
+					, userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
 
 				return new NotificationData( subject, message );
 			}
@@ -214,10 +248,8 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Friend - Email Subject: One of your friend %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Friend - Email Body: One of your friend %s has uploaded new photo '%s'"
-					, userCardLink, photoCardLink );
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "One of your friend %s has uploaded new photo '%s'. %s", userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
 
 				return new NotificationData( subject, message );
 			}
@@ -245,10 +277,9 @@ public abstract class UserNotificationsCollector {
 				final String userCardLink = getUserCardLink( photoAuthor );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New Photo Of Signed members - Email Subject: %s has uploaded new photo '%s'"
-					, photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New Photo Of Signed members - Email Body: %s has uploaded new photo '%s'. You signed on new photos of this member."
-					, userCardLink, photoCardLink );
+				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of photo author. %s"
+					, userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
 
 				return new NotificationData( subject, message );
 			}
@@ -290,48 +321,8 @@ public abstract class UserNotificationsCollector {
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New comment to your photo - Subject: %s has commented your photo '%s'"
-					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New comment to your photo - Body: %s has commented your photo '%s'"
-					, commentAuthorCardLink, photoCardLink );
-
-				return new NotificationData( subject, message );
-			}
-		};
-	}
-
-	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
-		return new UserNotificationsCollector( services ) {
-
-			@Override
-			public List<UserNotification> getUserNotifications() {
-				final List<UserNotification> userNotifications = getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
-
-				removeNotificationsAboutOwnComments( userNotifications, comment );
-
-				return userNotifications;
-			}
-
-			@Override
-			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
-				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
-			}
-
-			@Override
-			public NotificationData getNotificationData() {
-				final User commentAuthor = comment.getCommentAuthor();
-
-				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
-
-				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo );
-
-				final String subject = String.format( "New comment to photo you are tracking comments of - Private message Subject: %s has commented photo '%s'."
-					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New comment to photo you are tracking comments of - Private message Body: %s has commented photo '%s'."
-													  + " You got this comment because you are tracking new comments to the photo"
-					, commentAuthorCardLink, photoCardLink );
+				final String subject = String.format( "%s has commented your photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "%s has commented your photo '%s'. %s", commentAuthorCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
 
 				return new NotificationData( subject, message );
 			}
@@ -365,10 +356,8 @@ public abstract class UserNotificationsCollector {
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New comment to photo you are tracking comments of - Email Subject: %s has commented photo '%s'"
-					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New comment to photo you are tracking comments of - Email Body: %s has commented photo '%s'"
-													  + " You got this comment because you are tracking new comments to the photo"
+				final String subject = String.format( "%s has commented photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "%s has commented photo '%s'. You got this email because you are tracking new comments to the photo."
 					, commentAuthorCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );
