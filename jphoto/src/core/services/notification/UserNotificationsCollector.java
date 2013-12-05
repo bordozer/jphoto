@@ -264,6 +264,10 @@ public abstract class UserNotificationsCollector {
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 				final User photoAuthor = getPhotoAuthor( photo );
 
+				if ( isUserEmailNotificationOptionSwitchedOn( photoAuthor, EmailNotificationType.COMMENT_TO_USER_PHOTO ) ) {
+					return Collections.emptyList();
+				}
+
 				final boolean isPhotoAuthorCommentedHisOwnPhoto = UserUtils.isUsersEqual( photoAuthor, comment.getCommentAuthor() );
 				if ( isPhotoAuthorCommentedHisOwnPhoto ) {
 					return Collections.emptyList();
@@ -391,7 +395,7 @@ public abstract class UserNotificationsCollector {
 		CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
 			@Override
 			public boolean evaluate( final UserNotification userNotification ) {
-				return userNotification.getUser().getEmailNotificationTypes().contains( emailNotificationType );
+				return isUserEmailNotificationOptionSwitchedOn( userNotification.getUser(), emailNotificationType );
 			}
 		} );
 
@@ -417,5 +421,9 @@ public abstract class UserNotificationsCollector {
 
 	protected String getUserCardLink( final User photoAuthor ) {
 		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor );
+	}
+
+	private static boolean isUserEmailNotificationOptionSwitchedOn( final User photoAuthor, final EmailNotificationType emailNotificationType ) {
+		return photoAuthor.getEmailNotificationTypes().contains( emailNotificationType );
 	}
 }
