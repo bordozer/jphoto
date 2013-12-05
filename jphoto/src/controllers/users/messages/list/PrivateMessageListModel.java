@@ -17,6 +17,8 @@ public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	private int messagingWithUserId;
 
+	private List<String> selectedMessagesIds;
+
 	public User getForUser() {
 		return forUser;
 	}
@@ -55,5 +57,13 @@ public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	public void setMessagingWithUserId( final int messagingWithUserId ) {
 		this.messagingWithUserId = messagingWithUserId;
+	}
+
+	public List<String> getSelectedMessagesIds() {
+		return selectedMessagesIds;
+	}
+
+	public void setSelectedMessagesIds( final List<String> selectedMessagesIds ) {
+		this.selectedMessagesIds = selectedMessagesIds;
 	}
 }

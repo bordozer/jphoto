@@ -5,6 +5,8 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="messages" tagdir="/WEB-INF/tags/messages" %>
+<%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="privateMessageListModel" class="controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
 
@@ -32,67 +34,89 @@
 	<c:set var="privateMessages" value="${privateMessageListModel.privateMessages}"/>
 	<c:set var="selectedPrivateMessageTypeType" value="${privateMessageListModel.privateMessageType}"/>
 
-	<div style="float: left; width: 100%;">
+	<form:form modelAttribute="privateMessageListModel" method="POST">
 
-		<div style="float: left; width: 15%; margin-top: 80px; border-right: solid 1px #d3d3d3;">
-			<c:forEach var="communicator" items="${usersWhoCommunicatedWithUser}">
+		<div style="float: left; width: 100%;">
 
-				<c:set var="withUser" value="${communicator.withUser}"/>
+			<div style="float: left; width: 15%; margin-top: 80px; border-right: solid 1px #d3d3d3;">
+				<c:forEach var="communicator" items="${usersWhoCommunicatedWithUser}">
 
-				<c:set var="css" value=""/>
-				<c:if test="${withUser.id == privateMessageListModel.messagingWithUserId}">
-					<c:set var="css" value="selectedUser"/>
-				</c:if>
+					<c:set var="withUser" value="${communicator.withUser}"/>
 
-				<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${privateMessageListModel.forUser.id}/messages/with/${withUser.id}/" title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
-					${withUser.nameEscaped}
-				</a>
-				<br />
+					<c:set var="css" value=""/>
+					<c:if test="${withUser.id == privateMessageListModel.messagingWithUserId}">
+						<c:set var="css" value="selectedUser"/>
+					</c:if>
+
+					<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${privateMessageListModel.forUser.id}/messages/with/${withUser.id}/"
+					   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
+							${withUser.nameEscaped}
+					</a>
+					<br/>
 				<span style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3">
-					<span style="margin-left: 5px;" title="${eco:translate1('Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('Sent: $1', communicator.sentMessagesCount)}</span>
-					<br />
-					<span style="margin-left: 5px;" title="${eco:translate1('Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('Received: $1', communicator.receivedMessagesCount)}</span>
+					<span style="margin-left: 5px;"
+						  title="${eco:translate1('Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('Sent: $1', communicator.sentMessagesCount)}</span>
+					<br/>
+					<span style="margin-left: 5px;"
+						  title="${eco:translate1('Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('Received: $1', communicator.receivedMessagesCount)}</span>
 				</span>
-				<br />
-			</c:forEach>
-		</div>
+					<br/>
+				</c:forEach>
+			</div>
 
-		<div style="float: left; width: 85px">
+			<div style="float: left; width: 85px">
 
-			<table:table width="800">
-
-				<table:tr>
-					<table:td>
-						<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 70px; border-bottom: 2px solid #d3d3d3; text-align: center;">
-							<c:forEach var="privateMessageType" items="${privateMessageTypeValues}">
-								<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
-									<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}" />
-									<br />
-									${privateMessageType.nameTranslated}
-								</div>
-							</c:forEach>
-						</div>
-					</table:td>
-				</table:tr>
-
-				<c:forEach var="privateMessage" items="${privateMessages}">
+				<table:table width="800">
 
 					<table:tr>
 
 						<table:td>
-
-							<messages:privateMessageView privateMessage="${privateMessage}"/>
-
+							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 70px; border-bottom: 2px solid #d3d3d3; text-align: center;">
+								<c:forEach var="privateMessageType" items="${privateMessageTypeValues}">
+									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
+										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
+										<br/>
+											${privateMessageType.nameTranslated}
+									</div>
+								</c:forEach>
+							</div>
 						</table:td>
-
 					</table:tr>
 
-				</c:forEach>
+					<table:tr>
+						<table:td>
+							<js:checkBoxChecker namePrefix="selectedMessagesIds" />
+						</table:td>
+					</table:tr>
 
-			</table:table>
+					<c:forEach var="privateMessage" items="${privateMessages}">
+
+						<table:tr>
+
+							<table:td>
+
+								<messages:privateMessageView privateMessage="${privateMessage}"/>
+
+							</table:td>
+
+						</table:tr>
+
+					</c:forEach>
+
+					<table:trok text_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+
+				</table:table>
+
+				<script type="text/javascript">
+					function deleteSelectedPrivateMessages() {
+						return confirm( "${eco:translate('Delete selected private messages?')}" );
+					}
+				</script>
+
+			</div>
 
 		</div>
 
-	</div>
+	</form:form>
 
 </tags:page>

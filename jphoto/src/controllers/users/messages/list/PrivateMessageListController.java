@@ -7,6 +7,7 @@ import core.general.message.PrivateMessage;
 import core.services.entry.PrivateMessageService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
+import core.services.utils.UrlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import utils.ListUtils;
 import utils.NumberUtils;
 import utils.UserUtils;
 import core.services.pageTitle.PageTitleUserUtilsService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -45,6 +48,9 @@ public class PrivateMessageListController {
 
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PrivateMessageListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
@@ -115,6 +121,21 @@ public class PrivateMessageListController {
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.POST, value = "/**" )
+	public String deleteMessages( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+
+		final List<String> _selectedMessagesIds = model.getSelectedMessagesIds();
+
+		if ( _selectedMessagesIds != null ) {
+			final List<Integer> selectedMessagesIds = ListUtils.convertStringListToInteger( _selectedMessagesIds );
+			for ( final int messagesId : selectedMessagesIds ) {
+				privateMessageService.delete( messagesId );
+			}
+		}
+
+		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
 	private String getMessageView( final PrivateMessageType messageType, final PrivateMessageListModel model ) {

@@ -7,6 +7,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ attribute name="privateMessage" required="true" type="core.general.message.PrivateMessage" %>
 
@@ -18,6 +19,8 @@
 <div style="float: left; width: 90%; padding-bottom: 5px; padding-top: 5px;">
 
 	<div style="float: left; width: 100%; height: 20px; border-bottom: 1px solid #CDCDCD;">
+
+		<form:checkbox path="selectedMessagesIds" value="${privateMessage.id}" />
 
 		<html:img16 src="messages/${privateMessageType.icon}" alt="${privateMessageType.nameTranslated}" />
 
