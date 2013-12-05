@@ -31,19 +31,27 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public void send( final MailBean mailBean ) throws MessagingException {
 
+		if ( ! systemVarsService.isMailEnabled() ) {
+			return;
+		}
+
 		Security.addProvider( new com.sun.net.ssl.internal.ssl.Provider() );
 
 		final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
 
 		final Properties props = System.getProperties();
-		props.setProperty( "mail.smtps.host", "smtp.gmail.com" );
-		props.setProperty( "mail.smtp.socketFactory.class", SSL_FACTORY );
-		props.setProperty( "mail.smtp.socketFactory.fallback", "false" );
-		props.setProperty( "mail.smtp.port", "465" );
-		props.setProperty( "mail.smtp.socketFactory.port", "465" );
-		props.setProperty( "mail.smtps.auth", "true" );
+		props.setProperty( "mail.smtp.host", systemVarsService.getMailServer() );
+		props.setProperty( "mail.smtp.port", systemVarsService.getMailServerPort() );
 
-		props.put( "mail.smtps.quitwait", "false" );
+		props.setProperty( "mail.transport.protocol", "smtp" );
+		props.setProperty( "mail.smtp.connectiontimeout", systemVarsService.getMailServerTimeout() );
+		props.put( "mail.smtp.quitwait", "false" );
+
+		props.setProperty( "mail.smtp.auth", "true" );
+		props.setProperty( "mail.smtp.user", systemVarsService.getMailUser() );
+		props.setProperty( "mail.smtp.password", systemVarsService.getMailPassword() );
+
+		props.setProperty( "mail.debug", "true" );
 
 		final Session session = Session.getInstance( props, null );
 
@@ -64,13 +72,11 @@ public class MailServiceImpl implements MailService {
 		msg.setText( mailBean.getBody(), "utf-8" );
 		msg.setSentDate( dateUtilsService.getCurrentTime() );
 
-		/*
-		// TODO: switch on!!!
-		final SMTPTransport transport = ( SMTPTransport ) session.getTransport( "smtps" );
+		final SMTPTransport transport = ( SMTPTransport ) session.getTransport( "smtp" );
 
 		transport.connect( systemVarsService.getMailServer(), systemVarsService.getMailUser(), systemVarsService.getMailPassword() );
 		transport.sendMessage( msg, msg.getAllRecipients() );
-		transport.close();*/
+		transport.close();
 
 		log.debug( String.format( "%s has sent to %s the email '%s'", mailBean.getFromAddress(), mailBean.getToAddresses(), mailBean.getBody() ) );
 	}

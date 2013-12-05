@@ -1,9 +1,11 @@
 package core.services.notification;
 
+import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
+import utils.TranslatorUtils;
 
 import java.util.Set;
 
@@ -40,6 +42,17 @@ public class NotificationServiceImpl implements NotificationService {
 		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, services ) );
 
 		sendNotifications( userNotifications );
+	}
+
+	@Override
+	public void newPrivateMessage( final PrivateMessage privateMessage ) {
+		final String subject = TranslatorUtils.translate( "New private message" );
+		final String message = TranslatorUtils.translate( "$1 has sent you a private message", privateMessage.getFromUser().getNameEscaped() );
+		final NotificationData data = new NotificationData( subject, message );
+
+		final UserNotification userNotification = new UserNotification( privateMessage.getToUser(), AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY, data );
+
+		userNotification.sendNotifications( services );
 	}
 
 	private void sendNotifications( final Set<UserNotification> userNotifications ) {

@@ -1,8 +1,17 @@
 
+
 mail.email=jphoto@pop3.ru
 
-mail.smtp.server=gmail.com
+mail.email.no.reply=jphoto@pop3.ru
+
+mail.smtp.server=smtp.qip.ru
+
+mail.smtp.server.port=25
+
+mail.smtp.server.timeout=5000
 
 mail.smtp.server.user=jphoto
 
 mail.smtp.server.password=jphoto2003
+
+mail.enabled=true

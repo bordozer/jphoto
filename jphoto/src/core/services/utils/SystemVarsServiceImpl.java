@@ -153,6 +153,22 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	public String getMailPassword() {
 		return config.getString( "mail.smtp.server.password" );
 	}
+
+
+	@Override
+	public String getMailServerPort() {
+		return config.getString( "mail.smtp.server.port" );
+	}
+
+	@Override
+	public String getMailServerTimeout() {
+		return config.getString( "mail.smtp.server.timeout" );
+	}
+
+	@Override
+	public boolean isMailEnabled() {
+		return config.getBoolean( "mail.enabled" );
+	}
 	// mail properties <--
 
 	private String commonPropertiesPath() {

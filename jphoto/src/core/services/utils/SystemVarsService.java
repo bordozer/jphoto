@@ -53,4 +53,10 @@ public interface SystemVarsService {
 	String getEmail();
 
 	String getEmailNoReply();
+
+	String getMailServerPort();
+
+	String getMailServerTimeout();
+
+	boolean isMailEnabled();
 }

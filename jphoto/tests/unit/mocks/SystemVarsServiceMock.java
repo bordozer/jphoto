@@ -129,4 +129,19 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	public String getEmailNoReply() {
 		return null;
 	}
+
+	@Override
+	public String getMailServerPort() {
+		return null;
+	}
+
+	@Override
+	public String getMailServerTimeout() {
+		return null;
+	}
+
+	@Override
+	public boolean isMailEnabled() {
+		return false;
+	}
 }

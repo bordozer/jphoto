@@ -7,6 +7,7 @@ import core.general.user.User;
 import core.general.message.PrivateMessage;
 import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
+import core.services.notification.NotificationService;
 import core.services.user.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	private final LogHelper log = new LogHelper( PrivateMessageServiceImpl.class );
 
@@ -124,6 +128,15 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		if ( !isSuccessfulIn ) {
 			resultDTO.setMessage( TranslatorUtils.translate( "Error saving IN message to DB" ) );
 			privateMessageDao.delete( privateMessageOut.getId() );
+		}
+
+		if ( resultDTO.isSuccessful() ) {
+			new Thread( new Runnable() {
+				@Override
+				public void run() {
+					notificationService.newPrivateMessage( privateMessageOut );
+				}
+			} ).start();
 		}
 
 		return resultDTO;
