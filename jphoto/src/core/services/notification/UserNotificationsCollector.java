@@ -31,36 +31,44 @@ public abstract class UserNotificationsCollector {
 
 	public abstract NotificationData getNotificationData();
 
-	public static List<UserNotification> newPhotoOfFavoriteMemberPrivateMessage( final Photo photo, final Services services ) {
-		return newPhotoOfFavoriteMemberPrivateMessageStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfFriendPrivateMessage( final Photo photo, final Services services ) {
-		return newPhotoOfFriendPrivateMessageStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfSignedMemberPrivateMessage( final Photo photo, final Services services ) {
-		return newPhotoOfSignedMemberPrivateMessageStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfFavoriteMemberEmail( final Photo photo, final Services services ) {
-		return newPhotoOfFavoriteMemberEmailStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfFriendEmail( final Photo photo, final Services services ) {
-		return newPhotoOfFriendEmailStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newPhotoOfSignedMemberEmail( final Photo photo, final Services services ) {
-		return newPhotoOfSignedMemberEmailStrategy( photo, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> newCommentToThePhotoAuthorEmail( final PhotoComment comment, final Services services ) {
-		return newCommentToThePhotoAuthorEmailStrategy( comment, services ).getUserNotifications();
+	public static List<UserNotification> emailToPhotoAuthorAboutNewCommentToHisPhoto( final PhotoComment comment, final Services services ) {
+		return emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( comment, services ).getUserNotifications();
+	}
+
+	public static List<UserNotification> privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( final PhotoComment comment, final Services services ) {
+		return privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ).getUserNotifications();
+	}
+
+	public static List<UserNotification> emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( final PhotoComment comment, final Services services ) {
+		return emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector newPhotoOfFavoriteMemberPrivateMessageStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
@@ -91,7 +99,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector newPhotoOfFriendPrivateMessageStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
@@ -122,7 +130,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector newPhotoOfSignedMemberPrivateMessageStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
@@ -153,12 +161,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector newPhotoOfFavoriteMemberEmailStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( newPhotoOfFavoriteMemberPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
+				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
 			}
 
 			@Override
@@ -184,12 +192,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector newPhotoOfFriendEmailStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( newPhotoOfFriendPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
+				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
 			}
 
 			@Override
@@ -215,12 +223,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector newPhotoOfSignedMemberEmailStrategy( final Photo photo, final Services services ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( newPhotoOfFavoriteMemberPrivateMessageStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
+				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
 			}
 
 			@Override
@@ -246,7 +254,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector newCommentToThePhotoAuthorEmailStrategy( final PhotoComment comment, final Services services ) {
+	private static UserNotificationsCollector emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( final PhotoComment comment, final Services services ) {
 		return new UserNotificationsCollector( services ) {
 
 			@Override
@@ -268,9 +276,77 @@ public abstract class UserNotificationsCollector {
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 				final String photoCardLink = getPhotoCardLink( photo );
 
-				final String subject = String.format( "New comment to your photo - Subject: %s has commenter your photo '%s'"
+				final String subject = String.format( "New comment to your photo - Subject: %s has commented your photo '%s'"
 					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "New comment to your photo - Body: %s has commenter your photo '%s'"
+				final String message = String.format( "New comment to your photo - Body: %s has commented your photo '%s'"
+					, commentAuthorCardLink, photoCardLink );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	/* Only users set corresponding option get Email about event */
+	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_PRIVATE_MESSAGE_STRATEGY;
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User commentAuthor = comment.getCommentAuthor();
+
+				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
+
+				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New comment to photo you are tracking comments of - Private message Subject: %s has commented photo '%s'."
+					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New comment to photo you are tracking comments of - Private message Body: %s has commented photo '%s'."
+													  + " You got this comment because you are tracking new comments to the photo"
+					, commentAuthorCardLink, photoCardLink );
+
+				return new NotificationData( subject, message );
+			}
+		};
+	}
+
+	/* Only users set corresponding option get Email about event */
+	private static UserNotificationsCollector emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
+
+			@Override
+			public List<UserNotification> getUserNotifications() {
+				return filterByEmailNotificationType( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+			}
+
+			@Override
+			public AbstractSendNotificationStrategy getSendNotificationStrategy() {
+				return AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY;
+			}
+
+			@Override
+			public NotificationData getNotificationData() {
+				final User commentAuthor = comment.getCommentAuthor();
+
+				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
+
+				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
+				final String photoCardLink = getPhotoCardLink( photo );
+
+				final String subject = String.format( "New comment to photo you are tracking comments of - Email Subject: %s has commented photo '%s'"
+					, commentAuthor.getNameEscaped(), photo.getNameEscaped() );
+				final String message = String.format( "New comment to photo you are tracking comments of - Email Body: %s has commented photo '%s'"
+													  + " You got this comment because you are tracking new comments to the photo"
 					, commentAuthorCardLink, photoCardLink );
 
 				return new NotificationData( subject, message );

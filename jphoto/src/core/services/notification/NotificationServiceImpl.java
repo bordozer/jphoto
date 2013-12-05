@@ -19,13 +19,13 @@ public class NotificationServiceImpl implements NotificationService {
 
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteMemberPrivateMessage( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendPrivateMessage( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedMemberPrivateMessage( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, services ) );
 
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFavoriteMemberEmail( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfFriendEmail( photo, services ) );
-		userNotifications.addAll( UserNotificationsCollector.newPhotoOfSignedMemberEmail( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, services ) );
 
 		sendNotifications( userNotifications );
 	}
@@ -34,7 +34,10 @@ public class NotificationServiceImpl implements NotificationService {
 	public void newCommentNotification( final PhotoComment comment ) {
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.newCommentToThePhotoAuthorEmail( comment, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( comment, services ) );
+
+		userNotifications.addAll( UserNotificationsCollector.emailToPhotoAuthorAboutNewCommentToHisPhoto( comment, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToPhoto( comment, services ) );
 
 		sendNotifications( userNotifications );
 	}

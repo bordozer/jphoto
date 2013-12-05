@@ -8,6 +8,20 @@ public abstract class AbstractSendNotificationStrategy {
 
 	public abstract void sendNotifications( final UserNotification userNotification, final Services services );
 
+	public abstract SendStrategyType getStrategyType();
+
+	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
+		@Override
+		public void sendNotifications( final UserNotification userNotification, final Services services ) {
+			services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, userNotification.getNotificationData().getMessage() );
+		}
+
+		@Override
+		public SendStrategyType getStrategyType() {
+			return SendStrategyType.PRIVATE_MESSAGE;
+		}
+	};
+
 	public static final AbstractSendNotificationStrategy SEND_EMAIL_STRATEGY = new AbstractSendNotificationStrategy() {
 		@Override
 		public void sendNotifications( final UserNotification userNotification, final Services services ) {
@@ -23,12 +37,10 @@ public abstract class AbstractSendNotificationStrategy {
 
 			services.getMailService().sendNoException( mail );
 		}
-	};
 
-	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
 		@Override
-		public void sendNotifications( final UserNotification userNotification, final Services services ) {
-			services.getPrivateMessageService().send( null, userNotification.getUser(), PrivateMessageType.SYSTEM_INFORMATION, userNotification.getNotificationData().getMessage() );
+		public SendStrategyType getStrategyType() {
+			return SendStrategyType.EMAIL;
 		}
 	};
 }

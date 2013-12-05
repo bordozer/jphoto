@@ -33,7 +33,7 @@ public class UserNotification {
 
 	@Override
 	public int hashCode() {
-		return user.hashCode() + sendNotificationStrategy.hashCode();
+		return user.hashCode() + sendNotificationStrategy.getStrategyType().hashCode();
 	}
 
 	@Override
@@ -56,6 +56,6 @@ public class UserNotification {
 
 	@Override
 	public String toString() {
-		return String.format( "%s - Notification Data", user );
+		return String.format( "%s to %s", sendNotificationStrategy.getStrategyType(), user );
 	}
 }
