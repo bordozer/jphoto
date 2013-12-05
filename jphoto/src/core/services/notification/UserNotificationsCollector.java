@@ -168,7 +168,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
 			}
 
 			@Override
@@ -199,7 +199,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
 			}
 
 			@Override
@@ -230,7 +230,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
 			}
 
 			@Override
@@ -340,7 +340,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				final List<UserNotification> userNotifications = filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+				final List<UserNotification> userNotifications = removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications(), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
 
 				removeNotificationsAboutOwnComments( userNotifications, comment );
 
@@ -372,15 +372,6 @@ public abstract class UserNotificationsCollector {
 		};
 	}
 
-	protected void removeNotificationsAboutOwnComments( final List<UserNotification> userNotifications, final PhotoComment comment ) {
-		CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
-			@Override
-			public boolean evaluate( final UserNotification userNotification ) {
-				return !UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
-			}
-		} );
-	}
-
 	protected List<UserNotification> getNewPhotoUserNotificationForFavoriteType( final FavoriteEntryType favoriteEntryType, final int userId ) {
 		final UserService userService = services.getUserService();
 
@@ -395,18 +386,25 @@ public abstract class UserNotificationsCollector {
 		return result;
 	}
 
-	private static List<UserNotification> filterThouseWhoDoNotWantToGetEmailAboutEvent( final UserNotificationsCollector collector, final EmailNotificationType emailNotificationType ) {
+	private static List<UserNotification> removeThoseWhoDoNotWantToGetEmailAboutEvent( final List<UserNotification> userNotifications, final EmailNotificationType emailNotificationType ) {
 
-		final List<UserNotification> result = collector.getUserNotifications();
-
-		CollectionUtils.filter( result, new Predicate<UserNotification>() {
+		CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
 			@Override
 			public boolean evaluate( final UserNotification userNotification ) {
 				return userNotification.getUser().getEmailNotificationTypes().contains( emailNotificationType );
 			}
 		} );
 
-		return result;
+		return userNotifications;
+	}
+
+	protected void removeNotificationsAboutOwnComments( final List<UserNotification> userNotifications, final PhotoComment comment ) {
+		CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
+			@Override
+			public boolean evaluate( final UserNotification userNotification ) {
+				return !UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
+			}
+		} );
 	}
 
 	protected User getPhotoAuthor( final Photo photo ) {
