@@ -10,7 +10,9 @@ import core.services.security.Services;
 import core.services.user.UserService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
+import utils.UserUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -166,7 +168,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
+				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
 			}
 
 			@Override
@@ -197,7 +199,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
+				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
 			}
 
 			@Override
@@ -228,7 +230,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
+				return filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
 			}
 
 			@Override
@@ -259,7 +261,15 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return newArrayList( new UserNotification( comment.getCommentAuthor(), getSendNotificationStrategy(), getNotificationData() ) );
+				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
+				final User photoAuthor = getPhotoAuthor( photo );
+
+				final boolean isPhotoAuthorCommentedHisOwnPhoto = UserUtils.isUsersEqual( photoAuthor, comment.getCommentAuthor() );
+				if ( isPhotoAuthorCommentedHisOwnPhoto ) {
+					return Collections.emptyList();
+				}
+
+				return newArrayList( new UserNotification( photoAuthor, getSendNotificationStrategy(), getNotificationData() ) );
 			}
 
 			@Override
@@ -292,7 +302,16 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
+				final List<UserNotification> userNotifications = getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, comment.getPhotoId() );
+
+				CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
+					@Override
+					public boolean evaluate( final UserNotification userNotification ) {
+						return ! UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
+					}
+				} );
+
+				return userNotifications;
 			}
 
 			@Override
@@ -326,7 +345,16 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return filterByEmailNotificationType( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+				final List<UserNotification> userNotifications = filterThouseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+
+				CollectionUtils.filter( userNotifications, new Predicate<UserNotification>() {
+					@Override
+					public boolean evaluate( final UserNotification userNotification ) {
+						return ! UserUtils.isUsersEqual( userNotification.getUser(), comment.getCommentAuthor() );
+					}
+				} );
+
+				return userNotifications;
 			}
 
 			@Override
@@ -368,7 +396,7 @@ public abstract class UserNotificationsCollector {
 		return result;
 	}
 
-	private static List<UserNotification> filterByEmailNotificationType( final UserNotificationsCollector collector, final EmailNotificationType emailNotificationType ) {
+	private static List<UserNotification> filterThouseWhoDoNotWantToGetEmailAboutEvent( final UserNotificationsCollector collector, final EmailNotificationType emailNotificationType ) {
 
 		final List<UserNotification> result = collector.getUserNotifications();
 
