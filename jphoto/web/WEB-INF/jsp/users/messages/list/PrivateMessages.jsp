@@ -71,7 +71,7 @@
 					<table:tr>
 
 						<table:td>
-							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 70px; border-bottom: 2px solid #d3d3d3; text-align: center;">
+							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 74px; border-bottom: 2px solid #d3d3d3; text-align: center;">
 								<c:forEach var="privateMessageType" items="${privateMessageTypeValues}">
 									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
@@ -85,7 +85,7 @@
 
 					<table:tr>
 						<table:td>
-							<js:checkBoxChecker namePrefix="selectedMessagesIds" />
+							<js:checkBoxChecker namePrefix="selectedMessagesIds"/>
 						</table:td>
 					</table:tr>
 
@@ -103,7 +103,7 @@
 
 					</c:forEach>
 
-					<table:trok text_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+					<table:trok text_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();"/>
 
 				</table:table>
 
