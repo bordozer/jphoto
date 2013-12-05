@@ -6,11 +6,11 @@ import utils.TranslatorUtils;
 
 public enum EmailNotificationType implements Identifiable {
 
-	NEW_PHOTO_OF_FAVORITE_MEMBER( 1, "New photo of favorite members" )
-	, NEW_PHOTO_OF_FRIEND( 8, "New photo of friend member " )
-	, NEW_PHOTO_OF_TRACKING_MEMBER( 4, "New uploaded photo of member you signed on new photos" )
+	NEW_PHOTO_OF_FAVORITE_MEMBER( 1, "New photo of one of your favorite members" )
+	, NEW_PHOTO_OF_FRIEND( 8, "New photo of your friend" )
+	, NEW_PHOTO_OF_TRACKING_MEMBER( 4, "New photo of member who's new photos you are tracking" )
 	, COMMENT_TO_USER_PHOTO( 2, "New comment to your photo" )
-	, COMMENT_TO_TRACKING_PHOTO( 3, "New comment to photo you signed" )
+	, COMMENT_TO_TRACKING_PHOTO( 3, "New comment to photo which comments you are tracking" )
 	, PRIVATE_MESSAGE( 5, "New private message" )
 	, ADMIN_MESSAGE( 6, "Messages from admin" )
 	, SYSTEM_INFORMATION( 7, "Messages from system" )
