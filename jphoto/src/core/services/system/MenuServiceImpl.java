@@ -290,7 +290,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userDataMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Data" );
+		final String caption = TranslatorUtils.translate( "Profile settings" );
 		final String link = urlUtilsService.getUserEditLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
