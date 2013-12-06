@@ -4,17 +4,17 @@ import utils.TranslatorUtils;
 
 public enum ConfigurationKey {
 
-	SYSTEM_LOGIN_MIN_LENGTH( 100, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Minimal length of member login" )
+	SYSTEM_SESSION_TIMEOUT_IN_MINUTES( 110, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MIN, ConfigurationTab.SYSTEM, "Session timeout in minutes" )
+	, SYSTEM_AUTO_START_SCHEDULER( 106, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Auto start scheduler when worker starts" )
+	, SYSTEM_LOGIN_MIN_LENGTH( 100, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Minimal length of member login" )
 	, SYSTEM_LOGIN_MAX_LENGTH( 101, "20", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of member login" )
 	, SYSTEM_USER_NAME_MIN_LENGTH( 102, "8", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Minimal length of member name" )
 	, SYSTEM_USER_NAME_MAX_LENGTH( 103, "30", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of member name" )
 	, SYSTEM_PHOTO_NAME_MAX_LENGTH( 104, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of photo name (DB limit is 255)" )
 	, SYSTEM_SHOW_UI_MENU_GO_TO_PHOTOS_FOR_OWN_ENTRIES( 105, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Show menu items 'Go to photos...' for own entries" )
-	, SYSTEM_AUTO_START_SCHEDULER( 106, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Auto start scheduler when worker starts" )
 	, SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH( 107, "15", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Portal page activity stream length" )
 	, SYSTEM_ACTIVITY_LOG_PHOTO_PREVIEWS( 108, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log photo preview activity" )
 	, SYSTEM_ACTIVITY_LOG_FAVORITE_ACTIONS( 109, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log favorite actions activity" )
-	, SYSTEM_SESSION_TIMEOUT_IN_MINUTES( 110, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MIN, ConfigurationTab.SYSTEM, "Session timeout in minutes" )
 
 	, MEMBERS_FILE_MAX_SIZE_KB( 200, "500", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Members max size of uploading file" )
 	, MEMBERS_DAILY_FILE_SIZE_LIMIT( 201, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Max summary photos size that allowed to upload daily" )
@@ -42,9 +42,9 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" )
 	, PHOTO_UPLOAD_ANONYMOUS_NAME( 408, "Anonymous posting", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous posting name" )
 
+	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
 	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
-	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
 
 	, PHOTO_USER_CARD_PHOTOS_IN_LINE( 502, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Member card: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE( 503, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty" )
