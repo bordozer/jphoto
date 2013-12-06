@@ -1,12 +1,12 @@
 package core.services.mail;
 
 import com.sun.mail.smtp.SMTPTransport;
+import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
+import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -16,42 +16,40 @@ import javax.mail.internet.MimeMessage;
 import java.security.Security;
 import java.util.Properties;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class MailServiceImpl implements MailService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private SystemVarsService systemVarsService;
+	private ConfigurationService configurationService;
 
 	protected final LogHelper log = new LogHelper( MailServiceImpl.class );
 
 	@Override
 	public void send( final MailBean mailBean ) throws MessagingException {
 
-		if ( ! systemVarsService.isMailEnabled() ) {
+		if ( ! configurationService.getBoolean( ConfigurationKey.EMAILING_ENABLED ) ) {
 			return;
 		}
 
 		Security.addProvider( new com.sun.net.ssl.internal.ssl.Provider() );
 
-		final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+		final String transportProtocol = configurationService.getString( ConfigurationKey.EMAILING_TRANSPORT_PROTOCOL );
 
 		final Properties props = System.getProperties();
-		props.setProperty( "mail.smtp.host", systemVarsService.getMailServer() );
-		props.setProperty( "mail.smtp.port", systemVarsService.getMailServerPort() );
+		props.setProperty( "mail.transportProtocol.host", configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER ) );
+		props.setProperty( "mail.transportProtocol.port", configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_PORT ) );
 
-		props.setProperty( "mail.transport.protocol", "smtp" );
-		props.setProperty( "mail.smtp.connectiontimeout", systemVarsService.getMailServerTimeout() );
-		props.put( "mail.smtp.quitwait", "false" );
+		props.setProperty( "mail.transport.protocol", transportProtocol );
+		props.setProperty( "mail.transportProtocol.connectiontimeout", configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_TIMEOUT ) );
+		props.put( "mail.transportProtocol.quitwait", "false" );
 
-		props.setProperty( "mail.smtp.auth", "true" );
-		props.setProperty( "mail.smtp.user", systemVarsService.getMailUser() );
-		props.setProperty( "mail.smtp.password", systemVarsService.getMailPassword() );
+		props.setProperty( "mail.transportProtocol.auth", "true" );
+		props.setProperty( "mail.transportProtocol.user", configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_USER ) );
+		props.setProperty( "mail.transportProtocol.password", configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_PASSWORD ) );
 
-		props.setProperty( "mail.debug", "true" );
+		props.setProperty( "mail.debug", String.valueOf( configurationService.getBoolean( ConfigurationKey.EMAILING_SMTP_DEBUG_MODE ) ) );
 
 		final Session session = Session.getInstance( props, null );
 
@@ -72,9 +70,13 @@ public class MailServiceImpl implements MailService {
 		msg.setText( mailBean.getBody(), "utf-8" );
 		msg.setSentDate( dateUtilsService.getCurrentTime() );
 
-		final SMTPTransport transport = ( SMTPTransport ) session.getTransport( "smtp" );
+		final SMTPTransport transport = ( SMTPTransport ) session.getTransport( transportProtocol );
 
-		transport.connect( systemVarsService.getMailServer(), systemVarsService.getMailUser(), systemVarsService.getMailPassword() );
+		transport.connect( configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER )
+			, configurationService.getInt( ConfigurationKey.EMAILING_SMTP_SERVER_PORT )
+			, configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_USER )
+			, configurationService.getString( ConfigurationKey.EMAILING_SMTP_SERVER_PASSWORD )
+		);
 		transport.sendMessage( msg, msg.getAllRecipients() );
 		transport.close();
 

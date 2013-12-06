@@ -17,6 +17,7 @@ public enum ConfigurationTab {
 	, RANK_VOTING( "rankVoting", "Voting for members' ranks in genres" )
 	, CACHE( "cache", "Cache" )
 	, ADMIN( "admin", "Admin" )
+	, EMAILING( "emailing", "Emailing" )
 	;
 
 	private final String key;

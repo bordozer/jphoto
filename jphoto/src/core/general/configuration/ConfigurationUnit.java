@@ -14,6 +14,7 @@ public enum ConfigurationUnit {
 	, PHOTO( 6, "Photos" )
 	, MIN( 7, "Minutes" )
 	, SECOND( 8, "Seconds" )
+	, MILLISECOND( 8, "Milliseconds" )
 	, VOICE( 9, "Voices" )
 	, KILOBYTE( 10, "Kb" )
 	, MEGABYTE( 11, "Mb" )

@@ -95,6 +95,17 @@ public enum ConfigurationKey {
 	, ADMIN_CAN_EDIT_OTHER_PHOTOS( 1021, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit other photos" )
 	, ADMIN_CAN_DELETE_OTHER_PHOTOS( 1022, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can delete other photos" )
 	, ADMIN_JOB_HISTORY_ITEMS_ON_PAGE( 1023, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.ADMIN, "Job history items on page" )
+
+	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
+	, EMAILING_ADMIN_EMAIL( 1301, "jphoto@pop3.ru", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Admin email write to" )
+	, EMAILING_NO_REPLY_EMAIL( 1302, "jphoto@pop3.ru", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "No reply email" )
+	, EMAILING_SMTP_SERVER( 1303, "smtp.qip.ru", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server" )
+	, EMAILING_TRANSPORT_PROTOCOL( 1309, "smtp", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Transport protocol" )
+	, EMAILING_SMTP_SERVER_PORT( 1304, "2525", false, ConfigurationDataType.INTEGER, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server port" )
+	, EMAILING_SMTP_SERVER_TIMEOUT( 1305, "5000", false, ConfigurationDataType.STRING, ConfigurationUnit.MILLISECOND, ConfigurationTab.EMAILING, "SMTP server timeout, milliseconds" )
+	, EMAILING_SMTP_SERVER_USER( 1306, "jphoto@pop3.ru", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server user" )
+	, EMAILING_SMTP_SERVER_PASSWORD( 1307, "jphoto2003", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server password" )
+	, EMAILING_SMTP_DEBUG_MODE( 1308, "jphoto2003", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP debug mode" )
 	;
 
 	private final int id;

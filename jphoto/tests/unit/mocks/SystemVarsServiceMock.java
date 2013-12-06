@@ -101,47 +101,7 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public String getMailServer() {
-		return null;
-	}
-
-	@Override
-	public String getMailUser() {
-		return null;
-	}
-
-	@Override
-	public String getMailPassword() {
-		return null;
-	}
-
-	@Override
-	public String getEmail() {
-		return null;
-	}
-
-	@Override
 	public boolean isDevMode() {
 		return true;
-	}
-
-	@Override
-	public String getEmailNoReply() {
-		return null;
-	}
-
-	@Override
-	public String getMailServerPort() {
-		return null;
-	}
-
-	@Override
-	public String getMailServerTimeout() {
-		return null;
-	}
-
-	@Override
-	public boolean isMailEnabled() {
-		return false;
 	}
 }

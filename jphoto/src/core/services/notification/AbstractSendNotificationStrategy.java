@@ -1,6 +1,7 @@
 package core.services.notification;
 
 import core.enums.PrivateMessageType;
+import core.general.configuration.ConfigurationKey;
 import core.services.mail.MailBean;
 import core.services.security.Services;
 
@@ -27,8 +28,8 @@ public abstract class AbstractSendNotificationStrategy {
 		public void sendNotifications( final UserNotification userNotification, final Services services ) {
 			final MailBean mail = new MailBean();
 
-			mail.setToAddress( services.getSystemVarsService().getEmailNoReply() ); // TODO: userNotification.getUser().getEmail()
-			mail.setFromAddress( services.getSystemVarsService().getEmailNoReply() );
+			mail.setToAddress( services.getConfigurationService().getString( ConfigurationKey.EMAILING_NO_REPLY_EMAIL ) ); // TODO: userNotification.getUser().getEmail()
+			mail.setFromAddress( services.getConfigurationService().getString( ConfigurationKey.EMAILING_NO_REPLY_EMAIL ) );
 
 			final NotificationData notificationData = userNotification.getNotificationData();
 

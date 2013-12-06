@@ -43,20 +43,4 @@ public interface SystemVarsService {
 	boolean isDevMode();
 
 	String getDatabaseName();
-
-	String getMailServer();
-
-	String getMailUser();
-
-	String getMailPassword();
-
-	String getEmail();
-
-	String getEmailNoReply();
-
-	String getMailServerPort();
-
-	String getMailServerTimeout();
-
-	boolean isMailEnabled();
 }

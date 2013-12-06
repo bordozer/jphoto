@@ -22,7 +22,7 @@
 <c:set var="title" value="${configurationKey.dataType.nameTranslated}: ${value} ${unit.nameTranslated}" />
 
 <c:if test="${dataType == 'STRING' || isCheckboxDataType}">
-	<c:set var="align" value="center" />
+	<c:set var="align" value="left" />
 </c:if>
 
 <c:if test="${dataType == 'INTEGER' || dataType == 'BYTE' || dataType == 'FLOAT' || isCheckboxDataType}">
@@ -36,7 +36,7 @@
 </c:if>
 
 <c:if test="${dataType == 'ARRAY_OF_STRINGS' || dataType == 'ARRAY_OF_INTEGERS'}">
-	<c:set var="align" value="center" />
+	<c:set var="align" value="left" />
 
 	<c:forEach var="arrayElement" items="${arrayElements}" varStatus="status">
 		<c:if test="${status.first}">

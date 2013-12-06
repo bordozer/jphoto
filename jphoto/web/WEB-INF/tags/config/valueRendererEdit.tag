@@ -22,7 +22,7 @@
 
 <c:if test="${dataType == 'STRING'}">
 	<c:set var="align" value="center" />
-	<c:set var="size" value="10" />
+	<c:set var="size" value="25" />
 </c:if>
 
 <c:if test="${dataType == 'INTEGER' || dataType == 'BYTE' || dataType == 'FLOAT'}">

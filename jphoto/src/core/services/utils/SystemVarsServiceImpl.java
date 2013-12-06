@@ -19,13 +19,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 		final File systemPropertiesFile = new File( String.format( "%s/System.properties", commonPropertiesPath() ) );
 		final File photoPropertiesFile = new File( String.format( "%s/Photo.properties", commonPropertiesPath() ) );
 		final File dbPropertiesFile = new File( String.format( "%s/Database.properties", commonPropertiesPath() ) );
-		final File nailPropertiesFile = new File( String.format( "%s/Mail.properties", commonPropertiesPath() ) );
 
 		config.addConfiguration( new PropertiesConfiguration( basePropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( systemPropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( photoPropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( dbPropertiesFile ) );
-		config.addConfiguration( new PropertiesConfiguration( nailPropertiesFile ) );
 	}
 
 	// Base properties -->
@@ -127,49 +125,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	public String getDatabaseName() {
 		return config.getString( "Database" );
 	}
-
-	// mail properties -->
-	@Override
-	public String getEmail() {
-		return config.getString( "mail.email" );
-	}
-
-	@Override
-	public String getEmailNoReply() {
-		return config.getString( "mail.email.no.reply" );
-	}
-
-	@Override
-	public String getMailServer() {
-		return config.getString( "mail.smtp.server" );
-	}
-
-	@Override
-	public String getMailUser() {
-		return config.getString( "mail.smtp.server.user" );
-	}
-
-	@Override
-	public String getMailPassword() {
-		return config.getString( "mail.smtp.server.password" );
-	}
-
-
-	@Override
-	public String getMailServerPort() {
-		return config.getString( "mail.smtp.server.port" );
-	}
-
-	@Override
-	public String getMailServerTimeout() {
-		return config.getString( "mail.smtp.server.timeout" );
-	}
-
-	@Override
-	public boolean isMailEnabled() {
-		return config.getBoolean( "mail.enabled" );
-	}
-	// mail properties <--
 
 	private String commonPropertiesPath() {
 		return "../properties";
