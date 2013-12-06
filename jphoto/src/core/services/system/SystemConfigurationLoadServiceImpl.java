@@ -2,11 +2,14 @@ package core.services.system;
 
 import core.exceptions.BaseRuntimeException;
 import core.general.configuration.Configuration;
+import core.general.configuration.ConfigurationKey;
 import core.general.configuration.SystemConfiguration;
 import core.services.dao.ConfigurationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLoadService {
 
@@ -38,29 +41,43 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 	@Override
 	public SystemConfiguration load( final int systemConfigurationId ) {
 		final SystemConfiguration systemConfiguration = configurationDao.load( systemConfigurationId );
-		final List<Configuration> beingSavedConfigurations = configurationDao.loadConfigurations( systemConfigurationId );
+		final List<Configuration> configurations = configurationDao.loadConfigurations( systemConfigurationId );
 
 		if ( systemConfiguration == null ) {
 			return null;
 		}
 
 		if ( systemConfiguration.isDefaultConfiguration() ) {
-			for ( final Configuration configuration : beingSavedConfigurations ) {
+			for ( final Configuration configuration : configurations ) {
 				configuration.setGotFromDefaultSystemConfiguration( true );
 			}
 		} else {
 			final SystemConfiguration defaultSystemConfiguration = getDefaultSystemConfiguration();
 			final List<Configuration> defaultConfigurations = defaultSystemConfiguration.getConfigurations();
 			for ( final Configuration defaultConfiguration : defaultConfigurations ) {
-				if ( ! containsConfiguration( beingSavedConfigurations, defaultConfiguration ) ) {
-					beingSavedConfigurations.add( defaultConfiguration );
+				if ( ! containsConfiguration( configurations, defaultConfiguration ) ) {
+					configurations.add( defaultConfiguration );
 				}
 			}
 		}
 
-		systemConfiguration.setConfigurations( beingSavedConfigurations );
+		systemConfiguration.setConfigurations( getConfigurationSorted( configurations ) );
 
 		return systemConfiguration;
+	}
+
+	private List<Configuration> getConfigurationSorted( final List<Configuration> configurations ) {
+		final List<Configuration> sortedConfigurations = newArrayList();
+
+		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
+			for ( final Configuration configuration : configurations ) {
+				if ( configuration.getConfigurationKey().equals( configurationKey ) ) {
+					sortedConfigurations.add( configuration );
+					break;
+				}
+			}
+		}
+		return sortedConfigurations;
 	}
 
 	private boolean containsConfiguration( final List<Configuration> configurations, final Configuration beingCheckedConfiguration ) {
