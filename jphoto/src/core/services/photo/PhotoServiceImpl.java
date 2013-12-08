@@ -408,6 +408,8 @@ public class PhotoServiceImpl implements PhotoService {
 		photoInfo.setSuperAdminUser( securityService.isSuperAdminUser( accessor.getId() ) );
 		photoInfo.setCommentsCount( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 
+		photoInfo.setShowStatistic( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
+
 		return photoInfo;
 	}
 
@@ -469,17 +471,13 @@ public class PhotoServiceImpl implements PhotoService {
 		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
 		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
 
-		final boolean showStatistic = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC );
-		photoInfo.setShowStatistic( showStatistic );
-		if ( showStatistic ) {
-			photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
+		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
 
-			photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
+		photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
 
-			photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
+		photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
 
-			photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
-		}
+		photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
 
 		photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
 		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );

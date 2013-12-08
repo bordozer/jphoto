@@ -39,8 +39,6 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 			throw new BaseRuntimeException( "Can not save configuration" );
 		}
 
-		cacheService.expire( CacheKey.PHOTO_INFO ); // Need to reload PhotoInfo statistic (marks/previews/comments) because thay are cachable
-
 		return result;
 	}
 
