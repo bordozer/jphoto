@@ -408,7 +408,8 @@ public class PhotoServiceImpl implements PhotoService {
 		photoInfo.setSuperAdminUser( securityService.isSuperAdminUser( accessor.getId() ) );
 		photoInfo.setCommentsCount( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 
-		photoInfo.setShowStatistic( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
+		photoInfo.setShowStatisticInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
+		photoInfo.setShowUserRankInGenreInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) );
 
 		return photoInfo;
 	}

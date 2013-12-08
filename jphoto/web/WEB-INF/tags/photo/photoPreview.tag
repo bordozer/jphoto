@@ -111,7 +111,7 @@
 
 	</div>
 
-	<c:if test="${photoInfo.showStatistic}">
+	<c:if test="${photoInfo.showStatisticInPhotoList}">
 		<div class="containerPhotoLine" style="font-size: 90%;">
 			<span title="${eco:translate1('Today\'s marks', days )}"><b>${photoInfo.todayMarks}</b></span>
 			/
@@ -152,9 +152,11 @@
 							 hideIconSendPrivateMessage="true"
 					/>--%>
 		</div>
-		<div class="containerPhotoLine">
-			<user:userRankInGenre user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photo.userGenreRank}" />
-		</div>
+		<c:if test="${photoInfo.showUserRankInGenreInPhotoList}">
+			<div class="containerPhotoLine">
+				<user:userRankInGenre user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photo.userGenreRank}" />
+			</div>
+		</c:if>
 	</c:if>
 
 	<c:if test="${photoInfo.photoAuthorNameMustBeHidden}">

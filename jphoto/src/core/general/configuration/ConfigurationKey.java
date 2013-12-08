@@ -52,6 +52,7 @@ public enum ConfigurationKey {
 	, PHOTO_LIST_PHOTO_LINES( 505, "6", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default row qty" )
 	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
 	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
+	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show user rank in genre" )
 
 	, RANK_VOTING_FIRST_RANK_POINTS( 601, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.VOICE, ConfigurationTab.RANK_VOTING, "First rank points" )
 	, RANK_VOTING_POINTS_BASE_STEP( 602, "6", true, ConfigurationDataType.INTEGER, ConfigurationUnit.EMPTY, ConfigurationTab.RANK_VOTING, "Rank voting base step points" )
