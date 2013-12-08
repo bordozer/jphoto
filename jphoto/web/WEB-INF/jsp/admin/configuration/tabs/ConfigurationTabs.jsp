@@ -62,7 +62,7 @@
 
 						<c:if test="${configurationKey.tab == configurationTab}">
 							<table:tr>
-								<table:td>
+								<table:tdunderlined>
 									<c:if test="${not gotFromDefaultSystemConfiguration}">
 										<html:img id="conf_${configurationKey.id}" src="edited16.png" width="16" height="16" alt="${eco:translate('Overrides value of default system configuration.')}" />
 									</c:if>
@@ -75,7 +75,7 @@
 											<html:img id="conf_${configurationKey.id}" src="icons16/noteditable.png" width="16" height="16" alt="${eco:translate('Editable only for default system configuration')}" />
 										</c:if>
 									</c:if>
-								</table:td>
+								</table:tdunderlined>
 
 								<table:tdunderlined cssClass="textcentered">
 									<span title="${eco:translate1('Configuration key ID: #$1', configurationKey.id)}">${configurationKey.id}</span>
