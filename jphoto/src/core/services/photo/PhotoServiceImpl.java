@@ -378,7 +378,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final PhotoInfo photoInfo = cacheServicePhotoInfo.getEntry( CacheKey.PHOTO_INFO, photo.getId(), new CacheEntryFactory<PhotoInfo>() {
 			@Override
 			public PhotoInfo createEntry() {
-				return loadCashablePhotoInfoPart( photo );
+				return loadCachablePhotoInfoPart( photo );
 			}
 		} );
 
@@ -457,7 +457,7 @@ public class PhotoServiceImpl implements PhotoService {
 		return photoDao.getLastUserPhoto( userId );
 	}
 
-	private PhotoInfo loadCashablePhotoInfoPart( final Photo photo ) {
+	private PhotoInfo loadCachablePhotoInfoPart( final Photo photo ) {
 		final int photoId = photo.getId();
 		final PhotoInfo photoInfo = new PhotoInfo( photo );
 
@@ -469,13 +469,17 @@ public class PhotoServiceImpl implements PhotoService {
 		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
 		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
 
-		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
+		final boolean showStatistic = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC );
+		photoInfo.setShowStatistic( showStatistic );
+		if ( showStatistic ) {
+			photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
 
-		photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
+			photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
 
-		photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
+			photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
 
-		photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
+			photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
+		}
 
 		photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
 		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
