@@ -17,7 +17,7 @@
 
 <tags:page pageModel="${jobModelUsers.pageModel}">
 
-	<admin:jobStart jobModel="${jobModelUsers}" />
+	<admin:jobEditData jobModel="${jobModelUsers}" />
 
 	<eco:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModelUsers.job.jobType.prefix}/">
 

@@ -16,7 +16,7 @@
 
 <tags:page pageModel="${activityStreamCleanupJobModel.pageModel}">
 
-	<admin:jobStart jobModel="${activityStreamCleanupJobModel}"/>
+	<admin:jobEditData jobModel="${activityStreamCleanupJobModel}"/>
 
 	<form:form modelAttribute="activityStreamCleanupJobModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/jobs/${savedJob.jobType.prefix}/" id="FormName" name="FormName">
 

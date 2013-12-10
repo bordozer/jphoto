@@ -20,7 +20,7 @@
 
 <tags:page pageModel="${favoritesJobModel.pageModel}">
 
-	<admin:jobStart jobModel="${favoritesJobModel}"/>
+	<admin:jobEditData jobModel="${favoritesJobModel}"/>
 
 	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${favoritesJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
 

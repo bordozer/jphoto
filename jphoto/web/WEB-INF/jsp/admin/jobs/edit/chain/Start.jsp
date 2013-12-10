@@ -25,7 +25,7 @@
 
 	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobChainJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
 
-		<admin:jobStart jobModel="${jobChainJobModel}" />
+		<admin:jobEditData jobModel="${jobChainJobModel}" />
 
 		<table:table width="800">
 

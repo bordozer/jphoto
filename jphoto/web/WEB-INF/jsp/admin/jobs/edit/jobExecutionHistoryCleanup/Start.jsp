@@ -22,7 +22,7 @@
 
 <tags:page pageModel="${jobExecutionHistoryCleanupJobModel.pageModel}">
 
-	<admin:jobStart jobModel="${jobExecutionHistoryCleanupJobModel}"/>
+	<admin:jobEditData jobModel="${jobExecutionHistoryCleanupJobModel}"/>
 
 	<form:form modelAttribute="jobExecutionHistoryCleanupJobModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/jobs/${savedJob.jobType.prefix}/" id="FormName" name="FormName">
 

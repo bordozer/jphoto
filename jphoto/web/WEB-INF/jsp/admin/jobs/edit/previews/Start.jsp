@@ -9,60 +9,58 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="jobModelPreviews" type="admin.controllers.jobs.edit.preview.PreviewGenerationModel" scope="request"/>
+<jsp:useBean id="previewGenerationModel" type="admin.controllers.jobs.edit.preview.PreviewGenerationModel" scope="request"/>
 
 <c:set var="previewSizeControl" value="<%=PreviewGenerationModel.PREVIEW_SIZE_FORM_CONTROL%>"/>
-<c:set var="savedJob" value="${jobModelPreviews.job}"/>
+<c:set var="savedJob" value="${previewGenerationModel.job}"/>
 
-<tags:page pageModel="${jobModelPreviews.pageModel}">
+<tags:page pageModel="${previewGenerationModel.pageModel}">
 
-	<admin:jobStart jobModel="${jobModelPreviews}"/>
+	<admin:jobEditData jobModel="${previewGenerationModel}">
 
-	<eco:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${savedJob.jobType.prefix}/">
+		<jsp:attribute name="jobForm">
 
-		<table:table border="0" width="500">
+			<table:table border="0" width="500">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${jobModelPreviews}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${previewGenerationModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}" />
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:td>
-					${eco:translate('Preview size')}:
-				</table:td>
+				<table:tr>
+					<table:td>
+						${eco:translate('Preview size')}:
+					</table:td>
 
-				<table:td>
-					<tags:inputHint inputId="${previewSizeControl}" focused="true" hintTitle_t="Preview size" hint="${eco:translate('Preview size')}">
+					<table:td>
+						<tags:inputHint inputId="${previewSizeControl}" focused="true" hintTitle_t="Preview size" hint="${eco:translate('Preview size')}">
 						<jsp:attribute name="inputField">
-							<form:input path="jobModelPreviews.${previewSizeControl}" cssErrorClass="invalid" size="4"/>
+							<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4"/>
 						</jsp:attribute>
-					</tags:inputHint>
-				</table:td>
+						</tags:inputHint>
+					</table:td>
 
-			</table:tr>
+				</table:tr>
 
-			<table:tr>
-				<table:td>
-					${eco:translate('Skip generation if preview already exists')}
-				</table:td>
-				<table:td>
-					<form:checkbox path="jobModelPreviews.skipPhotosWithExistingPreview"/>
-				</table:td>
+				<table:tr>
+					<table:td>
+						${eco:translate('Skip generation if preview already exists')}
+					</table:td>
+					<table:td>
+						<form:checkbox path="skipPhotosWithExistingPreview"/>
+					</table:td>
 
-			</table:tr>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${jobModelPreviews}" />
+		</jsp:attribute>
 
-	</eco:form>
-
-	<tags:springErrorHighliting bindingResult="${jobModelPreviews.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

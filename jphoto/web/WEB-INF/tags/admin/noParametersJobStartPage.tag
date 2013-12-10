@@ -8,7 +8,7 @@
 
 <%@ attribute name="jobModel" type="admin.controllers.jobs.edit.AbstractAdminJobModel" required="true" %>
 
-<admin:jobStart jobModel="${jobModel}"/>
+<admin:jobEditData jobModel="${jobModel}"/>
 
 <eco:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModel.job.jobType.prefix}/">
 

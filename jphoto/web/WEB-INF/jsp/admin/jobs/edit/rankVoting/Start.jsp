@@ -18,7 +18,7 @@
 
 <tags:page pageModel="${rankVotingJobModel.pageModel}">
 
-	<admin:jobStart jobModel="${rankVotingJobModel}" />
+	<admin:jobEditData jobModel="${rankVotingJobModel}" />
 
 	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${rankVotingJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
 

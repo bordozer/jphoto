@@ -45,7 +45,7 @@
 
 	<form:form modelAttribute="photosImportModel" action="${eco:baseAdminUrlWithPrefix()}/jobs/${photosImportModel.job.jobType.prefix}/" id="FormName" name="FormName">
 
-		<admin:jobStart jobModel="${photosImportModel}" />
+		<admin:jobEditData jobModel="${photosImportModel}" />
 
 		<table:table width="800">
 

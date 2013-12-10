@@ -13,7 +13,7 @@
 
 <tags:page pageModel="${photoRatingJobModel.pageModel}">
 
-	<admin:jobStart jobModel="${photoRatingJobModel}" />
+	<admin:jobEditData jobModel="${photoRatingJobModel}" />
 
 	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${photoRatingJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
 

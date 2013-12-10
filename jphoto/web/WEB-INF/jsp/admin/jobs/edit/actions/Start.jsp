@@ -22,7 +22,7 @@
 
 <tags:page pageModel="${jobModelPhotoAction.pageModel}">
 
-	<admin:jobStart jobModel="${jobModelPhotoAction}" />
+	<admin:jobEditData jobModel="${jobModelPhotoAction}" />
 
 	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModelPhotoAction.job.jobType.prefix}/" id="FormName" name="FormName">
 

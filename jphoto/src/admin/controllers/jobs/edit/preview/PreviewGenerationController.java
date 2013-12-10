@@ -27,7 +27,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @RequestMapping( "jobs/previews" )
 public class PreviewGenerationController extends AbstractJobController {
 
-	public static final String JOB_MODEL_NAME = "jobModelPreviews";
+	public static final String JOB_MODEL_NAME = "previewGenerationModel";
 
 	private static final String START_VIEW = "/admin/jobs/edit/previews/Start";
 
