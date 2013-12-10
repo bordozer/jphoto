@@ -14,41 +14,37 @@
 
 <jsp:useBean id="rankVotingJobModel" type="admin.controllers.jobs.edit.rankVoting.RankVotingJobModel" scope="request"/>
 
-<c:set var="actionsQtyControl" value="<%=RankVotingJobModel.ACTIONS_QTY_FORM_CONTROL%>" />
+<c:set var="actionsQtyControl" value="<%=RankVotingJobModel.ACTIONS_QTY_FORM_CONTROL%>"/>
 
 <tags:page pageModel="${rankVotingJobModel.pageModel}">
 
-	<admin:jobEditData jobModel="${rankVotingJobModel}" />
+	<admin:jobEditData jobModel="${rankVotingJobModel}">
 
-	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${rankVotingJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table width="500" border="0">
+			<table:table width="500" border="0">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${rankVotingJobModel}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${rankVotingJobModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}" />
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Total actions" isMandatory="true" />
-				<table:tddata>
-					<form:input path="${actionsQtyControl}" size="4"/>
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tddata>
+						<form:input path="${actionsQtyControl}" size="4"/>
+					</table:tddata>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${rankVotingJobModel}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<js:confirmAction />
-
-	<tags:springErrorHighliting bindingResult="${rankVotingJobModel.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

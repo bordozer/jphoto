@@ -20,53 +20,49 @@
 
 <tags:page pageModel="${favoritesJobModel.pageModel}">
 
-	<admin:jobEditData jobModel="${favoritesJobModel}"/>
+	<admin:jobEditData jobModel="${favoritesJobModel}">
 
-	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${favoritesJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table width="500">
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${favoritesJobModel}"/>
-				</table:td>
-			</table:tr>
+			<table:table width="500">
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${favoritesJobModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Total actions" isMandatory="true"/>
-				<table:tddata>
-					<form:input path="${actionsQtyControl}" size="4"/>
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tddata>
+						<form:input path="${actionsQtyControl}" size="4"/>
+					</table:tddata>
+				</table:tr>
 
-			<table:tr>
-				<table:tdtext text_t="Photos"/>
-				<table:tddata>
-					<form:input path="${photosQtyControl}" size="4"/>
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Photos"/>
+					<table:tddata>
+						<form:input path="${photosQtyControl}" size="4"/>
+					</table:tddata>
+				</table:tr>
 
-			<table:tr>
-				<table:tdtext text_t="Favorite entries" />
-				<table:tddata>
-					<js:checkBoxChecker namePrefix="favoriteEntriesIds" />
-					<br />
-					<form:checkboxes path="${favoriteEntriesIdsControl}" items="${favoriteEntriesIds}" itemValue="id" itemLabel="name" delimiter="<br />" />
-					<br />
-					<br />
-					${eco:translate('Each action generates one of selected favorite entries randomly')}
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Favorite entries"/>
+					<table:tddata>
+						<js:checkBoxChecker namePrefix="favoriteEntriesIds"/>
+						<br/>
+						<form:checkboxes path="${favoriteEntriesIdsControl}" items="${favoriteEntriesIds}" itemValue="id" itemLabel="name" delimiter="<br />"/>
+						<br/>
+						<br/>
+						${eco:translate('Each action generates one of selected favorite entries randomly')}
+					</table:tddata>
+				</table:tr>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${favoritesJobModel}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<js:confirmAction />
-
-	<tags:springErrorHighliting bindingResult="${favoritesJobModel.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

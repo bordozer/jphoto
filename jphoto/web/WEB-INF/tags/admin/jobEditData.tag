@@ -38,3 +38,5 @@
 </div>
 
 <tags:springErrorHighliting bindingResult="${jobModel.bindingResult}"/>
+
+<js:confirmAction />

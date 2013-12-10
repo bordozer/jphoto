@@ -13,39 +13,35 @@
 
 <tags:page pageModel="${photoRatingJobModel.pageModel}">
 
-	<admin:jobEditData jobModel="${photoRatingJobModel}" />
+	<admin:jobEditData jobModel="${photoRatingJobModel}">
 
-	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${photoRatingJobModel.job.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table width="500">
+			<table:table width="500">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${photoRatingJobModel}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${photoRatingJobModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}" />
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:td colspan="2">
-					<tags:dateRange dateRangeTypeId="${photoRatingJobModel.dateRangeTypeId}"
-									dateFrom="${photoRatingJobModel.dateFrom}"
-									dateTo="${photoRatingJobModel.dateTo}"
-									timePeriod="${photoRatingJobModel.timePeriod}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<tags:dateRange dateRangeTypeId="${photoRatingJobModel.dateRangeTypeId}"
+										dateFrom="${photoRatingJobModel.dateFrom}"
+										dateTo="${photoRatingJobModel.dateTo}"
+										timePeriod="${photoRatingJobModel.timePeriod}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${photoRatingJobModel}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<js:confirmAction />
-
-	<tags:springErrorHighliting bindingResult="${photoRatingJobModel.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

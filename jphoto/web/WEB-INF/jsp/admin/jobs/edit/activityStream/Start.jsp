@@ -16,39 +16,38 @@
 
 <tags:page pageModel="${activityStreamCleanupJobModel.pageModel}">
 
-	<admin:jobEditData jobModel="${activityStreamCleanupJobModel}"/>
+	<admin:jobEditData jobModel="${activityStreamCleanupJobModel}">
 
-	<form:form modelAttribute="activityStreamCleanupJobModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/jobs/${savedJob.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table border="0" width="700">
+			<table:table border="0" width="700">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${activityStreamCleanupJobModel}"/>
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${activityStreamCleanupJobModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
+				<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Delete activities older then" isMandatory="true" />
+				<table:tr>
+					<table:tdtext text_t="Delete activities older then" isMandatory="true"/>
 
-				<table:tddata>
-					<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave Activity For Days" hint="${eco:translate('Delete activities older then')}">
-						<jsp:attribute name="inputField">
-							<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4" /> ${eco:translate('days')}
-						</jsp:attribute>
-					</tags:inputHint>
-				</table:tddata>
+					<table:tddata>
+						<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave Activity For Days"
+										hint="${eco:translate('Delete activities older then')}">
+							<jsp:attribute name="inputField">
+								<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('days')}
+							</jsp:attribute>
+						</tags:inputHint>
+					</table:tddata>
 
-			</table:tr>
+				</table:tr>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${activityStreamCleanupJobModel}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<tags:springErrorHighliting bindingResult="${activityStreamCleanupJobModel.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

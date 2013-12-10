@@ -8,32 +8,30 @@
 
 <%@ attribute name="jobModel" type="admin.controllers.jobs.edit.AbstractAdminJobModel" required="true" %>
 
-<admin:jobEditData jobModel="${jobModel}"/>
+<admin:jobEditData jobModel="${jobModel}">
 
-<eco:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModel.job.jobType.prefix}/">
+	<jsp:attribute name="jobForm">
 
-	<table:table width="500" border="0">
+		<table:table width="500" border="0">
 
-		<table:tr>
-			<table:td colspan="2">
-				<admin:saveJobButton jobModel="${jobModel}"/>
-			</table:td>
-		</table:tr>
+			<table:tr>
+				<table:td colspan="2">
+					<admin:saveJobButton jobModel="${jobModel}"/>
+				</table:td>
+			</table:tr>
 
-		<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
+			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-		<table:tr>
-			<table:td colspan="2">${eco:translate('The job has no parameters')}</table:td>
-		</table:tr>
+			<table:tr>
+				<table:td colspan="2">${eco:translate('The job has no parameters')}</table:td>
+			</table:tr>
 
-		<table:separator colspan="2"/>
+			<table:separator colspan="2"/>
 
-	</table:table>
+		</table:table>
 
-	<admin:jobFinish jobModel="${jobModel}"/>
+	</jsp:attribute>
 
-</eco:form>
+</admin:jobEditData>
 
-<js:confirmAction/>
 
-<tags:springErrorHighliting bindingResult="${jobModel.bindingResult}"/>

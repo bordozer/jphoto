@@ -10,53 +10,49 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="jobModelUsers" type="admin.controllers.jobs.edit.users.UserGenerationModel" scope="request"/>
+<jsp:useBean id="userGenerationModel" type="admin.controllers.jobs.edit.users.UserGenerationModel" scope="request"/>
 
-<c:set var="userQtyLimitControl" value="<%=UserGenerationModel.USER_QTY_FORM_CONTROL%>" />
-<c:set var="avatarDirControl" value="<%=UserGenerationModel.AVATAR_DIR_FORM_CONTROL%>" />
+<c:set var="userQtyLimitControl" value="<%=UserGenerationModel.USER_QTY_FORM_CONTROL%>"/>
+<c:set var="avatarDirControl" value="<%=UserGenerationModel.AVATAR_DIR_FORM_CONTROL%>"/>
 
-<tags:page pageModel="${jobModelUsers.pageModel}">
+<tags:page pageModel="${userGenerationModel.pageModel}">
 
-	<admin:jobEditData jobModel="${jobModelUsers}" />
+	<admin:jobEditData jobModel="${userGenerationModel}">
 
-	<eco:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModelUsers.job.jobType.prefix}/">
+		<jsp:attribute name="jobForm">
 
-		<table:table width="500">
+			<table:table width="500">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${jobModelUsers}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${userGenerationModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}" />
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Total actions" isMandatory="true" />
-				<table:tddata>
-					<form:input path="jobModelUsers.${userQtyLimitControl}" size="4"/>
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tddata>
+						<form:input path="${userQtyLimitControl}" size="4"/>
+					</table:tddata>
+				</table:tr>
 
-			<table:tr>
-				<table:tdtext text_t="Avatar dir" />
-				<table:tddata>
-					<form:input path="jobModelUsers.${avatarDirControl}" size="40"/>
-					<br />
-					${eco:translate('The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)')}
-				</table:tddata>
-			</table:tr>
+				<table:tr>
+					<table:tdtext text_t="Avatar dir"/>
+					<table:tddata>
+						<form:input path="${avatarDirControl}" size="40"/>
+						<br/>
+						${eco:translate('The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)')}
+					</table:tddata>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${jobModelUsers}" />
+		</jsp:attribute>
 
-	</eco:form>
-
-	<js:confirmAction />
-
-	<tags:springErrorHighliting bindingResult="${jobModelUsers.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

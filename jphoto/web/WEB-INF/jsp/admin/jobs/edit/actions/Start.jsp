@@ -13,76 +13,72 @@
 
 <jsp:useBean id="jobModelPhotoAction" type="admin.controllers.jobs.edit.action.PhotoActionGenerationModel" scope="request"/>
 
-<c:set var="totalActionFormControl" value="<%=PhotoActionGenerationModel.TOTAL_ACTIONS_FORM_CONTROL%>" />
-<c:set var="photosQtyFormControl" value="<%=PhotoActionGenerationModel.PHOTOS_QTY_FORM_CONTROL%>" />
+<c:set var="totalActionFormControl" value="<%=PhotoActionGenerationModel.TOTAL_ACTIONS_FORM_CONTROL%>"/>
+<c:set var="photosQtyFormControl" value="<%=PhotoActionGenerationModel.PHOTOS_QTY_FORM_CONTROL%>"/>
 <c:set var="photoLinesControl" value="generationType"/>
 
-<c:set var="dateFromFormControl" value="<%=PhotoActionGenerationModel.DATE_FROM_FORM_CONTROL%>" />
-<c:set var="dateToFormControl" value="<%=PhotoActionGenerationModel.DATE_TO_FORM_CONTROL%>" />
+<c:set var="dateFromFormControl" value="<%=PhotoActionGenerationModel.DATE_FROM_FORM_CONTROL%>"/>
+<c:set var="dateToFormControl" value="<%=PhotoActionGenerationModel.DATE_TO_FORM_CONTROL%>"/>
 
 <tags:page pageModel="${jobModelPhotoAction.pageModel}">
 
-	<admin:jobEditData jobModel="${jobModelPhotoAction}" />
+	<admin:jobEditData jobModel="${jobModelPhotoAction}">
 
-	<form:form action="${eco:baseAdminUrlWithPrefix()}/jobs/${jobModelPhotoAction.job.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table width="500" border="0">
+			<table:table width="500" border="0">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${jobModelPhotoAction}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${jobModelPhotoAction}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}" />
+				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Total actions" isMandatory="true" />
-				<table:tddata>
-					<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total actions"
-									hint="Quantity of generated actions">
+				<table:tr>
+					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tddata>
+						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total actions"
+										hint="Quantity of generated actions">
 						<jsp:attribute name="inputField">
-							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7" />
+							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
 						</jsp:attribute>
-					</tags:inputHint>
-				</table:tddata>
-			</table:tr>
+						</tags:inputHint>
+					</table:tddata>
+				</table:tr>
 
-			<table:tr>
-				<table:tdtext text_t="Latest photo qty" />
-				<table:tddata>
-					<tags:inputHint inputId="${photosQtyFormControl}" hintTitle_t="Latest photo qty"
-									hint="Going to be affected photos (all if empty)">
+				<table:tr>
+					<table:tdtext text_t="Latest photo qty"/>
+					<table:tddata>
+						<tags:inputHint inputId="${photosQtyFormControl}" hintTitle_t="Latest photo qty"
+										hint="Going to be affected photos (all if empty)">
 						<jsp:attribute name="inputField">
-							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7" />
+							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
 						</jsp:attribute>
-					</tags:inputHint>
-					<br />
-					${eco:translate('Leave empty to process all images')}
-				</table:tddata>
-			</table:tr>
+						</tags:inputHint>
+						<br/>
+						${eco:translate('Leave empty to process all images')}
+					</table:tddata>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-			<table:tr>
-				<table:td colspan="2">
-					<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
-									dateFrom="${jobModelPhotoAction.dateFrom}"
-									dateTo="${jobModelPhotoAction.dateTo}"
-									timePeriod="${jobModelPhotoAction.timePeriod}" />
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<tags:dateRange dateRangeTypeId="${jobModelPhotoAction.dateRangeTypeId}"
+										dateFrom="${jobModelPhotoAction.dateFrom}"
+										dateTo="${jobModelPhotoAction.dateTo}"
+										timePeriod="${jobModelPhotoAction.timePeriod}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separator colspan="2" />
+				<table:separator colspan="2"/>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${jobModelPhotoAction}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<js:confirmAction />
-
-	<tags:springErrorHighliting bindingResult="${jobModelPhotoAction.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>

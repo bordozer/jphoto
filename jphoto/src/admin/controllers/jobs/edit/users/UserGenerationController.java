@@ -24,7 +24,7 @@ import java.util.Map;
 public class UserGenerationController extends AbstractJobController {
 
 	private static final String START_VIEW = "admin/jobs/edit/users/Start";
-	public static final String JOB_MODEL_NAME = "jobModelUsers";
+	public static final String JOB_MODEL_NAME = "userGenerationModel";
 
 	@Autowired
 	private UserGenerationValidator userGenerationValidator;

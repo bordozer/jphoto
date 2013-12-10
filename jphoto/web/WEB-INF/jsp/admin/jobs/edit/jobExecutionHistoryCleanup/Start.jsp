@@ -22,51 +22,51 @@
 
 <tags:page pageModel="${jobExecutionHistoryCleanupJobModel.pageModel}">
 
-	<admin:jobEditData jobModel="${jobExecutionHistoryCleanupJobModel}"/>
+	<admin:jobEditData jobModel="${jobExecutionHistoryCleanupJobModel}">
 
-	<form:form modelAttribute="jobExecutionHistoryCleanupJobModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/jobs/${savedJob.jobType.prefix}/" id="FormName" name="FormName">
+		<jsp:attribute name="jobForm">
 
-		<table:table border="0" width="1000">
+			<table:table border="0" width="1000">
 
-			<table:tr>
-				<table:td colspan="2">
-					<admin:saveJobButton jobModel="${jobExecutionHistoryCleanupJobModel}"/>
-				</table:td>
-			</table:tr>
+				<table:tr>
+					<table:td colspan="2">
+						<admin:saveJobButton jobModel="${jobExecutionHistoryCleanupJobModel}"/>
+					</table:td>
+				</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
+				<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
 
-			<table:tr>
-				<table:tdtext text_t="Delete entries that finished early then" isMandatory="true" />
+				<table:tr>
+					<table:tdtext text_t="Delete entries that finished early then" isMandatory="true"/>
 
-				<table:tddata>
-					<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave entries older then" hint="${eco:translate('Delete entries older then')}">
+					<table:tddata>
+						<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave entries older then"
+										hint="${eco:translate('Delete entries older then')}">
 						<jsp:attribute name="inputField">
-							<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4" /> ${eco:translate('day(s) ago')}
+							<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('day(s) ago')}
 						</jsp:attribute>
-					</tags:inputHint>
-				</table:tddata>
+						</tags:inputHint>
+					</table:tddata>
 
-			</table:tr>
+				</table:tr>
 
-			<table:tr>
-				<table:tdtext text_t="Delete entries with statuses" />
+				<table:tr>
+					<table:tdtext text_t="Delete entries with statuses"/>
 
-				<table:tddata>
-					<js:checkBoxChecker namePrefix="${job_execution_status_ids_to_delete_control}" />
-					<br />
-					<br />
-					<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="nameTranslated" delimiter="<br />" cssErrorClass="invalid"/>
-				</table:tddata>
+					<table:tddata>
+						<js:checkBoxChecker namePrefix="${job_execution_status_ids_to_delete_control}"/>
+						<br/>
+						<br/>
+						<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="nameTranslated"
+										 delimiter="<br />" cssErrorClass="invalid"/>
+					</table:tddata>
 
-			</table:tr>
+				</table:tr>
 
-		</table:table>
+			</table:table>
 
-		<admin:jobFinish jobModel="${jobExecutionHistoryCleanupJobModel}" />
+		</jsp:attribute>
 
-	</form:form>
-
-	<tags:springErrorHighliting bindingResult="${jobExecutionHistoryCleanupJobModel.bindingResult}"/>
+	</admin:jobEditData>
 
 </tags:page>
