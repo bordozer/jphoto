@@ -111,22 +111,24 @@
 
 	</div>
 
-	<div class="containerPhotoLine" style="font-size: 90%;">
-		<span title="${eco:translate1('Today\'s marks', days )}"><b>${photoInfo.todayMarks}</b></span>
-		/
-		<span title="${eco:translate1('Marks for last $1 days', days )}"><b>${photoInfo.topBestMarks}</b></span>
-		/
-		<b><links:photoMarkList photo="${photo}">${photoInfo.totalMarks}</links:photoMarkList></b>
+	<c:if test="${photoInfo.showStatisticInPhotoList}">
+		<div class="containerPhotoLine" style="font-size: 90%;">
+			<span title="${eco:translate1('Today\'s marks', days )}"><b>${photoInfo.todayMarks}</b></span>
+			/
+			<span title="${eco:translate1('Marks for last $1 days', days )}"><b>${photoInfo.topBestMarks}</b></span>
+			/
+			<b><links:photoMarkList photo="${photo}">${photoInfo.totalMarks}</links:photoMarkList></b>
 
-		<c:if test="${photoInfo.showPhotoRatingPosition}">
-		/ <span style="color: green" title="${photoInfo.photoRatingPositionDescription}">#<b>${photoInfo.photoRatingPosition}</b></span>
-		</c:if>
+			<c:if test="${photoInfo.showPhotoRatingPosition}">
+			/ <span style="color: green" title="${photoInfo.photoRatingPositionDescription}">#<b>${photoInfo.photoRatingPosition}</b></span>
+			</c:if>
 
-		&nbsp;&nbsp;&nbsp; <html:img8 src="photo_preview_views_icon.png" alt="${eco:translate1('Previews: $1', photoInfo.previewCount)}" /> <links:photoPreviewsList photoInfo="${photoInfo}"/>
+			&nbsp;&nbsp;&nbsp; <html:img8 src="photo_preview_views_icon.png" alt="${eco:translate1('Previews: $1', photoInfo.previewCount)}" /> <links:photoPreviewsList photoInfo="${photoInfo}"/>
 
-		<c:set var="commantsHint" value="${eco:translate1('Comments: $1', photoInfo.commentsCount)}"/>
-		/ <html:img8 src="photo_preview_comments_icon.png" alt="${commantsHint}" />: <span title="${commantsHint}">${photoInfo.commentsCount}</span>
-	</div>
+			<c:set var="commantsHint" value="${eco:translate1('Comments: $1', photoInfo.commentsCount)}"/>
+			/ <html:img8 src="photo_preview_comments_icon.png" alt="${commantsHint}" />: <span title="${commantsHint}">${photoInfo.commentsCount}</span>
+		</div>
+	</c:if>
 
 	<c:if test="${not photoInfo.photoAuthorNameMustBeHidden}">
 		<div class="containerPhotoLine" style="font-size: 80%; margin-top: 5px;">
@@ -150,9 +152,11 @@
 							 hideIconSendPrivateMessage="true"
 					/>--%>
 		</div>
-		<div class="containerPhotoLine">
-			<user:userRankInGenre user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photo.userGenreRank}" />
-		</div>
+		<c:if test="${photoInfo.showUserRankInGenreInPhotoList}">
+			<div class="containerPhotoLine">
+				<user:userRankInGenre user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photo.userGenreRank}" />
+			</div>
+		</c:if>
 	</c:if>
 
 	<c:if test="${photoInfo.photoAuthorNameMustBeHidden}">

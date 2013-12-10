@@ -1,6 +1,7 @@
 package core.services.system;
 
 import core.exceptions.BaseRuntimeException;
+import core.general.cache.CacheKey;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.SystemConfiguration;
@@ -15,6 +16,9 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 	@Autowired
 	private ConfigurationDao configurationDao;
+
+	@Autowired
+	private CacheService cacheService;
 
 	@Override
 	public boolean save( final SystemConfiguration entry ) {

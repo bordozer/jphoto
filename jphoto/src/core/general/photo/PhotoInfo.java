@@ -50,6 +50,9 @@ public class PhotoInfo implements Cacheable {
 
 	private int commentsCount;
 
+	private boolean showStatisticInPhotoList;
+	private boolean showUserRankInGenreInPhotoList;
+
 	private String photoImgUrl;
 	private String photoPreviewImgUrl;
 	private EntryMenu photoMenu;
@@ -294,5 +297,21 @@ public class PhotoInfo implements Cacheable {
 	@Override
 	public String toString() {
 		return String.format( "Photo info: %s", photo );
+	}
+
+	public boolean isShowStatisticInPhotoList() {
+		return showStatisticInPhotoList;
+	}
+
+	public void setShowStatisticInPhotoList( final boolean showStatisticInPhotoList ) {
+		this.showStatisticInPhotoList = showStatisticInPhotoList;
+	}
+
+	public boolean isShowUserRankInGenreInPhotoList() {
+		return showUserRankInGenreInPhotoList;
+	}
+
+	public void setShowUserRankInGenreInPhotoList( final boolean showUserRankInGenreInPhotoList ) {
+		this.showUserRankInGenreInPhotoList = showUserRankInGenreInPhotoList;
 	}
 }

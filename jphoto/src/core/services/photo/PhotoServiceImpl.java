@@ -378,7 +378,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final PhotoInfo photoInfo = cacheServicePhotoInfo.getEntry( CacheKey.PHOTO_INFO, photo.getId(), new CacheEntryFactory<PhotoInfo>() {
 			@Override
 			public PhotoInfo createEntry() {
-				return loadCashablePhotoInfoPart( photo );
+				return loadCachablePhotoInfoPart( photo );
 			}
 		} );
 
@@ -407,6 +407,9 @@ public class PhotoServiceImpl implements PhotoService {
 
 		photoInfo.setSuperAdminUser( securityService.isSuperAdminUser( accessor.getId() ) );
 		photoInfo.setCommentsCount( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
+
+		photoInfo.setShowStatisticInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
+		photoInfo.setShowUserRankInGenreInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) );
 
 		return photoInfo;
 	}
@@ -457,7 +460,7 @@ public class PhotoServiceImpl implements PhotoService {
 		return photoDao.getLastUserPhoto( userId );
 	}
 
-	private PhotoInfo loadCashablePhotoInfoPart( final Photo photo ) {
+	private PhotoInfo loadCachablePhotoInfoPart( final Photo photo ) {
 		final int photoId = photo.getId();
 		final PhotoInfo photoInfo = new PhotoInfo( photo );
 

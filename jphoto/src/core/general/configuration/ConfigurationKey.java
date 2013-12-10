@@ -42,15 +42,17 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" )
 	, PHOTO_UPLOAD_ANONYMOUS_NAME( 408, "Anonymous posting", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous posting name" )
 
-	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
-	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
-	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
+	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
+	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
+	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 
 	, PHOTO_USER_CARD_PHOTOS_IN_LINE( 502, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Member card: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE( 503, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES( 504, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty for moble devices" )
 	, PHOTO_LIST_PHOTO_LINES( 505, "6", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default row qty" )
 	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
+	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
+	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show user rank in genre" )
 
 	, RANK_VOTING_FIRST_RANK_POINTS( 601, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.VOICE, ConfigurationTab.RANK_VOTING, "First rank points" )
 	, RANK_VOTING_POINTS_BASE_STEP( 602, "6", true, ConfigurationDataType.INTEGER, ConfigurationUnit.EMPTY, ConfigurationTab.RANK_VOTING, "Rank voting base step points" )

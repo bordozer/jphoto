@@ -3,10 +3,13 @@ package utils;
 import core.context.ApplicationContextHelper;
 import core.general.genre.Genre;
 import core.general.user.User;
+import core.general.user.UserAvatar;
 import core.log.LogHelper;
+import core.services.user.UserService;
 import core.services.utils.PredicateUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsServiceImpl;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -67,6 +70,12 @@ public class TLD_Utils {
 	}
 
 	public static String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) {
+		final UserService userService = ApplicationContextHelper.getBean( UserService.BEAN_NAME );
+		final UserAvatar userAvatar = userService.getUserAvatar( userId );
+		if ( !userAvatar.isHasAvatar() ) {
+			return StringUtils.EMPTY;
+		}
+
 		final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService = ApplicationContextHelper.getBean( UserPhotoFilePathUtilsServiceImpl.BEAN_NAME );
 		try {
 			return userPhotoFilePathUtilsService.getUserAvatarImage( userId, width, height, imageId, onClick, cssStyle );
