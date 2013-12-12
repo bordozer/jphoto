@@ -47,6 +47,9 @@ public class ConfigurationValidator implements Validator {
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_HIGHEST_POSITIVE_MARK );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_LOWEST_POSITIVE_MARK );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		positiveConfigurationKeys.add( ConfigurationKey.ADMIN_JOB_HISTORY_ITEMS_ON_PAGE );
+		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_HEIGHT );
+		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_WIDTH );
 
 		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
 

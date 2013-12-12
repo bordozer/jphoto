@@ -14,7 +14,7 @@ public enum ConfigurationTab {
 	, COMMENTS( "photoComments", "Photo comments" )
 	, PHOTO_VOTING( "photoVoting", "Photo voting" )
 	, PHOTO_RATING( "photoRating", "Photo rating" )
-	, RANK_VOTING( "rankVoting", "Voting for members' ranks in category" )
+	, RANK_VOTING( "rankVoting", "Voting for members' ranks in a category" )
 	, CACHE( "cache", "Cache" )
 	, ADMIN( "admin", "Admin" )
 	, EMAILING( "emailing", "Emailing" )
