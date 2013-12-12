@@ -14,12 +14,14 @@
 
 <c:set var="splitter" value="&nbsp;<br />"/>
 
-<div style="float: left; width: 250px; text-align: left; height: auto; line-height: 30px; margin-left: 30px; margin-top: 30px; border-right: solid 1px #C4C4C4;">
+<div style="float: left; width: 300px; text-align: left; height: auto; line-height: 30px; margin-left: 30px; margin-top: 30px; border-right: solid 1px #C4C4C4;">
 
 	<c:if test="${isEdit}">
+
 		<c:if test="${empty activeConfigurationTab}"><b></c:if>
 			<a href="#" onclick="submitProperties();">${eco:translate('Properties')}</a>
 		<c:if test="${empty activeConfigurationTab}"></b></c:if>
+
 		<script type="text/javascript">
 			function submitProperties() {
 				$( '#configurationTabKey' ).val( '' );
