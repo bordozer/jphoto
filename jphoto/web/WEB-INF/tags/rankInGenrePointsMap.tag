@@ -26,7 +26,7 @@
 	</c:if>
 
 	<c:if test="${not((currentPoints == points) and (isCurrentPointsShown))}">
-		<span title="${eco:translate2('There is necessary to get $1 points for a rank in a category to get rank $2', points, rank)}">
+		<span title="${eco:translate2('There is necessary to have $1 votes to get rank $2 in a photo category', points, rank)}">
 			${points}
 		</span>
 
