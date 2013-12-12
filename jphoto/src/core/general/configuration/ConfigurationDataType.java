@@ -3,6 +3,8 @@ package core.general.configuration;
 import utils.StringUtilities;
 import utils.TranslatorUtils;
 
+import java.util.EnumSet;
+
 public enum ConfigurationDataType {
 
 	INTEGER( 1, "Int number" )
@@ -16,6 +18,9 @@ public enum ConfigurationDataType {
 
 	private final int id;
 	private final String name;
+
+	public final static EnumSet INTEGER_KEYS = EnumSet.of( INTEGER, BYTE );
+	public final static EnumSet NUMERIC_KEYS = EnumSet.of( INTEGER, BYTE, FLOAT );
 
 	private ConfigurationDataType( final int id, final String name ) {
 		this.id = id;

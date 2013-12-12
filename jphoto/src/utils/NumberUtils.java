@@ -43,6 +43,17 @@ public class NumberUtils {
 		return true;
 	}
 
+	public static boolean isInteger( final String str ) {
+
+		try {
+			Integer.parseInt( str );
+		} catch ( NumberFormatException e ) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public static int convertToInt( final String number ) {
 		if ( !isNumeric( number ) ) {
 			return 0;
