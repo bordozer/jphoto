@@ -57,7 +57,7 @@ public enum ConfigurationKey {
 	, RANK_VOTING_FIRST_RANK_POINTS( 601, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.VOICE, ConfigurationTab.RANK_VOTING, "First rank points" )
 	, RANK_VOTING_POINTS_BASE_STEP( 602, "6", true, ConfigurationDataType.INTEGER, ConfigurationUnit.EMPTY, ConfigurationTab.RANK_VOTING, "Rank voting base step points" )
 	, RANK_VOTING_POINTS_COEFFICIENT( 603, "0.2", true, ConfigurationDataType.INTEGER, ConfigurationUnit.EMPTY, ConfigurationTab.RANK_VOTING, "Rank voting coefficient" )
-	, RANK_VOTING_MAX_GENRE_RANK( 604, "25", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.RANK_VOTING, "Max rank in genre" )
+	, RANK_VOTING_MAX_GENRE_RANK( 604, "25", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.RANK_VOTING, "Max rank in genre" )
 	, RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE( 605, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.RANK_VOTING, "Member must have this approved photos quantity in a genre for other members can vote for his rank in the genre" )
 
 	, COMMENTS_MIN_LENGTH( 700, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.COMMENTS, "Min length of comment" )

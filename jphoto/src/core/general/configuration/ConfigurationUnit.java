@@ -19,6 +19,7 @@ public enum ConfigurationUnit {
 	, KILOBYTE( 10, "Kb" )
 	, MEGABYTE( 11, "Mb" )
 	, PIXEL( 12, "Pixel" )
+	, RANK( 13, "Rank" )
 	;
 
 	private final int id;
