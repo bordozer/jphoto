@@ -559,7 +559,8 @@ CREATE TABLE `userSecurity` (
   `authorizationKey` varchar(1000) DEFAULT NULL,
   `lastUserActivityTime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
   PRIMARY KEY (`userId`),
-  UNIQUE KEY `userId` (`userId`)
+  UNIQUE KEY `userId` (`userId`),
+  CONSTRAINT `fk_UserSecurity_UserId` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #

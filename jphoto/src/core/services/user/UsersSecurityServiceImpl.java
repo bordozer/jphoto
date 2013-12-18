@@ -89,6 +89,11 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 
 		final UsersSecurity usersSecurity = usersSecurityDao.load( user );
 
+		if ( usersSecurity == null ) {
+			EnvironmentContext.switchUser( User.NOT_LOGGED_USER );
+			return;
+		}
+
 		final String requestAuthorizationKey = getRequestAuthorizationKeyCookieValue( request );
 
 		final String storedAuthorizationKey = usersSecurity.getAuthorizationKey();
