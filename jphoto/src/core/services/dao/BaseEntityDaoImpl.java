@@ -1,11 +1,16 @@
 package core.services.dao;
 
+import core.enums.PrivateMessageType;
 import core.exceptions.BaseRuntimeException;
+import core.general.user.User;
 import core.interfaces.BaseEntity;
 import core.log.LogHelper;
 import core.interfaces.IdsSqlSelectable;
 import core.services.dao.mappers.IdsRowMapper;
+import core.services.entry.PrivateMessageService;
+import core.services.security.SecurityService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import sql.SqlSelectIdsResult;
@@ -29,6 +34,12 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 	protected abstract RowMapper<T> getRowMapper();
 
 	private LogHelper logHelper = new LogHelper( BaseEntityDaoImpl.class );
+
+	@Autowired
+	private PrivateMessageService privateMessageService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	public boolean createOrUpdateEntry( final T entry, final Map<Integer, String> fieldsToInsert, final Map<Integer, String> fieldsToUpdate ) {
 
@@ -54,7 +65,9 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		final boolean entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
 
 		if ( ! entryHasBeenCreated ) {
-			logHelper.error( String.format( "Record is not created/updated ( %s, id=%d ). sql: '%s', %s", entry.getClass().getName(), entry.getId(), sql, parameters ) );
+			final String message = String.format( "Record is not created/updated ( %s, id=%d ). sql: '%s', %s", entry.getClass().getName(), entry.getId(), sql, parameters );
+			logHelper.error( message );
+			sendPrivateMessagesAboutErrorToAdmins( message );
 			return false;
 		}
 
@@ -62,7 +75,9 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 			final long newId = jdbcTemplate.queryForLong( "SELECT LAST_INSERT_ID()", new MapSqlParameterSource() );
 
 			if ( newId == 0 ) {
-				throw new BaseRuntimeException( String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, parameters ) );
+				final String message = String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, parameters );
+				sendPrivateMessagesAboutErrorToAdmins( message );
+				throw new BaseRuntimeException( message );
 			}
 
 			entry.setId( ( int ) newId );
@@ -71,6 +86,12 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		}
 
 		return true;
+	}
+
+	private void sendPrivateMessagesAboutErrorToAdmins( final String message ) {
+		for ( final User adminUser : securityService.getSuperAdminUsers() ) {
+			privateMessageService.sendSystemNotification( adminUser, message );
+		}
 	}
 
 	final public SqlSelectResult<T> load( final SqlSelectQuery selectQuery ) {

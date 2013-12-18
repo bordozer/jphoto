@@ -7,6 +7,8 @@ import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.user.User;
 import core.general.photo.ValidationResult;
 
+import java.util.List;
+
 public interface SecurityService {
 
 	String BEAN_NAME = "securityService";
@@ -62,6 +64,8 @@ public interface SecurityService {
 	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre );
 
 	boolean isSuperAdminUser( final int userId );
+
+	List<User> getSuperAdminUsers();
 
 	void assertSuperAdminAccess( final User currentUser );
 

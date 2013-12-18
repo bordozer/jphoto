@@ -169,6 +169,11 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
+	public boolean sendSystemNotification( final User toUser, final String privateMessageText ) {
+		return send( null, toUser, PrivateMessageType.SYSTEM_INFORMATION, privateMessageText );
+	}
+
+	@Override
 	public boolean exists( final int entryId ) {
 		return privateMessageDao.exists( entryId );
 	}

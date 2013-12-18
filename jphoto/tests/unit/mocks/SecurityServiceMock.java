@@ -8,6 +8,8 @@ import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;
 
+import java.util.List;
+
 public class SecurityServiceMock implements SecurityService {
 
 	@Override
@@ -125,6 +127,11 @@ public class SecurityServiceMock implements SecurityService {
 	@Override
 	public boolean isSuperAdminUser( final int userId ) {
 		return false;
+	}
+
+	@Override
+	public List<User> getSuperAdminUsers() {
+		return null;
 	}
 
 	@Override

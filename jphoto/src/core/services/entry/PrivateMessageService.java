@@ -24,4 +24,6 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 	AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO );
 
 	boolean send( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText );
+
+	boolean sendSystemNotification( final User toUser, final String privateMessageText );
 }

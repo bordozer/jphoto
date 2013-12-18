@@ -459,6 +459,17 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public List<User> getSuperAdminUsers() {
+		final List<String> adminUserIds = systemVarsService.getAdminUserIds();
+
+		final List<User> result = newArrayList();
+		for ( final String _adminUserId : adminUserIds ) {
+			result.add( userService.load( NumberUtils.convertToInt( _adminUserId ) ) );
+		}
+		return result;
+	}
+
+	@Override
 	public void assertSuperAdminAccess( final User user ) {
 		if ( ! isSuperAdminUser( user.getId() ) ) {
 			throw new AccessDeniedException( "This operation is allowed for admin only!" );
