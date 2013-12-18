@@ -1,6 +1,5 @@
 package core.services.dao;
 
-import core.enums.PrivateMessageType;
 import core.exceptions.BaseRuntimeException;
 import core.general.user.User;
 import core.interfaces.BaseEntity;
@@ -90,7 +89,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 	private void sendPrivateMessagesAboutErrorToAdmins( final String message ) {
 		for ( final User adminUser : securityService.getSuperAdminUsers() ) {
-			privateMessageService.sendSystemNotification( adminUser, message );
+			privateMessageService.sendAdminMessage( adminUser, message );
 		}
 	}
 

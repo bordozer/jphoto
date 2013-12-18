@@ -25,5 +25,5 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 
 	boolean send( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText );
 
-	boolean sendSystemNotification( final User toUser, final String privateMessageText );
+	boolean sendAdminMessage( final User toUser, final String privateMessageText );
 }

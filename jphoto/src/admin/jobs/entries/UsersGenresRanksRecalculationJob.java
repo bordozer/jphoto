@@ -80,7 +80,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
-		message.setPrivateMessageType( PrivateMessageType.SYSTEM_INFORMATION );
+		message.setPrivateMessageType( PrivateMessageType.ACTIVITY_NOTIFICATIONS );
 		message.setMessageText( String.format( "You has bees given a new rank %s in category %s ( the previous one was %s )"
 			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre ), userCurrentRank )
 		);

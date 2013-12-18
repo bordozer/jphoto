@@ -6,6 +6,7 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="messages" tagdir="/WEB-INF/tags/messages" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="privateMessageListModel" class="controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
@@ -64,9 +65,9 @@
 				</c:forEach>
 			</div>
 
-			<div style="float: left; width: 85px">
+			<div style="float: left; width: 85px;">
 
-				<table:table width="800">
+				<table:table width="800" border="0">
 
 					<table:tr>
 
@@ -103,7 +104,11 @@
 
 					</c:forEach>
 
-					<table:trok text_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();"/>
+					<table:tr>
+						<table:td cssClass="buttoncolumn">
+							<html:submitButton id="deleteMessages" caption_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+						</table:td>
+					</table:tr>
 
 				</table:table>
 

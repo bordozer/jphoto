@@ -1,6 +1,5 @@
 package core.services.notification;
 
-import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
 import core.services.mail.MailBean;
 import core.services.security.Services;
@@ -14,7 +13,7 @@ public abstract class AbstractSendNotificationStrategy {
 	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
 		@Override
 		public void sendNotifications( final UserNotification userNotification, final Services services ) {
-			services.getPrivateMessageService().sendSystemNotification( userNotification.getUser(), userNotification.getNotificationData().getMessage() );
+			services.getPrivateMessageService().sendAdminMessage( userNotification.getUser(), userNotification.getNotificationData().getMessage() );
 		}
 
 		@Override
