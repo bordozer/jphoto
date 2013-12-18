@@ -62,7 +62,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 			final long newId = jdbcTemplate.queryForLong( "SELECT LAST_INSERT_ID()", new MapSqlParameterSource() );
 
 			if ( newId == 0 ) {
-				throw new BaseRuntimeException( String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s )", entry.getClass().getName() ) );
+				throw new BaseRuntimeException( String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, parameters ) );
 			}
 
 			entry.setId( ( int ) newId );
