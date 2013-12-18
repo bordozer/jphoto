@@ -79,8 +79,8 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 	}
 
 	private void validateThatAtLeastOneUserExists( final Errors errors ) {
-		final List<User> users = userService.loadAll();
-		if ( users.size() == 0 ) {
+		final int userQty = userService.getUserCount();
+		if ( userQty == 0 ) {
 			errors.reject( TranslatorUtils.translate( "The system is not configured properly" ), TranslatorUtils.translate( "There are no members in the system. Create members manually or run User Generation Job" ) );
 		}
 	}
