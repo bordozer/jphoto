@@ -34,27 +34,31 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 		final String tableName = getTableName();
 
-		final StringBuilder sql = new StringBuilder();
+		final StringBuilder sqlBuilder = new StringBuilder();
 
 		final boolean aNew = isNew( entry );
 		if ( aNew ) {
-			sql.append( "INSERT INTO " ).append( tableName );
-			sql.append( "( " ).append( getInsertFieldList( fieldsToInsert ) ).append( " )" );
-			sql.append( " VALUES ( " ).append( getValuesForInsertStatement( fieldsToInsert ) ).append( " )" );
+			sqlBuilder.append( "INSERT INTO " ).append( tableName );
+			sqlBuilder.append( "( " ).append( getInsertFieldList( fieldsToInsert ) ).append( " )" );
+			sqlBuilder.append( " VALUES ( " ).append( getValuesForInsertStatement( fieldsToInsert ) ).append( " )" );
 		} else {
-			sql.append( " UPDATE " ).append( tableName ).append( " SET " ).append( getUpdateFieldsAssignment( fieldsToUpdate ) );
-			sql.append( " WHERE " ).append( BaseEntityDao.ENTITY_ID ).append( "=" ).append( entry.getId() );
+			sqlBuilder.append( " UPDATE " ).append( tableName ).append( " SET " ).append( getUpdateFieldsAssignment( fieldsToUpdate ) );
+			sqlBuilder.append( " WHERE " ).append( BaseEntityDao.ENTITY_ID ).append( "=" ).append( entry.getId() );
 		}
 
-		logHelper.debug( String.format( "SQL: %s", sql.toString() ) );
+		final String sql = sqlBuilder.toString();
 
-		final boolean result = jdbcTemplate.update( sql.toString(), getParameters( entry ) ) > 0;
+		logHelper.debug( String.format( "SQL: %s", sql ) );
 
-		if ( ! result ) {
-			logHelper.debug( String.format( "Record is not created/updated ( %s, id=%d )", entry.getClass().getName(), entry.getId() ) );
+		final MapSqlParameterSource parameters = getParameters( entry );
+		final boolean entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
+
+		if ( ! entryHasBeenCreated ) {
+			logHelper.error( String.format( "Record is not created/updated ( %s, id=%d ). sql: '%s', %s", entry.getClass().getName(), entry.getId(), sql, parameters ) );
+			return false;
 		}
 
-		if ( result && aNew ) {
+		if ( aNew ) {
 			final long newId = jdbcTemplate.queryForLong( "SELECT LAST_INSERT_ID()", new MapSqlParameterSource() );
 
 			if ( newId == 0 ) {
@@ -66,7 +70,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 			logHelper.debug( String.format( "new entry (%s) has been creates ID: %s", entry.getClass().getName(), newId ) );
 		}
 
-		return result;
+		return true;
 	}
 
 	final public SqlSelectResult<T> load( final SqlSelectQuery selectQuery ) {

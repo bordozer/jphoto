@@ -45,6 +45,11 @@
 		<appender-ref ref="appender.file"/>
 	</logger>
 
+	<logger name="core.services.dao">
+		<level value="ERROR"/>
+		<appender-ref ref="appender.file"/>
+	</logger>
+
 	<!--<logger name="core.services.conversion">
 		<level value="DEBUG"/>
 		<appender-ref ref="appender.file"/>
