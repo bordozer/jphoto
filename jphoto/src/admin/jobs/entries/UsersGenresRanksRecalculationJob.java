@@ -46,7 +46,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
 					final Genre genre = services.getGenreService().load( genreId );
 
-					sendSystemMessageToUser( user, userCurrentRank, userNewRank, genre );
+					sendSystemNotificationAboutGotNewRankToUser( user, userCurrentRank, userNewRank, genre );
 
 					getLog().info( String.format( "User %s has bees given a new rank %s in %s (the previous one was %s)", user, userNewRank, genre, userCurrentRank ) );
 
@@ -75,12 +75,12 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 		getLog().debug( "Photo info cache has been cleared" );
 	}
 
-	private void sendSystemMessageToUser( final User user, final int userCurrentRank, final int userNewRank, final Genre genre ) {
+	private void sendSystemNotificationAboutGotNewRankToUser( final User user, final int userCurrentRank, final int userNewRank, final Genre genre ) {
 		final PrivateMessage message = new PrivateMessage();
 
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
-		message.setPrivateMessageType( PrivateMessageType.ACTIVITY_NOTIFICATIONS );
+		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
 		message.setMessageText( String.format( "You has bees given a new rank %s in category %s ( the previous one was %s )"
 			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre ), userCurrentRank )
 		);

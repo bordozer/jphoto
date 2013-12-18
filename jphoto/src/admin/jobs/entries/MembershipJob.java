@@ -36,7 +36,7 @@ public class MembershipJob extends NoParametersAbstractJob {
 			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
 				if ( services.getUserService().setUserMembership( user.getId(), UserStatus.MEMBER ) ) {
 
-					sendSystemMessageToUser( user );
+					sendSystemNotificationAboutGotMembershipToUser( user );
 
 					getLog().info( String.format( "Member %s has got new status: MEMBER", user.getId() ) );
 				} else {
@@ -59,12 +59,12 @@ public class MembershipJob extends NoParametersAbstractJob {
 		getLog().info( "User cache has been cleared" );
 	}
 
-	private void sendSystemMessageToUser( final User user ) {
+	private void sendSystemNotificationAboutGotMembershipToUser( final User user ) {
 		final PrivateMessage message = new PrivateMessage();
 
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
-		message.setPrivateMessageType( PrivateMessageType.ACTIVITY_NOTIFICATIONS );
+		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
 		message.setMessageText( String.format( "You has bees given a new club status: %s", UserStatus.MEMBER.getNameTranslated() ) );
 
 		services.getPrivateMessageService().save( message );

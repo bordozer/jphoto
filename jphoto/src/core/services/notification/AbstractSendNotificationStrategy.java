@@ -13,7 +13,7 @@ public abstract class AbstractSendNotificationStrategy {
 	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
 		@Override
 		public void sendNotifications( final UserNotification userNotification, final Services services ) {
-			services.getPrivateMessageService().sendAdminMessage( userNotification.getUser(), userNotification.getNotificationData().getMessage() );
+			services.getPrivateMessageService().sendActivityNotificationMessage( userNotification.getUser(), userNotification.getNotificationData().getMessage() );
 		}
 
 		@Override

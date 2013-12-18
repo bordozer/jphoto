@@ -66,7 +66,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		if ( ! entryHasBeenCreated ) {
 			final String message = String.format( "Record is not created/updated ( %s, id=%d ). sql: '%s', %s", entry.getClass().getName(), entry.getId(), sql, parameters );
 			logHelper.error( message );
-			sendPrivateMessagesAboutErrorToAdmins( message );
+			sendSystemNotificationAboutErrorToAdmins( message );
 			return false;
 		}
 
@@ -75,7 +75,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 			if ( newId == 0 ) {
 				final String message = String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, parameters );
-				sendPrivateMessagesAboutErrorToAdmins( message );
+				sendSystemNotificationAboutErrorToAdmins( message );
 				throw new BaseRuntimeException( message );
 			}
 
@@ -87,9 +87,9 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		return true;
 	}
 
-	private void sendPrivateMessagesAboutErrorToAdmins( final String message ) {
+	private void sendSystemNotificationAboutErrorToAdmins( final String message ) {
 		for ( final User adminUser : securityService.getSuperAdminUsers() ) {
-			privateMessageService.sendAdminMessage( adminUser, message );
+			privateMessageService.sendSystemNotificationMessage( adminUser, message );
 		}
 	}
 
