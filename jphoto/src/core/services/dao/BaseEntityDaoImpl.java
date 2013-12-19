@@ -61,10 +61,19 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		logHelper.debug( String.format( "SQL: %s", sql ) );
 
 		final MapSqlParameterSource parameters = getParameters( entry );
-		final boolean entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
+		final boolean entryHasBeenCreated;
+		try {
+			entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
+		} catch ( final Throwable t ) {
+			final String message = String.format( "Creating/Updating exception: %s. SQL: '%s', parameters: %s", t.getMessage(), sql, parameters );
+			logHelper.error( message, t );
+			sendSystemNotificationAboutErrorToAdmins( message );
+
+			return false;
+		}
 
 		if ( ! entryHasBeenCreated ) {
-			final String message = String.format( "Record is not created/updated ( %s, id=%d ). sql: '%s', %s", entry.getClass().getName(), entry.getId(), sql, parameters );
+			final String message = String.format( "Record is not created/updated ( %s, id=%d ). SQL: '%s', parameters: %s", entry.getClass().getName(), entry.getId(), sql, parameters );
 			logHelper.error( message );
 			sendSystemNotificationAboutErrorToAdmins( message );
 			return false;
