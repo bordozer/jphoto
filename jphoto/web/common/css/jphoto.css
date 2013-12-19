@@ -273,6 +273,7 @@ td.trunderlined {
 	padding: 5px;
 	height: auto;
 	min-height: 320px;
+	border-radius: 5px 5px 5px 5px;
 	/*border: dotted;*/
 }
 
