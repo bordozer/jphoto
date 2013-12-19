@@ -22,6 +22,7 @@
 			<tx:method name="get*" read-only="true"/>
 			<tx:method name="save"/>
 			<tx:method name="delete"/>
+			<tx:method name="createUser"/>
 			<tx:method name="saveUserPhotoVoting"/>
 			<tx:method name="recalculatePhotoRatingForPeriod"/>
 			<tx:method name="savePhotoWithTeamAndAlbums"/>
@@ -37,6 +38,11 @@
 	<aop:config>
 		<aop:pointcut id="deleteEntry" expression="execution(* core.interfaces.BaseEntityService.delete(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="deleteEntry"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="createUser" expression="execution(* core.services.user.UserService.createUser(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="createUser"/>
 	</aop:config>
 
 	<aop:config>

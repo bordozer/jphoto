@@ -20,6 +20,7 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 
 	SqlSelectResult<User> loadByIds( final SqlIdsSelectQuery selectIdsQuery );
 
+	// Transactional
 	boolean createUser( User user, String password );
 
 	User loadByName( final String name );
