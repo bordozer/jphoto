@@ -13,7 +13,7 @@
 
 <c:set var="privateMessageTypeValues" value="<%=PrivateMessageType.values()%>"/>
 <c:set var="privateMessageTypeValuesLength" value="<%=PrivateMessageType.values().length%>"/>
-<c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)}"/>
+<c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)-1}"/>
 
 <c:set var="usersWhoCommunicatedWithUser" value="${privateMessageListModel.usersWhoCommunicatedWithUser}"/>
 
@@ -72,7 +72,7 @@
 					<table:tr>
 
 						<table:td>
-							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 74px; border-bottom: 2px solid #d3d3d3; text-align: center;">
+							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 77px; border-bottom: 2px solid #d3d3d3; text-align: center;">
 								<c:forEach var="privateMessageType" items="${privateMessageTypeValues}">
 									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
