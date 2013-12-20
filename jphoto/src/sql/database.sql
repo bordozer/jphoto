@@ -269,10 +269,10 @@ CREATE TABLE `userPhotoAlbum` (
   `description` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
-  UNIQUE KEY `idx_name` (`name`) USING BTREE,
+  UNIQUE KEY `idx_userId_name` (`userId`,`name`),
   KEY `fk_userPhotoAlbum_userId_users_id` (`userId`),
   CONSTRAINT `fk_userPhotoAlbum_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2141 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1464 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoAlbums` table :
