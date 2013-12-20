@@ -150,15 +150,34 @@ public class UserGenerationJob extends AbstractJob {
 		final int randomAlbumQty = randomUtilsService.getRandomInt( 0, MAX_USER_ALBUM_QTY );
 
 		for ( int i = 0; i < randomAlbumQty; i++ ) {
+			final String albumName = String.format( "%s - %d", randomUtilsService.getRandomStringArrayElement( albumsNames ), randomUtilsService.getRandomInt( 1000, 9999 ) );
+
+			if ( doesUserHaveAlbumWithTheName( user, albumName ) ) {
+				continue;
+			}
+
 			final UserPhotoAlbum userphotoAlbum = new UserPhotoAlbum();
 			userphotoAlbum.setUser( user );
-			userphotoAlbum.setName( String.format( "%s - %d", randomUtilsService.getRandomStringArrayElement( albumsNames ), randomUtilsService.getRandomInt( 1000, 9999 ) ) );
+			userphotoAlbum.setName( albumName );
 			userphotoAlbum.setDescription( String.format( "Generated automatically by User generation job, %s %s", dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ), dateUtilsService.formatTime( dateUtilsService.getCurrentTime() ) ) );
 
 			log.debug( String.format( "User %s: photo albums '%s' is about tobe created", user, userphotoAlbum ) );
 
 			userPhotoAlbumService.save( userphotoAlbum );
 		}
+	}
+
+	private boolean doesUserHaveAlbumWithTheName( final User user, final String name ) {
+		final UserPhotoAlbumService userPhotoAlbumService = services.getUserPhotoAlbumService();
+
+		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadAllForEntry( user.getId() );
+		for ( final UserPhotoAlbum album : userPhotoAlbums ) {
+			if ( album.getName().equals( name ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private File getRandomAvatarFile( final List<File> avatarFileNames ) {
