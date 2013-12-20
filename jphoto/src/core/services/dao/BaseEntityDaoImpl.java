@@ -65,7 +65,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		try {
 			entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
 		} catch ( final Throwable t ) {
-			final String message = String.format( "Creating/Updating exception: %s. SQL: '%s', parameters: %s", t.getMessage(), sql, parameters );
+			final String message = String.format( "Creating/Updating exception: %s. SQL: '%s', parameters: %s", t.getMessage(), sql, serializeParameters( parameters ) );
 			logHelper.error( message, t );
 			sendSystemNotificationAboutErrorToAdmins( message );
 
@@ -73,7 +73,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		}
 
 		if ( ! entryHasBeenCreated ) {
-			final String message = String.format( "Record is not created/updated ( %s, id=%d ). SQL: '%s', parameters: %s", entry.getClass().getName(), entry.getId(), sql, parameters );
+			final String message = String.format( "Record is not created/updated ( %s, id=%d ). SQL: '%s', parameters: %s", entry.getClass().getName(), entry.getId(), sql, serializeParameters( parameters ) );
 			logHelper.error( message );
 			sendSystemNotificationAboutErrorToAdmins( message );
 			return false;
@@ -83,7 +83,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 			final long newId = jdbcTemplate.queryForLong( "SELECT LAST_INSERT_ID()", new MapSqlParameterSource() );
 
 			if ( newId == 0 ) {
-				final String message = String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, parameters );
+				final String message = String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, serializeParameters( parameters ) );
 				sendSystemNotificationAboutErrorToAdmins( message );
 				throw new BaseRuntimeException( message );
 			}
@@ -94,6 +94,17 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		}
 
 		return true;
+	}
+
+	private String serializeParameters( final MapSqlParameterSource parameters ) {
+		final StringBuilder builder = new StringBuilder();
+
+		final Map<String, Object> map = parameters.getValues();
+		for ( final String key : map.keySet() ) {
+			builder.append( key ).append( "=" ).append( map.get( key ) ).append( ";" );
+		}
+
+		return builder.toString();
 	}
 
 	private void sendSystemNotificationAboutErrorToAdmins( final String message ) {

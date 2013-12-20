@@ -37,9 +37,6 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 	private UserDao userDao;
 
 	@Autowired
-	private PhotoDao photoDao;
-
-	@Autowired
 	private CacheService<UserPhotoAlbum> cacheService;
 
 	private final LogHelper log = new LogHelper( UserPhotoAlbumDaoImpl.class );
