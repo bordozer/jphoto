@@ -724,5 +724,5 @@ WHERE photoAlbums.`photoId` IN (
 
 DELETE
 FROM `photos`
-	WHERE photos.uploadTime = 0
+	WHERE photos.uploadTime = 0;
 /* / delete photos with ZERO upload time */
