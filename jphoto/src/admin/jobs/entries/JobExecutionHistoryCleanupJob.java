@@ -67,6 +67,8 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
 		totalJopOperations = services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size();
+
+//		generationMonitor.setTotal( totalJopOperations );
 	}
 
 	@Override
@@ -87,6 +89,9 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 		} else {
 			builder.append( TranslatorUtils.translate( "All" ) );
 		}
+
+		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
+		builder.append( "<br />Total: " ).append( services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size() );
 
 		return builder.toString();
 	}

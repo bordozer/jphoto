@@ -18,6 +18,7 @@ import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -94,7 +95,8 @@ public class JobExecutionHistoryCleanupJobController extends AbstractJobControll
 		final JobExecutionHistoryCleanupJob job = ( JobExecutionHistoryCleanupJob ) model.getJob();
 		final JobExecutionHistoryCleanupJobModel aModel = ( JobExecutionHistoryCleanupJobModel ) model;
 
-		job.setDeleteEntriesOlderThenDays( NumberUtils.convertToInt( aModel.getDeleteEntriesOlderThenDays() ) );
+		final int deleteEntriesOlderThenDays = NumberUtils.convertToInt( aModel.getDeleteEntriesOlderThenDays() );
+		job.setDeleteEntriesOlderThenDays( deleteEntriesOlderThenDays );
 
 		final List<JobExecutionStatus> statuses = newArrayList();
 		for ( final String _id : aModel.getJobExecutionStatusIdsToDelete() ) {
@@ -102,7 +104,8 @@ public class JobExecutionHistoryCleanupJobController extends AbstractJobControll
 		}
 		job.setJobExecutionStatusesToDelete( statuses );
 
-		job.setTotalJopOperations( 1 );
+		final Date timeFrame = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
+		job.setTotalJopOperations( jobExecutionHistoryService.getEntriesIdsOlderThen( timeFrame, statuses ).size() );
 	}
 
 	@Override
