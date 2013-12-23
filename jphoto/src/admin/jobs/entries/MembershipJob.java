@@ -65,7 +65,7 @@ public class MembershipJob extends NoParametersAbstractJob {
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
 		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
-		message.setMessageText( String.format( "You has bees given a new club status: %s", UserStatus.MEMBER.getNameTranslated() ) );
+		message.setMessageText( String.format( "You have bees given a new club status: %s", UserStatus.MEMBER.getNameTranslated() ) );
 
 		services.getPrivateMessageService().save( message );
 	}
