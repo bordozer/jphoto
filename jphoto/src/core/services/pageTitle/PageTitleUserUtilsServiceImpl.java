@@ -241,4 +241,19 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
+
+	@Override
+	public PageTitleData getUserNotificationsControlData( final User user ) {
+		final String rootTranslated = getUserRootTranslated();
+		final String tran = "Notifications control";
+
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getUsersRootLink()
+			, entityLinkUtilsService.getUserCardLink( user )
+			, tran
+		);
+
+		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
 }

@@ -151,6 +151,8 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( getPrivateMessagesMenu( user ) );
 
 			menus.put( MenuItem.noLinkMenu( "Messages" ), menuItems );
+
+			menuItems.add( userNotificationsControlMenu( user ) );
 		}
 	}
 
@@ -322,6 +324,12 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem userTechMenu( final User user ) {
 		final String caption = TranslatorUtils.translate( "My Tech" );
 		final String link = urlUtilsService.getUserTechLink( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem userNotificationsControlMenu( final User user ) {
+		final String caption = TranslatorUtils.translate( "Notifications Control" );
+		final String link = urlUtilsService.getUserNotificationsMenu( user.getId() );
 		return new MenuItem( caption, link );
 	}
 

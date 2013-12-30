@@ -148,6 +148,8 @@ public interface UrlUtilsService {
 
 	String getUserPhotoAlbumDeleteLink( final int userId, final int albumId );
 
+	String getUserNotificationsMenu( final int userId );
+
 	String getAdminGenreListLink();
 
 	String getAdminGenreNewLink();

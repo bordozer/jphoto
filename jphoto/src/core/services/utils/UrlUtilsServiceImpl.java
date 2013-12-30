@@ -395,6 +395,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getUserNotificationsMenu( final int userId ) {
+		return String.format( "%s/members/%d/notifications/", getBaseURLWithPrefix(), userId );
+	}
+
+	@Override
 	public String getAdminGenreListLink() {
 		return String.format( "%s/%s/", getAdminBaseURLWithPrefix(), GENRES_URL );
 	}

@@ -56,4 +56,6 @@ public interface PageTitleUserUtilsService {
 	PageTitleData getUserWrongLogin();
 
 	PageTitleData getChangeUserPasswordData( final User user );
+
+	PageTitleData getUserNotificationsControlData( final User user );
 }

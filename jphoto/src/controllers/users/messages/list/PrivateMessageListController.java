@@ -49,9 +49,6 @@ public class PrivateMessageListController {
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
 
-	@Autowired
-	private UrlUtilsService urlUtilsService;
-
 	@ModelAttribute( MODEL_NAME )
 	public PrivateMessageListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
 
