@@ -46,7 +46,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
 public class PhotoListController {
 
-	private static final String VIEW = "photos/list/PhotoList";
+	public static final String VIEW = "photos/list/PhotoList";
 
 	@Autowired
 	private PhotoService photoService;

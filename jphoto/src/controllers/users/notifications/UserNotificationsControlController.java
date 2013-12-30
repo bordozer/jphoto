@@ -1,5 +1,6 @@
 package controllers.users.notifications;
 
+import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.NumberUtils;
+
+import java.util.Set;
+
+import static com.google.common.collect.Sets.newHashSet;
 
 @Controller
 @RequestMapping( "members/{userId}/notifications" )
@@ -33,9 +38,17 @@ public class UserNotificationsControlController {
 		securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
+		final User user = userService.load( userId );
+
 		final UserNotificationsControlModel model = new UserNotificationsControlModel();
 
-		model.setUser( userService.load( userId ) );
+		model.setUser( user );
+
+		final Set<String> notificationOptionIds = newHashSet();
+		for ( final EmailNotificationType emailNotificationType : user.getEmailNotificationTypes() ) {
+			notificationOptionIds.add( String.valueOf( emailNotificationType.getId() ) );
+		}
+		model.setEmailNotificationTypeIds( notificationOptionIds );
 
 		return model;
 	}

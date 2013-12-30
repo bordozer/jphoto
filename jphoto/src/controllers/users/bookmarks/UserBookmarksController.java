@@ -1,5 +1,6 @@
 package controllers.users.bookmarks;
 
+import controllers.photos.list.PhotoListController;
 import core.general.base.PagingModel;
 import core.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
@@ -31,7 +32,7 @@ import java.util.List;
 @RequestMapping( UrlUtilsServiceImpl.USERS_URL )
 public class UserBookmarksController {
 
-	private static final String PHOTO_LIST_VIEW = "photos/list/PhotoList";
+	private static final String VIEW = PhotoListController.VIEW;
 
 	@Autowired
 	private UserService userService;
@@ -83,7 +84,8 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.PHOTO );
-		return PHOTO_LIST_VIEW;
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/bookmark/" )
@@ -93,7 +95,8 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARK );
-		return PHOTO_LIST_VIEW;
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/notification/comments/" )
@@ -103,7 +106,8 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
-		return PHOTO_LIST_VIEW;
+
+		return VIEW;
 	}
 
 	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType ) {
