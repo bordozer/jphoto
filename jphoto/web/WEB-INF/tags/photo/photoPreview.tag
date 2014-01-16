@@ -91,7 +91,13 @@
 
 	<div class="containerPhotoLine">
 		<div style="text-align: center;">
+
+			<c:forEach var="favoriteEntryType" items="${photoInfo.showIconsForFavoriteEntryTypes}">
+				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
+			</c:forEach>
+
 			<tags:entryMenu entryMenu="${photoInfo.photoMenu}" />
+
 		</div>
 	</div>
 

@@ -1,5 +1,6 @@
 package controllers.photos.list;
 
+import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.context.EnvironmentContext;
 import core.general.data.PhotoListCriterias;
@@ -20,7 +21,6 @@ import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.system.ConfigurationService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -77,9 +77,6 @@ public class PhotoListController {
 	
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private ConfigurationService configurationService;
 
 	@Autowired
 	private GroupOperationService groupOperationService;

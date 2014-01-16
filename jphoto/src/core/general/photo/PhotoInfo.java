@@ -1,5 +1,6 @@
 package core.general.photo;
 
+import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.menus.EntryMenu;
@@ -10,6 +11,8 @@ import controllers.users.card.MarksByCategoryInfo;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoInfo implements Cacheable {
 
@@ -57,6 +60,8 @@ public class PhotoInfo implements Cacheable {
 	private String photoPreviewImgUrl;
 	private EntryMenu photoMenu;
 	private EntryMenu photoAuthorMenu;
+
+	private List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
 
 	public PhotoInfo( final Photo photo ) {
 		this.photo = photo;
@@ -313,5 +318,13 @@ public class PhotoInfo implements Cacheable {
 
 	public void setShowUserRankInGenreInPhotoList( final boolean showUserRankInGenreInPhotoList ) {
 		this.showUserRankInGenreInPhotoList = showUserRankInGenreInPhotoList;
+	}
+
+	public List<FavoriteEntryType> getShowIconsForFavoriteEntryTypes() {
+		return showIconsForFavoriteEntryTypes;
+	}
+
+	public void setShowIconsForFavoriteEntryTypes( final List<FavoriteEntryType> showIconsForFavoriteEntryTypes ) {
+		this.showIconsForFavoriteEntryTypes = showIconsForFavoriteEntryTypes;
 	}
 }

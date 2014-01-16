@@ -28,6 +28,8 @@ import core.services.pageTitle.PageTitleUserUtilsService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.USERS_URL )
 public class UserBookmarksController {
@@ -83,7 +85,9 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.PHOTO );
+		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList( FavoriteEntryType.PHOTO );
+
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.PHOTO, showIconsForFavoriteEntryTypes );
 
 		return VIEW;
 	}
@@ -94,7 +98,9 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARK );
+		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
+
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARK, showIconsForFavoriteEntryTypes );
 
 		return VIEW;
 	}
@@ -105,12 +111,14 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, showIconsForFavoriteEntryTypes );
 
 		return VIEW;
 	}
 
-	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType ) {
+	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes ) {
 		model.clear();
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, entryType );
@@ -119,7 +127,8 @@ public class UserBookmarksController {
 		final User user = userService.load( userId );
 
 		final String listTitle = TranslatorUtils.translate( "$1: $2", entityLinkUtilsService.getUserCardLink( user ), entryType.getName() );
-		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), listTitle );
+
+		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, showIconsForFavoriteEntryTypes, EnvironmentContext.getCurrentUser() ), listTitle );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 

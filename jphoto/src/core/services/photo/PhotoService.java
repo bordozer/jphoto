@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
@@ -58,6 +59,8 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final User accessor );
 
 	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final Date timeFrom, final Date timeTo, final User accessor );
+
+	List<PhotoInfo> getPhotoInfos( List<Photo> photos, List<FavoriteEntryType> showIconsForFavoriteEntryTypes, User currentUser );
 
 	boolean updatePhotoFileData( int photoId, final File file );
 

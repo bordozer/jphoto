@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
 import core.general.base.PagingModel;
@@ -427,6 +428,17 @@ public class PhotoServiceImpl implements PhotoService {
 		for ( Photo photo : photos ) {
 			photoInfos.add( getPhotoInfo( photo, timeFrom, timeTo, accessor ) );
 		}
+		return photoInfos;
+	}
+
+	@Override
+	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes, final User currentUser ) {
+		final List<PhotoInfo> photoInfos = getPhotoInfos( photos, currentUser );
+
+		for ( final PhotoInfo photoInfo : photoInfos ) {
+			photoInfo.setShowIconsForFavoriteEntryTypes( showIconsForFavoriteEntryTypes );
+		}
+
 		return photoInfos;
 	}
 

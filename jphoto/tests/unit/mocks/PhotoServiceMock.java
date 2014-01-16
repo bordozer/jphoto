@@ -1,5 +1,6 @@
 package mocks;
 
+import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
@@ -95,6 +96,11 @@ public class PhotoServiceMock implements PhotoService {
 
 	@Override
 	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final Date timeFrom, final Date timeTo, final User accessor ) {
+		return null;
+	}
+
+	@Override
+	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes, final User currentUser ) {
 		return null;
 	}
 
