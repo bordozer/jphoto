@@ -15,6 +15,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
 import core.services.entry.VotingCategoryService;
@@ -83,6 +84,9 @@ public class PhotoListController {
 	
 	@Autowired
 	private PhotoCriteriasSqlService photoCriteriasSqlService;
+
+	@Autowired
+	private FavoritesService favoritesService;
 
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
@@ -509,12 +513,16 @@ public class PhotoListController {
 
 	private PhotoList getPhotoList( final List<Photo> pagePhotos, final AbstractPhotoListData listData, final PhotoListCriterias criterias ) {
 
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
 		final List<PhotoInfo> photoInfos;
 		if ( dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeFrom() ) && dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeTo() ) ) {
-			photoInfos = photoService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), EnvironmentContext.getCurrentUser() );
+			photoInfos = photoService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), currentUser );
 		} else {
-			photoInfos = photoService.getPhotoInfos( pagePhotos, EnvironmentContext.getCurrentUser() );
+			photoInfos = photoService.getPhotoInfos( pagePhotos, currentUser );
 		}
+
+		addFavoriteIcons( photoInfos );
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 		final PhotoList photoList = new PhotoList( photoInfos, photoListCriteriasService.getPhotoListTitle( criterias ), showPaging );
@@ -523,9 +531,27 @@ public class PhotoListController {
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
 		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
+		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 
 		return photoList;
+	}
+
+	private void addFavoriteIcons( final List<PhotoInfo> photoInfos ) {
+
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		for ( final PhotoInfo photoInfo : photoInfos ) {
+			final Photo photo = photoInfo.getPhoto();
+			final List<FavoriteEntryType> icons = newArrayList();
+			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.PHOTO.getId() ) ) {
+				icons.add( FavoriteEntryType.PHOTO );
+			}
+
+			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.NEW_COMMENTS_NOTIFICATION.getId() ) ) {
+				icons.add( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+			}
+			photoInfo.setShowIconsForFavoriteEntryTypes( icons );
+		}
 	}
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
