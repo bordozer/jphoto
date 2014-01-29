@@ -9,6 +9,7 @@ public enum PrivateMessageType {
 	, USER_PRIVATE_MESSAGE_OUT( 4, "Sent messages", "privateOut.png" )
 	, ACTIVITY_NOTIFICATIONS( 3, "Activity notifications", "activityNotification.png" )
 	, SYSTEM_NOTIFICATIONS( 2, "System notifications", "systemNotification.png" )
+	, ADMIN_NOTIFICATIONS( 5, "Admin notifications", "adminNotification.png" )
 	;
 
 	private final int id;

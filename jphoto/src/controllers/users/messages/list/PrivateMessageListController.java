@@ -7,7 +7,6 @@ import core.general.message.PrivateMessage;
 import core.services.entry.PrivateMessageService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
-import core.services.utils.UrlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,7 +112,7 @@ public class PrivateMessageListController {
 
 		model.setPrivateMessages( messagesToShow );
 
-		model.setMessagesByType( getMessagesByType( model ) );
+		model.setMessagesByType( getMessagesByType( model.getForUser() ) );
 
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
@@ -135,10 +134,15 @@ public class PrivateMessageListController {
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
-	private Map<PrivateMessageType, Integer> getMessagesByType( final PrivateMessageListModel model ) {
+	private Map<PrivateMessageType, Integer> getMessagesByType( final User forUser ) {
 		final Map<PrivateMessageType, Integer> messagesByType = newLinkedHashMap();
 		for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
-			messagesByType.put( messageType, privateMessageService.getPrivateMessagesCount( model.getForUser().getId(), messageType ) );
+
+			if ( messageType == PrivateMessageType.ADMIN_NOTIFICATIONS && ! securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) ) {
+				continue;
+			}
+
+			messagesByType.put( messageType, privateMessageService.getPrivateMessagesCount( forUser.getId(), messageType ) );
 		}
 		return messagesByType;
 	}
@@ -167,7 +171,7 @@ public class PrivateMessageListController {
 
 		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( receivedMessages, sentMessages, forUser ) );
 
-		model.setMessagesByType( getMessagesByType( model ) );
+		model.setMessagesByType( getMessagesByType( model.getForUser() ) );
 
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 

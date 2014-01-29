@@ -11,7 +11,7 @@
 
 <jsp:useBean id="privateMessageListModel" class="controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
 
-<c:set var="privateMessageTypeValuesLength" value="<%=PrivateMessageType.values().length%>"/>
+<c:set var="privateMessageTypeValuesLength" value="<%=privateMessageListModel.getMessagesByType().size()%>"/>
 <c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)-1}"/>
 <c:set var="messagesByType" value="${privateMessageListModel.messagesByType}"/>
 
@@ -65,14 +65,14 @@
 				</c:forEach>
 			</div>
 
-			<div style="float: left; width: 85px;">
+			<div style="float: left; width: auto;">
 
-				<table:table width="800" border="0">
+				<table:table width="1000" border="0">
 
 					<table:tr>
 
 						<table:td>
-							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 77px; border-bottom: 2px solid #d3d3d3; text-align: center;">
+							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 74px; border-bottom: 2px solid #d3d3d3; text-align: center;">
 
 								<c:forEach var="entry" items="${messagesByType}">
 									<c:set var="privateMessageType" value="${entry.key}"/>

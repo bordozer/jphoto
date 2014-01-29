@@ -184,6 +184,11 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
+	public boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText ) {
+		return send( null, toUser, PrivateMessageType.ADMIN_NOTIFICATIONS, privateMessageText );
+	}
+
+	@Override
 	public boolean exists( final int entryId ) {
 		return privateMessageDao.exists( entryId );
 	}
