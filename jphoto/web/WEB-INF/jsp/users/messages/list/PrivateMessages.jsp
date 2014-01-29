@@ -11,9 +11,9 @@
 
 <jsp:useBean id="privateMessageListModel" class="controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
 
-<c:set var="privateMessageTypeValues" value="<%=PrivateMessageType.values()%>"/>
 <c:set var="privateMessageTypeValuesLength" value="<%=PrivateMessageType.values().length%>"/>
 <c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)-1}"/>
+<c:set var="messagesByType" value="${privateMessageListModel.messagesByType}"/>
 
 <c:set var="usersWhoCommunicatedWithUser" value="${privateMessageListModel.usersWhoCommunicatedWithUser}"/>
 
@@ -73,13 +73,18 @@
 
 						<table:td>
 							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 77px; border-bottom: 2px solid #d3d3d3; text-align: center;">
-								<c:forEach var="privateMessageType" items="${privateMessageTypeValues}">
+
+								<c:forEach var="entry" items="${messagesByType}">
+									<c:set var="privateMessageType" value="${entry.key}"/>
+									<c:set var="messages" value="${entry.value}"/>
+
 									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
 										<br/>
-											${privateMessageType.nameTranslated}
+										${privateMessageType.nameTranslated} ( ${messages} )
 									</div>
 								</c:forEach>
+
 							</div>
 						</table:td>
 					</table:tr>
@@ -90,17 +95,20 @@
 						</table:td>
 					</table:tr>
 
+					<c:set var="counter" value="1"/>
 					<c:forEach var="privateMessage" items="${privateMessages}">
 
 						<table:tr>
 
 							<table:td>
 
-								<messages:privateMessageView privateMessage="${privateMessage}"/>
+								<messages:privateMessageView counter="${counter}" privateMessage="${privateMessage}"/>
 
 							</table:td>
 
 						</table:tr>
+
+						<c:set var="counter" value="${counter + 1}"/>
 
 					</c:forEach>
 

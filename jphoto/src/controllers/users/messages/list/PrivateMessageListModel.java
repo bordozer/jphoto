@@ -6,12 +6,14 @@ import core.general.user.User;
 import core.general.message.PrivateMessage;
 
 import java.util.List;
+import java.util.Map;
 
 public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	private User forUser;
 	private List<PrivateMessage> privateMessages;
 	private PrivateMessageType privateMessageType;
+	private Map<PrivateMessageType, Integer> messagesByType;
 
 	private List<UsersWhoCommunicatedWithUser> usersWhoCommunicatedWithUser;
 
@@ -65,5 +67,13 @@ public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	public void setSelectedMessagesIds( final List<String> selectedMessagesIds ) {
 		this.selectedMessagesIds = selectedMessagesIds;
+	}
+
+	public Map<PrivateMessageType, Integer> getMessagesByType() {
+		return messagesByType;
+	}
+
+	public void setMessagesByType( final Map<PrivateMessageType, Integer> messagesByType ) {
+		this.messagesByType = messagesByType;
 	}
 }

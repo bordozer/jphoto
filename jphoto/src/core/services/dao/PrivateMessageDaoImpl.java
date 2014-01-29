@@ -85,6 +85,18 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 	}
 
 	@Override
+	public int getPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
+		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId;"
+				, ENTITY_ID, TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+		paramSource.addValue( "messageTypeId", privateMessageType.getId() );
+
+		return getIntValueOrZero( sql, paramSource );
+	}
+
+	@Override
 	public int markPrivateMessageAsRead( final int privateMessageId ) {
 		final String sql = String.format( "UPDATE %s SET %s=:currentTime WHERE %s=:id;", TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_READ_TIME, ENTITY_ID );
 

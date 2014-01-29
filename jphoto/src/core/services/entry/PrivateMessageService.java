@@ -19,6 +19,8 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 
 	int getNewPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType );
 
+	int getPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType );
+
 	int markPrivateMessageAsRead( final int privateMessageId );
 
 	AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO );

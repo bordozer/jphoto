@@ -9,6 +9,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%@ attribute name="counter" required="true" type="java.lang.Integer" %>
 <%@ attribute name="privateMessage" required="true" type="core.general.message.PrivateMessage" %>
 
 <c:set var="fromUser" value="${privateMessage.fromUser}"/>
@@ -19,6 +20,8 @@
 <div style="float: left; width: 90%; padding-bottom: 5px; padding-top: 5px;">
 
 	<div style="float: left; width: 100%; height: 20px; border-bottom: 1px solid #CDCDCD;">
+
+		${counter}
 
 		<form:checkbox path="selectedMessagesIds" value="${privateMessage.id}" />
 

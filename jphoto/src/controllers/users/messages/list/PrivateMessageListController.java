@@ -22,12 +22,10 @@ import utils.UserUtils;
 import core.services.pageTitle.PageTitleUserUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
 @Controller
@@ -115,6 +113,8 @@ public class PrivateMessageListController {
 
 		model.setPrivateMessages( messagesToShow );
 
+		model.setMessagesByType( getMessagesByType( model ) );
+
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
@@ -133,6 +133,14 @@ public class PrivateMessageListController {
 		}
 
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
+	}
+
+	private Map<PrivateMessageType, Integer> getMessagesByType( final PrivateMessageListModel model ) {
+		final Map<PrivateMessageType, Integer> messagesByType = newHashMap();
+		for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
+			messagesByType.put( messageType, privateMessageService.getPrivateMessagesCount( model.getForUser().getId(), messageType ) );
+		}
+		return messagesByType;
 	}
 
 	private String getMessageView( final PrivateMessageType messageType, final PrivateMessageListModel model ) {
@@ -158,6 +166,8 @@ public class PrivateMessageListController {
 		model.setPrivateMessages( messagesToShow );
 
 		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( receivedMessages, sentMessages, forUser ) );
+
+		model.setMessagesByType( getMessagesByType( model ) );
 
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
