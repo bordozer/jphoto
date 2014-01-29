@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Maps.newLinkedHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
 @Controller
@@ -136,7 +136,7 @@ public class PrivateMessageListController {
 	}
 
 	private Map<PrivateMessageType, Integer> getMessagesByType( final PrivateMessageListModel model ) {
-		final Map<PrivateMessageType, Integer> messagesByType = newHashMap();
+		final Map<PrivateMessageType, Integer> messagesByType = newLinkedHashMap();
 		for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
 			messagesByType.put( messageType, privateMessageService.getPrivateMessagesCount( model.getForUser().getId(), messageType ) );
 		}
