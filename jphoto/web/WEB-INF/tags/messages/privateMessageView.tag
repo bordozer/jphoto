@@ -30,11 +30,16 @@
 		&nbsp;&nbsp;
 
 		<c:if test="${privateMessageType != 'USER_PRIVATE_MESSAGE_OUT'}">
+
 			<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_IN'}">
 				${eco:translate('From')} <user:userCard user="${fromUser}"/> /
 			</c:if>
 
 			<b>${eco:formatDate(privateMessage.creationTime)} ${eco:formatTimeShort(privateMessage.creationTime)}</b>
+
+			<c:if test="${empty privateMessage.readTime.time}">
+				/ <span class="newInsertedComment">${eco:translate('New')}</span>
+			</c:if>
 
 			<c:if test="${privateMessage.readTime.time > 0}">
 				/ ${eco:translate('You read this message at ')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
@@ -43,6 +48,7 @@
 			<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_IN'}">
 				/ <icons:sendPrivateMessage toUser="${fromUser}" callback="reloadPageCallbackFunction" />
 			</c:if>
+
 		</c:if>
 
 		<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_OUT'}">

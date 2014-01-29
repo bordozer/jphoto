@@ -73,7 +73,7 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 	}
 
 	@Override
-	public int getNewPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
+	public int getNewReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
 		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId AND %s IS NULL;"
 				, ENTITY_ID, TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID, TABLE_PRIVATE_MESSAGE_COL_READ_TIME );
 
@@ -85,13 +85,25 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 	}
 
 	@Override
-	public int getPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
+	public int getReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
 		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId;"
 				, ENTITY_ID, TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
 		paramSource.addValue( "messageTypeId", privateMessageType.getId() );
+
+		return getIntValueOrZero( sql, paramSource );
+	}
+
+	@Override
+	public int getSentPrivateMessagesCount( final int userId ) {
+		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userId AND %s=:messageTypeId;"
+				, ENTITY_ID, TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_FROM_USER_ID, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+		paramSource.addValue( "messageTypeId", PrivateMessageType.USER_PRIVATE_MESSAGE_OUT.getId() );
 
 		return getIntValueOrZero( sql, paramSource );
 	}

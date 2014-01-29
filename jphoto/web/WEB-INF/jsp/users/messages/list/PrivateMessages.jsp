@@ -72,16 +72,21 @@
 					<table:tr>
 
 						<table:td>
-							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 74px; border-bottom: 2px solid #d3d3d3; text-align: center;">
+							<div style="width: 100%; align: center; margin-left: auto; margin-right: auto; height: 91px; border-bottom: 2px solid #d3d3d3; text-align: center;">
 
 								<c:forEach var="entry" items="${messagesByType}">
 									<c:set var="privateMessageType" value="${entry.key}"/>
-									<c:set var="messages" value="${entry.value}"/>
+									<c:set var="messageTypeData" value="${entry.value}"/>
 
 									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
 										<br/>
-										${privateMessageType.nameTranslated} ( ${messages} )
+										${privateMessageType.nameTranslated}
+										<br/>
+										<span title="${eco:translate('Total messages')}">${messageTypeData.messages}</span>
+										<c:if test="${messageTypeData.newMessages > 0}">
+											( <span title="${eco:translate('New messages')}">${messageTypeData.newMessages > 0 ? '+' : ''}${messageTypeData.newMessages}</span> )
+										</c:if>
 									</div>
 								</c:forEach>
 

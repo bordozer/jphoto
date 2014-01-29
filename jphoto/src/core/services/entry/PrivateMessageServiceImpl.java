@@ -59,13 +59,18 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public int getNewPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
-		return privateMessageDao.getNewPrivateMessagesCount( userId, privateMessageType );
+	public int getNewReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
+		return privateMessageDao.getNewReceivedPrivateMessagesCount( userId, privateMessageType );
 	}
 
 	@Override
-	public int getPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
-		return privateMessageDao.getPrivateMessagesCount( userId, privateMessageType );
+	public int getReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType ) {
+		return privateMessageDao.getReceivedPrivateMessagesCount( userId, privateMessageType );
+	}
+
+	@Override
+	public int getSentPrivateMessagesCount( final int userId ) {
+		return privateMessageDao.getSentPrivateMessagesCount( userId );
 	}
 
 	@Override

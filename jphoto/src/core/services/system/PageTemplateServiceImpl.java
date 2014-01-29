@@ -174,10 +174,12 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		final List<NewPrivateMessage> privateMessages = newArrayList();
 		if ( UserUtils.isCurrentUserLoggedUser() ) {
 			for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
+
 				if ( messageType == PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
 					continue;
 				}
-				final int messagesCount = privateMessageService.getNewPrivateMessagesCount( currentUser.getId(), messageType );
+
+				final int messagesCount = privateMessageService.getNewReceivedPrivateMessagesCount( currentUser.getId(), messageType );
 
 				if ( messagesCount > 0 ) {
 					final NewPrivateMessage newPrivateMessage = new NewPrivateMessage( messageType, messagesCount );

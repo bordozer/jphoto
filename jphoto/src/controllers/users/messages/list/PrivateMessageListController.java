@@ -134,16 +134,31 @@ public class PrivateMessageListController {
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
-	private Map<PrivateMessageType, Integer> getMessagesByType( final User forUser ) {
-		final Map<PrivateMessageType, Integer> messagesByType = newLinkedHashMap();
+	private Map<PrivateMessageType, MessageTypeData> getMessagesByType( final User forUser ) {
+		final Map<PrivateMessageType, MessageTypeData> messagesByType = newLinkedHashMap();
+
 		for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
 
 			if ( messageType == PrivateMessageType.ADMIN_NOTIFICATIONS && ! securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) ) {
 				continue;
 			}
 
-			messagesByType.put( messageType, privateMessageService.getPrivateMessagesCount( forUser.getId(), messageType ) );
+			final MessageTypeData data = new MessageTypeData();
+			final int messagesCount;
+			if ( messageType != PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
+				messagesCount = privateMessageService.getReceivedPrivateMessagesCount( forUser.getId(), messageType );
+			} else {
+				messagesCount = privateMessageService.getSentPrivateMessagesCount( forUser.getId() );
+			}
+
+			final int newMessagesCount = messageType != PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ? privateMessageService.getNewReceivedPrivateMessagesCount( forUser.getId(), messageType ) : 0;
+
+			data.setMessages( messagesCount );
+			data.setNewMessages( newMessagesCount );
+
+			messagesByType.put( messageType, data );
 		}
+
 		return messagesByType;
 	}
 
