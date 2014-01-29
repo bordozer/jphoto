@@ -129,6 +129,10 @@
 					function deleteSelectedPrivateMessages() {
 						return confirm( "${eco:translate('Delete selected private messages?')}" );
 					}
+
+					function reloadPageCallbackFunction() {
+						document.location.reload();
+					}
 				</script>
 
 			</div>

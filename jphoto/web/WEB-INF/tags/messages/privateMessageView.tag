@@ -75,9 +75,3 @@
 	</div>
 
 </div>
-
-<script type="text/javascript">
-	function reloadPageCallbackFunction() {
-		document.location.reload();
-	}
-</script>
