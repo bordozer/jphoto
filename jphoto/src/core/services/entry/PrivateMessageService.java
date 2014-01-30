@@ -13,9 +13,9 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 
 	String BEAN_NAME = "privateMessageService";
 
-	List<PrivateMessage> loadMessagesFromUser( final int fromUserId );
+	List<PrivateMessage> loadReceivedPrivateMessages( final int toUserId, final PrivateMessageType privateMessageType );
 
-	List<PrivateMessage> loadMessagesToUser( final int toUserId, final PrivateMessageType privateMessageType );
+	List<PrivateMessage> loadSentPrivateMessages( final int fromUserId );
 
 	int getNewReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType );
 

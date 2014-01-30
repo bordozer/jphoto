@@ -81,8 +81,8 @@ public class PrivateMessageListController {
 
 		securityService.assertUserEqualsToCurrentUser( forUser );
 
-		final List<PrivateMessage> receivedMessages = privateMessageService.loadMessagesToUser( forUser.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
-		final List<PrivateMessage> sentMessages = privateMessageService.loadMessagesFromUser( forUser.getId() );
+		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
+		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( forUser.getId() );
 
 		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( receivedMessages, sentMessages, forUser ) );
 		model.setMessagingWithUserId( withUserId );
@@ -143,7 +143,7 @@ public class PrivateMessageListController {
 
 		for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
 
-			if ( messageType == PrivateMessageType.ADMIN_NOTIFICATIONS && ! securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) ) {
+			if ( messageType == PrivateMessageType.ADMIN_NOTIFICATIONS && !securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) ) {
 				continue;
 			}
 
@@ -175,8 +175,8 @@ public class PrivateMessageListController {
 
 		final List<PrivateMessage> messagesToShow;
 
-		final List<PrivateMessage> receivedMessages = privateMessageService.loadMessagesToUser( forUser.getId(), messageType );
-		final List<PrivateMessage> sentMessages = privateMessageService.loadMessagesFromUser( forUser.getId() );
+		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), messageType );
+		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( forUser.getId() );
 
 		if ( messageType != PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
 			messagesToShow = receivedMessages;
@@ -198,12 +198,18 @@ public class PrivateMessageListController {
 	}
 
 	private void markMessagesAsReadIfNecessary( final List<PrivateMessage> messagesToShow ) {
-		for ( final PrivateMessage message : messagesToShow ) {
-			if ( ! message.isRead() && UserUtils.isUsersEqual( message.getToUser(), EnvironmentContext.getCurrentUser() ) ) {
-				privateMessageService.markPrivateMessageAsRead( message.getId() );
-				privateMessageService.markPrivateMessageAsRead( message.getOutPrivateMessageId() ); // Mark outgoing message as read by addressat
+
+		new Thread( new Runnable() {
+			@Override
+			public void run() {
+				for ( final PrivateMessage message : messagesToShow ) {
+					if ( !message.isRead() && UserUtils.isUsersEqual( message.getToUser(), EnvironmentContext.getCurrentUser() ) ) {
+						privateMessageService.markPrivateMessageAsRead( message.getId() );
+						privateMessageService.markPrivateMessageAsRead( message.getOutPrivateMessageId() ); // Mark outgoing message as read by addressat
+					}
+				}
 			}
-		}
+		} ).start();
 	}
 
 	private List<UsersWhoCommunicatedWithUser> getUsersWhoCommunicatedWithUser( final List<PrivateMessage> receivedMessages, final List<PrivateMessage> sentMessages, final User withUser ) {
@@ -249,7 +255,7 @@ public class PrivateMessageListController {
 		CollectionUtils.filter( whoGotMessagesUserSet, new Predicate<UsersWhoCommunicatedWithUser>() {
 			@Override
 			public boolean evaluate( final UsersWhoCommunicatedWithUser communicator ) {
-				return ! UserUtils.isUsersEqual( communicator.getWithUser(), withUser );
+				return !UserUtils.isUsersEqual( communicator.getWithUser(), withUser );
 			}
 		} );
 

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PrivateMessageDao extends BaseEntityDao<PrivateMessage> {
 
-	List<PrivateMessage> loadMessagesFromUser( final int fromUserId );
+	List<PrivateMessage> loadSentPrivateMessages( final int fromUserId );
 
-	List<PrivateMessage> loadMessagesToUser( final int toUserId, final PrivateMessageType privateMessageType );
+	List<PrivateMessage> loadReceivedPrivateMessages( final int toUserId, final PrivateMessageType privateMessageType );
 
 	int getNewReceivedPrivateMessagesCount( final int userId, final PrivateMessageType privateMessageType );
 

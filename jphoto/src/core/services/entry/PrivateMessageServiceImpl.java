@@ -49,13 +49,13 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public List<PrivateMessage> loadMessagesFromUser( final int fromUserId ) {
-		return privateMessageDao.loadMessagesFromUser( fromUserId );
+	public List<PrivateMessage> loadReceivedPrivateMessages( final int toUserId, final PrivateMessageType privateMessageType ) {
+		return privateMessageDao.loadReceivedPrivateMessages( toUserId, privateMessageType );
 	}
 
 	@Override
-	public List<PrivateMessage> loadMessagesToUser( final int toUserId, final PrivateMessageType privateMessageType ) {
-		return privateMessageDao.loadMessagesToUser( toUserId, privateMessageType );
+	public List<PrivateMessage> loadSentPrivateMessages( final int fromUserId ) {
+		return privateMessageDao.loadSentPrivateMessages( fromUserId );
 	}
 
 	@Override

@@ -63,12 +63,12 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 	}
 
 	@Override
-	public List<PrivateMessage> loadMessagesFromUser( final int fromUserId ) {
+	public List<PrivateMessage> loadSentPrivateMessages( final int fromUserId ) {
 		return getMessageForUserColumn( fromUserId, PrivateMessageType.USER_PRIVATE_MESSAGE_OUT, TABLE_PRIVATE_MESSAGE_COL_FROM_USER_ID );
 	}
 
 	@Override
-	public List<PrivateMessage> loadMessagesToUser( final int toUserId, final PrivateMessageType privateMessageType ) {
+	public List<PrivateMessage> loadReceivedPrivateMessages( final int toUserId, final PrivateMessageType privateMessageType ) {
 		return getMessageForUserColumn( toUserId, privateMessageType, TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID );
 	}
 
