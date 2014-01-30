@@ -79,6 +79,8 @@ public class PrivateMessageListController {
 		final int withUserId = NumberUtils.convertToInt( _withUserId );
 		final User forUser = model.getForUser();
 
+		securityService.assertUserEqualsToCurrentUser( forUser );
+
 		final List<PrivateMessage> receivedMessages = privateMessageService.loadMessagesToUser( forUser.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
 		final List<PrivateMessage> sentMessages = privateMessageService.loadMessagesFromUser( forUser.getId() );
 
@@ -121,6 +123,8 @@ public class PrivateMessageListController {
 
 	@RequestMapping( method = RequestMethod.POST, value = "/**" )
 	public String deleteMessages( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+
+		securityService.assertUserEqualsToCurrentUser( model.getForUser() );
 
 		final List<String> _selectedMessagesIds = model.getSelectedMessagesIds();
 
