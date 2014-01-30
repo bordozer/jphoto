@@ -6,6 +6,7 @@ import core.general.photo.PhotoComment;
 import core.services.system.CacheService;
 import core.services.user.UserService;
 import core.services.dao.mappers.IdsRowMapper;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -183,6 +184,17 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	}
 
 	@Override
+	public List<Integer> getUnreadCommentsIds( final int userId ) {
+		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL;"
+			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+
+		return jdbcTemplate.query( sql, paramSource, new IdsRowMapper() );
+	}
+
+	@Override
 	public int getWrittenCommentsQty( final int userId ) {
 		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s = :userId;"
 			, ENTITY_ID                         // 1
@@ -261,6 +273,18 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 		paramSource.addValue( "photoId", photoId );
 
 		return getIntValueOrZero( sql, paramSource );
+	}
+
+	@Override
+	public void markAllUnreadCommentAsRead( final int userId ) {
+		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s IN ( %s )", TABLE_COMMENTS, TABLE_COLUMN_READ_TIME, ENTITY_ID, StringUtils.join( getUnreadCommentsIds( userId), "," ) );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "readTime", dateUtilsService.getCurrentTime() );
+
+		jdbcTemplate.update( sql, paramSource );
+
+		cacheService.expire( CacheKey.PHOTO_COMMENT ); // TODO: for this user only!
 	}
 
 	class PhotoCommentMapper implements RowMapper<PhotoComment> {

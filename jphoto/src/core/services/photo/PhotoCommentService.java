@@ -57,4 +57,6 @@ public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
 	CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId );
 
 	int getPhotoCommentsCount( final int photoId );
+
+	void markAllUnreadCommentAsRead( final int userId );
 }

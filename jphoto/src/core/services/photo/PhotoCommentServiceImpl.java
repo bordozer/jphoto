@@ -326,6 +326,11 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	}
 
 	@Override
+	public void markAllUnreadCommentAsRead( final int userId ) {
+		photoCommentDao.markAllUnreadCommentAsRead( userId );
+	}
+
+	@Override
 	public boolean exists( final int entryId ) {
 		return photoCommentDao.exists( entryId );
 	}

@@ -78,6 +78,17 @@
 			<tags:paging showSummary="true"/>
 		</c:if>
 
+		<html:submitButton id="markAllAsReadButton" caption_t="Mark all as read" onclick="return markAllAsRead();" doNotTranslate="true" />
+		<script type="text/javascript">
+			function markAllAsRead() {
+				if ( confirm( "${eco:translate('Mark ALL unread comments as read?')}" ) ) {
+					document.location.href = '${eco:baseUrlWithPrefix()}/members/${user.id}/comments/to/markAllAsRead/';
+					return true;
+				}
+				return false;
+			}
+		</script>
+
 		<c:if test="${showNextButton}">
 			<comments:unreadCommentsNextButton userId="${user.id}" pagingModel="${pagingModel}" showInfo="true" />
 		</c:if>

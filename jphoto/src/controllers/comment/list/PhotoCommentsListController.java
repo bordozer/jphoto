@@ -12,6 +12,7 @@ import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
+import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -60,6 +61,9 @@ public class PhotoCommentsListController {
 
 	@Autowired
 	private EntryMenuService entryMenuService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoCommentsListModel prepareModel( final @PathVariable( "userId" ) int userId ) {
@@ -132,6 +136,18 @@ public class PhotoCommentsListController {
 		model.setPageTitleData( pageTitlePhotoCommentUtilsService.getUnreadPhotoCommentsToUserData( user ) );
 
 		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/to/markAllAsRead" )
+	public String markAllCommentsAsRead( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model ) {
+
+		final User user = model.getUser();
+
+		securityService.assertUserEqualsToCurrentUser( user );
+
+		photoCommentService.markAllUnreadCommentAsRead( user.getId() );
+
+		return String.format( "redirect:%s/members/%d/comments/to/", urlUtilsService.getBaseURLWithPrefix(), user.getId() );
 	}
 
 	private List<PhotoCommentInfo> getCommentsInfos( final List<Integer> commentIds, final PagingModel pagingModel ) {
