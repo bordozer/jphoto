@@ -2,11 +2,15 @@ package controllers.users.messages.list;
 
 import core.enums.PrivateMessageType;
 import core.context.EnvironmentContext;
+import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.message.PrivateMessage;
+import core.services.dao.PrivateMessageDaoImpl;
 import core.services.entry.PrivateMessageService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
+import core.services.utils.sql.BaseSqlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +19,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sql.SqlSelectIdsResult;
+import sql.builder.*;
 import utils.ListUtils;
 import utils.NumberUtils;
+import utils.PagingUtils;
 import utils.UserUtils;
 import core.services.pageTitle.PageTitleUserUtilsService;
 
@@ -34,6 +41,8 @@ public class PrivateMessageListController {
 	private static final String MODEL_NAME = "privateMessageListModel";
 	private static final String VIEW = "users/messages/list/PrivateMessages";
 
+	private static final int ITEMS_ON_PAGE = 25;
+
 	@Autowired
 	private UserService userService;
 
@@ -45,6 +54,12 @@ public class PrivateMessageListController {
 
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PrivateMessageListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
@@ -59,16 +74,26 @@ public class PrivateMessageListController {
 		return model;
 	}
 
+	@ModelAttribute( "pagingModel" )
+	public PagingModel preparePagingModel( final HttpServletRequest request ) {
+		final PagingModel pagingModel = new PagingModel();
+		PagingUtils.initPagingModel( pagingModel, request );
+
+		pagingModel.setItemsOnPage( ITEMS_ON_PAGE );
+
+		return pagingModel;
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String showAllList( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model ) {
-		return getMessageView( PrivateMessageType.USER_PRIVATE_MESSAGE_IN, model );
+	public String showAllList( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return getMessageView( PrivateMessageType.USER_PRIVATE_MESSAGE_IN, model, pagingModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{messageTypeId}/" )
-	public String showList( final @PathVariable( "messageTypeId" ) int messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model ) {
+	public String showList( final @PathVariable( "messageTypeId" ) int messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		final PrivateMessageType messageType = PrivateMessageType.getById( messageTypeId );
 
-		return getMessageView( messageType, model );
+		return getMessageView( messageType, model, pagingModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/with/{withUserId}/" )
@@ -166,7 +191,7 @@ public class PrivateMessageListController {
 		return messagesByType;
 	}
 
-	private String getMessageView( final PrivateMessageType messageType, final PrivateMessageListModel model ) {
+	private String getMessageView( final PrivateMessageType messageType, final PrivateMessageListModel model, final PagingModel pagingModel ) {
 		final User forUser = model.getForUser();
 
 		securityService.assertUserEqualsToCurrentUser( forUser );
@@ -175,8 +200,8 @@ public class PrivateMessageListController {
 
 		final List<PrivateMessage> messagesToShow;
 
-		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), messageType );
-		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( forUser.getId() );
+		final List<PrivateMessage> sentMessages = getSentMessages( forUser, pagingModel );
+		final List<PrivateMessage> receivedMessages = getReceivedMessages( forUser, pagingModel, messageType );
 
 		if ( messageType != PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
 			messagesToShow = receivedMessages;
@@ -195,6 +220,71 @@ public class PrivateMessageListController {
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
+	}
+
+	private List<PrivateMessage> getReceivedMessages( final User forUser, final PagingModel pagingModel, final PrivateMessageType messageType ) {
+		return getMessagesByQuery( getReceivedMessagesQuery( forUser, messageType ), pagingModel );
+	}
+
+	private List<PrivateMessage> getSentMessages( final User forUser, final PagingModel pagingModel ) {
+		return getMessagesByQuery( getSentMessagesQuery( forUser ), pagingModel );
+	}
+
+	private SqlIdsSelectQuery getReceivedMessagesQuery( final User toUser, final PrivateMessageType messageType ) {
+		final SqlTable tPrivateMessage = new SqlTable( PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE );
+
+		final SqlIdsSelectQuery selectIdsQuery = new SqlIdsSelectQuery( tPrivateMessage );
+
+		final SqlColumnSelect tPrivateMessageColToUser = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID );
+
+		final SqlLogicallyJoinable and = new SqlCondition( tPrivateMessageColToUser, SqlCriteriaOperator.EQUALS, toUser.getId(), dateUtilsService );
+		selectIdsQuery.addWhereAnd( and );
+
+		final SqlColumnSelect tPrivateMessageColMessageTypeId = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
+		final SqlLogicallyJoinable and2 = new SqlCondition( tPrivateMessageColMessageTypeId, SqlCriteriaOperator.EQUALS, messageType.getId(), dateUtilsService );
+		selectIdsQuery.addWhereAnd( and2 );
+
+		final SqlColumnSelect tPrivateMessageColCreateTime = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_CREATE_TIME );
+		selectIdsQuery.addSortingDesc( tPrivateMessageColCreateTime );
+
+		return selectIdsQuery;
+	}
+
+	private SqlIdsSelectQuery getSentMessagesQuery( final User fromUser ) {
+		final SqlTable tPrivateMessage = new SqlTable( PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE );
+
+		final SqlIdsSelectQuery selectIdsQuery = new SqlIdsSelectQuery( tPrivateMessage );
+
+		final SqlColumnSelect tPrivateMessageColToUser = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_FROM_USER_ID );
+
+		final SqlLogicallyJoinable and = new SqlCondition( tPrivateMessageColToUser, SqlCriteriaOperator.EQUALS, fromUser.getId(), dateUtilsService );
+		selectIdsQuery.addWhereAnd( and );
+
+		final SqlColumnSelect tPrivateMessageColMessageTypeId = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
+		final SqlLogicallyJoinable and2 = new SqlCondition( tPrivateMessageColMessageTypeId, SqlCriteriaOperator.EQUALS, PrivateMessageType.USER_PRIVATE_MESSAGE_OUT.getId(), dateUtilsService );
+		selectIdsQuery.addWhereAnd( and2 );
+
+		final SqlColumnSelect tPrivateMessageColCreateTime = new SqlColumnSelect( tPrivateMessage, PrivateMessageDaoImpl.TABLE_PRIVATE_MESSAGE_COL_CREATE_TIME );
+		selectIdsQuery.addSortingDesc( tPrivateMessageColCreateTime );
+
+		return selectIdsQuery;
+	}
+
+	private List<PrivateMessage> getMessagesByQuery( final SqlIdsSelectQuery selectIdsQuery, final PagingModel pagingModel ) {
+
+		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel );
+
+		final List<PrivateMessage> receivedMessages = newArrayList();
+
+		final SqlSelectIdsResult idsResult = privateMessageService.load( selectIdsQuery );
+		final List<Integer> ids = idsResult.getIds();
+		for ( final int id : ids ) {
+			receivedMessages.add( privateMessageService.load( id ) );
+		}
+
+		pagingModel.setTotalItems( idsResult.getRecordQty() );
+
+		return receivedMessages;
 	}
 
 	private void markMessagesAsReadIfNecessary( final List<PrivateMessage> messagesToShow ) {

@@ -6,10 +6,11 @@ import core.enums.PrivateMessageType;
 import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.interfaces.BaseEntityService;
+import core.interfaces.IdsSqlSelectable;
 
 import java.util.List;
 
-public interface PrivateMessageService extends BaseEntityService<PrivateMessage> {
+public interface PrivateMessageService extends BaseEntityService<PrivateMessage>, IdsSqlSelectable {
 
 	String BEAN_NAME = "privateMessageService";
 

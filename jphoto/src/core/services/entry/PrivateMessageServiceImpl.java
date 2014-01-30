@@ -12,6 +12,8 @@ import core.services.user.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import sql.SqlSelectIdsResult;
+import sql.builder.SqlIdsSelectQuery;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
@@ -201,5 +203,10 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	@Override
 	public boolean exists( final PrivateMessage entry ) {
 		return privateMessageDao.exists( entry );
+	}
+
+	@Override
+	public SqlSelectIdsResult load( final SqlIdsSelectQuery selectIdsQuery ) {
+		return privateMessageDao.load( selectIdsQuery );
 	}
 }

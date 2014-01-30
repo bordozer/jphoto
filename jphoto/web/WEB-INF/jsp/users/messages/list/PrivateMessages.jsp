@@ -90,24 +90,27 @@
 
 					<table:tr>
 						<table:td>
+							<tags:paging showSummary="false"/>
+						</table:td>
+					</table:tr>
+
+					<table:tr>
+						<table:td>
 							<js:checkBoxChecker namePrefix="selectedMessagesIds"/>
 						</table:td>
 					</table:tr>
 
-					<c:set var="counter" value="1"/>
 					<c:forEach var="privateMessage" items="${privateMessages}">
 
 						<table:tr>
 
 							<table:td>
 
-								<messages:privateMessageView counter="${counter}" privateMessage="${privateMessage}"/>
+								<messages:privateMessageView privateMessage="${privateMessage}"/>
 
 							</table:td>
 
 						</table:tr>
-
-						<c:set var="counter" value="${counter + 1}"/>
 
 					</c:forEach>
 
@@ -134,5 +137,9 @@
 		</div>
 
 	</form:form>
+
+	<tags:paging showSummary="true"/>
+
+	<div class="footerseparator"></div>
 
 </tags:page>
