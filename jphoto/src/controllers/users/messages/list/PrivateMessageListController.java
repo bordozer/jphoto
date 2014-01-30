@@ -109,7 +109,7 @@ public class PrivateMessageListController {
 		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
 		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( forUser.getId() );
 
-		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( receivedMessages, sentMessages, forUser ) );
+		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( forUser ) );
 		model.setMessagingWithUserId( withUserId );
 
 		CollectionUtils.filter( receivedMessages, new Predicate<PrivateMessage>() {
@@ -199,23 +199,21 @@ public class PrivateMessageListController {
 		model.setPrivateMessageType( messageType );
 
 		final List<PrivateMessage> messagesToShow;
-
-		final List<PrivateMessage> sentMessages = getSentMessages( forUser, pagingModel );
-		final List<PrivateMessage> receivedMessages = getReceivedMessages( forUser, pagingModel, messageType );
-
 		if ( messageType != PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
-			messagesToShow = receivedMessages;
+			messagesToShow = getReceivedMessages( forUser, pagingModel, messageType );
 		} else {
-			messagesToShow = sentMessages;
+			messagesToShow = getSentMessages( forUser, pagingModel );
 		}
 
 		markMessagesAsReadIfNecessary( messagesToShow );
 
 		model.setPrivateMessages( messagesToShow );
 
-		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( receivedMessages, sentMessages, forUser ) );
+		model.setUsersWhoCommunicatedWithUser( getUsersWhoCommunicatedWithUser( forUser ) );
 
 		model.setMessagesByType( getMessagesByType( model.getForUser() ) );
+
+		model.setShowPaging( true );
 
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
@@ -302,7 +300,10 @@ public class PrivateMessageListController {
 		} ).start();
 	}
 
-	private List<UsersWhoCommunicatedWithUser> getUsersWhoCommunicatedWithUser( final List<PrivateMessage> receivedMessages, final List<PrivateMessage> sentMessages, final User withUser ) {
+	private List<UsersWhoCommunicatedWithUser> getUsersWhoCommunicatedWithUser( final User user ) {
+
+		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( user.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
+		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( user.getId() );
 
 		final List<PrivateMessage> messages = newArrayList( receivedMessages );
 		final Set<UsersWhoCommunicatedWithUser> whoGotMessagesUserSet = newHashSet();
@@ -345,7 +346,7 @@ public class PrivateMessageListController {
 		CollectionUtils.filter( whoGotMessagesUserSet, new Predicate<UsersWhoCommunicatedWithUser>() {
 			@Override
 			public boolean evaluate( final UsersWhoCommunicatedWithUser communicator ) {
-				return !UserUtils.isUsersEqual( communicator.getWithUser(), withUser );
+				return !UserUtils.isUsersEqual( communicator.getWithUser(), user );
 			}
 		} );
 

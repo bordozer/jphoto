@@ -88,11 +88,13 @@
 						</table:td>
 					</table:tr>
 
-					<table:tr>
-						<table:td>
-							<tags:paging showSummary="false"/>
-						</table:td>
-					</table:tr>
+					<c:if test="${privateMessageListModel.showPaging}">
+						<table:tr>
+							<table:td>
+								<tags:paging showSummary="false"/>
+							</table:td>
+						</table:tr>
+					</c:if>
 
 					<table:tr>
 						<table:td>
@@ -138,7 +140,9 @@
 
 	</form:form>
 
-	<tags:paging showSummary="true"/>
+	<c:if test="${privateMessageListModel.showPaging}">
+		<tags:paging showSummary="true"/>
+	</c:if>
 
 	<div class="footerseparator"></div>
 

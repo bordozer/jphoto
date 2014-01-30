@@ -21,6 +21,8 @@ public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	private List<String> selectedMessagesIds;
 
+	private boolean showPaging;
+
 	public User getForUser() {
 		return forUser;
 	}
@@ -75,5 +77,13 @@ public class PrivateMessageListModel extends AbstractGeneralModel {
 
 	public void setMessagesByType( final Map<PrivateMessageType, MessageTypeData> messagesByType ) {
 		this.messagesByType = messagesByType;
+	}
+
+	public boolean isShowPaging() {
+		return showPaging;
+	}
+
+	public void setShowPaging( final boolean showPaging ) {
+		this.showPaging = showPaging;
 	}
 }
