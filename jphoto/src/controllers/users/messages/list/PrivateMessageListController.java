@@ -10,6 +10,7 @@ import core.services.entry.PrivateMessageService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -61,15 +62,22 @@ public class PrivateMessageListController {
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PrivateMessageListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
 
 		securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
-		final PrivateMessageListModel model = new PrivateMessageListModel();
 
-		model.setForUser( userService.load( userId ) );
+		final User forUser = userService.load( userId );
+
+		securityService.assertUserEqualsToCurrentUser( forUser );
+
+		final PrivateMessageListModel model = new PrivateMessageListModel();
+		model.setForUser( forUser );
 
 		return model;
 	}
@@ -103,8 +111,6 @@ public class PrivateMessageListController {
 
 		final int withUserId = NumberUtils.convertToInt( _withUserId );
 		final User forUser = model.getForUser();
-
-		securityService.assertUserEqualsToCurrentUser( forUser );
 
 		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
 		final List<PrivateMessage> sentMessages = privateMessageService.loadSentPrivateMessages( forUser.getId() );
@@ -148,10 +154,8 @@ public class PrivateMessageListController {
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.POST, value = "/**" )
+	@RequestMapping( method = RequestMethod.POST, value = "/delete/" )
 	public String deleteMessages( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
-
-		securityService.assertUserEqualsToCurrentUser( model.getForUser() );
 
 		final List<String> _selectedMessagesIds = model.getSelectedMessagesIds();
 
@@ -163,6 +167,20 @@ public class PrivateMessageListController {
 		}
 
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
+	}
+
+	@RequestMapping( method = RequestMethod.POST, value = "/type/{messageTypeId}/markAllAsRead/" )
+	public String markAllMessagesAsRead( final @PathVariable( "messageTypeId" ) String _messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+
+		final User forUser = model.getForUser();
+
+		final PrivateMessageType messageType = PrivateMessageType.getById( NumberUtils.convertToInt( _messageTypeId ) ); // TODO: exception if _messageTypeId is rubbish
+
+		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), messageType );
+
+		markMessagesAsReadIfNecessary( receivedMessages, forUser );
+
+		return String.format( "redirect:%s/members/%s/messages/%s/", urlUtilsService.getBaseURLWithPrefix(), model.getForUser().getId(), messageType.getId() );
 	}
 
 	private Map<PrivateMessageType, MessageTypeData> getMessagesByType( final User forUser ) {
@@ -195,8 +213,6 @@ public class PrivateMessageListController {
 
 	private String getMessageView( final PrivateMessageType messageType, final PrivateMessageListModel model, final PagingModel pagingModel ) {
 		final User forUser = model.getForUser();
-
-		securityService.assertUserEqualsToCurrentUser( forUser );
 
 		model.setPrivateMessageType( messageType );
 

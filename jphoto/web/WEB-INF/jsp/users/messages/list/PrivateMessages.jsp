@@ -14,6 +14,7 @@
 <c:set var="privateMessageTypeValuesLength" value="<%=privateMessageListModel.getMessagesByType().size()%>"/>
 <c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)-1}"/>
 <c:set var="messagesByType" value="${privateMessageListModel.messagesByType}"/>
+<c:set var="forUserId" value="${privateMessageListModel.forUser.id}"/>
 
 <c:set var="usersWhoCommunicatedWithUser" value="${privateMessageListModel.usersWhoCommunicatedWithUser}"/>
 
@@ -46,7 +47,7 @@
 					</c:if>
 
 					<div style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3;" class="${css}">
-						<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${privateMessageListModel.forUser.id}/messages/with/${withUser.id}/"
+						<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/with/${withUser.id}/"
 						   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
 								${withUser.nameEscaped}
 						</a>
@@ -118,20 +119,44 @@
 
 					<table:tr>
 						<table:td cssClass="buttoncolumn">
-							<html:submitButton id="deleteMessages" caption_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+
+							<c:if test="${not empty privateMessages}">
+								<html:submitButton id="markAllMessagesAsReadButton" caption_t="Mark all messages as read" onclick="return markAllMessagesAsRead();" />
+								<html:submitButton id="deleteMessages" caption_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+							</c:if>
+
 						</table:td>
 					</table:tr>
 
 				</table:table>
 
 				<script type="text/javascript">
-					function deleteSelectedPrivateMessages() {
-						return confirm( "${eco:translate('Delete selected private messages?')}" );
-					}
+
+					<c:if test="${not empty privateMessages}">
+						function deleteSelectedPrivateMessages() {
+							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/delete/";
+							var message = "${eco:translate('Delete selected private messages?')}";
+
+							return performAction( action, message );
+						}
+
+						function markAllMessagesAsRead() {
+							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
+							var message = "${eco:translate('Mark all messages as read?')}";
+
+							return performAction( action, message );
+						}
+
+						function performAction( action, message ) {
+							$( '#privateMessageListModel' ).attr( 'action', action );
+							return confirm( message );
+						}
+					</c:if>
 
 					function reloadPageCallbackFunction() {
 						document.location.reload();
 					}
+
 				</script>
 
 			</div>
