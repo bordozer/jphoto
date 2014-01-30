@@ -26,10 +26,6 @@
 			border-bottom-color: #aaaaaa;
 			border-radius: 12px 12px 0 0;
 		}
-
-		.selectedUser {
-			font-weight: bold;
-		}
 	</style>
 
 	<c:set var="privateMessages" value="${privateMessageListModel.privateMessages}"/>
@@ -46,21 +42,19 @@
 
 					<c:set var="css" value=""/>
 					<c:if test="${withUser.id == privateMessageListModel.messagingWithUserId}">
-						<c:set var="css" value="selectedUser"/>
+						<c:set var="css" value="selectedUser block-background"/>
 					</c:if>
 
-					<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${privateMessageListModel.forUser.id}/messages/with/${withUser.id}/"
-					   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
-							${withUser.nameEscaped}
-					</a>
-					<br/>
-				<span style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3">
-					<span style="margin-left: 5px;"
-						  title="${eco:translate1('Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('Sent: $1', communicator.sentMessagesCount)}</span>
-					<br/>
-					<span style="margin-left: 5px;"
-						  title="${eco:translate1('Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('Received: $1', communicator.receivedMessagesCount)}</span>
-				</span>
+					<div style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3;" class="${css}">
+						<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${privateMessageListModel.forUser.id}/messages/with/${withUser.id}/"
+						   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
+								${withUser.nameEscaped}
+						</a>
+						<br />
+						<span style="margin-left: 5px;" title="${eco:translate1('Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('Sent: $1', communicator.sentMessagesCount)}</span>
+						<br/>
+						<span style="margin-left: 5px;" title="${eco:translate1('Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('Received: $1', communicator.receivedMessagesCount)}</span>
+					</div>
 					<br/>
 				</c:forEach>
 			</div>
@@ -78,7 +72,7 @@
 									<c:set var="privateMessageType" value="${entry.key}"/>
 									<c:set var="messageTypeData" value="${entry.value}"/>
 
-									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab"' : ''}>
+									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab block-background"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
 										<br/>
 										${privateMessageType.nameTranslated}
