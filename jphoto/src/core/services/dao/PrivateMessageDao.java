@@ -18,4 +18,6 @@ public interface PrivateMessageDao extends BaseEntityDao<PrivateMessage> {
 	int getSentPrivateMessagesCount( final int userId );
 
 	int markPrivateMessageAsRead( final int privateMessageId );
+
+	boolean markPrivateMessagesAsRead( final List<PrivateMessage> messages );
 }

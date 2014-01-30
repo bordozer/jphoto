@@ -76,8 +76,14 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public int markPrivateMessageAsRead( final int privateMessageId ) {
-		return privateMessageDao.markPrivateMessageAsRead( privateMessageId );
+	public void markPrivateMessageAsRead( final PrivateMessage privateMessage ) {
+		privateMessageDao.markPrivateMessageAsRead( privateMessage.getId() );
+		privateMessageDao.markPrivateMessageAsRead( privateMessage.getOutPrivateMessageId() );
+	}
+
+	@Override
+	public void markPrivateMessagesAsRead( final List<PrivateMessage> messages ) {
+		privateMessageDao.markPrivateMessagesAsRead( messages );
 	}
 
 	@Override

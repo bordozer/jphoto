@@ -141,6 +141,8 @@ public class PrivateMessageListController {
 
 		model.setMessagesByType( getMessagesByType( model.getForUser() ) );
 
+		markMessagesAsReadIfNecessary( receivedMessages, forUser );
+
 		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
@@ -205,7 +207,7 @@ public class PrivateMessageListController {
 			messagesToShow = getSentMessages( forUser, pagingModel );
 		}
 
-		markMessagesAsReadIfNecessary( messagesToShow );
+		markMessagesAsReadIfNecessary( messagesToShow, forUser );
 
 		model.setPrivateMessages( messagesToShow );
 
@@ -285,19 +287,10 @@ public class PrivateMessageListController {
 		return receivedMessages;
 	}
 
-	private void markMessagesAsReadIfNecessary( final List<PrivateMessage> messagesToShow ) {
-
-		new Thread( new Runnable() {
-			@Override
-			public void run() {
-				for ( final PrivateMessage message : messagesToShow ) {
-					if ( !message.isRead() && UserUtils.isUsersEqual( message.getToUser(), EnvironmentContext.getCurrentUser() ) ) {
-						privateMessageService.markPrivateMessageAsRead( message.getId() );
-						privateMessageService.markPrivateMessageAsRead( message.getOutPrivateMessageId() ); // Mark outgoing message as read by addressat
-					}
-				}
-			}
-		} ).start();
+	private void markMessagesAsReadIfNecessary( final List<PrivateMessage> messagesToShow, final User messagesAddressat ) {
+		if ( UserUtils.isUsersEqual( messagesAddressat, EnvironmentContext.getCurrentUser() ) ) {
+			privateMessageService.markPrivateMessagesAsRead( messagesToShow );
+		}
 	}
 
 	private List<UsersWhoCommunicatedWithUser> getUsersWhoCommunicatedWithUser( final User user ) {

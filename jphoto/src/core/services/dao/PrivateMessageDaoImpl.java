@@ -119,6 +119,29 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 		return jdbcTemplate.update( sql, paramSource );
 	}
 
+	@Override
+	public boolean markPrivateMessagesAsRead( final List<PrivateMessage> messages ) {
+		final StringBuilder builder = new StringBuilder(  );
+		for ( final PrivateMessage message : messages ) {
+			if ( ! message.isRead() ) {
+				builder.append( message.getId() ).append( ", " );
+			}
+		}
+
+		if ( builder.length() == 0 ) {
+			return true;
+		}
+
+		final CharSequence ids = builder.subSequence( 0, builder.length() - 2 ).toString();
+
+		final String sql = String.format( "UPDATE %s SET %s=:currentTime WHERE %s IN ( %s );", TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_READ_TIME, ENTITY_ID, ids );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "currentTime", dateUtilsService.getCurrentTime() );
+
+		return jdbcTemplate.update( sql, paramSource ) > 0;
+	}
+
 	private List<PrivateMessage> getMessageForUserColumn( final int toUserId, final PrivateMessageType privateMessageType, final String userColumn ) {
 		final String sql = String.format( "SELECT * FROM %s WHERE %s=:toUserId AND %s=:messageTypeId ORDER BY %s DESC;"
 			, TABLE_PRIVATE_MESSAGE, userColumn, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID, TABLE_PRIVATE_MESSAGE_COL_CREATE_TIME );
