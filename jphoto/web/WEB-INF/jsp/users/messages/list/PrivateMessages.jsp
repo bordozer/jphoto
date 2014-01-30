@@ -121,11 +121,28 @@
 						<table:td cssClass="buttoncolumn">
 
 							<c:if test="${not empty privateMessages}">
-								<html:submitButton id="deleteSelectedMessagesButton" caption_t="Delete selected messages" onclick="return deleteSelectedPrivateMessages();" />
+								<html:submitButton
+										id="deleteSelectedMessagesButton"
+										caption_t="Delete selected messages"
+										onclick="return deleteSelectedPrivateMessages();"
+										icon="delete16.png"
+										/>
 
 								<c:if test="${not empty privateMessageListModel.privateMessageType}">
-									<html:submitButton id="markAllMessagesAsReadButton" caption_t="Mark all ${privateMessageListModel.privateMessageType.nameTranslated} as read" onclick="return markAllMessagesAsRead();" />
-									<html:submitButton id="deleteAllMessagesButton" caption_t="Delete ALL ${privateMessageListModel.privateMessageType.nameTranslated}" onclick="return deleteAllPrivateMessages();" />
+
+									<html:submitButton
+											id="deleteAllMessagesButton"
+											caption_t="Delete ALL ${privateMessageListModel.privateMessageType.nameTranslated}"
+											onclick="return deleteAllPrivateMessages();"
+											icon="deleteAll.png"
+											/>
+
+									<html:submitButton
+											id="markAllMessagesAsReadButton"
+											caption_t="Mark all ${privateMessageListModel.privateMessageType.nameTranslated} as read"
+											onclick="return markAllMessagesAsRead();"
+											icon="markAsRead.png"
+											/>
 								</c:if>
 							</c:if>
 

@@ -78,7 +78,13 @@
 			<tags:paging showSummary="true"/>
 		</c:if>
 
-		<html:submitButton id="markAllAsReadButton" caption_t="Mark all as read" onclick="return markAllAsRead();" doNotTranslate="true" />
+		<html:submitButton
+				id="markAllAsReadButton"
+				caption_t="Mark all as read"
+				onclick="return markAllAsRead();"
+				doNotTranslate="true"
+				icon="markAsRead.png"
+				/>
 		<script type="text/javascript">
 			function markAllAsRead() {
 				if ( confirm( "${eco:translate('Mark ALL unread comments as read?')}" ) ) {
