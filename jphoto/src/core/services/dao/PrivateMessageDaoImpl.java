@@ -3,6 +3,7 @@ package core.services.dao;
 import core.enums.PrivateMessageType;
 import core.general.user.User;
 import core.general.message.PrivateMessage;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -132,7 +133,7 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 			return true;
 		}
 
-		final CharSequence ids = builder.subSequence( 0, builder.length() - 2 ).toString();
+		final String ids = builder.subSequence( 0, builder.length() - 2 ).toString();
 
 		final String sql = String.format( "UPDATE %s SET %s=:currentTime WHERE %s IN ( %s );", TABLE_PRIVATE_MESSAGE, TABLE_PRIVATE_MESSAGE_COL_READ_TIME, ENTITY_ID, ids );
 
@@ -140,6 +141,34 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 		paramSource.addValue( "currentTime", dateUtilsService.getCurrentTime() );
 
 		return jdbcTemplate.update( sql, paramSource ) > 0;
+	}
+
+	@Override
+	public void delete( final List<Integer> ids ) {
+
+		if ( ids.size() == 0 ) {
+			return;
+		}
+
+		final String sql = String.format( "DELETE FROM %s WHERE %s IN ( %s );", TABLE_PRIVATE_MESSAGE, ENTITY_ID, StringUtils.join( ids, "," ) );
+
+		jdbcTemplate.update( sql, new MapSqlParameterSource() );
+	}
+
+	@Override
+	public void deleteAll( final int userId, final PrivateMessageType messageType ) {
+		String colUser = TABLE_PRIVATE_MESSAGE_COL_TO_USER_ID;
+		if ( messageType == PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
+			colUser = TABLE_PRIVATE_MESSAGE_COL_FROM_USER_ID;
+		}
+
+		final String sql = String.format( "DELETE FROM %s WHERE %s=:userId AND %s=:messageTypeId;", TABLE_PRIVATE_MESSAGE, colUser, TABLE_PRIVATE_MESSAGE_COL_MESSAGE_TYPE_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+		paramSource.addValue( "messageTypeId", messageType.getId() );
+
+		jdbcTemplate.update( sql, paramSource );
 	}
 
 	private List<PrivateMessage> getMessageForUserColumn( final int toUserId, final PrivateMessageType privateMessageType, final String userColumn ) {

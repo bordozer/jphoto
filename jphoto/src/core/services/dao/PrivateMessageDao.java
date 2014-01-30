@@ -20,4 +20,8 @@ public interface PrivateMessageDao extends BaseEntityDao<PrivateMessage> {
 	int markPrivateMessageAsRead( final int privateMessageId );
 
 	boolean markPrivateMessagesAsRead( final List<PrivateMessage> messages );
+
+	void delete( final List<Integer> ids );
+
+	void deleteAll( int userId, final PrivateMessageType messageType );
 }

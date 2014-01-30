@@ -154,33 +154,43 @@ public class PrivateMessageListController {
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.POST, value = "/delete/" )
-	public String deleteMessages( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+	@RequestMapping( method = RequestMethod.POST, value = "/delete/selected/" )
+	public String deleteSelectedMessages( final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
 
 		final List<String> _selectedMessagesIds = model.getSelectedMessagesIds();
 
 		if ( _selectedMessagesIds != null ) {
-			final List<Integer> selectedMessagesIds = ListUtils.convertStringListToInteger( _selectedMessagesIds );
-			for ( final int messagesId : selectedMessagesIds ) {
-				privateMessageService.delete( messagesId );
-			}
+			privateMessageService.delete( ListUtils.convertStringListToInteger( _selectedMessagesIds ) );
 		}
 
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
+	@RequestMapping( method = RequestMethod.POST, value = "/type/{messageTypeId}/delete/all/" )
+	public String deleteAllMessages( final @PathVariable( "messageTypeId" ) String _messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+
+		final PrivateMessageType messageType = getMessageTypeId( _messageTypeId );
+		privateMessageService.deleteAll( model.getForUser().getId(), messageType );
+
+		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
+	}
+
 	@RequestMapping( method = RequestMethod.POST, value = "/type/{messageTypeId}/markAllAsRead/" )
-	public String markAllMessagesAsRead( final @PathVariable( "messageTypeId" ) String _messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model, final HttpServletRequest request ) {
+	public String markAllMessagesAsRead( final @PathVariable( "messageTypeId" ) String _messageTypeId, final @ModelAttribute( MODEL_NAME ) PrivateMessageListModel model ) {
 
 		final User forUser = model.getForUser();
 
-		final PrivateMessageType messageType = PrivateMessageType.getById( NumberUtils.convertToInt( _messageTypeId ) ); // TODO: exception if _messageTypeId is rubbish
+		final PrivateMessageType messageType = getMessageTypeId( _messageTypeId );
 
 		final List<PrivateMessage> receivedMessages = privateMessageService.loadReceivedPrivateMessages( forUser.getId(), messageType );
 
 		markMessagesAsReadIfNecessary( receivedMessages, forUser );
 
 		return String.format( "redirect:%s/members/%s/messages/%s/", urlUtilsService.getBaseURLWithPrefix(), model.getForUser().getId(), messageType.getId() );
+	}
+
+	private PrivateMessageType getMessageTypeId( final String _messageTypeId ) {
+		return PrivateMessageType.getById( NumberUtils.convertToInt( _messageTypeId ) ); // TODO: exception if _messageTypeId is rubbish
 	}
 
 	private Map<PrivateMessageType, MessageTypeData> getMessagesByType( final User forUser ) {

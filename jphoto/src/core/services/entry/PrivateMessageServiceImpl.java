@@ -202,6 +202,16 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
+	public void delete( final List<Integer> ids ) {
+		privateMessageDao.delete( ids );
+	}
+
+	@Override
+	public void deleteAll( final int userId, final PrivateMessageType messageType ) {
+		privateMessageDao.deleteAll( userId, messageType );
+	}
+
+	@Override
 	public boolean exists( final int entryId ) {
 		return privateMessageDao.exists( entryId );
 	}

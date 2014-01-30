@@ -121,8 +121,12 @@
 						<table:td cssClass="buttoncolumn">
 
 							<c:if test="${not empty privateMessages}">
-								<html:submitButton id="markAllMessagesAsReadButton" caption_t="Mark all messages as read" onclick="return markAllMessagesAsRead();" />
-								<html:submitButton id="deleteMessages" caption_t="Delete selected private messages" onclick="return deleteSelectedPrivateMessages();" />
+								<html:submitButton id="deleteSelectedMessagesButton" caption_t="Delete selected messages" onclick="return deleteSelectedPrivateMessages();" />
+
+								<c:if test="${not empty privateMessageListModel.privateMessageType}">
+									<html:submitButton id="markAllMessagesAsReadButton" caption_t="Mark all ${privateMessageListModel.privateMessageType.nameTranslated} as read" onclick="return markAllMessagesAsRead();" />
+									<html:submitButton id="deleteAllMessagesButton" caption_t="Delete ALL ${privateMessageListModel.privateMessageType.nameTranslated}" onclick="return deleteAllPrivateMessages();" />
+								</c:if>
 							</c:if>
 
 						</table:td>
@@ -134,18 +138,27 @@
 
 					<c:if test="${not empty privateMessages}">
 						function deleteSelectedPrivateMessages() {
-							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/delete/";
+							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/delete/selected/";
 							var message = "${eco:translate('Delete selected private messages?')}";
 
 							return performAction( action, message );
 						}
 
-						function markAllMessagesAsRead() {
-							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
-							var message = "${eco:translate('Mark all messages as read?')}";
+						<c:if test="${not empty privateMessageListModel.privateMessageType}">
+							function deleteAllPrivateMessages() {
+								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
+								var message = "${eco:translate('Delete selected private messages?')}";
 
-							return performAction( action, message );
-						}
+								return performAction( action, message );
+							}
+
+							function markAllMessagesAsRead() {
+								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
+								var message = "${eco:translate('Mark all messages as read?')}";
+
+								return performAction( action, message );
+							}
+						</c:if>
 
 						function performAction( action, message ) {
 							$( '#privateMessageListModel' ).attr( 'action', action );
