@@ -139,7 +139,7 @@
 					<c:if test="${not empty privateMessages}">
 						function deleteSelectedPrivateMessages() {
 							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/delete/selected/";
-							var message = "${eco:translate('Delete selected private messages?')}";
+							var message = "${eco:translate('Delete selected messages?')}";
 
 							return performAction( action, message );
 						}
@@ -147,14 +147,14 @@
 						<c:if test="${not empty privateMessageListModel.privateMessageType}">
 							function deleteAllPrivateMessages() {
 								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
-								var message = "${eco:translate('Delete selected private messages?')}";
+								var message = "${eco:translate1('Delete ALL $1?', privateMessageListModel.privateMessageType.nameTranslated)}";
 
 								return performAction( action, message );
 							}
 
 							function markAllMessagesAsRead() {
 								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
-								var message = "${eco:translate('Mark all messages as read?')}";
+								var message = "${eco:translate1('Mark all $1 as read?', privateMessageListModel.privateMessageType.nameTranslated)}";
 
 								return performAction( action, message );
 							}
