@@ -21,7 +21,7 @@ public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoComm
 		final String rootTranslated = getPhotoRootTranslated();
 		final String comments = TranslatorUtils.translate( "Comments" );
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), comments );
+		final String title = pageTitleUtilsService.getTitleDataString( user.getName(), comments );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), comments );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
@@ -33,8 +33,13 @@ public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoComm
 		final String comments = TranslatorUtils.translate( "Comments" );
 		final String unread = TranslatorUtils.translate( "Unread" );
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), comments, unread );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCommentsToUserLink( user ), unread );
+		final String title = pageTitleUtilsService.getTitleDataString( user.getName(), comments, unread );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getUsersRootLink()
+			, entityLinkUtilsService.getUserCardLink( user )
+			, entityLinkUtilsService.getPhotoCommentsToUserLink( user )
+			, unread
+		);
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
