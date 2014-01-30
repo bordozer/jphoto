@@ -1,5 +1,6 @@
 package core.services.system;
 
+import core.enums.PrivateMessageType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.security.SecurityService;
@@ -149,6 +150,12 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( getCommentsToMeMenu( user ) );
 			menuItems.add( getMyCommentsMenu( user ) );
 			menuItems.add( getPrivateMessagesMenu( user ) );
+			menuItems.add( getActivityNotificationMenu( user ) );
+			menuItems.add( getSystemNotificationMenu( user ) );
+
+			if ( securityService.isSuperAdminUser( user.getId() ) ) {
+				menuItems.add( getAdminNotificationMenu( user ) );
+			}
 
 			menus.put( MenuItem.noLinkMenu( "Messages" ), menuItems );
 
@@ -171,6 +178,24 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem getPrivateMessagesMenu( final User user ) {
 		final String caption = TranslatorUtils.translate( "Private messages" );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getActivityNotificationMenu( final User user ) {
+		final String caption = TranslatorUtils.translate( PrivateMessageType.ACTIVITY_NOTIFICATIONS.getNameTranslated() );
+		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ACTIVITY_NOTIFICATIONS );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getSystemNotificationMenu( final User user ) {
+		final String caption = TranslatorUtils.translate( PrivateMessageType.SYSTEM_NOTIFICATIONS.getNameTranslated() );
+		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.SYSTEM_NOTIFICATIONS );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getAdminNotificationMenu( final User user ) {
+		final String caption = TranslatorUtils.translate( PrivateMessageType.ADMIN_NOTIFICATIONS.getNameTranslated() );
+		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ADMIN_NOTIFICATIONS );
 		return new MenuItem( caption, link );
 	}
 
