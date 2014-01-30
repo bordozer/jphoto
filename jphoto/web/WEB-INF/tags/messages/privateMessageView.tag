@@ -69,7 +69,6 @@
 
 	</div>
 
-
 	<div style="float: left; width: 100%; margin-left: 15px; padding-left: 5px; padding-top: 5px;">
 		${messageText}
 	</div>
