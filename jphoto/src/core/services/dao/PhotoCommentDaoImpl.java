@@ -277,14 +277,18 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public void markAllUnreadCommentAsRead( final int userId ) {
-		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s IN ( %s )", TABLE_COMMENTS, TABLE_COLUMN_READ_TIME, ENTITY_ID, StringUtils.join( getUnreadCommentsIds( userId), "," ) );
+		final List<Integer> unreadCommentsIds = getUnreadCommentsIds( userId );
+
+		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s IN ( %s )", TABLE_COMMENTS, TABLE_COLUMN_READ_TIME, ENTITY_ID, StringUtils.join( unreadCommentsIds, "," ) );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "readTime", dateUtilsService.getCurrentTime() );
 
 		jdbcTemplate.update( sql, paramSource );
 
-		cacheService.expire( CacheKey.PHOTO_COMMENT ); // TODO: for this user only!
+		for ( final int commentsId : unreadCommentsIds ) {
+			cacheService.expire( CacheKey.PHOTO_COMMENT, commentsId );
+		}
 	}
 
 	class PhotoCommentMapper implements RowMapper<PhotoComment> {
