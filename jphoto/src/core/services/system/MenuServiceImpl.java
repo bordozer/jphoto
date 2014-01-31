@@ -1,8 +1,10 @@
 package core.services.system;
 
 import core.enums.PrivateMessageType;
+import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.entry.GenreService;
 import core.services.security.SecurityService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -22,19 +24,23 @@ public class MenuServiceImpl implements MenuService {
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Autowired
 	private UrlUtilsService urlUtilsService;
-	
+
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private GenreService genreService;
 
 	@Override
 	public Map<MenuItem, List<MenuItem>> getMenuElements( final User user ) {
 
 		final Map<MenuItem, List<MenuItem>> menus = newLinkedHashMap();
 
-		createPhotosMenu( menus);
+		createPhotosMenu( menus );
+//		createPhotosByGenreMenu( menus );
 		createBestPhotosMenu( menus );
 		createAuthorsMenu( menus );
 		createLoggedUserMenu( menus, user );
@@ -62,6 +68,19 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
 		menus.put( new MenuItem( "Photos", menuItem.getLink() ), menuItems );
+	}
+
+	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus ) {
+		final List<MenuItem> menuItems = newArrayList();
+
+		final List<Genre> genres = genreService.loadAll();
+		for ( final Genre genre : genres ) {
+			final String caption = genre.getName();
+			final String link = urlUtilsService.getPhotosByGenreLink( genre.getId() );
+			menuItems.add( new MenuItem( caption, link ) );
+		}
+
+		menus.put( new MenuItem( "Categories", "" ), menuItems );
 	}
 
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
