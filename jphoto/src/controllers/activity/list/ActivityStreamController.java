@@ -58,7 +58,7 @@ public class ActivityStreamController {
 		return pagingModel;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/mobile", produces = "application/json" )
+	@RequestMapping( method = RequestMethod.GET, value = "/mobile/", produces = "application/json" )
 	@ResponseBody
 	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		return getActivities( getIds( model, pagingModel, null ) );
