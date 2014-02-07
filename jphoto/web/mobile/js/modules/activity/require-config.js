@@ -6,7 +6,7 @@ require( ["../../require-base-config"], function ( config ) {
 
 		var view = new View.ActivitiesView( {model:model} );
 		$( "body" ).append( view.$el ); // view.$el - base jquery element
-		view.render();
+//		view.render();
 
 //		console.log( model );
 	} );
