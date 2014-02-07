@@ -15,7 +15,7 @@ define( ["backbone"], function ( Backbone ) {
 	var TodoList = Backbone.Collection.extend( {
 												   model:Todo,
 												   url:function () {
-													   return "http://localhost:8080/rest/" + "todos";
+													   return "http://192.168.69.77:8083/jphoto/app/activityStream/mobile/";
 												   }
 											   } );
 

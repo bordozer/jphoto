@@ -11,10 +11,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.PagingUtils;
@@ -61,6 +58,18 @@ public class ActivityStreamController {
 		return pagingModel;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/mobile", produces = "application/json" )
+	@ResponseBody
+	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return getActivities( getIds( model, pagingModel, null ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/type/{activityTypeId}/mobile/", produces = "application/json" )
+	@ResponseBody
+	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @PathVariable( "activityTypeId" ) int activityTypeId, final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return getActivities( getIds( model, pagingModel, ActivityType.getById( activityTypeId ) ) );
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showActivityStream( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		return showActivities( model, pagingModel, null );
@@ -74,6 +83,34 @@ public class ActivityStreamController {
 	}
 
 	private String showActivities( final ActivityStreamModel model, final PagingModel pagingModel, final ActivityType activityType ) {
+		final SqlSelectIdsResult idsResult = getIds( model, pagingModel, activityType );
+
+		final List<AbstractActivityStreamEntry> activities = getActivities( idsResult );
+
+		model.setActivities( activities );
+
+		pagingModel.setTotalItems( idsResult.getRecordQty() );
+
+		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
+
+		return VIEW_MOBILE; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
+	}
+
+	private List<AbstractActivityStreamEntry> getActivities( final SqlSelectIdsResult idsResult ) {
+		final List<AbstractActivityStreamEntry> activities = newArrayList();
+		for ( final int activityId : idsResult.getIds() ) {
+			activities.add( activityStreamService.load( activityId ) );
+		}
+		return activities;
+	}
+
+	private SqlSelectIdsResult getIds( final ActivityStreamModel model, final PagingModel pagingModel, final ActivityType activityType ) {
+		final SqlIdsSelectQuery selectQuery = getSelectQuery( model, pagingModel, activityType );
+
+		return activityStreamService.load( selectQuery );
+	}
+
+	private SqlIdsSelectQuery getSelectQuery( final ActivityStreamModel model, final PagingModel pagingModel, final ActivityType activityType ) {
 		final SqlTable activityStreamTable = new SqlTable( ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM );
 		final SqlIdsSelectQuery selectQuery = new SqlIdsSelectQuery( activityStreamTable );
 
@@ -88,20 +125,6 @@ public class ActivityStreamController {
 		final SqlColumnSelectable timeCol = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
 		selectQuery.addSortingDesc( timeCol );
 		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
-
-		final SqlSelectIdsResult idsResult = activityStreamService.load( selectQuery );
-
-		final List<AbstractActivityStreamEntry> activities = newArrayList();
-		for ( final int activityId : idsResult.getIds() ) {
-			activities.add( activityStreamService.load( activityId ) );
-		}
-
-		model.setActivities( activities );
-
-		pagingModel.setTotalItems( idsResult.getRecordQty() );
-
-		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
-
-		return PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
+		return selectQuery;
 	}
 }
