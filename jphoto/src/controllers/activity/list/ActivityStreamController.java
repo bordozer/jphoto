@@ -1,5 +1,6 @@
 package controllers.activity.list;
 
+import core.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.general.activity.ActivityType;
 import core.general.base.PagingModel;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.PagingUtils;
+import utils.PhotoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -31,6 +33,7 @@ public class ActivityStreamController {
 
 	public static final String MODEL_NAME = "activityStreamModel";
 	private static final String VIEW = "/activity/list/ActivityStream";
+	private static final String VIEW_MOBILE = "mobile/activity/list/ActivityStream";
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
@@ -99,6 +102,6 @@ public class ActivityStreamController {
 
 		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
 
-		return VIEW;
+		return PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
 	}
 }
