@@ -1,4 +1,4 @@
-define( ["backbone", "jquery", "underscore", "common/js/front-end/activity"], function ( Backbone, $, _, Model ) {
+define( ["backbone", "jquery", "underscore", "activity/model"], function ( Backbone, $, _, Model ) {
 
 	var TodoView = Backbone.View.extend( {
 
