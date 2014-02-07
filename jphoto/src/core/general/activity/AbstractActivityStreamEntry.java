@@ -8,7 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import utils.StringUtilities;
 
 import java.util.Date;
 

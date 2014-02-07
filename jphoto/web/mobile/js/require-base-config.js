@@ -4,6 +4,7 @@ requirejs.config({
 		jquery: "../../../common/js/lib/jquery/jquery-1.7.2"
 		, underscore: "../lib/underscore"
 		, backbone: "../lib/backbone"
+		, text: "../lib/text"
 	},
 	shim: { /* config for lib those are not defined af modules */
 		'backbone': {
@@ -18,3 +19,5 @@ requirejs.config({
 		}
 	}
 });
+
+require(["text"], function(){});

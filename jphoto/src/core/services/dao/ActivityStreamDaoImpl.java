@@ -124,10 +124,10 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 
 	@Override
 	protected RowMapper<AbstractActivityStreamEntry> getRowMapper() {
-		return new AnonymousDayRowMapper();
+		return new ActivityStreamEntryMapper();
 	}
 
-	private class AnonymousDayRowMapper implements RowMapper<AbstractActivityStreamEntry> {
+	private class ActivityStreamEntryMapper implements RowMapper<AbstractActivityStreamEntry> {
 
 		@Override
 		public AbstractActivityStreamEntry mapRow( final ResultSet rs, final int rowNum ) throws SQLException {
@@ -142,7 +142,6 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 			}
 
 			result.setId( rs.getInt( BaseEntityDao.ENTITY_ID ) );
-			result.setId( rs.getInt( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME ) );
 			result.setActivityTime( rs.getTimestamp( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME ) );
 			result.setActivityOfUserId( rs.getInt( TABLE_ACTIVITY_STREAM_COL_USER_ID ) );
 			result.setActivityOfPhotoId( rs.getInt( TABLE_ACTIVITY_STREAM_COL_PHOTO_ID ) );

@@ -2,11 +2,14 @@ package controllers.activity.list;
 
 import core.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
+import core.general.activity.ActivityPhotoComment;
 import core.general.activity.ActivityType;
 import core.general.base.PagingModel;
+import core.general.photo.PhotoComment;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.pageTitle.PageTitleService;
+import core.services.security.Services;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +46,9 @@ public class ActivityStreamController {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private Services services;
 
 	@ModelAttribute( MODEL_NAME )
 	public ActivityStreamModel prepareModel() {
