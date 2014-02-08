@@ -89,9 +89,8 @@
 						<c:set var="currentPoints" value="${cardGenreInfo.votePointsForRankInGenre}" />
 						<c:set var="nextPoints" value="${cardGenreInfo.votePointsToGetNextRankInGenre}" />
 
-						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/"
-						   title="${eco:translate1('Click to see who voted for the rank in category $1', genre.name)}">
-							${currentPoints}
+						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genre.name)}">
+							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
 						</a>
 						/
 						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, votingModel.userRankInGenre + 1, genre.name )}">${nextPoints}</span>

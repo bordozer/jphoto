@@ -99,7 +99,7 @@ public class ActivityStreamController {
 
 		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
 
-		return VIEW_MOBILE; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
+		return VIEW; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
 	}
 
 	private List<AbstractActivityStreamEntry> getActivities( final SqlSelectIdsResult idsResult ) {
