@@ -1,4 +1,4 @@
-require( ["../../require-base-config"], function ( config ) {
+require( ["../../require-config-base"], function ( config ) {
 	require( ["activity/view", "activity/model", "jquery"], function ( View, Model, $ ) {
 
 		var model = new Model.Activities();
