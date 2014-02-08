@@ -64,13 +64,13 @@ public class ActivityStreamController {
 		return pagingModel;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/mobile/", produces = "application/json" )
+	@RequestMapping( method = RequestMethod.GET, value = "/json/", produces = "application/json" )
 	@ResponseBody
 	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		return getActivities( getIds( model, pagingModel, null ) );
 	}
 
-		@RequestMapping( method = RequestMethod.GET, value = "/type/{activityTypeId}/mobile/", produces = "application/json" )
+		@RequestMapping( method = RequestMethod.GET, value = "/type/{activityTypeId}/json/", produces = "application/json" )
 	@ResponseBody
 	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @PathVariable( "activityTypeId" ) int activityTypeId, final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		return getActivities( getIds( model, pagingModel, ActivityType.getById( activityTypeId ) ) );
@@ -99,7 +99,7 @@ public class ActivityStreamController {
 
 		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
 
-		return VIEW; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
+		return VIEW_MOBILE; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
 	}
 
 	private List<AbstractActivityStreamEntry> getActivities( final SqlSelectIdsResult idsResult ) {

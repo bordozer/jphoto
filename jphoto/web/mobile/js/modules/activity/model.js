@@ -6,7 +6,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	var Activities = Backbone.Collection.extend( {
 													 model:Activity,
-													 url:"/jphoto/app/activityStream/mobile/"
+													 url:"/jphoto/app/activityStream/json/"
 												 } );
 
 	return {Activity:Activity, Activities:Activities};
