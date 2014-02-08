@@ -6,7 +6,6 @@ import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
-import core.services.security.SecurityService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -41,9 +40,6 @@ public class UserGenreRankVotingController {
 	private UserGenreRankVotingValidator userGenreRankVotingValidator;
 
 	@Autowired
-	private SecurityService securityService;
-
-	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
@@ -69,6 +65,7 @@ public class UserGenreRankVotingController {
 		final UserGenreRankVotingModel model = new UserGenreRankVotingModel();
 
 		if ( userId == 0 ) {
+			// voting by photo
 			final int photoId = NumberUtils.convertToInt( _photoId );
 			final Photo photo = photoService.load( photoId );
 			userId = photo.getUserId();

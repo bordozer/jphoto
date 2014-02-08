@@ -78,10 +78,10 @@
 					<span title="${eco:translate2('Photos in category \'$1\': $2', genre.name, cardGenreInfo.photosQty)}"><b>${cardGenreInfo.photosQty}</b></span>
 				</table:td>
 
-				<table:td cssClass="textcentered">
-					<c:if test="${not isThisCardOfLoggedUser}">
+				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
+					<%--<c:if test="${not isThisCardOfLoggedUser}">
 						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${cardGenreInfo.votingModel}" />
-					</c:if>
+					</c:if>--%>
 				</table:td>
 
 				<table:td>
@@ -101,4 +101,6 @@
 		</c:forEach>
 
 	</table:table>
+
+	<script data-main="<c:url value="/common/js/modules/users/card/genreRankVoting/votingArea/require-config-genreRank.js"/>" src="<c:url value="/common/js/lib/front-end/require.js"/>"></script>
 </div>

@@ -5,7 +5,7 @@ define( ["backbone", "jquery", "underscore", "text!activity/templates/list.html"
 												   initialize:function () {
 //													   console.log( this.model );
 													   this.render(); // draw an empty list template
-													   this.listenTo( this.model, "add", this.renderActivity );
+													   this.listenTo( this.model, "add", this.renderVotingArea );
 													   //													   this.$list = this.$( ".activity-stream-entries" );
 													   this.model.fetch();
 												   },
@@ -14,7 +14,7 @@ define( ["backbone", "jquery", "underscore", "text!activity/templates/list.html"
 													   this.$el.html( $( listTemplate ) );
 												   },
 
-												   renderActivity:function ( activity ) {
+												   renderVotingArea:function ( activity ) {
 													   var rendered = this.template( activity.toJSON() );
 													   this.$( ".activity-stream-entries" ).append( $( rendered ) );
 												   }
