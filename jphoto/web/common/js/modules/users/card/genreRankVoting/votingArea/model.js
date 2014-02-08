@@ -6,7 +6,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	var VotingAreas = Backbone.Collection.extend( {
 													 model:VotingArea,
-													 url:"/jphoto/json/members/8526/card/genreRankVoting/"
+													 url:"/jphoto/json/members/" + userId_card + "/card/genreRankVoting/"
 												 } );
 
 	return {VotingArea:VotingArea, VotingAreas:VotingAreas};
