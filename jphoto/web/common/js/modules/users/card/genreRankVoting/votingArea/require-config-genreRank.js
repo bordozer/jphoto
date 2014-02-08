@@ -4,7 +4,7 @@ require( ["../../../../../require-config-base"], function ( config ) {
 		var model = new Model.VotingAreas();
 
 		var view = new View.VotingAreaView( {model:model} );
-		$( "body" ).append( view.$el ); // TODO
+//		$( "body" ).append( view.$el ); // TODO
 
 //		console.log( model );
 	} );

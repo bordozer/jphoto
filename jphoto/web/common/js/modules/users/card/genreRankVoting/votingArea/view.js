@@ -12,9 +12,7 @@ define( ["backbone", "jquery", "underscore", "text!users/card/genreRankVoting/vo
 													   var json = votingAreaModel.toJSON();
 
 													   var rendered = this.iconsTemplate( json );
-													   var selector = ".user-genre-rank-voting-" + json.userId + "-" + json.genreId; // + ' td';
-													   console.log( 'selector: ', selector );
-													   this.$( selector ).html( $( rendered ) );
+													   $( ".user-genre-rank-voting-" + json.userId + "-" + json.genreId ).html( $( rendered ) );
 												   }
 											   } );
 

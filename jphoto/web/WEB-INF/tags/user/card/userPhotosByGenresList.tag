@@ -79,6 +79,7 @@
 				</table:td>
 
 				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
+					<html:img16 src="progress.gif" />
 					<%--<c:if test="${not isThisCardOfLoggedUser}">
 						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${cardGenreInfo.votingModel}" />
 					</c:if>--%>
