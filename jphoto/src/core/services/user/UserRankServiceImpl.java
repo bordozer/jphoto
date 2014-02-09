@@ -132,11 +132,16 @@ public class UserRankServiceImpl implements UserRankService {
 			votingModel.setLastVotingPoints( setUserLastVotingResult( voterId, userId, genreId ) );
 		}
 
-		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
-		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( userId, genreId );
-		votingModel.setUserHasEnoughPhotosInGenre( userPhotosInGenre >= minPhotosQtyForGenreRankVoting );
+		votingModel.setUserHasEnoughPhotosInGenre( isUserHavingEnoughPhotosInGenre( userId, genreId ) );
 
 		return votingModel;
+	}
+
+	@Override
+	public boolean isUserHavingEnoughPhotosInGenre( final int userId, final int genreId ) {
+		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
+		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( userId, genreId );
+		return userPhotosInGenre >= minPhotosQtyForGenreRankVoting;
 	}
 
 	@Override

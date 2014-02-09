@@ -45,4 +45,6 @@ public interface UserRankService {
 	int calculateUserRankInGenre( final int userId, final int genreId );
 
 	int getVotePointsToGetNextRankInGenre( final int userCurrentVotePointsForRankInGenre );
+
+	boolean isUserHavingEnoughPhotosInGenre( int userId, int genreId );
 }

@@ -2,10 +2,14 @@ package json.users.rankInGenreVoting;
 
 import core.context.EnvironmentContext;
 import core.general.genre.Genre;
+import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
+import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +26,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public class UserGenreRankVotingController {
 
 	@Autowired
-	private UserRankService userRankService;
+	private UserService userService;
 
 	@Autowired
 	private PhotoService photoService;
@@ -30,12 +34,20 @@ public class UserGenreRankVotingController {
 	@Autowired
 	private GenreService genreService;
 
+	@Autowired
+	private UserRankService userRankService;
+
+	@Autowired
+	private SecurityService securityService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public List<UserCardVotingAreaModel> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
 
-		final User currentUser = EnvironmentContext.getCurrentUser();
-		final int voterId = currentUser.getId();
+		final User voter = EnvironmentContext.getCurrentUser();
+		final int voterId = voter.getId();
+
+		final User user = userService.load( userId );
 
 		final List<UserCardVotingAreaModel> result = newArrayList();
 
@@ -43,11 +55,27 @@ public class UserGenreRankVotingController {
 		for ( final Genre genre : genres ) {
 			final int qty = photoService.getPhotoQtyByUserAndGenre( userId, genre.getId() );
 			if ( qty > 0 ) {
+
 				final UserCardVotingAreaModel votingAreaModel = new UserCardVotingAreaModel();
+
 				votingAreaModel.setUserId( userId );
 				votingAreaModel.setGenreId( genre.getId() );
 				votingAreaModel.setVoterId( voterId );
 				votingAreaModel.setVoterRankInGenreVotingPoints( userRankService.getUserRankInGenreVotingPoints( voterId, genre.getId() ) );
+
+				final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+				votingAreaModel.setUiVotingIsInaccessible( validationResult.isUiVotingIsInaccessible() );
+				votingAreaModel.setValidationMessage( validationResult.getValidationMessage() );
+
+				final int userRankInGenre = userRankService.getUserRankInGenre( user.getId(), genre.getId() );
+
+				final boolean isVotedForThisRank = userRankService.isUserVotedLastTimeForThisRankInGenre( voterId, user.getId(), genre.getId(), userRankInGenre );
+//				final boolean isHavingEnoughPhotosInGenre = userRankService.isUserHavingEnoughPhotosInGenre( user.getId(), genre.getId() );
+
+				votingAreaModel.setVotedForThisRank( isVotedForThisRank );
+				if ( isVotedForThisRank ) {
+					votingAreaModel.setUserLastVotingResult( userRankService.setUserLastVotingResult( voterId, user.getId(), genre.getId() ) );
+				}
 
 				result.add( votingAreaModel );
 			}
