@@ -79,10 +79,10 @@
 				</table:td>
 
 				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
-					<%--<html:img16 src="progress.gif" />--%>
-					<c:if test="${not isThisCardOfLoggedUser}">
+					<html:img16 src="progress.gif" />
+					<%--<c:if test="${not isThisCardOfLoggedUser}">
 						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${cardGenreInfo.votingModel}" />
-					</c:if>
+					</c:if>--%>
 				</table:td>
 
 				<table:td>
@@ -107,5 +107,5 @@
 		var userId_card = ${user.id};
 	</script>
 
-	<%--<script data-main="<c:url value="/common/js/modules/users/card/genreRankVoting/votingArea/require-config-genreRank.js"/>" src="<c:url value="/common/js/lib/front-end/require.js"/>"></script>--%>
+	<script data-main="<c:url value="/common/js/modules/users/card/genreRankVoting/votingArea/require-config-genreRank.js"/>" src="<c:url value="/common/js/lib/front-end/require.js"/>"></script>
 </div>

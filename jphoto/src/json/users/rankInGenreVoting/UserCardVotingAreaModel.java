@@ -5,6 +5,7 @@ public class UserCardVotingAreaModel {
 	private int userId;
 	private int genreId;
 	private int voterId;
+	private int voterRankInGenreVotingPoints;
 
 	public int getUserId() {
 		return userId;
@@ -28,6 +29,14 @@ public class UserCardVotingAreaModel {
 
 	public void setVoterId( final int voterId ) {
 		this.voterId = voterId;
+	}
+
+	public int getVoterRankInGenreVotingPoints() {
+		return voterRankInGenreVotingPoints;
+	}
+
+	public void setVoterRankInGenreVotingPoints( final int voterRankInGenreVotingPoints ) {
+		this.voterRankInGenreVotingPoints = voterRankInGenreVotingPoints;
 	}
 
 	@Override

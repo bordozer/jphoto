@@ -35,6 +35,7 @@ public class UserGenreRankVotingController {
 	public List<UserCardVotingAreaModel> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
+		final int voterId = currentUser.getId();
 
 		final List<UserCardVotingAreaModel> result = newArrayList();
 
@@ -45,7 +46,8 @@ public class UserGenreRankVotingController {
 				final UserCardVotingAreaModel votingAreaModel = new UserCardVotingAreaModel();
 				votingAreaModel.setUserId( userId );
 				votingAreaModel.setGenreId( genre.getId() );
-				votingAreaModel.setVoterId( currentUser.getId() );
+				votingAreaModel.setVoterId( voterId );
+				votingAreaModel.setVoterRankInGenreVotingPoints( userRankService.getUserRankInGenreVotingPoints( voterId, genre.getId() ) );
 
 				result.add( votingAreaModel );
 			}
