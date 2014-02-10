@@ -302,20 +302,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final List<Genre> genres = genreService.loadAll();
 
 		for ( final Genre genre : genres ) {
-			final int genreId = genre.getId();
-
-			final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
-
-			final int photosQty = getPhotoQtyByUserAndGenre( userId, genreId );
-			genreInfo.setPhotosQty( photosQty );
-			genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
-
-			final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
-			genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
-
-			genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
-
-			photosByGenres.put( genre, genreInfo );
+			photosByGenres.put( genre, getUserCardGenreInfo( votingUser, userId, genre.getId() ) );
 		}
 
 		final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap = newLinkedHashMap();
@@ -431,32 +418,6 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public Photo getLastUserPhoto( final int userId ) {
 		return photoDao.getLastUserPhoto( userId );
-	}
-
-	private PhotoInfo loadCachablePhotoInfoPart( final Photo photo ) {
-		final int photoId = photo.getId();
-		final PhotoInfo photoInfo = new PhotoInfo( photo );
-
-		final List<MarksByCategoryInfo> marksByCategoryUser = photoVotingService.getPhotoSummaryVoicesByPhotoCategories( photo );
-		photoInfo.setMarksByCategoryInfos( marksByCategoryUser );
-
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
-		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
-		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
-
-		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
-
-		photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
-
-		photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
-
-		photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
-
-		photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
-		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
-
-		return photoInfo;
 	}
 
 	@Override
@@ -589,6 +550,47 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		return photos;
+	}
+
+	private UserCardGenreInfo getUserCardGenreInfo( final User votingUser, final int userId, final int genreId ) {
+		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
+
+		final int photosQty = getPhotoQtyByUserAndGenre( userId, genreId );
+		genreInfo.setPhotosQty( photosQty );
+		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
+
+		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
+		genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
+
+		genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
+
+		return genreInfo;
+	}
+
+	private PhotoInfo loadCachablePhotoInfoPart( final Photo photo ) {
+		final int photoId = photo.getId();
+		final PhotoInfo photoInfo = new PhotoInfo( photo );
+
+		final List<MarksByCategoryInfo> marksByCategoryUser = photoVotingService.getPhotoSummaryVoicesByPhotoCategories( photo );
+		photoInfo.setMarksByCategoryInfos( marksByCategoryUser );
+
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
+		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
+		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
+
+		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
+
+		photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
+
+		photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
+
+		photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
+
+		photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
+		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+
+		return photoInfo;
 	}
 
 	private void updateNotCachedInPhotoInfoEntries( final Photo photo, final PhotoInfo photoInfo, final Date timeFrom, final Date timeTo, final User accessor ) {
