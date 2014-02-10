@@ -18,6 +18,7 @@ import core.services.dao.ActivityStreamDaoImpl;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.EntryMenuService;
+import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
@@ -66,9 +67,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private PhotoPreviewService photoPreviewService;
-
-	@Autowired
 	private UserStatisticService userStatisticService;
 
 	@Autowired
@@ -113,6 +111,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 
+	@Autowired
+	private GenreService genreService;
+
 	@Override
 	public void setUserAvatar( final UserCardModel model ) {
 		model.setUserAvatar( userService.getUserAvatar( getUserId( model ) ) );
@@ -144,7 +145,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user ) {
-		return photoService.getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
+		return getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
 	}
 
 	@Override
@@ -267,6 +268,36 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		}
 
 		return activities;
+	}
+
+	private Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
+
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
+
+		final List<Genre> genres = genreService.loadAll();
+
+		for ( final Genre genre : genres ) {
+			final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( votingUser, user.getId(), genre.getId() );
+			if ( userCardGenreInfo.getPhotosQty() > 0 ) {
+				photosByGenresMap.put( genre, userCardGenreInfo );
+			}
+		}
+
+		return photosByGenresMap;
+	}
+
+	private UserCardGenreInfo getUserCardGenreInfo( final User votingUser, final int userId, final int genreId ) {
+		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
+
+		genreInfo.setPhotosQty( photoService.getPhotoQtyByUserAndGenre( userId, genreId ) );
+		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
+
+		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
+		genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
+
+		genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
+
+		return genreInfo;
 	}
 
 	private PhotoList getCustomPhotoList( final SqlIdsSelectQuery selectIdsQuery, final String photoListTitle, final String userTeamMemberCardLink ) {

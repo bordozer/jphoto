@@ -51,11 +51,6 @@ public class PhotoServiceMock implements PhotoService {
 	}
 
 	@Override
-	public Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
-		return null;
-	}
-
-	@Override
 	public int getPhotoQty() {
 		return 0;
 	}

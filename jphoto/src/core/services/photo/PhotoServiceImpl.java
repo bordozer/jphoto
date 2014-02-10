@@ -35,7 +35,6 @@ import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import controllers.users.card.MarksByCategoryInfo;
-import controllers.users.card.UserCardGenreInfo;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
@@ -52,7 +51,6 @@ import java.io.File;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newLinkedHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
 public class PhotoServiceImpl implements PhotoService {
@@ -294,23 +292,6 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
-
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
-
-		final List<Genre> genres = genreService.loadAll();
-
-		for ( final Genre genre : genres ) {
-			final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( votingUser, user.getId(), genre.getId() );
-			if ( userCardGenreInfo.getPhotosQty() > 0 ) {
-				photosByGenresMap.put( genre, userCardGenreInfo );
-			}
-		}
-
-		return photosByGenresMap;
-	}
-
-	@Override
 	public PhotoInfo getPhotoInfo( final Photo photo, final User accessor ) {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeToday();
 
@@ -545,20 +526,6 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		return photos;
-	}
-
-	private UserCardGenreInfo getUserCardGenreInfo( final User votingUser, final int userId, final int genreId ) {
-		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
-
-		genreInfo.setPhotosQty( getPhotoQtyByUserAndGenre( userId, genreId ) );
-		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
-
-		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
-		genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
-
-		genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
-
-		return genreInfo;
 	}
 
 	private PhotoInfo loadCachablePhotoInfoPart( final Photo photo ) {
