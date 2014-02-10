@@ -30,7 +30,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 		this.beingProcessedUsers = beingProcessedUsers;
 
 		log.debug( "Loading users photos by genres map" );
-		//			userPhotosByGenresMap = getUserPhotosByGenresMap( genres );
+		//			userPhotosByGenresMap = getUserCardGenreInfoMap( genres );
 
 		this.genres = genres;
 	}

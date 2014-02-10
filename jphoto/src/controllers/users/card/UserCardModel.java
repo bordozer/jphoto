@@ -32,7 +32,7 @@ public class UserCardModel extends AbstractGeneralModel {
 
 	private List<PhotoList> photoLists;
 
-	private Map<Genre, UserCardGenreInfo> genreInfoMap = newHashMap();
+	private Map<Genre, UserCardGenreInfo> userCardGenreInfoMap = newHashMap();
 	private List<MarksByCategoryInfo> marksByCategoryInfos;
 	private UserAvatar userAvatar;
 
@@ -100,12 +100,12 @@ public class UserCardModel extends AbstractGeneralModel {
 		return lastPhotosOfUserVisitors;
 	}
 
-	public Map<Genre, UserCardGenreInfo> getGenreInfoMap() {
-		return genreInfoMap;
+	public Map<Genre, UserCardGenreInfo> getUserCardGenreInfoMap() {
+		return userCardGenreInfoMap;
 	}
 
-	public void setGenreInfoMap( final Map<Genre, UserCardGenreInfo> genreInfoMap ) {
-		this.genreInfoMap = genreInfoMap;
+	public void setUserCardGenreInfoMap( final Map<Genre, UserCardGenreInfo> userCardGenreInfoMap ) {
+		this.userCardGenreInfoMap = userCardGenreInfoMap;
 	}
 
 	public List<MarksByCategoryInfo> getMarksByCategoryInfos() {

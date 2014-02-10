@@ -13,12 +13,12 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
-<%@ attribute name="genreInfoMap" required="true" type="java.util.Map" %>
+<%@ attribute name="userCardGenreInfoMap" required="true" type="java.util.Map" %>
 
 <%
 	int totalPhotos = 0;
-	for ( final Object o : genreInfoMap.keySet() ) {
-		totalPhotos += (( UserCardGenreInfo ) genreInfoMap.get( o )).getPhotosQty();
+	for ( final Object o : userCardGenreInfoMap.keySet() ) {
+		totalPhotos += (( UserCardGenreInfo ) userCardGenreInfoMap.get( o )).getPhotosQty();
 	}
 %>
 
@@ -49,12 +49,12 @@
 
 		</table:trinfo>
 
-		<c:forEach var="entry" items="${genreInfoMap}">
+		<c:forEach var="entry" items="${userCardGenreInfoMap}">
 
 			<c:set var="genre" value="${entry.key}"/>
-			<c:set var="cardGenreInfo" value="${entry.value}"/>
+			<c:set var="userCardGenreInfo" value="${entry.value}"/>
 
-			<c:set var="votingModel" value="${cardGenreInfo.votingModel}"/>
+			<c:set var="votingModel" value="${userCardGenreInfo.votingModel}"/>
 
 			<table:tr>
 				<table:td cssClass="titlecolumn">
@@ -73,20 +73,20 @@
 				</table:td>
 
 				<table:td cssClass="textright">
-					<span title="${eco:translate2('Photos in category \'$1\': $2', genre.name, cardGenreInfo.photosQty)}"><b>${cardGenreInfo.photosQty}</b></span>
+					<span title="${eco:translate2('Photos in category \'$1\': $2', genre.name, userCardGenreInfo.photosQty)}"><b>${userCardGenreInfo.photosQty}</b></span>
 				</table:td>
 
 				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
 					<%--<html:spinningWheel16 title="${eco:translate('Getting information from server...')}"/>--%>
 					<c:if test="${not isThisCardOfLoggedUser}">
-						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${cardGenreInfo.votingModel}" />
+						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${userCardGenreInfo.votingModel}" />
 					</c:if>
 				</table:td>
 
 				<table:td>
-					<c:if test="${( isThisCardOfLoggedUser && cardGenreInfo.votePointsForRankInGenre != 0 ) || userCanSeeUserRankVoteHistory}">
-						<c:set var="currentPoints" value="${cardGenreInfo.votePointsForRankInGenre}" />
-						<c:set var="nextPoints" value="${cardGenreInfo.votePointsToGetNextRankInGenre}" />
+					<c:if test="${( isThisCardOfLoggedUser && userCardGenreInfo.votePointsForRankInGenre != 0 ) || userCanSeeUserRankVoteHistory}">
+						<c:set var="currentPoints" value="${userCardGenreInfo.votePointsForRankInGenre}" />
+						<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
 
 						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genre.name)}">
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>

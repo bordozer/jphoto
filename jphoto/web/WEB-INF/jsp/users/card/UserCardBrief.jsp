@@ -27,7 +27,7 @@
 		</div>
 
 		<div style="float: left; width: 400px;">
-			<user:userPhotosByGenresList user="${user}" genreInfoMap="${userCardModel.genreInfoMap}"/>
+			<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
 		</div>
 	</div>
 

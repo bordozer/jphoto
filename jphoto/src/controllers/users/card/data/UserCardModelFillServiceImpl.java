@@ -143,7 +143,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	@Override
-	public Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User accessor ) {
+	public Map<Genre, UserCardGenreInfo> getUserCardGenreInfoMap( final User user, final User accessor ) {
 		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
 
 		final List<Genre> genres = genreService.loadAll();
@@ -315,7 +315,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 		final List<Photo> photos = photoService.load( ids );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserCardGenreInfoMap( user, EnvironmentContext.getCurrentUser() );
 		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
 		final String title = TranslatorUtils.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
 
@@ -333,7 +333,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserCardGenreInfoMap( user, EnvironmentContext.getCurrentUser() );
 		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
 		final String listTitle = TranslatorUtils.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
 
