@@ -59,6 +59,7 @@ public enum ConfigurationKey {
 	, RANK_VOTING_POINTS_COEFFICIENT( 603, "0.2", true, ConfigurationDataType.FLOAT, ConfigurationUnit.EMPTY, ConfigurationTab.RANK_VOTING, "Rank voting coefficient" )
 	, RANK_VOTING_MAX_GENRE_RANK( 604, "25", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.RANK_VOTING, "Max rank in photo category" )
 	, RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE( 605, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.RANK_VOTING, "Member must have this approved photos quantity in a photo category to make other members can vote for his rank in the category" )
+	, RANK_VOTING_RANK_QTY_TO_COLLAPSE( 606, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.RANK_VOTING, "Collapse user's rank in category with one icon (User card -> Photos and ranks -> Stars for genres)" )
 
 	, COMMENTS_MIN_LENGTH( 700, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.COMMENTS, "Min length of comment" )
 	, COMMENTS_MAX_LENGTH( 701, "777", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.COMMENTS, "Max length of comment" )
