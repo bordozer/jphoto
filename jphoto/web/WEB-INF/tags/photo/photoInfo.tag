@@ -166,7 +166,7 @@
 			<table:tr>
 				<table:td>${eco:translate("Vote for the rank")}</table:td>
 				<table:td>
-					<user:voteForUserRankInGenreByPhoto photo="${photo}" genre="${genre}" votingModel="${votingModel}" />
+					<user:userRankInGenreVotingArea_ByPhoto photo="${photo}" genre="${genre}" votingModel="${votingModel}" />
 				</table:td>
 			</table:tr>
 
