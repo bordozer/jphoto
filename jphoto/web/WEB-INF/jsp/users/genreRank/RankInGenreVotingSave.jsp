@@ -10,6 +10,6 @@
 <c:set var="genre" value="${userGenreRankVotingModel.genre}" />
 <c:set var="votingModel" value="${userGenreRankVotingModel.votingModel}" />
 
-<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${votingModel}" />
+<user:userRankInGenreVotingArea user="${user}" genre="${genre}" votingModel="${votingModel}" />
 
 <tags:springErrorHighliting bindingResult="${userGenreRankVotingModel.bindingResult}" />

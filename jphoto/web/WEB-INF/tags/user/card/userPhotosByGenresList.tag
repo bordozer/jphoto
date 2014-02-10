@@ -79,7 +79,7 @@
 				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
 					<%--<html:spinningWheel16 title="${eco:translate('Getting information from server...')}"/>--%>
 					<c:if test="${not isThisCardOfLoggedUser}">
-						<user:voteForUserRankInGenreByUserAndGenre user="${user}" genre="${genre}" votingModel="${userCardGenreInfo.votingModel}" />
+						<user:userRankInGenreVotingArea user="${user}" genre="${genre}" votingModel="${userCardGenreInfo.votingModel}" />
 					</c:if>
 				</table:td>
 
