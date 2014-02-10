@@ -16,18 +16,25 @@ import java.util.List;
 
 public interface ActivityStreamService extends BaseEntityService<AbstractActivityStreamEntry>, IdsSqlSelectable {
 
+	// TODO: Transactional
 	boolean saveUserRegistration( final User user );
 
+	// TODO: Transactional
 	boolean savePhotoUpload( final Photo photo );
 
+	// TODO: Transactional
 	boolean savePhotoVoting( final User voter, final Photo photo, final Date currentTime );
 
+	// TODO: Transactional
 	boolean savePhotoComment( final PhotoComment comment );
 
+	// TODO: Transactional
 	boolean savePhotoPreview( final PhotoPreview preview );
 
+	// TODO: Transactional
 	boolean saveFavoriteAction( final int userId, final int favoriteEntryId, final Date time, final FavoriteEntryType entryType );
 
+	// TODO: Transactional
 	boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting );
 
 	List<AbstractActivityStreamEntry> getActivityForPeriod( final Date dateFrom, final Date dateTo );

@@ -296,22 +296,19 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser ) {
-		final Map<Genre, UserCardGenreInfo> photosByGenres = newLinkedHashMap();
+
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
 
 		final List<Genre> genres = genreService.loadAll();
 
 		for ( final Genre genre : genres ) {
-			photosByGenres.put( genre, getUserCardGenreInfo( votingUser, user.getId(), genre.getId() ) );
-		}
-
-		final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap = newLinkedHashMap();
-		for ( final Genre genre : photosByGenres.keySet() ) {
-			if ( photosByGenres.get( genre ).getPhotosQty() > 0 ) {
-				userPhotosByGenresMap.put( genre, photosByGenres.get( genre ) );
+			final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( votingUser, user.getId(), genre.getId() );
+			if ( userCardGenreInfo.getPhotosQty() > 0 ) {
+				photosByGenresMap.put( genre, userCardGenreInfo );
 			}
 		}
 
-		return new UserPhotosByGenresContainer( user.getId(), userPhotosByGenresMap );
+		return new UserPhotosByGenresContainer( user.getId(), photosByGenresMap );
 	}
 
 	@Override
