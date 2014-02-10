@@ -161,7 +161,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public boolean send( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText ) {
+	public boolean sendPrivateMessage( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText ) {
 
 		final PrivateMessage privateMessageOut = new PrivateMessage();
 		privateMessageOut.setFromUser( fromUser );
@@ -188,17 +188,17 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 	@Override
 	public boolean sendSystemNotificationMessage( final User toUser, final String privateMessageText ) {
-		return send( null, toUser, PrivateMessageType.SYSTEM_NOTIFICATIONS, privateMessageText );
+		return sendPrivateMessage( null, toUser, PrivateMessageType.SYSTEM_NOTIFICATIONS, privateMessageText );
 	}
 
 	@Override
 	public boolean sendActivityNotificationMessage( final User toUser, final String privateMessageText ) {
-		return send( null, toUser, PrivateMessageType.ACTIVITY_NOTIFICATIONS, privateMessageText );
+		return sendPrivateMessage( null, toUser, PrivateMessageType.ACTIVITY_NOTIFICATIONS, privateMessageText );
 	}
 
 	@Override
 	public boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText ) {
-		return send( null, toUser, PrivateMessageType.ADMIN_NOTIFICATIONS, privateMessageText );
+		return sendPrivateMessage( null, toUser, PrivateMessageType.ADMIN_NOTIFICATIONS, privateMessageText );
 	}
 
 	@Override

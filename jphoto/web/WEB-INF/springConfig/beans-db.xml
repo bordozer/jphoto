@@ -27,6 +27,10 @@
 			<tx:method name="recalculatePhotoRatingForPeriod"/>
 			<tx:method name="savePhotoWithTeamAndAlbums"/>
 			<tx:method name="sendPrivateMessageAjax"/>
+			<tx:method name="sendPrivateMessage"/>
+			<tx:method name="sendSystemNotificationMessage"/>
+			<tx:method name="sendActivityNotificationMessage"/>
+			<tx:method name="sendAdminNotificationMessage"/>
 		</tx:attributes>
 	</tx:advice>
 
@@ -63,6 +67,26 @@
 	<aop:config>
 		<aop:pointcut id="sendPrivateMessageAjax" expression="execution(* core.services.entry.PrivateMessageService.sendPrivateMessageAjax(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendPrivateMessageAjax"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="sendPrivateMessage" expression="execution(* core.services.entry.PrivateMessageService.sendPrivateMessage(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendPrivateMessage"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="sendSystemNotificationMessage" expression="execution(* core.services.entry.PrivateMessageService.sendSystemNotificationMessage(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendSystemNotificationMessage"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="sendActivityNotificationMessage" expression="execution(* core.services.entry.PrivateMessageService.sendActivityNotificationMessage(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendActivityNotificationMessage"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="sendAdminNotificationMessage" expression="execution(* core.services.entry.PrivateMessageService.sendAdminNotificationMessage(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendAdminNotificationMessage"/>
 	</aop:config>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
