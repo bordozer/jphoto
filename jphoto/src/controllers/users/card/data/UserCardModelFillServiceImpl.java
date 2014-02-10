@@ -13,7 +13,6 @@ import core.general.menus.EntryMenu;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.conversion.PhotoPreviewService;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
@@ -144,8 +143,19 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	@Override
-	public Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user ) {
-		return getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
+	public Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User accessor ) {
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
+
+		final List<Genre> genres = genreService.loadAll();
+
+		for ( final Genre genre : genres ) {
+			final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user.getId(), genre.getId(), accessor );
+			if ( userCardGenreInfo.getPhotosQty() > 0 ) {
+				photosByGenresMap.put( genre, userCardGenreInfo );
+			}
+		}
+
+		return photosByGenresMap;
 	}
 
 	@Override
@@ -270,27 +280,11 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return activities;
 	}
 
-	private Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
-
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
-
-		final List<Genre> genres = genreService.loadAll();
-
-		for ( final Genre genre : genres ) {
-			final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( votingUser, user.getId(), genre.getId() );
-			if ( userCardGenreInfo.getPhotosQty() > 0 ) {
-				photosByGenresMap.put( genre, userCardGenreInfo );
-			}
-		}
-
-		return photosByGenresMap;
-	}
-
-	private UserCardGenreInfo getUserCardGenreInfo( final User votingUser, final int userId, final int genreId ) {
+	private UserCardGenreInfo getUserCardGenreInfo( final int userId, final int genreId, final User accessor ) {
 		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
 
 		genreInfo.setPhotosQty( photoService.getPhotoQtyByUserAndGenre( userId, genreId ) );
-		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
+		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, accessor ) );
 
 		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
 		genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
@@ -321,7 +315,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 		final List<Photo> photos = photoService.load( ids );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user );
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
 		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
 		final String title = TranslatorUtils.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
 
@@ -339,7 +333,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user );
+		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
 		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
 		final String listTitle = TranslatorUtils.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
 

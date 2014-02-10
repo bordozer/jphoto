@@ -29,7 +29,7 @@ public interface UserCardModelFillService {
 
 	PhotoList getLastPhotosOfUserVisitors( final User user );
 
-	Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user );
+	Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User accessor );
 
 	void setMarksByCategoryInfos( final UserCardModel model );
 
