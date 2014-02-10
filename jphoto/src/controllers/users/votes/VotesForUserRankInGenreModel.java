@@ -3,8 +3,6 @@ package controllers.users.votes;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.user.User;
-import core.general.user.UserGenreRankHistoryEntry;
-import core.general.user.UserRankPhotoVote;
 
 import java.util.List;
 import java.util.Map;

@@ -92,7 +92,9 @@
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
 						</a>
 						/
-						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, votingModel.userRankInGenre + 1, genre.name )}">${nextPoints}</span>
+						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, votingModel.userRankInGenre + 1, genre.name )}">
+							${nextPoints}
+						</span>
 					</c:if>
 				</table:td>
 			</table:tr>
