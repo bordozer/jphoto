@@ -17,10 +17,8 @@
 
 <%
 	int totalPhotos = 0;
-	UserCardGenreInfo cardGenreInfo;
 	for ( final Object o : genreInfoMap.keySet() ) {
-		cardGenreInfo = ( UserCardGenreInfo ) genreInfoMap.get( o );
-		totalPhotos += cardGenreInfo.getPhotosQty();
+		totalPhotos += (( UserCardGenreInfo ) genreInfoMap.get( o )).getPhotosQty();
 	}
 %>
 
