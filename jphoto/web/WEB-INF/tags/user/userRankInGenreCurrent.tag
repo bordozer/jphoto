@@ -11,7 +11,7 @@
 <%@ attribute name="userHasEnoughPhotos" required="true" type="java.lang.Boolean" %>
 
 <c:if test="${userHasEnoughPhotos && rank == 0}">
-	<html:img id="userrankIn${genre.id}" src="user_rank_icon_zero_16x16.png" width="8" height="8" alt="${eco:translate1('Author has zero rank in category \\\'$1\\\'', genre.name)}" />
+	<html:img id="userrankIn${genre.id}" src="user_rank_icon_zero_16x16.png" width="8" height="8" alt="${eco:translate1('The member has zero rank in category \\\'$1\\\'', genre.name)}" />
 </c:if>
 
 <c:if test="${not userHasEnoughPhotos}">
