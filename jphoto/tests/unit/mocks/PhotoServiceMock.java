@@ -1,9 +1,9 @@
 package mocks;
 
+import controllers.users.card.UserCardGenreInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
-import core.general.cache.entries.UserPhotosByGenresContainer;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
@@ -21,6 +21,7 @@ import sql.builder.SqlSelectQuery;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class PhotoServiceMock implements PhotoService {
@@ -50,7 +51,7 @@ public class PhotoServiceMock implements PhotoService {
 	}
 
 	@Override
-	public UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser ) {
+	public Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
 		return null;
 	}
 

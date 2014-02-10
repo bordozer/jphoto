@@ -1,9 +1,9 @@
 package core.services.photo;
 
+import controllers.users.card.UserCardGenreInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
-import core.general.cache.entries.UserPhotosByGenresContainer;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
@@ -21,6 +21,7 @@ import sql.builder.SqlSelectQuery;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable {
@@ -36,7 +37,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> loadUserPhotos( final int userId );
 
-	UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser );
+	Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser );
 
 	int getPhotoQty();
 

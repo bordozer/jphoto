@@ -6,7 +6,6 @@ import core.exceptions.SaveToDBException;
 import core.general.base.PagingModel;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
-import core.general.cache.entries.UserPhotosByGenresContainer;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
@@ -104,7 +103,7 @@ public class PhotoServiceImpl implements PhotoService {
 	private SecurityService securityService;
 
 	@Autowired
-	private CacheService<UserPhotosByGenresContainer> cacheService;
+	private CacheService cacheService;
 	
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -257,7 +256,7 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public int getPhotoQtyByUserAndGenre( final int userId, final int genreId ) {
-		return photoDao.getPhotoQtyByUserAndGenre( userId, genreId ); // TODO: cache this!!!
+		return photoDao.getPhotoQtyByUserAndGenre( userId, genreId );
 	}
 
 	@Override
@@ -295,7 +294,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser ) {
+	public Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap( final User user, final User votingUser ) {
 
 		final Map<Genre, UserCardGenreInfo> photosByGenresMap = newLinkedHashMap();
 
@@ -308,7 +307,7 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		}
 
-		return new UserPhotosByGenresContainer( user.getId(), photosByGenresMap );
+		return photosByGenresMap;
 	}
 
 	@Override
@@ -551,8 +550,7 @@ public class PhotoServiceImpl implements PhotoService {
 	private UserCardGenreInfo getUserCardGenreInfo( final User votingUser, final int userId, final int genreId ) {
 		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
 
-		final int photosQty = getPhotoQtyByUserAndGenre( userId, genreId );
-		genreInfo.setPhotosQty( photosQty );
+		genreInfo.setPhotosQty( getPhotoQtyByUserAndGenre( userId, genreId ) );
 		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, votingUser ) );
 
 		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );

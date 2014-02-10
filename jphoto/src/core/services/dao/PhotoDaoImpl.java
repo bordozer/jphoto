@@ -55,9 +55,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	private CacheService<UserGenrePhotosQty> cacheServiceUserGenre;
 
 	@Autowired
-	private CacheService<PhotoInfo> cacheServicePhotoInfo;
-
-	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	static {

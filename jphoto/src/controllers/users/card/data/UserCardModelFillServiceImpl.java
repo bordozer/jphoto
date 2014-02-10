@@ -144,7 +144,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public Map<Genre,UserCardGenreInfo> getUserPhotosByGenresMap( final User user ) {
-		return photoService.getUserPhotosByGenresContainer( user, EnvironmentContext.getCurrentUser() ).getUserPhotosByGenresMap();
+		return photoService.getUserPhotosByGenresMap( user, EnvironmentContext.getCurrentUser() );
 	}
 
 	@Override
