@@ -1,6 +1,5 @@
 package core.services.photo;
 
-import controllers.users.card.UserCardGenreInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
