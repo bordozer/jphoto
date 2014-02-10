@@ -14,7 +14,7 @@
 	<html:img id="userrankIn${genre.id}" src="user_rank_icon_zero_16x16.png" width="8" height="8" alt="${eco:translate1('The member has zero rank in category \\\'$1\\\'', genre.name)}" />
 </c:if>
 
-<c:if test="${not userHasEnoughPhotos}">
+<c:if test="${not userHasEnoughPhotos && rank == 0}">
 	<c:set var="title" value="${eco:translate1('The member does not have enough photos in category \\\'$1\\\'', genre.name)}" />
 	<html:img id="userrankIn${genre.id}" src="user_rank_icon_disabled16x16.png" width="8" height="8" alt="${title}" />
 </c:if>
