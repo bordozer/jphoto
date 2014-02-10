@@ -325,47 +325,8 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		}
 
-		final UserPhotosByGenresContainer container = new UserPhotosByGenresContainer( userId );
-		container.setUserPhotosByGenresMap( userPhotosByGenresMap );
-
-		return container;
+		return new UserPhotosByGenresContainer( userId, userPhotosByGenresMap );
 	}
-
-	/*private UserPhotosByGenresContainer loadUserPhotosByGenres( final User user ) {
-		final int userId = user.getId();
-		final Map<Genre, UserCardGenreInfo> photosByGenres = newLinkedHashMap();
-
-		final List<Genre> genres = genreService.loadAll();
-
-		for ( final Genre genre : genres ) {
-			final int genreId = genre.getId();
-
-			final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
-
-			final int photosQty = getPhotoQtyByUserAndGenre( userId, genreId );
-			genreInfo.setPhotosQty( photosQty );
-			genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, user ) );
-
-			final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
-			genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
-
-			genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
-
-			photosByGenres.put( genre, genreInfo );
-		}
-
-		final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap = newLinkedHashMap();
-		for ( final Genre genre : photosByGenres.keySet() ) {
-			if ( photosByGenres.get( genre ).getPhotosQty() > 0 ) {
-				userPhotosByGenresMap.put( genre, photosByGenres.get( genre ) );
-			}
-		}
-
-		final UserPhotosByGenresContainer entry = new UserPhotosByGenresContainer( userId );
-		entry.setUserPhotosByGenresMap( userPhotosByGenresMap );
-
-		return entry;
-	}*/
 
 	@Override
 	public PhotoInfo getPhotoInfo( final Photo photo, final User accessor ) {

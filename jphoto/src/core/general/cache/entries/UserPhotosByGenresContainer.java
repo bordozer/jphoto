@@ -9,10 +9,11 @@ import java.util.Map;
 public class UserPhotosByGenresContainer implements Cacheable {
 
 	private final int userId;
-	private Map<Genre, UserCardGenreInfo> userPhotosByGenresMap;
+	private final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap;
 
-	public UserPhotosByGenresContainer( final int userId ) {
+	public UserPhotosByGenresContainer( final int userId, final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap ) {
 		this.userId = userId;
+		this.userPhotosByGenresMap = userPhotosByGenresMap;
 	}
 
 	public int getUserId() {
@@ -21,9 +22,5 @@ public class UserPhotosByGenresContainer implements Cacheable {
 
 	public Map<Genre, UserCardGenreInfo> getUserPhotosByGenresMap() {
 		return userPhotosByGenresMap;
-	}
-
-	public void setUserPhotosByGenresMap( final Map<Genre, UserCardGenreInfo> userPhotosByGenresMap ) {
-		this.userPhotosByGenresMap = userPhotosByGenresMap;
 	}
 }
