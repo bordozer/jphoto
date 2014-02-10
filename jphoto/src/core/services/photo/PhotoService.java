@@ -3,11 +3,11 @@ package core.services.photo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
+import core.general.cache.entries.UserPhotosByGenresContainer;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.user.User;
-import core.general.cache.entries.UserPhotosByGenresEntry;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.UserPhotosByGenre;
@@ -36,7 +36,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> loadUserPhotos( final int userId );
 
-	UserPhotosByGenresEntry getUserPhotosByGenresEntry( final User user, final User votingUser );
+	UserPhotosByGenresContainer getUserPhotosByGenresEntry( final User user, final User votingUser );
 
 	int getPhotoQty();
 

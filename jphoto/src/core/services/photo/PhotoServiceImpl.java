@@ -6,7 +6,7 @@ import core.exceptions.SaveToDBException;
 import core.general.base.PagingModel;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
-import core.general.cache.entries.UserPhotosByGenresEntry;
+import core.general.cache.entries.UserPhotosByGenresContainer;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
@@ -104,7 +104,7 @@ public class PhotoServiceImpl implements PhotoService {
 	private SecurityService securityService;
 
 	@Autowired
-	private CacheService<UserPhotosByGenresEntry> cacheService;
+	private CacheService<UserPhotosByGenresContainer> cacheService;
 	
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -295,7 +295,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public UserPhotosByGenresEntry getUserPhotosByGenresEntry( final User user, final User votingUser ) {
+	public UserPhotosByGenresContainer getUserPhotosByGenresEntry( final User user, final User votingUser ) {
 		final int userId = user.getId();
 		final Map<Genre, UserCardGenreInfo> photosByGenres = newLinkedHashMap();
 
@@ -325,13 +325,13 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		}
 
-		final UserPhotosByGenresEntry entry = new UserPhotosByGenresEntry( userId );
-		entry.setUserPhotosByGenresMap( userPhotosByGenresMap );
+		final UserPhotosByGenresContainer container = new UserPhotosByGenresContainer( userId );
+		container.setUserPhotosByGenresMap( userPhotosByGenresMap );
 
-		return entry;
+		return container;
 	}
 
-	private UserPhotosByGenresEntry loadUserPhotosByGenres( final User user ) {
+	/*private UserPhotosByGenresContainer loadUserPhotosByGenres( final User user ) {
 		final int userId = user.getId();
 		final Map<Genre, UserCardGenreInfo> photosByGenres = newLinkedHashMap();
 
@@ -361,11 +361,11 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		}
 
-		final UserPhotosByGenresEntry entry = new UserPhotosByGenresEntry( userId );
+		final UserPhotosByGenresContainer entry = new UserPhotosByGenresContainer( userId );
 		entry.setUserPhotosByGenresMap( userPhotosByGenresMap );
 
 		return entry;
-	}
+	}*/
 
 	@Override
 	public PhotoInfo getPhotoInfo( final Photo photo, final User accessor ) {

@@ -6,12 +6,12 @@ import controllers.users.card.UserCardGenreInfo;
 
 import java.util.Map;
 
-public class UserPhotosByGenresEntry implements Cacheable {
+public class UserPhotosByGenresContainer implements Cacheable {
 
 	private final int userId;
 	private Map<Genre, UserCardGenreInfo> userPhotosByGenresMap;
 
-	public UserPhotosByGenresEntry( final int userId ) {
+	public UserPhotosByGenresContainer( final int userId ) {
 		this.userId = userId;
 	}
 
