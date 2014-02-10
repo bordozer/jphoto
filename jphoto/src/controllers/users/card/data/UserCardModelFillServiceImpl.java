@@ -315,8 +315,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 		final List<Photo> photos = photoService.load( ids );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserCardGenreInfoMap( user, EnvironmentContext.getCurrentUser() );
-		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
+		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 		final String title = TranslatorUtils.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
@@ -333,8 +332,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
-		final Map<Genre, UserCardGenreInfo> photosByGenresMap = getUserCardGenreInfoMap( user, EnvironmentContext.getCurrentUser() );
-		final int photosByGenre = getPhotosQty( photosByGenresMap, genre );
+		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 		final String listTitle = TranslatorUtils.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
 
 		final List<Photo> photos = photoService.loadPhotosByIdsQuery( selectIdsQuery );
@@ -385,16 +383,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = StringUtils.EMPTY;
 		final String listTitle = TranslatorUtils.translate( "Last photos of visitors who viewed the member's photos recently" );
 		return getPhotoList( photos, linkBest, listTitle );
-	}
-
-	private int getPhotosQty( final Map<Genre, UserCardGenreInfo> photosByGenresMap, final Genre genre ) {
-		for ( final Genre g : photosByGenresMap.keySet() ) {
-			if ( g.equals( genre )) {
-				return photosByGenresMap.get( g ).getPhotosQty();
-			}
-		}
-
-		return 0;
 	}
 
 	private PhotoList getPhotoList( final List<Photo> photos, final String linkToFullPhotoList, final String listTitle ) {
