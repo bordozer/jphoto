@@ -84,9 +84,9 @@
 				</table:td>
 
 				<table:td>
-					<c:if test="${( isThisCardOfLoggedUser && userCardGenreInfo.votePointsForRankInGenre != 0 ) || userCanSeeUserRankVoteHistory}">
-						<c:set var="currentPoints" value="${userCardGenreInfo.votePointsForRankInGenre}" />
-						<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
+					<c:set var="currentPoints" value="${userCardGenreInfo.votePointsForRankInGenre}" />
+					<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
+					<c:if test="${( isThisCardOfLoggedUser && currentPoints != 0 ) || userCanSeeUserRankVoteHistory}">
 
 						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genre.name)}">
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
