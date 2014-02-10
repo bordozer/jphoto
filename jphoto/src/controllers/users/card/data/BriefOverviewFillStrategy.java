@@ -1,7 +1,6 @@
 package controllers.users.card.data;
 
 import core.context.EnvironmentContext;
-import core.general.base.PagingModel;
 import core.general.user.User;
 import controllers.users.card.UserCardModel;
 import elements.PhotoList;
@@ -27,7 +26,7 @@ public class BriefOverviewFillStrategy extends AbstractUserCardModelFillStrategy
 		photoLists.add( userCardModelFillService.getLastPhotosOfUserVisitors( user ) );
 		model.setPhotoLists( photoLists );
 
-		model.setGenreInfoMap( userCardModelFillService.getUserPhotosByGenresEntry( model.getUser() ) );
+		model.setGenreInfoMap( userCardModelFillService.getUserPhotosByGenresMap( model.getUser() ) );
 
 		userCardModelFillService.setLastUserActivityTime( model );
 		model.setEntryMenu( userCardModelFillService.getUserMenu( user, EnvironmentContext.getCurrentUser() ) );

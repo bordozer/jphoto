@@ -50,7 +50,7 @@ public class PhotoServiceMock implements PhotoService {
 	}
 
 	@Override
-	public UserPhotosByGenresContainer getUserPhotosByGenresEntry( final User user, final User votingUser  ) {
+	public UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser ) {
 		return null;
 	}
 

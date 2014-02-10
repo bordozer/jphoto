@@ -36,7 +36,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> loadUserPhotos( final int userId );
 
-	UserPhotosByGenresContainer getUserPhotosByGenresEntry( final User user, final User votingUser );
+	UserPhotosByGenresContainer getUserPhotosByGenresContainer( final User user, final User votingUser );
 
 	int getPhotoQty();
 
