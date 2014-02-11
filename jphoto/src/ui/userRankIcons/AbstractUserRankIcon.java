@@ -28,7 +28,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return TranslatorUtils.translate( "There is not enough photos in category '$1' to have rank", genre.getName() );
+				return TranslatorUtils.translate( "There is not enough photos in category '$1' to have a rank", genre.getName() );
 			}
 		};
 	}
