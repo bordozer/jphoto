@@ -8,6 +8,7 @@ import core.general.photoTeam.PhotoTeam;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.Cacheable;
 import controllers.users.card.MarksByCategoryInfo;
+import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.Date;
 import java.util.List;
@@ -62,6 +63,7 @@ public class PhotoInfo implements Cacheable {
 	private EntryMenu photoAuthorMenu;
 
 	private List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
+	private UserRankIconContainer userRankIconContainer;
 
 	public PhotoInfo( final Photo photo ) {
 		this.photo = photo;
@@ -326,5 +328,13 @@ public class PhotoInfo implements Cacheable {
 
 	public void setShowIconsForFavoriteEntryTypes( final List<FavoriteEntryType> showIconsForFavoriteEntryTypes ) {
 		this.showIconsForFavoriteEntryTypes = showIconsForFavoriteEntryTypes;
+	}
+
+	public void setUserRankIconContainer( final UserRankIconContainer userRankIconContainer ) {
+		this.userRankIconContainer = userRankIconContainer;
+	}
+
+	public UserRankIconContainer getUserRankIconContainer() {
+		return userRankIconContainer;
 	}
 }

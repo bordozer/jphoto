@@ -19,11 +19,11 @@ import core.services.photo.PhotoService;
 import core.services.dao.UserRankDao;
 import controllers.users.genreRank.VotingModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public class UserRankServiceImpl implements UserRankService {
@@ -271,6 +271,11 @@ public class UserRankServiceImpl implements UserRankService {
 		}
 
 		return 0;
+	}
+
+	@Override
+	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre ) {
+		return new UserRankIconContainer( user, genre, this, configurationService );
 	}
 
 	private int getRankUpperPoints( final int base, final float coefficient, final int rank ) {

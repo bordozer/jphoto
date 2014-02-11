@@ -3,6 +3,7 @@ package core.services.photo;
 import controllers.comment.edit.PhotoCommentInfo;
 import core.dtos.CommentDTO;
 import core.context.EnvironmentContext;
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -289,7 +290,8 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		final int genreId = photo.getGenreId();
 		photoCommentInfo.setCommentAuthorRankInGenre( userRankService.getUserRankInGenre( commentAuthorId, genreId ) );
-		photoCommentInfo.setGenre( genreService.load( genreId ) );
+		final Genre genre = genreService.load( genreId );
+		photoCommentInfo.setGenre( genre );
 
 		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
 		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( commentAuthorId, genreId );
@@ -302,6 +304,8 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		photoCommentInfo.setEntryMenu( entryMenu );
 
 		photoCommentInfo.setAuthorNameMustBeHidden( securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, accessor ) );
+
+		photoCommentInfo.setUserRankIconContainer( userRankService.getUserRankIconContainer( photoComment.getCommentAuthor(), genre ) );
 
 		return photoCommentInfo;
 	}

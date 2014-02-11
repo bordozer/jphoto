@@ -7,6 +7,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.user.UserAvatar;
 import core.general.user.UserPhotoVote;
+import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class PhotoCommentInfo {
 
 	private EntryMenu entryMenu;
 	private boolean authorNameMustBeHidden;
+
+	private UserRankIconContainer userRankIconContainer;
 
 	public PhotoCommentInfo( final Photo photo, final PhotoComment photoComment ) {
 		this.photo = photo;
@@ -121,5 +124,13 @@ public class PhotoCommentInfo {
 
 	public boolean isAuthorNameMustBeHidden() {
 		return authorNameMustBeHidden;
+	}
+
+	public UserRankIconContainer getUserRankIconContainer() {
+		return userRankIconContainer;
+	}
+
+	public void setUserRankIconContainer( final UserRankIconContainer userRankIconContainer ) {
+		this.userRankIconContainer = userRankIconContainer;
 	}
 }

@@ -159,7 +159,7 @@
 			<table:tr>
 				<table:td>${eco:translate("Current")}</table:td>
 				<table:td>
-					<user:userRankInGenreCurrent user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photoInfo.photoAuthorRankInGenre}" userHasEnoughPhotos="${photoInfo.photoAuthorHasEnoughPhotosInGenre}"/>
+					<user:userRankInGenreCurrent userRankIconContainer="${photoInfo.userRankIconContainer}"/>
 				</table:td>
 			</table:tr>
 

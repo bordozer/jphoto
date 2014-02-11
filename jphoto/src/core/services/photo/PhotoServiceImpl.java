@@ -578,7 +578,9 @@ public class PhotoServiceImpl implements PhotoService {
 		photoInfo.setPhotoAuthorMenu( entryMenuService.getUserMenu( photoAuthor, accessor ) );
 		// TODO: should it be non-cachable? <--
 
-		photoInfo.setGenre( genreService.load( photo.getGenreId() ) );
+		final Genre genre = genreService.load( photo.getGenreId() );
+
+		photoInfo.setGenre( genre );
 
 		if ( dateUtilsService.isNotEmptyTime( timeFrom ) && dateUtilsService.isNotEmptyTime( timeTo ) ) {
 			final PhotoRating photoRatingPosition = photoRatingService.getPhotoRatingForPeriod( photo.getId(), timeFrom, timeTo );
@@ -603,6 +605,8 @@ public class PhotoServiceImpl implements PhotoService {
 				photoInfo.setPhotoRatingPositionDescription( photoRatingPositionDescription );
 			}
 		}
+
+		photoInfo.setUserRankIconContainer( userRankService.getUserRankIconContainer( user, genre ) );
 	}
 
 	private int getSummaryPhotoMark( final List<MarksByCategoryInfo> marksByCategories ) {

@@ -54,8 +54,6 @@
 			<c:set var="genre" value="${entry.key}"/>
 			<c:set var="userCardGenreInfo" value="${entry.value}"/>
 
-			<c:set var="votingModel" value="${userCardGenreInfo.votingModel}"/>
-
 			<table:tr>
 				<table:td cssClass="titlecolumn">
 					<div style="float: left; width: 100%; height: 25px;">
@@ -63,11 +61,7 @@
 							<links:photosByUserByGenre user="${user}" genre="${genre}"/>
 						</div>
 						<div style="float: left; width: 100%; height: 3px;">
-							<user:userRankInGenreCurrent user="${user}"
-												  genre="${genre}"
-												  rank="${votingModel.userRankInGenre}"
-												  userHasEnoughPhotos="${votingModel.userHasEnoughPhotosInGenre}"
-									/>
+							<user:userRankInGenreCurrent userRankIconContainer="${userCardGenreInfo.userRankIconContainer}"/>
 						</div>
 					</div>
 				</table:td>
@@ -92,7 +86,7 @@
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
 						</a>
 						/
-						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, votingModel.userRankInGenre + 1, genre.name )}">
+						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, userCardGenreInfo.userRankInGenre + 1, genre.name )}">
 							${nextPoints}
 						</span>
 					</c:if>

@@ -1,6 +1,7 @@
 package controllers.users.card;
 
 import controllers.users.genreRank.VotingModel;
+import ui.userRankIcons.UserRankIconContainer;
 
 public class UserCardGenreInfo {
 
@@ -8,6 +9,8 @@ public class UserCardGenreInfo {
 	private VotingModel votingModel;
 	private int votePointsForRankInGenre;
 	private int votePointsToGetNextRankInGenre;
+	private int userRankInGenre;
+	private UserRankIconContainer userRankIconContainer;
 
 	public int getPhotosQty() {
 		return photosQty;
@@ -15,14 +18,6 @@ public class UserCardGenreInfo {
 
 	public void setPhotosQty( final int photosQty ) {
 		this.photosQty = photosQty;
-	}
-
-	public VotingModel getVotingModel() {
-		return votingModel;
-	}
-
-	public void setVotingModel( final VotingModel votingModel ) {
-		this.votingModel = votingModel;
 	}
 
 	public int getVotePointsForRankInGenre() {
@@ -39,5 +34,29 @@ public class UserCardGenreInfo {
 
 	public void setVotePointsToGetNextRankInGenre( final int votePointsToGetNextRankInGenre ) {
 		this.votePointsToGetNextRankInGenre = votePointsToGetNextRankInGenre;
+	}
+
+	public int getUserRankInGenre() {
+		return userRankInGenre;
+	}
+
+	public void setUserRankInGenre( final int userRankInGenre ) {
+		this.userRankInGenre = userRankInGenre;
+	}
+
+	public UserRankIconContainer getUserRankIconContainer() {
+		return userRankIconContainer;
+	}
+
+	public void setUserRankIconContainer( final UserRankIconContainer userRankIconContainer ) {
+		this.userRankIconContainer = userRankIconContainer;
+	}
+
+	public VotingModel getVotingModel() {
+		return votingModel;
+	}
+
+	public void setVotingModel( final VotingModel votingModel ) {
+		this.votingModel = votingModel;
 	}
 }

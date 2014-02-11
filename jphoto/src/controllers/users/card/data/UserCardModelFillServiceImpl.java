@@ -150,7 +150,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		for ( final Genre genre : genres ) {
 			if ( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) > 0 || userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0 ) {
-				final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user.getId(), genre.getId(), accessor );
+				final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user, genre, accessor );
 				photosByGenresMap.put( genre, userCardGenreInfo );
 			}
 		}
@@ -280,16 +280,22 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return activities;
 	}
 
-	private UserCardGenreInfo getUserCardGenreInfo( final int userId, final int genreId, final User accessor ) {
+	private UserCardGenreInfo getUserCardGenreInfo( final User user, final Genre genre, final User accessor ) {
+		final int userId = user.getId();
+		final int genreId = genre.getId();
+
 		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
 
 		genreInfo.setPhotosQty( photoService.getPhotoQtyByUserAndGenre( userId, genreId ) );
 		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, accessor ) );
+		genreInfo.setUserRankInGenre( userRankService.getUserRankInGenre( userId, genreId ) );
 
 		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );
 		genreInfo.setVotePointsForRankInGenre( userVotePointsForRankInGenre );
 
 		genreInfo.setVotePointsToGetNextRankInGenre( userRankService.getVotePointsToGetNextRankInGenre( userVotePointsForRankInGenre ) );
+
+		genreInfo.setUserRankIconContainer( userRankService.getUserRankIconContainer( user, genre ) );
 
 		return genreInfo;
 	}

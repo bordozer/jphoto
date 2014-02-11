@@ -1,11 +1,13 @@
 package core.services.user;
 
+import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserRankPhotoVote;
 import core.general.configuration.SystemConfiguration;
 import controllers.users.genreRank.VotingModel;
+import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;
 import java.util.Map;
@@ -46,5 +48,7 @@ public interface UserRankService {
 
 	int getVotePointsToGetNextRankInGenre( final int userCurrentVotePointsForRankInGenre );
 
-	boolean isUserHavingEnoughPhotosInGenre( int userId, int genreId );
+	boolean isUserHavingEnoughPhotosInGenre( final int userId, final int genreId );
+
+	UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre );
 }
