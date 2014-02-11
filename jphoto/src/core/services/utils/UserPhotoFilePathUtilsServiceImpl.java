@@ -84,7 +84,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String generateUserPhotoFileName( final User user, final int photoId ) {
-		return String.format( "u%s_p%s_%s.jpg", user.getId(), photoId, dateUtilsService.getCurrentTime() );
+		return String.format( "u%s_p%s_%s.jpg", user.getId(), photoId, dateUtilsService.getCurrentTime().getTime() );
 	}
 
 	@Override
