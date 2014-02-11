@@ -5,8 +5,6 @@ import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
-import mocks.PhotoServiceMock;
-import mocks.SecurityServiceMock;
 import mocks.SystemVarsServiceMock;
 import org.junit.Before;
 
@@ -55,10 +53,7 @@ public class AbstractTestCase {
 		userPhotoFilePathUtilsService = new UserPhotoFilePathUtilsServiceImpl();
 		userPhotoFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );
 
-		final RandomUtilsServiceImpl randomUtilsService = new RandomUtilsServiceImpl();
-		randomUtilsService.setPhotoService( new PhotoServiceMock() );
-		randomUtilsService.setSecurityService( new SecurityServiceMock() );
-		userPhotoFilePathUtilsService.setRandomUtilsService( randomUtilsService );
+		userPhotoFilePathUtilsService.setDateUtilsService( dateUtilsService );
 
 		final SystemFilePathUtilsServiceImpl systemFilePathUtilsService = new SystemFilePathUtilsServiceImpl();
 		systemFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );

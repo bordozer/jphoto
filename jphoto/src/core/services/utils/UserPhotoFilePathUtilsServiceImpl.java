@@ -27,7 +27,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	private ImageFileUtilsService imageFileUtilsService;
 
 	@Autowired
-	private RandomUtilsService randomUtilsService;
+	private DateUtilsService dateUtilsService;
 
 	@Override
 	public File getUserPhotoDir( final int userId ) {
@@ -84,7 +84,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String generateUserPhotoFileName( final User user, final int photoId ) {
-		return String.format( "u%s_p%s_%s.jpg", user.getId(), photoId, randomUtilsService.getRandomInt( 1000, 9999 ) );
+		return String.format( "u%s_p%s_%s.jpg", user.getId(), photoId, dateUtilsService.getCurrentTime() );
 	}
 
 	@Override
@@ -191,7 +191,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		this.imageFileUtilsService = imageFileUtilsService;
 	}
 
-	public void setRandomUtilsService( final RandomUtilsService randomUtilsService ) {
-		this.randomUtilsService = randomUtilsService;
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
 	}
 }
