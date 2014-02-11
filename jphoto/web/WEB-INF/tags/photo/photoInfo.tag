@@ -152,14 +152,14 @@
 			<table:tr>
 				<table:td>${eco:translate("When photo was uploaded")}</table:td>
 				<table:td>
-					<user:userRankInGenreCurrent userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
+					<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
 				<table:td>${eco:translate("Current")}</table:td>
 				<table:td>
-					<user:userRankInGenreCurrent userRankIconContainer="${photoInfo.userRankIconContainer}"/>
+					<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankIconContainer}"/>
 				</table:td>
 			</table:tr>
 

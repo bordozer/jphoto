@@ -47,13 +47,13 @@ public class UserRankIconContainer {
 		final int collapsedIconsQty = NumberUtils.floor( absRank / qtyToCollapse );
 		final int iconsQty = absRank - ( qtyToCollapse * collapsedIconsQty );
 
-		for ( int i = iconsQty; i >= 1 ; i-- ) {
-			final int shownRank = i + ( collapsedIconsQty * qtyToCollapse );
-			rankIcons.add( rank > 0 ? AbstractUserRankIcon.getUserRankIcon( user, genre, shownRank ) : AbstractUserRankIcon.getNegativeUserRankIcon( user, genre, shownRank ) );
+		for ( int i = 1; i <= collapsedIconsQty; i++ ) {
+			rankIcons.add( rank > 0 ? AbstractUserRankIcon.getCollapsedUserRankIcon( user, genre, i * qtyToCollapse ) : AbstractUserRankIcon.getCollapsedNegativeUserRankIcon( user, genre, i * qtyToCollapse ) );
 		}
 
-		for ( int i = collapsedIconsQty; i >= 1; i-- ) {
-			rankIcons.add( rank > 0 ? AbstractUserRankIcon.getCollapsedUserRankIcon( user, genre, i * qtyToCollapse ) : AbstractUserRankIcon.getCollapsedNegativeUserRankIcon( user, genre, i * qtyToCollapse ) );
+		for ( int i = 1; i <= iconsQty ; i++ ) {
+			final int shownRank = i + ( collapsedIconsQty * qtyToCollapse );
+			rankIcons.add( rank > 0 ? AbstractUserRankIcon.getUserRankIcon( user, genre, shownRank ) : AbstractUserRankIcon.getNegativeUserRankIcon( user, genre, shownRank ) );
 		}
 	}
 

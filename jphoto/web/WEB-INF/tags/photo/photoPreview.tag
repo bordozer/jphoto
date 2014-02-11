@@ -160,7 +160,7 @@
 		</div>
 		<c:if test="${photoInfo.showUserRankInGenreInPhotoList}">
 			<div class="containerPhotoLine">
-				<user:userRankInGenreCurrent userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
+				<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
 			</div>
 		</c:if>
 	</c:if>

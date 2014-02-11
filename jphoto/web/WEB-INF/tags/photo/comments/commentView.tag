@@ -101,7 +101,7 @@
 			</c:if>
 
 			<c:if test="${showCommentAuthorData}">
-				/ <user:userRankInGenreCurrent userRankIconContainer="${commentInfo.userRankIconContainer}"/>
+				/ <user:userRankInGenreRenderer userRankIconContainer="${commentInfo.userRankIconContainer}"/>
 			</c:if>
 
 			/ ${eco:formatDate(comment.creationTime)} ${eco:formatTime(comment.creationTime)}

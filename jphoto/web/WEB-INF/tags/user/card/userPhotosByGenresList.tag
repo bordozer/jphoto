@@ -61,7 +61,7 @@
 							<links:photosByUserByGenre user="${user}" genre="${genre}"/>
 						</div>
 						<div style="float: left; width: 100%; height: 3px;">
-							<user:userRankInGenreCurrent userRankIconContainer="${userCardGenreInfo.userRankIconContainer}"/>
+							<user:userRankInGenreRenderer userRankIconContainer="${userCardGenreInfo.userRankIconContainer}"/>
 						</div>
 					</div>
 				</table:td>
