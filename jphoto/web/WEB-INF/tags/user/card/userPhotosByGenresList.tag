@@ -77,7 +77,7 @@
 					</c:if>
 				</table:td>
 
-				<table:td>
+				<table:td cssClass="textcentered">
 					<c:set var="currentPoints" value="${userCardGenreInfo.votePointsForRankInGenre}" />
 					<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
 					<c:if test="${( isThisCardOfLoggedUser && currentPoints != 0 ) || userCanSeeUserRankVoteHistory}">
