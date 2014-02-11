@@ -36,7 +36,7 @@
 		<table:separatorInfo colspan="4" height="50" title="${eco:translate('Photos and ranks')}"/>
 
 		<table:trinfo>
-			<table:td cssClass="titlecolumn">
+			<table:td>
 				<b><links:userPhotos user="${user}"/></b>
 			</table:td>
 
@@ -91,6 +91,7 @@
 						</span>
 					</c:if>
 				</table:td>
+
 			</table:tr>
 
 		</c:forEach>

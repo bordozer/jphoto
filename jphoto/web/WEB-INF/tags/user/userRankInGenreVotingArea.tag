@@ -16,8 +16,6 @@
 
 <div id="user_by_genre_voting_${genre.id}">
 
-	<c:set var="validationResult" value="${votingModel.validationResult}"/>
-
 	<c:if test="${! votingModel.validationResult.uiVotingIsInaccessible}">
 		<c:if test="${not hasUserAlreadyVotedForThisGenre}">
 			<a href="#" onclick="${jsFunctionVoteDown}" title="${eco:translate3('The member does not deserve his rank $1 (-$2) in category \'$3\'', userRankInGenre, loggedUserVotingPoints, genre.name)}">
@@ -41,17 +39,14 @@
 	</c:if>
 
 	<c:if test="${votingModel.validationResult.uiVotingIsInaccessible}">
-		<c:set var="delimeter" value="<br /><br />" />
-		<c:set var="errorMessage" value="${eco:translate1('You can not vote for the member rank in category $1:', genre.name)}${delimeter}"/>
 
-		<c:forEach var="validationMessage" items="${validationResult.validationMessage}">
-			<c:set var="errorMessage" value="${errorMessage}${validationMessage}" />
-		</c:forEach>
+		<c:set var="errorMessage" value="${eco:translate1('You can not vote for the member rank in category $1:', genre.name)}<br /><br />${votingModel.validationResult.validationMessage}"/>
 
 		<span title="${eco:translate('Not accessible')}">${eco:translate('N/A')}</span>
 		<a href="#" title="${eco:translate('You can not vote for the member\'s rank in category. Click to see detailed message')}" onclick="return false;">
 			<html:img12 src="icons16/help16.png" onclick="showInformationMessageNoAutoClose('${errorMessage}');" />
 		</a>
+
 	</c:if>
 
 </div>
