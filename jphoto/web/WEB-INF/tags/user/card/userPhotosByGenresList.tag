@@ -40,12 +40,12 @@
 				<b><links:userPhotos user="${user}"/></b>
 			</table:td>
 
-			<table:td cssClass="textright">
+			<table:td cssClass="textright" width="30">
 				<b title="${eco:translate('Total photos')}">${totalPhotos}</b>
 			</table:td>
 
-			<table:td/>
-			<table:td/>
+			<table:td width="60"/>
+			<table:td width="80"/>
 
 		</table:trinfo>
 
@@ -56,11 +56,14 @@
 
 			<table:tr>
 				<table:td>
-					<div style="float: left; width: 100%; height: 25px;">
+					<div style="float: left; width: 100%;">
 						<div style="float: left; width: 100%; height: 10px;">
 							<links:photosByUserByGenre user="${user}" genre="${genre}"/>
 						</div>
-						<div style="float: left; width: 100%; height: 3px;">
+						<div style="float: left; width: 100%; height: 15px;">
+							<div style="float: left; width: 20px;">
+								<span title="${eco:translate2( "Rank in category '$1': $2", genre.name, userCardGenreInfo.userRankInGenre)}" style="font-size: 11px;">${userCardGenreInfo.userRankInGenre}</span>:
+							</div>
 							<user:userRankInGenreRenderer userRankIconContainer="${userCardGenreInfo.userRankIconContainer}"/>
 						</div>
 					</div>
