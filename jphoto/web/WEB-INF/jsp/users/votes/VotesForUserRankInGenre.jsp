@@ -73,6 +73,10 @@
 
 	</table:table>
 
+	<br />
+
+	${eco:translate('* The rank could not correspond gotten voces due to ranks in categories are recalculated at midnight everyday.')}
+
 	<div class="footerseparator"></div>
 
 </tags:page>
