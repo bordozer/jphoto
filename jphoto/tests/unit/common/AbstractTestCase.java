@@ -64,11 +64,6 @@ public class AbstractTestCase {
 		systemFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );
 		userPhotoFilePathUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
 
-		/*final ImageFileUtilsServiceImpl imageFileUtilsService = new ImageFileUtilsServiceImpl();
-		imageFileUtilsService.setConfigurationService( configurationServiceMock );
-		imageFileUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
-		userPhotoFilePathUtilsService.setImageFileUtilsService( imageFileUtilsService );*/
-
 		userPhotoFilePathUtilsService.setUrlUtilsService( urlUtilsService );
 		// userPhotoFilePathUtilsService <--
 
