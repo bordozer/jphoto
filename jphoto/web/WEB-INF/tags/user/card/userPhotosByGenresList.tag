@@ -55,7 +55,7 @@
 			<c:set var="userCardGenreInfo" value="${entry.value}"/>
 
 			<table:tr>
-				<table:td cssClass="titlecolumn">
+				<table:td>
 					<div style="float: left; width: 100%; height: 25px;">
 						<div style="float: left; width: 100%; height: 10px;">
 							<links:photosByUserByGenre user="${user}" genre="${genre}"/>
