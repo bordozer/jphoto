@@ -22,10 +22,10 @@ public class EntityLinkUtilsServiceTest extends AbstractTestCase {
 	@Test
 	public void test() {
 		
-		final String projectUrl = systemVarsService.getProjectUrlClosed();
-		final String workerName = systemVarsService.getTomcatWorkerName();
-		final String appPrefix = systemVarsService.getApplicationPrefix();
-		final String adminPrefix = systemVarsService.getAdminPrefix();
+		final String projectUrl = systemVarsServiceMock.getProjectUrlClosed();
+		final String workerName = systemVarsServiceMock.getTomcatWorkerName();
+		final String appPrefix = systemVarsServiceMock.getApplicationPrefix();
+		final String adminPrefix = systemVarsServiceMock.getAdminPrefix();
 
 		final SystemConfiguration systemConfiguration = new SystemConfiguration();
 		systemConfiguration.setId( 333 );

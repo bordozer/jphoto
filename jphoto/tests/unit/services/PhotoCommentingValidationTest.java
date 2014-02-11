@@ -162,7 +162,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 
 	private SecurityServiceImpl getSecurityService() {
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
-		securityService.setSystemVarsService( systemVarsService );
+		securityService.setSystemVarsService( systemVarsServiceMock );
 
 		return securityService;
 	}

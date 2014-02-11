@@ -1,12 +1,10 @@
 package common;
 
 import core.general.user.User;
-import core.services.system.ConfigurationService;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
-import mocks.ConfigurationServiceMock;
 import mocks.PhotoServiceMock;
 import mocks.SecurityServiceMock;
 import mocks.SystemVarsServiceMock;
@@ -15,8 +13,7 @@ import org.junit.Before;
 public class AbstractTestCase {
 
 	protected final DateUtilsServiceImpl dateUtilsService;
-	protected final SystemVarsService systemVarsService;
-	protected final ConfigurationService configurationServiceMock;
+	protected final SystemVarsService systemVarsServiceMock;
 	protected final PhotoCriteriasSqlServiceImpl photoCriteriasSqlService;
 	protected final UrlUtilsServiceImpl urlUtilsService;
 	protected final UserPhotoFilePathUtilsServiceImpl userPhotoFilePathUtilsService;
@@ -26,15 +23,13 @@ public class AbstractTestCase {
 
 	public AbstractTestCase() {
 
-		systemVarsService = new SystemVarsServiceMock();
-
-		configurationServiceMock = new ConfigurationServiceMock();
+		systemVarsServiceMock = new SystemVarsServiceMock();
 
 		baseSqlUtilsService = new BaseSqlUtilsServiceImpl();
 
 		// dateUtilsService -->
 		dateUtilsService = new DateUtilsServiceImpl();
-		dateUtilsService.setSystemVarsService( systemVarsService );
+		dateUtilsService.setSystemVarsService( systemVarsServiceMock );
 		// dateUtilsService <--
 
 		// photoSqlFilterService -->
@@ -53,12 +48,12 @@ public class AbstractTestCase {
 		// urlUtilsService -->
 		urlUtilsService = new UrlUtilsServiceImpl();
 		urlUtilsService.setDateUtilsService( dateUtilsService );
-		urlUtilsService.setSystemVarsService( systemVarsService );
+		urlUtilsService.setSystemVarsService( systemVarsServiceMock );
 		// urlUtilsService <--
 
 		// userPhotoFilePathUtilsService -->
 		userPhotoFilePathUtilsService = new UserPhotoFilePathUtilsServiceImpl();
-		userPhotoFilePathUtilsService.setSystemVarsService( systemVarsService );
+		userPhotoFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );
 
 		final RandomUtilsServiceImpl randomUtilsService = new RandomUtilsServiceImpl();
 		randomUtilsService.setPhotoService( new PhotoServiceMock() );
@@ -66,13 +61,13 @@ public class AbstractTestCase {
 		userPhotoFilePathUtilsService.setRandomUtilsService( randomUtilsService );
 
 		final SystemFilePathUtilsServiceImpl systemFilePathUtilsService = new SystemFilePathUtilsServiceImpl();
-		systemFilePathUtilsService.setSystemVarsService( systemVarsService );
+		systemFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );
 		userPhotoFilePathUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
 
-		final ImageFileUtilsServiceImpl imageFileUtilsService = new ImageFileUtilsServiceImpl();
+		/*final ImageFileUtilsServiceImpl imageFileUtilsService = new ImageFileUtilsServiceImpl();
 		imageFileUtilsService.setConfigurationService( configurationServiceMock );
 		imageFileUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
-		userPhotoFilePathUtilsService.setImageFileUtilsService( imageFileUtilsService );
+		userPhotoFilePathUtilsService.setImageFileUtilsService( imageFileUtilsService );*/
 
 		userPhotoFilePathUtilsService.setUrlUtilsService( urlUtilsService );
 		// userPhotoFilePathUtilsService <--
@@ -81,7 +76,7 @@ public class AbstractTestCase {
 		entityLinkUtilsService = new EntityLinkUtilsServiceImpl();
 
 		entityLinkUtilsService.setDateUtilsService( dateUtilsService );
-		entityLinkUtilsService.setSystemVarsService( systemVarsService );
+		entityLinkUtilsService.setSystemVarsService( systemVarsServiceMock );
 		entityLinkUtilsService.setUrlUtilsService( urlUtilsService );
 		// entityLinkUtilsService <--
 	}

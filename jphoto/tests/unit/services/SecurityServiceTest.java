@@ -8,6 +8,7 @@ import core.exceptions.NudeContentException;
 import core.exceptions.notFound.GenreNotFoundException;
 import core.exceptions.notFound.PhotoNotFoundException;
 import core.exceptions.notFound.UserNotFoundException;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -15,6 +16,7 @@ import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.SecurityServiceImpl;
+import core.services.system.ConfigurationService;
 import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -24,6 +26,9 @@ import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class SecurityServiceTest extends AbstractTestCase {
+
+	public static final String MUST_BE_TRUE_BUT_FALSE = "Must be TRUE but FALSE";
+	public static final String MUST_BE_FALSE_BUT_TRUE = "Must be FALSE but TRUE";
 
 	@Before
 	public void setup() {
@@ -45,9 +50,13 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		assertTrue( String.format( "Must be TRUE but FALSE" ), securityService.userCanEditPhoto( photoAuthor, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanEditPhoto( justUser, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanEditPhoto( User.NOT_LOGGED_USER, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanEditPhoto( photoAuthor, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( justUser, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_USER_DATA ).userCanEditPhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_DELETE_PHOTO ).userCanEditPhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO ).userCanEditPhoto( SUPER_MEGA_ADMIN, photo ) );
 	}
 
 	@Test
@@ -65,9 +74,13 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		assertTrue( String.format( "Must be TRUE but FALSE" ), securityService.userCanDeletePhoto( photoAuthor, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanDeletePhoto( justUser, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanDeletePhoto( User.NOT_LOGGED_USER, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanDeletePhoto( photoAuthor, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( justUser, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO ).userCanDeletePhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_USER_DATA ).userCanDeletePhoto( SUPER_MEGA_ADMIN, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), getSecurityService( ADMIN_CAN_DELETE_PHOTO ).userCanDeletePhoto( SUPER_MEGA_ADMIN, photo ) );
 	}
 
 	@Test
@@ -85,9 +98,9 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		assertTrue( String.format( "Must be TRUE but FALSE" ), securityService.userCanVoteForPhoto( justUser, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanVoteForPhoto( photoAuthor, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanVoteForPhoto( User.NOT_LOGGED_USER, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanVoteForPhoto( justUser, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanVoteForPhoto( photoAuthor, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanVoteForPhoto( User.NOT_LOGGED_USER, photo ) );
 	}
 
 	@Test
@@ -105,9 +118,9 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		assertTrue( String.format( "Must be TRUE but FALSE" ), securityService.userOwnThePhoto( photoAuthor, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userOwnThePhoto( justUser, photo ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userOwnThePhoto( User.NOT_LOGGED_USER, photo ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userOwnThePhoto( photoAuthor, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userOwnThePhoto( justUser, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userOwnThePhoto( User.NOT_LOGGED_USER, photo ) );
 	}
 
 	@Test
@@ -125,9 +138,13 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		assertTrue( String.format( "Must be TRUE but FALSE" ), securityService.userCanEditUserData( photoAuthor, photoAuthor ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanEditUserData( justUser, photoAuthor ) );
-		assertFalse( String.format( "Must be FALSE but TRUE" ), securityService.userCanEditUserData( User.NOT_LOGGED_USER, photoAuthor ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanEditUserData( photoAuthor, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( justUser, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( User.NOT_LOGGED_USER, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( SUPER_MEGA_ADMIN, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_DELETE_PHOTO ).userCanEditUserData( SUPER_MEGA_ADMIN, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO ).userCanEditUserData( SUPER_MEGA_ADMIN, photoAuthor ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), getSecurityService( ADMIN_CAN_EDIT_USER_DATA ).userCanEditUserData( SUPER_MEGA_ADMIN, photoAuthor ) );
 	}
 
 	@Test
@@ -428,10 +445,65 @@ public class SecurityServiceTest extends AbstractTestCase {
 	}
 
 	private SecurityServiceImpl getSecurityService() {
+		return getSecurityService( ADMIN_CAN_NOTHING );
+	}
+
+	private SecurityServiceImpl getSecurityService( final ConfigKeys configKeys ) {
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
-		securityService.setSystemVarsService( systemVarsService );
-		securityService.setConfigurationService( configurationServiceMock );
+		securityService.setSystemVarsService( systemVarsServiceMock );
+		securityService.setConfigurationService( getConfigurationService( configKeys ) );
 
 		return securityService;
+	}
+
+	private ConfigurationService getConfigurationService( final ConfigKeys configKeys ) {
+		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
+
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_PHOTOS ) ).andReturn( configKeys.isAdminCanEditPhotosOfOtherUsers() ).anyTimes();
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_DELETE_OTHER_PHOTOS ) ).andReturn( configKeys.isAdminCanDeletePhotosOfOtherUsers() ).anyTimes();
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_USER_DATA ) ).andReturn( configKeys.isAdminCanEditOtherUserData() ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( configurationService );
+
+		return configurationService;
+	}
+
+	private final ConfigKeys ADMIN_CAN_NOTHING = new ConfigKeys();
+
+	private final ConfigKeys ADMIN_CAN_EDIT_PHOTO = new ConfigKeys() {
+		@Override
+		boolean isAdminCanEditPhotosOfOtherUsers() {
+			return true;
+		}
+	};
+
+	private final ConfigKeys ADMIN_CAN_DELETE_PHOTO = new ConfigKeys() {
+		@Override
+		boolean isAdminCanDeletePhotosOfOtherUsers() {
+			return true;
+		}
+	};
+
+	private final ConfigKeys ADMIN_CAN_EDIT_USER_DATA = new ConfigKeys() {
+		@Override
+		boolean isAdminCanEditOtherUserData() {
+			return true;
+		}
+	};
+
+	private class ConfigKeys {
+
+		boolean isAdminCanEditPhotosOfOtherUsers() {
+			return false;
+		}
+
+		boolean isAdminCanDeletePhotosOfOtherUsers() {
+			return false;
+		}
+
+		boolean isAdminCanEditOtherUserData() {
+			return false;
+		}
 	}
 }

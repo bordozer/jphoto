@@ -544,4 +544,8 @@ public class SecurityServiceImpl implements SecurityService {
 	public void setEntityLinkUtilsService( final EntityLinkUtilsService entityLinkUtilsService ) {
 		this.entityLinkUtilsService = entityLinkUtilsService;
 	}
+
+	public void setPhotoCommentService( final PhotoCommentService photoCommentService ) {
+		this.photoCommentService = photoCommentService;
+	}
 }

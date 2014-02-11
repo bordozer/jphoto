@@ -20,10 +20,10 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 	@Test
 	public void test() {
 
-		final String projectUrl = systemVarsService.getProjectUrlClosed();
-		final String workerName = systemVarsService.getTomcatWorkerName();
-		final String appPrefix = systemVarsService.getApplicationPrefix();
-		final String photoStoragePath = systemVarsService.getPhotoStoragePath();
+		final String projectUrl = systemVarsServiceMock.getProjectUrlClosed();
+		final String workerName = systemVarsServiceMock.getTomcatWorkerName();
+		final String appPrefix = systemVarsServiceMock.getApplicationPrefix();
+		final String photoStoragePath = systemVarsServiceMock.getPhotoStoragePath();
 
 		final int userId = 111;
 		final User user = new User();
