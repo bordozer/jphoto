@@ -276,8 +276,7 @@ public class UserRankServiceImpl implements UserRankService {
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre ) {
 		// current user rank in genre current
-		final int userRankInGenre = getUserRankInGenre( user.getId(), genre.getId() );
-		return new UserRankIconContainer( user, genre, userRankInGenre, this, configurationService );
+		return getUserRankIconContainer( user, genre, getUserRankInGenre( user.getId(), genre.getId() ) );
 	}
 
 	@Override
@@ -333,5 +332,21 @@ public class UserRankServiceImpl implements UserRankService {
 
 	public void setCacheService( final CacheService<RankInGenrePointsEntry> cacheService ) {
 		this.cacheService = cacheService;
+	}
+
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
+
+	public void setGenreService( final GenreService genreService ) {
+		this.genreService = genreService;
+	}
+
+	public void setActivityStreamService( final ActivityStreamService activityStreamService ) {
+		this.activityStreamService = activityStreamService;
 	}
 }

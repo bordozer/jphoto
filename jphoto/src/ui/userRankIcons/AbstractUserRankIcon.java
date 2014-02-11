@@ -6,24 +6,26 @@ import utils.TranslatorUtils;
 
 public abstract class AbstractUserRankIcon {
 
-	private final User user;
-	private final Genre genre;
+	public static final String USER_RANK_ICON_NOT_ENOUGH_PHOTOS = "user_rank_icon_disabled16x16.png";
+	public static final String USER_RANK_ICON_ZERO = "user_rank_icon_zero_16x16.png";
+	public static final String USER_RANK_ICON = "user_rank_icon_16x16.png";
+	public static final String USER_RANK_ICON_NEGATIVE = "user_negative_rank_icon_16x16.png";
+	public static final String USER_RANK_ICON_COLLAPSED = "user_rank_collapsed_icon_16x16.png";
+	public static final String USER_RANK_ICON_NEGATIVE_COLLAPSED = "user_negative_rank_collapsed_icon_16x16.png";
 
 	public abstract String getIcon();
 
 	public abstract String getTitle();
 
-	protected AbstractUserRankIcon( final User user, final Genre genre ) {
-		this.user = user;
-		this.genre = genre;
+	protected AbstractUserRankIcon() {
 	}
 
 	public static AbstractUserRankIcon getNotEnoughPhotosInGenreUserRankIcon( final User user, final Genre genre ) {
 
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_rank_icon_disabled16x16.png";
+				return USER_RANK_ICON_NOT_ENOUGH_PHOTOS;
 			}
 
 			@Override
@@ -35,10 +37,10 @@ public abstract class AbstractUserRankIcon {
 
 	public static AbstractUserRankIcon getZeroUserRankIcon( final User user, final Genre genre ) {
 
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_rank_icon_zero_16x16.png";
+				return USER_RANK_ICON_ZERO;
 			}
 
 			@Override
@@ -50,10 +52,10 @@ public abstract class AbstractUserRankIcon {
 
 	public static AbstractUserRankIcon getUserRankIcon( final User user, final Genre genre, final int rank ) {
 
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_rank_icon_16x16.png";
+				return USER_RANK_ICON;
 			}
 
 			@Override
@@ -64,10 +66,10 @@ public abstract class AbstractUserRankIcon {
 	}
 
 	public static AbstractUserRankIcon getNegativeUserRankIcon( final User user, final Genre genre, final int rank ) {
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_negative_rank_icon_16x16.png";
+				return USER_RANK_ICON_NEGATIVE;
 			}
 
 			@Override
@@ -78,10 +80,10 @@ public abstract class AbstractUserRankIcon {
 	}
 
 	public static AbstractUserRankIcon getCollapsedUserRankIcon( final User user, final Genre genre, final int rank ) {
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_rank_collapsed_icon_16x16.png";
+				return USER_RANK_ICON_COLLAPSED;
 			}
 
 			@Override
@@ -92,10 +94,10 @@ public abstract class AbstractUserRankIcon {
 	}
 
 	public static AbstractUserRankIcon getCollapsedNegativeUserRankIcon( final User user, final Genre genre, final int rank ) {
-		return new AbstractUserRankIcon( user, genre ) {
+		return new AbstractUserRankIcon() {
 			@Override
 			public String getIcon() {
-				return "user_negative_rank_collapsed_icon_16x16.png";
+				return USER_RANK_ICON_NEGATIVE_COLLAPSED;
 			}
 
 			@Override
