@@ -152,7 +152,7 @@
 			<table:tr>
 				<table:td>${eco:translate("When photo was uploaded")}</table:td>
 				<table:td>
-					<user:userRankInGenre user="${photoInfo.user}" genre="${photoInfo.genre}" rank="${photo.userGenreRank}"/>
+					<user:userRankInGenreCurrent userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
 				</table:td>
 			</table:tr>
 

@@ -35,7 +35,7 @@
 
 				<table:tdunderlined cssClass="textcentered">
 					<c:if test="${userGenreRankViewEntry.statusChangeEntry}">
-						<user:userRankInGenre user="${user}" genre="${genre}" rank="${userGenreRankViewEntry.column2}" />
+						<user:userRankInGenreCurrent userRankIconContainer="${userGenreRankViewEntry.userRankWhenPhotoWasUploadedIconContainer}"/>
 					</c:if>
 
 					<c:if test="${not userGenreRankViewEntry.statusChangeEntry}">

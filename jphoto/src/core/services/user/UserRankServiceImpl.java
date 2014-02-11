@@ -275,7 +275,21 @@ public class UserRankServiceImpl implements UserRankService {
 
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre ) {
-		return new UserRankIconContainer( user, genre, this, configurationService );
+		// current user rank in genre current
+		final int userRankInGenre = getUserRankInGenre( user.getId(), genre.getId() );
+		return new UserRankIconContainer( user, genre, userRankInGenre, this, configurationService );
+	}
+
+	@Override
+	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre, final int rankInGenre ) {
+		// current user rank in genre custom
+		return new UserRankIconContainer( user, genre, rankInGenre, this, configurationService );
+	}
+
+	@Override
+	public UserRankIconContainer getUserRankIconContainer( final User user, final Photo photo ) {
+		// user rank in genre when photo was uploaded
+		return new UserRankIconContainer( user, photo, this, configurationService, genreService );
 	}
 
 	private int getRankUpperPoints( final int base, final float coefficient, final int rank ) {

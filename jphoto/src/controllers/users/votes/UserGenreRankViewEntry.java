@@ -1,5 +1,7 @@
 package controllers.users.votes;
 
+import ui.userRankIcons.UserRankIconContainer;
+
 public class UserGenreRankViewEntry {
 
 	private String column1;
@@ -7,6 +9,8 @@ public class UserGenreRankViewEntry {
 	private String column3;
 
 	private boolean statusChangeEntry;
+
+	private UserRankIconContainer userRankWhenPhotoWasUploadedIconContainer;
 
 	public String getColumn1() {
 		return column1;
@@ -38,5 +42,13 @@ public class UserGenreRankViewEntry {
 
 	public void setStatusChangeEntry( final boolean statusChangeEntry ) {
 		this.statusChangeEntry = statusChangeEntry;
+	}
+
+	public UserRankIconContainer getUserRankWhenPhotoWasUploadedIconContainer() {
+		return userRankWhenPhotoWasUploadedIconContainer;
+	}
+
+	public void setUserRankWhenPhotoWasUploadedIconContainer( final UserRankIconContainer userRankWhenPhotoWasUploadedIconContainer ) {
+		this.userRankWhenPhotoWasUploadedIconContainer = userRankWhenPhotoWasUploadedIconContainer;
 	}
 }

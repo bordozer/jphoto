@@ -1,6 +1,7 @@
 package core.services.user;
 
 import core.general.genre.Genre;
+import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankInGenreVoting;
@@ -51,4 +52,8 @@ public interface UserRankService {
 	boolean isUserHavingEnoughPhotosInGenre( final int userId, final int genreId );
 
 	UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre );
+
+	UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre, final int rankInGenre );
+
+	UserRankIconContainer getUserRankIconContainer( final User user, final Photo photo );
 }

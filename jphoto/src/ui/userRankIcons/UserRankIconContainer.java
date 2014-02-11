@@ -2,7 +2,9 @@ package ui.userRankIcons;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
+import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.entry.GenreService;
 import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
 import utils.NumberUtils;
@@ -15,10 +17,16 @@ public class UserRankIconContainer {
 
 	private final List<AbstractUserRankIcon> rankIcons = newArrayList();
 
-	public UserRankIconContainer( final User user, final Genre genre, final UserRankService userRankService, final ConfigurationService configurationService ) {
+	public UserRankIconContainer( final User user, final Genre genre, final int rank, final UserRankService userRankService, final ConfigurationService configurationService ) {
+		fillIcons( user, genre, rank, userRankService, configurationService );
+	}
 
-		final int rank = userRankService.getUserRankInGenre( user.getId(), genre.getId() );
+	public UserRankIconContainer( final User user, final Photo photo, final UserRankService userRankService, final ConfigurationService configurationService, final GenreService genreService ) {
+		final Genre genre = genreService.load( photo.getGenreId() );
+		fillIcons( user, genre, photo.getUserGenreRank(), userRankService, configurationService );
+	}
 
+	private void fillIcons( final User user, final Genre genre, final int rank, final UserRankService userRankService, final ConfigurationService configurationService ) {
 		final int userId = user.getId();
 		final int genreId = genre.getId();
 

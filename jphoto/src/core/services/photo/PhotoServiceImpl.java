@@ -606,6 +606,7 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		}
 
+		photoInfo.setUserRankWhenPhotoWasUploadedIconContainer( userRankService.getUserRankIconContainer( user, photo ) );
 		photoInfo.setUserRankIconContainer( userRankService.getUserRankIconContainer( user, genre ) );
 	}
 
