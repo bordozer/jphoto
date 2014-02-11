@@ -124,9 +124,10 @@ public class VotesForUserRankInGenreController {
 				final Date rankAssignTime = userGenreRankHistoryEntry.getAssignTime();
 
 				if ( rankAssignTime.getTime() > exVoteTime.getTime() ) {
-					final UserGenreRankViewEntry viewHistoryEntry = new UserGenreRankViewEntry();
-					viewHistoryEntry.setColumn1( TranslatorUtils.translate( "New status" ) );
 					final int rank = userGenreRankHistoryEntry.getRank();
+
+					final UserGenreRankViewEntry viewHistoryEntry = new UserGenreRankViewEntry();
+					viewHistoryEntry.setColumn1( TranslatorUtils.translate( "New status: $1", rank ) );
 					viewHistoryEntry.setColumn2( String.valueOf( rank ) );
 					viewHistoryEntry.setColumn3( dateUtilsService.formatDateTimeShort( rankAssignTime ) );
 					viewHistoryEntry.setStatusChangeEntry( true );
