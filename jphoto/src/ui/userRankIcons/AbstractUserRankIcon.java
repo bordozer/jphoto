@@ -38,7 +38,7 @@ public abstract class AbstractUserRankIcon {
 		return new AbstractUserRankIcon( user, genre ) {
 			@Override
 			public String getIcon() {
-				return "user_rank_icon_disabled16x16.png";
+				return "user_rank_icon_zero_16x16.png";
 			}
 
 			@Override
