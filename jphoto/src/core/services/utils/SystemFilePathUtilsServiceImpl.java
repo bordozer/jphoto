@@ -1,10 +1,8 @@
 package core.services.utils;
 
-import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import core.services.utils.SystemVarsServiceImpl;
 
 import java.io.File;
 
@@ -43,5 +41,9 @@ public class SystemFilePathUtilsServiceImpl implements SystemFilePathUtilsServic
 			tempFolder.mkdir();
 		}
 		return tempFolder;
+	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
 	}
 }

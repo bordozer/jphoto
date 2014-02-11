@@ -10,11 +10,9 @@ import core.services.system.ConfigurationService;
 import core.services.user.UserRankServiceImpl;
 import core.services.user.UserService;
 import core.services.dao.UserRankDao;
-import core.services.utils.DateUtilsService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;
@@ -26,12 +24,6 @@ public class UserRankServiceTest extends AbstractTestCase {
 
 	public static final int USER_ID = 777;
 	public static final int GENRE_ID = 555;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
-
-	public UserRankServiceTest() {
-	}
 
 	@Before
 	public void setup() {

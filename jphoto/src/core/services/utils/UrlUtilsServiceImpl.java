@@ -518,4 +518,12 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	public String getAdminSavedJobProgressLink( final SavedJobType jobType, final int savedJobId ) {
 		return String.format( "%s/jobs/%s/progress/%d/", getAdminBaseURLWithPrefix(), jobType.getPrefix(), savedJobId );
 	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
+	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
 }

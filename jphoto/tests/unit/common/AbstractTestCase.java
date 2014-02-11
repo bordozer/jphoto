@@ -1,22 +1,95 @@
 package common;
 
-import core.context.ApplicationContextHelper;
 import core.general.user.User;
+import core.services.system.ConfigurationService;
+import core.services.utils.*;
+import core.services.utils.sql.BaseSqlUtilsServiceImpl;
+import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
+import core.services.utils.sql.PhotoSqlFilterServiceImpl;
+import mocks.ConfigurationServiceMock;
+import mocks.PhotoServiceMock;
+import mocks.SecurityServiceMock;
+import mocks.SystemVarsServiceMock;
 import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.test.context.ContextConfiguration;
 
-@RunWith( JUnit4ClassRunner.class )
-@ContextConfiguration( locations = {"file:springConfigs/tests-context.xml"} )
 public class AbstractTestCase {
+
+	protected final DateUtilsServiceImpl dateUtilsService;
+	protected final SystemVarsService systemVarsService;
+	protected final ConfigurationService configurationServiceMock;
+	protected final PhotoCriteriasSqlServiceImpl photoCriteriasSqlService;
+	protected final UrlUtilsServiceImpl urlUtilsService;
+	protected final UserPhotoFilePathUtilsServiceImpl userPhotoFilePathUtilsService;
+	protected final EntityLinkUtilsServiceImpl entityLinkUtilsService;
+	protected final PhotoSqlFilterServiceImpl photoSqlFilterService;
+	protected final BaseSqlUtilsServiceImpl baseSqlUtilsService;
+
+	public AbstractTestCase() {
+
+		systemVarsService = new SystemVarsServiceMock();
+
+		configurationServiceMock = new ConfigurationServiceMock();
+
+		baseSqlUtilsService = new BaseSqlUtilsServiceImpl();
+
+		// dateUtilsService -->
+		dateUtilsService = new DateUtilsServiceImpl();
+		dateUtilsService.setSystemVarsService( systemVarsService );
+		// dateUtilsService <--
+
+		// photoSqlFilterService -->
+		photoSqlFilterService = new PhotoSqlFilterServiceImpl();
+		photoSqlFilterService.setDateUtilsService( dateUtilsService );
+		photoSqlFilterService.setBaseSqlUtilsService( baseSqlUtilsService );
+		// photoSqlFilterService <--
+
+		// photoCriteriasSqlService -->
+		photoCriteriasSqlService = new PhotoCriteriasSqlServiceImpl();
+		photoCriteriasSqlService.setDateUtilsService( dateUtilsService );
+		photoCriteriasSqlService.setBaseSqlUtilsService( baseSqlUtilsService );
+		photoCriteriasSqlService.setPhotoSqlFilterService( photoSqlFilterService );
+		// photoCriteriasSqlService <--
+
+		// urlUtilsService -->
+		urlUtilsService = new UrlUtilsServiceImpl();
+		urlUtilsService.setDateUtilsService( dateUtilsService );
+		urlUtilsService.setSystemVarsService( systemVarsService );
+		// urlUtilsService <--
+
+		// userPhotoFilePathUtilsService -->
+		userPhotoFilePathUtilsService = new UserPhotoFilePathUtilsServiceImpl();
+		userPhotoFilePathUtilsService.setSystemVarsService( systemVarsService );
+
+		final RandomUtilsServiceImpl randomUtilsService = new RandomUtilsServiceImpl();
+		randomUtilsService.setPhotoService( new PhotoServiceMock() );
+		randomUtilsService.setSecurityService( new SecurityServiceMock() );
+		userPhotoFilePathUtilsService.setRandomUtilsService( randomUtilsService );
+
+		final SystemFilePathUtilsServiceImpl systemFilePathUtilsService = new SystemFilePathUtilsServiceImpl();
+		systemFilePathUtilsService.setSystemVarsService( systemVarsService );
+		userPhotoFilePathUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
+
+		final ImageFileUtilsServiceImpl imageFileUtilsService = new ImageFileUtilsServiceImpl();
+		imageFileUtilsService.setConfigurationService( configurationServiceMock );
+		imageFileUtilsService.setSystemFilePathUtilsService( systemFilePathUtilsService );
+		userPhotoFilePathUtilsService.setImageFileUtilsService( imageFileUtilsService );
+
+		userPhotoFilePathUtilsService.setUrlUtilsService( urlUtilsService );
+		// userPhotoFilePathUtilsService <--
+
+		// entityLinkUtilsService -->
+		entityLinkUtilsService = new EntityLinkUtilsServiceImpl();
+
+		entityLinkUtilsService.setDateUtilsService( dateUtilsService );
+		entityLinkUtilsService.setSystemVarsService( systemVarsService );
+		entityLinkUtilsService.setUrlUtilsService( urlUtilsService );
+		// entityLinkUtilsService <--
+	}
 
 	@Before
 	public void setup() {
-		final ApplicationContext applicationContext = new ClassPathXmlApplicationContext( "file:springConfigs/tests-context.xml" );
-		ApplicationContextHelper.setSpringContext( applicationContext );
 	}
+
 	public final static User SUPER_MEGA_ADMIN = new User(  ) {
 		@Override
 		public int getId() {

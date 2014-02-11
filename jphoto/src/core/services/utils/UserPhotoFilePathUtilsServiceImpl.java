@@ -174,4 +174,24 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 		return destFile;
 	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
+	}
+
+	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {
+		this.systemFilePathUtilsService = systemFilePathUtilsService;
+	}
+
+	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
+		this.urlUtilsService = urlUtilsService;
+	}
+
+	public void setImageFileUtilsService( final ImageFileUtilsService imageFileUtilsService ) {
+		this.imageFileUtilsService = imageFileUtilsService;
+	}
+
+	public void setRandomUtilsService( final RandomUtilsService randomUtilsService ) {
+		this.randomUtilsService = randomUtilsService;
+	}
 }

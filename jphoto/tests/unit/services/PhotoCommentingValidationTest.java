@@ -10,18 +10,13 @@ import core.services.system.ConfigurationService;
 import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityServiceImpl;
-import core.services.utils.SystemVarsService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static junit.framework.Assert.assertTrue;
 
 public class PhotoCommentingValidationTest extends AbstractTestCase {
-
-	@Autowired
-	private SystemVarsService systemVarsService;
 
 	@Before
 	public void setup() {

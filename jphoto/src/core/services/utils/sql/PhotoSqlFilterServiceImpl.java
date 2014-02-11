@@ -56,4 +56,12 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 		selectQuery.addWhereAnd( new SqlCondition( tPhotoVotingColTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, timeFrom, dateUtilsService ) );
 		selectQuery.addWhereAnd( new SqlCondition( tPhotoVotingColTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, timeTo, dateUtilsService ) );
 	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setBaseSqlUtilsService( final BaseSqlUtilsService baseSqlUtilsService ) {
+		this.baseSqlUtilsService = baseSqlUtilsService;
+	}
 }

@@ -3,19 +3,14 @@ package jobs;
 import admin.jobs.enums.DateRangeType;
 import admin.jobs.general.JobDateRange;
 import common.AbstractTestCase;
-import core.services.utils.DateUtilsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
 import static junit.framework.Assert.assertEquals;
 
 public class JobDateRangeTest extends AbstractTestCase {
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
 
 	@Before
 	public void setup() {

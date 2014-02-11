@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 public class DateUtilsServiceImpl implements DateUtilsService {
 
@@ -411,10 +410,6 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 		return new Date();
 	}
 
-	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
-		this.systemVarsService = systemVarsService;
-	}
-
 	private Calendar getCalendar() {
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setFirstDayOfWeek( Calendar.MONDAY );
@@ -462,5 +457,9 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 		sdf.setTimeZone( timeZone );
 
 		return sdf;
+	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
 	}
 }

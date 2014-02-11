@@ -11,14 +11,12 @@ import core.services.user.UserRankServiceImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
 import ui.userRankIcons.AbstractUserRankIcon;
 
 import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
 
-@ContextConfiguration( locations = {"file:springConfigs/ConfigurationService.xml"} )
 public class UserRankIconTest extends AbstractTestCase {
 
 	public static final int MIN_PHOTOS_IN_GENRE_FOR_VOTING = 3;

@@ -3,26 +3,14 @@ package utils;
 import common.AbstractTestCase;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.services.utils.SystemVarsService;
-import core.services.utils.UserPhotoFilePathUtilsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 
 import static org.junit.Assert.assertEquals;
 
 public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
-
-	@Autowired
-	private SystemVarsService systemVarsService;
-
-	@Autowired
-	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
-
-	public UserPhotoFilePathUtilsServiceTest() {
-	}
 
 	@Before
 	public void setup() {

@@ -2,19 +2,14 @@ package utils;
 
 import common.AbstractTestCase;
 import core.general.data.TimeRange;
-import core.services.utils.DateUtilsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
 public class DateUtilsServiceTest extends AbstractTestCase {
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
 
 	@Before
 	public void setup() {

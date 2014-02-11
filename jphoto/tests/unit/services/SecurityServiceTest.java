@@ -15,26 +15,15 @@ import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.SecurityServiceImpl;
-import core.services.system.ConfigurationService;
 import core.services.user.UserService;
-import core.services.utils.SystemVarsService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
-@ContextConfiguration( locations = {"file:springConfigs/ConfigurationService.xml"} )
 public class SecurityServiceTest extends AbstractTestCase {
-
-	@Autowired
-	private SystemVarsService systemVarsService;
-
-	@Autowired
-	private ConfigurationService configurationService;
 
 	@Before
 	public void setup() {
@@ -441,7 +430,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 	private SecurityServiceImpl getSecurityService() {
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
 		securityService.setSystemVarsService( systemVarsService );
-		securityService.setConfigurationService( configurationService );
+		securityService.setConfigurationService( configurationServiceMock );
 
 		return securityService;
 	}

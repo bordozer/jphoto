@@ -164,4 +164,12 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	private boolean isFileToBig( final MultipartFile multipartFile, final long maxFileSizeKb ) {
 		return getFileSizeInKb( multipartFile.getSize() ) > maxFileSizeKb;
 	}
+
+	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {
+		this.systemFilePathUtilsService = systemFilePathUtilsService;
+	}
+
+	public void setConfigurationService( final ConfigurationService configurationService ) {
+		this.configurationService = configurationService;
+	}
 }

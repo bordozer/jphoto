@@ -161,4 +161,16 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 			baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
 		}
 	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setBaseSqlUtilsService( final BaseSqlUtilsService baseSqlUtilsService ) {
+		this.baseSqlUtilsService = baseSqlUtilsService;
+	}
+
+	public void setPhotoSqlFilterService( final PhotoSqlFilterService photoSqlFilterService ) {
+		this.photoSqlFilterService = photoSqlFilterService;
+	}
 }

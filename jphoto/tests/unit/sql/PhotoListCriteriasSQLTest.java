@@ -12,13 +12,10 @@ import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.services.system.ConfigurationService;
 import core.services.photo.PhotoListCriteriasServiceImpl;
-import core.services.utils.DateUtilsService;
 import core.services.utils.UtilsService;
-import core.services.utils.sql.PhotoCriteriasSqlService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 
@@ -34,12 +31,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	public static final int CURRENT_PAGE = 3;
 	public static final int ITEMS_ON_PAGE = 20;
 	public static final int MIN_MARK_FOR_BEST = PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private PhotoCriteriasSqlService photoCriteriasSqlService;
 
 	@Before
 	public void setup() {

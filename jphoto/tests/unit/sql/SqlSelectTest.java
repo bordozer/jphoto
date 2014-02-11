@@ -7,9 +7,7 @@ import core.services.dao.PhotoVotingDaoImpl;
 import core.services.dao.UserDaoImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.*;
-import core.services.utils.DateUtilsService;
 
 import java.util.Date;
 
@@ -18,9 +16,6 @@ import static org.junit.Assert.*;
 public class SqlSelectTest extends AbstractTestCase {
 
 	private final static String FIELD_ID = BaseEntityDao.ENTITY_ID;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
 
 	@Before
 	public void setup() {

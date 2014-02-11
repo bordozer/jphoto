@@ -5,26 +5,14 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.configuration.SystemConfiguration;
-import core.services.utils.EntityLinkUtilsService;
-import core.services.utils.SystemVarsService;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
 public class EntityLinkUtilsServiceTest extends AbstractTestCase {
-
-	@Autowired
-	private SystemVarsService systemVarsService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	public EntityLinkUtilsServiceTest() {
-	}
 
 	@Before
 	public void setup() {

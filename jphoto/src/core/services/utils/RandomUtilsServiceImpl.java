@@ -271,4 +271,12 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 		final int length = array.length;
 		return array[ getRandomInt( 0, length - 1 )];
 	}
+
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
 }
