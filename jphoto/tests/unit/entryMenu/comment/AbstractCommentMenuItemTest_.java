@@ -1,7 +1,6 @@
 package entryMenu.comment;
 
 import common.AbstractTestCase;
-import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -79,6 +78,7 @@ public abstract class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( securityService.userOwnThePhoto( userWhoIsCallingMenu, photo ) ).andReturn( isUserWhoIsOpeningMenuOwnerOfThePhoto ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( userWhoIsCallingMenu.getId() ) ).andReturn( initialConditions.isMenuCallerSuperAdmin() ).anyTimes();
 		EasyMock.expect( securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, userWhoIsCallingMenu ) ).andReturn( initialConditions.isAnonymousPeriod() ).anyTimes();
+		EasyMock.expect( securityService.isPhotoAuthorNameMustBeHidden( photo, initialConditions.getUserWhoIsCallingMenu() ) ).andReturn( false ).anyTimes();
 
 		// TODO: this should be tested in SecurityService.userCanDeletePhotoComment( final int userId, final int commentId ). Then canDelete should be set to TRUE
 		final boolean canDelete = initialConditions.isMenuCallerSuperAdmin() || isUserWhoIsOpeningMenuOwnerOfThePhoto || initialConditions.getCommentAuthorId() == userWhoIsCallingMenu.getId();

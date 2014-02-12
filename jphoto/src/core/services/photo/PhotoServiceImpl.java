@@ -45,7 +45,6 @@ import sql.builder.*;
 import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import utils.UserUtils;
 
 import java.io.File;
 import java.util.*;
@@ -397,25 +396,6 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor ) {
-		final User photoAuthor = userService.load( photo.getUserId() );
-
-		if ( securityService.isSuperAdminUser( accessor.getId() ) ) {
-			return false;
-		}
-
-		if ( UserUtils.isUsersEqual( accessor, photoAuthor ) ) {
-			return false;
-		}
-
-		if ( photo.isAnonymousPosting() ) {
-			return dateUtilsService.getCurrentTime().getTime() < getPhotoAnonymousPeriodExpirationTime( photo ).getTime();
-		}
-
-		return false;
-	}
-
-	@Override
 	public Date getPhotoAnonymousPeriodExpirationTime( final Photo photo ) {
 		final int anonymousPeriod = configurationService.getConfiguration( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_PERIOD ).getValueInt();
 		return dateUtilsService.getDatesOffset( photo.getUploadTime(), anonymousPeriod );
@@ -559,7 +539,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final User user = userService.load( photo.getUserId() );
 		photoInfo.setUser( user );
 
-		final boolean isPhotoAuthorNameMustBeHidden = isPhotoAuthorNameMustBeHidden( photo, accessor );
+		final boolean isPhotoAuthorNameMustBeHidden = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 		photoInfo.setPhotoAuthorNameMustBeHidden( isPhotoAuthorNameMustBeHidden );
 		if ( isPhotoAuthorNameMustBeHidden ) {
 			photoInfo.setPhotoAuthorAnonymousName( configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) );

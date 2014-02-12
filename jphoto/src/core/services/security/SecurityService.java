@@ -7,6 +7,7 @@ import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.user.User;
 import core.general.photo.ValidationResult;
 
+import java.util.Date;
 import java.util.List;
 
 public interface SecurityService {
@@ -71,5 +72,9 @@ public interface SecurityService {
 
 	boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor );
 
+	boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor, final Date onTime );
+
 	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor );
+
+	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor, final Date onTime );
 }

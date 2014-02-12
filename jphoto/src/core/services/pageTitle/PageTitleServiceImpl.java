@@ -6,6 +6,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
@@ -32,12 +33,15 @@ public class PageTitleServiceImpl implements PageTitleService {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private SecurityService securityService;
+
 	@Override
 	public PageTitleData photoCardTitle( final Photo photo, final User accessor, final String title ) {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoCardForHiddenAuthor( photo, genre, title ) : pageTitlePhotoUtilsService.getPhotoCardData( photo, photoAuthor, genre, title );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoCardForHiddenAuthor( photo, genre, title ) : pageTitlePhotoUtilsService.getPhotoCardData( photo, photoAuthor, genre, title );
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoTitleForHiddenAuthor( photo, genre, "Votes" ) : pageTitlePhotoUtilsService.getUserPhotoVotingData( photoAuthor, photo, genre );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoTitleForHiddenAuthor( photo, genre, "Votes" ) : pageTitlePhotoUtilsService.getUserPhotoVotingData( photoAuthor, photo, genre );
 	}
 
 	@Override
@@ -53,7 +57,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoTitleForHiddenAuthor( photo, genre, "Previews" ) : pageTitlePhotoUtilsService.getUserPhotoPreviewsData( photoAuthor, photo, genre );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? pageTitlePhotoUtilsService.getPhotoTitleForHiddenAuthor( photo, genre, "Previews" ) : pageTitlePhotoUtilsService.getUserPhotoPreviewsData( photoAuthor, photo, genre );
 	}
 
 	@Override

@@ -50,7 +50,6 @@ public class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( photoService.load( initialConditions.getPhotoId() ) ).andReturn( photo ).anyTimes();
 		EasyMock.expect( photoService.getPhotoQtyByUser( initialConditions.getPhotoAuthorId() ) ).andReturn( initialConditions.getPhotoAuthorPhotosQty() ).anyTimes();
 		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( initialConditions.getPhotoAuthorId(), photo.getGenreId() ) ).andReturn( initialConditions.getPhotoQtyByUserAndGenre() ).anyTimes();
-		EasyMock.expect( photoService.isPhotoAuthorNameMustBeHidden( photo, initialConditions.getUserWhoIsCallingMenu() ) ).andReturn( initialConditions.isPhotoAuthorNameMustBeHidden() ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 		menuItem.setPhotoService( photoService );
@@ -69,6 +68,7 @@ public class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( securityService.isSuperAdminUser( userWhoIsCallingMenu.getId() ) ).andReturn( initialConditions.isMenuCallerSuperAdmin() ).anyTimes();
 		EasyMock.expect( securityService.userCanDeletePhoto( userWhoIsCallingMenu, photo ) ).andReturn( initialConditions.isUserCanDeletePhoto() ).anyTimes();
 		EasyMock.expect( securityService.userCanEditPhoto( userWhoIsCallingMenu, photo ) ).andReturn( initialConditions.isUserCanEditPhoto() ).anyTimes();
+		EasyMock.expect( securityService.isPhotoAuthorNameMustBeHidden( photo, initialConditions.getUserWhoIsCallingMenu() ) ).andReturn( initialConditions.isPhotoAuthorNameMustBeHidden() ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 		menuItem.setSecurityService( securityService );

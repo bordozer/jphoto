@@ -21,12 +21,14 @@ import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.*;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -59,6 +61,9 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private PhotoCommentService photoCommentService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@Override
 	public boolean userCanEditPhoto( final User user, final Photo photo ) {
@@ -478,6 +483,11 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor ) {
+		return isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, accessor, dateUtilsService.getCurrentTime() );
+	}
+
+	@Override
+	public boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor, final Date onTime ) {
 		final User commentAuthor = photoComment.getCommentAuthor();
 
 		if ( UserUtils.isUsersEqual( commentAuthor, accessor ) ) {
@@ -490,18 +500,31 @@ public class SecurityServiceImpl implements SecurityService {
 			return false;
 		}
 
-		/*final User photoAuthor = userService.load( photo.getUserId() );
-
-		if ( UserUtils.isUsersEqual( photoAuthor, commentAuthor ) ) {
-			return false;
-		}*/
-
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor );
+		return isPhotoAuthorNameMustBeHidden( photo, accessor, onTime );
 	}
 
 	@Override
 	public boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor ) {
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor );
+		return isPhotoAuthorNameMustBeHidden( photo, accessor, dateUtilsService.getCurrentTime() );
+	}
+
+	@Override
+	public boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor, final Date onTime ) {
+		final User photoAuthor = userService.load( photo.getUserId() );
+
+		if ( isSuperAdminUser( accessor.getId() ) ) {
+			return false;
+		}
+
+		if ( UserUtils.isUsersEqual( accessor, photoAuthor ) ) {
+			return false;
+		}
+
+		if ( photo.isAnonymousPosting() ) {
+			return onTime.getTime() < photoService.getPhotoAnonymousPeriodExpirationTime( photo ).getTime();
+		}
+
+		return false;
 	}
 
 	private User getUser( final int userId ) {

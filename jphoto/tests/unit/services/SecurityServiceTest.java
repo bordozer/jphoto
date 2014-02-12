@@ -237,64 +237,6 @@ public class SecurityServiceTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() {
-
-		final User commentAuthor = new User( 222 );
-		final User photoAuthor = new User( 444 );
-		final User justUser = new User( 555 );
-
-		final Photo photo = new Photo();
-		photo.setId( 777 );
-		photo.setUserId( 111 );
-		photo.setUserId( photoAuthor.getId() );
-		photo.setAnonymousPosting( true );
-		photo.setUploadTime( dateUtilsService.getCurrentTime() );
-
-		final PhotoComment comment = new PhotoComment();
-		comment.setId( 123 );
-		comment.setCommentAuthor( commentAuthor );
-		comment.setPhotoId( photo.getId() );
-
-		final SecurityServiceImpl securityService = getSecurityService();
-
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( SUPER_MEGA_ADMIN.getId() ) ).andReturn( SUPER_MEGA_ADMIN ).anyTimes();
-		EasyMock.expect( userService.load( commentAuthor.getId() ) ).andReturn( commentAuthor ).anyTimes();
-		EasyMock.expect( userService.load( photoAuthor.getId() ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expect( userService.load( justUser.getId() ) ).andReturn( justUser ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		securityService.setUserService( userService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.load( photo.getId() ) ).andReturn( photo ).anyTimes();
-		EasyMock.expect( photoService.isPhotoAuthorNameMustBeHidden( EasyMock.<Photo>anyObject(), EasyMock.<User>anyObject() ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
-		securityService.setPhotoService( photoService );
-
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser ) );
-
-		final PhotoService photoService1 = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService1.load( photo.getId() ) ).andReturn( photo ).anyTimes();
-		EasyMock.expect( photoService1.isPhotoAuthorNameMustBeHidden( EasyMock.<Photo>anyObject(), EasyMock.<User>anyObject() ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService1 );
-
-		securityService.setPhotoService( photoService1 );
-
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor ) );
-		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN ) );
-		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser ) );
-	}
-
-	@Test
 	public void assertPhotoExistsTest() {
 
 		final Photo photo = new Photo();

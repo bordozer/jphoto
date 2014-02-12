@@ -66,8 +66,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	Photo getLastUserPhoto( final int userId );
 
-	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor );
-
 	Date getPhotoAnonymousPeriodExpirationTime( final Photo photo );
 
 	void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos );

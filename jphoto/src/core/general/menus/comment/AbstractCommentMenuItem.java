@@ -1,6 +1,5 @@
 package core.general.menus.comment;
 
-import core.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;

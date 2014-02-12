@@ -1,6 +1,5 @@
 package core.general.menus.photo;
 
-import core.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItem;
@@ -24,7 +23,7 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem {
 	}
 
 	protected boolean isPhotoIsWithinAnonymousPeriod( final Photo photo, final User userWhoIsCallingMenu ) {
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, userWhoIsCallingMenu );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, userWhoIsCallingMenu );
 	}
 
 	protected boolean isPhotoOfMenuCaller( final Photo photo, final User userWhoIsCallingMenu ) {
