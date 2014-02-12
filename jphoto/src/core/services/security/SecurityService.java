@@ -69,7 +69,7 @@ public interface SecurityService {
 
 	void assertSuperAdminAccess( final User currentUser );
 
-	boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User user );
+	boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor );
 
 	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor );
 }

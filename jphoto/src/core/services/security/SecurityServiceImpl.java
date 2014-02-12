@@ -477,27 +477,26 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User user ) {
+	public boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor ) {
 		final User commentAuthor = photoComment.getCommentAuthor();
 
-		if ( UserUtils.isUsersEqual( commentAuthor, user ) ) {
+		if ( UserUtils.isUsersEqual( commentAuthor, accessor ) ) {
 			return false;
 		}
 
 		final Photo photo = photoService.load( photoComment.getPhotoId() );
 
-		boolean isUserOwnerThePhoto = userOwnThePhoto( commentAuthor, photo );
-		if ( ! isUserOwnerThePhoto ) {
+		if ( userOwnThePhoto( accessor, photo ) ) {
 			return false;
 		}
 
-		final User photoAuthor = userService.load( photo.getUserId() );
+		/*final User photoAuthor = userService.load( photo.getUserId() );
 
-		if ( ! UserUtils.isUsersEqual( photoAuthor, commentAuthor ) ) {
+		if ( UserUtils.isUsersEqual( photoAuthor, commentAuthor ) ) {
 			return false;
-		}
+		}*/
 
-		return photoService.isPhotoAuthorNameMustBeHidden( photo, user );
+		return photoService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 	}
 
 	@Override

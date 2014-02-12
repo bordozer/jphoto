@@ -356,8 +356,8 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes, final User currentUser ) {
-		final List<PhotoInfo> photoInfos = getPhotoInfos( photos, currentUser );
+	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes, final User accessor ) {
+		final List<PhotoInfo> photoInfos = getPhotoInfos( photos, accessor );
 
 		for ( final PhotoInfo photoInfo : photoInfos ) {
 			photoInfo.setShowIconsForFavoriteEntryTypes( showIconsForFavoriteEntryTypes );
@@ -404,8 +404,7 @@ public class PhotoServiceImpl implements PhotoService {
 			return false;
 		}
 
-		boolean isPhotoOwnerWatchingThePhoto = UserUtils.isUserEqualsToCurrentUser( photoAuthor );
-		if ( isPhotoOwnerWatchingThePhoto ) {
+		if ( UserUtils.isUsersEqual( accessor, photoAuthor ) ) {
 			return false;
 		}
 
