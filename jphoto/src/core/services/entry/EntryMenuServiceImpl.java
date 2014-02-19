@@ -175,8 +175,11 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	public List<EntryMenuOperationType> getCommentFullMenuItems() {
 		final List<EntryMenuOperationType> menuItems = newArrayList();
 
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
 		menuItems.add( EntryMenuOperationType.COMMENT_REPLY );
+
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
+		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
 		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
 
 		menuItems.add( EntryMenuOperationType.SEPARATOR );

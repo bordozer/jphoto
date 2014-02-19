@@ -96,6 +96,24 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public boolean userOwnThePhotoComment( final User user, final PhotoComment photoComment ) {
+		return UserUtils.isUsersEqual( photoComment.getCommentAuthor(), user );
+	}
+
+	@Override
+	public boolean userCanEditPhotoComment( final User user, final PhotoComment photoComment ) {
+		if ( photoComment.isCommentDeleted() ) {
+			return false;
+		}
+
+		if ( ! UserUtils.isLoggedUser( user ) ) {
+			return false;
+		}
+
+		return userOwnThePhotoComment( user, photoComment );
+	}
+
+	@Override
 	public boolean userCanDeletePhotoComment( final int userId, final int commentId ) {
 		final PhotoComment photoComment = photoCommentService.load( commentId );
 

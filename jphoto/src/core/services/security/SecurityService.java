@@ -26,6 +26,10 @@ public interface SecurityService {
 
 	boolean userOwnThePhoto( final User user, final Photo photo );
 
+	boolean userOwnThePhotoComment( User user, PhotoComment photoComment );
+
+	boolean userCanEditPhotoComment( final User user, final PhotoComment photoComment );
+
 	boolean userCanDeletePhotoComment( final int userId, final int commentId );
 
 	boolean userCanDeletePhotoComment( final User user, final PhotoComment photoComment );

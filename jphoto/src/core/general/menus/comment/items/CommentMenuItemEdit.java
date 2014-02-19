@@ -22,7 +22,13 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Edit your comment" );
+				final PhotoComment photoComment = photoCommentService.load( commentId );
+
+				if ( isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu ) ) {
+					return TranslatorUtils.translate( "Edit your comment" );
+				}
+
+				return TranslatorUtils.translate(  "Edit comment (ADMIN)" );
 			}
 
 			@Override
@@ -34,9 +40,6 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return ! photoComment.isCommentDeleted()
-			   && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu )
-			;
+		return securityService.userCanEditPhotoComment( userWhoIsCallingMenu, photoComment );
 	}
 }
