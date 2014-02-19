@@ -163,6 +163,53 @@ public class SecurityServiceTest extends AbstractTestCase {
 	}
 
 	@Test
+	public void userCanEditPhotoComment() {
+		final User commentAuthor = new User();
+		commentAuthor.setId( 111 );
+
+		final User justUser = new User();
+		justUser.setId( 222 );
+
+		final User photoAuthor = new User();
+		photoAuthor.setId( 333 );
+
+		final Photo photo = new Photo();
+		photo.setId( 777 );
+		photo.setUserId( 111 );
+		photo.setUserId( photoAuthor.getId() );
+
+		final PhotoComment comment = new PhotoComment();
+		comment.setId( 123 );
+		comment.setCommentAuthor( commentAuthor );
+		comment.setPhotoId( photo.getId() );
+
+		final PhotoCommentService photoCommentService = EasyMock.createMock( PhotoCommentService.class );
+		EasyMock.expect( photoCommentService.load( EasyMock.anyInt() ) ).andReturn( comment ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( photoCommentService );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+		securityService.setPhotoCommentService( photoCommentService );
+		securityService.setPhotoService( getPhotoService( photo ) );
+
+		securityService.setUserService( getUserService( commentAuthor ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanEditPhotoComment( commentAuthor, comment ) );
+
+		securityService.setUserService( getUserService( photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( photoAuthor, comment ) );
+
+		securityService.setUserService( getUserService( justUser ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( justUser, comment ) );
+
+		securityService.setUserService( getUserService( User.NOT_LOGGED_USER ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( User.NOT_LOGGED_USER, comment ) );
+
+		securityService.setUserService( getUserService( SUPER_MEGA_ADMIN ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( SUPER_MEGA_ADMIN, comment ) );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO_COMMENTS ).userCanEditPhotoComment( SUPER_MEGA_ADMIN, comment ) );
+	}
+
+	@Test
 	public void userCanDeletePhotoComment() {
 		final User commentAuthor = new User();
 		commentAuthor.setId( 111 );
@@ -551,6 +598,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_PHOTOS ) ).andReturn( configKeys.isAdminCanEditPhotosOfOtherUsers() ).anyTimes();
 		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_DELETE_OTHER_PHOTOS ) ).andReturn( configKeys.isAdminCanDeletePhotosOfOtherUsers() ).anyTimes();
 		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_USER_DATA ) ).andReturn( configKeys.isAdminCanEditOtherUserData() ).anyTimes();
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_PHOTO_COMMENTS ) ).andReturn( configKeys.isAdminCanEditPhotoComments() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
@@ -598,6 +646,13 @@ public class SecurityServiceTest extends AbstractTestCase {
 		}
 	};
 
+	private final ConfigKeys ADMIN_CAN_EDIT_PHOTO_COMMENTS = new ConfigKeys() {
+		@Override
+		boolean isAdminCanEditPhotoComments() {
+			return true;
+		}
+	};
+
 	private class ConfigKeys {
 
 		boolean isAdminCanEditPhotosOfOtherUsers() {
@@ -609,6 +664,10 @@ public class SecurityServiceTest extends AbstractTestCase {
 		}
 
 		boolean isAdminCanEditOtherUserData() {
+			return false;
+		}
+
+		boolean isAdminCanEditPhotoComments() {
 			return false;
 		}
 	}

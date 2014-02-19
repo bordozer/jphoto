@@ -110,6 +110,10 @@ public class SecurityServiceImpl implements SecurityService {
 			return false;
 		}
 
+		if ( configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_PHOTO_COMMENTS ) && isSuperAdminUser( user.getId() ) ) {
+			return true;
+		}
+
 		return userOwnThePhotoComment( user, photoComment );
 	}
 

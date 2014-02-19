@@ -97,6 +97,7 @@ public enum ConfigurationKey {
 	, ADMIN_CAN_EDIT_OTHER_USER_DATA( 1020, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit other user data" )
 	, ADMIN_CAN_EDIT_OTHER_PHOTOS( 1021, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit other photos" )
 	, ADMIN_CAN_DELETE_OTHER_PHOTOS( 1022, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can delete other photos" )
+	, ADMIN_CAN_EDIT_PHOTO_COMMENTS( 1024, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit photo comments" )
 	, ADMIN_JOB_HISTORY_ITEMS_ON_PAGE( 1023, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.ADMIN, "Job history items on page" )
 
 	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
