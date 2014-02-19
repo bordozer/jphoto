@@ -24,12 +24,16 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 			@Override
 			public String getMenuText() {
 				final PhotoComment photoComment = photoCommentService.load( commentId );
-				return TranslatorUtils.translate( UserUtils.isUsersEqual( photoComment.getCommentAuthor(), userWhoIsCallingMenu ) ? "Delete your comment" : "Delete comment" );
+				return TranslatorUtils.translate( isUserOwnTheComment( photoComment ) ? "Delete your comment" : "Delete comment (ADMIN)" );
 			}
 
 			@Override
 			public String getMenuCommand() {
 				return String.format( "deleteComment( %d ); return false;", commentId );
+			}
+
+			private boolean isUserOwnTheComment( final PhotoComment photoComment ) {
+				return UserUtils.isUsersEqual( photoComment.getCommentAuthor(), userWhoIsCallingMenu );
 			}
 		};
 	}

@@ -22,6 +22,8 @@ public interface SecurityService {
 
 	boolean userCanSeeUserRankVoteHistory( final User user, final User userWhoIsSeeing );
 
+	boolean userOwnThePhoto( final User user, final int photoId );
+
 	boolean userOwnThePhoto( final User user, final Photo photo );
 
 	boolean userCanDeletePhotoComment( final int userId, final int commentId );

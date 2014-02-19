@@ -22,7 +22,7 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Edit comment" );
+				return TranslatorUtils.translate( "Edit your comment" );
 			}
 
 			@Override

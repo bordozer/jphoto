@@ -71,10 +71,6 @@
 	}
 
 	function deleteComment( commentId ) {
-		if ( isUserCanNOTCommentPhoto() ) {
-			showMessageAboutDelayToNextComment();
-			return;
-		}
 
 		var beingEditedCommentId = $( '#${beingEditedCommentIdFormControl}' ).val();
 		if ( beingEditedCommentId == commentId ) {

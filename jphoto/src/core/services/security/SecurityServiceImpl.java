@@ -86,6 +86,11 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public boolean userOwnThePhoto( final User user, final int photoId ) {
+		return UserUtils.isUserOwnThePhoto( user, photoService.load( photoId ) );
+	}
+
+	@Override
 	public boolean userOwnThePhoto( final User user, final Photo photo ) {
 		return UserUtils.isUserOwnThePhoto( user, photo );
 	}

@@ -22,7 +22,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Edit photo" );
+				return TranslatorUtils.translate( securityService.userOwnThePhoto( userWhoIsCallingMenu, photoId ) ? "Edit your photo" : "Edit photo (ADMIN)" );
 			}
 
 			@Override

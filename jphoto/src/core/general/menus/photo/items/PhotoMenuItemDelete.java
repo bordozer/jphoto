@@ -22,7 +22,7 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Delete photo" );
+				return TranslatorUtils.translate( securityService.userOwnThePhoto( userWhoIsCallingMenu, photoId ) ? "Delete your photo" : "Delete photo (ADMIN)" );
 			}
 
 			@Override
