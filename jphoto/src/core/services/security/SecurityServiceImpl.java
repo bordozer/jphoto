@@ -102,6 +102,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public boolean userCanEditPhotoComment( final User user, final PhotoComment photoComment ) {
+
 		if ( photoComment.isCommentDeleted() ) {
 			return false;
 		}

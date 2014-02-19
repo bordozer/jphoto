@@ -53,6 +53,11 @@ public class PhotoCommentValidator implements Validator {
 		if ( commentingValidationResult.isValidationFailed() ) {
 			errors.reject( commentingValidationResult.getValidationMessage() );
 		}
+
+		final int photoCommentId = model.getPhotoCommentId();
+		if ( photoCommentId > 0 && ! securityService.userCanEditPhotoComment( EnvironmentContext.getCurrentUser(), photoCommentService.load( photoCommentId ) ) ) {
+			errors.reject( TranslatorUtils.translate( "You do not have permission to edit this comment" ) );
+		}
 	}
 
 	private void validateCommentText( final PhotoCommentModel model, final Errors errors ) {

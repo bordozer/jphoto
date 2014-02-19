@@ -22,7 +22,7 @@
 <c:set var="commentTextDivId" value="<%=PhotoCommentModel.COMMENT_TEXT_DIV_ID%>"/>
 <c:set var="commentStartAnchor" value="<%=PhotoCommentModel.COMMENT_START_ANCHOR%>"/>
 
-<c:set var="url" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoCardLink( photoCommentModel.getPhotoCommentInfo().getPhotoComment().getPhotoId() )%>"/>
+<c:set var="url" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoCardLink( photoCommentModel.getPhotoId() )%>"/>
 
 <c:if test="${not hasErrors}">
 
