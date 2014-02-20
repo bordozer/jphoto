@@ -182,6 +182,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		comment.setId( 123 );
 		comment.setCommentAuthor( commentAuthor );
 		comment.setPhotoId( photo.getId() );
+		comment.setCommentDeleted( false );
 
 		final PhotoCommentService photoCommentService = EasyMock.createMock( PhotoCommentService.class );
 		EasyMock.expect( photoCommentService.load( EasyMock.anyInt() ) ).andReturn( comment ).anyTimes();
@@ -207,6 +208,9 @@ public class SecurityServiceTest extends AbstractTestCase {
 		securityService.setUserService( getUserService( SUPER_MEGA_ADMIN ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( SUPER_MEGA_ADMIN, comment ) );
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO_COMMENTS ).userCanEditPhotoComment( SUPER_MEGA_ADMIN, comment ) );
+
+		comment.setCommentDeleted( false );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( SUPER_MEGA_ADMIN, comment ) );
 	}
 
 	@Test
