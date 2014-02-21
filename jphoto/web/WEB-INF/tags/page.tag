@@ -120,7 +120,7 @@
 		<c:set var="lockUserIFrameId" value="lockUserIFrame" />
 
 		<div id="${lockUserDivId}" title="..." style="display: none;">
-			<iframe id="${lockUserIFrameId}" src=""></iframe>
+			<iframe id="${lockUserIFrameId}" src="" width="98%" height="98%" style="border: none;"></iframe>
 		</div>
 
 		<script type="text/javascript">
@@ -136,7 +136,8 @@
 
 			function adminLockUser( userId, userName ) {
 
-				$( '#${lockUserIFrameId}' ).attr( 'src', "${eco:baseAdminUrlWithPrefix()}/members/" + userId + "/lock/" );
+				var url = "${eco:baseAdminUrlWithPrefix()}/members/" + userId + "/lock/";
+				$( '#${lockUserIFrameId}' ).attr( 'src', url );
 
 				$( "#${lockUserDivId}" )
 						.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName )
