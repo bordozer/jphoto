@@ -120,6 +120,13 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public boolean userCanDeletePhotoComment( final int userId, final int commentId ) {
+
+		// TODO: make test on this case -->
+		if ( ! UserUtils.isLoggedUser(  userId ) ) {
+			return false;
+		}
+		// TODO: make test on this case <--
+
 		final PhotoComment photoComment = photoCommentService.load( commentId );
 
 		final User user = userService.load( userId );

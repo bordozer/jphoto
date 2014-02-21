@@ -1,6 +1,7 @@
 package core.services.entry;
 
 import core.context.ApplicationContextHelper;
+import core.general.menus.comment.items.CommentAdminSubMenuItem;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -152,6 +153,29 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
+	public List<EntryMenuOperationType> getCommentFullMenuItems() {
+		final List<EntryMenuOperationType> menuItems = newArrayList();
+
+		menuItems.add( EntryMenuOperationType.COMMENT_REPLY );
+		
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		
+		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
+		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
+
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
+		menuItems.add( EntryMenuOperationType.BLACK_LIST_ADD );
+		menuItems.add( EntryMenuOperationType.BLACK_LIST_REMOVE );
+
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
+		menuItems.addAll( getCommentComplaintOnlyMenuItems() );
+
+		return menuItems;
+	}
+
+	@Override
 	public List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems() {
 		final List<EntryMenuOperationType> menuItems = newArrayList();
 
@@ -168,28 +192,9 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
 
-		return menuItems;
-	}
-
-	@Override
-	public List<EntryMenuOperationType> getCommentFullMenuItems() {
-		final List<EntryMenuOperationType> menuItems = newArrayList();
-
-		menuItems.add( EntryMenuOperationType.COMMENT_REPLY );
-
 		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
-
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
-
-		menuItems.add( EntryMenuOperationType.BLACK_LIST_ADD );
-		menuItems.add( EntryMenuOperationType.BLACK_LIST_REMOVE );
-
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
-
-		menuItems.addAll( getCommentComplaintOnlyMenuItems() );
+		menuItems.add( EntryMenuOperationType.COMMENT_ADMIN_SUB_MENU );
 
 		return menuItems;
 	}
@@ -261,9 +266,13 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 				return ApplicationContextHelper.getBean( CommentMenuItemGoToAuthorPhotoByGenre.BEAN_NAME );
 			case SEND_PRIVATE_MESSAGE:
 				return ApplicationContextHelper.getBean( CommentMenuItemSendPrivateMessage.BEAN_NAME );
+			case COMMENT_ADMIN_SUB_MENU:
+				return ApplicationContextHelper.getBean( CommentAdminSubMenuItem.BEAN_NAME );
+			case ADMIN_SUB_MENU_LOCK_USER:
+				return ApplicationContextHelper.getBean( CommentAdminSubMenuItemLockUser.BEAN_NAME );
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal EntryMenuOperationType: %s", entryMenuOperationType ) );
+		throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuOperationType ) );
 	}
 
 	private AbstractPhotoMenuItem createPhotoMenuItemInstance( final EntryMenuOperationType entryMenuOperationType ) {
@@ -288,7 +297,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 				return ApplicationContextHelper.getBean( PhotoMenuItemInfo.BEAN_NAME );
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal EntryMenuOperationType: %s", entryMenuOperationType ) );
+		throw new IllegalArgumentException( String.format( "Illegal photo EntryMenuOperationType: %s", entryMenuOperationType ) );
 	}
 
 	private AbstractUserMenuItem createUserMenuItemInstance( final EntryMenuOperationType entryMenuOperationType ) {
@@ -301,7 +310,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 				return ApplicationContextHelper.<UserMenuItemSendPrivateMessage>getBean( UserMenuItemSendPrivateMessage.BEAN_NAME );
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal EntryMenuOperationType: %s", entryMenuOperationType ) );
+		throw new IllegalArgumentException( String.format( "Illegal user EntryMenuOperationType: %s", entryMenuOperationType ) );
 	}
 
 	private void removeSpareSeparators( final List<? extends AbstractEntryMenuItem> menuItems ) {

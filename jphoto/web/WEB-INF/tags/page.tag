@@ -42,9 +42,14 @@
 
 	<c:set var="privateMessageTextId" value="privateMessageTextId" />
 	<c:set var="sendPrivateMessageToUserDivId" value="sendPrivateMessageToUserDivId" />
+	<c:set var="lockUserDivId" value="lockUserDivId" />
 
 	<div id="${sendPrivateMessageToUserDivId}" title="..." style="display: none;">
 		<html:textarea inputId="${privateMessageTextId}" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />
+	</div>
+
+	<div id="${lockUserDivId}" title="..." style="display: none;">
+		<h3>Locking area</h3>
 	</div>
 
 	<script type="text/javascript">
@@ -109,6 +114,34 @@
 			};
 		}
 
+	</script>
+
+	<script type="text/javascript">
+
+		$( function () {
+			$( "#${lockUserDivId}" ).dialog( {
+											height:300
+											, width:600
+											, modal:true
+											, autoOpen:false
+										 } );
+		} );
+
+		function adminLockUser( userId, userName ) {
+			$( "#${lockUserDivId}" )
+					.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName )
+					.dialog( 'option', 'buttons', {
+													Cancel:function () {
+														$( this ).dialog( "close" );
+													},
+													"${eco:translate('Lock')}": function() {
+
+
+														$( this ).dialog( "close" );
+													}
+												} )
+					.dialog( "open" );
+		}
 	</script>
 
 	<jsp:doBody/>

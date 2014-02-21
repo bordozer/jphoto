@@ -8,7 +8,7 @@ import core.general.menus.comment.AbstractCommentMenuItem;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
-public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
+public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
 	public static final String BEAN_NAME = "commentMenuItemSendPrivateMessage";
 

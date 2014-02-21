@@ -30,4 +30,14 @@ public class EntryMenu {
 	public EntryMenuType getEntryMenuType() {
 		return entryMenuType;
 	}
+
+	public int getMenuHeight() {
+		int result = 0;
+
+		for ( final AbstractEntryMenuItem entryMenuItem : entryMenuItems ) {
+			result += entryMenuItem.getHeight();
+		}
+
+		return result;
+	}
 }

@@ -2,6 +2,7 @@ package core.general.menus;
 
 import core.general.user.User;
 import core.general.configuration.ConfigurationKey;
+import core.services.entry.EntryMenuService;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
@@ -19,7 +20,8 @@ public abstract class AbstractEntryMenuItem {
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
 
-	public abstract EntryMenuOperationType getEntryMenuType();
+	public static final int MENU_ITEM_HEIGHT = 27;
+	public static final int MENU_SEPARATOR_HEIGHT = 5;
 
 	protected AbstractEntryMenuItemCommand menuItemCommand;
 
@@ -53,19 +55,23 @@ public abstract class AbstractEntryMenuItem {
 	@Autowired
 	protected UrlUtilsService urlUtilsService;
 
+	@Autowired
+	protected EntryMenuService entryMenuService;
+
+	public abstract EntryMenuOperationType getEntryMenuType();
+
 	protected abstract AbstractEntryMenuItemCommand initMenuItemCommand( final int entryId, final User userWhoIsCallingMenu );
 
-	final public void createMenuItemCommand( final int entryId, final User userWhoIsCallingMenu ) {
+	public boolean isSubMenu() {
+		return getEntryMenuType().isSubMenu();
+	}
+
+	public final void createMenuItemCommand( final int entryId, final User userWhoIsCallingMenu ) {
 		menuItemCommand = initMenuItemCommand( entryId, userWhoIsCallingMenu );
 	}
 
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return menuItemCommand;
-	}
-
-	@Override
-	public String toString() {
-		return String.format( "Entry menu: %s", getMenuItemCommand() != null ? getMenuItemCommand().getMenuText() : getEntryMenuType() );
 	}
 
 	final protected boolean isUserWhoIsCallingMenuLogged( final User userWhoIsCallingMenu ) {
@@ -122,5 +128,14 @@ public abstract class AbstractEntryMenuItem {
 
 	public void setPhotoCommentService( final PhotoCommentService photoCommentService ) {
 		this.photoCommentService = photoCommentService;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "Entry menu: %s", getMenuItemCommand() != null ? getMenuItemCommand().getMenuText() : getEntryMenuType() );
+	}
+
+	public int getHeight() {
+		return MENU_ITEM_HEIGHT;
 	}
 }

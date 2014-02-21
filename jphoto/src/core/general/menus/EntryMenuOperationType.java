@@ -3,6 +3,8 @@ package core.general.menus;
 import utils.StringUtilities;
 import utils.TranslatorUtils;
 
+import java.util.EnumSet;
+
 public enum EntryMenuOperationType {
 
 	SEPARATOR( 0, "Separator", "" )
@@ -27,7 +29,13 @@ public enum EntryMenuOperationType {
 
 	, PHOTO_INFO( 61, "Photo info", "menu_photo_info.png" )
 
+	, COMMENT_ADMIN_SUB_MENU( 71, "Admin comment submenu", "menu_sub_menu.png" )
+
+	, ADMIN_SUB_MENU_LOCK_USER( 81, "Lock user", "lock_user.png" )
+
 	;
+
+	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( COMMENT_ADMIN_SUB_MENU );
 
 	private final int id;
 	private final String name;
@@ -59,5 +67,9 @@ public enum EntryMenuOperationType {
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal EntryMenuOperationType id: %d", id ) );
+	}
+
+	public boolean isSubMenu() {
+		return SUB_MENUS.contains( this );
 	}
 }

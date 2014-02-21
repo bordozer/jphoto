@@ -35,4 +35,9 @@ public class CommentMenuItemSeparator extends AbstractCommentMenuItem {
 	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
 		return true;
 	}
+
+	@Override
+	public int getHeight() {
+		return MENU_SEPARATOR_HEIGHT;
+	}
 }

@@ -32,4 +32,9 @@ public class UserMenuItemSeparator extends AbstractUserMenuItem {
 	public boolean isAccessibleForUser( final User user, final User userWhoIsCallingMenu ) {
 		return true;
 	}
+
+	@Override
+	public int getHeight() {
+		return MENU_SEPARATOR_HEIGHT;
+	}
 }

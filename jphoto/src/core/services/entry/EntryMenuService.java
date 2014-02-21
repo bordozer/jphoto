@@ -22,7 +22,7 @@ public interface EntryMenuService {
 
 	List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems();
 
-	List<EntryMenuOperationType> getCommentFullMenuItems();
-
 	List<EntryMenuOperationType> getPhotoFullMenuItems();
+
+	List<EntryMenuOperationType> getCommentFullMenuItems();
 }

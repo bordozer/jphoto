@@ -33,4 +33,9 @@ public class PhotoMenuItemSeparator extends AbstractPhotoMenuItem {
 	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
 		return true;
 	}
+
+	@Override
+	public int getHeight() {
+		return MENU_SEPARATOR_HEIGHT;
+	}
 }

@@ -10,21 +10,36 @@
 
 	<c:set var="menuId" value="${entryMenu.menuId}"/>
 	<c:set var="entryMenuItems" value="${entryMenu.entryMenuItems}"/>
-	<c:set var="menuItems" value="${menuId}-items"/>
+	<c:set var="menuDivId" value="${menuId}-items"/>
 
 	<script type="text/javascript">
 		$( function () {
 			$( '#${menuId}' ).fgmenu( {
-										content:$( '#${menuItems}' ).html(), showSpeed:400, width:350
+										content:$( '#${menuDivId}' ).html()
+										  , showSpeed:400
+										  , width:350
+										  , maxHeight: ${entryMenu.menuHeight}
 									} );
 		} );
 	</script>
 
+	<%-- menu icon --%>
 	<a tabindex="0" href="#" id="${menuId}" onclick="return false;">
 		<html:img16 src="ui-menu-blue.png" alt="${eco:translate1('$1 menu', entryMenu.entryMenuType.nameTranslated)}"/>
 	</a>
+	<%-- / menu icon --%>
 
-	<div id="${menuItems}" style="position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden;">
+	<div id="${menuDivId}" class="entry-popup-menu">
+
+		<div class="floatleft block-background entry-popup-menu-header">
+			${entryMenu.entryMenuType.nameTranslated}: #${entryMenu.entryId}
+		</div>
+
+		<tags:entryMenuRenderer entryMenu="${entryMenu}" />
+
+	</div>
+
+	<%--<div id="${menuItems}" style="position:absolute; top:0; left:-9999px; width:1px; height:1px; overflow:hidden;">
 
 		<div class="floatleft block-background" style="text-align: center; font-size: 60%; padding-top: 3px; padding-bottom: 3px; margin-bottom: 5px;">
 			${entryMenu.entryMenuType.nameTranslated}: #${entryMenu.entryId}
@@ -40,17 +55,43 @@
 				</c:if>
 
 				<c:if test="${not isSeparator}">
+
 					<li style="font-size: 70%;">
 						<a href="#" onclick="${entryMenuItem.menuItemCommand.menuCommand}">
 							<html:img12 src="${entryMenuItem.menuItemCommand.commandIcon}" alt="${eco:translate('Menu')}"/>
 							&nbsp;
 							${entryMenuItem.menuItemCommand.menuText}
 						</a>
+
+						<c:if test="${entryMenuItem.subMenu}">
+							<ul>
+								<c:forEach var="subMenuItem" items="${entryMenuItem.subMenuItems}">
+
+									<c:set var="isSeparator" value="${subMenuItem.entryMenuType == 'SEPARATOR'}"/>
+
+									<c:if test="${isSeparator}">
+										<div class="floatleft block-background" style="height: 2px; margin: 2px;"></div>
+									</c:if>
+
+									<c:if test="${! isSeparator}">
+										<li>
+											<a href="#" onclick="${subMenuItem.menuItemCommand.menuCommand}">
+												<html:img12 src="${subMenuItem.menuItemCommand.commandIcon}" alt="${eco:translate('Menu')}"/>
+												&nbsp;
+												${subMenuItem.menuItemCommand.menuText}
+											</a>
+										</li>
+									</c:if>
+								</c:forEach>
+							</ul>
+						</c:if>
+
 					</li>
 				</c:if>
 
 			</c:forEach>
 		</ul>
 
-	</div>
+	</div>--%>
+
 </c:if>
