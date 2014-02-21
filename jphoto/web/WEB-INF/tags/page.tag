@@ -1,6 +1,7 @@
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="core.services.entry.PrivateMessageService" %>
+<%@ tag import="core.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -12,6 +13,8 @@
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "privateMessageService", ApplicationContextHelper.<PrivateMessageService>getBean( PrivateMessageService.BEAN_NAME ) );
 %>
+
+<c:set var="isSuperAdmin" value="<%=ApplicationContextHelper.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() )%>"/>
 
 <eco:page pageModel="${pageModel}">
 
@@ -42,14 +45,9 @@
 
 	<c:set var="privateMessageTextId" value="privateMessageTextId" />
 	<c:set var="sendPrivateMessageToUserDivId" value="sendPrivateMessageToUserDivId" />
-	<c:set var="lockUserDivId" value="lockUserDivId" />
 
 	<div id="${sendPrivateMessageToUserDivId}" title="..." style="display: none;">
 		<html:textarea inputId="${privateMessageTextId}" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />
-	</div>
-
-	<div id="${lockUserDivId}" title="..." style="display: none;">
-		<h3>Locking area</h3>
 	</div>
 
 	<script type="text/javascript">
@@ -116,33 +114,46 @@
 
 	</script>
 
-	<script type="text/javascript">
 
-		$( function () {
-			$( "#${lockUserDivId}" ).dialog( {
-											height:300
-											, width:600
-											, modal:true
-											, autoOpen:false
-										 } );
-		} );
+	<c:if test="${isSuperAdmin}">
+		<c:set var="lockUserDivId" value="lockUserDivId" />
+		<c:set var="lockUserIFrameId" value="lockUserIFrame" />
 
-		function adminLockUser( userId, userName ) {
-			$( "#${lockUserDivId}" )
-					.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName )
-					.dialog( 'option', 'buttons', {
-													Cancel:function () {
-														$( this ).dialog( "close" );
-													},
-													"${eco:translate('Lock')}": function() {
+		<div id="${lockUserDivId}" title="..." style="display: none;">
+			<iframe id="${lockUserIFrameId}" src=""></iframe>
+		</div>
 
+		<script type="text/javascript">
 
-														$( this ).dialog( "close" );
-													}
-												} )
-					.dialog( "open" );
-		}
-	</script>
+			$( function () {
+				$( "#${lockUserDivId}" ).dialog( {
+												height:300
+												, width:600
+												, modal:true
+												, autoOpen:false
+											 } );
+			} );
+
+			function adminLockUser( userId, userName ) {
+
+				$( '#${lockUserIFrameId}' ).attr( 'src', "${eco:baseAdminUrlWithPrefix()}/members/" + userId + "/lock/" );
+
+				$( "#${lockUserDivId}" )
+						.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName )
+						.dialog( 'option', 'buttons', {
+														Cancel:function () {
+															$( this ).dialog( "close" );
+														},
+														"${eco:translate('Lock')}": function() {
+
+															$( this ).dialog( "close" );
+														}
+													} )
+						.dialog( "open" );
+			}
+		</script>
+	</c:if>
+
 
 	<jsp:doBody/>
 
