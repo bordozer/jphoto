@@ -18,8 +18,6 @@
 </head>
 <body>
 
-<h3>User lock area - JSP</h3>
-
 <div class='userLockAreaDiv'>
 
 </div>

@@ -140,7 +140,7 @@
 				$( '#${lockUserIFrameId}' ).attr( 'src', url );
 
 				$( "#${lockUserDivId}" )
-						.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName )
+						.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName + ' ( #' + userId + ' )' )
 						.dialog( 'option', 'buttons', {
 														Cancel:function () {
 															$( this ).dialog( "close" );
