@@ -354,4 +354,168 @@ public class ServicesImpl implements Services {
 	public EntryMenuService getEntryMenuService() {
 		return entryMenuService;
 	}
+
+	public void setUserService( final UserService userService ) {
+		this.userService = userService;
+	}
+
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
+
+	public void setGenreService( final GenreService genreService ) {
+		this.genreService = genreService;
+	}
+
+	public void setConfigurationService( final ConfigurationService configurationService ) {
+		this.configurationService = configurationService;
+	}
+
+	public void setPreviewGenerationService( final PreviewGenerationService previewGenerationService ) {
+		this.previewGenerationService = previewGenerationService;
+	}
+
+	public void setUserRankService( final UserRankService userRankService ) {
+		this.userRankService = userRankService;
+	}
+
+	public void setCacheService( final CacheService cacheService ) {
+		this.cacheService = cacheService;
+	}
+
+	public void setVotingCategoryService( final VotingCategoryService votingCategoryService ) {
+		this.votingCategoryService = votingCategoryService;
+	}
+
+	public void setPhotoVotingService( final PhotoVotingService photoVotingService ) {
+		this.photoVotingService = photoVotingService;
+	}
+
+	public void setPhotoCommentService( final PhotoCommentService photoCommentService ) {
+		this.photoCommentService = photoCommentService;
+	}
+
+	public void setFavoritesService( final FavoritesService favoritesService ) {
+		this.favoritesService = favoritesService;
+	}
+
+	public void setPhotoRatingService( final PhotoRatingService photoRatingService ) {
+		this.photoRatingService = photoRatingService;
+	}
+
+	public void setUserTeamService( final UserTeamService userTeamService ) {
+		this.userTeamService = userTeamService;
+	}
+
+	public void setUserPhotoAlbumService( final UserPhotoAlbumService userPhotoAlbumService ) {
+		this.userPhotoAlbumService = userPhotoAlbumService;
+	}
+
+	public void setFakeUserService( final FakeUserService fakeUserService ) {
+		this.fakeUserService = fakeUserService;
+	}
+
+	public void setRandomUtilsService( final RandomUtilsService randomUtilsService ) {
+		this.randomUtilsService = randomUtilsService;
+	}
+
+	public void setSqlUtilsService( final SqlUtilsService sqlUtilsService ) {
+		this.sqlUtilsService = sqlUtilsService;
+	}
+
+	public void setPrivateMessageService( final PrivateMessageService privateMessageService ) {
+		this.privateMessageService = privateMessageService;
+	}
+
+	public void setSavedJobService( final SavedJobService savedJobService ) {
+		this.savedJobService = savedJobService;
+	}
+
+	public void setJobExecutionHistoryService( final JobExecutionHistoryService jobExecutionHistoryService ) {
+		this.jobExecutionHistoryService = jobExecutionHistoryService;
+	}
+
+	public void setAnonymousDaysService( final AnonymousDaysService anonymousDaysService ) {
+		this.anonymousDaysService = anonymousDaysService;
+	}
+
+	public void setUsersSecurityService( final UsersSecurityService usersSecurityService ) {
+		this.usersSecurityService = usersSecurityService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
+
+	public void setJobStatusChangeStrategyService( final JobStatusChangeStrategyService jobStatusChangeStrategyService ) {
+		this.jobStatusChangeStrategyService = jobStatusChangeStrategyService;
+	}
+
+	public void setJobExecutionService( final JobExecutionService jobExecutionService ) {
+		this.jobExecutionService = jobExecutionService;
+	}
+
+	public void setJobHelperService( final JobHelperService jobHelperService ) {
+		this.jobHelperService = jobHelperService;
+	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
+	}
+
+	public void setImageFileUtilsService( final ImageFileUtilsService imageFileUtilsService ) {
+		this.imageFileUtilsService = imageFileUtilsService;
+	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setEntityLinkUtilsService( final EntityLinkUtilsService entityLinkUtilsService ) {
+		this.entityLinkUtilsService = entityLinkUtilsService;
+	}
+
+	public void setPredicateUtilsService( final PredicateUtilsService predicateUtilsService ) {
+		this.predicateUtilsService = predicateUtilsService;
+	}
+
+	public void setUserPhotoFilePathUtilsService( final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService ) {
+		this.userPhotoFilePathUtilsService = userPhotoFilePathUtilsService;
+	}
+
+	public void setPhotoPreviewService( final PhotoPreviewService photoPreviewService ) {
+		this.photoPreviewService = photoPreviewService;
+	}
+
+	public void setBaseSqlUtilsService( final BaseSqlUtilsService baseSqlUtilsService ) {
+		this.baseSqlUtilsService = baseSqlUtilsService;
+	}
+
+	public void setPhotoCriteriasSqlService( final PhotoCriteriasSqlService photoCriteriasSqlService ) {
+		this.photoCriteriasSqlService = photoCriteriasSqlService;
+	}
+
+	public void setPhotoSqlFilterService( final PhotoSqlFilterService photoSqlFilterService ) {
+		this.photoSqlFilterService = photoSqlFilterService;
+	}
+
+	public void setUserSqlUtilsService( final UserSqlUtilsService userSqlUtilsService ) {
+		this.userSqlUtilsService = userSqlUtilsService;
+	}
+
+	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
+		this.urlUtilsService = urlUtilsService;
+	}
+
+	public void setActivityStreamService( final ActivityStreamService activityStreamService ) {
+		this.activityStreamService = activityStreamService;
+	}
+
+	public void setMailService( final MailService mailService ) {
+		this.mailService = mailService;
+	}
+
+	public void setEntryMenuService( final EntryMenuService entryMenuService ) {
+		this.entryMenuService = entryMenuService;
+	}
 }
