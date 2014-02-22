@@ -104,4 +104,6 @@ public interface Services {
 	ActivityStreamService getActivityStreamService();
 
 	MailService getMailService();
+
+	EntryMenuService getEntryMenuService();
 }

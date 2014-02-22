@@ -5,12 +5,15 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
 public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemSendPrivateMessage";
+	public PhotoMenuItemSendPrivateMessage( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -18,10 +21,10 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
-			private User photoAuthor = getPhotoAuthor( photoId );
+			private User photoAuthor = getPhotoAuthor( menuEntry );
 
 			@Override
 			public String getMenuText() {
@@ -30,13 +33,13 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "sendPrivateMessage( %d, %d, '%s' );", userWhoIsCallingMenu.getId(), photoAuthor.getId(), photoAuthor.getNameEscaped() );
+				return String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), photoAuthor.getId(), photoAuthor.getNameEscaped() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
 
 		if ( isSuperAdminUser( userWhoIsCallingMenu ) && ! UserUtils.isUsersEqual( userWhoIsCallingMenu, getPhotoAuthor( photo.getId() ) ) ) {
 			return true;
@@ -45,8 +48,8 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
 			   && ! hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu )
 			   && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && super.isAccessibleForPhoto( photo, userWhoIsCallingMenu )
-			   && !favoritesService.isUserInBlackListOfUser( photo.getUserId(), userWhoIsCallingMenu.getId() );
+			   && super.isAccessibleFor( photo, userWhoIsCallingMenu )
+			   && ! getFavoritesService().isUserInBlackListOfUser( photo.getUserId(), userWhoIsCallingMenu.getId() );
 
 	}
 }

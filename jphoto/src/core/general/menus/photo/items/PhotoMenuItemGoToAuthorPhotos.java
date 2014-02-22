@@ -5,11 +5,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemGoToAuthorPhotos";
+	public PhotoMenuItemGoToAuthorPhotos( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,8 +20,10 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
-		final User photoAuthor = getPhotoAuthor( photoId );
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final User photoAuthor = getPhotoAuthor( menuEntry );
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
@@ -35,15 +40,15 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
 		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
 			return false;
 		}
 
-		return super.isAccessibleForPhoto( photo, userWhoIsCallingMenu ) && getPhotoQtyByUser( photo.getUserId() ) > 1;
+		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getPhotoQtyByUser( photo.getUserId() ) > 1;
 	}
 
 	private int getPhotoQtyByUser( final int userId ) {
-		return photoService.getPhotoQtyByUser( userId );
+		return getPhotoService().getPhotoQtyByUser( userId );
 	}
 }

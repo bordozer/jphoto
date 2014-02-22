@@ -5,12 +5,15 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentReplyMenu";
+	public CommentMenuItemReply( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -18,18 +21,20 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final int commentId = menuEntry.getId();
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final PhotoComment photoComment = photoCommentService.load( commentId );
 
-				if ( isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, userWhoIsCallingMenu ) ) {
+				if ( isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( menuEntry, accessor ) ) {
 					return TranslatorUtils.translate( "Reply to photo author ( anonymous )" );
 				}
 
-				return TranslatorUtils.translate( "Reply to $1$2", getCommentAuthor( commentId ).getNameEscaped(), isCommentAuthorOwnerOfPhoto( photoComment) ? " ( photo's author )" : StringUtils.EMPTY );
+				return TranslatorUtils.translate( "Reply to $1$2", getCommentAuthor( commentId ).getNameEscaped(), isCommentAuthorOwnerOfPhoto( menuEntry ) ? " ( photo's author )" : StringUtils.EMPTY );
 			}
 
 			@Override
@@ -40,7 +45,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu ) && ! isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu );
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		return isUserWhoIsCallingMenuLogged( accessor ) && !isCommentLeftByUserWhoIsCallingMenu( photoComment, accessor );
 	}
 }

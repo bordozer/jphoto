@@ -1,15 +1,19 @@
 package core.general.menus.comment.items;
 
+import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuItem {
 
-	public static final String BEAN_NAME = "commentComplaintSpamMenu";
+	public CommentMenuItemComplaintSpam( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,7 +21,7 @@ public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuIt
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
@@ -27,7 +31,13 @@ public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuIt
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), commentId, userWhoIsCallingMenu.getId(), ComplaintReasonType.COMMENT_SPAM.getId() );
+				return String.format( "%s( %d, %d, %d, %d ); return false;"
+					, COMPLAINT_MESSAGE_JS_FUNCTION
+					, EntryMenuType.COMMENT.getId()
+					, menuEntry.getId()
+					, accessor.getId()
+					, ComplaintReasonType.COMMENT_SPAM.getId()
+				);
 			}
 		};
 	}

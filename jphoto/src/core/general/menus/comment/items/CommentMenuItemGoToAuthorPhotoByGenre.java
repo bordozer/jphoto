@@ -7,11 +7,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentMenuItemGoToAuthorPhotoByGenre";
+	public CommentMenuItemGoToAuthorPhotoByGenre( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -19,17 +22,16 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuIt
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
-		final PhotoComment photoComment = photoCommentService.load( commentId );
-		final Genre genre = getGenre( photoComment );
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+		final Genre genre = getGenre( menuEntry );
 
-		final User commentAuthor = getCommentAuthor( commentId );
+		final User commentAuthor = menuEntry.getCommentAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUserAndGenre = photoService.getPhotoQtyByUserAndGenre( commentAuthor.getId(), genre.getId() );
+				final int photoQtyByUserAndGenre = getPhotoService().getPhotoQtyByUserAndGenre( commentAuthor.getId(), genre.getId() );
 				return TranslatorUtils.translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), genre.getName(), String.valueOf( photoQtyByUserAndGenre ) );
 			}
 
@@ -41,20 +43,20 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuIt
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, accessor ) ) {
 			return false;
 		}
 
 		final Genre genre = getGenre( photoComment );
-		return super.isAccessibleForComment( photoComment, userWhoIsCallingMenu )
-			   && photoService.getPhotoQtyByUserAndGenre( photoComment.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu( photoComment );
+		return super.isAccessibleFor( photoComment, accessor )
+			   && getPhotoService().getPhotoQtyByUserAndGenre( photoComment.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu( photoComment );
 	}
 
 	protected Genre getGenre( final PhotoComment photoComment ) {
 		final int photoId = photoComment.getPhotoId();
-		final Photo photo = photoService.load( photoId );
+		final Photo photo = getPhotoService().load( photoId );
 
-		return genreService.load( photo.getGenreId() );
+		return services.getGenreService().load( photo.getGenreId() );
 	}
 }

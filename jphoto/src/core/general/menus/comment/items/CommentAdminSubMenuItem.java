@@ -4,6 +4,7 @@ import core.general.menus.*;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 import java.util.List;
@@ -11,8 +12,6 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
-
-	public static final String BEAN_NAME = "commentAdminSubMenuItem";
 
 	private EntryMenu entrySubMenu;
 
@@ -22,15 +21,19 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
 
+	public CommentAdminSubMenuItem( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
+
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
 		return EntryMenuOperationType.COMMENT_ADMIN_SUB_MENU;
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		entrySubMenu = new EntryMenu( 0, EntryMenuType.COMMENT, getSubMenus( commentId, userWhoIsCallingMenu ) ); // TODO: menu id?
+		entrySubMenu = new EntryMenu( 0, EntryMenuType.COMMENT, getSubMenus() ); // TODO: menu id?
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -47,15 +50,15 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return securityService.isSuperAdminUser( userWhoIsCallingMenu.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu );
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		return services.getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu( photoComment, accessor );
 	}
 
 	public EntryMenu getEntrySubMenu() {
 		return entrySubMenu;
 	}
 
-	private List<? extends AbstractEntryMenuItem> getSubMenus( final int commentId, final User userWhoIsCallingMenu ) {
-		return entryMenuService.getCommentMenu( photoCommentService.load( commentId ), userWhoIsCallingMenu, entryMenuOperationTypes ).getEntryMenuItems();
+	private List<? extends AbstractEntryMenuItem> getSubMenus() {
+		return services.getEntryMenuService().getCommentMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
 	}
 }

@@ -10,15 +10,15 @@ import java.util.List;
 
 public interface EntryMenuService {
 
-	EntryMenu getCommentMenu( final PhotoComment photoComment, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes );
+	EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
-	EntryMenu getPhotoMenu( final Photo photo, final User userWhoIsCallingMenu );
+	EntryMenu getPhotoMenu( final Photo photo, final User accessor );
 
-	EntryMenu getPhotoMenu( final Photo photo, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes );
+	EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
-	EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu );
+	EntryMenu getUserMenu( final User user, final User accessor );
 
-	EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes );
+	EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
 	List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems();
 

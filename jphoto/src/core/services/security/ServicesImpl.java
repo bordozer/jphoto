@@ -146,6 +146,9 @@ public class ServicesImpl implements Services {
 	@Autowired
 	private MailService mailService;
 
+	@Autowired
+	private EntryMenuService entryMenuService;
+
 	@Override
 	public UserService getUserService() {
 		return userService;
@@ -344,5 +347,10 @@ public class ServicesImpl implements Services {
 	@Override
 	public MailService getMailService() {
 		return mailService;
+	}
+
+	@Override
+	public EntryMenuService getEntryMenuService() {
+		return entryMenuService;
 	}
 }

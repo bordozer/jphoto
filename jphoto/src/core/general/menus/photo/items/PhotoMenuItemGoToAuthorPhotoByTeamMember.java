@@ -7,13 +7,18 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemGoToAuthorPhotoByTeamMember";
+	private final PhotoTeamMember photoTeamMember;
 
-	private PhotoTeamMember photoTeamMember;
+	public PhotoMenuItemGoToAuthorPhotoByTeamMember( final Photo photo, final User accessor, final Services services, final PhotoTeamMember photoTeamMember ) {
+		super( photo, accessor, services );
+
+		this.photoTeamMember = photoTeamMember;
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -21,9 +26,10 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
 		final UserTeamMember userTeamMember = photoTeamMember.getUserTeamMember();
-		final User photoAuthor = getPhotoAuthor( photoId );
+		final User photoAuthor = getPhotoAuthor( menuEntry );
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -46,19 +52,15 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
 		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
 			return false;
 		}
 
-		return super.isAccessibleForPhoto( photo, userWhoIsCallingMenu ) && getTeamMemberPhotosQty() > 1;
+		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getTeamMemberPhotosQty() > 1;
 	}
 
 	private int getTeamMemberPhotosQty() {
-		return userTeamService.getTeamMemberPhotosQty( photoTeamMember.getUserTeamMember().getId() );
-	}
-
-	public void setPhotoTeamMember( final PhotoTeamMember photoTeamMember ) {
-		this.photoTeamMember = photoTeamMember;
+		return services.getUserTeamService().getTeamMemberPhotosQty( photoTeamMember.getUserTeamMember().getId() );
 	}
 }

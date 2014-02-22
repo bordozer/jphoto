@@ -1,15 +1,16 @@
-package core.general.menus.comment.items;
+package core.general.menus;
 
-import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 
-public class CommentMenuItemSeparator extends AbstractCommentMenuItem {
+public class MenuItemSeparator<T extends PopupMenuAssignable> extends AbstractEntryMenuItem<T> {
 
 	public static final String BEAN_NAME = "separatorMenuItem";
+
+	public MenuItemSeparator( final T menuEntry, final User accessor, final Services services ) {
+		super( menuEntry, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,7 +18,12 @@ public class CommentMenuItemSeparator extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final PopupMenuAssignable menuEntry, final User accessor ) {
+		return true;
+	}
+
+	@Override
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
@@ -29,11 +35,6 @@ public class CommentMenuItemSeparator extends AbstractCommentMenuItem {
 				return StringUtils.EMPTY;
 			}
 		};
-	}
-
-	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return true;
 	}
 
 	@Override

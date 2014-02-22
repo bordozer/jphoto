@@ -5,11 +5,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentDeleteMenu";
+	public CommentMenuItemDelete( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,18 +20,16 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final PhotoComment photoComment = photoCommentService.load( commentId );
-
-				if ( isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu ) ) {
+				if ( isCommentLeftByUserWhoIsCallingMenu( menuEntry, accessor ) ) {
 					return TranslatorUtils.translate( "Delete your comment" );
 				}
 
-				if ( securityService.userOwnThePhoto( userWhoIsCallingMenu, photoComment.getPhotoId() ) ) {
+				if ( services.getSecurityService().userOwnThePhoto( accessor, menuEntry.getPhotoId() ) ) {
 					return TranslatorUtils.translate( "Delete comment (as photo author)" );
 				}
 
@@ -37,13 +38,13 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "deleteComment( %d ); return false;", commentId );
+				return String.format( "deleteComment( %d ); return false;", menuEntry.getId() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return securityService.userCanDeletePhotoComment( userWhoIsCallingMenu.getId(), photoComment.getId() );
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), photoComment.getId() );
 	}
 }

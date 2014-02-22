@@ -4,6 +4,7 @@ import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
 import core.general.base.AbstractBaseEntity;
+import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
 import core.interfaces.Cacheable;
@@ -13,7 +14,7 @@ import java.util.Date;
 import java.util.Set;
 
 
-public class User extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable {
+public class User extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable {
 
 	private static final String CAN_NOT_SET_PROPERTY_MESSAGE = "Can not set property of read-only user!";
 

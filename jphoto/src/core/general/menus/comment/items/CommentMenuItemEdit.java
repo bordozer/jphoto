@@ -5,11 +5,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentEditMenu";
+	public CommentMenuItemEdit( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,14 +20,12 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final PhotoComment photoComment = photoCommentService.load( commentId );
-
-				if ( isCommentLeftByUserWhoIsCallingMenu( photoComment, userWhoIsCallingMenu ) ) {
+				if ( isCommentLeftByUserWhoIsCallingMenu( menuEntry, accessor ) ) {
 					return TranslatorUtils.translate( "Edit your comment" );
 				}
 
@@ -33,13 +34,13 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "editComment( %d ); return false;", commentId );
+				return String.format( "editComment( %d ); return false;", menuEntry.getId() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return securityService.userCanEditPhotoComment( userWhoIsCallingMenu, photoComment );
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		return services.getSecurityService().userCanEditPhotoComment( accessor, photoComment );
 	}
 }

@@ -2,14 +2,18 @@ package core.general.menus.user;
 
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
+import core.services.entry.FavoritesService;
+import core.services.security.Services;
 import utils.UserUtils;
 
-public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem {
+public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem<User> {
 
-	protected abstract AbstractEntryMenuItemCommand initMenuItemCommand( final int userId, final User userWhoIsCallingMenu );
+	protected AbstractUserMenuItem( final User user, final User accessor, final Services services ) {
+		super( user, accessor, services );
+	}
 
-	public abstract boolean isAccessibleForUser( final User user, final User userWhoIsCallingMenu );
+	@Override
+	public abstract boolean isAccessibleFor( final User user, final User userWhoIsCallingMenu );
 	
 	protected boolean isMenuCallerIsSeeingOwnMenu( final User user, final User userWhoIsCallingMenu ) {
 		return UserUtils.isUsersEqual( userWhoIsCallingMenu, user );
@@ -18,4 +22,5 @@ public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem {
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller( final User user, final User userWhoIsCallingMenu ) {
 		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isMenuCallerIsSeeingOwnMenu( user, userWhoIsCallingMenu );
 	}
+
 }

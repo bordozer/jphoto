@@ -4,11 +4,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.user.AbstractUserMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 
-	public static final String BEAN_NAME = "userMenuItemGoToPhotos";
+	public UserMenuItemGoToPhotos( final User user, final User accessor, final Services services ) {
+		super( user, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -16,14 +19,16 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int userId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final int userId = menuEntry.getId();
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final User user = userService.load( userId );
 				final int photoQtyByUser = getPhotoQtyByUser( userId );
-				return TranslatorUtils.translate( "$1: all photos ( $2 )", user.getNameEscaped(), String.valueOf( photoQtyByUser ) );
+				return TranslatorUtils.translate( "$1: all photos ( $2 )", menuEntry.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
 			@Override
@@ -34,11 +39,11 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForUser( final User user, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final User user, final User userWhoIsCallingMenu ) {
 		return ! hideMenuItemBecauseEntryOfMenuCaller( user, userWhoIsCallingMenu) && getPhotoQtyByUser( user.getId() ) > 0;
 	}
 
 	private int getPhotoQtyByUser( final int userId ) {
-		return photoService.getPhotoQtyByUser( userId );
+		return getPhotoService().getPhotoQtyByUser( userId );
 	}
 }

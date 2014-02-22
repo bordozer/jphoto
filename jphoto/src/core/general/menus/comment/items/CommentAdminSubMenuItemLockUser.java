@@ -5,11 +5,14 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentAdminSubMenuItemLockUser";
+	public CommentAdminSubMenuItemLockUser( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,26 +20,25 @@ public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final PhotoComment photoComment = photoCommentService.load( commentId );
+		final User commentAuthor = menuEntry.getCommentAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock user: $1", photoComment.getCommentAuthor().getNameEscaped() );
+				return TranslatorUtils.translate( "Lock user: $1", commentAuthor.getNameEscaped() );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				final User commentAuthor = photoComment.getCommentAuthor();
 				return String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		return securityService.isSuperAdminUser( userWhoIsCallingMenu.getId() );
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		return services.getSecurityService().isSuperAdminUser( accessor.getId() );
 	}
 }

@@ -2,6 +2,7 @@ package core.general.photo;
 
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractBaseEntity;
+import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
 import core.interfaces.Cacheable;
@@ -10,7 +11,7 @@ import utils.StringUtilities;
 import java.io.File;
 import java.util.Date;
 
-public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable {
+public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable {
 
 	private String name;
 

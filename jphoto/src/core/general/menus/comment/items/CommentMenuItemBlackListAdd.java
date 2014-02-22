@@ -6,12 +6,15 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
 public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentMenuItemBlackListAdd";
+	public CommentMenuItemBlackListAdd( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -19,8 +22,10 @@ public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
-		final User commentAuthor = getCommentAuthor( commentId );
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final User commentAuthor = menuEntry.getCommentAuthor();
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
@@ -30,14 +35,17 @@ public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "jsonRPC.favoritesService.addEntryToFavoritesAjax( %d, %d, %d ); document.location.reload();", userWhoIsCallingMenu.getId(), commentAuthor.getId(), FavoriteEntryType.BLACKLIST.getId() );
+				return String.format( "jsonRPC.favoritesService.addEntryToFavoritesAjax( %d, %d, %d ); document.location.reload();", accessor.getId(), commentAuthor.getId(), FavoriteEntryType.BLACKLIST.getId() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
 		final User commentAuthor = photoComment.getCommentAuthor();
-		return super.isAccessibleForComment( photoComment, userWhoIsCallingMenu ) && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu ) && ! UserUtils.isUsersEqual( commentAuthor, userWhoIsCallingMenu ) && ! favoritesService.isUserInBlackListOfUser( userWhoIsCallingMenu.getId(), commentAuthor.getId() );
+		return super.isAccessibleFor( photoComment, accessor )
+			   && isUserWhoIsCallingMenuLogged( accessor )
+			   && ! UserUtils.isUsersEqual( commentAuthor, accessor )
+			   && ! getFavoritesService().isUserInBlackListOfUser( accessor.getId(), commentAuthor.getId() );
 	}
 }

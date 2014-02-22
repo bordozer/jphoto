@@ -5,11 +5,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentMenuItemGoToCommentAuthorPhotos";
+	public CommentMenuItemGoToCommentAuthorPhotos( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,13 +20,13 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuI
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
-		final User commentAuthor = getCommentAuthor( commentId );
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+		final User commentAuthor = menuEntry.getCommentAuthor();
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUser = photoService.getPhotoQtyByUser( commentAuthor.getId() );
+				final int photoQtyByUser = getPhotoService().getPhotoQtyByUser( commentAuthor.getId() );
 				return TranslatorUtils.translate( "$1: all photos ( $2 )", commentAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
@@ -35,12 +38,12 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuI
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, accessor ) ) {
 			return false;
 		}
 
-		return super.isAccessibleForComment( photoComment, userWhoIsCallingMenu )
-			   && photoService.getPhotoQtyByUser( photoComment.getCommentAuthor().getId() ) > minPhotosForMenu( photoComment );
+		return super.isAccessibleFor( photoComment, accessor )
+			   && getPhotoService().getPhotoQtyByUser( photoComment.getCommentAuthor().getId() ) > minPhotosForMenu( photoComment );
 	}
 }

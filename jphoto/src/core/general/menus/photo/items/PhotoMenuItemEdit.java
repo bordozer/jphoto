@@ -5,11 +5,14 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemEdit";
+	public PhotoMenuItemEdit( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,12 +20,15 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final int photoId = menuEntry.getId();
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( securityService.userOwnThePhoto( userWhoIsCallingMenu, photoId ) ? "Edit your photo" : "Edit photo (ADMIN)" );
+				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ? "Edit your photo" : "Edit photo (ADMIN)" );
 			}
 
 			@Override
@@ -33,7 +39,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
-		return securityService.userCanEditPhoto( userWhoIsCallingMenu, photo );
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
+		return services.getSecurityService().userCanEditPhoto( userWhoIsCallingMenu, photo );
 	}
 }

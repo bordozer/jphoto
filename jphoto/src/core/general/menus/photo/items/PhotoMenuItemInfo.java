@@ -5,11 +5,14 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemInfo";
+	public PhotoMenuItemInfo( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -17,7 +20,7 @@ public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
@@ -26,14 +29,16 @@ public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				final String infoLink = urlUtilsService.getPhotoInfoLink( photoId );
+				final int photoId = menuEntry.getId();
+				final String infoLink = services.getUrlUtilsService().getPhotoInfoLink( photoId );
+
 				return String.format( "openPopupWindowCustom( '%s', 'photoInfo_%d', 460, 800, 100, 100 );", infoLink, photoId );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
 		return true;
 	}
 }

@@ -6,13 +6,18 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.user.userAlbums.UserPhotoAlbum;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 
-	public static final String BEAN_NAME = "photoMenuItemGoToAuthorPhotoByAlbum";
+	private final UserPhotoAlbum userPhotoAlbum;
 
-	private UserPhotoAlbum userPhotoAlbum;
+	public PhotoMenuItemGoToAuthorPhotoByAlbum( final Photo photo, final User accessor, final Services services, final UserPhotoAlbum userPhotoAlbum ) {
+		super( photo, accessor, services );
+
+		this.userPhotoAlbum = userPhotoAlbum;
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -20,8 +25,10 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int photoId, final User userWhoIsCallingMenu ) {
-		final User photoAuthor = getPhotoAuthor( photoId );
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+
+		final User photoAuthor = getPhotoAuthor( menuEntry );
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
@@ -38,19 +45,15 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleForPhoto( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
 		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
 			return false;
 		}
 
-		return super.isAccessibleForPhoto( photo, userWhoIsCallingMenu ) && getUserPhotoAlbumPhotosQty() > 1;
+		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getUserPhotoAlbumPhotosQty() > 1;
 	}
 
 	private int getUserPhotoAlbumPhotosQty() {
-		return userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() );
-	}
-
-	public void setUserPhotoAlbum( final UserPhotoAlbum userPhotoAlbum ) {
-		this.userPhotoAlbum = userPhotoAlbum;
+		return services.getUserPhotoAlbumService().getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() );
 	}
 }

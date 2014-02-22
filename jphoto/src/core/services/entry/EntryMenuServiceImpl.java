@@ -1,21 +1,17 @@
 package core.services.entry;
 
-import core.context.ApplicationContextHelper;
 import core.general.menus.comment.items.CommentAdminSubMenuItem;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.menus.*;
-import core.general.menus.comment.*;
 import core.general.menus.comment.items.*;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.menus.photo.items.*;
-import core.general.menus.user.AbstractUserMenuItem;
 import core.general.menus.user.items.UserMenuItemGoToPhotos;
 import core.general.menus.user.items.UserMenuItemSendPrivateMessage;
-import core.general.menus.user.items.UserMenuItemSeparator;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userAlbums.UserPhotoAlbum;
+import core.services.security.Services;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserTeamService;
 import org.apache.commons.collections15.CollectionUtils;
@@ -30,124 +26,100 @@ import static com.google.common.collect.Lists.newArrayList;
 public class EntryMenuServiceImpl implements EntryMenuService {
 
 	@Autowired
-	private CommentMenuItemSeparator commentMenuItemSeparator;
-
-	@Autowired
-	private PhotoMenuItemSeparator photoMenuItemSeparator;
-
-	@Autowired
 	private UserTeamService userTeamService;
 
 	@Autowired
 	private UserPhotoAlbumService userPhotoAlbumService;
 
 	@Autowired
-	private UserMenuItemSeparator userMenuItemSeparator;
+	private Services services;
 
 	@Override
-	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
 		final int photoCommentId = photoComment.getId();
 
-		final List<AbstractCommentMenuItem> menuItems = newArrayList();
+		final List<AbstractEntryMenuItem<PhotoComment>> menuItems = newArrayList();
 
 		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
-			menuItems.add( createCommentMenuItemInstance( entryMenuOperationType ) );
+			menuItems.add( createCommentMenuItemInstance( photoComment, accessor, entryMenuOperationType ) );
 		}
 
-		CollectionUtils.filter( menuItems, new Predicate<AbstractCommentMenuItem>() {
+		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<PhotoComment>>() {
 			@Override
-			public boolean evaluate( final AbstractCommentMenuItem commentMenuItem ) {
-				return commentMenuItem.isAccessibleForComment( photoComment, userWhoIsCallingMenu );
+			public boolean evaluate( final AbstractEntryMenuItem<PhotoComment> commentMenuItem ) {
+				return commentMenuItem.isAccessibleFor( photoComment, accessor );
 			}
 		} );
 
 		removeSpareSeparators( menuItems );
 
-		for ( final AbstractEntryMenuItem menuItem : menuItems ) {
-			menuItem.createMenuItemCommand( photoCommentId, userWhoIsCallingMenu );
-		}
-
 		return new EntryMenu( photoCommentId, EntryMenuType.COMMENT, menuItems );
 	}
 
 	@Override
-	public EntryMenu getPhotoMenu( final Photo photo, final User userWhoIsCallingMenu ) {
-		return getPhotoMenu( photo, userWhoIsCallingMenu, getPhotoFullMenuItems() );
+	public EntryMenu getPhotoMenu( final Photo photo, final User accessor ) {
+		return getPhotoMenu( photo, accessor, getPhotoFullMenuItems() );
 	}
 
 	@Override
-	public EntryMenu getPhotoMenu( final Photo photo, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
 		final int photoId = photo.getId();
 
-		final List<AbstractPhotoMenuItem> menuItems = newArrayList();
+		final List<AbstractEntryMenuItem<Photo>> menuItems = newArrayList();
 
 		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
 			switch ( entryMenuOperationType ) {
 				case GO_TO_USER_PHOTOS_BY_TEAM_MEMBER:
 					final List<PhotoTeamMember> photoTeamMembers = userTeamService.getPhotoTeam( photoId ).getPhotoTeamMembers();
 					for ( final PhotoTeamMember photoTeamMember : photoTeamMembers ) {
-						final PhotoMenuItemGoToAuthorPhotoByTeamMember teamMemberMenuItem = ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotoByTeamMember.BEAN_NAME );
-						teamMemberMenuItem.setPhotoTeamMember( photoTeamMember );
-
-						menuItems.add( teamMemberMenuItem );
+						menuItems.add( new PhotoMenuItemGoToAuthorPhotoByTeamMember( photo, accessor, services, photoTeamMember ) );
 					}
 					break;
 				case GO_TO_USER_PHOTOS_BY_ALBUM:
 					final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photoId );
 					for ( final UserPhotoAlbum userPhotoAlbum : userPhotoAlbums ) {
-						final PhotoMenuItemGoToAuthorPhotoByAlbum albumMenuItem = ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotoByAlbum.BEAN_NAME );
-						albumMenuItem.setUserPhotoAlbum( userPhotoAlbum );
-
-						menuItems.add( albumMenuItem );
+						menuItems.add( new PhotoMenuItemGoToAuthorPhotoByAlbum( photo, accessor, services, userPhotoAlbum ) );
 					}
 					break;
 				default:
-					menuItems.add( createPhotoMenuItemInstance( entryMenuOperationType ) );
+					menuItems.add( createPhotoMenuItemInstance( photo, accessor, entryMenuOperationType ) );
 			}
 		}
 
-		CollectionUtils.filter( menuItems, new Predicate<AbstractPhotoMenuItem>() {
+		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<Photo>>() {
 			@Override
-			public boolean evaluate( final AbstractPhotoMenuItem commentMenuItem ) {
-				return commentMenuItem.isAccessibleForPhoto( photo, userWhoIsCallingMenu );
+			public boolean evaluate( final AbstractEntryMenuItem<Photo> commentMenuItem ) {
+				return commentMenuItem.isAccessibleFor( photo, accessor );
 			}
 		} );
 
 		removeSpareSeparators( menuItems );
-
-		for ( final AbstractEntryMenuItem menuItem : menuItems ) {
-			menuItem.createMenuItemCommand( photoId, userWhoIsCallingMenu );
-		}
 
 		return new EntryMenu( photoId, EntryMenuType.PHOTO, menuItems );
 	}
 
 	@Override
-	public EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu ) {
-		return getUserMenu( user, userWhoIsCallingMenu, getUserFullMenuItems() );
+	public EntryMenu getUserMenu( final User user, final User accessor ) {
+		return getUserMenu( user, accessor, getUserFullMenuItems() );
 	}
 
 	@Override
-	public EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
 
-		final List<AbstractUserMenuItem> menuItems = newArrayList();
+		final List<AbstractEntryMenuItem<User>> menuItems = newArrayList();
 
 		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
-			menuItems.add( createUserMenuItemInstance( entryMenuOperationType ) );
+			menuItems.add( createUserMenuItemInstance( user, accessor, entryMenuOperationType ) );
 		}
 
-		CollectionUtils.filter( menuItems, new Predicate<AbstractUserMenuItem>() {
+		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<User>>() {
 			@Override
-			public boolean evaluate( final AbstractUserMenuItem commentMenuItem ) {
-				return commentMenuItem.isAccessibleForUser( user, userWhoIsCallingMenu );
+			public boolean evaluate( final AbstractEntryMenuItem<User> userMenuItem ) {
+				return userMenuItem.isAccessibleFor( user, accessor );
 			}
 		} );
 
 		removeSpareSeparators( menuItems );
-
-		for ( final AbstractEntryMenuItem menuItem : menuItems ) {
-			menuItem.createMenuItemCommand( user.getId(), userWhoIsCallingMenu );
-		}
 
 		return new EntryMenu( user.getId(), EntryMenuType.USER, menuItems );
 	}
@@ -240,74 +212,70 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 		return menuItems;
 	}
 
-	private AbstractCommentMenuItem createCommentMenuItemInstance( final EntryMenuOperationType entryMenuOperationType ) {
+	private AbstractEntryMenuItem<PhotoComment> createCommentMenuItemInstance( final PhotoComment photoComment, final User accessor, final EntryMenuOperationType entryMenuOperationType ) {
 		switch ( entryMenuOperationType ) {
 			case SEPARATOR:
-				return commentMenuItemSeparator;
+				return new MenuItemSeparator<>( photoComment, accessor, services );
 			case MENU_ITEM_EDIT:
-				return ApplicationContextHelper.getBean( CommentMenuItemEdit.BEAN_NAME );
+				return new CommentMenuItemEdit( photoComment, accessor, services );
 			case COMMENT_REPLY:
-				return ApplicationContextHelper.getBean( CommentMenuItemReply.BEAN_NAME );
+				return new CommentMenuItemReply( photoComment, accessor, services );
 			case MENU_ITEM_DELETE:
-				return ApplicationContextHelper.getBean( CommentMenuItemDelete.BEAN_NAME );
+				return new CommentMenuItemDelete( photoComment, accessor, services );
 			case COMMENT_COMPLAINT_CUSTOM:
-				return ApplicationContextHelper.getBean( CommentMenuItemComplaintCustom.BEAN_NAME );
+				return new CommentMenuItemComplaintCustom( photoComment, accessor, services );
 			case COMMENT_COMPLAINT_SPAM:
-				return ApplicationContextHelper.getBean( CommentMenuItemComplaintSpam.BEAN_NAME );
+				return new CommentMenuItemComplaintSpam( photoComment, accessor, services );
 			case COMMENT_COMPLAINT_SWORD_WORDS:
-				return ApplicationContextHelper.getBean( CommentMenuItemComplaintSwordWords.BEAN_NAME );
+				return new CommentMenuItemComplaintSwordWords( photoComment, accessor, services );
 			case BLACK_LIST_ADD:
-				return ApplicationContextHelper.getBean( CommentMenuItemBlackListAdd.BEAN_NAME );
+				return new CommentMenuItemBlackListAdd( photoComment, accessor, services );
 			case BLACK_LIST_REMOVE:
-				return ApplicationContextHelper.getBean( CommentMenuItemBlackListRemove.BEAN_NAME );
+				return new CommentMenuItemBlackListRemove( photoComment, accessor, services );
 			case GO_TO_USER_PHOTOS:
-				return ApplicationContextHelper.getBean( CommentMenuItemGoToCommentAuthorPhotos.BEAN_NAME );
+				return new CommentMenuItemGoToCommentAuthorPhotos( photoComment, accessor, services );
 			case GO_TO_USER_PHOTOS_BY_GENRE:
-				return ApplicationContextHelper.getBean( CommentMenuItemGoToAuthorPhotoByGenre.BEAN_NAME );
+				return new CommentMenuItemGoToAuthorPhotoByGenre( photoComment, accessor, services );
 			case SEND_PRIVATE_MESSAGE:
-				return ApplicationContextHelper.getBean( CommentMenuItemSendPrivateMessage.BEAN_NAME );
+				return new CommentMenuItemSendPrivateMessage( photoComment, accessor, services );
 			case COMMENT_ADMIN_SUB_MENU:
-				return ApplicationContextHelper.getBean( CommentAdminSubMenuItem.BEAN_NAME );
+				return new CommentAdminSubMenuItem( photoComment, accessor, services );
 			case ADMIN_SUB_MENU_LOCK_USER:
-				return ApplicationContextHelper.getBean( CommentAdminSubMenuItemLockUser.BEAN_NAME );
+				return new CommentAdminSubMenuItemLockUser( photoComment, accessor, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuOperationType ) );
 	}
 
-	private AbstractPhotoMenuItem createPhotoMenuItemInstance( final EntryMenuOperationType entryMenuOperationType ) {
+	private AbstractEntryMenuItem<Photo> createPhotoMenuItemInstance( final Photo photo, final User accessor, final EntryMenuOperationType entryMenuOperationType ) {
 		switch ( entryMenuOperationType ) {
 			case SEPARATOR:
-				return photoMenuItemSeparator;
+				return new MenuItemSeparator<>( photo, accessor, services );
 			case MENU_ITEM_EDIT:
-				return ApplicationContextHelper.getBean( PhotoMenuItemEdit.BEAN_NAME );
+				return new PhotoMenuItemEdit( photo, accessor, services );
 			case MENU_ITEM_DELETE:
-				return ApplicationContextHelper.getBean( PhotoMenuItemDelete.BEAN_NAME );
+				return new PhotoMenuItemDelete( photo, accessor, services );
 			case GO_TO_USER_PHOTOS:
-				return ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotos.BEAN_NAME );
+				return new PhotoMenuItemGoToAuthorPhotos( photo, accessor, services );
 			case GO_TO_USER_PHOTOS_BY_GENRE:
-				return ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotoByGenre.BEAN_NAME );
-			case GO_TO_USER_PHOTOS_BY_TEAM_MEMBER:
-				return ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotoByTeamMember.BEAN_NAME );
-			case GO_TO_USER_PHOTOS_BY_ALBUM:
-				return ApplicationContextHelper.getBean( PhotoMenuItemGoToAuthorPhotoByAlbum.BEAN_NAME );
+				return new PhotoMenuItemGoToAuthorPhotoByGenre( photo, accessor, services );
 			case SEND_PRIVATE_MESSAGE:
-				return ApplicationContextHelper.getBean( PhotoMenuItemSendPrivateMessage.BEAN_NAME );
+				return new PhotoMenuItemSendPrivateMessage( photo, accessor, services );
 			case PHOTO_INFO:
-				return ApplicationContextHelper.getBean( PhotoMenuItemInfo.BEAN_NAME );
+				return new PhotoMenuItemInfo( photo, accessor, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal photo EntryMenuOperationType: %s", entryMenuOperationType ) );
 	}
 
-	private AbstractUserMenuItem createUserMenuItemInstance( final EntryMenuOperationType entryMenuOperationType ) {
+	private AbstractEntryMenuItem<User> createUserMenuItemInstance( final User user, final User accessor, final EntryMenuOperationType entryMenuOperationType ) {
 		switch ( entryMenuOperationType ) {
 			case SEPARATOR:
-				return userMenuItemSeparator;
+				return new MenuItemSeparator<>( user, accessor, services );
 			case GO_TO_USER_PHOTOS:
-				return ApplicationContextHelper.getBean( UserMenuItemGoToPhotos.BEAN_NAME );
+				return new UserMenuItemGoToPhotos( user, accessor, services );
 			case SEND_PRIVATE_MESSAGE:
-				return ApplicationContextHelper.<UserMenuItemSendPrivateMessage>getBean( UserMenuItemSendPrivateMessage.BEAN_NAME );
+				return new UserMenuItemSendPrivateMessage( user, accessor, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal user EntryMenuOperationType: %s", entryMenuOperationType ) );

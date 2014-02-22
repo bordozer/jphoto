@@ -5,12 +5,15 @@ import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
 public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
-	public static final String BEAN_NAME = "commentMenuItemSendPrivateMessage";
+	public CommentMenuItemSendPrivateMessage( final PhotoComment photoComment, final User accessor, final Services services ) {
+		super( photoComment, accessor, services );
+	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
@@ -18,10 +21,10 @@ public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem 
 	}
 
 	@Override
-	protected AbstractEntryMenuItemCommand initMenuItemCommand( final int commentId, final User userWhoIsCallingMenu ) {
+	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
-			private User commentAuthor = getCommentAuthor( commentId );
+			private User commentAuthor = getCommentAuthor( menuEntry.getId() );
 
 			@Override
 			public String getMenuText() {
@@ -30,26 +33,26 @@ public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem 
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "sendPrivateMessage( %d, %d, '%s' );", userWhoIsCallingMenu.getId(), commentAuthor.getId(), commentAuthor.getNameEscaped() );
+				return String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), commentAuthor.getId(), commentAuthor.getNameEscaped() );
 			}
 		};
 	}
 
 	@Override
-	public boolean isAccessibleForComment( final PhotoComment photoComment, final User userWhoIsCallingMenu ) {
-		if ( isSuperAdminUser( userWhoIsCallingMenu ) && ! UserUtils.isUsersEqual( userWhoIsCallingMenu, photoComment.getCommentAuthor() ) ) {
+	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+		if ( isSuperAdminUser( accessor ) && ! UserUtils.isUsersEqual( accessor, photoComment.getCommentAuthor() ) ) {
 			return true;
 		}
 
-		final boolean userInBlackListOfUser = favoritesService.isUserInBlackListOfUser( photoComment.getCommentAuthor().getId(), userWhoIsCallingMenu.getId() );
+		final boolean userInBlackListOfUser = getFavoritesService().isUserInBlackListOfUser( photoComment.getCommentAuthor().getId(), accessor.getId() );
 
-		if ( UserUtils.isUsersEqual( userWhoIsCallingMenu, getPhotoAuthor( photoComment ) ) && !userInBlackListOfUser ) {
+		if ( UserUtils.isUsersEqual( accessor, getPhotoAuthor( photoComment ) ) && !userInBlackListOfUser ) {
 			return true;
 		}
 
-		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && super.isAccessibleForComment( photoComment, userWhoIsCallingMenu )
-			   && ! isCommentOfMenuCaller( photoComment, userWhoIsCallingMenu )
+		return isUserWhoIsCallingMenuLogged( accessor )
+			   && super.isAccessibleFor( photoComment, accessor )
+			   && ! isCommentOfMenuCaller( photoComment, accessor )
 			   && !userInBlackListOfUser;
 	}
 }

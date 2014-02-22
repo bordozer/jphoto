@@ -17,8 +17,6 @@
 
 	<import resource="beans-service.xml"/>
 
-	<import resource="beans-menu.xml"/>
-
 	<import resource="admin-service.xml"/>
 
 	<bean id="requestContextFilter" class="core.context.RequestContextFilter" />
