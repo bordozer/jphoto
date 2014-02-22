@@ -22,18 +22,16 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final int photoId = menuEntry.getId();
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ? "Edit your photo" : "Edit photo (ADMIN)" );
+				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Edit your photo" : "Edit photo (ADMIN)" );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "editPhotoData( %d );", photoId );
+				return String.format( "editPhotoData( %d );", getId() );
 			}
 		};
 	}

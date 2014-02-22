@@ -21,10 +21,6 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 		return getUserService().load( menuEntry.getUserId() );
 	}
 
-	protected Photo getPhoto() {
-		return getPhotoService().load( menuEntry.getId() );
-	}
-
 	protected boolean isPhotoIsWithinAnonymousPeriod() {
 		return services.getSecurityService().isPhotoAuthorNameMustBeHidden( menuEntry, accessor );
 	}

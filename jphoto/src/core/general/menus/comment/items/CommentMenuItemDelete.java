@@ -1,5 +1,6 @@
 package core.general.menus.comment.items;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -38,13 +39,13 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "deleteComment( %d ); return false;", menuEntry.getId() );
+				return String.format( "deleteComment( %d ); return false;", getId() );
 			}
 		};
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), menuEntry.getId() );
+		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), getId() );
 	}
 }

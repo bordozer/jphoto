@@ -1,5 +1,6 @@
 package core.general.menus.photo.items;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
@@ -29,7 +30,7 @@ public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				final int photoId = menuEntry.getId();
+				final int photoId = getId();
 				final String infoLink = services.getUrlUtilsService().getPhotoInfoLink( photoId );
 
 				return String.format( "openPopupWindowCustom( '%s', 'photoInfo_%d', 460, 800, 100, 100 );", infoLink, photoId );

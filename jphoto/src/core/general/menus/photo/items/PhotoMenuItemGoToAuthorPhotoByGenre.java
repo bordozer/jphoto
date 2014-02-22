@@ -23,8 +23,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final int photoId = menuEntry.getId();
-		final Genre genre = getGenre( photoId );
+		final Genre genre = getGenre();
 		final User photoAuthor = getPhotoAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
@@ -52,7 +51,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoMenuItem {
 		return super.isAccessibleFor() && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() ) > 1;
 	}
 
-	private Genre getGenre( final int photoId ) {
-		return getGenreService().load( getPhoto().getGenreId() );
+	private Genre getGenre() {
+		return getGenreService().load( menuEntry.getGenreId() );
 	}
 }

@@ -30,7 +30,7 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), menuEntry.getId(), menuEntry.getNameEscaped() );
+				return String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), getId(), menuEntry.getNameEscaped() );
 			}
 		};
 	}
@@ -43,6 +43,6 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 		return isUserWhoIsCallingMenuLogged( accessor )
 			   && ! isMenuCallerIsSeeingOwnMenu()
-			   && ! getFavoritesService().isUserInBlackListOfUser( menuEntry.getId(), accessor.getId() );
+			   && ! getFavoritesService().isUserInBlackListOfUser( getId(), accessor.getId() );
 	}
 }

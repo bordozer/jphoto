@@ -1,5 +1,6 @@
 package core.general.menus.comment.items;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.EntryMenuType;
@@ -34,7 +35,7 @@ public class CommentMenuItemComplaintCustom extends AbstractCommentComplaintMenu
 				return String.format( "%s( %d, %d, %d, %d ); return false;"
 					, COMPLAINT_MESSAGE_JS_FUNCTION
 					, EntryMenuType.COMMENT.getId()
-					, menuEntry.getId()
+					, getId()
 					, accessor.getId()
 					, ComplaintReasonType.COMMENT_CUSTOM_COMPLAINT.getId()
 				);

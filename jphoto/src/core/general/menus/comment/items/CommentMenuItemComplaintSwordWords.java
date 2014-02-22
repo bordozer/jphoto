@@ -1,5 +1,6 @@
 package core.general.menus.comment.items;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -31,7 +32,7 @@ public class CommentMenuItemComplaintSwordWords extends AbstractCommentComplaint
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), menuEntry.getId(), accessor.getId(), ComplaintReasonType.COMMENT_SWORD_WORDS.getId() );
+				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), getId(), accessor.getId(), ComplaintReasonType.COMMENT_SWORD_WORDS.getId() );
 			}
 		};
 	}

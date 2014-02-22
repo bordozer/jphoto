@@ -22,18 +22,16 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final int photoId = menuEntry.getId();
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ? "Delete your photo" : "Delete photo (ADMIN)" );
+				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Delete your photo" : "Delete photo (ADMIN)" );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "deletePhoto( %d ); return false;", photoId );
+				return String.format( "deletePhoto( %d ); return false;", getId() );
 			}
 		};
 	}

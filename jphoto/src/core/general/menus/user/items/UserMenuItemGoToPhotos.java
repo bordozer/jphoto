@@ -21,26 +21,24 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final int userId = menuEntry.getId();
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUser = getPhotoQtyByUser( userId );
+				final int photoQtyByUser = getPhotoQtyByUser( getId() );
 				return TranslatorUtils.translate( "$1: all photos ( $2 )", menuEntry.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "goToMemberPhotos( %d );", userId );
+				return String.format( "goToMemberPhotos( %d );", getId() );
 			}
 		};
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-		return ! hideMenuItemBecauseEntryOfMenuCaller() && getPhotoQtyByUser( menuEntry.getId() ) > 0;
+		return ! hideMenuItemBecauseEntryOfMenuCaller() && getPhotoQtyByUser( getId() ) > 0;
 	}
 
 	private int getPhotoQtyByUser( final int userId ) {

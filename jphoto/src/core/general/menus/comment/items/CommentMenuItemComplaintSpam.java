@@ -34,7 +34,7 @@ public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuIt
 				return String.format( "%s( %d, %d, %d, %d ); return false;"
 					, COMPLAINT_MESSAGE_JS_FUNCTION
 					, EntryMenuType.COMMENT.getId()
-					, menuEntry.getId()
+					, getId()
 					, accessor.getId()
 					, ComplaintReasonType.COMMENT_SPAM.getId()
 				);

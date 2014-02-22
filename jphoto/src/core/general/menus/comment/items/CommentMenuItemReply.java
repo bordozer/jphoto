@@ -23,8 +23,6 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final int commentId = menuEntry.getId();
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
@@ -39,7 +37,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "replyToComment( %d ); return false;", commentId );
+				return String.format( "replyToComment( %d ); return false;", getId() );
 			}
 		};
 	}

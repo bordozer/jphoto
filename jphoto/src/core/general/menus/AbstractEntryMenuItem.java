@@ -76,4 +76,8 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	protected FavoritesService getFavoritesService() {
 		return services.getFavoritesService();
 	}
+
+	protected int getId() {
+		return menuEntry.getId();
+	}
 }

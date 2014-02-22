@@ -1,5 +1,6 @@
 package core.general.menus.comment.items;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -34,7 +35,7 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "editComment( %d ); return false;", menuEntry.getId() );
+				return String.format( "editComment( %d ); return false;", getId() );
 			}
 		};
 	}
