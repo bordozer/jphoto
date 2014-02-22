@@ -18,7 +18,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MenuCreationFactory<T extends PopupMenuAssignable> {
 
-	List<AbstractEntryMenuItem<T>> getAllMenuEntries( final T menuEntry, final User accessor, final EntryMenuOperationType entryMenuOperationType, final EntryMenuType menuType, final Services services ) {
+	List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getAllMenuEntries( final T menuEntry, final User accessor, final EntryMenuOperationType entryMenuOperationType, final EntryMenuType menuType, final Services services ) {
 
 		switch ( menuType ) {
 			case USER:
@@ -34,9 +34,9 @@ public class MenuCreationFactory<T extends PopupMenuAssignable> {
 
 	final AbstractMenuCreationStrategy<User> USER_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<User>() {
 		@Override
-		List<AbstractEntryMenuItem<User>> getMenuEntries( final User user, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final User user, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
 
-			final List<AbstractEntryMenuItem<User>> menuItems = newArrayList();
+			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
 			switch ( entryMenuOperationType ) {
 				case SEPARATOR:
@@ -59,9 +59,9 @@ public class MenuCreationFactory<T extends PopupMenuAssignable> {
 	final AbstractMenuCreationStrategy<Photo> PHOTO_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<Photo>() {
 
 		@Override
-		List<AbstractEntryMenuItem<Photo>> getMenuEntries( final Photo photo, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final Photo photo, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
 
-			final List<AbstractEntryMenuItem<Photo>> menuItems = newArrayList();
+			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
 			switch ( entryMenuOperationType ) {
 				case SEPARATOR:
@@ -105,12 +105,12 @@ public class MenuCreationFactory<T extends PopupMenuAssignable> {
 		}
 	};
 
-	final AbstractMenuCreationStrategy<PhotoComment> COMMENT_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<PhotoComment>() {
+	static final AbstractMenuCreationStrategy<PhotoComment> COMMENT_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<PhotoComment>() {
 
 		@Override
-		List<AbstractEntryMenuItem<PhotoComment>> getMenuEntries( final PhotoComment photoComment, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final PhotoComment photoComment, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
 
-			final List<AbstractEntryMenuItem<PhotoComment>> menuItems = newArrayList();
+			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
 			switch ( entryMenuOperationType ) {
 				case SEPARATOR:

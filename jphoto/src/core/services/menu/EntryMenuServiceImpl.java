@@ -132,20 +132,29 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 		return menuItems;
 	}
 
-	private <T extends PopupMenuAssignable> EntryMenu getGenericMenu( final T menuEntry, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes, final EntryMenuType menuType ) {
-		final List<AbstractEntryMenuItem<T>> menuItems = newArrayList();
+	private EntryMenu getGenericMenu( final PopupMenuAssignable menuEntry, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes, final EntryMenuType menuType ) {
 
 		final MenuCreationFactory<T> factory = new MenuCreationFactory<>();
+		final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
+
 		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
-			menuItems.addAll( factory.getAllMenuEntries( menuEntry, accessor, entryMenuOperationType, menuType, services ) );
+			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuEntries = factory.getAllMenuEntries( menuEntry, accessor, entryMenuOperationType, menuType, services );
+			menuItems.addAll( menuEntries );
 		}
 
-		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<T>>() {
+		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<? extends PopupMenuAssignable>>() {
+			@Override
+			public boolean evaluate( final AbstractEntryMenuItem<? extends PopupMenuAssignable> abstractEntryMenuItem ) {
+				return abstractEntryMenuItem.isAccessibleFor( menuEntry, accessor );
+			}
+		} );
+
+		/*CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<T>>() {
 			@Override
 			public boolean evaluate( final AbstractEntryMenuItem<T> commentMenuItem ) {
 				return commentMenuItem.isAccessibleFor( menuEntry, accessor );
 			}
-		} );
+		} );*/
 
 		removeSpareSeparators( menuItems );
 

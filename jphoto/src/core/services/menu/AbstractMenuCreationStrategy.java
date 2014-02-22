@@ -10,5 +10,5 @@ import java.util.List;
 
 abstract class AbstractMenuCreationStrategy<T extends PopupMenuAssignable> {
 
-	abstract List<AbstractEntryMenuItem<T>> getMenuEntries( final T menuEntry, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services );
+	abstract List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final T menuEntry, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services );
 }
