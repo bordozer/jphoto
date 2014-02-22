@@ -38,15 +38,6 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-
-		if ( menuEntry.isCommentDeleted() ) {
-			return false;
-		}
-
-		if ( ! UserUtils.isLoggedUser( accessor ) ) {
-			return false;
-		}
-
-		return getSecurityService().userOwnThePhotoComment( accessor, menuEntry );
+		return !menuEntry.isCommentDeleted() && UserUtils.isLoggedUser( accessor ) && getSecurityService().userOwnThePhotoComment( accessor, menuEntry );
 	}
 }

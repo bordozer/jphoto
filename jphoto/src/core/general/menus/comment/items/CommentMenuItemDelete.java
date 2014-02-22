@@ -42,6 +42,6 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return UserUtils.isLoggedUser( accessor ) && ( ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) || UserUtils.isUsersEqual( accessor, getCommentAuthor() ) ) );
+		return ! menuEntry.isCommentDeleted() && UserUtils.isLoggedUser( accessor ) && ( ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) || UserUtils.isUsersEqual( accessor, getCommentAuthor() ) ) );
 	}
 }
