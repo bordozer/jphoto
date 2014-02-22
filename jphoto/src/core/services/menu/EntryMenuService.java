@@ -10,19 +10,19 @@ import java.util.List;
 
 public interface EntryMenuService {
 
-	EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
+	EntryMenu getUserMenu( final User user, final User accessor );
+
+	EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
 	EntryMenu getPhotoMenu( final Photo photo, final User accessor );
 
 	EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
-	EntryMenu getUserMenu( final User user, final User accessor );
-
-	EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
-
-	List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems();
+	EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
 	List<EntryMenuOperationType> getPhotoFullMenuItems();
 
 	List<EntryMenuOperationType> getCommentFullMenuItems();
+
+	List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems();
 }
