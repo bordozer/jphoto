@@ -1,9 +1,9 @@
 package core.general.menus.comment;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.menus.AbstractEntryMenuItem;
 import core.services.security.Services;
 import utils.UserUtils;
 

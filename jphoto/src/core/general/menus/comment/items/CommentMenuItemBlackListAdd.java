@@ -1,11 +1,11 @@
 package core.general.menus.comment.items;
 
 import core.enums.FavoriteEntryType;
-import core.general.photo.PhotoComment;
-import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.general.photo.PhotoComment;
+import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;

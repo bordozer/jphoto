@@ -1,10 +1,10 @@
 package core.general.menus.photo.items;
 
-import core.general.photo.Photo;
-import core.general.user.User;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.general.photo.Photo;
+import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;

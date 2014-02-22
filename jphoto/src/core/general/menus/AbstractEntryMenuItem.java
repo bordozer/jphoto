@@ -1,7 +1,7 @@
 package core.general.menus;
 
-import core.general.user.User;
 import core.general.configuration.ConfigurationKey;
+import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.Services;

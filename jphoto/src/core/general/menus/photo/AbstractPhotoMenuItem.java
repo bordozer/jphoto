@@ -1,8 +1,8 @@
 package core.general.menus.photo;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.general.menus.AbstractEntryMenuItem;
 import core.services.entry.GenreService;
 import core.services.security.Services;
 import utils.UserUtils;

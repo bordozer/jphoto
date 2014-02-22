@@ -1,8 +1,8 @@
 package core.general.menus.comment.items;
 
+import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.menus.comment.AbstractCommentMenuItem;
 import core.services.security.Services;
 
 public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMenuItem {
