@@ -39,8 +39,8 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final User user, final User userWhoIsCallingMenu ) {
-		return ! hideMenuItemBecauseEntryOfMenuCaller( user, userWhoIsCallingMenu) && getPhotoQtyByUser( user.getId() ) > 0;
+	public boolean isAccessibleFor() {
+		return ! hideMenuItemBecauseEntryOfMenuCaller() && getPhotoQtyByUser( menuEntry.getId() ) > 0;
 	}
 
 	private int getPhotoQtyByUser( final int userId ) {

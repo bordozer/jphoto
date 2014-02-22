@@ -29,7 +29,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
 		final UserTeamMember userTeamMember = photoTeamMember.getUserTeamMember();
-		final User photoAuthor = getPhotoAuthor( menuEntry );
+		final User photoAuthor = getPhotoAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -52,12 +52,12 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor() {
+		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getTeamMemberPhotosQty() > 1;
+		return super.isAccessibleFor() && getTeamMemberPhotosQty() > 1;
 	}
 
 	private int getTeamMemberPhotosQty() {

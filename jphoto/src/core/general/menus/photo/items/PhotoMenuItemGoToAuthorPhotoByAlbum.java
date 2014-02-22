@@ -27,7 +27,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		final User photoAuthor = getPhotoAuthor( menuEntry );
+		final User photoAuthor = getPhotoAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -45,12 +45,12 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor() {
+		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getUserPhotoAlbumPhotosQty() > 1;
+		return super.isAccessibleFor() && getUserPhotoAlbumPhotosQty() > 1;
 	}
 
 	private int getUserPhotoAlbumPhotosQty() {

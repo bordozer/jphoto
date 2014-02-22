@@ -25,7 +25,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoMenuItem {
 
 		final int photoId = menuEntry.getId();
 		final Genre genre = getGenre( photoId );
-		final User photoAuthor = getPhotoAuthor( menuEntry );
+		final User photoAuthor = getPhotoAuthor();
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -44,15 +44,15 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor() {
+		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor( photo, userWhoIsCallingMenu ) && getPhotoService().getPhotoQtyByUserAndGenre( photo.getUserId(), photo.getGenreId() ) > 1;
+		return super.isAccessibleFor() && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() ) > 1;
 	}
 
 	private Genre getGenre( final int photoId ) {
-		return getGenreService().load( getPhoto( photoId ).getGenreId() );
+		return getGenreService().load( getPhoto().getGenreId() );
 	}
 }

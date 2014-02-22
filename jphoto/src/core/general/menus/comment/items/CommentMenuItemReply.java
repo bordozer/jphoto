@@ -30,11 +30,11 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 			@Override
 			public String getMenuText() {
 
-				if ( isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( menuEntry, accessor ) ) {
+				if ( isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() ) {
 					return TranslatorUtils.translate( "Reply to photo author ( anonymous )" );
 				}
 
-				return TranslatorUtils.translate( "Reply to $1$2", getCommentAuthor( commentId ).getNameEscaped(), isCommentAuthorOwnerOfPhoto( menuEntry ) ? " ( photo's author )" : StringUtils.EMPTY );
+				return TranslatorUtils.translate( "Reply to $1$2", menuEntry.getCommentAuthor().getNameEscaped(), isCommentAuthorOwnerOfPhoto() ? " ( photo's author )" : StringUtils.EMPTY );
 			}
 
 			@Override
@@ -45,7 +45,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		return isUserWhoIsCallingMenuLogged( accessor ) && !isCommentLeftByUserWhoIsCallingMenu( photoComment, accessor );
+	public boolean isAccessibleFor() {
+		return isUserWhoIsCallingMenuLogged( accessor ) && !isCommentLeftByUserWhoIsCallingMenu();
 	}
 }

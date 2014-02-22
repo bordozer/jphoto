@@ -25,7 +25,7 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				if ( isCommentLeftByUserWhoIsCallingMenu( menuEntry, accessor ) ) {
+				if ( isCommentLeftByUserWhoIsCallingMenu() ) {
 					return TranslatorUtils.translate( "Delete your comment" );
 				}
 
@@ -44,7 +44,7 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), photoComment.getId() );
+	public boolean isAccessibleFor() {
+		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), menuEntry.getId() );
 	}
 }

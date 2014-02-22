@@ -38,12 +38,12 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuI
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, accessor ) ) {
+	public boolean isAccessibleFor() {
+		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor( photoComment, accessor )
-			   && getPhotoService().getPhotoQtyByUser( photoComment.getCommentAuthor().getId() ) > minPhotosForMenu( photoComment );
+		return super.isAccessibleFor()
+			   && getPhotoService().getPhotoQtyByUser( menuEntry.getCommentAuthor().getId() ) > minPhotosForMenu();
 	}
 }

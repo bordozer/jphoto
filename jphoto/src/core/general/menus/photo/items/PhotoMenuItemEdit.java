@@ -39,7 +39,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
-		return services.getSecurityService().userCanEditPhoto( userWhoIsCallingMenu, photo );
+	public boolean isAccessibleFor() {
+		return services.getSecurityService().userCanEditPhoto( accessor, menuEntry );
 	}
 }

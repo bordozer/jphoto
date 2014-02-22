@@ -38,7 +38,7 @@ public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor() {
 		return true;
 	}
 }

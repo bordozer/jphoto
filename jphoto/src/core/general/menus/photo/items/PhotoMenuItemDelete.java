@@ -39,7 +39,7 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
-		return services.getSecurityService().userCanDeletePhoto( userWhoIsCallingMenu, photo );
+	public boolean isAccessibleFor() {
+		return services.getSecurityService().userCanDeletePhoto( accessor, menuEntry );
 	}
 }

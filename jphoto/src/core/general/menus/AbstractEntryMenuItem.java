@@ -22,7 +22,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public abstract EntryMenuOperationType getEntryMenuType();
 
-	public abstract boolean isAccessibleFor( final T menuEntry, final User accessor );
+	public abstract boolean isAccessibleFor();
 
 	public abstract AbstractEntryMenuItemCommand getMenuItemCommand();
 

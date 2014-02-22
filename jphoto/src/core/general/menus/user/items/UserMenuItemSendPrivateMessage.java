@@ -36,13 +36,13 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final User user, final User userWhoIsCallingMenu ) {
-		if ( ! UserUtils.isUsersEqual( userWhoIsCallingMenu, user ) && isSuperAdminUser( userWhoIsCallingMenu ) ) {
+	public boolean isAccessibleFor() {
+		if ( ! UserUtils.isUsersEqual( accessor, menuEntry ) && isSuperAdminUser( accessor ) ) {
 			return true;
 		}
 
-		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && ! isMenuCallerIsSeeingOwnMenu( user, userWhoIsCallingMenu )
-			   && ! getFavoritesService().isUserInBlackListOfUser( user.getId(), userWhoIsCallingMenu.getId() );
+		return isUserWhoIsCallingMenuLogged( accessor )
+			   && ! isMenuCallerIsSeeingOwnMenu()
+			   && ! getFavoritesService().isUserInBlackListOfUser( menuEntry.getId(), accessor.getId() );
 	}
 }

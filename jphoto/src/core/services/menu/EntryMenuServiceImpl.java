@@ -143,16 +143,9 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<? extends PopupMenuAssignable>>() {
 			@Override
 			public boolean evaluate( final AbstractEntryMenuItem<? extends PopupMenuAssignable> abstractEntryMenuItem ) {
-				return abstractEntryMenuItem.isAccessibleFor( menuEntry, accessor );
+				return abstractEntryMenuItem.isAccessibleFor();
 			}
 		} );
-
-		/*CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<T>>() {
-			@Override
-			public boolean evaluate( final AbstractEntryMenuItem<T> commentMenuItem ) {
-				return commentMenuItem.isAccessibleFor( menuEntry, accessor );
-			}
-		} );*/
 
 		removeSpareSeparators( menuItems );
 

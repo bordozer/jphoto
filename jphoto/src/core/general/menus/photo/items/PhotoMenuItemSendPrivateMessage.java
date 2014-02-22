@@ -24,7 +24,7 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
-			private User photoAuthor = getPhotoAuthor( menuEntry );
+			private User photoAuthor = getPhotoAuthor();
 
 			@Override
 			public String getMenuText() {
@@ -39,17 +39,17 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final Photo photo, final User userWhoIsCallingMenu ) {
+	public boolean isAccessibleFor() {
 
-		if ( isSuperAdminUser( userWhoIsCallingMenu ) && ! UserUtils.isUsersEqual( userWhoIsCallingMenu, getPhotoAuthor( photo.getId() ) ) ) {
+		if ( isSuperAdminUser( accessor ) && ! UserUtils.isUsersEqual( accessor, getPhotoAuthor() ) ) {
 			return true;
 		}
 
-		return isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && ! hideMenuItemBecauseEntryOfMenuCaller( photo, userWhoIsCallingMenu )
-			   && isUserWhoIsCallingMenuLogged( userWhoIsCallingMenu )
-			   && super.isAccessibleFor( photo, userWhoIsCallingMenu )
-			   && ! getFavoritesService().isUserInBlackListOfUser( photo.getUserId(), userWhoIsCallingMenu.getId() );
+		return isUserWhoIsCallingMenuLogged( accessor )
+			   && ! hideMenuItemBecauseEntryOfMenuCaller()
+			   && isUserWhoIsCallingMenuLogged( accessor )
+			   && super.isAccessibleFor()
+			   && ! getFavoritesService().isUserInBlackListOfUser( menuEntry.getUserId(), accessor.getId() );
 
 	}
 }

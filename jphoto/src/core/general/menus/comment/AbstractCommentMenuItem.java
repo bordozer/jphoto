@@ -14,57 +14,51 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		return ! isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, accessor );
+	public boolean isAccessibleFor() {
+		return ! isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod();
 	}
 
-	final protected boolean isUserWhoIsCallingMenuOwnerOfThePhoto( final PhotoComment photoComment, final User accessor ) {
-		return services.getSecurityService().userOwnThePhoto( accessor, getPhoto( photoComment ) );
+	final protected boolean isUserWhoIsCallingMenuOwnerOfThePhoto() {
+		return services.getSecurityService().userOwnThePhoto( accessor, getPhoto() );
 	}
 
-	private Photo getPhoto( final PhotoComment photoComment ) {
-		return getPhotoService().load( photoComment.getPhotoId() );
+	private Photo getPhoto() {
+		return getPhotoService().load( menuEntry.getPhotoId() );
 	}
 
-	final protected boolean isCommentLeftByUserWhoIsCallingMenu( final PhotoComment photoComment, final User accessor ) {
-		return UserUtils.isUsersEqual( photoComment.getCommentAuthor(), accessor );
+	final protected boolean isCommentLeftByUserWhoIsCallingMenu() {
+		return UserUtils.isUsersEqual( menuEntry.getCommentAuthor(), accessor );
 	}
 
-	protected User getCommentAuthor( final int commentId ) {
-		final PhotoComment photoComment = services.getPhotoCommentService().load( commentId );
-		return photoComment.getCommentAuthor();
+	protected boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() {
+		return services.getSecurityService().isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( menuEntry, accessor );
 	}
 
-	protected boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( final PhotoComment photoComment, final User accessor ) {
-		return services.getSecurityService().isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, accessor );
-	}
-
-	protected int minPhotosForMenu( final PhotoComment photoComment ) {
-		if ( isCommentAuthorOwnerOfPhoto( photoComment ) ) {
+	protected int minPhotosForMenu() {
+		if ( isCommentAuthorOwnerOfPhoto() ) {
 			return 1;
 		}
 
 		return 0;
 	}
 
-	protected boolean isCommentAuthorOwnerOfPhoto( final PhotoComment photoComment ) {
-		final User commentAuthor = photoComment.getCommentAuthor();
-
-		final User photoAuthor = getPhotoAuthor( photoComment );
+	protected boolean isCommentAuthorOwnerOfPhoto() {
+		final User commentAuthor = menuEntry.getCommentAuthor();
+		final User photoAuthor = getPhotoAuthor();
 
 		return UserUtils.isUsersEqual( photoAuthor, commentAuthor );
 	}
 
-	protected User getPhotoAuthor( final PhotoComment photoComment ) {
-		final Photo photo = getPhotoService().load( photoComment.getPhotoId() );
+	protected User getPhotoAuthor() {
+		final Photo photo = getPhotoService().load( menuEntry.getPhotoId() );
 		return getUserService().load( photo.getUserId() );
 	}
 
-	protected boolean isCommentOfMenuCaller( final PhotoComment photoComment, final User accessor ) {
-		return UserUtils.isUsersEqual( accessor, photoComment.getCommentAuthor() );
+	protected boolean isCommentOfMenuCaller() {
+		return UserUtils.isUsersEqual( accessor, menuEntry.getCommentAuthor() );
 	}
 
-	protected boolean hideMenuItemBecauseEntryOfMenuCaller( final PhotoComment photoComment, final User accessor ) {
-		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentOfMenuCaller( photoComment, accessor );
+	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
+		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentOfMenuCaller();
 	}
 }

@@ -18,7 +18,7 @@ public class MenuItemSeparator<T extends PopupMenuAssignable> extends AbstractEn
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PopupMenuAssignable menuEntry, final User accessor ) {
+	public boolean isAccessibleFor() {
 		return true;
 	}
 

@@ -43,14 +43,14 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuIt
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		if ( hideMenuItemBecauseEntryOfMenuCaller( photoComment, accessor ) ) {
+	public boolean isAccessibleFor() {
+		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		final Genre genre = getGenre( photoComment );
-		return super.isAccessibleFor( photoComment, accessor )
-			   && getPhotoService().getPhotoQtyByUserAndGenre( photoComment.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu( photoComment );
+		final Genre genre = getGenre( menuEntry );
+		return super.isAccessibleFor()
+			   && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu();
 	}
 
 	protected Genre getGenre( final PhotoComment photoComment ) {

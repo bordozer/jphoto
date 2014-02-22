@@ -39,9 +39,9 @@ public class CommentMenuItemBlackListRemove extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		final User commentAuthor = photoComment.getCommentAuthor();
-		return super.isAccessibleFor( photoComment, accessor )
+	public boolean isAccessibleFor() {
+		final User commentAuthor = menuEntry.getCommentAuthor();
+		return super.isAccessibleFor()
 			   && isUserWhoIsCallingMenuLogged( accessor )
 			   && ! UserUtils.isUsersEqual( commentAuthor, accessor )
 			   && getFavoritesService().isUserInBlackListOfUser( accessor.getId(), commentAuthor.getId() );

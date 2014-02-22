@@ -33,7 +33,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		entrySubMenu = new EntryMenu( 0, EntryMenuType.COMMENT, getSubMenus() ); // TODO: menu id?
+		entrySubMenu = new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus() );
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -50,8 +50,8 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		return services.getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu( photoComment, accessor );
+	public boolean isAccessibleFor() {
+		return services.getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu();
 	}
 
 	public EntryMenu getEntrySubMenu() {

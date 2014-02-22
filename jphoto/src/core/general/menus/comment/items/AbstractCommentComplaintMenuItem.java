@@ -12,9 +12,9 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
+	public boolean isAccessibleFor() {
 		return isUserWhoIsCallingMenuLogged( accessor )
 			   && !isSuperAdminUser( accessor.getId() )
-			   && !isCommentLeftByUserWhoIsCallingMenu( photoComment, accessor );
+			   && !isCommentLeftByUserWhoIsCallingMenu();
 	}
 }

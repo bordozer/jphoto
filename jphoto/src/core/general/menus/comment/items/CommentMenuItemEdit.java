@@ -25,7 +25,7 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				if ( isCommentLeftByUserWhoIsCallingMenu( menuEntry, accessor ) ) {
+				if ( isCommentLeftByUserWhoIsCallingMenu() ) {
 					return TranslatorUtils.translate( "Edit your comment" );
 				}
 
@@ -40,7 +40,7 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor( final PhotoComment photoComment, final User accessor ) {
-		return services.getSecurityService().userCanEditPhotoComment( accessor, photoComment );
+	public boolean isAccessibleFor() {
+		return services.getSecurityService().userCanEditPhotoComment( accessor, menuEntry );
 	}
 }
