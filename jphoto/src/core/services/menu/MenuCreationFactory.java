@@ -152,6 +152,12 @@ public class MenuCreationFactory {
 				case COMMENT_ADMIN_SUB_MENU:
 					menuItems.add( new CommentAdminSubMenuItem( photoComment, accessor, services ) );
 					break;
+				case ADMIN_MENU_ITEM_EDIT:
+					menuItems.add( new CommentMenuItemEditAdmin( photoComment, accessor, services ) );
+					break;
+				case ADMIN_MENU_ITEM_DELETE:
+					menuItems.add( new CommentMenuItemDeleteAdmin( photoComment, accessor, services ) );
+					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new CommentAdminSubMenuItemLockUser( photoComment, accessor, services ) );
 					break;

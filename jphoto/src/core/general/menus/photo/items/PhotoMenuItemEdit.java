@@ -26,7 +26,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Edit your photo" : "Edit photo (ADMIN)" );
+				return TranslatorUtils.translate( getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Edit your photo" : "Edit photo (ADMIN)" );
 			}
 
 			@Override
@@ -38,6 +38,6 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().userCanEditPhoto( accessor, menuEntry );
+		return getSecurityService().userCanEditPhoto( accessor, menuEntry );
 	}
 }

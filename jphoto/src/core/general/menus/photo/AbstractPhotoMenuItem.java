@@ -22,7 +22,7 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 	}
 
 	protected boolean isPhotoIsWithinAnonymousPeriod() {
-		return services.getSecurityService().isPhotoAuthorNameMustBeHidden( menuEntry, accessor );
+		return getSecurityService().isPhotoAuthorNameMustBeHidden( menuEntry, accessor );
 	}
 
 	protected boolean isPhotoOfMenuCaller() {

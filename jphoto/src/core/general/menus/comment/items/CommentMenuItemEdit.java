@@ -7,6 +7,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
+import utils.UserUtils;
 
 public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
@@ -25,11 +26,7 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				if ( isCommentLeftByUserWhoIsCallingMenu() ) {
-					return TranslatorUtils.translate( "Edit your comment" );
-				}
-
-				return TranslatorUtils.translate(  "Edit comment (ADMIN)" );
+				return TranslatorUtils.translate( "Edit your comment" );
 			}
 
 			@Override
@@ -41,6 +38,15 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().userCanEditPhotoComment( accessor, menuEntry );
+
+		if ( menuEntry.isCommentDeleted() ) {
+			return false;
+		}
+
+		if ( ! UserUtils.isLoggedUser( accessor ) ) {
+			return false;
+		}
+
+		return getSecurityService().userOwnThePhotoComment( accessor, menuEntry );
 	}
 }

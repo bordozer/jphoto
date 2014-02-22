@@ -8,37 +8,35 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
+public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
-	public CommentAdminSubMenuItemLockUser( final PhotoComment photoComment, final User accessor, final Services services ) {
+	public CommentMenuItemDeleteAdmin( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
 	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
-		return EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER;
+		return EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE;
 	}
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-
-		final User commentAuthor = menuEntry.getCommentAuthor();
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock user: $1", commentAuthor.getNameEscaped() );
+				return TranslatorUtils.translate(  "Delete comment (ADMIN)" );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() );
+				return String.format( "deleteComment( %d ); return false;", getId() );
 			}
 		};
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor.getId() );
+		return getSecurityService().isSuperAdminUser( accessor );
 	}
 }

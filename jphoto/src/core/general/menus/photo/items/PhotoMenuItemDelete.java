@@ -26,7 +26,7 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( services.getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Delete your photo" : "Delete photo (ADMIN)" );
+				return TranslatorUtils.translate( getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Delete your photo" : "Delete photo (ADMIN)" );
 			}
 
 			@Override
@@ -38,6 +38,6 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().userCanDeletePhoto( accessor, menuEntry );
+		return getSecurityService().userCanDeletePhoto( accessor, menuEntry );
 	}
 }

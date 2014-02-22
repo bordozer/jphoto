@@ -16,7 +16,8 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	private EntryMenu entrySubMenu;
 
 	final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.MENU_ITEM_DELETE
+		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
+		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
 		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
@@ -51,7 +52,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu();
+		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu();
 	}
 
 	public EntryMenu getEntrySubMenu() {

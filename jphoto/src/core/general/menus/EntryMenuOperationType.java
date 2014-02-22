@@ -32,6 +32,8 @@ public enum EntryMenuOperationType {
 	, COMMENT_ADMIN_SUB_MENU( 71, "Admin comment submenu", "menu_sub_menu.png" )
 
 	, ADMIN_SUB_MENU_LOCK_USER( 81, "Lock user", "lock_user.png" )
+	, ADMIN_MENU_ITEM_EDIT( 82, "Edit", "menu_edit.png" )
+	, ADMIN_MENU_ITEM_DELETE( 83, "Delete", "menu_delete.png" )
 
 	;
 

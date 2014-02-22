@@ -19,10 +19,10 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	final protected boolean isUserWhoIsCallingMenuOwnerOfThePhoto() {
-		return services.getSecurityService().userOwnThePhoto( accessor, getPhoto() );
+		return getSecurityService().userOwnThePhoto( accessor, getPhoto() );
 	}
 
-	private Photo getPhoto() {
+	protected Photo getPhoto() {
 		return getPhotoService().load( menuEntry.getPhotoId() );
 	}
 
@@ -31,7 +31,7 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	protected boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() {
-		return services.getSecurityService().isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( menuEntry, accessor );
+		return getSecurityService().isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( menuEntry, accessor );
 	}
 
 	protected int minPhotosForMenu() {
@@ -60,5 +60,9 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
 		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentOfMenuCaller();
+	}
+
+	protected User getCommentAuthor() {
+		return menuEntry.getCommentAuthor();
 	}
 }

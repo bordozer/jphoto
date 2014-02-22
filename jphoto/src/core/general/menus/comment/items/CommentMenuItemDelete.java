@@ -7,6 +7,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
+import utils.UserUtils;
 
 public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
@@ -29,11 +30,7 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 					return TranslatorUtils.translate( "Delete your comment" );
 				}
 
-				if ( services.getSecurityService().userOwnThePhoto( accessor, menuEntry.getPhotoId() ) ) {
-					return TranslatorUtils.translate( "Delete comment (as photo author)" );
-				}
-
-				return TranslatorUtils.translate(  "Delete comment (ADMIN)" );
+				return TranslatorUtils.translate( "Delete comment (as photo author)" );
 			}
 
 			@Override
@@ -45,6 +42,6 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return services.getSecurityService().userCanDeletePhotoComment( accessor.getId(), getId() );
+		return UserUtils.isLoggedUser( accessor ) && ( ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) || UserUtils.isUsersEqual( accessor, getCommentAuthor() ) ) );
 	}
 }

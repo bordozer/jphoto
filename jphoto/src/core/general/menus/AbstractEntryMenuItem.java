@@ -4,6 +4,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
+import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.user.UserService;
 import utils.UserUtils;
@@ -79,5 +80,13 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	protected int getId() {
 		return menuEntry.getId();
+	}
+
+	/*protected String throwIllegalStateException() {
+		throw new IllegalStateException( String.format( "Attempt to call popup inaccessible popup menu. Accessor: %s, entry: %s", accessor, menuEntry ) );
+	}*/
+
+	protected SecurityService getSecurityService() {
+		return services.getSecurityService();
 	}
 }

@@ -72,6 +72,8 @@ public interface SecurityService {
 
 	boolean isSuperAdminUser( final int userId );
 
+	boolean isSuperAdminUser( final User user );
+
 	List<User> getSuperAdminUsers();
 
 	void assertSuperAdminAccess( final User currentUser );

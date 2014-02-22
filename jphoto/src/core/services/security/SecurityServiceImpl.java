@@ -499,6 +499,11 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
+	public boolean isSuperAdminUser( final User user ) {
+		return isSuperAdminUser( user.getId() );
+	}
+
+	@Override
 	public List<User> getSuperAdminUsers() {
 		final List<String> adminUserIds = systemVarsService.getAdminUserIds();
 
