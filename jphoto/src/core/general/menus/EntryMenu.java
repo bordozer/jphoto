@@ -4,23 +4,23 @@ import java.util.List;
 
 public class EntryMenu {
 
-	private final int entryId;
+	private final PopupMenuAssignable menuEntry;
 	private final EntryMenuType entryMenuType;
 
 	private final List<? extends AbstractEntryMenuItem> entryMenuItems;
 
-	public EntryMenu( final int entryId, final EntryMenuType entryMenuType, final List<? extends AbstractEntryMenuItem> entryMenuItems ) {
-		this.entryId = entryId;
+	public EntryMenu( final PopupMenuAssignable menuEntry, final EntryMenuType entryMenuType, final List<? extends AbstractEntryMenuItem> entryMenuItems ) {
+		this.menuEntry = menuEntry;
 		this.entryMenuType = entryMenuType;
 		this.entryMenuItems = entryMenuItems;
 	}
 
 	public int getEntryId() {
-		return entryId;
+		return menuEntry.getId();
 	}
 
 	public String getMenuId() {
-		return String.format( "menu_%d_%d", entryMenuType.getId(), entryId );
+		return String.format( "menu_%d_%d", entryMenuType.getId(), getEntryId() );
 	}
 
 	public List<? extends AbstractEntryMenuItem> getEntryMenuItems() {

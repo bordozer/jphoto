@@ -134,12 +134,10 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 	private EntryMenu getGenericMenu( final PopupMenuAssignable menuEntry, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes, final EntryMenuType menuType ) {
 
-		final MenuCreationFactory<T> factory = new MenuCreationFactory<>();
 		final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
 		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
-			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuEntries = factory.getAllMenuEntries( menuEntry, accessor, entryMenuOperationType, menuType, services );
-			menuItems.addAll( menuEntries );
+			menuItems.addAll( MenuCreationFactory.getAllMenuEntries( menuEntry, accessor, entryMenuOperationType, menuType, services ) );
 		}
 
 		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<? extends PopupMenuAssignable>>() {
@@ -158,7 +156,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		removeSpareSeparators( menuItems );
 
-		return new EntryMenu( menuEntry.getId(), menuType, menuItems );
+		return new EntryMenu( menuEntry, menuType, menuItems );
 	}
 
 	private void removeSpareSeparators( final List<? extends AbstractEntryMenuItem> menuItems ) {
