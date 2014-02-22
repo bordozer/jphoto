@@ -11,7 +11,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuOperationType;
 import core.services.entry.ActivityStreamService;
-import core.services.entry.EntryMenuService;
+import core.services.menu.EntryMenuService;
 import core.services.system.ConfigurationService;
 import core.services.entry.GenreService;
 import core.services.notification.NotificationService;

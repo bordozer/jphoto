@@ -24,7 +24,7 @@ import core.services.conversion.PhotoPreviewService;
 import core.services.dao.PhotoDao;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
-import core.services.entry.EntryMenuService;
+import core.services.menu.EntryMenuService;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;

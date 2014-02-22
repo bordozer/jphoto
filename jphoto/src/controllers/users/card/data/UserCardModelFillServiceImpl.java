@@ -16,7 +16,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
-import core.services.entry.EntryMenuService;
+import core.services.menu.EntryMenuService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoListCriteriasService;

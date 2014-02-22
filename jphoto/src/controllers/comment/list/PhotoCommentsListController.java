@@ -7,7 +7,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.photo.PhotoPreviewWrapper;
-import core.services.entry.EntryMenuService;
+import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;

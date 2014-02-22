@@ -1,4 +1,4 @@
-package core.services.entry;
+package core.services.menu;
 
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
