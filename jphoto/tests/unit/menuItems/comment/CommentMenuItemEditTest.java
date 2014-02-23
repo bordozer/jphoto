@@ -4,7 +4,6 @@ import core.general.menus.comment.items.CommentMenuItemEdit;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;

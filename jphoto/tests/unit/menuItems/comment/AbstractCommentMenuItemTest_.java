@@ -1,14 +1,11 @@
 package menuItems.comment;
 
 import common.AbstractTestCase;
-import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
 import core.services.security.ServicesImpl;
-import core.services.system.ConfigurationService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 

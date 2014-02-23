@@ -44,6 +44,6 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return isUserWhoIsCallingMenuLogged( accessor ) && !isCommentLeftByUserWhoIsCallingMenu();
+		return isUserWhoIsCallingMenuLogged( accessor ) && !isCommentLeftByUserWhoIsCallingMenu(); // TODO: should be accessible for deleted comment?
 	}
 }
