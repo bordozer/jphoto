@@ -37,7 +37,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "replyToComment( %d ); return false;", getId() );
+				return String.format( "replyToComment( %d ); return false;", menuEntry.getCommentAuthor().getId() );
 			}
 		};
 	}

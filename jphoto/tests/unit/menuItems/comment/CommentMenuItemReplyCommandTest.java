@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class CommentMenuItemReplyTitleTest extends AbstractCommentMenuItemTest_ {
+public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void replyToUsualUserInNotAnonymousPeriodTest() {
@@ -49,6 +49,14 @@ public class CommentMenuItemReplyTitleTest extends AbstractCommentMenuItemTest_ 
 		comment.setCommentAuthor( user );
 
 		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
+	}
+
+	@Test
+	public void replyToJSFunctionTest() {
+		final User user = testData.getJustUser(); // Does not matter
+		final Services services = getServicesForTest( user, false );
+
+		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "replyToComment( %d ); return false;", testData.getCommentAuthor().getId() ) );
 	}
 
 	private ServicesImpl getServicesForTest( final User user, final Boolean isCommentAuthorNameInAnonymousPeriod ) {
