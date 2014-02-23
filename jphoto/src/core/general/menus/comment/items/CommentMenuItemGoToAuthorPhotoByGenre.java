@@ -4,7 +4,6 @@ import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
-import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
@@ -51,12 +50,5 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuIt
 		final Genre genre = getGenre( menuEntry );
 		return super.isAccessibleFor()
 			   && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu();
-	}
-
-	protected Genre getGenre( final PhotoComment photoComment ) {
-		final int photoId = photoComment.getPhotoId();
-		final Photo photo = getPhotoService().load( photoId );
-
-		return services.getGenreService().load( photo.getGenreId() );
 	}
 }

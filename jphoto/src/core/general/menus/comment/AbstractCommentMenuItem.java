@@ -1,5 +1,6 @@
 package core.general.menus.comment;
 
+import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -64,5 +65,12 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 
 	protected User getCommentAuthor() {
 		return menuEntry.getCommentAuthor();
+	}
+
+	protected Genre getGenre( final PhotoComment photoComment ) {
+		final int photoId = photoComment.getPhotoId();
+		final Photo photo = getPhotoService().load( photoId );
+
+		return services.getGenreService().load( photo.getGenreId() );
 	}
 }
