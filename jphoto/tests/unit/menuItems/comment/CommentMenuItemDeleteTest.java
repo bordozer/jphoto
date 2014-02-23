@@ -80,4 +80,13 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDelete( comment, user, services ).isAccessibleFor() );
 	}
+
+	@Test
+	public void commandTest() {
+
+		final User user = testData.getCommentAuthor();
+		final Services services = getServices( testData, user );
+
+		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "deleteComment( %d ); return false;", testData.getComment().getId() ) );
+	}
 }
