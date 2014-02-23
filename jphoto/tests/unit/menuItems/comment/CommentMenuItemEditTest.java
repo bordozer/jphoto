@@ -21,7 +21,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void commentAuthorCanEditCommentTest() {
+	public void onlyCommentAuthorCanEditCommentTest() {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 

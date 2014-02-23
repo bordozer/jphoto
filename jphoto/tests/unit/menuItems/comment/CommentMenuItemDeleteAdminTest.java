@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanNotSeeLockUserSubMenuItemTest() {
+	public void notLoggedUserCanNotDeleteCommentAdminSubMenuItemTest() {
 		final User user = User.NOT_LOGGED_USER;
 		final Services services = getServices( testData, user );
 
@@ -19,7 +19,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	}
 
 	@Test
-	public void usualUserCanNotSeeLockUserAdminSubMenuItemTest() {
+	public void usualUserCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getJustUser();
 		final Services services = getServices( testData, user );
 
@@ -27,7 +27,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	}
 
 	@Test
-	public void photoAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
+	public void photoAuthorCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getPhotoAuthor();
 		final Services services = getServices( testData, user );
 
@@ -35,7 +35,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	}
 
 	@Test
-	public void commentAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
+	public void commentAuthorCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
@@ -43,7 +43,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	}
 
 	@Test
-	public void adminCanSeeLockUserAdminSubMenuItemTest() {
+	public void adminCanSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = SUPER_MEGA_ADMIN;
 		final Services services = getServices( testData, user );
 

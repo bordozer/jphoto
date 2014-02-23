@@ -1,5 +1,6 @@
 package core.general.menus.comment.items;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
@@ -37,6 +38,8 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor );
+		return !menuEntry.isCommentDeleted()
+			   && getSecurityService().isSuperAdminUser( accessor )
+			   && services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_PHOTO_COMMENTS );
 	}
 }
