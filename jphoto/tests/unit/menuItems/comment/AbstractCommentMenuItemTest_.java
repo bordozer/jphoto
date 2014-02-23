@@ -40,6 +40,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 
 		EasyMock.expect( securityService.userOwnThePhotoComment( user, testData.getComment() ) ).andReturn( testData.getComment().getCommentAuthor().getId() == user.getId() ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( user.getId() ) ).andReturn( SUPER_ADMIN.getId() == user.getId() || SUPER_MEGA_ADMIN.getId() == user.getId() ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( user ) ).andReturn( SUPER_ADMIN.getId() == user.getId() || SUPER_MEGA_ADMIN.getId() == user.getId() ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 
