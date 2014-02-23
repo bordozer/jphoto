@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.services.security.Services;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -16,7 +17,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
-		assertTrue( WRONG_MENU_TEXT, new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand().getMenuText().equals( "Edit your comment" ) );
+		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Edit your comment" );
 	}
 
 	@Test

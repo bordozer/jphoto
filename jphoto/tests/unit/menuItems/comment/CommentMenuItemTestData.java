@@ -16,13 +16,13 @@ class CommentMenuItemTestData {
 
 	CommentMenuItemTestData() {
 		commentAuthor = new User( 111 );
-		commentAuthor.setName( "commentAuthor" );
+		commentAuthor.setName( "Comment Author" );
 
 		photoAuthor = new User( 222 );
-		commentAuthor.setName( "photoAuthor" );
+		commentAuthor.setName( "Photo Author" );
 
 		justUser = new User( 333 );
-		commentAuthor.setName( "justUser" );
+		commentAuthor.setName( "Just a User" );
 
 		photo = new Photo();
 		photo.setId( 567 );
@@ -33,6 +33,7 @@ class CommentMenuItemTestData {
 		comment.setId( 345 );
 		comment.setPhotoId( photo.getId() );
 		comment.setCommentAuthor( commentAuthor );
+		comment.setCommentText( "Comment text" );
 	}
 
 	public User getCommentAuthor() {
