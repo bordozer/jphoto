@@ -86,10 +86,10 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
 		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+//		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
-		menuItems.add( EntryMenuOperationType.BLACK_LIST_ADD );
-		menuItems.add( EntryMenuOperationType.BLACK_LIST_REMOVE );
+//		menuItems.add( EntryMenuOperationType.BLACK_LIST_ADD );
+//		menuItems.add( EntryMenuOperationType.BLACK_LIST_REMOVE );
 
 		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
