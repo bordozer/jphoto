@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanNotSeeAdminSubMenuCommentTest() {
+	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
 		final User user = User.NOT_LOGGED_USER;
 		final Services services = getServices( testData, user );
 
@@ -20,7 +20,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void usualUserCanNotSeeAdminSubMenuCommentTest() {
+	public void usualUserCanNotSeeAdminSubMenuTest() {
 		final User user = testData.getJustUser();
 		final Services services = getServices( testData, user );
 
@@ -28,7 +28,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void photoAuthorCanNotSeeAdminSubMenuCommentTest() {
+	public void photoAuthorCanNotSeeAdminSubMenuTest() {
 		final User user = testData.getPhotoAuthor();
 		final Services services = getServices( testData, user );
 
@@ -36,7 +36,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void commentAuthorCanNotSeeAdminSubMenuCommentTest() {
+	public void commentAuthorCanNotSeeAdminSubMenuTest() {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
@@ -44,7 +44,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void adminCanNotSeeAdminSubMenuIfThereIsHisCommentTest() {
+	public void adminCanNotSeeAdminSubMenuIfThereIsHisTest() {
 		final User user = SUPER_MEGA_ADMIN;
 		final Services services = getServices( testData, user );
 
@@ -55,7 +55,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	@Test
-	public void adminCanSeeAdminSubMenuCommentTest() {
+	public void adminCanSeeAdminSubMenuTest() {
 		final User user = SUPER_MEGA_ADMIN;
 		final Services services = getServices( testData, user );
 
