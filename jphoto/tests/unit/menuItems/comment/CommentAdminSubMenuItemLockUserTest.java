@@ -1,10 +1,12 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentAdminSubMenuItemLockUser;
 import core.general.user.User;
 import core.services.security.Services;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -48,5 +50,17 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 		final Services services = getServices( testData, user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User user = SUPER_MEGA_ADMIN;
+		final Services services = getServices( testData, user );
+
+		final User commentAuthor = testData.getCommentAuthor();
+		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services ).getMenuItemCommand();
+
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), String.format( "Lock user: %s", commentAuthor.getNameEscaped() ) );
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
 	}
 }

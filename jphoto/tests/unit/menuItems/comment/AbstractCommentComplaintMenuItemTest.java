@@ -8,10 +8,14 @@ import core.general.user.User;
 import core.services.security.Services;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuItemTest_ {
+
+	private static final String SOME_JS_FUNCTION = "someJSFunction();";
+	private static final String MENU_TITLE = "Menu title";
 
 	@Test
 	public void notLoggedUserCanNotComplainTest() {
@@ -64,6 +68,17 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, getMenuItemInstance( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
+	@Test
+	public void commandTest() {
+		final User user = testData.getJustUser(); // Does not matter
+		final Services services = getServices( testData, user );
+
+		final AbstractEntryMenuItemCommand command = getMenuItemInstance( testData.getComment(), user, services ).getMenuItemCommand();
+
+		assertEquals( WRONG_MENU_TEXT, command.getMenuText(), MENU_TITLE );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuCommand(), SOME_JS_FUNCTION );
+	}
+
 	private AbstractCommentComplaintMenuItem getMenuItemInstance( final PhotoComment comment, final User user, final Services services ) {
 		return new AbstractCommentComplaintMenuItem( comment, user, services ) {
 
@@ -74,7 +89,17 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 			@Override
 			public AbstractEntryMenuItemCommand getMenuItemCommand() {
-				return null; //"Does mot matter"
+				return new AbstractEntryMenuItemCommand( EntryMenuOperationType.COMMENT_COMPLAINT_CUSTOM ) {
+					@Override
+					public String getMenuText() {
+						return MENU_TITLE;
+					}
+
+					@Override
+					public String getMenuCommand() {
+						return SOME_JS_FUNCTION;
+					}
+				};
 			}
 		};
 	}
