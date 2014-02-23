@@ -12,19 +12,12 @@ import static org.junit.Assert.assertTrue;
 
 public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 
-	private final CommentMenuItemTestData testData = new CommentMenuItemTestData();
-
-	@Before
-	public void setup() {
-		super.setup();
-	}
-
 	@Test
 	public void commentAuthorMenuTest() {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
-		assertTrue( CommentMenuItemDeleteTest.WRONG_MENU_TEXT, new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand().getMenuText().equals( "Edit your comment" ) );
+		assertTrue( WRONG_MENU_TEXT, new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand().getMenuText().equals( "Edit your comment" ) );
 	}
 
 	@Test
@@ -32,7 +25,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
-		assertTrue( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -40,7 +33,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getPhotoAuthor();
 		final Services services = getServices( testData, user );
 
-		assertFalse( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -48,7 +41,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = User.NOT_LOGGED_USER;
 		final Services services = getServices( testData, user );
 
-		assertFalse( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -56,7 +49,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getJustUser();
 		final Services services = getServices( testData, user );
 
-		assertFalse( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -64,7 +57,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final User user = SUPER_MEGA_ADMIN;
 		final Services services = getServices( testData, user );
 
-		assertFalse( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -75,7 +68,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentDeleted( true );
 
-		assertFalse( CommentMenuItemDeleteTest.MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( comment, user, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( comment, user, services ).isAccessibleFor() );
 	}
 }
 
