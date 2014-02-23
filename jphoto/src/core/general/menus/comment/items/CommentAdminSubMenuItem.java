@@ -13,8 +13,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
-	private EntryMenu entrySubMenu;
-
 	final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
 		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
@@ -33,8 +31,6 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-
-		entrySubMenu = new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus() );
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
@@ -56,7 +52,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return entrySubMenu;
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus() );
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {
