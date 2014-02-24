@@ -24,6 +24,8 @@ public class PhotoList {
 
 	private PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
 
+	private int sortColumnNumber;
+
 	public PhotoList( final List<PhotoInfo> photoInfos, final String photoListTitle ) {
 		this( photoInfos, photoListTitle, true );
 	}
@@ -108,5 +110,13 @@ public class PhotoList {
 
 	public boolean hasPhotos() {
 		return photoInfos != null && ! photoInfos.isEmpty();
+	}
+
+	public int getSortColumnNumber() {
+		return sortColumnNumber;
+	}
+
+	public void setSortColumnNumber( final int sortColumnNumber ) {
+		this.sortColumnNumber = sortColumnNumber;
 	}
 }

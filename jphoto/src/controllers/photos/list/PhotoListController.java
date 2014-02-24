@@ -119,6 +119,7 @@ public class PhotoListController {
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosBestInPeriodUrl( topBestCriterias.getVotingTimeFrom(), topBestCriterias.getVotingTimeTo() ) );
 			topBestData.setTitleData( pageTitlePhotoUtilsService.getPhotosAllData() );
+			topBestData.setSortColumnNumber( 2 );
 
 			photoListDatas.add( topBestData );
 		}
@@ -142,6 +143,7 @@ public class PhotoListController {
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( pageTitlePhotoUtilsService.getPhotosAllDataBest() );
+		data.setSortColumnNumber( 3 );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -166,6 +168,7 @@ public class PhotoListController {
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setTitleData( pageTitlePhotoUtilsService.getPhotosByGenreData( genre ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByGenreLinkBest( genreId ) );
+			topBestData.setSortColumnNumber( 2 );
 
 			photoListDatas.add( topBestData );
 		}
@@ -194,6 +197,7 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( pageTitlePhotoUtilsService.getPhotosByGenreDataBest( genre ) );
 		data.setPhotoListBottomText( genre.getDescription() );
+		data.setSortColumnNumber( 2 );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -220,6 +224,7 @@ public class PhotoListController {
 			topBestData.setTitleData( pageTitlePhotoUtilsService.getPhotosByUser( user ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByUserLinkBest( userId ) );
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
+			topBestData.setSortColumnNumber( 3 );
 
 			photoListDatas.add( topBestData );
 		}
@@ -253,6 +258,7 @@ public class PhotoListController {
 		data.setTitleData( pageTitlePhotoUtilsService.getPhotosByUserBest( user ) );
 		data.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
+		data.setSortColumnNumber( 2 );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -283,6 +289,7 @@ public class PhotoListController {
 			topBestData.setTitleData( pageTitlePhotoUtilsService.getPhotosByUserAndGenre( user, genre ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByUserByGenreLinkBest( userId, genreId ) );
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
+			topBestData.setSortColumnNumber( 3 );
 
 			photoListDatas.add( topBestData );
 		}
@@ -319,6 +326,7 @@ public class PhotoListController {
 		data.setTitleData( pageTitlePhotoUtilsService.getPhotosByUserAndGenreBest( user, genre ) );
 		data.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
+		data.setSortColumnNumber( 2 );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -426,6 +434,7 @@ public class PhotoListController {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( fDateFrom, fDateTo );
 		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
 		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
+//		data.setSortColumnNumber( 2 ); //TODO: highlight sort column ( it is not shown yet )
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -448,6 +457,7 @@ public class PhotoListController {
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setTitleData( pageTitlePhotoUtilsService.getPhotosByMembershipType( membershipType ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
+			topBestData.setSortColumnNumber( 2 );
 
 			photoListDatas.add( topBestData );
 		}
@@ -472,6 +482,7 @@ public class PhotoListController {
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( pageTitlePhotoUtilsService.getPhotosByMembershipTypeBest( membershipType ) );
+		data.setSortColumnNumber( 3 );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -532,6 +543,7 @@ public class PhotoListController {
 		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
+		photoList.setSortColumnNumber( listData.getSortColumnNumber() );
 
 		return photoList;
 	}

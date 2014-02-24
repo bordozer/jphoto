@@ -550,3 +550,11 @@ table.formtable {
 .justify-font {
 	text-align: justify;
 }
+
+.underlined {
+	text-decoration:underline;
+}
+
+.photoPreviewMarks {
+	font-weight: bold;;
+}

@@ -8,6 +8,4 @@
 
 <c:set var="buttonTitle" value="${eco:translate1('$1 - votes', eco:escapeHtml(photo.name))}" />
 
-<a href ="${link}" title="${buttonTitle}">
-	<jsp:doBody />
-</a>
+<a href ="${link}" title="${buttonTitle}"><jsp:doBody /></a>

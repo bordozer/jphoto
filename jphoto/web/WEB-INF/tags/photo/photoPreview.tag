@@ -21,6 +21,7 @@
 
 <%@ attribute name="photoInfo" required="true" type="core.general.photo.PhotoInfo" %>
 <%@ attribute name="isGroupOperationEnabled" required="true" type="java.lang.Boolean" %>
+<%@ attribute name="sortColumnNumber" required="false" type="java.lang.Integer" %>
 
 <c:set var="photo" value="${photoInfo.photo}"/>
 
@@ -119,14 +120,14 @@
 
 	<c:if test="${photoInfo.showStatisticInPhotoList}">
 		<div class="containerPhotoLine" style="font-size: 90%;">
-			<span title="${eco:translate1('Today\'s marks', days )}"><b>${photoInfo.todayMarks}</b></span>
+			<span class="photoPreviewMarks ${sortColumnNumber == 1 ? 'underlined' : ''}" title="${eco:translate1('Today\'s marks', days )}">${photoInfo.todayMarks}</span>
 			/
-			<span title="${eco:translate1('Marks for last $1 days', days )}"><b>${photoInfo.topBestMarks}</b></span>
+			<span class="photoPreviewMarks ${sortColumnNumber == 2 ? 'underlined' : ''}" title="${eco:translate1('Marks for last $1 days', days )}">${photoInfo.topBestMarks}</span>
 			/
-			<b><links:photoMarkList photo="${photo}">${photoInfo.totalMarks}</links:photoMarkList></b>
+			<span class="photoPreviewMarks ${sortColumnNumber == 3 ? 'underlined' : ''}"><links:photoMarkList photo="${photo}">${photoInfo.totalMarks}</links:photoMarkList></span>
 
 			<c:if test="${photoInfo.showPhotoRatingPosition}">
-			/ <span style="color: green" title="${photoInfo.photoRatingPositionDescription}">#<b>${photoInfo.photoRatingPosition}</b></span>
+			/ <span class="photoPreviewMarks" style="color: green" title="${photoInfo.photoRatingPositionDescription}">#${photoInfo.photoRatingPosition}</span>
 			</c:if>
 
 			&nbsp;&nbsp;&nbsp; <html:img8 src="photo_preview_views_icon.png" alt="${eco:translate1('Previews: $1', photoInfo.previewCount)}" /> <links:photoPreviewsList photoInfo="${photoInfo}"/>

@@ -18,7 +18,7 @@ public abstract class AbstractPhotoListData {
 	protected Date photoRatingTimeTo;
 	protected boolean isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos;
 	protected PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
-	protected boolean groupOperationEnabled;
+	private int sortColumnNumber;
 
 	public abstract boolean isGroupOperationEnabled();
 
@@ -92,5 +92,13 @@ public abstract class AbstractPhotoListData {
 
 	public void setPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer ) {
 		this.photoGroupOperationMenuContainer = photoGroupOperationMenuContainer;
+	}
+
+	public int getSortColumnNumber() {
+		return sortColumnNumber;
+	}
+
+	public void setSortColumnNumber( final int sortColumnNumber ) {
+		this.sortColumnNumber = sortColumnNumber;
 	}
 }
