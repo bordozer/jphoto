@@ -16,6 +16,6 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 		return ! menuEntry.isCommentDeleted()
 				&& isUserWhoIsCallingMenuLogged()
 				&& !isSuperAdminUser( accessor.getId() )
-				&& !isCommentLeftByUserWhoIsCallingMenu();
+				&& !isCommentLeftByAccessor();
 	}
 }

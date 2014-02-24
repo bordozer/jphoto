@@ -26,7 +26,7 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				if ( isCommentLeftByUserWhoIsCallingMenu() ) {
+				if ( isCommentLeftByAccessor() ) {
 					return TranslatorUtils.translate( "Delete comment" );
 				}
 

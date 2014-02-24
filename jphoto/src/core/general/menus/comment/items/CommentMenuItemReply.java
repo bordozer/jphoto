@@ -1,10 +1,12 @@
 package core.general.menus.comment.items;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.general.user.UserStatus;
 import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 import utils.TranslatorUtils;
@@ -32,7 +34,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 					return TranslatorUtils.translate( "Reply to photo author ( anonymous )" );
 				}
 
-				return TranslatorUtils.translate( "Reply to $1$2", menuEntry.getCommentAuthor().getNameEscaped(), isCommentAuthorOwnerOfPhoto() ? " ( photo's author )" : StringUtils.EMPTY );
+				return TranslatorUtils.translate( "Reply to $1$2", menuEntry.getCommentAuthor().getNameEscaped(), isCommentAuthorOwnerOfThePhoto() ? " ( photo's author )" : StringUtils.EMPTY );
 			}
 
 			@Override
@@ -44,6 +46,21 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return isUserWhoIsCallingMenuLogged() && !isCommentLeftByUserWhoIsCallingMenu(); // TODO: should be accessible for deleted comment?
+
+		if ( ! isUserWhoIsCallingMenuLogged() ) {
+			return false;
+		}
+
+		if ( isCommentLeftByAccessor() ) {
+			return false;
+		}
+
+		// TODO: should be accessible for deleted comment?
+
+		if ( accessor.getUserStatus() == UserStatus.CANDIDATE ) {
+			return services.getConfigurationService().getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS );
+		}
+
+		return true;
 	}
 }

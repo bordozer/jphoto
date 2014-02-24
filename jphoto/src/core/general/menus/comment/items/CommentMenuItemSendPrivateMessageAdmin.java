@@ -44,7 +44,7 @@ public class CommentMenuItemSendPrivateMessageAdmin extends AbstractCommentMenuI
 			return false;
 		}
 
-		return ! isCommentLeftByUserWhoIsCallingMenu();
+		return ! isCommentLeftByAccessor();
 	}
 
 	@Override

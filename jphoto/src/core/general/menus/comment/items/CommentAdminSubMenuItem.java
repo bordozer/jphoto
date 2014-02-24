@@ -50,7 +50,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu();
+		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByAccessor();
 	}
 
 	public EntryMenu getEntrySubMenu() {

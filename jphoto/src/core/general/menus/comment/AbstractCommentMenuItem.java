@@ -19,16 +19,8 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 		return ! isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod();
 	}
 
-	final protected boolean isAccessorOwnesThePhoto() {
-		return getSecurityService().userOwnThePhoto( accessor, getPhoto() );
-	}
-
 	protected Photo getPhoto() {
 		return getPhotoService().load( menuEntry.getPhotoId() );
-	}
-
-	final protected boolean isCommentLeftByUserWhoIsCallingMenu() {
-		return UserUtils.isUsersEqual( menuEntry.getCommentAuthor(), accessor );
 	}
 
 	protected boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() {
@@ -36,14 +28,22 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	protected int minPhotosForMenu() {
-		if ( isCommentAuthorOwnerOfPhoto() ) {
+		if ( isCommentAuthorOwnerOfThePhoto() ) {
 			return 1;
 		}
 
 		return 0;
 	}
 
-	protected boolean isCommentAuthorOwnerOfPhoto() {
+	final protected boolean isCommentLeftByAccessor() {
+		return UserUtils.isUsersEqual( menuEntry.getCommentAuthor(), accessor );
+	}
+
+	final protected boolean isAccessorOwnerOfTheThePhoto() {
+		return getSecurityService().userOwnThePhoto( accessor, getPhoto() );
+	}
+
+	protected boolean isCommentAuthorOwnerOfThePhoto() {
 		final Photo photo = getPhotoService().load( menuEntry.getPhotoId() );
 		return UserUtils.isUsersEqual( photo.getUserId(), menuEntry.getCommentAuthor().getId() );
 	}
@@ -54,7 +54,7 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
-		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentLeftByUserWhoIsCallingMenu();
+		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentLeftByAccessor();
 	}
 
 	protected User getCommentAuthor() {

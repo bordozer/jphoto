@@ -44,13 +44,13 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 			return false;
 		}
 
-		if ( isCommentLeftByUserWhoIsCallingMenu() ) {
+		if ( isCommentLeftByAccessor() ) {
 			return false;
 		}
 
 		final boolean isAccessorInBlackListOfCommentAuthor = isAccessorInTheBlackListOfCommentAuthor();
 
-		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = isAccessorOwnesThePhoto() && !isAccessorInBlackListOfCommentAuthor;
+		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = isAccessorOwnerOfTheThePhoto() && !isAccessorInBlackListOfCommentAuthor;
 		if ( photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor ) {
 			return true;
 		}
