@@ -13,9 +13,22 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 
 	@Override
 	public boolean isAccessibleFor() {
-		return ! menuEntry.isCommentDeleted()
-				&& isUserWhoIsCallingMenuLogged()
-				&& !isSuperAdminUser( accessor.getId() )
-				&& !isCommentLeftByAccessor();
+		if ( menuEntry.isCommentDeleted() ) {
+			return false;
+		}
+
+		if ( ! isUserWhoIsCallingMenuLogged() ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor.getId() ) ) {
+			return false;
+		}
+
+		if ( isCommentLeftByAccessor() ) {
+			return false;
+		}
+
+		return true;
 	}
 }
