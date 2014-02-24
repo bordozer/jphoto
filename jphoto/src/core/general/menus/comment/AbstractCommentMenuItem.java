@@ -57,10 +57,6 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentLeftByAccessor();
 	}
 
-	protected User getCommentAuthor() {
-		return menuEntry.getCommentAuthor();
-	}
-
 	protected Genre getGenre( final PhotoComment photoComment ) {
 		final int photoId = photoComment.getPhotoId();
 		final Photo photo = getPhotoService().load( photoId );

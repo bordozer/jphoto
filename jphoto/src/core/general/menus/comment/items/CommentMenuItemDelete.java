@@ -42,6 +42,21 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return ! menuEntry.isCommentDeleted() && UserUtils.isLoggedUser( accessor ) && ( ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) || UserUtils.isUsersEqual( accessor, getCommentAuthor() ) ) );
+
+		if ( menuEntry.isCommentDeleted() ) {
+			return false;
+		}
+
+		if ( ! UserUtils.isLoggedUser( accessor ) ) {
+			return false;
+		}
+
+		if ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) ) {
+			return true;
+		}
+
+		// TODO: should be allowed deletion of admin messages?
+
+		return isCommentLeftByAccessor();
 	}
 }
