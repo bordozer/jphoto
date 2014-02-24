@@ -18,7 +18,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final User user = testData.getCommentAuthor();
 		final Services services = getServicesForTest( user, false );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), String.format( "Reply to %s", user.getNameEscaped() ) );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), String.format( "Reply to %s", user.getNameEscaped() ) );
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( user );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), String.format( "Reply to %s ( photo's author )", user.getNameEscaped() ) );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), String.format( "Reply to %s ( photo's author )", user.getNameEscaped() ) );
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final User user = testData.getJustUser();
 		final Services services = getServicesForTest( user, true );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( user );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final User user = testData.getJustUser(); // Does not matter
 		final Services services = getServicesForTest( user, false );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "replyToComment( %d ); return false;", testData.getCommentAuthor().getId() ) );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "replyToComment( %d ); return false;", testData.getCommentAuthor().getId() ) );
 	}
 
 	private ServicesImpl getServicesForTest( final User user, final Boolean isCommentAuthorNameInAnonymousPeriod ) {

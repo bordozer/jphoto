@@ -12,7 +12,8 @@ import org.junit.Before;
 
 public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 
-	protected static final String WRONG_MENU_TEXT = "Wrong menu text";
+	protected static final String WRONG_COMMAND = "Wrong menu text";
+
 	protected static final String MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT = "Menu item should be accessible but it is not";
 	protected static final String MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS = "Menu item should not be accessible but it is";
 
@@ -25,12 +26,12 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		testData = new CommentMenuItemTestData();
 	}
 
-	protected ServicesImpl getServices( final CommentMenuItemTestData testData, final User user ) {
+	protected ServicesImpl getServices( final CommentMenuItemTestData testData, final User accessor ) {
 		final ServicesImpl services = new ServicesImpl();
 
 		services.setPhotoCommentService( getPhotoCommentService( testData ) );
 		services.setPhotoService( getPhotoService( testData ) );
-		services.setSecurityService( getSecurityService( testData, user ) );
+		services.setSecurityService( getSecurityService( testData, accessor ) );
 		services.setUserService( getUserService( testData ) );
 
 		return services;
@@ -49,12 +50,12 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		return userService;
 	}
 
-	private SecurityService getSecurityService( final CommentMenuItemTestData testData, final User user ) {
+	private SecurityService getSecurityService( final CommentMenuItemTestData testData, final User accessor ) {
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		EasyMock.expect( securityService.userOwnThePhotoComment( user, testData.getComment() ) ).andReturn( testData.getComment().getCommentAuthor().getId() == user.getId() ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( user.getId() ) ).andReturn( SUPER_ADMIN.getId() == user.getId() || SUPER_MEGA_ADMIN.getId() == user.getId() ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( user ) ).andReturn( SUPER_ADMIN.getId() == user.getId() || SUPER_MEGA_ADMIN.getId() == user.getId() ).anyTimes();
+		EasyMock.expect( securityService.userOwnThePhotoComment( accessor, testData.getComment() ) ).andReturn( testData.getComment().getCommentAuthor().getId() == accessor.getId() ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId() ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( accessor ) ).andReturn( SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId() ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 

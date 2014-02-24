@@ -16,7 +16,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete your comment" );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete your comment" );
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getPhotoAuthor();
 		final Services services = getServices( testData, user );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete comment (as photo author)" );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete comment (as photo author)" );
 	}
 
 	@Test
@@ -85,6 +85,6 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( testData, user );
 
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "deleteComment( %d ); return false;", testData.getComment().getId() ) );
+		assertEquals( WRONG_COMMAND, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "deleteComment( %d ); return false;", testData.getComment().getId() ) );
 	}
 }
