@@ -558,3 +558,7 @@ table.formtable {
 .photoPreviewMarks {
 	font-weight: bold;;
 }
+
+.adminMenuItem {
+	font-weight: bold;
+}

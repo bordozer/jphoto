@@ -57,6 +57,11 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus() );
 	}
 
+	@Override
+	public String getMenuCssClass() {
+		return ADMIN_MENU_ITEM_CSS_CLASS;
+	}
+
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {
 		return services.getEntryMenuService().getCommentMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
 	}

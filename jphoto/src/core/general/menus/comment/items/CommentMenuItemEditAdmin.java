@@ -42,4 +42,9 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 			   && getSecurityService().isSuperAdminUser( accessor )
 			   && services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_PHOTO_COMMENTS );
 	}
+
+	@Override
+	public String getMenuCssClass() {
+		return ADMIN_MENU_ITEM_CSS_CLASS;
+	}
 }

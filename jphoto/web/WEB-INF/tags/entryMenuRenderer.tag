@@ -26,8 +26,8 @@
 
 			<li style="font-size: 10px;">
 
-				<a href="#" onclick="${entryMenuItem.menuItemCommand.menuCommand}">
-					<html:img12 src="${entryMenuItem.menuItemCommand.commandIcon}" alt="${eco:translate('Menu')}"/>
+				<a class="${entryMenuItem.menuCssClass}" href="#" onclick="${entryMenuItem.menuItemCommand.menuCommand}">
+					<html:img12 src="${entryMenuItem.menuItemCommand.commandIcon}" alt="${eco:translate(entryMenuItem.menuItemCommand.menuText)}"/>
 					&nbsp;
 					${entryMenuItem.menuItemCommand.menuText}
 				</a>

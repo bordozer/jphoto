@@ -46,4 +46,9 @@ public class CommentMenuItemSendPrivateMessageAdmin extends AbstractCommentMenuI
 
 		return ! isCommentLeftByUserWhoIsCallingMenu();
 	}
+
+	@Override
+	public String getMenuCssClass() {
+		return ADMIN_MENU_ITEM_CSS_CLASS;
+	}
 }

@@ -39,4 +39,9 @@ public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 	public boolean isAccessibleFor() {
 		return getSecurityService().isSuperAdminUser( accessor );
 	}
+
+	@Override
+	public String getMenuCssClass() {
+		return ADMIN_MENU_ITEM_CSS_CLASS;
+	}
 }

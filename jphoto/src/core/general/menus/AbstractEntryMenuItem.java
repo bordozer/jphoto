@@ -7,11 +7,13 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.user.UserService;
+import org.apache.commons.lang.StringUtils;
 import utils.UserUtils;
 
 public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
+	public static final String ADMIN_MENU_ITEM_CSS_CLASS = "adminMenuItem";
 
 	public static final int MENU_ITEM_HEIGHT = 27;
 	public static final int MENU_SEPARATOR_HEIGHT = 5;
@@ -35,6 +37,14 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public boolean isSubMenu() {
 		return getEntryMenuType().isSubMenu();
+	}
+
+	public int getHeight() {
+		return MENU_ITEM_HEIGHT;
+	}
+
+	public String getMenuCssClass() {
+		return StringUtils.EMPTY;
 	}
 
 	final protected boolean isUserWhoIsCallingMenuLogged( final User userWhoIsCallingMenu ) {
@@ -62,10 +72,6 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 		return String.format( "Entry menu: %s", getMenuItemCommand() != null ? getMenuItemCommand().getMenuText() : getEntryMenuType() );
 	}
 
-	public int getHeight() {
-		return MENU_ITEM_HEIGHT;
-	}
-
 	protected PhotoService getPhotoService() {
 		return services.getPhotoService();
 	}
@@ -81,10 +87,6 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	protected int getId() {
 		return menuEntry.getId();
 	}
-
-	/*protected String throwIllegalStateException() {
-		throw new IllegalStateException( String.format( "Attempt to call popup inaccessible popup menu. Accessor: %s, entry: %s", accessor, menuEntry ) );
-	}*/
 
 	protected SecurityService getSecurityService() {
 		return services.getSecurityService();
