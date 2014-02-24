@@ -45,7 +45,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanNotEditCommentTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( testData.getComment(), user, services ).isAccessibleFor() );
@@ -64,7 +64,7 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void commandTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand();

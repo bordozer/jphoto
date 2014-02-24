@@ -57,7 +57,7 @@ public class CommentAuthorVisibilityTest extends AbstractTestCase {
 
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor, viewTime ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor, viewTime ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN, viewTime ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_ADMIN_1, viewTime ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
 
 		comment.setCommentAuthor( photoAuthor );
@@ -75,7 +75,7 @@ public class CommentAuthorVisibilityTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor, viewTime ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor, viewTime ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN, viewTime ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_ADMIN_1, viewTime ) );
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
 	}
 
@@ -89,14 +89,14 @@ public class CommentAuthorVisibilityTest extends AbstractTestCase {
 
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor, viewTime ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor, viewTime ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN, viewTime ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_ADMIN_1, viewTime ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
 	}
 
 	private SecurityServiceImpl getSecurityService( final Date photoAnonymousPeriodExpirationTime ) {
 
 		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( SUPER_MEGA_ADMIN.getId() ) ).andReturn( SUPER_MEGA_ADMIN ).anyTimes();
+		EasyMock.expect( userService.load( SUPER_ADMIN_1.getId() ) ).andReturn( SUPER_ADMIN_1 ).anyTimes();
 		EasyMock.expect( userService.load( commentAuthor.getId() ) ).andReturn( commentAuthor ).anyTimes();
 		EasyMock.expect( userService.load( photoAuthor.getId() ) ).andReturn( photoAuthor ).anyTimes();
 		EasyMock.expect( userService.load( justUser.getId() ) ).andReturn( justUser ).anyTimes();

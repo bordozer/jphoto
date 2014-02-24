@@ -45,7 +45,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanReplyCommentTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), user, services ).isAccessibleFor() );

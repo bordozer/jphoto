@@ -33,7 +33,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 	@Test
 	public void nobodyCanComplainOnDeletedCommentTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		final PhotoComment comment = testData.getComment();
@@ -44,7 +44,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 	@Test
 	public void adminCanNotComplainTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, getMenuItemInstance( testData.getComment(), user, services ).isAccessibleFor() );

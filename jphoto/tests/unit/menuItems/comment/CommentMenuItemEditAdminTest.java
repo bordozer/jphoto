@@ -49,7 +49,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void deletedCommentCanNotBeEditedTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServicesForTest( user );
 
 		final PhotoComment comment = testData.getComment();
@@ -60,7 +60,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanNotSeeEditCommentAdminSubMenuItemIfItIsSwitchedOFFTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServicesForTest( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEditAdmin( testData.getComment(), user, services ).isAccessibleFor() );
@@ -68,7 +68,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanSeeEditCommentAdminSubMenuItemIfItIsSwitchedONTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServicesForTest( user, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemEditAdmin( testData.getComment(), user, services ).isAccessibleFor() );
@@ -76,7 +76,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void commandTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemEditAdmin( testData.getComment(), user, services ).getMenuItemCommand();

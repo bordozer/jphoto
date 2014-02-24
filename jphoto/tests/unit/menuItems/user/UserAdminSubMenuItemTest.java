@@ -46,15 +46,15 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void adminCanNotSeeAdminSubMenuIfThereIsHisTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices();
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( SUPER_MEGA_ADMIN, accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( SUPER_ADMIN_1, accessor, services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void adminCanSeeAdminSubMenuTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices();
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
@@ -62,7 +62,7 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void adminCanSeeAdminSubMenuForCommentOfAnotherAdminTest() {
-		final User accessor = SUPER_ADMIN;
+		final User accessor = SUPER_ADMIN_2;
 		final Services services = getServices();
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
@@ -70,7 +70,7 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void commandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices();
 
 		final AbstractEntryMenuItemCommand command = new UserAdminSubMenuItem( testData.getUser(), accessor, services ).getMenuItemCommand();

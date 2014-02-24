@@ -45,7 +45,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanNotSeeAdminSubMenuIfThereIsHisTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices( testData, accessor );
 
 		final PhotoComment comment = testData.getComment();
@@ -56,7 +56,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanSeeAdminSubMenuTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices( testData, accessor );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
@@ -64,18 +64,18 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanSeeAdminSubMenuForCommentOfAnotherAdminTest() {
-		final User accessor = SUPER_ADMIN;
+		final User accessor = SUPER_ADMIN_2;
 		final Services services = getServices( testData, accessor );
 
 		final PhotoComment comment = testData.getComment();
-		comment.setCommentAuthor( SUPER_MEGA_ADMIN ); // The comment of another admin
+		comment.setCommentAuthor( SUPER_ADMIN_1 ); // The comment of another admin
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void commandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices( testData, accessor );
 
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).getMenuItemCommand();

@@ -45,7 +45,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void adminCanNotDeleteCommentTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDelete( testData.getComment(), user, services ).isAccessibleFor() );

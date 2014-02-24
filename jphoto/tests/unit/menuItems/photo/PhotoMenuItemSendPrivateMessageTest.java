@@ -57,7 +57,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 
 	@Test
 	public void adminCanSeeMenuTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices( testData, accessor );
 
@@ -79,7 +79,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 
 	@Test
 	public void adminCanSeeMenuIfHeIsInThePhotoAuthorBlackListTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final boolean isPhotoWithinAnonymousPeriod = false;
 		final boolean isAccessorInPhotoAuthorBlackList = true;
 
@@ -92,7 +92,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 
 	@Test
 	public void adminCanSeeMenuIfPhotoWithinAnonymousPeriodTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final boolean isPhotoWithinAnonymousPeriod = true;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
@@ -104,7 +104,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 	}
 
 	private SecurityService getSecurityService( final User accessor, final boolean isPhotoWithinAnonymousPeriod ) {
-		final boolean isAdmin = SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId();
+		final boolean isAdmin = SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId();
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 

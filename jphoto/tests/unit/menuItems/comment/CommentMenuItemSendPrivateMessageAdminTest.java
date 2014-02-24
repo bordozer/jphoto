@@ -16,7 +16,7 @@ public class CommentMenuItemSendPrivateMessageAdminTest extends AbstractCommentM
 
 	@Test
 	public void adminCanSeeMenuTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices( testData, accessor );
 
@@ -25,7 +25,7 @@ public class CommentMenuItemSendPrivateMessageAdminTest extends AbstractCommentM
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices( testData, accessor );
 
@@ -73,7 +73,7 @@ public class CommentMenuItemSendPrivateMessageAdminTest extends AbstractCommentM
 
 	@Test
 	public void commandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final Services services = getServices( testData, accessor );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessageAdmin( testData.getComment(), accessor, services ).getMenuItemCommand();

@@ -75,7 +75,7 @@ public class AbstractTestCase {
 	public void setup() {
 	}
 
-	public final static User SUPER_MEGA_ADMIN = new User(  ) {
+	public final static User SUPER_ADMIN_1 = new User(  ) {
 		@Override
 		public int getId() {
 			return 666;
@@ -86,7 +86,8 @@ public class AbstractTestCase {
 			return "Super mega admin";
 		}
 	};
-	public final static User SUPER_ADMIN = new User(  ) {
+
+	public final static User SUPER_ADMIN_2 = new User(  ) {
 		@Override
 		public int getId() {
 			return 777;

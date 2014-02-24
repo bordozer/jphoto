@@ -46,7 +46,7 @@ public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void adminCommandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices( testData, accessor );
 

@@ -60,7 +60,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void commandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 		final int qty = 4;
 
 		final ServicesImpl services = getServices();

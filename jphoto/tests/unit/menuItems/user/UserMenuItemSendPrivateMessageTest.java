@@ -58,7 +58,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 
 	@Test
 	public void menuAccessibleForSuperAdminTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices();
 		services.setSecurityService( getSecurityService( accessor ) );
@@ -68,7 +68,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 
 	@Test
 	public void commandTest() {
-		final User accessor = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_ADMIN_1;
 
 		final ServicesImpl services = getServices();
 
@@ -81,7 +81,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	private SecurityService getSecurityService( final User user ) {
 		final SecurityService userService = EasyMock.createMock( SecurityService.class );
 
-		EasyMock.expect( userService.isSuperAdminUser( user.getId() ) ).andReturn( user.getId() == SUPER_MEGA_ADMIN.getId() ).anyTimes();
+		EasyMock.expect( userService.isSuperAdminUser( user.getId() ) ).andReturn( user.getId() == SUPER_ADMIN_1.getId() ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( userService );
 

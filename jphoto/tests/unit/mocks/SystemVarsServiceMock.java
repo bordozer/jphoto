@@ -92,7 +92,7 @@ public class SystemVarsServiceMock implements SystemVarsService {
 
 	@Override
 	public List<String> getAdminUserIds() {
-		return newArrayList( String.valueOf( AbstractTestCase.SUPER_MEGA_ADMIN.getId() ), String.valueOf( AbstractTestCase.SUPER_ADMIN.getId() ) );
+		return newArrayList( String.valueOf( AbstractTestCase.SUPER_ADMIN_1.getId() ), String.valueOf( AbstractTestCase.SUPER_ADMIN_2.getId() ) );
 	}
 
 	@Override

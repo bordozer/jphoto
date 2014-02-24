@@ -40,8 +40,8 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 
 		EasyMock.expect( userService.load( testData.getPhotoAuthor().getId() ) ).andReturn( testData.getPhotoAuthor() ).anyTimes();
 		EasyMock.expect( userService.load( testData.getAccessor().getId() ) ).andReturn( testData.getAccessor() ).anyTimes();
-		EasyMock.expect( userService.load( SUPER_MEGA_ADMIN.getId() ) ).andReturn( SUPER_MEGA_ADMIN ).anyTimes();
-		EasyMock.expect( userService.load( SUPER_ADMIN.getId() ) ).andReturn( SUPER_ADMIN ).anyTimes();
+		EasyMock.expect( userService.load( SUPER_ADMIN_1.getId() ) ).andReturn( SUPER_ADMIN_1 ).anyTimes();
+		EasyMock.expect( userService.load( SUPER_ADMIN_2.getId() ) ).andReturn( SUPER_ADMIN_2 ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( userService );
 
@@ -49,7 +49,7 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 	}
 
 	private SecurityService getSecurityService( final User accessor ) {
-		final boolean isAdmin = SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId();
+		final boolean isAdmin = SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId();
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
