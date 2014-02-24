@@ -44,7 +44,7 @@ public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 	public boolean isAccessibleFor() {
 		final User commentAuthor = menuEntry.getCommentAuthor();
 		return super.isAccessibleFor()
-			   && isUserWhoIsCallingMenuLogged( accessor )
+			   && isUserWhoIsCallingMenuLogged()
 			   && ! UserUtils.isUsersEqual( commentAuthor, accessor )
 			   && ! getFavoritesService().isUserInBlackListOfUser( accessor.getId(), commentAuthor.getId() );
 	}

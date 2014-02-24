@@ -36,7 +36,7 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		if ( ! isUserWhoIsCallingMenuLogged( accessor ) ) {
+		if ( ! isUserWhoIsCallingMenuLogged() ) {
 			return false;
 		}
 

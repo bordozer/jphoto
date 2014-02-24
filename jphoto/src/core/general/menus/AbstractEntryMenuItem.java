@@ -47,8 +47,8 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 		return StringUtils.EMPTY;
 	}
 
-	final protected boolean isUserWhoIsCallingMenuLogged( final User userWhoIsCallingMenu ) {
-		return UserUtils.isLoggedUser( userWhoIsCallingMenu );
+	final protected boolean isUserWhoIsCallingMenuLogged() {
+		return UserUtils.isLoggedUser( accessor );
 	}
 
 	final protected boolean isSuperAdminUser( final int userId ) {

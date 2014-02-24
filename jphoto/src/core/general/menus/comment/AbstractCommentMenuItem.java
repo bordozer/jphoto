@@ -19,7 +19,7 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 		return ! isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod();
 	}
 
-	final protected boolean isUserWhoIsCallingMenuOwnerOfThePhoto() {
+	final protected boolean isAccessorOwnesThePhoto() {
 		return getSecurityService().userOwnThePhoto( accessor, getPhoto() );
 	}
 
@@ -66,5 +66,9 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 		final Photo photo = getPhotoService().load( photoId );
 
 		return services.getGenreService().load( photo.getGenreId() );
+	}
+
+	protected boolean isAccessorInTheBlackListOfCommentAuthor() {
+		return getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
 	}
 }

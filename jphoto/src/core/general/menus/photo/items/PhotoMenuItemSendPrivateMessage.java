@@ -40,7 +40,7 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( ! isUserWhoIsCallingMenuLogged( accessor ) ) {
+		if ( ! isUserWhoIsCallingMenuLogged() ) {
 			return false;
 		}
 

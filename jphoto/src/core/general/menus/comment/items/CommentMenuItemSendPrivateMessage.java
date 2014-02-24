@@ -7,7 +7,6 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
-import utils.UserUtils;
 
 public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
@@ -41,7 +40,7 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( !isUserWhoIsCallingMenuLogged( accessor ) ) {
+		if ( !isUserWhoIsCallingMenuLogged() ) {
 			return false;
 		}
 
@@ -49,10 +48,9 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 			return false;
 		}
 
-		final boolean isAccessorInBlackListOfCommentAuthor = getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
-		final boolean photoAuthorIsCallingMenu = UserUtils.isUsersEqual( accessor, getPhotoAuthor() );
+		final boolean isAccessorInBlackListOfCommentAuthor = isAccessorInTheBlackListOfCommentAuthor();
 
-		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = photoAuthorIsCallingMenu && !isAccessorInBlackListOfCommentAuthor;
+		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = isAccessorOwnesThePhoto() && !isAccessorInBlackListOfCommentAuthor;
 		if ( photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor ) {
 			return true;
 		}
@@ -63,4 +61,5 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
 		return !isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod();
 	}
+
 }
