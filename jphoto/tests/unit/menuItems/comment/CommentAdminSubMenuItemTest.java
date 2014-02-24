@@ -21,7 +21,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void usualUserCanNotSeeAdminSubMenuTest() {
-		final User user = testData.getJustUser();
+		final User user = testData.getAccessor();
 		final Services services = getServices( testData, user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), user, services ).isAccessibleFor() );

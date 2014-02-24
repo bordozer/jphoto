@@ -9,7 +9,7 @@ import core.services.security.Services;
 import utils.TranslatorUtils;
 import utils.UserUtils;
 
-public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
+public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
 	public CommentMenuItemSendPrivateMessage( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
@@ -40,19 +40,31 @@ public class  CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem 
 
 	@Override
 	public boolean isAccessibleFor() {
-		if ( isSuperAdminUser( accessor ) && ! UserUtils.isUsersEqual( accessor, menuEntry.getCommentAuthor() ) ) {
+
+		if ( !isUserWhoIsCallingMenuLogged( accessor ) ) {
+			return false;
+		}
+
+		if ( isCommentLeftByUserWhoIsCallingMenu() ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor ) ) {
 			return true;
 		}
 
-		final boolean userInBlackListOfUser = getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
+		final boolean isAccessorInBlackListOfCommentAuthor = getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
+		final boolean photoAuthorIsCallingMenu = UserUtils.isUsersEqual( accessor, getPhotoAuthor() );
 
-		if ( UserUtils.isUsersEqual( accessor, getPhotoAuthor() ) && !userInBlackListOfUser ) {
+		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = photoAuthorIsCallingMenu && !isAccessorInBlackListOfCommentAuthor;
+		if ( photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor ) {
 			return true;
 		}
 
-		return isUserWhoIsCallingMenuLogged( accessor )
-			   && super.isAccessibleFor()
-			   && ! isCommentOfMenuCaller()
-			   && !userInBlackListOfUser;
+		if( isAccessorInBlackListOfCommentAuthor ) {
+			return false;
+		}
+
+		return !isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod();
 	}
 }

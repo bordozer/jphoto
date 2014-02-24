@@ -34,7 +34,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 	@Test
 	public void replyToUsualUserInAnonymousPeriodTest() {
-		final User user = testData.getJustUser();
+		final User user = testData.getAccessor();
 		final Services services = getServicesForTest( user, true );
 
 		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Reply to photo author ( anonymous )" );
@@ -53,7 +53,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 	@Test
 	public void replyToJSFunctionTest() {
-		final User user = testData.getJustUser(); // Does not matter
+		final User user = testData.getAccessor(); // Does not matter
 		final Services services = getServicesForTest( user, false );
 
 		assertEquals( WRONG_COMMAND, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuCommand(), String.format( "replyToComment( %d ); return false;", testData.getCommentAuthor().getId() ) );

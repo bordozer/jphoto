@@ -77,6 +77,32 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
 	}
 
+	@Test
+	public void adminCanSeeMenuIfHeIsInThePhotoAuthorBlackListTest() {
+		final User accessor = SUPER_MEGA_ADMIN;
+		final boolean isPhotoWithinAnonymousPeriod = false;
+		final boolean isAccessorInPhotoAuthorBlackList = true;
+
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
+		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
+
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void adminCanSeeMenuIfPhotoWithinAnonymousPeriodTest() {
+		final User accessor = SUPER_MEGA_ADMIN;
+		final boolean isPhotoWithinAnonymousPeriod = true;
+		final boolean isAccessorInPhotoAuthorBlackList = false;
+
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
+		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
+
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+	}
+
 	private SecurityService getSecurityService( final User accessor, final boolean isPhotoWithinAnonymousPeriod ) {
 		final boolean isAdmin = SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId();
 

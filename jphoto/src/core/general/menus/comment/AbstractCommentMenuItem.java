@@ -44,10 +44,8 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	}
 
 	protected boolean isCommentAuthorOwnerOfPhoto() {
-		final User commentAuthor = menuEntry.getCommentAuthor();
-		final User photoAuthor = getPhotoAuthor();
-
-		return UserUtils.isUsersEqual( photoAuthor, commentAuthor );
+		final Photo photo = getPhotoService().load( menuEntry.getPhotoId() );
+		return UserUtils.isUsersEqual( photo.getUserId(), menuEntry.getCommentAuthor().getId() );
 	}
 
 	protected User getPhotoAuthor() {
@@ -55,12 +53,8 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 		return getUserService().load( photo.getUserId() );
 	}
 
-	protected boolean isCommentOfMenuCaller() {
-		return UserUtils.isUsersEqual( accessor, menuEntry.getCommentAuthor() );
-	}
-
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
-		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentOfMenuCaller();
+		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isCommentLeftByUserWhoIsCallingMenu();
 	}
 
 	protected User getCommentAuthor() {

@@ -60,7 +60,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 	@Test
 	public void usualUserCanComplainTest() {
-		final User user = testData.getJustUser();
+		final User user = testData.getAccessor();
 		final Services services = getServices( testData, user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, getMenuItemInstance( testData.getComment(), user, services ).isAccessibleFor() );
@@ -68,7 +68,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 	@Test
 	public void commandTest() {
-		final User user = testData.getJustUser(); // Does not matter
+		final User user = testData.getAccessor(); // Does not matter
 		final Services services = getServices( testData, user );
 
 		final AbstractEntryMenuItemCommand command = getMenuItemInstance( testData.getComment(), user, services ).getMenuItemCommand();

@@ -37,7 +37,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void usualUserCanReplyCommentTest() {
-		final User user = testData.getJustUser();
+		final User user = testData.getAccessor();
 		final Services services = getServices( testData, user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), user, services ).isAccessibleFor() );
@@ -53,7 +53,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void everyoneCanReplyOnDeletedCommentTest() {
-		final User user = testData.getJustUser();
+		final User user = testData.getAccessor();
 		final Services services = getServices( testData, user );
 
 		final PhotoComment comment = testData.getComment();
