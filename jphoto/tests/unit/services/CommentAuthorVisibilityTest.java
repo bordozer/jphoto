@@ -48,7 +48,7 @@ public class CommentAuthorVisibilityTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void anonymousPeriodIsNotPassedTest() {
+	public void commentOfAbstractUserWhenAnonymousPeriodIsNotPassedTest() {
 
 		final Date viewTime = dateUtilsService.parseTime( "2014-01-12 13:00:00", FORMAT );
 		final Date anonymousPeriodExpirationTime = dateUtilsService.parseTime( "2014-01-12 14:00:00", FORMAT );
@@ -61,6 +61,21 @@ public class CommentAuthorVisibilityTest extends AbstractTestCase {
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
 
 		comment.setCommentAuthor( photoAuthor );
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
+	}
+
+	@Test
+	public void commentOfPhotoAuthorWhenAnonymousPeriodIsNotPassedTest() {
+
+		final Date viewTime = dateUtilsService.parseTime( "2014-01-12 13:00:00", FORMAT );
+		final Date anonymousPeriodExpirationTime = dateUtilsService.parseTime( "2014-01-12 14:00:00", FORMAT );
+		comment.setCommentAuthor( photoAuthor );
+
+		final SecurityServiceImpl securityService = getSecurityService( anonymousPeriodExpirationTime );
+
+		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, commentAuthor, viewTime ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, photoAuthor, viewTime ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, SUPER_MEGA_ADMIN, viewTime ) );
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( comment, justUser, viewTime ) );
 	}
 
