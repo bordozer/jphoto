@@ -18,7 +18,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	public void usualUserCanSeeGoToPhotosMenuIfUserHasAtLeastOnePhotoTest() {
 		final User accessor = testData.getAccessor();
 
-		final ServicesImpl services = getServices( testData );
+		final ServicesImpl services = getServices( testData, accessor );
 		services.setConfigurationService( getConfigurationService( true ) );
 		services.setPhotoService( getPhotoService( testData.getUser(), 1 ) );
 
@@ -29,7 +29,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	public void usualUserCanNotSeeGoToPhotosMenuIfUserHasNoPhotosTest() {
 		final User accessor = testData.getAccessor();
 
-		final ServicesImpl services = getServices( testData );
+		final ServicesImpl services = getServices( testData, accessor );
 		services.setConfigurationService( getConfigurationService( true ) );
 		services.setPhotoService( getPhotoService( testData.getUser(), 0 ) );
 
@@ -40,7 +40,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	public void userCanNotSeeOwnGoToPhotosMenuIfItIsSwitchedOffTest() {
 		final User accessor = testData.getUser();
 
-		final ServicesImpl services = getServices( testData );
+		final ServicesImpl services = getServices( testData, accessor );
 		services.setConfigurationService( getConfigurationService( false ) );
 		services.setPhotoService( getPhotoService( testData.getUser(), 7 ) );
 
@@ -51,7 +51,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	public void userCanNotSeeOwnGoToPhotosMenuIfItIsSwitchedOnTest() {
 		final User accessor = testData.getUser();
 
-		final ServicesImpl services = getServices( testData );
+		final ServicesImpl services = getServices( testData, accessor );
 		services.setConfigurationService( getConfigurationService( true ) );
 		services.setPhotoService( getPhotoService( testData.getUser(), 7 ) );
 
@@ -60,13 +60,13 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void commandTest() {
-		final User user = SUPER_MEGA_ADMIN;
+		final User accessor = SUPER_MEGA_ADMIN;
 		final int qty = 4;
 
-		final ServicesImpl services = getServices( testData);
+		final ServicesImpl services = getServices( testData, accessor );
 		services.setPhotoService( getPhotoService( testData.getUser(), qty ) );
 
-		final AbstractEntryMenuItemCommand command = new UserMenuItemGoToPhotos( testData.getUser(), user, services ).getMenuItemCommand();
+		final AbstractEntryMenuItemCommand command = new UserMenuItemGoToPhotos( testData.getUser(), accessor, services ).getMenuItemCommand();
 
 		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: all photos ( %d )", testData.getUser().getNameEscaped(), qty ) );
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", testData.getUser().getId() ) );
