@@ -46,7 +46,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
 
-	@Test
+	/*@Test
 	public void menuIsInaccessibleIfAccessorIsInTheBlackListOfCommentAuthorTest() {
 		final User accessor = testData.getAccessor();
 
@@ -68,7 +68,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 //		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
-	}
+	}*/
 
 	@Test
 	public void menuIsAccessibleIfAccessorIsCandidateAndVotingIsAllowedForCandidatesTest() {
@@ -129,7 +129,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentDeleted( true );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( comment, accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( comment, accessor, services ).isAccessibleFor() );
 	}
 
 	private ConfigurationService getConfigurationService( final boolean candidatesCanCommentPhotos ) {
