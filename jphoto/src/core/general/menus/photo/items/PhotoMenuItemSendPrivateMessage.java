@@ -7,7 +7,6 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
-import utils.UserUtils;
 
 public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 
@@ -41,15 +40,23 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( isSuperAdminUser( accessor ) && ! UserUtils.isUsersEqual( accessor, getPhotoAuthor() ) ) {
+		if ( ! isUserWhoIsCallingMenuLogged( accessor ) ) {
+			return false;
+		}
+
+		if ( isAccessorSeeingMenuOfOwnPhoto() ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor ) ) {
 			return true;
 		}
 
-		return isUserWhoIsCallingMenuLogged( accessor )
-			   && ! hideMenuItemBecauseEntryOfMenuCaller()
-			   && isUserWhoIsCallingMenuLogged( accessor )
-			   && super.isAccessibleFor()
-			   && ! getFavoritesService().isUserInBlackListOfUser( menuEntry.getUserId(), accessor.getId() );
+		if ( isPhotoIsWithinAnonymousPeriod() ) {
+			return false;
+		}
+
+		return ! getFavoritesService().isUserInBlackListOfUser( menuEntry.getUserId(), accessor.getId() );
 
 	}
 }

@@ -22,7 +22,7 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), User.NOT_LOGGED_USER, services ).isAccessibleFor() );
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), testData.getPhotoAuthor(), services ).isAccessibleFor() );
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), testData.getJustUser(), services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), testData.getAccessor(), services ).isAccessibleFor() );
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), SUPER_MEGA_ADMIN, services ).isAccessibleFor() );
 	}
 

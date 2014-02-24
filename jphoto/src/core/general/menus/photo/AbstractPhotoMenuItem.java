@@ -36,4 +36,8 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 	protected GenreService getGenreService() {
 		return services.getGenreService();
 	}
+
+	protected boolean isAccessorSeeingMenuOfOwnPhoto() {
+		return UserUtils.isUsersEqual( accessor.getId(), menuEntry.getUserId() );
+	}
 }

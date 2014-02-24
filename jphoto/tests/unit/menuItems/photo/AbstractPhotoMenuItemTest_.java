@@ -39,7 +39,7 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		final UserService userService = EasyMock.createMock( UserService.class );
 
 		EasyMock.expect( userService.load( testData.getPhotoAuthor().getId() ) ).andReturn( testData.getPhotoAuthor() ).anyTimes();
-		EasyMock.expect( userService.load( testData.getJustUser().getId() ) ).andReturn( testData.getJustUser() ).anyTimes();
+		EasyMock.expect( userService.load( testData.getAccessor().getId() ) ).andReturn( testData.getAccessor() ).anyTimes();
 		EasyMock.expect( userService.load( SUPER_MEGA_ADMIN.getId() ) ).andReturn( SUPER_MEGA_ADMIN ).anyTimes();
 		EasyMock.expect( userService.load( SUPER_ADMIN.getId() ) ).andReturn( SUPER_ADMIN ).anyTimes();
 		EasyMock.expectLastCall();
