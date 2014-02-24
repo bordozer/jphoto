@@ -19,7 +19,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void notLoggedUserCanNotSeeMenuTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 		services.setSecurityService( getSecurityService( accessor ) );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemSendPrivateMessage( testData.getUser(), accessor, services ).isAccessibleFor() );
@@ -29,7 +29,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void userCanNotSeeSendMessageInOwnMenuTest() {
 		final User accessor = testData.getUser();
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemSendPrivateMessage( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -38,7 +38,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void userCanNotSeeMenuIfHeIsInBlackListTest() {
 		final User accessor = testData.getAccessor();
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 		services.setSecurityService( getSecurityService( accessor ) );
 		services.setFavoritesService( getFavoritesService( true ) );
 
@@ -49,7 +49,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void userCanSeeMenuIfHeIsNotInBlackListTest() {
 		final User accessor = testData.getAccessor();
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 		services.setSecurityService( getSecurityService( accessor ) );
 		services.setFavoritesService( getFavoritesService( false ) );
 
@@ -60,7 +60,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void menuAccessibleForSuperAdminTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 		services.setSecurityService( getSecurityService( accessor ) );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemSendPrivateMessage( testData.getUser(), accessor, services ).isAccessibleFor() );
@@ -70,7 +70,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	public void commandTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices();
 
 		final AbstractEntryMenuItemCommand command = new UserMenuItemSendPrivateMessage( testData.getUser(), accessor, services ).getMenuItemCommand();
 

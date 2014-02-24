@@ -15,7 +15,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void notLoggedUserCanNotSeeLockUserSubMenuItemTest() {
 		final User accessor = User.NOT_LOGGED_USER;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -23,7 +23,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void usualUserCanNotSeeLockUserAdminSubMenuItemTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -31,7 +31,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void photoAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -39,7 +39,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void commentAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -47,7 +47,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void adminCanNotSeeLockAnotherAdminAdminSubMenuItemTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( SUPER_ADMIN, accessor, services ).isAccessibleFor() );
 	}
@@ -55,7 +55,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void adminCanSeeLockUserAdminSubMenuItemTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
 	}
@@ -63,7 +63,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 	@Test
 	public void commandTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices();
 
 		final AbstractEntryMenuItemCommand command = new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).getMenuItemCommand();
 
