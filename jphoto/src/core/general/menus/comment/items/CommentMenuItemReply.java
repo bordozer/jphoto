@@ -57,10 +57,10 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 		// TODO: should be accessible for deleted comment?
 
-		if ( accessor.getUserStatus() == UserStatus.CANDIDATE ) {
-			return services.getConfigurationService().getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS );
+		if ( accessor.getUserStatus() == UserStatus.CANDIDATE && ! services.getConfigurationService().getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ) {
+			return false;
 		}
 
-		return true;
+		return ! isAccessorInTheBlackListOfCommentAuthor();
 	}
 }
