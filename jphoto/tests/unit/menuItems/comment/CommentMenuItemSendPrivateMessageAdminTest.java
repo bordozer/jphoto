@@ -1,10 +1,13 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemSendPrivateMessageAdmin;
 import core.general.user.User;
+import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -53,5 +56,16 @@ public class CommentMenuItemSendPrivateMessageAdminTest extends AbstractCommentM
 		final ServicesImpl services = getServices( testData, accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessageAdmin( testData.getComment(), accessor, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User accessor = SUPER_MEGA_ADMIN;
+		final Services services = getServices( testData, accessor );
+
+		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessageAdmin( testData.getComment(), accessor, services ).getMenuItemCommand();
+
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Send admin message to %s", testData.getCommentAuthor().getNameEscaped() ) );
+		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), testData.getCommentAuthor().getId(), testData.getCommentAuthor().getNameEscaped() ) );
 	}
 }

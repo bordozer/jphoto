@@ -1,5 +1,6 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemSendPrivateMessage;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -10,6 +11,7 @@ import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -109,6 +111,17 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		comment.setCommentAuthor( testData.getPhotoAuthor() );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( comment, accessor, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User accessor = SUPER_MEGA_ADMIN;
+		final Services services = getServices( testData, accessor );
+
+		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).getMenuItemCommand();
+
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Send private message to %s", testData.getCommentAuthor().getNameEscaped() ) );
+		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), testData.getCommentAuthor().getId(), testData.getCommentAuthor().getNameEscaped() ) );
 	}
 
 	private FavoritesService getFavoritesService( final User blackListOwner, final User accessor, final boolean isInBlackList ) {
