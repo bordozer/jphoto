@@ -51,13 +51,11 @@ public abstract class AbstractUserMenuItemTest_ extends AbstractTestCase {
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		final boolean isUserAdmin = SUPER_ADMIN.getId() == testData.getUser().getId() || SUPER_MEGA_ADMIN.getId() == testData.getUser().getId();
-		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser().getId() ) ).andReturn( isUserAdmin ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser() ) ).andReturn( isUserAdmin ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser().getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser() ) ).andReturn( false ).anyTimes();
 
-		final boolean isAccessorAdmin = SUPER_ADMIN.getId() == testData.getAccessor().getId() || SUPER_MEGA_ADMIN.getId() == testData.getAccessor().getId();
-		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor().getId() ) ).andReturn( isUserAdmin ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor() ) ).andReturn( isAccessorAdmin ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor().getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor() ) ).andReturn( false ).anyTimes();
 
 		EasyMock.expect( securityService.isSuperAdminUser( SUPER_MEGA_ADMIN.getId() ) ).andReturn( true ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( SUPER_MEGA_ADMIN ) ).andReturn( true ).anyTimes();
