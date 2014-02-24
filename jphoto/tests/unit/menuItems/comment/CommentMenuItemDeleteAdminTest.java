@@ -2,6 +2,7 @@ package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemDeleteAdmin;
+import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import org.junit.Test;
@@ -43,11 +44,22 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	}
 
 	@Test
-	public void adminCanSeeDeleteCommentAdminSubMenuItemTest() {
+	public void adminCanSeeMenuTest() {
 		final User user = SUPER_ADMIN_1;
 		final Services services = getServices( testData, user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void adminCanNotSeeMenuIfCommentHasAlreadyBeenDeletedTest() {
+		final User user = SUPER_ADMIN_1;
+		final Services services = getServices( testData, user );
+
+		final PhotoComment comment = testData.getComment();
+		comment.setCommentDeleted( true );
+
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDeleteAdmin( comment, user, services ).isAccessibleFor() );
 	}
 
 	@Test
