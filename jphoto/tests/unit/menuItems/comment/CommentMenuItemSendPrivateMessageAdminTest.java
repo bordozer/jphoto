@@ -2,6 +2,7 @@ package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemSendPrivateMessageAdmin;
+import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.security.ServicesImpl;
@@ -24,6 +25,18 @@ public class CommentMenuItemSendPrivateMessageAdminTest extends AbstractCommentM
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuTest() {
+		final User accessor = SUPER_MEGA_ADMIN;
+
+		final ServicesImpl services = getServices( testData, accessor );
+
+		final PhotoComment comment = testData.getComment();
+		comment.setCommentAuthor( accessor );
+
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessageAdmin( comment, accessor, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void adminCanNotSeeMenuIfThereIsHisCommentTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
 		final ServicesImpl services = getServices( testData, accessor );

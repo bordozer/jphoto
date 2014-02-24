@@ -39,6 +39,11 @@ public class CommentMenuItemSendPrivateMessageAdmin extends AbstractCommentMenuI
 
 	@Override
 	public boolean isAccessibleFor() {
-		return isSuperAdminUser( accessor );
+
+		if ( ! isSuperAdminUser( accessor ) ) {
+			return false;
+		}
+
+		return ! isCommentLeftByUserWhoIsCallingMenu();
 	}
 }
