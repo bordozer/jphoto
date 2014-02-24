@@ -1,5 +1,8 @@
 package core.general.menus;
 
+import core.general.photo.PhotoComment;
+import utils.TranslatorUtils;
+
 import java.util.List;
 
 public class EntryMenu {
@@ -22,6 +25,10 @@ public class EntryMenu {
 		/*if ( menuEntry instanceof User ) {
 			builder.append( ); // TODO: show ADMIN prefix
 		}*/
+
+		if ( menuEntry instanceof PhotoComment ) {
+			builder.append( ( ( PhotoComment ) menuEntry ).isCommentDeleted() ? TranslatorUtils.translate( " ( deleted )" ) : "" );
+		}
 
 		return builder.toString();
 	}
