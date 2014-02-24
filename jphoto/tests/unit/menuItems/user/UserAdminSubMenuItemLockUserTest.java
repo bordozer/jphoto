@@ -67,7 +67,7 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 
 		final AbstractEntryMenuItemCommand command = new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Lock user: %s", testData.getUser().getNameEscaped() ) );
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Lock member: %s", testData.getUser().getNameEscaped() ) );
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", testData.getUser().getId(), testData.getUser().getNameEscaped() ) );
 	}
 }

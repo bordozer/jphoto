@@ -27,7 +27,7 @@ public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock user: $1", commentAuthor.getNameEscaped() );
+				return TranslatorUtils.translate( "Lock comment author: $1", commentAuthor.getNameEscaped() );
 			}
 
 			@Override

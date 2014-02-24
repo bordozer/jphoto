@@ -24,7 +24,7 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock user: $1", menuEntry.getNameEscaped() );
+				return TranslatorUtils.translate( "Lock member: $1", menuEntry.getNameEscaped() );
 			}
 
 			@Override
