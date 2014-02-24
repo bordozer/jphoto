@@ -24,11 +24,11 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		testData = new PhotoMenuItemTestData();
 	}
 
-	protected ServicesImpl getServices( final PhotoMenuItemTestData testData, final User accessor, final boolean userCanDeletePhoto ) {
+	protected ServicesImpl getServices( final PhotoMenuItemTestData testData, final User accessor ) {
 		final ServicesImpl services = new ServicesImpl();
 
 		services.setPhotoService( getPhotoService( testData ) );
-		services.setSecurityService( getSecurityService( accessor, userCanDeletePhoto ) );
+		services.setSecurityService( getSecurityService( accessor ) );
 		services.setUserService( getUserService( testData ) );
 
 		return services;
@@ -47,7 +47,7 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		return userService;
 	}
 
-	private SecurityService getSecurityService( final User accessor, final boolean userCanDeletePhoto ) {
+	private SecurityService getSecurityService( final User accessor ) {
 		final boolean isAdmin = SUPER_ADMIN.getId() == accessor.getId() || SUPER_MEGA_ADMIN.getId() == accessor.getId();
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
@@ -55,7 +55,6 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( isAdmin ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( accessor ) ).andReturn( isAdmin ).anyTimes();
 		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto().getId() ) ).andReturn( testData.getPhotoAuthor().getId() == accessor.getId() ).anyTimes();
-		EasyMock.expect( securityService.userCanDeletePhoto( accessor, testData.getPhoto() ) ).andReturn( userCanDeletePhoto ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 
