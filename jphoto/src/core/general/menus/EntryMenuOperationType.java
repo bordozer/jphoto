@@ -29,7 +29,7 @@ public enum EntryMenuOperationType {
 
 	, PHOTO_INFO( 61, "Photo info", "menu_photo_info.png" )
 
-	, COMMENT_ADMIN_SUB_MENU( 71, "Admin comment submenu", "menu_sub_menu.png" )
+	, ADMIN_SUB_MENU( 71, "Admin submenu", "menu_sub_menu.png" )
 
 	, ADMIN_SUB_MENU_LOCK_USER( 81, "Lock user", "lock_user.png" )
 	, ADMIN_MENU_ITEM_EDIT( 82, "Edit", "menu_edit.png" )
@@ -38,7 +38,7 @@ public enum EntryMenuOperationType {
 
 	;
 
-	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( COMMENT_ADMIN_SUB_MENU );
+	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( ADMIN_SUB_MENU );
 
 	private final int id;
 	private final String name;

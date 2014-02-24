@@ -117,7 +117,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
-		menuItems.add( EntryMenuOperationType.COMMENT_ADMIN_SUB_MENU );
+		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
 
 		return menuItems;
 	}
@@ -126,8 +126,14 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 		final List<EntryMenuOperationType> menuItems = newArrayList();
 
 		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS );
+
 		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
 		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
+
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
+		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
 
 		return menuItems;
 	}

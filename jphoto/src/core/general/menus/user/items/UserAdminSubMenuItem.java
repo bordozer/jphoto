@@ -1,8 +1,7 @@
-package core.general.menus.comment.items;
+package core.general.menus.user.items;
 
 import core.general.menus.*;
-import core.general.menus.comment.AbstractCommentMenuItem;
-import core.general.photo.PhotoComment;
+import core.general.menus.user.AbstractUserMenuItem;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
@@ -11,19 +10,14 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
+public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 
 	final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_SEND_PRIVATE_MESSAGE
+		EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
 
-	public CommentAdminSubMenuItem( final PhotoComment photoComment, final User accessor, final Services services ) {
-		super( photoComment, accessor, services );
+	public UserAdminSubMenuItem( final User user, final User accessor, final Services services ) {
+		super( user, accessor, services );
 	}
 
 	@Override
@@ -50,7 +44,12 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByUserWhoIsCallingMenu();
+
+		if ( ! getSecurityService().isSuperAdminUser( accessor.getId() ) ) {
+			return false;
+		}
+
+		return ! isMenuCallerIsSeeingOwnMenu();
 	}
 
 	public EntryMenu getEntrySubMenu() {
@@ -63,6 +62,6 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {
-		return services.getEntryMenuService().getCommentMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
+		return services.getEntryMenuService().getUserMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
 	}
 }

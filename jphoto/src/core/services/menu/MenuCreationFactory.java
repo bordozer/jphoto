@@ -3,6 +3,8 @@ package core.services.menu;
 import core.general.menus.*;
 import core.general.menus.comment.items.*;
 import core.general.menus.photo.items.*;
+import core.general.menus.user.items.UserAdminSubMenuItem;
+import core.general.menus.user.items.UserAdminSubMenuItemLockUser;
 import core.general.menus.user.items.UserMenuItemGoToPhotos;
 import core.general.menus.user.items.UserMenuItemSendPrivateMessage;
 import core.general.photo.Photo;
@@ -47,6 +49,12 @@ public class MenuCreationFactory {
 					break;
 				case SEND_PRIVATE_MESSAGE:
 					menuItems.add( new UserMenuItemSendPrivateMessage( user, accessor, services ) );
+					break;
+				case ADMIN_SUB_MENU:
+					menuItems.add( new UserAdminSubMenuItem( user, accessor, services ) );
+					break;
+				case ADMIN_SUB_MENU_LOCK_USER:
+					menuItems.add( new UserAdminSubMenuItemLockUser( user, accessor, services ) );
 					break;
 				default:
 					throw new IllegalArgumentException( String.format( "Illegal user EntryMenuOperationType: %s", entryMenuOperationType ) );
@@ -149,7 +157,7 @@ public class MenuCreationFactory {
 				case SEND_PRIVATE_MESSAGE:
 					menuItems.add( new CommentMenuItemSendPrivateMessage( photoComment, accessor, services ) );
 					break;
-				case COMMENT_ADMIN_SUB_MENU:
+				case ADMIN_SUB_MENU:
 					menuItems.add( new CommentAdminSubMenuItem( photoComment, accessor, services ) );
 					break;
 				case ADMIN_MENU_ITEM_EDIT:
