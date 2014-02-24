@@ -18,6 +18,8 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
 		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
+		, EntryMenuOperationType.SEPARATOR
+		, EntryMenuOperationType.ADMIN_SEND_PRIVATE_MESSAGE
 	);
 
 	public CommentAdminSubMenuItem( final PhotoComment photoComment, final User accessor, final Services services ) {

@@ -34,12 +34,14 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 	}
 
 	@Test
-	public void adminCanSeeMenuTest() {
+	public void adminCanNotSeeMenuTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
+		final boolean isAccessorInPhotoAuthorBlackList = true;
 
-		final Services services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setFavoritesService( getFavoritesService( testData.getCommentAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
 
 	@Test
@@ -94,7 +96,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 	}
 
 	@Test
-	public void adminCanSeeMenuEvenIfCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriodTest() {
+	public void adminCanNotSeeMenuIfCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriodTest() {
 		final User accessor = SUPER_MEGA_ADMIN;
 		final boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod = true;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
@@ -106,7 +108,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( testData.getPhotoAuthor() );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemSendPrivateMessage( comment, accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( comment, accessor, services ).isAccessibleFor() );
 	}
 
 	private FavoritesService getFavoritesService( final User blackListOwner, final User accessor, final boolean isInBlackList ) {

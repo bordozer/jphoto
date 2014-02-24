@@ -49,10 +49,6 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 			return false;
 		}
 
-		if ( isSuperAdminUser( accessor ) ) {
-			return true;
-		}
-
 		final boolean isAccessorInBlackListOfCommentAuthor = getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
 		final boolean photoAuthorIsCallingMenu = UserUtils.isUsersEqual( accessor, getPhotoAuthor() );
 
