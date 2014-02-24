@@ -1,6 +1,7 @@
 package menuItems.comment;
 
 import core.general.configuration.ConfigurationKey;
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemEditAdmin;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -10,6 +11,7 @@ import core.services.system.ConfigurationService;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -72,6 +74,17 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 		final Services services = getServicesForTest( user, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemEditAdmin( testData.getComment(), user, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User user = SUPER_MEGA_ADMIN;
+		final Services services = getServices( testData, user );
+
+		final AbstractEntryMenuItemCommand command = new CommentMenuItemEditAdmin( testData.getComment(), user, services ).getMenuItemCommand();
+
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), "Edit comment (ADMIN)" );
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "editComment( %d ); return false;", testData.getComment().getId() ) );
 	}
 
 	private Services getServicesForTest( final User user ) {

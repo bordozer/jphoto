@@ -1,5 +1,6 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentMenuItemEdit;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -11,14 +12,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
-
-	@Test
-	public void commentAuthorMenuTest() {
-		final User user = testData.getCommentAuthor();
-		final Services services = getServices( testData, user );
-
-		assertEquals( WRONG_MENU_TEXT, new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Edit your comment" );
-	}
 
 	@Test
 	public void onlyCommentAuthorCanEditCommentTest() {
@@ -69,6 +62,17 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 		comment.setCommentDeleted( true );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemEdit( comment, user, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User user = SUPER_MEGA_ADMIN;
+		final Services services = getServices( testData, user );
+
+		final AbstractEntryMenuItemCommand command = new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand();
+
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), "Edit comment" );
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "editComment( %d ); return false;", testData.getComment().getId() ) );
 	}
 }
 
