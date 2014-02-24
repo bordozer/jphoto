@@ -1,14 +1,17 @@
 package menuItems.user;
 
 import core.general.configuration.ConfigurationKey;
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.user.items.UserMenuItemGoToPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
+import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -56,6 +59,20 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 		services.setPhotoService( getPhotoService( testData.getUser(), 7 ) );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( testData.getUser(), accessor, services ).isAccessibleFor() );
+	}
+
+	@Test
+	public void commandTest() {
+		final User user = SUPER_MEGA_ADMIN;
+		final int qty = 4;
+
+		final ServicesImpl services = getServices( testData);
+		services.setPhotoService( getPhotoService( testData.getUser(), qty ) );
+
+		final AbstractEntryMenuItemCommand command = new UserMenuItemGoToPhotos( testData.getUser(), user, services ).getMenuItemCommand();
+
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), String.format( "%s: all photos ( %d )", testData.getUser().getNameEscaped(), qty ) );
+		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", testData.getUser().getId() ) );
 	}
 
 	private ConfigurationService getConfigurationService( final boolean showOwnMenuEntries ) {
