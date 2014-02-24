@@ -43,7 +43,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 					return String.format( "showInformationMessageNoAutoClose( '%s' )", TranslatorUtils.translate( "You are in the black list of $1. You can not reply.", menuEntry.getCommentAuthor().getNameEscaped() ) );
 				}
 
-				return String.format( "replyToComment( %d ); return false;", menuEntry.getCommentAuthor().getId() );
+				return String.format( "replyToComment( %d ); return false;", menuEntry.getId() );
 			}
 		};
 	}
