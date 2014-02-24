@@ -26,7 +26,7 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate(  "Edit comment (ADMIN)" );
+				return TranslatorUtils.translate(  "Edit comment" );
 			}
 
 			@Override

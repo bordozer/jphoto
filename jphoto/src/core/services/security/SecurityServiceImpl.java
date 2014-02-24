@@ -540,7 +540,7 @@ public class SecurityServiceImpl implements SecurityService {
 			return false;
 		}
 
-		return isPhotoAuthorNameMustBeHidden( photo, accessor, onTime );
+		return UserUtils.isUsersEqual( photo.getUserId(), commentAuthor.getId() ) && isPhotoAuthorNameMustBeHidden( photo, accessor, onTime );
 	}
 
 	@Override

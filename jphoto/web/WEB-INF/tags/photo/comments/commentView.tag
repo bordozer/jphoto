@@ -123,6 +123,12 @@
 				</div>
 			</c:if>
 
+			<c:if test="${!showCommentAuthorData}">
+				<div class="textcentered" style="float: left; width: 90px;">
+					<html:img src="hidden_picture.png" alt="${eco:translate('Author name is hidden due to anonymous period of photo')}"  id="avatar_${comment.id}" height="100" width="100"/>
+				</div>
+			</c:if>
+
 			<div style="float: left; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
 				<div id="photoCommentText_${commentId}" style="float: left; width: 100%;">
 					${eco:formatPhotoCommentText(comment.commentText)}
