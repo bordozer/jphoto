@@ -7,6 +7,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
+import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
@@ -23,7 +24,7 @@ public interface ActivityStreamService extends BaseEntityService<AbstractActivit
 	boolean savePhotoUpload( final Photo photo );
 
 	// TODO: Transactional
-	boolean savePhotoVoting( final User voter, final Photo photo, final Date currentTime );
+	boolean savePhotoVoting( final User voter, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date currentTime );
 
 	// TODO: Transactional
 	boolean savePhotoComment( final PhotoComment comment );

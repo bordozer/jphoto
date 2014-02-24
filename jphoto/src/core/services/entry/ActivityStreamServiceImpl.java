@@ -6,6 +6,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
+import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
 import core.services.dao.ActivityStreamDao;
 import core.services.security.Services;
@@ -35,8 +36,8 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	}
 
 	@Override
-	public boolean savePhotoVoting( final User voter, final Photo photo, final Date currentTime ) {
-		return save( new ActivityPhotoVoting( voter, photo, currentTime, services ) );
+	public boolean savePhotoVoting( final User voter, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date currentTime ) {
+		return save( new ActivityPhotoVoting( voter, photo, userPhotoVotes, currentTime, services ) );
 	}
 
 	@Override

@@ -60,7 +60,7 @@ public class PhotoVotingServiceImpl implements PhotoVotingService {
 
 		cacheServicePhotoInfo.expire( CacheKey.PHOTO_INFO, photo.getId() );
 
-		activityStreamService.savePhotoVoting( user, photo, votingTime );
+		activityStreamService.savePhotoVoting( user, photo, userPhotoVotes, votingTime );
 
 		return isSaved;
 	}
