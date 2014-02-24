@@ -69,8 +69,8 @@ public class CommentMenuItemEditTest extends AbstractCommentMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemEdit( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), "Edit comment" );
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "editComment( %d ); return false;", testData.getComment().getId() ) );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuText(), "Edit comment" );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuCommand(), String.format( "editComment( %d ); return false;", testData.getComment().getId() ) );
 	}
 }
 

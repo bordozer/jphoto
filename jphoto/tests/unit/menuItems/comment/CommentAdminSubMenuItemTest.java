@@ -80,7 +80,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItem( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), "ADMIN" );
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), "return false;" );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuText(), "ADMIN" );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuCommand(), "return false;" );
 	}
 }

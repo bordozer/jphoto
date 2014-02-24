@@ -1,7 +1,6 @@
 package menuItems.user;
 
 import common.AbstractTestCase;
-import core.general.user.User;
 import core.services.security.ServicesImpl;
 import core.services.user.UserService;
 import org.easymock.EasyMock;

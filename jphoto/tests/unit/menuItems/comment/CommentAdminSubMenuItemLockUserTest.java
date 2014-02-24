@@ -58,7 +58,7 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 		final User commentAuthor = testData.getCommentAuthor();
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuText(), String.format( "Lock user: %s", commentAuthor.getNameEscaped() ) );
-		assertEquals( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuText(), String.format( "Lock user: %s", commentAuthor.getNameEscaped() ) );
+		assertEquals( WRONG_MENU_TEXT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
 	}
 }
