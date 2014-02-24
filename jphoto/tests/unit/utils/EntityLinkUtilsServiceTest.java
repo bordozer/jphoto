@@ -1,10 +1,10 @@
 package utils;
 
 import common.AbstractTestCase;
+import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.general.configuration.SystemConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 

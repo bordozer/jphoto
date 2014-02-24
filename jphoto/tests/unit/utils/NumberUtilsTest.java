@@ -1,11 +1,8 @@
 package utils;
 
 import common.AbstractTestCase;
-import core.services.utils.RandomUtilsService;
-import core.services.utils.RandomUtilsServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertEquals;
 

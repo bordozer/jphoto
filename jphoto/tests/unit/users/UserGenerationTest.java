@@ -3,10 +3,10 @@ package users;
 import common.AbstractTestCase;
 import core.enums.UserGender;
 import core.general.user.User;
+import core.services.user.FakeUserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import core.services.user.FakeUserService;
 import utils.fakeUser.NameGenerator;
 
 public class UserGenerationTest extends AbstractTestCase {

@@ -1,15 +1,15 @@
 package services;
 
 import common.AbstractTestCase;
-import core.general.user.User;
-import core.general.user.UserStatus;
 import core.general.cache.entries.RankInGenrePointsEntry;
 import core.general.configuration.ConfigurationKey;
+import core.general.user.User;
+import core.general.user.UserStatus;
+import core.services.dao.UserRankDao;
 import core.services.system.CacheServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.user.UserRankServiceImpl;
 import core.services.user.UserService;
-import core.services.dao.UserRankDao;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;

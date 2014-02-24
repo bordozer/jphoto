@@ -19,10 +19,10 @@ class CommentMenuItemTestData {
 		commentAuthor.setName( "Comment Author" );
 
 		photoAuthor = new User( 222 );
-		commentAuthor.setName( "Photo Author" );
+		photoAuthor.setName( "Photo Author" );
 
 		justUser = new User( 333 );
-		commentAuthor.setName( "Just a User" );
+		justUser.setName( "Just a User" );
 
 		photo = new Photo();
 		photo.setId( 567 );

@@ -1,23 +1,23 @@
 package sql;
 
 import common.AbstractTestCase;
-import core.general.base.PagingModel;
 import core.context.Environment;
 import core.context.EnvironmentContext;
+import core.general.base.PagingModel;
+import core.general.configuration.ConfigurationKey;
+import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.configuration.ConfigurationKey;
-import core.general.data.PhotoListCriterias;
-import core.services.system.ConfigurationService;
 import core.services.photo.PhotoListCriteriasServiceImpl;
+import core.services.system.ConfigurationService;
 import core.services.utils.UtilsService;
+import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 import sql.builder.SqlIdsSelectQuery;
-import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 
 import java.util.Date;
 

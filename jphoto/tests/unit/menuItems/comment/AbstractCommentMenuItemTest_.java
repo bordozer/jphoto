@@ -12,9 +12,9 @@ import org.junit.Before;
 
 public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 
-	public static final String WRONG_MENU_TEXT = "Wrong menu text";
-	public static final String MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT = "Menu item should be accessible but it is not";
-	public static final String MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS = "Menu item should not be accessible but it is";
+	protected static final String WRONG_MENU_TEXT = "Wrong menu text";
+	protected static final String MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT = "Menu item should be accessible but it is not";
+	protected static final String MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS = "Menu item should not be accessible but it is";
 
 	protected CommentMenuItemTestData testData;
 
