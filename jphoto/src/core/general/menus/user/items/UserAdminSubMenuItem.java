@@ -45,11 +45,11 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( ! getSecurityService().isSuperAdminUser( accessor.getId() ) ) {
+		if ( !isAccessorSuperAdmin() ) {
 			return false;
 		}
 
-		return ! isMenuCallerIsSeeingOwnMenu();
+		return ! isUserCallingHisOwnMenu();
 	}
 
 	public EntryMenu getEntrySubMenu() {

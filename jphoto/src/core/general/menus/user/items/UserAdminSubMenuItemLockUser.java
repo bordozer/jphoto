@@ -7,7 +7,6 @@ import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.Services;
 import utils.TranslatorUtils;
-import utils.UserUtils;
 
 public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 
@@ -38,17 +37,16 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		final SecurityService securityService = getSecurityService();
 
-		if ( securityService.isSuperAdminUser( menuEntry ) ) {
+		if ( isUserSuperAdmin() ) {
 			return false;
 		}
 
-		if ( UserUtils.isUsersEqual( menuEntry, accessor ) ) {
+		if ( isUserCallingHisOwnMenu() ) {
 			return false;
 		}
 
-		return securityService.isSuperAdminUser( accessor.getId() );
+		return isAccessorSuperAdmin();
 	}
 
 	@Override

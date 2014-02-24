@@ -11,12 +11,19 @@ public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem<User> {
 		super( user, accessor, services );
 	}
 
-	protected boolean isMenuCallerIsSeeingOwnMenu() {
+	protected boolean isUserCallingHisOwnMenu() {
 		return UserUtils.isUsersEqual( accessor, menuEntry );
 	}
 
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
-		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isMenuCallerIsSeeingOwnMenu();
+		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isUserCallingHisOwnMenu();
 	}
 
+	protected boolean isAccessorSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( accessor.getId() );
+	}
+
+	protected boolean isUserSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( menuEntry );
+	}
 }

@@ -1,5 +1,7 @@
 package core.general.menus;
 
+import core.general.user.User;
+
 import java.util.List;
 
 public class EntryMenu {
@@ -13,6 +15,17 @@ public class EntryMenu {
 		this.menuEntry = menuEntry;
 		this.entryMenuType = entryMenuType;
 		this.entryMenuItems = entryMenuItems;
+	}
+
+	public String getMenuTitle() {
+		final StringBuilder builder = new StringBuilder();
+		builder.append( entryMenuType.getNameTranslated() ).append( ": " ).append( "#" ).append( menuEntry.getId() );
+
+		/*if ( menuEntry instanceof User ) {
+			builder.append( ); // TODO: show ADMIN prefix
+		}*/
+
+		return builder.toString();
 	}
 
 	public int getEntryId() {

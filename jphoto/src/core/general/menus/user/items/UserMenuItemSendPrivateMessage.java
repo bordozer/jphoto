@@ -6,7 +6,6 @@ import core.general.menus.user.AbstractUserMenuItem;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
-import utils.UserUtils;
 
 public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
@@ -41,7 +40,7 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 			return false;
 		}
 
-		if ( isMenuCallerIsSeeingOwnMenu() ) {
+		if ( isUserCallingHisOwnMenu() ) {
 			return false;
 		}
 

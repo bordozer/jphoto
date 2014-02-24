@@ -31,9 +31,7 @@
 
 	<div id="${menuDivId}" class="entry-popup-menu">
 
-		<div class="floatleft block-background entry-popup-menu-header">
-			${entryMenu.entryMenuType.nameTranslated}: #${entryMenu.entryId}
-		</div>
+		<div class="floatleft block-background entry-popup-menu-header">${entryMenu.menuTitle}</div>
 
 		<tags:entryMenuRenderer entryMenu="${entryMenu}" />
 
