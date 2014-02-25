@@ -13,10 +13,6 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 		super( photo, accessor, services );
 	}
 
-	public boolean isAccessibleFor() {
-		return isSuperAdminUser( accessor ) || ! isPhotoIsWithinAnonymousPeriod();
-	}
-
 	protected User getPhotoAuthor() {
 		return getUserService().load( menuEntry.getUserId() );
 	}

@@ -28,7 +28,7 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUser = getPhotoQtyByUser( photoAuthor.getId() );
+				final int photoQtyByUser = getPhotoQtyByUser();
 				return TranslatorUtils.translate( "$1: all photos ( $2 )", photoAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
@@ -41,14 +41,27 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( getPhotoQtyByUser() < 2 ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor ) ) {
+			return true;
+		}
+
 		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor() && getPhotoQtyByUser( menuEntry.getUserId() ) > 1;
+		if ( isPhotoIsWithinAnonymousPeriod() ) {
+			return false;
+		}
+
+		return true;
 	}
 
-	private int getPhotoQtyByUser( final int userId ) {
-		return getPhotoService().getPhotoQtyByUser( userId );
+	private int getPhotoQtyByUser() {
+		return getPhotoService().getPhotoQtyByUser( menuEntry.getUserId() );
 	}
 }
