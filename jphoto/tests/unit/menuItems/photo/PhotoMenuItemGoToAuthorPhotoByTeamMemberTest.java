@@ -21,7 +21,6 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 
 	private PhotoTeamMember photoTeamMember;
 	private UserTeamMember userTeamMember;
-	private User teamMemberUser;
 
 	@Before
 	public void setup() {
@@ -29,13 +28,12 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 
 		photoTeamMember = getPhotoTeamMember();
 		userTeamMember = getUserTeamMember();
-		teamMemberUser = getTeamMemberUser();
 	}
 
 	@Test
-	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosWithThisMemberTest() {
 		final User accessor = User.NOT_LOGGED_USER;
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
+
 		final int teamMemberPhotosQty = 2;
 		final boolean isPhotoAuthorNameMustBeHidden = false;
 
@@ -47,9 +45,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoInGenreTest() {
+	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoWithThisMemberTest() {
 		final User accessor = User.NOT_LOGGED_USER;
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final int teamMemberPhotosQty = 1;
 		final boolean isPhotoAuthorNameMustBeHidden = false;
 
@@ -61,9 +58,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosWithThisMemberTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final int teamMemberPhotosQty = 2;
 
 		final ServicesImpl services = getServices( testData, accessor );
@@ -73,9 +69,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosInGenreTest() {
+	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosWithThisMemberTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final int teamMemberPhotosQty = 2;
 
 		final ServicesImpl services = getServices( testData, accessor );
@@ -87,7 +82,6 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	@Test
 	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
 		final User accessor = testData.getPhotoAuthor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false; // sick!
 		final int teamMemberPhotosQty = 2;
 
@@ -99,9 +93,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosInGenreTest() {
+	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosWithThisMemberTest() {
 		final User accessor = testData.getPhotoAuthor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true; // sick!
 		final int teamMemberPhotosQty = 1; // sick!
 
@@ -115,7 +108,6 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	@Test
 	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
 		final User accessor = testData.getPhotoAuthor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
 		final boolean isPhotoAuthorNameMustBeHidden = false; // sick!
 		final int teamMemberPhotosQty = 2; // sick!
@@ -131,7 +123,6 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	@Test
 	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
 		final User accessor = testData.getAccessor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 		final boolean isPhotoAuthorNameMustBeHidden = true; // sick!
 		final int teamMemberPhotosQty = 2;
@@ -145,9 +136,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void menuIsNotShownIfThereIsLessThenOnePhotosInGenreTest() {
+	public void menuIsNotShownIfThereIsLessThenOnePhotosWithThisMemberTest() {
 		final User accessor = testData.getAccessor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 		final boolean isPhotoAuthorNameMustBeHidden = false;
 		final int teamMemberPhotosQty = 1;
@@ -161,9 +151,8 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void menuIsShownIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void menuIsShownIfThereIsMoreThenOnePhotosWithThisMemberTest() {
 		final User accessor = testData.getAccessor();
-		final PhotoTeamMember photoTeamMember = getPhotoTeamMember();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 		final boolean isPhotoAuthorNameMustBeHidden = false;
 		final int teamMemberPhotosQty = 2;
