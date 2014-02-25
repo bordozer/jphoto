@@ -1,5 +1,6 @@
 package menuItems.photo;
 
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 
@@ -8,6 +9,7 @@ class PhotoMenuItemTestData {
 	private final User photoAuthor;
 	private final User accessor;
 
+	private final Genre genre;
 	private final Photo photo;
 
 	PhotoMenuItemTestData() {
@@ -17,10 +19,15 @@ class PhotoMenuItemTestData {
 		accessor = new User( 333 );
 		accessor.setName( "Just a User" );
 
+		genre = new Genre();
+		genre.setId( 433 );
+		genre.setName( "Photo category" );
+
 		photo = new Photo();
 		photo.setId( 567 );
 		photo.setName( "The photo" );
 		photo.setUserId( photoAuthor.getId() );
+		photo.setGenreId( genre.getId() );
 	}
 
 	public User getPhotoAuthor() {
@@ -33,5 +40,9 @@ class PhotoMenuItemTestData {
 
 	public Photo getPhoto() {
 		return photo;
+	}
+
+	public Genre getGenre() {
+		return genre;
 	}
 }

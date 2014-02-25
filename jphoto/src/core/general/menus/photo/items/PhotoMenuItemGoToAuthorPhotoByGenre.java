@@ -44,11 +44,28 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( getPhotosInGenre() < 2 ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor ) ) {
+			return true;
+		}
+
 		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return ( isSuperAdminUser( accessor ) || ! isPhotoIsWithinAnonymousPeriod() ) && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() ) > 1;
+		if ( isPhotoIsWithinAnonymousPeriod() ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private int getPhotosInGenre() {
+		return getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() );
 	}
 
 	private Genre getGenre() {

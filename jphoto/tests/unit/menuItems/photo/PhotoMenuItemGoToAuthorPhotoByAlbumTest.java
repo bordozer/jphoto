@@ -17,6 +17,48 @@ import static org.junit.Assert.assertTrue;
 public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
+	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosInAlbumTest() {
+		final User accessor = User.NOT_LOGGED_USER;
+		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
+		final int albumPhotosQty = 2;
+		final boolean isPhotoAuthorNameMustBeHidden = false;
+
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setUserPhotoAlbumService( getUserPhotoAlbumService( photoAlbum.getId(), albumPhotosQty ) );
+		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
+
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByAlbum( testData.getPhoto(), accessor, services, photoAlbum ).isAccessibleFor() );
+	}
+
+	@Test
+	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoInAlbumTest() {
+		final User accessor = User.NOT_LOGGED_USER;
+		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
+		final int albumPhotosQty = 1;
+		final boolean isPhotoAuthorNameMustBeHidden = false;
+
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setUserPhotoAlbumService( getUserPhotoAlbumService( photoAlbum.getId(), albumPhotosQty ) );
+		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
+
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByAlbum( testData.getPhoto(), accessor, services, photoAlbum ).isAccessibleFor() );
+	}
+
+	@Test
+	public void notLoggedCanSeeMenuIfThereIsMoreThenOnePhotosInTheAlbumTest() {
+		final User accessor = User.NOT_LOGGED_USER;
+		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
+		final int albumPhotosQty = 2;
+		final boolean isPhotoAuthorNameMustBeHidden = false;
+
+		final ServicesImpl services = getServices( testData, accessor );
+		services.setUserPhotoAlbumService( getUserPhotoAlbumService( photoAlbum.getId(), albumPhotosQty ) );
+		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
+
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByAlbum( testData.getPhoto(), accessor, services, photoAlbum ).isAccessibleFor() );
+	}
+
+	@Test
 	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosInTheAlbumTest() {
 		final User accessor = SUPER_ADMIN_1;
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
@@ -41,7 +83,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	}
 
 	@Test
-	public void accessorCanNOTSeeMenuIfHeIsThePhotoAuthorAndShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
+	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
 		final User accessor = testData.getPhotoAuthor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
@@ -55,7 +97,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	}
 
 	@Test
-	public void accessorCanNOTSeeMenuIfHeIsThePhotoAuthorAndShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosInTheAlbumTest() {
+	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosInTheAlbumTest() {
 		final User accessor = testData.getPhotoAuthor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
@@ -69,7 +111,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	}
 
 	@Test
-	public void accessorCanSeeMenuIfHeIsThePhotoAuthorAndShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
+	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
 		final User accessor = testData.getPhotoAuthor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
 		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
@@ -88,7 +130,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
 		final User accessor = testData.getAccessor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
+		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 		final boolean isPhotoAuthorNameMustBeHidden = true;
 		final int albumPhotosQty = 2;
 
@@ -104,8 +146,8 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	public void menuIsNotShownIfThereIsLessThenOnePhotosInTheAlbumTest() {
 		final User accessor = testData.getAccessor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
-		final boolean isPhotoAuthorNameMustBeHidden = true;
+		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
+		final boolean isPhotoAuthorNameMustBeHidden = false;
 		final int albumPhotosQty = 1;
 
 		final ServicesImpl services = getServices( testData, accessor );
@@ -120,7 +162,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	public void menuIsShownIfThereIsMoreThenOnePhotosInTheAlbumTest() {
 		final User accessor = testData.getAccessor();
 		final UserPhotoAlbum photoAlbum = getUserPhotoAlbum();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
+		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 		final boolean isPhotoAuthorNameMustBeHidden = false;
 		final int albumPhotosQty = 2;
 
@@ -176,11 +218,4 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 
 		return album;
 	}
-
-	/*private User getAlbumUser() {
-		final User user = new User( 377 );
-		user.setName( "Album user" );
-
-		return user;
-	}*/
 }

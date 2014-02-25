@@ -30,7 +30,7 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 	}
 
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
-		return isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff() && isPhotoOfMenuCaller();
+		return isPhotoOfMenuCaller() && isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff();
 	}
 
 	protected GenreService getGenreService() {
