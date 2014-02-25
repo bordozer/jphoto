@@ -46,11 +46,20 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( isSuperAdminUser( accessor ) ) {
+			return true;
+		}
+
 		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor() && getUserPhotoAlbumPhotosQty() > 1;
+		if ( isPhotoIsWithinAnonymousPeriod() ) {
+			return false;
+		}
+
+		return getUserPhotoAlbumPhotosQty() > 1;
 	}
 
 	private int getUserPhotoAlbumPhotosQty() {
