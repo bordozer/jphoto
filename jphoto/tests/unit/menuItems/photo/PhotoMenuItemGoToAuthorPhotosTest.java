@@ -18,132 +18,112 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 	@Test
 	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
-		final User accessor = User.NOT_LOGGED_USER;
-		final int genrePhotosQty = 2;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoInGenreTest() {
-		final User accessor = User.NOT_LOGGED_USER;
-		final int genrePhotosQty = 1;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 1 );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final int genrePhotosQty = 2;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosInGenreTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final int genrePhotosQty = 2;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final int genrePhotosQty = 2;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosInGenreTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final int genrePhotosQty = 1;
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 1 );
+		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final int genrePhotosQty = 2;
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
+		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final ServicesImpl services = getServices( goToParameters );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = true; // sick!
-		final int genrePhotosQty = 2;
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
+		goToParameters.setPhotoAuthorNameMustBeHidden( true );
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final ServicesImpl services = getServices( goToParameters );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void menuIsNotShownIfThereIsLessThenOnePhotosInGenreTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final int genrePhotosQty = 1;
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 1 );
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final ServicesImpl services = getServices( goToParameters );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
 	public void menuIsShownIfThereIsMoreThenOnePhotosInGenreTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final int genrePhotosQty = 2;
 
-		final ServicesImpl services = getServices( accessor, genrePhotosQty, showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, isPhotoAuthorNameMustBeHidden );
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		final ServicesImpl services = getServices( goToParameters );
+
+		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
-	private ServicesImpl getServices( final User accessor, final int genrePhotosQty, final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, final boolean photoAuthorNameMustBeHidden ) {
+	private ServicesImpl getServices( final GoToParameters goToParameters ) {
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( testData, goToParameters.getAccessor() );
 
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setSecurityService( getSecurityService( accessor, photoAuthorNameMustBeHidden ) );
+		services.setConfigurationService( getConfigurationService( goToParameters.isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn() ) );
+		services.setSecurityService( getSecurityService( goToParameters.getAccessor(), goToParameters.isPhotoAuthorNameMustBeHidden() ) );
 		services.setGenreService( getGenreService() );
-		services.setPhotoService( getPhotoService( genrePhotosQty ) );
+		services.setPhotoService( getPhotoService( goToParameters.getGenrePhotosQty() ) );
 
 		return services;
 	}
@@ -193,5 +173,13 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 		EasyMock.replay( photoService );
 
 		return photoService;
+	}
+
+	private void assertT( final boolean accessibleFor ) {
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, accessibleFor );
+	}
+
+	private void assertF( final boolean accessibleFor ) {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, accessibleFor );
 	}
 }
