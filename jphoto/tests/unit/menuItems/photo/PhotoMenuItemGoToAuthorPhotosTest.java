@@ -14,44 +14,44 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
+public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractGoToAuthorPhotosTest_ {
 
 	@Test
-	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoInGenreTest() {
+	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 1 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosInGenreTest() {
+	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
@@ -61,18 +61,18 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosInGenreTest() {
+	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 1 );
 		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
@@ -82,7 +82,7 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
 		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
@@ -92,31 +92,31 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
 		goToParameters.setPhotoAuthorNameMustBeHidden( true );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void menuIsNotShownIfThereIsLessThenOnePhotosInGenreTest() {
+	public void menuIsNotShownIfThereIsLessThenOnePhotosTest() {
 		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 1 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertF( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
 	@Test
-	public void menuIsShownIfThereIsMoreThenOnePhotosInGenreTest() {
+	public void menuIsShownIfThereIsMoreThenOnePhotosTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
 
-		final ServicesImpl services = getServices( goToParameters );
+		final ServicesImpl services = getServicesGoTo( goToParameters );
 
 		assertT( new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), services ).isAccessibleFor() );
 	}
 
-	private ServicesImpl getServices( final GoToParameters goToParameters ) {
+	protected ServicesImpl getServicesGoTo( final GoToParameters goToParameters ) {
 
 		final ServicesImpl services = getServices( testData, goToParameters.getAccessor() );
 
@@ -175,11 +175,11 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 		return photoService;
 	}
 
-	private void assertT( final boolean accessibleFor ) {
+	protected void assertT( final boolean accessibleFor ) {
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, accessibleFor );
 	}
 
-	private void assertF( final boolean accessibleFor ) {
+	protected void assertF( final boolean accessibleFor ) {
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, accessibleFor );
 	}
 }
