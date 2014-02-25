@@ -11,9 +11,6 @@ import core.services.system.ConfigurationService;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractGoToAuthorPhotosTest_ {
 
 	@Test
@@ -173,13 +170,5 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractGoToAuthorPhotosT
 		EasyMock.replay( photoService );
 
 		return photoService;
-	}
-
-	protected void assertT( final boolean accessibleFor ) {
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, accessibleFor );
-	}
-
-	protected void assertF( final boolean accessibleFor ) {
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, accessibleFor );
 	}
 }
