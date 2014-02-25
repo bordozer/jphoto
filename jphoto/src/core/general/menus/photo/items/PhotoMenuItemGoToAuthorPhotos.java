@@ -2,13 +2,12 @@ package core.general.menus.photo.items;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
+public class PhotoMenuItemGoToAuthorPhotos extends AbstractGoToAuthorPhotos {
 
 	public PhotoMenuItemGoToAuthorPhotos( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
@@ -28,8 +27,7 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUser = getPhotoQtyByUser();
-				return TranslatorUtils.translate( "$1: all photos ( $2 )", photoAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
+				return TranslatorUtils.translate( "$1: all photos ( $2 )", photoAuthor.getNameEscaped(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override
@@ -40,28 +38,7 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-
-		if ( getPhotoQtyByUser() < 2 ) {
-			return false;
-		}
-
-		if ( isSuperAdminUser( accessor ) ) {
-			return true;
-		}
-
-		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
-			return false;
-		}
-
-		if ( isPhotoIsWithinAnonymousPeriod() ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private int getPhotoQtyByUser() {
+	protected int getPhotosQty() {
 		return getPhotoService().getPhotoQtyByUser( menuEntry.getUserId() );
 	}
 }

@@ -2,7 +2,6 @@ package core.general.menus.photo.items;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
@@ -10,7 +9,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuItem {
+public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractGoToAuthorPhotos {
 
 	private final PhotoTeamMember photoTeamMember;
 
@@ -36,7 +35,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( "$1: photos with $2 $3 ( $4 )"
-					, photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), String.valueOf( getTeamMemberPhotosQty() ) );
+					, photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override
@@ -52,28 +51,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-
-		if ( getTeamMemberPhotosQty() < 2 ) {
-			return false;
-		}
-
-		if ( isSuperAdminUser( accessor ) ) {
-			return true;
-		}
-
-		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
-			return false;
-		}
-
-		if ( isPhotoIsWithinAnonymousPeriod() ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private int getTeamMemberPhotosQty() {
+	protected int getPhotosQty() {
 		return services.getUserTeamService().getTeamMemberPhotosQty( photoTeamMember.getUserTeamMember().getId() );
 	}
 }

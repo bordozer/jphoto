@@ -2,14 +2,13 @@ package core.general.menus.photo.items;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
+public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractGoToAuthorPhotos {
 
 	private final UserPhotoAlbum userPhotoAlbum;
 
@@ -34,7 +33,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( "$1: photos from album '$2' ( $3 )"
-					, photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), String.valueOf( getUserPhotoAlbumPhotosQty() ) );
+					, photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override
@@ -45,28 +44,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-
-		if ( getUserPhotoAlbumPhotosQty() <= 1 ) {
-			return false;
-		}
-
-		if ( isSuperAdminUser( accessor ) ) {
-			return true;
-		}
-
-		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
-			return false;
-		}
-
-		if ( isPhotoIsWithinAnonymousPeriod() ) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private int getUserPhotoAlbumPhotosQty() {
+	protected int getPhotosQty() {
 		return services.getUserPhotoAlbumService().getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() );
 	}
 }
