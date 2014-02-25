@@ -53,11 +53,24 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoMenuI
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( getTeamMemberPhotosQty() < 2 ) {
+			return false;
+		}
+
+		if ( isSuperAdminUser( accessor ) ) {
+			return true;
+		}
+
 		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
 			return false;
 		}
 
-		return super.isAccessibleFor() && getTeamMemberPhotosQty() > 1;
+		if ( isPhotoIsWithinAnonymousPeriod() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private int getTeamMemberPhotosQty() {
