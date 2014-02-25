@@ -2,7 +2,7 @@ package menuItems.photo;
 
 import core.general.user.User;
 
-public class GoToParameters {
+class GoToParameters {
 
 	private final User accessor;
 	private final int genrePhotosQty;
@@ -13,13 +13,6 @@ public class GoToParameters {
 		this.accessor = accessor;
 		this.genrePhotosQty = genrePhotosQty;
 	}
-
-	/*public GoToParameters( final User accessor, final int genrePhotosQty, final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn, final boolean photoAuthorNameMustBeHidden ) {
-		this.accessor = accessor;
-		this.genrePhotosQty = genrePhotosQty;
-		this.showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn;
-		this.photoAuthorNameMustBeHidden = photoAuthorNameMustBeHidden;
-	}*/
 
 	public User getAccessor() {
 		return accessor;
