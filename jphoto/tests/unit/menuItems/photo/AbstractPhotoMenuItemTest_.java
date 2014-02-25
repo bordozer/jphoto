@@ -28,7 +28,7 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 	protected ServicesImpl getServices( final PhotoMenuItemTestData testData, final User accessor ) {
 		final ServicesImpl services = new ServicesImpl();
 
-		services.setPhotoService( getPhotoService( testData ) );
+		services.setPhotoService( getPhotoService() );
 		services.setSecurityService( getSecurityService( accessor ) );
 		services.setUserService( getUserService( testData ) );
 
@@ -62,7 +62,7 @@ public abstract class AbstractPhotoMenuItemTest_ extends AbstractTestCase {
 		return securityService;
 	}
 
-	private PhotoService getPhotoService( final PhotoMenuItemTestData testData ) {
+	private PhotoService getPhotoService() {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
 		EasyMock.expect( photoService.load( testData.getPhoto().getId() ) ).andReturn( testData.getPhoto() ).anyTimes();

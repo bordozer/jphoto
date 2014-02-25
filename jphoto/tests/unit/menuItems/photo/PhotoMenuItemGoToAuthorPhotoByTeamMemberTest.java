@@ -1,23 +1,17 @@
 package menuItems.photo;
 
 import core.enums.UserTeamMemberType;
-import core.general.configuration.ConfigurationKey;
 import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotoByTeamMember;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
-import core.services.system.ConfigurationService;
 import core.services.user.UserTeamService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoMenuItemTest_ {
+public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractGoToAuthorPhotosTest_ {
 
 	private PhotoTeamMember photoTeamMember;
 	private UserTeamMember userTeamMember;
@@ -31,166 +25,97 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 	}
 
 	@Test
-	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosWithThisMemberTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
 
-		final int teamMemberPhotosQty = 2;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
+		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoWithThisMemberTest() {
-		final User accessor = User.NOT_LOGGED_USER;
-		final int teamMemberPhotosQty = 1;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
+	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 1 );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosWithThisMemberTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final int teamMemberPhotosQty = 2;
+	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosWithThisMemberTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final int teamMemberPhotosQty = 2;
+	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false; // sick!
-		final int teamMemberPhotosQty = 2;
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosWithThisMemberTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true; // sick!
-		final int teamMemberPhotosQty = 1; // sick!
+	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosTest() {
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 1 );
+		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = true;
-		final boolean isPhotoAuthorNameMustBeHidden = false; // sick!
-		final int teamMemberPhotosQty = 2; // sick!
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
+		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
 	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = true; // sick!
-		final int teamMemberPhotosQty = 2;
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
+		goToParameters.setPhotoAuthorNameMustBeHidden( true );
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void menuIsNotShownIfThereIsLessThenOnePhotosWithThisMemberTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final int teamMemberPhotosQty = 1;
+	public void menuIsNotShownIfThereIsLessThenOnePhotosTest() {
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 1 );
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertF( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
 	@Test
-	public void menuIsShownIfThereIsMoreThenOnePhotosWithThisMemberTest() {
-		final User accessor = testData.getAccessor();
-		final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = false;
-		final boolean isPhotoAuthorNameMustBeHidden = false;
-		final int teamMemberPhotosQty = 2;
+	public void menuIsShownIfThereIsMoreThenOnePhotosTest() {
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) );
-		services.setSecurityService( getSecurityService( accessor, isPhotoAuthorNameMustBeHidden ) );
-		services.setUserTeamService( getUserTeamService( teamMemberPhotosQty ) );
+		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), accessor, services, photoTeamMember ).isAccessibleFor() );
+		assertT( new PhotoMenuItemGoToAuthorPhotoByTeamMember( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ), photoTeamMember ).isAccessibleFor() );
 	}
 
-	private ConfigurationService getConfigurationService( final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) {
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
+	protected ServicesImpl getServicesGoTo( final GoToParameters goToParameters ) {
 
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.SYSTEM_SHOW_UI_MENU_GO_TO_PHOTOS_FOR_OWN_ENTRIES ) ).andReturn( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ).anyTimes();
+		final ServicesImpl services = getServices( testData, goToParameters.getAccessor() );
 
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
+		services.setConfigurationService( getConfigurationServiceGoTo( goToParameters.isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn() ) );
+		services.setSecurityService( getSecurityServiceGoTo( goToParameters.getAccessor(), goToParameters.isPhotoAuthorNameMustBeHidden() ) );
+		services.setUserTeamService( getUserTeamService( goToParameters.getTeamMemberPhotosQty() ) );
 
-		return configurationService;
+		return services;
 	}
 
-	private SecurityService getSecurityService( final User accessor, final boolean isPhotoAuthorNameMustBeHidden ) {
-
-		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
-
-		EasyMock.expect( securityService.isPhotoAuthorNameMustBeHidden( testData.getPhoto(), accessor ) ).andReturn( isPhotoAuthorNameMustBeHidden ).anyTimes();
-
-		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( securityService );
-
-		return securityService;
-	}
-
-	private UserTeamService getUserTeamService( final int teamMemberPhotosQty ) {
+	protected UserTeamService getUserTeamService( final int teamMemberPhotosQty ) {
 		final UserTeamService userTeamService = EasyMock.createMock( UserTeamService.class );
 
 		EasyMock.expect( userTeamService.getTeamMemberPhotosQty( userTeamMember.getId() ) ).andReturn( teamMemberPhotosQty ).anyTimes();
@@ -201,7 +126,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 		return userTeamService;
 	}
 
-	public PhotoTeamMember getPhotoTeamMember() {
+	private PhotoTeamMember getPhotoTeamMember() {
 		final PhotoTeamMember photoTeamMember = new PhotoTeamMember();
 		photoTeamMember.setUserTeamMember( getUserTeamMember() );
 
@@ -223,5 +148,42 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 		final User user = new User();
 		user.setName( "Photo team member user" );
 		return user;
+	}
+
+	private class GoToParameters {
+
+		private final User accessor;
+		private final int teamMemberPhotosQty;
+		private boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn;
+		private boolean photoAuthorNameMustBeHidden;
+
+		public GoToParameters( final User accessor, final int teamMemberPhotosQty ) {
+			this.accessor = accessor;
+			this.teamMemberPhotosQty = teamMemberPhotosQty;
+		}
+
+		public User getAccessor() {
+			return accessor;
+		}
+
+		public int getTeamMemberPhotosQty() {
+			return teamMemberPhotosQty;
+		}
+
+		public boolean isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn() {
+			return showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn;
+		}
+
+		public void setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) {
+			this.showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn = showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn;
+		}
+
+		public boolean isPhotoAuthorNameMustBeHidden() {
+			return photoAuthorNameMustBeHidden;
+		}
+
+		public void setPhotoAuthorNameMustBeHidden( final boolean photoAuthorNameMustBeHidden ) {
+			this.photoAuthorNameMustBeHidden = photoAuthorNameMustBeHidden;
+		}
 	}
 }
