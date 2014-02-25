@@ -23,7 +23,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 	}
 
 	@Test
-	public void photoAuthorCanNotSeeMenuTest() {
+	public void photoAuthorCanNotSeeMenuForOwnPhotoTest() {
 		final User accessor = testData.getPhotoAuthor();
 
 		final ServicesImpl services = getServices( testData, accessor );
