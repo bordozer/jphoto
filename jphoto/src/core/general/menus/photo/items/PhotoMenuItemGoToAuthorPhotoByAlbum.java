@@ -47,6 +47,10 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
+		if ( getUserPhotoAlbumPhotosQty() <= 1 ) {
+			return false;
+		}
+
 		if ( isSuperAdminUser( accessor ) ) {
 			return true;
 		}
@@ -59,7 +63,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoMenuItem {
 			return false;
 		}
 
-		return getUserPhotoAlbumPhotosQty() > 1;
+		return true;
 	}
 
 	private int getUserPhotoAlbumPhotosQty() {
