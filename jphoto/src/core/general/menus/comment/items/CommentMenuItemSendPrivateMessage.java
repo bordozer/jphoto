@@ -48,6 +48,10 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 			return false;
 		}
 
+		if ( isSuperAdminUser( accessor ) ) {
+			return true;
+		}
+
 		final boolean isAccessorInBlackListOfCommentAuthor = isAccessorInTheBlackListOfCommentAuthor();
 
 		final boolean photoAuthorAlwaysCanSeeMenuButHeIsInTheBlackListOfCommentAuthor = isAccessorOwnerOfTheThePhoto() && !isAccessorInBlackListOfCommentAuthor;

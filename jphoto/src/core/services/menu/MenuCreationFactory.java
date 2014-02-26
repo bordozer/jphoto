@@ -169,9 +169,6 @@ public class MenuCreationFactory {
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new CommentAdminSubMenuItemLockUser( photoComment, accessor, services ) );
 					break;
-				case ADMIN_SEND_PRIVATE_MESSAGE:
-					menuItems.add( new CommentMenuItemSendPrivateMessageAdmin( photoComment, accessor, services ) );
-					break;
 				default:
 					throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuOperationType ) );
 			}
