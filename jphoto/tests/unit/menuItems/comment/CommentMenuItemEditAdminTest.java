@@ -3,7 +3,7 @@ package menuItems.comment;
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.items.CommentMenuItemEditAdmin;
+import core.general.menus.comment.admin.CommentMenuItemEditAdmin;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;

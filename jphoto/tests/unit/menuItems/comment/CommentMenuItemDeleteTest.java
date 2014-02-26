@@ -1,7 +1,7 @@
 package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.items.CommentMenuItemDelete;
+import core.general.menus.comment.operations.CommentMenuItemDelete;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;

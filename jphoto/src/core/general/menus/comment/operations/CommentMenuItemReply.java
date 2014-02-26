@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.operations;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;

@@ -2,7 +2,7 @@ package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.items.CommentAdminSubMenuItemLockUser;
+import core.general.menus.comment.bookmark.CommentAdminSubMenuItemLockUser;
 import core.general.user.User;
 import core.services.security.Services;
 import org.junit.Test;

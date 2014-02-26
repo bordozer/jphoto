@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.goTo;
 
 import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItemCommand;

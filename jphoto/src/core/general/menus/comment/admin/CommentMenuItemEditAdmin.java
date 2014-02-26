@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.admin;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;

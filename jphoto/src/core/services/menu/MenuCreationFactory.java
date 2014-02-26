@@ -1,7 +1,18 @@
 package core.services.menu;
 
 import core.general.menus.*;
-import core.general.menus.comment.items.*;
+import core.general.menus.comment.admin.CommentMenuItemDeleteAdmin;
+import core.general.menus.comment.admin.CommentMenuItemEditAdmin;
+import core.general.menus.comment.complain.CommentMenuItemComplaintCustom;
+import core.general.menus.comment.complain.CommentMenuItemComplaintSpam;
+import core.general.menus.comment.complain.CommentMenuItemComplaintSwordWords;
+import core.general.menus.comment.goTo.CommentMenuItemGoToAuthorPhotoByGenre;
+import core.general.menus.comment.goTo.CommentMenuItemGoToCommentAuthorPhotos;
+import core.general.menus.comment.bookmark.*;
+import core.general.menus.comment.operations.CommentMenuItemDelete;
+import core.general.menus.comment.operations.CommentMenuItemEdit;
+import core.general.menus.comment.operations.CommentMenuItemReply;
+import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockUser;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;

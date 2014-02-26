@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
@@ -9,15 +9,15 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class CommentMenuItemComplaintSwordWords extends AbstractCommentComplaintMenuItem {
+public class CommentMenuItemComplaintCustom extends AbstractCommentComplaintMenuItem {
 
-	public CommentMenuItemComplaintSwordWords( final PhotoComment photoComment, final User accessor, final Services services ) {
+	public CommentMenuItemComplaintCustom( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
 	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
-		return EntryMenuOperationType.COMMENT_COMPLAINT_SWORD_WORDS;
+		return EntryMenuOperationType.COMMENT_COMPLAINT_CUSTOM;
 	}
 
 	@Override
@@ -26,12 +26,18 @@ public class CommentMenuItemComplaintSwordWords extends AbstractCommentComplaint
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Report sword words or offence" );
+				return TranslatorUtils.translate( "Custom complaint" );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), getId(), accessor.getId(), ComplaintReasonType.COMMENT_SWORD_WORDS.getId() );
+				return String.format( "%s( %d, %d, %d, %d ); return false;"
+					, COMPLAINT_MESSAGE_JS_FUNCTION
+					, EntryMenuType.COMMENT.getId()
+					, getId()
+					, accessor.getId()
+					, ComplaintReasonType.COMMENT_CUSTOM_COMPLAINT.getId()
+				);
 			}
 		};
 	}

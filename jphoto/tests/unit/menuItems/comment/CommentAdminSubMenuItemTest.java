@@ -2,7 +2,7 @@ package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.items.CommentAdminSubMenuItem;
+import core.general.menus.comment.bookmark.CommentAdminSubMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;

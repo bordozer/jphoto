@@ -2,7 +2,7 @@ package menuItems.comment;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.items.AbstractCommentComplaintMenuItem;
+import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;

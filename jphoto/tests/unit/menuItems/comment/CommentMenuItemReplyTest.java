@@ -1,6 +1,6 @@
 package menuItems.comment;
 
-import core.general.menus.comment.items.CommentMenuItemReply;
+import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;

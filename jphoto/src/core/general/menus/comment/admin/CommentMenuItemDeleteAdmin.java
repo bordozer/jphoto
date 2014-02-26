@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.admin;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
@@ -7,17 +7,16 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
-import utils.UserUtils;
 
-public class CommentMenuItemDelete extends AbstractCommentMenuItem {
+public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
-	public CommentMenuItemDelete( final PhotoComment photoComment, final User accessor, final Services services ) {
+	public CommentMenuItemDeleteAdmin( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
 	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
-		return EntryMenuOperationType.MENU_ITEM_DELETE;
+		return EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE;
 	}
 
 	@Override
@@ -26,11 +25,7 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				if ( isCommentLeftByAccessor() ) {
-					return TranslatorUtils.translate( "Delete comment" );
-				}
-
-				return TranslatorUtils.translate( "Delete comment (as photo author)" );
+				return TranslatorUtils.translate(  "Delete comment" );
 			}
 
 			@Override
@@ -47,16 +42,11 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 			return false;
 		}
 
-		if ( ! UserUtils.isLoggedUser( accessor ) ) {
-			return false;
-		}
+		return getSecurityService().isSuperAdminUser( accessor );
+	}
 
-		if ( UserUtils.isUserOwnThePhoto( accessor, getPhoto() ) ) {
-			return true;
-		}
-
-		// TODO: should be allowed deletion of admin messages?
-
-		return isCommentLeftByAccessor();
+	@Override
+	public String getMenuCssClass() {
+		return MENU_ITEM_CSS_CLASS_ADMIN;
 	}
 }

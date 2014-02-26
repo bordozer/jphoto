@@ -1,4 +1,4 @@
-package core.general.menus.comment.items;
+package core.general.menus.comment.bookmark;
 
 import core.general.menus.*;
 import core.general.menus.comment.AbstractCommentMenuItem;
