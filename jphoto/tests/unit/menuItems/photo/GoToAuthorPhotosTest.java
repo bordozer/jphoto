@@ -17,35 +17,11 @@ import static org.junit.Assert.assertTrue;
 public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
-
-		doAssertTrue( goToParameters );
-	}
-
-	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
 
 		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 1 );
 
 		goAssertFalse( goToParameters );
-	}
-
-	@Test
-	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
-
-		doAssertTrue( goToParameters );
-	}
-
-	@Test
-	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
-
-		doAssertTrue( goToParameters );
 	}
 
 	@Test
@@ -66,14 +42,6 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 	}
 
 	@Test
-	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
-		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
-		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
-
-		doAssertTrue( goToParameters );
-	}
-
-	@Test
 	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
 		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
 		goToParameters.setPhotoAuthorNameMustBeHidden( true );
@@ -86,6 +54,38 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 1 );
 
 		goAssertFalse( goToParameters );
+	}
+
+	@Test
+	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
+
+		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
+
+		doAssertTrue( goToParameters );
+	}
+
+	@Test
+	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
+
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
+
+		doAssertTrue( goToParameters );
+	}
+
+	@Test
+	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
+
+		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
+
+		doAssertTrue( goToParameters );
+	}
+
+	@Test
+	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
+		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
+		goToParameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
+
+		doAssertTrue( goToParameters );
 	}
 
 	@Test
