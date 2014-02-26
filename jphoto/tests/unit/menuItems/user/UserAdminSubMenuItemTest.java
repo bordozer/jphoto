@@ -14,58 +14,37 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
-		final User accessor = User.NOT_LOGGED_USER;
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), User.NOT_LOGGED_USER, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void usualUserCanNotSeeAdminSubMenuTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeAdminSubMenuOfAnotherUserTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), testData.getAccessor(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void photoAuthorCanNotSeeAdminSubMenuTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeAdminSubMenuOfAdminTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( SUPER_ADMIN_1, testData.getUser(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void commentAuthorCanNotSeeAdminSubMenuTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeOwnAdminSubMenuTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), testData.getUser(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanNotSeeAdminSubMenuIfThereIsHisTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( SUPER_ADMIN_1, accessor, services ).isAccessibleFor() );
+	public void adminCanNotSeeOwnAdminSubMenuTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( SUPER_ADMIN_1, SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanSeeAdminSubMenuTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices();
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void adminCanSeeAdminSubMenuOfUsualUserTest() {
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( testData.getUser(), SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void adminCanSeeAdminSubMenuForCommentOfAnotherAdminTest() {
-		final User accessor = SUPER_ADMIN_2;
-		final Services services = getServices();
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void adminCanSeeAdminSubMenuForAnotherAdminTest() {
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItem( SUPER_ADMIN_2, SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
