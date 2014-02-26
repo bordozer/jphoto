@@ -7,13 +7,21 @@ import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest_ {
 
-	private final User user = testData.getUser();
+	private User user;
+
+	@Before
+	public void setup() {
+		super.setup();
+
+		user = testData.getUser();
+	}
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuTest() {

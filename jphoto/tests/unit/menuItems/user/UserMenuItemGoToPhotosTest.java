@@ -23,6 +23,14 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	}
 
 	@Test
+	public void usualUserCanNotSeeGoToPhotosMenuIfUserHasLessThenTwoPhotosTest() {
+
+		final Parameters parameters = new Parameters( 1, true );
+
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemGoToPhotos( testData.getUser(), testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
+	}
+
+	@Test
 	public void userCanNotSeeOwnGoToPhotosMenuIfItIsSwitchedOffTest() {
 
 		final Parameters parameters = new Parameters( 7, false );
@@ -31,9 +39,9 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	}
 
 	@Test
-	public void usualUserCanSeeGoToPhotosMenuIfUserHasAtLeastOnePhotoTest() {
+	public void usualUserCanSeeGoToPhotosMenuIfUserHasAtLeastTwoPhotoTest() {
 
-		final Parameters parameters = new Parameters( 1, true );
+		final Parameters parameters = new Parameters( 2, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( testData.getUser(), testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -41,7 +49,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void usualUserCanSeeGoToPhotosMenuOfAdminTest() {
 
-		final Parameters parameters = new Parameters( 1, true );
+		final Parameters parameters = new Parameters( 2, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( SUPER_ADMIN_1, testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -66,7 +74,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 		final ServicesImpl services = getServices();
 
 		services.setConfigurationService( getConfigurationService( parameters.isShowOwnGoToPhotoConfiguration() ) );
-		services.setPhotoService( getPhotoService( parameters.getPhotosQty() ) );
+		services.setPhotoService( getPhotoService( parameters.getPhotosQty(), testData.getUser() ) );
 
 		return services;
 	}
@@ -95,10 +103,12 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 		return configurationService;
 	}
 
-	private PhotoService getPhotoService( final int photosQty ) {
+	private PhotoService getPhotoService( final int photosQty, final User user ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUser( testData.getUser().getId() ) ).andReturn( photosQty ).anyTimes();
+		EasyMock.expect( photoService.getPhotoQtyByUser( user.getId() ) ).andReturn( photosQty ).anyTimes();
+		EasyMock.expect( photoService.getPhotoQtyByUser( SUPER_ADMIN_1.getId() ) ).andReturn( photosQty ).anyTimes();
+
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
