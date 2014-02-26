@@ -50,7 +50,6 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
 
 		services.setSecurityService( getSecurityServiceReply( parameters ) );
-//		services.setFavoritesService( getFavoritesService( parameters ) );
 
 		return services;
 	}
@@ -77,17 +76,6 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 		return securityService;
 	}
-
-	/*private FavoritesService getFavoritesService( final ReplyParameters parameters ) {
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( testData.getComment().getCommentAuthor().getId(), parameters.getAccessor().getId() ) ).andReturn( parameters.isAccessorInTheBlackListOfCommentAuthor() ).anyTimes();
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		return favoritesService;
-	}*/
 
 	private class ReplyParameters {
 
