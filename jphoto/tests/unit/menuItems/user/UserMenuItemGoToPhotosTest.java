@@ -17,7 +17,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void usualUserCanNotSeeGoToPhotosMenuIfUserHasNoPhotosTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 0, true );
+		final Parameters parameters = new Parameters( 0, true );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemGoToPhotos( testData.getUser(), testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -25,7 +25,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void userCanNotSeeOwnGoToPhotosMenuIfItIsSwitchedOffTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 7, false );
+		final Parameters parameters = new Parameters( 7, false );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemGoToPhotos( testData.getUser(), testData.getUser(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -33,7 +33,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void usualUserCanSeeGoToPhotosMenuIfUserHasAtLeastOnePhotoTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 1, true );
+		final Parameters parameters = new Parameters( 1, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( testData.getUser(), testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -41,7 +41,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void usualUserCanSeeGoToPhotosMenuOfAdminTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 1, true );
+		final Parameters parameters = new Parameters( 1, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( SUPER_ADMIN_1, testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -49,7 +49,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void userCanSeeOwnGoToPhotosMenuIfItIsSwitchedOnTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 7, true );
+		final Parameters parameters = new Parameters( 7, true );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( testData.getUser(), testData.getUser(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
@@ -57,16 +57,16 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	@Test
 	public void userCanSeeGoToPhotosMenuOfAnotherUserIfItIsSwitchedOffTest() {
 
-		final ParametersGoTo parameters = new ParametersGoTo( 7, false );
+		final Parameters parameters = new Parameters( 7, false );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserMenuItemGoToPhotos( testData.getUser(), testData.getAccessor(), getServicesGoTo( parameters ) ).isAccessibleFor() );
 	}
 
-	private ServicesImpl getServicesGoTo( final ParametersGoTo parametersGoTo ) {
+	private ServicesImpl getServicesGoTo( final Parameters parameters ) {
 		final ServicesImpl services = getServices();
 
-		services.setConfigurationService( getConfigurationService( parametersGoTo.isShowOwnGoToPhotoConfiguration() ) );
-		services.setPhotoService( getPhotoService( parametersGoTo.getPhotosQty() ) );
+		services.setConfigurationService( getConfigurationService( parameters.isShowOwnGoToPhotoConfiguration() ) );
+		services.setPhotoService( getPhotoService( parameters.getPhotosQty() ) );
 
 		return services;
 	}
@@ -77,7 +77,7 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 		final int photosQty = 4;
 		final boolean showOwnGoToPhotoConfiguration = true;
 
-		final ServicesImpl services = getServicesGoTo( new ParametersGoTo( photosQty, showOwnGoToPhotoConfiguration ) );
+		final ServicesImpl services = getServicesGoTo( new Parameters( photosQty, showOwnGoToPhotoConfiguration ) );
 
 		final AbstractEntryMenuItemCommand command = new UserMenuItemGoToPhotos( testData.getUser(), accessor, services ).getMenuItemCommand();
 
@@ -105,12 +105,12 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 		return photoService;
 	}
 
-	private static class ParametersGoTo {
+	private static class Parameters {
 
 		private final int photosQty;
 		private final boolean showOwnGoToPhotoConfiguration;
 
-		private ParametersGoTo( final int photosQty, final boolean showOwnGoToPhotoConfiguration ) {
+		private Parameters( final int photosQty, final boolean showOwnGoToPhotoConfiguration ) {
 			this.photosQty = photosQty;
 			this.showOwnGoToPhotoConfiguration = showOwnGoToPhotoConfiguration;
 		}
