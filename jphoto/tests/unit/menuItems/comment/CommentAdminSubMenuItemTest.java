@@ -9,7 +9,6 @@ import core.services.security.Services;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
