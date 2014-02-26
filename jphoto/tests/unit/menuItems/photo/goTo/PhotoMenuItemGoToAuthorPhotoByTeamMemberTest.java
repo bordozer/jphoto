@@ -1,4 +1,4 @@
-package menuItems.photo;
+package menuItems.photo.goTo;
 
 import core.enums.UserTeamMemberType;
 import core.general.menus.AbstractEntryMenuItem;
@@ -9,6 +9,7 @@ import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.security.ServicesImpl;
 import core.services.user.UserTeamService;
+import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;

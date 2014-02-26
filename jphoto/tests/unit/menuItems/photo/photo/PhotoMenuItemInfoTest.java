@@ -1,10 +1,11 @@
-package menuItems.photo;
+package menuItems.photo.photo;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.photo.items.PhotoMenuItemInfo;
 import core.general.user.User;
 import core.services.security.ServicesImpl;
 import core.services.utils.UrlUtilsService;
+import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

@@ -1,10 +1,11 @@
-package menuItems.photo;
+package menuItems.photo.user;
 
 import core.general.menus.photo.items.PhotoMenuItemSendPrivateMessage;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
+import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

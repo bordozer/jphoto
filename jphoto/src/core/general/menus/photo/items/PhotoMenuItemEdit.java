@@ -8,7 +8,7 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
+public class PhotoMenuItemEdit extends AbstractPhotoUserOperationsMenuItem {
 
 	public PhotoMenuItemEdit( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
@@ -37,16 +37,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-
-		if ( isAccessorSeeingMenuOfOwnPhoto() ) {
-			return true;
-		}
-
-		if ( isAccessorSuperAdmin() ) {
-			return false;
-		}
-
+	protected boolean hasAccessTo() {
 		return getSecurityService().userCanEditPhoto( accessor, menuEntry );
 	}
 }

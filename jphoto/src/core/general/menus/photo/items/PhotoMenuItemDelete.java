@@ -2,13 +2,12 @@ package core.general.menus.photo.items;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
+public class PhotoMenuItemDelete extends AbstractPhotoUserOperationsMenuItem {
 
 	public PhotoMenuItemDelete( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
@@ -26,7 +25,6 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-//				return TranslatorUtils.translate( getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Delete your photo" : "Delete photo (ADMIN)" );
 				return TranslatorUtils.translate( "Delete photo" );
 			}
 
@@ -38,16 +36,7 @@ public class PhotoMenuItemDelete extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-
-		if ( isAccessorSeeingMenuOfOwnPhoto() ) {
-			return true;
-		}
-
-		if ( isAccessorSuperAdmin() ) {
-			return false;
-		}
-
+	protected boolean hasAccessTo() {
 		return getSecurityService().userCanDeletePhoto( accessor, menuEntry );
 	}
 }

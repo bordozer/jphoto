@@ -4,7 +4,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 
-class PhotoMenuItemTestData {
+public class PhotoMenuItemTestData {
 
 	private final User photoAuthor;
 	private final User accessor;

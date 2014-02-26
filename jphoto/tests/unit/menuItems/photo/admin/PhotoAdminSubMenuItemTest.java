@@ -1,4 +1,4 @@
-package menuItems.photo;
+package menuItems.photo.admin;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -6,6 +6,7 @@ import core.general.menus.photo.items.PhotoAdminSubMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
+import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

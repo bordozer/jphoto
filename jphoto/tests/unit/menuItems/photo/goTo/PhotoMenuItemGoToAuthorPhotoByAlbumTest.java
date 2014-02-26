@@ -1,4 +1,4 @@
-package menuItems.photo;
+package menuItems.photo.goTo;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -7,6 +7,7 @@ import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.security.ServicesImpl;
 import core.services.user.UserPhotoAlbumService;
+import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;

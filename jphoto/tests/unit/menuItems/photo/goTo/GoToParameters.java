@@ -1,4 +1,4 @@
-package menuItems.photo;
+package menuItems.photo.goTo;
 
 import core.general.user.User;
 
