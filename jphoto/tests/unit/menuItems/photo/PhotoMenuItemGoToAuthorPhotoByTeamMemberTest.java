@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class PhotoMenuItemGoToAuthorPhotoByTeamMember1Test extends AbstractPhotoMenuItemTest_ {
+public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoMenuItemTest_ {
 
 	private PhotoTeamMember photoTeamMember;
 	private UserTeamMember userTeamMember;
