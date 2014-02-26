@@ -28,7 +28,7 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", photoAuthor.getId() ) );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.DEFAULT_CSS_CLASS );
+		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {

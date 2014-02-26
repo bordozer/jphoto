@@ -50,6 +50,6 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 
 	@Override
 	public String getMenuCssClass() {
-		return ADMIN_MENU_ITEM_CSS_CLASS;
+		return MENU_ITEM_CSS_CLASS_ADMIN;
 	}
 }

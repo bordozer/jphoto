@@ -1,5 +1,6 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentAdminSubMenuItemLockUser;
 import core.general.user.User;
@@ -7,6 +8,7 @@ import core.services.security.Services;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItemTest_ {
 
@@ -60,5 +62,14 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 
 		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Lock comment author: %s", commentAuthor.getNameEscaped() ) );
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
+	}
+
+	@Test
+	public void cssClassTest() {
+		final User user = User.NOT_LOGGED_USER; // does not matter
+		final Services services = getServices( testData, user );
+		final CommentAdminSubMenuItemLockUser menuItem = new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services );
+
+		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
 	}
 }

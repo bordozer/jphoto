@@ -1,5 +1,6 @@
 package menuItems.comment;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.items.CommentAdminSubMenuItem;
 import core.general.photo.PhotoComment;
@@ -8,6 +9,7 @@ import core.services.security.Services;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
@@ -82,5 +84,14 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 		assertEquals( WRONG_COMMAND, command.getMenuText(), "ADMIN" );
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), "return false;" );
+	}
+
+	@Test
+	public void cssClassTest() {
+		final User user = User.NOT_LOGGED_USER; // does not matter
+		final Services services = getServices( testData, user );
+		final CommentAdminSubMenuItem menuItem = new CommentAdminSubMenuItem( testData.getComment(), user, services );
+
+		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
 	}
 }

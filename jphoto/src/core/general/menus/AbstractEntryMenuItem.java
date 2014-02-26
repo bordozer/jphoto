@@ -13,11 +13,12 @@ import utils.UserUtils;
 public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
-	public static final String ADMIN_MENU_ITEM_CSS_CLASS = "adminMenuItem";
+
+	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "adminMenuItem";
+	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = StringUtils.EMPTY;
 
 	public static final int MENU_ITEM_HEIGHT = 27;
 	public static final int MENU_SEPARATOR_HEIGHT = 5;
-	public static final String DEFAULT_CSS_CLASS = StringUtils.EMPTY;
 
 	protected final T menuEntry;
 	protected final User accessor;
@@ -45,7 +46,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	}
 
 	public String getMenuCssClass() {
-		return DEFAULT_CSS_CLASS;
+		return MENU_ITEM_CSS_CLASS_DEFAULT;
 	}
 
 	final protected boolean isUserWhoIsCallingMenuLogged() {
