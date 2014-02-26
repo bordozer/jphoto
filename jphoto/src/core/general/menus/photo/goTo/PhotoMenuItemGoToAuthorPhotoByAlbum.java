@@ -8,7 +8,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractGoToAuthorPhotos {
+public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoGoToAuthorPhotos {
 
 	private final UserPhotoAlbum userPhotoAlbum;
 

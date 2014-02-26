@@ -20,7 +20,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 	public void notLoggedUserCanNotReplyCommentTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -29,7 +29,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 	public void accessorCanNotSeeMenuForHisOwnCommentsTest() {
 		final User accessor = testData.getCommentAuthor();
 
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -39,7 +39,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final User accessor = SUPER_ADMIN_1;
 		final boolean isAccessorInPhotoAuthorBlackList = true;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getCommentAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
@@ -50,7 +50,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final User accessor = testData.getPhotoAuthor();
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getCommentAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
@@ -61,7 +61,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final User accessor = testData.getPhotoAuthor();
 		final boolean isAccessorInPhotoAuthorBlackList = true;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getCommentAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).isAccessibleFor() );
@@ -73,7 +73,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod = true;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getPhotoAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 		services.setSecurityService( getSecurityService( accessor, isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod ) );
 
@@ -89,7 +89,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod = false;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getCommentAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 		services.setSecurityService( getSecurityService( accessor, isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod ) );
 
@@ -102,7 +102,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 		final boolean isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod = true;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setFavoritesService( getFavoritesService( testData.getPhotoAuthor(), accessor, isAccessorInPhotoAuthorBlackList ) );
 		services.setSecurityService( getSecurityService( accessor, isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod ) );
 
@@ -115,7 +115,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 	@Test
 	public void commandTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).getMenuItemCommand();
 

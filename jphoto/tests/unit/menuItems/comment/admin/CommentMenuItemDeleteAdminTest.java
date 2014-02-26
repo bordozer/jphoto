@@ -16,7 +16,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void notLoggedUserCanNotDeleteCommentAdminSubMenuItemTest() {
 		final User user = User.NOT_LOGGED_USER;
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
 	}
@@ -24,7 +24,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void usualUserCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getAccessor();
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
 	}
@@ -32,7 +32,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void photoAuthorCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getPhotoAuthor();
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
 	}
@@ -40,7 +40,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void commentAuthorCanNotSeeDeleteCommentAdminSubMenuItemTest() {
 		final User user = testData.getCommentAuthor();
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
 	}
@@ -48,7 +48,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void adminCanSeeMenuTest() {
 		final User user = SUPER_ADMIN_1;
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).isAccessibleFor() );
 	}
@@ -56,7 +56,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void adminCanNotSeeMenuIfCommentHasAlreadyBeenDeletedTest() {
 		final User user = SUPER_ADMIN_1;
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentDeleted( true );
@@ -67,7 +67,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void commandTest() {
 		final User user = SUPER_ADMIN_1;
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).getMenuItemCommand();
 
@@ -78,7 +78,7 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 	@Test
 	public void cssClassTest() {
 		final User user = User.NOT_LOGGED_USER; // does not matter
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 		final CommentMenuItemDeleteAdmin menuItem = new CommentMenuItemDeleteAdmin( testData.getComment(), user, services );
 
 		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );

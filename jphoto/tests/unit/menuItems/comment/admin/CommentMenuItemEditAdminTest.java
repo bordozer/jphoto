@@ -79,7 +79,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void commandTest() {
 		final User user = SUPER_ADMIN_1;
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemEditAdmin( testData.getComment(), user, services ).getMenuItemCommand();
 
@@ -90,7 +90,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void cssClassTest() {
 		final User user = User.NOT_LOGGED_USER; // does not matter
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 		final CommentMenuItemEditAdmin menuItem = new CommentMenuItemEditAdmin( testData.getComment(), user, services );
 
 		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
@@ -101,7 +101,7 @@ public class CommentMenuItemEditAdminTest extends AbstractCommentMenuItemTest_ {
 	}
 
 	private Services getServicesForTest( final User user, final Boolean adminCanEditComments ) {
-		final ServicesImpl services = getServices( testData, user );
+		final ServicesImpl services = getServices( user );
 
 		services.setConfigurationService( getConfigurationService( adminCanEditComments ) );
 

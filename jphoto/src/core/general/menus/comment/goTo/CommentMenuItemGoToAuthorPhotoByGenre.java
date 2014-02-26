@@ -3,13 +3,12 @@ package core.general.menus.comment.goTo;
 import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuItem {
+public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAuthorPhotos {
 
 	public CommentMenuItemGoToAuthorPhotoByGenre( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
@@ -42,13 +41,8 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentMenuIt
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
-			return false;
-		}
-
+	protected int getPhotoQty() {
 		final Genre genre = getGenre( menuEntry );
-		return super.isAccessibleFor()
-			   && getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() ) > minPhotosForMenu();
+		return getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() );
 	}
 }

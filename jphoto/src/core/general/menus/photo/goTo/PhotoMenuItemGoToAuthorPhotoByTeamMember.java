@@ -9,7 +9,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractGoToAuthorPhotos {
+public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoGoToAuthorPhotos {
 
 	private final PhotoTeamMember photoTeamMember;
 

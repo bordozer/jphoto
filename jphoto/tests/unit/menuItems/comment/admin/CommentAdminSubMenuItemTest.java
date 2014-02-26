@@ -16,7 +16,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
 		final User accessor = User.NOT_LOGGED_USER;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -24,7 +24,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void usualUserCanNotSeeAdminSubMenuTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -32,7 +32,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void photoAuthorCanNotSeeAdminSubMenuTest() {
 		final User accessor = testData.getPhotoAuthor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -40,7 +40,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void commentAuthorCanNotSeeAdminSubMenuTest() {
 		final User accessor = testData.getCommentAuthor();
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -48,7 +48,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void adminCanNotSeeAdminSubMenuIfThereIsHisTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( accessor ); // Admin see his own comment
@@ -59,7 +59,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void adminCanSeeAdminSubMenuTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
 	}
@@ -67,7 +67,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void adminCanSeeAdminSubMenuForCommentOfAnotherAdminTest() {
 		final User accessor = SUPER_ADMIN_2;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( SUPER_ADMIN_1 ); // The comment of another admin
@@ -78,7 +78,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void commandTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices( testData, accessor );
+		final Services services = getServices( accessor );
 
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).getMenuItemCommand();
 
@@ -89,7 +89,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 	@Test
 	public void cssClassTest() {
 		final User user = User.NOT_LOGGED_USER; // does not matter
-		final Services services = getServices( testData, user );
+		final Services services = getServices( user );
 		final CommentAdminSubMenuItem menuItem = new CommentAdminSubMenuItem( testData.getComment(), user, services );
 
 		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );

@@ -26,18 +26,18 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		testData = new CommentMenuItemTestData();
 	}
 
-	protected ServicesImpl getServices( final CommentMenuItemTestData testData, final User accessor ) {
+	protected ServicesImpl getServices( final User accessor ) {
 		final ServicesImpl services = new ServicesImpl();
 
-		services.setPhotoCommentService( getPhotoCommentService( testData ) );
-		services.setPhotoService( getPhotoService( testData ) );
+		services.setPhotoCommentService( getPhotoCommentService() );
+		services.setPhotoService( getPhotoService() );
 		services.setSecurityService( getSecurityService( accessor ) );
-		services.setUserService( getUserService( testData ) );
+		services.setUserService( getUserService() );
 
 		return services;
 	}
 
-	private UserService getUserService( final CommentMenuItemTestData testData ) {
+	private UserService getUserService() {
 		final UserService userService = EasyMock.createMock( UserService.class );
 
 		EasyMock.expect( userService.load( testData.getAccessor().getId() ) ).andReturn( testData.getAccessor() ).anyTimes();
@@ -81,7 +81,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		return securityService;
 	}
 
-	protected PhotoService getPhotoService( final CommentMenuItemTestData testData ) {
+	protected PhotoService getPhotoService() {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
 		EasyMock.expect( photoService.load( testData.getComment().getPhotoId() ) ).andReturn( testData.getPhoto() ).anyTimes();
@@ -91,7 +91,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		return photoService;
 	}
 
-	protected PhotoCommentService getPhotoCommentService( final CommentMenuItemTestData testData ) {
+	protected PhotoCommentService getPhotoCommentService() {
 		final PhotoCommentService photoCommentService = EasyMock.createMock( PhotoCommentService.class );
 
 		EasyMock.expect( photoCommentService.load( testData.getComment().getId() ) ).andReturn( testData.getComment() ).anyTimes();

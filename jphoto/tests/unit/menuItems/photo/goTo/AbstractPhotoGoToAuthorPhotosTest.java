@@ -3,7 +3,7 @@ package menuItems.photo.goTo;
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.goTo.AbstractGoToAuthorPhotos;
+import core.general.menus.photo.goTo.AbstractPhotoGoToAuthorPhotos;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class AbstractGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
+public class AbstractPhotoGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
@@ -88,8 +88,8 @@ public class AbstractGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 	}
 
 
-	private AbstractGoToAuthorPhotos getMenuEntry( final GoToParameters goToParameters ) {
-		return new AbstractGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ) ) {
+	private AbstractPhotoGoToAuthorPhotos getMenuEntry( final GoToParameters goToParameters ) {
+		return new AbstractPhotoGoToAuthorPhotos( testData.getPhoto(), goToParameters.getAccessor(), getServicesGoTo( goToParameters ) ) {
 
 			@Override
 			protected int getPhotosQty() {

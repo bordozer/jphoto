@@ -2,13 +2,12 @@ package core.general.menus.comment.goTo;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuItem {
+public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentGoToAuthorPhotos {
 
 	public CommentMenuItemGoToCommentAuthorPhotos( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
@@ -38,12 +37,7 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentMenuI
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-		if ( hideMenuItemBecauseEntryOfMenuCaller() ) {
-			return false;
-		}
-
-		return super.isAccessibleFor()
-			   && getPhotoService().getPhotoQtyByUser( menuEntry.getCommentAuthor().getId() ) > minPhotosForMenu();
+	protected int getPhotoQty() {
+		return getPhotoService().getPhotoQtyByUser( menuEntry.getCommentAuthor().getId() );
 	}
 }

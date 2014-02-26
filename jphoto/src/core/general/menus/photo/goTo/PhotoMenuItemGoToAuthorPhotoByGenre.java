@@ -8,7 +8,7 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractGoToAuthorPhotos {
+public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthorPhotos {
 
 	public PhotoMenuItemGoToAuthorPhotoByGenre( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );

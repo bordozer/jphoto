@@ -84,7 +84,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 	}
 
 	private ServicesImpl getServicesForTest( final User user, final Boolean isCommentAuthorNameInAnonymousPeriod ) {
-		final ServicesImpl services = getServices( testData, user );
+		final ServicesImpl services = getServices( user );
 
 		services.setSecurityService( getSecurityServiceForTest( user, isCommentAuthorNameInAnonymousPeriod ) );
 

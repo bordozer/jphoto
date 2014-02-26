@@ -5,11 +5,11 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 
-public abstract class AbstractGoToAuthorPhotos extends AbstractPhotoMenuItem {
+public abstract class AbstractPhotoGoToAuthorPhotos extends AbstractPhotoMenuItem {
 
 	protected abstract int getPhotosQty();
 
-	public AbstractGoToAuthorPhotos( final Photo photo, final User accessor, final Services services ) {
+	public AbstractPhotoGoToAuthorPhotos( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
 	}
 
