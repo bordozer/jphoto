@@ -1,44 +1,59 @@
 package menuItems.photo;
 
-import core.general.configuration.ConfigurationKey;
+import core.general.menus.AbstractEntryMenuItem;
+import core.general.menus.AbstractEntryMenuItemCommand;
+import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.services.security.SecurityService;
-import core.services.system.ConfigurationService;
+import core.services.security.ServicesImpl;
 import core.services.user.UserPhotoAlbumService;
 import org.easymock.EasyMock;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuItemTest_ {
 
-	private ConfigurationService getConfigurationService( final boolean showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ) {
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
+	private UserPhotoAlbum userPhotoAlbum;
 
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.SYSTEM_SHOW_UI_MENU_GO_TO_PHOTOS_FOR_OWN_ENTRIES ) ).andReturn( showGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn ).anyTimes();
+	@Before
+	public void setup() {
+		super.setup();
 
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		return configurationService;
+		userPhotoAlbum = getUserPhotoAlbum();
 	}
 
-	private SecurityService getSecurityService( final User accessor, final boolean isPhotoAuthorNameMustBeHidden ) {
+	@Test
+	public void commandTest() {
+		final GoToParameters parameters = new GoToParameters( testData.getAccessor(), 7 );
 
-		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
+		final ServicesImpl services = getServicesGoTo( parameters );
 
-		EasyMock.expect( securityService.isPhotoAuthorNameMustBeHidden( testData.getPhoto(), accessor ) ).andReturn( isPhotoAuthorNameMustBeHidden ).anyTimes();
+		final PhotoMenuItemGoToAuthorPhotoByAlbum menuItem = new PhotoMenuItemGoToAuthorPhotoByAlbum( testData.getPhoto(), parameters.getAccessor(), services, userPhotoAlbum );
+		final AbstractEntryMenuItemCommand command = menuItem.getMenuItemCommand();
 
-		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
+		final User photoAuthor = testData.getPhotoAuthor();
 
-		EasyMock.expectLastCall();
-		EasyMock.replay( securityService );
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos from album '%s' ( %s )"
+			, photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), parameters.getPhotosQty() ) );
 
-		return securityService;
+		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotosByAlbum( %d, %d );", photoAuthor.getId(), userPhotoAlbum.getId() ) );
+
+		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.DEFAULT_CSS_CLASS );
 	}
 
-	private UserPhotoAlbumService getUserPhotoAlbumService( final int photoAlbumId, final int albumPhotosQty ) {
+	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {
+		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
+		services.setUserPhotoAlbumService( getUserPhotoAlbumService( parameters ) );
+
+		return services;
+	}
+
+	private UserPhotoAlbumService getUserPhotoAlbumService( final GoToParameters parameters ) {
 		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
 
-		EasyMock.expect( userPhotoAlbumService.getUserPhotoAlbumPhotosQty( photoAlbumId ) ).andReturn( albumPhotosQty ).anyTimes();
+		EasyMock.expect( userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( userPhotoAlbumService );
