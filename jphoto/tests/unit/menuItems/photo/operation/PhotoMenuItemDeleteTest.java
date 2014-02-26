@@ -11,7 +11,6 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 

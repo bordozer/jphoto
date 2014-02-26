@@ -8,7 +8,8 @@ import core.general.user.User;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class AbstractPhotoUserOperationsMenuItemTest extends AbstractPhotoMenuItemTest_ {
 
