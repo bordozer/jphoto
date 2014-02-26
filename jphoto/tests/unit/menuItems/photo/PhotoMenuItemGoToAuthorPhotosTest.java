@@ -1,26 +1,47 @@
 package menuItems.photo;
 
-import core.services.entry.GenreService;
+import core.general.menus.AbstractEntryMenuItem;
+import core.general.menus.AbstractEntryMenuItemCommand;
+import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotos;
+import core.general.user.User;
 import core.services.photo.PhotoService;
+import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
-	private GenreService getGenreService() {
-		final GenreService genreService = EasyMock.createMock( GenreService.class );
+	@Test
+	public void commandTest() {
+		final GoToParameters parameters = new GoToParameters( testData.getAccessor(), 7 );
 
-		EasyMock.expect( genreService.load( testData.getPhoto().getGenreId() ) ).andReturn( testData.getGenre() ).anyTimes();
+		final ServicesImpl services = getServicesGoTo( parameters );
 
-		EasyMock.expectLastCall();
-		EasyMock.replay( genreService );
+		final PhotoMenuItemGoToAuthorPhotos menuItem = new PhotoMenuItemGoToAuthorPhotos( testData.getPhoto(), parameters.getAccessor(), services );
+		final AbstractEntryMenuItemCommand command = menuItem.getMenuItemCommand();
 
-		return genreService;
+		final User photoAuthor = testData.getPhotoAuthor();
+
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: all photos ( %d )", photoAuthor.getNameEscaped(), parameters.getPhotosQty() ) );
+
+		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", photoAuthor.getId() ) );
+
+		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.DEFAULT_CSS_CLASS );
 	}
 
-	private PhotoService getPhotoService( final int genrePhotosQty ) {
+	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {
+		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
+		services.setPhotoService( getPhotoService( parameters ) );
+
+		return services;
+	}
+
+	private PhotoService getPhotoService( final GoToParameters parameters ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUser( testData.getPhotoAuthor().getId() ) ).andReturn( genrePhotosQty ).anyTimes();
+		EasyMock.expect( photoService.getPhotoQtyByUser( testData.getPhotoAuthor().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );

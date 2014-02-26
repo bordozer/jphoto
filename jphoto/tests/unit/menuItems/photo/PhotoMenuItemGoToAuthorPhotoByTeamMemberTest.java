@@ -39,10 +39,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 
 		final User photoAuthor = testData.getPhotoAuthor();
 
-		assertEquals( WRONG_COMMAND
-			, command.getMenuText()
-			, String.format( "%s: photos with %s %s ( %d )", photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), parameters.getPhotosQty() )
-		);
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos with %s %s ( %d )", photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), parameters.getPhotosQty() ) );
 
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotosByTeamMember( %d, %d );", photoAuthor.getId(), userTeamMember.getId() ) );
 
