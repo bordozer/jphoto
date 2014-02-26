@@ -1,4 +1,4 @@
-package core.general.menus.user.items;
+package core.general.menus.user.admin;
 
 import core.general.menus.*;
 import core.general.menus.user.AbstractUserMenuItem;

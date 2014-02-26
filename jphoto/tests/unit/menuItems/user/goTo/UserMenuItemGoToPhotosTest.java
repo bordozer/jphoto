@@ -1,12 +1,13 @@
-package menuItems.user;
+package menuItems.user.goTo;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.user.items.UserMenuItemGoToPhotos;
+import core.general.menus.user.goTo.UserMenuItemGoToPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;
+import menuItems.user.AbstractUserMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

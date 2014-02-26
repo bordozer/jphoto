@@ -1,4 +1,4 @@
-package core.general.menus.user.items;
+package core.general.menus.user.user;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;

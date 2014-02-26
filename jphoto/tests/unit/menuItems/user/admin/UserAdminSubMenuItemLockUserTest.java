@@ -1,9 +1,10 @@
-package menuItems.user;
+package menuItems.user.admin;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.user.items.UserAdminSubMenuItemLockUser;
+import core.general.menus.user.admin.UserAdminSubMenuItemLockUser;
 import core.general.user.User;
 import core.services.security.Services;
+import menuItems.user.AbstractUserMenuItemTest_;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

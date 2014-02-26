@@ -1,11 +1,12 @@
-package menuItems.user;
+package menuItems.user.user;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.user.items.UserMenuItemSendPrivateMessage;
+import core.general.menus.user.user.UserMenuItemSendPrivateMessage;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
+import menuItems.user.AbstractUserMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;

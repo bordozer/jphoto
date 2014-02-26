@@ -2,7 +2,7 @@ package menuItems.user;
 
 import core.general.user.User;
 
-class UserMenuItemTestData {
+public class UserMenuItemTestData {
 
 	private final User user;
 	private final User accessor;
