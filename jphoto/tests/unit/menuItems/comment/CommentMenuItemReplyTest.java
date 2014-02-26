@@ -1,13 +1,11 @@
 package menuItems.comment;
 
-import core.general.configuration.ConfigurationKey;
 import core.general.menus.comment.items.CommentMenuItemReply;
-import core.general.photo.PhotoComment;
+import core.general.photo.ValidationResult;
 import core.general.user.User;
-import core.general.user.UserStatus;
-import core.services.security.Services;
+import core.services.entry.FavoritesService;
+import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
-import core.services.system.ConfigurationService;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
@@ -17,137 +15,103 @@ import static org.junit.Assert.assertTrue;
 public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanNotReplyCommentTest() {
-		final User user = User.NOT_LOGGED_USER;
-		final Services services = getServices( testData, user );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), user, services ).isAccessibleFor() );
-	}
-
-	@Test
-	public void commentAuthorCanNotReplyCommentTest() {
-		final User user = testData.getCommentAuthor();
-		final Services services = getServices( testData, user );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), user, services ).isAccessibleFor() );
-	}
-
-	@Test
-	public void menuIsInaccessibleIfAccessorIsCandidateAndVotingIsNotAllowedForCandidatesTest() {
+	public void menuIsInaccessibleIfUserCanNotCommentThePhotoTest() {
 		final User accessor = testData.getAccessor();
-		accessor.setUserStatus( UserStatus.CANDIDATE );
+		final boolean userCanCommentPhoto = false;
+		final boolean accessorInTheBlackListOfCommentAuthor = false;
 
-		final boolean candidatesCanCommentPhotos = false;
+		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( candidatesCanCommentPhotos ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
 	}
 
-	/*@Test
-	public void menuIsInaccessibleIfAccessorIsInTheBlackListOfCommentAuthorTest() {
+	@Test
+	public void menuIsAccessibleIfUserCanCommentThePhotoButInTheBlackListOfCommentAuthorTest() {
 		final User accessor = testData.getAccessor();
+		final boolean userCanCommentPhoto = true;
+		final boolean accessorInTheBlackListOfCommentAuthor = true;
 
-//		final boolean isUserInBlackListOfUser = true;
+		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
 	}
 
 	@Test
-	public void menuIsAccessibleIfAccessorIsNotInTheBlackListOfCommentAuthorTest() {
+	public void menuIsAccessibleIfUserCanCommentThePhotoAndNotInTheBlackListOfCommentAuthorTest() {
 		final User accessor = testData.getAccessor();
+		final boolean userCanCommentPhoto = true;
+		final boolean accessorInTheBlackListOfCommentAuthor = true;
 
-//		final boolean isUserInBlackListOfUser = false;
+		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
-	}*/
-
-	@Test
-	public void menuIsAccessibleIfAccessorIsCandidateAndVotingIsAllowedForCandidatesTest() {
-		final User accessor = testData.getAccessor();
-		accessor.setUserStatus( UserStatus.CANDIDATE );
-
-		final boolean candidatesCanCommentPhotos = true;
-//		final boolean isUserInBlackListOfUser = false;
-
-		final ServicesImpl services = getServices( testData, accessor );
-		services.setConfigurationService( getConfigurationService( candidatesCanCommentPhotos ) );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
 	}
 
-	@Test
-	public void photoAuthorCanReplyCommentTest() {
-		final User accessor = testData.getPhotoAuthor();
-//		final boolean isUserInBlackListOfUser = false;
+	private ServicesImpl getServicesReply( final ReplyParameters parameters ) {
+		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
+		services.setSecurityService( getSecurityServiceReply( parameters ) );
+//		services.setFavoritesService( getFavoritesService( parameters ) );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
+		return services;
 	}
 
-	@Test
-	public void usualUserCanReplyCommentTest() {
-		final User accessor = testData.getAccessor();
-//		final boolean isUserInBlackListOfUser = false;
+	private SecurityService getSecurityServiceReply( final ReplyParameters parameters ) {
+		final User accessor = parameters.getAccessor();
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
+		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
-	}
+		EasyMock.expect( securityService.userOwnThePhotoComment( accessor, testData.getComment() ) ).andReturn( testData.getComment().getCommentAuthor().getId() == accessor.getId() ).anyTimes();
 
-	@Test
-	public void adminCanReplyCommentTest() {
-		final User accessor = SUPER_ADMIN_1;
-//		final boolean isUserInBlackListOfUser = false;
+		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto() ) ).andReturn( testData.getPhoto().getUserId() == accessor.getId() ).anyTimes();
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
+		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( accessor ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), accessor, services ).isAccessibleFor() );
-	}
+		final ValidationResult validationResult = new ValidationResult();
+		validationResult.setValidationPassed( parameters.isUserCanCommentPhoto() );
 
-	@Test
-	public void everyoneCanReplyOnDeletedCommentTest() {
-		final User accessor = testData.getAccessor();
-//		final boolean isUserInBlackListOfUser = false;
+		EasyMock.expect( securityService.getPhotoCommentingValidationResult( accessor, testData.getPhoto() ) ).andReturn( validationResult ).anyTimes();
 
-		final ServicesImpl services = getServices( testData, accessor );
-//		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
-
-		final PhotoComment comment = testData.getComment();
-		comment.setCommentDeleted( true );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( comment, accessor, services ).isAccessibleFor() );
-	}
-
-	private ConfigurationService getConfigurationService( final boolean candidatesCanCommentPhotos ) {
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( candidatesCanCommentPhotos ).anyTimes();
 		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
+		EasyMock.replay( securityService );
 
-		return configurationService;
+		return securityService;
 	}
 
-	/*private FavoritesService getFavoritesService( final User accessor, final boolean isUserInBlackListOfUser ) {
+	/*private FavoritesService getFavoritesService( final ReplyParameters parameters ) {
 		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
 
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( testData.getCommentAuthor().getId(), accessor.getId() ) ).andReturn( isUserInBlackListOfUser ).anyTimes();
+		EasyMock.expect( favoritesService.isUserInBlackListOfUser( testData.getComment().getCommentAuthor().getId(), parameters.getAccessor().getId() ) ).andReturn( parameters.isAccessorInTheBlackListOfCommentAuthor() ).anyTimes();
+
 		EasyMock.expectLastCall();
 		EasyMock.replay( favoritesService );
 
 		return favoritesService;
 	}*/
+
+	private class ReplyParameters {
+
+		private final User accessor;
+		private final boolean userCanCommentPhoto;
+		private boolean accessorInTheBlackListOfCommentAuthor;
+
+		public ReplyParameters( final User accessor, final boolean userCanCommentPhoto, final boolean isAccessorInTheBlackListOfCommentAuthor ) {
+			this.accessor = accessor;
+			this.userCanCommentPhoto = userCanCommentPhoto;
+			this.accessorInTheBlackListOfCommentAuthor = isAccessorInTheBlackListOfCommentAuthor;
+		}
+
+		public User getAccessor() {
+			return accessor;
+		}
+
+		public boolean isUserCanCommentPhoto() {
+			return userCanCommentPhoto;
+		}
+
+		public boolean isAccessorInTheBlackListOfCommentAuthor() {
+			return accessorInTheBlackListOfCommentAuthor;
+		}
+	}
 }

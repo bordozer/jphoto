@@ -6,7 +6,6 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.user.UserStatus;
 import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 import utils.TranslatorUtils;
@@ -50,19 +49,10 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+		return userCanCommentPhoto();
+	}
 
-		if ( ! isUserWhoIsCallingMenuLogged() ) {
-			return false;
-		}
-
-		if ( isCommentLeftByAccessor() ) {
-			return false;
-		}
-
-		if ( accessor.getUserStatus() == UserStatus.CANDIDATE && ! services.getConfigurationService().getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ) {
-			return false;
-		}
-
-		return ! menuEntry.isCommentDeleted();
+	private boolean userCanCommentPhoto() {
+		return services.getSecurityService().getPhotoCommentingValidationResult( accessor, getPhoto() ).isValidationPassed();
 	}
 }
