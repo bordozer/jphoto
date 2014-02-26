@@ -14,6 +14,9 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
 
+	public static final String ADMIN_SUB_MENU_ENTRY_TEXT = "ADMIN";
+	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = "return false;";
+
 	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "adminMenuItem";
 	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = StringUtils.EMPTY;
 
@@ -27,9 +30,9 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public abstract EntryMenuOperationType getEntryMenuType();
 
-	public abstract boolean isAccessibleFor();
-
 	public abstract AbstractEntryMenuItemCommand getMenuItemCommand();
+
+	public abstract boolean isAccessibleFor();
 
 	public AbstractEntryMenuItem( final T menuEntry, final User accessor, final Services services ) {
 		this.menuEntry = menuEntry;

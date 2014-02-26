@@ -1,7 +1,8 @@
-package core.general.menus.user.items;
+package core.general.menus.photo.items;
 
 import core.general.menus.*;
-import core.general.menus.user.AbstractUserMenuItem;
+import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
@@ -10,14 +11,14 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class UserAdminSubMenuItem extends AbstractUserMenuItem {
+public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 
 	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
 		EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
 
-	public UserAdminSubMenuItem( final User user, final User accessor, final Services services ) {
-		super( user, accessor, services );
+	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
 	}
 
 	@Override
@@ -27,7 +28,6 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
@@ -48,7 +48,7 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 			return false;
 		}
 
-		return ! isUserCallingHisOwnMenu();
+		return !isAccessorSeeingMenuOfOwnPhoto();
 	}
 
 	public EntryMenu getEntrySubMenu() {
@@ -61,6 +61,6 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {
-		return services.getEntryMenuService().getUserMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
+		return services.getEntryMenuService().getPhotoMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
 	}
 }

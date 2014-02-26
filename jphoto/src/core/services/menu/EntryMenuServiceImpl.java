@@ -72,6 +72,10 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
 
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
+		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
+
 		return menuItems;
 	}
 

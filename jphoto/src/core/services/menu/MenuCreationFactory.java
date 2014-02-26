@@ -93,6 +93,12 @@ public class MenuCreationFactory {
 				case PHOTO_INFO:
 					menuItems.add( new PhotoMenuItemInfo( photo, accessor, services ) );
 					break;
+				case ADMIN_SUB_MENU:
+					menuItems.add( new PhotoAdminSubMenuItem( photo, accessor, services ) );
+					break;
+				case ADMIN_SUB_MENU_LOCK_USER:
+					menuItems.add( new PhotoAdminSubMenuItemLockUser( photo, accessor, services ) );
+					break;
 				case GO_TO_USER_PHOTOS_BY_TEAM_MEMBER:
 					final List<PhotoTeamMember> photoTeamMembers = services.getUserTeamService().getPhotoTeam( photo.getId() ).getPhotoTeamMembers();
 					for ( final PhotoTeamMember photoTeamMember : photoTeamMembers ) {

@@ -47,7 +47,7 @@ public class PhotoVotingValidator implements Validator {
 			return;
 		}
 
-		final ValidationResult votingValidationResult = securityService.validateUserCanSentPrivateMessage( EnvironmentContext.getCurrentUser(), model.getPhoto() );
+		final ValidationResult votingValidationResult = securityService.validateUserCanVoteForPhoto( EnvironmentContext.getCurrentUser(), model.getPhoto() );
 		if ( votingValidationResult.isValidationFailed() ) {
 			errors.reject( votingValidationResult.getValidationMessage() );
 		}

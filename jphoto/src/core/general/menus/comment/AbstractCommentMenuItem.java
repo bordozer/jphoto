@@ -67,4 +67,8 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	protected boolean isAccessorInTheBlackListOfCommentAuthor() {
 		return getFavoritesService().isUserInBlackListOfUser( menuEntry.getCommentAuthor().getId(), accessor.getId() );
 	}
+
+	protected boolean isAccessorSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( accessor.getId() );
+	}
 }

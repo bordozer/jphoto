@@ -39,7 +39,12 @@ public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByAccessor();
+
+		if ( ! isAccessorSuperAdmin() ) {
+			return false;
+		}
+
+		return !isCommentLeftByAccessor();
 	}
 
 	@Override

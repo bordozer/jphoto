@@ -13,7 +13,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 
-	final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
+	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
 		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
 		, EntryMenuOperationType.SEPARATOR
@@ -34,22 +34,26 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
-
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "ADMIN" );
+				return TranslatorUtils.translate( ADMIN_SUB_MENU_ENTRY_TEXT );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return "return false;";
+				return ADMIN_SUB_MENU_ENTRY_COMMAND;
 			}
 		};
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-		return getSecurityService().isSuperAdminUser( accessor.getId() ) && ! isCommentLeftByAccessor();
+
+		if ( ! isAccessorSuperAdmin() ) {
+			return false;
+		}
+
+		return ! isCommentLeftByAccessor();
 	}
 
 	public EntryMenu getEntrySubMenu() {

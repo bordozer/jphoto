@@ -1,16 +1,17 @@
-package core.general.menus.user.items;
+package core.general.menus.photo.items;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.user.AbstractUserMenuItem;
+import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
+public class PhotoAdminSubMenuItemLockUser extends AbstractPhotoMenuItem {
 
-	public UserAdminSubMenuItemLockUser( final User user, final User accessor, final Services services ) {
-		super( user, accessor, services );
+	public PhotoAdminSubMenuItemLockUser( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
 	}
 
 	@Override
@@ -21,27 +22,28 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
+		final User photoAuthor = getPhotoAuthor();
+
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock member: $1", menuEntry.getNameEscaped() );
+				return TranslatorUtils.translate( "Lock member: $1", photoAuthor.getNameEscaped() );
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminLockUser( %d, '%s' ); return false;", menuEntry.getId(), menuEntry.getNameEscaped() );
+				return String.format( "adminLockUser( %d, '%s' ); return false;", photoAuthor.getId(), photoAuthor.getNameEscaped() );
 			}
 		};
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-
 		if ( ! isAccessorSuperAdmin() ) {
 			return false;
 		}
 
-		return ! isUserCallingHisOwnMenu();
+		return ! isAccessorSeeingMenuOfOwnPhoto();
 	}
 
 	@Override
