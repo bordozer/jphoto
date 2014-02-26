@@ -44,10 +44,6 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( isPhotoAuthorSuperAdmin() ) {
-			return false;
-		}
-
 		if ( !isAccessorSuperAdmin() ) {
 			return false;
 		}

@@ -1,5 +1,6 @@
 package menuItems.user;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.user.items.UserAdminSubMenuItem;
 import core.general.user.User;
@@ -7,6 +8,7 @@ import core.services.security.Services;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
@@ -73,7 +75,7 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new UserAdminSubMenuItem( testData.getUser(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), "ADMIN" );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), "return false;" );
+		assertEquals( WRONG_COMMAND, command.getMenuText(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_TEXT );
+		assertEquals( WRONG_COMMAND, command.getMenuCommand(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_COMMAND );
 	}
 }
