@@ -1,6 +1,5 @@
 package core.general.menus.comment.items;
 
-import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
@@ -53,6 +52,6 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	private boolean userCanCommentPhoto() {
-		return services.getSecurityService().getPhotoCommentingValidationResult( accessor, getPhoto() ).isValidationPassed();
+		return services.getSecurityService().validateUserCanCommentPhoto( accessor, getPhoto() ).isValidationPassed();
 	}
 }

@@ -49,7 +49,7 @@ public class PhotoCommentValidator implements Validator {
 		validateCommentDelay( errors );
 
 		final Photo photo = photoService.load( model.getPhotoId() );
-		final ValidationResult commentingValidationResult = securityService.getPhotoCommentingValidationResult( EnvironmentContext.getCurrentUser(), photo );
+		final ValidationResult commentingValidationResult = securityService.validateUserCanCommentPhoto( EnvironmentContext.getCurrentUser(), photo );
 		if ( commentingValidationResult.isValidationFailed() ) {
 			errors.reject( commentingValidationResult.getValidationMessage() );
 		}

@@ -32,7 +32,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
 
-		assertTrue( "Not Logged User Can vote", securityService.getPhotoVotingValidationResult( User.NOT_LOGGED_USER, photo ).isValidationFailed() );
+		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( User.NOT_LOGGED_USER, photo ).isValidationFailed() );
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
 		securityService.setUserService( userService );
 
-		assertTrue( "User Can  Vote For His Own Photo", securityService.getPhotoVotingValidationResult( photoAuthor, photo ).isValidationFailed() );
+		assertTrue( "User Can  Vote For His Own Photo", securityService.validateUserCanVoteForPhoto( photoAuthor, photo ).isValidationFailed() );
 	}
 
 	@Test
@@ -83,7 +83,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 
-		assertTrue( "User From Black List Of Photo Author Can Vote", securityService.getPhotoVotingValidationResult( blackListUser, photo ).isValidationFailed() );
+		assertTrue( "User From Black List Of Photo Author Can Vote", securityService.validateUserCanVoteForPhoto( blackListUser, photo ).isValidationFailed() );
 	}
 
 	@Test
@@ -121,7 +121,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
 
-		assertTrue( "Candidates Can Vote If It Is Denied On The System Level", securityService.getPhotoVotingValidationResult( candidateUser, photo ).isValidationFailed() );
+		assertTrue( "Candidates Can Vote If It Is Denied On The System Level", securityService.validateUserCanVoteForPhoto( candidateUser, photo ).isValidationFailed() );
 	}
 
 	@Test
@@ -165,7 +165,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Voting Is Denied By Author but user can leave comment", securityService.getPhotoVotingValidationResult( user, photo ).isValidationFailed() );
+		assertTrue( "Voting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( user, photo ).isValidationFailed() );
 	}
 
 	@Test
@@ -209,6 +209,6 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.getPhotoVotingValidationResult( candidateUser, photo ).isValidationFailed() );
+		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( candidateUser, photo ).isValidationFailed() );
 	}
 }

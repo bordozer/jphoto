@@ -32,7 +32,7 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 			return false;
 		}
 
-		final ValidationResult validationResult = services.getSecurityService().getPhotoVotingValidationResult( user, photo );
+		final ValidationResult validationResult = services.getSecurityService().validateUserCanSentPrivateMessage( user, photo );
 		if ( validationResult.isValidationFailed() ) {
 			//				getLog().debug( String.format( "Voting fot a photo: %s", validation.getValidationMessage() ) );
 			return false;

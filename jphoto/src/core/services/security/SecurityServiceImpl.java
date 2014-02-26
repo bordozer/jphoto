@@ -289,7 +289,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public ValidationResult getPhotoCommentingValidationResult( final User user, final Photo photo ) {
+	public ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( isSuperAdminUser( user.getId() ) ) {
@@ -345,7 +345,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public ValidationResult getPhotoVotingValidationResult( final User user, final Photo photo ) {
+	public ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {

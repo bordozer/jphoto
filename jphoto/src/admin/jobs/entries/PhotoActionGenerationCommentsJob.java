@@ -27,7 +27,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 	public boolean doPhotoAction( final Photo photo, final User user ) {
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
-		if ( services.getSecurityService().getPhotoCommentingValidationResult( user, photo ).isValidationFailed() ) {
+		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo ).isValidationFailed() ) {
 			return false;
 		}
 

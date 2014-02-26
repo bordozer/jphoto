@@ -64,9 +64,9 @@ public interface SecurityService {
 
 	boolean isPhotoHasToBeHiddenBecauseOfNudeContent( final Photo photo, final User user );
 
-	ValidationResult getPhotoCommentingValidationResult( final User user, final Photo photo );
+	ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo );
 
-	ValidationResult getPhotoVotingValidationResult( final User user, final Photo photo );
+	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo );
 
 	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre );
 

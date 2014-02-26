@@ -135,8 +135,8 @@ public class PhotoCardController {
 		model.setVotingUserMinAccessibleMarkForGenre( userRankService.getUserLowestNegativeMarkInGenre( loggedUserId, genre.getId() ) );
 		model.setVotingUserMaxAccessibleMarkForGenre( userRankService.getUserHighestPositiveMarkInGenre( loggedUserId, genre.getId() ) );
 
-		model.setCommentingValidationResult( securityService.getPhotoCommentingValidationResult( currentUser, model.getPhoto() ) );
-		model.setVotingValidationResult( securityService.getPhotoVotingValidationResult( currentUser, model.getPhoto() ) );
+		model.setCommentingValidationResult( securityService.validateUserCanCommentPhoto( currentUser, model.getPhoto() ) );
+		model.setVotingValidationResult( securityService.validateUserCanSentPrivateMessage( currentUser, model.getPhoto() ) );
 
 		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), currentUser ) );
 
