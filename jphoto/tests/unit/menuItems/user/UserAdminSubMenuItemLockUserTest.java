@@ -12,50 +12,37 @@ public class UserAdminSubMenuItemLockUserTest extends AbstractUserMenuItemTest_ 
 
 	@Test
 	public void notLoggedUserCanNotSeeLockUserSubMenuItemTest() {
-		final User accessor = User.NOT_LOGGED_USER;
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), User.NOT_LOGGED_USER, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void usualUserCanNotSeeLockUserAdminSubMenuItemTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeLockUserAdminSubMenuItemOfAnotherUserTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), testData.getAccessor(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void photoAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeOwnLockUserMenuTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), testData.getUser(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
-	public void commentAuthorCanNotSeeLockUserAdminSubMenuItemTest() {
-		final User accessor = testData.getAccessor();
-		final Services services = getServices();
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
+	public void usualUserCanNotSeeLockUserAdminSubMenuItemOfAdminTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( SUPER_ADMIN_1, testData.getUser(), getServices() ).isAccessibleFor() );
 	}
 
 	@Test
 	public void adminCanNotSeeLockAnotherAdminAdminSubMenuItemTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices();
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( SUPER_ADMIN_2, SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
+	}
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( SUPER_ADMIN_2, accessor, services ).isAccessibleFor() );
+	@Test
+	public void adminCanNotSeeOwnLockUserMenuItemTest() {
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItemLockUser( SUPER_ADMIN_1, SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
 	public void adminCanSeeLockUserAdminSubMenuItemTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices();
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItemLockUser( testData.getUser(), accessor, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new UserAdminSubMenuItemLockUser( testData.getUser(), SUPER_ADMIN_1, getServices() ).isAccessibleFor() );
 	}
 
 	@Test
