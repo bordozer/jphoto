@@ -17,6 +17,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public static final int MENU_ITEM_HEIGHT = 27;
 	public static final int MENU_SEPARATOR_HEIGHT = 5;
+	public static final String DEFAULT_CSS_CLASS = StringUtils.EMPTY;
 
 	protected final T menuEntry;
 	protected final User accessor;
@@ -44,7 +45,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	}
 
 	public String getMenuCssClass() {
-		return StringUtils.EMPTY;
+		return DEFAULT_CSS_CLASS;
 	}
 
 	final protected boolean isUserWhoIsCallingMenuLogged() {

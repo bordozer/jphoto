@@ -5,7 +5,6 @@ import core.general.menus.comment.items.CommentMenuItemReply;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.user.UserStatus;
-import core.services.entry.FavoritesService;
 import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;

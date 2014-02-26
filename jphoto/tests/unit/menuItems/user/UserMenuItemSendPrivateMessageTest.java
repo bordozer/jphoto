@@ -9,9 +9,7 @@ import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest_ {
 
