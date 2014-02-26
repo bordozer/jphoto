@@ -71,4 +71,8 @@ public abstract class AbstractCommentMenuItem extends AbstractEntryMenuItem<Phot
 	protected boolean isAccessorSuperAdmin() {
 		return getSecurityService().isSuperAdminUser( accessor.getId() );
 	}
+
+	protected boolean isCommentAuthorSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( menuEntry.getCommentAuthor().getId() );
+	}
 }

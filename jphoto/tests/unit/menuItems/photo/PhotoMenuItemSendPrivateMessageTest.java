@@ -17,7 +17,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 	public void notLoggedUserCanNotSeeMenuTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
 	}
@@ -26,7 +26,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 	public void photoAuthorCanNotSeeMenuForOwnPhotoTest() {
 		final User accessor = testData.getPhotoAuthor();
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
 	}
@@ -36,7 +36,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		final User accessor = testData.getAccessor();
 		final boolean isPhotoWithinAnonymousPeriod = true;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
@@ -48,7 +48,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		final boolean isPhotoWithinAnonymousPeriod = false;
 		final boolean isAccessorInPhotoAuthorBlackList = true;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
 		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
 
@@ -59,7 +59,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 	public void adminCanSeeMenuTest() {
 		final User accessor = SUPER_ADMIN_1;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemSendPrivateMessage( testData.getPhoto(), accessor, services ).isAccessibleFor() );
 	}
@@ -70,7 +70,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		final boolean isPhotoWithinAnonymousPeriod = false;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
 		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
 
@@ -83,7 +83,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		final boolean isPhotoWithinAnonymousPeriod = false;
 		final boolean isAccessorInPhotoAuthorBlackList = true;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
 		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
 
@@ -96,7 +96,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 		final boolean isPhotoWithinAnonymousPeriod = true;
 		final boolean isAccessorInPhotoAuthorBlackList = false;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setSecurityService( getSecurityService( accessor, isPhotoWithinAnonymousPeriod ) );
 		services.setFavoritesService( getFavoritesService( isAccessorInPhotoAuthorBlackList ) );
 

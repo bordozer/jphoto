@@ -32,7 +32,7 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {
-		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
+		final ServicesImpl services = getServices( parameters.getAccessor() );
 		services.setPhotoService( getPhotoService( parameters ) );
 
 		return services;

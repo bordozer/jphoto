@@ -37,6 +37,10 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
+		if ( isUserSuperAdmin() ) {
+			return false;
+		}
+
 		if ( ! isAccessorSuperAdmin() ) {
 			return false;
 		}

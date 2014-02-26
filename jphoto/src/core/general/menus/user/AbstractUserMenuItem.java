@@ -22,4 +22,8 @@ public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem<User> {
 	protected boolean isAccessorSuperAdmin() {
 		return getSecurityService().isSuperAdminUser( accessor.getId() );
 	}
+
+	protected boolean isUserSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( menuEntry );
+	}
 }

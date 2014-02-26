@@ -98,7 +98,7 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	private ServicesImpl getServicesGoTo( final GoToParameters goToParameters ) {
 
-		final ServicesImpl services = getServices( testData, goToParameters.getAccessor() );
+		final ServicesImpl services = getServices( goToParameters.getAccessor() );
 
 		services.setConfigurationService( getConfigurationServiceGoTo( goToParameters.isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn() ) );
 		services.setSecurityService( getSecurityServiceGoTo( goToParameters.getAccessor(), goToParameters.isPhotoAuthorNameMustBeHidden() ) );

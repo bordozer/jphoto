@@ -40,4 +40,8 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 	protected boolean isAccessorSuperAdmin() {
 		return getSecurityService().isSuperAdminUser( accessor.getId() );
 	}
+
+	protected boolean isPhotoAuthorSuperAdmin() {
+		return getSecurityService().isSuperAdminUser( menuEntry.getUserId() );
+	}
 }

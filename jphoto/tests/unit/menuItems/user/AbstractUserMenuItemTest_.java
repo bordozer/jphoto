@@ -51,6 +51,9 @@ public abstract class AbstractUserMenuItemTest_ extends AbstractTestCase {
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
+		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
+
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser().getId() ) ).andReturn( false ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser() ) ).andReturn( false ).anyTimes();
 
@@ -63,8 +66,6 @@ public abstract class AbstractUserMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_2.getId() ) ).andReturn( true ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_2 ) ).andReturn( true ).anyTimes();
 
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );

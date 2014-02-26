@@ -31,7 +31,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 
 		services.setPhotoCommentService( getPhotoCommentService( testData ) );
 		services.setPhotoService( getPhotoService( testData ) );
-		services.setSecurityService( getSecurityService( testData, accessor ) );
+		services.setSecurityService( getSecurityService( accessor ) );
 		services.setUserService( getUserService( testData ) );
 
 		return services;
@@ -50,15 +50,30 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		return userService;
 	}
 
-	private SecurityService getSecurityService( final CommentMenuItemTestData testData, final User accessor ) {
+	private SecurityService getSecurityService( final User accessor ) {
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
 		EasyMock.expect( securityService.userOwnThePhotoComment( accessor, testData.getComment() ) ).andReturn( testData.getComment().getCommentAuthor().getId() == accessor.getId() ).anyTimes();
 
 		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto() ) ).andReturn( testData.getPhoto().getUserId() == accessor.getId() ).anyTimes();
 
-		EasyMock.expect( securityService.isSuperAdminUser( accessor.getId() ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( accessor ) ).andReturn( SUPER_ADMIN_2.getId() == accessor.getId() || SUPER_ADMIN_1.getId() == accessor.getId() ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
+
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor().getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor() ) ).andReturn( false ).anyTimes();
+
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getCommentAuthor().getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getCommentAuthor() ) ).andReturn( false ).anyTimes();
+
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getPhotoAuthor().getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( testData.getPhotoAuthor() ) ).andReturn( false ).anyTimes();
+
+		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_1.getId() ) ).andReturn( true ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_1 ) ).andReturn( true ).anyTimes();
+
+		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_2.getId() ) ).andReturn( true ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( SUPER_ADMIN_2 ) ).andReturn( true ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );

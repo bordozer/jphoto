@@ -43,7 +43,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {
-		final ServicesImpl services = getServices( testData, parameters.getAccessor() );
+		final ServicesImpl services = getServices( parameters.getAccessor() );
 		services.setUserPhotoAlbumService( getUserPhotoAlbumService( parameters ) );
 
 		return services;

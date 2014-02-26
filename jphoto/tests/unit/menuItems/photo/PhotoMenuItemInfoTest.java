@@ -18,7 +18,7 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 	@Test
 	public void anybodyCanSeeMenuTest() {
 
-		final ServicesImpl services = getServices( testData, User.NOT_LOGGED_USER );
+		final ServicesImpl services = getServices( User.NOT_LOGGED_USER );
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), User.NOT_LOGGED_USER, services ).isAccessibleFor() );
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemInfo( testData.getPhoto(), testData.getPhotoAuthor(), services ).isAccessibleFor() );
@@ -30,7 +30,7 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 	public void commandTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
-		final ServicesImpl services = getServices( testData, accessor );
+		final ServicesImpl services = getServices( accessor );
 		services.setUrlUtilsService( getUrlUtilsService() );
 
 		final AbstractEntryMenuItemCommand command = new PhotoMenuItemInfo( testData.getPhoto(), accessor, services ).getMenuItemCommand();

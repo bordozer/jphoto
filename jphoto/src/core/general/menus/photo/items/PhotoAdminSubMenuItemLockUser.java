@@ -39,6 +39,7 @@ public class PhotoAdminSubMenuItemLockUser extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
 		if ( ! isAccessorSuperAdmin() ) {
 			return false;
 		}
