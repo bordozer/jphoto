@@ -35,8 +35,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbumTest extends AbstractPhotoMenuIt
 
 		final User photoAuthor = testData.getPhotoAuthor();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos from album '%s' ( %s )"
-			, photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), parameters.getPhotosQty() ) );
+		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos from album '%s' ( %s )", photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), parameters.getPhotosQty() ) );
 
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotosByAlbum( %d, %d );", photoAuthor.getId(), userPhotoAlbum.getId() ) );
 
