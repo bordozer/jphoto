@@ -4,6 +4,7 @@ import core.general.menus.photo.items.PhotoMenuItemDelete;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -14,49 +15,48 @@ public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void userCanNotSeeMenuIfHeDoesNotHaveAccessToDeletePhotoTest() {
-		final User accessor = User.NOT_LOGGED_USER; // does not matter
+		final boolean userCanDeletePhoto = false;
 
-		final ServicesImpl services = getServices( accessor );
-		services.setSecurityService( getSecurityService( accessor, false ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemDelete( testData.getPhoto(), null, getServicesDelete( userCanDeletePhoto ) ).isAccessibleFor() );
 	}
 
 	@Test
 	public void userCanSeeMenuIfHeHasAccessToDeletePhotoTest() {
-		final User accessor = User.NOT_LOGGED_USER; // does not matter
+		final boolean userCanDeletePhoto = true;
 
-		final ServicesImpl services = getServices( accessor );
-		services.setSecurityService( getSecurityService( accessor, true ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemDelete( testData.getPhoto(), null, getServicesDelete( userCanDeletePhoto ) ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCommandTest() {
-		final User accessor = testData.getPhotoAuthor();
+		final boolean userCanDeletePhoto = false;
+		final boolean userOwnThePhoto = true;
 
-		final ServicesImpl services = getServices( accessor );
+		final ServicesImpl servicesDelete = getServicesDelete( userCanDeletePhoto, userOwnThePhoto );
 
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuText(), "Delete your photo" );
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuCommand(), String.format( "deletePhoto( %d ); return false;", testData.getPhoto().getId() ) );
+		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), null, servicesDelete ).getMenuItemCommand().getMenuText(), "Delete photo" );
+		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), null, servicesDelete ).getMenuItemCommand().getMenuCommand(), String.format( "deletePhoto( %d ); return false;", testData.getPhoto().getId() ) );
 	}
 
-	@Test
-	public void adminCommandTest() {
-		final User accessor = SUPER_ADMIN_1;
-
-		final ServicesImpl services = getServices( accessor );
-
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuText(), "Delete photo (ADMIN)" );
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuCommand(), String.format( "deletePhoto( %d ); return false;", testData.getPhoto().getId() ) );
+	private Services getServicesDelete( final boolean userCanDeletePhoto ) {
+		return getServicesDelete( userCanDeletePhoto, false ); // the second parameter does matter for CommandTest only
 	}
 
-	private SecurityService getSecurityService( final User accessor, final boolean userCanDeletePhoto ) {
+	private ServicesImpl getServicesDelete( final boolean userCanDeletePhoto, final boolean userOwnThePhoto ) {
+		final ServicesImpl services = new ServicesImpl();
+
+		services.setSecurityService( getSecurityService( userCanDeletePhoto, userOwnThePhoto ) );
+
+		return services;
+	}
+
+	private SecurityService getSecurityService( final boolean userCanDeletePhoto, final boolean userOwnThePhoto ) {
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto().getId() ) ).andReturn( testData.getPhotoAuthor().getId() == accessor.getId() ).anyTimes();
+		EasyMock.expect( securityService.userOwnThePhoto( EasyMock.<User>anyObject(), EasyMock.anyInt() ) ).andReturn( userOwnThePhoto ).anyTimes();
+
 		EasyMock.expect( securityService.userCanDeletePhoto( EasyMock.<User>anyObject(), EasyMock.<Photo>anyObject() ) ).andReturn( userCanDeletePhoto ).anyTimes();
+
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
 
