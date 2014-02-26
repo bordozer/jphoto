@@ -39,10 +39,11 @@ public class PhotoAdminSubMenuItemTest extends AbstractPhotoMenuItemTest_ {
 	@Test
 	public void adminCanNotSeeAdminSubMenuIfHeIsPhotoAuthorTest() {
 		final User accessor = SUPER_ADMIN_1;
-		final Services services = getServices( accessor );
 
 		final Photo photo = testData.getPhoto();
 		photo.setUserId( accessor.getId() );
+
+		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoAdminSubMenuItem( photo, accessor, services ).isAccessibleFor() );
 	}

@@ -18,18 +18,12 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 1 );
-
-		goAssertFalse( goToParameters );
+		goAssertFalse( new GoToParameters( User.NOT_LOGGED_USER, 1 ) );
 	}
 
 	@Test
 	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( testData.getPhotoAuthor(), 2 );
-
-		goAssertFalse( goToParameters );
+		goAssertFalse( new GoToParameters( testData.getPhotoAuthor(), 2 ) );
 	}
 
 	@Test
@@ -51,33 +45,22 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void menuIsNotShownIfThereIsLessThenOnePhotosTest() {
-		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 1 );
-
-		goAssertFalse( goToParameters );
+		goAssertFalse( new GoToParameters( testData.getAccessor(), 1 ) );
 	}
 
 	@Test
 	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( User.NOT_LOGGED_USER, 2 );
-
-		doAssertTrue( goToParameters );
+		doAssertTrue( new GoToParameters( User.NOT_LOGGED_USER, 2 ) );
 	}
 
 	@Test
 	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
-
-		doAssertTrue( goToParameters );
+		doAssertTrue( new GoToParameters( SUPER_ADMIN_1, 2 ) );
 	}
 
 	@Test
 	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( SUPER_ADMIN_1, 2 );
-
-		doAssertTrue( goToParameters );
+		doAssertTrue( new GoToParameters( SUPER_ADMIN_1, 2 ) );
 	}
 
 	@Test
@@ -90,10 +73,7 @@ public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void menuIsShownIfThereIsMoreThenOnePhotosTest() {
-
-		final GoToParameters goToParameters = new GoToParameters( testData.getAccessor(), 2 );
-
-		doAssertTrue( goToParameters );
+		doAssertTrue( new GoToParameters( testData.getAccessor(), 2 ) );
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters goToParameters ) {
