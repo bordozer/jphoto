@@ -16,41 +16,6 @@ import static org.junit.Assert.assertEquals;
 public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
-	public void adminCanSeeOwnPhotoMenuTest() {
-		final User accessor = SUPER_ADMIN_1;
-		final boolean userCanEditPhoto = true;
-
-		final Photo photo = testData.getPhoto();
-		photo.setUserId( SUPER_ADMIN_1.getId() );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemDelete( photo, accessor, getServicesEdit( accessor, userCanEditPhoto ) ).isAccessibleFor() );
-	}
-
-	@Test
-	public void photoAuthorCanSeeOwnPhotoMenuTest() {
-		final User accessor = testData.getPhotoAuthor();
-		final boolean userCanEditPhoto = true;
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemDelete( testData.getPhoto(), accessor, getServicesEdit( accessor, userCanEditPhoto ) ).isAccessibleFor() );
-	}
-
-	@Test
-	public void adminCanNotSeeMenuIfThisIsNOTHisPhotoTest() {
-		final User accessor = SUPER_ADMIN_1;   // admin has his own admin menu
-		final boolean userCanEditPhoto = true;
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemDelete( testData.getPhoto(), accessor, getServicesEdit( accessor, userCanEditPhoto ) ).isAccessibleFor() );
-	}
-
-	@Test
-	public void userCanNotSeeMenuIfHeIsNotPhotoAuthorAndDoesNotHaveAccessToEditPhotoTest() {
-		final User accessor = testData.getAccessor();
-		final boolean userCanEditPhoto = false;
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemDelete( testData.getPhoto(), accessor, getServicesEdit( accessor, userCanEditPhoto ) ).isAccessibleFor() );
-	}
-
-	@Test
 	public void userCanSeeMenuIfHeHasAccessToEditPhotoTest() {
 		final User accessor = testData.getPhotoAuthor();
 		final boolean userCanEditPhoto = true;
