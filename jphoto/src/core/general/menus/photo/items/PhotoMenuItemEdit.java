@@ -26,7 +26,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( getSecurityService().userOwnThePhoto( accessor, getId() ) ? "Edit your photo" : "Edit photo (ADMIN)" );
+				return TranslatorUtils.translate( "Edit photo" );
 			}
 
 			@Override

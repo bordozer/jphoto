@@ -4,7 +4,6 @@ import core.general.menus.photo.items.PhotoMenuItemDelete;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;
-import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -29,31 +28,22 @@ public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void photoAuthorCommandTest() {
-		final boolean userCanDeletePhoto = false;
-		final boolean userOwnThePhoto = true;
-
-		final ServicesImpl servicesDelete = getServicesDelete( userCanDeletePhoto, userOwnThePhoto );
+		final ServicesImpl servicesDelete = new ServicesImpl();
 
 		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), null, servicesDelete ).getMenuItemCommand().getMenuText(), "Delete photo" );
 		assertEquals( WRONG_COMMAND, new PhotoMenuItemDelete( testData.getPhoto(), null, servicesDelete ).getMenuItemCommand().getMenuCommand(), String.format( "deletePhoto( %d ); return false;", testData.getPhoto().getId() ) );
 	}
 
-	private Services getServicesDelete( final boolean userCanDeletePhoto ) {
-		return getServicesDelete( userCanDeletePhoto, false ); // the second parameter does matter for CommandTest only
-	}
-
-	private ServicesImpl getServicesDelete( final boolean userCanDeletePhoto, final boolean userOwnThePhoto ) {
+	private ServicesImpl getServicesDelete( final boolean userCanDeletePhoto ) {
 		final ServicesImpl services = new ServicesImpl();
 
-		services.setSecurityService( getSecurityService( userCanDeletePhoto, userOwnThePhoto ) );
+		services.setSecurityService( getSecurityService( userCanDeletePhoto ) );
 
 		return services;
 	}
 
-	private SecurityService getSecurityService( final boolean userCanDeletePhoto, final boolean userOwnThePhoto ) {
+	private SecurityService getSecurityService( final boolean userCanDeletePhoto ) {
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
-
-		EasyMock.expect( securityService.userOwnThePhoto( EasyMock.<User>anyObject(), EasyMock.anyInt() ) ).andReturn( userOwnThePhoto ).anyTimes();
 
 		EasyMock.expect( securityService.userCanDeletePhoto( EasyMock.<User>anyObject(), EasyMock.<Photo>anyObject() ) ).andReturn( userCanDeletePhoto ).anyTimes();
 

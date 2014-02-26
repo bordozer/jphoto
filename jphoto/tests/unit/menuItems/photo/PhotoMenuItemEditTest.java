@@ -13,49 +13,38 @@ import static org.junit.Assert.*;
 public class PhotoMenuItemEditTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
-	public void userCanNotSeeMenuIfHeDoesNotHaveAccessToDeletePhotoTest() {
-		final User accessor = User.NOT_LOGGED_USER; // does not matter
+	public void userCanNotSeeMenuIfHeDoesNotHaveAccessToEditPhotoTest() {
+		final boolean userCanEditPhoto = false;
 
-		final ServicesImpl services = getServices( accessor );
-		services.setSecurityService( getSecurityService( accessor, false ) );
-
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoMenuItemEdit( testData.getPhoto(), null, getServicesEdit( userCanEditPhoto ) ).isAccessibleFor() );
 	}
 
 	@Test
-	public void userCanSeeMenuIfHeHasAccessToDeletePhotoTest() {
-		final User accessor = User.NOT_LOGGED_USER; // does not matter
+	public void userCanSeeMenuIfHeHasAccessToEditPhotoTest() {
+		final boolean userCanEditPhoto = true;
 
-		final ServicesImpl services = getServices( accessor );
-		services.setSecurityService( getSecurityService( accessor, true ) );
-
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemEdit( testData.getPhoto(), null, getServicesEdit( userCanEditPhoto ) ).isAccessibleFor() );
 	}
 
 	@Test
 	public void photoAuthorCommandTest() {
-		final User accessor = testData.getPhotoAuthor();
+		final ServicesImpl services = new ServicesImpl();
 
-		final ServicesImpl services = getServices( accessor );
-
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuText(), "Edit your photo" );
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuCommand(), String.format( "editPhotoData( %d );", testData.getPhoto().getId() ) );
+		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), null, services ).getMenuItemCommand().getMenuText(), "Edit photo" );
+		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), null, services ).getMenuItemCommand().getMenuCommand(), String.format( "editPhotoData( %d );", testData.getPhoto().getId() ) );
 	}
 
-	@Test
-	public void adminCommandTest() {
-		final User accessor = SUPER_ADMIN_1;
+	private ServicesImpl getServicesEdit( final boolean userCanDeletePhoto ) {
+		final ServicesImpl services = new ServicesImpl();
 
-		final ServicesImpl services = getServices( accessor );
+		services.setSecurityService( getSecurityService( userCanDeletePhoto ) );
 
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuText(), "Edit photo (ADMIN)" );
-		assertEquals( WRONG_COMMAND, new PhotoMenuItemEdit( testData.getPhoto(), accessor, services ).getMenuItemCommand().getMenuCommand(), String.format( "editPhotoData( %d );", testData.getPhoto().getId() ) );
+		return services;
 	}
 
-	private SecurityService getSecurityService( final User accessor, final boolean userCanDeletePhoto ) {
+	private SecurityService getSecurityService( final boolean userCanDeletePhoto ) {
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto().getId() ) ).andReturn( testData.getPhotoAuthor().getId() == accessor.getId() ).anyTimes();
 		EasyMock.expect( securityService.userCanEditPhoto( EasyMock.<User>anyObject(), EasyMock.<Photo>anyObject() ) ).andReturn( userCanDeletePhoto ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
