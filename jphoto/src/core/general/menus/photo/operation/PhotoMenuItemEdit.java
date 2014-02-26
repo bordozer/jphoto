@@ -1,8 +1,7 @@
-package core.general.menus.photo.items;
+package core.general.menus.photo.operation;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
@@ -37,7 +36,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoUserOperationsMenuItem {
 	}
 
 	@Override
-	protected boolean hasAccessTo() {
+	public boolean hasAccessTo() {
 		return getSecurityService().userCanEditPhoto( accessor, menuEntry );
 	}
 }

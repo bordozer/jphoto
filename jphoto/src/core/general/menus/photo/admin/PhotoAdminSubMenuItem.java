@@ -1,4 +1,4 @@
-package core.general.menus.photo.items;
+package core.general.menus.photo.admin;
 
 import core.general.menus.*;
 import core.general.menus.photo.AbstractPhotoMenuItem;

@@ -3,7 +3,7 @@ package menuItems.photo.goTo;
 import core.enums.UserTeamMemberType;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotoByTeamMember;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;

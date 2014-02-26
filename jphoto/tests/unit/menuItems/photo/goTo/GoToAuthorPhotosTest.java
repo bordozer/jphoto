@@ -3,7 +3,7 @@ package menuItems.photo.goTo;
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.items.AbstractGoToAuthorPhotos;
+import core.general.menus.photo.goTo.AbstractGoToAuthorPhotos;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;

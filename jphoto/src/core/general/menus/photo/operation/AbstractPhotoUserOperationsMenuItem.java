@@ -1,4 +1,4 @@
-package core.general.menus.photo.items;
+package core.general.menus.photo.operation;
 
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
@@ -11,7 +11,7 @@ public abstract class AbstractPhotoUserOperationsMenuItem extends AbstractPhotoM
 		super( photo, accessor, services );
 	}
 
-	protected abstract boolean hasAccessTo();
+	public abstract boolean hasAccessTo();
 
 	@Override
 	public boolean isAccessibleFor() {

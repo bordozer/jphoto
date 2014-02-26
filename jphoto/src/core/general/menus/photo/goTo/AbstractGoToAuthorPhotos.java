@@ -1,4 +1,4 @@
-package core.general.menus.photo.items;
+package core.general.menus.photo.goTo;
 
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;

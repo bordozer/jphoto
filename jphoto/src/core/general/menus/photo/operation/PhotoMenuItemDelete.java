@@ -1,4 +1,4 @@
-package core.general.menus.photo.items;
+package core.general.menus.photo.operation;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
@@ -36,7 +36,7 @@ public class PhotoMenuItemDelete extends AbstractPhotoUserOperationsMenuItem {
 	}
 
 	@Override
-	protected boolean hasAccessTo() {
+	public boolean hasAccessTo() {
 		return getSecurityService().userCanDeletePhoto( accessor, menuEntry );
 	}
 }

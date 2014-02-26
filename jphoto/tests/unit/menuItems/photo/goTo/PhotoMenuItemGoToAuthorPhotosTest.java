@@ -2,7 +2,7 @@ package menuItems.photo.goTo;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotos;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.security.ServicesImpl;

@@ -1,8 +1,8 @@
-package menuItems.photo.userOperation;
+package menuItems.photo.operation;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.items.AbstractPhotoUserOperationsMenuItem;
+import core.general.menus.photo.operation.AbstractPhotoUserOperationsMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
@@ -59,7 +59,7 @@ public class AbstractPhotoUserOperationsMenuItemTest extends AbstractPhotoMenuIt
 		return new AbstractPhotoUserOperationsMenuItem( parameters.getPhoto(), parameters.getAccessor(), getServices( parameters.getAccessor() ) ) {
 
 			@Override
-			protected boolean hasAccessTo() {
+			public boolean hasAccessTo() {
 				return parameters.isHasAccessToOperation();
 			}
 

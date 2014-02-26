@@ -2,7 +2,16 @@ package core.services.menu;
 
 import core.general.menus.*;
 import core.general.menus.comment.items.*;
-import core.general.menus.photo.items.*;
+import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
+import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockUser;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotos;
+import core.general.menus.photo.operation.PhotoMenuItemDelete;
+import core.general.menus.photo.operation.PhotoMenuItemEdit;
+import core.general.menus.photo.photo.PhotoMenuItemInfo;
+import core.general.menus.photo.user.PhotoMenuItemSendPrivateMessage;
 import core.general.menus.user.items.UserAdminSubMenuItem;
 import core.general.menus.user.items.UserAdminSubMenuItemLockUser;
 import core.general.menus.user.items.UserMenuItemGoToPhotos;

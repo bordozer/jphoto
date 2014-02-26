@@ -3,7 +3,7 @@ package menuItems.photo.goTo;
 import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.items.PhotoMenuItemGoToAuthorPhotoByGenre;
+import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
 import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
