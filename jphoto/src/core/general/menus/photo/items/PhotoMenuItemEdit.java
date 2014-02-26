@@ -38,6 +38,15 @@ public class PhotoMenuItemEdit extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( isAccessorSeeingMenuOfOwnPhoto() ) {
+			return true;
+		}
+
+		if ( isAccessorSuperAdmin() ) {
+			return false;
+		}
+
 		return getSecurityService().userCanEditPhoto( accessor, menuEntry );
 	}
 }
