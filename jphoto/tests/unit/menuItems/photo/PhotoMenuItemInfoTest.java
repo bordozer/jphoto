@@ -30,13 +30,18 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 	public void commandTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 
-		final ServicesImpl services = getServices( accessor );
-		services.setUrlUtilsService( getUrlUtilsService() );
-
-		final AbstractEntryMenuItemCommand command = new PhotoMenuItemInfo( testData.getPhoto(), accessor, services ).getMenuItemCommand();
+		final AbstractEntryMenuItemCommand command = new PhotoMenuItemInfo( testData.getPhoto(), accessor, getServicesInfo() ).getMenuItemCommand();
 
 		assertEquals( WRONG_COMMAND, command.getMenuText(), "Photo info" );
 		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "openPopupWindowCustom( '%s', 'photoInfo_%d', 460, 800, 100, 100 );", PHOTO_URL, testData.getPhoto().getId() ) );
+	}
+
+	private ServicesImpl getServicesInfo() {
+		final ServicesImpl services = new ServicesImpl();
+
+		services.setUrlUtilsService( getUrlUtilsService() );
+
+		return services;
 	}
 
 	private UrlUtilsService getUrlUtilsService() {
