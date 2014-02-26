@@ -4,7 +4,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 
-class CommentMenuItemTestData {
+public class CommentMenuItemTestData {
 
 	private final User commentAuthor;
 	private final User photoAuthor;

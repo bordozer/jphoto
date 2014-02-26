@@ -1,10 +1,11 @@
-package menuItems.comment;
+package menuItems.comment.operations;
 
 import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
+import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

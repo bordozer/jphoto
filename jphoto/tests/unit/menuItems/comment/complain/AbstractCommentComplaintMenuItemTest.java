@@ -1,4 +1,4 @@
-package menuItems.comment;
+package menuItems.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
@@ -6,6 +6,7 @@ import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
+import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

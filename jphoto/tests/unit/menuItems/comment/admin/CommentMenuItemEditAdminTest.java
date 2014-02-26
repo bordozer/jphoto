@@ -1,4 +1,4 @@
-package menuItems.comment;
+package menuItems.comment.admin;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItem;
@@ -9,6 +9,7 @@ import core.general.user.User;
 import core.services.security.Services;
 import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;
+import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

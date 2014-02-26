@@ -1,4 +1,4 @@
-package menuItems.comment;
+package menuItems.comment.user;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
@@ -8,6 +8,7 @@ import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.security.ServicesImpl;
+import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 

@@ -15,7 +15,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class GoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
+public class AbstractGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
