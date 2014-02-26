@@ -2,6 +2,7 @@ package menuItems.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
+import core.general.menus.comment.ComplaintReasonType;
 import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -83,6 +84,16 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 			@Override
 			public EntryMenuOperationType getEntryMenuType() {
+				return null; // "Does mot matter"
+			}
+
+			@Override
+			protected ComplaintReasonType getComplainReasonType() {
+				return null; // "Does mot matter"
+			}
+
+			@Override
+			protected String getMenuItemText() {
 				return null; // "Does mot matter"
 			}
 

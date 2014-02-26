@@ -1,13 +1,10 @@
 package core.general.menus.comment.complain;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuItem {
 
@@ -21,18 +18,12 @@ public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuIt
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+	protected ComplaintReasonType getComplainReasonType() {
+		return ComplaintReasonType.COMMENT_SPAM;
+	}
 
-			@Override
-			public String getMenuText() {
-				return TranslatorUtils.translate( "Report spam" );
-			}
-
-			@Override
-			public String getMenuCommand() {
-				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), getId(), accessor.getId(), ComplaintReasonType.COMMENT_SPAM.getId() );
-			}
-		};
+	@Override
+	protected String getMenuItemText() {
+		return "Report spam";
 	}
 }
