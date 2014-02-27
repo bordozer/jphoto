@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanNotSeePhotoAuthorMenuTest() {
+	public void notLoggedUserCanNotSeeLockPhotoAuthorMenuTest() {
 		final User accessor = User.NOT_LOGGED_USER;
 		doAssertFalse( accessor, getServicesForTest( accessor ) );
 	}
@@ -70,11 +70,7 @@ public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest
 	}
 
 	private ServicesImpl getServicesForTest( final User accessor ) {
-		final ServicesImpl services = getServices( accessor );
-
-
-
-		return services;
+		return getServices( accessor );
 	}
 
 	private void doAssertTrue( final User accessor, final Services services ) {
