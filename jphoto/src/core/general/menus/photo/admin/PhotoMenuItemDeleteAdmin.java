@@ -38,6 +38,11 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
+
+		if ( isAccessorSeeingMenuOfOwnPhoto() ) {
+			return false;
+		}
+
 		return isAccessorSuperAdmin() && services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_DELETE_OTHER_PHOTOS );
 	}
 
