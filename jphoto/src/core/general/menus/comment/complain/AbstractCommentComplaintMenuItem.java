@@ -1,7 +1,7 @@
 package core.general.menus.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuType;
+import core.general.menus.AbstractEntryMenuItemComplaintCommand;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.PhotoComment;
@@ -42,16 +42,10 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
-
+		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, getComplainReasonType() ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( getMenuItemText() );
-			}
-
-			@Override
-			public String getMenuCommand() {
-				return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), getId(), accessor.getId(), getComplainReasonType().getId() );
 			}
 		};
 	}

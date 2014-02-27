@@ -57,6 +57,10 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
+		menuItems.add( EntryMenuOperationType.PHOTO_COMPLAINT_COPYRIGHT );
+
+		menuItems.add( EntryMenuOperationType.SEPARATOR );
+
 		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS );
 		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_GENRE );
 

@@ -8,6 +8,7 @@ import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.menus.comment.complain.CommentMenuItemComplaintCustom;
 import core.general.menus.comment.complain.CommentMenuItemComplaintSpam;
 import core.general.menus.comment.complain.CommentMenuItemComplaintSwordWords;
+import core.general.menus.AbstractEntryMenuItemComplaintCommand;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.security.ServicesImpl;
@@ -56,6 +57,6 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, expected, command.getMenuText() );
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS
 			, command.getMenuCommand()
-			, String.format( "%s( %d, %d, %d, %d ); return false;", AbstractEntryMenuItem.COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), testData.getComment().getId(), accessor.getId(), complaintReasonType.getId() ) );
+			, String.format( "%s( %d, %d, %d, %d ); return false;", AbstractEntryMenuItemComplaintCommand.COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), testData.getComment().getId(), accessor.getId(), complaintReasonType.getId() ) );
 	}
 }

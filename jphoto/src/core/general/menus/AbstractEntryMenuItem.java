@@ -12,8 +12,6 @@ import utils.UserUtils;
 
 public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
-	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
-
 	public static final String ADMIN_SUB_MENU_ENTRY_TEXT = "ADMIN";
 	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = "return false;";
 

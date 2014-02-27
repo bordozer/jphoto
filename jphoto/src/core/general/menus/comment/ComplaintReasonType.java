@@ -8,6 +8,7 @@ public enum ComplaintReasonType {
 	COMMENT_SPAM( 1, "Spam" )
 	, COMMENT_SWORD_WORDS( 2, "Sword words" )
 	, COMMENT_CUSTOM_COMPLAINT( 3, "Custom complaint" )
+	, PHOTO_COPYRIGHT_COMPLAINT( 4, "Photo copyright complaint" )
 	;
 
 	private final int id;

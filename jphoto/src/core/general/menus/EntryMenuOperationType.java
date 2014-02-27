@@ -28,6 +28,7 @@ public enum EntryMenuOperationType {
 	, SEND_PRIVATE_MESSAGE( 51, "Send private message", "menu_send_private_message.png" )
 
 	, PHOTO_INFO( 61, "Photo info", "menu_photo_info.png" )
+	, PHOTO_COMPLAINT_COPYRIGHT( 62, "Complain copyright", "menu_photo_complaint_copyright.png" )
 
 	, ADMIN_SUB_MENU( 71, "Admin submenu", "menu_sub_menu.png" )
 

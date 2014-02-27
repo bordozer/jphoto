@@ -19,6 +19,7 @@ import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockPhotoAuthor;
 import core.general.menus.photo.admin.PhotoMenuItemDeleteAdmin;
 import core.general.menus.photo.admin.PhotoMenuItemEditAdmin;
+import core.general.menus.photo.complain.PhotoComplaintCopyrightMenuItem;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
@@ -104,6 +105,9 @@ public class MenuCreationFactory {
 					break;
 				case MENU_ITEM_DELETE:
 					menuItems.add( new PhotoMenuItemDelete( photo, accessor, services ) );
+					break;
+				case PHOTO_COMPLAINT_COPYRIGHT:
+					menuItems.add( new PhotoComplaintCopyrightMenuItem( photo, accessor, services ) );
 					break;
 				case GO_TO_USER_PHOTOS:
 					menuItems.add( new PhotoMenuItemGoToAuthorPhotos( photo, accessor, services ) );
