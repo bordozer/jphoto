@@ -15,6 +15,7 @@ import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockUser;
+import core.general.menus.photo.admin.PhotoMenuItemDeleteAdmin;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
@@ -118,6 +119,9 @@ public class MenuCreationFactory {
 					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new PhotoAdminSubMenuItemLockUser( photo, accessor, services ) );
+					break;
+				case ADMIN_MENU_ITEM_DELETE:
+					menuItems.add( new PhotoMenuItemDeleteAdmin( photo, accessor, services ) );
 					break;
 				case GO_TO_USER_PHOTOS_BY_TEAM_MEMBER:
 					final List<PhotoTeamMember> photoTeamMembers = services.getUserTeamService().getPhotoTeam( photo.getId() ).getPhotoTeamMembers();

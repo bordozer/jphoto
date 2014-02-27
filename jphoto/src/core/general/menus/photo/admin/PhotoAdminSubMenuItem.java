@@ -14,7 +14,9 @@ import static com.google.common.collect.Lists.newArrayList;
 public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 
 	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
+		EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
+		, EntryMenuOperationType.SEPARATOR
+		,EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
 
 	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {
