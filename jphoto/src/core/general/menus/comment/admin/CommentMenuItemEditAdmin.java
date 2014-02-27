@@ -4,10 +4,10 @@ import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.AbstractCommentMenuItem;
+import core.general.menus.comment.commands.CommentMenuItemEditCommand;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 
@@ -22,18 +22,7 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
-
-			@Override
-			public String getMenuText() {
-				return TranslatorUtils.translate(  "Edit comment" );
-			}
-
-			@Override
-			public String getMenuCommand() {
-				return String.format( "editComment( %d ); return false;", getId() );
-			}
-		};
+		return new CommentMenuItemEditCommand( menuEntry, getEntryMenuType() );
 	}
 
 	@Override
