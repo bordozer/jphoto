@@ -6,7 +6,6 @@ import core.general.menus.photo.commands.PhotoMenuItemDeleteCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class PhotoMenuItemDelete extends AbstractPhotoUserOperationsMenuItem {
 

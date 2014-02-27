@@ -1,6 +1,7 @@
 package core.services.menu;
 
 import core.general.menus.*;
+import core.general.menus.comment.admin.CommentAdminSubMenuItem;
 import core.general.menus.comment.admin.CommentAdminSubMenuItemLockCommentAuthor;
 import core.general.menus.comment.admin.CommentMenuItemDeleteAdmin;
 import core.general.menus.comment.admin.CommentMenuItemEditAdmin;
@@ -17,6 +18,7 @@ import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockPhotoAuthor;
 import core.general.menus.photo.admin.PhotoMenuItemDeleteAdmin;
+import core.general.menus.photo.admin.PhotoMenuItemEditAdmin;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
@@ -120,6 +122,9 @@ public class MenuCreationFactory {
 					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new PhotoAdminSubMenuItemLockPhotoAuthor( photo, accessor, services ) );
+					break;
+				case ADMIN_MENU_ITEM_EDIT:
+					menuItems.add( new PhotoMenuItemEditAdmin( photo, accessor, services ) );
 					break;
 				case ADMIN_MENU_ITEM_DELETE:
 					menuItems.add( new PhotoMenuItemDeleteAdmin( photo, accessor, services ) );
