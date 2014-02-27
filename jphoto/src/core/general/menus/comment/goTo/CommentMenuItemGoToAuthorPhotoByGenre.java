@@ -21,16 +21,15 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAu
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		final Genre genre = getGenre( menuEntry );
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
+		final Genre genre = getGenre( menuEntry );
 
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUserAndGenre = getPhotoService().getPhotoQtyByUserAndGenre( commentAuthor.getId(), genre.getId() );
-				return TranslatorUtils.translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), genre.getName(), String.valueOf( photoQtyByUserAndGenre ) );
+				return TranslatorUtils.translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), genre.getName(), String.valueOf( getPhotoQty() ) );
 			}
 
 			@Override

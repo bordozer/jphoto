@@ -28,6 +28,7 @@ public class CommentMenuItemTestData {
 
 		genre = new Genre();
 		genre.setId( 400 );
+		genre.setName( "Photo Category" );
 
 		photo = new Photo();
 		photo.setId( 567 );

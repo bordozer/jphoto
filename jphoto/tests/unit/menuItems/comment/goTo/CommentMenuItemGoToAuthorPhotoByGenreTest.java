@@ -1,5 +1,6 @@
 package menuItems.comment.goTo;
 
+import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.goTo.CommentMenuItemGoToAuthorPhotoByGenre;
 import core.general.user.User;
 import core.services.entry.GenreService;
@@ -25,9 +26,19 @@ public class CommentMenuItemGoToAuthorPhotoByGenreTest extends AbstractCommentMe
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, getMenuEntry( new Parameters( testData.getAccessor(), photosQty ) ).getPhotoQty(), photosQty );
 	}
 
+	@Test
+	public void commandTest() {
+		final int photosQty = 4;
+
+		final CommentMenuItemGoToAuthorPhotoByGenre menuEntry = getMenuEntry( new Parameters( testData.getAccessor(), photosQty ) );
+		final AbstractEntryMenuItemCommand menuItemCommand = menuEntry.getMenuItemCommand();
+
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), String.format( "%s: photos in category '%s' ( %s )", testData.getCommentAuthor().getNameEscaped(), testData.getGenre().getName(), photosQty ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", testData.getCommentAuthor().getId(), testData.getGenre().getId() ) );
+	}
+
 	private CommentMenuItemGoToAuthorPhotoByGenre getMenuEntry( final Parameters parameters ) {
-		final ServicesImpl services = getServicesForTest( parameters );
-		return new CommentMenuItemGoToAuthorPhotoByGenre( testData.getComment(), parameters.getAccessor(), services );
+		return new CommentMenuItemGoToAuthorPhotoByGenre( testData.getComment(), parameters.getAccessor(), getServicesForTest( parameters ) );
 	}
 
 	private ServicesImpl getServicesForTest( final Parameters parameters ) {
