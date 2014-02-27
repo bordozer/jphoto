@@ -28,11 +28,11 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 		final User photoAuthor = testData.getPhotoAuthor();
 		final Genre genre = testData.getGenre();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), genre.getName(), parameters.getPhotosQty() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), genre.getName(), parameters.getPhotosQty() ) );
 
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {

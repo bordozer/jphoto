@@ -40,11 +40,11 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMemberTest extends AbstractPhotoM
 
 		final User photoAuthor = testData.getPhotoAuthor();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: photos with %s %s ( %d )", photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), parameters.getPhotosQty() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "%s: photos with %s %s ( %d )", photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), parameters.getPhotosQty() ) );
 
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotosByTeamMember( %d, %d );", photoAuthor.getId(), userTeamMember.getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByTeamMember( %d, %d );", photoAuthor.getId(), userTeamMember.getId() ) );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {

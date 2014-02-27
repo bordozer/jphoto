@@ -1,4 +1,4 @@
-package core.general.menus.comment.bookmark;
+package core.general.menus.comment.admin;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
@@ -8,9 +8,9 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class CommentAdminSubMenuItemLockUser extends AbstractCommentMenuItem {
+public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMenuItem {
 
-	public CommentAdminSubMenuItemLockUser( final PhotoComment photoComment, final User accessor, final Services services ) {
+	public CommentAdminSubMenuItemLockCommentAuthor( final PhotoComment photoComment, final User accessor, final Services services ) {
 		super( photoComment, accessor, services );
 	}
 

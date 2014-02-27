@@ -8,9 +8,9 @@ import core.general.user.User;
 import core.services.security.Services;
 import utils.TranslatorUtils;
 
-public class PhotoAdminSubMenuItemLockUser extends AbstractPhotoMenuItem {
+public class PhotoAdminSubMenuItemLockPhotoAuthor extends AbstractPhotoMenuItem {
 
-	public PhotoAdminSubMenuItemLockUser( final Photo photo, final User accessor, final Services services ) {
+	public PhotoAdminSubMenuItemLockPhotoAuthor( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
 	}
 
@@ -27,7 +27,7 @@ public class PhotoAdminSubMenuItemLockUser extends AbstractPhotoMenuItem {
 		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock member: $1", photoAuthor.getNameEscaped() );
+				return TranslatorUtils.translate( "Lock photo author: $1", photoAuthor.getNameEscaped() );
 			}
 
 			@Override

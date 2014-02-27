@@ -33,8 +33,8 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new PhotoMenuItemInfo( testData.getPhoto(), accessor, getServicesInfo() ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), "Photo info" );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "openPopupWindowCustom( '%s', 'photoInfo_%d', 460, 800, 100, 100 );", PHOTO_URL, testData.getPhoto().getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Photo info" );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "openPopupWindowCustom( '%s', 'photoInfo_%d', 460, 800, 100, 100 );", PHOTO_URL, testData.getPhoto().getId() ) );
 	}
 
 	private ServicesImpl getServicesInfo() {

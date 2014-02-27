@@ -1,6 +1,7 @@
 package core.services.menu;
 
 import core.general.menus.*;
+import core.general.menus.comment.admin.CommentAdminSubMenuItemLockCommentAuthor;
 import core.general.menus.comment.admin.CommentMenuItemDeleteAdmin;
 import core.general.menus.comment.admin.CommentMenuItemEditAdmin;
 import core.general.menus.comment.complain.CommentMenuItemComplaintCustom;
@@ -14,7 +15,7 @@ import core.general.menus.comment.operations.CommentMenuItemEdit;
 import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
 import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
-import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockUser;
+import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockPhotoAuthor;
 import core.general.menus.photo.admin.PhotoMenuItemDeleteAdmin;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
@@ -118,7 +119,7 @@ public class MenuCreationFactory {
 					menuItems.add( new PhotoAdminSubMenuItem( photo, accessor, services ) );
 					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
-					menuItems.add( new PhotoAdminSubMenuItemLockUser( photo, accessor, services ) );
+					menuItems.add( new PhotoAdminSubMenuItemLockPhotoAuthor( photo, accessor, services ) );
 					break;
 				case ADMIN_MENU_ITEM_DELETE:
 					menuItems.add( new PhotoMenuItemDeleteAdmin( photo, accessor, services ) );
@@ -197,7 +198,7 @@ public class MenuCreationFactory {
 					menuItems.add( new CommentMenuItemDeleteAdmin( photoComment, accessor, services ) );
 					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
-					menuItems.add( new CommentAdminSubMenuItemLockUser( photoComment, accessor, services ) );
+					menuItems.add( new CommentAdminSubMenuItemLockCommentAuthor( photoComment, accessor, services ) );
 					break;
 				default:
 					throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuOperationType ) );
