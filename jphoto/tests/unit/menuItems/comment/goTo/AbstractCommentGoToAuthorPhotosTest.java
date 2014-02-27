@@ -4,6 +4,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.comment.goTo.AbstractCommentGoToAuthorPhotos;
+import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
@@ -18,54 +19,57 @@ import static org.junit.Assert.assertTrue;
 public class AbstractCommentGoToAuthorPhotosTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
-	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
-		goAssertFalse( new Parameters( User.NOT_LOGGED_USER, 1 ) );
+	public void menuIsInvisibleForCommentAuthorIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
+
+		final Parameters parameters = new Parameters( testData.getCommentAuthor(), 2 );
+		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( false );
+
+		doAssertFalse( parameters );
 	}
 
 	@Test
-	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOFFTest() {
-		goAssertFalse( new Parameters( testData.getPhotoAuthor(), 2 ) );
+	public void menuIsVisibleForCommentAuthorIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONTest() {
+
+		final Parameters parameters = new Parameters( testData.getCommentAuthor(), 2 );
+		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
+
+		doAssertTrue( parameters );
 	}
 
 	@Test
-	public void photoAuthorCanNOTSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedONAndThereIsLessThenTwoPhotosTest() {
+	public void userCanNotSeeMenuIfPhotoIsWithinAnonymousPeriodTest() {
+		final Parameters parameters = new Parameters( testData.getAccessor(), 2 );
+		parameters.setCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( true );
+
+		doAssertFalse( parameters );
+	}
+
+	@Test
+	public void userCanSeeMenuIfPhotoIsNOTWithinAnonymousPeriodTest() {
+		final Parameters parameters = new Parameters( testData.getAccessor(), 2 );
+		parameters.setCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( false );
+
+		doAssertTrue( parameters );
+	}
+
+	@Test
+	public void menuIsInaccessibleIfCommentAuthorOwnThePhotoAndHasLessThenTwoPhotosTest() {
+
+		final PhotoComment comment = testData.getComment();
+		comment.setCommentAuthor( testData.getPhotoAuthor() );
 
 		final Parameters parameters = new Parameters( testData.getPhotoAuthor(), 1 );
 		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
-		goAssertFalse( parameters );
+		doAssertFalse( parameters );
 	}
 
 	@Test
-	public void usualUserCanNotSeeMenuThePhotoWithinAnonymousPeriodTest() {
-		final Parameters parameters = new Parameters( testData.getAccessor(), 2 );
-		parameters.setPhotoAuthorNameMustBeHidden( true );
+	public void menuIsAccessibleIfCommentAuthorOwnThePhotoAndHasMoreThenOnePhotosTest() {
 
-		goAssertFalse( parameters );
-	}
+		final PhotoComment comment = testData.getComment();
+		comment.setCommentAuthor( testData.getPhotoAuthor() );
 
-	@Test
-	public void menuIsNotShownIfThereIsLessThenOnePhotosTest() {
-		goAssertFalse( new Parameters( testData.getAccessor(), 1 ) );
-	}
-
-	@Test
-	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-		doAssertTrue( new Parameters( User.NOT_LOGGED_USER, 2 ) );
-	}
-
-	@Test
-	public void adminCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-		doAssertTrue( new Parameters( SUPER_ADMIN_1, 2 ) );
-	}
-
-	@Test
-	public void adminCanNotSeeMenuIfThereIsLessThenTwoPhotosTest() {
-		doAssertTrue( new Parameters( SUPER_ADMIN_1, 2 ) );
-	}
-
-	@Test
-	public void photoAuthorCanSeeMenuIfShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOnTest() {
 		final Parameters parameters = new Parameters( testData.getPhotoAuthor(), 2 );
 		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( true );
 
@@ -73,8 +77,21 @@ public class AbstractCommentGoToAuthorPhotosTest extends AbstractCommentMenuItem
 	}
 
 	@Test
-	public void menuIsShownIfThereIsMoreThenOnePhotosTest() {
-		doAssertTrue( new Parameters( testData.getAccessor(), 2 ) );
+	public void menuIsInaccessibleIfCommentAuthorDoesNotOwnThePhotoAndHasNoPhotosTest() {
+
+		final Parameters parameters = new Parameters( testData.getPhotoAuthor(), 0 );
+		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( false );
+
+		doAssertFalse( parameters );
+	}
+
+	@Test
+	public void menuIsAccessibleIfCommentAuthorDoesNotOwnThePhotoAndHasAtLeastOnePhotoTest() {
+
+		final Parameters parameters = new Parameters( testData.getPhotoAuthor(), 1 );
+		parameters.setShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOn( false );
+
+		doAssertTrue( parameters );
 	}
 
 	private AbstractCommentGoToAuthorPhotos getMenuEntry( final Parameters parameters ) {
@@ -143,7 +160,7 @@ public class AbstractCommentGoToAuthorPhotosTest extends AbstractCommentMenuItem
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, getMenuEntry( parameters ).isAccessibleFor() );
 	}
 
-	private void goAssertFalse( final Parameters parameters ) {
+	private void doAssertFalse( final Parameters parameters ) {
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, getMenuEntry( parameters ).isAccessibleFor() );
 	}
 
