@@ -12,7 +12,7 @@ import org.junit.Before;
 
 public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 
-	protected static final String WRONG_COMMAND = "Wrong menu text";
+	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 
 	protected static final String MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT = "Menu item should be accessible but it is not";
 	protected static final String MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS = "Menu item should not be accessible but it is";
@@ -44,6 +44,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		EasyMock.expect( userService.load( testData.getCommentAuthor().getId() ) ).andReturn( testData.getCommentAuthor() ).anyTimes();
 		EasyMock.expect( userService.load( testData.getPhotoAuthor().getId() ) ).andReturn( testData.getPhotoAuthor() ).anyTimes();
 		EasyMock.expect( userService.load( SUPER_ADMIN_1.getId() ) ).andReturn( SUPER_ADMIN_1 ).anyTimes();
+
 		EasyMock.expectLastCall();
 		EasyMock.replay( userService );
 

@@ -82,8 +82,8 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_TEXT );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_COMMAND );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_TEXT );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_COMMAND );
 	}
 
 	@Test
@@ -92,6 +92,6 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 		final Services services = getServices( user );
 		final CommentAdminSubMenuItem menuItem = new CommentAdminSubMenuItem( testData.getComment(), user, services );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
 	}
 }

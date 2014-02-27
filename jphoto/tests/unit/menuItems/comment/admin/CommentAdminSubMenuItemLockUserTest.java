@@ -60,8 +60,8 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 		final User commentAuthor = testData.getCommentAuthor();
 		final AbstractEntryMenuItemCommand command = new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Lock comment author: %s", commentAuthor.getNameEscaped() ) );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "Lock comment author: %s", commentAuthor.getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() ) );
 	}
 
 	@Test
@@ -70,6 +70,6 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 		final Services services = getServices( user );
 		final CommentAdminSubMenuItemLockUser menuItem = new CommentAdminSubMenuItemLockUser( testData.getComment(), user, services );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
 	}
 }

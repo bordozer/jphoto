@@ -98,7 +98,7 @@ public class AbstractCommentGoToAuthorPhotosTest extends AbstractCommentMenuItem
 		return new AbstractCommentGoToAuthorPhotos( testData.getComment(), parameters.getAccessor(), getServices( parameters ) ) {
 
 			@Override
-			protected int getPhotoQty() {
+			public int getPhotoQty() {
 				return parameters.getPhotosQty();
 			}
 

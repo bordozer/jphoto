@@ -75,8 +75,8 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 		final AbstractEntryMenuItemCommand command = getMenuItemInstance( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), MENU_TITLE );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), SOME_JS_FUNCTION );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), MENU_TITLE );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), SOME_JS_FUNCTION );
 	}
 
 	private AbstractCommentComplaintMenuItem getMenuItemInstance( final PhotoComment comment, final User user, final Services services ) {

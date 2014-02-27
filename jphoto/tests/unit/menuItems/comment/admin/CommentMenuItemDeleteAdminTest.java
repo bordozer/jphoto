@@ -71,8 +71,8 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemDeleteAdmin( testData.getComment(), user, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), "Delete comment" );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "deleteComment( %d ); return false;", testData.getComment().getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Delete comment" );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deleteComment( %d ); return false;", testData.getComment().getId() ) );
 	}
 
 	@Test
@@ -81,6 +81,6 @@ public class CommentMenuItemDeleteAdminTest extends AbstractCommentMenuItemTest_
 		final Services services = getServices( user );
 		final CommentMenuItemDeleteAdmin menuItem = new CommentMenuItemDeleteAdmin( testData.getComment(), user, services );
 
-		assertEquals( WRONG_COMMAND, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
 	}
 }

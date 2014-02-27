@@ -119,8 +119,8 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "Send private message to %s", testData.getCommentAuthor().getNameEscaped() ) );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), testData.getCommentAuthor().getId(), testData.getCommentAuthor().getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "Send private message to %s", testData.getCommentAuthor().getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), testData.getCommentAuthor().getId(), testData.getCommentAuthor().getNameEscaped() ) );
 	}
 
 	private FavoritesService getFavoritesService( final User blackListOwner, final User accessor, final boolean isInBlackList ) {

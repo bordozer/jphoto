@@ -1,5 +1,6 @@
 package menuItems.comment;
 
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -13,6 +14,7 @@ public class CommentMenuItemTestData {
 	private final Photo photo;
 
 	private final PhotoComment comment;
+	private final Genre genre;
 
 	CommentMenuItemTestData() {
 		commentAuthor = new User( 111 );
@@ -24,10 +26,14 @@ public class CommentMenuItemTestData {
 		accessor = new User( 333 );
 		accessor.setName( "Just a User" );
 
+		genre = new Genre();
+		genre.setId( 400 );
+
 		photo = new Photo();
 		photo.setId( 567 );
 		photo.setName( "The photo" );
 		photo.setUserId( photoAuthor.getId() );
+		photo.setGenreId( genre.getId() );
 
 		comment = new PhotoComment();
 		comment.setId( 345 );
@@ -54,5 +60,9 @@ public class CommentMenuItemTestData {
 
 	public PhotoComment getComment() {
 		return comment;
+	}
+
+	public Genre getGenre() {
+		return genre;
 	}
 }

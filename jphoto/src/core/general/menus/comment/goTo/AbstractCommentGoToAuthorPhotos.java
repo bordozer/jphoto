@@ -11,7 +11,7 @@ public abstract class AbstractCommentGoToAuthorPhotos extends AbstractCommentMen
 		super( photoComment, accessor, services );
 	}
 
-	protected abstract int getPhotoQty();
+	public abstract int getPhotoQty();
 
 	@Override
 	public boolean isAccessibleFor() {

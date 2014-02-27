@@ -37,7 +37,7 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentGoToA
 	}
 
 	@Override
-	protected int getPhotoQty() {
+	public int getPhotoQty() {
 		return getPhotoService().getPhotoQtyByUser( menuEntry.getCommentAuthor().getId() );
 	}
 }
