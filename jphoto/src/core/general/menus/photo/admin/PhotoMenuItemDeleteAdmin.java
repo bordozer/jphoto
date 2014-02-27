@@ -1,5 +1,6 @@
 package core.general.menus.photo.admin;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
@@ -37,7 +38,7 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return true;
+		return isAccessorSuperAdmin() && services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_DELETE_OTHER_PHOTOS );
 	}
 
 	@Override
