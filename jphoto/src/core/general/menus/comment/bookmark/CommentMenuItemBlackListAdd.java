@@ -22,11 +22,11 @@ public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
 
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {

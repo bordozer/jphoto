@@ -24,11 +24,11 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoGoToAuthor
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
 
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {

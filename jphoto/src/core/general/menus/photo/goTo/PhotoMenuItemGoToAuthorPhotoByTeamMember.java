@@ -25,12 +25,12 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoGoToA
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
 
 		final UserTeamMember userTeamMember = photoTeamMember.getUserTeamMember();
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {

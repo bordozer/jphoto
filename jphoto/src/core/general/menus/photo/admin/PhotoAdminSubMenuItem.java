@@ -29,8 +29,8 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( ADMIN_SUB_MENU_ENTRY_TEXT );

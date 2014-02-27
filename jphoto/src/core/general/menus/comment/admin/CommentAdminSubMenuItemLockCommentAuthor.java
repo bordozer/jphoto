@@ -20,11 +20,11 @@ public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMen
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
 
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( "Lock comment author: $1", commentAuthor.getNameEscaped() );

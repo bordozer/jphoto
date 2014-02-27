@@ -24,7 +24,7 @@ public class MenuItemSeparator<T extends PopupMenuAssignable> extends AbstractEn
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand( menuEntry, getEntryMenuType() ) {
 			@Override
 			public String getMenuText() {
 				return StringUtils.EMPTY;

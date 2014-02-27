@@ -20,7 +20,7 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry, getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {

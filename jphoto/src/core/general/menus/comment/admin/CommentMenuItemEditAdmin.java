@@ -21,8 +21,8 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
 
 			@Override
 			public String getMenuText() {

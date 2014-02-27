@@ -20,8 +20,8 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
+	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
 
 			private User photoAuthor = getPhotoAuthor();
 

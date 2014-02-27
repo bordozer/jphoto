@@ -30,7 +30,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public abstract EntryMenuOperationType getEntryMenuType();
 
-	public abstract AbstractEntryMenuItemCommand getMenuItemCommand();
+	public abstract AbstractEntryMenuItemCommand<T> getMenuItemCommand();
 
 	public abstract boolean isAccessibleFor();
 

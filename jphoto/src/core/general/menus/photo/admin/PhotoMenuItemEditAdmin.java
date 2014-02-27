@@ -1,21 +1,22 @@
-package core.general.menus.photo.operation;
+package core.general.menus.photo.admin;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.commands.PhotoMenuItemEditCommand;
+import core.general.menus.photo.operation.AbstractPhotoUserOperationsMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 
-public class PhotoMenuItemEdit extends AbstractPhotoUserOperationsMenuItem {
+public class PhotoMenuItemEditAdmin extends AbstractPhotoUserOperationsMenuItem {
 
-	public PhotoMenuItemEdit( final Photo photo, final User accessor, final Services services ) {
+	public PhotoMenuItemEditAdmin( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
 	}
 
 	@Override
 	public EntryMenuOperationType getEntryMenuType() {
-		return EntryMenuOperationType.MENU_ITEM_EDIT;
+		return EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT;
 	}
 
 	@Override
@@ -25,7 +26,11 @@ public class PhotoMenuItemEdit extends AbstractPhotoUserOperationsMenuItem {
 
 	@Override
 	public boolean hasAccessTo() {
-		return getSecurityService().userCanEditPhoto( accessor, menuEntry );
+		return false;
 	}
 
+	@Override
+	public String getMenuCssClass() {
+		return MENU_ITEM_CSS_CLASS_ADMIN;
+	}
 }

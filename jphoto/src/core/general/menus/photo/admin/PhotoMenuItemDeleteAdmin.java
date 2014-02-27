@@ -4,10 +4,10 @@ import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
+import core.general.menus.photo.commands.PhotoMenuItemDeleteCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItem {
 
@@ -21,19 +21,8 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
-
-		return new AbstractEntryMenuItemCommand( getEntryMenuType() ) {
-			@Override
-			public String getMenuText() {
-				return TranslatorUtils.translate( "Delete photo" );
-			}
-
-			@Override
-			public String getMenuCommand() {
-				return String.format( "deletePhoto( %d ); return false;", getId() );
-			}
-		};
+	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
+		return new PhotoMenuItemDeleteCommand( menuEntry, getEntryMenuType() );
 	}
 
 	@Override
@@ -50,4 +39,5 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItem {
 	public String getMenuCssClass() {
 		return MENU_ITEM_CSS_CLASS_ADMIN;
 	}
+
 }
