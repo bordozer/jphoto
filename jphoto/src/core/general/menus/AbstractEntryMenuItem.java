@@ -52,6 +52,10 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 		return MENU_ITEM_CSS_CLASS_DEFAULT;
 	}
 
+	public String getCommandIcon() {
+		return String.format( "menus/%s", getEntryMenuType().getIcon() );
+	}
+
 	final protected boolean isUserWhoIsCallingMenuLogged() {
 		return UserUtils.isLoggedUser( accessor );
 	}

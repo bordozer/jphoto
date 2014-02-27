@@ -21,7 +21,7 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		return new AbstractEntryMenuItemCommand<User>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {

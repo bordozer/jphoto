@@ -28,7 +28,7 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand getMenuItemCommand() {
 
-		return new AbstractEntryMenuItemCommand<User>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( ADMIN_SUB_MENU_ENTRY_TEXT );

@@ -21,7 +21,7 @@ public class PhotoMenuItemInfo extends AbstractPhotoMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( "Photo info" );

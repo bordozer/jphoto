@@ -10,6 +10,8 @@ import org.junit.Before;
 
 public class AbstractTestCase {
 
+	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
+
 	protected final DateUtilsServiceImpl dateUtilsService;
 	protected final SystemVarsService systemVarsServiceMock;
 	protected final PhotoCriteriasSqlServiceImpl photoCriteriasSqlService;

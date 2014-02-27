@@ -21,7 +21,7 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
 
 			private User commentAuthor = menuEntry.getCommentAuthor();
 

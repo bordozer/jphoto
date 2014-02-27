@@ -1,14 +1,14 @@
 package core.general.menus.photo.admin;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.menus.photo.commands.PhotoMenuItemEditCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
 
-public class PhotoMenuItemEditAdmin extends AbstractPhotoMenuItem {
+public class PhotoMenuItemEditAdmin extends AbstractPhotoMenuItemOperationAdmin {
 
 	public PhotoMenuItemEditAdmin( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
@@ -21,12 +21,12 @@ public class PhotoMenuItemEditAdmin extends AbstractPhotoMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new PhotoMenuItemEditCommand( menuEntry, getEntryMenuType() );
+		return new PhotoMenuItemEditCommand( menuEntry );
 	}
 
 	@Override
-	public boolean isAccessibleFor() {
-		return true;
+	protected boolean isOperationConfigurationOn() {
+		return services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_PHOTOS );
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {

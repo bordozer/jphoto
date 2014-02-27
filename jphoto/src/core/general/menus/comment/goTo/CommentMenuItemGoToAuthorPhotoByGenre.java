@@ -25,7 +25,7 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAu
 		final User commentAuthor = menuEntry.getCommentAuthor();
 		final Genre genre = getGenre( menuEntry );
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {

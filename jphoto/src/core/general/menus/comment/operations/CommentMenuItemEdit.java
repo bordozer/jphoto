@@ -22,11 +22,20 @@ public class CommentMenuItemEdit extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new CommentMenuItemEditCommand( menuEntry, getEntryMenuType() );
+		return new CommentMenuItemEditCommand( menuEntry );
 	}
 
 	@Override
 	public boolean isAccessibleFor() {
-		return !menuEntry.isCommentDeleted() && UserUtils.isLoggedUser( accessor ) && getSecurityService().userOwnThePhotoComment( accessor, menuEntry );
+
+		if ( menuEntry.isCommentDeleted() ) {
+			return false;
+		}
+
+		if ( ! UserUtils.isLoggedUser( accessor ) ) {
+			return false;
+		}
+
+		return isCommentLeftByAccessor();
 	}
 }

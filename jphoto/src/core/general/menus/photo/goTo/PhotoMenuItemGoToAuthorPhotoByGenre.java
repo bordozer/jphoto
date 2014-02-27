@@ -25,7 +25,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthor
 		final Genre genre = getGenre();
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {

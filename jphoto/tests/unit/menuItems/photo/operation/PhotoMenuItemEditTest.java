@@ -1,6 +1,5 @@
 package menuItems.photo.operation;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.photo.operation.PhotoMenuItemEdit;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -10,7 +9,8 @@ import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PhotoMenuItemEditTest extends AbstractPhotoMenuItemTest_ {
 
@@ -28,15 +28,6 @@ public class PhotoMenuItemEditTest extends AbstractPhotoMenuItemTest_ {
 		final boolean hasAccessTo = true;
 
 		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new PhotoMenuItemEdit( testData.getPhoto(), accessor, getServices( accessor, hasAccessTo ) ).hasAccessTo() );
-	}
-
-	@Test
-	public void photoAuthorCommandTest() {
-
-		final AbstractEntryMenuItemCommand command = new PhotoMenuItemEdit( testData.getPhoto(), null, new ServicesImpl() ).getMenuItemCommand();
-
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Edit photo" );
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "editPhotoData( %d );", testData.getPhoto().getId() ) );
 	}
 
 	private ServicesImpl getServices( final User accessor, final boolean hasAccessTo ) {

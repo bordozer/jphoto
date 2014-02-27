@@ -90,8 +90,8 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new UserMenuItemGoToPhotos( testData.getUser(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( WRONG_COMMAND, command.getMenuText(), String.format( "%s: all photos ( %d )", testData.getUser().getNameEscaped(), photosQty ) );
-		assertEquals( WRONG_COMMAND, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", testData.getUser().getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "%s: all photos ( %d )", testData.getUser().getNameEscaped(), photosQty ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", testData.getUser().getId() ) );
 	}
 
 	private ConfigurationService getConfigurationService( final boolean showOwnGoToPhotoConfiguration ) {

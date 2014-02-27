@@ -20,7 +20,7 @@ public class PhotoMenuItemEdit extends AbstractPhotoUserOperationsMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new PhotoMenuItemEditCommand( menuEntry, getEntryMenuType() );
+		return new PhotoMenuItemEditCommand( menuEntry );
 	}
 
 	@Override

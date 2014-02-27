@@ -30,7 +30,7 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoGoToA
 		final UserTeamMember userTeamMember = photoTeamMember.getUserTeamMember();
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {
@@ -42,16 +42,16 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoGoToA
 			public String getMenuCommand() {
 				return String.format( "goToMemberPhotosByTeamMember( %d, %d );", photoAuthor.getId(), userTeamMember.getId() );
 			}
-
-			@Override
-			public String getCommandIcon() {
-				return String.format( "userTeamMemberTypeIcons/%s", userTeamMember.getTeamMemberType().getIcon() );
-			}
 		};
 	}
 
 	@Override
 	protected int getPhotosQty() {
 		return services.getUserTeamService().getTeamMemberPhotosQty( photoTeamMember.getUserTeamMember().getId() );
+	}
+
+	@Override
+	public String getCommandIcon() {
+		return String.format( "userTeamMemberTypeIcons/%s", photoTeamMember.getUserTeamMember().getTeamMemberType().getIcon() );
 	}
 }

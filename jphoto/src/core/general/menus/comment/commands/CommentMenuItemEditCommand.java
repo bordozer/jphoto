@@ -1,14 +1,13 @@
 package core.general.menus.comment.commands;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuOperationType;
 import core.general.photo.PhotoComment;
 import utils.TranslatorUtils;
 
 public class CommentMenuItemEditCommand extends AbstractEntryMenuItemCommand<PhotoComment> {
 
-	public CommentMenuItemEditCommand( final PhotoComment menuEntry, final EntryMenuOperationType entryMenuType ) {
-		super( menuEntry, entryMenuType );
+	public CommentMenuItemEditCommand( final PhotoComment menuEntry ) {
+		super( menuEntry );
 	}
 
 	@Override

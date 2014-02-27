@@ -24,7 +24,7 @@ public class CommentMenuItemBlackListRemove extends AbstractCommentMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 		final User commentAuthor = menuEntry.getCommentAuthor();
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, getEntryMenuType() ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
 
 			@Override
 			public String getMenuText() {
