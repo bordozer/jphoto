@@ -121,7 +121,7 @@ public abstract class AbstractPhotoImportStrategy {
 			, photo.getId()
 			, entityLinkUtilsService.getPhotoCardLink( photo )
 			, entityLinkUtilsService.getUserCardLink( user )
-			, genre.getName()
+			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ) )
 		);
 		job.addJobExecutionFinalMessage( message );
 

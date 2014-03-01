@@ -1,6 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
 import core.log.LogHelper;
+import core.services.entry.GenreService;
+import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.ResponseHandler;
@@ -42,16 +44,54 @@ public class PhotosightRemoteContentHelper {
 		return getPageUrl( photoId, PhotosightImportStrategy.PHOTOS );
 	}
 
+	public static String getUserCardUrl( final int userId, final int page ) {
+		return String.format( "%s/?pager=%d", getPageUrl( userId, PhotosightImportStrategy.USERS ), page );
+	}
+
+	private static String getPageUrl( final int photoId, final String photos ) {
+		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, photos, photoId );
+	}
+
+	public static String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
+		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photosightCategory.getId() );
+	}
+
+	public static String getPhotosightUserName( final PhotosightUser photosightUser ) {
+		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUser.getId() );
+		if ( StringUtils.isEmpty( userPageContent ) ) {
+			return null;
+		}
+		return PhotosightContentDataExtractor.extractPhotosightUserName( userPageContent );
+	}
+
+	public static String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
+		final int photosightUserId = photosightUser.getId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
+	}
+
+	public static String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
+		final int photosightPhotoId = photosightPhoto.getPhotoId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), StringUtils.isNotEmpty( photosightPhoto.getName() ) ? StringUtilities.unescapeHtml( photosightPhoto.getName() ) : "-no name-", photosightPhotoId );
+	}
+
+	public static String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService ) {
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
+			, PhotosightRemoteContentHelper.getPhotosightCategoryPageUrl( photosightCategory )
+			, photosightCategory.getName()
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ) )
+		);
+	}
+
+	public static String getPhotoCardLink( final int photosightPhotoId ) {
+		return String.format( "<a href='%s'>%d</a>", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
+	}
+
 	public static String getUserPageContent( final int page, int photosightUserId ) {
 		return getContent( photosightUserId, getUserCardUrl( photosightUserId, page ) );
 	}
 
 	public static String getPhotoPageContent( final PhotosightUser photosightUser, final int photoId ) {
 		return getContent( photosightUser.getId(), getPhotoCardUrl( photoId ) );
-	}
-
-	public static String getUserCardUrl( final int userId, final int page ) {
-		return String.format( "%s/?pager=%d", getPageUrl( userId, PhotosightImportStrategy.USERS ), page );
 	}
 
 	private static void setCookie( final DefaultHttpClient httpClient, final int userId ) {
@@ -91,39 +131,5 @@ public class PhotosightRemoteContentHelper {
 		cookie.setPath( "/" );
 
 		return cookie;
-	}
-
-	private static String getPageUrl( final int photoId, final String photos ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, photos, photoId );
-	}
-
-	public static String getPhotosightUserName( final PhotosightUser photosightUser ) {
-		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUser.getId() );
-		if ( StringUtils.isEmpty( userPageContent ) ) {
-			return null;
-		}
-		return PhotosightContentDataExtractor.extractPhotosightUserName( userPageContent );
-	}
-
-	public static String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
-		final int photosightUserId = photosightUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
-			, PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId, 1 )
-			, StringUtilities.unescapeHtml( photosightUser.getName() )
-			, photosightUserId
-		);
-	}
-
-	public static String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
-		final int photosightPhotoId = photosightPhoto.getPhotoId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
-			, PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId )
-			, StringUtils.isNotEmpty( photosightPhoto.getName() ) ? StringUtilities.unescapeHtml( photosightPhoto.getName() ) : "-no name-"
-			, photosightPhotoId
-		);
-	}
-
-	public static String getPhotoCardLink( final int photosightPhotoId ) {
-		return String.format( "<a href='%s'>%d</a>", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
 	}
 }
