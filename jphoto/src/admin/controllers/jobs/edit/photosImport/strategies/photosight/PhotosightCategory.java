@@ -4,7 +4,7 @@ public enum PhotosightCategory {
 
 	NUDE( 15, "Nude" )
 	, GLAMOUR( 18, "Glamour" )
-	, CITY( 7, "city" )
+	, CITY( 7, "City" )
 	, CHILDREN( 80, "Children" )
 	, GENRE( 12, "Genre" )
 	, GENRE_PORTRAIT( 70, "Genre portrait" )
