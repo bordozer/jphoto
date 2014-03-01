@@ -214,7 +214,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final PhotosightPhoto photosightPhoto : cachedPhotosightPagePhoto ) {
 			final File imageFile = PhotosightImageFileUtils.getPhotosightPhotoLocalImageFile( photosightPhoto );
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategoryId() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ) );
 			result.add( new PhotosightPhotoOnDisk( photosightPhoto, imageDiscEntry ) );
 		}
 
@@ -307,10 +307,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			imageToImport.setUser( user );
 			imageToImport.setName( photosightPhoto.getName() );
 
-			final int photosightCategoryId = photosightPhoto.getPhotosightCategoryId();
+			final PhotosightCategory photosightCategory = photosightPhoto.getPhotosightCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = PhotosightImageFileUtils.getGenreDiscEntry( photosightCategoryId );
+			final GenreDiscEntry genreDiscEntry = PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory );
 			final String description = String.format( "Imported from photosight at %s ( %s ). Photo category: %s."
 				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ), PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ), genreDiscEntry.getName()
 			);
@@ -390,13 +390,13 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			return null;
 		}
 
-		final int photosightCategoryId = PhotosightContentHelper.extractPhotoCategoryId( photoPageContent );
-		if( photosightCategoryId == 0 ) {
+		final PhotosightCategory photosightCategory = PhotosightCategory.getById( PhotosightContentHelper.extractPhotoCategoryId( photoPageContent ) );
+		if( photosightCategory == null ) {
 			logPhotoSkipping( photosightUser, photosightPhotoId, "Can not extract photosight category from page content." );
 			return null;
 		}
 
-		final PhotosightPhoto photosightPhoto = new PhotosightPhoto( photosightUser, photosightPhotoId, photosightCategoryId );
+		final PhotosightPhoto photosightPhoto = new PhotosightPhoto( photosightUser, photosightPhotoId, photosightCategory );
 		photosightPhoto.setName( PhotosightContentHelper.extractPhotoName( photoPageContent ) );
 
 		final Date uploadTime = extractUploadTime( photoPageContent );
@@ -417,9 +417,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		photosightPhoto.setCached( false );
 
 		log.debug( String.format( "Photo %d has been downloaded from photosight", photosightPhoto.getPhotoId() ) );
-		job.addJobExecutionFinalMessage( String.format( "Downloaded from photosight: %s of %s"
+		job.addJobExecutionFinalMessage( String.format( "Downloaded from photosight: %s of %s, photosight category: %s"
 			, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto )
-			, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+			, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
+			, PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ).getName()
+			)
 		);
 
 		return photosightPhoto;

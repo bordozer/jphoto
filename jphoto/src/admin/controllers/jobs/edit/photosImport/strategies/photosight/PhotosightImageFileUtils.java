@@ -13,47 +13,47 @@ public class PhotosightImageFileUtils {
 
 	public static final String PHOTOSIGHT_LOCAL_IMAGE_DIR = "/home/blu"; // TODO:
 	public static final String PHOTOSIGHT_HOST = "photosight.ru";
-	private static List<CategoryPair> categoryPairs = newArrayList();
+	private static List<PhotoCategoryMapping> photoCategoryMappings = newArrayList();
 
 	private final static LogHelper log = new LogHelper( PhotosightImageFileUtils.class );
 
 	static {
-		categoryPairs.add( new CategoryPair( 15, GenreDiscEntry.NUDE ) );		// Nude
-		categoryPairs.add( new CategoryPair( 18, GenreDiscEntry.GLAMOUR ) );	// Glamour
-		categoryPairs.add( new CategoryPair( 7, GenreDiscEntry.CITY ) );		// City
-		categoryPairs.add( new CategoryPair( 80, GenreDiscEntry.CHILDREN ) );	// Children
-		categoryPairs.add( new CategoryPair( 12, GenreDiscEntry.GENRE ) );		// Genre
-		categoryPairs.add( new CategoryPair( 70, GenreDiscEntry.GENRE ) );		// Genre portrait
-		categoryPairs.add( new CategoryPair( 8, GenreDiscEntry.ANIMALS ) );		// Animals
-		categoryPairs.add( new CategoryPair( 14, GenreDiscEntry.DIGITAL_ART ) );// Digital art
-		categoryPairs.add( new CategoryPair( 5, GenreDiscEntry.MACRO ) ); 		// Macro
-		categoryPairs.add( new CategoryPair( 78, GenreDiscEntry.OTHER ) );		// Mobile photo
-		categoryPairs.add( new CategoryPair( 4, GenreDiscEntry.STILL ) );		// Still
-		categoryPairs.add( new CategoryPair( 36, GenreDiscEntry.LANDSCAPE ) );	// Landscape
-		categoryPairs.add( new CategoryPair( 65, GenreDiscEntry.UNDERWATER ) );	// Underwater
-		categoryPairs.add( new CategoryPair( 2, GenreDiscEntry.PORTRAIT ) );	// Portrait
-		categoryPairs.add( new CategoryPair( 6, GenreDiscEntry.TRAVELLING ) );	// Travelling
-		categoryPairs.add( new CategoryPair( 19, GenreDiscEntry.ADVERTISING ) );// Advertising
-		categoryPairs.add( new CategoryPair( 9, GenreDiscEntry.REPORTING ) );	// Reporting
-		categoryPairs.add( new CategoryPair( 91, GenreDiscEntry.WEDDING ) );	// Wedding
-		categoryPairs.add( new CategoryPair( 10, GenreDiscEntry.SPORT ) );		// Sport
-		categoryPairs.add( new CategoryPair( 17, GenreDiscEntry.GENRE ) );		// Photosight
-		categoryPairs.add( new CategoryPair( 64, GenreDiscEntry.ANIMALS ) );	// Photo hunting
-		categoryPairs.add( new CategoryPair( 82, GenreDiscEntry.CITY ) );		// Architecture
-		categoryPairs.add( new CategoryPair( 13, GenreDiscEntry.OTHER ) );		// Museum
-		categoryPairs.add( new CategoryPair( 3, GenreDiscEntry.OTHER ) );		// Nature
-		categoryPairs.add( new CategoryPair( 92, GenreDiscEntry.OTHER ) );		// Tech
-		categoryPairs.add( new CategoryPair( 87, GenreDiscEntry.MODELS ) );		// Models
-		categoryPairs.add( new CategoryPair( 11, GenreDiscEntry.HUMOR ) );		// humor - hidden on photosight in new version
-		categoryPairs.add( new CategoryPair( 16, GenreDiscEntry.OTHER ) );		// the rest - hidden on photosight in new version
-		categoryPairs.add( new CategoryPair( 27, GenreDiscEntry.OTHER ) );		// paparazzi - hidden on photosight in new version
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.NUDE, GenreDiscEntry.NUDE ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.CITY, GenreDiscEntry.CITY ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.CHILDREN, GenreDiscEntry.CHILDREN ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.GENRE, GenreDiscEntry.GENRE ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.ANIMALS, GenreDiscEntry.ANIMALS ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.DIGITAL_ART, GenreDiscEntry.DIGITAL_ART ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.MACRO, GenreDiscEntry.MACRO ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.STILL, GenreDiscEntry.STILL ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.ADVERTISING, GenreDiscEntry.ADVERTISING ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.REPORTING, GenreDiscEntry.REPORTING ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.WEDDING, GenreDiscEntry.WEDDING ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.SPORT, GenreDiscEntry.SPORT ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.PHOTOSIGHT, GenreDiscEntry.GENRE ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.PHOTO_HUNTING, GenreDiscEntry.ANIMALS ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.ARCHITECTURE, GenreDiscEntry.CITY ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.MODELS, GenreDiscEntry.MODELS ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.HUMOR, GenreDiscEntry.HUMOR ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.MOBILE_PHOTO, GenreDiscEntry.OTHER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.MUSEUM, GenreDiscEntry.OTHER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.NATURE, GenreDiscEntry.OTHER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.TECH, GenreDiscEntry.OTHER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.REST, GenreDiscEntry.OTHER ) );
+		photoCategoryMappings.add( new PhotoCategoryMapping( PhotosightCategory.PAPARAZZI, GenreDiscEntry.OTHER ) );
 	}
 
 	public static void prepareUserGenreFolders( final PhotosightUser photosightUser, final List<PhotosightPhoto> photosightPhotos ) throws IOException {
 
 		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
 			final File userFolder = getUserFolderForPhotoDownloading( photosightUser );
-			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategoryId() );
+			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategory() );
 
 			final File userGenrePath = new File( userFolder, genreDiscEntry.getName() );
 			if ( ! userGenrePath.exists() ) {
@@ -77,10 +77,9 @@ public class PhotosightImageFileUtils {
 	}
 
 	private static ImageDiscEntry getImageFile( final PhotosightPhoto photosightPhoto, final String imageContent ) throws IOException {
-		final PhotosightUser photosightUser = photosightPhoto.getPhotosightUser();
-		final int categoryId = photosightPhoto.getPhotosightCategoryId();
+		final PhotosightCategory category = photosightPhoto.getPhotosightCategory();
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( categoryId );
+		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( category );
 
 		final File imageFile = getPhotosightPhotoLocalImageFile( photosightPhoto );
 
@@ -92,7 +91,7 @@ public class PhotosightImageFileUtils {
 	public static File getPhotosightPhotoLocalImageFile( final PhotosightPhoto photosightPhoto ) throws IOException {
 		final String imageFileName = getPhotosightPhotoFileName( photosightPhoto.getPhotoId() );
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategoryId() );
+		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategory() );
 		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( photosightPhoto.getPhotosightUser() );
 		final File imageFolder = new File( userFolderForPhotoDownloading, genreDiscEntry.getName() );
 		return new File( imageFolder, imageFileName );
@@ -102,14 +101,14 @@ public class PhotosightImageFileUtils {
 		return String.format( "%d.jpg", photoId );
 	}
 
-	public static GenreDiscEntry getGenreDiscEntry( final int photosightCategoryId ) {
-		for ( final CategoryPair categoryPair : categoryPairs ) {
-			if ( categoryPair.getPhotosightCategoryId() == photosightCategoryId ) {
-				return categoryPair.getGenreDiscEntry();
+	public static GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
+		for ( final PhotoCategoryMapping photoCategoryMapping : photoCategoryMappings ) {
+			if ( photoCategoryMapping.getPhotosightCategory() == photosightCategory ) {
+				return photoCategoryMapping.getGenreDiscEntry();
 			}
 		}
 
-		log.warn( String.format( "Photosight category id %d does not mach any genre", photosightCategoryId ) );
+		log.warn( String.format( "Photosight category %s does not mach any genre", photosightCategory ) );
 
 		return GenreDiscEntry.OTHER;
 	}
@@ -141,47 +140,21 @@ public class PhotosightImageFileUtils {
 		}
 	}
 
-	static class CategoryPair {
-		private final int photosightCategoryId;
+	static class PhotoCategoryMapping {
+		private final PhotosightCategory photosightCategory;
 		private final GenreDiscEntry genreDiscEntry;
 
-		private CategoryPair( final int photosightCategoryId, final GenreDiscEntry genreDiscEntry ) {
-			this.photosightCategoryId = photosightCategoryId;
+		private PhotoCategoryMapping( final PhotosightCategory photosightCategory, final GenreDiscEntry genreDiscEntry ) {
+			this.photosightCategory = photosightCategory;
 			this.genreDiscEntry = genreDiscEntry;
 		}
 
-		public int getPhotosightCategoryId() {
-			return photosightCategoryId;
+		public PhotosightCategory getPhotosightCategory() {
+			return photosightCategory;
 		}
 
 		public GenreDiscEntry getGenreDiscEntry() {
 			return genreDiscEntry;
 		}
 	}
-
-	/*public static boolean isPhotosightPhotoAlreadyProcessed( final PhotosightUser photosightUser, final int photosightPhotoId ) throws IOException {
-		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( photosightUser );
-		final String imageFileName = getPhotosightPhotoFileName( photosightPhotoId );
-
-		final File[] genreDirList = userFolderForPhotoDownloading.listFiles( PredicateUtilsService.getDirFilter() );
-
-		if ( genreDirList == null ) {
-			return false;
-		}
-
-		for ( File genreDir : genreDirList ) {
-			final File[] files = genreDir.listFiles( PredicateUtilsService.getFileFilter() );
-
-			if ( files == null ) {
-				continue;
-			}
-
-			for ( File file : files ) {
-				if ( file.getName().equals( imageFileName ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}*/
 }

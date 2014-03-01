@@ -117,7 +117,12 @@ public abstract class AbstractPhotoImportStrategy {
 		photoToImport.setPhoto( photo );
 
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		final String message = String.format( "Created photo #%d '%s' of %s", photo.getId(), entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getUserCardLink( user ) );
+		final String message = String.format( "Created photo #%d '%s' of %s, category: %s"
+			, photo.getId()
+			, entityLinkUtilsService.getPhotoCardLink( photo )
+			, entityLinkUtilsService.getUserCardLink( user )
+			, genre.getName()
+		);
 		job.addJobExecutionFinalMessage( message );
 
 		log.debug( String.format( "Photo %s is generated for user %s", photo.getNameEscaped(), user.getNameEscaped() ) );

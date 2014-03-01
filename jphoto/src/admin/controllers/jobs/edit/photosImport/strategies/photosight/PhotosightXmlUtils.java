@@ -1,6 +1,5 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
-import core.context.ApplicationContextHelper;
 import core.exceptions.BaseRuntimeException;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -89,8 +88,8 @@ public class PhotosightXmlUtils {
 		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
 			final Element photoElement = rootElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ELEMENT_NAME );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( photosightPhoto.getPhotoId() ) );
-			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( photosightPhoto.getPhotosightCategoryId() ) );
-			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategoryId() ).getName() );
+			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( photosightPhoto.getPhotosightCategory() ) );
+			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ).getName() );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( photosightPhoto.getName() ) );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( photosightPhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( photosightPhoto.getImageUrl() );
@@ -121,7 +120,7 @@ public class PhotosightXmlUtils {
 		while ( photosIterator.hasNext() ) {
 			final Element photoElement = ( Element ) photosIterator.next();
 			final int photosightPhotoId = NumberUtils.convertToInt( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ID ).getText() );
-			final int categoryId = NumberUtils.convertToInt( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText() );
+			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText() ) );
 			final String photoName = StringEscapeUtils.unescapeXml( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_NAME ).getText() );
 
 			final String textUploadTime = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_UPLOAD_TIME ).getText();
@@ -133,7 +132,7 @@ public class PhotosightXmlUtils {
 			}
 			final String imageUrl = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
 
-			final PhotosightPhoto photosightPhoto = new PhotosightPhoto( photosightUser, photosightPhotoId, categoryId );
+			final PhotosightPhoto photosightPhoto = new PhotosightPhoto( photosightUser, photosightPhotoId, category );
 			photosightPhoto.setName( photoName );
 			photosightPhoto.setUploadTime( uploadTime );
 			photosightPhoto.setImageUrl( imageUrl );

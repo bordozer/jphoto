@@ -7,7 +7,7 @@ public class PhotosightPhoto {
 
 	private final PhotosightUser photosightUser;
 	private final int photoId;
-	private final int photosightCategoryId;
+	private final PhotosightCategory photosightCategory;
 	private String name;
 	private Date uploadTime;
 	private String imageUrl;
@@ -16,10 +16,10 @@ public class PhotosightPhoto {
 
 	private boolean isCached;
 
-	public PhotosightPhoto( final PhotosightUser photosightUser, final int photoId, final int photosightCategoryId ) {
+	public PhotosightPhoto( final PhotosightUser photosightUser, final int photoId, final PhotosightCategory photosightCategory ) {
 		this.photosightUser = photosightUser;
 		this.photoId = photoId;
-		this.photosightCategoryId = photosightCategoryId;
+		this.photosightCategory = photosightCategory;
 	}
 
 	public PhotosightUser getPhotosightUser() {
@@ -30,8 +30,8 @@ public class PhotosightPhoto {
 		return photoId;
 	}
 
-	public int getPhotosightCategoryId() {
-		return photosightCategoryId;
+	public PhotosightCategory getPhotosightCategory() {
+		return photosightCategory;
 	}
 
 	public String getName() {
