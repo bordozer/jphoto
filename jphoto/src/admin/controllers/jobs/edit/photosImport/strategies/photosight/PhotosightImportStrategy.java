@@ -420,7 +420,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		job.addJobExecutionFinalMessage( String.format( "Downloaded from photosight: %s of %s, photosight category: %s"
 			, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto )
 			, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
-			, PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ).getName()
+			, photosightPhoto.getPhotosightCategory().getName()
 			)
 		);
 
