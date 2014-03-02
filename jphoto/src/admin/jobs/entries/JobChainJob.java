@@ -6,8 +6,8 @@ import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
-import utils.TranslatorUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -106,11 +106,13 @@ public class JobChainJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Run mode:" ) ).append( jobRunMode.getNameTranslated() ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Stop dependant jobs if error:" ) ).append( TranslatorUtils.translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Jobs:" ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Run mode:" ) ).append( jobRunMode.getNameTranslated() ).append( "<br />" );
+		builder.append( translatorService.translate( "Stop dependant jobs if error:" ) ).append( translatorService.translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Jobs:" ) ).append( "<br />" );
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {
 			final SavedJob savedJob = services.getSavedJobService().load( savedJobToExecuteId );
 			final String img = String.format( "<img width='16' height='16' src='%s/jobtype/%s' title='%s'>"

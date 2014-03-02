@@ -10,11 +10,11 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
 import core.services.photo.PhotoService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.RandomUtilsService;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -87,12 +87,14 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 	@Override
 	public String getJobParametersDescription() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Actions" ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Photos" ) ).append( ": " ).append( photoQtyLimit > 0 ? photoQtyLimit : TranslatorUtils.translate( "all" ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Actions" ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translatorService.translate( "Photos" ) ).append( ": " ).append( photoQtyLimit > 0 ? photoQtyLimit : translatorService.translate( "all" ) ).append( "<br />" );
 
-		builder.append( TranslatorUtils.translate( "Actions type" ) ).append( ": " ).append( getJobType().getNameTranslated() ).append( "<br />" );
+		builder.append( translatorService.translate( "Actions type" ) ).append( ": " ).append( getJobType().getNameTranslated() ).append( "<br />" );
 
 		addDateRangeParameters( builder );
 

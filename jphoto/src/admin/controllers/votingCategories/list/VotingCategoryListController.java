@@ -3,6 +3,7 @@ package admin.controllers.votingCategories.list;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import utils.TranslatorUtils;
 
 import java.util.List;
 
@@ -29,6 +29,9 @@ public class VotingCategoryListController {
 
 	@Autowired
 	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( "votingCategoryListModel" )
 	public VotingCategoryListModel prepareModel() {
@@ -52,7 +55,7 @@ public class VotingCategoryListController {
 
 		if ( ! result ) {
 			BindingResult bindingResult = new BeanPropertyBindingResult( model, "votingCategoryListModel" );
-			bindingResult.reject( TranslatorUtils.translate( "Registration error" ), TranslatorUtils.translate( "Deletion error." ) );
+			bindingResult.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Deletion error." ) );
 			model.setBindingResult( bindingResult );
 		}
 

@@ -5,6 +5,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
 import core.services.pageTitle.PageTitleGenreUtilsService;
+import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import utils.TranslatorUtils;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,6 +40,9 @@ public class GenreEditDataController {
 
 	@Autowired
 	private PageTitleGenreUtilsService pageTitleGenreUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -94,7 +97,7 @@ public class GenreEditDataController {
 		genre.setPhotoVotingCategories( model.getAllowedVotingCategories() );
 
 		if ( ! genreService.save( genre ) ) {
-			result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Error saving data to DB" ) );
 			return VIEW;
 		}
 

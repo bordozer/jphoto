@@ -10,7 +10,6 @@ import core.general.user.UserRankInGenreVoting;
 import core.log.LogHelper;
 import core.services.user.UserRankService;
 import core.services.utils.EntityLinkUtilsService;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -121,7 +120,7 @@ public class RankVotingJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Actions: " ) ).append( totalJopOperations ).append( "<br />" );
+		builder.append( services.getTranslatorService().translate( "Actions: " ) ).append( totalJopOperations ).append( "<br />" );
 
 		return builder.toString();
 	}

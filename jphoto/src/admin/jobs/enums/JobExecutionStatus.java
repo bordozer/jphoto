@@ -2,7 +2,6 @@ package admin.jobs.enums;
 
 import core.interfaces.Identifiable;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.EnumSet;
 
@@ -54,7 +53,7 @@ public enum JobExecutionStatus implements Identifiable {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public String getIcon() {

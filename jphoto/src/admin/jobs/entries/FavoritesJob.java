@@ -7,7 +7,6 @@ import core.general.base.CommonProperty;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -78,7 +77,7 @@ public class FavoritesJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Actions: " ) ).append( totalJopOperations );
+		builder.append( services.getTranslatorService().translate( "Actions: " ) ).append( totalJopOperations );
 		for ( final FavoriteEntryType favoriteEntry : favoriteEntries ) {
 			builder.append( "<br />- " ).append( favoriteEntry.getName() );
 		}

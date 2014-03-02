@@ -5,8 +5,8 @@ import admin.jobs.general.JobDateRange;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -22,18 +22,19 @@ public abstract class AbstractDateRangeableJob extends AbstractJob {
 	public void addDateRangeParameters( final StringBuilder builder ) {
 
 		final DateRangeType dateRangeType = jobDateRange.getDateRangeType();
+		final TranslatorService translatorService = services.getTranslatorService();
 
 		final String dateRangeText = dateRangeType.getNameTranslated();
-		final String timePeriodText = TranslatorUtils.translate( "$1 $2 days", dateRangeType.getNameTranslated(), String.valueOf( jobDateRange.getTimePeriod() ) );
-		final String currentTimeText = TranslatorUtils.translate( "Time: $1", DateRangeType.CURRENT_TIME.getNameTranslated() );
+		final String timePeriodText = translatorService.translate( "$1 $2 days", dateRangeType.getNameTranslated(), String.valueOf( jobDateRange.getTimePeriod() ) );
+		final String currentTimeText = translatorService.translate( "Time: $1", DateRangeType.CURRENT_TIME.getNameTranslated() );
 
 		final String dateRange = dateRangeType == DateRangeType.DATE_RANGE ? dateRangeText : dateRangeType == DateRangeType.TIME_PERIOD ? timePeriodText : currentTimeText;
 
 		builder.append( dateRange ).append( "<br />" );
 
 		if ( dateRangeType != DateRangeType.CURRENT_TIME ) {
-			builder.append( TranslatorUtils.translate( "from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
-			builder.append( TranslatorUtils.translate( "to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
+			builder.append( translatorService.translate( "from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
+			builder.append( translatorService.translate( "to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
 		}
 	}
 

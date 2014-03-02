@@ -2,17 +2,20 @@ package admin.controllers.votingCategories.edit;
 
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
+import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 public class VotingCategoryEditDataValidator implements Validator {
 
 	@Autowired
 	private VotingCategoryService votingCategoryService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -32,14 +35,14 @@ public class VotingCategoryEditDataValidator implements Validator {
 		final String name = photoVotingCategory.getName();
 
 		if ( StringUtils.isEmpty( name ) ) {
-			final String errorCode = TranslatorUtils.translate( "$1 should not be empty.", FormatUtils.getFormattedFieldName( "Name" ) );
+			final String errorCode = translatorService.translate( "$1 should not be empty.", FormatUtils.getFormattedFieldName( "Name" ) );
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL, errorCode );
 		}
 
 		final PhotoVotingCategory checkPhotoVotingCategories = votingCategoryService.loadByName( name );
 		if ( checkPhotoVotingCategories != null && checkPhotoVotingCategories.getId() > 0 && checkPhotoVotingCategories.getId() != photoVotingCategory.getId() ) {
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL
-				, TranslatorUtils.translate( "$1 ($2) already exists!", FormatUtils.getFormattedFieldName( "Name" ), name ), name );
+				, translatorService.translate( "$1 ($2) already exists!", FormatUtils.getFormattedFieldName( "Name" ), name ), name );
 		}
 	}
 }

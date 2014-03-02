@@ -5,9 +5,9 @@ import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.TranslatorUtils;
 
 import java.util.List;
 
@@ -23,6 +23,9 @@ public class UpgradeServiceImpl implements UpgradeService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	private LogHelper log = new LogHelper( UpgradeServiceImpl.class );
 
@@ -66,7 +69,7 @@ public class UpgradeServiceImpl implements UpgradeService {
 			final AbstractUpgradeTask upgradeTask = upgradeTaskToPerform.getUpgradeTask();
 			upgradeTask.setSqlUtilsService( sqlUtilsService );
 
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: navy\"><b>%s</b></span>", TranslatorUtils.translate( "Start $1", upgradeTask.getDescription() ) ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: navy\"><b>%s</b></span>", translatorService.translate( "Start $1", upgradeTask.getDescription() ) ) );
 
 			upgradeTask.performUpgrade( upgradeMonitor );
 
@@ -75,11 +78,11 @@ public class UpgradeServiceImpl implements UpgradeService {
 
 			sqlUtilsService.execSQL( "COMMIT;" );
 
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: green\"><b>%s</b></span>", TranslatorUtils.translate( "ALL UPGRADE TASKS HAVE BEEN PERFORMED SUCCESSFULLY" ) ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: green\"><b>%s</b></span>", translatorService.translate( "ALL UPGRADE TASKS HAVE BEEN PERFORMED SUCCESSFULLY" ) ) );
 		} catch ( Throwable e ) {
 			upgradeMonitor.setUpgradeState( UpgradeState.ERROR );
 			upgradeTaskToPerform.setUpgradeTaskResult( UpgradeTaskResult.ERROR );
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: red\"><b>%s:</b></span> %s", TranslatorUtils.translate( "ERROR" ), e.getMessage() ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: red\"><b>%s:</b></span> %s", translatorService.translate( "ERROR" ), e.getMessage() ) );
 			log.error( e );
 
 			sqlUtilsService.execSQL( "ROLLBACK;" );

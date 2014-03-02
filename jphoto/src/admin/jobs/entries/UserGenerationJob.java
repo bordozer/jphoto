@@ -10,6 +10,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -18,7 +19,6 @@ import core.services.utils.PredicateUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DuplicateKeyException;
-import utils.TranslatorUtils;
 import utils.fakeUser.AbstractFakeMember;
 
 import java.io.File;
@@ -212,10 +212,12 @@ public class UserGenerationJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Users: " ) ).append( totalJopOperations ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Avatars: " ) ).append( avatarsDir );
+		builder.append( translatorService.translate( "Users: " ) ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translatorService.translate( "Avatars: " ) ).append( avatarsDir );
 
 		return builder.toString();
 	}

@@ -23,7 +23,6 @@ import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -504,7 +503,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		if ( existingUser != null ) {
 
-			job.addJobExecutionFinalMessage( TranslatorUtils.translate( String.format( "Existing user found: %s", entityLinkUtilsService.getUserCardLink( existingUser ) ) ) );
+			job.addJobExecutionFinalMessage( services.getTranslatorService().translate( String.format( "Existing user found: %s", entityLinkUtilsService.getUserCardLink( existingUser ) ) ) );
 
 			return existingUser;
 		}
@@ -521,7 +520,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			throw new BaseRuntimeException( "Can not create user" );
 		}
 
-		job.addJobExecutionFinalMessage( TranslatorUtils.translate( String.format( "New user has been created: %s", entityLinkUtilsService.getUserCardLink( user ) ) ) );
+		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( String.format( "New user has been created: %s", entityLinkUtilsService.getUserCardLink( user ) ) ) );
 
 		return user;
 	}

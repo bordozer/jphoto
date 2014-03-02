@@ -10,13 +10,13 @@ import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
-import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,6 +53,9 @@ public abstract class AbstractJobController {
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	protected abstract void showFormCustomAction( final AbstractAdminJobModel model );
 
@@ -137,7 +140,7 @@ public abstract class AbstractJobController {
 			final AbstractJob activeJob = jobExecutionService.getActiveJob( jobId );
 			if ( activeJob == null ) {
 				// There in NO active job but JobExecutionHistoryEntry is in progress - just set ERROR status of this job
-				final String message = TranslatorUtils.translate( "There in NO active job #$1 but JobExecutionHistoryEntry is in progress.<br /><br />Something must have happened during job execution (exception, worker stopping, etc.).<br /><br />ERROR status of the job was assigned forcibly", jobId );
+				final String message = translatorService.translate( "There in NO active job #$1 but JobExecutionHistoryEntry is in progress.<br /><br />Something must have happened during job execution (exception, worker stopping, etc.).<br /><br />ERROR status of the job was assigned forcibly", jobId );
 				jobExecutionHistoryService.setJobExecutionHistoryEntryStatus( historyEntry.getId(), message, JobExecutionStatus.ERROR );
 				return getRedirectToJobDoneListView( model );
 			}
@@ -155,15 +158,15 @@ public abstract class AbstractJobController {
 		if ( jobExecutionStatus.isNotActive() ) {
 
 			if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( TranslatorUtils.translate( "Preview generation job finished successfully" ) ) );
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job finished successfully" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.STOPPED_BY_USER ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( TranslatorUtils.translate( "Preview generation job has been stopped by user" ) ) );
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job has been stopped by user" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.ERROR ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( TranslatorUtils.translate( "Preview generation job finished with error" ) ) );
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job finished with error" ) ) );
 			}
 
 			return getFinishView( model );
@@ -216,7 +219,7 @@ public abstract class AbstractJobController {
 		savedJob.setJobType( job.getJobType() );
 
 		if ( ! savedJobService.save( savedJob ) ) {
-			result.reject( TranslatorUtils.translate( "Error" ), TranslatorUtils.translate( "Data saving error" ) );
+			result.reject( translatorService.translate( "Error" ), translatorService.translate( "Data saving error" ) );
 			return getStartViewName( model );
 		}
 

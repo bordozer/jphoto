@@ -6,8 +6,8 @@ import core.general.base.CommonProperty;
 import core.general.conversion.ConversionOptions;
 import core.general.photo.Photo;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
-import utils.TranslatorUtils;
 
 import java.awt.*;
 import java.util.Map;
@@ -66,12 +66,14 @@ public class PreviewGenerationJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
 
 		totalJopOperations = services.getPhotoService().getPhotoQty(); // TODO: hack!
 
-		builder.append( TranslatorUtils.translate( "Preview size: " ) ).append( previewSize ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Skip, if preview exists: " ) ).append( TranslatorUtils.translate( skipPhotosWithExistingPreview ? "Yes" : "No" ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Preview size: " ) ).append( previewSize ).append( "<br />" );
+		builder.append( translatorService.translate( "Skip, if preview exists: " ) ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No" ) ).append( "<br />" );
 
 		return builder.toString();
 	}

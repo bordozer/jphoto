@@ -1,14 +1,18 @@
 package admin.controllers.jobs.edit.chain;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
+import core.services.translator.TranslatorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 import java.util.List;
 
 public class JobChainJobValidator extends SavedJobValidator implements Validator {
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -27,7 +31,7 @@ public class JobChainJobValidator extends SavedJobValidator implements Validator
 	private void validateJobSelected( final JobChainJobModel model, final Errors errors ) {
 		final List<String> savedJobsIds = model.getSelectedSavedJobsIds();
 		if ( savedJobsIds == null || savedJobsIds.size() == 0 ) {
-			errors.rejectValue( JobChainJobModel.SELECTED_SAVED_JOBS_IDS_FORM_CONTROL, TranslatorUtils.translate( String.format( "Select at least one %s.", FormatUtils.getFormattedFieldName( "Job" ) ) ) );
+			errors.rejectValue( JobChainJobModel.SELECTED_SAVED_JOBS_IDS_FORM_CONTROL, translatorService.translate( String.format( "Select at least one %s.", FormatUtils.getFormattedFieldName( "Job" ) ) ) );
 		}
 	}
 }

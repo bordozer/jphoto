@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 
@@ -50,7 +49,7 @@ public class PhotoActionGenerationValidator extends SavedJobValidator implements
 
 	private boolean  validateEmpty( final String number, final Errors errors, String formControl, String fieldName ) {
 		if ( StringUtils.isEmpty( number ) ) {
-			errors.rejectValue( formControl, TranslatorUtils.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( fieldName ) ) ) );
+			errors.rejectValue( formControl, translatorService.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( fieldName ) ) ) );
 			return false;
 		}
 		return true;
@@ -62,12 +61,12 @@ public class PhotoActionGenerationValidator extends SavedJobValidator implements
 
 	private void validateDates( final String dateFrom, final String dateTo, final Errors errors ) {
 		if ( StringUtils.isEmpty( dateFrom ) ) {
-			errors.rejectValue( PhotoActionGenerationModel.DATE_FROM_FORM_CONTROL, TranslatorUtils.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
+			errors.rejectValue( PhotoActionGenerationModel.DATE_FROM_FORM_CONTROL, translatorService.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
 			return;
 		}
 
 		if ( StringUtils.isEmpty( dateTo ) ) {
-			errors.rejectValue( PhotoActionGenerationModel.DATE_TO_FORM_CONTROL, TranslatorUtils.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater to" ) ) ) );
+			errors.rejectValue( PhotoActionGenerationModel.DATE_TO_FORM_CONTROL, translatorService.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater to" ) ) ) );
 			return;
 		}
 
@@ -75,7 +74,7 @@ public class PhotoActionGenerationValidator extends SavedJobValidator implements
 		final Date toDate = dateUtilsService.parseDate( dateTo );
 
 		if ( toDate.getTime() < fromDate.getTime() ) {
-			errors.rejectValue( PhotoActionGenerationModel.DATE_TO_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s should be more then %s", FormatUtils.getFormattedFieldName( "Dater to" ), FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
+			errors.rejectValue( PhotoActionGenerationModel.DATE_TO_FORM_CONTROL, translatorService.translate( String.format( "%s should be more then %s", FormatUtils.getFormattedFieldName( "Dater to" ), FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
 		}
 	}
 }

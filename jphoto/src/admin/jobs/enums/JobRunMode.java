@@ -1,7 +1,6 @@
 package admin.jobs.enums;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum JobRunMode {
 
@@ -26,7 +25,7 @@ public enum JobRunMode {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static JobRunMode getById( int id ) {

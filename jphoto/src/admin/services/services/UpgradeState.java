@@ -1,7 +1,6 @@
 package admin.services.services;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum UpgradeState {
 	IN_PROGRESS( 1, "In progress")
@@ -26,7 +25,7 @@ public enum UpgradeState {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static UpgradeState getById( final int id ) {

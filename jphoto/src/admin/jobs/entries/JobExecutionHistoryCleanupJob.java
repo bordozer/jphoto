@@ -6,8 +6,8 @@ import admin.services.jobs.JobExecutionHistoryService;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
+import core.services.translator.TranslatorService;
 import utils.ListUtils;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -73,10 +73,12 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Delete entries that finished early then $1 day(s) ago", deleteEntriesOlderThenDays ) ).append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Job statuses to delete: " ) );
+		builder.append( translatorService.translate( "Delete entries that finished early then $1 day(s) ago", deleteEntriesOlderThenDays ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Job statuses to delete: " ) );
 
 		if ( jobExecutionStatusesToDelete.size() < JobExecutionStatus.values().length ) {
 			builder.append( "<br />" );
@@ -87,7 +89,7 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 				builder.append( "<br />" );
 			}
 		} else {
-			builder.append( TranslatorUtils.translate( "All" ) );
+			builder.append( translatorService.translate( "All" ) );
 		}
 
 		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );

@@ -10,6 +10,7 @@ import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.scheduler.SchedulerTask;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -20,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import utils.TranslatorUtils;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -53,6 +53,9 @@ public class SchedulerTaskEditController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
 		binder.setValidator( schedulerTaskEditValidator );
@@ -75,7 +78,7 @@ public class SchedulerTaskEditController {
 
 		final ExecutionTaskType initTaskType = ExecutionTaskType.ONCE;
 
-		model.setSchedulerTaskName( TranslatorUtils.translate( "New scheduler task" ) );
+		model.setSchedulerTaskName( translatorService.translate( "New scheduler task" ) );
 		model.setExecutionTaskTypeId( initTaskType.getId() );
 		model.setStartTaskDate( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ) );
 		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getFirstSecondOfToday() ) );
@@ -145,7 +148,7 @@ public class SchedulerTaskEditController {
 		final SchedulerTask schedulerTask = createSchedulerTaskFromModel( model );
 
 		if ( ! schedulerService.save( schedulerTask ) ) {
-			result.reject( TranslatorUtils.translate( "Registration error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Error saving data to DB" ) );
 			return VIEW;
 		}
 

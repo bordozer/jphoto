@@ -6,6 +6,7 @@ import core.services.entry.GenreService;
 import core.services.pageTitle.PageTitleGenreUtilsService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import utils.TranslatorUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -41,6 +41,9 @@ public class GenreListController {
 
 	@Autowired
 	private PageTitleGenreUtilsService pageTitleGenreUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( "genreListModel" )
 	public GenreListModel prepareModel() {
@@ -81,7 +84,7 @@ public class GenreListController {
 
 		if ( ! result ) {
 			BindingResult bindingResult = new BeanPropertyBindingResult( model, "genreListModel" );
-			bindingResult.reject( TranslatorUtils.translate( "Registration error" ), TranslatorUtils.translate( "Deletion error." ) );
+			bindingResult.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Deletion error." ) );
 			model.setBindingResult( bindingResult );
 		}
 

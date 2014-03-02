@@ -4,7 +4,6 @@ import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.Map;
@@ -45,7 +44,7 @@ public class ActivityStreamCleanupJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Delete activities older then $1 days", leaveActivityForDays ) );
+		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", leaveActivityForDays ) );
 
 		return builder.toString();
 	}

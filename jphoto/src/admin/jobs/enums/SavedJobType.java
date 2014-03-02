@@ -1,7 +1,5 @@
 package admin.jobs.enums;
 
-import utils.TranslatorUtils;
-
 public enum SavedJobType {
 
 	PREVIEW_GENERATION( 4, "Photo previews generation", JobListTab.SYSTEM_JOBS, "previews", "previewGeneration.png" )
@@ -45,7 +43,7 @@ public enum SavedJobType {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 
 	public JobListTab getJobListTab() {

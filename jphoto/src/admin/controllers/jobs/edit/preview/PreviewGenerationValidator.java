@@ -5,7 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 public class PreviewGenerationValidator extends SavedJobValidator implements Validator {
 
@@ -27,7 +26,7 @@ public class PreviewGenerationValidator extends SavedJobValidator implements Val
 	private void validatePictureFolder( final int previewSize, final Errors errors ) {
 		if ( previewSize <= 0 ) {
 			errors.rejectValue( PreviewGenerationModel.PREVIEW_SIZE_FORM_CONTROL,
-								TranslatorUtils.translate( String.format( "Enter %s.", FormatUtils.getFormattedFieldName( "Preview size" ) ) ) );
+								translatorService.translate( String.format( "Enter %s.", FormatUtils.getFormattedFieldName( "Preview size" ) ) ) );
 		}
 	}
 }

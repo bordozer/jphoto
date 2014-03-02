@@ -1,7 +1,6 @@
 package admin.jobs.enums;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum DateRangeType {
 
@@ -27,7 +26,7 @@ public enum DateRangeType {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static DateRangeType getById( final int id ) {

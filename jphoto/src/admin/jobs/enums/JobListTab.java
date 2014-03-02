@@ -1,7 +1,5 @@
 package admin.jobs.enums;
 
-import utils.TranslatorUtils;
-
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -38,7 +36,7 @@ public enum JobListTab {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 
 	public static JobListTab getByKey( final String key ) {

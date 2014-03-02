@@ -7,6 +7,7 @@ import admin.services.scheduler.SchedulerService;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.ListUtils;
-import utils.TranslatorUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +50,9 @@ public class SchedulerTaskListController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	private final LogHelper log = new LogHelper( SchedulerTaskListController.class );
 
 	@ModelAttribute( MODEL_NAME )
@@ -83,7 +86,7 @@ public class SchedulerTaskListController {
 			log.info( "Starting scheduler" );
 			scheduledTasksExecutionService.start();
 		} catch ( SchedulerException e ) {
-			model.getBindingResult().reject( TranslatorUtils.translate( "Scheduler error" ), TranslatorUtils.translate( "Can not start Scheduler" ) );
+			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not start Scheduler" ) );
 			log.error( "Can not start Scheduler" );
 		}
 
@@ -96,7 +99,7 @@ public class SchedulerTaskListController {
 			log.info( "Stopping scheduler" );
 			scheduledTasksExecutionService.pauseAll();
 		} catch ( SchedulerException e ) {
-			model.getBindingResult().reject( TranslatorUtils.translate( "Scheduler error" ), TranslatorUtils.translate( "Can not stop Scheduler" ) );
+			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not stop Scheduler" ) );
 			log.error( "Can not stop Scheduler" );
 		}
 

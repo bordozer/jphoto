@@ -1,7 +1,6 @@
 package admin.upgrade.entities;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum UpgradeTaskResult {
 
@@ -24,7 +23,7 @@ public enum UpgradeTaskResult {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static UpgradeTaskResult getById( final int id ) {

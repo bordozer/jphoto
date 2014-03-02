@@ -9,7 +9,7 @@ import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.exceptions.UpgradeException;
 import core.services.pageTitle.PageTitleAdminUtilsService;
-import core.services.utils.SystemVarsService;
+import core.services.translator.TranslatorService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.dom4j.Attribute;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import utils.TranslatorUtils;
 
 import java.io.File;
 import java.util.Iterator;
@@ -51,7 +50,7 @@ public class UpgradeController {
 	private UpgradeService upgradeService;
 
 	@Autowired
-	private SystemVarsService systemVarsService;
+	private TranslatorService translatorService;
 
 	@Autowired
 	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
@@ -75,7 +74,7 @@ public class UpgradeController {
 
 			model.setUpgradeTasksToPerform( upgradeTaskToPerform );
 		} catch ( Throwable e ) {
-			model.getBindingResult().reject( TranslatorUtils.translate( "File read error" ), TranslatorUtils.translate( "Can not read upgrade tasks from XML" ) );
+			model.getBindingResult().reject( translatorService.translate( "File read error" ), translatorService.translate( "Can not read upgrade tasks from XML" ) );
 		}
 
 		model.setUpgradeMonitor( upgradeService.getUpgradeMonitor() );

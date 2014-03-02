@@ -4,7 +4,6 @@ import admin.jobs.entries.AbstractJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
-import utils.TranslatorUtils;
 
 import java.util.Map;
 
@@ -23,7 +22,7 @@ public abstract class NoParametersAbstractJob extends AbstractJob {
 
 	@Override
 	final public String getJobParametersDescription() {
-		return TranslatorUtils.translate( "No parameters" );
+		return services.getTranslatorService().translate( "No parameters" );
 	}
 
 	@Override
