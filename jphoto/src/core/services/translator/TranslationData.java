@@ -1,14 +1,14 @@
 package core.services.translator;
 
-import java.util.List;
+import java.util.Set;
 
 public class TranslationData {
 
 	private final String nerd;
 
-	private final List<TranslationEntry> translations;
+	private final Set<TranslationEntry> translations;
 
-	public TranslationData( final String nerd, final List<TranslationEntry> translations ) {
+	public TranslationData( final String nerd, final Set<TranslationEntry> translations ) {
 		this.nerd = nerd;
 		this.translations = translations;
 	}
@@ -26,7 +26,7 @@ public class TranslationData {
 		return nerd;
 	}
 
-	public List<TranslationEntry> getTranslations() {
+	public Set<TranslationEntry> getTranslations() {
 		return translations;
 	}
 }
