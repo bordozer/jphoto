@@ -71,7 +71,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( thisMonthPhotos() );
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
-		menus.put( new MenuItem( "Photos", menuItem.getLink() ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( "Photos" ), menuItem.getLink() ), menuItems );
 	}
 
 	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus ) {
@@ -84,7 +84,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( new MenuItem( caption, link ) );
 		}
 
-		menus.put( new MenuItem( "Categories", "" ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( "Categories" ), "" ), menuItems );
 	}
 
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
@@ -120,7 +120,7 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem getActivityStreamMenu() {
 		final String caption = translatorService.translate( "Activity Stream" );
 		final String link = urlUtilsService.getActivityStreamUrl();
-		return new MenuItem( caption, link );
+		return new MenuItem( translatorService.translate( caption ), link );
 	}
 
 	private void createLoggedUserMenu( final Map<MenuItem, List<MenuItem>> menus, final User user ) {
@@ -141,10 +141,10 @@ public class MenuServiceImpl implements MenuService {
 
 			final String caption = translatorService.translate( "My club" );
 			final String link = userCardMenu.getLink();
-			menuItem = new MenuItem( caption, link );
+			menuItem = new MenuItem( translatorService.translate( caption ), link );
 		} else {
 			menuItem = registerMenu();
-			menuItems.add( new MenuItem( "Register", menuItem.getLink() ) );
+			menuItems.add( new MenuItem( translatorService.translate( "Register" ), menuItem.getLink() ) );
 		}
 
 		menus.put( menuItem, menuItems );
@@ -180,7 +180,7 @@ public class MenuServiceImpl implements MenuService {
 				menuItems.add( getAdminNotificationMenu( user ) );
 			}
 
-			menus.put( MenuItem.noLinkMenu( "Messages" ), menuItems );
+			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Messages" ) ), menuItems );
 
 			menuItems.add( userNotificationsControlMenu( user ) );
 		}
@@ -229,7 +229,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( getsubscriptionOnNewCommentsMenu( user ) );
 			menuItems.add( getSubscriptionOnNewPhotosMenu( user ) );
 
-			menus.put( MenuItem.noLinkMenu( "My subscription" ), menuItems );
+			menus.put( MenuItem.noLinkMenu( translatorService.translate( "My subscription" ) ), menuItems );
 		}
 	}
 
@@ -244,7 +244,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( votingCategoriesMenu() );
 		menuItems.add( upgradeMenu() );
 
-		menus.put( MenuItem.noLinkMenu( "Administration" ), menuItems );
+		menus.put( MenuItem.noLinkMenu( translatorService.translate( "Administration" ) ), menuItems );
 	}
 
 	private List<MenuItem> byMembershipMenus( final String url ) {
@@ -268,13 +268,13 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = StringUtilities.toUpperCaseFirst( membershipType.getNames() );
+		final String caption = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNames() ) );
 		final String link = urlUtilsService.getPhotosByMembership( membershipType, url );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem membershipBestMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = translatorService.translate( "Best of $1", StringUtilities.toUpperCaseFirst( membershipType.getNames() ) );
+		final String caption = translatorService.translate( "Best of $1", StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNames() ) ) );
 		final String link = urlUtilsService.getPhotosByMembershipBest( membershipType, url );
 		return new MenuItem( caption, link );
 	}
