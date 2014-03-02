@@ -3,7 +3,9 @@ package controllers.exception;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.ExceptionModel;
 import core.exceptions.notFound.NotFoundExceptionEntryType;
+import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ExceptionController {
 
 	private static final String MODEL_NAME = "exceptionModel";
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ExceptionModel prepareModel( final HttpServletRequest request ) {
@@ -31,6 +36,7 @@ public class ExceptionController {
 
 		model.setExceptionUrl( url );
 		model.setRefererUrl( request.getHeader( "referer" ) );
+		model.setTranslatorService( translatorService );
 
 		return model;
 	}

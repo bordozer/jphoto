@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.apache.commons.lang.exception.ExceptionUtils" %>
-<%@ page import="utils.TranslatorUtils" %>
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
 <%@ page isErrorPage="true" %>
@@ -14,7 +13,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = TranslatorUtils.translate( "Oops!" );
+	final String title = exceptionModel.getTranslatorService().translate( "Oops!" );
 
 	final String[] traceElements = ExceptionUtils.getStackFrames( exception );
 

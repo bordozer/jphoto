@@ -18,7 +18,7 @@
 <jsp:useBean id="portalPageModel" type="controllers.portalpage.PortalPageModel" scope="request" />
 
 <%
-	final String title = TranslatorUtils.translate( "Portal page" );
+	final String title = portalPageModel.getTranslatorService().translate( "Portal page" );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

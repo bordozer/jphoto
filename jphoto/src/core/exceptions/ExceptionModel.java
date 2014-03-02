@@ -1,6 +1,7 @@
 package core.exceptions;
 
 import core.exceptions.notFound.NotFoundExceptionEntryType;
+import core.services.translator.TranslatorService;
 
 public class ExceptionModel {
 
@@ -8,6 +9,8 @@ public class ExceptionModel {
 	private String refererUrl;
 	private String exceptionMessage;
 	private NotFoundExceptionEntryType notFoundExceptionEntryType;
+
+	private TranslatorService translatorService;
 
 	public String getExceptionUrl() {
 		return exceptionUrl;
@@ -39,5 +42,13 @@ public class ExceptionModel {
 
 	public NotFoundExceptionEntryType getNotFoundExceptionEntryType() {
 		return notFoundExceptionEntryType;
+	}
+
+	public TranslatorService getTranslatorService() {
+		return translatorService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }

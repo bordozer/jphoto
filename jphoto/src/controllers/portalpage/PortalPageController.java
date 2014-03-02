@@ -63,7 +63,10 @@ public class PortalPageController {
 
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
-		return new PortalPageModel();
+		final PortalPageModel model = new PortalPageModel();
+		model.setTranslatorService( translatorService );
+
+		return model;
 	}
 
 	@RequestMapping( "/" )

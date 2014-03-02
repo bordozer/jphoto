@@ -1,5 +1,4 @@
 <%@ page import="elements.PageTitleData" %>
-<%@ page import="utils.TranslatorUtils" %>
 <%@ page import="elements.PageModel" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true"%>
@@ -13,7 +12,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = TranslatorUtils.translate( "Error 404 - Page not found" );
+	final String title = exceptionModel.getTranslatorService().translate( "Error 404 - Page not found" );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

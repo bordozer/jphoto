@@ -1,5 +1,4 @@
 <%@ page import="elements.PageTitleData" %>
-<%@ page import="utils.TranslatorUtils" %>
 <%@ page import="elements.PageModel" %>
 <%@ page import="utils.UserUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -16,7 +15,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = TranslatorUtils.translate( "Nude content warning" );
+	final String title = exceptionModel.getTranslatorService().translate( "Nude content warning" );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

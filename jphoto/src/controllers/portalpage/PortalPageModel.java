@@ -2,6 +2,7 @@ package controllers.portalpage;
 
 import core.general.activity.AbstractActivityStreamEntry;
 import core.general.data.UserRating;
+import core.services.translator.TranslatorService;
 import elements.PhotoList;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public class PortalPageModel {
 	private int randomBestPhotoArrayIndex;
 
 	private List<AbstractActivityStreamEntry> lastActivities;
+
+	private TranslatorService translatorService;
 
 	public PhotoList getLastUploadedPhotoList() {
 		return lastUploadedPhotoList;
@@ -94,5 +97,13 @@ public class PortalPageModel {
 
 	public void setLastActivities( final List<AbstractActivityStreamEntry> lastActivities ) {
 		this.lastActivities = lastActivities;
+	}
+
+	public TranslatorService getTranslatorService() {
+		return translatorService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }
