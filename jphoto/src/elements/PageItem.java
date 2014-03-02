@@ -7,9 +7,9 @@ public class PageItem {
 	private final int number;
 	private String title;
 
-	public PageItem( int number ) {
+	public PageItem( final int number ) {
 		this.number = number;
-		title = TranslatorUtils.translate( "Page $1", number );
+		title = String.format( "Page %d", number ); //  // TODO: translate
 	}
 
 	public int getNumber() {

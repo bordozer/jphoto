@@ -20,6 +20,6 @@ public class MenuItem {
 	}
 
 	public static MenuItem noLinkMenu( final String title ) {
-		return new MenuItem( TranslatorUtils.translate( title ), "#" );
+		return new MenuItem( title, "#" ); // TODO: translate
 	}
 }

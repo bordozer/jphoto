@@ -12,11 +12,11 @@ public class PhotoList {
 	final private List<PhotoInfo> photoInfos;
 	final private String photoListTitle;
 	private int photosInLine;
-	private String noPhotoText = TranslatorUtils.translate( "No photos correspond to the criterias" );
+	private String noPhotoText = "No photos correspond to the criterias"; // TODO: translate
 
 	private final boolean showPaging;
 
-	private String linkToFullListText = TranslatorUtils.translate( "All photos" );
+	private String linkToFullListText = "All photos"; // TODO: translate
 	private String linkToFullList = StringUtils.EMPTY;
 	private String photosCriteriasDescription = StringUtils.EMPTY;
 
