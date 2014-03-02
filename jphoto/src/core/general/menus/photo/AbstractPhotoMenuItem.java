@@ -21,12 +21,12 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 		return getSecurityService().isPhotoAuthorNameMustBeHidden( menuEntry, accessor );
 	}
 
-	protected boolean isPhotoOfMenuCaller() {
+	protected boolean isPhotoOfMenuAccessor() {
 		return UserUtils.isUsersEqual( accessor, getUserService().load( menuEntry.getUserId() ) );
 	}
 
 	protected boolean hideMenuItemBecauseEntryOfMenuCaller() {
-		return isPhotoOfMenuCaller() && isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff();
+		return isPhotoOfMenuAccessor() && isShowGoToPhotosMenuItemsForMenuCallerOwnEntriesSwitchedOff();
 	}
 
 	protected GenreService getGenreService() {

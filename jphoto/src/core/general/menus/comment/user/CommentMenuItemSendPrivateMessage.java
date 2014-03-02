@@ -40,7 +40,7 @@ public class CommentMenuItemSendPrivateMessage extends AbstractCommentMenuItem {
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( !isUserWhoIsCallingMenuLogged() ) {
+		if ( !isMenuAccessorLogged() ) {
 			return false;
 		}
 

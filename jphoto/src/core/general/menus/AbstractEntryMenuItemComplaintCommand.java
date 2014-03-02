@@ -6,6 +6,7 @@ import core.general.user.User;
 public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuAssignable> extends AbstractEntryMenuItemCommand<T> {
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
+
 	private User accessor;
 	private final ComplaintReasonType complaintReasonType;
 
@@ -17,6 +18,12 @@ public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuA
 
 	@Override
 	public String getMenuCommand() {
-		return String.format( "%s( %d, %d, %d, %d ); return false;", COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), getId(), accessor.getId(), complaintReasonType.getId() );
+		return String.format( "%s( %d, %d, %d, %d ); return false;"
+			, COMPLAINT_MESSAGE_JS_FUNCTION
+			, EntryMenuType.COMMENT.getId()
+			, getId()
+			, accessor.getId()
+			, complaintReasonType.getId()
+		);
 	}
 }

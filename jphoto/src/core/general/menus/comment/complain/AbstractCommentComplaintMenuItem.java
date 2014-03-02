@@ -25,7 +25,7 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 			return false;
 		}
 
-		if ( ! isUserWhoIsCallingMenuLogged() ) {
+		if ( ! isMenuAccessorLogged() ) {
 			return false;
 		}
 

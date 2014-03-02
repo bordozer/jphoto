@@ -39,9 +39,4 @@ public class PhotoComplaintCopyrightMenuItem extends AbstractPhotoComplaintMenuI
 			}
 		};
 	}
-
-	@Override
-	public boolean isAccessibleFor() {
-		return true;
-	}
 }

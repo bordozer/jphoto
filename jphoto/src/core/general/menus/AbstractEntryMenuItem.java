@@ -54,7 +54,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 		return String.format( "menus/%s", getEntryMenuType().getIcon() );
 	}
 
-	final protected boolean isUserWhoIsCallingMenuLogged() {
+	final protected boolean isMenuAccessorLogged() {
 		return UserUtils.isLoggedUser( accessor );
 	}
 

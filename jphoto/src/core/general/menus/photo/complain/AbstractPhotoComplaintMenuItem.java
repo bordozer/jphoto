@@ -1,12 +1,10 @@
 package core.general.menus.photo.complain;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public abstract class AbstractPhotoComplaintMenuItem extends AbstractPhotoMenuItem {
 
@@ -21,29 +19,14 @@ public abstract class AbstractPhotoComplaintMenuItem extends AbstractPhotoMenuIt
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( ! isUserWhoIsCallingMenuLogged() ) {
+		if ( ! isMenuAccessorLogged() ) {
 			return false;
 		}
 
-		if ( isPhotoOfMenuCaller() ) {
+		if ( isPhotoOfMenuAccessor() ) {
 			return false;
 		}
 
 		return true;
-	}
-
-	@Override
-	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
-			@Override
-			public String getMenuText() {
-				return TranslatorUtils.translate( "Complaint copyright" );
-			}
-
-			@Override
-			public String getMenuCommand() {
-				return String.format( "complaintPhotoCopyright( %d );", getId() );
-			}
-		};
 	}
 }
