@@ -78,6 +78,7 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public String getTranslatedSign() {
 		return StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
+//		return "(t)"; //StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
 	}
 
 	@Override
