@@ -6,6 +6,7 @@ import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
+import core.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,9 @@ public class ChangeUserPasswordController {
 	@Autowired
 	private ChangeUserPasswordValidator changeUserPasswordValidator;
 
+	@Autowired
+	private DataRequirementService dataRequirementService;
+
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
 		binder.setValidator( changeUserPasswordValidator );
@@ -55,6 +59,7 @@ public class ChangeUserPasswordController {
 		final ChangeUserPasswordModel model = new ChangeUserPasswordModel( user );
 
 		model.setPageTitleData( pageTitleUserUtilsService.getChangeUserPasswordData( user ) );
+		model.setDataRequirementService( dataRequirementService );
 
 		return model;
 	}

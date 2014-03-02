@@ -17,7 +17,7 @@
 <c:set var="newPasswordControl" value="<%=ChangeUserPasswordModel.FORM_CONTROL_NEW_PASSWORD%>"/>
 <c:set var="newPasswordConfirmationControl" value="<%=ChangeUserPasswordModel.FORM_CONTROL_NEW_PASSWORD_CONFIRMATION%>"/>
 
-<c:set var="passwordRequirement" value="<%=UserRequirement.getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
+<c:set var="passwordRequirement" value="<%=changeUserPasswordModel.getDataRequirementService().getUserRequirement().getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
 
 <tags:page pageModel="${changeUserPasswordModel.pageModel}">
 

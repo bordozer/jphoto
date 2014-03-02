@@ -3,6 +3,7 @@ package controllers.users.password.change;
 import controllers.users.edit.UserEditDataModel;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
+import core.services.validation.DataRequirementService;
 
 public class ChangeUserPasswordModel extends AbstractGeneralModel {
 
@@ -15,6 +16,8 @@ public class ChangeUserPasswordModel extends AbstractGeneralModel {
 	private String oldPassword;
 	private String password;
 	private String confirmPassword;
+
+	private DataRequirementService dataRequirementService;
 
 	public ChangeUserPasswordModel( final User user ) {
 		this.user = user;
@@ -46,5 +49,13 @@ public class ChangeUserPasswordModel extends AbstractGeneralModel {
 
 	public void setConfirmPassword( final String confirmPassword ) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public DataRequirementService getDataRequirementService() {
+		return dataRequirementService;
+	}
+
+	public void setDataRequirementService( final DataRequirementService dataRequirementService ) {
+		this.dataRequirementService = dataRequirementService;
 	}
 }
