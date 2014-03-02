@@ -26,6 +26,7 @@ import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -40,7 +41,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -115,6 +115,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Autowired
 	private GenreService genreService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public void setUserAvatar( final UserCardModel model ) {
@@ -227,7 +230,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public PhotoList getUserTeamMemberLastPhotos( final int userId, final UserTeamMember userTeamMember, final Map<UserTeamMember, Integer> teamMemberPhotosQtyMap ) {
 		final int photosQty = teamMemberPhotosQtyMap.get( userTeamMember );
-		final String photoListTitle = TranslatorUtils.translate( "Last photos with $1, $2 - $3 photos"
+		final String photoListTitle = translatorService.translate( "Last photos with $1, $2 - $3 photos"
 			, StringUtilities.escapeHtml( userTeamMember.getName() ), userTeamMember.getTeamMemberType().getNameTranslated(), String.valueOf( photosQty ) );
 		final String userTeamMemberCardLink = urlUtilsService.getUserTeamMemberCardLink( userId, userTeamMember.getId() );
 
@@ -239,7 +242,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public PhotoList getUserPhotoAlbumLastPhotos( final int userId, final UserPhotoAlbum userPhotoAlbum, final Map<UserPhotoAlbum, Integer> userPhotoAlbumsQtyMap ) {
 		final int photosQty = userPhotoAlbumsQtyMap.get( userPhotoAlbum );
-		final String photoListTitle = TranslatorUtils.translate( "Last photos from album '$1' - $2 photos", StringUtilities.escapeHtml( userPhotoAlbum.getName() ), String.valueOf( photosQty ) );
+		final String photoListTitle = translatorService.translate( "Last photos from album '$1' - $2 photos", StringUtilities.escapeHtml( userPhotoAlbum.getName() ), String.valueOf( photosQty ) );
 		final String userTeamMemberCardLink = urlUtilsService.getUserPhotoAlbumPhotosLink( userId, userPhotoAlbum.getId() );
 
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( userId, userPhotoAlbum.getId(), getPagingModel() );
@@ -325,7 +328,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.load( ids );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String title = TranslatorUtils.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
+		final String title = translatorService.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 		return getPhotoList( photos, link, title );
@@ -342,7 +345,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String listTitle = TranslatorUtils.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
+		final String listTitle = translatorService.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
 
 		final List<Photo> photos = photoService.loadPhotosByIdsQuery( selectIdsQuery );
 
@@ -357,7 +360,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getBestUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
-		final String listTitle = TranslatorUtils.translate( "The best photos" );
+		final String listTitle = translatorService.translate( "The best photos" );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
 		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
@@ -369,7 +372,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
-		final String listTitle = TranslatorUtils.translate( "Last photos" );
+		final String listTitle = translatorService.translate( "Last photos" );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
 		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
@@ -381,7 +384,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastVotedPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
-		final String listTitle = TranslatorUtils.translate( "The photos the member has voted recently for" );
+		final String listTitle = translatorService.translate( "The photos the member has voted recently for" );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 
@@ -390,7 +393,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastPhotosOfUserVisitors( user, getConfiguredUserCardPhotosInLine() );
 
 		final String linkBest = StringUtils.EMPTY;
-		final String listTitle = TranslatorUtils.translate( "Last photos of visitors who viewed the member's photos recently" );
+		final String listTitle = translatorService.translate( "Last photos of visitors who viewed the member's photos recently" );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 

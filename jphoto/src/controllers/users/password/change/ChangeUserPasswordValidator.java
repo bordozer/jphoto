@@ -1,17 +1,20 @@
 package controllers.users.password.change;
 
 import core.general.user.User;
+import core.services.translator.TranslatorService;
 import core.services.user.UsersSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 public class ChangeUserPasswordValidator implements Validator {
 
 	@Autowired
 	private UsersSecurityService usersSecurityService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -31,7 +34,7 @@ public class ChangeUserPasswordValidator implements Validator {
 
 	private void validateOldPassword( final User user, final String password, final Errors errors ) {
 		if ( ! usersSecurityService.isUserPasswordCorrect( user, password ) ) {
-			errors.rejectValue( ChangeUserPasswordModel.FORM_CONTROL_OLD_PASSWORD, TranslatorUtils.translate( "Incorrect $1", FormatUtils.getFormattedFieldName( "Old password" ) ) );
+			errors.rejectValue( ChangeUserPasswordModel.FORM_CONTROL_OLD_PASSWORD, translatorService.translate( "Incorrect $1", FormatUtils.getFormattedFieldName( "Old password" ) ) );
 		}
 	}
 

@@ -9,6 +9,7 @@ import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import utils.TranslatorUtils;
 
 import java.util.Collections;
 import java.util.Date;
@@ -58,6 +58,9 @@ public class PortalPageController {
 	@Autowired
 	private ActivityStreamService activityStreamService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
 		return new PortalPageModel();
@@ -65,12 +68,12 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() ), TranslatorUtils.translate( "Last uploaded photos" ) );
+		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "Last uploaded photos" ) );
 		lastUploadedPhotoList.setPhotosInLine( 4 );
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
 		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );
 
-		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), TranslatorUtils.translate( "The Best Photos" ) );
+		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The Best Photos" ) );
 		model.setTheBestPhotoList( theBestPhotoList );
 		Collections.shuffle( theBestPhotoList.getPhotoInfos() );
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );

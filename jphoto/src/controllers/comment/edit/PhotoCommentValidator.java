@@ -9,6 +9,7 @@ import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 
@@ -36,6 +36,9 @@ public class PhotoCommentValidator implements Validator {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -58,7 +61,7 @@ public class PhotoCommentValidator implements Validator {
 
 		final int photoCommentId = model.getPhotoCommentId();
 		if ( photoCommentId > 0 && ! securityService.userCanEditPhotoComment( EnvironmentContext.getCurrentUser(), photoCommentService.load( photoCommentId ) ) ) {
-			errors.reject( TranslatorUtils.translate( "You do not have permission to edit this comment" ) );
+			errors.reject( translatorService.translate( "You do not have permission to edit this comment" ) );
 		}
 	}
 
@@ -68,7 +71,7 @@ public class PhotoCommentValidator implements Validator {
 
 		if ( StringUtils.isEmpty( commentText ) ) {
 			errors.rejectValue( PhotoCommentModel.COMMENT_TEXT_FORM_CONTROL
-				, TranslatorUtils.translate( String.format( "%s must not be empty.", FormatUtils.getFormattedFieldName( "Comment" ) ) ) );
+				, translatorService.translate( String.format( "%s must not be empty.", FormatUtils.getFormattedFieldName( "Comment" ) ) ) );
 			return;
 		}
 
@@ -78,7 +81,7 @@ public class PhotoCommentValidator implements Validator {
 		if ( actualLength < minLength || actualLength > maxLength ) {
 			final String text = String.format( "%s must be more then $1 symbols and less then $2. Entered: $3", FormatUtils.getFormattedFieldName( "Comment" ) );
 			errors.rejectValue( PhotoCommentModel.COMMENT_TEXT_FORM_CONTROL
-				, TranslatorUtils.translate( text, String.valueOf( minLength ), String.valueOf( maxLength ), String.valueOf( actualLength ) ) );
+				, translatorService.translate( text, String.valueOf( minLength ), String.valueOf( maxLength ), String.valueOf( actualLength ) ) );
 			return;
 		}
 
@@ -96,7 +99,7 @@ public class PhotoCommentValidator implements Validator {
 			final String lastCommentTimeTxt = dateUtilsService.formatTime( lastCommentTime );
 			final String nextCommentTimeTxt = dateUtilsService.formatTime( nextCommentTime );
 
-			String error = TranslatorUtils.translate( "You can leave the next comment in $1 seconds. <br />Your last comment $2<br /> You can leave the next $3"
+			String error = translatorService.translate( "You can leave the next comment in $1 seconds. <br />Your last comment $2<br /> You can leave the next $3"
 				, String.valueOf( delayInSecs ), lastCommentTimeTxt, nextCommentTimeTxt );
 			errors.reject( error );
 		}

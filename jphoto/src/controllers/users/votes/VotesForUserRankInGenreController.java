@@ -8,6 +8,7 @@ import core.general.user.UserRankPhotoVote;
 import core.services.entry.GenreService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -54,6 +54,9 @@ public class VotesForUserRankInGenreController {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public VotesForUserRankInGenreModel prepareModel( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) int genreId ) {
@@ -127,7 +130,7 @@ public class VotesForUserRankInGenreController {
 					final int rank = userGenreRankHistoryEntry.getRank();
 
 					final UserGenreRankViewEntry viewHistoryEntry = new UserGenreRankViewEntry();
-					viewHistoryEntry.setColumn1( TranslatorUtils.translate( "New status: $1", rank ) );
+					viewHistoryEntry.setColumn1( translatorService.translate( "New status: $1", rank ) );
 					viewHistoryEntry.setColumn2( String.valueOf( rank ) );
 					viewHistoryEntry.setColumn3( dateUtilsService.formatDateTimeShort( rankAssignTime ) );
 					viewHistoryEntry.setStatusChangeEntry( true );

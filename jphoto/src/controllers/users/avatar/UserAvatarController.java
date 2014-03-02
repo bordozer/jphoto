@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.ImageFileUtilsService;
 import core.services.utils.TempFileUtilsService;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 import javax.validation.Valid;
 import java.io.File;
@@ -55,6 +55,9 @@ public class UserAvatarController {
 
 	@Autowired
 	private ImageFileUtilsService imageFileUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	private LogHelper log = new LogHelper( UserAvatarController.class );
 
@@ -124,7 +127,7 @@ public class UserAvatarController {
 
 			userService.saveAvatar( userId, tmpAvatarFile );
 		} catch ( IOException e ) {
-			result.reject( TranslatorUtils.translate( "Saving data error" ), TranslatorUtils.translate( "Can not copy file" ) );
+			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Can not copy file" ) );
 			log.error( e );
 		}
 

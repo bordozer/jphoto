@@ -13,6 +13,7 @@ import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
@@ -145,6 +146,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private EntryMenuService entryMenuService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public UserService getUserService() {
@@ -351,6 +355,11 @@ public class ServicesImpl implements Services {
 		return entryMenuService;
 	}
 
+	@Override
+	public TranslatorService getTranslatorService() {
+		return translatorService;
+	}
+
 	public void setUserService( final UserService userService ) {
 		this.userService = userService;
 	}
@@ -513,5 +522,9 @@ public class ServicesImpl implements Services {
 
 	public void setEntryMenuService( final EntryMenuService entryMenuService ) {
 		this.entryMenuService = entryMenuService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }

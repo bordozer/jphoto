@@ -11,10 +11,10 @@ import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -153,12 +153,16 @@ public abstract class AbstractGroupOperationHandler {
 		return String.format( "%d_%d", photo.getId(), ENTRY_ID );
 	}
 
+	protected TranslatorService getTranslatorService() {
+		return services.getTranslatorService();
+	}
+
 	private void setPhotoEditAccess( final PhotoGroupOperationEntry groupOperationEntry ) {
 		final SecurityService securityService = services.getSecurityService();
 
 		final Photo photo = groupOperationEntry.getPhoto();
 		if ( !securityService.userCanEditPhoto( getUser(), photo ) ) {
-			groupOperationEntry.setPhotoOperationAllowanceMessage( TranslatorUtils.translate( "You do not have permission to edit this photo" ) );
+			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to edit this photo" ) );
 			groupOperationEntry.setGroupOperationAccessible( false );
 		}
 	}

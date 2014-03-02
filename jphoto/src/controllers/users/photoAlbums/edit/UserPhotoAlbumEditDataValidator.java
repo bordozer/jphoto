@@ -1,12 +1,16 @@
 package controllers.users.photoAlbums.edit;
 
+import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 public class UserPhotoAlbumEditDataValidator implements Validator {
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -23,7 +27,7 @@ public class UserPhotoAlbumEditDataValidator implements Validator {
 	private void validateName( final UserPhotoAlbumEditDataModel model, final Errors errors ) {
 		if ( StringUtils.isEmpty( model.getAlbumName() ) ) {
 			errors.rejectValue( UserPhotoAlbumEditDataModel.FORM_CONTROL_PHOTO_ALBUM_NAME
-				, TranslatorUtils.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Album name" ) ) ) );
+				, translatorService.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Album name" ) ) ) );
 		}
 	}
 }

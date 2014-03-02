@@ -9,6 +9,7 @@ import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -52,6 +52,9 @@ public class PhotoVotingController {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -92,7 +95,7 @@ public class PhotoVotingController {
 
 		final Date votingTime = userPhotoVotes.get( 0 ).getVotingTime(); // TODO: this time is duplicated in userPhotoVote!
 		if ( ! photoVotingService.saveUserPhotoVoting( EnvironmentContext.getCurrentUser(), photo, votingTime, userPhotoVotes ) ) {
-			result.reject( TranslatorUtils.translate( "Voting error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Voting error" ), translatorService.translate( "Error saving data to DB" ) );
 
 			resetModel( model, photo );
 		}

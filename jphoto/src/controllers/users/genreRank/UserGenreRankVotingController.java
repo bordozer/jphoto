@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -47,6 +47,9 @@ public class UserGenreRankVotingController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -113,7 +116,7 @@ public class UserGenreRankVotingController {
 		final User votingUser = EnvironmentContext.getCurrentUser();
 
 		if ( !userRankService.saveVotingForUserRankInGenre( voting, votingUser ) ) {
-			result.reject( TranslatorUtils.translate( "Voting error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Voting error" ), translatorService.translate( "Error saving data to DB" ) );
 			return VIEW;
 		}
 

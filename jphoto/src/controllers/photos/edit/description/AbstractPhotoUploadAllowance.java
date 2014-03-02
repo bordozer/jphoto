@@ -7,10 +7,10 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.photo.PhotoUploadService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -35,6 +35,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	private DateUtilsService dateUtilsService;
 
 	private ImageFileUtilsService imageFileUtilsService;
+
+	private TranslatorService translatorService;
 
 	public abstract UserStatus getUserStatus();
 
@@ -75,7 +77,7 @@ public abstract class AbstractPhotoUploadAllowance {
 	private void addMaxPhotoSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
 		final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-		uploadDescription.setUploadRuleDescription( TranslatorUtils.translate( "Max photo's size you can upload is $1 $2.", String.valueOf( getMaxPhotoSize() ), ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB.getUnit().getName() ) );
+		uploadDescription.setUploadRuleDescription( translatorService.translate( "Max photo's size you can upload is $1 $2.", String.valueOf( getMaxPhotoSize() ), ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB.getUnit().getName() ) );
 
 		photoUploadDescriptions.add( uploadDescription );
 	}
@@ -105,14 +107,14 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final StringBuilder builder = new StringBuilder();
 
-			builder.append( TranslatorUtils.translate( "Your status' limit is $1 photo(s) per $2. ", String.valueOf( limitPhotosQty ), period2 ) );
-			builder.append( TranslatorUtils.translate( "You uploaded $1 photo(s) $2. ", String.valueOf( uploadedPhotosQty ), period1 ) );
+			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2. ", String.valueOf( limitPhotosQty ), period2 ) );
+			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2. ", String.valueOf( uploadedPhotosQty ), period1 ) );
 			if ( userCanUploadPhoto ) {
 				final int canBeUploadedPhotos = limitPhotosQty - uploadedPhotosQty;
 				if ( canBeUploadedPhotos > 0 ) {
-					builder.append( TranslatorUtils.translate( "You can upload $1 photo(s) more $2.", String.valueOf( canBeUploadedPhotos ), period1 ) );
+					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", String.valueOf( canBeUploadedPhotos ), period1 ) );
 				} else {
-					builder.append( TranslatorUtils.translate( "You can not upload photo $1.", period1 ) );
+					builder.append( translatorService.translate( "You can not upload photo $1.", period1 ) );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );
@@ -150,14 +152,14 @@ public abstract class AbstractPhotoUploadAllowance {
 			final StringBuilder builder = new StringBuilder();
 
 			final String unit = ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName();
-			builder.append( TranslatorUtils.translate( "Your status' limit is $1 $2 per $3. ", String.valueOf( uploadSizeLimit ), unit, period2 ) );
-			builder.append( TranslatorUtils.translate( "You uploaded $1 $2 $3. ", String.valueOf( uploadedSummarySize ), unit, period1 ) );
+			builder.append( translatorService.translate( "Your status' limit is $1 $2 per $3. ", String.valueOf( uploadSizeLimit ), unit, period2 ) );
+			builder.append( translatorService.translate( "You uploaded $1 $2 $3. ", String.valueOf( uploadedSummarySize ), unit, period1 ) );
 			if ( userCanUploadPhoto ) {
 				final float canUploadKb = uploadSizeLimit - uploadedSummarySize;
 				if ( canUploadKb > 0 ) {
-					builder.append( TranslatorUtils.translate( "You can upload $1 Kb more $3.", String.valueOf( canUploadKb ), period1, period2 ) );
+					builder.append( translatorService.translate( "You can upload $1 Kb more $3.", String.valueOf( canUploadKb ), period1, period2 ) );
 				} else {
-					builder.append( TranslatorUtils.translate( "You can not upload photo $1.", period1 ) );
+					builder.append( translatorService.translate( "You can not upload photo $1.", period1 ) );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );
@@ -180,13 +182,13 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final StringBuilder builder = new StringBuilder();
 
-			builder.append( TranslatorUtils.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", additionalWeeklyLimitPerGenreRank ) );
-			builder.append( TranslatorUtils.translate( "Your rank in genre '$1' is $2.", genre.getName(), String.valueOf( userRankInGenre ) ) );
+			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", additionalWeeklyLimitPerGenreRank ) );
+			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", genre.getName(), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
 				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
-				builder.append( TranslatorUtils.translate( "So it gives you possibility to upload on $1 Kb more this week.", additionalRankSize ) );
+				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", additionalRankSize ) );
 			} else {
-				builder.append( TranslatorUtils.translate( "So it is too small to give you any bonuses :(." ) );
+				builder.append( translatorService.translate( "So it is too small to give you any bonuses :(." ) );
 			}
 
 			uploadDescription.setUploadRuleDescription( builder.toString() );
@@ -247,5 +249,9 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public void setImageFileUtilsService( final ImageFileUtilsService imageFileUtilsService ) {
 		this.imageFileUtilsService = imageFileUtilsService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }

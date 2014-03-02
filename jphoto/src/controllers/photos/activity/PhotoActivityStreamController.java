@@ -10,6 +10,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.pageTitle.PageTitleService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.NumberUtils;
 import utils.PagingUtils;
-import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -54,6 +54,9 @@ public class PhotoActivityStreamController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoActivityStreamModel prepareModel( final @PathVariable( "photoId" ) String _photoId ) {
@@ -120,7 +123,7 @@ public class PhotoActivityStreamController {
 
 		pagingModel.setTotalItems( idsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), TranslatorUtils.translate( "Activity" ) ) );
+		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), translatorService.translate( "Activity" ) ) );
 
 		return VIEW;
 	}

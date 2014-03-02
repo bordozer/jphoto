@@ -11,6 +11,7 @@ import core.general.user.UserStatus;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.FakeUserService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -22,7 +23,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import javax.validation.Valid;
@@ -62,6 +62,9 @@ public class UserEditDataController {
 	
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -158,7 +161,7 @@ public class UserEditDataController {
 		}
 
 		if ( !isSaved ) {
-			result.reject( TranslatorUtils.translate( "Registration error" ), TranslatorUtils.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Error saving data to DB" ) );
 			return VIEW;
 		}
 

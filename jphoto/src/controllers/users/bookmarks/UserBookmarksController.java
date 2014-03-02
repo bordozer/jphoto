@@ -11,6 +11,7 @@ import core.services.entry.GroupOperationService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -27,7 +28,6 @@ import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import utils.NumberUtils;
 import utils.PagingUtils;
-import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -63,6 +63,9 @@ public class UserBookmarksController {
 
 	@Autowired
 	private GroupOperationService groupOperationService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
@@ -130,7 +133,7 @@ public class UserBookmarksController {
 
 		final User user = userService.load( userId );
 
-		final String listTitle = TranslatorUtils.translate( "$1: $2", entityLinkUtilsService.getUserCardLink( user ), entryType.getName() );
+		final String listTitle = translatorService.translate( "$1: $2", entityLinkUtilsService.getUserCardLink( user ), entryType.getName() );
 
 		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, showIconsForFavoriteEntryTypes, EnvironmentContext.getCurrentUser() ), listTitle );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );

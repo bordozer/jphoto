@@ -1,14 +1,13 @@
 package controllers.photos.groupoperations;
 
 import core.general.photo.group.PhotoGroupOperationType;
+import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
-import core.services.user.UserTeamService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class PhotoGroupOperationValidator implements Validator {
 	private UserPhotoAlbumService userPhotoAlbumService;
 
 	@Autowired
-	private UserTeamService userTeamService;
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -40,20 +39,20 @@ public class PhotoGroupOperationValidator implements Validator {
 		final String groupOperationId = model.getPhotoGroupOperationId();
 
 		if ( StringUtils.isEmpty( groupOperationId ) ) {
-			errors.reject( TranslatorUtils.translate( "Validation error" ), TranslatorUtils.translate( "Please, select group operation" ) );
+			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Please, select group operation" ) );
 			return;
 		}
 
 		final PhotoGroupOperationType groupOperationType = PhotoGroupOperationType.getById( Integer.parseInt( groupOperationId ) );
 		if ( groupOperationType == null ) {
-			errors.reject( TranslatorUtils.translate( "Validation error" ), TranslatorUtils.translate( "Group operation is unknown" ) );
+			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Group operation is unknown" ) );
 		}
 	}
 
 	void validateAtLeastOnePhotoSelected( final PhotoGroupOperationModel model, final Errors errors ) {
 		final List<String> selectedPhotoIds = model.getSelectedPhotoIds();
 		if ( selectedPhotoIds == null || selectedPhotoIds.size() == 0 ) {
-			errors.reject( TranslatorUtils.translate( "Validation error" ), TranslatorUtils.translate( "Please, select at least one photo" ) );
+			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Please, select at least one photo" ) );
 		}
 	}
 
@@ -69,7 +68,7 @@ public class PhotoGroupOperationValidator implements Validator {
 		}
 
 		if ( model.getMoveToGenreId() == 0 ) {
-			errors.rejectValue( PhotoGroupOperationModel.FORM_CONTROL_MOVE_TO_GENRE_ID, TranslatorUtils.translate( String.format( "Select %s to move to.", FormatUtils.getFormattedFieldName( "genre" ) ) ) );
+			errors.rejectValue( PhotoGroupOperationModel.FORM_CONTROL_MOVE_TO_GENRE_ID, translatorService.translate( String.format( "Select %s to move to.", FormatUtils.getFormattedFieldName( "genre" ) ) ) );
 		}
 	}
 }

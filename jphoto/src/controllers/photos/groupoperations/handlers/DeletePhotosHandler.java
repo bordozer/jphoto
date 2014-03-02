@@ -11,7 +11,6 @@ import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -39,7 +38,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 		final SecurityService securityService = services.getSecurityService();
 
 		if ( !securityService.userCanDeletePhoto( getUser(), groupOperationEntry.getPhoto() ) ) {
-			groupOperationEntry.setPhotoOperationAllowanceMessage( TranslatorUtils.translate( "You do not have permission to delete this photo" ) );
+			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to delete this photo" ) );
 			groupOperationEntry.setGroupOperationAccessible( false );
 		}
 	}
@@ -51,7 +50,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 		final Map<String, PhotoGroupOperationEntryProperty> map = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		final String key = getDefaultEntryKey( photo );
-		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, TranslatorUtils.translate( "Delete" ) );
+		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, getTranslatorService().translate( "Delete" ) );
 		entryProperty.setValue( true );
 
 		map.put( key, entryProperty );

@@ -1,6 +1,7 @@
 package controllers.users.login;
 
 import core.general.user.User;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
 import org.apache.commons.lang.StringUtils;
@@ -8,18 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 
 public class UserLoginValidator implements Validator {
 
-	public static final String INCORRECT_LOGIN_PASSWORD_MESSAGE = TranslatorUtils.translate( "Incorrect $1 or $2. Please, verify the data and try again."
-		, FormatUtils.getFormattedFieldName( "Login" ), FormatUtils.getFormattedFieldName( "Password" ) );
+	public static final String INCORRECT_LOGIN_PASSWORD_MESSAGE = String.format( "Incorrect %s or %s. Please, verify the data and try again."
+	, FormatUtils.getFormattedFieldName( "Login" ), FormatUtils.getFormattedFieldName( "Password" ) ); // TODO
 
 	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private UsersSecurityService usersSecurityService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean supports( Class<?> clazz ) {
@@ -57,7 +60,7 @@ public class UserLoginValidator implements Validator {
 	private void validateLoginEntered( final UserLoginModel model, final Errors errors ) {
 		final String login = model.getUserlogin();
 		if ( StringUtils.isEmpty( login ) ) {
-			final String errorCode = TranslatorUtils.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Login" ) );
+			final String errorCode = translatorService.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Login" ) );
 			errors.rejectValue( UserLoginModel.LOGIN_FORM_LOGIN_CONTROL, errorCode );
 			return;
 		}
@@ -66,7 +69,7 @@ public class UserLoginValidator implements Validator {
 	private void validatePasswordEntered( final UserLoginModel model, final Errors errors ) {
 		final String password = model.getUserpassword();
 		if ( StringUtils.isEmpty( password ) ) {
-			final String errorCode = TranslatorUtils.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Password" ) );
+			final String errorCode = translatorService.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Password" ) );
 			errors.rejectValue( UserLoginModel.LOGIN_FORM_PASSWORD_CONTROL, errorCode );
 			return;
 		}
