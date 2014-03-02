@@ -104,4 +104,9 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	public boolean isDevMode() {
 		return true;
 	}
+
+	@Override
+	public String getPropertiesPath() {
+		return "/path/to/properties";
+	}
 }

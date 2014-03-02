@@ -43,4 +43,6 @@ public interface SystemVarsService {
 	boolean isDevMode();
 
 	String getDatabaseName();
+
+	String getPropertiesPath();
 }

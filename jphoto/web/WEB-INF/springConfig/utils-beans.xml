@@ -7,7 +7,7 @@
 	<bean id="utilsService" class="core.services.utils.UtilsServiceImpl"/>
 
 	<bean id="systemVarsService" class="core.services.utils.SystemVarsServiceImpl" init-method="initSystemVars"/>
-	<bean id="translatorService" class="core.services.translator.TranslatorServiceImpl"/>
+	<bean id="translatorService" class="core.services.translator.TranslatorServiceImpl" init-method="initTranslations"/>
 
 	<bean id="fakeUserService" class="core.services.user.FakeUserServiceImpl"/>
 	<bean id="randomUtilsService" class="core.services.utils.RandomUtilsServiceImpl"/>

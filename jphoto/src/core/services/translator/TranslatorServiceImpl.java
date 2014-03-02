@@ -4,7 +4,13 @@ import core.services.utils.SystemVarsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
+
 public class TranslatorServiceImpl implements TranslatorService {
+
+	public static final String TRANSLATIONS_XML = "translations.xml";
+
+	private Translator translator;
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -46,16 +52,22 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Override
 	public String translateWithParameters( final String nerd, final String... params ) {
-		/*if ( StringUtils.isEmpty( nerd ) ) {
-			return StringUtils.EMPTY;
-		}*/
+
+		String result = translator.translate( nerd, Language.RU ); // TODO: set System or User defined Language
 
 		int i = 1;
-		String result = nerd;
 		for ( String param : params ) {
 			result = result.replace( String.format( "$%d", i++ ), param );
 		}
+
 		return markAsTranslated( result );
+	}
+
+	public void initTranslations() {
+
+		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );
+
+		translator = TranslationsReader.getTranslator( translationsFile );
 	}
 
 	private String markAsTranslated( final String nerd ) {

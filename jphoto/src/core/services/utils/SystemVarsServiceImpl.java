@@ -15,10 +15,10 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	public void initSystemVars() throws ConfigurationException {
 
-		final File basePropertiesFile = new File( String.format( "%s/Base.properties", commonPropertiesPath() ) );
-		final File systemPropertiesFile = new File( String.format( "%s/System.properties", commonPropertiesPath() ) );
-		final File photoPropertiesFile = new File( String.format( "%s/Photo.properties", commonPropertiesPath() ) );
-		final File dbPropertiesFile = new File( String.format( "%s/Database.properties", commonPropertiesPath() ) );
+		final File basePropertiesFile = new File( String.format( "%s/Base.properties", getPropertiesPath() ) );
+		final File systemPropertiesFile = new File( String.format( "%s/System.properties", getPropertiesPath() ) );
+		final File photoPropertiesFile = new File( String.format( "%s/Photo.properties", getPropertiesPath() ) );
+		final File dbPropertiesFile = new File( String.format( "%s/Database.properties", getPropertiesPath() ) );
 
 		config.addConfiguration( new PropertiesConfiguration( basePropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( systemPropertiesFile ) );
@@ -126,7 +126,8 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 		return config.getString( "Database" );
 	}
 
-	private String commonPropertiesPath() {
+	@Override
+	public String getPropertiesPath() {
 		return "../properties";
 	}
 }

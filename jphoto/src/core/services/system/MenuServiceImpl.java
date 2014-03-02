@@ -139,9 +139,8 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userPhotoAlbumsMenu( user ) );
 			menuItems.add( userTechMenu( user ) );
 
-			final String caption = translatorService.translate( "My club" );
 			final String link = userCardMenu.getLink();
-			menuItem = new MenuItem( translatorService.translate( caption ), link );
+			menuItem = new MenuItem( translatorService.translate( "My club" ), link );
 		} else {
 			menuItem = registerMenu();
 			menuItems.add( new MenuItem( translatorService.translate( "Register" ), menuItem.getLink() ) );
