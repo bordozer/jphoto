@@ -1,13 +1,13 @@
 package controllers.photos.groupoperations.handlers;
 
-import core.context.EnvironmentContext;
-import core.general.photo.Photo;
-import core.general.user.User;
-import core.general.photo.group.PhotoGroupOperationType;
 import controllers.photos.groupoperations.GroupOperationResult;
 import controllers.photos.groupoperations.PhotoGroupOperationEntry;
-import controllers.photos.groupoperations.PhotoGroupOperationModel;
 import controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
+import controllers.photos.groupoperations.PhotoGroupOperationModel;
+import core.context.EnvironmentContext;
+import core.general.photo.Photo;
+import core.general.photo.group.PhotoGroupOperationType;
+import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;

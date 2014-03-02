@@ -1,7 +1,7 @@
 package core.services.utils.sql;
 
-import core.general.base.PagingModel;
 import core.enums.FavoriteEntryType;
+import core.general.base.PagingModel;
 import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Date;

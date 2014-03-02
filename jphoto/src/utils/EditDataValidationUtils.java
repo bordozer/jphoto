@@ -1,9 +1,9 @@
 package utils;
 
+import controllers.users.edit.UserEditDataModel;
 import core.context.ApplicationContextHelper;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
-import controllers.users.edit.UserEditDataModel;
 
 public class EditDataValidationUtils {
 

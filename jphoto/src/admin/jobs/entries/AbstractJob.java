@@ -1,9 +1,9 @@
 package admin.jobs.entries;
 
 import admin.jobs.enums.JobExecutionStatus;
+import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.GenerationMonitor;
 import admin.jobs.general.JobExecutionFinalMessage;
-import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionService;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -13,7 +13,7 @@ import core.services.security.Services;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
-import utils.*;
+import utils.ErrorUtils;
 
 import java.util.Date;
 import java.util.List;

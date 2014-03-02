@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankPhotoVote;
 import core.services.entry.GenreService;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.NumberUtils;
-import core.services.pageTitle.PageTitleUserUtilsService;
 import utils.TranslatorUtils;
 
 import java.util.Date;

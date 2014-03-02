@@ -1,11 +1,10 @@
 package admin.controllers.jobs.list;
 
-import admin.jobs.enums.JobListTab;
-import admin.jobs.general.SavedJob;
-import admin.jobs.enums.SavedJobType;
-import admin.jobs.general.TabJobInfo;
-import admin.services.jobs.JobExecutionHistoryEntry;
 import admin.jobs.entries.AbstractJob;
+import admin.jobs.enums.JobListTab;
+import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
+import admin.jobs.general.TabJobInfo;
 import core.general.base.AbstractGeneralModel;
 import core.general.scheduler.SchedulerTask;
 

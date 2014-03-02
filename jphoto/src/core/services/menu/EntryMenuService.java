@@ -1,10 +1,10 @@
 package core.services.menu;
 
+import core.general.menus.EntryMenu;
+import core.general.menus.EntryMenuOperationType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.menus.EntryMenu;
-import core.general.menus.EntryMenuOperationType;
 
 import java.util.List;
 

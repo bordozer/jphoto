@@ -2,17 +2,17 @@ package controllers.users.team.edit;
 
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
-import core.services.user.UserTeamService;
 import core.services.user.UserService;
+import core.services.user.UserTeamService;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import utils.NumberUtils;
-import core.services.utils.UrlUtilsServiceImpl;
-import core.services.pageTitle.PageTitleUserUtilsService;
 
 import javax.validation.Valid;
 

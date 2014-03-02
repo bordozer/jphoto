@@ -1,8 +1,8 @@
 package admin.controllers.upgrade;
 
+import admin.services.services.UpgradeMonitor;
 import admin.upgrade.entities.UpgradeTaskLogEntry;
 import admin.upgrade.entities.UpgradeTaskToPerform;
-import admin.services.services.UpgradeMonitor;
 import core.general.base.AbstractGeneralModel;
 
 import java.util.List;

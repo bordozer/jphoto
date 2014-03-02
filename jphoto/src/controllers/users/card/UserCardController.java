@@ -1,22 +1,23 @@
 package controllers.users.card;
 
 import controllers.activity.list.ActivityStreamController;
-import core.general.base.PagingModel;
-import core.enums.UserCardTab;
+import controllers.users.card.data.AbstractUserCardModelFillStrategy;
+import controllers.users.card.data.UserCardModelFillService;
 import core.context.EnvironmentContext;
+import core.enums.UserCardTab;
+import core.general.base.PagingModel;
 import core.general.user.User;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.UrlUtilsServiceImpl;
-import controllers.users.card.data.AbstractUserCardModelFillStrategy;
-import controllers.users.card.data.UserCardModelFillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import utils.*;
-import core.services.pageTitle.PageTitleUserUtilsService;
+import utils.NumberUtils;
+import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
 

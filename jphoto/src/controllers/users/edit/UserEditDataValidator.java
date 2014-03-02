@@ -1,9 +1,9 @@
 package controllers.users.edit;
 
 import core.enums.UserGender;
+import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
@@ -11,9 +11,10 @@ import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.*;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import utils.FormatUtils;
+import utils.TranslatorUtils;
 
 public class UserEditDataValidator implements Validator {
 

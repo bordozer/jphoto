@@ -1,7 +1,6 @@
 package controllers.users.card.data;
 
 import controllers.users.card.UserCardModel;
-import core.general.base.PagingModel;
 
 public class StatisticFillStrategy extends AbstractUserCardModelFillStrategy {
 

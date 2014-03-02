@@ -2,17 +2,17 @@ package admin.services.jobs;
 
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.services.dao.PhotoDaoImpl;
 import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
-import core.services.dao.PhotoDaoImpl;
+import core.services.utils.DateUtilsService;
+import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
-import core.services.utils.DateUtilsService;
-import core.services.utils.RandomUtilsService;
 
 import java.util.Date;
 import java.util.List;

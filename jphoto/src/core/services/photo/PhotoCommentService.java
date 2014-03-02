@@ -2,9 +2,9 @@ package core.services.photo;
 
 import controllers.comment.edit.PhotoCommentInfo;
 import core.dtos.CommentDTO;
+import core.general.menus.EntryMenuOperationType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.general.menus.EntryMenuOperationType;
 import core.interfaces.BaseEntityService;
 
 import java.util.Date;

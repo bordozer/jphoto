@@ -1,6 +1,5 @@
 package core.services.dao.mappers;
 
-import core.services.dao.BaseEntityDao;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

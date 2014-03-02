@@ -1,9 +1,9 @@
 package controllers.photos.groupoperations.handlers;
 
+import controllers.photos.groupoperations.*;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
-import controllers.photos.groupoperations.*;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;

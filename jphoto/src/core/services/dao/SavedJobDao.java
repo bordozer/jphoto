@@ -1,7 +1,7 @@
 package core.services.dao;
 
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 

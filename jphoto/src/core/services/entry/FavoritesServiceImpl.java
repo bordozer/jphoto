@@ -1,9 +1,9 @@
 package core.services.entry;
 
 import core.dtos.AjaxResultDTO;
+import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.favorite.FavoriteEntry;
-import core.enums.FavoriteEntryType;
 import core.services.dao.FavoritesDao;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;

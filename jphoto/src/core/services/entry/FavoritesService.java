@@ -1,8 +1,8 @@
 package core.services.entry;
 
 import core.dtos.AjaxResultDTO;
-import core.general.favorite.FavoriteEntry;
 import core.enums.FavoriteEntryType;
+import core.general.favorite.FavoriteEntry;
 import core.interfaces.BaseEntityService;
 
 import java.util.Date;

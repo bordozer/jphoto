@@ -1,12 +1,13 @@
 package controllers.users.messages.list;
 
-import core.enums.PrivateMessageType;
 import core.context.EnvironmentContext;
+import core.enums.PrivateMessageType;
 import core.general.base.PagingModel;
-import core.general.user.User;
 import core.general.message.PrivateMessage;
+import core.general.user.User;
 import core.services.dao.PrivateMessageDaoImpl;
 import core.services.entry.PrivateMessageService;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -26,7 +27,6 @@ import utils.ListUtils;
 import utils.NumberUtils;
 import utils.PagingUtils;
 import utils.UserUtils;
-import core.services.pageTitle.PageTitleUserUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;

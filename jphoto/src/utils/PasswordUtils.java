@@ -1,7 +1,7 @@
 package utils;
 
 
-import java.util.*;
+import java.util.Random;
 
 public class PasswordUtils {
 

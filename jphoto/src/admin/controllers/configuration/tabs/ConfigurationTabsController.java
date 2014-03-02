@@ -3,6 +3,7 @@ package admin.controllers.configuration.tabs;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import core.services.user.UserRankService;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import java.util.Map;
 

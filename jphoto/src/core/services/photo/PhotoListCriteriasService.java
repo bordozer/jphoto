@@ -1,10 +1,10 @@
 package core.services.photo;
 
+import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.data.PhotoListCriterias;
 
 import java.util.Date;
 

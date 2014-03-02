@@ -1,23 +1,23 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
-import admin.jobs.entries.AbstractJob;
-import admin.jobs.general.JobDateRange;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.jobs.entries.AbstractJob;
+import admin.jobs.general.JobDateRange;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.user.User;
-import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.utils.PredicateUtilsService;
 import org.apache.commons.io.FileUtils;
-import utils.*;
+import utils.PhotoUtils;
 
 import java.io.File;
 import java.io.IOException;

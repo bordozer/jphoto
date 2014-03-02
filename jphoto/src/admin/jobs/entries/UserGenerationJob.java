@@ -18,7 +18,7 @@ import core.services.utils.PredicateUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DuplicateKeyException;
-import utils.*;
+import utils.TranslatorUtils;
 import utils.fakeUser.AbstractFakeMember;
 
 import java.io.File;

@@ -1,8 +1,8 @@
 package core.services.pageTitle;
 
+import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import core.services.utils.EntityLinkUtilsService;
 
 import java.util.List;
 

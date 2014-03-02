@@ -1,8 +1,8 @@
 package admin.services.jobs;
 
-import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.enums.JobExecutionStatus;
+import admin.jobs.general.JobStatusChangeStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.TranslatorUtils;
 

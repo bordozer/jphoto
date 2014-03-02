@@ -1,7 +1,7 @@
 package admin.upgrade.tasks.example;
 
-import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.services.services.UpgradeMonitor;
+import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.exceptions.UpgradeException;
 

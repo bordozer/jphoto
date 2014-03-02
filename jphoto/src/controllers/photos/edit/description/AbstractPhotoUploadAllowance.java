@@ -1,12 +1,12 @@
 package controllers.photos.edit.description;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserStatus;
-import core.general.configuration.ConfigurationKey;
-import core.services.system.ConfigurationService;
 import core.services.photo.PhotoUploadService;
+import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;

@@ -1,10 +1,10 @@
 package controllers.photos.edit;
 
 import core.context.EnvironmentContext;
-import core.general.user.User;
-import core.general.user.UserStatus;
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
+import core.general.user.User;
+import core.general.user.UserStatus;
 import core.services.system.ConfigurationService;
 import core.services.utils.ImageFileUtilsService;
 import org.apache.commons.lang.StringUtils;
@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
-import utils.*;
+import utils.FormatUtils;
+import utils.TranslatorUtils;
+import utils.UserUtils;
 
 public class PhotoEditDataValidator implements Validator {
 

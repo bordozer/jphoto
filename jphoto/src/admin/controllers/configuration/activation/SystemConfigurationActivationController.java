@@ -2,6 +2,7 @@ package admin.controllers.configuration.activation;
 
 import admin.controllers.configuration.list.SystemConfigurationListController;
 import core.general.configuration.SystemConfiguration;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import org.apache.commons.lang.StringUtils;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

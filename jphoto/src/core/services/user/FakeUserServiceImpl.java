@@ -1,11 +1,11 @@
 package core.services.user;
 
+import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
-import core.general.user.EmailNotificationType;
-import core.general.user.userTeam.UserTeamMember;
 import core.general.user.userTeam.UserTeam;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

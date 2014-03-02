@@ -3,10 +3,10 @@ package controllers.exception;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.ExceptionModel;
 import core.exceptions.notFound.NotFoundExceptionEntryType;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import core.services.utils.UrlUtilsServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

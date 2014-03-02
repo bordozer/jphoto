@@ -7,8 +7,6 @@ import core.general.user.User;
 import java.util.List;
 import java.util.Set;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class UserEditDataModel extends AbstractGeneralModel {
 
 	public static final String USER_ID_FORM_CONTROL = "userId";

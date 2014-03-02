@@ -4,9 +4,9 @@ import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.controllers.jobs.edit.AbstractJobController;
 import admin.jobs.entries.PreviewGenerationJob;
 import admin.jobs.enums.SavedJobType;
-import core.general.conversion.ConversionOptions;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
+import core.general.conversion.ConversionOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.awt.*;
 import java.util.Map;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @SessionAttributes( {PreviewGenerationController.JOB_MODEL_NAME} )
 @Controller

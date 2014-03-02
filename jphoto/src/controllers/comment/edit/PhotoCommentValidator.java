@@ -1,20 +1,22 @@
 package controllers.comment.edit;
 
 import core.context.EnvironmentContext;
+import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
-import core.general.configuration.ConfigurationKey;
-import core.services.photo.PhotoService;
-import core.services.system.ConfigurationService;
 import core.services.photo.PhotoCommentService;
+import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import utils.*;
+import utils.FormatUtils;
+import utils.NumberUtils;
+import utils.TranslatorUtils;
 
 import java.util.Date;
 

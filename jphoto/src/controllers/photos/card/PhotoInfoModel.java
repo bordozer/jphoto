@@ -1,7 +1,7 @@
 package controllers.photos.card;
 
-import core.general.photo.PhotoInfo;
 import controllers.users.genreRank.VotingModel;
+import core.general.photo.PhotoInfo;
 
 public class PhotoInfoModel {
 

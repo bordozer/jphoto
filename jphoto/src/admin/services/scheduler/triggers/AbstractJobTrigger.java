@@ -1,6 +1,6 @@
 package admin.services.scheduler.triggers;
 
-import core.general.executiontasks.*;
+import core.general.executiontasks.AbstractExecutionTask;
 import core.services.utils.DateUtilsService;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.Trigger;

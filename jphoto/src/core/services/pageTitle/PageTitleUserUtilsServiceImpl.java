@@ -1,17 +1,17 @@
 package core.services.pageTitle;
 
-import core.enums.UserCardTab;
 import core.enums.FavoriteEntryType;
+import core.enums.UserCardTab;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import core.services.utils.EntityLinkUtilsService;
-import utils.TranslatorUtils;
 import utils.StringUtilities;
+import utils.TranslatorUtils;
 
 public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService {
 

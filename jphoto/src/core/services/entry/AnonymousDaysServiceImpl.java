@@ -2,8 +2,8 @@ package core.services.entry;
 
 import core.general.anonym.AnonymousDay;
 import core.services.dao.AnonymousDaysDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;

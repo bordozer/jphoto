@@ -2,16 +2,16 @@ package controllers.voting;
 
 import core.context.EnvironmentContext;
 import core.general.photo.Photo;
-import core.general.user.UserPhotoVote;
 import core.general.photo.ValidationResult;
+import core.general.user.UserPhotoVote;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
 import core.services.user.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import utils.TranslatorUtils;
 import utils.FormatUtils;
+import utils.TranslatorUtils;
 
 import java.util.List;
 

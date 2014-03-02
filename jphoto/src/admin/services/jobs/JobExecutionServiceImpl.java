@@ -1,18 +1,18 @@
 package admin.services.jobs;
 
 import admin.jobs.entries.AbstractJob;
-import admin.jobs.general.GenerationMonitor;
-import admin.jobs.enums.JobExecutionStatus;
-import admin.jobs.general.JobProgressDTO;
 import admin.jobs.entries.JobChainJob;
+import admin.jobs.enums.JobExecutionStatus;
+import admin.jobs.enums.JobRunMode;
+import admin.jobs.general.GenerationMonitor;
+import admin.jobs.general.JobProgressDTO;
 import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.general.SavedJob;
-import admin.jobs.enums.JobRunMode;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.system.ConfigurationService;
-import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Map;

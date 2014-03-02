@@ -1,8 +1,8 @@
 package core.general.photo;
 
 import core.general.base.AbstractBaseEntity;
-import core.interfaces.Nameable;
 import core.interfaces.Cacheable;
+import core.interfaces.Nameable;
 
 public class PhotoVotingCategory extends AbstractBaseEntity implements Nameable, Comparable<PhotoVotingCategory>,  Cacheable {
 

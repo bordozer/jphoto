@@ -1,5 +1,6 @@
 package core.services.user;
 
+import controllers.users.genreRank.VotingModel;
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
@@ -10,14 +11,13 @@ import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.*;
+import core.services.dao.UserRankDao;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
+import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import core.services.photo.PhotoService;
-import core.services.dao.UserRankDao;
-import controllers.users.genreRank.VotingModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.userRankIcons.UserRankIconContainer;
 

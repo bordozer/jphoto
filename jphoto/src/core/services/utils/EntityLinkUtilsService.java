@@ -1,14 +1,13 @@
 package core.services.utils;
 
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
-import core.general.activity.ActivityType;
+import admin.jobs.general.SavedJob;
+import core.general.configuration.ConfigurationTab;
+import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.configuration.ConfigurationTab;
-import core.general.configuration.SystemConfiguration;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 

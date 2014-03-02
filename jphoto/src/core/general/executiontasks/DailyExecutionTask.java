@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 

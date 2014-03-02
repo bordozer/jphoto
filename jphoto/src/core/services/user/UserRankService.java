@@ -1,13 +1,13 @@
 package core.services.user;
 
+import controllers.users.genreRank.VotingModel;
+import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserRankPhotoVote;
-import core.general.configuration.SystemConfiguration;
-import controllers.users.genreRank.VotingModel;
 import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;

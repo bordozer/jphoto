@@ -1,24 +1,23 @@
 package admin.controllers.genres.list;
 
-import core.general.genre.Genre;
 import core.general.configuration.ConfigurationKey;
-import core.services.system.ConfigurationService;
+import core.general.genre.Genre;
 import core.services.entry.GenreService;
+import core.services.pageTitle.PageTitleGenreUtilsService;
 import core.services.photo.PhotoService;
+import core.services.system.ConfigurationService;
 import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import utils.TranslatorUtils;
-import core.services.utils.UrlUtilsServiceImpl;
-import core.services.pageTitle.PageTitleGenreUtilsService;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 @SessionAttributes( { "genreListModel" } )

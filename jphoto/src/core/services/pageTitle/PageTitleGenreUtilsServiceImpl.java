@@ -1,9 +1,9 @@
 package core.services.pageTitle;
 
 import core.general.genre.Genre;
+import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import core.services.utils.EntityLinkUtilsService;
 import utils.TranslatorUtils;
 
 public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsService {

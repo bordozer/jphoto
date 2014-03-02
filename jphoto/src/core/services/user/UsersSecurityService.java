@@ -5,7 +5,6 @@ import core.general.user.UsersSecurity;
 import org.springframework.validation.Errors;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 public interface UsersSecurityService {

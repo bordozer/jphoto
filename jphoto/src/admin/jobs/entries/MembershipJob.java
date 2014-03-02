@@ -6,10 +6,10 @@ import core.enums.PrivateMessageType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.cache.CacheKey;
-import core.general.user.User;
-import core.general.user.UserStatus;
 import core.general.configuration.ConfigurationKey;
 import core.general.message.PrivateMessage;
+import core.general.user.User;
+import core.general.user.UserStatus;
 import core.log.LogHelper;
 
 import java.util.List;

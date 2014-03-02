@@ -1,7 +1,7 @@
 package core.services.dao;
 
-import core.general.favorite.FavoriteEntry;
 import core.enums.FavoriteEntryType;
+import core.general.favorite.FavoriteEntry;
 
 import java.util.Date;
 import java.util.List;

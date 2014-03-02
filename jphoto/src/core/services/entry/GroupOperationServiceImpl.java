@@ -1,9 +1,9 @@
 package core.services.entry;
 
-import core.general.user.User;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
+import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;

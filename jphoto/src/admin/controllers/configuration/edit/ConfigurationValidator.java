@@ -4,11 +4,9 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationDataType;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.NumberUtils;
-import utils.StringUtilities;
 import utils.TranslatorUtils;
 
 import java.util.List;

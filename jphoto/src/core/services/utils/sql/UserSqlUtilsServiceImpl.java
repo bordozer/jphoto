@@ -1,7 +1,7 @@
 package core.services.utils.sql;
 
-import core.general.base.PagingModel;
 import core.enums.FavoriteEntryType;
+import core.general.base.PagingModel;
 import core.general.user.UserMembershipType;
 import core.services.dao.FavoritesDaoImpl;
 import core.services.dao.UserDaoImpl;

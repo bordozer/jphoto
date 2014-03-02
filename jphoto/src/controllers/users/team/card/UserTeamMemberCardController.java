@@ -1,16 +1,18 @@
 package controllers.users.team.card;
 
-import core.general.base.PagingModel;
 import core.context.EnvironmentContext;
+import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.UtilsService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
-import sql.builder.*;
+import sql.builder.SqlIdsSelectQuery;
 import utils.NumberUtils;
 import utils.PagingUtils;
-import core.services.utils.sql.PhotoSqlHelperService;
-import core.services.pageTitle.PageTitleUserUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

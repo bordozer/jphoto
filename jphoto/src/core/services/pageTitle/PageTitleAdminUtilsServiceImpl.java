@@ -2,14 +2,14 @@ package core.services.pageTitle;
 
 import admin.jobs.enums.JobListTab;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import admin.services.services.UpgradeState;
 import core.general.configuration.ConfigurationTab;
-import admin.jobs.general.SavedJob;
-import core.general.photo.PhotoVotingCategory;
 import core.general.configuration.SystemConfiguration;
+import core.general.photo.PhotoVotingCategory;
+import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import core.services.utils.EntityLinkUtilsService;
 import utils.TranslatorUtils;
 
 public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsService {

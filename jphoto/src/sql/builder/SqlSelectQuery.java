@@ -1,8 +1,5 @@
 package sql.builder;
 
-import core.log.LogHelper;
-import org.apache.commons.lang.StringUtils;
-
 import java.util.Collections;
 import java.util.List;
 

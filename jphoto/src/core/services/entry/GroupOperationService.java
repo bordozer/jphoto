@@ -1,8 +1,8 @@
 package core.services.entry;
 
-import core.general.user.User;
 import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
+import core.general.user.User;
 
 import java.util.List;
 

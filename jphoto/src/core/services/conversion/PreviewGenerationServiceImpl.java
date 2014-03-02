@@ -3,9 +3,9 @@ package core.services.conversion;
 import core.general.conversion.ConversionOptions;
 import core.general.photo.Photo;
 import core.services.photo.PhotoService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import core.services.utils.UserPhotoFilePathUtilsService;
 
 import java.io.File;
 import java.io.IOException;

@@ -2,8 +2,8 @@ package core.general.genre;
 
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.PhotoVotingCategory;
-import core.interfaces.Nameable;
 import core.interfaces.Cacheable;
+import core.interfaces.Nameable;
 
 import java.util.List;
 

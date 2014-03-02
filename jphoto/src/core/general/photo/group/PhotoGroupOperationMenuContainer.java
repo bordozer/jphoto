@@ -2,11 +2,7 @@ package core.general.photo.group;
 
 import com.google.common.collect.Lists;
 
-import java.util.Collections;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
 
 public class PhotoGroupOperationMenuContainer {
 

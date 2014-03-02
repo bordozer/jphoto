@@ -1,7 +1,8 @@
 package controllers.photos.groupoperations;
 
-import core.general.photo.group.PhotoGroupOperationType;
 import controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
+import core.general.photo.group.PhotoGroupOperationType;
+import core.services.pageTitle.PageTitlePhotoUtilsService;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +10,9 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import core.services.pageTitle.PageTitlePhotoUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @SessionAttributes( PhotoGroupOperationController.MODEL_NAME )
 @Controller

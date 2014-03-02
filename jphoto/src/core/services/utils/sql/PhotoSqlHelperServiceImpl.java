@@ -1,11 +1,11 @@
 package core.services.utils.sql;
 
-import core.general.base.PagingModel;
 import core.enums.FavoriteEntryType;
+import core.general.base.PagingModel;
 import core.services.dao.*;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.*;
-import core.services.utils.DateUtilsService;
 
 import java.util.Date;
 

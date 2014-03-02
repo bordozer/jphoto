@@ -1,10 +1,10 @@
 package core.services.photo;
 
-import core.general.photo.Photo;
-import core.general.user.UserPhotoVote;
-import core.general.user.User;
-import core.general.data.UserRating;
 import controllers.users.card.MarksByCategoryInfo;
+import core.general.data.UserRating;
+import core.general.photo.Photo;
+import core.general.user.User;
+import core.general.user.UserPhotoVote;
 
 import java.util.Date;
 import java.util.List;

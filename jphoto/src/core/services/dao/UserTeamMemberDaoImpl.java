@@ -9,8 +9,8 @@ import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
-import core.services.system.CacheService;
 import core.services.dao.mappers.IdsRowMapper;
+import core.services.system.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -20,7 +20,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public class UserTeamMemberDaoImpl extends BaseEntityDaoImpl<UserTeamMember> implements UserTeamMemberDao {

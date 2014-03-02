@@ -1,15 +1,15 @@
 package controllers.photos.groupoperations.handlers;
 
+import controllers.photos.groupoperations.GroupOperationResult;
+import controllers.photos.groupoperations.PhotoGroupOperationEntry;
+import controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
+import controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import controllers.photos.groupoperations.GroupOperationResult;
-import controllers.photos.groupoperations.PhotoGroupOperationEntry;
-import controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
-import controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.services.security.Services;
 import core.services.user.UserTeamService;
 import core.services.utils.EntityLinkUtilsService;

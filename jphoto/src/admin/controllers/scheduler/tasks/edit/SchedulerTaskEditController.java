@@ -1,12 +1,18 @@
 package admin.controllers.scheduler.tasks.edit;
 
 import admin.jobs.general.SavedJob;
-import core.enums.SchedulerTaskProperty;
-import core.general.base.CommonProperty;
-import core.general.executiontasks.*;
-import core.general.scheduler.SchedulerTask;
 import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.SchedulerService;
+import core.enums.SchedulerTaskProperty;
+import core.general.base.CommonProperty;
+import core.general.executiontasks.AbstractExecutionTask;
+import core.general.executiontasks.ExecutionTaskFactory;
+import core.general.executiontasks.ExecutionTaskType;
+import core.general.scheduler.SchedulerTask;
+import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.utils.DateUtilsService;
+import core.services.utils.UrlUtilsService;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +20,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
-import core.services.utils.UrlUtilsService;
-import core.services.utils.UrlUtilsServiceImpl;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import javax.validation.Valid;
 import java.util.*;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
 @SessionAttributes( SchedulerTaskEditController.MODEL_NAME )

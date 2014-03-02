@@ -1,13 +1,14 @@
 package admin.controllers.upgrade;
 
-import admin.upgrade.entities.UpgradeTaskLogEntry;
-import admin.upgrade.entities.UpgradeTaskResult;
-import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.services.services.UpgradeMonitor;
 import admin.services.services.UpgradeService;
 import admin.services.services.UpgradeState;
+import admin.upgrade.entities.UpgradeTaskLogEntry;
+import admin.upgrade.entities.UpgradeTaskResult;
+import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.exceptions.UpgradeException;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.utils.SystemVarsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.TranslatorUtils;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import java.io.File;
 import java.util.Iterator;

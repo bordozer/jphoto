@@ -3,11 +3,11 @@ package controllers.users.avatar;
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
 import core.services.system.ConfigurationService;
+import core.services.utils.ImageFileUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
-import core.services.utils.ImageFileUtilsService;
 
 public class UserAvatarValidator implements Validator {
 

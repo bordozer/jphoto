@@ -2,12 +2,12 @@ package controllers.content.nude;
 
 import core.context.Environment;
 import core.context.EnvironmentContext;
+import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import core.services.utils.UrlUtilsService;
 
 import javax.servlet.http.HttpServletRequest;
 

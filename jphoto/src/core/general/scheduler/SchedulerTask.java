@@ -1,9 +1,9 @@
 package core.general.scheduler;
 
 import core.general.base.AbstractBaseEntity;
-import core.interfaces.Nameable;
 import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.ExecutionTaskType;
+import core.interfaces.Nameable;
 
 public class SchedulerTask extends AbstractBaseEntity implements Nameable {
 

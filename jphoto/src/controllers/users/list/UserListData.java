@@ -1,7 +1,7 @@
 package controllers.users.list;
 
-import core.general.user.UserAvatar;
 import core.general.menus.EntryMenu;
+import core.general.user.UserAvatar;
 
 public class UserListData {
 

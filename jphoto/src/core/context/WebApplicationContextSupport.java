@@ -1,6 +1,5 @@
 package core.context;
 
-import core.context.ApplicationContextHelper;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContextEvent;

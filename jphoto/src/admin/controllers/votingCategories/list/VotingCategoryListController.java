@@ -2,19 +2,17 @@ package admin.controllers.votingCategories.list;
 
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import utils.TranslatorUtils;
-import core.services.utils.UrlUtilsServiceImpl;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @SessionAttributes( { "votingCategoryListModel" } )
 @Controller

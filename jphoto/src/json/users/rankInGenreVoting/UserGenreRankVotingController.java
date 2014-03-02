@@ -7,7 +7,6 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

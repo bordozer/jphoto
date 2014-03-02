@@ -1,7 +1,7 @@
 package admin.controllers.anonymousDays;
 
-import core.general.base.AbstractGeneralModel;
 import core.general.anonym.AnonymousDay;
+import core.general.base.AbstractGeneralModel;
 
 import java.util.Date;
 import java.util.List;

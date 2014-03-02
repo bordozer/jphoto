@@ -1,15 +1,17 @@
 package controllers.portalpage;
 
 import core.context.EnvironmentContext;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.configuration.ConfigurationKey;
 import core.services.entry.ActivityStreamService;
-import core.services.system.ConfigurationService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.system.ConfigurationService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,9 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
-import core.services.utils.sql.PhotoSqlHelperService;
 
 import java.util.Collections;
 import java.util.Date;

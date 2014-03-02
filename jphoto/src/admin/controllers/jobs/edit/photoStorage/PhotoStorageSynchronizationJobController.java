@@ -2,7 +2,6 @@ package admin.controllers.jobs.edit.photoStorage;
 
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.controllers.jobs.edit.AbstractJobController;
-import admin.jobs.entries.PhotoStorageSynchronizationJob;
 import admin.jobs.enums.SavedJobType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

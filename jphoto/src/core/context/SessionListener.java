@@ -2,10 +2,11 @@ package core.context;
 
 import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
-import core.services.utils.SystemVarsService;
 import core.services.utils.DateUtilsService;
 
-import javax.servlet.http.*;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 import java.util.Date;
 
 public class SessionListener implements HttpSessionListener {

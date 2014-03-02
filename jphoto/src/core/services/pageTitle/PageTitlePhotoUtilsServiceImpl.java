@@ -1,11 +1,11 @@
 package core.services.pageTitle;
 
+import controllers.photos.edit.PhotoEditWizardStep;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
-import controllers.photos.edit.PhotoEditWizardStep;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
@@ -14,7 +14,8 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.*;
+import utils.StringUtilities;
+import utils.TranslatorUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

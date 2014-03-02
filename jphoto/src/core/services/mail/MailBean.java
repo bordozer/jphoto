@@ -1,8 +1,5 @@
 package core.services.mail;
 
-import javax.mail.internet.InternetAddress;
-import java.util.List;
-
 public class MailBean {
 
 	private String fromAddress;

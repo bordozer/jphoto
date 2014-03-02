@@ -1,8 +1,8 @@
 package controllers.photos.edit.description;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserStatus;
-import core.general.configuration.ConfigurationKey;
 
 public class MemberPhotoUploadHelper extends AbstractPhotoUploadAllowance {
 

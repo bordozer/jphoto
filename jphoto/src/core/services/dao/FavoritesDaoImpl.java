@@ -1,10 +1,10 @@
 package core.services.dao;
 
-import core.general.favorite.FavoriteEntry;
 import core.enums.FavoriteEntryType;
+import core.general.favorite.FavoriteEntry;
+import core.services.dao.mappers.IdsRowMapper;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
-import core.services.dao.mappers.IdsRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

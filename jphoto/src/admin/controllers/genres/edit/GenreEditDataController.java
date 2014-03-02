@@ -4,15 +4,15 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
+import core.services.pageTitle.PageTitleGenreUtilsService;
 import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import utils.TranslatorUtils;
-import core.services.utils.UrlUtilsServiceImpl;
-import core.services.pageTitle.PageTitleGenreUtilsService;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -4,8 +4,8 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.UserRankInGenreVotingValidationResult;
-import core.general.user.User;
 import core.general.photo.ValidationResult;
+import core.general.user.User;
 
 import java.util.Date;
 import java.util.List;

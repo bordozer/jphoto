@@ -1,7 +1,7 @@
 package core.services.dao;
 
-import core.general.user.userTeam.UserTeamMember;
 import core.general.photoTeam.PhotoTeam;
+import core.general.user.userTeam.UserTeamMember;
 
 import java.util.List;
 

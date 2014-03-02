@@ -3,8 +3,6 @@ package admin.services.scheduler;
 import core.general.scheduler.SchedulerTask;
 import org.quartz.SchedulerException;
 
-import java.util.List;
-
 public interface ScheduledTasksExecutionService {
 
 	void start() throws SchedulerException;

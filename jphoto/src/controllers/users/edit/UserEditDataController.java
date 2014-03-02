@@ -1,28 +1,29 @@
 package controllers.users.edit;
 
+import core.context.EnvironmentContext;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
-import core.context.EnvironmentContext;
+import core.general.configuration.ConfigurationKey;
+import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
-import core.general.configuration.ConfigurationKey;
-import core.general.user.EmailNotificationType;
-import core.services.system.ConfigurationService;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
+import core.services.user.FakeUserService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.*;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import utils.NumberUtils;
 import utils.TranslatorUtils;
-import utils.*;
-import core.services.user.FakeUserService;
-import core.services.pageTitle.PageTitleUserUtilsService;
+import utils.UserUtils;
 
 import javax.validation.Valid;
 import java.util.Set;

@@ -4,7 +4,6 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;

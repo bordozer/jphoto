@@ -1,11 +1,8 @@
 package controllers.activity.list;
 
-import core.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
-import core.general.activity.ActivityPhotoComment;
 import core.general.activity.ActivityType;
 import core.general.base.PagingModel;
-import core.general.photo.PhotoComment;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.pageTitle.PageTitleService;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.PagingUtils;
-import utils.PhotoUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

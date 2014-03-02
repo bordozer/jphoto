@@ -3,7 +3,6 @@ package controllers.users.notifications;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
 
-import java.util.List;
 import java.util.Set;
 
 public class UserNotificationsControlModel extends AbstractGeneralModel {

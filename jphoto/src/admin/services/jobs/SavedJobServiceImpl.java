@@ -2,14 +2,13 @@ package admin.services.jobs;
 
 import admin.controllers.jobs.edit.AbstractJobController;
 import admin.jobs.entries.AbstractJob;
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
 import core.services.dao.SavedJobDao;
 import core.services.dao.SchedulerTasksDao;
-import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

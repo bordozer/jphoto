@@ -1,8 +1,8 @@
 package admin.controllers.configuration.edit;
 
+import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
-import core.general.configuration.Configuration;
 import core.general.configuration.SystemConfiguration;
 import elements.PageModel;
 import org.springframework.validation.BindingResult;

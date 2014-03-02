@@ -1,5 +1,6 @@
 package core.services.dao;
 
+import controllers.users.card.MarksByCategoryInfo;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.configuration.ConfigurationKey;
@@ -12,7 +13,6 @@ import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import controllers.users.card.MarksByCategoryInfo;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

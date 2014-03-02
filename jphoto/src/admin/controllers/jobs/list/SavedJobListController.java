@@ -1,21 +1,19 @@
 package admin.controllers.jobs.list;
 
-import admin.jobs.enums.JobListTab;
-import admin.jobs.general.SavedJob;
-import admin.jobs.enums.SavedJobType;
-import admin.services.jobs.JobExecutionHistoryDaoImpl;
-import admin.services.jobs.JobExecutionHistoryEntry;
-import admin.services.jobs.JobExecutionHistoryService;
 import admin.jobs.entries.AbstractJob;
-import admin.services.jobs.JobExecutionService;
+import admin.jobs.enums.JobListTab;
+import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import admin.jobs.loaders.AbstractSavedJobsLoader;
 import admin.jobs.loaders.SavedJobLoaderFactory;
+import admin.services.jobs.*;
+import admin.services.scheduler.SchedulerService;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
-import admin.services.jobs.SavedJobService;
-import admin.services.scheduler.SchedulerService;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import utils.ListUtils;
-import core.services.utils.UrlUtilsService;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;

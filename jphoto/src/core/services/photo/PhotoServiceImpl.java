@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import controllers.users.card.MarksByCategoryInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
@@ -24,17 +25,18 @@ import core.services.conversion.PhotoPreviewService;
 import core.services.dao.PhotoDao;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
-import core.services.menu.EntryMenuService;
 import core.services.entry.GenreService;
+import core.services.menu.EntryMenuService;
+import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import core.services.notification.NotificationService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
-import controllers.users.card.MarksByCategoryInfo;
+import core.services.utils.DateUtilsService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
@@ -42,9 +44,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.*;
-import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
-import core.services.utils.UserPhotoFilePathUtilsService;
 
 import java.io.File;
 import java.util.*;

@@ -1,18 +1,17 @@
 package admin.controllers.scheduler.tasks.edit;
 
-import core.general.executiontasks.*;
 import admin.services.scheduler.SchedulerService;
+import core.general.executiontasks.ExecutionTaskType;
+import core.general.executiontasks.PeriodUnit;
+import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import core.services.utils.DateUtilsService;
 import utils.FormatUtils;
 import utils.TranslatorUtils;
 
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public class SchedulerTaskEditValidator implements Validator {
 

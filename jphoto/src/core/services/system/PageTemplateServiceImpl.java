@@ -1,20 +1,20 @@
 package core.services.system;
 
-import core.enums.PrivateMessageType;
+import controllers.users.login.UserLoginModel;
 import core.context.EnvironmentContext;
+import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.entry.PrivateMessageService;
-import core.services.security.SecurityService;
 import core.services.photo.PhotoCommentService;
+import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
-import controllers.users.login.UserLoginModel;
 import elements.MenuItem;
 import elements.PageModel;
 import elements.PageTitleData;
@@ -26,7 +26,9 @@ import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.ToolManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
-import utils.*;
+import utils.StringUtilities;
+import utils.TranslatorUtils;
+import utils.UserUtils;
 
 import java.io.StringWriter;
 import java.util.Collections;

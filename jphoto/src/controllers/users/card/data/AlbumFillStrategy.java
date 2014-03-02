@@ -1,8 +1,7 @@
 package controllers.users.card.data;
 
-import core.general.base.PagingModel;
-import core.general.user.userAlbums.UserPhotoAlbum;
 import controllers.users.card.UserCardModel;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import elements.PhotoList;
 
 import java.util.List;

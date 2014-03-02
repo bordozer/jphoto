@@ -1,7 +1,7 @@
 package core.services.utils;
 
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;

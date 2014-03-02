@@ -1,7 +1,10 @@
 package core.services.utils.sql;
 
 import core.general.base.PagingModel;
-import core.services.dao.*;
+import core.services.dao.GenreDaoImpl;
+import core.services.dao.PhotoDaoImpl;
+import core.services.dao.PhotoVotingDaoImpl;
+import core.services.dao.UserDaoImpl;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.*;

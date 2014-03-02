@@ -1,12 +1,12 @@
 package admin.controllers.configuration.list;
 
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 
 @Controller
 @RequestMapping ( value = "configuration" )

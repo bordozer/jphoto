@@ -6,9 +6,9 @@ import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
-import core.general.user.User;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.photoTeam.PhotoTeam;
+import core.general.user.User;
 import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.BaseEntityService;
@@ -20,7 +20,6 @@ import sql.builder.SqlSelectQuery;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable {

@@ -2,8 +2,8 @@ package controllers.users.messages.list;
 
 import core.enums.PrivateMessageType;
 import core.general.base.AbstractGeneralModel;
-import core.general.user.User;
 import core.general.message.PrivateMessage;
+import core.general.user.User;
 
 import java.util.List;
 import java.util.Map;

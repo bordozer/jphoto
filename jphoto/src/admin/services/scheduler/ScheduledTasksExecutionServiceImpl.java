@@ -1,13 +1,13 @@
 package admin.services.scheduler;
 
 import admin.services.jobs.JobExecutionService;
+import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.triggers.AbstractJobTrigger;
 import admin.services.scheduler.triggers.ExecutionTaskTriggerFactory;
 import core.general.configuration.ConfigurationKey;
 import core.general.executiontasks.AbstractExecutionTask;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import admin.services.jobs.SavedJobService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import org.quartz.*;
@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static admin.services.scheduler.triggers.ExecutionTaskTriggerFactory.getTriggerIdentity;
-import static org.quartz.JobBuilder.*;
+import static org.quartz.JobBuilder.newJob;
 
 public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecutionService {
 

@@ -1,17 +1,17 @@
 package admin.controllers.jobs.edit.photosImport.strategies;
 
-import admin.jobs.entries.AbstractJob;
-import admin.services.jobs.JobHelperService;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.jobs.entries.AbstractJob;
+import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
-import core.general.user.User;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
+import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;

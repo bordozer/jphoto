@@ -2,7 +2,6 @@ package core.services.entry;
 
 import core.general.anonym.AnonymousDay;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 

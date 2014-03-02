@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import controllers.users.card.MarksByCategoryInfo;
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheKey;
 import core.general.data.PhotoRating;
@@ -8,14 +9,14 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
+import core.services.dao.PhotoVotingDao;
 import core.services.entry.ActivityStreamService;
 import core.services.system.CacheService;
-import core.services.dao.PhotoVotingDao;
-import controllers.users.card.MarksByCategoryInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 public class PhotoVotingServiceImpl implements PhotoVotingService {
 

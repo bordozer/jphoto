@@ -8,9 +8,6 @@ import org.apache.commons.lang.StringUtils;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newLinkedHashMap;
-
 public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 
 	private int period;

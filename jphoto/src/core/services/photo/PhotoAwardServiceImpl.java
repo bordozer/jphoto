@@ -1,14 +1,14 @@
 package core.services.photo;
 
 import core.enums.PhotoAwardKey;
-import core.general.photo.PhotoAward;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoRating;
 import core.general.data.TimeRange;
-import core.services.system.ConfigurationService;
+import core.general.photo.PhotoAward;
 import core.services.dao.PhotoAwardDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

@@ -1,17 +1,19 @@
 package core.services.security;
 
-import core.enums.PhotoActionAllowance;
 import core.context.EnvironmentContext;
-import core.exceptions.*;
+import core.enums.PhotoActionAllowance;
+import core.exceptions.AccessDeniedException;
+import core.exceptions.NotLoggedUserException;
+import core.exceptions.NudeContentException;
 import core.exceptions.notFound.GenreNotFoundException;
 import core.exceptions.notFound.PhotoNotFoundException;
 import core.exceptions.notFound.UserNotFoundException;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photo.PhotoComment;
 import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.photo.ValidationResult;
-import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.entry.FavoritesService;
@@ -25,7 +27,9 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.*;
+import utils.NumberUtils;
+import utils.TranslatorUtils;
+import utils.UserUtils;
 
 import java.io.File;
 import java.util.Date;

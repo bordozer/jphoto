@@ -2,7 +2,6 @@ package admin.controllers.scheduler.tasks.list;
 
 import admin.jobs.general.SavedJob;
 import core.general.base.AbstractGeneralModel;
-import core.general.scheduler.SchedulerTask;
 
 import java.util.List;
 import java.util.Map;

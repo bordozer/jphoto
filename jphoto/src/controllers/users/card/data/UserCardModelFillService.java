@@ -1,15 +1,14 @@
 package controllers.users.card.data;
 
-import core.general.activity.AbstractActivityStreamEntry;
-import core.general.activity.ActivityType;
-import core.general.base.PagingModel;
-import core.general.genre.Genre;
-import core.general.user.User;
-import core.general.menus.EntryMenu;
-import core.general.user.userAlbums.UserPhotoAlbum;
-import core.general.user.userTeam.UserTeamMember;
 import controllers.users.card.UserCardGenreInfo;
 import controllers.users.card.UserCardModel;
+import core.general.activity.AbstractActivityStreamEntry;
+import core.general.base.PagingModel;
+import core.general.genre.Genre;
+import core.general.menus.EntryMenu;
+import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
+import core.general.user.userTeam.UserTeamMember;
 import elements.PhotoList;
 
 import java.util.List;

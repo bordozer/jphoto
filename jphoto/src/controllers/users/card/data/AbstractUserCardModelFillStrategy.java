@@ -1,9 +1,9 @@
 package controllers.users.card.data;
 
+import controllers.users.card.UserCardModel;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
-import controllers.users.card.UserCardModel;
 
 public abstract class AbstractUserCardModelFillStrategy {
 

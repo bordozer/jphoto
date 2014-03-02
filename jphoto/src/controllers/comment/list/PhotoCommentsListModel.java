@@ -2,8 +2,8 @@ package controllers.comment.list;
 
 import controllers.comment.edit.PhotoCommentInfo;
 import core.general.base.AbstractGeneralPageModel;
-import core.general.user.User;
 import core.general.photo.PhotoPreviewWrapper;
+import core.general.user.User;
 
 import java.util.List;
 import java.util.Map;

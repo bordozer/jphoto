@@ -3,9 +3,9 @@ package admin.controllers.jobs.edit.preview;
 import admin.controllers.jobs.edit.SavedJobValidator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import utils.FormatUtils;
 import utils.NumberUtils;
 import utils.TranslatorUtils;
-import utils.FormatUtils;
 
 public class PreviewGenerationValidator extends SavedJobValidator implements Validator {
 

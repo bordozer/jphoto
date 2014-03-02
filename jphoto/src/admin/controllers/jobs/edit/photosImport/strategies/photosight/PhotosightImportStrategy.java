@@ -1,12 +1,12 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
-import admin.jobs.entries.AbstractJob;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
-import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
+import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
-import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
+import admin.jobs.entries.AbstractJob;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
@@ -22,9 +22,11 @@ import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
-import utils.*;
+import utils.StringUtilities;
+import utils.TranslatorUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;

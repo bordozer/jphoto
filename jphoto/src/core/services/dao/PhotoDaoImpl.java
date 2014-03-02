@@ -7,14 +7,13 @@ import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoFile;
-import core.general.photo.PhotoInfo;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import core.services.utils.UserPhotoFilePathUtilsService;
 
 import java.io.File;
 import java.sql.ResultSet;

@@ -1,7 +1,7 @@
 package admin.upgrade.tasks;
 
-import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.services.services.UpgradeMonitor;
+import admin.upgrade.entities.UpgradeTaskToPerform;
 import core.exceptions.UpgradeException;
 import core.services.dao.PhotoCommentDaoImpl;
 

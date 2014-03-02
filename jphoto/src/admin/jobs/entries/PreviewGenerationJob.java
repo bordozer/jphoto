@@ -1,9 +1,9 @@
 package admin.jobs.entries;
 
 import admin.jobs.enums.SavedJobType;
-import core.general.conversion.ConversionOptions;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
+import core.general.conversion.ConversionOptions;
 import core.general.photo.Photo;
 import core.log.LogHelper;
 import core.services.utils.DateUtilsService;

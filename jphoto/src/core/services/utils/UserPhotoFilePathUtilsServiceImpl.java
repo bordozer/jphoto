@@ -1,8 +1,8 @@
 package core.services.utils;
 
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.general.img.Dimension;
 import core.log.LogHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;

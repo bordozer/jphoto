@@ -7,16 +7,16 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserAvatar;
 import core.general.user.UserStatus;
+import core.services.dao.UserDao;
 import core.services.entry.ActivityStreamService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import core.services.dao.UserDao;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.SqlIdsSelectQuery;
-import core.services.utils.UserPhotoFilePathUtilsService;
 
 import java.io.File;
 import java.io.IOException;

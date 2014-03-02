@@ -2,8 +2,8 @@ package core.services.utils;
 
 import admin.jobs.enums.SavedJobType;
 import core.enums.PrivateMessageType;
-import core.general.user.UserMembershipType;
 import core.general.configuration.ConfigurationTab;
+import core.general.user.UserMembershipType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;

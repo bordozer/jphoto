@@ -1,8 +1,8 @@
 package core.services.utils;
 
 import core.context.EnvironmentContext;
-import core.general.user.User;
 import core.general.configuration.ConfigurationKey;
+import core.general.user.User;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.PhotoUtils;

@@ -1,8 +1,8 @@
 package admin.jobs.entries;
 
 import admin.jobs.enums.JobRunMode;
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
@@ -12,7 +12,6 @@ import utils.TranslatorUtils;
 import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 public class JobChainJob extends AbstractJob {

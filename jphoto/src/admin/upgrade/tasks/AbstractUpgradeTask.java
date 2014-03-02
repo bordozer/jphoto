@@ -1,8 +1,8 @@
 package admin.upgrade.tasks;
 
-import admin.upgrade.entities.UpgradeTaskToPerform;
-import admin.services.services.UpgradeMonitor;
 import admin.services.services.SqlUtilsService;
+import admin.services.services.UpgradeMonitor;
+import admin.upgrade.entities.UpgradeTaskToPerform;
 import core.exceptions.UpgradeException;
 
 public abstract class AbstractUpgradeTask {

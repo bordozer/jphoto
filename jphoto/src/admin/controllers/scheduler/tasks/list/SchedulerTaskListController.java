@@ -1,11 +1,12 @@
 package admin.controllers.scheduler.tasks.list;
 
 import admin.jobs.general.SavedJob;
+import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.ScheduledTasksExecutionService;
+import admin.services.scheduler.SchedulerService;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import admin.services.jobs.SavedJobService;
-import admin.services.scheduler.SchedulerService;
+import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import core.services.pageTitle.PageTitleAdminUtilsService;
 import utils.ListUtils;
 import utils.TranslatorUtils;
 
@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
 @Controller

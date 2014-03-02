@@ -2,20 +2,20 @@ package controllers.voting;
 
 import core.context.EnvironmentContext;
 import core.general.photo.Photo;
-import core.general.user.UserPhotoVote;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.UserPhotoVote;
 import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
 import core.services.user.UserRankService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
 
 import javax.servlet.http.HttpServletRequest;

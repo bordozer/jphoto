@@ -4,7 +4,6 @@ import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.utils.DateUtilsService;
 
-import java.util.Date;
 import java.util.Map;
 
 public class OnceExecutionTask extends AbstractExecutionTask {

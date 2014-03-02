@@ -4,11 +4,9 @@ import admin.jobs.enums.SavedJobType;
 import core.enums.FavoriteEntryType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
-import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
-import core.services.utils.DateUtilsService;
 import utils.TranslatorUtils;
 
 import java.util.Date;

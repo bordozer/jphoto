@@ -1,13 +1,13 @@
 package core.services.dao;
 
 import core.enums.PrivateMessageType;
-import core.general.user.User;
 import core.general.message.PrivateMessage;
+import core.general.user.User;
+import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import core.services.utils.DateUtilsService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

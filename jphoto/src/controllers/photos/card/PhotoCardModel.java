@@ -1,14 +1,13 @@
 package controllers.photos.card;
 
-import controllers.comment.edit.PhotoCommentInfo;
+import controllers.users.genreRank.VotingModel;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.img.Dimension;
 import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
-import core.general.photo.ValidationResult;
-import controllers.users.genreRank.VotingModel;
 import core.general.photo.PhotoInfo;
+import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 

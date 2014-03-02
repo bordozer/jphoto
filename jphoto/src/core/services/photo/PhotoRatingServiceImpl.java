@@ -5,8 +5,8 @@ import core.general.data.PhotoRating;
 import core.general.data.TimeRange;
 import core.services.dao.PhotoRatingDao;
 import core.services.dao.PhotoVotingDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
 import java.util.List;

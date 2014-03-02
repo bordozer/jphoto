@@ -1,14 +1,14 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.services.jobs.JobExecutionHistoryEntry;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.*;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.jobs.enums.SavedJobType;
+import admin.services.jobs.JobExecutionHistoryEntry;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.general.base.CommonProperty;
@@ -16,7 +16,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.utils.DateUtilsService;
-import utils.*;
+import utils.TranslatorUtils;
 
 import java.io.IOException;
 import java.util.List;

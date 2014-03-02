@@ -1,7 +1,7 @@
 package core.services.pageTitle;
 
-import core.enums.UserCardTab;
 import core.enums.FavoriteEntryType;
+import core.enums.UserCardTab;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;

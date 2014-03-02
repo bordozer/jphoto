@@ -1,12 +1,12 @@
 package core.services.pageTitle;
 
 import admin.jobs.enums.JobListTab;
-import admin.jobs.general.SavedJob;
 import admin.jobs.enums.SavedJobType;
+import admin.jobs.general.SavedJob;
 import admin.services.services.UpgradeState;
-import core.general.photo.PhotoVotingCategory;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
+import core.general.photo.PhotoVotingCategory;
 import elements.PageTitleData;
 
 public interface PageTitleAdminUtilsService {

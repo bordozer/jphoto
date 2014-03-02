@@ -5,8 +5,8 @@ import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.log.LogHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import utils.TranslatorUtils;
 
 import java.util.List;

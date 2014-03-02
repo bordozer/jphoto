@@ -2,8 +2,8 @@ package core.services.ajax;
 
 import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
-import core.general.menus.comment.ComplaintReasonType;
 import core.general.menus.EntryMenuType;
+import core.general.menus.comment.ComplaintReasonType;
 
 public class AjaxServiceImpl implements AjaxService {
 

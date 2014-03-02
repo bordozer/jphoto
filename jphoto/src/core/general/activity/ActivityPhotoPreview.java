@@ -1,7 +1,6 @@
 package core.general.activity;
 
 import core.general.photo.PhotoPreview;
-import core.general.user.User;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;

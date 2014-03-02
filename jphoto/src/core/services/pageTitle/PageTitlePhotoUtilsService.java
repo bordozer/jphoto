@@ -1,10 +1,10 @@
 package core.services.pageTitle;
 
+import controllers.photos.edit.PhotoEditWizardStep;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
-import controllers.photos.edit.PhotoEditWizardStep;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import elements.PageTitleData;

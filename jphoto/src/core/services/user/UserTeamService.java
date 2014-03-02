@@ -1,9 +1,9 @@
 package core.services.user;
 
 import core.dtos.UserPickerDTO;
+import core.general.photoTeam.PhotoTeam;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import core.general.photoTeam.PhotoTeam;
 import core.interfaces.AllEntriesByIdLoadable;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;

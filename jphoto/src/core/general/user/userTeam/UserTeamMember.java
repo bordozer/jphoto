@@ -2,10 +2,10 @@ package core.general.user.userTeam;
 
 import core.enums.UserTeamMemberType;
 import core.general.base.AbstractBaseEntity;
-import core.interfaces.Favoritable;
-import core.interfaces.Nameable;
 import core.general.user.User;
 import core.interfaces.Cacheable;
+import core.interfaces.Favoritable;
+import core.interfaces.Nameable;
 import org.apache.commons.lang.StringUtils;
 import utils.StringUtilities;
 

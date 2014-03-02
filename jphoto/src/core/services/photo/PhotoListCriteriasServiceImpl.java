@@ -1,19 +1,21 @@
 package core.services.photo;
 
-import core.general.genre.Genre;
-import core.general.photo.PhotoVotingCategory;
-import core.general.user.User;
-import core.general.user.UserMembershipType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.data.PhotoSort;
 import core.general.data.TimeRange;
+import core.general.genre.Genre;
+import core.general.photo.PhotoVotingCategory;
+import core.general.user.User;
+import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.*;
+import utils.PhotoUtils;
+import utils.StringUtilities;
+import utils.TranslatorUtils;
 
 import java.util.Date;
 

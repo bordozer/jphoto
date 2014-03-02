@@ -6,8 +6,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import utils.TranslatorUtils;
 import utils.FormatUtils;
+import utils.TranslatorUtils;
 
 public class VotingCategoryEditDataValidator implements Validator {
 

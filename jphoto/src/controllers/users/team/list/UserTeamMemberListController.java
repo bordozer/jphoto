@@ -2,9 +2,10 @@ package controllers.users.team.list;
 
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
-import core.services.user.UserTeamService;
 import core.services.user.UserService;
+import core.services.user.UserTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import utils.NumberUtils;
-import core.services.pageTitle.PageTitleUserUtilsService;
 
 import java.util.List;
 import java.util.Map;

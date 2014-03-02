@@ -1,15 +1,13 @@
 package admin.controllers.jobs.edit;
 
 import admin.jobs.entries.AbstractJob;
-import admin.services.jobs.JobExecutionHistoryEntry;
 import admin.jobs.enums.JobListTab;
 import admin.jobs.general.TabJobInfo;
+import admin.services.jobs.JobExecutionHistoryEntry;
 import core.general.base.AbstractGeneralModel;
 
 import java.util.List;
 import java.util.Map;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractAdminJobModel extends AbstractGeneralModel {
 

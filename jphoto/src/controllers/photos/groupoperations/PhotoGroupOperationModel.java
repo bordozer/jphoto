@@ -1,7 +1,7 @@
 package controllers.photos.groupoperations;
 
-import core.general.photo.group.PhotoGroupOperationType;
 import core.general.base.AbstractGeneralModel;
+import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 

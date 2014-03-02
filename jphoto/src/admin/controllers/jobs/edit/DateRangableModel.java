@@ -1,7 +1,5 @@
 package admin.controllers.jobs.edit;
 
-import admin.controllers.jobs.edit.AbstractAdminJobModel;
-
 public class DateRangableModel extends AbstractAdminJobModel {
 
 	public static final String DATE_RANGE_TYPE_ID_FORM_CONTROL = "dateRangeTypeId";

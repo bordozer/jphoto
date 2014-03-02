@@ -2,9 +2,9 @@ package core.general.user.userAlbums;
 
 
 import core.general.base.AbstractBaseEntity;
-import core.interfaces.Nameable;
 import core.general.user.User;
 import core.interfaces.Cacheable;
+import core.interfaces.Nameable;
 
 public class UserPhotoAlbum extends AbstractBaseEntity implements Nameable, Cacheable {
 
