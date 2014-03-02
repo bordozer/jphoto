@@ -1,10 +1,10 @@
 package core.services.pageTitle;
 
 import core.general.genre.Genre;
+import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.TranslatorUtils;
 
 public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsService {
 
@@ -18,6 +18,9 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
+	
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public PageTitleData getGenreListData() {
@@ -32,7 +35,7 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 	@Override
 	public PageTitleData getGenreNewData() {
 		final String rootTranslated = getGenreRootTranslated();
-		final String tran = TranslatorUtils.translate( "New" );
+		final String tran = translatorService.translate( "New" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink(), tran );
@@ -42,7 +45,7 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 
 	@Override
 	public PageTitleData getGenreEditData( final Genre genre ) {
-		final String tran = TranslatorUtils.translate( "Edit" );
+		final String tran = translatorService.translate( "Edit" );
 		final String rootTranslated = getGenreRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated, genre.getName(), tran );
@@ -53,7 +56,7 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 
 	@Override
 	public String getGenreRootTranslated() {
-		return TranslatorUtils.translate( GENRE_ROOT );
+		return translatorService.translate( GENRE_ROOT );
 	}
 
 }

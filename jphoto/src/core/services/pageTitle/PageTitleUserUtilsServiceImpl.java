@@ -7,11 +7,11 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService {
 
@@ -22,6 +22,9 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public PageTitleData getUserListData() {
@@ -36,7 +39,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserNewData() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Register" );
+		final String tran = translatorService.translate( "Register" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
@@ -47,7 +50,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getVotesForUserRankInGenreData( final User user, final Genre genre ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Votes for rank in genre" );
+		final String tran = translatorService.translate( "Votes for rank in genre" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), tran );
@@ -59,12 +62,12 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getUserEditData( final User user ) {
-		return getUserData( user, TranslatorUtils.translate( "Edit" ) );
+		return getUserData( user, translatorService.translate( "Edit" ) );
 	}
 
 	@Override
 	public PageTitleData setUserAvatarData( final User user ) {
-		return getUserData( user, TranslatorUtils.translate( "Avatar" ) );
+		return getUserData( user, translatorService.translate( "Avatar" ) );
 	}
 
 	@Override
@@ -82,7 +85,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserListByFilter() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Filter" );
+		final String tran = translatorService.translate( "Filter" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
@@ -103,20 +106,20 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getUserTeamMemberListData( final User user ) {
-		return getUserData( user, TranslatorUtils.translate( "Team" ) );
+		return getUserData( user, translatorService.translate( "Team" ) );
 	}
 
 	@Override
 	public PageTitleData getUserPrivateMessagesListData( final User user ) {
-		return getUserData( user, TranslatorUtils.translate( "Private Messages" ) );
+		return getUserData( user, translatorService.translate( "Private Messages" ) );
 	}
 
 	@Override
 	public PageTitleData getUserTeamMemberNewData( final User user ) {
-		final String aNew = TranslatorUtils.translate( "New" );
+		final String aNew = translatorService.translate( "New" );
 
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Team" );
+		final String tran = translatorService.translate( "Team" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId() ), aNew );
@@ -126,10 +129,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getUserTeamMemberEditData( final UserTeamMember userTeamMember ) {
-		final String edit = TranslatorUtils.translate( "Edit" );
+		final String edit = translatorService.translate( "Edit" );
 
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Team" );
+		final String tran = translatorService.translate( "Team" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran, edit );
 
@@ -142,7 +145,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserTeamMemberCardData( final UserTeamMember userTeamMember ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = TranslatorUtils.translate( "Team" );
+		final String tran = translatorService.translate( "Team" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran );
 
@@ -154,12 +157,12 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getUserPhotoAlbumsData( final User user ) {
-		return getUserData( user, TranslatorUtils.translate( "Photo albums" ) );
+		return getUserData( user, translatorService.translate( "Photo albums" ) );
 	}
 
 	@Override
 	public PageTitleData getUserPhotoAlbumsNew( final User user ) {
-		final String tran = TranslatorUtils.translate( "New" );
+		final String tran = translatorService.translate( "New" );
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
@@ -171,7 +174,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserPhotoAlbumsEdit( final UserPhotoAlbum photoAlbum ) {
 		final User user = photoAlbum.getUser();
-		final String tran = TranslatorUtils.translate( "Edit" );
+		final String tran = translatorService.translate( "Edit" );
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
@@ -194,17 +197,17 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getFavoriteEntry( final User user, final FavoriteEntryType favoriteEntryType ) {
-		return getUserData( user, String.format( "%s / %s", TranslatorUtils.translate( "Favorites" ), favoriteEntryType.getName() ) );
+		return getUserData( user, String.format( "%s / %s", translatorService.translate( "Favorites" ), favoriteEntryType.getName() ) );
 	}
 
 	@Override
 	public PageTitleData getAddedToFavoritesByEntry( final User user ) {
-		return getUserData( user, String.format( "%s", TranslatorUtils.translate( "Added to Favorites by" ) ) );
+		return getUserData( user, String.format( "%s", translatorService.translate( "Added to Favorites by" ) ) );
 	}
 
 	@Override
 	public String getUserRootTranslated() {
-		return TranslatorUtils.translate( USER_ROOT );
+		return translatorService.translate( USER_ROOT );
 	}
 
 	@Override

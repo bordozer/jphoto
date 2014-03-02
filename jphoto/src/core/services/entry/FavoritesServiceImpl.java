@@ -6,9 +6,9 @@ import core.general.configuration.ConfigurationKey;
 import core.general.favorite.FavoriteEntry;
 import core.services.dao.FavoritesDao;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import java.util.Date;
@@ -28,6 +28,9 @@ public class FavoritesServiceImpl implements FavoritesService {
 	@Autowired
 	private ConfigurationService configurationService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@Override
 	public boolean isEntryInFavorites( final int userId, final int beingAddedEntryId, final int entryTypeId ) {
 		return getFavoriteEntry( userId, beingAddedEntryId, FavoriteEntryType.getById( entryTypeId ) ) != null;
@@ -46,14 +49,14 @@ public class FavoritesServiceImpl implements FavoritesService {
 		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
-			ajaxResultDTO.setMessage( TranslatorUtils.translate( "You are not logged in" ) );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in" ) );
 
 			return ajaxResultDTO;
 		}
 
 		if ( isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
 			isSuccessful = false;
-			message = TranslatorUtils.translate( "Entry is already in your favorites" );
+			message = translatorService.translate( "Entry is already in your favorites" );
 		} else {
 			final FavoriteEntryType entryType = FavoriteEntryType.getById( entryTypeId );
 			final Date currentTime = dateUtilsService.getCurrentTime();
@@ -78,14 +81,14 @@ public class FavoritesServiceImpl implements FavoritesService {
 		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
-			ajaxResultDTO.setMessage( TranslatorUtils.translate( "You are not logged in" ) );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in" ) );
 
 			return ajaxResultDTO;
 		}
 
 		if ( !isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
 			isSuccessful = false;
-			message = TranslatorUtils.translate( "Entry is NOT in your favorites" );
+			message = translatorService.translate( "Entry is NOT in your favorites" );
 		} else {
 			isSuccessful = favoritesDao.removeEntryFromFavorites( userId, favoriteEntryId, FavoriteEntryType.getById( entryTypeId ) );
 		}

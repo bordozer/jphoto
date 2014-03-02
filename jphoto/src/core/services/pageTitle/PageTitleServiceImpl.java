@@ -5,21 +5,17 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GenreService;
-import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.TranslatorUtils;
 
 public class PageTitleServiceImpl implements PageTitleService {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private PhotoService photoService;
 
 	@Autowired
 	private GenreService genreService;
@@ -35,6 +31,9 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public PageTitleData photoCardTitle( final Photo photo, final User accessor, final String title ) {
@@ -62,7 +61,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	@Override
 	public PageTitleData getActivityStreamData( final ActivityType activityType ) {
-		final String rootTranslated = TranslatorUtils.translate( "Activity Stream" );
+		final String rootTranslated = translatorService.translate( "Activity Stream" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
 
@@ -78,7 +77,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	/*@Override
 	public PageTitleData getPhotoActivityStreamData( final Photo photo ) {
-		final String rootTranslated = TranslatorUtils.translate( "Activity Stream" );
+		final String rootTranslated = translatorService.translate( "Activity Stream" );
 
 		final User user = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );

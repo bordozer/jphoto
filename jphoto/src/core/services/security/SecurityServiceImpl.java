@@ -21,6 +21,7 @@ import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -28,7 +29,6 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import java.io.File;
@@ -68,6 +68,9 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean userCanEditPhoto( final User user, final Photo photo ) {
@@ -301,14 +304,14 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "You are not logged in" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "You are not logged in" ) );
 
 			return allowanceValidationResult;
 		}
 
 		final boolean isUserInBlackListOfPhotoOwner = photo.getUserId() != user.getId() && favoritesService.isUserInBlackListOfUser( photo.getUserId(), user.getId() );
 		if ( isUserInBlackListOfPhotoOwner ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "You are in the black list of photo's author" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "You are in the black list of photo's author" ) );
 
 			return allowanceValidationResult;
 		}
@@ -318,7 +321,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( photoQty > 0 ) {
 			final int userApprovedPhotosQty = 5;
 			if ( userApprovedPhotosQty < photoQty ) {
-				allowanceValidation.failValidation( TranslatorUtils.translate( "You do not have enough approved photos ( has to be $1 )", photoQty ) );
+				allowanceValidation.failValidation( translatorService.translate( "You do not have enough approved photos ( has to be $1 )", photoQty ) );
 
 				return allowanceValidation;
 			}
@@ -326,7 +329,7 @@ public class SecurityServiceImpl implements SecurityService {
 		// TODO: <--
 
 		if ( user.getUserStatus() == UserStatus.CANDIDATE && ! configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "Commenting is not allowed to candidates" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "Commenting is not allowed to candidates" ) );
 
 			return allowanceValidationResult;
 		}
@@ -334,13 +337,13 @@ public class SecurityServiceImpl implements SecurityService {
 		final PhotoActionAllowance photoCommentsAllowance = photoService.getPhotoCommentAllowance( photo );
 
 		if ( photoCommentsAllowance == PhotoActionAllowance.ACTIONS_DENIED ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "The Author did not allow commenting" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "The Author did not allow commenting" ) );
 
 			return allowanceValidationResult;
 		}
 
 		if ( photoCommentsAllowance == PhotoActionAllowance.MEMBERS_ONLY && user.getUserStatus() == UserStatus.CANDIDATE ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "The author allowed commenting to members only" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "The author allowed commenting to members only" ) );
 
 			return allowanceValidationResult;
 		}
@@ -353,7 +356,7 @@ public class SecurityServiceImpl implements SecurityService {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "You are not logged in" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "You are not logged in" ) );
 
 			return allowanceValidationResult;
 		}
@@ -361,20 +364,20 @@ public class SecurityServiceImpl implements SecurityService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 
 		if ( UserUtils.isUsersEqual( user, photoAuthor ) ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "This is your own photo" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "This is your own photo" ) );
 
 			return allowanceValidationResult;
 		}
 
 		final boolean isUserInBlackListOfPhotoOwner = favoritesService.isUserInBlackListOfUser( photoAuthor.getId(), user.getId() );
 		if ( isUserInBlackListOfPhotoOwner ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "You are in the black list of photo's author" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "You are in the black list of photo's author" ) );
 
 			return allowanceValidationResult;
 		}
 
 		if ( user.getUserStatus() == UserStatus.CANDIDATE && ! configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "Voting is not allowed to candidates" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "Voting is not allowed to candidates" ) );
 
 			return allowanceValidationResult;
 		}
@@ -382,13 +385,13 @@ public class SecurityServiceImpl implements SecurityService {
 		final PhotoActionAllowance photoVotingAllowance = photoService.getPhotoVotingAllowance( photo );
 
 		if ( photoVotingAllowance == PhotoActionAllowance.ACTIONS_DENIED ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "The Author denied voting" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "The Author denied voting" ) );
 
 			return allowanceValidationResult;
 		}
 
 		if ( photoVotingAllowance == PhotoActionAllowance.MEMBERS_ONLY && user.getUserStatus() == UserStatus.CANDIDATE ) {
-			allowanceValidationResult.failValidation( TranslatorUtils.translate( "The author allowed voting to members only" ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "The author allowed voting to members only" ) );
 
 			return allowanceValidationResult;
 		}
@@ -397,7 +400,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userRankInGenre < 0 ) {
 			final Genre genre = genreService.load( photo.getGenreId() );
 			allowanceValidationResult.failValidation(
-				TranslatorUtils.translate( "You have negative rank ( $1 ) in category $2", String.valueOf( userRankInGenre ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) );
+				translatorService.translate( "You have negative rank ( $1 ) in category $2", String.valueOf( userRankInGenre ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) );
 
 			return allowanceValidationResult;
 		}
@@ -411,7 +414,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( ! UserUtils.isLoggedUser( voter ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You are not logged in." ) );
+			result.setValidationMessage( translatorService.translate( "You are not logged in." ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -420,7 +423,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( UserUtils.isUsersEqual( user, voter ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You can not vote for your own rank." ) );
+			result.setValidationMessage( translatorService.translate( "You can not vote for your own rank." ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -429,7 +432,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( voter.getUserStatus() == UserStatus.CANDIDATE && ! configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_USER_RANKS_IN_GENRE ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You are not the member yet. Voting for member ranks in photo categories is not allowed to candidates." ) );
+			result.setValidationMessage( translatorService.translate( "You are not the member yet. Voting for member ranks in photo categories is not allowed to candidates." ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -443,7 +446,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( voterRankInGenre < 0 ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You have an negative rank in category '$1'.", genre.getName() ) );
+			result.setValidationMessage( translatorService.translate( "You have an negative rank in category '$1'.", genre.getName() ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -453,7 +456,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userRankService.isUserVotedLastTimeForThisRankInGenre( voterId, userId, genreId, userRankInGenre ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You have already voted when member rank is $1 in category $2.", String.valueOf( userRankInGenre ), genre.getName() ) );
+			result.setValidationMessage( translatorService.translate( "You have already voted when member rank is $1 in category $2.", String.valueOf( userRankInGenre ), genre.getName() ) );
 			result.setUiVotingIsInaccessible( false );
 
 			return result;
@@ -464,7 +467,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userPhotosInGenre < minPhotosQtyForGenreRankVoting ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones )."
+			result.setValidationMessage( translatorService.translate( "The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones )."
 				, genre.getName(), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) );
 			result.setUiVotingIsInaccessible( true );
 
@@ -474,7 +477,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( favoritesService.isUserInBlackListOfUser( userId, voterId ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( TranslatorUtils.translate( "You are in the black list of $1.", user.getNameEscaped() ) );
+			result.setValidationMessage( translatorService.translate( "You are in the black list of $1.", user.getNameEscaped() ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;

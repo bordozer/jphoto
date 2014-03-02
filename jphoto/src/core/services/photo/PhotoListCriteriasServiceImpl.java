@@ -9,13 +9,13 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.PhotoUtils;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 
@@ -31,22 +31,25 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@Override
 	public String getPhotoListTitle( final PhotoListCriterias criterias ) {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( TranslatorUtils.translate( "Photos" ) );
+		builder.append( translatorService.translate( "Photos" ) );
 
 		if ( criterias.getUser() != null ) {
-			builder.append( TranslatorUtils.translate( " of $1", criterias.getUser().getName() ) );
+			builder.append( translatorService.translate( " of $1", criterias.getUser().getName() ) );
 		}
 
 		if ( criterias.getGenre() != null ) {
-			builder.append( TranslatorUtils.translate( ", category $1", criterias.getGenre().getName() ) );
+			builder.append( translatorService.translate( ", category $1", criterias.getGenre().getName() ) );
 		}
 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
-			builder.append( TranslatorUtils.translate( ", min $1 marks", criterias.getMinimalMarks() ) );
+			builder.append( translatorService.translate( ", min $1 marks", criterias.getMinimalMarks() ) );
 
 			addVotingTimeText( criterias, builder );
 		}
@@ -59,61 +62,61 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		final StringBuilder builder = new StringBuilder();
 
 		if ( criterias.isTopBestPhotoList() ) {
-			builder.append( TranslatorUtils.translate( "Top $1 best photos", criterias.getPhotoQtyLimit() ) );
+			builder.append( translatorService.translate( "Top $1 best photos", criterias.getPhotoQtyLimit() ) );
 		} else {
-			builder.append( TranslatorUtils.translate( "Photos" ) );
+			builder.append( translatorService.translate( "Photos" ) );
 		}
 
 		if ( !thereAreNoFilterCriterias( criterias ) ) {
 			if ( criterias.getUser() != null ) {
-				builder.append( TranslatorUtils.translate( " of '$1'", criterias.getUser().getName() ) );
+				builder.append( translatorService.translate( " of '$1'", criterias.getUser().getName() ) );
 			}
 
 			if ( criterias.getGenre() != null ) {
-				builder.append( TranslatorUtils.translate( " in category '$1'", criterias.getGenre().getName() ) );
+				builder.append( translatorService.translate( " in category '$1'", criterias.getGenre().getName() ) );
 			}
 
 			final Date uploadDateTo = criterias.getUploadDateTo();
 			final Date uploadDateFrom = criterias.getUploadDateFrom();
 
 			if ( dateUtilsService.isNotEmptyTime( uploadDateFrom ) ) {
-				builder.append( TranslatorUtils.translate( " posted in period from <b>$1</b>", dateUtilsService.formatDate( uploadDateFrom ) ) );
+				builder.append( translatorService.translate( " posted in period from <b>$1</b>", dateUtilsService.formatDate( uploadDateFrom ) ) );
 			}
 
 			if ( dateUtilsService.isNotEmptyTime( uploadDateTo ) ) {
 				if ( dateUtilsService.isEmptyTime( uploadDateFrom ) ) {
-					builder.append( TranslatorUtils.translate( " posted in period" ) );
+					builder.append( translatorService.translate( " posted in period" ) );
 				}
-				builder.append( TranslatorUtils.translate( " to <b>$1</b>", dateUtilsService.formatDate( uploadDateTo ) ) );
+				builder.append( translatorService.translate( " to <b>$1</b>", dateUtilsService.formatDate( uploadDateTo ) ) );
 			}
 
 			if ( criterias.getVotedUser() != null ) {
-				builder.append( TranslatorUtils.translate( ", voted member:  $1", StringUtilities.escapeHtml( criterias.getVotedUser().getName() ) ) );
+				builder.append( translatorService.translate( ", voted member:  $1", StringUtilities.escapeHtml( criterias.getVotedUser().getName() ) ) );
 			}
 
 			if ( criterias.getVotingCategory() != null ) {
-				builder.append( TranslatorUtils.translate( ", category:  $1", StringUtilities.escapeHtml( criterias.getVotingCategory().getName() ) ) );
+				builder.append( translatorService.translate( ", category:  $1", StringUtilities.escapeHtml( criterias.getVotingCategory().getName() ) ) );
 			}
 		}
 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
-			builder.append( TranslatorUtils.translate( " that have got at least $1 marks", criterias.getMinimalMarks() ) );
+			builder.append( translatorService.translate( " that have got at least $1 marks", criterias.getMinimalMarks() ) );
 
 			addVotingTimeText( criterias, builder );
 		}
 
 		if ( criterias.getMembershipType() != null ) {
-			builder.append( TranslatorUtils.translate( " uploaded by users with membership type ' $1 '", criterias.getMembershipType().getName() ) );
+			builder.append( translatorService.translate( " uploaded by users with membership type ' $1 '", criterias.getMembershipType().getName() ) );
 		}
 
 		builder.append( "<br />" );
-		builder.append( TranslatorUtils.translate( "Sorted by " ) );
+		builder.append( translatorService.translate( "Sorted by " ) );
 		switch( criterias.getPhotoSort()  ) {
 			case UPLOAD_TIME:
-				builder.append( TranslatorUtils.translate( "upload time descending" ) );
+				builder.append( translatorService.translate( "upload time descending" ) );
 				break;
 			case SUM_MARKS:
-				builder.append( TranslatorUtils.translate( "marks for period descending" ) );
+				builder.append( translatorService.translate( "marks for period descending" ) );
 				break;
 		}
 
@@ -132,21 +135,21 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		final Date votingDateTo = dateUtilsService.getFirstSecondOfDay( votingTimeTo );
 
 		if ( dateUtilsService.isNotEmptyTime( votingTimeFrom ) && votingDateFrom == votingDateTo ) {
-			builder.append( TranslatorUtils.translate( " voting at $1 ", dateUtilsService.formatDate( votingTimeFrom ) ) );
+			builder.append( translatorService.translate( " voting at $1 ", dateUtilsService.formatDate( votingTimeFrom ) ) );
 		} else {
 			if ( dateUtilsService.isNotEmptyTime( votingTimeFrom ) ) {
-				builder.append( TranslatorUtils.translate( ", voting time: <b>$1</b> ", dateUtilsService.formatDate( votingTimeFrom ) ) );
+				builder.append( translatorService.translate( ", voting time: <b>$1</b> ", dateUtilsService.formatDate( votingTimeFrom ) ) );
 			}
 
 			if ( dateUtilsService.isNotEmptyTime( votingTimeTo ) ) {
-				builder.append( TranslatorUtils.translate( " - <b>$1</b> ", dateUtilsService.formatDate( votingTimeTo ) ) );
+				builder.append( translatorService.translate( " - <b>$1</b> ", dateUtilsService.formatDate( votingTimeTo ) ) );
 			}
 		}
 	}
 
 	@Override
 	public String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias ) {
-		return TranslatorUtils.translate( "See all photos" );
+		return translatorService.translate( "See all photos" );
 	}
 
 	private boolean thereAreNoFilterCriterias( final PhotoListCriterias criterias ) {

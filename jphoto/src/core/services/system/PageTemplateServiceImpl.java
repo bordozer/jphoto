@@ -11,6 +11,7 @@ import core.services.entry.GenreService;
 import core.services.entry.PrivateMessageService;
 import core.services.photo.PhotoCommentService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
@@ -27,7 +28,6 @@ import org.apache.velocity.tools.ToolManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import java.io.StringWriter;
@@ -70,6 +70,9 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
 
 	@Override
@@ -99,7 +102,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "registerurl", urlUtilsService.getUserNewLink() );
 
 		model.put( "progectname", systemVarsService.getProjectName() );
-		model.put( "slogan", TranslatorUtils.translate( "Post your soul here" ) );
+		model.put( "slogan", translatorService.translate( "Post your soul here" ) );
 
 		final Map<MenuItem,List<MenuItem>> menuElements = menuService.getMenuElements( currentUser );
 		final int menuElementsQty = menuElements.size();
@@ -110,23 +113,23 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "loginFormAction", urlUtilsService.getUserLoginLink() );
 		model.put( "showLoginForm", pageModel.isShowLoginForm() );
-		model.put( "loginFormLogin", TranslatorUtils.translate( "Login" ) );
-		model.put( "rememberMeText", TranslatorUtils.translate( "Remember me" ) );
+		model.put( "loginFormLogin", translatorService.translate( "Login" ) );
+		model.put( "rememberMeText", translatorService.translate( "Remember me" ) );
 
-		model.put( "loginFormPassword", TranslatorUtils.translate( "Password" ) );
+		model.put( "loginFormPassword", translatorService.translate( "Password" ) );
 		model.put( "defaultDebugPassword", UsersSecurity.DEFAULT_DEBUG_PASSWORD );
 		model.put( "loginFormLoginControl", UserLoginModel.LOGIN_FORM_LOGIN_CONTROL );
 		model.put( "loginFormPasswordControl", UserLoginModel.LOGIN_FORM_PASSWORD_CONTROL );
 		model.put( "loginUserAutomaticallyControl", UserLoginModel.LOGIN_FORM_LOGIN_USER_AUTOMATICALLY_CONTROL );
 
-		model.put( "logoutText", TranslatorUtils.translate( "Logout" ) );
+		model.put( "logoutText", translatorService.translate( "Logout" ) );
 
 		model.put( "loggedUserId", currentUser.getId() );
 		model.put( "loggedUserName", StringUtilities.escapeHtml( currentUser.getName() ) );
 		model.put( "loggedUserCardUrl", urlUtilsService.getUserCardLink( currentUser.getId() ) );
-		model.put( "loggedUserCardUrlTitle", TranslatorUtils.translate( "Your card" ) );
+		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card" ) );
 
-		model.put( "uploadPhotoText", TranslatorUtils.translate( "Upload photo" ) );
+		model.put( "uploadPhotoText", translatorService.translate( "Upload photo" ) );
 
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {
@@ -138,7 +141,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		if ( unreadCommentsQty > 0 ) {
 			unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
 				, urlUtilsService.getUnreadCommentsToUserList( currentUser.getId() )
-				, TranslatorUtils.translate( "You have $1 new comment(s)", unreadCommentsQty )
+				, translatorService.translate( "You have $1 new comment(s)", unreadCommentsQty )
 				, urlUtilsService.getSiteImagesPath()
 				, unreadCommentsQty
 			);
@@ -186,7 +189,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 				if ( messagesCount > 0 ) {
 					final NewPrivateMessage newPrivateMessage = new NewPrivateMessage( messageType, messagesCount );
 					newPrivateMessage.setLink( urlUtilsService.getPrivateMessagesList( currentUser.getId(), messageType ) );
-					newPrivateMessage.setHint( TranslatorUtils.translate( "$1: +$2", messageType.getName(), String.valueOf( messagesCount ) ) );
+					newPrivateMessage.setHint( translatorService.translate( "$1: +$2", messageType.getName(), String.valueOf( messagesCount ) ) );
 
 					privateMessages.add( newPrivateMessage );
 				}

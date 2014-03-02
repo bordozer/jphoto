@@ -31,6 +31,7 @@ import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
@@ -44,7 +45,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.*;
-import utils.TranslatorUtils;
 
 import java.io.File;
 import java.util.*;
@@ -125,6 +125,9 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean save( final Photo entry ) {
@@ -580,7 +583,7 @@ public class PhotoServiceImpl implements PhotoService {
 					dateInterval = areDatesEquals ? dateFrom : String.format( "%s - %s", dateFrom, dateTo );
 				}
 
-				final String photoRatingPositionDescription = TranslatorUtils.translate( "Photo's rating position on $1", dateInterval );
+				final String photoRatingPositionDescription = translatorService.translate( "Photo's rating position on $1", dateInterval );
 				photoInfo.setPhotoRatingPositionDescription( photoRatingPositionDescription );
 			}
 		}

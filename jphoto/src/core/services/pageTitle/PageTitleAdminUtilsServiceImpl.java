@@ -7,10 +7,10 @@ import admin.services.services.UpgradeState;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
+import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.TranslatorUtils;
 
 public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsService {
 	
@@ -19,6 +19,9 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 	
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
+	
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public PageTitleData getJobListData( final JobListTab jobListTab ) {
@@ -45,7 +48,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), savedJob.getName(), TranslatorUtils.translate( "Edit" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), savedJob.getName(), translatorService.translate( "Edit" ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -55,14 +58,14 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), TranslatorUtils.translate( "new" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), translatorService.translate( "new" ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getAdminConfigurationNew() {
-		final String tran = TranslatorUtils.translate( "New" );
+		final String tran = translatorService.translate( "New" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSystemConfigurationListLink(), tran );
@@ -72,12 +75,12 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminConfigurationInfoData( final SystemConfiguration systemConfiguration ) {
-		final String tran = TranslatorUtils.translate( "Configuration" );
+		final String tran = translatorService.translate( "Configuration" );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, systemConfiguration.getName()
-			, systemConfiguration.isDefaultConfiguration() ? TranslatorUtils.translate( " - default" ) : ""
-			, systemConfiguration.isActiveConfiguration() ? TranslatorUtils.translate( " - active" ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default" ) : ""
+			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active" ) : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), systemConfiguration.getName() );
@@ -88,13 +91,13 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminConfigurationInfoTbData( final SystemConfiguration systemConfiguration, final String configTabName ) {
-		final String tran = TranslatorUtils.translate( "Tabs" );
+		final String tran = translatorService.translate( "Tabs" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran, configTabName );
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? TranslatorUtils.translate( " - default" ) : ""
-			, systemConfiguration.isActiveConfiguration() ? TranslatorUtils.translate( " - active" ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default" ) : ""
+			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active" ) : ""
 		);
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSystemConfigurationListLink(), sysConfigName, configTabName );
@@ -104,7 +107,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminSystemConfigurationListData() {
-		final String tran = TranslatorUtils.translate( "System configuration" );
+		final String tran = translatorService.translate( "System configuration" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), tran );
@@ -114,13 +117,13 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminConfigurationEditTabData( final int systemConfigurationId, final SystemConfiguration systemConfiguration, final ConfigurationTab configTab ) {
-		final String configuration = TranslatorUtils.translate( "Configuration" );
-		final String edit = TranslatorUtils.translate( "Edit" );
+		final String configuration = translatorService.translate( "Configuration" );
+		final String edit = translatorService.translate( "Edit" );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? TranslatorUtils.translate( " - default" ) : ""
-			, systemConfiguration.isActiveConfiguration() ? TranslatorUtils.translate( " - active" ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default" ) : ""
+			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active" ) : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), configuration, edit );
@@ -131,13 +134,13 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminConfigurationEditData( final SystemConfiguration systemConfiguration ) {
-		final String configuration = TranslatorUtils.translate( "Configuration" );
-		final String edit = TranslatorUtils.translate( "Edit" );
+		final String configuration = translatorService.translate( "Configuration" );
+		final String edit = translatorService.translate( "Edit" );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? TranslatorUtils.translate( " - default" ) : ""
-			, systemConfiguration.isActiveConfiguration() ? TranslatorUtils.translate( " - active" ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default" ) : ""
+			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active" ) : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), configuration, edit );
@@ -161,14 +164,14 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated, nerd );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), nerd, TranslatorUtils.translate( "Template" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), nerd, translatorService.translate( "Template" ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getAdminSchedulerTaskListData() {
-		final String nerd = TranslatorUtils.translate( "Scheduler tasks" );
+		final String nerd = translatorService.translate( "Scheduler tasks" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -178,8 +181,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminSchedulerNewData() {
-		final String scheduler = TranslatorUtils.translate( "Scheduler tasks" );
-		final String aNew = TranslatorUtils.translate( "New" );
+		final String scheduler = translatorService.translate( "Scheduler tasks" );
+		final String aNew = translatorService.translate( "New" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), scheduler, aNew );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSchedulerTaskListLink(), aNew );
@@ -189,8 +192,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAdminSchedulerEditData( final String scheduledTaskName ) {
-		final String scheduler = TranslatorUtils.translate( "Scheduler tasks" );
-		final String edit = TranslatorUtils.translate( "Edit" );
+		final String scheduler = translatorService.translate( "Scheduler tasks" );
+		final String edit = translatorService.translate( "Edit" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), scheduledTaskName, scheduler );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSchedulerTaskListLink(), scheduledTaskName, edit );
@@ -200,7 +203,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getVotingCategoryList() {
-		final String nerd = TranslatorUtils.translate( "Voting categories" );
+		final String nerd = translatorService.translate( "Voting categories" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -210,8 +213,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getVotingCategoryNewData() {
-		final String nerd = TranslatorUtils.translate( "Voting categories" );
-		final String aNew = TranslatorUtils.translate( "New" );
+		final String nerd = translatorService.translate( "Voting categories" );
+		final String aNew = translatorService.translate( "New" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd, aNew );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminVotingCategoriesRootLink(), aNew );
@@ -221,7 +224,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getVotingCategoryEditData( final PhotoVotingCategory photoVotingCategory ) {
-		final String nerd = TranslatorUtils.translate( "Voting categories" );
+		final String nerd = translatorService.translate( "Voting categories" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd, photoVotingCategory.getName() );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminVotingCategoriesRootLink(), photoVotingCategory.getName() );
@@ -231,16 +234,16 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public String getAdminTranslatedRoot() {
-		return TranslatorUtils.translate( "Admin" );
+		return translatorService.translate( "Admin" );
 	}
 
 	private String getJobsRootTranslated() {
-		return TranslatorUtils.translate( "Jobs" );
+		return translatorService.translate( "Jobs" );
 	}
 
 	@Override
 	public PageTitleData setActiveConfigurationData() {
-		final String nerd = TranslatorUtils.translate( "Set active configuration" );
+		final String nerd = translatorService.translate( "Set active configuration" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSystemConfigurationListLink(), nerd );
@@ -250,7 +253,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getUpgradeTasksListData() {
-		final String nerd = TranslatorUtils.translate( "Upgrade tasks" );
+		final String nerd = translatorService.translate( "Upgrade tasks" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminUpgradeLink(), nerd );
@@ -260,9 +263,9 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getUpgradeData( final UpgradeState upgradeState, final int doneUpgradeTasks, final int totalUpgradeTasks, final int errors ) {
-		final String header = TranslatorUtils.translate( "Upgrade tasks" );
+		final String header = translatorService.translate( "Upgrade tasks" );
 
-		final String nerd = TranslatorUtils.translateWithParameters( "Upgrade tasks - $1 ( done $2 of $3, errors: $4 )"
+		final String nerd = translatorService.translateWithParameters( "Upgrade tasks - $1 ( done $2 of $3, errors: $4 )"
 			, upgradeState.getNameTranslated(), String.valueOf( doneUpgradeTasks ), String.valueOf( totalUpgradeTasks ), String.valueOf( errors ) );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), header );
@@ -273,7 +276,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getAnonymousDaysData() {
-		final String nerd = TranslatorUtils.translate( "Anonymous Posting Days" );
+		final String nerd = translatorService.translate( "Anonymous Posting Days" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );

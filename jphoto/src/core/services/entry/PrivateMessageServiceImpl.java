@@ -8,13 +8,13 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
 import core.services.notification.NotificationService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import java.util.List;
@@ -32,6 +32,9 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 	@Autowired
 	private NotificationService notificationService;
+	
+	@Autowired
+	private TranslatorService translatorService;
 
 	private final LogHelper log = new LogHelper( PrivateMessageServiceImpl.class );
 
@@ -90,32 +93,32 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	public AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO ) {
 
 		if ( !UserUtils.isCurrentUserLoggedUser() ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "You are not logged in" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "You are not logged in" ) );
 		}
 
 		final int fromUserId = messageDTO.getFromUserId();
 		final User fromUser = userService.load( fromUserId );
 		if ( fromUser == null ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Member FROM not found" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found" ) );
 		}
 
 		if ( !UserUtils.isUserEqualsToCurrentUser( fromUser ) ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?" ) );
 		}
 
 		final int toUserId = messageDTO.getToUserId();
 		final User toUser = userService.load( toUserId );
 		if ( toUser == null ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Member you are trying to send message not found" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Member you are trying to send message not found" ) );
 		}
 
 		if ( UserUtils.isUsersEqual( fromUser, toUser ) ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "You can not send message to yourself" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "You can not send message to yourself" ) );
 		}
 
 		final String privateMessageText = messageDTO.getPrivateMessageText();
 		if ( StringUtils.isEmpty( privateMessageText ) ) {
-			return AjaxResultDTO.failResult( TranslatorUtils.translate( "Message text should not be empty" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Message text should not be empty" ) );
 		}
 
 		final PrivateMessage privateMessageOut = new PrivateMessage();
@@ -131,7 +134,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		resultDTO.setSuccessful( isSuccessfulOut );
 
 		if ( !isSuccessfulOut ) {
-			resultDTO.setMessage( TranslatorUtils.translate( "Error saving OUT message to DB" ) );
+			resultDTO.setMessage( translatorService.translate( "Error saving OUT message to DB" ) );
 
 			return resultDTO;
 		}
@@ -145,7 +148,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		resultDTO.setSuccessful( isSuccessfulIn );
 
 		if ( !isSuccessfulIn ) {
-			resultDTO.setMessage( TranslatorUtils.translate( "Error saving IN message to DB" ) );
+			resultDTO.setMessage( translatorService.translate( "Error saving IN message to DB" ) );
 			privateMessageDao.delete( privateMessageOut.getId() );
 		}
 

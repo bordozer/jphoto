@@ -6,13 +6,13 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import elements.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -34,6 +34,9 @@ public class MenuServiceImpl implements MenuService {
 
 	@Autowired
 	private GenreService genreService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public Map<MenuItem, List<MenuItem>> getMenuElements( final User user ) {
@@ -97,7 +100,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( photosMonthBest() );
 		menuItems.addAll( bestPhotosByMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
-		final MenuItem menuItem = new MenuItem( TranslatorUtils.translate( "The best photos" ), bestPhotos.getLink() );
+		final MenuItem menuItem = new MenuItem( translatorService.translate( "The best photos" ), bestPhotos.getLink() );
 
 		menus.put( menuItem, menuItems );
 	}
@@ -111,11 +114,11 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.USERS_URL ) );
 		menuItems.add( getActivityStreamMenu() );
 
-		menus.put( new MenuItem( TranslatorUtils.translate( "Members" ), menuItem.getLink() ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( "Members" ), menuItem.getLink() ), menuItems );
 	}
 
 	private MenuItem getActivityStreamMenu() {
-		final String caption = TranslatorUtils.translate( "Activity Stream" );
+		final String caption = translatorService.translate( "Activity Stream" );
 		final String link = urlUtilsService.getActivityStreamUrl();
 		return new MenuItem( caption, link );
 	}
@@ -136,7 +139,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userPhotoAlbumsMenu( user ) );
 			menuItems.add( userTechMenu( user ) );
 
-			final String caption = TranslatorUtils.translate( "My club" );
+			final String caption = translatorService.translate( "My club" );
 			final String link = userCardMenu.getLink();
 			menuItem = new MenuItem( caption, link );
 		} else {
@@ -158,7 +161,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( userFriendsMenu( user ) );
 			menuItems.add( userBlackListMenu( user ) );
 
-			final MenuItem menuItem = new MenuItem( TranslatorUtils.translate( "My bookmarks" ), favoritesMenu.getLink() );
+			final MenuItem menuItem = new MenuItem( translatorService.translate( "My bookmarks" ), favoritesMenu.getLink() );
 			menus.put( menuItem, menuItems );
 		}
 	}
@@ -184,37 +187,37 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem getCommentsToMeMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Comments to me" );
+		final String caption = translatorService.translate( "Comments to me" );
 		final String link = urlUtilsService.getCommentsToUserList( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getMyCommentsMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My comments" );
+		final String caption = translatorService.translate( "My comments" );
 		final String link = urlUtilsService.getUserCommentsList( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getPrivateMessagesMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Private messages" );
+		final String caption = translatorService.translate( "Private messages" );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getActivityNotificationMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( PrivateMessageType.ACTIVITY_NOTIFICATIONS.getNameTranslated() );
+		final String caption = translatorService.translate( PrivateMessageType.ACTIVITY_NOTIFICATIONS.getNameTranslated() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ACTIVITY_NOTIFICATIONS );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getSystemNotificationMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( PrivateMessageType.SYSTEM_NOTIFICATIONS.getNameTranslated() );
+		final String caption = translatorService.translate( PrivateMessageType.SYSTEM_NOTIFICATIONS.getNameTranslated() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.SYSTEM_NOTIFICATIONS );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getAdminNotificationMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( PrivateMessageType.ADMIN_NOTIFICATIONS.getNameTranslated() );
+		final String caption = translatorService.translate( PrivateMessageType.ADMIN_NOTIFICATIONS.getNameTranslated() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ADMIN_NOTIFICATIONS );
 		return new MenuItem( caption, link );
 	}
@@ -271,169 +274,169 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipBestMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = TranslatorUtils.translate( "Best of $1", StringUtilities.toUpperCaseFirst( membershipType.getNames() ) );
+		final String caption = translatorService.translate( "Best of $1", StringUtilities.toUpperCaseFirst( membershipType.getNames() ) );
 		final String link = urlUtilsService.getPhotosByMembershipBest( membershipType, url );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem genresMenu() {
-		final String caption = TranslatorUtils.translate( "Genres" );
+		final String caption = translatorService.translate( "Genres" );
 		final String link = urlUtilsService.getAdminGenreListLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem votingCategoriesMenu() {
-		final String caption = TranslatorUtils.translate( "Voting Categories" );
+		final String caption = translatorService.translate( "Voting Categories" );
 		final String link = urlUtilsService.getAdminVotingCategoriesLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem jobsMenu() {
-		final String caption = TranslatorUtils.translate( "Jobs" );
+		final String caption = translatorService.translate( "Jobs" );
 		final String link = urlUtilsService.getAdminJobsLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem schedulerMenu() {
-		final String caption = TranslatorUtils.translate( "Scheduler" );
+		final String caption = translatorService.translate( "Scheduler" );
 		final String link = urlUtilsService.getAdminSchedulerTaskListLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem upgradeMenu() {
-		final String caption = TranslatorUtils.translate( "DB upgrade" );
+		final String caption = translatorService.translate( "DB upgrade" );
 		final String link = urlUtilsService.getAdminUpgradeLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem anonymousDaysMenu() {
-		final String caption = TranslatorUtils.translate( "Anonymous Days" );
+		final String caption = translatorService.translate( "Anonymous Days" );
 		final String link = urlUtilsService.getAdminAnonymousDaysLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem configurationMenu() {
-		final String caption = TranslatorUtils.translate( "Configuration" );
+		final String caption = translatorService.translate( "Configuration" );
 		final String link = urlUtilsService.getAdminSystemConfigurationListLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem uploadPhotoMenu() {
-		final String caption = TranslatorUtils.translate( "Upload photo" );
+		final String caption = translatorService.translate( "Upload photo" );
 		final String link = urlUtilsService.getPhotoNewLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userCardMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Card" );
+		final String caption = translatorService.translate( "My Card" );
 		final String link = urlUtilsService.getUserCardLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userPhotosMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Photos" );
+		final String caption = translatorService.translate( "My Photos" );
 		final String link = urlUtilsService.getPhotosByUserLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userDataMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Profile settings" );
+		final String caption = translatorService.translate( "Profile settings" );
 		final String link = urlUtilsService.getUserEditLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem changePasswordMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Change password" );
+		final String caption = translatorService.translate( "Change password" );
 		final String link = urlUtilsService.getChangeUserPasswordLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userAvatarMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Avatar" );
+		final String caption = translatorService.translate( "My Avatar" );
 		final String link = urlUtilsService.getEditUserAvatarLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userTeamMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Team" );
+		final String caption = translatorService.translate( "My Team" );
 		final String link = urlUtilsService.getUserTeamMembersLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userPhotoAlbumsMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Albums" );
+		final String caption = translatorService.translate( "My Albums" );
 		final String link = urlUtilsService.getUserPhotoAlbumListLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userTechMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "My Tech" );
+		final String caption = translatorService.translate( "My Tech" );
 		final String link = urlUtilsService.getUserTechLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userNotificationsControlMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Notifications Control" );
+		final String caption = translatorService.translate( "Notifications Control" );
 		final String link = urlUtilsService.getUserNotificationsMenu( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFavoritePhotosMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Favorite photos" );
+		final String caption = translatorService.translate( "Favorite photos" );
 		final String link = urlUtilsService.getUserFavoritePhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFavoriteMembersMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Favorite Members" );
+		final String caption = translatorService.translate( "Favorite Members" );
 		final String link = urlUtilsService.getUserFavoriteMembersLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userBlackListMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Black List" );
+		final String caption = translatorService.translate( "Black List" );
 		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userBookmarkedPhotosMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Bookmarked photos" );
+		final String caption = translatorService.translate( "Bookmarked photos" );
 		final String link = urlUtilsService.getUserBookmarkedPhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getsubscriptionOnNewCommentsMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "On new comments" );
+		final String caption = translatorService.translate( "On new comments" );
 		final String link = urlUtilsService.getPhotosWithSubscribeOnNewCommentsLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getSubscriptionOnNewPhotosMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "On new photos" );
+		final String caption = translatorService.translate( "On new photos" );
 		final String link = urlUtilsService.getUsersNewPhotosNotificationMenuLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFriendsMenu( final User user ) {
-		final String caption = TranslatorUtils.translate( "Friends" );
+		final String caption = translatorService.translate( "Friends" );
 		final String link = urlUtilsService.getUserFavoriteFriendsLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem allUsersMenu() {
-		final String caption = TranslatorUtils.translate( "All Members" );
+		final String caption = translatorService.translate( "All Members" );
 		final String link = urlUtilsService.getAllUsersLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem allPhotosMenu() {
-		final String caption = TranslatorUtils.translate( "All photos" );
+		final String caption = translatorService.translate( "All photos" );
 		final String link = urlUtilsService.getAllPhotosLink();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem todayPhotos() {
-		final String caption = TranslatorUtils.translate( "Today's photos" );
+		final String caption = translatorService.translate( "Today's photos" );
 
 		final Date currentDate = dateUtilsService.getCurrentDate();
 		final String link = urlUtilsService.getPhotosUploadedInPeriodUrl( currentDate, currentDate );
@@ -442,7 +445,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem yesterdayPhotos() {
-		final String caption = TranslatorUtils.translate( "Yesterday's photos" );
+		final String caption = translatorService.translate( "Yesterday's photos" );
 
 		final Date yesterday = dateUtilsService.getDatesOffsetFromCurrentDate( -1 );
 		final String link = urlUtilsService.getPhotosUploadedInPeriodUrl( yesterday, yesterday );
@@ -451,7 +454,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem thisWeekPhotos() {
-		final String caption = TranslatorUtils.translate( "This week's photos" );
+		final String caption = translatorService.translate( "This week's photos" );
 
 		final Date firstSecondOfLastMonday = dateUtilsService.getFirstSecondOfLastMonday();
 		final Date lastSecondOfNextSunday = dateUtilsService.getLastSecondOfNextSunday();
@@ -461,7 +464,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem thisMonthPhotos() {
-		final String caption = TranslatorUtils.translate( "This month's photos" );
+		final String caption = translatorService.translate( "This month's photos" );
 
 		final Date firstSecondOfMonth = dateUtilsService.getFirstSecondOfMonth();
 		final Date lastSecondOfMonth = dateUtilsService.getLastSecondOfMonth();
@@ -471,19 +474,19 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem photosAbsoluteBest() {
-		final String caption = TranslatorUtils.translate( "Absolute best" );
+		final String caption = translatorService.translate( "Absolute best" );
 		final String link = urlUtilsService.getPhotosAbsoluteBestURL();
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem photosTodayBest() {
-		final String caption = TranslatorUtils.translate( "Best today's photos" );
+		final String caption = translatorService.translate( "Best today's photos" );
 		final String link = urlUtilsService.getPhotosBestOnDateUrl( dateUtilsService.getCurrentDate() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem photosYesterdayBest() {
-		final String caption = TranslatorUtils.translate( "Best yesterday's photos" );
+		final String caption = translatorService.translate( "Best yesterday's photos" );
 		final String link = urlUtilsService.getPhotosBestOnDateUrl( dateUtilsService.getDatesOffsetFromCurrentDate( -1 ) );
 		return new MenuItem( caption, link );
 	}
@@ -491,13 +494,13 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem photosPeriodBest( final int days ) {
 		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
 		final Date dateTo = dateUtilsService.getCurrentDate();
-		final String caption = TranslatorUtils.translate( "Best for $1 days", String.valueOf( days ) );
+		final String caption = translatorService.translate( "Best for $1 days", String.valueOf( days ) );
 		final String link = urlUtilsService.getPhotosBestInPeriodUrl( dateFrom, dateTo );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem photosWeekBest() {
-		final String caption = TranslatorUtils.translate( "Best week's photos" );
+		final String caption = translatorService.translate( "Best week's photos" );
 
 		final Date firstSecondOfLastMonday = dateUtilsService.getFirstSecondOfLastMonday();
 		final Date lastSecondOfNextSunday = dateUtilsService.getLastSecondOfNextSunday();
@@ -507,7 +510,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem photosMonthBest() {
-		final String caption = TranslatorUtils.translate( "Best month's photos" );
+		final String caption = translatorService.translate( "Best month's photos" );
 
 		final Date firstSecondOfMonth = dateUtilsService.getFirstSecondOfMonth();
 		final Date lastSecondOfMonth = dateUtilsService.getLastSecondOfMonth();
@@ -517,7 +520,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem registerMenu() {
-		final String caption = TranslatorUtils.translate( "Register" );
+		final String caption = translatorService.translate( "Register" );
 		final String link = urlUtilsService.getUserNewLink();
 		return new MenuItem( caption, link );
 	}

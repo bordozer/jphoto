@@ -6,6 +6,7 @@ import core.exceptions.UserRequestSecurityException;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
 import core.services.dao.UsersSecurityDao;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
 import org.apache.commons.lang.StringUtils;
@@ -13,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import utils.EditDataValidationUtils;
 import utils.FormatUtils;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import javax.servlet.http.Cookie;
@@ -35,6 +35,9 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 
 	@Autowired
 	private NetworkUtils networkUtils;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean isUserPasswordCorrect( final User user, final String password ) {
@@ -128,12 +131,12 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 	public void validatePasswordCreation( final String password, final String confirmPassword, final Errors errors ) {
 
 		if ( StringUtils.isEmpty( password ) ) {
-			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Password" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Password" ) ) ) );
 			return;
 		}
 
 		if ( password.length() < UserEditDataModel.MIN_PASSWORD_LENGTH || password.length() > UserEditDataModel.MAX_PASSWORD_LENGTH ) {
-			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, TranslatorUtils.translateWithParameters( String.format( "%s must have length at least $1 characters and maximum of $2."
+			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, translatorService.translateWithParameters( String.format( "%s must have length at least $1 characters and maximum of $2."
 				, FormatUtils.getFormattedFieldName( "Password" ) ), String.valueOf( UserEditDataModel.MIN_PASSWORD_LENGTH ), String.valueOf( UserEditDataModel.MAX_PASSWORD_LENGTH ) )  );
 			return;
 		}
@@ -142,7 +145,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		final Matcher matcher = pattern.matcher( password );
 		if ( ! matcher.matches() ) {
 			final StringBuilder builder = new StringBuilder();
-			builder.append( TranslatorUtils.translate( "$1 is too simple!", FormatUtils.getFormattedFieldName( "Password" ) ) );
+			builder.append( translatorService.translate( "$1 is too simple!", FormatUtils.getFormattedFieldName( "Password" ) ) );
 			builder.append( EditDataValidationUtils.HINT_LINE_BREAK );
 			builder.append( EditDataValidationUtils.UserRequirement.getPasswordRequirement( false ) );
 
@@ -151,13 +154,13 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		}
 
 		if ( StringUtils.isEmpty( confirmPassword ) ) {
-			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s should not be empty."
+			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty."
 				, FormatUtils.getFormattedFieldName( "Confirm password" ) ) ) );
 			return;
 		}
 
 		if ( ! password.equals( confirmPassword )  ) {
-			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL, TranslatorUtils.translate( String.format( "%s are not equal."
+			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL, translatorService.translate( String.format( "%s are not equal."
 				, FormatUtils.getFormattedFieldName( "Passwords" ) ) ) );
 		}
 	}

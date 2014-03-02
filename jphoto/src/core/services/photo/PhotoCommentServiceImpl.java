@@ -17,12 +17,12 @@ import core.services.menu.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 import java.util.Date;
@@ -71,6 +71,9 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean save( final PhotoComment entry ) {
@@ -165,7 +168,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
 			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( TranslatorUtils.translate( "You do not have permission to delete this comment" ) );
+			commentDTO.setErrorMessage( translatorService.translate( "You do not have permission to delete this comment" ) );
 
 			return commentDTO;
 		}
@@ -176,7 +179,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		if ( comment.isCommentDeleted() ) {
 			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( TranslatorUtils.translate( "The comment has already been deleted" ) );
+			commentDTO.setErrorMessage( translatorService.translate( "The comment has already been deleted" ) );
 
 			return commentDTO;
 		}
