@@ -2,16 +2,15 @@ package menuItems.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
+import core.general.menus.AbstractEntryMenuItemComplaintCommand;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.menus.comment.complain.CommentMenuItemComplaintCustom;
 import core.general.menus.comment.complain.CommentMenuItemComplaintSpam;
 import core.general.menus.comment.complain.CommentMenuItemComplaintSwordWords;
-import core.general.menus.AbstractEntryMenuItemComplaintCommand;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.security.ServicesImpl;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.junit.Test;
 
@@ -54,7 +53,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 		final AbstractEntryMenuItemCommand command = menuItem.getMenuItemCommand();
 
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
-		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, expected, command.getMenuText() );
+		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, translated( expected ), command.getMenuText() );
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS
 			, command.getMenuCommand()
 			, String.format( "%s( %d, %d, %d, %d ); return false;", AbstractEntryMenuItemComplaintCommand.COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), testData.getComment().getId(), accessor.getId(), complaintReasonType.getId() ) );

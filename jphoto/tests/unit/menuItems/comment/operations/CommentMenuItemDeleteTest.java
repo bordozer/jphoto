@@ -69,7 +69,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getCommentAuthor();
 		final Services services = getServices( user );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete comment" );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( "Delete comment" ) );
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class CommentMenuItemDeleteTest extends AbstractCommentMenuItemTest_ {
 		final User user = testData.getPhotoAuthor();
 		final Services services = getServices( user );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), "Delete comment (as photo author)" );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemDelete( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( "Delete comment (as photo author)" ) );
 	}
 
 	@Test

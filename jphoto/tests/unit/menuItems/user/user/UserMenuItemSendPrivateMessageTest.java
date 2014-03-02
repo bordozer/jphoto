@@ -72,7 +72,7 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 
 		final AbstractEntryMenuItemCommand command = new UserMenuItemSendPrivateMessage( user, accessor, services ).getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "Send private message to %s", user.getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "Send private message to %s", user.getNameEscaped() ) ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), user.getId(), user.getNameEscaped() ) );
 	}
 

@@ -119,7 +119,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 
 		final AbstractEntryMenuItemCommand command = new CommentMenuItemSendPrivateMessage( testData.getComment(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "Send private message to %s", testData.getCommentAuthor().getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "Send private message to %s", testData.getCommentAuthor().getNameEscaped() ) ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "sendPrivateMessage( %d, %d, '%s' );", accessor.getId(), testData.getCommentAuthor().getId(), testData.getCommentAuthor().getNameEscaped() ) );
 	}
 

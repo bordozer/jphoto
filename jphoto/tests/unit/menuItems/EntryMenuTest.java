@@ -5,7 +5,6 @@ import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuType;
 import core.general.photo.PhotoComment;
-import core.services.security.ServicesImpl;
 import org.junit.Test;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, getServices() );
 
-		assertEquals( WRONG_MENU_TITLE, "Comment: #912", entryMenu.getMenuTitle() );
+		assertEquals( WRONG_MENU_TITLE, String.format( "Comment: #%d", comment.getId() ), entryMenu.getMenuTitle() );
 	}
 
 	@Test
@@ -39,6 +38,6 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, getServices() );
 
-		assertEquals( WRONG_MENU_TITLE, "Comment: #912 ( deleted )", entryMenu.getMenuTitle() );
+		assertEquals( WRONG_MENU_TITLE, String.format( "Comment: #%d ( deleted )%s", comment.getId(), TRANSLATION_SIGN ), entryMenu.getMenuTitle() );
 	}
 }

@@ -8,7 +8,6 @@ import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.services.security.ServicesImpl;
 import org.junit.Before;
 import org.junit.Test;
 

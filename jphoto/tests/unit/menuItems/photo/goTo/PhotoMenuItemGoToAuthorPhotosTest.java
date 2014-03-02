@@ -25,7 +25,7 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 		final User photoAuthor = testData.getPhotoAuthor();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), String.format( "%s: all photos ( %d )", photoAuthor.getNameEscaped(), parameters.getPhotosQty() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: all photos ( %d )", photoAuthor.getNameEscaped(), parameters.getPhotosQty() ) ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotos( %d );", photoAuthor.getId() ) );
 

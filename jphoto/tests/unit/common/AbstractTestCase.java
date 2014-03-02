@@ -2,7 +2,6 @@ package common;
 
 import core.general.user.User;
 import core.services.security.ServicesImpl;
-import core.services.translator.TranslatorService;
 import core.services.translator.TranslatorServiceImpl;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
@@ -12,6 +11,8 @@ import mocks.SystemVarsServiceMock;
 import org.junit.Before;
 
 public class AbstractTestCase {
+
+	public static final String TRANSLATION_SIGN = "(t)";
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 
@@ -80,6 +81,10 @@ public class AbstractTestCase {
 		// entityLinkUtilsService <--
 	}
 
+	@Before
+	public void setup() {
+	}
+
 	protected ServicesImpl getServices() {
 		final ServicesImpl services = new ServicesImpl();
 		services.setTranslatorService( translatorService );
@@ -87,8 +92,8 @@ public class AbstractTestCase {
 		return services;
 	}
 
-	@Before
-	public void setup() {
+	public static String translated( final String nerd ) {
+		return String.format( "%s%s", nerd, TRANSLATION_SIGN );
 	}
 
 	public final static User SUPER_ADMIN_1 = new User() {

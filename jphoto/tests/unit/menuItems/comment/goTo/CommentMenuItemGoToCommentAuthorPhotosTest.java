@@ -32,7 +32,7 @@ public class CommentMenuItemGoToCommentAuthorPhotosTest extends AbstractCommentM
 		final CommentMenuItemGoToCommentAuthorPhotos menuEntry = getMenuEntry( new Parameters( testData.getAccessor(), photosQty ) );
 		final AbstractEntryMenuItemCommand menuItemCommand = menuEntry.getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), String.format( "%s: all photos ( %s )", testData.getCommentAuthor().getNameEscaped(), photosQty ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), translated( String.format( "%s: all photos ( %s )", testData.getCommentAuthor().getNameEscaped(), photosQty ) ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuCommand(), String.format( "goToMemberPhotos( %d );", testData.getCommentAuthor().getId() ) );
 	}
 

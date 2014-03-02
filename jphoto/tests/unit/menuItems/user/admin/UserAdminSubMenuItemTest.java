@@ -54,7 +54,7 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 		final AbstractEntryMenuItemCommand command = new UserAdminSubMenuItem( testData.getUser(), accessor, services ).getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_TEXT );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_TEXT ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), AbstractEntryMenuItem.ADMIN_SUB_MENU_ENTRY_COMMAND );
 	}
 }

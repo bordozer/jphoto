@@ -18,7 +18,7 @@ public class PhotoComplaintCopyrightMenuItemTest extends AbstractPhotoMenuItemTe
 
 		final PhotoComplaintCopyrightMenuItem menuItem = new PhotoComplaintCopyrightMenuItem( testData.getPhoto(), accessor, getServices( accessor ) );
 
-		assertEquals( menuItem.getMenuItemCommand().getMenuText(), "Complaint copyright" );
+		assertEquals( menuItem.getMenuItemCommand().getMenuText(), translated( "Complaint copyright" ) );
 	}
 
 	@Test

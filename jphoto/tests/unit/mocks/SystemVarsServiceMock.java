@@ -2,7 +2,6 @@ package mocks;
 
 import common.AbstractTestCase;
 import core.services.utils.SystemVarsService;
-import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
 
@@ -77,8 +76,8 @@ public class SystemVarsServiceMock implements SystemVarsService {
 
 	@Override
 	public String getTranslatedSign() {
-		return StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
-//		return "(t)"; //StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
+//		return StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
+		return AbstractTestCase.TRANSLATION_SIGN;
 	}
 
 	@Override
