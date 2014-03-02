@@ -1,6 +1,8 @@
 package common;
 
 import core.general.user.User;
+import core.services.translator.TranslatorService;
+import core.services.translator.TranslatorServiceImpl;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
@@ -13,6 +15,7 @@ public class AbstractTestCase {
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 
 	protected final DateUtilsServiceImpl dateUtilsService;
+	protected final TranslatorServiceImpl translatorService;
 	protected final SystemVarsService systemVarsServiceMock;
 	protected final PhotoCriteriasSqlServiceImpl photoCriteriasSqlService;
 	protected final UrlUtilsServiceImpl urlUtilsService;
@@ -24,6 +27,9 @@ public class AbstractTestCase {
 	public AbstractTestCase() {
 
 		systemVarsServiceMock = new SystemVarsServiceMock();
+
+		translatorService = new TranslatorServiceImpl();
+		translatorService.setSystemVarsService( systemVarsServiceMock );
 
 		baseSqlUtilsService = new BaseSqlUtilsServiceImpl();
 

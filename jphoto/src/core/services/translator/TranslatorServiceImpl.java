@@ -62,4 +62,8 @@ public class TranslatorServiceImpl implements TranslatorService {
 		final String translatedSign = systemVarsService.getTranslatedSign();
 		return String.format( "%s%s", nerd, StringUtils.isNotEmpty( translatedSign ) ? translatedSign : StringUtils.EMPTY );
 	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
+	}
 }

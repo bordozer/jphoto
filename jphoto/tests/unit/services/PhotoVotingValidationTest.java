@@ -30,7 +30,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		final Photo photo = new Photo();
 		photo.setId( 333 );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 
 		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( User.NOT_LOGGED_USER, photo ).isValidationFailed() );
 	}
@@ -50,7 +50,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.expectLastCall();
 		EasyMock.replay( userService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 
 		assertTrue( "User Can  Vote For His Own Photo", securityService.validateUserCanVoteForPhoto( photoAuthor, photo ).isValidationFailed() );
@@ -79,7 +79,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.expectLastCall();
 		EasyMock.replay( favoritesService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 
@@ -116,7 +116,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
@@ -159,7 +159,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
@@ -203,12 +203,20 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
 		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( candidateUser, photo ).isValidationFailed() );
+	}
+
+	private SecurityServiceImpl getSecurityService() {
+		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+
+		securityService.setTranslatorService( translatorService );
+
+		return securityService;
 	}
 }

@@ -35,7 +35,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User user = new User( 11 );
 		final User voter = User.NOT_LOGGED_USER;
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
@@ -49,7 +49,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User user = new User( 11 );
 		final User voter = new User( 11 ); // the same user ID
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
@@ -69,7 +69,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 
 		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
@@ -98,7 +98,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( userRankService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
@@ -133,7 +133,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( userRankService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
@@ -178,7 +178,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 		securityService.setPhotoService( photoService );
@@ -231,7 +231,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( favoritesService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 		securityService.setFavoritesService( favoritesService );
@@ -282,7 +282,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		EasyMock.expectLastCall();
 		EasyMock.replay( favoritesService );
 
-		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 		securityService.setFavoritesService( favoritesService );
@@ -301,5 +301,13 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		genre.setName( "Photo category name" );
 
 		return genre;
+	}
+
+	private SecurityServiceImpl getSecurityService() {
+		final SecurityServiceImpl securityService = new SecurityServiceImpl();
+
+		securityService.setTranslatorService( translatorService );
+
+		return securityService;
 	}
 }
