@@ -21,7 +21,7 @@ public class PhotoMenuItemEditCommandTest extends AbstractTestCase {
 		final Photo photo = new Photo();
 		photo.setId( 444 );
 
-		final PhotoMenuItemEditCommand command = new PhotoMenuItemEditCommand( photo, new ServicesImpl() );
+		final PhotoMenuItemEditCommand command = new PhotoMenuItemEditCommand( photo, getServices() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Edit photo" );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "editPhotoData( %d );", photo.getId() ) );
 	}

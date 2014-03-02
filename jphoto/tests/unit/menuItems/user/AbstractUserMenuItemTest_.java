@@ -22,11 +22,13 @@ public abstract class AbstractUserMenuItemTest_ extends AbstractTestCase {
 		testData = new UserMenuItemTestData();
 	}
 
+	@Override
 	protected ServicesImpl getServices() {
 		final ServicesImpl services = new ServicesImpl();
 
 		services.setUserService( getUserService() );
 		services.setSecurityService( getSecurityService() );
+		services.setTranslatorService( translatorService );
 
 		return services;
 	}

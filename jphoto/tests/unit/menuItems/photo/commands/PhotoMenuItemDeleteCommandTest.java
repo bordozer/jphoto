@@ -21,7 +21,7 @@ public class PhotoMenuItemDeleteCommandTest extends AbstractTestCase {
 		final Photo photo = new Photo();
 		photo.setId( 444 );
 
-		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, new ServicesImpl() );
+		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, getServices() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Delete photo" );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deletePhoto( %d ); return false;", photo.getId() ) );
 	}

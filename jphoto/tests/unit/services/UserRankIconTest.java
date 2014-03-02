@@ -291,6 +291,7 @@ public class UserRankIconTest extends AbstractTestCase {
 	private UserRankServiceImpl getUserRankService( final User user, final Genre genre, final int currentRankInGenre, final int userPhotosQtyInGenre ) {
 		final UserRankServiceImpl userRankService = new UserRankServiceImpl();
 
+		userRankService.setTranslatorService( translatorService );
 		userRankService.setUserRankDao( getUserRankDao( user, genre, currentRankInGenre ) );
 		userRankService.setConfigurationService( getConfigurationService() );
 		userRankService.setPhotoService( getPhotoService( genre, user, userPhotosQtyInGenre ) );

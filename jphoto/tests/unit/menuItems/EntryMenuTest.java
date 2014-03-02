@@ -24,7 +24,7 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final List<? extends AbstractEntryMenuItem> menuEntries = newArrayList();
 
-		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, new ServicesImpl() );
+		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, getServices() );
 
 		assertEquals( WRONG_MENU_TITLE, "Comment: #912", entryMenu.getMenuTitle() );
 	}
@@ -37,7 +37,7 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final List<? extends AbstractEntryMenuItem> menuEntries = newArrayList();
 
-		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, new ServicesImpl() );
+		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, getServices() );
 
 		assertEquals( WRONG_MENU_TITLE, "Comment: #912 ( deleted )", entryMenu.getMenuTitle() );
 	}

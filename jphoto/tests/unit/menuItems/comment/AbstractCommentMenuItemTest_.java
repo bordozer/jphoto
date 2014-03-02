@@ -31,6 +31,7 @@ public class AbstractCommentMenuItemTest_ extends AbstractTestCase {
 		services.setPhotoService( getPhotoService() );
 		services.setSecurityService( getSecurityService( accessor ) );
 		services.setUserService( getUserService() );
+		services.setTranslatorService( translatorService );
 
 		return services;
 	}

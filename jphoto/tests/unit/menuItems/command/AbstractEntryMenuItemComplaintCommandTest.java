@@ -62,7 +62,7 @@ public class AbstractEntryMenuItemComplaintCommandTest extends AbstractTestCase 
 		final User accessor = new User( 222 );
 		accessor.setName( "Just a User" );
 
-		final AbstractEntryMenuItemComplaintCommand menuItem = new AbstractEntryMenuItemComplaintCommand<T>( menuEntry, accessor, comment, complaintReasonType, new ServicesImpl() ) {
+		final AbstractEntryMenuItemComplaintCommand menuItem = new AbstractEntryMenuItemComplaintCommand<T>( menuEntry, accessor, comment, complaintReasonType, getServices() ) {
 
 			@Override
 			public String getMenuText() {

@@ -19,6 +19,7 @@ import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.userRankIcons.UserRankIconContainer;
 
@@ -54,7 +55,7 @@ public class UserRankServiceImpl implements UserRankService {
 	private ActivityStreamService activityStreamService;
 
 	@Autowired
-	private Services services;
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final User votingUser ) {
@@ -286,13 +287,13 @@ public class UserRankServiceImpl implements UserRankService {
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre, final int rankInGenre ) {
 		// current user rank in genre custom
-		return new UserRankIconContainer( user, genre, rankInGenre, services );
+		return new UserRankIconContainer( user, genre, rankInGenre, this, configurationService, translatorService );
 	}
 
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Photo photo ) {
 		// user rank in genre when photo was uploaded
-		return new UserRankIconContainer( user, photo, services );
+		return new UserRankIconContainer( user, photo, this, configurationService, genreService, translatorService );
 	}
 
 	private int getRankUpperPoints( final int base, final float coefficient, final int rank ) {
@@ -352,5 +353,9 @@ public class UserRankServiceImpl implements UserRankService {
 
 	public void setActivityStreamService( final ActivityStreamService activityStreamService ) {
 		this.activityStreamService = activityStreamService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }

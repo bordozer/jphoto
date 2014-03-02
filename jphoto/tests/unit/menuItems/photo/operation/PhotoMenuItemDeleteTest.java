@@ -33,7 +33,7 @@ public class PhotoMenuItemDeleteTest extends AbstractPhotoMenuItemTest_ {
 	@Test
 	public void photoAuthorCommandTest() {
 
-		final AbstractEntryMenuItemCommand command = new PhotoMenuItemDelete( testData.getPhoto(), null, new ServicesImpl() ).getMenuItemCommand();
+		final AbstractEntryMenuItemCommand command = new PhotoMenuItemDelete( testData.getPhoto(), null, getServices() ).getMenuItemCommand();
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), "Delete photo" );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deletePhoto( %d ); return false;", testData.getPhoto().getId() ) );

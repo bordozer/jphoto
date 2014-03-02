@@ -1,6 +1,7 @@
 package common;
 
 import core.general.user.User;
+import core.services.security.ServicesImpl;
 import core.services.translator.TranslatorService;
 import core.services.translator.TranslatorServiceImpl;
 import core.services.utils.*;
@@ -77,6 +78,13 @@ public class AbstractTestCase {
 		entityLinkUtilsService.setSystemVarsService( systemVarsServiceMock );
 		entityLinkUtilsService.setUrlUtilsService( urlUtilsService );
 		// entityLinkUtilsService <--
+	}
+
+	protected ServicesImpl getServices() {
+		final ServicesImpl services = new ServicesImpl();
+		services.setTranslatorService( translatorService );
+
+		return services;
 	}
 
 	@Before

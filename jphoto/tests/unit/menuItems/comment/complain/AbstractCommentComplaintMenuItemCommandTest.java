@@ -22,7 +22,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 	@Test
 	public void CommentMenuItemComplaintCustomTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = new ServicesImpl();
+		final Services services = getServices();
 
 		final CommentMenuItemComplaintCustom menuItem = new CommentMenuItemComplaintCustom( testData.getComment(), accessor, services );
 
@@ -32,7 +32,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 	@Test
 	public void CommentMenuItemComplaintSpamTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = new ServicesImpl();
+		final Services services = getServices();
 
 		final CommentMenuItemComplaintSpam menuItem = new CommentMenuItemComplaintSpam( testData.getComment(), accessor, services );
 
@@ -42,7 +42,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 	@Test
 	public void CommentMenuItemComplaintSwordWordsTest() {
 		final User accessor = testData.getAccessor();
-		final Services services = new ServicesImpl();
+		final Services services = getServices();
 
 		final CommentMenuItemComplaintSwordWords menuItem = new CommentMenuItemComplaintSwordWords( testData.getComment(), accessor, services );
 

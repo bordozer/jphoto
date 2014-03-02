@@ -41,6 +41,7 @@ public class PhotoMenuItemInfoTest extends AbstractPhotoMenuItemTest_ {
 		final ServicesImpl services = new ServicesImpl();
 
 		services.setUrlUtilsService( getUrlUtilsService() );
+		services.setTranslatorService( translatorService );
 
 		return services;
 	}
