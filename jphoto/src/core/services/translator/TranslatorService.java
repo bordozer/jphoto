@@ -2,6 +2,8 @@ package core.services.translator;
 
 public interface TranslatorService {
 
+	String BEAN_NAME = "translatorService";
+
 	String translate( final String nerd );
 
 	String translate( final String nerd, final String param );

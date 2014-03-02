@@ -3,6 +3,7 @@ package core.context;
 import core.exceptions.BaseRuntimeException;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.*;
 import org.springframework.context.ApplicationContext;
 
@@ -55,5 +56,9 @@ public class ApplicationContextHelper {
 
 	public static SecurityService getSecurityService() {
 		return getBean( SecurityService.BEAN_NAME );
+	}
+
+	public static TranslatorService getTranslatorService() {
+		return getBean( TranslatorService.BEAN_NAME );
 	}
 }
