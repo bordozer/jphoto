@@ -2,17 +2,18 @@ package core.general.menus.photo.commands;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.photo.Photo;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 public class PhotoMenuItemDeleteCommand extends AbstractEntryMenuItemCommand<Photo> {
 
-	public PhotoMenuItemDeleteCommand( final Photo menuEntry ) {
-		super( menuEntry );
+	public PhotoMenuItemDeleteCommand( final Photo menuEntry, Services services ) {
+		super( menuEntry, services );
 	}
 
 	@Override
 	public String getMenuText() {
-		return TranslatorUtils.translate( "Delete photo" );
+		return getTranslatorService().translate( "Delete photo" );
 	}
 
 	@Override

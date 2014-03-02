@@ -9,6 +9,7 @@ import core.services.dao.PrivateMessageDaoImpl;
 import core.services.entry.PrivateMessageService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -65,6 +66,9 @@ public class PrivateMessageListController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( MODEL_NAME )
 	public PrivateMessageListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
 
@@ -84,7 +88,7 @@ public class PrivateMessageListController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 
 		pagingModel.setItemsOnPage( ITEMS_ON_PAGE );

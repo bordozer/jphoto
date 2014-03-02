@@ -10,6 +10,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.pageTitle.PageTitleService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
@@ -58,6 +59,9 @@ public class PhotoActivityStreamController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( MODEL_NAME )
 	public PhotoActivityStreamModel prepareModel( final @PathVariable( "photoId" ) String _photoId ) {
 
@@ -70,7 +74,7 @@ public class PhotoActivityStreamController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 		pagingModel.setItemsOnPage( ActivityStreamController.ACTIVITY_STREAM_ITEMS_ON_PAGE );
 

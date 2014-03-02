@@ -4,9 +4,9 @@ import utils.TranslatorUtils;
 
 public enum UserMembershipType {
 
-	AUTHOR( 1, TranslatorUtils.translate( "author" ), TranslatorUtils.translate( "authors" ) )
-	, MODEL( 2, TranslatorUtils.translate( "model" ), TranslatorUtils.translate( "models" ) )
-	, MAKEUP_MASTER( 3, TranslatorUtils.translate( "makeup master" ), TranslatorUtils.translate( "makeup masters" ) )
+	AUTHOR( 1, "author", "authors" )
+	, MODEL( 2, "model", "models" )
+	, MAKEUP_MASTER( 3, "makeup master", "makeup masters" )
 	;
 	private final int id;
 	private final String name;
@@ -23,11 +23,11 @@ public enum UserMembershipType {
 	}
 
 	public String getName() {
-		return name;
+		return name; // TODO: translate
 	}
 
 	public String getNames() {
-		return names;
+		return names; // TODO: translate
 	}
 
 	public static UserMembershipType getById( String id ) {

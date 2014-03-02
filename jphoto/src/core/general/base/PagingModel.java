@@ -1,5 +1,7 @@
 package core.general.base;
 
+import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import elements.PageItem;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -21,7 +23,15 @@ public class PagingModel {
 	private int totalItems;
 	private int itemsOnPage;
 
+	private final Services services;
+
+	public PagingModel( final Services services ) {
+		this.services = services;
+	}
+
 	public List<PageItem> getPageItems() {
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final int shownPagesBunch = PAGE_SHOULDER * 2;
 		final int totalPages = getTotalPages();
 
@@ -59,7 +69,7 @@ public class PagingModel {
 
 		if ( firstBunchPageNumber > EXTREME_LEFT_PAGES_MIN_QTY + 1 ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( TranslatorUtils.translate( "Pages $1 - $2", EXTREME_LEFT_PAGES_MIN_QTY + 1, firstBunchPageNumber - 1 ) );
+			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", EXTREME_LEFT_PAGES_MIN_QTY + 1, firstBunchPageNumber - 1 ) );
 
 			pageItems.add( lastSeparator );
 		}
@@ -71,7 +81,7 @@ public class PagingModel {
 		int limit = totalPages - EXTREME_RIGHT_PAGES_MIN_QTY;
 		if ( lastBunchPageNumber < limit ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( TranslatorUtils.translate( "Pages $1 - $2", lastBunchPageNumber + 1, totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) );
+			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", lastBunchPageNumber + 1, totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) );
 
 			pageItems.add( lastSeparator );
 		}

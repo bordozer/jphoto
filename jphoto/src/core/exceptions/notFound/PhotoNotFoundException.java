@@ -5,7 +5,7 @@ import utils.TranslatorUtils;
 public class PhotoNotFoundException extends AbstractEntryNotFoundException {
 
 	public PhotoNotFoundException( final String _entryId ) {
-		super( _entryId, TranslatorUtils.translate( "Photo" ) );
+		super( _entryId, "Photo" ); // TODO: translate
 	}
 
 	public PhotoNotFoundException( final int photoId ) {

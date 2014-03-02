@@ -25,6 +25,7 @@ import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.Services;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -118,6 +119,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private Services services;
 
 	@Override
 	public void setUserAvatar( final UserCardModel model ) {
@@ -409,7 +413,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	private PagingModel getPagingModel() {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		pagingModel.setCurrentPage( 1 );
 		pagingModel.setItemsOnPage( getConfiguredUserCardPhotosInLine() );
 		return pagingModel;

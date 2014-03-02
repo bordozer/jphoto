@@ -34,7 +34,7 @@ public enum UserTeamMemberType {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static UserTeamMemberType getById( final int id ) {

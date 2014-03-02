@@ -19,14 +19,14 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<User> getMenuItemCommand() {
 
-		return new AbstractEntryMenuItemCommand<User>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry, services ) {
 
 			@Override
 			public String getMenuText() {
 				final int photoQtyByUser = getPhotoQtyByUser( getId() );
-				return TranslatorUtils.translate( "$1: all photos ( $2 )", menuEntry.getNameEscaped(), String.valueOf( photoQtyByUser ) );
+				return getTranslatorService().translate( "$1: all photos ( $2 )", menuEntry.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
 			@Override

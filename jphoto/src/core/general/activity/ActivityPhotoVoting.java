@@ -78,7 +78,7 @@ public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
 	@Override
 	public String getActivityDescription() {
 
-		return TranslatorUtils.translate( "voted for photo $1<br />$2"
+		return services.getTranslatorService().translate( "voted for photo $1<br />$2"
 			, services.getEntityLinkUtilsService().getPhotoCardLink( photo )
 			, votes
 		);

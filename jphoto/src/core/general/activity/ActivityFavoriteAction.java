@@ -56,7 +56,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getActivityDescription() {
-		return TranslatorUtils.translate( "added $1 to $2"
+		return services.getTranslatorService().translate( "added $1 to $2"
 			, getFavoriteEntry( favoriteEntryId, favoriteType )
 			, favoriteType.getNameTranslated()
 		);

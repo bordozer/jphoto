@@ -22,7 +22,7 @@ public enum UserBookedMembersType {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 
 	public static UserBookedMembersType getById( final int id ) {

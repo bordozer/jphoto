@@ -28,7 +28,7 @@ public enum PhotoGroupOperationType {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 
 	public static PhotoGroupOperationType getById( final int id ) {

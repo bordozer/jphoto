@@ -9,6 +9,7 @@ import core.services.entry.GroupOperationService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.UtilsService;
@@ -59,6 +60,9 @@ public class UserTeamMemberCardController {
 	@Autowired
 	private GroupOperationService groupOperationService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( MODEL_NAME )
 	public UserTeamMemberCardModel prepareModel() {
 		return new UserTeamMemberCardModel();
@@ -66,7 +70,7 @@ public class UserTeamMemberCardController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 
 		pagingModel.setItemsOnPage( utilsService.getPhotosOnPage( EnvironmentContext.getCurrentUser() ) );

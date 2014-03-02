@@ -9,6 +9,7 @@ import core.general.base.PagingModel;
 import core.general.user.User;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.user.UserService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class UserCardController {
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
 
+	@Autowired
+	private Services services;
+
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
 		binder.setValidator( userCardValidator );
@@ -55,7 +59,7 @@ public class UserCardController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 
 		PagingUtils.initPagingModel( pagingModel, request );
 		pagingModel.setItemsOnPage( ActivityStreamController.ACTIVITY_STREAM_ITEMS_ON_PAGE );

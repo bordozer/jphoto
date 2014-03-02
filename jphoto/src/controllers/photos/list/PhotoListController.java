@@ -23,6 +23,7 @@ import core.services.pageTitle.PageTitlePhotoUtilsService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -93,6 +94,9 @@ public class PhotoListController {
 	@Autowired
 	private FavoritesService favoritesService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
 		final PhotoListModel model = new PhotoListModel();
@@ -104,7 +108,7 @@ public class PhotoListController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 
 		pagingModel.setItemsOnPage( utilsService.getPhotosOnPage( EnvironmentContext.getCurrentUser() ) );

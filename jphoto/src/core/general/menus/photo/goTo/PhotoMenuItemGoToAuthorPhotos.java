@@ -23,11 +23,11 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoGoToAuthorPhotos
 
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, services ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "$1: all photos ( $2 )", photoAuthor.getNameEscaped(), String.valueOf( getPhotosQty() ) );
+				return getTranslatorService().translate( "$1: all photos ( $2 )", photoAuthor.getNameEscaped(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override

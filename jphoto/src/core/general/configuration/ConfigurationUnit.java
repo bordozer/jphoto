@@ -39,7 +39,7 @@ public enum ConfigurationUnit {
 	}
 
 	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( TranslatorUtils.translate( name ) );
+		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static ConfigurationUnit getById( final int id ) {

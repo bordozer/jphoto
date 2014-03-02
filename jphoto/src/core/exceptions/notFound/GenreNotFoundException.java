@@ -5,7 +5,7 @@ import utils.TranslatorUtils;
 public class GenreNotFoundException extends AbstractEntryNotFoundException {
 
 	public GenreNotFoundException( final String _entryId ) {
-		super( _entryId, TranslatorUtils.translate( "Photo category" ) );
+		super( _entryId, "Photo category" ); // TODO: translate
 	}
 
 	public GenreNotFoundException( final int genreId ) {

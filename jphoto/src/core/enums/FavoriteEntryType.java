@@ -49,15 +49,15 @@ public enum FavoriteEntryType implements Identifiable {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 
 	public String getAddText() {
-		return TranslatorUtils.translate( addText );
+		return addText; // TODO: translate
 	}
 
 	public String getRemoveText() {
-		return TranslatorUtils.translate( removeText );
+		return removeText; // TODO: translate
 	}
 
 	public String getAddIcon() {

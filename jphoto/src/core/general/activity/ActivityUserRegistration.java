@@ -39,7 +39,7 @@ public class ActivityUserRegistration extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getActivityDescription() {
-		return TranslatorUtils.translate( "registered" );
+		return services.getTranslatorService().translate( "registered" );
 	}
 
 	@Override

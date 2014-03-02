@@ -50,7 +50,7 @@ public class ActivityPhotoUpload extends AbstractActivityStreamEntry {
 	public String getActivityDescription() {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
-		return TranslatorUtils.translate( "uploaded photo $1"
+		return services.getTranslatorService().translate( "uploaded photo $1"
 			, entityLinkUtilsService.getPhotoCardLink( uploadedPhoto )
 		);
 	}

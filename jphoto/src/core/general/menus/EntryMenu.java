@@ -1,6 +1,7 @@
 package core.general.menus;
 
 import core.general.photo.PhotoComment;
+import core.services.security.Services;
 import utils.TranslatorUtils;
 
 import java.util.List;
@@ -11,11 +12,13 @@ public class EntryMenu {
 	private final EntryMenuType entryMenuType;
 
 	private final List<? extends AbstractEntryMenuItem> entryMenuItems;
+	private Services services;
 
-	public EntryMenu( final PopupMenuAssignable menuEntry, final EntryMenuType entryMenuType, final List<? extends AbstractEntryMenuItem> entryMenuItems ) {
+	public EntryMenu( final PopupMenuAssignable menuEntry, final EntryMenuType entryMenuType, final List<? extends AbstractEntryMenuItem> entryMenuItems, final Services services ) {
 		this.menuEntry = menuEntry;
 		this.entryMenuType = entryMenuType;
 		this.entryMenuItems = entryMenuItems;
+		this.services = services;
 	}
 
 	public String getMenuTitle() {
@@ -27,7 +30,7 @@ public class EntryMenu {
 		}*/
 
 		if ( menuEntry instanceof PhotoComment ) {
-			builder.append( ( ( PhotoComment ) menuEntry ).isCommentDeleted() ? TranslatorUtils.translate( " ( deleted )" ) : "" );
+			builder.append( ( ( PhotoComment ) menuEntry ).isCommentDeleted() ? services.getTranslatorService().translate( " ( deleted )" ) : "" );
 		}
 
 		return builder.toString();

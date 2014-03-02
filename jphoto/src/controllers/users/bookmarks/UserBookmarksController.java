@@ -11,6 +11,7 @@ import core.services.entry.GroupOperationService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
@@ -67,6 +68,9 @@ public class UserBookmarksController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
 		final PhotoListModel model = new PhotoListModel();
@@ -78,7 +82,7 @@ public class UserBookmarksController {
 
 	@ModelAttribute
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 
 		pagingModel.setItemsOnPage( utilsService.getPhotosOnPage( EnvironmentContext.getCurrentUser() ) );

@@ -12,6 +12,7 @@ import core.services.menu.EntryMenuService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.system.ConfigurationService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -86,6 +87,9 @@ public class UserListController {
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( "userListModel" )
 	public UserListModel prepareModel() {
 		return new UserListModel();
@@ -101,7 +105,7 @@ public class UserListController {
 
 	@ModelAttribute
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 		pagingModel.setItemsOnPage( USERS_ON_PAGE );
 

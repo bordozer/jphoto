@@ -50,7 +50,7 @@ public class ActivityPhotoPreview extends AbstractActivityStreamEntry {
 
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
-		return TranslatorUtils.translate( "viewed photo $1"
+		return services.getTranslatorService().translate( "viewed photo $1"
 			, linkUtilsService.getPhotoCardLink( preview.getPhoto() )
 		);
 	}

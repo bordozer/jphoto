@@ -8,6 +8,7 @@ import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import utils.TranslatorUtils;
 
 public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMenuItem {
@@ -44,10 +45,10 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, EntryMenuType.COMMENT, getComplainReasonType() ) {
+		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, EntryMenuType.COMMENT, getComplainReasonType(), services ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( getMenuItemText() );
+				return getTranslatorService().translate( getMenuItemText() );
 			}
 		};
 	}

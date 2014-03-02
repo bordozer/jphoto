@@ -18,6 +18,6 @@ public enum NotFoundExceptionEntryType {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( name );
+		return name; // TODO: translate
 	}
 }

@@ -25,12 +25,11 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthor
 		final Genre genre = getGenre();
 		final User photoAuthor = getPhotoAuthor();
 
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, services ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "$1: photos in category '$2' ( $3 )"
-					, photoAuthor.getNameEscaped(), genre.getName(), String.valueOf( getPhotosQty() ) );
+				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", photoAuthor.getNameEscaped(), genre.getName(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override

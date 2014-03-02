@@ -12,6 +12,7 @@ import core.services.pageTitle.PageTitlePhotoCommentUtilsService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -65,6 +66,9 @@ public class PhotoCommentsListController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( MODEL_NAME )
 	public PhotoCommentsListModel prepareModel( final @PathVariable( "userId" ) int userId ) {
 		final PhotoCommentsListModel model = new PhotoCommentsListModel();
@@ -77,7 +81,7 @@ public class PhotoCommentsListController {
 	
 	@ModelAttribute
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 
 		pagingModel.setCurrentPage( PagingUtils.getPageFromRequest( request ) );
 		pagingModel.setItemsOnPage( COMMENTS_ON_PAGE );

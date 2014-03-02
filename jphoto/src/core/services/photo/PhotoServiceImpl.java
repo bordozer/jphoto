@@ -29,6 +29,7 @@ import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -128,6 +129,9 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private Services services;
 
 	@Override
 	public boolean save( final Photo entry ) {
@@ -603,7 +607,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	private PagingModel getPagingModel( final int photosQty ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		pagingModel.setCurrentPage( 1 );
 		pagingModel.setItemsOnPage( photosQty );
 

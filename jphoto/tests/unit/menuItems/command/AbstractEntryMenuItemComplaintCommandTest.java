@@ -8,6 +8,7 @@ import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.services.security.ServicesImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -61,7 +62,7 @@ public class AbstractEntryMenuItemComplaintCommandTest extends AbstractTestCase 
 		final User accessor = new User( 222 );
 		accessor.setName( "Just a User" );
 
-		final AbstractEntryMenuItemComplaintCommand menuItem = new AbstractEntryMenuItemComplaintCommand<T>( menuEntry, accessor, comment, complaintReasonType ) {
+		final AbstractEntryMenuItemComplaintCommand menuItem = new AbstractEntryMenuItemComplaintCommand<T>( menuEntry, accessor, comment, complaintReasonType, new ServicesImpl() ) {
 
 			@Override
 			public String getMenuText() {

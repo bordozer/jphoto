@@ -140,7 +140,7 @@ public enum ConfigurationKey {
 	}
 
 	public String getNameTranslated() {
-		return TranslatorUtils.translate( description );
+		return description; // TODO: translate
 	}
 
 	public String getDefaultValue() {

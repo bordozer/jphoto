@@ -53,7 +53,7 @@ public class ActivityStreamController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 		pagingModel.setItemsOnPage( ACTIVITY_STREAM_ITEMS_ON_PAGE );
 

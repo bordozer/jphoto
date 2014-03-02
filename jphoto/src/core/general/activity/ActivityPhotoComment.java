@@ -53,7 +53,7 @@ public class ActivityPhotoComment extends AbstractActivityStreamEntry {
 	public String getActivityDescription() {
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
-		return TranslatorUtils.translate( "commented photo $1"
+		return services.getTranslatorService().translate( "commented photo $1"
 			, linkUtilsService.getPhotoCardLink( photo )
 		);
 	}

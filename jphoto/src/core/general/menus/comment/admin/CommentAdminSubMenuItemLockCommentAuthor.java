@@ -24,10 +24,10 @@ public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMen
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( "Lock comment author: $1", commentAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "Lock comment author: $1", commentAuthor.getNameEscaped() );
 			}
 
 			@Override

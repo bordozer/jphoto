@@ -21,11 +21,11 @@ public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
 
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate(  "Delete comment" );
+				return getTranslatorService().translate( "Delete comment" );
 			}
 
 			@Override

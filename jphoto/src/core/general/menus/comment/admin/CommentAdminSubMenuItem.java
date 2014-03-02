@@ -32,10 +32,10 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
 			@Override
 			public String getMenuText() {
-				return TranslatorUtils.translate( ADMIN_SUB_MENU_ENTRY_TEXT );
+				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT );
 			}
 
 			@Override
@@ -56,7 +56,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus() );
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), services );
 	}
 
 	@Override

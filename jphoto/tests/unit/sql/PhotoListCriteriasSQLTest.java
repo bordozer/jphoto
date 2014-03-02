@@ -11,6 +11,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.photo.PhotoListCriteriasServiceImpl;
+import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;
 import core.services.utils.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
@@ -545,7 +546,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	}
 
 	private PagingModel getPagingModel() {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( new ServicesImpl() );
 		pagingModel.setCurrentPage( CURRENT_PAGE );
 		pagingModel.setItemsOnPage( ITEMS_ON_PAGE );
 		return pagingModel;

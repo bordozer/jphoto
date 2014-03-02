@@ -6,6 +6,6 @@ import utils.TranslatorUtils;
 public abstract class AbstractEntryNotFoundException extends BaseRuntimeException {
 
 	public AbstractEntryNotFoundException( final String _entryId, final String entityName ) {
-		super( TranslatorUtils.translate( "$1 with ID = '$2' not found", entityName, _entryId ) );
+		super( String.format( "%s with ID = '%s' not found", entityName, _entryId ) ); // TODO: translate
 	}
 }

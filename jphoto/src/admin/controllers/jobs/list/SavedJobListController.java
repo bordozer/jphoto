@@ -11,6 +11,7 @@ import admin.services.scheduler.SchedulerService;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.security.Services;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -72,6 +73,9 @@ public class SavedJobListController {
 	@Autowired
 	private SchedulerService schedulerService;
 
+	@Autowired
+	private Services services;
+
 	@ModelAttribute( MODEL_NAME )
 	public SavedJobListModel prepareModel() {
 		return new SavedJobListModel();
@@ -79,7 +83,7 @@ public class SavedJobListController {
 
 	@ModelAttribute( "pagingModel" )
 	public PagingModel preparePagingModel( final HttpServletRequest request ) {
-		final PagingModel pagingModel = new PagingModel();
+		final PagingModel pagingModel = new PagingModel( services );
 		PagingUtils.initPagingModel( pagingModel, request );
 
 		pagingModel.setItemsOnPage( configurationService.getInt( ConfigurationKey.ADMIN_JOB_HISTORY_ITEMS_ON_PAGE ) );
