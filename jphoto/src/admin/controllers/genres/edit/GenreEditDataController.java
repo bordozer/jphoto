@@ -8,6 +8,7 @@ import core.services.pageTitle.PageTitleGenreUtilsService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import core.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,9 @@ public class GenreEditDataController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private DataRequirementService dataRequirementService;
+
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
 		binder.setValidator( genreEditDataValidator );
@@ -51,7 +55,11 @@ public class GenreEditDataController {
 
 	@ModelAttribute( "genreEditDataModel" )
 	public GenreEditDataModel prepareModel() {
-		return new GenreEditDataModel();
+		final GenreEditDataModel model = new GenreEditDataModel();
+
+		model.setDataRequirementService( dataRequirementService );
+
+		return model;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/new/" )

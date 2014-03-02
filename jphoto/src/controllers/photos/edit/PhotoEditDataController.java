@@ -28,6 +28,7 @@ import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.*;
+import core.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -114,6 +115,9 @@ public class PhotoEditDataController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private DataRequirementService dataRequirementService;
+
 	private final LogHelper log = new LogHelper( PhotoEditDataController.class );
 
 	@InitBinder
@@ -123,7 +127,11 @@ public class PhotoEditDataController {
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
-		return new PhotoEditDataModel();
+		final PhotoEditDataModel model = new PhotoEditDataModel();
+
+		model.setDataRequirementService( dataRequirementService );
+
+		return model;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/new/" )

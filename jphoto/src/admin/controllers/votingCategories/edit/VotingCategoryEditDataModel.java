@@ -2,6 +2,7 @@ package admin.controllers.votingCategories.edit;
 
 import core.general.base.AbstractGeneralModel;
 import core.general.photo.PhotoVotingCategory;
+import core.services.validation.DataRequirementService;
 
 public class VotingCategoryEditDataModel extends AbstractGeneralModel {
 
@@ -10,6 +11,7 @@ public class VotingCategoryEditDataModel extends AbstractGeneralModel {
 	public final static String VOTING_CATEGORIES_DESCRIPTION_FORM_CONTROL = "description";
 
 	private PhotoVotingCategory photoVotingCategory;
+	private DataRequirementService dataRequirementService;
 
 	public PhotoVotingCategory getPhotoVotingCategory() {
 		return photoVotingCategory;
@@ -48,5 +50,13 @@ public class VotingCategoryEditDataModel extends AbstractGeneralModel {
 
 	public void setDescription( final String description ) {
 		photoVotingCategory.setDescription( description );
+	}
+
+	public DataRequirementService getDataRequirementService() {
+		return dataRequirementService;
+	}
+
+	public void setDataRequirementService( final DataRequirementService dataRequirementService ) {
+		this.dataRequirementService = dataRequirementService;
 	}
 }

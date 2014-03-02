@@ -3,6 +3,7 @@ package admin.controllers.genres.edit;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
+import core.services.validation.DataRequirementService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 
@@ -27,6 +28,8 @@ public class GenreEditDataModel extends AbstractGeneralModel {
 	private Genre genre;
 	private List<PhotoVotingCategory> photoVotingCategories = newArrayList();
 	private List<String> allowedVotingCategoryIDs = newArrayList();
+
+	private DataRequirementService dataRequirementService;
 
 	public Genre getGenre() {
 		return genre;
@@ -119,5 +122,13 @@ public class GenreEditDataModel extends AbstractGeneralModel {
 
 	public void setContainsNudeContent( final boolean containsNudeContent ) {
 		genre.setContainsNudeContent( containsNudeContent );
+	}
+
+	public DataRequirementService getDataRequirementService() {
+		return dataRequirementService;
+	}
+
+	public void setDataRequirementService( final DataRequirementService dataRequirementService ) {
+		this.dataRequirementService = dataRequirementService;
 	}
 }

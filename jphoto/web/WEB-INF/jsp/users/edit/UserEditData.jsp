@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="controllers.users.edit.UserEditDataModel" %>
 <%@ page import="core.general.user.UserMembershipType" %>
-<%@ page import="utils.EditDataValidationUtils" %>
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ page import="core.general.user.EmailNotificationType" %>
+<%@ page import="core.services.validation.UserRequirement" %>
+<%@ page import="core.services.validation.DataRequirementService" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -79,17 +80,22 @@
 
 <c:set var="separatorHeight" value="50"/>
 
-<c:set var="loginRequirement" value="<%=EditDataValidationUtils.UserRequirement.getLoginRequirement( minLoginLength, maxLoginLength )%>"/>
+<%
+	final core.services.validation.DataRequirementService dataRequirementService = userEditDataModel.getDataRequirementService();
+	final UserRequirement userRequirement = userEditDataModel.getDataRequirementService().getUserRequirement();
+%>
 
-<c:set var="passwordRequirement" value="<%=EditDataValidationUtils.UserRequirement.getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
-<c:set var="confirmPasswordRequirement" value="<%=EditDataValidationUtils.UserRequirement.getConfirmPasswordRequirement()%>"/>
-<c:set var="nameRequirement" value="<%=EditDataValidationUtils.UserRequirement.getNameRequirement( minUserNameLength, maxUserNameLength )%>"/>
-<c:set var="emailRequirement" value="<%=EditDataValidationUtils.UserRequirement.getEmailRequirement()%>"/>
-<c:set var="birthdayRequirement" value="<%=EditDataValidationUtils.UserRequirement.getBirthdayRequirement()%>"/>
-<c:set var="homeSiteRequirement" value="<%=EditDataValidationUtils.UserRequirement.getHomeSiteRequirement()%>"/>
+<c:set var="loginRequirement" value="<%=userRequirement.getLoginRequirement( minLoginLength, maxLoginLength )%>"/>
 
-<c:set var="mandatoryText" value="<%=EditDataValidationUtils.getFieldIsMandatoryText()%>"/>
-<c:set var="optionalText" value="<%=EditDataValidationUtils.getFieldIsOptionalText()%>"/>
+<c:set var="passwordRequirement" value="<%=userRequirement.getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
+<c:set var="confirmPasswordRequirement" value="<%=userRequirement.getConfirmPasswordRequirement()%>"/>
+<c:set var="nameRequirement" value="<%=userRequirement.getNameRequirement( minUserNameLength, maxUserNameLength )%>"/>
+<c:set var="emailRequirement" value="<%=userRequirement.getEmailRequirement()%>"/>
+<c:set var="birthdayRequirement" value="<%=userRequirement.getBirthdayRequirement()%>"/>
+<c:set var="homeSiteRequirement" value="<%=userRequirement.getHomeSiteRequirement()%>"/>
+
+<c:set var="mandatoryText" value="<%=dataRequirementService.getFieldIsMandatoryText()%>"/>
+<c:set var="optionalText" value="<%=dataRequirementService.getFieldIsOptionalText()%>"/>
 
 <c:set var="minLoginLength" value="<%=minLoginLength%>"/>
 <c:set var="maxLoginLength" value="<%=maxLoginLength%>"/>

@@ -9,10 +9,11 @@ import core.services.dao.UsersSecurityDao;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
+import core.services.validation.DataRequirementService;
+import core.services.validation.UserRequirement;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
-import utils.EditDataValidationUtils;
 import utils.FormatUtils;
 import utils.UserUtils;
 
@@ -38,6 +39,9 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private DataRequirementService dataRequirementService;
 
 	@Override
 	public boolean isUserPasswordCorrect( final User user, final String password ) {
@@ -146,8 +150,8 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		if ( ! matcher.matches() ) {
 			final StringBuilder builder = new StringBuilder();
 			builder.append( translatorService.translate( "$1 is too simple!", FormatUtils.getFormattedFieldName( "Password" ) ) );
-			builder.append( EditDataValidationUtils.HINT_LINE_BREAK );
-			builder.append( EditDataValidationUtils.UserRequirement.getPasswordRequirement( false ) );
+			builder.append( DataRequirementService.HINT_LINE_BREAK );
+			builder.append( dataRequirementService.getUserRequirement().getPasswordRequirement( false ) );
 
 			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, builder.toString() );
 			return;

@@ -6,6 +6,7 @@ import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import core.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,9 @@ public class VotingCategoryEditDataController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private DataRequirementService dataRequirementService;
+
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
 		binder.setValidator( votingCategoryEditDataValidator );
@@ -43,7 +47,11 @@ public class VotingCategoryEditDataController {
 
 	@ModelAttribute( "votingCategoryEditDataModel" )
 	public VotingCategoryEditDataModel prepareModel() {
-		return new VotingCategoryEditDataModel();
+		final VotingCategoryEditDataModel model = new VotingCategoryEditDataModel();
+
+		model.setDataRequirementService( dataRequirementService );
+
+		return model;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/new/" )

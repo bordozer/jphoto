@@ -17,6 +17,7 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import core.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -66,6 +67,9 @@ public class UserEditDataController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private DataRequirementService dataRequirementService;
+
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
 		binder.setValidator( userEditDataValidator );
@@ -80,6 +84,8 @@ public class UserEditDataController {
 
 		model.setMinUserNameLength( configurationService.getInt( ConfigurationKey.SYSTEM_USER_NAME_MIN_LENGTH ) );
 		model.setMaxUserNameLength( configurationService.getInt( ConfigurationKey.SYSTEM_USER_NAME_MAX_LENGTH ) );
+
+		model.setDataRequirementService( dataRequirementService );
 
 		return model;
 	}

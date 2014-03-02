@@ -7,6 +7,7 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.validation.DataRequirementService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -72,6 +73,8 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private Date photoUploadTime;
 
 	private int photoNameMaxLength;
+
+	private DataRequirementService dataRequirementService;
 
 	public int getPhotoId() {
 		return photoId;
@@ -343,6 +346,14 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setPhotoNameMaxLength( final int photoNameMaxLength ) {
 		this.photoNameMaxLength = photoNameMaxLength;
+	}
+
+	public DataRequirementService getDataRequirementService() {
+		return dataRequirementService;
+	}
+
+	public void setDataRequirementService( final DataRequirementService dataRequirementService ) {
+		this.dataRequirementService = dataRequirementService;
 	}
 
 	@Override

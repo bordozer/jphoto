@@ -1,7 +1,6 @@
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 <%@ page import="admin.controllers.votingCategories.edit.VotingCategoryEditDataModel" %>
 <%@ page import="core.general.photo.PhotoVotingCategory" %>
-<%@ page import="utils.EditDataValidationUtils" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,8 +24,8 @@
 <c:set var="votingCategoryDescriptionControl" value="<%=VotingCategoryEditDataModel.VOTING_CATEGORIES_DESCRIPTION_FORM_CONTROL%>" />
 <c:set var="descriptionRequirement" value="${eco:translate( 'Description of voting category' )}" />
 
-<c:set var="mandatoryText" value="<%=EditDataValidationUtils.getFieldIsMandatoryText()%>"/>
-<c:set var="optionalText" value="<%=EditDataValidationUtils.getFieldIsOptionalText()%>"/>
+<c:set var="mandatoryText" value="<%=votingCategoryEditDataModel.getDataRequirementService().getFieldIsMandatoryText()%>"/>
+<c:set var="optionalText" value="<%=votingCategoryEditDataModel.getDataRequirementService().getFieldIsOptionalText()%>"/>
 
 <tags:page pageModel="${votingCategoryEditDataModel.pageModel}">
 

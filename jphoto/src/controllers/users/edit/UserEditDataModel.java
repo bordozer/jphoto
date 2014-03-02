@@ -3,6 +3,7 @@ package controllers.users.edit;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
+import core.services.validation.DataRequirementService;
 
 import java.util.List;
 import java.util.Set;
@@ -60,6 +61,8 @@ public class UserEditDataModel extends AbstractGeneralModel {
 
 	private List<PhotoActionAllowance> accessibleCommentAllowances;
 	private List<PhotoActionAllowance> accessibleVotingAllowances;
+
+	private DataRequirementService dataRequirementService;
 
 	public int getUserId() {
 		return userId;
@@ -251,6 +254,14 @@ public class UserEditDataModel extends AbstractGeneralModel {
 
 	public void setMaxUserNameLength( final int maxUserNameLength ) {
 		this.maxUserNameLength = maxUserNameLength;
+	}
+
+	public DataRequirementService getDataRequirementService() {
+		return dataRequirementService;
+	}
+
+	public void setDataRequirementService( final DataRequirementService dataRequirementService ) {
+		this.dataRequirementService = dataRequirementService;
 	}
 
 	@Override

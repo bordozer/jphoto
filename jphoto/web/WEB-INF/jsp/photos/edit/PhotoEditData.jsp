@@ -1,10 +1,11 @@
 <%@ page import="controllers.photos.edit.PhotoEditDataModel" %>
-<%@ page import="utils.EditDataValidationUtils" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ page import="controllers.photos.edit.PhotoEditWizardStep" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="core.general.configuration.ConfigurationKey" %>
+<%@ page import="core.services.validation.PhotoRequirement" %>
+<%@ page import="core.services.validation.DataRequirementService" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -44,12 +45,17 @@
 <c:set var="photoTeamMembersIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_USER_TEAM_MEMBERS_IDS%>"/>
 <c:set var="photoAlbumsIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_PHOTO_ALBUMS_IDS%>"/>
 
-<c:set var="nameRequirement" value="<%=EditDataValidationUtils.PhotoRequirement.getNameRequirement()%>"/>
-<c:set var="descriptionRequirement" value="<%=EditDataValidationUtils.PhotoRequirement.getDescriptionRequirement()%>"/>
-<c:set var="keywordsRequirement" value="<%=EditDataValidationUtils.PhotoRequirement.getKeywordsRequirement()%>"/>
+<%
+	final DataRequirementService dataRequirementService = photoEditDataModel.getDataRequirementService();
+	final PhotoRequirement photoRequirement = dataRequirementService.getPhotoRequirement();
+%>
 
-<c:set var="mandatoryText" value="<%=EditDataValidationUtils.getFieldIsMandatoryText()%>"/>
-<c:set var="optionalText" value="<%=EditDataValidationUtils.getFieldIsOptionalText()%>"/>
+<c:set var="nameRequirement" value="<%=photoRequirement.getNameRequirement()%>"/>
+<c:set var="descriptionRequirement" value="<%=photoRequirement.getDescriptionRequirement()%>"/>
+<c:set var="keywordsRequirement" value="<%=photoRequirement.getKeywordsRequirement()%>"/>
+
+<c:set var="mandatoryText" value="<%=dataRequirementService.getFieldIsMandatoryText()%>"/>
+<c:set var="optionalText" value="<%=dataRequirementService.getFieldIsOptionalText()%>"/>
 
 <c:set var="genresCanHaveNudeContent" value="<%=genresCanHaveNudeContent%>"/>
 <c:set var="genresHaveNudeContent" value="<%=genresHaveNudeContent%>"/>

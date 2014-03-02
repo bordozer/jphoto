@@ -1,5 +1,5 @@
 <%@ page import="controllers.users.password.change.ChangeUserPasswordModel" %>
-<%@ page import="utils.EditDataValidationUtils" %>
+<%@ page import="core.services.validation.UserRequirement" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,7 +17,7 @@
 <c:set var="newPasswordControl" value="<%=ChangeUserPasswordModel.FORM_CONTROL_NEW_PASSWORD%>"/>
 <c:set var="newPasswordConfirmationControl" value="<%=ChangeUserPasswordModel.FORM_CONTROL_NEW_PASSWORD_CONFIRMATION%>"/>
 
-<c:set var="passwordRequirement" value="<%=EditDataValidationUtils.UserRequirement.getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
+<c:set var="passwordRequirement" value="<%=UserRequirement.getPasswordRequirement( false )%>"/> <%-- TODO: set to true--%>
 
 <tags:page pageModel="${changeUserPasswordModel.pageModel}">
 

@@ -1,6 +1,5 @@
 <%@ page import="core.general.genre.Genre" %>
 <%@ page import="admin.controllers.genres.edit.GenreEditDataModel" %>
-<%@ page import="utils.EditDataValidationUtils" %>
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
@@ -31,8 +30,8 @@
 <c:set var="minMarksRequirement" value="${eco:translate( 'Photos of this ganre has to have minimal marks to be in genre\\\'s best. <br />0 - use default system\\\'s value.' )}"/>
 <c:set var="descriptionRequirement" value="${eco:translate( 'Any information about genre' )}"/>
 
-<c:set var="mandatoryText" value="<%=EditDataValidationUtils.getFieldIsMandatoryText()%>"/>
-<c:set var="optionalText" value="<%=EditDataValidationUtils.getFieldIsOptionalText()%>"/>
+<c:set var="mandatoryText" value="<%=genreEditDataModel.getDataRequirementService().getFieldIsMandatoryText()%>"/>
+<c:set var="optionalText" value="<%=genreEditDataModel.getDataRequirementService().getFieldIsOptionalText()%>"/>
 
 <tags:page pageModel="${genreEditDataModel.pageModel}">
 
