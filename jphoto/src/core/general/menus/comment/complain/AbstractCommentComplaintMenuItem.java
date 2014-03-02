@@ -8,8 +8,6 @@ import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.TranslatorService;
-import utils.TranslatorUtils;
 
 public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMenuItem {
 
