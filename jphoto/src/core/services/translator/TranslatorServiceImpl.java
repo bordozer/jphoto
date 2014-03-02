@@ -2,6 +2,7 @@ package core.services.translator;
 
 import core.services.utils.SystemVarsService;
 import org.apache.commons.lang.StringUtils;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
@@ -63,7 +64,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 		return markAsTranslated( result );
 	}
 
-	public void initTranslations() {
+	public void initTranslations() throws DocumentException {
 
 		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );
 

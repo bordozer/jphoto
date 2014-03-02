@@ -2,15 +2,10 @@ package core.services.translator;
 
 public class TranslationEntry {
 
-	private String value;
 	private final Language language;
+	private final String value;
 
 	protected final String nerd;
-
-	public TranslationEntry( final String nerd, final Language language ) {
-		this.nerd = nerd;
-		this.language = language;
-	}
 
 	public TranslationEntry( final String nerd, final Language language, final String value ) {
 		this.nerd = nerd;

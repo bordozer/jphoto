@@ -2,9 +2,14 @@
 
 <translations>
 
-	<translations>
+	<translation>
 		<nerd>Login</nerd>
-		<ru></ru>
-	</translations>
+		<ru><![CDATA[Логин]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Logout</nerd>
+		<ru><![CDATA[Выход]]></ru>
+	</translation>
 
 </translations>
