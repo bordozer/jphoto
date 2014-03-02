@@ -16,6 +16,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.security.Services;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,9 @@ public class UserRankServiceImpl implements UserRankService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private Services services;
 
 	@Override
 	public boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final User votingUser ) {
@@ -282,13 +286,13 @@ public class UserRankServiceImpl implements UserRankService {
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Genre genre, final int rankInGenre ) {
 		// current user rank in genre custom
-		return new UserRankIconContainer( user, genre, rankInGenre, this, configurationService );
+		return new UserRankIconContainer( user, genre, rankInGenre, services );
 	}
 
 	@Override
 	public UserRankIconContainer getUserRankIconContainer( final User user, final Photo photo ) {
 		// user rank in genre when photo was uploaded
-		return new UserRankIconContainer( user, photo, this, configurationService, genreService );
+		return new UserRankIconContainer( user, photo, services );
 	}
 
 	private int getRankUpperPoints( final int base, final float coefficient, final int rank ) {
