@@ -7,7 +7,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import utils.NumberUtils;
-import utils.TranslatorUtils;
 
 public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntry {
 

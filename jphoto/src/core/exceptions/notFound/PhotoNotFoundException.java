@@ -1,7 +1,5 @@
 package core.exceptions.notFound;
 
-import utils.TranslatorUtils;
-
 public class PhotoNotFoundException extends AbstractEntryNotFoundException {
 
 	public PhotoNotFoundException( final String _entryId ) {

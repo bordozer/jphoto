@@ -1,7 +1,5 @@
 package core.general.user;
 
-import utils.TranslatorUtils;
-
 public enum UserBookedMembersType {
 	MEMBERS( 1, "Members" ), FRIENDS( 2, "Friends" ), BLACKLIST( 3, "Black list" );
 

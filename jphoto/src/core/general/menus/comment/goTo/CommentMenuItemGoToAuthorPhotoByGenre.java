@@ -6,7 +6,6 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAuthorPhotos {
 

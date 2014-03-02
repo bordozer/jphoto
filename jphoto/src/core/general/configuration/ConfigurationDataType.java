@@ -1,7 +1,6 @@
 package core.general.configuration;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.EnumSet;
 

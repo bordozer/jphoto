@@ -5,7 +5,6 @@ import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 import java.util.List;
 

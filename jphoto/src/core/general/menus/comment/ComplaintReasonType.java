@@ -1,7 +1,6 @@
 package core.general.menus.comment;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum ComplaintReasonType {
 

@@ -1,7 +1,5 @@
 package core.general.photo.group;
 
-import utils.TranslatorUtils;
-
 public enum PhotoGroupOperationType {
 	ARRANGE_PHOTO_ALBUMS( 1, "Arrange photo albums" )
 	, ARRANGE_TEAM_MEMBERS( 4, "Arrange team members" )

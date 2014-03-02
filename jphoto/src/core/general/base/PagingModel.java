@@ -5,7 +5,6 @@ import core.services.translator.TranslatorService;
 import elements.PageItem;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
-import utils.TranslatorUtils;
 
 import java.util.List;
 

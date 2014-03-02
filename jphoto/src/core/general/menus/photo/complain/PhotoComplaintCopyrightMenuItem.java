@@ -8,7 +8,6 @@ import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class PhotoComplaintCopyrightMenuItem extends AbstractPhotoComplaintMenuItem {
 

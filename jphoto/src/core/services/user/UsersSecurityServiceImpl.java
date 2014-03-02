@@ -10,7 +10,6 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
 import core.services.validation.DataRequirementService;
-import core.services.validation.UserRequirement;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

@@ -1,7 +1,5 @@
 package elements;
 
-import utils.TranslatorUtils;
-
 public class PageItem {
 
 	private final int number;

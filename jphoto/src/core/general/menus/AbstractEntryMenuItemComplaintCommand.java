@@ -3,7 +3,6 @@ package core.general.menus;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.TranslatorService;
 
 public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuAssignable> extends AbstractEntryMenuItemCommand<T> {
 

@@ -2,7 +2,6 @@ package core.general.executiontasks;
 
 import core.interfaces.Identifiable;
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 import java.util.Calendar;
 

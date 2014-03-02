@@ -2,7 +2,6 @@ package ui.userRankIcons;
 
 import core.general.genre.Genre;
 import core.general.user.User;
-import core.services.security.Services;
 import core.services.translator.TranslatorService;
 
 public abstract class AbstractUserRankIcon {

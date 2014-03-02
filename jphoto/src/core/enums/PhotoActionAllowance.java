@@ -1,7 +1,6 @@
 package core.enums;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum PhotoActionAllowance {
 	ACTIONS_DENIED( 1, "Not allowed" )

@@ -1,7 +1,6 @@
 package core.general.menus;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum EntryMenuType {
 

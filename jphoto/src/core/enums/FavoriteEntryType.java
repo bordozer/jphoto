@@ -1,7 +1,6 @@
 package core.enums;
 
 import core.interfaces.Identifiable;
-import utils.TranslatorUtils;
 
 import java.util.EnumSet;
 

@@ -1,7 +1,6 @@
 package core.general.activity;
 
 import admin.jobs.enums.SavedJobType;
-import utils.TranslatorUtils;
 
 import java.util.List;
 

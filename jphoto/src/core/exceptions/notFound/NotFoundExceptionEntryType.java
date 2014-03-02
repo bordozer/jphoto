@@ -1,7 +1,5 @@
 package core.exceptions.notFound;
 
-import utils.TranslatorUtils;
-
 public enum NotFoundExceptionEntryType {
 	USER( "Member" )
 	, PHOTO( "Photo" )

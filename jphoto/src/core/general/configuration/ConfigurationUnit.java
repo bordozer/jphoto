@@ -1,7 +1,6 @@
 package core.general.configuration;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum ConfigurationUnit {
 

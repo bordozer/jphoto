@@ -1,7 +1,5 @@
 package core.exceptions.notFound;
 
-import utils.TranslatorUtils;
-
 public class UserNotFoundException extends AbstractEntryNotFoundException {
 
 	public UserNotFoundException( final String _entryId ) {

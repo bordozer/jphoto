@@ -1,7 +1,6 @@
 package core.general.user;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum UserStatus {
 	CANDIDATE( 1, "candidate")

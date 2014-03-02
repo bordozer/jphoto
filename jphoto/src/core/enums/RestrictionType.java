@@ -1,7 +1,6 @@
 package core.enums;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum RestrictionType {
 	USER_LOGIN( 1, "Login in" )

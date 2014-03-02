@@ -5,7 +5,6 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.user.AbstractUserMenuItem;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 

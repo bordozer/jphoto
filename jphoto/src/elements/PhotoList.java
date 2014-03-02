@@ -3,7 +3,6 @@ package elements;
 import core.general.photo.PhotoInfo;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import org.apache.commons.lang.StringUtils;
-import utils.TranslatorUtils;
 
 import java.util.List;
 

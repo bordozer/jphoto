@@ -1,7 +1,5 @@
 package core.general.configuration;
 
-import utils.TranslatorUtils;
-
 public enum ConfigurationKey {
 
 	SYSTEM_SESSION_TIMEOUT_IN_MINUTES( 110, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MIN, ConfigurationTab.SYSTEM, "Session timeout in minutes" )

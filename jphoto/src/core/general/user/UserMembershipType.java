@@ -1,7 +1,5 @@
 package core.general.user;
 
-import utils.TranslatorUtils;
-
 public enum UserMembershipType {
 
 	AUTHOR( 1, "author", "authors" )

@@ -8,7 +8,6 @@ import core.general.user.User;
 import core.services.security.Services;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
-import utils.TranslatorUtils;
 
 public class CommentMenuItemReply extends AbstractCommentMenuItem {
 

@@ -1,7 +1,6 @@
 package core.enums;
 
 import utils.StringUtilities;
-import utils.TranslatorUtils;
 
 public enum PhotoRatingKey {
 	DAY( 1, "date" )

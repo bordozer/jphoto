@@ -1,7 +1,5 @@
 package core.general.executiontasks;
 
-import utils.TranslatorUtils;
-
 public enum ExecutionTaskType {
 	ONCE( 1, "One time", "schedulerTaskOnce.png" )
 	, PERIODICAL( 2, "Periodically", "schedulerTaskPeriodical.png" )

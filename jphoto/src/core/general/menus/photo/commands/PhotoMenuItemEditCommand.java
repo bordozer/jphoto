@@ -3,7 +3,6 @@ package core.general.menus.photo.commands;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.photo.Photo;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 
 public class PhotoMenuItemEditCommand extends AbstractEntryMenuItemCommand<Photo> {
 

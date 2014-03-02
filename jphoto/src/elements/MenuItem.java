@@ -1,7 +1,5 @@
 package elements;
 
-import utils.TranslatorUtils;
-
 public class MenuItem {
 	final private String caption;
 	final private String link;

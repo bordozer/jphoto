@@ -1,7 +1,6 @@
 package core.exceptions.notFound;
 
 import core.exceptions.BaseRuntimeException;
-import utils.TranslatorUtils;
 
 public abstract class AbstractEntryNotFoundException extends BaseRuntimeException {
 

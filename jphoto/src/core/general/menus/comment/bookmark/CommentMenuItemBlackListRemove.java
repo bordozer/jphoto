@@ -7,7 +7,6 @@ import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import utils.TranslatorUtils;
 import utils.UserUtils;
 
 public class CommentMenuItemBlackListRemove extends AbstractCommentMenuItem {
