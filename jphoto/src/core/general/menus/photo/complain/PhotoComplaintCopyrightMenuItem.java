@@ -3,6 +3,7 @@ package core.general.menus.photo.complain;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.AbstractEntryMenuItemComplaintCommand;
 import core.general.menus.EntryMenuOperationType;
+import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -32,7 +33,7 @@ public class PhotoComplaintCopyrightMenuItem extends AbstractPhotoComplaintMenuI
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new AbstractEntryMenuItemComplaintCommand<Photo>( menuEntry, accessor, getComplainReasonType() ) {
+		return new AbstractEntryMenuItemComplaintCommand<Photo>( menuEntry, accessor, EntryMenuType.PHOTO, getComplainReasonType() ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( getMenuItemText() );

@@ -2,6 +2,7 @@ package core.general.menus.comment.complain;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.AbstractEntryMenuItemComplaintCommand;
+import core.general.menus.EntryMenuType;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.photo.PhotoComment;
@@ -21,6 +22,7 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 
 	@Override
 	public boolean isAccessibleFor() {
+
 		if ( menuEntry.isCommentDeleted() ) {
 			return false;
 		}
@@ -42,7 +44,7 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, getComplainReasonType() ) {
+		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, EntryMenuType.COMMENT, getComplainReasonType() ) {
 			@Override
 			public String getMenuText() {
 				return TranslatorUtils.translate( getMenuItemText() );

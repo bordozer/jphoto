@@ -7,12 +7,14 @@ public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuA
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
 
-	private User accessor;
+	private final User accessor;
+	private final EntryMenuType entryMenuType;
 	private final ComplaintReasonType complaintReasonType;
 
-	public AbstractEntryMenuItemComplaintCommand( final T menuEntry, final User accessor, final ComplaintReasonType complaintReasonType ) {
+	public AbstractEntryMenuItemComplaintCommand( final T menuEntry, final User accessor, final EntryMenuType entryMenuType, final ComplaintReasonType complaintReasonType ) {
 		super( menuEntry );
 		this.accessor = accessor;
+		this.entryMenuType = entryMenuType;
 		this.complaintReasonType = complaintReasonType;
 	}
 
@@ -20,7 +22,7 @@ public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuA
 	public String getMenuCommand() {
 		return String.format( "%s( %d, %d, %d, %d ); return false;"
 			, COMPLAINT_MESSAGE_JS_FUNCTION
-			, EntryMenuType.COMMENT.getId()
+			, entryMenuType.getId()
 			, getId()
 			, accessor.getId()
 			, complaintReasonType.getId()
