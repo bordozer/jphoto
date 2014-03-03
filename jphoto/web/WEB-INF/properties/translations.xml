@@ -92,4 +92,24 @@
 		<ru><![CDATA[оценкам за период по убыванию]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Portal page</nerd>
+		<ru><![CDATA[Главная страница]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top authors of the week</nerd>
+		<ru><![CDATA[Лучшие авторы недели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top authors of the month</nerd>
+		<ru><![CDATA[Лучшие авторы месяца]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
 </translations>

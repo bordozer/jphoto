@@ -209,11 +209,11 @@
 			<c:set var="topBestUsersQty" value="<%=PortalPageModel.TOP_BEST_USERS_QTY%>"/>
 
 			<table:td width="${ratingWirth}" valign="top">
-				<user:userRating userRatings="${portalPageModel.bestWeekUserRating}" listTitle="${eco:translate('Top of the week')}" />
+				<user:userRating userRatings="${portalPageModel.bestWeekUserRating}" listTitle="${eco:translate('Top authors of the week')}" />
 			</table:td>
 
 			<table:td width="${ratingWirth}" valign="top">
-				<user:userRating userRatings="${portalPageModel.bestMonthUserRating}" listTitle="${eco:translate('Top of the month')}" />
+				<user:userRating userRatings="${portalPageModel.bestMonthUserRating}" listTitle="${eco:translate('Top authors of the month')}" />
 			</table:td>
 
 		</table:tr>
