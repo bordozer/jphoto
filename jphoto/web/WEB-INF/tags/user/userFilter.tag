@@ -27,7 +27,7 @@
 
 			<tr>
 				<td colspan="2">
-						<h3>${eco:translate( 'Filter' )}:</h3>
+					<h3>${eco:translate( 'Filter' )}:</h3>
 				</td>
 			</tr>
 

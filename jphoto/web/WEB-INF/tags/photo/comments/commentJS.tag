@@ -92,7 +92,7 @@
 		$( '#${beingEditedCommentIdFormControl}' ).val( '0' );
 		$( '#${replyToCommentIdFormControl}' ).val( '0' );
 		$( '#${commentTextFormControl}' ).val( '' );
-		$( '#${submitCommentButton}' ).html( '${eco:translate(addButtonCaption)}' );
+		$( '#${submitCommentButton}' ).html( '${addButtonCaption}' );
 		$( '#${photoCommentFormInfoDiv}' ).html( '${addButtonCaption}' );
 	}
 
