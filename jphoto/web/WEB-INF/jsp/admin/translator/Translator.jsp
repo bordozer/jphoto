@@ -15,7 +15,7 @@
 	<br />
 
 	<c:forEach var="letter" items="${translatorModel.letters}" >
-		<a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/${letter}/">${letter}</a> &nbsp;
+		<a href="${eco:baseAdminUrlWithPrefix()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a> &nbsp;
 	</c:forEach>
 
 	<br />

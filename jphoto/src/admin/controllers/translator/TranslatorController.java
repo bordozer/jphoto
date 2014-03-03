@@ -69,6 +69,8 @@ public class TranslatorController {
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( untranslatedMap );
 
+		model.setUrlPrefix( "untranslated" );
+
 		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
 
 		return VIEW;
@@ -81,6 +83,8 @@ public class TranslatorController {
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( untranslatedMap, letter ) );
+
+		model.setUrlPrefix( "untranslated" );
 
 		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
 

@@ -11,6 +11,8 @@ public class TranslatorModel extends AbstractGeneralModel {
 	private Map<String, TranslationData> translationsMap;
 	private Set<String> letters;
 
+	private String urlPrefix;
+
 	public void setTranslationsMap( final Map<String,TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
 	}
@@ -25,5 +27,13 @@ public class TranslatorModel extends AbstractGeneralModel {
 
 	public void setLetters( final Set<String> letters ) {
 		this.letters = letters;
+	}
+
+	public String getUrlPrefix() {
+		return urlPrefix;
+	}
+
+	public void setUrlPrefix( final String urlPrefix ) {
+		this.urlPrefix = urlPrefix;
 	}
 }
