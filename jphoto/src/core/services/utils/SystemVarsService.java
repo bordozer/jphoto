@@ -1,5 +1,7 @@
 package core.services.utils;
 
+import org.apache.commons.configuration.ConfigurationException;
+
 import java.util.List;
 
 public interface SystemVarsService {
@@ -49,4 +51,6 @@ public interface SystemVarsService {
 	String getTranslatorStartPrefix();
 
 	String getTranslatorEndPrefix();
+
+	void initSystemVars() throws ConfigurationException;
 }

@@ -13,6 +13,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	private final CompositeConfiguration config = new CompositeConfiguration();
 
+	@Override
 	public void initSystemVars() throws ConfigurationException {
 
 		final File basePropertiesFile = new File( String.format( "%s/Base.properties", getPropertiesPath() ) );

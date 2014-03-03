@@ -112,4 +112,14 @@
 		<ru><![CDATA[Лента событий]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Admin</nerd>
+		<ru><![CDATA[Админ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Control panel</nerd>
+		<ru><![CDATA[Панель управления]]></ru>
+	</translation>
+
 </translations>

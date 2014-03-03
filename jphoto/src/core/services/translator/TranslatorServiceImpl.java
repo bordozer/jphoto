@@ -115,6 +115,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 		return untranslatedMap;
 	}
 
+	@Override
 	public void initTranslations() throws DocumentException {
 
 		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );

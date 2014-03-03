@@ -500,6 +500,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getAdminControlPanelLink() {
+		return String.format( "%s/control-panel/", getAdminBaseURLWithPrefix() );
+	}
+
+	@Override
 	public String getAdminVotingCategoryNewLink() {
 		return String.format( "%s/%s/new/", getAdminBaseURLWithPrefix(), VOTING_CATEGORIES_URL );
 	}

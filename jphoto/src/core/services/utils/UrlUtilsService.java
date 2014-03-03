@@ -190,6 +190,8 @@ public interface UrlUtilsService {
 
 	String getAdminTranslatorLink();
 
+	String getAdminControlPanelLink();
+
 	String getAdminVotingCategoryNewLink();
 
 	String getAdminVotingCategoryEditLink( final int votingCategoryId );

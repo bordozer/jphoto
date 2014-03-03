@@ -1,5 +1,7 @@
 package core.services.translator;
 
+import org.dom4j.DocumentException;
+
 import java.util.Map;
 
 public interface TranslatorService {
@@ -25,4 +27,6 @@ public interface TranslatorService {
 	Map<String, TranslationData> getTranslationsMap();
 
 	Map<String, TranslationData> getUntranslatedMap();
+
+	void initTranslations() throws DocumentException;
 }

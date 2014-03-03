@@ -234,7 +234,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public String getAdminTranslatedRoot() {
-		return translatorService.translate( "Admin" );
+		return translatorService.translate( "Administration" );
 	}
 
 	private String getJobsRootTranslated() {
@@ -287,6 +287,16 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 	@Override
 	public PageTitleData getTranslatorTitle() {
 		final String nerd = translatorService.translate( "Translator" );
+
+		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
+
+		return new PageTitleData( title, nerd, breadcrumbs );
+	}
+
+	@Override
+	public PageTitleData getControlPanelTitleData() {
+		final String nerd = translatorService.translate( "Control panel" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );

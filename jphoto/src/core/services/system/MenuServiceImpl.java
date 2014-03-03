@@ -242,6 +242,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( genresMenu() );
 		menuItems.add( votingCategoriesMenu() );
 		menuItems.add( translatorMenu() );
+		menuItems.add( controlPanelMenu() );
 		menuItems.add( upgradeMenu() );
 
 		menus.put( MenuItem.noLinkMenu( translatorService.translate( "Administration" ) ), menuItems );
@@ -294,6 +295,12 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem translatorMenu() {
 		final String caption = translatorService.translate( "Translator" );
 		final String link = urlUtilsService.getAdminTranslatorLink();
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem controlPanelMenu() {
+		final String caption = translatorService.translate( "Control panel" );
+		final String link = urlUtilsService.getAdminControlPanelLink();
 		return new MenuItem( caption, link );
 	}
 

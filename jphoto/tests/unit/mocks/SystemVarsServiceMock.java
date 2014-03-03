@@ -2,6 +2,7 @@ package mocks;
 
 import common.AbstractTestCase;
 import core.services.utils.SystemVarsService;
+import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -89,6 +90,10 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public String getTranslatorEndPrefix() {
 		return StringUtils.EMPTY;
+	}
+
+	@Override
+	public void initSystemVars() throws ConfigurationException {
 	}
 
 	@Override

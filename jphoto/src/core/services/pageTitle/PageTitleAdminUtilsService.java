@@ -58,4 +58,6 @@ public interface PageTitleAdminUtilsService {
 	PageTitleData getAnonymousDaysData();
 
 	PageTitleData getTranslatorTitle();
+
+	PageTitleData getControlPanelTitleData();
 }
