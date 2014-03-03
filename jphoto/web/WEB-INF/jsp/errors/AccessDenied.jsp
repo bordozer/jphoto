@@ -21,12 +21,12 @@
 <c:set var="pageModel" value="<%=pageModel%>" />
 <c:set var="exceptionMessage" value="${exceptionModel.exceptionMessage}" />
 
-<c:set var="messageTranslated" value="${eco:translate( title ) }" />
+<c:set var="messageTranslated" value="${title}" />
 
 <tags:page pageModel="${pageModel}">
 
 	<div class="errorHandlingMessage">
-		<h1>${eco:translate( 'Access denied' ) }</h1>
+		<h1>${title}</h1>
 		${eco:translate( 'Sorry, but you do not have permission to perform this operation' ) }
 		<h3>${exceptionMessage}</h3>
 

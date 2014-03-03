@@ -7,6 +7,20 @@
 
 <tags:page pageModel="${translatorModel.pageModel}" >
 
+	<a href="${eco:baseAdminUrlWithPrefix()}/translator/">${eco:translate('Translated')}</a>
+	&nbsp;&nbsp;
+	<a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/">${eco:translate('Untranslated')}</a>
+
+	<br />
+	<br />
+
+	<c:forEach var="letter" items="${translatorModel.letters}" >
+		<a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/${letter}/">${letter}</a> &nbsp;
+	</c:forEach>
+
+	<br />
+	<br />
+
 	<c:forEach var="entry" items="${translatorModel.translationsMap}">
 		<c:set var="nerd" value="${entry.key}"/>
 		<c:set var="translationData" value="${entry.value}"/>

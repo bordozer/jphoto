@@ -4,10 +4,12 @@ import core.general.base.AbstractGeneralModel;
 import core.services.translator.TranslationData;
 
 import java.util.Map;
+import java.util.Set;
 
 public class TranslatorModel extends AbstractGeneralModel {
 
 	private Map<String, TranslationData> translationsMap;
+	private Set<String> letters;
 
 	public void setTranslationsMap( final Map<String,TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
@@ -15,5 +17,13 @@ public class TranslatorModel extends AbstractGeneralModel {
 
 	public Map<String, TranslationData> getTranslationsMap() {
 		return translationsMap;
+	}
+
+	public Set<String> getLetters() {
+		return letters;
+	}
+
+	public void setLetters( final Set<String> letters ) {
+		this.letters = letters;
 	}
 }

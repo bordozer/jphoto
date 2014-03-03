@@ -120,7 +120,7 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem getActivityStreamMenu() {
 		final String caption = translatorService.translate( "Activity Stream" );
 		final String link = urlUtilsService.getActivityStreamUrl();
-		return new MenuItem( translatorService.translate( caption ), link );
+		return new MenuItem( caption, link );
 	}
 
 	private void createLoggedUserMenu( final Map<MenuItem, List<MenuItem>> menus, final User user ) {

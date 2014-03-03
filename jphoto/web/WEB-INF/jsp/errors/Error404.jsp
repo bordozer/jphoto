@@ -20,7 +20,7 @@
 <c:set var="title" value="<%=title%>" />
 <c:set var="pageModel" value="<%=pageModel%>" />
 
-<c:set var="messageTranslated" value="${eco:translate( title ) }" />
+<c:set var="messageTranslated" value="${title}" />
 
 <tags:page pageModel="${pageModel}">
 
