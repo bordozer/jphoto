@@ -124,7 +124,7 @@
 						5:${leftToRenderPhotos} <br />
 						6:${emptyCellToRender}
 					</td>--%>
-					<td width="${tdWidth}" align="center">&nbsp;[ ${eco:translate('No photo')} ]</td>
+					<td width="${tdWidth}" align="center">&nbsp;${eco:translate('No photo')}</td>
 				</c:forEach>
 			</c:if>
 
