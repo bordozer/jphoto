@@ -241,6 +241,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( anonymousDaysMenu() );
 		menuItems.add( genresMenu() );
 		menuItems.add( votingCategoriesMenu() );
+		menuItems.add( translatorMenu() );
 		menuItems.add( upgradeMenu() );
 
 		menus.put( MenuItem.noLinkMenu( translatorService.translate( "Administration" ) ), menuItems );
@@ -287,6 +288,12 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem votingCategoriesMenu() {
 		final String caption = translatorService.translate( "Voting Categories" );
 		final String link = urlUtilsService.getAdminVotingCategoriesLink();
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem translatorMenu() {
+		final String caption = translatorService.translate( "Translator" );
+		final String link = urlUtilsService.getAdminTranslatorLink();
 		return new MenuItem( caption, link );
 	}
 

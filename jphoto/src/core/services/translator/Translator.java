@@ -12,16 +12,18 @@ public class Translator {
 
 	public TranslationEntry getTranslation( final String nerd, final Language language ) {
 
-		for ( final String _nerd : translationsMap.keySet() ) {
-			if ( _nerd.equals( nerd ) ) {
-				return translationsMap.get( _nerd ).getTranslationEntry( language );
-			}
+		if ( ! translationsMap.containsKey( nerd ) ) {
+			return new TranslationEntryNerd( nerd );
 		}
 
-		return new TranslationEntryNerd( nerd );
+		return translationsMap.get( nerd ).getTranslationEntry( language );
 	}
 
 	public String translate( final String nerd, final Language ru ) {
 		return getTranslation( nerd, Language.RU ).getValue();
+	}
+
+	public Map<String, TranslationData> getTranslationsMap() {
+		return translationsMap;
 	}
 }

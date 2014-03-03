@@ -283,4 +283,14 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 		return new PageTitleData( title, nerd, breadcrumbs );
 	}
+
+	@Override
+	public PageTitleData getTranslatorTitle() {
+		final String nerd = translatorService.translate( "Translator" );
+
+		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
+
+		return new PageTitleData( title, nerd, breadcrumbs );
+	}
 }

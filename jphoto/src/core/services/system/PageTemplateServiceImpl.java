@@ -189,7 +189,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 				if ( messagesCount > 0 ) {
 					final NewPrivateMessage newPrivateMessage = new NewPrivateMessage( messageType, messagesCount );
 					newPrivateMessage.setLink( urlUtilsService.getPrivateMessagesList( currentUser.getId(), messageType ) );
-					newPrivateMessage.setHint( translatorService.translate( "$1: +$2", messageType.getName(), String.valueOf( messagesCount ) ) );
+					newPrivateMessage.setHint( String.format( "%s: +%d", messageType.getName(), messagesCount ) );
 
 					privateMessages.add( newPrivateMessage );
 				}

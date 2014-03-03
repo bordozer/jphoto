@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping( "configuration/activation/" )
+@RequestMapping( "configuration/activation" )
 public class SystemConfigurationActivationController {
 
 	public static final String MODEL_NAME = "systemConfigurationActivationModel";

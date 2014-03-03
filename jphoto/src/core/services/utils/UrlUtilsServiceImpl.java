@@ -495,6 +495,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getAdminTranslatorLink() {
+		return String.format( "%s/translator/", getAdminBaseURLWithPrefix() );
+	}
+
+	@Override
 	public String getAdminVotingCategoryNewLink() {
 		return String.format( "%s/%s/new/", getAdminBaseURLWithPrefix(), VOTING_CATEGORIES_URL );
 	}

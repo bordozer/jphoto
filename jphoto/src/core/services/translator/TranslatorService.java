@@ -1,5 +1,7 @@
 package core.services.translator;
 
+import java.util.Map;
+
 public interface TranslatorService {
 
 	String BEAN_NAME = "translatorService";
@@ -19,4 +21,8 @@ public interface TranslatorService {
 	String translate( final String nerd, final long param );
 
 	String translateWithParameters( final String nerd, final String... params );
+
+	Map<String, TranslationData> getTranslationsMap();
+
+	Map<String, TranslationData> getUntranslatedMap();
 }

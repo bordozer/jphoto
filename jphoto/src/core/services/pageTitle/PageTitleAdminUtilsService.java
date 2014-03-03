@@ -56,4 +56,6 @@ public interface PageTitleAdminUtilsService {
 	PageTitleData getUpgradeData( UpgradeState upgradeState, int doneUpgradeTasks, int totalUpgradeTasks, int errors );
 
 	PageTitleData getAnonymousDaysData();
+
+	PageTitleData getTranslatorTitle();
 }
