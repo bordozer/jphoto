@@ -14,69 +14,64 @@ import static com.google.common.collect.Lists.newArrayList;
 public class GenreEditDataModel extends AbstractGeneralModel {
 
 	public static final String GENRE_EDIT_DATA_ID_FORM_CONTROL = "genreId";
-	public static final String GENRE_EDIT_DATA_NAME_FORM_CONTROL = "name";
+	public static final String GENRE_EDIT_DATA_NAME_FORM_CONTROL = "genreName";
+	public static final String GENRE_EDIT_DATA_DESCRIPTION_FORM_CONTROL = "description";
 
 	public static final String GENRE_EDIT_DATA_ALLOWED_VOTING_CATEGORIES_FORM_CONTROL = "allowedVotingCategoryIDs";
 
 	public static final String GENRE_EDIT_MIN_MARKS_FORM_CONTROL = "minMarksForBest";
 
-	public static final String GENRE_EDIT_DATA_CAN_CONTAIN_NUDE_CONTENT_FORM_CONTROL = "canContainNudeContent";
-	public static final String GENRE_EDIT_DATA_CONTAINS_NUDE_CONTENT_FORM_CONTROL = "containsNudeContent";
+	private int genreId;
+	private String genreName;
+	private String description;
+	private boolean canContainNudeContent;
+	private boolean ContainsNudeContent;
+	private int minMarksForBest;
 
-	public static final String GENRE_EDIT_DATA_DESCRIPTION_FORM_CONTROL = "description";
-
-	private Genre genre;
 	private List<PhotoVotingCategory> photoVotingCategories = newArrayList();
 	private List<String> allowedVotingCategoryIDs = newArrayList();
 
 	private DataRequirementService dataRequirementService;
 
-	public Genre getGenre() {
-		return genre;
-	}
-
-	public void setGenre( final Genre genre ) {
-		this.genre = genre;
-	}
-
 	@Override
 	public void clear() {
 		super.clear();
 
-		genre = null;
+		genreId = 0;
+		genreName = null;
 		allowedVotingCategoryIDs = newArrayList();
 	}
 
 	public int getGenreId() {
-		return genre.getId();
+		return genreId;
 	}
 
 	public void setGenreId( final int genreId ) {
-		genre.setId( genreId );
+		this.genreId = genreId;
 	}
 
-	public String getName() {
-		return genre.getName();
+	public String getGenreName() {
+		return genreName;
 	}
 
-	public void setName( final String name ) {
-		genre.setName( name.trim() );
+	public void setGenreName( final String genreName ) {
+		this.genreName = genreName;
 	}
 
-	public String getMinMarksForBest() {
-		return String.valueOf( genre.getMinMarksForBest() );
+	public int getMinMarksForBest() {
+		return minMarksForBest;
 	}
 
-	public void setMinMarksForBest( final String minMarksForBest ) {
-		genre.setMinMarksForBest( Integer.parseInt( minMarksForBest ) );
+	public void setMinMarksForBest( final int minMarksForBest ) {
+		this.minMarksForBest = minMarksForBest;
 	}
 
 	public String getDescription() {
-		return genre.getDescription();
+		return description;
 	}
 
 	public void setDescription( final String description ) {
-		genre.setDescription( description.trim() );
+		this.description = description;
 	}
 
 	public List<PhotoVotingCategory> getPhotoVotingCategories() {
@@ -109,19 +104,19 @@ public class GenreEditDataModel extends AbstractGeneralModel {
 	}
 
 	public boolean isCanContainNudeContent() {
-		return genre.isCanContainNudeContent();
+		return canContainNudeContent;
 	}
 
 	public void setCanContainNudeContent( final boolean canContainNudeContent ) {
-		genre.setCanContainNudeContent( canContainNudeContent );
+		this.canContainNudeContent = canContainNudeContent;
 	}
 
 	public boolean isContainsNudeContent() {
-		return genre.isContainsNudeContent();
+		return ContainsNudeContent;
 	}
 
 	public void setContainsNudeContent( final boolean containsNudeContent ) {
-		genre.setContainsNudeContent( containsNudeContent );
+		ContainsNudeContent = containsNudeContent;
 	}
 
 	public DataRequirementService getDataRequirementService() {

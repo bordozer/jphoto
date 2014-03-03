@@ -27,6 +27,8 @@ public class GenreEditDataController {
 
 	public static final String VIEW = "admin/genres/edit/GenreEditData";
 
+	public static final String MODEL_NAME = "genreEditDataModel";
+
 	@Autowired
 	private GenreService genreService;
 
@@ -53,7 +55,7 @@ public class GenreEditDataController {
 		binder.setValidator( genreEditDataValidator );
 	}
 
-	@ModelAttribute( "genreEditDataModel" )
+	@ModelAttribute( MODEL_NAME )
 	public GenreEditDataModel prepareModel() {
 		final GenreEditDataModel model = new GenreEditDataModel();
 
@@ -63,10 +65,9 @@ public class GenreEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/new/" )
-	public String newGenre( @ModelAttribute( "genreEditDataModel" ) GenreEditDataModel model ) {
+	public String newGenre( final @ModelAttribute( MODEL_NAME ) GenreEditDataModel model ) {
 		model.clear();
 
-		model.setGenre( new Genre() );
 		model.setNew( true );
 		model.setPageTitleData( pageTitleGenreUtilsService.getGenreNewData() );
 		model.setPhotoVotingCategories( votingCategoryService.loadAll() );
@@ -75,11 +76,16 @@ public class GenreEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{genreId}/edit/" )
-	public String editGenre( @PathVariable( "genreId" ) int genreId, @ModelAttribute( "genreEditDataModel" ) GenreEditDataModel model ) {
+	public String editGenre( final @PathVariable( "genreId" ) int genreId, final @ModelAttribute( MODEL_NAME ) GenreEditDataModel model ) {
 		model.clear();
 
 		final Genre genre = new Genre( genreService.load( genreId ) );
-		model.setGenre( genre );
+		model.setGenreId( genre.getId() );
+		model.setGenreName( genre.getName() );
+		model.setDescription( genre.getDescription() );
+		model.setCanContainNudeContent( genre.isCanContainNudeContent() );
+		model.setContainsNudeContent( genre.isContainsNudeContent() );
+		model.setMinMarksForBest( genre.getMinMarksForBest() );
 		model.setPhotoVotingCategories( votingCategoryService.loadAll() );
 
 		final List<String> allowedVotingCategoryIDs = newArrayList();
@@ -94,14 +100,21 @@ public class GenreEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/save/" )
-	public String saveGenre( @Valid @ModelAttribute( "genreEditDataModel" ) GenreEditDataModel model, final BindingResult result ) {
+	public String saveGenre( @Valid final @ModelAttribute( MODEL_NAME ) GenreEditDataModel model, final BindingResult result ) {
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
 			return VIEW;
 		}
 
-		final Genre genre = model.getGenre();
+		final Genre genre = new Genre();
+		genre.setId( model.getGenreId() );
+		genre.setName( model.getGenreName() );
+		genre.setDescription( model.getDescription() );
+		genre.setCanContainNudeContent( model.isCanContainNudeContent() );
+		genre.setContainsNudeContent( model.isContainsNudeContent() );
+		genre.setMinMarksForBest( model.getMinMarksForBest() );
+
 		genre.setPhotoVotingCategories( model.getAllowedVotingCategories() );
 
 		if ( ! genreService.save( genre ) ) {

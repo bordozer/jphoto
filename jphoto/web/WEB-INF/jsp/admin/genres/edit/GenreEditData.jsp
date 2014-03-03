@@ -1,4 +1,3 @@
-<%@ page import="core.general.genre.Genre" %>
 <%@ page import="admin.controllers.genres.edit.GenreEditDataModel" %>
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 
@@ -7,16 +6,10 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
-<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="genreEditDataModel" type="admin.controllers.genres.edit.GenreEditDataModel" scope="request"/>
 
-<%
-	final Genre genre = genreEditDataModel.getGenre();
-%>
-
-<c:set var="genre" value="<%=genre%>"/>
 <c:set var="isNew" value="<%=genreEditDataModel.isNew()%>"/>
 
 <c:set var="entityUrl" value="<%=UrlUtilsServiceImpl.GENRES_URL%>"/>
@@ -37,9 +30,9 @@
 
 	<tags:inputHintForm/>
 
-	<eco:form action="${eco:baseAdminUrlWithPrefix()}/${entityUrl}/save/">
+	<form:form modelAttribute="genreEditDataModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/${entityUrl}/save/">
 
-		<input type="hidden" name="${genreIdControl}" id="${genreIdControl}" value="${genre.id}"/>
+		<form:hidden path="${genreIdControl}" />
 
 		<table:table width="680" border="0">
 
@@ -49,10 +42,9 @@
 				<table:tdtext text_t="Name" labelFor="${genreNameControl}" isMandatory="true"/>
 
 				<table:tddata>
-					<tags:inputHint inputId="${genreNameControl}" hintTitle_t="Genre name"
-									hint="${eco:translate( 'Genre name.' )}<br /><br />${mandatoryText}" focused="true">
+					<tags:inputHint inputId="${genreNameControl}" hintTitle_t="Genre name" hint="${eco:translate( 'Genre name.' )}<br /><br />${mandatoryText}" focused="true">
 						<jsp:attribute name="inputField">
-							<html:input fieldId="${genreNameControl}" fieldValue="${genre.name}"/>
+							<form:input path="${genreNameControl}"/>
 						</jsp:attribute>
 					</tags:inputHint>
 				</table:tddata>
@@ -63,7 +55,7 @@
 
 				<table:tddata>
 					<form:checkboxes items="${genreEditDataModel.photoVotingCategories}"
-									 path="genreEditDataModel.${allowedVotingCategoriesControl}"
+									 path="${allowedVotingCategoriesControl}"
 									 itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="false"/>
 				</table:tddata>
 			</table:tredit>
@@ -72,11 +64,9 @@
 				<table:tdtext text_t="Minimal mark" labelFor="${genreMinMarksControl}"/>
 
 				<table:tddata>
-					<tags:inputHint inputId="${genreMinMarksControl}" hintTitle_t="Minimal marks"
-									hint="${minMarksRequirement}<br /><br />${optionalText}">
+					<tags:inputHint inputId="${genreMinMarksControl}" hintTitle_t="Minimal marks" hint="${minMarksRequirement}<br /><br />${optionalText}">
 						<jsp:attribute name="inputField">
-							<html:input fieldId="${genreMinMarksControl}"
-										fieldValue="${genreEditDataModel.minMarksForBest}" size="3" maxLength="3"/>
+							<form:input path="${genreMinMarksControl}" size="3" maxLength="3"/>
 						</jsp:attribute>
 					</tags:inputHint>
 				</table:tddata>
@@ -88,7 +78,7 @@
 				<table:tdtext text_t="Can contain nude content" labelFor="canContainNudeContent1"/>
 
 				<table:tddata>
-					<form:checkbox path="genreEditDataModel.canContainNudeContent"/>
+					<form:checkbox path="canContainNudeContent"/>
 				</table:tddata>
 			</table:tredit>
 
@@ -96,7 +86,7 @@
 				<table:tdtext text_t="Contains nude content" labelFor="containsNudeContent1"/>
 
 				<table:tddata>
-					<form:checkbox path="genreEditDataModel.containsNudeContent"/>
+					<form:checkbox path="containsNudeContent"/>
 				</table:tddata>
 			</table:tredit>
 
@@ -109,9 +99,7 @@
 					<tags:inputHint inputId="${genreDescriptionControl}" hintTitle_t="Description"
 									hint="${eco:translate( 'Genre description.' )}<br /><br />${optionalText}">
 									<jsp:attribute name="inputField">
-										<html:textarea inputId="${genreDescriptionControl}"
-													   inputValue="${genre.description}"
-													   title="Description" hint="${descriptionRequirement}"/>
+										<form:textarea path="${genreDescriptionControl}"/>
 									</jsp:attribute>
 					</tags:inputHint>
 				</table:tddata>
@@ -121,7 +109,7 @@
 
 		</table:table>
 
-	</eco:form>
+	</form:form>
 
 	<tags:springErrorHighliting bindingResult="${genreEditDataModel.bindingResult}"/>
 
