@@ -12,4 +12,69 @@
 		<ru><![CDATA[Выход]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Members</nerd>
+		<ru><![CDATA[Участники]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Register</nerd>
+		<ru><![CDATA[Регистрация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos</nerd>
+		<ru><![CDATA[Фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The best photos</nerd>
+		<ru><![CDATA[Лучшие фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My club</nerd>
+		<ru><![CDATA[Мой клуб]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My bookmarks</nerd>
+		<ru><![CDATA[Мои закладки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My subscription</nerd>
+		<ru><![CDATA[Мои подписки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Administration</nerd>
+		<ru><![CDATA[Администрирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Messages</nerd>
+		<ru><![CDATA[Сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private Messages</nerd>
+		<ru><![CDATA[Личные сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private Message</nerd>
+		<ru><![CDATA[Личное сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ACCESS DENIED</nerd>
+		<ru><![CDATA[Доступ закрыт]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Post your soul here</nerd>
+		<ru><![CDATA[Опубликуй мечту здесь]]></ru>
+	</translation>
+
 </translations>
