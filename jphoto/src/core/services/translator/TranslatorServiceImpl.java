@@ -61,6 +61,10 @@ public class TranslatorServiceImpl implements TranslatorService {
 	@Override
 	public String translateWithParameters( final String nerd, final String... params ) {
 
+		if ( nerd.trim().length() == 0 ) {
+			return nerd;
+		}
+
 		final TranslationEntry translation = translator.getTranslation( nerd, Language.RU );
 
 		if ( translation instanceof TranslationEntryNerd ) {
