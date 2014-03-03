@@ -1,6 +1,8 @@
 package admin.controllers.control;
 
+import core.general.cache.CacheKey;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.system.CacheService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
@@ -32,6 +34,9 @@ public class ControlPanelController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private CacheService cacheService;
+
 	@ModelAttribute( MODEL_NAME )
 	public ControlPanelModel prepareModel() {
 		final ControlPanelModel model = new ControlPanelModel();
@@ -51,7 +56,7 @@ public class ControlPanelController {
 
 		systemVarsService.initSystemVars();
 
-		return String.format( "redirect:%s", urlUtilsService.getAdminControlPanelLink() );
+		return getRedirectUrl();
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/reload-translations/" )
@@ -59,6 +64,20 @@ public class ControlPanelController {
 
 		translatorService.initTranslations();
 
+		return getRedirectUrl();
+	}
+
+	@RequestMapping( method = RequestMethod.POST, value = "/clear-cache/" )
+	public String clearSystemCache( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) throws DocumentException {
+
+		for ( final CacheKey cacheKey : CacheKey.values() ) {
+			cacheService.expire( cacheKey );
+		}
+
+		return getRedirectUrl();
+	}
+
+	private String getRedirectUrl() {
 		return String.format( "redirect:%s", urlUtilsService.getAdminControlPanelLink() );
 	}
 }

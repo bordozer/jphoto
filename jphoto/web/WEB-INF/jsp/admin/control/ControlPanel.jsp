@@ -32,6 +32,15 @@
 
 			</table:tr>
 
+			<table:tr>
+
+				<table:td>
+					<html:submitButton id="clear-cache" caption_t="Clear system cache"
+									   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
+				</table:td>
+
+			</table:tr>
+
 		</table:table>
 
 	</form:form>

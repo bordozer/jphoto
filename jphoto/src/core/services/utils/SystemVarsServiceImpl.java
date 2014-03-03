@@ -21,6 +21,8 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 		final File photoPropertiesFile = new File( String.format( "%s/Photo.properties", getPropertiesPath() ) );
 		final File dbPropertiesFile = new File( String.format( "%s/Database.properties", getPropertiesPath() ) );
 
+		config.clear();
+
 		config.addConfiguration( new PropertiesConfiguration( basePropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( systemPropertiesFile ) );
 		config.addConfiguration( new PropertiesConfiguration( photoPropertiesFile ) );
