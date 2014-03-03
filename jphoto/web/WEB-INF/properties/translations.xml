@@ -77,4 +77,19 @@
 		<ru><![CDATA[Опубликуй мечту здесь]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Sorted by</nerd>
+		<ru><![CDATA[Отсортировано по]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>upload time descending</nerd>
+		<ru><![CDATA[дате загрузки по убыванию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>marks for period descending</nerd>
+		<ru><![CDATA[оценкам за период по убыванию]]></ru>
+	</translation>
+
 </translations>

@@ -110,7 +110,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 
 		builder.append( "<br />" );
-		builder.append( translatorService.translate( "Sorted by " ) );
+		builder.append( translatorService.translate( "Sorted by" ) ).append( " " );
 		switch( criterias.getPhotoSort()  ) {
 			case UPLOAD_TIME:
 				builder.append( translatorService.translate( "upload time descending" ) );
