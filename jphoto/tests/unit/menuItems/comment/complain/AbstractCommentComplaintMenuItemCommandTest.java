@@ -53,9 +53,18 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 		final AbstractEntryMenuItemCommand command = menuItem.getMenuItemCommand();
 
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
+
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, translated( expected ), command.getMenuText() );
+
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS
-			, command.getMenuCommand()
-			, String.format( "%s( %d, %d, %d, %d ); return false;", AbstractEntryMenuItemComplaintCommand.COMPLAINT_MESSAGE_JS_FUNCTION, EntryMenuType.COMMENT.getId(), testData.getComment().getId(), accessor.getId(), complaintReasonType.getId() ) );
+				, command.getMenuCommand()
+				, String.format( "%s( %d, %d, %d, %d ); return false;"
+				, AbstractEntryMenuItemComplaintCommand.COMPLAINT_MESSAGE_JS_FUNCTION
+				, EntryMenuType.COMMENT.getId()
+				, testData.getComment().getId()
+				, accessor.getId()
+				, complaintReasonType.getId()
+			)
+		);
 	}
 }

@@ -119,7 +119,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );
 
-		translator = TranslationsReader.getTranslator( translationsFile );
+		translator = TranslationsReader.getTranslator( translationsFile, systemVarsService );
 	}
 
 	private String markAsTranslated( final String nerd ) {
@@ -129,5 +129,9 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
 		this.systemVarsService = systemVarsService;
+	}
+
+	public void setTranslator( final Translator translator ) {
+		this.translator = translator;
 	}
 }

@@ -46,7 +46,7 @@ public abstract class AbstractCommentComplaintMenuItem extends AbstractCommentMe
 		return new AbstractEntryMenuItemComplaintCommand<PhotoComment>( menuEntry, accessor, EntryMenuType.COMMENT, getComplainReasonType(), services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( getMenuItemText() );
+				return getMenuItemText();
 			}
 		};
 	}

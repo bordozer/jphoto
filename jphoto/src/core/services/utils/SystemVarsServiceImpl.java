@@ -97,7 +97,17 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	@Override
 	public String getTranslatedSign() {
-		return config.getString( "TranslatedSign" );
+		return config.getString( "translator.TranslatedSign" );
+	}
+
+	@Override
+	public String getTranslatorStartPrefix() {
+		return config.getString( "translator.startPrefix" );
+	}
+
+	@Override
+	public String getTranslatorEndPrefix() {
+		return config.getString( "translator.endPrefix" );
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package core.services.translator;
 
+import core.services.utils.SystemVarsService;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -17,7 +18,7 @@ public class TranslationsReader {
 
 	public static final String TRANSLATION = "translation";
 
-	public static Translator getTranslator( final File translationsFile ) throws DocumentException {
+	public static Translator getTranslator( final File translationsFile, final SystemVarsService systemVarsService ) throws DocumentException {
 
 		final SAXReader reader = new SAXReader( false );
 		final Document document = reader.read( translationsFile );
@@ -32,7 +33,7 @@ public class TranslationsReader {
 			final String nerd = nerdElement.element( Language.NERD.getCode() ).getText();
 
 			final Set<TranslationEntry> translations = newHashSet();
-			translations.add( new TranslationEntryNerd( nerd ) );
+			translations.add( new TranslationEntryNerd( nerd, systemVarsService.getTranslatorStartPrefix(), systemVarsService.getTranslatorEndPrefix() ) );
 
 			for ( final Language language : Language.values() ) {
 
@@ -47,6 +48,6 @@ public class TranslationsReader {
 			translationsMap.put( nerd, new TranslationData( nerd, translations ) );
 		}
 
-		return new Translator( translationsMap );
+		return new Translator( translationsMap, systemVarsService.getTranslatorStartPrefix(), systemVarsService.getTranslatorEndPrefix() );
 	}
 }

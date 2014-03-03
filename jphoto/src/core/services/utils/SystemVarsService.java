@@ -45,4 +45,8 @@ public interface SystemVarsService {
 	String getDatabaseName();
 
 	String getPropertiesPath();
+
+	String getTranslatorStartPrefix();
+
+	String getTranslatorEndPrefix();
 }

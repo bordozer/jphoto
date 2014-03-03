@@ -19,8 +19,10 @@ PhotoLines=5
 ##Photos in line - default
 PhotosInLine=4
 
-# translated sign
-TranslatedSign=&trade;
+# translator
+translator.TranslatedSign=&trade;
+translator.startPrefix=[
+translator.endPrefix=]
 
 #Admin user IDs
 SuperAdminUserIDs=6987,6306
