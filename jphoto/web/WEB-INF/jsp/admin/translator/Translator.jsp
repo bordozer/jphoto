@@ -7,15 +7,25 @@
 
 <tags:page pageModel="${translatorModel.pageModel}" >
 
-	<a href="${eco:baseAdminUrlWithPrefix()}/translator/">${eco:translate('Translated')}</a>
+	<style type="text/css">
+		.selected {
+			/*text-decoration: underline;*/
+			font-weight: bold;
+		}
+	</style>
+
+	<c:set var="mode" value="${translatorModel.translationMode}"/>
+	<c:if test="${mode == 'TRANSLATED'}"><span class='selected'></c:if><a href="${eco:baseAdminUrlWithPrefix()}/translator/">${eco:translate('Translated')}</a><c:if test="${mode == 'TRANSLATED'}"></span></c:if>
 	&nbsp;&nbsp;
-	<a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/">${eco:translate('Untranslated')}</a>
+	<c:if test="${mode == 'UNTRANSLATED'}"><span class='selected'></c:if><a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/">${eco:translate('Untranslated')}</a><c:if test="${mode == 'UNTRANSLATED'}"></span></c:if>
 
 	<br />
 	<br />
 
 	<c:forEach var="letter" items="${translatorModel.letters}" >
-		<a href="${eco:baseAdminUrlWithPrefix()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a> &nbsp;
+		<c:set var="isSelected" value="${translatorModel.filterByLetter == letter}"/>
+		<c:if test="${isSelected}"><span class='selected'></c:if><a href="${eco:baseAdminUrlWithPrefix()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a><c:if test="${isSelected}"></span></c:if>
+		 &nbsp;
 	</c:forEach>
 
 	<br />

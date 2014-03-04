@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 import static com.google.common.collect.Sets.newHashSet;
 
@@ -44,6 +43,8 @@ public class TranslatorController {
 		model.setLetters( getLetters( translationsMap ) );
 		model.setTranslationsMap( translationsMap );
 
+		model.setTranslationMode( TranslationMode.TRANSLATED );
+
 		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
 
 		return VIEW;
@@ -57,6 +58,9 @@ public class TranslatorController {
 		model.setLetters( getLetters( translatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( translatedMap, letter ) );
 
+		model.setFilterByLetter( letter );
+		model.setTranslationMode( TranslationMode.TRANSLATED );
+
 		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
 
 		return VIEW;
@@ -69,6 +73,8 @@ public class TranslatorController {
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( untranslatedMap );
+
+		model.setTranslationMode( TranslationMode.UNTRANSLATED );
 
 		model.setUrlPrefix( "untranslated" );
 
@@ -84,6 +90,9 @@ public class TranslatorController {
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( untranslatedMap, letter ) );
+
+		model.setFilterByLetter( letter );
+		model.setTranslationMode( TranslationMode.UNTRANSLATED );
 
 		model.setUrlPrefix( "untranslated" );
 
@@ -107,13 +116,24 @@ public class TranslatorController {
 		return map;
 	}
 
-	private Set<String> getLetters( final Map<NerdKey, TranslationData> translationsMap ) {
-		final Set<String> result = newHashSet();
+	private List<String> getLetters( final Map<NerdKey, TranslationData> translationsMap ) {
+		final List<String> result = newArrayList();
 
 		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
 			final TranslationData translationData = translationsMap.get( nerdKey );
-			result.add( translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 ).toUpperCase() );
+			final String letter = translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 ).toUpperCase();
+			if ( ! result.contains( letter ) ) {
+				result.add( letter );
+			}
 		}
+
+		Collections.sort( result, new Comparator<String>() {
+			@Override
+			public int compare( final String o1, final String o2 ) {
+				return o1.compareTo( o2 );
+			}
+		} );
+
 		return result;
 	}
 }
