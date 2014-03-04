@@ -90,59 +90,49 @@
 		</div>
 
 		<div class="right-pane">
-			<c:if test="${isUntranslatedMode}">
 
-				<script type="text/javascript">
-					function placeToTranslatorForm( nerd ) {
-						$( "#${translatorNerd}" ).html( nerd );
+			<script type="text/javascript">
+				function placeToTranslatorForm( nerd ) {
+					$( "#${translatorNerd}" ).html( nerd );
 
-						var translationDTO = jsonRPC.translatorService.getTranslationAjax( nerd );
-						console.log( translationDTO );
+					var translationDTO = jsonRPC.translatorService.getTranslationAjax( nerd );
 
-						/*$.ajax( {
-									type:'GET',
-									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
-									success:function ( response ) {
-										var translationDTO = jsonRPC.translatorService.getTranslationAjax( nerd );
-										console.log( translationDTO );
-									},
-									error:function () {
-										showErrorMessage( "${eco:translate('Error loading translations')}" );
-									}
-								} );*/
+					var map = translationDTO.translations.map;
+					for( languageCode in map ) {
+						$( "#translation_" + languageCode ).text( map[ languageCode ] );
 					}
-				</script>
+				}
+			</script>
 
-				<table:table width="400px">
+			<table:table width="400px">
 
-					<table:tr>
+				<table:tr>
 
-						<table:td/>
-						<table:td>
-							<a name="${translatorNerdAnchor}" />
-							<div id="${translatorNerd}" class="floatleft" style="height: 30px; font-size: 14px;"></div>
-						</table:td>
+					<table:td/>
+					<table:td>
+						<a name="${translatorNerdAnchor}" />
+						<div id="${translatorNerd}" class="floatleft" style="height: 30px; font-size: 14px;"></div>
+					</table:td>
 
-					</table:tr>
+				</table:tr>
 
-					<c:forEach var="language" items="${languages}">
-						<c:if test="${language != languageNerd}">
-							<table:tr>
+				<c:forEach var="language" items="${languages}">
+					<c:if test="${language != languageNerd}">
+						<table:tr>
 
-								<table:td>
-									${language.code}
-								</table:td>
-								<table:td>
-									<textarea id="translation_${language.code}" rows="5" cols="40"></textarea>
-								</table:td>
+							<table:td>
+								${language.code}
+							</table:td>
+							<table:td>
+								<textarea id="translation_${language.code}" rows="5" cols="40"></textarea>
+							</table:td>
 
-							</table:tr>
-						</c:if>
-					</c:forEach>
+						</table:tr>
+					</c:if>
+				</c:forEach>
 
-				</table:table>
+			</table:table>
 
-			</c:if>
 		</div>
 
 	</div>
