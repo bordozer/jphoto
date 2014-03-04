@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class Translator {
 
-	private Map<String, TranslationData> translationsMap;
+	private Map<NerdKey, TranslationData> translationsMap;
 	private final String startPrefix;
 	private final String endPrefix;
 
-	public Translator( final Map<String, TranslationData> translationsMap, final String startPrefix, final String endPrefix ) {
+	public Translator( final Map<NerdKey, TranslationData> translationsMap, final String startPrefix, final String endPrefix ) {
 		this.translationsMap = translationsMap;
 
 		this.startPrefix = startPrefix;
@@ -17,18 +17,20 @@ public class Translator {
 
 	public TranslationEntry getTranslation( final String nerd, final Language language ) {
 
-		if ( ! translationsMap.containsKey( nerd ) ) {
+		final NerdKey key = new NerdKey( nerd );
+
+		if ( ! translationsMap.containsKey( key ) ) {
 			return new TranslationEntryNerd( nerd, startPrefix, endPrefix );
 		}
 
-		return translationsMap.get( nerd ).getTranslationEntry( language );
+		return translationsMap.get( key ).getTranslationEntry( language );
 	}
 
 	public String translate( final String nerd, final Language language ) {
 		return getTranslation( nerd, language ).getValue();
 	}
 
-	public Map<String, TranslationData> getTranslationsMap() {
+	public Map<NerdKey, TranslationData> getTranslationsMap() {
 		return translationsMap;
 	}
 }

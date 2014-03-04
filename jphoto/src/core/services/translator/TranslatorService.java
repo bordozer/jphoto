@@ -24,9 +24,9 @@ public interface TranslatorService {
 
 	String translateWithParameters( final String nerd, final String... params );
 
-	Map<String, TranslationData> getTranslationsMap();
+	Map<NerdKey, TranslationData> getTranslationsMap();
 
-	Map<String, TranslationData> getUntranslatedMap();
+	Map<NerdKey, TranslationData> getUntranslatedMap();
 
 	void initTranslations() throws DocumentException;
 }

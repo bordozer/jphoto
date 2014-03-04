@@ -2,6 +2,7 @@ package admin.controllers.translator;
 
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.translator.Language;
+import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String getTranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<String, TranslationData> translationsMap = translatorService.getTranslationsMap();
+		final Map<NerdKey, TranslationData> translationsMap = translatorService.getTranslationsMap();
 		model.setLetters( getLetters( translationsMap ) );
 		model.setTranslationsMap( translationsMap );
 
@@ -51,7 +52,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{letter}/" )
 	public String getTranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<String, TranslationData> translatedMap = translatorService.getTranslationsMap();
+		final Map<NerdKey, TranslationData> translatedMap = translatorService.getTranslationsMap();
 
 		model.setLetters( getLetters( translatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( translatedMap, letter ) );
@@ -64,7 +65,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/" )
 	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<String, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
+		final Map<NerdKey, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( untranslatedMap );
@@ -79,7 +80,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{letter}/" )
 	public String getUntranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<String, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
+		final Map<NerdKey, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( untranslatedMap, letter ) );
@@ -91,26 +92,26 @@ public class TranslatorController {
 		return VIEW;
 	}
 
-	private Map<String, TranslationData> filterByFirstLetter( final Map<String, TranslationData> translationsMap, final String letter ) {
+	private Map<NerdKey, TranslationData> filterByFirstLetter( final Map<NerdKey, TranslationData> translationsMap, final String letter ) {
 
-		final HashMap<String,TranslationData> map = newHashMap( translationsMap );
+		final HashMap<NerdKey,TranslationData> map = newHashMap( translationsMap );
 
-		for ( final String nerd : translationsMap.keySet() ) {
-			final TranslationData translationData = translationsMap.get( nerd );
+		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
+			final TranslationData translationData = translationsMap.get( nerdKey );
 			final String firstLetter = translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 );
 			if ( ! firstLetter.equalsIgnoreCase( letter ) ) {
-				map.remove( nerd );
+				map.remove( nerdKey );
 			}
 		}
 
 		return map;
 	}
 
-	private Set<String> getLetters( final Map<String, TranslationData> translationsMap ) {
+	private Set<String> getLetters( final Map<NerdKey, TranslationData> translationsMap ) {
 		final Set<String> result = newHashSet();
 
-		for ( final String nerd : translationsMap.keySet() ) {
-			final TranslationData translationData = translationsMap.get( nerd );
+		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
+			final TranslationData translationData = translationsMap.get( nerdKey );
 			result.add( translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 ).toUpperCase() );
 		}
 		return result;

@@ -22,10 +22,10 @@
 	<br />
 
 	<c:forEach var="entry" items="${translatorModel.translationsMap}">
-		<c:set var="nerd" value="${entry.key}"/>
+		<c:set var="nerdKey" value="${entry.key}"/>
 		<c:set var="translationData" value="${entry.value}"/>
 
-		${nerd}
+		${nerdKey.nerd}
 		<br />
 		<c:forEach var="translations" items="${translationData.translations}">
 			${translations.language}: ${translations.value}

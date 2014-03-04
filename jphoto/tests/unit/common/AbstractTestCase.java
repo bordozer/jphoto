@@ -3,6 +3,7 @@ package common;
 import com.google.common.collect.Maps;
 import core.general.user.User;
 import core.services.security.ServicesImpl;
+import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 import core.services.translator.Translator;
 import core.services.translator.TranslatorServiceImpl;
@@ -13,8 +14,6 @@ import core.services.utils.sql.PhotoSqlFilterServiceImpl;
 import mocks.SystemVarsServiceMock;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-
-import java.util.HashMap;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -39,7 +38,7 @@ public class AbstractTestCase {
 		systemVarsServiceMock = new SystemVarsServiceMock();
 
 		translatorService = new TranslatorServiceImpl();
-		translatorService.setTranslator( new Translator( Maps.<String, TranslationData>newHashMap(), StringUtils.EMPTY, StringUtils.EMPTY ) );
+		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap(), StringUtils.EMPTY, StringUtils.EMPTY ) );
 
 		translatorService.setSystemVarsService( systemVarsServiceMock );
 

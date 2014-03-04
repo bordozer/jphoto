@@ -1,6 +1,7 @@
 package admin.controllers.translator;
 
 import core.general.base.AbstractGeneralModel;
+import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 
 import java.util.Map;
@@ -8,16 +9,16 @@ import java.util.Set;
 
 public class TranslatorModel extends AbstractGeneralModel {
 
-	private Map<String, TranslationData> translationsMap;
+	private Map<NerdKey, TranslationData> translationsMap;
 	private Set<String> letters;
 
 	private String urlPrefix;
 
-	public void setTranslationsMap( final Map<String,TranslationData> translationsMap ) {
+	public void setTranslationsMap( final Map<NerdKey,TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
 	}
 
-	public Map<String, TranslationData> getTranslationsMap() {
+	public Map<NerdKey, TranslationData> getTranslationsMap() {
 		return translationsMap;
 	}
 

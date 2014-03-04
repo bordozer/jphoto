@@ -18,7 +18,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	private Translator translator;
 
-	private final Map<String, TranslationData> untranslatedMap = newHashMap();
+	private final Map<NerdKey, TranslationData> untranslatedMap = newHashMap();
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -83,15 +83,16 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	private void addUntranslated( final String nerd, final TranslationEntry translation ) {
 		synchronized ( untranslatedMap ) {
-			final TranslationData translationData = untranslatedMap.get( nerd );
+			final NerdKey nerdKey = new NerdKey( nerd );
+			final TranslationData translationData = untranslatedMap.get( nerdKey );
 			if ( translationData == null ) {
 				final TranslationData translations = new TranslationData( nerd, newHashSet( translation ) );
-				untranslatedMap.put( nerd, translations );
+				untranslatedMap.put( nerdKey, translations );
 			} else {
 				if ( ! hasTranslation( translationData, translation.getLanguage() ) ) {
 					final Set<TranslationEntry> translations = translationData.getTranslations();
 					translations.add( new TranslationEntry( nerd, translation.getLanguage(), translation.getValue() ) );
-					untranslatedMap.put( nerd, new TranslationData( nerd, translations ) );
+					untranslatedMap.put( nerdKey, new TranslationData( nerd, translations ) );
 				}
 			}
 		}
@@ -110,12 +111,12 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
-	public Map<String, TranslationData> getTranslationsMap() {
+	public Map<NerdKey, TranslationData> getTranslationsMap() {
 		return translator.getTranslationsMap();
 	}
 
 	@Override
-	public Map<String, TranslationData> getUntranslatedMap() {
+	public Map<NerdKey, TranslationData> getUntranslatedMap() {
 		return untranslatedMap;
 	}
 

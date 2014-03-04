@@ -25,7 +25,7 @@ public class TranslationsReader {
 
 		final Iterator photosIterator = document.getRootElement().elementIterator( TRANSLATION );
 
-		final Map<String, TranslationData> translationsMap = newHashMap();
+		final Map<NerdKey, TranslationData> translationsMap = newHashMap();
 
 		while ( photosIterator.hasNext() ) {
 
@@ -45,7 +45,7 @@ public class TranslationsReader {
 				translations.add( new TranslationEntry( nerd, language, translation ) );
 			}
 
-			translationsMap.put( nerd, new TranslationData( nerd, translations ) );
+			translationsMap.put( new NerdKey( nerd ), new TranslationData( nerd, translations ) );
 		}
 
 		return new Translator( translationsMap, systemVarsService.getTranslatorStartPrefix(), systemVarsService.getTranslatorEndPrefix() );
