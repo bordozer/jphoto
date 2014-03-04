@@ -77,18 +77,22 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public String getTranslatedSign() {
-//		return StringUtils.EMPTY; // Important! Must be EMPTY to be able to test translated strings as RAW
-		return AbstractTestCase.TRANSLATION_SIGN;
+	public String getTranslatorTranslatedStartPrefix() {
+		return AbstractTestCase.TRANSLATION_START_PREFIX;
 	}
 
 	@Override
-	public String getTranslatorStartPrefix() {
+	public String getTranslatorTranslatedEndPrefix() {
+		return AbstractTestCase.TRANSLATION_END_PREFIX;
+	}
+
+	@Override
+	public String getTranslatorUntranslatedStartPrefix() {
 		return StringUtils.EMPTY;
 	}
 
 	@Override
-	public String getTranslatorEndPrefix() {
+	public String getTranslatorUntranslatedEndPrefix() {
 		return StringUtils.EMPTY;
 	}
 

@@ -20,9 +20,11 @@ PhotoLines=5
 PhotosInLine=4
 
 # translator
-translator.TranslatedSign=&trade;
-translator.startPrefix=[
-translator.endPrefix=]
+translator.translated.startPrefix=
+translator.translated.endPrefix=&trade;
+
+translator.untranslated.startPrefix=[
+translator.untranslated.endPrefix=]
 
 #Admin user IDs
 SuperAdminUserIDs=6987,6306

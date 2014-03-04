@@ -1,18 +1,17 @@
 package core.services.translator;
 
+import core.services.utils.SystemVarsService;
+
 import java.util.Map;
 
 public class Translator {
 
 	private Map<NerdKey, TranslationData> translationsMap;
-	private final String startPrefix;
-	private final String endPrefix;
+	private SystemVarsService systemVarsService;
 
-	public Translator( final Map<NerdKey, TranslationData> translationsMap, final String startPrefix, final String endPrefix ) {
+	public Translator( final Map<NerdKey, TranslationData> translationsMap, final SystemVarsService systemVarsService ) {
 		this.translationsMap = translationsMap;
-
-		this.startPrefix = startPrefix;
-		this.endPrefix = endPrefix;
+		this.systemVarsService = systemVarsService;
 	}
 
 	public TranslationEntry getTranslation( final String nerd, final Language language ) {
@@ -20,14 +19,14 @@ public class Translator {
 		final NerdKey key = new NerdKey( nerd );
 
 		if ( ! translationsMap.containsKey( key ) ) {
-			return new TranslationEntryNerd( nerd, startPrefix, endPrefix );
+			return new TranslationEntryNerd( nerd, systemVarsService );
 		}
 
 		return translationsMap.get( key ).getTranslationEntry( language );
 	}
 
 	public String translate( final String nerd, final Language language ) {
-		return getTranslation( nerd, language ).getValue();
+		return getTranslation( nerd, language ).getValueWithPrefixes();
 	}
 
 	public Map<NerdKey, TranslationData> getTranslationsMap() {

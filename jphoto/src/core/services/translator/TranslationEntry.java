@@ -1,16 +1,24 @@
 package core.services.translator;
 
+import core.services.utils.SystemVarsService;
+import org.apache.commons.lang.StringUtils;
+
 public class TranslationEntry {
+
+	protected final String nerd;
 
 	private final Language language;
 	private final String value;
 
-	protected final String nerd;
+	protected final SystemVarsService systemVarsService;
 
-	public TranslationEntry( final String nerd, final Language language, final String value ) {
+	public TranslationEntry( final String nerd, final Language language, final String value, final SystemVarsService systemVarsService ) {
 		this.nerd = nerd;
+
 		this.language = language;
 		this.value = value;
+
+		this.systemVarsService = systemVarsService;
 	}
 
 	public String getNerd() {
@@ -21,8 +29,24 @@ public class TranslationEntry {
 		return language;
 	}
 
+	public String getValueWithPrefixes() {
+		return String.format( "%s%s%s", getPrefix( getStartPrefix() ), value, getPrefix( getEndPrefix() ) );
+	}
+
 	public String getValue() {
 		return value;
+	}
+
+	protected String getStartPrefix() {
+		return systemVarsService.getTranslatorTranslatedStartPrefix();
+	}
+
+	protected String getEndPrefix() {
+		return systemVarsService.getTranslatorTranslatedEndPrefix();
+	}
+
+	protected String getPrefix( final String prefix ) {
+		return StringUtils.isNotEmpty( prefix ) ? prefix : StringUtils.EMPTY;
 	}
 
 	@Override

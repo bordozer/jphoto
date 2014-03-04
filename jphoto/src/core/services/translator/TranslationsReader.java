@@ -33,7 +33,7 @@ public class TranslationsReader {
 			final String nerd = nerdElement.element( Language.NERD.getCode() ).getText();
 
 			final Set<TranslationEntry> translations = newHashSet();
-			translations.add( new TranslationEntryNerd( nerd, systemVarsService.getTranslatorStartPrefix(), systemVarsService.getTranslatorEndPrefix() ) );
+			translations.add( new TranslationEntryNerd( nerd, systemVarsService ) );
 
 			for ( final Language language : Language.values() ) {
 
@@ -42,12 +42,12 @@ public class TranslationsReader {
 				}
 
 				final String translation = nerdElement.element( language.getCode() ).getText();
-				translations.add( new TranslationEntry( nerd, language, translation ) );
+				translations.add( new TranslationEntry( nerd, language, translation, systemVarsService ) );
 			}
 
 			translationsMap.put( new NerdKey( nerd ), new TranslationData( nerd, translations ) );
 		}
 
-		return new Translator( translationsMap, systemVarsService.getTranslatorStartPrefix(), systemVarsService.getTranslatorEndPrefix() );
+		return new Translator( translationsMap, systemVarsService );
 	}
 }

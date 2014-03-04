@@ -1,7 +1,7 @@
 package core.services.translator;
 
+import core.dtos.TranslationDTO;
 import core.services.utils.SystemVarsService;
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -71,14 +71,15 @@ public class TranslatorServiceImpl implements TranslatorService {
 			addUntranslated( nerd, translation );
 		}
 
-		String result = translation.getValue(); // TODO: set System or User defined Language
+		String result = translation.getValueWithPrefixes(); // TODO: set System or User defined Language
 
 		int i = 1;
 		for ( String param : params ) {
 			result = result.replace( String.format( "$%d", i++ ), param );
 		}
 
-		return markAsTranslated( result );
+//		return markAsTranslated( result );
+		return result;
 	}
 
 	private void addUntranslated( final String nerd, final TranslationEntry translation ) {
@@ -91,7 +92,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 			} else {
 				if ( ! hasTranslation( translationData, translation.getLanguage() ) ) {
 					final Set<TranslationEntry> translations = translationData.getTranslations();
-					translations.add( new TranslationEntry( nerd, translation.getLanguage(), translation.getValue() ) );
+					translations.add( new TranslationEntry( nerd, translation.getLanguage(), translation.getValueWithPrefixes(), systemVarsService ) );
 					untranslatedMap.put( nerdKey, new TranslationData( nerd, translations ) );
 				}
 			}
@@ -130,9 +131,17 @@ public class TranslatorServiceImpl implements TranslatorService {
 		translator = TranslationsReader.getTranslator( translationsFile, systemVarsService );
 	}
 
-	private String markAsTranslated( final String nerd ) {
-		final String translatedSign = systemVarsService.getTranslatedSign();
-		return String.format( "%s%s", nerd, StringUtils.isNotEmpty( translatedSign ) ? translatedSign : StringUtils.EMPTY );
+	@Override
+	public TranslationDTO getTranslationAjax( final String nerd ) {
+
+		final Map<String, String> translations = newHashMap();
+
+		for ( final Language language : Language.values() ) {
+			final TranslationEntry translation = translator.getTranslation( nerd, language );
+			translations.put( language.getCode(), translation.getValue() );
+		}
+
+		return new TranslationDTO( translations );
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {

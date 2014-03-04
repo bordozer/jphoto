@@ -1,5 +1,6 @@
 package core.services.translator;
 
+import core.dtos.TranslationDTO;
 import org.dom4j.DocumentException;
 
 import java.util.Map;
@@ -29,4 +30,6 @@ public interface TranslatorService {
 	Map<NerdKey, TranslationData> getUntranslatedMap();
 
 	void initTranslations() throws DocumentException;
+
+	TranslationDTO getTranslationAjax( final String nerd );
 }

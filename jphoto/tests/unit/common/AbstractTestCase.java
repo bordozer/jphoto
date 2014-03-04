@@ -12,14 +12,12 @@ import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
 import mocks.SystemVarsServiceMock;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-
-import static com.google.common.collect.Maps.newHashMap;
 
 public class AbstractTestCase {
 
-	public static final String TRANSLATION_SIGN = "(t)";
+	public static final String TRANSLATION_START_PREFIX = "(t)";
+	public static final String TRANSLATION_END_PREFIX = "";
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 
@@ -38,7 +36,7 @@ public class AbstractTestCase {
 		systemVarsServiceMock = new SystemVarsServiceMock();
 
 		translatorService = new TranslatorServiceImpl();
-		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap(), StringUtils.EMPTY, StringUtils.EMPTY ) );
+		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap(), systemVarsServiceMock ) );
 
 		translatorService.setSystemVarsService( systemVarsServiceMock );
 
@@ -102,7 +100,7 @@ public class AbstractTestCase {
 	}
 
 	public static String translated( final String nerd ) {
-		return String.format( "%s%s", nerd, TRANSLATION_SIGN );
+		return String.format( "%s%s%s", TRANSLATION_END_PREFIX, nerd, TRANSLATION_START_PREFIX );
 	}
 
 	public final static User SUPER_ADMIN_1 = new User() {

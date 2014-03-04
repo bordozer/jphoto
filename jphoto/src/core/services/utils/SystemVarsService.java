@@ -34,7 +34,7 @@ public interface SystemVarsService {
 
 	String getJavaScriptDateFormat();
 
-	String getTranslatedSign();
+	String getTranslatorTranslatedStartPrefix();
 
 	int getPhotoLinesForNotLoggedUsers();
 
@@ -48,9 +48,11 @@ public interface SystemVarsService {
 
 	String getPropertiesPath();
 
-	String getTranslatorStartPrefix();
+	String getTranslatorUntranslatedStartPrefix();
 
-	String getTranslatorEndPrefix();
+	String getTranslatorUntranslatedEndPrefix();
 
 	void initSystemVars() throws ConfigurationException;
+
+	String getTranslatorTranslatedEndPrefix();
 }
