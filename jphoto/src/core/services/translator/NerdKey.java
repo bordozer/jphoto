@@ -14,7 +14,7 @@ public class NerdKey {
 
 	@Override
 	public int hashCode() {
-		return nerd.toLowerCase().hashCode();
+		return nerd.hashCode();
 	}
 
 	@Override
@@ -32,6 +32,6 @@ public class NerdKey {
 		}
 
 		final NerdKey nerdKey = ( NerdKey ) obj;
-		return this.nerd.toLowerCase().equals( nerdKey.getNerd().toLowerCase() );
+		return nerd.equals( nerdKey.getNerd() );
 	}
 }

@@ -118,7 +118,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem getActivityStreamMenu() {
-		final String caption = translatorService.translate( "Activity Stream" );
+		final String caption = translatorService.translate( "Activity stream" );
 		final String link = urlUtilsService.getActivityStreamUrl();
 		return new MenuItem( caption, link );
 	}
@@ -437,7 +437,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem allUsersMenu() {
-		final String caption = translatorService.translate( "All Members" );
+		final String caption = translatorService.translate( "All members" );
 		final String link = urlUtilsService.getAllUsersLink();
 		return new MenuItem( caption, link );
 	}

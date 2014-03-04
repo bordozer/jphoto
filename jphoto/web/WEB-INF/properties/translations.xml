@@ -122,4 +122,44 @@
 		<ru><![CDATA[Панель управления]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>All members</nerd>
+		<ru><![CDATA[Все участники]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Authors</nerd>
+		<ru><![CDATA[Авторы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Models</nerd>
+		<ru><![CDATA[Модели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Makeup masters</nerd>
+		<ru><![CDATA[Визажисты]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>authors</nerd>
+		<ru><![CDATA[авторы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>models</nerd>
+		<ru><![CDATA[модели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>makeup masters</nerd>
+		<ru><![CDATA[визажисты]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Upload photo</nerd>
+		<ru><![CDATA[Загрузить фото]]></ru>
+	</translation>
+
 </translations>
