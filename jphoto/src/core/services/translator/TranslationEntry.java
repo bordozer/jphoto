@@ -30,7 +30,9 @@ public class TranslationEntry {
 	}
 
 	public String getValueWithPrefixes() {
-		return String.format( "%s%s%s", getPrefix( getStartPrefix() ), value, getPrefix( getEndPrefix() ) );
+		final String startPrefix = getStartPrefix();
+		final String endPrefix = getEndPrefix();
+		return String.format( "%s%s%s", getPrefix( startPrefix ), value, getPrefix( endPrefix ) );
 	}
 
 	public String getValue() {

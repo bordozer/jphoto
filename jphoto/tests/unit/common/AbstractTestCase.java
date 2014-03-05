@@ -16,8 +16,8 @@ import org.junit.Before;
 
 public class AbstractTestCase {
 
-	public static final String TRANSLATION_START_PREFIX = "(t)";
-	public static final String TRANSLATION_END_PREFIX = "";
+	public static final String TRANSLATION_START_PREFIX = "";
+	public static final String TRANSLATION_END_PREFIX = "(t)";
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 
@@ -100,7 +100,7 @@ public class AbstractTestCase {
 	}
 
 	public static String translated( final String nerd ) {
-		return String.format( "%s%s%s", TRANSLATION_END_PREFIX, nerd, TRANSLATION_START_PREFIX );
+		return String.format( "%s%s%s", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
 	}
 
 	public final static User SUPER_ADMIN_1 = new User() {
