@@ -39,6 +39,7 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_MAX_HEIGHT( 403, "1200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image height" )
 	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" )
 	, PHOTO_UPLOAD_ANONYMOUS_NAME( 408, "Anonymous posting", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous posting name" )
+	, PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN( 409, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.PHOTO_UPLOAD, "Ignore anonymous global settings if user's rank in genre more then" )
 
 	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
