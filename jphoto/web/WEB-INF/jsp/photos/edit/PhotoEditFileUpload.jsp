@@ -78,12 +78,9 @@
 			<table:tr>
 				<table:tdtext text_t="Anonymous posting"/>
 				<table:tddata>
-					<c:if test="${isAnonymousDay}">
-						<anonym:anonymousDayDescription />
-					</c:if>
-					<c:if test="${not isAnonymousDay}">
-						${eco:translate(isAnonymousPosting ? "Yes" : "No")}
-					</c:if>
+					${eco:translate(isAnonymousPosting ? "Yes" : "No")}
+					<br />
+					<anonym:anonymousDaySchedule />
 				</table:tddata>
 			</table:tr>
 

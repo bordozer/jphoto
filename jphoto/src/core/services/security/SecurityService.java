@@ -1,5 +1,6 @@
 package core.services.security;
 
+import core.dtos.AnonymousSettingsDTO;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -85,4 +86,8 @@ public interface SecurityService {
 	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor );
 
 	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor, final Date onTime );
+
+	boolean forceAnonymousPosting( final int userId, final int genreId, final Date time );
+
+	AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId );
 }

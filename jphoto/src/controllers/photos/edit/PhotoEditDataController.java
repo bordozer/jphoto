@@ -459,9 +459,8 @@ public class PhotoEditDataController {
 	}
 
 	private void setAnonymousOptions( final PhotoEditDataModel model, final boolean customAnonymousPosting ) {
-		final boolean isPostingDateAnonymousDay = anonymousDaysService.isDayAnonymous( model.getPhotoUploadTime() );
-		model.setAnonymousPosting( customAnonymousPosting || isPostingDateAnonymousDay );
-		model.setAnonymousDay( isPostingDateAnonymousDay );
+		model.setAnonymousPosting( customAnonymousPosting );
+		model.setAnonymousDay( anonymousDaysService.isDayAnonymous( model.getPhotoUploadTime() ) );
 	}
 
 	private void initPhotoFromModel( final Photo photo, final PhotoEditDataModel model ) {

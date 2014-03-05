@@ -6,6 +6,8 @@
 <%@ page import="core.general.configuration.ConfigurationKey" %>
 <%@ page import="core.services.validation.PhotoRequirement" %>
 <%@ page import="core.services.validation.DataRequirementService" %>
+<%@ page import="core.services.security.SecurityService" %>
+<%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -22,6 +24,10 @@
 <%
 	final String genresCanHaveNudeContent = StringUtils.join( photoEditDataModel.getGenresCanHaveNudeContent(), ", " );
 	final String genresHaveNudeContent = StringUtils.join( photoEditDataModel.getGenresHaveNudeContent(), ", " );
+%>
+
+<%
+	JSONRPCBridge.getGlobalBridge().registerObject( "securityService", ApplicationContextHelper.<SecurityService>getBean( SecurityService.BEAN_NAME ) );
 %>
 
 <c:set var="accessibleCommentAllowances" value="${photoEditDataModel.accessibleCommentAllowances}"/>
@@ -41,6 +47,7 @@
 <c:set var="photoBgColorControl" value="<%=PhotoEditDataModel.PHOTO_EDIT_DATA_BGCOLOR_FORM_CONTROL%>"/>
 
 <c:set var="containsNudeContentControl" value="containsNudeContent1"/>
+<c:set var="anonymousPostingControl" value="anonymousPosting1"/>
 
 <c:set var="photoTeamMembersIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_USER_TEAM_MEMBERS_IDS%>"/>
 <c:set var="photoAlbumsIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_PHOTO_ALBUMS_IDS%>"/>
@@ -49,6 +56,8 @@
 	final DataRequirementService dataRequirementService = photoEditDataModel.getDataRequirementService();
 	final PhotoRequirement photoRequirement = dataRequirementService.getPhotoRequirement();
 %>
+<c:set var="photoAuthor" value="${photoEditDataModel.photoAuthor}"/>
+<c:set var="photoAuthorId" value="${photoAuthor.id}"/>
 
 <c:set var="nameRequirement" value="<%=photoRequirement.getNameRequirement()%>"/>
 <c:set var="descriptionRequirement" value="<%=photoRequirement.getDescriptionRequirement()%>"/>
@@ -69,6 +78,27 @@
 <c:set var="photoNameMaxLength" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH )%>"/>
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
+
+<script type="text/javascript">
+	var jsonRPC;
+	jQuery().ready( function () {
+		jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+	} );
+
+	 jQuery().ready( function () {
+		<c:if test="${not photoEditDataModel.anonymousDay}">
+		 	$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
+		 	appendAnonymousDescription( "<br />" );
+		 	appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
+		 	appendAnonymousDescription( "<br />" );
+		 </c:if>
+
+		 <c:if test="${photoEditDataModel.anonymousDay}">
+		 	$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
+		 	$( "#dayAnonymousDescription" ).append( "<br/>" );
+		 </c:if>
+	} );
+</script>
 
 <div style="float: left; width: 98%;">
 	<c:if test="${isNew}">
@@ -135,6 +165,32 @@
 						processNudeContentControl( getGenreId() );
 					} );
 
+					function performPhotoCategoryChange() {
+						setNudeControl();
+						setAnonymousPosting();
+					}
+
+					function setAnonymousPosting() {
+						<c:if test="${photoEditDataModel.anonymousDay}">
+							var anonymousSettingsDTO = jsonRPC.securityService.forceAnonymousPostingAjax( ${photoAuthorId}, getGenreId() );
+							var forcedAnonymousPosting = anonymousSettingsDTO.forcedAnonymousPosting;
+							var messages = anonymousSettingsDTO.messages;
+
+							clearAnonymousDescription();
+							var list = messages.list;
+							for( var key in list ) {
+								appendAnonymousDescription( list[ key ] );
+								appendAnonymousDescription( "<br />" );
+							}
+
+							if ( forcedAnonymousPosting ) {
+								forceCheckAnonymousPostingControl();
+							} else {
+								enableAnonymousPostingControl();
+							}
+						</c:if>
+					}
+
 					function setNudeControl() {
 						processNudeContentControl( getGenreId() );
 					}
@@ -146,14 +202,17 @@
 						if ( genreHaveNudeContent( genreId ) ) {
 							checkNudeContentControl();
 							disableNudeContentControl();
+							setNudeContentDescription( "${eco:translate('All photos in this category have nude content obviously')}" );
 							return;
 						}
 
 						if ( genreCanHaveNudeContent( genreId ) ) {
 							enableNudeContentControl();
+							setNudeContentDescription( "${eco:translate('The photo category can contains nude content')}" );
 						} else {
 							disableNudeContentControl();
 							uncheckNudeContentControl();
+							setNudeContentDescription( "${eco:translate('The photo category can not contains nude content')}" );
 						}
 
 						function genreCanHaveNudeContent( genreId ) {
@@ -182,6 +241,19 @@
 						}
 					}
 
+					function forceCheckAnonymousPostingControl() {
+						checkAnonymousPostingControl();
+						disableAnonymousPostingControl();
+					}
+
+					function checkAnonymousPostingControl() {
+						$( "#${anonymousPostingControl}" ).attr( 'checked', 'checked' );
+					}
+
+					function uncheckAnonymousPostingControl() {
+						$( "#${anonymousPostingControl}" ).removeAttr( 'checked' );
+					}
+
 					function enableNudeContentControl() {
 						$( "#${containsNudeContentControl}" ).removeAttr( 'disabled' );
 					}
@@ -189,13 +261,33 @@
 					function disableNudeContentControl() {
 						$( "#${containsNudeContentControl}" ).attr( 'disabled', 'disabled' );
 					}
+
+					function enableAnonymousPostingControl() {
+						$( "#${anonymousPostingControl}" ).removeAttr( 'disabled' );
+					}
+
+					function disableAnonymousPostingControl() {
+						$( "#${anonymousPostingControl}" ).attr( 'disabled', 'disabled' );
+					}
+
+					function setNudeContentDescription( text ) {
+						$( "#nudeContentDescription" ).html( text );
+					}
+
+					function clearAnonymousDescription() {
+						$( "#anonymousDescription" ).text( '' );
+					}
+
+					function appendAnonymousDescription( text ) {
+						$( "#anonymousDescription" ).append( text );
+					}
 				</script>
 
 				<table:tredit>
 					<table:tdtext text_t="Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
 
 					<table:tddata>
-						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24" onclick="setNudeControl();"/>
+						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24" onclick="performPhotoCategoryChange();"/>
 					</table:tddata>
 				</table:tredit>
 				<%-- / Genres --%>
@@ -208,13 +300,14 @@
 
 					<table:tddata>
 						<form:checkbox path="photoEditDataModel.containsNudeContent"/>
+						<span id="nudeContentDescription" style="height: 20px;"></span>
 					</table:tddata>
 				</table:tredit>
 				<%-- / Nude content --%>
 
 				<table:separator colspan="2" />
 
-				<%-- Nude content --%>
+				<%-- Backgroung color --%>
 				<table:tredit>
 					<table:tdtext text_t="Backgroung color" labelFor="${photoBgColorControl}"/>
 
@@ -222,7 +315,7 @@
 						<html:colorpicker fieldId="${photoBgColorControl}" fieldValue="${photoEditDataModel.bgColor}" />
 					</table:tddata>
 				</table:tredit>
-				<%-- / Nude content --%>
+				<%-- / Backgroung colort --%>
 
 				<table:separator colspan="2" />
 
@@ -264,26 +357,23 @@
 				<table:separator colspan="2" />
 
 				<%-- Anonymous Posting --%>
-				<c:set var="isAnonymousDay" value="${photoEditDataModel.anonymousDay}" />
-				<c:set var="isAnonymousPosting" value="${photoEditDataModel.anonymousPosting}" />
-				<c:set var="forceAnonymousUploading" value="${isNew and isAnonymousDay}" />
-
 				<table:tredit>
-					<table:tdtext text_t="Anonymous posting" labelFor="anonymousPosting"/>
+					<table:tdtext text_t="Anonymous posting" labelFor="${anonymousPostingControl}"/>
 
 					<table:tddata>
-						<c:if test="${not forceAnonymousUploading}">
-							<c:if test="${isNew}">
-								<form:checkbox items="${photoEditDataModel.anonymousPosting}" path="photoEditDataModel.anonymousPosting" />
-								<br />
-								${eco:translate('* You can not edit this option when photo is posted')}
-							</c:if>
-							<c:if test="${not isNew}">
-								${eco:translate1('$1', photoEditDataModel.anonymousPosting ? 'Yes' : 'No')}
-							</c:if>
+						<c:if test="${not isNew}">
+							${eco:translate1('$1', photoEditDataModel.anonymousPosting ? 'Yes' : 'No')}
 						</c:if>
-						<c:if test="${forceAnonymousUploading}">
-							<anonym:anonymousDayDescription />
+
+						<c:if test="${isNew}">
+							<form:checkbox path="photoEditDataModel.anonymousPosting" />
+							<br />
+							<span id="dayAnonymousDescription" style="height: 20px;"></span>
+							<span id="anonymousDescription" style="height: 20px;"></span>
+							<br />
+							${eco:translate('You can not edit this option when photo is posted')}
+							<br />
+							<anonym:anonymousDaySchedule />
 						</c:if>
 					</table:tddata>
 				</table:tredit>

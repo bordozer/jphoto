@@ -1,6 +1,7 @@
 package core.services.security;
 
 import core.context.EnvironmentContext;
+import core.dtos.AnonymousSettingsDTO;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NotLoggedUserException;
@@ -16,6 +17,7 @@ import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.general.user.UserStatus;
+import core.services.entry.AnonymousDaysService;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
@@ -71,6 +73,9 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private AnonymousDaysService anonymousDaysService;
 
 	@Override
 	public boolean userCanEditPhoto( final User user, final Photo photo ) {
@@ -572,6 +577,45 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 
 		return false;
+	}
+
+	@Override
+	public boolean forceAnonymousPosting( final int userId, final int genreId, final Date time ) {
+		final int minRankToIgnoreAnonymousDay = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN );
+		final int userRankInGenre = userRankService.getUserRankInGenre( userId, genreId );
+
+		final boolean isPostingDateAnonymousDay = anonymousDaysService.isDayAnonymous( time );
+		return isPostingDateAnonymousDay && userRankInGenre < minRankToIgnoreAnonymousDay;
+	}
+
+	@Override
+	public AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId ) {
+		final Date time = dateUtilsService.getCurrentTime();
+
+		final boolean forceAnonymous = forceAnonymousPosting( userId, genreId, time );
+
+		final boolean isDayAnonymous = anonymousDaysService.isDayAnonymous( time );
+		final int minRankToIgnoreAnonymousDay = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN );
+		final int userRankInGenre = userRankService.getUserRankInGenre( userId, genreId );
+
+		final Genre genre = genreService.load( genreId );
+
+		final List<String> messages = newArrayList();
+
+		if ( isDayAnonymous ) {
+//			messages.add( translatorService.translate( "Today is anonymous posting day" ) );
+			if ( userRankInGenre >= minRankToIgnoreAnonymousDay ) {
+				messages.add( translatorService.translate( "But your rank in category '$1' is big enough to ignore global settings and decide if you want to upload a photo anonymously", genre.getName() ) );
+			} else {
+				messages.add( translatorService.translate( "Your photo will be posted anonymously" ) );
+				messages.add( translatorService.translate( "You will be able to ignore anonymous days when your rank in category '$1' reached $2", genre.getName(), String.valueOf( minRankToIgnoreAnonymousDay ) ) );
+			}
+		} else {
+			messages.add( translatorService.translate( "Today is not anonymous posting day" ) );
+			messages.add( translatorService.translate( "You decide if you want to upload a photo anonymously" ) );
+		}
+
+		return new AnonymousSettingsDTO( forceAnonymous, messages );
 	}
 
 	private User getUser( final int userId ) {
