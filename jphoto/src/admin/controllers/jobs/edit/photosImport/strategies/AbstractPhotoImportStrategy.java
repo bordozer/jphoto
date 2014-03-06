@@ -80,7 +80,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final JobHelperService jobHelperService = services.getJobHelperService();
 		final UserRankService userRankService = services.getUserRankService();
 
-		photo.setAnonymousPosting( jobHelperService.getAnonymousOption( uploadTime ) );
+		photo.setAnonymousPosting( jobHelperService.getAnonymousOption( user.getId(), genre.getId(), uploadTime ) );
 		photo.setBgColor( randomUtilsService.getPhotoBackgroundRandomColor() );
 		photo.setCommentsAllowance( randomUtilsService.getRandomPhotoAllowance() );
 		photo.setVotingAllowance( randomUtilsService.getRandomPhotoAllowance() );

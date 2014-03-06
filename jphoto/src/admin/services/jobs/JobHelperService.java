@@ -8,7 +8,7 @@ public interface JobHelperService {
 
 	Date getFirstPhotoUploadTime();
 
-	boolean getAnonymousOption( final Date uploadTime );
+	boolean getAnonymousOption( final int userId, final int genreId, final Date uploadTime );
 
 	void initPhotoNudeContentOption( final Photo photo );
 

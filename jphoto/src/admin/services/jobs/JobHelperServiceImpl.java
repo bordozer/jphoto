@@ -6,6 +6,7 @@ import core.services.dao.PhotoDaoImpl;
 import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.security.SecurityService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
@@ -36,9 +37,12 @@ public class JobHelperServiceImpl implements JobHelperService {
 	
 	@Autowired
 	private PhotoSqlFilterService photoSqlFilterService;
-	
+
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	@Override
 	public Date getFirstPhotoUploadTime() {
@@ -74,10 +78,10 @@ public class JobHelperServiceImpl implements JobHelperService {
 	}
 
 	@Override
-	public boolean getAnonymousOption( final Date uploadTime ) {
-		final boolean isPhotoUploadDayAnonymous = anonymousDaysService.isDayAnonymous( uploadTime );
+	public boolean getAnonymousOption( final int userId, final int genreId, final Date uploadTime ) {
+		final boolean forceAnonymousPosting = securityService.forceAnonymousPosting( userId, genreId, uploadTime );
 
-		return isPhotoUploadDayAnonymous || randomUtilsService.getRandomIntegerArrayElement( new int[] {0, 0, 0, 1} ) == 1;
+		return forceAnonymousPosting || randomUtilsService.getRandomIntegerArrayElement( new int[] {0, 0, 0, 1} ) == 1;
 
 	}
 
