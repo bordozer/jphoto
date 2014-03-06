@@ -52,7 +52,7 @@ public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecuti
 
 	@Override
 	public void start() throws SchedulerException {
-		scheduler.start(); // call after standby()
+		scheduler.start(); // When you call start() after standby(), any misfires, which appear while standby, will be ignored.
 	}
 
 	@Override
@@ -61,18 +61,18 @@ public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecuti
 		scheduler.standby();
 	}
 
-	@Override
+	/*@Override
 	public void pauseAll() throws SchedulerException {
-		// When you call resumeAll() after pauseAll(), all misfires, which appear while scheduler was paused, will be applyed.
+		// When you call resumeAll() after pauseAll(), all misfires, which appear while scheduler was paused, will be applied.
 		scheduler.pauseAll();
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public void resumeAll() throws SchedulerException {
 		//	Resume (un-pause) all triggers - similar to calling resumeTriggerGroup(group) on every group.
 		//	If any Trigger missed one or more fire-times, then the Trigger's misfire instruction will be applied.
 		scheduler.resumeAll(); // call after pauseAll()
-	}
+	}*/
 
 	@Override
 	public boolean isRunning() throws SchedulerException {

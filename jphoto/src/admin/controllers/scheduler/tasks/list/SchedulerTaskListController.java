@@ -97,7 +97,7 @@ public class SchedulerTaskListController {
 	public String schedulerStop( final @ModelAttribute( MODEL_NAME ) SchedulerTaskListModel model ) {
 		try {
 			log.info( "Stopping scheduler" );
-			scheduledTasksExecutionService.pauseAll();
+			scheduledTasksExecutionService.standby();
 		} catch ( SchedulerException e ) {
 			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not stop Scheduler" ) );
 			log.error( "Can not stop Scheduler" );

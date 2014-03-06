@@ -9,9 +9,9 @@ public interface ScheduledTasksExecutionService {
 
 	void standby() throws SchedulerException;
 
-	void pauseAll() throws SchedulerException;
+//	void pauseAll() throws SchedulerException;
 
-	void resumeAll() throws SchedulerException;
+//	void resumeAll() throws SchedulerException;
 
 	boolean isRunning() throws SchedulerException;
 

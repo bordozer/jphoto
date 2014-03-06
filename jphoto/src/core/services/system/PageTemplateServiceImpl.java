@@ -1,5 +1,6 @@
 package core.services.system;
 
+import admin.services.scheduler.ScheduledTasksExecutionService;
 import controllers.users.login.UserLoginModel;
 import core.context.EnvironmentContext;
 import core.enums.PrivateMessageType;
@@ -25,6 +26,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.ToolManager;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import utils.StringUtilities;
@@ -72,6 +74,9 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ScheduledTasksExecutionService scheduledTasksExecutionService;
 
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
 
@@ -130,6 +135,16 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card" ) );
 
 		model.put( "uploadPhotoText", translatorService.translate( "Upload photo" ) );
+		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
+		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURLWithPrefix() );
+
+		try {
+			model.put( "isSchedulerRunning", scheduledTasksExecutionService.isRunning() );
+		} catch ( final SchedulerException e ) {
+			model.put( "isSchedulerRunning", false );
+		}
+		model.put( "schedulerIsStoppedIcon", String.format( "<img src=\"%s/scheduler/SchedulerIsStopped.png\" height=\"16\" width=\"16\" title=\"%s\" />"
+			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!" ) ) );
 
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {
