@@ -15,6 +15,12 @@ public class Environment {
 		this.currentUser = currentUser;
 	}
 
+	public Environment( final Environment environment ) {
+		currentUser = environment.getCurrentUser();
+		deviceType = environment.getDeviceType();
+		showNudeContent = environment.isShowNudeContent();
+	}
+
 	public User getCurrentUser() {
 		return currentUser;
 	}

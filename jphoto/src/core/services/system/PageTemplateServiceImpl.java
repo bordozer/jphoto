@@ -149,6 +149,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {
 			model.put( "hiMessage", StringUtilities.escapeHtml( hiMessage ) );
+			EnvironmentContext.getEnvironment().setHiMessage( StringUtils.EMPTY );
 		}
 
 		final int unreadCommentsQty = photoCommentService.getUnreadCommentsQty( currentUser.getId() );

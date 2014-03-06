@@ -4,6 +4,8 @@ import admin.jobs.general.SavedJob;
 import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.ScheduledTasksExecutionService;
 import admin.services.scheduler.SchedulerService;
+import core.context.Environment;
+import core.context.EnvironmentContext;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
@@ -85,6 +87,7 @@ public class SchedulerTaskListController {
 		try {
 			log.info( "Starting scheduler" );
 			scheduledTasksExecutionService.start();
+			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been started" ) );
 		} catch ( SchedulerException e ) {
 			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not start Scheduler" ) );
 			log.error( "Can not start Scheduler" );
@@ -98,6 +101,8 @@ public class SchedulerTaskListController {
 		try {
 			log.info( "Stopping scheduler" );
 			scheduledTasksExecutionService.standby();
+
+			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been stopped" ) );
 		} catch ( SchedulerException e ) {
 			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not stop Scheduler" ) );
 			log.error( "Can not stop Scheduler" );
@@ -115,14 +120,17 @@ public class SchedulerTaskListController {
 		switch ( formAction ) {
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_ACTIVATE:
 				schedulerService.activateSchedulerTasks( ids );
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been activated", ids.size() ) );
 				break;
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_DEACTIVATE:
 				schedulerService.deactivateSchedulerTasks( ids );
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deactivated", ids.size() ) );
 				break;
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_DELETE:
 				for ( final int id : ids ) {
 					schedulerService.delete( id );
 				}
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deleted", ids.size() ) );
 				break;
 		}
 

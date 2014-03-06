@@ -80,7 +80,7 @@
 				#if ( $hiMessage )
 					<script type="text/javascript">
 						jQuery().ready( function() {
-							showInformationMessage( "$hiMessage" );
+							notifySuccessMessage( "$hiMessage" );
 						});
 					</script>
 				#end

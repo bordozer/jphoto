@@ -91,6 +91,7 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	}
 
 	private Environment getSessionEnvironment( final HttpSession session ) {
+		//		return new Environment ( ( Environment ) session.getAttribute( ENVIRONMENT_SESSION_KEY ) );
 		return ( Environment ) session.getAttribute( ENVIRONMENT_SESSION_KEY );
 	}
 }
