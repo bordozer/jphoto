@@ -19,11 +19,12 @@ public class SessionListener implements HttpSessionListener {
 
 		final HttpSession session = httpSessionEvent.getSession();
 
-		final int sessionTimeoutMins = ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_SESSION_TIMEOUT_IN_MINUTES ) * 60;
-		session.setMaxInactiveInterval( sessionTimeoutMins );
+		final int sessionTimeoutMinutes = ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_SESSION_TIMEOUT_IN_MINUTES );
+		final int sessionTimeoutSeconds = sessionTimeoutMinutes * 60;
+		session.setMaxInactiveInterval( sessionTimeoutSeconds );
 
 		final String info = String.format( "Session is STARTED: id = '%s', creation time='%s' ( session timeout: %d minutes )"
-			, session.getId(), dateUtilsService.formatDateTime( new Date( session.getCreationTime() ) ), sessionTimeoutMins );
+			, session.getId(), dateUtilsService.formatDateTime( new Date( session.getCreationTime() ) ), sessionTimeoutMinutes );
 
 		log.info( info );
 	}
