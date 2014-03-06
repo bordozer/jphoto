@@ -4,4 +4,10 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getAdminSchedulerStopLink()%>" />
 
-<a href ="${link}"><jsp:doBody/></a>
+<a href ="${link}" onclick="return stopScheduler();"><jsp:doBody/></a>
+
+<script type="text/javascript">
+	function stopScheduler() {
+		return confirm( "${eco:translate('Stop scheduler?')}" );
+	}
+</script>

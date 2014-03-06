@@ -4,4 +4,10 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getAdminSchedulerRunLink()%>" />
 
-<a href ="${link}"><jsp:doBody/></a>
+<a href ="${link}" onclick="return runScheduler();"><jsp:doBody/></a>
+
+<script type="text/javascript">
+	function runScheduler() {
+		return confirm( "${eco:translate('Run scheduler?')}" );
+	}
+</script>
