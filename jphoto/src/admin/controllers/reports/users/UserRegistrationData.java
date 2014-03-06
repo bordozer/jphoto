@@ -4,10 +4,6 @@ public class UserRegistrationData {
 
 	private int users;
 
-	public UserRegistrationData( final int users ) {
-		this.users = users;
-	}
-
 	public int getUsers() {
 		return users;
 	}

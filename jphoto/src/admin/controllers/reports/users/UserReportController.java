@@ -51,15 +51,22 @@ public class UserReportController {
 			}
 		} );
 
+		final User firstUser = users.get( 0 );
+		final Date firstRegistrationTime = firstUser.getRegistrationTime();
+		final Date firstRegistrationDate = dateUtilsService.getFirstSecondOfDay( firstRegistrationTime );
+		final int daysSinceFirstUserRegistrations = dateUtilsService.getDifferenceInDays( firstRegistrationDate, dateUtilsService.getFirstSecondOfToday() );
+
 		final Map<Date, UserRegistrationData> registrationsMap = newLinkedHashMap();
+
+		for ( int i = 0; i <= daysSinceFirstUserRegistrations; i++ ) {
+			registrationsMap.put( dateUtilsService.getDatesOffset( firstRegistrationDate, i ), new UserRegistrationData() );
+		}
+
 		for ( final User user : users ) {
 			final Date registrationDate = dateUtilsService.getFirstSecondOfDay( user.getRegistrationTime() );
-			if ( registrationsMap.containsKey( registrationDate ) ) {
-				final UserRegistrationData userRegistrationData = registrationsMap.get( registrationDate );
-				userRegistrationData.increaseUsersCount();
-			} else {
-				registrationsMap.put( registrationDate, new UserRegistrationData( 1 ) );
-			}
+
+			final UserRegistrationData userRegistrationData = registrationsMap.get( registrationDate );
+			userRegistrationData.increaseUsersCount();
 		}
 
 		model.setRegistrationsMap( registrationsMap );
