@@ -35,7 +35,7 @@
 
 	<div class="floatleft" style="padding: 50px;">
 
-		<table id="userRegistrationGraph">
+		<table id="userRegistrationGraph" style="display: none;">
 			<caption>${eco:translate('User registrations by date')}</caption>
 			<thead>
 			<tr>
@@ -43,18 +43,18 @@
 
 				<c:forEach var="entry" items="${registrationsMap}" varStatus="status">
 					<c:set var="date" value="${entry.key}"/>
-					<c:set var="showTrace" value="${counter == 5}"/>
+					<c:set var="showTrace" value="${counter == 0}"/>
 
 					<c:if test="${showTrace}">
 						<th scope="col"><span class="rotate">${eco:formatDate(date)}</span></th>
-						<c:set var="counter" value="0"/>
+						<c:set var="counter" value="5"/>
 					</c:if>
 
 					<c:if test="${not showTrace}">
 						<th scope="col"></th>
 					</c:if>
 
-					<c:set var="counter" value="${counter + 1}"/>
+					<c:set var="counter" value="${counter - 1}"/>
 				</c:forEach>
 			</tr>
 			</thead>
@@ -73,7 +73,6 @@
 	<script type="text/javascript">
 
 		jQuery().ready( function () {
-//			$( "#userRegistrationGraph" ).hide();
 			var chartOptions = { type:'line', width:1300, height:300, lineWeight:2 };
 			$( '#userRegistrationGraph' ).visualize( chartOptions );
 		} );
