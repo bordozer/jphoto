@@ -24,6 +24,11 @@
 		.inactiveTasks {
 			background: #E8E8E8;
 		}
+
+		.imageOpacity {
+			opacity: 0.2;
+			filter: alpha(opacity = 40); /* For IE8 and earlier */
+		}
 	</style>
 
 	<form:form action="" method="POST" modelAttribute="schedulerTaskListModel" >
@@ -122,12 +127,19 @@
 							<c:set var="taskIconTitle" value="${eco:translate('The task is inactive')}"/>
 						</c:if>
 
+						<c:set var="imgCss" value=""/>
+						<c:set var="imgTitle" value=""/>
+						<c:if test="${not schedulerRunning}">
+							<c:set var="imgCss" value="imageOpacity"/>
+							<c:set var="imgTitle" value="${eco:translate('The scheduler is stopped')}"/>
+						</c:if>
+
 						<c:set var="schedulerTaskId" value="${schedulerTask.id}"/>
 
 						<table:tr>
 
 							<table:tdicon cssClass="${css}">
-								<html:img32 src="scheduler/${taskIcon}" alt="${taskIconTitle}" />
+								<html:img32 src="scheduler/${taskIcon}" alt="${taskIconTitle} ${imgTitle}" cssClass="${imgCss}" />
 							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">
