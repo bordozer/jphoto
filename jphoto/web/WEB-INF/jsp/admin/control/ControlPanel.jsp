@@ -15,18 +15,37 @@
 		<div class="floatleft">
 
 			<div class="floatleft" style="width: 30%;">
-				<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
-								   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
-				<br />
-				<html:submitButton id="reload-translations" caption_t="Reload translations"
-								   onclick="return submitControlPanelForm( 'reload-translations', '${eco:translate('Reload translations?')}' );"/>
-				<br />
-				<html:submitButton id="clear-cache" caption_t="Clear system cache"
-								   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
+				<table:table width="250">
+
+					<table:separatorInfo colspan="2" title="${eco:translate('System')}" />
+
+					<table:tr cssClass="textcentered">
+						<table:td>
+							<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
+											   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
+						</table:td>
+					</table:tr>
+
+					<table:tr>
+						<table:td cssClass="textcentered">
+							<html:submitButton id="reload-translations" caption_t="Reload translations"
+											   onclick="return submitControlPanelForm( 'reload-translations', '${eco:translate('Reload translations?')}' );"/>
+						</table:td>
+					</table:tr>
+
+					<table:tr>
+						<table:td cssClass="textcentered">
+							<html:submitButton id="clear-cache" caption_t="Clear system cache"
+											   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
+						</table:td>
+					</table:tr>
+				</table:table>
 			</div>
 
 			<div class="floatleft" style="width: 30%;">
-				<table:table>
+				<table:table width="250">
+
+					<table:separatorInfo colspan="2" title="${eco:translate('Statistics')}" />
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Users total')}</table:td>
