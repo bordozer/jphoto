@@ -42,6 +42,8 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 	// Transactional
 	boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText );
 
+	int getPrivateMessagesCount();
+
 	void delete( final List<Integer> ids );
 
 	void deleteAll( final int userId, final PrivateMessageType messageType );

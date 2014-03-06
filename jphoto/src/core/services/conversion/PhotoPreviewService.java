@@ -17,6 +17,8 @@ public interface PhotoPreviewService extends BaseEntityService<PhotoPreview> {
 
 	int getPreviewCount( final int photoId );
 
+	int getPreviewCount();
+
 	List<PhotoPreview> getPreviews( final int photoId );
 
 	List<Integer> getLastUsersWhoViewedUserPhotos( final int userId, final int qty );

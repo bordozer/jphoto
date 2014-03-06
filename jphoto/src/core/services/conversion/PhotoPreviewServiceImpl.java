@@ -101,6 +101,11 @@ public class PhotoPreviewServiceImpl implements PhotoPreviewService {
 	}
 
 	@Override
+	public int getPreviewCount() {
+		return photoPreviewDao.getPreviewCount();
+	}
+
+	@Override
 	public List<PhotoPreview> getPreviews( final int photoId ) {
 		return photoPreviewDao.getPreviews( photoId );
 	}

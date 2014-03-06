@@ -213,6 +213,11 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		return photoCommentDao.getPhotoCommentsCount( photoId );
 	}
 
+	@Override
+	public int getPhotoCommentsCount() {
+		return photoCommentDao.getPhotoCommentsCount();
+	}
+
 	private void saveLastUserCommentTime( final User commentAuthor ) {
 
 		if ( securityService.isSuperAdminUser( commentAuthor.getId() ) ) {

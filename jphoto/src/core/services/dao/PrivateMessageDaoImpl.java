@@ -144,6 +144,11 @@ public class PrivateMessageDaoImpl extends BaseEntityDaoImpl<PrivateMessage> imp
 	}
 
 	@Override
+	public int getPrivateMessagesCount() {
+		return 0; // TODO: implement
+	}
+
+	@Override
 	public void delete( final List<Integer> ids ) {
 
 		if ( ids.size() == 0 ) {

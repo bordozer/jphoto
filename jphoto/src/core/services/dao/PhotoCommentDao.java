@@ -33,5 +33,7 @@ public interface PhotoCommentDao extends BaseEntityDao<PhotoComment> {
 
 	int getPhotoCommentsCount( final int photoId );
 
+	int getPhotoCommentsCount();
+
 	void markAllUnreadCommentAsRead( final int userId );
 }

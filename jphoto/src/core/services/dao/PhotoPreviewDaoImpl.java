@@ -78,13 +78,19 @@ public class PhotoPreviewDaoImpl extends BaseEntityDaoImpl<PhotoPreview> impleme
 
 	@Override
 	public int getPreviewCount( final int photoId ) {
-		final String sql = String.format( "SELECT COUNT( %s ) FROM %s WHERE %s=:photoId;"
-			, BaseEntityDao.ENTITY_ID, TABLE_PHOTO_PREVIEW, TABLE_PHOTO_PREVIEW_COLUMN_PHOTO_ID );
+		final String sql = String.format( "SELECT COUNT( %s ) FROM %s WHERE %s=:photoId;", BaseEntityDao.ENTITY_ID, TABLE_PHOTO_PREVIEW, TABLE_PHOTO_PREVIEW_COLUMN_PHOTO_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "photoId", photoId );
 
 		return jdbcTemplate.queryForInt( sql, paramSource );
+	}
+
+	@Override
+	public int getPreviewCount() {
+		final String sql = String.format( "SELECT COUNT( %s ) FROM %s;", BaseEntityDao.ENTITY_ID, TABLE_PHOTO_PREVIEW );
+
+		return jdbcTemplate.queryForInt( sql, new MapSqlParameterSource() );
 	}
 
 	@Override

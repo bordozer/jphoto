@@ -12,36 +12,51 @@
 
 	<form:form method="POST" modelAttribute="controlPanelModel" action="${eco:baseAdminUrlWithPrefix()}/control-panel/" >
 
-		<table:table>
+		<div class="floatleft">
 
-			<table:tr>
+			<div class="floatleft" style="width: 30%;">
+				<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
+								   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
+				<br />
+				<html:submitButton id="reload-translations" caption_t="Reload translations"
+								   onclick="return submitControlPanelForm( 'reload-translations', '${eco:translate('Reload translations?')}' );"/>
+				<br />
+				<html:submitButton id="clear-cache" caption_t="Clear system cache"
+								   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
+			</div>
 
-				<table:td>
-					<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
-									   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
-				</table:td>
+			<div class="floatleft" style="width: 30%;">
+				<table:table>
 
-			</table:tr>
+					<table:tr>
+						<table:td cssClass="textright">${eco:translate('Users total')}</table:td>
+						<table:td>${controlPanelModel.usersTotal}</table:td>
+					</table:tr>
 
-			<table:tr>
+					<table:tr>
+						<table:td cssClass="textright">${eco:translate('Photos total')}</table:td>
+						<table:td>${controlPanelModel.photosTotal}</table:td>
+					</table:tr>
 
-				<table:td>
-					<html:submitButton id="reload-translations" caption_t="Reload translations"
-									   onclick="return submitControlPanelForm( 'reload-translations', '${eco:translate('Reload translations?')}' );"/>
-				</table:td>
+					<table:tr>
+						<table:td cssClass="textright">${eco:translate('Photo previews total')}</table:td>
+						<table:td>${controlPanelModel.photoPreviewsTotal}</table:td>
+					</table:tr>
 
-			</table:tr>
+					<table:tr>
+						<table:td cssClass="textright">${eco:translate('Photo comments total')}</table:td>
+						<table:td>${controlPanelModel.photoCommentsTotal}</table:td>
+					</table:tr>
 
-			<table:tr>
+					<table:tr>
+						<table:td cssClass="textright">${eco:translate('Private messages total')}</table:td>
+						<table:td>${controlPanelModel.privateMessagesTotal}</table:td>
+					</table:tr>
 
-				<table:td>
-					<html:submitButton id="clear-cache" caption_t="Clear system cache"
-									   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
-				</table:td>
+				</table:table>
+			</div>
 
-			</table:tr>
-
-		</table:table>
+		</div>
 
 	</form:form>
 

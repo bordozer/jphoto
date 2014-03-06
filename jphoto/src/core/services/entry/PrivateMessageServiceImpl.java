@@ -206,6 +206,11 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
+	public int getPrivateMessagesCount() {
+		return privateMessageDao.getPrivateMessagesCount();
+	}
+
+	@Override
 	public void delete( final List<Integer> ids ) {
 		privateMessageDao.delete( ids );
 	}

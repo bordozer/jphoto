@@ -1,9 +1,14 @@
 package admin.controllers.control;
 
 import core.general.cache.CacheKey;
+import core.services.conversion.PhotoPreviewService;
+import core.services.entry.PrivateMessageService;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.photo.PhotoCommentService;
+import core.services.photo.PhotoService;
 import core.services.system.CacheService;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
 import org.apache.commons.configuration.ConfigurationException;
@@ -37,6 +42,21 @@ public class ControlPanelController {
 	@Autowired
 	private CacheService cacheService;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private PhotoService photoService;
+
+	@Autowired
+	private PhotoPreviewService photoPreviewService;
+
+	@Autowired
+	private PhotoCommentService photoCommentService;
+
+	@Autowired
+	private PrivateMessageService privateMessageService;
+
 	@ModelAttribute( MODEL_NAME )
 	public ControlPanelModel prepareModel() {
 		final ControlPanelModel model = new ControlPanelModel();
@@ -48,6 +68,13 @@ public class ControlPanelController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String controlPanel( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) {
+
+		model.setUsersTotal( userService.getUserCount() );
+		model.setPhotosTotal( photoService.getPhotoQty() );
+		model.setPhotoPreviewsTotal( photoPreviewService.getPreviewCount() );
+		model.setPhotoCommentsTotal( photoCommentService.getPhotoCommentsCount() );
+		model.setPrivateMessagesTotal( privateMessageService.getPrivateMessagesCount() );
+
 		return VIEW;
 	}
 

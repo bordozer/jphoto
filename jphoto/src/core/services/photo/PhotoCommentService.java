@@ -58,5 +58,7 @@ public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
 
 	int getPhotoCommentsCount( final int photoId );
 
+	int getPhotoCommentsCount();
+
 	void markAllUnreadCommentAsRead( final int userId );
 }

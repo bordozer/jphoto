@@ -276,6 +276,16 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	}
 
 	@Override
+	public int getPhotoCommentsCount() {
+		final String sql = String.format( "SELECT COUNT( %s ) FROM %s;"
+			, ENTITY_ID
+			, TABLE_COMMENTS
+		);
+
+		return getIntValueOrZero( sql, new MapSqlParameterSource() );
+	}
+
+	@Override
 	public void markAllUnreadCommentAsRead( final int userId ) {
 		final List<Integer> unreadCommentsIds = getUnreadCommentsIds( userId );
 
