@@ -43,33 +43,40 @@
 			</div>
 
 			<div class="floatleft" style="width: 30%;">
-				<table:table width="250">
+				<table:table width="350">
 
-					<table:separatorInfo colspan="2" title="${eco:translate('Statistics')}" />
+					<table:separatorInfo colspan="3" title="${eco:translate('Statistics')}" />
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Users total')}</table:td>
 						<table:td>${controlPanelModel.usersTotal}</table:td>
+						<table:td>
+							<a href="${eco:baseAdminUrlWithPrefix()}/reports/users/"> ${eco:translate('Statistic')}</a>
+						</table:td>
 					</table:tr>
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Photos total')}</table:td>
 						<table:td>${controlPanelModel.photosTotal}</table:td>
+						<table:td>${eco:translate('Statistic')}</table:td>
 					</table:tr>
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Photo previews total')}</table:td>
 						<table:td>${controlPanelModel.photoPreviewsTotal}</table:td>
+						<table:td>${eco:translate('Statistic')}</table:td>
 					</table:tr>
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Photo comments total')}</table:td>
 						<table:td>${controlPanelModel.photoCommentsTotal}</table:td>
+						<table:td>${eco:translate('Statistic')}</table:td>
 					</table:tr>
 
 					<table:tr>
 						<table:td cssClass="textright">${eco:translate('Private messages total')}</table:td>
 						<table:td>${controlPanelModel.privateMessagesTotal}</table:td>
+						<table:td>${eco:translate('Statistic')}</table:td>
 					</table:tr>
 
 				</table:table>
