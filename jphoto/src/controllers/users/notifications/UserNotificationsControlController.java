@@ -2,6 +2,7 @@ package controllers.users.notifications;
 
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
+import core.services.entry.FavoritesService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
@@ -33,6 +34,9 @@ public class UserNotificationsControlController {
 	@Autowired
 	private PageTitleUserUtilsService pageTitleUserUtilsService;
 
+	@Autowired
+	private FavoritesService favoritesService;
+
 	@ModelAttribute( MODEL_NAME )
 	public UserNotificationsControlModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
 		securityService.assertUserExists( _userId );
@@ -49,6 +53,9 @@ public class UserNotificationsControlController {
 			notificationOptionIds.add( String.valueOf( emailNotificationType.getId() ) );
 		}
 		model.setEmailNotificationTypeIds( notificationOptionIds );
+
+		model.setPhotoQtyWhichCommentsUserIsTracking( favoritesService.getPhotoQtyWhichCommentsUserIsTracking( user ) );
+		model.setUsersQtyWhoNewPhotoUserIsTracking( favoritesService.getUsersQtyWhoNewPhotoUserIsTracking( user ) );
 
 		return model;
 	}

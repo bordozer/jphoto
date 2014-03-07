@@ -13,6 +13,9 @@ public class UserNotificationsControlModel extends AbstractGeneralModel {
 
 	private Set<String> emailNotificationTypeIds;
 
+	private int usersQtyWhoNewPhotoUserIsTracking;
+	private int photoQtyWhichCommentsUserIsTracking;
+
 	public void setUser( final User user ) {
 		this.user = user;
 	}
@@ -27,5 +30,21 @@ public class UserNotificationsControlModel extends AbstractGeneralModel {
 
 	public void setEmailNotificationTypeIds( final Set<String> emailNotificationTypeIds ) {
 		this.emailNotificationTypeIds = emailNotificationTypeIds;
+	}
+
+	public void setPhotoQtyWhichCommentsUserIsTracking( final int photoQtyWhichCommentsUserIsTracking ) {
+		this.photoQtyWhichCommentsUserIsTracking = photoQtyWhichCommentsUserIsTracking;
+	}
+
+	public void setUsersQtyWhoNewPhotoUserIsTracking( final int usersQtyWhoNewPhotoUserIsTracking ) {
+		this.usersQtyWhoNewPhotoUserIsTracking = usersQtyWhoNewPhotoUserIsTracking;
+	}
+
+	public int getPhotoQtyWhichCommentsUserIsTracking() {
+		return photoQtyWhichCommentsUserIsTracking;
+	}
+
+	public int getUsersQtyWhoNewPhotoUserIsTracking() {
+		return usersQtyWhoNewPhotoUserIsTracking;
 	}
 }

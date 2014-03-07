@@ -2,6 +2,7 @@ package core.services.dao;
 
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
+import core.general.user.User;
 
 import java.util.Date;
 import java.util.List;
@@ -31,4 +32,8 @@ public interface FavoritesDao extends BaseEntityDao<FavoriteEntry> {
 	int getNotificationsAboutNewCommentsQty( final int userId );
 
 	List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType );
+
+	int getPhotoQtyWhichCommentsUserIsTracking( final User user );
+
+	int getUsersQtyWhoNewPhotoUserIsTracking( final User user );
 }

@@ -3,6 +3,7 @@ package core.services.entry;
 import core.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
+import core.general.user.User;
 import core.interfaces.BaseEntityService;
 
 import java.util.Date;
@@ -25,4 +26,8 @@ public interface FavoritesService extends BaseEntityService<FavoriteEntry> {
 	AjaxResultDTO removeEntryFromFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
 
 	List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType );
+
+	int getPhotoQtyWhichCommentsUserIsTracking( final User user );
+
+	int getUsersQtyWhoNewPhotoUserIsTracking( final User user );
 }

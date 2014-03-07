@@ -25,22 +25,24 @@
 
 		<table:table width="600">
 
-			<table:separatorInfo colspan="1" title="${eco:translate('Email Notifications')}" />
+			<table:separatorInfo colspan="2" title="${eco:translate('Email Notifications')}" />
 
 			<table:tr>
-				<table:td>
+				<table:td colspan="2">
 					<form:checkboxes path="${emailNotificationTypeIdsControl}" items="${emailNotificationTypes}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />" />
 				</table:td>
 			</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Activity Notifications')}" />
+			<table:separatorInfo colspan="3" title="${eco:translate('Activity Notifications')}" />
 
 			<table:tr>
 				<table:td><a href="${photosWithSubscribeOnNewCommentsLink}">${eco:translate("New photo of the member I'm tracking who's")}</a></table:td>
+				<table:td>${userNotificationsControlModel.usersQtyWhoNewPhotoUserIsTracking}</table:td>
 			</table:tr>
 
 			<table:tr>
 				<table:td><a href="${usersNewPhotosNotificationMenuLink}">${eco:translate("New comments of the photos I\'m tracking which")}</a></table:td>
+				<table:td>${userNotificationsControlModel.photoQtyWhichCommentsUserIsTracking}</table:td>
 			</table:tr>
 
 			<table:trok text_t="Save" />

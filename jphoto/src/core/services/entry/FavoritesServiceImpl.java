@@ -4,6 +4,7 @@ import core.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.favorite.FavoriteEntry;
+import core.general.user.User;
 import core.services.dao.FavoritesDao;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -119,6 +120,16 @@ public class FavoritesServiceImpl implements FavoritesService {
 	@Override
 	public List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType ) {
 		return favoritesDao.getAllUsersIdsWhoHasThisEntryInFavorites( favoriteEntryId, favoriteEntryType );
+	}
+
+	@Override
+	public int getPhotoQtyWhichCommentsUserIsTracking( final User user ) {
+		return favoritesDao.getPhotoQtyWhichCommentsUserIsTracking( user );
+	}
+
+	@Override
+	public int getUsersQtyWhoNewPhotoUserIsTracking( final User user ) {
+		return favoritesDao.getUsersQtyWhoNewPhotoUserIsTracking( user );
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package core.services.dao;
 
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
+import core.general.user.User;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
@@ -142,6 +143,16 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 		paramSource.addValue( "entryType", favoriteEntryType.getId() );
 
 		return jdbcTemplate.query( sql, paramSource, new IdsRowMapper() );
+	}
+
+	@Override
+	public int getPhotoQtyWhichCommentsUserIsTracking( final User user ) {
+		return 0;
+	}
+
+	@Override
+	public int getUsersQtyWhoNewPhotoUserIsTracking( final User user ) {
+		return 0;
 	}
 
 	private int getFavoriteEntriesQty( final int userId, final FavoriteEntryType entryType ) {
