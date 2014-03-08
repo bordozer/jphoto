@@ -137,7 +137,8 @@ public abstract class AbstractJob extends Thread {
 
 			log.error( exceptionMessage );
 
-			services.getPrivateMessageService().sendNotificationAboutErrorToAdmins( exceptionMessage );
+			final String message = String.format( "Job '%s' failed with exception: %s", this, exceptionMessage );
+			services.getPrivateMessageService().sendNotificationAboutErrorToAdmins( message );
 		} finally {
 			jobExecutionService.removeJobFromActiveList( this );
 //			log.debug( String.format( "removeJobFromActiveList: %s", this ) );
