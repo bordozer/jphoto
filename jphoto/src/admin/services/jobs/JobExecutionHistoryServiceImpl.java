@@ -84,6 +84,11 @@ public class JobExecutionHistoryServiceImpl implements JobExecutionHistoryServic
 		return jobExecutionHistoryDao.load( selectIdsQuery );
 	}
 
+	@Override
+	public void delete( final List<Integer> ids ) {
+		jobExecutionHistoryDao.delete( ids );
+	}
+
 	private Map<SavedJobParameterKey, CommonProperty> getJobParametersMap( final int jobExecutionHistoryId ) {
 		final Map<SavedJobParameterKey, CommonProperty> jobParameters = jobExecutionHistoryDao.getJobParameters( jobExecutionHistoryId );
 

@@ -22,4 +22,6 @@ public interface JobExecutionHistoryService extends BaseEntityService<JobExecuti
 	List<Integer> getEntriesIdsOlderThen( final Date timeFrame, final List<JobExecutionStatus> jobExecutionStatusesToDelete );
 
 	void deleteEntriesOlderThen( final Date timeFrame, final List<JobExecutionStatus> jobExecutionStatusesToDelete );
+
+	void delete( final List<Integer> ids );
 }

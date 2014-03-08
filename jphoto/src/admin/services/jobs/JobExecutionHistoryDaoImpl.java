@@ -5,6 +5,7 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
+import core.services.dao.BaseEntityDao;
 import core.services.dao.BaseEntityDaoImpl;
 import core.services.dao.SavedJobDao;
 import core.services.dao.mappers.IdsRowMapper;
@@ -185,6 +186,16 @@ public class JobExecutionHistoryDaoImpl extends BaseEntityDaoImpl<JobExecutionHi
 		for ( final int jobExecutionHistoryId : jobExecutionHistoryToDeleteIds ) {
 			delete( jobExecutionHistoryId );
 		}
+	}
+
+	public void delete( final List<Integer> entryIds ) {
+
+		if ( entryIds.size() == 0 ) {
+			return;
+		}
+
+		final String sql = String.format( "DELETE FROM %s WHERE %s IN ( %s );", getTableName(), BaseEntityDao.ENTITY_ID, StringUtils.join( entryIds, "," ) );
+		jdbcTemplate.update( sql, new MapSqlParameterSource() );
 	}
 
 	@Override

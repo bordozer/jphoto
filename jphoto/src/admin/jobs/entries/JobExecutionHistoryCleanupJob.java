@@ -31,16 +31,10 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 		final JobExecutionHistoryService jobExecutionHistoryService = services.getJobExecutionHistoryService();
 		final List<Integer> idsToBeDeleted = jobExecutionHistoryService.getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete );
-		for ( final int id : idsToBeDeleted ) {
 
-			jobExecutionHistoryService.delete( id );
+		increment();
 
-			increment();
-
-			if ( hasJobFinishedWithAnyResult() ) {
-				break;
-			}
-		}
+		jobExecutionHistoryService.delete( idsToBeDeleted );
 	}
 
 	@Override
@@ -65,10 +59,7 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 			jobExecutionStatusesToDelete.add( JobExecutionStatus.getById( statusId ) );
 		}
 
-		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
-		totalJopOperations = services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size();
-
-//		generationMonitor.setTotal( totalJopOperations );
+		totalJopOperations = 2;
 	}
 
 	@Override
@@ -93,7 +84,9 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 		}
 
 		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
-		builder.append( "<br />Total: " ).append( services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size() );
+		builder.append( "<br />" );
+		builder.append( translatorService.translate( "Total" ) ).append( ": " );
+		builder.append( services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size() );
 
 		return builder.toString();
 	}
