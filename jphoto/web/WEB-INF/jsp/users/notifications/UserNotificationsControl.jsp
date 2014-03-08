@@ -15,6 +15,7 @@
 %>
 <c:set var="photosWithSubscribeOnNewCommentsLink" value="<%=urlUtilsService.getPhotosWithSubscribeOnNewCommentsLink( userNotificationsControlModel.getUser().getId() )%>"/>
 <c:set var="usersNewPhotosNotificationMenuLink" value="<%=urlUtilsService.getUsersNewPhotosNotificationMenuLink( userNotificationsControlModel.getUser().getId() )%>"/>
+<c:set var="userFavoriteFriendsLink" value="<%=urlUtilsService.getUserFavoriteFriendsLink( userNotificationsControlModel.getUser().getId() )%>"/>
 
 <tags:page pageModel="${userNotificationsControlModel.pageModel}">
 
@@ -36,13 +37,18 @@
 			<table:separatorInfo colspan="3" title="${eco:translate('Activity Notifications')}" />
 
 			<table:tr>
+				<table:td><a href="${usersNewPhotosNotificationMenuLink}">${eco:translate("New comments of the photos I\'m tracking which")}</a></table:td>
+				<table:td>${userNotificationsControlModel.photoQtyWhichCommentsUserIsTracking}</table:td>
+			</table:tr>
+
+			<table:tr>
 				<table:td><a href="${photosWithSubscribeOnNewCommentsLink}">${eco:translate("New photo of the member I'm tracking who's")}</a></table:td>
 				<table:td>${userNotificationsControlModel.usersQtyWhoNewPhotoUserIsTracking}</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td><a href="${usersNewPhotosNotificationMenuLink}">${eco:translate("New comments of the photos I\'m tracking which")}</a></table:td>
-				<table:td>${userNotificationsControlModel.photoQtyWhichCommentsUserIsTracking}</table:td>
+				<table:td><a href="${userFavoriteFriendsLink}">${eco:translate("Your friends")}</a></table:td>
+				<table:td>${userNotificationsControlModel.friendsQty}</table:td>
 			</table:tr>
 
 			<table:trok text_t="Save" />

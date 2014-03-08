@@ -27,7 +27,9 @@ public interface FavoritesService extends BaseEntityService<FavoriteEntry> {
 
 	List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType );
 
+	int getUsersQtyWhoNewPhotoUserIsTracking( final User user );
+
 	int getPhotoQtyWhichCommentsUserIsTracking( final User user );
 
-	int getUsersQtyWhoNewPhotoUserIsTracking( final User user );
+	int getFriendsQty( final User user );
 }

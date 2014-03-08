@@ -123,13 +123,18 @@ public class FavoritesServiceImpl implements FavoritesService {
 	}
 
 	@Override
+	public int getUsersQtyWhoNewPhotoUserIsTracking( final User user ) {
+		return favoritesDao.getUsersQtyWhoNewPhotoUserIsTracking( user );
+	}
+
+	@Override
 	public int getPhotoQtyWhichCommentsUserIsTracking( final User user ) {
 		return favoritesDao.getPhotoQtyWhichCommentsUserIsTracking( user );
 	}
 
 	@Override
-	public int getUsersQtyWhoNewPhotoUserIsTracking( final User user ) {
-		return favoritesDao.getUsersQtyWhoNewPhotoUserIsTracking( user );
+	public int getFriendsQty( final User user ) {
+		return favoritesDao.getFriendsQty( user.getId() );
 	}
 
 	@Override

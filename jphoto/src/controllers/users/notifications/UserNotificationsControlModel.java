@@ -15,6 +15,7 @@ public class UserNotificationsControlModel extends AbstractGeneralModel {
 
 	private int usersQtyWhoNewPhotoUserIsTracking;
 	private int photoQtyWhichCommentsUserIsTracking;
+	private int friendsQty;
 
 	public void setUser( final User user ) {
 		this.user = user;
@@ -46,5 +47,13 @@ public class UserNotificationsControlModel extends AbstractGeneralModel {
 
 	public int getUsersQtyWhoNewPhotoUserIsTracking() {
 		return usersQtyWhoNewPhotoUserIsTracking;
+	}
+
+	public void setFriendsQty( final int friendsQty ) {
+		this.friendsQty = friendsQty;
+	}
+
+	public int getFriendsQty() {
+		return friendsQty;
 	}
 }

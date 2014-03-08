@@ -54,8 +54,9 @@ public class UserNotificationsControlController {
 		}
 		model.setEmailNotificationTypeIds( notificationOptionIds );
 
-		model.setPhotoQtyWhichCommentsUserIsTracking( favoritesService.getPhotoQtyWhichCommentsUserIsTracking( user ) );
 		model.setUsersQtyWhoNewPhotoUserIsTracking( favoritesService.getUsersQtyWhoNewPhotoUserIsTracking( user ) );
+		model.setPhotoQtyWhichCommentsUserIsTracking( favoritesService.getPhotoQtyWhichCommentsUserIsTracking( user ) );
+		model.setFriendsQty( favoritesService.getFriendsQty( user ) );
 
 		return model;
 	}
