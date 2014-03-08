@@ -32,8 +32,8 @@
 						 suppressAutoReloading="true"
 		/>
 
+	<script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
 	<script type="text/javascript">
-
 		$( function () {
 			$( "#progressbar" ).progressbar( {
 												 value:${percentage}
@@ -88,40 +88,12 @@
 		var updateJobExecutionIFrameUpdateInterval = 6000;
 
 		setTimeout( function() {
-			updateProgress( jsonRPC );
+			updateProgress( ${jobExecutionHistoryEntry.id} );
 		}, interval );
 
 		setTimeout( function() {
 			updateJobExecutionIFrame();
 		}, updateJobExecutionIFrameUpdateInterval );
-
-		function updateProgress( jsonRPC ) {
-			var jobProgressDTO = jsonRPC.jobExecutionService.getJobProgressAjax( ${jobExecutionHistoryEntry.id} );
-			var current = jobProgressDTO.current;
-			var total = jobProgressDTO.total;
-			var jobStatusId = jobProgressDTO.jobStatusId;
-			var isJobActive = jobProgressDTO.jobActive;
-			var jobExecutionDuration = jobProgressDTO.jobExecutionDuration;
-
-			if ( ! isJobActive ) {
-				document.location.reload();
-				return;
-			}
-			var percentage = Math.floor( 100 * parseInt( current ) / parseInt( total ) );
-
-			$( '#totalStepsDivId' ).text( total > 0 ? total : "${calculatingText}" );
-			$( '#currentJobProgressId' ).text( current );
-			$( '#percentageJobProgressId' ).text( percentage + '%, ' + jobExecutionDuration );
-
-			$( "#progressbar" ).progressbar( {
-												 value:percentage
-											 } );
-
-			setTimeout( function() {
-				updateProgress( jsonRPC );
-			}, interval );
-
-		}
 
 		function updateJobExecutionIFrame() {
 			var jobExecutionLogIFrame = $( '#jobExecutionLogIFrame' );

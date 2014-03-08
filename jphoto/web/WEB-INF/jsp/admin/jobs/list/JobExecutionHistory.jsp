@@ -22,6 +22,8 @@
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
+<script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
+
 <style type="text/css">
 	tr.chainJob td {
 		font-weight: bold;
