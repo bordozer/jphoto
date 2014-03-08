@@ -30,7 +30,7 @@
 			<tx:method name="sendPrivateMessage"/>
 			<tx:method name="sendSystemNotificationMessage"/>
 			<tx:method name="sendActivityNotificationMessage"/>
-			<tx:method name="sendAdminNotificationMessage"/>
+			<tx:method name="sendNotificationAboutErrorToAdmins"/>
 		</tx:attributes>
 	</tx:advice>
 
@@ -85,8 +85,8 @@
 	</aop:config>
 
 	<aop:config>
-		<aop:pointcut id="sendAdminNotificationMessage" expression="execution(* core.services.entry.PrivateMessageService.sendAdminNotificationMessage(..))"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendAdminNotificationMessage"/>
+		<aop:pointcut id="sendNotificationAboutErrorToAdmins" expression="execution(* core.services.entry.PrivateMessageService.sendNotificationAboutErrorToAdmins(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendNotificationAboutErrorToAdmins"/>
 	</aop:config>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

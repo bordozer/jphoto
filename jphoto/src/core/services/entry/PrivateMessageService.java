@@ -40,7 +40,7 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 	boolean sendActivityNotificationMessage( final User toUser, final String privateMessageText );
 
 	// Transactional
-	boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText );
+	void sendNotificationAboutErrorToAdmins( final String message );
 
 	int getPrivateMessagesCount();
 

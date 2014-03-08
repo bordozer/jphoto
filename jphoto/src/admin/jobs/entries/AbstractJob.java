@@ -136,6 +136,8 @@ public abstract class AbstractJob extends Thread {
 			jobExecutionService.breakJobExecutionChain( this, services.getJobStatusChangeStrategyService().error( this, exceptionMessage ) );
 
 			log.error( exceptionMessage );
+
+			services.getPrivateMessageService().sendNotificationAboutErrorToAdmins( exceptionMessage );
 		} finally {
 			jobExecutionService.removeJobFromActiveList( this );
 //			log.debug( String.format( "removeJobFromActiveList: %s", this ) );

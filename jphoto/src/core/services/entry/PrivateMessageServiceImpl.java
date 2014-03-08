@@ -8,6 +8,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
 import core.services.notification.NotificationService;
+import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -35,6 +36,9 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	private final LogHelper log = new LogHelper( PrivateMessageServiceImpl.class );
 
@@ -201,7 +205,13 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText ) {
+	public void sendNotificationAboutErrorToAdmins( final String message ) {
+		for ( final User adminUser : securityService.getSuperAdminUsers() ) {
+			sendAdminNotificationMessage( adminUser, message );
+		}
+	}
+
+	private boolean sendAdminNotificationMessage( final User toUser, final String privateMessageText ) {
 		return sendPrivateMessage( null, toUser, PrivateMessageType.ADMIN_NOTIFICATIONS, privateMessageText );
 	}
 
