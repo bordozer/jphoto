@@ -1,5 +1,6 @@
 <%@ page import="admin.jobs.enums.JobExecutionStatus" %>
 <%@ page import="admin.jobs.enums.SavedJobType" %>
+<%@ page import="admin.controllers.jobs.list.SavedJobListController" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -19,10 +20,15 @@
 
 <c:set var="savedJobTypeValues" value="<%=SavedJobType.values()%>"/>
 <c:set var="savedJobTypeValuesLength" value="<%=SavedJobType.values().length%>"/>
+<c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
 <script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
+
+<script type="text/javascript">
+	var interval = ${jobProgressInterval};
+</script>
 
 <style type="text/css">
 	tr.chainJob td {
@@ -231,7 +237,12 @@
 									<c:set var="progressColor" value="#669966"/>
 								</c:if>
 
-								<tags:progressSimple progressBarId="progress_${jobEntryId}" percentage="${percentage}" width="200" height="7" color="${progressColor}"/>
+								<tags:progressSimple progressBarId="progressbar_${jobEntryId}" percentage="${percentage}" width="200" height="7" color="${progressColor}"/>
+								<script type="text/javascript">
+									setTimeout( function () {
+										updateProgress( ${jobExecutionHistoryEntry.id} );
+									}, interval );
+								</script>
 							</c:if>
 
 							<c:if test="${isJobFinishedWithAnyResult}">

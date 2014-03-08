@@ -1,6 +1,7 @@
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="admin.services.jobs.JobExecutionService" %>
+<%@ page import="admin.controllers.jobs.list.SavedJobListController" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -23,6 +24,7 @@
 <c:set var="current" value="${jobExecutionHistoryEntry.currentJobStep}" />
 <c:set var="total" value="${jobExecutionHistoryEntry.totalJobSteps}" />
 <c:set var="percentage" value="${eco:floor( 100 * current / total )}" />
+<c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
 
 <tags:page pageModel="${command.pageModel}">
 
@@ -84,7 +86,7 @@
 	</div>
 
 	<script type="text/javascript">
-		var interval = 2000;
+		var interval = ${jobProgressInterval};
 		var updateJobExecutionIFrameUpdateInterval = 6000;
 
 		setTimeout( function() {

@@ -40,6 +40,8 @@ import static com.google.common.collect.Sets.newHashSet;
 @RequestMapping( "jobs" )
 public class SavedJobListController {
 
+	public static final int JOB_PROGRESS_INTERVAL = 2000;
+
 	private final static String JOB_TEMPLATE_VIEW = "admin/jobs/list/JobTemplateList";
 	private final static String SAVED_JOBS_VIEW = "admin/jobs/list/SavedJobList";
 	private final static String DONE_JOBS_VIEW = "admin/jobs/list/JobExecutionHistory";

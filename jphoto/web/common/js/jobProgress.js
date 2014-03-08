@@ -23,5 +23,4 @@ function updateProgress( jobId ) {
 	setTimeout( function () {
 		updateProgress( jobId );
 	}, interval );
-
 }
