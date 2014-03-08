@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
 	<script type="text/javascript">
 		$( function () {
-			$( "#progressbar" ).progressbar( {
+			$( "#progressbar_${jobExecutionHistoryEntry.id}" ).progressbar( {
 												 value:${percentage}
 											 } );
 		} );
@@ -67,7 +67,7 @@
 
 	<br />
 	<br />
-	<div id="progressbar" style="width: 400px; height: 7px; text-align: center;"></div>
+	<div id="progressbar_${jobExecutionHistoryEntry.id}" style="width: 400px; height: 7px; text-align: center;"></div>
 
 	<h3>${eco:translate('Job parameters:')}</h3>
 	${jobExecutionHistoryEntry.jobParametersDescription}

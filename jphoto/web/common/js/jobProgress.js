@@ -16,7 +16,7 @@ function updateProgress( jobId ) {
 	$( '#currentJobProgressId' ).text( current );
 	$( '#percentageJobProgressId' ).text( percentage + '%, ' + jobExecutionDuration );
 
-	$( "#progressbar" ).progressbar( {
+	$( "#progressbar_" + jobId ).progressbar( {
 										 value:percentage
 									 } );
 
