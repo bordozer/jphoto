@@ -5,6 +5,7 @@ import core.services.translator.Language;
 import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 import core.services.translator.TranslatorService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -120,7 +121,13 @@ public class TranslatorController {
 
 		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
 			final TranslationData translationData = translationsMap.get( nerdKey );
-			final String letter = translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 ).toUpperCase();
+			final String nerd = translationData.getTranslationEntry( Language.NERD ).getNerd();
+
+			if ( StringUtils.isEmpty( nerd ) ) {
+				continue;
+			}
+
+			final String letter = nerd.substring( 0, 1 ).toUpperCase();
 			if ( ! result.contains( letter ) ) {
 				result.add( letter );
 			}
