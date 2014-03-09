@@ -62,7 +62,7 @@
 		&nbsp;&nbsp; - &nbsp;&nbsp; <b>${eco:formatDate(jobExecutionHistoryEntry.endTime)} &nbsp; ${eco:formatTime(jobExecutionHistoryEntry.endTime)}</b>
 		<br/>
 		<br/>
-		${eco:translate('Execution time:')} <b>${eco:formatTime(executionTime)}</b>
+		${eco:translate('Execution time')}: <b>${eco:formatTime(executionTime)}</b>
 
 		<br />
 		<br />
@@ -75,7 +75,7 @@
 		${errorMessage}
 	</c:if>
 
-	<h3>${eco:translate('Job parameters:')}</h3>
+	<h3>${eco:translate('Job parameters')}:</h3>
 	${jobExecutionHistoryEntry.jobParametersDescription}
 
 	<br />

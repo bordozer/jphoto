@@ -148,15 +148,15 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case PHOTOSIGHT:
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
-				builder.append( translatorService.translate( "Photosight user ids: " ) ).append( photosightParameters.getPhotosightUserIds() ).append( "<br />" );
-				builder.append( translatorService.translate( "User name: " ) ).append( photosightParameters.getUserName() ).append( "<br />" );
-				builder.append( translatorService.translate( "Gender: " ) ).append( photosightParameters.getUserGender().getNameTranslated() ).append( "<br />" );
-				builder.append( translatorService.translate( "Membership: " ) ).append( photosightParameters.getMembershipType().getName() ).append( "<br />" );
-				builder.append( translatorService.translate( "Import comments: " ) ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No" ) ).append( "<br />" );
-				builder.append( translatorService.translate( "Delay between requests: " ) ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
+				builder.append( translatorService.translate( "Photosight user ids" ) ).append( ": " ).append( photosightParameters.getPhotosightUserIds() ).append( "<br />" );
+				builder.append( translatorService.translate( "User name" ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
+				builder.append( translatorService.translate( "Gender" ) ).append( ": " ).append( photosightParameters.getUserGender().getNameTranslated() ).append( "<br />" );
+				builder.append( translatorService.translate( "Membership" ) ).append( ": " ).append( photosightParameters.getMembershipType().getName() ).append( "<br />" );
+				builder.append( translatorService.translate( "Import comments" ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No" ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Delay between requests" ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
 
 				final int pageQty = photosightParameters.getPageQty();
-				builder.append( translatorService.translate( "Process pages: " ) ).append( pageQty > 0 ? pageQty : "all" ).append( "<br />" );
+				builder.append( translatorService.translate( "Pages to process" ) ).append( ": " ).append( pageQty > 0 ? pageQty : "all" ).append( "<br />" );
 
 				break;
 			default:
