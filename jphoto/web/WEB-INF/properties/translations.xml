@@ -868,8 +868,198 @@
 	</translation>
 
 	<translation>
-		<nerd> $1 - previews</nerd>
-		<ru><![CDATA[ $1 - просмотры]]></ru>
+		<nerd>$1 - previews</nerd>
+		<ru><![CDATA[$1 - просмотры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>On new photos</nerd>
+		<ru><![CDATA[На новые работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>On new comments</nerd>
+		<ru><![CDATA[На новые комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Anonymous Days</nerd>
+		<ru><![CDATA[Дни анонимной загрузки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group operations with selected photos</nerd>
+		<ru><![CDATA[Групповые операции с отмеченными работами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>See all photos</nerd>
+		<ru><![CDATA[Все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The photo is marked as 'Contains nude content' </nerd>
+		<ru><![CDATA[Работа помечена как содержащая НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Marks for last $1 days</nerd>
+		<ru><![CDATA[Оценки за последние $1 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Rank in category '$1' : $2</nerd>
+		<ru><![CDATA[ранг в разделе '$1' : $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Lock user</nerd>
+		<ru><![CDATA[Забанить пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Today's marks</nerd>
+		<ru><![CDATA[Оценки полученные сегодня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Pages</nerd>
+		<ru><![CDATA[Страницы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Anonymous till</nerd>
+		<ru><![CDATA[Анонимность до]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Change password</nerd>
+		<ru><![CDATA[Изменить пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Items on page</nerd>
+		<ru><![CDATA[Единиц на странице]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private message text</nerd>
+		<ru><![CDATA[Текст личного сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Nude content</nerd>
+		<ru><![CDATA[НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments: $1</nerd>
+		<ru><![CDATA[Комментарии: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Please, select group operation first</nerd>
+		<ru><![CDATA[Пожалуйста, выберите групповую оперция сперва]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Translator</nerd>
+		<ru><![CDATA[Переводчик]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send private message to</nerd>
+		<ru><![CDATA[Отправить личное сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: photos from album '$2' ( $3 ) </nerd>
+		<ru><![CDATA[$1: работы в альбоме '$2' ( $3 ) ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show photos on $1</nerd>
+		<ru><![CDATA[Показать работы на $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 menu</nerd>
+		<ru><![CDATA[$1 меню]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top $1 best photos</nerd>
+		<ru><![CDATA[Top $1 лучших работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send complaint message:</nerd>
+		<ru><![CDATA[Пожаловаться на:]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The photo is posted anonymously</nerd>
+		<ru><![CDATA[Работа размещена анонимно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Items</nerd>
+		<ru><![CDATA[Единиц]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The Author did not allow commenting</nerd>
+		<ru><![CDATA[Автор запретил комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Message</nerd>
+		<ru><![CDATA[Сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>that have got at least $1 marks</nerd>
+		<ru><![CDATA[получившие не менее $1 оценок]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show all photos of the list</nerd>
+		<ru><![CDATA[Показать все работы в списке]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Pages $1 - $2</nerd>
+		<ru><![CDATA[Страницы $1 - $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin notifications</nerd>
+		<ru><![CDATA[Уведомления от админа]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Previews: $1</nerd>
+		<ru><![CDATA[Просмотры: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The author allowed voting to members only</nerd>
+		<ru><![CDATA[Автор разрешил голосование только для членов клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Please, select at least one photo first</nerd>
+		<ru><![CDATA[Пожалуйста, выделите сперва хотя бы одну работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best for $1 days</nerd>
+		<ru><![CDATA[Лучшие за $1 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 - previews</nerd>
+		<ru><![CDATA[$1 - просмотры]]></ru>
 	</translation>
 
 </translations>
