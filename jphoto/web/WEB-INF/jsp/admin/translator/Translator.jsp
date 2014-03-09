@@ -2,6 +2,8 @@
 <%@ page import="core.services.translator.TranslatorService" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.List" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,7 +16,7 @@
 	JSONRPCBridge.getGlobalBridge().registerObject( "translatorService", ApplicationContextHelper.<TranslatorService>getBean( TranslatorService.BEAN_NAME ) );
 %>
 
-<c:set var="languages" value="<%=Language.values()%>"/>
+<c:set var="languages" value="<%=Arrays.asList( Language.values() )%>"/>
 <c:set var="languageNerd" value="<%=Language.NERD%>"/>
 
 <tags:page pageModel="${translatorModel.pageModel}">
