@@ -534,7 +534,12 @@
 
 	<translation>
 		<nerd>Send private message to $1</nerd>
-		<ru><![CDATA[Отправить личное смообщение $1]]></ru>
+		<ru><![CDATA[Отправить личное сообщение $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send private message to</nerd>
+		<ru><![CDATA[Отправить личное сообщение]]></ru>
 	</translation>
 
 	<translation>
@@ -1100,6 +1105,11 @@
 	<translation>
 		<nerd>Time: $1</nerd>
 		<ru><![CDATA[Время: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Sorry, but you do not have permission to perform this operation</nerd>
+		<ru><![CDATA[Извините, но у вас нет доступа к данной операции]]></ru>
 	</translation>
 
 </translations>
