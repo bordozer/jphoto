@@ -3,7 +3,9 @@ package core.services.translator;
 public enum Language {
 
 	NERD( 1, "nerd", "Nerd" )
-	, RU( 2, "ru", "Russian" );
+	, EN( 2, "en", "English" )
+	, RU( 3, "ru", "Russian" )
+	;
 
 	private final int id;
 	private final String code;

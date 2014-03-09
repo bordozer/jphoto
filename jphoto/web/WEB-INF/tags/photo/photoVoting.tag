@@ -33,7 +33,7 @@
 
 <c:set var="votingTitle" value="${eco:translate('Voiting')}" />
 <c:if test="${hasUserAlreadyVotedForPhoto}">
-	<c:set var="votingTitle" value="${eco:translate1('You voted at $1', eco:formatDateTimeShort(userPhotoVotes[0].votingTime))}" />
+	<c:set var="votingTitle" value="${eco:translate1('You has already voted at $1', eco:formatDateTimeShort(userPhotoVotes[0].votingTime))}" />
 </c:if>
 
 <c:set var="voteUrl" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoVotingLink( photo.getId() )%>"/>

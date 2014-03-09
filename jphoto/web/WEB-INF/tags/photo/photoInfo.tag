@@ -47,12 +47,12 @@
 			<table:separatorInfo colspan="2" title="${eco:translate('Photo detailes')}" />
 
 			<table:tr>
-				<table:td width="170">${eco:translate("Name")}</table:td>
+				<table:td width="170">${eco:translate("Photo name")}</table:td>
 				<table:td>${eco:escapeHtml(photo.name)}</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Author")}</table:td>
+				<table:td>${eco:translate("Uploaded by")}</table:td>
 				<table:td>
 					<c:if test="${not isPhotoAuthorNameMustBeHidden}">
 						<user:userCard user="${user}"/>
@@ -81,20 +81,20 @@
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Genre")}</table:td>
+				<table:td>${eco:translate("Photo category")}</table:td>
 				<table:td><links:genrePhotos genre="${photoInfo.genre}"/></table:td>
 			</table:tr>
 
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:td>${eco:translate("Original dimension")}</table:td>
+				<table:td>${eco:translate("Original size")}</table:td>
 				<table:td>${originalDimension.width} x ${originalDimension.height} ${eco:translate("px")}</table:td>
 			</table:tr>
 
 			<c:if test="${resizedDimension.width != originalDimension.width || resizedDimension.height != originalDimension.height}">
 				<table:tr>
-					<table:td>${eco:translate("Shown dimension")}</table:td>
+					<table:td>${eco:translate("Shown size")}</table:td>
 					<table:td>${resizedDimension.width} x ${resizedDimension.height} ${eco:translate("px")}</table:td>
 				</table:tr>
 			</c:if>
@@ -137,7 +137,7 @@
 
 			<table:tr>
 				<table:td colspan="2">
-					${eco:translate("Author\'s rank in category ")}
+					${eco:translate("Author\'s rank in category")}
 
 					<c:if test="${not isPhotoAuthorNameMustBeHidden}">
 						${eco:photosByUserByGenreLink(user, genre)}
@@ -157,7 +157,7 @@
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Current")}</table:td>
+				<table:td>${eco:translate("Current rank")}</table:td>
 				<table:td>
 					<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankIconContainer}"/>
 				</table:td>

@@ -70,7 +70,7 @@
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Leave a comment as"/>
+					<table:tdtext text_t="Comment from"/>
 					<table:td>
 						<user:userCard user="${loggedUser}"/>
 					</table:td>

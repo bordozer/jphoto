@@ -162,4 +162,714 @@
 		<ru><![CDATA[Загрузить фото]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Vote</nerd>
+		<ru><![CDATA[Голосовать]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Add a new comment</nerd>
+		<ru><![CDATA[Добавить комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo name</nerd>
+		<ru><![CDATA[Название работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Uploaded by</nerd>
+		<ru><![CDATA[Загрузил]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Upload time</nerd>
+		<ru><![CDATA[Время загрузки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo category</nerd>
+		<ru><![CDATA[Раздел фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Original size</nerd>
+		<ru><![CDATA[Размер оригинала]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Shown dimension</nerd>
+		<ru><![CDATA[Показанный размер]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>File size</nerd>
+		<ru><![CDATA[Размер файла]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo team</nerd>
+		<ru><![CDATA[Участники съемки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo albums</nerd>
+		<ru><![CDATA[Входит в альбомы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Author's rank in category</nerd>
+		<ru><![CDATA[Ранг автора в разделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Current rank</nerd>
+		<ru><![CDATA[Текущий ранг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>When photo was uploaded</nerd>
+		<ru><![CDATA[Когда работа была загружена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Vote for the rank</nerd>
+		<ru><![CDATA[Голосовать за рагн автора в разделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Total marks</nerd>
+		<ru><![CDATA[Всего оценок]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Marks by categories</nerd>
+		<ru><![CDATA[Оценки в разрезе категорий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Today's rating position</nerd>
+		<ru><![CDATA[Позиция в сегодняшнем рейтинге]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo's awards</nerd>
+		<ru><![CDATA[Полученные награды]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Previews</nerd>
+		<ru><![CDATA[Просмотров]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments</nerd>
+		<ru><![CDATA[Комментариев]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo detailes</nerd>
+		<ru><![CDATA[Информация о работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>px</nerd>
+		<ru><![CDATA[пикселей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Kb</nerd>
+		<ru><![CDATA[Кб]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo description</nerd>
+		<ru><![CDATA[Описание фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reply to the comment</nerd>
+		<ru><![CDATA[Ответить на комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment from</nerd>
+		<ru><![CDATA[Комментарий от]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment</nerd>
+		<ru><![CDATA[Комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not leave comments</nerd>
+		<ru><![CDATA[Вы не можете комментировать данную работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reset comment form</nerd>
+		<ru><![CDATA[Очистить форму комментария]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments length: $1 - $2 symbols</nerd>
+		<ru><![CDATA[Длина комментария: $1 - $2 символов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your delay between comments: $1 seconds</nerd>
+		<ru><![CDATA[Задержка между комментариями: $1 секунд]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You has already voted at $1</nerd>
+		<ru><![CDATA[Вы уже проголосовали $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Users total</nerd>
+		<ru><![CDATA[Всего пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private messages total</nerd>
+		<ru><![CDATA[Всего личных сообщений]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Statistics</nerd>
+		<ru><![CDATA[Статистика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reload system properties</nerd>
+		<ru><![CDATA[Перезагрузить системные настройки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Lock photo author: $1</nerd>
+		<ru><![CDATA[Забанить автора фоторафии: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time to the next comment </nerd>
+		<ru><![CDATA[Время до следующего комментария]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>This week's photos</nerd>
+		<ru><![CDATA[Фотографии этой недели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Tech</nerd>
+		<ru><![CDATA[Моя техника]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Notifications Control</nerd>
+		<ru><![CDATA[Управление уведомлениями]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo info</nerd>
+		<ru><![CDATA[Информация о фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>This month's photos</nerd>
+		<ru><![CDATA[Фотографии этого месяца]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System notifications</nerd>
+		<ru><![CDATA[Системные уведомления]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Lock comment author: $1</nerd>
+		<ru><![CDATA[Забанить афтора комментария: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private messages</nerd>
+		<ru><![CDATA[Личные сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Lock user</nerd>
+		<ru><![CDATA[Забанить пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show photos: $1</nerd>
+		<ru><![CDATA[Показать фотографии: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>N/A</nerd>
+		<ru><![CDATA[Н/Д]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Error saving message</nerd>
+		<ru><![CDATA[Ошибка сохранения сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Error getting photo info</nerd>
+		<ru><![CDATA[Ошибка загрузки информации о работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Bookmarked photos</nerd>
+		<ru><![CDATA[Работы в закладках]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ADMIN</nerd>
+		<ru><![CDATA[АДМИН]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo comments total</nerd>
+		<ru><![CDATA[Всего комментариев]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Save changes</nerd>
+		<ru><![CDATA[Сохранить изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can leave a comment after</nerd>
+		<ru><![CDATA[Вы можете оставить комментарий через]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Favorite photos</nerd>
+		<ru><![CDATA[Избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones ).</nerd>
+		<ru><![CDATA[Участник не имеет достаточного количества работ в разделе $1 ( у него загружено только $2 работ(ы), а должно быть не менее $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos total</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Card</nerd>
+		<ru><![CDATA[Моя карточка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Max accessible at voting time mark: $1</nerd>
+		<ru><![CDATA[Максимальная оценка, доступная на момент голосования: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Black List</nerd>
+		<ru><![CDATA[Черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Clear system cache</nerd>
+		<ru><![CDATA[Очичтить системный кеш]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best of $1</nerd>
+		<ru><![CDATA[Лучшие $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Albums</nerd>
+		<ru><![CDATA[Мои альбомы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best yesterday's photos</nerd>
+		<ru><![CDATA[Лучшие работы за вчера]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Password</nerd>
+		<ru><![CDATA[Пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Warning</nerd>
+		<ru><![CDATA[Предупреждение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not vote for the member's rank in category. Click to see detailed message</nerd>
+		<ru><![CDATA[Вы не можете проголосовать за ранг участника в разделе. Кликните чтобы посмотреть дополнительную информацию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Max accessible at voting time for $1 mark</nerd>
+		<ru><![CDATA[Максимальная оценка, доступная $1 на момент голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activity notifications</nerd>
+		<ru><![CDATA[Уведомления о действиях пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send private message to $1</nerd>
+		<ru><![CDATA[Отправить личное смообщение $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduler</nerd>
+		<ru><![CDATA[Планировщик]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Summary photo's mark in this category</nerd>
+		<ru><![CDATA[Суммарные оценки работы в этом разделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not delete a comment which you are editing now</nerd>
+		<ru><![CDATA[Вы не можете удалить комментарий который в данный момент редактируете]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Lock member: $1</nerd>
+		<ru><![CDATA[Забанить пользователя: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Translated</nerd>
+		<ru><![CDATA[Переведенные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>has been added to</nerd>
+		<ru><![CDATA[был добавлен в]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete photo</nerd>
+		<ru><![CDATA[Удалить работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your set mark for $1: $2</nerd>
+		<ru><![CDATA[Ваша оценка в категории $1: $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The message has been sent</nerd>
+		<ru><![CDATA[Сообщение отправлено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments to me</nerd>
+		<ru><![CDATA[Полученные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Zero rank in category '$1'</nerd>
+		<ru><![CDATA[Нулевой ранг в разделе '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>All photos</nerd>
+		<ru><![CDATA[Все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 - votes</nerd>
+		<ru><![CDATA[$1 - голоса]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Member $1, photo album '$2'</nerd>
+		<ru><![CDATA[$1, фотоальбом '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The message has been sent to</nerd>
+		<ru><![CDATA[Сообщение было отправлено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Complaint copyright</nerd>
+		<ru><![CDATA[Пожаловаться на нарушение авторства]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not vote for the member rank in category $1:</nerd>
+		<ru><![CDATA[Вы не можете голосовать за ранг пользователя в разделе $1:]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments subscribe</nerd>
+		<ru><![CDATA[Подписка на комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Photos</nerd>
+		<ru><![CDATA[Мои работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Statistic</nerd>
+		<ru><![CDATA[Статистика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting Categories</nerd>
+		<ru><![CDATA[Категории голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Today's photos</nerd>
+		<ru><![CDATA[Сегодняшние работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Yesterday's photos</nerd>
+		<ru><![CDATA[Вчерашние работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Clear system cache?</nerd>
+		<ru><![CDATA[Очистить системный кеш?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best week's photos</nerd>
+		<ru><![CDATA[Лучшие работы этой недели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>There is not enough photos in category '$1' to have a rank</nerd>
+		<ru><![CDATA[Недостаточно работ в разделе '$1'] чтобы иметь ранг]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Change password</nerd>
+		<ru><![CDATA[Изменить пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My comments</nerd>
+		<ru><![CDATA[Мои комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Avatar</nerd>
+		<ru><![CDATA[Мой аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Actions type</nerd>
+		<ru><![CDATA[Тим события]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your card</nerd>
+		<ru><![CDATA[Ваша карточка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo previews total</nerd>
+		<ru><![CDATA[Всего просмотров]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job $1 is performed successfully</nerd>
+		<ru><![CDATA[Job $1 выполнена успешно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 - avatar</nerd>
+		<ru><![CDATA[$1 - аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Remember me</nerd>
+		<ru><![CDATA[Запомнить меня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>DB upgrade</nerd>
+		<ru><![CDATA[Апгрейд БД]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Profile settings</nerd>
+		<ru><![CDATA[Настройки профайла]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete comment?</nerd>
+		<ru><![CDATA[Удалить комментарий?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Absolute best</nerd>
+		<ru><![CDATA[Абсолютный рейтинг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send private message to</nerd>
+		<ru><![CDATA[Написать личное сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reply to $1$2</nerd>
+		<ru><![CDATA[Ответить $1$2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>My Team</nerd>
+		<ru><![CDATA[Моя команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Editing comment</nerd>
+		<ru><![CDATA[Редактирование комментария]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Favorite Members</nerd>
+		<ru><![CDATA[Избранные участники]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reload translations?</nerd>
+		<ru><![CDATA[Перезагрузить переводы?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Set by $1 mark</nerd>
+		<ru><![CDATA[Оценки выставленные $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Friends</nerd>
+		<ru><![CDATA[Друзья]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show member card: $1</nerd>
+		<ru><![CDATA[Показать карточку: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reload system properties?</nerd>
+		<ru><![CDATA[Перезагрузить системные настройки?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: photo card</nerd>
+		<ru><![CDATA[$1: карточка работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send complaint message</nerd>
+		<ru><![CDATA[Пожаловаться]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete comment</nerd>
+		<ru><![CDATA[Удалить комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit photo</nerd>
+		<ru><![CDATA[Редактировать работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Untranslated</nerd>
+		<ru><![CDATA[Непереведенные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>To the top of page</nerd>
+		<ru><![CDATA[Наверх страницы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment must be more then $1 and less then $2 symbols</nerd>
+		<ru><![CDATA[Комментарий должен быть больше чем $1 и меньше чем $2 символов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The scheduler is stopped!</nerd>
+		<ru><![CDATA[Планировщик остановлен!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Configuration</nerd>
+		<ru><![CDATA[Конфигурация системы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: photos in category '$2' ( $3 )</nerd>
+		<ru><![CDATA[$1: работы из раздела '$2' ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: all photos ( $2 )</nerd>
+		<ru><![CDATA[$1: все работы ( $2 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin notifications </nerd>
+		<ru><![CDATA[Уведомления администрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best today's photos</nerd>
+		<ru><![CDATA[Лучшие работы сегодня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete photo?</nerd>
+		<ru><![CDATA[Удалить работу?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best month's photos</nerd>
+		<ru><![CDATA[Лучшие работы месяца]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Number of users who voted for the photo in this category </nerd>
+		<ru><![CDATA[Количество пользователей, которые проголосовали за работу в этой категории]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send message</nerd>
+		<ru><![CDATA[Отправить сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd> $1 - previews</nerd>
+		<ru><![CDATA[ $1 - просмотры]]></ru>
+	</translation>
+
 </translations>

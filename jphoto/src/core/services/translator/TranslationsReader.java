@@ -41,7 +41,13 @@ public class TranslationsReader {
 					continue;
 				}
 
-				final String translation = nerdElement.element( language.getCode() ).getText();
+				final Element element = nerdElement.element( language.getCode() );
+				if ( element == null ) {
+					translations.add( new TranslationEntryNerd( nerd, systemVarsService ) );
+					continue;
+				}
+
+				final String translation = element.getText();
 				translations.add( new TranslationEntry( nerd, language, translation, systemVarsService ) );
 			}
 

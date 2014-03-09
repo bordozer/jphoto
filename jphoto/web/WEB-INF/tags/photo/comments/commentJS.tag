@@ -51,9 +51,9 @@
 		$( '#${beingEditedCommentIdFormControl}' ).val( commentDTO.commentId );
 		$( '#${commentTextFormControl}' ).val( commentDTO.commentText );
 
-		$( '#${submitCommentButton}' ).html( '${eco:translate('Save a comment')}' );
+		$( '#${submitCommentButton}' ).html( '${eco:translate('Save changes')}' );
 
-		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Editing comment #")}' + commentDTO.commentId + '</b> &nbsp/&nbsp;' + '<a href=\"#${photoCommentFormAnchor}\" onclick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
+		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Editing comment")}' + ' #' + commentDTO.commentId + '</b> &nbsp/&nbsp;' + '<a href=\"#${photoCommentFormAnchor}\" onclick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
 
 		$( '#${commentTextFormControl}' ).focus();
 		$( '#${commentTextFormControl}' ).select();
@@ -66,8 +66,8 @@
 		}
 
 		$( '#${replyToCommentIdFormControl}' ).val( commentId );
-		$( '#${submitCommentButton}' ).html( '${eco:translate('Reply on the comment')}' );
-		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Answer on comment #")}' + commentId + '</b>' + '<br /><a href=\"#${photoCommentFormAnchor}\" onClick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
+		$( '#${submitCommentButton}' ).html( '${eco:translate('Reply to the comment')}' );
+		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Reply to the comment")}' + ' #' + commentId + '</b>' + '<br /><a href=\"#${photoCommentFormAnchor}\" onClick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
 	}
 
 	function deleteComment( commentId ) {
