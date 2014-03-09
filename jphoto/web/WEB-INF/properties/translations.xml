@@ -1112,4 +1112,9 @@
 		<ru><![CDATA[Извините, но у вас нет доступа к данной операции]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Oops!</nerd>
+		<ru><![CDATA[Ой!]]></ru>
+	</translation>
+
 </translations>
