@@ -358,7 +358,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Time to the next comment </nerd>
+		<nerd>Time to the next comment</nerd>
 		<ru><![CDATA[Время до следующего комментария]]></ru>
 	</translation>
 
@@ -838,7 +838,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Admin notifications </nerd>
+		<nerd>Admin notifications</nerd>
 		<ru><![CDATA[Уведомления администрации]]></ru>
 	</translation>
 
@@ -858,7 +858,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Number of users who voted for the photo in this category </nerd>
+		<nerd>Number of users who voted for the photo in this category</nerd>
 		<ru><![CDATA[Количество пользователей, которые проголосовали за работу в этой категории]]></ru>
 	</translation>
 
@@ -898,7 +898,7 @@
 	</translation>
 
 	<translation>
-		<nerd>The photo is marked as 'Contains nude content' </nerd>
+		<nerd>The photo is marked as 'Contains nude content'</nerd>
 		<ru><![CDATA[Работа помечена как содержащая НЮ контент]]></ru>
 	</translation>
 
@@ -973,8 +973,8 @@
 	</translation>
 
 	<translation>
-		<nerd>$1: photos from album '$2' ( $3 ) </nerd>
-		<ru><![CDATA[$1: работы в альбоме '$2' ( $3 ) ]]></ru>
+		<nerd>$1: photos from album '$2' ( $3 )</nerd>
+		<ru><![CDATA[$1: работы в альбоме '$2' ( $3 )]]></ru>
 	</translation>
 
 	<translation>
@@ -1060,6 +1060,46 @@
 	<translation>
 		<nerd>$1 - previews</nerd>
 		<ru><![CDATA[$1 - просмотры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genres</nerd>
+		<ru><![CDATA[Раздемы фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Sorry, but page not found on the server</nerd>
+		<ru><![CDATA[Извините, но такой страницы на сервере нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Error 404 - Page not found</nerd>
+		<ru><![CDATA[Ошибка 404 - страница не найдена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Please, select at least one category</nerd>
+		<ru><![CDATA[Пожалуйста, выделите сперва хотя бы один раздел]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The author allowed commenting to members only</nerd>
+		<ru><![CDATA[Автор разрешил комментарии только членам клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Full activity stream</nerd>
+		<ru><![CDATA[Вся лента событий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Error!</nerd>
+		<ru><![CDATA[Ошибка!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time: $1</nerd>
+		<ru><![CDATA[Время: $1]]></ru>
 	</translation>
 
 </translations>
