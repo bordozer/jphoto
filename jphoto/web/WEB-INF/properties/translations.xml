@@ -738,11 +738,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Send private message to</nerd>
-		<ru><![CDATA[Написать личное сообщение]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Reply to $1$2</nerd>
 		<ru><![CDATA[Ответить $1$2]]></ru>
 	</translation>
@@ -973,11 +968,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Send private message to</nerd>
-		<ru><![CDATA[Отправить личное сообщение]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>$1: photos from album '$2' ( $3 )</nerd>
 		<ru><![CDATA[$1: работы в альбоме '$2' ( $3 )]]></ru>
 	</translation>
@@ -1115,6 +1105,11 @@
 	<translation>
 		<nerd>Oops!</nerd>
 		<ru><![CDATA[Ой!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The Author denied voting</nerd>
+		<ru><![CDATA[Автор запретил голосование]]></ru>
 	</translation>
 
 </translations>
