@@ -8,6 +8,6 @@
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
 
-<c:set var="text" value="${eco:translate('Received comments unread')}" />
+<c:set var="text" value="${eco:translate('Received unread comments')}" />
 
-<a href ="${link}" title="${eco:translate1("Unread received by $1 comments", userNameEscaped)}">${text}</a>
+<a href ="${link}" title="${eco:translate1("$1: received but unread comments", userNameEscaped)}">${text}</a>

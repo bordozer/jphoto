@@ -489,7 +489,7 @@
 
 	<translation>
 		<nerd>Clear system cache</nerd>
-		<ru><![CDATA[Очичтить системный кеш]]></ru>
+		<ru><![CDATA[Очистить системный кеш]]></ru>
 	</translation>
 
 	<translation>
@@ -1109,7 +1109,7 @@
 
 	<translation>
 		<nerd>Sorry, but you do not have permission to perform this operation</nerd>
-		<ru><![CDATA[Извините, но у вас нет доступа к данной операции]]></ru>
+		<ru><![CDATA[Извините, но у вас нет доступа к данной функциональности]]></ru>
 	</translation>
 
 	<translation>
@@ -1403,7 +1403,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Received comments unread</nerd>
+		<nerd>Received unread comments</nerd>
 		<ru><![CDATA[Полученные непрочитанные комментарии]]></ru>
 	</translation>
 
@@ -1425,6 +1425,161 @@
 	<translation>
 		<nerd>Activity filter: $1</nerd>
 		<ru><![CDATA[Фильтр: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You have $1 new comment(s)</nerd>
+		<ru><![CDATA[У вас $1 новых комментариев]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Mark ALL unread comments as read?</nerd>
+		<ru><![CDATA[Пометить ВСЕ непрочитанные комменатрии как прочитанные?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Black list</nerd>
+		<ru><![CDATA[Черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Mark all as read</nerd>
+		<ru><![CDATA[Пометить все как прочитанное]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: the best photos. Total $2</nerd>
+		<ru><![CDATA[$1: лучшие работы. Всего $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>voted for rank of $1 in category $2 ( $3 )</nerd>
+		<ru><![CDATA[голосовал за ранк $1 в разделе $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 marked $2 photo(s) as $3</nerd>
+		<ru><![CDATA[$1 оценил $2 работ критерием $3]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Submit</nerd>
+		<ru><![CDATA[Отправить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd><![CDATA[voted for photo $1<br />$2]]></nerd>
+		<ru><![CDATA[оценил работу $1<br />$2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Received comments</nerd>
+		<ru><![CDATA[Полученные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>id</nerd>
+		<ru><![CDATA[id]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System</nerd>
+		<ru><![CDATA[Система]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comments of $1</nerd>
+		<ru><![CDATA[Комментарии $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Summary marks set for $1: $2</nerd>
+		<ru><![CDATA[Суммарно выставленные оценки по критерию $1: $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No items</nerd>
+		<ru><![CDATA[Ничего не найдено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Not accessible</nerd>
+		<ru><![CDATA[Недоступно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>uploaded photo $1</nerd>
+		<ru><![CDATA[загрузил работу $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Generate preview</nerd>
+		<ru><![CDATA[Генерировать превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No</nerd>
+		<ru><![CDATA[Нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Yes</nerd>
+		<ru><![CDATA[Да]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's notifications about new photos</nerd>
+		<ru><![CDATA[$1: уведомления о новых работах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo: $1</nerd>
+		<ru><![CDATA[Работа: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: received but unread comments</nerd>
+		<ru><![CDATA[$1: полученные, но еще непрочитанные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos was appraised '$1' by $2</nerd>
+		<ru><![CDATA[Работы оцененные по критерию '$1' $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>commented photo $1</nerd>
+		<ru><![CDATA[оставил комментарий к работе $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>comments</nerd>
+		<ru><![CDATA[комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>marks</nerd>
+		<ru><![CDATA[оценки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Shown size</nerd>
+		<ru><![CDATA[Показанный размер]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Unread</nerd>
+		<ru><![CDATA[Непрочитанные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last set marks</nerd>
+		<ru><![CDATA[Последние выставленные оценки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The Best</nerd>
+		<ru><![CDATA[Лучшие]]></ru>
 	</translation>
 
 	<translation>
