@@ -116,7 +116,7 @@ public class JobChainJob extends AbstractJob {
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {
 			final SavedJob savedJob = services.getSavedJobService().load( savedJobToExecuteId );
 			final String img = String.format( "<img width='16' height='16' src='%s/jobtype/%s' title='%s'>"
-				, services.getUrlUtilsService().getSiteImagesPath(), savedJob.getJobType().getIcon(), savedJob.getJobType().getNameTranslated() );
+				, services.getUrlUtilsService().getSiteImagesPath(), savedJob.getJobType().getIcon(), translatorService.translate( savedJob.getJobType().getName() ) );
 			builder.append( "<br />" ).append( img ).append( " " ).append( services.getEntityLinkUtilsService().getAdminSavedJobLink( savedJob.getJobType(), savedJob ) );
 		}
 

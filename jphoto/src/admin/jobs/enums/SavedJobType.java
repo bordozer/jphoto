@@ -42,10 +42,6 @@ public enum SavedJobType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
-
 	public JobListTab getJobListTab() {
 		return jobListTab;
 	}

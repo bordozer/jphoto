@@ -36,7 +36,7 @@
 					<c:set var="cssClass" value="block-border block-background block-shadow"/>
 				</c:if>
 
-				<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${savedJobType.nameTranslated}">
+				<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
 					<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}" />
 				</a> &nbsp;&nbsp;&nbsp;&nbsp;
 			</c:forEach>

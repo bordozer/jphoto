@@ -109,7 +109,7 @@
 
 	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 		<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == savedJobType.id}">${selectedIconCss}</c:if>">
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${savedJobType.nameTranslated}">
+			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
 				<html:img32 src="jobtype/${savedJobType.icon}"/>
 			</a>
 		</div>
@@ -184,7 +184,7 @@
 						</table:td>
 
 						<table:tdicon>
-							<html:img16 src="jobtype/${jobExecutionHistoryEntry.savedJobType.icon}" alt="${jobExecutionHistoryEntry.savedJobType.nameTranslated}"/>
+							<html:img16 src="jobtype/${jobExecutionHistoryEntry.savedJobType.icon}" alt="${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}"/>
 						</table:tdicon>
 
 						<table:tdunderlined width="150">
@@ -201,7 +201,7 @@
 						<table:tdunderlined>
 							<c:if test="${isJobWatingForStartOrInProgress}">
 								<c:if test="${empty jobExecutionHistoryEntry.savedJob}">
-									<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${jobExecutionHistoryEntry.savedJobType.nameTranslated}</a>
+									<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}</a>
 								</c:if>
 								<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 									<jobs:savedJobProgress savedJob="${jobExecutionHistoryEntry.savedJob}" jobId="${jobEntryId}"/>
@@ -210,7 +210,7 @@
 
 							<c:if test="${isJobFinishedWithAnyResult}">
 								<c:if test="${empty jobExecutionHistoryEntry.savedJob}">
-									${jobExecutionHistoryEntry.savedJobType.nameTranslated}
+									${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}
 								</c:if>
 								<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 									<links:savedJobEdit savedJob="${jobExecutionHistoryEntry.savedJob}"/>
@@ -258,7 +258,7 @@
 									<c:set var="icon" value="error32.png"/>
 								</c:if>
 
-								<c:set var="jobInfoTitle" value="<b>${jobExecutionHistoryEntry.savedJobType.nameTranslated}</b><br /><br />"/>
+								<c:set var="jobInfoTitle" value="<b>${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}</b><br /><br />"/>
 								<c:set var="parametersDescription" value="${jobExecutionHistoryEntry.parametersDescription}<br /><br />"/>
 								<c:if test="${not empty jobExecutionHistoryEntry.jobMessage}">
 									<c:set var="jobMessage" value="${jobExecutionHistoryEntry.jobMessage}<br /><br />"/>

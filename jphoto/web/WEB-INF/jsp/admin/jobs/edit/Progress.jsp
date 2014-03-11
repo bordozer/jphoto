@@ -47,14 +47,15 @@
 	<c:set var="jobTypeId" value="${jobType.id}" />
 
 	<c:set var="calculatingText" value="${eco:translate('Calculating...')}" />
+	<c:set var="jobTypeNameTranslated" value="${eco:translate(jobType.name)}"/>
 
 	<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
-		<div style="float: left; width: 32px; margin-right: 10px;"><html:img32 src="jobtype/${jobType.icon}" alt="${jobType.nameTranslated}" /></div>
-		${jobType.nameTranslated}
+		<div style="float: left; width: 32px; margin-right: 10px;"><html:img32 src="jobtype/${jobType.icon}" alt="${jobTypeNameTranslated}" /></div>
+		${jobTypeNameTranslated}
 	</div>
 
 	<div style="float: left; width: 100%;">
-	${eco:translate('Job type:')} ${jobType.nameTranslated}
+	${eco:translate('Job type:')} ${jobTypeNameTranslated}
 	<br />
 	${eco:translate('Start time:')} <b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
 

@@ -48,7 +48,7 @@
 				<html:spinningWheel16 title="${eco:translate('There are active jobs')}" />
 			</c:if>
 
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTabValue.key}/">${jobListTabValue.nameTranslated}</a>
+			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTabValue.key}/">${eco:translate(jobListTabValue.name)}</a>
 
 			<br />
 

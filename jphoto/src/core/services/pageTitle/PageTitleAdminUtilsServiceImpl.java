@@ -28,7 +28,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), jobListTab.getNameTranslated() );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink()
+			, translatorService.translate( jobListTab.getName() )  );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -38,7 +39,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink(), jobListTab.getNameTranslated(), savedJobType.getNameTranslated() );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink()
+			, translatorService.translate( jobListTab.getName() ), translatorService.translate( savedJobType.getName() ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}

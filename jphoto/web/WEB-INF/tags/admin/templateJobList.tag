@@ -14,7 +14,7 @@
 
 <table:table border="0" width="400">
 
-	<table:separatorInfo colspan="3" title="${jobListTab.name}" height="50"/>
+	<table:separatorInfo colspan="3" title="${eco:translate(jobListTab.name)}" height="50"/>
 
 	<c:forEach var="jobType" items="${savedJobTypes}">
 

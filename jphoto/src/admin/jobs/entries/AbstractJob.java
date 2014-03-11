@@ -178,7 +178,7 @@ public abstract class AbstractJob extends Thread {
 	}
 
 	public String getNameTranslated() {
-		return getJobType().getNameTranslated();
+		return getJobType().getName();
 	}
 
 	public GenerationMonitor getGenerationMonitor() {

@@ -177,7 +177,7 @@
 
 							<c:set var="savedJob" value="${schedulerTaskListModel.savedJobMap[savedJobId]}"/>
 							<table:td cssClass="${css}">
-								<html:img32 src="jobtype/${savedJob.jobType.icon}" alt="${savedJob.jobType.nameTranslated}"/>
+								<html:img32 src="jobtype/${savedJob.jobType.icon}" alt="${eco:translate(savedJob.jobType.name)}"/>
 							</table:td>
 
 							<table:td cssClass="${css}">

@@ -1714,17 +1714,17 @@
 
 	<translation>
 		<nerd>Photo actions: previews</nerd>
-		<ru><![CDATA[Фото действия: просмотры]]></ru>
+		<ru><![CDATA[Действия с работами: просмотры]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo actions: voting</nerd>
-		<ru><![CDATA[Фото действия: голосование]]></ru>
+		<ru><![CDATA[Действия с работами: голосование]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo actions: comments</nerd>
-		<ru><![CDATA[Фото действия: комментарии]]></ru>
+		<ru><![CDATA[Действия с работами: комментарии]]></ru>
 	</translation>
 
 	<translation>
@@ -1848,13 +1848,48 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Chains</nerd>
+		<ru><![CDATA[Комплексные задачи]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Data generation / Import</nerd>
+		<ru><![CDATA[Генерирование данных / Импорт]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Recalculation</nerd>
+		<ru><![CDATA[Пересчет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Clean-up</nerd>
+		<ru><![CDATA[Очистка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions</nerd>
+		<ru><![CDATA[Действия с работами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User actions / Favorites</nerd>
+		<ru><![CDATA[Действия с пользователями / Избранное]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>All saved jobs</nerd>
+		<ru><![CDATA[Все сохраненные задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job templates</nerd>
+		<ru><![CDATA[Шаблоны задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Active / Performed</nerd>
+		<ru><![CDATA[Активные / Выполненные]]></ru>
 	</translation>
 
 </translations>

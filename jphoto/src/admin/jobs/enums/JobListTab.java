@@ -35,10 +35,6 @@ public enum JobListTab {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
-
 	public static JobListTab getByKey( final String key ) {
 		for ( final JobListTab tab : JobListTab.values() ) {
 			if ( tab.getKey().equals( key ) ) {

@@ -172,7 +172,7 @@ public abstract class AbstractJobController {
 			return getFinishView( model );
 		}
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( historyEntry.getSavedJobType().getNameTranslated() ) );
+		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName() ) ) );
 		model.setJob( recreatedFromHistoryEntryJob );
 
 		return getView( PROGRESS_VIEW, model );
