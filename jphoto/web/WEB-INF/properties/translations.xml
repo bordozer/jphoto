@@ -704,7 +704,7 @@
 
 	<translation>
 		<nerd>Job $1 is performed successfully</nerd>
-		<ru><![CDATA[Job $1 выполнена успешно]]></ru>
+		<ru><![CDATA[Задача $1 выполнена успешно]]></ru>
 	</translation>
 
 	<translation>
@@ -1139,7 +1139,7 @@
 
 	<translation>
 		<nerd>Jobs</nerd>
-		<ru><![CDATA[Jobs]]></ru>
+		<ru><![CDATA[Задачи]]></ru>
 	</translation>
 
 	<translation>
@@ -1583,8 +1583,258 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Alert</nerd>
+		<ru><![CDATA[Предупреждение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>second(s)</nerd>
+		<ru><![CDATA[секунд]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>seconds</nerd>
+		<ru><![CDATA[секунд]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Users generation</nerd>
+		<ru><![CDATA[Генерирование пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User membership recalculation</nerd>
+		<ru><![CDATA[Пересчет членства пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The task is active</nerd>
+		<ru><![CDATA[Задача активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task job</nerd>
+		<ru><![CDATA[Запланированная задача]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Task type</nerd>
+		<ru><![CDATA[Тип задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task type</nerd>
+		<ru><![CDATA[Тип запланированной задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Deactivate selected scheduler tasks</nerd>
+		<ru><![CDATA[Деактивировать выделенные задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The Scheduler is running. Click to stop scheduler.</nerd>
+		<ru><![CDATA[Планировщик запущен. Кликните чтобы остановить.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos import</nerd>
+		<ru><![CDATA[Импорт фотографий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activate selected scheduler tasks</nerd>
+		<ru><![CDATA[Активировать выделенные задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo rating for period recalculation</nerd>
+		<ru><![CDATA[Пересчет рейтинга работ за период]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Recreate indexes and constraints</nerd>
+		<ru><![CDATA[Пересоздание индексов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Task parameters</nerd>
+		<ru><![CDATA[Параметры задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job: #$1</nerd>
+		<ru><![CDATA[Задача: #$1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo storage synchronization</nerd>
+		<ru><![CDATA[Синхронизация фотохранилища]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task is scheduled</nerd>
+		<ru><![CDATA[Задача планировщика запланирована]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Task name</nerd>
+		<ru><![CDATA[Название задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Dir</nerd>
+		<ru><![CDATA[Каталог]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>View info '$1'</nerd>
+		<ru><![CDATA[Посмотреть информацию '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activate selected tasks?</nerd>
+		<ru><![CDATA[Активировать выделенные задачи?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected scheduler tasks</nerd>
+		<ru><![CDATA[Удалить выделенные задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Chain job</nerd>
+		<ru><![CDATA[Комплексная задача]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task job id</nerd>
+		<ru><![CDATA[ID запланированной задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions: previews</nerd>
+		<ru><![CDATA[Фото действия: просмотры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions: voting</nerd>
+		<ru><![CDATA[Фото действия: голосование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions: comments</nerd>
+		<ru><![CDATA[Фото действия: комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting for users ranks in categories generation</nerd>
+		<ru><![CDATA[Генерирование голосования за пользовательский ранг в разделах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 - photo info</nerd>
+		<ru><![CDATA[$1 - информация о работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled</nerd>
+		<ru><![CDATA[Запланированно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Members ranks in genres recalculation</nerd>
+		<ru><![CDATA[Пересчет пользовательского ранга по разделам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task is active</nerd>
+		<ru><![CDATA[Задача планировщика активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete task '$1'</nerd>
+		<ru><![CDATA[Удалить задачу '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Deactivate selected tasks?</nerd>
+		<ru><![CDATA[Деактивировать выделенные задачи?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected tasks?</nerd>
+		<ru><![CDATA[Удалить выделенные задачи?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task name</nerd>
+		<ru><![CDATA[Название задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit scheduler task $1: '$2'</nerd>
+		<ru><![CDATA[Редактировать задачу планировщика $1: '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The task is inactive</nerd>
+		<ru><![CDATA[Задача неактивна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo previews generation</nerd>
+		<ru><![CDATA[Генерация фото превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task' parameters</nerd>
+		<ru><![CDATA[Параметры задач планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task job type</nerd>
+		<ru><![CDATA[Тип задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Stop scheduler?</nerd>
+		<ru><![CDATA[Остановить планировщик?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Create new scheduler task</nerd>
+		<ru><![CDATA[Создать новую задачу планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job type</nerd>
+		<ru><![CDATA[Тип задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activity stream clean-up</nerd>
+		<ru><![CDATA[Очистка ленты событий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Scheduled task id</nerd>
+		<ru><![CDATA[ID задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Favorite entries generation</nerd>
+		<ru><![CDATA[Генерирование избранного контента]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job execution history clean-up</nerd>
+		<ru><![CDATA[Очистка истории выполнения задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal</nerd>
+		<ru><![CDATA[Оценка работы]]></ru>
 	</translation>
 
 </translations>

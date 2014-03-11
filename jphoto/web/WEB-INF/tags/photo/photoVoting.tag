@@ -31,7 +31,7 @@
 <c:set var="frmPhotoVoting" value="frmPhotoVoting"/>
 <c:set var="votingMarkQty" value="<%=VotingCategoryService.PHOTO_VOTING_CATEGORY_QTY%>"/>
 
-<c:set var="votingTitle" value="${eco:translate('Voiting')}" />
+<c:set var="votingTitle" value="${eco:translate('Photo appraisal')}" />
 <c:if test="${hasUserAlreadyVotedForPhoto}">
 	<c:set var="votingTitle" value="${eco:translate1('You has already voted at $1', eco:formatDateTimeShort(userPhotoVotes[0].votingTime))}" />
 </c:if>
