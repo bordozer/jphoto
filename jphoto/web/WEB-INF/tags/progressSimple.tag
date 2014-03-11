@@ -11,7 +11,6 @@
 
 <div style="float: left; width: ${width}px;">
 	<div id="${progressBarId}" style="float: left; width: ${width - textWidth - 5}px; height: ${height}px; margin-top: 4px;"></div>
-	<div style="float: right; width: ${textWidth}px;"> - ${percentage}%</div>
 </div>
 
 <c:if test="${not empty color}">

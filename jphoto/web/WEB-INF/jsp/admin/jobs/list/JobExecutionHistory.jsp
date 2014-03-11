@@ -238,6 +238,7 @@
 								</c:if>
 
 								<tags:progressSimple progressBarId="progressbar_${jobEntryId}" percentage="${percentage}" width="200" height="7" color="${progressColor}"/>
+								<span id="currentJobProgressId_${jobEntryId}"></span> / <span id="totalStepsDivId_${jobEntryId}"></span> - <span id="percentageJobProgressId_${jobEntryId}"></span>
 								<script type="text/javascript">
 									setTimeout( function () {
 										updateProgress( ${jobExecutionHistoryEntry.id} );

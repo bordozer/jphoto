@@ -12,9 +12,9 @@ function updateProgress( jobId ) {
 	}
 	var percentage = Math.floor( 100 * parseInt( current ) / parseInt( total ) );
 
-	$( '#totalStepsDivId' ).text( total > 0 ? total : "${calculatingText}" );
-	$( '#currentJobProgressId' ).text( current );
-	$( '#percentageJobProgressId' ).text( percentage + '%, ' + jobExecutionDuration );
+	$( '#totalStepsDivId_' + jobId ).text( total > 0 ? total : "${calculatingText}" );
+	$( '#currentJobProgressId_' + jobId ).text( current );
+	$( '#percentageJobProgressId_' + jobId ).text( percentage + '%, ' + jobExecutionDuration );
 
 	$( "#progressbar_" + jobId ).progressbar( {
 										 value:percentage

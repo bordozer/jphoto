@@ -25,6 +25,7 @@
 <c:set var="total" value="${jobExecutionHistoryEntry.totalJobSteps}" />
 <c:set var="percentage" value="${eco:floor( 100 * current / total )}" />
 <c:set var="jobProgressInterval" value="<%=SavedJobListController.JOB_PROGRESS_INTERVAL%>"/>
+<c:set var="id" value="${jobExecutionHistoryEntry.id}"/>
 
 <tags:page pageModel="${command.pageModel}">
 
@@ -37,7 +38,7 @@
 	<script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
 	<script type="text/javascript">
 		$( function () {
-			$( "#progressbar_${jobExecutionHistoryEntry.id}" ).progressbar( {
+			$( "#progressbar_${id}" ).progressbar( {
 												 value:${percentage}
 											 } );
 		} );
@@ -63,9 +64,9 @@
 	<br />
 
 	<b>${eco:translate('Job progress:')}
-		<span id="currentJobProgressId">${current}</span>
-		${eco:translate('of')} <span id="totalStepsDivId">${total > 0 ? total : calculatingText}</span>
-		- <span id="percentageJobProgressId">${percentage}%, ${eco:formatTime(jobExecutionHistoryEntry.executionDuration)}</span>
+		<span id="currentJobProgressId_${id}">${current}</span>
+		${eco:translate('of')} <span id="totalStepsDivId_${id}">${total > 0 ? total : calculatingText}</span>
+		- <span id="percentageJobProgressId_${id}">${percentage}%, ${eco:formatTime(jobExecutionHistoryEntry.executionDuration)}</span>
 	</b>
 
 	<br />
