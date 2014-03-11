@@ -1178,7 +1178,7 @@
 	</translation>
 
 	<translation>
-		<nerd>You have already voted when member's rank is $1 in category $2</nerd>
+		<nerd>You have already voted when member's rank is $1 in category '$2'</nerd>
 		<ru><![CDATA[Вы уже голосовали когда ранг пользователя был $1 в разделе '$2']]></ru>
 	</translation>
 
@@ -1315,6 +1315,116 @@
 	<translation>
 		<nerd>Status</nerd>
 		<ru><![CDATA[Статус]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit member data: $1</nerd>
+		<ru><![CDATA[Редактировать данные: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Notifications about new photos</nerd>
+		<ru><![CDATA[Уведомление о новых работах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No team</nerd>
+		<ru><![CDATA[Команды нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Total photos</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reset activity filter</nerd>
+		<ru><![CDATA[Сбросить фильтр]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's notifications about new comments</nerd>
+		<ru><![CDATA[$1: уведомления о новых комментариях]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Favorite members</nerd>
+		<ru><![CDATA[Избранные пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Friends of $1</nerd>
+		<ru><![CDATA[$1: друзья]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Written by $1 comments</nerd>
+		<ru><![CDATA[Комментарии, которые написал(а) $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Added in Favorites by</nerd>
+		<ru><![CDATA[Добавлен в избранные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Notifications about new comments</nerd>
+		<ru><![CDATA[Уведомление о новых работах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Team</nerd>
+		<ru><![CDATA[Команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's favorite members</nerd>
+		<ru><![CDATA[$1: избранные пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No photo</nerd>
+		<ru><![CDATA[Работ нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's favorite photos</nerd>
+		<ru><![CDATA[$1: избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's black list</nerd>
+		<ru><![CDATA[$1: черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Received by $1 comments</nerd>
+		<ru><![CDATA[Полученные $1 комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Received comments unread</nerd>
+		<ru><![CDATA[Полученные непрочитанные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos from album '$1' - $2 photos</nerd>
+		<ru><![CDATA[Последние работы из альбома '$1' - $2 работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Written comments</nerd>
+		<ru><![CDATA[Написанные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1's bookmarked photos</nerd>
+		<ru><![CDATA[$1: работы в закладках]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Activity filter: $1</nerd>
+		<ru><![CDATA[Фильтр: $1]]></ru>
 	</translation>
 
 	<translation>
