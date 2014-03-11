@@ -1,4 +1,5 @@
 <%@ page import="controllers.photos.groupoperations.PhotoGroupOperationModel" %>
+<%@ page import="controllers.photos.groupoperations.PhotoGroupOperationValidator" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -24,6 +25,7 @@
 <c:set var="width" value="${selectedPhotosQty < 5 ? customPercent : 18}"/>
 
 <c:set var="photoGroupOperationType" value="${photoGroupOperationModel.photoGroupOperationType}"/>
+<c:set var="noGenreSelected" value="<%=PhotoGroupOperationValidator.NO_GENRE_SELECTED%>"/>
 
 <tags:page pageModel="${photoGroupOperationModel.pageModel}">
 
@@ -146,7 +148,7 @@
 				<br />
 				<br />
 				<form:select path="moveToGenreId">
-					<form:option value="">&nbsp;</form:option>
+					<form:option value="${noGenreSelected}">&nbsp;</form:option>
 					<form:options items="${photoGroupOperationModel.genreEntries}" itemValue="genreId" itemLabel="genreName" />
 				</form:select>
 			</c:if>

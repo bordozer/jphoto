@@ -62,7 +62,7 @@ public class PhotoGroupOperationController {
 		}
 
 		final PhotoGroupOperationType groupOperationType = PhotoGroupOperationType.getById( Integer.parseInt( groupOperationId ) );
-		model.setGroupOperationType( groupOperationType );
+		model.setPhotoGroupOperationType( groupOperationType );
 
 		model.setReturnUrl( request.getHeader( "referer" ) );
 

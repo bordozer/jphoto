@@ -19,13 +19,12 @@ public class PhotoGroupOperationModel extends AbstractGeneralModel {
 	public static final String FORM_CONTROL_MOVE_TO_GENRE_ID = "moveToGenreId";
 
 	private String photoGroupOperationId;
-	private PhotoGroupOperationType groupOperationType;
+
+	private PhotoGroupOperationType photoGroupOperationType;
 
 	private List<String> selectedPhotoIds = newArrayList();
 
 	private List<PhotoGroupOperationEntry> photoGroupOperationEntries;
-
-	private PhotoGroupOperationType photoGroupOperationType;
 	private List<UserPhotoAlbum> userPhotoAlbums;
 
 	private List<UserTeamMember> userTeamMembers;
@@ -60,14 +59,6 @@ public class PhotoGroupOperationModel extends AbstractGeneralModel {
 
 	public void setPhotoGroupOperationEntries( final List<PhotoGroupOperationEntry> photoGroupOperationEntries ) {
 		this.photoGroupOperationEntries = photoGroupOperationEntries;
-	}
-
-	public PhotoGroupOperationType getGroupOperationType() {
-		return groupOperationType;
-	}
-
-	public void setGroupOperationType( final PhotoGroupOperationType groupOperationType ) {
-		this.groupOperationType = groupOperationType;
 	}
 
 	public PhotoGroupOperationType getPhotoGroupOperationType() {

@@ -2,7 +2,6 @@ package controllers.photos.groupoperations;
 
 import core.general.photo.group.PhotoGroupOperationType;
 import core.services.translator.TranslatorService;
-import core.services.user.UserPhotoAlbumService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -13,8 +12,7 @@ import java.util.List;
 
 public class PhotoGroupOperationValidator implements Validator {
 
-	@Autowired
-	private UserPhotoAlbumService userPhotoAlbumService;
+	public static final int NO_GENRE_SELECTED = -1;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -67,7 +65,7 @@ public class PhotoGroupOperationValidator implements Validator {
 			return;
 		}
 
-		if ( model.getMoveToGenreId() == 0 ) {
+		if ( model.getMoveToGenreId() == NO_GENRE_SELECTED ) {
 			errors.rejectValue( PhotoGroupOperationModel.FORM_CONTROL_MOVE_TO_GENRE_ID, translatorService.translate( String.format( "Select %s to move to.", FormatUtils.getFormattedFieldName( "genre" ) ) ) );
 		}
 	}
