@@ -23,12 +23,12 @@
 				<html:img id="rank_down_${genre.id}" src="genre_rank_down.png" width="16" height="16"/>
 			</a>
 
-			&nbsp;&nbsp;&nbsp;
+			&nbsp;
 
-			+${loggedUserVotingPoints}
 			<a href="#" onclick="${jsFunctionVoteUp}" title="${eco:translate3('The member deserves higher rank than his current one $1 (+$2) in category in \'$3\'', userRankInGenre, loggedUserVotingPoints, genre.name)}">
 				<html:img id="rank_up_${genre.id}" src="genre_rank_up.png" width="16" height="16"/>
 			</a>
+			+${loggedUserVotingPoints}
 		</c:if>
 
 		<c:if test="${hasUserAlreadyVotedForThisGenre}">

@@ -44,7 +44,7 @@
 				<b title="${eco:translate('Total photos')}">${totalPhotos}</b>
 			</table:td>
 
-			<table:td width="60"/>
+			<table:td width="100"/>
 			<table:td width="80"/>
 
 		</table:trinfo>

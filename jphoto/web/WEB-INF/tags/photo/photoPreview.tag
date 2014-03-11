@@ -170,7 +170,7 @@
 		<div class="containerPhotoLine small-text note-text-color" style="padding-top: 7px;">
 			${photoInfo.photoAuthorAnonymousName}
 			<br />
-			${eco:translate('Anonymous till ')} ${eco:formatDate(photoInfo.photoAnonymousPeriodExpirationTime)} ${eco:formatTimeShort(photoInfo.photoAnonymousPeriodExpirationTime)}
+			${eco:translate('Anonymous till')} ${eco:formatDate(photoInfo.photoAnonymousPeriodExpirationTime)} ${eco:formatTimeShort(photoInfo.photoAnonymousPeriodExpirationTime)}
 		</div>
 	</c:if>
 
