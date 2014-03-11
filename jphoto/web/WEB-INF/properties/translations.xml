@@ -1837,4 +1837,24 @@
 		<ru><![CDATA[Оценка работы]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>There are active jobs</nerd>
+		<ru><![CDATA[Есть активные задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show active jobs</nerd>
+		<ru><![CDATA[Показать активные задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 </translations>
