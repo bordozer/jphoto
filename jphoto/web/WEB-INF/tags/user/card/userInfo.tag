@@ -44,7 +44,7 @@
 	</c:if>
 
 	<table:trinfo>
-		<table:tdtext text_t="Name"/>
+		<table:tdtext text_t="Member name"/>
 		<table:td>
 			${eco:escapeHtml(user.name)}
 			<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" />

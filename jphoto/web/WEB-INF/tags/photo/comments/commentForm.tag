@@ -101,7 +101,7 @@
 				</table:tr>
 
 				<table:tr>
-					<table:td colspan="2"><a href="#">${eco:translate('To the top of page ')}</a></table:td>
+					<table:td colspan="2"><a href="#">${eco:translate('To the top of page')}</a></table:td>
 				</table:tr>
 
 			</table:table>

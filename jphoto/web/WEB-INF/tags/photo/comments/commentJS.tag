@@ -35,7 +35,7 @@
 	function showMessageAboutDelayToNextComment() {
 		var userDelayToNextComment = jsonRPC.photoCommentService.getUserDelayToNextComment( ${loggedUser.id} );
 		userDelayToNextComment = Math.round( userDelayToNextComment / 1000 );
-		showInformationMessage( "${eco:translate('You can leave a comment after ')}" + userDelayToNextComment + "${eco:translate(' second(s)')}" );
+		showInformationMessage( "${eco:translate('You can leave a comment after')}" + ' ' + userDelayToNextComment + "${eco:translate(' second(s)')}" );
 	}
 	function editComment( commentId ) {
 

@@ -28,7 +28,7 @@
 			<table:separatorInfo colspan="2" title="${eco:translate('Member parameters')}" />
 
 			<table:tr>
-				<table:tdtext text_t="Name" />
+				<table:tdtext text_t="Member name" />
 				<table:tddata>
 					<form:input path="${albumNameControl}" />
 				</table:tddata>

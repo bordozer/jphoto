@@ -13,11 +13,11 @@ public class StringUtilities {
 	}
 
 	public static String escapeHtml( final String text ) {
-		return String.format( "%s &sup3;", StringEscapeUtils.escapeHtml( text ) );
+		return String.format( "%s", StringEscapeUtils.escapeHtml( text ) ); // &sup3;
 	}
 
 	public static String escapeJavaScript( final String text ) {
-		return String.format( "%s &sup2;", StringEscapeUtils.escapeJavaScript( text ) );
+		return String.format( "%s", StringEscapeUtils.escapeJavaScript( text ) ); // &sup2;
 	}
 
 //	public static String formatLineBrakes( final String text ) {

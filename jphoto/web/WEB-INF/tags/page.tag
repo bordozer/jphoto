@@ -65,7 +65,7 @@
 			$( '#${privateMessageTextId}' ).val( '' );
 
 			$( "#${sendPrivateMessageToUserDivId}" )
-					.dialog( 'option', 'title', "${eco:translate('Send private message to ')}" + toUserName )
+					.dialog( 'option', 'title', "${eco:translate('Send private message to')}" + ' ' + toUserName )
 					.dialog( 'option', 'buttons', {
 													Cancel:function () {
 														$( this ).dialog( "close" );
@@ -140,7 +140,7 @@
 				$( '#${lockUserIFrameId}' ).attr( 'src', url );
 
 				$( "#${lockUserDivId}" )
-						.dialog( 'option', 'title', "${eco:translate('Lock user ')}" + userName + ' ( #' + userId + ' )' )
+						.dialog( 'option', 'title', "${eco:translate('Lock user')}" + ' ' + userName + ' ( #' + userId + ' )' )
 						.dialog( 'option', 'buttons', {
 														Cancel:function () {
 															$( this ).dialog( "close" );

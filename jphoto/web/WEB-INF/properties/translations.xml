@@ -763,6 +763,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Reload translations</nerd>
+		<ru><![CDATA[Перезагрузить переводы]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Set by $1 mark</nerd>
 		<ru><![CDATA[Оценки выставленные $1]]></ru>
 	</translation>
@@ -913,8 +918,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Lock user</nerd>
-		<ru><![CDATA[Забанить пользователя]]></ru>
+		<nerd>Lock</nerd>
+		<ru><![CDATA[Забанить]]></ru>
 	</translation>
 
 	<translation>
@@ -939,7 +944,7 @@
 
 	<translation>
 		<nerd>Items on page</nerd>
-		<ru><![CDATA[Единиц на странице]]></ru>
+		<ru><![CDATA[На странице]]></ru>
 	</translation>
 
 	<translation>
@@ -999,7 +1004,7 @@
 
 	<translation>
 		<nerd>Items</nerd>
-		<ru><![CDATA[Единиц]]></ru>
+		<ru><![CDATA[Всего]]></ru>
 	</translation>
 
 	<translation>
@@ -1093,6 +1098,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Error</nerd>
+		<ru><![CDATA[Ошибка]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Time: $1</nerd>
 		<ru><![CDATA[Время: $1]]></ru>
 	</translation>
@@ -1110,6 +1120,206 @@
 	<translation>
 		<nerd>The Author denied voting</nerd>
 		<ru><![CDATA[Автор запретил голосование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>min $1 marks</nerd>
+		<ru><![CDATA[минимум $1 баллов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>voting time: $1</nerd>
+		<ru><![CDATA[время голосования: <b>$1</b>]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No photos correspond to the criterias</nerd>
+		<ru><![CDATA[Работ по данным критериям не найдено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Jobs</nerd>
+		<ru><![CDATA[Jobs]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>posted in period from</nerd>
+		<ru><![CDATA[загруженные с $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>to $1</nerd>
+		<ru><![CDATA[по $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Info</nerd>
+		<ru><![CDATA[Информация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Invert selection</nerd>
+		<ru><![CDATA[Инвертировать выделение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send email</nerd>
+		<ru><![CDATA[Написать письмо]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>This functionality has not been implemented yet...</nerd>
+		<ru><![CDATA[Эта функциональность еще не реализована...]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 $2 days</nerd>
+		<ru><![CDATA[$1 $2 дней]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You have already voted when member's rank is $1 in category $2</nerd>
+		<ru><![CDATA[Вы уже голосовали когда ранг пользователя был $1 в разделе '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>is duplicated value</nerd>
+		<ru><![CDATA[повторяющееся значение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Click to see full size</nerd>
+		<ru><![CDATA[Кликните чтобы посмотреть в полном размере]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting error</nerd>
+		<ru><![CDATA[Ошибка голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Success</nerd>
+		<ru><![CDATA[Успешно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Rank in category '$1': $2</nerd>
+		<ru><![CDATA[Ранг в разделе '$1': $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last activity time</nerd>
+		<ru><![CDATA[Время последней активности]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your marks have been saved</nerd>
+		<ru><![CDATA[Ваши голосование принято]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The member does not deserve his rank $1 (-$2) in category '$3'</nerd>
+		<ru><![CDATA[Пользователь не заслуживает свой ранг $1 (-$2) в разделе '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The member deserves higher rank than his current one $1 (+$2) in category in '$3'</nerd>
+		<ru><![CDATA[Пользователь заслуживает более высокий ранг $1 (+$2) в разделе '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>There are $1 point(s) more is necessary to achieve rank $2 in category '$3'</nerd>
+		<ru><![CDATA[Вам необходимо набрать $1 балл(ов) чтобы достичь ранга $2 в разделе '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The photos the member has voted recently for</nerd>
+		<ru><![CDATA[]Фотографии за которые пользователь недавно голосовал]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Click to see who voted for the rank in category $1</nerd>
+		<ru><![CDATA[Кликните, чтобы увидеть кто голосовал за ранг в разделе $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: show all photos</nerd>
+		<ru><![CDATA[$1: показать все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos and ranks</nerd>
+		<ru><![CDATA[Работы и ранги по разделам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Personal information</nerd>
+		<ru><![CDATA[Персональные данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos</nerd>
+		<ru><![CDATA[Последние работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Membership type</nerd>
+		<ru><![CDATA[Тип членства]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Change avatar</nerd>
+		<ru><![CDATA[Изменить аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos in category '$1': $2</nerd>
+		<ru><![CDATA[Работы в категории '$1': $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos of visitors who viewed the member's photos recently</nerd>
+		<ru><![CDATA[Последние работы посетителей недавно смотревших работы пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Gender</nerd>
+		<ru><![CDATA[Пол]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Email</nerd>
+		<ru><![CDATA[Электронный адрес]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Birthday</nerd>
+		<ru><![CDATA[День рождения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Member self description</nerd>
+		<ru><![CDATA[Дополнительная информация о пользователе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit data</nerd>
+		<ru><![CDATA[Редактировать данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Member name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Status</nerd>
+		<ru><![CDATA[Статус]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 </translations>

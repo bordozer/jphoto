@@ -70,7 +70,7 @@
 				<tr>
 					<td colspan="${photosInLine}" class="centerAlign">
 						<div class="floatleft" style="margin-top: 20px; margin-bottom: 20px; font-size: 120%;">
-							${photoList.noPhotoText}
+							${eco:translate(photoList.noPhotoText)}
 						</div>
 					</td>
 				</tr>

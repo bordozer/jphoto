@@ -11,7 +11,7 @@ public class PhotoList {
 	final private List<PhotoInfo> photoInfos;
 	final private String photoListTitle;
 	private int photosInLine;
-	private String noPhotoText = "No photos correspond to the criterias"; // TODO: translate
+	private String noPhotoText = "No photos correspond to the criterias";
 
 	private final boolean showPaging;
 

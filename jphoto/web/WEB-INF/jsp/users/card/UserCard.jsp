@@ -28,7 +28,7 @@
 
 			<div class="floatleft">
 				<div class="block-background block-border justify-font" style="padding: 40px;">
-					<b>${eco:translate('Member self description:')}</b>
+					<b>${eco:translate('Member self description')}:</b>
 					<br/>
 						${eco:formatPhotoCommentText(user.selfDescription)}
 				</div>

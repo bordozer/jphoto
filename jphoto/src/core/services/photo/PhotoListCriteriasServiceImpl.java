@@ -45,11 +45,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 
 		if ( criterias.getGenre() != null ) {
-			builder.append( translatorService.translate( ", category $1", criterias.getGenre().getName() ) );
+			builder.append( ", " ).append( translatorService.translate( "category $1", criterias.getGenre().getName() ) );
 		}
 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
-			builder.append( translatorService.translate( ", min $1 marks", criterias.getMinimalMarks() ) );
+			builder.append( ", " ).append( translatorService.translate( "min $1 marks", criterias.getMinimalMarks() ) );
 
 			addVotingTimeText( criterias, builder );
 		}
@@ -80,27 +80,27 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 			final Date uploadDateFrom = criterias.getUploadDateFrom();
 
 			if ( dateUtilsService.isNotEmptyTime( uploadDateFrom ) ) {
-				builder.append( translatorService.translate( " posted in period from <b>$1</b>", dateUtilsService.formatDate( uploadDateFrom ) ) );
+				builder.append( " " ).append( translatorService.translate( "posted in period from $1", dateUtilsService.formatDate( uploadDateFrom ) ) );
 			}
 
 			if ( dateUtilsService.isNotEmptyTime( uploadDateTo ) ) {
 				if ( dateUtilsService.isEmptyTime( uploadDateFrom ) ) {
 					builder.append( translatorService.translate( " posted in period" ) );
 				}
-				builder.append( translatorService.translate( " to <b>$1</b>", dateUtilsService.formatDate( uploadDateTo ) ) );
+				builder.append( " " ).append( translatorService.translate( "to $1", dateUtilsService.formatDate( uploadDateTo ) ) );
 			}
 
 			if ( criterias.getVotedUser() != null ) {
-				builder.append( translatorService.translate( ", voted member:  $1", StringUtilities.escapeHtml( criterias.getVotedUser().getName() ) ) );
+				builder.append( ", " ).append( translatorService.translate( "voted member:  $1", StringUtilities.escapeHtml( criterias.getVotedUser().getName() ) ) );
 			}
 
 			if ( criterias.getVotingCategory() != null ) {
-				builder.append( translatorService.translate( ", category:  $1", StringUtilities.escapeHtml( criterias.getVotingCategory().getName() ) ) );
+				builder.append( ", " ).append( translatorService.translate( "category:  $1", StringUtilities.escapeHtml( criterias.getVotingCategory().getName() ) ) );
 			}
 		}
 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
-			builder.append( translatorService.translate( " that have got at least $1 marks", criterias.getMinimalMarks() ) );
+			builder.append( " " ).append( translatorService.translate( "that have got at least $1 marks", criterias.getMinimalMarks() ) );
 
 			addVotingTimeText( criterias, builder );
 		}
@@ -138,11 +138,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 			builder.append( translatorService.translate( " voting at $1 ", dateUtilsService.formatDate( votingTimeFrom ) ) );
 		} else {
 			if ( dateUtilsService.isNotEmptyTime( votingTimeFrom ) ) {
-				builder.append( translatorService.translate( ", voting time: <b>$1</b> ", dateUtilsService.formatDate( votingTimeFrom ) ) );
+				builder.append( ", " ).append( translatorService.translate( "voting time: $1", dateUtilsService.formatDate( votingTimeFrom ) ) ).append( " " );
 			}
 
 			if ( dateUtilsService.isNotEmptyTime( votingTimeTo ) ) {
-				builder.append( translatorService.translate( " - <b>$1</b> ", dateUtilsService.formatDate( votingTimeTo ) ) );
+				builder.append( String.format( " - %s ", dateUtilsService.formatDate( votingTimeTo ) ) );
 			}
 		}
 	}

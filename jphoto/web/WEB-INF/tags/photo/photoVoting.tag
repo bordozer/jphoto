@@ -167,7 +167,7 @@
 
 						},
 						error:function () {
-							showErrorMessage( '${eco:translate('Error due voting')}' );
+							showErrorMessage( '${eco:translate('Voting error')}' );
 						}
 					} ).done(function() {
 						refreshPhotoInfo();

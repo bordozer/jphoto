@@ -33,7 +33,7 @@
 
 			<tr>
 				<td align="right" width="320px">
-					<label for="${filterUserNameControl}">${eco:translate( 'Name' )}</label>
+					<label for="${filterUserNameControl}">${eco:translate( 'Member name' )}</label>
 				</td>
 				<td class="datacolumn">
 					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="${eco:translate('Filter')}"

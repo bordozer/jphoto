@@ -27,7 +27,7 @@
 			</c:if>
 			<table:td>${eco:translate( "id" )}</table:td>
 			<table:td>${eco:translate( "Avatar" )}</table:td>
-			<table:td>${eco:translate( "Name" )}</table:td>
+			<table:td>${eco:translate( "Member name" )}</table:td>
 			<table:td>${eco:translate( "Icons" )}</table:td>
 			<table:td>${eco:translate( "Status" )}</table:td>
 			<%--<table:td>${eco:translate( "Login" )}</table:td>--%>

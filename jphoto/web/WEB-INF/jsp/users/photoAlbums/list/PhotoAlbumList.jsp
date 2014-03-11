@@ -29,7 +29,7 @@
 				<table:td />
 			</c:if>
 
-			<table:td width="200">${eco:translate( "Name" )}</table:td>
+			<table:td width="200">${eco:translate( "Album name" )}</table:td>
 			<table:td>${eco:translate( "Description" )}</table:td>
 			<table:td>${eco:translate( "Photos" )}</table:td>
 		</jsp:attribute>

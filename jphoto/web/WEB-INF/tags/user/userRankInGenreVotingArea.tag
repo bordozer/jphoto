@@ -32,7 +32,7 @@
 		</c:if>
 
 		<c:if test="${hasUserAlreadyVotedForThisGenre}">
-			<span title="${eco:translate2('You have already voted for member\'s rank $1 in category \'$2\'', userRankInGenre, genre.name)}">
+			<span title="${eco:translate2('You have already voted when member\'s rank $1 in category \'$2\'', userRankInGenre, genre.name)}">
 				<b>${lastVotingPoints > 0 ? '+' : ''}${lastVotingPoints}</b>
 			</span>
 		</c:if>

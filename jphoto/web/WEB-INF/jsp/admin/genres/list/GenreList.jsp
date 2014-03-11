@@ -34,7 +34,7 @@
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "id" )}</table:td>
-			<table:td width="100">${eco:translate( "Name" )}</table:td>
+			<table:td width="100">${eco:translate( "Member name" )}</table:td>
 
 			<table:td>${eco:translate( "Can contain nude" )}</table:td>
 			<table:td>${eco:translate( "Contains nude" )}</table:td>

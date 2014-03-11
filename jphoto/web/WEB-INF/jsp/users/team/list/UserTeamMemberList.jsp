@@ -33,7 +33,7 @@
 			</c:if>
 
 			<table:td>${eco:translate( "Avatar" )}</table:td>
-			<table:td>${eco:translate( "Name" )}</table:td>
+			<table:td>${eco:translate( "Member name" )}</table:td>
 			<table:td>${eco:translate( "Member" )}</table:td>
 			<table:td />
 			<table:td>${eco:translate( "Type" )}</table:td>

@@ -461,7 +461,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userRankService.isUserVotedLastTimeForThisRankInGenre( voterId, userId, genreId, userRankInGenre ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( translatorService.translate( "You have already voted when member rank is $1 in category $2.", String.valueOf( userRankInGenre ), genre.getName() ) );
+			result.setValidationMessage( translatorService.translate( "You have already voted when member's rank is $1 in category $2", String.valueOf( userRankInGenre ), genre.getName() ) );
 			result.setUiVotingIsInaccessible( false );
 
 			return result;
