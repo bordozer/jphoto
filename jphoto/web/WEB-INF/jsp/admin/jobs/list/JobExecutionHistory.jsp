@@ -220,7 +220,11 @@
 						<%-- / Job reference  --%>
 
 						<%-- Job state icon --%>
-						<table:tdunderlined cssClass="textcentered">
+						<c:set var="resultCssClass" value="textcentered"/>
+						<c:if test="${jobExecutionStatus == 'IN_PROGRESS'}">
+							<c:set var="resultCssClass" value=""/>
+						</c:if>
+						<table:tdunderlined cssClass="${resultCssClass}">
 
 							<c:if test="${jobExecutionStatus == 'WAITING_FOR_START'}">
 								<c:set var="watingMessage" value="${eco:translate('The job is waiting for start')}"/>
@@ -238,7 +242,9 @@
 								</c:if>
 
 								<tags:progressSimple progressBarId="progressbar_${jobEntryId}" percentage="${percentage}" width="200" height="7" color="${progressColor}"/>
-								<span id="currentJobProgressId_${jobEntryId}"></span> / <span id="totalStepsDivId_${jobEntryId}"></span> - <span id="percentageJobProgressId_${jobEntryId}"></span>
+								<span style="font-size: 10px;">
+									<span id="currentJobProgressId_${jobEntryId}"></span> / <span id="totalStepsDivId_${jobEntryId}"></span> - <span id="percentageJobProgressId_${jobEntryId}"></span>
+								</span>
 								<script type="text/javascript">
 									setTimeout( function () {
 										updateProgress( ${jobExecutionHistoryEntry.id} );
