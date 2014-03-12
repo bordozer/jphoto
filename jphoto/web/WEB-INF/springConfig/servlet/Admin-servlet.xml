@@ -24,7 +24,7 @@
 	<bean id="photoActionGenerationValidator" class="admin.controllers.jobs.edit.action.PhotoActionGenerationValidator"/>
 	<bean id="genreRankRecalculationValidator" class="admin.controllers.jobs.edit.genreRank.UsersGenresRanksRecalculationValidator"/>
 	<bean id="rankVotingJobValidator" class="admin.controllers.jobs.edit.rankVoting.RankVotingJobValidator"/>
-	<bean id="membershipJobValidator" class="admin.controllers.jobs.edit.membership.MembershipJobValidator"/>
+	<bean id="userStatusRecalculationJobValidator" class="admin.controllers.jobs.edit.userStatus.UserStatusRecalculationJobValidator"/>
 	<bean id="favoritesJobValidator" class="admin.controllers.jobs.edit.favorites.FavoritesJobValidator"/>
 	<bean id="photoRatingJobValidator" class="admin.controllers.jobs.edit.photoRating.PhotoRatingJobValidator"/>
 	<bean id="reindexJobValidator" class="admin.controllers.jobs.edit.reindex.ReindexJobValidator"/>

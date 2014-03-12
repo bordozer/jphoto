@@ -1,8 +1,8 @@
-package admin.controllers.jobs.edit.membership;
+package admin.controllers.jobs.edit.userStatus;
 
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.controllers.jobs.edit.AbstractJobController;
-import admin.jobs.entries.MembershipJob;
+import admin.jobs.entries.UserStatusRecalculationJob;
 import admin.jobs.enums.SavedJobType;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,52 +15,52 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-@SessionAttributes( MembershipJobController.JOB_MODEL_NAME )
+@SessionAttributes( UserStatusRecalculationJobController.JOB_MODEL_NAME )
 @Controller
 @RequestMapping( "jobs/user-status" )
-public class MembershipJobController extends AbstractJobController {
+public class UserStatusRecalculationJobController extends AbstractJobController {
 
-	public static final String JOB_MODEL_NAME = "membershipJobModel";
-	private static final String START_VIEW = "admin/jobs/edit/membership/Start";
+	public static final String JOB_MODEL_NAME = "userStatusRecalculationJobModel";
+	private static final String START_VIEW = "admin/jobs/edit/userStatus/Start";
 
 	@Autowired
 	private UserService userService;
 
 	@Autowired
-	private MembershipJobValidator membershipJobValidator;
+	private UserStatusRecalculationJobValidator userStatusRecalculationJobValidator;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
-		binder.setValidator( membershipJobValidator );
+		binder.setValidator( userStatusRecalculationJobValidator );
 	}
 
 	@ModelAttribute( JOB_MODEL_NAME )
-	public MembershipJobModel prepareModel() {
-		return new MembershipJobModel();
+	public UserStatusRecalculationJobModel prepareModel() {
+		return new UserStatusRecalculationJobModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public ModelAndView showForm( final @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model ) {
+	public ModelAndView showForm( final @ModelAttribute( JOB_MODEL_NAME ) UserStatusRecalculationJobModel model ) {
 		return doShowForm( model, SavedJobType.USER_STATUS );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/" )
-	public ModelAndView postForm( final @Valid @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model, final BindingResult result ) {
+	public ModelAndView postForm( final @Valid @ModelAttribute( JOB_MODEL_NAME ) UserStatusRecalculationJobModel model, final BindingResult result ) {
 		return doPostForm( model, result );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/save/" )
-	public ModelAndView saveJob( final @Valid @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model, final BindingResult result ) {
+	public ModelAndView saveJob( final @Valid @ModelAttribute( JOB_MODEL_NAME ) UserStatusRecalculationJobModel model, final BindingResult result ) {
 		return doSaveJob( model, result );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{savedJobId}/edit/" )
-	public ModelAndView editEntry( final @PathVariable( "savedJobId" ) int savedJobId, final @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model, final HttpServletRequest request ) {
+	public ModelAndView editEntry( final @PathVariable( "savedJobId" ) int savedJobId, final @ModelAttribute( JOB_MODEL_NAME ) UserStatusRecalculationJobModel model, final HttpServletRequest request ) {
 		return processEditing( savedJobId, model, request );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{savedJobId}/delete/" )
-	public ModelAndView deleteEntry( final @PathVariable( "savedJobId" ) int savedJobId, final @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model ) {
+	public ModelAndView deleteEntry( final @PathVariable( "savedJobId" ) int savedJobId, final @ModelAttribute( JOB_MODEL_NAME ) UserStatusRecalculationJobModel model ) {
 		return deleteAndReturnView( savedJobId, model );
 	}
 
@@ -86,7 +86,7 @@ public class MembershipJobController extends AbstractJobController {
 
 	@Override
 	protected void initJobFromModel( final AbstractAdminJobModel model ) {
-		final MembershipJob job = ( MembershipJob ) model.getJob();
+		final UserStatusRecalculationJob job = ( UserStatusRecalculationJob ) model.getJob();
 
 		job.setTotalJopOperations( userService.getUserCount() );
 	}

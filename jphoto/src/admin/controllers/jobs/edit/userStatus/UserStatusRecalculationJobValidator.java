@@ -1,19 +1,19 @@
-package admin.controllers.jobs.edit.membership;
+package admin.controllers.jobs.edit.userStatus;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-public class MembershipJobValidator extends SavedJobValidator implements Validator {
+public class UserStatusRecalculationJobValidator extends SavedJobValidator implements Validator {
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
-		return MembershipJobModel.class.equals( clazz );
+		return UserStatusRecalculationJobModel.class.equals( clazz );
 	}
 
 	@Override
 	public void validate( final Object target, final Errors errors ) {
-		final MembershipJobModel model = ( MembershipJobModel ) target;
+		final UserStatusRecalculationJobModel model = ( UserStatusRecalculationJobModel ) target;
 
 		validateJobName( model, errors );
 	}

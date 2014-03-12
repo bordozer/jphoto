@@ -16,10 +16,10 @@ import core.services.utils.DateUtilsService;
 import java.util.List;
 import java.util.Map;
 
-public class MembershipJob extends NoParametersAbstractJob {
+public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
-	public MembershipJob() {
-		super( new LogHelper( MembershipJob.class ) );
+	public UserStatusRecalculationJob() {
+		super( new LogHelper( UserStatusRecalculationJob.class ) );
 	}
 
 	@Override
