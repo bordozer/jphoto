@@ -38,7 +38,7 @@ public class SchedulerJobRunContainer implements Job {
 
 		job.setScheduledTaskId( schedulerTaskId );
 
-		log.info( String.format( "Scheduled job #%s (%s) is about to be executed ( Saved Job '%s')", schedulerTaskId, schedulerTask.getName(), job ) );
+		log.debug( String.format( "Scheduled job #%s (%s) is about to be executed ( Saved Job '%s')", schedulerTaskId, schedulerTask.getName(), job ) );
 
 		jobExecutionService.execute( job );
 	}

@@ -96,11 +96,7 @@ public abstract class AbstractJob extends Thread {
 				return;
 			}
 
-			log.info( String.format( "Init job '%s'", this ) );
-
-			/*if ( totalJopOperations == 0 ) {
-				throw new BaseRuntimeException( "Total operations can not be 0" );
-			}*/
+//			log.info( String.format( "Init job '%s'", this ) );
 
 			beingProcessedUsers = services.getUserService().loadAll();
 
@@ -108,7 +104,7 @@ public abstract class AbstractJob extends Thread {
 
 			finishTime = null;
 
-			log.info( String.format( "Running job '%s'", this ) );
+			log.debug( String.format( "Running job '%s'", this ) );
 
 			// DO NOT EXTRACT VARIABLE generationMonitor.getStatus()!!!
 			if ( generationMonitor.getStatus() == JobExecutionStatus.WAITING_FOR_START ) {
@@ -126,7 +122,7 @@ public abstract class AbstractJob extends Thread {
 			if ( generationMonitor.getStatus().isStoppedOrErrorOrCancelled() ) {
 				getLog().error( String.format( "Job '%s'  finished WITH errors", this ) );
 			} else {
-				getLog().info( String.format( "Job '%s' finished without errors", this ) );
+				getLog().debug( String.format( "Job '%s' finished without errors", this ) );
 			}
 
 		} catch ( Throwable e ) {
