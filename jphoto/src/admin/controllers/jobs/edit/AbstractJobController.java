@@ -292,7 +292,7 @@ public abstract class AbstractJobController {
 		switch ( jobType ) {
 			case PREVIEW_GENERATION:
 				return new PreviewGenerationJob();
-			case USER_MEMBERSHIP:
+			case USER_STATUS:
 				return new MembershipJob();
 			case USER_GENRES_RANKS_RECALCULATING:
 				return new UsersGenresRanksRecalculationJob();

@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @SessionAttributes( MembershipJobController.JOB_MODEL_NAME )
 @Controller
-@RequestMapping( "jobs/membership" )
+@RequestMapping( "jobs/user-status" )
 public class MembershipJobController extends AbstractJobController {
 
 	public static final String JOB_MODEL_NAME = "membershipJobModel";
@@ -41,7 +41,7 @@ public class MembershipJobController extends AbstractJobController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public ModelAndView showForm( final @ModelAttribute( JOB_MODEL_NAME ) MembershipJobModel model ) {
-		return doShowForm( model, SavedJobType.USER_MEMBERSHIP );
+		return doShowForm( model, SavedJobType.USER_STATUS );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/" )

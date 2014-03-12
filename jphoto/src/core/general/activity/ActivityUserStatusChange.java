@@ -23,7 +23,7 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	private UserStatus newStatus;
 
 	public ActivityUserStatusChange( final String activityXML, final Services services ) throws DocumentException {
-		super( ActivityType.PHOTO_VOTING, services );
+		super( ActivityType.USER_STATUS, services );
 
 		final Document document = DocumentHelper.parseText( activityXML );
 
@@ -37,7 +37,7 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	}
 
 	public ActivityUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
-		super( ActivityType.USER_MEMBERSHIP, services );
+		super( ActivityType.USER_STATUS, services );
 
 		this.user = user;
 		this.oldStatus = oldStatus;

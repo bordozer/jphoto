@@ -88,6 +88,6 @@ public class MembershipJob extends NoParametersAbstractJob {
 
 	@Override
 	public SavedJobType getJobType() {
-		return SavedJobType.USER_MEMBERSHIP;
+		return SavedJobType.USER_STATUS;
 	}
 }
