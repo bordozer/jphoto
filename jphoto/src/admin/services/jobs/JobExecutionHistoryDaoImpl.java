@@ -194,6 +194,13 @@ public class JobExecutionHistoryDaoImpl extends BaseEntityDaoImpl<JobExecutionHi
 			return;
 		}
 
+		final String deleteParametersSql = String.format( "DELETE FROM %s WHERE %s IN ( %s );"
+			, TABLE_JOB_EXECUTION_HISTORY_PARAMETERS
+			, TABLE_JOB_EXECUTION_HISTORY_PARAMETERS_COLUMN_JOB_ID
+			, StringUtils.join( entryIds, "," )
+		);
+		jdbcTemplate.update( deleteParametersSql, new MapSqlParameterSource() );
+
 		final String sql = String.format( "DELETE FROM %s WHERE %s IN ( %s );", getTableName(), BaseEntityDao.ENTITY_ID, StringUtils.join( entryIds, "," ) );
 		jdbcTemplate.update( sql, new MapSqlParameterSource() );
 	}

@@ -213,14 +213,14 @@ CREATE TABLE `jobExecutionHistory` (
   `startTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
   `endTime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
   `jobStatusId` int(11) NOT NULL,
-  `jobMessage` text,
+  `jobMessage` longtext,
   `savedJobId` int(11) DEFAULT NULL,
   `currentJobStep` int(11) DEFAULT NULL,
   `totalJobSteps` int(11) DEFAULT NULL,
   `schedulerTaskId` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5788 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=367623 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `jobExecutionHistoryParameters` table :

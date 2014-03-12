@@ -8,6 +8,7 @@ import core.general.base.CommonProperty;
 import core.log.LogHelper;
 import core.services.translator.TranslatorService;
 import utils.ListUtils;
+import utils.NumberUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
+	private static final int ITEMS_IN_BUNCH_TO_DELETE = 50;
+
 	private int deleteEntriesOlderThenDays;
 	private List<JobExecutionStatus> jobExecutionStatusesToDelete;
 
@@ -27,14 +30,39 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 	@Override
 	protected void runJob() throws Throwable {
-		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
 
 		final JobExecutionHistoryService jobExecutionHistoryService = services.getJobExecutionHistoryService();
-		final List<Integer> idsToBeDeleted = jobExecutionHistoryService.getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete );
+		final List<Integer> idsToBeDeleted = getTotalItemsToDelete( jobExecutionHistoryService );
 
 		increment();
 
-		jobExecutionHistoryService.delete( idsToBeDeleted );
+		final int totalItemsToDelete = idsToBeDeleted.size();
+		final int total = getTotalSteps( totalItemsToDelete );
+
+		for ( int i = 0; i < total; i++ ) {
+			final int from = i * ITEMS_IN_BUNCH_TO_DELETE;
+			int to = ( i + 1 ) * ITEMS_IN_BUNCH_TO_DELETE - 1;
+
+			if ( to >= totalItemsToDelete ) {
+				to = totalItemsToDelete;
+			}
+
+			final List<Integer> deleteBunch = idsToBeDeleted.subList( from, to );
+			log.debug( String.format( "From: %d, to: %d", from, to ) );
+
+			increment();
+
+			jobExecutionHistoryService.delete( deleteBunch );
+
+			if ( isFinished() ) {
+				break;
+			}
+
+			if ( hasJobFinishedWithAnyResult() ) {
+				break;
+			}
+		}
+
 	}
 
 	@Override
@@ -59,7 +87,8 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 			jobExecutionStatusesToDelete.add( JobExecutionStatus.getById( statusId ) );
 		}
 
-		totalJopOperations = 2;
+		final List<Integer> idsToBeDeleted = getTotalItemsToDelete( services.getJobExecutionHistoryService() );
+		totalJopOperations = getTotalSteps( idsToBeDeleted.size() );
 	}
 
 	@Override
@@ -83,10 +112,9 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 			builder.append( translatorService.translate( "All" ) );
 		}
 
-		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
 		builder.append( "<br />" );
 		builder.append( translatorService.translate( "Total" ) ).append( ": " );
-		builder.append( services.getJobExecutionHistoryService().getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete ).size() );
+		builder.append( getTotalItemsToDelete( services.getJobExecutionHistoryService() ).size() );
 
 		return builder.toString();
 	}
@@ -110,5 +138,14 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 	public void setJobExecutionStatusesToDelete( final List<JobExecutionStatus> jobExecutionStatusesToDelete ) {
 		this.jobExecutionStatusesToDelete = jobExecutionStatusesToDelete;
+	}
+
+	private List<Integer> getTotalItemsToDelete( final JobExecutionHistoryService jobExecutionHistoryService ) {
+		final Date timeFrame = services.getDateUtilsService().getFirstSecondOfTheDayNDaysAgo( deleteEntriesOlderThenDays );
+		return jobExecutionHistoryService.getEntriesIdsOlderThen( timeFrame, jobExecutionStatusesToDelete );
+	}
+
+	private int getTotalSteps( final int totalItemsToDelete ) {
+		return ( int ) NumberUtils.ceil( ( float ) totalItemsToDelete / ITEMS_IN_BUNCH_TO_DELETE );
 	}
 }
