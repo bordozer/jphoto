@@ -38,9 +38,13 @@ public class MembershipJob extends NoParametersAbstractJob {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
 
-					getLog().info( String.format( "Member %s has got new status: MEMBER", user.getId() ) );
+					final String message = String.format( "Member %s has got new status: MEMBER", user.getId() );
+					getLog().info( message );
+					addJobExecutionFinalMessage( message );
 				} else {
-					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
+					final String message = String.format( "Can not update member status. Id = # %s", user.getId() );
+					getLog().error( message );
+					addJobExecutionFinalMessage( message );
 				}
 			}
 
@@ -56,7 +60,7 @@ public class MembershipJob extends NoParametersAbstractJob {
 		}
 
 		services.getCacheService().expire( CacheKey.USER );
-		getLog().info( "User cache has been cleared" );
+		getLog().debug( "User cache has been cleared" );
 	}
 
 	private void sendSystemNotificationAboutGotMembershipToUser( final User user ) {
