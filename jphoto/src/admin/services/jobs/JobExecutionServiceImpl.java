@@ -11,6 +11,7 @@ import admin.jobs.general.SavedJob;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,6 +39,9 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
 	@Autowired
 	private JobStatusChangeStrategyService jobStatusChangeStrategyService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	private final List<AbstractJob> activeJobs = newArrayList();
 
@@ -142,7 +146,7 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
 	@Override
 	public JobProgressDTO getJobProgressAjax( final int jobId ) {
-		final JobProgressDTO result = new JobProgressDTO();
+		final JobProgressDTO result = new JobProgressDTO( translatorService );
 
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 		if ( historyEntry == null ) {

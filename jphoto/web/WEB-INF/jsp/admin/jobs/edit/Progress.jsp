@@ -47,7 +47,6 @@
 	<c:set var="jobType" value="${jobExecutionHistoryEntry.savedJobType}" />
 	<c:set var="jobTypeId" value="${jobType.id}" />
 
-	<c:set var="calculatingText" value="${eco:translate('Calculating...')}" />
 	<c:set var="jobTypeNameTranslated" value="${eco:translate(jobType.name)}"/>
 
 	<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
@@ -64,9 +63,7 @@
 	<br />
 
 	<b>${eco:translate('Job progress:')}
-		<span id="currentJobProgressId_${id}">${current}</span>
-		${eco:translate('of')} <span id="totalStepsDivId_${id}">${total > 0 ? total : calculatingText}</span>
-		- <span id="percentageJobProgressId_${id}">${percentage}%, ${eco:formatTime(jobExecutionHistoryEntry.executionDuration)}</span>
+		<span id="progressStatusFullDescription_${id}"></span>
 	</b>
 
 	<br />
