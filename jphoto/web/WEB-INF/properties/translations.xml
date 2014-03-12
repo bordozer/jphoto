@@ -1604,7 +1604,7 @@
 
 	<translation>
 		<nerd>User membership recalculation</nerd>
-		<ru><![CDATA[Пересчет членства пользователей]]></ru>
+		<ru><![CDATA[Пересчет пользовательских статусов]]></ru>
 	</translation>
 
 	<translation>
@@ -1744,7 +1744,7 @@
 
 	<translation>
 		<nerd>Members ranks in genres recalculation</nerd>
-		<ru><![CDATA[Пересчет пользовательского ранга по разделам]]></ru>
+		<ru><![CDATA[Пересчет пользовательских рангов по разделам]]></ru>
 	</translation>
 
 	<translation>
@@ -1854,7 +1854,7 @@
 
 	<translation>
 		<nerd>Data generation / Import</nerd>
-		<ru><![CDATA[Генерирование данных / Импорт]]></ru>
+		<ru><![CDATA[Генерация / Импорт]]></ru>
 	</translation>
 
 	<translation>
@@ -1874,7 +1874,7 @@
 
 	<translation>
 		<nerd>User actions / Favorites</nerd>
-		<ru><![CDATA[Действия с пользователями / Избранное]]></ru>
+		<ru><![CDATA[Юзеры / Избранное]]></ru>
 	</translation>
 
 	<translation>
@@ -1889,7 +1889,7 @@
 
 	<translation>
 		<nerd>Active / Performed</nerd>
-		<ru><![CDATA[Активные / Выполненные]]></ru>
+		<ru><![CDATA[Акт. / Выполн.]]></ru>
 	</translation>
 
 </translations>
