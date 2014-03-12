@@ -8,8 +8,10 @@ import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
+import core.general.user.UserStatus;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
+import core.services.security.Services;
 
 import java.util.Date;
 import java.util.List;
@@ -46,4 +48,6 @@ public interface ActivityStreamService extends BaseEntityService<AbstractActivit
 	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final int qty );
 
 	void deleteEntriesOlderThen( final Date timeFrame );
+
+	boolean saveUserStatusChange( User user, UserStatus oldStatus, UserStatus newStatus, Date activityTime, Services services );
 }

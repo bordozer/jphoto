@@ -11,6 +11,7 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
+import core.services.utils.DateUtilsService;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ public class MembershipJob extends NoParametersAbstractJob {
 
 	@Override
 	protected void runJob() throws Throwable {
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+
 		final List<User> users = services.getUserService().loadAll();
 
 		for ( final User user : users ) {
@@ -41,6 +44,8 @@ public class MembershipJob extends NoParametersAbstractJob {
 					final String message = String.format( "Member %s has got new status: MEMBER", user.getId() );
 					getLog().info( message );
 					addJobExecutionFinalMessage( message );
+
+					services.getActivityStreamService().saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
 				} else {
 					final String message = String.format( "Can not update member status. Id = # %s", user.getId() );
 					getLog().error( message );

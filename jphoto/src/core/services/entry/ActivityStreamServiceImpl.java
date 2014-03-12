@@ -8,6 +8,7 @@ import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
+import core.general.user.UserStatus;
 import core.services.dao.ActivityStreamDao;
 import core.services.security.Services;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,11 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Override
 	public boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting ) {
 		return save( new ActivityVotingForUserRankInGenre( rankInGenreVoting, services ) );
+	}
+
+	@Override
+	public boolean saveUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
+		return save( new ActivityUserStatusChange( user, oldStatus, newStatus, activityTime, services ) );
 	}
 
 	@Override
