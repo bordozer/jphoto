@@ -173,7 +173,7 @@ public abstract class AbstractJob extends Thread {
 		updateCurrentJobExecutionEntryStep();
 	}
 
-	public String getNameTranslated() {
+	public String getJobName() {
 		return getJobType().getName();
 	}
 

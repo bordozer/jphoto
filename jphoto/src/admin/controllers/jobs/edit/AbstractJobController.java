@@ -76,7 +76,7 @@ public abstract class AbstractJobController {
 		model.setJobName( job.getJobType().getName() );
 		model.setActive( true );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsDataTemplate( job.getNameTranslated() ) );
+		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName() ) ) );
 
 		addUsersAndPhotosInfo( model );
 
@@ -100,7 +100,7 @@ public abstract class AbstractJobController {
 
 		final AbstractJob job = model.getJob();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( job.getNameTranslated() ) );
+		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( job.getJobName() ) );
 
 		initJobFromModel( model );
 

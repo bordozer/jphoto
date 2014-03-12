@@ -26,7 +26,7 @@
 		</table:td>
 	</table:tr>
 
-	<table:separatorInfo colspan="2" title="${jobModel.job.nameTranslated}" />
+	<table:separatorInfo colspan="2" title="${jobModel.job.jobName}" />
 
 	<table:tr>
 		<table:td width="120">
@@ -69,7 +69,7 @@
 	}
 
 	function saveJobAsCopy() {
-		if( confirmDeletion( '${eco:translate1('Save "$1" as copy?', jobModel.job.nameTranslated)}' ) ) {
+		if( confirmDeletion( '${eco:translate1('Save "$1" as copy?', jobModel.job.jobName)}' ) ) {
 			$( '#${saveAsCopyFormControl}' ).val( true );
 			saveJob();
 		}
@@ -79,7 +79,7 @@
 		$( '#${saveJobModeFormControl}' ).val( false );
 		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrlWithPrefix()}/jobs/${jobModel.job.jobType.prefix}/' );
 
-		if( confirmDeletion( '${eco:translate1('Run "$1?"', jobModel.job.nameTranslated)}' ) ) {
+		if( confirmDeletion( '${eco:translate1('Run "$1?"', jobModel.job.jobName)}' ) ) {
 			$( '#FormName' ).submit();
 		}
 	}
