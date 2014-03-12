@@ -166,6 +166,8 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 				return new ActivityFavoriteAction( activityXML, services );
 			case VOTING_FOR_USER_RANK_IN_GENRE:
 				return new ActivityVotingForUserRankInGenre( activityXML, services );
+			case USER_MEMBERSHIP:
+				return new ActivityUserStatusChange( activityXML, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal ActivityType: %s", activityType ) );
