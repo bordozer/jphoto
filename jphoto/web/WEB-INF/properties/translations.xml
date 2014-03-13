@@ -14,7 +14,7 @@
 
 	<translation>
 		<nerd>Members</nerd>
-		<ru><![CDATA[Участники]]></ru>
+		<ru><![CDATA[Пользователи]]></ru>
 	</translation>
 
 	<translation>
@@ -23,13 +23,23 @@
 	</translation>
 
 	<translation>
-		<nerd>Photos</nerd>
-		<ru><![CDATA[Фотографии]]></ru>
+		<nerd>Photo gallery</nerd>
+		<ru><![CDATA[Фотогалерея]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: User's photos</nerd>
+		<ru><![CDATA[Работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>All user's photos</nerd>
+		<ru><![CDATA[Работы]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>The best photos</nerd>
-		<ru><![CDATA[Лучшие фотографии]]></ru>
+		<ru><![CDATA[Лучшие работы]]></ru>
 	</translation>
 
 	<translation>
@@ -124,7 +134,7 @@
 
 	<translation>
 		<nerd>All members</nerd>
-		<ru><![CDATA[Все участники]]></ru>
+		<ru><![CDATA[Все пользователи]]></ru>
 	</translation>
 
 	<translation>
@@ -289,7 +299,7 @@
 
 	<translation>
 		<nerd>Photo description</nerd>
-		<ru><![CDATA[Описание фотографии]]></ru>
+		<ru><![CDATA[Дополнительная информация о работе]]></ru>
 	</translation>
 
 	<translation>
@@ -364,7 +374,7 @@
 
 	<translation>
 		<nerd>This week's photos</nerd>
-		<ru><![CDATA[Фотографии этой недели]]></ru>
+		<ru><![CDATA[Работы этой недели]]></ru>
 	</translation>
 
 	<translation>
@@ -379,12 +389,12 @@
 
 	<translation>
 		<nerd>Photo info</nerd>
-		<ru><![CDATA[Информация о фотографии]]></ru>
+		<ru><![CDATA[Информация о работе]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>This month's photos</nerd>
-		<ru><![CDATA[Фотографии этого месяца]]></ru>
+		<ru><![CDATA[Работы этого месяца]]></ru>
 	</translation>
 
 	<translation>
@@ -409,7 +419,7 @@
 
 	<translation>
 		<nerd>Show photos: $1</nerd>
-		<ru><![CDATA[Показать фотографии: $1]]></ru>
+		<ru><![CDATA[Показать работы: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -459,17 +469,12 @@
 
 	<translation>
 		<nerd>The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones ).</nerd>
-		<ru><![CDATA[Участник не имеет достаточного количества работ в разделе $1 ( у него загружено только $2 работ(ы), а должно быть не менее $3 )]]></ru>
+		<ru><![CDATA[Пользователь не имеет достаточного количества работ в разделе $1 ( у него загружено только $2 работ(ы), а должно быть не менее $3 )]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photos total</nerd>
 		<ru><![CDATA[Всего работ]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>
@@ -519,7 +524,7 @@
 
 	<translation>
 		<nerd>You can not vote for the member's rank in category. Click to see detailed message</nerd>
-		<ru><![CDATA[Вы не можете проголосовать за ранг участника в разделе. Кликните чтобы посмотреть дополнительную информацию]]></ru>
+		<ru><![CDATA[Вы не можете проголосовать за ранг пользователя в разделе. Кликните чтобы посмотреть дополнительную информацию]]></ru>
 	</translation>
 
 	<translation>
@@ -754,7 +759,7 @@
 
 	<translation>
 		<nerd>Favorite Members</nerd>
-		<ru><![CDATA[Избранные участники]]></ru>
+		<ru><![CDATA[Избранные пользователи]]></ru>
 	</translation>
 
 	<translation>
@@ -1234,7 +1239,7 @@
 
 	<translation>
 		<nerd>The photos the member has voted recently for</nerd>
-		<ru><![CDATA[]Фотографии за которые пользователь недавно голосовал]></ru>
+		<ru><![CDATA[]Работы, за которые пользователь недавно голосовал]></ru>
 	</translation>
 
 	<translation>
@@ -1905,26 +1910,6 @@
 	<translation>
 		<nerd>Favorites</nerd>
 		<ru><![CDATA[Избранные работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
 	</translation>
 
 </translations>

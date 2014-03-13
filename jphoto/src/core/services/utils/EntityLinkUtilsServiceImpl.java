@@ -57,7 +57,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		return String.format( "<a href=\"%s\" title=\"%s: all photos\">%s</a>"
 			, urlUtilsService.getPhotosByUserLink( user.getId() )
 			, StringUtilities.escapeHtml( user.getName() )
-			, translatorService.translate( "Photos" )
+			, translatorService.translate( "All user's photos" )
 		);
 	}
 
@@ -145,7 +145,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getPhotosRootLink() {
 		final String link = String.format( "%s", urlUtilsService.getAllPhotosLink() );
-		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( "Photos" ) );
+		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( "Photo gallery" ) );
 	}
 
 	@Override

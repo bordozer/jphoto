@@ -26,8 +26,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsService {
 
-	public static final String PHOTOS_ROOT = "Photos";
-	
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
 	
@@ -65,7 +63,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	@Override
 	public PageTitleData getPhotoNewData( final User user, final PhotoEditWizardStep wizardStep ) {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String tran = translatorService.translate( "Upload" );
+		final String tran = translatorService.translate( "Breadcrumbs: Upload new photo" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), tran, wizardStep.getStepDescription() );
@@ -88,7 +86,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	@Override
 	public PageTitleData getPhotoEditData( final Photo photo, final User user, final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String tran = translatorService.translate( "Edit" );
+		final String tran = translatorService.translate( "Breadcrumbs: Edit photo" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName(), tran );
 
@@ -185,7 +183,11 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getUserCardLink( user ), translatorService.translate( "Photos" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getPhotosRootLink()
+			, entityLinkUtilsService.getUserCardLink( user )
+			, translatorService.translate( "Breadcrumbs: User's photos" )
+		);
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -204,7 +206,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated, genre.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), translatorService.translate( genre.getName() ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), genre.getName() );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -280,7 +282,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 
 	@Override
 	public String getPhotoRootTranslated() {
-		return translatorService.translate( PHOTOS_ROOT );
+		return translatorService.translate( "Photo gallery" );
 	}
 
 	private List<String> getPhotoBaseBreadcrumbs( final Photo photo, final User user, final Genre genre, final String... strings ) {
