@@ -6,34 +6,29 @@ import core.general.user.User;
 import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
 import java.util.Date;
 
 public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 
-	protected static final String ACTIVITY_XML_TAG_ROOT = "activity";
-	protected static final String ACTIVITY_XML_TAG_ID = "id";
+	private static final String ACTIVITY_XML_TAG_ROOT = "activity";
+	private static final String ACTIVITY_XML_TAG_USER_ID = "userId";
 
-	private final ActivityType activityType;
-
-	protected Date activityTime;
-
-	protected int activityOfUserId;
-	protected int activityOfPhotoId;
-
-	protected boolean activityOfDeletedEntry;
+	protected final User activityOfUser;
+	protected final Date activityTime;
+	protected final ActivityType activityType;
 
 	protected final Services services;
 
-	public abstract String buildActivityXML();
-
-	public abstract String getActivityDescription();
+	public abstract String getDisplayActivityDescription();
 
 	/* Loading from DB */
-	protected AbstractActivityStreamEntry( final ActivityType activityType, final Services services ) {
+	public AbstractActivityStreamEntry( final User activityOfUser, final Date activityTime, final ActivityType activityType, final Services services ) {
+		this.activityOfUser = activityOfUser;
+		this.activityTime = activityTime;
 		this.activityType = activityType;
+
 		this.services = services;
 	}
 
@@ -42,21 +37,15 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 	}
 
 	public String getDisplayActivityUserLink() {
-		if ( activityOfUserId == 0 ) {
+		if ( activityOfUser == null ) {
 			return StringUtils.EMPTY;
 		}
 
-		final User user = services.getUserService().load( activityOfUserId );
-
-		if ( user == null ) {
-			return String.format( "<font color='red'>The member #%d does not exist</font>", activityOfUserId ); // TODO: the member MUST be n DB or there is an error otherwise
-		}
-
-		return services.getEntityLinkUtilsService().getUserCardLink( user );
+		return services.getEntityLinkUtilsService().getUserCardLink( activityOfUser );
 	}
 
 	public int getDisplayActivityUserId() {
-		return activityOfUserId;
+		return activityOfUser.getId();
 	}
 
 	public ActivityType getActivityType() {
@@ -67,41 +56,21 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 		return activityTime;
 	}
 
-	public void setActivityTime( final Date activityTime ) {
-		this.activityTime = activityTime;
-	}
-
-	public int getActivityOfUserId() {
-		return activityOfUserId;
-	}
-
-	public void setActivityOfUserId( final int activityOfUserId ) {
-		this.activityOfUserId = activityOfUserId;
+	public User getActivityOfUser() {
+		return activityOfUser;
 	}
 
 	public int getActivityOfPhotoId() {
-		return activityOfPhotoId;
+		return 0;
 	}
 
-	public void setActivityOfPhotoId( final int activityOfPhotoId ) {
-		this.activityOfPhotoId = activityOfPhotoId;
-	}
-
-	public boolean isActivityOfDeletedEntry() {
-		return activityOfDeletedEntry;
-	}
-
-	public void setActivityOfDeletedEntry( final boolean activityOfDeletedEntry ) {
-		this.activityOfDeletedEntry = activityOfDeletedEntry;
-	}
-
-	protected String getXML( final String xmlTagPhotoId, final int id ) {
-		final Document document = DocumentHelper.createDocument();
+	public Document getActivityXML() {
+		final Document document = getEmptyDocument();
 
 		final Element rootElement = document.addElement( ACTIVITY_XML_TAG_ROOT );
-		rootElement.addElement( xmlTagPhotoId ).addText( String.valueOf( id ) );
+		rootElement.addElement( ACTIVITY_XML_TAG_USER_ID ).addText( String.valueOf( activityOfUser.getId() ) );
 
-		return document.asXML();
+		return document;
 	}
 
 	protected String getPhotoIcon( final Photo photo ) {
@@ -114,9 +83,5 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 			, services.getUserPhotoFilePathUtilsService().getPhotoUrl( photo )
 			, photo.getNameEscaped()
 		);
-	}
-
-	protected void registerActivityEntryAsInvisibleForActivityStream() {
-		activityOfDeletedEntry = true;
 	}
 }

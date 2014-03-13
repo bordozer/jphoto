@@ -4,79 +4,47 @@ import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.services.security.Services;
-import core.services.utils.EntityLinkUtilsService;
 import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import utils.NumberUtils;
 
-public class ActivityPhotoUpload extends AbstractActivityStreamEntry {
-
-	private Photo uploadedPhoto;
-
-	public ActivityPhotoUpload( final String activityXML, final Services services ) throws DocumentException {
-		super( ActivityType.PHOTO_UPLOAD, services );
-
-		final Document document = DocumentHelper.parseText( activityXML );
-
-		final Element rootElement = document.getRootElement();
-		activityOfPhotoId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_ID ).getText() );
-
-		uploadedPhoto = services.getPhotoService().load( activityOfPhotoId );
-		if ( uploadedPhoto == null ) {
-			registerActivityEntryAsInvisibleForActivityStream();
-		}
-	}
+public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	public ActivityPhotoUpload( final Photo photo, final Services services ) {
-		super( ActivityType.PHOTO_UPLOAD, services );
-
-		this.uploadedPhoto = photo;
-
-		activityTime = photo.getUploadTime();
-
-		activityOfUserId = photo.getUserId();
-		activityOfPhotoId = photo.getId();
+		super( services.getUserService().load( photo.getUserId() ), photo, photo.getUploadTime(), ActivityType.PHOTO_UPLOAD, services );
 	}
 
 	@Override
-	public String buildActivityXML() {
-		return getXML( ACTIVITY_XML_TAG_ID, uploadedPhoto.getId() );
+	public Document getActivityXML() {
+		return getEmptyDocument();
 	}
 
 	@Override
-	public String getActivityDescription() {
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-
-		return services.getTranslatorService().translate( "uploaded photo $1"
-			, entityLinkUtilsService.getPhotoCardLink( uploadedPhoto )
-		);
+	public String getDisplayActivityDescription() {
+		return services.getTranslatorService().translate( "uploaded photo $1", services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto ) );
 	}
 
 	public String getDisplayActivityUserLink() {
 
 		// there is acceptable to use EnvironmentContext.getCurrentUser() because this is UI called method
-		if ( services.getSecurityService().isPhotoAuthorNameMustBeHidden( uploadedPhoto, EnvironmentContext.getCurrentUser() ) ) {
+		if ( services.getSecurityService().isPhotoAuthorNameMustBeHidden( activityOfPhoto, EnvironmentContext.getCurrentUser() ) ) {
 			return services.getConfigurationService().getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
 		}
 
-		return services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( uploadedPhoto.getUserId() ) );
+		return services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( activityOfPhoto.getUserId() ) );
 	}
 
 	@Override
 	public int getDisplayActivityUserId() {
 		// there is acceptable to use EnvironmentContext.getCurrentUser() because this is UI called method
-		return services.getSecurityService().isPhotoAuthorNameMustBeHidden( uploadedPhoto, EnvironmentContext.getCurrentUser() ) ? 0 : activityOfUserId;
+		return services.getSecurityService().isPhotoAuthorNameMustBeHidden( activityOfPhoto, EnvironmentContext.getCurrentUser() ) ? 0 : activityOfUser.getId();
 	}
 
 	@Override
 	public String getDisplayActivityIcon() {
-		return getPhotoIcon( uploadedPhoto );
+		return getPhotoIcon( activityOfPhoto );
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s", getActivityType(), uploadedPhoto );
+		return String.format( "%s: %s", getActivityType(), activityOfPhoto );
 	}
 }

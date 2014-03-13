@@ -1,6 +1,7 @@
 package core.general.activity;
 
 import core.enums.FavoriteEntryType;
+import core.general.user.User;
 import core.services.security.Services;
 import core.services.utils.EntityLinkUtilsService;
 import org.dom4j.Document;
@@ -13,48 +14,42 @@ import java.util.Date;
 
 public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
-	protected static final String ACTIVITY_XML_TAG_VOTER_ID = "userId";
 	protected static final String ACTIVITY_XML_TAG_FAVORITE_ENTRY_ID = "favoriteEntryId";
 	protected static final String ACTIVITY_XML_TAG_FAVORITE_TYPE_ID = "favoriteTypeId";
 
 	private int favoriteEntryId;
 	private FavoriteEntryType favoriteType;
 
-	public ActivityFavoriteAction( final String activityXML, final Services services ) throws DocumentException {
-		super( ActivityType.FAVORITE_ACTION, services );
+	public ActivityFavoriteAction( final User user, final Date activityTime, final String activityXML, final Services services ) throws DocumentException {
+		super( user, activityTime, ActivityType.FAVORITE_ACTION, services );
 
 		final Document document = DocumentHelper.parseText( activityXML );
-
 		final Element rootElement = document.getRootElement();
-		activityOfUserId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_VOTER_ID ).getText() );
+
 		favoriteEntryId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_ENTRY_ID ).getText() );
 		favoriteType = FavoriteEntryType.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_TYPE_ID ).getText() ) );
 	}
 
-	public ActivityFavoriteAction( final int userId, final int favoriteEntryId, final Date time, final FavoriteEntryType entryType, final Services services ) {
-		super( ActivityType.FAVORITE_ACTION, services );
+	public ActivityFavoriteAction( final User user, final int favoriteEntryId, final Date activityTime, final FavoriteEntryType entryType, final Services services ) {
+		super( user, activityTime, ActivityType.FAVORITE_ACTION, services );
 
-		this.activityTime = time;
-
-		this.activityOfUserId = userId;
 		this.favoriteEntryId = favoriteEntryId;
 		this.favoriteType = entryType;
 	}
 
 	@Override
-	public String buildActivityXML() {
-		final Document document = DocumentHelper.createDocument();
+	public Document getActivityXML() {
+		final Document document = super.getActivityXML();
 
-		final Element rootElement = document.addElement( ACTIVITY_XML_TAG_ROOT );
-		rootElement.addElement( ACTIVITY_XML_TAG_VOTER_ID ).addText( String.valueOf( activityOfUserId ) );
+		final Element rootElement = document.getRootElement();
 		rootElement.addElement( ACTIVITY_XML_TAG_FAVORITE_ENTRY_ID ).addText( String.valueOf( favoriteEntryId ) );
 		rootElement.addElement( ACTIVITY_XML_TAG_FAVORITE_TYPE_ID ).addText( String.valueOf( favoriteType.getId() ) );
 
-		return document.asXML();
+		return document;
 	}
 
 	@Override
-	public String getActivityDescription() {
+	public String getDisplayActivityDescription() {
 		return services.getTranslatorService().translate( "added $1 to $2"
 			, getFavoriteEntry( favoriteEntryId, favoriteType )
 			, favoriteType.getNameTranslated()
@@ -63,7 +58,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 	@Override
 	public String toString() {
-		return String.format( "%s added %s to %s", activityOfUserId, favoriteEntryId, favoriteType );
+		return String.format( "%s added %s to %s", activityOfUser, favoriteEntryId, favoriteType );
 	}
 
 	@Override

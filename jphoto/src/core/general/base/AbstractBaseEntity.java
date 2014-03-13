@@ -1,6 +1,8 @@
 package core.general.base;
 
 import core.interfaces.BaseEntity;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
 
 public abstract class AbstractBaseEntity implements BaseEntity {
 
@@ -25,5 +27,9 @@ public abstract class AbstractBaseEntity implements BaseEntity {
 
 	public boolean isNew (){
 		return id == 0;
+	}
+
+	protected Document getEmptyDocument() {
+		return DocumentHelper.createDocument();
 	}
 }

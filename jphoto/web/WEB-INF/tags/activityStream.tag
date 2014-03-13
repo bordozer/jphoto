@@ -13,9 +13,10 @@
 
 	<c:forEach var="activity" items="${activities}">
 
-		<c:if test="${not activity.activityOfDeletedEntry}">
+		<c:if test="${not empty activity}">
 
 			<table:tr>
+
 				<table:td width="100" cssClass="small-text textcentered">
 					${eco:formatDate(activity.activityTime)}
 					<br/>
@@ -32,7 +33,7 @@
 						${activity.displayActivityUserLink}
 					</c:if>
 
-					${activity.activityDescription}
+					${activity.displayActivityDescription}
 				</table:td>
 
 				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">

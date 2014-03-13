@@ -14,23 +14,17 @@ import java.util.Date;
 
 public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 
-	private static final String ACTIVITY_XML_TAG_USER_ID = "userId";
 	private static final String ACTIVITY_XML_TAG_OLD_STATUS_ID = "old_status";
 	private static final String ACTIVITY_XML_TAG_NEW_STATUS_ID = "new_status";
 
-	private User user;
 	private UserStatus oldStatus;
 	private UserStatus newStatus;
 
-	public ActivityUserStatusChange( final String activityXML, final Services services ) throws DocumentException {
-		super( ActivityType.USER_STATUS, services );
+	public ActivityUserStatusChange( final User user, final Date activityTime, final String activityXML, final Services services ) throws DocumentException {
+		super( user, activityTime, ActivityType.USER_STATUS, services );
 
 		final Document document = DocumentHelper.parseText( activityXML );
-
 		final Element rootElement = document.getRootElement();
-
-		activityOfUserId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID ).getText() );
-		user = services.getUserService().load( activityOfUserId );
 
 		oldStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_OLD_STATUS_ID ).getText() ) );
 		newStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_NEW_STATUS_ID ).getText() ) );
@@ -38,35 +32,29 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	}
 
 	public ActivityUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
-		super( ActivityType.USER_STATUS, services );
+		super( user, activityTime, ActivityType.USER_STATUS, services );
 
-		this.activityOfUserId = user.getId();
-		this.activityTime = activityTime;
-
-		this.user = user;
 		this.oldStatus = oldStatus;
 		this.newStatus = newStatus;
-
 	}
 
 	@Override
-	public String buildActivityXML() {
-		final Document document = DocumentHelper.createDocument();
+	public Document getActivityXML() {
+		final Document document = super.getActivityXML();
 
-		final Element rootElement = document.addElement( ACTIVITY_XML_TAG_ROOT );
-		rootElement.addElement( ACTIVITY_XML_TAG_USER_ID ).addText( String.valueOf( user.getId() ) );
+		final Element rootElement = document.getRootElement();
 		rootElement.addElement( ACTIVITY_XML_TAG_OLD_STATUS_ID ).addText( String.valueOf( oldStatus.getId() ) );
 		rootElement.addElement( ACTIVITY_XML_TAG_NEW_STATUS_ID ).addText( String.valueOf( newStatus.getId() ) );
 
-		return document.asXML();
+		return document;
 	}
 
 	@Override
-	public String getActivityDescription() {
+	public String getDisplayActivityDescription() {
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		return translatorService.translate( "$1: the status in the club has been changed from $2 to $3"
-			, user.getNameEscaped()
+			, activityOfUser.getNameEscaped()
 			, translatorService.translate( oldStatus.getName() )
 			, translatorService.translate( newStatus.getName() )
 		);
@@ -74,6 +62,6 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 
 	@Override
 	public String toString() {
-		return String.format( "%s: old status: %s, new status: %s", user, oldStatus, newStatus );
+		return String.format( "%s: old status: %s, new status: %s", activityOfUser, oldStatus, newStatus );
 	}
 }

@@ -11,6 +11,7 @@ import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserStatus;
 import core.services.dao.ActivityStreamDao;
 import core.services.security.Services;
+import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
@@ -22,6 +23,9 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Autowired
 	private ActivityStreamDao activityStreamDao;
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private Services services;
@@ -53,7 +57,7 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Override
 	public boolean saveFavoriteAction( final int userId, final int favoriteEntryId, final Date time, final FavoriteEntryType entryType ) {
-		return save( new ActivityFavoriteAction( userId, favoriteEntryId, time, entryType, services ) );
+		return save( new ActivityFavoriteAction( userService.load( userId ), favoriteEntryId, time, entryType, services ) );
 	}
 
 	@Override

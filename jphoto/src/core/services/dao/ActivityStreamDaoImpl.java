@@ -1,7 +1,10 @@
 package core.services.dao;
 
 import core.general.activity.*;
+import core.general.photo.Photo;
+import core.general.user.User;
 import core.log.LogHelper;
+import core.services.photo.PhotoService;
 import core.services.security.Services;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,12 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private PhotoService photoService;
 
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 
@@ -108,11 +117,11 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 	protected MapSqlParameterSource getParameters( final AbstractActivityStreamEntry entry ) {
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
-		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE, entry.getActivityType().getId() );
-		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME, entry.getActivityTime() );
-		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_USER_ID, entry.getActivityOfUserId() );
+		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_USER_ID, entry.getActivityOfUser().getId() );
 		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_PHOTO_ID, entry.getActivityOfPhotoId() );
-		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_XML, entry.buildActivityXML() );
+		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME, entry.getActivityTime() );
+		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE, entry.getActivityType().getId() );
+		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_XML, entry.getActivityXML().asXML() );
 
 		return paramSource;
 	}
@@ -131,43 +140,57 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 
 		@Override
 		public AbstractActivityStreamEntry mapRow( final ResultSet rs, final int rowNum ) throws SQLException {
+
+			final int userId = rs.getInt( TABLE_ACTIVITY_STREAM_COL_USER_ID );
+			final int photoId = rs.getInt( TABLE_ACTIVITY_STREAM_COL_PHOTO_ID );
 			final ActivityType activityType = ActivityType.getById( rs.getInt( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE ) );
+			final Date activityTime = rs.getTimestamp( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
 			final String activityXML = rs.getString( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_XML );
-			final AbstractActivityStreamEntry result;
+
 			try {
-				result = getInstance( activityType, activityXML );
+				final AbstractActivityStreamEntry result = getInstance( userId, photoId, activityTime, activityType, activityXML );
+				if ( result == null ) {
+					return null;
+				}
+				result.setId( rs.getInt( BaseEntityDao.ENTITY_ID ) );
+
+				return result;
 			} catch ( final DocumentException e ) {
 				log.error( String.format( "Invalid activity xml: %s", activityXML ), e );
 				return null;
 			}
-
-			result.setId( rs.getInt( BaseEntityDao.ENTITY_ID ) );
-			result.setActivityTime( rs.getTimestamp( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME ) );
-			result.setActivityOfUserId( rs.getInt( TABLE_ACTIVITY_STREAM_COL_USER_ID ) );
-			result.setActivityOfPhotoId( rs.getInt( TABLE_ACTIVITY_STREAM_COL_PHOTO_ID ) );
-
-			return result;
 		}
 	}
 
-	private AbstractActivityStreamEntry getInstance( final ActivityType activityType, final String activityXML ) throws DocumentException {
+	private AbstractActivityStreamEntry getInstance( final int userId, final int photoId, final Date activityTime, final ActivityType activityType, final String activityXML ) throws DocumentException {
+
+		final User user = userDao.load( userId );
+
 		switch ( activityType ) {
 			case USER_REGISTRATION:
-				return new ActivityUserRegistration( activityXML, services );
-			case PHOTO_UPLOAD:
-				return new ActivityPhotoUpload( activityXML, services );
-			case PHOTO_VOTING:
-				return new ActivityPhotoVoting( activityXML, services );
-			case PHOTO_COMMENT:
-				return new ActivityPhotoComment( activityXML, services );
-			case PHOTO_PREVIEW:
-				return new ActivityPhotoPreview( activityXML, services );
+				return new ActivityUserRegistration( user, services );
 			case FAVORITE_ACTION:
-				return new ActivityFavoriteAction( activityXML, services );
+				return new ActivityFavoriteAction( user, activityTime, activityXML, services );
 			case VOTING_FOR_USER_RANK_IN_GENRE:
-				return new ActivityVotingForUserRankInGenre( activityXML, services );
+				return new ActivityVotingForUserRankInGenre( user, activityTime, activityXML, services );
 			case USER_STATUS:
-				return new ActivityUserStatusChange( activityXML, services );
+				return new ActivityUserStatusChange( user, activityTime, activityXML, services );
+		}
+
+		final Photo photo = photoService.load( photoId );
+		if ( photo == null ) {
+			return null;
+		}
+
+		switch ( activityType ) {
+			case PHOTO_UPLOAD:
+				return new ActivityPhotoUpload( photo, services );
+			case PHOTO_VOTING:
+				return new ActivityPhotoVoting( user, photo, activityTime, activityXML, services );
+			case PHOTO_COMMENT:
+				return new ActivityPhotoComment( user, photo, activityTime, activityXML, services );
+			case PHOTO_PREVIEW:
+				return new ActivityPhotoPreview( user, photo, activityTime, activityXML, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal ActivityType: %s", activityType ) );

@@ -9,51 +9,29 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import utils.NumberUtils;
 
 import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
-
-	private static final String ACTIVITY_XML_TAG_VOTER_ID = "userId";
-	private static final String ACTIVITY_XML_TAG_PHOTO_ID = "photoId";
+public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 
 	private static final String ACTIVITY_XML_TAG_VOTES = "votes";
 
-	private User voter;
-	private Photo photo;
 	private String votes;
 
-	public ActivityPhotoVoting( final String activityXML, final Services services ) throws DocumentException {
-		super( ActivityType.PHOTO_VOTING, services );
+	public ActivityPhotoVoting( final User user, final Photo photo, final Date activityTime, final String activityXML, final Services services ) throws DocumentException {
+		super( user, photo, activityTime, ActivityType.PHOTO_VOTING, services );
 
 		final Document document = DocumentHelper.parseText( activityXML );
-
 		final Element rootElement = document.getRootElement();
-		final int voterId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_VOTER_ID ).getText() );
-		final int photoId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_PHOTO_ID ).getText() );
+
 		votes = rootElement.element( ACTIVITY_XML_TAG_VOTES ).getText();
-
-		voter = services.getUserService().load( voterId );
-		photo = services.getPhotoService().load( photoId );
-
-		if ( photo == null ) {
-			registerActivityEntryAsInvisibleForActivityStream();
-		}
 	}
 
-	public ActivityPhotoVoting( final User voter, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date activityTime, final Services services ) {
-		super( ActivityType.PHOTO_VOTING, services );
-
-		this.voter = voter;
-		this.photo = photo;
-		this.activityTime = activityTime;
-
-		activityOfUserId = this.voter.getId();
-		activityOfPhotoId = photo.getId();
+	public ActivityPhotoVoting( final User user, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date activityTime, final Services services ) {
+		super( user, photo, activityTime, ActivityType.PHOTO_VOTING, services );
 
 		final List<String> arr = newArrayList();
 		for ( final UserPhotoVote userPhotoVote : userPhotoVotes ) {
@@ -63,33 +41,28 @@ public class ActivityPhotoVoting extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String buildActivityXML() {
-		final Document document = DocumentHelper.createDocument();
-
-		final Element rootElement = document.addElement( ACTIVITY_XML_TAG_ROOT );
-		rootElement.addElement( ACTIVITY_XML_TAG_VOTER_ID ).addText( String.valueOf( voter.getId() ) );
-		rootElement.addElement( ACTIVITY_XML_TAG_PHOTO_ID ).addText( String.valueOf( photo.getId() ) );
-		rootElement.addElement( ACTIVITY_XML_TAG_VOTES ).addText( votes );
-
-		return document.asXML();
+	public Document getActivityXML() {
+		final Document document = super.getActivityXML();
+		document.getRootElement().addElement( ACTIVITY_XML_TAG_VOTES ).addText( votes );
+		return document;
 	}
 
 	@Override
-	public String getActivityDescription() {
+	public String getDisplayActivityDescription() {
 
 		return services.getTranslatorService().translate( "voted for photo $1<br />$2"
-			, services.getEntityLinkUtilsService().getPhotoCardLink( photo )
+			, services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto )
 			, votes
 		);
 	}
 
 	@Override
 	public String getDisplayActivityIcon() {
-		return getPhotoIcon( photo );
+		return getPhotoIcon( activityOfPhoto );
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s voted for %s", getActivityType(), voter, photo );
+		return String.format( "%s: %s voted for %s", getActivityType(), activityOfUser, activityOfPhoto );
 	}
 }
