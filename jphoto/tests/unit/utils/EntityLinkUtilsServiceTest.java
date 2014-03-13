@@ -44,10 +44,10 @@ public class EntityLinkUtilsServiceTest extends AbstractTestCase {
 		genre.setName( "Genre name" );
 
 		assertEquals( String.format( "<a href=\"%s%s/%s/\" title=\"Main page\">Test jPhoto</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getPortalPageLink() );
-		assertEquals( String.format( "<a class=\"member-link\" href=\"%s%s/%s/members/111/card/\" title=\"User name &sup3;: card\">User name &sup3;</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getUserCardLink( user ) );
+		assertEquals( String.format( "<a class=\"member-link\" href=\"%s%s/%s/members/111/card/\" title=\"User name: card\">User name</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getUserCardLink( user ) );
 //		assertEquals( String.format( "<a href=\"%s%s/%s/photos/members/111/\" title=\"User name &sup3;: all photos\">%s</a>", projectUrl, workerName, appPrefix, TranslatorUtils.translate( "Photos" ) ), entityLinkUtilsService.getPhotosByUserLink( user ) );
 		assertEquals( String.format( "<a href=\"%s%s/%s/photos/genres/555/\" title=\"All photos in genre 'Genre name'\">Genre name</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getPhotosByGenreLink( genre ) );
-		assertEquals( String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%s%s/%s/photos/members/111/genre/555/\" title=\"User name &sup3;: all photos in category 'Genre name'\">Genre name</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ) );
+		assertEquals( String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%s%s/%s/photos/members/111/genre/555/\" title=\"User name: all photos in category 'Genre name'\">Genre name</a>", projectUrl, workerName, appPrefix ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ) );
 //		assertEquals( String.format( "<a href=\"%s%s/%s/photos/type/2/\">%s</a>", projectUrl, workerName, appPrefix, TranslatorUtils.translate( "Models" ) ), entityLinkUtilsService.getPhotosByMembershipLink( UserMembershipType.MODEL )  );
 
 		final Date dateFrom = new Date( 1360101600000L ); // the first second of 2013-02-06
