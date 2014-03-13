@@ -11,6 +11,7 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
+import core.services.entry.ActivityStreamService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 
@@ -27,6 +28,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 	protected void runJob() throws Throwable {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final UserService userService = services.getUserService();
+		final ActivityStreamService activityStreamService = services.getActivityStreamService();
 
 		final List<User> users = userService.loadAll();
 
@@ -47,7 +49,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 					getLog().info( message );
 					addJobExecutionFinalMessage( message );
 
-					services.getActivityStreamService().saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
+					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
 				} else {
 					final String message = String.format( "Can not update member status. Id = # %s", user.getId() );
 					getLog().error( message );

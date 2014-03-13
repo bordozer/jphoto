@@ -29,21 +29,24 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 
 		final Element rootElement = document.getRootElement();
 
-		final int userId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID ).getText() );
-		user = services.getUserService().load( userId );
+		activityOfUserId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID ).getText() );
+		user = services.getUserService().load( activityOfUserId );
 
 		oldStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_OLD_STATUS_ID ).getText() ) );
 		newStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_NEW_STATUS_ID ).getText() ) );
+
 	}
 
 	public ActivityUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
 		super( ActivityType.USER_STATUS, services );
 
+		this.activityOfUserId = user.getId();
+		this.activityTime = activityTime;
+
 		this.user = user;
 		this.oldStatus = oldStatus;
 		this.newStatus = newStatus;
 
-		this.activityTime = activityTime;
 	}
 
 	@Override

@@ -39,6 +39,9 @@ public interface ActivityStreamService extends BaseEntityService<AbstractActivit
 	// TODO: Transactional
 	boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting );
 
+	// TODO: Transactional
+	boolean saveUserStatusChange( User user, UserStatus oldStatus, UserStatus newStatus, Date activityTime, Services services );
+
 	List<AbstractActivityStreamEntry> getActivityForPeriod( final Date dateFrom, final Date dateTo );
 
 	List<AbstractActivityStreamEntry> getLastActivities( final int qty );
@@ -48,6 +51,4 @@ public interface ActivityStreamService extends BaseEntityService<AbstractActivit
 	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final int qty );
 
 	void deleteEntriesOlderThen( final Date timeFrame );
-
-	boolean saveUserStatusChange( User user, UserStatus oldStatus, UserStatus newStatus, Date activityTime, Services services );
 }
