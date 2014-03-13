@@ -142,7 +142,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
-				, translated( String.format( "You have already voted when member rank is %s in category %s.", String.valueOf( userRankInGenre ), genre.getName() ) ) );
+				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), genre.getName() ) ) );
 	}
 
 	@Test
