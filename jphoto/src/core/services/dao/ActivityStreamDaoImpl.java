@@ -175,6 +175,8 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 				return new ActivityVotingForUserRankInGenre( user, activityTime, activityXML, services );
 			case USER_STATUS:
 				return new ActivityUserStatusChange( user, activityTime, activityXML, services );
+			case USER_RANK_IN_GENRE_CHANGED:
+				return new ActivityUserRankInGenreChanged( user, activityTime, activityXML, services );
 		}
 
 		final Photo photo = photoService.load( photoId );

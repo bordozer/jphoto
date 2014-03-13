@@ -15,7 +15,8 @@ public enum ActivityType {
 	, PHOTO_PREVIEW( 5, "Photo preview", SavedJobType.ACTIONS_GENERATION_VIEWS.getIcon() )
 	, FAVORITE_ACTION( 6, "Favorite action", SavedJobType.FAVORITES_GENERATION.getIcon() )
 	, VOTING_FOR_USER_RANK_IN_GENRE( 7, "Voting for user rank in genre", SavedJobType.RANK_VOTING_GENERATION.getIcon() )
-	, USER_STATUS( 8, "User status", SavedJobType.USER_STATUS.getIcon() )
+	, USER_STATUS( 8, "Member status", SavedJobType.USER_STATUS.getIcon() )
+	, USER_RANK_IN_GENRE_CHANGED( 9, "Member's rank in genre changed", SavedJobType.USER_GENRES_RANKS_RECALCULATING.getIcon() )
 	;
 
 	public final static List<ActivityType> SYSTEM_ACTIVITIES = newArrayList( ActivityType.values() );

@@ -10,7 +10,9 @@ import core.general.genre.Genre;
 import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.log.LogHelper;
+import core.services.entry.ActivityStreamService;
 import core.services.user.UserRankService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 
 import java.util.List;
@@ -28,8 +30,9 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 		final List<Integer> genreIds = services.getGenreService().load( services.getBaseSqlUtilsService().getGenresIdsSQL() ).getIds();
 
 		final UserRankService userRankService = services.getUserRankService();
-
+		final ActivityStreamService activityStreamService = services.getActivityStreamService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		for ( final User user : beingProcessedUsers ) {
 			final int userId = user.getId();
@@ -55,6 +58,8 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 						, userNewRank
 						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre )
 						, userCurrentRank ) );
+
+					activityStreamService.saveUserRankInGenreChanged( user, genre, userCurrentRank, userNewRank, dateUtilsService.getCurrentTime(), services );
 				}
 			}
 			increment();

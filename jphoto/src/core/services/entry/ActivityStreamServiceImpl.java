@@ -2,6 +2,7 @@ package core.services.entry;
 
 import core.enums.FavoriteEntryType;
 import core.general.activity.*;
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreview;
@@ -68,6 +69,11 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Override
 	public boolean saveUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
 		return save( new ActivityUserStatusChange( user, oldStatus, newStatus, activityTime, services ) );
+	}
+
+	@Override
+	public boolean saveUserRankInGenreChanged( final User user, final Genre genre, final int oldRank, final int newRank, final Date activityTime, final Services services ) {
+		return save( new ActivityUserRankInGenreChanged( user, genre, oldRank, newRank, activityTime, services ) );
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package core.services.entry;
 
 import core.enums.FavoriteEntryType;
 import core.general.activity.AbstractActivityStreamEntry;
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreview;
@@ -18,29 +19,23 @@ import java.util.List;
 
 public interface ActivityStreamService extends BaseEntityService<AbstractActivityStreamEntry>, IdsSqlSelectable {
 
-	// TODO: Transactional
 	boolean saveUserRegistration( final User user );
 
-	// TODO: Transactional
 	boolean savePhotoUpload( final Photo photo );
 
-	// TODO: Transactional
 	boolean savePhotoVoting( final User voter, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date currentTime );
 
-	// TODO: Transactional
 	boolean savePhotoComment( final PhotoComment comment );
 
-	// TODO: Transactional
 	boolean savePhotoPreview( final PhotoPreview preview );
 
-	// TODO: Transactional
 	boolean saveFavoriteAction( final int userId, final int favoriteEntryId, final Date time, final FavoriteEntryType entryType );
 
-	// TODO: Transactional
 	boolean saveVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting );
 
-	// TODO: Transactional
 	boolean saveUserStatusChange( User user, UserStatus oldStatus, UserStatus newStatus, Date activityTime, Services services );
+
+	boolean saveUserRankInGenreChanged( User user, Genre genre, int oldRank, int newRank, Date activityTime, Services services );
 
 	List<AbstractActivityStreamEntry> getActivityForPeriod( final Date dateFrom, final Date dateTo );
 
