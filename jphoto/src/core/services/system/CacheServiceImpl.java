@@ -211,6 +211,8 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 				return configurationService.getInt( ConfigurationKey.CACHE_LENGTH_RANK_IN_GENRE_POINTS );
 			case USER_GENRE_PHOTOS_QTY:
 				return configurationService.getInt( ConfigurationKey.CACHE_LENGTH_USER_PHOTOS_BY_GENRES );
+			case ACTIVITY_STREAM_ENTRY:
+				return configurationService.getInt( ConfigurationKey.CACHE_LENGTH_ACTIVITY_STREAM_ENTRY );
 		}
 
 		throw new IllegalArgumentException( String.format( "Invalid cache key: %s", key ) );

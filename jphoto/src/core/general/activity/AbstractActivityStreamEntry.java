@@ -3,6 +3,7 @@ package core.general.activity;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.interfaces.Cacheable;
 import core.services.security.Services;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -10,7 +11,7 @@ import org.dom4j.Element;
 
 import java.util.Date;
 
-public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
+public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity implements Cacheable {
 
 	private static final String ACTIVITY_XML_TAG_ROOT = "activity";
 	private static final String ACTIVITY_XML_TAG_USER_ID = "userId";

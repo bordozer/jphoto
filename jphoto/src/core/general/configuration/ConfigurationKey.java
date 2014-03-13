@@ -89,6 +89,7 @@ public enum ConfigurationKey {
 	, CACHE_LENGTH_USER_GENRE_RANK( 911, "1111", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.CACHE, "User rank in a photo category cache length" )
 	, CACHE_LENGTH_RANK_IN_GENRE_POINTS( 912, "200", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.CACHE, "Rank in a photo category points cache length" )
 	, CACHE_LENGTH_USER_PHOTOS_BY_GENRES( 913, "2000", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.CACHE, "User photos in a photo category quantity cache length" )
+	, CACHE_LENGTH_ACTIVITY_STREAM_ENTRY( 914, "2000", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.CACHE, "Activity stream entry cache length" )
 
 	, PHOTO_CARD_MAX_WIDTH( 1010, "1100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_CARD, "Photo card: resize photo image width to" )
 	, PHOTO_CARD_MAX_HEIGHT( 1011, "900", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_CARD, "Photo card: resize photo image height to" )

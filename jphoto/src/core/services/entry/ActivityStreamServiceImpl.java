@@ -2,6 +2,8 @@ package core.services.entry;
 
 import core.enums.FavoriteEntryType;
 import core.general.activity.*;
+import core.general.cache.CacheEntryFactory;
+import core.general.cache.CacheKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -12,6 +14,7 @@ import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserStatus;
 import core.services.dao.ActivityStreamDao;
 import core.services.security.Services;
+import core.services.system.CacheService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
@@ -30,6 +33,9 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private CacheService<AbstractActivityStreamEntry> cacheService;
 
 	@Override
 	public boolean saveUserRegistration( final User user ) {
@@ -83,7 +89,12 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Override
 	public AbstractActivityStreamEntry load( final int id ) {
-		return activityStreamDao.load( id );
+		return cacheService.getEntry( CacheKey.ACTIVITY_STREAM_ENTRY, id, new CacheEntryFactory<AbstractActivityStreamEntry>() {
+			@Override
+			public AbstractActivityStreamEntry createEntry() {
+				return activityStreamDao.load( id );
+			}
+		} );
 	}
 
 	@Override
