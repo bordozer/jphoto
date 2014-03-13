@@ -214,7 +214,7 @@
 
 	<translation>
 		<nerd>Photo albums</nerd>
-		<ru><![CDATA[Входит в альбомы]]></ru>
+		<ru><![CDATA[Фото альбомы]]></ru>
 	</translation>
 
 	<translation>
@@ -929,7 +929,7 @@
 
 	<translation>
 		<nerd>Pages</nerd>
-		<ru><![CDATA[Страницы]]></ru>
+		<ru><![CDATA[Страниц]]></ru>
 	</translation>
 
 	<translation>
@@ -1890,6 +1890,41 @@
 	<translation>
 		<nerd>Active / Performed</nerd>
 		<ru><![CDATA[Акт. / Выполн.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show member activity stream</nerd>
+		<ru><![CDATA[Показать ленту событий пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Registered</nerd>
+		<ru><![CDATA[Дата регистрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Favorites</nerd>
+		<ru><![CDATA[Избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 </translations>

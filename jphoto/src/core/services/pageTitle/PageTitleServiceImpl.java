@@ -61,7 +61,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	@Override
 	public PageTitleData getActivityStreamData( final ActivityType activityType ) {
-		final String rootTranslated = translatorService.translate( "Activity Stream" );
+		final String rootTranslated = translatorService.translate( "Activity stream" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
 
@@ -77,7 +77,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	/*@Override
 	public PageTitleData getPhotoActivityStreamData( final Photo photo ) {
-		final String rootTranslated = translatorService.translate( "Activity Stream" );
+		final String rootTranslated = translatorService.translate( "Activity stream" );
 
 		final User user = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
