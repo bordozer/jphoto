@@ -15,7 +15,7 @@ public interface UserDao extends BaseEntityDao<User> {
 
 	User loadByEmail( final String userEmail );
 
-	boolean setUserMembership( final int userId, final UserStatus userStatus );
+	boolean setUserStatus( final int userId, final UserStatus userStatus );
 
 	int getUserCount();
 

@@ -33,7 +33,7 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 
 	UserAvatar getUserAvatar( final int userId );
 
-	boolean setUserMembership( final int userId, final UserStatus userStatus );
+	boolean setUserStatus( final int userId, final UserStatus userStatus );
 
 	int getUserCount();
 

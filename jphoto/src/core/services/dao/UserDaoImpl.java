@@ -146,7 +146,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 	}
 
 	@Override
-	public boolean setUserMembership( final int userId, final UserStatus userStatus ) {
+	public boolean setUserStatus( final int userId, final UserStatus userStatus ) {
 		final String sql = String.format( "UPDATE %s SET %s = :userStatusId WHERE %s=:useId;"
 			, TABLE_USERS, TABLE_COLUMN_USER_STATUS, ENTITY_ID );
 

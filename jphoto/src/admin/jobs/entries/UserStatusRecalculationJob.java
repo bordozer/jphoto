@@ -11,6 +11,7 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
+import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 
 import java.util.List;
@@ -25,8 +26,9 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 	@Override
 	protected void runJob() throws Throwable {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+		final UserService userService = services.getUserService();
 
-		final List<User> users = services.getUserService().loadAll();
+		final List<User> users = userService.loadAll();
 
 		for ( final User user : users ) {
 
@@ -37,11 +39,11 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 			final int photoQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
 			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
-				if ( services.getUserService().setUserMembership( user.getId(), UserStatus.MEMBER ) ) {
+				if ( userService.setUserStatus( user.getId(), UserStatus.MEMBER ) ) {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
 
-					final String message = String.format( "Member %s has got new status: MEMBER", user.getId() );
+					final String message = String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() );
 					getLog().info( message );
 					addJobExecutionFinalMessage( message );
 

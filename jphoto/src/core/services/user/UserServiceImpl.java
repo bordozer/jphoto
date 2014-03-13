@@ -133,8 +133,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean setUserMembership( final int userId, final UserStatus userStatus ) {
-		return userDao.setUserMembership( userId, userStatus );
+	public boolean setUserStatus( final int userId, final UserStatus userStatus ) {
+		return userDao.setUserStatus( userId, userStatus );
 	}
 
 	@Override
