@@ -46,7 +46,7 @@ public class MenuServiceImpl implements MenuService {
 		createPhotosMenu( menus );
 //		createPhotosByGenreMenu( menus );
 		createBestPhotosMenu( menus );
-		createAuthorsMenu( menus );
+		createMembersMenu( menus );
 		createLoggedUserMenu( menus, user );
 		createUserBookmarksMenu( menus, user );
 		createMessageMenu( menus, user );
@@ -71,7 +71,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( thisMonthPhotos() );
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.PHOTOS_URL ) );
 
-		menus.put( new MenuItem( translatorService.translate( "Photos" ), menuItem.getLink() ), menuItems );
+		menus.put( new MenuItem( menuItem.getCaption(), menuItem.getLink() ), menuItems );
 	}
 
 	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus ) {
@@ -105,7 +105,7 @@ public class MenuServiceImpl implements MenuService {
 		menus.put( menuItem, menuItems );
 	}
 
-	private void createAuthorsMenu( final Map<MenuItem, List<MenuItem>> menus ) {
+	private void createMembersMenu( final Map<MenuItem, List<MenuItem>> menus ) {
 		final List<MenuItem> menuItems = newArrayList();
 
 		final MenuItem menuItem = allUsersMenu();
@@ -269,13 +269,13 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNames() ) );
+		final String caption = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural() ) );
 		final String link = urlUtilsService.getPhotosByMembership( membershipType, url );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem membershipBestMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = translatorService.translate( "Best of $1", StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNames() ) ) );
+		final String caption = translatorService.translate( String.format( "Best photos of %s", membershipType.getNamePlural() ) );
 		final String link = urlUtilsService.getPhotosByMembershipBest( membershipType, url );
 		return new MenuItem( caption, link );
 	}
@@ -443,7 +443,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem allPhotosMenu() {
-		final String caption = translatorService.translate( "All photos" );
+		final String caption = translatorService.translate( "Photo gallery" );
 		final String link = urlUtilsService.getAllPhotosLink();
 		return new MenuItem( caption, link );
 	}

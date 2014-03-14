@@ -263,7 +263,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	@Override
 	public PageTitleData getPhotosByMembershipType( final UserMembershipType membershipType ) {
 		final String rootTranslated = getPhotoRootTranslated();
-		String membershipTypeName = StringUtilities.toUpperCaseFirst( membershipType.getNames() );
+		String membershipTypeName = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural() ) );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, membershipTypeName );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), membershipTypeName );

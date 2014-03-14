@@ -106,7 +106,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 
 		if ( criterias.getMembershipType() != null ) {
-			builder.append( translatorService.translate( " uploaded by users with membership type ' $1 '", criterias.getMembershipType().getName() ) );
+			builder.append( translatorService.translate( " uploaded by users with membership type ' $1 '", translatorService.translate( criterias.getMembershipType().getName() ) ) );
 		}
 
 		builder.append( "<br />" );

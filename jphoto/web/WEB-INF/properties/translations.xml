@@ -1069,7 +1069,7 @@
 
 	<translation>
 		<nerd>Genres</nerd>
-		<ru><![CDATA[Раздемы фотографии]]></ru>
+		<ru><![CDATA[Разделы фотографии]]></ru>
 	</translation>
 
 	<translation>
@@ -1910,6 +1910,21 @@
 	<translation>
 		<nerd>Favorites</nerd>
 		<ru><![CDATA[Избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>author plural</nerd>
+		<ru><![CDATA[Авторы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>model plural</nerd>
+		<ru><![CDATA[Модели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>makeup master plural</nerd>
+		<ru><![CDATA[Визажисты]]></ru>
 	</translation>
 
 </translations>

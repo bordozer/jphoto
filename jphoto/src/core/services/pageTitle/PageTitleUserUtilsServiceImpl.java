@@ -96,7 +96,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUsersByMembershipType( final UserMembershipType membershipType ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = StringUtilities.toUpperCaseFirst( membershipType.getNames() );
+		final String tran = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural() ) );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );

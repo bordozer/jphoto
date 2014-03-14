@@ -2,18 +2,18 @@ package core.general.user;
 
 public enum UserMembershipType {
 
-	AUTHOR( 1, "author", "authors" )
-	, MODEL( 2, "model", "models" )
-	, MAKEUP_MASTER( 3, "makeup master", "makeup masters" )
+	AUTHOR( 1, "author", "author plural" )
+	, MODEL( 2, "model", "model plural" )
+	, MAKEUP_MASTER( 3, "makeup master", "makeup master plural" )
 	;
 	private final int id;
 	private final String name;
-	private final String names;
+	private final String namePlural;
 
-	UserMembershipType( int id, String name, String names ) {
+	UserMembershipType( int id, String name, String namePlural ) {
 		this.id = id;
 		this.name = name;
-		this.names = names;
+		this.namePlural = namePlural;
 	}
 
 	public int getId() {
@@ -21,11 +21,11 @@ public enum UserMembershipType {
 	}
 
 	public String getName() {
-		return name; // TODO: translate
+		return name;
 	}
 
-	public String getNames() {
-		return names; // TODO: translate
+	public String getNamePlural() {
+		return namePlural;
 	}
 
 	public static UserMembershipType getById( String id ) {
