@@ -1927,4 +1927,19 @@
 		<ru><![CDATA[Визажисты]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Best photos of author plural</nerd>
+		<ru><![CDATA[Лучшие работы авторов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best photos of model plural</nerd>
+		<ru><![CDATA[Лучшие работы моделей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best photos of makeup master plural</nerd>
+		<ru><![CDATA[Лучшие работы визажистов]]></ru>
+	</translation>
+
 </translations>
