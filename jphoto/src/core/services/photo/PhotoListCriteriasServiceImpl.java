@@ -49,7 +49,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 			return builder.toString();
 		}
 
-		builder.append( translatorService.translate( "Photo gallery" ) );
+		if ( criterias.isTopBestPhotoList() ) {
+			builder.append( translatorService.translate( "Photos" ) );
+		} else {
+			builder.append( translatorService.translate( "Photo gallery" ) );
+		}
 
 		if ( criterias.getUser() != null ) {
 			builder.append( " " ).append( translatorService.translate( "photos of member $1", criterias.getUser().getName() ) );
