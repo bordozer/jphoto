@@ -1229,7 +1229,7 @@
 
 	<translation>
 		<nerd>The photos $1 has voted recently for</nerd>
-		<ru><![CDATA[Работы, за которые $1 недавно оценил]]></ru>
+		<ru><![CDATA[Работы, которые $1 недавно оценил]]></ru>
 	</translation>
 
 	<translation>
@@ -1274,7 +1274,7 @@
 
 	<translation>
 		<nerd>Last photos of visitors who viewed $1's photos recently</nerd>
-		<ru><![CDATA[Последние работы посетителей недавно смотревших работы $1]]></ru>
+		<ru><![CDATA[Последние работы посетителей, недавно смотревших работы $1]]></ru>
 	</translation>
 
 	<translation>
