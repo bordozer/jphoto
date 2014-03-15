@@ -15,7 +15,7 @@
 		<div class="floatleft">
 
 			<div class="floatleft" style="width: 30%;">
-				<table:table width="250">
+				<table:table width="350">
 
 					<table:separatorInfo colspan="2" title="${eco:translate('System')}" />
 
