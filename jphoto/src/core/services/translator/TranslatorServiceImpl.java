@@ -138,6 +138,11 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
+	public void reloadTranslationsAjax() throws DocumentException {
+		reloadTranslations();
+	}
+
+	@Override
 	public TranslationDTO getTranslationAjax( final String nerd ) {
 
 		final Map<String, String> translations = newHashMap();

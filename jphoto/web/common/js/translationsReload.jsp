@@ -18,7 +18,7 @@ function reloadTranslations() {
 		return;
 	}
 
-	jsonRPC.translatorService.reloadTranslations();
+	jsonRPC.translatorService.reloadTranslationsAjax();
 	<%--document.location.reload();--%>
 	notifySuccessMessage( "${eco:translate('Translations have been reloaded')}" );
 }

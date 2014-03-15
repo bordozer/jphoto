@@ -103,10 +103,8 @@ public class TranslatorController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
-	public String reloadTranslationsAjax() throws DocumentException {
+	public void reloadTranslationsAjax() throws DocumentException {
 		translatorService.reloadTranslations();
-
-		return "/admin/control/emptyResponse";
 	}
 
 	private Map<NerdKey, TranslationData> filterByFirstLetter( final Map<NerdKey, TranslationData> translationsMap, final String letter ) {
