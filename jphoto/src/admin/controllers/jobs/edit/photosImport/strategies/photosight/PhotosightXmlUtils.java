@@ -120,7 +120,13 @@ public class PhotosightXmlUtils {
 		while ( photosIterator.hasNext() ) {
 			final Element photoElement = ( Element ) photosIterator.next();
 			final int photosightPhotoId = NumberUtils.convertToInt( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ID ).getText() );
-			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText() ) );
+
+			final String savedCategoryId = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
+			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( savedCategoryId ) );
+			if ( category == null ) {
+				throw new BaseRuntimeException( String.format( "User #%d info file '%s' contains unknown categoryId '%s'. Note: delete file to import photos again", photosightUser.getId(), userInfoFile.getAbsolutePath(), savedCategoryId ) );
+			}
+
 			final String photoName = StringEscapeUtils.unescapeXml( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_NAME ).getText() );
 
 			final String textUploadTime = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_UPLOAD_TIME ).getText();
