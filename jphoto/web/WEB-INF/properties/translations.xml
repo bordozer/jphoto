@@ -1989,7 +1989,7 @@
 
 	<translation>
 		<nerd>Membership</nerd>
-		<ru><![CDATA[Тип членства импортируемого пользователя]]></ru>
+		<ru><![CDATA[Тип членства]]></ru>
 	</translation>
 
 	<translation>
@@ -2009,7 +2009,12 @@
 
 	<translation>
 		<nerd>User name</nerd>
-		<ru><![CDATA[Имя импортируемого пользователя]]></ru>
+		<ru><![CDATA[Имя пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Being imported user</nerd>
+		<ru><![CDATA[Импортируемый пользователь]]></ru>
 	</translation>
 
 	<translation>
