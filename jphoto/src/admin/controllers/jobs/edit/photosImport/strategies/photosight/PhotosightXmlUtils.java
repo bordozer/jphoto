@@ -1,6 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
 import core.exceptions.BaseRuntimeException;
+import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.dom4j.Document;
@@ -110,7 +112,10 @@ public class PhotosightXmlUtils {
 		output.close();
 	}
 
-	public static List<PhotosightPhoto> getPhotosFromPhotosightUserInfoFile( final PhotosightUser photosightUser, final DateUtilsService dateUtilsService ) throws IOException, DocumentException {
+	public static List<PhotosightPhoto> getPhotosFromPhotosightUserInfoFile( final PhotosightUser photosightUser, final Services services ) throws IOException, DocumentException {
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final SAXReader reader = new SAXReader( false );
 		final File userInfoFile = getUserInfoFile( photosightUser );
 		final Document document = reader.read( userInfoFile );
@@ -124,7 +129,11 @@ public class PhotosightXmlUtils {
 			final String savedCategoryId = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
 			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( savedCategoryId ) );
 			if ( category == null ) {
-				throw new BaseRuntimeException( String.format( "User #%d info file '%s' contains unknown categoryId '%s'. Note: delete file to import photos again", photosightUser.getId(), userInfoFile.getAbsolutePath(), savedCategoryId ) );
+				final String message = translatorService.translate( "File '$1' contains unknown photosight categoryId '$2'. Note: file deletion may solve the problem because the import will be done again"
+					, userInfoFile.getAbsolutePath()
+					, savedCategoryId
+				);
+				throw new BaseRuntimeException( message );
 			}
 
 			final String photoName = StringEscapeUtils.unescapeXml( photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_NAME ).getText() );

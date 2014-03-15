@@ -276,7 +276,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 	private List<PhotosightPhoto> getCachedLocallyPhotosightPhotos( final PhotosightUser photosightUser ) throws IOException {
 		try {
-			return PhotosightXmlUtils.getPhotosFromPhotosightUserInfoFile( photosightUser, services.getDateUtilsService() );
+			return PhotosightXmlUtils.getPhotosFromPhotosightUserInfoFile( photosightUser, services );
 		} catch ( DocumentException e ) {
 			final String message = String.format( "Error reading user info file: %s<br />%s", PhotosightXmlUtils.getUserInfoFile( photosightUser ), e.getMessage() );
 			job.addJobExecutionFinalMessage( message );

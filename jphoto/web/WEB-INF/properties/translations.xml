@@ -1977,4 +1977,9 @@
 		<ru><![CDATA[Лучшие работы]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>File '$1' contains unknown photosight categoryId '$2'. Note: file deletion may solve the problem because the import will be done again</nerd>
+		<ru><![CDATA[Файл '$1' содержит название рубрики фотосайта '$2' которая не может быть идентифицирована (отсутствует в захрдкоженных значениях рубрик фотосайта PhotosightCategory). Удаление папки пользователя может решить проблему т.к. в этом случае все фотографии будут импортированы заново]]></ru>
+	</translation>
+
 </translations>
