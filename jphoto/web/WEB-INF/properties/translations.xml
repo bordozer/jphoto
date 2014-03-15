@@ -1564,7 +1564,12 @@
 
 	<translation>
 		<nerd>marks</nerd>
-		<ru><![CDATA[оценки]]></ru>
+		<ru><![CDATA[баллы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>of marks</nerd>
+		<ru><![CDATA[баллов]]></ru>
 	</translation>
 
 	<translation>
@@ -2097,27 +2102,27 @@
 		<ru><![CDATA[Прервать выполнение задачи]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Appreciated photos</nerd>
+		<ru><![CDATA[Оцененные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photos</nerd>
+		<ru><![CDATA[фото]]></ru>
+	</translation>
+
 	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-	</translation>
+	</translation>-->
 
-	<translation>
+	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-	</translation>
+	</translation>-->
 
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
+	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>-->

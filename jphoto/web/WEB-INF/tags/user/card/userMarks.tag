@@ -19,13 +19,13 @@
 				<links:photosByUserByVotingCategory user="${user}" votingCategory="${marksByCategoryInfo.photoVotingCategory}" />
 			</table:tdright>
 			
-			<table:tddata>
+			<table:td cssClass="textright">
 				<span title="${eco:translate3('$1 marked $2 photo(s) as $3', user.nameEscaped, marksByCategoryInfo.quantity, marksByCategoryInfo.photoVotingCategory.name)}">${marksByCategoryInfo.quantity} ${eco:translate('photos')}</span>
-			</table:tddata>
+			</table:td>
 
-			<table:tddata>
-				<span title="${eco:translate2('Summary marks set for $1: $2', marksByCategoryInfo.photoVotingCategory.name, marksByCategoryInfo.sumMark)}">${marksByCategoryInfo.sumMark} ${eco:translate('marks')}</span>
-			</table:tddata>
+			<table:td cssClass="textright">
+				<span title="${eco:translate2('Summary marks set for $1: $2', marksByCategoryInfo.photoVotingCategory.name, marksByCategoryInfo.sumMark)}">${marksByCategoryInfo.sumMark} ${eco:translate('of marks')}</span>
+			</table:td>
 
 		</table:trinfo>
 	</c:forEach>

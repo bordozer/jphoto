@@ -30,7 +30,7 @@
 
 	<table:tr>
 
-		<table:td width="30%" cssClass="vlaign">
+		<table:td width="${width}" cssClass="vlaign">
 			<userCard:userStatistics user="${user}" userStatistic="${userStatistic}"/>
 		</table:td>
 
