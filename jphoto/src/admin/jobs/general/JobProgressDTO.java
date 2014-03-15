@@ -79,6 +79,10 @@ public class JobProgressDTO {
 	}
 
 	public int getJobExecutionPercentage() {
+		if ( total == 0 ) {
+			return 0;
+		}
+
 		return NumberUtils.floor( 100 * current / total );
 	}
 }

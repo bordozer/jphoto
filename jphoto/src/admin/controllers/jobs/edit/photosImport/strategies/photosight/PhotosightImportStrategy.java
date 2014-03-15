@@ -62,8 +62,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			importPhotosightUserPhotos( photosightUser );
 
-			log.debug( String.format( "Import photos from photosight for userId: %d", photosightUser.getId() ) );
-
 			if( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
@@ -74,7 +72,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		final User user = findByNameOrCreateUser( photosightUser, importParameters );
 		if ( user == null ) {
-			log.info( String.format( "User %s can not be created. Skipping photo import.", photosightUser ) );
+			log.error( String.format( "User %s can not be created. Skipping user's photos import.", photosightUser ) );
 			return;
 		}
 
@@ -255,7 +253,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUser );
 
 		if ( StringUtils.isEmpty( photosightUserName ) ) {
-			log.error( String.format( "Can not extract photosight user name from page content. Photosight user: %s.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) ) );
+			final String message = String.format( "Can not extract photosight user name from page content. Photosight user: %s.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
+			log.error( message );
+			job.addJobExecutionFinalMessage( message );
+			throw new BaseRuntimeException( message );
 		}
 
 		return photosightUserName;
