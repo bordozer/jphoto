@@ -153,8 +153,9 @@
 						.dialog( "open" );
 			}
 		</script>
-	</c:if>
 
+		<script type="text/javascript" src="<c:url value="/common/js/translationsReload.jsp" /> "></script>
+	</c:if>
 
 	<jsp:doBody/>
 

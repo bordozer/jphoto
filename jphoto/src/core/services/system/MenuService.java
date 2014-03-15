@@ -1,7 +1,7 @@
 package core.services.system;
 
 import core.general.user.User;
-import elements.MenuItem;
+import elements.menus.MenuItem;
 
 import java.util.List;
 import java.util.Map;

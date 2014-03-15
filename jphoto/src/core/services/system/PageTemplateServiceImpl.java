@@ -17,7 +17,7 @@ import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
-import elements.MenuItem;
+import elements.menus.MenuItem;
 import elements.PageModel;
 import elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;

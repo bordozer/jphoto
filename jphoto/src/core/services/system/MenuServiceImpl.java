@@ -10,7 +10,7 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import elements.MenuItem;
+import elements.menus.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.StringUtilities;
 
@@ -242,6 +242,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( genresMenu() );
 		menuItems.add( votingCategoriesMenu() );
 		menuItems.add( translatorMenu() );
+		menuItems.add( reloadTranslatorMenu() );
 		menuItems.add( controlPanelMenu() );
 		menuItems.add( upgradeMenu() );
 
@@ -296,6 +297,11 @@ public class MenuServiceImpl implements MenuService {
 		final String caption = translatorService.translate( "Translator" );
 		final String link = urlUtilsService.getAdminTranslatorLink();
 		return new MenuItem( caption, link );
+	}
+
+	private MenuItem reloadTranslatorMenu() {
+		final String caption = translatorService.translate( "Reload translations" );
+		return MenuItem.jsFunctionLinkMenu( caption, "reloadTranslations(); return false;" );
 	}
 
 	private MenuItem controlPanelMenu() {
