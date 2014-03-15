@@ -17,6 +17,7 @@ import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -148,11 +149,11 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case PHOTOSIGHT:
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
-				builder.append( translatorService.translate( "Photosight user ids" ) ).append( ": " ).append( photosightParameters.getPhotosightUserIds() ).append( "<br />" );
+				builder.append( translatorService.translate( "Photosight user ids" ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
 				builder.append( translatorService.translate( "Being imported user" ) ).append( ": " ).append( "<br />" );
 				builder.append( "&nbsp;" ).append( translatorService.translate( "User name" ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
 				builder.append( "&nbsp;" ).append( translatorService.translate( "Gender" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName() ) ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Membership" ) ).append( ": " ).append( services.getTranslatorService().translate( photosightParameters.getMembershipType().getName() ) ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Membership" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName() ) ).append( "<br />" );
 				builder.append( translatorService.translate( "Import comments" ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No" ) ).append( "<br />" );
 				builder.append( translatorService.translate( "Delay between requests" ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
 
