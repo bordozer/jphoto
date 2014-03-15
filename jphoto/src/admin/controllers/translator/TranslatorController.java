@@ -6,6 +6,7 @@ import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -99,6 +100,13 @@ public class TranslatorController {
 		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
 
 		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
+	public String reloadTranslationsAjax() throws DocumentException {
+		translatorService.reloadTranslations();
+
+		return "/admin/control/emptyResponse";
 	}
 
 	private Map<NerdKey, TranslationData> filterByFirstLetter( final Map<NerdKey, TranslationData> translationsMap, final String letter ) {

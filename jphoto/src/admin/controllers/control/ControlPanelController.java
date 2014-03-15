@@ -86,13 +86,13 @@ public class ControlPanelController {
 		return getRedirectUrl();
 	}
 
-	@RequestMapping( method = RequestMethod.POST, value = "/reload-translations/" )
+	/*@RequestMapping( method = RequestMethod.POST, value = "/reload-translations/" )
 	public String reloadTranslations( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) throws DocumentException {
 
 		translatorService.initTranslations();
 
 		return getRedirectUrl();
-	}
+	}*/
 
 	@RequestMapping( method = RequestMethod.POST, value = "/clear-cache/" )
 	public String clearSystemCache( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) throws DocumentException {

@@ -31,5 +31,7 @@ public interface TranslatorService {
 
 	void initTranslations() throws DocumentException;
 
+	void reloadTranslations() throws DocumentException;
+
 	TranslationDTO getTranslationAjax( final String nerd );
 }

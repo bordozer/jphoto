@@ -124,11 +124,17 @@ public class TranslatorServiceImpl implements TranslatorService {
 	@Override
 	public void initTranslations() throws DocumentException {
 
-		untranslatedMap.clear();
-
 		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );
 
 		translator = TranslationsReader.getTranslator( translationsFile, systemVarsService );
+	}
+
+	@Override
+	public void reloadTranslations() throws DocumentException {
+
+		untranslatedMap.clear();
+
+		initTranslations();
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public class UserLockController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public UserLockModel userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
-		final UserLockModel model = new UserLockModel( userId );
-		return model;
+		return new UserLockModel( userId );
 	}
 }

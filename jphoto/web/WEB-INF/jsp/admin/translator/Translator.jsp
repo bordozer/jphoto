@@ -3,12 +3,12 @@
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.List" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
+<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 
 <jsp:useBean id="translatorModel" type="admin.controllers.translator.TranslatorModel" scope="request"/>
 
@@ -132,6 +132,12 @@
 						</table:tr>
 					</c:if>
 				</c:forEach>
+
+				<table:tr>
+					<table:td colspan="2">
+						<admin:reloadTranslationsButton />
+					</table:td>
+				</table:tr>
 
 			</table:table>
 

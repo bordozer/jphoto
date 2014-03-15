@@ -4,6 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
+<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="controlPanelModel" type="admin.controllers.control.ControlPanelModel" scope="request"/>
@@ -28,8 +29,7 @@
 
 					<table:tr>
 						<table:td cssClass="textcentered">
-							<html:submitButton id="reload-translations" caption_t="Reload translations"
-											   onclick="return submitControlPanelForm( 'reload-translations', '${eco:translate('Reload translations?')}' );"/>
+							<admin:reloadTranslationsButton />
 						</table:td>
 					</table:tr>
 
