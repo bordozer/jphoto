@@ -234,8 +234,8 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public PhotoList getUserTeamMemberLastPhotos( final int userId, final UserTeamMember userTeamMember, final Map<UserTeamMember, Integer> teamMemberPhotosQtyMap ) {
 		final int photosQty = teamMemberPhotosQtyMap.get( userTeamMember );
-		final String photoListTitle = translatorService.translate( "Last photos with $1, $2 - $3 photos"
-			, StringUtilities.escapeHtml( userTeamMember.getName() ), userTeamMember.getTeamMemberType().getNameTranslated(), String.valueOf( photosQty ) );
+		final String photoListTitle = translatorService.translate( "Last photos with $1 $2 - $3 photos"
+			, translatorService.translate( userTeamMember.getTeamMemberType().getName() ), StringUtilities.escapeHtml( userTeamMember.getName() ), String.valueOf( photosQty ) );
 		final String userTeamMemberCardLink = urlUtilsService.getUserTeamMemberCardLink( userId, userTeamMember.getId() );
 
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserTeamMemberLastPhotosQuery( userId, userTeamMember.getId(), getPagingModel() );

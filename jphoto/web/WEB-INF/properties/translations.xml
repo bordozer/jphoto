@@ -2112,15 +2112,30 @@
 		<ru><![CDATA[фото]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Model</nerd>
+		<ru><![CDATA[Модель]]></ru>
+	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Photograph</nerd>
+		<ru><![CDATA[Фотограф]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Makeup master</nerd>
+		<ru><![CDATA[Визажист]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Hair dresser</nerd>
+		<ru><![CDATA[Парикмахер]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos with $1 $2 - $3 photos</nerd>
+		<ru><![CDATA[Последние работы с $1 $2 - $3 шт]]></ru>
+	</translation>
 
 	<!--<translation>
 		<nerd></nerd>
