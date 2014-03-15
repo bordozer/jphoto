@@ -53,8 +53,7 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	public String getDisplayActivityDescription() {
 		final TranslatorService translatorService = services.getTranslatorService();
 
-		return translatorService.translate( "$1: the status in the club has been changed from $2 to $3"
-			, activityOfUser.getNameEscaped()
+		return translatorService.translate( "the status in the club has been changed from $1 to $2"
 			, translatorService.translate( oldStatus.getName() )
 			, translatorService.translate( newStatus.getName() )
 		);

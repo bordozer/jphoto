@@ -1942,4 +1942,29 @@
 		<ru><![CDATA[Лучшие работы визажистов]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>the status in the club has been changed from $1 to $2</nerd>
+		<ru><![CDATA[статус в клубе изменен с $1 на $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>candidate</nerd>
+		<ru><![CDATA[кандидат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>member</nerd>
+		<ru><![CDATA[член клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 </translations>
