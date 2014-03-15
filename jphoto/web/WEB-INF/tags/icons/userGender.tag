@@ -8,4 +8,4 @@
 
 <c:set var="maleGenderId" value="<%=UserGender.MALE.getId()%>" />
 
-<html:img id="genderIcon${user.id}" src="/icons16/${user.gender.id == maleGenderId ? 'male.png' : 'female.png'}" width="16" height="16" alt="${user.gender.nameTranslated}" />
+<html:img id="genderIcon${user.id}" src="/icons16/${user.gender.id == maleGenderId ? 'male.png' : 'female.png'}" width="16" height="16" alt="${eco:translate(user.gender.name)}" />

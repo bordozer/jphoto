@@ -103,9 +103,10 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 		if ( jobExecutionStatusesToDelete.size() < JobExecutionStatus.values().length ) {
 			builder.append( "<br />" );
 			for ( final JobExecutionStatus jobExecutionStatus : jobExecutionStatusesToDelete ) {
+				final String execStatusTranslated = translatorService.translate( jobExecutionStatus.getName() );
 				final String img = String.format( "<img src='%s/jobExecutionStatus/%s' height='16' title='%s'> "
-					, services.getUrlUtilsService().getSiteImagesPath(), jobExecutionStatus.getIcon(), jobExecutionStatus.getNameTranslated() );
-				builder.append( img ).append( jobExecutionStatus.getNameTranslated() ).append( "</li>" );
+					, services.getUrlUtilsService().getSiteImagesPath(), jobExecutionStatus.getIcon(), execStatusTranslated );
+				builder.append( img ).append( execStatusTranslated ).append( "</li>" );
 				builder.append( "<br />" );
 			}
 		} else {

@@ -1982,4 +1982,99 @@
 		<ru><![CDATA[Файл '$1' содержит название рубрики фотосайта '$2' которая не может быть идентифицирована (отсутствует в захрдкоженных значениях рубрик фотосайта PhotosightCategory). Удаление папки пользователя может решить проблему т.к. в этом случае все фотографии будут импортированы заново]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Job progress</nerd>
+		<ru><![CDATA[Прогресс задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Membership</nerd>
+		<ru><![CDATA[Тип членства импортируемого пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import comments</nerd>
+		<ru><![CDATA[Импортировать комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delay between requests</nerd>
+		<ru><![CDATA[Задержка между запросами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Pages to process</nerd>
+		<ru><![CDATA[Импортировать страниц]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User name</nerd>
+		<ru><![CDATA[Имя импортируемого пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Female</nerd>
+		<ru><![CDATA[Женский]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Male</nerd>
+		<ru><![CDATA[Мужской]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>female</nerd>
+		<ru><![CDATA[женский]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>male</nerd>
+		<ru><![CDATA[мужской]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Process all pages</nerd>
+		<ru><![CDATA[Все страницы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Start time</nerd>
+		<ru><![CDATA[Время начала выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Jobs is performed successfully</nerd>
+		<ru><![CDATA[Задача выполнена успешно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Performed $1 from $2</nerd>
+		<ru><![CDATA[Выполнено $1 из $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job parameters</nerd>
+		<ru><![CDATA[Параметры задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Execution time</nerd>
+		<ru><![CDATA[Время выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>No messages found</nerd>
+		<ru><![CDATA[Записей в логе выполнения задачи нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Execution log</nerd>
+		<ru><![CDATA[Лог выполнения задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photosight user ids</nerd>
+		<ru><![CDATA[ID пользователей фотосайта]]></ru>
+	</translation>
+
 </translations>

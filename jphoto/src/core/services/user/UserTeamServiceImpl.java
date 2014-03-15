@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.dao.UserTeamMemberDao;
+import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class UserTeamServiceImpl implements UserTeamService {
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean save( final UserTeamMember entry ) {
@@ -107,7 +111,7 @@ public class UserTeamServiceImpl implements UserTeamService {
 			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
 			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
 			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
-			userPickerDTO.setUserGender( user.getGender().getNameTranslated() );
+			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName() ) );
 
 			userPickerDTOs.add( userPickerDTO );
 		}

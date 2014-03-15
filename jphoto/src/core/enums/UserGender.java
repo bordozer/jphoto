@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum UserGender {
 
 	MALE( 1, "male" )
@@ -22,10 +20,6 @@ public enum UserGender {
 
 	public String getName() {
 		return name;
-	}
-
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static UserGender getById( final int id ) {

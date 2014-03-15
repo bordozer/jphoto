@@ -52,10 +52,6 @@ public enum JobExecutionStatus implements Identifiable {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public String getIcon() {
 		return icon;
 	}

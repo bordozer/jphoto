@@ -88,7 +88,7 @@
 	<c:forEach var="jobExecutionStatus" items="${jobExecutionStatusValues}">
 		<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == jobExecutionStatus.id}">${selectedIconCss}</c:if>">
 			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
-				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${jobExecutionStatus.nameTranslated}"/>
+				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}"/>
 			</a>
 		</div>
 	</c:forEach>
@@ -253,7 +253,7 @@
 							</c:if>
 
 							<c:if test="${isJobFinishedWithAnyResult}">
-								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${jobExecutionStatus.nameTranslated}" onclick="showJobMessage( ${jobEntryId} );"/>
+								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( ${jobEntryId} );"/>
 
 								<c:set var="bgColor" value="#CCE6FF"/>
 								<c:set var="fontColor" value="navy"/>

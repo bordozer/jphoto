@@ -34,6 +34,8 @@
 <c:set var="current" value="${jobExecutionHistoryEntry.currentJobStep}" />
 <c:set var="total" value="${jobExecutionHistoryEntry.totalJobSteps}" />
 
+<c:set var="jobStatusNameTranslated" value="${eco:translate(jobStatus.name)}"/>
+
 <tags:page pageModel="${command.pageModel}">
 
 	<c:set var="job" value="${command.job}"/>
@@ -48,12 +50,12 @@
 		<h3>${eco:translate(jobType.name)}</h3>
 
 		<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/">
-			<html:img id="testDataGenerationFinishedImg" src="jobExecutionStatus/big/${jobStatus.icon}" width="128" height="128" alt="${jobStatus.nameTranslated}"/>
+			<html:img id="testDataGenerationFinishedImg" src="jobExecutionStatus/big/${jobStatus.icon}" width="128" height="128" alt="${jobStatusNameTranslated}"/>
 		</a>
 
 		<br/>
 		<br/>
-		<h3>${jobStatus.nameTranslated}</h3>
+		<h3>${jobStatusNameTranslated}</h3>
 		<br/>
 		<b>${eco:translate2('Performed $1 from $2', current, total)}</b>
 		<br/>
@@ -81,6 +83,6 @@
 	<br />
 	<br />
 
-	<jobs:jobExecutionLog jobId="${command.job.jobId}" />
+	<%--<jobs:jobExecutionLog jobId="${command.job.jobId}" />--%> <%-- TODO: it is empty now. Implement an uncomment --%>
 
 </tags:page>
