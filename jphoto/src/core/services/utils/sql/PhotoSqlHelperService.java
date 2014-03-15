@@ -20,6 +20,8 @@ public interface PhotoSqlHelperService {
 
 	SqlIdsSelectQuery getFavoritesPhotosSQL( final PagingModel pagingModel, final int userId, final FavoriteEntryType entryType );
 
+	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final PagingModel pagingModel, final int userId );
+
 	SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final PagingModel pagingModel );
 
 	SqlIdsSelectQuery getUserPhotoAlbumLastPhotosQuery( final int userId, final int photoAlbumId, final PagingModel pagingModel );

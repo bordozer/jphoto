@@ -1323,6 +1323,16 @@
 	</translation>
 
 	<translation>
+		<nerd>$1's favorite members' photos</nerd>
+		<ru><![CDATA[Работы избранных $1 пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos of the favorite members</nerd>
+		<ru><![CDATA[Работы избранных пользователей]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>No team</nerd>
 		<ru><![CDATA[Команды нет]]></ru>
 	</translation>

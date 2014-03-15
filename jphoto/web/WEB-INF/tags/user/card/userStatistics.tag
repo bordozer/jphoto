@@ -26,6 +26,11 @@
 	</table:trinfo>
 
 	<table:trinfo>
+		<table:td cssClass="${cssClass}" width="${width}"><links:userPhotosOfFavoriteMembers user="${user}"/></table:td>
+		<table:td>TODO</table:td> <%-- TODO: --%>
+	</table:trinfo>
+
+	<table:trinfo>
 		<table:td cssClass="${cssClass}" width="${width}"><links:userFavoriteBookmarks user="${user}"/></table:td>
 		<table:td>${userStatistic.bookmarkedPhotosQty}</table:td>
 	</table:trinfo>

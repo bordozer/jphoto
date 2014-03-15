@@ -100,6 +100,8 @@ public interface UrlUtilsService {
 
 	String getUserFavoriteMembersLink( final int userId );
 
+	String getUserPhotosOfFavoriteMembersLink( final int userId );
+
 	String getUsersQtyWhoAddedInFavoriteMembersLink( final int userId );
 
 	String getUserFavoriteFriendsLink( final int userId );

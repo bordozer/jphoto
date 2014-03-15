@@ -58,4 +58,6 @@ public interface PageTitleUserUtilsService {
 	PageTitleData getChangeUserPasswordData( final User user );
 
 	PageTitleData getUserNotificationsControlData( final User user );
+
+	PageTitleData getPhotosOfUserFavoriteMembers( final User user );
 }

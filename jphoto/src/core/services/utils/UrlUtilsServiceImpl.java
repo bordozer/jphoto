@@ -275,6 +275,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getUserPhotosOfFavoriteMembersLink( final int userId ) {
+		return String.format( "%s/%s/%s/favorites/members/photos/", getBaseURLWithPrefix(), USERS_URL, userId );
+	}
+
+	@Override
 	public String getUsersQtyWhoAddedInFavoriteMembersLink( final int userId ) {
 		return String.format( "%s/%s/%s/favorites/members/in/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}

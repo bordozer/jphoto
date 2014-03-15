@@ -103,6 +103,23 @@ public class UserBookmarksController {
 		return VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "{userId}/favorites/members/photos/" )
+	public String showPhotosOfFavoriteMembers( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		securityService.assertUserExists( _userId );
+
+		final int userId = NumberUtils.convertToInt( _userId );
+
+		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
+
+		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
+		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.PHOTO, showIconsForFavoriteEntryTypes );
+
+		final User user = userService.load( userId );
+		model.setPageTitleData( pageTitleUserUtilsService.getPhotosOfUserFavoriteMembers( user ) );
+
+		return VIEW;
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/bookmark/" )
 	public String showBookmarkedPhotos( @PathVariable( "userId" ) String _userId, @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		securityService.assertUserExists( _userId );
@@ -130,9 +147,13 @@ public class UserBookmarksController {
 	}
 
 	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes ) {
+		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, entryType );
+		initFavorites( selectQuery,  userId, model, pagingModel, entryType, showIconsForFavoriteEntryTypes );
+	}
+
+	private void initFavorites( final SqlIdsSelectQuery selectQuery, final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> showIconsForFavoriteEntryTypes ) {
 		model.clear();
 
-		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, entryType );
 		final List<Photo> photos = selectDataFromDB( pagingModel, selectQuery );
 
 		final User user = userService.load( userId );

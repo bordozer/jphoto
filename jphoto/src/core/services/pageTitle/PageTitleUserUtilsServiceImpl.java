@@ -223,7 +223,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserWrongLogin() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = "Can't login";
+		final String tran = translatorService.translate( "Can't login" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
@@ -234,7 +234,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getChangeUserPasswordData( final User user ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = "Change password";
+		final String tran = translatorService.translate( "Change password" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink()
@@ -248,7 +248,22 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserNotificationsControlData( final User user ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = "Notifications control";
+		final String tran = translatorService.translate( "Notifications control" );
+
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getUsersRootLink()
+			, entityLinkUtilsService.getUserCardLink( user )
+			, tran
+		);
+
+		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	@Override
+	public PageTitleData getPhotosOfUserFavoriteMembers( final User user ) {
+		final String rootTranslated = getUserRootTranslated();
+		final String tran = translatorService.translate( "Photos of the favorite members" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
