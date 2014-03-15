@@ -38,11 +38,6 @@
 	</translation>
 
 	<translation>
-		<nerd>The best photos</nerd>
-		<ru><![CDATA[Лучшие работы]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>My club</nerd>
 		<ru><![CDATA[Мой клуб]]></ru>
 	</translation>
@@ -1024,7 +1019,7 @@
 
 	<translation>
 		<nerd>that have got at least $1 marks</nerd>
-		<ru><![CDATA[получившие не менее $1 оценок]]></ru>
+		<ru><![CDATA[набравшие не менее $1 баллов]]></ru>
 	</translation>
 
 	<translation>
@@ -1128,13 +1123,8 @@
 	</translation>
 
 	<translation>
-		<nerd>min $1 marks</nerd>
-		<ru><![CDATA[минимум $1 баллов]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>voting time: $1</nerd>
-		<ru><![CDATA[время голосования: <b>$1</b>]]></ru>
+		<ru><![CDATA[за период: <b>$1</b>]]></ru>
 	</translation>
 
 	<translation>
@@ -1238,8 +1228,8 @@
 	</translation>
 
 	<translation>
-		<nerd>The photos the member has voted recently for</nerd>
-		<ru><![CDATA[]Работы, за которые пользователь недавно голосовал]></ru>
+		<nerd>The photos $1 has voted recently for</nerd>
+		<ru><![CDATA[Работы, за которые $1 недавно оценил]]></ru>
 	</translation>
 
 	<translation>
@@ -1263,8 +1253,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Last photos</nerd>
-		<ru><![CDATA[Последние работы]]></ru>
+		<nerd>Last photos of $1</nerd>
+		<ru><![CDATA[Последние работы $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1283,8 +1273,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Last photos of visitors who viewed the member's photos recently</nerd>
-		<ru><![CDATA[Последние работы посетителей недавно смотревших работы пользователя]]></ru>
+		<nerd>Last photos of visitors who viewed $1's photos recently</nerd>
+		<ru><![CDATA[Последние работы посетителей недавно смотревших работы $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1958,13 +1948,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photos</nerd>
+		<ru><![CDATA[Работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>photos from category '$1'</nerd>
+		<ru><![CDATA[из раздела $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photos of member $1</nerd>
+		<ru><![CDATA[$1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The very best of $1</nerd>
+		<ru><![CDATA[Лучшие работы $1]]></ru>
 	</translation>
 
 </translations>

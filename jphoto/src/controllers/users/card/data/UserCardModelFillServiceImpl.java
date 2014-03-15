@@ -364,7 +364,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getBestUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
-		final String listTitle = translatorService.translate( "The best photos" );
+		final String listTitle = translatorService.translate( "The very best of $1", user.getNameEscaped() );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
 		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
@@ -376,7 +376,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "Last photos" );
+		final String listTitle = translatorService.translate( "Last photos of $1", user.getNameEscaped() );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
 		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
@@ -388,7 +388,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastVotedPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "The photos the member has voted recently for" );
+		final String listTitle = translatorService.translate( "The photos $1 has voted recently for", user.getNameEscaped() );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 
@@ -397,7 +397,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastPhotosOfUserVisitors( user, getConfiguredUserCardPhotosInLine() );
 
 		final String linkBest = StringUtils.EMPTY;
-		final String listTitle = translatorService.translate( "Last photos of visitors who viewed the member's photos recently" );
+		final String listTitle = translatorService.translate( "Last photos of visitors who viewed $1's photos recently", user.getNameEscaped() );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 
