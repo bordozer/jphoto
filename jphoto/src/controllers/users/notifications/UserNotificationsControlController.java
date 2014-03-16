@@ -44,6 +44,8 @@ public class UserNotificationsControlController {
 		final int userId = NumberUtils.convertToInt( _userId );
 		final User user = userService.load( userId );
 
+		securityService.assertUserEqualsToCurrentUser( user );
+
 		final UserNotificationsControlModel model = new UserNotificationsControlModel();
 
 		model.setUser( user );
