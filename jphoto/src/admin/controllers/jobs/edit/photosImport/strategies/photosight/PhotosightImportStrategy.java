@@ -280,7 +280,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		} catch ( DocumentException e ) {
 			final String message = String.format( "Error reading user info file: %s<br />%s", PhotosightXmlUtils.getUserInfoFile( photosightUser ), e.getMessage() );
 			job.addJobExecutionFinalMessage( message );
-			log.info( message );
+			log.error( message );
 			throw new BaseRuntimeException( e );
 		}
 	}
@@ -449,7 +449,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final PhotoCommentService photoCommentService = services.getPhotoCommentService();
 
 		final PhotosightPhoto photosightPhoto = dbEntry.getPhotosightPhotoOnDisk().getPhotosightPhoto();
-		log.info( String.format( "Import comments for photo %d", photosightPhoto.getPhotoId() ) );
+		log.debug( String.format( "Importing comments for photo %d", photosightPhoto.getPhotoId() ) );
 
 		final Photo photo = dbEntry.getImageToImport().getPhoto();
 
