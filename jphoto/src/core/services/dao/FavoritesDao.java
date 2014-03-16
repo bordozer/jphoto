@@ -33,9 +33,5 @@ public interface FavoritesDao extends BaseEntityDao<FavoriteEntry> {
 
 	List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType );
 
-	int getPhotoQtyWhichCommentsUserIsTracking( final User user );
-
-	int getUsersQtyWhoNewPhotoUserIsTracking( final User user );
-
 	int getPhotosOfUserFavoriteMembersQty( final int userId );
 }
