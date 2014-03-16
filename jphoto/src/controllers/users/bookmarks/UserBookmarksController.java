@@ -17,6 +17,7 @@ import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.UtilsService;
+import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +68,9 @@ public class UserBookmarksController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Autowired
 	private Services services;

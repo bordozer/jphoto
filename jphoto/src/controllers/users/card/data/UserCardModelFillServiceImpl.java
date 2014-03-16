@@ -145,6 +145,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		userStatistic.setFriendsQty( userStatisticService.getFriendsQty( userId ) );
 		userStatistic.setFavoriteMembersQty( userStatisticService.getFavoriteMembersQty( userId ) );
+		userStatistic.setPhotosOfFavoriteMembersQty( userStatisticService.getPhotosQtyOfUserFavoriteMembers( userId ) );
 		userStatistic.setBlackListEntriesQty( userStatisticService.getBackListEntriesQty( userId ) );
 		userStatistic.setNotificationsAboutNewPhotosQty( userStatisticService.getNotificationsAboutNewPhotosQty( userId ) );
 		userStatistic.setNotificationsAboutNewCommentsQty( userStatisticService.getNotificationsAboutNewCommentsQty( userId ) );

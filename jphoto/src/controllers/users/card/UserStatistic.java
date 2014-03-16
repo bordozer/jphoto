@@ -12,6 +12,7 @@ public class UserStatistic {
 
 	private int friendsQty;
 	private int favoriteMembersQty;
+	private int photosOfFavoriteMembersQty;
 	private int blackListEntriesQty;
 
 	private int notificationsAboutNewPhotosQty;
@@ -79,6 +80,14 @@ public class UserStatistic {
 
 	public void setFavoriteMembersQty( final int favoriteMembersQty ) {
 		this.favoriteMembersQty = favoriteMembersQty;
+	}
+
+	public int getPhotosOfFavoriteMembersQty() {
+		return photosOfFavoriteMembersQty;
+	}
+
+	public void setPhotosOfFavoriteMembersQty( final int photosOfFavoriteMembersQty ) {
+		this.photosOfFavoriteMembersQty = photosOfFavoriteMembersQty;
 	}
 
 	public int getBlackListEntriesQty() {

@@ -147,12 +147,30 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 
 	@Override
 	public int getPhotoQtyWhichCommentsUserIsTracking( final User user ) {
-		return 0;
+		return 0; // TODO:
 	}
 
 	@Override
 	public int getUsersQtyWhoNewPhotoUserIsTracking( final User user ) {
-		return 0;
+		return 0; // TODO:
+	}
+
+	@Override
+	public int getPhotosOfUserFavoriteMembersQty( final int userId ) {
+		final String sql = String.format( "SELECT COUNT( p.%s ) FROM %s p WHERE p.%s IN ( SELECT f.%s FROM %s f WHERE f.%s = :userId AND f.entryType = %d );"
+			, BaseEntityDao.ENTITY_ID
+			, PhotoDaoImpl.TABLE_PHOTOS
+			, PhotoDaoImpl.TABLE_COLUMN_USER_ID
+			, TABLE_COLUMN_FAVORITE_ENTRY_ID
+			, TABLE_FAVORITES
+			, TABLE_COLUMN_USER_ID
+			, FavoriteEntryType.USER.getId()
+		);
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+
+		return getIntValueOrZero( sql, paramSource );
 	}
 
 	private int getFavoriteEntriesQty( final int userId, final FavoriteEntryType entryType ) {

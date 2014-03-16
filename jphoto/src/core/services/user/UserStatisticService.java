@@ -16,6 +16,8 @@ public interface UserStatisticService {
 
 	int getFavoriteMembersQty( final int userId );
 
+	int getPhotosQtyOfUserFavoriteMembers( final int userId );
+
 	int getBackListEntriesQty( final int userId );
 
 	int getNotificationsAboutNewPhotosQty( final int userId );

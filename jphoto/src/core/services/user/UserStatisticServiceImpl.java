@@ -48,6 +48,11 @@ public class UserStatisticServiceImpl implements UserStatisticService {
 	}
 
 	@Override
+	public int getPhotosQtyOfUserFavoriteMembers( final int userId ) {
+		return favoritesDao.getPhotosOfUserFavoriteMembersQty( userId );
+	}
+
+	@Override
 	public int getBackListEntriesQty( final int userId ) {
 		return favoritesDao.getBackListEntriesQty( userId );
 	}
