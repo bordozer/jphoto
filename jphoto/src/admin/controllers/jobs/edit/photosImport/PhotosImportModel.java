@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
 import core.general.user.User;
+import org.apache.commons.lang.StringUtils;
 
 public class PhotosImportModel extends DateRangableModel {
 
@@ -158,6 +159,8 @@ public class PhotosImportModel extends DateRangableModel {
 	public void clear() {
 		super.clear();
 
+		pageQty = StringUtils.EMPTY;
+		delayBetweenRequest = StringUtils.EMPTY;
 		deletePictureFromDiskAfterImport = false;
 	}
 }

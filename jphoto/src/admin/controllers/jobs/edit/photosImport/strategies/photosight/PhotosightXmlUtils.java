@@ -90,7 +90,7 @@ public class PhotosightXmlUtils {
 		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
 			final Element photoElement = rootElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ELEMENT_NAME );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( photosightPhoto.getPhotoId() ) );
-			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( photosightPhoto.getPhotosightCategory() ) );
+			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( photosightPhoto.getPhotosightCategory().getId() ) );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ).getName() );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( photosightPhoto.getName() ) );
 			photoElement.addElement( PHOTOSIGHT_USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( photosightPhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
