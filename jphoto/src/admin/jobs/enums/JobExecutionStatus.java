@@ -1,7 +1,6 @@
 package admin.jobs.enums;
 
 import core.interfaces.Identifiable;
-import utils.StringUtilities;
 
 import java.util.EnumSet;
 

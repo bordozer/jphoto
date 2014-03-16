@@ -2,7 +2,6 @@ package core.services.dao;
 
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
-import core.general.user.User;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
