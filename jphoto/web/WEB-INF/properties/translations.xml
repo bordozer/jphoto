@@ -2137,6 +2137,16 @@
 		<ru><![CDATA[Последние работы с $1 $2 - $3 шт]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Jobs stopped by user</nerd>
+		<ru><![CDATA[Выполнение задачи прервано]]></ru>
+	</translation>
+
+	<!--<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>-->
+
 	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
