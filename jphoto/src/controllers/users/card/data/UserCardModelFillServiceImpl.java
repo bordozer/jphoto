@@ -388,7 +388,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.getLastVotedPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "The photos $1 has voted recently for", user.getNameEscaped() );
+		final String listTitle = translatorService.translate( "The photos $1 has appraised recently", user.getNameEscaped() );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 

@@ -80,9 +80,9 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final User photoAuthor = services.getUserService().load( photo.getUserId() );
 
-		addJobExecutionFinalMessage( String.format( "User %s has voted for photo %s of %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getUserCardLink( photoAuthor ), dateUtilsService.formatDateTime( actionTime ) ) );
+		addJobExecutionFinalMessage( String.format( "User %s has appraised photo %s of %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getUserCardLink( photoAuthor ), dateUtilsService.formatDateTime( actionTime ) ) );
 
-		getLog().info( String.format( "User %s has voted for photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
+		getLog().info( String.format( "User %s has appraised photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 
 		return true;
 	}

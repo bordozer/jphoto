@@ -224,7 +224,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosVotedByUser( final User user ) {
 		final PageTitleData titleData = getPhotosByUser( user );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getUserCardLink( user ), translatorService.translate( "Appreciated photos" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getUserCardLink( user ), translatorService.translate( "Appraised photos" ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}

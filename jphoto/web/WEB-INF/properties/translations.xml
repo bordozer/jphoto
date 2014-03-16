@@ -1228,7 +1228,7 @@
 	</translation>
 
 	<translation>
-		<nerd>The photos $1 has voted recently for</nerd>
+		<nerd>The photos $1 has appraised recently</nerd>
 		<ru><![CDATA[Работы, которые $1 недавно оценил]]></ru>
 	</translation>
 
@@ -2103,7 +2103,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Appreciated photos</nerd>
+		<nerd>Appraised photos</nerd>
 		<ru><![CDATA[Оцененные работы]]></ru>
 	</translation>
 
