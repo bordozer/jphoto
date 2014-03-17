@@ -57,7 +57,7 @@
 						<js:checkBoxChecker namePrefix="${job_execution_status_ids_to_delete_control}"/>
 						<br/>
 						<br/>
-						<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="nameTranslated"
+						<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="name"
 										 delimiter="<br />" cssErrorClass="invalid"/>
 					</table:tddata>
 

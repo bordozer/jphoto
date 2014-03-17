@@ -51,8 +51,7 @@
 					<table:tr>
 						<table:tdtext text_t="Job run mode"/>
 						<table:td>
-							<form:radiobuttons path="${jobRunModeIdControl}" items="${jobRunModeValues}" itemValue="id" itemLabel="nameTranslated" delimiter="<br />"
-											   htmlEscape="false"/>
+							<form:radiobuttons path="${jobRunModeIdControl}" items="${jobRunModeValues}" itemValue="id" itemLabel="name" delimiter="<br />" htmlEscape="false"/>
 						</table:td>
 					</table:tr>
 
