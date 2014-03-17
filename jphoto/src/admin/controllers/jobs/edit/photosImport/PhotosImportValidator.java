@@ -60,6 +60,8 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 
 //				validateUserName( model, errors );
 
+				validatePhotoSightCategories( model, errors );
+
 				validateGender( model, errors );
 
 				validateMembershipType( model, errors );
@@ -68,6 +70,13 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 				break;
 			default:
 				throw new IllegalArgumentException( String.format( "Illegal PhotosImportSource: %s", importSource ) );
+		}
+	}
+
+	private void validatePhotoSightCategories( final PhotosImportModel model, final Errors errors ) {
+		final List<String> photosightCategories = model.getPhotosightCategories();
+		if ( photosightCategories == null || photosightCategories.isEmpty() ) {
+			errors.rejectValue( PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL, translatorService.translate( String.format( "Select at least one %s", FormatUtils.getFormattedFieldName( "Photosight category" ) ) ) );
 		}
 	}
 

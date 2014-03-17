@@ -29,6 +29,7 @@ public enum SavedJobParameterKey {
 	, IMPORT_PAGE_QTY( 26 )
 	, DAYS( 27 )
 	, ENTRY_TYPES( 28 )
+	, PHOTOSIGHT_CATEGORIES( 29 )
 	;
 
 	private final int id;

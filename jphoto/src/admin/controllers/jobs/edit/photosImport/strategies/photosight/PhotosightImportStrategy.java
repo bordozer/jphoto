@@ -115,6 +115,12 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			final List<PhotosightPhoto> photosightPagePhotos = getPhotosightPhotosToImport( photosightUser, photosightPagePhotosIds, cachedLocallyPhotosightPhotos, user );
+			CollectionUtils.filter( photosightPagePhotos, new Predicate<PhotosightPhoto>() {
+				@Override
+				public boolean evaluate( final PhotosightPhoto photosightPhoto ) {
+					return importParameters.getPhotosightCategories().contains( photosightPhoto.getPhotosightCategory() );
+				}
+			} );
 
 			final List<PhotosightPhotoOnDisk> photosightPhotosOnDisk = getPhotosightPhotoOnDisk( photosightUser, photosightPagePhotos, cachedLocallyPhotosightPhotos );
 

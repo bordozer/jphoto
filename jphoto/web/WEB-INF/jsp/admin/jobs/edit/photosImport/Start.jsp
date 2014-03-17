@@ -2,6 +2,7 @@
 <%@ page import="core.general.user.UserMembershipType" %>
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
+<%@ page import="admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -30,6 +31,7 @@
 <c:set var="userMembershipIdControl" value="<%=PhotosImportModel.USER_MEMBERSHIP_ID_FORM_CONTROL%>"/>
 <c:set var="pageQtyControl" value="<%=PhotosImportModel.ACTIONS_QTY_FORM_CONTROL%>"/>
 <c:set var="importCommentsControl" value="<%=PhotosImportModel.IMPORT_COMMENTS_FORM_CONTROL%>"/>
+<c:set var="photosightCategoriesControl" value="<%=PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL%>"/>
 <c:set var="delayBetweenRequestControl" value="<%=PhotosImportModel.DELAY_BETWEEN_REQUEST_FORM_CONTROL%>"/>
 
 <c:set var="userGenders" value="<%=UserGender.values()%>"/>
@@ -37,6 +39,7 @@
 
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
+<c:set var="photosightCategories" value="<%=PhotosightCategory.values()%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
@@ -157,6 +160,31 @@
 									</table:tr>
 
 									<table:tr>
+										<table:tdtext text_t="Import photos from photosight categories"/>
+										<table:td>
+											<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
+											<br />
+											<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategories}" itemValue="id" itemLabel="name" delimiter="<br />" />
+										</table:td>
+									</table:tr>
+
+									<table:tr>
+										<table:tdtext text_t="Import comments"/>
+										<table:td>
+											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
+										</table:td>
+									</table:tr>
+
+									<table:tr>
+										<table:tdtext text_t="Page qty"/>
+										<table:td>
+											<form:input path="${pageQtyControl}" size="4"/>
+										</table:td>
+									</table:tr>
+
+									<table:separator colspan="2" />
+
+									<table:tr>
 										<table:tdtext text_t="Custom user name"/>
 										<table:td>
 											<form:input path="${userNameControl}"/>
@@ -181,12 +209,7 @@
 										</table:td>
 									</table:tr>
 
-									<table:tr>
-										<table:tdtext text_t="Import comments"/>
-										<table:td>
-											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
-										</table:td>
-									</table:tr>
+									<table:separator colspan="2" />
 
 									<table:tr>
 										<table:tdtext text_t="Delay between request, secs"/>
@@ -195,12 +218,6 @@
 										</table:td>
 									</table:tr>
 
-									<table:tr>
-										<table:tdtext text_t="Page qty"/>
-										<table:td>
-											<form:input path="${pageQtyControl}" size="4"/>
-										</table:td>
-									</table:tr>
 								</table:table>
 
 							</div>

@@ -6,9 +6,12 @@ import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameter
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.general.base.CommonProperty;
@@ -29,6 +32,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 	private PhotosImportSource importSource;
 	private ImportParameters importParameters;
+	private List<PhotosightCategory> photosightCategories;
 
 	public PhotosImportJob() {
 		super( new LogHelper( PhotosImportJob.class ) );
@@ -80,6 +84,15 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final int pageQty = photosightParameters.getPageQty();
 				parametersMap.put( SavedJobParameterKey.IMPORT_PAGE_QTY, new CommonProperty( SavedJobParameterKey.IMPORT_PAGE_QTY.getId(), pageQty ) );
 
+
+				final List<String> photosightCategoryIds = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
+					@Override
+					public String apply( final PhotosightCategory photosightCategory ) {
+						return String.valueOf( photosightCategory.getId() );
+					}
+				} );
+				parametersMap.put( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES, new CommonProperty( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES.getId(), photosightCategoryIds ) );
+
 				totalJopOperations = pageQty;
 				break;
 			default:
@@ -115,7 +128,14 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final int delayBetweenRequest = jobParameters.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueInt();
 				final int pageQty = jobParameters.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValueInt();
 
-				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty );
+				final List<PhotosightCategory> photosightCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListInt(), new Function<Integer, PhotosightCategory>() {
+					@Override
+					public PhotosightCategory apply( final Integer id ) {
+						return PhotosightCategory.getById( id );
+					}
+				} );
+
+				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty, photosightCategories );
 
 				break;
 			default:
@@ -214,5 +234,9 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				throw new IllegalArgumentException( String.format( "Unsupported import source: %s", importSource ) );
 		}
 		return importStrategy;
+	}
+
+	public void setPhotosightCategories( final List<PhotosightCategory> photosightCategories ) {
+		this.photosightCategories = photosightCategories;
 	}
 }

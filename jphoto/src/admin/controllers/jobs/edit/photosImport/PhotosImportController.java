@@ -5,11 +5,14 @@ import admin.controllers.jobs.edit.DateRangableController;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
 import admin.jobs.enums.DateRangeType;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.JobDateRange;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
@@ -27,6 +30,7 @@ import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +113,18 @@ public class PhotosImportController extends DateRangableController {
 
 	@Override
 	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
+
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
+
 		aModel.setImportComments( true );
+
+		final List<PhotosightCategory> categoryList = Arrays.asList( PhotosightCategory.values() );
+		aModel.setPhotosightCategories( Lists.transform( categoryList, new Function<PhotosightCategory, String>() {
+			@Override
+			public String apply( final PhotosightCategory photosightCategory ) {
+				return String.valueOf( photosightCategory.getId() );
+			}
+		} ) );
 	}
 
 	@Override
@@ -161,7 +175,16 @@ public class PhotosImportController extends DateRangableController {
 				final int delayBetweenRequests = NumberUtils.convertToInt( aModel.getDelayBetweenRequest() );
 				final int pageQty = NumberUtils.convertToInt( aModel.getPageQty() );
 
-				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests, pageQty );
+				final List<String> photosightCategories = aModel.getPhotosightCategories();
+				final List<PhotosightCategory> categoryList = Lists.transform( photosightCategories, new Function<String, PhotosightCategory>() {
+					@Override
+					public PhotosightCategory apply( final String id ) {
+						return PhotosightCategory.getById( NumberUtils.convertToInt( id ) );
+					}
+				} );
+				job.setPhotosightCategories( categoryList );
+
+				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests, pageQty, categoryList );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

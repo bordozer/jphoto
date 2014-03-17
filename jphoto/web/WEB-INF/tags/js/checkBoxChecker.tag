@@ -6,6 +6,7 @@
 
 <%@ attribute name="namePrefix" type="java.lang.String" required="true" %>
 <%@ attribute name="uniqueId" type="java.lang.String" required="false" %>
+<%@ attribute name="isChecked" type="java.lang.Boolean" required="false" %>
 
 <c:set var="iconId" value="checkAllIcon${uniqueId}"/>
 
@@ -13,23 +14,28 @@
 
 <script type="text/javascript">
 
-	var isChecked = false;
+	var isChecked = ${!isChecked};
 
 	jQuery().ready( function() {
 		var icon = $( '#${iconId}' );
 		icon.bind( 'click', checkAll${uniqueId} );
+//		switchIcon( icon );
 
 		icon.click( function() {
-			if ( isChecked ) {
-				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
-				checkNone${uniqueId}();
-			} else {
-				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
-				checkAll${uniqueId}();
-			}
-			isChecked = !isChecked;
+			switchIcon( icon );
 		});
 	});
+
+	function switchIcon( icon ) {
+		if ( isChecked ) {
+			icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
+			checkNone${uniqueId}();
+		} else {
+			icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
+			checkAll${uniqueId}();
+		}
+		isChecked = !isChecked;
+	}
 
 	function checkAll${uniqueId}() {
 		$( "[name*='${namePrefix}']" ).each( function () {

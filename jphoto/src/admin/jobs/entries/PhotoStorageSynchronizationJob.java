@@ -4,6 +4,7 @@ import admin.controllers.jobs.edit.NoParametersAbstractJob;
 import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.jobs.enums.SavedJobType;
@@ -17,6 +18,7 @@ import utils.NumberUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +34,8 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 	protected void runJob() throws Throwable {
 		final List<Integer> usersIds = getUsersIds();
 
-		final ImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0 );
+		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
+		final ImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, photosightCategories );
 
 		final AbstractPhotoImportStrategy importStrategy = new PhotosightImportStrategy( this, importParameters, services );
 

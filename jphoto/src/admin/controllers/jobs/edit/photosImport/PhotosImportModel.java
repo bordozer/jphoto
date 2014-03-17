@@ -1,8 +1,17 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
+import com.google.common.base.Function;
+import com.google.common.base.Functions;
+import com.google.common.collect.Lists;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotosImportModel extends DateRangableModel {
 
@@ -29,18 +38,20 @@ public class PhotosImportModel extends DateRangableModel {
 	public final static String USER_GENDER_ID_FORM_CONTROL = "userGenderId";
 	public final static String USER_MEMBERSHIP_ID_FORM_CONTROL = "userMembershipId";
 	public final static String IMPORT_COMMENTS_FORM_CONTROL = "importComments";
-	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
+	public static final String PHOTOSIGHT_CATEGORIES_FORM_CONTROL = "photosightCategories";
 
+	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
 	private String photosightUserId;
 	private String userName;
-	private String pageQty;
 
+	private String pageQty;
 	private String userGenderId;
 	private String userMembershipId;
 	private boolean importComments;
 	private String delayBetweenRequest;
-	// photosight import fields <--
+	private List<String> photosightCategories;
 
+	// photosight import fields <--
 	private boolean deletePictureFromDiskAfterImport;
 
 	public PhotosImportSource getImportSource() {
@@ -153,6 +164,14 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setDeletePictureFromDiskAfterImport( final boolean deletePictureFromDiskAfterImport ) {
 		this.deletePictureFromDiskAfterImport = deletePictureFromDiskAfterImport;
+	}
+
+	public List<String> getPhotosightCategories() {
+		return photosightCategories;
+	}
+
+	public void setPhotosightCategories( final List<String> photosightCategories ) {
+		this.photosightCategories = photosightCategories;
 	}
 
 	@Override
