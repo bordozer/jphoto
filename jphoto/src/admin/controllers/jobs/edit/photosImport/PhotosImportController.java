@@ -237,6 +237,7 @@ public class PhotosImportController extends DateRangableController {
 				aModel.setImportComments( importComments );
 				aModel.setPageQty( pageQty );
 				aModel.setDelayBetweenRequest( delayBetweenRequests );
+				aModel.setPhotosightCategories( savedJobParametersMap.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueListString() );
 				break;
 			default:
 				throw new BaseRuntimeException( String.format( "Unsupported PhotoImportSource: %s", importSource ) );

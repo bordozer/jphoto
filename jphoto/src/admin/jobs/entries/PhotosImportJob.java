@@ -180,6 +180,16 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final int pageQty = photosightParameters.getPageQty();
 				builder.append( translatorService.translate( "Pages to process" ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages" ) ).append( "<br />" );
 
+				final List<PhotosightCategory> photosightCategories = photosightParameters.getPhotosightCategories();
+				final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
+					@Override
+					public String apply( final PhotosightCategory photosightCategory ) {
+						return photosightCategory.getName();
+					}
+				} );
+				builder.append( translatorService.translate( "Import photos from categories" ) ).append( ": " );
+				builder.append( categories == null || categories.size() == PhotosightCategory.values().length ? translatorService.translate( "All categories" ) : StringUtils.join( categories, ", " ) );
+
 				break;
 			default:
 				throw new IllegalArgumentException( String.format( "Unsupported import source: %s", importSource ) );
