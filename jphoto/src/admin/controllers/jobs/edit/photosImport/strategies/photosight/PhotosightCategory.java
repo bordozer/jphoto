@@ -1,5 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
+import utils.NumberUtils;
+
 public enum PhotosightCategory {
 
 	NUDE( 15, "Nude" )
@@ -59,5 +61,9 @@ public enum PhotosightCategory {
 
 //		throw new IllegalArgumentException( String.format( "Illegal PhotosightCategory id: %d", id ));
 		return null;
+	}
+
+	public static PhotosightCategory getById( final String id ) {
+		return getById( NumberUtils.convertToInt( id ) );
 	}
 }

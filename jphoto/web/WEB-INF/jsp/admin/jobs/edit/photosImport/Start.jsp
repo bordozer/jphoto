@@ -3,6 +3,10 @@
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Comparator" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -39,7 +43,17 @@
 
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
-<c:set var="photosightCategories" value="<%=PhotosightCategory.values()%>"/>
+
+<%
+	final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
+	Collections.sort( photosightCategories, new Comparator<PhotosightCategory>() {
+		@Override
+		public int compare( final PhotosightCategory category1, final PhotosightCategory category12 ) {
+			return category1.name().compareTo( category12.name() );
+		}
+	} );
+%>
+<c:set var="photosightCategories" value="<%=photosightCategories%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>

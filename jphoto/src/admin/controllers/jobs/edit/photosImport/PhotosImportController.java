@@ -30,10 +30,7 @@ import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -237,7 +234,16 @@ public class PhotosImportController extends DateRangableController {
 				aModel.setImportComments( importComments );
 				aModel.setPageQty( pageQty );
 				aModel.setDelayBetweenRequest( delayBetweenRequests );
-				aModel.setPhotosightCategories( savedJobParametersMap.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueListString() );
+
+				final List<String> categories = savedJobParametersMap.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListString();
+				/*Collections.sort( categories, new Comparator<String>() {
+					@Override
+					public int compare( final String id1, final String id2 ) {
+						return PhotosightCategory.getById( id1 ).name().compareTo( PhotosightCategory.getById( id2 ).name() );
+					}
+				} );*/
+
+				aModel.setPhotosightCategories( categories );
 				break;
 			default:
 				throw new BaseRuntimeException( String.format( "Unsupported PhotoImportSource: %s", importSource ) );
