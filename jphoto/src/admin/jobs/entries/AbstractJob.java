@@ -178,6 +178,11 @@ public abstract class AbstractJob extends Thread {
 		updateCurrentJobExecutionEntryStep();
 	}
 
+	public void setProgress( final int steps) {
+		generationMonitor.setCurrent( steps );
+		updateCurrentJobExecutionEntryStep();
+	}
+
 	public String getJobName() {
 		return getJobType().getName();
 	}

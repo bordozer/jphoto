@@ -50,7 +50,7 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 			final List<Integer> deleteBunch = idsToBeDeleted.subList( from, to );
 			log.debug( String.format( "From: %d, to: %d", from, to ) );
 
-			increment();
+			setProgress( to );
 
 			jobExecutionHistoryService.delete( deleteBunch );
 
@@ -88,7 +88,7 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 		}
 
 		final List<Integer> idsToBeDeleted = getTotalItemsToDelete( services.getJobExecutionHistoryService() );
-		totalJopOperations = getTotalSteps( idsToBeDeleted.size() );
+		totalJopOperations = idsToBeDeleted.size(); //getTotalSteps( idsToBeDeleted.size() );
 	}
 
 	@Override
@@ -113,9 +113,9 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 			builder.append( translatorService.translate( "All" ) );
 		}
 
-		builder.append( "<br />" );
+		/*builder.append( "<br />" );
 		builder.append( translatorService.translate( "Total" ) ).append( ": " );
-		builder.append( getTotalItemsToDelete( services.getJobExecutionHistoryService() ).size() );
+		builder.append( getTotalItemsToDelete( services.getJobExecutionHistoryService() ).size() );*/
 
 		return builder.toString();
 	}
