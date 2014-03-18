@@ -2142,10 +2142,40 @@
 		<ru><![CDATA[Выполнение задачи прервано]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Photosight import: Page qty</nerd>
+		<ru><![CDATA[Импортировать только страницы с первой по ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photosight import: Custom user name</nerd>
+		<ru><![CDATA[Имя пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photosight user name is used if leave empty</nerd>
+		<ru><![CDATA[Оставьте пустым чтобы использовать имя с фотосайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delay between requests in seconds</nerd>
+		<ru><![CDATA[Пауза между запросами в секундах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import photos from photosight categories</nerd>
+		<ru><![CDATA[Импортировать фотографии только из разделов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Use ',' as separator</nerd>
+		<ru><![CDATA[Используйте ',' как разделитель]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import sources</nerd>
+		<ru><![CDATA[Источники импорта]]></ru>
+	</translation>
 
 	<!--<translation>
 		<nerd></nerd>

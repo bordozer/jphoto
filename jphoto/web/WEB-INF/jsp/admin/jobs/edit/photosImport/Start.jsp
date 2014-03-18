@@ -190,7 +190,7 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Page qty"/>
+										<table:tdtext text_t="Photosight import: Page qty"/>
 										<table:td>
 											<form:input path="${pageQtyControl}" size="4"/>
 										</table:td>
@@ -199,7 +199,7 @@
 									<table:separator colspan="2" />
 
 									<table:tr>
-										<table:tdtext text_t="Custom user name"/>
+										<table:tdtext text_t="Photosight import: Custom user name"/>
 										<table:td>
 											<form:input path="${userNameControl}"/>
 											<br/>
@@ -226,7 +226,7 @@
 									<table:separator colspan="2" />
 
 									<table:tr>
-										<table:tdtext text_t="Delay between request, secs"/>
+										<table:tdtext text_t="Delay between requests in seconds"/>
 										<table:td>
 											<form:input path="${delayBetweenRequestControl}" size="4"/>
 										</table:td>
