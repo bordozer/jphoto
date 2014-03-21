@@ -326,4 +326,15 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
+
+	@Override
+	public PageTitleData getPhotoRatingTitleData( final int photoRatingRank ) {
+		final String rootTranslated = getPhotoRootTranslated();
+		final String text = translatorService.translate( "Rating" );
+
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, text );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), text );
+
+		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
 }
