@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport;
 
 public enum GenreDiscEntry {
+
 	ADVERTISING( "Advertising" )
 	, ANIMALS( "Animals" )
 	, CHILDREN( "Children" )
@@ -24,6 +25,7 @@ public enum GenreDiscEntry {
 	, WEDDING( "Wedding" )
 	, WALLPAPERS( "Wallpapers" )
 	;
+
 	private final String name;
 
 	GenreDiscEntry( final String name ) {

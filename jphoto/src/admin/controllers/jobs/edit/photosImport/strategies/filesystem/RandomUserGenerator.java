@@ -1,13 +1,16 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
+import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
 import core.general.user.User;
+import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.utils.RandomUtilsService;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,6 +20,8 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class RandomUserGenerator extends AbstractUserGenerator {
 
+	private static final int MAX_ATTEMPTS_TO_FIND_USER_FOR_GENRE = 50;
+
 	private final Map<User, Set<Genre>> userPhotosByGenresCacheMap = newHashMap();
 	private final Set<Genre> genres;
 
@@ -24,6 +29,8 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 	private final Services services;
 
 	protected final LogHelper log = new LogHelper( RandomUserGenerator.class );
+
+	private final static EnumSet<GenreDiscEntry> allowedForModelsAndMakeupMastersGenres = EnumSet.of( GenreDiscEntry.ADVERTISING, GenreDiscEntry.CHILDREN, GenreDiscEntry.GLAMOUR, GenreDiscEntry.MODELS, GenreDiscEntry.NUDE, GenreDiscEntry.PORTRAIT, GenreDiscEntry.WEDDING, GenreDiscEntry.HDR );
 
 	public RandomUserGenerator( final Set<Genre> genres, final List<User> beingProcessedUsers, final Services services ) {
 		this.services = services;
@@ -43,7 +50,6 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 	private User getRandomUserForGenre( final Genre genre ) {
 		final UserSelectionHelper helper = new UserSelectionHelper( services );
 
-		final int maxAttemptsToFindUserForGenre = 50;
 		int i = 0;
 
 		while ( true ) {
@@ -51,19 +57,20 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 
 			final User user = getRandomNonPhotosightUser( 0 );
 
-			//				final boolean doesUserHavePhotos = doesUserHavePhotos( user, userPhotosByGenresMap );
 			final int userPhotosQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
 			final boolean doesUserHavePhotos = userPhotosQty > 0;
 
 			if ( !doesUserHavePhotos ) {
 				// no photo at all yet. This randomly selected user is about to upload his first photo in this genre
-				return user;
+				if ( ! isGenreSuitableForUserMembershipType( user.getMembershipType(), genre ) ) {
+					continue; // genre is nor suitable, try to find another user
+				}
 			}
 
 			// already has photo(s) int this or another genre(s)
 			final int photosByGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 			if ( photosByGenre > 0 ) {
-				// already has photo(s) in this genre - user fits our genre and can upload another photo of this genre
+				// already has photo(s) in this photo category - user suitable for the category and can upload another photo of this category
 				return user;
 			}
 
@@ -79,12 +86,24 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			}
 
 			// user has photos but not in the genre or similar to it - skipping this user and try to select another one
-			if ( i > maxAttemptsToFindUserForGenre ) {
+			if ( i > MAX_ATTEMPTS_TO_FIND_USER_FOR_GENRE ) {
 				break;
 			}
 		}
 
 		return getRandomNonPhotosightUser( 0 ); // This genre might have been missed in configuration...
+	}
+
+	private boolean isGenreSuitableForUserMembershipType( final UserMembershipType membershipType, final Genre genre ) {
+		switch ( membershipType ) {
+			case AUTHOR:
+				return true;
+			case MODEL:
+			case MAKEUP_MASTER:
+				return allowedForModelsAndMakeupMastersGenres.contains( GenreDiscEntry.getByName( genre.getName() ) );
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal membershipType: %s", membershipType ) );
 	}
 
 	private User getRandomNonPhotosightUser( final int counter ) {
