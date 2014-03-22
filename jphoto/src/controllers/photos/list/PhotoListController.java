@@ -148,11 +148,10 @@ public class PhotoListController {
 		final PhotoFilterData filterData = ( PhotoFilterData ) session.getAttribute( PHOTO_FILTER_DATA_SESSION_KEY );
 
 		if ( filterData == null ) {
-			filterModel.setPhotosSortColumn( PhotoFilterSortColumn.POSTING_TIME.getId() );
-			filterModel.setPhotosSortOrder( PhotoFilterSortOrder.DESC.getId() );
+			setDefaultOrdering( filterModel );
 		} else {
-			filterModel.setPhotosSortColumn( filterData.getPhotosSortColumn() );
-			filterModel.setPhotosSortOrder( filterData.getPhotosSortOrder() );
+			filterModel.setPhotosSortColumn( filterData.getPhotosSortColumn().getId() );
+			filterModel.setPhotosSortOrder( filterData.getPhotosSortOrder().getId() );
 		}
 
 		filterModel.setFilterGenres( genreService.loadAll() );
@@ -193,6 +192,8 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas );
 
+		setDefaultOrdering( filterModel );
+
 		return VIEW;
 	}
 
@@ -208,6 +209,8 @@ public class PhotoListController {
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -244,6 +247,7 @@ public class PhotoListController {
 		initPhotoListData( model, pagingModel, photoListDatas );
 
 		filterModel.setFilterGenreId( _genreId );
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -266,6 +270,7 @@ public class PhotoListController {
 		initPhotoListData( model, pagingModel, photoListDatas );
 
 		filterModel.setFilterGenreId( _genreId );
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -306,6 +311,9 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas );
 
+		fillFilterModelWithUserData( filterModel, user );
+		setDefaultOrdering( filterModel );
+
 		return VIEW;
 	}
 
@@ -329,6 +337,8 @@ public class PhotoListController {
 		initUserGenres( model, user );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		fillFilterModelWithUserData( filterModel, user );
 
 		return VIEW;
 	}
@@ -373,8 +383,8 @@ public class PhotoListController {
 		initPhotoListData( model, pagingModel, photoListDatas );
 
 		filterModel.setFilterGenreId( _genreId );
-		filterModel.setFilterAuthorName( user.getName() );
-		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
+		fillFilterModelWithUserData( filterModel, user );
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -403,8 +413,7 @@ public class PhotoListController {
 		initPhotoListData( model, pagingModel, photoListDatas );
 
 		filterModel.setFilterGenreId( _genreId );
-		filterModel.setFilterAuthorName( user.getName() );
-		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
+		fillFilterModelWithUserData( filterModel, user );
 
 		return VIEW;
 	}
@@ -425,6 +434,8 @@ public class PhotoListController {
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -448,6 +459,10 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas );
 
+		fillFilterModelWithUserData( filterModel, user );
+
+		setDefaultOrdering( filterModel );
+
 		return VIEW;
 	}
 
@@ -456,16 +471,16 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/uploaded/" )
 	public String showPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processPhotosOnPeriod( date, date, model, pagingModel );
+		return processPhotosOnPeriod( date, date, model, pagingModel, filterModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/uploaded/" )
 	public String showPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
 		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processPhotosOnPeriod( dateFrom, dateTo, model, pagingModel );
+		return processPhotosOnPeriod( dateFrom, dateTo, model, pagingModel, filterModel );
 	}
 
-	private String processPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel ) {
+	private String processPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel, final PhotoFilterModel filterModel ) {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
@@ -483,6 +498,8 @@ public class PhotoListController {
 		photoListDatas.add( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -548,6 +565,8 @@ public class PhotoListController {
 		photoListDatas.add( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -762,8 +781,8 @@ public class PhotoListController {
 		filterData.setFilterAuthorName( filterByAuthorName );
 		filterData.setPhotoAuthorMembershipTypeIds( filterByPhotoAuthorMembershipTypeIds );
 		filterData.setSelectQuery( selectIdsQuery );
-		filterData.setPhotosSortColumn( sortColumn.getId() );
-		filterData.setPhotosSortOrder( sortOrder.getId() );
+		filterData.setPhotosSortColumn( sortColumn );
+		filterData.setPhotosSortOrder( sortOrder );
 
 		final HttpSession session = request.getSession();
 		session.setAttribute( PHOTO_FILTER_DATA_SESSION_KEY, filterData );
@@ -864,5 +883,15 @@ public class PhotoListController {
 		if ( UserUtils.isUsersEqual( EnvironmentContext.getCurrentUser(), user ) ) {
 			data.setPhotoGroupOperationMenuContainer( new PhotoGroupOperationMenuContainer( groupOperationService.getUserOwnPhotosGroupOperationMenus() ) );
 		}
+	}
+
+	private void setDefaultOrdering( final PhotoFilterModel filterModel ) {
+		filterModel.setPhotosSortColumn( PhotoFilterSortColumn.POSTING_TIME.getId() );
+		filterModel.setPhotosSortOrder( PhotoFilterSortOrder.DESC.getId() );
+	}
+
+	private void fillFilterModelWithUserData( final PhotoFilterModel filterModel, final User user ) {
+		filterModel.setFilterAuthorName( user.getName() );
+		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
 	}
 }

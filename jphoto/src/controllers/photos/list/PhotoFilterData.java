@@ -15,8 +15,9 @@ public class PhotoFilterData {
 
 	private String filterAuthorName;
 	private List<Integer> photoAuthorMembershipTypeIds;
-	private String photosSortColumn;
-	private String photosSortOrder;
+
+	private PhotoFilterSortColumn photosSortColumn;
+	private PhotoFilterSortOrder photosSortOrder;
 
 	public SqlIdsSelectQuery getSelectQuery() {
 		return selectQuery;
@@ -66,19 +67,19 @@ public class PhotoFilterData {
 		this.photoAuthorMembershipTypeIds = photoAuthorMembershipTypeIds;
 	}
 
-	public String getPhotosSortColumn() {
+	public PhotoFilterSortColumn getPhotosSortColumn() {
 		return photosSortColumn;
 	}
 
-	public void setPhotosSortColumn( final String photosSortColumn ) {
+	public void setPhotosSortColumn( final PhotoFilterSortColumn photosSortColumn ) {
 		this.photosSortColumn = photosSortColumn;
 	}
 
-	public String getPhotosSortOrder() {
+	public PhotoFilterSortOrder getPhotosSortOrder() {
 		return photosSortOrder;
 	}
 
-	public void setPhotosSortOrder( final String photosSortOrder ) {
+	public void setPhotosSortOrder( final PhotoFilterSortOrder photosSortOrder ) {
 		this.photosSortOrder = photosSortOrder;
 	}
 }
