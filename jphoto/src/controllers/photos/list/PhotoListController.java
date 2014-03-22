@@ -575,6 +575,7 @@ public class PhotoListController {
 
 		filterModel.setFilterPhotoName( filterData.getFilterPhotoName() );
 		filterModel.setFilterGenreId( filterData.getFilterGenre() != null ? String.valueOf( filterData.getFilterGenre().getId() ) : "-1" );
+		filterModel.setFilterByNudeContent( filterData.isFilterByNudeContent() );
 		filterModel.setFilterAuthorName( filterData.getFilterAuthorName() );
 		filterModel.setPhotoAuthorMembershipTypeIds( filterData.getPhotoAuthorMembershipTypeIds() );
 
@@ -599,6 +600,7 @@ public class PhotoListController {
 
 		final String filterByPhotoName = photoFilterModel.getFilterPhotoName();
 		final Genre filterByGenre = ! photoFilterModel.getFilterGenreId().equals( "-1" ) ? genreService.load( NumberUtils.convertToInt( photoFilterModel.getFilterGenreId() ) ) : null;
+		final boolean filterByNudeContent = photoFilterModel.isFilterByNudeContent();
 		final String filterByAuthorName = photoFilterModel.getFilterAuthorName();
 		final List<Integer> filterByPhotoAuthorMembershipTypeIds = photoFilterModel.getPhotoAuthorMembershipTypeIds();
 
@@ -616,6 +618,12 @@ public class PhotoListController {
 		if ( filterByGenre != null ) {
 			final SqlColumnSelectable tPhotoColGenreId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
 			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColGenreId, SqlCriteriaOperator.LIKE, filterByGenre.getId(), dateUtilsService );
+			selectIdsQuery.addWhereAnd( photoNameCondition );
+		}
+
+		if ( filterByNudeContent ) {
+			final SqlColumnSelectable tPhotoColHasNudeContent = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_CONTAINS_NUDE_CONTENT );
+			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColHasNudeContent, SqlCriteriaOperator.EQUALS, tPhotoColHasNudeContent, dateUtilsService );
 			selectIdsQuery.addWhereAnd( photoNameCondition );
 		}
 
@@ -665,6 +673,7 @@ public class PhotoListController {
 		final PhotoFilterData filterData = new PhotoFilterData();
 		filterData.setFilterPhotoName( filterByPhotoName );
 		filterData.setFilterGenre( filterByGenre );
+		filterData.setFilterByNudeContent( filterByNudeContent );
 		filterData.setFilterAuthorName( filterByAuthorName );
 		filterData.setPhotoAuthorMembershipTypeIds( filterByPhotoAuthorMembershipTypeIds );
 		filterData.setSelectQuery( selectIdsQuery );

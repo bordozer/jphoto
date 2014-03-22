@@ -11,8 +11,9 @@ public class PhotoFilterData {
 
 	private String filterPhotoName;
 	private Genre filterGenre;
-	private String filterAuthorName;
+	private boolean filterByNudeContent;
 
+	private String filterAuthorName;
 	private List<Integer> photoAuthorMembershipTypeIds;
 
 	public SqlIdsSelectQuery getSelectQuery() {
@@ -37,6 +38,14 @@ public class PhotoFilterData {
 
 	public void setFilterGenre( final Genre filterGenre ) {
 		this.filterGenre = filterGenre;
+	}
+
+	public boolean isFilterByNudeContent() {
+		return filterByNudeContent;
+	}
+
+	public void setFilterByNudeContent( final boolean filterByNudeContent ) {
+		this.filterByNudeContent = filterByNudeContent;
 	}
 
 	public String getFilterAuthorName() {

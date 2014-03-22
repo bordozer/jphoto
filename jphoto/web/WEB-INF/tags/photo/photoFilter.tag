@@ -35,6 +35,15 @@
 		</table:tr>
 
 		<table:tr>
+			<table:tdtext text_t="Photo has nude content"/>
+			<table:tddata>
+				<form:checkbox path="filterByNudeContent"/>
+			</table:tddata>
+		</table:tr>
+
+		<table:separator colspan="2" />
+
+		<table:tr>
 			<table:tdtext text_t="Author name contains"/>
 			<table:tddata>
 				<form:input path="filterAuthorName"/>
@@ -47,6 +56,8 @@
 				<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}" itemValue="id" itemLabel="name" delimiter="<br />"/>
 			</table:tddata>
 		</table:tr>
+
+		<table:separator colspan="2" />
 
 		<table:trok text_t="Filter" />
 
