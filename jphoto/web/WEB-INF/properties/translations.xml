@@ -2202,10 +2202,10 @@
 		<ru><![CDATA[Результаты поиска]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Photo search</nerd>
+		<ru><![CDATA[Поиск работ]]></ru>
+	</translation>
 
 	<!--<translation>
 		<nerd></nerd>
