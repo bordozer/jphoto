@@ -11,7 +11,7 @@ public class PhotoFilterData {
 
 	private String filterPhotoName;
 	private Genre filterGenre;
-	private boolean filterByNudeContent;
+	private boolean showPhotosWithNudeContent;
 
 	private String filterAuthorName;
 	private List<Integer> photoAuthorMembershipTypeIds;
@@ -40,12 +40,12 @@ public class PhotoFilterData {
 		this.filterGenre = filterGenre;
 	}
 
-	public boolean isFilterByNudeContent() {
-		return filterByNudeContent;
+	public boolean isShowPhotosWithNudeContent() {
+		return showPhotosWithNudeContent;
 	}
 
-	public void setFilterByNudeContent( final boolean filterByNudeContent ) {
-		this.filterByNudeContent = filterByNudeContent;
+	public void setShowPhotosWithNudeContent( final boolean showPhotosWithNudeContent ) {
+		this.showPhotosWithNudeContent = showPhotosWithNudeContent;
 	}
 
 	public String getFilterAuthorName() {

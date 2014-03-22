@@ -2177,6 +2177,36 @@
 		<ru><![CDATA[Источники импорта]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Photo name contains</nerd>
+		<ru><![CDATA[Название работы содержит]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show photos with nude content</nerd>
+		<ru><![CDATA[Показывать работы содержащие "взрослый" контент (НЮ)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Author name contains</nerd>
+		<ru><![CDATA[Имя автора содержит]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Author membership type</nerd>
+		<ru><![CDATA[Тип членства автора]]></ru>
+	</translation>
+
+	<!--<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>-->
+
+	<!--<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>-->
+
 	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>

@@ -330,7 +330,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	@Override
 	public PageTitleData getFilteredPhotoListTitleData() {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String text = translatorService.translate( "Filter" );
+		final String text = translatorService.translate( "Photo search" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, text );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), text );

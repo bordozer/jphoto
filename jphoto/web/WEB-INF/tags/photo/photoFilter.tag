@@ -13,7 +13,7 @@
 
 <form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrlWithPrefix()}/photos/filter/">
 
-	<table:table width="400">
+	<table:table width="600">
 
 		<table:separatorInfo colspan="2" title="${eco:translate('Photo filter')}" />
 
@@ -35,9 +35,9 @@
 		</table:tr>
 
 		<table:tr>
-			<table:tdtext text_t="Photo has nude content"/>
+			<table:tdtext text_t="Show photos with nude content"/>
 			<table:tddata>
-				<form:checkbox path="filterByNudeContent"/>
+				<form:checkbox path="showPhotosWithNudeContent"/>
 			</table:tddata>
 		</table:tr>
 

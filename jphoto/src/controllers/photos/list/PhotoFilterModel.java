@@ -9,7 +9,7 @@ public class PhotoFilterModel {
 
 	private String filterPhotoName;
 	private String filterGenreId;
-	private boolean filterByNudeContent;
+	private boolean showPhotosWithNudeContent;
 
 	private String filterAuthorName;
 	private List<Integer> photoAuthorMembershipTypeIds;
@@ -33,12 +33,12 @@ public class PhotoFilterModel {
 		this.filterGenreId = filterGenreId;
 	}
 
-	public boolean isFilterByNudeContent() {
-		return filterByNudeContent;
+	public boolean isShowPhotosWithNudeContent() {
+		return showPhotosWithNudeContent;
 	}
 
-	public void setFilterByNudeContent( final boolean filterByNudeContent ) {
-		this.filterByNudeContent = filterByNudeContent;
+	public void setShowPhotosWithNudeContent( final boolean showPhotosWithNudeContent ) {
+		this.showPhotosWithNudeContent = showPhotosWithNudeContent;
 	}
 
 	public String getFilterAuthorName() {

@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface GroupOperationService {
 
+	PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final User user );
+
 	PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer customGroupOperationMenuContainer, final boolean isBestPhotoList, final User user );
 
 	PhotoGroupOperationMenuContainer getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( final User userCardOwner, final User accessor );

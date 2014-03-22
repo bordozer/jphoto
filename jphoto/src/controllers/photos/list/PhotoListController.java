@@ -143,7 +143,10 @@ public class PhotoListController {
 	public PhotoFilterModel prepareUserFilterModel() {
 		final PhotoFilterModel filterModel = new PhotoFilterModel();
 
+		filterModel.setShowPhotosWithNudeContent( true );
+
 		filterModel.setFilterGenres( genreService.loadAll() );
+
 		filterModel.setPhotoAuthorMembershipTypeIds( Lists.transform( Arrays.asList( UserMembershipType.values() ), new Function<UserMembershipType, Integer>() {
 			@Override
 			public Integer apply( final UserMembershipType membershipType ) {
@@ -568,14 +571,14 @@ public class PhotoListController {
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
 		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
 
 		pagingModel.setTotalItems( selectResult.getRecordQty() );
 
 		filterModel.setFilterPhotoName( filterData.getFilterPhotoName() );
 		filterModel.setFilterGenreId( filterData.getFilterGenre() != null ? String.valueOf( filterData.getFilterGenre().getId() ) : "-1" );
-		filterModel.setFilterByNudeContent( filterData.isFilterByNudeContent() );
+		filterModel.setShowPhotosWithNudeContent( filterData.isShowPhotosWithNudeContent() );
 		filterModel.setFilterAuthorName( filterData.getFilterAuthorName() );
 		filterModel.setPhotoAuthorMembershipTypeIds( filterData.getPhotoAuthorMembershipTypeIds() );
 
@@ -600,7 +603,7 @@ public class PhotoListController {
 
 		final String filterByPhotoName = photoFilterModel.getFilterPhotoName();
 		final Genre filterByGenre = ! photoFilterModel.getFilterGenreId().equals( "-1" ) ? genreService.load( NumberUtils.convertToInt( photoFilterModel.getFilterGenreId() ) ) : null;
-		final boolean filterByNudeContent = photoFilterModel.isFilterByNudeContent();
+		final boolean showPhotosWithNudeContent = photoFilterModel.isShowPhotosWithNudeContent();
 		final String filterByAuthorName = photoFilterModel.getFilterAuthorName();
 		final List<Integer> filterByPhotoAuthorMembershipTypeIds = photoFilterModel.getPhotoAuthorMembershipTypeIds();
 
@@ -621,9 +624,9 @@ public class PhotoListController {
 			selectIdsQuery.addWhereAnd( photoNameCondition );
 		}
 
-		if ( filterByNudeContent ) {
+		if ( ! showPhotosWithNudeContent ) {
 			final SqlColumnSelectable tPhotoColHasNudeContent = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_CONTAINS_NUDE_CONTENT );
-			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColHasNudeContent, SqlCriteriaOperator.EQUALS, tPhotoColHasNudeContent, dateUtilsService );
+			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColHasNudeContent, SqlCriteriaOperator.EQUALS, ! showPhotosWithNudeContent, dateUtilsService );
 			selectIdsQuery.addWhereAnd( photoNameCondition );
 		}
 
@@ -664,7 +667,7 @@ public class PhotoListController {
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, currentUser );
 
 		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		model.addPhotoList( photoList );
 
@@ -673,7 +676,7 @@ public class PhotoListController {
 		final PhotoFilterData filterData = new PhotoFilterData();
 		filterData.setFilterPhotoName( filterByPhotoName );
 		filterData.setFilterGenre( filterByGenre );
-		filterData.setFilterByNudeContent( filterByNudeContent );
+		filterData.setShowPhotosWithNudeContent( showPhotosWithNudeContent );
 		filterData.setFilterAuthorName( filterByAuthorName );
 		filterData.setPhotoAuthorMembershipTypeIds( filterByPhotoAuthorMembershipTypeIds );
 		filterData.setSelectQuery( selectIdsQuery );

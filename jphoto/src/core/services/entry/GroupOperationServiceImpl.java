@@ -23,6 +23,11 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 	private SecurityService securityService;
 
 	@Override
+	public PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final User user ) {
+		return getPhotoListPhotoGroupOperationMenuContainer( null, false, user );
+	}
+
+	@Override
 	public PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer customGroupOperationMenuContainer, final boolean isBestPhotoList, final User user ) {
 
 		if ( isBestPhotoList ) {
