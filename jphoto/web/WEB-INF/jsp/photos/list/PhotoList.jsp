@@ -29,6 +29,10 @@
 		<photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}" />
 	</c:if>
 
+	<div class="floatleft">
+		<photo:photoFilter />
+	</div>
+
 	<div class="footerseparator"></div>
 
 </tags:page>

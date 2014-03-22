@@ -1,5 +1,10 @@
 package core.general.user;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
+
+import java.util.List;
+
 public enum UserMembershipType {
 
 	AUTHOR( 1, "author", "author plural" )
@@ -40,5 +45,14 @@ public enum UserMembershipType {
 		}
 
 		return null;
+	}
+
+	public static List<UserMembershipType> getByIds( final List<Integer> ids ) {
+		return Lists.transform( ids, new Function<Integer, UserMembershipType>() {
+			@Override
+			public UserMembershipType apply( final Integer membershipTypeId ) {
+				return UserMembershipType.getById( membershipTypeId );
+			}
+		} );
 	}
 }

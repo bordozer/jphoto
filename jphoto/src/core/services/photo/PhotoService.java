@@ -33,6 +33,8 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
 
+	List<PhotoInfo> getPhotoInfos( final SqlIdsSelectQuery selectQuery, final User user );
+
 	List<Photo> loadUserPhotos( final int userId );
 
 	int getPhotoQty();

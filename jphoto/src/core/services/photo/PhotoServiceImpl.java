@@ -220,7 +220,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> load( final List<Integer> photoIds ) {
 		final List<Photo> result = newArrayList();
 
-		for ( final Integer photoId : photoIds ) {
+		for ( final int photoId : photoIds ) {
 			result.add( load( photoId ) );
 		}
 
@@ -282,6 +282,13 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectIdsQuery ) {
 		final SqlSelectIdsResult sqlSelectIdsResult = load( selectIdsQuery );
 		return load( sqlSelectIdsResult.getIds() );
+	}
+
+	@Override
+	public List<PhotoInfo> getPhotoInfos( final SqlIdsSelectQuery selectQuery, final User user ) {
+		final SqlSelectIdsResult selectResult = load( selectQuery );
+		final List<Photo> photos = load( selectResult.getIds() );
+		return getPhotoInfos( photos, user );
 	}
 
 	@Override

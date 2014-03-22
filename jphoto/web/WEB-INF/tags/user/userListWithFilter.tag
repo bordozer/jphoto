@@ -31,7 +31,7 @@
 </div>
 
 <div class="floatleft">
-	<user:userFilter actionPrefix="members"/>
+	<user:userFilter />
 </div>
 
 <div class="footerseparator"></div>

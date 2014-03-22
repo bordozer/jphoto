@@ -15,6 +15,7 @@
 
 	<bean id="userEditDataValidator" class="controllers.users.edit.UserEditDataValidator"/>
 	<bean id="filterValidator" class="controllers.users.list.FilterValidator"/>
+	<bean id="photoFilterValidator" class="controllers.photos.list.PhotoFilterValidator"/>
 	<bean id="userCardValidator" class="controllers.users.card.UserCardValidator"/>
 	<bean id="userLoginValidator" class="controllers.users.login.UserLoginValidator"/>
 	<bean id="userAvatarValidator" class="controllers.users.avatar.UserAvatarValidator"/>

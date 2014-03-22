@@ -63,5 +63,5 @@ public interface PageTitlePhotoUtilsService {
 
 	PageTitleData getPhotoGroupOperationErrorTitleData();
 
-	PageTitleData getPhotoRatingTitleData( int photoRatingRank );
+	PageTitleData getFilteredPhotoListTitleData();
 }

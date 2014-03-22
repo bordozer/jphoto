@@ -328,9 +328,9 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	}
 
 	@Override
-	public PageTitleData getPhotoRatingTitleData( final int photoRatingRank ) {
+	public PageTitleData getFilteredPhotoListTitleData() {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String text = translatorService.translate( "Rating" );
+		final String text = translatorService.translate( "Filter" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, text );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), text );

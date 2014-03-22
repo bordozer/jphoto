@@ -1,5 +1,7 @@
 package controllers.photos.list;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
@@ -15,6 +17,8 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.dao.PhotoDaoImpl;
+import core.services.dao.UserDaoImpl;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
@@ -24,26 +28,33 @@ import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.UtilsService;
+import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import elements.PhotoList;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
-import sql.builder.SqlIdsSelectQuery;
+import sql.builder.*;
 import utils.NumberUtils;
 import utils.PagingUtils;
 import utils.UserUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -54,6 +65,9 @@ import static com.google.common.collect.Lists.newArrayList;
 public class PhotoListController {
 
 	public static final String VIEW = "photos/list/PhotoList";
+
+	private static final String PHOTO_FILTER_MODEL = "photoFilterModel";
+	private static final String PHOTO_FILTER_DATA_SESSION_KEY = "PhotoFilterDataKey";
 
 	@Autowired
 	private PhotoService photoService;
@@ -97,6 +111,15 @@ public class PhotoListController {
 	@Autowired
 	private Services services;
 
+	@Autowired
+	private BaseSqlUtilsService baseSqlUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
+
+	@Autowired
+	private PhotoFilterValidator photoFilterValidator;
+
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
 		final PhotoListModel model = new PhotoListModel();
@@ -116,9 +139,24 @@ public class PhotoListController {
 		return pagingModel;
 	}
 
+	@ModelAttribute( PHOTO_FILTER_MODEL )
+	public PhotoFilterModel prepareUserFilterModel() {
+		final PhotoFilterModel filterModel = new PhotoFilterModel();
+
+		filterModel.setFilterGenres( genreService.loadAll() );
+		filterModel.setPhotoAuthorMembershipTypeIds( Lists.transform( Arrays.asList( UserMembershipType.values() ), new Function<UserMembershipType, Integer>() {
+			@Override
+			public Integer apply( final UserMembershipType membershipType ) {
+				return membershipType.getId();
+			}
+		} ) );
+
+		return filterModel;
+	}
+
 	// all -->
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String showAllPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showAllPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList();
 
@@ -146,7 +184,7 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
-	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( EnvironmentContext.getCurrentUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
@@ -164,7 +202,7 @@ public class PhotoListController {
 
 	// by genre -->
 	@RequestMapping( method = RequestMethod.GET, value = "genres/{genreId}/" )
-	public String showPhotosByGenre( final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByGenre( final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
@@ -196,7 +234,7 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "genres/{genreId}/best/" )
-	public String showPhotosByGenreBest( final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByGenreBest( final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
@@ -218,7 +256,7 @@ public class PhotoListController {
 
 	// by user -->
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/" )
-	public String showPhotosByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 
@@ -255,7 +293,7 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/best/" )
-	public String showPhotosByUserBest( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByUserBest( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 
@@ -281,7 +319,7 @@ public class PhotoListController {
 
 	// by user and genre -->
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/genre/{genreId}/" )
-	public String showPhotosByUserByGenre( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByUserByGenre( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final int genreId = assertGenreExists( _genreId );
@@ -321,7 +359,7 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/genre/{genreId}/best/" )
-	public String showPhotosByUserByGenreBest( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByUserByGenreBest( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final int genreId = assertGenreExists( _genreId );
@@ -348,7 +386,7 @@ public class PhotoListController {
 
 	// by user and genre <--
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/category/" )
-	public String showPhotosVotedByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosVotedByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 
@@ -367,7 +405,8 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/category/{votingCategoryId}/" )
-	public String showPhotosByUserByVotingCategory( final @PathVariable( "userId" ) String _userId, final @PathVariable( "votingCategoryId" ) int votingCategoryId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByUserByVotingCategory( final @PathVariable( "userId" ) String _userId, final @PathVariable( "votingCategoryId" ) int votingCategoryId, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 
@@ -390,12 +429,14 @@ public class PhotoListController {
 	// by date -->
 
 	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/uploaded/" )
-	public String showPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		return processPhotosOnPeriod( date, date, model, pagingModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/uploaded/" )
-	public String showPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
+		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		return processPhotosOnPeriod( dateFrom, dateTo, model, pagingModel );
 	}
 
@@ -422,12 +463,14 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/best/" )
-	public String showBestPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showBestPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		return processBestPhotosOnPeriod( date, date, model, pagingModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/best/" )
-	public String showBestPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showBestPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
+		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		return processBestPhotosOnPeriod( dateFrom, dateTo, model, pagingModel );
 	}
 
@@ -455,7 +498,8 @@ public class PhotoListController {
 
 	// by User Membership Type -->
 	@RequestMapping( method = RequestMethod.GET, value = "type/{typeId}/" )
-	public String showPhotosByMembershipType( final @PathVariable( "typeId" ) int typeId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByMembershipType( final @PathVariable( "typeId" ) int typeId, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList();
@@ -484,7 +528,8 @@ public class PhotoListController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "type/{typeId}/best/" )
-	public String showPhotosByMembershipTypeBest( final @PathVariable( "typeId" ) int typeId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	public String showPhotosByMembershipTypeBest( final @PathVariable( "typeId" ) int typeId, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, EnvironmentContext.getCurrentUser() );
@@ -500,6 +545,129 @@ public class PhotoListController {
 		return VIEW;
 	}
 	// by User Membership Type <--
+
+	@RequestMapping( method = RequestMethod.GET, value = "/filter/" )
+	public String searchGet( final PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel
+		, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel, final HttpServletRequest request ) {
+
+		final HttpSession session = request.getSession();
+		final PhotoFilterData filterData = ( PhotoFilterData ) session.getAttribute( PHOTO_FILTER_DATA_SESSION_KEY );
+
+		if ( filterData == null ) {
+			return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() ); // TODO: the session is expired - haw to be?
+		}
+
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		final SqlIdsSelectQuery selectQuery = filterData.getSelectQuery();
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+
+		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
+
+		final List<Photo> photos = photoService.load( selectResult.getIds() );
+		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
+		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
+		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+		model.addPhotoList( photoList );
+
+		pagingModel.setTotalItems( selectResult.getRecordQty() );
+
+		filterModel.setFilterPhotoName( filterData.getFilterPhotoName() );
+		filterModel.setFilterGenreId( filterData.getFilterGenre() != null ? String.valueOf( filterData.getFilterGenre().getId() ) : "-1" );
+		filterModel.setFilterAuthorName( filterData.getFilterAuthorName() );
+		filterModel.setPhotoAuthorMembershipTypeIds( filterData.getPhotoAuthorMembershipTypeIds() );
+
+		model.setPageTitleData( pageTitlePhotoUtilsService.getFilteredPhotoListTitleData() );
+
+		return PhotoListController.VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.POST, value = "/filter/" )
+	public String searchPost( final PhotoListModel model, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel photoFilterModel
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final HttpServletRequest request  ) {
+
+		model.setPageTitleData( pageTitlePhotoUtilsService.getFilteredPhotoListTitleData() );
+
+		final BindingResult bindingResult = new BindException( photoFilterModel, "" );
+		photoFilterValidator.validate( photoFilterModel, bindingResult );
+		photoFilterModel.setBindingResult( bindingResult );
+
+		if ( bindingResult.hasErrors() ) {
+			return VIEW;
+		}
+
+		final String filterByPhotoName = photoFilterModel.getFilterPhotoName();
+		final Genre filterByGenre = ! photoFilterModel.getFilterGenreId().equals( "-1" ) ? genreService.load( NumberUtils.convertToInt( photoFilterModel.getFilterGenreId() ) ) : null;
+		final String filterByAuthorName = photoFilterModel.getFilterAuthorName();
+		final List<Integer> filterByPhotoAuthorMembershipTypeIds = photoFilterModel.getPhotoAuthorMembershipTypeIds();
+
+		final SqlTable tPhotos = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
+		final SqlIdsSelectQuery selectIdsQuery = new SqlIdsSelectQuery( tPhotos );
+
+		final SqlTable tUsers = new SqlTable( UserDaoImpl.TABLE_USERS );
+
+		if ( StringUtils.isNotEmpty( filterByPhotoName ) ) {
+			final SqlColumnSelectable tPhotoColName = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_NAME );
+			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColName, SqlCriteriaOperator.LIKE, filterByPhotoName, dateUtilsService );
+			selectIdsQuery.addWhereAnd( photoNameCondition );
+		}
+
+		final boolean isFilterByAuthorNameNeeded = StringUtils.isNotEmpty( filterByAuthorName );
+		final boolean isFilterByAuthorMembershipNeeded = filterByPhotoAuthorMembershipTypeIds.size() < UserMembershipType.values().length;
+		final boolean isFilterByUserDataNeeded = isFilterByAuthorNameNeeded || isFilterByAuthorMembershipNeeded;
+		if ( isFilterByUserDataNeeded ) {
+			final SqlColumnSelect tPhotosColUserId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_USER_ID );
+			final SqlColumnSelect tUsersColId = new SqlColumnSelect( tUsers, UserDaoImpl.ENTITY_ID );
+			final SqlJoin join = SqlJoin.inner( tUsers, new SqlJoinCondition( tPhotosColUserId, tUsersColId ) );
+			selectIdsQuery.joinTable( join );
+
+			if ( isFilterByAuthorNameNeeded ) {
+				final SqlColumnSelectable tUserColName = new SqlColumnSelect( tUsers, UserDaoImpl.TABLE_COLUMN_NAME );
+				final SqlLogicallyJoinable photoAuthorNameCondition = new SqlCondition( tUserColName, SqlCriteriaOperator.LIKE, filterByAuthorName, dateUtilsService );
+				selectIdsQuery.addWhereAnd( photoAuthorNameCondition );
+			}
+
+			if ( isFilterByAuthorMembershipNeeded ) {
+				final SqlColumnSelectable tUsersColMembershipType = new SqlColumnSelect( tUsers, UserDaoImpl.TABLE_COLUMN_MEMBERSHIP_TYPE );
+				final SqlConditionList membershipConditions = new SqlLogicallyOr();
+				final List<SqlLogicallyJoinable> membershipConditionsItems = newArrayList();
+
+				for ( final UserMembershipType membershipType : UserMembershipType.getByIds( filterByPhotoAuthorMembershipTypeIds ) ) {
+					membershipConditionsItems.add( new SqlCondition( tUsersColMembershipType, SqlCriteriaOperator.EQUALS, membershipType.getId(), dateUtilsService ) );
+				}
+				membershipConditions.setLogicallyItems( membershipConditionsItems );
+				selectIdsQuery.addWhereAnd( membershipConditions );
+			}
+		}
+
+		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel );
+
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );
+		final List<Photo> photos = photoService.load( selectResult.getIds() );
+		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, currentUser );
+
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
+		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
+		model.addPhotoList( photoList );
+
+		pagingModel.setTotalItems( selectResult.getRecordQty() );
+
+		final PhotoFilterData filterData = new PhotoFilterData();
+		filterData.setFilterPhotoName( filterByPhotoName );
+		filterData.setFilterGenre( filterByGenre );
+		filterData.setFilterAuthorName( filterByAuthorName );
+		filterData.setPhotoAuthorMembershipTypeIds( filterByPhotoAuthorMembershipTypeIds );
+		filterData.setSelectQuery( selectIdsQuery );
+
+		final HttpSession session = request.getSession();
+		session.setAttribute( PHOTO_FILTER_DATA_SESSION_KEY, filterData );
+
+		return VIEW;
+	}
 
 	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<AbstractPhotoListData> photoListDatas ) {
 

@@ -9,8 +9,6 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<%@ attribute name="actionPrefix" required="true" type="java.lang.String" %>
-
 <jsp:useBean id="userFilterModel" type="controllers.users.list.UserFilterModel" scope="request"/>
 
 <c:if test="${userFilterModel.visible}">
@@ -21,7 +19,7 @@
 	<c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
 	<c:set var="membershipTypeControl" value="userFilterModel.membershipTypeList"/>
 
-	<eco:form action="${eco:baseUrlWithPrefix()}/${actionPrefix}/filter/">
+	<eco:form action="${eco:baseUrlWithPrefix()}/members/filter/">
 
 		<table:table width="400">
 
