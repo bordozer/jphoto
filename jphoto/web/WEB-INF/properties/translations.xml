@@ -2197,10 +2197,10 @@
 		<ru><![CDATA[Тип членства автора]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Search result</nerd>
+		<ru><![CDATA[Результаты поиска]]></ru>
+	</translation>
 
 	<!--<translation>
 		<nerd></nerd>

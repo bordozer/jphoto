@@ -17,8 +17,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.services.dao.PhotoDaoImpl;
-import core.services.dao.UserDaoImpl;
+import core.services.dao.*;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
@@ -140,10 +139,21 @@ public class PhotoListController {
 	}
 
 	@ModelAttribute( PHOTO_FILTER_MODEL )
-	public PhotoFilterModel prepareUserFilterModel() {
+	public PhotoFilterModel prepareUserFilterModel( final HttpServletRequest request ) {
 		final PhotoFilterModel filterModel = new PhotoFilterModel();
 
 		filterModel.setShowPhotosWithNudeContent( true );
+
+		final HttpSession session = request.getSession();
+		final PhotoFilterData filterData = ( PhotoFilterData ) session.getAttribute( PHOTO_FILTER_DATA_SESSION_KEY );
+
+		if ( filterData == null ) {
+			filterModel.setPhotosSortColumn( PhotoFilterSortColumn.POSTING_TIME.getId() );
+			filterModel.setPhotosSortOrder( PhotoFilterSortOrder.DESC.getId() );
+		} else {
+			filterModel.setPhotosSortColumn( filterData.getPhotosSortColumn() );
+			filterModel.setPhotosSortOrder( filterData.getPhotosSortOrder() );
+		}
 
 		filterModel.setFilterGenres( genreService.loadAll() );
 
@@ -581,7 +591,7 @@ public class PhotoListController {
 
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result" ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
@@ -618,6 +628,8 @@ public class PhotoListController {
 		final boolean showPhotosWithNudeContent = photoFilterModel.isShowPhotosWithNudeContent();
 		final String filterByAuthorName = photoFilterModel.getFilterAuthorName();
 		final List<Integer> filterByPhotoAuthorMembershipTypeIds = photoFilterModel.getPhotoAuthorMembershipTypeIds();
+		final PhotoFilterSortColumn sortColumn = PhotoFilterSortColumn.getById( photoFilterModel.getPhotosSortColumn() );
+		final PhotoFilterSortOrder sortOrder = PhotoFilterSortOrder.getById( photoFilterModel.getPhotosSortOrder() );
 
 		final SqlTable tPhotos = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlIdsSelectQuery selectIdsQuery = new SqlIdsSelectQuery( tPhotos );
@@ -670,6 +682,64 @@ public class PhotoListController {
 			}
 		}
 
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhotos, UserDaoImpl.ENTITY_ID );
+		final SqlColumnSelectable tPhotosColUploadTime = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+
+		final SqlColumnSelectable tableSortColumn;
+
+		switch ( sortColumn ) {
+			case POSTING_TIME:
+				tableSortColumn = tPhotosColUploadTime;
+				break;
+			case COMMENTS_COUNT:
+				final SqlTable tComments = new SqlTable( PhotoCommentDaoImpl.TABLE_COMMENTS );
+				final SqlColumnSelect tCommentsColPhotoId = new SqlColumnSelect( tComments, PhotoCommentDaoImpl.TABLE_COLUMN_PHOTO_ID );
+
+
+				final SqlJoin join1 = SqlJoin.inner( tComments, new SqlJoinCondition( tPhotoColId, tCommentsColPhotoId ) );
+				selectIdsQuery.joinTable( join1 );
+
+				final SqlColumnSelect tCommentsColId = new SqlColumnSelect( tComments, PhotoCommentDaoImpl.ENTITY_ID );
+				tableSortColumn = new SqlColumnAggregate( tCommentsColId, SqlFunctions.COUNT, "commentsCount" );
+
+				final List<SqlBuildable> groupBy1 = newArrayList();
+				groupBy1.add( tPhotoColId );
+				selectIdsQuery.setGroupColumns( groupBy1 );
+				break;
+			case VIEWS_COUNT:
+				final SqlTable tPreviews = new SqlTable( PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW );
+				final SqlColumnSelect tPreviewsColPhotoId = new SqlColumnSelect( tPreviews, PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW_COLUMN_PHOTO_ID );
+
+				final SqlJoin join2 = SqlJoin.inner( tPreviews, new SqlJoinCondition( tPhotoColId, tPreviewsColPhotoId ) );
+				selectIdsQuery.joinTable( join2 );
+
+				final SqlColumnSelect tPreviewsColId = new SqlColumnSelect( tPreviews, PhotoCommentDaoImpl.ENTITY_ID );
+				tableSortColumn = new SqlColumnAggregate( tPreviewsColId, SqlFunctions.COUNT, "viewsCount" );
+
+				final List<SqlBuildable> groupBy2 = newArrayList();
+				groupBy2.add( tPhotoColId );
+				selectIdsQuery.setGroupColumns( groupBy2 );
+				break;
+			case RATING:
+				final SqlTable tPhotoVotingSummary = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_SUMMARY );
+				final SqlColumnSelect tPhotoVotingSummaryColPhotoId = new SqlColumnSelect( tPhotoVotingSummary, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_SUMMARY_PHOTO_ID );
+
+				final SqlJoin join3 = SqlJoin.inner( tPhotoVotingSummary, new SqlJoinCondition( tPhotoColId, tPhotoVotingSummaryColPhotoId ) );
+				selectIdsQuery.joinTable( join3 );
+
+				final SqlColumnSelect tPhotoVotingSummaryColPhotoSummaryMark = new SqlColumnSelect( tPhotoVotingSummary, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_SUMMARY_MARKS );
+				tableSortColumn = new SqlColumnAggregate( tPhotoVotingSummaryColPhotoSummaryMark, SqlFunctions.SUM, "photoSummaryMark" );
+
+				final List<SqlBuildable> groupBy3 = newArrayList();
+				groupBy3.add( tPhotoColId );
+				selectIdsQuery.setGroupColumns( groupBy3 );
+				break;
+			default:
+				throw new IllegalArgumentException( String.format( "Illegal photo search form sort column: %s", sortColumn ) );
+		}
+		selectIdsQuery.addSorting( tableSortColumn, sortOrder.getSortOrder() );
+		selectIdsQuery.addSorting( tPhotosColUploadTime, SqlSortOrder.DESC );
+
 		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel );
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
@@ -678,7 +748,7 @@ public class PhotoListController {
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, currentUser );
 
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Filter result" ) );
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result" ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		model.addPhotoList( photoList );
@@ -692,6 +762,8 @@ public class PhotoListController {
 		filterData.setFilterAuthorName( filterByAuthorName );
 		filterData.setPhotoAuthorMembershipTypeIds( filterByPhotoAuthorMembershipTypeIds );
 		filterData.setSelectQuery( selectIdsQuery );
+		filterData.setPhotosSortColumn( sortColumn.getId() );
+		filterData.setPhotosSortOrder( sortOrder.getId() );
 
 		final HttpSession session = request.getSession();
 		session.setAttribute( PHOTO_FILTER_DATA_SESSION_KEY, filterData );

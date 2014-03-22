@@ -1,4 +1,6 @@
 <%@ tag import="core.general.user.UserMembershipType" %>
+<%@ tag import="controllers.photos.list.PhotoFilterSortColumn" %>
+<%@ tag import="controllers.photos.list.PhotoFilterSortOrder" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,6 +12,8 @@
 <jsp:useBean id="photoFilterModel" type="controllers.photos.list.PhotoFilterModel" scope="request"/>
 
 <c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
+<c:set var="photoFilterSortColumnsValues" value="<%=PhotoFilterSortColumn.values()%>"/>
+<c:set var="photoFilterSortOrderValues" value="<%=PhotoFilterSortOrder.values()%>"/>
 
 <form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrlWithPrefix()}/photos/filter/">
 
@@ -35,7 +39,7 @@
 		</table:tr>
 
 		<table:tr>
-			<table:tdtext text_t="Show photos with nude content"/>
+			<table:tdtext text_t="Show photos with nude content" />
 			<table:tddata>
 				<form:checkbox path="showPhotosWithNudeContent"/>
 			</table:tddata>
@@ -54,6 +58,17 @@
 			<table:tdtext text_t="Author membership type"/>
 			<table:tddata>
 				<form:checkboxes path="photoAuthorMembershipTypeIds" items="${membershipTypeListValues}" itemValue="id" itemLabel="name" delimiter="<br />"/>
+			</table:tddata>
+		</table:tr>
+
+		<table:separator colspan="2" />
+
+		<table:tr>
+			<table:tdtext text_t="Sort by"/>
+			<table:tddata>
+				<form:select path="photosSortColumn" items="${photoFilterSortColumnsValues}" itemValue="id" itemLabel="name" />
+				<br />
+				<form:radiobuttons path="photosSortOrder" items="${photoFilterSortOrderValues}" itemValue="id" itemLabel="name" delimiter="<br />" />
 			</table:tddata>
 		</table:tr>
 
