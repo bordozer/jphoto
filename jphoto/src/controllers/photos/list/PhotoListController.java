@@ -613,6 +613,12 @@ public class PhotoListController {
 			selectIdsQuery.addWhereAnd( photoNameCondition );
 		}
 
+		if ( filterByGenre != null ) {
+			final SqlColumnSelectable tPhotoColGenreId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
+			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColGenreId, SqlCriteriaOperator.LIKE, filterByGenre.getId(), dateUtilsService );
+			selectIdsQuery.addWhereAnd( photoNameCondition );
+		}
+
 		final boolean isFilterByAuthorNameNeeded = StringUtils.isNotEmpty( filterByAuthorName );
 		final boolean isFilterByAuthorMembershipNeeded = filterByPhotoAuthorMembershipTypeIds.size() < UserMembershipType.values().length;
 		final boolean isFilterByUserDataNeeded = isFilterByAuthorNameNeeded || isFilterByAuthorMembershipNeeded;
