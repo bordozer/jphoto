@@ -13,7 +13,7 @@
 		<c:set var="total" value="${total + userPhotosByGenre.photosQty}" />
 	</c:forEach>
 
-	<div style="float: left; width: 100%; margin: 10px; text-align: center;">
+	<div style="float: left; width: 100%; margin: 10px; padding-bottom: 20px; text-align: center;">
 
 		<links:userPhotos user="${user}" /> ( ${total} ) &nbsp;-&nbsp;
 

@@ -15,7 +15,7 @@
 
 	<table:table width="600">
 
-		<table:separatorInfo colspan="2" title="${eco:translate('Photo filter')}" />
+		<table:separatorInfo colspan="2" title="${eco:translate('Photo search')}" />
 
 		<table:tr>
 			<table:tdtext text_t="Photo name contains"/>
@@ -59,7 +59,7 @@
 
 		<table:separator colspan="2" />
 
-		<table:trok text_t="Filter" />
+		<table:trok text_t="Search photos" />
 
 	</table:table>
 

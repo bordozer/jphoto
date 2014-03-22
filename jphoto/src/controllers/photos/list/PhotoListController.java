@@ -233,6 +233,8 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas );
 
+		filterModel.setFilterGenreId( _genreId );
+
 		return VIEW;
 	}
 
@@ -252,6 +254,8 @@ public class PhotoListController {
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		filterModel.setFilterGenreId( _genreId );
 
 		return VIEW;
 	}
@@ -358,6 +362,10 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas );
 
+		filterModel.setFilterGenreId( _genreId );
+		filterModel.setFilterAuthorName( user.getName() );
+		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
+
 		return VIEW;
 	}
 
@@ -383,6 +391,10 @@ public class PhotoListController {
 		initUserGenres( model, user );
 
 		initPhotoListData( model, pagingModel, photoListDatas );
+
+		filterModel.setFilterGenreId( _genreId );
+		filterModel.setFilterAuthorName( user.getName() );
+		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
 
 		return VIEW;
 	}
