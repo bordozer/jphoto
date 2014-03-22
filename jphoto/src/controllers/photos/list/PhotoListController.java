@@ -190,9 +190,7 @@ public class PhotoListController {
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
-
-		setDefaultOrdering( filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -208,9 +206,7 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
-
-		setDefaultOrdering( filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -244,10 +240,9 @@ public class PhotoListController {
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		filterModel.setFilterGenreId( _genreId );
-		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -267,10 +262,9 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		filterModel.setFilterGenreId( _genreId );
-		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -309,10 +303,9 @@ public class PhotoListController {
 
 		initUserGenres( model, user );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		fillFilterModelWithUserData( filterModel, user );
-		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -336,7 +329,7 @@ public class PhotoListController {
 
 		initUserGenres( model, user );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		fillFilterModelWithUserData( filterModel, user );
 
@@ -380,11 +373,10 @@ public class PhotoListController {
 
 		initUserGenres( model, user );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );
-		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -410,7 +402,7 @@ public class PhotoListController {
 
 		initUserGenres( model, user );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );
@@ -433,9 +425,7 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
-
-		setDefaultOrdering( filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -457,11 +447,9 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		fillFilterModelWithUserData( filterModel, user );
-
-		setDefaultOrdering( filterModel );
 
 		return VIEW;
 	}
@@ -497,9 +485,7 @@ public class PhotoListController {
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
-
-		setDefaultOrdering( filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -507,16 +493,16 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/best/" )
 	public String showBestPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processBestPhotosOnPeriod( date, date, model, pagingModel );
+		return processBestPhotosOnPeriod( date, date, model, pagingModel, filterModel );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/best/" )
 	public String showBestPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
 		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processBestPhotosOnPeriod( dateFrom, dateTo, model, pagingModel );
+		return processBestPhotosOnPeriod( dateFrom, dateTo, model, pagingModel, filterModel );
 	}
 
-	private String processBestPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel ) {
+	private String processBestPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel, final PhotoFilterModel filterModel ) {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
@@ -532,7 +518,7 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -564,9 +550,7 @@ public class PhotoListController {
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
-
-		setDefaultOrdering( filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -584,7 +568,7 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
 	}
@@ -790,7 +774,7 @@ public class PhotoListController {
 		return VIEW;
 	}
 
-	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<AbstractPhotoListData> photoListDatas ) {
+	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<AbstractPhotoListData> photoListDatas, final PhotoFilterModel filterModel ) {
 
 		for ( final AbstractPhotoListData listData : photoListDatas ) {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
@@ -807,6 +791,8 @@ public class PhotoListController {
 			model.addPhotoList( photoList );
 			model.setPageTitleData( listData.getTitleData() );
 		}
+
+		setDefaultOrdering( filterModel );
 	}
 
 	private List<Photo> getPhotos( final PagingModel pagingModel, final AbstractPhotoListData listData ) {
