@@ -1,5 +1,7 @@
 package core.services.ajax;
 
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
@@ -20,5 +22,15 @@ public class AjaxServiceImpl implements AjaxService {
 
 		final AjaxResultDTO resultDTO = AjaxResultDTO.successResult();
 		return resultDTO;
+	}
+
+	@Override
+	public PhotosightUserDTO getPhotosightUserDTO( final int photosightUserId ) {
+		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( photosightUserId );
+
+		photosightUserDTO.setPhotosightUserName( PhotosightRemoteContentHelper.getPhotosightUserName( photosightUserId ) );
+		photosightUserDTO.setPhotosightUserCardUrl( PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ) );
+
+		return photosightUserDTO;
 	}
 }

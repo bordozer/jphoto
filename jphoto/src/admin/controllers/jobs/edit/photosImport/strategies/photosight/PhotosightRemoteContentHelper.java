@@ -44,6 +44,10 @@ public class PhotosightRemoteContentHelper {
 		return getPageUrl( photoId, PhotosightImportStrategy.PHOTOS );
 	}
 
+	public static String getUserCardUrl( final int userId ) {
+		return getUserCardUrl( userId, 0 );
+	}
+
 	public static String getUserCardUrl( final int userId, final int page ) {
 		return String.format( "%s/?pager=%d", getPageUrl( userId, PhotosightImportStrategy.USERS ), page );
 	}
@@ -57,7 +61,11 @@ public class PhotosightRemoteContentHelper {
 	}
 
 	public static String getPhotosightUserName( final PhotosightUser photosightUser ) {
-		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUser.getId() );
+		return getPhotosightUserName( photosightUser.getId() );
+	}
+
+	public static String getPhotosightUserName( final int photosightUserId ) {
+		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
 		}

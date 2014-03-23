@@ -7,6 +7,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.Comparator" %>
+<%@ page import="org.jabsorb.JSONRPCBridge" %>
+<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="core.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -52,6 +55,9 @@
 			return category1.name().compareTo( category12.name() );
 		}
 	} );
+%>
+<%
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 <c:set var="photosightCategories" value="<%=photosightCategories%>"/>
 
@@ -167,9 +173,10 @@
 									<table:tr>
 										<table:tdtext text_t="Photosight user ids" isMandatory="true"/>
 										<table:td>
-											<form:input path="${photosightUserIdControl}" size="60"/>
+											<form:input path="${photosightUserIdControl}" size="60" onchange="showPhotosightUserInfo();"/>
 											<br/>
 											${eco:translate("Use ',' as separator")}
+											<div id="photosightUserInfo" class="floatleft" style="display: none;"></div>
 										</table:td>
 									</table:tr>
 
@@ -263,6 +270,31 @@
 				$( '#${filesystemImportDivId}' ).hide();
 				$( '#${photosightImportDivId}' ).show();
 			}
+		}
+
+		var jsonRPC;
+		jQuery().ready( function () {
+			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		} );
+
+		function showPhotosightUserInfo() {
+
+			var photosightUserInfo = $( "#photosightUserInfo" );
+
+			var photosightUserId = $( "#${photosightUserIdControl}" ).val();
+			alert( photosightUserId );
+			if ( photosightUserId == '' ) {
+				photosightUserInfo.hide();
+				return;
+			}
+
+			var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId );
+			var photosightUserName = photosightUserDTO.photosightUserName;
+			var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
+
+			photosightUserInfo.html( "<a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+
+			photosightUserInfo.show();
 		}
 	</script>
 
