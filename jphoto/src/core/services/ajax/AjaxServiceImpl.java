@@ -6,6 +6,8 @@ import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
+import org.apache.commons.lang.StringUtils;
+import utils.StringUtilities;
 
 public class AjaxServiceImpl implements AjaxService {
 
@@ -28,8 +30,12 @@ public class AjaxServiceImpl implements AjaxService {
 	public PhotosightUserDTO getPhotosightUserDTO( final int photosightUserId ) {
 		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( photosightUserId );
 
-		photosightUserDTO.setPhotosightUserName( PhotosightRemoteContentHelper.getPhotosightUserName( photosightUserId ) );
-		photosightUserDTO.setPhotosightUserCardUrl( PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ) );
+		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUserId );
+		final String photosightUserCardUrl = PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId );
+
+		photosightUserDTO.setPhotosightUserName( photosightUserName );
+		photosightUserDTO.setPhotosightUserCardUrl( photosightUserCardUrl );
+		photosightUserDTO.setPhotosightUserFound( StringUtils.isNotEmpty( photosightUserName ) );
 
 		return photosightUserDTO;
 	}

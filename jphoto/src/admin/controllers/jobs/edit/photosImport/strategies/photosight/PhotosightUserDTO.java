@@ -6,6 +6,8 @@ public class PhotosightUserDTO {
 	private String photosightUserName;
 	private String photosightUserCardUrl;
 
+	private boolean photosightUserFound;
+
 	public PhotosightUserDTO( final int photosightUserId ) {
 		this.photosightUserId = photosightUserId;
 	}
@@ -28,5 +30,18 @@ public class PhotosightUserDTO {
 
 	public void setPhotosightUserCardUrl( final String photosightUserCardUrl ) {
 		this.photosightUserCardUrl = photosightUserCardUrl;
+	}
+
+	public boolean isPhotosightUserFound() {
+		return photosightUserFound;
+	}
+
+	public void setPhotosightUserFound( final boolean photosightUserFound ) {
+		this.photosightUserFound = photosightUserFound;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s", photosightUserName );
 	}
 }

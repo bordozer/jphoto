@@ -176,7 +176,7 @@
 											<form:input path="${photosightUserIdControl}" size="60" onchange="showPhotosightUserInfo();"/>
 											<br/>
 											${eco:translate("Use ',' as separator")}
-											<div id="photosightUserInfo" class="floatleft" style="display: none;"></div>
+											<div id="photosightUserInfoDiv" class="floatleft" style="display: none;"></div>
 										</table:td>
 									</table:tr>
 
@@ -277,24 +277,119 @@
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
-		function showPhotosightUserInfo() {
+		var photosightUserModel = function () {
 
-			var photosightUserInfo = $( "#photosightUserInfo" );
+			var photosightUsersIds = [];
+			var photosightUserInfoDivSelector = "#photosightUserInfoDiv";
 
-			var photosightUserId = $( "#${photosightUserIdControl}" ).val();
-			alert( photosightUserId );
-			if ( photosightUserId == '' ) {
-				photosightUserInfo.hide();
-				return;
+			function resetPhotosightUser( photosightUserId ) {
+				photosightUsersIds = [];
 			}
 
-			var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId );
-			var photosightUserName = photosightUserDTO.photosightUserName;
-			var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
+			function registerPhotosightUser( photosightUserId ) {
+				if ( ! isPhotosightUserRegistered( photosightUserId ) ) {
+					photosightUsersIds.push( photosightUserId );
+				}
+			}
 
-			photosightUserInfo.html( "<a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+			function isPhotosightUserRegistered( photosightUserId ) {
+				return findPhotosightUser( photosightUserId ) != null;
+			}
 
-			photosightUserInfo.show();
+			function findPhotosightUser( photosightUserId ) {
+				for ( var index = 0; index < photosightUsersIds.length; index++ ) {
+					var entry = photosightUsersIds[ index ];
+					if ( entry == photosightUserId ) {
+						return entry;
+					}
+				}
+				return null;
+			}
+
+			function getPhotosightUsersIds( _photosightUserIds ) {
+				var arr = _photosightUserIds.split( ',' );
+				var photosightUserIds = [];
+				for ( var i = 0; i < arr.length; i++ ) {
+					photosightUserIds.push( arr[i].trim() );
+				}
+				return photosightUserIds;
+			}
+
+			function getPhotosightUserInfoDiv() {
+				return $( photosightUserInfoDivSelector );
+			}
+
+			function showPhotosightUserInfoDiv() {
+				getPhotosightUserInfoDiv().show();
+			}
+
+			function hidePhotosightUserInfoDiv() {
+				getPhotosightUserInfoDiv().hide();
+			}
+
+			function clearPhotosightUserInfoDiv() {
+				getPhotosightUserInfoDiv().html( '' );
+			}
+
+			function renderExistingPhotosightUser( photosightUserDTO ) {
+
+				var photosightUserName = photosightUserDTO.photosightUserName;
+				var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
+
+				getPhotosightUserInfoDiv().append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+			}
+
+			function renderNotExistingPhotosightUser( photosightUserId ) {
+				getPhotosightUserInfoDiv().append( "#" + photosightUserId + ": Not found" );
+			}
+
+			return {
+				registerPhotosightUsers:function ( _photosightUserIds ) {
+
+//					console.log( _photosightUserIds );
+
+					resetPhotosightUser();
+
+					var ids = _photosightUserIds.trim();
+
+					if ( ids == '' ) {
+						hidePhotosightUserInfoDiv();
+						return;
+					}
+
+					var photosightUserIds = getPhotosightUsersIds( ids );
+					for ( var i = 0; i < photosightUserIds.length; i++ ) {
+						registerPhotosightUser( photosightUserIds[i] );
+					}
+				},
+				renderPhotosightUsers:function () {
+					var photosightUserInfoDiv = $( photosightUserInfoDivSelector );
+
+					clearPhotosightUserInfoDiv();
+
+					for ( var index = 0; index < photosightUsersIds.length; index++ ) {
+						var photosightUserId = photosightUsersIds[ index ];
+						var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId );
+						console.log( 'User ' + photosightUserId + ' is found: ' + photosightUserDTO.photosightUserFound );
+						if ( photosightUserDTO.photosightUserFound ) {
+							renderExistingPhotosightUser( photosightUserDTO );
+						} else {
+							renderNotExistingPhotosightUser( photosightUserId );
+						}
+						photosightUserInfoDiv.append( '<br />' );
+
+						showPhotosightUserInfoDiv();
+					}
+				}
+			}
+		}();
+
+		function showPhotosightUserInfo() {
+
+			// 375096,319232,428597
+			var _photosightUserIds = $( "#${photosightUserIdControl}" ).val();
+			photosightUserModel.registerPhotosightUsers( _photosightUserIds );
+			photosightUserModel.renderPhotosightUsers();
 		}
 	</script>
 
