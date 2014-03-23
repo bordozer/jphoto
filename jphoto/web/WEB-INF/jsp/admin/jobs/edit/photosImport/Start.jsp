@@ -256,6 +256,9 @@
 	<script type="text/javascript">
 		jQuery().ready( function () {
 			setFormsVisibility();
+			if ( $( "#${photosightUserIdControl}" ).val().trim() != '' ) {
+				showPhotosightUserInfoAsync();
+			}
 		} );
 
 		function setFormsVisibility() {
