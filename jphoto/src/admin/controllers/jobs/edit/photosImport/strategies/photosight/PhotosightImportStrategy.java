@@ -369,6 +369,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		return countedTotal;
 	}
 
+	public static String getPhotosightUserLogin( final int photosightUserId ) {
+		return String.format( "%s%d", PHOTOSIGHT_USER_LOGIN_PREFIX, photosightUserId );
+	}
+
 	private List<Integer> extractUserPhotosIds( final String userPageContent ) {
 		final List<Integer> result = newArrayList();
 
@@ -505,7 +509,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		photosightUser.setName( userName );
 
-		final String userLogin = String.format( "%s%d", PHOTOSIGHT_USER_LOGIN_PREFIX, photosightUser.getId() );
+		final String userLogin = getPhotosightUserLogin( photosightUser.getId() );
 		final User existingUser = services.getUserService().loadByLogin( userLogin );
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		if ( existingUser != null ) {
@@ -531,8 +535,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		return user;
 	}
-
-
 
 	private Date extractUploadTime( final String photoPageContent ) {
 		final Pattern pattern = Pattern.compile( "\\d{2}\\.\\d{2}\\.\\d{4}\\s\\d{2}\\:\\d{2}" );

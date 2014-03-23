@@ -1,15 +1,34 @@
 package core.services.ajax;
 
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
+import core.general.user.User;
+import core.services.photo.PhotoService;
+import core.services.user.UserService;
+import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.UrlUtilsService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import utils.NumberUtils;
 
 public class AjaxServiceImpl implements AjaxService {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private PhotoService photoService;
+
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -44,6 +63,17 @@ public class AjaxServiceImpl implements AjaxService {
 		photosightUserDTO.setPhotosightUserName( photosightUserName );
 		photosightUserDTO.setPhotosightUserCardUrl( photosightUserCardUrl );
 		photosightUserDTO.setPhotosightUserFound( StringUtils.isNotEmpty( photosightUserName ) );
+
+		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( photosightUserId );
+		final User user = userService.loadByLogin( userLogin );
+		final boolean userExistsInTheSystem = user != null;
+		photosightUserDTO.setPhotosightUserExistsInTheSystem( userExistsInTheSystem );
+
+		if ( userExistsInTheSystem ) {
+			photosightUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
+			photosightUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
+			photosightUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
+		}
 
 		return photosightUserDTO;
 	}

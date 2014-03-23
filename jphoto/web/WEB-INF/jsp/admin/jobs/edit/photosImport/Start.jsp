@@ -70,7 +70,7 @@
 
 			<jsp:attribute name="jobForm">
 
-				<table:table width="800">
+				<table:table width="900">
 
 					<table:tr>
 						<table:td colspan="2">
@@ -336,7 +336,12 @@
 				var photosightUserName = photosightUserDTO.photosightUserName;
 				var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
 
-				getPhotosightUserInfoDiv().append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+				var div = getPhotosightUserInfoDiv();
+				div.append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+
+				if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
+					div.append( ' ( ' + photosightUserDTO.userCardLink + ", <a href='" + photosightUserDTO.userPhotosUrl + "'>" + photosightUserDTO.photosCount + " ${eco:translate('photos')}</a> )" );
+				}
 			}
 
 			function renderNotExistingPhotosightUser( photosightUserId ) {
@@ -388,7 +393,6 @@
 		}
 
 		function showPhotosightUserInfo() {
-			// 375096,319232,428597
 			var _photosightUserIds = $( "#${photosightUserIdControl}" ).val();
 			photosightUserModel.registerPhotosightUsers( _photosightUserIds );
 			photosightUserModel.renderPhotosightUsers();
