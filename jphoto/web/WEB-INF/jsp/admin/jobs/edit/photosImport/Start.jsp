@@ -173,7 +173,7 @@
 									<table:tr>
 										<table:tdtext text_t="Photosight user ids" isMandatory="true"/>
 										<table:td>
-											<form:input path="${photosightUserIdControl}" size="60" onchange="showPhotosightUserInfo();"/>
+											<form:input path="${photosightUserIdControl}" size="60" onchange="showPhotosightUserInfoAsync();"/>
 											<br/>
 											${eco:translate("Use ',' as separator")}
 											<div id="photosightUserInfoDiv" class="floatleft" style="display: none;"></div>
@@ -340,13 +340,11 @@
 			}
 
 			function renderNotExistingPhotosightUser( photosightUserId ) {
-				getPhotosightUserInfoDiv().append( "#" + photosightUserId + ": Not found" );
+				getPhotosightUserInfoDiv().append( "#" + photosightUserId + ": <span class='newInsertedComment'>Not found</span>" );
 			}
 
 			return {
 				registerPhotosightUsers:function ( _photosightUserIds ) {
-
-//					console.log( _photosightUserIds );
 
 					resetPhotosightUser();
 
@@ -368,9 +366,10 @@
 					clearPhotosightUserInfoDiv();
 
 					for ( var index = 0; index < photosightUsersIds.length; index++ ) {
+
 						var photosightUserId = photosightUsersIds[ index ];
+
 						var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId );
-						console.log( 'User ' + photosightUserId + ' is found: ' + photosightUserDTO.photosightUserFound );
 						if ( photosightUserDTO.photosightUserFound ) {
 							renderExistingPhotosightUser( photosightUserDTO );
 						} else {
@@ -384,8 +383,11 @@
 			}
 		}();
 
-		function showPhotosightUserInfo() {
+		function showPhotosightUserInfoAsync() {
+			setTimeout( showPhotosightUserInfo, 1 );
+		}
 
+		function showPhotosightUserInfo() {
 			// 375096,319232,428597
 			var _photosightUserIds = $( "#${photosightUserIdControl}" ).val();
 			photosightUserModel.registerPhotosightUsers( _photosightUserIds );

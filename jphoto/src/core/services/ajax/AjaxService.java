@@ -10,5 +10,5 @@ public interface AjaxService {
 
 	AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO );
 
-	PhotosightUserDTO getPhotosightUserDTO( final int photosightUserId );
+	PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId );
 }

@@ -7,7 +7,7 @@ import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
 import org.apache.commons.lang.StringUtils;
-import utils.StringUtilities;
+import utils.NumberUtils;
 
 public class AjaxServiceImpl implements AjaxService {
 
@@ -27,7 +27,15 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public PhotosightUserDTO getPhotosightUserDTO( final int photosightUserId ) {
+	public PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId ) {
+		final int photosightUserId = NumberUtils.convertToInt(_photosightUserId);
+
+		if ( photosightUserId == 0 ) {
+			final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( 0 );
+			photosightUserDTO.setPhotosightUserFound( false );
+			return photosightUserDTO;
+		}
+
 		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( photosightUserId );
 
 		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUserId );
