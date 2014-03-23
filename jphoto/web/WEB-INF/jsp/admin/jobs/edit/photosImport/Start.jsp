@@ -340,7 +340,10 @@
 				var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
 
 				var div = getPhotosightUserInfoDiv();
-				div.append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" );
+				div.append( "#" + photosightUserDTO.photosightUserId
+									+ ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>"
+									+ ", " + photosightUserDTO.photosightUserPhotosCount + " ${eco:translate('photos')}"
+				);
 
 				if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
 					div.append( ' ( ' + photosightUserDTO.userCardLink + ", <a href='" + photosightUserDTO.userPhotosUrl + "'>" + photosightUserDTO.photosCount + " ${eco:translate('photos')}</a> )" );

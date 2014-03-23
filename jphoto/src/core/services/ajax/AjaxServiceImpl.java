@@ -1,5 +1,6 @@
 package core.services.ajax;
 
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
@@ -62,7 +63,13 @@ public class AjaxServiceImpl implements AjaxService {
 
 		photosightUserDTO.setPhotosightUserName( photosightUserName );
 		photosightUserDTO.setPhotosightUserCardUrl( photosightUserCardUrl );
-		photosightUserDTO.setPhotosightUserFound( StringUtils.isNotEmpty( photosightUserName ) );
+
+		final boolean photosightUserFound = StringUtils.isNotEmpty( photosightUserName );
+		photosightUserDTO.setPhotosightUserFound( photosightUserFound );
+
+		if ( photosightUserFound ) {
+			photosightUserDTO.setPhotosightUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( photosightUserId ) );
+		}
 
 		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( photosightUserId );
 		final User user = userService.loadByLogin( userLogin );

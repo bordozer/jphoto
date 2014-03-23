@@ -12,6 +12,7 @@ public class PhotosightUserDTO {
 	private String userCardLink;
 	private int photosCount;
 	private String userPhotosUrl;
+	private int photosightUserPhotosCount;
 
 	public PhotosightUserDTO( final int photosightUserId ) {
 		this.photosightUserId = photosightUserId;
@@ -80,5 +81,13 @@ public class PhotosightUserDTO {
 
 	public String getUserPhotosUrl() {
 		return userPhotosUrl;
+	}
+
+	public void setPhotosightUserPhotosCount( final int photosightUserPhotosCount ) {
+		this.photosightUserPhotosCount = photosightUserPhotosCount;
+	}
+
+	public int getPhotosightUserPhotosCount() {
+		return photosightUserPhotosCount;
 	}
 }
