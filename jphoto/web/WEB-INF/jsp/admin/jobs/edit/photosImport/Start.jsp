@@ -389,6 +389,9 @@
 						photosightUserInfoDiv.append( '<br />' );
 
 						showPhotosightUserInfoDiv();
+
+						$( 'input[name="${userGenderIdControl}"][value="' + photosightUserDTO.userGender.id + '"]' ).attr( 'checked', 'checked' );
+						$( 'input[name="${userMembershipIdControl}"][value="' + photosightUserDTO.userMembershipType.id + '"]' ).attr( 'checked', 'checked' );
 					}
 				}
 			}

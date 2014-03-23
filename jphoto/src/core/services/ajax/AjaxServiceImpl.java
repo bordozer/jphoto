@@ -80,6 +80,8 @@ public class AjaxServiceImpl implements AjaxService {
 			photosightUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
 			photosightUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
 			photosightUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
+			photosightUserDTO.setUserGender( user.getGender() );
+			photosightUserDTO.setUserMembershipType( user.getMembershipType() );
 		}
 
 		return photosightUserDTO;

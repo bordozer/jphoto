@@ -1,5 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
+import core.enums.UserGender;
+import core.general.user.UserMembershipType;
+
 public class PhotosightUserDTO {
 
 	private final int photosightUserId;
@@ -13,6 +16,9 @@ public class PhotosightUserDTO {
 	private int photosCount;
 	private String userPhotosUrl;
 	private int photosightUserPhotosCount;
+
+	private UserGender userGender;
+	private UserMembershipType userMembershipType;
 
 	public PhotosightUserDTO( final int photosightUserId ) {
 		this.photosightUserId = photosightUserId;
@@ -89,5 +95,21 @@ public class PhotosightUserDTO {
 
 	public int getPhotosightUserPhotosCount() {
 		return photosightUserPhotosCount;
+	}
+
+	public UserGender getUserGender() {
+		return userGender;
+	}
+
+	public void setUserGender( final UserGender userGender ) {
+		this.userGender = userGender;
+	}
+
+	public UserMembershipType getUserMembershipType() {
+		return userMembershipType;
+	}
+
+	public void setUserMembershipType( final UserMembershipType userMembershipType ) {
+		this.userMembershipType = userMembershipType;
 	}
 }
