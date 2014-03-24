@@ -169,7 +169,7 @@
 
 							<%-- PHOTOSIGHT IMPORT --%>
 							<div id="${photosightImportDivId}" style="float: left; width: 100%; display: none;">
-								<div style="float: left; width: 75%;">
+								<div style="float: left; width: 80%;">
 								<table:table width="100%">
 									<table:tr>
 										<table:tdtext text_t="Photosight user ids" isMandatory="true"/>
@@ -242,7 +242,7 @@
 
 								</table:table>
 								</div>
-								<div style="float: left; width: 25%;">
+								<div style="float: left; width: 20%;">
 									${eco:translate('Import photos from photosight categories')}
 									<br />
 									<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
@@ -399,8 +399,10 @@
 
 						showPhotosightUserInfoDiv();
 
-						$( 'input[name="${userGenderIdControl}"][value="' + photosightUserDTO.userGender.id + '"]' ).attr( 'checked', 'checked' );
-						$( 'input[name="${userMembershipIdControl}"][value="' + photosightUserDTO.userMembershipType.id + '"]' ).attr( 'checked', 'checked' );
+						if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
+							$( 'input[name="${userGenderIdControl}"][value="' + photosightUserDTO.userGender.id + '"]' ).attr( 'checked', 'checked' );
+							$( 'input[name="${userMembershipIdControl}"][value="' + photosightUserDTO.userMembershipType.id + '"]' ).attr( 'checked', 'checked' );
+						}
 					}
 				}
 			}
@@ -416,5 +418,7 @@
 			photosightUserModel.renderPhotosightUsers();
 		}
 	</script>
+
+	<div class="footerseparator"></div>
 
 </tags:page>
