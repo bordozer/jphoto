@@ -70,7 +70,7 @@
 
 			<jsp:attribute name="jobForm">
 
-				<table:table width="900">
+				<table:table width="1000">
 
 					<table:tr>
 						<table:td colspan="2">
@@ -169,6 +169,7 @@
 
 							<%-- PHOTOSIGHT IMPORT --%>
 							<div id="${photosightImportDivId}" style="float: left; width: 100%; display: none;">
+								<div style="float: left; width: 75%;">
 								<table:table width="100%">
 									<table:tr>
 										<table:tdtext text_t="Photosight user ids" isMandatory="true"/>
@@ -180,14 +181,14 @@
 										</table:td>
 									</table:tr>
 
-									<table:tr>
+									<%--<table:tr>
 										<table:tdtext text_t="Import photos from photosight categories"/>
 										<table:td>
 											<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
 											<br />
 											<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategories}" itemValue="id" itemLabel="name" delimiter="<br />" />
 										</table:td>
-									</table:tr>
+									</table:tr>--%>
 
 									<table:tr>
 										<table:tdtext text_t="Import comments"/>
@@ -240,6 +241,14 @@
 									</table:tr>
 
 								</table:table>
+								</div>
+								<div style="float: left; width: 25%;">
+									${eco:translate('Import photos from photosight categories')}
+									<br />
+									<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
+									<br />
+									<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategories}" itemValue="id" itemLabel="name" delimiter="<br />" />
+								</div>
 
 							</div>
 							<%-- / PHOTOSIGHT IMPORT --%>
