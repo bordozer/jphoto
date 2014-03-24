@@ -13,3 +13,4 @@ kwaqua/target
 rebel.xml
 log4j.log
 log4j-junit.log
+log4j.*
