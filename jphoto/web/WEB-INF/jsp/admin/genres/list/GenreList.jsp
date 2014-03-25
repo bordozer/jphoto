@@ -4,6 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
+<%@ taglib prefix="translations" tagdir="/WEB-INF/tags/links/translations" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 
@@ -20,8 +21,12 @@
 <tags:page pageModel="${genreListModel.pageModel}" >
 
 	<links:genreNew>
-		<html:img id="addNewGenreIcon" src="add32.png" width="32" height="32" alt="${newGenreButtonHint}" />
+		<html:img32 src="add32.png" alt="${newGenreButtonHint}" />
 	</links:genreNew>
+
+	<translations:genres>
+		<html:img32 src="icons32/translate.png" alt="${eco:translate('Genres translations')}" />
+	</translations:genres>
 
 	<br/>
 	<br/>

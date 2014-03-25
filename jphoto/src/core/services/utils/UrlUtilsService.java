@@ -203,4 +203,6 @@ public interface UrlUtilsService {
 	String getAdminSavedJobEditLink( SavedJobType jobType, final int savedJobId );
 
 	String getAdminSavedJobProgressLink( SavedJobType jobType, final int savedJobId );
+
+	String getAdminGenresTranslationsUrl();
 }

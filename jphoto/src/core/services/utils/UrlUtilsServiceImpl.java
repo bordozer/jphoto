@@ -534,6 +534,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 		return String.format( "%s/jobs/%s/progress/%d/", getAdminBaseURLWithPrefix(), jobType.getPrefix(), savedJobId );
 	}
 
+	@Override
+	public String getAdminGenresTranslationsUrl() {
+		return String.format( "%s/genres/translations/", getAdminBaseURLWithPrefix() );
+	}
+
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
 		this.systemVarsService = systemVarsService;
 	}
