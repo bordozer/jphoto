@@ -157,17 +157,18 @@ public abstract class AbstractJobController {
 		final JobExecutionStatus jobExecutionStatus = historyEntry.getJobExecutionStatus();
 		if ( jobExecutionStatus.isNotActive() ) {
 
-			if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job finished successfully" ) ) );
+			model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "The job execution finished" ) ) );
+			/*if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Finished successfully" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.STOPPED_BY_USER ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job has been stopped by user" ) ) );
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Has been stopped by user" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.ERROR ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Preview generation job finished with error" ) ) );
-			}
+				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Finished with error" ) ) );
+			}*/
 
 			return getFinishView( model );
 		}

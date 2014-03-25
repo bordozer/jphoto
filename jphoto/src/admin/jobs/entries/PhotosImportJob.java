@@ -170,16 +170,6 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
 				builder.append( translatorService.translate( "Photosight user ids" ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
-				builder.append( translatorService.translate( "Being imported user" ) ).append( ": " ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "User name" ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Gender" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName() ) ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Membership" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName() ) ).append( "<br />" );
-				builder.append( translatorService.translate( "Import comments" ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No" ) ).append( "<br />" );
-				builder.append( translatorService.translate( "Delay between requests" ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
-
-				final int pageQty = photosightParameters.getPageQty();
-				builder.append( translatorService.translate( "Pages to process" ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages" ) ).append( "<br />" );
-
 				final List<PhotosightCategory> photosightCategories = photosightParameters.getPhotosightCategories();
 				final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
 					@Override
@@ -188,7 +178,19 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					}
 				} );
 				builder.append( translatorService.translate( "Import photos from categories" ) ).append( ": " );
-				builder.append( categories == null || categories.size() == PhotosightCategory.values().length ? translatorService.translate( "All categories" ) : StringUtils.join( categories, ", " ) );
+				builder.append( categories == null || categories.size() == PhotosightCategory.values().length ? translatorService.translate( "All categories" ) : StringUtils.join( categories, ", " ) ).append( "<br />" );
+
+				final int pageQty = photosightParameters.getPageQty();
+				builder.append( translatorService.translate( "Pages to process" ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages" ) ).append( "<br />" );
+
+				builder.append( translatorService.translate( "Import comments" ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No" ) ).append( "<br />" );
+
+				builder.append( translatorService.translate( "Being imported user" ) ).append( ": " ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "User name" ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Gender" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName() ) ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Membership" ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName() ) ).append( "<br />" );
+
+				builder.append( translatorService.translate( "Delay between requests" ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
 
 				break;
 			default:

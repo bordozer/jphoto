@@ -2207,6 +2207,41 @@
 		<ru><![CDATA[Поиск работ]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>The job execution finished</nerd>
+		<ru><![CDATA[Задача завершена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Import photos from categories</nerd>
+		<ru><![CDATA[Импортировать работы из категорий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Can contain nude</nerd>
+		<ru><![CDATA[Может содержать НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Contains nude</nerd>
+		<ru><![CDATA[Всегда содержит НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photos Qty</nerd>
+		<ru><![CDATA[К-во работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Min marks</nerd>
+		<ru><![CDATA[Мин баллы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting categories</nerd>
+		<ru><![CDATA[Категории голосования]]></ru>
+	</translation>
+
 	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
