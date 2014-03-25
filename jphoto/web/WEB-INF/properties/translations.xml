@@ -2242,6 +2242,31 @@
 		<ru><![CDATA[Категории голосования]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Last uploaded photos</nerd>
+		<ru><![CDATA[Последние загруженные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The best photos are not defined</nerd>
+		<ru><![CDATA[Лучшие работы еще не определены]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The photos that have got $1 marks for last $2 days</nerd>
+		<ru><![CDATA[Работы набравшие не менее $1 баллов за последние $2 дня]]></ru>
+	</translation>
+
+	<!--<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>-->
+
+	<!--<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>-->
+
 	<!--<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
