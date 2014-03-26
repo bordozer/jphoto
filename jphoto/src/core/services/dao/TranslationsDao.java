@@ -1,6 +1,6 @@
 package core.services.dao;
 
-import admin.controllers.translator.translations.TranslationEntryType;
+import admin.controllers.translator.custom.TranslationEntryType;
 import core.services.translator.Language;
 
 public interface TranslationsDao {

@@ -1,6 +1,6 @@
 package utils;
 
-import admin.controllers.translator.translations.TranslationEntryType;
+import admin.controllers.translator.custom.TranslationEntryType;
 import core.context.ApplicationContextHelper;
 import core.services.translator.Language;
 

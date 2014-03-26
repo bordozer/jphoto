@@ -2257,19 +2257,54 @@
 		<ru><![CDATA[Работы набравшие не менее $1 баллов за последние $2 дня]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Description</nerd>
+		<ru><![CDATA[Описание]]></ru>
+	</translation>
 
-	<!--<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Create new voting category</nerd>
+		<ru><![CDATA[Создать категорию голосования]]></ru>
+	</translation>
 
-	<!--<translation>
+	<translation>
+		<nerd>Voting categories translations</nerd>
+		<ru><![CDATA[Перевод категорий голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System languages</nerd>
+		<ru><![CDATA[Языки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Translations</nerd>
+		<ru><![CDATA[Переводы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete voting category</nerd>
+		<ru><![CDATA[Удалить категорию голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Save translations</nerd>
+		<ru><![CDATA[Сохранить переводы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting category</nerd>
+		<ru><![CDATA[Категория голосования]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-	</translation>-->
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
 
 </translations>

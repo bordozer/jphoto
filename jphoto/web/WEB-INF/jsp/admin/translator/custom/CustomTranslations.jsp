@@ -6,7 +6,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="customTranslationsModel" type="admin.controllers.translator.translations.CustomTranslationsModel" scope="request"/>
+<jsp:useBean id="customTranslationsModel" type="admin.controllers.translator.custom.CustomTranslationsModel" scope="request"/>
 
 <c:set var="languageValues" value="<%=customTranslationsModel.getLanguages()%>"/>
 <c:set var="customTranslatableEntriesMap" value="<%=customTranslationsModel.getCustomTranslatableEntriesMap()%>"/>
@@ -17,14 +17,19 @@
 
 		<table:table width="400px">
 
+			<table:separatorInfo colspan="3" title="${eco:translate('System languages')}" />
+
 			<table:tr>
 				<table:td>
 					${eco:translate('Language')}
 				</table:td>
+				<table:td/>
 				<table:td>
 					<form:radiobuttons path="selectedLanguageId" items="${languageValues}" itemValue="id" itemLabel="name" onchange="$( '#customTranslationsModel' ).submit();" delimiter="<br />"/>
 				</table:td>
 			</table:tr>
+
+			<table:separatorInfo colspan="3" title="${eco:translate('Translations')}" />
 
 			<c:forEach var="entry" items="${customTranslationsModel.selectedLanguageTranslationEntriesMap}">
 
@@ -39,8 +44,9 @@
 
 				<c:if test="${language.id == customTranslationsModel.selectedLanguageId}">
 					<table:td>
-						<label for="${fieldId}">${customTranslatableEntryTranslation} ${language}</label>
+						<label for="${fieldId}">${customTranslatableEntryTranslation}</label>
 					</table:td>
+					<table:td> ${language}</table:td>
 					<table:td>
 						<html:input fieldId="${fieldId}" fieldValue="${translationEntry.translation}" />
 					</table:td>

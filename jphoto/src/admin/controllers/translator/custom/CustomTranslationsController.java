@@ -1,4 +1,4 @@
-package admin.controllers.translator.translations;
+package admin.controllers.translator.custom;
 
 import core.context.EnvironmentContext;
 import core.general.genre.Genre;
@@ -30,7 +30,7 @@ import static com.google.common.collect.Maps.newLinkedHashMap;
 public class CustomTranslationsController {
 
 	public static final String MODEL_NAME = "customTranslationsModel";
-	public static final String VIEW = "/admin/translations/GenresTranslations";
+	public static final String VIEW = "/admin/translator/custom/CustomTranslations";
 
 	private static final Language DEFAULT_LANGUAGE = Language.RU;
 

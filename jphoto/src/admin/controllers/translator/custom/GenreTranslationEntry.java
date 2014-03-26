@@ -1,4 +1,4 @@
-package admin.controllers.translator.translations;
+package admin.controllers.translator.custom;
 
 import core.services.translator.Language;
 
