@@ -183,7 +183,7 @@
 				<table:td>${eco:translate("Marks by categories")}</table:td>
 				<table:td>
 					<c:forEach var="marksByCategoryInfo" items="${photoInfo.marksByCategoryInfos}" >
-						${marksByCategoryInfo.photoVotingCategory.name}:
+						${eco:translateVotingCategory(marksByCategoryInfo.photoVotingCategory.id)}:
 						<span title="${eco:translate('Number of users who voted for the photo in this category')}">${marksByCategoryInfo.quantity}</span>
 						/
 						<span title="${eco:translate('Summary photo\'s mark in this category')}">${marksByCategoryInfo.sumMark}</span>

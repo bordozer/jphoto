@@ -28,6 +28,7 @@ public class VotingCategoryServiceImpl implements VotingCategoryService {
 	public boolean save( final PhotoVotingCategory entry ) {
 		final boolean isSuccessful = photoVotingDao.saveToDB( entry );
 
+		cacheService.expire( CacheKey.PHOTO_VOTING_CATEGORY, entry.getId() );
 		cacheService.expire( CacheKey.GENRE_VOTING_CATEGORY );
 		cacheService.expire( CacheKey.GENRE );
 

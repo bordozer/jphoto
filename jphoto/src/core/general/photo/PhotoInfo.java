@@ -144,11 +144,13 @@ public class PhotoInfo implements Cacheable {
 	}
 
 	public int getTotalMarks() {
-		return totalMarks;
-	}
+		int sumMark = 0;
 
-	public void setTotalMarks( final int totalMarks ) {
-		this.totalMarks = totalMarks;
+		for ( final MarksByCategoryInfo marksByCategory : marksByCategoryInfos ) {
+			sumMark += marksByCategory.getSumMark();
+		}
+
+		return sumMark;
 	}
 
 	public List<MarksByCategoryInfo> getMarksByCategoryInfos() {

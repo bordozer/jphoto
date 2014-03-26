@@ -320,6 +320,10 @@ public class PhotoServiceImpl implements PhotoService {
 			}
 		} );
 
+		// TODO: marksByCategoryInfos can be loaded in cacheable part if update PhotoVotingCategory to prevent caching
+		final List<MarksByCategoryInfo> marksByCategoryUser = photoVotingService.getPhotoSummaryVoicesByPhotoCategories( photo );
+		photoInfo.setMarksByCategoryInfos( marksByCategoryUser );
+
 		updateNotCachedInPhotoInfoEntries( photo, photoInfo, timeFrom, timeTo, accessor );
 
 		photoInfo.setPhotoTeam( userTeamService.getPhotoTeam( photo.getId() ) );
@@ -525,17 +529,12 @@ public class PhotoServiceImpl implements PhotoService {
 		final int photoId = photo.getId();
 		final PhotoInfo photoInfo = new PhotoInfo( photo );
 
-		final List<MarksByCategoryInfo> marksByCategoryUser = photoVotingService.getPhotoSummaryVoicesByPhotoCategories( photo );
-		photoInfo.setMarksByCategoryInfos( marksByCategoryUser );
-
 		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
 		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
 		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
 
 		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
-
-		photoInfo.setTotalMarks( getSummaryPhotoMark( marksByCategoryUser ) );
 
 		photoInfo.setPreviewCount( photoPreviewService.getPreviewCount( photoId ) );
 
