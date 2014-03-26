@@ -1,6 +1,7 @@
 package mocks;
 
 import common.AbstractTestCase;
+import core.services.translator.Language;
 import core.services.utils.SystemVarsService;
 import org.apache.commons.configuration.ConfigurationException;
 
@@ -28,6 +29,11 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public String getApplicationPrefix() {
 		return "test";
+	}
+
+	@Override
+	public Language getLanguage() {
+		return Language.RU;
 	}
 
 	@Override

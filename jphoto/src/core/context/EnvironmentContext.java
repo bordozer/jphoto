@@ -2,6 +2,7 @@ package core.context;
 
 import core.exceptions.BaseRuntimeException;
 import core.general.user.User;
+import core.services.translator.Language;
 import org.springframework.mobile.device.DeviceType;
 
 public class EnvironmentContext {
@@ -39,6 +40,10 @@ public class EnvironmentContext {
 		return getEnvironment().getHiMessage();
 	}
 
+	public static Language getLanguage() {
+		return getEnvironment().getLanguage();
+	}
+
 	public static void switchUser( final User user ) {
 		final Environment env = getEnvironment();
 
@@ -56,7 +61,7 @@ public class EnvironmentContext {
 		environment.set( env );
 	}
 
-	public static Environment getNullEnvironment() {
-		return new Environment( User.NOT_LOGGED_USER );
+	public static Environment getNullEnvironment( final Language language ) {
+		return new Environment( User.NOT_LOGGED_USER, language );
 	}
 }

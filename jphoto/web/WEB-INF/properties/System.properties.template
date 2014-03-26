@@ -1,6 +1,9 @@
 # Project name
 application.ProjectName=JPhoto
 
+# system language ( RU, EN ). See enum Language.java
+application.language=RU
+
 #Date format
 datetime.SystemDateFormat=yyyy-MM-dd
 

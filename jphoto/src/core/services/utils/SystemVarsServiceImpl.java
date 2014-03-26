@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import core.services.translator.Language;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
@@ -75,6 +76,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	@Override
 	public String getProjectName() {
 		return config.getString( "application.ProjectName" );
+	}
+
+	@Override
+	public Language getLanguage() {
+		return Language.getByCode( config.getString( "application.language" ) );
 	}
 
 	@Override

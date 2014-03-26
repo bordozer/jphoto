@@ -1,5 +1,4 @@
 <%@ page import="elements.PageTitleData" %>
-<%@ page import="utils.TranslatorUtils" %>
 <%@ page import="elements.PageModel" %>
 <%@ page import="controllers.portalpage.PortalPageModel" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

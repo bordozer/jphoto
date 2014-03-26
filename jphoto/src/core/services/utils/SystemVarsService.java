@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import core.services.translator.Language;
 import org.apache.commons.configuration.ConfigurationException;
 
 import java.util.List;
@@ -55,4 +56,6 @@ public interface SystemVarsService {
 	void initSystemVars() throws ConfigurationException;
 
 	String getTranslatorTranslatedEndPrefix();
+
+	Language getLanguage();
 }

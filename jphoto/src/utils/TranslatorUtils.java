@@ -1,7 +1,13 @@
 package utils;
 
+import admin.controllers.translator.translations.TranslationEntryType;
 import core.context.ApplicationContextHelper;
+import core.context.EnvironmentContext;
+import core.services.translator.Language;
 
+/*
+* For using in web/WEB-INF/tags.tld ONLY
+*/
 public class TranslatorUtils {
 
 	public static String translate( final String nerd ) {
@@ -34,5 +40,13 @@ public class TranslatorUtils {
 
 	public static String translateWithParameters( final String nerd, final String... params ) {
 		return ApplicationContextHelper.getTranslatorService().translateWithParameters( nerd, params );
+	}
+
+	public static String translateGenre( final int entryId ) {
+		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.GENRE, entryId, EnvironmentContext.getLanguage() );
+	}
+
+	public static String translateVotingCategory( final int entryId ) {
+		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, EnvironmentContext.getLanguage() );
 	}
 }

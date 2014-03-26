@@ -1,5 +1,4 @@
 <%@ page import="elements.PageModel" %>
-<%@ page import="utils.TranslatorUtils" %>
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

@@ -96,6 +96,18 @@
 	</function>
 
 	<function>
+		<name>translateGenre</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translateGenre(int)</function-signature>
+	</function>
+
+	<function>
+		<name>translateVotingCategory</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translateVotingCategory(int)</function-signature>
+	</function>
+
+	<function>
 		<name>formatDate</name>
 		<function-class>utils.TLD_Utils</function-class>
 		<function-signature>java.lang.String formatDate(java.util.Date)</function-signature>

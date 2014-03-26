@@ -43,6 +43,16 @@ public enum Language {
 		throw new IllegalArgumentException( String.format( "Illegal language id: %d", id ) );
 	}
 
+	public static Language getByCode( final String code ) {
+		for ( final Language language : values() ) {
+			if ( language.getCode().equalsIgnoreCase( code ) ) {
+				return language;
+			}
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal language code: %s", code ) );
+	}
+
 	public static List<Language> getUILanguages() {
 
 		final List<Language> languages = newArrayList();

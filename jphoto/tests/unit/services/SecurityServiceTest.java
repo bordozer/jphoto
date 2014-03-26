@@ -19,6 +19,7 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.SecurityServiceImpl;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -529,7 +530,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		final SecurityService securityService = getSecurityService();
 
-		EnvironmentContext.setEnv( new Environment( photoAuthor ) );
+		EnvironmentContext.setEnv( new Environment( photoAuthor, systemVarsServiceMock.getLanguage() ) );
 
 		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, photoAuthor ) );
 		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserNoNudeContent ) );
@@ -541,7 +542,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		assertFalse( String.format( "User switched on nude content but can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserWithNudeContent ) );
 		assertTrue( String.format( "Not logged user can see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, User.NOT_LOGGED_USER ) );
 
-		final Environment env = new Environment( User.NOT_LOGGED_USER );
+		final Environment env = new Environment( User.NOT_LOGGED_USER, systemVarsServiceMock.getLanguage() );
 		env.setShowNudeContent( true );
 
 		EnvironmentContext.setEnv( env );
@@ -568,7 +569,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = getSecurityService();
 
 		try {
-			EnvironmentContext.setEnv( new Environment( justUserWithNudeContent ) );
+			EnvironmentContext.setEnv( new Environment( justUserWithNudeContent, systemVarsServiceMock.getLanguage() ) );
 			securityService.assertUserWantSeeNudeContent( justUserWithNudeContent, photoWithNudeContent, "" );
 			//User with switched on nude content can see it - ok
 		} catch ( NudeContentException e ) {
@@ -576,7 +577,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		}
 
 		try {
-			EnvironmentContext.setEnv( new Environment( justUserNoNudeContent ) );
+			EnvironmentContext.setEnv( new Environment( justUserNoNudeContent, systemVarsServiceMock.getLanguage() ) );
 			securityService.assertUserWantSeeNudeContent( justUserNoNudeContent, photoWithNudeContent, "" );
 			assertFalse( "User with switched off nude content can see it", true );
 		} catch ( NudeContentException e ) {

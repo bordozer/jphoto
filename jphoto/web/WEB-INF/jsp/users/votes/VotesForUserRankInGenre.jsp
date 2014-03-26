@@ -21,7 +21,7 @@
 
 	<table:table width="600">
 
-		<table:separatorInfo colspan="${colspan}" title="${eco:translate2('Voting for $1\\\'s rank in category $2', eco:escapeHtml(user.name), genre.name )}" />
+		<table:separatorInfo colspan="${colspan}" title="${eco:translate2('Voting for $1\\\'s rank in category $2', eco:escapeHtml(user.name), eco:translateGenre(genre.id) )}" />
 
 		<c:set var="prevVotingTime" value="0"/>
 

@@ -5,6 +5,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
+import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 import utils.PhotoUtils;
@@ -29,6 +30,9 @@ public class RequestContextFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private UsersSecurityService usersSecurityService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
 
 	@Override
 	protected void doFilterInternal( final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain ) throws ServletException, IOException {
@@ -83,7 +87,7 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	}
 
 	private Environment createSessionEnvironment( final HttpSession session ) {
-		final Environment environment = EnvironmentContext.getNullEnvironment();
+		final Environment environment = EnvironmentContext.getNullEnvironment( systemVarsService.getLanguage() );
 
 		session.setAttribute( ENVIRONMENT_SESSION_KEY, environment );
 

@@ -54,6 +54,8 @@
 			<c:set var="genre" value="${entry.key}"/>
 			<c:set var="userCardGenreInfo" value="${entry.value}"/>
 
+			<c:set var="genreNameTranslated" value="${eco:translateGenre(genre.id)}"/>
+
 			<table:tr>
 				<table:td>
 					<div style="float: left; width: 100%;">
@@ -62,7 +64,7 @@
 						</div>
 						<div style="float: left; width: 100%; height: 15px;">
 							<div style="float: left; width: 20px;">
-								<span title="${eco:translate2( "Rank in category '$1': $2", genre.name, userCardGenreInfo.userRankInGenre)}" style="font-size: 11px;">${userCardGenreInfo.userRankInGenre}</span>:
+								<span title="${eco:translate2( "Rank in category '$1': $2", genreNameTranslated, userCardGenreInfo.userRankInGenre)}" style="font-size: 11px;">${userCardGenreInfo.userRankInGenre}</span>:
 							</div>
 							<user:userRankInGenreRenderer userRankIconContainer="${userCardGenreInfo.userRankIconContainer}"/>
 						</div>
@@ -70,7 +72,7 @@
 				</table:td>
 
 				<table:td cssClass="textright">
-					<span title="${eco:translate2('Photos in category \'$1\': $2', genre.name, userCardGenreInfo.photosQty)}"><b>${userCardGenreInfo.photosQty}</b></span>
+					<span title="${eco:translate2('Photos in category \'$1\': $2', genreNameTranslated, userCardGenreInfo.photosQty)}"><b>${userCardGenreInfo.photosQty}</b></span>
 				</table:td>
 
 				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
@@ -85,11 +87,11 @@
 					<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
 					<c:if test="${( isThisCardOfLoggedUser && currentPoints != 0 ) || userCanSeeUserRankVoteHistory}">
 
-						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genre.name)}">
+						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genreNameTranslated)}">
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
 						</a>
 						/
-						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, userCardGenreInfo.userRankInGenre + 1, genre.name )}">
+						<span title="${eco:translate3('There are $1 point(s) more is necessary to achieve rank $2 in category \'$3\'', nextPoints - currentPoints, userCardGenreInfo.userRankInGenre + 1, genreNameTranslated )}">
 							${nextPoints}
 						</span>
 					</c:if>

@@ -6,6 +6,8 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotosByGenreLink( genre.getId() )%>" />
 
-<c:set var="buttonTitle" value="${eco:translate1('Show photos: $1', genre.name)}" />
+<c:set var="genreNameTranslated" value="${eco:translateGenre(genre.id)}"/>
 
-<a href ="${link}" title="${buttonTitle}">${genre.name}</a>
+<c:set var="buttonTitle" value="${eco:translate1('Show photos: $1', genreNameTranslated)}" />
+
+<a href ="${link}" title="${buttonTitle}">${genreNameTranslated}</a>

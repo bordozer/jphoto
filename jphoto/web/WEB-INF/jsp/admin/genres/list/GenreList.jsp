@@ -67,7 +67,7 @@
 					<table:tdicon>
 						<c:if test="${photosQty == 0}">
 							<links:genreDelete id="${genre.id}">
-								<html:img id="deleteGenreIcon" src="delete16.png" width="16" height="16" alt="${deleteGenreButtonHint}" onclick="return confirmDeletion( 'Delete ${genre.name}?' );" />
+								<html:img id="deleteGenreIcon" src="delete16.png" width="16" height="16" alt="${deleteGenreButtonHint}" onclick="return confirmDeletion( 'Delete ${eco:translateGenre(genre.id)}?' );" />
 							</links:genreDelete>
 						</c:if>
 

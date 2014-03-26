@@ -5,6 +5,7 @@ import core.context.Environment;
 import core.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.translator.Language;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -196,6 +197,6 @@ public class UserUtilsTest extends AbstractTestCase {
 	}*/
 
 	private void emulateUserLogin( final User dataOwner ) {
-		EnvironmentContext.setEnv( new Environment( dataOwner ) );
+		EnvironmentContext.setEnv( new Environment( dataOwner, systemVarsServiceMock.getLanguage() ) );
 	}
 }
