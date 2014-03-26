@@ -183,7 +183,7 @@ public abstract class AbstractPhotoUploadAllowance {
 			final StringBuilder builder = new StringBuilder();
 
 			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", additionalWeeklyLimitPerGenreRank ) );
-			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", genre.getName(), String.valueOf( userRankInGenre ) ) );
+			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", translatorService.translateGenre( genre ), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
 				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
 				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", additionalRankSize ) );

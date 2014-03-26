@@ -40,10 +40,6 @@ public class EnvironmentContext {
 		return getEnvironment().getHiMessage();
 	}
 
-	public static Language getLanguage() {
-		return getEnvironment().getLanguage();
-	}
-
 	public static void switchUser( final User user ) {
 		final Environment env = getEnvironment();
 
@@ -62,6 +58,6 @@ public class EnvironmentContext {
 	}
 
 	public static Environment getNullEnvironment( final Language language ) {
-		return new Environment( User.NOT_LOGGED_USER, language );
+		return new Environment( User.NOT_LOGGED_USER );
 	}
 }

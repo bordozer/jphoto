@@ -2,7 +2,6 @@ package utils;
 
 import admin.controllers.translator.translations.TranslationEntryType;
 import core.context.ApplicationContextHelper;
-import core.context.EnvironmentContext;
 import core.services.translator.Language;
 
 /*
@@ -43,10 +42,14 @@ public class TranslatorUtils {
 	}
 
 	public static String translateGenre( final int entryId ) {
-		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.GENRE, entryId, EnvironmentContext.getLanguage() );
+		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.GENRE, entryId, getLanguage() );
 	}
 
 	public static String translateVotingCategory( final int entryId ) {
-		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, EnvironmentContext.getLanguage() );
+		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, getLanguage() );
+	}
+
+	private static Language getLanguage() {
+		return ApplicationContextHelper.getSystemVarsService().getLanguage();
 	}
 }

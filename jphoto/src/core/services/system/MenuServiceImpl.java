@@ -79,7 +79,7 @@ public class MenuServiceImpl implements MenuService {
 
 		final List<Genre> genres = genreService.loadAll();
 		for ( final Genre genre : genres ) {
-			final String caption = genre.getName();
+			final String caption = translatorService.translateGenre( genre );
 			final String link = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 			menuItems.add( new MenuItem( caption, link ) );
 		}

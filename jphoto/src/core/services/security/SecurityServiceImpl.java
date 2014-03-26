@@ -448,10 +448,12 @@ public class SecurityServiceImpl implements SecurityService {
 		final int voterId = voter.getId();
 
 		final int voterRankInGenre = userRankService.getUserRankInGenre( voterId, genreId );
+		final String genreName = translatorService.translateGenre( genre );
+
 		if ( voterRankInGenre < 0 ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( translatorService.translate( "You have an negative rank in category '$1'.", genre.getName() ) );
+			result.setValidationMessage( translatorService.translate( "You have an negative rank in category '$1'.", genreName ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -461,7 +463,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userRankService.isUserVotedLastTimeForThisRankInGenre( voterId, userId, genreId, userRankInGenre ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( translatorService.translate( "You have already voted when member's rank is $1 in category '$2'", String.valueOf( userRankInGenre ), genre.getName() ) );
+			result.setValidationMessage( translatorService.translate( "You have already voted when member's rank is $1 in category '$2'", String.valueOf( userRankInGenre ), genreName ) );
 			result.setUiVotingIsInaccessible( false );
 
 			return result;
@@ -473,7 +475,7 @@ public class SecurityServiceImpl implements SecurityService {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
 			result.setValidationMessage( translatorService.translate( "The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones )."
-				, genre.getName(), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) );
+				, genreName, String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
@@ -604,11 +606,12 @@ public class SecurityServiceImpl implements SecurityService {
 
 		if ( isDayAnonymous ) {
 //			messages.add( translatorService.translate( "Today is anonymous posting day" ) );
+			final String genreName = translatorService.translateGenre( genre );
 			if ( userRankInGenre >= minRankToIgnoreAnonymousDay ) {
-				messages.add( translatorService.translate( "But your rank in category '$1' is big enough to ignore global settings and decide if you want to upload a photo anonymously", genre.getName() ) );
+				messages.add( translatorService.translate( "But your rank in category '$1' is big enough to ignore global settings and decide if you want to upload a photo anonymously", genreName ) );
 			} else {
 				messages.add( translatorService.translate( "Your photo will be posted anonymously" ) );
-				messages.add( translatorService.translate( "You will be able to ignore anonymous days when your rank in category '$1' reached $2", genre.getName(), String.valueOf( minRankToIgnoreAnonymousDay ) ) );
+				messages.add( translatorService.translate( "You will be able to ignore anonymous days when your rank in category '$1' reached $2", genreName, String.valueOf( minRankToIgnoreAnonymousDay ) ) );
 			}
 		} else {
 			messages.add( translatorService.translate( "Today is not anonymous posting day" ) );

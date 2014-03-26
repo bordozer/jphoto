@@ -163,8 +163,9 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByGenreData( final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, genre.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), genre.getName() );
+		final String genreName = translatorService.translateGenre( genre );
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, genreName );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), genreName );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -205,8 +206,9 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByUserAndGenre( final User user, final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated, genre.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), genre.getName() );
+		final String genreName = translatorService.translateGenre( genre );
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated, genreName );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), genreName );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}

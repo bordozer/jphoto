@@ -33,7 +33,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "There is not enough photos in category '$1' to have a rank", genre.getName() );
+				return translatorService.translate( "There is not enough photos in category '$1' to have a rank", getGenreName( genre, translatorService ) );
 			}
 		};
 	}
@@ -48,7 +48,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Zero rank in category '$1'", genre.getName() );
+				return translatorService.translate( "Zero rank in category '$1'", getGenreName( genre, translatorService ) );
 			}
 		};
 	}
@@ -63,7 +63,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Rank in category '$1' : $2", genre.getName(), String.valueOf( rank ) );
+				return translatorService.translate( "Rank in category '$1' : $2", getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -77,7 +77,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Negative rank in category '$1' : $2", genre.getName(), String.valueOf( rank ) );
+				return translatorService.translate( "Negative rank in category '$1' : $2", getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -91,7 +91,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Rank in category '$1' : $2", genre.getName(), String.valueOf( rank ) );
+				return translatorService.translate( "Rank in category '$1' : $2", getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -105,8 +105,12 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Negative rank in category '$1' : $2", genre.getName(), String.valueOf( rank ) );
+				return translatorService.translate( "Negative rank in category '$1' : $2", getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
+	}
+
+	private static String getGenreName( final Genre genre, final TranslatorService translatorService ) {
+		return translatorService.translateGenre( genre );
 	}
 }

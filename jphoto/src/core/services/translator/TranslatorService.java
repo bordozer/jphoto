@@ -2,6 +2,7 @@ package core.services.translator;
 
 import admin.controllers.translator.translations.TranslationEntryType;
 import core.dtos.TranslationDTO;
+import core.general.genre.Genre;
 import org.dom4j.DocumentException;
 
 import java.util.Map;
@@ -40,5 +41,9 @@ public interface TranslatorService {
 
 	boolean save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation );
 
-	String translateCustom( TranslationEntryType entryType, int entryId, Language language );
+	String translateCustom( final TranslationEntryType entryType, final int entryId, final Language language );
+
+	String translateGenre( final Genre genre );
+
+	String translateGenre( final int entryId );
 }

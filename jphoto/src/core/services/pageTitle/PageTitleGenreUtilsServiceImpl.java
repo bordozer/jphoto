@@ -48,7 +48,7 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 		final String tran = translatorService.translate( "Edit" );
 		final String rootTranslated = getGenreRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated, genre.getName(), tran );
+		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated, translatorService.translateGenre( genre ), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );

@@ -33,8 +33,9 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 			final Photo photo = groupOperationEntry.getPhoto();
 			final Genre genre = getGenre( photo );
 
+			final String genreNameTranslated = services.getTranslatorService().translateGenre( genre );
 			if ( genre.isContainsNudeContent() ) {
-				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "The photo has category '$1' and must have 'Nude content' option.", genre.getName() ) );
+				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "The photo has category '$1' and must have 'Nude content' option.", genreNameTranslated ) );
 //				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not remove 'Nude content' option for photo with category '$1'.<br />The category contains nude obviously.", genre.getName() ) );
 //				groupOperationEntry.setGroupOperationAccessible( false );
 
@@ -42,7 +43,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 			}
 
 			if ( !photo.isContainsNudeContent() && !genre.isCanContainNudeContent() ) {
-				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not set 'Nude content' option for photo with category '$1'.<br />Nude content is not allowed for the category.<br />If the photo does contains nude, then remove the photo to appropriate category.", genre.getName() ) );
+				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not set 'Nude content' option for photo with category '$1'.<br />Nude content is not allowed for the category.<br />If the photo does contains nude, then remove the photo to appropriate category.", genreNameTranslated ) );
 				groupOperationEntry.setGroupOperationAccessible( false );
 
 				return;
@@ -78,7 +79,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 		final Genre genre = getGenre( photo );
 		if ( isPhotoNudeContentChecked && ! genre.isCanContainNudeContent() ) {
 			operationResults.add( GroupOperationResult.warning( String.format( "Option 'Contains nude content' can no be set for '%s' because nude content is not allowed for it's category '%s'. You have to move the photo to another category, if the photo contains nude."
-				, getPhoyoLink( photo ), genre.getName() ) ) );
+				, getPhoyoLink( photo ), services.getTranslatorService().translateGenre( genre ) ) ) );
 			/*if ( photo.isContainsNudeContent() ) {
 				photo.setContainsNudeContent( false );
 				services.getPhotoService().save( photo );

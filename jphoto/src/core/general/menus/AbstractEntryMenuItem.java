@@ -1,6 +1,7 @@
 package core.general.menus;
 
 import core.general.configuration.ConfigurationKey;
+import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
@@ -97,5 +98,9 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	protected SecurityService getSecurityService() {
 		return services.getSecurityService();
+	}
+
+	protected String getGenreNameTranslated( final Genre genre ) {
+		return services.getTranslatorService().translateGenre( genre );
 	}
 }

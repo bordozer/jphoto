@@ -1,6 +1,7 @@
 package core.general.menus.photo.goTo;
 
 import core.general.genre.Genre;
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.photo.Photo;
@@ -28,7 +29,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthor
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", photoAuthor.getNameEscaped(), genre.getName(), String.valueOf( getPhotosQty() ) );
+				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", photoAuthor.getNameEscaped(), getGenreNameTranslated( genre ), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override

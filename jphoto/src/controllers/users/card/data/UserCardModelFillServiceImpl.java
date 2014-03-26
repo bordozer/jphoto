@@ -333,7 +333,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.load( ids );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String title = translatorService.translate( "$1: last photos. Total $2.", genre.getName(), String.valueOf( photosByGenre ) );
+		final String title = translatorService.translate( "$1: last photos. Total $2.", translatorService.translateGenre( genre ), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 		return getPhotoList( photos, link, title );

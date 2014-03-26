@@ -13,7 +13,6 @@ import core.general.user.UserMembershipType;
 import core.services.photo.PhotoListCriteriasServiceImpl;
 import core.services.security.ServicesImpl;
 import core.services.system.ConfigurationService;
-import core.services.translator.Language;
 import core.services.utils.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.easymock.EasyMock;
@@ -45,7 +44,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 			}
 		};
 
-		final Environment environment = new Environment( user, systemVarsServiceMock.getLanguage() );
+		final Environment environment = new Environment( user );
 		EnvironmentContext.setEnv( environment );
 	}
 

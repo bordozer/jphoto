@@ -58,7 +58,7 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		return translatorService.translate( "rank in category '$1' has changed from $2 to $3"
-			, genre.getName()
+			, translatorService.translateGenre( genre )
 			, String.valueOf( oldRank )
 			, String.valueOf( newRank )
 		);

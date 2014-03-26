@@ -65,7 +65,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	public String getPhotosByGenreLink( final Genre genre ) {
 		return String.format( "<a href=\"%1$s\" title=\"All photos in genre '%2$s'\">%2$s</a>"
 			, urlUtilsService.getPhotosByGenreLink( genre.getId() )
-			, genre.getName()
+			, translatorService.translateGenre( genre )
 		);
 	}
 
@@ -74,7 +74,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		return String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%1$s\" title=\"%2$s: all photos in category '%3$s'\">%3$s</a>"
 			, urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() )
 			, StringUtilities.escapeHtml( user.getName() )
-			, genre.getName()
+			, translatorService.translateGenre( genre )
 		);
 	}
 

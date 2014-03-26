@@ -28,7 +28,7 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAu
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), genre.getName(), String.valueOf( getPhotoQty() ) );
+				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), getGenreNameTranslated( genre ), String.valueOf( getPhotoQty() ) );
 			}
 
 			@Override
