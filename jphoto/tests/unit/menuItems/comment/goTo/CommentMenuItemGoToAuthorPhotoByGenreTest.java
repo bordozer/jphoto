@@ -33,7 +33,7 @@ public class CommentMenuItemGoToAuthorPhotoByGenreTest extends AbstractCommentMe
 		final CommentMenuItemGoToAuthorPhotoByGenre menuEntry = getMenuEntry( new Parameters( testData.getAccessor(), photosQty ) );
 		final AbstractEntryMenuItemCommand menuItemCommand = menuEntry.getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", testData.getCommentAuthor().getNameEscaped(), testData.getGenre().getName(), photosQty ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", testData.getCommentAuthor().getNameEscaped(), translatorService.translateGenre( testData.getGenre() ), photosQty ) ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", testData.getCommentAuthor().getId(), testData.getGenre().getId() ) );
 	}
 

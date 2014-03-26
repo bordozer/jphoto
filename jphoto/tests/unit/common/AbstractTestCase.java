@@ -1,17 +1,18 @@
 package common;
 
+import admin.controllers.translator.custom.TranslationEntryType;
 import com.google.common.collect.Maps;
 import core.general.user.User;
+import core.services.dao.TranslationsDao;
+import core.services.dao.TranslationsDaoImpl;
 import core.services.security.ServicesImpl;
-import core.services.translator.NerdKey;
-import core.services.translator.TranslationData;
-import core.services.translator.Translator;
-import core.services.translator.TranslatorServiceImpl;
+import core.services.translator.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
 import mocks.SystemVarsServiceMock;
+import org.easymock.EasyMock;
 import org.junit.Before;
 
 public class AbstractTestCase {
@@ -20,6 +21,7 @@ public class AbstractTestCase {
 	public static final String TRANSLATION_END_PREFIX = "(t)";
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
+	public static final String TRANSLATED_ENTRY = "Translated entry";
 
 	protected final DateUtilsServiceImpl dateUtilsService;
 	protected final TranslatorServiceImpl translatorService;
@@ -37,6 +39,7 @@ public class AbstractTestCase {
 
 		translatorService = new TranslatorServiceImpl();
 		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap(), systemVarsServiceMock ) );
+		translatorService.setTranslationsDao( getTranslationsDao() );
 
 		translatorService.setSystemVarsService( systemVarsServiceMock );
 
@@ -85,11 +88,24 @@ public class AbstractTestCase {
 		entityLinkUtilsService.setDateUtilsService( dateUtilsService );
 		entityLinkUtilsService.setSystemVarsService( systemVarsServiceMock );
 		entityLinkUtilsService.setUrlUtilsService( urlUtilsService );
+		entityLinkUtilsService.setTranslatorService( translatorService );
 		// entityLinkUtilsService <--
 	}
 
 	@Before
 	public void setup() {
+	}
+
+	private TranslationsDao getTranslationsDao() {
+
+		final TranslationsDao translationsDao = EasyMock.createMock( TranslationsDao.class );
+
+		EasyMock.expect( translationsDao.translateCustom( EasyMock.<TranslationEntryType>anyObject(), EasyMock.anyInt(),EasyMock.<Language>anyObject() ) ).andReturn( TRANSLATED_ENTRY ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( translationsDao );
+
+		return translationsDao;
 	}
 
 	protected ServicesImpl getServices() {

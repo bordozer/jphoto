@@ -28,7 +28,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 		final User photoAuthor = testData.getPhotoAuthor();
 		final Genre genre = testData.getGenre();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), genre.getName(), parameters.getPhotosQty() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), translatorService.translateGenre( testData.getGenre() ), parameters.getPhotosQty() ) ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
 

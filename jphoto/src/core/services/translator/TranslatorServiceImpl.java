@@ -181,11 +181,15 @@ public class TranslatorServiceImpl implements TranslatorService {
 		return translationsDao.save( entryType, entryId, language, translation );
 	}
 
+	public void setTranslator( final Translator translator ) {
+		this.translator = translator;
+	}
+
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
 		this.systemVarsService = systemVarsService;
 	}
 
-	public void setTranslator( final Translator translator ) {
-		this.translator = translator;
+	public void setTranslationsDao( final TranslationsDao translationsDao ) {
+		this.translationsDao = translationsDao;
 	}
 }

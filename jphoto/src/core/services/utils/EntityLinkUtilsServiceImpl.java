@@ -236,4 +236,8 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
 	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
+	}
 }

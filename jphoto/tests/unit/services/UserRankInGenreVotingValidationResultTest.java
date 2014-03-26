@@ -106,7 +106,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You have an negative rank in category '%s'.", genre.getName() ) ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You have an negative rank in category '%s'.", translatorService.translateGenre( genre ) ) ) );
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
-				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), genre.getName() ) ) );
+				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), translatorService.translateGenre( genre ) ) ) );
 	}
 
 	@Test
@@ -189,7 +189,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
 			, translated( String.format( "The member does not have enough photos in category %s ( there are %s photos but has to be at least %s ones )."
-			, genre.getName(), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) )
+			, translatorService.translateGenre( genre ), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) )
 		);
 	}
 
