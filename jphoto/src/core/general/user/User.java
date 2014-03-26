@@ -8,6 +8,7 @@ import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
+import core.services.translator.Language;
 import utils.StringUtilities;
 
 import java.util.Date;
@@ -36,6 +37,8 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 
 	private PhotoActionAllowance defaultPhotoCommentsAllowance;
 	private PhotoActionAllowance defaultPhotoVotingAllowance;
+
+	private Language language;
 
 	public User() {
 	}
@@ -199,6 +202,14 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 		this.showNudeContent = showNudeContent;
 	}
 
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage( final Language language ) {
+		this.language = language;
+	}
+
 	@Override
 	public String toString() {
 		return String.format( "#%d: %s", getId(), getName() );
@@ -281,12 +292,10 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 		public UserMembershipType getMembershipType() {
 			return UserMembershipType.AUTHOR;
 		}
-	};
 
-	public static final User SYSTEM_USER = new User() {
 		@Override
-		public int getId() {
-			return -666;
+		public Language getLanguage() {
+			return Language.EN;
 		}
 	};
 }

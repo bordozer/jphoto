@@ -234,7 +234,14 @@
 				</table:tddata>
 			</table:tredit>
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="Club preferences" />
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="UI settings" />
+
+			<table:tredit>
+				<table:tdtext text_t="Language" labelFor="${photoLinesControl}" />
+				<table:tddata>
+					<form:radiobuttons items="${userEditDataModel.usedLanguages}" path="userEditDataModel.userUILanguageId" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
+				</table:tddata>
+			</table:tredit>
 
 			<%--Photos in line--%>
 			<table:tredit>

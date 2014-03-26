@@ -6,18 +6,17 @@ import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
+import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.fakeUser.AbstractFakeMember;
 import utils.fakeUser.FakeMakeUpMaster;
 import utils.fakeUser.FakeModel;
 import utils.fakeUser.FakePhotographer;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -35,6 +34,9 @@ public class FakeUserServiceImpl implements FakeUserService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
 
 	@Override
 	public User getRandomUser() {
@@ -149,7 +151,13 @@ public class FakeUserServiceImpl implements FakeUserService {
 		user.setDefaultPhotoCommentsAllowance( randomUtilsService.getRandomPhotoAllowance() );
 		user.setDefaultPhotoVotingAllowance( randomUtilsService.getRandomPhotoAllowance() );
 
+		user.setLanguage( getRandomLanguage() );
+
 		return user;
+	}
+
+	private Language getRandomLanguage() {
+		return randomUtilsService.getRandomGenericSetElement( newHashSet( systemVarsService.getUsedLanguages() ) );
 	}
 
 	private String getRandomEmail() {

@@ -9,6 +9,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
 import core.services.system.CacheService;
+import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -41,6 +42,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 	public final static String TABLE_COLUMN_REGISTER_TIME = "registerTime";
 	public final static String TABLE_COLUMN_USER_GENDER = "gender";
 	public final static String TABLE_COLUMN_SHOW_NUDE_CONTENT = "showNudeContent";
+	public final static String TABLE_COLUMN_LANGUAGE_ID = "languageId";
 
 	public final static String TABLE_COLUMN_EMAIL_NOTIFICATION_OPTIONS = "emailNotificationOptions";
 
@@ -70,6 +72,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		fields.put( 14, TABLE_COLUMN_DEFAULT_VOTING_ALLOWANCE_ID );
 		fields.put( 15, TABLE_COLUMN_SHOW_NUDE_CONTENT );
 		fields.put( 16, TABLE_COLUMN_SELF_DESCRIPTION );
+		fields.put( 17, TABLE_COLUMN_LANGUAGE_ID );
 	}
 
 	static {
@@ -87,6 +90,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		updatableFields.put( 14, TABLE_COLUMN_DEFAULT_VOTING_ALLOWANCE_ID );
 		updatableFields.put( 15, TABLE_COLUMN_SHOW_NUDE_CONTENT );
 		updatableFields.put( 16, TABLE_COLUMN_SELF_DESCRIPTION );
+		updatableFields.put( 17, TABLE_COLUMN_LANGUAGE_ID );
 	}
 
 	@Override
@@ -196,6 +200,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		paramSource.addValue( TABLE_COLUMN_USER_STATUS, entry.getUserStatus().getId() );
 		paramSource.addValue( TABLE_COLUMN_REGISTER_TIME, entry.getRegistrationTime() );
 		paramSource.addValue( TABLE_COLUMN_USER_GENDER, entry.getGender().getId() );
+		paramSource.addValue( TABLE_COLUMN_LANGUAGE_ID, entry.getLanguage().getId() );
 
 		final Set<EmailNotificationType> emailNotificationTypes = entry.getEmailNotificationTypes();
 		if ( emailNotificationTypes != null ) {
@@ -263,6 +268,8 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 			result.setDefaultPhotoCommentsAllowance( PhotoActionAllowance.getById( rs.getInt( TABLE_COLUMN_DEFAULT_COMMENTS_ALLOWANCE_ID ) ) );
 			result.setDefaultPhotoVotingAllowance( PhotoActionAllowance.getById( rs.getInt( TABLE_COLUMN_DEFAULT_VOTING_ALLOWANCE_ID ) ) );
 			result.setShowNudeContent( rs.getBoolean( TABLE_COLUMN_SHOW_NUDE_CONTENT ) );
+
+			result.setLanguage( Language.getById( rs.getInt( TABLE_COLUMN_LANGUAGE_ID ) ) );
 
 			return result;
 		}

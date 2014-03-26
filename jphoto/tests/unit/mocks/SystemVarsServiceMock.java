@@ -32,8 +32,13 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public Language getLanguage() {
+	public Language getSystemDefaultLanguage() {
 		return Language.RU;
+	}
+
+	@Override
+	public List<Language> getUsedLanguages() {
+		return newArrayList( Language.RU, Language.EN );
 	}
 
 	@Override

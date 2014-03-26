@@ -10,6 +10,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 public class SystemVarsServiceImpl implements SystemVarsService {
 
 	private final CompositeConfiguration config = new CompositeConfiguration();
@@ -79,8 +81,22 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public Language getLanguage() {
-		return Language.getByCode( config.getString( "application.language" ) );
+	public Language getSystemDefaultLanguage() {
+		return Language.getByCode( config.getString( "application.language.default" ) );
+	}
+
+	@Override
+	public List<Language> getUsedLanguages() {
+		final List<Object> list = config.getList( "application.language.usedLanguages" );
+
+		final List<Language> result = newArrayList();
+
+		for ( final Object code : list ) {
+			final String languageCode = ( String ) code;
+			result.add( Language.getByCode( languageCode ) );
+		}
+
+		return result;
 	}
 
 	@Override

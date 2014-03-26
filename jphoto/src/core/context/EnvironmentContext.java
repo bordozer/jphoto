@@ -57,7 +57,7 @@ public class EnvironmentContext {
 		environment.set( env );
 	}
 
-	public static Environment getNullEnvironment( final Language language ) {
+	public static Environment getNullEnvironment() {
 		return new Environment( User.NOT_LOGGED_USER );
 	}
 }

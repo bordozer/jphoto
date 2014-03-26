@@ -11,6 +11,7 @@ import core.general.user.UserStatus;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.FakeUserService;
 import core.services.user.UserService;
@@ -87,6 +88,8 @@ public class UserEditDataController {
 
 		model.setDataRequirementService( dataRequirementService );
 
+		model.setUsedLanguages( systemVarsService.getUsedLanguages() );
+
 		return model;
 	}
 
@@ -116,6 +119,7 @@ public class UserEditDataController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/edit/" )
 	public String editUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "userEditDataModel" ) UserEditDataModel model ) {
+
 		securityService.assertUserExists( _userId );
 
 		model.clear();
@@ -178,6 +182,16 @@ public class UserEditDataController {
 		return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
 	}
 
+	private void setCommentAllowance( final UserEditDataModel model, final User user ) {
+		model.setAccessibleCommentAllowances( configurationService.getAccessiblePhotoCommentAllowance() );
+		model.setDefaultPhotoCommentsAllowanceId( userService.getUserPhotoCommentAllowance( user ).getId() );
+	}
+
+	private void setVotingAllowance( final UserEditDataModel model, final User user ) {
+		model.setAccessibleVotingAllowances( configurationService.getAccessiblePhotoVotingAllowance() );
+		model.setDefaultPhotoVotingAllowanceId( userService.getUserPhotoVotingAllowance( user ).getId() );
+	}
+
 	private void initModelFromUser( final UserEditDataModel model, final User user ) {
 		model.setUserId( user.getId() );
 		model.setLogin( user.getLogin() );
@@ -191,6 +205,7 @@ public class UserEditDataController {
 		model.setPhotosInLine( user.getPhotosInLine() );
 		model.setPhotoLines( user.getPhotoLines() );
 		model.setShowNudeContent( user.isShowNudeContent() );
+		model.setUserUILanguageId( user.getLanguage().getId() );
 
 		final Set<String> notificationOptionIds = newHashSet();
 		for ( final EmailNotificationType emailNotificationType : user.getEmailNotificationTypes() ) {
@@ -201,16 +216,6 @@ public class UserEditDataController {
 		setCommentAllowance( model, user );
 
 		setVotingAllowance( model, user );
-	}
-
-	private void setCommentAllowance( final UserEditDataModel model, final User user ) {
-		model.setAccessibleCommentAllowances( configurationService.getAccessiblePhotoCommentAllowance() );
-		model.setDefaultPhotoCommentsAllowanceId( userService.getUserPhotoCommentAllowance( user ).getId() );
-	}
-
-	private void setVotingAllowance( final UserEditDataModel model, final User user ) {
-		model.setAccessibleVotingAllowances( configurationService.getAccessiblePhotoVotingAllowance() );
-		model.setDefaultPhotoVotingAllowanceId( userService.getUserPhotoVotingAllowance( user ).getId() );
 	}
 
 	private void initUserFromModel( final User user, final UserEditDataModel model ) {
@@ -226,6 +231,7 @@ public class UserEditDataController {
 		user.setPhotosInLine( model.getPhotosInLine() );
 		user.setPhotoLines( model.getPhotoLines() );
 		user.setShowNudeContent( model.isShowNudeContent() );
+		user.setLanguage( Language.getById( model.getUserUILanguageId() ) );
 
 		final Set<String> emailNotificationOptionIds = model.getEmailNotificationOptionIds();
 		if ( emailNotificationOptionIds != null ) {

@@ -168,7 +168,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Override
 	public String translateGenre( final int entryId ) {
-		return translateCustom( TranslationEntryType.GENRE, entryId, systemVarsService.getLanguage() );
+		return translateCustom( TranslationEntryType.GENRE, entryId, systemVarsService.getSystemDefaultLanguage() );
 	}
 
 	@Override

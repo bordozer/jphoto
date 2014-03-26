@@ -57,5 +57,7 @@ public interface SystemVarsService {
 
 	String getTranslatorTranslatedEndPrefix();
 
-	Language getLanguage();
+	Language getSystemDefaultLanguage();
+
+	List<Language> getUsedLanguages();
 }

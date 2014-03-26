@@ -87,7 +87,7 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	}
 
 	private Environment createSessionEnvironment( final HttpSession session ) {
-		final Environment environment = EnvironmentContext.getNullEnvironment( systemVarsService.getLanguage() );
+		final Environment environment = EnvironmentContext.getNullEnvironment();
 
 		session.setAttribute( ENVIRONMENT_SESSION_KEY, environment );
 

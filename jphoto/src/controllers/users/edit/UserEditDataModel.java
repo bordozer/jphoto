@@ -3,6 +3,7 @@ package controllers.users.edit;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
+import core.services.translator.Language;
 import core.services.validation.DataRequirementService;
 
 import java.util.List;
@@ -39,6 +40,9 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	private int membershipTypeId;
 	private int userGenderId;
 	private boolean showNudeContent;
+	private int userUILanguageId;
+
+	private List<Language> usedLanguages;
 
 	private int photosInLine;
 	private int photoLines;
@@ -222,6 +226,22 @@ public class UserEditDataModel extends AbstractGeneralModel {
 
 	public void setShowNudeContent( final boolean showNudeContent ) {
 		this.showNudeContent = showNudeContent;
+	}
+
+	public int getUserUILanguageId() {
+		return userUILanguageId;
+	}
+
+	public void setUserUILanguageId( final int userUILanguageId ) {
+		this.userUILanguageId = userUILanguageId;
+	}
+
+	public List<Language> getUsedLanguages() {
+		return usedLanguages;
+	}
+
+	public void setUsedLanguages( final List<Language> usedLanguages ) {
+		this.usedLanguages = usedLanguages;
 	}
 
 	public List<PhotoActionAllowance> getAccessibleCommentAllowances() {

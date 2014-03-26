@@ -50,6 +50,6 @@ public class TranslatorUtils {
 	}
 
 	private static Language getLanguage() {
-		return ApplicationContextHelper.getSystemVarsService().getLanguage();
+		return ApplicationContextHelper.getSystemVarsService().getSystemDefaultLanguage();
 	}
 }

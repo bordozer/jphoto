@@ -1,10 +1,12 @@
 package core.services.translator;
 
+import core.interfaces.Identifiable;
+
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public enum Language {
+public enum Language implements Identifiable {
 
 	NERD( 1, "nerd", "Nerd" )
 	, RU( 3, "ru", "Russian" )

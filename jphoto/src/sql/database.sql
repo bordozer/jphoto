@@ -68,13 +68,14 @@ CREATE TABLE `users` (
   `defaultPhotoVotingAllowanceId` tinyint(1) DEFAULT NULL,
   `showNudeContent` tinyint(1) DEFAULT NULL,
   `selfDescription` text,
+  `languageId` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   UNIQUE KEY `idx_name` (`name`) USING BTREE,
   UNIQUE KEY `idx_login` (`login`) USING BTREE,
   UNIQUE KEY `idx_email` (`email`) USING BTREE,
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=8455 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
+) ENGINE=InnoDB AUTO_INCREMENT=1089 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
 
 #
 # Structure for the `photos` table :
