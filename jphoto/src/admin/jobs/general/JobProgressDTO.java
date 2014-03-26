@@ -1,5 +1,6 @@
 package admin.jobs.general;
 
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import utils.NumberUtils;
 
@@ -13,9 +14,11 @@ public class JobProgressDTO {
 	private String jobExecutionDuration;
 
 	private TranslatorService translatorService;
+	private Language language;
 
-	public JobProgressDTO( final TranslatorService translatorService ) {
+	public JobProgressDTO( final TranslatorService translatorService, final Language language ) {
 		this.translatorService = translatorService;
+		this.language = language;
 	}
 
 	public int getCurrent() {
@@ -71,7 +74,7 @@ public class JobProgressDTO {
 
 		final double percentage = getJobExecutionPercentage();
 
-		builder.append( current ).append( " / " ).append( total > 0 ? total : translatorService.translate( "Calculating..." ) );
+		builder.append( current ).append( " / " ).append( total > 0 ? total : translatorService.translate( "Calculating...", language ) );
 		builder.append( ", " ).append( percentage ).append( "%, " );
 		builder.append( jobExecutionDuration );
 

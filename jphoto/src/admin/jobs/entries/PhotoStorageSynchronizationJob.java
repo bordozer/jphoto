@@ -1,7 +1,7 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
-import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
+import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
@@ -36,7 +36,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 		final List<Integer> usersIds = getUsersIds();
 
 		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
-		final ImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, jobEnvironment.getLanguage(), photosightCategories );
+		final AbstractImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, jobEnvironment.getLanguage(), photosightCategories );
 
 		final AbstractPhotoImportStrategy importStrategy = new PhotosightImportStrategy( this, importParameters, services );
 

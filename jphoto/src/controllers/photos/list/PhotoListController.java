@@ -27,6 +27,7 @@ import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -594,7 +595,7 @@ public class PhotoListController {
 
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result" ) );
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
@@ -751,7 +752,7 @@ public class PhotoListController {
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, currentUser );
 
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result" ) );
+		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		model.addPhotoList( photoList );
@@ -780,7 +781,7 @@ public class PhotoListController {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
 			final List<Photo> pagePhotos = getPhotos( pagingModel, listData );
-			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias );
+			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias, null );
 
 			photoList.setPhotoGroupOperationMenuContainer( pagePhotos.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
@@ -806,7 +807,7 @@ public class PhotoListController {
 		return pagePhotos;
 	}
 
-	private PhotoList getPhotoList( final List<Photo> pagePhotos, final AbstractPhotoListData listData, final PhotoListCriterias criterias ) {
+	private PhotoList getPhotoList( final List<Photo> pagePhotos, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
@@ -820,11 +821,11 @@ public class PhotoListController {
 		addFavoriteIcons( photoInfos );
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
-		final PhotoList photoList = new PhotoList( photoInfos, photoListCriteriasService.getPhotoListTitle( criterias ), showPaging );
+		final PhotoList photoList = new PhotoList( photoInfos, photoListCriteriasService.getPhotoListTitle( criterias, EnvironmentContext.getLanguage() ), showPaging );
 
-		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias ) );
+		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias, language ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
-		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias ) );
+		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias, EnvironmentContext.getLanguage() ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setSortColumnNumber( listData.getSortColumnNumber() );

@@ -5,16 +5,17 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.translator.Language;
 
 import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	String getPhotoListTitle( final PhotoListCriterias criterias );
+	String getPhotoListTitle( final PhotoListCriterias criterias, final Language language );
 
-	String getPhotoListCriteriasDescription( final PhotoListCriterias criterias );
+	String getPhotoListCriteriasDescription( final PhotoListCriterias criterias, final Language language );
 
-	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias );
+	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias, final Language language );
 
 	PhotoListCriterias getForAllPhotos( final User user );
 

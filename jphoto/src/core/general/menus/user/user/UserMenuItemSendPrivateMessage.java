@@ -19,11 +19,11 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<User> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<User>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry, accessor, services ) {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Send private message to $1", menuEntry.getNameEscaped() );
+				return getTranslatorService().translate( "Send private message to $1", accessor.getLanguage(), menuEntry.getNameEscaped() );
 			}
 
 			@Override

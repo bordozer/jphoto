@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.activityStream;
 
+import core.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -27,7 +28,7 @@ public class ActivityStreamCleanupJobValidator implements Validator {
 	private void validateLeaveActivityForDays( final String leaveActivityForDays, final Errors errors ) {
 		if ( NumberUtils.convertToInt( leaveActivityForDays ) <= 0 ) {
 			errors.rejectValue( ActivityStreamCleanupJobModel.LEAVE_ACTIVITY_FOR_DAYS_CONTROL,
-								translatorService.translate( String.format( "Please, enter %s", FormatUtils.getFormattedFieldName( "days" ) ) ) );
+								translatorService.translate( "Please, enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "days" ) ) );
 		}
 	}
 }

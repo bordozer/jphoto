@@ -1,5 +1,6 @@
 package core.services.entry;
 
+import core.context.EnvironmentContext;
 import core.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
@@ -50,14 +51,14 @@ public class FavoritesServiceImpl implements FavoritesService {
 		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
-			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in" ) );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
 
 			return ajaxResultDTO;
 		}
 
 		if ( isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
 			isSuccessful = false;
-			message = translatorService.translate( "Entry is already in your favorites" );
+			message = translatorService.translate( "Entry is already in your favorites", EnvironmentContext.getLanguage() );
 		} else {
 			final FavoriteEntryType entryType = FavoriteEntryType.getById( entryTypeId );
 			final Date currentTime = dateUtilsService.getCurrentTime();
@@ -82,14 +83,14 @@ public class FavoritesServiceImpl implements FavoritesService {
 		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
-			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in" ) );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
 
 			return ajaxResultDTO;
 		}
 
 		if ( !isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
 			isSuccessful = false;
-			message = translatorService.translate( "Entry is NOT in your favorites" );
+			message = translatorService.translate( "Entry is NOT in your favorites", EnvironmentContext.getLanguage() );
 		} else {
 			isSuccessful = favoritesDao.removeEntryFromFavorites( userId, favoriteEntryId, FavoriteEntryType.getById( entryTypeId ) );
 		}

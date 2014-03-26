@@ -32,7 +32,8 @@ public class TranslationEntry {
 	public String getValueWithPrefixes() {
 		final String startPrefix = getStartPrefix();
 		final String endPrefix = getEndPrefix();
-		return String.format( "%s%s%s", getPrefix( startPrefix ), value, getPrefix( endPrefix ) );
+//		return String.format( "%s%s%s (%s)", getPrefix( startPrefix ), value, getPrefix( endPrefix ), language.getCode() ); // TODO: do I need prefixes?
+		return String.format( "%s(%s)", value, language.getCode() );
 	}
 
 	public String getValue() {

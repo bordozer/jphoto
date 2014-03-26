@@ -40,10 +40,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserNewData() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Register" );
+		final String tran = translatorService.translate( "Register", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -51,10 +51,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getVotesForUserRankInGenreData( final User user, final Genre genre ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Votes for rank in genre" );
+		final String tran = translatorService.translate( "Votes for rank in genre", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user )
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user, EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
@@ -64,12 +64,12 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 
 	@Override
 	public PageTitleData getUserEditData( final User user ) {
-		return getUserData( user, translatorService.translate( "Edit" ) );
+		return getUserData( user, translatorService.translate( "Edit", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
 	public PageTitleData setUserAvatarData( final User user ) {
-		return getUserData( user, translatorService.translate( "Avatar" ) );
+		return getUserData( user, translatorService.translate( "Avatar", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), userCardTab.getNameTranslated() );
 
 		final String userLinkOrName = userCardTab.isDefaultTab() ? user.getNameEscaped() : entityLinkUtilsService.getUserCardLink( user );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), userLinkOrName, userCardTab.getNameTranslated() );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), userLinkOrName, userCardTab.getNameTranslated() );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -87,10 +87,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserListByFilter() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Filter" );
+		final String tran = translatorService.translate( "Filter", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -98,48 +98,48 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUsersByMembershipType( final UserMembershipType membershipType ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural() ) );
+		final String tran = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), EnvironmentContext.getLanguage() ) );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getUserTeamMemberListData( final User user ) {
-		return getUserData( user, translatorService.translate( "Team" ) );
+		return getUserData( user, translatorService.translate( "Team", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
 	public PageTitleData getUserPrivateMessagesListData( final User user ) {
-		return getUserData( user, translatorService.translate( "Private Messages" ) );
+		return getUserData( user, translatorService.translate( "Private Messages", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
 	public PageTitleData getUserTeamMemberNewData( final User user ) {
-		final String aNew = translatorService.translate( "New" );
+		final String aNew = translatorService.translate( "New", EnvironmentContext.getLanguage() );
 
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team" );
+		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId() ), aNew );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), aNew );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getUserTeamMemberEditData( final UserTeamMember userTeamMember ) {
-		final String edit = translatorService.translate( "Edit" );
+		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
 
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team" );
+		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran, edit );
 
 		final User user = userTeamMember.getUser();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId() ), entityLinkUtilsService.getUserTeamMemberCardLink( userTeamMember ), edit );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserTeamMemberCardLink( userTeamMember, EnvironmentContext.getLanguage() ), edit );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -147,28 +147,28 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserTeamMemberCardData( final UserTeamMember userTeamMember ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team" );
+		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran );
 
 		final User user = userTeamMember.getUser();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId() ), StringUtilities.escapeHtml( userTeamMember.getTeamMemberName() ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), StringUtilities.escapeHtml( userTeamMember.getTeamMemberName() ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getUserPhotoAlbumsData( final User user ) {
-		return getUserData( user, translatorService.translate( "Photo albums" ) );
+		return getUserData( user, translatorService.translate( "Photo albums", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
 	public PageTitleData getUserPhotoAlbumsNew( final User user ) {
-		final String tran = translatorService.translate( "New" );
+		final String tran = translatorService.translate( "New", EnvironmentContext.getLanguage() );
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId() ), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -176,11 +176,11 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserPhotoAlbumsEdit( final UserPhotoAlbum photoAlbum ) {
 		final User user = photoAlbum.getUser();
-		final String tran = translatorService.translate( "Edit" );
+		final String tran = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId() ), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum ), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum, EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -192,24 +192,24 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId() ), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getFavoriteEntry( final User user, final FavoriteEntryType favoriteEntryType ) {
-		return getUserData( user, String.format( "%s / %s", translatorService.translate( "Favorites" ), favoriteEntryType.getName() ) );
+		return getUserData( user, String.format( "%s / %s", translatorService.translate( "Favorites", EnvironmentContext.getLanguage() ), favoriteEntryType.getName() ) );
 	}
 
 	@Override
 	public PageTitleData getAddedToFavoritesByEntry( final User user ) {
-		return getUserData( user, String.format( "%s", translatorService.translate( "Added to Favorites by" ) ) );
+		return getUserData( user, String.format( "%s", translatorService.translate( "Added to Favorites by", EnvironmentContext.getLanguage() ) ) );
 	}
 
 	@Override
 	public String getUserRootTranslated() {
-		return translatorService.translate( USER_ROOT );
+		return translatorService.translate( USER_ROOT, EnvironmentContext.getLanguage() );
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 		final String rootTranslated = getUserRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -225,10 +225,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserWrongLogin() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Can't login" );
+		final String tran = translatorService.translate( "Can't login", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -236,10 +236,10 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getChangeUserPasswordData( final User user ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Change password" );
+		final String tran = translatorService.translate( "Change password", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink()
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getUserCardLink( user )
 			, tran
 		);
@@ -250,11 +250,11 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserNotificationsControlData( final User user ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Notifications control" );
+		final String tran = translatorService.translate( "Notifications control", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getUsersRootLink()
+			entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getUserCardLink( user )
 			, tran
 		);
@@ -265,11 +265,11 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getPhotosOfUserFavoriteMembers( final User user ) {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Photos of the favorite members" );
+		final String tran = translatorService.translate( "Photos of the favorite members", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getUsersRootLink()
+			entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getUserCardLink( user )
 			, tran
 		);

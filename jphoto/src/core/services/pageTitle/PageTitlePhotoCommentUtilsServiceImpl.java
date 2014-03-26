@@ -1,5 +1,6 @@
 package core.services.pageTitle;
 
+import core.context.EnvironmentContext;
 import core.general.user.User;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
@@ -22,10 +23,10 @@ public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoComm
 	@Override
 	public PageTitleData getPhotoCommentsToUserData( final User user ) {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String comments = translatorService.translate( "Comments" );
+		final String comments = translatorService.translate( "Comments", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( user.getName(), comments );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), comments );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), comments );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -33,14 +34,14 @@ public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoComm
 	@Override
 	public PageTitleData getUnreadPhotoCommentsToUserData( final User user ) {
 		final String rootTranslated = getPhotoRootTranslated();
-		final String comments = translatorService.translate( "Comments" );
-		final String unread = translatorService.translate( "Unread" );
+		final String comments = translatorService.translate( "Comments", EnvironmentContext.getLanguage() );
+		final String unread = translatorService.translate( "Unread", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( user.getName(), comments, unread );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getUsersRootLink()
+			entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getUserCardLink( user )
-			, entityLinkUtilsService.getPhotoCommentsToUserLink( user )
+			, entityLinkUtilsService.getPhotoCommentsToUserLink( user, EnvironmentContext.getLanguage() )
 			, unread
 		);
 
@@ -49,6 +50,6 @@ public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoComm
 
 	@Override
 	public String getPhotoRootTranslated() {
-		return translatorService.translate( PHOTO_COMMENTS_ROOT );
+		return translatorService.translate( PHOTO_COMMENTS_ROOT, EnvironmentContext.getLanguage() );
 	}
 }

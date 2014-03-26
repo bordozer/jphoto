@@ -1,5 +1,6 @@
 package core.services.entry;
 
+import core.context.EnvironmentContext;
 import core.dtos.AjaxResultDTO;
 import core.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;
@@ -9,6 +10,7 @@ import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -96,33 +98,35 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	@Override
 	public AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO ) {
 
+		final Language language = EnvironmentContext.getLanguage();
+
 		if ( !UserUtils.isCurrentUserLoggedUser() ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "You are not logged in" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "You are not logged in", language ) );
 		}
 
 		final int fromUserId = messageDTO.getFromUserId();
 		final User fromUser = userService.load( fromUserId );
 		if ( fromUser == null ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found", language ) );
 		}
 
 		if ( !UserUtils.isUserEqualsToCurrentUser( fromUser ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?", language ) );
 		}
 
 		final int toUserId = messageDTO.getToUserId();
 		final User toUser = userService.load( toUserId );
 		if ( toUser == null ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Member you are trying to send message not found" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Member you are trying to send message not found", language ) );
 		}
 
 		if ( UserUtils.isUsersEqual( fromUser, toUser ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "You can not send message to yourself" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "You can not send message to yourself", language ) );
 		}
 
 		final String privateMessageText = messageDTO.getPrivateMessageText();
 		if ( StringUtils.isEmpty( privateMessageText ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Message text should not be empty" ) );
+			return AjaxResultDTO.failResult( translatorService.translate( "Message text should not be empty", language ) );
 		}
 
 		final PrivateMessage privateMessageOut = new PrivateMessage();
@@ -138,7 +142,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		resultDTO.setSuccessful( isSuccessfulOut );
 
 		if ( !isSuccessfulOut ) {
-			resultDTO.setMessage( translatorService.translate( "Error saving OUT message to DB" ) );
+			resultDTO.setMessage( translatorService.translate( "Error saving OUT message to DB", language ) );
 
 			return resultDTO;
 		}
@@ -152,7 +156,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		resultDTO.setSuccessful( isSuccessfulIn );
 
 		if ( !isSuccessfulIn ) {
-			resultDTO.setMessage( translatorService.translate( "Error saving IN message to DB" ) );
+			resultDTO.setMessage( translatorService.translate( "Error saving IN message to DB", language ) );
 			privateMessageDao.delete( privateMessageOut.getId() );
 		}
 
@@ -160,7 +164,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 			new Thread( new Runnable() {
 				@Override
 				public void run() {
-					notificationService.newPrivateMessage( privateMessageOut );
+					notificationService.newPrivateMessage( privateMessageOut, language );
 				}
 			} ).start();
 		}

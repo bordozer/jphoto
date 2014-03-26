@@ -30,10 +30,10 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT );
+				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT, accessor.getLanguage() );
 			}
 
 			@Override
@@ -54,7 +54,7 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), services );
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), accessor.getLanguage(), services );
 	}
 
 	@Override

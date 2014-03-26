@@ -107,18 +107,16 @@ public class JobChainJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
-		final TranslatorService translatorService = services.getTranslatorService();
-
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Run mode:" ) ).append( jobRunMode.getNameTranslated() ).append( "<br />" );
-		builder.append( translatorService.translate( "Stop dependant jobs if error:" ) ).append( translatorService.translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
-		builder.append( translatorService.translate( "Jobs:" ) ).append( "<br />" );
+		builder.append( translate( "Run mode:" ) ).append( jobRunMode.getNameTranslated() ).append( "<br />" );
+		builder.append( translate( "Stop dependant jobs if error:" ) ).append( translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
+		builder.append( translate( "Jobs:" ) ).append( "<br />" );
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {
 			final SavedJob savedJob = services.getSavedJobService().load( savedJobToExecuteId );
 			final String img = String.format( "<img width='16' height='16' src='%s/jobtype/%s' title='%s'>"
-				, services.getUrlUtilsService().getSiteImagesPath(), savedJob.getJobType().getIcon(), translatorService.translate( savedJob.getJobType().getName() ) );
-			builder.append( "<br />" ).append( img ).append( " " ).append( services.getEntityLinkUtilsService().getAdminSavedJobLink( savedJob.getJobType(), savedJob ) );
+				, services.getUrlUtilsService().getSiteImagesPath(), savedJob.getJobType().getIcon(), translate( savedJob.getJobType().getName() ) );
+			builder.append( "<br />" ).append( img ).append( " " ).append( services.getEntityLinkUtilsService().getAdminSavedJobLink( savedJob.getJobType(), savedJob, jobEnvironment.getLanguage() ) );
 		}
 
 		return builder.toString();

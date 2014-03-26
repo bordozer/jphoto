@@ -5,6 +5,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
 import core.log.LogHelper;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,36 +117,36 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	}
 
 	@Override
-	public void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final String fileControlName ) {
+	public void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final String fileControlName, final Language language ) {
 
 		final String fileName = multipartFile.getOriginalFilename();
 
 		if ( StringUtils.isEmpty( fileName ) ) {
-			errors.rejectValue( fileControlName, translatorService.translate( String.format( "Select %s.", FormatUtils.getFormattedFieldName( "File" ) ) ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "Select $1", language, FormatUtils.getFormattedFieldName( "File" ) ) );
 			return;
 		}
 
 		if ( isFileToBig( multipartFile, maxFileSizeKb ) ) {
 			final long actualFileSizeKiloBytes = multipartFile.getSize() / 1024;
-			errors.rejectValue( fileControlName, translatorService.translate( String.format( "%s size should be less then $1 Kilobytes.<br />Attempt to upload $2 Kilobytes", FormatUtils.getFormattedFieldName( "File" ) ), String.valueOf( maxFileSizeKb ), String.valueOf( actualFileSizeKiloBytes ) ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "%s size should be less then $1 Kilobytes.<br />Attempt to upload $2 Kilobytes", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxFileSizeKb ), String.valueOf( actualFileSizeKiloBytes ) ) );
 			return;
 		}
 
 		final String contentType = multipartFile.getContentType();
 		final List<String> allowedExtensions = configurationService.getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
 		if ( !PhotoUtils.isPhotoContentTypeSupported( allowedExtensions, contentType ) ) {
-			errors.rejectValue( fileControlName, translatorService.translate( String.format( "Unsupported %s type is uploaded - $1.", FormatUtils.getFormattedFieldName( "File" ) ), contentType ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "Unsupported %s type is uploaded - $1.", language, FormatUtils.getFormattedFieldName( "File" ) ), contentType );
 			return;
 		}
 
 		try {
-			checkFileDimension( multipartFile, maxDimension, errors, fileControlName );
+			checkFileDimension( multipartFile, maxDimension, errors, fileControlName, language );
 		} catch ( IOException e ) {
-			errors.rejectValue( fileControlName, translatorService.translate( "Error reading file dimension" ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "Error reading file dimension", language ) );
 		}
 	}
 
-	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName ) throws IOException {
+	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName, final Language language ) throws IOException {
 
 		final String originalFilename = multipartFile.getOriginalFilename();
 		final File uploadedFile = new File( systemFilePathUtilsService.getTempDir().getFile().getPath(), originalFilename );
@@ -160,7 +161,8 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 		final Dimension dimension = getImageDimension( uploadedFile );
 
 		if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
-			errors.rejectValue( fileControlName, translatorService.translate( String.format( "Max %s dimension is %s x %s, but uploaded file is %s x %s", FormatUtils.getFormattedFieldName( "File" ), maxDimension.getWidth(), maxDimension.getHeight(), dimension.getWidth(), dimension.getHeight() ) ) );
+			final String mess = translatorService.translate( "Max $1 dimension is $2 x $3, but uploaded file is $4 x %5", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
+			errors.rejectValue( fileControlName, mess );
 		}
 	}
 

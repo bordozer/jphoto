@@ -95,7 +95,7 @@ public class PhotoVotingController {
 
 		final Date votingTime = userPhotoVotes.get( 0 ).getVotingTime(); // TODO: this time is duplicated in userPhotoVote!
 		if ( ! photoVotingService.saveUserPhotoVoting( EnvironmentContext.getCurrentUser(), photo, votingTime, userPhotoVotes ) ) {
-			result.reject( translatorService.translate( "Voting error" ), translatorService.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "Error saving data to DB", EnvironmentContext.getLanguage() ) );
 
 			resetModel( model, photo );
 		}

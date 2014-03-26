@@ -12,6 +12,7 @@ import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -78,7 +79,7 @@ public abstract class AbstractJobController {
 		model.setJobName( job.getJobType().getName() );
 		model.setActive( true );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName() ) ) );
+		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
 
 		addUsersAndPhotosInfo( model );
 
@@ -89,6 +90,10 @@ public abstract class AbstractJobController {
 		showFormCustomAction( model );
 
 		return getView( getStartViewName(), model );
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 
 	protected ModelAndView doPostForm( final AbstractAdminJobModel model, final BindingResult result ) {
@@ -142,7 +147,7 @@ public abstract class AbstractJobController {
 			final AbstractJob activeJob = jobExecutionService.getActiveJob( jobId );
 			if ( activeJob == null ) {
 				// There in NO active job but JobExecutionHistoryEntry is in progress - just set ERROR status of this job
-				final String message = translatorService.translate( "There in NO active job #$1 but JobExecutionHistoryEntry is in progress.<br /><br />Something must have happened during job execution (exception, worker stopping, etc.).<br /><br />ERROR status of the job was assigned forcibly", jobId );
+				final String message = translatorService.translate( "There in NO active job #$1 but JobExecutionHistoryEntry is in progress.<br /><br />Something must have happened during job execution (exception, worker stopping, etc.).<br /><br />ERROR status of the job was assigned forcibly", getLanguage(), String.valueOf( jobId ) );
 				jobExecutionHistoryService.setJobExecutionHistoryEntryStatus( historyEntry.getId(), message, JobExecutionStatus.ERROR );
 				return getRedirectToJobDoneListView( model );
 			}
@@ -159,7 +164,7 @@ public abstract class AbstractJobController {
 		final JobExecutionStatus jobExecutionStatus = historyEntry.getJobExecutionStatus();
 		if ( jobExecutionStatus.isNotActive() ) {
 
-			model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "The job execution finished" ) ) );
+			model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "The job execution finished", getLanguage() ) ) );
 			/*if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
 				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Finished successfully" ) ) );
 			}
@@ -175,7 +180,7 @@ public abstract class AbstractJobController {
 			return getFinishView( model );
 		}
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName() ) ) );
+		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName(), getLanguage() ) ) );
 		model.setJob( recreatedFromHistoryEntryJob );
 
 		return getView( PROGRESS_VIEW, model );
@@ -222,7 +227,7 @@ public abstract class AbstractJobController {
 		savedJob.setJobType( job.getJobType() );
 
 		if ( ! savedJobService.save( savedJob ) ) {
-			result.reject( translatorService.translate( "Error" ), translatorService.translate( "Data saving error" ) );
+			result.reject( translatorService.translate( "Error", getLanguage() ), translatorService.translate( "Data saving error", getLanguage() ) );
 			return getStartViewName( model );
 		}
 

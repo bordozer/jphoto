@@ -38,14 +38,17 @@ public abstract class AbstractPhotoImportStrategy {
 	protected final Services services;
 	protected final LogHelper log;
 
+	protected Language language;
+
 	public abstract void doImport() throws IOException, SaveToDBException;
 
 	public abstract int getTotalOperations( final int totalJopOperations ) throws IOException;
 
-	public AbstractPhotoImportStrategy( final AbstractJob job, final Services services, final LogHelper log ) {
+	public AbstractPhotoImportStrategy( final AbstractJob job, final Services services, final LogHelper log, final Language language ) {
 		this.job = job;
 		this.services = services;
 		this.log = log;
+		this.language = language;
 	}
 
 	protected void createPhotosDBEntries( final List<ImageToImport> imageToImports ) throws IOException, SaveToDBException {
@@ -120,7 +123,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final String message = String.format( "Created photo #%d '%s' of %s, category: %s"
 			, photo.getId()
-			, entityLinkUtilsService.getPhotoCardLink( photo )
+			, entityLinkUtilsService.getPhotoCardLink( photo, language )
 			, entityLinkUtilsService.getUserCardLink( user )
 			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), services.getSystemVarsService().getSystemDefaultLanguage() ) // TODO: user language?
 		);

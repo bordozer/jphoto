@@ -26,16 +26,16 @@ public abstract class AbstractDateRangeableJob extends AbstractJob {
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		final String dateRangeText = dateRangeType.getNameTranslated();
-		final String timePeriodText = translatorService.translate( "$1 $2 days", dateRangeType.getNameTranslated(), String.valueOf( jobDateRange.getTimePeriod() ) );
-		final String currentTimeText = translatorService.translate( "Time: $1", DateRangeType.CURRENT_TIME.getNameTranslated() );
+		final String timePeriodText = translatorService.translate( "$1 $2 days", jobEnvironment.getLanguage(), dateRangeType.getNameTranslated(), String.valueOf( jobDateRange.getTimePeriod() ) );
+		final String currentTimeText = translatorService.translate( "Time: $1", jobEnvironment.getLanguage(), DateRangeType.CURRENT_TIME.getNameTranslated() );
 
 		final String dateRange = dateRangeType == DateRangeType.DATE_RANGE ? dateRangeText : dateRangeType == DateRangeType.TIME_PERIOD ? timePeriodText : currentTimeText;
 
 		builder.append( dateRange ).append( "<br />" );
 
 		if ( dateRangeType != DateRangeType.CURRENT_TIME ) {
-			builder.append( translatorService.translate( "from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
-			builder.append( translatorService.translate( "to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
+			builder.append( translate( "from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
+			builder.append( translate( "to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
 		}
 	}
 

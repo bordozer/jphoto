@@ -54,11 +54,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getPhotosByUserLink( final User user ) {
+	public String getPhotosByUserLink( final User user, final Language language ) {
 		return String.format( "<a href=\"%s\" title=\"%s: all photos\">%s</a>"
 			, urlUtilsService.getPhotosByUserLink( user.getId() )
 			, StringUtilities.escapeHtml( user.getName() )
-			, translatorService.translate( "All user's photos" )
+			, translatorService.translate( "All user's photos", language )
 		);
 	}
 
@@ -80,9 +80,9 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getPhotosByMembershipLink( final UserMembershipType membershipType ) {
+	public String getPhotosByMembershipLink( final UserMembershipType membershipType, final Language language ) {
 		return String.format( "<a href=\"%s\">%s</a>", urlUtilsService.getPhotosByMembership( membershipType, UrlUtilsServiceImpl.PHOTOS_URL )
-			, StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural() ) ) );
+			, StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), language ) ) );
 	}
 
 	@Override
@@ -93,76 +93,76 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getPhotoCardLink( final Photo photo ) {
+	public String getPhotoCardLink( final Photo photo, final Language language ) {
 		final String photoNameTranslated = StringUtilities.escapeHtml( photo.getName() );
 
 		return String.format( "<a class=\"photo-link\" href=\"%1$s\" title=\"%2$s\">%3$s</a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
-			, translatorService.translate( "$1: photo card", photoNameTranslated )
+			, translatorService.translate( "$1: photo card", language, photoNameTranslated )
 			, photoNameTranslated
 		);
 	}
 
 	@Override
-	public String getUsersRootLink() {
+	public String getUsersRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllUsersLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Members" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Members", language ) );
 	}
 
 	@Override
-	public String getUserTeamMemberListLink( final int userId ) {
+	public String getUserTeamMemberListLink( final int userId, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserTeamMembersLink( userId ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Team" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Team", language ) );
 	}
 
 	@Override
-	public String getUserTeamMemberCardLink( final UserTeamMember userTeamMember ) {
+	public String getUserTeamMemberCardLink( final UserTeamMember userTeamMember, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserTeamMemberCardLink( userTeamMember.getUser().getId(), userTeamMember.getId() ) );
 		final String name = StringUtilities.escapeHtml( userTeamMember.getTeamMemberName() );
 
-		return String.format( "<a href=\"%s\" title=\"%s: %s\">%s</a>", link, translatorService.translate( "Team member" ), userTeamMember.getTeamMemberNameWithType(), name );
+		return String.format( "<a href=\"%s\" title=\"%s: %s\">%s</a>", link, translatorService.translate( "Team member", language ), userTeamMember.getTeamMemberNameWithType(), name );
 	}
 
 	@Override
-	public String getUserPhotoAlbumListLink( final int userId ) {
+	public String getUserPhotoAlbumListLink( final int userId, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserPhotoAlbumListLink( userId ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Albums" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Albums", language ) );
 	}
 
 	@Override
-	public String getPhotosVotedByUserLinkUser( final int userId ) {
+	public String getPhotosVotedByUserLinkUser( final int userId, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getPhotosVotedByUserLink( userId ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Appraised photos" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Appraised photos", language ) );
 	}
 
 	@Override
-	public String getUserPhotoAlbumPhotosLink( final UserPhotoAlbum photoAlbum ) {
+	public String getUserPhotoAlbumPhotosLink( final UserPhotoAlbum photoAlbum, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum.getUser().getId(), photoAlbum.getId() ) );
 		final String name = StringUtilities.escapeHtml( photoAlbum.getName() );
 
-		return String.format( "<a href=\"%1$s\" title\"%3$s: %2$s\">%2$s</a>", link, name, translatorService.translate( "Photo album" ) );
+		return String.format( "<a href=\"%1$s\" title\"%3$s: %2$s\">%2$s</a>", link, name, translatorService.translate( "Photo album", language ) );
 	}
 
 	@Override
-	public String getPhotosRootLink() {
+	public String getPhotosRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllPhotosLink() );
-		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( "Photo gallery" ) );
+		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( "Photo gallery", language ) );
 	}
 
 	@Override
-	public String getPhotoCommentsToUserLink( final User user ) {
+	public String getPhotoCommentsToUserLink( final User user, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getCommentsToUserList( user.getId() ) );
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, link
-			, translatorService.translate( "Comments of $1", StringUtilities.escapeHtml( user.getName() ) )
-			, translatorService.translate( "Comments" )
+			, translatorService.translate( "Comments of $1", language, StringUtilities.escapeHtml( user.getName() ) )
+			, translatorService.translate( "Comments", language )
 		);
 	}
 
 	@Override
-	public String getAdminGenresRootLink() {
+	public String getAdminGenresRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminGenreListLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Genres" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Genres", language ) );
 	}
 
 	@Override
@@ -172,46 +172,46 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getAdminSystemConfigurationListLink() {
+	public String getAdminSystemConfigurationListLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminSystemConfigurationListLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "System configuration" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "System configuration", language ) );
 	}
 
 	@Override
-	public String getAdminConfigurationLink( final int systemConfigurationId, final ConfigurationTab configTab ) {
+	public String getAdminConfigurationLink( final int systemConfigurationId, final ConfigurationTab configTab, final Language language ) {
 	final String link = String.format( "%s", urlUtilsService.getAdminConfigurationTabLink( systemConfigurationId, configTab.getKey() ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( configTab.getName() ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( configTab.getName(), language ) );
 	}
 
 	@Override
-	public String getAdminJobsRootLink() {
+	public String getAdminJobsRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminJobsLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Jobs" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Jobs", language ) );
 	}
 
 	@Override
-	public String getAdminSchedulerTaskListLink() {
+	public String getAdminSchedulerTaskListLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminSchedulerTaskListLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Scheduler tasks" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Scheduler tasks", language ) );
 	}
 
 	@Override
-	public String getAdminVotingCategoriesRootLink() {
+	public String getAdminVotingCategoriesRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminVotingCategoriesLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Voting category" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Voting category", language ) );
 	}
 
 	@Override
-	public String getAdminUpgradeLink() {
+	public String getAdminUpgradeLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminUpgradeLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Upgrade tasks" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Upgrade tasks", language ) );
 	}
 
 	@Override
-	public String getAdminSavedJobLink( final SavedJobType jobType, final SavedJob savedJob ) {
+	public String getAdminSavedJobLink( final SavedJobType jobType, final SavedJob savedJob, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminSavedJobEditLink( jobType, savedJob.getId() ) );
-		final String result = String.format( "<a href=\"%s\" title=\"%s\">%s</a>", link, translatorService.translate( "$1: '$2' $3"
-			, translatorService.translate( savedJob.getJobType().getName() ), savedJob.getName(), ( !savedJob.isActive() ? "(inactive)" : StringUtils.EMPTY ) ), savedJob.getName() );
+		final String result = String.format( "<a href=\"%s\" title=\"%s\">%s</a>", link, translatorService.translate( "$1: '$2' $3", language
+			, translatorService.translate( savedJob.getJobType().getName(), language ), savedJob.getName(), ( !savedJob.isActive() ? "(inactive)" : StringUtils.EMPTY ) ), savedJob.getName() );
 
 		if ( savedJob.isActive() ) {
 			return result;
@@ -221,9 +221,9 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getActivityStreamRootLink() {
+	public String getActivityStreamRootLink( final Language language ) {
 		final String link = String.format( "%s/activityStream/", urlUtilsService.getBaseURLWithPrefix() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Activity stream" ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Activity stream", language ) );
 	}
 
 	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {

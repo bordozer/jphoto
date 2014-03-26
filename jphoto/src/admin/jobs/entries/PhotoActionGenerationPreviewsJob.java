@@ -22,7 +22,7 @@ public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerat
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		addJobExecutionFinalMessage( String.format( "User %s has seen photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), dateUtilsService.formatDateTime( actionTime ) ) );
+		addJobExecutionFinalMessage( String.format( "User %s has seen photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo, jobEnvironment.getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
 
 		return savePhotoPreview( photo, user, actionTime );
 	}

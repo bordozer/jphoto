@@ -31,48 +31,13 @@ public class TranslatorServiceImpl implements TranslatorService {
 	private TranslationsDao translationsDao;
 
 	@Override
-	public String translate( final String nerd ) {
-		return translateWithParameters( nerd );
-	}
-
-	@Override
-	public String translate( final String nerd, final String param ) {
-		return translateWithParameters( nerd, param );
-	}
-
-	@Override
-	public String translate( final String nerd, final String param1, final String param2 ) {
-		return translateWithParameters( nerd, param1, param2 );
-	}
-
-	@Override
-	public String translate( final String nerd, final String param1, final String param2, final String param3 ) {
-		return translateWithParameters( nerd, param1, param2, param3 );
-	}
-
-	@Override
-	public String translate( final String nerd, final String param1, final String param2, final String param3, final String param4 ) {
-		return translateWithParameters( nerd, param1, param2, param3, param4 );
-	}
-
-	@Override
-	public String translate( final String nerd, final int param1, final int param2 ) {
-		return translateWithParameters( nerd, String.valueOf( param1 ), String.valueOf( param2 ) );
-	}
-
-	@Override
-	public String translate( final String nerd, final long param ) {
-		return translateWithParameters( nerd, String.valueOf( param ) );
-	}
-
-	@Override
-	public String translateWithParameters( final String nerd, final String... params ) {
+	public String translate( final String nerd, final Language language, final String... params ) {
 
 		if ( nerd.trim().length() == 0 ) {
 			return nerd;
 		}
 
-		final TranslationEntry translation = translator.getTranslation( nerd, Language.RU );
+		final TranslationEntry translation = translator.getTranslation( nerd, language );
 
 		if ( translation instanceof TranslationEntryNerd ) {
 			addUntranslated( nerd, translation );

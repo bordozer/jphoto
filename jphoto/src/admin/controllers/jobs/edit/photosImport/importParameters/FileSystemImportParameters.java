@@ -1,8 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.importParameters;
 
 import admin.jobs.general.JobDateRange;
+import core.services.translator.Language;
 
-public class FileSystemImportParameters implements ImportParameters {
+public class FileSystemImportParameters extends AbstractImportParameters {
 
 	private final String pictureDir;
 	private final int photoQtyLimit;
@@ -11,7 +12,8 @@ public class FileSystemImportParameters implements ImportParameters {
 
 	private final JobDateRange jobDateRange;
 
-	public FileSystemImportParameters( final String pictureDir, final int photoQtyLimit, final boolean deletePictureAfterImport, final int assignAllGeneratedPhotosToUserId, final JobDateRange jobDateRange ) {
+	public FileSystemImportParameters( final String pictureDir, final int photoQtyLimit, final boolean deletePictureAfterImport, final int assignAllGeneratedPhotosToUserId, final JobDateRange jobDateRange, final Language language ) {
+		super( language );
 		this.pictureDir = pictureDir;
 		this.photoQtyLimit = photoQtyLimit;
 		this.deletePictureAfterImport = deletePictureAfterImport;

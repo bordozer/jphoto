@@ -1,5 +1,6 @@
 package core.services.user;
 
+import core.context.EnvironmentContext;
 import core.dtos.UserPickerDTO;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
@@ -111,7 +112,7 @@ public class UserTeamServiceImpl implements UserTeamService {
 			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
 			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
 			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
-			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName() ) );
+			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
 
 			userPickerDTOs.add( userPickerDTO );
 		}

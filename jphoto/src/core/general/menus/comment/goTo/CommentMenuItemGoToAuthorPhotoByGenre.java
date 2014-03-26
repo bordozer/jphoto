@@ -24,11 +24,11 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAu
 		final User commentAuthor = menuEntry.getCommentAuthor();
 		final Genre genre = getGenre( menuEntry );
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", commentAuthor.getNameEscaped(), getGenreNameTranslated( genre ), String.valueOf( getPhotoQty() ) );
+				return getTranslatorService().translate( "$1: photos in category '$2' ( $3 )", accessor.getLanguage(), commentAuthor.getNameEscaped(), getGenreNameTranslated( genre ), String.valueOf( getPhotoQty() ) );
 			}
 
 			@Override

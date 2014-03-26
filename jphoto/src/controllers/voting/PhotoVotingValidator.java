@@ -6,6 +6,7 @@ import core.general.photo.ValidationResult;
 import core.general.user.UserPhotoVote;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +51,7 @@ public class PhotoVotingValidator implements Validator {
 			return;
 		}
 
-		final ValidationResult votingValidationResult = securityService.validateUserCanVoteForPhoto( EnvironmentContext.getCurrentUser(), model.getPhoto(), EnvironmentContext.getCurrentUser().getLanguage() );
+		final ValidationResult votingValidationResult = securityService.validateUserCanVoteForPhoto( EnvironmentContext.getCurrentUser(), model.getPhoto(), getLanguage() );
 		if ( votingValidationResult.isValidationFailed() ) {
 			errors.reject( votingValidationResult.getValidationMessage() );
 		}
@@ -58,15 +59,19 @@ public class PhotoVotingValidator implements Validator {
 
 	private boolean validateThanUserHasUserAlreadyNotVotedForPhoto( final Photo photo, final Errors errors ) {
 		if ( photoVotingService.isUserVotedForPhoto( EnvironmentContext.getCurrentUser(), photo ) ) {
-			errors.reject( translatorService.translate( "You have already voted for this photo" ) );
+			errors.reject( translatorService.translate( "You have already voted for this photo", getLanguage() ) );
 			return false;
 		}
 		return true;
 	}
 
+	private Language getLanguage() {
+		return EnvironmentContext.getCurrentUser().getLanguage();
+	}
+
 	private boolean validateAtLeastOneVotingCategoryIsSelected( final List<UserPhotoVote> userPhotoVotes, final Errors errors ) {
 		if ( userPhotoVotes.size() == 0) {
-			final String errorCode = translatorService.translate( "Select at least one $1", FormatUtils.getFormattedFieldName( "voting category" ) );
+			final String errorCode = translatorService.translate( "Select at least one $1", getLanguage(), FormatUtils.getFormattedFieldName( "voting category" ) );
 			errors.reject( errorCode );
 			return false;
 		}
@@ -78,7 +83,7 @@ public class PhotoVotingValidator implements Validator {
 			final int votingCategoryMark = userPhotoVote.getMark();
 
 			if ( votingCategoryMark == 0 ) {
-				final String errorCode = translatorService.translate( "Set mark for $1 '$2'", FormatUtils.getFormattedFieldName( "voting category" ), userPhotoVote.getPhotoVotingCategory().getName() );
+				final String errorCode = translatorService.translate( "Set mark for $1 '$2'", getLanguage(), FormatUtils.getFormattedFieldName( "voting category" ), userPhotoVote.getPhotoVotingCategory().getName() );
 				errors.reject( errorCode );
 
 				return false;
@@ -87,7 +92,7 @@ public class PhotoVotingValidator implements Validator {
 			final int minMark = userRankService.getUserLowestNegativeMarkInGenre( userPhotoVote.getUser().getId(), userPhotoVote.getPhoto().getGenreId() );
 			final int getMaxMark = userRankService.getUserHighestPositiveMarkInGenre( userPhotoVote.getUser().getId(), userPhotoVote.getPhoto().getGenreId() );
 			if ( votingCategoryMark < minMark || votingCategoryMark > getMaxMark ) {
-				final String errorCode = translatorService.translate( "$1 '$2' is out of bounds", FormatUtils.getFormattedFieldName( "Voting category" ), userPhotoVote.getPhotoVotingCategory().getName() );
+				final String errorCode = translatorService.translate( "$1 '$2' is out of bounds", getLanguage(), FormatUtils.getFormattedFieldName( "Voting category" ), userPhotoVote.getPhotoVotingCategory().getName() );
 				errors.reject( errorCode );
 
 				return false;

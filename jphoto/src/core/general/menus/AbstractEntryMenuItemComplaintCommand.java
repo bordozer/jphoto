@@ -8,13 +8,11 @@ public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuA
 
 	public static final String COMPLAINT_MESSAGE_JS_FUNCTION = "sendComplaintMessage";
 
-	private final User accessor;
 	private final EntryMenuType entryMenuType;
 	private final ComplaintReasonType complaintReasonType;
 
 	public AbstractEntryMenuItemComplaintCommand( final T menuEntry, final User accessor, final EntryMenuType entryMenuType, final ComplaintReasonType complaintReasonType, final Services services ) {
-		super( menuEntry, services );
-		this.accessor = accessor;
+		super( menuEntry, accessor, services );
 		this.entryMenuType = entryMenuType;
 		this.complaintReasonType = complaintReasonType;
 	}

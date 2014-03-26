@@ -2,8 +2,8 @@ package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.controllers.jobs.edit.DateRangableController;
+import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
-import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.jobs.entries.AbstractJob;
@@ -134,7 +134,7 @@ public class PhotosImportController extends DateRangableController {
 		final PhotosImportSource importSource = aModel.getImportSource();
 		job.setImportSource( importSource );
 
-		final ImportParameters importParameters;
+		final AbstractImportParameters importParameters;
 
 		switch ( importSource ) {
 			case FILE_SYSTEM:

@@ -1,6 +1,7 @@
 package core.general.base;
 
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import elements.PageItem;
 import org.apache.commons.collections15.CollectionUtils;
@@ -28,7 +29,7 @@ public class PagingModel {
 		this.services = services;
 	}
 
-	public List<PageItem> getPageItems() {
+	public List<PageItem> getPageItems( final Language language ) {
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		final int shownPagesBunch = PAGE_SHOULDER * 2;
@@ -68,7 +69,7 @@ public class PagingModel {
 
 		if ( firstBunchPageNumber > EXTREME_LEFT_PAGES_MIN_QTY + 1 ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", EXTREME_LEFT_PAGES_MIN_QTY + 1, firstBunchPageNumber - 1 ) );
+			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", language, String.valueOf( EXTREME_LEFT_PAGES_MIN_QTY + 1 ), String.valueOf( firstBunchPageNumber - 1 ) ) );
 
 			pageItems.add( lastSeparator );
 		}
@@ -80,7 +81,7 @@ public class PagingModel {
 		int limit = totalPages - EXTREME_RIGHT_PAGES_MIN_QTY;
 		if ( lastBunchPageNumber < limit ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", lastBunchPageNumber + 1, totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) );
+			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", language, String.valueOf( lastBunchPageNumber + 1 ), String.valueOf( totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) ) );
 
 			pageItems.add( lastSeparator );
 		}
@@ -157,18 +158,5 @@ public class PagingModel {
 
 	public void setItemsOnPage( final int itemsOnPage ) {
 		this.itemsOnPage = itemsOnPage;
-	}
-
-	public int getNotNullPages() {
-		final List<PageItem> pageItems = newArrayList( getPageItems() );
-
-		CollectionUtils.filter( pageItems, new Predicate<PageItem>() {
-			@Override
-			public boolean evaluate( final PageItem pageItem ) {
-				return pageItem.getNumber() > 0;
-			}
-		} );
-
-		return pageItems.size();
 	}
 }

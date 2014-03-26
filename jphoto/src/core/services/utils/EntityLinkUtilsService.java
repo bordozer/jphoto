@@ -24,51 +24,51 @@ public interface EntityLinkUtilsService {
 
 	String getUserCardLink( User user, String name );
 
-	String getPhotosByUserLink( User user );
+	String getPhotosByUserLink( User user, final Language language );
 
 	String getPhotosByGenreLink( Genre genre, final Language language );
 
 	String getPhotosByUserByGenreLink( User user, Genre genre, final Language language );
 
-	String getPhotosByMembershipLink( UserMembershipType membershipType );
+	String getPhotosByMembershipLink( UserMembershipType membershipType, final Language language );
 
 	String getPhotosByPeriod( Date dateFrom, Date dateTo );
 
-	String getPhotoCardLink( Photo photo );
+	String getPhotoCardLink( final Photo photo, final Language language );
 
-	String getUsersRootLink();
+	String getUsersRootLink( final Language language );
 
-	String getUserTeamMemberListLink( int userId );
+	String getUserTeamMemberListLink( int userId, final Language language );
 
-	String getUserTeamMemberCardLink( UserTeamMember userTeamMember );
+	String getUserTeamMemberCardLink( UserTeamMember userTeamMember, final Language language );
 
-	String getUserPhotoAlbumListLink( int userId );
+	String getUserPhotoAlbumListLink( int userId, final Language language );
 
-	String getPhotosVotedByUserLinkUser( int userId );
+	String getPhotosVotedByUserLinkUser( int userId, final Language language );
 
-	String getUserPhotoAlbumPhotosLink( UserPhotoAlbum photoAlbum );
+	String getUserPhotoAlbumPhotosLink( UserPhotoAlbum photoAlbum, final Language language );
 
-	String getPhotosRootLink();
+	String getPhotosRootLink( final Language language );
 
-	String getPhotoCommentsToUserLink( User user );
+	String getPhotoCommentsToUserLink( User user, final Language language );
 
-	String getAdminGenresRootLink();
+	String getAdminGenresRootLink( final Language language );
 
 	String getAdminConfigurationTabsLink( SystemConfiguration systemConfiguration );
 
-	String getAdminSystemConfigurationListLink();
+	String getAdminSystemConfigurationListLink( final Language language );
 
-	String getAdminConfigurationLink( int systemConfigurationId, ConfigurationTab configTab );
+	String getAdminConfigurationLink( int systemConfigurationId, ConfigurationTab configTab, final Language language );
 
-	String getAdminJobsRootLink();
+	String getAdminJobsRootLink( final Language language );
 
-	String getAdminSchedulerTaskListLink();
+	String getAdminSchedulerTaskListLink( final Language language );
 
-	String getAdminVotingCategoriesRootLink();
+	String getAdminVotingCategoriesRootLink( final Language language );
 
-	String getAdminUpgradeLink();
+	String getAdminUpgradeLink( final Language language );
 
-	String getAdminSavedJobLink( SavedJobType jobType, SavedJob savedJob );
+	String getAdminSavedJobLink( SavedJobType jobType, SavedJob savedJob, final Language language );
 
-	String getActivityStreamRootLink();
+	String getActivityStreamRootLink( final Language language );
 }

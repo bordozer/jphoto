@@ -87,7 +87,7 @@
 					<table:td>
 						<ul>
 							<c:forEach var="photoVotingCategory" items="${genre.photoVotingCategories}">
-								<li>${photoVotingCategory.name}</li>
+								<li>${eco:translateVotingCategory(photoVotingCategory.id)}</li>
 							</c:forEach>
 						</ul>
 					</table:td>

@@ -92,10 +92,10 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Actions" ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
-		builder.append( translatorService.translate( "Photos" ) ).append( ": " ).append( photoQtyLimit > 0 ? photoQtyLimit : translatorService.translate( "all" ) ).append( "<br />" );
+		builder.append( translate( "Actions" ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translate( "Photos" ) ).append( ": " ).append( photoQtyLimit > 0 ? photoQtyLimit : translate( "all" ) ).append( "<br />" );
 
-		builder.append( translatorService.translate( "Actions type" ) ).append( ": " ).append( translatorService.translate( getJobType().getName() ) ).append( "<br />" );
+		builder.append( translate( "Actions type" ) ).append( ": " ).append( translate( getJobType().getName() ) ).append( "<br />" );
 
 		addDateRangeParameters( builder );
 

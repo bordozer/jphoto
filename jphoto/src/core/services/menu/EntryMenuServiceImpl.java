@@ -163,7 +163,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 
 		removeSpareSeparators( menuItems );
 
-		return new EntryMenu( menuEntry, menuType, menuItems, services );
+		return new EntryMenu( menuEntry, menuType, menuItems, accessor.getLanguage(), services );
 	}
 
 	private void removeSpareSeparators( final List<? extends AbstractEntryMenuItem> menuItems ) {

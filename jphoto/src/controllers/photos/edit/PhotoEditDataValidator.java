@@ -50,7 +50,7 @@ public class PhotoEditDataValidator implements Validator {
 
 	private void validateUser( final Errors errors ) {
 		if ( ! UserUtils.isCurrentUserLoggedUser() ) {
-			errors.reject( translatorService.translate( "Please, login" ), translatorService.translate( "You are not logged in" ) );
+			errors.reject( translatorService.translate( "Please, login", EnvironmentContext.getLanguage() ), translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
@@ -69,26 +69,26 @@ public class PhotoEditDataValidator implements Validator {
 		final int maxFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MAX_HEIGHT );
 		final Dimension maxDimension = new Dimension( maxFileWidth, maxFileHeight );
 
-		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, PhotoEditDataModel.PHOTO_EDIT_DATA_FILE_FORM_CONTROL );
+		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, PhotoEditDataModel.PHOTO_EDIT_DATA_FILE_FORM_CONTROL, EnvironmentContext.getLanguage() );
 	}
 
 	private void validateName( final Errors errors, final String name ) {
 
 		if ( StringUtils.isEmpty( name ) ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Name" ) ) ) );
+			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( "%s should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ) ) );
 			return;
 		}
 
 		final int photoNameMaxLength = configurationService.getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH );
 		if ( name.length() > photoNameMaxLength ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) should be less then %d symbols ( entered $2 symbols)."
-				, FormatUtils.getFormattedFieldName( "Name" ), photoNameMaxLength ), name, String.valueOf( name.length() ) ) );
+			final String mess = translatorService.translate( "$1 ($2) should be less then %d symbols ( entered $2 symbols)", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ), String.valueOf( photoNameMaxLength ), name, String.valueOf( name.length() ) );
+			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, mess );
 		}
 	}
 
 	private void validateGenre( final Errors errors, final int genreId ) {
 		if ( genreId == 0 ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_GENRE_ID_FORM_CONTROL, translatorService.translate( String.format( "Select %s.", FormatUtils.getFormattedFieldName( "Genre" ) ) ) );
+			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_GENRE_ID_FORM_CONTROL, translatorService.translate( "Select $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Genre" ) ) );
 		}
 	}
 }

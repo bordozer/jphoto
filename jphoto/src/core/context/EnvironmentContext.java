@@ -24,6 +24,10 @@ public class EnvironmentContext {
 		return getEnvironment().getCurrentUser();
 	}
 
+	public static Language getLanguage() {
+		return getEnvironment().getCurrentUser().getLanguage();
+	}
+
 	public static int getCurrentUserId() {
 		return getCurrentUser().getId();
 	}

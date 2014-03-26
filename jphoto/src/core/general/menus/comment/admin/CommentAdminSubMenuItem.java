@@ -34,7 +34,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT );
+				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT, accessor.getLanguage() );
 			}
 
 			@Override
@@ -55,7 +55,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), services );
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), accessor.getLanguage(), services );
 	}
 
 	@Override

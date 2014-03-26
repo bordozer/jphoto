@@ -71,12 +71,13 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "Last uploaded photos" ) );
+		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() )
+			, translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
 		lastUploadedPhotoList.setPhotosInLine( 4 );
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
 		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );
 
-		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The Best Photos" ) );
+		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The Best Photos", EnvironmentContext.getLanguage() ) );
 		model.setTheBestPhotoList( theBestPhotoList );
 		Collections.shuffle( theBestPhotoList.getPhotoInfos() );
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );

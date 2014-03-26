@@ -1,5 +1,6 @@
 package controllers.users.avatar;
 
+import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
 import core.services.system.ConfigurationService;
@@ -37,6 +38,6 @@ public class UserAvatarValidator implements Validator {
 		final int maxFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_HEIGHT );
 		final Dimension maxDimension = new Dimension( maxFileWidth, maxFileHeight );
 
-		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, UserAvatarModel.AVATAR_FILE_FORM_CONTROL );
+		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, UserAvatarModel.AVATAR_FILE_FORM_CONTROL, EnvironmentContext.getLanguage() );
 	}
 }

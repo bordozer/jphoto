@@ -1,5 +1,6 @@
 <%@ tag import="utils.PagingUtils" %>
 <%@ tag import="core.services.dao.BaseEntityDao" %>
+<%@ tag import="core.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -13,7 +14,7 @@
 <jsp:useBean id="pagingModel" type="core.general.base.PagingModel" scope="request"/>
 
 <c:set var="currentPage" value="<%=pagingModel.getCurrentPage()%>"/>
-<c:set var="pageItems" value="<%=pagingModel.getPageItems()%>"/>
+<c:set var="pageItems" value="<%=pagingModel.getPageItems( EnvironmentContext.getLanguage() )%>"/>
 <c:set var="totalPages" value="<%=pagingModel.getTotalPages()%>"/>
 
 <c:set var="pageParam" value="<%=PagingUtils.PAGING_PARAMETER_NAME%>" />

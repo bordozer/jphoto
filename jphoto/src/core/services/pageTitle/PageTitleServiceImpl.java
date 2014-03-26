@@ -1,5 +1,6 @@
 package core.services.pageTitle;
 
+import core.context.EnvironmentContext;
 import core.general.activity.ActivityType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
@@ -61,13 +62,13 @@ public class PageTitleServiceImpl implements PageTitleService {
 
 	@Override
 	public PageTitleData getActivityStreamData( final ActivityType activityType ) {
-		final String rootTranslated = translatorService.translate( "Activity stream" );
+		final String rootTranslated = translatorService.translate( "Activity stream", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
 
 		final String breadcrumbs;
 		if ( activityType != null ) {
-			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getActivityStreamRootLink(), activityType.getNameTranslated() );
+			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getActivityStreamRootLink( EnvironmentContext.getLanguage() ), activityType.getNameTranslated() );
 		} else {
 			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
 		}

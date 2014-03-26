@@ -8,6 +8,7 @@ import admin.jobs.general.GenerationMonitor;
 import admin.jobs.general.JobProgressDTO;
 import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.general.SavedJob;
+import core.context.EnvironmentContext;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.system.ConfigurationService;
@@ -146,7 +147,7 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
 	@Override
 	public JobProgressDTO getJobProgressAjax( final int jobId ) {
-		final JobProgressDTO result = new JobProgressDTO( translatorService );
+		final JobProgressDTO result = new JobProgressDTO( translatorService, EnvironmentContext.getLanguage() );
 
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 		if ( historyEntry == null ) {

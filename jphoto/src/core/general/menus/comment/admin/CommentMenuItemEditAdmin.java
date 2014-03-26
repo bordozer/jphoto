@@ -22,7 +22,7 @@ public class CommentMenuItemEditAdmin extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new CommentMenuItemEditCommand( menuEntry, services );
+		return new CommentMenuItemEditCommand( menuEntry, accessor, services );
 	}
 
 	@Override

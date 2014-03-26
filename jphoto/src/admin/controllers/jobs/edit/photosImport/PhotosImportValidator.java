@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
+import core.context.EnvironmentContext;
 import core.enums.UserGender;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.UserMembershipType;
@@ -76,38 +77,41 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 	private void validatePhotoSightCategories( final PhotosImportModel model, final Errors errors ) {
 		final List<String> photosightCategories = model.getPhotosightCategories();
 		if ( photosightCategories == null || photosightCategories.isEmpty() ) {
-			errors.rejectValue( PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL, translatorService.translate( String.format( "Select at least one %s", FormatUtils.getFormattedFieldName( "Photosight category" ) ) ) );
+			errors.rejectValue( PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL, translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage()
+				, FormatUtils.getFormattedFieldName( "Photosight category" ) ) );
 		}
 	}
 
 	private void validatePhotoCategoriesExist( final Errors errors ) {
 		final List<PhotoVotingCategory> categories = votingCategoryService.loadAll();
 		if ( categories.size() == 0 ) {
-			errors.reject( translatorService.translate( "The system is not configured properly" ), translatorService.translate( "There are at least three voting categories have to be configured in the system" ) );
+			errors.reject( translatorService.translate( "The system is not configured properly", EnvironmentContext.getLanguage() )
+				, translatorService.translate( "There are at least three voting categories have to be configured in the system", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
 	private void validateThatAtLeastOneUserExists( final Errors errors ) {
 		final int userQty = userService.getUserCount();
 		if ( userQty == 0 ) {
-			errors.reject( translatorService.translate( "The system is not configured properly" ), translatorService.translate( "There are no members in the system. Create members manually or run User Generation Job" ) );
+			errors.reject( translatorService.translate( "The system is not configured properly", EnvironmentContext.getLanguage() )
+				, translatorService.translate( "There are no members in the system. Create members manually or run User Generation Job", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
 	private void validatePictureFolder( final String previewDir, final Errors errors ) {
 		if ( StringUtils.isEmpty( previewDir ) ) {
-			errors.rejectValue( PhotosImportModel.PICTURE_DIR_FORM_CONTROL, translatorService.translate( String.format( "Enter %s.", FormatUtils.getFormattedFieldName( "Folder with test pictures" ) ) ) );
+			errors.rejectValue( PhotosImportModel.PICTURE_DIR_FORM_CONTROL, translatorService.translate( "Enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Folder with test pictures" ) ) );
 		}
 	}
 
 	private void validateDates( final String dateFrom, final String dateTo, final Errors errors ) {
 		if ( StringUtils.isEmpty( dateFrom ) ) {
-			errors.rejectValue( PhotosImportModel.DATE_FROM_FORM_CONTROL, translatorService.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
+			errors.rejectValue( PhotosImportModel.DATE_FROM_FORM_CONTROL, translatorService.translate( "Enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Dater from" ) ) );
 			return;
 		}
 
 		if ( StringUtils.isEmpty( dateTo ) ) {
-			errors.rejectValue( PhotosImportModel.DATE_TO_FORM_CONTROL, translatorService.translate( String.format( "Enter %s", FormatUtils.getFormattedFieldName( "Dater to" ) ) ) );
+			errors.rejectValue( PhotosImportModel.DATE_TO_FORM_CONTROL, translatorService.translate( "Enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Dater to" ) ) );
 			return;
 		}
 
@@ -115,7 +119,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 		final Date toDate = dateUtilsService.parseDate( dateTo );
 
 		if ( toDate.getTime() < fromDate.getTime() ) {
-			errors.rejectValue( PhotosImportModel.DATE_TO_FORM_CONTROL, translatorService.translate( String.format( "%s should be more then %s", FormatUtils.getFormattedFieldName( "Dater to" ), FormatUtils.getFormattedFieldName( "Dater from" ) ) ) );
+			errors.rejectValue( PhotosImportModel.DATE_TO_FORM_CONTROL, translatorService.translate( "$1 should be more then %s", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Dater to" ), FormatUtils.getFormattedFieldName( "Dater from" ) ) );
 		}
 	}
 
@@ -123,7 +127,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 
 		final boolean isEmptyValue = StringUtils.isEmpty( photoQtyLimit ) || photoQtyLimit.equals( "0" );
 		if ( !isEmptyValue && !IntegerValidator.getInstance().isValid( photoQtyLimit ) ) {
-			errors.rejectValue( PhotosImportModel.PHOTO_QTY_LIMIT_FORM_CONTROL, translatorService.translate( String.format( "%s must be a number, an empty string ot 0", FormatUtils.getFormattedFieldName( "Photo qty" ) ) ) );
+			errors.rejectValue( PhotosImportModel.PHOTO_QTY_LIMIT_FORM_CONTROL, translatorService.translate( "$1 must be a number, an empty string ot 0", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Photo qty" ) ) );
 		}
 	}
 
@@ -153,7 +157,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 		final int genderId = NumberUtils.convertToInt( _genderId );
 		final UserGender userGender = UserGender.getById( genderId );
 		if ( userGender == null ) {
-			errors.rejectValue( PhotosImportModel.USER_GENDER_ID_FORM_CONTROL, translatorService.translate( String.format( "Select %s.", FormatUtils.getFormattedFieldName( "gender" ) ) ) );
+			errors.rejectValue( PhotosImportModel.USER_GENDER_ID_FORM_CONTROL, translatorService.translate( "Select $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "gender" ) ) );
 		}
 	}
 
@@ -168,7 +172,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 		final int membershipId = NumberUtils.convertToInt( _membershipId );
 		final UserMembershipType membershipType = UserMembershipType.getById( membershipId );
 		if ( membershipType == null ) {
-			errors.rejectValue( PhotosImportModel.USER_MEMBERSHIP_ID_FORM_CONTROL, translatorService.translate( String.format( "Select %s.", FormatUtils.getFormattedFieldName( "membership type" ) ) ) );
+			errors.rejectValue( PhotosImportModel.USER_MEMBERSHIP_ID_FORM_CONTROL, translatorService.translate( "Select $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "membership type" ) ) );
 		}
 	}
 

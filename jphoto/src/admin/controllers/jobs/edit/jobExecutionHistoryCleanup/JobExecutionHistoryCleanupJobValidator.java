@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.jobExecutionHistoryCleanup;
 
+import core.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -30,14 +31,14 @@ public class JobExecutionHistoryCleanupJobValidator implements Validator {
 	private void validateDays( final String leaveActivityForDays, final Errors errors ) {
 		if ( ! NumberUtils.isNumeric( leaveActivityForDays ) ) {
 			errors.rejectValue( JobExecutionHistoryCleanupJobModel.DELETE_ENTRIES_OLDER_THE_N_DAYS_CONTROL,
-								translatorService.translate( String.format( "%s must be zero or a positive number", FormatUtils.getFormattedFieldName( "days" ) ) ) );
+								translatorService.translate( "$1 must be zero or a positive number", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "days" ) ) );
 		}
 	}
 
 	private void validateStatuses( final List<String> jobExecutionStatusIdsToDelete, final Errors errors ) {
 		if ( jobExecutionStatusIdsToDelete == null || jobExecutionStatusIdsToDelete.size() == 0 ) {
 			errors.rejectValue( JobExecutionHistoryCleanupJobModel.DELETE_ENTRIES_OLDER_THE_N_DAYS_CONTROL,
-								translatorService.translate( String.format( "Select at least one %s", FormatUtils.getFormattedFieldName( "status" ) ) ) );
+								translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "status" ) ) );
 		}
 	}
 }

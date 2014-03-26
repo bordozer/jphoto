@@ -1,15 +1,19 @@
 package core.general.menus;
 
+import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 
 public abstract class AbstractEntryMenuItemCommand<T extends PopupMenuAssignable> {
 
 	protected final T menuEntry;
+	protected User accessor;
 	protected Services services;
 
-	public AbstractEntryMenuItemCommand( final T menuEntry, final Services services ) {
+	public AbstractEntryMenuItemCommand( final T menuEntry, final User accessor, final Services services ) {
 		this.menuEntry = menuEntry;
+		this.accessor = accessor;
 		this.services = services;
 	}
 

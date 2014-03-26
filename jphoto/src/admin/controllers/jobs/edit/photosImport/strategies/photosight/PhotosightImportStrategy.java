@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
-import admin.controllers.jobs.edit.photosImport.importParameters.ImportParameters;
+import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.jobs.entries.AbstractJob;
@@ -39,14 +39,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	public static final String PHOTOS = "photos";
 	public static final String PHOTOSIGHT_USER_LOGIN_PREFIX = "PS_";
 
-	protected PhotosightImportParameters importParameters;
+	private PhotosightImportParameters importParameters;
 
 	final LogHelper log = new LogHelper( PhotosightImportStrategy.class );
 
 	private final Date firstPhotoUploadTime;
 
-	public PhotosightImportStrategy( final AbstractJob job, final ImportParameters parameters, final Services services ) {
-		super( job, services, new LogHelper( PhotosightImportStrategy.class ) );
+	public PhotosightImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
+		super( job, services, new LogHelper( PhotosightImportStrategy.class ), parameters.getLanguage() );
 
 		importParameters = ( PhotosightImportParameters ) parameters;
 
@@ -514,7 +514,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		if ( existingUser != null ) {
 
-			job.addJobExecutionFinalMessage( services.getTranslatorService().translate( String.format( "Existing user found: %s", entityLinkUtilsService.getUserCardLink( existingUser ) ) ) );
+			job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "Existing user found: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( existingUser ) ) );
 
 			return existingUser;
 		}
@@ -531,7 +531,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			throw new BaseRuntimeException( "Can not create user" );
 		}
 
-		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( String.format( "New user has been created: %s", entityLinkUtilsService.getUserCardLink( user ) ) ) );
+		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "New user has been created: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( user ) ) );
 
 		return user;
 	}

@@ -25,12 +25,12 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 	}
 
 	@Override
-	public AbstractEntryMenuItemCommand getMenuItemCommand() {
+	public AbstractEntryMenuItemCommand<User> getMenuItemCommand() {
 
-		return new AbstractEntryMenuItemCommand<User>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<User>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT );
+				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT, accessor.getLanguage() );
 			}
 
 			@Override
@@ -51,7 +51,7 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), services );
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), accessor.getLanguage(), services );
 	}
 
 	@Override
