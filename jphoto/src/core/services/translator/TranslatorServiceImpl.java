@@ -2,6 +2,7 @@ package core.services.translator;
 
 import admin.controllers.translator.translations.TranslationEntryType;
 import core.dtos.TranslationDTO;
+import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Autowired
 	private SystemVarsService systemVarsService;
+
+	@Autowired
+	private TranslationsDao translationsDao;
 
 	@Override
 	public String translate( final String nerd ) {
@@ -157,7 +161,13 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
-	public void save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation ) {
+	public String translateCustom( final TranslationEntryType entryType, final int entryId, final Language language ) {
+		return translationsDao.translateCustom( entryType, entryId, language );
+	}
+
+	@Override
+	public boolean save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation ) {
+		return translationsDao.save( entryType, entryId, language, translation );
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {

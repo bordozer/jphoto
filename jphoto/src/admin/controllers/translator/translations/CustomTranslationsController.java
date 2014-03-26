@@ -11,6 +11,7 @@ import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -70,7 +71,7 @@ public class CustomTranslationsController {
 
 		final List<Genre> entries = genreService.loadAll();
 
-		final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap( entries );
+		final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap( entries, model.getTranslationEntryType() );
 		model.setAllTranslationEntriesMap( allTranslationEntriesMap );
 
 		model.setSelectedLanguageTranslationEntriesMap( getTranslationEntriesMap( allTranslationEntriesMap ) );
@@ -93,7 +94,7 @@ public class CustomTranslationsController {
 
 		final List<PhotoVotingCategory> entries = votingCategoryService.loadAll();
 
-		final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap( entries );
+		final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap( entries, model.getTranslationEntryType() );
 		model.setAllTranslationEntriesMap( allTranslationEntriesMap );
 
 		model.setSelectedLanguageTranslationEntriesMap( getTranslationEntriesMap( allTranslationEntriesMap ) );
@@ -104,11 +105,6 @@ public class CustomTranslationsController {
 
 	@RequestMapping( method = RequestMethod.POST, value = "/" )
 	public String submit( final @ModelAttribute( MODEL_NAME ) CustomTranslationsModel model ) {
-
-		// TODO: save request values to model.getAllTranslationEntriesMap()
-		for ( final int genreId : model.getSelectedLanguageTranslationEntriesMap().keySet() ) {
-
-		}
 
 		model.setSelectedLanguageTranslationEntriesMap( getTranslationEntriesMap( model.getAllTranslationEntriesMap(), Language.getById( model.getSelectedLanguageId() ) ) );
 
@@ -122,6 +118,11 @@ public class CustomTranslationsController {
 
 		for ( final IdLanguageKey idLanguageKey : entriesMap.keySet() ) {
 			final GenreTranslationEntry translationEntry = entriesMap.get( idLanguageKey );
+
+			if ( StringUtils.isEmpty( translationEntry.getTranslation() ) ) {
+				continue;
+			}
+
 			translatorService.save( model.getTranslationEntryType(), translationEntry.getEntryId(), idLanguageKey.getLanguage(), translationEntry.getTranslation() );
 		}
 
@@ -151,12 +152,15 @@ public class CustomTranslationsController {
 		return translationEntriesMap;
 	}
 
-	private Map<IdLanguageKey, GenreTranslationEntry> getAllTranslationEntriesMap( final List<? extends CustomTranslatable> entries ) {
+	private Map<IdLanguageKey, GenreTranslationEntry> getAllTranslationEntriesMap( final List<? extends CustomTranslatable> entries, final TranslationEntryType entryType ) {
 
 		final Map<IdLanguageKey, GenreTranslationEntry> translationEntriesMap = newLinkedHashMap();
 		for ( final CustomTranslatable entry : entries ) {
 			for ( final Language language : Language.getUILanguages() ) {
-				translationEntriesMap.put( new IdLanguageKey( entry.getId(), language ), new GenreTranslationEntry( entry.getId(), language, entry.getName() ) );
+				final int entryId = entry.getId();
+
+				final String translation = translatorService.translateCustom( entryType, entryId, language );
+				translationEntriesMap.put( new IdLanguageKey( entryId, language ), new GenreTranslationEntry( entryId, language, translation ) );
 			}
 		}
 		return translationEntriesMap;

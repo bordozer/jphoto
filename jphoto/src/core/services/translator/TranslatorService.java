@@ -38,5 +38,7 @@ public interface TranslatorService {
 
 	TranslationDTO getTranslationAjax( final String nerd );
 
-	void save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation );
+	boolean save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation );
+
+	String translateCustom( TranslationEntryType entryType, int entryId, Language language );
 }

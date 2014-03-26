@@ -642,12 +642,13 @@ CREATE TABLE `activityStream` (
 
 CREATE TABLE `translations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nerd` varchar(1000) NOT NULL,
+  `entryTypeId` int(11) NOT NULL,
+  `entryId` int(11) NOT NULL,
   `languageId` tinyint(4) NOT NULL,
-  `translation` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  `translation` varchar(1000) NOT NULL,
+  PRIMARY KEY (`entryTypeId`,`entryId`,`languageId`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
