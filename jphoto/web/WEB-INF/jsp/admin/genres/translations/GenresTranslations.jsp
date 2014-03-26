@@ -16,7 +16,7 @@
 
 	<form:form modelAttribute="genresTranslationsModel" method="POST">
 
-		<table:table width="300px">
+		<table:table width="400px">
 
 			<table:tr>
 				<table:td>
@@ -35,18 +35,23 @@
 				<c:set var="genre" value="${genreMap[genreId]}"/>
 				<c:set var="fieldId" value="translationEntriesMap['${genreId}'].value"/>
 
+				<table:tr>
+
 				<c:if test="${language.id == genresTranslationsModel.selectedLanguageId}">
-					<table:tr>
-						<table:td>
-							<label for="${fieldId}">${genre.name}</label>
-						</table:td>
-						<table:td>
-							<html:input fieldId="${fieldId}" fieldValue="${translationEntry.value}" />
-						</table:td>
-					</table:tr>
+					<table:td>
+						<label for="${fieldId}">${genre.name}</label>
+					</table:td>
+					<table:td>
+						<html:input fieldId="${fieldId}" fieldValue="${translationEntry.value}" />
+					</table:td>
 				</c:if>
 
+				</table:tr>
+
 			</c:forEach>
+
+			<table:trok text_t="Save translations" />
+
 		</table:table>
 
 	</form:form>

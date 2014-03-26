@@ -322,7 +322,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String nerd = translatorService.translate( "Genres translations" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink(), nerd );
 
 		return new PageTitleData( title, nerd, breadcrumbs );
 	}
