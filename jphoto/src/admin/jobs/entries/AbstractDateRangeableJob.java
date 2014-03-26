@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.DateRangeType;
 import admin.jobs.general.JobDateRange;
 import core.enums.SavedJobParameterKey;
@@ -15,8 +16,8 @@ public abstract class AbstractDateRangeableJob extends AbstractJob {
 
 	protected JobDateRange jobDateRange;
 
-	protected AbstractDateRangeableJob( final LogHelper log ) {
-		super( log );
+	protected AbstractDateRangeableJob( final LogHelper log, final JobRuntimeEnvironment jobEnvironment ) {
+		super( log, jobEnvironment );
 	}
 
 	public void addDateRangeParameters( final StringBuilder builder ) {

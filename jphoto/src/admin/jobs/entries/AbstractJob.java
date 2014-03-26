@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.GenerationMonitor;
@@ -10,6 +11,7 @@ import core.general.base.CommonProperty;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
@@ -26,6 +28,8 @@ public abstract class AbstractJob extends Thread {
 
 	public static final int OPERATION_COUNT_UNKNOWN = -1;
 	protected final GenerationMonitor generationMonitor = new GenerationMonitor();
+
+	protected JobRuntimeEnvironment jobEnvironment;
 
 	protected int jobId;
 	protected int savedJobId;
@@ -59,8 +63,9 @@ public abstract class AbstractJob extends Thread {
 
 	public abstract SavedJobType getJobType();
 
-	public AbstractJob( final LogHelper log ) {
+	public AbstractJob( final LogHelper log, final JobRuntimeEnvironment jobEnvironment ) {
 		this.log = log;
+		this.jobEnvironment = jobEnvironment;
 	}
 
 	@Override
@@ -343,5 +348,9 @@ public abstract class AbstractJob extends Thread {
 
 	public void setScheduledTaskId( final int scheduledTaskId ) {
 		this.scheduledTaskId = scheduledTaskId;
+	}
+
+	protected Language getSystemDefaultLanguage() {
+		return services.getSystemVarsService().getSystemDefaultLanguage();
 	}
 }

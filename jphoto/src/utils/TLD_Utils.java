@@ -1,6 +1,7 @@
 package utils;
 
 import core.context.ApplicationContextHelper;
+import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserAvatar;
@@ -87,6 +88,6 @@ public class TLD_Utils {
 	}
 
 	public static String getPhotosByUserByGenreLink( final User user, final Genre genre ) {
-		return ApplicationContextHelper.getEntityLinkUtilsService().getPhotosByUserByGenreLink( user, genre );
+		return ApplicationContextHelper.getEntityLinkUtilsService().getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() );
 	}
 }

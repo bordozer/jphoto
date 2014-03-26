@@ -398,7 +398,7 @@ public class PhotoEditDataController {
 	}
 
 	private void setPhotoUploadAllowance( final PhotoEditDataModel model ) {
-		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( model.getPhotoAuthor() );
+		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( model.getPhotoAuthor(), EnvironmentContext.getCurrentUser() );
 
 		uploadAllowance.setConfigurationService( configurationService );
 		uploadAllowance.setPhotoUploadService( photoUploadService );

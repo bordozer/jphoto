@@ -101,6 +101,6 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	}
 
 	protected String getGenreNameTranslated( final Genre genre ) {
-		return services.getTranslatorService().translateGenre( genre );
+		return services.getTranslatorService().translateGenre( genre, accessor.getLanguage() );
 	}
 }

@@ -62,7 +62,7 @@ public class UserGenreRankVotingController {
 				votingAreaModel.setVoterId( voterId );
 				votingAreaModel.setVoterRankInGenreVotingPoints( userRankService.getUserRankInGenreVotingPoints( voterId, genre.getId() ) );
 
-				final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+				final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, voter.getLanguage() );
 				votingAreaModel.setUiVotingIsInaccessible( validationResult.isUiVotingIsInaccessible() );
 				votingAreaModel.setValidationMessage( validationResult.getValidationMessage() );
 

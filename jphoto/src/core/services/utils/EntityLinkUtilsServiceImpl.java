@@ -10,6 +10,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,19 +63,19 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getPhotosByGenreLink( final Genre genre ) {
+	public String getPhotosByGenreLink( final Genre genre, final Language language ) {
 		return String.format( "<a href=\"%1$s\" title=\"All photos in genre '%2$s'\">%2$s</a>"
 			, urlUtilsService.getPhotosByGenreLink( genre.getId() )
-			, translatorService.translateGenre( genre )
+			, translatorService.translateGenre( genre, language )
 		);
 	}
 
 	@Override
-	public String getPhotosByUserByGenreLink( final User user, final Genre genre ) {
+	public String getPhotosByUserByGenreLink( final User user, final Genre genre, final Language language ) {
 		return String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%1$s\" title=\"%2$s: all photos in category '%3$s'\">%3$s</a>"
 			, urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() )
 			, StringUtilities.escapeHtml( user.getName() )
-			, translatorService.translateGenre( genre )
+			, translatorService.translateGenre( genre, language )
 		);
 	}
 

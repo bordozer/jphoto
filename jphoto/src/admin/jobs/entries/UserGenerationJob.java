@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import controllers.users.edit.UserEditDataController;
 import core.enums.SavedJobParameterKey;
@@ -41,8 +42,8 @@ public class UserGenerationJob extends AbstractJob {
 	private final String[] albumsNames = { "First attempts", "My cat", "Beauty", "She", "Random", "Just an album", "Black album", "General", "Nature", "Macro", "In studio"
 			, "Sun light", "Fairy Tales", "The ocean", "Emotions", "Moonlight", "Silver Lightning", "Loneliness", "The best", "My best", "Collection" };
 
-	public UserGenerationJob() {
-		super( new LogHelper( UserGenerationJob.class ) );
+	public UserGenerationJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( UserGenerationJob.class ), jobEnvironment );
 	}
 
 	@Override

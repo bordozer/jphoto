@@ -1,6 +1,7 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.services.UpgradeDaoImpl;
 import com.google.common.collect.Lists;
@@ -22,8 +23,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class ReindexJob extends NoParametersAbstractJob {
 
-	public ReindexJob() {
-		super( new LogHelper( ReindexJob.class ) );
+	public ReindexJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( ReindexJob.class ), jobEnvironment );
 	}
 
 	@Override

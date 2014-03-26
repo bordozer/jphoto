@@ -13,6 +13,7 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.JobDateRange;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import core.context.EnvironmentContext;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
@@ -181,7 +182,7 @@ public class PhotosImportController extends DateRangableController {
 				} );
 				job.setPhotosightCategories( categoryList );
 
-				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests, pageQty, categoryList );
+				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), categoryList );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

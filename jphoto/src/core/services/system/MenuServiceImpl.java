@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -74,12 +75,12 @@ public class MenuServiceImpl implements MenuService {
 		menus.put( new MenuItem( menuItem.getCaption(), menuItem.getLink() ), menuItems );
 	}
 
-	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus ) {
+	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus, final Language language ) {
 		final List<MenuItem> menuItems = newArrayList();
 
 		final List<Genre> genres = genreService.loadAll();
 		for ( final Genre genre : genres ) {
-			final String caption = translatorService.translateGenre( genre );
+			final String caption = translatorService.translateGenre( genre, language );
 			final String link = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 			menuItems.add( new MenuItem( caption, link ) );
 		}

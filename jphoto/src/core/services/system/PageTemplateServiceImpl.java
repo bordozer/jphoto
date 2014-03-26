@@ -186,7 +186,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		final List<Genre> genres = genreService.loadAll();
 		final List<String> genreLinks = newArrayList();
 		for ( Genre genre : genres ) {
-			String genreLink = entityLinkUtilsService.getPhotosByGenreLink( genre );
+			String genreLink = entityLinkUtilsService.getPhotosByGenreLink( genre, currentUser.getLanguage() );
 			genreLinks.add( genreLink );
 		}
 		model.put( "genres", genres );

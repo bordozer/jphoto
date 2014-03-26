@@ -6,8 +6,8 @@ import core.general.user.UserStatus;
 
 public class CandidatePhotoUploadHelper extends AbstractPhotoUploadAllowance {
 
-	public CandidatePhotoUploadHelper( final User user ) {
-		super( user );
+	public CandidatePhotoUploadHelper( final User user, final User accessor ) {
+		super( user, accessor );
 	}
 
 	@Override

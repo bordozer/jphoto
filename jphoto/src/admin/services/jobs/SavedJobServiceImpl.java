@@ -1,6 +1,7 @@
 package admin.services.jobs;
 
 import admin.controllers.jobs.edit.AbstractJobController;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
@@ -9,6 +10,7 @@ import core.general.base.CommonProperty;
 import core.log.LogHelper;
 import core.services.dao.SavedJobDao;
 import core.services.dao.SchedulerTasksDao;
+import core.services.utils.SystemVarsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class SavedJobServiceImpl implements SavedJobService {
 
 	@Autowired
 	private JobExecutionService jobExecutionService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
 
 	private final LogHelper log = new LogHelper( SavedJobServiceImpl.class );
 
@@ -68,7 +73,7 @@ public class SavedJobServiceImpl implements SavedJobService {
 
 		final SavedJobType jobType = savedJob.getJobType();
 
-		final AbstractJob job = AbstractJobController.createInstance( jobType );
+		final AbstractJob job = AbstractJobController.createInstance( jobType, new JobRuntimeEnvironment( systemVarsService.getSystemDefaultLanguage() ) ); // TODO: what language to use???
 		job.setSavedJobId( savedJobId );
 
 		jobExecutionService.initJobServices( job );

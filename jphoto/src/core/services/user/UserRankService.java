@@ -8,6 +8,7 @@ import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserRankPhotoVote;
+import core.services.translator.Language;
 import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;

@@ -1,6 +1,7 @@
 package core.services.pageTitle;
 
 import controllers.photos.edit.PhotoEditWizardStep;
+import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
@@ -9,6 +10,7 @@ import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -126,7 +128,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 
 		final List<String> breadcrumbList = newArrayList();
 		breadcrumbList.add( entityLinkUtilsService.getPhotosRootLink() );
-		breadcrumbList.add( entityLinkUtilsService.getPhotosByGenreLink( genre ) );
+		breadcrumbList.add( entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ) );
 		breadcrumbList.add( userAnonymousName );
 		breadcrumbList.add( StringUtils.isNotEmpty( title ) ? entityLinkUtilsService.getPhotoCardLink( photo ) : photo.getNameEscaped() );
 		if ( StringUtils.isNotEmpty( title ) ) {
@@ -144,7 +146,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 
 		final String anonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, anonymousName, photo.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), anonymousName, translatorService.translate( mode_t ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), anonymousName, translatorService.translate( mode_t ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -163,7 +165,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByGenreData( final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String genreName = translatorService.translateGenre( genre );
+		final String genreName = translatorService.translateGenre( genre, getLanguage() );
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, genreName );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), genreName );
 
@@ -174,7 +176,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByGenreDataBest( final Genre genre ) {
 		final PageTitleData titleData = getPhotosByGenreData( genre );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), translatorService.translate( "The Best" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), translatorService.translate( "The Best" ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}
@@ -206,9 +208,9 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByUserAndGenre( final User user, final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
-		final String genreName = translatorService.translateGenre( genre );
+		final String genreName = translatorService.translateGenre( genre, getLanguage() );
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated, genreName );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), genreName );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), genreName );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -217,7 +219,7 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	public PageTitleData getPhotosByUserAndGenreBest( final User user, final Genre genre ) {
 		final PageTitleData titleData = getPhotosByUserAndGenre( user, genre );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), translatorService.translate( "The Best" ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() ), translatorService.translate( "The Best" ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}
@@ -290,10 +292,10 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 	private List<String> getPhotoBaseBreadcrumbs( final Photo photo, final User user, final Genre genre, final String... strings ) {
 		final ArrayList<String> list = newArrayList(
 			entityLinkUtilsService.getPhotosRootLink()
-			, entityLinkUtilsService.getPhotosByGenreLink( genre )
+			, entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() )
 			, entityLinkUtilsService.getUserCardLink( user )
 			, entityLinkUtilsService.getPhotosByUserLink( user )
-			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre )
+			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() )
 		);
 
 		if ( strings.length > 0 && StringUtils.isNotEmpty( strings[0] ) ) {
@@ -338,5 +340,9 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink(), text );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getCurrentUser().getLanguage();
 	}
 }

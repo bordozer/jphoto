@@ -8,6 +8,7 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.ServicesImpl;
+import core.services.translator.Language;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -18,6 +19,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 
 	@Test
 	public void commandTest() {
+		final User accessor = new User();
 		final GoToParameters parameters = new GoToParameters( testData.getAccessor(), 7 );
 
 		final ServicesImpl services = getServicesGoTo( parameters );
@@ -28,7 +30,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 		final User photoAuthor = testData.getPhotoAuthor();
 		final Genre genre = testData.getGenre();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), translatorService.translateGenre( testData.getGenre() ), parameters.getPhotosQty() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), translatorService.translateGenre( testData.getGenre(), Language.EN ), parameters.getPhotosQty() ) ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
 

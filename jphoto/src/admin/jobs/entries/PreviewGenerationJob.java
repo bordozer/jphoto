@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -21,8 +22,8 @@ public class PreviewGenerationJob extends AbstractJob {
 	private int previewSize;
 	private boolean skipPhotosWithExistingPreview;
 
-	public PreviewGenerationJob() {
-		super( new LogHelper( PreviewGenerationJob.class ) );
+	public PreviewGenerationJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( PreviewGenerationJob.class ), jobEnvironment );
 	}
 
 	@Override

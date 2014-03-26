@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
 import core.log.LogHelper;
 import core.services.entry.GenreService;
+import core.services.translator.Language;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.CookieStore;
@@ -82,11 +83,11 @@ public class PhotosightRemoteContentHelper {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), StringUtils.isNotEmpty( photosightPhoto.getName() ) ? StringUtilities.unescapeHtml( photosightPhoto.getName() ) : "-no name-", photosightPhotoId );
 	}
 
-	public static String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService ) {
+	public static String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
 			, PhotosightRemoteContentHelper.getPhotosightCategoryPageUrl( photosightCategory )
 			, photosightCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ) )
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ), language )
 		);
 	}
 

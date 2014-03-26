@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.JobRunMode;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
@@ -20,8 +21,8 @@ public class JobChainJob extends AbstractJob {
 	private JobRunMode jobRunMode;
 	private boolean breakChainExecutionIfError;
 
-	public JobChainJob() {
-		super( new LogHelper( JobChainJob.class ) );
+	public JobChainJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( JobChainJob.class ), jobEnvironment );
 	}
 
 	@Override

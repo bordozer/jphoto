@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.DateRangeType;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
@@ -30,8 +31,8 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 	public abstract boolean doPhotoAction( final Photo photo, final User user );
 
-	protected AbstractPhotoActionGenerationJob( final SavedJobType savedJobType, final LogHelper log ) {
-		super( log );
+	protected AbstractPhotoActionGenerationJob( final SavedJobType savedJobType, final LogHelper log, final JobRuntimeEnvironment jobEnvironment ) {
+		super( log, jobEnvironment );
 		this.savedJobType = savedJobType;
 	}
 

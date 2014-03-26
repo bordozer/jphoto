@@ -1,11 +1,13 @@
 package admin.controllers.jobs.edit;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.entries.*;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import admin.jobs.loaders.SavedJobLoaderFactory;
 import admin.services.jobs.*;
+import core.context.EnvironmentContext;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.photo.PhotoService;
@@ -70,7 +72,7 @@ public abstract class AbstractJobController {
 	protected ModelAndView doShowForm( final AbstractAdminJobModel model, final SavedJobType jobType ) {
 		model.clear();
 
-		final AbstractJob job = createInstance( jobType );
+		final AbstractJob job = createInstance( jobType, getCurrentUserJobRuntimeEnvironment() );
 
 		model.setJob( job );
 		model.setJobName( job.getJobType().getName() );
@@ -146,7 +148,7 @@ public abstract class AbstractJobController {
 			}
 		}
 
-		final AbstractJob recreatedFromHistoryEntryJob = createInstance( historyEntry.getSavedJobType() );
+		final AbstractJob recreatedFromHistoryEntryJob = createInstance( historyEntry.getSavedJobType(), getCurrentUserJobRuntimeEnvironment() );
 		recreatedFromHistoryEntryJob.setJobId( jobId );
 
 		jobExecutionService.initJobServices( recreatedFromHistoryEntryJob );
@@ -288,43 +290,47 @@ public abstract class AbstractJobController {
 		model.setTabJobInfosMap( factory.getTabJobInfos() );
 	}
 
-	public static AbstractJob createInstance( final SavedJobType jobType ) {
+	public static AbstractJob createInstance( final SavedJobType jobType, final JobRuntimeEnvironment jobEnvironment ) {
 
 		switch ( jobType ) {
 			case PREVIEW_GENERATION:
-				return new PreviewGenerationJob();
+				return new PreviewGenerationJob( jobEnvironment );
 			case USER_STATUS:
-				return new UserStatusRecalculationJob();
+				return new UserStatusRecalculationJob( jobEnvironment );
 			case USER_GENRES_RANKS_RECALCULATING:
-				return new UsersGenresRanksRecalculationJob();
+				return new UsersGenresRanksRecalculationJob( jobEnvironment );
 			case PHOTO_RATING:
-				return new PhotoRatingJob();
+				return new PhotoRatingJob( jobEnvironment );
 			case REINDEX:
-				return new ReindexJob();
+				return new ReindexJob( jobEnvironment );
 			case JOB_CHAIN:
-				return new JobChainJob();
+				return new JobChainJob( jobEnvironment );
 			case USER_GENERATION:
-				return new UserGenerationJob();
+				return new UserGenerationJob( jobEnvironment );
 			case ACTIONS_GENERATION:
-				return new PhotoActionGenerationVotingJob();
+				return new PhotoActionGenerationVotingJob( jobEnvironment );
 			case ACTIONS_GENERATION_COMMENTS:
-				return new PhotoActionGenerationCommentsJob();
+				return new PhotoActionGenerationCommentsJob( jobEnvironment );
 			case ACTIONS_GENERATION_VIEWS:
-				return new PhotoActionGenerationPreviewsJob();
+				return new PhotoActionGenerationPreviewsJob( jobEnvironment );
 			case RANK_VOTING_GENERATION:
-				return new RankVotingJob();
+				return new RankVotingJob( jobEnvironment );
 			case FAVORITES_GENERATION:
-				return new FavoritesJob();
+				return new FavoritesJob( jobEnvironment );
 			case PHOTOS_IMPORT:
-				return new PhotosImportJob();
+				return new PhotosImportJob( jobEnvironment );
 			case PHOTO_STORAGE_SYNCHRONIZATION:
-				return new PhotoStorageSynchronizationJob();
+				return new PhotoStorageSynchronizationJob( jobEnvironment );
 			case ACTIVITY_STREAM_CLEAN_UP:
-				return new ActivityStreamCleanupJob();
+				return new ActivityStreamCleanupJob( jobEnvironment );
 			case JOB_EXECUTION_HISTORY_CLEAN_UP:
-				return new JobExecutionHistoryCleanupJob();
+				return new JobExecutionHistoryCleanupJob( jobEnvironment );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal SavedJobType: %s", jobType ) );
+	}
+
+	private JobRuntimeEnvironment getCurrentUserJobRuntimeEnvironment() {
+		return new JobRuntimeEnvironment( EnvironmentContext.getCurrentUser().getLanguage() );
 	}
 }

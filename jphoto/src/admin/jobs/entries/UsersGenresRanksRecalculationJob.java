@@ -1,6 +1,7 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.PrivateMessageType;
 import core.enums.SavedJobParameterKey;
@@ -20,8 +21,8 @@ import java.util.Map;
 
 public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
-	public UsersGenresRanksRecalculationJob() {
-		super( new LogHelper( UsersGenresRanksRecalculationJob.class ) );
+	public UsersGenresRanksRecalculationJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( UsersGenresRanksRecalculationJob.class ), jobEnvironment );
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 					addJobExecutionFinalMessage( String.format( "User %s has bees given a new rank %s in %s ( the previous one was %s )"
 						, entityLinkUtilsService.getUserCardLink( user )
 						, userNewRank
-						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre )
+						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, jobEnvironment.getLanguage() )
 						, userCurrentRank ) );
 
 					activityStreamService.saveUserRankInGenreChanged( user, genre, userCurrentRank, userNewRank, dateUtilsService.getCurrentTime(), services );
@@ -87,7 +88,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
 		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
 		message.setMessageText( String.format( "You have bees given a new rank %s in category %s ( the previous one was %s )"
-			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre ), userCurrentRank )
+			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre, jobEnvironment.getLanguage() ), userCurrentRank )
 		);
 
 		services.getPrivateMessageService().save( message );

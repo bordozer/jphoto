@@ -1,6 +1,7 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.PrivateMessageType;
 import core.enums.SavedJobParameterKey;
@@ -20,8 +21,8 @@ import java.util.Map;
 
 public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
-	public UserStatusRecalculationJob() {
-		super( new LogHelper( UserStatusRecalculationJob.class ) );
+	public UserStatusRecalculationJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( UserStatusRecalculationJob.class ), jobEnvironment );
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryService;
@@ -24,8 +25,8 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 	private int deleteEntriesOlderThenDays;
 	private List<JobExecutionStatus> jobExecutionStatusesToDelete;
 
-	public JobExecutionHistoryCleanupJob() {
-		super( new LogHelper( JobExecutionHistoryCleanupJob.class ) );
+	public JobExecutionHistoryCleanupJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( JobExecutionHistoryCleanupJob.class ), jobEnvironment );
 	}
 
 	@Override

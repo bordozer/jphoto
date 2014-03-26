@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportSt
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
 import core.enums.SavedJobParameterKey;
@@ -26,8 +27,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
-	public PhotoStorageSynchronizationJob() {
-		super( new LogHelper( PhotoStorageSynchronizationJob.class ) );
+	public PhotoStorageSynchronizationJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( PhotoStorageSynchronizationJob.class ), jobEnvironment );
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 		final List<Integer> usersIds = getUsersIds();
 
 		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
-		final ImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, photosightCategories );
+		final ImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, jobEnvironment.getLanguage(), photosightCategories );
 
 		final AbstractPhotoImportStrategy importStrategy = new PhotosightImportStrategy( this, importParameters, services );
 

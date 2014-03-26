@@ -10,6 +10,7 @@ import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityServiceImpl;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.user.UserRankService;
 import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
@@ -36,7 +37,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User voter = User.NOT_LOGGED_USER;
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -50,7 +51,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User voter = new User( 11 ); // the same user ID
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -72,7 +73,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre() );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -102,11 +103,11 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You have an negative rank in category '%s'.", translatorService.translateGenre( genre ) ) ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You have an negative rank in category '%s'.", translatorService.translateGenre( genre, Language.EN ) ) ) );
 	}
 
 	@Test
@@ -137,12 +138,12 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
-				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), translatorService.translateGenre( genre ) ) ) );
+				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), translatorService.translateGenre( genre, Language.EN ) ) ) );
 	}
 
 	@Test
@@ -183,13 +184,13 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setUserRankService( userRankService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
 			, translated( String.format( "The member does not have enough photos in category %s ( there are %s photos but has to be at least %s ones )."
-			, translatorService.translateGenre( genre ), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) )
+			, translatorService.translateGenre( genre, Language.EN ), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) )
 		);
 	}
 
@@ -237,7 +238,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setFavoritesService( favoritesService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -288,7 +289,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setFavoritesService( favoritesService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
 
 		assertTrue( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );

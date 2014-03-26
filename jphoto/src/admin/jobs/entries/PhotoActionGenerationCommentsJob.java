@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.PhotoActionAllowance;
 import core.general.photo.Photo;
@@ -19,8 +20,8 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 
 	private enum CommentType { COMMENT, ANSWER }
 
-	public PhotoActionGenerationCommentsJob() {
-		super( SavedJobType.ACTIONS_GENERATION_COMMENTS, new LogHelper( PhotoActionGenerationCommentsJob.class ) );
+	public PhotoActionGenerationCommentsJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( SavedJobType.ACTIONS_GENERATION_COMMENTS, new LogHelper( PhotoActionGenerationCommentsJob.class ), jobEnvironment );
 	}
 
 	@Override

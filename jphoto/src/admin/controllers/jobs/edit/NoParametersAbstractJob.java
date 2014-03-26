@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.entries.AbstractJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -11,8 +12,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public abstract class NoParametersAbstractJob extends AbstractJob {
 
-	public NoParametersAbstractJob(  final LogHelper log ) {
-		super( log );
+	public NoParametersAbstractJob(  final LogHelper log, final JobRuntimeEnvironment jobEnvironment ) {
+		super( log, jobEnvironment );
 	}
 
 	@Override

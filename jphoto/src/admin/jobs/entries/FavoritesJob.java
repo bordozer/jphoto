@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.FavoriteEntryType;
 import core.enums.SavedJobParameterKey;
@@ -21,8 +22,8 @@ public class FavoritesJob extends AbstractJob {
 
 	private final static Integer MAX_ITERATIONS = 1000;
 
-	public FavoritesJob() {
-		super( new LogHelper( FavoritesJob.class ) );
+	public FavoritesJob( final JobRuntimeEnvironment jobEnvironment) {
+		super( new LogHelper( FavoritesJob.class ), jobEnvironment );
 	}
 
 	@Override

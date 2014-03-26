@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -25,8 +26,8 @@ public class RankVotingJob extends AbstractJob {
 
 	private final int[] voteArrays = { -1, 1, 1, 1, 1, 1 };
 
-	public RankVotingJob() {
-		super( new LogHelper( RankVotingJob.class ) );
+	public RankVotingJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( RankVotingJob.class ), jobEnvironment );
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class RankVotingJob extends AbstractJob {
 			addJobExecutionFinalMessage( String.format( "User %s has voted for %s's rank in %s ( %s )"
 				, entityLinkUtilsService.getUserCardLink( votingUser )
 				, entityLinkUtilsService.getUserCardLink( beingVotedUser )
-				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre )
+				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, jobEnvironment.getLanguage() )
 				, randomVotingPoints )
 			);
 

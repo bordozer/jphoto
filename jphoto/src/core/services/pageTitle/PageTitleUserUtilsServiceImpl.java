@@ -1,5 +1,6 @@
 package core.services.pageTitle;
 
+import core.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.enums.UserCardTab;
 import core.general.genre.Genre;
@@ -53,7 +54,8 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 		final String tran = translatorService.translate( "Votes for rank in genre" );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink(), entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotosByUserLink( user )
+			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 

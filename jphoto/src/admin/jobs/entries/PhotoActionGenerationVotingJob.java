@@ -1,6 +1,7 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.action.PhotoStrategyType;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
@@ -18,8 +19,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGenerationJob {
 
-	public PhotoActionGenerationVotingJob() {
-		super( SavedJobType.ACTIONS_GENERATION, new LogHelper( PhotoActionGenerationVotingJob.class ) );
+	public PhotoActionGenerationVotingJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( SavedJobType.ACTIONS_GENERATION, new LogHelper( PhotoActionGenerationVotingJob.class ), jobEnvironment );
 	}
 
 	@Override
@@ -32,7 +33,7 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 			return false;
 		}
 
-		final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto( user, photo );
+		final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto( user, photo, getSystemDefaultLanguage() );
 		if ( validationResult.isValidationFailed() ) {
 			//				getLog().debug( String.format( "Voting fot a photo: %s", validation.getValidationMessage() ) );
 			return false;

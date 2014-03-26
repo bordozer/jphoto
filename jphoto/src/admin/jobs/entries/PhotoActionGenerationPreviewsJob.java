@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -11,8 +12,8 @@ import java.util.Date;
 
 public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerationJob {
 
-	public PhotoActionGenerationPreviewsJob() {
-		super( SavedJobType.ACTIONS_GENERATION_VIEWS, new LogHelper( PhotoActionGenerationPreviewsJob.class ) );
+	public PhotoActionGenerationPreviewsJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( SavedJobType.ACTIONS_GENERATION_VIEWS, new LogHelper( PhotoActionGenerationPreviewsJob.class ), jobEnvironment );
 	}
 
 	@Override

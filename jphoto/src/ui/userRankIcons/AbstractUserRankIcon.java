@@ -2,6 +2,7 @@ package ui.userRankIcons;
 
 import core.general.genre.Genre;
 import core.general.user.User;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 
 public abstract class AbstractUserRankIcon {
@@ -111,6 +112,6 @@ public abstract class AbstractUserRankIcon {
 	}
 
 	private static String getGenreName( final Genre genre, final TranslatorService translatorService ) {
-		return translatorService.translateGenre( genre );
+		return translatorService.translateGenre( genre, Language.EN ); // TODO: pass the language of logged user
 	}
 }

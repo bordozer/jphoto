@@ -8,6 +8,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportSt
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
 import com.google.common.base.Function;
@@ -34,8 +35,8 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 	private ImportParameters importParameters;
 	private List<PhotosightCategory> photosightCategories;
 
-	public PhotosImportJob() {
-		super( new LogHelper( PhotosImportJob.class ) );
+	public PhotosImportJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( PhotosImportJob.class ), jobEnvironment );
 	}
 
 	@Override
@@ -135,7 +136,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					}
 				} );
 
-				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty, photosightCategories );
+				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty, jobEnvironment.getLanguage(), photosightCategories );
 
 				break;
 			default:

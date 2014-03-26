@@ -23,6 +23,7 @@ import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
@@ -357,7 +358,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo ) {
+	public ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Language language ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {
@@ -405,7 +406,8 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( userRankInGenre < 0 ) {
 			final Genre genre = genreService.load( photo.getGenreId() );
 			allowanceValidationResult.failValidation(
-				translatorService.translate( "You have negative rank ( $1 ) in category $2", String.valueOf( userRankInGenre ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) );
+				translatorService.translate( "You have negative rank ( $1 ) in category $2", String.valueOf( userRankInGenre )
+					, entityLinkUtilsService.getPhotosByGenreLink( genre, language ) ) );
 
 			return allowanceValidationResult;
 		}
@@ -414,7 +416,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre ) {
+	public UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Language language ) {
 
 		if ( ! UserUtils.isLoggedUser( voter ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
@@ -448,7 +450,7 @@ public class SecurityServiceImpl implements SecurityService {
 		final int voterId = voter.getId();
 
 		final int voterRankInGenre = userRankService.getUserRankInGenre( voterId, genreId );
-		final String genreName = translatorService.translateGenre( genre );
+		final String genreName = translatorService.translateGenre( genre, language );
 
 		if ( voterRankInGenre < 0 ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
@@ -591,7 +593,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId ) {
+	public AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId, final Language language ) {
 		final Date time = dateUtilsService.getCurrentTime();
 
 		final boolean forceAnonymous = forceAnonymousPosting( userId, genreId, time );
@@ -606,7 +608,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 		if ( isDayAnonymous ) {
 //			messages.add( translatorService.translate( "Today is anonymous posting day" ) );
-			final String genreName = translatorService.translateGenre( genre );
+			final String genreName = translatorService.translateGenre( genre, language );
 			if ( userRankInGenre >= minRankToIgnoreAnonymousDay ) {
 				messages.add( translatorService.translate( "But your rank in category '$1' is big enough to ignore global settings and decide if you want to upload a photo anonymously", genreName ) );
 			} else {

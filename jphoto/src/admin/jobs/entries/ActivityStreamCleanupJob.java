@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -14,8 +15,8 @@ public class ActivityStreamCleanupJob extends AbstractJob {
 
 	private int leaveActivityForDays;
 
-	public ActivityStreamCleanupJob() {
-		super( new LogHelper( ActivityStreamCleanupJob.class ) );
+	public ActivityStreamCleanupJob( final JobRuntimeEnvironment jobEnvironment) {
+		super( new LogHelper( ActivityStreamCleanupJob.class ), jobEnvironment );
 	}
 
 	@Override

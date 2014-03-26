@@ -326,21 +326,25 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	private PhotoList getUserPhotosByGenrePhotoList( final User user, final Genre genre ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, EnvironmentContext.getCurrentUser() );
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, currentUser );
 		final SqlIdsSelectQuery idsSQL = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel() );
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 		final List<Photo> photos = photoService.load( ids );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String title = translatorService.translate( "$1: last photos. Total $2.", translatorService.translateGenre( genre ), String.valueOf( photosByGenre ) );
+		final String title = translatorService.translate( "$1: last photos. Total $2.", translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 		return getPhotoList( photos, link, title );
 	}
 
 	private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, EnvironmentContext.getCurrentUser() );
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, currentUser );
 		final SqlIdsSelectQuery selectIdsQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel() );
 
 		final SqlColumnSelectable tPhotoColGenreId = new SqlColumnSelect( new SqlTable( PhotoDaoImpl.TABLE_PHOTOS ), PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
@@ -350,7 +354,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String listTitle = translatorService.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre ), String.valueOf( photosByGenre ) );
+		final String listTitle = translatorService.translate( "$1: the best photos. Total $2", entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final List<Photo> photos = photoService.loadPhotosByIdsQuery( selectIdsQuery );
 

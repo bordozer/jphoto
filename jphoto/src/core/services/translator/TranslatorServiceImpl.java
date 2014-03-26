@@ -3,6 +3,7 @@ package core.services.translator;
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import core.general.genre.Genre;
+import core.general.user.User;
 import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
@@ -167,13 +168,13 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
-	public String translateGenre( final int entryId ) {
-		return translateCustom( TranslationEntryType.GENRE, entryId, systemVarsService.getSystemDefaultLanguage() );
+	public String translateGenre( final int entryId, final Language language ) {
+		return translateCustom( TranslationEntryType.GENRE, entryId, language );
 	}
 
 	@Override
-	public String translateGenre( final Genre genre ) {
-		return translateGenre( genre.getId() );
+	public String translateGenre( final Genre genre, final Language language ) {
+		return translateGenre( genre.getId(), language );
 	}
 
 	@Override

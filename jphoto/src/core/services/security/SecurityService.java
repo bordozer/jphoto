@@ -7,6 +7,7 @@ import core.general.photo.PhotoComment;
 import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
+import core.services.translator.Language;
 
 import java.util.Date;
 import java.util.List;
@@ -67,9 +68,9 @@ public interface SecurityService {
 
 	ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo );
 
-	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo );
+	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Language language );
 
-	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre );
+	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Language language );
 
 	boolean isSuperAdminUser( final int userId );
 
@@ -89,5 +90,5 @@ public interface SecurityService {
 
 	boolean forceAnonymousPosting( final int userId, final int genreId, final Date time );
 
-	AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId );
+	AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId, final Language language );
 }

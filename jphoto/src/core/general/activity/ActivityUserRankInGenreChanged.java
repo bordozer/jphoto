@@ -1,5 +1,6 @@
 package core.general.activity;
 
+import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.security.Services;
@@ -58,7 +59,7 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		return translatorService.translate( "rank in category '$1' has changed from $2 to $3"
-			, translatorService.translateGenre( genre )
+			, services.getEntityLinkUtilsService().getPhotosByUserByGenreLink( activityOfUser, genre, EnvironmentContext.getCurrentUser().getLanguage() )
 			, String.valueOf( oldRank )
 			, String.valueOf( newRank )
 		);

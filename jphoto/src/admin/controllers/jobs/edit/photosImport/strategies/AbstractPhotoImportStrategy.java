@@ -18,6 +18,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -121,7 +122,7 @@ public abstract class AbstractPhotoImportStrategy {
 			, photo.getId()
 			, entityLinkUtilsService.getPhotoCardLink( photo )
 			, entityLinkUtilsService.getUserCardLink( user )
-			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ) )
+			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), services.getSystemVarsService().getSystemDefaultLanguage() ) // TODO: user language?
 		);
 		job.addJobExecutionFinalMessage( message );
 

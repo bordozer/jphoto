@@ -1,5 +1,6 @@
 package admin.jobs.entries;
 
+import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -11,8 +12,8 @@ import static com.google.common.collect.Maps.newHashMap;
 
 public class PhotoRatingJob extends AbstractDateRangeableJob {
 
-	public PhotoRatingJob() {
-		super( new LogHelper( PhotoRatingJob.class ) );
+	public PhotoRatingJob( final JobRuntimeEnvironment jobEnvironment ) {
+		super( new LogHelper( PhotoRatingJob.class ), jobEnvironment );
 	}
 
 	@Override

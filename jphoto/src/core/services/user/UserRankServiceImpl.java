@@ -18,6 +18,7 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.userRankIcons.UserRankIconContainer;
@@ -114,8 +115,8 @@ public class UserRankServiceImpl implements UserRankService {
 	}
 
 	@Override
-	public VotingModel getVotingModel( final int userId, final int genreId, final User voter ) {
-		final int voterId = voter.getId();
+	public VotingModel getVotingModel( final int userId, final int genreId, final User votingUser ) {
+		final int voterId = votingUser.getId();
 
 		final int userCurrentRankInGenre = getUserRankInGenre( userId, genreId );
 
@@ -130,7 +131,7 @@ public class UserRankServiceImpl implements UserRankService {
 
 		final User user = userService.load( userId );
 		final Genre genre = genreService.load( genreId );
-		votingModel.setValidationResult( securityService.getUserRankInGenreVotingValidationResult( user, voter, genre ) );
+		votingModel.setValidationResult( securityService.getUserRankInGenreVotingValidationResult( user, votingUser, genre, votingUser.getLanguage() ) );
 
 		if ( userAlreadyVoted ) {
 			votingModel.setLastVotingPoints( setUserLastVotingResult( voterId, userId, genreId ) );

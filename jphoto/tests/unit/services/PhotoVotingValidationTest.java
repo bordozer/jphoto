@@ -10,6 +10,7 @@ import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityServiceImpl;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = getSecurityService();
 
-		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( User.NOT_LOGGED_USER, photo ).isValidationFailed() );
+		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( User.NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -53,7 +54,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setUserService( userService );
 
-		assertTrue( "User Can  Vote For His Own Photo", securityService.validateUserCanVoteForPhoto( photoAuthor, photo ).isValidationFailed() );
+		assertTrue( "User Can  Vote For His Own Photo", securityService.validateUserCanVoteForPhoto( photoAuthor, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -83,7 +84,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setUserService( userService );
 		securityService.setFavoritesService( favoritesService );
 
-		assertTrue( "User From Black List Of Photo Author Can Vote", securityService.validateUserCanVoteForPhoto( blackListUser, photo ).isValidationFailed() );
+		assertTrue( "User From Black List Of Photo Author Can Vote", securityService.validateUserCanVoteForPhoto( blackListUser, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -121,7 +122,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
 
-		assertTrue( "Candidates Can Vote If It Is Denied On The System Level", securityService.validateUserCanVoteForPhoto( candidateUser, photo ).isValidationFailed() );
+		assertTrue( "Candidates Can Vote If It Is Denied On The System Level", securityService.validateUserCanVoteForPhoto( candidateUser, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -165,7 +166,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Voting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( user, photo ).isValidationFailed() );
+		assertTrue( "Voting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( user, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -209,7 +210,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( candidateUser, photo ).isValidationFailed() );
+		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( candidateUser, photo, Language.EN ).isValidationFailed() );
 	}
 
 	private SecurityServiceImpl getSecurityService() {

@@ -140,7 +140,7 @@ public class PhotoCardController {
 		model.setVotingUserMaxAccessibleMarkForGenre( userRankService.getUserHighestPositiveMarkInGenre( loggedUserId, genre.getId() ) );
 
 		model.setCommentingValidationResult( securityService.validateUserCanCommentPhoto( currentUser, model.getPhoto() ) );
-		model.setVotingValidationResult( securityService.validateUserCanVoteForPhoto( currentUser, model.getPhoto() ) );
+		model.setVotingValidationResult( securityService.validateUserCanVoteForPhoto( currentUser, model.getPhoto(), currentUser.getLanguage() ) );
 
 		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), currentUser ) );
 

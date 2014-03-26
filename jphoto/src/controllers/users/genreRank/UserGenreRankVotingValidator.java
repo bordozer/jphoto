@@ -67,7 +67,7 @@ public class UserGenreRankVotingValidator implements Validator {
 			return;
 		}
 
-		final ValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( model.getUser(), EnvironmentContext.getCurrentUser(), model.getGenre() );
+		final ValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( model.getUser(), EnvironmentContext.getCurrentUser(), model.getGenre(), model.getVoter().getLanguage() );
 
 		if ( validationResult.isValidationFailed() ) {
 			errors.reject( validationResult.getValidationMessage() );

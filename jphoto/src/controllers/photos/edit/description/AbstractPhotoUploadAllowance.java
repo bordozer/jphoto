@@ -20,6 +20,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public abstract class AbstractPhotoUploadAllowance {
 
 	private final User photoAuthor;
+	private User accessor;
 	private Genre genre;
 
 	private List<Photo> uploadThisWeekPhotos;
@@ -50,8 +51,9 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public abstract int getWeeklyLimitUploadSize();
 
-	public AbstractPhotoUploadAllowance( final User photoAuthor ) {
+	public AbstractPhotoUploadAllowance( final User photoAuthor, final User accessor ) {
 		this.photoAuthor = photoAuthor;
+		this.accessor = accessor;
 	}
 
 	public List<PhotoUploadDescription> getUploadAllowance() {
@@ -183,7 +185,7 @@ public abstract class AbstractPhotoUploadAllowance {
 			final StringBuilder builder = new StringBuilder();
 
 			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", additionalWeeklyLimitPerGenreRank ) );
-			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", translatorService.translateGenre( genre ), String.valueOf( userRankInGenre ) ) );
+			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", translatorService.translateGenre( genre, accessor.getLanguage() ), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
 				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
 				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", additionalRankSize ) );

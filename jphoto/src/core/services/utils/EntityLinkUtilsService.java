@@ -10,6 +10,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.translator.Language;
 
 import java.util.Date;
 
@@ -25,9 +26,9 @@ public interface EntityLinkUtilsService {
 
 	String getPhotosByUserLink( User user );
 
-	String getPhotosByGenreLink( Genre genre );
+	String getPhotosByGenreLink( Genre genre, final Language language );
 
-	String getPhotosByUserByGenreLink( User user, Genre genre );
+	String getPhotosByUserByGenreLink( User user, Genre genre, final Language language );
 
 	String getPhotosByMembershipLink( UserMembershipType membershipType );
 

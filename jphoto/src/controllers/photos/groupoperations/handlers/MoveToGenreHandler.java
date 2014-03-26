@@ -53,7 +53,7 @@ public class MoveToGenreHandler extends AbstractGroupOperationHandler {
 		final String key = getDefaultEntryKey( photo );
 
 		final String nudeContentWarning = photo.isContainsNudeContent() ? getTranslatorService().translate( "<br />&nbsp;Nude content!" ) : StringUtils.EMPTY;
-		final String name = getTranslatorService().translate( "Move<br />&nbsp;Current category: '$1'$2", entityLinkUtilsService.getPhotosByGenreLink( genre ), nudeContentWarning );
+		final String name = getTranslatorService().translate( "Move<br />&nbsp;Current category: '$1'$2", entityLinkUtilsService.getPhotosByGenreLink( genre, getUser().getLanguage() ), nudeContentWarning );
 		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, name );
 		entryProperty.setValue( true );
 
@@ -81,13 +81,13 @@ public class MoveToGenreHandler extends AbstractGroupOperationHandler {
 		final Genre genre = services.getGenreService().load( moveToGenreId );
 
 		if ( photo.getGenreId() == moveToGenreId ) {
-			operationResults.add( GroupOperationResult.skipped( getTranslatorService().translate( "Photo '$1' already has category '$2'. Skipped.", entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) ) );
+			operationResults.add( GroupOperationResult.skipped( getTranslatorService().translate( "Photo '$1' already has category '$2'. Skipped.", entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre, getUser().getLanguage() ) ) ) );
 			return operationResults;
 		}
 
 		if ( photo.isContainsNudeContent() && ! genre.isCanContainNudeContent() ) {
 			operationResults.add( GroupOperationResult.warning( getTranslatorService().translate( "Photo '$1' contains nude content, but this is not allowed for category '$2'."
-				, entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) ) );
+				, entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre, getUser().getLanguage() ) ) ) );
 			return operationResults;
 		}
 
@@ -98,7 +98,7 @@ public class MoveToGenreHandler extends AbstractGroupOperationHandler {
 		}
 
 		operationResults.add( GroupOperationResult.successful( getTranslatorService().translate( "Photo '$1' has been moved to '$2'"
-			, entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre ) ) ) );
+			, entityLinkUtilsService.getPhotoCardLink( photo ), entityLinkUtilsService.getPhotosByGenreLink( genre, getUser().getLanguage() ) ) ) );
 
 		return operationResults;
 	}

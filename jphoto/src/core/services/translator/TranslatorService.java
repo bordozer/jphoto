@@ -43,7 +43,7 @@ public interface TranslatorService {
 
 	String translateCustom( final TranslationEntryType entryType, final int entryId, final Language language );
 
-	String translateGenre( final Genre genre );
+	String translateGenre( final Genre genre, final Language language );
 
-	String translateGenre( final int entryId );
+	String translateGenre( final int entryId, final Language language );
 }
