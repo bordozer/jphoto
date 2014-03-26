@@ -1,55 +1,50 @@
 package admin.controllers.votingCategories.edit;
 
 import core.general.base.AbstractGeneralModel;
-import core.general.photo.PhotoVotingCategory;
 import core.services.validation.DataRequirementService;
 
 public class VotingCategoryEditDataModel extends AbstractGeneralModel {
 
-	public static final String VOTING_CATEGORIES_ID_FORM_CONTROL = "categoryId";
-	public final static String VOTING_CATEGORIES_NAME_FORM_CONTROL = "name";
-	public final static String VOTING_CATEGORIES_DESCRIPTION_FORM_CONTROL = "description";
+	public static final String VOTING_CATEGORIES_ID_FORM_CONTROL = "votingCategoryId";
+	public final static String VOTING_CATEGORIES_NAME_FORM_CONTROL = "votingCategoryName";
+	public final static String VOTING_CATEGORIES_DESCRIPTION_FORM_CONTROL = "votingCategoryDescription";
 
-	private PhotoVotingCategory photoVotingCategory;
 	private DataRequirementService dataRequirementService;
 
-	public PhotoVotingCategory getPhotoVotingCategory() {
-		return photoVotingCategory;
-	}
-
-	public void setPhotoVotingCategory( final PhotoVotingCategory photoVotingCategory ) {
-		this.photoVotingCategory = photoVotingCategory;
-	}
+	private int votingCategoryId;
+	private String votingCategoryName;
+	private String votingCategoryDescription;
 
 	@Override
 	public void clear() {
 		super.clear();
 
-		photoVotingCategory = null;
+		votingCategoryName = null;
+		votingCategoryDescription = null;
 	}
 
-	public int getCategoryId() {
-		return photoVotingCategory.getId();
+	public int getVotingCategoryId() {
+		return votingCategoryId;
 	}
 
-	public void setCategoryId( final int categoryId ) {
-		photoVotingCategory.setId( categoryId );
+	public void setVotingCategoryId( final int votingCategoryId ) {
+		this.votingCategoryId = votingCategoryId;
 	}
 
-	public String getName() {
-		return photoVotingCategory.getName();
+	public String getVotingCategoryName() {
+		return votingCategoryName;
 	}
 
-	public void setName( final String name ) {
-		photoVotingCategory.setName( name );
+	public void setVotingCategoryName( final String votingCategoryName ) {
+		this.votingCategoryName = votingCategoryName;
 	}
 
-	public String getDescription() {
-		return photoVotingCategory.getDescription();
+	public String getVotingCategoryDescription() {
+		return votingCategoryDescription;
 	}
 
-	public void setDescription( final String description ) {
-		photoVotingCategory.setDescription( description );
+	public void setVotingCategoryDescription( final String votingCategoryDescription ) {
+		this.votingCategoryDescription = votingCategoryDescription;
 	}
 
 	public DataRequirementService getDataRequirementService() {

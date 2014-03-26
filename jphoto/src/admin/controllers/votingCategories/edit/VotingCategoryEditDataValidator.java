@@ -26,23 +26,23 @@ public class VotingCategoryEditDataValidator implements Validator {
 	public void validate( final Object target, final Errors errors ) {
 		final VotingCategoryEditDataModel model = ( VotingCategoryEditDataModel ) target;
 
-		final PhotoVotingCategory photoVotingCategory = model.getPhotoVotingCategory();
+		final int votingCategoryId = model.getVotingCategoryId();
+		final String votingCategoryName = model.getVotingCategoryName();
 
-		validateName( errors, photoVotingCategory );
+		validateName( errors, votingCategoryId, votingCategoryName );
 	}
 
-	private void validateName( final Errors errors, final PhotoVotingCategory photoVotingCategory ) {
-		final String name = photoVotingCategory.getName();
+	private void validateName( final Errors errors, final int votingCategoryId, final String votingCategoryName ) {
 
-		if ( StringUtils.isEmpty( name ) ) {
+		if ( StringUtils.isEmpty( votingCategoryName ) ) {
 			final String errorCode = translatorService.translate( "$1 should not be empty.", FormatUtils.getFormattedFieldName( "Name" ) );
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL, errorCode );
 		}
 
-		final PhotoVotingCategory checkPhotoVotingCategories = votingCategoryService.loadByName( name );
-		if ( checkPhotoVotingCategories != null && checkPhotoVotingCategories.getId() > 0 && checkPhotoVotingCategories.getId() != photoVotingCategory.getId() ) {
+		final PhotoVotingCategory checkPhotoVotingCategories = votingCategoryService.loadByName( votingCategoryName );
+		if ( checkPhotoVotingCategories != null && checkPhotoVotingCategories.getId() > 0 && checkPhotoVotingCategories.getId() != votingCategoryId ) {
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL
-				, translatorService.translate( "$1 ($2) already exists!", FormatUtils.getFormattedFieldName( "Name" ), name ), name );
+				, translatorService.translate( "$1 ($2) already exists!", FormatUtils.getFormattedFieldName( "Name" ), votingCategoryName ), votingCategoryName );
 		}
 	}
 }

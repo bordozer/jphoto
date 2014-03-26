@@ -58,7 +58,6 @@ public class VotingCategoryEditDataController {
 	public String newVotingCategory( @ModelAttribute( "votingCategoryEditDataModel" ) VotingCategoryEditDataModel model ) {
 		model.clear();
 
-		model.setPhotoVotingCategory( new PhotoVotingCategory() );
 		model.setNew( true );
 		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoryNewData() );
 
@@ -70,7 +69,9 @@ public class VotingCategoryEditDataController {
 		model.clear();
 
 		final PhotoVotingCategory photoVotingCategory = votingCategoryService.load( categoryId );
-		model.setPhotoVotingCategory( photoVotingCategory );
+
+		initModelFromObject( model, photoVotingCategory );
+
 		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoryEditData( photoVotingCategory ) );
 
 		return VIEW;
@@ -84,12 +85,28 @@ public class VotingCategoryEditDataController {
 			return VIEW;
 		}
 
-		if ( !votingCategoryService.save( model.getPhotoVotingCategory() ) ) {
+		final PhotoVotingCategory photoVotingCategory = getObjectFromModel( model );
+
+		if ( !votingCategoryService.save( photoVotingCategory ) ) {
 			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Error saving data to DB" ) );
 			return VIEW;
 		}
 
 		return String.format( "redirect:/%s/%s/", systemVarsService.getAdminPrefix(), UrlUtilsServiceImpl.VOTING_CATEGORIES_URL );
+	}
+
+	private void initModelFromObject( final VotingCategoryEditDataModel model, final PhotoVotingCategory photoVotingCategory ) {
+		model.setVotingCategoryId( photoVotingCategory.getId() );
+		model.setVotingCategoryName( photoVotingCategory.getName() );
+		model.setVotingCategoryDescription( photoVotingCategory.getDescription() );
+	}
+
+	private PhotoVotingCategory getObjectFromModel( final VotingCategoryEditDataModel model ) {
+		final PhotoVotingCategory photoVotingCategory = new PhotoVotingCategory();
+		photoVotingCategory.setId( model.getVotingCategoryId() );
+		photoVotingCategory.setName( model.getVotingCategoryName() );
+		photoVotingCategory.setDescription( model.getVotingCategoryDescription() );
+		return photoVotingCategory;
 	}
 
 }

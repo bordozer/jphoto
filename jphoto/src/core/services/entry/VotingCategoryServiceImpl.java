@@ -51,6 +51,7 @@ public class VotingCategoryServiceImpl implements VotingCategoryService {
 
 	@Override
 	public List<PhotoVotingCategory> loadAll() {
+
 		final SqlTable tVotingCategory = new SqlTable( PhotoVotingDaoImpl.TABLE_VOTING_CATEGORIES );
 		final SqlIdsSelectQuery selectQuery = new SqlIdsSelectQuery( tVotingCategory );
 

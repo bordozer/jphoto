@@ -50,7 +50,7 @@
 
 					<table:tdicon>
 						<links:votingCategoryEdit id="${votingCategory.id}">
-							<html:img id="editVotingCategoryIcon" src="edit16.png" width="16" height="16" alt="${eco:translate('Edit')}" />
+							<html:img16 src="edit16.png" alt="${eco:translate('Edit voting category')}" />
 						</links:votingCategoryEdit>
 					</table:tdicon>
 
