@@ -22,7 +22,7 @@ import static com.google.common.collect.Maps.newLinkedHashMap;
 
 @SessionAttributes( { GenresTranslationsController.MODEL_NAME } )
 @Controller
-@RequestMapping( "genres/translations" )
+@RequestMapping( "translations/custom" )
 public class GenresTranslationsController {
 
 	public static final String MODEL_NAME = "genresTranslationsModel";
@@ -56,10 +56,12 @@ public class GenresTranslationsController {
 		return model;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	@RequestMapping( method = RequestMethod.GET, value = "genres/" )
 	public String loadGenresTranslations( final @ModelAttribute( MODEL_NAME ) GenresTranslationsModel model ) {
 
 		securityService.assertSuperAdminAccess( EnvironmentContext.getCurrentUser() );
+
+		model.setTranslationEntryType( TranslationEntryType.GENRE );
 
 		final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap();
 		model.setAllTranslationEntriesMap( allTranslationEntriesMap );
@@ -68,6 +70,26 @@ public class GenresTranslationsController {
 		model.setGenreMap( getGenresMap() );
 
 		model.setPageTitleData( pageTitleAdminUtilsService.getGenresTranslationsTitleData() );
+
+		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "genres/" )
+	public String loadVotingCategoriesTranslations( final @ModelAttribute( MODEL_NAME ) GenresTranslationsModel model ) {
+
+		securityService.assertSuperAdminAccess( EnvironmentContext.getCurrentUser() );
+
+		model.setTranslationEntryType( TranslationEntryType.VOTING_CATEGORY );
+
+		/*final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap = getAllTranslationEntriesMap();
+		model.setAllTranslationEntriesMap( allTranslationEntriesMap );
+
+		model.setTranslationEntriesMap( getTranslationEntriesMap( allTranslationEntriesMap, DEFAULT_LANGUAGE ) );
+		model.setGenreMap( getGenresMap() );
+
+		model.setTranslationEntryType( TranslationEntryType.GENRE );
+
+		model.setPageTitleData( pageTitleAdminUtilsService.getGenresTranslationsTitleData() );*/
 
 		return VIEW;
 	}
@@ -92,7 +114,7 @@ public class GenresTranslationsController {
 
 		for ( final IdLanguageKey idLanguageKey : entriesMap.keySet() ) {
 			final GenreTranslationEntry translationEntry = entriesMap.get( idLanguageKey );
-			translatorService.save( TranslationEntryType.GENRE, translationEntry.getEntryId(), idLanguageKey.getLanguage(), translationEntry.getTranslation() );
+			translatorService.save( model.getTranslationEntryType(), translationEntry.getEntryId(), idLanguageKey.getLanguage(), translationEntry.getTranslation() );
 		}
 
 		return String.format( "redirect:%s/genres/", urlUtilsService.getAdminBaseURLWithPrefix() );

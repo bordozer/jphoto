@@ -19,6 +19,8 @@ public class GenresTranslationsModel extends AbstractGeneralModel {
 	private Map<Integer, Genre> genreMap;
 	private List<Language> languages;
 
+	private TranslationEntryType translationEntryType;
+
 	public int getSelectedLanguageId() {
 		return selectedLanguageId;
 	}
@@ -65,5 +67,13 @@ public class GenresTranslationsModel extends AbstractGeneralModel {
 
 	public void setGenreMap( final Map<Integer, Genre> genreMap ) {
 		this.genreMap = genreMap;
+	}
+
+	public TranslationEntryType getTranslationEntryType() {
+		return translationEntryType;
+	}
+
+	public void setTranslationEntryType( final TranslationEntryType translationEntryType ) {
+		this.translationEntryType = translationEntryType;
 	}
 }

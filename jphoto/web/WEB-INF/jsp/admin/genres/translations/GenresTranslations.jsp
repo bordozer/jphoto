@@ -13,7 +13,7 @@
 
 <tags:page pageModel="${genresTranslationsModel.pageModel}">
 
-	<form:form modelAttribute="genresTranslationsModel" method="POST">
+	<form:form modelAttribute="genresTranslationsModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/translations/custom/">
 
 		<table:table width="400px">
 

@@ -536,7 +536,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getAdminGenresTranslationsUrl() {
-		return String.format( "%s/genres/translations/", getAdminBaseURLWithPrefix() );
+		return String.format( "%s/translations/custom/genres/", getAdminBaseURLWithPrefix() );
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
