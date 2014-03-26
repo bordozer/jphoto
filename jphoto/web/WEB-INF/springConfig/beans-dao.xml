@@ -46,4 +46,6 @@
 
 	<bean name="activityStreamDao" class="core.services.dao.ActivityStreamDaoImpl"/>
 
+	<bean name="translationsDao" class="core.services.dao.TranslationsDaoImpl"/>
+
 </beans>

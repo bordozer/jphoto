@@ -62,4 +62,6 @@ public interface PageTitleAdminUtilsService {
 	PageTitleData getControlPanelTitleData();
 
 	PageTitleData getUsersReportTitleData();
+
+	PageTitleData getGenresTranslationsTitleData();
 }

@@ -14,7 +14,7 @@
 		<property name="maxActive" value="${maxActive}"/>
 		<property name="testOnBorrow" value="true"/>
 		<property name="validationQuery" value="SELECT 1"/>
-		<!--<property name="testWhileIdle" value="true" />-->
+		<!--<property name="testWhileIdle" language="true" />-->
 	</bean>
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
