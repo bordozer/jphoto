@@ -1,5 +1,6 @@
 package core.services.translator;
 
+import admin.controllers.genres.translations.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
@@ -153,6 +154,10 @@ public class TranslatorServiceImpl implements TranslatorService {
 		}
 
 		return new TranslationDTO( translations );
+	}
+
+	@Override
+	public void save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation ) {
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {

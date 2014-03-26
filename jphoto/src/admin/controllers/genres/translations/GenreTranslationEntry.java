@@ -5,14 +5,24 @@ import core.services.translator.Language;
 public class GenreTranslationEntry {
 
 	private Language language;
-	private String value;
+	private int entryId;
+	private String translation;
 
 	public GenreTranslationEntry() {
 	}
 
-	public GenreTranslationEntry( final Language language, final String value ) {
+	public GenreTranslationEntry( final int entryId, final Language language, final String translation ) {
 		this.language = language;
-		this.value = value;
+		this.translation = translation;
+		this.entryId = entryId;
+	}
+
+	public int getEntryId() {
+		return entryId;
+	}
+
+	public void setEntryId( final int entryId ) {
+		this.entryId = entryId;
 	}
 
 	public Language getLanguage() {
@@ -23,11 +33,11 @@ public class GenreTranslationEntry {
 		this.language = language;
 	}
 
-	public String getValue() {
-		return value;
+	public String getTranslation() {
+		return translation;
 	}
 
-	public void setValue( final String value ) {
-		this.value = value;
+	public void setTranslation( final String translation ) {
+		this.translation = translation;
 	}
 }

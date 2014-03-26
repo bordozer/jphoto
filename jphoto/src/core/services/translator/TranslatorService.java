@@ -1,5 +1,6 @@
 package core.services.translator;
 
+import admin.controllers.genres.translations.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import org.dom4j.DocumentException;
 
@@ -36,4 +37,6 @@ public interface TranslatorService {
 	void reloadTranslationsAjax() throws DocumentException;
 
 	TranslationDTO getTranslationAjax( final String nerd );
+
+	void save( final TranslationEntryType entryType, final int entryId, final Language language, final String translation );
 }

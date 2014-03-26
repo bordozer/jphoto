@@ -6,6 +6,8 @@ import core.services.entry.GenreService;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
+import core.services.translator.TranslatorService;
+import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,6 +38,12 @@ public class GenresTranslationsController {
 
 	@Autowired
 	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public GenresTranslationsModel prepareModel() {
@@ -77,6 +85,19 @@ public class GenresTranslationsController {
 		return VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.POST, value = "save/" )
+	public String saveTranslations( final @ModelAttribute( MODEL_NAME ) GenresTranslationsModel model ) {
+
+		final Map<IdLanguageKey, GenreTranslationEntry> entriesMap = model.getAllTranslationEntriesMap();
+
+		for ( final IdLanguageKey idLanguageKey : entriesMap.keySet() ) {
+			final GenreTranslationEntry translationEntry = entriesMap.get( idLanguageKey );
+			translatorService.save( TranslationEntryType.GENRE, translationEntry.getEntryId(), idLanguageKey.getLanguage(), translationEntry.getTranslation() );
+		}
+
+		return String.format( "redirect:%s/genres/", urlUtilsService.getAdminBaseURLWithPrefix() );
+	}
+
 	private Map<Integer, GenreTranslationEntry> getTranslationEntriesMap( final Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap, final Language language ) {
 
 		final Map<Integer, GenreTranslationEntry> translationEntriesMap = newLinkedHashMap();
@@ -96,7 +117,7 @@ public class GenresTranslationsController {
 		final Map<IdLanguageKey, GenreTranslationEntry> translationEntriesMap = newLinkedHashMap();
 		for ( final Genre genre : genres ) {
 			for ( final Language language : Language.getUILanguages() ) {
-				translationEntriesMap.put( new IdLanguageKey( genre.getId(), language ), new GenreTranslationEntry( language, genre.getName() ) );
+				translationEntriesMap.put( new IdLanguageKey( genre.getId(), language ), new GenreTranslationEntry( genre.getId(), language, genre.getName() ) );
 			}
 		}
 		return translationEntriesMap;
