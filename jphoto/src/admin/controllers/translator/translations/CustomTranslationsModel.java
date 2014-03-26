@@ -1,25 +1,24 @@
-package admin.controllers.genres.translations;
+package admin.controllers.translator.translations;
 
 import core.general.base.AbstractGeneralModel;
-import core.general.genre.Genre;
 import core.services.translator.Language;
-import core.services.translator.TranslationEntry;
 
 import java.util.List;
 import java.util.Map;
 
-public class GenresTranslationsModel extends AbstractGeneralModel {
+public class CustomTranslationsModel extends AbstractGeneralModel {
 
 	private int selectedLanguageId;
 	private int selectedLanguageIdOld;
 
-	private Map<Integer, GenreTranslationEntry> translationEntriesMap;
+	private Map<Integer, GenreTranslationEntry> selectedLanguageTranslationEntriesMap;
 	private Map<IdLanguageKey, GenreTranslationEntry> allTranslationEntriesMap;
 
-	private Map<Integer, Genre> genreMap;
+	private Map<Integer, String> customTranslatableEntriesMap;
 	private List<Language> languages;
 
 	private TranslationEntryType translationEntryType;
+	private String redirectToPrefix;
 
 	public int getSelectedLanguageId() {
 		return selectedLanguageId;
@@ -37,12 +36,12 @@ public class GenresTranslationsModel extends AbstractGeneralModel {
 		this.selectedLanguageIdOld = selectedLanguageIdOld;
 	}
 
-	public Map<Integer, GenreTranslationEntry> getTranslationEntriesMap() {
-		return translationEntriesMap;
+	public Map<Integer, GenreTranslationEntry> getSelectedLanguageTranslationEntriesMap() {
+		return selectedLanguageTranslationEntriesMap;
 	}
 
-	public void setTranslationEntriesMap( final Map<Integer, GenreTranslationEntry> translationEntriesMap ) {
-		this.translationEntriesMap = translationEntriesMap;
+	public void setSelectedLanguageTranslationEntriesMap( final Map<Integer, GenreTranslationEntry> selectedLanguageTranslationEntriesMap ) {
+		this.selectedLanguageTranslationEntriesMap = selectedLanguageTranslationEntriesMap;
 	}
 
 	public Map<IdLanguageKey, GenreTranslationEntry> getAllTranslationEntriesMap() {
@@ -61,12 +60,12 @@ public class GenresTranslationsModel extends AbstractGeneralModel {
 		this.languages = languages;
 	}
 
-	public Map<Integer, Genre> getGenreMap() {
-		return genreMap;
+	public Map<Integer, String> getCustomTranslatableEntriesMap() {
+		return customTranslatableEntriesMap;
 	}
 
-	public void setGenreMap( final Map<Integer, Genre> genreMap ) {
-		this.genreMap = genreMap;
+	public void setCustomTranslatableEntriesMap( final Map<Integer, String> customTranslatableEntriesMap ) {
+		this.customTranslatableEntriesMap = customTranslatableEntriesMap;
 	}
 
 	public TranslationEntryType getTranslationEntryType() {
@@ -75,5 +74,13 @@ public class GenresTranslationsModel extends AbstractGeneralModel {
 
 	public void setTranslationEntryType( final TranslationEntryType translationEntryType ) {
 		this.translationEntryType = translationEntryType;
+	}
+
+	public String getRedirectToPrefix() {
+		return redirectToPrefix;
+	}
+
+	public void setRedirectToPrefix( final String redirectToPrefix ) {
+		this.redirectToPrefix = redirectToPrefix;
 	}
 }

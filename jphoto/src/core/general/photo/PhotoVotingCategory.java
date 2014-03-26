@@ -2,9 +2,10 @@ package core.general.photo;
 
 import core.general.base.AbstractBaseEntity;
 import core.interfaces.Cacheable;
+import core.interfaces.CustomTranslatable;
 import core.interfaces.Nameable;
 
-public class PhotoVotingCategory extends AbstractBaseEntity implements Nameable, Comparable<PhotoVotingCategory>,  Cacheable {
+public class PhotoVotingCategory extends AbstractBaseEntity implements Nameable, Comparable<PhotoVotingCategory>,  Cacheable, CustomTranslatable {
 
 	private String name;
 	private String description;

@@ -6,6 +6,7 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
+<%@ taglib prefix="translations" tagdir="/WEB-INF/tags/links/translations" %>
 
 <jsp:useBean id="votingCategoryListModel" type="admin.controllers.votingCategories.list.VotingCategoryListModel" scope="request" />
 
@@ -22,6 +23,10 @@
 	<links:votingCategoryNew>
 		<html:img id="addNewVotingCategoryIcon" src="add32.png" width="32" height="32" alt="${newVotingCategoryHint}" />
 	</links:votingCategoryNew>
+
+	<translations:votingCategories>
+		<html:img32 src="icons32/translate.png" alt="${eco:translate('Voting categories translations')}" />
+	</translations:votingCategories>
 
 	<br/>
 	<br/>

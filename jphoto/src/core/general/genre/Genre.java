@@ -3,13 +3,14 @@ package core.general.genre;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.PhotoVotingCategory;
 import core.interfaces.Cacheable;
+import core.interfaces.CustomTranslatable;
 import core.interfaces.Nameable;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class Genre extends AbstractBaseEntity implements Nameable, Comparable<Genre>, Cacheable {
+public class Genre extends AbstractBaseEntity implements Nameable, Comparable<Genre>, Cacheable, CustomTranslatable {
 
 	private String name;
 	private List<PhotoVotingCategory> photoVotingCategories;

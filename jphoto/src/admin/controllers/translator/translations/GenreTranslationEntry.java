@@ -1,4 +1,4 @@
-package admin.controllers.genres.translations;
+package admin.controllers.translator.translations;
 
 import core.services.translator.Language;
 

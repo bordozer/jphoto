@@ -1,6 +1,6 @@
 package core.services.translator;
 
-import admin.controllers.genres.translations.TranslationEntryType;
+import admin.controllers.translator.translations.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
