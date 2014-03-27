@@ -85,7 +85,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 			resetStoredAuthorizationKey( user );
 		}
 
-		switchUser( user );
+		switchUserToNotLoggedUser();
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		final UsersSecurity usersSecurity = usersSecurityDao.load( user );
 
 		if ( usersSecurity == null ) {
-			switchUser( user );
+			switchUserToNotLoggedUser();
 			return;
 		}
 
@@ -181,8 +181,8 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		return usersSecurityDao.load( user ).getAuthorizationKey();
 	}
 
-	private void switchUser( final User user ) {
-		EnvironmentContext.switchUser( userService.getNotLoggedTemporaryUser( user.getLanguage() ) ); // TODO: could user be null?
+	private void switchUserToNotLoggedUser() {
+		EnvironmentContext.switchUser( userService.getNotLoggedTemporaryUser() );
 	}
 
 	private void resetStoredAuthorizationKey( final User user ) {

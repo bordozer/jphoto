@@ -16,8 +16,7 @@
 				<tr>
 					<td>$loginFormPassword</td>
 					<td>
-						<input class="ui-state-default ui-corner-all" type="password" id="$loginFormPasswordControl" name="$loginFormPasswordControl" value="$defaultDebugPassword"
-							   size="14"/>
+						<input class="ui-state-default ui-corner-all" type="password" id="$loginFormPasswordControl" name="$loginFormPasswordControl" value="$defaultDebugPassword" size="14"/>
 						<input border="0" height="16" width="16" src="$imagePath/register-icon.png" type="image" name="image"/>
 					</td>
 				</tr>
@@ -26,6 +25,7 @@
 					<td>
 						<input id="$loginUserAutomaticallyControl" name="$loginUserAutomaticallyControl" type="checkbox" value="1"
 							   class="ui-state-default ui-corner-all"> $rememberMeText
+						<br />$loggedUserId #* TODO: remove not logged temporary user ID from UI*#
 					</td>
 				</tr>
 			</table>
