@@ -1,6 +1,5 @@
 package core.general.menus.comment.goTo;
 
-import core.general.genre.Genre;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;

@@ -16,7 +16,10 @@ import utils.fakeUser.FakeMakeUpMaster;
 import utils.fakeUser.FakeModel;
 import utils.fakeUser.FakePhotographer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;

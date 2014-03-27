@@ -4,8 +4,6 @@ import core.services.security.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import elements.PageItem;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 
 import java.util.List;
 

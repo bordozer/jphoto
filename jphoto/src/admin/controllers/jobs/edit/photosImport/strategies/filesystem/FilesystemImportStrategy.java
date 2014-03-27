@@ -15,7 +15,6 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
-import core.services.translator.Language;
 import core.services.utils.PredicateUtilsService;
 import org.apache.commons.io.FileUtils;
 import utils.PhotoUtils;

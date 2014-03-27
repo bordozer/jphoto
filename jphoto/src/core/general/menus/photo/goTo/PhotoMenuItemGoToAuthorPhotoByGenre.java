@@ -1,7 +1,6 @@
 package core.general.menus.photo.goTo;
 
 import core.general.genre.Genre;
-import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.photo.Photo;

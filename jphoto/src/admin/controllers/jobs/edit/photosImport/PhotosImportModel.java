@@ -1,17 +1,10 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
-import com.google.common.base.Function;
-import com.google.common.base.Functions;
-import com.google.common.collect.Lists;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
 
-import java.util.Arrays;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotosImportModel extends DateRangableModel {
 

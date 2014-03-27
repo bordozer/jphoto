@@ -18,7 +18,6 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
-import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.userRankIcons.UserRankIconContainer;

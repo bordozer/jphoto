@@ -7,7 +7,6 @@ import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
-import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 
 import java.util.List;

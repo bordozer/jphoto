@@ -6,7 +6,6 @@ import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.Language;
 
 public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMenuItem {
 

@@ -4,7 +4,6 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.Language;
 
 public class PhotoMenuItemEditCommand extends AbstractEntryMenuItemCommand<Photo> {
 
