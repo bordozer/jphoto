@@ -116,7 +116,7 @@ public class UserGenreRankVotingController {
 		final User votingUser = EnvironmentContext.getCurrentUser();
 
 		if ( !userRankService.saveVotingForUserRankInGenre( voting, votingUser ) ) {
-			result.reject( translatorService.translate( "Voting error" ), translatorService.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "Error saving data to DB", EnvironmentContext.getLanguage() ) );
 			return VIEW;
 		}
 

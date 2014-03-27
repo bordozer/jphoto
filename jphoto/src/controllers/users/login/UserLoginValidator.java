@@ -1,5 +1,6 @@
 package controllers.users.login;
 
+import core.context.EnvironmentContext;
 import core.general.user.User;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
@@ -60,7 +61,7 @@ public class UserLoginValidator implements Validator {
 	private void validateLoginEntered( final UserLoginModel model, final Errors errors ) {
 		final String login = model.getUserlogin();
 		if ( StringUtils.isEmpty( login ) ) {
-			final String errorCode = translatorService.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Login" ) );
+			final String errorCode = translatorService.translate( "Please, enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Login" ) );
 			errors.rejectValue( UserLoginModel.LOGIN_FORM_LOGIN_CONTROL, errorCode );
 			return;
 		}
@@ -69,7 +70,7 @@ public class UserLoginValidator implements Validator {
 	private void validatePasswordEntered( final UserLoginModel model, final Errors errors ) {
 		final String password = model.getUserpassword();
 		if ( StringUtils.isEmpty( password ) ) {
-			final String errorCode = translatorService.translate( "Please, enter $1.", FormatUtils.getFormattedFieldName( "Password" ) );
+			final String errorCode = translatorService.translate( "Please, enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Password" ) );
 			errors.rejectValue( UserLoginModel.LOGIN_FORM_PASSWORD_CONTROL, errorCode );
 			return;
 		}

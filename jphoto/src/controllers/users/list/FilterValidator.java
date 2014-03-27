@@ -1,5 +1,6 @@
 package controllers.users.list;
 
+import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -37,15 +38,15 @@ public class FilterValidator implements Validator {
 		final int minUserNameLength = configurationService.getInt( ConfigurationKey.SYSTEM_LOGIN_MIN_LENGTH );
 		final String filterUserName = model.getFilterUserName();
 		if ( StringUtils.isNotEmpty( filterUserName ) && filterUserName.length() < minUserNameLength ) {
-			errors.rejectValue( UserFilterModel.USER_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s should be at least %d symbols"
-				, FormatUtils.getFormattedFieldName( "Name" ), minUserNameLength ) ) );
+			errors.rejectValue( UserFilterModel.USER_NAME_FORM_CONTROL, translatorService.translate( "$1 should be at least $2 symbols", EnvironmentContext.getLanguage()
+				, FormatUtils.getFormattedFieldName( "Name" ), String.valueOf( minUserNameLength ) ) );
 		}
 	}
 
 	private void validateMembership( final UserFilterModel model, final Errors errors ) {
 		final List<Integer> membershipTypeIds = model.getMembershipTypeList();
 		if ( membershipTypeIds == null ) {
-			errors.rejectValue( "membershipTypeList", translatorService.translate( String.format( "Select at least one %s", FormatUtils.getFormattedFieldName( "Membership type" ) ) ) );
+			errors.rejectValue( "membershipTypeList", translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Membership type" ) ) );
 		}
 	}
 }

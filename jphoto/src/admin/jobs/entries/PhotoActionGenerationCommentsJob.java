@@ -28,7 +28,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 	public boolean doPhotoAction( final Photo photo, final User user ) {
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
-		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo ).isValidationFailed() ) {
+		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo, getLanguage() ).isValidationFailed() ) {
 			return false;
 		}
 
@@ -60,7 +60,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		addJobExecutionFinalMessage( String.format( "User %s has left a comment for photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo ), dateUtilsService.formatDateTime( actionTime ) ) );
+		addJobExecutionFinalMessage( String.format( "User %s has left a comment for photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
 
 		getLog().info( String.format( "User %s has commented photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 

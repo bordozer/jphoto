@@ -5,6 +5,7 @@ import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
+import core.services.translator.Language;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -70,7 +71,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ValidationResult validationResult = new ValidationResult();
 		validationResult.setValidationPassed( parameters.isUserCanCommentPhoto() );
 
-		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto() ) ).andReturn( validationResult ).anyTimes();
+		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), Language.EN ) ).andReturn( validationResult ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );

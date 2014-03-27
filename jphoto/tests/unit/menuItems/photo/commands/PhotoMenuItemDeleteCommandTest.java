@@ -3,6 +3,8 @@ package menuItems.photo.commands;
 import common.AbstractTestCase;
 import core.general.menus.photo.commands.PhotoMenuItemDeleteCommand;
 import core.general.photo.Photo;
+import core.general.user.User;
+import core.services.translator.Language;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +22,10 @@ public class PhotoMenuItemDeleteCommandTest extends AbstractTestCase {
 		final Photo photo = new Photo();
 		photo.setId( 444 );
 
-		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, getServices() );
+		final User accessor = new User( 234 );
+		accessor.setLanguage( Language.EN );
+
+		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, accessor, getServices() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "Delete photo" ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deletePhoto( %d ); return false;", photo.getId() ) );
 	}

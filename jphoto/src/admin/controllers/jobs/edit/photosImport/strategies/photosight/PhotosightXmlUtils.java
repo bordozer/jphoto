@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
 import core.exceptions.BaseRuntimeException;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -112,7 +113,7 @@ public class PhotosightXmlUtils {
 		output.close();
 	}
 
-	public static List<PhotosightPhoto> getPhotosFromPhotosightUserInfoFile( final PhotosightUser photosightUser, final Services services ) throws IOException, DocumentException {
+	public static List<PhotosightPhoto> getPhotosFromPhotosightUserInfoFile( final PhotosightUser photosightUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
@@ -129,7 +130,7 @@ public class PhotosightXmlUtils {
 			final String savedCategoryId = photoElement.element( PHOTOSIGHT_USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
 			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( savedCategoryId ) );
 			if ( category == null ) {
-				final String message = translatorService.translate( "File '$1' contains unknown photosight categoryId '$2'. Note: file deletion may solve the problem because the import will be done again"
+				final String message = translatorService.translate( "File '$1' contains unknown photosight categoryId '$2'. Note: file deletion may solve the problem because the import will be done again", language
 					, userInfoFile.getAbsolutePath()
 					, savedCategoryId
 				);

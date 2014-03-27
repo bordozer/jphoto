@@ -1,6 +1,8 @@
 package controllers.photos.groupoperations;
 
+import core.context.EnvironmentContext;
 import core.general.photo.group.PhotoGroupOperationType;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,20 +39,20 @@ public class PhotoGroupOperationValidator implements Validator {
 		final String groupOperationId = model.getPhotoGroupOperationId();
 
 		if ( StringUtils.isEmpty( groupOperationId ) ) {
-			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Please, select group operation" ) );
+			errors.reject( translatorService.translate( "Validation error", getLanguage() ), translatorService.translate( "Please, select group operation" , getLanguage() ) );
 			return;
 		}
 
 		final PhotoGroupOperationType groupOperationType = PhotoGroupOperationType.getById( Integer.parseInt( groupOperationId ) );
 		if ( groupOperationType == null ) {
-			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Group operation is unknown" ) );
+			errors.reject( translatorService.translate( "Validation error", getLanguage() ), translatorService.translate( "Group operation is unknown", getLanguage() ) );
 		}
 	}
 
 	void validateAtLeastOnePhotoSelected( final PhotoGroupOperationModel model, final Errors errors ) {
 		final List<String> selectedPhotoIds = model.getSelectedPhotoIds();
 		if ( selectedPhotoIds == null || selectedPhotoIds.size() == 0 ) {
-			errors.reject( translatorService.translate( "Validation error" ), translatorService.translate( "Please, select at least one photo" ) );
+			errors.reject( translatorService.translate( "Validation error", getLanguage() ), translatorService.translate( "Please, select at least one photo", getLanguage() ) );
 		}
 	}
 
@@ -66,7 +68,11 @@ public class PhotoGroupOperationValidator implements Validator {
 		}
 
 		if ( model.getMoveToGenreId() == NO_GENRE_SELECTED ) {
-			errors.rejectValue( PhotoGroupOperationModel.FORM_CONTROL_MOVE_TO_GENRE_ID, translatorService.translate( String.format( "Select %s to move to.", FormatUtils.getFormattedFieldName( "genre" ) ) ) );
+			errors.rejectValue( PhotoGroupOperationModel.FORM_CONTROL_MOVE_TO_GENRE_ID, translatorService.translate( "Select %s to move to.", getLanguage(), FormatUtils.getFormattedFieldName( "genre" ) ) );
 		}
+	}
+
+	private static Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

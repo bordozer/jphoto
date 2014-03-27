@@ -22,6 +22,7 @@ import core.services.photo.PhotoService;
 import core.services.photo.PhotoUploadService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
@@ -282,12 +283,13 @@ public class PhotoEditDataController {
 		final PhotoTeam photoTeam = getPhotoTeam( photo, model );
 		final List<UserPhotoAlbum> photoAlbums = getPhotoAlbums( model );
 
+		final Language language = EnvironmentContext.getLanguage();
 		try {
 			photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, photoAlbums );
 		} catch ( final SaveToDBException e ) {
 			photoService.delete( photo.getId() );
 			log.error( String.format( "Can not save photo data: %s", photo ), e );
-			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Error saving data to DB", language ) );
 			return FILE_UPLOAD_VIEW;
 		}
 
@@ -299,7 +301,7 @@ public class PhotoEditDataController {
 				if ( ! photoService.updatePhotoFileData( photo.getId(), savedFile ) ) {
 					photoService.delete( photo.getId() );
 					log.error( String.format( "Can not update photo file data: %s", photo ), null );
-					result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Can not update photo file data" ) );
+					result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Can not update photo file data", language ) );
 					return FILE_UPLOAD_VIEW;
 				}
 
@@ -308,12 +310,12 @@ public class PhotoEditDataController {
 			} catch ( final IOException e ){
 				photoService.delete( photo.getId() );
 				log.error( "Saving data error" );
-				result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Can not copy photo #$1 file", photo.getId() ) );
+				result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Can not copy photo #$1 file", language, String.valueOf( photo.getId() ) ) );
 				return FILE_UPLOAD_VIEW;
 			} catch ( final InterruptedException e ) {
 				photoService.delete( photo.getId() );
 				log.error( "Photo preview generation failed" );
-				result.reject( translatorService.translate( "Photo preview generation" ), translatorService.translate( "Photo #$1 preview generation error", photo.getId() ) );
+				result.reject( translatorService.translate( "Photo preview generation", language ), translatorService.translate( "Photo #$1 preview generation error", language, String.valueOf( photo.getId() ) ) );
 				return FILE_UPLOAD_VIEW;
 			}
 		}

@@ -98,20 +98,20 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Delete entries that finished early then $1 day(s) ago", deleteEntriesOlderThenDays ) ).append( "<br />" );
-		builder.append( translatorService.translate( "Job statuses to delete: " ) );
+		builder.append( translatorService.translate( "Delete entries that finished early then $1 day(s) ago", getLanguage(), String.valueOf( deleteEntriesOlderThenDays ) ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Job statuses to delete: ", getLanguage() ) );
 
 		if ( jobExecutionStatusesToDelete.size() < JobExecutionStatus.values().length ) {
 			builder.append( "<br />" );
 			for ( final JobExecutionStatus jobExecutionStatus : jobExecutionStatusesToDelete ) {
-				final String execStatusTranslated = translatorService.translate( jobExecutionStatus.getName() );
+				final String execStatusTranslated = translatorService.translate( jobExecutionStatus.getName(), getLanguage() );
 				final String img = String.format( "<img src='%s/jobExecutionStatus/%s' height='16' title='%s'> "
 					, services.getUrlUtilsService().getSiteImagesPath(), jobExecutionStatus.getIcon(), execStatusTranslated );
 				builder.append( img ).append( execStatusTranslated ).append( "</li>" );
 				builder.append( "<br />" );
 			}
 		} else {
-			builder.append( translatorService.translate( "All" ) );
+			builder.append( translatorService.translate( "All job execution statuses", getLanguage() ) );
 		}
 
 		/*builder.append( "<br />" );

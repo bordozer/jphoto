@@ -1,5 +1,6 @@
 package controllers.users.password.change;
 
+import core.context.EnvironmentContext;
 import core.general.user.User;
 import core.services.translator.TranslatorService;
 import core.services.user.UsersSecurityService;
@@ -34,7 +35,7 @@ public class ChangeUserPasswordValidator implements Validator {
 
 	private void validateOldPassword( final User user, final String password, final Errors errors ) {
 		if ( ! usersSecurityService.isUserPasswordCorrect( user, password ) ) {
-			errors.rejectValue( ChangeUserPasswordModel.FORM_CONTROL_OLD_PASSWORD, translatorService.translate( "Incorrect $1", FormatUtils.getFormattedFieldName( "Old password" ) ) );
+			errors.rejectValue( ChangeUserPasswordModel.FORM_CONTROL_OLD_PASSWORD, translatorService.translate( "Incorrect $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Old password" ) ) );
 		}
 	}
 

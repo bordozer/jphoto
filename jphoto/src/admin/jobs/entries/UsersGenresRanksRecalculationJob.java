@@ -57,7 +57,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 					addJobExecutionFinalMessage( String.format( "User %s has bees given a new rank %s in %s ( the previous one was %s )"
 						, entityLinkUtilsService.getUserCardLink( user )
 						, userNewRank
-						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, jobEnvironment.getLanguage() )
+						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() )
 						, userCurrentRank ) );
 
 					activityStreamService.saveUserRankInGenreChanged( user, genre, userCurrentRank, userNewRank, dateUtilsService.getCurrentTime(), services );
@@ -88,7 +88,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
 		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
 		message.setMessageText( String.format( "You have bees given a new rank %s in category %s ( the previous one was %s )"
-			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre, jobEnvironment.getLanguage() ), userCurrentRank )
+			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre, getLanguage() ), userCurrentRank )
 		);
 
 		services.getPrivateMessageService().save( message );

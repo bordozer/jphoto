@@ -130,7 +130,7 @@ public class VotesForUserRankInGenreController {
 					final int rank = userGenreRankHistoryEntry.getRank();
 
 					final UserGenreRankViewEntry viewHistoryEntry = new UserGenreRankViewEntry();
-					viewHistoryEntry.setColumn1( translatorService.translate( "New status: $1", rank ) );
+					viewHistoryEntry.setColumn1( translatorService.translate( "New status: $1", EnvironmentContext.getLanguage(), String.valueOf( rank ) ) );
 					viewHistoryEntry.setColumn2( String.valueOf( rank ) );
 					viewHistoryEntry.setColumn3( dateUtilsService.formatDateTimeShort( rankAssignTime ) );
 					viewHistoryEntry.setStatusChangeEntry( true );

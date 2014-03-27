@@ -7,6 +7,7 @@ import core.general.base.CommonProperty;
 import core.general.conversion.ConversionOptions;
 import core.general.photo.Photo;
 import core.log.LogHelper;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 
@@ -73,8 +74,9 @@ public class PreviewGenerationJob extends AbstractJob {
 
 		totalJopOperations = services.getPhotoService().getPhotoQty(); // TODO: hack!
 
-		builder.append( translatorService.translate( "Preview size: " ) ).append( previewSize ).append( "<br />" );
-		builder.append( translatorService.translate( "Skip, if preview exists: " ) ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No" ) ).append( "<br />" );
+		final Language language = getLanguage();
+		builder.append( translatorService.translate( "Preview size: ", language ) ).append( previewSize ).append( "<br />" );
+		builder.append( translatorService.translate( "Skip, if preview exists: ", language ) ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No", language ) ).append( "<br />" );
 
 		return builder.toString();
 	}

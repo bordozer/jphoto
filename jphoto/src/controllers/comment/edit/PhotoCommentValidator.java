@@ -54,14 +54,14 @@ public class PhotoCommentValidator implements Validator {
 		validateCommentDelay( errors );
 
 		final Photo photo = photoService.load( model.getPhotoId() );
-		final ValidationResult commentingValidationResult = securityService.validateUserCanCommentPhoto( EnvironmentContext.getCurrentUser(), photo );
+		final ValidationResult commentingValidationResult = securityService.validateUserCanCommentPhoto( EnvironmentContext.getCurrentUser(), photo, EnvironmentContext.getLanguage() );
 		if ( commentingValidationResult.isValidationFailed() ) {
 			errors.reject( commentingValidationResult.getValidationMessage() );
 		}
 
 		final int photoCommentId = model.getPhotoCommentId();
 		if ( photoCommentId > 0 && ! securityService.userCanEditPhotoComment( EnvironmentContext.getCurrentUser(), photoCommentService.load( photoCommentId ) ) ) {
-			errors.reject( translatorService.translate( "You do not have permission to edit this comment" ) );
+			errors.reject( translatorService.translate( "You do not have permission to edit this comment", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
@@ -71,7 +71,7 @@ public class PhotoCommentValidator implements Validator {
 
 		if ( StringUtils.isEmpty( commentText ) ) {
 			errors.rejectValue( PhotoCommentModel.COMMENT_TEXT_FORM_CONTROL
-				, translatorService.translate( String.format( "%s must not be empty.", FormatUtils.getFormattedFieldName( "Comment" ) ) ) );
+				, translatorService.translate( "$1 must not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Comment" ) ) );
 			return;
 		}
 
@@ -81,7 +81,7 @@ public class PhotoCommentValidator implements Validator {
 		if ( actualLength < minLength || actualLength > maxLength ) {
 			final String text = String.format( "%s must be more then $1 symbols and less then $2. Entered: $3", FormatUtils.getFormattedFieldName( "Comment" ) );
 			errors.rejectValue( PhotoCommentModel.COMMENT_TEXT_FORM_CONTROL
-				, translatorService.translate( text, String.valueOf( minLength ), String.valueOf( maxLength ), String.valueOf( actualLength ) ) );
+				, translatorService.translate( text, EnvironmentContext.getLanguage(), String.valueOf( minLength ), String.valueOf( maxLength ), String.valueOf( actualLength ) ) );
 			return;
 		}
 
@@ -99,7 +99,7 @@ public class PhotoCommentValidator implements Validator {
 			final String lastCommentTimeTxt = dateUtilsService.formatTime( lastCommentTime );
 			final String nextCommentTimeTxt = dateUtilsService.formatTime( nextCommentTime );
 
-			String error = translatorService.translate( "You can leave the next comment in $1 seconds. <br />Your last comment $2<br /> You can leave the next $3"
+			String error = translatorService.translate( "You can leave the next comment in $1 seconds. <br />Your last comment $2<br /> You can leave the next $3", EnvironmentContext.getLanguage()
 				, String.valueOf( delayInSecs ), lastCommentTimeTxt, nextCommentTimeTxt );
 			errors.reject( error );
 		}

@@ -89,7 +89,7 @@ public class RankVotingJob extends AbstractJob {
 			addJobExecutionFinalMessage( String.format( "User %s has voted for %s's rank in %s ( %s )"
 				, entityLinkUtilsService.getUserCardLink( votingUser )
 				, entityLinkUtilsService.getUserCardLink( beingVotedUser )
-				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, jobEnvironment.getLanguage() )
+				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, getLanguage() )
 				, randomVotingPoints )
 			);
 
@@ -121,7 +121,7 @@ public class RankVotingJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Actions: " ) ).append( totalJopOperations ).append( "<br />" );
+		builder.append( services.getTranslatorService().translate( "Actions: ", getLanguage() ) ).append( totalJopOperations ).append( "<br />" );
 
 		return builder.toString();
 	}

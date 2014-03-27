@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.ImageFileUtilsService;
@@ -127,7 +128,8 @@ public class UserAvatarController {
 
 			userService.saveAvatar( userId, tmpAvatarFile );
 		} catch ( IOException e ) {
-			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Can not copy file" ) );
+			final Language language = EnvironmentContext.getLanguage();
+			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Can not copy file", language ) );
 			log.error( e );
 		}
 

@@ -162,7 +162,7 @@ public class UserBookmarksController {
 
 		final User user = userService.load( userId );
 
-		final String listTitle = translatorService.translate( "$1: $2", entityLinkUtilsService.getUserCardLink( user ), entryType.getName() );
+		final String listTitle = String.format( "%s: %s", entityLinkUtilsService.getUserCardLink( user ), translatorService.translate(  entryType.getName(), EnvironmentContext.getLanguage() ) );
 
 		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, showIconsForFavoriteEntryTypes, EnvironmentContext.getCurrentUser() ), listTitle );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );

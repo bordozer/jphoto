@@ -45,7 +45,7 @@ public class ActivityStreamCleanupJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", leaveActivityForDays ) );
+		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", getLanguage(), String.valueOf( leaveActivityForDays ) ) );
 
 		return builder.toString();
 	}

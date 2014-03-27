@@ -11,6 +11,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
@@ -217,8 +218,8 @@ public class UserGenerationJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Users: " ) ).append( totalJopOperations ).append( "<br />" );
-		builder.append( translatorService.translate( "Avatars: " ) ).append( avatarsDir );
+		builder.append( translatorService.translate( "Users: ", getLanguage() ) ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translatorService.translate( "Avatars: ", getLanguage() ) ).append( avatarsDir );
 
 		return builder.toString();
 	}

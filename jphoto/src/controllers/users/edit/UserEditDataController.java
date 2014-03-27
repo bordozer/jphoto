@@ -171,7 +171,7 @@ public class UserEditDataController {
 		}
 
 		if ( !isSaved ) {
-			result.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Error saving data to DB" ) );
+			result.reject( translatorService.translate( "Registration error", EnvironmentContext.getLanguage() ), translatorService.translate( "Error saving data to DB", EnvironmentContext.getLanguage() ) );
 			return VIEW;
 		}
 

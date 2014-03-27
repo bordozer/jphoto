@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.preview;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
+import core.context.EnvironmentContext;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;
@@ -26,7 +27,7 @@ public class PreviewGenerationValidator extends SavedJobValidator implements Val
 	private void validatePictureFolder( final int previewSize, final Errors errors ) {
 		if ( previewSize <= 0 ) {
 			errors.rejectValue( PreviewGenerationModel.PREVIEW_SIZE_FORM_CONTROL,
-								translatorService.translate( String.format( "Enter %s.", FormatUtils.getFormattedFieldName( "Preview size" ) ) ) );
+								translatorService.translate( "Enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Preview size" ) ) );
 		}
 	}
 }

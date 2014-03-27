@@ -357,4 +357,12 @@ public abstract class AbstractJob extends Thread {
 	protected String translate( final String actions ) {
 		return services.getTranslatorService().translate( actions, jobEnvironment.getLanguage() );
 	}
+
+	public JobRuntimeEnvironment getJobEnvironment() {
+		return jobEnvironment;
+	}
+
+	public Language getLanguage() {
+		return jobEnvironment.getLanguage();
+	}
 }

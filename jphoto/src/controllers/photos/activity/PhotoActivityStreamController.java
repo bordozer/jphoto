@@ -127,7 +127,7 @@ public class PhotoActivityStreamController {
 
 		pagingModel.setTotalItems( idsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), translatorService.translate( "Activity" ) ) );
+		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), translatorService.translate( "Activity", EnvironmentContext.getLanguage() ) ) );
 
 		return VIEW;
 	}

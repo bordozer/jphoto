@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.favorites;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
+import core.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -34,7 +35,8 @@ public class FavoritesJobValidator extends SavedJobValidator implements Validato
 
 	private void validateFavoriteEntries( final FavoritesJobModel model, final Errors errors ) {
 		if ( model.getFavoriteEntriesIds() == null || model.getFavoriteEntriesIds().size() == 0 ) {
-			errors.rejectValue( FavoritesJobModel.FAVORITE_ENTRIES_IDS_FORM_CONTROL, translatorService.translate( String.format( "Select at least one checkbox of %s", FormatUtils.getFormattedFieldName( "Favorite entries" ) ) ) );
+			final String errorCode = translatorService.translate( "Select at least one checkbox of $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Favorite entries" ) );
+			errors.rejectValue( FavoritesJobModel.FAVORITE_ENTRIES_IDS_FORM_CONTROL, errorCode );
 		}
 	}
 }

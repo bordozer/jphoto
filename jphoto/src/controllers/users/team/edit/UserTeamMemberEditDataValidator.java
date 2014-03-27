@@ -1,5 +1,6 @@
 package controllers.users.team.edit;
 
+import core.context.EnvironmentContext;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.TranslatorService;
@@ -40,14 +41,14 @@ public class UserTeamMemberEditDataValidator implements Validator {
 	private void validateName( final UserTeamMemberEditDataModel model, final Errors errors ) {
 		if ( StringUtils.isEmpty( model.getTeamMemberName() ) ) {
 			errors.rejectValue( UserTeamMemberEditDataModel.FORM_CONTROL_TEAM_MEMBER_NAME
-				, translatorService.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Team member custom name" ) ) ) );
+				, translatorService.translate( "$1 should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Team member custom name" ) ) );
 			return;
 		}
 
 		final UserTeamMember userTeamMember = userTeamService.loadUserTeamMemberByName( model.getUser().getId(), model.getTeamMemberName() );
 		if ( userTeamMember != null && userTeamMember.getId() != model.getUserTeamMemberId() ) {
 			errors.rejectValue( UserTeamMemberEditDataModel.FORM_CONTROL_TEAM_MEMBER_NAME
-				, translatorService.translate( String.format( "%s should be unique. You already have this name in your team", FormatUtils.getFormattedFieldName( "Team member custom name" ) ) ) );
+				, translatorService.translate( "$1 should be unique. You already have this name in your team", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Team member custom name" ) ) );
 		}
 	}
 
@@ -61,7 +62,7 @@ public class UserTeamMemberEditDataValidator implements Validator {
 		final User teamMemberUser = userService.load( teamMemberUserId );
 		if ( teamMemberUser == null ) {
 			errors.rejectValue( UserTeamMemberEditDataModel.FORM_CONTROL_TEAM_MEMBER_USER_ID
-				, translatorService.translate( String.format( "%s does not exist", FormatUtils.getFormattedFieldName( "User" ) ) ) );
+				, translatorService.translate( "$1 does not exist", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "User" ) ) );
 		}
 	}
 }
