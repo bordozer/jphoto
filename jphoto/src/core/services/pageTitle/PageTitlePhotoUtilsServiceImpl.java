@@ -244,7 +244,10 @@ public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsServic
 		final PageTitleData titleData = getPhotosByUser( user );
 
 		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosVotedByUserLinkUser( user.getId(), language ), votingCategory.getName() );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language )
+			, entityLinkUtilsService.getUserCardLink( user, language )
+			, entityLinkUtilsService.getPhotosVotedByUserLinkUser( user.getId(), language )
+			, translatorService.translatePhotoVotingCategory( votingCategory, language ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}

@@ -3,6 +3,7 @@ package core.services.translator;
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import core.general.genre.Genre;
+import core.general.photo.PhotoVotingCategory;
 import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
@@ -131,13 +132,18 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
-	public String translateGenre( final int entryId, final Language language ) {
-		return translateCustom( TranslationEntryType.GENRE, entryId, language );
+	public String translateGenre( final int genreId, final Language language ) {
+		return translateCustom( TranslationEntryType.GENRE, genreId, language );
 	}
 
 	@Override
 	public String translateGenre( final Genre genre, final Language language ) {
 		return translateGenre( genre.getId(), language );
+	}
+
+	@Override
+	public String translatePhotoVotingCategory( final PhotoVotingCategory photoVotingCategory, final Language language ) {
+		return translateCustom( TranslationEntryType.VOTING_CATEGORY, photoVotingCategory.getId(), language );
 	}
 
 	@Override

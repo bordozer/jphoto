@@ -3,6 +3,7 @@ package core.services.translator;
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.dtos.TranslationDTO;
 import core.general.genre.Genre;
+import core.general.photo.PhotoVotingCategory;
 import org.dom4j.DocumentException;
 
 import java.util.Map;
@@ -31,5 +32,7 @@ public interface TranslatorService {
 
 	String translateGenre( final Genre genre, final Language language );
 
-	String translateGenre( final int entryId, final Language language );
+	String translateGenre( final int genreId, final Language language );
+
+	String translatePhotoVotingCategory( final PhotoVotingCategory photoVotingCategory, final Language language );
 }
