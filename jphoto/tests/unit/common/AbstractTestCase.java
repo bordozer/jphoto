@@ -117,8 +117,8 @@ public class AbstractTestCase {
 	}
 
 	public static String translated( final String nerd ) {
-//		return String.format( "%s%s%s", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
-		return String.format( "%s(%s)", nerd, Language.NERD.getCode() );
+		return String.format( "%s%s%s<sup>nerd</sup>", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
+//		return String.format( "%s(%s)", nerd, Language.NERD.getCode() );
 	}
 
 	/*public User getNotLoggedTemporaryUser() {

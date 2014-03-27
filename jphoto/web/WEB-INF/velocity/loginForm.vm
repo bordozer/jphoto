@@ -1,5 +1,5 @@
 <div class="loginform">
-	#if ( $showLoginForm && $loggedUserId == -1 )
+	#if ( $showLoginForm && $loggedUserId <= 0 )
 		<form id="loginform" method="POST" action="$loginFormAction">
 			<table width="100%" border="0">
 				<tr>
