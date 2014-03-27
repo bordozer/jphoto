@@ -43,7 +43,7 @@ public class TranslationsReader {
 
 				final Element element = nerdElement.element( language.getCode() );
 				if ( element == null ) {
-					translations.add( new TranslationEntryNerd( nerd, systemVarsService ) );
+					translations.add( new TranslationEntryMissed( nerd, language, systemVarsService ) );
 					continue;
 				}
 

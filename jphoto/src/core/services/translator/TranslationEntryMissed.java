@@ -2,10 +2,10 @@ package core.services.translator;
 
 import core.services.utils.SystemVarsService;
 
-public class TranslationEntryNerd extends TranslationEntry {
+public class TranslationEntryMissed extends TranslationEntry {
 
-	public TranslationEntryNerd( final String nerd, final SystemVarsService systemVarsService ) {
-		super( nerd, Language.NERD, nerd, systemVarsService );
+	public TranslationEntryMissed( final String nerd, final Language language, final SystemVarsService systemVarsService ) {
+		super( nerd, language, nerd, systemVarsService );
 	}
 
 	@Override
@@ -18,8 +18,8 @@ public class TranslationEntryNerd extends TranslationEntry {
 		return systemVarsService.getTranslatorUntranslatedEndPrefix();
 	}
 
-	/*@Override
+	@Override
 	public String getLanguageCode() {
-		return String.format( "(%s)", Language.NERD.getCode() );
-	}*/
+		return String.format( "%s<sup>!<sup>", super.getLanguageCode() );
+	}
 }
