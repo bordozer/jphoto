@@ -77,10 +77,13 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotosByUserByGenreLink( final User user, final Genre genre, final Language language ) {
-		return String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%1$s\" title=\"%2$s: all photos in category '%3$s'\">%3$s</a>"
+		final String userName = StringUtilities.escapeHtml( user.getName() );
+		final String genreName = translatorService.translateGenre( genre, language );
+
+		return String.format( "<a class=\"photos-by-user-by-genre-link\" href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() )
-			, StringUtilities.escapeHtml( user.getName() )
-			, translatorService.translateGenre( genre, language )
+			, translatorService.translate( "$1: all photos in category '$2'", language, userName, genreName )
+			, genreName
 		);
 	}
 
