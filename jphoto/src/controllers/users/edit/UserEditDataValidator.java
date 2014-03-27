@@ -1,5 +1,6 @@
 package controllers.users.edit;
 
+import core.context.EnvironmentContext;
 import core.enums.UserGender;
 import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
@@ -63,8 +64,8 @@ public class UserEditDataValidator implements Validator {
 	private void validateLogin( final Errors errors, final String userLogin, final int userId ) {
 
 		if ( StringUtils.isEmpty( userLogin ) ) {
-			errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty."
-					, FormatUtils.getFormattedFieldName( "Login" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Login" ) ) );
 			return;
 		}
 
@@ -73,7 +74,7 @@ public class UserEditDataValidator implements Validator {
 		final int maxLoginLength = configurationService.getInt( ConfigurationKey.SYSTEM_LOGIN_MAX_LENGTH );
 
 		if ( loginLength < minLoginLength ) {
-			final String translate = translatorService.translate( "is too short. Min: $2, entered: $3", userLogin, String.valueOf( minLoginLength ), String.valueOf( loginLength ) );
+			final String translate = translatorService.translate( "is too short. Min: $2, entered: $3", EnvironmentContext.getLanguage(), userLogin, String.valueOf( minLoginLength ), String.valueOf( loginLength ) );
 			final String errorCode = String.format( "%s %s", FormatUtils.getFormattedFieldName( "Login" ), translate );
 
 			errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, errorCode );
@@ -81,7 +82,7 @@ public class UserEditDataValidator implements Validator {
 			return;
 		} else {
 			if ( loginLength > maxLoginLength ) {
-				String translate = translatorService.translate( "is too long. Max: $2, entered: $3", userLogin, String.valueOf( maxLoginLength ), String.valueOf( loginLength ) );
+				String translate = translatorService.translate( "is too long. Max: $2, entered: $3", EnvironmentContext.getLanguage(), userLogin, String.valueOf( maxLoginLength ), String.valueOf( loginLength ) );
 				final String errorCode = String.format( "%s %s", FormatUtils.getFormattedFieldName( "Login" ), translate );
 
 				errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, errorCode );
@@ -92,16 +93,16 @@ public class UserEditDataValidator implements Validator {
 		// User's login has to be unique
 		final User checkUser = userService.loadByLogin( userLogin );
 		if ( checkUser != null && checkUser.getId() > 0 && checkUser.getId() != userId ) {
-			errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) is busy."
-					, FormatUtils.getFormattedFieldName( "login" ) ), userLogin ) );
+			errors.rejectValue( UserEditDataModel.USER_LOGIN_FORM_CONTROL, translatorService.translate( "$1 '$2' is busy", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "login" ), userLogin ) );
 		}
 	}
 
 	private void validateName( final Errors errors, final String userName, final int userId ) {
 
 		if ( StringUtils.isEmpty( userName ) ) {
-			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty."
-					, FormatUtils.getFormattedFieldName( "Name" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Name" ) ) );
 			return;
 		}
 
@@ -110,51 +111,51 @@ public class UserEditDataValidator implements Validator {
 		final int maxUserNameLength = configurationService.getInt( ConfigurationKey.SYSTEM_USER_NAME_MAX_LENGTH );
 
 		if ( userName.length() < minUserNameLength ) {
-			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) should be more then %d symbols."
-					, FormatUtils.getFormattedFieldName( "Name" ), minUserNameLength ), userName ) );
+			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( "$1 '$2' should be more then $3 symbols", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Name" ), userName, String.valueOf( minUserNameLength ) ) );
 			return;
 		}
 
 		if ( userName.length() > maxUserNameLength ) {
-			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) should be less then %d symbols."
-					, FormatUtils.getFormattedFieldName( "Name" ), maxUserNameLength ), userName ) );
+			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( "$1 '$2' should be less then $3 symbols", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Name" ), userName, String.valueOf( maxUserNameLength ) ) );
 			return;
 		}
 
 		// User's name has to be unique
 		final User checkUser = userService.loadByName( userName );
 		if ( checkUser != null && checkUser.getId() > 0 && checkUser.getId() != userId ) {
-			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) is busy."
-					, FormatUtils.getFormattedFieldName( "name" ) ), userName ) );
+			errors.rejectValue( UserEditDataModel.USER_NAME_FORM_CONTROL, translatorService.translate( "$1 '$2' is busy", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "name" ), userName ) );
 		}
 	}
 
 	private void validateEmail( final Errors errors, final String userEmail, final int userId ) {
 
 		if ( StringUtils.isEmpty( userEmail ) ) {
-			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( String.format( "%s should not be empty."
-					, FormatUtils.getFormattedFieldName( "Email" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Email" ) ) );
 			return;
 		}
 
 		if ( !EmailValidator.getInstance().isValid( userEmail ) ) {
-			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) has invalid format."
-					, FormatUtils.getFormattedFieldName( "Email" ) ), userEmail ) );
+			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( "$1 '$2') has invalid format", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Email" ), userEmail ) );
 			return;
 		}
 
 		// User's email has to be unique
 		final User checkUser = userService.loadByEmail( userEmail );
 		if ( checkUser != null && checkUser.getId() > 0 && checkUser.getId() != userId ) {
-			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( String.format( "%s ($1) is already presents in the system."
-					, FormatUtils.getFormattedFieldName( "email" ) ), userEmail ) );
+			errors.rejectValue( UserEditDataModel.USER_EMAIL_FORM_CONTROL, translatorService.translate( "$1 '$2' is already presents in the system", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "email" ), userEmail ) );
 		}
 	}
 
 	private void validateBirthDate( final Errors errors, final String dateOfBirth ) {
 		if ( ! dateUtilsService.validateDate( dateOfBirth ) ) {
-			errors.rejectValue( UserEditDataModel.USER_DATE_OF_BIRTH_FORM_CONTROL, translatorService.translate( String.format( "%s is invalid"
-					, FormatUtils.getFormattedFieldName( "Birthday" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_DATE_OF_BIRTH_FORM_CONTROL, translatorService.translate( "$1 is invalid", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Birthday" ) ) );
 		}
 	}
 
@@ -170,16 +171,16 @@ public class UserEditDataValidator implements Validator {
 	private void validateMembershipType( final Errors errors, final int membershipTypeId ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( membershipTypeId );
 		if ( membershipType == null ) {
-			errors.rejectValue( UserEditDataModel.MEMBERSHIP_TYPE_FORM_CONTROL, translatorService.translate( String.format( "Select your %s"
-					, FormatUtils.getFormattedFieldName( "Membership type" ) ) ) );
+			errors.rejectValue( UserEditDataModel.MEMBERSHIP_TYPE_FORM_CONTROL, translatorService.translate( "Select your $1", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Membership type" ) ) );
 		}
 	}
 
 	private void validateGender( final Errors errors, final int userGenderId ) {
 		final UserGender userGender = UserGender.getById( userGenderId );
 		if ( userGender == null ) {
-			errors.rejectValue( UserEditDataModel.USER_GENDER_FORM_CONTROL, translatorService.translate( String.format( "Please, select your %s"
-					, FormatUtils.getFormattedFieldName( "Gender" ) ) ) );
+			errors.rejectValue( UserEditDataModel.USER_GENDER_FORM_CONTROL, translatorService.translate( "Please, select your $1", EnvironmentContext.getLanguage()
+					, FormatUtils.getFormattedFieldName( "Gender" ) ) );
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 		final SecurityService securityService = services.getSecurityService();
 
 		if ( !securityService.userCanDeletePhoto( getUser(), groupOperationEntry.getPhoto() ) ) {
-			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to delete this photo" ) );
+			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to delete this photo", getLanguage() ) );
 			groupOperationEntry.setGroupOperationAccessible( false );
 		}
 	}
@@ -50,7 +50,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 		final Map<String, PhotoGroupOperationEntryProperty> map = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		final String key = getDefaultEntryKey( photo );
-		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, getTranslatorService().translate( "Delete" ) );
+		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, getTranslatorService().translate( "Delete", getLanguage() ) );
 		entryProperty.setValue( true );
 
 		map.put( key, entryProperty );
@@ -66,7 +66,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 
 		final boolean isSelectedForDeletion = entryProperty.isValue();
 		if ( ! isSelectedForDeletion ) {
-			operationResults.add( GroupOperationResult.skipped( String.format( "Photo '%s' is skipped", entityLinkUtilsService.getPhotoCardLink( photo ) ) ) );
+			operationResults.add( GroupOperationResult.skipped( String.format( "Photo '%s' is skipped", entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) ) ) );
 
 			return operationResults;
 		}

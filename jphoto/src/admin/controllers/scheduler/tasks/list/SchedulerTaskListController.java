@@ -8,6 +8,7 @@ import core.context.EnvironmentContext;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
@@ -83,12 +84,13 @@ public class SchedulerTaskListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/run/" )
 	public String schedulerStart( final @ModelAttribute( MODEL_NAME ) SchedulerTaskListModel model ) {
+		final Language language = EnvironmentContext.getLanguage();
 		try {
 			log.info( "Starting scheduler" );
 			scheduledTasksExecutionService.start();
-			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been started" ) );
+			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been started", language ) );
 		} catch ( SchedulerException e ) {
-			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not start Scheduler" ) );
+			model.getBindingResult().reject( translatorService.translate( "Scheduler error", language ), translatorService.translate( "Can not start Scheduler", language ) );
 			log.error( "Can not start Scheduler" );
 		}
 
@@ -97,13 +99,14 @@ public class SchedulerTaskListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/stop/" )
 	public String schedulerStop( final @ModelAttribute( MODEL_NAME ) SchedulerTaskListModel model ) {
+		final Language language = EnvironmentContext.getLanguage();
 		try {
 			log.info( "Stopping scheduler" );
 			scheduledTasksExecutionService.standby();
 
-			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been stopped" ) );
+			EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "The scheduler has been stopped", language ) );
 		} catch ( SchedulerException e ) {
-			model.getBindingResult().reject( translatorService.translate( "Scheduler error" ), translatorService.translate( "Can not stop Scheduler" ) );
+			model.getBindingResult().reject( translatorService.translate( "Scheduler error", language ), translatorService.translate( "Can not stop Scheduler", language ) );
 			log.error( "Can not stop Scheduler" );
 		}
 
@@ -116,20 +119,21 @@ public class SchedulerTaskListController {
 		final String formAction = model.getSchedulerTasksFormAction();
 		final List<Integer> ids = ListUtils.convertStringListToInteger( Arrays.asList( model.getSchedulerTaskCheckbox() ) );
 
+		final Language language = EnvironmentContext.getLanguage();
 		switch ( formAction ) {
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_ACTIVATE:
 				schedulerService.activateSchedulerTasks( ids );
-				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been activated", ids.size() ) );
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been activated", language, String.valueOf( ids.size() ) ) );
 				break;
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_DEACTIVATE:
 				schedulerService.deactivateSchedulerTasks( ids );
-				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deactivated", ids.size() ) );
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deactivated", language, String.valueOf( ids.size() ) ) );
 				break;
 			case SCHEDULER_TASK_LIST_GROUP_ACTION_DELETE:
 				for ( final int id : ids ) {
 					schedulerService.delete( id );
 				}
-				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deleted", ids.size() ) );
+				EnvironmentContext.getEnvironment().setHiMessage( translatorService.translate( "$1 task(s) have been deleted", language, String.valueOf( ids.size() ) ) );
 				break;
 		}
 

@@ -164,7 +164,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 			new Thread( new Runnable() {
 				@Override
 				public void run() {
-					notificationService.newPrivateMessage( privateMessageOut, language );
+					notificationService.newPrivateMessage( privateMessageOut );
 				}
 			} ).start();
 		}

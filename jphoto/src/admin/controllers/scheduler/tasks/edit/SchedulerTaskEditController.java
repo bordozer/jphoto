@@ -3,6 +3,7 @@ package admin.controllers.scheduler.tasks.edit;
 import admin.jobs.general.SavedJob;
 import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.SchedulerService;
+import core.context.EnvironmentContext;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.general.executiontasks.AbstractExecutionTask;
@@ -10,6 +11,7 @@ import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.scheduler.SchedulerTask;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -78,7 +80,7 @@ public class SchedulerTaskEditController {
 
 		final ExecutionTaskType initTaskType = ExecutionTaskType.ONCE;
 
-		model.setSchedulerTaskName( translatorService.translate( "New scheduler task" ) );
+		model.setSchedulerTaskName( translatorService.translate( "New scheduler task", EnvironmentContext.getLanguage() ) );
 		model.setExecutionTaskTypeId( initTaskType.getId() );
 		model.setStartTaskDate( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ) );
 		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getFirstSecondOfToday() ) );
@@ -148,7 +150,8 @@ public class SchedulerTaskEditController {
 		final SchedulerTask schedulerTask = createSchedulerTaskFromModel( model );
 
 		if ( ! schedulerService.save( schedulerTask ) ) {
-			result.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Error saving data to DB" ) );
+			final Language language = EnvironmentContext.getLanguage();
+			result.reject( translatorService.translate( "Registration error", language ), translatorService.translate( "Error saving data to DB", language ) );
 			return VIEW;
 		}
 

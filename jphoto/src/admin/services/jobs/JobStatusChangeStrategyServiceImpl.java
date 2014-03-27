@@ -3,7 +3,9 @@ package admin.services.jobs;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.general.JobStatusChangeStrategy;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrategyService {
@@ -16,6 +18,9 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
 
 	@Override
 	public JobStatusChangeStrategy doneSuccessfully( final AbstractJob job ) {
@@ -33,7 +38,7 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 			@Override
 			public String getMessage() {
-				return translatorService.translate( "Job $1 is performed successfully", job.getJobId() );
+				return translatorService.translate( "Job $1 is performed successfully", getLanguage(), String.valueOf( job.getJobId() ) );
 			}
 		};
 	}
@@ -90,7 +95,7 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 			@Override
 			public String getMessage() {
-				return translatorService.translate( "Job $1 is stopped by user", job.getId() );
+				return translatorService.translate( "Job $1 is stopped by user", getLanguage(), String.valueOf( job.getId() ) );
 			}
 		};
 	}
@@ -112,7 +117,7 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 			@Override
 			public String getMessage() {
-				return translatorService.translate( "Stopped by parent job #$1", parentJob.getJobId() );
+				return translatorService.translate( "Stopped by parent job #$1", getLanguage(), String.valueOf( parentJob.getJobId() ) );
 			}
 		};
 	}
@@ -133,7 +138,7 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 			@Override
 			public String getMessage() {
-				return translatorService.translate( "Job is cancelled by parent job #$1", parentJob.getJobId() );
+				return translatorService.translate( "Job is cancelled by parent job #$1", getLanguage(), String.valueOf( parentJob.getJobId() ) );
 			}
 		};
 	}
@@ -154,7 +159,7 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 
 			@Override
 			public String getMessage() {
-				return translatorService.translate( "Job is stopped because of error in child job #$1", failedChildJob.getJobId() );
+				return translatorService.translate( "Job is stopped because of error in child job #$1", getLanguage(), String.valueOf( failedChildJob.getJobId() ) );
 			}
 		};
 	}
@@ -180,7 +185,27 @@ public class JobStatusChangeStrategyServiceImpl implements JobStatusChangeStrate
 		};
 	}
 
+	private Language getLanguage() {
+		return systemVarsService.getSystemDefaultLanguage();
+	}
+
 	private void removeFromActiveJobsList( final AbstractJob job ) {
 		jobExecutionService.removeJobFromActiveList( job );
+	}
+
+	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
+		this.systemVarsService = systemVarsService;
+	}
+
+	public void setJobExecutionService( final JobExecutionService jobExecutionService ) {
+		this.jobExecutionService = jobExecutionService;
+	}
+
+	public void setJobExecutionHistoryService( final JobExecutionHistoryService jobExecutionHistoryService ) {
+		this.jobExecutionHistoryService = jobExecutionHistoryService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
 	}
 }

@@ -11,6 +11,7 @@ import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -62,7 +63,7 @@ public abstract class AbstractGroupOperationHandler {
 		for ( final Photo photo : getPhotos() ) {
 
 			if ( ! securityService.userCanDeletePhoto( currentUser, photo ) ) {
-				operationResults.add( GroupOperationResult.error( String.format( "You do not have permission to perform this operation with '%s'.", entityLinkUtilsService.getPhotoCardLink( photo ) ) ) );
+				operationResults.add( GroupOperationResult.error( String.format( "You do not have permission to perform this operation with '%s'.", entityLinkUtilsService.getPhotoCardLink( photo, currentUser.getLanguage() ) ) ) );
 				continue;
 			}
 
@@ -162,8 +163,12 @@ public abstract class AbstractGroupOperationHandler {
 
 		final Photo photo = groupOperationEntry.getPhoto();
 		if ( !securityService.userCanEditPhoto( getUser(), photo ) ) {
-			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to edit this photo" ) );
+			groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You do not have permission to edit this photo", getLanguage() ) );
 			groupOperationEntry.setGroupOperationAccessible( false );
 		}
+	}
+
+	protected Language getLanguage() {
+		return getUser().getLanguage();
 	}
 }

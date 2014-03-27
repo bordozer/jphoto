@@ -1,5 +1,6 @@
 package admin.controllers.votingCategories.list;
 
+import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
 import core.services.pageTitle.PageTitleAdminUtilsService;
@@ -55,7 +56,7 @@ public class VotingCategoryListController {
 
 		if ( ! result ) {
 			BindingResult bindingResult = new BeanPropertyBindingResult( model, "votingCategoryListModel" );
-			bindingResult.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Deletion error." ) );
+			bindingResult.reject( translatorService.translate( "Registration error", EnvironmentContext.getLanguage() ), translatorService.translate( "Deletion error.", EnvironmentContext.getLanguage() ) );
 			model.setBindingResult( bindingResult );
 		}
 

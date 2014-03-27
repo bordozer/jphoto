@@ -1,8 +1,10 @@
 package admin.controllers.votingCategories.edit;
 
+import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -88,7 +90,8 @@ public class VotingCategoryEditDataController {
 		final PhotoVotingCategory photoVotingCategory = getObjectFromModel( model );
 
 		if ( !votingCategoryService.save( photoVotingCategory ) ) {
-			result.reject( translatorService.translate( "Saving data error" ), translatorService.translate( "Error saving data to DB" ) );
+			final Language language = EnvironmentContext.getLanguage();
+			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Error saving data to DB", language ) );
 			return VIEW;
 		}
 

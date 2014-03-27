@@ -1,5 +1,6 @@
 package admin.controllers.configuration.edit;
 
+import core.context.EnvironmentContext;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationDataType;
 import core.general.configuration.ConfigurationKey;
@@ -141,7 +142,7 @@ public class ConfigurationValidator implements Validator {
 		final Configuration configuration = getConfiguration( configurationMap, configurationKey );
 
 		if ( configuration.getValueListString().size() == 0 ) {
-			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should not be empty", configurationKey.getId() ), configurationKey ) );
+			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage(), String.valueOf(  configurationKey.getId() ) ), configurationKey ) );
 		}
 	}
 
@@ -153,7 +154,8 @@ public class ConfigurationValidator implements Validator {
 		final Configuration configuration2 = getConfiguration( configurationMap, configurationKey2 );
 
 		if ( configuration1.getValueInt() > configuration2.getValueInt() ) {
-			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be less then $2", configurationKey1.getId(), configurationKey2.getId() ), configurationKey1 ) );
+			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be less then $2", EnvironmentContext.getLanguage()
+				, String.valueOf( configurationKey1.getId() ), String.valueOf( configurationKey2.getId() ) ), configurationKey1 ) );
 		}
 	}
 
@@ -165,7 +167,8 @@ public class ConfigurationValidator implements Validator {
 		final Configuration configuration2 = getConfiguration( configurationMap, configurationKey2 );
 
 		if ( configuration1.getValueInt() > configuration2.getValueInt() ) {
-			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be less then $2", configurationKey1.getId(), configurationKey2.getId() ), configurationKey1 ) );
+			errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be less then $2", EnvironmentContext.getLanguage()
+				, String.valueOf( configurationKey1.getId() ), String.valueOf( configurationKey2.getId() ) ), configurationKey1 ) );
 		}
 	}
 
@@ -174,21 +177,23 @@ public class ConfigurationValidator implements Validator {
 		final Configuration configuration2 = getConfiguration( configurationMap, ConfigurationKey.PHOTO_VOTING_LOWEST_POSITIVE_MARK );
 		if ( configuration1.getValueInt() < configuration2.getValueInt() ) {
 			errors.rejectValue( "configurationMap"
-				, addConfigurationTab( translatorService.translate( "$1 should be less then $2", ConfigurationKey.PHOTO_VOTING_HIGHEST_POSITIVE_MARK.getId(), ConfigurationKey.PHOTO_VOTING_LOWEST_POSITIVE_MARK.getId() ), configuration1.getConfigurationKey() ) );
+				, addConfigurationTab( translatorService.translate( "$1 should be less then $2", EnvironmentContext.getLanguage()
+				, String.valueOf( ConfigurationKey.PHOTO_VOTING_HIGHEST_POSITIVE_MARK.getId() ), String.valueOf( ConfigurationKey.PHOTO_VOTING_LOWEST_POSITIVE_MARK.getId() ) ), configuration1.getConfigurationKey() ) );
 		}
 
 		final Configuration configuration3 = getConfiguration( configurationMap, ConfigurationKey.PHOTO_VOTING_HIGHEST_NEGATIVE_MARK );
 		final Configuration configuration4 = getConfiguration( configurationMap, ConfigurationKey.PHOTO_VOTING_LOWEST_NEGATIVE_MARK );
 		if ( configuration3.getValueInt() < configuration4.getValueInt() ) {
 			errors.rejectValue( "configurationMap"
-				, addConfigurationTab( translatorService.translate( "$1 should be more then $2", ConfigurationKey.PHOTO_VOTING_HIGHEST_NEGATIVE_MARK.getId(), ConfigurationKey.PHOTO_VOTING_LOWEST_NEGATIVE_MARK.getId() ), configuration1.getConfigurationKey() ) );
+				, addConfigurationTab( translatorService.translate( "$1 should be more then $2", EnvironmentContext.getLanguage()
+				, String.valueOf( ConfigurationKey.PHOTO_VOTING_HIGHEST_NEGATIVE_MARK.getId() ), String.valueOf( ConfigurationKey.PHOTO_VOTING_LOWEST_NEGATIVE_MARK.getId() ) ), configuration1.getConfigurationKey() ) );
 		}
 	}
 
 	private void validatePositiveKeys( final Map<String, Configuration> configurationMap, final Errors errors ) {
 		for ( final ConfigurationKey configurationKey : positiveConfigurationKeys ) {
 			if ( getConfiguration( configurationMap, configurationKey ).getValueInt() <= 0 ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be positive", configurationKey.getId() ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be positive", EnvironmentContext.getLanguage(), String.valueOf( configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}
@@ -197,7 +202,7 @@ public class ConfigurationValidator implements Validator {
 		for ( final ConfigurationKey configurationKey : integerConfigurationKeys ) {
 			final String value = getConfiguration( configurationMap, configurationKey ).getValue();
 			if ( /*StringUtils.isNotEmpty( value ) &&*/ ! NumberUtils.isInteger( value ) ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be integer", configurationKey.getId() ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be integer", EnvironmentContext.getLanguage(), String.valueOf( configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}
@@ -206,7 +211,7 @@ public class ConfigurationValidator implements Validator {
 		for ( final ConfigurationKey configurationKey : numericConfigurationKeys ) {
 			final String value = getConfiguration( configurationMap, configurationKey ).getValue();
 			if ( /*StringUtils.isNotEmpty( value ) &&*/ ! NumberUtils.isNumeric( value ) ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be numeric", configurationKey.getId() ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be numeric", EnvironmentContext.getLanguage(), String.valueOf( configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}
@@ -214,7 +219,7 @@ public class ConfigurationValidator implements Validator {
 	private void validatePositiveOrZeroKeys( final Map<String, Configuration> configurationMap, final Errors errors ) {
 		for ( final ConfigurationKey configurationKey : positiveOrZeroConfigurationKeys ) {
 			if ( getConfiguration( configurationMap, configurationKey ).getValueInt() < 0 ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be 0 or positive", String.valueOf( configurationKey.getId() ) ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be 0 or positive", EnvironmentContext.getLanguage(), String.valueOf( configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}
@@ -222,7 +227,7 @@ public class ConfigurationValidator implements Validator {
 	private void validateNegativeOrZeroKeys( final Map<String, Configuration> configurationMap, final Errors errors ) {
 		for ( final ConfigurationKey configurationKey : negativeOrZeroConfigurationKeys ) {
 			if ( getConfiguration( configurationMap, configurationKey ).getValueInt() > 0 ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 ($2) should be negative or 0", configurationKey.getId() ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 ($2) should be negative or 0", EnvironmentContext.getLanguage(), String.valueOf(  configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}
@@ -230,7 +235,7 @@ public class ConfigurationValidator implements Validator {
 	private void validateNegativeKeys( final Map<String, Configuration> configurationMap, final Errors errors ) {
 		for ( final ConfigurationKey configurationKey : negativeConfigurationKeys ) {
 			if ( getConfiguration( configurationMap, configurationKey ).getValueInt() >= 0 ) {
-				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be negative", configurationKey.getId() ), configurationKey ) );
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "$1 should be negative", EnvironmentContext.getLanguage(), String.valueOf(  configurationKey.getId() ) ), configurationKey ) );
 			}
 		}
 	}

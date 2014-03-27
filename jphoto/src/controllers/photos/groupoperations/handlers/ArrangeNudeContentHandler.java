@@ -35,7 +35,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 
 			final String genreNameTranslated = services.getTranslatorService().translateGenre( genre, getUser().getLanguage() );
 			if ( genre.isContainsNudeContent() ) {
-				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "The photo has category '$1' and must have 'Nude content' option.", genreNameTranslated ) );
+				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "The photo has category '$1' and must have 'Nude content' option.", getUser().getLanguage(), genreNameTranslated ) );
 //				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not remove 'Nude content' option for photo with category '$1'.<br />The category contains nude obviously.", genre.getName() ) );
 //				groupOperationEntry.setGroupOperationAccessible( false );
 
@@ -43,7 +43,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 			}
 
 			if ( !photo.isContainsNudeContent() && !genre.isCanContainNudeContent() ) {
-				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not set 'Nude content' option for photo with category '$1'.<br />Nude content is not allowed for the category.<br />If the photo does contains nude, then remove the photo to appropriate category.", genreNameTranslated ) );
+				groupOperationEntry.setPhotoOperationAllowanceMessage( getTranslatorService().translate( "You can not set 'Nude content' option for photo with category '$1'.<br />Nude content is not allowed for the category.<br />If the photo does contains nude, then remove the photo to appropriate category.", getUser().getLanguage(), genreNameTranslated ) );
 				groupOperationEntry.setGroupOperationAccessible( false );
 
 				return;
@@ -59,7 +59,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 
 		final Genre genre = getGenre( photo );
 		final String key = getDefaultEntryKey( photo );
-		final String entryName = String.format( "%s%s",  getTranslatorService().translate( "Nude content" ), ( ! genre.isCanContainNudeContent() ? "<br />&nbsp;&nbsp;Nude content is not allowed for the photo's category and can be only unset" : "" ) );
+		final String entryName = String.format( "%s%s",  getTranslatorService().translate( "Nude content", getUser().getLanguage() ), ( ! genre.isCanContainNudeContent() ? "<br />&nbsp;&nbsp;Nude content is not allowed for the photo's category and can be only unset" : "" ) );
 //		final String entryName = getTranslatorService().translate( "Nude content" );
 		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, entryName );
 		entryProperty.setValue( photo.isContainsNudeContent() );
@@ -109,7 +109,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 	}
 
 	private String getPhoyoLink( final Photo photo ) {
-		return services.getEntityLinkUtilsService().getPhotoCardLink( photo );
+		return services.getEntityLinkUtilsService().getPhotoCardLink( photo, getUser().getLanguage() );
 	}
 
 	private Genre getGenre( final Photo photo ) {

@@ -151,7 +151,7 @@ public class PhotosImportController extends DateRangableController {
 				final int timePeriod = NumberUtils.convertToInt( aModel.getTimePeriod() );
 				final JobDateRange jobDateRange = new JobDateRange( dateRangeType, dateFrom, dateTo, timePeriod, dateUtilsService );
 
-				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, deletePictureAfterImport, assignAllGeneratedPhotosToUserId, jobDateRange );
+				importParameters = new FileSystemImportParameters( pictureDir, photoQtyLimit, deletePictureAfterImport, assignAllGeneratedPhotosToUserId, jobDateRange, EnvironmentContext.getLanguage() );
 
 				job.setTotalJopOperations( photoQtyLimit > 0 ? photoQtyLimit : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

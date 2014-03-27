@@ -1,5 +1,6 @@
 package controllers.users.photoAlbums.edit;
 
+import core.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class UserPhotoAlbumEditDataValidator implements Validator {
 	private void validateName( final UserPhotoAlbumEditDataModel model, final Errors errors ) {
 		if ( StringUtils.isEmpty( model.getAlbumName() ) ) {
 			errors.rejectValue( UserPhotoAlbumEditDataModel.FORM_CONTROL_PHOTO_ALBUM_NAME
-				, translatorService.translate( String.format( "%s should not be empty.", FormatUtils.getFormattedFieldName( "Album name" ) ) ) );
+				, translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Album name" ) ) );
 		}
 	}
 }

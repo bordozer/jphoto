@@ -1,5 +1,6 @@
 package admin.controllers.genres.list;
 
+import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
@@ -84,7 +85,7 @@ public class GenreListController {
 
 		if ( ! result ) {
 			BindingResult bindingResult = new BeanPropertyBindingResult( model, "genreListModel" );
-			bindingResult.reject( translatorService.translate( "Registration error" ), translatorService.translate( "Deletion error." ) );
+			bindingResult.reject( translatorService.translate( "Registration error", EnvironmentContext.getLanguage() ), translatorService.translate( "Deletion error.", EnvironmentContext.getLanguage() ) );
 			model.setBindingResult( bindingResult );
 		}
 

@@ -45,7 +45,7 @@ public class ArrangePhotoAlbumsHandler extends AbstractGroupOperationHandler {
 		final Map<String, PhotoGroupOperationEntryProperty> map = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		for ( final UserPhotoAlbum userPhotoAlbum : userPhotoAlbums ) {
-			final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), userPhotoAlbum.getId(), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( userPhotoAlbum ) );
+			final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), userPhotoAlbum.getId(), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( userPhotoAlbum, getLanguage() ) );
 			entryProperty.setValue( userPhotoAlbumService.isPhotoInAlbum( photo.getId(), userPhotoAlbum.getId() ) );
 
 			final String key = String.format( "%d_%d", photo.getId(), userPhotoAlbum.getId() );
@@ -67,8 +67,8 @@ public class ArrangePhotoAlbumsHandler extends AbstractGroupOperationHandler {
 
 		final UserPhotoAlbum photoAlbum = userPhotoAlbumService.load( photoAlbumId );
 
-		final String photoCardLink = entityLinkUtilsService.getPhotoCardLink( photo );
-		final String albumLink = entityLinkUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum );
+		final String photoCardLink = entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() );
+		final String albumLink = entityLinkUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum, getLanguage() );
 
 		final boolean isAlbumChecked = entryProperty.isValue();
 		final boolean isPhotoInAlbum = userPhotoAlbumService.isPhotoInAlbum( photo.getId(), photoAlbumId );

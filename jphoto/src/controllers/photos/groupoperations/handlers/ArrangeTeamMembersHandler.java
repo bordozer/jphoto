@@ -87,7 +87,7 @@ public class ArrangeTeamMembersHandler extends AbstractGroupOperationHandler {
 			newPhotoTeamMembers.add( photoTeamMember );
 
 			userTeamService.savePhotoTeam( new PhotoTeam( photo, newPhotoTeamMembers ) );
-			operationResults.add( GroupOperationResult.successful( String.format( "%s has been assigned to photo '%s'", entityLinkUtilsService.getUserTeamMemberCardLink( teamMember ), entityLinkUtilsService.getPhotoCardLink( photo ) ) ) );
+			operationResults.add( GroupOperationResult.successful( String.format( "%s has been assigned to photo '%s'", entityLinkUtilsService.getUserTeamMemberCardLink( teamMember, getLanguage() ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) ) ) );
 		}
 
 		if ( ! isTeamMemberChecked && isTeamMemberAssignedToPhoto ) {
@@ -95,7 +95,7 @@ public class ArrangeTeamMembersHandler extends AbstractGroupOperationHandler {
 
 			userTeamService.savePhotoTeam( new PhotoTeam( photo, newPhotoTeamMembers ) );
 
-			operationResults.add( GroupOperationResult.successful( String.format( "%s has been removed from photo '%s'", entityLinkUtilsService.getUserTeamMemberCardLink( teamMember ), entityLinkUtilsService.getPhotoCardLink( photo ) ) ) );
+			operationResults.add( GroupOperationResult.successful( String.format( "%s has been removed from photo '%s'", entityLinkUtilsService.getUserTeamMemberCardLink( teamMember, getLanguage() ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) ) ) );
 		}
 
 		return operationResults;

@@ -7,6 +7,7 @@ import admin.upgrade.entities.UpgradeTaskLogEntry;
 import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
+import core.context.EnvironmentContext;
 import core.exceptions.UpgradeException;
 import core.services.pageTitle.PageTitleAdminUtilsService;
 import core.services.translator.TranslatorService;
@@ -74,7 +75,8 @@ public class UpgradeController {
 
 			model.setUpgradeTasksToPerform( upgradeTaskToPerform );
 		} catch ( Throwable e ) {
-			model.getBindingResult().reject( translatorService.translate( "File read error" ), translatorService.translate( "Can not read upgrade tasks from XML" ) );
+			model.getBindingResult().reject( translatorService.translate( "File read error", EnvironmentContext.getLanguage() )
+				, translatorService.translate( "Can not read upgrade tasks from XML", EnvironmentContext.getLanguage() ) );
 		}
 
 		model.setUpgradeMonitor( upgradeService.getUpgradeMonitor() );
@@ -104,7 +106,7 @@ public class UpgradeController {
 					new Thread(){
 						@Override
 						public void run() {
-							upgradeService.performUpgrade( model.getUpgradeTasksToPerform() );
+							upgradeService.performUpgrade( model.getUpgradeTasksToPerform(), EnvironmentContext.getCurrentUser() );
 						}
 					}.start();
 				}

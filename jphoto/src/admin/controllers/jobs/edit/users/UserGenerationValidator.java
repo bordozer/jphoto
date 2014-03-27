@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.users;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
 import admin.jobs.entries.UserGenerationJob;
+import core.context.EnvironmentContext;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -39,21 +40,21 @@ public class UserGenerationValidator extends SavedJobValidator implements Valida
 		final File avatarDir = new File( avatarPath );
 		if ( ! avatarDir.exists() ) {
 			errors.rejectValue( UserGenerationModel.AVATAR_DIR_FORM_CONTROL
-				, translatorService.translate( String.format( "%s does not exist", FormatUtils.getFormattedFieldName( "Avatar dir" ) ) ) );
+				, translatorService.translate( "$1 does not exist", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Avatar dir" ) ) );
 			return;
 		}
 
 		final File maleAvatarDir = new File( avatarPath, UserGenerationJob.AVATAR_SUBDIR_MALE );
 		if ( ! maleAvatarDir.exists() ) {
 			errors.rejectValue( UserGenerationModel.AVATAR_DIR_FORM_CONTROL
-				, translatorService.translate( String.format( "%s does not consist 'male' folder", FormatUtils.getFormattedFieldName( "Avatar dir" ) ) ) );
+				, translatorService.translate( "$1 does not consist 'male' folder", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Avatar dir" ) ) );
 			return;
 		}
 
 		final File femaleAvatarDir = new File( avatarPath, UserGenerationJob.AVATAR_SUBDIR_FEMALE );
 		if ( ! femaleAvatarDir.exists() ) {
 			errors.rejectValue( UserGenerationModel.AVATAR_DIR_FORM_CONTROL
-				, translatorService.translate( String.format( "%s does not consist 'female' folder", FormatUtils.getFormattedFieldName( "Avatar dir" ) ) ) );
+				, translatorService.translate( "$1 does not consist 'female' folder", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Avatar dir" ) ) );
 			return;
 		}
 	}

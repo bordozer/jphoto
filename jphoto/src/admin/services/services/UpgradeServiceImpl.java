@@ -4,6 +4,7 @@ import admin.upgrade.entities.UpgradeTaskLogEntry;
 import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
+import core.general.user.User;
 import core.log.LogHelper;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
@@ -30,7 +31,7 @@ public class UpgradeServiceImpl implements UpgradeService {
 	private LogHelper log = new LogHelper( UpgradeServiceImpl.class );
 
 	@Override
-	public void performUpgrade( final List<UpgradeTaskToPerform> upgradeTasksToPerform ) {
+	public void performUpgrade( final List<UpgradeTaskToPerform> upgradeTasksToPerform, final User accessor ) {
 
 		upgradeMonitor.setUpgradeTasksToPerform( upgradeTasksToPerform );
 		upgradeMonitor.getTaskMessageMap().clear();
@@ -42,7 +43,7 @@ public class UpgradeServiceImpl implements UpgradeService {
 				upgradeMonitor.setCurrentTaskProgress( 0 );
 				upgradeMonitor.setCurrentTaskTotal( 1 );
 
-				performUpgradeTask( upgradeTaskToPerform );
+				performUpgradeTask( upgradeTaskToPerform, accessor );
 
 				upgradeDao.save( upgradeTaskToPerform ); // TODO: uncomment saving!
 
@@ -61,7 +62,7 @@ public class UpgradeServiceImpl implements UpgradeService {
 		}
 	}
 
-	private void performUpgradeTask( final UpgradeTaskToPerform upgradeTaskToPerform ) {
+	private void performUpgradeTask( final UpgradeTaskToPerform upgradeTaskToPerform, final User accessor ) {
 
 		try {
 			upgradeTaskToPerform.setStartTime( dateUtilsService.getCurrentTime() );
@@ -69,7 +70,8 @@ public class UpgradeServiceImpl implements UpgradeService {
 			final AbstractUpgradeTask upgradeTask = upgradeTaskToPerform.getUpgradeTask();
 			upgradeTask.setSqlUtilsService( sqlUtilsService );
 
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: navy\"><b>%s</b></span>", translatorService.translate( "Start $1", upgradeTask.getDescription() ) ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: navy\"><b>%s</b></span>"
+				, translatorService.translate( "Start $1", accessor.getLanguage(), upgradeTask.getDescription() ) ) );
 
 			upgradeTask.performUpgrade( upgradeMonitor );
 
@@ -78,11 +80,13 @@ public class UpgradeServiceImpl implements UpgradeService {
 
 			sqlUtilsService.execSQL( "COMMIT;" );
 
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: green\"><b>%s</b></span>", translatorService.translate( "ALL UPGRADE TASKS HAVE BEEN PERFORMED SUCCESSFULLY" ) ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: green\"><b>%s</b></span>"
+				, translatorService.translate( "ALL UPGRADE TASKS HAVE BEEN PERFORMED SUCCESSFULLY", accessor.getLanguage() ) ) );
 		} catch ( Throwable e ) {
 			upgradeMonitor.setUpgradeState( UpgradeState.ERROR );
 			upgradeTaskToPerform.setUpgradeTaskResult( UpgradeTaskResult.ERROR );
-			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: red\"><b>%s:</b></span> %s", translatorService.translate( "ERROR" ), e.getMessage() ) );
+			upgradeMonitor.addTaskMessage( upgradeTaskToPerform, String.format( "<span style=\"color: red\"><b>%s:</b></span> %s"
+				, translatorService.translate( "ERROR", accessor.getLanguage() ), e.getMessage() ) );
 			log.error( e );
 
 			sqlUtilsService.execSQL( "ROLLBACK;" );

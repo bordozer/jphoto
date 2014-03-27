@@ -1,5 +1,6 @@
 package admin.controllers.votingCategories.edit;
 
+import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
 import core.services.translator.TranslatorService;
@@ -35,14 +36,14 @@ public class VotingCategoryEditDataValidator implements Validator {
 	private void validateName( final Errors errors, final int votingCategoryId, final String votingCategoryName ) {
 
 		if ( StringUtils.isEmpty( votingCategoryName ) ) {
-			final String errorCode = translatorService.translate( "$1 should not be empty.", FormatUtils.getFormattedFieldName( "Name" ) );
+			final String errorCode = translatorService.translate( "$1 should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ) );
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL, errorCode );
 		}
 
 		final PhotoVotingCategory checkPhotoVotingCategories = votingCategoryService.loadByName( votingCategoryName );
 		if ( checkPhotoVotingCategories != null && checkPhotoVotingCategories.getId() > 0 && checkPhotoVotingCategories.getId() != votingCategoryId ) {
 			errors.rejectValue( VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL
-				, translatorService.translate( "$1 ($2) already exists!", FormatUtils.getFormattedFieldName( "Name" ), votingCategoryName ), votingCategoryName );
+				, translatorService.translate( "$1 ($2) already exists!", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ), votingCategoryName ), votingCategoryName );
 		}
 	}
 }
