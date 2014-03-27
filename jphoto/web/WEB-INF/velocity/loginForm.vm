@@ -25,7 +25,6 @@
 					<td>
 						<input id="$loginUserAutomaticallyControl" name="$loginUserAutomaticallyControl" type="checkbox" value="1"
 							   class="ui-state-default ui-corner-all"> $rememberMeText
-						<br />$loggedUserId #* TODO: remove not logged temporary user ID from UI*#
 					</td>
 				</tr>
 			</table>
