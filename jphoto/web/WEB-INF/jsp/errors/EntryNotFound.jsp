@@ -1,6 +1,8 @@
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
 <%@ page import="core.exceptions.notFound.NotFoundExceptionEntryType" %>
+<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="core.services.translator.TranslatorService" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true"%>
 
@@ -14,7 +16,8 @@
 
 <%
 	final NotFoundExceptionEntryType entryType = exceptionModel.getNotFoundExceptionEntryType();
-	final String titleTranslated = exceptionModel.getTranslatorService().translate( "$1 not found", entryType.getNameTranslated() );
+	final TranslatorService translatorService = exceptionModel.getTranslatorService();
+	final String titleTranslated = translatorService.translate( "$1 not found", EnvironmentContext.getLanguage(), translatorService.translate( entryType.getNameTranslated(), EnvironmentContext.getLanguage() ) );
 
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( titleTranslated, titleTranslated, titleTranslated ) );

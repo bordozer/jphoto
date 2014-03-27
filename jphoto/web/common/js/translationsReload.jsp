@@ -1,4 +1,7 @@
-<%@ page import="org.jabsorb.JSONRPCBridge"%><%@ page import="core.context.ApplicationContextHelper"%><%@ page import="core.services.translator.TranslatorService"%><%@page contentType="text/javascript" %>
+<%@page contentType="text/javascript" %>
+<%@ page import="org.jabsorb.JSONRPCBridge"%>
+<%@ page import="core.context.ApplicationContextHelper"%>
+<%@ page import="core.services.translator.TranslatorService"%>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,6 +22,6 @@ function reloadTranslations() {
 	}
 
 	jsonRPC.translatorService.reloadTranslationsAjax();
-	<%--document.location.reload();--%>
+
 	notifySuccessMessage( "${eco:translate('Translations have been reloaded')}" );
 }

@@ -1,6 +1,7 @@
 <%@ page import="elements.PageModel" %>
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="core.context.EnvironmentContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true" %>
 
@@ -9,7 +10,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
 <%
-	final String title = ApplicationContextHelper.getTranslatorService().translate( "The page is under construction" ); // TODO: use TranslatorService
+	final String title = ApplicationContextHelper.getTranslatorService().translate( "The page is under construction", EnvironmentContext.getLanguage() );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

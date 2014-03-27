@@ -2,6 +2,7 @@
 <%@ page import="org.apache.commons.lang.exception.ExceptionUtils" %>
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
+<%@ page import="core.context.EnvironmentContext" %>
 <%@ page isErrorPage="true" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
@@ -13,7 +14,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = exceptionModel.getTranslatorService().translate( "Oops!" );
+	final String title = exceptionModel.getTranslatorService().translate( "Oops!", EnvironmentContext.getLanguage() );
 
 	final String[] traceElements = ExceptionUtils.getStackFrames( exception );
 

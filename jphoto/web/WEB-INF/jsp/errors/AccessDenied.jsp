@@ -1,5 +1,6 @@
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
+<%@ page import="core.context.EnvironmentContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true"%>
 
@@ -12,7 +13,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = exceptionModel.getTranslatorService().translate( "Access denied" );
+	final String title = exceptionModel.getTranslatorService().translate( "Access denied", EnvironmentContext.getLanguage() );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>
