@@ -4,6 +4,7 @@ import admin.controllers.translator.custom.TranslationEntryType;
 import core.context.ApplicationContextHelper;
 import core.context.EnvironmentContext;
 import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 
 /*
 * For using in web/WEB-INF/tags.tld ONLY
@@ -11,46 +12,50 @@ import core.services.translator.Language;
 public class TranslatorUtils {
 
 	public static String translate( final String nerd ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage() );
+		return getTranslatorService().translate( nerd, getLanguage() );
 	}
 
 	public static String translate( final String nerd, final String param ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), param );
+		return getTranslatorService().translate( nerd, getLanguage(), param );
 	}
 
 	public static String translate( final String nerd, final long param ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), String.valueOf( param ) );
+		return getTranslatorService().translate( nerd, getLanguage(), String.valueOf( param ) );
 	}
 
 	public static String translate( final String nerd, final String param1, final String param2 ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), param1, param2 );
+		return getTranslatorService().translate( nerd, getLanguage(), param1, param2 );
 	}
 
 	public static String translate( final String nerd, final String param1, final String param2, final String param3 ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), param1, param2, param3 );
+		return getTranslatorService().translate( nerd, getLanguage(), param1, param2, param3 );
 	}
 
 	public static String translate( final String nerd, final String param1, final String param2, final String param3, final String param4 ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), param1, param2, param3, param4 );
+		return getTranslatorService().translate( nerd, getLanguage(), param1, param2, param3, param4 );
 	}
 
 	public static String translate( final String nerd, final int param1, final int param2 ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), String.valueOf( param1 ), String.valueOf( param2 ) );
+		return getTranslatorService().translate( nerd, getLanguage(), String.valueOf( param1 ), String.valueOf( param2 ) );
 	}
 
 	public static String translateWithParameters( final String nerd, final String... params ) {
-		return ApplicationContextHelper.getTranslatorService().translate( nerd, getLanguage(), params );
+		return getTranslatorService().translate( nerd, getLanguage(), params );
 	}
 
 	public static String translateGenre( final int entryId ) {
-		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.GENRE, entryId, getLanguage() );
+		return getTranslatorService().translateCustom( TranslationEntryType.GENRE, entryId, getLanguage() );
 	}
 
 	public static String translateVotingCategory( final int entryId ) {
-		return ApplicationContextHelper.getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, getLanguage() );
+		return getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, getLanguage() );
 	}
 
 	private static Language getLanguage() {
 		return EnvironmentContext.getLanguage();
+	}
+
+	private static TranslatorService getTranslatorService() {
+		return ApplicationContextHelper.getTranslatorService();
 	}
 }
