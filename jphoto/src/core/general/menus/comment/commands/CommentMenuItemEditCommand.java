@@ -13,7 +13,7 @@ public class CommentMenuItemEditCommand extends AbstractEntryMenuItemCommand<Pho
 
 	@Override
 	public String getMenuText() {
-		return getTranslatorService().translate( "Edit comment", accessor.getLanguage() );
+		return getTranslatorService().translate( "Edit comment", getLanguage() );
 	}
 
 	@Override

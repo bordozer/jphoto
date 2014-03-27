@@ -21,15 +21,15 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 
 			@Override
 			public String getMenuText() {
 				if ( isCommentLeftByAccessor() ) {
-					return getTranslatorService().translate( "Delete comment" );
+					return getTranslatorService().translate( "Delete comment", getLanguage() );
 				}
 
-				return getTranslatorService().translate( "Delete comment (as photo author)" );
+				return getTranslatorService().translate( "Delete comment (as photo author)", getLanguage() );
 			}
 
 			@Override

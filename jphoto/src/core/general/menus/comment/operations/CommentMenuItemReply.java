@@ -31,17 +31,17 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 			public String getMenuText() {
 
 				if ( isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod() ) {
-					return translatorService.translate( "Reply to photo author ( anonymous )", accessor.getLanguage() );
+					return translatorService.translate( "Reply to photo author ( anonymous )", getLanguage() );
 				}
 
-				return translatorService.translate( "Reply to $1$2", accessor.getLanguage(), menuEntry.getCommentAuthor().getNameEscaped(), isCommentAuthorOwnerOfThePhoto() ? " ( photo's author )" : StringUtils.EMPTY );
+				return translatorService.translate( "Reply to $1$2", getLanguage(), menuEntry.getCommentAuthor().getNameEscaped(), isCommentAuthorOwnerOfThePhoto() ? " ( photo's author )" : StringUtils.EMPTY );
 			}
 
 			@Override
 			public String getMenuCommand() {
 				if( isAccessorInTheBlackListOfCommentAuthor() ) {
 					return String.format( "showInformationMessageNoAutoClose( '%s' )"
-						, translatorService.translate( "You are in the black list of $1. You can not reply.", accessor.getLanguage(), menuEntry.getCommentAuthor().getNameEscaped() ) );
+						, translatorService.translate( "You are in the black list of $1. You can not reply.", getLanguage(), menuEntry.getCommentAuthor().getNameEscaped() ) );
 				}
 
 				return String.format( "replyToComment( %d ); return false;", menuEntry.getId() );

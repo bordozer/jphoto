@@ -24,6 +24,6 @@ public class CommentMenuItemComplaintCustom extends AbstractCommentComplaintMenu
 
 	@Override
 	protected String getMenuItemText() {
-		return services.getTranslatorService().translate( "Custom complaint" );
+		return services.getTranslatorService().translate( "Custom complaint", getLanguage() );
 	}
 }

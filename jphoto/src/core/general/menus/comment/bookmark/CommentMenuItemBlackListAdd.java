@@ -25,11 +25,11 @@ public class CommentMenuItemBlackListAdd extends AbstractCommentMenuItem {
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Add $1 to your black list", commentAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "Add $1 to your black list", getLanguage(), commentAuthor.getNameEscaped() );
 			}
 
 			@Override

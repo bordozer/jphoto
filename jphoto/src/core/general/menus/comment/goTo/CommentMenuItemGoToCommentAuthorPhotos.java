@@ -20,12 +20,12 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentGoToA
 	@Override
 	public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 		final User commentAuthor = menuEntry.getCommentAuthor();
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 
 			@Override
 			public String getMenuText() {
 				final int photoQtyByUser = getPhotoService().getPhotoQtyByUser( commentAuthor.getId() );
-				return getTranslatorService().translate( "$1: all photos ( $2 )", commentAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
+				return getTranslatorService().translate( "$1: all photos ( $2 )", getLanguage(), commentAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
 			@Override

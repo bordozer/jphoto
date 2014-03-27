@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.security.Services;
+import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -50,8 +51,9 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 	@Override
 	public String getDisplayActivityDescription() {
 
-		return services.getTranslatorService().translate( "voted for photo $1<br />$2"
-			, services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto )
+		final Language language = getCurrentUserLanguage();
+		return services.getTranslatorService().translate( "voted for photo $1<br />$2", language
+			, services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto, language )
 			, votes
 		);
 	}

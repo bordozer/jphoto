@@ -13,7 +13,7 @@ public class PhotoMenuItemDeleteCommand extends AbstractEntryMenuItemCommand<Pho
 
 	@Override
 	public String getMenuText() {
-		return getTranslatorService().translate( "Delete photo", accessor.getLanguage() );
+		return getTranslatorService().translate( "Delete photo", getLanguage() );
 	}
 
 	@Override

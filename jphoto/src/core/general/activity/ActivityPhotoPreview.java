@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -51,8 +52,9 @@ public class ActivityPhotoPreview extends AbstractPhotoActivityStreamEntry {
 
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
-		return services.getTranslatorService().translate( "viewed photo $1"
-			, linkUtilsService.getPhotoCardLink( preview.getPhoto() )
+		final Language language = getCurrentUserLanguage();
+		return services.getTranslatorService().translate( "viewed photo $1", language
+			, linkUtilsService.getPhotoCardLink( preview.getPhoto(), language )
 		);
 	}
 

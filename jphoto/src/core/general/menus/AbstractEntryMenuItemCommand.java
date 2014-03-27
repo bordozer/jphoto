@@ -28,4 +28,8 @@ public abstract class AbstractEntryMenuItemCommand<T extends PopupMenuAssignable
 	protected TranslatorService getTranslatorService() {
 		return services.getTranslatorService();
 	}
+
+	protected Language getLanguage() {
+		return accessor.getLanguage();
+	}
 }

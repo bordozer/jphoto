@@ -20,13 +20,13 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, accessor, services ) {
 
 			private User photoAuthor = getPhotoAuthor();
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Send private message to $1", photoAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "Send private message to $1", getLanguage(), photoAuthor.getNameEscaped() );
 			}
 
 			@Override

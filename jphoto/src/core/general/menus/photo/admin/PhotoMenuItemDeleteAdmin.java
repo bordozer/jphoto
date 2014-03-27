@@ -21,7 +21,7 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItemOperationAdmi
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new PhotoMenuItemDeleteCommand( menuEntry, services );
+		return new PhotoMenuItemDeleteCommand( menuEntry, accessor, services );
 	}
 
 	@Override

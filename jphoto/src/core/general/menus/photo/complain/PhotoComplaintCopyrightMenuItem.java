@@ -35,7 +35,7 @@ public class PhotoComplaintCopyrightMenuItem extends AbstractPhotoComplaintMenuI
 		return new AbstractEntryMenuItemComplaintCommand<Photo>( menuEntry, accessor, EntryMenuType.PHOTO, getComplainReasonType(), services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( getMenuItemText(), accessor.getLanguage() );
+				return getTranslatorService().translate( getMenuItemText(), getLanguage() );
 			}
 		};
 	}

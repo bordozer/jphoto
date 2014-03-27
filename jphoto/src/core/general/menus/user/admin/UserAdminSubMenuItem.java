@@ -30,7 +30,7 @@ public class UserAdminSubMenuItem extends AbstractUserMenuItem {
 		return new AbstractEntryMenuItemCommand<User>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT, accessor.getLanguage() );
+				return getTranslatorService().translate( ADMIN_SUB_MENU_ENTRY_TEXT, getLanguage() );
 			}
 
 			@Override

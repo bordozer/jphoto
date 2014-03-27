@@ -23,7 +23,7 @@ public class UserMenuItemSendPrivateMessage extends AbstractUserMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Send private message to $1", accessor.getLanguage(), menuEntry.getNameEscaped() );
+				return getTranslatorService().translate( "Send private message to $1", getLanguage(), menuEntry.getNameEscaped() );
 			}
 
 			@Override

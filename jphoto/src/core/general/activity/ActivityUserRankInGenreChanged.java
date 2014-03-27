@@ -61,7 +61,7 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		final String photosByUserByGenreLink = services.getEntityLinkUtilsService().getPhotosByUserByGenreLink( activityOfUser, genre, EnvironmentContext.getCurrentUser().getLanguage() );
 
 		return translatorService.translate( "rank in category '$1' has changed from $2 to $3"
-			, EnvironmentContext.getLanguage()
+			, getCurrentUserLanguage()
 			, photosByUserByGenreLink
 			, String.valueOf( oldRank )
 			, String.valueOf( newRank )

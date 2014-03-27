@@ -3,6 +3,7 @@ package core.general.activity;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -53,9 +54,11 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	public String getDisplayActivityDescription() {
 		final TranslatorService translatorService = services.getTranslatorService();
 
+		final Language language = getCurrentUserLanguage();
 		return translatorService.translate( "the status in the club has been changed from $1 to $2"
-			, translatorService.translate( oldStatus.getName() )
-			, translatorService.translate( newStatus.getName() )
+			, language
+			, translatorService.translate( oldStatus.getName(), language )
+			, translatorService.translate( newStatus.getName(), language )
 		);
 	}
 

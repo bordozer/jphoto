@@ -2,16 +2,18 @@ package core.general.menus.photo.commands;
 
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.photo.Photo;
+import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.Language;
 
 public class PhotoMenuItemEditCommand extends AbstractEntryMenuItemCommand<Photo> {
 
-	public PhotoMenuItemEditCommand( final Photo photo, final Services services ) {
-		super( photo, services );
+	public PhotoMenuItemEditCommand( final Photo photo, final User accessor, final Services services ) {
+		super( photo, accessor, services );
 	}
 
 	public String getMenuText() {
-		return getTranslatorService().translate( "Edit photo" );
+		return getTranslatorService().translate( "Edit photo", getLanguage() );
 	}
 
 	@Override

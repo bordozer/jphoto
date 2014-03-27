@@ -51,6 +51,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 	@Override
 	public String getDisplayActivityDescription() {
 		return services.getTranslatorService().translate( "added $1 to $2"
+			, getCurrentUserLanguage()
 			, getFavoriteEntry( favoriteEntryId, favoriteType )
 			, favoriteType.getNameTranslated()
 		);
@@ -82,7 +83,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 			case PHOTO:
 				case BOOKMARK:
 				case NEW_COMMENTS_NOTIFICATION:
-				return linkUtilsService.getPhotoCardLink( services.getPhotoService().load( favoriteEntryId ) );
+				return linkUtilsService.getPhotoCardLink( services.getPhotoService().load( favoriteEntryId ), getCurrentUserLanguage() );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal FavoriteEntryType: %s", entryType ) );

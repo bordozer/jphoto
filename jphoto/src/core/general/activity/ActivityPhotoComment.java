@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.utils.EntityLinkUtilsService;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -46,8 +47,9 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 	public String getDisplayActivityDescription() {
 		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
 
-		return services.getTranslatorService().translate( "commented photo $1"
-			, linkUtilsService.getPhotoCardLink( activityOfPhoto )
+		final Language language = getCurrentUserLanguage();
+		return services.getTranslatorService().translate( "commented photo $1", language
+			, linkUtilsService.getPhotoCardLink( activityOfPhoto, language )
 		);
 	}
 

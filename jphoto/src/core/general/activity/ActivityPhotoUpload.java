@@ -4,6 +4,7 @@ import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.services.security.Services;
+import core.services.translator.Language;
 import org.dom4j.Document;
 
 public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
@@ -19,7 +20,8 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	@Override
 	public String getDisplayActivityDescription() {
-		return services.getTranslatorService().translate( "uploaded photo $1", services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto ) );
+		final Language language = getCurrentUserLanguage();
+		return services.getTranslatorService().translate( "uploaded photo $1", language, services.getEntityLinkUtilsService().getPhotoCardLink( activityOfPhoto, language ) );
 	}
 
 	public String getDisplayActivityUserLink() {

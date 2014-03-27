@@ -21,7 +21,7 @@ public class PhotoMenuItemEditAdmin extends AbstractPhotoMenuItemOperationAdmin 
 
 	@Override
 	public AbstractEntryMenuItemCommand<Photo> getMenuItemCommand() {
-		return new PhotoMenuItemEditCommand( menuEntry, services );
+		return new PhotoMenuItemEditCommand( menuEntry, accessor, services );
 	}
 
 	@Override

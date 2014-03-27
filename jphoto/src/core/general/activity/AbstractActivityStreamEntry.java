@@ -1,10 +1,12 @@
 package core.general.activity;
 
+import core.context.EnvironmentContext;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.interfaces.Cacheable;
 import core.services.security.Services;
+import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -84,5 +86,9 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 			, services.getUserPhotoFilePathUtilsService().getPhotoUrl( photo )
 			, photo.getNameEscaped()
 		);
+	}
+
+	protected Language getCurrentUserLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

@@ -17,7 +17,7 @@ public class ActivityUserRegistration extends AbstractActivityStreamEntry {
 
 	@Override
 	public String getDisplayActivityDescription() {
-		return services.getTranslatorService().translate( "registered" );
+		return services.getTranslatorService().translate( "registered", getCurrentUserLanguage() );
 	}
 
 	@Override
