@@ -39,7 +39,7 @@
 				<table:tr>
 					<table:tdtext text_t="Photos action to generate" isMandatory="true"/>
 					<table:tddata>
-						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total actions"
+						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total job steps"
 										hint="Quantity of generated actions">
 						<jsp:attribute name="inputField">
 							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>

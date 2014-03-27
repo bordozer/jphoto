@@ -2354,7 +2354,7 @@
 
 	<translation>
 		<nerd>Actual time</nerd>
-		<ru><![CDATA[Актуальное время]]></ru>
+		<ru><![CDATA[Текущее время]]></ru>
 	</translation>
 
 	<translation>
@@ -2433,7 +2433,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Total job's steps</nerd>
+		<nerd>Total job steps</nerd>
 		<ru><![CDATA[Всего шагов]]></ru>
 	</translation>
 
@@ -2445,6 +2445,21 @@
 	<translation>
 		<nerd>Photos action to generate</nerd>
 		<ru><![CDATA[К-во действий к генерации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Leave empty to process all images</nerd>
+		<ru><![CDATA[Оставьте пустым чтобы обработать все фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Run "$1?"</nerd>
+		<ru><![CDATA[Запустить "$1?"]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Actual time will be used</nerd>
+		<ru><![CDATA[Тукущее время]]></ru>
 	</translation>
 
 	<translation>

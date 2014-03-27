@@ -35,7 +35,7 @@ public class PhotoActionGenerationValidator extends SavedJobValidator implements
 	}
 
 	private void validateTotalActions( final String number, final Errors errors ) {
-		final String fieldName = "Total actions";
+		final String fieldName = "Total job steps";
 		if ( validateEmpty( number, errors, PhotoActionGenerationModel.TOTAL_ACTIONS_FORM_CONTROL, fieldName ) ) {
 			validateNumber( number, errors, PhotoActionGenerationModel.TOTAL_ACTIONS_FORM_CONTROL, fieldName );
 		}

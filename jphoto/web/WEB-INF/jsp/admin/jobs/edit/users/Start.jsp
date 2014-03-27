@@ -32,7 +32,7 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tdtext text_t="Total job steps" isMandatory="true"/>
 					<table:tddata>
 						<form:input path="${userQtyLimitControl}" size="4"/>
 					</table:tddata>

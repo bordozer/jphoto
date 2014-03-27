@@ -30,7 +30,7 @@ public class FavoritesJobValidator extends SavedJobValidator implements Validato
 	}
 
 	private void validateActionQty( final FavoritesJobModel model, final Errors errors ) {
-		validatePositiveNumber( model.getActionsQty(), errors, FavoritesJobModel.ACTIONS_QTY_FORM_CONTROL, "Total job's steps" );
+		validatePositiveNumber( model.getActionsQty(), errors, FavoritesJobModel.ACTIONS_QTY_FORM_CONTROL, "Total job steps" );
 	}
 
 	private void validateFavoriteEntries( final FavoritesJobModel model, final Errors errors ) {

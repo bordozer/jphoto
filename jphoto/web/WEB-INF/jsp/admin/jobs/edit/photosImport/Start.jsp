@@ -133,9 +133,9 @@
 
 									<%--TODO: translate--%>
 									<table:tr>
-										<table:tdtext text_t="Total actions"/>
+										<table:tdtext text_t="Total job steps"/>
 										<table:tddata>
-											<tags:inputHint inputId="${userQtyLimitControl}" hintTitle_t="Total actions"
+											<tags:inputHint inputId="${userQtyLimitControl}" hintTitle_t="Total job steps"
 															hint="Photo qty<br />Leave empty to process all images in the folder">
 										<jsp:attribute name="inputField">
 											<html:input fieldId="${userQtyLimitControl}" fieldValue="${photosImportModel.photoQtyLimit}" size="3"/>
