@@ -64,10 +64,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotosByGenreLink( final Genre genre, final Language language ) {
+		final String genreTranslated = translatorService.translateGenre( genre, language );
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
-			, translatorService.translate( "All photos in genre '%2$s'", language )
 			, urlUtilsService.getPhotosByGenreLink( genre.getId() )
-			, translatorService.translateGenre( genre, language )
+			, translatorService.translate( "All photos in genre '$1'", language, genreTranslated )
+			, genreTranslated
 		);
 	}
 
