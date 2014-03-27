@@ -216,6 +216,12 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "800px"  );
 
+		final List<Language> uiLanguages = newArrayList();
+		for ( final Language lang : systemVarsService.getUsedLanguages() ) {
+			uiLanguages.add( lang );
+		}
+		model.put( "uiLanguages", uiLanguages );
+
 		final Template template = velocityEngine.getTemplate( "pageheader.vm" );
 		template.merge( model, writer );
 

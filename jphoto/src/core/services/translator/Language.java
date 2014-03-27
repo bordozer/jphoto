@@ -9,18 +9,27 @@ import static com.google.common.collect.Lists.newArrayList;
 public enum Language implements Identifiable {
 
 	NERD( 1, "nerd", "Nerd" )
-	, RU( 3, "ru", "Russian" )
-	, EN( 2, "en", "English" )
+	, RU( 3, "ru", "Russian", "ru.png" )
+	, EN( 2, "en", "English", "en.png" )
 	;
 
 	private final int id;
 	private final String code;
 	private final String name;
+	private final String icon;
 
 	private Language( final int id, final String code, final String name ) {
 		this.id = id;
 		this.code = code;
 		this.name = name;
+		this.icon = "";
+	}
+
+	private Language( final int id, final String code, final String name, final String icon ) {
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.icon = icon;
 	}
 
 	public int getId() {
@@ -33,6 +42,10 @@ public enum Language implements Identifiable {
 
 	public String getName() {
 		return name;
+	}
+
+	public String getIcon() {
+		return icon;
 	}
 
 	public static Language getById( final int id ) {
