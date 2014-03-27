@@ -46,14 +46,23 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
 
-					final String message = String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() );
-					getLog().info( message );
+					getLog().info( String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() ) );
+
+					final String message = services.getTranslatorService().translate( "Member $1 has got new status: $2"
+						, getLanguage()
+						, String.valueOf( user.getId() )
+						, UserStatus.MEMBER.getName()
+					);
 					addJobExecutionFinalMessage( message );
 
 					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
 				} else {
-					final String message = String.format( "Can not update member status. Id = # %s", user.getId() );
-					getLog().error( message );
+					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
+
+					final String message = services.getTranslatorService().translate( "Can not update member status. Id = #$1"
+						, getLanguage()
+						, String.valueOf( user.getId() )
+					);
 					addJobExecutionFinalMessage( message );
 				}
 			}

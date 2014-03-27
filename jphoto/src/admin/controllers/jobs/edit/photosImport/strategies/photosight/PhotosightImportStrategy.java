@@ -107,9 +107,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			if ( photosightPagePhotosIds.size() == 0 ) {
 				final String userCardFileName = getUserCardFileName( photosightUser, page );
 				final File file = PhotosightImageFileUtils.writePageContentToFile( userCardFileName, userPageContent );
-				final String message = String.format( "No photo have been found on page %d. User page content saved. See %s", page, file.getCanonicalPath() );
-				job.addJobExecutionFinalMessage( message );
-				log.info( message );
+
+				job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "No photo have been found on page $1. User page content saved. See $2", language, String.valueOf( page ), file.getCanonicalPath() ) );
+
+				log.info( String.format( "No photo have been found on page %d. User page content saved. See %s", page, file.getCanonicalPath() ) );
 
 				continue;
 			}
@@ -170,9 +171,15 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			if ( getServices().getJobHelperService().doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
-				final String message = String.format( "Photo %d of %s has already been imported.", photosightPhotoId, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
+
+				final String message = services.getTranslatorService().translate( "Photo $1 of $2 has already been imported."
+					, language
+					, String.valueOf( photosightPhotoId )
+					, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
+				);
 				log.debug( message );
-				job.addJobExecutionFinalMessage( message );
+
+				job.addJobExecutionFinalMessage( String.format( "Photo %d of %s has already been imported.", photosightPhotoId, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) ) );
 
 				continue;
 			}
@@ -183,7 +190,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			if ( cachedPhotosightPhoto != null ) {
 				photosightPhoto = cachedPhotosightPhoto;
 				log.debug( String.format( "Photo %d of %s has been found in the local cache.", photosightPhotoId, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) ) );
-				job.addJobExecutionFinalMessage( String.format( "Found in the local cache: %s", PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) ) );
+
+				final String message = services.getTranslatorService().translate( "Found in the local cache: $1", language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) );
+				job.addJobExecutionFinalMessage( message );
 			} else {
 				final int delayBetweenRequest = importParameters.getDelayBetweenRequest();
 				if ( delayBetweenRequest > 0 ) {
@@ -261,7 +270,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		if ( StringUtils.isEmpty( photosightUserName ) ) {
 			final String message = String.format( "Can not extract photosight user name from page content. Photosight user: %s.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
 			log.error( message );
-			job.addJobExecutionFinalMessage( message );
+
+			final String execMessage = services.getTranslatorService().translate( "Can not extract photosight user name from page content. Photosight user: $1.", language, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
+			job.addJobExecutionFinalMessage( execMessage );
+
 			throw new BaseRuntimeException( message );
 		}
 
@@ -284,9 +296,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		try {
 			return PhotosightXmlUtils.getPhotosFromPhotosightUserInfoFile( photosightUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
-			final String message = String.format( "Error reading user info file: %s<br />%s", PhotosightXmlUtils.getUserInfoFile( photosightUser ), e.getMessage() );
+			final String message = services.getTranslatorService().translate( "Error reading user info file: $1<br />$2", language, PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath(), e.getMessage() );
 			job.addJobExecutionFinalMessage( message );
-			log.error( message );
+
+			log.error( String.format( "Error reading user info file: %s<br />", PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath() ), e );
+
 			throw new BaseRuntimeException( e );
 		}
 	}
@@ -351,9 +365,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
 
 			if ( StringUtils.isEmpty( userPageContent ) ) {
-				final String message = String.format( "ERROR getting photosight user #%d pages qty. Photos import of the user will be skipped.", photosightUserId );
-				log.error( message );
+				log.error( String.format( "ERROR getting photosight user #%d pages qty. Photos import of the user will be skipped.", photosightUserId ) );
+
+				final String message = services.getTranslatorService().translate( "ERROR getting photosight user #$1 pages qty. Photos import of the user will be skipped.", language, String.valueOf( photosightUserId ) );
 				job.addJobExecutionFinalMessage( message );
+
 				continue;
 			}
 
@@ -416,7 +432,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			photosightPhoto.setUploadTime( uploadTime );
 		} else {
 			photosightPhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
-			job.addJobExecutionFinalMessage( String.format( "%s: can not get upload time from photosight photo page. Random time is used.", PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) ) );
+
+			final String message = services.getTranslatorService().translate( "$1: can not get upload time from photosight photo page. Random time is used.", language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) );
+			job.addJobExecutionFinalMessage( message );
 		}
 
 		photosightPhoto.setImageUrl( imageUrl );
@@ -429,11 +447,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		photosightPhoto.setCached( false );
 
 		log.debug( String.format( "Photo %d has been downloaded from photosight", photosightPhoto.getPhotoId() ) );
-		job.addJobExecutionFinalMessage( String.format( "Downloaded from photosight: %s of %s, photosight category: %s"
-			, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto )
-			, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
-			, PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() )
-			)
+
+		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "Downloaded from photosight: $1 of $2, photosight category: $3", language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ), PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ), PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
 		);
 
 		return photosightPhoto;
@@ -441,8 +456,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private void logPhotoSkipping( final PhotosightUser photosightUser, final int photosightPhotoId, final String s ) {
-		final String message = String.format( "%s User: %s; photo: %s.<br />Photo import skipped.", s, photosightUser, PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId ) );
+		final String message = services.getTranslatorService().translate( "$1 User: $2; photo: $3.<br />Photo import skipped."
+			, language
+			, s
+			, photosightUser.toString() // TODO: ?
+			, PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId )
+		);
 		job.addJobExecutionFinalMessage( message );
+
 		log.warn( String.format( "%s Photo #%d. Photo import skipped.", s, photosightPhotoId ) );
 	}
 

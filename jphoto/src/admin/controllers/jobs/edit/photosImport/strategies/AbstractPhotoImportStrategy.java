@@ -121,11 +121,12 @@ public abstract class AbstractPhotoImportStrategy {
 		photoToImport.setPhoto( photo );
 
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		final String message = String.format( "Created photo #%d '%s' of %s, category: %s"
-			, photo.getId()
+		final String message = services.getTranslatorService().translate( "Created photo #$1 '$2' of $3, category: $4"
+			, language
+			, String.valueOf( photo.getId() )
 			, entityLinkUtilsService.getPhotoCardLink( photo, language )
 			, entityLinkUtilsService.getUserCardLink( user, language )
-			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), services.getSystemVarsService().getSystemDefaultLanguage() ) // TODO: user language?
+			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), language )
 		);
 		job.addJobExecutionFinalMessage( message );
 

@@ -8,6 +8,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
+import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 
@@ -28,7 +29,8 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 	public boolean doPhotoAction( final Photo photo, final User user ) {
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
-		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo, getLanguage() ).isValidationFailed() ) {
+		final Language language = getLanguage();
+		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo, language ).isValidationFailed() ) {
 			return false;
 		}
 
@@ -60,7 +62,14 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		addJobExecutionFinalMessage( String.format( "User %s has left a comment for photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user, getLanguage() ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
+
+		final String message = services.getTranslatorService().translate( "User $1 has left a comment for photo $2 ( time: $3 )"
+			, language
+			, entityLinkUtilsService.getUserCardLink( user, language )
+			, entityLinkUtilsService.getPhotoCardLink( photo, language )
+			, dateUtilsService.formatDateTime( actionTime )
+		);
+		addJobExecutionFinalMessage( message );
 
 		getLog().info( String.format( "User %s has commented photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 

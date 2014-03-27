@@ -12,6 +12,7 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.entry.ActivityStreamService;
+import core.services.translator.Language;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -54,11 +55,14 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
 					getLog().info( String.format( "User %s has bees given a new rank %s in %s (the previous one was %s)", user, userNewRank, genre, userCurrentRank ) );
 
-					addJobExecutionFinalMessage( String.format( "User %s has bees given a new rank %s in %s ( the previous one was %s )"
-						, entityLinkUtilsService.getUserCardLink( user, getLanguage() )
-						, userNewRank
-						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() )
-						, userCurrentRank ) );
+					final Language language = getLanguage();
+					addJobExecutionFinalMessage( services.getTranslatorService().translate( "User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )"
+						, language
+						, entityLinkUtilsService.getUserCardLink( user, language )
+						, String.valueOf( userNewRank )
+						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, language )
+						, String.valueOf( userCurrentRank ) )
+					);
 
 					activityStreamService.saveUserRankInGenreChanged( user, genre, userCurrentRank, userNewRank, dateUtilsService.getCurrentTime(), services );
 				}

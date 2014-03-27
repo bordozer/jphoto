@@ -83,9 +83,10 @@ public class UserGenerationJob extends AbstractJob {
 				try {
 					final boolean isCreated = userService.createUser( user, UserEditDataController.DEFAULT_USER_PASSWORD );
 					if ( ! isCreated ) {
-						final String message = String.format( "Error creating user %s", user );
+						final String message = services.getTranslatorService().translate( "Error creating user $1", getLanguage(), user.getNameEscaped() );
 						addJobExecutionFinalMessage( message );
-						getLog().error( message );
+
+						getLog().error( String.format( "Error creating user %s", user ) );
 						continue;
 					}
 

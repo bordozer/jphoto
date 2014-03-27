@@ -9,6 +9,7 @@ import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.log.LogHelper;
+import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 
@@ -81,7 +82,15 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final User photoAuthor = services.getUserService().load( photo.getUserId() );
 
-		addJobExecutionFinalMessage( String.format( "User %s has appraised photo %s of %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user, getLanguage() ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ), entityLinkUtilsService.getUserCardLink( photoAuthor, getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
+		final Language language = getLanguage();
+		final String message = services.getTranslatorService().translate( "User $1 has appraised photo $2 of $3 ( time: $4 )"
+			, language
+			, entityLinkUtilsService.getUserCardLink( user, language )
+			, entityLinkUtilsService.getPhotoCardLink( photo, language )
+			, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
+			, dateUtilsService.formatDateTime( actionTime )
+		);
+		addJobExecutionFinalMessage( message );
 
 		getLog().info( String.format( "User %s has appraised photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 
