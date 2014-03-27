@@ -23,7 +23,7 @@ public class PhotoMenuItemDeleteCommandTest extends AbstractTestCase {
 		photo.setId( 444 );
 
 		final User accessor = new User( 234 );
-		accessor.setLanguage( Language.EN );
+		accessor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, accessor, getServices() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "Delete photo" ) );

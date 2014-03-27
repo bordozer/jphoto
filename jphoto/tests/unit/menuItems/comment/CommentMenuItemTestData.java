@@ -1,9 +1,11 @@
 package menuItems.comment;
 
+import common.AbstractTestCase;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.services.translator.Language;
 
 public class CommentMenuItemTestData {
 
@@ -19,12 +21,15 @@ public class CommentMenuItemTestData {
 	CommentMenuItemTestData() {
 		commentAuthor = new User( 111 );
 		commentAuthor.setName( "Comment Author" );
+		commentAuthor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		photoAuthor = new User( 222 );
 		photoAuthor.setName( "Photo Author" );
+		photoAuthor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		accessor = new User( 333 );
 		accessor.setName( "Just a User" );
+		accessor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		genre = new Genre();
 		genre.setId( 400 );

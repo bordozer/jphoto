@@ -1,5 +1,6 @@
 package menuItems.comment.operations;
 
+import common.AbstractTestCase;
 import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
@@ -71,7 +72,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ValidationResult validationResult = new ValidationResult();
 		validationResult.setValidationPassed( parameters.isUserCanCommentPhoto() );
 
-		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), Language.EN ) ).andReturn( validationResult ).anyTimes();
+		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), AbstractTestCase.MENU_LANGUAGE ) ).andReturn( validationResult ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );

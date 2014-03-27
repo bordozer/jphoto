@@ -1,5 +1,6 @@
 package menuItems.photo.goTo;
 
+import common.AbstractTestCase;
 import core.general.genre.Genre;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.AbstractEntryMenuItemCommand;
@@ -30,7 +31,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 		final User photoAuthor = testData.getPhotoAuthor();
 		final Genre genre = testData.getGenre();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), translatorService.translateGenre( testData.getGenre(), Language.EN ), parameters.getPhotosQty() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", photoAuthor.getNameEscaped(), translatorService.translateGenre( testData.getGenre(), AbstractTestCase.MENU_LANGUAGE ), parameters.getPhotosQty() ) ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
 

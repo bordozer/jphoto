@@ -1,5 +1,6 @@
 package menuItems.comment.goTo;
 
+import common.AbstractTestCase;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.goTo.CommentMenuItemGoToAuthorPhotoByGenre;
 import core.general.user.User;
@@ -34,7 +35,7 @@ public class CommentMenuItemGoToAuthorPhotoByGenreTest extends AbstractCommentMe
 		final CommentMenuItemGoToAuthorPhotoByGenre menuEntry = getMenuEntry( new Parameters( testData.getAccessor(), photosQty ) );
 		final AbstractEntryMenuItemCommand menuItemCommand = menuEntry.getMenuItemCommand();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", testData.getCommentAuthor().getNameEscaped(), translatorService.translateGenre( testData.getGenre(), Language.EN ), photosQty ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuText(), translated( String.format( "%s: photos in category '%s' ( %s )", testData.getCommentAuthor().getNameEscaped(), translatorService.translateGenre( testData.getGenre(), AbstractTestCase.MENU_LANGUAGE ), photosQty ) ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItemCommand.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", testData.getCommentAuthor().getId(), testData.getGenre().getId() ) );
 	}
 

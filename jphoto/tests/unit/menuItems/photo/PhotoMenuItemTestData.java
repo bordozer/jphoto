@@ -1,5 +1,6 @@
 package menuItems.photo;
 
+import common.AbstractTestCase;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -15,9 +16,11 @@ public class PhotoMenuItemTestData {
 	PhotoMenuItemTestData() {
 		photoAuthor = new User( 222 );
 		photoAuthor.setName( "Photo Author" );
+		photoAuthor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		accessor = new User( 333 );
 		accessor.setName( "Just a User" );
+		accessor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		genre = new Genre();
 		genre.setId( 433 );

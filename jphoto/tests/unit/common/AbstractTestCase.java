@@ -20,6 +20,8 @@ public class AbstractTestCase {
 	public static final String TRANSLATION_START_PREFIX = "";
 	public static final String TRANSLATION_END_PREFIX = "(t)";
 
+	public static final Language MENU_LANGUAGE = Language.EN;
+
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
 	public static final String TRANSLATED_ENTRY = "Translated entry";
 
@@ -116,7 +118,8 @@ public class AbstractTestCase {
 	}
 
 	public static String translated( final String nerd ) {
-		return String.format( "%s%s%s", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
+//		return String.format( "%s%s%s", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
+		return String.format( "%s(%s)", nerd, Language.NERD.getCode() );
 	}
 
 	public final static User SUPER_ADMIN_1 = new User() {
