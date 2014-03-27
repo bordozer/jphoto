@@ -99,7 +99,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 			@Override
 			public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
-				return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+				return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 					@Override
 					public String getMenuText() {
 						return MENU_TITLE;

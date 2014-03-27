@@ -21,35 +21,37 @@ public class NotificationServiceImpl implements NotificationService {
 	private TranslatorService translatorService;
 
 	@Override
-	public void newPhotoNotification( final Photo photo, final Language language ) {
+	public void newPhotoNotification( final Photo photo ) {
 
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, language, services ) );
-		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, language, services ) );
-		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, language, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, services ) );
 
-		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, language, services ) );
-		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, language, services ) );
-		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, language, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( photo, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( photo, services ) );
 
 		sendNotifications( userNotifications );
 	}
 
 	@Override
-	public void newCommentNotification( final PhotoComment comment, final Language language ) {
+	public void newCommentNotification( final PhotoComment comment ) {
 		final Set<UserNotification> userNotifications = newLinkedHashSet();
 
-		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, language, services ) );
+		userNotifications.addAll( UserNotificationsCollector.privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, services ) );
 
-		userNotifications.addAll( UserNotificationsCollector.emailToPhotoAuthorAboutNewCommentToHisPhoto( comment, language, services ) );
-		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, language, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailToPhotoAuthorAboutNewCommentToHisPhoto( comment, services ) );
+		userNotifications.addAll( UserNotificationsCollector.emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( comment, services ) );
 
 		sendNotifications( userNotifications );
 	}
 
 	@Override
-	public void newPrivateMessage( final PrivateMessage privateMessage, final Language language ) {
+	public void newPrivateMessage( final PrivateMessage privateMessage ) {
+		final Language language = privateMessage.getToUser().getLanguage();
+
 		final String subject = translatorService.translate( "New private message", language );
 		final String message = translatorService.translate( "$1 has sent you a private message", language, privateMessage.getFromUser().getNameEscaped() );
 		final NotificationData data = new NotificationData( subject, message );

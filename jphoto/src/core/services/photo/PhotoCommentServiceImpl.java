@@ -168,7 +168,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
 			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( translatorService.translate( "You do not have permission to delete this comment" ) );
+			commentDTO.setErrorMessage( translatorService.translate( "You do not have permission to delete this comment", EnvironmentContext.getLanguage() ) );
 
 			return commentDTO;
 		}
@@ -179,7 +179,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		if ( comment.isCommentDeleted() ) {
 			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( translatorService.translate( "The comment has already been deleted" ) );
+			commentDTO.setErrorMessage( translatorService.translate( "The comment has already been deleted", EnvironmentContext.getLanguage() ) );
 
 			return commentDTO;
 		}

@@ -41,19 +41,19 @@ public class UserGenreRankVotingValidator implements Validator {
 
 	private void validateThatUserIsNotInBlackList( final UserGenreRankVotingModel model, final Errors errors ) {
 		if ( favoritesService.isUserInBlackListOfUser( model.getUser().getId(), model.getVoter().getId() ) ) {
-			errors.reject( translatorService.translate( "Voting error" ), translatorService.translate( "You are in the black list of the member" ) );
+			errors.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "You are in the black list of the member", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
 	private void validateThatUserLogged( final UserGenreRankVotingModel model, final Errors errors ) {
 		if ( ! UserUtils.isLoggedUser( model.getVoter() ) ) {
-			errors.reject( translatorService.translate( "Voting error" ), translatorService.translate( "Only logged members can vote" ) );
+			errors.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "Only logged members can vote", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
 	private void validateThatUserDoesNotVoteForOwnRanks( final UserGenreRankVotingModel model, final Errors errors ) {
 		if ( UserUtils.isUserEqualsToCurrentUser( model.getUser() ) ) {
-			errors.reject( translatorService.translate( "Voting error" ), translatorService.translate( "You can not vote for your oun rank" ) );
+			errors.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "You can not vote for your oun rank", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
@@ -63,7 +63,7 @@ public class UserGenreRankVotingValidator implements Validator {
 		final int votingPoints = votingModel.getLoggedUserVotingPoints();
 
 		if ( votingPoints == 0 ) {
-			errors.reject( translatorService.translate( "Voting error" ), translatorService.translate( "ZERO Voting For User Rank In Genre", model.getGenre().getName() ) );
+			errors.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "ZERO Voting For User Rank In Genre", EnvironmentContext.getLanguage(), model.getGenre().getName() ) );
 			return;
 		}
 

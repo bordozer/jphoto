@@ -23,13 +23,11 @@ public abstract class UserNotificationsCollector {
 	private static final String CONTROL_EMAIL_NOTIFICATIONS_HINT = "You can control email notifications in the settings of your profile.";
 
 	protected Services services;
-	protected Language language;
 
 	protected final LogHelper log = new LogHelper( this.getClass() );
 
-	public UserNotificationsCollector( final Services services, final Language language ) {
+	public UserNotificationsCollector( final Services services ) {
 		this.services = services;
-		this.language = language;
 	}
 
 	public abstract List<UserNotification> getUserNotifications();
@@ -38,45 +36,41 @@ public abstract class UserNotificationsCollector {
 
 	public abstract NotificationData getNotificationData();
 
-	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Language language, final Services services ) {
-		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Language language, final Services services ) {
-		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Language language, final Services services ) {
-		return privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Services services ) {
+		return privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Language language, final Services services ) {
-		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavorites( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Language language, final Services services ) {
-		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriends( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Language language, final Services services ) {
-		return emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, language, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthor( final Photo photo, final Services services ) {
+		return emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( photo, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> emailToPhotoAuthorAboutNewCommentToHisPhoto( final PhotoComment comment, final Language language, final Services services ) {
-		return emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( comment, language, services ).getUserNotifications();
+	public static List<UserNotification> emailToPhotoAuthorAboutNewCommentToHisPhoto( final PhotoComment comment, final Services services ) {
+		return emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
-	public static List<UserNotification> privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Language language, final Services services ) {
-		return privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, language, services ).getUserNotifications();
-	}
-
-	public static List<UserNotification> emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Language language, final Services services ) {
-		return emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, language, services ).getUserNotifications();
+	public static List<UserNotification> emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Services services ) {
+		return emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications();
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
@@ -93,7 +87,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "One of your favorite members %s has uploaded new photo '%s'."
@@ -105,8 +99,8 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
@@ -123,7 +117,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "One of your friends %s has uploaded new photo '%s'"
@@ -135,8 +129,8 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* All users get Private message about event */
-	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector privateMessagesAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
@@ -153,7 +147,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of %s."
@@ -164,9 +158,13 @@ public abstract class UserNotificationsCollector {
 		};
 	}
 
+	public static List<UserNotification> privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhoto( final PhotoComment comment, final Services services ) {
+		return privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications();
+	}
+
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
@@ -189,7 +187,7 @@ public abstract class UserNotificationsCollector {
 				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
 
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has commented photo '%s'.", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "%s has commented photo '%s'. You got this message because you are tracking new comments to the photo."
@@ -201,12 +199,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, language, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FAVORITE_MEMBER );
 			}
 
 			@Override
@@ -219,7 +217,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "One of your favorite member %s has uploaded new photo '%s'. %s"
@@ -231,12 +229,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, language, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFriendsStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_FRIEND );
 			}
 
 			@Override
@@ -249,7 +247,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "One of your friend %s has uploaded new photo '%s'. %s", userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
@@ -260,12 +258,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services,language ) {
+	private static UserNotificationsCollector emailsAboutNewPhotoToUsersWhoAreTrackingNewPhotosOfPhotoAuthorStrategy( final Photo photo, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, language, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
+				return removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewPhotoToUsersWhoHavePhotoAuthorInFavoritesStrategy( photo, services ).getUserNotifications(), EmailNotificationType.NEW_PHOTO_OF_TRACKING_MEMBER );
 			}
 
 			@Override
@@ -278,7 +276,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of photo author. %s"
@@ -290,8 +288,8 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( final PhotoComment comment, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector emailToPhotoAuthorAboutNewCommentToHisPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
@@ -322,7 +320,7 @@ public abstract class UserNotificationsCollector {
 				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
 
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has commented your photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "%s has commented your photo '%s'. %s", commentAuthorCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
@@ -333,12 +331,12 @@ public abstract class UserNotificationsCollector {
 	}
 
 	/* Only users set corresponding option get Email about event */
-	private static UserNotificationsCollector emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Language language, final Services services ) {
-		return new UserNotificationsCollector( services, language ) {
+	private static UserNotificationsCollector emailsAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( final PhotoComment comment, final Services services ) {
+		return new UserNotificationsCollector( services ) {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				final List<UserNotification> userNotifications = removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, language, services ).getUserNotifications(), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
+				final List<UserNotification> userNotifications = removeThoseWhoDoNotWantToGetEmailAboutEvent( privateMessagesAboutNewCommentToUsersWhoAreTrackingNewCommentsToCommentedPhotoStrategy( comment, services ).getUserNotifications(), EmailNotificationType.COMMENT_TO_TRACKING_PHOTO );
 
 				removeNotificationsAboutOwnComments( userNotifications, comment );
 
@@ -357,7 +355,7 @@ public abstract class UserNotificationsCollector {
 				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
 
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo );
+				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
 				final String subject = String.format( "%s has commented photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
 				final String message = String.format( "%s has commented photo '%s'. You got this email because you are tracking new comments to the photo."
@@ -407,7 +405,7 @@ public abstract class UserNotificationsCollector {
 		return services.getUserService().load( photo.getUserId() );
 	}
 
-	protected String getPhotoCardLink( final Photo photo ) {
+	protected String getPhotoCardLink( final Photo photo, final Language language ) {
 		return services.getEntityLinkUtilsService().getPhotoCardLink( photo, language );
 	}
 

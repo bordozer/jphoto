@@ -1,5 +1,6 @@
 package core.services.validation;
 
+import core.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,11 +21,11 @@ public class DataRequirementServiceImpl implements DataRequirementService {
 
 	@Override
 	public String getFieldIsMandatoryText() {
-		return translatorService.translate( "The field is mandatory." );
+		return translatorService.translate( "The field is mandatory.", EnvironmentContext.getLanguage() );
 	}
 
 	@Override
 	public String getFieldIsOptionalText() {
-		return translatorService.translate( "The field is optional." );
+		return translatorService.translate( "The field is optional.", EnvironmentContext.getLanguage() );
 	}
 }
