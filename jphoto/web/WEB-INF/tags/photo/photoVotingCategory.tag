@@ -17,7 +17,7 @@
 		<select id="votingCategory${number}" name="votingCategory${number}" onchange="setAccessToVotingCategoryMark( ${number} )" class="votingCategoryClass">
 			<option value="0"> - - - - - - - - </option>
 			<c:forEach var="votingCategory" items="${votingCategories}">
-				<option value="${votingCategory.id}">${votingCategory.name}&nbsp;&nbsp;</option>
+				<option value="${votingCategory.id}">${eco:translateVotingCategory(votingCategory.id)}&nbsp;&nbsp;</option>
 			</c:forEach>
 		</select>
 	</table:td>
