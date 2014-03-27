@@ -3,12 +3,16 @@ package core.services.entry;
 import core.general.genre.Genre;
 import core.services.dao.GenreDao;
 import core.services.dao.GenreDaoImpl;
+import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlColumnSelect;
 import sql.builder.SqlIdsSelectQuery;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -20,6 +24,9 @@ public class GenreServiceImpl implements GenreService {
 	
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@Override
 	public boolean save( final Genre entry ) {
@@ -54,6 +61,20 @@ public class GenreServiceImpl implements GenreService {
 		}
 
 		return genres;
+	}
+
+	@Override
+	public List<Genre> loadAll( final Language language ) {
+		final List<Genre> result = loadAll();
+
+		Collections.sort( result, new Comparator<Genre>() {
+			@Override
+			public int compare( final Genre o1, final Genre o2 ) {
+				return translatorService.translateGenre( o1, language ).compareTo( translatorService.translateGenre( o2, language ) );
+			}
+		} );
+
+		return result;
 	}
 
 	@Override

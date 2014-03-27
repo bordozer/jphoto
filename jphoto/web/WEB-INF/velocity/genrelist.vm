@@ -1,5 +1,5 @@
 <div class="genreList block-border">
 	#foreach( $genreLink in $genreLinks )
-		$genreLink &nbsp; &nbsp;
+		<span style="white-space:nowrap; padding-right: 20px;">$genreLink</span>
 	#end
 </div>

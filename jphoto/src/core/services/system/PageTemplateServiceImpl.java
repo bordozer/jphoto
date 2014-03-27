@@ -185,11 +185,10 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "userLogins", userLogins );
 		// TODO: TEMP <--
 
-		final List<Genre> genres = genreService.loadAll();
+		final List<Genre> genres = genreService.loadAll( language );
 		final List<String> genreLinks = newArrayList();
 		for ( Genre genre : genres ) {
-			String genreLink = entityLinkUtilsService.getPhotosByGenreLink( genre, language );
-			genreLinks.add( genreLink );
+			genreLinks.add( entityLinkUtilsService.getPhotosByGenreLink( genre, language ) );
 		}
 		model.put( "genres", genres );
 		model.put( "genreLinks", genreLinks );
