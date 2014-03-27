@@ -37,7 +37,7 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Total actions" isMandatory="true"/>
+					<table:tdtext text_t="Photos action to generate" isMandatory="true"/>
 					<table:tddata>
 						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total actions"
 										hint="Quantity of generated actions">

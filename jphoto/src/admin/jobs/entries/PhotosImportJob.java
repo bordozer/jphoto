@@ -164,7 +164,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				addDateRangeParameters( builder );
 
-				builder.append( translatorService.translate( "Actions", getLanguage() ) ).append( ": " ).append( fsParameters.getPhotoQtyLimit() );
+				builder.append( translatorService.translate( "Total job's steps: photos to process", getLanguage() ) ).append( ": " ).append( fsParameters.getPhotoQtyLimit() );
 
 				break;
 			case PHOTOSIGHT:

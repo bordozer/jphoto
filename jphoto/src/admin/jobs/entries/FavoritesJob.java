@@ -78,7 +78,7 @@ public class FavoritesJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Actions: ", getLanguage() ) ).append( totalJopOperations );
+		builder.append( services.getTranslatorService().translate( "Total job's steps", getLanguage() ) ).append( ": " ).append( totalJopOperations );
 		for ( final FavoriteEntryType favoriteEntry : favoriteEntries ) {
 			builder.append( "<br />- " ).append( favoriteEntry.getName() );
 		}

@@ -2433,18 +2433,18 @@
 	</translation>
 
 	<translation>
-		<nerd>Actions</nerd>
-		<ru><![CDATA[Действия]]></ru>
+		<nerd>Total job's steps</nerd>
+		<ru><![CDATA[Всего шагов]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Total job's steps: photos to process</nerd>
+		<ru><![CDATA[К-во фото для импорта]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photos action to generate</nerd>
+		<ru><![CDATA[К-во действий к генерации]]></ru>
 	</translation>
 
 	<translation>

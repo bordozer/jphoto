@@ -124,7 +124,7 @@ public class RankVotingJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Actions: ", getLanguage() ) ).append( totalJopOperations ).append( "<br />" );
+		builder.append( services.getTranslatorService().translate( "Total job's steps", getLanguage() ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
 
 		return builder.toString();
 	}
