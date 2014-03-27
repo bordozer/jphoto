@@ -21,7 +21,7 @@
 	<table:tr>
 		<table:td colspan="2">
 			<html:img id="save" src="/icons32/save32.png" width="32" height="32" onclick="saveJob();" alt="${eco:translate1('Save \\\'$1\\\' job', jobModel.jobName)}"/>
-			<html:img id="saveAsCopy" src="/icons32/saveAsCopy32.png" width="32" height="32" onclick="saveJobAsCopy();" alt="${eco:translate1('Save as copy \\\'$1\\\' job', jobModel.jobName)}"/>
+			<html:img id="saveAsCopy" src="/icons32/saveAsCopy32.png" width="32" height="32" onclick="saveJobAsCopy();" alt="${eco:translate1('Save job \\\'$1\\\' as copy', jobModel.jobName)}"/>
 			<html:img id="run" src="/icons32/start32.png" width="32" height="32" onclick="checkAndStart();" alt="${eco:translate1('Run \\\'$1\\\' job', jobModel.jobName)}"/>
 		</table:td>
 	</table:tr>

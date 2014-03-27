@@ -2313,8 +2313,128 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>This is your own photo</nerd>
+		<ru><![CDATA[Это работа загружена вами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has left a comment for photo $2 ( time: $3 )</nerd>
+		<ru><![CDATA[Пользователь $1 прокомментировал работу $2 ( время: $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 is going to do the action for another photo of $2</nerd>
+		<ru><![CDATA[Пользователь $1 решил повторить действие для другой работы пользователя $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently</nerd>
+		<ru><![CDATA[Пользователь $1 решил выполнить действие над работой пользователя $2 потому что $3 проголосовал за его работу недавно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo categories</nerd>
+		<ru><![CDATA[Фото категории]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The UI language has been changed for this session only. Set preferred a language in your profile settings for permanent basement</nerd>
+		<ru><![CDATA[Язык интерфейса был изменен только для текущей сессии. Изменить язык постоянно можно в настройках пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>All photos in genre '$1'</nerd>
+		<ru><![CDATA[Все работы в категории '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best photos of $1</nerd>
+		<ru><![CDATA[Лучшие работы $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Actual time</nerd>
+		<ru><![CDATA[Актуальное время]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Run '$1' job</nerd>
+		<ru><![CDATA[Запустить задачу '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete entries that finished early then</nerd>
+		<ru><![CDATA[Удалить записи старше чем]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Save "$1" as copy?</nerd>
+		<ru><![CDATA[Сохранить "$1" как копию?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete activities older then</nerd>
+		<ru><![CDATA[Удалить записи старше чем]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete job execution history entry?</nerd>
+		<ru><![CDATA[Удалить записи журнала выполнения задач?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Save as copy '$1' job</nerd>
+		<ru><![CDATA[Сохранить задачу '$1' как копию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected history entries</nerd>
+		<ru><![CDATA[Удалить выделенные записи истории выполнения задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reset filter by job type</nerd>
+		<ru><![CDATA[Сбросить фильтр по типу задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Finished with error</nerd>
+		<ru><![CDATA[Завершено без ошибок]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Jobs that have not started yet and execution is cancelled because a user had stopped parent job</nerd>
+		<ru><![CDATA[Задачи которые еще не были запущены и их выполнение было отменено по причине того, что родительская задача была остановлена пользователем]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete activities older then $1 days</nerd>
+		<ru><![CDATA[Удалить записи старше чем $1 дня(ей)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete entries that finished early then $1 day(s) ago</nerd>
+		<ru><![CDATA[Удалить записи старше чем $1 дня(ей) назад]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has voted for $2's rank in $3 ( $4 )</nerd>
+		<ru><![CDATA[Пользователь $1 проголосовал за ранг $2 в $3 ( $4 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has appraised photo $2 of $3 ( time: $4 )</nerd>
+		<ru><![CDATA[Пользователь $1 оценил работу $2 автора $3 ( время: $4 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User %s has seen photo $1 ( time: $2 )</nerd>
+		<ru><![CDATA[Пользователь %s посмотрел работу $1 ( время: $2 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Actions</nerd>
+		<ru><![CDATA[Действия]]></ru>
 	</translation>
 
 	<translation>
@@ -2332,9 +2452,14 @@
 		<ru><![CDATA[]]></ru>
 	</translation>
 
-	<!--<translation>
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-	</translation>-->
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
 
 </translations>
