@@ -58,7 +58,7 @@
 						</jsp:attribute>
 						</tags:inputHint>
 						<br/>
-						${eco:translate('Leave empty to process all images')}
+						${eco:translate('Leave empty to select all photos')}
 					</table:tddata>
 				</table:tr>
 

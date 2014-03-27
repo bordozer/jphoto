@@ -2,6 +2,7 @@ package core.services.utils;
 
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
+import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
@@ -34,8 +35,9 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	
 	@Override
 	public String getPortalPageLink() {
-		return String.format( "<a href=\"%s\" title=\"Main page\">%s</a>"
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPortalPageURL()
+			, translatorService.translate( "Portal page", EnvironmentContext.getLanguage() )
 			, systemVarsService.getProjectName()
 		);
 	}

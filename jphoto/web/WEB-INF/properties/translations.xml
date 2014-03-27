@@ -164,7 +164,7 @@
 
 	<translation>
 		<nerd>Upload photo</nerd>
-		<ru><![CDATA[Загрузить фото]]></ru>
+		<ru><![CDATA[Загрузить работу]]></ru>
 	</translation>
 
 	<translation>
@@ -2444,12 +2444,17 @@
 
 	<translation>
 		<nerd>Photos action to generate</nerd>
-		<ru><![CDATA[К-во действий к генерации]]></ru>
+		<ru><![CDATA[Генерировать к-во действий]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Leave empty to process all images</nerd>
 		<ru><![CDATA[Оставьте пустым чтобы обработать все фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Leave empty to select all photos</nerd>
+		<ru><![CDATA[Оставьте пустым чтобы выбрать все работы]]></ru>
 	</translation>
 
 	<translation>
@@ -2459,7 +2464,7 @@
 
 	<translation>
 		<nerd>Actual time will be used</nerd>
-		<ru><![CDATA[Тукущее время]]></ru>
+		<ru><![CDATA[Текущее время]]></ru>
 	</translation>
 
 	<translation>
