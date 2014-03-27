@@ -243,6 +243,7 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 	}
 
 	public static final User NOT_LOGGED_USER = new User() {
+
 		@Override
 		public int getId() {
 			return -1;

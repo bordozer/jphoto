@@ -73,6 +73,7 @@ public class PortalPageController {
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
 		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() )
 			, translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
+
 		lastUploadedPhotoList.setPhotosInLine( 4 );
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
 		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );

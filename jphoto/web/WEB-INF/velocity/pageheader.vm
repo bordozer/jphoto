@@ -62,11 +62,20 @@
 			<h2><a href="$portalpageurl">$slogan</a></h2>
 			<div class="floatleft" style="margin-top: 2px;">
 				#foreach( $uiLanguage in $uiLanguages )
-					<a href="#" onclick="changeUiLanguage( $uiLanguage.id ); return false;"><img src="$imagePath/languages/$uiLanguage.icon" title="$uiLanguage.name"></a>
+					<a href="#" onclick="changeUiLanguage( '$uiLanguage.code' ); return false;"><img src="$imagePath/languages/$uiLanguage.icon" title="$uiLanguage.name"></a>
 				#end
 				<script type="text/javascript">
-					function changeUiLanguage( languageId ) {
-						alert( languageId );
+					function changeUiLanguage( languageCode ) {
+						$.ajax( {
+									type:'GET',
+									url:'$siteUrlWithPrefix/language/' + languageCode + '/',
+									success:function ( response ) {
+										document.location.reload();
+									},
+									error:function () {
+										alert( 'Error changing UI language :' );
+									}
+								} );
 					}
 				</script>
 			</div>
