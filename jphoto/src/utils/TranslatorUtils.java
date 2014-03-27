@@ -2,6 +2,7 @@ package utils;
 
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.context.ApplicationContextHelper;
+import core.context.EnvironmentContext;
 import core.services.translator.Language;
 
 /*
@@ -50,6 +51,6 @@ public class TranslatorUtils {
 	}
 
 	private static Language getLanguage() {
-		return ApplicationContextHelper.getSystemVarsService().getSystemDefaultLanguage();
+		return EnvironmentContext.getLanguage();
 	}
 }
