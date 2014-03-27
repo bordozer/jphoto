@@ -4,8 +4,8 @@ application.ProjectName=JPhoto
 # system default language ( RU, EN )
 application.language.default=RU
 
-# system used languages, comma is a separator ( RU, EN ). See enum Language.java for all accessible languages
-application.language.usedLanguages=RU,EN
+# system used languages, comma is a separator ( UA, RU, EN ). See enum Language.java for all accessible languages
+application.language.usedLanguages=RU,UA
 
 #Date format
 datetime.SystemDateFormat=yyyy-MM-dd

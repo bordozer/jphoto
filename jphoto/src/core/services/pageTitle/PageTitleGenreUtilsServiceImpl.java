@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsService {
 
-	public static final String GENRE_ROOT = "Genres";
+	public static final String GENRE_ROOT = "Photo categories";
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;

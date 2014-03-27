@@ -11,6 +11,7 @@ public enum Language implements Identifiable {
 	NERD( 1, "nerd", "Nerd" )
 	, RU( 3, "ru", "Russian", "ru.png" )
 	, EN( 2, "en", "English", "en.png" )
+	, UA( 4, "ua", "Ukrainian", "ua.png" )
 	;
 
 	private final int id;

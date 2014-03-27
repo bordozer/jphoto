@@ -170,7 +170,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getAdminGenresRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminGenreListLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Genres", language ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Photo categories", language ) );
 	}
 
 	@Override
