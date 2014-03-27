@@ -121,7 +121,7 @@ public class UserUtilsTest extends AbstractTestCase {
 		user.setId( 111 );
 		user.setName( "User name" );
 
-		emulateUserLogin( User.NOT_LOGGED_USER );
+		emulateUserLogin( NOT_LOGGED_USER );
 		assertFalse( "Condition must be FALSE but true", UserUtils.isCurrentUserLoggedUser() );
 
 		emulateUserLogin( user2 );
@@ -130,10 +130,10 @@ public class UserUtilsTest extends AbstractTestCase {
 
 		assertTrue( "Condition must be TRUE but false", UserUtils.isLoggedUser( user2 ) );
 		assertTrue( "Condition must be TRUE but false", UserUtils.isLoggedUser( user ) );
-		assertFalse( "Condition must be FALSE but true", UserUtils.isLoggedUser( User.NOT_LOGGED_USER ) );
+		assertFalse( "Condition must be FALSE but true", UserUtils.isLoggedUser( NOT_LOGGED_USER ) );
 
-		assertTrue( "Condition must be TRUE but false", UserUtils.isUserEqualsToCurrentUser( user2 ) );
-		assertFalse( "Condition must be FALSE but true", UserUtils.isUserEqualsToCurrentUser( user ) );
+		assertTrue( "Condition must be TRUE but false", UserUtils.isTheUserThatWhoIsCurrentUser( user2 ) );
+		assertFalse( "Condition must be FALSE but true", UserUtils.isTheUserThatWhoIsCurrentUser( user ) );
 	}
 
 	// TODO: use SecurityService!

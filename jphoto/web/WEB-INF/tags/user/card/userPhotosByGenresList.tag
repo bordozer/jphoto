@@ -23,7 +23,7 @@
 %>
 
 <c:set var="totalPhotos" value="<%=totalPhotos%>"/>
-<c:set var="isThisCardOfLoggedUser" value="<%=UserUtils.isUserEqualsToCurrentUser( user )%>"/>
+<c:set var="isThisCardOfLoggedUser" value="<%=UserUtils.isTheUserThatWhoIsCurrentUser( user )%>"/>
 <c:set var="isCurrentUserLoggedUser" value="<%=UserUtils.isCurrentUserLoggedUser()%>"/>
 <c:set var="userCanSeeUserRankVoteHistory" value="<%=ApplicationContextHelper.getSecurityService().userCanSeeUserRankVoteHistory( user, EnvironmentContext.getCurrentUser() )%>"/>
 

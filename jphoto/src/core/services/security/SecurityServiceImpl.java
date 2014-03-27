@@ -214,7 +214,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public void assertUserEqualsToCurrentUser( final User user ) {
-		if ( ! UserUtils.isUserEqualsToCurrentUser( user ) ) {
+		if ( ! UserUtils.isTheUserThatWhoIsCurrentUser( user ) ) {
 			throw new AccessDeniedException();
 		}
 	}

@@ -14,7 +14,7 @@ public class UserAdminSubMenuItemTest extends AbstractUserMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), User.NOT_LOGGED_USER, getServices() ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserAdminSubMenuItem( testData.getUser(), NOT_LOGGED_USER, getServices() ).isAccessibleFor() );
 	}
 
 	@Test

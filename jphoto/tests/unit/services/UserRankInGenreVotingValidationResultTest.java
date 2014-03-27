@@ -34,7 +34,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 	public void notLoggedUser() {
 
 		final User user = new User( 11 );
-		final User voter = User.NOT_LOGGED_USER;
+		final User voter = NOT_LOGGED_USER;
 
 		final SecurityServiceImpl securityService = getSecurityService();
 		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );

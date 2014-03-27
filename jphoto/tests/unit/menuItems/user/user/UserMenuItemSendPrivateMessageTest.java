@@ -27,9 +27,9 @@ public class UserMenuItemSendPrivateMessageTest extends AbstractUserMenuItemTest
 	@Test
 	public void notLoggedUserCanNotSeeMenuTest() {
 
-		final Parameters parameters = new Parameters( User.NOT_LOGGED_USER, false );
+		final Parameters parameters = new Parameters( NOT_LOGGED_USER, false );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemSendPrivateMessage( user, User.NOT_LOGGED_USER, getServicesSendMessage( parameters ) ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new UserMenuItemSendPrivateMessage( user, NOT_LOGGED_USER, getServicesSendMessage( parameters ) ).isAccessibleFor() );
 	}
 
 	@Test

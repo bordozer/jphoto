@@ -16,7 +16,7 @@ public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest
 
 	@Test
 	public void notLoggedUserCanNotSeeLockPhotoAuthorMenuTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+		final User accessor = NOT_LOGGED_USER;
 		doAssertFalse( accessor, getServicesForTest( accessor ) );
 	}
 
@@ -61,7 +61,7 @@ public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest
 
 	@Test
 	public void cssClassTest() {
-		final User accessor = User.NOT_LOGGED_USER; // does not matter
+		final User accessor = NOT_LOGGED_USER; // does not matter
 		final PhotoAdminSubMenuItemLockPhotoAuthor menuItem = new PhotoAdminSubMenuItemLockPhotoAuthor( testData.getPhoto(), accessor, getServicesForTest( accessor ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );

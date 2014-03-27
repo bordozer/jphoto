@@ -6,7 +6,6 @@ import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
-import core.services.translator.Language;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;

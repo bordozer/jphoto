@@ -15,7 +15,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+		final User accessor = NOT_LOGGED_USER;
 		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentAdminSubMenuItem( testData.getComment(), accessor, services ).isAccessibleFor() );
@@ -88,7 +88,7 @@ public class CommentAdminSubMenuItemTest extends AbstractCommentMenuItemTest_ {
 
 	@Test
 	public void cssClassTest() {
-		final User user = User.NOT_LOGGED_USER; // does not matter
+		final User user = NOT_LOGGED_USER; // does not matter
 		final Services services = getServices( user );
 		final CommentAdminSubMenuItem menuItem = new CommentAdminSubMenuItem( testData.getComment(), user, services );
 

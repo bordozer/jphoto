@@ -15,7 +15,7 @@ public class PhotoAdminSubMenuItemTest extends AbstractPhotoMenuItemTest_ {
 
 	@Test
 	public void notLoggedUserCanNotSeeAdminSubMenuTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+		final User accessor = NOT_LOGGED_USER;
 		final Services services = getServices( accessor );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new PhotoAdminSubMenuItem( testData.getPhoto(), accessor, services ).isAccessibleFor() );

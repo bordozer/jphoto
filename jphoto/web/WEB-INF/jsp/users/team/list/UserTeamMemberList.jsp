@@ -13,7 +13,7 @@
 
 <c:set var="userTeamMembers" value="${userTeamMemberListModel.userTeamMembers}" />
 <c:set var="userTeamMemberPhotosQtyMap" value="${userTeamMemberListModel.userTeamMemberPhotosQtyMap}" />
-<c:set var="canEdit" value="<%=UserUtils.isUserEqualsToCurrentUser( userTeamMemberListModel.getUser() )%>" />
+<c:set var="canEdit" value="<%=UserUtils.isTheUserThatWhoIsCurrentUser( userTeamMemberListModel.getUser() )%>" />
 
 <tags:page pageModel="${userTeamMemberListModel.pageModel}">
 

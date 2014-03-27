@@ -2,7 +2,6 @@ package core.general.user;
 
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
-import core.exceptions.BaseRuntimeException;
 import core.general.base.AbstractBaseEntity;
 import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Cacheable;
@@ -16,8 +15,6 @@ import java.util.Set;
 
 
 public class User extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable {
-
-	private static final String CAN_NOT_SET_PROPERTY_MESSAGE = "Can not set property of read-only user!";
 
 	private String login;
 	private String name;
@@ -211,11 +208,6 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 	}
 
 	@Override
-	public String toString() {
-		return String.format( "#%d: %s", getId(), getName() );
-	}
-
-	@Override
 	public int hashCode() {
 		return getId();
 	}
@@ -238,65 +230,12 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 		return user.getId() == getId();
 	}
 
+	@Override
+	public String toString() {
+		return String.format( "#%d: %s", getId(), getName() );
+	}
+
 	public int getPhotoQtyOnPage() {
 		return getPhotosInLine() * getPhotoLines();
 	}
-
-	public static final User NOT_LOGGED_USER = new User() {
-
-		@Override
-		public int getId() {
-			return -1;
-		}
-
-		@Override
-		public String getName() {
-			return "NOT LOGGED USER";
-		}
-
-		@Override
-		public int getPhotosInLine() {
-			return 4; // TODO: SystemVarsServiceImpl.getPhotosInLineForNotLoggedUsers();
-		}
-
-		@Override
-		public int getPhotoLines() {
-			return 4; // TODO: SystemVarsServiceImpl.getPhotoLinesForNotLoggedUsers();
-		}
-
-		@Override
-		public void setName( final String name ) {
-			throw new BaseRuntimeException( CAN_NOT_SET_PROPERTY_MESSAGE );
-		}
-
-		@Override
-		public void setLogin( final String login ) {
-			throw new BaseRuntimeException( CAN_NOT_SET_PROPERTY_MESSAGE );
-		}
-
-		@Override
-		public void setEmail( final String email ) {
-			throw new BaseRuntimeException( CAN_NOT_SET_PROPERTY_MESSAGE );
-		}
-
-		@Override
-		public void setDateOfBirth( final Date dateOfBirth ) {
-			throw new BaseRuntimeException( CAN_NOT_SET_PROPERTY_MESSAGE );
-		}
-
-		@Override
-		public void setHomeSite( final String homeSite ) {
-			throw new BaseRuntimeException( CAN_NOT_SET_PROPERTY_MESSAGE );
-		}
-
-		@Override
-		public UserMembershipType getMembershipType() {
-			return UserMembershipType.AUTHOR;
-		}
-
-		@Override
-		public Language getLanguage() {
-			return Language.EN;
-		}
-	};
 }

@@ -16,7 +16,7 @@ public class PhotoMenuItemSendPrivateMessageTest extends AbstractPhotoMenuItemTe
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+		final User accessor = NOT_LOGGED_USER;
 
 		final ServicesImpl services = getServices( accessor );
 

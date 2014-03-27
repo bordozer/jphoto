@@ -9,6 +9,7 @@ import core.general.user.User;
 import core.services.dao.FavoritesDao;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.UserUtils;
@@ -33,6 +34,9 @@ public class FavoritesServiceImpl implements FavoritesService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private UserService userService;
+
 	@Override
 	public boolean isEntryInFavorites( final int userId, final int beingAddedEntryId, final int entryTypeId ) {
 		return getFavoriteEntry( userId, beingAddedEntryId, FavoriteEntryType.getById( entryTypeId ) ) != null;
@@ -48,10 +52,20 @@ public class FavoritesServiceImpl implements FavoritesService {
 		boolean isSuccessful;
 		String message = "";
 
-		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
+		// TODO: change a test if exists
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
 			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		// TODO: make a test
+		if ( ! UserUtils.isTheUserThatWhoIsCurrentUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "Wrong account", EnvironmentContext.getLanguage() ) );
 
 			return ajaxResultDTO;
 		}
@@ -80,10 +94,20 @@ public class FavoritesServiceImpl implements FavoritesService {
 		boolean isSuccessful;
 		String message = "";
 
-		if ( ! UserUtils.isLoggedUser( userId ) || !UserUtils.isUserEqualsToCurrentUser( userId ) ) {
+		// TODO: change a test if exists
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
 			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
 			ajaxResultDTO.setSuccessful( false );
 			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		// TODO: make a test
+		if ( !UserUtils.isTheUserThatWhoIsCurrentUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "Wrong account", EnvironmentContext.getLanguage() ) );
 
 			return ajaxResultDTO;
 		}

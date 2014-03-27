@@ -5,7 +5,6 @@ import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuType;
 import core.general.photo.PhotoComment;
-import core.services.translator.Language;
 import org.junit.Test;
 
 import java.util.List;

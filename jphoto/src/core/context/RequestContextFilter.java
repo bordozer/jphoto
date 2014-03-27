@@ -5,7 +5,6 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
-import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 import utils.PhotoUtils;
@@ -31,9 +30,6 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	@Autowired
 	private UsersSecurityService usersSecurityService;
 
-	@Autowired
-	private SystemVarsService systemVarsService;
-
 	@Override
 	protected void doFilterInternal( final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain ) throws ServletException, IOException {
 
@@ -46,9 +42,9 @@ public class RequestContextFilter extends OncePerRequestFilter {
 			setEnvironmentUserFromCookie( request, environment );
 		} else {
 			environment = getSessionEnvironment( session );
-			if ( environment == null ) {
+			/*if ( environment == null ) {
 				environment = createSessionEnvironment( session ); // Again because session could be alive after the tomcat restart
-			}
+			}*/
 		}
 
 		environment.setDeviceType( PhotoUtils.getDeviceType( request ) );
@@ -87,7 +83,9 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	}
 
 	private Environment createSessionEnvironment( final HttpSession session ) {
-		final Environment environment = EnvironmentContext.getNullEnvironment();
+		final User sessionUser = userService.getNotLoggedTemporaryUser();
+
+		final Environment environment = new Environment( sessionUser );
 
 		session.setAttribute( ENVIRONMENT_SESSION_KEY, environment );
 
@@ -95,7 +93,6 @@ public class RequestContextFilter extends OncePerRequestFilter {
 	}
 
 	private Environment getSessionEnvironment( final HttpSession session ) {
-		//		return new Environment ( ( Environment ) session.getAttribute( ENVIRONMENT_SESSION_KEY ) );
 		return ( Environment ) session.getAttribute( ENVIRONMENT_SESSION_KEY );
 	}
 }

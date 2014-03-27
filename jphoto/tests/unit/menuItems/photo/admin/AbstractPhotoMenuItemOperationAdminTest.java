@@ -20,7 +20,7 @@ public class AbstractPhotoMenuItemOperationAdminTest extends AbstractPhotoMenuIt
 
 	@Test
 	public void notLoggedUserCanNotSeeDeletePhotoMenuTest() {
-		final Parameters parameters = new Parameters( User.NOT_LOGGED_USER );
+		final Parameters parameters = new Parameters( NOT_LOGGED_USER );
 		doAssertFalse( parameters, getServicesForTest( parameters ) );
 	}
 

@@ -7,6 +7,7 @@ import core.general.user.UserStatus;
 import core.interfaces.AllEntriesLoadable;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
+import core.services.translator.Language;
 import sql.SqlSelectResult;
 import sql.builder.SqlIdsSelectQuery;
 
@@ -42,4 +43,8 @@ public interface UserService extends BaseEntityService<User>, AllEntriesLoadable
 	PhotoActionAllowance getUserPhotoCommentAllowance( final User user );
 
 	PhotoActionAllowance getUserPhotoVotingAllowance( final User user );
+
+	User getNotLoggedTemporaryUser();
+
+	User getNotLoggedTemporaryUser( final Language language );
 }

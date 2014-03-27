@@ -18,7 +18,7 @@ public class CommentMenuItemSendPrivateMessageTest extends AbstractCommentMenuIt
 
 	@Test
 	public void notLoggedUserCanNotReplyCommentTest() {
-		final User accessor = User.NOT_LOGGED_USER;
+		final User accessor = NOT_LOGGED_USER;
 
 		final Services services = getServices( accessor );
 

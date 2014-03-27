@@ -52,7 +52,7 @@ public class UserGenreRankVotingValidator implements Validator {
 	}
 
 	private void validateThatUserDoesNotVoteForOwnRanks( final UserGenreRankVotingModel model, final Errors errors ) {
-		if ( UserUtils.isUserEqualsToCurrentUser( model.getUser() ) ) {
+		if ( UserUtils.isTheUserThatWhoIsCurrentUser( model.getUser() ) ) {
 			errors.reject( translatorService.translate( "Voting error", EnvironmentContext.getLanguage() ), translatorService.translate( "You can not vote for your oun rank", EnvironmentContext.getLanguage() ) );
 		}
 	}

@@ -42,6 +42,9 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 	@Autowired
 	private DataRequirementService dataRequirementService;
 
+	@Autowired
+	private UserService userService;
+
 	@Override
 	public boolean isUserPasswordCorrect( final User user, final String password ) {
 		UsersSecurity usersSecurity = usersSecurityDao.load( user );
@@ -82,7 +85,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 			resetStoredAuthorizationKey( user );
 		}
 
-		EnvironmentContext.switchUser( User.NOT_LOGGED_USER );
+		switchUser( user );
 	}
 
 	@Override
@@ -95,7 +98,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		final UsersSecurity usersSecurity = usersSecurityDao.load( user );
 
 		if ( usersSecurity == null ) {
-			EnvironmentContext.switchUser( User.NOT_LOGGED_USER );
+			switchUser( user );
 			return;
 		}
 
@@ -176,6 +179,10 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 	@Override
 	public String getStoredUserAuthorizationKey( final User user ) {
 		return usersSecurityDao.load( user ).getAuthorizationKey();
+	}
+
+	private void switchUser( final User user ) {
+		EnvironmentContext.switchUser( userService.getNotLoggedTemporaryUser( user.getLanguage() ) ); // TODO: could user be null?
 	}
 
 	private void resetStoredAuthorizationKey( final User user ) {

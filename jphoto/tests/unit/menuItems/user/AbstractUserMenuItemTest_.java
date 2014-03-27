@@ -1,7 +1,6 @@
 package menuItems.user;
 
 import common.AbstractTestCase;
-import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.security.ServicesImpl;
 import core.services.user.UserService;
@@ -51,8 +50,8 @@ public abstract class AbstractUserMenuItemTest_ extends AbstractTestCase {
 
 		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
 
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
 
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser().getId() ) ).andReturn( false ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getUser() ) ).andReturn( false ).anyTimes();

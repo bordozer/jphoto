@@ -4,7 +4,6 @@ import admin.controllers.translator.custom.TranslationEntryType;
 import com.google.common.collect.Maps;
 import core.general.user.User;
 import core.services.dao.TranslationsDao;
-import core.services.dao.TranslationsDaoImpl;
 import core.services.security.ServicesImpl;
 import core.services.translator.*;
 import core.services.utils.*;
@@ -122,6 +121,17 @@ public class AbstractTestCase {
 		return String.format( "%s(%s)", nerd, Language.NERD.getCode() );
 	}
 
+	/*public User getNotLoggedTemporaryUser() {
+		final UserService userService = EasyMock.createMock( UserService.class );
+
+		EasyMock.expect( userService.getNotLoggedTemporaryUser() ).andReturn( NOT_LOGGED_USER ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( userService );
+
+		return NOT_LOGGED_USER;
+	}*/
+
 	public final static User SUPER_ADMIN_1 = new User() {
 		@Override
 		public int getId() {
@@ -143,6 +153,18 @@ public class AbstractTestCase {
 		@Override
 		public String getName() {
 			return "Super admin";
+		}
+	};
+
+	public final static User NOT_LOGGED_USER = new User() {
+		@Override
+		public int getId() {
+			return -1024; // MUST have negative ID
+		}
+
+		@Override
+		public String getName() {
+			return "NOT LOGGED TEST USER";
 		}
 	};
 

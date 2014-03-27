@@ -9,7 +9,7 @@
 
 <jsp:useBean id="userPhotoAlbumListModel" type="controllers.users.photoAlbums.list.UserPhotoAlbumListModel" scope="request" />
 
-<c:set var="canEdit" value="<%=UserUtils.isUserEqualsToCurrentUser( userPhotoAlbumListModel.getUser() )%>" />
+<c:set var="canEdit" value="<%=UserUtils.isTheUserThatWhoIsCurrentUser( userPhotoAlbumListModel.getUser() )%>" />
 
 <tags:page pageModel="${userPhotoAlbumListModel.pageModel}">
 

@@ -19,7 +19,7 @@ public class AbstractCommentComplaintMenuItemTest extends AbstractCommentMenuIte
 
 	@Test
 	public void notLoggedUserCanNotComplainTest() {
-		final User user = User.NOT_LOGGED_USER;
+		final User user = NOT_LOGGED_USER;
 		final Services services = getServices( user );
 
 		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, getMenuItemInstance( testData.getComment(), user, services ).isAccessibleFor() );

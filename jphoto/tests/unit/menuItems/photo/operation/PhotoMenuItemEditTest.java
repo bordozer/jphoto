@@ -45,8 +45,8 @@ public class PhotoMenuItemEditTest extends AbstractPhotoMenuItemTest_ {
 
 		EasyMock.expect( securityService.userOwnThePhoto( accessor, testData.getPhoto().getId() ) ).andReturn( testData.getPhoto().getUserId() == accessor.getId() ).anyTimes();
 
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
-		EasyMock.expect( securityService.isSuperAdminUser( User.NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( NOT_LOGGED_USER.getId() ) ).andReturn( false ).anyTimes();
+		EasyMock.expect( securityService.isSuperAdminUser( NOT_LOGGED_USER ) ).andReturn( false ).anyTimes();
 
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor().getId() ) ).andReturn( false ).anyTimes();
 		EasyMock.expect( securityService.isSuperAdminUser( testData.getAccessor() ) ).andReturn( false ).anyTimes();

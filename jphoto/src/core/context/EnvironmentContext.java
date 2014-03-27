@@ -60,8 +60,4 @@ public class EnvironmentContext {
 	public static void setEnv( final Environment env ) {
 		environment.set( env );
 	}
-
-	public static Environment getNullEnvironment() {
-		return new Environment( User.NOT_LOGGED_USER );
-	}
 }

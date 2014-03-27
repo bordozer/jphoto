@@ -56,7 +56,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanEditPhoto( photoAuthor, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( justUser, photo ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( NOT_LOGGED_USER, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhoto( SUPER_ADMIN_1, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_USER_DATA ).userCanEditPhoto( SUPER_ADMIN_1, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_DELETE_PHOTO ).userCanEditPhoto( SUPER_ADMIN_1, photo ) );
@@ -80,7 +80,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanDeletePhoto( photoAuthor, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( justUser, photo ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( NOT_LOGGED_USER, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhoto( SUPER_ADMIN_1, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO ).userCanDeletePhoto( SUPER_ADMIN_1, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_USER_DATA ).userCanDeletePhoto( SUPER_ADMIN_1, photo ) );
@@ -104,7 +104,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanVoteForPhoto( justUser, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanVoteForPhoto( photoAuthor, photo ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanVoteForPhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanVoteForPhoto( NOT_LOGGED_USER, photo ) );
 	}
 
 	@Test
@@ -124,7 +124,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userOwnThePhoto( photoAuthor, photo ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userOwnThePhoto( justUser, photo ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userOwnThePhoto( User.NOT_LOGGED_USER, photo ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userOwnThePhoto( NOT_LOGGED_USER, photo ) );
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanEditUserData( photoAuthor, photoAuthor ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( justUser, photoAuthor ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( User.NOT_LOGGED_USER, photoAuthor ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( NOT_LOGGED_USER, photoAuthor ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditUserData( SUPER_ADMIN_1, photoAuthor ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_DELETE_PHOTO ).userCanEditUserData( SUPER_ADMIN_1, photoAuthor ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), getSecurityService( ADMIN_CAN_EDIT_PHOTO ).userCanEditUserData( SUPER_ADMIN_1, photoAuthor ) );
@@ -158,7 +158,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		final SecurityService securityService = getSecurityService();
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanSeeUserRankVoteHistory( historyOwner, historyOwner ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanSeeUserRankVoteHistory( historyOwner, visitor ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanSeeUserRankVoteHistory( historyOwner, User.NOT_LOGGED_USER ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanSeeUserRankVoteHistory( historyOwner, NOT_LOGGED_USER ) );
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanSeeUserRankVoteHistory( historyOwner, SUPER_ADMIN_1 ) );
 	}
 
@@ -202,8 +202,8 @@ public class SecurityServiceTest extends AbstractTestCase {
 		securityService.setUserService( getUserService( justUser ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( justUser, comment ) );
 
-		securityService.setUserService( getUserService( User.NOT_LOGGED_USER ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( User.NOT_LOGGED_USER, comment ) );
+		securityService.setUserService( getUserService( NOT_LOGGED_USER ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( NOT_LOGGED_USER, comment ) );
 
 		securityService.setUserService( getUserService( SUPER_ADMIN_1 ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanEditPhotoComment( SUPER_ADMIN_1, comment ) );
@@ -252,8 +252,8 @@ public class SecurityServiceTest extends AbstractTestCase {
 		securityService.setUserService( getUserService( justUser ) );
 		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhotoComment( justUser, comment ) );
 
-		securityService.setUserService( getUserService( User.NOT_LOGGED_USER ) );
-		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhotoComment( User.NOT_LOGGED_USER, comment ) );
+		securityService.setUserService( getUserService( NOT_LOGGED_USER ) );
+		assertFalse( String.format( MUST_BE_FALSE_BUT_TRUE ), securityService.userCanDeletePhotoComment( NOT_LOGGED_USER, comment ) );
 
 		securityService.setUserService( getUserService( SUPER_ADMIN_1 ) );
 		assertTrue( String.format( MUST_BE_TRUE_BUT_FALSE ), securityService.userCanDeletePhotoComment( SUPER_ADMIN_1, comment ) );
@@ -534,18 +534,18 @@ public class SecurityServiceTest extends AbstractTestCase {
 		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, photoAuthor ) );
 		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserNoNudeContent ) );
 		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserWithNudeContent ) );
-		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, User.NOT_LOGGED_USER ) );
+		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, NOT_LOGGED_USER ) );
 
 		assertFalse( String.format( "Photo author can not see nude content of his own photo" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, photoAuthor ) );
 		assertTrue( String.format( "User switched off nude content but can see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserNoNudeContent ) );
 		assertFalse( String.format( "User switched on nude content but can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserWithNudeContent ) );
-		assertTrue( String.format( "Not logged user can see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, User.NOT_LOGGED_USER ) );
+		assertTrue( String.format( "Not logged user can see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
 
-		final Environment env = new Environment( User.NOT_LOGGED_USER );
+		final Environment env = new Environment( NOT_LOGGED_USER );
 		env.setShowNudeContent( true );
 
 		EnvironmentContext.setEnv( env );
-		assertFalse( String.format( "Not logged user confirmed nude content can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, User.NOT_LOGGED_USER ) );
+		assertFalse( String.format( "Not logged user confirmed nude content can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
 
 		assertFalse( String.format( "Super Admin can not see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, SUPER_ADMIN_1 ) );
 	}

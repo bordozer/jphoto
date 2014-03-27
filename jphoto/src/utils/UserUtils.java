@@ -15,7 +15,7 @@ public class UserUtils {
 	}
 
 	public static boolean isLoggedUser( final int userId ) {
-		return userId > 0 && ! isUsersEqual( userId, User.NOT_LOGGED_USER.getId() );
+		return userId > 0;
 	}
 
 	public static boolean isLoggedUser( final User user ) {
@@ -26,11 +26,11 @@ public class UserUtils {
 		return isLoggedUser( EnvironmentContext.getCurrentUser() );
 	}
 
-	public static boolean isUserEqualsToCurrentUser( final User user ) {
-		return isUserEqualsToCurrentUser( user.getId() );
+	public static boolean isTheUserThatWhoIsCurrentUser( final User user ) {
+		return isTheUserThatWhoIsCurrentUser( user.getId() );
 	}
 
-	public static boolean isUserEqualsToCurrentUser( final int userId ) {
+	public static boolean isTheUserThatWhoIsCurrentUser( final int userId ) {
 		return isLoggedUser( userId ) && isUsersEqual( EnvironmentContext.getCurrentUser().getId(), userId );
 	}
 

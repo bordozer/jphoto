@@ -19,7 +19,7 @@ public class AbstractPhotoGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 	@Test
 	public void notLoggedUserCanNotSeeMenuIfThereIsLessThenOnePhotoTest() {
-		goAssertFalse( new GoToParameters( User.NOT_LOGGED_USER, 1 ) );
+		goAssertFalse( new GoToParameters( NOT_LOGGED_USER, 1 ) );
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class AbstractPhotoGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 
 	@Test
 	public void notLoggedUserCanSeeMenuIfThereIsMoreThenOnePhotosTest() {
-		doAssertTrue( new GoToParameters( User.NOT_LOGGED_USER, 2 ) );
+		doAssertTrue( new GoToParameters( NOT_LOGGED_USER, 2 ) );
 	}
 
 	@Test

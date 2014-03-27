@@ -14,7 +14,7 @@
 <jsp:useBean id="pagingModel" type="core.general.base.PagingModel" scope="request"/>
 
 <%
-	final boolean userEqualsToLoggedUser = UserUtils.isUserEqualsToCurrentUser( photoCommentsListModel.getUser() );
+	final boolean userEqualsToLoggedUser = UserUtils.isTheUserThatWhoIsCurrentUser( photoCommentsListModel.getUser() );
 %>
 
 <c:set var="isLoggedUserLokingOnOwnUnreadMessages" value="<%=userEqualsToLoggedUser%>" />

@@ -7,7 +7,6 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.ServicesImpl;
-import core.services.translator.Language;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;

@@ -110,7 +110,7 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found", language ) );
 		}
 
-		if ( !UserUtils.isUserEqualsToCurrentUser( fromUser ) ) {
+		if ( !UserUtils.isTheUserThatWhoIsCurrentUser( fromUser ) ) {
 			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?", language ) );
 		}
 

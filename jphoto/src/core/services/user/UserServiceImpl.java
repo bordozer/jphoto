@@ -11,6 +11,9 @@ import core.services.dao.UserDao;
 import core.services.entry.ActivityStreamService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
+import core.services.utils.DateUtilsService;
+import core.services.utils.SystemVarsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ import sql.builder.SqlIdsSelectQuery;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -43,6 +47,14 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	private final AtomicInteger sessionUserCounter = new AtomicInteger( 1 );
 
 	@Override
 	public SqlSelectIdsResult load( final SqlIdsSelectQuery selectIdsQuery ) {
@@ -188,6 +200,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean exists( final User entry ) {
 		return userDao.exists( entry );
+	}
+
+	@Override
+	public User getNotLoggedTemporaryUser() {
+		return getNotLoggedTemporaryUser( systemVarsService.getSystemDefaultLanguage() );
+	}
+
+	@Override
+	public User getNotLoggedTemporaryUser( final Language language ) {
+		final User user = new User( - getSessionUserUniqueId() );
+
+		user.setLanguage( language );
+		user.setRegistrationTime( dateUtilsService.getCurrentTime() );
+		user.setName( "NOT LOGGED USER" );
+		user.setPhotoLines( systemVarsService.getPhotoLinesForNotLoggedUsers() );
+		user.setPhotosInLine( systemVarsService.getPhotosInLineForNotLoggedUsers() );
+
+		return user;
+	}
+
+	private int getSessionUserUniqueId() {
+		synchronized ( sessionUserCounter ) {
+			return sessionUserCounter.getAndIncrement();
+		}
 	}
 
 	private UserAvatar loadUserAvatar( final int userId ) {

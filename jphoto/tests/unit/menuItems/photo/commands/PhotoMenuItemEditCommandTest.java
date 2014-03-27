@@ -4,7 +4,6 @@ import common.AbstractTestCase;
 import core.general.menus.photo.commands.PhotoMenuItemEditCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.services.translator.Language;
 import org.junit.Before;
 import org.junit.Test;
 

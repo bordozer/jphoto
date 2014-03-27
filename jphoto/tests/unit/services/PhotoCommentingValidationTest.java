@@ -32,7 +32,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = getSecurityService();
 
-		assertTrue( "Not Logged User Can leave comment", securityService.validateUserCanCommentPhoto( User.NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Not Logged User Can leave comment", securityService.validateUserCanCommentPhoto( NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test

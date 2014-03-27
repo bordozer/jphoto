@@ -33,7 +33,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = getSecurityService();
 
-		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( User.NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Not Logged User Can vote", securityService.validateUserCanVoteForPhoto( NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
 	}
 
 	@Test

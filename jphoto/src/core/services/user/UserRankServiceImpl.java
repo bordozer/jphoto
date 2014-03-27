@@ -21,6 +21,7 @@ import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.userRankIcons.UserRankIconContainer;
+import utils.UserUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -150,7 +151,7 @@ public class UserRankServiceImpl implements UserRankService {
 
 	@Override
 	public int getUserHighestPositiveMarkInGenre( final int userId, final int genreId ) {
-		if ( userId == User.NOT_LOGGED_USER.getId() ) {
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
 			return 0;
 		}
 
@@ -179,7 +180,7 @@ public class UserRankServiceImpl implements UserRankService {
 	@Override
 	public int getUserLowestNegativeMarkInGenre( final int userId, final int genreId ) {
 
-		if ( userId == User.NOT_LOGGED_USER.getId() ) {
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
 			return 0;
 		}
 
