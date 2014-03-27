@@ -218,8 +218,8 @@ public class UserGenerationJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Users: ", getLanguage() ) ).append( totalJopOperations ).append( "<br />" );
-		builder.append( translatorService.translate( "Avatars: ", getLanguage() ) ).append( avatarsDir );
+		builder.append( translatorService.translate( "Users to generate", getLanguage() ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translatorService.translate( "Avatars dir", getLanguage() ) ).append( ": " ).append( avatarsDir );
 
 		return builder.toString();
 	}

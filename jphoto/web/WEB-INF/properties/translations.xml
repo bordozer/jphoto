@@ -2463,13 +2463,48 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Latest photo qty</nerd>
+		<ru><![CDATA[Ограничиться к-вом работ из числа последних]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Date to</nerd>
+		<ru><![CDATA[Дата по]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Date range</nerd>
+		<ru><![CDATA[Диапазон дат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Date from</nerd>
+		<ru><![CDATA[Дата с]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period</nerd>
+		<ru><![CDATA[Период времени]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job name</nerd>
+		<ru><![CDATA[Название задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Users to generate</nerd>
+		<ru><![CDATA[К-во потзователей к генерации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Avatars dir</nerd>
+		<ru><![CDATA[Папка с аватарами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Save job '$1' as copy</nerd>
+		<ru><![CDATA[Сохранить задачу '$1' как копию]]></ru>
 	</translation>
 
 	<translation>
