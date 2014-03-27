@@ -6,6 +6,7 @@ import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.Language;
 
 public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMenuItem {
 
@@ -23,10 +24,10 @@ public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMen
 
 		final User commentAuthor = menuEntry.getCommentAuthor();
 
-		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, services ) {
+		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Lock comment author: $1", commentAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "Lock comment author: $1", getLanguage(), commentAuthor.getNameEscaped() );
 			}
 
 			@Override

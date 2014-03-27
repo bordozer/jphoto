@@ -588,12 +588,12 @@ public class PhotoServiceImpl implements PhotoService {
 				String dateInterval;
 				final String currentDate = dateUtilsService.formatDate( dateUtilsService.getCurrentDate() );
 				if ( areDatesEquals && dateFrom.equals( currentDate ) ) {
-					dateInterval = "today";
+					dateInterval = translatorService.translate( "today", accessor.getLanguage() );
 				} else {
 					dateInterval = areDatesEquals ? dateFrom : String.format( "%s - %s", dateFrom, dateTo );
 				}
 
-				final String photoRatingPositionDescription = translatorService.translate( "Photo's rating position on $1", dateInterval );
+				final String photoRatingPositionDescription = translatorService.translate( "Photo's rating position on $1", accessor.getLanguage(), dateInterval );
 				photoInfo.setPhotoRatingPositionDescription( photoRatingPositionDescription );
 			}
 		}

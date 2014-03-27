@@ -12,6 +12,7 @@ import core.services.entry.GenreService;
 import core.services.entry.PrivateMessageService;
 import core.services.photo.PhotoCommentService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
@@ -83,6 +84,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	@Override
 	public String renderPageHeader( final PageModel pageModel ) {
 		final User currentUser = EnvironmentContext.getCurrentUser(); // TODO: EnvironmentContext in a service!
+		final Language language = currentUser.getLanguage();
 
 		final PageTitleData dataPage = pageModel.getPageTitleData();
 
@@ -107,7 +109,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "registerurl", urlUtilsService.getUserNewLink() );
 
 		model.put( "progectname", systemVarsService.getProjectName() );
-		model.put( "slogan", translatorService.translate( "Post your soul here" ) );
+		model.put( "slogan", translatorService.translate( "Post your soul here", language ) );
 
 		final Map<MenuItem,List<MenuItem>> menuElements = menuService.getMenuElements( currentUser );
 		final int menuElementsQty = menuElements.size();
@@ -118,23 +120,23 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "loginFormAction", urlUtilsService.getUserLoginLink() );
 		model.put( "showLoginForm", pageModel.isShowLoginForm() );
-		model.put( "loginFormLogin", translatorService.translate( "Login" ) );
-		model.put( "rememberMeText", translatorService.translate( "Remember me" ) );
+		model.put( "loginFormLogin", translatorService.translate( "Login", language ) );
+		model.put( "rememberMeText", translatorService.translate( "Remember me", language ) );
 
-		model.put( "loginFormPassword", translatorService.translate( "Password" ) );
+		model.put( "loginFormPassword", translatorService.translate( "Password", language ) );
 		model.put( "defaultDebugPassword", UsersSecurity.DEFAULT_DEBUG_PASSWORD );
 		model.put( "loginFormLoginControl", UserLoginModel.LOGIN_FORM_LOGIN_CONTROL );
 		model.put( "loginFormPasswordControl", UserLoginModel.LOGIN_FORM_PASSWORD_CONTROL );
 		model.put( "loginUserAutomaticallyControl", UserLoginModel.LOGIN_FORM_LOGIN_USER_AUTOMATICALLY_CONTROL );
 
-		model.put( "logoutText", translatorService.translate( "Logout" ) );
+		model.put( "logoutText", translatorService.translate( "Logout", language ) );
 
 		model.put( "loggedUserId", currentUser.getId() );
 		model.put( "loggedUserName", StringUtilities.escapeHtml( currentUser.getName() ) );
 		model.put( "loggedUserCardUrl", urlUtilsService.getUserCardLink( currentUser.getId() ) );
-		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card" ) );
+		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card", language ) );
 
-		model.put( "uploadPhotoText", translatorService.translate( "Upload photo" ) );
+		model.put( "uploadPhotoText", translatorService.translate( "Upload photo", language ) );
 		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURLWithPrefix() );
 
@@ -144,7 +146,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 			model.put( "isSchedulerRunning", false );
 		}
 		model.put( "schedulerIsStoppedIcon", String.format( "<img src=\"%s/scheduler/SchedulerIsStopped.png\" height=\"16\" width=\"16\" title=\"%s\" />"
-			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!" ) ) );
+			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!", language ) ) );
 
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {
@@ -157,7 +159,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		if ( unreadCommentsQty > 0 ) {
 			unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
 				, urlUtilsService.getUnreadCommentsToUserList( currentUser.getId() )
-				, translatorService.translate( "You have $1 new comment(s)", unreadCommentsQty )
+				, translatorService.translate( "You have $1 new comment(s)", language, String.valueOf( unreadCommentsQty ) )
 				, urlUtilsService.getSiteImagesPath()
 				, unreadCommentsQty
 			);
@@ -186,7 +188,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		final List<Genre> genres = genreService.loadAll();
 		final List<String> genreLinks = newArrayList();
 		for ( Genre genre : genres ) {
-			String genreLink = entityLinkUtilsService.getPhotosByGenreLink( genre, currentUser.getLanguage() );
+			String genreLink = entityLinkUtilsService.getPhotosByGenreLink( genre, language );
 			genreLinks.add( genreLink );
 		}
 		model.put( "genres", genres );

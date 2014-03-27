@@ -7,6 +7,7 @@ import core.services.entry.FavoritesService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
+import core.services.translator.Language;
 import core.services.user.UserService;
 import org.apache.commons.lang.StringUtils;
 import utils.UserUtils;
@@ -102,5 +103,9 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	protected String getGenreNameTranslated( final Genre genre ) {
 		return services.getTranslatorService().translateGenre( genre, accessor.getLanguage() );
+	}
+
+	protected Language getLanguage() {
+		return accessor.getLanguage();
 	}
 }

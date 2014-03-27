@@ -54,7 +54,7 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem {
 	}
 
 	public EntryMenu getEntrySubMenu() {
-		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), accessor.getLanguage(), services );
+		return new EntryMenu( menuEntry, EntryMenuType.COMMENT, getSubMenus(), getLanguage(), services );
 	}
 
 	@Override
