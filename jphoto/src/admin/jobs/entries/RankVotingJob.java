@@ -87,8 +87,8 @@ public class RankVotingJob extends AbstractJob {
 //			getLog().debug( String.format( "User %s is voting for %s in genre %s (mark %s)", votingUser.getId(), beingVotedUser.getId(), genreId, accessibleVotingPoints ) );
 
 			addJobExecutionFinalMessage( String.format( "User %s has voted for %s's rank in %s ( %s )"
-				, entityLinkUtilsService.getUserCardLink( votingUser )
-				, entityLinkUtilsService.getUserCardLink( beingVotedUser )
+				, entityLinkUtilsService.getUserCardLink( votingUser, getLanguage() )
+				, entityLinkUtilsService.getUserCardLink( beingVotedUser, getLanguage() )
 				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, getLanguage() )
 				, randomVotingPoints )
 			);

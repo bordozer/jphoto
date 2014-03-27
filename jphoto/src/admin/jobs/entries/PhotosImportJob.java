@@ -159,7 +159,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final int userId = fsParameters.getAssignAllGeneratedPhotosToUserId();
 				if ( userId > 0 ) {
 					final User user = services.getUserService().load( userId );
-					builder.append( translatorService.translate( "User Id", getLanguage() ) ).append( ": " ).append( services.getEntityLinkUtilsService().getUserCardLink( user ) ).append( "<br />" );
+					builder.append( translatorService.translate( "User Id", getLanguage() ) ).append( ": " ).append( services.getEntityLinkUtilsService().getUserCardLink( user, getLanguage() ) ).append( "<br />" );
 				}
 
 				addDateRangeParameters( builder );

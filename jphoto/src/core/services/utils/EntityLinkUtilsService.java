@@ -20,9 +20,9 @@ public interface EntityLinkUtilsService {
 
 	String getPortalPageLink();
 
-	String getUserCardLink( User user );
+	String getUserCardLink( User user, final Language language );
 
-	String getUserCardLink( User user, String name );
+	String getUserCardLink( User user, String name, final Language language );
 
 	String getPhotosByUserLink( User user, final Language language );
 

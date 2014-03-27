@@ -2298,8 +2298,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1: all photos</nerd>
+		<ru><![CDATA[$1: все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: card</nerd>
+		<ru><![CDATA[$1: карточка]]></ru>
 	</translation>
 
 	<translation>

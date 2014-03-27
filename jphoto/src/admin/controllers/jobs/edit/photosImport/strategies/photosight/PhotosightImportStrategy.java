@@ -514,7 +514,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		if ( existingUser != null ) {
 
-			job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "Existing user found: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( existingUser ) ) );
+			job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "Existing user found: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( existingUser, language ) ) );
 
 			return existingUser;
 		}
@@ -531,7 +531,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			throw new BaseRuntimeException( "Can not create user" );
 		}
 
-		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "New user has been created: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( user ) ) );
+		job.addJobExecutionFinalMessage( services.getTranslatorService().translate( "New user has been created: $1", importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( user, language ) ) );
 
 		return user;
 	}

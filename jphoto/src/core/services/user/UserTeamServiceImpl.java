@@ -110,7 +110,7 @@ public class UserTeamServiceImpl implements UserTeamService {
 			userPickerDTO.setUserId( String.valueOf( user.getId() ) );
 			userPickerDTO.setUserName( user.getName() );
 			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
-			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
+			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
 			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
 			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
 

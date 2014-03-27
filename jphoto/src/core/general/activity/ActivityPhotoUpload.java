@@ -31,7 +31,7 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 			return services.getConfigurationService().getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
 		}
 
-		return services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( activityOfPhoto.getUserId() ) );
+		return services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( activityOfPhoto.getUserId() ), getCurrentUserLanguage() );
 	}
 
 	@Override

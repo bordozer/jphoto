@@ -41,23 +41,24 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getUserCardLink( final User user ) {
-		return getUserCardLink( user, user.getName() );
+	public String getUserCardLink( final User user, final Language language ) {
+		return getUserCardLink( user, user.getName(), language );
 	}
 
 	@Override
-	public String getUserCardLink( final User user, final String name ) {
-		return String.format( "<a class=\"member-link\" href=\"%1$s\" title=\"%2$s: card\">%2$s</a>"
+	public String getUserCardLink( final User user, final String name, final Language language ) {
+		return String.format( "<a class=\"member-link\" href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getUserCardLink( user.getId() )
+			, translatorService.translate( "$1: card", language, StringUtilities.escapeHtml( user.getName() ) )
 			, StringUtilities.escapeHtml( name )
 		);
 	}
 
 	@Override
 	public String getPhotosByUserLink( final User user, final Language language ) {
-		return String.format( "<a href=\"%s\" title=\"%s: all photos\">%s</a>"
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPhotosByUserLink( user.getId() )
-			, StringUtilities.escapeHtml( user.getName() )
+			, translatorService.translate( "$1: all photos", language, StringUtilities.escapeHtml( user.getName() ) )
 			, translatorService.translate( "All user's photos", language )
 		);
 	}

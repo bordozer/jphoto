@@ -155,7 +155,7 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		if ( isHasVotedUserGoingToDoTheActionForAnotherPhotoOfPhotoAuthor ) {
 
 			final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-			addJobExecutionFinalMessage( String.format( "User %s is going to do the action for another photo of %s", entityLinkUtilsService.getUserCardLink( actionCommitter ), entityLinkUtilsService.getUserCardLink( photoAuthor ) ) );
+			addJobExecutionFinalMessage( String.format( "User %s is going to do the action for another photo of %s", entityLinkUtilsService.getUserCardLink( actionCommitter, getLanguage() ), entityLinkUtilsService.getUserCardLink( photoAuthor, getLanguage() ) ) );
 
 			final Photo randomPhotoOfPhotoAuthor = randomUtilsService.getRandomPhotoOfUser( photoAuthorId );
 			if ( doPhotoAction( randomPhotoOfPhotoAuthor, actionCommitter ) ) {
@@ -185,7 +185,7 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 			final Photo randomPhoto = randomUtilsService.getRandomPhotoOfUser( authorIdOfRandomPhotoFromLastVoted );
 
 			final User authorOfRandomPhotoFromLastVoted = userService.load( authorIdOfRandomPhotoFromLastVoted );
-			addJobExecutionFinalMessage( String.format( "User %s is going to do the action for photo of %s because %s has voted for his photos recently", entityLinkUtilsService.getUserCardLink( actionCommitter ), entityLinkUtilsService.getUserCardLink( authorOfRandomPhotoFromLastVoted ), entityLinkUtilsService.getUserCardLink( photoAuthor ) ) );
+			addJobExecutionFinalMessage( String.format( "User %s is going to do the action for photo of %s because %s has voted for his photos recently", entityLinkUtilsService.getUserCardLink( actionCommitter, getLanguage() ), entityLinkUtilsService.getUserCardLink( authorOfRandomPhotoFromLastVoted, getLanguage() ), entityLinkUtilsService.getUserCardLink( photoAuthor, getLanguage() ) ) );
 
 			if ( doPhotoAction( randomPhoto, actionCommitter ) ) {
 				doActionForPhotoOfAuthorsForWhomPhotoAuthorHasVotesRecently( authorIdOfRandomPhotoFromLastVoted, actionCommitter );

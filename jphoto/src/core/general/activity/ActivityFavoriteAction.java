@@ -79,7 +79,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 				case FRIEND:
 				case BLACKLIST:
 				case NEW_PHOTO_NOTIFICATION:
-				return linkUtilsService.getUserCardLink( services.getUserService().load( favoriteEntryId ) );
+				return linkUtilsService.getUserCardLink( services.getUserService().load( favoriteEntryId ), getCurrentUserLanguage() );
 			case PHOTO:
 				case BOOKMARK:
 				case NEW_COMMENTS_NOTIFICATION:

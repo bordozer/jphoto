@@ -55,7 +55,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 					getLog().info( String.format( "User %s has bees given a new rank %s in %s (the previous one was %s)", user, userNewRank, genre, userCurrentRank ) );
 
 					addJobExecutionFinalMessage( String.format( "User %s has bees given a new rank %s in %s ( the previous one was %s )"
-						, entityLinkUtilsService.getUserCardLink( user )
+						, entityLinkUtilsService.getUserCardLink( user, getLanguage() )
 						, userNewRank
 						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() )
 						, userCurrentRank ) );

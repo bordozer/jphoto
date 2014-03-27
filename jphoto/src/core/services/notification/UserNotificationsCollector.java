@@ -410,7 +410,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	protected String getUserCardLink( final User photoAuthor ) {
-		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor );
+		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor, Language.EN ); // TODO: pass addressat language here
 	}
 
 	private static boolean isUserEmailNotificationOptionSwitchedOn( final User photoAuthor, final EmailNotificationType emailNotificationType ) {

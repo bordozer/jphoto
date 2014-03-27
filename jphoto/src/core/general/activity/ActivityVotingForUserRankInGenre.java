@@ -57,7 +57,7 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 
 		return services.getTranslatorService().translate( "voted for rank of $1 in category $2 ( $3 )"
 			, getCurrentUserLanguage()
-			, services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( userVotedForId ) )
+			, services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( userVotedForId ), getCurrentUserLanguage() )
 			, services.getGenreService().load( genreId ).getName()
 			, getPoints()
 		);

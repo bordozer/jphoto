@@ -4,6 +4,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.photosight.Photosight
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
+import core.context.EnvironmentContext;
 import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
@@ -77,7 +78,7 @@ public class AjaxServiceImpl implements AjaxService {
 		photosightUserDTO.setPhotosightUserExistsInTheSystem( userExistsInTheSystem );
 
 		if ( userExistsInTheSystem ) {
-			photosightUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user ) );
+			photosightUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
 			photosightUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
 			photosightUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
 			photosightUserDTO.setUserGender( user.getGender() );

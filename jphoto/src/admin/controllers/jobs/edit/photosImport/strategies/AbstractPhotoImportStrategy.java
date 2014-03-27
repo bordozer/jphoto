@@ -124,7 +124,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final String message = String.format( "Created photo #%d '%s' of %s, category: %s"
 			, photo.getId()
 			, entityLinkUtilsService.getPhotoCardLink( photo, language )
-			, entityLinkUtilsService.getUserCardLink( user )
+			, entityLinkUtilsService.getUserCardLink( user, language )
 			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), services.getSystemVarsService().getSystemDefaultLanguage() ) // TODO: user language?
 		);
 		job.addJobExecutionFinalMessage( message );

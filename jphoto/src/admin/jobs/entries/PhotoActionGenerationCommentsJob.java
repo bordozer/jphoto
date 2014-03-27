@@ -60,7 +60,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		addJobExecutionFinalMessage( String.format( "User %s has left a comment for photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
+		addJobExecutionFinalMessage( String.format( "User %s has left a comment for photo %s ( time: %s )", entityLinkUtilsService.getUserCardLink( user, getLanguage() ), entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ), dateUtilsService.formatDateTime( actionTime ) ) );
 
 		getLog().info( String.format( "User %s has commented photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 

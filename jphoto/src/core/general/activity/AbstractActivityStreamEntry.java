@@ -44,7 +44,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 			return StringUtils.EMPTY;
 		}
 
-		return services.getEntityLinkUtilsService().getUserCardLink( activityOfUser );
+		return services.getEntityLinkUtilsService().getUserCardLink( activityOfUser, getCurrentUserLanguage() );
 	}
 
 	public int getDisplayActivityUserId() {

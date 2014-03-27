@@ -8,6 +8,7 @@ import core.general.user.UserRankPhotoVote;
 import core.services.entry.GenreService;
 import core.services.pageTitle.PageTitleUserUtilsService;
 import core.services.security.SecurityService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
@@ -121,6 +122,7 @@ public class VotesForUserRankInGenreController {
 			final Date voteTime = userRankPhotoVote.getVoteTime();
 
 			final Iterator<UserGenreRankHistoryEntry> iterator = userGenreRankHistoryEntries.iterator();
+			final Language language = EnvironmentContext.getLanguage();
 			while( iterator.hasNext() ) {
 
 				final UserGenreRankHistoryEntry userGenreRankHistoryEntry = iterator.next();
@@ -130,7 +132,7 @@ public class VotesForUserRankInGenreController {
 					final int rank = userGenreRankHistoryEntry.getRank();
 
 					final UserGenreRankViewEntry viewHistoryEntry = new UserGenreRankViewEntry();
-					viewHistoryEntry.setColumn1( translatorService.translate( "New status: $1", EnvironmentContext.getLanguage(), String.valueOf( rank ) ) );
+					viewHistoryEntry.setColumn1( translatorService.translate( "New status: $1", language, String.valueOf( rank ) ) );
 					viewHistoryEntry.setColumn2( String.valueOf( rank ) );
 					viewHistoryEntry.setColumn3( dateUtilsService.formatDateTimeShort( rankAssignTime ) );
 					viewHistoryEntry.setStatusChangeEntry( true );
@@ -146,7 +148,7 @@ public class VotesForUserRankInGenreController {
 			}
 
 			final UserGenreRankViewEntry viewEntry = new UserGenreRankViewEntry();
-			viewEntry.setColumn1( entityLinkUtilsService.getUserCardLink( userRankPhotoVote.getVoter() ) );
+			viewEntry.setColumn1( entityLinkUtilsService.getUserCardLink( userRankPhotoVote.getVoter(), language ) );
 			viewEntry.setColumn2( String.format( "%s%d", ( userRankPhotoVote.getVotePoints() > 0 ? "+" : "" ), userRankPhotoVote.getVotePoints() ) );
 
 			viewEntry.setColumn3( dateUtilsService.formatDateTimeShort( voteTime ) );
