@@ -781,7 +781,7 @@ public class PhotoListController {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
 			final List<Photo> pagePhotos = getPhotos( pagingModel, listData );
-			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias, null );
+			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias, EnvironmentContext.getLanguage() );
 
 			photoList.setPhotoGroupOperationMenuContainer( pagePhotos.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 

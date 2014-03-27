@@ -45,7 +45,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 				builder.append( " " ).append( translatorService.translate( "photos from category '$1'", language, criterias.getGenre().getName() ) );
 			}
 
-			addVotingTimeText( criterias, builder, null );
+			addVotingTimeText( criterias, builder, language );
 
 			return builder.toString();
 		}
@@ -67,7 +67,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
 			builder.append( ", " ).append( translatorService.translate( "that have got at least $1 marks", language, String.valueOf( criterias.getMinimalMarks() ) ) );
 
-			addVotingTimeText( criterias, builder, null );
+			addVotingTimeText( criterias, builder, language );
 		}
 
 		return builder.toString();
@@ -118,7 +118,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
 			builder.append( ", " ).append( translatorService.translate( "that have got at least $1 marks", language, String.valueOf( criterias.getMinimalMarks() ) ) );
 
-			addVotingTimeText( criterias, builder, null );
+			addVotingTimeText( criterias, builder, language );
 		}
 
 		if ( criterias.getMembershipType() != null ) {

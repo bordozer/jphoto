@@ -20,6 +20,6 @@ public class TranslationEntryMissed extends TranslationEntry {
 
 	@Override
 	public String getLanguageCode() {
-		return String.format( "%s<sup>!<sup>", super.getLanguageCode() );
+		return String.format( "%s<sup>!</sup>", super.getLanguageCode() );
 	}
 }
