@@ -5,6 +5,7 @@ import core.dtos.TranslationDTO;
 import core.general.genre.Genre;
 import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,7 +50,6 @@ public class TranslatorServiceImpl implements TranslatorService {
 			result = result.replace( String.format( "$%d", i++ ), param );
 		}
 
-//		return markAsTranslated( result );
 		return result;
 	}
 
