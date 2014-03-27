@@ -175,7 +175,16 @@ public class UserEditDataController {
 			return VIEW;
 		}
 
+		updateUserUILanguageIfLoggedUserChangedHisLanguage( user );
+
 		return getRedirectToUserListView();
+	}
+
+	private void updateUserUILanguageIfLoggedUserChangedHisLanguage( final User user ) {
+		final User currentUser = EnvironmentContext.getCurrentUser();
+		if ( UserUtils.isUserEqualsToCurrentUser( user ) && currentUser.getLanguage() != user.getLanguage() ) {
+			currentUser.setLanguage( user.getLanguage() );
+		}
 	}
 
 	private String getRedirectToUserListView() {
