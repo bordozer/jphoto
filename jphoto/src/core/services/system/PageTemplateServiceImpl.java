@@ -216,6 +216,15 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "800px"  );
 
+		fillUiLanguages( language, model );
+
+		final Template template = velocityEngine.getTemplate( "pageheader.vm" );
+		template.merge( model, writer );
+
+		return writer.toString();
+	}
+
+	private void fillUiLanguages( final Language language, final VelocityContext model ) {
 		final List<LanguageWrapper> uiLanguages = newArrayList();
 		for ( final Language lang : systemVarsService.getUsedLanguages() ) {
 			final LanguageWrapper wrapper = new LanguageWrapper( lang );
@@ -227,11 +236,6 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 			uiLanguages.add( wrapper );
 		}
 		model.put( "uiLanguages", uiLanguages );
-
-		final Template template = velocityEngine.getTemplate( "pageheader.vm" );
-		template.merge( model, writer );
-
-		return writer.toString();
 	}
 
 	@Override
