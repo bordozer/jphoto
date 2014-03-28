@@ -10,10 +10,8 @@ import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 public class TranslatorServiceImpl implements TranslatorService {
@@ -21,8 +19,6 @@ public class TranslatorServiceImpl implements TranslatorService {
 	public static final String TRANSLATIONS_XML = "translations.xml";
 
 	private Translator translator;
-
-	private final Map<NerdKey, TranslationData> untranslatedMap = newHashMap();
 
 	@Autowired
 	private SystemVarsService systemVarsService;
@@ -44,10 +40,10 @@ public class TranslatorServiceImpl implements TranslatorService {
 		}
 
 		if ( translationEntry instanceof TranslationEntryMissed ) {
-			addUntranslated( nerd, translationEntry );
+			translator.registerNotTranslationEntry( translationEntry );
 		}
 
-		String result = translationEntry.getValueWithPrefixes();
+		String result = translationEntry.getValueWithPrefixes(); // TODO: just getValue() on a production
 
 		int i = 1;
 		for ( String param : params ) {
@@ -57,35 +53,6 @@ public class TranslatorServiceImpl implements TranslatorService {
 		return result;
 	}
 
-	private void addUntranslated( final String nerd, final TranslationEntry translation ) {
-		synchronized ( untranslatedMap ) {
-			final NerdKey nerdKey = new NerdKey( nerd );
-			final TranslationData translationData = untranslatedMap.get( nerdKey );
-			if ( translationData == null ) {
-				final TranslationData translations = new TranslationData( nerd, newArrayList( translation ) );
-				untranslatedMap.put( nerdKey, translations );
-			} else {
-				if ( ! hasTranslation( translationData, translation.getLanguage() ) ) {
-					final List<TranslationEntry> translations = translationData.getTranslations();
-					translations.add( new TranslationEntryMissed( nerd, translation.getLanguage(), systemVarsService ) );
-					untranslatedMap.put( nerdKey, new TranslationData( nerd, translations ) );
-				}
-			}
-		}
-	}
-
-	private boolean hasTranslation( final TranslationData translationData, final Language language ) {
-		final List<TranslationEntry> translations = translationData.getTranslations();
-
-		for ( final TranslationEntry _translation : translations ) {
-			if ( _translation.getLanguage() == language ) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	@Override
 	public Map<NerdKey, TranslationData> getTranslationsMap() {
 		return translator.getTranslationsMap();
@@ -93,7 +60,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Override
 	public Map<NerdKey, TranslationData> getUntranslatedMap() {
-		return untranslatedMap;
+		return translator.getUntranslatedMap();
 	}
 
 	@Override
@@ -107,7 +74,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 	@Override
 	public void reloadTranslations() throws DocumentException {
 
-		untranslatedMap.clear();
+		translator.clearUntranslatedMap();
 
 		initTranslations();
 	}

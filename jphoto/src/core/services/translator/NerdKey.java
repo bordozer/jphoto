@@ -13,6 +13,11 @@ public class NerdKey {
 	}
 
 	@Override
+	public String toString() {
+		return nerd;
+	}
+
+	@Override
 	public int hashCode() {
 		return nerd.hashCode();
 	}
