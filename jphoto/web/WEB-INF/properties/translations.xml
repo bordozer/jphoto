@@ -2525,8 +2525,28 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Reset value to the value of the default configuration?</nerd>
+		<ru><![CDATA[Сбросить установленное значение в значение дефолтной конфигурации?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Allowed uploaded photo file formats separated by comma</nerd>
+		<ru><![CDATA[Допустимые форматы картинок через запятую]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Skip, if preview exists</nerd>
+		<ru><![CDATA[Пропускать фото с уже с генеренными превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Preview size</nerd>
+		<ru><![CDATA[Размер превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: default column qty for moble devices</nerd>
+		<ru><![CDATA[Фотогалерея: к-во столбцов по умолчанию для мобильных устройсиво]]></ru>
 	</translation>
 
 	<translation>

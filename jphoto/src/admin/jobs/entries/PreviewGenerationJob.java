@@ -81,8 +81,8 @@ public class PreviewGenerationJob extends AbstractJob {
 		totalJopOperations = services.getPhotoService().getPhotoQty(); // TODO: hack!
 
 		final Language language = getLanguage();
-		builder.append( translatorService.translate( "Preview size: ", language ) ).append( previewSize ).append( "<br />" );
-		builder.append( translatorService.translate( "Skip, if preview exists: ", language ) ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No", language ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Preview size", language ) ).append( ": " ).append( previewSize ).append( "<br />" );
+		builder.append( translatorService.translate( "Skip, if preview exists", language ) ).append( ": " ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No", language ) ).append( "<br />" );
 
 		return builder.toString();
 	}
