@@ -1,6 +1,6 @@
 
 var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, onLoad:function () {} };
-var messageTimeout = 2000;
+var messageTimeout = 5000;
 
 function showInformationMessage( message ) {
 	var divId = 'infoMessageDiv';
