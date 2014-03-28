@@ -25,7 +25,7 @@ public class Translator {
 		final NerdKey key = new NerdKey( nerd );
 
 		if ( ! translationsMap.containsKey( key ) ) {
-			return new TranslationEntryNerd( nerd, systemVarsService );
+			return new TranslationEntryMissed( nerd, language, systemVarsService );
 		}
 
 		return translationsMap.get( key ).getTranslationEntry( language );

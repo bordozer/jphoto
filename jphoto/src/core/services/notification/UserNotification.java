@@ -2,7 +2,6 @@ package core.services.notification;
 
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.Language;
 
 public class UserNotification {
 
