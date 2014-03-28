@@ -8,6 +8,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -86,12 +87,14 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "One of your favorite members %s has uploaded new photo '%s'."
-					, userCardLink, photoCardLink );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services )
+					.addStringUnit( photoAuthor.getNameEscaped() )
+					.addStringUnit( photo.getNameEscaped() )
+					;
+				final TranslatableMessage message = new TranslatableMessage( "One of your favorite members $1 has uploaded new photo '$2'.", services )
+					.addLinkToUserCardUnit( photoAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -116,12 +119,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "One of your friends %s has uploaded new photo '%s'"
-					, userCardLink, photoCardLink );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "One of your friends $1 has uploaded new photo '$2'", services ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
 
 				return new NotificationData( subject, message );
 			}
@@ -146,12 +145,12 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of %s."
-					, userCardLink, photoCardLink, photoAuthor.getNameEscaped() );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", services )
+					.addLinkToUserCardUnit( photoAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					.addStringUnit( photoAuthor.getNameEscaped() )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -183,15 +182,13 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public NotificationData getNotificationData() {
 				final User commentAuthor = comment.getCommentAuthor();
-
-				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
-
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
-				final String subject = String.format( "%s has commented photo '%s'.", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "%s has commented photo '%s'. You got this message because you are tracking new comments to the photo."
-					, commentAuthorCardLink, photoCardLink );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented photo '$2'.", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", services )
+					.addLinkToUserCardUnit( commentAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -216,12 +213,12 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "One of your favorite member %s has uploaded new photo '%s'. %s"
-					, userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "One of your favorite member $1 has uploaded new photo '$2'. $3", services )
+					.addLinkToUserCardUnit( photoAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -246,11 +243,12 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "One of your friend %s has uploaded new photo '%s'. %s", userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "One of your friend $1 has uploaded new photo '$2'. $3", services )
+					.addLinkToUserCardUnit( photoAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -275,12 +273,12 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final String userCardLink = getUserCardLink( photoAuthor );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
-
-				final String subject = String.format( "%s has uploaded new photo '%s'", photoAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "%s has uploaded new photo '%s'. You got this message because you are tracking new photos of photo author. %s"
-					, userCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of photo author. $3", services )
+					.addLinkToUserCardUnit( photoAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -316,14 +314,14 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public NotificationData getNotificationData() {
 				final User commentAuthor = comment.getCommentAuthor();
-
-				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
-
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
-				final String subject = String.format( "%s has commented your photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "%s has commented your photo '%s'. %s", commentAuthorCardLink, photoCardLink, CONTROL_EMAIL_NOTIFICATIONS_HINT );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented your photo '$2'", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "$1 has commented your photo '$2'. $3", services )
+					.addLinkToUserCardUnit( commentAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
+					;
 
 				return new NotificationData( subject, message );
 			}
@@ -351,15 +349,13 @@ public abstract class UserNotificationsCollector {
 			@Override
 			public NotificationData getNotificationData() {
 				final User commentAuthor = comment.getCommentAuthor();
-
-				final String commentAuthorCardLink = getUserCardLink( commentAuthor );
-
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
-				final String photoCardLink = getPhotoCardLink( photo, Language.EN ); // TODO: pass addressat language here
 
-				final String subject = String.format( "%s has commented photo '%s'", commentAuthor.getNameEscaped(), photo.getNameEscaped() );
-				final String message = String.format( "%s has commented photo '%s'. You got this email because you are tracking new comments to the photo."
-					, commentAuthorCardLink, photoCardLink );
+				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented photo '$2'", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+				final TranslatableMessage message = new TranslatableMessage( "$1 has commented photo '$2'. You got this email because you are tracking new comments to the photo.", services )
+					.addLinkToUserCardUnit( commentAuthor )
+					.addLinkToPhotoCardUnit( photo )
+					;
 
 				return new NotificationData( subject, message );
 			}

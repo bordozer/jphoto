@@ -1,20 +1,22 @@
 package core.services.notification;
 
+import core.services.translator.message.TranslatableMessage;
+
 public class NotificationData {
 
-	private final String subject;
-	private final String message;
+	private final TranslatableMessage subject;
+	private final TranslatableMessage message;
 
-	public NotificationData( final String subject, final String message ) {
+	public NotificationData( final TranslatableMessage subject, final TranslatableMessage message ) {
 		this.subject = subject;
 		this.message = message;
 	}
 
-	public String getSubject() {
+	public TranslatableMessage getSubject() {
 		return subject;
 	}
 
-	public String getMessage() {
+	public TranslatableMessage getMessage() {
 		return message;
 	}
 

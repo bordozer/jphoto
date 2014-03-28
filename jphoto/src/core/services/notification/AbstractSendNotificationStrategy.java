@@ -3,6 +3,7 @@ package core.services.notification;
 import core.general.configuration.ConfigurationKey;
 import core.services.mail.MailBean;
 import core.services.security.Services;
+import core.services.translator.Language;
 
 public abstract class AbstractSendNotificationStrategy {
 
@@ -13,7 +14,7 @@ public abstract class AbstractSendNotificationStrategy {
 	public static final AbstractSendNotificationStrategy SEND_PRIVATE_MESSAGE_STRATEGY = new AbstractSendNotificationStrategy() {
 		@Override
 		public void sendNotifications( final UserNotification userNotification, final Services services ) {
-			services.getPrivateMessageService().sendActivityNotificationMessage( userNotification.getUser(), userNotification.getNotificationData().getMessage() );
+			services.getPrivateMessageService().sendActivityNotificationMessage( userNotification.getUser(), userNotification.getNotificationData().getMessage().build( userNotification.getUser().getLanguage() ) );
 		}
 
 		@Override
@@ -32,8 +33,10 @@ public abstract class AbstractSendNotificationStrategy {
 
 			final NotificationData notificationData = userNotification.getNotificationData();
 
-			mail.setSubject( notificationData.getSubject() );
-			mail.setBody( notificationData.getMessage() );
+			final Language language = userNotification.getUser().getLanguage();
+
+			mail.setSubject( notificationData.getSubject().build( language ) );
+			mail.setBody( notificationData.getMessage().build( language ) );
 
 			services.getMailService().sendNoException( mail );
 		}

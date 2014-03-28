@@ -6,6 +6,7 @@ import core.general.photo.PhotoComment;
 import core.services.security.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Set;
@@ -16,9 +17,6 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Autowired
 	private Services services;
-
-	@Autowired
-	private TranslatorService translatorService;
 
 	@Override
 	public void newPhotoNotification( final Photo photo ) {
@@ -50,10 +48,9 @@ public class NotificationServiceImpl implements NotificationService {
 
 	@Override
 	public void newPrivateMessage( final PrivateMessage privateMessage ) {
-		final Language language = privateMessage.getToUser().getLanguage();
 
-		final String subject = translatorService.translate( "New private message", language );
-		final String message = translatorService.translate( "$1 has sent you a private message", language, privateMessage.getFromUser().getNameEscaped() );
+		final TranslatableMessage subject = new TranslatableMessage( "New private message", services );
+		final TranslatableMessage message = new TranslatableMessage( "$1 has sent you a private message", services ).addStringUnit( privateMessage.getFromUser().getNameEscaped() );
 		final NotificationData data = new NotificationData( subject, message );
 
 		final UserNotification userNotification = new UserNotification( privateMessage.getToUser(), AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY, data );
