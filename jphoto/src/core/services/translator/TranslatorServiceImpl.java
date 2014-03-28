@@ -10,11 +10,11 @@ import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
-import static com.google.common.collect.Sets.newHashSet;
 
 public class TranslatorServiceImpl implements TranslatorService {
 
@@ -58,11 +58,11 @@ public class TranslatorServiceImpl implements TranslatorService {
 			final NerdKey nerdKey = new NerdKey( nerd );
 			final TranslationData translationData = untranslatedMap.get( nerdKey );
 			if ( translationData == null ) {
-				final TranslationData translations = new TranslationData( nerd, newHashSet( translation ) );
+				final TranslationData translations = new TranslationData( nerd, newArrayList( translation ) );
 				untranslatedMap.put( nerdKey, translations );
 			} else {
 				if ( ! hasTranslation( translationData, translation.getLanguage() ) ) {
-					final Set<TranslationEntry> translations = translationData.getTranslations();
+					final List<TranslationEntry> translations = translationData.getTranslations();
 					translations.add( new TranslationEntry( nerd, translation.getLanguage(), translation.getValueWithPrefixes(), systemVarsService ) );
 					untranslatedMap.put( nerdKey, new TranslationData( nerd, translations ) );
 				}
@@ -71,7 +71,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	private boolean hasTranslation( final TranslationData translationData, final Language language ) {
-		final Set<TranslationEntry> translations = translationData.getTranslations();
+		final List<TranslationEntry> translations = translationData.getTranslations();
 
 		for ( final TranslationEntry _translation : translations ) {
 			if ( _translation.getLanguage() == language ) {

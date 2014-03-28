@@ -8,11 +8,11 @@ import org.dom4j.io.SAXReader;
 
 import java.io.File;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
-import static com.google.common.collect.Sets.newHashSet;
 
 public class TranslationsReader {
 
@@ -32,7 +32,7 @@ public class TranslationsReader {
 			final Element nerdElement = ( Element ) photosIterator.next();
 			final String nerd = nerdElement.element( Language.NERD.getCode() ).getText();
 
-			final Set<TranslationEntry> translations = newHashSet();
+			final List<TranslationEntry> translations = newArrayList();
 			translations.add( new TranslationEntryNerd( nerd, systemVarsService ) );
 
 			for ( final Language language : Language.values() ) {
