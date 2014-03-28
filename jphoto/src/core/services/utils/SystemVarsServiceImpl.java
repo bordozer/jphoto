@@ -126,6 +126,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
+	public boolean getShowLanguageCodeAfterTranslation() {
+		return config.getBoolean( "translator.showLanguageCodeAfterTranslation" );
+	}
+
+	@Override
 	public String getTranslatorTranslatedEndPrefix() {
 		return config.getString( "translator.translated.endPrefix" );
 	}

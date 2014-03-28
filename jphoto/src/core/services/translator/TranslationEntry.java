@@ -33,11 +33,14 @@ public class TranslationEntry {
 		final String startPrefix = getStartPrefix();
 		final String endPrefix = getEndPrefix();
 		return String.format( "%s%s%s%s", getPrefix( startPrefix ), value, getPrefix( endPrefix ), getLanguageCode() );
-//		return String.format( "%s%s%s", getPrefix( startPrefix ), value, getPrefix( endPrefix ) );
 	}
 
 	public String getLanguageCode() {
-		return String.format( "<sup>%s</sup>", language.getCode() );
+		if ( systemVarsService.getShowLanguageCodeAfterTranslation() ) {
+			return String.format( "<sup>%s</sup>", language.getCode() );
+		}
+
+		return StringUtils.EMPTY;
 	}
 
 	public String getValue() {

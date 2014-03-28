@@ -42,6 +42,11 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
+	public boolean getShowLanguageCodeAfterTranslation() {
+		return false;
+	}
+
+	@Override
 	public String getAdminPrefix() {
 		return "adm";
 	}

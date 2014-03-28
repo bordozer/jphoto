@@ -60,4 +60,6 @@ public interface SystemVarsService {
 	Language getSystemDefaultLanguage();
 
 	List<Language> getUsedLanguages();
+
+	boolean getShowLanguageCodeAfterTranslation();
 }

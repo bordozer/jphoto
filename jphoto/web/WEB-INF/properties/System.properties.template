@@ -26,6 +26,9 @@ PhotoLines=5
 PhotosInLine=4
 
 # translator
+# show language code after translation true/false
+translator.showLanguageCodeAfterTranslation=true
+
 translator.translated.startPrefix=
 translator.translated.endPrefix=&trade;
 
