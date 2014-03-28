@@ -43,7 +43,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 			addUntranslated( nerd, translation );
 		}
 
-		String result = translation.getValueWithPrefixes(); // TODO: set System or User defined Language
+		String result = translation.getValueWithPrefixes();
 
 		int i = 1;
 		for ( String param : params ) {
