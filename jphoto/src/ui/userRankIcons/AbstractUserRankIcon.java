@@ -1,5 +1,6 @@
 package ui.userRankIcons;
 
+import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.translator.Language;
@@ -116,6 +117,6 @@ public abstract class AbstractUserRankIcon {
 	}
 
 	private static Language getLanguage() {
-		return Language.EN; // TODO: pass the language of logged user
+		return EnvironmentContext.getLanguage(); // TODO: pass the language of logged user
 	}
 }
