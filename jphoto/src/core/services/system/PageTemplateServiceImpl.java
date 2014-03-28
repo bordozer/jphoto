@@ -83,7 +83,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 	@Override
 	public String renderPageHeader( final PageModel pageModel ) {
-		final User currentUser = EnvironmentContext.getCurrentUser(); // TODO: EnvironmentContext in a service!
+		final User currentUser = EnvironmentContext.getCurrentUser();
 		final Language language = currentUser.getLanguage();
 
 		final PageTitleData dataPage = pageModel.getPageTitleData();
@@ -216,9 +216,15 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "800px"  );
 
-		final List<Language> uiLanguages = newArrayList();
+		final List<LanguageWrapper> uiLanguages = newArrayList();
 		for ( final Language lang : systemVarsService.getUsedLanguages() ) {
-			uiLanguages.add( lang );
+			final LanguageWrapper wrapper = new LanguageWrapper( lang );
+			wrapper.setTitle( translatorService.translate( lang.getName(), lang ) );
+			if ( language == lang ) {
+				wrapper.setStyle( "selectedLanguage" );
+				wrapper.setTitle( translatorService.translate( "$1 - selected UI language", lang, translatorService.translate( lang.getName(), lang ) ) );
+			}
+			uiLanguages.add( wrapper );
 		}
 		model.put( "uiLanguages", uiLanguages );
 
@@ -240,6 +246,37 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		template.merge( model, writer );
 
 		return writer.toString();
+	}
+
+	public class LanguageWrapper {
+
+		private final Language language;
+		private String style;
+		private String title;
+
+		public LanguageWrapper( final Language language ) {
+			this.language = language;
+		}
+
+		public Language getLanguage() {
+			return language;
+		}
+
+		public String getStyle() {
+			return style;
+		}
+
+		public void setStyle( final String style ) {
+			this.style = style;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle( final String title ) {
+			this.title = title;
+		}
 	}
 
 	public class UserLogin {

@@ -52,6 +52,15 @@
 	<link rel="stylesheet" href="/$workername/common/js/lib/fg.menu/fg.menu.css" type="text/css"/>
 ##	/ fg.menu
 
+	<style type="text/css">
+		.language {
+			padding: 2px;
+		}
+		.selectedLanguage {
+			border: 1px solid #bbbbbb;
+		}
+	</style>
+
 </head>
 <body class="base-font-color">
 
@@ -62,7 +71,9 @@
 			<h2><a href="$portalpageurl">$slogan</a></h2>
 			<div class="floatleft" style="margin-top: 2px;">
 				#foreach( $uiLanguage in $uiLanguages )
-					<a href="#" onclick="changeUiLanguage( '$uiLanguage.code' ); return false;"><img src="$imagePath/languages/$uiLanguage.icon" title="$uiLanguage.name"></a>
+					<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
+						<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title" class="language $uiLanguage.style">
+					</a>
 				#end
 				<script type="text/javascript">
 					function changeUiLanguage( languageCode ) {

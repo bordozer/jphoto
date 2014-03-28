@@ -1434,7 +1434,7 @@
 
 	<translation>
 		<nerd>You have $1 new comment(s)</nerd>
-		<ru><![CDATA[У вас $1 новых комментариев]]></ru>
+		<ru><![CDATA[Новые комментарии: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -2550,8 +2550,31 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Russian language name</nerd>
+		<ru><![CDATA[Русский]]></ru>
+		<en><![CDATA[Русский]]></en>
+		<ua><![CDATA[Русский]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>English language name</nerd>
+		<ru><![CDATA[English]]></ru>
+		<en><![CDATA[English]]></en>
+		<ua><![CDATA[English]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>Ukrainian language name</nerd>
+		<ru><![CDATA[Українська]]></ru>
+		<en><![CDATA[Українська]]></en>
+		<ua><![CDATA[Українська]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>$1 - selected UI language</nerd>
+		<ru><![CDATA[$1 - выбран]]></ru>
+		<en><![CDATA[$1 - selected]]></en>
+		<ua><![CDATA[$1 - вибрана]]></ua>
 	</translation>
 
 	<translation>
