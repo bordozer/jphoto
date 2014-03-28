@@ -47,6 +47,10 @@ public class TranslationEntry {
 		return value;
 	}
 
+	public TranslationEntryType getTranslationEntryType() {
+		return TranslationEntryType.TRANSLATED;
+	}
+
 	protected String getStartPrefix() {
 		return systemVarsService.getTranslatorTranslatedStartPrefix();
 	}

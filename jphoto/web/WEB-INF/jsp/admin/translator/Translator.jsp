@@ -84,7 +84,7 @@
 				<a href="#${translatorNerdAnchor}" onclick="placeToTranslatorForm( '${eco:escapeJavaScript(nerdKey.nerd)}' );">${nerdKey.nerd}</a>
 				<br/>
 				<c:forEach var="translations" items="${translationData.translations}">
-					${translations.language}: "${eco:escapeHtml(translations.value)}"
+					${translations.language}: "${eco:escapeHtml(translations.value)}" ( ${translations.translationEntryType.description} )
 					<br/>
 				</c:forEach>
 				<br/>

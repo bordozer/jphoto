@@ -9,7 +9,9 @@
 
 	<translation>
 		<nerd>Logout</nerd>
+		<ua><![CDATA[Вихiд]]></ua>
 		<ru><![CDATA[Выход]]></ru>
+		<en><![CDATA[Logout]]></en>
 	</translation>
 
 	<translation>
@@ -2579,12 +2581,9 @@
 
 	<translation>
 		<nerd></nerd>
+		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
 	</translation>
 
 </translations>

@@ -20,7 +20,8 @@ public class TranslationData {
 			}
 		}
 
-		throw new IllegalStateException( String.format( "Translation for '%s' ( %s ) not found!", nerd, language ) );
+//		throw new IllegalStateException( String.format( "Translation for '%s' ( %s ) not found!", nerd, language ) );
+		return null;
 	}
 
 	public String getNerd() {

@@ -37,13 +37,17 @@ public class TranslatorServiceImpl implements TranslatorService {
 			return nerd;
 		}
 
-		final TranslationEntry translation = translator.getTranslation( nerd, language );
+		TranslationEntry translationEntry = translator.getTranslation( nerd, language );
 
-		if ( translation instanceof TranslationEntryNerd ) {
-			addUntranslated( nerd, translation );
+		if ( translationEntry == null ) {
+			translationEntry = new TranslationEntryMissed( nerd, language, systemVarsService );
 		}
 
-		String result = translation.getValueWithPrefixes();
+		if ( translationEntry instanceof TranslationEntryMissed ) {
+			addUntranslated( nerd, translationEntry );
+		}
+
+		String result = translationEntry.getValueWithPrefixes();
 
 		int i = 1;
 		for ( String param : params ) {
@@ -63,7 +67,7 @@ public class TranslatorServiceImpl implements TranslatorService {
 			} else {
 				if ( ! hasTranslation( translationData, translation.getLanguage() ) ) {
 					final List<TranslationEntry> translations = translationData.getTranslations();
-					translations.add( new TranslationEntry( nerd, translation.getLanguage(), translation.getValueWithPrefixes(), systemVarsService ) );
+					translations.add( new TranslationEntryMissed( nerd, translation.getLanguage(), systemVarsService ) );
 					untranslatedMap.put( nerdKey, new TranslationData( nerd, translations ) );
 				}
 			}

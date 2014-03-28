@@ -17,4 +17,9 @@ public class TranslationEntryNerd extends TranslationEntry {
 	protected String getEndPrefix() {
 		return systemVarsService.getTranslatorUntranslatedEndPrefix();
 	}
+
+	@Override
+	public TranslationEntryType getTranslationEntryType() {
+		return TranslationEntryType.NERD_TRANSLATION;
+	}
 }

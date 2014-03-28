@@ -1,10 +1,7 @@
 package admin.controllers.translator;
 
 import core.services.pageTitle.PageTitleAdminUtilsService;
-import core.services.translator.Language;
-import core.services.translator.NerdKey;
-import core.services.translator.TranslationData;
-import core.services.translator.TranslatorService;
+import core.services.translator.*;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -127,13 +124,13 @@ public class TranslatorController {
 
 		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
 			final TranslationData translationData = translationsMap.get( nerdKey );
-			final String nerd = translationData.getTranslationEntry( Language.NERD ).getNerd();
+			final TranslationEntry translationEntry = translationData.getTranslationEntry( Language.NERD );
 
-			if ( StringUtils.isEmpty( nerd ) ) {
+			if ( translationEntry == null || StringUtils.isEmpty( translationEntry.getNerd() ) ) {
 				continue;
 			}
 
-			final String letter = nerd.substring( 0, 1 ).toUpperCase();
+			final String letter = translationEntry.getNerd().substring( 0, 1 ).toUpperCase();
 			if ( ! result.contains( letter ) ) {
 				result.add( letter );
 			}
