@@ -264,6 +264,13 @@ public class JobExecutionHistoryDaoImpl extends BaseEntityDaoImpl<JobExecutionHi
 		return paramSource;
 	}
 
+	@Override
+	public int getJobExecutionLogLength() {
+		final String sql = String.format( "SELECT COUNT(%s) FROM %s;", ENTITY_ID, TABLE_JOB_EXECUTION_HISTORY );
+
+		return getIntValueOrZero( sql, new MapSqlParameterSource() );
+	}
+
 	private void setJobStatus( final int jobId, final JobExecutionStatus status ) {
 		final String sql = String.format( "UPDATE %s SET %s = :endTime, %s = :jobStatusId WHERE %s = :id;"
 			, TABLE_JOB_EXECUTION_HISTORY, TABLE_JOB_DONE_COL_END_TIME, TABLE_JOB_DONE_COL_JOB_STATUS_ID, ENTITY_ID );

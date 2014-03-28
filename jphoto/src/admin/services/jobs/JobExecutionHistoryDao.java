@@ -32,4 +32,6 @@ public interface JobExecutionHistoryDao extends BaseEntityDao<JobExecutionHistor
 	void deleteEntriesOlderThen( final Date timeFrame, final List<JobExecutionStatus> jobExecutionStatusesToDelete );
 
 	void delete( final List<Integer> ids );
+
+	int getJobExecutionLogLength();
 }

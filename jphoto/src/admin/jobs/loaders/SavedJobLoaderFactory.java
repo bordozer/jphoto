@@ -43,9 +43,7 @@ public class SavedJobLoaderFactory {
 			tabJobInfos.put( savedJobTab, new TabJobInfo( savedJobTab, loaderFactory.getInstance( savedJobTab ).load().size() ) );
 		}
 
-
-
-		tabJobInfos.put( JobListTab.JOB_EXECUTION_HISTORY, new TabJobInfo( JobListTab.JOB_EXECUTION_HISTORY, jobExecutionHistoryService.getJobExecutionHistoryEntries().size() ) ); // TODO
+		tabJobInfos.put( JobListTab.JOB_EXECUTION_HISTORY, new TabJobInfo( JobListTab.JOB_EXECUTION_HISTORY, jobExecutionHistoryService.getJobExecutionLogLength() ) );
 
 		return tabJobInfos;
 	}

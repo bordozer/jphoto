@@ -89,6 +89,11 @@ public class JobExecutionHistoryServiceImpl implements JobExecutionHistoryServic
 		jobExecutionHistoryDao.delete( ids );
 	}
 
+	@Override
+	public int getJobExecutionLogLength() {
+		return jobExecutionHistoryDao.getJobExecutionLogLength();
+	}
+
 	private Map<SavedJobParameterKey, CommonProperty> getJobParametersMap( final int jobExecutionHistoryId ) {
 		final Map<SavedJobParameterKey, CommonProperty> jobParameters = jobExecutionHistoryDao.getJobParameters( jobExecutionHistoryId );
 
