@@ -142,7 +142,7 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 		try {
 			checkFileDimension( multipartFile, maxDimension, errors, fileControlName, language );
 		} catch ( IOException e ) {
-			errors.rejectValue( fileControlName, translatorService.translate( "Error reading file dimension", language ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "Can not upload file", language ) );
 		}
 	}
 
