@@ -87,14 +87,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services )
-					.addStringUnit( photoAuthor.getNameEscaped() )
-					.addStringUnit( photo.getNameEscaped() )
-					;
-				final TranslatableMessage message = new TranslatableMessage( "One of your favorite members $1 has uploaded new photo '$2'.", services )
-					.addLinkToUserCardUnit( photoAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "One of your favorite members $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -119,8 +113,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "One of your friends $1 has uploaded new photo '$2'", services ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "One of your friends $1 has uploaded new photo '$2'", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -145,12 +139,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", services )
-					.addLinkToUserCardUnit( photoAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					.addStringUnit( photoAuthor.getNameEscaped() )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).addStringUnit( photoAuthor.getNameEscaped() );
 
 				return new NotificationData( subject, message );
 			}
@@ -184,11 +174,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented photo '$2'.", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", services )
-					.addLinkToUserCardUnit( commentAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has commented photo '$2'.", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -213,12 +200,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "One of your favorite member $1 has uploaded new photo '$2'. $3", services )
-					.addLinkToUserCardUnit( photoAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "One of your favorite member $1 has uploaded new photo '$2'. $3", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -243,12 +226,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "One of your friend $1 has uploaded new photo '$2'. $3", services )
-					.addLinkToUserCardUnit( photoAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "One of your friend $1 has uploaded new photo '$2'. $3", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -273,12 +252,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has uploaded new photo '$2'", services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of photo author. $3", services )
-					.addLinkToUserCardUnit( photoAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of photo author. $3", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -316,12 +291,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented your photo '$2'", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "$1 has commented your photo '$2'. $3", services )
-					.addLinkToUserCardUnit( commentAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					.addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has commented your photo '$2'", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "$1 has commented your photo '$2'. $3", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -351,11 +322,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = new TranslatableMessage( "$1 has commented photo '$2'", services ).addStringUnit( commentAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
-				final TranslatableMessage message = new TranslatableMessage( "$1 has commented photo '$2'. You got this email because you are tracking new comments to the photo.", services )
-					.addLinkToUserCardUnit( commentAuthor )
-					.addLinkToPhotoCardUnit( photo )
-					;
+				final TranslatableMessage subject = getSubject( "$1 has commented photo '$2'", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "$1 has commented photo '$2'. You got this email because you are tracking new comments to the photo.", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -411,5 +379,17 @@ public abstract class UserNotificationsCollector {
 
 	private static boolean isUserEmailNotificationOptionSwitchedOn( final User photoAuthor, final EmailNotificationType emailNotificationType ) {
 		return photoAuthor.getEmailNotificationTypes().contains( emailNotificationType );
+	}
+
+	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services1 ) {
+		return new TranslatableMessage( subj, services1 ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+	}
+
+	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
+		return new TranslatableMessage( nerd, services1 ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
+	}
+
+	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
+		return getMessage( nerd, photoAuthor, photo, services1 ).addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT );
 	}
 }
