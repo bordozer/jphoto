@@ -9,8 +9,8 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 
 import java.util.Date;
 import java.util.List;
@@ -61,15 +61,20 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		services.getPhotoCommentService().save( comment );
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
+		/*final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
 		final String message = services.getTranslatorService().translate( "User $1 has left a comment for photo $2 ( time: $3 )"
 			, language
 			, entityLinkUtilsService.getUserCardLink( user, language )
 			, entityLinkUtilsService.getPhotoCardLink( photo, language )
 			, dateUtilsService.formatDateTime( actionTime )
-		);
-		addJobExecutionFinalMessage( message );
+		);*/
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has left a comment for photo $2 ( time: $3 )", services )
+			.addLinkToUserCardUnit( user )
+			.addLinkToPhotoCardUnit( photo )
+			.addFormattedDateTimeUnit( actionTime )
+			;
+		addJobRuntimeLogMessage( translatableMessage );
 
 		getLog().info( String.format( "User %s has commented photo %s ( time: %s )", user, photo, dateUtilsService.formatDateTime( actionTime ) ) );
 

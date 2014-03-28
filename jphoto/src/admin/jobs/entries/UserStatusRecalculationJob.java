@@ -13,6 +13,7 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.log.LogHelper;
 import core.services.entry.ActivityStreamService;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 
@@ -48,22 +49,26 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 					getLog().info( String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() ) );
 
-					final String message = services.getTranslatorService().translate( "Member $1 has got new status: $2"
+					/*final String message = services.getTranslatorService().translate( "Member $1 has got new status: $2"
 						, getLanguage()
 						, String.valueOf( user.getId() )
 						, UserStatus.MEMBER.getName()
-					);
-					addJobExecutionFinalMessage( message );
+					);*/
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
+						.addLinkToUserCardUnit( user )
+						.addStringUnit( UserStatus.MEMBER.getName() );
+					addJobRuntimeLogMessage( translatableMessage );
 
 					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
 				} else {
 					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
 
-					final String message = services.getTranslatorService().translate( "Can not update member status. Id = #$1"
+					/*final String message = services.getTranslatorService().translate( "Can not update member status. Id = #$1"
 						, getLanguage()
 						, String.valueOf( user.getId() )
-					);
-					addJobExecutionFinalMessage( message );
+					);*/
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addLinkToUserCardUnit( user );
+					addJobRuntimeLogMessage( translatableMessage );
 				}
 			}
 

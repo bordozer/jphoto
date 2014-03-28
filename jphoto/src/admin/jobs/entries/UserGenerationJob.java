@@ -12,6 +12,7 @@ import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
 import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -83,8 +84,11 @@ public class UserGenerationJob extends AbstractJob {
 				try {
 					final boolean isCreated = userService.createUser( user, UserEditDataController.DEFAULT_USER_PASSWORD );
 					if ( ! isCreated ) {
-						final String message = services.getTranslatorService().translate( "Error creating user $1", getLanguage(), user.getNameEscaped() );
-						addJobExecutionFinalMessage( message );
+//						final String message = services.getTranslatorService().translate( "Error creating user $1", getLanguage(), user.getNameEscaped() );
+						final TranslatableMessage translatableMessage = new TranslatableMessage( "Error creating user $1", services )
+							.addStringUnit( user.getNameEscaped() )
+							;
+						addJobRuntimeLogMessage( translatableMessage );
 
 						getLog().error( String.format( "Error creating user %s", user ) );
 						continue;

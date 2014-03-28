@@ -19,9 +19,9 @@ import core.log.LogHelper;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.RandomUtilsService;
 
 import java.io.File;
@@ -120,15 +120,22 @@ public abstract class AbstractPhotoImportStrategy {
 
 		photoToImport.setPhoto( photo );
 
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
+		/*final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final String message = services.getTranslatorService().translate( "Created photo #$1 '$2' of $3, category: $4"
 			, language
 			, String.valueOf( photo.getId() )
 			, entityLinkUtilsService.getPhotoCardLink( photo, language )
 			, entityLinkUtilsService.getUserCardLink( user, language )
 			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), language )
-		);
-		job.addJobExecutionFinalMessage( message );
+		);*/
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
+			.addIntegerUnit( photo.getId() )
+			.addLinkToPhotoCardUnit( photo )
+			.addLinkToUserCardUnit( user )
+			.addLinkToPhotosByGenreUnit( genre )
+			;
+
+		job.addJobRuntimeLogMessage( translatableMessage );
 
 		log.debug( String.format( "Photo %s is generated for user %s", photo.getNameEscaped(), user.getNameEscaped() ) );
 	}

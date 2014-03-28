@@ -9,6 +9,7 @@ import core.general.photo.Photo;
 import core.log.LogHelper;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 
 import java.awt.*;
@@ -36,6 +37,11 @@ public class PreviewGenerationJob extends AbstractJob {
 
 			if ( !skipPhotosWithExistingPreview || !services.getUserPhotoFilePathUtilsService().getPhotoPreviewFile( photo ).exists() ) {
 				services.getPreviewGenerationService().generatePreview( photo.getId(), options );
+
+				final TranslatableMessage translatableMessage = new TranslatableMessage( "Generated preview for $1", services )
+					.addLinkToPhotoCardUnit( photo )
+					;
+				addJobRuntimeLogMessage( translatableMessage );
 			}
 
 			increment();

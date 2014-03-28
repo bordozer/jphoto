@@ -11,8 +11,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
 import core.services.photo.PhotoService;
-import core.services.translator.Language;
-import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -156,13 +155,17 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 			final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
-			final Language language = getLanguage();
+			/*final Language language = getLanguage();
 			final String message = services.getTranslatorService().translate( "User $1 is going to do the action for another photo of $2"
 				, language
 				, entityLinkUtilsService.getUserCardLink( actionCommitter, language )
 				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
-			);
-			addJobExecutionFinalMessage( message );
+			);*/
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for another photo of $2", services )
+				.addLinkToUserCardUnit( actionCommitter )
+				.addLinkToUserCardUnit( photoAuthor )
+				;
+			addJobRuntimeLogMessage( translatableMessage );
 
 			final Photo randomPhotoOfPhotoAuthor = randomUtilsService.getRandomPhotoOfUser( photoAuthorId );
 			if ( doPhotoAction( randomPhotoOfPhotoAuthor, actionCommitter ) ) {
@@ -193,14 +196,19 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 			final User authorOfRandomPhotoFromLastVoted = userService.load( authorIdOfRandomPhotoFromLastVoted );
 
-			final Language language = getLanguage();
+			/*final Language language = getLanguage();
 			final String message = services.getTranslatorService().translate( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently"
 				, language
 				, entityLinkUtilsService.getUserCardLink( actionCommitter, language )
 				, entityLinkUtilsService.getUserCardLink( authorOfRandomPhotoFromLastVoted, language )
 				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
-			);
-			addJobExecutionFinalMessage( message );
+			);*/
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently", services )
+				.addLinkToUserCardUnit( actionCommitter )
+				.addLinkToUserCardUnit( authorOfRandomPhotoFromLastVoted )
+				.addLinkToUserCardUnit( photoAuthor )
+				;
+			addJobRuntimeLogMessage( translatableMessage );
 
 			if ( doPhotoAction( randomPhoto, actionCommitter ) ) {
 				doActionForPhotoOfAuthorsForWhomPhotoAuthorHasVotesRecently( authorIdOfRandomPhotoFromLastVoted, actionCommitter );

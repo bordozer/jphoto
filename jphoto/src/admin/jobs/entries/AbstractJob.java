@@ -4,7 +4,7 @@ import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.JobExecutionStatus;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.GenerationMonitor;
-import admin.jobs.general.JobExecutionFinalMessage;
+import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
@@ -12,6 +12,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
@@ -49,7 +50,7 @@ public abstract class AbstractJob extends Thread {
 	protected List<Integer> beingProcessedPhotosIds;
 
 	protected int totalJopOperations;
-	private List<JobExecutionFinalMessage> jobExecutionFinalMessages = newArrayList();
+	private List<JobRuntimeLog> jobRuntimeLogs = newArrayList();
 
 	private int scheduledTaskId;
 
@@ -334,12 +335,12 @@ public abstract class AbstractJob extends Thread {
 		return false;
 	}
 
-	public List<JobExecutionFinalMessage> getJobExecutionFinalMessages() {
-		return jobExecutionFinalMessages;
+	public List<JobRuntimeLog> getJobRuntimeLogs() {
+		return jobRuntimeLogs;
 	}
 
-	public void addJobExecutionFinalMessage( final String message ) {
-		jobExecutionFinalMessages.add( new JobExecutionFinalMessage( message, services.getDateUtilsService().getCurrentTime() ) );
+	public void addJobRuntimeLogMessage( final TranslatableMessage translatableMessage ) {
+		jobRuntimeLogs.add( new JobRuntimeLog( translatableMessage, services.getDateUtilsService().getCurrentTime() ) );
 	}
 
 	public int getScheduledTaskId() {

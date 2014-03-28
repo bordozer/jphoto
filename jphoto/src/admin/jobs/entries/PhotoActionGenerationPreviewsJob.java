@@ -5,7 +5,7 @@ import admin.jobs.enums.SavedJobType;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
-import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 
@@ -24,14 +24,20 @@ public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerat
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
-		final Language language = getLanguage();
+		/*final Language language = getLanguage();
 		final String message = services.getTranslatorService().translate( "User %s has seen photo $1 ( time: $2 )"
 			, language
 			, entityLinkUtilsService.getUserCardLink( user, language )
 			, entityLinkUtilsService.getPhotoCardLink( photo, language )
 			, dateUtilsService.formatDateTime( actionTime )
-		);
-		addJobExecutionFinalMessage( message );
+		);*/
+
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "User %s has seen photo $1 ( time: $2 )", services )
+			.addLinkToUserCardUnit( user )
+			.addLinkToPhotoCardUnit( photo )
+			.addFormattedDateTimeUnit( actionTime )
+			;
+		addJobRuntimeLogMessage( translatableMessage );
 
 		return savePhotoPreview( photo, user, actionTime );
 	}

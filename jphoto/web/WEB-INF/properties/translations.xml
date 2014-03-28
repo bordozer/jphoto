@@ -2518,8 +2518,10 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Generated preview for $1</nerd>
+		<ru><![CDATA[Сгенерировано превью для $1]]></ru>
+		<en><![CDATA[Generated preview for $1]]></en>
+		<ua><![CDATA[Прев'ю сгенеровано для $1]]></ua>
 	</translation>
 
 	<translation>

@@ -9,7 +9,7 @@
 
 	<c:set var="job" value="${jobExecutionLogModel.job}" />
 	<c:set var="jobNotFoundError" value="${jobExecutionLogModel.jobNotFoundError}" />
-	<c:set var="jobExecutionFinalMessages" value="${jobExecutionLogModel.jobExecutionFinalMessages}" />
+	<c:set var="jobRuntimeLogs" value="${jobExecutionLogModel.jobRuntimeLogsMessages}" />
 
 	<div style="float: left;; width: 100%; padding: 10px;">
 
@@ -17,17 +17,17 @@
 			<h3>${eco:translate('Job not found. It must be finished.')}</h3>
 		</c:if>
 
-		<c:if test="${not empty jobExecutionFinalMessages}">
-			<c:forEach var="jobExecutionFinalMessage" items="${jobExecutionFinalMessages}">
+		<c:if test="${not empty jobRuntimeLogs}">
+			<c:forEach var="jobRuntimeLogEntry" items="${jobRuntimeLogs}">
 
-				<b>${eco:formatDate(jobExecutionFinalMessage.finalMessageTime)} &nbsp; ${eco:formatTime(jobExecutionFinalMessage.finalMessageTime)}</b>: ${jobExecutionFinalMessage.finalMessage}
+				${jobRuntimeLogEntry}
 
 				<br/>
 
 			</c:forEach>
 		</c:if>
 
-		<c:if test="${not jobNotFoundError and empty jobExecutionFinalMessages}">
+		<c:if test="${not jobNotFoundError and empty jobRuntimeLogs}">
 			<h3>${eco:translate('No messages found')}</h3>
 		</c:if>
 

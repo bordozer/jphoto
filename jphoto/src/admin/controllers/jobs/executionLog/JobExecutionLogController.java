@@ -1,8 +1,11 @@
 package admin.controllers.jobs.executionLog;
 
 import admin.jobs.entries.AbstractJob;
-import admin.jobs.general.JobExecutionFinalMessage;
+import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
+import core.context.EnvironmentContext;
+import core.services.translator.Language;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Controller
 @RequestMapping( "jobs/execution" )
@@ -26,6 +31,9 @@ public class JobExecutionLogController {
 
 	@Autowired
 	private JobExecutionService jobExecutionService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@ModelAttribute( JOB_MODEL_NAME )
 	public JobExecutionLogModel initModel() {
@@ -42,15 +50,23 @@ public class JobExecutionLogController {
 			return VIEW;
 		}
 
-		final List<JobExecutionFinalMessage> jobExecutionFinalMessages = job.getJobExecutionFinalMessages();
-		Collections.sort( jobExecutionFinalMessages, new Comparator<JobExecutionFinalMessage>() {
+		final List<JobRuntimeLog> jobRuntimeLogs = job.getJobRuntimeLogs();
+		Collections.sort( jobRuntimeLogs, new Comparator<JobRuntimeLog>() {
 			@Override
-			public int compare( final JobExecutionFinalMessage o1, final JobExecutionFinalMessage o2 ) {
-				return o2.getFinalMessageTime().compareTo( o1.getFinalMessageTime() );
+			public int compare( final JobRuntimeLog o1, final JobRuntimeLog o2 ) {
+				return o2.getJobRuntimeLogEntryTime().compareTo( o1.getJobRuntimeLogEntryTime() );
 			}
 		} );
 
-		model.setJobExecutionFinalMessages( jobExecutionFinalMessages.size() < LOG_MESSAGE_QTY ? jobExecutionFinalMessages : jobExecutionFinalMessages.subList( 0, LOG_MESSAGE_QTY ) );
+		final Language language = EnvironmentContext.getLanguage();
+
+		final List<String> jobRuntimeLogsMessage = newArrayList();
+		for ( final JobRuntimeLog jobRuntimeLog : jobRuntimeLogs ) {
+			final String translation = jobRuntimeLog.getTranslatableMessage().build( language );
+			jobRuntimeLogsMessage.add( String.format( "%s %s", dateUtilsService.formatTime( jobRuntimeLog.getJobRuntimeLogEntryTime() ), translation ) );
+		}
+
+		model.setJobRuntimeLogsMessages( jobRuntimeLogsMessage.size() < LOG_MESSAGE_QTY ? jobRuntimeLogsMessage : jobRuntimeLogsMessage.subList( 0, LOG_MESSAGE_QTY ) );
 
 		return VIEW;
 	}

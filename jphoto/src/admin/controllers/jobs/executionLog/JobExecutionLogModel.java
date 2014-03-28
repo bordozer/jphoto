@@ -1,7 +1,6 @@
 package admin.controllers.jobs.executionLog;
 
 import admin.jobs.entries.AbstractJob;
-import admin.jobs.general.JobExecutionFinalMessage;
 
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class JobExecutionLogModel {
 
 	private AbstractJob job;
 
-	private List<JobExecutionFinalMessage> jobExecutionFinalMessages;
+	private List<String> jobRuntimeLogsMessages;
 	private boolean jobNotFoundError;
 
 	public AbstractJob getJob() {
@@ -28,11 +27,11 @@ public class JobExecutionLogModel {
 		this.jobNotFoundError = jobNotFoundError;
 	}
 
-	public List<JobExecutionFinalMessage> getJobExecutionFinalMessages() {
-		return jobExecutionFinalMessages;
+	public List<String> getJobRuntimeLogsMessages() {
+		return jobRuntimeLogsMessages;
 	}
 
-	public void setJobExecutionFinalMessages( final List<JobExecutionFinalMessage> jobExecutionFinalMessages ) {
-		this.jobExecutionFinalMessages = jobExecutionFinalMessages;
+	public void setJobRuntimeLogsMessages( final List<String> jobRuntimeLogsMessages ) {
+		this.jobRuntimeLogsMessages = jobRuntimeLogsMessages;
 	}
 }

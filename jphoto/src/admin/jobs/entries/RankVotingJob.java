@@ -9,7 +9,7 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;
 import core.log.LogHelper;
-import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserRankService;
 import core.services.utils.EntityLinkUtilsService;
 
@@ -87,14 +87,21 @@ public class RankVotingJob extends AbstractJob {
 
 //			getLog().debug( String.format( "User %s is voting for %s in genre %s (mark %s)", votingUser.getId(), beingVotedUser.getId(), genreId, accessibleVotingPoints ) );
 
-			final Language language = getLanguage();
-			addJobExecutionFinalMessage( services.getTranslatorService().translate( "User $1 has voted for $2's rank in $3 ( $4 )"
+			/*final Language language = getLanguage();
+			addJobRuntimeLogMessage( services.getTranslatorService().translate( "User $1 has voted for $2's rank in $3 ( $4 )"
 				, language
 				, entityLinkUtilsService.getUserCardLink( votingUser, language )
 				, entityLinkUtilsService.getUserCardLink( beingVotedUser, language )
 				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, language )
 				, String.valueOf( randomVotingPoints ) )
-			);
+			);*/
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has voted for $2's rank in $3 ( $4 )", services )
+				.addLinkToUserCardUnit( votingUser )
+				.addLinkToUserCardUnit( beingVotedUser )
+				.addLinkToPhotosByUserByGenreUnit( beingVotedUser, genre )
+				.addIntegerUnit( randomVotingPoints )
+				;
+			addJobRuntimeLogMessage( translatableMessage );
 
 			counter = 0;
 			increment();
