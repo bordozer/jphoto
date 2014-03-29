@@ -1935,32 +1935,22 @@
 
 	<translation>
 		<nerd>author plural</nerd>
-		<ru><![CDATA[Авторы]]></ru>
+		<ru><![CDATA[авторы]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>model plural</nerd>
-		<ru><![CDATA[Модели]]></ru>
+		<ru><![CDATA[модели]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>makeup master plural</nerd>
-		<ru><![CDATA[Визажисты]]></ru>
+		<ru><![CDATA[визажисты]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Best photos of author plural</nerd>
-		<ru><![CDATA[Лучшие работы авторов]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of model plural</nerd>
-		<ru><![CDATA[Лучшие работы моделей]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of makeup master plural</nerd>
-		<ru><![CDATA[Лучшие работы визажистов]]></ru>
+		<nerd>Best photos of $1</nerd>
+		<ru><![CDATA[Лучшие работы: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1995,7 +1985,7 @@
 
 	<translation>
 		<nerd>The very best of $1</nerd>
-		<ru><![CDATA[Лучшие работы $1]]></ru>
+		<ru><![CDATA[Лучшие работы: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -2363,11 +2353,6 @@
 	<translation>
 		<nerd>All photos in genre '$1'</nerd>
 		<ru><![CDATA[Все работы в категории '$1']]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of $1</nerd>
-		<ru><![CDATA[Лучшие работы $1]]></ru>
 	</translation>
 
 	<translation>
@@ -3041,6 +3026,55 @@
 		<ru><![CDATA[загруженные с $1]]></ru>
 		<ua><![CDATA[завантаженi з $1]]></ua>
 		<en><![CDATA[posted in period from $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>uploaded by users with membership type '$1'</nerd>
+		<ru><![CDATA[загруженные пользователями с типом участия $1]]></ru>
+		<ua><![CDATA[заванаженнi учасниками з типом участi $1]]></ua>
+		<en><![CDATA[uploaded by users with membership type '$1']]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>

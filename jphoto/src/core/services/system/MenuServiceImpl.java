@@ -278,7 +278,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipBestMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = translatorService.translate( "Best photos of $1", getLanguage(), membershipType.getNamePlural() );
+		final String caption = translatorService.translate( "Best photos of $1", getLanguage(), translatorService.translate( membershipType.getNamePlural(), getLanguage() ) );
 		final String link = urlUtilsService.getPhotosByMembershipBest( membershipType, url );
 		return new MenuItem( caption, link );
 	}
