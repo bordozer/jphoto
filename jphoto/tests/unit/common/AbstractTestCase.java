@@ -16,8 +16,6 @@ import org.junit.Before;
 
 public class AbstractTestCase {
 
-	public static final String TRANSLATION_END_PREFIX = "(t)<sup>nerd</sup>";
-
 	public static final Language MENU_LANGUAGE = Language.EN;
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";

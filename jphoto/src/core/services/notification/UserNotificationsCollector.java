@@ -7,7 +7,6 @@ import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
-import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import org.apache.commons.collections15.CollectionUtils;
@@ -367,14 +366,6 @@ public abstract class UserNotificationsCollector {
 
 	protected User getPhotoAuthor( final Photo photo ) {
 		return services.getUserService().load( photo.getUserId() );
-	}
-
-	protected String getPhotoCardLink( final Photo photo, final Language language ) {
-		return services.getEntityLinkUtilsService().getPhotoCardLink( photo, language );
-	}
-
-	protected String getUserCardLink( final User photoAuthor ) {
-		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor, Language.EN ); // TODO: pass addressat language here
 	}
 
 	private static boolean isUserEmailNotificationOptionSwitchedOn( final User photoAuthor, final EmailNotificationType emailNotificationType ) {
