@@ -177,16 +177,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			if ( getServices().getJobHelperService().doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
 
-				final String message = services.getTranslatorService().translate( "Photo $1 of $2 has already been imported."
+				final String message = services.getTranslatorService().translate( "Photo $1 of $2 has already been imported"
 					, language
 					, String.valueOf( photosightPhotoId )
 					, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
 				);
 				log.debug( message );
 
-				/*final String format = String.format( "Photo %d of %s has already been imported."
-					, photosightPhotoId, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );*/
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo %d of %s has already been imported.", services )
+				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
 					.addIntegerUnit( photosightPhotoId )
 					.addStringUnit( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 					;
@@ -462,8 +460,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		} else {
 			photosightPhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
-			/*final String message = services.getTranslatorService().translate( "$1: can not get upload time from photosight photo page. Random time is used."
-				, language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from photosight photo page. Random time is used.", services )
 				.addStringUnit( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
 				;
@@ -481,12 +477,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		log.debug( String.format( "Photo %d has been downloaded from photosight", photosightPhoto.getPhotoId() ) );
 
-		/*final String translate = services.getTranslatorService().translate( "Downloaded from photosight: $1 of $2, photosight category: $3"
-			, language
-			, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto )
-			, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
-			, PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() )
-		);*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from photosight: $1 of $2, photosight category: $3", services )
 			.addStringUnit( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
 			.addStringUnit( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )

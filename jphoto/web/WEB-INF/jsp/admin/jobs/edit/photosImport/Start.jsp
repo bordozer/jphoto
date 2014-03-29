@@ -111,7 +111,7 @@
 									<table:separator colspan="2"/>
 
 									<table:tr>
-										<table:td colspan="2">${eco:translate('Assign all generated photos to member:')}</table:td>
+										<table:td colspan="2">${eco:translate('Assign all generated photos to member')}?</table:td>
 									</table:tr>
 
 									<table:tr>

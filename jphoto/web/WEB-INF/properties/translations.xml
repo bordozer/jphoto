@@ -2771,6 +2771,97 @@
 	</translation>
 
 	<translation>
+		<nerd>Downloaded from photosight: $1 of $2, photosight category: $3</nerd>
+		<ru><![CDATA[Загружено с photosight: $1 автора $2, категория: $3]]></ru>
+		<ua><![CDATA[Завантажено з photosight: $1 автора $2, категорiя: $3]]></ua>
+		<en><![CDATA[Downloaded from photosight: $1 of $2, photosight category: $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo $1 of $2 has already been imported</nerd>
+		<ru><![CDATA[Фото $1 автора $2 уже была импортирована ранее]]></ru>
+		<ua><![CDATA[Фото $1 автора $2 вже була iмпортована ранiше]]></ua>
+		<en><![CDATA[Photo $1 of $2 has already been imported]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Existing user found: $1</nerd>
+		<ru><![CDATA[Найден ользователь: $1]]></ru>
+		<ua><![CDATA[Знайден учасник: $1]]></ua>
+		<en><![CDATA[Existing user found: $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Tme member has not downloaded avatar yet... :(</nerd>
+		<ru><![CDATA[Пользователь не загрузил аватал]]></ru>
+		<ua><![CDATA[Учасник ще не завантажив аватар]]></ua>
+		<en><![CDATA[The member has not downloaded avatar yet... :(]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Assign all generated photos to member</nerd>
+		<ru><![CDATA[Присвоить все работы пользователю]]></ru>
+		<ua><![CDATA[Завантажити усi работы учаснику]]></ua>
+		<en><![CDATA[Assign all generated photos to member]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Found member:</nerd>
+		<ru><![CDATA[Найден пользователь:]]></ru>
+		<ua><![CDATA[Знайден учасник:]]></ua>
+		<en><![CDATA[Found member:]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job execution log</nerd>
+		<ru><![CDATA[Лог выполнения задачи]]></ru>
+		<ua><![CDATA[Лог выконання завдання]]></ua>
+		<en><![CDATA[Job execution log]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete picture after import</nerd>
+		<ru><![CDATA[Удалить файл картинки после импорта]]></ru>
+		<ua><![CDATA[Видалити файл зображення пiсля iмпорту]]></ua>
+		<en><![CDATA[Delete picture after import]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Folder with test pictures</nerd>
+		<ru><![CDATA[Папка с картинками для импорта]]></ru>
+		<ua><![CDATA[Папка з зображеннями для iмпорту]]></ua>
+		<en><![CDATA[Folder with test pictures]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Save '$1' job</nerd>
+		<ru><![CDATA[Сожранить '$1' задачу]]></ru>
+		<ua><![CDATA[Зберегти '$1' завдання]]></ua>
+		<en><![CDATA[Save '$1' job]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
