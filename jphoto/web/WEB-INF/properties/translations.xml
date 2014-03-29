@@ -2841,10 +2841,10 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>New user has been created: $1</nerd>
+		<ru><![CDATA[Создан новый пользователь: $1]]></ru>
+		<ua><![CDATA[Створен новий учасник:  $1]]></ua>
+		<en><![CDATA[New user has been created: $1]]></en>
 	</translation>
 
 	<translation>
