@@ -2687,10 +2687,45 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Reset filter</nerd>
+		<ru><![CDATA[Сбросить фильтр]]></ru>
+		<ua><![CDATA[Скинути фiльтр]]></ua>
+		<en><![CDATA[Reset filter]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Membership type</nerd>
+		<ru><![CDATA[Тип участия]]></ru>
+		<ua><![CDATA[Тип участi]]></ua>
+		<en><![CDATA[Membership type]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Gender</nerd>
+		<ru><![CDATA[Пол]]></ru>
+		<ua><![CDATA[Стать]]></ua>
+		<en><![CDATA[Gender]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
+		<ua><![CDATA[Аватар]]></ua>
+		<en><![CDATA[Avatar]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photos in line</nerd>
+		<ru><![CDATA[Работ в ряд]]></ru>
+		<ua><![CDATA[Робот у рядi]]></ua>
+		<en><![CDATA[Photos in line]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Filter by user name</nerd>
+		<ru><![CDATA[Фильтр по имени]]></ru>
+		<ua><![CDATA[Фiльтр по iменi]]></ua>
+		<en><![CDATA[Filter by user name]]></en>
 	</translation>
 
 	<translation>

@@ -33,8 +33,8 @@
 			<%--<table:td>${eco:translate( "Login" )}</table:td>--%>
 			<%--<table:td>${eco:translate( "Email" )}</table:td>--%>
 			<table:td>${eco:translate( "Birthday" )}</table:td>
-			<table:td>${eco:translate( "Genred" )}</table:td>
-			<table:td>${eco:translate( "Membership types" )}</table:td>
+			<table:td>${eco:translate( "Gender" )}</table:td>
+			<table:td>${eco:translate( "Membership type" )}</table:td>
 			<table:td>${eco:translate( "Photos in line" )}</table:td>
 			<table:td>${eco:translate( "Photos Qty" )}</table:td>
 		</jsp:attribute>
