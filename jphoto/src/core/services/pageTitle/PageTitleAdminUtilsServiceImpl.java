@@ -167,7 +167,7 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated, nerd );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), nerd, translatorService.translate( "Template", EnvironmentContext.getLanguage()) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), nerd, translatorService.translate( "Job template", EnvironmentContext.getLanguage()) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}

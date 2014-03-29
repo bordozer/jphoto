@@ -65,7 +65,7 @@
 		<table:tr>
 			<table:tdtext text_t="Time period"/>
 			<table:tddata>
-				<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('days')}</div>
+				<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('date range tag => parameters => days')}</div>
 			</table:tddata>
 		</table:tr>
 	</table:table>
@@ -79,7 +79,7 @@
 		<table:tr>
 			<table:tdtext text_t="Time period"/>
 			<table:tddata>
-				<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('days')}
+				<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('date range tag => parameters => days')}
 			</table:tddata>
 		</table:tr>
 	</table:table>

@@ -35,7 +35,7 @@
 <c:set var="imageNotFoundImg" value="${eco:imageFolderURL()}/imagenotfound.png"/>
 
 <c:set var="resetFoundMemberImg" value="${eco:imageFolderURL()}/icons16/resetFoundMember.png"/>
-<c:set var="resetFoundMemberHint" value="${eco:translate('Reset')}"/>
+<c:set var="resetFoundMemberHint" value="${eco:translate('Reset found member in user picker')}"/>
 
 <c:set var="avatarHeight" value="150"/>
 

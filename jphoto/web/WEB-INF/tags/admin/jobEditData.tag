@@ -31,9 +31,9 @@
 
 	</form:form>
 
-	&nbsp;&nbsp;${eco:translate('Users: ')} <b>${jobModel.usersTotal}</b>
+	&nbsp;&nbsp;${eco:translate('Job: total users')}: <b>${jobModel.usersTotal}</b>
 	<br/>
-	&nbsp;&nbsp;${eco:translate('Photos: ')} <b>${jobModel.photosTotal}</b>
+	&nbsp;&nbsp;${eco:translate('Job: total Photos')}: <b>${jobModel.photosTotal}</b>
 
 </div>
 

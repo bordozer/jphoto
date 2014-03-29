@@ -1903,6 +1903,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Job template</nerd>
+		<ru><![CDATA[Шаблон]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Active / Performed</nerd>
 		<ru><![CDATA[Акт. / Выполн.]]></ru>
 	</translation>
@@ -2886,17 +2891,143 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Mark all Admin notifications as read</nerd>
+		<ru><![CDATA[Пометить все сообщения от админа как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити усi повiдомлення вiд адмiна як прочитанi]]></ua>
+		<en><![CDATA[Mark all Admin notifications as read]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
+		<nerd>Delete selected messages</nerd>
+		<ru><![CDATA[Удалить выделенные сообщения]]></ru>
+		<ua><![CDATA[Видалити помiченi повiдомлення]]></ua>
+		<en><![CDATA[Delete selected messages]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Total messages</nerd>
+		<ru><![CDATA[Всего сообщений]]></ru>
+		<ua><![CDATA[Всього повiдомлень]]></ua>
+		<en><![CDATA[Total messages]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You are in the black list of photo's author</nerd>
+		<ru><![CDATA[Вы в черном списке автора]]></ru>
+		<ua><![CDATA[Ви у чорному листi автора]]></ua>
+		<en><![CDATA[You are in the black list of photo's author]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected messages?</nerd>
+		<ru><![CDATA[Удалить выбранные сообщения?]]></ru>
+		<ua><![CDATA[Видалити помiченнi повiдомлення?]]></ua>
+		<en><![CDATA[Delete selected messages?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete ALL Admin notifications</nerd>
+		<ru><![CDATA[Удалить все сообщения от админа]]></ru>
+		<ua><![CDATA[Видалити усi повiдомлення вiд адмiна]]></ua>
+		<en><![CDATA[Delete ALL Admin notifications]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset found member in user picker</nerd>
+		<ru><![CDATA[Сбросить]]></ru>
+		<ua><![CDATA[Скинути]]></ua>
+		<en><![CDATA[Reset]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job: total users</nerd>
+		<ru><![CDATA[Всего пользователей]]></ru>
+		<ua><![CDATA[Усього учасникiв]]></ua>
+		<en><![CDATA[Users count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job: total Photos</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+		<ua><![CDATA[Всього робот]]></ua>
+		<en><![CDATA[Photos count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Mark all $1 as read?</nerd>
+		<ru><![CDATA[Пометить $1 как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити $1 як прочитанi]]></ua>
+		<en><![CDATA[Mark all $1 as read?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>This is an active configuration</nerd>
+		<ru><![CDATA[активная]]></ru>
+		<ua><![CDATA[активна]]></ua>
+		<en><![CDATA[active]]></en>
+	</translation>
+
+	<translation>
+		<nerd>This is an active job</nerd>
+		<ru><![CDATA[Активна]]></ru>
+		<ua><![CDATA[Актiвна]]></ua>
+		<en><![CDATA[Active]]></en>
+	</translation>
+
+	<translation>
+		<nerd>activity cleanup job => parameter => days</nerd>
+		<ru><![CDATA[дней]]></ru>
+		<ua><![CDATA[днiв]]></ua>
+		<en><![CDATA[days]]></en>
+	</translation>
+
+	<translation>
+		<nerd>date range tag => parameters => days</nerd>
+		<ru><![CDATA[дней]]></ru>
+		<ua><![CDATA[днiв]]></ua>
+		<en><![CDATA[days]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Going to be affected photos (all if empty)</nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<en><![CDATA[Going to be affected photos (all if empty)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Quantity of generated actions</nerd>
+		<ru><![CDATA[К-во генерируемых действий]]></ru>
+		<ua><![CDATA[Кiлькiсть генерованих дiй]]></ua>
+		<en><![CDATA[Quantity of generated actions]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The job has no parameters</nerd>
+		<ru><![CDATA[Этот тип задачи не имеет параметров]]></ru>
+		<ua><![CDATA[Цей тип завдання не маЕ параметрiв]]></ua>
+		<en><![CDATA[The job has no parameters]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Skip generation if preview already exists</nerd>
+		<ru><![CDATA[Пропустить генерирование превью, если оно существует]]></ru>
+		<ua><![CDATA[Пропустити генерування превью, якщо воно iснуЕ]]></ua>
+		<en><![CDATA[Skip generation if preview already exists]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)</nerd>
+		<ru><![CDATA[В папке дожны быть male и female подкаталоги, в которых находятся аватары (регистр имен не имеет значения)]]></ru>
+		<ua><![CDATA[У каталозi повиннi бути  male и female пiдкаталоги, в яких знаходяться аватари (регистри не мають значення)]]></ua>
+		<en><![CDATA[The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Avatar dir</nerd>
+		<ru><![CDATA[Каталог с аватарами]]></ru>
+		<ua><![CDATA[Каталог з аватарами]]></ua>
+		<en><![CDATA[Avatar dir]]></en>
 	</translation>
 
 	<translation>
