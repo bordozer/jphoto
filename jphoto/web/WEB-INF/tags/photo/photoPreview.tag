@@ -59,7 +59,7 @@
 
 <div class="${containerCss}">
 
-	<div class="containerPhotoGenre">
+	<div class="containerPhotoGenre" style="font-size: 10px;">
 		<links:genrePhotos genre="${photoInfo.genre}" />
 	</div>
 
