@@ -64,9 +64,9 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 						, String.valueOf( userCurrentRank ) )
 					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )", services )
-						.addLinkToUserCardUnit( user )
+						.addUserCardLinkUnit( user )
 						.addIntegerUnit( userNewRank )
-						.addLinkToPhotosByUserByGenreUnit( user, genre )
+						.addPhotosByUserByGenreLinkUnit( user, genre )
 						.addIntegerUnit( userCurrentRank )
 						;
 					addJobRuntimeLogMessage( translatableMessage );

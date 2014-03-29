@@ -83,9 +83,9 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 		final User photoAuthor = services.getUserService().load( photo.getUserId() );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has appraised photo $2 of $3 ( time: $4 )", services )
-			.addLinkToUserCardUnit( user )
-			.addLinkToPhotoCardUnit( photo )
-			.addLinkToUserCardUnit( photoAuthor )
+			.addUserCardLinkUnit( user )
+			.addPhotoCardLinkUnit( photo )
+			.addUserCardLinkUnit( photoAuthor )
 			;
 		addJobRuntimeLogMessage( translatableMessage );
 

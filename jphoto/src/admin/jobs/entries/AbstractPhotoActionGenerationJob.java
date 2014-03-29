@@ -162,8 +162,8 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
 			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for another photo of $2", services )
-				.addLinkToUserCardUnit( actionCommitter )
-				.addLinkToUserCardUnit( photoAuthor )
+				.addUserCardLinkUnit( actionCommitter )
+				.addUserCardLinkUnit( photoAuthor )
 				;
 			addJobRuntimeLogMessage( translatableMessage );
 
@@ -204,9 +204,9 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
 			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently", services )
-				.addLinkToUserCardUnit( actionCommitter )
-				.addLinkToUserCardUnit( authorOfRandomPhotoFromLastVoted )
-				.addLinkToUserCardUnit( photoAuthor )
+				.addUserCardLinkUnit( actionCommitter )
+				.addUserCardLinkUnit( authorOfRandomPhotoFromLastVoted )
+				.addUserCardLinkUnit( photoAuthor )
 				;
 			addJobRuntimeLogMessage( translatableMessage );
 

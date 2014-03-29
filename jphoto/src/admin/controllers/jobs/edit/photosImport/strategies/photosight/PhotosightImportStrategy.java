@@ -586,7 +586,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			/*final String translate = services.getTranslatorService().translate( "Existing user found: $1"
 				, importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( existingUser, language ) );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found: $1", services )
-				.addLinkToUserCardUnit( existingUser )
+				.addUserCardLinkUnit( existingUser )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -608,7 +608,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		/*final String translate = services.getTranslatorService().translate( "New user has been created: $1"
 			, importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( user, language ) );*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "New user has been created: $1", services )
-			.addLinkToUserCardUnit( user )
+			.addUserCardLinkUnit( user )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 

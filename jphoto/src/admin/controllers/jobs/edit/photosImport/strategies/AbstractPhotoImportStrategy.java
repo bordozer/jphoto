@@ -130,9 +130,9 @@ public abstract class AbstractPhotoImportStrategy {
 		);*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
 			.addIntegerUnit( photo.getId() )
-			.addLinkToPhotoCardUnit( photo )
-			.addLinkToUserCardUnit( user )
-			.addLinkToPhotosByGenreUnit( genre )
+			.addPhotoCardLinkUnit( photo )
+			.addUserCardLinkUnit( user )
+			.addPhotosByGenreLinkUnit( genre )
 			;
 
 		job.addJobRuntimeLogMessage( translatableMessage );

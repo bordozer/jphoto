@@ -39,22 +39,22 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotosByGenreUnit( final Genre genre ) {
+	public TranslatableMessage addPhotosByGenreLinkUnit( final Genre genre ) {
 		messageUnits.add( new LinkToPhotosByGenreUnit( genre, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToUserCardUnit( final User user ) {
+	public TranslatableMessage addUserCardLinkUnit( final User user ) {
 		messageUnits.add( new LinkToUserCardUnit( user, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotosByUserByGenreUnit( final User user, final Genre genre ) {
+	public TranslatableMessage addPhotosByUserByGenreLinkUnit( final User user, final Genre genre ) {
 		messageUnits.add( new LinkToPhotosByUserByGenreUnit( user, genre, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotoCardUnit( final Photo photo ) {
+	public TranslatableMessage addPhotoCardLinkUnit( final Photo photo ) {
 		messageUnits.add( new LinkToPhotoCardUnit( photo, services ) );
 		return this;
 	}

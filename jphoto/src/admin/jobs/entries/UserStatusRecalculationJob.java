@@ -55,7 +55,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 						, UserStatus.MEMBER.getName()
 					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
-						.addLinkToUserCardUnit( user )
+						.addUserCardLinkUnit( user )
 						.addStringTranslatableUnit( UserStatus.MEMBER.getName() );
 					addJobRuntimeLogMessage( translatableMessage );
 
@@ -67,7 +67,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 						, getLanguage()
 						, String.valueOf( user.getId() )
 					);*/
-					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addLinkToUserCardUnit( user );
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addUserCardLinkUnit( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
 			}
