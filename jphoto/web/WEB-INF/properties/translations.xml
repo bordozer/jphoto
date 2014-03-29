@@ -2786,7 +2786,7 @@
 
 	<translation>
 		<nerd>Existing user found: $1</nerd>
-		<ru><![CDATA[Найден ользователь: $1]]></ru>
+		<ru><![CDATA[Найден пользователь: $1]]></ru>
 		<ua><![CDATA[Знайден учасник: $1]]></ua>
 		<en><![CDATA[Existing user found: $1]]></en>
 	</translation>
