@@ -2582,6 +2582,34 @@
 	</translation>
 
 	<translation>
+		<nerd>Language tag is missed in translation.xml</nerd>
+		<ua><![CDATA[Мовний тег вiдсутнiй в translation.xml]]></ua>
+		<ru><![CDATA[Языковой тэг отсутствует в translation.xml]]></ru>
+		<en><![CDATA[Language tag is missed in translation.xml]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ua><![CDATA[]]></ua>
+		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ua><![CDATA[]]></ua>
+		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ua><![CDATA[]]></ua>
+		<ru><![CDATA[]]></ru>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
