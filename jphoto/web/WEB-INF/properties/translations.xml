@@ -936,6 +936,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Page $1</nerd>
+		<ru><![CDATA[Страница $1]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Anonymous till</nerd>
 		<ru><![CDATA[Анонимность до]]></ru>
 	</translation>

@@ -7,7 +7,6 @@ public class PageItem {
 
 	public PageItem( final int number ) {
 		this.number = number;
-		title = String.format( "Page %d", number ); //  // TODO: translate
 	}
 
 	public int getNumber() {

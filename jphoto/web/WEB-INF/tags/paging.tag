@@ -41,14 +41,16 @@
 			<span class="page selectedPage block-border">${pageItem.number}</span>
 		</c:if>
 
+		<c:set var="pageItemTitle" value="${eco:translate1('Page $1', pageItem.number)}"/>
+
 		<c:if test="${currentPage != pageItem.number}">
 
 			<c:if test="${pageItem.number == 0}">
-				<span title="${pageItem.title}">&nbsp;...&nbsp;</span>
+				<span title="${pageItemTitle}">&nbsp;...&nbsp;</span>
 			</c:if>
 
 			<c:if test="${pageItem.number != 0}">
-				<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItem.title}">
+				<a href="${pagingModel.requestUrl}?${pageParam}=${pageItem.number}" title="${pageItemTitle}">
 					<span class="page block-background block-border block-shadow">${pageItem.number}</span>
 				</a>
 			</c:if>
