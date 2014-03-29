@@ -12,6 +12,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotosightContentHelper {
 
+	public static final String NO_PHOTO_NAME = "-no name-";
+
 	public static int getTotalPagesQty( final String userCardContent, int photosightUserId ) {
 		// <a class="" href="/users/316896/?pager=8">8</a>
 		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%d/\\?pager=(.+?)\">", photosightUserId ) );
@@ -48,7 +50,7 @@ public class PhotosightContentHelper {
 			return StringUtilities.truncateString( name, 255 );
 		}
 
-		return "";
+		return NO_PHOTO_NAME;
 	}
 
 	public static List<String> extractComments( final String photoPageContent ) {

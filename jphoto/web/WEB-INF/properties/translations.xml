@@ -2315,8 +2315,8 @@
 
 	<translation>
 		<nerd>Created photo #$1 '$2' of $3, category: $4</nerd>
-		<ru><![CDATA[Создана работа #$1 '$2' автора $3, раздел: $4]]></ru>
-		<ua><![CDATA[Створена робота #$1 '$2' автора $3, раздiл: $4]]></ua>
+		<ru><![CDATA[Создана работа #$1 '$2', автор $3, раздел: $4]]></ru>
+		<ua><![CDATA[Створена робота #$1 '$2', автор $3, роздiл: $4]]></ua>
 	</translation>
 
 	<translation>
@@ -2862,6 +2862,55 @@
 		<ru><![CDATA[Все разделы]]></ru>
 		<ua><![CDATA[Усi роздiли]]></ua>
 		<en><![CDATA[All categories]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 User: $2; photo: $3. Photo import skipped.</nerd>
+		<ru><![CDATA[$1 Пользователь: $2; фото: $3. Фото не импортировано.]]></ru>
+		<ua><![CDATA[$1 Участник: $2; фото: $3. Фото не импортовано.]]></ua>
+		<en><![CDATA[$1 User: $2; photo: $3. Photo import skipped.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>There are $1 untranslated</nerd>
+		<ru><![CDATA[Отсутствуют переводы: $1]]></ru>
+		<ua><![CDATA[Вiдсутнi переклады:  $1]]></ua>
+		<en><![CDATA[There are $1 untranslated]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Nerd</nerd>
+		<ru><![CDATA[Оригинальная фраза]]></ru>
+		<ua><![CDATA[Оригiнальна фраза]]></ua>
+		<en><![CDATA[Nerd]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>

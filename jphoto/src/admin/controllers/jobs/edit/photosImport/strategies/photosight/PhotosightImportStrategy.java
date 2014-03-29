@@ -489,13 +489,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private void logPhotoSkipping( final PhotosightUser photosightUser, final int photosightPhotoId, final String s ) {
-		/*final String message = services.getTranslatorService().translate( "$1 User: $2; photo: $3.<br />Photo import skipped."
-			, language
-			, s
-			, photosightUser.toString() // TODO: ?
-			, PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId )
-		);*/
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 User: $2; photo: $3.<br />Photo import skipped.", services )
+
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 User: $2; photo: $3. Photo import skipped.", services )
 			.addStringUnit( s )
 			.addStringUnit( photosightUser.toString() ) // TODO: ?
 			.addStringUnit( PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId ) )
