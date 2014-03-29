@@ -50,7 +50,7 @@ public abstract class AbstractJob extends Thread {
 	protected List<Integer> beingProcessedPhotosIds;
 
 	protected int totalJopOperations;
-	private List<JobRuntimeLog> jobRuntimeLogs = newArrayList();
+	private final List<JobRuntimeLog> jobRuntimeLogs = newArrayList();
 
 	private int scheduledTaskId;
 
@@ -340,7 +340,9 @@ public abstract class AbstractJob extends Thread {
 	}
 
 	public void addJobRuntimeLogMessage( final TranslatableMessage translatableMessage ) {
-		jobRuntimeLogs.add( new JobRuntimeLog( translatableMessage, services.getDateUtilsService().getCurrentTime() ) );
+		synchronized ( jobRuntimeLogs ) {
+			jobRuntimeLogs.add( new JobRuntimeLog( translatableMessage, services.getDateUtilsService().getCurrentTime() ) );
+		}
 	}
 
 	public int getScheduledTaskId() {
