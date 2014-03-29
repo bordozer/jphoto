@@ -12,7 +12,7 @@
 
 	<jsp:attribute name="jobForm">
 
-		<table:table width="500" border="0">
+		<table:table width="700" border="0">
 
 			<table:tr>
 				<table:td colspan="2">

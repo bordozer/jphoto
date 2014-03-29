@@ -1913,8 +1913,14 @@
 	</translation>
 
 	<translation>
-		<nerd>Show member activity stream</nerd>
-		<ru><![CDATA[Показать ленту событий пользователя]]></ru>
+		<nerd>Show full member activity stream</nerd>
+		<ru><![CDATA[Показать всю ленту событий пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show full member activity stream (short)</nerd>
+		<ru><![CDATA[Все]]></ru>
+		<ua><![CDATA[Усi]]></ua>
 	</translation>
 
 	<translation>
