@@ -15,6 +15,6 @@ public class StringUnit extends AbstractTranslatableMessageUnit {
 
 	@Override
 	public String getValue( final Language language ) {
-		return getTranslatorService().translate( value, language );
+		return value;
 	}
 }

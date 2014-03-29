@@ -56,7 +56,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
 						.addLinkToUserCardUnit( user )
-						.addStringUnit( UserStatus.MEMBER.getName() );
+						.addStringTranslatableUnit( UserStatus.MEMBER.getName() );
 					addJobRuntimeLogMessage( translatableMessage );
 
 					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );

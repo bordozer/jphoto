@@ -29,6 +29,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addStringTranslatableUnit( final String value ) {
+		messageUnits.add( new StringTranslatableUnit( value, services ) );
+		return this;
+	}
+
 	public TranslatableMessage addIntegerUnit( final int value ) {
 		messageUnits.add( new IntegerUnit( value, services ) );
 		return this;

@@ -381,15 +381,15 @@ public abstract class UserNotificationsCollector {
 		return photoAuthor.getEmailNotificationTypes().contains( emailNotificationType );
 	}
 
-	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return new TranslatableMessage( subj, services1 ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services ) {
+		return new TranslatableMessage( subj, services ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
 	}
 
-	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return new TranslatableMessage( nerd, services1 ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
+	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
+		return new TranslatableMessage( nerd, services ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
 	}
 
-	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return getMessage( nerd, photoAuthor, photo, services1 ).addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT );
+	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
+		return getMessage( nerd, photoAuthor, photo, services ).addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT );
 	}
 }
