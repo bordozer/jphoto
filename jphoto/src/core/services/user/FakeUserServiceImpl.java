@@ -160,7 +160,7 @@ public class FakeUserServiceImpl implements FakeUserService {
 	}
 
 	private Language getRandomLanguage() {
-		return randomUtilsService.getRandomGenericSetElement( newHashSet( systemVarsService.getUsedLanguages() ) );
+		return randomUtilsService.getRandomGenericSetElement( newHashSet( systemVarsService.getActiveLanguages() ) );
 	}
 
 	private String getRandomEmail() {

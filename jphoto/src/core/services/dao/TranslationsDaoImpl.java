@@ -33,7 +33,8 @@ public class TranslationsDaoImpl extends BaseDaoImpl implements TranslationsDao 
 		final String translation = getEntryOrNull( sql, paramSource, new SingleColumnRowMapper<String>() );
 
 		if ( StringUtils.isEmpty( translation ) ) {
-			return String.format( "%s %d %s - no custom translation", entryType, entryId, language );
+//			return String.format( "%s %d %s - no custom translation", entryType, entryId, language );
+			return "";
 		}
 
 		return translation;

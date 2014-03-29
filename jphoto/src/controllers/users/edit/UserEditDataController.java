@@ -88,7 +88,7 @@ public class UserEditDataController {
 
 		model.setDataRequirementService( dataRequirementService );
 
-		model.setUsedLanguages( systemVarsService.getUsedLanguages() );
+		model.setUsedLanguages( systemVarsService.getActiveLanguages() );
 
 		return model;
 	}

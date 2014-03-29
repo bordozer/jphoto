@@ -59,7 +59,7 @@ public interface SystemVarsService {
 
 	Language getSystemDefaultLanguage();
 
-	List<Language> getUsedLanguages();
+	List<Language> getActiveLanguages();
 
 	boolean getShowLanguageCodeAfterTranslation();
 }
