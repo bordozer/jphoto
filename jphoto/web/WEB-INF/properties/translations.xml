@@ -2772,8 +2772,8 @@
 
 	<translation>
 		<nerd>Downloaded from photosight: $1 of $2, photosight category: $3</nerd>
-		<ru><![CDATA[Загружено с photosight: $1 автора $2, категория: $3]]></ru>
-		<ua><![CDATA[Завантажено з photosight: $1 автора $2, категорiя: $3]]></ua>
+		<ru><![CDATA[Загружено с photosight: $1 автор $2, категория: $3]]></ru>
+		<ua><![CDATA[Завантажено з photosight: $1 автор $2, категорiя: $3]]></ua>
 		<en><![CDATA[Downloaded from photosight: $1 of $2, photosight category: $3]]></en>
 	</translation>
 
