@@ -41,7 +41,7 @@ public class PhotosightContentHelper {
 
 	public static String extractPhotoName( final String photoPageContent ) {
 
-		final Pattern pattern = Pattern.compile( "<h1 itemprop=\"name\">(.+?)</h1>" );
+		final Pattern pattern = Pattern.compile( "<div class=\"photoinfobox\">\\s+<h1>(.+?)</h1>" );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
