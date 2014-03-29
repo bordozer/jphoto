@@ -132,28 +132,8 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	// Date/time format properties <--
 
 	@Override
-	public String getTranslatorTranslatedStartPrefix() {
-		return config.getString( "translator.translated.startPrefix" );
-	}
-
-	@Override
-	public boolean getShowLanguageCodeAfterTranslation() {
-		return config.getBoolean( "translator.showLanguageCodeAfterTranslation" );
-	}
-
-	@Override
-	public String getTranslatorTranslatedEndPrefix() {
-		return config.getString( "translator.translated.endPrefix" );
-	}
-
-	@Override
-	public String getTranslatorUntranslatedStartPrefix() {
-		return config.getString( "translator.untranslated.startPrefix" );
-	}
-
-	@Override
-	public String getTranslatorUntranslatedEndPrefix() {
-		return config.getString( "translator.untranslated.endPrefix" );
+	public boolean isShowTranslationSigns() {
+		return config.getBoolean( "translator.showTranslationSigns" );
 	}
 
 	@Override

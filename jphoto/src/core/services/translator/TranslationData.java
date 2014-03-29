@@ -20,7 +20,7 @@ public class TranslationData {
 			}
 		}
 
-		return null;
+		return new TranslationEntryMissed( nerd, language );
 	}
 
 	public String getNerd() {

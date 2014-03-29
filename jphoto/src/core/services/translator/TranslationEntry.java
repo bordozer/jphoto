@@ -1,24 +1,19 @@
 package core.services.translator;
 
-import core.services.utils.SystemVarsService;
 import org.apache.commons.lang.StringUtils;
 
 public class TranslationEntry {
 
 	protected final String nerd;
 
-	private final Language language;
-	private final String value;
+	protected final Language language;
+	protected final String value;
 
-	protected final SystemVarsService systemVarsService;
-
-	public TranslationEntry( final String nerd, final Language language, final String value, final SystemVarsService systemVarsService ) {
+	public TranslationEntry( final String nerd, final Language language, final String value ) {
 		this.nerd = nerd;
 
 		this.language = language;
 		this.value = value;
-
-		this.systemVarsService = systemVarsService;
 	}
 
 	public String getNerd() {
@@ -30,17 +25,7 @@ public class TranslationEntry {
 	}
 
 	public String getValueWithPrefixes() {
-		final String startPrefix = getStartPrefix();
-		final String endPrefix = getEndPrefix();
-		return String.format( "%s%s%s%s", getPrefix( startPrefix ), value, getPrefix( endPrefix ), getLanguageCode() );
-	}
-
-	public String getLanguageCode() {
-		if ( systemVarsService.getShowLanguageCodeAfterTranslation() ) {
-			return String.format( "<sup>%s</sup>", language.getCode() );
-		}
-
-		return StringUtils.EMPTY;
+		return String.format( "%s<sup>%s</sup>", value, language.getCode() );
 	}
 
 	public String getValue() {
@@ -49,14 +34,6 @@ public class TranslationEntry {
 
 	public TranslationEntryType getTranslationEntryType() {
 		return TranslationEntryType.TRANSLATED;
-	}
-
-	protected String getStartPrefix() {
-		return systemVarsService.getTranslatorTranslatedStartPrefix();
-	}
-
-	protected String getEndPrefix() {
-		return systemVarsService.getTranslatorTranslatedEndPrefix();
 	}
 
 	protected String getPrefix( final String prefix ) {

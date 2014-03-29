@@ -43,17 +43,17 @@ public class TranslationsReader {
 
 				final Element element = nerdElement.element( language.getCode() );
 				if ( element == null ) {
-					translations.add( new TranslationEntryMissed( nerd, language, systemVarsService ) );
+					translations.add( new TranslationEntryMissed( nerd, language ) );
 					continue;
 				}
 
 				final String translation = element.getText();
-				translations.add( new TranslationEntry( nerd, language, translation, systemVarsService ) );
+				translations.add( new TranslationEntry( nerd, language, translation ) );
 			}
 
 			translationsMap.put( new NerdKey( nerd ), new TranslationData( nerd, translations ) );
 		}
 
-		return new Translator( translationsMap, systemVarsService );
+		return new Translator( translationsMap );
 	}
 }

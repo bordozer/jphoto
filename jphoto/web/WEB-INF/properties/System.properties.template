@@ -27,13 +27,7 @@ PhotosInLine=4
 
 # translator
 # show language code after translation true/false
-translator.showLanguageCodeAfterTranslation=true
-
-translator.translated.startPrefix=
-translator.translated.endPrefix=&trade;
-
-translator.untranslated.startPrefix=[
-translator.untranslated.endPrefix=]
+translator.showTranslationSigns=true
 
 #Admin user IDs
 SuperAdminUserIDs=6987,6306
