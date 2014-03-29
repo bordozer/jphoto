@@ -25,7 +25,7 @@
 
 			<tr>
 				<td colspan="2">
-					<h3>${eco:translate( 'Filter' )}:</h3>
+					<h3>${eco:translate( 'Members search' )}:</h3>
 				</td>
 			</tr>
 
@@ -34,8 +34,8 @@
 					<label for="${filterUserNameControl}">${eco:translate( 'Member name' )}</label>
 				</td>
 				<td class="datacolumn">
-					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="${eco:translate('Filter')}"
-									hint="${eco:translate('Filter by user name')}">
+					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="${eco:translate('Members search')}"
+									hint="${eco:translate('Filter by member name')}">
 						<jsp:attribute name="inputField">
 							<input id="${filterUserNameControl}" type="text" name="${filterUserNameControl}" value="${userFilterModel.filterUserName}"/>
 						</jsp:attribute>
@@ -57,7 +57,7 @@
 
 			<table:tredit>
 				<td class="buttoncolumn">
-					<html:submitButton id="applyUserListFilterButton" caption_t="Apply filter"/>
+					<html:submitButton id="applyUserListFilterButton" caption_t="Search members"/>
 				</td>
 				<table:td>
 					<html:resetButton caption_t="Reset filter"/>

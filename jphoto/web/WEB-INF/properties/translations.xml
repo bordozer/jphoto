@@ -2722,10 +2722,10 @@
 	</translation>
 
 	<translation>
-		<nerd>Filter by user name</nerd>
+		<nerd>Filter by member name</nerd>
 		<ru><![CDATA[Фильтр по имени]]></ru>
 		<ua><![CDATA[Фiльтр по iменi]]></ua>
-		<en><![CDATA[Filter by user name]]></en>
+		<en><![CDATA[Filter by member name]]></en>
 	</translation>
 
 	<translation>
@@ -2743,24 +2743,31 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Member's team member: $1 - $2</nerd>
+		<ru><![CDATA[Участник команды: $1 - $2]]></ru>
+		<ua><![CDATA[Учасник команди: $1 - $2]]></ua>
+		<en><![CDATA[The member's team member: $1 - $2]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>$1: last photos. Total $2.</nerd>
+		<ru><![CDATA[$1: последние рабты. Всего $2.]]></ru>
+		<ua><![CDATA[$1: останнi роботи. Всего $2.]]></ua>
+		<en><![CDATA[$1: last photos. Total $2.]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Search members</nerd>
+		<ru><![CDATA[Поиск пользователей]]></ru>
+		<ua><![CDATA[Пошук учасникiв]]></ua>
+		<en><![CDATA[Search members]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Members search</nerd>
+		<ru><![CDATA[Поиск пользователей]]></ru>
+		<ua><![CDATA[Пошук учасникiв]]></ua>
+		<en><![CDATA[Members search]]></en>
 	</translation>
 
 	<translation>
