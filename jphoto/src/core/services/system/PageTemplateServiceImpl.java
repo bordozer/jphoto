@@ -216,6 +216,12 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "800px"  );
 
+		if ( securityService.isSuperAdminUser( currentUser ) ) {
+			final int untranslatedMessagesCount = translatorService.getUntranslatedMap().size();
+			model.put( "untranslatedMessagesCount", untranslatedMessagesCount );
+			model.put( "untranslatedMessagesCountHint", translatorService.translate( "There are $1 untranslated", language, String.valueOf( untranslatedMessagesCount ) ) );
+		}
+
 		fillUiLanguages( language, model );
 
 		final Template template = velocityEngine.getTemplate( "pageheader.vm" );
