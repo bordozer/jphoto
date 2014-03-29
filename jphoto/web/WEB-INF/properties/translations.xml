@@ -416,7 +416,7 @@
 
 	<translation>
 		<nerd>Show photos: $1</nerd>
-		<ru><![CDATA[Показать работы: $1]]></ru>
+		<ru><![CDATA[Показать все работы из раздела '$1']]></ru>
 	</translation>
 
 	<translation>
