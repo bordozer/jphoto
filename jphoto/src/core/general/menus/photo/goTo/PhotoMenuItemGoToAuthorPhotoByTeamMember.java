@@ -33,7 +33,14 @@ public class PhotoMenuItemGoToAuthorPhotoByTeamMember extends AbstractPhotoGoToA
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "$1: photos with $2 $3 ( $4 )", getLanguage(), photoAuthor.getNameEscaped(), userTeamMember.getTeamMemberType().getNameTranslated().toLowerCase(), userTeamMember.getTeamMemberName(), String.valueOf( getPhotosQty() ) );
+				final String teamMemberTypeNameTranslated = getTranslatorService().translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ).toLowerCase();
+				return getTranslatorService().translate( "$1: photos with $2 $3 ( $4 )"
+					, getLanguage()
+					, photoAuthor.getNameEscaped()
+					, teamMemberTypeNameTranslated
+					, userTeamMember.getTeamMemberName()
+					, String.valueOf( getPhotosQty() )
+				);
 			}
 
 			@Override

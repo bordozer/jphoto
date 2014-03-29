@@ -2659,31 +2659,31 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>$1: photos with $2 $3 ( $4 )</nerd>
+		<ru><![CDATA[$1: работы с $2 $3 ( $4 )]]></ru>
+		<ua><![CDATA[$1: роботи з $2 $3 ( $4 )]]></ua>
+		<en><![CDATA[$1: photos with $2 $3 ( $4 )]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.</nerd>
+		<ru><![CDATA[$1 оставил комментарий к работе '$2'. Вы получили это сообщение поскольку вы следите за комментариями к этой работе.]]></ru>
+		<ua><![CDATA[$1 прокоментував роботу '$2'. Ви отримали це повiдомлення оскiльки ви спостерiгаете за комментарями до роботи.]]></ua>
+		<en><![CDATA[$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>One of your favorite members $1 has uploaded new photo '$2'.</nerd>
+		<ru><![CDATA[Пользователь $1 из вашего списка избранных пользователей загрузил новую работу '$2'.]]></ru>
+		<ua><![CDATA[Учасник $1 з вашого листа обраних учасникiв загрузив нову роботу '$2'.]]></ua>
+		<en><![CDATA[One of your favorite members $1 has uploaded new photo '$2'.]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Edit comment</nerd>
+		<ru><![CDATA[Изменить комментарий]]></ru>
+		<ua><![CDATA[Редагувати комментар]]></ua>
+		<en><![CDATA[Edit comment]]></en>
 	</translation>
 
 	<translation>
