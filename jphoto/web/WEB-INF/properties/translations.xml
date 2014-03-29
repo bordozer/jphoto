@@ -792,6 +792,7 @@
 	<translation>
 		<nerd>$1: photo card</nerd>
 		<ru><![CDATA[$1: карточка работы]]></ru>
+		<ua><![CDATA[$1: картка роботы]]></ua>
 	</translation>
 
 	<translation>
@@ -2309,6 +2310,7 @@
 	<translation>
 		<nerd>$1: card</nerd>
 		<ru><![CDATA[$1: карточка]]></ru>
+		<ua><![CDATA[$1: картка]]></ua>
 	</translation>
 
 	<translation>
@@ -2849,17 +2851,17 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Stop the job?</nerd>
+		<ru><![CDATA[Остановить выполнение задачи?]]></ru>
+		<ua><![CDATA[Припинити виконання завдання?]]></ua>
+		<en><![CDATA[Stop the job?]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>All categories</nerd>
+		<ru><![CDATA[Все разделы]]></ru>
+		<ua><![CDATA[Усi роздiли]]></ua>
+		<en><![CDATA[All categories]]></en>
 	</translation>
 
 	<translation>
