@@ -129,9 +129,9 @@ var favoriteEntryModel = function () {
 			if ( isSavedSuccessfully ) {
 				isEntryInFavorites = !isEntryInFavorites;
 
-				var m1 = ' ${eco:translate('has been added to ')}';
+				var m1 = ' ${eco:translate('add/remove bookmark: has been added to')} ';
 				if ( !isEntryInFavorites ) {
-					m1 = ' ${eco:translate('has been removed from ')}';
+					m1 = ' ${eco:translate('add/remove bookmark: has been removed from')} ';
 				}
 				var message = favoriteEntry.getFavoriteEntryName() + m1 + favoriteEntry.getFavoriteEntryTypeName();
 
@@ -187,13 +187,13 @@ function saveToDB( isEntryInFavorites, favoriteEntry ) {
 function validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled ) {
 
 	if ( isAddingFuncCalled && isEntryInFavorites ) {
-		showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+		showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
 		return false;
 	}
 
 	var isRemoving = !isAddingFuncCalled;
 	if ( isRemoving && !isEntryInFavorites ) {
-		showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+		showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
 		return false;
 	}
 

@@ -21,7 +21,7 @@
 <c:set var="complaintReasonTypes" value="<%=ComplaintReasonType.values()%>"/>
 
 <div id="${sendComplaintDivId}" title="..." style="display: none;">
-	<html:textarea inputId="${customDescriptionTextId}" title="${eco:translate('Message')}" hint="${eco:translate('Admin message text')}" rows="7" cols="50" />
+	<html:textarea inputId="${customDescriptionTextId}" title="${eco:translate('Message')}" rows="7" cols="50" />
 </div>
 
 <script type="text/javascript">

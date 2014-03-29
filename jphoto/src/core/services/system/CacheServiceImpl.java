@@ -83,8 +83,6 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 
 			if ( cache.get( key ).containsKey( compositeKey ) ) {
 				cache.get( key ).remove( compositeKey );
-
-				//				log.debug( String.format( "CACHE -> %s -> entry #%s has been REMOVED from the cache", key, id ) );
 			}
 		}
 	}

@@ -2589,30 +2589,114 @@
 	</translation>
 
 	<translation>
+		<nerd>$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.</nerd>
+		<ru><![CDATA[$1 загрузил новую работу '$2'. Вы получили это сообщение поскольку подписаны на новые работы $3.]]></ru>
+		<ua><![CDATA[$1 загрузив нову роботу '$2'. Ви отримали це повiдомлення оскiльки вы пiдiсанi на новi роботи $3.]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented your photo '$2'</nerd>
+		<ru><![CDATA[$1 прокомментировал работу '$2']]></ru>
+		<ua><![CDATA[$1 прокоментував роботу '$2']]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented your photo '$2'. $3</nerd>
+		<ru><![CDATA[$1 прокомментировал вашу работу '$2'. $3]]></ru>
+		<ua><![CDATA[$1 прокомментував вашу роботу '$2'. $3]]></ua>
+		<en><![CDATA[$1 has commented your photo '$2'. $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You can control email notifications in the settings of your profile.</nerd>
+		<ru><![CDATA[Вы можете управлять уведомлениями в настройках вашего профайла]]></ru>
+		<ua><![CDATA[Ви можете контролювати повiдомлення у настройках вашого профайлу]]></ua>
+		<en><![CDATA[You can control email notifications in the settings of your profile.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: has been added to</nerd>
+		<ru><![CDATA[добавлен(а) в]]></ru>
+		<ua><![CDATA[додан(а) в]]></ua>
+		<en><![CDATA[has been added to]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: has been removed from</nerd>
+		<ru><![CDATA[удален(а) из]]></ru>
+		<ua><![CDATA[видален(а) з]]></ua>
+		<en><![CDATA[has been removed from]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: is already in</nerd>
+		<ru><![CDATA[уже в]]></ru>
+		<ua><![CDATA[вже у]]></ua>
+		<en><![CDATA[is already in]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: is NOT in</nerd>
+		<ru><![CDATA[не в]]></ru>
+		<ua><![CDATA[не у]]></ua>
+		<en><![CDATA[is NOT in]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Search photos</nerd>
+		<ru><![CDATA[Поиск работ]]></ru>
+		<ua><![CDATA[Пошук робот]]></ua>
+		<en><![CDATA[Search photos]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo filter: Sort by</nerd>
+		<ru><![CDATA[Сортировать по]]></ru>
+		<ua><![CDATA[Сортувати по]]></ua>
+		<en><![CDATA[Sort by]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
-		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
-		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
-		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
-		<ua><![CDATA[]]></ua>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
 

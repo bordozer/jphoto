@@ -3,8 +3,8 @@
 
 <%@ attribute name="inputId" required="true" type="java.lang.String" %>
 <%@ attribute name="inputValue" required="false" type="java.lang.String" %>
-<%@ attribute name="title" required="true" type="java.lang.String" %>
-<%@ attribute name="hint" required="true" type="java.lang.String" %>
+<%@ attribute name="title" required="false" type="java.lang.String" %>
+<%@ attribute name="hint" required="false" type="java.lang.String" %>
 <%@ attribute name="rows" required="false" type="java.lang.String" %>
 <%@ attribute name="cols" required="false" type="java.lang.String" %>
 <%@ attribute name="isDisabled" required="false" type="java.lang.Boolean" %>
