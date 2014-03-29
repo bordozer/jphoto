@@ -72,7 +72,7 @@
 			<div class="floatleft" style="margin-top: 2px;">
 				#foreach( $uiLanguage in $uiLanguages )
 					<a href="#" onclick="changeUiLanguage( '$uiLanguage.language.code' ); return false;">
-						<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title" class="language $uiLanguage.style">
+						<img src="$imagePath/languages/$uiLanguage.language.icon" title="$uiLanguage.title" class="language $uiLanguage.style" height="11" width="16">
 					</a>
 				#end
 				<script type="text/javascript">
