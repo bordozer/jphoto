@@ -14,7 +14,7 @@ public class LinkToUserCardUnit extends AbstractTranslatableMessageUnit {
 	}
 
 	@Override
-	public String translate( final Language language ) {
+	public String getValue( final Language language ) {
 		return getEntityLinkUtilsService().getUserCardLink( user, language );
 	}
 }

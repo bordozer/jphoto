@@ -15,7 +15,7 @@ public class FormattedDateTimeUnit extends AbstractTranslatableMessageUnit {
 	}
 
 	@Override
-	public String translate( final Language language ) {
+	public String getValue( final Language language ) {
 		return getDateUtilsService().formatDateTime( time );
 	}
 }

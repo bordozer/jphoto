@@ -17,7 +17,7 @@ public class LinkToPhotosByUserByGenreUnit extends AbstractTranslatableMessageUn
 	}
 
 	@Override
-	public String translate( final Language language ) {
+	public String getValue( final Language language ) {
 		return getEntityLinkUtilsService().getPhotosByUserByGenreLink( user, genre, language );
 	}
 }

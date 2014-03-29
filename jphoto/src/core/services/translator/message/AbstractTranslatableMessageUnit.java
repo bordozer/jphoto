@@ -14,7 +14,7 @@ public abstract class AbstractTranslatableMessageUnit {
 		this.services = services;
 	}
 
-	public abstract String translate( final Language language );
+	public abstract String getValue( final Language language );
 
 	protected TranslatorService getTranslatorService() {
 		return services.getTranslatorService();

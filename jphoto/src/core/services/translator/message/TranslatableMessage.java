@@ -64,7 +64,7 @@ public class TranslatableMessage {
 		String result = services.getTranslatorService().translate( nerd, language );
 		int i = 1;
 		for ( final AbstractTranslatableMessageUnit messageUnit : messageUnits ) {
-			result = result.replace( String.format( "$%d", i++ ), messageUnit.translate( language ) );
+			result = result.replace( String.format( "$%d", i++ ), messageUnit.getValue( language ) );
 		}
 
 		return result;
