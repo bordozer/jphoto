@@ -2314,6 +2314,7 @@
 	<translation>
 		<nerd>Created photo #$1 '$2' of $3, category: $4</nerd>
 		<ru><![CDATA[Создана работа #$1 '$2' автора $3, раздел: $4]]></ru>
+		<ua><![CDATA[Створена робота #$1 '$2' автора $3, раздiл: $4]]></ua>
 	</translation>
 
 	<translation>
