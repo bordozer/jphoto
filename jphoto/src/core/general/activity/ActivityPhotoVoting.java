@@ -39,10 +39,16 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 		final Element votesElement = rootElement.element( ACTIVITY_XML_TAG_VOTES );
 		final Iterator votesIterator = votesElement.elementIterator( ACTIVITY_XML_TAG_VOTE );
 		while ( votesIterator.hasNext() ) {
+
 			final Element voteElement = ( Element ) votesIterator.next();
-			final int photoVotingCategoryId = NumberUtils.convertToInt( voteElement.attribute( ACTIVITY_XML_TAG_VOTING_CATEGORY_ID ).getValue() );
+
 			final int votingPoints = NumberUtils.convertToInt( voteElement.getText() );
-			votes.put( votingCategoryService.load( photoVotingCategoryId ), votingPoints );
+
+			final int photoVotingCategoryId = NumberUtils.convertToInt( voteElement.attribute( ACTIVITY_XML_TAG_VOTING_CATEGORY_ID ).getValue() );
+			final PhotoVotingCategory photoVotingCategory = votingCategoryService.load( photoVotingCategoryId );
+			if ( photoVotingCategory != null ) {
+				votes.put( photoVotingCategory, votingPoints );
+			}
 		}
 
 		initActivityTranslatableText();
