@@ -55,8 +55,8 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 						, UserStatus.MEMBER.getName()
 					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
-						.addUserCardLinkUnit( user )
-						.addStringTranslatableUnit( UserStatus.MEMBER.getName() );
+						.addUserCardLinkParameter( user )
+						.addStringTranslatableParameter( UserStatus.MEMBER.getName() );
 					addJobRuntimeLogMessage( translatableMessage );
 
 					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
@@ -67,7 +67,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 						, getLanguage()
 						, String.valueOf( user.getId() )
 					);*/
-					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addUserCardLinkUnit( user );
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
 			}

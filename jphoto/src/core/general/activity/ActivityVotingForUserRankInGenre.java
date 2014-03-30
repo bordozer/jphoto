@@ -57,9 +57,9 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 	public String getDisplayActivityDescription() {
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "voted for rank of $1 in category $2 ( $3 )", services )
-			.addUserCardLinkUnit( userVotedForId )
-			.addPhotosByGenreLinkUnit( genreId )
-			.addStringUnit( getPoints() )
+			.addUserCardLinkParameter( userVotedForId )
+			.addPhotosByGenreLinkParameter( genreId )
+			.addStringParameter( getPoints() )
 			;
 
 		return translatableMessage.build( getCurrentUserLanguage() );

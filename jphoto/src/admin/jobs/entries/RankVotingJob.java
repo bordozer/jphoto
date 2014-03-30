@@ -96,10 +96,10 @@ public class RankVotingJob extends AbstractJob {
 				, String.valueOf( randomVotingPoints ) )
 			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has voted for $2's rank in $3 ( $4 )", services )
-				.addUserCardLinkUnit( votingUser )
-				.addUserCardLinkUnit( beingVotedUser )
-				.addPhotosByUserByGenreLinkUnit( beingVotedUser, genre )
-				.addIntegerUnit( randomVotingPoints )
+				.addUserCardLinkParameter( votingUser )
+				.addUserCardLinkParameter( beingVotedUser )
+				.addPhotosByUserByGenreLinkParameter( beingVotedUser, genre )
+				.addIntegerParameter( randomVotingPoints )
 				;
 			addJobRuntimeLogMessage( translatableMessage );
 

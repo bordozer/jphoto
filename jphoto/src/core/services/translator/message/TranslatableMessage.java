@@ -15,7 +15,7 @@ public class TranslatableMessage {
 
 	private final String nerd;
 
-	private List<AbstractTranslatableMessageUnit> messageUnits = newArrayList();
+	private List<AbstractTranslatableMessageParameter> messageParameters = newArrayList();
 
 	private final Services services;
 
@@ -24,53 +24,53 @@ public class TranslatableMessage {
 		this.services = services;
 	}
 
-	public TranslatableMessage addStringUnit( final String value ) {
-		messageUnits.add( new StringUnit( value, services ) );
+	public TranslatableMessage addStringParameter( final String value ) {
+		messageParameters.add( new StringParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addStringTranslatableUnit( final String value ) {
-		messageUnits.add( new StringTranslatableUnit( value, services ) );
+	public TranslatableMessage addStringTranslatableParameter( final String value ) {
+		messageParameters.add( new StringTranslatableParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addIntegerUnit( final int value ) {
-		messageUnits.add( new IntegerUnit( value, services ) );
+	public TranslatableMessage addIntegerParameter( final int value ) {
+		messageParameters.add( new IntegerParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addPhotosByGenreLinkUnit( final Genre genre ) {
-		messageUnits.add( new LinkToPhotosByGenreUnit( genre, services ) );
+	public TranslatableMessage addPhotosByGenreLinkParameter( final Genre genre ) {
+		messageParameters.add( new PhotosByGenreLinkParameter( genre, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addPhotosByGenreLinkUnit( final int genreId ) {
-		messageUnits.add( new LinkToPhotosByGenreUnit( services.getGenreService().load( genreId ), services ) );
+	public TranslatableMessage addPhotosByGenreLinkParameter( final int genreId ) {
+		messageParameters.add( new PhotosByGenreLinkParameter( services.getGenreService().load( genreId ), services ) );
 		return this;
 	}
 
-	public TranslatableMessage addUserCardLinkUnit( final User user ) {
-		messageUnits.add( new LinkToUserCardUnit( user, services ) );
+	public TranslatableMessage addUserCardLinkParameter( final User user ) {
+		messageParameters.add( new UserCardLinkParameter( user, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addUserCardLinkUnit( final int userId ) {
-		messageUnits.add( new LinkToUserCardUnit( services.getUserService().load( userId ), services ) );
+	public TranslatableMessage addUserCardLinkParameter( final int userId ) {
+		messageParameters.add( new UserCardLinkParameter( services.getUserService().load( userId ), services ) );
 		return this;
 	}
 
-	public TranslatableMessage addPhotosByUserByGenreLinkUnit( final User user, final Genre genre ) {
-		messageUnits.add( new LinkToPhotosByUserByGenreUnit( user, genre, services ) );
+	public TranslatableMessage addPhotosByUserByGenreLinkParameter( final User user, final Genre genre ) {
+		messageParameters.add( new PhotosByUserByGenreLinkParameter( user, genre, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addPhotoCardLinkUnit( final Photo photo ) {
-		messageUnits.add( new LinkToPhotoCardUnit( photo, services ) );
+	public TranslatableMessage addPhotoCardLinkParameter( final Photo photo ) {
+		messageParameters.add( new PhotoCardLinkParameter( photo, services ) );
 		return this;
 	}
 
 	public TranslatableMessage addFormattedDateTimeUnit( final Date actionTime ) {
-		messageUnits.add( new FormattedDateTimeUnit( actionTime, services ) );
+		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
 		return this;
 	}
 
@@ -78,8 +78,8 @@ public class TranslatableMessage {
 
 		String result = services.getTranslatorService().translate( nerd, language );
 		int i = 1;
-		for ( final AbstractTranslatableMessageUnit messageUnit : messageUnits ) {
-			result = result.replace( String.format( "$%d", i++ ), messageUnit.getValue( language ) );
+		for ( final AbstractTranslatableMessageParameter messageParameter : messageParameters ) {
+			result = result.replace( String.format( "$%d", i++ ), messageParameter.getValue( language ) );
 		}
 
 		return result;

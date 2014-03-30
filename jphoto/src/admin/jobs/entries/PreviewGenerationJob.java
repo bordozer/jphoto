@@ -39,7 +39,7 @@ public class PreviewGenerationJob extends AbstractJob {
 				services.getPreviewGenerationService().generatePreview( photo.getId(), options );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Generated preview for $1", services )
-					.addPhotoCardLinkUnit( photo )
+					.addPhotoCardLinkParameter( photo )
 					;
 				addJobRuntimeLogMessage( translatableMessage );
 			}

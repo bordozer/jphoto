@@ -23,7 +23,6 @@ import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
-import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,10 +121,10 @@ public abstract class AbstractPhotoImportStrategy {
 		photoToImport.setPhoto( photo );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
-			.addIntegerUnit( photo.getId() )
-			.addPhotoCardLinkUnit( photo )
-			.addUserCardLinkUnit( user )
-			.addPhotosByGenreLinkUnit( genre )
+			.addIntegerParameter( photo.getId() )
+			.addPhotoCardLinkParameter( photo )
+			.addUserCardLinkParameter( user )
+			.addPhotosByGenreLinkParameter( genre )
 			;
 
 		job.addJobRuntimeLogMessage( translatableMessage );

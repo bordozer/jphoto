@@ -63,8 +63,8 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has left a comment for photo $2 ( time: $3 )", services )
-			.addUserCardLinkUnit( user )
-			.addPhotoCardLinkUnit( photo )
+			.addUserCardLinkParameter( user )
+			.addPhotoCardLinkParameter( photo )
 			.addFormattedDateTimeUnit( actionTime )
 			;
 		addJobRuntimeLogMessage( translatableMessage );

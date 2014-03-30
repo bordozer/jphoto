@@ -4,11 +4,11 @@ import core.general.user.User;
 import core.services.security.Services;
 import core.services.translator.Language;
 
-public class LinkToUserCardUnit extends AbstractTranslatableMessageUnit {
+public class UserCardLinkParameter extends AbstractTranslatableMessageParameter {
 
 	private User user;
 
-	protected LinkToUserCardUnit( final User user, final Services services ) {
+	protected UserCardLinkParameter( final User user, final Services services ) {
 		super( services );
 		this.user = user;
 	}

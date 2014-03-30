@@ -33,8 +33,8 @@ public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerat
 		);*/
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User %s has seen photo $1 ( time: $2 )", services )
-			.addUserCardLinkUnit( user )
-			.addPhotoCardLinkUnit( photo )
+			.addUserCardLinkParameter( user )
+			.addPhotoCardLinkParameter( photo )
 			.addFormattedDateTimeUnit( actionTime )
 			;
 		addJobRuntimeLogMessage( translatableMessage );

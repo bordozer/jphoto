@@ -3,11 +3,11 @@ package core.services.translator.message;
 import core.services.security.Services;
 import core.services.translator.Language;
 
-public class StringTranslatableUnit extends AbstractTranslatableMessageUnit {
+public class StringTranslatableParameter extends AbstractTranslatableMessageParameter {
 
 	private String value;
 
-	protected StringTranslatableUnit( final String value, final Services services ) {
+	protected StringTranslatableParameter( final String value, final Services services ) {
 		super( services );
 
 		this.value = value;
