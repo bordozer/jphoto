@@ -1,9 +1,11 @@
 package core.general.activity;
 
+import core.exceptions.BaseRuntimeException;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.interfaces.Cacheable;
+import core.log.LogHelper;
 import core.services.security.Services;
 import core.services.translator.Language;
 import core.services.translator.message.EmptyTranslatableMessage;
@@ -11,7 +13,17 @@ import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Date;
 
 public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity implements Cacheable {
@@ -28,6 +40,8 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	protected final Services services;
 
 	protected abstract TranslatableMessage getActivityTranslatableText();
+
+	protected LogHelper log = new LogHelper( this.getClass() );
 
 	/* Loading from DB */
 	public AbstractActivityStreamEntry( final User activityOfUser, final Date activityTime, final ActivityType activityType, final Services services ) {
@@ -71,7 +85,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	}
 
 	public int getActivityOfPhotoId() {
-		return 0;
+		return 0; // This activity has nothing to do with photo
 	}
 
 	public Document getActivityXML() {
@@ -81,6 +95,35 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 		rootElement.addElement( ACTIVITY_XML_TAG_USER_ID ).addText( String.valueOf( activityOfUser.getId() ) );
 
 		return document;
+	}
+
+	public String getActivityXMLFormatted() {
+
+		return getActivityXML().asXML();
+
+		/*final Document document = getActivityXML();
+
+		try {
+			final OutputFormat format = OutputFormat.createPrettyPrint();
+			final Writer writer = new StringWriter();
+			final XMLWriter output = new XMLWriter( writer, format );
+			output.write( document );
+			output.close();
+		} catch ( IOException e ) {
+			log.error( String.format( "Can not format XML: %s", document.asXML() ), e );
+		}
+
+		throw new BaseRuntimeException( "TEMP" );*/
+
+
+		/*final Transformer transformer;
+		try {
+			transformer = TransformerFactory.newInstance().newTransformer();
+			transformer.setOutputProperty( OutputKeys.INDENT, "yes" );
+
+		} catch ( final TransformerConfigurationException e ) {
+			log.error( "Can not format XML", e );
+		}*/
 	}
 
 	protected String getPhotoIcon( final Photo photo ) {

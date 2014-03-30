@@ -70,9 +70,6 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 			element.addText( String.valueOf( points ) );
 		}
 
-		/*Transformer transformer = TransformerFactory.newInstance().newTransformer();
-		transformer.setOutputProperty( OutputKeys.INDENT, "yes");*/
-		
 		return document;
 	}
 
