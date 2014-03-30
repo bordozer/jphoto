@@ -40,4 +40,9 @@ public class UserRankPhotoVote {
 	public void setVoteTime( final Date voteTime ) {
 		this.voteTime = voteTime;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s", voter, voteTime );
+	}
 }
