@@ -4,8 +4,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.Language;
-import core.services.utils.EntityLinkUtilsService;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -28,12 +27,16 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 
 		final int commentId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_PHOTO_COMMENT_ID ).getText() );
 		comment = services.getPhotoCommentService().load( commentId );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoComment( final PhotoComment comment, final Services services ) {
 		super( comment.getCommentAuthor(), services.getPhotoService().load( comment.getPhotoId() ), comment.getCreationTime(), ActivityType.PHOTO_COMMENT, services );
 
 		this.comment = comment;
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -44,13 +47,8 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
-		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
-
-		final Language language = getCurrentUserLanguage();
-		return services.getTranslatorService().translate( "commented photo $1", language
-			, linkUtilsService.getPhotoCardLink( activityOfPhoto, language )
-		);
+	protected TranslatableMessage getActivityTranslatableText() {
+		return new TranslatableMessage( "commented photo $1", services ).addPhotoCardLinkParameter( activityOfPhoto );
 	}
 
 	@Override

@@ -31,6 +31,8 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID_VOTED_FOR ).getText() );
 		genreId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_GENRE_ID ).getText() );
 		points = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_POINTS ).getText() );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final Services services ) {
@@ -39,6 +41,8 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = rankInGenreVoting.getUserId();
 		genreId = rankInGenreVoting.getGenreId();
 		points = rankInGenreVoting.getPoints();
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -54,15 +58,13 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
+	protected TranslatableMessage getActivityTranslatableText() {
 
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "voted for rank of $1 in category $2 ( $3 )", services )
+		return new TranslatableMessage( "voted for rank of $1 in category $2 ( $3 )", services )
 			.addUserCardLinkParameter( userVotedForId )
 			.addPhotosByGenreLinkParameter( genreId )
 			.addStringParameter( getPoints() )
 			;
-
-		return translatableMessage.build( getCurrentUserLanguage() );
 	}
 
 	private String getPoints() {

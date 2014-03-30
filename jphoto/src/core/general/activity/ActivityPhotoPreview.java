@@ -4,8 +4,8 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.Language;
-import core.services.utils.EntityLinkUtilsService;
+import core.services.translator.message.EmptyTranslatableMessage;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -29,12 +29,16 @@ public class ActivityPhotoPreview extends AbstractPhotoActivityStreamEntry {
 
 		final int previewId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_PHOTO_PREVIEW_ID ).getText() );
 		preview = services.getPhotoPreviewService().load( previewId );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoPreview( final PhotoPreview preview, final Services services ) {
 		super( preview.getUser(), preview.getPhoto(), preview.getPreviewTime(), ActivityType.PHOTO_PREVIEW, services );
 
 		this.preview = preview;
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -45,17 +49,12 @@ public class ActivityPhotoPreview extends AbstractPhotoActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
+	protected TranslatableMessage getActivityTranslatableText() {
 		if ( preview == null ) {
-			return StringUtils.EMPTY;
+			return new EmptyTranslatableMessage();
 		}
 
-		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
-
-		final Language language = getCurrentUserLanguage();
-		return services.getTranslatorService().translate( "viewed photo $1", language
-			, linkUtilsService.getPhotoCardLink( preview.getPhoto(), language )
-		);
+		return new TranslatableMessage( "viewed photo $1", services ).addPhotoCardLinkParameter( preview.getPhoto() );
 	}
 
 	@Override

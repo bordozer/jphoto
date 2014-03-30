@@ -3,6 +3,7 @@ package utils;
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.context.ApplicationContextHelper;
 import core.context.EnvironmentContext;
+import core.general.activity.AbstractActivityStreamEntry;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 
@@ -49,6 +50,14 @@ public class TranslatorUtils {
 
 	public static String translateVotingCategory( final int entryId ) {
 		return getTranslatorService().translateCustom( TranslationEntryType.VOTING_CATEGORY, entryId, getLanguage() );
+	}
+
+	public static String translateActivityStreamEntry( final AbstractActivityStreamEntry activityStreamEntry ) {
+		return activityStreamEntry.getActivityText( getLanguage() );
+	}
+
+	public static String translateActivityStreamUser( final AbstractActivityStreamEntry activityStreamEntry ) {
+		return activityStreamEntry.getDisplayActivityUserLink().build( getLanguage() );
 	}
 
 	private static Language getLanguage() {

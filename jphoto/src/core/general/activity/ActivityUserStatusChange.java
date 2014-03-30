@@ -3,8 +3,7 @@ package core.general.activity;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.security.Services;
-import core.services.translator.Language;
-import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -51,15 +50,12 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
-		final TranslatorService translatorService = services.getTranslatorService();
+	protected TranslatableMessage getActivityTranslatableText() {
 
-		final Language language = getCurrentUserLanguage();
-		return translatorService.translate( "the status in the club has been changed from $1 to $2"
-			, language
-			, translatorService.translate( oldStatus.getName(), language )
-			, translatorService.translate( newStatus.getName(), language )
-		);
+		return new TranslatableMessage( "the status in the club has been changed from $1 to $2", services )
+			.addStringTranslatableParameter( oldStatus.getName() )
+			.addStringTranslatableParameter( newStatus.getName() )
+			;
 	}
 
 	@Override

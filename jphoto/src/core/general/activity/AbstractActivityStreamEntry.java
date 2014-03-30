@@ -1,12 +1,13 @@
 package core.general.activity;
 
-import core.context.EnvironmentContext;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.interfaces.Cacheable;
 import core.services.security.Services;
 import core.services.translator.Language;
+import core.services.translator.message.EmptyTranslatableMessage;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -22,9 +23,11 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	protected final Date activityTime;
 	protected final ActivityType activityType;
 
+	protected TranslatableMessage activityTranslatableText;
+
 	protected final Services services;
 
-	public abstract String getDisplayActivityDescription();
+	protected abstract TranslatableMessage getActivityTranslatableText();
 
 	/* Loading from DB */
 	public AbstractActivityStreamEntry( final User activityOfUser, final Date activityTime, final ActivityType activityType, final Services services ) {
@@ -39,12 +42,16 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 		return StringUtils.EMPTY;
 	}
 
-	public String getDisplayActivityUserLink() {
+	public String getActivityText( final Language language ) {
+		return activityTranslatableText.build( language );
+	}
+
+	public TranslatableMessage getDisplayActivityUserLink() {
 		if ( activityOfUser == null ) {
-			return StringUtils.EMPTY;
+			return new EmptyTranslatableMessage();
 		}
 
-		return services.getEntityLinkUtilsService().getUserCardLink( activityOfUser, getCurrentUserLanguage() );
+		return new TranslatableMessage( "$1", services ).addUserCardLinkParameter( activityOfUser );
 	}
 
 	public int getDisplayActivityUserId() {
@@ -88,7 +95,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 		);
 	}
 
-	protected Language getCurrentUserLanguage() {
-		return EnvironmentContext.getLanguage();
+	protected void initActivityTranslatableText() {
+		activityTranslatableText = getActivityTranslatableText();
 	}
 }

@@ -3,7 +3,7 @@ package core.general.activity;
 import core.enums.FavoriteEntryType;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.utils.EntityLinkUtilsService;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -28,6 +28,8 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 		favoriteEntryId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_ENTRY_ID ).getText() );
 		favoriteType = FavoriteEntryType.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_TYPE_ID ).getText() ) );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityFavoriteAction( final User user, final int favoriteEntryId, final Date activityTime, final FavoriteEntryType entryType, final Services services ) {
@@ -35,6 +37,8 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 		this.favoriteEntryId = favoriteEntryId;
 		this.favoriteType = entryType;
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -49,12 +53,12 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
-		return services.getTranslatorService().translate( "added $1 to $2"
-			, getCurrentUserLanguage()
-			, getFavoriteEntry( favoriteEntryId, favoriteType )
-			, favoriteType.getNameTranslated()
-		);
+	protected TranslatableMessage getActivityTranslatableText() {
+
+		return new TranslatableMessage( "added $1 to $2", services )
+			.addTranslatableMessageParameter( getFavoriteEntry( favoriteEntryId, favoriteType ) )
+			.addStringTranslatableParameter( favoriteType.getName() )
+			;
 	}
 
 	@Override
@@ -71,19 +75,18 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 		return super.getDisplayActivityIcon();
 	}
 
-	private String getFavoriteEntry( final int favoriteEntryId, final FavoriteEntryType entryType ) {
-		final EntityLinkUtilsService linkUtilsService = services.getEntityLinkUtilsService();
+	private TranslatableMessage getFavoriteEntry( final int favoriteEntryId, final FavoriteEntryType entryType ) {
 
 		switch ( entryType ) {
 			case USER:
 				case FRIEND:
 				case BLACKLIST:
 				case NEW_PHOTO_NOTIFICATION:
-				return linkUtilsService.getUserCardLink( services.getUserService().load( favoriteEntryId ), getCurrentUserLanguage() );
+				return new TranslatableMessage( "$1", services ).addUserCardLinkParameter( favoriteEntryId );
 			case PHOTO:
 				case BOOKMARK:
 				case NEW_COMMENTS_NOTIFICATION:
-				return linkUtilsService.getPhotoCardLink( services.getPhotoService().load( favoriteEntryId ), getCurrentUserLanguage() );
+				return new TranslatableMessage( "$1", services ).addPhotoCardLinkParameter( favoriteEntryId );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal FavoriteEntryType: %s", entryType ) );

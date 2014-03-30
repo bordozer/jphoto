@@ -7,7 +7,10 @@ import core.general.user.UserPhotoVote;
 import core.services.entry.VotingCategoryService;
 import core.services.security.Services;
 import core.services.translator.message.TranslatableMessage;
-import org.dom4j.*;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import utils.NumberUtils;
 
 import java.util.Date;
@@ -23,7 +26,7 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 	private static final String ACTIVITY_XML_TAG_VOTE = "vote";
 	private static final String ACTIVITY_XML_TAG_VOTING_CATEGORY_ID = "voting-category-id";
 
-	private Map<PhotoVotingCategory, Integer> votes = newHashMap(); // Map<PhotoVotingCategory, points>
+	private final Map<PhotoVotingCategory, Integer> votes = newHashMap();
 
 	public ActivityPhotoVoting( final User user, final Photo photo, final Date activityTime, final String activityXML, final Services services ) throws DocumentException {
 		super( user, photo, activityTime, ActivityType.PHOTO_VOTING, services );
@@ -41,6 +44,8 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 			final int votingPoints = NumberUtils.convertToInt( voteElement.getText() );
 			votes.put( votingCategoryService.load( photoVotingCategoryId ), votingPoints );
 		}
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoVoting( final User user, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date activityTime, final Services services ) {
@@ -49,6 +54,8 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 		for ( final UserPhotoVote userPhotoVote : userPhotoVotes ) {
 			votes.put( userPhotoVote.getPhotoVotingCategory(), userPhotoVote.getMark() );
 		}
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -70,7 +77,7 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() { // TODO: language as parameter to be able cache the entry
+	protected TranslatableMessage getActivityTranslatableText() {
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "appraised photo $1<br />", services )
 			.addPhotoCardLinkParameter( activityOfPhoto )
@@ -87,7 +94,7 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 			translatableMessage.addStringParameter( "<br />" );
 		}
 
-		return translatableMessage.build( getCurrentUserLanguage() );
+		return translatableMessage;
 	}
 
 	@Override

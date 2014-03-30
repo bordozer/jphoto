@@ -2,6 +2,7 @@ package core.general.activity;
 
 import core.general.user.User;
 import core.services.security.Services;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 
 public class ActivityUserRegistration extends AbstractActivityStreamEntry {
@@ -16,8 +17,8 @@ public class ActivityUserRegistration extends AbstractActivityStreamEntry {
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
-		return services.getTranslatorService().translate( "registered", getCurrentUserLanguage() );
+	protected TranslatableMessage getActivityTranslatableText() {
+		return new TranslatableMessage( "$1", services ).addStringTranslatableParameter( "registered" );
 	}
 
 	@Override

@@ -75,6 +75,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addPhotoCardLinkParameter( final int photoId ) {
+		messageParameters.add( new PhotoCardLinkParameter( services.getPhotoService().load( photoId ), services ) );
+		return this;
+	}
+
 	public TranslatableMessage addFormattedDateTimeParameter( final Date actionTime ) {
 		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
 		return this;
