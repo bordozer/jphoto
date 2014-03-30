@@ -1468,8 +1468,8 @@
 	</translation>
 
 	<translation>
-		<nerd>voted for rank of $1 in category $2 ( $3 )</nerd>
-		<ru><![CDATA[голосовал за ранг $1 в разделе $2 ( $3 )]]></ru>
+		<nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
+		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе $2 ( $3 )]]></ru>
 	</translation>
 
 	<translation>
@@ -1523,8 +1523,8 @@
 	</translation>
 
 	<translation>
-		<nerd>uploaded photo $1</nerd>
-		<ru><![CDATA[загрузил работу $1]]></ru>
+		<nerd>activity stream: uploaded photo $1</nerd>
+		<ru><![CDATA[загрузил(а) работу $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1931,6 +1931,13 @@
 	<translation>
 		<nerd>Registered</nerd>
 		<ru><![CDATA[Дата регистрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>user registration activity stream: registered</nerd>
+		<ru><![CDATA[зарегистрировался]]></ru>
+		<ua><![CDATA[зареЕструвався]]></ua>
+		<en><![CDATA[registered]]></en>
 	</translation>
 
 	<translation>
@@ -3041,17 +3048,17 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>activity stream entry: added $1 to $2</nerd>
+		<ru><![CDATA[добавил(а) $1 в $2]]></ru>
+		<ua><![CDATA[додав(ла) $1 жо $2]]></ua>
+		<en><![CDATA[added $1 to $2]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>activity stream entry: rank in category '$1' has changed from $2 to $3</nerd>
+		<ru><![CDATA[ранг в категории '$1' изменен с $2 на $3]]></ru>
+		<ua><![CDATA[ранг у категорiI '$1' змiнено з $2 на $3]]></ua>
+		<en><![CDATA[rank in category '$1' has changed from $2 to $3]]></en>
 	</translation>
 
 	<translation>

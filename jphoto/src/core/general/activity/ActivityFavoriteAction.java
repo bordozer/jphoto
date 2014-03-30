@@ -55,7 +55,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 	@Override
 	protected TranslatableMessage getActivityTranslatableText() {
 
-		return new TranslatableMessage( "added $1 to $2", services )
+		return new TranslatableMessage( "activity stream entry: added $1 to $2", services )
 			.addTranslatableMessageParameter( getFavoriteEntry( favoriteEntryId, favoriteType ) )
 			.addStringTranslatableParameter( favoriteType.getName() )
 			;

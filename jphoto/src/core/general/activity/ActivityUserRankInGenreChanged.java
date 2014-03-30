@@ -60,7 +60,7 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 	@Override
 	protected TranslatableMessage getActivityTranslatableText() {
 
-		return new TranslatableMessage( "rank in category '$1' has changed from $2 to $3", services )
+		return new TranslatableMessage( "activity stream entry: rank in category '$1' has changed from $2 to $3", services )
 			.addPhotosByUserByGenreLinkParameter( activityOfUser, genre )
 			.addIntegerParameter( oldRank )
 			.addIntegerParameter( newRank )

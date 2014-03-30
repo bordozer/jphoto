@@ -29,6 +29,7 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 		oldStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_OLD_STATUS_ID ).getText() ) );
 		newStatus = UserStatus.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_NEW_STATUS_ID ).getText() ) );
 
+		initActivityTranslatableText();
 	}
 
 	public ActivityUserStatusChange( final User user, final UserStatus oldStatus, final UserStatus newStatus, final Date activityTime, final Services services ) {
@@ -36,6 +37,8 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 
 		this.oldStatus = oldStatus;
 		this.newStatus = newStatus;
+
+		initActivityTranslatableText();
 	}
 
 	@Override

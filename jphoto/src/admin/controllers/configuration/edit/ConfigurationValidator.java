@@ -64,9 +64,9 @@ public class ConfigurationValidator implements Validator {
 				numericConfigurationKeys.add( configurationKey );
 			}
 
-			if ( configurationKey.getTab() == ConfigurationTab.CACHE ) {
+			/*if ( configurationKey.getTab() == ConfigurationTab.CACHE ) {
 				positiveConfigurationKeys.add( configurationKey );
-			}
+			}*/
 		}
 	}
 
