@@ -1483,7 +1483,7 @@
 	</translation>
 
 	<translation>
-		<nerd><![CDATA[voted for photo $1<br />$2]]></nerd>
+		<nerd><![CDATA[appraised photo $1<br />]]></nerd>
 		<ru><![CDATA[оценил работу $1<br />$2]]></ru>
 	</translation>
 

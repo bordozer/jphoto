@@ -2,6 +2,7 @@ package core.services.translator.message;
 
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.translator.Language;
@@ -22,6 +23,11 @@ public class TranslatableMessage {
 	public TranslatableMessage( final String nerd, final Services services ) {
 		this.nerd = nerd;
 		this.services = services;
+	}
+
+	public TranslatableMessage addTranslatableMessageParameter( final TranslatableMessage translatableMessage ) {
+		messageParameters.add( new TranslatableMessageParameter( translatableMessage, services ) );
+		return this;
 	}
 
 	public TranslatableMessage addStringParameter( final String value ) {
@@ -69,19 +75,34 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addFormattedDateTimeUnit( final Date actionTime ) {
+	public TranslatableMessage addFormattedDateTimeParameter( final Date actionTime ) {
 		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotoVotingCategoryParameterParameter( final PhotoVotingCategory photoVotingCategory ) {
+		messageParameters.add( new PhotoVotingCategoryParameter( photoVotingCategory, services ) );
 		return this;
 	}
 
 	public String build( final Language language ) {
 
-		String result = services.getTranslatorService().translate( nerd, language );
+		final StringBuilder builder = new StringBuilder( services.getTranslatorService().translate( nerd, language ) );
+
 		int i = 1;
 		for ( final AbstractTranslatableMessageParameter messageParameter : messageParameters ) {
-			result = result.replace( String.format( "$%d", i++ ), messageParameter.getValue( language ) );
+			final String parameterPlaceholder = String.format( "$%d", i );
+
+			final int start = builder.indexOf( parameterPlaceholder );
+			if ( start >= 0 ) {
+				builder.replace( start, start + parameterPlaceholder.length(), messageParameter.getValue( language ) );
+			} else {
+				builder.append( messageParameter.getValue( language ) );
+			}
+
+			i++;
 		}
 
-		return result;
+		return builder.toString();
 	}
 }
