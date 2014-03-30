@@ -44,8 +44,18 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addPhotosByGenreLinkUnit( final int genreId ) {
+		messageUnits.add( new LinkToPhotosByGenreUnit( services.getGenreService().load( genreId ), services ) );
+		return this;
+	}
+
 	public TranslatableMessage addUserCardLinkUnit( final User user ) {
 		messageUnits.add( new LinkToUserCardUnit( user, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addUserCardLinkUnit( final int userId ) {
+		messageUnits.add( new LinkToUserCardUnit( services.getUserService().load( userId ), services ) );
 		return this;
 	}
 
