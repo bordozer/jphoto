@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import core.exceptions.BaseRuntimeException;
 import core.services.translator.Language;
 import org.apache.commons.configuration.CompositeConfiguration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -49,7 +50,15 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 			}
 		}
 
+		if ( activeLanguages.size() == 0 ) {
+			throw new BaseRuntimeException( "System active languages are not configured!" );
+		}
+
 		defaultLanguage = Language.getByCode( config.getString( "application.language.default" ) );
+
+		if ( defaultLanguage == null ) {
+			throw new BaseRuntimeException( "Default language is not configured!" );
+		}
 	}
 
 	// Base properties -->
