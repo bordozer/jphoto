@@ -13,7 +13,7 @@
 
 <table:tr>
 
-	<table:td  width="195px" align="right">
+	<table:td  width="250px" align="right">
 		<select id="votingCategory${number}" name="votingCategory${number}" onchange="setAccessToVotingCategoryMark( ${number} )" class="votingCategoryClass">
 			<option value="0"> - - - - - - - - </option>
 			<c:forEach var="votingCategory" items="${votingCategories}">
