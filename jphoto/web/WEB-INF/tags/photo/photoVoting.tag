@@ -59,14 +59,15 @@
 
 			<c:if test="${hasUserAlreadyVotedForPhoto}">
 				<c:forEach var="userPhotoVote" items="${userPhotoVotes}">
+					<c:set var="photoVotingCategoryName" value="${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}"/>
 					<table:tr>
-						<table:td width="220" cssClass="textright">${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}</table:td>
+						<table:td width="220" cssClass="textright">${photoVotingCategoryName}</table:td>
 						<table:td>
-							<span title="${eco:translate2('Your set mark for $1: $2', userPhotoVote.photoVotingCategory.name, userPhotoVote.mark)}">
+							<span title="${eco:translate2('Your set mark for $1: $2', photoVotingCategoryName, userPhotoVote.mark)}">
 								${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}
 							</span>
 							/
-							<span title="${eco:translate1('Max accessible at voting time mark: $1', userPhotoVote.maxAccessibleMark)}">${userPhotoVote.maxAccessibleMark}</span>
+							<span title="${eco:translate1('Max accessible at voting time mark: $1', userPhotoVote.maxAccessibleMark)}">+${userPhotoVote.maxAccessibleMark}</span>
 						</table:td>
 					</table:tr>
 				</c:forEach>

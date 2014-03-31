@@ -136,10 +136,10 @@
 
 				<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
 					<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
-						${userPhotoVote.photoVotingCategory.name}:
-						<span title="${eco:translate1('Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark}</span>
+						${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
+						<span title="${eco:translate1('Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
 						/
-						<span title="${eco:translate1('Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.maxAccessibleMark}</span>
+						<span title="${eco:translate1('Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
 						<c:if test="${not status.last}">
 							,
 						</c:if>
