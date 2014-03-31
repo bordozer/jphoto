@@ -2,6 +2,7 @@ package admin.controllers.reports.users;
 
 import core.general.user.User;
 import core.services.pageTitle.PageTitleAdminUtilsService;
+import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,9 @@ public class UserReportController {
 			final Date registrationDate = dateUtilsService.getFirstSecondOfDay( user.getRegistrationTime() );
 
 			final UserRegistrationData userRegistrationData = registrationsMap.get( registrationDate );
-			userRegistrationData.increaseUsersCount();
+			if ( userRegistrationData != null ) {
+				userRegistrationData.increaseUsersCount();
+			}
 		}
 
 		model.setRegistrationsMap( registrationsMap );

@@ -65,7 +65,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 			return new EmptyTranslatableMessage();
 		}
 
-		return new TranslatableMessage( "$1", services ).addUserCardLinkParameter( activityOfUser );
+		return new TranslatableMessage( services ).addUserCardLinkParameter( activityOfUser );
 	}
 
 	public int getDisplayActivityUserId() {

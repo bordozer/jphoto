@@ -309,8 +309,8 @@ public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsServic
 
 	@Override
 	public PageTitleData getUsersReportTitleData() {
-		final String root = translatorService.translate( "Reports", EnvironmentContext.getLanguage() );
-		final String nerd = translatorService.translate( "Users", EnvironmentContext.getLanguage() );
+		final String root = translatorService.translate( "Tile data: Reports", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Tile data: Users", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), root, nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), root, nerd );

@@ -82,11 +82,11 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 				case FRIEND:
 				case BLACKLIST:
 				case NEW_PHOTO_NOTIFICATION:
-				return new TranslatableMessage( "$1", services ).addUserCardLinkParameter( favoriteEntryId );
+				return new TranslatableMessage( services ).addUserCardLinkParameter( favoriteEntryId );
 			case PHOTO:
 				case BOOKMARK:
 				case NEW_COMMENTS_NOTIFICATION:
-				return new TranslatableMessage( "$1", services ).addPhotoCardLinkParameter( favoriteEntryId );
+				return new TranslatableMessage( services ).addPhotoCardLinkParameter( favoriteEntryId );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal FavoriteEntryType: %s", entryType ) );

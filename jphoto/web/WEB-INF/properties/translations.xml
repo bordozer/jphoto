@@ -3062,10 +3062,45 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>User registrations by date graph</nerd>
+		<ru><![CDATA[График регистрации пользователей]]></ru>
+		<ua><![CDATA[Крафiк реЕстрацiI учасникiв]]></ua>
+		<en><![CDATA[User registrations by date]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Tile data: Reports</nerd>
+		<ru><![CDATA[Отчеты]]></ru>
+		<ua><![CDATA[Звiти]]></ua>
+		<en><![CDATA[Reports]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Tile data: Users</nerd>
+		<ru><![CDATA[Пользователи]]></ru>
+		<ua><![CDATA[Учасники]]></ua>
+		<en><![CDATA[Users]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No albums</nerd>
+		<ru><![CDATA[Альбомов нет]]></ru>
+		<ua><![CDATA[Альбомов немаЕ]]></ua>
+		<en><![CDATA[No albums]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You can not vote for your own rank.</nerd>
+		<ru><![CDATA[Вы не можете голосовать за ваш собственный ранг]]></ru>
+		<ua><![CDATA[Голосування за свiй ранг неможливо]]></ua>
+		<en><![CDATA[You can not vote for your own rank.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1</nerd>
+		<ru><![CDATA[$1]]></ru>
+		<ua><![CDATA[$1]]></ua>
+		<en><![CDATA[$1]]></en>
 	</translation>
 
 	<translation>

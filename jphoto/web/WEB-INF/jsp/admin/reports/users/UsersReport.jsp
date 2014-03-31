@@ -36,7 +36,7 @@
 	<div class="floatleft" style="padding: 50px;">
 
 		<table id="userRegistrationGraph" style="display: none;">
-			<caption>${eco:translate('User registrations by date')}</caption>
+			<caption>${eco:translate('User registrations by date graph')}</caption>
 			<thead>
 			<tr>
 				<c:set var="counter" value="0"/>

@@ -28,7 +28,7 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 	}
 
 	public TranslatableMessage getDisplayActivityUserLink() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( services );
 
 		if ( services.getSecurityService().isPhotoAuthorNameMustBeHidden( activityOfPhoto, EnvironmentContext.getCurrentUser() ) ) {
 			return translatableMessage.addStringParameter( services.getConfigurationService().getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) );

@@ -6,6 +6,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.translator.Language;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,11 @@ public class TranslatableMessage {
 	private List<AbstractTranslatableMessageParameter> messageParameters = newArrayList();
 
 	private final Services services;
+
+	public TranslatableMessage( final Services services ) {
+		this.nerd = StringUtils.EMPTY;
+		this.services = services;
+	}
 
 	public TranslatableMessage( final String nerd, final Services services ) {
 		this.nerd = nerd;
