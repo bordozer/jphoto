@@ -108,6 +108,18 @@
 	</function>
 
 	<function>
+		<name>translateActivityStreamEntry</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translateActivityStreamEntry(core.general.activity.AbstractActivityStreamEntry)</function-signature>
+	</function>
+
+	<function>
+		<name>translateActivityStreamUser</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translateActivityStreamUser(core.general.activity.AbstractActivityStreamEntry)</function-signature>
+	</function>
+
+	<function>
 		<name>formatDate</name>
 		<function-class>utils.TLD_Utils</function-class>
 		<function-signature>java.lang.String formatDate(java.util.Date)</function-signature>

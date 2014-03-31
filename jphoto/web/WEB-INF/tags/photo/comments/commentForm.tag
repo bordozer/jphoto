@@ -79,9 +79,9 @@
 				<table:tr>
 					<table:tdtext text_t="Comment" isMandatory="true" labelFor="${commentTextFormControl}"/>
 					<table:tddata>
-						<tags:inputHint inputId="${commentTextFormControl}" hintTitle_t="Textarea title" hint="${eco:translate('Textarea hint')}">
+						<tags:inputHint inputId="${commentTextFormControl}">
 						<jsp:attribute name="inputField">
-							<html:textarea inputId="${commentTextFormControl}" title="${eco:translate('Textarea title')}" hint="${eco:translate('Textarea hint')}" inputValue="" cols="40" rows="5"/>
+							<html:textarea inputId="${commentTextFormControl}" inputValue="" cols="40" rows="5"/>
 							<div style="float: left; width: 100%; height: 20px;">
 								${eco:translate2( "Comments length: $1 - $2 symbols", minCommentLength, maxCommentLength )}
 								<br />

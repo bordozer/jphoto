@@ -37,12 +37,12 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public List<Language> getUsedLanguages() {
+	public List<Language> getActiveLanguages() {
 		return newArrayList( Language.RU, Language.EN );
 	}
 
 	@Override
-	public boolean getShowLanguageCodeAfterTranslation() {
+	public boolean isShowTranslationSigns() {
 		return false;
 	}
 
@@ -89,26 +89,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public String getJavaScriptDateFormat() {
 		return "yy-mm-dd";
-	}
-
-	@Override
-	public String getTranslatorTranslatedStartPrefix() {
-		return AbstractTestCase.TRANSLATION_START_PREFIX;
-	}
-
-	@Override
-	public String getTranslatorTranslatedEndPrefix() {
-		return AbstractTestCase.TRANSLATION_END_PREFIX;
-	}
-
-	@Override
-	public String getTranslatorUntranslatedStartPrefix() {
-		return AbstractTestCase.TRANSLATION_START_PREFIX;
-	}
-
-	@Override
-	public String getTranslatorUntranslatedEndPrefix() {
-		return AbstractTestCase.TRANSLATION_END_PREFIX;
 	}
 
 	@Override

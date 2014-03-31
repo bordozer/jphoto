@@ -3,6 +3,7 @@ package core.general.activity;
 import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;
 import core.services.security.Services;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -30,6 +31,8 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID_VOTED_FOR ).getText() );
 		genreId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_GENRE_ID ).getText() );
 		points = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_POINTS ).getText() );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final Services services ) {
@@ -38,6 +41,8 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = rankInGenreVoting.getUserId();
 		genreId = rankInGenreVoting.getGenreId();
 		points = rankInGenreVoting.getPoints();
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -53,14 +58,13 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
+	protected TranslatableMessage getActivityTranslatableText() {
 
-		return services.getTranslatorService().translate( "voted for rank of $1 in category $2 ( $3 )"
-			, getCurrentUserLanguage()
-			, services.getEntityLinkUtilsService().getUserCardLink( services.getUserService().load( userVotedForId ), getCurrentUserLanguage() )
-			, services.getGenreService().load( genreId ).getName()
-			, getPoints()
-		);
+		return new TranslatableMessage( "activity stream entry: voted for rank of $1 in category $2 ( $3 )", services )
+			.addUserCardLinkParameter( userVotedForId )
+			.addPhotosByGenreLinkParameter( genreId )
+			.addStringParameter( getPoints() )
+			;
 	}
 
 	private String getPoints() {

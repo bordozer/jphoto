@@ -2,6 +2,7 @@ package core.services.translator.message;
 
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.services.security.Services;
 import core.services.translator.Language;
@@ -15,7 +16,7 @@ public class TranslatableMessage {
 
 	private final String nerd;
 
-	private List<AbstractTranslatableMessageUnit> messageUnits = newArrayList();
+	private List<AbstractTranslatableMessageParameter> messageParameters = newArrayList();
 
 	private final Services services;
 
@@ -24,49 +25,89 @@ public class TranslatableMessage {
 		this.services = services;
 	}
 
-	public TranslatableMessage addStringUnit( final String value ) {
-		messageUnits.add( new StringUnit( value, services ) );
+	public TranslatableMessage addTranslatableMessageParameter( final TranslatableMessage translatableMessage ) {
+		messageParameters.add( new TranslatableMessageParameter( translatableMessage, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addIntegerUnit( final int value ) {
-		messageUnits.add( new IntegerUnit( value, services ) );
+	public TranslatableMessage addStringParameter( final String value ) {
+		messageParameters.add( new StringParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotosByGenreUnit( final Genre genre ) {
-		messageUnits.add( new LinkToPhotosByGenreUnit( genre, services ) );
+	public TranslatableMessage addStringTranslatableParameter( final String value ) {
+		messageParameters.add( new StringTranslatableParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToUserCardUnit( final User user ) {
-		messageUnits.add( new LinkToUserCardUnit( user, services ) );
+	public TranslatableMessage addIntegerParameter( final int value ) {
+		messageParameters.add( new IntegerParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotosByUserByGenreUnit( final User user, final Genre genre ) {
-		messageUnits.add( new LinkToPhotosByUserByGenreUnit( user, genre, services ) );
+	public TranslatableMessage addPhotosByGenreLinkParameter( final Genre genre ) {
+		messageParameters.add( new PhotosByGenreLinkParameter( genre, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addLinkToPhotoCardUnit( final Photo photo ) {
-		messageUnits.add( new LinkToPhotoCardUnit( photo, services ) );
+	public TranslatableMessage addPhotosByGenreLinkParameter( final int genreId ) {
+		messageParameters.add( new PhotosByGenreLinkParameter( services.getGenreService().load( genreId ), services ) );
 		return this;
 	}
 
-	public TranslatableMessage addFormattedDateTimeUnit( final Date actionTime ) {
-		messageUnits.add( new FormattedDateTimeUnit( actionTime, services ) );
+	public TranslatableMessage addUserCardLinkParameter( final User user ) {
+		messageParameters.add( new UserCardLinkParameter( user, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addUserCardLinkParameter( final int userId ) {
+		messageParameters.add( new UserCardLinkParameter( services.getUserService().load( userId ), services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotosByUserByGenreLinkParameter( final User user, final Genre genre ) {
+		messageParameters.add( new PhotosByUserByGenreLinkParameter( user, genre, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotoCardLinkParameter( final Photo photo ) {
+		messageParameters.add( new PhotoCardLinkParameter( photo, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotoCardLinkParameter( final int photoId ) {
+		messageParameters.add( new PhotoCardLinkParameter( services.getPhotoService().load( photoId ), services ) );
+		return this;
+	}
+
+	public TranslatableMessage addFormattedDateTimeParameter( final Date actionTime ) {
+		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotoVotingCategoryParameterParameter( final PhotoVotingCategory photoVotingCategory ) {
+		messageParameters.add( new PhotoVotingCategoryParameter( photoVotingCategory, services ) );
 		return this;
 	}
 
 	public String build( final Language language ) {
 
-		String result = services.getTranslatorService().translate( nerd, language );
+		final StringBuilder builder = new StringBuilder( services.getTranslatorService().translate( nerd, language ) );
+
 		int i = 1;
-		for ( final AbstractTranslatableMessageUnit messageUnit : messageUnits ) {
-			result = result.replace( String.format( "$%d", i++ ), messageUnit.translate( language ) );
+		for ( final AbstractTranslatableMessageParameter messageParameter : messageParameters ) {
+			final String parameterPlaceholder = String.format( "$%d", i );
+
+			final int start = builder.indexOf( parameterPlaceholder );
+			if ( start >= 0 ) {
+				builder.replace( start, start + parameterPlaceholder.length(), messageParameter.getValue( language ) );
+			} else {
+				builder.append( messageParameter.getValue( language ) );
+			}
+
+			i++;
 		}
 
-		return result;
+		return builder.toString();
 	}
 }

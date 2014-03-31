@@ -64,7 +64,7 @@
 		<table:separator colspan="2" />
 
 		<table:tr>
-			<table:tdtext text_t="Sort by"/>
+			<table:tdtext text_t="Photo filter: Sort by"/>
 			<table:tddata>
 				<form:select path="photosSortColumn" items="${photoFilterSortColumnsValues}" itemValue="id" itemLabel="name" />
 				<br />

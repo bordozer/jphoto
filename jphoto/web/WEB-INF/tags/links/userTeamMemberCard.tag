@@ -9,5 +9,6 @@
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserTeamMemberCardLink( userTeamMember.getUser().getId(), userTeamMember.getId() )%>" />
 
 <c:set var="teamMemberNameEscaped" value="${eco:escapeHtml(userTeamMember.teamMemberName)}" />
+<c:set var="teamMemberTypeName" value="${eco:translate(userTeamMember.teamMemberType.name)}"/>
 
-<a href ="${link}" title="${eco:translate2('Member\'s team member: $1 - $2', teamMemberNameEscaped, userTeamMember.teamMemberType.nameTranslated)}">${teamMemberNameEscaped}</a>
+<a href ="${link}" title="${eco:translate2('Member\'s team member: $1 - $2', teamMemberNameEscaped, teamMemberTypeName)}">${teamMemberNameEscaped}</a>

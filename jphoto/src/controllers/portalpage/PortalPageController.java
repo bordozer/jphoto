@@ -78,7 +78,7 @@ public class PortalPageController {
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
 		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );
 
-		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The Best Photos", EnvironmentContext.getLanguage() ) );
+		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
 		model.setTheBestPhotoList( theBestPhotoList );
 		Collections.shuffle( theBestPhotoList.getPhotoInfos() );
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );

@@ -8,7 +8,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public enum Language implements Identifiable {
 
-	NERD( 1, "nerd", "Nerd" )
+	NERD( 1, "nerd", "Nerd", "nerd.png" )
 	, UA( 4, "ua", "Ukrainian language name", "ua.png" )
 	, RU( 3, "ru", "Russian language name", "ru.png" )
 	, EN( 2, "en", "English language name", "en.png" )
@@ -18,13 +18,6 @@ public enum Language implements Identifiable {
 	private final String code;
 	private final String name;
 	private final String icon;
-
-	private Language( final int id, final String code, final String name ) {
-		this.id = id;
-		this.code = code;
-		this.name = name;
-		this.icon = "";
-	}
 
 	private Language( final int id, final String code, final String name, final String icon ) {
 		this.id = id;

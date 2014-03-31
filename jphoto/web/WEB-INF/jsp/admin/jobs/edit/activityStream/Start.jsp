@@ -37,7 +37,7 @@
 						<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave Activity For Days"
 										hint="${eco:translate('Delete activities older then')}">
 							<jsp:attribute name="inputField">
-								<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('days')}
+								<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('activity cleanup job => parameter => days')}
 							</jsp:attribute>
 						</tags:inputHint>
 					</table:tddata>

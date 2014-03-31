@@ -7,7 +7,6 @@ import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.security.Services;
-import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import org.apache.commons.collections15.CollectionUtils;
@@ -140,7 +139,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).addStringUnit( photoAuthor.getNameEscaped() );
+				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).addStringParameter( photoAuthor.getNameEscaped() );
 
 				return new NotificationData( subject, message );
 			}
@@ -369,27 +368,19 @@ public abstract class UserNotificationsCollector {
 		return services.getUserService().load( photo.getUserId() );
 	}
 
-	protected String getPhotoCardLink( final Photo photo, final Language language ) {
-		return services.getEntityLinkUtilsService().getPhotoCardLink( photo, language );
-	}
-
-	protected String getUserCardLink( final User photoAuthor ) {
-		return services.getEntityLinkUtilsService().getUserCardLink( photoAuthor, Language.EN ); // TODO: pass addressat language here
-	}
-
 	private static boolean isUserEmailNotificationOptionSwitchedOn( final User photoAuthor, final EmailNotificationType emailNotificationType ) {
 		return photoAuthor.getEmailNotificationTypes().contains( emailNotificationType );
 	}
 
-	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return new TranslatableMessage( subj, services1 ).addStringUnit( photoAuthor.getNameEscaped() ).addStringUnit( photo.getNameEscaped() );
+	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services ) {
+		return new TranslatableMessage( subj, services ).addStringParameter( photoAuthor.getNameEscaped() ).addStringParameter( photo.getNameEscaped() );
 	}
 
-	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return new TranslatableMessage( nerd, services1 ).addLinkToUserCardUnit( photoAuthor ).addLinkToPhotoCardUnit( photo );
+	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
+		return new TranslatableMessage( nerd, services ).addUserCardLinkParameter( photoAuthor ).addPhotoCardLinkParameter( photo );
 	}
 
-	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services1 ) {
-		return getMessage( nerd, photoAuthor, photo, services1 ).addStringUnit( CONTROL_EMAIL_NOTIFICATIONS_HINT );
+	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
+		return getMessage( nerd, photoAuthor, photo, services ).addStringParameter( CONTROL_EMAIL_NOTIFICATIONS_HINT );
 	}
 }

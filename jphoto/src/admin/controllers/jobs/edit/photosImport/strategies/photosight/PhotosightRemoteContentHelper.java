@@ -80,7 +80,7 @@ public class PhotosightRemoteContentHelper {
 
 	public static String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
 		final int photosightPhotoId = photosightPhoto.getPhotoId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), StringUtils.isNotEmpty( photosightPhoto.getName() ) ? StringUtilities.unescapeHtml( photosightPhoto.getName() ) : "-no name-", photosightPhotoId );
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( photosightPhoto.getName() ), photosightPhotoId );
 	}
 
 	public static String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {

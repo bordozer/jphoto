@@ -51,7 +51,7 @@
 						<a class="uppercase" href="$menuItem.key.link">$menuItem.key.caption</a>
 						<ul class="block-background block-border">
 							#foreach( $subMenuItem in $menuItem.value )
-								<li class="block-border"><a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">$subMenuItem.caption</a></li>
+								<li class="block-border"><a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">$subMenuItem.caption &nbsp;</a></li>
 							#end
 						</ul>
 					</li>

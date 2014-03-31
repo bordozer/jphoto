@@ -13,7 +13,7 @@ public abstract class AbstractPhotoActivityStreamEntry extends AbstractActivityS
 
 	protected Photo activityOfPhoto;
 
-	protected AbstractPhotoActivityStreamEntry( final User user, final Photo photo, final Date activityTime, final ActivityType activityType, final Services services ) {
+	public AbstractPhotoActivityStreamEntry( final User user, final Photo photo, final Date activityTime, final ActivityType activityType, final Services services ) {
 		super( user, activityTime, activityType, services );
 
 		this.activityOfPhoto = photo;

@@ -33,17 +33,13 @@ public class TranslatorServiceImpl implements TranslatorService {
 			return nerd;
 		}
 
-		TranslationEntry translationEntry = translator.getTranslation( nerd, language );
-
-		if ( translationEntry == null ) {
-			translationEntry = new TranslationEntryMissed( nerd, language, systemVarsService );
-		}
+		final TranslationEntry translationEntry = translator.getTranslation( nerd, language );
 
 		if ( translationEntry instanceof TranslationEntryMissed ) {
 			translator.registerNotTranslationEntry( translationEntry );
 		}
 
-		String result = translationEntry.getValueWithPrefixes(); // TODO: just getValue() on a production
+		String result = systemVarsService.isShowTranslationSigns() ? translationEntry.getValueWithPrefixes() : translationEntry.getValue();
 
 		int i = 1;
 		for ( String param : params ) {

@@ -114,6 +114,11 @@
 						});
 					</script>
 				#end
+
+				#if ( $untranslatedMessagesCount > 0 )
+					<img src="$imagePath/icons32/translate.png" width="16" height="16">
+					<a href="$baseAdminPrefix/translator/untranslated/" title="$untranslatedMessagesCountHint">+$untranslatedMessagesCount</a>
+				#end
 			</div>
 
 		</div>

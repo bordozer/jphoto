@@ -26,7 +26,7 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="500" border="0">
+			<table:table width="700" border="0">
 
 				<table:tr>
 					<table:td colspan="2">
@@ -39,8 +39,8 @@
 				<table:tr>
 					<table:tdtext text_t="Photos action to generate" isMandatory="true"/>
 					<table:tddata>
-						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Total job steps"
-										hint="Quantity of generated actions">
+						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Latest photo qty"
+										hint="${eco:translate('Quantity of generated actions')}">
 						<jsp:attribute name="inputField">
 							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
 						</jsp:attribute>
@@ -52,7 +52,7 @@
 					<table:tdtext text_t="Latest photo qty"/>
 					<table:tddata>
 						<tags:inputHint inputId="${photosQtyFormControl}" hintTitle_t="Latest photo qty"
-										hint="Going to be affected photos (all if empty)">
+										hint="${eco:translate('Going to be affected photos (all if empty)')}">
 						<jsp:attribute name="inputField">
 							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
 						</jsp:attribute>

@@ -87,7 +87,7 @@ public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService 
 	@Override
 	public PageTitleData getUserListByFilter() {
 		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Filter", EnvironmentContext.getLanguage() );
+		final String tran = translatorService.translate( "User filter", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );

@@ -6,15 +6,15 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 
-public abstract class AbstractTranslatableMessageUnit {
+public abstract class AbstractTranslatableMessageParameter {
 
 	protected final Services services;
 
-	protected AbstractTranslatableMessageUnit( final Services services ) {
+	protected AbstractTranslatableMessageParameter( final Services services ) {
 		this.services = services;
 	}
 
-	public abstract String translate( final Language language );
+	public abstract String getValue( final Language language );
 
 	protected TranslatorService getTranslatorService() {
 		return services.getTranslatorService();

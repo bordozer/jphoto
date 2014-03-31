@@ -28,13 +28,13 @@
 			<table:td>${eco:translate( "id" )}</table:td>
 			<table:td>${eco:translate( "Avatar" )}</table:td>
 			<table:td>${eco:translate( "Member name" )}</table:td>
-			<table:td>${eco:translate( "Icons" )}</table:td>
+			<table:td />
 			<table:td>${eco:translate( "Status" )}</table:td>
 			<%--<table:td>${eco:translate( "Login" )}</table:td>--%>
 			<%--<table:td>${eco:translate( "Email" )}</table:td>--%>
 			<table:td>${eco:translate( "Birthday" )}</table:td>
-			<table:td>${eco:translate( "Genred" )}</table:td>
-			<table:td>${eco:translate( "Membership types" )}</table:td>
+			<table:td>${eco:translate( "Gender" )}</table:td>
+			<table:td>${eco:translate( "Membership type" )}</table:td>
 			<table:td>${eco:translate( "Photos in line" )}</table:td>
 			<table:td>${eco:translate( "Photos Qty" )}</table:td>
 		</jsp:attribute>

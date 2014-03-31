@@ -120,19 +120,11 @@ public abstract class AbstractPhotoImportStrategy {
 
 		photoToImport.setPhoto( photo );
 
-		/*final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-		final String message = services.getTranslatorService().translate( "Created photo #$1 '$2' of $3, category: $4"
-			, language
-			, String.valueOf( photo.getId() )
-			, entityLinkUtilsService.getPhotoCardLink( photo, language )
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, services.getEntityLinkUtilsService().getPhotosByGenreLink( services.getGenreService().loadIdByName( genre.getName() ), language )
-		);*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
-			.addIntegerUnit( photo.getId() )
-			.addLinkToPhotoCardUnit( photo )
-			.addLinkToUserCardUnit( user )
-			.addLinkToPhotosByGenreUnit( genre )
+			.addIntegerParameter( photo.getId() )
+			.addPhotoCardLinkParameter( photo )
+			.addUserCardLinkParameter( user )
+			.addPhotosByGenreLinkParameter( genre )
 			;
 
 		job.addJobRuntimeLogMessage( translatableMessage );

@@ -5,17 +5,17 @@ import core.services.translator.Language;
 
 import java.util.Date;
 
-public class FormattedDateTimeUnit extends AbstractTranslatableMessageUnit {
+public class FormattedDateTimeParameter extends AbstractTranslatableMessageParameter {
 
 	private Date time;
 
-	public FormattedDateTimeUnit( final Date time, final Services services ) {
+	public FormattedDateTimeParameter( final Date time, final Services services ) {
 		super( services );
 		this.time = time;
 	}
 
 	@Override
-	public String translate( final Language language ) {
+	public String getValue( final Language language ) {
 		return getDateUtilsService().formatDateTime( time );
 	}
 }

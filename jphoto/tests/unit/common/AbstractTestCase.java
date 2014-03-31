@@ -16,9 +16,6 @@ import org.junit.Before;
 
 public class AbstractTestCase {
 
-	public static final String TRANSLATION_START_PREFIX = "";
-	public static final String TRANSLATION_END_PREFIX = "(t)";
-
 	public static final Language MENU_LANGUAGE = Language.EN;
 
 	protected static final String EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT = "Expected and actual results are different";
@@ -39,7 +36,7 @@ public class AbstractTestCase {
 		systemVarsServiceMock = new SystemVarsServiceMock();
 
 		translatorService = new TranslatorServiceImpl();
-		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap(), systemVarsServiceMock ) );
+		translatorService.setTranslator( new Translator( Maps.<NerdKey, TranslationData>newHashMap() ) );
 		translatorService.setTranslationsDao( getTranslationsDao() );
 
 		translatorService.setSystemVarsService( systemVarsServiceMock );
@@ -117,20 +114,8 @@ public class AbstractTestCase {
 	}
 
 	public static String translated( final String nerd ) {
-		return String.format( "%s%s%s<sup>nerd</sup>", TRANSLATION_START_PREFIX, nerd, TRANSLATION_END_PREFIX );
-//		return String.format( "%s(%s)", nerd, Language.NERD.getCode() );
+		return nerd;
 	}
-
-	/*public User getNotLoggedTemporaryUser() {
-		final UserService userService = EasyMock.createMock( UserService.class );
-
-		EasyMock.expect( userService.getNotLoggedTemporaryUser() ).andReturn( NOT_LOGGED_USER ).anyTimes();
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		return NOT_LOGGED_USER;
-	}*/
 
 	public final static User SUPER_ADMIN_1 = new User() {
 		@Override

@@ -1,7 +1,5 @@
 package core.services.translator;
 
-import core.services.utils.SystemVarsService;
-
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +11,8 @@ public class Translator {
 	private final Map<NerdKey, TranslationData> translationsMap;
 	private final Map<NerdKey, TranslationData> untranslatedMap = newHashMap();
 
-	private SystemVarsService systemVarsService;
-
-	public Translator( final Map<NerdKey, TranslationData> translationsMap, final SystemVarsService systemVarsService ) {
+	public Translator( final Map<NerdKey, TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
-		this.systemVarsService = systemVarsService;
 	}
 
 	public TranslationEntry getTranslation( final String nerd, final Language language ) {
@@ -25,7 +20,7 @@ public class Translator {
 		final NerdKey key = new NerdKey( nerd );
 
 		if ( ! translationsMap.containsKey( key ) ) {
-			return new TranslationEntryMissed( nerd, language, systemVarsService );
+			return new TranslationEntryMissed( nerd, language );
 		}
 
 		return translationsMap.get( key ).getTranslationEntry( language );
@@ -70,7 +65,7 @@ public class Translator {
 		} else {
 			if ( ! hasTranslationEntryForLanguage( translationData, translationEntry.getLanguage() ) ) {
 				final List<TranslationEntry> translations = translationData.getTranslations();
-				translations.add( new TranslationEntryMissed( nerd, translationEntry.getLanguage(), systemVarsService ) );
+				translations.add( new TranslationEntryMissed( nerd, translationEntry.getLanguage() ) );
 				map.put( nerdKey, new TranslationData( nerd, translations ) );
 			}
 		}

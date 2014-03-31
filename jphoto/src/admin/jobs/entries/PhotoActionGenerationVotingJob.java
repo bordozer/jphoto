@@ -82,18 +82,10 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final User photoAuthor = services.getUserService().load( photo.getUserId() );
 
-		/*final Language language = getLanguage();
-		final String message = services.getTranslatorService().translate( "User $1 has appraised photo $2 of $3 ( time: $4 )"
-			, language
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, entityLinkUtilsService.getPhotoCardLink( photo, language )
-			, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
-			, dateUtilsService.formatDateTime( actionTime )
-		);*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has appraised photo $2 of $3 ( time: $4 )", services )
-			.addLinkToUserCardUnit( user )
-			.addLinkToPhotoCardUnit( photo )
-			.addLinkToUserCardUnit( photoAuthor )
+			.addUserCardLinkParameter( user )
+			.addPhotoCardLinkParameter( photo )
+			.addUserCardLinkParameter( photoAuthor )
 			;
 		addJobRuntimeLogMessage( translatableMessage );
 

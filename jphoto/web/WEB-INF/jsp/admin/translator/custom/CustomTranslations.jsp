@@ -1,3 +1,4 @@
+<%@ page import="core.services.translator.Language" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,6 +11,7 @@
 
 <c:set var="languageValues" value="<%=customTranslationsModel.getLanguages()%>"/>
 <c:set var="customTranslatableEntriesMap" value="<%=customTranslationsModel.getCustomTranslatableEntriesMap()%>"/>
+<c:set var="selectedLanguage" value="<%=Language.getById( customTranslationsModel.getSelectedLanguageId() )%>"/>
 
 <tags:page pageModel="${customTranslationsModel.pageModel}">
 
@@ -22,6 +24,8 @@
 			<table:tr>
 				<table:td>
 					${eco:translate('Language')}
+					<br />
+					<html:img id="langIcon" src="languages/${selectedLanguage.icon}"  height="11" width="16" alt="${eco:translate(selectedLanguage.name)}"/>
 				</table:td>
 				<table:td/>
 				<table:td>

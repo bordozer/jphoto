@@ -61,18 +61,11 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		services.getPhotoCommentService().save( comment );
 
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
-		/*final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
-		final String message = services.getTranslatorService().translate( "User $1 has left a comment for photo $2 ( time: $3 )"
-			, language
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, entityLinkUtilsService.getPhotoCardLink( photo, language )
-			, dateUtilsService.formatDateTime( actionTime )
-		);*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has left a comment for photo $2 ( time: $3 )", services )
-			.addLinkToUserCardUnit( user )
-			.addLinkToPhotoCardUnit( photo )
-			.addFormattedDateTimeUnit( actionTime )
+			.addUserCardLinkParameter( user )
+			.addPhotoCardLinkParameter( photo )
+			.addFormattedDateTimeParameter( actionTime )
 			;
 		addJobRuntimeLogMessage( translatableMessage );
 

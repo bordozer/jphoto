@@ -32,10 +32,6 @@ public enum UserTeamMemberType {
 		return icon;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static UserTeamMemberType getById( final int id ) {
 		for ( final UserTeamMemberType upgradeTaskResult : UserTeamMemberType.values() ) {
 			if ( upgradeTaskResult.getId() == id ) {

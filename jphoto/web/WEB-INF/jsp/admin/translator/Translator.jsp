@@ -35,13 +35,13 @@
 
 		.left-pane {
 			float: left;
-			width: 40%;
+			width: 100%;
 		}
 
-		.right-pane{
+		/*.right-pane{
 			float: left;
-			width: 60%;
-		}
+			width: 400%;
+		}*/
 	</style>
 
 	<c:set var="mode" value="${translatorModel.translationMode}"/>
@@ -84,14 +84,14 @@
 				<a href="#${translatorNerdAnchor}" onclick="placeToTranslatorForm( '${eco:escapeJavaScript(nerdKey.nerd)}' );">${nerdKey.nerd}</a>
 				<br/>
 				<c:forEach var="translations" items="${translationData.translations}">
-					${translations.language}: "${eco:escapeHtml(translations.value)}" ( ${translations.translationEntryType.description} )
+					<span title="${eco:translate(translations.translationEntryType.description)}">${translations.language}: "${eco:escapeHtml(translations.value)}"</span>
 					<br/>
 				</c:forEach>
 				<br/>
 			</c:forEach>
 		</div>
 
-		<div class="right-pane">
+		<%--<div class="right-pane">
 
 			<script type="text/javascript">
 				function placeToTranslatorForm( nerd ) {
@@ -141,7 +141,7 @@
 
 			</table:table>
 
-		</div>
+		</div>--%>
 
 	</div>
 

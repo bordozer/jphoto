@@ -121,7 +121,7 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_PHOTO_ID, entry.getActivityOfPhotoId() );
 		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME, entry.getActivityTime() );
 		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE, entry.getActivityType().getId() );
-		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_XML, entry.getActivityXML().asXML() );
+		paramSource.addValue( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_XML, entry.getActivityXMLFormatted() );
 
 		return paramSource;
 	}

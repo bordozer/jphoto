@@ -40,7 +40,7 @@
 
 	<table:tr>
 		<table:td>
-			${eco:translate('Active')}
+			${eco:translate('This is an active job')}
 		</table:td>
 
 		<table:td>

@@ -29,7 +29,7 @@
 								<c:set var="label" value="${label} - ${eco:translate('default')}" />
 							</c:if>
 							<c:if test="${systemConfiguration.activeConfiguration}">
-								<c:set var="label" value="${label} - ${eco:translate('active')}" />
+								<c:set var="label" value="${label} - ${eco:translate('This is an active configuration')}" />
 							</c:if>
 
 							<form:option value="${systemConfiguration.id}" label="${label}"/>

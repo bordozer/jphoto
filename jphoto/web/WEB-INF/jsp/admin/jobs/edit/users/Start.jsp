@@ -21,7 +21,7 @@
 
 		<jsp:attribute name="jobForm">
 
-			<table:table width="500">
+			<table:table width="700">
 
 				<table:tr>
 					<table:td colspan="2">

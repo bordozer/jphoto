@@ -42,9 +42,9 @@ public class RequestContextFilter extends OncePerRequestFilter {
 			setEnvironmentUserFromCookie( request, environment );
 		} else {
 			environment = getSessionEnvironment( session );
-			/*if ( environment == null ) {
+			if ( environment == null ) {
 				environment = createSessionEnvironment( session ); // Again because session could be alive after the tomcat restart
-			}*/
+			}
 		}
 
 		environment.setDeviceType( PhotoUtils.getDeviceType( request ) );

@@ -60,8 +60,6 @@ public class PhotosightXmlUtils {
 		final XMLWriter output = new XMLWriter( fileWriter, format );
 		output.write( document );
 		output.close();
-
-//		writeImageContentToFile( userInfoFile, "", "UTF-8" );
 	}
 
 	public static void writeImageContentToFile( final File imageFile, final String imageContent, final String charsetName ) throws IOException {

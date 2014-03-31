@@ -30,16 +30,16 @@
 				<table:td>
 
 					<c:if test="${not hideUser}">
-						${activity.displayActivityUserLink}
+						${eco:translateActivityStreamUser(activity)}
 					</c:if>
 
-					${activity.displayActivityDescription}
+					${eco:translateActivityStreamEntry(activity)}
 				</table:td>
 
 				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">
 					<table:td cssClass="textcentered" width="20">
 						<a href="${eco:baseUrlWithPrefix()}/members/${activity.displayActivityUserId}/card/activity/"
-						   title="${eco:translate('Show member activity stream')}">${eco:translate('all')}</a>
+						   title="${eco:translate('Show full member activity stream')}">${eco:translate('Show full member activity stream (short)')}</a>
 					</table:td>
 				</c:if>
 

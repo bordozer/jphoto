@@ -27,7 +27,7 @@ public class UserNotification {
 		return notificationData;
 	}
 
-	public void sendNotifications( final Services services ) {
+	public void sendNotifications( final Services services ) { 
 		sendNotificationStrategy.sendNotifications( this, services );
 	}
 

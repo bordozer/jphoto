@@ -16,20 +16,40 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	private final CompositeConfiguration config = new CompositeConfiguration();
 
+	private Language defaultLanguage;
+	private final List<Language> activeLanguages = newArrayList();
+
 	@Override
 	public void initSystemVars() throws ConfigurationException {
 
-		final File basePropertiesFile = new File( String.format( "%s/Base.properties", getPropertiesPath() ) );
-		final File systemPropertiesFile = new File( String.format( "%s/System.properties", getPropertiesPath() ) );
-		final File photoPropertiesFile = new File( String.format( "%s/Photo.properties", getPropertiesPath() ) );
-		final File dbPropertiesFile = new File( String.format( "%s/Database.properties", getPropertiesPath() ) );
+		final List<String> propertyFiles = newArrayList();
+		propertyFiles.add( "Base" );
+		propertyFiles.add( "System" );
+		propertyFiles.add( "Photo" );
+		propertyFiles.add( "Database" );
 
 		config.clear();
 
-		config.addConfiguration( new PropertiesConfiguration( basePropertiesFile ) );
-		config.addConfiguration( new PropertiesConfiguration( systemPropertiesFile ) );
-		config.addConfiguration( new PropertiesConfiguration( photoPropertiesFile ) );
-		config.addConfiguration( new PropertiesConfiguration( dbPropertiesFile ) );
+		for ( final String propertyFile : propertyFiles ) {
+			config.addConfiguration( new PropertiesConfiguration( new File( String.format( "%s/%s.properties", getPropertiesPath(), propertyFile ) ) ) );
+		}
+
+		initLanguages();
+	}
+
+	private void initLanguages() {
+		final List<Object> list = config.getList( "application.language.actives" );
+
+		synchronized ( activeLanguages ) {
+			activeLanguages.clear();
+
+			for ( final Object code : list ) {
+				final String languageCode = ( String ) code;
+				activeLanguages.add( Language.getByCode( languageCode ) );
+			}
+		}
+
+		defaultLanguage = Language.getByCode( config.getString( "application.language.default" ) );
 	}
 
 	// Base properties -->
@@ -82,21 +102,12 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	@Override
 	public Language getSystemDefaultLanguage() {
-		return Language.getByCode( config.getString( "application.language.default" ) );
+		return defaultLanguage;
 	}
 
 	@Override
-	public List<Language> getUsedLanguages() {
-		final List<Object> list = config.getList( "application.language.usedLanguages" );
-
-		final List<Language> result = newArrayList();
-
-		for ( final Object code : list ) {
-			final String languageCode = ( String ) code;
-			result.add( Language.getByCode( languageCode ) );
-		}
-
-		return result;
+	public List<Language> getActiveLanguages() {
+		return activeLanguages;
 	}
 
 	@Override
@@ -121,28 +132,8 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	// Date/time format properties <--
 
 	@Override
-	public String getTranslatorTranslatedStartPrefix() {
-		return config.getString( "translator.translated.startPrefix" );
-	}
-
-	@Override
-	public boolean getShowLanguageCodeAfterTranslation() {
-		return config.getBoolean( "translator.showLanguageCodeAfterTranslation" );
-	}
-
-	@Override
-	public String getTranslatorTranslatedEndPrefix() {
-		return config.getString( "translator.translated.endPrefix" );
-	}
-
-	@Override
-	public String getTranslatorUntranslatedStartPrefix() {
-		return config.getString( "translator.untranslated.startPrefix" );
-	}
-
-	@Override
-	public String getTranslatorUntranslatedEndPrefix() {
-		return config.getString( "translator.untranslated.endPrefix" );
+	public boolean isShowTranslationSigns() {
+		return config.getBoolean( "translator.showTranslationSigns" );
 	}
 
 	@Override

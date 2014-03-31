@@ -416,7 +416,7 @@
 
 	<translation>
 		<nerd>Show photos: $1</nerd>
-		<ru><![CDATA[Показать работы: $1]]></ru>
+		<ru><![CDATA[Показать все работы из раздела '$1']]></ru>
 	</translation>
 
 	<translation>
@@ -792,6 +792,7 @@
 	<translation>
 		<nerd>$1: photo card</nerd>
 		<ru><![CDATA[$1: карточка работы]]></ru>
+		<ua><![CDATA[$1: картка роботы]]></ua>
 	</translation>
 
 	<translation>
@@ -935,6 +936,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Page $1</nerd>
+		<ru><![CDATA[Страница $1]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Anonymous till</nerd>
 		<ru><![CDATA[Анонимность до]]></ru>
 	</translation>
@@ -1028,7 +1034,7 @@
 
 	<translation>
 		<nerd>Show all photos of the list</nerd>
-		<ru><![CDATA[Показать все работы в списке]]></ru>
+		<ru><![CDATA[Показать все работы из списка]]></ru>
 	</translation>
 
 	<translation>
@@ -1462,8 +1468,8 @@
 	</translation>
 
 	<translation>
-		<nerd>voted for rank of $1 in category $2 ( $3 )</nerd>
-		<ru><![CDATA[голосовал за ранк $1 в разделе $2 ( $3 )]]></ru>
+		<nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
+		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе $2 ( $3 )]]></ru>
 	</translation>
 
 	<translation>
@@ -1477,7 +1483,7 @@
 	</translation>
 
 	<translation>
-		<nerd><![CDATA[voted for photo $1<br />$2]]></nerd>
+		<nerd><![CDATA[appraised photo $1<br />]]></nerd>
 		<ru><![CDATA[оценил работу $1<br />$2]]></ru>
 	</translation>
 
@@ -1517,8 +1523,8 @@
 	</translation>
 
 	<translation>
-		<nerd>uploaded photo $1</nerd>
-		<ru><![CDATA[загрузил работу $1]]></ru>
+		<nerd>activity stream: uploaded photo $1</nerd>
+		<ru><![CDATA[загрузил(а) работу $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1902,18 +1908,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Job template</nerd>
+		<ru><![CDATA[Шаблон]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Active / Performed</nerd>
 		<ru><![CDATA[Акт. / Выполн.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Show member activity stream</nerd>
-		<ru><![CDATA[Показать ленту событий пользователя]]></ru>
+		<nerd>Show full member activity stream</nerd>
+		<ru><![CDATA[Показать всю ленту событий пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show full member activity stream (short)</nerd>
+		<ru><![CDATA[Все]]></ru>
+		<ua><![CDATA[Усi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Registered</nerd>
 		<ru><![CDATA[Дата регистрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>user registration activity stream: registered</nerd>
+		<ru><![CDATA[зарегистрировался]]></ru>
+		<ua><![CDATA[зареЕструвався]]></ua>
+		<en><![CDATA[registered]]></en>
 	</translation>
 
 	<translation>
@@ -1923,32 +1947,22 @@
 
 	<translation>
 		<nerd>author plural</nerd>
-		<ru><![CDATA[Авторы]]></ru>
+		<ru><![CDATA[авторы]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>model plural</nerd>
-		<ru><![CDATA[Модели]]></ru>
+		<ru><![CDATA[модели]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>makeup master plural</nerd>
-		<ru><![CDATA[Визажисты]]></ru>
+		<ru><![CDATA[визажисты]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Best photos of author plural</nerd>
-		<ru><![CDATA[Лучшие работы авторов]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of model plural</nerd>
-		<ru><![CDATA[Лучшие работы моделей]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of makeup master plural</nerd>
-		<ru><![CDATA[Лучшие работы визажистов]]></ru>
+		<nerd>Best photos of $1</nerd>
+		<ru><![CDATA[Лучшие работы: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -1983,7 +1997,7 @@
 
 	<translation>
 		<nerd>The very best of $1</nerd>
-		<ru><![CDATA[Лучшие работы $1]]></ru>
+		<ru><![CDATA[Лучшие работы: $1]]></ru>
 	</translation>
 
 	<translation>
@@ -2309,11 +2323,13 @@
 	<translation>
 		<nerd>$1: card</nerd>
 		<ru><![CDATA[$1: карточка]]></ru>
+		<ua><![CDATA[$1: картка]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Created photo #$1 '$2' of $3, category: $4</nerd>
-		<ru><![CDATA[Создана работа #$1 '$2' автора $3, раздел: $4]]></ru>
+		<ru><![CDATA[Создана работа #$1 '$2', автор $3, раздел: $4]]></ru>
+		<ua><![CDATA[Створена робота #$1 '$2', автор $3, роздiл: $4]]></ua>
 	</translation>
 
 	<translation>
@@ -2349,11 +2365,6 @@
 	<translation>
 		<nerd>All photos in genre '$1'</nerd>
 		<ru><![CDATA[Все работы в категории '$1']]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photos of $1</nerd>
-		<ru><![CDATA[Лучшие работы $1]]></ru>
 	</translation>
 
 	<translation>
@@ -2545,7 +2556,7 @@
 
 	<translation>
 		<nerd>Preview size</nerd>
-		<ru><![CDATA[Размер превью]]></ru>
+		<ru><![CDATA[Размер превью в пикселях]]></ru>
 	</translation>
 
 	<translation>
@@ -2582,9 +2593,513 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ua><![CDATA[]]></ua>
+		<nerd>Language tag is missed in translation.xml</nerd>
+		<ua><![CDATA[Мовний тег вiдсутнiй в translation.xml]]></ua>
+		<ru><![CDATA[Языковой тэг отсутствует в translation.xml]]></ru>
+		<en><![CDATA[Language tag is missed in translation.xml]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.</nerd>
+		<ru><![CDATA[$1 загрузил новую работу '$2'. Вы получили это сообщение поскольку подписаны на новые работы $3.]]></ru>
+		<ua><![CDATA[$1 загрузив нову роботу '$2'. Ви отримали це повiдомлення оскiльки вы пiдiсанi на новi роботи $3.]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented your photo '$2'</nerd>
+		<ru><![CDATA[$1 прокомментировал работу '$2']]></ru>
+		<ua><![CDATA[$1 прокоментував роботу '$2']]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented your photo '$2'. $3</nerd>
+		<ru><![CDATA[$1 прокомментировал вашу работу '$2'. $3]]></ru>
+		<ua><![CDATA[$1 прокомментував вашу роботу '$2'. $3]]></ua>
+		<en><![CDATA[$1 has commented your photo '$2'. $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You can control email notifications in the settings of your profile.</nerd>
+		<ru><![CDATA[Вы можете управлять уведомлениями в настройках вашего профайла]]></ru>
+		<ua><![CDATA[Ви можете контролювати повiдомлення у настройках вашого профайлу]]></ua>
+		<en><![CDATA[You can control email notifications in the settings of your profile.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: has been added to</nerd>
+		<ru><![CDATA[добавлен(а) в]]></ru>
+		<ua><![CDATA[додан(а) в]]></ua>
+		<en><![CDATA[has been added to]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: has been removed from</nerd>
+		<ru><![CDATA[удален(а) из]]></ru>
+		<ua><![CDATA[видален(а) з]]></ua>
+		<en><![CDATA[has been removed from]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: is already in</nerd>
+		<ru><![CDATA[уже в]]></ru>
+		<ua><![CDATA[вже у]]></ua>
+		<en><![CDATA[is already in]]></en>
+	</translation>
+
+	<translation>
+		<nerd>add/remove bookmark: is NOT in</nerd>
+		<ru><![CDATA[не в]]></ru>
+		<ua><![CDATA[не у]]></ua>
+		<en><![CDATA[is NOT in]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Search photos</nerd>
+		<ru><![CDATA[Поиск работ]]></ru>
+		<ua><![CDATA[Пошук робот]]></ua>
+		<en><![CDATA[Search photos]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo filter: Sort by</nerd>
+		<ru><![CDATA[Сортировать по]]></ru>
+		<ua><![CDATA[Сортувати по]]></ua>
+		<en><![CDATA[Sort by]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1: photos with $2 $3 ( $4 )</nerd>
+		<ru><![CDATA[$1: работы с $2 $3 ( $4 )]]></ru>
+		<ua><![CDATA[$1: роботи з $2 $3 ( $4 )]]></ua>
+		<en><![CDATA[$1: photos with $2 $3 ( $4 )]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.</nerd>
+		<ru><![CDATA[$1 оставил комментарий к работе '$2'. Вы получили это сообщение поскольку вы следите за комментариями к этой работе.]]></ru>
+		<ua><![CDATA[$1 прокоментував роботу '$2'. Ви отримали це повiдомлення оскiльки ви спостерiгаете за комментарями до роботи.]]></ua>
+		<en><![CDATA[$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>One of your favorite members $1 has uploaded new photo '$2'.</nerd>
+		<ru><![CDATA[Пользователь $1 из вашего списка избранных пользователей загрузил новую работу '$2'.]]></ru>
+		<ua><![CDATA[Учасник $1 з вашого листа обраних учасникiв загрузив нову роботу '$2'.]]></ua>
+		<en><![CDATA[One of your favorite members $1 has uploaded new photo '$2'.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Edit comment</nerd>
+		<ru><![CDATA[Изменить комментарий]]></ru>
+		<ua><![CDATA[Редагувати комментар]]></ua>
+		<en><![CDATA[Edit comment]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset filter</nerd>
+		<ru><![CDATA[Сбросить фильтр]]></ru>
+		<ua><![CDATA[Скинути фiльтр]]></ua>
+		<en><![CDATA[Reset filter]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Membership type</nerd>
+		<ru><![CDATA[Тип участия]]></ru>
+		<ua><![CDATA[Тип участi]]></ua>
+		<en><![CDATA[Membership type]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Gender</nerd>
+		<ru><![CDATA[Пол]]></ru>
+		<ua><![CDATA[Стать]]></ua>
+		<en><![CDATA[Gender]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
+		<ua><![CDATA[Аватар]]></ua>
+		<en><![CDATA[Avatar]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photos in line</nerd>
+		<ru><![CDATA[Работ в ряд]]></ru>
+		<ua><![CDATA[Робот у рядi]]></ua>
+		<en><![CDATA[Photos in line]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Filter by member name</nerd>
+		<ru><![CDATA[Фильтр по имени]]></ru>
+		<ua><![CDATA[Фiльтр по iменi]]></ua>
+		<en><![CDATA[Filter by member name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>One of your friends $1 has uploaded new photo '$2'</nerd>
+		<ru><![CDATA[Один из ваших друзей $1 загрузил новую работу '$2']]></ru>
+		<ua><![CDATA[Один из ваших друзiв $1 загрузив нову роботу '$2']]></ua>
+		<en><![CDATA[One of your friends $1 has uploaded new photo '$2']]></en>
+	</translation>
+
+	<translation>
+		<nerd>Apply filter</nerd>
+		<ru><![CDATA[Применить фильтр]]></ru>
+		<ua><![CDATA[Застосувати фiльтр]]></ua>
+		<en><![CDATA[Apply filter]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Member's team member: $1 - $2</nerd>
+		<ru><![CDATA[Участник команды: $1 - $2]]></ru>
+		<ua><![CDATA[Учасник команди: $1 - $2]]></ua>
+		<en><![CDATA[The member's team member: $1 - $2]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1: last photos. Total $2.</nerd>
+		<ru><![CDATA[$1: последние рабты. Всего $2.]]></ru>
+		<ua><![CDATA[$1: останнi роботи. Всего $2.]]></ua>
+		<en><![CDATA[$1: last photos. Total $2.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Search members</nerd>
+		<ru><![CDATA[Поиск пользователей]]></ru>
+		<ua><![CDATA[Пошук учасникiв]]></ua>
+		<en><![CDATA[Search members]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Members search</nerd>
+		<ru><![CDATA[Поиск пользователей]]></ru>
+		<ua><![CDATA[Пошук учасникiв]]></ua>
+		<en><![CDATA[Members search]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Downloaded from photosight: $1 of $2, photosight category: $3</nerd>
+		<ru><![CDATA[Загружено с photosight: $1 автор $2, категория: $3]]></ru>
+		<ua><![CDATA[Завантажено з photosight: $1 автор $2, категорiя: $3]]></ua>
+		<en><![CDATA[Downloaded from photosight: $1 of $2, photosight category: $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo $1 of $2 has already been imported</nerd>
+		<ru><![CDATA[Фото $1 автора $2 уже была импортировано ранее]]></ru>
+		<ua><![CDATA[Фото $1 автора $2 вже була iмпортовано ранiше]]></ua>
+		<en><![CDATA[Photo $1 of $2 has already been imported]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Existing user found: $1</nerd>
+		<ru><![CDATA[Найден пользователь: $1]]></ru>
+		<ua><![CDATA[Знайден учасник: $1]]></ua>
+		<en><![CDATA[Existing user found: $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Tme member has not downloaded avatar yet... :(</nerd>
+		<ru><![CDATA[Пользователь не загрузил аватал]]></ru>
+		<ua><![CDATA[Учасник ще не завантажив аватар]]></ua>
+		<en><![CDATA[The member has not downloaded avatar yet... :(]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Assign all generated photos to member</nerd>
+		<ru><![CDATA[Присвоить все работы пользователю]]></ru>
+		<ua><![CDATA[Завантажити усi работы учаснику]]></ua>
+		<en><![CDATA[Assign all generated photos to member]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Found member:</nerd>
+		<ru><![CDATA[Найден пользователь:]]></ru>
+		<ua><![CDATA[Знайден учасник:]]></ua>
+		<en><![CDATA[Found member:]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job execution log</nerd>
+		<ru><![CDATA[Лог выполнения задачи]]></ru>
+		<ua><![CDATA[Лог выконання завдання]]></ua>
+		<en><![CDATA[Job execution log]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete picture after import</nerd>
+		<ru><![CDATA[Удалить файл картинки после импорта]]></ru>
+		<ua><![CDATA[Видалити файл зображення пiсля iмпорту]]></ua>
+		<en><![CDATA[Delete picture after import]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Folder with test pictures</nerd>
+		<ru><![CDATA[Папка с картинками для импорта]]></ru>
+		<ua><![CDATA[Папка з зображеннями для iмпорту]]></ua>
+		<en><![CDATA[Folder with test pictures]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Save '$1' job</nerd>
+		<ru><![CDATA[Сожранить '$1' задачу]]></ru>
+		<ua><![CDATA[Зберегти '$1' завдання]]></ua>
+		<en><![CDATA[Save '$1' job]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New user has been created: $1</nerd>
+		<ru><![CDATA[Создан новый пользователь: $1]]></ru>
+		<ua><![CDATA[Створен новий учасник:  $1]]></ua>
+		<en><![CDATA[New user has been created: $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Stop the job?</nerd>
+		<ru><![CDATA[Остановить выполнение задачи?]]></ru>
+		<ua><![CDATA[Припинити виконання завдання?]]></ua>
+		<en><![CDATA[Stop the job?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>All categories</nerd>
+		<ru><![CDATA[Все разделы]]></ru>
+		<ua><![CDATA[Усi роздiли]]></ua>
+		<en><![CDATA[All categories]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 User: $2; photo: $3. Photo import skipped.</nerd>
+		<ru><![CDATA[$1 Пользователь: $2; фото: $3. Фото не импортировано.]]></ru>
+		<ua><![CDATA[$1 Участник: $2; фото: $3. Фото не импортовано.]]></ua>
+		<en><![CDATA[$1 User: $2; photo: $3. Photo import skipped.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>There are $1 untranslated</nerd>
+		<ru><![CDATA[Отсутствуют переводы: $1]]></ru>
+		<ua><![CDATA[Вiдсутнi переклады:  $1]]></ua>
+		<en><![CDATA[There are $1 untranslated]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Nerd</nerd>
+		<ru><![CDATA[Оригинальная фраза]]></ru>
+		<ua><![CDATA[Оригiнальна фраза]]></ua>
+		<en><![CDATA[Nerd]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Mark all Admin notifications as read</nerd>
+		<ru><![CDATA[Пометить все сообщения от админа как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити усi повiдомлення вiд адмiна як прочитанi]]></ua>
+		<en><![CDATA[Mark all Admin notifications as read]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected messages</nerd>
+		<ru><![CDATA[Удалить выделенные сообщения]]></ru>
+		<ua><![CDATA[Видалити помiченi повiдомлення]]></ua>
+		<en><![CDATA[Delete selected messages]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Total messages</nerd>
+		<ru><![CDATA[Всего сообщений]]></ru>
+		<ua><![CDATA[Всього повiдомлень]]></ua>
+		<en><![CDATA[Total messages]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You are in the black list of photo's author</nerd>
+		<ru><![CDATA[Вы в черном списке автора]]></ru>
+		<ua><![CDATA[Ви у чорному листi автора]]></ua>
+		<en><![CDATA[You are in the black list of photo's author]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected messages?</nerd>
+		<ru><![CDATA[Удалить выбранные сообщения?]]></ru>
+		<ua><![CDATA[Видалити помiченнi повiдомлення?]]></ua>
+		<en><![CDATA[Delete selected messages?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete ALL Admin notifications</nerd>
+		<ru><![CDATA[Удалить все сообщения от админа]]></ru>
+		<ua><![CDATA[Видалити усi повiдомлення вiд адмiна]]></ua>
+		<en><![CDATA[Delete ALL Admin notifications]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset found member in user picker</nerd>
+		<ru><![CDATA[Сбросить]]></ru>
+		<ua><![CDATA[Скинути]]></ua>
+		<en><![CDATA[Reset]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job: total users</nerd>
+		<ru><![CDATA[Всего пользователей]]></ru>
+		<ua><![CDATA[Усього учасникiв]]></ua>
+		<en><![CDATA[Users count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Job: total Photos</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+		<ua><![CDATA[Всього робот]]></ua>
+		<en><![CDATA[Photos count]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Mark all $1 as read?</nerd>
+		<ru><![CDATA[Пометить $1 как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити $1 як прочитанi]]></ua>
+		<en><![CDATA[Mark all $1 as read?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>This is an active configuration</nerd>
+		<ru><![CDATA[активная]]></ru>
+		<ua><![CDATA[активна]]></ua>
+		<en><![CDATA[active]]></en>
+	</translation>
+
+	<translation>
+		<nerd>This is an active job</nerd>
+		<ru><![CDATA[Активна]]></ru>
+		<ua><![CDATA[Актiвна]]></ua>
+		<en><![CDATA[Active]]></en>
+	</translation>
+
+	<translation>
+		<nerd>activity cleanup job => parameter => days</nerd>
+		<ru><![CDATA[дней]]></ru>
+		<ua><![CDATA[днiв]]></ua>
+		<en><![CDATA[days]]></en>
+	</translation>
+
+	<translation>
+		<nerd>date range tag => parameters => days</nerd>
+		<ru><![CDATA[дней]]></ru>
+		<ua><![CDATA[днiв]]></ua>
+		<en><![CDATA[days]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Going to be affected photos (all if empty)</nerd>
 		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[Going to be affected photos (all if empty)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Quantity of generated actions</nerd>
+		<ru><![CDATA[К-во генерируемых действий]]></ru>
+		<ua><![CDATA[Кiлькiсть генерованих дiй]]></ua>
+		<en><![CDATA[Quantity of generated actions]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The job has no parameters</nerd>
+		<ru><![CDATA[Этот тип задачи не имеет параметров]]></ru>
+		<ua><![CDATA[Цей тип завдання не маЕ параметрiв]]></ua>
+		<en><![CDATA[The job has no parameters]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Skip generation if preview already exists</nerd>
+		<ru><![CDATA[Пропустить генерирование превью, если оно существует]]></ru>
+		<ua><![CDATA[Пропустити генерування превью, якщо воно iснуЕ]]></ua>
+		<en><![CDATA[Skip generation if preview already exists]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)</nerd>
+		<ru><![CDATA[В папке дожны быть male и female подкаталоги, в которых находятся аватары (регистр имен не имеет значения)]]></ru>
+		<ua><![CDATA[У каталозi повиннi бути  male и female пiдкаталоги, в яких знаходяться аватари (регистри не мають значення)]]></ua>
+		<en><![CDATA[The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Avatar dir</nerd>
+		<ru><![CDATA[Каталог с аватарами]]></ru>
+		<ua><![CDATA[Каталог з аватарами]]></ua>
+		<en><![CDATA[Avatar dir]]></en>
+	</translation>
+
+	<translation>
+		<nerd>posted in period from $1</nerd>
+		<ru><![CDATA[загруженные с $1]]></ru>
+		<ua><![CDATA[завантаженi з $1]]></ua>
+		<en><![CDATA[posted in period from $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>uploaded by users with membership type '$1'</nerd>
+		<ru><![CDATA[загруженные пользователями с типом участия $1]]></ru>
+		<ua><![CDATA[заванаженнi учасниками з типом участi $1]]></ua>
+		<en><![CDATA[uploaded by users with membership type '$1']]></en>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: added $1 to $2</nerd>
+		<ru><![CDATA[добавил(а) $1 в $2]]></ru>
+		<ua><![CDATA[додав(ла) $1 жо $2]]></ua>
+		<en><![CDATA[added $1 to $2]]></en>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: rank in category '$1' has changed from $2 to $3</nerd>
+		<ru><![CDATA[ранг в категории '$1' изменен с $2 на $3]]></ru>
+		<ua><![CDATA[ранг у категорiI '$1' змiнено з $2 на $3]]></ua>
+		<en><![CDATA[rank in category '$1' has changed from $2 to $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
 

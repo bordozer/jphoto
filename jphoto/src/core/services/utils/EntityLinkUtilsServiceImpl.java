@@ -102,12 +102,12 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotoCardLink( final Photo photo, final Language language ) {
-		final String photoNameTranslated = StringUtilities.escapeHtml( photo.getName() );
+		final String photoNameEscaped = StringUtilities.escapeHtml( photo.getName() );
 
-		return String.format( "<a class=\"photo-link\" href=\"%1$s\" title=\"%2$s\">%3$s</a>"
+		return String.format( "<a class=\"photo-link\" href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
-			, translatorService.translate( "$1: photo card", language, photoNameTranslated )
-			, photoNameTranslated
+			, translatorService.translate( "$1: photo card", language, photoNameEscaped )
+			, photoNameEscaped
 		);
 	}
 

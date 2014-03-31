@@ -1,10 +1,9 @@
 package core.general.activity;
 
-import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.security.Services;
-import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -32,6 +31,8 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		genre = services.getGenreService().load( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_GENRE_ID ).getText() ) );
 		oldRank = 	NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_OLD_RANK ).getText() );
 		newRank = 	NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_NEW_RANK ).getText() );
+
+		initActivityTranslatableText();
 	}
 
 	public ActivityUserRankInGenreChanged( final User user, final Genre genre, final int oldRank, final int newRank, final Date activityTime, final Services services ) {
@@ -40,6 +41,8 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		this.genre = genre;
 		this.oldRank = oldRank;
 		this.newRank = newRank;
+
+		initActivityTranslatableText();
 	}
 
 	@Override
@@ -55,16 +58,12 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 	}
 
 	@Override
-	public String getDisplayActivityDescription() {
-		final TranslatorService translatorService = services.getTranslatorService();
+	protected TranslatableMessage getActivityTranslatableText() {
 
-		final String photosByUserByGenreLink = services.getEntityLinkUtilsService().getPhotosByUserByGenreLink( activityOfUser, genre, EnvironmentContext.getCurrentUser().getLanguage() );
-
-		return translatorService.translate( "rank in category '$1' has changed from $2 to $3"
-			, getCurrentUserLanguage()
-			, photosByUserByGenreLink
-			, String.valueOf( oldRank )
-			, String.valueOf( newRank )
-		);
+		return new TranslatableMessage( "activity stream entry: rank in category '$1' has changed from $2 to $3", services )
+			.addPhotosByUserByGenreLinkParameter( activityOfUser, genre )
+			.addIntegerParameter( oldRank )
+			.addIntegerParameter( newRank )
+			;
 	}
 }

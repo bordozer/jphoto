@@ -113,4 +113,6 @@
 
 	</script>
 
+	<div class="footerseparator"></div>
+
 </tags:page>
