@@ -3419,38 +3419,38 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>User Id</nerd>
+		<ru><![CDATA[ID пользователя]]></ru>
+		<ua><![CDATA[ID учасника]]></ua>
+		<en><![CDATA[User Id]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Job '$1' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job</nerd>
+		<ru><![CDATA[Задача '$1' не может быть удалена. Возможно, она используется планировщиком или является параметром комплексной задачи]]></ru>
+		<ua><![CDATA[Завдання '$1' не може бути вцыдалено. Можливо, воно використовуваЕться планувальником або являеться параметром комплексного завдання]]></ua>
+		<en><![CDATA[Job '$1' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Delete job '$1</nerd>
+		<ru><![CDATA[Удалить задание '$1']]></ru>
+		<ua><![CDATA[Видалити завдання '$1']]></ua>
+		<en><![CDATA[Delete job '$1']]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>You are in the black list of $1. You can not reply.</nerd>
+		<ru><![CDATA[Ви в черном списке $1 и не можете ему отвечать]]></ru>
+		<ua><![CDATA[Ви у чорному листi $1 та не можете йому вiдповiдати]]></ua>
+		<en><![CDATA[You are in the black list of $1. You can not reply.]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Set maximum marks</nerd>
+		<ru><![CDATA[Выставить работе максимальную оценку]]></ru>
+		<ua><![CDATA[Виставити роботi максимальну оцiнку]]></ua>
+		<en><![CDATA[Set maximum marks]]></en>
 	</translation>
 
 	<translation>
