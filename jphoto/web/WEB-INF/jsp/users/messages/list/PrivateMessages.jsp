@@ -132,14 +132,14 @@
 
 									<html:submitButton
 											id="deleteAllMessagesButton"
-											caption_t="Delete ALL ${privateMessageListModel.privateMessageType.nameTranslated}"
+											caption_t="Delete ALL ${privateMessageListModel.privateMessageType.name}"
 											onclick="return deleteAllPrivateMessages();"
 											icon="deleteAll.png"
 											/>
 
 									<html:submitButton
 											id="markAllMessagesAsReadButton"
-											caption_t="Mark all ${privateMessageListModel.privateMessageType.nameTranslated} as read"
+											caption_t="Mark all ${privateMessageListModel.privateMessageType.name} as read"
 											onclick="return markAllMessagesAsRead();"
 											icon="markAsRead.png"
 											/>

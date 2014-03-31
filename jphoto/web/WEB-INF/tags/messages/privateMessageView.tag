@@ -39,7 +39,7 @@
 			</c:if>
 
 			<c:if test="${privateMessage.readTime.time > 0}">
-				/ ${eco:translate('You read this message at ')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
+				/ ${eco:translate('You read this message at')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
 			</c:if>
 
 			<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_IN'}">

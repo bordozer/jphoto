@@ -3384,6 +3384,97 @@
 	</translation>
 
 	<translation>
+		<nerd>Delete ALL $1?</nerd>
+		<ru><![CDATA[Удалить все $1?]]></ru>
+		<ua><![CDATA[Видалити усi $1?]]></ua>
+		<en><![CDATA[Delete ALL $1?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Mark all Activity notifications as read</nerd>
+		<ru><![CDATA[Пометить все сообщения как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити усi повiдомлення як прочитанi]]></ua>
+		<en><![CDATA[Mark all Activity notifications as read]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You read this message at</nerd>
+		<ru><![CDATA[Вы прочитали это сообщение ]]></ru>
+		<ua><![CDATA[Ви прочитали це повiдомлення]]></ua>
+		<en><![CDATA[You read this message at]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete ALL Activity notifications</nerd>
+		<ru><![CDATA[Удалить все сообщенияоб активности]]></ru>
+		<ua><![CDATA[Видалити усi повiдомлення про активнiсть]]></ua>
+		<en><![CDATA[Delete ALL Activity notifications]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1: $2</nerd>
+		<ru><![CDATA[$1: $2]]></ru>
+		<ua><![CDATA[$1: $2]]></ua>
+		<en><![CDATA[$1: $2]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
