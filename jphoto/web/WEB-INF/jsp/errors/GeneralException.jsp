@@ -36,11 +36,10 @@
 <c:set var="traceElements" value="<%=traceElements%>"/>
 
 <c:set var="messageOops" value="Oops!" />
-<c:set var="messageOopsTranslated" value="${eco:translate( title )}" />
 
 <tags:page pageModel="${pageModel}">
 
-	<html:img id="generalExceptionImg" src="ooops1.jpg" width="170" height="120" alt="${messageOopsTranslated}" />
+	<html:img id="generalExceptionImg" src="ooops1.jpg" width="170" height="120" alt="${title}" />
 	<br/>
 
 	URL: <b>${requestScope['javax.servlet.forward.request_uri']}</b>
