@@ -34,8 +34,7 @@
 					<label for="${filterUserNameControl}">${eco:translate( 'Member name' )}</label>
 				</td>
 				<td class="datacolumn">
-					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="${eco:translate('Members search')}"
-									hint="${eco:translate('Filter by member name')}">
+					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="Members search" hint="${eco:translate('Filter by member name')}">
 						<jsp:attribute name="inputField">
 							<input id="${filterUserNameControl}" type="text" name="${filterUserNameControl}" value="${userFilterModel.filterUserName}"/>
 						</jsp:attribute>
