@@ -4,13 +4,14 @@
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="core.general.user.User" %>
-<%@ tag import="utils.UserUtils" %>
 <%@ tag import="core.services.utils.UrlUtilsServiceImpl" %>
+<%@ tag import="controllers.voting.PhotoVotingModel" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
 <%@ attribute name="photo" required="true" type="core.general.photo.Photo" %>
 <%@ attribute name="userPhotoVotes" required="true" type="java.util.List" %>
@@ -29,6 +30,7 @@
 <c:set var="hasUserAlreadyVotedForPhoto" value="<%=isUserVotedForPhoto%>"/>
 
 <c:set var="frmPhotoVoting" value="frmPhotoVoting"/>
+<c:set var="votingCategoryMarkControl" value="<%=PhotoVotingModel.VOTING_CATEGORY_MARK_CONTROL%>" />
 <c:set var="votingMarkQty" value="<%=VotingCategoryService.PHOTO_VOTING_CATEGORY_QTY%>"/>
 
 <c:set var="votingTitle" value="${eco:translate('Photo appraisal')}" />
@@ -69,7 +71,24 @@
 			</c:if>
 
 			<c:if test="${not hasUserAlreadyVotedForPhoto}">
-				<table:trok text_t="Vote" onclick="return submitVotingForm()" />
+				<table:tr>
+					<table:td cssClass="buttoncolumn"><html:submitButton id="voteButton" caption_t="${eco:translate('Vote')}" onclick="return submitVotingForm()" /></table:td>
+					<table:td>
+						<%--<html:img16 src="icons16/decrease.png" onclick="setMaxMarks();" />--%>
+						<html:img16 src="icons16/increase.png" onclick="return voteWithMaxMarks();" alt="${eco:translate('Set maximum marks')}"/>
+
+						<script type="text/javascript">
+							function voteWithMaxMarks() {
+								// TODO: should it be confirmation?
+								for ( var i = 1; i <= 3; i++ ) {
+									$( "#${votingCategoryMarkControl}" + i ).val( $( "#${votingCategoryMarkControl}1 option:first" ).val() );
+								}
+								return submitVotingForm();
+							}
+						</script>
+
+					</table:td>
+				</table:tr>
 			</c:if>
 
 		</table:table>
