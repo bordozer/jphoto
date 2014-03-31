@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 public class PhotosImportJob extends AbstractDateRangeableJob {
@@ -171,15 +172,32 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
 				builder.append( translatorService.translate( "Photosight user ids", getLanguage() ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
+
 				final List<PhotosightCategory> photosightCategories = photosightParameters.getPhotosightCategories();
-				final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
-					@Override
-					public String apply( final PhotosightCategory photosightCategory ) {
-						return photosightCategory.getName();
-					}
-				} );
 				builder.append( translatorService.translate( "Import photos from categories", getLanguage() ) ).append( ": " );
-				builder.append( categories == null || categories.size() == PhotosightCategory.values().length ? translatorService.translate( "All categories", getLanguage() ) : StringUtils.join( categories, ", " ) ).append( "<br />" );
+				final String catText;
+				if ( photosightCategories.size() == PhotosightCategory.values().length ) {
+					catText = translatorService.translate( "All categories", getLanguage() );
+				} else {
+					if ( photosightCategories.size() < PhotosightCategory.values().length / 2 ) {
+						final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
+							@Override
+							public String apply( final PhotosightCategory photosightCategory ) {
+								return photosightCategory.getName();
+							}
+						} );
+						catText = StringUtils.join( categories, ", " );
+					} else {
+						final List<String> excludedCategories = newArrayList();
+						for ( final PhotosightCategory photosightCategory : PhotosightCategory.values() ) {
+							if ( ! photosightCategories.contains( photosightCategory ) ) {
+								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", photosightCategory.getName() ) );
+							}
+						}
+						catText = StringUtils.join( excludedCategories, ", " );
+					}
+				}
+				builder.append( catText ).append( "<br />" );
 
 				final int pageQty = photosightParameters.getPageQty();
 				builder.append( translatorService.translate( "Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages", getLanguage() ) ).append( "<br />" );
