@@ -284,6 +284,7 @@
 				</script>
 
 				<table:tredit>
+					<a name="photo-category" />
 					<table:tdtext text_t="Photo edit: Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
 
 					<table:tddata>
@@ -453,9 +454,12 @@
 		<script type="text/javascript">
 
 			function isGenreSelected() {
+				$( '#${photoGenreIdControl}' ).removeClass( 'invalid' );
 				var genreId = $( "#${photoGenreIdControl}" ).val();
 
 				if ( genreId == null ) {
+					$( '#${photoGenreIdControl}' ).addClass( 'invalid' );
+					document.location.href = document.location + '#photo-category';
 					showErrorMessage( "${eco:translate('Photo uploading validation message: Select genre')}" );
 					return false;
 				}
