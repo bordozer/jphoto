@@ -3111,10 +3111,10 @@
 	</translation>
 
 	<translation>
-		<nerd>The field is optional.</nerd>
+		<nerd>The field is optional</nerd>
 		<ru><![CDATA[Не обязательно к заполнению]]></ru>
 		<ua><![CDATA[Не обов'язково до заповнення]]></ua>
-		<en><![CDATA[The field is optional.]]></en>
+		<en><![CDATA[The field is optional]]></en>
 	</translation>
 
 	<translation>
@@ -3370,17 +3370,17 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Photo uploading: description hint</nerd>
+		<ru><![CDATA[Дополнительная информация о работе]]></ru>
+		<ua><![CDATA[Додаткова iнформацiя о роботi]]></ua>
+		<en><![CDATA[Photo description]]></en>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+		<nerd>Photo uploading: keywords hint</nerd>
+		<ru><![CDATA[Ключевые слова]]></ru>
+		<ua><![CDATA[Ключові слова]]></ua>
+		<en><![CDATA[Photo keywords]]></en>
 	</translation>
 
 	<translation>

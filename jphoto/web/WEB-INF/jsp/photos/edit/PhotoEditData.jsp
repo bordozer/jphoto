@@ -324,7 +324,7 @@
 					<table:tdtext text_t="Description" labelFor="${photoDescriptionControl}"/>
 
 					<table:tddata>
-						<tags:inputHint inputId="${photoDescriptionControl}" hintTitle_t="Genre name" hint="${descriptionRequirement}<br /><br />${optionalText}">
+						<tags:inputHint inputId="${photoDescriptionControl}" hintTitle_t="Photo uploading: description hint" hint="${descriptionRequirement}<br /><br />${optionalText}">
 							<jsp:attribute name="inputField">
 								<html:textarea inputId="${photoDescriptionControl}" inputValue="${photoEditDataModel.description}" title="${eco:translate('Photo description')}" hint="${eco:translate('Photo description')}" />
 							</jsp:attribute>
@@ -342,7 +342,7 @@
 					<table:tdtext text_t="Keywords" labelFor="${photoKeywordsControl}"/>
 
 					<table:tddata>
-						<tags:inputHint inputId="${photoKeywordsControl}" hintTitle_t="Genre name"
+						<tags:inputHint inputId="${photoKeywordsControl}" hintTitle_t="Photo uploading: keywords hint"
 										hint="${keywordsRequirement}<br /><br />${optionalText}">
 							<jsp:attribute name="inputField">
 								<html:input fieldId="${photoKeywordsControl}" fieldValue="${photoEditDataModel.keywords}" size="30" maxLength="255"/>
