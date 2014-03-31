@@ -3104,6 +3104,272 @@
 	</translation>
 
 	<translation>
+		<nerd>The name of your photo. Max length is $1 symbols</nerd>
+		<ru><![CDATA[Называние работы. Максимальная длина $1 символов]]></ru>
+		<ua><![CDATA[Назва роботи. Максимальна довжина $1 символiв]]></ua>
+		<en><![CDATA[The name of your photo. Max length is $1 symbols]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The field is optional.</nerd>
+		<ru><![CDATA[Не обязательно к заполнению]]></ru>
+		<ua><![CDATA[Не обов'язково до заповнення]]></ua>
+		<en><![CDATA[The field is optional.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Anonymous posting</nerd>
+		<ru><![CDATA[Анонимный постинг]]></ru>
+		<ua><![CDATA[Анонiмне розмiщення]]></ua>
+		<en><![CDATA[Anonymous posting]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo data</nerd>
+		<ru><![CDATA[Данные работы]]></ru>
+		<ua><![CDATA[Даннi роботи]]></ua>
+		<en><![CDATA[Photo data]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Your status is $1</nerd>
+		<ru><![CDATA[Ваш статус $1]]></ru>
+		<ua><![CDATA[Ваш статус $1]]></ua>
+		<en><![CDATA[Your status is $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>All photos in this category have nude content obviously</nerd>
+		<ru><![CDATA[Все работы, размещенные в этома разделе, имеют НЮ контент]]></ru>
+		<ua><![CDATA[Усi роботи, розмiщеннi в цьому роздiлi, мають НЮ контент]]></ua>
+		<en><![CDATA[All photos in this category have nude content obviously]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Background color</nerd>
+		<ru><![CDATA[Цвет фона]]></ru>
+		<ua><![CDATA[Колiр фону]]></ua>
+		<en><![CDATA[Background color]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Next >></nerd>
+		<ru><![CDATA[Следующий шаг]]></ru>
+		<ua><![CDATA[Наступний крок]]></ua>
+		<en><![CDATA[Next >>]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You uploaded $1 photo(s) $2.</nerd>
+		<ru><![CDATA[Вы уже загрузили $1 работ(ы) $2.]]></ru>
+		<ua><![CDATA[Ви все завантажили $1 робот(ы) $2.]]></ua>
+		<en><![CDATA[You uploaded $1 photo(s) $2.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Max photo's size you can upload is $1 $2.</nerd>
+		<ru><![CDATA[Максимальный размер файла, который ви можете загрузить $1 $2.]]></ru>
+		<ua><![CDATA[Найбiльший розмiр файла, який ви можере завантажити $1 $2.]]></ua>
+		<en><![CDATA[Max photo's size you can upload is $1 $2.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The field is mandatory</nerd>
+		<ru><![CDATA[Обязательно к заполнению]]></ru>
+		<ua><![CDATA[Обов'язково до заповнення]]></ua>
+		<en><![CDATA[The field is mandatory]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo edit: Genre</nerd>
+		<ru><![CDATA[Раздел]]></ru>
+		<ua><![CDATA[Роздiл]]></ua>
+		<en><![CDATA[Photo category]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Any additional information about the photo</nerd>
+		<ru><![CDATA[Любая дополнительная информация о работе]]></ru>
+		<ua><![CDATA[Iнша додадкова iнформацiя про роботу]]></ua>
+		<en><![CDATA[Any additional information about the photo]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Upload new photo</nerd>
+		<ru><![CDATA[Загрузка новой работы]]></ru>
+		<ua><![CDATA[Завантаження новоI роботи]]></ua>
+		<en><![CDATA[Upload new photo]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Contains nude content</nerd>
+		<ru><![CDATA[Содержит обнаженную натуру (НЮ)]]></ru>
+		<ua><![CDATA[Мiстить оголену натуру (НЮ)]]></ua>
+		<en><![CDATA[Contains nude content]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Keywords</nerd>
+		<ru><![CDATA[Ключевые слова]]></ru>
+		<ua><![CDATA[Ключові слова]]></ua>
+		<en><![CDATA[Keywords]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo data editing: Voting allowance</nerd>
+		<ru><![CDATA[Голосование]]></ru>
+		<ua><![CDATA[Голосування]]></ua>
+		<en><![CDATA[Voting allowance]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You can not edit this option when photo is posted</nerd>
+		<ru><![CDATA[Вы не сможете изменить эту опцию после размещения работы]]></ru>
+		<ua><![CDATA[Ви не зможете змiнити цю опцiю пiсля розмiщення роботи]]></ua>
+		<en><![CDATA[You can not edit this option when photo is posted]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Step1: Photo's data</nerd>
+		<ru><![CDATA[Шаг 1: данные работы]]></ru>
+		<ua><![CDATA[Крок 1: данi роботи]]></ua>
+		<en><![CDATA[Step1: Photo's data]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You can upload $1 photo(s) more $2.</nerd>
+		<ru><![CDATA[Вы можете загрузить еще $1 работ(ы) $2.]]></ru>
+		<ua><![CDATA[Ви можете завантажити ще $1 робот(ы) $2.]]></ua>
+		<en><![CDATA[You can upload $1 photo(s) more $2.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: this week</nerd>
+		<ru><![CDATA[на этой неделе]]></ru>
+		<ua><![CDATA[на цьому тижднi]]></ua>
+		<en><![CDATA[this week]]></en>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: week</nerd>
+		<ru><![CDATA[неделя]]></ru>
+		<ua><![CDATA[тиждень]]></ua>
+		<en><![CDATA[week]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Name</nerd>
+		<ru><![CDATA[Название]]></ru>
+		<ua><![CDATA[Назва]]></ua>
+		<en><![CDATA[Name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Genre edit: Name</nerd>
+		<ru><![CDATA[Название]]></ru>
+		<ua><![CDATA[Назва]]></ua>
+		<en><![CDATA[Name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Voting category: Name</nerd>
+		<ru><![CDATA[Название]]></ru>
+		<ua><![CDATA[Назва]]></ua>
+		<en><![CDATA[Name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Today is not anonymous posting day</nerd>
+		<ru><![CDATA[Сегодня не анонимный день]]></ru>
+		<ua><![CDATA[Сьогоднi не анонiмний день]]></ua>
+		<en><![CDATA[Today is not anonymous posting day]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Anonymous posting schedule</nerd>
+		<ru><![CDATA[Расписание анонимных дней]]></ru>
+		<ua><![CDATA[Зозклад анонiмних днiв]]></ua>
+		<en><![CDATA[Anonymous posting schedule]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The photo category can contains nude content</nerd>
+		<ru><![CDATA[Работы в этой категории могут собержать обнаженную натуру]]></ru>
+		<ua><![CDATA[Роботи з цiЕI категорiI можуть мiстити оголену натуру]]></ua>
+		<en><![CDATA[The photo category can contains nude content]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo edit: name hint</nerd>
+		<ru><![CDATA[Название работы]]></ru>
+		<ua><![CDATA[Назва роботи]]></ua>
+		<en><![CDATA[Photo name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Your status' limit is $1 photo(s) per $2.</nerd>
+		<ru><![CDATA[Ограничение для вашего статуса $1 работ(ы) в $2.]]></ru>
+		<ua><![CDATA[Обмеження для вашого статусу $1 робот(ы) у $2.]]></ua>
+		<en><![CDATA[Your status' limit is $1 photo(s) per $2.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Comma (,) separated keywords.</nerd>
+		<ru><![CDATA[Разделитель - запятая ',']]></ru>
+		<ua><![CDATA[Разделитель - кома ',']]></ua>
+		<en><![CDATA[Comma (,) separated keywords.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The photo category can not contains nude content</nerd>
+		<ru><![CDATA[Данный раздел не может содержать НЮ контент]]></ru>
+		<ua><![CDATA[Даний роздiл не млже мiстити НЮ контент]]></ua>
+		<en><![CDATA[The photo category can not contains nude content]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Commenting and voting</nerd>
+		<ru><![CDATA[Комментарии и голосование]]></ru>
+		<ua><![CDATA[Коментари та голосування]]></ua>
+		<en><![CDATA[Commenting and voting]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Commenting</nerd>
+		<ru><![CDATA[Комментарии]]></ru>
+		<ua><![CDATA[Коментування]]></ua>
+		<en><![CDATA[Commenting]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo data editing: Photo team</nerd>
+		<ru><![CDATA[Отметьте членов вашей команды, участвовавших в создании работы]]></ru>
+		<ua><![CDATA[ВiдмiттЕ членiв вашоI команды, що брали участь у створеннi роботи]]></ua>
+		<en><![CDATA[Photo team]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Sent notification email about new comments</nerd>
+		<ru><![CDATA[Слать уведомление о новых комментариях]]></ru>
+		<ua><![CDATA[Слаты повiдомлення о нових коментарях]]></ua>
+		<en><![CDATA[Sent notification email about new comments]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You decide if you want to upload a photo anonymously</nerd>
+		<ru><![CDATA[Сегодня вы можете выбирать, загружать ли работу анонимно]]></ru>
+		<ua><![CDATA[Сьогоднi ви можете выбiрати, чи завантажувати роботу анонiмно]]></ua>
+		<en><![CDATA[You decide if you want to upload a photo anonymously]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading validation message: Select genre</nerd>
+		<ru><![CDATA[Вы забыли выбрать раздер фотографии]]></ru>
+		<ua><![CDATA[Ви забули вибраты роздiл фотографiI]]></ua>
+		<en><![CDATA[Please, select genre]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

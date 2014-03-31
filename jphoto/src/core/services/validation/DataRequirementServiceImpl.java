@@ -21,11 +21,11 @@ public class DataRequirementServiceImpl implements DataRequirementService {
 
 	@Override
 	public String getFieldIsMandatoryText() {
-		return translatorService.translate( "The field is mandatory.", EnvironmentContext.getLanguage() );
+		return translatorService.translate( "The field is mandatory", EnvironmentContext.getLanguage() );
 	}
 
 	@Override
 	public String getFieldIsOptionalText() {
-		return translatorService.translate( "The field is optional.", EnvironmentContext.getLanguage() );
+		return translatorService.translate( "The field is optional", EnvironmentContext.getLanguage() );
 	}
 }

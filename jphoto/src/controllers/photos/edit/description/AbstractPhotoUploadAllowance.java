@@ -7,6 +7,7 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.photo.PhotoUploadService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
@@ -85,8 +86,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addDailyPhotosQtyDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final String period1 = "today";
-		final String period2 = "day";
+		final String period1 = "photo uploading: today";
+		final String period2 = "photo uploading: day";
 		final int limitPhotosQty = getDailyLimitPhotosQty();
 		final List<Integer> uploadedPhotosIds = photoUploadService.getUploadedTodayPhotosIds( photoAuthor.getId() );
 
@@ -94,8 +95,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addWeeklyPhotosQtyDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final String period1 = "this week";
-		final String period2 = "week";
+		final String period1 = "photo uploading: this week";
+		final String period2 = "photo uploading: week";
 		final int limitPhotosQty = getWeeklyLimitPhotosQty();
 		final List<Integer> uploadedPhotosIds = photoUploadService.getUploadedThisWeekPhotosIds( photoAuthor.getId() );
 
@@ -105,18 +106,20 @@ public abstract class AbstractPhotoUploadAllowance {
 	private void addPhotoQtyLimitDescription( final List<PhotoUploadDescription> photoUploadDescriptions, final String period1, final String period2, final int limitPhotosQty, final int uploadedPhotosQty, final Date nextVotingTime ) {
 		if ( limitPhotosQty > 0 ) {
 
+			final Language language = accessor.getLanguage();
+
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
 			final StringBuilder builder = new StringBuilder();
 
-			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2. ", accessor.getLanguage(), String.valueOf( limitPhotosQty ), period2 ) );
-			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2. ", accessor.getLanguage(), String.valueOf( uploadedPhotosQty ), period1 ) );
+			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2.", language, String.valueOf( limitPhotosQty ), translatorService.translate( period2, language ) ) ).append( " " );
+			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2.", language, String.valueOf( uploadedPhotosQty ), period1 ) ).append( " " );;
 			if ( userCanUploadPhoto ) {
 				final int canBeUploadedPhotos = limitPhotosQty - uploadedPhotosQty;
 				if ( canBeUploadedPhotos > 0 ) {
-					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", accessor.getLanguage(), String.valueOf( canBeUploadedPhotos ), period1 ) );
+					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", language, String.valueOf( canBeUploadedPhotos ), translatorService.translate( period1, language ) ) );
 				} else {
-					builder.append( translatorService.translate( "You can not upload photo $1.", accessor.getLanguage(), period1 ) );
+					builder.append( translatorService.translate( "You can not upload photo $1.", language, translatorService.translate( period1, language ) ) );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );
@@ -130,8 +133,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addDailyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final String period1 = "today";
-		final String period2 = "day";
+		final String period1 = "photo uploading: today";
+		final String period2 = "photo uploading: day";
 		final int uploadSizeLimit = getDailyLimitUploadSize();
 		final long uploadedSummarySize = photoUploadService.getUploadedTodayPhotosSummarySize( photoAuthor.getId() );
 
@@ -139,8 +142,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final String period1 = "week";
-		final String period2 = "this week";
+		final String period1 = "photo uploading: week";
+		final String period2 = "photo uploading: this week";
 		final int uploadSizeLimit = getWeeklyLimitUploadSize();
 		final long uploadedSummarySize = photoUploadService.getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() );
 
@@ -178,19 +181,21 @@ public abstract class AbstractPhotoUploadAllowance {
 		final int additionalWeeklyLimitPerGenreRank = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
 		if ( additionalWeeklyLimitPerGenreRank > 0 ) {
 
+			final Language language = accessor.getLanguage();
+
 			final int userRankInGenre = userRankService.getUserRankInGenre( photoAuthor.getId(), genre.getId() );
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
 			final StringBuilder builder = new StringBuilder();
 
-			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", accessor.getLanguage(), String.valueOf( additionalWeeklyLimitPerGenreRank ) ) );
-			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", accessor.getLanguage(), translatorService.translateGenre( genre, accessor.getLanguage() ), String.valueOf( userRankInGenre ) ) );
+			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", language, String.valueOf( additionalWeeklyLimitPerGenreRank ) ) );
+			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", language, translatorService.translateGenre( genre, language ), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
 				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
-				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", accessor.getLanguage(), String.valueOf( additionalRankSize ) ) );
+				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", language, String.valueOf( additionalRankSize ) ) );
 			} else {
-				builder.append( translatorService.translate( "So it is too small to give you any bonuses :(.", accessor.getLanguage() ) );
+				builder.append( translatorService.translate( "So it is too small to give you any bonuses :(.", language ) );
 			}
 
 			uploadDescription.setUploadRuleDescription( builder.toString() );

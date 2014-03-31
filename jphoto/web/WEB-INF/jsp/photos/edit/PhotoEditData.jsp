@@ -123,10 +123,10 @@
 
 				<%-- Name --%>
 				<table:tredit>
-					<table:tdtext text_t="Name" labelFor="${photoNameControl}" isMandatory="true"/>
+					<table:tdtext text_t="Photo uploading: Name" labelFor="${photoNameControl}" isMandatory="true"/>
 
 					<table:tddata>
-						<tags:inputHint inputId="${photoNameControl}" hintTitle_t="Genre name"
+						<tags:inputHint inputId="${photoNameControl}" hintTitle_t="Photo edit: name hint"
 										hint="${nameRequirement}<br /><br />${mandatoryText}" focused="true">
 							<jsp:attribute name="inputField">
 								<html:textarea inputId="${photoNameControl}" inputValue="${photoEditDataModel.name}" title="${eco:translate('Photo name')}" hint="${eco:translate('Photo name')}" cols="51" rows="2" maxlength="${photoNameMaxLength}" />
@@ -284,7 +284,7 @@
 				</script>
 
 				<table:tredit>
-					<table:tdtext text_t="Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
+					<table:tdtext text_t="Photo edit: Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
 
 					<table:tddata>
 						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24" onclick="performPhotoCategoryChange();"/>
@@ -307,15 +307,15 @@
 
 				<table:separator colspan="2" />
 
-				<%-- Backgroung color --%>
+				<%-- Background color --%>
 				<table:tredit>
-					<table:tdtext text_t="Backgroung color" labelFor="${photoBgColorControl}"/>
+					<table:tdtext text_t="Background color" labelFor="${photoBgColorControl}"/>
 
 					<table:tddata>
 						<html:colorpicker fieldId="${photoBgColorControl}" fieldValue="${photoEditDataModel.bgColor}" />
 					</table:tddata>
 				</table:tredit>
-				<%-- / Backgroung colort --%>
+				<%-- / Background colort --%>
 
 				<table:separator colspan="2" />
 
@@ -383,7 +383,7 @@
 
 				<%-- Comments allowance --%>
 				<table:tredit>
-					<table:tdtext text_t="Commenting"/>
+					<table:tdtext text_t="Photo uploading: Commenting"/>
 
 					<table:tddata>
 						<form:radiobuttons path="photoEditDataModel.commentsAllowanceId" items="${accessibleCommentAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />
@@ -408,7 +408,7 @@
 
 				<%-- voting allowance --%>
 				<table:tredit>
-					<table:tdtext text_t="Voting"/>
+					<table:tdtext text_t="Photo data editing: Voting allowance"/>
 
 					<table:tddata>
 						<form:radiobuttons path="photoEditDataModel.votingAllowanceId" items="${accessibleVotingAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />
@@ -420,7 +420,7 @@
 
 				<%-- User teams members --%>
 				<table:tredit>
-					<table:tdtext text_t="Your team" labelFor="photoTeamIds1"/>
+					<table:tdtext text_t="Photo data editing: Photo team" labelFor="photoTeamIds1"/>
 
 					<table:tddata>
 						<form:checkboxes items="${photoEditDataModel.userTeamMembers}"
@@ -456,7 +456,7 @@
 				var genreId = $( "#${photoGenreIdControl}" ).val();
 
 				if ( genreId == null ) {
-					showErrorMessage( "${eco:translate('Select genre')}" );
+					showErrorMessage( "${eco:translate('Photo uploading validation message: Select genre')}" );
 					return false;
 				}
 

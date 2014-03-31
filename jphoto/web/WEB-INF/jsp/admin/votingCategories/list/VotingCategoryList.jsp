@@ -37,7 +37,7 @@
 			<table:th>&nbsp;</table:th>
 			<table:th>&nbsp;</table:th>
 			<table:th text_t="id" width="20" />
-			<table:th text_t="Name" width="200" />
+			<table:th text_t="Voting category: Name" width="200" />
 			<table:th text_t="Description" />
 		</jsp:attribute>
 

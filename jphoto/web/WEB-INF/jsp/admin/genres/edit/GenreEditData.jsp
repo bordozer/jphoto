@@ -39,7 +39,7 @@
 			<table:separatorInfo colspan="2" height="50" title="${eco:translate('Genre data')}"/>
 
 			<table:tredit>
-				<table:tdtext text_t="Name" labelFor="${genreNameControl}" isMandatory="true"/>
+				<table:tdtext text_t="Genre edit: Name" labelFor="${genreNameControl}" isMandatory="true"/>
 
 				<table:tddata>
 					<tags:inputHint inputId="${genreNameControl}" hintTitle_t="Genre name" hint="${eco:translate( 'Genre name.' )}<br /><br />${mandatoryText}" focused="true">
