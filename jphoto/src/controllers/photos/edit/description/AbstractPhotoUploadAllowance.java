@@ -112,14 +112,17 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final StringBuilder builder = new StringBuilder();
 
-			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2.", language, String.valueOf( limitPhotosQty ), translatorService.translate( period2, language ) ) ).append( " " );
-			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2.", language, String.valueOf( uploadedPhotosQty ), period1 ) ).append( " " );;
+			final String period1_t = translatorService.translate( period1, language );
+			final String period2_t = translatorService.translate( period2, language );
+
+			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2.", language, String.valueOf( limitPhotosQty ), period2_t ) ).append( " " );
+			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2.", language, String.valueOf( uploadedPhotosQty ), period1_t ) ).append( " " );
 			if ( userCanUploadPhoto ) {
 				final int canBeUploadedPhotos = limitPhotosQty - uploadedPhotosQty;
 				if ( canBeUploadedPhotos > 0 ) {
-					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", language, String.valueOf( canBeUploadedPhotos ), translatorService.translate( period1, language ) ) );
+					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", language, String.valueOf( canBeUploadedPhotos ), period1_t ) );
 				} else {
-					builder.append( translatorService.translate( "You can not upload photo $1.", language, translatorService.translate( period1, language ) ) );
+					builder.append( translatorService.translate( "You can not upload photo $1.", language, period1_t ) );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );

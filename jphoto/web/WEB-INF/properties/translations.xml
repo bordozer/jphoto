@@ -3168,7 +3168,7 @@
 
 	<translation>
 		<nerd>Max photo's size you can upload is $1 $2.</nerd>
-		<ru><![CDATA[Максимальный размер файла, который ви можете загрузить $1 $2.]]></ru>
+		<ru><![CDATA[Максимальный размер файла, который вы можете загрузить $1 $2.]]></ru>
 		<ua><![CDATA[Найбiльший розмiр файла, який ви можере завантажити $1 $2.]]></ua>
 		<en><![CDATA[Max photo's size you can upload is $1 $2.]]></en>
 	</translation>
@@ -3252,7 +3252,7 @@
 
 	<translation>
 		<nerd>photo uploading: week</nerd>
-		<ru><![CDATA[неделя]]></ru>
+		<ru><![CDATA[неделю]]></ru>
 		<ua><![CDATA[тиждень]]></ua>
 		<en><![CDATA[week]]></en>
 	</translation>
