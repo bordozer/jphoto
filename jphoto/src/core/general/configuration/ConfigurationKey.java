@@ -45,7 +45,6 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
 	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 
-	, PHOTO_USER_CARD_PHOTOS_IN_LINE( 502, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Member card: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE( 503, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES( 504, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty for moble devices" )
 	, PHOTO_LIST_PHOTO_LINES( 505, "6", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default row qty" )

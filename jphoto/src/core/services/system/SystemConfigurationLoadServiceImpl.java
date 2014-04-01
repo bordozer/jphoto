@@ -5,6 +5,8 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.SystemConfiguration;
 import core.services.dao.ConfigurationDao;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -15,9 +17,6 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 	@Autowired
 	private ConfigurationDao configurationDao;
-
-	@Autowired
-	private CacheService cacheService;
 
 	@Override
 	public boolean save( final SystemConfiguration entry ) {
@@ -45,6 +44,14 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 	public SystemConfiguration load( final int systemConfigurationId ) {
 		final SystemConfiguration systemConfiguration = configurationDao.load( systemConfigurationId );
 		final List<Configuration> configurations = configurationDao.loadConfigurations( systemConfigurationId );
+
+		// TODO: possible it had better do not load absent configuration
+		CollectionUtils.filter( configurations, new Predicate<Configuration>() {
+			@Override
+			public boolean evaluate( final Configuration configuration ) {
+				return configuration.getConfigurationKey() != null;
+			}
+		} );
 
 		if ( systemConfiguration == null ) {
 			return null;

@@ -6,7 +6,6 @@ import controllers.users.card.UserStatistic;
 import core.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
-import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
@@ -318,7 +317,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
 		final PhotoList photoList = new PhotoList( photoInfos, photoListTitle, false );
-		photoList.setPhotosInLine( getConfiguredUserCardPhotosInLine() );
+		photoList.setPhotosInLine( getUserPhotosInLine() );
 		photoList.setLinkToFullList( userTeamMemberCardLink );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
@@ -366,7 +365,8 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public PhotoList getBestUserPhotoList( final User user ) {
-		final List<Photo> photos = photoService.getBestUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
+		final User currentUser = EnvironmentContext.getCurrentUser();
+		final List<Photo> photos = photoService.getBestUserPhotos( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 		final String listTitle = translatorService.translate( "The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
@@ -378,7 +378,8 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public PhotoList getLastUserPhotoList( final User user ) {
-		final List<Photo> photos = photoService.getLastUserPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
+		final User currentUser = EnvironmentContext.getCurrentUser();
+		final List<Photo> photos = photoService.getLastUserPhotos( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
@@ -390,7 +391,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public PhotoList getLastVotedPhotoList( final User user ) {
-		final List<Photo> photos = photoService.getLastVotedPhotos( user, getConfiguredUserCardPhotosInLine(), EnvironmentContext.getCurrentUser() );
+		final List<Photo> photos = photoService.getLastVotedPhotos( user, getUserPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
@@ -399,7 +400,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public PhotoList getLastPhotosOfUserVisitors( final User user ) {
-		final List<Photo> photos = photoService.getLastPhotosOfUserVisitors( user, getConfiguredUserCardPhotosInLine() );
+		final List<Photo> photos = photoService.getLastPhotosOfUserVisitors( user, getUserPhotosInLine() );
 
 		final String linkBest = StringUtils.EMPTY;
 		final String listTitle = translatorService.translate( "Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
@@ -420,12 +421,12 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PagingModel getPagingModel() {
 		final PagingModel pagingModel = new PagingModel( services );
 		pagingModel.setCurrentPage( 1 );
-		pagingModel.setItemsOnPage( getConfiguredUserCardPhotosInLine() );
+		pagingModel.setItemsOnPage( getUserPhotosInLine() );
 		return pagingModel;
 	}
 
-	private int getConfiguredUserCardPhotosInLine() {
-		return configurationService.getInt( ConfigurationKey.PHOTO_USER_CARD_PHOTOS_IN_LINE );
+	private int getUserPhotosInLine() {
+		return utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() );
 	}
 
 	protected User getUser( final UserCardModel model ) {

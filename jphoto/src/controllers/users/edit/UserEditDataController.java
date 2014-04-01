@@ -182,8 +182,10 @@ public class UserEditDataController {
 
 	private void updateUserUILanguageIfLoggedUserChangedHisLanguage( final User user ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
-		if ( UserUtils.isTheUserThatWhoIsCurrentUser( user ) && currentUser.getLanguage() != user.getLanguage() ) {
+		if ( UserUtils.isTheUserThatWhoIsCurrentUser( user ) ) {
 			currentUser.setLanguage( user.getLanguage() );
+			currentUser.setPhotoLines( user.getPhotoLines() );
+			currentUser.setPhotosInLine( user.getPhotosInLine() );
 		}
 	}
 

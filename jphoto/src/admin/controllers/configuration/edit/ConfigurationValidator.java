@@ -41,7 +41,6 @@ public class ConfigurationValidator implements Validator {
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_WIDTH );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_HEIGHT );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB );
-		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_USER_CARD_PHOTOS_IN_LINE );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_LIST_PHOTOS_IN_LINE );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_LIST_PHOTO_LINES );
