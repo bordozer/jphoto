@@ -63,4 +63,25 @@
 		<en><![CDATA[Finished with error]]></en>
 	</translation>
 
+	<translation>
+		<nerd>Filter by job status: $1</nerd>
+		<ru><![CDATA[Фильтр по статусу задачи: $1]]></ru>
+		<ua><![CDATA[Фiльтр по статусу завдання: $1]]></ua>
+		<en><![CDATA[Filter by job status: $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Filter by job type: $1</nerd>
+		<ru><![CDATA[Фильтр по типу задачи: $1]]></ru>
+		<ua><![CDATA[Фiльтр по типу завданны: $1]]></ua>
+		<en><![CDATA[Filter by job type: $1]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
 </translations>

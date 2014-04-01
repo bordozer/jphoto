@@ -88,7 +88,8 @@
 	<c:forEach var="jobExecutionStatus" items="${jobExecutionStatusValues}">
 		<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == jobExecutionStatus.id}">${selectedIconCss}</c:if>">
 			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
-				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}"/>
+				<c:set var="jobExecutionStatusNameTranslated" value="${eco:translate(jobExecutionStatus.name)}"/>
+				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
 			</a>
 		</div>
 	</c:forEach>
@@ -109,7 +110,8 @@
 
 	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 		<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == savedJobType.id}">${selectedIconCss}</c:if>">
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
+			<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
+			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('Filter by job type: $1', savedJobTypeNameTranslated)}">
 				<html:img32 src="jobtype/${savedJobType.icon}"/>
 			</a>
 		</div>
