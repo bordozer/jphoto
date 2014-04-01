@@ -2081,11 +2081,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Jobs is performed successfully</nerd>
-		<ru><![CDATA[Задача выполнена успешно]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Performed $1 from $2</nerd>
 		<ru><![CDATA[Выполнено $1 из $2]]></ru>
 	</translation>
@@ -2153,11 +2148,6 @@
 	<translation>
 		<nerd>Last photos with $1 $2 - $3 photos</nerd>
 		<ru><![CDATA[Последние работы с $1 $2 - $3 шт]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Jobs stopped by user</nerd>
-		<ru><![CDATA[Выполнение задачи прервано]]></ru>
 	</translation>
 
 	<translation>
@@ -2410,16 +2400,6 @@
 	<translation>
 		<nerd>Reset filter by job type</nerd>
 		<ru><![CDATA[Сбросить фильтр по типу задачи]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Finished with error</nerd>
-		<ru><![CDATA[Завершено без ошибок]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Jobs that have not started yet and execution is cancelled because a user had stopped parent job</nerd>
-		<ru><![CDATA[Задачи которые еще не были запущены и их выполнение было отменено по причине того, что родительская задача была остановлена пользователем]]></ru>
 	</translation>
 
 	<translation>
@@ -3482,20 +3462,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Jobs that have not started yet and execution was cancelled because of error in previous job in the chain</nerd>
-		<ru><![CDATA[Задача не была запущена и выполнение ее отменено по причине ошибки в комплексной задаче ранее]]></ru>
-		<ua><![CDATA[Завдання не було розпочате та його виконання було вiдмiнено тому що трапилась помилка у комплексноI задачi ранiше]]></ua>
-		<en><![CDATA[Jobs that have not started yet and execution was cancelled because of error in previous job in the chain]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Jobs that had already started but the execution was stopped because a user had stopped parent job</nerd>
-		<ru><![CDATA[Задача была запущена, но выполнение ее было прервано по причине остановки родительской комплексной задачи]]></ru>
-		<ua><![CDATA[Виконання завдання було розпочате, але було перервано тому, що батькiвська задача була зупинена]]></ua>
-		<en><![CDATA[Jobs that had already started but the execution was stopped because a user had stopped parent job]]></en>
-	</translation>
-
-	<translation>
 		<nerd>Finish time</nerd>
 		<ru><![CDATA[Время завершения]]></ru>
 		<ua><![CDATA[Час завершення]]></ua>
@@ -3573,20 +3539,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Jobs are waiting for start</nerd>
-		<ru><![CDATA[Задачи ожидающие запуска]]></ru>
-		<ua><![CDATA[Завдання очикуючi запуску]]></ua>
-		<en><![CDATA[Jobs are waiting for start]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Chain jobs was stopped because of error in child job</nerd>
-		<ru><![CDATA[Комплексная задача была остановлена по причине ошибки в одной из ее задач]]></ru>
-		<ua><![CDATA[Комплексне завдання було зупинене бо виникла помилка в однiЕI з II зачач]]></ua>
-		<en><![CDATA[Chain jobs was stopped because of error in child job]]></en>
-	</translation>
-
-	<translation>
 		<nerd>Delete ALL System notifications</nerd>
 		<ru><![CDATA[Удалить все записи системных уведомлений]]></ru>
 		<ua><![CDATA[Видалити усi записи системних повiдомлень]]></ua>
@@ -3605,13 +3557,6 @@
 		<ru><![CDATA[$1: '$2' $3]]></ru>
 		<ua><![CDATA[$1: '$2' $3]]></ua>
 		<en><![CDATA[$1: '$2' $3]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Jobs in progress</nerd>
-		<ru><![CDATA[Задачи в процессе выполнения]]></ru>
-		<ua><![CDATA[Завдання що виконуються зараз]]></ua>
-		<en><![CDATA[Jobs are in progress]]></en>
 	</translation>
 
 	<translation>
