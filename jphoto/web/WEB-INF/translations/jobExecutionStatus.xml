@@ -73,7 +73,7 @@
 	<translation>
 		<nerd>Filter by job type: $1</nerd>
 		<ru><![CDATA[Фильтр по типу задачи: $1]]></ru>
-		<ua><![CDATA[Фiльтр по типу завданны: $1]]></ua>
+		<ua><![CDATA[Фiльтр по типу завдання: $1]]></ua>
 		<en><![CDATA[Filter by job type: $1]]></en>
 	</translation>
 
