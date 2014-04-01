@@ -2,6 +2,7 @@ package core.services.translator;
 
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.dtos.TranslationDTO;
+import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.services.dao.TranslationsDao;
@@ -10,13 +11,15 @@ import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
 
 public class TranslatorServiceImpl implements TranslatorService {
 
-	public static final String TRANSLATIONS_XML = "translations.xml";
+	public static final String TRANSLATIONS_PATH = "../translations";
 
 	private Translator translator;
 
@@ -62,9 +65,21 @@ public class TranslatorServiceImpl implements TranslatorService {
 	@Override
 	public void initTranslations() throws DocumentException {
 
-		final File translationsFile = new File( systemVarsService.getPropertiesPath(), TRANSLATIONS_XML );
+		final File translationDir = new File( TRANSLATIONS_PATH );
 
-		translator = TranslationsReader.getTranslator( translationsFile, systemVarsService );
+		final File[] files = translationDir.listFiles();
+		if ( files == null ) {
+			throw new BaseRuntimeException( String.format( "No translations have been found in '%s'", translationDir.getAbsolutePath() ) );
+		}
+
+		final List<File> translationFiles = Arrays.asList( files );
+
+		final Map<NerdKey, TranslationData> translationsMap = newHashMap();
+		translator = new Translator( translationsMap );
+
+		for ( final File translationFile : translationFiles ) {
+			TranslationsReader.loadTranslations( translator, translationFile );
+		}
 	}
 
 	@Override

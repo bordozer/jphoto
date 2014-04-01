@@ -18,7 +18,11 @@ public class TranslationsReader {
 
 	public static final String TRANSLATION = "translation";
 
-	public static Translator getTranslator( final File translationsFile, final SystemVarsService systemVarsService ) throws DocumentException {
+	public static void loadTranslations( final Translator translator, final File translationFile ) throws DocumentException {
+		translator.addTranslations( getTranslator( translationFile ) );
+	}
+
+	private static Map<NerdKey, TranslationData> getTranslator( final File translationsFile ) throws DocumentException {
 
 		final SAXReader reader = new SAXReader( false );
 		final Document document = reader.read( translationsFile );
@@ -33,7 +37,7 @@ public class TranslationsReader {
 			final String nerd = nerdElement.element( Language.NERD.getCode() ).getText();
 
 			final List<TranslationEntry> translations = newArrayList();
-			translations.add( new TranslationEntryNerd( nerd, systemVarsService ) );
+			translations.add( new TranslationEntryNerd( nerd ) );
 
 			for ( final Language language : Language.values() ) {
 
@@ -54,6 +58,6 @@ public class TranslationsReader {
 			translationsMap.put( new NerdKey( nerd ), new TranslationData( nerd, translations ) );
 		}
 
-		return new Translator( translationsMap );
+		return translationsMap;
 	}
 }

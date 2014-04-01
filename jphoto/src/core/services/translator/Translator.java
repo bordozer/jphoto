@@ -55,6 +55,10 @@ public class Translator {
 		}
 	}
 
+	public void addTranslations( final Map<NerdKey, TranslationData> translationsMap ) {
+		this.translationsMap.putAll( translationsMap );
+	}
+
 	private void addToMap( final Map<NerdKey, TranslationData> map, final TranslationEntry translationEntry ) {
 		final String nerd = translationEntry.getNerd();
 		final NerdKey nerdKey = new NerdKey( nerd );

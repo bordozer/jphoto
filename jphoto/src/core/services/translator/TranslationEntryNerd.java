@@ -4,7 +4,7 @@ import core.services.utils.SystemVarsService;
 
 public class TranslationEntryNerd extends TranslationEntry {
 
-	public TranslationEntryNerd( final String nerd, final SystemVarsService systemVarsService ) {
+	public TranslationEntryNerd( final String nerd ) {
 		super( nerd, Language.NERD, nerd );
 	}
 
