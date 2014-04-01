@@ -3454,6 +3454,195 @@
 	</translation>
 
 	<translation>
+		<nerd>Filter by scheduler task</nerd>
+		<ru><![CDATA[Показать историю выполнения задачи планировщика]]></ru>
+		<ua><![CDATA[Показати iсторию виконання завдання планувальника]]></ua>
+		<en><![CDATA[Filter by scheduler task]]></en>
+	</translation>
+
+	<translation>
+		<nerd>New messages</nerd>
+		<ru><![CDATA[Новые сообщения]]></ru>
+		<ua><![CDATA[Новi поiдомлення]]></ua>
+		<en><![CDATA[New messages]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset filter by execution status</nerd>
+		<ru><![CDATA[Сбросить фильтр по статусу задания]]></ru>
+		<ua><![CDATA[Зкинути фiльтр по статусу завдання]]></ua>
+		<en><![CDATA[Reset filter by execution status]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete selected history entries?</nerd>
+		<ru><![CDATA[Удалить выделенные записи?]]></ru>
+		<ua><![CDATA[Видалити помiченi записи?]]></ua>
+		<en><![CDATA[Delete selected history entries?]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Jobs that have not started yet and execution was cancelled because of error in previous job in the chain</nerd>
+		<ru><![CDATA[Задача не была запущена и выполнение ее отменено по причине ошибки в комплексной задаче ранее]]></ru>
+		<ua><![CDATA[Завдання не було розпочате та його виконання було вiдмiнено тому що трапилась помилка у комплексноI задачi ранiше]]></ua>
+		<en><![CDATA[Jobs that have not started yet and execution was cancelled because of error in previous job in the chain]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Jobs that had already started but the execution was stopped because a user had stopped parent job</nerd>
+		<ru><![CDATA[Задача была запущена, но выполнение ее было прервано по причине остановки родительской комплексной задачи]]></ru>
+		<ua><![CDATA[Виконання завдання було розпочате, але було перервано тому, що батькiвська задача була зупинена]]></ua>
+		<en><![CDATA[Jobs that had already started but the execution was stopped because a user had stopped parent job]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Finish time</nerd>
+		<ru><![CDATA[Время завершения]]></ru>
+		<ua><![CDATA[Час завершення]]></ua>
+		<en><![CDATA[Finish time]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Next $1 of $2 >></nerd>
+		<ru><![CDATA[Следующие $1 из $2 >>]]></ru>
+		<ua><![CDATA[Наступнi $1 з $2 >>]]></ua>
+		<en><![CDATA[Next $1 of $2 >>]]></en>
+	</translation>
+
+	<translation>
+		<nerd>The job is executing</nerd>
+		<ru><![CDATA[Задача выполняется]]></ru>
+		<ua><![CDATA[Завдання виконуЕться]]></ua>
+		<en><![CDATA[The job is executing]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Scheduler task is not found. It mush have been deleted.</nerd>
+		<ru><![CDATA[Задача планировщика не найдена. Скорее всего, она была удалена.]]></ru>
+		<ua><![CDATA[Завдання планувальника не знайдено. Скорiше за все, воно було видалене.]]></ua>
+		<en><![CDATA[Scheduler task is not found. It mush have been deleted.]]></en>
+	</translation>
+
+	<translation>
+		<nerd>You have negative rank ( $1 ) in category $2</nerd>
+		<ru><![CDATA[Вы имеете негативный ранг ( $1 ) в разделе '$2']]></ru>
+		<ua><![CDATA[Ви маЕте негативний ранг ( $1 ) у роздiлi '$2']]></ua>
+		<en><![CDATA[You have negative rank ( $1 ) in category '$2']]></en>
+	</translation>
+
+	<translation>
+		<nerd>'$1' - progress</nerd>
+		<ru><![CDATA['$1' - прогресс]]></ru>
+		<ua><![CDATA['$1' - прогресс]]></ua>
+		<en><![CDATA['$1' - progress]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Shown $1 of $2 unread comments</nerd>
+		<ru><![CDATA[Показать следующие $1 из $2 непрочитанных комментариев]]></ru>
+		<ua><![CDATA[Показати наступнi $1 з $2 непрочитанних клмментарiв]]></ua>
+		<en><![CDATA[Shown $1 of $2 unread comments]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Reset all filters</nerd>
+		<ru><![CDATA[Сбросить все фильтры]]></ru>
+		<ua><![CDATA[Зкинути усi фiльтри]]></ua>
+		<en><![CDATA[Reset all filters]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Saved job id</nerd>
+		<ru><![CDATA[ID сохраненной задачи]]></ru>
+		<ua><![CDATA[ID збереженноI задачi]]></ua>
+		<en><![CDATA[Saved job id]]></en>
+	</translation>
+
+	<translation>
+		<nerd>No parameters</nerd>
+		<ru><![CDATA[Параметров нет]]></ru>
+		<ua><![CDATA[Параметрiв немаЕ]]></ua>
+		<en><![CDATA[No parameters]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1 read this comment at $2 $3</nerd>
+		<ru><![CDATA[$1 прочитал этот комментарий $2 $3]]></ru>
+		<ua><![CDATA[$1 прочитав цей комментар $2 $3]]></ua>
+		<en><![CDATA[$1 read this comment at $2 $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Jobs are waiting for start</nerd>
+		<ru><![CDATA[Задачи ожидающие запуска]]></ru>
+		<ua><![CDATA[Завдання очикуючi запуску]]></ua>
+		<en><![CDATA[Jobs are waiting for start]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Chain jobs was stopped because of error in child job</nerd>
+		<ru><![CDATA[Комплексная задача была остановлена по причине ошибки в одной из ее задач]]></ru>
+		<ua><![CDATA[Комплексне завдання було зупинене бо виникла помилка в однiЕI з II зачач]]></ua>
+		<en><![CDATA[Chain jobs was stopped because of error in child job]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Delete ALL System notifications</nerd>
+		<ru><![CDATA[Удалить все записи системных уведомлений]]></ru>
+		<ua><![CDATA[Видалити усi записи системних повiдомлень]]></ua>
+		<en><![CDATA[Delete ALL System notifications]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Mark all System notifications as read</nerd>
+		<ru><![CDATA[Пометить все системные сообщения как прочитанные]]></ru>
+		<ua><![CDATA[Помiтити усi системнi повiдомлення як прочитаннi]]></ua>
+		<en><![CDATA[Mark all System notifications as read]]></en>
+	</translation>
+
+	<translation>
+		<nerd>$1: '$2' $3</nerd>
+		<ru><![CDATA[$1: '$2' $3]]></ru>
+		<ua><![CDATA[$1: '$2' $3]]></ua>
+		<en><![CDATA[$1: '$2' $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Jobs in progress</nerd>
+		<ru><![CDATA[Задачи в процуессе выполнения]]></ru>
+		<ua><![CDATA[Завдання що виконуються зараз]]></ua>
+		<en><![CDATA[Jobs are in progress]]></en>
+	</translation>
+
+	<translation>
+		<nerd>All job execution statuses</nerd>
+		<ru><![CDATA[Все статусы выполнения задач]]></ru>
+		<ua><![CDATA[Усi статуси виконання завданнь]]></ua>
+		<en><![CDATA[All job execution statuses]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
