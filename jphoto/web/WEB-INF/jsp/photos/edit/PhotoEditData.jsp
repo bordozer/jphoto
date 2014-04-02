@@ -384,7 +384,7 @@
 
 				<%-- Comments allowance --%>
 				<table:tredit>
-					<table:tdtext text_t="Photo uploading: Commenting"/>
+					<table:tdtext text_t="Photo uploading: Comments allowance"/>
 
 					<table:tddata>
 						<form:radiobuttons path="photoEditDataModel.commentsAllowanceId" items="${accessibleCommentAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />
@@ -409,7 +409,7 @@
 
 				<%-- voting allowance --%>
 				<table:tredit>
-					<table:tdtext text_t="Photo data editing: Voting allowance"/>
+					<table:tdtext text_t="Photo uploading: Photo appraisal allowance"/>
 
 					<table:tddata>
 						<form:radiobuttons path="photoEditDataModel.votingAllowanceId" items="${accessibleVotingAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />

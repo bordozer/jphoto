@@ -289,7 +289,7 @@
 
 			<%-- default Photo Comments Allowance --%>
 			<table:tredit>
-				<table:tdtext text_t="Photo upload: comments allowance by default" labelFor="defaultPhotoCommentsAllowanceId1" />
+				<table:tdtext text_t="Photo uploading: Comments allowance by default" labelFor="defaultPhotoCommentsAllowanceId1" />
 
 				<table:tddata>
 					<form:radiobuttons items="${accessibleCommentAllowances}" path="userEditDataModel.${defaultPhotoCommentsAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>
@@ -300,7 +300,7 @@
 
 			<%-- default Photo Voting Allowance --%>
 			<table:tredit>
-				<table:tdtext text_t="Photo upload: voting allowance by default" labelFor="defaultPhotoVotingAllowanceId1" />
+				<table:tdtext text_t="Photo uploading: Photo appraisal allowance by default" labelFor="defaultPhotoVotingAllowanceId1" />
 
 				<table:tddata>
 					<form:radiobuttons items="${accessibleVotingAllowances}" path="userEditDataModel.${defaultPhotoVotingAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>

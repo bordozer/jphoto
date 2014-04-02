@@ -40,7 +40,7 @@ public class UserRequirement {
 		builder.append( DataRequirementService.HINT_LINE_BREAK );
 		builder.append( DataRequirementService.HINT_LINE_BREAK );
 
-		builder.append( translatorService.translate( "<b>Randomly generated passwords</b> (you can use one of them):", getLanguage() ) );
+		builder.append( translatorService.translate( "Randomly generated passwords (you can use one of them):", getLanguage() ) );
 		builder.append( DataRequirementService.HINT_LINE_BREAK );
 		builder.append( DataRequirementService.HINT_LINE_BREAK );
 

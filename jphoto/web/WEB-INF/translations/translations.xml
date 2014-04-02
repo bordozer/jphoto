@@ -3196,13 +3196,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo data editing: Voting allowance</nerd>
-		<ru><![CDATA[Голосование]]></ru>
-		<ua><![CDATA[Голосування]]></ua>
-		<en><![CDATA[Voting allowance]]></en>
-	</translation>
-
-	<translation>
 		<nerd>You can not edit this option when photo is posted</nerd>
 		<ru><![CDATA[Вы не сможете изменить эту опцию после размещения работы]]></ru>
 		<ua><![CDATA[Ви не зможете змiнити цю опцiю пiсля розмiщення роботи]]></ua>
@@ -3312,13 +3305,6 @@
 		<ru><![CDATA[Комментарии и голосование]]></ru>
 		<ua><![CDATA[Коментари та голосування]]></ua>
 		<en><![CDATA[Commenting and voting]]></en>
-	</translation>
-
-	<translation>
-		<nerd>Photo uploading: Commenting</nerd>
-		<ru><![CDATA[Комментарии]]></ru>
-		<ua><![CDATA[Коментування]]></ua>
-		<en><![CDATA[Commenting]]></en>
 	</translation>
 
 	<translation>
