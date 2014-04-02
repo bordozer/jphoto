@@ -21,6 +21,17 @@
 
 <tags:page pageModel="${configurationEditModel.pageModel}">
 
+	<style type="text/css">
+		.notFromDefaultSystemConfiguration {
+			font-weight: bold;
+		}
+
+		.configurationMissedInDB {
+			font-style: italic;
+			color: #005599;
+		}
+	</style>
+
 	<c:set var="configurationMap" value="${configurationEditModel.configurationMap}"/>
 	<c:set var="selectedConfigurationTab" value="${configurationEditModel.configurationTab}"/>
 
@@ -62,6 +73,7 @@
 					<c:set var="configuration" value="${entry.value}"/>
 					<c:set var="configurationKey" value="${configuration.configurationKey}"/>
 					<c:set var="gotFromDefaultSystemConfiguration" value="${configuration.gotFromDefaultSystemConfiguration}"/>
+					<c:set var="isConfigurationMissedInDB" value="${configuration.missedInDB}"/>
 
 					<c:if test="${isAllTabs or ( isChabgesOnly and ( not configuration.gotFromDefaultSystemConfiguration) ) or ( selectedConfigurationTab == configurationKey.tab ) }">
 
@@ -97,10 +109,15 @@
 							</table:tdunderlined>
 
 							<table:tdunderlined>
-								<span title="${configurationKey.id}: ${configurationKey}">
-									<c:if test="${not gotFromDefaultSystemConfiguration}"><b></c:if>
-										${eco:translate(configurationKey.description)}
-									<c:if test="${not gotFromDefaultSystemConfiguration}"></b></c:if>
+								<c:set var="additionalCss" value=""/>
+								<c:if test="${not gotFromDefaultSystemConfiguration}">
+									<c:set var="additionalCss" value="notFromDefaultSystemConfiguration"/>
+								</c:if>
+								<c:if test="${isConfigurationMissedInDB}">
+									<c:set var="additionalCss" value="${additionalCss} configurationMissedInDB"/>
+								</c:if>
+								<span title="${configurationKey.id}: ${configurationKey}<c:if test="${isConfigurationMissedInDB}">. ${eco:translate('The key is not stored in db. The default value is used.')}</c:if>" class="${additionalCss}">
+									${eco:translate(configurationKey.description)}
 								</span>
 							</table:tdunderlined>
 

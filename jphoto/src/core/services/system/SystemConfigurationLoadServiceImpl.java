@@ -53,6 +53,8 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 			}
 		} );
 
+		addMissedInDBConfigurations( configurations );
+
 		if ( systemConfiguration == null ) {
 			return null;
 		}
@@ -74,6 +76,26 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 		systemConfiguration.setConfigurations( getConfigurationSorted( configurations ) );
 
 		return systemConfiguration;
+	}
+
+	private void addMissedInDBConfigurations( final List<Configuration> configurations ) {
+
+		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
+
+			boolean configurationKeyExistsInDB = false;
+
+			for ( final Configuration configuration : configurations ) {
+				if ( configuration.getConfigurationKey() == configurationKey ) {
+					configurationKeyExistsInDB = true;
+					break;
+				}
+			}
+			if ( ! configurationKeyExistsInDB ) {
+				final Configuration missedConfiguration = new Configuration( configurationKey, configurationKey.getDefaultValue() );
+				missedConfiguration.setMissedInDB( true );
+				configurations.add( missedConfiguration );
+			}
+		}
 	}
 
 	private List<Configuration> getConfigurationSorted( final List<Configuration> configurations ) {

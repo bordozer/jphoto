@@ -27,8 +27,6 @@ public interface ConfigurationService {
 
 	long getLong( final ConfigurationKey key );
 
-	Date getDate( final ConfigurationKey key );
-
 	float getFloat( final ConfigurationKey key );
 
 	boolean getBoolean( final ConfigurationKey key );

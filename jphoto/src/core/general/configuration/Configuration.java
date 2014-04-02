@@ -20,6 +20,7 @@ public class Configuration implements Cloneable {
 
 	private boolean gotFromDefaultSystemConfiguration;
 	private Configuration defaultSystemConfiguration;
+	private boolean missedInDB = false;
 
 	public Configuration( final ConfigurationKey configurationKey, final String value ) {
 		this.configurationKey = configurationKey;
@@ -95,8 +96,12 @@ public class Configuration implements Cloneable {
 		return integers;
 	}
 
-	public Date getDate() {
-		throw new BaseRuntimeException( "core.general.configuration.Configuration.getDate() is not implemented yet" );
+	public boolean isMissedInDB() {
+		return missedInDB;
+	}
+
+	public void setMissedInDB( final boolean missedInDB ) {
+		this.missedInDB = missedInDB;
 	}
 
 	@Override

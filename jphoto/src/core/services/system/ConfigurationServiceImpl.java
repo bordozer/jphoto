@@ -76,11 +76,6 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 
 	@Override
-	public Date getDate( final ConfigurationKey key ) {
-		return getConfiguration( key ).getDate();
-	}
-
-	@Override
 	public float getFloat( final ConfigurationKey key ) {
 		return getConfiguration( key ).getValueFloat();
 	}
