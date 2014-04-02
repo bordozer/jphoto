@@ -121,12 +121,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			final List<PhotosightPhoto> photosightPagePhotos = getPhotosightPhotosToImport( photosightUser, photosightPagePhotosIds, cachedLocallyPhotosightPhotos, user );
-			CollectionUtils.filter( photosightPagePhotos, new Predicate<PhotosightPhoto>() {
-				@Override
-				public boolean evaluate( final PhotosightPhoto photosightPhoto ) {
-					return importParameters.getPhotosightCategories().contains( photosightPhoto.getPhotosightCategory() );
-				}
-			} );
+
+			filterDownloadedPhotosByPhotosightCategories( photosightPagePhotos );
 
 			final List<PhotosightPhotoOnDisk> photosightPhotosOnDisk = getPhotosightPhotoOnDisk( photosightUser, photosightPagePhotos, cachedLocallyPhotosightPhotos );
 
@@ -154,6 +150,15 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			page++;
 			job.increment();
 		}
+	}
+
+	private void filterDownloadedPhotosByPhotosightCategories( final List<PhotosightPhoto> photosightPagePhotos ) {
+		CollectionUtils.filter( photosightPagePhotos, new Predicate<PhotosightPhoto>() {
+			@Override
+			public boolean evaluate( final PhotosightPhoto photosightPhoto ) {
+				return importParameters.getPhotosightCategories().contains( photosightPhoto.getPhotosightCategory() );
+			}
+		} );
 	}
 
 	private List<PhotosightPhotoOnDisk> getPhotosightPhotoOnDisk( final PhotosightUser photosightUser, final List<PhotosightPhoto> photosightPagePhotos, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos ) throws IOException {
