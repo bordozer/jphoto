@@ -10,6 +10,76 @@
 	</translation>
 
 	<translation>
+		<nerd>Auto start scheduler when worker starts</nerd>
+		<ru><![CDATA[Автоматически запускать планировщик при старте системы]]></ru>
+		<ua><![CDATA[Автоматично запускати планувальник при стартi системи]]></ua>
+		<en><![CDATA[Auto start scheduler when worker starts]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Minimal length of member login</nerd>
+		<ru><![CDATA[Минимальная длина логина пользователя]]></ru>
+		<ua><![CDATA[Мiнiмальна довжина логiна учасника]]></ua>
+		<en><![CDATA[Minimal length of member login]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Max length of member login</nerd>
+		<ru><![CDATA[Максимальная длина логина пользователя]]></ru>
+		<ua><![CDATA[Максимальна довжина логiна учасника]]></ua>
+		<en><![CDATA[Max length of member login]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Minimal length of member name</nerd>
+		<ru><![CDATA[Минимальная длина имени участника]]></ru>
+		<ua><![CDATA[Мiнiмальна довжина iменi учасника]]></ua>
+		<en><![CDATA[Minimal length of member name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Max length of member name</nerd>
+		<ru><![CDATA[Максимальная длина имени участника]]></ru>
+		<ua><![CDATA[Максимальна довжина iменi учасника]]></ua>
+		<en><![CDATA[Max length of member name]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Show menu items 'Go to photos...' for own entries</nerd>
+		<ru><![CDATA[Показывать пункт контекстного меню 'Перейти к...' в меню для собственных учетной записи/работ/комментариев]]></ru>
+		<ua><![CDATA[Показывать пункт контекстного меню 'Перейти к...' в меню для собственных учетной записи/работ/комментариев]]></ua>
+		<en><![CDATA[Show menu items 'Go to photos...' for own entries]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Portal page activity stream length</nerd>
+		<ru><![CDATA[Длина показываемой ленты событий на главной странице]]></ru>
+		<ua><![CDATA[Довжина вiдображенноI стрічкi подій на головноI сторiнцi]]></ua>
+		<en><![CDATA[Portal page activity stream length]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Log photo preview activity</nerd>
+		<ru><![CDATA[Добавлять просмотр работ в ленту событий]]></ru>
+		<ua><![CDATA[Додавати перегляд робот в стрічку подій]]></ua>
+		<en><![CDATA[Log photo preview activity]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Log favorite actions activity</nerd>
+		<ru><![CDATA[Добавлять добавление в закладки в ленту событий]]></ru>
+		<ua><![CDATA[Додавати  додання в закладки в стрічку подій]]></ua>
+		<en><![CDATA[Log favorite actions activity]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Max length of photo name (DB limit is 255)</nerd>
+		<ru><![CDATA[Максимальная длина названия работы (максимум 255 символов из-за ограничение БД)]]></ru>
+		<ua><![CDATA[Максимальна довжина назви роботи (максимум 255 сiмволов iз-за обмеження БД)]]></ua>
+		<en><![CDATA[Max length of photo name (DB limit is 255)]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>
