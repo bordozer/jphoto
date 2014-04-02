@@ -2,9 +2,9 @@ package core.services.translator;
 
 import admin.controllers.translator.custom.TranslationEntryType;
 import core.dtos.TranslationDTO;
-import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
+import core.log.LogHelper;
 import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
@@ -28,6 +28,8 @@ public class TranslatorServiceImpl implements TranslatorService {
 
 	@Autowired
 	private TranslationsDao translationsDao;
+
+	private final LogHelper log = new LogHelper( TranslatorServiceImpl.class );
 
 	@Override
 	public String translate( final String nerd, final Language language, final String... params ) {
@@ -65,21 +67,36 @@ public class TranslatorServiceImpl implements TranslatorService {
 	@Override
 	public void initTranslations() throws DocumentException {
 
-		final File translationDir = new File( TRANSLATIONS_PATH );
-
-		final File[] files = translationDir.listFiles();
-		if ( files == null ) {
-			throw new BaseRuntimeException( String.format( "No translations have been found in '%s'", translationDir.getAbsolutePath() ) );
-		}
-
-		final List<File> translationFiles = Arrays.asList( files );
-
 		final Map<NerdKey, TranslationData> translationsMap = newHashMap();
 		translator = new Translator( translationsMap );
 
-		for ( final File translationFile : translationFiles ) {
-			TranslationsReader.loadTranslations( translator, translationFile );
+		translator.addTranslationMap( getTranslationMap( new File( TRANSLATIONS_PATH ) ) );
+	}
+
+	private Map<NerdKey, TranslationData> getTranslationMap( final File dir ) {
+
+		final File[] farr = dir.listFiles();
+		if ( farr == null ) {
+			return newHashMap();
 		}
+
+		final List<File> files = Arrays.asList( farr );
+
+		final Map<NerdKey, TranslationData> result = newHashMap();
+		for ( final File file : files ) {
+			if ( file.isDirectory() ) {
+				result.putAll( getTranslationMap( file ) );
+				continue;
+			}
+
+			try {
+				result.putAll( TranslationsReader.getTranslationMap( file ) );
+			} catch ( final DocumentException e ) {
+				log.error( String.format( "Can not load translation from file '%s'", file.getAbsolutePath() ), e );
+			}
+		}
+
+		return result;
 	}
 
 	@Override

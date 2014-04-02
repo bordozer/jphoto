@@ -55,7 +55,7 @@ public class Translator {
 		}
 	}
 
-	public void addTranslations( final Map<NerdKey, TranslationData> translationsMap ) {
+	public void addTranslationMap( final Map<NerdKey, TranslationData> translationsMap ) {
 		this.translationsMap.putAll( translationsMap );
 	}
 

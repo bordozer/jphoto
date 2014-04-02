@@ -1,6 +1,5 @@
 package core.services.translator;
 
-import core.services.utils.SystemVarsService;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -18,11 +17,7 @@ public class TranslationsReader {
 
 	public static final String TRANSLATION = "translation";
 
-	public static void loadTranslations( final Translator translator, final File translationFile ) throws DocumentException {
-		translator.addTranslations( getTranslator( translationFile ) );
-	}
-
-	private static Map<NerdKey, TranslationData> getTranslator( final File translationsFile ) throws DocumentException {
+	public static Map<NerdKey, TranslationData> getTranslationMap( final File translationsFile ) throws DocumentException {
 
 		final SAXReader reader = new SAXReader( false );
 		final Document document = reader.read( translationsFile );

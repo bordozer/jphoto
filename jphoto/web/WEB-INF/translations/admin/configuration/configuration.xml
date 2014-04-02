@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Session timeout in minutes</nerd>
+		<ru><![CDATA[Таймаут сессии, минуты]]></ru>
+		<ua><![CDATA[Таймаут сессiI, хвилини]]></ua>
+		<en><![CDATA[Session timeout in minutes]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+</translations>
