@@ -151,14 +151,14 @@
 						genresCanHaveNudeContent = new Array( -1, ${genresCanHaveNudeContent} );
 					</c:if>
 					<c:if test="${empty genresCanHaveNudeContent}">
-						genresCanHaveNudeContent = new Array();
+						genresCanHaveNudeContent = [];
 					</c:if>
 
 					<c:if test="${not empty genresHaveNudeContent}">
 						genresHaveNudeContent = new Array( -1, ${genresHaveNudeContent} );
 					</c:if>
 					<c:if test="${empty genresHaveNudeContent}">
-						genresHaveNudeContent = new Array();
+						genresHaveNudeContent = [];
 					</c:if>
 
 					jQuery().ready( function () {
