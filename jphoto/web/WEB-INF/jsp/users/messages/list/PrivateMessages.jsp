@@ -76,7 +76,7 @@
 									<div style="float: left; width: ${cellWidth}%; padding-top: 10px; padding-bottom: 10px; text-align: center;" ${selectedPrivateMessageTypeType == privateMessageType ? 'class="selectedTab block-background"' : ''}>
 										<messages:privateMessageIcon user="${privateMessageListModel.forUser}" privateMessageType="${privateMessageType}"/>
 										<br/>
-										${privateMessageType.nameTranslated}
+										${eco:translate(privateMessageType.name)}
 										<br/>
 										<span title="${eco:translate('Total messages')}">${messageTypeData.messages}</span>
 										<c:if test="${messageTypeData.newMessages > 0}">
@@ -132,14 +132,14 @@
 
 									<html:submitButton
 											id="deleteAllMessagesButton"
-											caption_t="Delete ALL ${privateMessageListModel.privateMessageType.name}"
+											caption_t="Delete ALL ${eco:translate(privateMessageListModel.privateMessageType.name)}"
 											onclick="return deleteAllPrivateMessages();"
 											icon="deleteAll.png"
 											/>
 
 									<html:submitButton
 											id="markAllMessagesAsReadButton"
-											caption_t="Mark all ${privateMessageListModel.privateMessageType.name} as read"
+											caption_t="Mark all ${eco:translate(privateMessageListModel.privateMessageType.name)} as read"
 											onclick="return markAllMessagesAsRead();"
 											icon="markAsRead.png"
 											/>
@@ -162,16 +162,17 @@
 						}
 
 						<c:if test="${not empty privateMessageListModel.privateMessageType}">
+							<c:set var="privateMessageTypeName" value="${eco:translate(privateMessageListModel.privateMessageType.name)}" />
 							function deleteAllPrivateMessages() {
 								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
-								var message = "${eco:translate1('Delete ALL $1?', privateMessageListModel.privateMessageType.nameTranslated)}";
+								var message = "${eco:translate1('Delete ALL $1?', privateMessageTypeName)}";
 
 								return performAction( action, message );
 							}
 
 							function markAllMessagesAsRead() {
 								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
-								var message = "${eco:translate1('Mark all $1 as read?', privateMessageListModel.privateMessageType.nameTranslated)}";
+								var message = "${eco:translate1('Mark all $1 as read?', privateMessageTypeName)}";
 
 								return performAction( action, message );
 							}

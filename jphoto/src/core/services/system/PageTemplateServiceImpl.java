@@ -136,7 +136,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "loggedUserCardUrl", urlUtilsService.getUserCardLink( currentUser.getId() ) );
 		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card", language ) );
 
-		model.put( "uploadPhotoText", translatorService.translate( "Upload photo", language ) );
+		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
 		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURLWithPrefix() );
 

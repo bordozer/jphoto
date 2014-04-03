@@ -1,14 +1,12 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum PrivateMessageType {
 
-	USER_PRIVATE_MESSAGE_IN( 1, "Received messages", "privateIn.png" )
-	, USER_PRIVATE_MESSAGE_OUT( 4, "Sent messages", "privateOut.png" )
-	, ACTIVITY_NOTIFICATIONS( 3, "Activity notifications", "activityNotification.png" )
-	, SYSTEM_NOTIFICATIONS( 2, "System notifications", "systemNotification.png" )
-	, ADMIN_NOTIFICATIONS( 5, "Admin notifications", "adminNotification.png" )
+	USER_PRIVATE_MESSAGE_IN( 1, "PrivateMessageType: Received messages", "privateIn.png" )
+	, USER_PRIVATE_MESSAGE_OUT( 4, "PrivateMessageType: Sent messages", "privateOut.png" )
+	, ACTIVITY_NOTIFICATIONS( 3, "PrivateMessageType: Activity notifications", "activityNotification.png" )
+	, SYSTEM_NOTIFICATIONS( 2, "PrivateMessageType: System notifications", "systemNotification.png" )
+	, ADMIN_NOTIFICATIONS( 5, "PrivateMessageType: Admin notifications", "adminNotification.png" )
 	;
 
 	private final int id;
@@ -31,10 +29,6 @@ public enum PrivateMessageType {
 
 	public String getIcon() {
 		return icon;
-	}
-
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static PrivateMessageType getById( final int id ) {

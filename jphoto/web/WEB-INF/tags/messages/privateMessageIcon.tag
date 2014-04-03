@@ -13,5 +13,5 @@
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getPrivateMessagesList( user.getId(), privateMessageType )%>" />
 
 <a href="${link}">
-	<html:img32 src="messages/${privateMessageType.icon}" alt="${privateMessageType.nameTranslated}" />
+	<html:img32 src="messages/${privateMessageType.icon}" alt="${eco:translate(privateMessageType.name)}" />
 </a>
