@@ -58,6 +58,17 @@
 	</translation>
 
 	<translation>
+		<nerd>Show full member activity stream (short)</nerd>
+		<ru><![CDATA[Все]]></ru>
+		<ua><![CDATA[Усi]]></ua>
+	</translation>
+
+	<translation>
+		<nerd>Show full member activity stream</nerd>
+		<ru><![CDATA[Показать всю ленту событий пользователя]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
