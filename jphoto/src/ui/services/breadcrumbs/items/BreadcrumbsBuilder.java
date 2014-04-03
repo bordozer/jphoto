@@ -156,6 +156,11 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
+	public BreadcrumbsBuilder activityStream() {
+		breadcrumbs.add( new ActivityStreamBreadcrumb( services ) );
+		return this;
+	}
+
 	public BreadcrumbsBuilder formattedDate( final Time date, final Genre genre ) {
 		breadcrumbs.add( new FormattedDateBreadcrumb( date, services ) );
 		return this;

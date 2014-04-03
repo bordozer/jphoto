@@ -37,4 +37,9 @@
 		<ru><![CDATA[Оценки]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Breadcrumbs: Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
 </translations>

@@ -1,36 +1,35 @@
 package ui.services.breadcrumbs;
 
-import core.context.EnvironmentContext;
 import core.general.activity.ActivityType;
-import core.services.translator.TranslatorService;
-import core.services.utils.EntityLinkUtilsService;
+import core.services.system.Services;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
+
+import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class PageTitleServiceImpl implements PageTitleService {
 
 	@Autowired
-	private PageTitleUtilsService pageTitleUtilsService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	@Autowired
-	private TranslatorService translatorService;
+	private Services services;
 
 	@Override
-	public PageTitleData getActivityStreamData( final ActivityType activityType ) {
-		final String rootTranslated = translatorService.translate( "Activity stream", EnvironmentContext.getLanguage() );
+	public PageTitleData getActivityStreamBreadcrumbs( final ActivityType activityType ) {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
+		final TranslatableStringBreadcrumb activityStreamText = new TranslatableStringBreadcrumb( "Breadcrumbs: Activity stream", services );
 
-		final String breadcrumbs;
-		if ( activityType != null ) {
-			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getActivityStreamRootLink( EnvironmentContext.getLanguage() ), activityType.getNameTranslated() );
+		final String title = BreadcrumbsBuilder.pageTitle( activityStreamText, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( activityStreamText, services ).build();
+
+		final BreadcrumbsBuilder breadcrumbs = portalPage( services );
+
+		if ( activityType == null ) {
+			breadcrumbs.add( activityStreamText ).build();
 		} else {
-			breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
+			breadcrumbs.activityStream().translatableString( activityType.getName() );
 		}
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( title, header, breadcrumbs.build() );
 	}
 }

@@ -5,5 +5,5 @@ import elements.PageTitleData;
 
 public interface PageTitleService {
 
-	PageTitleData getActivityStreamData( final ActivityType activityType );
+	PageTitleData getActivityStreamBreadcrumbs( final ActivityType activityType );
 }

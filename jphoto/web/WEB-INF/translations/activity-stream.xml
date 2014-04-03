@@ -7,4 +7,54 @@
 		<ru><![CDATA[загрузил(а) работу '$1']]></ru>
 	</translation>
 
+	<translation>
+		<nerd>ActivityType: New member registration</nerd>
+		<ru><![CDATA[Регистрация новых пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: New photo upload</nerd>
+		<ru><![CDATA[Загрузка работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Photo voting</nerd>
+		<ru><![CDATA[Оценка работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Photo comment</nerd>
+		<ru><![CDATA[Комментирование работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Photo preview</nerd>
+		<ru><![CDATA[Просмотры работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Favorite action</nerd>
+		<ru><![CDATA[Добавление в закладки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Voting for user rank in genre</nerd>
+		<ru><![CDATA[Голосование за ранг пользователей в фото категориях]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Member status</nerd>
+		<ru><![CDATA[Изменение статуса пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ActivityType: Member's rank in genre changed</nerd>
+		<ru><![CDATA[Изменение ранга пользователей в фото категориях]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 </translations>

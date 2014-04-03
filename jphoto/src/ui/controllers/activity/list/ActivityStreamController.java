@@ -93,7 +93,7 @@ public class ActivityStreamController {
 
 		pagingModel.setTotalItems( idsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleService.getActivityStreamData( activityType ) );
+		model.setPageTitleData( pageTitleService.getActivityStreamBreadcrumbs( activityType ) );
 
 		return VIEW; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
 	}
