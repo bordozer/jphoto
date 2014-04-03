@@ -19,8 +19,20 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Sorry, but you do not have permission to perform this operation</nerd>
+		<ru><![CDATA[Извините, но у вас нет доступа к данной функциональности]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 has commented your photo '$2'. $3</nerd>
+		<ru><![CDATA[$1 прокомментировал вашу работу '$2'. $3]]></ru>
+		<ua><![CDATA[$1 прокомментував вашу роботу '$2'. $3]]></ua>
+		<en><![CDATA[$1 has commented your photo '$2'. $3]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Password</nerd>
+		<ru><![CDATA[Пароль]]></ru>
 	</translation>
 
 	<translation>
@@ -543,11 +555,6 @@
 	<translation>
 		<nerd>Best yesterday's photos</nerd>
 		<ru><![CDATA[Лучшие работы за вчера]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Password</nerd>
-		<ru><![CDATA[Пароль]]></ru>
 	</translation>
 
 	<translation>
@@ -1151,11 +1158,6 @@
 	<translation>
 		<nerd>Time: $1</nerd>
 		<ru><![CDATA[Время: $1]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Sorry, but you do not have permission to perform this operation</nerd>
-		<ru><![CDATA[Извините, но у вас нет доступа к данной функциональности]]></ru>
 	</translation>
 
 	<translation>
@@ -2627,13 +2629,6 @@
 		<ru><![CDATA[$1 прокомментировал работу '$2']]></ru>
 		<ua><![CDATA[$1 прокоментував роботу '$2']]></ua>
 		<en><![CDATA[]]></en>
-	</translation>
-
-	<translation>
-		<nerd>$1 has commented your photo '$2'. $3</nerd>
-		<ru><![CDATA[$1 прокомментировал вашу работу '$2'. $3]]></ru>
-		<ua><![CDATA[$1 прокомментував вашу роботу '$2'. $3]]></ua>
-		<en><![CDATA[$1 has commented your photo '$2'. $3]]></en>
 	</translation>
 
 	<translation>

@@ -355,4 +355,9 @@
 		<ru><![CDATA[Обновление БД]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Reload translations?</nerd>
+		<ru><![CDATA[Перезагрузить переводы заново?]]></ru>
+	</translation>
+
 </translations>
