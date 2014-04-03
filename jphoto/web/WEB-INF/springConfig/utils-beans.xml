@@ -15,14 +15,16 @@
 	<bean id="systemFilePathUtilsService" class="core.services.utils.SystemFilePathUtilsServiceImpl" init-method="createSystemDirectoriesOnStartup"/>
 	<bean id="userPhotoFilePathUtilsService" class="core.services.utils.UserPhotoFilePathUtilsServiceImpl"/>
 
+	<bean id="commonBreadcrumbsService" class="ui.services.breadcrumbs.CommonBreadcrumbsServiceImpl"/>
 	<bean id="pageTitleUtilsService" class="ui.services.breadcrumbs.PageTitleUtilsServiceImpl"/>
-	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
 	<bean id="breadcrumbsAdminService" class="ui.services.breadcrumbs.BreadcrumbsAdminServiceImpl"/>
 	<bean id="breadcrumbsPhotoCommentService" class="ui.services.breadcrumbs.BreadcrumbsPhotoCommentServiceImpl"/>
 	<bean id="breadcrumbsPhotoGalleryService" class="ui.services.breadcrumbs.BreadcrumbsPhotoGalleryServiceImpl"/>
 	<bean id="breadcrumbsPhotoService" class="ui.services.breadcrumbs.BreadcrumbsPhotoServiceImpl"/>
 	<bean id="breadcrumbsUserService" class="ui.services.breadcrumbs.BreadcrumbsUserServiceImpl"/>
 	<bean id="breadcrumbsGenreService" class="ui.services.breadcrumbs.BreadcrumbsGenreServiceImpl"/>
+
+	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
 
 	<bean id="dateUtilsService" class="core.services.utils.DateUtilsServiceImpl"/>
 	<bean id="networkUtils" class="core.services.utils.NetworkUtilsImpl"/>

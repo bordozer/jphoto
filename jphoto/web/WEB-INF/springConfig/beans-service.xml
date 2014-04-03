@@ -5,7 +5,6 @@
 	   default-autowire="byName">
 
 	<bean id="pageTemplateService" class="core.services.system.PageTemplateServiceImpl"/>
-	<bean id="pageTitleService" class="ui.services.breadcrumbs.PageTitleServiceImpl"/>
 	<bean id="menuService" class="core.services.system.MenuServiceImpl"/>
 
 	<bean id="services" class="core.services.system.ServicesImpl"/>

@@ -9,7 +9,7 @@ import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
-public class PageTitleServiceImpl implements PageTitleService {
+public class CommonBreadcrumbsServiceImpl implements CommonBreadcrumbsService {
 
 	@Autowired
 	private Services services;

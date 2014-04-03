@@ -5,7 +5,7 @@ import core.general.activity.ActivityType;
 import core.general.base.PagingModel;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
-import ui.services.breadcrumbs.PageTitleService;
+import ui.services.breadcrumbs.CommonBreadcrumbsService;
 import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
@@ -38,7 +38,7 @@ public class ActivityStreamController {
 	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Autowired
-	private PageTitleService pageTitleService;
+	private CommonBreadcrumbsService commonBreadcrumbsService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -93,7 +93,7 @@ public class ActivityStreamController {
 
 		pagingModel.setTotalItems( idsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleService.getActivityStreamBreadcrumbs( activityType ) );
+		model.setPageTitleData( commonBreadcrumbsService.getActivityStreamBreadcrumbs( activityType ) );
 
 		return VIEW; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
 	}

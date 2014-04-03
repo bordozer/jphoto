@@ -8,7 +8,6 @@ import core.general.photo.Photo;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
-import ui.services.breadcrumbs.PageTitleService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
