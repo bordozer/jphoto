@@ -1,8 +1,5 @@
 package ui.services.breadcrumbs;
 
-import core.services.system.MenuService;
-import core.services.system.Services;
-import ui.controllers.photos.edit.PhotoEditWizardStep;
 import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
@@ -12,6 +9,7 @@ import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
@@ -20,6 +18,8 @@ import elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
+import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
 import utils.StringUtilities;
 
 import java.util.ArrayList;
@@ -51,17 +51,11 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {
-		final String title = builder()
-			.addPortalPageBreadcrumb()
-			.addPhotoGalleryBreadcrumb()
-			.build();
 
-		final String header = builder()
-			.addPortalPageBreadcrumb()
-			.build();
+		final String title = BreadcrumbsBuilder.pageTitle( new PhotoGalleryBreadcrumb( services ), services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( new PortalPageBreadcrumb( services ), services ).build();
 
-		final String breadcrumbs = builder()
-			.addPortalPageLinkBreadcrumb()
+		final String breadcrumbs = root()
 			.addPhotoGalleryBreadcrumb()
 			.build();
 
@@ -78,18 +72,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotoNewData( final User user, final PhotoEditWizardStep wizardStep ) {
-		final String rootTranslated = getPhotoRootTranslated();
-		final Language language = EnvironmentContext.getLanguage();
-		final String tran = translatorService.translate( MenuService.MAIN_MENU_UPLOAD_PHOTO, language );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), tran, wizardStep.getStepDescription() );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	@Override
 	public PageTitleData getPhotoCardData( final Photo photo, final User user, final Genre genre, final String title ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
@@ -99,19 +81,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( baseBreadcrumbs );
 
 		return new PageTitleData( fullTitle, rootTranslated, breadcrumbs );
-	}
-
-	@Override
-	public PageTitleData getPhotoEditData( final Photo photo, final User user, final Genre genre ) {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String tran = translatorService.translate( "Breadcrumbs: Edit photo", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName(), tran );
-
-		final List<String> baseBreadcrumbs = getPhotoBaseBreadcrumbs( photo, user, genre, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( baseBreadcrumbs );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
@@ -370,8 +339,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
-	private BreadcrumbsBuilder builder() {
-		return BreadcrumbsBuilder.getInstance( services );
+	private BreadcrumbsBuilder root() {
+		return BreadcrumbsBuilder.breadcrumbs( services );
 	}
 
 	private Language getLanguage() {

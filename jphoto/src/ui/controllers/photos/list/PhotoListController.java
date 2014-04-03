@@ -178,7 +178,7 @@ public class PhotoListController {
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosBestInPeriodUrl( topBestCriterias.getVotingTimeFrom(), topBestCriterias.getVotingTimeTo() ) );
-			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
+//			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
 			topBestData.setSortColumnNumber( 2 );
 
 			photoListDatas.add( topBestData );
@@ -226,7 +226,7 @@ public class PhotoListController {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForGenreTopBest( genre, EnvironmentContext.getCurrentUser() );
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
-			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreData( genre ) );
+//			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreData( genre ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByGenreLinkBest( genreId ) );
 			topBestData.setSortColumnNumber( 2 );
 
@@ -285,7 +285,7 @@ public class PhotoListController {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForUserTopBest( user, EnvironmentContext.getCurrentUser() );
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
-			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUser( user ) );
+//			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUser( user ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByUserLinkBest( userId ) );
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 			topBestData.setSortColumnNumber( 3 );
@@ -354,7 +354,7 @@ public class PhotoListController {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, EnvironmentContext.getCurrentUser() );
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
-			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenre( user, genre ) );
+//			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenre( user, genre ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByUserByGenreLinkBest( userId, genreId ) );
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 			topBestData.setSortColumnNumber( 3 );
@@ -537,7 +537,7 @@ public class PhotoListController {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForMembershipTypeTopBest( membershipType, EnvironmentContext.getCurrentUser() );
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
-			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipType( membershipType ) );
+//			topBestData.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipType( membershipType ) );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 			topBestData.setSortColumnNumber( 2 );
 

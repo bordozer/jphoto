@@ -35,12 +35,13 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	private TranslatorService translatorService;
 	
 	@Override
-	public String getPortalPageLink() {
-		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
-			, urlUtilsService.getPortalPageURL()
-			, translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() )
-			, systemVarsService.getProjectName()
-		);
+	public String getPortalPageLink( final Language language ) {
+		return getPortalPageLink( translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, language ), language );
+	}
+
+	@Override
+	public String getProjectNameLink( final Language language ) {
+		return getPortalPageLink( systemVarsService.getProjectName(), language );
 	}
 
 	@Override
@@ -249,5 +250,13 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
+	}
+
+	private String getPortalPageLink( final String projectName, final Language language ) {
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
+			, urlUtilsService.getPortalPageURL()
+			, translatorService.translate( "Page title: $1: Portal page", language, projectName )
+			, projectName
+		);
 	}
 }

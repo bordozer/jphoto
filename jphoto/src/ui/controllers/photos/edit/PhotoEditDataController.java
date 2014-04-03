@@ -17,7 +17,6 @@ import core.log.LogHelper;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoUploadService;
 import core.services.security.SecurityService;
@@ -36,6 +35,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +105,7 @@ public class PhotoEditDataController {
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Autowired
-	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
+	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@Autowired
 	private ImageFileUtilsService imageFileUtilsService;
@@ -173,7 +173,7 @@ public class PhotoEditDataController {
 
 		setAnonymousOptions( model, false );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoNewData( currentUser, model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser, model.getCurrentStep() ) );
 
 		return DATA_VIEW;
 	}
@@ -208,7 +208,7 @@ public class PhotoEditDataController {
 
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoEditData( photo, user, genre ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo, user, genre ) );
 
 		return DATA_VIEW;
 	}
@@ -251,7 +251,7 @@ public class PhotoEditDataController {
 		}
 		model.setPhotoAlbums( photoAlbums );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoNewData( model.getPhotoAuthor(), model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( model.getPhotoAuthor(), model.getCurrentStep() ) );
 
 		return FILE_UPLOAD_VIEW;
 	}

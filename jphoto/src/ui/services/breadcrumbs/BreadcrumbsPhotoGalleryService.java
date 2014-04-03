@@ -1,6 +1,5 @@
 package ui.services.breadcrumbs;
 
-import ui.controllers.photos.edit.PhotoEditWizardStep;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
@@ -17,11 +16,7 @@ public interface BreadcrumbsPhotoGalleryService {
 
 	PageTitleData getPhotosAllDataBest();
 
-	PageTitleData getPhotoNewData( User user, PhotoEditWizardStep wizardStep );
-
 	PageTitleData getPhotoCardData( final Photo photo, final User user, Genre genre, final String title );
-
-	PageTitleData getPhotoEditData( Photo photo, User user, Genre genre );
 
 	PageTitleData getPhotoNotFoundData();
 

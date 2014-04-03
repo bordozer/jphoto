@@ -1,5 +1,6 @@
 package ui.services.breadcrumbs;
 
+import core.context.EnvironmentContext;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class PageTitleUtilsServiceImpl implements PageTitleUtilsService {
 
 	@Override
 	public String getBreadcrumbsDataString( final String... strings ) {
-		return getDataString( entityLinkUtilsService.getPortalPageLink(), strings );
+		return getDataString( entityLinkUtilsService.getPortalPageLink( EnvironmentContext.getLanguage() ), strings );
 	}
 
 	@Override
@@ -50,6 +51,6 @@ public class PageTitleUtilsServiceImpl implements PageTitleUtilsService {
 			elements[ i++ ] = element;
 		}
 
-		return getDataString( entityLinkUtilsService.getPortalPageLink(), elements );
+		return getDataString( entityLinkUtilsService.getPortalPageLink( EnvironmentContext.getLanguage() ), elements );
 	}
 }

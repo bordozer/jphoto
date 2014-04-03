@@ -80,7 +80,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getPortalPageURL() {
-		return String.format( "%s%s", getServerUrlClosed(), getContextWithPrefix() );
+		return String.format( "%s%s/", getServerUrlClosed(), getContextWithPrefix() );
 	}
 
 	@Override

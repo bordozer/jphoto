@@ -26,21 +26,59 @@ public class BreadcrumbsBuilder {
 		this.services = services;
 	}
 
+	public static BreadcrumbsBuilder breadcrumbs( final Services services ) {
+		return new BreadcrumbsBuilder( services ).addPortalPageLinkBreadcrumb();
+	}
+
+	public static BreadcrumbsBuilder pageTitle( final AbstractBreadcrumb breadcrumb, final Services services ) {
+		return new BreadcrumbsBuilder( services ).addProjectNameBreadcrumb().add( breadcrumb );
+	}
+
+	public static BreadcrumbsBuilder pageHeader( final AbstractBreadcrumb breadcrumb, final Services services ) {
+		return new BreadcrumbsBuilder( services ).add( breadcrumb );
+	}
+
 	public static BreadcrumbsBuilder getInstance( final Services services ) {
 		return new BreadcrumbsBuilder( services );
 	}
 
-	public BreadcrumbsBuilder addPortalPageBreadcrumb() {
-		breadcrumbs.add( new MainPageBreadcrumb( services ) );
+	public BreadcrumbsBuilder add( final AbstractBreadcrumb breadcrumb ) {
+		breadcrumbs.add( breadcrumb );
 		return this;
 	}
+
+	public BreadcrumbsBuilder addPortalPageBreadcrumb() {
+		breadcrumbs.add( new PortalPageBreadcrumb( services ) );
+		return this;
+	}
+
 	public BreadcrumbsBuilder addPortalPageLinkBreadcrumb() {
-		breadcrumbs.add( new MainPageLinkBreadcrumb( services ) );
+		breadcrumbs.add( new PortalPageLinkBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addProjectNameBreadcrumb() {
+		breadcrumbs.add( new ProjectNameBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addProjectNameLinkBreadcrumb() {
+		breadcrumbs.add( new ProjectNameLinkBreadcrumb( services ) );
 		return this;
 	}
 
 	public BreadcrumbsBuilder addPhotoGalleryBreadcrumb() {
 		breadcrumbs.add( new PhotoGalleryBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addPhotoUploadBreadcrumb() {
+		breadcrumbs.add( new PhotoUploadBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addPhotoEditBreadcrumb() {
+		breadcrumbs.add( new PhotoEditBreadcrumb( services ) );
 		return this;
 	}
 
@@ -71,6 +109,11 @@ public class BreadcrumbsBuilder {
 
 	public BreadcrumbsBuilder addPhotosByGenreBreadcrumb( final Genre genre ) {
 		breadcrumbs.add( new PhotosByGenreBreadcrumb( genre, services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addPhotosByUserBreadcrumb( final User user ) {
+		breadcrumbs.add( new PhotosByUserBreadcrumb( user, services ) );
 		return this;
 	}
 

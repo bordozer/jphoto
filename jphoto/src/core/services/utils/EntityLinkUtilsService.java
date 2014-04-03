@@ -18,7 +18,7 @@ public interface EntityLinkUtilsService {
 
 	String BEAN_NAME = "entityLinkUtilsService";
 
-	String getPortalPageLink();
+	String getPortalPageLink( final Language language );
 
 	String getUserCardLink( User user, final Language language );
 
@@ -71,4 +71,6 @@ public interface EntityLinkUtilsService {
 	String getAdminSavedJobLink( SavedJobType jobType, SavedJob savedJob, final Language language );
 
 	String getActivityStreamRootLink( final Language language );
+
+	String getProjectNameLink( Language language );
 }
