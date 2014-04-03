@@ -69,11 +69,12 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	public PageTitleData getPhotoActivitiesBreadcrumbs( final Photo photo, final User accessor ) {
 
 		final String title = title( photo, accessor ).photoName( photo ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( new PhotoNameBreadcrumb( photo, services ), services ).build();
+		final TranslatableStringBreadcrumb activities = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo activities", services );
+		final String header = BreadcrumbsBuilder.pageHeader( activities, services ).build();
 
 		final String breadcrumbs = userPhoto( photo, accessor )
-			.photoName( photo )
-			.translatableString( "Breadcrumbs: Photo activities" )
+			.photoCardLink( photo )
+			.add( activities )
 			.build( accessor.getLanguage() );
 
 		return new PageTitleData( title, header, breadcrumbs );
