@@ -27,4 +27,14 @@
 		<ru><![CDATA[Лента событий]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Breadcrumbs: Photo previews</nerd>
+		<ru><![CDATA[Просмотры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Photo appraisement</nerd>
+		<ru><![CDATA[Оценки]]></ru>
+	</translation>
+
 </translations>

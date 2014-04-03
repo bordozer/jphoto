@@ -2,27 +2,12 @@ package ui.services.breadcrumbs;
 
 import core.context.EnvironmentContext;
 import core.general.activity.ActivityType;
-import core.general.genre.Genre;
-import core.general.photo.Photo;
-import core.general.user.User;
-import core.services.entry.GenreService;
-import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
-import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PageTitleServiceImpl implements PageTitleService {
-
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private GenreService genreService;
-
-	@Autowired
-	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
@@ -31,26 +16,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Autowired
-	private SecurityService securityService;
-
-	@Autowired
 	private TranslatorService translatorService;
-
-	@Override
-	public PageTitleData userPhotoVotingData( final Photo photo, final User accessor ) {
-		final User photoAuthor = userService.load( photo.getUserId() );
-		final Genre genre = genreService.load( photo.getGenreId() );
-
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoTitleForHiddenAuthor( photo, genre, "Votes" ) : breadcrumbsPhotoGalleryService.getUserPhotoVotingData( photoAuthor, photo, genre );
-	}
-
-	@Override
-	public PageTitleData userPhotoPreviewsData( final Photo photo, final User accessor ) {
-		final User photoAuthor = userService.load( photo.getUserId() );
-		final Genre genre = genreService.load( photo.getGenreId() );
-
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoTitleForHiddenAuthor( photo, genre, "Previews" ) : breadcrumbsPhotoGalleryService.getUserPhotoPreviewsData( photoAuthor, photo, genre );
-	}
 
 	@Override
 	public PageTitleData getActivityStreamData( final ActivityType activityType ) {

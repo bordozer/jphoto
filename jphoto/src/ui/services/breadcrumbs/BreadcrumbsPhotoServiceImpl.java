@@ -7,7 +7,9 @@ import core.services.system.Services;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
-import ui.services.breadcrumbs.items.*;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.PhotoNameBreadcrumb;
+import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
@@ -67,9 +69,22 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 
 	@Override
 	public PageTitleData getPhotoActivitiesBreadcrumbs( final Photo photo, final User accessor ) {
+		return getPhotoFullBreadcrumbs( photo, accessor, "Breadcrumbs: Photo activities" );
+	}
 
+	@Override
+	public PageTitleData getUserPhotoPreviewsBreadcrumbs( final Photo photo, final User accessor ) {
+		return getPhotoFullBreadcrumbs( photo, accessor, "Breadcrumbs: Photo previews" );
+	}
+
+	@Override
+	public PageTitleData getPhotoAppraisementBreadcrumbs( final Photo photo, final User accessor ) {
+		return getPhotoFullBreadcrumbs( photo, accessor, "Breadcrumbs: Photo appraisement" );
+	}
+
+	private PageTitleData getPhotoFullBreadcrumbs( final Photo photo, final User accessor, final String breadcrumb ) {
 		final String title = title( photo, accessor ).photoName( photo ).build();
-		final TranslatableStringBreadcrumb activities = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo activities", services );
+		final TranslatableStringBreadcrumb activities = new TranslatableStringBreadcrumb( breadcrumb, services );
 		final String header = BreadcrumbsBuilder.pageHeader( activities, services ).build();
 
 		final String breadcrumbs = userPhoto( photo, accessor )

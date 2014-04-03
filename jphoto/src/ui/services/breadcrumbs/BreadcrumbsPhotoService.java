@@ -14,4 +14,8 @@ public interface BreadcrumbsPhotoService {
 	PageTitleData getPhotoCardBreadcrumbs( final Photo photo, final User accessor );
 
 	PageTitleData getPhotoActivitiesBreadcrumbs( final Photo photo, final User accessor );
+
+	PageTitleData getUserPhotoPreviewsBreadcrumbs( final Photo photo, final User accessor );
+
+	PageTitleData getPhotoAppraisementBreadcrumbs( final Photo photo, final User accessor );
 }

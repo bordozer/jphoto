@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>activity stream: uploaded photo $1</nerd>
+		<ru><![CDATA[загрузил(а) работу '$1']]></ru>
+	</translation>
+
+</translations>

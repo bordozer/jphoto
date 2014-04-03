@@ -72,24 +72,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotoNotFoundData() {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String tran = translatorService.translate( "Photo not found", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), tran );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	@Override
 	public PageTitleData getUserPhotoVotingData( final User user, final Photo photo, final Genre genre ) {
 		return photoActionsDetails( user, photo, genre, translatorService.translate( "Votes", EnvironmentContext.getLanguage() ) );
-	}
-
-	@Override
-	public PageTitleData getUserPhotoPreviewsData( final User user, final Photo photo, final Genre genre ) {
-		return photoActionsDetails( user, photo, genre, translatorService.translate( "Previews", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.PageTitleService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
@@ -41,7 +41,7 @@ public class PhotoPreviewsController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleService pageTitleService;
+	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoPreviewsModel prepareModel() {
@@ -69,7 +69,7 @@ public class PhotoPreviewsController {
 
 		model.setPhotoPreviewWrapper( photoService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() ) );
 
-		model.setPageTitleData( pageTitleService.userPhotoPreviewsData( photo, EnvironmentContext.getCurrentUser() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getUserPhotoPreviewsBreadcrumbs( photo, EnvironmentContext.getCurrentUser() ) );
 
 		return VIEW;
 	}

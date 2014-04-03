@@ -7,7 +7,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.PageTitleService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
@@ -51,7 +51,7 @@ public class PhotoMarkListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleService pageTitleService;
+	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
@@ -83,7 +83,7 @@ public class PhotoMarkListController {
 
 		model.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 
-		model.setPageTitleData( pageTitleService.userPhotoVotingData( photo, EnvironmentContext.getCurrentUser() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getPhotoAppraisementBreadcrumbs( photo, EnvironmentContext.getCurrentUser() ) );
 
 		return model;
 	}
