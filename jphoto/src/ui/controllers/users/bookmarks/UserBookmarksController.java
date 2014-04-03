@@ -8,7 +8,7 @@ import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GroupOperationService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
@@ -55,7 +55,7 @@ public class UserBookmarksController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
@@ -119,7 +119,7 @@ public class UserBookmarksController {
 		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.PHOTO, showIconsForFavoriteEntryTypes );
 
 		final User user = userService.load( userId );
-		model.setPageTitleData( pageTitleUserUtilsService.getPhotosOfUserFavoriteMembers( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembers( user ) );
 
 		return VIEW;
 	}
@@ -168,7 +168,7 @@ public class UserBookmarksController {
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getFavoriteEntry( user, entryType ) );
+		model.setPageTitleData( breadcrumbsUserService.getFavoriteEntry( user, entryType ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 	}
 

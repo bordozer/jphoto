@@ -4,7 +4,7 @@ import core.context.EnvironmentContext;
 import core.general.img.Dimension;
 import core.general.user.User;
 import core.log.LogHelper;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -46,7 +46,7 @@ public class UserAvatarController {
 	private TempFileUtilsService tempFileUtilsService;
 	
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
@@ -90,7 +90,7 @@ public class UserAvatarController {
 			model.setCurrentAvatarFile( userAvatarFile );
 		}
 
-		model.getPageModel().setPageTitleData( pageTitleUserUtilsService.setUserAvatarData( model.getUser() ) );
+		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarData( model.getUser() ) );
 
 		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 
@@ -111,7 +111,7 @@ public class UserAvatarController {
 
 		model.setBindingResult( result );
 
-		model.getPageModel().setPageTitleData( pageTitleUserUtilsService.setUserAvatarData( model.getUser() ) );
+		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarData( model.getUser() ) );
 
 		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 

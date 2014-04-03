@@ -2,7 +2,7 @@ package admin.controllers.configuration.activation;
 
 import admin.controllers.configuration.list.SystemConfigurationListController;
 import core.general.configuration.SystemConfiguration;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import org.apache.commons.lang.StringUtils;
@@ -30,7 +30,7 @@ public class SystemConfigurationActivationController {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@ModelAttribute( MODEL_NAME )
 	public SystemConfigurationActivationModel prepareModel( final HttpServletRequest request ) {
@@ -50,7 +50,7 @@ public class SystemConfigurationActivationController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String edit( final @ModelAttribute( MODEL_NAME ) SystemConfigurationActivationModel model ) {
-		model.getPageModel().setPageTitleData( pageTitleAdminUtilsService.setActiveConfigurationData() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.setActiveConfigurationData() );
 
 		return EDIT_VIEW;
 	}

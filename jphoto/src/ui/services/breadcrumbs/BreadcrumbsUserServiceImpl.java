@@ -14,7 +14,7 @@ import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.StringUtilities;
 
-public class PageTitleUserUtilsServiceImpl implements PageTitleUserUtilsService {
+public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	public static final String USER_ROOT = "Members";
 	

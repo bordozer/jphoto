@@ -2,7 +2,7 @@ package admin.controllers.anonymousDays;
 
 import core.general.configuration.ConfigurationKey;
 import core.services.entry.AnonymousDaysService;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class AnonymousDaysAdminController {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -60,7 +60,7 @@ public class AnonymousDaysAdminController {
 	}
 
 	private void initModel( final AnonymousDaysAdminModel model, final int year ) {
-		model.setPageTitleData( pageTitleAdminUtilsService.getAnonymousDaysData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAnonymousDaysData() );
 		model.setAnonymousDays( anonymousDaysService.loadAll() );
 		model.setAnonymousPeriod( configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_PERIOD ) );
 		model.setAnonymousDaysForYear( year );

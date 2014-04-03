@@ -7,7 +7,7 @@ import core.context.EnvironmentContext;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.user.UserService;
@@ -42,7 +42,7 @@ public class UserCardController {
 	private UserCardModelFillService userCardModelFillService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private Services services;
@@ -119,7 +119,7 @@ public class UserCardController {
 		final AbstractUserCardModelFillStrategy fillStrategy = AbstractUserCardModelFillStrategy.getInstance( model, userCardTab, pagingModel, userCardModelFillService );
 		fillStrategy.fillModel();
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserCardData( user, userCardTab ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserCardData( user, userCardTab ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )

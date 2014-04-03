@@ -7,7 +7,7 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.CacheServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
@@ -54,7 +54,7 @@ public class ConfigurationEditController {
 	private CacheServiceImpl cacheService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -84,7 +84,7 @@ public class ConfigurationEditController {
 
 		model.setConfigurationMap( configurationService.getSystemConfigurationParametersMap( systemConfiguration ) );
 
-		model.getPageModel().setPageTitleData( pageTitleAdminUtilsService.getAdminConfigurationNew() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminConfigurationNew() );
 
 		model.setRankInGenrePointsMap( getUserGenreRankPointsMap( model ) );
 
@@ -187,9 +187,9 @@ public class ConfigurationEditController {
 	private PageTitleData getPageData( final ConfigurationEditModel model, final ConfigurationTab configurationTab ) {
 		final PageTitleData pageTitleData;
 		if ( configurationTab != null ) {
-			pageTitleData = pageTitleAdminUtilsService.getAdminConfigurationEditTabData( model.getSystemConfiguration().getId(), model.getSystemConfiguration(), configurationTab );
+			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditTabData( model.getSystemConfiguration().getId(), model.getSystemConfiguration(), configurationTab );
 		} else {
-			pageTitleData = pageTitleAdminUtilsService.getAdminConfigurationEditData( model.getSystemConfiguration() );
+			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditData( model.getSystemConfiguration() );
 		}
 		return pageTitleData;
 	}

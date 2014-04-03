@@ -4,7 +4,7 @@ import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.PageTitleGenreUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsGenreService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -41,7 +41,7 @@ public class GenreListController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
-	private PageTitleGenreUtilsService pageTitleGenreUtilsService;
+	private BreadcrumbsGenreService breadcrumbsGenreService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -74,7 +74,7 @@ public class GenreListController {
 		}
 		model.setGenrePhotoVotingCategoriesMap( genrePhotoVotingCategoriesMap );*/
 
-		model.setPageTitleData( pageTitleGenreUtilsService.getGenreListData() );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreListData() );
 
 		return VIEW;
 	}

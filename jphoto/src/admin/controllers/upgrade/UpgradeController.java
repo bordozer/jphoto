@@ -9,7 +9,7 @@ import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.context.EnvironmentContext;
 import core.exceptions.UpgradeException;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.TranslatorService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -54,7 +54,7 @@ public class UpgradeController {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@ModelAttribute( MODEL_NAME )
 	public UpgradeModel prepareModel() {
@@ -87,7 +87,7 @@ public class UpgradeController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showForm( final @ModelAttribute( MODEL_NAME ) UpgradeModel model ) {
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getUpgradeTasksListData() );
+		model.setPageTitleData( breadcrumbsAdminService.getUpgradeTasksListData() );
 
 		return VIEW;
 	}
@@ -124,7 +124,7 @@ public class UpgradeController {
 		final int done = upgradeMonitor.getDoneUpgradeTasks();
 		final int error = upgradeMonitor.getErrorUpgradeTasks();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getUpgradeData( upgradeMonitor.getUpgradeState(), done, totalUpgradeTasks, error ) );
+		model.setPageTitleData( breadcrumbsAdminService.getUpgradeData( upgradeMonitor.getUpgradeState(), done, totalUpgradeTasks, error ) );
 
 		return VIEW_PROGRESS;
 	}

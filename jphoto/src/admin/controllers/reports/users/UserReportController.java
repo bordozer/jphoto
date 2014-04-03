@@ -1,7 +1,7 @@
 package admin.controllers.reports.users;
 
 import core.general.user.User;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserReportController {
 	private static final String VIEW = "admin/reports/users/UsersReport";
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private UserService userService;
@@ -35,7 +35,7 @@ public class UserReportController {
 	public UserReportModel prepareModel() {
 		final UserReportModel model = new UserReportModel();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getUsersReportTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getUsersReportTitleData() );
 
 		return model;
 	}

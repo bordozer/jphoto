@@ -7,7 +7,7 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.services.dao.PrivateMessageDaoImpl;
 import core.services.entry.PrivateMessageService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
 import core.services.user.UserService;
@@ -55,7 +55,7 @@ public class PrivateMessageListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -153,7 +153,7 @@ public class PrivateMessageListController {
 
 		markMessagesAsReadIfNecessary( receivedMessages, forUser );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
 	}
@@ -247,7 +247,7 @@ public class PrivateMessageListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPrivateMessagesListData( forUser ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListData( forUser ) );
 
 		return VIEW;
 	}

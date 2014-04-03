@@ -8,7 +8,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsService {
+public class BreadcrumbsGenreServiceImpl implements BreadcrumbsGenreService {
 
 	public static final String GENRE_ROOT = "Photo categories";
 
@@ -16,7 +16,7 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 	private PageTitleUtilsService pageTitleUtilsService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
@@ -28,8 +28,8 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 	public PageTitleData getGenreListData() {
 		final String rootTranslated = getGenreRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated );
+		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -39,8 +39,8 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 		final String rootTranslated = getGenreRootTranslated();
 		final String tran = translatorService.translate( "New", EnvironmentContext.getLanguage() );
 
-		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() ), tran );
+		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated, tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -52,10 +52,10 @@ public class PageTitleGenreUtilsServiceImpl implements PageTitleGenreUtilsServic
 
 		final Language language = EnvironmentContext.getCurrentUser().getLanguage();
 
-		final String title = pageTitleUtilsService.getTitleDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), rootTranslated
+		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated
 			, translatorService.translateGenre( genre, language ), tran );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( pageTitleAdminUtilsService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() )
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getPhotosByGenreLink( genre, language ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );

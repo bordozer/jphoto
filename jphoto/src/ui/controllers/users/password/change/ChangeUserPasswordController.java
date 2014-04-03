@@ -2,7 +2,7 @@ package ui.controllers.users.password.change;
 
 import core.context.EnvironmentContext;
 import core.general.user.User;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
@@ -25,7 +25,7 @@ public class ChangeUserPasswordController {
 	private static final String VIEW_DONE = "users/password/change/ChangeUserPasswordDone";
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private UserService userService;
@@ -58,7 +58,7 @@ public class ChangeUserPasswordController {
 
 		final ChangeUserPasswordModel model = new ChangeUserPasswordModel( user );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getChangeUserPasswordData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getChangeUserPasswordData( user ) );
 		model.setDataRequirementService( dataRequirementService );
 
 		return model;

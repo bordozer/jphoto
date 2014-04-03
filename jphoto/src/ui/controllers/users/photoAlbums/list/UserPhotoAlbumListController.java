@@ -2,7 +2,7 @@ package ui.controllers.users.photoAlbums.list;
 
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
@@ -36,7 +36,7 @@ public class UserPhotoAlbumListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@ModelAttribute( MODEL_NAME )
 	public UserPhotoAlbumListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
@@ -65,7 +65,7 @@ public class UserPhotoAlbumListController {
 		}
 		model.setUserPhotoAlbumsQtyMap( userPhotoAlbumsQtyMap );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPhotoAlbumsData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsData( user ) );
 
 		return VIEW;
 	}

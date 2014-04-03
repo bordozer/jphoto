@@ -3,7 +3,7 @@ package admin.controllers.control;
 import core.general.cache.CacheKey;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.PrivateMessageService;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.system.CacheService;
@@ -28,7 +28,7 @@ public class ControlPanelController {
 	private static final String VIEW = "admin/control/ControlPanel";
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -61,7 +61,7 @@ public class ControlPanelController {
 	public ControlPanelModel prepareModel() {
 		final ControlPanelModel model = new ControlPanelModel();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getControlPanelTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getControlPanelTitleData() );
 
 		return model;
 	}

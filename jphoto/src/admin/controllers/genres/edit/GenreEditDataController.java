@@ -5,7 +5,7 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.PageTitleGenreUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsGenreService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -43,7 +43,7 @@ public class GenreEditDataController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
-	private PageTitleGenreUtilsService pageTitleGenreUtilsService;
+	private BreadcrumbsGenreService breadcrumbsGenreService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -70,7 +70,7 @@ public class GenreEditDataController {
 		model.clear();
 
 		model.setNew( true );
-		model.setPageTitleData( pageTitleGenreUtilsService.getGenreNewData() );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreNewData() );
 		model.setPhotoVotingCategories( votingCategoryService.loadAll() );
 
 		return VIEW;
@@ -95,7 +95,7 @@ public class GenreEditDataController {
 		}
 		model.setAllowedVotingCategoryIDs( allowedVotingCategoryIDs );
 
-		model.setPageTitleData( pageTitleGenreUtilsService.getGenreEditData( genre ) );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreEditData( genre ) );
 
 		return VIEW;
 	}

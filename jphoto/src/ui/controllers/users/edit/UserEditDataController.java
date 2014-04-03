@@ -8,7 +8,7 @@ import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -63,7 +63,7 @@ public class UserEditDataController {
 	private DateUtilsService dateUtilsService;
 	
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -112,7 +112,7 @@ public class UserEditDataController {
 		model.setPassword( DEFAULT_USER_PASSWORD );
 		model.setConfirmPassword( DEFAULT_USER_PASSWORD );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserNewData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserNewData() );
 
 		return VIEW;
 	}
@@ -136,7 +136,7 @@ public class UserEditDataController {
 
 		model.setBeingChangedUser( beingChangedUser );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserEditData( beingChangedUser ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserEditData( beingChangedUser ) );
 
 		return VIEW;
 	}

@@ -6,7 +6,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.entry.GroupOperationService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
@@ -47,7 +47,7 @@ public class UserPhotoAlbumPhotosController {
 	private UtilsService utilsService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private PhotoSqlHelperService photoSqlHelperService;
@@ -107,7 +107,7 @@ public class UserPhotoAlbumPhotosController {
 
 		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPhotoAlbumsPhotos( photoAlbum ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsPhotos( photoAlbum ) );
 
 		return VIEW;
 	}

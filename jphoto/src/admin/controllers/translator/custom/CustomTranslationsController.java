@@ -6,7 +6,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.interfaces.CustomTranslatable;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -41,7 +41,7 @@ public class CustomTranslationsController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -67,7 +67,7 @@ public class CustomTranslationsController {
 		model.setTranslationEntryType( TranslationEntryType.GENRE );
 		model.setRedirectToPrefix( "genres" );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getGenresTranslationsTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getGenresTranslationsTitleData() );
 
 		final List<Genre> entries = genreService.loadAll();
 
@@ -90,7 +90,7 @@ public class CustomTranslationsController {
 		model.setTranslationEntryType( TranslationEntryType.VOTING_CATEGORY );
 		model.setRedirectToPrefix( "votingcategories" );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoriesTranslationsTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoriesTranslationsTitleData() );
 
 		final List<PhotoVotingCategory> entries = votingCategoryService.loadAll();
 

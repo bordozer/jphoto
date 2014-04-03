@@ -9,7 +9,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.dao.UserDaoImpl;
 import core.services.menu.EntryMenuService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
@@ -67,7 +67,7 @@ public class UserListController {
 	private UrlUtilsService urlUtilsService;
 	
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -126,7 +126,7 @@ public class UserListController {
 
 		model.setUserList( users );
 		model.setUserListDataMap( getUserListDataMap( users ) );
-		model.setPageTitleData( pageTitleUserUtilsService.getUserListData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListData() );
 
 		model.setShowEditIcons( securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) && configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_USER_DATA ) );
 
@@ -151,12 +151,12 @@ public class UserListController {
 		model.setUserList( users );
 
 		model.setUserListDataMap( getUserListDataMap( users ) );
-		model.setPageTitleData( pageTitleUserUtilsService.getUserListData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListData() );
 
 		model.setMembershipType( membershipType );
 
 		filterModel.clear();
-		model.setPageTitleData( pageTitleUserUtilsService.getUsersByMembershipType( membershipType ) );
+		model.setPageTitleData( breadcrumbsUserService.getUsersByMembershipType( membershipType ) );
 		model.setUserListTitle( StringUtils.EMPTY );
 
 		filterModel.setMembershipTypeList( Lists.<Integer>newArrayList( typeId ) );
@@ -181,7 +181,7 @@ public class UserListController {
 		final SqlIdsSelectQuery selectIdsQuery = userSqlUtilsService.getAddedToFavoritesBySQL( pagingModel, userId );
 
 		final User user = userService.load( userId );
-		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, pageTitleUserUtilsService.getAddedToFavoritesByEntry( user ) );
+		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getAddedToFavoritesByEntry( user ) );
 
 		return VIEW;
 	}
@@ -236,7 +236,7 @@ public class UserListController {
 		filterModel.setFilterUserName( filterData.getFilterUserName() );
 		filterModel.setMembershipTypeList( filterData.getMembershipTypeIds() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserListByFilter() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListByFilter() );
 
 		return VIEW;
 	}
@@ -245,7 +245,7 @@ public class UserListController {
 	public String searchPost( final UserListModel model, final @ModelAttribute( USER_FILTER_MODEL ) UserFilterModel filterModel
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final HttpServletRequest request  ) {
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserListByFilter() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListByFilter() );
 
 		final BindingResult bindingResult = new BindException( filterModel, "" );
 		filterValidator.validate( filterModel, bindingResult );
@@ -325,7 +325,7 @@ public class UserListController {
 		final SqlIdsSelectQuery selectIdsQuery = userSqlUtilsService.getUsersFavoritesSQL( pagingModel, userId, entryType );
 
 		final User user = userService.load( userId );
-		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, pageTitleUserUtilsService.getFavoriteEntry( user, entryType ) );
+		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getFavoriteEntry( user, entryType ) );
 	}
 
 	private void initUserFavoritesByQuery( final UserListModel model, final UserFilterModel filterModel, final PagingModel pagingModel, final SqlIdsSelectQuery selectIdsQuery, final PageTitleData favoriteEntry ) {

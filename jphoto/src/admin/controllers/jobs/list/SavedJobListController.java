@@ -10,7 +10,7 @@ import admin.services.jobs.*;
 import admin.services.scheduler.SchedulerService;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.security.Services;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
@@ -58,7 +58,7 @@ public class SavedJobListController {
 	private JobExecutionHistoryService jobExecutionHistoryService;
 	
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -109,7 +109,7 @@ public class SavedJobListController {
 		model.setTabJobInfosMap( loaderFactory.getTabJobInfos() );
 
 		model.setJobListTab( JobListTab.TEMPLATES );
-		model.setPageTitleData( pageTitleAdminUtilsService.getJobListData( JobListTab.TEMPLATES ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListData( JobListTab.TEMPLATES ) );
 
 		return JOB_TEMPLATE_VIEW;
 	}
@@ -125,7 +125,7 @@ public class SavedJobListController {
 
 		prepareJobs( model, jobListTab, savedJobs );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getJobListData( jobListTab ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListData( jobListTab ) );
 
 		return SAVED_JOBS_VIEW;
 	}
@@ -145,7 +145,7 @@ public class SavedJobListController {
 
 		prepareJobs( model, jobListTab, savedJobs );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getJobListFilteredByTypeData( jobListTab, savedJobType ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListFilteredByTypeData( jobListTab, savedJobType ) );
 
 		return SAVED_JOBS_VIEW;
 	}
@@ -230,7 +230,7 @@ public class SavedJobListController {
 		model.setTabJobInfosMap( factory.getTabJobInfos() );
 
 		model.setJobListTab( JobListTab.JOB_EXECUTION_HISTORY );
-		model.setPageTitleData( pageTitleAdminUtilsService.getJobListData( JobListTab.JOB_EXECUTION_HISTORY ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListData( JobListTab.JOB_EXECUTION_HISTORY ) );
 
 		model.setJobExecutionStatusIdFilter( jobExecutionStatusId );
 		model.setJobTypeIdFilter( jobTypeId );

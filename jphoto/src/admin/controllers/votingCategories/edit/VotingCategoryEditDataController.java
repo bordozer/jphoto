@@ -3,7 +3,7 @@ package admin.controllers.votingCategories.edit;
 import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
@@ -34,7 +34,7 @@ public class VotingCategoryEditDataController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -61,7 +61,7 @@ public class VotingCategoryEditDataController {
 		model.clear();
 
 		model.setNew( true );
-		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoryNewData() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryNewData() );
 
 		return VIEW;
 	}
@@ -74,7 +74,7 @@ public class VotingCategoryEditDataController {
 
 		initModelFromObject( model, photoVotingCategory );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoryEditData( photoVotingCategory ) );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryEditData( photoVotingCategory ) );
 
 		return VIEW;
 	}

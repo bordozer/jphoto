@@ -2,7 +2,7 @@ package ui.controllers.users.photoAlbums.edit;
 
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
@@ -37,7 +37,7 @@ public class UserPhotoAlbumEditDataController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -64,7 +64,7 @@ public class UserPhotoAlbumEditDataController {
 		final User user = userService.load( userId );
 		model.setUser( user );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPhotoAlbumsNew( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsNew( user ) );
 
 		return VIEW;
 	}
@@ -86,7 +86,7 @@ public class UserPhotoAlbumEditDataController {
 		model.setAlbumName( photoAlbum.getName() );
 		model.setAlbumDescription( photoAlbum.getDescription() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserPhotoAlbumsEdit( photoAlbum ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsEdit( photoAlbum ) );
 
 		return VIEW;
 	}

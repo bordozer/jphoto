@@ -3,7 +3,7 @@ package ui.controllers.users.notifications;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class UserNotificationsControlController {
 	private UserService userService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private FavoritesService favoritesService;
@@ -68,7 +68,7 @@ public class UserNotificationsControlController {
 
 		final User user = model.getUser();
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserNotificationsControlData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserNotificationsControlData( user ) );
 
 		return VIEW;
 	}

@@ -8,7 +8,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PageTitlePhotoCommentUtilsServiceImpl implements PageTitlePhotoCommentUtilsService {
+public class BreadcrumbsPhotoCommentServiceImpl implements BreadcrumbsPhotoCommentService {
 
 	public static final String PHOTO_COMMENTS_ROOT = "comments";
 

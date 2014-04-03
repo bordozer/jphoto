@@ -13,7 +13,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PageTitleAdminUtilsServiceImpl implements PageTitleAdminUtilsService {
+public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;

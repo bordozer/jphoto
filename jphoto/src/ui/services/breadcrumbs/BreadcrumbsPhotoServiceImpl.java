@@ -26,7 +26,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class PageTitlePhotoUtilsServiceImpl implements PageTitlePhotoUtilsService {
+public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;

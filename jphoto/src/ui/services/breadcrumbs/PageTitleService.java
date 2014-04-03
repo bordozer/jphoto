@@ -14,6 +14,4 @@ public interface PageTitleService {
 	PageTitleData userPhotoPreviewsData( final Photo photo, final User accessor );
 
 	PageTitleData getActivityStreamData( final ActivityType activityType );
-
-//	PageTitleData getPhotoActivityStreamData( final Photo photo );
 }

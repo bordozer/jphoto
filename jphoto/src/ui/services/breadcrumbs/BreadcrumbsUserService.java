@@ -9,7 +9,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import elements.PageTitleData;
 
-public interface PageTitleUserUtilsService {
+public interface BreadcrumbsUserService {
 
 	PageTitleData getUserListData();
 

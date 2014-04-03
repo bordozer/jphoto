@@ -6,7 +6,7 @@ import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankPhotoVote;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -48,7 +48,7 @@ public class VotesForUserRankInGenreController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
@@ -98,7 +98,7 @@ public class VotesForUserRankInGenreController {
 
 		model.setRanksInGenrePointsMap( userRankService.getUserGenreRankPointsMap() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getVotesForUserRankInGenreData( user, genre ) );
+		model.setPageTitleData( breadcrumbsUserService.getVotesForUserRankInGenreData( user, genre ) );
 
 		return VIEW;
 	}

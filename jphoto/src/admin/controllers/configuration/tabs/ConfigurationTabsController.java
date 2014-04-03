@@ -3,7 +3,7 @@ package admin.controllers.configuration.tabs;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import core.services.user.UserRankService;
@@ -37,7 +37,7 @@ public class ConfigurationTabsController {
 	private UserRankService userRankService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ConfigurationTabsModel prepareModel( final @PathVariable( "systemConfigurationId" ) int systemConfigurationId ) {
@@ -67,7 +67,7 @@ public class ConfigurationTabsController {
 
 		model.setRankInGenrePointsMap( userRankService.getUserGenreRankPointsMap( model.getSystemConfiguration() ) );
 
-		final PageTitleData pageTitleData = pageTitleAdminUtilsService.getAdminConfigurationInfoData( systemConfiguration );
+		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoData( systemConfiguration );
 		model.getPageModel().setPageTitleData( pageTitleData );
 
 		return VIEW;
@@ -93,7 +93,7 @@ public class ConfigurationTabsController {
 
 		model.setRankInGenrePointsMap( userRankService.getUserGenreRankPointsMap( model.getSystemConfiguration() ) );
 
-		final PageTitleData pageTitleData = pageTitleAdminUtilsService.getAdminConfigurationInfoTbData( systemConfiguration, configurationTab.getName() );
+		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoTbData( systemConfiguration, configurationTab.getName() );
 		model.getPageModel().setPageTitleData( pageTitleData );
 
 		return VIEW;

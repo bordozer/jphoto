@@ -2,7 +2,7 @@ package ui.controllers.users.login;
 
 import core.context.EnvironmentContext;
 import core.general.user.User;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
@@ -48,7 +48,7 @@ public class UserLoginController {
 	private UrlUtilsService urlUtilsService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -66,7 +66,7 @@ public class UserLoginController {
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( pageTitleUserUtilsService.getUserWrongLogin() );
+			model.setPageTitleData( breadcrumbsUserService.getUserWrongLogin() );
 			return "users/login/Login";
 		}
 

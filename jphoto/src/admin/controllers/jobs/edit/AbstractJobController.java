@@ -9,7 +9,7 @@ import admin.jobs.loaders.SavedJobLoaderFactory;
 import admin.services.jobs.*;
 import core.context.EnvironmentContext;
 import core.log.LogHelper;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
 import core.services.translator.Language;
@@ -49,7 +49,7 @@ public abstract class AbstractJobController {
 	protected JobExecutionHistoryService jobExecutionHistoryService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	protected DateUtilsService dateUtilsService;
@@ -79,7 +79,7 @@ public abstract class AbstractJobController {
 		model.setJobName( job.getJobType().getName() );
 		model.setActive( true );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
 
 		addUsersAndPhotosInfo( model );
 
@@ -107,7 +107,7 @@ public abstract class AbstractJobController {
 
 		final AbstractJob job = model.getJob();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( job.getJobName() ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( job.getJobName() ) );
 
 		initJobFromModel( model );
 
@@ -137,7 +137,7 @@ public abstract class AbstractJobController {
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 
 		if ( historyEntry == null ) {
-			model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( "Job history entry not found" ) );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( "Job history entry not found" ) );
 			return getView( JOB_HISTORY_ENTRY_NOT_FOUND_VIEW, model ).addObject( "jobExecutionHistoryEntryId", jobId );
 		}
 
@@ -164,23 +164,23 @@ public abstract class AbstractJobController {
 		final JobExecutionStatus jobExecutionStatus = historyEntry.getJobExecutionStatus();
 		if ( jobExecutionStatus.isNotActive() ) {
 
-			model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "The job execution finished", getLanguage() ) ) );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "The job execution finished", getLanguage() ) ) );
 			/*if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Finished successfully" ) ) );
+				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Finished successfully" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.STOPPED_BY_USER ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Has been stopped by user" ) ) );
+				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Has been stopped by user" ) ) );
 			}
 
 			if ( jobExecutionStatus == JobExecutionStatus.ERROR ) {
-				model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( "Finished with error" ) ) );
+				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Finished with error" ) ) );
 			}*/
 
 			return getFinishView( model );
 		}
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName(), getLanguage() ) ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName(), getLanguage() ) ) );
 		model.setJob( recreatedFromHistoryEntryJob );
 
 		return getView( PROGRESS_VIEW, model );
@@ -202,7 +202,7 @@ public abstract class AbstractJobController {
 		model.setJobName( savedJob.getName() );
 		model.setActive( savedJob.isActive() );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getJobEditData( savedJob ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobEditData( savedJob ) );
 
 		addUsersAndPhotosInfo( model );
 

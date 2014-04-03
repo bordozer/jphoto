@@ -2,7 +2,7 @@ package ui.controllers.users.team.list;
 
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -36,7 +36,7 @@ public class UserTeamMemberListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@ModelAttribute( MODEL_NAME )
 	public UserTeamMemberListModel prepareModel( final @PathVariable( "userId" ) String _userId ) {
@@ -70,7 +70,7 @@ public class UserTeamMemberListController {
 		}
 		model.setUserTeamMemberPhotosQtyMap( userTeamMemberPhotosQtyMap );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserTeamMemberListData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberListData( user ) );
 
 		return VIEW;
 	}

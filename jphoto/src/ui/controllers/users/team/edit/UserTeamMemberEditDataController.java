@@ -2,7 +2,7 @@ package ui.controllers.users.team.edit;
 
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -37,7 +37,7 @@ public class UserTeamMemberEditDataController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private UrlUtilsServiceImpl urlUtilsService;
@@ -65,7 +65,7 @@ public class UserTeamMemberEditDataController {
 
 		model.setUser( user );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserTeamMemberNewData( model.getUser() ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberNewData( model.getUser() ) );
 
 		return VIEW;
 	}
@@ -95,7 +95,7 @@ public class UserTeamMemberEditDataController {
 		}
 		model.setTeamMemberType( userTeamMember.getTeamMemberType() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserTeamMemberEditData( userTeamMember ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberEditData( userTeamMember ) );
 
 		return VIEW;
 	}

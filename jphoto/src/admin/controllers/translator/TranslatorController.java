@@ -1,6 +1,6 @@
 package admin.controllers.translator;
 
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.*;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
@@ -27,7 +27,7 @@ public class TranslatorController {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@ModelAttribute( MODEL_NAME )
 	public TranslatorModel prepareModel() {
@@ -43,7 +43,7 @@ public class TranslatorController {
 
 		model.setTranslationMode( TranslationMode.TRANSLATED );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
 
 		return VIEW;
 	}
@@ -59,7 +59,7 @@ public class TranslatorController {
 		model.setFilterByLetter( letter );
 		model.setTranslationMode( TranslationMode.TRANSLATED );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
 
 		return VIEW;
 	}
@@ -76,7 +76,7 @@ public class TranslatorController {
 
 		model.setUrlPrefix( "untranslated" );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
 
 		return VIEW;
 	}
@@ -94,7 +94,7 @@ public class TranslatorController {
 
 		model.setUrlPrefix( "untranslated" );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
 
 		return VIEW;
 	}

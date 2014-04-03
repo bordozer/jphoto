@@ -6,7 +6,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
-import ui.services.breadcrumbs.PageTitleUserUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.security.Services;
@@ -49,7 +49,7 @@ public class UserTeamMemberCardController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleUserUtilsService pageTitleUserUtilsService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private PhotoSqlHelperService photoSqlHelperService;
@@ -106,7 +106,7 @@ public class UserTeamMemberCardController {
 
 		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleUserUtilsService.getUserTeamMemberCardData( userTeamMember ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberCardData( userTeamMember ) );
 
 		return VIEW;
 	}

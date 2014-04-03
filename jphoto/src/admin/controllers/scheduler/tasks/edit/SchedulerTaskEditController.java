@@ -10,7 +10,7 @@ import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.scheduler.SchedulerTask;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
@@ -47,7 +47,7 @@ public class SchedulerTaskEditController {
 	private SavedJobService savedJobService;
 	
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 	
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -89,7 +89,7 @@ public class SchedulerTaskEditController {
 		model.setSelectedTaskType( initTaskType );
 		model.setPeriodicalTaskHours( SchedulerTaskEditModel.HOURS );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminSchedulerNewData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewData() );
 
 		return VIEW;
 	}
@@ -114,7 +114,7 @@ public class SchedulerTaskEditController {
 		final Map<SchedulerTaskProperty, CommonProperty> parametersMap = schedulerTask.getExecutionTask().getParametersMap();
 		initModelFromExecutionTaskParameterMap( model, parametersMap );
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
 
 		return VIEW;
 	}
@@ -131,9 +131,9 @@ public class SchedulerTaskEditController {
 	public String schedulerTaskSubmit( @Valid final @ModelAttribute( MODEL_NAME ) SchedulerTaskEditModel model, final BindingResult result ) throws SchedulerException {
 
 		if ( model.getSchedulerTaskId() == 0 ) {
-			model.setPageTitleData( pageTitleAdminUtilsService.getAdminSchedulerNewData() );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewData() );
 		} else {
-			model.setPageTitleData( pageTitleAdminUtilsService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
 		}
 
 		model.setSelectedTaskType( ExecutionTaskType.getById( model.getExecutionTaskTypeId() ) );

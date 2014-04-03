@@ -8,7 +8,7 @@ import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
 import core.services.menu.EntryMenuService;
-import ui.services.breadcrumbs.PageTitlePhotoCommentUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoCommentService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -55,7 +55,7 @@ public class PhotoCommentsListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitlePhotoCommentUtilsService pageTitlePhotoCommentUtilsService;
+	private BreadcrumbsPhotoCommentService breadcrumbsPhotoCommentService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -101,7 +101,7 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( pageTitlePhotoCommentUtilsService.getPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsPhotoCommentService.getPhotoCommentsToUserData( user ) );
 
 		return VIEW;
 	}
@@ -119,7 +119,7 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( false );
 
-		model.setPageTitleData( pageTitlePhotoCommentUtilsService.getUnreadPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsPhotoCommentService.getUnreadPhotoCommentsToUserData( user ) );
 
 		return VIEW;
 	}
@@ -137,7 +137,7 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( pageTitlePhotoCommentUtilsService.getUnreadPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsPhotoCommentService.getUnreadPhotoCommentsToUserData( user ) );
 
 		return VIEW;
 	}

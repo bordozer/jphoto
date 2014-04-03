@@ -3,7 +3,7 @@ package ui.services.breadcrumbs;
 import core.general.user.User;
 import elements.PageTitleData;
 
-public interface PageTitlePhotoCommentUtilsService {
+public interface BreadcrumbsPhotoCommentService {
 
 	PageTitleData getPhotoCommentsToUserData( User user );
 

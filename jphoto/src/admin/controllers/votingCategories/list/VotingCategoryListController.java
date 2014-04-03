@@ -3,7 +3,7 @@ package admin.controllers.votingCategories.list;
 import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -29,7 +29,7 @@ public class VotingCategoryListController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -45,7 +45,7 @@ public class VotingCategoryListController {
 
 		final List<PhotoVotingCategory> list = votingCategoryService.loadAll();
 		model.setPhotoVotingCategories( list );
-		model.setPageTitleData( pageTitleAdminUtilsService.getVotingCategoryList() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryList() );
 
 		return VIEW;
 	}

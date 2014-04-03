@@ -7,7 +7,7 @@ import admin.services.scheduler.SchedulerService;
 import core.context.EnvironmentContext;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsService;
@@ -44,7 +44,7 @@ public class SchedulerTaskListController {
 	private SavedJobService savedJobService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@Autowired
 	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -61,7 +61,7 @@ public class SchedulerTaskListController {
 	public SchedulerTaskListModel prepareModel() throws SchedulerException {
 		final SchedulerTaskListModel model = new SchedulerTaskListModel();
 
-		model.setPageTitleData( pageTitleAdminUtilsService.getAdminSchedulerTaskListData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerTaskListData() );
 
 		setScheduledTaskData( model );
 

@@ -9,7 +9,7 @@ import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
 import elements.PageTitleData;
 
-public interface PageTitleAdminUtilsService {
+public interface BreadcrumbsAdminService {
 
 	PageTitleData getJobListData( JobListTab jobListTab );
 

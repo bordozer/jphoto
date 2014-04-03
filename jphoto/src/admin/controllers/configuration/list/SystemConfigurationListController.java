@@ -1,6 +1,6 @@
 package admin.controllers.configuration.list;
 
-import ui.services.breadcrumbs.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,14 +22,14 @@ public class SystemConfigurationListController {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private PageTitleAdminUtilsService pageTitleAdminUtilsService;
+	private BreadcrumbsAdminService breadcrumbsAdminService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String configurationInfo( final @ModelAttribute( MODEL_NAME ) SystemConfigurationListModel model ) {
 
 		model.setSystemConfigurations( configurationService.getAllSystemConfigurations() );
 
-		model.getPageModel().setPageTitleData( pageTitleAdminUtilsService.getAdminSystemConfigurationListData() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminSystemConfigurationListData() );
 
 		return VIEW;
 	}
