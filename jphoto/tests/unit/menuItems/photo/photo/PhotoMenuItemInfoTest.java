@@ -3,7 +3,7 @@ package menuItems.photo.photo;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.photo.photo.PhotoMenuItemInfo;
 import core.general.user.User;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import core.services.utils.UrlUtilsService;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;

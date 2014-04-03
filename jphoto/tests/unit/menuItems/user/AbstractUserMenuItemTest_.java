@@ -2,7 +2,7 @@ package menuItems.user;
 
 import common.AbstractTestCase;
 import core.services.security.SecurityService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;

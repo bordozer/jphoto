@@ -7,7 +7,7 @@ import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import core.services.user.UserTeamService;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;

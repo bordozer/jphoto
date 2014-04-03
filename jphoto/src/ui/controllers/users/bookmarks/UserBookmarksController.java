@@ -11,7 +11,7 @@ import core.services.entry.GroupOperationService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;

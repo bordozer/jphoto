@@ -10,7 +10,7 @@ import core.services.entry.ActivityStreamService;
 import ui.services.breadcrumbs.PageTitleService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;

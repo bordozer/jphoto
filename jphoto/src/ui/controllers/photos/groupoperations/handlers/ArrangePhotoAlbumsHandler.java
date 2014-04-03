@@ -7,7 +7,7 @@ import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.user.UserPhotoAlbumService;
 import core.services.utils.EntityLinkUtilsService;
 

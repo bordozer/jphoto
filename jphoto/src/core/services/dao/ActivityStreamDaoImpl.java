@@ -5,7 +5,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.photo.PhotoService;
-import core.services.security.Services;
+import core.services.system.Services;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

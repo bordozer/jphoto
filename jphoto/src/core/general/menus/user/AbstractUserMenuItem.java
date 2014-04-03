@@ -2,7 +2,7 @@ package core.general.menus.user;
 
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 import utils.UserUtils;
 
 public abstract class AbstractUserMenuItem extends AbstractEntryMenuItem<User> {

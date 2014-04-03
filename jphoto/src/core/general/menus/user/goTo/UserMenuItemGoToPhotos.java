@@ -4,7 +4,7 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.menus.user.AbstractUserMenuItem;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 

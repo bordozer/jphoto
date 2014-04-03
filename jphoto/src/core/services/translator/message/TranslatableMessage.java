@@ -4,7 +4,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
 
@@ -51,6 +51,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addUserCardLinkParameter( final User user ) {
+		messageParameters.add( new UserCardLinkParameter( user, services ) );
+		return this;
+	}
+
 	public TranslatableMessage addPhotosByGenreLinkParameter( final Genre genre ) {
 		messageParameters.add( new PhotosByGenreLinkParameter( genre, services ) );
 		return this;
@@ -58,11 +63,6 @@ public class TranslatableMessage {
 
 	public TranslatableMessage addPhotosByGenreLinkParameter( final int genreId ) {
 		messageParameters.add( new PhotosByGenreLinkParameter( services.getGenreService().load( genreId ), services ) );
-		return this;
-	}
-
-	public TranslatableMessage addUserCardLinkParameter( final User user ) {
-		messageParameters.add( new UserCardLinkParameter( user, services ) );
 		return this;
 	}
 

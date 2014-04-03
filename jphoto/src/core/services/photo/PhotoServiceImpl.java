@@ -29,7 +29,7 @@ import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;

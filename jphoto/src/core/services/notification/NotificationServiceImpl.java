@@ -3,7 +3,7 @@ package core.services.notification;
 import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 

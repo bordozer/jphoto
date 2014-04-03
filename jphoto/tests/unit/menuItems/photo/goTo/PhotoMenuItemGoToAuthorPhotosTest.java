@@ -5,7 +5,7 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;

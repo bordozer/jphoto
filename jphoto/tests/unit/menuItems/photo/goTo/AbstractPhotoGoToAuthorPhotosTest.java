@@ -6,7 +6,7 @@ import core.general.menus.EntryMenuOperationType;
 import core.general.menus.photo.goTo.AbstractPhotoGoToAuthorPhotos;
 import core.general.user.User;
 import core.services.security.SecurityService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import core.services.system.ConfigurationService;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.easymock.EasyMock;

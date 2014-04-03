@@ -2,7 +2,7 @@ package core.services.notification;
 
 import core.general.configuration.ConfigurationKey;
 import core.services.mail.MailBean;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.Language;
 
 public abstract class AbstractSendNotificationStrategy {

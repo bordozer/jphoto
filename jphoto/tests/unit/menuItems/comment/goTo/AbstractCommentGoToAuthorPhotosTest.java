@@ -7,7 +7,7 @@ import core.general.menus.comment.goTo.AbstractCommentGoToAuthorPhotos;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.SecurityService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import core.services.system.ConfigurationService;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;

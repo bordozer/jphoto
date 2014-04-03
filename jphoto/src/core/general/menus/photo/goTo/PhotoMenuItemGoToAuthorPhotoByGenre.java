@@ -5,7 +5,7 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.EntryMenuOperationType;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthorPhotos {
 

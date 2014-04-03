@@ -13,7 +13,7 @@ import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserStatus;
 import core.services.dao.ActivityStreamDao;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.system.CacheService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

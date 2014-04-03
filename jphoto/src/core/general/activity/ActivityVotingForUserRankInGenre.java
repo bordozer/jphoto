@@ -2,7 +2,7 @@ package core.general.activity;
 
 import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

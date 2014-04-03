@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
-import core.services.security.Services;
+import core.services.system.Services;
 
 import java.util.List;
 

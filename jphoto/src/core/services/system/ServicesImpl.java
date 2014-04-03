@@ -1,4 +1,4 @@
-package core.services.security;
+package core.services.system;
 
 import admin.services.jobs.*;
 import admin.services.services.SqlUtilsService;
@@ -11,8 +11,7 @@ import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoRatingService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
-import core.services.system.CacheService;
-import core.services.system.ConfigurationService;
+import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;

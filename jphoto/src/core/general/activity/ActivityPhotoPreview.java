@@ -3,7 +3,7 @@ package core.general.activity;
 import core.general.photo.Photo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.message.EmptyTranslatableMessage;
 import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;

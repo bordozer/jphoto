@@ -3,7 +3,7 @@ package core.general.menus.comment.commands;
 import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public class CommentMenuItemEditCommand extends AbstractEntryMenuItemCommand<PhotoComment> {
 

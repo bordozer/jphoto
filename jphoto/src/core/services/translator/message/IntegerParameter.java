@@ -1,6 +1,6 @@
 package core.services.translator.message;
 
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.Language;
 
 public class IntegerParameter extends AbstractTranslatableMessageParameter {

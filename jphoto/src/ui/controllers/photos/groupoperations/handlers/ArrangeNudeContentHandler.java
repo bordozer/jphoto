@@ -7,7 +7,7 @@ import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
-import core.services.security.Services;
+import core.services.system.Services;
 
 import java.util.List;
 import java.util.Map;

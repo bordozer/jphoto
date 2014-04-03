@@ -9,7 +9,7 @@ import core.services.dao.PrivateMessageDaoImpl;
 import core.services.entry.PrivateMessageService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;

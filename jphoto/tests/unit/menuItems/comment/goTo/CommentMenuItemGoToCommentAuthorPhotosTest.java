@@ -4,7 +4,7 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.goTo.CommentMenuItemGoToCommentAuthorPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;

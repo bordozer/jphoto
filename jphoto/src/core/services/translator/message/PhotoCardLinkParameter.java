@@ -1,7 +1,7 @@
 package core.services.translator.message;
 
 import core.general.photo.Photo;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.Language;
 
 public class PhotoCardLinkParameter extends AbstractTranslatableMessageParameter {

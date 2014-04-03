@@ -8,7 +8,7 @@
 	<bean id="pageTitleService" class="ui.services.breadcrumbs.PageTitleServiceImpl"/>
 	<bean id="menuService" class="core.services.system.MenuServiceImpl"/>
 
-	<bean id="services" class="core.services.security.ServicesImpl"/>
+	<bean id="services" class="core.services.system.ServicesImpl"/>
 
 	<bean id="userService" class="core.services.user.UserServiceImpl"/>
 	<bean id="usersSecurityService" class="core.services.user.UsersSecurityServiceImpl"/>

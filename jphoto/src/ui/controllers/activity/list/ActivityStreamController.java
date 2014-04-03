@@ -6,7 +6,7 @@ import core.general.base.PagingModel;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
 import ui.services.breadcrumbs.PageTitleService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

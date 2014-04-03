@@ -1,29 +1,18 @@
 package core.general.activity;
 
-import core.exceptions.BaseRuntimeException;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.interfaces.Cacheable;
 import core.log.LogHelper;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.EmptyTranslatableMessage;
 import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactory;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Date;
 
 public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity implements Cacheable {

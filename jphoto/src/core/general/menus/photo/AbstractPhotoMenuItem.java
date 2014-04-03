@@ -4,7 +4,7 @@ import core.general.menus.AbstractEntryMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GenreService;
-import core.services.security.Services;
+import core.services.system.Services;
 import utils.UserUtils;
 
 public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo> {

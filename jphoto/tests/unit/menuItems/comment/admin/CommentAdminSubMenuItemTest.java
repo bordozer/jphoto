@@ -5,7 +5,7 @@ import core.general.menus.AbstractEntryMenuItemCommand;
 import core.general.menus.comment.admin.CommentAdminSubMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.junit.Test;
 

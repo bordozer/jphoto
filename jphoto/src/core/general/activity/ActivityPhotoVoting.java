@@ -5,7 +5,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.entry.VotingCategoryService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;

@@ -5,7 +5,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.services.photo.PhotoService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
 

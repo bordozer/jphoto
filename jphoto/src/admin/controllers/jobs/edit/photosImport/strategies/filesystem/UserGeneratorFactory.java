@@ -2,7 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
 import core.general.genre.Genre;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 import java.util.List;
 import java.util.Set;

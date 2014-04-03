@@ -38,7 +38,7 @@ import core.general.photo.PhotoComment;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.services.security.Services;
+import core.services.system.Services;
 
 import java.util.List;
 

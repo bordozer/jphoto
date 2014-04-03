@@ -14,7 +14,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.photo.PhotoCommentService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;

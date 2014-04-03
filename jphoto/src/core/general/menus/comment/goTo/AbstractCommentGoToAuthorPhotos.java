@@ -3,7 +3,7 @@ package core.general.menus.comment.goTo;
 import core.general.menus.comment.AbstractCommentMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public abstract class AbstractCommentGoToAuthorPhotos extends AbstractCommentMenuItem {
 

@@ -1,7 +1,7 @@
 package core.general.menus;
 
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 import org.apache.commons.lang.StringUtils;
 
 public class MenuItemSeparator<T extends PopupMenuAssignable> extends AbstractEntryMenuItem<T> {

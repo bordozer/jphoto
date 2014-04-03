@@ -24,7 +24,7 @@ import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;

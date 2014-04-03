@@ -12,7 +12,7 @@ import core.services.menu.EntryMenuService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
-import core.services.security.Services;
+import core.services.system.Services;
 import core.services.system.ConfigurationService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;

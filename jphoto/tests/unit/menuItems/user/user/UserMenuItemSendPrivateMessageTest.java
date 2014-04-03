@@ -5,7 +5,7 @@ import core.general.menus.user.user.UserMenuItemSendPrivateMessage;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
-import core.services.security.ServicesImpl;
+import core.services.system.ServicesImpl;
 import menuItems.user.AbstractUserMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Before;

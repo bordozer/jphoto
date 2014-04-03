@@ -3,7 +3,7 @@ package core.general.menus.photo.goTo;
 import core.general.menus.photo.AbstractPhotoMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public abstract class AbstractPhotoGoToAuthorPhotos extends AbstractPhotoMenuItem {
 

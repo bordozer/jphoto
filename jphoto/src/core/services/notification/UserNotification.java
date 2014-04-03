@@ -1,7 +1,7 @@
 package core.services.notification;
 
 import core.general.user.User;
-import core.services.security.Services;
+import core.services.system.Services;
 
 public class UserNotification {
 
