@@ -22,7 +22,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 	private GenreService genreService;
 
 	@Autowired
-	private BreadcrumbsPhotoService breadcrumbsPhotoService;
+	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
@@ -41,7 +41,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoService.getPhotoCardForHiddenAuthor( photo, genre, title ) : breadcrumbsPhotoService.getPhotoCardData( photo, photoAuthor, genre, title );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoCardForHiddenAuthor( photo, genre, title ) : breadcrumbsPhotoGalleryService.getPhotoCardData( photo, photoAuthor, genre, title );
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoService.getPhotoTitleForHiddenAuthor( photo, genre, "Votes" ) : breadcrumbsPhotoService.getUserPhotoVotingData( photoAuthor, photo, genre );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoTitleForHiddenAuthor( photo, genre, "Votes" ) : breadcrumbsPhotoGalleryService.getUserPhotoVotingData( photoAuthor, photo, genre );
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class PageTitleServiceImpl implements PageTitleService {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoService.getPhotoTitleForHiddenAuthor( photo, genre, "Previews" ) : breadcrumbsPhotoService.getUserPhotoPreviewsData( photoAuthor, photo, genre );
+		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoTitleForHiddenAuthor( photo, genre, "Previews" ) : breadcrumbsPhotoGalleryService.getUserPhotoPreviewsData( photoAuthor, photo, genre );
 	}
 
 	@Override

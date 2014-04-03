@@ -19,7 +19,7 @@
 	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
 	<bean id="pageTitleAdminUtilsService" class="ui.services.breadcrumbs.BreadcrumbsAdminServiceImpl"/>
 	<bean id="pageTitlePhotoCommentUtilsService" class="ui.services.breadcrumbs.BreadcrumbsPhotoCommentServiceImpl"/>
-	<bean id="pageTitlePhotoUtilsService" class="ui.services.breadcrumbs.BreadcrumbsPhotoServiceImpl"/>
+	<bean id="pageTitlePhotoUtilsService" class="ui.services.breadcrumbs.BreadcrumbsPhotoGalleryServiceImpl"/>
 	<bean id="pageTitleUserUtilsService" class="ui.services.breadcrumbs.BreadcrumbsUserServiceImpl"/>
 	<bean id="pageTitleGenreUtilsService" class="ui.services.breadcrumbs.BreadcrumbsGenreServiceImpl"/>
 

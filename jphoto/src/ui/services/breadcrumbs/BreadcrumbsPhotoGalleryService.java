@@ -11,7 +11,7 @@ import elements.PageTitleData;
 
 import java.util.Date;
 
-public interface BreadcrumbsPhotoService {
+public interface BreadcrumbsPhotoGalleryService {
 
 	PageTitleData getPhotoGalleryBreadcrumbs();
 

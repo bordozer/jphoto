@@ -2,7 +2,7 @@ package ui.controllers.photos.groupoperations;
 
 import ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
 import core.general.photo.group.PhotoGroupOperationType;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 import core.services.system.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +29,7 @@ public class PhotoGroupOperationController {
 	private PhotoGroupOperationValidator photoGroupOperationValidator;
 	
 	@Autowired
-	private BreadcrumbsPhotoService breadcrumbsPhotoService;
+	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
 
 	@Autowired
 	private Services services;
@@ -57,7 +57,7 @@ public class PhotoGroupOperationController {
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( breadcrumbsPhotoService.getPhotoGroupOperationErrorTitleData() );
+			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorTitleData() );
 			return VIEW_ERROR;
 		}
 
@@ -66,7 +66,7 @@ public class PhotoGroupOperationController {
 
 		model.setReturnUrl( request.getHeader( "referer" ) );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getPhotoGroupOperationTitleData( groupOperationType ) );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationTitleData( groupOperationType ) );
 
 		final AbstractGroupOperationHandler groupOperationHandler = AbstractGroupOperationHandler.getInstance( groupOperationType, model, services );
 		groupOperationHandler.fillModel();
@@ -79,7 +79,7 @@ public class PhotoGroupOperationController {
 
 		model.setBindingResult( result );
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( breadcrumbsPhotoService.getPhotoGroupOperationErrorTitleData() );
+			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorTitleData() );
 			return VIEW;
 		}
 

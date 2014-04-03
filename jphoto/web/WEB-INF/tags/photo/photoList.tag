@@ -4,7 +4,7 @@
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsServiceImpl" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
-<%@ tag import="ui.services.breadcrumbs.BreadcrumbsPhotoService" %>
+<%@ tag import="ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>

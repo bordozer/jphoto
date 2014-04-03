@@ -17,7 +17,7 @@ import core.log.LogHelper;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoUploadService;
 import core.services.security.SecurityService;
@@ -105,7 +105,7 @@ public class PhotoEditDataController {
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Autowired
-	private BreadcrumbsPhotoService breadcrumbsPhotoService;
+	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
 
 	@Autowired
 	private ImageFileUtilsService imageFileUtilsService;
@@ -173,7 +173,7 @@ public class PhotoEditDataController {
 
 		setAnonymousOptions( model, false );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getPhotoNewData( currentUser, model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoNewData( currentUser, model.getCurrentStep() ) );
 
 		return DATA_VIEW;
 	}
@@ -208,7 +208,7 @@ public class PhotoEditDataController {
 
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditData( photo, user, genre ) );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoEditData( photo, user, genre ) );
 
 		return DATA_VIEW;
 	}
@@ -251,7 +251,7 @@ public class PhotoEditDataController {
 		}
 		model.setPhotoAlbums( photoAlbums );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getPhotoNewData( model.getPhotoAuthor(), model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoNewData( model.getPhotoAuthor(), model.getCurrentStep() ) );
 
 		return FILE_UPLOAD_VIEW;
 	}

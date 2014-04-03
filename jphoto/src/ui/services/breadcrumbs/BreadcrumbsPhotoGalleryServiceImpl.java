@@ -29,7 +29,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
+public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalleryService {
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
