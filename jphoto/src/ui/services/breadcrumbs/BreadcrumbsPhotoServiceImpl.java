@@ -1,17 +1,15 @@
 package ui.services.breadcrumbs;
 
-import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;
-import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
 import ui.services.breadcrumbs.items.*;
 
-import static com.google.common.collect.Lists.newArrayList;
+import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 
@@ -19,24 +17,19 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	private Services services;
 
 	@Autowired
-	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
-
-	@Autowired
 	private SecurityService securityService;
-
-	@Autowired
-	private ConfigurationService configurationService;
 
 	@Override
 	public PageTitleData getUploadPhotoBreadcrumbs( final User user, final PhotoEditWizardStep wizardStep ) {
 
-		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo uploading", services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+		final TranslatableStringBreadcrumb photoUploadingText = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo uploading", services );
 
-		final String breadcrumbs = portalPage()
+		final String title = BreadcrumbsBuilder.pageTitle( user, photoUploadingText, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( photoUploadingText, services ).build();
+
+		final String breadcrumbs = portalPage( services )
 			.userCardLink( user )
-			.add( breadcrumb )
+			.add( photoUploadingText )
 			.translatableString( wizardStep.getStepDescription() )
 			.build();
 
@@ -46,14 +39,14 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	@Override
 	public PageTitleData getPhotoEditDataBreadcrumbs( final Photo photo ) {
 
-		final String title = BreadcrumbsBuilder.pageTitle( new PhotoNameBreadcrumb( photo, services ), services ).build();
+		final String title = BreadcrumbsBuilder.pageTitle( photo.getUserId(), new PhotoNameBreadcrumb( photo, services ), services ).build();
 
-		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo editing", services );
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+		final TranslatableStringBreadcrumb photoEditingText = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo editing", services );
+		final String header = BreadcrumbsBuilder.pageHeader( photoEditingText, services ).build();
 
 		final String breadcrumbs = userPhotoWithAuthor( photo )
 			.photoCardLink( photo )
-			.add( breadcrumb )
+			.add( photoEditingText )
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
@@ -62,10 +55,8 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	@Override
 	public PageTitleData getPhotoCardBreadcrumbs( final Photo photo, final User accessor ) {
 
-		final PhotoNameBreadcrumb breadcrumb = new PhotoNameBreadcrumb( photo, services );
-
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+		final String title = title( photo, accessor ).photoName( photo ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( new PhotoNameBreadcrumb( photo, services ), services ).build();
 
 		final String breadcrumbs = userPhoto( photo, accessor )
 			.photoName( photo )
@@ -76,57 +67,53 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 
 	@Override
 	public PageTitleData getPhotoActivitiesBreadcrumbs( final Photo photo, final User accessor ) {
-		return new PageTitleData( "", "", "" ); //getPhotoActivitiesBreadcrumbs( photo, accessor );
+
+		final String title = title( photo, accessor ).photoName( photo ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( new PhotoNameBreadcrumb( photo, services ), services ).build();
+
+		final String breadcrumbs = userPhoto( photo, accessor )
+			.photoName( photo )
+			.translatableString( "Breadcrumbs: Photo activities" )
+			.build( accessor.getLanguage() );
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
-	/*@Override
-	public PageTitleData getPhotoCardForHiddenAuthor( final Photo photo ) {
-		*//*final String rootTranslated = getPhotoRootTranslated();
+	private BreadcrumbsBuilder title( final Photo photo, final User accessor ) {
 
-		final String userAnonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
-		final String fullTitle = pageTitleUtilsService.getTitleDataString( rootTranslated, userAnonymousName, photo.getName(), title );
+		final BreadcrumbsBuilder builder = new BreadcrumbsBuilder( services );
 
-		final List<String> breadcrumbList = newArrayList();
-		breadcrumbList.add( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ) );
-		breadcrumbList.add( entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ) );
-		breadcrumbList.add( userAnonymousName );
-		breadcrumbList.add( StringUtils.isNotEmpty( title ) ? entityLinkUtilsService.getPhotoCardLink( photo, EnvironmentContext.getLanguage() ) : photo.getNameEscaped() );
-		if ( StringUtils.isNotEmpty( title ) ) {
-			breadcrumbList.add( title );
+		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ) {
+			return builder.projectName();
 		}
 
-		final String portalPage = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbList );*//*
-
-		return new PageTitleData( "", "", "" );
-	}*/
-
-	private BreadcrumbsBuilder portalPage() {
-		return BreadcrumbsBuilder.portalPage( services );
+		return builder.projectName().userName( photo.getUserId() );
 	}
 
 	private BreadcrumbsBuilder userPhoto( final Photo photo, final User accessor ) {
 
 		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ) {
-			return userPhotoAnonymously( photo, accessor );
+			return userPhotoAnonymously( photo );
 		}
 
 		return userPhotoWithAuthor( photo );
 	}
 
 	private BreadcrumbsBuilder userPhotoWithAuthor( final Photo photo ) {
-		return portalPage()
+		return portalPage( services )
 			.photoGalleryLink()
+			.photosByGenre( photo.getGenreId() )
 			.userCardLink( photo.getUserId() )
+			.photosByUser( photo.getUserId() )
 			.photosByUserAndGenre( photo.getUserId(), photo.getGenreId() )
-//			.photoName( photo )
 			;
 	}
 
-	private BreadcrumbsBuilder userPhotoAnonymously( final Photo photo, final User accessor ) {
-		return portalPage()
+	private BreadcrumbsBuilder userPhotoAnonymously( final Photo photo ) {
+		return portalPage( services )
 			.photoGalleryLink()
-			.string( configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME ) )
-//			.photoName( photo )
+			.photosByGenre( photo.getGenreId() )
+			.anonymousUser()
 			;
 	}
 }

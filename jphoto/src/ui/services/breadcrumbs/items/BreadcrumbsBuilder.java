@@ -34,6 +34,14 @@ public class BreadcrumbsBuilder {
 		return new BreadcrumbsBuilder( services ).projectName().add( breadcrumb );
 	}
 
+	public static BreadcrumbsBuilder pageTitle( final User user, final AbstractBreadcrumb breadcrumb, final Services services ) {
+		return new BreadcrumbsBuilder( services ).projectName().userName( user ).add( breadcrumb );
+	}
+
+	public static BreadcrumbsBuilder pageTitle( final int userId, final AbstractBreadcrumb breadcrumb, final Services services ) {
+		return pageTitle( getUser( userId, services ), breadcrumb, services );
+	}
+
 	public static BreadcrumbsBuilder pageHeader( final AbstractBreadcrumb breadcrumb, final Services services ) {
 		return new BreadcrumbsBuilder( services ).add( breadcrumb );
 	}
@@ -89,7 +97,21 @@ public class BreadcrumbsBuilder {
 	}
 
 	public BreadcrumbsBuilder userCardLink( final int userId ) {
-		return userCardLink( services.getUserService().load( userId ) );
+		return userCardLink( getUser( userId, services ) );
+	}
+
+	public BreadcrumbsBuilder userName( final User user ) {
+		breadcrumbs.add( new UserNameBreadcrumb( user, services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder userName( final int userId ) {
+		return userName( getUser( userId, services ) );
+	}
+
+	public BreadcrumbsBuilder anonymousUser() {
+		breadcrumbs.add( new AnonymousUserBreadcrumb( services ) );
+		return this;
 	}
 
 	public BreadcrumbsBuilder photoCardLink( final Photo photo ) {
@@ -107,9 +129,17 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
+	public BreadcrumbsBuilder photosByGenre( final int genreId ) {
+		return photosByGenre( getGenre( genreId ) );
+	}
+
 	public BreadcrumbsBuilder photosByUser( final User user ) {
 		breadcrumbs.add( new PhotosByUserBreadcrumb( user, services ) );
 		return this;
+	}
+
+	public BreadcrumbsBuilder photosByUser( final int userId ) {
+		return photosByUser( getUser( userId, services ) );
 	}
 
 	public BreadcrumbsBuilder photosByUserAndGenre( final User user, final Genre genre ) {
@@ -118,7 +148,7 @@ public class BreadcrumbsBuilder {
 	}
 
 	public BreadcrumbsBuilder photosByUserAndGenre( final int userId, final int genreId ) {
-		return photosByUserAndGenre( services.getUserService().load( userId ), services.getGenreService().load( genreId ) );
+		return photosByUserAndGenre( services.getUserService().load( userId ), getGenre( genreId ) );
 	}
 
 	public BreadcrumbsBuilder photoAppraisalCategory( final PhotoVotingCategory photoVotingCategory, final Genre genre ) {
@@ -144,5 +174,13 @@ public class BreadcrumbsBuilder {
 		}
 
 		return builder.substring( 0, builder.length() - 2 );
+	}
+
+	private static User getUser( final int userId, final Services services ) {
+		return services.getUserService().load( userId );
+	}
+
+	private Genre getGenre( final int genreId ) {
+		return services.getGenreService().load( genreId );
 	}
 }
