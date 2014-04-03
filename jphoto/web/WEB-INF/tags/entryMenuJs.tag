@@ -1,6 +1,6 @@
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
-<%@ tag import="core.services.ajax.AjaxService" %>
+<%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ tag import="core.general.menus.comment.ComplaintReasonType" %>
 <%@ tag import="core.services.utils.UrlUtilsService" %>

@@ -27,7 +27,7 @@
 	<bean id="photoRatingService" class="core.services.photo.PhotoRatingServiceImpl"/>
 	<bean id="photoAwardService" class="core.services.photo.PhotoAwardServiceImpl"/>
 	<bean id="userTeamService" class="core.services.user.UserTeamServiceImpl"/>
-	<bean id="ajaxService" class="core.services.ajax.AjaxServiceImpl"/>
+	<bean id="ajaxService" class="ui.services.ajax.AjaxServiceImpl"/>
 
 	<bean id="systemConfigurationLoadService" class="core.services.system.SystemConfigurationLoadServiceImpl" />
 	<bean id="configurationService" class="core.services.system.ConfigurationServiceImpl" init-method="loadSystemConfiguration" />

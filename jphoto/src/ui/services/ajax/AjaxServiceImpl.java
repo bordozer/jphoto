@@ -1,4 +1,4 @@
-package core.services.ajax;
+package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;

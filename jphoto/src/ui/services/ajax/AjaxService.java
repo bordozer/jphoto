@@ -1,4 +1,4 @@
-package core.services.ajax;
+package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import core.dtos.AjaxResultDTO;
