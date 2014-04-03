@@ -14,6 +14,7 @@ import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import elements.menus.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.StringUtilities;
 
 import java.util.Date;
@@ -452,7 +453,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem allPhotosMenu() {
-		final String caption = translatorService.translate( "Photo gallery root", getLanguage() );
+		final String caption = translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, getLanguage() );
 		final String link = urlUtilsService.getAllPhotosLink();
 		return new MenuItem( caption, link );
 	}

@@ -1,10 +1,11 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.services.system.Services;
+import core.services.translator.Language;
 
 import java.sql.Time;
 import java.util.List;
@@ -13,6 +14,9 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class BreadcrumbsBuilder {
 
+	public static final String BREADCRUMBS_PORTAL_PAGE = "Breadcrumbs: Portal page";
+	public static final String BREADCRUMBS_PHOTO_GALLERY_ROOT = "Photo gallery root";
+
 	protected final Services services;
 
 	private final List<AbstractBreadcrumb> breadcrumbs = newArrayList();
@@ -20,7 +24,26 @@ public class BreadcrumbsBuilder {
 	public BreadcrumbsBuilder( final Services services ) {
 		this.services = services;
 
+//		breadcrumbs.add( new MainPageBreadcrumb( services ) );
+	}
+
+	public BreadcrumbsBuilder addPortalPageBreadcrumb() {
 		breadcrumbs.add( new MainPageBreadcrumb( services ) );
+		return this;
+	}
+	public BreadcrumbsBuilder addPortalPageLinkBreadcrumb() {
+		breadcrumbs.add( new MainPageLinkBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addPhotoGalleryBreadcrumb() {
+		breadcrumbs.add( new PhotoGalleryBreadcrumb( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder addPhotoGalleryLinkBreadcrumb() {
+		breadcrumbs.add( new PhotoGalleryLinkBreadcrumb( services ) );
+		return this;
 	}
 
 	public BreadcrumbsBuilder addStringBreadcrumb( final String breadcrumb ) {
@@ -54,12 +77,23 @@ public class BreadcrumbsBuilder {
 	}
 
 	public BreadcrumbsBuilder addPhotoAppraisalCategoryParameter( final PhotoVotingCategory photoVotingCategory, final Genre genre ) {
-		breadcrumbs.add( new PhotoAppraisalCategoryParameter( photoVotingCategory, services ) );
+		breadcrumbs.add( new PhotoAppraisalCategoryBreadcrumb( photoVotingCategory, services ) );
 		return this;
 	}
 
 	public BreadcrumbsBuilder addFormattedDateBreadcrumb( final Time date, final Genre genre ) {
 		breadcrumbs.add( new FormattedDateBreadcrumb( date, services ) );
 		return this;
+	}
+
+	public String build( final Language language ) {
+
+		final StringBuilder builder = new StringBuilder(  );
+
+		for ( final AbstractBreadcrumb breadcrumb : breadcrumbs ) {
+			builder.append( breadcrumb.getValue( language ) ).append( " / " );
+		}
+
+		return builder.substring( 0, builder.length() - 2 );
 	}
 }

@@ -1,4 +1,4 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.general.photo.Photo;
 import core.services.system.Services;

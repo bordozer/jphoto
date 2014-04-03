@@ -15,6 +15,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.PhotoUtils;
 import utils.StringUtilities;
 
@@ -53,7 +54,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		if ( criterias.isTopBestPhotoList() ) {
 			builder.append( translatorService.translate( "Photos", language ) );
 		} else {
-			builder.append( translatorService.translate( "Photo gallery", language ) );
+			builder.append( translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, language ) );
 		}
 
 		if ( criterias.getUser() != null ) {

@@ -25,8 +25,6 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	public static final String NOT_LOGGED_USER_VIEW = "errors/NotLoggedUser";
 	public static final String NUDE_CONTENT_WARNING_VIEW = "NudeContentWarning";
 
-	private static final String PORTAL_PAGE_ROOT_FOLDER = "";
-
 	@Autowired
 	private SystemVarsService systemVarsService;
 	
@@ -82,7 +80,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getPortalPageURL() {
-		return String.format( "%s%s/%s", getServerUrlClosed(), getContextWithPrefix(), PORTAL_PAGE_ROOT_FOLDER );
+		return String.format( "%s%s", getServerUrlClosed(), getContextWithPrefix() );
 	}
 
 	@Override

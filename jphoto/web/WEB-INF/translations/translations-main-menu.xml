@@ -3,6 +3,11 @@
 <translations>
 
 	<translation>
+		<nerd>Breadcrumbs: Portal page</nerd>
+		<ru><![CDATA[Главная страница]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo gallery root</nerd>
 		<ru><![CDATA[Фотогалерея]]></ru>
 	</translation>

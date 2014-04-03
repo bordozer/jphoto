@@ -13,7 +13,7 @@ import java.util.Date;
 
 public interface BreadcrumbsPhotoService {
 
-	PageTitleData getPhotosAllData();
+	PageTitleData getPhotoGalleryBreadcrumbs();
 
 	PageTitleData getPhotosAllDataBest();
 

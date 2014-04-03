@@ -178,7 +178,7 @@ public class PhotoListController {
 			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosBestInPeriodUrl( topBestCriterias.getVotingTimeFrom(), topBestCriterias.getVotingTimeTo() ) );
-			topBestData.setTitleData( breadcrumbsPhotoService.getPhotosAllData() );
+			topBestData.setTitleData( breadcrumbsPhotoService.getPhotoGalleryBreadcrumbs() );
 			topBestData.setSortColumnNumber( 2 );
 
 			photoListDatas.add( topBestData );
@@ -187,7 +187,7 @@ public class PhotoListController {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( EnvironmentContext.getCurrentUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoService.getPhotosAllData() );
+		data.setTitleData( breadcrumbsPhotoService.getPhotoGalleryBreadcrumbs() );
 
 		photoListDatas.add( data );
 

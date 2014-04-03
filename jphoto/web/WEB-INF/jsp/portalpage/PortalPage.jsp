@@ -2,6 +2,7 @@
 <%@ page import="elements.PageModel" %>
 <%@ page import="ui.controllers.portalpage.PortalPageModel" %>
 <%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.services.breadcrumbs.items.BreadcrumbsBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
@@ -18,7 +19,7 @@
 <jsp:useBean id="portalPageModel" type="ui.controllers.portalpage.PortalPageModel" scope="request" />
 
 <%
-	final String title = portalPageModel.getTranslatorService().translate( "Portal page", EnvironmentContext.getLanguage() );
+	final String title = portalPageModel.getTranslatorService().translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

@@ -1,4 +1,4 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -11,6 +11,6 @@ public class MainPageBreadcrumb extends AbstractBreadcrumb {
 
 	@Override
 	public String getValue( final Language language ) {
-		return getTranslatorService().translate( "Breadcrumbs: Main page", language );
+		return getTranslatorService().translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, language );
 	}
 }

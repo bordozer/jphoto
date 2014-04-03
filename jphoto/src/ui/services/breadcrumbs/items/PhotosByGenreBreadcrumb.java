@@ -1,4 +1,4 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.general.genre.Genre;
 import core.services.system.Services;

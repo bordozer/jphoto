@@ -1,4 +1,4 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.services.system.Services;
 import core.services.translator.Language;

@@ -1,5 +1,6 @@
 package ui.services.breadcrumbs;
 
+import core.services.system.Services;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
 import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
@@ -17,6 +18,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.StringUtilities;
 
 import java.util.ArrayList;
@@ -43,19 +45,24 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@Override
-	public PageTitleData getPhotosAllData() {
+	public PageTitleData getPhotoGalleryBreadcrumbs() {
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
+		final String breadcrumbs = new BreadcrumbsBuilder( services )
+			.addPortalPageLinkBreadcrumb()
+			.addPhotoGalleryBreadcrumb().build( EnvironmentContext.getLanguage() );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosAllDataBest() {
-		final PageTitleData titleData = getPhotosAllData();
+		final PageTitleData titleData = getPhotoGalleryBreadcrumbs();
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
 
@@ -296,8 +303,9 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	}
 
 	@Override
+	@Deprecated
 	public String getPhotoRootTranslated() {
-		return translatorService.translate( "Photo gallery", EnvironmentContext.getLanguage() );
+		return translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, EnvironmentContext.getLanguage() );
 	}
 
 	private List<String> getPhotoBaseBreadcrumbs( final Photo photo, final User user, final Genre genre, final String... strings ) {

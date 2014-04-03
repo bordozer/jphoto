@@ -1,14 +1,14 @@
-package ui.breadcrumbs;
+package ui.services.breadcrumbs.items;
 
 import core.general.photo.PhotoVotingCategory;
 import core.services.system.Services;
 import core.services.translator.Language;
 
-public class PhotoAppraisalCategoryParameter extends AbstractBreadcrumb {
+public class PhotoAppraisalCategoryBreadcrumb extends AbstractBreadcrumb {
 
 	private PhotoVotingCategory photoVotingCategory;
 
-	public PhotoAppraisalCategoryParameter( final PhotoVotingCategory photoVotingCategory, final Services services ) {
+	public PhotoAppraisalCategoryBreadcrumb( final PhotoVotingCategory photoVotingCategory, final Services services ) {
 		super( services );
 		this.photoVotingCategory = photoVotingCategory;
 	}

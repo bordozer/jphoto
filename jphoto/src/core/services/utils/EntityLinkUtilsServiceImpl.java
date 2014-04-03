@@ -15,6 +15,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.StringUtilities;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	public String getPortalPageLink() {
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPortalPageURL()
-			, translatorService.translate( "Portal page", EnvironmentContext.getLanguage() )
+			, translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() )
 			, systemVarsService.getProjectName()
 		);
 	}
@@ -154,7 +155,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getPhotosRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllPhotosLink() );
-		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( "Photo gallery", language ) );
+		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, language ) );
 	}
 
 	@Override
