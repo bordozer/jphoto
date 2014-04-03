@@ -9,7 +9,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 
-<jsp:useBean id="userCardModel" type="controllers.users.card.UserCardModel" scope="request"/>
+<jsp:useBean id="userCardModel" type="ui.controllers.users.card.UserCardModel" scope="request"/>
 
 <c:set var="user" value="${userCardModel.user}"/>
 <c:set var="editingUserDataIsAccessible" value="${userCardModel.editingUserDataIsAccessible}" />

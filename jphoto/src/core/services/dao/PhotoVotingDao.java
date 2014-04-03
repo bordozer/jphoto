@@ -1,6 +1,6 @@
 package core.services.dao;
 
-import controllers.users.card.MarksByCategoryInfo;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import core.general.data.PhotoMarksForPeriod;
 import core.general.data.UserRating;
 import core.general.genre.GenreVotingCategories;

@@ -15,7 +15,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
 <%@ attribute name="photoInfo" required="true" type="core.general.photo.PhotoInfo" %>
-<%@ attribute name="votingModel" required="true" type="controllers.users.genreRank.VotingModel" %>
+<%@ attribute name="votingModel" required="true" type="ui.controllers.users.genreRank.VotingModel" %>
 <%@ attribute name="hideAuthorIconsAndMenu" required="true" type="java.lang.Boolean" %>
 
 <%

@@ -1,7 +1,7 @@
-<%@ page import="controllers.photos.edit.PhotoEditDataModel" %>
+<%@ page import="ui.controllers.photos.edit.PhotoEditDataModel" %>
 <%@ page import="org.apache.commons.lang.StringUtils" %>
 <%@ page import="core.enums.YesNo" %>
-<%@ page import="controllers.photos.edit.PhotoEditWizardStep" %>
+<%@ page import="ui.controllers.photos.edit.PhotoEditWizardStep" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="core.general.configuration.ConfigurationKey" %>
 <%@ page import="core.services.validation.PhotoRequirement" %>
@@ -19,7 +19,7 @@
 <%@ taglib prefix="anonym" tagdir="/WEB-INF/tags/anonym" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="photoEditDataModel" type="controllers.photos.edit.PhotoEditDataModel" scope="request"/>
+<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
 <%
 	final String genresCanHaveNudeContent = StringUtils.join( photoEditDataModel.getGenresCanHaveNudeContent(), ", " );

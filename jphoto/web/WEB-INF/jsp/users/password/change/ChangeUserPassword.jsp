@@ -1,4 +1,4 @@
-<%@ page import="controllers.users.password.change.ChangeUserPasswordModel" %>
+<%@ page import="ui.controllers.users.password.change.ChangeUserPasswordModel" %>
 <%@ page import="core.services.validation.UserRequirement" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,7 +9,7 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="changeUserPasswordModel" type="controllers.users.password.change.ChangeUserPasswordModel" scope="request" />
+<jsp:useBean id="changeUserPasswordModel" type="ui.controllers.users.password.change.ChangeUserPasswordModel" scope="request" />
 
 <c:set var="user" value="${changeUserPasswordModel.user}"/>
 

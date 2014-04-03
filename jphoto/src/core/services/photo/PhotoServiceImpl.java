@@ -1,6 +1,6 @@
 package core.services.photo;
 
-import controllers.users.card.MarksByCategoryInfo;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;

@@ -1,4 +1,4 @@
-<%@ tag import="controllers.users.card.UserCardGenreInfo" %>
+<%@ tag import="ui.controllers.users.card.UserCardGenreInfo" %>
 <%@ tag import="utils.UserUtils" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ tag import="core.context.EnvironmentContext" %>

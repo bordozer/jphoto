@@ -2,7 +2,7 @@ package admin.controllers.anonymousDays;
 
 import core.general.configuration.ConfigurationKey;
 import core.services.entry.AnonymousDaysService;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

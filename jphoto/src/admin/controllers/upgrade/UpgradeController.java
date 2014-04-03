@@ -9,7 +9,7 @@ import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
 import core.context.EnvironmentContext;
 import core.exceptions.UpgradeException;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.translator.TranslatorService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;

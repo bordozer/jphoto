@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="photoGroupOperationModel" type="controllers.photos.groupoperations.PhotoGroupOperationModel" scope="request"/>
+<jsp:useBean id="photoGroupOperationModel" type="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" scope="request"/>
 
 <tags:page pageModel="${photoGroupOperationModel.pageModel}">
 

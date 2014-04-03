@@ -1,6 +1,6 @@
 package core.services.photo;
 
-import controllers.comment.edit.PhotoCommentInfo;
+import ui.controllers.comment.edit.PhotoCommentInfo;
 import core.dtos.CommentDTO;
 import core.general.menus.EntryMenuOperationType;
 import core.general.photo.PhotoComment;

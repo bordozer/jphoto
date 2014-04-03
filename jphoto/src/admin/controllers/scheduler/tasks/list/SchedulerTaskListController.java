@@ -7,7 +7,7 @@ import admin.services.scheduler.SchedulerService;
 import core.context.EnvironmentContext;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.UrlUtilsService;

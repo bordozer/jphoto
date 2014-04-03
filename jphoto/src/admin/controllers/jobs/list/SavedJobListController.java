@@ -10,7 +10,7 @@ import admin.services.jobs.*;
 import admin.services.scheduler.SchedulerService;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.security.Services;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;

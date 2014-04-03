@@ -1,5 +1,5 @@
 <%@ tag import="core.context.EnvironmentContext" %>
-<%@ tag import="controllers.comment.edit.PhotoCommentModel" %>
+<%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
@@ -14,7 +14,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 
-<%@ attribute name="commentInfo" required="true" type="controllers.comment.edit.PhotoCommentInfo" %>
+<%@ attribute name="commentInfo" required="true" type="ui.controllers.comment.edit.PhotoCommentInfo" %>
 <%@ attribute name="useAnimation" required="false" type="java.lang.Boolean" %>
 
 <c:set var="comment" value="${commentInfo.photoComment}"/>

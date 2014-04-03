@@ -7,7 +7,7 @@
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
 <%@ attribute name="genre" required="true" type="core.general.genre.Genre" %>
-<%@ attribute name="votingModel" required="true" type="controllers.users.genreRank.VotingModel" %>
+<%@ attribute name="votingModel" required="true" type="ui.controllers.users.genreRank.VotingModel" %>
 
 <c:set var="hasUserAlreadyVotedForThisGenre" value="${votingModel.userAlreadyVoted}"/>
 <c:set var="lastVotingPoints" value="${votingModel.lastVotingPoints}"/>

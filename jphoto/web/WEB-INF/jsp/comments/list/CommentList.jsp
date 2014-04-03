@@ -10,7 +10,7 @@
 <%@ taglib prefix="comments" tagdir="/WEB-INF/tags/photo/comments" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<jsp:useBean id="photoCommentsListModel" type="controllers.comment.list.PhotoCommentsListModel" scope="request"/>
+<jsp:useBean id="photoCommentsListModel" type="ui.controllers.comment.list.PhotoCommentsListModel" scope="request"/>
 <jsp:useBean id="pagingModel" type="core.general.base.PagingModel" scope="request"/>
 
 <%

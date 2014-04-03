@@ -1,7 +1,7 @@
 package core.services.system;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
-import controllers.users.login.UserLoginModel;
+import ui.controllers.users.login.UserLoginModel;
 import core.context.EnvironmentContext;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;

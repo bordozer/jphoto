@@ -4,7 +4,7 @@
 
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 
-<jsp:useBean id="photoInfoModel" type="controllers.photos.card.PhotoInfoModel" scope="request"/>
+<jsp:useBean id="photoInfoModel" type="ui.controllers.photos.card.PhotoInfoModel" scope="request"/>
 
 <c:set var="photo" value="${photoInfoModel.photoInfo.photo}" />
 

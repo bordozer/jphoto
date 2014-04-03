@@ -1,8 +1,7 @@
 package admin.controllers.reports.users;
 
 import core.general.user.User;
-import core.services.pageTitle.PageTitleAdminUtilsService;
-import core.services.security.SecurityService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

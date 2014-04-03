@@ -1,5 +1,5 @@
 <%@ tag import="admin.jobs.enums.DateRangeType" %>
-<%@ tag import="admin.controllers.jobs.edit.DateRangableModel" %>
+<%@ tag import="admin.ui.controllers.jobs.edit.DateRangableModel" %>
 <%@ tag import="core.services.utils.SystemVarsServiceImpl" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>

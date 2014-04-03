@@ -9,7 +9,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="privateMessageListModel" class="controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
+<jsp:useBean id="privateMessageListModel" class="ui.controllers.users.messages.list.PrivateMessageListModel" scope="request"/>
 
 <c:set var="privateMessageTypeValuesLength" value="<%=privateMessageListModel.getMessagesByType().size()%>"/>
 <c:set var="cellWidth" value="${eco:floor(100 / privateMessageTypeValuesLength)-1}"/>

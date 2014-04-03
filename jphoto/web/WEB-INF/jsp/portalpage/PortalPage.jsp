@@ -1,6 +1,6 @@
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
-<%@ page import="controllers.portalpage.PortalPageModel" %>
+<%@ page import="ui.controllers.portalpage.PortalPageModel" %>
 <%@ page import="core.context.EnvironmentContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -15,7 +15,7 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
-<jsp:useBean id="portalPageModel" type="controllers.portalpage.PortalPageModel" scope="request" />
+<jsp:useBean id="portalPageModel" type="ui.controllers.portalpage.PortalPageModel" scope="request" />
 
 <%
 	final String title = portalPageModel.getTranslatorService().translate( "Portal page", EnvironmentContext.getLanguage() );

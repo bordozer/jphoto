@@ -1,6 +1,6 @@
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="tags.FormTag" %>
-<%@ tag import="controllers.comment.edit.PhotoCommentModel" %>
+<%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

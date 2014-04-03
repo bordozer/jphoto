@@ -7,7 +7,7 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.system.CacheServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;

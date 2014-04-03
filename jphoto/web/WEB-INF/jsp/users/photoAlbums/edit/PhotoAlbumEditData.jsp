@@ -1,5 +1,5 @@
 <%@ page import="core.enums.UserTeamMemberType" %>
-<%@ page import="controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataModel" %>
+<%@ page import="ui.controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataModel" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -10,7 +10,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userPhotoAlbumEditDataModel" type="controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataModel" scope="request" />
+<jsp:useBean id="userPhotoAlbumEditDataModel" type="ui.controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataModel" scope="request" />
 
 <c:set var="user" value="${userPhotoAlbumEditDataModel.user}"/>
 

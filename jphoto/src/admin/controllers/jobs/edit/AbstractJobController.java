@@ -9,7 +9,7 @@ import admin.jobs.loaders.SavedJobLoaderFactory;
 import admin.services.jobs.*;
 import core.context.EnvironmentContext;
 import core.log.LogHelper;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.photo.PhotoService;
 import core.services.security.Services;
 import core.services.translator.Language;

@@ -6,7 +6,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 
-<jsp:useBean id="photoListModel" type="controllers.photos.list.PhotoListModel" scope="request"/>
+<jsp:useBean id="photoListModel" type="ui.controllers.photos.list.PhotoListModel" scope="request"/>
 
 <tags:page pageModel="${photoListModel.pageModel}">
 

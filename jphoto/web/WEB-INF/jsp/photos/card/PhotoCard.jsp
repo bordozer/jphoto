@@ -1,5 +1,5 @@
 <%@ page import="core.enums.FavoriteEntryType" %>
-<%@ page import="controllers.comment.edit.PhotoCommentModel" %>
+<%@ page import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ page import="core.context.EnvironmentContext" %>
 <%@ page import="utils.UserUtils" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
@@ -16,7 +16,7 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 
-<jsp:useBean id="photoCardModel" type="controllers.photos.card.PhotoCardModel" scope="request"/>
+<jsp:useBean id="photoCardModel" type="ui.controllers.photos.card.PhotoCardModel" scope="request"/>
 
 <c:set var="photo" value="${photoCardModel.photo}"/>
 <c:set var="photoInfo" value="${photoCardModel.photoInfo}"/>

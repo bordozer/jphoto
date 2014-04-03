@@ -8,7 +8,7 @@
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
-<jsp:useBean id="photoPreviewsModel" type="controllers.photos.previews.PhotoPreviewsModel" scope="request"/>
+<jsp:useBean id="photoPreviewsModel" type="ui.controllers.photos.previews.PhotoPreviewsModel" scope="request"/>
 
 <tags:page pageModel="${photoPreviewsModel.pageModel}">
 

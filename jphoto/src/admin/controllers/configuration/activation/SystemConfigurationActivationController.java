@@ -2,7 +2,7 @@ package admin.controllers.configuration.activation;
 
 import admin.controllers.configuration.list.SystemConfigurationListController;
 import core.general.configuration.SystemConfiguration;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import org.apache.commons.lang.StringUtils;

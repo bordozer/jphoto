@@ -4,7 +4,7 @@
 <%@ tag import="core.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
-<%@ tag import="controllers.photos.groupoperations.PhotoGroupOperationModel" %>
+<%@ tag import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
 <%@ tag import="java.util.Date" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>

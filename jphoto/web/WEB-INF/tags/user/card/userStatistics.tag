@@ -6,7 +6,7 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
-<%@ attribute name="userStatistic" required="true" type="controllers.users.card.UserStatistic" %>
+<%@ attribute name="userStatistic" required="true" type="ui.controllers.users.card.UserStatistic" %>
 
 <c:set var="cssClass" value="textright"/>
 <c:set var="width" value="70%"/>

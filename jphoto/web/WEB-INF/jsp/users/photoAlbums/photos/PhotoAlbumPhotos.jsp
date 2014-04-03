@@ -4,7 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 
-<jsp:useBean id="userPhotoAlbumPhotosModel" type="controllers.users.photoAlbums.photos.UserPhotoAlbumPhotosModel" scope="request" />
+<jsp:useBean id="userPhotoAlbumPhotosModel" type="ui.controllers.users.photoAlbums.photos.UserPhotoAlbumPhotosModel" scope="request" />
 
 <tags:page pageModel="${userPhotoAlbumPhotosModel.pageModel}">
 

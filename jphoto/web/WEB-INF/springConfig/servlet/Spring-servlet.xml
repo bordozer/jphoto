@@ -11,24 +11,24 @@
 	<context:annotation-config/>
 	<mvc:annotation-driven/>
 
-	<context:component-scan base-package="controllers"/>
+	<context:component-scan base-package="ui.controllers"/>
 
-	<bean id="userEditDataValidator" class="controllers.users.edit.UserEditDataValidator"/>
-	<bean id="filterValidator" class="controllers.users.list.FilterValidator"/>
-	<bean id="photoFilterValidator" class="controllers.photos.list.PhotoFilterValidator"/>
-	<bean id="userCardValidator" class="controllers.users.card.UserCardValidator"/>
-	<bean id="userLoginValidator" class="controllers.users.login.UserLoginValidator"/>
-	<bean id="userAvatarValidator" class="controllers.users.avatar.UserAvatarValidator"/>
-	<bean id="userTeamMemberEditDataValidator" class="controllers.users.team.edit.UserTeamMemberEditDataValidator"/>
-	<bean id="userPhotoAlbumEditDataValidator" class="controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataValidator"/>
+	<bean id="userEditDataValidator" class="ui.controllers.users.edit.UserEditDataValidator"/>
+	<bean id="filterValidator" class="ui.controllers.users.list.FilterValidator"/>
+	<bean id="photoFilterValidator" class="ui.controllers.photos.list.PhotoFilterValidator"/>
+	<bean id="userCardValidator" class="ui.controllers.users.card.UserCardValidator"/>
+	<bean id="userLoginValidator" class="ui.controllers.users.login.UserLoginValidator"/>
+	<bean id="userAvatarValidator" class="ui.controllers.users.avatar.UserAvatarValidator"/>
+	<bean id="userTeamMemberEditDataValidator" class="ui.controllers.users.team.edit.UserTeamMemberEditDataValidator"/>
+	<bean id="userPhotoAlbumEditDataValidator" class="ui.controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataValidator"/>
 
-	<bean id="photoEditDataValidator" class="controllers.photos.edit.PhotoEditDataValidator"/>
-	<bean id="photoCommentValidator" class="controllers.comment.edit.PhotoCommentValidator"/>
-	<bean id="photoVotingValidator" class="controllers.voting.PhotoVotingValidator"/>
-	<bean id="userGenreRankVotingValidator" class="controllers.users.genreRank.UserGenreRankVotingValidator"/>
-	<bean id="photoGroupOperationValidator" class="controllers.photos.groupoperations.PhotoGroupOperationValidator"/>
+	<bean id="photoEditDataValidator" class="ui.controllers.photos.edit.PhotoEditDataValidator"/>
+	<bean id="photoCommentValidator" class="ui.controllers.comment.edit.PhotoCommentValidator"/>
+	<bean id="photoVotingValidator" class="ui.controllers.voting.PhotoVotingValidator"/>
+	<bean id="userGenreRankVotingValidator" class="ui.controllers.users.genreRank.UserGenreRankVotingValidator"/>
+	<bean id="photoGroupOperationValidator" class="ui.controllers.photos.groupoperations.PhotoGroupOperationValidator"/>
 
-	<bean id="changeUserPasswordValidator" class="controllers.users.password.change.ChangeUserPasswordValidator"/>
+	<bean id="changeUserPasswordValidator" class="ui.controllers.users.password.change.ChangeUserPasswordValidator"/>
 
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">

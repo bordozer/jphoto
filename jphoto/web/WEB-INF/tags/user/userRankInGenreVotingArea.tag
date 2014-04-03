@@ -5,7 +5,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <%@ attribute name="genre" required="true" type="core.general.genre.Genre" %>
-<%@ attribute name="votingModel" required="true" type="controllers.users.genreRank.VotingModel" %>
+<%@ attribute name="votingModel" required="true" type="ui.controllers.users.genreRank.VotingModel" %>
 <%@ attribute name="jsFunctionVoteUp" required="true" type="java.lang.String" %>
 <%@ attribute name="jsFunctionVoteDown" required="true" type="java.lang.String" %>
 

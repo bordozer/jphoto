@@ -1,6 +1,6 @@
 <%@ tag import="core.general.user.UserMembershipType" %>
-<%@ tag import="controllers.photos.list.PhotoFilterSortColumn" %>
-<%@ tag import="controllers.photos.list.PhotoFilterSortOrder" %>
+<%@ tag import="ui.controllers.photos.list.PhotoFilterSortColumn" %>
+<%@ tag import="ui.controllers.photos.list.PhotoFilterSortOrder" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,7 +9,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="photoFilterModel" type="controllers.photos.list.PhotoFilterModel" scope="request"/>
+<jsp:useBean id="photoFilterModel" type="ui.controllers.photos.list.PhotoFilterModel" scope="request"/>
 
 <c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
 <c:set var="photoFilterSortColumnsValues" value="<%=PhotoFilterSortColumn.values()%>"/>

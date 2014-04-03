@@ -9,7 +9,7 @@
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
-<jsp:useBean id="userTeamMemberListModel" type="controllers.users.team.list.UserTeamMemberListModel" scope="request" />
+<jsp:useBean id="userTeamMemberListModel" type="ui.controllers.users.team.list.UserTeamMemberListModel" scope="request" />
 
 <c:set var="userTeamMembers" value="${userTeamMemberListModel.userTeamMembers}" />
 <c:set var="userTeamMemberPhotosQtyMap" value="${userTeamMemberListModel.userTeamMemberPhotosQtyMap}" />

@@ -1,5 +1,5 @@
-<%@ page import="controllers.photos.groupoperations.PhotoGroupOperationModel" %>
-<%@ page import="controllers.photos.groupoperations.PhotoGroupOperationValidator" %>
+<%@ page import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
+<%@ page import="ui.controllers.photos.groupoperations.PhotoGroupOperationValidator" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -14,7 +14,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="x_rt" uri="http://java.sun.com/jstl/xml_rt" %>
 
-<jsp:useBean id="photoGroupOperationModel" type="controllers.photos.groupoperations.PhotoGroupOperationModel" scope="request"/>
+<jsp:useBean id="photoGroupOperationModel" type="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" scope="request"/>
 
 <c:set var="controlPhotoAlbumId" value="<%=PhotoGroupOperationModel.FORM_CONTROL_PHOTO_ALBUM_ID%>"/>
 

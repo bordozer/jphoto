@@ -5,7 +5,7 @@
 	   default-autowire="byName">
 
 	<bean id="pageTemplateService" class="core.services.system.PageTemplateServiceImpl"/>
-	<bean id="pageTitleService" class="core.services.pageTitle.PageTitleServiceImpl"/>
+	<bean id="pageTitleService" class="ui.services.breadcrumbs.PageTitleServiceImpl"/>
 	<bean id="menuService" class="core.services.system.MenuServiceImpl"/>
 
 	<bean id="services" class="core.services.security.ServicesImpl"/>
@@ -43,7 +43,7 @@
 	<bean id="cacheService" class="core.services.system.CacheServiceImpl" />
 
 	<bean id="fileConversionService" class="core.services.conversion.FileConversionServiceImpl"/>
-	<bean id="userCardModelFillService" class="controllers.users.card.data.UserCardModelFillServiceImpl"/>
+	<bean id="userCardModelFillService" class="ui.controllers.users.card.data.UserCardModelFillServiceImpl"/>
 	<bean id="activityStreamService" class="core.services.entry.ActivityStreamServiceImpl"/>
 
 	<bean id="mailService" class="core.services.mail.MailServiceImpl"/>

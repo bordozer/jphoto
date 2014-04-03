@@ -10,7 +10,7 @@ import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.scheduler.SchedulerTask;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;

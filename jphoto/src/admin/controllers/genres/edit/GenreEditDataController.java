@@ -5,7 +5,7 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
-import core.services.pageTitle.PageTitleGenreUtilsService;
+import ui.services.breadcrumbs.PageTitleGenreUtilsService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;

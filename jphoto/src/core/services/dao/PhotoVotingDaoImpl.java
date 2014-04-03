@@ -1,6 +1,6 @@
 package core.services.dao;
 
-import controllers.users.card.MarksByCategoryInfo;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.configuration.ConfigurationKey;

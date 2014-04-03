@@ -3,7 +3,7 @@ package admin.controllers.configuration.tabs;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import core.services.user.UserRankService;

@@ -7,7 +7,7 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
-<jsp:useBean id="userPhotoAlbumListModel" type="controllers.users.photoAlbums.list.UserPhotoAlbumListModel" scope="request" />
+<jsp:useBean id="userPhotoAlbumListModel" type="ui.controllers.users.photoAlbums.list.UserPhotoAlbumListModel" scope="request" />
 
 <c:set var="canEdit" value="<%=UserUtils.isTheUserThatWhoIsCurrentUser( userPhotoAlbumListModel.getUser() )%>" />
 

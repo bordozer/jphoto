@@ -1,5 +1,5 @@
 <%@ tag import="core.general.executiontasks.Month" %>
-<%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ tag import="admin.ui.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>

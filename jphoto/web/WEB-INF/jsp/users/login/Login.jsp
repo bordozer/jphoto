@@ -1,5 +1,5 @@
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
-<%@ page import="controllers.users.login.UserLoginModel" %>
+<%@ page import="ui.controllers.users.login.UserLoginModel" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
@@ -10,7 +10,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 
-<jsp:useBean id="userLoginModel" type="controllers.users.login.UserLoginModel" scope="request"/>
+<jsp:useBean id="userLoginModel" type="ui.controllers.users.login.UserLoginModel" scope="request"/>
 
 <c:set var="loginFormAction" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserLoginLink()%>"/>
 <c:set var="loginControl" value="<%=UserLoginModel.LOGIN_FORM_LOGIN_CONTROL%>"/>

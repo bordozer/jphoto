@@ -7,7 +7,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
-<jsp:useBean id="votesForUserRankInGenreModel" type="controllers.users.votes.VotesForUserRankInGenreModel" scope="request"/>
+<jsp:useBean id="votesForUserRankInGenreModel" type="ui.controllers.users.votes.VotesForUserRankInGenreModel" scope="request"/>
 
 <tags:page pageModel="${votesForUserRankInGenreModel.pageModel}">
 

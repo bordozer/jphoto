@@ -9,7 +9,7 @@
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
-<jsp:useBean id="photoMarkListModel" type="controllers.marks.list.PhotoMarkListModel" scope="request"/>
+<jsp:useBean id="photoMarkListModel" type="ui.controllers.marks.list.PhotoMarkListModel" scope="request"/>
 
 <c:set var="photo" value="${photoMarkListModel.photo}" />
 <c:set var="votingCategories" value="${photoMarkListModel.votingCategories}" />

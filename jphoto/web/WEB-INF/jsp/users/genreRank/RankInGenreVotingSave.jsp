@@ -4,7 +4,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="userGenreRankVotingModel" type="controllers.users.genreRank.UserGenreRankVotingModel" scope="request"/>
+<jsp:useBean id="userGenreRankVotingModel" type="ui.controllers.users.genreRank.UserGenreRankVotingModel" scope="request"/>
 
 <c:set var="user" value="${userGenreRankVotingModel.user}" />
 <c:set var="genre" value="${userGenreRankVotingModel.genre}" />

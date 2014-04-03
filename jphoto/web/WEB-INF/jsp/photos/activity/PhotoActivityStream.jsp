@@ -2,7 +2,7 @@
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="photoActivityStreamModel" type="controllers.photos.activity.PhotoActivityStreamModel" scope="request"/>
+<jsp:useBean id="photoActivityStreamModel" type="ui.controllers.photos.activity.PhotoActivityStreamModel" scope="request"/>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>

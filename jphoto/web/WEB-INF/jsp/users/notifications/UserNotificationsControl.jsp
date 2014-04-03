@@ -1,5 +1,5 @@
 <%@ page import="core.general.user.EmailNotificationType" %>
-<%@ page import="controllers.users.notifications.UserNotificationsControlModel" %>
+<%@ page import="ui.controllers.users.notifications.UserNotificationsControlModel" %>
 <%@ page import="core.context.ApplicationContextHelper" %>
 <%@ page import="core.services.utils.UrlUtilsService" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
@@ -8,7 +8,7 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userNotificationsControlModel" class="controllers.users.notifications.UserNotificationsControlModel" scope="request"/>
+<jsp:useBean id="userNotificationsControlModel" class="ui.controllers.users.notifications.UserNotificationsControlModel" scope="request"/>
 
 <%
 	final UrlUtilsService urlUtilsService = ApplicationContextHelper.getBean( UrlUtilsService.BEAN_NAME );

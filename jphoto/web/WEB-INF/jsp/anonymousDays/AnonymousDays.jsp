@@ -4,7 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="anonym" tagdir="/WEB-INF/tags/anonym" %>
 
-<jsp:useBean id="anonymousDaysModel" type="controllers.anonymousDays.AnonymousDaysModel" scope="request"/>
+<jsp:useBean id="anonymousDaysModel" type="ui.controllers.anonymousDays.AnonymousDaysModel" scope="request"/>
 
 <tags:pageLight title="${eco:translate('Anonymous Days')}">
 

@@ -1,6 +1,6 @@
 package core.general.photo;
 
-import controllers.users.card.MarksByCategoryInfo;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;

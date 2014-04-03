@@ -1,4 +1,4 @@
-<%@ tag import="admin.controllers.configuration.edit.ConfigurationEditModel" %>
+<%@ tag import="admin.ui.controllers.configuration.edit.ConfigurationEditModel" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

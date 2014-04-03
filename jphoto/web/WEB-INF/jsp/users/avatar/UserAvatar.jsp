@@ -1,4 +1,4 @@
-<%@ page import="controllers.users.avatar.UserAvatarModel" %>
+<%@ page import="ui.controllers.users.avatar.UserAvatarModel" %>
 <%@ page import="java.io.File" %>
 <%@ page import="core.general.img.Dimension" %>
 <%@ page import="core.services.utils.UserPhotoFilePathUtilsService" %>
@@ -12,7 +12,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userAvatarModel" type="controllers.users.avatar.UserAvatarModel" scope="request"/>
+<jsp:useBean id="userAvatarModel" type="ui.controllers.users.avatar.UserAvatarModel" scope="request"/>
 
 <c:set var="avatarFileControl" value="<%=UserAvatarModel.AVATAR_FILE_FORM_CONTROL%>" />
 

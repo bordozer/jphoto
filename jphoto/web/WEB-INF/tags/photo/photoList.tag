@@ -1,10 +1,10 @@
 <%@ tag import="core.services.utils.sql.PhotoSqlHelperServiceImpl" %>
 <%@ tag import="core.services.photo.PhotoServiceImpl" %>
-<%@ tag import="controllers.photos.groupoperations.PhotoGroupOperationModel" %>
+<%@ tag import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsServiceImpl" %>
 <%@ tag import="core.context.ApplicationContextHelper" %>
-<%@ tag import="core.services.pageTitle.PageTitlePhotoUtilsService" %>
+<%@ tag import="ui.services.breadcrumbs.PageTitlePhotoUtilsService" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>

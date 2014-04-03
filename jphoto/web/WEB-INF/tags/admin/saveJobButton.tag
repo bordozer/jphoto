@@ -1,4 +1,4 @@
-<%@ tag import="admin.controllers.jobs.edit.AbstractAdminJobModel" %>
+<%@ tag import="admin.ui.controllers.jobs.edit.AbstractAdminJobModel" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

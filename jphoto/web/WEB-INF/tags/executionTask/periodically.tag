@@ -1,4 +1,4 @@
-<%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ tag import="admin.ui.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ tag import="core.general.executiontasks.PeriodUnit" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

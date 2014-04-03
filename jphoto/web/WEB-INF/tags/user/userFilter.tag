@@ -1,4 +1,4 @@
-<%@ tag import="controllers.users.list.UserFilterModel" %>
+<%@ tag import="ui.controllers.users.list.UserFilterModel" %>
 <%@ tag import="core.general.user.UserMembershipType" %>
 
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
@@ -9,7 +9,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userFilterModel" type="controllers.users.list.UserFilterModel" scope="request"/>
+<jsp:useBean id="userFilterModel" type="ui.controllers.users.list.UserFilterModel" scope="request"/>
 
 <c:if test="${userFilterModel.visible}">
 	<tags:inputHintForm/>

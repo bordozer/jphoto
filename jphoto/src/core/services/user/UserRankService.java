@@ -1,6 +1,6 @@
 package core.services.user;
 
-import controllers.users.genreRank.VotingModel;
+import ui.controllers.users.genreRank.VotingModel;
 import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
 import core.general.photo.Photo;

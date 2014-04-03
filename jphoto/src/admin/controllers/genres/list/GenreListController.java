@@ -4,7 +4,7 @@ import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
-import core.services.pageTitle.PageTitleGenreUtilsService;
+import ui.services.breadcrumbs.PageTitleGenreUtilsService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;

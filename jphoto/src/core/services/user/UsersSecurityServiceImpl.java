@@ -1,6 +1,6 @@
 package core.services.user;
 
-import controllers.users.edit.UserEditDataModel;
+import ui.controllers.users.edit.UserEditDataModel;
 import core.context.EnvironmentContext;
 import core.exceptions.UserRequestSecurityException;
 import core.general.user.User;

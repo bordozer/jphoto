@@ -15,13 +15,13 @@
 	<bean id="systemFilePathUtilsService" class="core.services.utils.SystemFilePathUtilsServiceImpl" init-method="createSystemDirectoriesOnStartup"/>
 	<bean id="userPhotoFilePathUtilsService" class="core.services.utils.UserPhotoFilePathUtilsServiceImpl"/>
 
-	<bean id="pageTitleUtilsService" class="core.services.pageTitle.PageTitleUtilsServiceImpl"/>
+	<bean id="pageTitleUtilsService" class="ui.services.breadcrumbs.PageTitleUtilsServiceImpl"/>
 	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
-	<bean id="pageTitleAdminUtilsService" class="core.services.pageTitle.PageTitleAdminUtilsServiceImpl"/>
-	<bean id="pageTitlePhotoCommentUtilsService" class="core.services.pageTitle.PageTitlePhotoCommentUtilsServiceImpl"/>
-	<bean id="pageTitlePhotoUtilsService" class="core.services.pageTitle.PageTitlePhotoUtilsServiceImpl"/>
-	<bean id="pageTitleUserUtilsService" class="core.services.pageTitle.PageTitleUserUtilsServiceImpl"/>
-	<bean id="pageTitleGenreUtilsService" class="core.services.pageTitle.PageTitleGenreUtilsServiceImpl"/>
+	<bean id="pageTitleAdminUtilsService" class="ui.services.breadcrumbs.PageTitleAdminUtilsServiceImpl"/>
+	<bean id="pageTitlePhotoCommentUtilsService" class="ui.services.breadcrumbs.PageTitlePhotoCommentUtilsServiceImpl"/>
+	<bean id="pageTitlePhotoUtilsService" class="ui.services.breadcrumbs.PageTitlePhotoUtilsServiceImpl"/>
+	<bean id="pageTitleUserUtilsService" class="ui.services.breadcrumbs.PageTitleUserUtilsServiceImpl"/>
+	<bean id="pageTitleGenreUtilsService" class="ui.services.breadcrumbs.PageTitleGenreUtilsServiceImpl"/>
 
 	<bean id="dateUtilsService" class="core.services.utils.DateUtilsServiceImpl"/>
 	<bean id="networkUtils" class="core.services.utils.NetworkUtilsImpl"/>

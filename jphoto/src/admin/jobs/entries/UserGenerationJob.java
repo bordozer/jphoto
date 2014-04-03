@@ -2,7 +2,7 @@ package admin.jobs.entries;
 
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
-import controllers.users.edit.UserEditDataController;
+import ui.controllers.users.edit.UserEditDataController;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.general.base.CommonProperty;

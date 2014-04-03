@@ -1,6 +1,6 @@
 package admin.controllers.translator;
 
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.translator.*;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;

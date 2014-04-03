@@ -1,6 +1,6 @@
 package core.services.user;
 
-import controllers.users.genreRank.VotingModel;
+import ui.controllers.users.genreRank.VotingModel;
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;

@@ -1,7 +1,7 @@
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ attribute name="uploadAllowance" type="controllers.photos.edit.description.AbstractPhotoUploadAllowance" required="true" %>
+<%@ attribute name="uploadAllowance" type="ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance" required="true" %>
 
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>

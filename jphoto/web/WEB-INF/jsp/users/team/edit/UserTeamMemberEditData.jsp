@@ -1,4 +1,4 @@
-<%@ page import="controllers.users.team.edit.UserTeamMemberEditDataModel" %>
+<%@ page import="ui.controllers.users.team.edit.UserTeamMemberEditDataModel" %>
 <%@ page import="core.enums.UserTeamMemberType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -10,7 +10,7 @@
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userTeamMemberEditDataModel" type="controllers.users.team.edit.UserTeamMemberEditDataModel" scope="request" />
+<jsp:useBean id="userTeamMemberEditDataModel" type="ui.controllers.users.team.edit.UserTeamMemberEditDataModel" scope="request" />
 
 <c:set var="user" value="${userTeamMemberEditDataModel.user}"/>
 

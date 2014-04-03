@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<jsp:useBean id="userEditDataModel" type="controllers.users.edit.UserEditDataModel" scope="request" />
+<jsp:useBean id="userEditDataModel" type="ui.controllers.users.edit.UserEditDataModel" scope="request" />
 
 <c:set var="model" value="<%=userEditDataModel%>"/>
 <c:set var="userId" value="<%=userEditDataModel.getUserId()%>"/>

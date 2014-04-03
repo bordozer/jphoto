@@ -4,7 +4,7 @@
 
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 
-<jsp:useBean id="photoVotingModel" type="controllers.voting.PhotoVotingModel" scope="request"/>
+<jsp:useBean id="photoVotingModel" type="ui.controllers.voting.PhotoVotingModel" scope="request"/>
 
 <c:set var="hasError" value="<%=photoVotingModel.getBindingResult().hasErrors()%>" />
 

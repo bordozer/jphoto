@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="controllers.users.edit.UserEditDataModel" %>
+<%@ page import="ui.controllers.users.edit.UserEditDataModel" %>
 <%@ page import="core.general.user.UserMembershipType" %>
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 <%@ page import="core.enums.UserGender" %>
@@ -15,7 +15,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="userEditDataModel" type="controllers.users.edit.UserEditDataModel" scope="request" />
+<jsp:useBean id="userEditDataModel" type="ui.controllers.users.edit.UserEditDataModel" scope="request" />
 
 <%
 	final Integer[] photosInLineValues = { 1, 2, 3, 4, 5 };

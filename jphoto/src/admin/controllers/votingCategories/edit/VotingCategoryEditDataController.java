@@ -3,7 +3,7 @@ package admin.controllers.votingCategories.edit;
 import core.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
-import core.services.pageTitle.PageTitleAdminUtilsService;
+import ui.services.breadcrumbs.PageTitleAdminUtilsService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;

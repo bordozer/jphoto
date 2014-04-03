@@ -5,7 +5,7 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="userCard" tagdir="/WEB-INF/tags/user/card" %>
 
-<%@ attribute name="userCardModel" required="true" type="controllers.users.card.UserCardModel" %>
+<%@ attribute name="userCardModel" required="true" type="ui.controllers.users.card.UserCardModel" %>
 
 <c:set var="user" value="${userCardModel.user}"/>
 

@@ -1,6 +1,6 @@
 package core.services.photo;
 
-import controllers.users.card.MarksByCategoryInfo;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheKey;
 import core.general.data.PhotoRating;

@@ -1,7 +1,7 @@
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="photoEditDataModel" type="controllers.photos.edit.PhotoEditDataModel" scope="request" />
+<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request" />
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
