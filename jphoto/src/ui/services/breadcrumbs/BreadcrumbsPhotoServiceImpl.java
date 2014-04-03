@@ -51,14 +51,19 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 
 	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {
-		final String title = builder().addPortalPageBreadcrumb().addPhotoGalleryBreadcrumb().build( getLanguage() );
-		final String header = builder().addPortalPageBreadcrumb().build( getLanguage() );
+		final String title = builder()
+			.addPortalPageBreadcrumb()
+			.addPhotoGalleryBreadcrumb()
+			.build();
+
+		final String header = builder()
+			.addPortalPageBreadcrumb()
+			.build();
 
 		final String breadcrumbs = builder()
 			.addPortalPageLinkBreadcrumb()
 			.addPhotoGalleryBreadcrumb()
-			.build( getLanguage() )
-			;
+			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
 	}

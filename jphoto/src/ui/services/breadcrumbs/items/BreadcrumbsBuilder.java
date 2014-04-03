@@ -1,5 +1,6 @@
 package ui.services.breadcrumbs.items;
 
+import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
@@ -86,6 +87,10 @@ public class BreadcrumbsBuilder {
 	public BreadcrumbsBuilder addFormattedDateBreadcrumb( final Time date, final Genre genre ) {
 		breadcrumbs.add( new FormattedDateBreadcrumb( date, services ) );
 		return this;
+	}
+
+	public String build() {
+		return build( EnvironmentContext.getLanguage() );
 	}
 
 	public String build( final Language language ) {
