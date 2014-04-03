@@ -3,43 +3,186 @@
 <translations>
 
 	<translation>
-		<nerd>Photo gallery</nerd>
+		<nerd>Photo gallery root</nerd>
 		<ru><![CDATA[Фотогалерея]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Today's photos</nerd>
+		<nerd>Main menu: Today's photos</nerd>
 		<ru><![CDATA[Работы за сегодня]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Yesterday's photos</nerd>
+		<nerd>Main menu: Yesterday's photos</nerd>
 		<ru><![CDATA[Работы за вчера]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>This week's photos</nerd>
+		<nerd>Main menu: This week's photos</nerd>
 		<ru><![CDATA[Работы этой недели]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>This month's photos</nerd>
+		<nerd>Main menu: This month's photos</nerd>
 		<ru><![CDATA[Работы за месяц]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Photos: author</nerd>
+		<nerd>Main menu: photos: author</nerd>
 		<ru><![CDATA[Работы авторов]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Photos: model</nerd>
+		<nerd>Main menu: photos: model</nerd>
 		<ru><![CDATA[Работы моделей]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Photos: makeup master</nerd>
+		<nerd>Main menu: photos: makeup master</nerd>
 		<ru><![CDATA[Работы визажистов]]></ru>
+	</translation>
+
+
+
+
+
+	<translation>
+		<nerd>Main menu: The best photos</nerd>
+		<ru><![CDATA[Лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Absolute best</nerd>
+		<ru><![CDATA[Абсолютный рейтинг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Best today's photos</nerd>
+		<ru><![CDATA[Лучшие работы сегодня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Best yesterday's photos</nerd>
+		<ru><![CDATA[Лучшие работы за вчера]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Best for $1 days</nerd>
+		<ru><![CDATA[Лучшие работы за $1 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Best week's photos</nerd>
+		<ru><![CDATA[Лучшие работы за неделю]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Best month's photos</nerd>
+		<ru><![CDATA[Лучшие работы за месяц]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: The best photos: author</nerd>
+		<ru><![CDATA[Лучшие работы авторов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: The best photos: model</nerd>
+		<ru><![CDATA[Лучшие работы моделей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: The best photos: makeup master</nerd>
+		<ru><![CDATA[Лучшие работы визажистов]]></ru>
+	</translation>
+
+
+
+
+
+	<translation>
+		<nerd>Main menu: Members</nerd>
+		<ru><![CDATA[Пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: All members</nerd>
+		<ru><![CDATA[Все пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: members: author</nerd>
+		<ru><![CDATA[Авторы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: members: model</nerd>
+		<ru><![CDATA[Модели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: members: makeup master</nerd>
+		<ru><![CDATA[Визажисты]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Main menu: Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>
