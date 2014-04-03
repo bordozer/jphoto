@@ -1,5 +1,6 @@
 package ui.services.breadcrumbs;
 
+import core.services.system.MenuService;
 import core.services.system.Services;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
 import core.context.EnvironmentContext;
@@ -53,9 +54,12 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
-		final String breadcrumbs = new BreadcrumbsBuilder( services )
+
+		final String breadcrumbs = builder()
 			.addPortalPageLinkBreadcrumb()
-			.addPhotoGalleryBreadcrumb().build( EnvironmentContext.getLanguage() );
+			.addPhotoGalleryBreadcrumb()
+			.build( getLanguage() )
+			;
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -73,7 +77,7 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	public PageTitleData getPhotoNewData( final User user, final PhotoEditWizardStep wizardStep ) {
 		final String rootTranslated = getPhotoRootTranslated();
 		final Language language = EnvironmentContext.getLanguage();
-		final String tran = translatorService.translate( "Breadcrumbs: Upload new photo", language );
+		final String tran = translatorService.translate( MenuService.MAIN_MENU_UPLOAD_PHOTO, language );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), tran, wizardStep.getStepDescription() );
@@ -360,6 +364,10 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), text );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	private BreadcrumbsBuilder builder() {
+		return BreadcrumbsBuilder.getInstance( services );
 	}
 
 	private Language getLanguage() {

@@ -8,5 +8,7 @@ import java.util.Map;
 
 public interface MenuService {
 
+	String MAIN_MENU_UPLOAD_PHOTO = "Main menu: Upload photo";
+
 	Map<MenuItem, List<MenuItem>> getMenuElements( final User user );
 }

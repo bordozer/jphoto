@@ -23,8 +23,10 @@ public class BreadcrumbsBuilder {
 
 	public BreadcrumbsBuilder( final Services services ) {
 		this.services = services;
+	}
 
-//		breadcrumbs.add( new MainPageBreadcrumb( services ) );
+	public static BreadcrumbsBuilder getInstance( final Services services ) {
+		return new BreadcrumbsBuilder( services );
 	}
 
 	public BreadcrumbsBuilder addPortalPageBreadcrumb() {

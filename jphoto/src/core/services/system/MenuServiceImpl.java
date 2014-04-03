@@ -345,7 +345,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem uploadPhotoMenu() {
-		final String caption = translatorService.translate( "Main menu: Upload photo", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_UPLOAD_PHOTO, getLanguage() );
 		final String link = urlUtilsService.getPhotoNewLink();
 		return new MenuItem( caption, link );
 	}
