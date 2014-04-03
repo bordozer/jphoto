@@ -117,7 +117,7 @@
 			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Login information')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="Login" labelFor="${userLoginControl}" isMandatory="true" />
+				<table:tdtext text_t="User data edit: Login" labelFor="${userLoginControl}" isMandatory="true" />
 
 				<table:tddata>
 					<tags:inputHint inputId="${userLoginControl}" hintTitle_t="Login" hint="${loginRequirement}<br /><br />${mandatoryText}" focused="true">
@@ -130,7 +130,7 @@
 
 			<c:if test="${isNew}">
 				<table:tredit>
-					<table:tdtext text_t="Password" labelFor="${userPasswordControl}" isMandatory="true" />
+					<table:tdtext text_t="User data edit: Password" labelFor="${userPasswordControl}" isMandatory="true" />
 
 					<table:tddata>
 						<tags:inputHint inputId="${userPasswordControl}" hintTitle_t="Password" hint="${passwordRequirement}<br /><br />${mandatoryText}">
@@ -142,7 +142,7 @@
 				</table:tredit>
 
 				<table:tredit>
-					<table:tdtext text_t="Confirm password" labelFor="${userConfirmPasswordControl}" isMandatory="true" />
+					<table:tdtext text_t="User data edit: Confirm password" labelFor="${userConfirmPasswordControl}" isMandatory="true" />
 
 					<table:tddata>
 						<tags:inputHint inputId="${userConfirmPasswordControl}" hintTitle_t="Confirm Password" hint="${confirmPasswordRequirement}<br /><br />${mandatoryText}">
@@ -157,7 +157,7 @@
 			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Personal information')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="Gender" labelFor="${userGenderId1}" />
+				<table:tdtext text_t="User data edit: Gender" labelFor="${userGenderId1}" />
 
 				<table:tddata>
 					<form:radiobuttons path="${userGenderControl}" items="${userGenderValues}" itemValue="id" itemLabel="name" delimiter="<br/>" htmlEscape="false" />
@@ -165,7 +165,7 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Name" labelFor="${filterUserNameControl}" isMandatory="true" />
+				<table:tdtext text_t="User data edit: Name" labelFor="${filterUserNameControl}" isMandatory="true" />
 
 				<table:tddata>
 					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="Name" hint="${nameRequirement}<br /><br />${mandatoryText}">
@@ -189,7 +189,7 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Birthday" labelFor="${userDateOfBirthControl}" />
+				<table:tdtext text_t="User data edit: Birthday" labelFor="${userDateOfBirthControl}" />
 
 				<table:tddata>
 					<tags:inputHint inputId="${userDateOfBirthControl}" hintTitle_t="Birthday" hint="${birthdayRequirement}<br /><br />${mandatoryText}">
@@ -201,7 +201,7 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Home site" labelFor="${userHomeSiteControl}" />
+				<table:tdtext text_t="User data edit: Home site" labelFor="${userHomeSiteControl}" />
 
 				<table:tddata>
 					<tags:inputHint inputId="${userHomeSiteControl}" hintTitle_t="Personal site" hint="${homeSiteRequirement}<br /><br />${optionalText}">
@@ -216,7 +216,7 @@
 				<%--<table:tdtext text_t="Self description" labelFor="${selfDescriptionControl}" />--%>
 
 				<table:td colspan="2">
-					${eco:translate('Any information you wouls like to show about yourself')}
+					${eco:translate('User data edit: Any information you wouls like to show about yourself')}
 					<br />
 					<html:textarea inputId="${selfDescriptionControl}" inputValue="${selfDescription}" cols="80" rows="5" hint="${eco:translate('Self description')}" title="${eco:translate('Self description')}" />
 				</table:td>
@@ -225,7 +225,7 @@
 			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Account information')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="Membership type" labelFor="${membershipTypeId1}" />
+				<table:tdtext text_t="User data edit: Membership type" labelFor="${membershipTypeId1}" />
 
 				<table:tddata>
 					<form:radiobuttons items="${membershipTypeListValues}" path="userEditDataModel.${membershipTypeControl}"
@@ -236,7 +236,7 @@
 			<table:separatorInfo colspan="2" height="${separatorHeight}" title="UI settings" />
 
 			<table:tredit>
-				<table:tdtext text_t="Language" labelFor="${photoLinesControl}" />
+				<table:tdtext text_t="User data edit: Language" labelFor="${photoLinesControl}" />
 				<table:tddata>
 					<form:radiobuttons items="${userEditDataModel.usedLanguages}" path="userEditDataModel.userUILanguageId" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
@@ -244,7 +244,7 @@
 
 			<%--Photos in line--%>
 			<table:tredit>
-				<table:tdtext text_t="Photos in line" labelFor="${photosInLineControl}" />
+				<table:tdtext text_t="User data edit: Photos in line" labelFor="${photosInLineControl}" />
 
 				<table:tddata>
 					<form:radiobutton path="${photosInLineControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
@@ -256,7 +256,7 @@
 
 			<%--Photo Lines--%>
 			<table:tredit>
-				<table:tdtext text_t="Photos lines" labelFor="${photoLinesControl}" />
+				<table:tdtext text_t="User data edit: Photos lines" labelFor="${photoLinesControl}" />
 
 				<table:tddata>
 					<form:radiobuttons items="${photoLinesValues}" path="${photoLinesControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
@@ -266,7 +266,7 @@
 			<%-- / Photos Lines--%>
 
 			<table:tr>
-				<table:tdtext text_t="Show nude content" />
+				<table:tdtext text_t="User data edit: Show nude content" />
 				<table:tddata><form:checkbox path="userEditDataModel.${showNudeContentControl}" value="true"/></table:tddata>
 			</table:tr>
 
@@ -274,7 +274,7 @@
 
 			<%-- notification Message About New Photos Of Favorite Members --%>
 			<table:tredit>
-				<table:tdtext text_t="Send notification email about" />
+				<table:tdtext text_t="User data edit: Send notification email about" />
 
 				<table:tddata>
 					<%--<form:radiobuttons items="${yesNoValues}" path="userEditDataModel.${emailNotificationOptionIdsControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>--%>
@@ -288,7 +288,7 @@
 
 			<%-- default Photo Comments Allowance --%>
 			<table:tredit>
-				<table:tdtext text_t="Photo uploading: Comments allowance by default" labelFor="defaultPhotoCommentsAllowanceId1" />
+				<table:tdtext text_t="User data edit: Comments allowance by default" labelFor="defaultPhotoCommentsAllowanceId1" />
 
 				<table:tddata>
 					<form:radiobuttons items="${accessibleCommentAllowances}" path="userEditDataModel.${defaultPhotoCommentsAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>
@@ -299,7 +299,7 @@
 
 			<%-- default Photo Voting Allowance --%>
 			<table:tredit>
-				<table:tdtext text_t="Photo uploading: Photo appraisal allowance by default" labelFor="defaultPhotoVotingAllowanceId1" />
+				<table:tdtext text_t="User data edit: Photo appraisal allowance by default" labelFor="defaultPhotoVotingAllowanceId1" />
 
 				<table:tddata>
 					<form:radiobuttons items="${accessibleVotingAllowances}" path="userEditDataModel.${defaultPhotoVotingAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>
@@ -308,7 +308,7 @@
 			</table:tredit>
 			<%-- / default Photo Voting Allowance --%>
 
-			<table:trok text_t="${isNew ? 'Register' : 'Save'}" />
+			<table:trok text_t="${isNew ? 'User data edit: Register' : 'User data edit: Save'}" />
 
 		</table:table>
 

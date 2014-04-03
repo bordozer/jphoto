@@ -66,13 +66,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo uploading: Photo appraisal allowance by default</nerd>
+		<nerd>User data edit: Photo appraisal allowance by default</nerd>
 		<ru><![CDATA[По умолчанию при загрузке работ выставлять значение поля 'Возможность оценивать работу']]></ru>
 		<en><![CDATA[Photo upload: voting allowance by default]]></en>
 	</translation>
 
 	<translation>
-		<nerd>Photo uploading: Comments allowance by default</nerd>
+		<nerd>User data edit: Comments allowance by default</nerd>
 		<ru><![CDATA[По умолчанию при загрузке работ выставлять значение поля 'Возможность оставлять комментарии']]></ru>
 		<en><![CDATA[Photo upload: voting allowance by default]]></en>
 	</translation>

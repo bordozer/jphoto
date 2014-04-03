@@ -3,6 +3,47 @@
 <translations>
 
 	<translation>
+		<nerd>The field is optional</nerd>
+		<ru><![CDATA[Поле необязательно к заполнению]]></ru>
+		<en><![CDATA[The field is optional]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Upload photo</nerd>
+		<ru><![CDATA[Загрузить работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<!--<translation>
 		<nerd>Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
 	</translation>
@@ -3614,5 +3655,6 @@
 		<ua><![CDATA[]]></ua>
 		<en><![CDATA[]]></en>
 	</translation>
+	-->
 
 </translations>
