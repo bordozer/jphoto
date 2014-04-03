@@ -31,7 +31,7 @@
 		</c:if>
 
 		<a href="${url}type/${activityType.id}/">
-			<html:img32 src="jobtype/${activityType.icon}" alt="${eco:translate1('Activity filter: $1', activityType.nameTranslated)}" cssClass="${css}"/>
+			<html:img32 src="jobtype/${activityType.icon}" alt="${eco:translate(activityType.name)}" cssClass="${css}"/>
 		</a>
 
 		${separator}

@@ -41,10 +41,6 @@ public enum ActivityType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
-
 	public String getIcon() {
 		return icon;
 	}
