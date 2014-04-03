@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Breadcrumbs: Portal page</nerd>
+		<ru><![CDATA[Главная страница]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Page title: $1: Portal page</nerd>
+		<ru><![CDATA[$1: Главная страница]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Photo uploading</nerd>
+		<ru><![CDATA[Загрузка работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Photo editing</nerd>
+		<ru><![CDATA[Редактирование]]></ru>
+	</translation>
+
+</translations>

@@ -13,6 +13,11 @@ public class UserCardLinkBreadcrumb extends AbstractBreadcrumb {
 		this.user = user;
 	}
 
+	public UserCardLinkBreadcrumb( final int userId, final Services services ) {
+		super( services );
+		this.user = services.getUserService().load( userId );
+	}
+
 	@Override
 	public String getValue( final Language language ) {
 		return getEntityLinkUtilsService().getUserCardLink( user, language );

@@ -255,7 +255,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	private String getPortalPageLink( final String projectName, final Language language ) {
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPortalPageURL()
-			, translatorService.translate( "Page title: $1: Portal page", language, projectName )
+			, translatorService.translate( "Page title: $1: Portal page", language, systemVarsService.getProjectName() )
 			, projectName
 		);
 	}

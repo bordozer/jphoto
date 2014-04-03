@@ -26,20 +26,16 @@ public class BreadcrumbsBuilder {
 		this.services = services;
 	}
 
-	public static BreadcrumbsBuilder breadcrumbs( final Services services ) {
-		return new BreadcrumbsBuilder( services ).addPortalPageLinkBreadcrumb();
+	public static BreadcrumbsBuilder portalPage( final Services services ) {
+		return new BreadcrumbsBuilder( services ).portalPageLink();
 	}
 
 	public static BreadcrumbsBuilder pageTitle( final AbstractBreadcrumb breadcrumb, final Services services ) {
-		return new BreadcrumbsBuilder( services ).addProjectNameBreadcrumb().add( breadcrumb );
+		return new BreadcrumbsBuilder( services ).projectName().add( breadcrumb );
 	}
 
 	public static BreadcrumbsBuilder pageHeader( final AbstractBreadcrumb breadcrumb, final Services services ) {
 		return new BreadcrumbsBuilder( services ).add( breadcrumb );
-	}
-
-	public static BreadcrumbsBuilder getInstance( final Services services ) {
-		return new BreadcrumbsBuilder( services );
 	}
 
 	public BreadcrumbsBuilder add( final AbstractBreadcrumb breadcrumb ) {
@@ -47,87 +43,90 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPortalPageBreadcrumb() {
+	public BreadcrumbsBuilder portalPage() {
 		breadcrumbs.add( new PortalPageBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPortalPageLinkBreadcrumb() {
+	public BreadcrumbsBuilder portalPageLink() {
 		breadcrumbs.add( new PortalPageLinkBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addProjectNameBreadcrumb() {
+	public BreadcrumbsBuilder projectName() {
 		breadcrumbs.add( new ProjectNameBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addProjectNameLinkBreadcrumb() {
+	public BreadcrumbsBuilder projectNameLink() {
 		breadcrumbs.add( new ProjectNameLinkBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotoGalleryBreadcrumb() {
+	public BreadcrumbsBuilder photoGallery() {
 		breadcrumbs.add( new PhotoGalleryBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotoUploadBreadcrumb() {
-		breadcrumbs.add( new PhotoUploadBreadcrumb( services ) );
-		return this;
-	}
-
-	public BreadcrumbsBuilder addPhotoEditBreadcrumb() {
-		breadcrumbs.add( new PhotoEditBreadcrumb( services ) );
-		return this;
-	}
-
-	public BreadcrumbsBuilder addPhotoGalleryLinkBreadcrumb() {
+	public BreadcrumbsBuilder photoGalleryLink() {
 		breadcrumbs.add( new PhotoGalleryLinkBreadcrumb( services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addStringBreadcrumb( final String breadcrumb ) {
+	public BreadcrumbsBuilder string( final String breadcrumb ) {
 		breadcrumbs.add( new StringBreadcrumb( breadcrumb, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addTranslatableStringBreadcrumb( final String breadcrumb ) {
+	public BreadcrumbsBuilder translatableString( final String breadcrumb ) {
 		breadcrumbs.add( new TranslatableStringBreadcrumb( breadcrumb, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addUserCardLinkBreadcrumb( final User user ) {
+	public BreadcrumbsBuilder userCardLink( final User user ) {
 		breadcrumbs.add( new UserCardLinkBreadcrumb( user, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotoCardBreadcrumb( final Photo photo ) {
-		breadcrumbs.add( new PhotoCardBreadcrumb( photo, services ) );
+	public BreadcrumbsBuilder userCardLink( final int userId ) {
+		return userCardLink( services.getUserService().load( userId ) );
+	}
+
+	public BreadcrumbsBuilder photoCardLink( final Photo photo ) {
+		breadcrumbs.add( new PhotoCardLinkBreadcrumb( photo, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotosByGenreBreadcrumb( final Genre genre ) {
+	public BreadcrumbsBuilder photoName( final Photo photo ) {
+		breadcrumbs.add( new PhotoNameBreadcrumb( photo, services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder photosByGenre( final Genre genre ) {
 		breadcrumbs.add( new PhotosByGenreBreadcrumb( genre, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotosByUserBreadcrumb( final User user ) {
+	public BreadcrumbsBuilder photosByUser( final User user ) {
 		breadcrumbs.add( new PhotosByUserBreadcrumb( user, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotosByUserAndGenreBreadcrumb( final User user, final Genre genre ) {
+	public BreadcrumbsBuilder photosByUserAndGenre( final User user, final Genre genre ) {
 		breadcrumbs.add( new PhotosByUserAndGenreBreadcrumb( user, genre, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addPhotoAppraisalCategoryParameter( final PhotoVotingCategory photoVotingCategory, final Genre genre ) {
+	public BreadcrumbsBuilder photosByUserAndGenre( final int userId, final int genreId ) {
+		return photosByUserAndGenre( services.getUserService().load( userId ), services.getGenreService().load( genreId ) );
+	}
+
+	public BreadcrumbsBuilder photoAppraisalCategory( final PhotoVotingCategory photoVotingCategory, final Genre genre ) {
 		breadcrumbs.add( new PhotoAppraisalCategoryBreadcrumb( photoVotingCategory, services ) );
 		return this;
 	}
 
-	public BreadcrumbsBuilder addFormattedDateBreadcrumb( final Time date, final Genre genre ) {
+	public BreadcrumbsBuilder formattedDate( final Time date, final Genre genre ) {
 		breadcrumbs.add( new FormattedDateBreadcrumb( date, services ) );
 		return this;
 	}

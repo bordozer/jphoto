@@ -1,6 +1,5 @@
 package ui.services.breadcrumbs;
 
-import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import elements.PageTitleData;
@@ -10,5 +9,9 @@ public interface BreadcrumbsPhotoService {
 
 	PageTitleData getUploadPhotoBreadcrumbs( final User user, final PhotoEditWizardStep wizardStep );
 
-	PageTitleData getPhotoEditDataBreadcrumbs( final Photo photo, final User user, final Genre genre );
+	PageTitleData getPhotoEditDataBreadcrumbs( final Photo photo );
+
+	PageTitleData getPhotoCardBreadcrumbs( final Photo photo, final User accessor );
+
+	PageTitleData getPhotoActivitiesBreadcrumbs( final Photo photo, final User accessor );
 }

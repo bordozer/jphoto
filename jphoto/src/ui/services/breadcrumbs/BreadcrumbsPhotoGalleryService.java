@@ -16,15 +16,11 @@ public interface BreadcrumbsPhotoGalleryService {
 
 	PageTitleData getPhotosAllDataBest();
 
-	PageTitleData getPhotoCardData( final Photo photo, final User user, Genre genre, final String title );
-
 	PageTitleData getPhotoNotFoundData();
 
 	PageTitleData getUserPhotoVotingData( User user, Photo photo, Genre genre );
 
 	PageTitleData getUserPhotoPreviewsData( User user, Photo photo, Genre genre );
-
-	PageTitleData getPhotoCardForHiddenAuthor( final Photo photo, final Genre genre, final String title );
 
 	PageTitleData getPhotoTitleForHiddenAuthor( Photo photo, Genre genre, String mode_t );
 

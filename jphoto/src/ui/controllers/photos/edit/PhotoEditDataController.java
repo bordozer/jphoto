@@ -196,8 +196,6 @@ public class PhotoEditDataController {
 		model.setCurrentStep( PhotoEditWizardStep.EDIT_PHOTO_DATA );
 		model.setNextStep( PhotoEditWizardStep.PHOTO_SAVING );
 
-		final User user = userService.load( photo.getUserId() );
-
 		initModelFromPhoto( model, photo );
 
 		initGenreLists( model );
@@ -208,7 +206,7 @@ public class PhotoEditDataController {
 
 		final Genre genre = genreService.load( photo.getGenreId() );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo, user, genre ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo ) );
 
 		return DATA_VIEW;
 	}

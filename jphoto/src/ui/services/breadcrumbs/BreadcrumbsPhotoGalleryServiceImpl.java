@@ -55,8 +55,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String title = BreadcrumbsBuilder.pageTitle( new PhotoGalleryBreadcrumb( services ), services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( new PortalPageBreadcrumb( services ), services ).build();
 
-		final String breadcrumbs = root()
-			.addPhotoGalleryBreadcrumb()
+		final String breadcrumbs = portalPage()
+			.photoGallery()
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
@@ -69,18 +69,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
-	}
-
-	@Override
-	public PageTitleData getPhotoCardData( final Photo photo, final User user, final Genre genre, final String title ) {
-		final String rootTranslated = getPhotoRootTranslated();
-
-		final String fullTitle = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName(), title );
-
-		final List<String> baseBreadcrumbs = getPhotoBaseBreadcrumbs( photo, user, genre, title );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( baseBreadcrumbs );
-
-		return new PageTitleData( fullTitle, rootTranslated, breadcrumbs );
 	}
 
 	@Override
@@ -102,27 +90,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	@Override
 	public PageTitleData getUserPhotoPreviewsData( final User user, final Photo photo, final Genre genre ) {
 		return photoActionsDetails( user, photo, genre, translatorService.translate( "Previews", EnvironmentContext.getLanguage() ) );
-	}
-
-	@Override
-	public PageTitleData getPhotoCardForHiddenAuthor( final Photo photo, final Genre genre, final String title ) {
-		final String rootTranslated = getPhotoRootTranslated();
-
-		final String userAnonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
-		final String fullTitle = pageTitleUtilsService.getTitleDataString( rootTranslated, userAnonymousName, photo.getName(), title );
-
-		final List<String> breadcrumbList = newArrayList();
-		breadcrumbList.add( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ) );
-		breadcrumbList.add( entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ) );
-		breadcrumbList.add( userAnonymousName );
-		breadcrumbList.add( StringUtils.isNotEmpty( title ) ? entityLinkUtilsService.getPhotoCardLink( photo, EnvironmentContext.getLanguage() ) : photo.getNameEscaped() );
-		if ( StringUtils.isNotEmpty( title ) ) {
-			breadcrumbList.add( title );
-		}
-
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbList );
-
-		return new PageTitleData( fullTitle, rootTranslated, breadcrumbs );
 	}
 
 	@Override
@@ -339,8 +306,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
-	private BreadcrumbsBuilder root() {
-		return BreadcrumbsBuilder.breadcrumbs( services );
+	private BreadcrumbsBuilder portalPage() {
+		return BreadcrumbsBuilder.portalPage( services );
 	}
 
 	private Language getLanguage() {

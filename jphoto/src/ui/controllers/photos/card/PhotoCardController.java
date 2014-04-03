@@ -12,6 +12,7 @@ import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.breadcrumbs.PageTitleService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
@@ -73,7 +74,7 @@ public class PhotoCardController {
 	private SecurityService securityService;
 
 	@Autowired
-	private PageTitleService pageTitleService;
+	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
@@ -144,7 +145,7 @@ public class PhotoCardController {
 
 		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), currentUser ) );
 
-		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), StringUtils.EMPTY ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getPhotoCardBreadcrumbs( photo, EnvironmentContext.getCurrentUser() ) );
 
 		model.setEntryMenu( entryMenuService.getPhotoMenu( photo, currentUser ) );
 

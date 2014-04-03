@@ -7,6 +7,7 @@ import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.breadcrumbs.PageTitleService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -48,7 +49,7 @@ public class PhotoActivityStreamController {
 	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Autowired
-	private PageTitleService pageTitleService;
+	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -127,7 +128,7 @@ public class PhotoActivityStreamController {
 
 		pagingModel.setTotalItems( idsResult.getRecordQty() );
 
-		model.setPageTitleData( pageTitleService.photoCardTitle( photo, EnvironmentContext.getCurrentUser(), translatorService.translate( "Activity", EnvironmentContext.getLanguage() ) ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getPhotoActivitiesBreadcrumbs( photo, EnvironmentContext.getCurrentUser() ) );
 
 		return VIEW;
 	}

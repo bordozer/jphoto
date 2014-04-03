@@ -37,14 +37,6 @@ public class PageTitleServiceImpl implements PageTitleService {
 	private TranslatorService translatorService;
 
 	@Override
-	public PageTitleData photoCardTitle( final Photo photo, final User accessor, final String title ) {
-		final User photoAuthor = userService.load( photo.getUserId() );
-		final Genre genre = genreService.load( photo.getGenreId() );
-
-		return securityService.isPhotoAuthorNameMustBeHidden( photo, accessor ) ? breadcrumbsPhotoGalleryService.getPhotoCardForHiddenAuthor( photo, genre, title ) : breadcrumbsPhotoGalleryService.getPhotoCardData( photo, photoAuthor, genre, title );
-	}
-
-	@Override
 	public PageTitleData userPhotoVotingData( final Photo photo, final User accessor ) {
 		final User photoAuthor = userService.load( photo.getUserId() );
 		final Genre genre = genreService.load( photo.getGenreId() );

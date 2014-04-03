@@ -62,7 +62,7 @@ function Menu(caller, options){
 	// ----- multi-level menu defaults -----
 		crossSpeed: 200, // cross-fade speed for multi-level menus
 		crumbDefaultText: 'Choose an option:',
-		backLink: true, // in the ipod-style menu: instead of breadcrumbs, show only a 'back' link
+		backLink: true, // in the ipod-style menu: instead of portalPage, show only a 'back' link
 		backLinkText: 'Back',
 		flyOut: false, // multi-level menus are ipod-style by default; this parameter overrides to make a flyout instead
 		flyOutOnState: 'ui-state-default',
@@ -425,7 +425,7 @@ Menu.prototype.drilldown = function(container, options) {
 										setPrevMenu();
 									});
 								
-									// make this the current crumb, delete all breadcrumbs after this one, and navigate to the relevant menu
+									// make this the current crumb, delete all portalPage after this one, and navigate to the relevant menu
 									$(this).parent().addClass('fg-menu-current-crumb').find('span').remove();
 									$(this).parent().nextAll().remove();									
 								};
