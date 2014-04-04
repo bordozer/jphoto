@@ -161,6 +161,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( favoritesMenu );
 			menuItems.add( userBookmarkedPhotosMenu( user ) );
 			menuItems.add( userFavoriteMembersMenu( user ) );
+			menuItems.add( getUserPhotosOfFavoriteMembersMenu( user ) );
 			menuItems.add( userFriendsMenu( user ) );
 			menuItems.add( userBlackListMenu( user ) );
 
@@ -428,6 +429,12 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem userFavoriteMembersMenu( final User user ) {
 		final String caption = translatorService.translate( FavoriteEntryType.FAVORITE_MEMBERS.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteMembersLink( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getUserPhotosOfFavoriteMembersMenu( final User user ) {
+		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS.getText(), getLanguage() );
+		final String link = urlUtilsService.getUserPhotosOfFavoriteMembersLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
