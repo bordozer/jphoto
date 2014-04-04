@@ -847,7 +847,7 @@ public class PhotoListController {
 			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.NEW_COMMENTS_NOTIFICATION.getId() ) ) {
 				icons.add( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
 			}
-			photoInfo.setShowIconsForFavoriteEntryTypes( icons );
+			photoInfo.setPhotoIconsTypes( icons );
 		}
 	}
 
