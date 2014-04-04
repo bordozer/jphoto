@@ -112,7 +112,7 @@ public class UserEditDataController {
 		model.setPassword( DEFAULT_USER_PASSWORD );
 		model.setConfirmPassword( DEFAULT_USER_PASSWORD );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserNewData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserRegistrationBreadcrumbs() );
 
 		return VIEW;
 	}

@@ -13,7 +13,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserListBreadcrumbs();
 
-	PageTitleData getUserNewData();
+	PageTitleData getUserRegistrationBreadcrumbs();
 
 	PageTitleData getVotesForUserRankInGenreData( final User user, final Genre genre );
 

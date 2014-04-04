@@ -146,7 +146,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItem = new MenuItem( translatorService.translate( "Main menu: My club", getLanguage() ), link );
 		} else {
 			menuItem = registerMenu();
-			menuItems.add( new MenuItem( translatorService.translate( "Main menu: Register", getLanguage() ), menuItem.getLink() ) );
+			menuItems.add( new MenuItem( translatorService.translate( MAIN_MENU_REGISTER, getLanguage() ), menuItem.getLink() ) );
 		}
 
 		menus.put( menuItem, menuItems );

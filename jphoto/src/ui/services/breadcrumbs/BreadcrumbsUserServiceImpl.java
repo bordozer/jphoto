@@ -8,14 +8,13 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.system.MenuService;
 import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
-import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
-import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
 import ui.services.breadcrumbs.items.UserListBreadcrumbs;
 import utils.StringUtilities;
 
@@ -52,14 +51,18 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserNewData() {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Register", EnvironmentContext.getLanguage() );
+	public PageTitleData getUserRegistrationBreadcrumbs() {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
+		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.translatableString( MenuService.MAIN_MENU_REGISTER )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
@@ -72,8 +75,6 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
-
-//		return getUserData( user, tran );
 	}
 
 	@Override
