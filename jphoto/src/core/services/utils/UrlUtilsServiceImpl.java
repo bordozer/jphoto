@@ -304,17 +304,17 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getUserCommentsList( final int userId ) {
-		return String.format( "%s/%s/%s/comments/", getBaseURLWithPrefix(), USERS_URL, userId );
+		return String.format( "%s/%s/%s/comments/written/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
 	@Override
 	public String getCommentsToUserList( final int userId ) {
-		return String.format( "%s/%s/%s/comments/to/", getBaseURLWithPrefix(), USERS_URL, userId );
+		return String.format( "%s/%s/%s/comments/received/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
 	@Override
 	public String getUnreadCommentsToUserList( final int userId ) {
-		return String.format( "%s/%s/%s/comments/to/unread/", getBaseURLWithPrefix(), USERS_URL, userId );
+		return String.format( "%s/%s/%s/comments/received/unread/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
 	@Override

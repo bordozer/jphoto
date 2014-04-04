@@ -8,6 +8,9 @@ public enum LinkNerdText {
 	, USER_STATISTICS_COMMENTS_RECEIVED(
 		"User Statistics: User's received comments"
 		, "User Statistics: Comments to $1's photos" )
+	, USER_STATISTICS_COMMENTS_RECEIVED_UNREAD(
+		"User Statistics: User's received unread comments"
+		, "User Statistics: Unread by $1 comments" )
 	, USER_STATISTICS_COMMENTS_WRITTEN(
 		"User Statistics: Written by user comments"
 		, "User Statistics: Written by $1 comments" )

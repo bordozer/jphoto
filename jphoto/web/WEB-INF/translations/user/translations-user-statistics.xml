@@ -23,6 +23,16 @@
 	</translation>
 
 	<translation>
+		<nerd>User Statistics: User's received unread comments</nerd>
+		<ru><![CDATA[Полученные непрочитанные комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Unread by $1 comments</nerd>
+		<ru><![CDATA[Комментарии к работам $1, непрочитанные автором]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>User Statistics: Written by user comments</nerd>
 		<ru><![CDATA[Написанные комменарии]]></ru>
 	</translation>
@@ -30,16 +40,6 @@
 	<translation>
 		<nerd>User Statistics: Written by $1 comments</nerd>
 		<ru><![CDATA[Комментарии, которые $1 оставил к работам]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

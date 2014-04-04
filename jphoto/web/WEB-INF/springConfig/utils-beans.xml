@@ -18,7 +18,6 @@
 	<bean id="commonBreadcrumbsService" class="ui.services.breadcrumbs.CommonBreadcrumbsServiceImpl"/>
 	<bean id="pageTitleUtilsService" class="ui.services.breadcrumbs.PageTitleUtilsServiceImpl"/>
 	<bean id="breadcrumbsAdminService" class="ui.services.breadcrumbs.BreadcrumbsAdminServiceImpl"/>
-	<bean id="breadcrumbsPhotoCommentService" class="ui.services.breadcrumbs.BreadcrumbsPhotoCommentServiceImpl"/>
 	<bean id="breadcrumbsPhotoGalleryService" class="ui.services.breadcrumbs.BreadcrumbsPhotoGalleryServiceImpl"/>
 	<bean id="breadcrumbsPhotoService" class="ui.services.breadcrumbs.BreadcrumbsPhotoServiceImpl"/>
 	<bean id="breadcrumbsUserService" class="ui.services.breadcrumbs.BreadcrumbsUserServiceImpl"/>

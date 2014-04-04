@@ -8,7 +8,6 @@ import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
 import core.services.menu.EntryMenuService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoCommentService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +55,7 @@ public class PhotoCommentsListController {
 	private SecurityService securityService;
 
 	@Autowired
-	private BreadcrumbsPhotoCommentService breadcrumbsPhotoCommentService;
+	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -89,7 +89,7 @@ public class PhotoCommentsListController {
 		return pagingModel;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/to/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/received/" )
 	public String commentsToUser( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model, final @ModelAttribute( PAGING_MODEL_NAME ) PagingModel pagingModel ) {
 		final User user = model.getUser();
 
@@ -101,12 +101,12 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( breadcrumbsPhotoCommentService.getPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserReceivedCommentsBreadcrumb( user ) );
 
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/to/unread/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/received/unread/" )
 	public String unreadCommentsToUser( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model, final @ModelAttribute( PAGING_MODEL_NAME ) PagingModel pagingModel ) {
 
 		final User user = model.getUser();
@@ -119,12 +119,12 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( false );
 
-		model.setPageTitleData( breadcrumbsPhotoCommentService.getUnreadPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserWrittenUnreadCommentsBreadcrumb( user ) );
 
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	@RequestMapping( method = RequestMethod.GET, value = "/written/" )
 	public String userComments( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model, final @ModelAttribute( PAGING_MODEL_NAME ) PagingModel pagingModel ) {
 
 		final User user = model.getUser();
@@ -137,12 +137,12 @@ public class PhotoCommentsListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( breadcrumbsPhotoCommentService.getUnreadPhotoCommentsToUserData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserWrittenCommentsBreadcrumb( user ) );
 
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/to/markAllAsRead" )
+	@RequestMapping( method = RequestMethod.GET, value = "/received/markAllAsRead" )
 	public String markAllCommentsAsRead( final @ModelAttribute( MODEL_NAME ) PhotoCommentsListModel model ) {
 
 		final User user = model.getUser();
@@ -151,7 +151,7 @@ public class PhotoCommentsListController {
 
 		photoCommentService.markAllUnreadCommentAsRead( user.getId() );
 
-		return String.format( "redirect:%s/members/%d/comments/to/", urlUtilsService.getBaseURLWithPrefix(), user.getId() );
+		return String.format( "redirect:%s/members/%d/comments/received/", urlUtilsService.getBaseURLWithPrefix(), user.getId() );
 	}
 
 	private List<PhotoCommentInfo> getCommentsInfos( final List<Integer> commentIds, final PagingModel pagingModel ) {

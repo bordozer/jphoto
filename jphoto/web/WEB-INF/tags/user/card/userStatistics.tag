@@ -56,17 +56,17 @@
 	</table:trinfo>
 
 	<table:trinfo>
-		<table:td cssClass="${cssClass}" width="${width}"><links:commentsOfUser user="${user}"/></table:td>
+		<table:td cssClass="${cssClass}" width="${width}"><links:commentsWritten user="${user}"/></table:td>
 		<table:td>${userStatistic.writtenCommentsQty}</table:td>
 	</table:trinfo>
 
 	<table:trinfo>
-		<table:td cssClass="${cssClass}" width="${width}"><links:commentsToUser user="${user}"/></table:td>
+		<table:td cssClass="${cssClass}" width="${width}"><links:commentsReceived user="${user}"/></table:td>
 		<table:td>${userStatistic.receivedCommentsQty}</table:td>
 	</table:trinfo>
 
 	<table:trinfo>
-		<table:td cssClass="${cssClass}" width="${width}"><links:commentsToUserUnread user="${user}"/></table:td>
+		<table:td cssClass="${cssClass}" width="${width}"><links:commentsReceivedUnread user="${user}"/></table:td>
 		<table:td>${userStatistic.receivedUnreadCommentsQty}</table:td>
 	</table:trinfo>
 

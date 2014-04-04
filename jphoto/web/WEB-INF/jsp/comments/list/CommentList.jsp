@@ -88,7 +88,7 @@
 		<script type="text/javascript">
 			function markAllAsRead() {
 				if ( confirm( "${eco:translate('Mark ALL unread comments as read?')}" ) ) {
-					document.location.href = '${eco:baseUrlWithPrefix()}/members/${user.id}/comments/to/markAllAsRead/';
+					document.location.href = '${eco:baseUrlWithPrefix()}/members/${user.id}/comments/received/markAllAsRead/';
 					return true;
 				}
 				return false;
