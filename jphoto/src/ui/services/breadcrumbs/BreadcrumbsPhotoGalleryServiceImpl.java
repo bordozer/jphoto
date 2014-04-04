@@ -28,6 +28,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalleryService {
 
@@ -55,7 +56,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String title = BreadcrumbsBuilder.pageTitle( new PhotoGalleryBreadcrumb( services ), services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( new PortalPageBreadcrumb( services ), services ).build();
 
-		final String breadcrumbs = portalPage()
+		final String breadcrumbs = portalPage( services )
 			.photoGallery()
 			.build();
 
@@ -288,10 +289,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), text );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	private BreadcrumbsBuilder portalPage() {
-		return BreadcrumbsBuilder.portalPage( services );
 	}
 
 	private Language getLanguage() {

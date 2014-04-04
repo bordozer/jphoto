@@ -91,6 +91,16 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
+	public BreadcrumbsBuilder userList() {
+		breadcrumbs.add( new UserListBreadcrumbs( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder userListLink() {
+		breadcrumbs.add( new UserListLinkBreadcrumbs( services ) );
+		return this;
+	}
+
 	public BreadcrumbsBuilder userCardLink( final User user ) {
 		breadcrumbs.add( new UserCardLinkBreadcrumb( user, services ) );
 		return this;

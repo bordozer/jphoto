@@ -126,7 +126,7 @@ public class UserListController {
 
 		model.setUserList( users );
 		model.setUserListDataMap( getUserListDataMap( users ) );
-		model.setPageTitleData( breadcrumbsUserService.getUserListData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListBreadcrumbs() );
 
 		model.setShowEditIcons( securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) && configurationService.getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_USER_DATA ) );
 
@@ -151,7 +151,7 @@ public class UserListController {
 		model.setUserList( users );
 
 		model.setUserListDataMap( getUserListDataMap( users ) );
-		model.setPageTitleData( breadcrumbsUserService.getUserListData() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListBreadcrumbs() );
 
 		model.setMembershipType( membershipType );
 

@@ -8,11 +8,18 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
+import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
+import ui.services.breadcrumbs.items.UserListBreadcrumbs;
 import utils.StringUtilities;
+
+import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
@@ -27,14 +34,21 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@Override
-	public PageTitleData getUserListData() {
-		final String rootTranslated = getUserRootTranslated();
+	public PageTitleData getUserListBreadcrumbs() {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( rootTranslated );
+		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = portalPage( services )
+			.userList()
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override

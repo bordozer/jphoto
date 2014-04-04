@@ -11,6 +11,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.system.MenuService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
@@ -116,7 +117,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getUsersRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllUsersLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Members", language ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( MenuService.MAIN_MENU_MEMBERS, language ) );
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import elements.PageTitleData;
 
 public interface BreadcrumbsUserService {
 
-	PageTitleData getUserListData();
+	PageTitleData getUserListBreadcrumbs();
 
 	PageTitleData getUserNewData();
 

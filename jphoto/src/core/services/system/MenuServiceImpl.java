@@ -117,7 +117,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.addAll( byMembershipMenus( UrlUtilsServiceImpl.USERS_URL ) );
 		menuItems.add( getActivityStreamMenu() );
 
-		menus.put( new MenuItem( translatorService.translate( "Main menu: Members", getLanguage() ), menuItem.getLink() ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( MAIN_MENU_MEMBERS, getLanguage() ), menuItem.getLink() ), menuItems );
 	}
 
 	private MenuItem getActivityStreamMenu() {
