@@ -174,7 +174,7 @@
 				<option value="" selected="selected"></option>
 				<c:forEach var="photoGroupOperationMenu" items="${photoGroupOperationMenues}">
 					<c:set var="photoGroupOperation" value="${photoGroupOperationMenu.photoGroupOperation}"/>
-					<option value="${photoGroupOperation.id}">${photoGroupOperation.nameTranslated}</option>
+					<option value="${photoGroupOperation.id}">${eco:translate(photoGroupOperation.name)}</option>
 				</c:forEach>
 			</select>
 

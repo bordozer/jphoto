@@ -105,7 +105,7 @@
 				<br />
 				<br />
 				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
-					<js:checkBoxChecker namePrefix="_${userTeamMember.id}']" uniqueId="${userTeamMember.hashCode}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${userTeamMember.teamMemberType.nameTranslated} )
+					<js:checkBoxChecker namePrefix="_${userTeamMember.id}']" uniqueId="${userTeamMember.hashCode}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />
 				</c:forEach>
 			</c:if>

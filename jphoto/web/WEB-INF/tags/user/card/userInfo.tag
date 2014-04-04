@@ -64,7 +64,7 @@
 
 	<table:trinfo>
 		<table:tdtext text_t="Status"/>
-		<table:td>${user.userStatus.nameTranslated}</table:td>
+		<table:td>${eco:translate(user.userStatus.name)}</table:td>
 	</table:trinfo>
 
 	<table:trinfo>

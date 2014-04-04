@@ -12,7 +12,8 @@
 	<table:table width="800">
 
 		<table:tr>
-			<table:td>${eco:translate1('Your status is $1', uploadAllowance.photoAuthor.userStatus.nameTranslated )}</table:td>
+			<c:set var="userStatusName" value="${eco:translate(uploadAllowance.photoAuthor.userStatus.name)}"/>
+			<table:td>${eco:translate1('Your status is $1', userStatusName)}</table:td>
 		</table:tr>
 
 		<c:set var="uploadThisWeekPhotos" value="${uploadAllowance.uploadThisWeekPhotos}"/>

@@ -202,7 +202,7 @@
 				<table:td>
 					<c:forEach var="photoAward" items="${photoInfo.photoAwards}" varStatus="status">
 
-						${photoAward.awardKey.nameTranslated}
+						${eco:translate(photoAward.awardKey.name)}
 
 						<c:if test="${not status.end}">
 							<br />

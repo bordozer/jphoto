@@ -95,7 +95,7 @@
 					</table:tdicon>
 
 					<table:td cssClass="textcentered">
-						${userTeamMember.teamMemberType.nameTranslated}
+						${eco:translate(userTeamMember.teamMemberType.name)}
 					</table:td>
 
 					<table:td cssClass="textcentered">

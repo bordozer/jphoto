@@ -34,7 +34,7 @@
 		<c:set var="isSelectedTab" value="${selectedTab == userCardTab}" />
 
 		<div class="userCardTab block-border${isSelectedTab ? " block-background" : ""}">
-			<a href="${userCardLink}${userCardTab.key}/">${userCardTab.nameTranslated}</a>
+			<a href="${userCardLink}${userCardTab.key}/">${eco:translate(userCardTab.name)}</a>
 		</div>
 
 	</c:forEach>

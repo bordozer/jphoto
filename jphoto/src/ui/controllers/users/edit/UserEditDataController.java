@@ -136,7 +136,7 @@ public class UserEditDataController {
 
 		model.setBeingChangedUser( beingChangedUser );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserEditData( beingChangedUser ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserEditBreadcrumbs( beingChangedUser ) );
 
 		return VIEW;
 	}

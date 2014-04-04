@@ -90,7 +90,7 @@ public class UserAvatarController {
 			model.setCurrentAvatarFile( userAvatarFile );
 		}
 
-		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarData( model.getUser() ) );
+		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
 
 		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 
@@ -111,7 +111,7 @@ public class UserAvatarController {
 
 		model.setBindingResult( result );
 
-		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarData( model.getUser() ) );
+		model.getPageModel().setPageTitleData( breadcrumbsUserService.setUserAvatarBreadcrumbs( model.getUser() ) );
 
 		model.setDimension( getAvatarDimension( model.getCurrentAvatarFile() ) );
 

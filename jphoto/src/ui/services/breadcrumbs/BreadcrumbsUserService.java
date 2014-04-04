@@ -17,11 +17,11 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getVotesForUserRankInGenreBreadcrumbs( final User user, final Genre genre );
 
-	PageTitleData getUserEditData( final User user );
+	PageTitleData getUserEditBreadcrumbs( final User user );
 
-	PageTitleData setUserAvatarData( final User user );
+	PageTitleData setUserAvatarBreadcrumbs( final User user );
 
-	PageTitleData getUserCardData( final User user, final UserCardTab userCardTab );
+	PageTitleData getUserCardBreadcrumbs( final User user, final UserCardTab userCardTab );
 
 	PageTitleData getUserListByFilter();
 

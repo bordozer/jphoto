@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>UserCardTab: Overview</nerd>
+		<ru><![CDATA[Карточка пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Personal data</nerd>
+		<ru><![CDATA[Персональные данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Photos overview</nerd>
+		<ru><![CDATA[Обзор работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Statistics</nerd>
+		<ru><![CDATA[Статистика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Team</nerd>
+		<ru><![CDATA[Команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Albums</nerd>
+		<ru><![CDATA[Фото альбомы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserCardTab: Activity stream</nerd>
+		<ru><![CDATA[Лента событий]]></ru>
+	</translation>
+
+</translations>

@@ -363,7 +363,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userDataMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Profile settings", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_PROFILE_SETTINGS, getLanguage() );
 		final String link = urlUtilsService.getUserEditLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
@@ -375,7 +375,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userAvatarMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: My Avatar", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_MY_AVATAR, getLanguage() );
 		final String link = urlUtilsService.getEditUserAvatarLink( user.getId() );
 		return new MenuItem( caption, link );
 	}

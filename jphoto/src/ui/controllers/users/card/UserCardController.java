@@ -119,7 +119,7 @@ public class UserCardController {
 		final AbstractUserCardModelFillStrategy fillStrategy = AbstractUserCardModelFillStrategy.getInstance( model, userCardTab, pagingModel, userCardModelFillService );
 		fillStrategy.fillModel();
 
-		model.setPageTitleData( breadcrumbsUserService.getUserCardData( user, userCardTab ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserCardBreadcrumbs( user, userCardTab ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )

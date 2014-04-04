@@ -84,7 +84,7 @@
 					<tags:entryMenu entryMenu="${userMenu}" />
 				</table:td>
 
-				<table:td cssClass="textcentered">${user.userStatus.nameTranslated}</table:td>
+				<table:td cssClass="textcentered">${eco:translate(user.userStatus.name)}</table:td>
 
 				<%--<table:td>${eco:escapeHtml(user.login)}</table:td>--%>
 				<%--<table:td>${eco:escapeHtml(user.email)}</table:td>--%>

@@ -48,19 +48,19 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: user edit data</nerd>
+		<ru><![CDATA[Редактирование ]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: User avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
 	</translation>
 
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
+	<!--<translation>
+		<nerd>Breadcrumbs: $1: user card</nerd>
+		<ru><![CDATA[$1: карточка пользователя]]></ru>
+	</translation>-->
 
 	<translation>
 		<nerd></nerd>

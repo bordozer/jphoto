@@ -41,7 +41,7 @@
 	jQuery().ready( function() {
 
 		var favoriteEntry = registerFavoriteEntry( ${currentUser.id}, ${entryType.id}, ${favoriteEntry.id}, '${entryName}'
-				, '${entryType.addIcon}', '${entryType.removeIcon}', '${entryType.nameTranslated}', '${entryType.addText}', '${entryType.removeText}', '${favoriteIconId}' );
+				, '${entryType.addIcon}', '${entryType.removeIcon}', '${eco:translate(entryType.name)}', '${entryType.addText}', '${entryType.removeText}', '${favoriteIconId}' );
 
 		$( '#${favoriteIconId}' ).bind( "click", function() {
 			favoriteEntryModel.${jsFunction}( favoriteEntry );

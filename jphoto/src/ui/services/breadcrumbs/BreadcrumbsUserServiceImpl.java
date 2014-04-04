@@ -15,7 +15,9 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 import ui.services.breadcrumbs.items.UserListBreadcrumbs;
+import ui.services.breadcrumbs.items.UserNameBreadcrumb;
 import utils.StringUtilities;
 
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
@@ -42,9 +44,9 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserListBreadcrumbs() {
 
-		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
-		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
+		final UserListBreadcrumbs breadcrumb = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
 		final String breadcrumbs = portalPage( services )
 			.userList()
@@ -56,13 +58,13 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserRegistrationBreadcrumbs() {
 
-		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
-		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( MenuService.MAIN_MENU_REGISTER, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
 		final String breadcrumbs = portalPage( services )
 			.userListLink()
-			.translatableString( MenuService.MAIN_MENU_REGISTER )
+			.add( breadcrumb )
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
@@ -70,44 +72,47 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	@Override
 	public PageTitleData getVotesForUserRankInGenreBreadcrumbs( final User user, final Genre genre ) {
-		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
-		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
 
 		final String breadcrumbs = breadcrumbsPhotoGalleryService.getUserPhotosInGenreLinkBreadcrumbs( user, genre )
 																 .translatableString( "Breadcrumbs: Votes for rank in genre" )
 																 .build();
-		/*final String breadcrumbs = portalPage( services )
-			.userListLink()
-			.userCardLink( user )
-			.photosByUser( user )
-			.photosByUserAndGenre( user, genre )
-			.translatableString( "Breadcrumbs: Votes for rank in genre" )
-			.build();*/
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserEditData( final User user ) {
-		return getUserData( user, translatorService.translate( "Edit", EnvironmentContext.getLanguage() ) );
+	public PageTitleData getUserEditBreadcrumbs( final User user ) {
+
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( MenuService.MAIN_MENU_PROFILE_SETTINGS )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData setUserAvatarData( final User user ) {
-		return getUserData( user, translatorService.translate( "Avatar", EnvironmentContext.getLanguage() ) );
+	public PageTitleData setUserAvatarBreadcrumbs( final User user ) {
+
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( "Breadcrumbs: User avatar" )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserCardData( final User user, final UserCardTab userCardTab ) {
-		final String rootTranslated = getUserRootTranslated();
+	public PageTitleData getUserCardBreadcrumbs( final User user, final UserCardTab userCardTab ) {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), userCardTab.getNameTranslated() );
+		final BreadcrumbsBuilder builder = portalPage( services ).userListLink();
 
-		final String userLinkOrName = userCardTab.isDefaultTab() ? user.getNameEscaped() : entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), userLinkOrName, userCardTab.getNameTranslated() );
+		if ( userCardTab.isDefaultTab() ) {
+			final String str = String.format( "%s: %s", user.getNameEscaped(), translatorService.translate( UserCardTab.getDefaultUserCardTab().getName(), EnvironmentContext.getLanguage() ) );
+			builder.string( str );
+		} else {
+			builder.userCardLink( user ).translatableString( userCardTab.getName() );
+		}
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), builder.build() );
 	}
 
 	@Override
@@ -301,5 +306,17 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		);
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	private BreadcrumbsBuilder userCardLink( final User user ) {
+		return portalPage( services ).userListLink().userCardLink( user );
+	}
+
+	private String userCardHeader( final User user ) {
+		return BreadcrumbsBuilder.pageHeader( new UserNameBreadcrumb( user, services ), services ).build();
+	}
+
+	private String userCardTitle( final User user ) {
+		return BreadcrumbsBuilder.pageTitle( new UserNameBreadcrumb( user, services ), services ).build();
 	}
 }

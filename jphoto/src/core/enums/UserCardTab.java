@@ -4,13 +4,13 @@ import utils.StringUtilities;
 
 public enum UserCardTab {
 
-	BRIEF_USER__OVERVIEW( "brief", "Overview" )
-	, PERSONAL_DATA( "personal", "Personal data" )
-	, PHOTOS_OVERVIEW( "photos", "Photos overview" )
-	, STATISTICS( "statistics", "Statistics" )
-	, TEAM( "team", "Team" )
-	, ALBUMS( "albums", "Albums" )
-	, ACTIVITY_STREAM( "activity", "Activity stream" )
+	BRIEF_USER__OVERVIEW( "brief", "UserCardTab: Overview" )
+	, PERSONAL_DATA( "personal", "UserCardTab: Personal data" )
+	, PHOTOS_OVERVIEW( "photos", "UserCardTab: Photos overview" )
+	, STATISTICS( "statistics", "UserCardTab: Statistics" )
+	, TEAM( "team", "UserCardTab: Team" )
+	, ALBUMS( "albums", "UserCardTab: Albums" )
+	, ACTIVITY_STREAM( "activity", "UserCardTab: Activity stream" )
 	;
 
 	private final String key;
@@ -35,10 +35,6 @@ public enum UserCardTab {
 
 	public boolean isDefaultTab() {
 		return this == getDefaultUserCardTab();
-	}
-
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
 	}
 
 	public static UserCardTab getById( final String key ) {

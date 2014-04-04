@@ -26,7 +26,7 @@
 
 <script type="text/javascript">
 
-	var complaintEntities = {<c:forEach var="complaintEntity" items="${complaintEntities}" varStatus="status"> '${complaintEntity.id}': "${complaintEntity.nameTranslated}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
+	var complaintEntities = {<c:forEach var="complaintEntity" items="${complaintEntities}" varStatus="status"> '${complaintEntity.id}': "${eco:translate(complaintEntity.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 	var complaintReasonTypes = {<c:forEach var="complaintReasonType" items="${complaintReasonTypes}" varStatus="status"> '${complaintReasonType.id}': "${complaintReasonType.nameTranslated}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 
 	$( function () {

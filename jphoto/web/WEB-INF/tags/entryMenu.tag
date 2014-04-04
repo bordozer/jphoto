@@ -25,7 +25,8 @@
 
 	<%-- menu icon --%>
 	<a tabindex="0" href="#" id="${menuId}" onclick="return false;">
-		<html:img16 src="ui-menu-blue.png" alt="${eco:translate1('$1 menu', entryMenu.entryMenuType.nameTranslated)}"/>
+		<c:set var="entryMenuTypeName" value="${eco:translate(entryMenu.entryMenuType.name)}"/>
+		<html:img16 src="ui-menu-blue.png" alt="${eco:translate1('$1 menu', entryMenuTypeName)}"/>
 	</a>
 	<%-- / menu icon --%>
 

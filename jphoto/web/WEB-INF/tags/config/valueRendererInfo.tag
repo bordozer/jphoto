@@ -19,7 +19,7 @@
 <c:set var="arrayElements" value="<%=configuration.getValueListString()%>" />
 
 <c:set var="align" value="left" />
-<c:set var="title" value="${configurationKey.dataType.nameTranslated}: ${value} ${unit.nameTranslated}" />
+<c:set var="title" value="${eco:translate(configurationKey.dataType.name)}: ${value} ${eco:translate(unit.name)}" />
 
 <c:if test="${dataType == 'STRING' || isCheckboxDataType}">
 	<c:set var="align" value="left" />
