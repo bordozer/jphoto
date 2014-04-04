@@ -373,11 +373,12 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final User accessor ) {
+	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes, final User accessor ) {
 		final List<PhotoInfo> photoInfos = getPhotoInfos( photos, accessor );
 
 		for ( final PhotoInfo photoInfo : photoInfos ) {
 			photoInfo.setPhotoIconsTypes( photoIconsTypes );
+			photoInfo.setUserIconsTypes( userIconsTypes );
 		}
 
 		return photoInfos;

@@ -151,6 +151,10 @@
 				</links:userCard>
 			</c:if>
 
+			<c:forEach var="favoriteEntryType" items="${photoInfo.userIconsTypes}">
+				<icons:favoritesUser user="${user}" entryType="${favoriteEntryType}"/>
+			</c:forEach>
+
 			<%--<icons:userIcons user="${user}"
 							 hideIconToFavoriteUser="false"
 							 hideIconToFriend="false"

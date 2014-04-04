@@ -63,6 +63,7 @@ public class PhotoInfo implements Cacheable {
 	private EntryMenu photoAuthorMenu;
 
 	private List<FavoriteEntryType> photoIconsTypes = newArrayList();
+	private List<FavoriteEntryType> userIconsTypes = newArrayList();
 
 	private UserRankIconContainer userRankIconContainer;
 	private UserRankIconContainer userRankWhenPhotoWasUploadedIconContainer;
@@ -332,6 +333,14 @@ public class PhotoInfo implements Cacheable {
 
 	public void setPhotoIconsTypes( final List<FavoriteEntryType> photoIconsTypes ) {
 		this.photoIconsTypes = photoIconsTypes;
+	}
+
+	public List<FavoriteEntryType> getUserIconsTypes() {
+		return userIconsTypes;
+	}
+
+	public void setUserIconsTypes( final List<FavoriteEntryType> userIconsTypes ) {
+		this.userIconsTypes = userIconsTypes;
 	}
 
 	public void setUserRankIconContainer( final UserRankIconContainer userRankIconContainer ) {

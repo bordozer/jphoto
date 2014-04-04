@@ -98,8 +98,9 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_PHOTOS );
+		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes, userIconsTypes );
 
 		return VIEW;
 	}
@@ -111,9 +112,10 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList();
+		final List<FavoriteEntryType> userIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_MEMBERS );
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
-		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes );
+		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes, userIconsTypes );
 
 		final User user = userService.load( userId );
 		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
@@ -128,8 +130,9 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList();
+		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS, photoIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS, photoIconsTypes, userIconsTypes );
 
 		return VIEW;
 	}
@@ -141,18 +144,21 @@ public class UserBookmarksController {
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, photoIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, photoIconsTypes, userIconsTypes );
 
 		return VIEW;
 	}
 
-	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes ) {
+	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes ) {
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, entryType );
-		initFavorites( selectQuery,  userId, model, pagingModel, entryType, photoIconsTypes );
+		initFavorites( selectQuery,  userId, model, pagingModel, entryType, photoIconsTypes, userIconsTypes );
 	}
 
-	private void initFavorites( final SqlIdsSelectQuery selectQuery, final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes ) {
+	private void initFavorites( final SqlIdsSelectQuery selectQuery, final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes
+		, final List<FavoriteEntryType> userIconsTypes ) {
+
 		model.clear();
 
 		final List<Photo> photos = selectDataFromDB( pagingModel, selectQuery );
@@ -161,7 +167,7 @@ public class UserBookmarksController {
 
 		final String listTitle = String.format( "%s: %s", entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), translatorService.translate( entryType.getName(), EnvironmentContext.getLanguage() ) );
 
-		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, photoIconsTypes, EnvironmentContext.getCurrentUser() ), listTitle );
+		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, photoIconsTypes, userIconsTypes, EnvironmentContext.getCurrentUser() ), listTitle );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 

@@ -59,7 +59,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final Date timeFrom, final Date timeTo, final User accessor );
 
-	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final User accessor );
+	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes, final User accessor );
 
 	boolean updatePhotoFileData( int photoId, final File file );
 
