@@ -50,7 +50,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserFavoriteEntryListBreadcrumbs( final User user, final FavoriteEntryType favoriteEntryType );
 
-	PageTitleData getAddedToFavoritesByEntry( final User user );
+	PageTitleData getUserIsAddedInFavoriteMembersByBreadcrumbs( final User user );
 
 	String getUserRootTranslated();
 

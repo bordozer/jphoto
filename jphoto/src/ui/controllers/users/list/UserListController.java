@@ -181,7 +181,7 @@ public class UserListController {
 		final SqlIdsSelectQuery selectIdsQuery = userSqlUtilsService.getAddedToFavoritesBySQL( pagingModel, userId );
 
 		final User user = userService.load( userId );
-		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getAddedToFavoritesByEntry( user ) );
+		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getUserIsAddedInFavoriteMembersByBreadcrumbs( user ) );
 
 		return VIEW;
 	}
