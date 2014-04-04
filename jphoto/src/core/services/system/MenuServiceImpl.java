@@ -173,7 +173,8 @@ public class MenuServiceImpl implements MenuService {
 		final List<MenuItem> menuItems = newArrayList();
 
 		if ( user.getId() > 0 ) {
-			menuItems.add( getCommentsToMeMenu( user ) );
+			menuItems.add( getReceivedCommentsMenu( user ) );
+			menuItems.add( getReceivedUnreadCommentsMenu( user ) );
 			menuItems.add( getWrittenCommentsMenu( user ) );
 			menuItems.add( getPrivateMessagesReceivedMenu( user ) );
 			menuItems.add( getPrivateMessagesSentMenu( user ) );
@@ -190,15 +191,21 @@ public class MenuServiceImpl implements MenuService {
 		}
 	}
 
-	private MenuItem getCommentsToMeMenu( final User user ) {
+	private MenuItem getReceivedCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED.getText(), getLanguage() );
-		final String link = urlUtilsService.getCommentsToUserList( user.getId() );
+		final String link = urlUtilsService.getReceivedComments( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getReceivedUnreadCommentsMenu( final User user ) {
+		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED_UNREAD.getText(), getLanguage() );
+		final String link = urlUtilsService.getReceivedUnreadComments( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getWrittenCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN.getText(), getLanguage() );
-		final String link = urlUtilsService.getUserCommentsList( user.getId() );
+		final String link = urlUtilsService.getWrittenComments( user.getId() );
 		return new MenuItem( caption, link );
 	}
 

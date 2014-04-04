@@ -8,7 +8,7 @@
 <%@ attribute name="pagingModel" required="true" type="core.general.base.PagingModel" %>
 <%@ attribute name="showInfo" required="false" type="java.lang.Boolean" %>
 
-<c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUnreadCommentsToUserList( userId )%>" />
+<c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getReceivedUnreadComments( userId )%>" />
 <c:set var="totalItems" value="${pagingModel.totalItems}" />
 <c:set var="itemsOnPage" value="${pagingModel.itemsOnPage > totalItems ? totalItems : pagingModel.itemsOnPage}" />
 <c:set var="unreadComments" value="${totalItems}" />

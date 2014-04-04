@@ -112,11 +112,11 @@ public interface UrlUtilsService {
 
 	String getPhotosWithSubscribeOnNewCommentsLink( final int userId );
 
-	String getUserCommentsList( final int userId );
+	String getWrittenComments( final int userId );
 
-	String getCommentsToUserList( final int userId );
+	String getReceivedComments( final int userId );
 
-	String getUnreadCommentsToUserList( final int userId );
+	String getReceivedUnreadComments( final int userId );
 
 	String getPrivateMessagesList( final int userId );
 

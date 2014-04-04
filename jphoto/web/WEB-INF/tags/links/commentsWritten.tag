@@ -5,7 +5,7 @@
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
 
-<c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserCommentsList( user.getId() )%>" />
+<c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getWrittenComments( user.getId() )%>" />
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
 <c:set var="linkNerdText" value="<%=LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN%>"/>

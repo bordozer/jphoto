@@ -173,7 +173,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotoCommentsToUserLink( final User user, final Language language ) {
-		final String link = String.format( "%s", urlUtilsService.getCommentsToUserList( user.getId() ) );
+		final String link = String.format( "%s", urlUtilsService.getReceivedComments( user.getId() ) );
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, link
 			, translatorService.translate( "Comments of $1", language, StringUtilities.escapeHtml( user.getName() ) )

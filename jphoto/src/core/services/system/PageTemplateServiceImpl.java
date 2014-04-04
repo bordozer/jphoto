@@ -158,7 +158,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		String unreadCommentsText = StringUtils.EMPTY;
 		if ( unreadCommentsQty > 0 ) {
 			unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
-				, urlUtilsService.getUnreadCommentsToUserList( currentUser.getId() )
+				, urlUtilsService.getReceivedUnreadComments( currentUser.getId() )
 				, translatorService.translate( "You have $1 new comment(s)", language, String.valueOf( unreadCommentsQty ) )
 				, urlUtilsService.getSiteImagesPath()
 				, unreadCommentsQty

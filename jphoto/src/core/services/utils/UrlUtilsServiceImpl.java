@@ -303,17 +303,17 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
-	public String getUserCommentsList( final int userId ) {
+	public String getWrittenComments( final int userId ) {
 		return String.format( "%s/%s/%s/comments/written/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
 	@Override
-	public String getCommentsToUserList( final int userId ) {
+	public String getReceivedComments( final int userId ) {
 		return String.format( "%s/%s/%s/comments/received/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
 	@Override
-	public String getUnreadCommentsToUserList( final int userId ) {
+	public String getReceivedUnreadComments( final int userId ) {
 		return String.format( "%s/%s/%s/comments/received/unread/", getBaseURLWithPrefix(), USERS_URL, userId );
 	}
 
