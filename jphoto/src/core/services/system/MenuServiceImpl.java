@@ -412,25 +412,25 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userFavoritePhotosMenu( final User user ) {
-		final String caption = translatorService.translate( FavoriteEntryType.PHOTO.getName(), getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.FAVORITE_PHOTOS.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoritePhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFavoriteMembersMenu( final User user ) {
-		final String caption = translatorService.translate( FavoriteEntryType.USER.getName(), getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.FAVORITE_MEMBERS.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteMembersLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userBookmarkedPhotosMenu( final User user ) {
-		final String caption = translatorService.translate( FavoriteEntryType.BOOKMARK.getName(), getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.BOOKMARKED_PHOTOS.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserBookmarkedPhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFriendsMenu( final User user ) {
-		final String caption = translatorService.translate( FavoriteEntryType.FRIEND.getName(), getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.FRIENDS.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteFriendsLink( user.getId() );
 		return new MenuItem( caption, link );
 	}

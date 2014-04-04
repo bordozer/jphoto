@@ -90,7 +90,7 @@ public class UserSqlUtilsServiceImpl implements UserSqlUtilsService {
 		selectQuery.joinTable( join );
 
 		selectQuery.addWhereAnd( new SqlCondition( tFavoritesColFavEntryId, SqlCriteriaOperator.EQUALS, userId, dateUtilsService ) );
-		selectQuery.addWhereAnd( new SqlCondition( tFavoritesColFavEntryType, SqlCriteriaOperator.EQUALS, FavoriteEntryType.USER.getId(), dateUtilsService ) );
+		selectQuery.addWhereAnd( new SqlCondition( tFavoritesColFavEntryType, SqlCriteriaOperator.EQUALS, FavoriteEntryType.FAVORITE_MEMBERS.getId(), dateUtilsService ) );
 
 		return selectQuery;
 	}

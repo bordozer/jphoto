@@ -840,8 +840,8 @@ public class PhotoListController {
 		for ( final PhotoInfo photoInfo : photoInfos ) {
 			final Photo photo = photoInfo.getPhoto();
 			final List<FavoriteEntryType> icons = newArrayList();
-			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.PHOTO.getId() ) ) {
-				icons.add( FavoriteEntryType.PHOTO );
+			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.FAVORITE_PHOTOS.getId() ) ) {
+				icons.add( FavoriteEntryType.FAVORITE_PHOTOS );
 			}
 
 			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.NEW_COMMENTS_NOTIFICATION.getId() ) ) {

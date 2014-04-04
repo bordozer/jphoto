@@ -43,8 +43,8 @@
 
 <c:set var="photoId" value="${photo.id}"/>
 
-<c:set var="favoriteEntryTypePhoto" value="<%=FavoriteEntryType.PHOTO%>"/>
-<c:set var="favoriteEntryTypeBookmark" value="<%=FavoriteEntryType.BOOKMARK%>"/>
+<c:set var="favoriteEntryTypePhoto" value="<%=FavoriteEntryType.FAVORITE_PHOTOS%>"/>
+<c:set var="favoriteEntryTypeBookmark" value="<%=FavoriteEntryType.BOOKMARKED_PHOTOS%>"/>
 <c:set var="newCommentsNotificationEntryType" value="<%=FavoriteEntryType.NEW_COMMENTS_NOTIFICATION%>"/>
 
 <c:set var="controlSelectedPhotoIds" value="<%=PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS%>"/>

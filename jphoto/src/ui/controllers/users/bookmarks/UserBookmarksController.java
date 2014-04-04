@@ -17,7 +17,6 @@ import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.UtilsService;
-import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,9 +97,9 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList( FavoriteEntryType.PHOTO );
+		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList( FavoriteEntryType.FAVORITE_PHOTOS );
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.PHOTO, showIconsForFavoriteEntryTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, showIconsForFavoriteEntryTypes );
 
 		return VIEW;
 	}
@@ -114,7 +113,7 @@ public class UserBookmarksController {
 		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
-		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.PHOTO, showIconsForFavoriteEntryTypes );
+		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, showIconsForFavoriteEntryTypes );
 
 		final User user = userService.load( userId );
 		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembers( user ) );
@@ -130,7 +129,7 @@ public class UserBookmarksController {
 
 		final List<FavoriteEntryType> showIconsForFavoriteEntryTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARK, showIconsForFavoriteEntryTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS, showIconsForFavoriteEntryTypes );
 
 		return VIEW;
 	}

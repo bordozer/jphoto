@@ -15,11 +15,11 @@
 <%@ attribute name="hideIconSendPrivateMessage" required="false" type="java.lang.Boolean" %>
 
 <c:if test="${not hideIconToFavoriteUser}">
-	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.USER%>" />
+	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.FAVORITE_MEMBERS%>" />
 </c:if>
 
 <c:if test="${not hideIconToFriend}">
-	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.FRIEND%>" />
+	<icons:favoritesUser user="${user}" entryType="<%=FavoriteEntryType.FRIENDS%>" />
 </c:if>
 
 <c:if test="${not hideIconNewPhotoNotification}">

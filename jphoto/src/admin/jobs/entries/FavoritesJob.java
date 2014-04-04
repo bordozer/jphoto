@@ -105,15 +105,15 @@ public class FavoritesJob extends AbstractJob {
 	private class FavoriteGeneratorFactory {
 		public AbstractFavoriteEntryGenerator getInstance( final FavoriteEntryType favoriteEntryType, final User user ) {
 			switch ( favoriteEntryType ) {
-				case PHOTO:
+				case FAVORITE_PHOTOS:
 					return new FavoritePhotoEntryGenerator( user );
-				case USER:
+				case FAVORITE_MEMBERS:
 					return new FavoriteUserEntryGenerator( user );
-				case FRIEND:
+				case FRIENDS:
 					return new FriendEntryGenerator( user );
 				case BLACKLIST:
 					return new BlacklistEntryGenerator( user );
-				case BOOKMARK:
+				case BOOKMARKED_PHOTOS:
 					return new BookmarkEntryGenerator( user );
 				case NEW_COMMENTS_NOTIFICATION:
 					return new NewCommentNotificationEntryGenerator( user );
@@ -184,7 +184,7 @@ public class FavoritesJob extends AbstractJob {
 
 		@Override
 		public boolean generateFavoriteEntry() {
-			return addFavoriteUser( FavoriteEntryType.USER );
+			return addFavoriteUser( FavoriteEntryType.FAVORITE_MEMBERS );
 		}
 	}
 
@@ -196,7 +196,7 @@ public class FavoritesJob extends AbstractJob {
 
 		@Override
 		public boolean generateFavoriteEntry() {
-			return addFavoriteUser( FavoriteEntryType.FRIEND );
+			return addFavoriteUser( FavoriteEntryType.FRIENDS );
 		}
 	}
 
@@ -232,7 +232,7 @@ public class FavoritesJob extends AbstractJob {
 
 		@Override
 		public boolean generateFavoriteEntry() {
-			return addFavoritePhoto( FavoriteEntryType.PHOTO );
+			return addFavoritePhoto( FavoriteEntryType.FAVORITE_PHOTOS );
 		}
 	}
 
@@ -244,7 +244,7 @@ public class FavoritesJob extends AbstractJob {
 
 		@Override
 		public boolean generateFavoriteEntry() {
-			return addFavoritePhoto( FavoriteEntryType.BOOKMARK );
+			return addFavoritePhoto( FavoriteEntryType.BOOKMARKED_PHOTOS );
 		}
 	}
 

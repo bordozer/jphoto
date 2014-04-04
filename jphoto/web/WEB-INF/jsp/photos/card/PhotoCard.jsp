@@ -34,9 +34,9 @@
 <c:set var="photoName" value="${photo.name}"/>
 <c:set var="imageUrl" value="<%=photoCardModel.getPhotoInfo().getPhotoImgUrl()%>"/>
 
-<c:set var="favoriteEntryType" value="<%=FavoriteEntryType.PHOTO%>"/>
+<c:set var="favoriteEntryType" value="<%=FavoriteEntryType.FAVORITE_PHOTOS%>"/>
 <c:set var="newCommentsNotificationEntryType" value="<%=FavoriteEntryType.NEW_COMMENTS_NOTIFICATION%>"/>
-<c:set var="favoriteEntryTypeBookmark" value="<%=FavoriteEntryType.BOOKMARK%>"/>
+<c:set var="favoriteEntryTypeBookmark" value="<%=FavoriteEntryType.BOOKMARKED_PHOTOS%>"/>
 
 <c:set var="commentEditIconId" value="<%=PhotoCommentModel.COMMENT_EDIT_ICON_ID%>"/>
 <c:set var="commentReplyIconId" value="<%=PhotoCommentModel.COMMENT_REPLY_ICON_ID%>"/>

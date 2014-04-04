@@ -6,18 +6,18 @@ import java.util.EnumSet;
 
 public enum FavoriteEntryType implements Identifiable {
 
-	USER( 1, "FavoriteEntryType: Favorite members", "add to favorite members", "The member is in your favorites. Click to remove.", "userAdd16x16.png", "userRemove16x16.png" )
-	, PHOTO( 2, "FavoriteEntryType: Favorite photos", "add to favorite photos", "The photo is in your favorites. Click to remove.", "photoAdd16x16.png", "photoRemove16x16.png" )
-	, FRIEND( 3, "FavoriteEntryType: Friends", "add to friends", "The member is your friend. Click to remove.", "friendAdd16x16.png", "friendRemove16x16.png" )
+	FAVORITE_MEMBERS( 1, "FavoriteEntryType: Favorite members", "add to favorite members", "The member is in your favorites. Click to remove.", "userAdd16x16.png", "userRemove16x16.png" )
+	, FAVORITE_PHOTOS( 2, "FavoriteEntryType: Favorite photos", "add to favorite photos", "The photo is in your favorites. Click to remove.", "photoAdd16x16.png", "photoRemove16x16.png" )
+	, FRIENDS( 3, "FavoriteEntryType: Friends", "add to friends", "The member is your friend. Click to remove.", "friendAdd16x16.png", "friendRemove16x16.png" )
 	, BLACKLIST( 4, "FavoriteEntryType: Black list", "add to black list", "The member is in your black list. Click to remove.", "blackListAdd16x16.png", "blackListRemove16x16.png" )
-	, BOOKMARK( 5, "FavoriteEntryType: Bookmarks", "add photo to bookmarks", "The photo is in your bookmarks. Click to remove.", "bookmarkAdd16x16.png", "bookmarkRemove16x16.png" )
+	, BOOKMARKED_PHOTOS( 5, "FavoriteEntryType: Bookmarks", "add photo to bookmarks", "The photo is in your bookmarks. Click to remove.", "bookmarkAdd16x16.png", "bookmarkRemove16x16.png" )
 	, NEW_PHOTO_NOTIFICATION( 6, "FavoriteEntryType: New photos notification", "add notification about new photos", "You get notification about new photos. Click to unsubscribe", "newPhotoNotificationAdd16x16.png", "newPhotoNotificationRemove16x16.png" )
 	, NEW_COMMENTS_NOTIFICATION( 7, "FavoriteEntryType: New comments notification", "You did not subscribe notification about new comments", "You get notification about new comments. Click to unsubscribe", "newCommentsNotificationAdd16x16.png", "newCommentsNotificationRemove16x16.png" )
 	;
 
 	public static final String FAVORITES_IMAGE_FOLDER = "favorites";
 
-	private final static EnumSet RELATED_TO_PHOTO = EnumSet.of( PHOTO, BOOKMARK, NEW_COMMENTS_NOTIFICATION );
+	private final static EnumSet RELATED_TO_PHOTO = EnumSet.of( FAVORITE_PHOTOS, BOOKMARKED_PHOTOS, NEW_COMMENTS_NOTIFICATION );
 
 	private final int id;
 

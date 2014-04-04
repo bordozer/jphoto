@@ -74,7 +74,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.USER, photo.getUserId() );
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.FAVORITE_MEMBERS, photo.getUserId() );
 			}
 
 			@Override
@@ -100,7 +100,7 @@ public abstract class UserNotificationsCollector {
 
 			@Override
 			public List<UserNotification> getUserNotifications() {
-				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.FRIEND, photo.getUserId() );
+				return getNewPhotoUserNotificationForFavoriteType( FavoriteEntryType.FRIENDS, photo.getUserId() );
 			}
 
 			@Override

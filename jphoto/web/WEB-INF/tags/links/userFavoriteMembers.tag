@@ -8,6 +8,6 @@
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserFavoriteMembersLink( user.getId() )%>" />
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
-<c:set var="favoriteEntryTypeName" value="<%=FavoriteEntryType.USER.getName()%>"/>
+<c:set var="favoriteEntryTypeName" value="<%=FavoriteEntryType.FAVORITE_MEMBERS.getName()%>"/>
 
 <a href ="${link}" title="${eco:translate1("$1\'s favorite members", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>

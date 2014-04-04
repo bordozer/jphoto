@@ -83,12 +83,12 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 
 	@Override
 	public int getFavoritePhotosQty( final int userId ) {
-		return getFavoriteEntriesQty( userId, FavoriteEntryType.PHOTO );
+		return getFavoriteEntriesQty( userId, FavoriteEntryType.FAVORITE_PHOTOS );
 	}
 
 	@Override
 	public int getBookmarkedPhotosQty( final int userId ) {
-		return getFavoriteEntriesQty( userId, FavoriteEntryType.BOOKMARK );
+		return getFavoriteEntriesQty( userId, FavoriteEntryType.BOOKMARKED_PHOTOS );
 	}
 
 	@Override
@@ -102,19 +102,19 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
-		paramSource.addValue( "entryType", FavoriteEntryType.USER.getId() );
+		paramSource.addValue( "entryType", FavoriteEntryType.FAVORITE_MEMBERS.getId() );
 
 		return getIntValueOrZero( sql, paramSource );
 	}
 
 	@Override
 	public int getFriendsQty( final int userId ) {
-		return getFavoriteEntriesQty( userId, FavoriteEntryType.FRIEND );
+		return getFavoriteEntriesQty( userId, FavoriteEntryType.FRIENDS );
 	}
 
 	@Override
 	public int getFavoriteMembersQty( final int userId ) {
-		return getFavoriteEntriesQty( userId, FavoriteEntryType.USER );
+		return getFavoriteEntriesQty( userId, FavoriteEntryType.FAVORITE_MEMBERS );
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class FavoritesDaoImpl extends BaseEntityDaoImpl<FavoriteEntry> implement
 			, TABLE_COLUMN_FAVORITE_ENTRY_ID
 			, TABLE_FAVORITES
 			, TABLE_COLUMN_USER_ID
-			, FavoriteEntryType.USER.getId()
+			, FavoriteEntryType.FAVORITE_MEMBERS.getId()
 		);
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();

@@ -78,13 +78,13 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 	private TranslatableMessage getFavoriteEntry( final int favoriteEntryId, final FavoriteEntryType entryType ) {
 
 		switch ( entryType ) {
-			case USER:
-				case FRIEND:
+			case FAVORITE_MEMBERS:
+				case FRIENDS:
 				case BLACKLIST:
 				case NEW_PHOTO_NOTIFICATION:
 				return new TranslatableMessage( services ).addUserCardLinkParameter( favoriteEntryId );
-			case PHOTO:
-				case BOOKMARK:
+			case FAVORITE_PHOTOS:
+				case BOOKMARKED_PHOTOS:
 				case NEW_COMMENTS_NOTIFICATION:
 				return new TranslatableMessage( services ).addPhotoCardLinkParameter( favoriteEntryId );
 		}

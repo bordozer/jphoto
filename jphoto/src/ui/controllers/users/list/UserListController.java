@@ -169,7 +169,7 @@ public class UserListController {
 	public String showFavoriteUsers( final @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 
-		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.USER );
+		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.FAVORITE_MEMBERS );
 
 		return VIEW;
 	}
@@ -190,7 +190,7 @@ public class UserListController {
 	public String showFriends( @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 
-		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.FRIEND );
+		initUserFavorites( userId, model, filterModel, pagingModel, FavoriteEntryType.FRIENDS );
 
 		return VIEW;
 	}
