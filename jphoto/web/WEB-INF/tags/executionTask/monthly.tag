@@ -1,7 +1,7 @@
 <%@ tag import="core.general.executiontasks.Month" %>
-<%@ tag import="admin.ui.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
+<%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
