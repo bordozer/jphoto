@@ -106,8 +106,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		final BreadcrumbsBuilder builder = portalPage( services ).userListLink();
 
 		if ( userCardTab.isDefaultTab() ) {
-			final String str = String.format( "%s: %s", user.getNameEscaped(), translatorService.translate( UserCardTab.getDefaultUserCardTab().getName(), EnvironmentContext.getLanguage() ) );
-			builder.string( str );
+			builder.string( String.format( "%s: %s", user.getNameEscaped(), translatorService.translate( UserCardTab.getDefaultUserCardTab().getName(), EnvironmentContext.getLanguage() ) ) );
 		} else {
 			builder.userCardLink( user ).translatableString( userCardTab.getName() );
 		}
@@ -116,14 +115,18 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserListByFilter() {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "User filter", EnvironmentContext.getLanguage() );
+	public PageTitleData getUserListSearchResultBreadcrumbs() {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
+		final UserListBreadcrumbs breadcrumb = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.translatableString( "User list: search result" )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
@@ -308,15 +311,15 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
-	private BreadcrumbsBuilder userCardLink( final User user ) {
-		return portalPage( services ).userListLink().userCardLink( user );
+	private String userCardTitle( final User user ) {
+		return BreadcrumbsBuilder.pageTitle( new UserNameBreadcrumb( user, services ), services ).build();
 	}
 
 	private String userCardHeader( final User user ) {
 		return BreadcrumbsBuilder.pageHeader( new UserNameBreadcrumb( user, services ), services ).build();
 	}
 
-	private String userCardTitle( final User user ) {
-		return BreadcrumbsBuilder.pageTitle( new UserNameBreadcrumb( user, services ), services ).build();
+	private BreadcrumbsBuilder userCardLink( final User user ) {
+		return portalPage( services ).userListLink().userCardLink( user );
 	}
 }

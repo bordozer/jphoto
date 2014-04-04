@@ -236,7 +236,7 @@ public class UserListController {
 		filterModel.setFilterUserName( filterData.getFilterUserName() );
 		filterModel.setMembershipTypeList( filterData.getMembershipTypeIds() );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserListByFilter() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListSearchResultBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -245,7 +245,7 @@ public class UserListController {
 	public String searchPost( final UserListModel model, final @ModelAttribute( USER_FILTER_MODEL ) UserFilterModel filterModel
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final HttpServletRequest request  ) {
 
-		model.setPageTitleData( breadcrumbsUserService.getUserListByFilter() );
+		model.setPageTitleData( breadcrumbsUserService.getUserListSearchResultBreadcrumbs() );
 
 		final BindingResult bindingResult = new BindException( filterModel, "" );
 		filterValidator.validate( filterModel, bindingResult );

@@ -23,7 +23,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserCardBreadcrumbs( final User user, final UserCardTab userCardTab );
 
-	PageTitleData getUserListByFilter();
+	PageTitleData getUserListSearchResultBreadcrumbs();
 
 	PageTitleData getUsersByMembershipType( final UserMembershipType membershipType );
 
