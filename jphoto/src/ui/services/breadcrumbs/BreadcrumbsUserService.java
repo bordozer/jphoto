@@ -34,9 +34,9 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final PrivateMessageType messageType );
 
-	PageTitleData getUserTeamMemberNewData( final User user );
+	PageTitleData getUserTeamMemberNewBreadcrumbs( final User user );
 
-	PageTitleData getUserTeamMemberEditData( final UserTeamMember userTeamMember );
+	PageTitleData getUserTeamMemberEditBreadcrumbs( final UserTeamMember userTeamMember );
 
 	PageTitleData getUserTeamMemberCardData( final UserTeamMember userTeamMember );
 

@@ -5,6 +5,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;
 import core.services.translator.Language;
 
@@ -117,6 +118,16 @@ public class BreadcrumbsBuilder {
 
 	public BreadcrumbsBuilder userName( final int userId ) {
 		return userName( getUser( userId, services ) );
+	}
+
+	public BreadcrumbsBuilder userTeamLink( final User user ) {
+		breadcrumbs.add( new UserTeamLinkBreadcrumbs( user, services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder userTeamMemberLink( final UserTeamMember userTeamMember ) {
+		breadcrumbs.add( new UserTeamMemberLinkBreadcrumbs( userTeamMember, services ) );
+		return this;
 	}
 
 	public BreadcrumbsBuilder anonymousUser() {

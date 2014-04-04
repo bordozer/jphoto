@@ -42,7 +42,7 @@
 		<table:tddata>
 			<js:checkBoxChecker namePrefix="dailyTaskWeekdayIds" />
 			<br />
-			<form:checkboxes path="${dailyTaskWeekdayIds}" items="${weekdays}" itemValue="id" itemLabel="nameTranslated" delimiter="<br />" />
+			<form:checkboxes path="${dailyTaskWeekdayIds}" items="${weekdays}" itemValue="id" itemLabel="name" delimiter="<br />" />
 		</table:tddata>
 	</table:tr>
 

@@ -399,7 +399,7 @@
 					<table:tdtext text_t="Sent notification email about new comments" />
 
 					<table:tddata>
-						<form:radiobuttons items="${yesNoValues}" path="photoEditDataModel.${notificationEmailAboutNewPhotoCommentControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+						<form:radiobuttons items="${yesNoValues}" path="photoEditDataModel.${notificationEmailAboutNewPhotoCommentControl}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
 					</table:tddata>
 
 				</table:tredit>

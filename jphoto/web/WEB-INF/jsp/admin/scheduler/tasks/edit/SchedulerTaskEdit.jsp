@@ -68,7 +68,7 @@
 				<table:tdtext text_t="Execute task"/>
 				<table:tddata>
 					<div style="float: left; width: 200px; font-weight: bold;">
-						<form:radiobuttons path="executionTaskTypeId" items="${executionTaskTypes}"  itemValue="id" itemLabel="nameTranslated" onchange="submitFormData();" delimiter="<br />" />
+						<form:radiobuttons path="executionTaskTypeId" items="${executionTaskTypes}"  itemValue="id" itemLabel="name" onchange="submitFormData();" delimiter="<br />" />
 					</div>
 					<div style="float: left; width: 32px; padding-top: 25px;">
 						<html:img32 src="scheduler/type/${schedulerTaskEditModel.selectedTaskType.icon}" alt="${schedulerTaskEditModel.selectedTaskType.nameTranslated}" />

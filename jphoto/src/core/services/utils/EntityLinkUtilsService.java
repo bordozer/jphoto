@@ -17,6 +17,7 @@ import java.util.Date;
 public interface EntityLinkUtilsService {
 
 	String BEAN_NAME = "entityLinkUtilsService";
+	String BREADCRUMBS_USER_TEAM = "Breadcrumbs: User team";
 
 	String getPortalPageLink( final Language language );
 

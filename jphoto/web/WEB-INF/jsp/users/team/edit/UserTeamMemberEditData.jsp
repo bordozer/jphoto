@@ -35,7 +35,7 @@
 
 			<table:tr>
 				<table:tdtext text_t="Model name" />
-				<table:tddata><form:radiobuttons path="${teamMemberTypeIdControl}" items="${userTeamMemberTypeValues}" itemValue="id" itemLabel="nameTranslated" delimiter="<br />" htmlEscape="false"/></table:tddata>
+				<table:tddata><form:radiobuttons path="${teamMemberTypeIdControl}" items="${userTeamMemberTypeValues}" itemValue="id" itemLabel="name" delimiter="<br />" htmlEscape="false"/></table:tddata>
 			</table:tr>
 
 			<table:separatorInfo colspan="2" title="${eco:translate('Member')}" />

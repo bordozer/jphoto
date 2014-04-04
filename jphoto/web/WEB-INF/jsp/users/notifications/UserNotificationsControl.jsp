@@ -30,7 +30,7 @@
 
 			<table:tr>
 				<table:td colspan="2">
-					<form:checkboxes path="${emailNotificationTypeIdsControl}" items="${emailNotificationTypes}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />" />
+					<form:checkboxes path="${emailNotificationTypeIdsControl}" items="${emailNotificationTypes}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" />
 				</table:td>
 			</table:tr>
 

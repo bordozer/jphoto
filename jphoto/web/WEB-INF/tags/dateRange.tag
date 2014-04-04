@@ -29,7 +29,7 @@
 <c:set var="dateRangeDiffDiv" value="dateRangeDiffDiv" />
 
 <div class="centerAlign">
-	<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes}" itemValue="id" itemLabel="nameTranslated" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
+	<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes}" itemValue="id" itemLabel="name" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
 </div>
 
 <c:set var="tblWidth" value="500"/>

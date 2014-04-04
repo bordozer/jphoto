@@ -277,8 +277,8 @@
 				<table:tdtext text_t="User data edit: Send notification email about" />
 
 				<table:tddata>
-					<%--<form:radiobuttons items="${yesNoValues}" path="userEditDataModel.${emailNotificationOptionIdsControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>--%>
-					<form:checkboxes path="userEditDataModel.${emailNotificationOptionIdsControl}" items="${emailNotificationOptionsValues}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />" />
+					<%--<form:radiobuttons items="${yesNoValues}" path="userEditDataModel.${emailNotificationOptionIdsControl}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>--%>
+					<form:checkboxes path="userEditDataModel.${emailNotificationOptionIdsControl}" items="${emailNotificationOptionsValues}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" />
 				</table:tddata>
 
 			</table:tredit>
@@ -291,7 +291,7 @@
 				<table:tdtext text_t="User data edit: Comments allowance by default" labelFor="defaultPhotoCommentsAllowanceId1" />
 
 				<table:tddata>
-					<form:radiobuttons items="${accessibleCommentAllowances}" path="userEditDataModel.${defaultPhotoCommentsAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>
+					<form:radiobuttons items="${accessibleCommentAllowances}" path="userEditDataModel.${defaultPhotoCommentsAllowanceIdControl}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
 
 			</table:tredit>
@@ -302,7 +302,7 @@
 				<table:tdtext text_t="User data edit: Photo appraisal allowance by default" labelFor="defaultPhotoVotingAllowanceId1" />
 
 				<table:tddata>
-					<form:radiobuttons items="${accessibleVotingAllowances}" path="userEditDataModel.${defaultPhotoVotingAllowanceIdControl}" itemValue="id" itemLabel="nameTranslated" htmlEscape="false" delimiter="<br />"/>
+					<form:radiobuttons items="${accessibleVotingAllowances}" path="userEditDataModel.${defaultPhotoVotingAllowanceIdControl}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
 
 			</table:tredit>

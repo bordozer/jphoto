@@ -65,7 +65,7 @@ public class UserTeamMemberEditDataController {
 
 		model.setUser( user );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberNewData( model.getUser() ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberNewBreadcrumbs( model.getUser() ) );
 
 		return VIEW;
 	}
@@ -95,7 +95,7 @@ public class UserTeamMemberEditDataController {
 		}
 		model.setTeamMemberType( userTeamMember.getTeamMemberType() );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberEditData( userTeamMember ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberEditBreadcrumbs( userTeamMember ) );
 
 		return VIEW;
 	}

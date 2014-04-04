@@ -120,7 +120,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	public PageTitleData getUserTeamMemberListData( final User user ) {
 
 		final String breadcrumbs = userCardLink( user )
-			.translatableString( "Breadcrumbs: User team members list" )
+			.translatableString( EntityLinkUtilsService.BREADCRUMBS_USER_TEAM )
 			.build();
 
 		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
@@ -176,31 +176,40 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserTeamMemberNewData( final User user ) {
-		final String aNew = translatorService.translate( "New", EnvironmentContext.getLanguage() );
+	public PageTitleData getUserTeamMemberNewBreadcrumbs( final User user ) {
 
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), aNew );
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.userTeamLink( user )
+			.translatableString( "Breadcrumbs: New member of user team" )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserTeamMemberEditData( final UserTeamMember userTeamMember ) {
-		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
-
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran, edit );
+	public PageTitleData getUserTeamMemberEditBreadcrumbs( final UserTeamMember userTeamMember ) {
 
 		final User user = userTeamMember.getUser();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserTeamMemberCardLink( userTeamMember, EnvironmentContext.getLanguage() ), edit );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.userTeamLink( user )
+			.userTeamMemberLink( userTeamMember )
+			.translatableString( "Breadcrumbs: Editing user team member's data" )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override

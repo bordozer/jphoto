@@ -2,7 +2,6 @@ package core.services.utils;
 
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
-import core.context.EnvironmentContext;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
@@ -127,7 +126,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getUserTeamMemberListLink( final int userId, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserTeamMembersLink( userId ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Team", language ) );
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
+			, link
+			, translatorService.translate( BREADCRUMBS_USER_TEAM, language )
+			, translatorService.translate( BREADCRUMBS_USER_TEAM, language )
+		);
 	}
 
 	@Override

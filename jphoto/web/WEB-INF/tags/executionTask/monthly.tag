@@ -65,7 +65,7 @@
 		<table:tddata>
 			<js:checkBoxChecker namePrefix="monthlyTaskMonthIds" />
 			<br />
-			<form:checkboxes path="${monthlyTaskMonthIds}" items="${months}" itemValue="id" itemLabel="nameTranslated" delimiter="<br />" />
+			<form:checkboxes path="${monthlyTaskMonthIds}" items="${months}" itemValue="id" itemLabel="name" delimiter="<br />" />
 		</table:tddata>
 	</table:tr>
 

@@ -58,28 +58,23 @@
 	</translation>
 
 	<translation>
-		<nerd>Breadcrumbs: User team members list</nerd>
-		<ru><![CDATA[Команда пользователя]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Breadcrumbs: messaging with user $1</nerd>
 		<ru><![CDATA[Переписка с $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: User team</nerd>
+		<ru><![CDATA[Команда]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: New member of user team</nerd>
+		<ru><![CDATA[Новый член команды]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Editing user team member's data</nerd>
+		<ru><![CDATA[Редактирование]]></ru>
 	</translation>
 
 	<translation>
