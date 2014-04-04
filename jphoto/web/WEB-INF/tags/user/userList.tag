@@ -92,7 +92,7 @@
 				<table:td cssClass="textcentered">
 					<icons:userGender user="${user}" />
 				</table:td>
-				<table:td cssClass="textcentered">${user.membershipType.name}</table:td>
+				<table:td cssClass="textcentered">${eco:translate(user.membershipType.name)}</table:td>
 				<table:td cssClass="textcentered">${user.photosInLine > 0 ? user.photosInLine : 'auto'}</table:td>
 				<table:td cssClass="textright">${photosByUser}</table:td>
 			</table:tr>

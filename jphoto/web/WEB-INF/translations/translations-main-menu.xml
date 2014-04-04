@@ -27,22 +27,6 @@
 		<ru><![CDATA[Работы за месяц]]></ru>
 	</translation>
 
-	<translation>
-		<nerd>Main menu: photos: author</nerd>
-		<ru><![CDATA[Работы авторов]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: photos: model</nerd>
-		<ru><![CDATA[Работы моделей]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: photos: makeup master</nerd>
-		<ru><![CDATA[Работы визажистов]]></ru>
-	</translation>
-
-
 
 
 
@@ -81,21 +65,6 @@
 		<ru><![CDATA[Лучшие работы за месяц]]></ru>
 	</translation>
 
-	<translation>
-		<nerd>Main menu: The best photos: author</nerd>
-		<ru><![CDATA[Лучшие работы авторов]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: The best photos: model</nerd>
-		<ru><![CDATA[Лучшие работы моделей]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: The best photos: makeup master</nerd>
-		<ru><![CDATA[Лучшие работы визажистов]]></ru>
-	</translation>
-
 
 
 
@@ -108,21 +77,6 @@
 	<translation>
 		<nerd>Main menu: All members</nerd>
 		<ru><![CDATA[Все пользователи]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: members: author</nerd>
-		<ru><![CDATA[Авторы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: members: model</nerd>
-		<ru><![CDATA[Модели]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: members: makeup master</nerd>
-		<ru><![CDATA[Визажисты]]></ru>
 	</translation>
 
 	<translation>

@@ -7,9 +7,9 @@ import java.util.List;
 
 public enum UserMembershipType {
 
-	AUTHOR( 1, "author", "author plural" )
-	, MODEL( 2, "model", "model plural" )
-	, MAKEUP_MASTER( 3, "makeup master", "makeup master plural" )
+	AUTHOR( 1, "UserMembershipType: author", "UserMembershipType: author plural" )
+	, MODEL( 2, "UserMembershipType: model", "UserMembershipType: model plural" )
+	, MAKEUP_MASTER( 3, "UserMembershipType: makeup master", "UserMembershipType: makeup master plural" )
 	;
 	private final int id;
 	private final String name;

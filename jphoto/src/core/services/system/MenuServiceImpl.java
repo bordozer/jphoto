@@ -273,7 +273,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = translatorService.translate( StringUtilities.toUpperCaseFirst( String.format( "Main menu: %s: %s", url, membershipType.getName() ) ), getLanguage() );
+		final String caption = translatorService.translate( String.format( "Main menu: %s: %s", url, membershipType.getName() ), getLanguage() );
 		final String link = urlUtilsService.getPhotosByMembership( membershipType, url );
 		return new MenuItem( caption, link );
 	}

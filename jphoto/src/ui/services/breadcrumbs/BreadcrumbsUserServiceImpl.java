@@ -131,13 +131,16 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	@Override
 	public PageTitleData getUsersByMembershipType( final UserMembershipType membershipType ) {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), EnvironmentContext.getLanguage() ) );
+		final UserListBreadcrumbs breadcrumb = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.translatableString( StringUtilities.toUpperCaseFirst( membershipType.getNamePlural() ) )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
