@@ -160,8 +160,8 @@ public class MenuServiceImpl implements MenuService {
 			final MenuItem favoritesMenu = userFavoritePhotosMenu( user );
 			menuItems.add( favoritesMenu );
 			menuItems.add( userBookmarkedPhotosMenu( user ) );
-			menuItems.add( userFavoriteMembersMenu( user ) );
 			menuItems.add( getUserPhotosOfFavoriteMembersMenu( user ) );
+			menuItems.add( userFavoriteMembersMenu( user ) );
 			menuItems.add( userFriendsMenu( user ) );
 			menuItems.add( userBlackListMenu( user ) );
 

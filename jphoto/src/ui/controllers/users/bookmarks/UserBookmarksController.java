@@ -129,7 +129,7 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		final List<FavoriteEntryType> photoIconsTypes = newArrayList();
+		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.BOOKMARKED_PHOTOS );
 		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS, photoIconsTypes, userIconsTypes );
