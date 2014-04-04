@@ -14,6 +14,9 @@ public enum LinkNerdText {
 	, USER_STATISTICS_COMMENTS_WRITTEN(
 		"User Statistics: Written by user comments"
 		, "User Statistics: Written by $1 comments" )
+	, USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS(
+		"User Statistics: Photos of user's favorite members"
+		, "User Statistics: Photos of $1's favorite members" )
 	;
 
 

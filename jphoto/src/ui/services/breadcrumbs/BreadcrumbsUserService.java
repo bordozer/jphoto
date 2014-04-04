@@ -62,7 +62,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserNotificationsControlData( final User user );
 
-	PageTitleData getPhotosOfUserFavoriteMembers( final User user );
+	PageTitleData getPhotosOfUserFavoriteMembersBreadcrumb( final User user );
 
 	PageTitleData getUserWrittenCommentsBreadcrumb( final User user );
 

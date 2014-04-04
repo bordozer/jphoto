@@ -310,14 +310,19 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getPhotosOfUserFavoriteMembers( final User user ) {
-		final String rootTranslated = getUserRootTranslated();
+	public PageTitleData getPhotosOfUserFavoriteMembersBreadcrumb( final User user ) {
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( LinkNerdText.USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS.getText() )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		/*final String rootTranslated = getUserRootTranslated();
 		final String tran = translatorService.translate( "Photos of the favorite members", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), tran );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( title, rootTranslated, breadcrumbs );*/
 	}
 
 	@Override

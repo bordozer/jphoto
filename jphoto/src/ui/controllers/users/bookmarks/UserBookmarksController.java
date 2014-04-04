@@ -116,7 +116,7 @@ public class UserBookmarksController {
 		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, showIconsForFavoriteEntryTypes );
 
 		final User user = userService.load( userId );
-		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembers( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
 
 		return VIEW;
 	}
