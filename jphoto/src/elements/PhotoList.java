@@ -15,7 +15,8 @@ public class PhotoList {
 
 	private final boolean showPaging;
 
-	private String linkToFullListText = "All photos"; // TODO: translate
+	private String linkToFullListText = "All photos";
+//	private String linkToFullListText = "IF YOU SEE THIS, THAT MEANS THAT PHOTO LIST WAS NOT SET IT FULL LIST TEXT";
 	private String linkToFullList = StringUtils.EMPTY;
 	private String photosCriteriasDescription = StringUtils.EMPTY;
 

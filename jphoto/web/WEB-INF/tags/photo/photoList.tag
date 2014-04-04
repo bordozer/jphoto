@@ -134,7 +134,7 @@
 				<table:td colspan="${photosInLine}">
 					<div class="floatleft">
 						<c:if test="${totalPhotos > 0}">
-							<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${photoList.linkToFullListText}" />
+							<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
 						</c:if>
 
 						<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
