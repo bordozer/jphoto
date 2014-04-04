@@ -25,10 +25,6 @@ public enum EntryMenuType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name); // TODO: translate
-	}
-
 	public static EntryMenuType getById( final int id ) {
 		for ( final EntryMenuType entryMenuType : EntryMenuType.values() ) {
 			if ( entryMenuType.getId() == id ) {

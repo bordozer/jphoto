@@ -37,10 +37,6 @@ public enum Weekday implements Identifiable {
 		return croneSchedulerName;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static Weekday getById( final int id ) {
 		for ( final Weekday weekday : Weekday.values() ) {
 			if ( weekday.getId() == id ) {

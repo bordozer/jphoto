@@ -108,7 +108,7 @@ public class JobChainJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translate( "Run mode:" ) ).append( jobRunMode.getNameTranslated() ).append( "<br />" );
+		builder.append( translate( "Run mode:" ) ).append( jobRunMode.getName() ).append( "<br />" );
 		builder.append( translate( "Stop dependant jobs if error:" ) ).append( translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
 		builder.append( translate( "Jobs:" ) ).append( "<br />" );
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {

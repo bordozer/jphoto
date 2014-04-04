@@ -57,10 +57,6 @@ public enum EntryMenuOperationType {
 		return id;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static EntryMenuOperationType getById( final int id ) {
 		for ( final EntryMenuOperationType entryMenuOperationType : EntryMenuOperationType.values() ) {
 			if ( entryMenuOperationType.getId() == id ) {

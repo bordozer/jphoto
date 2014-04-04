@@ -25,7 +25,7 @@ public class EntryMenu {
 
 	public String getMenuTitle() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append( entryMenuType.getNameTranslated() ).append( ": " ).append( "#" ).append( menuEntry.getId() );
+		builder.append( entryMenuType.getName() ).append( ": " ).append( "#" ).append( menuEntry.getId() );
 
 		/*if ( menuEntry instanceof User ) {
 			builder.append( ); // TODO: show ADMIN prefix

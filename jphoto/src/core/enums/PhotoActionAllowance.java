@@ -23,10 +23,6 @@ public enum PhotoActionAllowance {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static PhotoActionAllowance getById( final int id ) {
 		for ( final PhotoActionAllowance commentsAllowance : PhotoActionAllowance.values() ) {
 			if ( commentsAllowance.getId() == id ) {

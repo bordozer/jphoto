@@ -14,8 +14,4 @@ public enum NotFoundExceptionEntryType {
 	public String getName() {
 		return name;
 	}
-
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
 }

@@ -34,10 +34,6 @@ public enum ConfigurationDataType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static ConfigurationDataType getById( final int id ) {
 		for ( final ConfigurationDataType configurationDataType : ConfigurationDataType.values() ) {
 			if ( configurationDataType.getId() == id ) {

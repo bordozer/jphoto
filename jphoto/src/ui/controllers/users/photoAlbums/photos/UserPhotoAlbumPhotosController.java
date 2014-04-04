@@ -107,7 +107,7 @@ public class UserPhotoAlbumPhotosController {
 
 		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsPhotos( photoAlbum ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumPhotosBreadcrumbs( photoAlbum ) );
 
 		return VIEW;
 	}

@@ -24,10 +24,6 @@ public enum JobRunMode {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static JobRunMode getById( int id ) {
 		for ( JobRunMode jobRunMode : JobRunMode.values() ) {
 			if ( jobRunMode.getId() == id ) {

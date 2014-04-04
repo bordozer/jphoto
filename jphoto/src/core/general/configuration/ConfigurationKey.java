@@ -138,10 +138,6 @@ public enum ConfigurationKey {
 		return description;
 	}
 
-	public String getNameTranslated() {
-		return description; // TODO: translate
-	}
-
 	public String getDefaultValue() {
 		return defaultValue;
 	}

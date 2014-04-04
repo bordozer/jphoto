@@ -71,7 +71,7 @@
 						<form:radiobuttons path="executionTaskTypeId" items="${executionTaskTypes}"  itemValue="id" itemLabel="name" onchange="submitFormData();" delimiter="<br />" />
 					</div>
 					<div style="float: left; width: 32px; padding-top: 25px;">
-						<html:img32 src="scheduler/type/${schedulerTaskEditModel.selectedTaskType.icon}" alt="${schedulerTaskEditModel.selectedTaskType.nameTranslated}" />
+						<html:img32 src="scheduler/type/${schedulerTaskEditModel.selectedTaskType.icon}" alt="${eco:translate(schedulerTaskEditModel.selectedTaskType.name)}" />
 					</div>
 				</table:tddata>
 			</table:tr>

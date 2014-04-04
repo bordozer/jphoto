@@ -269,7 +269,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String header = translatorService.translate( "Upgrade tasks", EnvironmentContext.getLanguage() );
 
 		final String nerd = translatorService.translate( "Upgrade tasks - $1 ( done $2 of $3, errors: $4 )", EnvironmentContext.getLanguage()
-			, upgradeState.getNameTranslated(), String.valueOf( doneUpgradeTasks ), String.valueOf( totalUpgradeTasks ), String.valueOf( errors ) );
+			, upgradeState.getName(), String.valueOf( doneUpgradeTasks ), String.valueOf( totalUpgradeTasks ), String.valueOf( errors ) );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), header );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminUpgradeLink( EnvironmentContext.getLanguage() ), nerd );

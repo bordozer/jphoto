@@ -26,10 +26,6 @@ public enum ComplaintReasonType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static ComplaintReasonType getById( final int id ) {
 		for ( final ComplaintReasonType complaintReasonType : ComplaintReasonType.values() ) {
 			if ( complaintReasonType.getId() == id ) {

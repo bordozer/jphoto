@@ -89,7 +89,7 @@
 				</td>
 
 				<td width="100">
-					${upgradeTasksToPerform.upgradeTaskResult.nameTranslated}
+					${eco:translate(upgradeTasksToPerform.upgradeTaskResult.name)}
 				</td>
 
 			</tr>

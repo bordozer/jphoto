@@ -141,7 +141,7 @@
 								</c:if>
 							</table:tdunderlined>
 
-							<table:tdunderlined>${configurationKey.unit.nameTranslated}</table:tdunderlined>
+							<table:tdunderlined>${eco:translate(configurationKey.unit.name)}</table:tdunderlined>
 						</table:tr>
 
 					</c:if>

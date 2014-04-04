@@ -168,7 +168,7 @@ public class UserBookmarksController {
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 
-		model.setPageTitleData( breadcrumbsUserService.getFavoriteEntry( user, entryType ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserFavoriteEntryListBreadcrumbs( user, entryType ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 	}
 

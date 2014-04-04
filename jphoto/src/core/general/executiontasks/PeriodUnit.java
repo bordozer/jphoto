@@ -26,10 +26,6 @@ public enum PeriodUnit {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static PeriodUnit getById( final int id ) {
 		for ( final PeriodUnit configurationDataType : PeriodUnit.values() ) {
 			if ( configurationDataType.getId() == id ) {

@@ -19,10 +19,6 @@ public enum UserBookedMembersType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
-
 	public static UserBookedMembersType getById( final int id ) {
 		for ( UserBookedMembersType userBookedMembersType : UserBookedMembersType.values() ) {
 			if ( userBookedMembersType.getId() == id ) {

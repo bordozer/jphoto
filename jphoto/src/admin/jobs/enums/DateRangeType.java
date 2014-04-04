@@ -25,10 +25,6 @@ public enum DateRangeType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static DateRangeType getById( final int id ) {
 		for ( final DateRangeType dateRangeType : DateRangeType.values() ) {
 			if ( dateRangeType.getId() == id ) {

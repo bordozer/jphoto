@@ -88,7 +88,7 @@
 
 			<table:tr>
 				<table:tdtext text_t="Comments allowance"/>
-				<table:tddata>${photoEditDataModel.commentsAllowance.nameTranslated}</table:tddata>
+				<table:tddata>${eco:translate(photoEditDataModel.commentsAllowance.name)}</table:tddata>
 			</table:tr>
 
 			<table:tr>
@@ -98,7 +98,7 @@
 
 			<table:tr>
 				<table:tdtext text_t="Voting allowance"/>
-				<table:tddata>${photoEditDataModel.votingAllowance.nameTranslated}</table:tddata>
+				<table:tddata>${eco:translate(photoEditDataModel.votingAllowance.name)}</table:tddata>
 			</table:tr>
 
 			<table:separator colspan="2" />

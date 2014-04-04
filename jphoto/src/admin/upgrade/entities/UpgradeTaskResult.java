@@ -22,10 +22,6 @@ public enum UpgradeTaskResult {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static UpgradeTaskResult getById( final int id ) {
 		for ( final UpgradeTaskResult upgradeTaskResult : UpgradeTaskResult.values() ) {
 			if ( upgradeTaskResult.getId() == id ) {

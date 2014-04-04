@@ -194,16 +194,12 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 		final User user = userTeamMember.getUser();
 
-		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
-
 		final String breadcrumbs = userTeamLink( user )
 			.userTeamMemberLink( userTeamMember )
 			.translatableString( "Breadcrumbs: Editing user team member's data" )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
@@ -211,15 +207,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 		final User user = userTeamMember.getUser();
 
-		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
-
 		final String breadcrumbs = userTeamLink( user )
 			.userTeamMemberName( userTeamMember )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
@@ -239,15 +231,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserPhotoAlbumNewBreadcrumbs( final User user ) {
 
-		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
-
 		final String breadcrumbs = userAlbumListLink( user )
 			.translatableString( "Breadcrumbs: Create new user photo album" )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
@@ -255,37 +243,34 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 		final User user = photoAlbum.getUser();
 
-		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
-
 		final String breadcrumbs = userAlbumListLink( user )
 			.userAlbumLinkLink( photoAlbum )
 			.translatableString( "Breadcrumbs: User photo album edit" )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserPhotoAlbumsPhotos( final UserPhotoAlbum photoAlbum ) {
+	public PageTitleData getUserPhotoAlbumPhotosBreadcrumbs( final UserPhotoAlbum photoAlbum ) {
 
 		final User user = photoAlbum.getUser();
-
-		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
 		final String breadcrumbs = userAlbumListLink( user )
 			.translatableString( photoAlbum.getNameEscaped() )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getFavoriteEntry( final User user, final FavoriteEntryType favoriteEntryType ) {
-		return getUserData( user, String.format( "%s / %s", translatorService.translate( "Favorites", EnvironmentContext.getLanguage() ), favoriteEntryType.getName() ) );
+	public PageTitleData getUserFavoriteEntryListBreadcrumbs( final User user, final FavoriteEntryType favoriteEntryType ) {
+
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( favoriteEntryType.getName() )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Override

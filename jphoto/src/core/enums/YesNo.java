@@ -24,10 +24,6 @@ public enum YesNo {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static YesNo getById( final int id ) {
 		for ( final YesNo upgradeTaskResult : YesNo.values() ) {
 			if ( upgradeTaskResult.getId() == id ) {

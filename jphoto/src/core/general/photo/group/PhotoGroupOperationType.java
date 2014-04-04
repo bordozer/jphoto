@@ -25,10 +25,6 @@ public enum PhotoGroupOperationType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return name; // TODO: translate
-	}
-
 	public static PhotoGroupOperationType getById( final int id ) {
 		for ( final PhotoGroupOperationType groupOperationType : PhotoGroupOperationType.values() ) {
 			if ( id != -1 && groupOperationType.getId() == id ) {

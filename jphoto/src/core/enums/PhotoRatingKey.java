@@ -25,10 +25,6 @@ public enum PhotoRatingKey {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static PhotoRatingKey getById( final int id ) {
 		for ( final PhotoRatingKey upgradeTaskResult : PhotoRatingKey.values() ) {
 			if ( upgradeTaskResult.getId() == id ) {

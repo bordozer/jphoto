@@ -39,10 +39,6 @@ public enum Month implements Identifiable {
 		return croneSchedulerName;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static Month getById( final int id ) {
 		for ( final Month weekday : Month.values() ) {
 			if ( weekday.getId() == id ) {

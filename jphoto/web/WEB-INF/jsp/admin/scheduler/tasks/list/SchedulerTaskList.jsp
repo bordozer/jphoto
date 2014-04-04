@@ -161,7 +161,7 @@
 							</table:tdicon>
 
 							<table:td cssClass="${css} textcentered">
-								<html:img32 src="scheduler/type/${schedulerTaskType.icon}" alt="${schedulerTaskType.nameTranslated}"/>
+								<html:img32 src="scheduler/type/${schedulerTaskType.icon}" alt="${eco:translate(schedulerTaskType.name)}"/>
 							</table:td>
 
 							<table:td cssClass="${css}">

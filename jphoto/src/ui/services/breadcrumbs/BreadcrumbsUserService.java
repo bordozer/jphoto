@@ -46,9 +46,9 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserPhotoAlbumEditBreadcrumbs( final UserPhotoAlbum photoAlbum );
 
-	PageTitleData getUserPhotoAlbumsPhotos( final UserPhotoAlbum photoAlbum );
+	PageTitleData getUserPhotoAlbumPhotosBreadcrumbs( final UserPhotoAlbum photoAlbum );
 
-	PageTitleData getFavoriteEntry( final User user, final FavoriteEntryType favoriteEntryType );
+	PageTitleData getUserFavoriteEntryListBreadcrumbs( final User user, final FavoriteEntryType favoriteEntryType );
 
 	PageTitleData getAddedToFavoritesByEntry( final User user );
 

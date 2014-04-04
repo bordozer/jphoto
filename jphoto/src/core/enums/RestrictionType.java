@@ -25,10 +25,6 @@ public enum RestrictionType {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static RestrictionType getById( final int id ) {
 		for ( final RestrictionType restrictionType : RestrictionType.values() ) {
 			if ( restrictionType.getId() == id ) {

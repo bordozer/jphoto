@@ -31,10 +31,6 @@ public enum EmailNotificationType implements Identifiable {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static EmailNotificationType getById( final int id ) {
 		for ( final EmailNotificationType entryType : EmailNotificationType.values() ) {
 			if ( entryType.getId() == id ) {

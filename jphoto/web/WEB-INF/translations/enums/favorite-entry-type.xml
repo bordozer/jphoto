@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>FavoriteEntryType: Favorite members</nerd>
+		<ru><![CDATA[Избранные авторы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: Favorite photos</nerd>
+		<ru><![CDATA[Избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: Friends</nerd>
+		<ru><![CDATA[Друзья]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: Black list</nerd>
+		<ru><![CDATA[Черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: Bookmarks</nerd>
+		<ru><![CDATA[Закладки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: New photos notification</nerd>
+		<ru><![CDATA[Авторыб новые работы которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: New comments notification</nerd>
+		<ru><![CDATA[Работы, новые комментари к которым отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

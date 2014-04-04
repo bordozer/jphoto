@@ -23,10 +23,6 @@ public enum UserStatus {
 		return name;
 	}
 
-	public String getNameTranslated() {
-		return StringUtilities.toUpperCaseFirst( name ); // TODO: translate
-	}
-
 	public static UserStatus getById( final int id ) {
 		for ( final UserStatus userStatus : UserStatus.values() ) {
 			if ( userStatus.getId() == id ) {
