@@ -29,9 +29,11 @@
 		<photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}" />
 	</c:if>
 
-	<div class="floatleft">
-		<photo:photoFilter />
-	</div>
+	<c:if test="${photoListModel.showPhotoSearchForm}">
+		<div class="floatleft">
+			<photo:photoFilter />
+		</div>
+	</c:if>
 
 	<div class="footerseparator"></div>
 

@@ -19,6 +19,8 @@ public class PhotoListModel extends AbstractGeneralModel {
 	private User user;
 	private List<UserPhotosByGenre> userPhotosByGenres;
 
+	private boolean showPhotoSearchForm = true;
+
 	public List<PhotoList> getPhotoLists() {
 		return photoLists;
 	}
@@ -53,5 +55,13 @@ public class PhotoListModel extends AbstractGeneralModel {
 
 	public void setUserPhotosByGenres( final List<UserPhotosByGenre> userPhotosByGenres ) {
 		this.userPhotosByGenres = userPhotosByGenres;
+	}
+
+	public boolean isShowPhotoSearchForm() {
+		return showPhotoSearchForm;
+	}
+
+	public void setShowPhotoSearchForm( final boolean showPhotoSearchForm ) {
+		this.showPhotoSearchForm = showPhotoSearchForm;
 	}
 }

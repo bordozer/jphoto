@@ -70,14 +70,12 @@ public class UserBookmarksController {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Autowired
 	private Services services;
 
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
 		final PhotoListModel model = new PhotoListModel();
+		model.setShowPhotoSearchForm( false );
 
 		model.setDeviceType( EnvironmentContext.getDeviceType() );
 
