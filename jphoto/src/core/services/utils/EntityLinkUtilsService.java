@@ -2,6 +2,7 @@ package core.services.utils;
 
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
+import core.enums.UserCardTab;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.genre.Genre;
@@ -18,6 +19,7 @@ public interface EntityLinkUtilsService {
 
 	String BEAN_NAME = "entityLinkUtilsService";
 	String BREADCRUMBS_USER_TEAM = "Breadcrumbs: User team";
+	String USER_PHOTO_ALBUM_LIST = UserCardTab.ALBUMS.getName();
 
 	String getPortalPageLink( final Language language );
 

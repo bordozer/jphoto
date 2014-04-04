@@ -144,7 +144,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getUserPhotoAlbumListLink( final int userId, final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getUserPhotoAlbumListLink( userId ) );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Albums", language ) );
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
+			, link
+			, translatorService.translate( "Albums", language )
+			, translatorService.translate( USER_PHOTO_ALBUM_LIST, language )
+		);
 	}
 
 	@Override

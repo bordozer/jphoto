@@ -64,7 +64,7 @@ public class UserPhotoAlbumEditDataController {
 		final User user = userService.load( userId );
 		model.setUser( user );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsNew( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumNewBreadcrumbs( user ) );
 
 		return VIEW;
 	}
@@ -86,7 +86,7 @@ public class UserPhotoAlbumEditDataController {
 		model.setAlbumName( photoAlbum.getName() );
 		model.setAlbumDescription( photoAlbum.getDescription() );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsEdit( photoAlbum ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumEditBreadcrumbs( photoAlbum ) );
 
 		return VIEW;
 	}

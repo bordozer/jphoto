@@ -40,11 +40,11 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserTeamMemberCardBreadcrumbs( final UserTeamMember userTeamMember );
 
-	PageTitleData getUserPhotoAlbumsData( final User user );
+	PageTitleData getUserPhotoAlbumListBreadcrumbs( final User user );
 
-	PageTitleData getUserPhotoAlbumsNew( final User user );
+	PageTitleData getUserPhotoAlbumNewBreadcrumbs( final User user );
 
-	PageTitleData getUserPhotoAlbumsEdit( final UserPhotoAlbum photoAlbum );
+	PageTitleData getUserPhotoAlbumEditBreadcrumbs( final UserPhotoAlbum photoAlbum );
 
 	PageTitleData getUserPhotoAlbumsPhotos( final UserPhotoAlbum photoAlbum );
 

@@ -5,6 +5,7 @@ import core.general.base.AbstractBaseEntity;
 import core.general.user.User;
 import core.interfaces.Cacheable;
 import core.interfaces.Nameable;
+import org.apache.commons.lang.StringEscapeUtils;
 
 public class UserPhotoAlbum extends AbstractBaseEntity implements Nameable, Cacheable {
 
@@ -22,6 +23,10 @@ public class UserPhotoAlbum extends AbstractBaseEntity implements Nameable, Cach
 
 	public String getName() {
 		return name;
+	}
+
+	public String getNameEscaped() {
+		return StringEscapeUtils.escapeHtml( name );
 	}
 
 	public void setName( final String name ) {

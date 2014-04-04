@@ -65,7 +65,7 @@ public class UserPhotoAlbumListController {
 		}
 		model.setUserPhotoAlbumsQtyMap( userPhotoAlbumsQtyMap );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumsData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumListBreadcrumbs( user ) );
 
 		return VIEW;
 	}

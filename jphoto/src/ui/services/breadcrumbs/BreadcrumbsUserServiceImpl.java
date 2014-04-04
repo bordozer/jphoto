@@ -169,7 +169,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 		final String breadcrumbs = portalPage( services )
 			.userListLink()
-			.translatableString( StringUtilities.toUpperCaseFirst( membershipType.getNamePlural() ) )
+			.translatableString( membershipType.getNamePlural() )
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
@@ -223,43 +223,64 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserPhotoAlbumsData( final User user ) {
-		return getUserData( user, translatorService.translate( "Photo albums", EnvironmentContext.getLanguage() ) );
+	public PageTitleData getUserPhotoAlbumListBreadcrumbs( final User user ) {
+
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( EntityLinkUtilsService.USER_PHOTO_ALBUM_LIST )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserPhotoAlbumsNew( final User user ) {
-		final String tran = translatorService.translate( "New", EnvironmentContext.getLanguage() );
-		final String rootTranslated = getUserRootTranslated();
+	public PageTitleData getUserPhotoAlbumNewBreadcrumbs( final User user ) {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), tran );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = userAlbumListLink( user )
+			.translatableString( "Breadcrumbs: Create new user photo album" )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getUserPhotoAlbumsEdit( final UserPhotoAlbum photoAlbum ) {
+	public PageTitleData getUserPhotoAlbumEditBreadcrumbs( final UserPhotoAlbum photoAlbum ) {
+
 		final User user = photoAlbum.getUser();
-		final String tran = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
-		final String rootTranslated = getUserRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( photoAlbum, EnvironmentContext.getLanguage() ), tran );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = userAlbumListLink( user )
+			.userAlbumLinkLink( photoAlbum )
+			.translatableString( "Breadcrumbs: User photo album edit" )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getUserPhotoAlbumsPhotos( final UserPhotoAlbum photoAlbum ) {
+
 		final User user = photoAlbum.getUser();
-		final String tran = StringUtilities.escapeHtml( photoAlbum.getName() );
-		final String rootTranslated = getUserRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserPhotoAlbumListLink( user.getId(), EnvironmentContext.getLanguage() ), tran );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = userAlbumListLink( user )
+			.translatableString( photoAlbum.getNameEscaped() )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
@@ -361,5 +382,10 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 			.userListLink()
 			.userCardLink( user )
 			.userTeamLink( user );
+	}
+
+	private BreadcrumbsBuilder userAlbumListLink( final User user ) {
+		return userCardLink( user )
+			.userAlbumListLink( user );
 	}
 }
