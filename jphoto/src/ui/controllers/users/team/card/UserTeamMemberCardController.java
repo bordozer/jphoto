@@ -106,7 +106,7 @@ public class UserTeamMemberCardController {
 
 		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberCardData( userTeamMember ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberCardBreadcrumbs( userTeamMember ) );
 
 		return VIEW;
 	}

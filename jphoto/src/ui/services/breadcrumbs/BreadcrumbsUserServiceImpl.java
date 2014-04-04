@@ -213,16 +213,22 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserTeamMemberCardData( final UserTeamMember userTeamMember ) {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Team", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, userTeamMember.getTeamMemberName(), tran );
+	public PageTitleData getUserTeamMemberCardBreadcrumbs( final UserTeamMember userTeamMember ) {
 
 		final User user = userTeamMember.getUser();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserTeamMemberListLink( user.getId(), EnvironmentContext.getLanguage() ), StringUtilities.escapeHtml( userTeamMember.getTeamMemberName() ) );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final UserNameBreadcrumb breadcrumb = new UserNameBreadcrumb( user, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+
+		final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.userTeamLink( user )
+			.userTeamMemberName( userTeamMember )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override

@@ -130,6 +130,11 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
+	public BreadcrumbsBuilder userTeamMemberName( final UserTeamMember userTeamMember ) {
+		breadcrumbs.add( new UserTeamMemberNameBreadcrumbs( userTeamMember, services ) );
+		return this;
+	}
+
 	public BreadcrumbsBuilder anonymousUser() {
 		breadcrumbs.add( new AnonymousUserBreadcrumb( services ) );
 		return this;

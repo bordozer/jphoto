@@ -38,7 +38,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserTeamMemberEditBreadcrumbs( final UserTeamMember userTeamMember );
 
-	PageTitleData getUserTeamMemberCardData( final UserTeamMember userTeamMember );
+	PageTitleData getUserTeamMemberCardBreadcrumbs( final UserTeamMember userTeamMember );
 
 	PageTitleData getUserPhotoAlbumsData( final User user );
 
