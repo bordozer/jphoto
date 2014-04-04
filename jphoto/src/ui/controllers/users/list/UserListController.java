@@ -156,7 +156,7 @@ public class UserListController {
 		model.setMembershipType( membershipType );
 
 		filterModel.clear();
-		model.setPageTitleData( breadcrumbsUserService.getUsersByMembershipType( membershipType ) );
+		model.setPageTitleData( breadcrumbsUserService.getUsersFilteredByMembershipTypeBreadcrumbs( membershipType ) );
 		model.setUserListTitle( StringUtils.EMPTY );
 
 		filterModel.setMembershipTypeList( Lists.<Integer>newArrayList( typeId ) );

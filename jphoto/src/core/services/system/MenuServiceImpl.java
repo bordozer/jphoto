@@ -15,7 +15,6 @@ import core.services.utils.UrlUtilsServiceImpl;
 import elements.menus.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
-import utils.StringUtilities;
 
 import java.util.Date;
 import java.util.List;
@@ -174,7 +173,8 @@ public class MenuServiceImpl implements MenuService {
 		if ( user.getId() > 0 ) {
 			menuItems.add( getCommentsToMeMenu( user ) );
 			menuItems.add( getWrittenCommentsMenu( user ) );
-			menuItems.add( getPrivateMessagesMenu( user ) );
+			menuItems.add( getPrivateMessagesReceivedMenu( user ) );
+			menuItems.add( getPrivateMessagesSentMenu( user ) );
 			menuItems.add( getActivityNotificationMenu( user ) );
 			menuItems.add( getSystemNotificationMenu( user ) );
 
@@ -200,9 +200,15 @@ public class MenuServiceImpl implements MenuService {
 		return new MenuItem( caption, link );
 	}
 
-	private MenuItem getPrivateMessagesMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Private messages", getLanguage() );
+	private MenuItem getPrivateMessagesReceivedMenu( final User user ) {
+		final String caption = translatorService.translate( MAIN_MENU_PRIVATE_MESSAGES_RECEIVED, getLanguage() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getPrivateMessagesSentMenu( final User user ) {
+		final String caption = translatorService.translate( MAIN_MENU_PRIVATE_MESSAGES_SENT, getLanguage() );
+		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
 		return new MenuItem( caption, link );
 	}
 

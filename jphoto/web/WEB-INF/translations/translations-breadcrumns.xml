@@ -57,14 +57,14 @@
 		<ru><![CDATA[Аватар]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd>Breadcrumbs: $1: user card</nerd>
-		<ru><![CDATA[$1: карточка пользователя]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Breadcrumbs: User team members list</nerd>
+		<ru><![CDATA[Команда пользователя]]></ru>
+	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: messaging with user $1</nerd>
+		<ru><![CDATA[Переписка с $1]]></ru>
 	</translation>
 
 	<translation>

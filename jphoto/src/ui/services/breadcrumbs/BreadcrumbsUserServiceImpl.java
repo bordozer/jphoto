@@ -2,6 +2,7 @@ package ui.services.breadcrumbs;
 
 import core.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
+import core.enums.PrivateMessageType;
 import core.enums.UserCardTab;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -10,6 +11,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.system.MenuService;
 import core.services.system.Services;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
@@ -115,6 +117,35 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
+	public PageTitleData getUserTeamMemberListData( final User user ) {
+
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( "Breadcrumbs: User team members list" )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+	}
+
+	@Override
+	public PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final User withUser ) {
+		final Language language = EnvironmentContext.getLanguage();
+		final String breadcrumbs = userCardLink( user )
+			.string( translatorService.translate( "Breadcrumbs: messaging with user $1", language, entityLinkUtilsService.getUserCardLink( withUser, language ) ) )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+	}
+
+	@Override
+	public PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final PrivateMessageType messageType ) {
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( messageType.getName() )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+	}
+
+	@Override
 	public PageTitleData getUserListSearchResultBreadcrumbs() {
 
 		final UserListBreadcrumbs breadcrumb = new UserListBreadcrumbs( services );
@@ -130,7 +161,8 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUsersByMembershipType( final UserMembershipType membershipType ) {
+	public PageTitleData getUsersFilteredByMembershipTypeBreadcrumbs( final UserMembershipType membershipType ) {
+
 		final UserListBreadcrumbs breadcrumb = new UserListBreadcrumbs( services );
 		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
@@ -141,16 +173,6 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
-	}
-
-	@Override
-	public PageTitleData getUserTeamMemberListData( final User user ) {
-		return getUserData( user, translatorService.translate( "Team", EnvironmentContext.getLanguage() ) );
-	}
-
-	@Override
-	public PageTitleData getUserPrivateMessagesListData( final User user ) {
-		return getUserData( user, translatorService.translate( "Private Messages", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override
@@ -244,11 +266,13 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		return getUserData( user, String.format( "%s", translatorService.translate( "Added to Favorites by", EnvironmentContext.getLanguage() ) ) );
 	}
 
+	@Deprecated
 	@Override
 	public String getUserRootTranslated() {
 		return translatorService.translate( USER_ROOT, EnvironmentContext.getLanguage() );
 	}
 
+	@Deprecated
 	@Override
 	public PageTitleData getUserData( final User user, final String tran ) {
 		final String rootTranslated = getUserRootTranslated();
@@ -260,7 +284,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserWrongLogin() {
+	public PageTitleData getUserWrongLogin() { // TODO: move to CommonBreadcrumbsService
 		final String rootTranslated = getUserRootTranslated();
 		final String tran = translatorService.translate( "Can't login", EnvironmentContext.getLanguage() );
 

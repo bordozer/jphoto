@@ -196,10 +196,10 @@
 		<ru><![CDATA[Написанные комментарии]]></ru>
 	</translation>
 
-	<translation>
-		<nerd>Main menu: Private messages</nerd>
-		<ru><![CDATA[Личные сообщения]]></ru>
-	</translation>
+	<!--<translation>
+		<nerd>Main menu: Received private messages</nerd>
+		<ru><![CDATA[Полученные личные сообщения]]></ru>
+	</translation>-->
 
 	<translation>
 		<nerd>PrivateMessageType: Received messages</nerd>

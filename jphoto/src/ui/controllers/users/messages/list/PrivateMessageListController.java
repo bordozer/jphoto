@@ -153,7 +153,8 @@ public class PrivateMessageListController {
 
 		markMessagesAsReadIfNecessary( receivedMessages, forUser );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListData( forUser ) );
+		final User withUser = userService.load( withUserId );
+		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListBreadcrumbs( forUser, withUser ) );
 
 		return VIEW;
 	}
@@ -247,7 +248,7 @@ public class PrivateMessageListController {
 
 		model.setShowPaging( true );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListData( forUser ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserPrivateMessagesListBreadcrumbs( forUser, messageType ) );
 
 		return VIEW;
 	}

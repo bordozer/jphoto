@@ -1,6 +1,7 @@
 package ui.services.breadcrumbs;
 
 import core.enums.FavoriteEntryType;
+import core.enums.PrivateMessageType;
 import core.enums.UserCardTab;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -25,11 +26,13 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserListSearchResultBreadcrumbs();
 
-	PageTitleData getUsersByMembershipType( final UserMembershipType membershipType );
+	PageTitleData getUsersFilteredByMembershipTypeBreadcrumbs( final UserMembershipType membershipType );
 
 	PageTitleData getUserTeamMemberListData( final User user );
 
-	PageTitleData getUserPrivateMessagesListData( final User user );
+	PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final User withUser );
+
+	PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final PrivateMessageType messageType );
 
 	PageTitleData getUserTeamMemberNewData( final User user );
 

@@ -22,7 +22,7 @@
 
 		<form:checkbox path="selectedMessagesIds" value="${privateMessage.id}" />
 
-		<html:img16 src="messages/${privateMessageType.icon}" alt="${privateMessageType.nameTranslated}" />
+		<html:img16 src="messages/${privateMessageType.icon}" alt="${eco:translate(privateMessageType.name)}" />
 
 		&nbsp;&nbsp;
 
