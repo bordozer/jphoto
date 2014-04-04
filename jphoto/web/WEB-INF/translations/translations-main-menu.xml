@@ -146,35 +146,9 @@
 
 
 
-
 	<translation>
 		<nerd>Main menu: My bookmarks</nerd>
 		<ru><![CDATA[Мои закладки]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Favorite photos</nerd>
-		<ru><![CDATA[Избранные работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Favorite Members</nerd>
-		<ru><![CDATA[Избранные авторы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Black List</nerd>
-		<ru><![CDATA[Черный список]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Bookmarked photos</nerd>
-		<ru><![CDATA[Работы в закладках]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Friends</nerd>
-		<ru><![CDATA[Друзья]]></ru>
 	</translation>
 
 
@@ -195,11 +169,6 @@
 		<nerd>Main menu: Written comments</nerd>
 		<ru><![CDATA[Написанные комментарии]]></ru>
 	</translation>
-
-	<!--<translation>
-		<nerd>Main menu: Received private messages</nerd>
-		<ru><![CDATA[Полученные личные сообщения]]></ru>
-	</translation>-->
 
 	<translation>
 		<nerd>PrivateMessageType: Received messages</nerd>

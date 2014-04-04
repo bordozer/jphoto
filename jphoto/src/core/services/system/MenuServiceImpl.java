@@ -1,6 +1,7 @@
 package core.services.system;
 
 import core.context.EnvironmentContext;
+import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -234,7 +235,7 @@ public class MenuServiceImpl implements MenuService {
 		final List<MenuItem> menuItems = newArrayList();
 
 		if ( user.getId() > 0 ) {
-			menuItems.add( getsubscriptionOnNewCommentsMenu( user ) );
+			menuItems.add( getSubscriptionOnNewCommentsMenu( user ) );
 			menuItems.add( getSubscriptionOnNewPhotosMenu( user ) );
 
 			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: My subscription", getLanguage() ) ), menuItems );
@@ -411,36 +412,36 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem userFavoritePhotosMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Favorite photos", getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.PHOTO.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoritePhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFavoriteMembersMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Favorite Members", getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.USER.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteMembersLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
-	private MenuItem userBlackListMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Black List", getLanguage() );
-		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
-		return new MenuItem( caption, link );
-	}
-
 	private MenuItem userBookmarkedPhotosMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Bookmarked photos", getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.BOOKMARK.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserBookmarkedPhotosLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem userFriendsMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Friends", getLanguage() );
+		final String caption = translatorService.translate( FavoriteEntryType.FRIEND.getName(), getLanguage() );
 		final String link = urlUtilsService.getUserFavoriteFriendsLink( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
-	private MenuItem getsubscriptionOnNewCommentsMenu( final User user ) {
+	private MenuItem userBlackListMenu( final User user ) {
+		final String caption = translatorService.translate( FavoriteEntryType.BLACKLIST.getName(), getLanguage() );
+		final String link = urlUtilsService.getUserFavoriteBlackListLink( user.getId() );
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem getSubscriptionOnNewCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: On new comments", getLanguage() );
 		final String link = urlUtilsService.getPhotosWithSubscribeOnNewCommentsLink( user.getId() );
 		return new MenuItem( caption, link );

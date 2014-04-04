@@ -1,4 +1,5 @@
 <%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,5 +8,6 @@
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserFavoritePhotosLink( user.getId() )%>" />
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
+<c:set var="favoriteEntryTypeName" value="<%=FavoriteEntryType.PHOTO.getName()%>"/>
 
-<a href ="${link}" title="${eco:translate1("$1\'s favorite photos", userNameEscaped)}">${eco:translate("Favorite photos")}</a>
+<a href ="${link}" title="${eco:translate1("$1\'s favorite photos", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>

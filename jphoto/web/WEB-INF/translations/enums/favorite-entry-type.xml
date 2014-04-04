@@ -14,17 +14,17 @@
 
 	<translation>
 		<nerd>FavoriteEntryType: Friends</nerd>
-		<ru><![CDATA[Друзья]]></ru>
+		<ru><![CDATA[Пользователи-друзья]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>FavoriteEntryType: Black list</nerd>
-		<ru><![CDATA[Черный список]]></ru>
+		<ru><![CDATA[Черный список пользователей]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>FavoriteEntryType: Bookmarks</nerd>
-		<ru><![CDATA[Закладки]]></ru>
+		<ru><![CDATA[Работы в закладках]]></ru>
 	</translation>
 
 	<translation>
