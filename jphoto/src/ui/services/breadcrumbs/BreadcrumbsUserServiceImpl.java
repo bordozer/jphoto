@@ -182,10 +182,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		final String breadcrumbs = portalPage( services )
-			.userListLink()
-			.userCardLink( user )
-			.userTeamLink( user )
+		final String breadcrumbs = userTeamLink( user )
 			.translatableString( "Breadcrumbs: New member of user team" )
 			.build();
 
@@ -201,10 +198,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		final String breadcrumbs = portalPage( services )
-			.userListLink()
-			.userCardLink( user )
-			.userTeamLink( user )
+		final String breadcrumbs = userTeamLink( user )
 			.userTeamMemberLink( userTeamMember )
 			.translatableString( "Breadcrumbs: Editing user team member's data" )
 			.build();
@@ -221,10 +215,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
 		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-		final String breadcrumbs = portalPage( services )
-			.userListLink()
-			.userCardLink( user )
-			.userTeamLink( user )
+		final String breadcrumbs = userTeamLink( user )
 			.userTeamMemberName( userTeamMember )
 			.build();
 
@@ -363,5 +354,12 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	private BreadcrumbsBuilder userCardLink( final User user ) {
 		return portalPage( services ).userListLink().userCardLink( user );
+	}
+
+	private BreadcrumbsBuilder userTeamLink( final User user ) {
+		return portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.userTeamLink( user );
 	}
 }
