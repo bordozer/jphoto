@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
 import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
+import ui.services.breadcrumbs.items.UserListBreadcrumbs;
 import utils.StringUtilities;
 
 import java.util.ArrayList;
@@ -49,6 +50,17 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Autowired
 	private Services services;
+
+	@Override
+	public BreadcrumbsBuilder getUserPhotosInGenreLinkBreadcrumbs( final User user, final Genre genre ) {
+
+		return portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.photosByUser( user )
+			.photosByUserAndGenre( user, genre )
+			;
+	}
 
 	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {

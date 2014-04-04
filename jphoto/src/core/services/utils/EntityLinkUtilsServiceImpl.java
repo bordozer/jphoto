@@ -117,7 +117,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getUsersRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllUsersLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( MenuService.MAIN_MENU_MEMBERS, language ) );
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
+			, link
+			, translatorService.translate( "Breadcrumbs: Members list", language )
+			, translatorService.translate( MenuService.MAIN_MENU_MEMBERS, language )
+		);
 	}
 
 	@Override

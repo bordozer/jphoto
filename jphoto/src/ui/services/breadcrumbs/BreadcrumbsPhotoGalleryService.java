@@ -7,10 +7,13 @@ import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import elements.PageTitleData;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 import java.util.Date;
 
 public interface BreadcrumbsPhotoGalleryService {
+
+	BreadcrumbsBuilder getUserPhotosInGenreLinkBreadcrumbs( User user, Genre genre );
 
 	PageTitleData getPhotoGalleryBreadcrumbs();
 

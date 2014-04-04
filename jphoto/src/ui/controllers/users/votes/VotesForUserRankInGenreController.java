@@ -98,7 +98,7 @@ public class VotesForUserRankInGenreController {
 
 		model.setRanksInGenrePointsMap( userRankService.getUserGenreRankPointsMap() );
 
-		model.setPageTitleData( breadcrumbsUserService.getVotesForUserRankInGenreData( user, genre ) );
+		model.setPageTitleData( breadcrumbsUserService.getVotesForUserRankInGenreBreadcrumbs( user, genre ) );
 
 		return VIEW;
 	}

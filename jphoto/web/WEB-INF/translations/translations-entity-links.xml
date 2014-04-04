@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Breadcrumbs: Members list</nerd>
+		<ru><![CDATA[Пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: card</nerd>
+		<ru><![CDATA[$1: карточка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: all photos</nerd>
+		<ru><![CDATA[$1: все работы пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: all photos in category '$2'</nerd>
+		<ru><![CDATA[$1: все работы пользователя из раздела '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

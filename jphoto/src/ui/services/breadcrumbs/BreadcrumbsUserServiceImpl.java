@@ -34,6 +34,9 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	private TranslatorService translatorService;
 
 	@Autowired
+	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
+
+	@Autowired
 	private Services services;
 
 	@Override
@@ -66,15 +69,23 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getVotesForUserRankInGenreData( final User user, final Genre genre ) {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Votes for rank in genre", EnvironmentContext.getLanguage() );
+	public PageTitleData getVotesForUserRankInGenreBreadcrumbs( final User user, final Genre genre ) {
+		final UserListBreadcrumbs userListText = new UserListBreadcrumbs( services );
+		final String title = BreadcrumbsBuilder.pageTitle( userListText, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( userListText, services ).build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByUserLink( user, EnvironmentContext.getLanguage() )
-			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() ), tran );
+		final String breadcrumbs = breadcrumbsPhotoGalleryService.getUserPhotosInGenreLinkBreadcrumbs( user, genre )
+																 .translatableString( "Breadcrumbs: Votes for rank in genre" )
+																 .build();
+		/*final String breadcrumbs = portalPage( services )
+			.userListLink()
+			.userCardLink( user )
+			.photosByUser( user )
+			.photosByUserAndGenre( user, genre )
+			.translatableString( "Breadcrumbs: Votes for rank in genre" )
+			.build();*/
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override

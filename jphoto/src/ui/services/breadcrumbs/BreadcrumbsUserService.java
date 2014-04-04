@@ -15,7 +15,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserRegistrationBreadcrumbs();
 
-	PageTitleData getVotesForUserRankInGenreData( final User user, final Genre genre );
+	PageTitleData getVotesForUserRankInGenreBreadcrumbs( final User user, final Genre genre );
 
 	PageTitleData getUserEditData( final User user );
 
