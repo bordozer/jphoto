@@ -12,6 +12,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.system.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
+import core.services.translator.LinkNerdText;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
@@ -20,7 +21,6 @@ import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 import ui.services.breadcrumbs.items.UserListBreadcrumbs;
 import ui.services.breadcrumbs.items.UserNameBreadcrumb;
-import utils.StringUtilities;
 
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
@@ -275,7 +275,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	@Override
 	public PageTitleData getAddedToFavoritesByEntry( final User user ) {
-		return getUserData( user, String.format( "%s", translatorService.translate( "Added to Favorites by", EnvironmentContext.getLanguage() ) ) );
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( LinkNerdText.USER_STATISTICS_THE_USER_IS_ADDED_IN_FAVORITE_MEMBERS_BY.getText() )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
 	@Deprecated
