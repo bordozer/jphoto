@@ -12,7 +12,7 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.system.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
-import core.services.translator.LinkNerdText;
+import core.services.translator.nerds.LinkNerdText;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
@@ -282,23 +282,6 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 
-	@Deprecated
-	@Override
-	public String getUserRootTranslated() {
-		return translatorService.translate( USER_ROOT, EnvironmentContext.getLanguage() );
-	}
-
-	@Deprecated
-	@Override
-	public PageTitleData getUserData( final User user, final String tran ) {
-		final String rootTranslated = getUserRootTranslated();
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), tran );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
 	@Override
 	public PageTitleData getUserWrongLogin() { // TODO: move to CommonBreadcrumbsService
 		final String rootTranslated = getUserRootTranslated();
@@ -350,6 +333,23 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 			, entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() )
 			, tran
 		);
+
+		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	@Deprecated
+	@Override
+	public String getUserRootTranslated() {
+		return translatorService.translate( USER_ROOT, EnvironmentContext.getLanguage() );
+	}
+
+	@Deprecated
+	@Override
+	public PageTitleData getUserData( final User user, final String tran ) {
+		final String rootTranslated = getUserRootTranslated();
+
+		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), tran );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}

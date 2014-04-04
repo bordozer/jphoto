@@ -10,6 +10,7 @@ import core.services.entry.GenreService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -190,13 +191,13 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem getCommentsToMeMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Comments to me", getLanguage() );
+		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED.getText(), getLanguage() );
 		final String link = urlUtilsService.getCommentsToUserList( user.getId() );
 		return new MenuItem( caption, link );
 	}
 
 	private MenuItem getWrittenCommentsMenu( final User user ) {
-		final String caption = translatorService.translate( "Main menu: Written comments", getLanguage() );
+		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN.getText(), getLanguage() );
 		final String link = urlUtilsService.getUserCommentsList( user.getId() );
 		return new MenuItem( caption, link );
 	}

@@ -8,28 +8,28 @@
 	</translation>
 
 	<translation>
-		<nerd>The list of users who added $1 to the favorite members</nerd>
+		<nerd>User Statistics: The list of users who added $1 to the favorite members</nerd>
 		<ru><![CDATA[Список пользователей, кто добавил $1 в избранные пользователи]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User Statistics: User's received comments</nerd>
+		<ru><![CDATA[Полученные комментарии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User Statistics: Comments to $1's photos</nerd>
+		<ru><![CDATA[Комментарии к работам пользователя]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User Statistics: Written by user comments</nerd>
+		<ru><![CDATA[Написанные комменарии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User Statistics: Written by $1 comments</nerd>
+		<ru><![CDATA[Комментарии, которые $1 оставил к работам]]></ru>
 	</translation>
 
 	<translation>

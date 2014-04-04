@@ -161,16 +161,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Main menu: Comments to me</nerd>
-		<ru><![CDATA[Полученные комментарии]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Main menu: Written comments</nerd>
-		<ru><![CDATA[Написанные комментарии]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>PrivateMessageType: Received messages</nerd>
 		<ru><![CDATA[Полученные сообщения]]></ru>
 	</translation>

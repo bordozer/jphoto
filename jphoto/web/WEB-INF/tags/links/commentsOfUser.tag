@@ -1,4 +1,5 @@
 <%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="core.services.translator.nerds.LinkNerdText" %>
 <%@ taglib prefix="eco" uri="http://jphoto.dev" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -7,7 +8,6 @@
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserCommentsList( user.getId() )%>" />
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
+<c:set var="linkNerdText" value="<%=LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN%>"/>
 
-<c:set var="text" value="${eco:translate('Written comments')}" />
-
-<a href ="${link}" title="${eco:translate1("Written by $1 comments", userNameEscaped)}">${text}</a>
+<a href ="${link}" title="${eco:translate1(linkNerdText.title, userNameEscaped)}">${eco:translate(linkNerdText.text)}</a>
