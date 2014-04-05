@@ -11,7 +11,6 @@ public enum JobListTab {
 	, RECALCULATION( "recalculation", "JobListTab: Recalculation" )
 	, OTHER_DATA_GENERATION( "datageneration", "JobListTab: Data generation / Import" )
 	, PHOTO_ACTIONS( "photoactions", "JobListTab: Photo actions" )
-	, OTHER( "other", "JobListTab: User actions / Favorites" )
 	, CLEAN_UP( "cleanup", "JobListTab: Clean-up" )
 	, CHAINS( "chains", "JobListTab: Chains" )
 	, JOB_EXECUTION_HISTORY( "done", "JobListTab: Active / Performed" )
@@ -20,7 +19,7 @@ public enum JobListTab {
 	private final String key;
 	private final String name;
 
-	public final static List<JobListTab> SAVED_JOB_TABS = newArrayList( SYSTEM_JOBS, RECALCULATION, OTHER_DATA_GENERATION, PHOTO_ACTIONS, OTHER, CLEAN_UP, CHAINS );
+	public final static List<JobListTab> SAVED_JOB_TABS = newArrayList( SYSTEM_JOBS, RECALCULATION, OTHER_DATA_GENERATION, PHOTO_ACTIONS, CLEAN_UP, CHAINS );
 
 	private JobListTab( final String key, final String name ) {
 		this.key = key;
