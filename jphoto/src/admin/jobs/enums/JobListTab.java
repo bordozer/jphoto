@@ -5,16 +5,16 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 public enum JobListTab {
-	TEMPLATES( "templates", "Job templates" )
-	, ALL_SAVED_JOBS( "all", "All saved jobs" )
-	, SYSTEM_JOBS( "system", "System" )
-	, RECALCULATION( "recalculation", "Recalculation" )
-	, OTHER_DATA_GENERATION( "datageneration", "Data generation / Import" )
-	, PHOTO_ACTIONS( "photoactions", "Photo actions" )
-	, OTHER( "other", "User actions / Favorites" )
-	, CLEAN_UP( "cleanup", "Clean-up" )
-	, CHAINS( "chains", "Chains" )
-	, JOB_EXECUTION_HISTORY( "done", "Active / Performed" )
+	TEMPLATES( "templates", "JobListTab: Job templates" )
+	, ALL_SAVED_JOBS( "all", "JobListTab: All saved jobs" )
+	, SYSTEM_JOBS( "system", "JobListTab: System" )
+	, RECALCULATION( "recalculation", "JobListTab: Recalculation" )
+	, OTHER_DATA_GENERATION( "datageneration", "JobListTab: Data generation / Import" )
+	, PHOTO_ACTIONS( "photoactions", "JobListTab: Photo actions" )
+	, OTHER( "other", "JobListTab: User actions / Favorites" )
+	, CLEAN_UP( "cleanup", "JobListTab: Clean-up" )
+	, CHAINS( "chains", "JobListTab: Chains" )
+	, JOB_EXECUTION_HISTORY( "done", "JobListTab: Active / Performed" )
 	;
 
 	private final String key;

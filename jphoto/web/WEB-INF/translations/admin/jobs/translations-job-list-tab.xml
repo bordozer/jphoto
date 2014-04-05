@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>JobListTab: Job templates</nerd>
+		<ru><![CDATA[Шаблоны задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: All saved jobs</nerd>
+		<ru><![CDATA[Задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: System</nerd>
+		<ru><![CDATA[Система]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Recalculation</nerd>
+		<ru><![CDATA[Пересчет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Data generation / Import</nerd>
+		<ru><![CDATA[Данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Photo actions</nerd>
+		<ru><![CDATA[Фотодействия]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: User actions / Favorites</nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Clean-up</nerd>
+		<ru><![CDATA[Очистка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Chains</nerd>
+		<ru><![CDATA[Комплексные задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>JobListTab: Active / Performed</nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
