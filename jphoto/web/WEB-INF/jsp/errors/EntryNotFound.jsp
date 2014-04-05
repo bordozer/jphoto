@@ -17,7 +17,7 @@
 <%
 	final NotFoundExceptionEntryType entryType = exceptionModel.getNotFoundExceptionEntryType();
 	final TranslatorService translatorService = exceptionModel.getTranslatorService();
-	final String titleTranslated = translatorService.translate( "$1 not found", EnvironmentContext.getLanguage(), translatorService.translate( entryType.getNameTranslated(), EnvironmentContext.getLanguage() ) );
+	final String titleTranslated = translatorService.translate( "$1 not found", EnvironmentContext.getLanguage(), translatorService.translate( entryType.getName(), EnvironmentContext.getLanguage() ) );
 
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( titleTranslated, titleTranslated, titleTranslated ) );
