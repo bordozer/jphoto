@@ -36,7 +36,8 @@
 			</table:tdicon>
 
 			<table:td>
-				<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/" title="${eco:translate(jobType.name)}">${eco:translate(jobType.name)}</a>
+				<admin:jobTemplate savedJobType="${jobType}" />
+				<%--<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/" title="${eco:translate(jobType.name)}">${eco:translate(jobType.name)}</a>--%>
 			</table:td>
 
 			</table:tr>

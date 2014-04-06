@@ -186,7 +186,7 @@
 						</table:td>
 
 						<table:tdicon>
-							<html:img16 src="jobtype/${jobExecutionHistoryEntry.savedJobType.icon}" alt="${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}"/>
+							<html:img16 src="jobtype/${jobType.icon}" alt="${eco:translate(jobType.name)}"/>
 						</table:tdicon>
 
 						<table:tdunderlined width="150">
@@ -203,7 +203,7 @@
 						<table:tdunderlined>
 							<c:if test="${isJobWatingForStartOrInProgress}">
 								<c:if test="${empty jobExecutionHistoryEntry.savedJob}">
-									<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}</a>
+									<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${eco:translate(jobType.name)}</a>
 								</c:if>
 								<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 									<jobs:savedJobProgress savedJob="${jobExecutionHistoryEntry.savedJob}" jobId="${jobEntryId}"/>
@@ -212,7 +212,8 @@
 
 							<c:if test="${isJobFinishedWithAnyResult}">
 								<c:if test="${empty jobExecutionHistoryEntry.savedJob}">
-									${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}
+									<%--${eco:translate(jobType.name)}--%>
+									<admin:jobTemplate savedJobType="${jobType}" />
 								</c:if>
 								<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 									<links:savedJobEdit savedJob="${jobExecutionHistoryEntry.savedJob}"/>
