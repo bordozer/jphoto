@@ -1,10 +1,10 @@
 package core.general.executiontasks;
 
 public enum ExecutionTaskType {
-	ONCE( 1, "One time", "schedulerTaskOnce.png" )
-	, PERIODICAL( 2, "Periodically", "schedulerTaskPeriodical.png" )
-	, DAILY( 3, "Daily", "schedulerTaskDaily.png" )
-	, MONTHLY( 4, "Monthly", "schedulerTaskMonthly.png" );
+	ONCE( 1, "ExecutionTaskType: One time", "schedulerTaskOnce.png" )
+	, PERIODICAL( 2, "ExecutionTaskType: Periodically", "schedulerTaskPeriodical.png" )
+	, DAILY( 3, "ExecutionTaskType: Daily", "schedulerTaskDaily.png" )
+	, MONTHLY( 4, "ExecutionTaskType: Monthly", "schedulerTaskMonthly.png" );
 
 	private final int id;
 	private final String name;

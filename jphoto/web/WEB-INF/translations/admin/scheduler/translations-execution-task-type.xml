@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>ExecutionTaskType: One time</nerd>
+		<ru><![CDATA[Одноразово]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTaskType: Periodically</nerd>
+		<ru><![CDATA[Периодично]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTaskType: Daily</nerd>
+		<ru><![CDATA[Ежедневно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTaskType: Monthly</nerd>
+		<ru><![CDATA[Ежемесячно]]></ru>
+	</translation>
+
+</translations>

@@ -38,10 +38,10 @@
 		<div style="width: 95%; float: left; height: 100%; margin: 10px;">
 
 			<links:schedulerTaskNew>
-				<html:img32 src="add32.png" alt="${eco:translate('Create new scheduler task')}" />
+				<html:img32 src="add32.png" alt="${eco:translate('SchedulerTaskList: Create new scheduler task')}" />
 			</links:schedulerTaskNew>
 
-			<html:img32 src="scheduler/schedulerDeteteTask.png" alt="${eco:translate('Delete selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${deleteGroupAction}' )" />
+			<html:img32 src="scheduler/schedulerDeteteTask.png" alt="${eco:translate('SchedulerTaskList: Delete selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${deleteGroupAction}' )" />
 
 			${separator}
 
@@ -49,28 +49,28 @@
 
 			<c:if test="${schedulerRunning}">
 				<links:schedulerStop>
-					<html:img32 src="scheduler/SchedulerIsRunning.png" alt="${eco:translate('The Scheduler is running. Click to stop scheduler.')}" />
+					<html:img32 src="scheduler/SchedulerIsRunning.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is running. Click to stop scheduler.')}" />
 				</links:schedulerStop>
 			</c:if>
 
 			<c:if test="${not schedulerRunning}">
 				<links:schedulerRun>
-					<html:img32 src="scheduler/SchedulerIsStopped.png" alt="${eco:translate('The Scheduler is stopped. Click to run scheduler.')}" />
+					<html:img32 src="scheduler/SchedulerIsStopped.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is stopped. Click to run scheduler.')}" />
 				</links:schedulerRun>
 			</c:if>
 
 			${separator}
 
-			<html:img32 src="scheduler/schedulerTaskActivate.png" alt="${eco:translate('Activate selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${activateGroupAction}' )" />
-			<html:img32 src="scheduler/schedulerTaskDeactivate.png" alt="${eco:translate('Deactivate selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${deactivateGroupAction}' )" />
+			<html:img32 src="scheduler/schedulerTaskActivate.png" alt="${eco:translate('SchedulerTaskList: Activate selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${activateGroupAction}' )" />
+			<html:img32 src="scheduler/schedulerTaskDeactivate.png" alt="${eco:translate('SchedulerTaskList: Deactivate selected scheduler tasks')}" onclick="submitSchedulerTaskListForm( '${deactivateGroupAction}' )" />
 
 			<script type="text/javascript">
 				function submitSchedulerTaskListForm( action ) {
-					var confirmation = "${eco:translate('Activate selected tasks?')}";
+					var confirmation = "${eco:translate('SchedulerTaskList: Activate selected tasks?')}";
 					if ( action == '${deactivateGroupAction}' ) {
-						confirmation = "${eco:translate('Deactivate selected tasks?')}";
+						confirmation = "${eco:translate('SchedulerTaskList: Deactivate selected tasks?')}";
 					} else if ( action == '${deleteGroupAction}' ) {
-						confirmation = "${eco:translate('Delete selected tasks?')}";
+						confirmation = "${eco:translate('SchedulerTaskList: Delete selected tasks?')}";
 					}
 
 					if ( confirm( confirmation ) ) {
@@ -120,18 +120,18 @@
 
 						<c:set var="css" value=""/>
 						<c:set var="taskIcon" value="schedulerTaskActivate.png"/>
-						<c:set var="taskIconTitle" value="${eco:translate('The task is active')}"/>
+						<c:set var="taskIconTitle" value="${eco:translate('SchedulerTaskList: The task is active')}"/>
 						<c:if test="${not isTaskActive}">
 							<c:set var="css" value="inactiveTasks"/>
 							<c:set var="taskIcon" value="schedulerTaskDeactivate.png"/>
-							<c:set var="taskIconTitle" value="${eco:translate('The task is inactive')}"/>
+							<c:set var="taskIconTitle" value="${eco:translate('SchedulerTaskList: The task is inactive')}"/>
 						</c:if>
 
 						<c:set var="imgCss" value=""/>
 						<c:set var="imgTitle" value=""/>
 						<c:if test="${not schedulerRunning}">
 							<c:set var="imgCss" value="imageOpacity"/>
-							<c:set var="imgTitle" value="${eco:translate('The scheduler is stopped')}"/>
+							<c:set var="imgTitle" value="${eco:translate('SchedulerTaskList: The scheduler is stopped')}"/>
 						</c:if>
 
 						<c:set var="schedulerTaskId" value="${schedulerTask.id}"/>
@@ -155,7 +155,7 @@
 							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">
-								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/delete/" title="${eco:translate1('Delete task \'$1\'', schedulerTask.name)}">
+								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/delete/" title="${eco:translate1('SchedulerTaskList: Delete task \'$1\'', schedulerTask.name)}">
 									<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${schedulerTask.name}\\'?' );"/>
 								</a>
 							</table:tdicon>
@@ -165,7 +165,7 @@
 							</table:td>
 
 							<table:td cssClass="${css}">
-								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/info/" title="${eco:translate1('View info \'$1\'', schedulerTask.name)}">
+								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/info/" title="${eco:translate1('SchedulerTaskList: View info \'$1\'', schedulerTask.name)}">
 									${schedulerTask.name}
 								</a>
 							</table:td>
@@ -181,7 +181,7 @@
 							</table:td>
 
 							<table:td cssClass="${css}">
-								<span title="${eco:translate1('Job: #$1', savedJobId)}">#${savedJobId}</span>
+								<span title="${eco:translate1('SchedulerTaskList: Job: #$1', savedJobId)}">#${savedJobId}</span>
 							</table:td>
 
 							<table:td cssClass="${css}">

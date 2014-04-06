@@ -46,13 +46,6 @@ public class SchedulerTask extends AbstractBaseEntity implements Nameable {
 	}
 
 	public String getDescription() {
-		final StringBuilder builder = new StringBuilder();
-
-//		builder.append( String.format( "Name: '%s'", name ) ).append( "<br />" );
-//		builder.append( String.format( "Saved job Id: '%d'", savedJobId ) ).append( "<br />" );
-//		builder.append( "Execution task:" ).append( "<br />" );
-		builder.append( executionTask.getDescription() );
-
-		return builder.toString();
+		return executionTask.getDescription();
 	}
 }
