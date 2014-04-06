@@ -10,6 +10,7 @@ import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.scheduler.SchedulerTask;
+import core.services.system.Services;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -57,6 +58,9 @@ public class SchedulerTaskEditController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private Services services;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -253,7 +257,7 @@ public class SchedulerTaskEditController {
 			parametersMap.put( SchedulerTaskProperty.PROPERTY_END_TASK_DATE, new CommonProperty( SchedulerTaskProperty.PROPERTY_END_TASK_DATE.getId(), endTaskDate, dateUtilsService ) );
 		}
 
-		final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), dateUtilsService );
+		final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), services );
 		executionTask.initTaskParameters( parametersMap );
 		schedulerTask.setExecutionTask( executionTask );
 

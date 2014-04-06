@@ -7,6 +7,7 @@ import core.general.executiontasks.ExecutionTaskFactory;
 import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.dao.SchedulerTasksDao;
+import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ import static com.google.common.collect.Sets.newLinkedHashSet;
 public class SchedulerServiceImpl implements SchedulerService {
 
 	@Autowired
-	private DateUtilsService dateUtilsService;
+	private Services services;
 
 	private final Set<SchedulerTaskProperty> schedulerTaskProperties = newLinkedHashSet();
 
@@ -74,7 +75,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 			return null;
 		}
 
-		final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), getParametersMap( schedulerTaskId ), dateUtilsService );
+		final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), getParametersMap( schedulerTaskId ), services );
 		schedulerTask.setExecutionTask( executionTask );
 
 		return schedulerTask;
@@ -85,7 +86,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 		final List<SchedulerTask> schedulerTasks = schedulerTasksDao.loadAll(); // TODO: load only IDs
 
 		for ( final SchedulerTask schedulerTask : schedulerTasks ) {
-			final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), getParametersMap( schedulerTask.getId() ), dateUtilsService );
+			final AbstractExecutionTask executionTask = ExecutionTaskFactory.createInstance( schedulerTask.getTaskType(), getParametersMap( schedulerTask.getId() ), services );
 			schedulerTask.setExecutionTask( executionTask );
 		}
 

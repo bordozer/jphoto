@@ -2,6 +2,7 @@ package core.general.executiontasks;
 
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
+import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 
@@ -16,12 +17,12 @@ public class MonthlyExecutionTask extends AbstractPeriodicalExecutionTask {
 	private List<Month> months;
 	private int dayOfMonth;
 
-	public MonthlyExecutionTask( final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.MONTHLY, dateUtilsService );
+	public MonthlyExecutionTask( final Services services ) {
+		super( ExecutionTaskType.MONTHLY, services );
 	}
 
-	public MonthlyExecutionTask( final Map<SchedulerTaskProperty,CommonProperty> parametersMap, final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.MONTHLY, dateUtilsService );
+	public MonthlyExecutionTask( final Map<SchedulerTaskProperty,CommonProperty> parametersMap, final Services services ) {
+		super( ExecutionTaskType.MONTHLY, services );
 
 		initTaskParameters( parametersMap );
 	}
@@ -73,6 +74,7 @@ public class MonthlyExecutionTask extends AbstractPeriodicalExecutionTask {
 
 		final StringBuilder builder = new StringBuilder();
 
+		final DateUtilsService dateUtilsService = getDateUtilsService();
 		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
 //		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 		builder.append( String.format( "Day %s of %s", ( dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "Last day" ), StringUtils.join( cronMonths, "," ) ) ).append( "<br />" );

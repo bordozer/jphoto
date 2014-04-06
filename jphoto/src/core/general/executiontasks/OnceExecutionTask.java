@@ -2,18 +2,18 @@ package core.general.executiontasks;
 
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
-import core.services.utils.DateUtilsService;
+import core.services.system.Services;
 
 import java.util.Map;
 
 public class OnceExecutionTask extends AbstractExecutionTask {
 
-	public OnceExecutionTask( final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.ONCE, dateUtilsService );
+	public OnceExecutionTask( final Services services ) {
+		super( ExecutionTaskType.ONCE, services );
 	}
 
-	public OnceExecutionTask( final Map<SchedulerTaskProperty, CommonProperty> parametersMap, final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.ONCE, dateUtilsService );
+	public OnceExecutionTask( final Map<SchedulerTaskProperty, CommonProperty> parametersMap, final Services services ) {
+		super( ExecutionTaskType.ONCE, services );
 
 		initTaskParameters( parametersMap );
 	}
@@ -32,7 +32,7 @@ public class OnceExecutionTask extends AbstractExecutionTask {
 	public String getDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( String.format( "Execution time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
+		builder.append( getTranslatorService( "Execution time: $1", getDateUtilsService().formatDateTime( startTaskTime ) ) ).append( "<br />" );
 //		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 
 		return builder.toString();

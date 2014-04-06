@@ -1,7 +1,5 @@
 package core.general.executiontasks;
 
-import utils.StringUtilities;
-
 public enum PeriodUnit {
 
 	SECOND( 1, "second" )

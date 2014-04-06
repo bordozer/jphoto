@@ -2,7 +2,7 @@ package core.general.executiontasks;
 
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
-import core.services.utils.DateUtilsService;
+import core.services.system.Services;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;
@@ -12,8 +12,8 @@ public abstract class AbstractPeriodicalExecutionTask extends AbstractExecutionT
 
 	protected Date endTaskTime;
 
-	protected AbstractPeriodicalExecutionTask( final ExecutionTaskType taskType, final DateUtilsService dateUtilsService ) {
-		super( taskType, dateUtilsService );
+	protected AbstractPeriodicalExecutionTask( final ExecutionTaskType taskType, final Services services ) {
+		super( taskType, services );
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public abstract class AbstractPeriodicalExecutionTask extends AbstractExecutionT
 
 		final CommonProperty property = parametersMap.get( SchedulerTaskProperty.PROPERTY_END_TASK_DATE );
 		if ( property != null ) {
-			endTaskTime = property.getValueTime( dateUtilsService );
+			endTaskTime = property.getValueTime( getDateUtilsService() );
 		}
 	}
 
@@ -31,7 +31,7 @@ public abstract class AbstractPeriodicalExecutionTask extends AbstractExecutionT
 		final Map<SchedulerTaskProperty, CommonProperty> parametersMap = super.getParametersMap();
 
 		if ( endTaskTime != null ) {
-			parametersMap.put( SchedulerTaskProperty.PROPERTY_END_TASK_DATE, new CommonProperty( SchedulerTaskProperty.PROPERTY_END_TASK_DATE.getId(), endTaskTime, dateUtilsService ) );
+			parametersMap.put( SchedulerTaskProperty.PROPERTY_END_TASK_DATE, new CommonProperty( SchedulerTaskProperty.PROPERTY_END_TASK_DATE.getId(), endTaskTime, getDateUtilsService() ) );
 		} else {
 			parametersMap.put( SchedulerTaskProperty.PROPERTY_END_TASK_DATE, new CommonProperty( SchedulerTaskProperty.PROPERTY_END_TASK_DATE.getId(), StringUtils.EMPTY ) );
 		}

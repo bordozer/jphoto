@@ -2,7 +2,7 @@ package core.general.executiontasks;
 
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
-import core.services.utils.DateUtilsService;
+import core.services.system.Services;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 
 	private List<Weekday> weekdays;
 
-	public DailyExecutionTask( final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.DAILY, dateUtilsService );
+	public DailyExecutionTask( final Services services ) {
+		super( ExecutionTaskType.DAILY, services );
 	}
 
-	public DailyExecutionTask( final Map<SchedulerTaskProperty,CommonProperty> parametersMap, final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.DAILY, dateUtilsService );
+	public DailyExecutionTask( final Map<SchedulerTaskProperty,CommonProperty> parametersMap, final Services services ) {
+		super( ExecutionTaskType.DAILY, services );
 
 		initTaskParameters( parametersMap );
 	}
@@ -56,7 +56,7 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
+		builder.append( String.format( "Start time: %s", getDateUtilsService().formatDateTime( startTaskTime ) ) ).append( "<br />" );
 //		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 
 		builder.append( "Week days: " );
@@ -71,7 +71,7 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 		}
 
 		if ( endTaskTime != null ) {
-			builder.append( String.format( "End time: %s", dateUtilsService.formatDateTime( endTaskTime ) ) );
+			builder.append( String.format( "End time: %s", getDateUtilsService().formatDateTime( endTaskTime ) ) );
 		}
 
 		return builder.toString();

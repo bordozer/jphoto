@@ -2,6 +2,7 @@ package core.general.executiontasks;
 
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
+import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 
@@ -14,12 +15,12 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 	private PeriodUnit periodUnit;
 	private List<String> executionHours;
 
-	protected PeriodicalExecutionTask( final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.PERIODICAL, dateUtilsService );
+	protected PeriodicalExecutionTask( final Services services ) {
+		super( ExecutionTaskType.PERIODICAL, services );
 	}
 
-	public PeriodicalExecutionTask( final Map<SchedulerTaskProperty, CommonProperty> parametersMap, final DateUtilsService dateUtilsService ) {
-		super( ExecutionTaskType.PERIODICAL, dateUtilsService );
+	public PeriodicalExecutionTask( final Map<SchedulerTaskProperty, CommonProperty> parametersMap, final Services services ) {
+		super( ExecutionTaskType.PERIODICAL, services );
 
 		initTaskParameters( parametersMap );
 	}
@@ -65,6 +66,7 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 	public String getDescription() {
 		final StringBuilder builder = new StringBuilder();
 
+		final DateUtilsService dateUtilsService = getDateUtilsService();
 		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
 //		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
 		builder.append( String.format( "Interval: %d %s(s)", period, periodUnit.getName() ) );
