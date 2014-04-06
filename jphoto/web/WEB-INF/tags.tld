@@ -214,4 +214,10 @@
 		<function-class>utils.TLD_Utils</function-class>
 		<function-signature>java.lang.String getPhotosByUserByGenreLink(core.general.user.User,core.general.genre.Genre)</function-signature>
 	</function>
+
+	<function>
+		<name>projectName</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getProjectName()</function-signature>
+	</function>
 </taglib>

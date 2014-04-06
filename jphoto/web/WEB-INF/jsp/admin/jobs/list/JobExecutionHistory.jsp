@@ -249,8 +249,10 @@
 
 								<script type="text/javascript">
 									setTimeout( function () {
-										updateProgress( ${jobExecutionHistoryEntry.id} );
+										updateProgress( ${jobExecutionHistoryEntry.id}, doNothing );
 									}, interval );
+
+									function doNothing() {}
 								</script>
 							</c:if>
 

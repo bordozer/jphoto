@@ -89,8 +89,13 @@
 		var updateJobExecutionIFrameUpdateInterval = 6000;
 
 		setTimeout( function() {
-			updateProgress( ${jobExecutionHistoryEntry.id} );
+			updateProgress( ${jobExecutionHistoryEntry.id}, updatePageTitle );
+
 		}, interval );
+
+		function updatePageTitle( percentage ) {
+			document.title = "${eco:projectName()}: " + percentage + "%";
+		}
 
 		setTimeout( function() {
 			updateJobExecutionIFrame();

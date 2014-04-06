@@ -1,4 +1,4 @@
-function updateProgress( jobId ) {
+function updateProgress( jobId, callback ) {
 	var jobProgressDTO = jsonRPC.jobExecutionService.getJobProgressAjax( jobId );
 
 	var percentage = parseInt( jobProgressDTO.jobExecutionPercentage );
@@ -14,7 +14,11 @@ function updateProgress( jobId ) {
 										 value:percentage
 									 } );
 
+	callback( percentage );
+
 	setTimeout( function () {
-		updateProgress( jobId );
+		updateProgress( jobId, callback );
 	}, interval );
+
+//	return percentage;
 }
