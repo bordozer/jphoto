@@ -80,7 +80,7 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 			translatableMessage.string( "<br />" );
 			translatableMessage.translatableString( "Hours: " );
 			if ( executionHours.size() == 24 ) {
-				translatableMessage.translatableString( "Every day during the week" );
+				translatableMessage.translatableString( "Every hour during the day" );
 			} else {
 				translatableMessage.string( StringUtils.join( executionHours, "," ) ); // TODO: translate executionHours
 			}
