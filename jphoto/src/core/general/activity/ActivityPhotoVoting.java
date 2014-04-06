@@ -94,7 +94,7 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 				.addIntegerParameter( points );
 
 			translatableMessage.addTranslatableMessageParameter( photoVotingCategoryMessage );
-			translatableMessage.addStringParameter( "<br />" );
+			translatableMessage.string( "<br />" );
 		}
 
 		return translatableMessage;

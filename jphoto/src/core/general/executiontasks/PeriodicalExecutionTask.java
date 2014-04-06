@@ -3,7 +3,7 @@ package core.general.executiontasks;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.system.Services;
-import core.services.utils.DateUtilsService;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -63,26 +63,29 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 	}
 
 	@Override
-	public String getDescription() {
-		final StringBuilder builder = new StringBuilder();
+	public TranslatableMessage getDescription() {
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		translatableMessage.dateTimeFormatted( startTaskTime );
+		translatableMessage.string( "<br />" );
 
-		final DateUtilsService dateUtilsService = getDateUtilsService();
-		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
-		builder.append( String.format( "Interval: %d %s(s)", period, periodUnit.getName() ) );
+		final TranslatableMessage mess = new TranslatableMessage( "Interval: $1 $2", services ).addIntegerParameter( period ).translatableString( periodUnit.getName() );
+		translatableMessage.addTranslatableMessageParameter( mess );
+
 		if ( endTaskTime != null ) {
-			builder.append( "<br />" ).append( String.format( "End time: %s", dateUtilsService.formatDateTime( endTaskTime ) ) );
+			translatableMessage.string( "<br />" );
+			translatableMessage.translatableString( "End time: " ).dateTimeFormatted( endTaskTime );
 		}
 
 		if ( periodUnit != PeriodUnit.HOUR ) {
-			builder.append( "<br />" ).append( "Hours: " );
+			translatableMessage.string( "<br />" );
+			translatableMessage.translatableString( "Hours: " );
 			if ( executionHours.size() == 24 ) {
-				builder.append( "Whole day" );
+				translatableMessage.translatableString( "Every day during the week" );
 			} else {
-				builder.append( StringUtils.join( executionHours, "," ) );
+				translatableMessage.string( StringUtils.join( executionHours, "," ) ); // TODO: translate executionHours
 			}
 		}
 
-		return builder.toString();
+		return translatableMessage;
 	}
 }

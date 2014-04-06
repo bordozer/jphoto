@@ -65,7 +65,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has left a comment for photo $2 ( time: $3 )", services )
 			.addUserCardLinkParameter( user )
 			.addPhotoCardLinkParameter( photo )
-			.addFormattedDateTimeParameter( actionTime )
+			.dateTimeFormatted( actionTime )
 			;
 		addJobRuntimeLogMessage( translatableMessage );
 

@@ -30,7 +30,7 @@
 				<table:td>
 
 					<c:if test="${not hideUser}">
-						${eco:translateActivityStreamUser(activity)}
+						${eco:translatableMessage(activity.displayActivityUserLink)}
 					</c:if>
 
 					${eco:translateActivityStreamEntry(activity)}

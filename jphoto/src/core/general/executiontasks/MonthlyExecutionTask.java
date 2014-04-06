@@ -3,7 +3,7 @@ package core.general.executiontasks;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.system.Services;
-import core.services.utils.DateUtilsService;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.Date;
@@ -65,23 +65,27 @@ public class MonthlyExecutionTask extends AbstractPeriodicalExecutionTask {
 	}
 
 	@Override
-	public String getDescription() {
+	public TranslatableMessage getDescription() {
 
 		final List<String> cronMonths = newArrayList();
 		for ( final Month month : months ) {
 			cronMonths.add( String.valueOf( month.getId() + 1 ) );
 		}
 
-		final StringBuilder builder = new StringBuilder();
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		translatableMessage.dateTimeFormatted( startTaskTime );
+		translatableMessage.string( "<br />" );
 
-		final DateUtilsService dateUtilsService = getDateUtilsService();
-		builder.append( String.format( "Start time: %s", dateUtilsService.formatDateTime( startTaskTime ) ) ).append( "<br />" );
-//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
-		builder.append( String.format( "Day %s of %s", ( dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "Last day" ), StringUtils.join( cronMonths, "," ) ) ).append( "<br />" );
+		final String dayOfMont = dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "Last day";
+		final String months = StringUtils.join( cronMonths, "," );
+
+		final TranslatableMessage mess = new TranslatableMessage( "Day $1 of $2", services ).string( dayOfMont ).string( months );
+		translatableMessage.addTranslatableMessageParameter( mess );
+		translatableMessage.string( "<br />" );
 		if ( endTaskTime != null ) {
-			builder.append( String.format( "End time: %s", dateUtilsService.formatDateTime( endTaskTime ) ) );
+			translatableMessage.translatableString( "End time: " ).dateTimeFormatted( endTaskTime );
 		}
 
-		return builder.toString();
+		return translatableMessage;
 	}
 }

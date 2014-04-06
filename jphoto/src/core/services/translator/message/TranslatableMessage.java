@@ -36,15 +36,20 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addStringParameter( final String value ) {
+	public TranslatableMessage string( final String value ) {
 		messageParameters.add( new StringParameter( value, services ) );
 		return this;
 	}
 
-	public TranslatableMessage addStringTranslatableParameter( final String value ) {
+	public TranslatableMessage translatableString( final String value ) {
 		messageParameters.add( new StringTranslatableParameter( value, services ) );
 		return this;
 	}
+
+	/*public TranslatableMessage translatableList( final List<String> value ) {
+		messageParameters.add( new StringTranslatableParameter( value, services ) );
+		return this;
+	}*/
 
 	public TranslatableMessage addIntegerParameter( final int value ) {
 		messageParameters.add( new IntegerParameter( value, services ) );
@@ -86,7 +91,7 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addFormattedDateTimeParameter( final Date actionTime ) {
+	public TranslatableMessage dateTimeFormatted( final Date actionTime ) {
 		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
 		return this;
 	}

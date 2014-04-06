@@ -139,7 +139,7 @@ public abstract class UserNotificationsCollector {
 				final User photoAuthor = getPhotoAuthor( photo );
 
 				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).addStringParameter( photoAuthor.getNameEscaped() );
+				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).string( photoAuthor.getNameEscaped() );
 
 				return new NotificationData( subject, message );
 			}
@@ -373,7 +373,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	private static TranslatableMessage getSubject( final String subj, final User photoAuthor, final Photo photo, final Services services ) {
-		return new TranslatableMessage( subj, services ).addStringParameter( photoAuthor.getNameEscaped() ).addStringParameter( photo.getNameEscaped() );
+		return new TranslatableMessage( subj, services ).string( photoAuthor.getNameEscaped() ).string( photo.getNameEscaped() );
 	}
 
 	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
@@ -381,6 +381,6 @@ public abstract class UserNotificationsCollector {
 	}
 
 	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
-		return getMessage( nerd, photoAuthor, photo, services ).addStringParameter( CONTROL_EMAIL_NOTIFICATIONS_HINT );
+		return getMessage( nerd, photoAuthor, photo, services ).string( CONTROL_EMAIL_NOTIFICATIONS_HINT );
 	}
 }

@@ -111,7 +111,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "No photo have been found on page $1. User page content saved. See $2", services )
 					.addIntegerParameter( page )
-					.addStringParameter( file.getAbsolutePath() )
+					.string( file.getAbsolutePath() )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -191,7 +191,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
 					.addIntegerParameter( photosightPhotoId )
-					.addStringParameter( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+					.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -209,7 +209,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 					, language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) );*/
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
-					.addStringParameter( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
+					.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 			} else {
@@ -293,7 +293,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			/*final String execMessage = services.getTranslatorService().translate( "Can not extract photosight user name from page content. Photosight user: $1."
 				, language, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract photosight user name from page content. Photosight user: $1.", services )
-				.addStringParameter( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+				.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -322,8 +322,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			/*final String message = services.getTranslatorService().translate( "Error reading user info file: $1<br />$2"
 				, language, PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath(), e.getMessage() );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
-				.addStringParameter( PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath() )
-				.addStringParameter( e.getMessage() )
+				.string( PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath() )
+				.string( e.getMessage() )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -466,7 +466,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			photosightPhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from photosight photo page. Random time is used.", services )
-				.addStringParameter( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
+				.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -483,9 +483,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		log.debug( String.format( "Photo %d has been downloaded from photosight", photosightPhoto.getPhotoId() ) );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from photosight: $1 of $2, photosight category: $3", services )
-			.addStringParameter( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
-			.addStringParameter( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
-			.addStringParameter( PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
+			.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
+			.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+			.string( PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -496,9 +496,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	private void logPhotoSkipping( final PhotosightUser photosightUser, final int photosightPhotoId, final String s ) {
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 User: $2; photo: $3. Photo import skipped.", services )
-			.addStringParameter( s )
-			.addStringParameter( photosightUser.toString() ) // TODO: ?
-			.addStringParameter( PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId ) )
+			.string( s )
+			.string( photosightUser.toString() ) // TODO: ?
+			.string( PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 

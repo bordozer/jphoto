@@ -86,7 +86,7 @@ public class UserGenerationJob extends AbstractJob {
 					if ( ! isCreated ) {
 //						final String message = services.getTranslatorService().translate( "Error creating user $1", getLanguage(), user.getNameEscaped() );
 						final TranslatableMessage translatableMessage = new TranslatableMessage( "Error creating user $1", services )
-							.addStringParameter( user.getNameEscaped() )
+							.string( user.getNameEscaped() )
 							;
 						addJobRuntimeLogMessage( translatableMessage );
 

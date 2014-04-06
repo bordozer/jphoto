@@ -56,8 +56,8 @@ public class ActivityUserStatusChange extends AbstractActivityStreamEntry {
 	protected TranslatableMessage getActivityTranslatableText() {
 
 		return new TranslatableMessage( "the status in the club has been changed from $1 to $2", services )
-			.addStringTranslatableParameter( oldStatus.getName() )
-			.addStringTranslatableParameter( newStatus.getName() )
+			.translatableString( oldStatus.getName() )
+			.translatableString( newStatus.getName() )
 			;
 	}
 

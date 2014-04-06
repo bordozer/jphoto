@@ -48,7 +48,7 @@ public class NotificationServiceImpl implements NotificationService {
 	public void newPrivateMessage( final PrivateMessage privateMessage ) {
 
 		final TranslatableMessage subject = new TranslatableMessage( "New private message", services );
-		final TranslatableMessage message = new TranslatableMessage( "$1 has sent you a private message", services ).addStringParameter( privateMessage.getFromUser().getNameEscaped() );
+		final TranslatableMessage message = new TranslatableMessage( "$1 has sent you a private message", services ).string( privateMessage.getFromUser().getNameEscaped() );
 		final NotificationData data = new NotificationData( subject, message );
 
 		final UserNotification userNotification = new UserNotification( privateMessage.getToUser(), AbstractSendNotificationStrategy.SEND_EMAIL_STRATEGY, data );

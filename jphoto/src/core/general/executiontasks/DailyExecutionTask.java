@@ -3,6 +3,7 @@ package core.general.executiontasks;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.system.Services;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.List;
@@ -52,28 +53,29 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 	}
 
 	@Override
-	public String getDescription() {
+	public TranslatableMessage getDescription() {
 
-		final StringBuilder builder = new StringBuilder();
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		translatableMessage.dateTimeFormatted( startTaskTime );
+		translatableMessage.string( "<br />" );
 
-		builder.append( String.format( "Start time: %s", getDateUtilsService().formatDateTime( startTaskTime ) ) ).append( "<br />" );
-//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
-
-		builder.append( "Week days: " );
+		translatableMessage.translatableString( "Week days: " );
 		if ( weekdays.size() == 7 ) {
-			builder.append( "Whole week" ).append( "<br />" );
+			translatableMessage.translatableString( "Whole week" );
 		} else {
 			final List<String> cronWeeks = newArrayList();
 			for ( final Weekday weekday : weekdays ) {
 				cronWeeks.add( weekday.getCroneSchedulerName() );
 			}
-			builder.append( StringUtils.join( cronWeeks, "," ) ).append( "<br />" );
+			translatableMessage.string( StringUtils.join( cronWeeks, "," ) );
 		}
+		translatableMessage.string( "<br />" );
 
 		if ( endTaskTime != null ) {
-			builder.append( String.format( "End time: %s", getDateUtilsService().formatDateTime( endTaskTime ) ) );
+			translatableMessage.translatableString( "End time:" );
+			translatableMessage.dateTimeFormatted( endTaskTime );
 		}
 
-		return builder.toString();
+		return translatableMessage;
 	}
 }

@@ -4,6 +4,7 @@ import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.system.Services;
 import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ public abstract class AbstractExecutionTask {
 
 	protected final Services services;
 
-	public abstract String getDescription();
+	public abstract TranslatableMessage getDescription();
 
 	public AbstractExecutionTask( final ExecutionTaskType taskType, final Services services ) {
 		this.taskType = taskType;

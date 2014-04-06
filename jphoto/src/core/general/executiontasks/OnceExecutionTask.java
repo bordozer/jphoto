@@ -3,6 +3,7 @@ package core.general.executiontasks;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.services.system.Services;
+import core.services.translator.message.TranslatableMessage;
 
 import java.util.Map;
 
@@ -29,12 +30,7 @@ public class OnceExecutionTask extends AbstractExecutionTask {
 	}
 
 	@Override
-	public String getDescription() {
-		final StringBuilder builder = new StringBuilder();
-
-		builder.append( getTranslatorService( "Execution time: $1", getDateUtilsService().formatDateTime( startTaskTime ) ) ).append( "<br />" );
-//		builder.append( String.format( "Skip missed executions: %s", skipMissedExecutions ) ).append( "<br />" );
-
-		return builder.toString();
+	public TranslatableMessage getDescription() {
+		return new TranslatableMessage( "Execution time: $1", services ).dateTimeFormatted( startTaskTime ).string( "<br />" );
 	}
 }

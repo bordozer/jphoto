@@ -4,6 +4,7 @@ import core.general.base.AbstractBaseEntity;
 import core.general.executiontasks.AbstractExecutionTask;
 import core.general.executiontasks.ExecutionTaskType;
 import core.interfaces.Nameable;
+import core.services.translator.message.TranslatableMessage;
 
 public class SchedulerTask extends AbstractBaseEntity implements Nameable {
 
@@ -45,7 +46,7 @@ public class SchedulerTask extends AbstractBaseEntity implements Nameable {
 		this.executionTask = executionTask;
 	}
 
-	public String getDescription() {
+	public TranslatableMessage getDescription() {
 		return executionTask.getDescription();
 	}
 }

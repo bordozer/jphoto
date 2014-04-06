@@ -114,9 +114,9 @@
 	</function>
 
 	<function>
-		<name>translateActivityStreamUser</name>
+		<name>translatableMessage</name>
 		<function-class>utils.TranslatorUtils</function-class>
-		<function-signature>java.lang.String translateActivityStreamUser(core.general.activity.AbstractActivityStreamEntry)</function-signature>
+		<function-signature>java.lang.String translatableMessage(core.services.translator.message.TranslatableMessage)</function-signature>
 	</function>
 
 	<function>

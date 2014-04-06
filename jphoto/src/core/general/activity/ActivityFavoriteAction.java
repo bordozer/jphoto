@@ -57,7 +57,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 		return new TranslatableMessage( "activity stream entry: added $1 to $2", services )
 			.addTranslatableMessageParameter( getFavoriteEntry( favoriteEntryId, favoriteType ) )
-			.addStringTranslatableParameter( favoriteType.getName() )
+			.translatableString( favoriteType.getName() )
 			;
 	}
 

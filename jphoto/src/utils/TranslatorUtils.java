@@ -6,6 +6,7 @@ import core.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.translator.message.TranslatableMessage;
 
 /*
 * For using in web/WEB-INF/tags.tld ONLY
@@ -56,8 +57,8 @@ public class TranslatorUtils {
 		return activityStreamEntry.getActivityText( getLanguage() );
 	}
 
-	public static String translateActivityStreamUser( final AbstractActivityStreamEntry activityStreamEntry ) {
-		return activityStreamEntry.getDisplayActivityUserLink().build( getLanguage() );
+	public static String translatableMessage( final TranslatableMessage translatableMessage ) {
+		return translatableMessage.build( getLanguage() );
 	}
 
 	private static Language getLanguage() {

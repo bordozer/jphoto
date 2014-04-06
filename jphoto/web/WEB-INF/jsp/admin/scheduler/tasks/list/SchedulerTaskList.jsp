@@ -173,7 +173,7 @@
 							<table:td width="30" cssClass="textcentered ${css}"><c:if test="${isTaskActive}">Yes</c:if></table:td>
 							<table:td width="30" cssClass="textcentered ${css}"><c:if test="${scheduledTasksData.scheduled}">Yes</c:if></table:td>
 
-							<table:td cssClass="${css}">${schedulerTask.description}</table:td>
+							<table:td cssClass="${css}">${eco:translatableMessage(schedulerTask.description)}</table:td>
 
 							<c:set var="savedJob" value="${schedulerTaskListModel.savedJobMap[savedJobId]}"/>
 							<table:td cssClass="${css}">
