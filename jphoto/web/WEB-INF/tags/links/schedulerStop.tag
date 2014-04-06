@@ -8,6 +8,6 @@
 
 <script type="text/javascript">
 	function stopScheduler() {
-		return confirm( "${eco:translate('Stop scheduler?')}" );
+		return confirm( "${eco:translate('SchedulerTaskList: Stop scheduler?')}" );
 	}
 </script>

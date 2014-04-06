@@ -3,28 +3,83 @@
 <translations>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: Delete task '$1'</nerd>
+		<ru><![CDATA[Удалить задачу планировщика '$1']]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: The Scheduler is running. Click to stop scheduler.</nerd>
+		<ru><![CDATA[Планировщик запущен. Кликните, чтобы остановить]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: The Scheduler is stopped. Click to run scheduler.</nerd>
+		<ru><![CDATA[Планировщик остановлен. Кликните, чтобы запустить]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: Job: #$1</nerd>
+		<ru><![CDATA[Задача планировщика #$1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: Deactivate selected tasks?</nerd>
+		<ru><![CDATA[Деактивировать выбранные задачи планировщика?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Activate selected tasks?</nerd>
+		<ru><![CDATA[Активировать выбранные задачи планировщика?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Deactivate selected scheduler tasks</nerd>
+		<ru><![CDATA[Деактивировать выбранные задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Activate selected scheduler tasks</nerd>
+		<ru><![CDATA[Активировать выбранные задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Create new scheduler task</nerd>
+		<ru><![CDATA[Создать новую задачу планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: View info '$1'</nerd>
+		<ru><![CDATA[Посмотреть информацию по '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Delete selected scheduler tasks</nerd>
+		<ru><![CDATA[Удалить выбранные задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: The task is active</nerd>
+		<ru><![CDATA[Задача активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Delete selected tasks?</nerd>
+		<ru><![CDATA[Удалить выбранные задачи планировщика?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: The scheduler is stopped</nerd>
+		<ru><![CDATA[Планировщик остановлен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Run scheduler?</nerd>
+		<ru><![CDATA[Запустить планировщик?\nНачнется выполнение запланированных задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Stop scheduler?</nerd>
+		<ru><![CDATA[Остановить планировщик?\nВыполнение запланированных задач прекратится]]></ru>
 	</translation>
 
 	<translation>

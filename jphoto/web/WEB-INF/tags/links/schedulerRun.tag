@@ -8,6 +8,6 @@
 
 <script type="text/javascript">
 	function runScheduler() {
-		return confirm( "${eco:translate('Run scheduler?')}" );
+		return confirm( "${eco:translate('SchedulerTaskList: Run scheduler?')}" );
 	}
 </script>
