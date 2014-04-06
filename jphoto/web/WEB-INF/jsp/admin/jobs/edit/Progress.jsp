@@ -94,7 +94,7 @@
 		}, interval );
 
 		function updatePageTitle( percentage ) {
-			document.title = "${eco:projectName()}: " + percentage + "%";
+			document.title = "${eco:projectName()} / ${jobExecutionHistoryEntry.id} / " + percentage + "%";
 		}
 
 		setTimeout( function() {
