@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PhotoGroupOperationType: Arrange photo albums</nerd>
+		<ru><![CDATA[Распределить работы по фотоальбомам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoGroupOperationType: Arrange team members</nerd>
+		<ru><![CDATA[Назначить участников съемки (команду)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoGroupOperationType: Delete photos</nerd>
+		<ru><![CDATA[Удалить работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoGroupOperationType: Set nude content</nerd>
+		<ru><![CDATA[Установить НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoGroupOperationType: Move to category</nerd>
+		<ru><![CDATA[Переместить рфботы в друой раздел]]></ru>
+	</translation>
+
+</translations>

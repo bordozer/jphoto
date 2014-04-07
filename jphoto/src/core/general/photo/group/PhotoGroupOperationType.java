@@ -1,11 +1,11 @@
 package core.general.photo.group;
 
 public enum PhotoGroupOperationType {
-	ARRANGE_PHOTO_ALBUMS( 1, "Arrange photo albums" )
-	, ARRANGE_TEAM_MEMBERS( 4, "Arrange team members" )
-	, DELETE_PHOTOS( 3, "Delete photos" )
-	, ARRANGE_NUDE_CONTENT( 5, "Set nude content" )
-	, MOVE_TO_GENRE( 6, "Move to category" )
+	ARRANGE_PHOTO_ALBUMS( 1, "PhotoGroupOperationType: Arrange photo albums" )
+	, ARRANGE_TEAM_MEMBERS( 4, "PhotoGroupOperationType: Arrange team members" )
+	, DELETE_PHOTOS( 3, "PhotoGroupOperationType: Delete photos" )
+	, ARRANGE_NUDE_CONTENT( 5, "PhotoGroupOperationType: Set nude content" )
+	, MOVE_TO_GENRE( 6, "PhotoGroupOperationType: Move to category" )
 	, SEPARATOR( -1, "- - - - - - - - - - - - - - - - - - - - - - -" )
 	;
 

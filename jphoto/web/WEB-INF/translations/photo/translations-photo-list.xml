@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Photo list: This photo has been posted anonymously</nerd>
+		<ru><![CDATA[Работа загружена анонимно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: The photo will be shown in the member's card when anonymous time pass</nerd>
+		<ru><![CDATA[Работа будет отображена, когда пройдет период анонимности]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: No photo in this cell</nerd>
+		<ru><![CDATA[Пусто]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: Group operations with selected photos</nerd>
+		<ru><![CDATA[Групповые операции с выделенными работами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: Please, select group operation first</nerd>
+		<ru><![CDATA[Пожалуйста, выберите операцию сперва]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list: Please, select at least one photo first</nerd>
+		<ru><![CDATA[Пожалуйста, выберите хотя бы одну работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

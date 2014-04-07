@@ -92,9 +92,9 @@
 							<div style="padding-top: 45px;">
 								${eco:translate(anonymouslyPostedPhotoText)}
 								<br />
-								<html:img128 src="hidden_picture.png" alt="${eco:translate('This photo has been posted anonymously')}" />
+								<html:img128 src="hidden_picture.png" alt="${eco:translate('Photo list: This photo has been posted anonymously')}" />
 								<br />
-								${eco:translate('The photo will be shown in the member\'s card when anonymous time pass' )}
+								${eco:translate('Photo list: The photo will be shown in the member\'s card when anonymous time pass' )}
 							</div>
 						</div>
 					</c:if>
@@ -124,7 +124,7 @@
 						5:${leftToRenderPhotos} <br />
 						6:${emptyCellToRender}
 					</td>--%>
-					<td width="${tdWidth}" align="center">&nbsp;${eco:translate('No photo')}</td>
+					<td width="${tdWidth}" align="center">&nbsp;${eco:translate('Photo list: No photo in this cell')}</td>
 				</c:forEach>
 			</c:if>
 
@@ -168,7 +168,7 @@
 
 			<js:checkBoxChecker namePrefix="${controlSelectedPhotoIds}" />
 
-			<label for="${controlPhotoGroupOperationId}">${eco:translate('Group operations with selected photos')}</label>
+			<label for="${controlPhotoGroupOperationId}">${eco:translate('Photo list: Group operations with selected photos')}</label>
 
 			<select id="${controlPhotoGroupOperationId}" name="${controlPhotoGroupOperationId}">
 				<option value="" selected="selected"></option>
@@ -186,13 +186,13 @@
 			function submitForm() {
 				var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
 				if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
-					showErrorMessage( '${eco:translate("Please, select group operation first")}' );
+					showErrorMessage( '${eco:translate("Photo list: Please, select group operation first")}' );
 					return false;
 				}
 
 				var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
 				if ( controlSelectedPhotoIds.length == 0 ) {
-					showErrorMessage( '${eco:translate("Please, select at least one photo first")}' );
+					showErrorMessage( '${eco:translate("Photo list: Please, select at least one photo first")}' );
 					return false;
 				}
 
