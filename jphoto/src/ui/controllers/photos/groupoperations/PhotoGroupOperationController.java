@@ -57,7 +57,7 @@ public class PhotoGroupOperationController {
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorTitleData() );
+			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorBreadcrumbs() );
 			return VIEW_ERROR;
 		}
 
@@ -66,7 +66,7 @@ public class PhotoGroupOperationController {
 
 		model.setReturnUrl( request.getHeader( "referer" ) );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationTitleData( groupOperationType ) );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationBreadcrumbs( groupOperationType ) );
 
 		final AbstractGroupOperationHandler groupOperationHandler = AbstractGroupOperationHandler.getInstance( groupOperationType, model, services );
 		groupOperationHandler.fillModel();
@@ -79,7 +79,7 @@ public class PhotoGroupOperationController {
 
 		model.setBindingResult( result );
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorTitleData() );
+			model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGroupOperationErrorBreadcrumbs() );
 			return VIEW;
 		}
 

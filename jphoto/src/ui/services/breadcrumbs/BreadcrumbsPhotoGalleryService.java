@@ -1,13 +1,11 @@
 package ui.services.breadcrumbs;
 
 import core.general.genre.Genre;
-import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import elements.PageTitleData;
-import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 import java.util.Date;
 
@@ -15,41 +13,35 @@ public interface BreadcrumbsPhotoGalleryService {
 
 	PageTitleData getPhotoGalleryBreadcrumbs();
 
-	PageTitleData getPhotosAllDataBest();
+	PageTitleData getAbsolutelyBestPhotosBreadcrumbs();
 
-	PageTitleData getUserPhotoVotingData( User user, Photo photo, Genre genre );
+	PageTitleData getPhotosByGenreBreadcrumbs( final Genre genre );
 
-	PageTitleData getPhotoTitleForHiddenAuthor( Photo photo, Genre genre, String mode_t );
+	PageTitleData getPhotosByGenreBestBreadcrumbs( final Genre genre );
 
-	PageTitleData getPhotosByGenreData( Genre genre );
+	PageTitleData getPhotosByUserBreadcrumbs( final User user );
 
-	PageTitleData getPhotosByGenreDataBest( Genre genre );
+	PageTitleData getPhotosByUserBestBreadcrumbs( final User user );
 
-	PageTitleData getPhotosByUser( User user );
+	PageTitleData getPhotosByUserAndGenreBreadcrumbs( final User user, final Genre genre );
 
-	PageTitleData getPhotosByUserBest( User user );
+	PageTitleData getPhotosByUserAndGenreBestBreadcrumbs( final User user, final Genre genre );
 
-	PageTitleData getPhotosByUserAndGenre( User user, Genre genre );
+	PageTitleData getPhotosAppraisedByUserBreadcrumbs( final User user );
 
-	PageTitleData getPhotosByUserAndGenreBest( User user, Genre genre );
+	PageTitleData getPhotosByUserByVotingCategoryBreadcrumbs( final User user, final PhotoVotingCategory votingCategory );
 
-	PageTitleData getPhotosVotedByUser( User user );
+	PageTitleData getPhotosByPeriodBreadcrumbs( final Date dateFrom, final Date dateTo );
 
-	PageTitleData getPhotosByUserByVotingCategory ( User user, PhotoVotingCategory votingCategory );
+	PageTitleData getPhotosByPeriodBestBreadcrumbs( final Date dateFrom, final Date dateTo );
 
-	PageTitleData getPhotosByPeriodData( Date dateFrom, Date dateTo );
+	PageTitleData getPhotosByMembershipTypeBreadcrumbs( final UserMembershipType membershipType );
 
-	PageTitleData getPhotosByPeriodDataBest( Date dateFrom, Date dateTo );
+	PageTitleData getPhotosByMembershipTypeBestBreadcrumbs( final UserMembershipType membershipType );
 
-	PageTitleData getPhotosByMembershipType( UserMembershipType membershipType );
+	PageTitleData getPhotoGroupOperationBreadcrumbs( final PhotoGroupOperationType groupOperationType );
 
-	PageTitleData getPhotosByMembershipTypeBest( UserMembershipType membershipType );
+	PageTitleData getPhotoGroupOperationErrorBreadcrumbs();
 
-	String getPhotoRootTranslated();
-
-	PageTitleData getPhotoGroupOperationTitleData( PhotoGroupOperationType groupOperationType );
-
-	PageTitleData getPhotoGroupOperationErrorTitleData();
-
-	PageTitleData getFilteredPhotoListTitleData();
+	PageTitleData getFilteredPhotoListBreadcrumbs();
 }

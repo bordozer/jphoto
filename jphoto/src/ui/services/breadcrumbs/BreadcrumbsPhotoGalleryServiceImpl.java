@@ -1,9 +1,7 @@
 package ui.services.breadcrumbs;
 
 import core.context.EnvironmentContext;
-import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
@@ -15,20 +13,14 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
 import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
-import ui.services.breadcrumbs.items.UserListBreadcrumbs;
 import utils.StringUtilities;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalleryService {
@@ -41,9 +33,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private ConfigurationService configurationService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -65,7 +54,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosAllDataBest() {
+	public PageTitleData getAbsolutelyBestPhotosBreadcrumbs() {
 		final PageTitleData titleData = getPhotoGalleryBreadcrumbs();
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
@@ -74,33 +63,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getUserPhotoVotingData( final User user, final Photo photo, final Genre genre ) {
-		return photoActionsDetails( user, photo, genre, translatorService.translate( "Votes", EnvironmentContext.getLanguage() ) );
-	}
-
-	@Override
-	public PageTitleData getPhotoTitleForHiddenAuthor( final Photo photo, final Genre genre, final String mode_t ) {
-		final String rootTranslated = getPhotoRootTranslated();
-
-		final String anonymousName = configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, anonymousName, photo.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), anonymousName, translatorService.translate( mode_t, EnvironmentContext.getLanguage() ) );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	private PageTitleData photoActionsDetails( final User user, final Photo photo, final Genre genre, final String tran ) {
-		final String rootTranslated = getPhotoRootTranslated();
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), photo.getName(), tran );
-		final List<String> baseBreadcrumbs = getPhotoBaseBreadcrumbs( photo, user, genre, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( baseBreadcrumbs );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	@Override
-	public PageTitleData getPhotosByGenreData( final Genre genre ) {
+	public PageTitleData getPhotosByGenreBreadcrumbs( final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String genreName = translatorService.translateGenre( genre, getLanguage() );
@@ -111,8 +74,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByGenreDataBest( final Genre genre ) {
-		final PageTitleData titleData = getPhotosByGenreData( genre );
+	public PageTitleData getPhotosByGenreBestBreadcrumbs( final Genre genre ) {
+		final PageTitleData titleData = getPhotosByGenreBreadcrumbs( genre );
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
 
@@ -120,7 +83,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByUser( final User user ) {
+	public PageTitleData getPhotosByUserBreadcrumbs( final User user ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated );
@@ -135,8 +98,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByUserBest( final User user ) {
-		final PageTitleData titleData = getPhotosByUser( user );
+	public PageTitleData getPhotosByUserBestBreadcrumbs( final User user ) {
+		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
 
 		final Language language = EnvironmentContext.getLanguage();
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), translatorService.translate( "The Best", language ) );
@@ -145,7 +108,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByUserAndGenre( final User user, final Genre genre ) {
+	public PageTitleData getPhotosByUserAndGenreBreadcrumbs( final User user, final Genre genre ) {
 		final String rootTranslated = getPhotoRootTranslated();
 
 		final String genreName = translatorService.translateGenre( genre, getLanguage() );
@@ -157,8 +120,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByUserAndGenreBest( final User user, final Genre genre ) {
-		final PageTitleData titleData = getPhotosByUserAndGenre( user, genre );
+	public PageTitleData getPhotosByUserAndGenreBestBreadcrumbs( final User user, final Genre genre ) {
+		final PageTitleData titleData = getPhotosByUserAndGenreBreadcrumbs( user, genre );
 
 		final Language language = EnvironmentContext.getLanguage();
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() ), translatorService.translate( "The Best", language ) );
@@ -167,8 +130,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosVotedByUser( final User user ) {
-		final PageTitleData titleData = getPhotosByUser( user );
+	public PageTitleData getPhotosAppraisedByUserBreadcrumbs( final User user ) {
+		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
 
 		final Language language = EnvironmentContext.getLanguage();
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), translatorService.translate( "Appraised photos", language ) );
@@ -177,8 +140,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByUserByVotingCategory( final User user, final PhotoVotingCategory votingCategory ) {
-		final PageTitleData titleData = getPhotosByUser( user );
+	public PageTitleData getPhotosByUserByVotingCategoryBreadcrumbs( final User user, final PhotoVotingCategory votingCategory ) {
+		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
 
 		final Language language = EnvironmentContext.getLanguage();
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language )
@@ -190,7 +153,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByPeriodData( final Date dateFrom, final Date dateTo ) {
+	public PageTitleData getPhotosByPeriodBreadcrumbs( final Date dateFrom, final Date dateTo ) {
 		final String rootTranslated = getPhotoRootTranslated();
 		final String fDateFrom = dateUtilsService.formatDate( dateFrom );
 		final String fDateTo = dateUtilsService.formatDate( dateTo );
@@ -203,8 +166,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByPeriodDataBest( final Date dateFrom, final Date dateTo ) {
-		final PageTitleData titleData = getPhotosByPeriodData( dateFrom, dateTo  );
+	public PageTitleData getPhotosByPeriodBestBreadcrumbs( final Date dateFrom, final Date dateTo ) {
+		final PageTitleData titleData = getPhotosByPeriodBreadcrumbs( dateFrom, dateTo );
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByPeriod( dateFrom, dateTo ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
 
@@ -212,7 +175,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByMembershipType( final UserMembershipType membershipType ) {
+	public PageTitleData getPhotosByMembershipTypeBreadcrumbs( final UserMembershipType membershipType ) {
 		final String rootTranslated = getPhotoRootTranslated();
 		String membershipTypeName = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), EnvironmentContext.getLanguage() ) );
 
@@ -223,8 +186,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotosByMembershipTypeBest( final UserMembershipType membershipType ) {
-		final PageTitleData titleData = getPhotosByMembershipType( membershipType );
+	public PageTitleData getPhotosByMembershipTypeBestBreadcrumbs( final UserMembershipType membershipType ) {
+		final PageTitleData titleData = getPhotosByMembershipTypeBreadcrumbs( membershipType );
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() )
 			, entityLinkUtilsService.getPhotosByMembershipLink( membershipType, EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
@@ -232,34 +195,12 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}
 
-	@Override
-	@Deprecated
-	public String getPhotoRootTranslated() {
+	private String getPhotoRootTranslated() {
 		return translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, EnvironmentContext.getLanguage() );
 	}
 
-	private List<String> getPhotoBaseBreadcrumbs( final Photo photo, final User user, final Genre genre, final String... strings ) {
-		final Language language = EnvironmentContext.getLanguage();
-		final ArrayList<String> list = newArrayList(
-			entityLinkUtilsService.getPhotosRootLink( language )
-			, entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() )
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, entityLinkUtilsService.getPhotosByUserLink( user, language )
-			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() )
-		);
-
-		if ( strings.length > 0 && StringUtils.isNotEmpty( strings[0] ) ) {
-			list.add( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
-			list.addAll( Arrays.asList( strings ) );
-		} else {
-			list.add( StringUtilities.escapeHtml( photo.getName() ) );
-		}
-
-		return list;
-	}
-
 	@Override
-	public PageTitleData getPhotoGroupOperationTitleData( final PhotoGroupOperationType groupOperationType ) {
+	public PageTitleData getPhotoGroupOperationBreadcrumbs( final PhotoGroupOperationType groupOperationType ) {
 		final String rootTranslated = getPhotoRootTranslated();
 		final String groupOperationText = translatorService.translate( "Group operations", EnvironmentContext.getLanguage() );
 
@@ -270,7 +211,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getPhotoGroupOperationErrorTitleData() {
+	public PageTitleData getPhotoGroupOperationErrorBreadcrumbs() {
 		final String rootTranslated = getPhotoRootTranslated();
 		final String groupOperationText = translatorService.translate( "Group operations", EnvironmentContext.getLanguage() );
 
@@ -282,7 +223,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
-	public PageTitleData getFilteredPhotoListTitleData() {
+	public PageTitleData getFilteredPhotoListBreadcrumbs() {
 		final String rootTranslated = getPhotoRootTranslated();
 		final String text = translatorService.translate( "Photo search", EnvironmentContext.getLanguage() );
 
