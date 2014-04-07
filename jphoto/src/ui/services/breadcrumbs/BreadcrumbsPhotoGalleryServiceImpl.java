@@ -14,13 +14,11 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
-import core.services.utils.UrlUtilsServiceImpl;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.StringBreadcrumb;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
-import utils.StringUtilities;
 
 import java.util.Date;
 
@@ -29,6 +27,7 @@ import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalleryService {
 
 	public static final String PHOTO_GALLERY_THE_BEST = "Breadcrumbs: The best";
+	public static final String BREADCRUMBS_GROUP_OPERATIONS = "Breadcrumbs: Group operations";
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
 	
@@ -196,41 +195,46 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Override
 	public PageTitleData getPhotoGroupOperationBreadcrumbs( final PhotoGroupOperationType groupOperationType ) {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String groupOperationText = translatorService.translate( "Group operations", EnvironmentContext.getLanguage() );
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, groupOperationText, groupOperationType.getName() );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), groupOperationText, groupOperationType.getName() );
+		final String breadcrumbs = photoGalleryLink()
+			.translatableString( groupOperationType.getName() )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( BREADCRUMBS_GROUP_OPERATIONS, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotoGroupOperationErrorBreadcrumbs() {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String groupOperationText = translatorService.translate( "Group operations", EnvironmentContext.getLanguage() );
 
-		final String error = translatorService.translate( "Group operation error", EnvironmentContext.getLanguage() );
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, groupOperationText, error );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), groupOperationText, error );
+		final String breadcrumbs = photoGalleryLink()
+			.translatableString( BREADCRUMBS_GROUP_OPERATIONS )
+			.translatableString( "Error" )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( BREADCRUMBS_GROUP_OPERATIONS, services );
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getFilteredPhotoListBreadcrumbs() {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String text = translatorService.translate( "Photo search", EnvironmentContext.getLanguage() );
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, text );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), text );
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "Photo search: Photo search result", services );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
-	@Deprecated
-	private String getPhotoRootTranslated() {
-		return translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, EnvironmentContext.getLanguage() );
+		final String breadcrumbs = photoGalleryLink()
+			.add( breadcrumb )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	private String pageTitle() {

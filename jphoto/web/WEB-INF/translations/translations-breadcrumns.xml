@@ -132,14 +132,9 @@
 		<ru><![CDATA[Лучшие работы за период $1 - $2]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd>Breadcrumbs: The photos uploaded for period $1 - $2</nerd>
-		<ru><![CDATA[Работы, загруженные за период $1 - $2]]></ru>
-	</translation>-->
-
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Group operations</nerd>
+		<ru><![CDATA[Групповые операции с работами]]></ru>
 	</translation>
 
 	<translation>
