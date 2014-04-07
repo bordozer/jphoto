@@ -24,25 +24,13 @@
 	</translation>
 
 	<translation>
-		<nerd>$1 has commented your photo '$2'. $3</nerd>
-		<ru><![CDATA[$1 прокомментировал вашу работу '$2'. $3]]></ru>
-		<ua><![CDATA[$1 прокомментував вашу роботу '$2'. $3]]></ua>
-		<en><![CDATA[$1 has commented your photo '$2'. $3]]></en>
-	</translation>
-
-	<translation>
 		<nerd>Password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>All user's photos</nerd>
-		<ru><![CDATA[Все работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Sorry, but page not found on the server</nerd>
+		<ru><![CDATA[Извините, но такой страницы на сервере нет]]></ru>
 	</translation>
 
 	<translation>
