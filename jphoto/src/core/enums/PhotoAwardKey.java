@@ -4,10 +4,10 @@ import utils.StringUtilities;
 
 public enum PhotoAwardKey {
 
-	PHOTO_OF_THE_DAY( 1, "The photo of the day" )
-	, TOP_3_OF_THE_DAY( 2, "Top 3 of the day" )
-	, TOP_10_OF_THE_DAY( 3, "Top 10 of the day" )
-	, TOP_50_OF_THE_DAY( 4, "Top 50 of the day" )
+	PHOTO_OF_THE_DAY( 1, "PhotoAwardKey: The photo of the day" )
+	, TOP_3_OF_THE_DAY( 2, "PhotoAwardKey: Top 3 of the day" )
+	, TOP_10_OF_THE_DAY( 3, "PhotoAwardKey: Top 10 of the day" )
+	, TOP_50_OF_THE_DAY( 4, "PhotoAwardKey: Top 50 of the day" )
 //	, TOP_200_WEEK( 5, "Top 200 of the week" )
 	;
 

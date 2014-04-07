@@ -42,17 +42,17 @@
 
 		<js:genreRankVotingJS />
 
-		<table:table border="0" width="99%>">
+		<table:table border="0" width="100%>">
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Photo detailes')}" />
+			<table:separatorInfo colspan="2" title="${eco:translate('Photo info: Photo details')}" />
 
 			<table:tr>
-				<table:td width="170">${eco:translate("Photo name")}</table:td>
+				<table:td width="190">${eco:translate("Photo info: Photo name")}</table:td>
 				<table:td>${eco:escapeHtml(photo.name)}</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Uploaded by")}</table:td>
+				<table:td>${eco:translate("Photo info: Uploaded by")}</table:td>
 				<table:td>
 					<c:if test="${not isPhotoAuthorNameMustBeHidden}">
 						<user:userCard user="${user}"/>
@@ -67,13 +67,13 @@
 					</c:if>
 
 					<c:if test="${isPhotoAuthorNameMustBeHidden}">
-						<span title="${eco:translate('The photo is posted anonymously')}">${photoInfo.photoAuthorAnonymousName}</span>
+						<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${photoInfo.photoAuthorAnonymousName}</span>
 					</c:if>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td width="90">${eco:translate("Upload time")}</table:td>
+				<table:td width="90">${eco:translate("Photo info: Upload time")}</table:td>
 				<table:td>
 					<links:photosOnDate uploadTime="${photo.uploadTime}" />
 					${eco:formatTimeShort(photo.uploadTime)}
@@ -81,26 +81,26 @@
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Photo category")}</table:td>
+				<table:td>${eco:translate("Photo info: Photo category")}</table:td>
 				<table:td><links:genrePhotos genre="${photoInfo.genre}"/></table:td>
 			</table:tr>
 
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:td>${eco:translate("Original size")}</table:td>
+				<table:td>${eco:translate("Photo info: Original size")}</table:td>
 				<table:td>${originalDimension.width} x ${originalDimension.height} ${eco:translate("px")}</table:td>
 			</table:tr>
 
 			<c:if test="${resizedDimension.width != originalDimension.width || resizedDimension.height != originalDimension.height}">
 				<table:tr>
-					<table:td>${eco:translate("Shown size")}</table:td>
+					<table:td>${eco:translate("Photo info: Shown size")}</table:td>
 					<table:td>${resizedDimension.width} x ${resizedDimension.height} ${eco:translate("px")}</table:td>
 				</table:tr>
 			</c:if>
 
 			<table:tr>
-				<table:td>${eco:translate("File size")}</table:td>
+				<table:td>${eco:translate("Photo info: File size")}</table:td>
 				<table:td>${eco:fileSizeToKb(photo.fileSize)} ${eco:translate('Kb')}</table:td>
 			</table:tr>
 
@@ -108,7 +108,7 @@
 				<table:separator colspan="2" />
 
 				<table:tr>
-					<table:td>${eco:translate("Photo team")}</table:td>
+					<table:td>${eco:translate("Photo info: Photo team")}</table:td>
 					<table:td>
 						<c:forEach var="photoTeamMember" items="${photoTeamMembers}">
 							<icons:teamMemberType teamMemberType="${photoTeamMember.userTeamMember.teamMemberType}" />
@@ -123,7 +123,7 @@
 				<table:separator colspan="2" />
 
 				<table:tr>
-					<table:td>${eco:translate("Photo albums")}</table:td>
+					<table:td>${eco:translate("Photo info: Photo albums")}</table:td>
 					<table:td>
 						<c:forEach var="userPhotoAlbum" items="${userPhotoAlbums}">
 							<links:userPhotoAlbumPhotos userPhotoAlbum="${userPhotoAlbum}" />
@@ -137,7 +137,7 @@
 
 			<table:tr>
 				<table:td colspan="2">
-					${eco:translate("Author\'s rank in category")}
+					${eco:translate("Photo info: Author\'s rank in category")}
 
 					<c:if test="${not isPhotoAuthorNameMustBeHidden}">
 						${eco:photosByUserByGenreLink(user, genre)}
@@ -150,21 +150,21 @@
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("When photo was uploaded")}</table:td>
+				<table:td><li>${eco:translate("Photo info: When photo was uploaded")}</li></table:td>
 				<table:td>
 					<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankWhenPhotoWasUploadedIconContainer}"/>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Current rank")}</table:td>
+				<table:td><li>${eco:translate("Photo info: Current rank")}</li></table:td>
 				<table:td>
 					<user:userRankInGenreRenderer userRankIconContainer="${photoInfo.userRankIconContainer}"/>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Vote for the rank")}</table:td>
+				<table:td>${eco:translate("Photo info: Vote for the rank")}</table:td>
 				<table:td>
 					<user:userRankInGenreVotingArea_ByPhoto photo="${photo}" genre="${genre}" votingModel="${votingModel}" />
 				</table:td>
@@ -173,32 +173,32 @@
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:td>${eco:translate("Total marks")}</table:td>
+				<table:td>${eco:translate("Photo info: Total marks")}</table:td>
 				<table:td>
 					<links:photoMarkList photo="${photo}">${photoInfo.totalMarks}</links:photoMarkList>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Marks by categories")}</table:td>
+				<table:td>${eco:translate("Photo info: Marks by categories")}</table:td>
 				<table:td>
 					<c:forEach var="marksByCategoryInfo" items="${photoInfo.marksByCategoryInfos}" >
 						${eco:translateVotingCategory(marksByCategoryInfo.photoVotingCategory.id)}:
-						<span title="${eco:translate('Number of users who voted for the photo in this category')}">${marksByCategoryInfo.quantity}</span>
+						<span title="${eco:translate('Photo info: Number of users who voted for the photo in this category')}">${marksByCategoryInfo.quantity}</span>
 						/
-						<span title="${eco:translate('Summary photo\'s mark in this category')}">${marksByCategoryInfo.sumMark}</span>
+						<span title="${eco:translate('Photo info: Summary photo\'s mark in this category')}">${marksByCategoryInfo.sumMark}</span>
 						<br />
 					</c:forEach>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Today\'s rating position")}</table:td>
+				<table:td>${eco:translate("Photo info: Today\'s rating position")}</table:td>
 				<table:td>${photoInfo.photoRatingPosition > 0 ? photoInfo.photoRatingPosition : '-'}</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Photo\'s awards")}</table:td>
+				<table:td>${eco:translate("Photo info: Photo\'s awards")}</table:td>
 				<table:td>
 					<c:forEach var="photoAward" items="${photoInfo.photoAwards}" varStatus="status">
 
@@ -214,14 +214,14 @@
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:td>${eco:translate("Previews")}</table:td>
+				<table:td>${eco:translate("Photo info: Previews count")}</table:td>
 				<table:td>
 					<links:photoPreviewsList photoInfo="${photoInfo}"/>
 				</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td>${eco:translate("Comments")}</table:td>
+				<table:td>${eco:translate("Photo info: Comments count")}</table:td>
 				<table:td>
 					${photoInfo.commentsCount}
 				</table:td>
@@ -229,7 +229,7 @@
 
 			<table:tr>
 				<table:td />
-				<table:td cssClass="textsentered"><a href="${eco:baseUrlWithPrefix()}/photo/${photo.id}/activity/">${eco:translate("Photo activity stream")}</a></table:td>
+				<table:td cssClass="textsentered"><a href="${eco:baseUrlWithPrefix()}/photo/${photo.id}/activity/">${eco:translate("Photo info: Photo activity stream")}</a></table:td>
 			</table:tr>
 
 		</table:table>
