@@ -52,17 +52,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	private Services services;
 
 	@Override
-	public BreadcrumbsBuilder getUserPhotosInGenreLinkBreadcrumbs( final User user, final Genre genre ) {
-
-		return portalPage( services )
-			.userListLink()
-			.userCardLink( user )
-			.photosByUser( user )
-			.photosByUserAndGenre( user, genre )
-			;
-	}
-
-	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {
 
 		final String title = BreadcrumbsBuilder.pageTitle( new PhotoGalleryBreadcrumb( services ), services ).build();

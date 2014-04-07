@@ -13,8 +13,6 @@ import java.util.Date;
 
 public interface BreadcrumbsPhotoGalleryService {
 
-	BreadcrumbsBuilder getUserPhotosInGenreLinkBreadcrumbs( User user, Genre genre );
-
 	PageTitleData getPhotoGalleryBreadcrumbs();
 
 	PageTitleData getPhotosAllDataBest();

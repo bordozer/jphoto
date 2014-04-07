@@ -75,9 +75,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getVotesForUserRankInGenreBreadcrumbs( final User user, final Genre genre ) {
 
-		final String breadcrumbs = breadcrumbsPhotoGalleryService.getUserPhotosInGenreLinkBreadcrumbs( user, genre )
-																 .translatableString( "Breadcrumbs: Votes for rank in genre" )
-																 .build();
+		final String breadcrumbs = userCardLink( user )
+			.photosByUser( user )
+			.photosByUserAndGenre( user, genre )
+			.translatableString( "Breadcrumbs: Votes for rank in genre" )
+			.build();
 
 		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
@@ -384,7 +386,9 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	private BreadcrumbsBuilder userCardLink( final User user ) {
-		return portalPage( services ).userListLink().userCardLink( user );
+		return portalPage( services )
+			.userListLink()
+			.userCardLink( user );
 	}
 
 	private BreadcrumbsBuilder userTeamLink( final User user ) {
