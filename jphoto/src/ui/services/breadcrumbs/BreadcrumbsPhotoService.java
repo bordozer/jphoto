@@ -4,7 +4,6 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import elements.PageTitleData;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
-import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 public interface BreadcrumbsPhotoService {
 

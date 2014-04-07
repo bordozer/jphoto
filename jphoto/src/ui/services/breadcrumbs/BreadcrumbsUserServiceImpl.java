@@ -12,8 +12,8 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.system.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
-import core.services.translator.nerds.LinkNerdText;
 import core.services.translator.TranslatorService;
+import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +26,11 @@ import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
-	public static final String USER_ROOT = "Members";
-	
-	@Autowired
-	private PageTitleUtilsService pageTitleUtilsService;
-	
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Autowired
 	private TranslatorService translatorService;
-
-	@Autowired
-	private BreadcrumbsPhotoGalleryService breadcrumbsPhotoGalleryService;
 
 	@Autowired
 	private Services services;
