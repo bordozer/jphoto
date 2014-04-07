@@ -24,6 +24,7 @@ public interface EntityLinkUtilsService {
 
 	String BREADCRUMBS_USER_TEAM = "Breadcrumbs: User team";
 	String USER_PHOTO_ALBUM_LIST = UserCardTab.ALBUMS.getName();
+	String BREADCRUMBS_PHOTO_CATEGORIES = "Breadcrumbs: Photo categories";
 
 	String getPortalPageLink( final Language language );
 

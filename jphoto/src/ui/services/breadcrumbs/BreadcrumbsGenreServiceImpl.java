@@ -2,15 +2,18 @@ package ui.services.breadcrumbs;
 
 import core.context.EnvironmentContext;
 import core.general.genre.Genre;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 
 public class BreadcrumbsGenreServiceImpl implements BreadcrumbsGenreService {
 
-	public static final String GENRE_ROOT = "Photo categories";
+	public static final String BREADCRUMBS_ADMINISTRATION = "Breadcrumbs: Administration";
 
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
@@ -24,46 +27,56 @@ public class BreadcrumbsGenreServiceImpl implements BreadcrumbsGenreService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@Override
-	public PageTitleData getGenreListData() {
-		final String rootTranslated = getGenreRootTranslated();
+	public PageTitleData getGenreListBreadcrumbs() {
+		final String breadcrumbs = admin()
+			.translatableString( EntityLinkUtilsService.BREADCRUMBS_PHOTO_CATEGORIES )
+			.build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getGenreNewData() {
-		final String rootTranslated = getGenreRootTranslated();
-		final String tran = translatorService.translate( "New", EnvironmentContext.getLanguage() );
+	public PageTitleData getGenreNewBreadcrumbs() {
+		final String breadcrumbs = admin()
+			.string( entityLinkUtilsService.getAdminGenresRootLink( getLanguage() ) )
+			.translatableString( "Breadcrumbs: Create new photo category" )
+			.build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() ), tran );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
-	public PageTitleData getGenreEditData( final Genre genre ) {
-		final String tran = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
-		final String rootTranslated = getGenreRootTranslated();
+	public PageTitleData getGenreEditBreadcrumbs( final Genre genre ) {
+		final Language language = getLanguage();
 
-		final Language language = EnvironmentContext.getCurrentUser().getLanguage();
+		final String breadcrumbs = admin()
+			.string( entityLinkUtilsService.getAdminGenresRootLink( language ) )
+			.string( entityLinkUtilsService.getPhotosByGenreLink( genre, language ) )
+			.translatableString( "Breadcrumbs: Edit photo category" )
+			.build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), rootTranslated
-			, translatorService.translateGenre( genre, language ), tran );
-
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( breadcrumbsAdminService.getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() )
-			, entityLinkUtilsService.getPhotosByGenreLink( genre, language ), tran );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
-	@Override
-	public String getGenreRootTranslated() {
-		return translatorService.translate( GENRE_ROOT, EnvironmentContext.getLanguage() );
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 
+	private String pageTitle() {
+		return BreadcrumbsBuilder.pageTitle( new TranslatableStringBreadcrumb( BREADCRUMBS_ADMINISTRATION, services ), services ).build();
+	}
+
+	private String pageHeader() {
+		return admin()
+			.build();
+	}
+
+	private BreadcrumbsBuilder admin() {
+		return new BreadcrumbsBuilder( services )
+			.translatableString( BREADCRUMBS_ADMINISTRATION );
+	}
 }

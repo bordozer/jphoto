@@ -74,7 +74,7 @@ public class GenreListController {
 		}
 		model.setGenrePhotoVotingCategoriesMap( genrePhotoVotingCategoriesMap );*/
 
-		model.setPageTitleData( breadcrumbsGenreService.getGenreListData() );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreListBreadcrumbs() );
 
 		return VIEW;
 	}

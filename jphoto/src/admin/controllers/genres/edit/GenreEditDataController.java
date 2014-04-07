@@ -70,7 +70,7 @@ public class GenreEditDataController {
 		model.clear();
 
 		model.setNew( true );
-		model.setPageTitleData( breadcrumbsGenreService.getGenreNewData() );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreNewBreadcrumbs() );
 		model.setPhotoVotingCategories( votingCategoryService.loadAll() );
 
 		return VIEW;
@@ -95,7 +95,7 @@ public class GenreEditDataController {
 		}
 		model.setAllowedVotingCategoryIDs( allowedVotingCategoryIDs );
 
-		model.setPageTitleData( breadcrumbsGenreService.getGenreEditData( genre ) );
+		model.setPageTitleData( breadcrumbsGenreService.getGenreEditBreadcrumbs( genre ) );
 
 		return VIEW;
 	}

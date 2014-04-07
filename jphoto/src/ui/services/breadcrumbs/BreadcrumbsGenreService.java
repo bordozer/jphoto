@@ -5,11 +5,9 @@ import elements.PageTitleData;
 
 public interface BreadcrumbsGenreService {
 
-	PageTitleData getGenreListData();
+	PageTitleData getGenreListBreadcrumbs();
 
-	PageTitleData getGenreNewData();
+	PageTitleData getGenreNewBreadcrumbs();
 
-	PageTitleData getGenreEditData( Genre genre );
-
-	String getGenreRootTranslated();
+	PageTitleData getGenreEditBreadcrumbs( Genre genre );
 }

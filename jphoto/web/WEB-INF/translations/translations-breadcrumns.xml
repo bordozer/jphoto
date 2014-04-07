@@ -138,13 +138,28 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Photo categories</nerd>
+		<ru><![CDATA[Разделы фотографии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Administration</nerd>
+		<ru><![CDATA[Администрирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Create new photo category</nerd>
+		<ru><![CDATA[Создание нового раздела фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Edit photo category</nerd>
+		<ru><![CDATA[Редактирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: All photos in category '$1'</nerd>
+		<ru><![CDATA[Все работы из раздела '$1']]></ru>
 	</translation>
 
 	<translation>

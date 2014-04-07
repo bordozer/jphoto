@@ -72,7 +72,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		final String genreTranslated = translatorService.translateGenre( genre, language );
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPhotosByGenreLink( genre.getId() )
-			, translatorService.translate( "All photos in genre '$1'", language, genreTranslated )
+			, translatorService.translate( "Breadcrumbs: All photos in category '$1'", language, genreTranslated )
 			, genreTranslated
 		);
 	}
@@ -196,7 +196,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getAdminGenresRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAdminGenreListLink() );
-		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Photo categories", language ) );
+		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( BREADCRUMBS_PHOTO_CATEGORIES, language ) );
 	}
 
 	@Override
