@@ -15,6 +15,6 @@ public class PhotoAppraisedPhotosLinkBreadcrumb extends AbstractBreadcrumb {
 
 	@Override
 	public String getValue( final Language language ) {
-		return getEntityLinkUtilsService().getPhotosVotedByUserLinkUser( user.getId(), language );
+		return getEntityLinkUtilsService().getPhotosVotedByUserLinkUser( user, language );
 	}
 }
