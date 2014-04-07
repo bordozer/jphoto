@@ -180,7 +180,12 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	@Override
 	public String getPhotosRootLink( final Language language ) {
 		final String link = String.format( "%s", urlUtilsService.getAllPhotosLink() );
-		return String.format( "<a href=\"%s\" title=\"All photos\">%s</a>", link, translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, language ) );
+		final String translate = translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, language );
+		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
+			, link
+			, translate
+			, translate
+		);
 	}
 
 	@Override
