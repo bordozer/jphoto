@@ -80,4 +80,6 @@ public interface EntityLinkUtilsService {
 	String getActivityStreamRootLink( final Language language );
 
 	String getProjectNameLink( Language language );
+
+	String getMembershipPhotosLinkText( UserMembershipType membershipType, Language language );
 }

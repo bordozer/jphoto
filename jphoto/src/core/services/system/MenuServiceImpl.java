@@ -12,6 +12,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.DateUtilsService;
+import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import elements.menus.MenuItem;
@@ -41,6 +42,9 @@ public class MenuServiceImpl implements MenuService {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Override
 	public Map<MenuItem, List<MenuItem>> getMenuElements( final User user ) {
@@ -289,7 +293,8 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem membershipMenu( final UserMembershipType membershipType, final String url ) {
-		final String caption = translatorService.translate( String.format( "Main menu: %s: %s", url, membershipType.getName() ), getLanguage() );
+//		final String caption = entityLinkUtilsService.getMembershipPhotosLinkText( membership); //translatorService.translate( String.format( MAIN_MENU_MEMBERSHIP_TYPE_NERD, url, membershipType.getName() ), getLanguage() );
+		final String caption = translatorService.translate( String.format( MAIN_MENU_MEMBERSHIP_TYPE_NERD, url, membershipType.getName() ), getLanguage() ); // TODO: try to use entityLinkUtilsService.getMembershipPhotosLinkText()
 		final String link = urlUtilsService.getPhotosByMembership( membershipType, url );
 		return new MenuItem( caption, link );
 	}

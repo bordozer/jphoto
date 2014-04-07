@@ -91,8 +91,15 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotosByMembershipLink( final UserMembershipType membershipType, final Language language ) {
-		return String.format( "<a href=\"%s\">%s</a>", urlUtilsService.getPhotosByMembership( membershipType, UrlUtilsServiceImpl.PHOTOS_URL )
-			, StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), language ) ) );
+		return String.format( "<a href=\"%s\">%s</a>"
+			, urlUtilsService.getPhotosByMembership( membershipType, UrlUtilsServiceImpl.PHOTOS_URL )
+			, getMembershipPhotosLinkText( membershipType, language )
+		);
+	}
+
+	@Override
+	public String getMembershipPhotosLinkText( final UserMembershipType membershipType, final Language language ) {
+		return translatorService.translate( String.format( MenuService.MAIN_MENU_MEMBERSHIP_TYPE_NERD, UrlUtilsServiceImpl.PHOTOS_URL, membershipType.getName() ), language );
 	}
 
 	@Override

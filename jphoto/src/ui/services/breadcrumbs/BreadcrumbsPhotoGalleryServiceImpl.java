@@ -14,6 +14,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.UrlUtilsServiceImpl;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
@@ -176,23 +177,21 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Override
 	public PageTitleData getPhotosByMembershipTypeBreadcrumbs( final UserMembershipType membershipType ) {
-		final String rootTranslated = getPhotoRootTranslated();
-		String membershipTypeName = StringUtilities.toUpperCaseFirst( translatorService.translate( membershipType.getNamePlural(), EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = photoGalleryLink()
+			.string( entityLinkUtilsService.getMembershipPhotosLinkText( membershipType, getLanguage() ) )
+			.build();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, membershipTypeName );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), membershipTypeName );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByMembershipTypeBestBreadcrumbs( final UserMembershipType membershipType ) {
-		final PageTitleData titleData = getPhotosByMembershipTypeBreadcrumbs( membershipType );
+		final String breadcrumbs = photoGalleryLink()
+			.string( entityLinkUtilsService.getPhotosByMembershipLink( membershipType, getLanguage() ) )
+			.translatableString( PHOTO_GALLERY_THE_BEST )
+			.build();
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() )
-			, entityLinkUtilsService.getPhotosByMembershipLink( membershipType, EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
-
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	private String getPhotoRootTranslated() {
