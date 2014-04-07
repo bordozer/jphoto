@@ -77,8 +77,9 @@
 				<table:tr>
 					<table:td cssClass="buttoncolumn"><html:submitButton id="voteButton" caption_t="${eco:translate('Vote')}" onclick="return submitVotingForm()" /></table:td>
 					<table:td>
-						<%--<html:img16 src="icons16/decrease.png" onclick="setMaxMarks();" />--%>
-						<html:img16 src="icons16/increase.png" onclick="return voteWithMaxMarks();" alt="${eco:translate('Set maximum marks')}"/>
+						<a href="#" onclick="return voteWithMaxMarks();" title="${eco:translate('Appraisal the photo with the maximum marks')}">
+							+${maxMarkForGenre}, +${maxMarkForGenre}, +${maxMarkForGenre}
+						</a>
 
 						<script type="text/javascript">
 							function voteWithMaxMarks() {
