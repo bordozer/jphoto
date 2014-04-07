@@ -58,7 +58,7 @@ public class ChangeUserPasswordController {
 
 		final ChangeUserPasswordModel model = new ChangeUserPasswordModel( user );
 
-		model.setPageTitleData( breadcrumbsUserService.getChangeUserPasswordData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getChangeUserPasswordBreadcrumbs( user ) );
 		model.setDataRequirementService( dataRequirementService );
 
 		return model;

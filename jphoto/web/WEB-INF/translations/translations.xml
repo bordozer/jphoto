@@ -34,16 +34,6 @@
 	</translation>
 
 	<translation>
-		<nerd>System login: Wrong user name or password</nerd>
-		<ru><![CDATA[Неверный логин или пароль]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>System login: Authorization</nerd>
-		<ru><![CDATA[Авторизация]]></ru>
-	</translation>
-
-	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

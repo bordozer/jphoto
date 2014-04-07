@@ -66,7 +66,7 @@ public class UserLoginController {
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
-			model.setPageTitleData( breadcrumbsUserService.getUserWrongLogin() );
+			model.setPageTitleData( breadcrumbsUserService.getUserWrongLoginBreadcrumbs() );
 			return "users/login/Login";
 		}
 

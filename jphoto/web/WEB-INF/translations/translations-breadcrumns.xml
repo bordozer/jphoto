@@ -88,13 +88,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Wrong user name or password</nerd>
+		<ru><![CDATA[Неверный логин или пароль]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Authorization</nerd>
+		<ru><![CDATA[Авторизация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Changing your password</nerd>
+		<ru><![CDATA[Изменение пароля]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: Notification control</nerd>
+		<ru><![CDATA[Управление уведомлениями]]></ru>
 	</translation>
 
 	<translation>

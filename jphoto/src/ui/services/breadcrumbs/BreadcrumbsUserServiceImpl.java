@@ -87,21 +87,13 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserEditBreadcrumbs( final User user ) {
 
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( MenuService.MAIN_MENU_PROFILE_SETTINGS )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, MenuService.MAIN_MENU_PROFILE_SETTINGS );
 	}
 
 	@Override
 	public PageTitleData setUserAvatarBreadcrumbs( final User user ) {
 
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( "Breadcrumbs: User avatar" )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, "Breadcrumbs: User avatar" );
 	}
 
 	@Override
@@ -119,13 +111,9 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserTeamMemberListData( final User user ) {
+	public PageTitleData getUserTeamMemberListBreadcrumbs( final User user ) {
 
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( EntityLinkUtilsService.BREADCRUMBS_USER_TEAM )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, EntityLinkUtilsService.BREADCRUMBS_USER_TEAM );
 	}
 
 	@Override
@@ -140,11 +128,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	@Override
 	public PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final PrivateMessageType messageType ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( messageType.getName() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, messageType.getName() );
 	}
 
 	@Override
@@ -268,66 +252,43 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserFavoriteEntryListBreadcrumbs( final User user, final FavoriteEntryType favoriteEntryType ) {
 
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( favoriteEntryType.getName() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, favoriteEntryType.getName() );
 	}
 
 	@Override
 	public PageTitleData getUserIsAddedInFavoriteMembersByBreadcrumbs( final User user ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( LinkNerdText.USER_STATISTICS_THE_USER_IS_ADDED_IN_FAVORITE_MEMBERS_BY.getText() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, LinkNerdText.USER_STATISTICS_THE_USER_IS_ADDED_IN_FAVORITE_MEMBERS_BY.getText() );
 	}
 
 	@Override
 	public PageTitleData getUserWrittenCommentsBreadcrumb( final User user ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN.getText() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN.getText() );
 	}
 
 	@Override
 	public PageTitleData getUserReceivedCommentsBreadcrumb( final User user ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED.getText() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED.getText() );
 	}
 
 	@Override
 	public PageTitleData getUserWrittenUnreadCommentsBreadcrumb( final User user ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED_UNREAD.getText() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		return getUserBreadcrumbs( user, LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED_UNREAD.getText() );
 	}
 
 	@Override
 	public PageTitleData getPhotosOfUserFavoriteMembersBreadcrumb( final User user ) {
-		final String breadcrumbs = userCardLink( user )
-			.translatableString( LinkNerdText.USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS.getText() )
-			.build();
-
-		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
+		final String text = LinkNerdText.USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS.getText();
+		return getUserBreadcrumbs( user, text );
 	}
 
 	@Override
-	public PageTitleData getUserWrongLogin() {
+	public PageTitleData getUserWrongLoginBreadcrumbs() {
 
-		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "System login: Authorization", services );
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "Breadcrumbs: Authorization", services );
 
 		final String breadcrumbs = portalPage( services )
 			.add( breadcrumb )
-			.translatableString( "System login: Wrong user name or password" )
+			.translatableString( "Breadcrumbs: Wrong user name or password" )
 			.build();
 
 		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
@@ -337,49 +298,13 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getChangeUserPasswordData( final User user ) {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Change password", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
-			, entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() )
-			, tran
-		);
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	public PageTitleData getChangeUserPasswordBreadcrumbs( final User user ) {
+		return getUserBreadcrumbs( user, "Breadcrumbs: Changing your password" );
 	}
 
 	@Override
-	public PageTitleData getUserNotificationsControlData( final User user ) {
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Notifications control", EnvironmentContext.getLanguage() );
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() )
-			, entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() )
-			, tran
-		);
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
-	}
-
-	@Deprecated
-	@Override
-	public String getUserRootTranslated() {
-		return translatorService.translate( USER_ROOT, EnvironmentContext.getLanguage() );
-	}
-
-	@Deprecated
-	@Override
-	public PageTitleData getUserData( final User user, final String tran ) {
-		final String rootTranslated = getUserRootTranslated();
-
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), tran );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	public PageTitleData getUserNotificationsControlBreadcrumbs( final User user ) {
+		return getUserBreadcrumbs( user, "Breadcrumbs: Notification control" );
 	}
 
 	private String userCardTitle( final User user ) {
@@ -406,5 +331,13 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	private BreadcrumbsBuilder userAlbumListLink( final User user ) {
 		return userCardLink( user )
 			.userAlbumListLink( user );
+	}
+
+	private PageTitleData getUserBreadcrumbs( final User user, final String text ) {
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( text )
+			.build();
+
+		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
 	}
 }

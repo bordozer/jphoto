@@ -28,7 +28,7 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUsersFilteredByMembershipTypeBreadcrumbs( final UserMembershipType membershipType );
 
-	PageTitleData getUserTeamMemberListData( final User user );
+	PageTitleData getUserTeamMemberListBreadcrumbs( final User user );
 
 	PageTitleData getUserPrivateMessagesListBreadcrumbs( final User user, final User withUser );
 
@@ -52,15 +52,11 @@ public interface BreadcrumbsUserService {
 
 	PageTitleData getUserIsAddedInFavoriteMembersByBreadcrumbs( final User user );
 
-	String getUserRootTranslated();
+	PageTitleData getUserWrongLoginBreadcrumbs();
 
-	PageTitleData getUserData( final User user, final String tran );
+	PageTitleData getChangeUserPasswordBreadcrumbs( final User user );
 
-	PageTitleData getUserWrongLogin();
-
-	PageTitleData getChangeUserPasswordData( final User user );
-
-	PageTitleData getUserNotificationsControlData( final User user );
+	PageTitleData getUserNotificationsControlBreadcrumbs( final User user );
 
 	PageTitleData getPhotosOfUserFavoriteMembersBreadcrumb( final User user );
 

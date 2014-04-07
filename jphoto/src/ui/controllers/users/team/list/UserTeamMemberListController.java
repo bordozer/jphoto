@@ -70,7 +70,7 @@ public class UserTeamMemberListController {
 		}
 		model.setUserTeamMemberPhotosQtyMap( userTeamMemberPhotosQtyMap );
 
-		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberListData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberListBreadcrumbs( user ) );
 
 		return VIEW;
 	}

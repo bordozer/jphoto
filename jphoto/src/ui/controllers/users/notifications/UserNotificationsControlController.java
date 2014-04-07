@@ -68,7 +68,7 @@ public class UserNotificationsControlController {
 
 		final User user = model.getUser();
 
-		model.setPageTitleData( breadcrumbsUserService.getUserNotificationsControlData( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getUserNotificationsControlBreadcrumbs( user ) );
 
 		return VIEW;
 	}
