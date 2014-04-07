@@ -194,10 +194,6 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
-	private String getPhotoRootTranslated() {
-		return translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, EnvironmentContext.getLanguage() );
-	}
-
 	@Override
 	public PageTitleData getPhotoGroupOperationBreadcrumbs( final PhotoGroupOperationType groupOperationType ) {
 		final String rootTranslated = getPhotoRootTranslated();
@@ -230,6 +226,11 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), text );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
+	}
+
+	@Deprecated
+	private String getPhotoRootTranslated() {
+		return translatorService.translate( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, EnvironmentContext.getLanguage() );
 	}
 
 	private String pageTitle() {
