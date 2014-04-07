@@ -60,7 +60,7 @@ public class AnonymousDaysAdminController {
 	}
 
 	private void initModel( final AnonymousDaysAdminModel model, final int year ) {
-		model.setPageTitleData( breadcrumbsAdminService.getAnonymousDaysData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAnonymousDaysBreadcrumbs() );
 		model.setAnonymousDays( anonymousDaysService.loadAll() );
 		model.setAnonymousPeriod( configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_PERIOD ) );
 		model.setAnonymousDaysForYear( year );

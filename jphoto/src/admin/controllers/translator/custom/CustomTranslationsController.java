@@ -67,7 +67,7 @@ public class CustomTranslationsController {
 		model.setTranslationEntryType( TranslationEntryType.GENRE );
 		model.setRedirectToPrefix( "genres" );
 
-		model.setPageTitleData( breadcrumbsAdminService.getGenresTranslationsTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getGenresTranslationsBreadcrumbs() );
 
 		final List<Genre> entries = genreService.loadAll();
 
@@ -90,7 +90,7 @@ public class CustomTranslationsController {
 		model.setTranslationEntryType( TranslationEntryType.VOTING_CATEGORY );
 		model.setRedirectToPrefix( "votingcategories" );
 
-		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoriesTranslationsTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoriesTranslationsBreadcrumbs() );
 
 		final List<PhotoVotingCategory> entries = votingCategoryService.loadAll();
 

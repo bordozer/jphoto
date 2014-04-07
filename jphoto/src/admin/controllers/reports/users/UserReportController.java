@@ -35,7 +35,7 @@ public class UserReportController {
 	public UserReportModel prepareModel() {
 		final UserReportModel model = new UserReportModel();
 
-		model.setPageTitleData( breadcrumbsAdminService.getUsersReportTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getUsersReportBreadcrumbs() );
 
 		return model;
 	}

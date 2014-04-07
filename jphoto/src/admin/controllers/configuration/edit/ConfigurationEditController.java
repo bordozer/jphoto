@@ -84,7 +84,7 @@ public class ConfigurationEditController {
 
 		model.setConfigurationMap( configurationService.getSystemConfigurationParametersMap( systemConfiguration ) );
 
-		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminConfigurationNew() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminConfigurationNewBreadcrumbs() );
 
 		model.setRankInGenrePointsMap( getUserGenreRankPointsMap( model ) );
 
@@ -187,9 +187,9 @@ public class ConfigurationEditController {
 	private PageTitleData getPageData( final ConfigurationEditModel model, final ConfigurationTab configurationTab ) {
 		final PageTitleData pageTitleData;
 		if ( configurationTab != null ) {
-			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditTabData( model.getSystemConfiguration().getId(), model.getSystemConfiguration(), configurationTab );
+			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditTabBreadcrumbs( model.getSystemConfiguration().getId(), model.getSystemConfiguration(), configurationTab );
 		} else {
-			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditData( model.getSystemConfiguration() );
+			pageTitleData = breadcrumbsAdminService.getAdminConfigurationEditDataBreadcrumbs( model.getSystemConfiguration() );
 		}
 		return pageTitleData;
 	}

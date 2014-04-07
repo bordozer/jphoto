@@ -45,7 +45,7 @@ public class VotingCategoryListController {
 
 		final List<PhotoVotingCategory> list = votingCategoryService.loadAll();
 		model.setPhotoVotingCategories( list );
-		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryList() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryListBreadcrumbs() );
 
 		return VIEW;
 	}

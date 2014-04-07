@@ -67,7 +67,7 @@ public class ConfigurationTabsController {
 
 		model.setRankInGenrePointsMap( userRankService.getUserGenreRankPointsMap( model.getSystemConfiguration() ) );
 
-		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoData( systemConfiguration );
+		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoBreadcrumbs( systemConfiguration );
 		model.getPageModel().setPageTitleData( pageTitleData );
 
 		return VIEW;
@@ -93,7 +93,7 @@ public class ConfigurationTabsController {
 
 		model.setRankInGenrePointsMap( userRankService.getUserGenreRankPointsMap( model.getSystemConfiguration() ) );
 
-		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoTbData( systemConfiguration, configurationTab.getName() );
+		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoTbBreadcrumbs( systemConfiguration, configurationTab.getName() );
 		model.getPageModel().setPageTitleData( pageTitleData );
 
 		return VIEW;

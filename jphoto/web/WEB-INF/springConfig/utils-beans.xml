@@ -21,7 +21,7 @@
 	<bean id="breadcrumbsPhotoGalleryService" class="ui.services.breadcrumbs.BreadcrumbsPhotoGalleryServiceImpl"/>
 	<bean id="breadcrumbsPhotoService" class="ui.services.breadcrumbs.BreadcrumbsPhotoServiceImpl"/>
 	<bean id="breadcrumbsUserService" class="ui.services.breadcrumbs.BreadcrumbsUserServiceImpl"/>
-	<bean id="breadcrumbsGenreService" class="ui.services.breadcrumbs.BreadcrumbsGenreServiceImpl"/>
+	<bean id="breadcrumbsAdminPhotoCategoriesService" class="ui.services.breadcrumbs.BreadcrumbsAdminPhotoCategoriesServiceImpl"/>
 
 	<bean id="urlUtilsService" class="core.services.utils.UrlUtilsServiceImpl"/>
 

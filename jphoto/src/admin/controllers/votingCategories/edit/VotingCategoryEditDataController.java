@@ -61,7 +61,7 @@ public class VotingCategoryEditDataController {
 		model.clear();
 
 		model.setNew( true );
-		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryNewData() );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryNewBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -74,7 +74,7 @@ public class VotingCategoryEditDataController {
 
 		initModelFromObject( model, photoVotingCategory );
 
-		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryEditData( photoVotingCategory ) );
+		model.setPageTitleData( breadcrumbsAdminService.getVotingCategoryEditDataBreadcrumbs( photoVotingCategory ) );
 
 		return VIEW;
 	}

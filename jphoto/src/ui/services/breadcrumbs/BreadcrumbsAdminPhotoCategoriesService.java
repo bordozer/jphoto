@@ -3,7 +3,7 @@ package ui.services.breadcrumbs;
 import core.general.genre.Genre;
 import elements.PageTitleData;
 
-public interface BreadcrumbsGenreService {
+public interface BreadcrumbsAdminPhotoCategoriesService {
 
 	PageTitleData getGenreListBreadcrumbs();
 

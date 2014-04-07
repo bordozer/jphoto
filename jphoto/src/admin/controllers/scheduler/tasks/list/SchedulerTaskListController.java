@@ -61,7 +61,7 @@ public class SchedulerTaskListController {
 	public SchedulerTaskListModel prepareModel() throws SchedulerException {
 		final SchedulerTaskListModel model = new SchedulerTaskListModel();
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerTaskListData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerTaskListBreadcrumbs() );
 
 		setScheduledTaskData( model );
 

@@ -79,7 +79,7 @@ public abstract class AbstractJobController {
 		model.setJobName( job.getJobType().getName() );
 		model.setActive( true );
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsDataTemplate( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsDataTemplateBreadcrumbs( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
 
 		addUsersAndPhotosInfo( model );
 
@@ -107,7 +107,7 @@ public abstract class AbstractJobController {
 
 		final AbstractJob job = model.getJob();
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( job.getJobName() ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsBreadcrumbs( job.getJobName() ) );
 
 		initJobFromModel( model );
 
@@ -137,7 +137,7 @@ public abstract class AbstractJobController {
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 
 		if ( historyEntry == null ) {
-			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( "Job history entry not found" ) );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsBreadcrumbs( "Job history entry not found" ) );
 			return getView( JOB_HISTORY_ENTRY_NOT_FOUND_VIEW, model ).addObject( "jobExecutionHistoryEntryId", jobId );
 		}
 
@@ -164,23 +164,11 @@ public abstract class AbstractJobController {
 		final JobExecutionStatus jobExecutionStatus = historyEntry.getJobExecutionStatus();
 		if ( jobExecutionStatus.isNotActive() ) {
 
-			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "The job execution finished", getLanguage() ) ) );
-			/*if ( jobExecutionStatus == JobExecutionStatus.DONE ) {
-				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Finished successfully" ) ) );
-			}
-
-			if ( jobExecutionStatus == JobExecutionStatus.STOPPED_BY_USER ) {
-				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Has been stopped by user" ) ) );
-			}
-
-			if ( jobExecutionStatus == JobExecutionStatus.ERROR ) {
-				model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( "Finished with error" ) ) );
-			}*/
-
+			model.setPageTitleData( breadcrumbsAdminService.getAdminJobsBreadcrumbs( translatorService.translate( "The job execution finished", getLanguage() ) ) );
 			return getFinishView( model );
 		}
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsData( translatorService.translate( historyEntry.getSavedJobType().getName(), getLanguage() ) ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsBreadcrumbs( translatorService.translate( historyEntry.getSavedJobType().getName(), getLanguage() ) ) );
 		model.setJob( recreatedFromHistoryEntryJob );
 
 		return getView( PROGRESS_VIEW, model );
@@ -202,7 +190,7 @@ public abstract class AbstractJobController {
 		model.setJobName( savedJob.getName() );
 		model.setActive( savedJob.isActive() );
 
-		model.setPageTitleData( breadcrumbsAdminService.getJobEditData( savedJob ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobEditBreadcrumbs( savedJob ) );
 
 		addUsersAndPhotosInfo( model );
 

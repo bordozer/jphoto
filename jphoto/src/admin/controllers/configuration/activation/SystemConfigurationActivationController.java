@@ -50,7 +50,7 @@ public class SystemConfigurationActivationController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String edit( final @ModelAttribute( MODEL_NAME ) SystemConfigurationActivationModel model ) {
-		model.getPageModel().setPageTitleData( breadcrumbsAdminService.setActiveConfigurationData() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.setActiveConfigurationBreadcrumbs() );
 
 		return EDIT_VIEW;
 	}

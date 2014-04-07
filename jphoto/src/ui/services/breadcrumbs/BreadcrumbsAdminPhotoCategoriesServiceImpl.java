@@ -4,14 +4,13 @@ import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.services.system.Services;
 import core.services.translator.Language;
-import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 
-public class BreadcrumbsGenreServiceImpl implements BreadcrumbsGenreService {
+public class BreadcrumbsAdminPhotoCategoriesServiceImpl implements BreadcrumbsAdminPhotoCategoriesService {
 
 	public static final String BREADCRUMBS_ADMINISTRATION = "Breadcrumbs: Administration";
 

@@ -109,7 +109,7 @@ public class SavedJobListController {
 		model.setTabJobInfosMap( loaderFactory.getTabJobInfos() );
 
 		model.setJobListTab( JobListTab.TEMPLATES );
-		model.setPageTitleData( breadcrumbsAdminService.getJobListData( JobListTab.TEMPLATES ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListBreadcrumbs( JobListTab.TEMPLATES ) );
 
 		return JOB_TEMPLATE_VIEW;
 	}
@@ -125,7 +125,7 @@ public class SavedJobListController {
 
 		prepareJobs( model, jobListTab, savedJobs );
 
-		model.setPageTitleData( breadcrumbsAdminService.getJobListData( jobListTab ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListBreadcrumbs( jobListTab ) );
 
 		return SAVED_JOBS_VIEW;
 	}
@@ -145,7 +145,7 @@ public class SavedJobListController {
 
 		prepareJobs( model, jobListTab, savedJobs );
 
-		model.setPageTitleData( breadcrumbsAdminService.getJobListFilteredByTypeData( jobListTab, savedJobType ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListFilteredByTypeBreadcrumbs( jobListTab, savedJobType ) );
 
 		return SAVED_JOBS_VIEW;
 	}
@@ -230,7 +230,7 @@ public class SavedJobListController {
 		model.setTabJobInfosMap( factory.getTabJobInfos() );
 
 		model.setJobListTab( JobListTab.JOB_EXECUTION_HISTORY );
-		model.setPageTitleData( breadcrumbsAdminService.getJobListData( JobListTab.JOB_EXECUTION_HISTORY ) );
+		model.setPageTitleData( breadcrumbsAdminService.getJobListBreadcrumbs( JobListTab.JOB_EXECUTION_HISTORY ) );
 
 		model.setJobExecutionStatusIdFilter( jobExecutionStatusId );
 		model.setJobTypeIdFilter( jobTypeId );

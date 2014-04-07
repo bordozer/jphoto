@@ -11,59 +11,55 @@ import elements.PageTitleData;
 
 public interface BreadcrumbsAdminService {
 
-	PageTitleData getJobListData( JobListTab jobListTab );
+	PageTitleData getJobListBreadcrumbs( final JobListTab jobListTab );
 
-	PageTitleData getJobListFilteredByTypeData( JobListTab jobListTab, SavedJobType savedJobType );
+	PageTitleData getJobListFilteredByTypeBreadcrumbs( final JobListTab jobListTab, final SavedJobType savedJobType );
 
-	PageTitleData getJobEditData( SavedJob savedJob );
+	PageTitleData getJobEditBreadcrumbs( final SavedJob savedJob );
 
-	PageTitleData getJobNewData();
+	PageTitleData getAdminConfigurationNewBreadcrumbs();
 
-	PageTitleData getAdminConfigurationNew();
+	PageTitleData getAdminConfigurationInfoBreadcrumbs( final SystemConfiguration systemConfiguration );
 
-	PageTitleData getAdminConfigurationInfoData( SystemConfiguration systemConfiguration );
+	PageTitleData getAdminConfigurationInfoTbBreadcrumbs( final SystemConfiguration systemConfiguration, final String configTabName );
 
-	PageTitleData getAdminConfigurationInfoTbData( SystemConfiguration systemConfiguration, String configTabName );
+	PageTitleData getAdminSystemConfigurationListBreadcrumbs();
 
-	PageTitleData getAdminSystemConfigurationListData();
+	PageTitleData getAdminConfigurationEditTabBreadcrumbs( final int systemConfigurationId, final SystemConfiguration systemConfiguration, final ConfigurationTab configTab );
 
-	PageTitleData getAdminConfigurationEditTabData( int systemConfigurationId, SystemConfiguration systemConfiguration, ConfigurationTab configTab );
+	PageTitleData getAdminConfigurationEditDataBreadcrumbs( final SystemConfiguration systemConfiguration );
 
-	PageTitleData getAdminConfigurationEditData( SystemConfiguration systemConfiguration );
+	PageTitleData getAdminJobsBreadcrumbs( final String nerd );
 
-	PageTitleData getAdminJobsData( String nerd );
+	PageTitleData getAdminJobsDataTemplateBreadcrumbs( final String nerd );
 
-	PageTitleData getAdminJobsDataTemplate( String nerd );
+	PageTitleData getAdminSchedulerTaskListBreadcrumbs();
 
-	PageTitleData getAdminSchedulerTaskListData();
+	PageTitleData getAdminSchedulerNewBreadcrumbs();
 
-	PageTitleData getAdminSchedulerNewData();
+	PageTitleData getAdminSchedulerEditBreadcrumbs( final String scheduledTaskName );
 
-	PageTitleData getAdminSchedulerEditData( String scheduledTaskName );
+	PageTitleData getVotingCategoryListBreadcrumbs();
 
-	PageTitleData getVotingCategoryList();
+	PageTitleData getVotingCategoryNewBreadcrumbs();
 
-	PageTitleData getVotingCategoryNewData();
+	PageTitleData getVotingCategoryEditDataBreadcrumbs( final PhotoVotingCategory photoVotingCategory );
 
-	PageTitleData getVotingCategoryEditData( PhotoVotingCategory photoVotingCategory );
+	PageTitleData setActiveConfigurationBreadcrumbs();
 
-	String getAdminTranslatedRoot();
+	PageTitleData getUpgradeTasksListBreadcrumbs();
 
-	PageTitleData setActiveConfigurationData();
+	PageTitleData getUpgradeBreadcrumbs( final UpgradeState upgradeState, final int doneUpgradeTasks, final int totalUpgradeTasks, final int errors );
 
-	PageTitleData getUpgradeTasksListData();
+	PageTitleData getAnonymousDaysBreadcrumbs();
 
-	PageTitleData getUpgradeData( UpgradeState upgradeState, int doneUpgradeTasks, int totalUpgradeTasks, int errors );
+	PageTitleData getTranslatorBreadcrumbs();
 
-	PageTitleData getAnonymousDaysData();
+	PageTitleData getControlPanelTitleBreadcrumbs();
 
-	PageTitleData getTranslatorTitle();
+	PageTitleData getUsersReportBreadcrumbs();
 
-	PageTitleData getControlPanelTitleData();
+	PageTitleData getGenresTranslationsBreadcrumbs();
 
-	PageTitleData getUsersReportTitleData();
-
-	PageTitleData getGenresTranslationsTitleData();
-
-	PageTitleData getVotingCategoriesTranslationsTitleData();
+	PageTitleData getVotingCategoriesTranslationsBreadcrumbs();
 }

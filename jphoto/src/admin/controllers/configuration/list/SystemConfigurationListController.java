@@ -29,7 +29,7 @@ public class SystemConfigurationListController {
 
 		model.setSystemConfigurations( configurationService.getAllSystemConfigurations() );
 
-		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminSystemConfigurationListData() );
+		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminSystemConfigurationListBreadcrumbs() );
 
 		return VIEW;
 	}

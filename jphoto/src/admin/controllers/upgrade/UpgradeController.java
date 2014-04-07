@@ -87,7 +87,7 @@ public class UpgradeController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showForm( final @ModelAttribute( MODEL_NAME ) UpgradeModel model ) {
 
-		model.setPageTitleData( breadcrumbsAdminService.getUpgradeTasksListData() );
+		model.setPageTitleData( breadcrumbsAdminService.getUpgradeTasksListBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -124,7 +124,7 @@ public class UpgradeController {
 		final int done = upgradeMonitor.getDoneUpgradeTasks();
 		final int error = upgradeMonitor.getErrorUpgradeTasks();
 
-		model.setPageTitleData( breadcrumbsAdminService.getUpgradeData( upgradeMonitor.getUpgradeState(), done, totalUpgradeTasks, error ) );
+		model.setPageTitleData( breadcrumbsAdminService.getUpgradeBreadcrumbs( upgradeMonitor.getUpgradeState(), done, totalUpgradeTasks, error ) );
 
 		return VIEW_PROGRESS;
 	}

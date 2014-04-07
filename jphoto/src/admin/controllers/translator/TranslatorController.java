@@ -44,7 +44,7 @@ public class TranslatorController {
 
 		model.setTranslationMode( TranslationMode.TRANSLATED );
 
-		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -60,7 +60,7 @@ public class TranslatorController {
 		model.setFilterByLetter( letter );
 		model.setTranslationMode( TranslationMode.TRANSLATED );
 
-		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -77,7 +77,7 @@ public class TranslatorController {
 
 		model.setUrlPrefix( "untranslated" );
 
-		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -95,7 +95,7 @@ public class TranslatorController {
 
 		model.setUrlPrefix( "untranslated" );
 
-		model.setPageTitleData( breadcrumbsAdminService.getTranslatorTitle() );
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
 
 		return VIEW;
 	}

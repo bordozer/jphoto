@@ -93,7 +93,7 @@ public class SchedulerTaskEditController {
 		model.setSelectedTaskType( initTaskType );
 		model.setPeriodicalTaskHours( SchedulerTaskEditModel.HOURS );
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewData() );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewBreadcrumbs() );
 
 		return VIEW;
 	}
@@ -118,7 +118,7 @@ public class SchedulerTaskEditController {
 		final Map<SchedulerTaskProperty, CommonProperty> parametersMap = schedulerTask.getExecutionTask().getParametersMap();
 		initModelFromExecutionTaskParameterMap( model, parametersMap );
 
-		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
+		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditBreadcrumbs( model.getSchedulerTaskName() ) );
 
 		return VIEW;
 	}
@@ -135,9 +135,9 @@ public class SchedulerTaskEditController {
 	public String schedulerTaskSubmit( @Valid final @ModelAttribute( MODEL_NAME ) SchedulerTaskEditModel model, final BindingResult result ) throws SchedulerException {
 
 		if ( model.getSchedulerTaskId() == 0 ) {
-			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewData() );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewBreadcrumbs() );
 		} else {
-			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditData( model.getSchedulerTaskName() ) );
+			model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerEditBreadcrumbs( model.getSchedulerTaskName() ) );
 		}
 
 		model.setSelectedTaskType( ExecutionTaskType.getById( model.getExecutionTaskTypeId() ) );

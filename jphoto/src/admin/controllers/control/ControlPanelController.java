@@ -61,7 +61,7 @@ public class ControlPanelController {
 	public ControlPanelModel prepareModel() {
 		final ControlPanelModel model = new ControlPanelModel();
 
-		model.setPageTitleData( breadcrumbsAdminService.getControlPanelTitleData() );
+		model.setPageTitleData( breadcrumbsAdminService.getControlPanelTitleBreadcrumbs() );
 
 		return model;
 	}
