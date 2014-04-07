@@ -16,16 +16,7 @@ public class BreadcrumbsGenreServiceImpl implements BreadcrumbsGenreService {
 	public static final String BREADCRUMBS_ADMINISTRATION = "Breadcrumbs: Administration";
 
 	@Autowired
-	private PageTitleUtilsService pageTitleUtilsService;
-
-	@Autowired
-	private BreadcrumbsAdminService breadcrumbsAdminService;
-
-	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
-	
-	@Autowired
-	private TranslatorService translatorService;
 
 	@Autowired
 	private Services services;
