@@ -1,11 +1,14 @@
 package ui.services.breadcrumbs;
 
 import core.context.EnvironmentContext;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.system.ConfigurationService;
+import core.services.system.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -14,6 +17,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.breadcrumbs.items.StringBreadcrumb;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 import utils.StringUtilities;
 
@@ -23,6 +27,7 @@ import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
 public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalleryService {
 
+	public static final String PHOTO_GALLERY_THE_BEST = "Breadcrumbs: The best";
 	@Autowired
 	private PageTitleUtilsService pageTitleUtilsService;
 	
@@ -36,99 +41,95 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	private TranslatorService translatorService;
 
 	@Autowired
+	private ConfigurationService configurationService;
+
+	@Autowired
 	private Services services;
 
 	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {
 
-		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services );
-
-		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
-
 		final String breadcrumbs = portalPage( services )
-			.add( breadcrumb )
+			.add( new TranslatableStringBreadcrumb( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services ) )
 			.build();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getAbsolutelyBestPhotosBreadcrumbs() {
-		final PageTitleData titleData = getPhotoGalleryBreadcrumbs();
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() )
-			, translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = photoGalleryLink()
+			.translatableString( MenuService.MAIN_MENU_ABSOLUTE_BEST )
+			.build();
 
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByGenreBreadcrumbs( final Genre genre ) {
-		final String rootTranslated = getPhotoRootTranslated();
+		final String breadcrumbs = photoGalleryLink()
+			.string( getGenreNameTranslated( genre ) )
+			.build();
 
-		final String genreName = translatorService.translateGenre( genre, getLanguage() );
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, genreName );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), genreName );
-
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByGenreBestBreadcrumbs( final Genre genre ) {
-		final PageTitleData titleData = getPhotosByGenreBreadcrumbs( genre );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = photoGalleryLink()
+			.photosByGenre( genre )
+			.string( getTheBestForPeriodBreadcrumb() )
+			.build();
 
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByUserBreadcrumbs( final User user ) {
-		final String rootTranslated = getPhotoRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated );
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
-			entityLinkUtilsService.getPhotosRootLink( language )
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, translatorService.translate( "Breadcrumbs: User's photos", language )
-		);
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( EntityLinkUtilsService.ALL_USER_S_PHOTOS )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByUserBestBreadcrumbs( final User user ) {
-		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
+		final String breadcrumbs = userCardLink( user )
+			.photosByUser( user )
+			.translatableString( PHOTO_GALLERY_THE_BEST )
+			.build();
 
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), translatorService.translate( "The Best", language ) );
-
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByUserAndGenreBreadcrumbs( final User user, final Genre genre ) {
-		final String rootTranslated = getPhotoRootTranslated();
 
-		final String genreName = translatorService.translateGenre( genre, getLanguage() );
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, user.getName(), rootTranslated, genreName );
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), genreName );
+		final String breadcrumbs = photoGalleryLink()
+			.photosByGenre( genre )
+			.userCardLink( user )
+			.photosByUser( user )
+			.string( getGenreNameTranslated( genre ) )
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByUserAndGenreBestBreadcrumbs( final User user, final Genre genre ) {
-		final PageTitleData titleData = getPhotosByUserAndGenreBreadcrumbs( user, genre );
+		final String breadcrumbs = photoGalleryLink()
+			.photosByGenre( genre )
+			.userCardLink( user )
+			.photosByUser( user )
+			.photosByUserAndGenre( user, genre )
+			.translatableString( PHOTO_GALLERY_THE_BEST )
+			.build();
 
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() ), entityLinkUtilsService.getUserCardLink( user, language ), entityLinkUtilsService.getPhotosByUserLink( user, language ), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, getLanguage() ), translatorService.translate( "The Best", language ) );
-
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
@@ -235,7 +236,44 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
 
+	private String pageTitle() {
+		return BreadcrumbsBuilder.pageTitle( new TranslatableStringBreadcrumb( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services ), services ).build();
+	}
+
+	private String pageHeader() {
+		return BreadcrumbsBuilder.pageHeader( new TranslatableStringBreadcrumb( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services ), services ).build();
+	}
+
+	private String pageTitle( final User user ) {
+		return BreadcrumbsBuilder.pageTitle( new StringBreadcrumb( user.getNameEscaped(), services ), services ).build();
+	}
+
+	private String pageHeader( final User user ) {
+		return BreadcrumbsBuilder.pageHeader( new StringBreadcrumb( user.getNameEscaped(), services ), services ).build();
+	}
+
 	private Language getLanguage() {
 		return EnvironmentContext.getCurrentUser().getLanguage();
+	}
+
+	private BreadcrumbsBuilder photoGalleryLink() {
+		return portalPage( services ).photoGalleryLink();
+	}
+
+	private String getTheBestForPeriodBreadcrumb() {
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
+		final Date dateTo = dateUtilsService.getCurrentDate();
+
+		return translatorService.translate( "Breadcrumbs: The best for period $1 - $2", getLanguage(), dateUtilsService.formatDate( dateFrom ), dateUtilsService.formatDate( dateTo ) );
+	}
+
+	private BreadcrumbsBuilder userCardLink( final User user ) {
+		return photoGalleryLink()
+			.userCardLink( user );
+	}
+
+	private String getGenreNameTranslated( final Genre genre ) {
+		return translatorService.translateGenre( genre, getLanguage() );
 	}
 }

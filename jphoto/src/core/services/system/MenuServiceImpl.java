@@ -519,7 +519,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem photosAbsoluteBest() {
-		final String caption = translatorService.translate( "Main menu: Absolute best", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_ABSOLUTE_BEST, getLanguage() );
 		final String link = urlUtilsService.getPhotosAbsoluteBestURL();
 		return new MenuItem( caption, link );
 	}

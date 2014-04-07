@@ -63,7 +63,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getPhotosByUserLink( user.getId() )
 			, translatorService.translate( "$1: all photos", language, StringUtilities.escapeHtml( user.getName() ) )
-			, translatorService.translate( "All user's photos", language )
+			, translatorService.translate( ALL_USER_S_PHOTOS, language )
 		);
 	}
 

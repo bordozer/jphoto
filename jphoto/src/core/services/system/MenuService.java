@@ -16,6 +16,7 @@ public interface MenuService {
 	String MAIN_MENU_MY_AVATAR = "Main menu: My Avatar";
 	String MAIN_MENU_PRIVATE_MESSAGES_RECEIVED = PrivateMessageType.USER_PRIVATE_MESSAGE_IN.getName();
 	String MAIN_MENU_PRIVATE_MESSAGES_SENT = PrivateMessageType.USER_PRIVATE_MESSAGE_OUT.getName();
+	String MAIN_MENU_ABSOLUTE_BEST = "Main menu: Absolute best";
 
 	Map<MenuItem, List<MenuItem>> getMenuElements( final User user );
 }
