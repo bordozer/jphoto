@@ -321,14 +321,19 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	}
 
 	@Override
-	public PageTitleData getUserWrongLogin() { // TODO: move to CommonBreadcrumbsService
-		final String rootTranslated = getUserRootTranslated();
-		final String tran = translatorService.translate( "Can't login", EnvironmentContext.getLanguage() );
+	public PageTitleData getUserWrongLogin() {
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, tran );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getUsersRootLink( EnvironmentContext.getLanguage() ), tran );
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( "System login: Authorization", services );
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String breadcrumbs = portalPage( services )
+			.add( breadcrumb )
+			.translatableString( "System login: Wrong user name or password" )
+			.build();
+
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
