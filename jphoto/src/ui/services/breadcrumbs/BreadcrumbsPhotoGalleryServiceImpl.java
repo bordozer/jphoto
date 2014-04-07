@@ -6,7 +6,6 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -15,8 +14,7 @@ import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
-import ui.services.breadcrumbs.items.PhotoGalleryBreadcrumb;
-import ui.services.breadcrumbs.items.PortalPageBreadcrumb;
+import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 import utils.StringUtilities;
 
 import java.util.Date;
@@ -43,11 +41,13 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	@Override
 	public PageTitleData getPhotoGalleryBreadcrumbs() {
 
-		final String title = BreadcrumbsBuilder.pageTitle( new PhotoGalleryBreadcrumb( services ), services ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( new PortalPageBreadcrumb( services ), services ).build();
+		final TranslatableStringBreadcrumb breadcrumb = new TranslatableStringBreadcrumb( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services );
+
+		final String title = BreadcrumbsBuilder.pageTitle( breadcrumb, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( breadcrumb, services ).build();
 
 		final String breadcrumbs = portalPage( services )
-			.photoGallery()
+			.add( breadcrumb )
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
@@ -57,7 +57,9 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	public PageTitleData getAbsolutelyBestPhotosBreadcrumbs() {
 		final PageTitleData titleData = getPhotoGalleryBreadcrumbs();
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString(
+			entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() )
+			, translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
 
 		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
 	}

@@ -73,11 +73,6 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
-	public BreadcrumbsBuilder photoGallery() {
-		breadcrumbs.add( new PhotoGalleryBreadcrumb( services ) );
-		return this;
-	}
-
 	public BreadcrumbsBuilder photoGalleryLink() {
 		breadcrumbs.add( new PhotoGalleryLinkBreadcrumb( services ) );
 		return this;
