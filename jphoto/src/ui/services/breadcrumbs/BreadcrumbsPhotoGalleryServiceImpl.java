@@ -80,7 +80,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 		final String breadcrumbs = photoGalleryLink()
 			.photosByGenre( genre )
-			.string( getTheBestForPeriodBreadcrumb() )
+			.string( getForPeriodBreadcrumb( "Breadcrumbs: The best for period $1 - $2" ) ) // TODO: show info that there are the best for period photos
 			.build();
 
 		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
@@ -155,24 +155,23 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Override
 	public PageTitleData getPhotosByPeriodBreadcrumbs( final Date dateFrom, final Date dateTo ) {
-		final String rootTranslated = getPhotoRootTranslated();
-		final String fDateFrom = dateUtilsService.formatDate( dateFrom );
-		final String fDateTo = dateUtilsService.formatDate( dateTo );
-		final String dateRange = dateFrom.getTime() != dateTo.getTime() ? String.format( "%s - %s", fDateFrom, fDateTo ) : fDateTo;
 
-		final String title = pageTitleUtilsService.getTitleDataString( rootTranslated, dateRange );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), dateRange );
+		final String breadcrumbs = photoGalleryLink()
+			.string( String.format( "%s - %s", dateUtilsService.formatDate( dateFrom ), dateUtilsService.formatDate( dateTo ) ) ) // TODO: show info that there are uploaded in period photos
+			.build();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByPeriodBestBreadcrumbs( final Date dateFrom, final Date dateTo ) {
-		final PageTitleData titleData = getPhotosByPeriodBreadcrumbs( dateFrom, dateTo );
 
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( EnvironmentContext.getLanguage() ), entityLinkUtilsService.getPhotosByPeriod( dateFrom, dateTo ), translatorService.translate( "The Best", EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = photoGalleryLink()
+			.string( entityLinkUtilsService.getPhotosByPeriod( dateFrom, dateTo ) )
+			.string( getForPeriodBreadcrumb( PHOTO_GALLERY_THE_BEST ) )
+			.build();
 
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
 	}
 
 	@Override
@@ -258,12 +257,12 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 		return portalPage( services ).photoGalleryLink();
 	}
 
-	private String getTheBestForPeriodBreadcrumb() {
+	private String getForPeriodBreadcrumb( final String nerd ) {
 		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
 		final Date dateTo = dateUtilsService.getCurrentDate();
 
-		return translatorService.translate( "Breadcrumbs: The best for period $1 - $2", getLanguage(), dateUtilsService.formatDate( dateFrom ), dateUtilsService.formatDate( dateTo ) );
+		return translatorService.translate( nerd, getLanguage(), dateUtilsService.formatDate( dateFrom ), dateUtilsService.formatDate( dateTo ) );
 	}
 
 	private BreadcrumbsBuilder userCardLink( final User user ) {

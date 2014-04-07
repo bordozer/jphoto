@@ -128,6 +128,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Breadcrumbs: The best for period $1 - $2</nerd>
+		<ru><![CDATA[Лучшие работы за период $1 - $2]]></ru>
+	</translation>
+
+	<!--<translation>
+		<nerd>Breadcrumbs: The photos uploaded for period $1 - $2</nerd>
+		<ru><![CDATA[Работы, загруженные за период $1 - $2]]></ru>
+	</translation>-->
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
