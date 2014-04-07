@@ -3,7 +3,6 @@ package ui.services.breadcrumbs.items;
 import core.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
@@ -183,8 +182,8 @@ public class BreadcrumbsBuilder {
 		return photosByUserAndGenre( services.getUserService().load( userId ), getGenre( genreId ) );
 	}
 
-	public BreadcrumbsBuilder photoAppraisalPhotosLink( final User user ) {
-		breadcrumbs.add( new PhotoAppraisalPhotosLinkBreadcrumb( user, services ) );
+	public BreadcrumbsBuilder photoAppraisedPhotosLink( final User user ) {
+		breadcrumbs.add( new PhotoAppraisedPhotosLinkBreadcrumb( user, services ) );
 		return this;
 	}
 

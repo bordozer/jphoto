@@ -4,11 +4,11 @@ import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
 
-public class PhotoAppraisalPhotosLinkBreadcrumb extends AbstractBreadcrumb {
+public class PhotoAppraisedPhotosLinkBreadcrumb extends AbstractBreadcrumb {
 
 	private User user;
 
-	public PhotoAppraisalPhotosLinkBreadcrumb( final User user, final Services services ) {
+	public PhotoAppraisedPhotosLinkBreadcrumb( final User user, final Services services ) {
 		super( services );
 		this.user = user;
 	}

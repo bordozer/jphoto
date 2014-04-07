@@ -146,7 +146,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	public PageTitleData getPhotosByUserByVotingCategoryBreadcrumbs( final User user, final PhotoVotingCategory votingCategory ) {
 
 		final String breadcrumbs = userCardLink( user )
-			.photoAppraisalPhotosLink( user )
+			.photoAppraisedPhotosLink( user )
 			.string( translatorService.translatePhotoVotingCategory( votingCategory, getLanguage() ) )
 			.build();
 
