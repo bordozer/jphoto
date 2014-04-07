@@ -24,10 +24,10 @@
 <c:if test="${showSummary}">
 	<div class="floatleft pagingsummary" style="margin-bottom: 20px; margin-left: 20px;">
 
-		${eco:translate('Items')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Pages')}: ${totalPages} ${delimeter}
+		${eco:translate('Paging: Items total')}: ${pagingModel.totalItems} ${delimeter} / ${delimeter} ${eco:translate('Paging: Pages total')}: ${totalPages} ${delimeter}
 
 		<c:if test="${pagingModel.totalItems > 0}">
-			/ ${delimeter} ${eco:translate('Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
+			/ ${delimeter} ${eco:translate('Paging: Items on page')}: ${pagingModel.itemsOnPage} ${delimeter}
 		</c:if>
 
 	</div>
@@ -41,7 +41,7 @@
 			<span class="page selectedPage block-border">${pageItem.number}</span>
 		</c:if>
 
-		<c:set var="pageItemTitle" value="${eco:translate1('Page $1', pageItem.number)}"/>
+		<c:set var="pageItemTitle" value="${eco:translate1('Paging: Page $1', pageItem.number)}"/>
 
 		<c:if test="${currentPage != pageItem.number}">
 

@@ -35,7 +35,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "There is not enough photos in category '$1' to have a rank", getLanguage(), getGenreName( genre, translatorService ) );
+				return translatorService.translate( "UserRankIcon: There is not enough photos in category '$1' to have a rank", getLanguage(), getGenreName( genre, translatorService ) );
 			}
 		};
 	}
@@ -50,7 +50,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Zero rank in category '$1'", getLanguage(), getGenreName( genre, translatorService ) );
+				return translatorService.translate( "UserRankIcon: Zero rank in category '$1'", getLanguage(), getGenreName( genre, translatorService ) );
 			}
 		};
 	}
@@ -65,7 +65,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
+				return translatorService.translate( "UserRankIcon: Rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -79,7 +79,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Negative rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
+				return translatorService.translate( "UserRankIcon: Negative rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -93,7 +93,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
+				return translatorService.translate( "UserRankIcon: Rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}
@@ -107,7 +107,7 @@ public abstract class AbstractUserRankIcon {
 
 			@Override
 			public String getTitle() {
-				return translatorService.translate( "Negative rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
+				return translatorService.translate( "UserRankIcon: Negative rank in category '$1' : $2", getLanguage(), getGenreName( genre, translatorService ), String.valueOf( rank ) );
 			}
 		};
 	}

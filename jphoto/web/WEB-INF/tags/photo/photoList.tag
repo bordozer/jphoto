@@ -178,7 +178,7 @@
 				</c:forEach>
 			</select>
 
-			<html:submitButton id="ok" caption_t="Submit" onclick="return submitForm();" />
+			<html:submitButton id="ok" caption_t="Photo list: Do group operations" onclick="return submitForm();" />
 		</div>
 
 		<script type="text/javascript">
