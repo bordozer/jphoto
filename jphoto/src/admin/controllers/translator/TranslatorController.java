@@ -15,6 +15,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Maps.newTreeMap;
 
 @Controller
 @RequestMapping( "translator" )
@@ -37,7 +38,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String getTranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<NerdKey, TranslationData> translationsMap = translatorService.getTranslationsMap();
+		final Map<NerdKey, TranslationData> translationsMap = getTranslatedSortedMap();
 		model.setLetters( getLetters( translationsMap ) );
 		model.setTranslationsMap( translationsMap );
 
@@ -51,7 +52,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{letter}/" )
 	public String getTranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<NerdKey, TranslationData> translatedMap = translatorService.getTranslationsMap();
+		final Map<NerdKey, TranslationData> translatedMap = getTranslatedSortedMap();
 
 		model.setLetters( getLetters( translatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( translatedMap, letter ) );
@@ -67,7 +68,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/" )
 	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<NerdKey, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
+		final Map<NerdKey, TranslationData> untranslatedMap = getUntranslatedSortedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( untranslatedMap );
@@ -84,7 +85,7 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{letter}/" )
 	public String getUntranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
 
-		final Map<NerdKey, TranslationData> untranslatedMap = translatorService.getUntranslatedMap();
+		final Map<NerdKey, TranslationData> untranslatedMap = getUntranslatedSortedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( untranslatedMap, letter ) );
@@ -102,6 +103,27 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
 	public void reloadTranslationsAjax() throws DocumentException {
 		translatorService.reloadTranslations();
+	}
+
+	private Map<NerdKey, TranslationData> getTranslatedSortedMap() {
+		return getSortedMap( translatorService.getTranslationsMap() );
+	}
+
+	private Map<NerdKey, TranslationData> getUntranslatedSortedMap() {
+		return getSortedMap( translatorService.getUntranslatedMap() );
+	}
+
+	private Map<NerdKey, TranslationData> getSortedMap( final Map<NerdKey, TranslationData> untranslatedMap ) {
+		final TreeMap<NerdKey, TranslationData> sortedMap = new TreeMap<NerdKey, TranslationData>( new Comparator<NerdKey>() {
+			@Override
+			public int compare( final NerdKey o1, final NerdKey o2 ) {
+				return o1.getNerd().compareTo( o2.getNerd() );
+			}
+		} );
+
+		sortedMap.putAll( untranslatedMap );
+
+		return sortedMap;
 	}
 
 	private Map<NerdKey, TranslationData> filterByFirstLetter( final Map<NerdKey, TranslationData> translationsMap, final String letter ) {
