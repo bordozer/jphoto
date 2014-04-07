@@ -18,9 +18,12 @@ import java.util.Date;
 public interface EntityLinkUtilsService {
 
 	String BEAN_NAME = "entityLinkUtilsService";
+
+	String ALL_USER_S_PHOTOS = "Breadcrumbs: All user's photos";
+	String BREADCRUMBS_APPRAISED_PHOTOS = "Breadcrumbs: Appraised photos";
+
 	String BREADCRUMBS_USER_TEAM = "Breadcrumbs: User team";
 	String USER_PHOTO_ALBUM_LIST = UserCardTab.ALBUMS.getName();
-	String ALL_USER_S_PHOTOS = "Breadcrumbs: All user's photos";
 
 	String getPortalPageLink( final Language language );
 

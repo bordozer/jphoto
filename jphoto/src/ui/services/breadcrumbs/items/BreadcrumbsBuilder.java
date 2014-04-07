@@ -183,8 +183,8 @@ public class BreadcrumbsBuilder {
 		return photosByUserAndGenre( services.getUserService().load( userId ), getGenre( genreId ) );
 	}
 
-	public BreadcrumbsBuilder photoAppraisalCategory( final PhotoVotingCategory photoVotingCategory, final Genre genre ) {
-		breadcrumbs.add( new PhotoAppraisalCategoryBreadcrumb( photoVotingCategory, services ) );
+	public BreadcrumbsBuilder photoAppraisalPhotosLink( final User user ) {
+		breadcrumbs.add( new PhotoAppraisalPhotosLinkBreadcrumb( user, services ) );
 		return this;
 	}
 

@@ -134,25 +134,23 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Override
 	public PageTitleData getPhotosAppraisedByUserBreadcrumbs( final User user ) {
-		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
 
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language ), entityLinkUtilsService.getUserCardLink( user, language ), translatorService.translate( "Appraised photos", language ) );
+		final String breadcrumbs = userCardLink( user )
+			.translatableString( EntityLinkUtilsService.BREADCRUMBS_APPRAISED_PHOTOS )
+			.build();
 
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
 	public PageTitleData getPhotosByUserByVotingCategoryBreadcrumbs( final User user, final PhotoVotingCategory votingCategory ) {
-		final PageTitleData titleData = getPhotosByUserBreadcrumbs( user );
 
-		final Language language = EnvironmentContext.getLanguage();
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( entityLinkUtilsService.getPhotosRootLink( language )
-			, entityLinkUtilsService.getUserCardLink( user, language )
-			, entityLinkUtilsService.getPhotosVotedByUserLinkUser( user.getId(), language )
-			, translatorService.translatePhotoVotingCategory( votingCategory, language ) );
+		final String breadcrumbs = userCardLink( user )
+			.photoAppraisalPhotosLink( user )
+			.string( translatorService.translatePhotoVotingCategory( votingCategory, getLanguage() ) )
+			.build();
 
-		return new PageTitleData( titleData.getTitle(), titleData.getHeader(), breadcrumbs );
+		return new PageTitleData( pageTitle( user ), pageHeader( user ), breadcrumbs );
 	}
 
 	@Override
