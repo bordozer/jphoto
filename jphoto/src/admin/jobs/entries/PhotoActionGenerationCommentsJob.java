@@ -48,7 +48,6 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		comment.setPhotoId( photo.getId() );
 		comment.setCommentAuthor( user );
 		comment.setCreationTime( actionTime );
-//		comment.setCommentText( services.getRandomUtilsService().getRandomStringArrayElement( comments ) );
 		comment.setCommentText( FakePhotoCommentLoader.getRandomFakeComment( services ) );
 
 		if ( isGoingToBeAnswer() ) {

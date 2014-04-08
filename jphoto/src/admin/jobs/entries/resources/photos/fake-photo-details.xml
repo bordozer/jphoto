@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+
+<items>
+
+	<item>
+		<case><![CDATA[Именительный]]></case>
+		<value><![CDATA[гора]]></value>
+		<value><![CDATA[песок]]></value>
+		<value><![CDATA[горы]]></value>
+		<value><![CDATA[топор]]></value>
+		<value><![CDATA[молот]]></value>
+		<value><![CDATA[ведьма]]></value>
+		<value><![CDATA[хрюшка]]></value>
+		<value><![CDATA[кино]]></value>
+		<value><![CDATA[обещание]]></value>
+		<value><![CDATA[род]]></value>
+		<value><![CDATA[вера]]></value>
+		<value><![CDATA[доказательство]]></value>
+		<value><![CDATA[ум]]></value>
+		<value><![CDATA[совесть]]></value>
+		<value><![CDATA[вес]]></value>
+		<value><![CDATA[мотылек]]></value>
+		<value><![CDATA[мотыга]]></value>
+		<value><![CDATA[ведро]]></value>
+		<value><![CDATA[сан]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Родительный]]></case>
+		<value><![CDATA[горы]]></value>
+		<value><![CDATA[лютни]]></value>
+		<value><![CDATA[пардона]]></value>
+		<value><![CDATA[глубины]]></value>
+		<value><![CDATA[яблока]]></value>
+		<value><![CDATA[портрета]]></value>
+		<value><![CDATA[цыбули]]></value>
+		<value><![CDATA[вдохновения]]></value>
+		<value><![CDATA[Парижа]]></value>
+		<value><![CDATA[участи]]></value>
+		<value><![CDATA[холодца]]></value>
+		<value><![CDATA[обиды]]></value>
+		<value><![CDATA[гружи]]></value>
+		<value><![CDATA[печенья]]></value>
+		<value><![CDATA[овощей и фруктов]]></value>
+		<value><![CDATA[обилигаций]]></value>
+		<value><![CDATA[помех]]></value>
+		<value><![CDATA[учтивости]]></value>
+		<value><![CDATA[паспорта]]></value>
+		<value><![CDATA[уклончивости]]></value>
+		<value><![CDATA[внимания]]></value>
+		<value><![CDATA[препятствий]]></value>
+		<value><![CDATA[ударов]]></value>
+		<value><![CDATA[удара]]></value>
+		<value><![CDATA[комара]]></value>
+		<value><![CDATA[долгов]]></value>
+		<value><![CDATA[объяснений]]></value>
+		<value><![CDATA[влияния]]></value>
+		<value><![CDATA[наливания]]></value>
+		<value><![CDATA[вливания]]></value>
+		<value><![CDATA[тоста]]></value>
+		<value><![CDATA[хорошей истории]]></value>
+		<value><![CDATA[дурной славы]]></value>
+		<value><![CDATA[дурностая]]></value>
+		<value><![CDATA[родной семьи]]></value>
+		<value><![CDATA[урода]]></value>
+		<value><![CDATA[гения]]></value>
+		<value><![CDATA[вольнодумца]]></value>
+		<value><![CDATA[извращенца]]></value>
+		<value><![CDATA[перепелки]]></value>
+		<value><![CDATA[второго носка]]></value>
+		<value><![CDATA[пальто]]></value>
+		<value><![CDATA[кофе]]></value>
+		<value><![CDATA[чая]]></value>
+		<value><![CDATA[чаяния]]></value>
+		<value><![CDATA[укуса]]></value>
+		<value><![CDATA[покусывания]]></value>
+		<value><![CDATA[территории]]></value>
+		<value><![CDATA[мнения]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Дательный]]></case>
+		<value><![CDATA[обходу]]></value>
+		<value><![CDATA[проходу]]></value>
+		<value><![CDATA[вниманию]]></value>
+		<value><![CDATA[барабану]]></value>
+		<value><![CDATA[барону]]></value>
+		<value><![CDATA[влиянию]]></value>
+		<value><![CDATA[умению]]></value>
+		<value><![CDATA[забывчивости]]></value>
+		<value><![CDATA[стандартам]]></value>
+		<value><![CDATA[хрен]]></value>
+		<value><![CDATA[боку]]></value>
+		<value><![CDATA[небесам]]></value>
+		<value><![CDATA[страсти]]></value>
+		<value><![CDATA[неосуществленным желаниям]]></value>
+		<value><![CDATA[незбывшимся мечтам]]></value>
+		<value><![CDATA[второй натуре]]></value>
+		<value><![CDATA[чертям]]></value>
+		<value><![CDATA[бесам]]></value>
+		<value><![CDATA[волосам]]></value>
+		<value><![CDATA[неуместным мыслям]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Винительный]]></case>
+		<value><![CDATA[бедро]]></value>
+		<value><![CDATA[перо]]></value>
+		<value><![CDATA[проезд]]></value>
+		<value><![CDATA[проход]]></value>
+		<value><![CDATA[внимание]]></value>
+		<value><![CDATA[колено]]></value>
+		<value><![CDATA[тернии]]></value>
+		<value><![CDATA[немогу]]></value>
+		<value><![CDATA[пробки]]></value>
+		<value><![CDATA[задницу]]></value>
+		<value><![CDATA[любовь]]></value>
+		<value><![CDATA[ненависть]]></value>
+		<value><![CDATA[халатность]]></value>
+		<value><![CDATA[любовь]]></value>
+		<value><![CDATA[вину]]></value>
+		<value><![CDATA[вино]]></value>
+		<value><![CDATA[пролитую водку]]></value>
+		<value><![CDATA[чистую воду]]></value>
+		<value><![CDATA[неизвестные дали]]></value>
+		<value><![CDATA[подземнывй переход]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Творительный]]></case>
+		<value><![CDATA[силой]]></value>
+		<value><![CDATA[размером]]></value>
+		<value><![CDATA[объемом]]></value>
+		<value><![CDATA[скоростью]]></value>
+		<value><![CDATA[волосами]]></value>
+		<value><![CDATA[достижениями]]></value>
+		<value><![CDATA[полем]]></value>
+		<value><![CDATA[рекой]]></value>
+		<value><![CDATA[облаками]]></value>
+		<value><![CDATA[радугой]]></value>
+		<value><![CDATA[закатом]]></value>
+		<value><![CDATA[грозовыми тучами]]></value>
+		<value><![CDATA[небом]]></value>
+		<value><![CDATA[лугом]]></value>
+		<value><![CDATA[предом]]></value>
+		<value><![CDATA[пашней]]></value>
+		<value><![CDATA[полем]]></value>
+		<value><![CDATA[столом]]></value>
+		<value><![CDATA[стулом]]></value>
+		<value><![CDATA[удивительным сходством]]></value>
+		<value><![CDATA[утроенной силой]]></value>
+		<value><![CDATA[удесятеренным вниманием]]></value>
+		<value><![CDATA[уничижительным вниманием]]></value>
+		<value><![CDATA[подозрительными достижениями]]></value>
+		<value><![CDATA[полосатым как колорадский жук]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Предложный]]></case>
+		<value><![CDATA[всем]]></value>
+		<value><![CDATA[неком]]></value>
+		<value><![CDATA[реке]]></value>
+		<value><![CDATA[поле]]></value>
+		<value><![CDATA[подсолнухе]]></value>
+		<value><![CDATA[крапиве]]></value>
+		<value><![CDATA[лопухе]]></value>
+		<value><![CDATA[траве]]></value>
+		<value><![CDATA[зыбкой почве]]></value>
+		<value><![CDATA[илистом дне]]></value>
+		<value><![CDATA[вызкой жиже]]></value>
+		<value><![CDATA[шпильках]]></value>
+		<value><![CDATA[высоких каблуках]]></value>
+		<value><![CDATA[платформах]]></value>
+		<value><![CDATA[модных туфельках]]></value>
+		<value><![CDATA[модной кофточке]]></value>
+		<value><![CDATA[валютных резервах]]></value>
+		<value><![CDATA[последней заначке]]></value>
+		<value><![CDATA[первой любви]]></value>
+	</item>
+
+</items>

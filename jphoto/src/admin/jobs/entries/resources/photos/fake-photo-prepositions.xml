@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+
+<items>
+
+	<item>
+		<case><![CDATA[Именительный]]></case>
+	</item>
+
+	<item>
+		<case><![CDATA[Родительный]]></case>
+		<value><![CDATA[без]]></value>
+		<value><![CDATA[у]]></value>
+		<value><![CDATA[до]]></value>
+		<value><![CDATA[от]]></value>
+		<value><![CDATA[с]]></value>
+		<value><![CDATA[около]]></value>
+		<value><![CDATA[из]]></value>
+		<value><![CDATA[возле]]></value>
+		<value><![CDATA[после]]></value>
+		<value><![CDATA[для]]></value>
+		<value><![CDATA[вокруг]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Дательный]]></case>
+		<value><![CDATA[к]]></value>
+		<value><![CDATA[по]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Винительный]]></case>
+		<value><![CDATA[в]]></value>
+		<value><![CDATA[за]]></value>
+		<value><![CDATA[на]]></value>
+		<value><![CDATA[про]]></value>
+		<value><![CDATA[через]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Творительный]]></case>
+		<value><![CDATA[за]]></value>
+		<value><![CDATA[над]]></value>
+		<value><![CDATA[под]]></value>
+		<value><![CDATA[перед]]></value>
+		<value><![CDATA[с]]></value>
+	</item>
+
+	<item>
+		<case><![CDATA[Предложный]]></case>
+		<value><![CDATA[в]]></value>
+		<value><![CDATA[на]]></value>
+		<value><![CDATA[о]]></value>
+		<value><![CDATA[об]]></value>
+		<value><![CDATA[обо]]></value>
+		<value><![CDATA[при]]></value>
+	</item>
+
+</items>

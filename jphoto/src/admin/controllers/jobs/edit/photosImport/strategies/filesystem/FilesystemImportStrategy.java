@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.jobs.entries.AbstractJob;
+import admin.jobs.entries.resources.photos.FakePhotoNameGenerator;
 import admin.jobs.general.JobDateRange;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
@@ -90,7 +91,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private String getRandomPhotoName() {
-		return String.format( "Photo from disk #%d", services.getRandomUtilsService().getRandomInt( 1000, 9999 ) );
+//		return String.format( "Photo from disk #%d", services.getRandomUtilsService().getRandomInt( 1000, 9999 ) );
+		return FakePhotoNameGenerator.getFakePhotoName( services.getRandomUtilsService() );
 	}
 
 	@Override
