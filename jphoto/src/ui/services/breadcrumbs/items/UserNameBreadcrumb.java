@@ -13,6 +13,10 @@ public class UserNameBreadcrumb extends AbstractBreadcrumb {
 		this.user = user;
 	}
 
+	public UserNameBreadcrumb( final int userId, final Services services ) {
+		this( services.getUserService().load( userId ), services );
+	}
+
 	@Override
 	public String getValue( final Language language ) {
 		return user.getNameEscaped();

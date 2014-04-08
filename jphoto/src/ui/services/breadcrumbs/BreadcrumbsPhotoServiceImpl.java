@@ -10,6 +10,7 @@ import ui.controllers.photos.edit.PhotoEditWizardStep;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.PhotoNameBreadcrumb;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
+import ui.services.breadcrumbs.items.UserNameBreadcrumb;
 
 import static ui.services.breadcrumbs.items.BreadcrumbsBuilder.portalPage;
 
@@ -58,7 +59,7 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	public PageTitleData getPhotoCardBreadcrumbs( final Photo photo, final User accessor ) {
 
 		final String title = title( photo, accessor ).photoName( photo ).build();
-		final String header = BreadcrumbsBuilder.pageHeader( new PhotoNameBreadcrumb( photo, services ), services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( new UserNameBreadcrumb( photo.getUserId(), services ), services ).build();
 
 		final String breadcrumbs = userPhoto( photo, accessor )
 			.photoName( photo )
