@@ -316,6 +316,17 @@ td.trunderlined {
 	/*border: dotted;*/
 }
 
+.photo-preview-name {
+	float: left;
+	width: 95%;
+	margin: 3px 3px 3px 7px;
+	text-align: left;
+	font-size: 12px;
+	height: 22px;
+	line-height: 11px;
+	/*border: dotted;*/
+}
+
 .photoUploadDate {
 	font-size: 9px;
 	vertical-align: 6px;

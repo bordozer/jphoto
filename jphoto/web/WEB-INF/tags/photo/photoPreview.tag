@@ -102,9 +102,10 @@
 		</div>
 	</div>
 
-	<div class="containerPhotoLine">
+	<div class="photo-preview-name">
 
-		<c:set var="maxPhotoNameLenght" value="25"/>
+		<photo:photoCard photo="${photo}" />
+		<%--<c:set var="maxPhotoNameLenght" value="25"/>
 		<c:set var="photoNameLenght" value="${fn:length(photo.name)}"/>
 		<c:if test="${photoNameLenght <= maxPhotoNameLenght}">
 			<photo:photoCard photo="${photo}" />
@@ -114,7 +115,7 @@
 			<links:photoCard id="${photo.id}" title="${photo.nameEscaped}">
 				${eco:escapeHtml(fn:substring(photo.name, 0, maxPhotoNameLenght))}...
 			</links:photoCard>
-		</c:if>
+		</c:if>--%>
 
 	</div>
 
