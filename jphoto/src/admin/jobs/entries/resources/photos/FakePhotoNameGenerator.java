@@ -15,7 +15,6 @@ import org.dom4j.io.SAXReader;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,9 +30,9 @@ public class FakePhotoNameGenerator {
 	private static final String KEY_TAG = "key";
 	private static final String VALUE_TAG = "value";
 
-	private static final List<CaseSensitiveData> subjects = newArrayList();
-	private static final List<CaseSensitiveData> prepositions = newArrayList();
-	private static final List<CaseSensitiveData> details = newArrayList();
+	private static final List<PhotoNameXMLData> subjects = newArrayList();
+	private static final List<PhotoNameXMLData> prepositions = newArrayList();
+	private static final List<PhotoNameXMLData> details = newArrayList();
 
 	public static void main( String[] args ) throws UnsupportedEncodingException {
 		final Genre genre = new Genre();
@@ -49,9 +48,9 @@ public class FakePhotoNameGenerator {
 
 	public static String getFakePhotoName( final Genre genre, final RandomUtilsService randomUtilsService ) {
 
-		final List<CaseSensitiveData> subjects = getSubjects();
-		final List<CaseSensitiveData> prepositions = getPrepositions();
-		final List<CaseSensitiveData> details = getDetails();
+		final List<PhotoNameXMLData> subjects = getSubjects();
+		final List<PhotoNameXMLData> prepositions = getPrepositions();
+		final List<PhotoNameXMLData> details = getDetails();
 
 		final StringBuilder result = new StringBuilder( getRandomSubject( genre, subjects, randomUtilsService ) );
 
@@ -68,18 +67,18 @@ public class FakePhotoNameGenerator {
 		return result.toString();
 	}
 
-	private static String getRandomSubject( final Genre genre, final List<CaseSensitiveData> subjects, final RandomUtilsService randomUtilsService ) {
+	private static String getRandomSubject( final Genre genre, final List<PhotoNameXMLData> subjects, final RandomUtilsService randomUtilsService ) {
 
-		final List<CaseSensitiveData> sbj = newArrayList( subjects );
-		CollectionUtils.filter( sbj, new Predicate<CaseSensitiveData>() {
+		final List<PhotoNameXMLData> sbj = newArrayList( subjects );
+		CollectionUtils.filter( sbj, new Predicate<PhotoNameXMLData>() {
 			@Override
-			public boolean evaluate( final CaseSensitiveData caseSensitiveData ) {
-				return caseSensitiveData.getKey().equals( genre.getName() );
+			public boolean evaluate( final PhotoNameXMLData photoNameXMLData ) {
+				return photoNameXMLData.getKey().equals( genre.getName() );
 			}
 		} );
 
 		if ( sbj.size() == 0 ) {
-			for ( final CaseSensitiveData subject : subjects ) {
+			for ( final PhotoNameXMLData subject : subjects ) {
 				if ( subject.getKey().equals( GenreDiscEntry.OTHER.getName() ) ) {
 					return randomUtilsService.getRandomGenericListElement( subject.getValues() );
 				}
@@ -90,9 +89,9 @@ public class FakePhotoNameGenerator {
 		return randomUtilsService.getRandomGenericListElement( subjectsForGenre );
 	}
 
-	private static String getRandomCombination( final List<CaseSensitiveData> prepositions, final List<CaseSensitiveData> details, final RandomUtilsService randomUtilsService ) {
+	private static String getRandomCombination( final List<PhotoNameXMLData> prepositions, final List<PhotoNameXMLData> details, final RandomUtilsService randomUtilsService ) {
 
-		final CaseSensitiveData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
+		final PhotoNameXMLData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
 
 		if ( randomCase.getValues().size() == 0 ) { // ???????????? ?????
 			return randomUtilsService.getRandomGenericListElement( details.get( 0 ).getValues() );
@@ -100,7 +99,7 @@ public class FakePhotoNameGenerator {
 
 		final String randomPreposition = randomUtilsService.getRandomGenericListElement( randomCase.getValues() );
 
-		for ( final CaseSensitiveData detail : details ) {
+		for ( final PhotoNameXMLData detail : details ) {
 			if ( detail.getKey().equals( randomCase.getKey() ) ) {
 				final String randomOther = randomUtilsService.getRandomGenericListElement( detail.getValues() );
 				return String.format( "%s %s", randomPreposition, randomOther );
@@ -110,7 +109,7 @@ public class FakePhotoNameGenerator {
 		throw new IllegalStateException( String.format( "FakePhotoNameGenerator: can not generate random photo name" ) );
 	}
 
-	private static List<CaseSensitiveData> getSubjects() {
+	private static List<PhotoNameXMLData> getSubjects() {
 
 		if ( subjects.size() > 0 ) {
 			return subjects;
@@ -126,7 +125,7 @@ public class FakePhotoNameGenerator {
 		}
 	}
 
-	private static List<CaseSensitiveData> getPrepositions() {
+	private static List<PhotoNameXMLData> getPrepositions() {
 		if ( prepositions.size() > 0 ) {
 			return prepositions;
 		}
@@ -141,7 +140,7 @@ public class FakePhotoNameGenerator {
 		}
 	}
 
-	private static List<CaseSensitiveData> getDetails() {
+	private static List<PhotoNameXMLData> getDetails() {
 		if ( details.size() > 0 ) {
 			return details;
 		}
@@ -156,7 +155,7 @@ public class FakePhotoNameGenerator {
 		}
 	}
 
-	private static List<CaseSensitiveData> loadCaseSensitiveData( final String fileName, final List<CaseSensitiveData> list ) {
+	private static List<PhotoNameXMLData> loadCaseSensitiveData( final String fileName, final List<PhotoNameXMLData> list ) {
 		final File translationsFile = new File( fileName );
 
 		final SAXReader reader = new SAXReader( false );
@@ -184,7 +183,7 @@ public class FakePhotoNameGenerator {
 				values.add( valueElement.getText() );
 			}
 
-			final CaseSensitiveData data = new CaseSensitiveData( caseName, values );
+			final PhotoNameXMLData data = new PhotoNameXMLData( caseName, values );
 
 			list.add( data );
 		}

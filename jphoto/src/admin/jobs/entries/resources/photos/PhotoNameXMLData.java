@@ -2,12 +2,12 @@ package admin.jobs.entries.resources.photos;
 
 import java.util.List;
 
-public class CaseSensitiveData {
+public class PhotoNameXMLData {
 
 	private String key;
 	private List<String> values;
 
-	public CaseSensitiveData( final String key, final List<String> values ) {
+	public PhotoNameXMLData( final String key, final List<String> values ) {
 
 		this.key = key;
 		this.values = values;
