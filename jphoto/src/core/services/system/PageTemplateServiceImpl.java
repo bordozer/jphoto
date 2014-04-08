@@ -214,7 +214,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		}
 		model.put( "newPrivateMessages", privateMessages );
 
-		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "800px"  );
+		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  );
 
 		if ( securityService.isSuperAdminUser( currentUser ) ) {
 			final int untranslatedMessagesCount = translatorService.getUntranslatedMap().size();
