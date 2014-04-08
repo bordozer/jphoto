@@ -1,9 +1,13 @@
 package admin.jobs.entries.resources.photos;
 
+import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.jobs.entries.resources.FakePhotoCommentLoader;
+import core.general.genre.Genre;
 import core.log.LogHelper;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.RandomUtilsServiceImpl;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -11,6 +15,7 @@ import org.dom4j.io.SAXReader;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,15 +28,18 @@ public class FakePhotoNameGenerator {
 	private static final String OTHER_XML = "admin/jobs/entries/resources/photos/fake-photo-details.xml";
 
 	private static final String ITEM_TAG = "item";
-	private static final String CASE_TAG = "case";
+	private static final String KEY_TAG = "key";
 	private static final String VALUE_TAG = "value";
 
-	private static final List<String> subjects = newArrayList();
+	private static final List<CaseSensitiveData> subjects = newArrayList();
 	private static final List<CaseSensitiveData> prepositions = newArrayList();
 	private static final List<CaseSensitiveData> details = newArrayList();
 
 	public static void main( String[] args ) throws UnsupportedEncodingException {
-		final String name = getFakePhotoName( new RandomUtilsServiceImpl() );
+		final Genre genre = new Genre();
+		genre.setName( GenreDiscEntry.ANIMALS.getName() );
+
+		final String name = getFakePhotoName( genre, new RandomUtilsServiceImpl() );
 
 		final byte bytes[] = name.getBytes( "UTF-8" );
 		final String value = new String( bytes, "UTF-8" );
@@ -39,13 +47,13 @@ public class FakePhotoNameGenerator {
 		System.out.println( value );
 	}
 
-	public static String getFakePhotoName( final RandomUtilsService randomUtilsService ) {
+	public static String getFakePhotoName( final Genre genre, final RandomUtilsService randomUtilsService ) {
 
-		final List<String> subjects = getSubjects();
+		final List<CaseSensitiveData> subjects = getSubjects();
 		final List<CaseSensitiveData> prepositions = getPrepositions();
 		final List<CaseSensitiveData> details = getDetails();
 
-		final StringBuilder result = new StringBuilder( randomUtilsService.getRandomGenericListElement( subjects ) );
+		final StringBuilder result = new StringBuilder( getRandomSubject( genre, subjects, randomUtilsService ) );
 
 		if ( randomUtilsService.getRandomInt( 0, 10 ) > 3 ) {
 			result.append( " " );
@@ -60,6 +68,28 @@ public class FakePhotoNameGenerator {
 		return result.toString();
 	}
 
+	private static String getRandomSubject( final Genre genre, final List<CaseSensitiveData> subjects, final RandomUtilsService randomUtilsService ) {
+
+		final List<CaseSensitiveData> sbj = newArrayList( subjects );
+		CollectionUtils.filter( sbj, new Predicate<CaseSensitiveData>() {
+			@Override
+			public boolean evaluate( final CaseSensitiveData caseSensitiveData ) {
+				return caseSensitiveData.getKey().equals( genre.getName() );
+			}
+		} );
+
+		if ( sbj.size() == 0 ) {
+			for ( final CaseSensitiveData subject : subjects ) {
+				if ( subject.getKey().equals( GenreDiscEntry.OTHER.getName() ) ) {
+					return randomUtilsService.getRandomGenericListElement( subject.getValues() );
+				}
+			}
+		}
+
+		final List<String> subjectsForGenre = sbj.get( 0 ).getValues();
+		return randomUtilsService.getRandomGenericListElement( subjectsForGenre );
+	}
+
 	private static String getRandomCombination( final List<CaseSensitiveData> prepositions, final List<CaseSensitiveData> details, final RandomUtilsService randomUtilsService ) {
 
 		final CaseSensitiveData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
@@ -71,7 +101,7 @@ public class FakePhotoNameGenerator {
 		final String randomPreposition = randomUtilsService.getRandomGenericListElement( randomCase.getValues() );
 
 		for ( final CaseSensitiveData detail : details ) {
-			if ( detail.getCaseName().equals( randomCase.getCaseName() ) ) {
+			if ( detail.getKey().equals( randomCase.getKey() ) ) {
 				final String randomOther = randomUtilsService.getRandomGenericListElement( detail.getValues() );
 				return String.format( "%s %s", randomPreposition, randomOther );
 			}
@@ -80,7 +110,7 @@ public class FakePhotoNameGenerator {
 		throw new IllegalStateException( String.format( "FakePhotoNameGenerator: can not generate random photo name" ) );
 	}
 
-	private static List<String> getSubjects() {
+	private static List<CaseSensitiveData> getSubjects() {
 
 		if ( subjects.size() > 0 ) {
 			return subjects;
@@ -92,7 +122,7 @@ public class FakePhotoNameGenerator {
 				return subjects;
 			}
 
-			return loadSubjects();
+			return loadCaseSensitiveData( SUBJECTS_XML, subjects );
 		}
 	}
 
@@ -126,29 +156,6 @@ public class FakePhotoNameGenerator {
 		}
 	}
 
-	private static List<String> loadSubjects() {
-		final File translationsFile = new File( SUBJECTS_XML );
-
-		final SAXReader reader = new SAXReader( false );
-		final Document document;
-		try {
-			document = reader.read( translationsFile );
-		} catch ( DocumentException e ) {
-			final LogHelper log = new LogHelper( FakePhotoCommentLoader.class );
-			log.error( String.format( "Can not read file '%s'", SUBJECTS_XML ), e );
-
-			return newArrayList();
-		}
-
-		final Iterator photosIterator = document.getRootElement().elementIterator( ITEM_TAG );
-
-		while ( photosIterator.hasNext() ) {
-			subjects.add( ( ( Element ) photosIterator.next() ).getText().trim() );
-		}
-
-		return subjects;
-	}
-
 	private static List<CaseSensitiveData> loadCaseSensitiveData( final String fileName, final List<CaseSensitiveData> list ) {
 		final File translationsFile = new File( fileName );
 
@@ -168,7 +175,7 @@ public class FakePhotoNameGenerator {
 		while ( itemsIterator.hasNext() ) {
 			final Element itemElement = ( Element ) itemsIterator.next();
 
-			final String caseName = itemElement.element( CASE_TAG ).getText();
+			final String caseName = itemElement.element( KEY_TAG ).getText();
 
 			final List<String> values = newArrayList();
 			final Iterator valuesIterator = itemElement.elementIterator( VALUE_TAG );

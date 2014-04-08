@@ -66,7 +66,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			final User user = userGenerator.getUser( genre );
 			imageToImport.setUser( user );
 
-			imageToImport.setName( getRandomPhotoName() );
+			imageToImport.setName( getRandomPhotoName( genre ) );
 
 			final JobDateRange jobDateRange = importParameters.getJobDateRange();
 			imageToImport.setUploadTime( services.getRandomUtilsService().getRandomDate( jobDateRange.getStartDate(), jobDateRange.getEndDate() ) );
@@ -90,9 +90,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	private String getRandomPhotoName() {
-//		return String.format( "Photo from disk #%d", services.getRandomUtilsService().getRandomInt( 1000, 9999 ) );
-		return FakePhotoNameGenerator.getFakePhotoName( services.getRandomUtilsService() );
+	private String getRandomPhotoName( final Genre genre ) {
+		return FakePhotoNameGenerator.getFakePhotoName( genre, services.getRandomUtilsService() );
 	}
 
 	@Override

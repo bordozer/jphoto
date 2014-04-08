@@ -4,17 +4,17 @@ import java.util.List;
 
 public class CaseSensitiveData {
 
-	private String caseName;
+	private String key;
 	private List<String> values;
 
-	public CaseSensitiveData( final String caseName, final List<String> values ) {
+	public CaseSensitiveData( final String key, final List<String> values ) {
 
-		this.caseName = caseName;
+		this.key = key;
 		this.values = values;
 	}
 
-	public String getCaseName() {
-		return caseName;
+	public String getKey() {
+		return key;
 	}
 
 	public List<String> getValues() {
@@ -23,6 +23,6 @@ public class CaseSensitiveData {
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %d", caseName, values.size() );
+		return String.format( "%s: %d", key, values.size() );
 	}
 }

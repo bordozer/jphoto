@@ -77,7 +77,11 @@
 					</table:tdicon>
 
 					<table:tdicon>${genre.id}</table:tdicon>
-					<table:td><links:genrePhotos genre="${genre}"/></table:td>
+					<table:td>
+						<links:genrePhotos genre="${genre}"/>
+						<br />
+						${genre.name}
+					</table:td>
 
 					<table:td cssClass="textcentered">${genre.canContainNudeContent ? "Yes" : ""}</table:td>
 					<table:td cssClass="textcentered">${genre.containsNudeContent ? "Yes" : ""}</table:td>

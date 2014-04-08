@@ -3,7 +3,7 @@
 <items>
 
 	<item>
-		<case><![CDATA[Именительный]]></case>
+		<key><![CDATA[Именительный]]></key>
 		<value><![CDATA[или превратность судьбы]]></value>
 		<value><![CDATA[под коньячек]]></value>
 		<value><![CDATA[без надежды на просвет]]></value>
@@ -38,7 +38,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Родительный]]></case>
+		<key><![CDATA[Родительный]]></key>
 		<value><![CDATA[горы]]></value>
 		<value><![CDATA[лютни]]></value>
 		<value><![CDATA[пардона]]></value>
@@ -91,7 +91,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Дательный]]></case>
+		<key><![CDATA[Дательный]]></key>
 		<value><![CDATA[обходу]]></value>
 		<value><![CDATA[проходу]]></value>
 		<value><![CDATA[вниманию]]></value>
@@ -115,7 +115,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Винительный]]></case>
+		<key><![CDATA[Винительный]]></key>
 		<value><![CDATA[бедро]]></value>
 		<value><![CDATA[перо]]></value>
 		<value><![CDATA[проезд]]></value>
@@ -139,7 +139,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Творительный]]></case>
+		<key><![CDATA[Творительный]]></key>
 		<value><![CDATA[силой]]></value>
 		<value><![CDATA[размером]]></value>
 		<value><![CDATA[объемом]]></value>
@@ -154,7 +154,7 @@
 		<value><![CDATA[грозовыми тучами]]></value>
 		<value><![CDATA[небом]]></value>
 		<value><![CDATA[лугом]]></value>
-		<value><![CDATA[предом]]></value>
+		<value><![CDATA[пледом]]></value>
 		<value><![CDATA[пашней]]></value>
 		<value><![CDATA[полем]]></value>
 		<value><![CDATA[столом]]></value>
@@ -168,7 +168,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Предложный]]></case>
+		<key><![CDATA[Предложный]]></key>
 		<value><![CDATA[всем]]></value>
 		<value><![CDATA[неком]]></value>
 		<value><![CDATA[реке]]></value>

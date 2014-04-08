@@ -3,11 +3,11 @@
 <items>
 
 	<item>
-		<case><![CDATA[Именительный]]></case>
+		<key><![CDATA[Именительный]]></key>
 	</item>
 
 	<item>
-		<case><![CDATA[Родительный]]></case>
+		<key><![CDATA[Родительный]]></key>
 		<value><![CDATA[без]]></value>
 		<value><![CDATA[у]]></value>
 		<value><![CDATA[до]]></value>
@@ -22,13 +22,13 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Дательный]]></case>
+		<key><![CDATA[Дательный]]></key>
 		<value><![CDATA[к]]></value>
 		<value><![CDATA[по]]></value>
 	</item>
 
 	<item>
-		<case><![CDATA[Винительный]]></case>
+		<key><![CDATA[Винительный]]></key>
 		<value><![CDATA[в]]></value>
 		<value><![CDATA[за]]></value>
 		<value><![CDATA[на]]></value>
@@ -37,7 +37,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Творительный]]></case>
+		<key><![CDATA[Творительный]]></key>
 		<value><![CDATA[за]]></value>
 		<value><![CDATA[над]]></value>
 		<value><![CDATA[под]]></value>
@@ -46,7 +46,7 @@
 	</item>
 
 	<item>
-		<case><![CDATA[Предложный]]></case>
+		<key><![CDATA[Предложный]]></key>
 		<value><![CDATA[в]]></value>
 		<value><![CDATA[на]]></value>
 		<value><![CDATA[о]]></value>

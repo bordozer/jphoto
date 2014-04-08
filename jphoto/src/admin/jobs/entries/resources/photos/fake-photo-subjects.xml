@@ -2,46 +2,555 @@
 
 <items>
 
-	<item><![CDATA[Закат]]></item>
-	<item><![CDATA[Мороз]]></item>
-	<item><![CDATA[Морозное утро]]></item>
-	<item><![CDATA[Горячее предложение]]></item>
-	<item><![CDATA[Крышка]]></item>
-	<item><![CDATA[Юная леди]]></item>
-	<item><![CDATA[Временная трудность]]></item>
-	<item><![CDATA[Вид]]></item>
-	<item><![CDATA[Осязание]]></item>
-	<item><![CDATA[Каприз]]></item>
-	<item><![CDATA[Линии]]></item>
-	<item><![CDATA[Изгибы]]></item>
-	<item><![CDATA[Полусферы]]></item>
-	<item><![CDATA[Блики]]></item>
-	<item><![CDATA[Светотени]]></item>
-	<item><![CDATA[Нужда]]></item>
-	<item><![CDATA[Вдохновение]]></item>
-	<item><![CDATA[Изумруд]]></item>
-	<item><![CDATA[Тени]]></item>
-	<item><![CDATA[Тень]]></item>
-	<item><![CDATA[Прозрачность]]></item>
-	<item><![CDATA[Витиеватость]]></item>
-	<item><![CDATA[Гром]]></item>
-	<item><![CDATA[Дождь]]></item>
-	<item><![CDATA[Берег]]></item>
-	<item><![CDATA[Далекий берег]]></item>
-	<item><![CDATA[Упущенная возможность]]></item>
-	<item><![CDATA[Просроченный кредит]]></item>
-	<item><![CDATA[Деловая дама]]></item>
-	<item><![CDATA[Сосиска]]></item>
-	<item><![CDATA[Далекая радуга]]></item>
-	<item><![CDATA[Далекая жена]]></item>
-	<item><![CDATA[Жена]]></item>
-	<item><![CDATA[Когда поезд]]></item>
-	<item><![CDATA[Когда жена]]></item>
-	<item><![CDATA[Если соседка]]></item>
-	<item><![CDATA[Неужели этот мир]]></item>
-	<item><![CDATA[Посредственное занятие]]></item>
-	<item><![CDATA[Как в кино]]></item>
-	<item><![CDATA[Не верь ей]]></item>
-	<item><![CDATA[Обида]]></item>
+	<item>
+		<key>Advertising</key>
+		<value><![CDATA[Прелести]]></value>
+		<value><![CDATA[Лучшее средство]]></value>
+		<value><![CDATA[Купите это]]></value>
+		<value><![CDATA[Самый лучший]]></value>
+		<value><![CDATA[Изумительный вкус]]></value>
+		<value><![CDATA[Блеск]]></value>
+		<value><![CDATA[Чистое сияние]]></value>
+		<value><![CDATA[Будущее]]></value>
+		<value><![CDATA[Вы этого достойны]]></value>
+		<value><![CDATA[Товар года]]></value>
+		<value><![CDATA[Товар месяца]]></value>
+		<value><![CDATA[Легенда]]></value>
+		<value><![CDATA[Легендарная вещь]]></value>
+		<value><![CDATA[Премиум-класс]]></value>
+		<value><![CDATA[Бизнесс-класс]]></value>
+		<value><![CDATA[Новая мода]]></value>
+	</item>
+
+	<item>
+		<key>Animals</key>
+		<value><![CDATA[Зверушка]]></value>
+		<value><![CDATA[Няшка]]></value>
+		<value><![CDATA[Клыкастик]]></value>
+		<value><![CDATA[Друг человека]]></value>
+		<value><![CDATA[Комок шерсти]]></value>
+		<value><![CDATA[Зверь]]></value>
+		<value><![CDATA[Зверюга]]></value>
+		<value><![CDATA[Зверинец]]></value>
+		<value><![CDATA[Питомец]]></value>
+		<value><![CDATA[Кусака]]></value>
+		<value><![CDATA[Царь]]></value>
+		<value><![CDATA[Одинокий волк]]></value>
+		<value><![CDATA[Царский любимец]]></value>
+		<value><![CDATA[Котик]]></value>
+		<value><![CDATA[Кыцька]]></value>
+		<value><![CDATA[Киска]]></value>
+		<value><![CDATA[Соня]]></value>
+	</item>
+
+	<item>
+		<key>Children</key>
+		<value><![CDATA[Озорник]]></value>
+		<value><![CDATA[Озорной разбойник]]></value>
+		<value><![CDATA[Соня]]></value>
+		<value><![CDATA[Грязнуля]]></value>
+		<value><![CDATA[Детская мода]]></value>
+		<value><![CDATA[Только бы папа не узнал]]></value>
+		<value><![CDATA[А где мама]]></value>
+		<value><![CDATA[Своих не сдаем]]></value>
+		<value><![CDATA[Дружбан]]></value>
+		<value><![CDATA[Дружба]]></value>
+		<value><![CDATA[Распря]]></value>
+		<value><![CDATA[Обида]]></value>
+		<value><![CDATA[Прощение]]></value>
+		<value><![CDATA[Потасовка]]></value>
+	</item>
+
+	<item>
+		<key>City</key>
+		<value><![CDATA[Закат]]></value>
+		<value><![CDATA[Восход]]></value>
+		<value><![CDATA[День]]></value>
+		<value><![CDATA[Дождь]]></value>
+		<value><![CDATA[Зной]]></value>
+		<value><![CDATA[Жара]]></value>
+		<value><![CDATA[Стекло]]></value>
+		<value><![CDATA[Бетон]]></value>
+		<value><![CDATA[Бетонные джунгли]]></value>
+		<value><![CDATA[Мегаполис]]></value>
+		<value><![CDATA[Село]]></value>
+		<value><![CDATA[Деревушка]]></value>
+		<value><![CDATA[Избушка]]></value>
+		<value><![CDATA[Музей]]></value>
+		<value><![CDATA[Перекресток]]></value>
+		<value><![CDATA[Дороги]]></value>
+		<value><![CDATA[Ночь]]></value>
+		<value><![CDATA[Полночь]]></value>
+		<value><![CDATA[Прохожий]]></value>
+		<value><![CDATA[Одиночество]]></value>
+		<value><![CDATA[Пустота]]></value>
+		<value><![CDATA[Час-пик]]></value>
+		<value><![CDATA[Блики]]></value>
+		<value><![CDATA[Светотени]]></value>
+	</item>
+
+	<item>
+		<key>Digital art</key>
+		<value><![CDATA[Горячее предложение]]></value>
+		<value><![CDATA[Временная трудность]]></value>
+		<value><![CDATA[Осязание]]></value>
+		<value><![CDATA[Витеиватость]]></value>
+		<value><![CDATA[Каприз]]></value>
+		<value><![CDATA[Линии]]></value>
+		<value><![CDATA[Изгибы]]></value>
+		<value><![CDATA[Полусферы]]></value>
+		<value><![CDATA[Блики]]></value>
+		<value><![CDATA[Светотени]]></value>
+		<value><![CDATA[Вдохновение]]></value>
+		<value><![CDATA[Изумруд]]></value>
+		<value><![CDATA[Упущенная возможность]]></value>
+		<value><![CDATA[Просроченный кредит]]></value>
+		<value><![CDATA[Далекая радуга]]></value>
+		<value><![CDATA[Неужели этот мир]]></value>
+		<value><![CDATA[Посредственное занятие]]></value>
+		<value><![CDATA[Облом]]></value>
+		<value><![CDATA[Как в кино]]></value>
+	</item>
+
+	<item>
+		<key>Genre</key>
+		<value><![CDATA[Как в кино]]></value>
+		<value><![CDATA[Обида]]></value>
+		<value><![CDATA[История]]></value>
+		<value><![CDATA[Жизнь]]></value>
+		<value><![CDATA[Случай]]></value>
+		<value><![CDATA[Совпадение]]></value>
+		<value><![CDATA[Мир]]></value>
+		<value><![CDATA[Миф]]></value>
+		<value><![CDATA[Однажны]]></value>
+		<value><![CDATA[Некогда]]></value>
+		<value><![CDATA[Проишествие]]></value>
+		<value><![CDATA[Как в жизни]]></value>
+		<value><![CDATA[Из жизни]]></value>
+		<value><![CDATA[Вечность]]></value>
+		<value><![CDATA[Шанс]]></value>
+		<value><![CDATA[Один день]]></value>
+		<value><![CDATA[Одна ночь]]></value>
+		<value><![CDATA[Закат]]></value>
+		<value><![CDATA[Неожиданный поворот]]></value>
+		<value><![CDATA[Крутой поворот]]></value>
+	</item>
+
+	<item>
+		<key>Glamour</key>
+		<value><![CDATA[Цаца]]></value>
+		<value><![CDATA[Дива]]></value>
+		<value><![CDATA[Гламурная дива]]></value>
+		<value><![CDATA[Модница]]></value>
+		<value><![CDATA[Мода]]></value>
+		<value><![CDATA[Новая мода]]></value>
+		<value><![CDATA[Новая одежка]]></value>
+		<value><![CDATA[Снимая все]]></value>
+		<value><![CDATA[Обнажение]]></value>
+		<value><![CDATA[Блеск]]></value>
+		<value><![CDATA[Ночная жизнь]]></value>
+		<value><![CDATA[Любовь]]></value>
+		<value><![CDATA[Любовь и проклятье]]></value>
+		<value><![CDATA[Обещание]]></value>
+		<value><![CDATA[Интрига]]></value>
+		<value><![CDATA[Ноготки]]></value>
+		<value><![CDATA[Розовый вечер]]></value>
+		<value><![CDATA[Звезда]]></value>
+		<value><![CDATA[Спутница]]></value>
+		<value><![CDATA[Жена]]></value>
+		<value><![CDATA[Когда жена]]></value>
+		<value><![CDATA[Если жена]]></value>
+		<value><![CDATA[Платформы]]></value>
+		<value><![CDATA[Стразная жизнь]]></value>
+		<value><![CDATA[Стразы]]></value>
+		<value><![CDATA[Волнение]]></value>
+		<value><![CDATA[Вздох]]></value>
+		<value><![CDATA[Выдох]]></value>
+		<value><![CDATA[Взгляд]]></value>
+		<value><![CDATA[Пламенный взгляд]]></value>
+		<value><![CDATA[Губы]]></value>
+		<value><![CDATA[Розовая помада]]></value>
+		<value><![CDATA[Киска]]></value>
+		<value><![CDATA[Кошка]]></value>
+		<value><![CDATA[Мечты]]></value>
+		<value><![CDATA[Гламурные мечты]]></value>
+		<value><![CDATA[Гибкая как кошка]]></value>
+		<value><![CDATA[Вместо жены]]></value>
+		<value><![CDATA[Чужое место]]></value>
+		<value><![CDATA[Мягкое место]]></value>
+		<value><![CDATA[Кривые]]></value>
+		<value><![CDATA[Полусфера]]></value>
+		<value><![CDATA[Лед и пламя]]></value>
+	</item>
+
+	<item>
+		<key>HDR</key>
+		<value><![CDATA[Глубина]]></value>
+		<value><![CDATA[Резкость]]></value>
+		<value><![CDATA[Небеса]]></value>
+		<value><![CDATA[Панорама]]></value>
+		<value><![CDATA[Цвет]]></value>
+		<value><![CDATA[Свет]]></value>
+		<value><![CDATA[Восприятие]]></value>
+	</item>
+
+	<item>
+		<key>Humor</key>
+		<value><![CDATA[Ржака]]></value>
+		<value><![CDATA[Укушенный мухомором]]></value>
+		<value><![CDATA[Укуренный мальчик]]></value>
+		<value><![CDATA[Обдолбанная девочка]]></value>
+		<value><![CDATA[Неожиданный случай]]></value>
+		<value><![CDATA[Неизбежность]]></value>
+		<value><![CDATA[Улыбка]]></value>
+		<value><![CDATA[Ржач]]></value>
+		<value><![CDATA[Лошадиный ржач]]></value>
+		<value><![CDATA[Не уследил]]></value>
+		<value><![CDATA[Не угадал]]></value>
+		<value><![CDATA[Не смог]]></value>
+		<value><![CDATA[Случай из жизни]]></value>
+	</item>
+
+	<item>
+		<key>Landscape</key>
+		<value><![CDATA[Закат]]></value>
+		<value><![CDATA[Восход]]></value>
+		<value><![CDATA[День]]></value>
+		<value><![CDATA[Дождь]]></value>
+		<value><![CDATA[Зной]]></value>
+		<value><![CDATA[Жара]]></value>
+		<value><![CDATA[Ливень]]></value>
+		<value><![CDATA[Град]]></value>
+		<value><![CDATA[Одиночество]]></value>
+		<value><![CDATA[Поле]]></value>
+		<value><![CDATA[Панорама]]></value>
+		<value><![CDATA[Широта]]></value>
+		<value><![CDATA[Глубина]]></value>
+		<value><![CDATA[Перспектива]]></value>
+		<value><![CDATA[Горизонт]]></value>
+		<value><![CDATA[За горизонтом]]></value>
+		<value><![CDATA[Полдень]]></value>
+		<value><![CDATA[Раннее утро]]></value>
+		<value><![CDATA[Поздний вечер]]></value>
+		<value><![CDATA[Комариная ночь]]></value>
+	</item>
+
+	<item>
+		<key>Macro</key>
+		<value><![CDATA[Охота]]></value>
+		<value><![CDATA[Атака]]></value>
+		<value><![CDATA[Ктруженик]]></value>
+		<value><![CDATA[Красавица]]></value>
+		<value><![CDATA[Чудовище]]></value>
+		<value><![CDATA[Капельки]]></value>
+		<value><![CDATA[Зов весны]]></value>
+		<value><![CDATA[Хамелеон]]></value>
+		<value><![CDATA[Охотник]]></value>
+		<value><![CDATA[Цветок]]></value>
+		<value><![CDATA[Я как одуванчик]]></value>
+		<value><![CDATA[Вальс]]></value>
+		<value><![CDATA[Букашка]]></value>
+		<value><![CDATA[Жук]]></value>
+		<value><![CDATA[Дюймовочка]]></value>
+		<value><![CDATA[Мальчик-с-пальчик]]></value>
+	</item>
+
+	<item>
+		<key>Models</key>
+		<value><![CDATA[Цаца]]></value>
+		<value><![CDATA[Дива]]></value>
+		<value><![CDATA[Гламурная дива]]></value>
+		<value><![CDATA[Модница]]></value>
+		<value><![CDATA[Мода]]></value>
+		<value><![CDATA[Новая мода]]></value>
+		<value><![CDATA[Новая одежка]]></value>
+		<value><![CDATA[Снимая все]]></value>
+		<value><![CDATA[Обнажение]]></value>
+		<value><![CDATA[Блеск]]></value>
+		<value><![CDATA[Ночная жизнь]]></value>
+		<value><![CDATA[Любовь]]></value>
+		<value><![CDATA[Любовь и проклятье]]></value>
+		<value><![CDATA[Обещание]]></value>
+		<value><![CDATA[Интрига]]></value>
+		<value><![CDATA[Ноготки]]></value>
+		<value><![CDATA[Розовый вечер]]></value>
+		<value><![CDATA[Звезда]]></value>
+		<value><![CDATA[Спутница]]></value>
+		<value><![CDATA[Жена]]></value>
+		<value><![CDATA[Когда жена]]></value>
+		<value><![CDATA[Если жена]]></value>
+		<value><![CDATA[Платформы]]></value>
+		<value><![CDATA[Стразная жизнь]]></value>
+		<value><![CDATA[Стразы]]></value>
+		<value><![CDATA[Волнение]]></value>
+		<value><![CDATA[Вздох]]></value>
+		<value><![CDATA[Выдох]]></value>
+		<value><![CDATA[Взгляд]]></value>
+		<value><![CDATA[Пламенный взгляд]]></value>
+		<value><![CDATA[Губы]]></value>
+		<value><![CDATA[Розовая помада]]></value>
+		<value><![CDATA[Киска]]></value>
+		<value><![CDATA[Кошка]]></value>
+		<value><![CDATA[Мечты]]></value>
+		<value><![CDATA[Гламурные мечты]]></value>
+		<value><![CDATA[Гибкая как кошка]]></value>
+		<value><![CDATA[Вместо жены]]></value>
+		<value><![CDATA[Чужое место]]></value>
+		<value><![CDATA[Мягкое место]]></value>
+		<value><![CDATA[Кривые]]></value>
+		<value><![CDATA[Полусфера]]></value>
+		<value><![CDATA[Лед и пламя]]></value>
+	</item>
+
+	<item>
+		<key>Nude</key>
+		<value><![CDATA[Цаца]]></value>
+		<value><![CDATA[Дива]]></value>
+		<value><![CDATA[Гламурная дива]]></value>
+		<value><![CDATA[Модница]]></value>
+		<value><![CDATA[Мода]]></value>
+		<value><![CDATA[Новая мода]]></value>
+		<value><![CDATA[Новая одежка]]></value>
+		<value><![CDATA[Снимая все]]></value>
+		<value><![CDATA[Обнажение]]></value>
+		<value><![CDATA[Блеск]]></value>
+		<value><![CDATA[Ночная жизнь]]></value>
+		<value><![CDATA[Любовь]]></value>
+		<value><![CDATA[Любовь и проклятье]]></value>
+		<value><![CDATA[Обещание]]></value>
+		<value><![CDATA[Интрига]]></value>
+		<value><![CDATA[Ноготки]]></value>
+		<value><![CDATA[Розовый вечер]]></value>
+		<value><![CDATA[Звезда]]></value>
+		<value><![CDATA[Спутница]]></value>
+		<value><![CDATA[Жена]]></value>
+		<value><![CDATA[Когда жена]]></value>
+		<value><![CDATA[Если жена]]></value>
+		<value><![CDATA[Платформы]]></value>
+		<value><![CDATA[Стразная жизнь]]></value>
+		<value><![CDATA[Стразы]]></value>
+		<value><![CDATA[Волнение]]></value>
+		<value><![CDATA[Вздох]]></value>
+		<value><![CDATA[Выдох]]></value>
+		<value><![CDATA[Взгляд]]></value>
+		<value><![CDATA[Пламенный взгляд]]></value>
+		<value><![CDATA[Губы]]></value>
+		<value><![CDATA[Розовая помада]]></value>
+		<value><![CDATA[Киска]]></value>
+		<value><![CDATA[Кошка]]></value>
+		<value><![CDATA[Мечты]]></value>
+		<value><![CDATA[Гламурные мечты]]></value>
+		<value><![CDATA[Гибкая как кошка]]></value>
+		<value><![CDATA[Вместо жены]]></value>
+		<value><![CDATA[Чужое место]]></value>
+		<value><![CDATA[Мягкое место]]></value>
+		<value><![CDATA[Кривые]]></value>
+		<value><![CDATA[Полусфера]]></value>
+		<value><![CDATA[Откровение]]></value>
+		<value><![CDATA[Вызов]]></value>
+		<value><![CDATA[Протест]]></value>
+		<value><![CDATA[Классика]]></value>
+		<value><![CDATA[Одиночество]]></value>
+		<value><![CDATA[Брошеная]]></value>
+		<value><![CDATA[Брошь за милион]]></value>
+	</item>
+
+	<item>
+		<key>Other</key>
+		<value><![CDATA[Как в кино]]></value>
+		<value><![CDATA[Обида]]></value>
+		<value><![CDATA[История]]></value>
+		<value><![CDATA[Жизнь]]></value>
+		<value><![CDATA[Случай]]></value>
+		<value><![CDATA[Совпадение]]></value>
+		<value><![CDATA[Мир]]></value>
+		<value><![CDATA[Миф]]></value>
+		<value><![CDATA[Однажны]]></value>
+		<value><![CDATA[Некогда]]></value>
+		<value><![CDATA[Проишествие]]></value>
+		<value><![CDATA[Как в жизни]]></value>
+		<value><![CDATA[Из жизни]]></value>
+		<value><![CDATA[Вечность]]></value>
+		<value><![CDATA[Шанс]]></value>
+		<value><![CDATA[Один день]]></value>
+		<value><![CDATA[Одна ночь]]></value>
+		<value><![CDATA[Закат]]></value>
+		<value><![CDATA[Просто так]]></value>
+		<value><![CDATA[Неожиданный поворот]]></value>
+	</item>
+
+	<item>
+		<key>Portrait</key>
+		<value><![CDATA[Свет]]></value>
+		<value><![CDATA[Тень]]></value>
+		<value><![CDATA[Свет и тень]]></value>
+		<value><![CDATA[Свет без тени]]></value>
+		<value><![CDATA[Тень и свет]]></value>
+		<value><![CDATA[Лик]]></value>
+		<value><![CDATA[Милый лик]]></value>
+		<value><![CDATA[Взгляд]]></value>
+		<value><![CDATA[Ожидание]]></value>
+		<value><![CDATA[Одиночество в ночи]]></value>
+		<value><![CDATA[Одиночество]]></value>
+		<value><![CDATA[Она]]></value>
+		<value><![CDATA[Незнакомка]]></value>
+		<value><![CDATA[Автопортрет]]></value>
+		<value><![CDATA[Как много в этом взгляде]]></value>
+		<value><![CDATA[Реснички]]></value>
+		<value><![CDATA[Королева]]></value>
+	</item>
+
+	<item>
+		<key>Reporting</key>
+		<value><![CDATA[Попадание]]></value>
+		<value><![CDATA[Попал]]></value>
+		<value><![CDATA[Случай]]></value>
+		<value><![CDATA[Событие]]></value>
+		<value><![CDATA[Проишествие]]></value>
+		<value><![CDATA[Однажды в Америке]]></value>
+		<value><![CDATA[Где-то на белом свете]]></value>
+		<value><![CDATA[Война миров]]></value>
+		<value><![CDATA[Инцидент]]></value>
+		<value><![CDATA[Авария]]></value>
+		<value><![CDATA[Последствия]]></value>
+		<value><![CDATA[Устранение последствий]]></value>
+		<value><![CDATA[Аттракцион]]></value>
+		<value><![CDATA[Лед и пламя]]></value>
+		<value><![CDATA[Шоу]]></value>
+		<value><![CDATA[Соревнование]]></value>
+	</item>
+
+	<item>
+		<key>Sport</key>
+		<value><![CDATA[Шоу]]></value>
+		<value><![CDATA[Соревнование]]></value>
+		<value><![CDATA[Заплыв]]></value>
+		<value><![CDATA[Финальный рывок]]></value>
+		<value><![CDATA[Финишный рывок]]></value>
+		<value><![CDATA[Последний отсчет]]></value>
+		<value><![CDATA[Финишный свисток]]></value>
+		<value><![CDATA[После финиша]]></value>
+		<value><![CDATA[Победа]]></value>
+		<value><![CDATA[Поражение]]></value>
+		<value><![CDATA[Ничья]]></value>
+		<value><![CDATA[Схватка]]></value>
+		<value><![CDATA[Крутой поворот]]></value>
+		<value><![CDATA[Неожиданный поворот]]></value>
+		<value><![CDATA[Поворот]]></value>
+		<value><![CDATA[Последний поворот]]></value>
+		<value><![CDATA[Занос]]></value>
+		<value><![CDATA[Удар]]></value>
+	</item>
+
+	<item>
+		<key>Still</key>
+		<value><![CDATA[Цветы]]></value>
+		<value><![CDATA[Утро]]></value>
+		<value><![CDATA[Тишина]]></value>
+		<value><![CDATA[Спокойствие]]></value>
+		<value><![CDATA[Свет]]></value>
+		<value><![CDATA[Всет и тень]]></value>
+		<value><![CDATA[Полусвет]]></value>
+		<value><![CDATA[Полутемень]]></value>
+		<value><![CDATA[Композиция]]></value>
+		<value><![CDATA[Утро в деревне]]></value>
+		<value><![CDATA[Розы]]></value>
+		<value><![CDATA[Хризантемы]]></value>
+		<value><![CDATA[Сало]]></value>
+		<value><![CDATA[Набор алкоголика]]></value>
+		<value><![CDATA[Нежность]]></value>
+		<value><![CDATA[Гранатовое утро]]></value>
+		<value><![CDATA[Бокал]]></value>
+		<value><![CDATA[Осенний натюрморт]]></value>
+		<value><![CDATA[Осень]]></value>
+		<value><![CDATA[Фрукты]]></value>
+	</item>
+
+	<item>
+		<key>Travelling</key>
+		<value><![CDATA[Море]]></value>
+		<value><![CDATA[Пляж]]></value>
+		<value><![CDATA[Затерянный город]]></value>
+		<value><![CDATA[Город]]></value>
+		<value><![CDATA[Древний город]]></value>
+		<value><![CDATA[Турист]]></value>
+		<value><![CDATA[Фестиваль]]></value>
+		<value><![CDATA[Модница]]></value>
+		<value><![CDATA[Утро]]></value>
+		<value><![CDATA[Традиция]]></value>
+		<value><![CDATA[Древняя традиция]]></value>
+		<value><![CDATA[Как Венеция]]></value>
+		<value><![CDATA[Венеция]]></value>
+		<value><![CDATA[Париж]]></value>
+		<value><![CDATA[Горы]]></value>
+		<value><![CDATA[Священная гора]]></value>
+		<value><![CDATA[Равнины]]></value>
+		<value><![CDATA[Первый день]]></value>
+		<value><![CDATA[Канал]]></value>
+		<value><![CDATA[Райское место]]></value>
+		<value><![CDATA[Чудесное место]]></value>
+		<value><![CDATA[Рай]]></value>
+		<value><![CDATA[Потерянный рай]]></value>
+		<value><![CDATA[Древний монастырь]]></value>
+		<value><![CDATA[Старая площадь]]></value>
+		<value><![CDATA[Базар]]></value>
+		<value><![CDATA[Старинный базар]]></value>
+		<value><![CDATA[Ярмарка]]></value>
+		<value><![CDATA[Старуха]]></value>
+		<value><![CDATA[Аттракцион]]></value>
+		<value><![CDATA[Новая площадь]]></value>
+		<value><![CDATA[Церьковь]]></value>
+		<value><![CDATA[Собор]]></value>
+		<value><![CDATA[Храм]]></value>
+		<value><![CDATA[Храм судьбы]]></value>
+		<value><![CDATA[Высота]]></value>
+	</item>
+
+	<item>
+		<key>Underwater</key>
+		<value><![CDATA[Подводная история]]></value>
+		<value><![CDATA[Дно]]></value>
+		<value><![CDATA[Глубина]]></value>
+		<value><![CDATA[Однажны на глубине]]></value>
+		<value><![CDATA[Хищник]]></value>
+		<value><![CDATA[Прибой]]></value>
+		<value><![CDATA[Подводный мир]]></value>
+		<value><![CDATA[Рыбка]]></value>
+		<value><![CDATA[Теплое море]]></value>
+		<value><![CDATA[Озеро]]></value>
+		<value><![CDATA[Охота]]></value>
+		<value><![CDATA[Засада]]></value>
+		<value><![CDATA[Тихая гавань]]></value>
+		<value><![CDATA[В тихой гавани]]></value>
+	</item>
+
+	<item>
+		<key>Wedding</key>
+		<value><![CDATA[Первый раз]]></value>
+		<value><![CDATA[Красавица и чудовище]]></value>
+		<value><![CDATA[Бал]]></value>
+		<value><![CDATA[Венчание]]></value>
+		<value><![CDATA[Победительница]]></value>
+		<value><![CDATA[Успех]]></value>
+		<value><![CDATA[Счастье]]></value>
+		<value><![CDATA[Необыкновенный день]]></value>
+		<value><![CDATA[Свадьба]]></value>
+		<value><![CDATA[Женитьба]]></value>
+		<value><![CDATA[Теща]]></value>
+		<value><![CDATA[Тесть]]></value>
+		<value><![CDATA[Свекровь]]></value>
+		<value><![CDATA[Брат жениха]]></value>
+		<value><![CDATA[Подружка невесты]]></value>
+		<value><![CDATA[Невеста подружки]]></value>
+		<value><![CDATA[Первый разв первый класс]]></value>
+		<value><![CDATA[Как в сказке]]></value>
+	</item>
+
+	<item>
+		<key>Wallpapers</key>
+		<value><![CDATA[Рок-стар]]></value>
+		<value><![CDATA[Супер-звезда]]></value>
+		<value><![CDATA[Обои для стола]]></value>
+	</item>
 
 </items>
