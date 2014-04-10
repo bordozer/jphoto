@@ -62,6 +62,7 @@
 		<value><![CDATA[сила]]></value>
 		<value><![CDATA[слабость]]></value>
 		<value><![CDATA[непреодолимое препятствие]]></value>
+		<value><![CDATA[глубокий вырез]]></value>
 	</item>
 
 	<item>
@@ -128,6 +129,10 @@
 		<value><![CDATA[любимого]]></value>
 		<value><![CDATA[соседа]]></value>
 		<value><![CDATA[тещи]]></value>
+		<value><![CDATA[томного взгляда]]></value>
+		<value><![CDATA[глубокого выреза]]></value>
+		<value><![CDATA[последнего шанса]]></value>
+		<value><![CDATA[единого шанса]]></value>
 	</item>
 
 	<item>
@@ -146,13 +151,34 @@
 		<value><![CDATA[небесам]]></value>
 		<value><![CDATA[страсти]]></value>
 		<value><![CDATA[неосуществленным желаниям]]></value>
+		<value><![CDATA[заветным желаниям]]></value>
 		<value><![CDATA[незбывшимся мечтам]]></value>
-		<value><![CDATA[одиннадцатой натуре]]></value>
+		<value><![CDATA[мечтательной натуре]]></value>
 		<value><![CDATA[чертям]]></value>
 		<value><![CDATA[бесам]]></value>
 		<value><![CDATA[волосам]]></value>
 		<value><![CDATA[неуместным мыслям]]></value>
 		<value><![CDATA[ней]]></value>
+		<value><![CDATA[бабушке]]></value>
+		<value><![CDATA[жежушке]]></value>
+		<value><![CDATA[незнакомке]]></value>
+		<value><![CDATA[случаю]]></value>
+		<value><![CDATA[несчастному случаю]]></value>
+		<value><![CDATA[счастливому случаю]]></value>
+		<value><![CDATA[черепашке]]></value>
+		<value><![CDATA[колену]]></value>
+		<value><![CDATA[ноге]]></value>
+		<value><![CDATA[голове]]></value>
+		<value><![CDATA[груди]]></value>
+		<value><![CDATA[плечу]]></value>
+		<value><![CDATA[качану]]></value>
+		<value><![CDATA[беседе]]></value>
+		<value><![CDATA[предлогу]]></value>
+		<value><![CDATA[поводу]]></value>
+		<value><![CDATA[ожерелью]]></value>
+		<value><![CDATA[подарку]]></value>
+		<value><![CDATA[причалу]]></value>
+		<value><![CDATA[привычке]]></value>
 	</item>
 
 	<item>
@@ -176,6 +202,32 @@
 		<value><![CDATA[море вины]]></value>
 		<value><![CDATA[чистую воду]]></value>
 		<value><![CDATA[неизвестные дали]]></value>
+		<value><![CDATA[мост]]></value>
+		<value><![CDATA[вечность]]></value>
+		<value><![CDATA[неизбежность]]></value>
+		<value><![CDATA[конфронитацию]]></value>
+		<value><![CDATA[постель]]></value>
+		<value><![CDATA[плетень]]></value>
+		<value><![CDATA[порог]]></value>
+		<value><![CDATA[кровать]]></value>
+		<value><![CDATA[дружбу]]></value>
+		<value><![CDATA[ненависть]]></value>
+		<value><![CDATA[чувства]]></value>
+		<value><![CDATA[искренние чувства]]></value>
+		<value><![CDATA[симпатию]]></value>
+		<value><![CDATA[ёлку]]></value>
+		<value><![CDATA[пруд]]></value>
+		<value><![CDATA[реку]]></value>
+		<value><![CDATA[горы]]></value>
+		<value><![CDATA[снега]]></value>
+		<value><![CDATA[болото]]></value>
+		<value><![CDATA[самопожертвование]]></value>
+		<value><![CDATA[бутерброд с сыром]]></value>
+		<value><![CDATA[булочку]]></value>
+		<value><![CDATA[варенье]]></value>
+		<value><![CDATA[сладости]]></value>
+		<value><![CDATA[подозрения]]></value>
+		<value><![CDATA[брод]]></value>
 	</item>
 
 	<item>
@@ -201,16 +253,25 @@
 		<value><![CDATA[стулом]]></value>
 		<value><![CDATA[удивительным сходством]]></value>
 		<value><![CDATA[утроенной силой]]></value>
-		<value><![CDATA[удесятеренным вниманием]]></value>
-		<value><![CDATA[уничижительным вниманием]]></value>
-		<value><![CDATA[подозрительными достижениями]]></value>
-		<value><![CDATA[полосатым как колорадский жук]]></value>
+		<value><![CDATA[пристальным вниманием]]></value>
+		<value><![CDATA[достижениями]]></value>
+		<value><![CDATA[лицом]]></value>
+		<value><![CDATA[взором]]></value>
+		<value><![CDATA[воротами рая]]></value>
+		<value><![CDATA[ромашкой]]></value>
+		<value><![CDATA[розой]]></value>
+		<value><![CDATA[хризантемой]]></value>
+		<value><![CDATA[лютиками]]></value>
+		<value><![CDATA[собором]]></value>
+		<value><![CDATA[крестом]]></value>
+		<value><![CDATA[землей]]></value>
+		<value><![CDATA[парусом]]></value>
 	</item>
 
 	<item>
 		<key><![CDATA[Предложный]]></key>
 		<value><![CDATA[всем]]></value>
-		<value><![CDATA[неком случае]]></value>
+		<value><![CDATA[удобном случае]]></value>
 		<value><![CDATA[реке]]></value>
 		<value><![CDATA[поле]]></value>
 		<value><![CDATA[подсолнухе]]></value>
@@ -218,8 +279,8 @@
 		<value><![CDATA[лопухе]]></value>
 		<value><![CDATA[траве]]></value>
 		<value><![CDATA[зыбкой почве]]></value>
-		<value><![CDATA[илистом дне]]></value>
-		<value><![CDATA[вязкой жиже]]></value>
+		<value><![CDATA[дне]]></value>
+		<value><![CDATA[взгляде]]></value>
 		<value><![CDATA[шпильках]]></value>
 		<value><![CDATA[высоких каблуках]]></value>
 		<value><![CDATA[платформах]]></value>
@@ -228,6 +289,19 @@
 		<value><![CDATA[валютных резервах]]></value>
 		<value><![CDATA[последней заначке]]></value>
 		<value><![CDATA[первой любви]]></value>
+		<value><![CDATA[кресте]]></value>
+		<value><![CDATA[оказии]]></value>
+		<value><![CDATA[делах]]></value>
+		<value><![CDATA[деньгах]]></value>
+		<value><![CDATA[власти]]></value>
+		<value><![CDATA[роскоши]]></value>
+		<value><![CDATA[блондинке]]></value>
+		<value><![CDATA[своих]]></value>
+		<value><![CDATA[волне]]></value>
+		<value><![CDATA[ветру]]></value>
+		<value><![CDATA[склоне]]></value>
+		<value><![CDATA[склоне лет]]></value>
+		<value><![CDATA[парусе]]></value>
 	</item>
 
 </items>
