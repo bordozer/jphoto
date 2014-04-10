@@ -2,6 +2,7 @@ package ui.controllers.users.login;
 
 import core.context.EnvironmentContext;
 import core.general.user.User;
+import org.apache.commons.lang.StringUtils;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
@@ -95,7 +96,7 @@ public class UserLoginController {
 	public String processLogout( final @ModelAttribute( USER_LOGIN_MODEL ) UserLoginModel model, final HttpServletRequest request, final HttpServletResponse response ) {
 
 		final Cookie cookie = new Cookie( UserLoginController.USER_LOGIN_COOKIE, EnvironmentContext.getCurrentUser().getLogin() );
-		cookie.setPath( request.getContextPath() );
+		cookie.setPath( getPath( request ) );
 		cookie.setMaxAge( 0 );
 
 		response.addCookie( cookie );
@@ -115,7 +116,7 @@ public class UserLoginController {
 		}
 
 		final Cookie cookie = new Cookie( USER_LOGIN_COOKIE, userLogin );
-		cookie.setPath( request.getContextPath() );
+		cookie.setPath( getPath( request ) );
 		cookie.setMaxAge( expiration );
 
 		response.addCookie( cookie );
@@ -123,7 +124,11 @@ public class UserLoginController {
 
 	private void addAuthorizationKeyCookie( final User user, final HttpServletRequest request, final HttpServletResponse response ) {
 		final Cookie cookie = new Cookie( UsersSecurityServiceImpl.AUTHORIZATION_KEY_COOKIE, usersSecurityService.getStoredUserAuthorizationKey( user ) );
-		cookie.setPath( request.getContextPath() );
+		cookie.setPath( getPath( request ) );
 		response.addCookie( cookie );
+	}
+
+	private String getPath( final HttpServletRequest request ) {
+		return StringUtils.isNotEmpty( request.getContextPath() ) ? request.getContextPath() : "/";
 	}
 }
