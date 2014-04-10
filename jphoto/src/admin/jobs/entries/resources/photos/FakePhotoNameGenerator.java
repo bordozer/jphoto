@@ -34,6 +34,8 @@ public class FakePhotoNameGenerator {
 	private static final List<PhotoNameXMLData> prepositions = newArrayList();
 	private static final List<PhotoNameXMLData> details = newArrayList();
 
+	private final static List<String> punctuationMarks = newArrayList( "?", "!", "!!!", "...", "?!" );
+
 	public static void main( String[] args ) throws UnsupportedEncodingException {
 		final Genre genre = new Genre();
 		genre.setName( GenreDiscEntry.ANIMALS.getName() );
@@ -64,6 +66,10 @@ public class FakePhotoNameGenerator {
 			result.append( getRandomCombination( prepositions, details, randomUtilsService ) );
 		}
 
+		if ( randomUtilsService.getRandomInt( 0, 10 ) > 9 ) {
+			result.append( randomUtilsService.getRandomGenericListElement( punctuationMarks ) );
+		}
+
 		return result.toString();
 	}
 
@@ -90,6 +96,8 @@ public class FakePhotoNameGenerator {
 	}
 
 	private static String getRandomCombination( final List<PhotoNameXMLData> prepositions, final List<PhotoNameXMLData> details, final RandomUtilsService randomUtilsService ) {
+
+		final List<String> ends = newArrayList( "c", "?", "", "", "", "", "", "" );
 
 		final PhotoNameXMLData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
 

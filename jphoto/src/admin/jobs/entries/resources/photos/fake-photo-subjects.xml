@@ -146,6 +146,13 @@
 		<value><![CDATA[Неожиданный поворот]]></value>
 		<value><![CDATA[Крутой поворот]]></value>
 		<value><![CDATA[Сага]]></value>
+		<value><![CDATA[Карты]]></value>
+		<value><![CDATA[Деньги]]></value>
+		<value><![CDATA[Намек]]></value>
+		<value><![CDATA[Вольность]]></value>
+		<value><![CDATA[Дух]]></value>
+		<value><![CDATA[Пещера]]></value>
+		<value><![CDATA[Яма]]></value>
 	</item>
 
 	<item>
@@ -272,7 +279,7 @@
 		<key>Macro</key>
 		<value><![CDATA[Охота]]></value>
 		<value><![CDATA[Атака]]></value>
-		<value><![CDATA[Ктруженик]]></value>
+		<value><![CDATA[Труженик]]></value>
 		<value><![CDATA[Красавица]]></value>
 		<value><![CDATA[Чудовище]]></value>
 		<value><![CDATA[Капельки]]></value>

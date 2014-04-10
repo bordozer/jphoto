@@ -4,25 +4,27 @@
 
 	<item>
 		<key><![CDATA[Именительный]]></key>
-		<value><![CDATA[или превратность судьбы]]></value>
+		<value><![CDATA[превратность судьбы]]></value>
 		<value><![CDATA[под коньячек]]></value>
 		<value><![CDATA[без надежды на просвет]]></value>
+		<value><![CDATA[наизнанку]]></value>
 		<value><![CDATA[в пространстве]]></value>
-		<value><![CDATA[или молот ведьм]]></value>
-		<value><![CDATA[как у ведьмы]]></value>
+		<value><![CDATA[молот ведьм]]></value>
+		<value><![CDATA[у ведьмы]]></value>
 		<value><![CDATA[по-свински]]></value>
-		<value><![CDATA[как в кино]]></value>
+		<value><![CDATA[в кино]]></value>
 		<value><![CDATA[без берегов]]></value>
 		<value><![CDATA[в родовом гнезде]]></value>
 		<value><![CDATA[на ветру]]></value>
-		<value><![CDATA[как доказательство вины]]></value>
+		<value><![CDATA[доказательство вины]]></value>
 		<value><![CDATA[без ума]]></value>
 		<value><![CDATA[на совесть]]></value>
 		<value><![CDATA[в невесомости]]></value>
-		<value><![CDATA[как однодневный мотылек]]></value>
-		<value><![CDATA[или мотыга войны]]></value>
-		<value><![CDATA[или прерванный полет]]></value>
-		<value><![CDATA[и никакий фантастики]]></value>
+		<value><![CDATA[однодневный мотылек]]></value>
+		<value><![CDATA[топор войны]]></value>
+		<value><![CDATA[прерванный полет]]></value>
+		<value><![CDATA[из фантастики]]></value>
+		<value><![CDATA[плохой боевик]]></value>
 		<value><![CDATA[сквозь призму времени]]></value>
 		<value><![CDATA[навылет]]></value>
 		<value><![CDATA[в мундирах]]></value>
@@ -31,10 +33,35 @@
 		<value><![CDATA[из Валгаллы]]></value>
 		<value><![CDATA[после дождя]]></value>
 		<value><![CDATA[из-под тишка]]></value>
-		<value><![CDATA[как шкодливый котенок]]></value>
+		<value><![CDATA[шкодливый котенок]]></value>
 		<value><![CDATA[вместо присяги]]></value>
 		<value><![CDATA[не пряча слез]]></value>
 		<value><![CDATA[не скрывая гнева]]></value>
+		<value><![CDATA[без тормозов]]></value>
+		<value><![CDATA[открытие]]></value>
+		<value><![CDATA[первая любовь]]></value>
+		<value><![CDATA[последний лист]]></value>
+		<value><![CDATA[горечь утраты]]></value>
+		<value><![CDATA[горячие угли]]></value>
+		<value><![CDATA[память о]]></value>
+		<value><![CDATA[яркие воспоминания]]></value>
+		<value><![CDATA[сто граммов]]></value>
+		<value><![CDATA[щедрость обещаний]]></value>
+		<value><![CDATA[время]]></value>
+		<value><![CDATA[совет]]></value>
+		<value><![CDATA[любовь]]></value>
+		<value><![CDATA[маятник]]></value>
+		<value><![CDATA[долг]]></value>
+		<value><![CDATA[вечность]]></value>
+		<value><![CDATA[пуля]]></value>
+		<value><![CDATA[неизбежность]]></value>
+		<value><![CDATA[первая стадия]]></value>
+		<value><![CDATA[последняя стадия]]></value>
+		<value><![CDATA[вздох]]></value>
+		<value><![CDATA[последний вздох]]></value>
+		<value><![CDATA[сила]]></value>
+		<value><![CDATA[слабость]]></value>
+		<value><![CDATA[непреодолимое препятствие]]></value>
 	</item>
 
 	<item>
@@ -95,6 +122,12 @@
 		<value><![CDATA[умопомрачения]]></value>
 		<value><![CDATA[усталости]]></value>
 		<value><![CDATA[удали]]></value>
+		<value><![CDATA[подземном переходе]]></value>
+		<value><![CDATA[небес]]></value>
+		<value><![CDATA[любимой]]></value>
+		<value><![CDATA[любимого]]></value>
+		<value><![CDATA[соседа]]></value>
+		<value><![CDATA[тещи]]></value>
 	</item>
 
 	<item>
@@ -143,7 +176,6 @@
 		<value><![CDATA[море вины]]></value>
 		<value><![CDATA[чистую воду]]></value>
 		<value><![CDATA[неизвестные дали]]></value>
-		<value><![CDATA[подземный переход]]></value>
 	</item>
 
 	<item>
@@ -178,7 +210,7 @@
 	<item>
 		<key><![CDATA[Предложный]]></key>
 		<value><![CDATA[всем]]></value>
-		<value><![CDATA[неком]]></value>
+		<value><![CDATA[неком случае]]></value>
 		<value><![CDATA[реке]]></value>
 		<value><![CDATA[поле]]></value>
 		<value><![CDATA[подсолнухе]]></value>
@@ -187,7 +219,7 @@
 		<value><![CDATA[траве]]></value>
 		<value><![CDATA[зыбкой почве]]></value>
 		<value><![CDATA[илистом дне]]></value>
-		<value><![CDATA[вызкой жиже]]></value>
+		<value><![CDATA[вязкой жиже]]></value>
 		<value><![CDATA[шпильках]]></value>
 		<value><![CDATA[высоких каблуках]]></value>
 		<value><![CDATA[платформах]]></value>
