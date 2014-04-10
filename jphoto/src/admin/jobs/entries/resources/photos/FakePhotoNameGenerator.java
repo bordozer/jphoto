@@ -97,8 +97,6 @@ public class FakePhotoNameGenerator {
 
 	private static String getRandomCombination( final List<PhotoNameXMLData> prepositions, final List<PhotoNameXMLData> details, final RandomUtilsService randomUtilsService ) {
 
-		final List<String> ends = newArrayList( "c", "?", "", "", "", "", "", "" );
-
 		final PhotoNameXMLData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
 
 		final String randomPreposition = randomUtilsService.getRandomGenericListElement( randomCase.getValues() );
