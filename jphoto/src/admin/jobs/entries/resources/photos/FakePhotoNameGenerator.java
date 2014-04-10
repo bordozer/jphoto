@@ -102,7 +102,8 @@ public class FakePhotoNameGenerator {
 		final String randomPreposition = randomUtilsService.getRandomGenericListElement( randomCase.getValues() );
 
 		for ( final PhotoNameXMLData detail : details ) {
-			if ( detail.getKey().equals( randomCase.getKey() ) ) {
+			final boolean isCaseTheSame = detail.getKey().equals( randomCase.getKey() );
+			if ( isCaseTheSame ) {
 				final String randomOther = randomUtilsService.getRandomGenericListElement( detail.getValues() );
 				return String.format( "%s %s", randomPreposition, randomOther );
 			}
