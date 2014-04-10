@@ -4,6 +4,8 @@
 
 	<item>
 		<key><![CDATA[Именительный]]></key>
+		<value><![CDATA[]]></value>
+		<value><![CDATA[или]]></value>
 	</item>
 
 	<item>
@@ -52,7 +54,7 @@
 		<value><![CDATA[на]]></value>
 		<value><![CDATA[о]]></value>
 		<value><![CDATA[об]]></value>
-		<value><![CDATA[обо]]></value>
+		<!--<value><![CDATA[обо]]></value>-->
 		<value><![CDATA[при]]></value>
 	</item>
 

@@ -93,10 +93,6 @@ public class FakePhotoNameGenerator {
 
 		final PhotoNameXMLData randomCase = randomUtilsService.getRandomGenericListElement( prepositions );
 
-		if ( randomCase.getValues().size() == 0 ) { // ???????????? ?????
-			return randomUtilsService.getRandomGenericListElement( details.get( 0 ).getValues() );
-		}
-
 		final String randomPreposition = randomUtilsService.getRandomGenericListElement( randomCase.getValues() );
 
 		for ( final PhotoNameXMLData detail : details ) {
