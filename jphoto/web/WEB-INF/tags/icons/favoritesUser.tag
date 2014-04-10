@@ -3,7 +3,7 @@
 <%@ tag import="core.general.user.User" %>
 <%@ tag import="core.context.EnvironmentContext" %>
 <%@ tag import="utils.UserUtils" %>
-<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
+<%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>

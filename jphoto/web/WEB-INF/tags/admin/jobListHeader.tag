@@ -1,6 +1,6 @@
 <%@ tag import="admin.jobs.enums.JobListTab" %>
 <%@ tag import="admin.jobs.enums.JobExecutionStatus" %>
-<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
+<%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 

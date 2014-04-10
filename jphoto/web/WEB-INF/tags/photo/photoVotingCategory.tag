@@ -1,5 +1,5 @@
 <%@ tag import="ui.controllers.voting.PhotoVotingModel" %>
-<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
+<%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>

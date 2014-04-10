@@ -2,7 +2,7 @@
 <%@ tag import="tags.FormTag" %>
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
-<%@ taglib prefix="eco" uri="http://jphoto.dev" %>
+<%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>

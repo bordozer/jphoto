@@ -7,7 +7,7 @@
 
 	<tlib-version>1.0</tlib-version>
 	<short-name>eco</short-name>
-	<uri>http://jphoto.dev</uri>
+	<uri>http://taglibs</uri>
 
 	<tag>
 		<name>page</name>
