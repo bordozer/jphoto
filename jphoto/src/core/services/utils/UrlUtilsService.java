@@ -26,8 +26,6 @@ public interface UrlUtilsService {
 
 	String getPortalPageURL();
 
-	String getCSSFolderUrl();
-
 	String getSiteImagesPath();
 
 	String getPhotoNewLink();

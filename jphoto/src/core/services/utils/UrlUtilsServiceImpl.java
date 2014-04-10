@@ -36,7 +36,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	private String getContextWithPrefix() {
-		return String.format( "%s/%s", getContextName(), systemVarsService.getApplicationPrefix() );
+		return String.format( "%s%s", getContextName(), systemVarsService.getApplicationPrefix() );
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	private String getAdminContextWithPrefix() {
-		return String.format( "%s/%s", getContextName(), systemVarsService.getAdminPrefix() );
+		return String.format( "%s%s", getContextName(), systemVarsService.getAdminPrefix() );
 	}
 
 	@Override
@@ -81,11 +81,6 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	@Override
 	public String getPortalPageURL() {
 		return String.format( "%s%s/", getServerUrlClosed(), getContextWithPrefix() );
-	}
-
-	@Override
-	public String getCSSFolderUrl() {
-		return String.format( "/%s/", getContextWithPrefix() );
 	}
 
 	@Override
