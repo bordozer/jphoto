@@ -1,5 +1,7 @@
 package ui.controllers.photos.edit;
 
+import admin.jobs.entries.resources.photos.FakePhotoNameGenerator;
+import core.services.system.Services;
 import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
 import ui.controllers.photos.edit.description.UploadDescriptionFactory;
 import core.context.EnvironmentContext;
@@ -154,7 +156,7 @@ public class PhotoEditDataController {
 		model.setPhotoAuthor( currentUser );
 
 		final int randomInt = randomUtilsService.getRandomInt( 100, 999 );
-		model.setName( String.format( "Photo name - %s", randomInt ) );
+		model.setName( String.format( "Manually uploaded photo - %s", randomInt ) );
 		model.setKeywords( String.format( "Keywords - %s", randomInt ) );
 		model.setDescription( String.format( "Description - %s", randomInt ) );
 
