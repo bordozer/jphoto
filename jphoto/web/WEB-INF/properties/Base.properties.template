@@ -4,7 +4,7 @@ ProjectUrl=http://192.168.69.77:8083
 #Tomcat context
 TomcatWorkerName=/jphoto
 
-#Application prefix (can't be null)
+#Application prefix
 ApplicationPrefix=app
 
 # Admin prefix

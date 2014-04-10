@@ -7,53 +7,48 @@
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/app/error/general/</location>
+		<location>/error/general/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.notFound.UserNotFoundException</exception-type>
-		<location>/app/error/notFound/user/</location>
+		<location>/error/notFound/user/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.notFound.PhotoNotFoundException</exception-type>
-		<location>/app/error/notFound/photo/</location>
+		<location>/error/notFound/photo/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.notFound.GenreNotFoundException</exception-type>
-		<location>/app/error/notFound/genre/</location>
+		<location>/error/notFound/genre/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.NotLoggedUserException</exception-type>
-		<location>/app/error/notLoggedUser/</location>
+		<location>/error/notLoggedUser/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.AccessDeniedException</exception-type>
-		<location>/app/error/accessDenied/</location>
+		<location>/error/accessDenied/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.NudeContentException</exception-type>
-		<location>/app/error/nudeContentWarning/</location>
+		<location>/error/nudeContentWarning/</location>
 	</error-page>
 
 	<error-page>
 		<exception-type>core.exceptions.UserRequestSecurityException</exception-type>
-		<location>/app/error/userRequestSecurityException/</location>
+		<location>/error/userRequestSecurityException/</location>
 	</error-page>
 
 	<error-page>
 		<error-code>500</error-code>
-		<location>/app/error/general/</location>
+		<location>/error/general/</location>
 	</error-page>
-
-	<!--<error-page>
-		<exception-type>java.lang.Throwable</exception-type>
-		<location>/app/error/general/</location>
-	</error-page>-->
 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -158,7 +153,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Spring</servlet-name>
-		<url-pattern>/app/*</url-pattern>
+		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
 	<!-- Admin -->
