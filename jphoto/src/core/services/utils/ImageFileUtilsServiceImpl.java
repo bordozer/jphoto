@@ -128,14 +128,15 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 
 		if ( isFileToBig( multipartFile, maxFileSizeKb ) ) {
 			final long actualFileSizeKiloBytes = multipartFile.getSize() / 1024;
-			errors.rejectValue( fileControlName, translatorService.translate( "%s size should be less then $1 Kilobytes.<br />Attempt to upload $2 Kilobytes", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxFileSizeKb ), String.valueOf( actualFileSizeKiloBytes ) ) );
+			errors.rejectValue( fileControlName, translatorService.translate( "$1 size should be less then $1 Kilobytes.<br />Attempt to upload $2 Kilobytes", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxFileSizeKb ), String.valueOf( actualFileSizeKiloBytes ) ) );
 			return;
 		}
 
 		final String contentType = multipartFile.getContentType();
 		final List<String> allowedExtensions = configurationService.getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
 		if ( !PhotoUtils.isPhotoContentTypeSupported( allowedExtensions, contentType ) ) {
-			errors.rejectValue( fileControlName, translatorService.translate( "Unsupported %s type is uploaded - $1.", language, FormatUtils.getFormattedFieldName( "File" ) ), contentType );
+			errors.rejectValue( fileControlName, translatorService.translate( "Unsupported $1 type is uploaded - $2."
+				, language, FormatUtils.getFormattedFieldName( "File" ) ), contentType );
 			return;
 		}
 
