@@ -1,20 +1,26 @@
-#Project URL
+#Project URL without closing slash
 ProjectUrl=http://192.168.69.77:8083
 
-#Tomcat context
+#Tomcat context with leading slash
 TomcatWorkerName=/jphoto
 
-#Application prefix
-ApplicationPrefix=app
+# use this if no context
+TomcatWorkerName=
 
-# Admin prefix
-AdminPrefix=admin
+#Application prefix with leading slash
+ApplicationPrefix=/app
 
-# System photo path
+# use this if no prefix
+#ApplicationPrefix=
+
+# Admin prefix with leading slash
+AdminPrefix=/admin
+
+# Photo storage path
 PhotoStoragePath=/home/blu/src/userPhotos
-
-# System temp path
-SystemTempFolder=../Files/temp
 
 ## Preview folder name
 PreviewFolderName=preview
+
+# Temp files path
+SystemTempFolder=../Files/temp

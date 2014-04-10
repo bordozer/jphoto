@@ -8,6 +8,7 @@ import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
+import core.services.utils.UrlUtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
@@ -70,6 +71,9 @@ public class UserEditDataController {
 
 	@Autowired
 	private DataRequirementService dataRequirementService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -190,7 +194,7 @@ public class UserEditDataController {
 	}
 
 	private String getRedirectToUserListView() {
-		return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.USERS_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURLWithPrefix(), UrlUtilsServiceImpl.USERS_URL );
 	}
 
 	private void setCommentAllowance( final UserEditDataModel model, final User user ) {

@@ -18,17 +18,17 @@ public class SystemVarsServiceMock implements SystemVarsService {
 
 	@Override
 	public String getProjectUrlClosed() {
-		return "http://127.0.0.1:8085/";
+		return String.format( "%s/", getProjectUrl() );
 	}
 
 	@Override
 	public String getTomcatWorkerName() {
-		return "worker";
+		return "/worker";
 	}
 
 	@Override
 	public String getApplicationPrefix() {
-		return "test";
+		return "/test";
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class SystemVarsServiceMock implements SystemVarsService {
 
 	@Override
 	public String getAdminPrefix() {
-		return "adm";
+		return "/adm";
 	}
 
 	@Override

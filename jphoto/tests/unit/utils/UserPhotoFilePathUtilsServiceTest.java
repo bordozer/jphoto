@@ -20,11 +20,6 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 	@Test
 	public void test() {
 
-		final String projectUrl = systemVarsServiceMock.getProjectUrlClosed();
-		final String workerName = systemVarsServiceMock.getTomcatWorkerName();
-		final String appPrefix = systemVarsServiceMock.getApplicationPrefix();
-		final String photoStoragePath = systemVarsServiceMock.getPhotoStoragePath();
-
 		final int userId = 111;
 		final User user = new User();
 		user.setId( userId );
@@ -37,13 +32,12 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setName( "Photo name" );
 		photo.setFile( new File( "/photoDir", "photoFileName" ) );
 
-		assertEquals( String.format( "%s/%d", photoStoragePath, userId ), userPhotoFilePathUtilsService.getUserPhotoDir( userId ).getPath() );
-		assertEquals( String.format( "%s%s/%s/download/photos/%d/preview/", projectUrl, workerName, appPrefix, photoId ), userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
-		assertEquals( String.format( "%s%s/%s/download/photos/%d/", projectUrl, workerName, appPrefix, photoId ), userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
-		assertEquals( String.format( "photoFileName_preview.jpg" ), userPhotoFilePathUtilsService.generateUserPhotoPreviewFileName( photo ) );
-		assertEquals( String.format( "%s/%d/previews/photoFileName_preview.jpg", photoStoragePath, userId ), userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
-		assertEquals( String.format( "_avatar_%d.jpg", userId ), userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
-		assertEquals( String.format( "%s%s/%s/download/file/?filePath=%s/%d/_avatar_%d.jpg"
-			, projectUrl, workerName, appPrefix, photoStoragePath, userId, userId ), userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
+		assertEquals( "photo/storage/path/111", userPhotoFilePathUtilsService.getUserPhotoDir( userId ).getPath() );
+		assertEquals( "http://127.0.0.1:8085/worker/test/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+		assertEquals( "http://127.0.0.1:8085/worker/test/download/photos/444/", userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
+		assertEquals( "photoFileName_preview.jpg", userPhotoFilePathUtilsService.generateUserPhotoPreviewFileName( photo ) );
+		assertEquals( "photo/storage/path/111/previews/photoFileName_preview.jpg", userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
+		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
+		assertEquals( "http://127.0.0.1:8085/worker/test/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
 	}
 }

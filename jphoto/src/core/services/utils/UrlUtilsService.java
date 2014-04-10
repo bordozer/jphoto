@@ -14,15 +14,13 @@ public interface UrlUtilsService {
 
 	String getServerUrlClosed();
 
-	String getBaseURLWithPrefix();
-
-	String getAdminURLWithPrefix();
-
-	String getAdminBaseURLWithPrefix();
-
 	String getBaseURL();
 
+	String getBaseURLWithPrefix();
+
 	String getBaseURLWithPrefixClosed();
+
+	String getAdminBaseURLWithPrefix();
 
 	String getPortalPageURL();
 

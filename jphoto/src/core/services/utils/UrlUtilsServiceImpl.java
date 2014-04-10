@@ -31,14 +31,6 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
-	private String getContextName() {
-		return systemVarsService.getTomcatWorkerName();
-	}
-
-	private String getContextWithPrefix() {
-		return String.format( "%s%s", getContextName(), systemVarsService.getApplicationPrefix() );
-	}
-
 	@Override
 	public String getServerUrl() {
 		return systemVarsService.getProjectUrl();
@@ -50,37 +42,28 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
-	public String getBaseURLWithPrefix() {
-		return getServerUrlClosed() + getContextWithPrefix();
-	}
-
-	private String getAdminContextWithPrefix() {
-		return String.format( "%s%s", getContextName(), systemVarsService.getAdminPrefix() );
-	}
-
-	@Override
-	public String getAdminURLWithPrefix() {
-		return getServerUrlClosed() + getAdminContextWithPrefix();
-	}
-
-	@Override
-	public String getAdminBaseURLWithPrefix() {
-		return getServerUrlClosed() + getAdminContextWithPrefix();
-	}
-
-	@Override
 	public String getBaseURL() {
-		return getServerUrlClosed() + getContextName();
+		return String.format( "%s%s/", getServerUrl(), getContextName() );
+	}
+
+	@Override
+	public String getBaseURLWithPrefix() {
+		return getServerUrl() + getContextWithPrefix();
 	}
 
 	@Override
 	public String getBaseURLWithPrefixClosed() {
-		return String.format( "%s%s/", getServerUrlClosed(), getContextWithPrefix() );
+		return String.format( "%s%s/", getServerUrl(), getContextWithPrefix() );
+	}
+
+	@Override
+	public String getAdminBaseURLWithPrefix() {
+		return getServerUrl() + getAdminContextWithPrefix();
 	}
 
 	@Override
 	public String getPortalPageURL() {
-		return String.format( "%s%s/", getServerUrlClosed(), getContextWithPrefix() );
+		return String.format( "%s%s/", getServerUrl(), getContextWithPrefix() );
 	}
 
 	@Override
@@ -535,6 +518,18 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	@Override
 	public String getAdminVotingCategoriesTranslationsUrl() {
 		return String.format( "%s/translations/custom/voting-categories/", getAdminBaseURLWithPrefix() );
+	}
+
+	private String getContextName() {
+		return systemVarsService.getTomcatWorkerName();
+	}
+
+	private String getContextWithPrefix() {
+		return String.format( "%s%s", getContextName(), systemVarsService.getApplicationPrefix() );
+	}
+
+	private String getAdminContextWithPrefix() {
+		return String.format( "%s%s", getContextName(), systemVarsService.getAdminPrefix() );
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {

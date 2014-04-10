@@ -69,7 +69,7 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 
 	@Override
 	public String getProjectUrlClosed() {
-		return String.format( "%s/", config.getString( "ProjectUrl" ) );
+		return String.format( "%s/", getProjectUrl() );
 	}
 
 	@Override

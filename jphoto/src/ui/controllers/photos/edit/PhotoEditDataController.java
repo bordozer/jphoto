@@ -96,9 +96,6 @@ public class PhotoEditDataController {
 	private AnonymousDaysService anonymousDaysService;
 
 	@Autowired
-	private SystemVarsService systemVarsService;
-
-	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
@@ -118,6 +115,9 @@ public class PhotoEditDataController {
 
 	@Autowired
 	private DataRequirementService dataRequirementService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	private final LogHelper log = new LogHelper( PhotoEditDataController.class );
 
@@ -318,7 +318,7 @@ public class PhotoEditDataController {
 			}
 		}
 
-		return String.format( "redirect:/%s/%s/", systemVarsService.getApplicationPrefix(), UrlUtilsServiceImpl.PHOTOS_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURLWithPrefix(), UrlUtilsServiceImpl.PHOTOS_URL );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )
