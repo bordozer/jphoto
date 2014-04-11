@@ -80,9 +80,7 @@
 															return false;
 														}
 
-														<%--showInformationMessage( "${eco:translate('The message has been sent to')}" + toUserName );--%>
-														<%--jAlert( "${eco:translate('The message has been sent to')}" + toUserName );--%>
-														notifySuccessMessage( "${eco:translate('The message has been sent to')}" + toUserName );
+														notifySuccessMessage( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
 
 														$( this ).dialog( "close" );
 
