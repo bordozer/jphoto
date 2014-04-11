@@ -1,7 +1,7 @@
 package utils;
 
-import core.context.ApplicationContextHelper;
-import core.context.EnvironmentContext;
+import ui.context.ApplicationContextHelper;
+import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserAvatar;

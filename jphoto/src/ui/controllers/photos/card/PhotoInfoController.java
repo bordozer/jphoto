@@ -1,6 +1,6 @@
 package ui.controllers.photos.card;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.services.photo.PhotoService;
 import core.services.user.UserRankService;

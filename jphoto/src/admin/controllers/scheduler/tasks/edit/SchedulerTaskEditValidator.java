@@ -1,7 +1,7 @@
 package admin.controllers.scheduler.tasks.edit;
 
 import admin.services.scheduler.SchedulerService;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.executiontasks.PeriodUnit;
 import core.services.translator.TranslatorService;

@@ -1,6 +1,6 @@
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.entry.FavoritesService" %>
-<%@ tag import="core.context.EnvironmentContext" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.general.user.User" %>
 <%@ tag import="utils.UserUtils" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

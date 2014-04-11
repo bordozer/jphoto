@@ -1,7 +1,7 @@
 package ui.controllers.content.nude;
 
-import core.context.Environment;
-import core.context.EnvironmentContext;
+import ui.context.Environment;
+import ui.context.EnvironmentContext;
 import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

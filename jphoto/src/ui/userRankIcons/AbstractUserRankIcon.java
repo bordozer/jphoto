@@ -1,6 +1,6 @@
 package ui.userRankIcons;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.translator.Language;

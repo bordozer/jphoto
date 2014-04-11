@@ -1,6 +1,6 @@
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
 <%@ page import="ui.controllers.users.login.UserLoginModel" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>

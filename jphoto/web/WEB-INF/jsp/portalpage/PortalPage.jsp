@@ -1,7 +1,7 @@
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
 <%@ page import="ui.controllers.portalpage.PortalPageModel" %>
-<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="ui.services.breadcrumbs.items.BreadcrumbsBuilder" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

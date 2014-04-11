@@ -1,7 +1,7 @@
 package core.services.validation;
 
 import ui.controllers.users.edit.UserEditDataModel;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import utils.PasswordUtils;

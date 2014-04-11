@@ -2,7 +2,7 @@
 <%@ tag import="core.services.utils.ImageFileUtilsServiceImpl" %>
 <%@ tag import="core.general.img.Dimension" %>
 <%@ tag import="core.services.utils.ImageFileUtilsService" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

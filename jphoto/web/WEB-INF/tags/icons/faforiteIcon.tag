@@ -1,6 +1,6 @@
-<%@ tag import="core.context.EnvironmentContext" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

@@ -1,6 +1,6 @@
 package ui.controllers.users.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.general.configuration.ConfigurationKey;

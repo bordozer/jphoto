@@ -1,8 +1,8 @@
 package sql;
 
 import common.AbstractTestCase;
-import core.context.Environment;
-import core.context.EnvironmentContext;
+import ui.context.Environment;
+import ui.context.EnvironmentContext;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;

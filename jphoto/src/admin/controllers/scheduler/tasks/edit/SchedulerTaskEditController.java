@@ -3,7 +3,7 @@ package admin.controllers.scheduler.tasks.edit;
 import admin.jobs.general.SavedJob;
 import admin.services.jobs.SavedJobService;
 import admin.services.scheduler.SchedulerService;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.SchedulerTaskProperty;
 import core.general.base.CommonProperty;
 import core.general.executiontasks.AbstractExecutionTask;

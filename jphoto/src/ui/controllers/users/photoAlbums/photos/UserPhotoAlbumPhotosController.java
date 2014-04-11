@@ -1,6 +1,6 @@
 package ui.controllers.users.photoAlbums.photos;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.user.User;

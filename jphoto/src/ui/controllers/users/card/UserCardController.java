@@ -3,7 +3,7 @@ package ui.controllers.users.card;
 import ui.controllers.activity.list.ActivityStreamController;
 import ui.controllers.users.card.data.AbstractUserCardModelFillStrategy;
 import ui.controllers.users.card.data.UserCardModelFillService;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;

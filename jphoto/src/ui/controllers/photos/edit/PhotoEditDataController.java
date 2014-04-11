@@ -1,10 +1,8 @@
 package ui.controllers.photos.edit;
 
-import admin.jobs.entries.resources.photos.FakePhotoNameGenerator;
-import core.services.system.Services;
 import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
 import ui.controllers.photos.edit.description.UploadDescriptionFactory;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;

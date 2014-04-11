@@ -1,10 +1,9 @@
 package admin.controllers.configuration.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationDataType;
 import core.general.configuration.ConfigurationKey;
-import core.general.configuration.ConfigurationTab;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ tag import="utils.UserUtils" %>
-<%@ tag import="core.context.EnvironmentContext" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.general.user.User" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>

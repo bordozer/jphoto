@@ -1,7 +1,7 @@
 package ui.controllers.photos.activity;
 
 import ui.controllers.activity.list.ActivityStreamController;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;

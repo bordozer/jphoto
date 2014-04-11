@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;

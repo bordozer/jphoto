@@ -1,6 +1,6 @@
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
-<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true"%>
 

@@ -1,6 +1,6 @@
 package ui.controllers.users.password.change;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.user.User;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;

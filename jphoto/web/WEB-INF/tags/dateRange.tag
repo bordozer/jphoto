@@ -1,6 +1,6 @@
 <%@ tag import="admin.jobs.enums.DateRangeType" %>
 <%@ tag import="core.services.utils.SystemVarsServiceImpl" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="admin.controllers.jobs.edit.DateRangableModel" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

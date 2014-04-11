@@ -1,4 +1,4 @@
-package core.context;
+package ui.context;
 
 import ui.controllers.users.login.UserLoginController;
 import core.general.user.User;

@@ -2,7 +2,7 @@ package ui.controllers.photos.list;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;

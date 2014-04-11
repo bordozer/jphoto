@@ -1,6 +1,6 @@
 package ui.controllers.users.list;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;

@@ -1,6 +1,6 @@
 package tags;
 
-import core.context.ApplicationContextHelper;
+import ui.context.ApplicationContextHelper;
 import core.services.system.PageTemplateService;
 import elements.PageModel;
 

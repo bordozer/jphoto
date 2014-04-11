@@ -7,7 +7,7 @@ import admin.upgrade.entities.UpgradeTaskLogEntry;
 import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.exceptions.UpgradeException;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.TranslatorService;

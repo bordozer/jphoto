@@ -1,6 +1,6 @@
 package ui.controllers.users.messages.list;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.PrivateMessageType;
 import core.general.base.PagingModel;
 import core.general.message.PrivateMessage;

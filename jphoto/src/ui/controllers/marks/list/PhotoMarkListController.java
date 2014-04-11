@@ -1,6 +1,6 @@
 package ui.controllers.marks.list;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;

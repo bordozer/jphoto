@@ -8,7 +8,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.Comparator" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="ui.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

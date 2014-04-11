@@ -13,7 +13,7 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.JobDateRange;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;

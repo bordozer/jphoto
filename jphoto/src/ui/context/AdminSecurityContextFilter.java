@@ -1,6 +1,7 @@
-package core.context;
+package ui.context;
 
-import core.services.user.UsersSecurityService;
+import core.exceptions.AccessDeniedException;
+import core.services.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -11,15 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserSecurityContextFilter extends OncePerRequestFilter implements Filter {
+public class AdminSecurityContextFilter extends OncePerRequestFilter implements Filter {
 
 	@Autowired
-	private UsersSecurityService usersSecurityService;
+	private SecurityService securityService;
 
 	@Override
 	protected void doFilterInternal( final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain ) throws ServletException, IOException {
 
-		usersSecurityService.assertLoggedUserRequestSecurityPassed( EnvironmentContext.getCurrentUser(), request );
+		if ( ! securityService.isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() ) ) {
+			throw new AccessDeniedException( "Admin only area" );
+		}
 
 		filterChain.doFilter( request, response );
 	}

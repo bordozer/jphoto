@@ -1,7 +1,7 @@
 package ui.controllers.users.list;
 
 import com.google.common.collect.Lists;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;

@@ -1,7 +1,7 @@
 <%@ page import="admin.jobs.enums.JobExecutionStatus" %>
 <%@ page import="admin.services.jobs.JobExecutionHistoryEntry" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

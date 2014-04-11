@@ -2,7 +2,7 @@
 <%@ page import="org.apache.commons.lang.exception.ExceptionUtils" %>
 <%@ page import="elements.PageTitleData" %>
 <%@ page import="elements.PageModel" %>
-<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ page isErrorPage="true" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>

@@ -1,4 +1,4 @@
-package core.context;
+package ui.context;
 
 import core.exceptions.BaseRuntimeException;
 import core.general.user.User;

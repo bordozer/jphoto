@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.preview;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import utils.FormatUtils;

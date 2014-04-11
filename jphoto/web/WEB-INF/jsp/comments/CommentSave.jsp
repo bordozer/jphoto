@@ -1,6 +1,6 @@
 <%@ page import="org.springframework.validation.BindingResult" %>
 <%@ page import="ui.controllers.comment.edit.PhotoCommentModel" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

@@ -1,6 +1,6 @@
 <%@ page import="core.services.translator.Language" %>
 <%@ page import="core.services.translator.TranslatorService" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ page import="java.util.Arrays" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

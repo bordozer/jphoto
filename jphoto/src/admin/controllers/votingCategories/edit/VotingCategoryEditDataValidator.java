@@ -1,6 +1,6 @@
 package admin.controllers.votingCategories.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
 import core.services.translator.TranslatorService;

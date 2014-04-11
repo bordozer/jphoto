@@ -8,7 +8,7 @@ import admin.jobs.general.GenerationMonitor;
 import admin.jobs.general.JobProgressDTO;
 import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.general.SavedJob;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.log.LogHelper;
 import core.services.system.Services;
 import core.services.system.ConfigurationService;

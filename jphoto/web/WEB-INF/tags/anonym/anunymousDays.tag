@@ -1,6 +1,6 @@
 <%@ tag import="core.services.entry.AnonymousDaysService" %>
 <%@ tag import="core.services.utils.SystemVarsServiceImpl" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.utils.SystemVarsService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

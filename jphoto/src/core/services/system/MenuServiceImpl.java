@@ -1,6 +1,6 @@
 package core.services.system;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;

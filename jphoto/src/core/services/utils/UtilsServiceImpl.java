@@ -1,6 +1,6 @@
 package core.services.utils;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.services.system.ConfigurationService;

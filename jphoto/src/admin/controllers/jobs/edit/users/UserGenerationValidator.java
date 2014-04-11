@@ -2,7 +2,7 @@ package admin.controllers.jobs.edit.users;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
 import admin.jobs.entries.UserGenerationJob;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

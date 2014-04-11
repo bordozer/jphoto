@@ -1,6 +1,6 @@
 package ui.controllers.users.avatar;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.img.Dimension;
 import core.general.user.User;
 import core.log.LogHelper;

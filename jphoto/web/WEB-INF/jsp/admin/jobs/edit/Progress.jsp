@@ -1,5 +1,5 @@
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="admin.services.jobs.JobExecutionService" %>
 <%@ page import="admin.controllers.jobs.list.SavedJobListController" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

@@ -1,4 +1,4 @@
-package core.context;
+package ui.context;
 
 import core.general.user.User;
 import org.springframework.mobile.device.DeviceType;

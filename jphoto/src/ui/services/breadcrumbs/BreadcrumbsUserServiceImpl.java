@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.enums.UserCardTab;

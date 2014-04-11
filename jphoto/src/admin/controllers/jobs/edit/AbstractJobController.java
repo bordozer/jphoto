@@ -7,7 +7,7 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import admin.jobs.loaders.SavedJobLoaderFactory;
 import admin.services.jobs.*;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.log.LogHelper;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.photo.PhotoService;

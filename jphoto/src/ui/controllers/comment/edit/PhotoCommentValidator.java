@@ -1,6 +1,6 @@
 package ui.controllers.comment.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.ValidationResult;

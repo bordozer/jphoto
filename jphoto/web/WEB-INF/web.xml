@@ -129,7 +129,7 @@
 	<!-- / User Security filter -->
 
 	<listener>
-		<listener-class>core.context.SessionListener</listener-class>
+		<listener-class>ui.context.SessionListener</listener-class>
 	</listener>
 
 	<context-param>
@@ -203,7 +203,7 @@
 	</listener>
 
 	<listener>
-		<listener-class>core.context.WebApplicationContextSupport</listener-class>
+		<listener-class>ui.context.WebApplicationContextSupport</listener-class>
 	</listener>
 
 	<servlet>

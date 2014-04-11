@@ -3,7 +3,7 @@
 <%@ tag import="core.services.utils.ImageFileUtilsServiceImpl" %>
 <%@ tag import="java.io.File" %>
 <%@ tag import="core.services.utils.ImageFileUtilsService" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.utils.UrlUtilsService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

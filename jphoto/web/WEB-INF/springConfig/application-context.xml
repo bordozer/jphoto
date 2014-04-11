@@ -19,8 +19,8 @@
 
 	<import resource="admin-service.xml"/>
 
-	<bean id="requestContextFilter" class="core.context.RequestContextFilter" />
-	<bean id="adminSecurityContextFilter" class="core.context.AdminSecurityContextFilter" />
-	<bean id="userSecurityContextFilter" class="core.context.UserSecurityContextFilter" />
+	<bean id="requestContextFilter" class="ui.context.RequestContextFilter" />
+	<bean id="adminSecurityContextFilter" class="ui.context.AdminSecurityContextFilter" />
+	<bean id="userSecurityContextFilter" class="ui.context.UserSecurityContextFilter" />
 
 </beans>

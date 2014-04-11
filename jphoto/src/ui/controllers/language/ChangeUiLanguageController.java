@@ -1,6 +1,6 @@
 package ui.controllers.language;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;

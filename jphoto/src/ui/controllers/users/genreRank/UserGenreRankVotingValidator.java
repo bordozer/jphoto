@@ -1,6 +1,6 @@
 package ui.controllers.users.genreRank;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.ValidationResult;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;

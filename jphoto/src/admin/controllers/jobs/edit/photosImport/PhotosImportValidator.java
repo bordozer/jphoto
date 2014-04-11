@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.UserGender;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.UserMembershipType;

@@ -1,5 +1,5 @@
 <%@ page import="core.services.entry.AnonymousDaysService" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ page import="core.services.utils.DateUtilsService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

@@ -1,8 +1,8 @@
 package utils;
 
 import admin.controllers.translator.custom.TranslationEntryType;
-import core.context.ApplicationContextHelper;
-import core.context.EnvironmentContext;
+import ui.context.ApplicationContextHelper;
+import ui.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;

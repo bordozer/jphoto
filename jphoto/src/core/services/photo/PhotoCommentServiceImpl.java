@@ -1,7 +1,7 @@
 package core.services.photo;
 
 import ui.controllers.comment.edit.PhotoCommentInfo;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.dtos.CommentDTO;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;

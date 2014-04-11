@@ -1,6 +1,6 @@
 package json.users.rankInGenreVoting;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.user.User;

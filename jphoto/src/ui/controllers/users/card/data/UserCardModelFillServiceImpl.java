@@ -3,7 +3,7 @@ package ui.controllers.users.card.data;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
 import ui.controllers.users.card.UserStatistic;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;

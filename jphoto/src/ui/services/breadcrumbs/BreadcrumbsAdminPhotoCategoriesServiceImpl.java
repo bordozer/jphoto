@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.services.system.Services;
 import core.services.translator.Language;

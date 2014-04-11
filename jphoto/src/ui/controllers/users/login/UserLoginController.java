@@ -1,6 +1,6 @@
 package ui.controllers.users.login;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
 import ui.services.breadcrumbs.BreadcrumbsUserService;

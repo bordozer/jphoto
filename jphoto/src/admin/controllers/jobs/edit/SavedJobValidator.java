@@ -2,7 +2,7 @@ package admin.controllers.jobs.edit;
 
 import admin.jobs.general.SavedJob;
 import admin.services.jobs.SavedJobService;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;

@@ -1,6 +1,6 @@
 package core.services.entry;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.dtos.AjaxResultDTO;
 import core.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;

@@ -1,6 +1,6 @@
 package ui.controllers.photos.groupoperations;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;

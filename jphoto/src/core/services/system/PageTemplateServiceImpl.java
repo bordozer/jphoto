@@ -2,7 +2,7 @@ package core.services.system;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
 import ui.controllers.users.login.UserLoginModel;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
 import core.general.user.User;

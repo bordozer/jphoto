@@ -1,7 +1,7 @@
-<%@ tag import="core.context.EnvironmentContext" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

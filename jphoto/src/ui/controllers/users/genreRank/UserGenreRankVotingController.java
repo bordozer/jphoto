@@ -1,6 +1,6 @@
 package ui.controllers.users.genreRank;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserRankInGenreVoting;

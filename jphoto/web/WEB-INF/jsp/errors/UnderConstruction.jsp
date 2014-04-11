@@ -1,7 +1,7 @@
 <%@ page import="elements.PageModel" %>
 <%@ page import="elements.PageTitleData" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
-<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isErrorPage="true" %>
 

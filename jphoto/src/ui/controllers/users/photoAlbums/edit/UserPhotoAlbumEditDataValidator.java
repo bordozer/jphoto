@@ -1,6 +1,6 @@
 package ui.controllers.users.photoAlbums.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@
 <%@ page import="core.general.img.Dimension" %>
 <%@ page import="core.services.utils.UserPhotoFilePathUtilsService" %>
 <%@ page import="core.services.utils.ImageFileUtilsService" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

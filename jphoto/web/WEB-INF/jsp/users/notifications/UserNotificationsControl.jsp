@@ -1,6 +1,6 @@
 <%@ page import="core.general.user.EmailNotificationType" %>
 <%@ page import="ui.controllers.users.notifications.UserNotificationsControlModel" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="core.services.utils.UrlUtilsService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

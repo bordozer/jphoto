@@ -1,8 +1,8 @@
 package services;
 
 import common.AbstractTestCase;
-import core.context.Environment;
-import core.context.EnvironmentContext;
+import ui.context.Environment;
+import ui.context.EnvironmentContext;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NudeContentException;
 import core.exceptions.notFound.GenreNotFoundException;

@@ -1,6 +1,6 @@
 package ui.controllers.users.team.edit;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.TranslatorService;

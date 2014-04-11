@@ -1,8 +1,8 @@
 <%@ page import="core.enums.FavoriteEntryType" %>
 <%@ page import="ui.controllers.comment.edit.PhotoCommentModel" %>
-<%@ page import="core.context.EnvironmentContext" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="utils.UserUtils" %>
-<%@ page import="core.context.ApplicationContextHelper" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.springframework.mobile.device.DeviceType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

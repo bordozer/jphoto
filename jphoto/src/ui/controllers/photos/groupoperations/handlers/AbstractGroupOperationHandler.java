@@ -4,7 +4,7 @@ import ui.controllers.photos.groupoperations.GroupOperationResult;
 import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
 import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
 import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;

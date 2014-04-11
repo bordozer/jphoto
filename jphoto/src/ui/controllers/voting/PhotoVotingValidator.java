@@ -1,6 +1,6 @@
 package ui.controllers.voting;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.photo.ValidationResult;
 import core.general.user.UserPhotoVote;

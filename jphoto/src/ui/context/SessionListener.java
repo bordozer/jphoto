@@ -1,4 +1,4 @@
-package core.context;
+package ui.context;
 
 import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;

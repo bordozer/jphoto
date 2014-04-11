@@ -1,8 +1,8 @@
 package utils;
 
 import common.AbstractTestCase;
-import core.context.Environment;
-import core.context.EnvironmentContext;
+import ui.context.Environment;
+import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.user.User;
 import org.junit.Before;

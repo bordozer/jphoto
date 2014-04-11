@@ -1,8 +1,8 @@
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
-<%@ tag import="core.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="core.services.photo.PhotoCommentService" %>
-<%@ tag import="core.context.EnvironmentContext" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

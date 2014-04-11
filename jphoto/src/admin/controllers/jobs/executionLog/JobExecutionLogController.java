@@ -3,7 +3,7 @@ package admin.controllers.jobs.executionLog;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

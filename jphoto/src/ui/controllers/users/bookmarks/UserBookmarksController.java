@@ -2,7 +2,7 @@ package ui.controllers.users.bookmarks;
 
 import ui.controllers.photos.list.PhotoListController;
 import ui.controllers.photos.list.PhotoListModel;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;

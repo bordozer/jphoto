@@ -1,7 +1,7 @@
 package ui.controllers.comment.list;
 
 import ui.controllers.comment.edit.PhotoCommentInfo;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;

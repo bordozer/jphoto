@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.activityStream;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

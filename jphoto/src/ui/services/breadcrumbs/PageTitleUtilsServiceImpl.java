@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs;
 
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;

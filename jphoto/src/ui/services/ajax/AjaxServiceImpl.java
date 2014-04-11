@@ -4,7 +4,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.photosight.Photosight
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
-import core.context.EnvironmentContext;
+import ui.context.EnvironmentContext;
 import core.dtos.AjaxResultDTO;
 import core.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;

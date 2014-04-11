@@ -1,7 +1,7 @@
 package core.services.validation;
 
-import core.context.ApplicationContextHelper;
-import core.context.EnvironmentContext;
+import ui.context.ApplicationContextHelper;
+import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
