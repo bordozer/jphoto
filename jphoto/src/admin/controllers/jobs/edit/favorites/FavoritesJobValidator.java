@@ -1,11 +1,11 @@
 package admin.controllers.jobs.edit.favorites;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
-import ui.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 public class FavoritesJobValidator extends SavedJobValidator implements Validator {

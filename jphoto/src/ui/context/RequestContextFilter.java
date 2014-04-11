@@ -1,12 +1,12 @@
 package ui.context;
 
-import ui.controllers.users.login.UserLoginController;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ui.controllers.users.login.UserLoginController;
 import utils.PhotoUtils;
 import utils.UserUtils;
 

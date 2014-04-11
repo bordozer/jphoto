@@ -1,7 +1,7 @@
 package ui.controllers.users.card.data;
 
-import ui.controllers.users.card.UserCardModel;
 import core.general.base.PagingModel;
+import ui.controllers.users.card.UserCardModel;
 
 public class ActivityStreamStrategy extends AbstractUserCardModelFillStrategy {
 

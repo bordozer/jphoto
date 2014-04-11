@@ -1,8 +1,8 @@
 package tags;
 
+import elements.PageModel;
 import ui.context.ApplicationContextHelper;
 import ui.services.PageTemplateService;
-import elements.PageModel;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;

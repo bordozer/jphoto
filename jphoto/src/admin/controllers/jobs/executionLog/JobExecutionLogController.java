@@ -3,7 +3,6 @@ package admin.controllers.jobs.executionLog;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
-import ui.context.EnvironmentContext;
 import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
 
 import java.util.Collections;
 import java.util.Comparator;

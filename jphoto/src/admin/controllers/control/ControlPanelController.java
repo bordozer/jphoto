@@ -3,7 +3,6 @@ package admin.controllers.control;
 import core.general.cache.CacheKey;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.PrivateMessageService;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.system.CacheService;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 @Controller
 @RequestMapping( value = "control-panel" )

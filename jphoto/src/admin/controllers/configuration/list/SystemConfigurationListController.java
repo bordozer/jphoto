@@ -1,12 +1,12 @@
 package admin.controllers.configuration.list;
 
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 @Controller
 @RequestMapping ( value = "configuration" )

@@ -1,10 +1,8 @@
 package ui.controllers.users.avatar;
 
-import ui.context.EnvironmentContext;
 import core.general.img.Dimension;
 import core.general.user.User;
 import core.log.LogHelper;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -19,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 
 import javax.validation.Valid;

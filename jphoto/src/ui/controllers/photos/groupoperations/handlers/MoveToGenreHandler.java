@@ -1,6 +1,5 @@
 package ui.controllers.photos.groupoperations.handlers;
 
-import ui.controllers.photos.groupoperations.*;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
@@ -8,6 +7,7 @@ import core.services.photo.PhotoService;
 import core.services.system.Services;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
+import ui.controllers.photos.groupoperations.*;
 
 import java.util.List;
 import java.util.Map;

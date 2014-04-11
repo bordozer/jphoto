@@ -1,13 +1,9 @@
 package ui.controllers.photos.activity;
 
-import ui.controllers.activity.list.ActivityStreamController;
-import ui.context.EnvironmentContext;
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
@@ -22,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
+import ui.activity.AbstractActivityStreamEntry;
+import ui.context.EnvironmentContext;
+import ui.controllers.activity.list.ActivityStreamController;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 import utils.PagingUtils;
 

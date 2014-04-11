@@ -1,11 +1,8 @@
 package ui.controllers.activity.list;
 
-import ui.activity.AbstractActivityStreamEntry;
-import ui.activity.ActivityType;
 import core.general.base.PagingModel;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
-import ui.services.breadcrumbs.CommonBreadcrumbsService;
 import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
@@ -14,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
+import ui.activity.AbstractActivityStreamEntry;
+import ui.activity.ActivityType;
+import ui.services.breadcrumbs.CommonBreadcrumbsService;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;

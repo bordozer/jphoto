@@ -1,13 +1,8 @@
 package ui.controllers.users.card;
 
-import ui.controllers.activity.list.ActivityStreamController;
-import ui.controllers.users.card.data.AbstractUserCardModelFillStrategy;
-import ui.controllers.users.card.data.UserCardModelFillService;
-import ui.context.EnvironmentContext;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.user.UserService;
@@ -17,6 +12,11 @@ import org.springframework.mobile.device.DeviceType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.controllers.activity.list.ActivityStreamController;
+import ui.controllers.users.card.data.AbstractUserCardModelFillStrategy;
+import ui.controllers.users.card.data.UserCardModelFillService;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
 

@@ -2,7 +2,6 @@ package ui.controllers.users.photoAlbums.list;
 
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 
 import java.util.List;

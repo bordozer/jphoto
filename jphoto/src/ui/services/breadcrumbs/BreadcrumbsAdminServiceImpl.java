@@ -4,7 +4,6 @@ import admin.jobs.enums.JobListTab;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import admin.services.services.UpgradeState;
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
@@ -12,6 +11,7 @@ import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
 
 public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	

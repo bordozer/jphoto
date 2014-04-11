@@ -1,6 +1,5 @@
 package ui.services.breadcrumbs.items;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -8,6 +7,7 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;
 import core.services.translator.Language;
+import ui.context.EnvironmentContext;
 
 import java.sql.Time;
 import java.util.List;

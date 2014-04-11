@@ -2,7 +2,6 @@ package ui.controllers.users.team.edit;
 
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 
 import javax.validation.Valid;

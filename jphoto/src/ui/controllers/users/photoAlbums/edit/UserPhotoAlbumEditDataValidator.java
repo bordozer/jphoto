@@ -1,11 +1,11 @@
 package ui.controllers.users.photoAlbums.edit;
 
-import ui.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 public class UserPhotoAlbumEditDataValidator implements Validator {

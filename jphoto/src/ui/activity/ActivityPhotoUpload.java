@@ -1,11 +1,11 @@
 package ui.activity;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
+import ui.context.EnvironmentContext;
 
 
 public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {

@@ -1,6 +1,5 @@
 package ui.controllers.users.list;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -8,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 import java.util.List;

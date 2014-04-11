@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum UserCardTab {
 
 	BRIEF_USER__OVERVIEW( "brief", "UserCardTab: Overview" )

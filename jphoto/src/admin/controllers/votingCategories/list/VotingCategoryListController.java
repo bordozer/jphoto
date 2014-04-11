@@ -1,9 +1,7 @@
 package admin.controllers.votingCategories.list;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -12,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import java.util.List;
 

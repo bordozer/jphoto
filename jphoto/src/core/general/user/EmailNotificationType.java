@@ -1,7 +1,6 @@
 package core.general.user;
 
 import core.interfaces.Identifiable;
-import utils.StringUtilities;
 
 public enum EmailNotificationType implements Identifiable {
 

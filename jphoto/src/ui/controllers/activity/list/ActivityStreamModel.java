@@ -1,7 +1,7 @@
 package ui.controllers.activity.list;
 
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.AbstractGeneralPageModel;
+import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.List;
 

@@ -1,14 +1,14 @@
 package ui.controllers.photos.edit;
 
-import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import ui.services.validation.DataRequirementService;
 import org.springframework.web.multipart.MultipartFile;
+import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
+import ui.services.validation.DataRequirementService;
 
 import java.util.Date;
 import java.util.List;

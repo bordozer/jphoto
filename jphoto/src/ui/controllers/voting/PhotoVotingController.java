@@ -1,6 +1,5 @@
 package ui.controllers.voting;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

@@ -1,12 +1,10 @@
 package admin.controllers.translator.custom;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.interfaces.CustomTranslatable;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import java.util.List;
 import java.util.Map;

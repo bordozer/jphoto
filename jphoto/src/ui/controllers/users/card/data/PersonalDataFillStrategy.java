@@ -1,7 +1,7 @@
 package ui.controllers.users.card.data;
 
-import ui.controllers.users.card.UserCardModel;
 import ui.context.EnvironmentContext;
+import ui.controllers.users.card.UserCardModel;
 
 public class PersonalDataFillStrategy extends AbstractUserCardModelFillStrategy {
 

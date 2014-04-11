@@ -2,7 +2,6 @@ package admin.jobs.entries;
 
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
-import ui.controllers.users.edit.UserEditDataController;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.general.base.CommonProperty;
@@ -21,6 +20,7 @@ import core.services.utils.PredicateUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DuplicateKeyException;
+import ui.controllers.users.edit.UserEditDataController;
 import utils.fakeUser.AbstractFakeMember;
 
 import java.io.File;

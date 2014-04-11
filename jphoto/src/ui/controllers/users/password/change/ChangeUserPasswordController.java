@@ -1,17 +1,17 @@
 package ui.controllers.users.password.change;
 
-import ui.context.EnvironmentContext;
 import core.general.user.User;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
-import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.services.validation.DataRequirementService;
 import utils.NumberUtils;
 
 import javax.validation.Valid;

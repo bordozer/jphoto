@@ -8,7 +8,6 @@ import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.dao.SchedulerTasksDao;
 import core.services.system.Services;
-import core.services.utils.DateUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 

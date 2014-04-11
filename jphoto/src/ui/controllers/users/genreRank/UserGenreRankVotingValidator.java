@@ -1,6 +1,5 @@
 package ui.controllers.users.genreRank;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.ValidationResult;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
@@ -8,6 +7,7 @@ import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.UserUtils;
 
 public class UserGenreRankVotingValidator implements Validator {

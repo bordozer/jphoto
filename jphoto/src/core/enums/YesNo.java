@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum YesNo {
 
 	YES( 1, "yes" )

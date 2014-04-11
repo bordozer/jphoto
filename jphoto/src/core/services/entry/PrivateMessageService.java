@@ -5,8 +5,6 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
-import ui.dtos.AjaxResultDTO;
-import ui.dtos.PrivateMessageSendingDTO;
 
 import java.util.List;
 

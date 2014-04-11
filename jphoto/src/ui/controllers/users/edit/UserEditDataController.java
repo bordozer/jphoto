@@ -1,6 +1,5 @@
 package ui.controllers.users.edit;
 
-import ui.context.EnvironmentContext;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.general.configuration.ConfigurationKey;
@@ -8,8 +7,6 @@ import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
-import core.services.utils.UrlUtilsService;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -18,13 +15,16 @@ import core.services.user.FakeUserService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.services.validation.DataRequirementService;
 import utils.NumberUtils;
 import utils.UserUtils;
 

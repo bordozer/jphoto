@@ -1,8 +1,8 @@
 package ui.services.breadcrumbs.items;
 
-import ui.services.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
+import ui.services.MenuService;
 
 public class UserListBreadcrumbs extends AbstractBreadcrumb {
 

@@ -1,7 +1,5 @@
 package core.general.configuration;
 
-import utils.StringUtilities;
-
 import java.util.EnumSet;
 
 public enum ConfigurationDataType {

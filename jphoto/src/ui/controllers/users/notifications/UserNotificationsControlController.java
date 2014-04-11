@@ -3,7 +3,6 @@ package ui.controllers.users.notifications;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 
 import java.util.Set;

@@ -1,7 +1,5 @@
 package admin.upgrade.entities;
 
-import utils.StringUtilities;
-
 public enum UpgradeTaskResult {
 
 	ERROR ( 0, "Error" ), SUCCESSFUL( 1, "Done" );

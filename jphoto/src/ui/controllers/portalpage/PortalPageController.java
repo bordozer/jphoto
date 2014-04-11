@@ -1,6 +1,5 @@
 package ui.controllers.portalpage;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.context.EnvironmentContext;
 
 import java.util.Collections;
 import java.util.Date;

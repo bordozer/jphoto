@@ -1,7 +1,6 @@
 package admin.controllers.scheduler.tasks.edit;
 
 import admin.services.scheduler.SchedulerService;
-import ui.context.EnvironmentContext;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.executiontasks.PeriodUnit;
 import core.services.translator.TranslatorService;
@@ -10,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 import java.util.List;

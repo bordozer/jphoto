@@ -1,7 +1,5 @@
 package core.general.menus.comment;
 
-import utils.StringUtilities;
-
 public enum ComplaintReasonType {
 
 	COMMENT_SPAM( 1, "Spam" )

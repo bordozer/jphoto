@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum RestrictionType {
 	USER_LOGIN( 1, "Login in" )
 	, USER_PHOTO_UPLOADING( 2, "Photo uploading" )

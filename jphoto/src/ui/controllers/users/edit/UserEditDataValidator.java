@@ -1,6 +1,5 @@
 package ui.controllers.users.edit;
 
-import ui.context.EnvironmentContext;
 import core.enums.UserGender;
 import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
@@ -15,6 +14,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 public class UserEditDataValidator implements Validator {

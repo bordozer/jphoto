@@ -1,6 +1,5 @@
 package ui.controllers.users.avatar;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
 import core.services.system.ConfigurationService;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
+import ui.context.EnvironmentContext;
 
 public class UserAvatarValidator implements Validator {
 

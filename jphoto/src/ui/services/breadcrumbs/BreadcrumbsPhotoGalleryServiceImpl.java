@@ -1,6 +1,5 @@
 package ui.services.breadcrumbs;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
@@ -8,7 +7,6 @@ import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
-import ui.services.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -16,6 +14,8 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
+import ui.services.MenuService;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.StringBreadcrumb;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;

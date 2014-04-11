@@ -1,8 +1,5 @@
 package ui.controllers.users.card.data;
 
-import ui.controllers.users.card.UserCardGenreInfo;
-import ui.controllers.users.card.UserCardModel;
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
@@ -10,6 +7,9 @@ import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import elements.PhotoList;
+import ui.activity.AbstractActivityStreamEntry;
+import ui.controllers.users.card.UserCardGenreInfo;
+import ui.controllers.users.card.UserCardModel;
 
 import java.util.List;
 import java.util.Map;

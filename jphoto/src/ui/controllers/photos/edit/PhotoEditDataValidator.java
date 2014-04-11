@@ -1,6 +1,5 @@
 package ui.controllers.photos.edit;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
 import core.general.user.User;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 import utils.UserUtils;
 

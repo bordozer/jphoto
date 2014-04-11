@@ -1,12 +1,10 @@
 package ui.controllers.photos.previews;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 
 @Controller

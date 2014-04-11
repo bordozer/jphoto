@@ -1,14 +1,10 @@
 package ui.controllers.users.bookmarks;
 
-import ui.controllers.photos.list.PhotoListController;
-import ui.controllers.photos.list.PhotoListModel;
-import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GroupOperationService;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
@@ -27,6 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.context.EnvironmentContext;
+import ui.controllers.photos.list.PhotoListController;
+import ui.controllers.photos.list.PhotoListModel;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
 

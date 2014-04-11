@@ -1,7 +1,5 @@
 package core.general.menus;
 
-import utils.StringUtilities;
-
 import java.util.EnumSet;
 
 public enum EntryMenuOperationType {

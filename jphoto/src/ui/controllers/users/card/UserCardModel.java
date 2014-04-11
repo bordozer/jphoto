@@ -1,7 +1,6 @@
 package ui.controllers.users.card;
 
 import core.enums.UserCardTab;
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
@@ -13,6 +12,7 @@ import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import elements.PhotoList;
 import org.springframework.mobile.device.DeviceType;
+import ui.activity.AbstractActivityStreamEntry;
 import utils.PhotoUtils;
 
 import java.util.Date;

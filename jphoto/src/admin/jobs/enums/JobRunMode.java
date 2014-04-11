@@ -1,7 +1,5 @@
 package admin.jobs.enums;
 
-import utils.StringUtilities;
-
 public enum JobRunMode {
 
 	SERIALLY( 1, "Serially" )

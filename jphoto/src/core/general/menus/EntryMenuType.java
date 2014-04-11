@@ -1,7 +1,5 @@
 package core.general.menus;
 
-import utils.StringUtilities;
-
 public enum EntryMenuType {
 
 	PHOTO( 1, "Photo" )

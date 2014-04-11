@@ -1,15 +1,15 @@
 package ui.controllers.photos.groupoperations.handlers;
 
-import ui.controllers.photos.groupoperations.GroupOperationResult;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.system.Services;
 import core.services.user.UserPhotoAlbumService;
 import core.services.utils.EntityLinkUtilsService;
+import ui.controllers.photos.groupoperations.GroupOperationResult;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 
 import java.util.List;
 import java.util.Map;

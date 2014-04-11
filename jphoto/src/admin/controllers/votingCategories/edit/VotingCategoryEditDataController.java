@@ -1,19 +1,19 @@
 package admin.controllers.votingCategories.edit;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
+import ui.services.validation.DataRequirementService;
 
 import javax.validation.Valid;
 

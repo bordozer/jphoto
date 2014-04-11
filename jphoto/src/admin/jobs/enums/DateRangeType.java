@@ -1,7 +1,5 @@
 package admin.jobs.enums;
 
-import utils.StringUtilities;
-
 public enum DateRangeType {
 
 	DATE_RANGE( 1, "date range" )

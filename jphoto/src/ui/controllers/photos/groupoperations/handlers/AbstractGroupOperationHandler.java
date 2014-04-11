@@ -1,10 +1,5 @@
 package ui.controllers.photos.groupoperations.handlers;
 
-import ui.controllers.photos.groupoperations.GroupOperationResult;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
-import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
@@ -15,6 +10,11 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import ui.context.EnvironmentContext;
+import ui.controllers.photos.groupoperations.GroupOperationResult;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import utils.NumberUtils;
 
 import java.util.List;

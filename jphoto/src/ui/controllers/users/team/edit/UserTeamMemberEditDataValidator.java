@@ -1,6 +1,5 @@
 package ui.controllers.users.team.edit;
 
-import ui.context.EnvironmentContext;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.TranslatorService;
@@ -10,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 import utils.NumberUtils;
 

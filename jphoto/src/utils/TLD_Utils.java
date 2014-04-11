@@ -1,7 +1,5 @@
 package utils;
 
-import ui.context.ApplicationContextHelper;
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserAvatar;
@@ -11,6 +9,8 @@ import core.services.utils.PredicateUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsServiceImpl;
 import org.apache.commons.lang.StringUtils;
+import ui.context.ApplicationContextHelper;
+import ui.context.EnvironmentContext;
 
 import java.io.IOException;
 import java.util.Collection;

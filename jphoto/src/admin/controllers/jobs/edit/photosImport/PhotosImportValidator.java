@@ -1,7 +1,6 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.SavedJobValidator;
-import ui.context.EnvironmentContext;
 import core.enums.UserGender;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.UserMembershipType;
@@ -13,6 +12,7 @@ import org.apache.commons.validator.routines.IntegerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 import utils.NumberUtils;
 

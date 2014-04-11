@@ -1,6 +1,5 @@
 package core.general.photo;
 
-import ui.controllers.users.card.MarksByCategoryInfo;
 import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
@@ -8,6 +7,7 @@ import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.Cacheable;
+import ui.controllers.users.card.MarksByCategoryInfo;
 import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.Date;

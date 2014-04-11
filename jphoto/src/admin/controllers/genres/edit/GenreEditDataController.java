@@ -1,20 +1,20 @@
 package admin.controllers.genres.edit;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
-import ui.services.breadcrumbs.BreadcrumbsAdminPhotoCategoriesService;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminPhotoCategoriesService;
+import ui.services.validation.DataRequirementService;
 
 import javax.validation.Valid;
 import java.util.List;

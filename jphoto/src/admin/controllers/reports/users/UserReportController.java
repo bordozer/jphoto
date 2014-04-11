@@ -1,7 +1,6 @@
 package admin.controllers.reports.users;
 
 import core.general.user.User;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import java.util.*;
 

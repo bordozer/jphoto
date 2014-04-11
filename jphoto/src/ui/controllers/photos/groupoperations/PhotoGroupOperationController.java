@@ -1,8 +1,6 @@
 package ui.controllers.photos.groupoperations;
 
-import ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
 import core.general.photo.group.PhotoGroupOperationType;
-import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 import core.services.system.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +8,8 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
+import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

@@ -13,7 +13,6 @@ import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.JobDateRange;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import ui.context.EnvironmentContext;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
@@ -27,6 +26,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ui.context.EnvironmentContext;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;

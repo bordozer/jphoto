@@ -1,6 +1,5 @@
 package json.users.rankInGenreVoting;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.user.User;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ui.context.EnvironmentContext;
 
 import java.util.List;
 

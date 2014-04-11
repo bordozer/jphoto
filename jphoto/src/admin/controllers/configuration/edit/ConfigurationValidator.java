@@ -1,6 +1,5 @@
 package admin.controllers.configuration.edit;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationDataType;
 import core.general.configuration.ConfigurationKey;
@@ -9,6 +8,7 @@ import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.NumberUtils;
 
 import java.util.List;

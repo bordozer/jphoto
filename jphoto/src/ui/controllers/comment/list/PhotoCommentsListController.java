@@ -1,7 +1,5 @@
 package ui.controllers.comment.list;
 
-import ui.controllers.comment.edit.PhotoCommentInfo;
-import ui.context.EnvironmentContext;
 import core.general.base.PagingModel;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -21,6 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.PagingUtils;
 

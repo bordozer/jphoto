@@ -1,12 +1,10 @@
 package ui.controllers.users.votes;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserGenreRankHistoryEntry;
 import core.general.user.UserRankPhotoVote;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 
 import java.util.Date;

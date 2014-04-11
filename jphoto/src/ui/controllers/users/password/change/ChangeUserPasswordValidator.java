@@ -1,12 +1,12 @@
 package ui.controllers.users.password.change;
 
-import ui.context.EnvironmentContext;
 import core.general.user.User;
 import core.services.translator.TranslatorService;
 import core.services.user.UsersSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 public class ChangeUserPasswordValidator implements Validator {

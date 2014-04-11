@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum PhotoAwardKey {
 
 	PHOTO_OF_THE_DAY( 1, "PhotoAwardKey: The photo of the day" )

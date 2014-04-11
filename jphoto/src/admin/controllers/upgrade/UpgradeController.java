@@ -7,9 +7,7 @@ import admin.upgrade.entities.UpgradeTaskLogEntry;
 import admin.upgrade.entities.UpgradeTaskResult;
 import admin.upgrade.entities.UpgradeTaskToPerform;
 import admin.upgrade.tasks.AbstractUpgradeTask;
-import ui.context.EnvironmentContext;
 import core.exceptions.UpgradeException;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.translator.TranslatorService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -23,6 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import java.io.File;
 import java.util.Iterator;

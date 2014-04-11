@@ -1,6 +1,5 @@
 package ui.controllers.users.login;
 
-import ui.context.EnvironmentContext;
 import core.general.user.User;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
@@ -9,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 
 public class UserLoginValidator implements Validator {

@@ -1,8 +1,5 @@
 package ui.controllers.photos.edit;
 
-import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
-import ui.controllers.photos.edit.description.UploadDescriptionFactory;
-import ui.context.EnvironmentContext;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
@@ -28,14 +25,17 @@ import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.*;
-import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ui.context.EnvironmentContext;
+import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
+import ui.controllers.photos.edit.description.UploadDescriptionFactory;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
+import ui.services.validation.DataRequirementService;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;

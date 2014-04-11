@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum PhotoActionAllowance {
 	ACTIONS_DENIED( 1, "Not allowed" )
 	, CANDIDATES_AND_MEMBERS( 2, "Candidates and members" )

@@ -1,9 +1,5 @@
 package ui.controllers.photos.groupoperations.handlers;
 
-import ui.controllers.photos.groupoperations.GroupOperationResult;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
-import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.photoTeam.PhotoTeam;
@@ -13,6 +9,10 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;
 import core.services.user.UserTeamService;
 import core.services.utils.EntityLinkUtilsService;
+import ui.controllers.photos.groupoperations.GroupOperationResult;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntry;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationEntryProperty;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 
 import java.util.Iterator;
 import java.util.List;

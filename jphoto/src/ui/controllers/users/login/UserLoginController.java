@@ -1,15 +1,13 @@
 package ui.controllers.users.login;
 
-import ui.context.EnvironmentContext;
 import core.general.user.User;
-import org.apache.commons.lang.StringUtils;
-import ui.services.breadcrumbs.BreadcrumbsUserService;
 import core.services.security.SecurityService;
 import core.services.user.UserService;
 import core.services.user.UsersSecurityService;
 import core.services.user.UsersSecurityServiceImpl;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +16,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsUserService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

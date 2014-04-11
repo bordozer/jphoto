@@ -1,7 +1,5 @@
 package core.general.configuration;
 
-import utils.StringUtilities;
-
 public enum ConfigurationUnit {
 
 	EMPTY( 0, "" )

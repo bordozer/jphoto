@@ -1,7 +1,5 @@
 package admin.services.services;
 
-import utils.StringUtilities;
-
 public enum UpgradeState {
 	IN_PROGRESS( 1, "In progress")
 	, STOPPED( 1, "Finished")

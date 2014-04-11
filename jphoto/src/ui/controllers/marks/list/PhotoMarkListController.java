@@ -1,13 +1,11 @@
 package ui.controllers.marks.list;
 
-import ui.context.EnvironmentContext;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
@@ -19,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 
 import java.util.List;

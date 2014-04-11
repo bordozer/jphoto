@@ -1,8 +1,8 @@
 package ui.controllers.users.password.change;
 
-import ui.controllers.users.edit.UserEditDataModel;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
+import ui.controllers.users.edit.UserEditDataModel;
 import ui.services.validation.DataRequirementService;
 
 public class ChangeUserPasswordModel extends AbstractGeneralModel {

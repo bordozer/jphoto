@@ -1,7 +1,5 @@
 package core.enums;
 
-import utils.StringUtilities;
-
 public enum UserTeamMemberType {
 
 	MODEL( 1, "Model", "model.png" )

@@ -7,7 +7,6 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import ui.services.breadcrumbs.BreadcrumbsAdminService;
 import core.services.system.CacheServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;

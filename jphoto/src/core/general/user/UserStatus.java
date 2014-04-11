@@ -1,7 +1,5 @@
 package core.general.user;
 
-import utils.StringUtilities;
-
 public enum UserStatus {
 	CANDIDATE( 1, "candidate")
 	, MEMBER( 2, "member")

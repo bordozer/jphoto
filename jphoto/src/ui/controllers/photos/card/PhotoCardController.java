@@ -1,6 +1,5 @@
 package ui.controllers.photos.card;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.img.Dimension;
@@ -12,7 +11,6 @@ import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
-import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
@@ -30,6 +28,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 import utils.UserUtils;
 

@@ -1,8 +1,8 @@
 package utils;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.general.user.User;
+import ui.context.EnvironmentContext;
 
 public class UserUtils {
 

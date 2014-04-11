@@ -1,10 +1,5 @@
 package ui.controllers.users.card.data;
 
-import ui.controllers.users.card.UserCardGenreInfo;
-import ui.controllers.users.card.UserCardModel;
-import ui.controllers.users.card.UserStatistic;
-import ui.context.EnvironmentContext;
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
@@ -24,8 +19,8 @@ import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
-import core.services.system.Services;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.DateUtilsService;
@@ -40,6 +35,11 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
+import ui.activity.AbstractActivityStreamEntry;
+import ui.context.EnvironmentContext;
+import ui.controllers.users.card.UserCardGenreInfo;
+import ui.controllers.users.card.UserCardModel;
+import ui.controllers.users.card.UserStatistic;
 import utils.StringUtilities;
 
 import java.util.Collections;

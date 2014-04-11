@@ -1,10 +1,8 @@
 package admin.controllers.genres.list;
 
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
-import ui.services.breadcrumbs.BreadcrumbsAdminPhotoCategoriesService;
 import core.services.photo.PhotoService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -15,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
+import ui.services.breadcrumbs.BreadcrumbsAdminPhotoCategoriesService;
 
 import java.util.List;
 import java.util.Map;

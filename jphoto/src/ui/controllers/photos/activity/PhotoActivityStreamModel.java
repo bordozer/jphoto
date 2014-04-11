@@ -1,8 +1,8 @@
 package ui.controllers.photos.activity;
 
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.AbstractGeneralPageModel;
 import core.general.photo.Photo;
+import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.List;
 

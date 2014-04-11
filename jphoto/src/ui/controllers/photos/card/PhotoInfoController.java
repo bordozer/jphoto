@@ -1,6 +1,5 @@
 package ui.controllers.photos.card;
 
-import ui.context.EnvironmentContext;
 import core.general.photo.Photo;
 import core.services.photo.PhotoService;
 import core.services.user.UserRankService;
@@ -10,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
 
 @Controller
 @RequestMapping( "photos/{photoId}" )

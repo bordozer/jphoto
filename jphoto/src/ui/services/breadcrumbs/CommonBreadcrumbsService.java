@@ -1,7 +1,7 @@
 package ui.services.breadcrumbs;
 
-import ui.activity.ActivityType;
 import elements.PageTitleData;
+import ui.activity.ActivityType;
 
 public interface CommonBreadcrumbsService {
 
