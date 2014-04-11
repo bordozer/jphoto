@@ -29,4 +29,6 @@ public interface AjaxService {
 	CommentDTO getCommentDTOAjax( final int commentId );
 
 	boolean isUserCanCommentPhotosAjax( final int userId );
+
+	boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId );
 }

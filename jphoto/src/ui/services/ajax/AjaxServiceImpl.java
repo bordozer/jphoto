@@ -384,4 +384,9 @@ public class AjaxServiceImpl implements AjaxService {
 	public boolean isUserCanCommentPhotosAjax( final int userId ) {
 		return photoCommentService.isUserCanCommentPhotos( userId );
 	}
+
+	@Override
+	public boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId ) {
+		return favoritesService.isEntryInFavorites( userWhoIsAddingToFavorites, beingAddedEntryId, entryTypeId );
+	}
 }

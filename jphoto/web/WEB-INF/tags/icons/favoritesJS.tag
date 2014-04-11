@@ -119,7 +119,7 @@ var favoriteEntryModel = function () {
 		var entry = findFavoriteEntry( favoriteEntry );
 		var favoriteEntryIcons = entry.getFavoriteEntryIcons();
 
-		var isEntryInFavorites = jsonRPC.ajaxService.isEntryInFavorites( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+		var isEntryInFavorites = jsonRPC.ajaxService.isEntryInFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
 
 		var isValid = validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled );
 
