@@ -12,7 +12,7 @@ import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import core.services.user.UserRankService;
 import core.services.utils.UrlUtilsService;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

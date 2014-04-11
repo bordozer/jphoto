@@ -1,6 +1,6 @@
 package ui.services;
 
-import elements.PageModel;
+import ui.elements.PageModel;
 
 public interface PageTemplateService {
 

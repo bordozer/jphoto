@@ -17,7 +17,7 @@
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
-<%@ attribute name="photoList" required="true" type="elements.PhotoList" %>
+<%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
 <%
 	final ConfigurationService configurationService = ApplicationContextHelper.getConfigurationService();

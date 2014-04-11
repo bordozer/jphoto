@@ -13,7 +13,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.EntityLinkUtilsService;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.services.MenuService;

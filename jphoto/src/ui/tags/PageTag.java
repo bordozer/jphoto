@@ -1,6 +1,6 @@
-package tags;
+package ui.tags;
 
-import elements.PageModel;
+import ui.elements.PageModel;
 import ui.context.ApplicationContextHelper;
 import ui.services.PageTemplateService;
 

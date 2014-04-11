@@ -4,7 +4,7 @@ import core.general.genre.Genre;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.utils.EntityLinkUtilsService;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;

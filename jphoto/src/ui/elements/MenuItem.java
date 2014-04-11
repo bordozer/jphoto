@@ -1,4 +1,4 @@
-package elements.menus;
+package ui.elements;
 
 public class MenuItem {
 

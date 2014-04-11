@@ -2,7 +2,7 @@ package ui.services;
 
 import core.enums.PrivateMessageType;
 import core.general.user.User;
-import elements.menus.MenuItem;
+import ui.elements.MenuItem;
 
 import java.util.List;
 import java.util.Map;

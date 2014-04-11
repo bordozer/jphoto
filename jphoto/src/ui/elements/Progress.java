@@ -1,4 +1,4 @@
-package elements;
+package ui.elements;
 
 public class Progress {
 

@@ -8,7 +8,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
-<%@ attribute name="pageModel" required="true" type="elements.PageModel" %>
+<%@ attribute name="pageModel" required="true" type="ui.elements.PageModel" %>
 
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );

@@ -1,7 +1,7 @@
 package admin.controllers.configuration.list;
 
 import core.general.configuration.SystemConfiguration;
-import elements.PageModel;
+import ui.elements.PageModel;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package ui.controllers.users.card.data;
 
 import core.general.user.userAlbums.UserPhotoAlbum;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import ui.controllers.users.card.UserCardModel;
 
 import java.util.List;

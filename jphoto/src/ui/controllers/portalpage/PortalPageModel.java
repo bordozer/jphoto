@@ -2,7 +2,7 @@ package ui.controllers.portalpage;
 
 import core.general.data.UserRating;
 import core.services.translator.TranslatorService;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.List;

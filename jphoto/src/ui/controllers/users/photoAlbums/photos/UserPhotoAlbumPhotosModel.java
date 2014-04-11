@@ -2,7 +2,7 @@ package ui.controllers.users.photoAlbums.photos;
 
 import core.general.base.AbstractGeneralModel;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 
 public class UserPhotoAlbumPhotosModel extends AbstractGeneralModel {
 

@@ -1,7 +1,7 @@
 package ui.services.breadcrumbs;
 
 import core.general.genre.Genre;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 
 public interface BreadcrumbsAdminPhotoCategoriesService {
 

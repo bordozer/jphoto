@@ -1,7 +1,7 @@
 package core.general.base;
 
-import elements.PageModel;
-import elements.PageTitleData;
+import ui.elements.PageModel;
+import ui.elements.PageTitleData;
 
 public class AbstractGeneralPageModel {
 

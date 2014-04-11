@@ -1,5 +1,5 @@
-<%@ page import="elements.PageTitleData" %>
-<%@ page import="elements.PageModel" %>
+<%@ page import="ui.elements.PageTitleData" %>
+<%@ page import="ui.elements.PageModel" %>
 <%@ page import="core.exceptions.notFound.NotFoundExceptionEntryType" %>
 <%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="core.services.translator.TranslatorService" %>

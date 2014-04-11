@@ -1,7 +1,7 @@
 package ui.controllers.users.card.data;
 
 import core.general.user.User;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.card.UserCardModel;
 

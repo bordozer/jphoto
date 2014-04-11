@@ -11,7 +11,7 @@ import core.services.system.Services;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.sql.PhotoSqlHelperService;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

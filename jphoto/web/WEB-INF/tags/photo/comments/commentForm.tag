@@ -1,5 +1,5 @@
 <%@ tag import="ui.context.EnvironmentContext" %>
-<%@ tag import="tags.FormTag" %>
+<%@ tag import="ui.tags.FormTag" %>
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="core.enums.FavoriteEntryType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

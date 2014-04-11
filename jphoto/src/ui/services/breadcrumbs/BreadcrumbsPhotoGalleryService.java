@@ -5,7 +5,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 
 import java.util.Date;
 

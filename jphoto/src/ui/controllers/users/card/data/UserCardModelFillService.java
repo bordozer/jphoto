@@ -6,7 +6,7 @@ import core.general.menus.EntryMenu;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import ui.activity.AbstractActivityStreamEntry;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;

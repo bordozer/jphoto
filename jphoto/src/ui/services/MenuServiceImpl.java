@@ -13,7 +13,7 @@ import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import elements.menus.MenuItem;
+import ui.elements.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;

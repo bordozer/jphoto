@@ -10,7 +10,7 @@ import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import org.springframework.mobile.device.DeviceType;
 import ui.activity.AbstractActivityStreamEntry;
 import utils.PhotoUtils;

@@ -2,7 +2,7 @@ package ui.controllers.users.team.card;
 
 import core.general.base.AbstractGeneralModel;
 import core.general.user.userTeam.UserTeamMember;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 
 public class UserTeamMemberCardModel extends AbstractGeneralModel {
 

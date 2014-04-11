@@ -1,7 +1,7 @@
 package admin.controllers.configuration.activation;
 
 import core.general.configuration.SystemConfiguration;
-import elements.PageModel;
+import ui.elements.PageModel;
 import org.springframework.validation.BindingResult;
 
 import java.util.List;

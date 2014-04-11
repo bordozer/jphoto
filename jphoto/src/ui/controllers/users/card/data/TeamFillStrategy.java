@@ -2,7 +2,7 @@ package ui.controllers.users.card.data;
 
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import elements.PhotoList;
+import ui.elements.PhotoList;
 import ui.controllers.users.card.UserCardModel;
 
 import java.util.List;

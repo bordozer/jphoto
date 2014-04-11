@@ -2,7 +2,7 @@ package core.general.data.photoList;
 
 import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Date;

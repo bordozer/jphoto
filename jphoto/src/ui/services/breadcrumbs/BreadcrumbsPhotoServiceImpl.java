@@ -4,7 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.system.Services;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;

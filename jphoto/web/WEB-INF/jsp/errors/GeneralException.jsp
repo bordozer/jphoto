@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="org.apache.commons.lang.exception.ExceptionUtils" %>
-<%@ page import="elements.PageTitleData" %>
-<%@ page import="elements.PageModel" %>
+<%@ page import="ui.elements.PageTitleData" %>
+<%@ page import="ui.elements.PageModel" %>
 <%@ page import="ui.context.EnvironmentContext" %>
 <%@ page isErrorPage="true" %>
 

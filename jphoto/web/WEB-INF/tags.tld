@@ -11,13 +11,13 @@
 
 	<tag>
 		<name>page</name>
-		<tag-class>tags.PageTag</tag-class>
+		<tag-class>ui.tags.PageTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>pageModel</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>elements.PageModel</type>
+			<type>ui.elements.PageModel</type>
 		</attribute>
 		<attribute>
 			<name>errorPage</name>
@@ -29,7 +29,7 @@
 
 	<tag>
 		<name>form</name>
-		<tag-class>tags.FormTag</tag-class>
+		<tag-class>ui.tags.FormTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>action</name>
@@ -110,7 +110,7 @@
 	<function>
 		<name>translateActivityStreamEntry</name>
 		<function-class>utils.TranslatorUtils</function-class>
-		<function-signature>java.lang.String translateActivityStreamEntry(core.general.activity.AbstractActivityStreamEntry)</function-signature>
+		<function-signature>java.lang.String translateActivityStreamEntry(ui.activity.AbstractActivityStreamEntry)</function-signature>
 	</function>
 
 	<function>

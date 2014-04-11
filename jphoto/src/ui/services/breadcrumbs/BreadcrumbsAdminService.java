@@ -7,7 +7,7 @@ import admin.services.services.UpgradeState;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
-import elements.PageTitleData;
+import ui.elements.PageTitleData;
 
 public interface BreadcrumbsAdminService {
 

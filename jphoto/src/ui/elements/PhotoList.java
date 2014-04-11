@@ -1,4 +1,4 @@
-package elements;
+package ui.elements;
 
 import core.general.photo.PhotoInfo;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;

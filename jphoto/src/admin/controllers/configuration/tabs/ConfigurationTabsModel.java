@@ -3,7 +3,7 @@ package admin.controllers.configuration.tabs;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import elements.PageModel;
+import ui.elements.PageModel;
 
 import java.util.Map;
 
