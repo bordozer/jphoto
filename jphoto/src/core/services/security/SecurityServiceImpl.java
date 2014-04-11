@@ -1,7 +1,7 @@
 package core.services.security;
 
 import ui.context.EnvironmentContext;
-import core.dtos.AnonymousSettingsDTO;
+import ui.dtos.AnonymousSettingsDTO;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NotLoggedUserException;

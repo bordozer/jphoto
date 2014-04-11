@@ -1,4 +1,4 @@
-package core.dtos;
+package ui.dtos;
 
 import core.general.photo.PhotoComment;
 

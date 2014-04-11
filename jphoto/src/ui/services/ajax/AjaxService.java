@@ -1,8 +1,8 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
-import core.dtos.AjaxResultDTO;
-import core.dtos.ComplaintMessageDTO;
+import ui.dtos.AjaxResultDTO;
+import ui.dtos.ComplaintMessageDTO;
 
 public interface AjaxService {
 

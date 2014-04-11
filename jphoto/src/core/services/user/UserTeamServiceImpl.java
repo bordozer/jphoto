@@ -1,7 +1,7 @@
 package core.services.user;
 
 import ui.context.EnvironmentContext;
-import core.dtos.UserPickerDTO;
+import ui.dtos.UserPickerDTO;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeam;

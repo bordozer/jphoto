@@ -1,4 +1,4 @@
-package core.dtos;
+package ui.dtos;
 
 public class ComplaintMessageDTO {
 

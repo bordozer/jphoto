@@ -1,7 +1,7 @@
 package core.services.entry;
 
-import core.dtos.AjaxResultDTO;
-import core.dtos.PrivateMessageSendingDTO;
+import ui.dtos.AjaxResultDTO;
+import ui.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;
 import core.general.message.PrivateMessage;
 import core.general.user.User;

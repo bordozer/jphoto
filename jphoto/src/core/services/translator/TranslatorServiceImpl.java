@@ -1,7 +1,7 @@
 package core.services.translator;
 
 import admin.controllers.translator.custom.TranslationEntryType;
-import core.dtos.TranslationDTO;
+import ui.dtos.TranslationDTO;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.log.LogHelper;

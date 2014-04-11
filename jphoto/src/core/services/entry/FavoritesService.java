@@ -1,6 +1,6 @@
 package core.services.entry;
 
-import core.dtos.AjaxResultDTO;
+import ui.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
 import core.general.user.User;

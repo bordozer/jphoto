@@ -1,7 +1,7 @@
 package core.services.entry;
 
 import ui.context.EnvironmentContext;
-import core.dtos.AjaxResultDTO;
+import ui.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.favorite.FavoriteEntry;

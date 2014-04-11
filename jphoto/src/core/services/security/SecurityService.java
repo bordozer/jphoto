@@ -1,6 +1,6 @@
 package core.services.security;
 
-import core.dtos.AnonymousSettingsDTO;
+import ui.dtos.AnonymousSettingsDTO;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
