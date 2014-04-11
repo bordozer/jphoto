@@ -3,10 +3,10 @@ package ui.context;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.user.UserService;
-import core.services.user.UsersSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ui.controllers.users.login.UserLoginController;
+import ui.services.security.UsersSecurityService;
 import utils.PhotoUtils;
 import utils.UserUtils;
 

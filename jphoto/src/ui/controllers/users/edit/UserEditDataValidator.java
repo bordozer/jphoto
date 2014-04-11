@@ -7,7 +7,6 @@ import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
-import core.services.user.UsersSecurityService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ui.context.EnvironmentContext;
+import ui.services.security.UsersSecurityService;
 import utils.FormatUtils;
 
 public class UserEditDataValidator implements Validator {

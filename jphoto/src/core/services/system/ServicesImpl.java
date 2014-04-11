@@ -20,6 +20,7 @@ import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.UserSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.security.UsersSecurityService;
 
 public class ServicesImpl implements Services {
 

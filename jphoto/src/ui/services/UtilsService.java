@@ -1,4 +1,4 @@
-package core.services.utils;
+package ui.services;
 
 import core.general.user.User;
 

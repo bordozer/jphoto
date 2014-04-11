@@ -10,7 +10,7 @@
 	<bean id="services" class="core.services.system.ServicesImpl"/>
 
 	<bean id="userService" class="core.services.user.UserServiceImpl"/>
-	<bean id="usersSecurityService" class="core.services.user.UsersSecurityServiceImpl"/>
+	<bean id="usersSecurityService" class="ui.services.security.UsersSecurityServiceImpl"/>
 	<bean id="genreService" class="core.services.entry.GenreServiceImpl"/>
 	<bean id="photoService" class="core.services.photo.PhotoServiceImpl"/>
 	<bean id="photoCommentService" class="core.services.photo.PhotoCommentServiceImpl"/>
@@ -46,7 +46,7 @@
 	<bean id="activityStreamService" class="core.services.entry.ActivityStreamServiceImpl"/>
 
 	<bean id="photoUIService" class="ui.services.PhotoUIServiceImpl"/>
-	<bean id="securityUIService" class="ui.services.SecurityUIServiceImpl"/>
+	<bean id="securityUIService" class="ui.services.security.SecurityUIServiceImpl"/>
 
 	<bean id="mailService" class="core.services.mail.MailServiceImpl"/>
 

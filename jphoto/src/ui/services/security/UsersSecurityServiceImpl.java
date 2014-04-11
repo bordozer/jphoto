@@ -1,4 +1,4 @@
-package core.services.user;
+package ui.services.security;
 
 import core.exceptions.UserRequestSecurityException;
 import core.general.user.User;
@@ -6,6 +6,7 @@ import core.general.user.UsersSecurity;
 import core.services.dao.UsersSecurityDao;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
 import org.apache.commons.lang.StringUtils;

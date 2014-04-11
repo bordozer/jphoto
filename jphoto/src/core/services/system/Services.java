@@ -19,6 +19,7 @@ import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.UserSqlUtilsService;
+import ui.services.security.UsersSecurityService;
 
 public interface Services {
 

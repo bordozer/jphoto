@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.controllers.users.card.MarksByCategoryInfo;
+import ui.services.security.SecurityUIService;
 
 import java.util.Date;
 import java.util.List;

@@ -4,7 +4,7 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	   default-autowire="byName">
 
-	<bean id="utilsService" class="core.services.utils.UtilsServiceImpl"/>
+	<bean id="utilsService" class="ui.services.UtilsServiceImpl"/>
 
 	<bean id="systemVarsService" class="core.services.utils.SystemVarsServiceImpl" init-method="initSystemVars"/>
 	<bean id="translatorService" class="core.services.translator.TranslatorServiceImpl" init-method="initTranslations"/>

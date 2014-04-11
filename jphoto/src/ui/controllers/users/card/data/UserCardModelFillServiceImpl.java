@@ -26,7 +26,6 @@ import core.services.user.*;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
-import core.services.utils.UtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlHelperService;
@@ -41,6 +40,8 @@ import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
 import ui.controllers.users.card.UserStatistic;
 import ui.services.PhotoUIService;
+import ui.services.UtilsService;
+import ui.services.security.UsersSecurityService;
 import utils.StringUtilities;
 
 import java.util.Collections;

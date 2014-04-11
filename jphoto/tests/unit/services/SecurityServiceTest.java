@@ -23,8 +23,8 @@ import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import ui.services.SecurityUIService;
-import ui.services.SecurityUIServiceImpl;
+import ui.services.security.SecurityUIService;
+import ui.services.security.SecurityUIServiceImpl;
 
 import java.util.List;
 

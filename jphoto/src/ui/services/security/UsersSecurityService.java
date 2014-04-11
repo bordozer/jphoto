@@ -1,4 +1,4 @@
-package core.services.user;
+package ui.services.security;
 
 import core.general.user.User;
 import core.general.user.UsersSecurity;

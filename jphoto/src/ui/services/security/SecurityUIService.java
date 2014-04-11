@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.security;
 
 import core.general.photo.Photo;
 import core.general.user.User;

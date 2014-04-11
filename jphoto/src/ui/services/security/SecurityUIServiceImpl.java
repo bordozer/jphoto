@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.security;
 
 import core.exceptions.NudeContentException;
 import core.general.photo.Photo;

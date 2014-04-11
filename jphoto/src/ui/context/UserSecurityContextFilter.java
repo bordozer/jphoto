@@ -1,8 +1,8 @@
 package ui.context;
 
-import core.services.user.UsersSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ui.services.security.UsersSecurityService;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

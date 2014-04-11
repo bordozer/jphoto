@@ -13,7 +13,7 @@ import core.general.user.UserMembershipType;
 import core.services.photo.PhotoListCriteriasServiceImpl;
 import core.services.system.ServicesImpl;
 import core.services.system.ConfigurationService;
-import core.services.utils.UtilsService;
+import ui.services.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;

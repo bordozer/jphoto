@@ -30,8 +30,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 import ui.services.PhotoUIService;
-import ui.services.SecurityUIService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
+import ui.services.security.SecurityUIService;
 import utils.NumberUtils;
 import utils.UserUtils;
 
