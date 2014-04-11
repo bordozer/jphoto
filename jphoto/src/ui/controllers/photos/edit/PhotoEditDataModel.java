@@ -7,7 +7,7 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;

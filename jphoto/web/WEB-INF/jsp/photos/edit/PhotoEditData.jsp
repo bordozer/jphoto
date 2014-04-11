@@ -4,8 +4,8 @@
 <%@ page import="ui.controllers.photos.edit.PhotoEditWizardStep" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="core.general.configuration.ConfigurationKey" %>
-<%@ page import="core.services.validation.PhotoRequirement" %>
-<%@ page import="core.services.validation.DataRequirementService" %>
+<%@ page import="ui.services.validation.PhotoRequirement" %>
+<%@ page import="ui.services.validation.DataRequirementService" %>
 <%@ page import="core.services.security.SecurityService" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

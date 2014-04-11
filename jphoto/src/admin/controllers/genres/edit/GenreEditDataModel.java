@@ -2,7 +2,7 @@ package admin.controllers.genres.edit;
 
 import core.general.base.AbstractGeneralModel;
 import core.general.photo.PhotoVotingCategory;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 

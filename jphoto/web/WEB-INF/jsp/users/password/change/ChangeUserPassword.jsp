@@ -1,5 +1,5 @@
 <%@ page import="ui.controllers.users.password.change.ChangeUserPasswordModel" %>
-<%@ page import="core.services.validation.UserRequirement" %>
+<%@ page import="ui.services.validation.UserRequirement" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

@@ -28,7 +28,7 @@ import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.*;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

@@ -39,6 +39,6 @@
 	<bean id="userSqlUtilsService" class="core.services.utils.sql.UserSqlUtilsServiceImpl" />
 	<bean id="photoCriteriasSqlService" class="core.services.utils.sql.PhotoCriteriasSqlServiceImpl" />
 	<bean id="photoSqlFilterService" class="core.services.utils.sql.PhotoSqlFilterServiceImpl" />
-	<bean id="dataRequirementService" class="core.services.validation.DataRequirementServiceImpl" />
+	<bean id="dataRequirementService" class="ui.services.validation.DataRequirementServiceImpl" />
 
 </beans>

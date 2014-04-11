@@ -4,7 +4,7 @@ import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
 import core.services.translator.Language;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 
 import java.util.List;
 import java.util.Set;

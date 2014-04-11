@@ -8,7 +8,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

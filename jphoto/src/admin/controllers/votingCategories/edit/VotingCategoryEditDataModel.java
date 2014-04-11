@@ -1,7 +1,7 @@
 package admin.controllers.votingCategories.edit;
 
 import core.general.base.AbstractGeneralModel;
-import core.services.validation.DataRequirementService;
+import ui.services.validation.DataRequirementService;
 
 public class VotingCategoryEditDataModel extends AbstractGeneralModel {
 

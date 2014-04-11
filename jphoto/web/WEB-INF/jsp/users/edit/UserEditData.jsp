@@ -5,7 +5,8 @@
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ page import="core.general.user.EmailNotificationType" %>
-<%@ page import="core.services.validation.UserRequirement" %>
+<%@ page import="ui.services.validation.UserRequirement" %>
+<%@ page import="ui.services.validation.DataRequirementService" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -80,7 +81,7 @@
 <c:set var="separatorHeight" value="50"/>
 
 <%
-	final core.services.validation.DataRequirementService dataRequirementService = userEditDataModel.getDataRequirementService();
+	final DataRequirementService dataRequirementService = userEditDataModel.getDataRequirementService();
 	final UserRequirement userRequirement = userEditDataModel.getDataRequirementService().getUserRequirement();
 %>
 
