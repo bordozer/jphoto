@@ -1,6 +1,5 @@
 package core.services.dao;
 
-import ui.controllers.users.card.MarksByCategoryInfo;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.configuration.ConfigurationKey;
@@ -17,6 +16,7 @@ import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import ui.controllers.users.card.MarksByCategoryInfo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,6 +1,5 @@
 package core.services.photo;
 
-import ui.controllers.users.card.MarksByCategoryInfo;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
@@ -29,9 +28,9 @@ import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
-import core.services.system.Services;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
@@ -46,6 +45,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.*;
+import ui.controllers.users.card.MarksByCategoryInfo;
 
 import java.io.File;
 import java.util.*;

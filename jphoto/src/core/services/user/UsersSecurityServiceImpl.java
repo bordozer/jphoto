@@ -1,7 +1,5 @@
 package core.services.user;
 
-import ui.controllers.users.edit.UserEditDataModel;
-import ui.context.EnvironmentContext;
 import core.exceptions.UserRequestSecurityException;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
@@ -13,6 +11,8 @@ import core.services.validation.DataRequirementService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import ui.context.EnvironmentContext;
+import ui.controllers.users.edit.UserEditDataModel;
 import utils.FormatUtils;
 import utils.UserUtils;
 

@@ -1,6 +1,5 @@
 package core.services.dao;
 
-import ui.activity.*;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
@@ -10,6 +9,7 @@ import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import ui.activity.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

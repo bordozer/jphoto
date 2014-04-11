@@ -1,6 +1,5 @@
 package core.services.entry;
 
-import ui.dtos.AjaxResultDTO;
 import core.enums.FavoriteEntryType;
 import core.general.favorite.FavoriteEntry;
 import core.general.user.User;
@@ -21,9 +20,7 @@ public interface FavoritesService extends BaseEntityService<FavoriteEntry> {
 
 	boolean addEntryToFavorites( final int userId, final int favoriteEntryId, final Date time, final FavoriteEntryType entryType );
 
-	AjaxResultDTO addEntryToFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
-
-	AjaxResultDTO removeEntryFromFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
+	boolean removeEntryFromFavorites( final int userId, final int favoriteEntryId, final FavoriteEntryType byId );
 
 	List<Integer> getAllUsersIdsWhoHasThisEntryInFavorites( final int favoriteEntryId, final FavoriteEntryType favoriteEntryType );
 

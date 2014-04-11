@@ -1,7 +1,6 @@
 package core.services.translator;
 
 import admin.controllers.translator.custom.TranslationEntryType;
-import ui.dtos.TranslationDTO;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.log.LogHelper;
@@ -9,6 +8,7 @@ import core.services.dao.TranslationsDao;
 import core.services.utils.SystemVarsService;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.dtos.TranslationDTO;
 
 import java.io.File;
 import java.util.Arrays;

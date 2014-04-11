@@ -1,8 +1,8 @@
 package core.services.validation;
 
-import ui.context.EnvironmentContext;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
 
 public class DataRequirementServiceImpl implements DataRequirementService {
 

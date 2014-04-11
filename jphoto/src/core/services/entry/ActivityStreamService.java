@@ -1,7 +1,6 @@
 package core.services.entry;
 
 import core.enums.FavoriteEntryType;
-import ui.activity.AbstractActivityStreamEntry;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -13,6 +12,7 @@ import core.general.user.UserStatus;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
 import core.services.system.Services;
+import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.Date;
 import java.util.List;

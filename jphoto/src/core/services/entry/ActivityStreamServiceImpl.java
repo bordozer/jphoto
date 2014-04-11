@@ -1,7 +1,6 @@
 package core.services.entry;
 
 import core.enums.FavoriteEntryType;
-import ui.activity.*;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.genre.Genre;
@@ -13,12 +12,13 @@ import core.general.user.UserPhotoVote;
 import core.general.user.UserRankInGenreVoting;
 import core.general.user.UserStatus;
 import core.services.dao.ActivityStreamDao;
-import core.services.system.Services;
 import core.services.system.CacheService;
+import core.services.system.Services;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.activity.*;
 
 import java.util.Date;
 import java.util.List;

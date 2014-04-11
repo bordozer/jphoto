@@ -1,7 +1,5 @@
 package core.services.security;
 
-import ui.context.EnvironmentContext;
-import ui.dtos.AnonymousSettingsDTO;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NotLoggedUserException;
@@ -31,6 +29,8 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
+import ui.dtos.AnonymousSettingsDTO;
 import utils.NumberUtils;
 import utils.UserUtils;
 

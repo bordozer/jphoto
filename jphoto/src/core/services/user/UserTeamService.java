@@ -1,12 +1,12 @@
 package core.services.user;
 
-import ui.dtos.UserPickerDTO;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.interfaces.AllEntriesByIdLoadable;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
+import ui.dtos.UserPickerDTO;
 
 import java.util.List;
 

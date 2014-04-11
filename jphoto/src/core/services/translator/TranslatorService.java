@@ -1,10 +1,10 @@
 package core.services.translator;
 
 import admin.controllers.translator.custom.TranslationEntryType;
-import ui.dtos.TranslationDTO;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import org.dom4j.DocumentException;
+import ui.dtos.TranslationDTO;
 
 import java.util.Map;
 

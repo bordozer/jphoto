@@ -1,6 +1,5 @@
 package core.services.system;
 
-import ui.context.EnvironmentContext;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
@@ -17,6 +16,7 @@ import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import elements.menus.MenuItem;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 import java.util.Date;

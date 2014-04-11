@@ -1,8 +1,6 @@
 package core.services.system;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
-import ui.controllers.users.login.UserLoginModel;
-import ui.context.EnvironmentContext;
 import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -30,6 +28,8 @@ import org.apache.velocity.tools.ToolManager;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
+import ui.context.EnvironmentContext;
+import ui.controllers.users.login.UserLoginModel;
 import utils.StringUtilities;
 import utils.UserUtils;
 

@@ -1,11 +1,11 @@
 package core.services.validation;
 
-import ui.context.ApplicationContextHelper;
-import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import ui.context.ApplicationContextHelper;
+import ui.context.EnvironmentContext;
 
 public class PhotoRequirement {
 

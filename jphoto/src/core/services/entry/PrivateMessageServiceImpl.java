@@ -1,8 +1,5 @@
 package core.services.entry;
 
-import ui.context.EnvironmentContext;
-import ui.dtos.AjaxResultDTO;
-import ui.dtos.PrivateMessageSendingDTO;
 import core.enums.PrivateMessageType;
 import core.general.message.PrivateMessage;
 import core.general.user.User;
@@ -18,6 +15,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.context.EnvironmentContext;
+import ui.dtos.AjaxResultDTO;
+import ui.dtos.PrivateMessageSendingDTO;
 import utils.UserUtils;
 
 import java.util.List;

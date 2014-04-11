@@ -11,4 +11,8 @@ public interface AjaxService {
 	AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO );
 
 	PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId );
+
+	AjaxResultDTO addEntryToFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
+
+	AjaxResultDTO removeEntryFromFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
 }

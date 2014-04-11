@@ -1,7 +1,5 @@
 package core.services.user;
 
-import ui.context.EnvironmentContext;
-import ui.dtos.UserPickerDTO;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeam;
@@ -13,6 +11,8 @@ import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.context.EnvironmentContext;
+import ui.dtos.UserPickerDTO;
 import utils.StringUtilities;
 
 import java.util.List;

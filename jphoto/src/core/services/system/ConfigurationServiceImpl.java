@@ -9,7 +9,6 @@ import core.general.configuration.SystemConfiguration;
 import core.log.LogHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;

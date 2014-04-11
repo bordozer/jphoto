@@ -1,7 +1,5 @@
 package core.services.translator;
 
-import core.services.utils.SystemVarsService;
-
 public class TranslationEntryNerd extends TranslationEntry {
 
 	public TranslationEntryNerd( final String nerd ) {

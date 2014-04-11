@@ -4,6 +4,13 @@ import admin.controllers.jobs.edit.photosImport.strategies.photosight.Photosight
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
+import core.enums.FavoriteEntryType;
+import core.general.configuration.ConfigurationKey;
+import core.services.entry.ActivityStreamService;
+import core.services.entry.FavoritesService;
+import core.services.system.ConfigurationService;
+import core.services.translator.TranslatorService;
+import core.services.utils.DateUtilsService;
 import ui.context.EnvironmentContext;
 import ui.dtos.AjaxResultDTO;
 import ui.dtos.ComplaintMessageDTO;
@@ -17,6 +24,9 @@ import core.services.utils.UrlUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.NumberUtils;
+import utils.UserUtils;
+
+import java.util.Date;
 
 public class AjaxServiceImpl implements AjaxService {
 
@@ -31,6 +41,21 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
+
+	@Autowired
+	private FavoritesService favoritesService;
+
+	@Autowired
+	private TranslatorService translatorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
+
+	@Autowired
+	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -86,5 +111,84 @@ public class AjaxServiceImpl implements AjaxService {
 		}
 
 		return photosightUserDTO;
+	}
+
+	@Override
+	public AjaxResultDTO addEntryToFavoritesAjax( final int userId, final int favoriteEntryId, final int entryTypeId ) {
+		boolean isSuccessful;
+		String message = "";
+
+		// TODO: change a test if exists
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		// TODO: make a test
+		if ( ! UserUtils.isTheUserThatWhoIsCurrentUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "Wrong account", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		if ( favoritesService.isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
+			isSuccessful = false;
+			message = translatorService.translate( "Entry is already in your favorites", EnvironmentContext.getLanguage() );
+		} else {
+			final FavoriteEntryType entryType = FavoriteEntryType.getById( entryTypeId );
+			final Date currentTime = dateUtilsService.getCurrentTime();
+			isSuccessful = favoritesService.addEntryToFavorites( userId, favoriteEntryId, currentTime, entryType );
+			if ( configurationService.getBoolean( ConfigurationKey.SYSTEM_ACTIVITY_LOG_FAVORITE_ACTIONS ) ) {
+				activityStreamService.saveFavoriteAction( userId, favoriteEntryId, currentTime, entryType );
+			}
+		}
+
+		final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+		ajaxResultDTO.setSuccessful( isSuccessful );
+		ajaxResultDTO.setMessage( message );
+
+		return ajaxResultDTO;
+	}
+
+	@Override
+	public AjaxResultDTO removeEntryFromFavoritesAjax( final int userId, final int favoriteEntryId, final int entryTypeId ) {
+		boolean isSuccessful;
+		String message = "";
+
+		// TODO: change a test if exists
+		if ( ! UserUtils.isLoggedUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		// TODO: make a test
+		if ( !UserUtils.isTheUserThatWhoIsCurrentUser( userId ) ) {
+			final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+			ajaxResultDTO.setSuccessful( false );
+			ajaxResultDTO.setMessage( translatorService.translate( "Wrong account", EnvironmentContext.getLanguage() ) );
+
+			return ajaxResultDTO;
+		}
+
+		if ( !favoritesService.isEntryInFavorites( userId, favoriteEntryId, entryTypeId ) ) {
+			isSuccessful = false;
+			message = translatorService.translate( "Entry is NOT in your favorites", EnvironmentContext.getLanguage() );
+		} else {
+			isSuccessful = favoritesService.removeEntryFromFavorites( userId, favoriteEntryId, FavoriteEntryType.getById( entryTypeId ) );
+		}
+
+		final AjaxResultDTO ajaxResultDTO = new AjaxResultDTO();
+		ajaxResultDTO.setSuccessful( isSuccessful );
+		ajaxResultDTO.setMessage( message );
+
+		return ajaxResultDTO;
 	}
 }

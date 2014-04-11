@@ -1,6 +1,5 @@
 package core.services.user;
 
-import ui.controllers.users.genreRank.VotingModel;
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
@@ -20,6 +19,7 @@ import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.controllers.users.genreRank.VotingModel;
 import ui.userRankIcons.UserRankIconContainer;
 import utils.UserUtils;
 

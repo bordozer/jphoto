@@ -12,8 +12,6 @@ import core.services.photo.PhotoRatingService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
-import core.services.system.CacheService;
-import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;
