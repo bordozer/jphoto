@@ -5,39 +5,21 @@ import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.dao.PrivateMessageDao;
-import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
-import core.services.translator.Language;
-import core.services.translator.TranslatorService;
-import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.context.EnvironmentContext;
-import ui.dtos.AjaxResultDTO;
-import ui.dtos.PrivateMessageSendingDTO;
-import utils.UserUtils;
 
 import java.util.List;
 
 public class PrivateMessageServiceImpl implements PrivateMessageService {
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private PrivateMessageDao privateMessageDao;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private NotificationService notificationService;
-	
-	@Autowired
-	private TranslatorService translatorService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -96,83 +78,6 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 	}
 
 	@Override
-	public AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO ) {
-
-		final Language language = EnvironmentContext.getLanguage();
-
-		if ( !UserUtils.isCurrentUserLoggedUser() ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "You are not logged in", language ) );
-		}
-
-		final int fromUserId = messageDTO.getFromUserId();
-		final User fromUser = userService.load( fromUserId );
-		if ( fromUser == null ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found", language ) );
-		}
-
-		if ( !UserUtils.isTheUserThatWhoIsCurrentUser( fromUser ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?", language ) );
-		}
-
-		final int toUserId = messageDTO.getToUserId();
-		final User toUser = userService.load( toUserId );
-		if ( toUser == null ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Member you are trying to send message not found", language ) );
-		}
-
-		if ( UserUtils.isUsersEqual( fromUser, toUser ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "You can not send message to yourself", language ) );
-		}
-
-		final String privateMessageText = messageDTO.getPrivateMessageText();
-		if ( StringUtils.isEmpty( privateMessageText ) ) {
-			return AjaxResultDTO.failResult( translatorService.translate( "Message text should not be empty", language ) );
-		}
-
-		final PrivateMessage privateMessageOut = new PrivateMessage();
-		privateMessageOut.setFromUser( fromUser );
-		privateMessageOut.setToUser( toUser );
-		privateMessageOut.setMessageText( privateMessageText );
-		privateMessageOut.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
-		privateMessageOut.setCreationTime( dateUtilsService.getCurrentTime() );
-
-		final boolean isSuccessfulOut = privateMessageDao.saveToDB( privateMessageOut );
-
-		final AjaxResultDTO resultDTO = new AjaxResultDTO();
-		resultDTO.setSuccessful( isSuccessfulOut );
-
-		if ( !isSuccessfulOut ) {
-			resultDTO.setMessage( translatorService.translate( "Error saving OUT message to DB", language ) );
-
-			return resultDTO;
-		}
-
-		final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
-		privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
-		privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
-
-		final boolean isSuccessfulIn = privateMessageDao.saveToDB( privateMessageIn );
-
-		resultDTO.setSuccessful( isSuccessfulIn );
-
-		if ( !isSuccessfulIn ) {
-			resultDTO.setMessage( translatorService.translate( "Error saving IN message to DB", language ) );
-			privateMessageDao.delete( privateMessageOut.getId() );
-		}
-
-		if ( resultDTO.isSuccessful() ) {
-			new Thread( new Runnable() {
-				@Override
-				public void run() {
-					notificationService.newPrivateMessage( privateMessageOut );
-				}
-			} ).start();
-		}
-
-		return resultDTO;
-	}
-
-	@Override
 	public boolean sendPrivateMessage( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText ) {
 
 		final PrivateMessage privateMessageOut = new PrivateMessage();
@@ -183,15 +88,6 @@ public class PrivateMessageServiceImpl implements PrivateMessageService {
 		privateMessageOut.setCreationTime( dateUtilsService.getCurrentTime() );
 
 		final boolean isSuccessfulOut = privateMessageDao.saveToDB( privateMessageOut );
-
-		/*boolean isSuccessfulIn = true;
-		if ( fromUser != null ) {
-			final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
-			privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
-			privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
-
-			isSuccessfulIn = privateMessageDao.saveToDB( privateMessageIn );
-		}*/
 
 		log.debug( String.format( "%s has sent to %s the text '%s'", fromUser, toUser, privateMessageText ) );
 

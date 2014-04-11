@@ -65,7 +65,7 @@
 	</aop:config>
 
 	<aop:config>
-		<aop:pointcut id="sendPrivateMessageAjax" expression="execution(* core.services.entry.PrivateMessageService.sendPrivateMessageAjax(..))"/>
+		<aop:pointcut id="sendPrivateMessageAjax" expression="execution(* ui.services.ajax.AjaxService.sendPrivateMessageAjax(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendPrivateMessageAjax"/>
 	</aop:config>
 

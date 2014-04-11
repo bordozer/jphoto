@@ -28,8 +28,6 @@ public interface PrivateMessageService extends BaseEntityService<PrivateMessage>
 
 	void markPrivateMessagesAsRead( final List<PrivateMessage> messages );
 
-	AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO );
-
 	// Transactional
 	boolean sendPrivateMessage( final User fromUser, final User toUser, final PrivateMessageType messageType, final String privateMessageText );
 

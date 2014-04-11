@@ -5,10 +5,15 @@ import admin.controllers.jobs.edit.photosImport.strategies.photosight.Photosight
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import core.enums.FavoriteEntryType;
+import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
+import core.general.message.PrivateMessage;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.FavoritesService;
+import core.services.entry.PrivateMessageService;
+import core.services.notification.NotificationService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import ui.context.EnvironmentContext;
@@ -23,6 +28,7 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.dtos.PrivateMessageSendingDTO;
 import utils.NumberUtils;
 import utils.UserUtils;
 
@@ -56,6 +62,12 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private PrivateMessageService privateMessageService;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -190,5 +202,82 @@ public class AjaxServiceImpl implements AjaxService {
 		ajaxResultDTO.setMessage( message );
 
 		return ajaxResultDTO;
+	}
+
+	@Override
+	public AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO ) {
+
+		final Language language = EnvironmentContext.getLanguage();
+
+		if ( !UserUtils.isCurrentUserLoggedUser() ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "You are not logged in", language ) );
+		}
+
+		final int fromUserId = messageDTO.getFromUserId();
+		final User fromUser = userService.load( fromUserId );
+		if ( fromUser == null ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "Member FROM not found", language ) );
+		}
+
+		if ( !UserUtils.isTheUserThatWhoIsCurrentUser( fromUser ) ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "Attempt to send the message from another account. It seems you have changed your account after loading of this page, haven't you?", language ) );
+		}
+
+		final int toUserId = messageDTO.getToUserId();
+		final User toUser = userService.load( toUserId );
+		if ( toUser == null ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "Member you are trying to send message not found", language ) );
+		}
+
+		if ( UserUtils.isUsersEqual( fromUser, toUser ) ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "You can not send message to yourself", language ) );
+		}
+
+		final String privateMessageText = messageDTO.getPrivateMessageText();
+		if ( StringUtils.isEmpty( privateMessageText ) ) {
+			return AjaxResultDTO.failResult( translatorService.translate( "Message text should not be empty", language ) );
+		}
+
+		final PrivateMessage privateMessageOut = new PrivateMessage();
+		privateMessageOut.setFromUser( fromUser );
+		privateMessageOut.setToUser( toUser );
+		privateMessageOut.setMessageText( privateMessageText );
+		privateMessageOut.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
+		privateMessageOut.setCreationTime( dateUtilsService.getCurrentTime() );
+
+		final boolean isSuccessfulOut = privateMessageService.save( privateMessageOut );
+
+		final AjaxResultDTO resultDTO = new AjaxResultDTO();
+		resultDTO.setSuccessful( isSuccessfulOut );
+
+		if ( !isSuccessfulOut ) {
+			resultDTO.setMessage( translatorService.translate( "Error saving OUT message to DB", language ) );
+
+			return resultDTO;
+		}
+
+		final PrivateMessage privateMessageIn = new PrivateMessage( privateMessageOut );
+		privateMessageIn.setPrivateMessageType( PrivateMessageType.USER_PRIVATE_MESSAGE_IN );
+		privateMessageIn.setOutPrivateMessageId( privateMessageOut.getId() );
+
+		final boolean isSuccessfulIn = privateMessageService.save( privateMessageIn );
+
+		resultDTO.setSuccessful( isSuccessfulIn );
+
+		if ( !isSuccessfulIn ) {
+			resultDTO.setMessage( translatorService.translate( "Error saving IN message to DB", language ) );
+			privateMessageService.delete( privateMessageOut.getId() );
+		}
+
+		if ( resultDTO.isSuccessful() ) {
+			new Thread( new Runnable() {
+				@Override
+				public void run() {
+					notificationService.newPrivateMessage( privateMessageOut );
+				}
+			} ).start();
+		}
+
+		return resultDTO;
 	}
 }
