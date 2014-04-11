@@ -6,9 +6,6 @@ import core.general.user.userTeam.UserTeamMember;
 import core.interfaces.AllEntriesByIdLoadable;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
-import ui.dtos.UserPickerDTO;
-
-import java.util.List;
 
 public interface UserTeamService extends BaseEntityService<UserTeamMember>, IdsSqlSelectable, AllEntriesByIdLoadable<UserTeamMember> {
 
@@ -19,8 +16,6 @@ public interface UserTeamService extends BaseEntityService<UserTeamMember>, IdsS
 	UserTeamMember loadUserTeamMemberByName( final int userId, final String name );
 
 	int getTeamMemberPhotosQty( final int userTeamMemberId );
-
-	List<UserPickerDTO> userLinkAjax( final String searchString );
 
 	boolean savePhotoTeam( final PhotoTeam photoTeam );
 

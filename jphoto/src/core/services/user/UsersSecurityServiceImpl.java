@@ -4,6 +4,7 @@ import core.exceptions.UserRequestSecurityException;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
 import core.services.dao.UsersSecurityDao;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.NetworkUtils;
@@ -136,13 +137,15 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 	@Override
 	public void validatePasswordCreation( final String password, final String confirmPassword, final Errors errors ) {
 
+		final Language language = EnvironmentContext.getLanguage();
+
 		if ( StringUtils.isEmpty( password ) ) {
-			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, translatorService.translate( "$1 should not be empty", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Password" ) ) );
+			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, translatorService.translate( "$1 should not be empty", language, FormatUtils.getFormattedFieldName( "Password" ) ) );
 			return;
 		}
 
 		if ( password.length() < UserEditDataModel.MIN_PASSWORD_LENGTH || password.length() > UserEditDataModel.MAX_PASSWORD_LENGTH ) {
-			final String mess = translatorService.translate( "$1 must have length at least $1 characters and maximum of $2", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Password" ), String.valueOf( UserEditDataModel.MIN_PASSWORD_LENGTH ), String.valueOf( UserEditDataModel.MAX_PASSWORD_LENGTH ) );
+			final String mess = translatorService.translate( "$1 must have length at least $1 characters and maximum of $2", language, FormatUtils.getFormattedFieldName( "Password" ), String.valueOf( UserEditDataModel.MIN_PASSWORD_LENGTH ), String.valueOf( UserEditDataModel.MAX_PASSWORD_LENGTH ) );
 			errors.rejectValue( UserEditDataModel.USER_PASSWORD_FORM_CONTROL, mess );
 			return;
 		}
@@ -151,7 +154,7 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 		final Matcher matcher = pattern.matcher( password );
 		if ( ! matcher.matches() ) {
 			final StringBuilder builder = new StringBuilder();
-			builder.append( translatorService.translate( "$1 is too simple!", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Password" ) ) );
+			builder.append( translatorService.translate( "$1 is too simple!", language, FormatUtils.getFormattedFieldName( "Password" ) ) );
 			builder.append( DataRequirementService.HINT_LINE_BREAK );
 			builder.append( dataRequirementService.getUserRequirement().getPasswordRequirement( false ) );
 
@@ -161,13 +164,13 @@ public class UsersSecurityServiceImpl implements UsersSecurityService {
 
 		if ( StringUtils.isEmpty( confirmPassword ) ) {
 			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL
-				, translatorService.translate( "$1 should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Confirm password" ) ) );
+				, translatorService.translate( "$1 should not be empty.", language, FormatUtils.getFormattedFieldName( "Confirm password" ) ) );
 			return;
 		}
 
 		if ( ! password.equals( confirmPassword )  ) {
 			errors.rejectValue( UserEditDataModel.USER_CONFIRM_PASSWORD_FORM_CONTROL
-				, translatorService.translate( "$1 are not equal.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Passwords" ) ) );
+				, translatorService.translate( "$1 are not equal.", language, FormatUtils.getFormattedFieldName( "Passwords" ) ) );
 		}
 	}
 

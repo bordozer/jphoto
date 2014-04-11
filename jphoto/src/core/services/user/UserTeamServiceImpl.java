@@ -1,7 +1,6 @@
 package core.services.user;
 
 import core.general.photoTeam.PhotoTeam;
-import core.general.user.User;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.dao.UserTeamMemberDao;
@@ -11,9 +10,6 @@ import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.context.EnvironmentContext;
-import ui.dtos.UserPickerDTO;
-import utils.StringUtilities;
 
 import java.util.List;
 
@@ -26,15 +22,6 @@ public class UserTeamServiceImpl implements UserTeamService {
 
 	@Autowired
 	private UserTeamMemberDao userTeamMemberDao;
-
-	@Autowired
-	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	@Autowired
-	private TranslatorService translatorService;
 
 	@Override
 	public boolean save( final UserTeamMember entry ) {
@@ -82,42 +69,6 @@ public class UserTeamServiceImpl implements UserTeamService {
 	@Override
 	public int getTeamMemberPhotosQty( final int userTeamMemberId ) {
 		return userTeamMemberDao.getTeamMemberPhotosQty( userTeamMemberId );
-	}
-
-	@Override
-	public List<UserPickerDTO> userLinkAjax( final String searchString ) {
-
-		/*final int userId = NumberUtils.convertToInt( searchString );
-		if ( userId > 0 ) {
-			final User user = userService.load( userId );
-			if ( user == null ) {
-				return newArrayList();
-			}
-			return newArrayList( EntityLinkUtilsServiceImpl.getUserCardLink( user ) );
-		}*/
-
-		final List<User> users = userService.searchByPartOfName( searchString );
-
-		final List<UserPickerDTO> userPickerDTOs = newArrayList();
-
-		if ( users.size() == 0 ) {
-			return newArrayList();
-		}
-
-		for ( final User user : users ) {
-			final UserPickerDTO userPickerDTO = new UserPickerDTO();
-
-			userPickerDTO.setUserId( String.valueOf( user.getId() ) );
-			userPickerDTO.setUserName( user.getName() );
-			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
-			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
-			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
-			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
-
-			userPickerDTOs.add( userPickerDTO );
-		}
-
-		return userPickerDTOs;
 	}
 
 	@Override

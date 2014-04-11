@@ -20,10 +20,9 @@ import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import ui.context.EnvironmentContext;
-import ui.dtos.AjaxResultDTO;
-import ui.dtos.CommentDTO;
-import ui.dtos.ComplaintMessageDTO;
+import ui.dtos.*;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
 import core.general.user.User;
@@ -33,11 +32,14 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.dtos.PrivateMessageSendingDTO;
 import utils.NumberUtils;
+import utils.StringUtilities;
 import utils.UserUtils;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class AjaxServiceImpl implements AjaxService {
 
@@ -79,6 +81,9 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -335,5 +340,32 @@ public class AjaxServiceImpl implements AjaxService {
 		photoCommentService.save( deletedComment );
 
 		return new CommentDTO( commentId, commentText );
+	}
+
+	@Override
+	public List<UserPickerDTO> userLinkAjax( final String searchString ) {
+
+		final List<User> users = userService.searchByPartOfName( searchString );
+
+		final List<UserPickerDTO> userPickerDTOs = newArrayList();
+
+		if ( users.size() == 0 ) {
+			return newArrayList();
+		}
+
+		for ( final User user : users ) {
+			final UserPickerDTO userPickerDTO = new UserPickerDTO();
+
+			userPickerDTO.setUserId( String.valueOf( user.getId() ) );
+			userPickerDTO.setUserName( user.getName() );
+			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
+			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
+			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
+			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
+
+			userPickerDTOs.add( userPickerDTO );
+		}
+
+		return userPickerDTOs;
 	}
 }
