@@ -23,4 +23,10 @@ public interface AjaxService {
 	CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId );
 
 	List<UserPickerDTO> userLinkAjax( final String searchString );
+
+	long getUserDelayToNextCommentAjax( final int userId );
+
+	CommentDTO getCommentDTOAjax( final int commentId );
+
+	boolean isUserCanCommentPhotosAjax( final int userId );
 }

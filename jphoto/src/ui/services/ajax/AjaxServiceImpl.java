@@ -368,4 +368,20 @@ public class AjaxServiceImpl implements AjaxService {
 
 		return userPickerDTOs;
 	}
+
+	@Override
+	public long getUserDelayToNextCommentAjax( final int userId ) {
+		return photoCommentService.getUserDelayToNextComment( userId );
+	}
+
+	@Override
+	public CommentDTO getCommentDTOAjax( final int commentId ) {
+		final PhotoComment photoComment = photoCommentService.load( commentId );
+		return new CommentDTO( photoComment );
+	}
+
+	@Override
+	public boolean isUserCanCommentPhotosAjax( final int userId ) {
+		return photoCommentService.isUserCanCommentPhotos( userId );
+	}
 }

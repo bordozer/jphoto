@@ -20,7 +20,6 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.comment.edit.PhotoCommentInfo;
-import ui.dtos.CommentDTO;
 import utils.NumberUtils;
 
 import java.util.Date;
@@ -180,12 +179,6 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		synchronized ( usersLastCommentTime ) {
 			usersLastCommentTime.put( commentAuthor.getId(), getCurrentTime() );
 		}
-	}
-
-	@Override
-	public CommentDTO getCommentDTO( final int commentId ) {
-		final PhotoComment photoComment = load( commentId );
-		return new CommentDTO( photoComment );
 	}
 
 	@Override

@@ -32,8 +32,6 @@ public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
 
 	int getUnreadCommentsQty( final int userId );
 
-	CommentDTO getCommentDTO( final int photoCommentId );
-
 	Date getUserLastCommentTime( final int userId );
 
 	Date getUserNextCommentTime( final int userId );

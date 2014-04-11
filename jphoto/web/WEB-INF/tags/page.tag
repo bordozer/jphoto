@@ -1,7 +1,7 @@
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
-<%@ tag import="core.services.entry.PrivateMessageService" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,7 +11,7 @@
 <%@ attribute name="pageModel" required="true" type="elements.PageModel" %>
 
 <%
-	JSONRPCBridge.getGlobalBridge().registerObject( "privateMessageService", ApplicationContextHelper.<PrivateMessageService>getBean( PrivateMessageService.BEAN_NAME ) );
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 
 <c:set var="isSuperAdmin" value="<%=ApplicationContextHelper.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() )%>"/>
@@ -73,7 +73,7 @@
 													"${eco:translate('Send message')}": function() {
 														var privateMessageDTO = new PrivateMessageSendingDTO( fromUserId, toUserId, $( '#${privateMessageTextId}' ).val() );
 
-														var ajaxResultDTO = jsonRPC.privateMessageService.sendPrivateMessageAjax( privateMessageDTO );
+														var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
 
 														if ( ! ajaxResultDTO.successful ) {
 															showErrorMessage( ajaxResultDTO.message );

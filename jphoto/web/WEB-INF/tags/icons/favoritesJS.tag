@@ -1,12 +1,12 @@
 <%@ tag import="core.enums.FavoriteEntryType" %>
-<%@ tag import="core.services.entry.FavoritesService" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
+<%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-	JSONRPCBridge.getGlobalBridge().registerObject( "favoritesService", ApplicationContextHelper.<FavoritesService>getBean( FavoritesService.BEAN_NAME ) );
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 
 <c:set var="favoriteImagesFolder" value="<%=FavoriteEntryType.FAVORITES_IMAGE_FOLDER%>"/>
@@ -119,7 +119,7 @@ var favoriteEntryModel = function () {
 		var entry = findFavoriteEntry( favoriteEntry );
 		var favoriteEntryIcons = entry.getFavoriteEntryIcons();
 
-		var isEntryInFavorites = jsonRPC.favoritesService.isEntryInFavorites( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+		var isEntryInFavorites = jsonRPC.ajaxService.isEntryInFavorites( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
 
 		var isValid = validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled );
 
@@ -171,9 +171,9 @@ var favoriteEntryModel = function () {
 function saveToDB( isEntryInFavorites, favoriteEntry ) {
 	var ajaxResultDTO;
 	if ( isEntryInFavorites ) {
-		ajaxResultDTO = jsonRPC.favoritesService.removeEntryFromFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+		ajaxResultDTO = jsonRPC.ajaxService.removeEntryFromFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
 	} else {
-		ajaxResultDTO = jsonRPC.favoritesService.addEntryToFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+		ajaxResultDTO = jsonRPC.ajaxService.addEntryToFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
 	}
 
 	if ( !ajaxResultDTO.successful ) {

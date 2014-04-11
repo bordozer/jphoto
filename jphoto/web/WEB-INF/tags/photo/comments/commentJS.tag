@@ -1,15 +1,15 @@
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
-<%@ tag import="core.services.photo.PhotoCommentService" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="photoId" required="true" type="java.lang.Integer" %>
 
 <%
-	JSONRPCBridge.getGlobalBridge().registerObject( "photoCommentService", ApplicationContextHelper.<PhotoCommentService>getBean( PhotoCommentService.BEAN_NAME ) );
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 
 <c:set var="editUrl" value="${eco:baseUrlWithPrefix()}/photos/${photoId}/comments/"/>
@@ -33,7 +33,7 @@
 <script type="text/javascript">
 
 	function showMessageAboutDelayToNextComment() {
-		var userDelayToNextComment = jsonRPC.photoCommentService.getUserDelayToNextComment( ${loggedUser.id} );
+		var userDelayToNextComment = jsonRPC.ajaxService.getUserDelayToNextCommentAjax( ${loggedUser.id} );
 		userDelayToNextComment = Math.round( userDelayToNextComment / 1000 );
 		showInformationMessage( "${eco:translate('You can leave a comment after')}" + ' ' + userDelayToNextComment + ' ' + "${eco:translate('second(s)')}" );
 	}
@@ -44,7 +44,7 @@
 			return;
 		}
 
-		var commentDTO = jsonRPC.photoCommentService.getCommentDTO( commentId );
+		var commentDTO = jsonRPC.ajaxService.getCommentDTOAjax( commentId );
 
 		resetPhotoCommentForm();
 
@@ -79,7 +79,7 @@
 		}
 
 		if ( confirmDeletion( "${eco:translate('Delete comment?')}" ) ) {
-			var commentDTO = jsonRPC.photoCommentService.markCommentAsDeletedAjax( ${loggedUser.id}, commentId );
+			var commentDTO = jsonRPC.ajaxService.markCommentAsDeletedAjax( ${loggedUser.id}, commentId );
 			if( commentDTO.errorMessage != undefined ) {
 				showErrorMessage( commentDTO.errorMessage );
 				return;
@@ -97,7 +97,7 @@
 	}
 
 	function isUserCanNOTCommentPhoto() {
-		return ! jsonRPC.photoCommentService.isUserCanCommentPhotos( ${loggedUser.id} );
+		return ! jsonRPC.ajaxService.isUserCanCommentPhotosAjax( ${loggedUser.id} );
 	}
 
 </script>

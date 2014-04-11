@@ -1,6 +1,6 @@
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
-<%@ tag import="core.services.user.UserTeamService" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
+<%@ tag import="ui.services.ajax.AjaxService" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,8 +14,7 @@
 <%@ attribute name="callbackJSFunction" type="java.lang.String" required="false" %>
 
 <%
-	final UserTeamService userTeamService = ApplicationContextHelper.<UserTeamService>getBean( UserTeamService.BEAN_NAME );
-	JSONRPCBridge.getGlobalBridge().registerObject( "userTeamService", userTeamService );
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 
 <style type="text/css">
@@ -87,7 +86,7 @@
 													 highlight:false,
 													 source:function ( request, response ) {
 														 var searchString = $( '#${searchControl}' ).val();
-														 var userPickerDTOs = jsonRPC.userTeamService.userLinkAjax( searchString ).list;
+														 var userPickerDTOs = jsonRPC.ajaxService.userLinkAjax( searchString ).list;
 
 														 response( $.map( userPickerDTOs, function ( item ) {
 															 var img = "<img src='" + item.userAvatarUrl + "' />";

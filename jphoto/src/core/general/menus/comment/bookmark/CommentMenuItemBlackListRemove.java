@@ -32,7 +32,7 @@ public class CommentMenuItemBlackListRemove extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "jsonRPC.favoritesService.removeEntryFromFavoritesAjax( %d, %d, %d ); document.location.reload();", accessor.getId(), commentAuthor.getId(), FavoriteEntryType.BLACKLIST.getId() );
+				return String.format( "jsonRPC.ajaxService.removeEntryFromFavoritesAjax( %d, %d, %d ); document.location.reload();", accessor.getId(), commentAuthor.getId(), FavoriteEntryType.BLACKLIST.getId() );
 			}
 		};
 	}
