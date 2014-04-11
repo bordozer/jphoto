@@ -2,6 +2,7 @@ package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import ui.dtos.AjaxResultDTO;
+import ui.dtos.CommentDTO;
 import ui.dtos.ComplaintMessageDTO;
 import ui.dtos.PrivateMessageSendingDTO;
 
@@ -19,4 +20,6 @@ public interface AjaxService {
 
 	// Transactional
 	AjaxResultDTO sendPrivateMessageAjax( final PrivateMessageSendingDTO messageDTO );
+
+	CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId );
 }

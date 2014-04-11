@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs.items;
 
-import core.services.system.MenuService;
+import ui.services.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
 

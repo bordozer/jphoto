@@ -10,7 +10,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.system.MenuService;
+import ui.services.MenuService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;

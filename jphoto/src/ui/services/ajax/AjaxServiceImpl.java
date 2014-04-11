@@ -8,16 +8,21 @@ import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
 import core.general.message.PrivateMessage;
+import core.general.photo.Photo;
+import core.general.photo.PhotoComment;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.FavoritesService;
 import core.services.entry.PrivateMessageService;
 import core.services.notification.NotificationService;
+import core.services.photo.PhotoCommentService;
+import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import ui.context.EnvironmentContext;
 import ui.dtos.AjaxResultDTO;
+import ui.dtos.CommentDTO;
 import ui.dtos.ComplaintMessageDTO;
 import core.general.menus.EntryMenuType;
 import core.general.menus.comment.ComplaintReasonType;
@@ -68,6 +73,12 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private NotificationService notificationService;
+
+	@Autowired
+	private PhotoCommentService photoCommentService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -279,5 +290,50 @@ public class AjaxServiceImpl implements AjaxService {
 		}
 
 		return resultDTO;
+	}
+
+	@Override
+	public CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId ) { // TODO: move to AJAX service
+
+		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
+			final CommentDTO commentDTO = new CommentDTO( commentId );
+			commentDTO.setErrorMessage( translatorService.translate( "You do not have permission to delete this comment", EnvironmentContext.getLanguage() ) );
+
+			return commentDTO;
+		}
+
+		final User userWhoIsDeletingComment = EnvironmentContext.getCurrentUser();
+
+		final PhotoComment comment = photoCommentService.load( commentId );
+
+		if ( comment.isCommentDeleted() ) {
+			final CommentDTO commentDTO = new CommentDTO( commentId );
+			commentDTO.setErrorMessage( translatorService.translate( "The comment has already been deleted", EnvironmentContext.getLanguage() ) );
+
+			return commentDTO;
+		}
+
+		final PhotoComment deletedComment = new PhotoComment( comment );
+		deletedComment.setId( commentId );
+		deletedComment.setCommentDeleted( true );
+
+		final Photo photo = photoService.load( comment.getPhotoId() );
+
+		String userRole = "";
+		if ( securityService.isSuperAdminUser( userWhoIsDeletingComment.getId() ) ) {
+			userRole = "admin";
+		} else if( UserUtils.isUserOwnThePhoto( userWhoIsDeletingComment, photo ) ) {
+			userRole = "photo author";
+		} else {
+			userRole = "comment author";
+		}
+
+		final String commentText = String.format( "%s ( %s ) deleted this comment: %s"
+			, userWhoIsDeletingComment.getNameEscaped(), userRole, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ) );
+		deletedComment.setCommentText( commentText );
+
+		photoCommentService.save( deletedComment );
+
+		return new CommentDTO( commentId, commentText );
 	}
 }

@@ -8,7 +8,7 @@ import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
-import core.services.system.MenuService;
+import ui.services.MenuService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;

@@ -1,4 +1,4 @@
-package core.services.system;
+package ui.services;
 
 import elements.PageModel;
 

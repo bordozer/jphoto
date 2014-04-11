@@ -1,4 +1,4 @@
-package core.services.system;
+package ui.services;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.enums.PrivateMessageType;

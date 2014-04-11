@@ -4,8 +4,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd"
 	   default-autowire="byName">
 
-	<bean id="pageTemplateService" class="core.services.system.PageTemplateServiceImpl"/>
-	<bean id="menuService" class="core.services.system.MenuServiceImpl"/>
+	<bean id="pageTemplateService" class="ui.services.PageTemplateServiceImpl"/>
+	<bean id="menuService" class="ui.services.MenuServiceImpl"/>
 
 	<bean id="services" class="core.services.system.ServicesImpl"/>
 

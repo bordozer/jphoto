@@ -19,11 +19,9 @@ import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.context.EnvironmentContext;
 import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.dtos.CommentDTO;
 import utils.NumberUtils;
-import utils.UserUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -161,51 +159,6 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	@Override
 	public boolean delete( final int entryId ) {
 		return photoCommentDao.delete( entryId );
-	}
-
-	@Override
-	public CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId ) { // TODO: move to AJAX service
-
-		if ( ! securityService.userCanDeletePhotoComment( userId, commentId ) ) {
-			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( translatorService.translate( "You do not have permission to delete this comment", EnvironmentContext.getLanguage() ) );
-
-			return commentDTO;
-		}
-
-		final User userWhoIsDeletingComment = EnvironmentContext.getCurrentUser();
-
-		final PhotoComment comment = load( commentId );
-
-		if ( comment.isCommentDeleted() ) {
-			final CommentDTO commentDTO = new CommentDTO( commentId );
-			commentDTO.setErrorMessage( translatorService.translate( "The comment has already been deleted", EnvironmentContext.getLanguage() ) );
-
-			return commentDTO;
-		}
-
-		final PhotoComment deletedComment = new PhotoComment( comment );
-		deletedComment.setId( commentId );
-		deletedComment.setCommentDeleted( true );
-
-		final Photo photo = photoService.load( comment.getPhotoId() );
-
-		String userRole = "";
-		if ( securityService.isSuperAdminUser( userWhoIsDeletingComment.getId() ) ) {
-			userRole = "admin";
-		} else if( UserUtils.isUserOwnThePhoto( userWhoIsDeletingComment, photo ) ) {
-			userRole = "photo author";
-		} else {
-			userRole = "comment author";
-		}
-
-		final String commentText = String.format( "%s ( %s ) deleted this comment: %s"
-			, userWhoIsDeletingComment.getNameEscaped(), userRole, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ) );
-		deletedComment.setCommentText( commentText );
-
-		save( deletedComment );
-
-		return new CommentDTO( commentId, commentText );
 	}
 
 	@Override
