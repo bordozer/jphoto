@@ -40,6 +40,7 @@ import ui.context.EnvironmentContext;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
 import ui.controllers.users.card.UserStatistic;
+import ui.services.PhotoUIService;
 import utils.StringUtilities;
 
 import java.util.Collections;
@@ -58,6 +59,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private PhotoListCriteriasService photoListCriteriasService;
@@ -315,7 +319,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final List<Photo> photos = photoService.load( selectIdsResult.getIds() );
 
-		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
+		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
 		final PhotoList photoList = new PhotoList( photoInfos, photoListTitle, false );
 		photoList.setPhotosInLine( getUserPhotosInLine() );
 		photoList.setLinkToFullList( userTeamMemberCardLink );
@@ -358,7 +362,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Photo> photos = photoService.loadPhotosByIdsQuery( selectIdsQuery );
 
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
+		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
 		return photoList;
 	}
@@ -371,7 +375,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 		final String listTitle = translatorService.translate( "The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
+		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
 		return photoList;
 	}
@@ -384,7 +388,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
+		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
 		return photoList;
 	}
@@ -409,7 +413,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	private PhotoList getPhotoList( final List<Photo> photos, final String linkToFullPhotoList, final String listTitle ) {
 
-		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), listTitle, false );
+		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), listTitle, false );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setLinkToFullList( linkToFullPhotoList );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );

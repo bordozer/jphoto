@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 
@@ -33,6 +34,9 @@ public class PhotoPreviewsController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private PhotoPreviewService photoPreviewService;
@@ -67,7 +71,7 @@ public class PhotoPreviewsController {
 		model.setPhotoAuthor( user );
 		model.setGenre( genre );
 
-		model.setPhotoPreviewWrapper( photoService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() ) );
+		model.setPhotoPreviewWrapper( photoUIService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getUserPhotoPreviewsBreadcrumbs( photo, EnvironmentContext.getCurrentUser() ) );
 

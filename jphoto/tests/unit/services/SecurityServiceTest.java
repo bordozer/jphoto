@@ -23,6 +23,8 @@ import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
+import ui.services.SecurityUIService;
+import ui.services.SecurityUIServiceImpl;
 
 import java.util.List;
 
@@ -527,27 +529,27 @@ public class SecurityServiceTest extends AbstractTestCase {
 		justUserWithNudeContent.setId( 555 );
 		justUserWithNudeContent.setShowNudeContent( true );
 
-		final SecurityService securityService = getSecurityService();
+		final SecurityUIServiceImpl securityUIService = getSecurityUIService();
 
 		EnvironmentContext.setEnv( new Environment( photoAuthor ) );
 
-		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, photoAuthor ) );
-		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserNoNudeContent ) );
-		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserWithNudeContent ) );
-		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, NOT_LOGGED_USER ) );
+		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, photoAuthor ) );
+		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserNoNudeContent ) );
+		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, justUserWithNudeContent ) );
+		assertFalse( String.format( "Photo without nude content but nude preview is shown" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoNoNudeContent, NOT_LOGGED_USER ) );
 
-		assertFalse( String.format( "Photo author can not see nude content of his own photo" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, photoAuthor ) );
-		assertTrue( String.format( "User switched off nude content but can see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserNoNudeContent ) );
-		assertFalse( String.format( "User switched on nude content but can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserWithNudeContent ) );
-		assertTrue( String.format( "Not logged user can see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
+		assertFalse( String.format( "Photo author can not see nude content of his own photo" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, photoAuthor ) );
+		assertTrue( String.format( "User switched off nude content but can see it" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserNoNudeContent ) );
+		assertFalse( String.format( "User switched on nude content but can not see it" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, justUserWithNudeContent ) );
+		assertTrue( String.format( "Not logged user can see nude content" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
 
 		final Environment env = new Environment( NOT_LOGGED_USER );
 		env.setShowNudeContent( true );
 
 		EnvironmentContext.setEnv( env );
-		assertFalse( String.format( "Not logged user confirmed nude content can not see it" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
+		assertFalse( String.format( "Not logged user confirmed nude content can not see it" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, NOT_LOGGED_USER ) );
 
-		assertFalse( String.format( "Super Admin can not see nude content" ), securityService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, SUPER_ADMIN_1 ) );
+		assertFalse( String.format( "Super Admin can not see nude content" ), securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photoWithNudeContent, SUPER_ADMIN_1 ) );
 	}
 
 	@Test
@@ -565,7 +567,7 @@ public class SecurityServiceTest extends AbstractTestCase {
 		final User justUserNoNudeContent = new User();
 		justUserNoNudeContent.setId( 444 );
 
-		final SecurityServiceImpl securityService = getSecurityService();
+		final SecurityUIServiceImpl securityService = getSecurityUIService();
 
 		try {
 			EnvironmentContext.setEnv( new Environment( justUserWithNudeContent ) );
@@ -586,6 +588,13 @@ public class SecurityServiceTest extends AbstractTestCase {
 
 	private SecurityServiceImpl getSecurityService() {
 		return getSecurityService( ADMIN_CAN_NOTHING );
+	}
+
+	private SecurityUIServiceImpl getSecurityUIService() {
+		final SecurityUIServiceImpl securityUIService = new SecurityUIServiceImpl();
+		securityUIService.setSecurityService( getSecurityService() );
+
+		return securityUIService;
 	}
 
 	private SecurityServiceImpl getSecurityService( final ConfigKeys configKeys ) {

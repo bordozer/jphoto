@@ -26,6 +26,7 @@ import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.list.PhotoListController;
 import ui.controllers.photos.list.PhotoListModel;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
@@ -46,6 +47,9 @@ public class UserBookmarksController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UtilsService utilsService;
@@ -167,7 +171,7 @@ public class UserBookmarksController {
 
 		final String listTitle = String.format( "%s: %s", entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), translatorService.translate( entryType.getName(), EnvironmentContext.getLanguage() ) );
 
-		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, photoIconsTypes, userIconsTypes, EnvironmentContext.getCurrentUser() ), listTitle );
+		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, photoIconsTypes, userIconsTypes, EnvironmentContext.getCurrentUser() ), listTitle );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 

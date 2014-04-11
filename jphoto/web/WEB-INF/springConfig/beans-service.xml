@@ -45,6 +45,9 @@
 	<bean id="userCardModelFillService" class="ui.controllers.users.card.data.UserCardModelFillServiceImpl"/>
 	<bean id="activityStreamService" class="core.services.entry.ActivityStreamServiceImpl"/>
 
+	<bean id="photoUIService" class="ui.services.PhotoUIServiceImpl"/>
+	<bean id="securityUIService" class="ui.services.SecurityUIServiceImpl"/>
+
 	<bean id="mailService" class="core.services.mail.MailServiceImpl"/>
 
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">

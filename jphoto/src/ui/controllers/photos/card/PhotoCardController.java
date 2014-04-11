@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
+import ui.services.SecurityUIService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 import utils.UserUtils;
@@ -46,6 +48,9 @@ public class PhotoCardController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UserService userService;
@@ -70,6 +75,9 @@ public class PhotoCardController {
 
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private SecurityUIService securityUIService;
 
 	@Autowired
 	private BreadcrumbsPhotoService breadcrumbsPhotoService;
@@ -106,7 +114,7 @@ public class PhotoCardController {
 
 		securityService.assertPhotoFileExists( photo );
 
-		securityService.assertUserWantSeeNudeContent( EnvironmentContext.getCurrentUser(), photo, urlUtilsService.getPhotoCardLink( photoId ) );
+		securityUIService.assertUserWantSeeNudeContent( EnvironmentContext.getCurrentUser(), photo, urlUtilsService.getPhotoCardLink( photoId ) );
 
 		model.setPhoto( photo );
 
@@ -129,7 +137,7 @@ public class PhotoCardController {
 
 		savePhotoPreviewIfNecessary( photo ); // should be before photoInfo loading
 
-		final PhotoInfo photoInfo = photoService.getPhotoInfo( photo, EnvironmentContext.getCurrentUser() );
+		final PhotoInfo photoInfo = photoUIService.getPhotoInfo( photo, EnvironmentContext.getCurrentUser() );
 		model.setPhotoInfo( photoInfo );
 
 		model.setMinCommentLength( configurationService.getInt( ConfigurationKey.COMMENTS_MIN_LENGTH ) );

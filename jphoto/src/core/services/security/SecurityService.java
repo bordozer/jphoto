@@ -62,10 +62,6 @@ public interface SecurityService {
 
 	void assertGenreExists( final String _genreId );
 
-	void assertUserWantSeeNudeContent( final User user, final Photo photo, final String url );
-
-	boolean isPhotoHasToBeHiddenBecauseOfNudeContent( final Photo photo, final User user );
-
 	ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Language language );
 
 	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Language language );

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import utils.NumberUtils;
 
@@ -37,6 +38,9 @@ public class PhotoMarkListController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UserService userService;
@@ -76,7 +80,7 @@ public class PhotoMarkListController {
 		model.setVotingCategories( getVotingCategories( photoVotes ) );
 		model.setUserVotesMap( getUserVotesMap( photoVotes ) );
 		model.setMarksByCategoriesMap( getMarksByCategories( photoVotes ) );
-		model.setPhotoPreviewWrapper( photoService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() ) );
+		model.setPhotoPreviewWrapper( photoUIService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() ) );
 
 		final Genre genre = genreService.load( photo.getGenreId() );
 		model.setGenre( genre );

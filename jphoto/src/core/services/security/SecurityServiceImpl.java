@@ -3,7 +3,6 @@ package core.services.security;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NotLoggedUserException;
-import core.exceptions.NudeContentException;
 import core.exceptions.notFound.GenreNotFoundException;
 import core.exceptions.notFound.PhotoNotFoundException;
 import core.exceptions.notFound.UserNotFoundException;
@@ -29,7 +28,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.context.EnvironmentContext;
 import ui.dtos.AnonymousSettingsDTO;
 import utils.NumberUtils;
 import utils.UserUtils;
@@ -269,36 +267,6 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( genre == null ) {
 			throw new GenreNotFoundException( genreId );
 		}
-	}
-
-	@Override
-	public void assertUserWantSeeNudeContent( final User user, final Photo photo, final String url ) {
-		if ( isPhotoHasToBeHiddenBecauseOfNudeContent( photo, user ) ) {
-			throw new NudeContentException( url );
-		}
-	}
-
-	@Override
-	public boolean isPhotoHasToBeHiddenBecauseOfNudeContent( final Photo photo, final User user ) {
-
-		if ( isSuperAdminUser( user.getId() ) ) {
-			return false;
-		}
-
-		final boolean isUserOwnerOfPhoto = userOwnThePhoto( user, photo );
-		if ( ! photo.isContainsNudeContent() || isUserOwnerOfPhoto ) {
-			return false;
-		}
-
-		final boolean userHasAlreadyConfirmedShowingNudeContent = EnvironmentContext.isShowNudeContext(); // TODO: EnvironmentContext in service!!!
-		if ( userHasAlreadyConfirmedShowingNudeContent ) {
-			return false;
-		}
-
-		final boolean userDoesNotWantToSeeNudeContent = !user.isShowNudeContent();
-		final boolean notLoggedUserHasNotConfirmedNudeContent = ! UserUtils.isLoggedUser( user );
-
-		return userDoesNotWantToSeeNudeContent || notLoggedUserHasNotConfirmedNudeContent;
 	}
 
 	@Override

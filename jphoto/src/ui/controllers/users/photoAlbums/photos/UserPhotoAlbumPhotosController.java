@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
@@ -42,6 +43,9 @@ public class UserPhotoAlbumPhotosController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UtilsService utilsService;
@@ -98,7 +102,7 @@ public class UserPhotoAlbumPhotosController {
 
 		final List<Photo> photos = photoService.load( selectIdsResult.getIds() );
 
-		final PhotoList photoList = new PhotoList( photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), title );
+		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), title );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setBottomText( photoAlbum.getDescription() );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );

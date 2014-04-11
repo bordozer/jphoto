@@ -47,6 +47,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 import utils.NumberUtils;
 import utils.PagingUtils;
@@ -71,6 +72,9 @@ public class PhotoListController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UserService userService;
@@ -589,7 +593,7 @@ public class PhotoListController {
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
-		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
+		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
 		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
@@ -745,7 +749,7 @@ public class PhotoListController {
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );
 		final List<Photo> photos = photoService.load( selectResult.getIds() );
-		final List<PhotoInfo> photoInfos = photoService.getPhotoInfos( photos, currentUser );
+		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, currentUser );
 
 		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
@@ -781,7 +785,7 @@ public class PhotoListController {
 			photoList.setPhotoGroupOperationMenuContainer( pagePhotos.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
 			if ( listData.isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos() ) {
-				photoService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
+				photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 			}
 
 			model.addPhotoList( photoList );
@@ -808,9 +812,9 @@ public class PhotoListController {
 
 		final List<PhotoInfo> photoInfos;
 		if ( dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeFrom() ) && dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeTo() ) ) {
-			photoInfos = photoService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), currentUser );
+			photoInfos = photoUIService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), currentUser );
 		} else {
-			photoInfos = photoService.getPhotoInfos( pagePhotos, currentUser );
+			photoInfos = photoUIService.getPhotoInfos( pagePhotos, currentUser );
 		}
 
 		addFavoriteIcons( photoInfos );

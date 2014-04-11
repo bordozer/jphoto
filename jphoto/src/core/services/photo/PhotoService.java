@@ -1,12 +1,9 @@
 package core.services.photo;
 
-import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.photo.PhotoInfo;
-import core.general.photo.PhotoPreviewWrapper;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.UserPhotosByGenre;
@@ -33,8 +30,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
 
-	List<PhotoInfo> getPhotoInfos( final SqlIdsSelectQuery selectQuery, final User user );
-
 	List<Photo> loadUserPhotos( final int userId );
 
 	int getPhotoQty();
@@ -51,16 +46,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	Set<Genre> getUserPhotoGenres( final int userId );
 
-	PhotoInfo getPhotoInfo( final Photo photo, final User accessor );
-
-	PhotoInfo getPhotoInfo( final Photo photo, final Date timeFrom, final Date timeTo, final User accessor );
-
-	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final User accessor );
-
-	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final Date timeFrom, final Date timeTo, final User accessor );
-
-	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes, final User accessor );
-
 	boolean updatePhotoFileData( int photoId, final File file );
 
 	int getPhotoQtyByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo );
@@ -69,15 +54,11 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	Date getPhotoAnonymousPeriodExpirationTime( final Photo photo );
 
-	void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos );
-
 	PhotoActionAllowance getPhotoCommentAllowance( final Photo photo );
 
 	PhotoActionAllowance getPhotoVotingAllowance( final Photo photo );
 
 	List<UserPhotosByGenre> getUserPhotosByGenres( int userId );
-
-	PhotoPreviewWrapper getPhotoPreviewWrapper( final Photo photo, final User user );
 
 	List<Photo> getBestUserPhotos( final User user, final int photosQty, final User accessor );
 

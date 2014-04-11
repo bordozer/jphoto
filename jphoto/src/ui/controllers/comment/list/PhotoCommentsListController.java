@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 import ui.controllers.comment.edit.PhotoCommentInfo;
+import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.PagingUtils;
 
@@ -47,6 +48,9 @@ public class PhotoCommentsListController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private PhotoCommentService photoCommentService;
@@ -223,7 +227,7 @@ public class PhotoCommentsListController {
 		for ( final PhotoCommentInfo photoCommentInfo : photoCommentInfos ) {
 			final Photo photo = photoCommentInfo.getPhoto();
 
-			final PhotoPreviewWrapper previewWrapper = photoService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() );
+			final PhotoPreviewWrapper previewWrapper = photoUIService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() );
 
 			if ( photoCommentInfoMap.containsKey( previewWrapper ) ) {
 				photoCommentInfoMap.get( previewWrapper ).add( photoCommentInfo );

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 
 import java.util.Collections;
 import java.util.Date;
@@ -36,6 +37,9 @@ public class PortalPageController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoUIService photoUIService;
 
 	@Autowired
 	private GenreService genreService;
@@ -71,14 +75,14 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-		final PhotoList lastUploadedPhotoList = new PhotoList( photoService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() )
+		final PhotoList lastUploadedPhotoList = new PhotoList( photoUIService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() )
 			, translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
 
 		lastUploadedPhotoList.setPhotosInLine( 4 );
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
 		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );
 
-		final PhotoList theBestPhotoList = new PhotoList( photoService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
+		final PhotoList theBestPhotoList = new PhotoList( photoUIService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
 		model.setTheBestPhotoList( theBestPhotoList );
 		Collections.shuffle( theBestPhotoList.getPhotoInfos() );
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );

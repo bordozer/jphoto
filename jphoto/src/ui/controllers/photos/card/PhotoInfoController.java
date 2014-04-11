@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
+import ui.services.PhotoUIService;
 
 @Controller
 @RequestMapping( "photos/{photoId}" )
@@ -21,12 +22,15 @@ public class PhotoInfoController {
 	private PhotoService photoService;
 
 	@Autowired
+	private PhotoUIService photoUIService;
+
+	@Autowired
 	private UserRankService userRankService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/info/" )
 	public String getPhotoInfo( final @PathVariable( "photoId" ) int photoId, final @ModelAttribute( "photoInfoModel" ) PhotoInfoModel model ) {
 		final Photo photo = photoService.load( photoId );
-		model.setPhotoInfo( photoService.getPhotoInfo( photo, EnvironmentContext.getCurrentUser() ) );
+		model.setPhotoInfo( photoUIService.getPhotoInfo( photo, EnvironmentContext.getCurrentUser() ) );
 		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), EnvironmentContext.getCurrentUser() ) );
 
 		return PHOTO_INFO_VIEW;
