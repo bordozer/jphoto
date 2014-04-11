@@ -1,4 +1,4 @@
-package core.general.activity;
+package ui.activity;
 
 import admin.jobs.enums.SavedJobType;
 

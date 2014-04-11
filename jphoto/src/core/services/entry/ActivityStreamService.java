@@ -1,7 +1,7 @@
 package core.services.entry;
 
 import core.enums.FavoriteEntryType;
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;

@@ -1,6 +1,6 @@
 package core.services.dao;
 
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 
 import java.util.Date;
 import java.util.List;

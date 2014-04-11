@@ -1,7 +1,7 @@
 package core.services.entry;
 
 import core.enums.FavoriteEntryType;
-import core.general.activity.*;
+import ui.activity.*;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.genre.Genre;

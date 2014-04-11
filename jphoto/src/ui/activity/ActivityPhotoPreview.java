@@ -1,4 +1,4 @@
-package core.general.activity;
+package ui.activity;
 
 import core.general.photo.Photo;
 import core.general.photo.PhotoPreview;

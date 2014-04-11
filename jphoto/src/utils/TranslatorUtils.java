@@ -3,7 +3,7 @@ package utils;
 import admin.controllers.translator.custom.TranslationEntryType;
 import ui.context.ApplicationContextHelper;
 import ui.context.EnvironmentContext;
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.translator.message.TranslatableMessage;

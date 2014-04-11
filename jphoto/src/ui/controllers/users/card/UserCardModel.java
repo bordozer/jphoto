@@ -1,7 +1,7 @@
 package ui.controllers.users.card;
 
 import core.enums.UserCardTab;
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;

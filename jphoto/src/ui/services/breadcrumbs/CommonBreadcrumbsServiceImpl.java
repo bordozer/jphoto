@@ -1,6 +1,6 @@
 package ui.services.breadcrumbs;
 
-import core.general.activity.ActivityType;
+import ui.activity.ActivityType;
 import core.services.system.Services;
 import elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package core.services.dao;
 
-import core.general.activity.*;
+import ui.activity.*;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;

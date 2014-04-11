@@ -1,7 +1,7 @@
 package ui.controllers.activity.list;
 
-import core.general.activity.AbstractActivityStreamEntry;
-import core.general.activity.ActivityType;
+import ui.activity.AbstractActivityStreamEntry;
+import ui.activity.ActivityType;
 import core.general.base.PagingModel;
 import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;

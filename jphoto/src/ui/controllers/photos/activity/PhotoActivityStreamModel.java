@@ -1,6 +1,6 @@
 package ui.controllers.photos.activity;
 
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.AbstractGeneralPageModel;
 import core.general.photo.Photo;
 

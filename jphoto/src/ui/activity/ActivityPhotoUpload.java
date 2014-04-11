@@ -1,4 +1,4 @@
-package core.general.activity;
+package ui.activity;
 
 import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;

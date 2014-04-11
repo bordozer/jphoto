@@ -2,7 +2,7 @@ package ui.controllers.users.card.data;
 
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;

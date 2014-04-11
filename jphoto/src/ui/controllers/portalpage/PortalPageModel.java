@@ -1,6 +1,6 @@
 package ui.controllers.portalpage;
 
-import core.general.activity.AbstractActivityStreamEntry;
+import ui.activity.AbstractActivityStreamEntry;
 import core.general.data.UserRating;
 import core.services.translator.TranslatorService;
 import elements.PhotoList;

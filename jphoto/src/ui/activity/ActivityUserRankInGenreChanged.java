@@ -1,4 +1,4 @@
-package core.general.activity;
+package ui.activity;
 
 import core.general.genre.Genre;
 import core.general.user.User;
