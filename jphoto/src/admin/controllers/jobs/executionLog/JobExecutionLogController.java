@@ -50,7 +50,7 @@ public class JobExecutionLogController {
 			return VIEW;
 		}
 
-		final List<JobRuntimeLog> jobRuntimeLogs = job.getJobRuntimeLogs();
+		final List<JobRuntimeLog> jobRuntimeLogs = newArrayList( job.getJobRuntimeLogs() );
 		Collections.sort( jobRuntimeLogs, new Comparator<JobRuntimeLog>() {
 			@Override
 			public int compare( final JobRuntimeLog o1, final JobRuntimeLog o2 ) {
