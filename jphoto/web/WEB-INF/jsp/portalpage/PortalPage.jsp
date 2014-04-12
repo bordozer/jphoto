@@ -3,6 +3,7 @@
 <%@ page import="ui.controllers.portalpage.PortalPageModel" %>
 <%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="ui.services.breadcrumbs.items.BreadcrumbsBuilder" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
@@ -21,7 +22,7 @@
 <%
 	final String title = portalPageModel.getTranslatorService().translate( BreadcrumbsBuilder.BREADCRUMBS_PORTAL_PAGE, EnvironmentContext.getLanguage() );
 	final PageModel pageModel = new PageModel();
-	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
+	pageModel.setPageTitleData( new PageTitleData( ApplicationContextHelper.getSystemVarsService().getProjectName(), title, title ) );
 %>
 
 <c:set var="pageModel" value="<%=pageModel%>" />
