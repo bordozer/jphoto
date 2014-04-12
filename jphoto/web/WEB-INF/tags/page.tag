@@ -152,7 +152,7 @@
 			}
 		</script>
 
-		<script type="text/javascript" src="<c:url value="/common/js/translationsReload.jsp" /> "></script>
+		<script type="text/javascript" src="${eco:baseUrl()}/common/js/translationsReload.jsp"></script>
 	</c:if>
 
 	<jsp:doBody/>

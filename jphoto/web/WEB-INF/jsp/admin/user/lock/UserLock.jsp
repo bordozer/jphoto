@@ -9,11 +9,11 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 
-	<link href="<c:url value="/common/css/jphoto-mobile.css"/>" rel="stylesheet" type="text/css"/>
-	<link rel="stylesheet" type="text/css" href="<c:url value="/common/js/lib/front-end/css/jquery.mobile-1.4.0.css"/>"/>
+	<link href="${eco:baseUrl()}/common/css/jphoto-mobile.css" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="${eco:baseUrl()}/common/js/lib/front-end/css/jquery.mobile-1.4.0.css"/>
 
 	<%-- Dependensies configuration --%>
-	<script data-main="<c:url value="/common/js/modules/admin/user/lock/require-config-user-lock.js"/>" src="<c:url value="/common/js/lib/front-end/require.js"/>"></script>
+	<script data-main="${eco:baseUrl()}/common/js/modules/admin/user/lock/require-config-user-lock.js" src="${eco:baseUrl()}/common/js/lib/front-end/require.js"></script>
 
 </head>
 <body>

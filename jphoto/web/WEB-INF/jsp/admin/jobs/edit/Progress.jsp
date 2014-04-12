@@ -35,7 +35,7 @@
 						 suppressAutoReloading="true"
 		/>
 
-	<script type="text/javascript" src="<c:url value="/common/js/jobProgress.js" />"></script>
+	<script type="text/javascript" src="${eco:baseUrl()}/common/js/jobProgress.js"></script>
 	<script type="text/javascript">
 		$( function () {
 			$( "#progressbar_${id}" ).progressbar( {
