@@ -102,10 +102,10 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "pageHeader", pageHeader );
 
 		model.put( "workername", systemVarsService.getTomcatWorkerName() );
-		model.put( "siteUrlWithPrefix", urlUtilsService.getBaseURLWithPrefix() );
+		model.put( "siteUrlWithPrefix", urlUtilsService.getBaseURL() );
 		model.put( "imagePath", urlUtilsService.getSiteImagesPath() );
 
-		model.put( "portalpageurl", urlUtilsService.getBaseURLWithPrefixClosed() );
+		model.put( "portalpageurl", urlUtilsService.getPortalPageURL() );
 		model.put( "registerurl", urlUtilsService.getUserNewLink() );
 
 		model.put( "progectname", systemVarsService.getProjectName() );
@@ -138,7 +138,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
 		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
-		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURLWithPrefix() );
+		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURL() );
 
 		try {
 			model.put( "isSchedulerRunning", scheduledTasksExecutionService.isRunning() );

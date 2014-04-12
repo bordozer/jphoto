@@ -155,7 +155,7 @@ public class PhotoCommentsListController {
 
 		photoCommentService.markAllUnreadCommentAsRead( user.getId() );
 
-		return String.format( "redirect:%s/members/%d/comments/received/", urlUtilsService.getBaseURLWithPrefix(), user.getId() );
+		return String.format( "redirect:%s/members/%d/comments/received/", urlUtilsService.getBaseURL(), user.getId() );
 	}
 
 	private List<PhotoCommentInfo> getCommentsInfos( final List<Integer> commentIds, final PagingModel pagingModel ) {

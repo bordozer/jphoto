@@ -78,11 +78,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public String getApplicationPrefix() {
-		return config.getString( "ApplicationPrefix" );
-	}
-
-	@Override
 	public String getAdminPrefix() {
 		return config.getString( "AdminPrefix" );
 	}

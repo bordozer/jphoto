@@ -10,17 +10,9 @@ public interface UrlUtilsService {
 
 	String BEAN_NAME = "urlUtilsService";
 
-	String getServerUrl();
-
-	String getServerUrlClosed();
-
 	String getBaseURL();
 
-	String getBaseURLWithPrefix();
-
-	String getBaseURLWithPrefixClosed();
-
-	String getAdminBaseURLWithPrefix();
+	String getAdminBaseURL();
 
 	String getPortalPageURL();
 

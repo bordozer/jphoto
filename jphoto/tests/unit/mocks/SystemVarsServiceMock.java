@@ -27,11 +27,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public String getApplicationPrefix() {
-		return "/test";
-	}
-
-	@Override
 	public Language getSystemDefaultLanguage() {
 		return Language.RU;
 	}

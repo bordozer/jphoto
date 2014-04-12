@@ -126,7 +126,7 @@ public class CustomTranslationsController {
 			translatorService.save( model.getTranslationEntryType(), translationEntry.getEntryId(), idLanguageKey.getLanguage(), translationEntry.getTranslation() );
 		}
 
-		return String.format( "redirect:%s/%s/", urlUtilsService.getAdminBaseURLWithPrefix(), model.getRedirectToPrefix() );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getAdminBaseURL(), model.getRedirectToPrefix() );
 	}
 
 	private void initLanguages( final CustomTranslationsModel model ) {

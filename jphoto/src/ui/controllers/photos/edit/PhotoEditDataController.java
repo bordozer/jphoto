@@ -318,7 +318,7 @@ public class PhotoEditDataController {
 			}
 		}
 
-		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURLWithPrefix(), UrlUtilsServiceImpl.PHOTOS_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURL(), UrlUtilsServiceImpl.PHOTOS_URL );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )

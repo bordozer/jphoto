@@ -42,6 +42,6 @@ public class NudeContentController {
 		env.setShowNudeContent( true );
 		EnvironmentContext.setEnv( env );
 
-		return String.format( "redirect:%s%s", urlUtilsService.getServerUrl(), model.getRedirectToIfAcceptUrl() );
+		return String.format( "redirect:%s%s", urlUtilsService.getBaseURL(), model.getRedirectToIfAcceptUrl() );
 	}
 }

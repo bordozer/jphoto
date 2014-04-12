@@ -20,11 +20,11 @@ import java.util.Map;
 public class TLD_Utils {
 
 	public static String getBaseURLWithPrefix() {
-		return ApplicationContextHelper.getUrlUtilsService().getBaseURLWithPrefix();
+		return ApplicationContextHelper.getUrlUtilsService().getBaseURL();
 	}
 
 	public static String getAdminBaseURLWithPrefix() {
-		return ApplicationContextHelper.getUrlUtilsService().getAdminBaseURLWithPrefix();
+		return ApplicationContextHelper.getUrlUtilsService().getAdminBaseURL();
 	}
 
 	public static String getBaseURL() {

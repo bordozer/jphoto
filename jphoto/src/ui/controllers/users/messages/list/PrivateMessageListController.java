@@ -191,7 +191,7 @@ public class PrivateMessageListController {
 
 		markMessagesAsReadIfNecessary( receivedMessages, forUser );
 
-		return String.format( "redirect:%s/members/%s/messages/%s/", urlUtilsService.getBaseURLWithPrefix(), model.getForUser().getId(), messageType.getId() );
+		return String.format( "redirect:%s/members/%s/messages/%s/", urlUtilsService.getBaseURL(), model.getForUser().getId(), messageType.getId() );
 	}
 
 	private PrivateMessageType getMessageTypeId( final String _messageTypeId ) {

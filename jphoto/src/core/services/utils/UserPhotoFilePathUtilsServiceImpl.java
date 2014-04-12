@@ -46,12 +46,12 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String getPhotoPreviewUrl( final Photo photo ) {
-		return String.format( "%s/download/photos/%s/preview/", urlUtilsService.getBaseURLWithPrefix(), photo.getId() );
+		return String.format( "%s/download/photos/%s/preview/", urlUtilsService.getBaseURL(), photo.getId() );
 	}
 
 	@Override
 	public String getPhotoUrl( final Photo photo ) {
-		return String.format( "%s/download/photos/%s/", urlUtilsService.getBaseURLWithPrefix(), photo.getId() );
+		return String.format( "%s/download/photos/%s/", urlUtilsService.getBaseURL(), photo.getId() );
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String getUserAvatarFileUrl( final int userId ) {
-		return String.format( "%s/download/file/?filePath=%s", urlUtilsService.getBaseURLWithPrefix(), getUserAvatarFile( userId ) );
+		return String.format( "%s/download/file/?filePath=%s", urlUtilsService.getBaseURL(), getUserAvatarFile( userId ) );
 	}
 
 	@Override

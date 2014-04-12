@@ -15,8 +15,6 @@ public interface SystemVarsService {
 
 	String getTomcatWorkerName();
 
-	String getApplicationPrefix();
-
 	String getAdminPrefix();
 
 	String getPhotoStoragePath();

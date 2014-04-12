@@ -265,7 +265,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getActivityStreamRootLink( final Language language ) {
-		final String link = String.format( "%s/activityStream/", urlUtilsService.getBaseURLWithPrefix() );
+		final String link = String.format( "%s/activityStream/", urlUtilsService.getBaseURL() );
 		return String.format( "<a href=\"%s\">%s</a>", link, translatorService.translate( "Activity stream", language ) );
 	}
 

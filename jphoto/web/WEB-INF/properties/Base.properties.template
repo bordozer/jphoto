@@ -7,9 +7,6 @@ TomcatWorkerName=/jphoto
 # use this if no context
 TomcatWorkerName=
 
-#Application prefix with leading slash
-ApplicationPrefix=/app
-
 # use this if no prefix
 #ApplicationPrefix=
 

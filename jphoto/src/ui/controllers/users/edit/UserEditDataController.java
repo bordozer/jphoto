@@ -194,7 +194,7 @@ public class UserEditDataController {
 	}
 
 	private String getRedirectToUserListView() {
-		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURLWithPrefix(), UrlUtilsServiceImpl.USERS_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURL(), UrlUtilsServiceImpl.USERS_URL );
 	}
 
 	private void setCommentAllowance( final UserEditDataModel model, final User user ) {
