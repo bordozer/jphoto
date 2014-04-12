@@ -43,12 +43,12 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getPortalPageURL() {
-		return String.format( "%s/", getBaseURL() );
+		return getBaseURL();
 	}
 
 	@Override
 	public String getSiteImagesPath() {
-		return String.format( "%s%s/%s", systemVarsService.getProjectUrlClosed(), systemVarsService.getTomcatWorkerName(), SITE_IMAGE_FOLDER_NAME );
+		return String.format( "%s/%s", getBaseURL(), SITE_IMAGE_FOLDER_NAME );
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class UrlUtilsServiceTest extends AbstractTestCase {
 
 		assertEquals( "http://127.0.0.1:8085/worker/adm", urlUtilsService.getAdminBaseURL() );
 
-		assertEquals( "http://127.0.0.1:8085/worker/", urlUtilsService.getPortalPageURL() );
+		assertEquals( "http://127.0.0.1:8085/worker", urlUtilsService.getPortalPageURL() );
 	}
 
 	@Test
@@ -33,7 +33,6 @@ public class UrlUtilsServiceTest extends AbstractTestCase {
 
 		final SystemVarsService systemVarsService = EasyMock.createMock( SystemVarsService.class );
 		EasyMock.expect( systemVarsService.getProjectUrl() ).andReturn( "http://127.0.0.1:8085" ).anyTimes();
-		EasyMock.expect( systemVarsService.getProjectUrlClosed() ).andReturn( "http://127.0.0.1:8085/" ).anyTimes();
 		EasyMock.expect( systemVarsService.getTomcatWorkerName() ).andReturn( "" ).anyTimes();
 		EasyMock.expect( systemVarsService.getAdminPrefix() ).andReturn( "/adm" ).anyTimes();
 		EasyMock.expectLastCall();
@@ -46,6 +45,6 @@ public class UrlUtilsServiceTest extends AbstractTestCase {
 
 		assertEquals( "http://127.0.0.1:8085/adm", urlUtilsService.getAdminBaseURL() );
 
-		assertEquals( "http://127.0.0.1:8085/", urlUtilsService.getPortalPageURL() );
+		assertEquals( "http://127.0.0.1:8085", urlUtilsService.getPortalPageURL() );
 	}
 }

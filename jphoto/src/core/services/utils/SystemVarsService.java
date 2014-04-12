@@ -11,8 +11,6 @@ public interface SystemVarsService {
 
 	String getProjectUrl();
 
-	String getProjectUrlClosed();
-
 	String getTomcatWorkerName();
 
 	String getAdminPrefix();

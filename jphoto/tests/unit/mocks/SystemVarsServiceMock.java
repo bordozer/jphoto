@@ -17,13 +17,13 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public String getProjectUrlClosed() {
-		return String.format( "%s/", getProjectUrl() );
+	public String getTomcatWorkerName() {
+		return "/worker";
 	}
 
 	@Override
-	public String getTomcatWorkerName() {
-		return "/worker";
+	public String getAdminPrefix() {
+		return "/adm";
 	}
 
 	@Override
@@ -39,11 +39,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public boolean isShowTranslationSigns() {
 		return false;
-	}
-
-	@Override
-	public String getAdminPrefix() {
-		return "/adm";
 	}
 
 	@Override

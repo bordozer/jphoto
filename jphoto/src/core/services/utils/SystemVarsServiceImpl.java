@@ -68,11 +68,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public String getProjectUrlClosed() {
-		return String.format( "%s/", getProjectUrl() );
-	}
-
-	@Override
 	public String getTomcatWorkerName() {
 		return config.getString( "TomcatWorkerName" );
 	}

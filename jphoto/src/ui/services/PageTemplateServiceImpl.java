@@ -101,8 +101,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "title", pageTitle );
 		model.put( "pageHeader", pageHeader );
 
-		model.put( "workername", systemVarsService.getTomcatWorkerName() );
-		model.put( "siteUrlWithPrefix", urlUtilsService.getBaseURL() );
+		model.put( "baseUrl", urlUtilsService.getBaseURL() );
 		model.put( "imagePath", urlUtilsService.getSiteImagesPath() );
 
 		model.put( "portalpageurl", urlUtilsService.getPortalPageURL() );
