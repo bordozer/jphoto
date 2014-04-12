@@ -29,7 +29,7 @@
 
 <tags:page pageModel="${userAvatarModel.pageModel}">
 
-	<eco:form action="${eco:baseUrlWithPrefix()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
+	<eco:form action="${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/" multipartForm="true">
 
 		<table:table width="800" border="0">
 
@@ -61,7 +61,7 @@
 						<script type="text/javascript">
 							function deleteAvatar() {
 								if ( confirm( '${eco:translate('Delete your avatar?')}' ) ) {
-									document.location.href = '${eco:baseUrlWithPrefix()}/members/${userAvatarModel.user.id}/avatar/delete/';
+									document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
 								}
 								return false;
 							}

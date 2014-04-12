@@ -49,12 +49,12 @@
 			</c:if>
 
 			<c:set var="jobListTabValueName" value="${eco:translate(jobListTabValue.name)}"/>
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName}</a>
+			<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/" title="${jobListTabValueName}">${jobListTabValueName}</a>
 
 			<br />
 
 			<c:if test="${activeTabAndThereAreRunningJobs}">
-				<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTabValue.key}/status/${activeStatusId}/" title="${eco:translate('Show active jobs')}">&nbsp;${activeJobsQty}&nbsp;</a> /
+				<a href="${eco:baseAdminUrl()}/jobs/${jobListTabValue.key}/status/${activeStatusId}/" title="${eco:translate('Show active jobs')}">&nbsp;${activeJobsQty}&nbsp;</a> /
 			</c:if>
 			${tabJobInfosMap[jobListTabValue].tabJobsQty}
 

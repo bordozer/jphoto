@@ -21,7 +21,7 @@
 
 <tags:page pageModel="${changeUserPasswordModel.pageModel}">
 
-	<form:form modelAttribute="changeUserPasswordModel" method="POST" action="${eco:baseUrlWithPrefix()}/members/${user.id}/password/">
+	<form:form modelAttribute="changeUserPasswordModel" method="POST" action="${eco:baseUrl()}/members/${user.id}/password/">
 
 		<table:table width="800">
 

@@ -38,7 +38,7 @@
 
 				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">
 					<table:td cssClass="textcentered" width="20">
-						<a href="${eco:baseUrlWithPrefix()}/members/${activity.displayActivityUserId}/card/activity/"
+						<a href="${eco:baseUrl()}/members/${activity.displayActivityUserId}/card/activity/"
 						   title="${eco:translate('Show full member activity stream')}">${eco:translate('Show full member activity stream (short)')}</a>
 					</table:td>
 				</c:if>

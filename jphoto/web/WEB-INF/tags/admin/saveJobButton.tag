@@ -64,7 +64,7 @@
 <script type="text/javascript">
 	function saveJob() {
 		$( '#${saveJobModeFormControl}' ).val( true );
-		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrlWithPrefix()}/jobs/${jobModel.job.jobType.prefix}/save/' );
+		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/${jobModel.job.jobType.prefix}/save/' );
 		$( '#FormName' ).submit();
 	}
 
@@ -77,7 +77,7 @@
 
 	function checkAndStart() {
 		$( '#${saveJobModeFormControl}' ).val( false );
-		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrlWithPrefix()}/jobs/${jobModel.job.jobType.prefix}/' );
+		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/${jobModel.job.jobType.prefix}/' );
 
 		if( confirmDeletion( '${eco:translate1('Run "$1?"', jobModel.job.jobName)}' ) ) {
 			$( '#FormName' ).submit();

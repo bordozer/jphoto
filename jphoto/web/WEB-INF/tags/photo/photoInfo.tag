@@ -229,7 +229,7 @@
 
 			<table:tr>
 				<table:td />
-				<table:td cssClass="textsentered"><a href="${eco:baseUrlWithPrefix()}/photo/${photo.id}/activity/">${eco:translate("Photo info: Photo activity stream")}</a></table:td>
+				<table:td cssClass="textsentered"><a href="${eco:baseUrl()}/photo/${photo.id}/activity/">${eco:translate("Photo info: Photo activity stream")}</a></table:td>
 			</table:tr>
 
 		</table:table>

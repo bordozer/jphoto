@@ -137,7 +137,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
 		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
-		model.put( "baseAdminPrefix", urlUtilsService.getAdminBaseURL() );
+		model.put( "baseAdminPrefix", urlUtilsService.getBaseAdminURL() );
 
 		try {
 			model.put( "isSchedulerRunning", scheduledTasksExecutionService.isRunning() );

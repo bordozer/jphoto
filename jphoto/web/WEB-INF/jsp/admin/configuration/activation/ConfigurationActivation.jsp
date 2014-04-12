@@ -12,7 +12,7 @@
 
 <tags:page pageModel="${systemConfigurationActivationModel.pageModel}">
 
-	<form:form modelAttribute="systemConfigurationActivationModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/configuration/activation/">
+	<form:form modelAttribute="systemConfigurationActivationModel" method="POST" action="${eco:baseAdminUrl()}/configuration/activation/">
 
 		<table:table>
 

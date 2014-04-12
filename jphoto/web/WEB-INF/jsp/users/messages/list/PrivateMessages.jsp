@@ -47,7 +47,7 @@
 					</c:if>
 
 					<div style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3;" class="${css}">
-						<a class="${css}" href="${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/with/${withUser.id}/"
+						<a class="${css}" href="${eco:baseUrl()}/members/${forUserId}/messages/with/${withUser.id}/"
 						   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
 								${withUser.nameEscaped}
 						</a>
@@ -155,7 +155,7 @@
 
 					<c:if test="${not empty privateMessages}">
 						function deleteSelectedPrivateMessages() {
-							var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/delete/selected/";
+							var action = "${eco:baseUrl()}/members/${forUserId}/messages/delete/selected/";
 							var message = "${eco:translate('Delete selected messages?')}";
 
 							return performAction( action, message );
@@ -164,14 +164,14 @@
 						<c:if test="${not empty privateMessageListModel.privateMessageType}">
 							<c:set var="privateMessageTypeName" value="${eco:translate(privateMessageListModel.privateMessageType.name)}" />
 							function deleteAllPrivateMessages() {
-								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
+								var action = "${eco:baseUrl()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
 								var message = "${eco:translate1('Delete ALL $1?', privateMessageTypeName)}";
 
 								return performAction( action, message );
 							}
 
 							function markAllMessagesAsRead() {
-								var action = "${eco:baseUrlWithPrefix()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
+								var action = "${eco:baseUrl()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
 								var message = "${eco:translate1('Mark all $1 as read?', privateMessageTypeName)}";
 
 								return performAction( action, message );

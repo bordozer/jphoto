@@ -47,7 +47,7 @@
 
 	<script src="${eco:baseUrl()}/common/js/lib/jquery/jquery.form.js" type="text/javascript"></script>
 
-	<c:set var="url" value="${eco:baseUrlWithPrefix()}/photos/${photoId}/comments/save/"/>
+	<c:set var="url" value="${eco:baseUrl()}/photos/${photoId}/comments/save/"/>
 	<c:set var="frmPhotoComment" value="<%=FormTag.FORM_NAME%>"/>
 
 	<div class="photoCommentForm">

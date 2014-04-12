@@ -13,7 +13,7 @@
 
 <c:set var="systemConfiguration" value="${configurationEditModel.systemConfiguration}"/>
 
-<c:set var="configurationEditUrl" value="${eco:baseAdminUrlWithPrefix()}/configuration/${systemConfiguration.id}/edit/"/>
+<c:set var="configurationEditUrl" value="${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/edit/"/>
 <c:set var="hasEntries" value="${configurationEditModel.configurationMap.size() > 0}"/>
 <c:set var="activeConfigurationTab" value="${configurationEditModel.configurationTab}"/>
 
@@ -157,7 +157,7 @@
 							<script type="text/javascript">
 								function submitAndSaveConfiguration() {
 									var form = $( '#configurationEditModel' );
-									form.attr( 'action', '${eco:baseAdminUrlWithPrefix()}/configuration/${systemConfiguration.id}/save/' );
+									form.attr( 'action', '${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/save/' );
 									form.submit();
 								}
 

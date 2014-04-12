@@ -15,7 +15,7 @@
 
 <tags:page pageModel="${customTranslationsModel.pageModel}">
 
-	<form:form modelAttribute="customTranslationsModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/translations/custom/">
+	<form:form modelAttribute="customTranslationsModel" method="POST" action="${eco:baseAdminUrl()}/translations/custom/">
 
 		<table:table width="400px">
 
@@ -67,7 +67,7 @@
 		<script type="text/javascript">
 			function saveTranslations() {
 				var form = $( '#customTranslationsModel' );
-				form.attr( 'action', '${eco:baseAdminUrlWithPrefix()}/translations/custom/save/' );
+				form.attr( 'action', '${eco:baseAdminUrl()}/translations/custom/save/' );
 				form.submit();
 			}
 		</script>

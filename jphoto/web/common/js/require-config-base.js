@@ -1,11 +1,11 @@
 /* TODO: jphoto in the path is configurable context. Get it from properties */
 requirejs.config({
-	baseUrl: '/jphoto/common/js/modules',
+	baseUrl: '/common/js/modules', /* TODO: pass context here */
 	paths: {
-		jquery: "/jphoto/common/js/lib/jquery/jquery-1.7.2"
-		, underscore: "/jphoto/common/js/lib/front-end/underscore"
-		, backbone: "/jphoto/common/js/lib/front-end/backbone"
-		, text: "/jphoto/common/js/lib/front-end/text"
+		jquery: "/common/js/lib/jquery/jquery-1.7.2" /* TODO: pass context here */
+		, underscore: "/common/js/lib/front-end/underscore" /* TODO: pass context here */
+		, backbone: "/common/js/lib/front-end/backbone" /* TODO: pass context here */
+		, text: "/common/js/lib/front-end/text" /* TODO: pass context here */
 	},
 	shim: { /* config for lib those are not defined af modules */
 		'backbone': {

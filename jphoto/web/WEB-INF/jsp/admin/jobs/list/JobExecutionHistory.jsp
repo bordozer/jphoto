@@ -80,14 +80,14 @@
 
 <div class="jobHistoryToolbar">
 	<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == 0}">${selectedIconCss}</c:if>">
-		<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobTypeIdUrlFilter}">
+		<a href="${eco:baseAdminUrl()}/jobs/done/${jobTypeIdUrlFilter}">
 			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('Reset filter by execution status')}"/>
 		</a>
 	</div>
 
 	<c:forEach var="jobExecutionStatus" items="${jobExecutionStatusValues}">
 		<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == jobExecutionStatus.id}">${selectedIconCss}</c:if>">
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
+			<a href="${eco:baseAdminUrl()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
 				<c:set var="jobExecutionStatusNameTranslated" value="${eco:translate(jobExecutionStatus.name)}"/>
 				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
 			</a>
@@ -96,14 +96,14 @@
 
 	<div class="jobHistoryButton wdth">&nbsp;</div>
 	<div class="jobHistoryButton wdth">
-		<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/">
+		<a href="${eco:baseAdminUrl()}/jobs/done/">
 			<html:img32 src="jobExecutionStatus/allEntries.png" alt="${eco:translate('Reset all filters')}"/>
 		</a>
 	</div>
 	<div class="jobHistoryButton wdth">&nbsp;</div>
 
 	<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == 0}">${selectedIconCss}</c:if>">
-		<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}">
+		<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}">
 			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('Reset filter by job type')}"/>
 		</a>
 	</div>
@@ -111,7 +111,7 @@
 	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 		<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == savedJobType.id}">${selectedIconCss}</c:if>">
 			<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
-			<a href="${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('Filter by job type: $1', savedJobTypeNameTranslated)}">
+			<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('Filter by job type: $1', savedJobTypeNameTranslated)}">
 				<html:img32 src="jobtype/${savedJobType.icon}"/>
 			</a>
 		</div>
@@ -121,7 +121,7 @@
 
 <tags:paging showSummary="false"/>
 
-<form:form modelAttribute="savedJobListModel" action="${eco:baseAdminUrlWithPrefix()}/jobs/delete/" method="POST">
+<form:form modelAttribute="savedJobListModel" action="${eco:baseAdminUrl()}/jobs/delete/" method="POST">
 
 	<form:hidden path="formAction"/>
 
@@ -203,7 +203,7 @@
 						<table:tdunderlined>
 							<c:if test="${isJobWatingForStartOrInProgress}">
 								<c:if test="${empty jobExecutionHistoryEntry.savedJob}">
-									<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${eco:translate(jobType.name)}</a>
+									<a href="${eco:baseAdminUrl()}/jobs/${jobType.prefix}/progress/${jobEntryId}/">${eco:translate(jobType.name)}</a>
 								</c:if>
 								<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 									<jobs:savedJobProgress savedJob="${jobExecutionHistoryEntry.savedJob}" jobId="${jobEntryId}"/>
@@ -335,18 +335,18 @@
 <script type="text/javascript">
 	function deleteJobExecutionHistoryEntry( jobEntryId ) {
 		if ( confirm( "${eco:translate('Delete job execution history entry?')}" ) ) {
-			document.location.href = "${eco:baseAdminUrlWithPrefix()}/jobs/delete/" + jobEntryId + "/";
+			document.location.href = "${eco:baseAdminUrl()}/jobs/delete/" + jobEntryId + "/";
 		}
 	}
 
 	function deleteSelectedHistoryEntries() {
-		$( '#savedJobListModel' ).attr( 'action', '${eco:baseAdminUrlWithPrefix()}/jobs/delete/' );
+		$( '#savedJobListModel' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/delete/' );
 		return confirm( "${eco:translate('Delete selected history entries?')}" );
 	}
 
 	function filterBySchedulerTask() {
 		$( '#formAction' ).val( 'filter' );
-		$( '#savedJobListModel' ).attr( 'action', '${eco:baseAdminUrlWithPrefix()}/jobs/done/${jobExecutionStatusIdUrlFilter}${jobTypeIdUrlFilter}' ); // TODO: icon click ignore this filter
+		$( '#savedJobListModel' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}${jobTypeIdUrlFilter}' ); // TODO: icon click ignore this filter
 		$( '#savedJobListModel' ).submit();
 	}
 

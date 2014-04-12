@@ -30,7 +30,7 @@
 
 	<tags:inputHintForm/>
 
-	<form:form modelAttribute="genreEditDataModel" method="POST" action="${eco:baseAdminUrlWithPrefix()}/${entityUrl}/save/">
+	<form:form modelAttribute="genreEditDataModel" method="POST" action="${eco:baseAdminUrl()}/${entityUrl}/save/">
 
 		<form:hidden path="${genreIdControl}" />
 

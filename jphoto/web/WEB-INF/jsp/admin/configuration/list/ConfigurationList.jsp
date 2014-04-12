@@ -47,7 +47,7 @@
 					</c:if>
 
 					<c:if test="${not systemConfiguration.activeConfiguration}">
-						<a href="${eco:baseAdminUrlWithPrefix()}/configuration/activation/?id=${systemConfiguration.id}" >
+						<a href="${eco:baseAdminUrl()}/configuration/activation/?id=${systemConfiguration.id}" >
 							<html:img id="${systemConfiguration.id}" src="inactiveSysConfig.png" width="16" height="16" alt="${eco:translate('Activate configuration')}" />
 						</a>
 					</c:if>

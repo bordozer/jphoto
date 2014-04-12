@@ -5,7 +5,7 @@
 	function voteForUserRankInGenre( userId, genreId, votingPoints ) {
 		$.ajax( {
 					type:'GET',
-					url:"${eco:baseUrlWithPrefix()}/voting/rank/voting/?userId=" + userId + "&genreId=" + genreId + "&points=" + votingPoints,
+					url:"${eco:baseUrl()}/voting/rank/voting/?userId=" + userId + "&genreId=" + genreId + "&points=" + votingPoints,
 					success:function ( response ) {
 						// response == RankInGenreVotingSave.jsp
 						$( "#user_by_genre_voting_" + genreId ).html( response );
@@ -19,7 +19,7 @@
 	function voteForUserRankInGenreByPhoto( photoId, genreId, votingPoints ) {
 		$.ajax( {
 					type:'GET',
-					url:"${eco:baseUrlWithPrefix()}/voting/rank/voting/?photoId=" + photoId + "&points=" + votingPoints,
+					url:"${eco:baseUrl()}/voting/rank/voting/?photoId=" + photoId + "&points=" + votingPoints,
 					success:function ( response ) {
 						// response == RankInGenreVotingSave.jsp
 						$( "#user_by_genre_voting_" + genreId ).html( response );

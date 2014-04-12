@@ -19,7 +19,7 @@
 	<c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
 	<c:set var="membershipTypeControl" value="userFilterModel.membershipTypeList"/>
 
-	<eco:form action="${eco:baseUrlWithPrefix()}/members/filter/">
+	<eco:form action="${eco:baseUrl()}/members/filter/">
 
 		<table:table width="400">
 

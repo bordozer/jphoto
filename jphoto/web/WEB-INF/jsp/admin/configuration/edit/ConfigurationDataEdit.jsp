@@ -12,7 +12,7 @@
 
 <c:set var="systemConfiguration" value="${configurationEditModel.systemConfiguration}"/>
 
-<c:set var="configurationEditUrl" value="${eco:baseAdminUrlWithPrefix()}/configuration/${systemConfiguration.id}/edit/"/>
+<c:set var="configurationEditUrl" value="${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/edit/"/>
 
 <tags:page pageModel="${configurationEditModel.pageModel}">
 
@@ -68,7 +68,7 @@
 			<script type="text/javascript">
 				function submitAndSaveConfiguration() {
 					var form = $( '#configurationEditModel' );
-					form.attr( 'action', '${eco:baseAdminUrlWithPrefix()}/configuration/${systemConfiguration.id}/save/' );
+					form.attr( 'action', '${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/save/' );
 					form.submit();
 				}
 			</script>

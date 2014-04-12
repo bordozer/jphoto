@@ -19,16 +19,12 @@ import java.util.Map;
 
 public class TLD_Utils {
 
-	public static String getBaseURLWithPrefix() {
-		return ApplicationContextHelper.getUrlUtilsService().getBaseURL();
-	}
-
-	public static String getAdminBaseURLWithPrefix() {
-		return ApplicationContextHelper.getUrlUtilsService().getAdminBaseURL();
-	}
-
 	public static String getBaseURL() {
 		return ApplicationContextHelper.getUrlUtilsService().getBaseURL();
+	}
+
+	public static String getBaseAdminURL() {
+		return ApplicationContextHelper.getUrlUtilsService().getBaseAdminURL();
 	}
 
 	public static String getSiteImagesPath() {

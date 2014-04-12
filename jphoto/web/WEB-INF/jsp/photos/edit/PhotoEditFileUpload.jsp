@@ -24,7 +24,7 @@
 
 	<photo:photoAllowance uploadAllowance="${uploadAllowance}" />
 
-	<eco:form action="${eco:baseUrlWithPrefix()}/photos/save/" multipartForm="true">
+	<eco:form action="${eco:baseUrl()}/photos/save/" multipartForm="true">
 
 		<input type="hidden" id="currentStepId" name="currentStepId" value="${photoFileUploadWizardStepId}">
 

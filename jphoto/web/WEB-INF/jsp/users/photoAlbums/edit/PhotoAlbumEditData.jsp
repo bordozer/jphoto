@@ -21,7 +21,7 @@
 
 <tags:page pageModel="${userPhotoAlbumEditDataModel.pageModel}">
 
-	<form:form modelAttribute="userPhotoAlbumEditDataModel" method="POST" action="${eco:baseUrlWithPrefix()}/members/${user.id}/albums/save/">
+	<form:form modelAttribute="userPhotoAlbumEditDataModel" method="POST" action="${eco:baseUrl()}/members/${user.id}/albums/save/">
 
 		<table:table width="700">
 

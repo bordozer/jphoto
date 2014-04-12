@@ -15,7 +15,7 @@
 <c:set var="photoFilterSortColumnsValues" value="<%=PhotoFilterSortColumn.values()%>"/>
 <c:set var="photoFilterSortOrderValues" value="<%=PhotoFilterSortOrder.values()%>"/>
 
-<form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrlWithPrefix()}/photos/filter/">
+<form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrl()}/photos/filter/">
 
 	<table:table width="600">
 

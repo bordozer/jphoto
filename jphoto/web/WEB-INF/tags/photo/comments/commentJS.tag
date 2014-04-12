@@ -12,8 +12,8 @@
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
 
-<c:set var="editUrl" value="${eco:baseUrlWithPrefix()}/photos/${photoId}/comments/"/>
-<c:set var="deleteUrl" value="${eco:baseUrlWithPrefix()}/photos/${photoId}/comments/"/>
+<c:set var="editUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>
+<c:set var="deleteUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>
 
 <c:set var="loggedUser" value="<%=EnvironmentContext.getCurrentUser()%>"/>
 <c:set var="replyToCommentIdFormControl" value="<%=PhotoCommentModel.REPLY_TO_COMMENT_ID_FORM_CONTROL%>"/>

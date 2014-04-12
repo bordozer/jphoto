@@ -134,7 +134,7 @@
 
 			function adminLockUser( userId, userName ) {
 
-				var url = "${eco:baseAdminUrlWithPrefix()}/members/" + userId + "/lock/";
+				var url = "${eco:baseAdminUrl()}/members/" + userId + "/lock/";
 				$( '#${lockUserIFrameId}' ).attr( 'src', url );
 
 				$( "#${lockUserDivId}" )

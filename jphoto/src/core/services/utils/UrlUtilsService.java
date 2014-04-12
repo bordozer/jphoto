@@ -12,7 +12,7 @@ public interface UrlUtilsService {
 
 	String getBaseURL();
 
-	String getAdminBaseURL();
+	String getBaseAdminURL();
 
 	String getPortalPageURL();
 

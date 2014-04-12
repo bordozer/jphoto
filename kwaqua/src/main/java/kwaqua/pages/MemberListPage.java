@@ -6,8 +6,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.openqa.selenium.WebDriver;
 
-@DefaultUrl( "http://localhost:8083/jphoto/app/members/" )
-@At( urls = {"#HOST/jphoto/app/members/.*"} )
+@DefaultUrl( "http://localhost:8083/jphoto/members/" )
+@At( urls = {"#HOST/jphoto/members/.*"} )
 public class MemberListPage extends PageObject {
 
 	public MemberListPage( final WebDriver driver ) {

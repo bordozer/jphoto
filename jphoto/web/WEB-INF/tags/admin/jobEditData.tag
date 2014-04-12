@@ -23,7 +23,7 @@
 
 <div style="float: left; width: 100%;">
 
-	<form:form id="FormName" name="FormName" action="${eco:baseAdminUrlWithPrefix()}/jobs/${job.jobType.prefix}/">
+	<form:form id="FormName" name="FormName" action="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/">
 
 		<input type="hidden" id="referrer" name="referrer" value="${jobModel.referrer}">
 

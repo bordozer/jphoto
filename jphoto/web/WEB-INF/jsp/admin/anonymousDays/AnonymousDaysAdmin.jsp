@@ -114,7 +114,7 @@
 					<c:set var="yearCss" value="currentYearCss" />
 				</c:if>
 
-				<span class="${yearCss}"><a href="${eco:baseAdminUrlWithPrefix()}/anonymousDays/${year}/">${year}</a></span>
+				<span class="${yearCss}"><a href="${eco:baseAdminUrl()}/anonymousDays/${year}/">${year}</a></span>
 
 				&nbsp;
 			</c:forEach>

@@ -112,7 +112,7 @@
 
 		function stopTheJob() {
 			if ( confirm( "${eco:translate('Stop the job?')}" )) {
-				document.location.href = "${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
+				document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
 			}
 		}
 

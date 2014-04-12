@@ -49,7 +49,7 @@
 	<div class="centerAlign">
 		<h3>${eco:translate(jobType.name)}</h3>
 
-		<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobType.prefix}/">
+		<a href="${eco:baseAdminUrl()}/jobs/${jobType.prefix}/">
 			<html:img id="testDataGenerationFinishedImg" src="jobExecutionStatus/big/${jobStatus.icon}" width="128" height="128" alt="${jobStatusNameTranslated}"/>
 		</a>
 

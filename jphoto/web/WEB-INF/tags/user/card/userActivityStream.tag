@@ -10,7 +10,7 @@
 <%@ attribute name="filterActivityTypeId" required="true" type="java.lang.Integer" %>
 
 <tags:activityStreamFilter activityTypeValues="<%=ActivityType.USER_ACTIVITIES%>" filterActivityTypeId="${filterActivityTypeId}"
-						   url="${eco:baseUrlWithPrefix()}/members/${user.id}/card/activity/"/>
+						   url="${eco:baseUrl()}/members/${user.id}/card/activity/"/>
 
 <div class="floatleft">
 

@@ -48,21 +48,15 @@
 	</tag>
 
 	<function>
-		<name>baseUrlWithPrefix</name>
-		<function-class>utils.TLD_Utils</function-class>
-		<function-signature>java.lang.String getBaseURLWithPrefix()</function-signature>
-	</function>
-
-	<function>
-		<name>baseAdminUrlWithPrefix</name>
-		<function-class>utils.TLD_Utils</function-class>
-		<function-signature>java.lang.String getAdminBaseURLWithPrefix()</function-signature>
-	</function>
-
-	<function>
 		<name>baseUrl</name>
 		<function-class>utils.TLD_Utils</function-class>
 		<function-signature>java.lang.String getBaseURL()</function-signature>
+	</function>
+
+	<function>
+		<name>baseAdminUrl</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String getBaseAdminURL()</function-signature>
 	</function>
 
 	<function>

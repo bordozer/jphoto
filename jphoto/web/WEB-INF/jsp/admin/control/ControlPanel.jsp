@@ -11,7 +11,7 @@
 
 <tags:page pageModel="${controlPanelModel.pageModel}">
 
-	<form:form method="POST" modelAttribute="controlPanelModel" action="${eco:baseAdminUrlWithPrefix()}/control-panel/" >
+	<form:form method="POST" modelAttribute="controlPanelModel" action="${eco:baseAdminUrl()}/control-panel/" >
 
 		<div class="floatleft">
 
@@ -51,7 +51,7 @@
 						<table:td cssClass="textright">${eco:translate('Users total')}</table:td>
 						<table:td>${controlPanelModel.usersTotal}</table:td>
 						<table:td>
-							<a href="${eco:baseAdminUrlWithPrefix()}/reports/users/"> ${eco:translate('Statistic')}</a>
+							<a href="${eco:baseAdminUrl()}/reports/users/"> ${eco:translate('Statistic')}</a>
 						</table:td>
 					</table:tr>
 
@@ -90,7 +90,7 @@
 		function submitControlPanelForm( prefix, confirmation ) {
 			if ( confirm( confirmation ) ) {
 				var form = $( '#controlPanelModel' );
-				form.attr( 'action', '${eco:baseAdminUrlWithPrefix()}/control-panel/' + prefix + '/' );
+				form.attr( 'action', '${eco:baseAdminUrl()}/control-panel/' + prefix + '/' );
 				form.submit();
 
 				return true;

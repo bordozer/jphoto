@@ -31,7 +31,7 @@
 	<c:set var="taskTime" value="${schedulerTaskEditModel.schedulerTaskTime}"/>
 	<c:set var="isSchedulerTaskActive" value="${schedulerTaskEditModel.schedulerTaskActive}"/>
 
-	<form:form method="POST" action="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/submit/" modelAttribute="schedulerTaskEditModel">
+	<form:form method="POST" action="${eco:baseAdminUrl()}/scheduler/tasks/submit/" modelAttribute="schedulerTaskEditModel">
 
 		<form:hidden path="formAction"/>
 

@@ -25,7 +25,7 @@
 
 	<tags:inputHintForm />
 
-	<eco:form action="${eco:baseAdminUrlWithPrefix()}/${entityUrl}/save/">
+	<eco:form action="${eco:baseAdminUrl()}/${entityUrl}/save/">
 
 		<input type="hidden" name="${votingCategoryIdControl}" id="${votingCategoryIdControl}" value="${votingCategoryEditDataModel.votingCategoryId}" />
 

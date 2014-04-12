@@ -229,7 +229,7 @@
 
 				<br />
 
-				<a href="${eco:baseUrlWithPrefix()}/activityStream/">${eco:translate('Full activity stream')}</a>
+				<a href="${eco:baseUrl()}/activityStream/">${eco:translate('Full activity stream')}</a>
 
 			</table:td>
 

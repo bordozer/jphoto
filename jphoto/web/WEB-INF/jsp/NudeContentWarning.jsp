@@ -32,7 +32,7 @@
 
 <tags:page pageModel="${pageModel}">
 
-	<form id="viewingNudeContentForm" method="POST" action="${eco:baseUrlWithPrefix()}/nudeContent/">
+	<form id="viewingNudeContentForm" method="POST" action="${eco:baseUrl()}/nudeContent/">
 		<input type="hidden" id="redirectToIfAcceptUrl" name="redirectToIfAcceptUrl" value="${redirectToIfAcceptUrl}">
 		<input type="hidden" id="redirectToIfDeclineUrl" name="redirectToIfDeclineUrl" value="${redirectToIfDeclineUrl}">
 

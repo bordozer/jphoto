@@ -109,7 +109,7 @@
 
 	<tags:inputHintForm />
 
-	<eco:form action="${eco:baseUrlWithPrefix()}/${userPathPrefix}/${userId}/save/">
+	<eco:form action="${eco:baseUrl()}/${userPathPrefix}/${userId}/save/">
 
 		<input type="hidden" name="${userIdControl}" id="${userIdControl}" value="${userId}" />
 

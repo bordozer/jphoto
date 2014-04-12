@@ -13,7 +13,7 @@
 	<div class="floatleft">
 		<tags:activityStreamFilter activityTypeValues="<%=ActivityType.SYSTEM_ACTIVITIES%>"
 								   filterActivityTypeId="${activityStreamModel.filterActivityTypeId}"
-								   url="${eco:baseUrlWithPrefix()}/activityStream/"/>
+								   url="${eco:baseUrl()}/activityStream/"/>
 
 		<tags:paging showSummary="false"/>
 

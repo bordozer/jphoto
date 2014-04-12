@@ -56,11 +56,11 @@
 		<div class="left-pane">
 
 			<c:if test="${isTranslatedMode}"><span class='selected'></c:if>
-			<a href="${eco:baseAdminUrlWithPrefix()}/translator/">${eco:translate('Translated')}</a>
+			<a href="${eco:baseAdminUrl()}/translator/">${eco:translate('Translated')}</a>
 			<c:if test="${isTranslatedMode}"></span></c:if>
 			&nbsp;&nbsp;
 			<c:if test="${isUntranslatedMode}"><span class='selected'></c:if>
-			<a href="${eco:baseAdminUrlWithPrefix()}/translator/untranslated/">${eco:translate('Untranslated')}</a>
+			<a href="${eco:baseAdminUrl()}/translator/untranslated/">${eco:translate('Untranslated')}</a>
 			<c:if test="${isUntranslatedMode}"></span></c:if>
 
 			<br/>
@@ -69,7 +69,7 @@
 			<c:forEach var="letter" items="${translatorModel.letters}">
 				<c:set var="isSelected" value="${translatorModel.filterByLetter == letter}"/>
 				<c:if test="${isSelected}"><span class='selected'></c:if>
-				<a href="${eco:baseAdminUrlWithPrefix()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a>
+				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a>
 				<c:if test="${isSelected}"></span></c:if>
 				&nbsp;
 			</c:forEach>

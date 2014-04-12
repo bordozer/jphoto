@@ -87,7 +87,7 @@
 					<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
 					<c:if test="${( isThisCardOfLoggedUser && currentPoints != 0 ) || userCanSeeUserRankVoteHistory}">
 
-						<a href="${eco:baseUrlWithPrefix()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genreNameTranslated)}">
+						<a href="${eco:baseUrl()}/members/${user.id}/category/${genre.id}/votes/" title="${eco:translate1('Click to see who voted for the rank in category $1', genreNameTranslated)}">
 							<span class='current-points-${user.id}-${genre.id}'>${currentPoints}</span>
 						</a>
 						/

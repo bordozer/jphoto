@@ -120,7 +120,7 @@
 
 						$.ajax( {
 									type:'GET',
-									url:'${eco:baseUrlWithPrefix()}/photo/comment/' + commentId + "/",
+									url:'${eco:baseUrl()}/photo/comment/' + commentId + "/",
 									success:function ( response ) {
 										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
 										renderComment( index + 1 );

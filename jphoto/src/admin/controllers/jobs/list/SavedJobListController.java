@@ -175,7 +175,7 @@ public class SavedJobListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/delete/{jobExecutionHistoryEntryId}/" )
 	public String deleteJobExecutionHistoryEntry( final @PathVariable( "jobExecutionHistoryEntryId" ) int jobExecutionHistoryEntryId, final @ModelAttribute( MODEL_NAME ) SavedJobListModel model ) {
 		jobExecutionHistoryService.delete( jobExecutionHistoryEntryId );
-		return String.format( "redirect:%s/jobs/done/", urlUtilsService.getAdminBaseURL() );
+		return String.format( "redirect:%s/jobs/done/", urlUtilsService.getBaseAdminURL() );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/delete/" )
@@ -189,7 +189,7 @@ public class SavedJobListController {
 			}
 		}
 
-		return String.format( "redirect:%s/jobs/done/", urlUtilsService.getAdminBaseURL() );
+		return String.format( "redirect:%s/jobs/done/", urlUtilsService.getBaseAdminURL() );
 	}
 
 	private String showJobHistoryList( final int jobExecutionStatusId, final int jobTypeId, final SavedJobListModel model, final PagingModel pagingModel ) {

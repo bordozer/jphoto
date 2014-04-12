@@ -103,28 +103,28 @@
 		}
 
 	function goToMemberPhotos( memberId ) {
-		document.location.href = '${eco:baseUrlWithPrefix()}/photos/members/' + memberId + '/';
+		document.location.href = '${eco:baseUrl()}/photos/members/' + memberId + '/';
 	}
 
 	function goToMemberPhotosByGenre( memberId, genreId ) {
-		document.location.href = '${eco:baseUrlWithPrefix()}/photos/members/' + memberId + '/genre/' + genreId + '/';
+		document.location.href = '${eco:baseUrl()}/photos/members/' + memberId + '/genre/' + genreId + '/';
 	}
 
 	function goToMemberPhotosByTeamMember( memberId, teamMemberId ) {
-		document.location.href = '${eco:baseUrlWithPrefix()}/members/' + memberId + '/team/' + teamMemberId + '/';
+		document.location.href = '${eco:baseUrl()}/members/' + memberId + '/team/' + teamMemberId + '/';
 	}
 
 	function goToMemberPhotosByAlbum( memberId, albumId ) {
-		document.location.href = '${eco:baseUrlWithPrefix()}/members/' + memberId + '/albums/' + albumId + '/';
+		document.location.href = '${eco:baseUrl()}/members/' + memberId + '/albums/' + albumId + '/';
 	}
 
 	function editPhotoData( photoId ) {
-		document.location.href = '${eco:baseUrlWithPrefix()}/photos/' + photoId + '/edit/';
+		document.location.href = '${eco:baseUrl()}/photos/' + photoId + '/edit/';
 	}
 
 	function deletePhoto( photoId ) {
 		if ( confirmDeletion( '${eco:translate("Delete photo?")}' ) ) {
-			document.location.href = '${eco:baseUrlWithPrefix()}/photos/' + photoId + '/delete/';
+			document.location.href = '${eco:baseUrl()}/photos/' + photoId + '/delete/';
 		}
 	}
 </script>

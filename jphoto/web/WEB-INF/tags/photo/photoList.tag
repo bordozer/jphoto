@@ -40,7 +40,7 @@
 
 <c:set var="formAction" value="" />
 <c:if test="${isGroupOperationEnabled}">
-	<c:set var="formAction" value="${eco:baseUrlWithPrefix()}/photos/groupOperations/" />
+	<c:set var="formAction" value="${eco:baseUrl()}/photos/groupOperations/" />
 </c:if>
 
 <eco:form action="${formAction}" formName="${groupOperationForm}">

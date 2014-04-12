@@ -155,7 +155,7 @@
 							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">
-								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/delete/" title="${eco:translate1('SchedulerTaskList: Delete task \'$1\'', schedulerTask.name)}">
+								<a href="${eco:baseAdminUrl()}/scheduler/tasks/${schedulerTaskId}/delete/" title="${eco:translate1('SchedulerTaskList: Delete task \'$1\'', schedulerTask.name)}">
 									<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${schedulerTask.name}\\'?' );"/>
 								</a>
 							</table:tdicon>
@@ -165,7 +165,7 @@
 							</table:td>
 
 							<table:td cssClass="${css}">
-								<a href="${eco:baseAdminUrlWithPrefix()}/scheduler/tasks/${schedulerTaskId}/info/" title="${eco:translate1('SchedulerTaskList: View info \'$1\'', schedulerTask.name)}">
+								<a href="${eco:baseAdminUrl()}/scheduler/tasks/${schedulerTaskId}/info/" title="${eco:translate1('SchedulerTaskList: View info \'$1\'', schedulerTask.name)}">
 									${schedulerTask.name}
 								</a>
 							</table:td>

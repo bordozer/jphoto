@@ -31,7 +31,7 @@
 
 	<div style="width: 98%; margin-left: 50px;">
 
-		<form:form modelAttribute="photoGroupOperationModel" action="${eco:baseUrlWithPrefix()}/photos/groupOperations/confirm/">
+		<form:form modelAttribute="photoGroupOperationModel" action="${eco:baseUrl()}/photos/groupOperations/confirm/">
 
 			<h3>${eco:translate('Selected photos')}</h3>
 

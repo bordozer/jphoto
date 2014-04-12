@@ -36,7 +36,7 @@
 					<c:set var="cssClass" value="block-border block-background block-shadow"/>
 				</c:if>
 
-				<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
+				<a href="${eco:baseAdminUrl()}/jobs/${jobListTab.key}/${savedJobType.id}/" title="${eco:translate(savedJobType.name)}">
 					<html:img32 src="jobtype/${savedJobType.icon}" cssClass="${cssClass}" />
 				</a> &nbsp;&nbsp;&nbsp;&nbsp;
 			</c:forEach>
@@ -78,7 +78,7 @@
 				<c:set var="isUsedInScheduler" value="${eco:contains(notDeletableJobIds, savedJobId)}" />
 
 				<c:if test="${not isUsedInScheduler and not isActiveSavedJob}">
-					<a href="${eco:baseAdminUrlWithPrefix()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/" title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
+					<a href="${eco:baseAdminUrl()}/jobs/${job.jobType.prefix}/${savedJobId}/delete/" title="${eco:translate1('Delete job \'$1\'', savedJob.name)}">
 						<html:img16 src="delete16.png" onclick="return confirmDeletion( 'Delete \\'${savedJob.name}\\'?' );"/>
 					</a>
 				</c:if>

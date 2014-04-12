@@ -23,7 +23,7 @@ public class UrlUtilsServiceTest extends AbstractTestCase {
 
 		assertEquals( "http://127.0.0.1:8085/worker", urlUtilsService.getBaseURL() );
 
-		assertEquals( "http://127.0.0.1:8085/worker/adm", urlUtilsService.getAdminBaseURL() );
+		assertEquals( "http://127.0.0.1:8085/worker/adm", urlUtilsService.getBaseAdminURL() );
 
 		assertEquals( "http://127.0.0.1:8085/worker", urlUtilsService.getPortalPageURL() );
 	}
@@ -43,7 +43,7 @@ public class UrlUtilsServiceTest extends AbstractTestCase {
 
 		assertEquals( "http://127.0.0.1:8085", urlUtilsService.getBaseURL() );
 
-		assertEquals( "http://127.0.0.1:8085/adm", urlUtilsService.getAdminBaseURL() );
+		assertEquals( "http://127.0.0.1:8085/adm", urlUtilsService.getBaseAdminURL() );
 
 		assertEquals( "http://127.0.0.1:8085", urlUtilsService.getPortalPageURL() );
 	}

@@ -22,7 +22,7 @@
 
 <tags:page pageModel="${userTeamMemberEditDataModel.pageModel}">
 
-	<form:form modelAttribute="userTeamMemberEditDataModel" method="POST" action="${eco:baseUrlWithPrefix()}/members/${user.id}/team/save/">
+	<form:form modelAttribute="userTeamMemberEditDataModel" method="POST" action="${eco:baseUrl()}/members/${user.id}/team/save/">
 
 		<table:table width="500">
 

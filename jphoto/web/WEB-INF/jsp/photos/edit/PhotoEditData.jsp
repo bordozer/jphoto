@@ -113,7 +113,7 @@
 
 	<c:if test="${(isNew and userCanUploadPhoto) or not isNew}">
 
-		<eco:form action="${eco:baseUrlWithPrefix()}/photos/${photoEditDataModel.nextStep.urlPrefix}/">
+		<eco:form action="${eco:baseUrl()}/photos/${photoEditDataModel.nextStep.urlPrefix}/">
 
 			<input type="hidden" id="currentStepId" name="currentStepId" value="${editDataWizardStepId}">
 

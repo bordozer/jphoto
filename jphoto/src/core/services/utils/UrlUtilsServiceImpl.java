@@ -37,7 +37,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
-	public String getAdminBaseURL() {
+	public String getBaseAdminURL() {
 		return String.format( "%s%s", getBaseURL(), systemVarsService.getAdminPrefix() );
 	}
 
@@ -362,72 +362,72 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getAdminGenreListLink() {
-		return String.format( "%s/%s/", getAdminBaseURL(), GENRES_URL );
+		return String.format( "%s/%s/", getBaseAdminURL(), GENRES_URL );
 	}
 
 	@Override
 	public String getAdminGenreNewLink() {
-		return String.format( "%s/%s/new/", getAdminBaseURL(), GENRES_URL );
+		return String.format( "%s/%s/new/", getBaseAdminURL(), GENRES_URL );
 	}
 
 	@Override
 	public String getAdminGenreEditLink( final int genreId ) {
-		return String.format( "%s/%s/%s/edit/", getAdminBaseURL(), GENRES_URL, genreId );
+		return String.format( "%s/%s/%s/edit/", getBaseAdminURL(), GENRES_URL, genreId );
 	}
 
 	@Override
 	public String getAdminGenreDeleteLink( final int genreId ) {
-		return String.format( "%s/%s/%s/delete/", getAdminBaseURL(), GENRES_URL, genreId );
+		return String.format( "%s/%s/%s/delete/", getBaseAdminURL(), GENRES_URL, genreId );
 	}
 
 	@Override
 	public String getAdminAnonymousDaysLink() {
-		return String.format( "%s/anonymousDays/", getAdminBaseURL() );
+		return String.format( "%s/anonymousDays/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminJobsLink() {
-		return String.format( "%s/jobs/", getAdminBaseURL() );
+		return String.format( "%s/jobs/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSchedulerTaskListLink() {
-		return String.format( "%s/scheduler/tasks/", getAdminBaseURL() );
+		return String.format( "%s/scheduler/tasks/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminUpgradeLink() {
-		return String.format( "%s/upgrade/", getAdminBaseURL() );
+		return String.format( "%s/upgrade/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getBestPhotosMenuLink() {
-		return String.format( "%s/menu/", getAdminBaseURL() );
+		return String.format( "%s/menu/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSchedulerTaskNewLink() {
-		return String.format( "%s/scheduler/tasks/new/", getAdminBaseURL() );
+		return String.format( "%s/scheduler/tasks/new/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSchedulerRunLink() {
-		return String.format( "%s/scheduler/run/", getAdminBaseURL() );
+		return String.format( "%s/scheduler/run/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSchedulerStopLink() {
-		return String.format( "%s/scheduler/stop/", getAdminBaseURL() );
+		return String.format( "%s/scheduler/stop/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSystemConfigurationListLink() {
-		return String.format( "%s/configuration/", getAdminBaseURL() );
+		return String.format( "%s/configuration/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminSystemConfigurationNewLink() {
-		return String.format( "%s/configuration/new/", getAdminBaseURL() );
+		return String.format( "%s/configuration/new/", getBaseAdminURL() );
 	}
 
 	@Override
@@ -437,67 +437,67 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getAdminConfigurationTabLink( final int systemConfigurationId, final String tabKey ) {
-		return String.format( "%s/configuration/%s/tabs/%s/info/", getAdminBaseURL(), systemConfigurationId, tabKey );
+		return String.format( "%s/configuration/%s/tabs/%s/info/", getBaseAdminURL(), systemConfigurationId, tabKey );
 	}
 
 	@Override
 	public String getAdminConfigurationListLink() {
-		return String.format( "%s/configuration/", getAdminBaseURL() );
+		return String.format( "%s/configuration/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminConfigurationEditLink( final int systemConfigurationId ) {
-		return String.format( "%s/configuration/%s/edit/", getAdminBaseURL(), systemConfigurationId );
+		return String.format( "%s/configuration/%s/edit/", getBaseAdminURL(), systemConfigurationId );
 	}
 
 	@Override
 	public String getAdminVotingCategoriesLink() {
-		return String.format( "%s/%s/", getAdminBaseURL(), VOTING_CATEGORIES_URL );
+		return String.format( "%s/%s/", getBaseAdminURL(), VOTING_CATEGORIES_URL );
 	}
 
 	@Override
 	public String getAdminTranslatorLink() {
-		return String.format( "%s/translator/", getAdminBaseURL() );
+		return String.format( "%s/translator/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminControlPanelLink() {
-		return String.format( "%s/control-panel/", getAdminBaseURL() );
+		return String.format( "%s/control-panel/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminVotingCategoryNewLink() {
-		return String.format( "%s/%s/new/", getAdminBaseURL(), VOTING_CATEGORIES_URL );
+		return String.format( "%s/%s/new/", getBaseAdminURL(), VOTING_CATEGORIES_URL );
 	}
 
 	@Override
 	public String getAdminVotingCategoryEditLink( final int votingCategoryId ) {
-		return String.format( "%s/%s/%s/edit/", getAdminBaseURL(), VOTING_CATEGORIES_URL, votingCategoryId );
+		return String.format( "%s/%s/%s/edit/", getBaseAdminURL(), VOTING_CATEGORIES_URL, votingCategoryId );
 	}
 
 	@Override
 	public String getAdminVotingCategoryDeleteLink( final int votingCategoryId ) {
-		return String.format( "%s/%s/%s/delete/", getAdminBaseURL(), VOTING_CATEGORIES_URL, votingCategoryId );
+		return String.format( "%s/%s/%s/delete/", getBaseAdminURL(), VOTING_CATEGORIES_URL, votingCategoryId );
 	}
 
 	@Override
 	public String getAdminSavedJobEditLink( final SavedJobType jobType, final int savedJobId ) {
-		return String.format( "%s/jobs/%s/%s/edit/", getAdminBaseURL(), jobType.getPrefix(), savedJobId );
+		return String.format( "%s/jobs/%s/%s/edit/", getBaseAdminURL(), jobType.getPrefix(), savedJobId );
 	}
 
 	@Override
 	public String getAdminSavedJobProgressLink( final SavedJobType jobType, final int savedJobId ) {
-		return String.format( "%s/jobs/%s/progress/%d/", getAdminBaseURL(), jobType.getPrefix(), savedJobId );
+		return String.format( "%s/jobs/%s/progress/%d/", getBaseAdminURL(), jobType.getPrefix(), savedJobId );
 	}
 
 	@Override
 	public String getAdminGenresTranslationsUrl() {
-		return String.format( "%s/translations/custom/genres/", getAdminBaseURL() );
+		return String.format( "%s/translations/custom/genres/", getBaseAdminURL() );
 	}
 
 	@Override
 	public String getAdminVotingCategoriesTranslationsUrl() {
-		return String.format( "%s/translations/custom/voting-categories/", getAdminBaseURL() );
+		return String.format( "%s/translations/custom/voting-categories/", getBaseAdminURL() );
 	}
 
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
