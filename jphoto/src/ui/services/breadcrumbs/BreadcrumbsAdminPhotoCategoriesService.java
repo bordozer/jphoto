@@ -9,5 +9,5 @@ public interface BreadcrumbsAdminPhotoCategoriesService {
 
 	PageTitleData getGenreNewBreadcrumbs();
 
-	PageTitleData getGenreEditBreadcrumbs( Genre genre );
+	PageTitleData getGenreDataEditBreadcrumbs( Genre genre );
 }

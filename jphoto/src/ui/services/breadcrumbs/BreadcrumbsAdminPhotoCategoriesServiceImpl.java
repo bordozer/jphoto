@@ -40,7 +40,7 @@ public class BreadcrumbsAdminPhotoCategoriesServiceImpl implements BreadcrumbsAd
 	}
 
 	@Override
-	public PageTitleData getGenreEditBreadcrumbs( final Genre genre ) {
+	public PageTitleData getGenreDataEditBreadcrumbs( final Genre genre ) {
 		final Language language = getLanguage();
 
 		final String breadcrumbs = admin()

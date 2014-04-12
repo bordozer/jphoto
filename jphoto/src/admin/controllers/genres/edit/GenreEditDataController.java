@@ -95,7 +95,7 @@ public class GenreEditDataController {
 		}
 		model.setAllowedVotingCategoryIDs( allowedVotingCategoryIDs );
 
-		model.setPageTitleData( breadcrumbsAdminPhotoCategoriesService.getGenreEditBreadcrumbs( genre ) );
+		model.setPageTitleData( breadcrumbsAdminPhotoCategoriesService.getGenreDataEditBreadcrumbs( genre ) );
 
 		return VIEW;
 	}
