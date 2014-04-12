@@ -234,7 +234,7 @@
 		</div> <%-- / commentsDiv --%>
 
 		<div class="photoInfoAndVotingDiv">
-			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" hideAuthorIconsAndMenu="false"/>
+			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
 
 			<c:if test="${photoCardModel.votingValidationResult.validationPassed}">
 				<div class="votingDiv block-background block-border">

@@ -16,7 +16,6 @@
 
 <%@ attribute name="photoInfo" required="true" type="core.general.photo.PhotoInfo" %>
 <%@ attribute name="votingModel" required="true" type="ui.controllers.users.genreRank.VotingModel" %>
-<%@ attribute name="hideAuthorIconsAndMenu" required="true" type="java.lang.Boolean" %>
 
 <%
 	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
@@ -56,14 +55,11 @@
 				<table:td>
 					<c:if test="${not isPhotoAuthorNameMustBeHidden}">
 						<user:userCard user="${user}"/>
-						<c:if test="${not hideAuthorIconsAndMenu}">
-							<br />
-							<icons:userIcons user="${user}"
-											 hideIconSendPrivateMessage="true"
-											 hideIconToBlackList="true"
-									/>
-							<tags:entryMenu entryMenu="${photoInfo.photoAuthorMenu}" />
-						</c:if>
+						<icons:userIcons user="${user}"
+										 hideIconSendPrivateMessage="true"
+										 hideIconToBlackList="true"
+								/>
+						<tags:entryMenu entryMenu="${photoInfo.photoAuthorMenu}" />
 					</c:if>
 
 					<c:if test="${isPhotoAuthorNameMustBeHidden}">

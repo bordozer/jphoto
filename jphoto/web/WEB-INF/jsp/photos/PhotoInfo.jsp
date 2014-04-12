@@ -11,7 +11,7 @@
 <tags:pageLight title="${eco:translate1('$1 - photo info', photo.name)}">
 
 	<div style="float: left; width: 100%; margin-top: 10px;">
-		<photo:photoInfo photoInfo="${photoInfoModel.photoInfo}" votingModel="${photoInfoModel.votingModel}" hideAuthorIconsAndMenu="true" />
+		<photo:photoInfo photoInfo="${photoInfoModel.photoInfo}" votingModel="${photoInfoModel.votingModel}" />
 	</div>
 
 </tags:pageLight>
