@@ -426,7 +426,7 @@
 					<table:tddata>
 						<form:checkboxes items="${photoEditDataModel.userTeamMembers}"
 										 path="photoEditDataModel.${photoTeamMembersIdsControl}"
-										 itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="false"/>
+										 itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="true"/>
 					</table:tddata>
 				</table:tredit>
 				<%-- / User teams members --%>

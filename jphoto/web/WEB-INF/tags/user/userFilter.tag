@@ -46,7 +46,7 @@
 				<table:tdtext text_t="Membership type" labelFor="membershipTypeId" />
 
 				<table:tddata>
-					<form:checkboxes items="${membershipTypeListValues}" path="${membershipTypeControl}" itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="false" />
+					<form:checkboxes items="${membershipTypeListValues}" path="${membershipTypeControl}" itemLabel="name" itemValue="id" delimiter="<br/>" />
 					<%--<html:checkbox inputId="membershipTypeId" inputValue="0" /> ${eco:translate('any')} <br />
 					<c:forEach var="mType" items="${membershipTypeListValues}">
 						<html:checkbox inputId="membershipTypeId" inputValue="${mType.id}" /> ${mType.name} <br />

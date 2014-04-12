@@ -56,7 +56,7 @@
 				<table:tddata>
 					<form:checkboxes items="${genreEditDataModel.photoVotingCategories}"
 									 path="${allowedVotingCategoriesControl}"
-									 itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="false"/>
+									 itemLabel="name" itemValue="id" delimiter="<br/>" />
 				</table:tddata>
 			</table:tredit>
 

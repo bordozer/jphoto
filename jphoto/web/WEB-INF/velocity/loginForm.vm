@@ -33,7 +33,7 @@
 
 	#if ( $showLoginForm && $loggedUserId > 0 )
 		<div class="loginFormUserCardLink"><a href="$loggedUserCardUrl" title="$loggedUserCardUrlTitle">$loggedUserName</a></div>
-		<div class="loginFormLoggedUser"><a href="$siteUrlWithPrefix/photos/new/" title="$uploadPhotoText">$uploadPhotoText</a></div>
-		<div class="loginFormLoggedUser">[ <a href="$siteUrlWithPrefix/members/logout/" title="$logoutText">$logoutText</a> ]</div>
+		<div class="loginFormLoggedUser"><a href="$baseUrl/photos/new/" title="$uploadPhotoText">$uploadPhotoText</a></div>
+		<div class="loginFormLoggedUser">[ <a href="$baseUrl/members/logout/" title="$logoutText">$logoutText</a> ]</div>
 	#end
 </div>
