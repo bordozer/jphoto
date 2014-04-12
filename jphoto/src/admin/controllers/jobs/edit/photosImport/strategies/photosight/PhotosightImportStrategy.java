@@ -339,6 +339,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
 			final ImageDiscEntry imageDiscEntry = PhotosightImageFileUtils.downloadPhotosightPhotoOnDisk( photosightPhoto );
+			if ( imageDiscEntry == null ) {
+				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get photosight photo image content: '$1'", services ).string( photosightPhoto.getImageUrl() ) );
+				continue;
+			}
 			result.add( new PhotosightPhotoOnDisk( photosightPhoto, imageDiscEntry ) );
 		}
 

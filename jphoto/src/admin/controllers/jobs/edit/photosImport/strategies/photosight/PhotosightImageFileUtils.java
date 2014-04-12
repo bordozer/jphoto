@@ -71,6 +71,9 @@ public class PhotosightImageFileUtils {
 		log.debug( String.format( "Getting photo %s content", imageUrl ) );
 
 		final String imageContent = PhotosightRemoteContentHelper.getImageContentFromUrl( imageUrl );
+		if ( imageContent == null ) {
+			return null;
+		}
 		final ImageDiscEntry imageDiscEntry = getImageFile( photosightPhoto, imageContent );
 
 		log.debug( String.format( "Photo %s has been saved on disc: %s", photosightPhoto, imageDiscEntry.getImageFile().getCanonicalPath() ) );
