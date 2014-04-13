@@ -25,10 +25,10 @@
 		<appender-ref ref="appender.file"/>
 	</logger>
 
-	<!--<logger name="admin.services.scheduler">
+	<logger name="admin.services.scheduler">
 		<level value="DEBUG"/>
 		<appender-ref ref="appender.file"/>
-	</logger>-->
+	</logger>
 
 	<logger name="admin.controllers.jobs.edit.photosImport.strategies.photosight">
 		<level value="INFO"/>

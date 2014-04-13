@@ -3,7 +3,7 @@ SQLServer=localhost
 
 SQLPort=3306
 
-Database=jphoto_timestamp
+Database=jphoto_v1
 
 SqlLogin=root
 
