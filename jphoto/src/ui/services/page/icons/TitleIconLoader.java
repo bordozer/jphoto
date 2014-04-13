@@ -73,8 +73,6 @@ public class TitleIconLoader {
 	private static void addUntranslatedMessagesIcon( final List<AbstractTitleIcon> result, final Services services ) {
 		if ( services.getSecurityService().isSuperAdminUser( getCurrentUser() ) ) {
 			result.add( new UntranslatedMessagesTitleIcon( getTranslatorService( services ).getUntranslatedMap().size(), services ) );
-//			model.put( "untranslatedMessagesCount", untranslatedMessagesCount );
-//			model.put( "untranslatedMessagesCountHint", translatorService.translate( "There are $1 untranslated", language, String.valueOf( untranslatedMessagesCount ) ) );
 		}
 	}
 

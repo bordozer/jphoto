@@ -23,7 +23,7 @@ public abstract class AbstractTitleIcon {
 	}
 
 	public final String getIcon() {
-		return String.format( "<a href=\"%s\" title=\"%s\">%s %s</a>"
+		return String.format( "<a href=\"%s\" title=\"%s\">%s <sup>%s</sup></a>"
 			, getIconUrl()
 			, getIconTitle()
 			, getIconImage()

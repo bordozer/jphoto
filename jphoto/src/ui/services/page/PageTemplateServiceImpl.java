@@ -139,7 +139,6 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card", language ) );
 
 		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
-		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getBaseAdminURL() );
 
 		model.put( "titleIcons", TitleIconLoader.getTitleIcons( services ) );
@@ -162,7 +161,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "genres", genres );
 		model.put( "genreLinks", genreLinks );
 
-		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  );
+		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  ); // TODO: should be a separate view for mobile devices
 
 		fillUiLanguages( language, model );
 
