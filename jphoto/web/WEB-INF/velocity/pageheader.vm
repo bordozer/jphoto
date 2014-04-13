@@ -98,14 +98,19 @@
 
 			<div class="breadcrumbs breadcrumbs-color">$breadcrumbs</div>
 			<div class="infoLayer">
+
+				#foreach( $titleIcon in $titleIcons )
+					<span style="float: left; width: 25px; border-right: 1px solid #00cc00;">$titleIcon.icon</span>
+				#end
+
 				$unreadCommentsQtyText
 				#foreach( $newPrivateMessage in $newPrivateMessages )
 					&nbsp;&nbsp;<a href="$newPrivateMessage.link" title="$newPrivateMessage.hint"><img src="$imagePath/messages/$newPrivateMessage.privateMessageType.icon" width="16" height="16"> +$newPrivateMessage.newMessagesCount</a> &nbsp;
 				#end
 
-				#if ( !$isSchedulerRunning && $isSuperAdminUser )
+				#*#if ( !$isSchedulerRunning && $isSuperAdminUser )
 					<a href="$baseAdminPrefix/scheduler/tasks/">$schedulerIsStoppedIcon</a>
-				#end
+				#end*#
 
 				#if ( $hiMessage )
 					<script type="text/javascript">

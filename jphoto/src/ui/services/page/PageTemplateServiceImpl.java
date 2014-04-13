@@ -10,6 +10,7 @@ import core.services.entry.GenreService;
 import core.services.entry.PrivateMessageService;
 import core.services.photo.PhotoCommentService;
 import core.services.security.SecurityService;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
@@ -31,6 +32,7 @@ import org.springframework.mobile.device.DeviceType;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.login.UserLoginModel;
 import ui.services.MenuService;
+import ui.services.page.icons.TitleIconLoader;
 import utils.StringUtilities;
 import utils.UserUtils;
 
@@ -78,7 +80,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private ScheduledTasksExecutionService scheduledTasksExecutionService;
+	private Services services;
 
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
 
@@ -140,13 +142,15 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "isSuperAdminUser", securityService.isSuperAdminUser( currentUser ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getBaseAdminURL() );
 
-		try {
+		model.put( "titleIcons", TitleIconLoader.getTitleIcons( services ) );
+
+		/*try {
 			model.put( "isSchedulerRunning", scheduledTasksExecutionService.isRunning() );
 		} catch ( final SchedulerException e ) {
 			model.put( "isSchedulerRunning", false );
 		}
 		model.put( "schedulerIsStoppedIcon", String.format( "<img src=\"%s/scheduler/SchedulerIsStopped.png\" height=\"16\" width=\"16\" title=\"%s\" />"
-			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!", language ) ) );
+			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!", language ) ) );*/
 
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {

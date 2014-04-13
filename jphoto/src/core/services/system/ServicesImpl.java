@@ -1,6 +1,7 @@
 package core.services.system;
 
 import admin.services.jobs.*;
+import admin.services.scheduler.ScheduledTasksExecutionService;
 import admin.services.services.SqlUtilsService;
 import core.services.conversion.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;
@@ -149,6 +150,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ScheduledTasksExecutionService scheduledTasksExecutionService;
 
 	@Override
 	public UserService getUserService() {
@@ -360,6 +364,11 @@ public class ServicesImpl implements Services {
 		return translatorService;
 	}
 
+	@Override
+	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
+		return scheduledTasksExecutionService;
+	}
+
 	public void setUserService( final UserService userService ) {
 		this.userService = userService;
 	}
@@ -526,5 +535,9 @@ public class ServicesImpl implements Services {
 
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
+	}
+
+	public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
+		this.scheduledTasksExecutionService = scheduledTasksExecutionService;
 	}
 }
