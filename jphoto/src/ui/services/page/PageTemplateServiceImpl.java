@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.page;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.enums.PrivateMessageType;
@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.login.UserLoginModel;
+import ui.services.MenuService;
 import utils.StringUtilities;
 import utils.UserUtils;
 
@@ -255,96 +256,5 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		template.merge( model, writer );
 
 		return writer.toString();
-	}
-
-	public class LanguageWrapper {
-
-		private final Language language;
-		private String style;
-		private String title;
-
-		public LanguageWrapper( final Language language ) {
-			this.language = language;
-		}
-
-		public Language getLanguage() {
-			return language;
-		}
-
-		public String getStyle() {
-			return style;
-		}
-
-		public void setStyle( final String style ) {
-			this.style = style;
-		}
-
-		public String getTitle() {
-			return title;
-		}
-
-		public void setTitle( final String title ) {
-			this.title = title;
-		}
-	}
-
-	public class UserLogin {
-
-		private final String name;
-		private final String login;
-
-		private UserLogin( final String name, final String login ) {
-			this.name = name;
-			this.login = login;
-		}
-
-		public String getLogin() {
-			return login;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public String toString() {
-			return String.format( "User %s, %s", login, name );
-		}
-	}
-
-	public class NewPrivateMessage {
-		private final PrivateMessageType privateMessageType;
-		private final int newMessagesCount;
-		private String link;
-		private String hint;
-
-		public NewPrivateMessage( final PrivateMessageType privateMessageType, final int newMessagesCount ) {
-			this.privateMessageType = privateMessageType;
-			this.newMessagesCount = newMessagesCount;
-		}
-
-		public PrivateMessageType getPrivateMessageType() {
-			return privateMessageType;
-		}
-
-		public int getNewMessagesCount() {
-			return newMessagesCount;
-		}
-
-		public String getLink() {
-			return link;
-		}
-
-		public void setLink( final String link ) {
-			this.link = link;
-		}
-
-		public String getHint() {
-			return hint;
-		}
-
-		public void setHint( final String hint ) {
-			this.hint = hint;
-		}
 	}
 }

@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.page;
 
 import ui.elements.PageModel;
 

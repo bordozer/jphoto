@@ -2,7 +2,7 @@ package ui.tags;
 
 import ui.elements.PageModel;
 import ui.context.ApplicationContextHelper;
-import ui.services.PageTemplateService;
+import ui.services.page.PageTemplateService;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
