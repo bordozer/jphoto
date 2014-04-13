@@ -80,6 +80,9 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	private TranslatorService translatorService;
 
 	@Autowired
+	private ScheduledTasksExecutionService scheduledTasksExecutionService;
+
+	@Autowired
 	private Services services;
 
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
@@ -141,7 +144,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getBaseAdminURL() );
 
-		model.put( "titleIcons", TitleIconLoader.getTitleIcons( services ) );
+		model.put( "titleIcons", TitleIconLoader.getTitleIcons( services, scheduledTasksExecutionService ) );
 
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {

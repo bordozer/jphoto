@@ -1,5 +1,6 @@
 package ui.services.page.icons;
 
+import admin.services.scheduler.ScheduledTasksExecutionService;
 import core.enums.PrivateMessageType;
 import core.general.user.User;
 import core.services.entry.PrivateMessageService;
@@ -15,10 +16,10 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class TitleIconLoader {
 
-	public static List<AbstractTitleIcon> getTitleIcons( final Services services ) {
+	public static List<AbstractTitleIcon> getTitleIcons( final Services services, final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
 		final List<AbstractTitleIcon> result = newArrayList();
 
-		addScheduledIcon( result, services );
+		addScheduledIcon( result, services, scheduledTasksExecutionService );
 
 		addUnreadCommentsCountIcon( result, services );
 
@@ -29,10 +30,10 @@ public class TitleIconLoader {
 		return result;
 	}
 
-	private static void addScheduledIcon( final List<AbstractTitleIcon> result, final Services services ) {
+	private static void addScheduledIcon( final List<AbstractTitleIcon> result, final Services services, final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
 		boolean running;
 		try {
-			running = services.getScheduledTasksExecutionService().isRunning();
+			running = scheduledTasksExecutionService.isRunning();
 		} catch ( final SchedulerException e ) {
 			running = false;
 		}

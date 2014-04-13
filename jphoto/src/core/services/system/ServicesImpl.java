@@ -151,8 +151,8 @@ public class ServicesImpl implements Services {
 	@Autowired
 	private TranslatorService translatorService;
 
-	@Autowired
-	private ScheduledTasksExecutionService scheduledTasksExecutionService;
+//	@Autowired
+//	private ScheduledTasksExecutionService scheduledTasksExecutionService;
 
 	@Override
 	public UserService getUserService() {
@@ -364,10 +364,10 @@ public class ServicesImpl implements Services {
 		return translatorService;
 	}
 
-	@Override
+	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
-	}
+	}*/
 
 	public void setUserService( final UserService userService ) {
 		this.userService = userService;
@@ -537,7 +537,7 @@ public class ServicesImpl implements Services {
 		this.translatorService = translatorService;
 	}
 
-	public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
+	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
 		this.scheduledTasksExecutionService = scheduledTasksExecutionService;
-	}
+	}*/
 }

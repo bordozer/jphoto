@@ -108,5 +108,5 @@ public interface Services {
 
 	TranslatorService getTranslatorService();
 
-	ScheduledTasksExecutionService getScheduledTasksExecutionService();
+//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }
