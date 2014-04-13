@@ -90,7 +90,7 @@
 
 	<translation>
 		<nerd>activity stream entry: uploaded photo $1</nerd>
-		<ru><![CDATA[оценил(а) работу $1]]></ru>
+		<ru><![CDATA[загрузил(а) работу $1]]></ru>
 	</translation>
 
 	<translation>
@@ -111,6 +111,11 @@
 	<translation>
 		<nerd>activity stream entry: added $1 to $2</nerd>
 		<ru><![CDATA[добавил(а) $1 в $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: appraised photo $1</nerd>
+		<ru><![CDATA[оценил(а) работу '$1']]></ru>
 	</translation>
 
 	<translation>

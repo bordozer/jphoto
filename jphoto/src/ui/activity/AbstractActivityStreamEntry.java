@@ -47,14 +47,16 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 
 	public String getActivityText( final Language language ) {
 
-		if ( activityTranslatableText == null ) {
-			synchronized ( activityTranslatableText ) {
-				if ( activityTranslatableText == null ) {
-					activityTranslatableText = getActivityTranslatableText();
-				}
+		if ( activityTranslatableText != null ) {
+			return activityTranslatableText.build( language );
+		}
+
+		synchronized ( this ) {
+			if ( activityTranslatableText == null ) {
+				activityTranslatableText = getActivityTranslatableText();
 			}
 		}
-//		activityTranslatableText = getActivityTranslatableText(); // to reload cached value just uncomment this
+		//activityTranslatableText = getActivityTranslatableText(); // to reload cached value just uncomment this
 
 		return activityTranslatableText.build( language );
 	}
