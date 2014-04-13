@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntry {
 
-	protected static final String ACTIVITY_XML_TAG_USER_ID_VOTED_FOR = "userId";
+	protected static final String ACTIVITY_XML_TAG_USER_ID_VOTED_FOR = "votingForUserId";
 	protected static final String ACTIVITY_XML_TAG_GENRE_ID = "genreId";
 	protected static final String ACTIVITY_XML_TAG_POINTS = "points";
 
@@ -34,7 +34,7 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 	}
 
 	public ActivityVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final Services services ) {
-		super( services.getUserService().load( rankInGenreVoting.getUserId() ), rankInGenreVoting.getVotingTime(), ActivityType.VOTING_FOR_USER_RANK_IN_GENRE, services );
+		super( services.getUserService().load( rankInGenreVoting.getVoterId() ), rankInGenreVoting.getVotingTime(), ActivityType.VOTING_FOR_USER_RANK_IN_GENRE, services );
 
 		userVotedForId = rankInGenreVoting.getUserId();
 		genreId = rankInGenreVoting.getGenreId();

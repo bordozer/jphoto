@@ -1,9 +1,12 @@
 package core.services.dao;
 
+import core.general.cache.CacheEntryFactory;
+import core.general.cache.CacheKey;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.photo.PhotoService;
+import core.services.system.CacheService;
 import core.services.system.Services;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,9 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 	@Autowired
 	private PhotoService photoService;
 
+	@Autowired
+	private CacheService<AbstractActivityStreamEntry> cacheService;
+
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 
 	static {
@@ -59,6 +65,16 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 		paramSource.addValue( "timeTo", dateTo );
 
 		return jdbcTemplate.query( sql, paramSource, getRowMapper() );
+	}
+
+	@Override
+	public AbstractActivityStreamEntry load( final int entryId ) {
+		return cacheService.getEntry( CacheKey.ACTIVITY_STREAM_ENTRY, entryId, new CacheEntryFactory<AbstractActivityStreamEntry>() {
+			@Override
+			public AbstractActivityStreamEntry createEntry() {
+				return loadEntryById( entryId, new ActivityStreamEntryMapper() );
+			}
+		} );
 	}
 
 	@Override

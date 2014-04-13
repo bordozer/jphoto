@@ -34,9 +34,6 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	@Autowired
 	private Services services;
 
-	@Autowired
-	private CacheService<AbstractActivityStreamEntry> cacheService;
-
 	@Override
 	public boolean saveUserRegistration( final User user ) {
 		return save( new ActivityUserRegistration( user, services ) );
@@ -89,12 +86,7 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 
 	@Override
 	public AbstractActivityStreamEntry load( final int id ) {
-		return cacheService.getEntry( CacheKey.ACTIVITY_STREAM_ENTRY, id, new CacheEntryFactory<AbstractActivityStreamEntry>() {
-			@Override
-			public AbstractActivityStreamEntry createEntry() {
-				return activityStreamDao.load( id );
-			}
-		} );
+		return activityStreamDao.load( id );
 	}
 
 	@Override
