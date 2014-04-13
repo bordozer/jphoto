@@ -16,14 +16,13 @@ public class PageTag extends BodyTagSupport {
 	private PageModel pageModel;
 	private boolean errorPage = false;
 
-	private final PageTemplateService pageTemplateService = ApplicationContextHelper.getBean( PageTemplateService.BEAN_NAME );
-
 	@Override
 	public int doStartTag() throws JspException {
 		pageContext.getResponse().setCharacterEncoding( "UTF-8" );
 		pageContext.getResponse().setContentType( "text/html" );
 
 		try {
+			final PageTemplateService pageTemplateService = ApplicationContextHelper.getBean( PageTemplateService.BEAN_NAME );
 			pageContext.getOut().println( pageTemplateService.renderPageHeader( pageModel ) );
 		} catch ( IOException e ) {
 			throw new JspTagException( e.getMessage(), e );
@@ -42,6 +41,7 @@ public class PageTag extends BodyTagSupport {
 	}
 
 	private void doCloseBodyHtml( JspWriter out ) throws IOException {
+		final PageTemplateService pageTemplateService = ApplicationContextHelper.getBean( PageTemplateService.BEAN_NAME );
 		out.println( pageTemplateService.renderPageFooter() );
 	}
 
