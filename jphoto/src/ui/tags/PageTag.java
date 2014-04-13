@@ -14,7 +14,6 @@ import java.io.IOException;
 public class PageTag extends BodyTagSupport {
 
 	private PageModel pageModel;
-	private boolean errorPage = false;
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -47,9 +46,5 @@ public class PageTag extends BodyTagSupport {
 
 	public void setPageModel( PageModel pageModel ) {
 		this.pageModel = pageModel;
-	}
-
-	public void setErrorPage( boolean errorPage ) {
-		this.errorPage = errorPage;
 	}
 }

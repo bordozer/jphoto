@@ -19,12 +19,6 @@
 			<rtexprvalue>true</rtexprvalue>
 			<type>ui.elements.PageModel</type>
 		</attribute>
-		<attribute>
-			<name>errorPage</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.Boolean</type>
-		</attribute>
 	</tag>
 
 	<tag>
