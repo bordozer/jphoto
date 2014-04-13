@@ -1,8 +1,8 @@
 package core.general.user;
 
 public enum UserStatus {
-	CANDIDATE( 1, "candidate")
-	, MEMBER( 2, "member")
+	CANDIDATE( 1, "UserStatus: candidate")
+	, MEMBER( 2, "UserStatus: member")
 	;
 
 	private final int id;
