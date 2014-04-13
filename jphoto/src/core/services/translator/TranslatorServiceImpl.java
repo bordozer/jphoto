@@ -38,6 +38,10 @@ public class TranslatorServiceImpl implements TranslatorService {
 			return nerd;
 		}
 
+		if ( language == Language.NERD ) {
+			return nerd;
+		}
+
 		final TranslationEntry translationEntry = translator.getTranslation( nerd, language );
 
 		if ( translationEntry instanceof TranslationEntryMissed ) {
