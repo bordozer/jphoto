@@ -48,7 +48,7 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 
 	@Override
 	protected TranslatableMessage getActivityTranslatableText() {
-		return new TranslatableMessage( "commented photo $1", services ).addPhotoCardLinkParameter( activityOfPhoto );
+		return new TranslatableMessage( "activity stream entry: commented photo $1", services ).addPhotoCardLinkParameter( activityOfPhoto );
 	}
 
 	@Override

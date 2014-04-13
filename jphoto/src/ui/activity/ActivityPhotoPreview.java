@@ -54,7 +54,7 @@ public class ActivityPhotoPreview extends AbstractPhotoActivityStreamEntry {
 			return new EmptyTranslatableMessage();
 		}
 
-		return new TranslatableMessage( "viewed photo $1", services ).addPhotoCardLinkParameter( preview.getPhoto() );
+		return new TranslatableMessage( "activity stream entry: viewed photo $1", services ).addPhotoCardLinkParameter( preview.getPhoto() );
 	}
 
 	@Override

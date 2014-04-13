@@ -82,8 +82,9 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 	@Override
 	protected TranslatableMessage getActivityTranslatableText() {
 
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "appraised photo $1<br />", services )
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "activity stream entry: appraised photo $1", services )
 			.addPhotoCardLinkParameter( activityOfPhoto )
+			.string( "<br />" )
 			;
 
 		for ( final PhotoVotingCategory photoVotingCategory : votes.keySet() ) {

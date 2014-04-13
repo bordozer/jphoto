@@ -23,7 +23,7 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	@Override
 	protected TranslatableMessage getActivityTranslatableText() {
-		return new TranslatableMessage( "activity stream: uploaded photo $1", services ).addPhotoCardLinkParameter( activityOfPhoto );
+		return new TranslatableMessage( "activity stream entry: uploaded photo $1", services ).addPhotoCardLinkParameter( activityOfPhoto );
 	}
 
 	public TranslatableMessage getDisplayActivityUserLink() {

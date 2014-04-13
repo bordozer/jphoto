@@ -69,6 +69,51 @@
 	</translation>
 
 	<translation>
+		<nerd>activity stream entry: rank in category '$1' has changed from $2 to $3</nerd>
+		<ru><![CDATA[ранг в разделе '$1' изменен с $2 на $3]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>user registration activity stream: registered</nerd>
+		<ru><![CDATA[зарегистрировался(лась)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
+		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: the status in the club has been changed from $1 to $2</nerd>
+		<ru><![CDATA[статус в клубе изменен с $1 на $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: uploaded photo $1</nerd>
+		<ru><![CDATA[оценил(а) работу $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream: uploaded photo $1</nerd>
+		<ru><![CDATA[загрузил(а) $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: viewed photo $1</nerd>
+		<ru><![CDATA[посмотрел(а) работу$1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: commented photo $1</nerd>
+		<ru><![CDATA[оставил(а) комментарий к работе $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>activity stream entry: added $1 to $2</nerd>
+		<ru><![CDATA[добавил(а) $1 в $2]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
