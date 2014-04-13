@@ -9,9 +9,9 @@ import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
-import ui.elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
+import ui.elements.PageTitleData;
 
 public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	

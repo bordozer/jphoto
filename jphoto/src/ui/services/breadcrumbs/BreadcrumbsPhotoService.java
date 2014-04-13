@@ -2,8 +2,8 @@ package ui.services.breadcrumbs;
 
 import core.general.photo.Photo;
 import core.general.user.User;
-import ui.elements.PageTitleData;
 import ui.controllers.photos.edit.PhotoEditWizardStep;
+import ui.elements.PageTitleData;
 
 public interface BreadcrumbsPhotoService {
 

@@ -10,9 +10,9 @@ import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import ui.elements.PhotoList;
 import org.springframework.mobile.device.DeviceType;
 import ui.activity.AbstractActivityStreamEntry;
+import ui.elements.PhotoList;
 import utils.PhotoUtils;
 
 import java.util.Date;

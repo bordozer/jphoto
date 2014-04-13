@@ -12,7 +12,6 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
-import ui.elements.PhotoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
+import ui.elements.PhotoList;
 import ui.services.PhotoUIService;
 
 import java.util.Collections;

@@ -6,10 +6,10 @@ import core.general.menus.EntryMenu;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import ui.elements.PhotoList;
 import ui.activity.AbstractActivityStreamEntry;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
+import ui.elements.PhotoList;
 
 import java.util.List;
 import java.util.Map;

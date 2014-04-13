@@ -1,14 +1,11 @@
 package ui.services.page;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
-import core.enums.PrivateMessageType;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
-import core.services.entry.PrivateMessageService;
-import core.services.photo.PhotoCommentService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -17,24 +14,22 @@ import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
-import ui.elements.PageModel;
-import ui.elements.PageTitleData;
-import ui.elements.MenuItem;
 import org.apache.commons.lang.StringUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.apache.velocity.tools.ToolManager;
-import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.login.UserLoginModel;
+import ui.elements.MenuItem;
+import ui.elements.PageModel;
+import ui.elements.PageTitleData;
 import ui.services.MenuService;
 import ui.services.page.icons.TitleIconLoader;
 import utils.StringUtilities;
-import utils.UserUtils;
 
 import java.io.StringWriter;
 import java.util.Collections;
@@ -56,13 +51,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	private UserService userService;
 
 	@Autowired
-	private PhotoCommentService photoCommentService;
-
-	@Autowired
 	private MenuService menuService;
-
-	@Autowired
-	private PrivateMessageService privateMessageService;
 
 	@Autowired
 	private SecurityService securityService;

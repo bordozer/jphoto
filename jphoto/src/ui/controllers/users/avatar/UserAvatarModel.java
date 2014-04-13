@@ -2,9 +2,9 @@ package ui.controllers.users.avatar;
 
 import core.general.img.Dimension;
 import core.general.user.User;
-import ui.elements.PageModel;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
+import ui.elements.PageModel;
 
 import java.io.File;
 

@@ -18,7 +18,6 @@ import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.UserSqlUtilsService;
-import ui.elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +31,7 @@ import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
+import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.PagingUtils;
 

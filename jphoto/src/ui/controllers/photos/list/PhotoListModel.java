@@ -3,8 +3,8 @@ package ui.controllers.photos.list;
 import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
 import core.general.user.UserPhotosByGenre;
-import ui.elements.PhotoList;
 import org.springframework.mobile.device.DeviceType;
+import ui.elements.PhotoList;
 import utils.PhotoUtils;
 
 import java.util.List;

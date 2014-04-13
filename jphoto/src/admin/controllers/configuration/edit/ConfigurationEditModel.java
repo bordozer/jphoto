@@ -4,8 +4,8 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
-import ui.elements.PageModel;
 import org.springframework.validation.BindingResult;
+import ui.elements.PageModel;
 
 import java.util.Map;
 

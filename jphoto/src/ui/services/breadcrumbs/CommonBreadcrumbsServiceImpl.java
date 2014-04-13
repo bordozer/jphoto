@@ -1,9 +1,9 @@
 package ui.services.breadcrumbs;
 
 import core.services.system.Services;
-import ui.elements.PageTitleData;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.activity.ActivityType;
+import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
 

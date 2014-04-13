@@ -1,7 +1,6 @@
 package core.services.system;
 
 import admin.services.jobs.*;
-import admin.services.scheduler.ScheduledTasksExecutionService;
 import admin.services.services.SqlUtilsService;
 import core.services.conversion.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;

@@ -2,8 +2,8 @@ package core.general.data.photoList;
 
 import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
-import ui.elements.PageTitleData;
 import sql.builder.SqlIdsSelectQuery;
+import ui.elements.PageTitleData;
 
 import java.util.Date;
 

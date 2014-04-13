@@ -12,13 +12,13 @@ import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
 import core.services.user.UserRankService;
 import core.services.utils.UrlUtilsService;
-import ui.elements.PageTitleData;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import javax.servlet.http.HttpServletRequest;

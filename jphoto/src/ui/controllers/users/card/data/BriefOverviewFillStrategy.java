@@ -1,9 +1,9 @@
 package ui.controllers.users.card.data;
 
 import core.general.user.User;
-import ui.elements.PhotoList;
 import ui.context.EnvironmentContext;
 import ui.controllers.users.card.UserCardModel;
+import ui.elements.PhotoList;
 
 import java.util.List;
 
