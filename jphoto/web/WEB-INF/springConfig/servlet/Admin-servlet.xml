@@ -13,8 +13,6 @@
 
 	<context:component-scan base-package="admin.controllers"/>
 
-	<!--<bean id="genreDataValidator" class="core.services.translator.TranslatorService"/>-->
-
 	<bean id="genreDataValidator" class="admin.controllers.genres.edit.GenreEditDataValidator"/>
 	<bean id="votingCategoriesEditDataValidator" class="admin.controllers.votingCategories.edit.VotingCategoryEditDataValidator"/>
 	<bean id="configurationValidator" class="admin.controllers.configuration.edit.ConfigurationValidator"/>

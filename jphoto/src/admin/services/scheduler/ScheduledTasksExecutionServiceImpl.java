@@ -21,6 +21,7 @@ import static org.quartz.JobBuilder.newJob;
 public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecutionService {
 
 	public static final String SCHEDULED_TASK_JOB_GROUP = "ScheduledTaskJobGroup";
+
 	@Autowired
 	private SchedulerService schedulerService;
 
