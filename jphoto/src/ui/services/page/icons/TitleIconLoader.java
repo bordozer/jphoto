@@ -1,7 +1,11 @@
 package ui.services.page.icons;
 
+import core.general.user.User;
+import core.services.photo.PhotoCommentService;
 import core.services.system.Services;
+import org.apache.commons.lang.StringUtils;
 import org.quartz.SchedulerException;
+import ui.context.EnvironmentContext;
 
 import java.util.List;
 
@@ -13,6 +17,8 @@ public class TitleIconLoader {
 		final List<AbstractTitleIcon> result = newArrayList();
 
 		addScheduledIcon( result, services );
+
+		addUnreadCommentsCountIcon( result, services );
 
 		return result;
 	}
@@ -28,5 +34,25 @@ public class TitleIconLoader {
 		if ( ! running ) {
 			result.add( new SchedulerTitleIcon( services ) );
 		}
+	}
+
+	private static void addUnreadCommentsCountIcon( final List<AbstractTitleIcon> result, final Services services ) {
+
+		final PhotoCommentService photoCommentService = services.getPhotoCommentService();
+
+		final int unreadCommentsCount = photoCommentService.getUnreadCommentsQty( getCurrentUser().getId() );
+		if ( unreadCommentsCount > 0 ) {
+			result.add( new UnreadCommentsCountTitleIcon( unreadCommentsCount, services ) );
+			/*final String unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
+				, urlUtilsService.getReceivedUnreadComments( currentUser.getId() )
+				, translatorService.translate( "You have $1 new comment(s)", language, String.valueOf( unreadCommentsCount ) )
+				, urlUtilsService.getSiteImagesPath()
+				, unreadCommentsCount
+			);*/
+		}
+	}
+
+	private static User getCurrentUser() {
+		return EnvironmentContext.getCurrentUser();
 	}
 }

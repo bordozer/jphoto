@@ -158,7 +158,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 			EnvironmentContext.getEnvironment().setHiMessage( StringUtils.EMPTY );
 		}
 
-		final int unreadCommentsQty = photoCommentService.getUnreadCommentsQty( currentUser.getId() );
+		/*final int unreadCommentsQty = photoCommentService.getUnreadCommentsQty( currentUser.getId() );
 		String unreadCommentsText = StringUtils.EMPTY;
 		if ( unreadCommentsQty > 0 ) {
 			unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
@@ -168,7 +168,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 				, unreadCommentsQty
 			);
 		}
-		model.put( "unreadCommentsQtyText", unreadCommentsText );
+		model.put( "unreadCommentsQtyText", unreadCommentsText );*/
 
 		// TODO: TEMP -->
 		final List<User> users = userService.loadAll();
