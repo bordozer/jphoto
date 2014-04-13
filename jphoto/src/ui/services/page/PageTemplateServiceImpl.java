@@ -144,49 +144,14 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "titleIcons", TitleIconLoader.getTitleIcons( services ) );
 
-		/*try {
-			model.put( "isSchedulerRunning", scheduledTasksExecutionService.isRunning() );
-		} catch ( final SchedulerException e ) {
-			model.put( "isSchedulerRunning", false );
-		}
-		model.put( "schedulerIsStoppedIcon", String.format( "<img src=\"%s/scheduler/SchedulerIsStopped.png\" height=\"16\" width=\"16\" title=\"%s\" />"
-			, urlUtilsService.getSiteImagesPath(), translatorService.translate( "The scheduler is stopped!", language ) ) );*/
-
 		final String hiMessage = EnvironmentContext.getHiMessage();
 		if ( StringUtils.isNotEmpty( hiMessage ) ) {
 			model.put( "hiMessage", StringUtilities.escapeHtml( hiMessage ) );
 			EnvironmentContext.getEnvironment().setHiMessage( StringUtils.EMPTY );
 		}
 
-		/*final int unreadCommentsQty = photoCommentService.getUnreadCommentsQty( currentUser.getId() );
-		String unreadCommentsText = StringUtils.EMPTY;
-		if ( unreadCommentsQty > 0 ) {
-			unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
-				, urlUtilsService.getReceivedUnreadComments( currentUser.getId() )
-				, translatorService.translate( "You have $1 new comment(s)", language, String.valueOf( unreadCommentsQty ) )
-				, urlUtilsService.getSiteImagesPath()
-				, unreadCommentsQty
-			);
-		}
-		model.put( "unreadCommentsQtyText", unreadCommentsText );*/
-
 		// TODO: TEMP -->
-		final List<User> users = userService.loadAll();
-		final List<UserLogin> userLogins = newArrayList();
-		for ( final User user : users ) {
-			String role = user.getUserStatus().getName().substring( 0, 1 );
-			if ( securityService.isSuperAdminUser( user.getId() ) ) {
-				role = "SA";
-			}
-			userLogins.add( new UserLogin( String.format( "%s (%s)", StringUtilities.escapeHtml( StringUtilities.truncateString( user.getName(), 13 ) ), role ), user.getLogin() ) );
-		}
-		Collections.sort( userLogins, new Comparator<UserLogin>() {
-			@Override
-			public int compare( final UserLogin o1, final UserLogin o2 ) {
-				return StringUtilities.unescapeHtml( o1.getName() ).compareToIgnoreCase( StringUtilities.unescapeHtml( o2.getName() ) );
-			}
-		} );
-		model.put( "userLogins", userLogins );
+		addLoginSelectBox( model );
 		// TODO: TEMP <--
 
 		final List<Genre> genres = genreService.loadAll( language );
@@ -232,6 +197,25 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		template.merge( model, writer );
 
 		return writer.toString();
+	}
+
+	private void addLoginSelectBox( final VelocityContext model ) {
+		final List<User> users = userService.loadAll();
+		final List<UserLogin> userLogins = newArrayList();
+		for ( final User user : users ) {
+			String role = user.getUserStatus().getName().substring( 0, 1 );
+			if ( securityService.isSuperAdminUser( user.getId() ) ) {
+				role = "SA";
+			}
+			userLogins.add( new UserLogin( String.format( "%s (%s)", StringUtilities.escapeHtml( StringUtilities.truncateString( user.getName(), 13 ) ), role ), user.getLogin() ) );
+		}
+		Collections.sort( userLogins, new Comparator<UserLogin>() {
+			@Override
+			public int compare( final UserLogin o1, final UserLogin o2 ) {
+				return StringUtilities.unescapeHtml( o1.getName() ).compareToIgnoreCase( StringUtilities.unescapeHtml( o2.getName() ) );
+			}
+		} );
+		model.put( "userLogins", userLogins );
 	}
 
 	private void fillUiLanguages( final Language language, final VelocityContext model ) {
