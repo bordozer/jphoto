@@ -146,6 +146,21 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 
+	<!-- Spring context-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>ui.context.WebApplicationContextSupport</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/springConfig/application-context.xml</param-value>
+	</context-param>
+	<!-- / Spring context-->
+
 	<servlet>
 		<servlet-name>Spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -196,20 +211,6 @@
 		<url-pattern>/json/*</url-pattern>
 	</servlet-mapping>
 	<!-- / JSON -->
-
-	<!-- Spring context-->
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/springConfig/application-context.xml</param-value>
-	</context-param>
-
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-
-	<listener>
-		<listener-class>ui.context.WebApplicationContextSupport</listener-class>
-	</listener>
 
 	<servlet>
 		<servlet-name>JSONRPCServlet</servlet-name>
