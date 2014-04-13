@@ -105,6 +105,10 @@ public class TranslatableMessage {
 
 		final StringBuilder builder = new StringBuilder( services.getTranslatorService().translate( nerd, language ) );
 
+		if ( language == Language.NERD ) {
+			return builder.toString();
+		}
+
 		int i = 1;
 		for ( final AbstractTranslatableMessageParameter messageParameter : messageParameters ) {
 			final String parameterPlaceholder = String.format( "$%d", i );
