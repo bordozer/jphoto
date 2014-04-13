@@ -12,8 +12,6 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	public ActivityPhotoUpload( final Photo photo, final Services services ) {
 		super( services.getUserService().load( photo.getUserId() ), photo, photo.getUploadTime(), ActivityType.PHOTO_UPLOAD, services );
-
-		initActivityTranslatableText();
 	}
 
 	@Override

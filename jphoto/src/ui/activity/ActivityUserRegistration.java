@@ -9,8 +9,6 @@ public class ActivityUserRegistration extends AbstractActivityStreamEntry {
 
 	public ActivityUserRegistration( final User user, final Services services ) {
 		super( user, user.getRegistrationTime(), ActivityType.USER_REGISTRATION, services );
-
-		initActivityTranslatableText();
 	}
 
 	@Override

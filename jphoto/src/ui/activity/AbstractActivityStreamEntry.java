@@ -46,6 +46,16 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	}
 
 	public String getActivityText( final Language language ) {
+
+		if ( activityTranslatableText == null ) {
+			synchronized ( activityTranslatableText ) {
+				if ( activityTranslatableText == null ) {
+					activityTranslatableText = getActivityTranslatableText();
+				}
+			}
+		}
+//		activityTranslatableText = getActivityTranslatableText(); // to reload cached value just uncomment this
+
 		return activityTranslatableText.build( language );
 	}
 
@@ -125,9 +135,5 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 			, services.getUserPhotoFilePathUtilsService().getPhotoUrl( photo )
 			, photo.getNameEscaped()
 		);
-	}
-
-	protected void initActivityTranslatableText() {
-		activityTranslatableText = getActivityTranslatableText();
 	}
 }

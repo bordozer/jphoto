@@ -31,8 +31,6 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_USER_ID_VOTED_FOR ).getText() );
 		genreId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_GENRE_ID ).getText() );
 		points = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_POINTS ).getText() );
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityVotingForUserRankInGenre( final UserRankInGenreVoting rankInGenreVoting, final Services services ) {
@@ -41,8 +39,6 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 		userVotedForId = rankInGenreVoting.getUserId();
 		genreId = rankInGenreVoting.getGenreId();
 		points = rankInGenreVoting.getPoints();
-
-		initActivityTranslatableText();
 	}
 
 	@Override

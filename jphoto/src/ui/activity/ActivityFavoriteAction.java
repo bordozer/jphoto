@@ -28,8 +28,6 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 		favoriteEntryId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_ENTRY_ID ).getText() );
 		favoriteType = FavoriteEntryType.getById( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_FAVORITE_TYPE_ID ).getText() ) );
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityFavoriteAction( final User user, final int favoriteEntryId, final Date activityTime, final FavoriteEntryType entryType, final Services services ) {
@@ -37,8 +35,6 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 
 		this.favoriteEntryId = favoriteEntryId;
 		this.favoriteType = entryType;
-
-		initActivityTranslatableText();
 	}
 
 	@Override

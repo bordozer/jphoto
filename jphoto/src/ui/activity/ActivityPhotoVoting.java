@@ -50,8 +50,6 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 				votes.put( photoVotingCategory, votingPoints );
 			}
 		}
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoVoting( final User user, final Photo photo, final List<UserPhotoVote> userPhotoVotes, final Date activityTime, final Services services ) {
@@ -60,8 +58,6 @@ public class ActivityPhotoVoting extends AbstractPhotoActivityStreamEntry {
 		for ( final UserPhotoVote userPhotoVote : userPhotoVotes ) {
 			votes.put( userPhotoVote.getPhotoVotingCategory(), userPhotoVote.getMark() );
 		}
-
-		initActivityTranslatableText();
 	}
 
 	@Override

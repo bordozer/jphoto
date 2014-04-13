@@ -27,16 +27,11 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 
 		final int commentId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_PHOTO_COMMENT_ID ).getText() );
 		comment = services.getPhotoCommentService().load( commentId );
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoComment( final PhotoComment comment, final Services services ) {
 		super( comment.getCommentAuthor(), services.getPhotoService().load( comment.getPhotoId() ), comment.getCreationTime(), ActivityType.PHOTO_COMMENT, services );
-
 		this.comment = comment;
-
-		initActivityTranslatableText();
 	}
 
 	@Override

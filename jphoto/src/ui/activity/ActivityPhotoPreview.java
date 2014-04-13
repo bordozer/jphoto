@@ -29,16 +29,12 @@ public class ActivityPhotoPreview extends AbstractPhotoActivityStreamEntry {
 
 		final int previewId = NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_PHOTO_PREVIEW_ID ).getText() );
 		preview = services.getPhotoPreviewService().load( previewId );
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityPhotoPreview( final PhotoPreview preview, final Services services ) {
 		super( preview.getUser(), preview.getPhoto(), preview.getPreviewTime(), ActivityType.PHOTO_PREVIEW, services );
 
 		this.preview = preview;
-
-		initActivityTranslatableText();
 	}
 
 	@Override

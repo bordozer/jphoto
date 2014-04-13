@@ -31,8 +31,6 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		genre = services.getGenreService().load( NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_GENRE_ID ).getText() ) );
 		oldRank = 	NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_OLD_RANK ).getText() );
 		newRank = 	NumberUtils.convertToInt( rootElement.element( ACTIVITY_XML_TAG_NEW_RANK ).getText() );
-
-		initActivityTranslatableText();
 	}
 
 	public ActivityUserRankInGenreChanged( final User user, final Genre genre, final int oldRank, final int newRank, final Date activityTime, final Services services ) {
@@ -41,8 +39,6 @@ public class ActivityUserRankInGenreChanged extends AbstractActivityStreamEntry 
 		this.genre = genre;
 		this.oldRank = oldRank;
 		this.newRank = newRank;
-
-		initActivityTranslatableText();
 	}
 
 	@Override
