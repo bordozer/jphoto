@@ -80,12 +80,12 @@
 
 	<translation>
 		<nerd>activity stream entry: voted for rank of $1 in category $2 ( $3 )</nerd>
-		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе $2 ( $3 )]]></ru>
+		<ru><![CDATA[проголосовал(а) за ранг $1 в разделе '$2' ( $3 )]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>activity stream entry: the status in the club has been changed from $1 to $2</nerd>
-		<ru><![CDATA[статус в клубе изменен с $1 на $2]]></ru>
+		<ru><![CDATA[статус в клубе изменен с '$1' на '$2']]></ru>
 	</translation>
 
 	<translation>
