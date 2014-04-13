@@ -180,6 +180,8 @@ public interface UrlUtilsService {
 
 	String getAdminTranslatorLink();
 
+	String getAdminUntranslatedLink();
+
 	String getAdminControlPanelLink();
 
 	String getAdminVotingCategoryNewLink();

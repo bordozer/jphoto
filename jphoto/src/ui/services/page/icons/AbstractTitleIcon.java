@@ -18,7 +18,7 @@ public abstract class AbstractTitleIcon {
 
 	protected abstract String getIconUrl();
 
-	protected AbstractTitleIcon( final Services services ) {
+	public AbstractTitleIcon( final Services services ) {
 		this.services = services;
 	}
 

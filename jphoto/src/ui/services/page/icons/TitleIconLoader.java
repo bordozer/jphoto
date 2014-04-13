@@ -1,11 +1,13 @@
 package ui.services.page.icons;
 
+import core.enums.PrivateMessageType;
 import core.general.user.User;
-import core.services.photo.PhotoCommentService;
+import core.services.entry.PrivateMessageService;
 import core.services.system.Services;
-import org.apache.commons.lang.StringUtils;
+import core.services.translator.TranslatorService;
 import org.quartz.SchedulerException;
 import ui.context.EnvironmentContext;
+import utils.UserUtils;
 
 import java.util.List;
 
@@ -19,6 +21,10 @@ public class TitleIconLoader {
 		addScheduledIcon( result, services );
 
 		addUnreadCommentsCountIcon( result, services );
+
+		addUnreadPrivateMessagesIcon( result, services );
+
+		addUntranslatedMessagesIcon( result, services );
 
 		return result;
 	}
@@ -37,19 +43,43 @@ public class TitleIconLoader {
 	}
 
 	private static void addUnreadCommentsCountIcon( final List<AbstractTitleIcon> result, final Services services ) {
-
-		final PhotoCommentService photoCommentService = services.getPhotoCommentService();
-
-		final int unreadCommentsCount = photoCommentService.getUnreadCommentsQty( getCurrentUser().getId() );
+		final int unreadCommentsCount = services.getPhotoCommentService().getUnreadCommentsQty( getCurrentUser().getId() );
 		if ( unreadCommentsCount > 0 ) {
 			result.add( new UnreadCommentsCountTitleIcon( unreadCommentsCount, services ) );
-			/*final String unreadCommentsText = String.format( "<a href='%1$s' title=\"%2$s\"><img src=\"%3$s/icons16/newComments16.png\"> +%4$s</a>"
-				, urlUtilsService.getReceivedUnreadComments( currentUser.getId() )
-				, translatorService.translate( "You have $1 new comment(s)", language, String.valueOf( unreadCommentsCount ) )
-				, urlUtilsService.getSiteImagesPath()
-				, unreadCommentsCount
-			);*/
 		}
+	}
+
+	private static void addUnreadPrivateMessagesIcon( final List<AbstractTitleIcon> result, final Services services ) {
+
+		final PrivateMessageService privateMessageService = services.getPrivateMessageService();
+		final int userId = getCurrentUser().getId();
+
+		if ( UserUtils.isCurrentUserLoggedUser() ) {
+			for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
+
+				if ( messageType == PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
+					continue;
+				}
+
+				final int messagesCount = privateMessageService.getNewReceivedPrivateMessagesCount( userId, messageType );
+
+				if ( messagesCount > 0 ) {
+					result.add( new UnreadPrivateMessagesTitleIcon( messageType, messagesCount, services ) );
+				}
+			}
+		}
+	}
+
+	private static void addUntranslatedMessagesIcon( final List<AbstractTitleIcon> result, final Services services ) {
+		if ( services.getSecurityService().isSuperAdminUser( getCurrentUser() ) ) {
+			result.add( new UntranslatedMessagesTitleIcon( getTranslatorService( services ).getUntranslatedMap().size(), services ) );
+//			model.put( "untranslatedMessagesCount", untranslatedMessagesCount );
+//			model.put( "untranslatedMessagesCountHint", translatorService.translate( "There are $1 untranslated", language, String.valueOf( untranslatedMessagesCount ) ) );
+		}
+	}
+
+	private static TranslatorService getTranslatorService( final Services services ) {
+		return services.getTranslatorService();
 	}
 
 	private static User getCurrentUser() {

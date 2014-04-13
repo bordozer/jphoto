@@ -461,6 +461,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getAdminUntranslatedLink() {
+		return String.format( "%s/untranslated/", getAdminTranslatorLink() );
+	}
+
+	@Override
 	public String getAdminControlPanelLink() {
 		return String.format( "%s/control-panel/", getBaseAdminURL() );
 	}

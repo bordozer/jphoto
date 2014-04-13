@@ -162,34 +162,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "genres", genres );
 		model.put( "genreLinks", genreLinks );
 
-		final List<NewPrivateMessage> privateMessages = newArrayList();
-		if ( UserUtils.isCurrentUserLoggedUser() ) {
-			for ( final PrivateMessageType messageType : PrivateMessageType.values() ) {
-
-				if ( messageType == PrivateMessageType.USER_PRIVATE_MESSAGE_OUT ) {
-					continue;
-				}
-
-				final int messagesCount = privateMessageService.getNewReceivedPrivateMessagesCount( currentUser.getId(), messageType );
-
-				if ( messagesCount > 0 ) {
-					final NewPrivateMessage newPrivateMessage = new NewPrivateMessage( messageType, messagesCount );
-					newPrivateMessage.setLink( urlUtilsService.getPrivateMessagesList( currentUser.getId(), messageType ) );
-					newPrivateMessage.setHint( String.format( "%s: +%d", messageType.getName(), messagesCount ) );
-
-					privateMessages.add( newPrivateMessage );
-				}
-			}
-		}
-		model.put( "newPrivateMessages", privateMessages );
-
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  );
-
-		if ( securityService.isSuperAdminUser( currentUser ) ) {
-			final int untranslatedMessagesCount = translatorService.getUntranslatedMap().size();
-			model.put( "untranslatedMessagesCount", untranslatedMessagesCount );
-			model.put( "untranslatedMessagesCountHint", translatorService.translate( "There are $1 untranslated", language, String.valueOf( untranslatedMessagesCount ) ) );
-		}
 
 		fillUiLanguages( language, model );
 

@@ -6,14 +6,14 @@ public class UnreadCommentsCountTitleIcon extends AbstractTitleIcon {
 
 	private int unreadCommentsCount;
 
-	protected UnreadCommentsCountTitleIcon( final int unreadCommentsCount, final Services services ) {
+	public UnreadCommentsCountTitleIcon( final int unreadCommentsCount, final Services services ) {
 		super( services );
 		this.unreadCommentsCount = unreadCommentsCount;
 	}
 
 	@Override
 	protected String getIconPath() {
-		return "/icons16/newComments16.png";
+		return "icons16/newComments16.png";
 	}
 
 	@Override
