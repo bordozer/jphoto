@@ -67,17 +67,22 @@ public class TranslatableMessage {
 	}
 
 	public TranslatableMessage addPhotosByGenreLinkParameter( final int genreId ) {
-		messageParameters.add( new PhotosByGenreLinkParameter( services.getGenreService().load( genreId ), services ) );
+		messageParameters.add( new PhotosByGenreLinkParameter( getGenre( genreId ), services ) );
 		return this;
 	}
 
 	public TranslatableMessage addUserCardLinkParameter( final int userId ) {
-		messageParameters.add( new UserCardLinkParameter( services.getUserService().load( userId ), services ) );
+		messageParameters.add( new UserCardLinkParameter( getUser( userId ), services ) );
 		return this;
 	}
 
 	public TranslatableMessage addPhotosByUserByGenreLinkParameter( final User user, final Genre genre ) {
 		messageParameters.add( new PhotosByUserByGenreLinkParameter( user, genre, services ) );
+		return this;
+	}
+
+	public TranslatableMessage addPhotosByUserByGenreLinkParameter( final int userId, final int genreId ) {
+		messageParameters.add( new PhotosByUserByGenreLinkParameter( getUser( userId ), getGenre( genreId ), services ) );
 		return this;
 	}
 
@@ -124,5 +129,13 @@ public class TranslatableMessage {
 		}
 
 		return builder.toString();
+	}
+
+	private User getUser( final int userId ) {
+		return services.getUserService().load( userId );
+	}
+
+	private Genre getGenre( final int genreId ) {
+		return services.getGenreService().load( genreId );
 	}
 }
