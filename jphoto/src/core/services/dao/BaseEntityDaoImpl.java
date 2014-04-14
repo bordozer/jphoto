@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.BaseSqlSelectQuery;
@@ -39,9 +40,6 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 	@Autowired
 	private PrivateMessageService privateMessageService;
 
-	@Autowired
-	private SecurityService securityService;
-
 	public boolean createOrUpdateEntry( final T entry, final Map<Integer, String> fieldsToInsert, final Map<Integer, String> fieldsToUpdate ) {
 
 		final String tableName = getTableName();
@@ -64,8 +62,9 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 
 		final MapSqlParameterSource parameters = getParameters( entry );
 		final boolean entryHasBeenCreated;
+		final GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 		try {
-			entryHasBeenCreated = jdbcTemplate.update( sql, parameters ) > 0;
+			entryHasBeenCreated = jdbcTemplate.update( sql, parameters, keyHolder ) > 0;
 		} catch ( final Throwable t ) {
 			final String message = String.format( "Creating/Updating exception: %s. SQL: '%s', parameters: %s", t.getMessage(), sql, serializeParameters( parameters ) );
 			logHelper.error( message, t );
@@ -82,7 +81,7 @@ public abstract class BaseEntityDaoImpl<T extends BaseEntity> extends BaseDaoImp
 		}
 
 		if ( aNew ) {
-			final long newId = jdbcTemplate.queryForLong( "SELECT LAST_INSERT_ID()", new MapSqlParameterSource() );
+			final long newId = keyHolder.getKey().longValue();
 
 			if ( newId == 0 ) {
 				final String message = String.format( "SELECT LAST_INSERT_ID() has not returned last ID ( %s ). sql: '%s', %s", entry.getClass().getName(), sql, serializeParameters( parameters ) );
