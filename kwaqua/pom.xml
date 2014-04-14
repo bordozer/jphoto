@@ -13,7 +13,7 @@
 	<properties>
 		<encoding>UTF-8</encoding>
 		<embeddables>kwaqua/stories/**/*.java</embeddables>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<!-- Thucydides of version 0.9.125 is not working with selenium version 2.35.0
 		please do not upgrade until Thucydides support for newer selenium will be added -->
 		<selenium.version>2.34.0</selenium.version>
