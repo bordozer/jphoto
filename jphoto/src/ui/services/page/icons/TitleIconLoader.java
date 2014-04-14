@@ -31,6 +31,11 @@ public class TitleIconLoader {
 	}
 
 	private static void addScheduledIcon( final List<AbstractTitleIcon> result, final Services services, final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
+
+		if ( ! services.getSecurityService().isSuperAdminUser( getCurrentUser() ) ) {
+			return;
+		}
+
 		boolean running;
 		try {
 			running = scheduledTasksExecutionService.isRunning();
@@ -38,7 +43,7 @@ public class TitleIconLoader {
 			running = false;
 		}
 
-		if ( ! running ) {
+		if ( !running ) {
 			result.add( new SchedulerTitleIcon( services ) );
 		}
 	}
