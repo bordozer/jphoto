@@ -1,9 +1,13 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PhotosImportModel extends DateRangableModel {
@@ -46,6 +50,18 @@ public class PhotosImportModel extends DateRangableModel {
 
 	// photosight import fields <--
 	private boolean deletePictureFromDiskAfterImport;
+	
+	private final List<PhotosightCategory> photosightCategoriesSorted;
+
+	public PhotosImportModel() {
+		photosightCategoriesSorted = Arrays.asList( PhotosightCategory.values() );
+		Collections.sort( photosightCategoriesSorted, new Comparator<PhotosightCategory>() {
+			@Override
+			public int compare( final PhotosightCategory category1, final PhotosightCategory category2 ) {
+				return category1.name().compareTo( category2.name() );
+			}
+		} );
+	}
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -165,6 +181,10 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setPhotosightCategories( final List<String> photosightCategories ) {
 		this.photosightCategories = photosightCategories;
+	}
+
+	public List<PhotosightCategory> getPhotosightCategoriesSorted() {
+		return photosightCategoriesSorted;
 	}
 
 	@Override

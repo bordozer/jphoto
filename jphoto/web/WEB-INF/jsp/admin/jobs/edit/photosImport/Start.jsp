@@ -48,18 +48,9 @@
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 
 <%
-	final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
-	Collections.sort( photosightCategories, new Comparator<PhotosightCategory>() {
-		@Override
-		public int compare( final PhotosightCategory category1, final PhotosightCategory category12 ) {
-			return category1.name().compareTo( category12.name() );
-		}
-	} );
-%>
-<%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
-<c:set var="photosightCategories" value="<%=photosightCategories%>"/>
+<c:set var="photosightCategoriesSorted" value="<%=photosImportModel.getPhotosightCategoriesSorted()%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
@@ -184,9 +175,9 @@
 									<%--<table:tr>
 										<table:tdtext text_t="Import photos from photosight categories"/>
 										<table:td>
-											<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
+											<js:checkBoxChecker namePrefix="photosightCategoriesSorted" isChecked="true" />
 											<br />
-											<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategories}" itemValue="id" itemLabel="name" delimiter="<br />" />
+											<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategoriesSorted}" itemValue="id" itemLabel="name" delimiter="<br />" />
 										</table:td>
 									</table:tr>--%>
 
@@ -245,9 +236,9 @@
 								<div style="float: left; width: 20%;">
 									${eco:translate('Import photos from photosight categories')}
 									<br />
-									<js:checkBoxChecker namePrefix="photosightCategories" isChecked="true" />
+									<js:checkBoxChecker namePrefix="photosightCategoriesSorted" isChecked="true" />
 									<br />
-									<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategories}" itemValue="id" itemLabel="name" delimiter="<br />" />
+									<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategoriesSorted}" itemValue="id" itemLabel="name" delimiter="<br />" />
 								</div>
 
 							</div>
