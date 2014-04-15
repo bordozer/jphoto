@@ -177,14 +177,17 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( getReceivedCommentsMenu( user ) );
 			menuItems.add( getReceivedUnreadCommentsMenu( user ) );
 			menuItems.add( getWrittenCommentsMenu( user ) );
-			menuItems.add( getPrivateMessagesReceivedMenu( user ) );
+
+			menuItems.addAll( getPrivateMessagesMenus( user ) );
+
+			/*menuItems.add( getPrivateMessagesReceivedMenu( user ) );
 			menuItems.add( getPrivateMessagesSentMenu( user ) );
 			menuItems.add( getActivityNotificationMenu( user ) );
 			menuItems.add( getSystemNotificationMenu( user ) );
 
 			if ( securityService.isSuperAdminUser( user.getId() ) ) {
 				menuItems.add( getAdminNotificationMenu( user ) );
-			}
+			}*/
 
 			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: Messages", getLanguage() ) ), menuItems );
 
@@ -210,7 +213,28 @@ public class MenuServiceImpl implements MenuService {
 		return new MenuItem( caption, link );
 	}
 
-	private MenuItem getPrivateMessagesReceivedMenu( final User user ) {
+	private List<MenuItem> getPrivateMessagesMenus( final User user ) {
+		final List<MenuItem> result = newArrayList();
+
+		for ( final PrivateMessageType privateMessageType : PrivateMessageType.values() ) {
+
+			if ( privateMessageType == PrivateMessageType.ADMIN_NOTIFICATIONS && ! securityService.isSuperAdminUser( user.getId() ) ) {
+				continue;
+			}
+
+			final String caption = translatorService.translate( privateMessageType.getName(), getLanguage() );
+			final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
+
+			final MenuItem menuItem = new MenuItem( caption, link );
+			menuItem.setIcon( String.format( "messages/%s", privateMessageType.getIcon() ) );
+
+			result.add( menuItem );
+		}
+
+		return result;
+	}
+
+	/*private MenuItem getPrivateMessagesReceivedMenu( final User user ) {
 		final String caption = translatorService.translate( MAIN_MENU_PRIVATE_MESSAGES_RECEIVED, getLanguage() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
 		return new MenuItem( caption, link );
@@ -238,7 +262,7 @@ public class MenuServiceImpl implements MenuService {
 		final String caption = translatorService.translate( PrivateMessageType.ADMIN_NOTIFICATIONS.getName(), getLanguage() );
 		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ADMIN_NOTIFICATIONS );
 		return new MenuItem( caption, link );
-	}
+	}*/
 
 	private void createUserNotificationMenu( final Map<MenuItem, List<MenuItem>> menus, final User user ) {
 		final List<MenuItem> menuItems = newArrayList();

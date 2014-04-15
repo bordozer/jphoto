@@ -51,7 +51,14 @@
 						<a class="uppercase" href="$menuItem.key.link">$menuItem.key.caption</a>
 						<ul class="block-background block-border">
 							#foreach( $subMenuItem in $menuItem.value )
-								<li class="block-border"><a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">$subMenuItem.caption &nbsp;</a></li>
+								<li class="block-border">
+									<a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">
+										#if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
+											<img src="$imagePath/$subMenuItem.icon" height="16" width="16" />
+										#end
+										$subMenuItem.caption &nbsp;
+									</a>
+								</li>
 							#end
 						</ul>
 					</li>

@@ -1,15 +1,20 @@
 package ui.elements;
 
+import org.apache.commons.lang.StringUtils;
+
 public class MenuItem {
 
 	protected final String caption;
 	private final String link;
+
+	private String icon;
 	private String jsFunction;
 
 	public MenuItem( final String caption, final String link ) {
 		this.caption = caption;
 		this.link = link;
 
+		icon = StringUtils.EMPTY;
 		this.jsFunction = "return true;";
 	}
 
@@ -27,6 +32,14 @@ public class MenuItem {
 
 	public void setJsFunction( final String jsFunction ) {
 		this.jsFunction = jsFunction;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon( final String icon ) {
+		this.icon = icon;
 	}
 
 	public static MenuItem noLinkMenu( final String title ) {

@@ -99,6 +99,8 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "baseUrl", urlUtilsService.getBaseURL() );
 		model.put( "imagePath", urlUtilsService.getSiteImagesPath() );
 
+		model.put("StringUtils", StringUtils.class);
+
 		model.put( "portalpageurl", urlUtilsService.getPortalPageURL() );
 		model.put( "registerurl", urlUtilsService.getUserNewLink() );
 
