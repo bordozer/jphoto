@@ -5,6 +5,7 @@ import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
+import core.services.translator.Language;
 import ui.activity.ActivityType;
 import utils.ListUtils;
 
@@ -59,17 +60,22 @@ public class ActivityStreamCleanupJob extends AbstractJob {
 
 	@Override
 	public String getJobParametersDescription() {
+		final Language language = getLanguage();
+
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", getLanguage(), String.valueOf( leaveActivityForDays ) ) );
+		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", language, String.valueOf( leaveActivityForDays ) ) );
 		builder.append( "<br />" );
 
-		builder.append( services.getTranslatorService().translate( "Activity types to delete", getLanguage() ) ).append( ": " );
+		builder.append( services.getTranslatorService().translate( "Activity types to delete", language ) ).append( ": " );
 		if ( activityTypes.size() == ActivityType.values().length ) {
-			builder.append( services.getTranslatorService().translate( "ActivityStreamCleanupJob: All activity types", getLanguage() ) );
+			builder.append( services.getTranslatorService().translate( "ActivityStreamCleanupJob: All activity types", language ) );
 		}  else {
 			for ( final ActivityType activityType : activityTypes ) {
-				builder.append( services.getTranslatorService().translate( activityType.getName(), getLanguage() ) ).append( "<br />" );
+				final String name = services.getTranslatorService().translate( activityType.getName(), language );
+				final String img = String.format( "<img src='%s/jobtype/%s' height='16' title='%s'> "
+					, services.getUrlUtilsService().getSiteImagesPath(), activityType.getIcon(), name );
+				builder.append( img ).append( services.getTranslatorService().translate( name, language ) ).append( "<br />" );
 			}
 		}
 
