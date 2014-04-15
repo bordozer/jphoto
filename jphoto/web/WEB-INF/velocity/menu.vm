@@ -3,7 +3,7 @@
 		float: left;
 		width: 100%;
 		height: 22px;
-		text-align: center;
+		/*text-align: center;*/
 		float: left;
 		margin: 3px 3px 3px 7px;
 		padding: 4px;
@@ -20,7 +20,7 @@
 	.menuItem {
 		float: left;
 		height: 30px;
-		text-align: center;
+		/*text-align: center;*/
 		/*border: dashed;*/
 	}
 
@@ -55,6 +55,9 @@
 									<a href="$subMenuItem.link" onclick="$subMenuItem.jsFunction">
 										#if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
 											<img src="$imagePath/$subMenuItem.icon" height="16" width="16" />
+										#end
+										#if ( $StringUtils.isEmpty( $subMenuItem.icon ) )
+											&nbsp;&nbsp;&nbsp;&nbsp;
 										#end
 										$subMenuItem.caption &nbsp;
 									</a>

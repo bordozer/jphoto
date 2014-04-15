@@ -180,15 +180,6 @@ public class MenuServiceImpl implements MenuService {
 
 			menuItems.addAll( getPrivateMessagesMenus( user ) );
 
-			/*menuItems.add( getPrivateMessagesReceivedMenu( user ) );
-			menuItems.add( getPrivateMessagesSentMenu( user ) );
-			menuItems.add( getActivityNotificationMenu( user ) );
-			menuItems.add( getSystemNotificationMenu( user ) );
-
-			if ( securityService.isSuperAdminUser( user.getId() ) ) {
-				menuItems.add( getAdminNotificationMenu( user ) );
-			}*/
-
 			menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: Messages", getLanguage() ) ), menuItems );
 
 			menuItems.add( userNotificationsControlMenu( user ) );
@@ -233,36 +224,6 @@ public class MenuServiceImpl implements MenuService {
 
 		return result;
 	}
-
-	/*private MenuItem getPrivateMessagesReceivedMenu( final User user ) {
-		final String caption = translatorService.translate( MAIN_MENU_PRIVATE_MESSAGES_RECEIVED, getLanguage() );
-		final String link = urlUtilsService.getPrivateMessagesList( user.getId() );
-		return new MenuItem( caption, link );
-	}
-
-	private MenuItem getPrivateMessagesSentMenu( final User user ) {
-		final String caption = translatorService.translate( MAIN_MENU_PRIVATE_MESSAGES_SENT, getLanguage() );
-		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.USER_PRIVATE_MESSAGE_OUT );
-		return new MenuItem( caption, link );
-	}
-
-	private MenuItem getActivityNotificationMenu( final User user ) {
-		final String caption = translatorService.translate( PrivateMessageType.ACTIVITY_NOTIFICATIONS.getName(), getLanguage() );
-		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ACTIVITY_NOTIFICATIONS );
-		return new MenuItem( caption, link );
-	}
-
-	private MenuItem getSystemNotificationMenu( final User user ) {
-		final String caption = translatorService.translate( PrivateMessageType.SYSTEM_NOTIFICATIONS.getName(), getLanguage() );
-		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.SYSTEM_NOTIFICATIONS );
-		return new MenuItem( caption, link );
-	}
-
-	private MenuItem getAdminNotificationMenu( final User user ) {
-		final String caption = translatorService.translate( PrivateMessageType.ADMIN_NOTIFICATIONS.getName(), getLanguage() );
-		final String link = urlUtilsService.getPrivateMessagesList( user.getId(), PrivateMessageType.ADMIN_NOTIFICATIONS );
-		return new MenuItem( caption, link );
-	}*/
 
 	private void createUserNotificationMenu( final Map<MenuItem, List<MenuItem>> menus, final User user ) {
 		final List<MenuItem> menuItems = newArrayList();
