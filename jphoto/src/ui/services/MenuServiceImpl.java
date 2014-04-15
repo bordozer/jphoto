@@ -437,7 +437,11 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem getUserPhotosOfFavoriteMembersMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_PHOTOS_OF_USER_FAVORITE_MEMBERS.getText(), getLanguage() );
 		final String link = urlUtilsService.getUserPhotosOfFavoriteMembersLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "icons16/photos16.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userBookmarkedPhotosMenu( final User user ) {
