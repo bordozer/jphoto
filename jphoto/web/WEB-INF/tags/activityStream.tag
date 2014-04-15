@@ -8,6 +8,7 @@
 <%@ attribute name="activities" required="true" type="java.util.List" %>
 <%@ attribute name="hideUser" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="showUserActivityLink" required="false" type="java.lang.Boolean" %>
+<%@ attribute name="hideTextForAdmin" required="false" type="java.lang.Boolean" %>
 
 <table:table oddEven="true" width="100%">
 
@@ -35,9 +36,11 @@
 
 					${eco:translateActivityStreamEntry(activity)}
 
-					<div style="float: left; width: 95%;">
-						${eco:translateActivityStreamEntryForAdmin(activity)}
-					</div>
+					<c:if test="${not hideTextForAdmin}">
+						<div style="float: left; width: 95%;">
+							${eco:translateActivityStreamEntryForAdmin(activity)}
+						</div>
+					</c:if>
 
 				</table:td>
 

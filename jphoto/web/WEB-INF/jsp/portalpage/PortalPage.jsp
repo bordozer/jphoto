@@ -226,7 +226,7 @@
 
 			<table:td>
 
-				<tags:activityStream activities="${lastActivities}" showUserActivityLink="true" />
+				<tags:activityStream activities="${lastActivities}" showUserActivityLink="true" hideTextForAdmin="true" />
 
 				<br />
 
