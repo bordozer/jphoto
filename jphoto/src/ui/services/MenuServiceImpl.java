@@ -439,7 +439,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getUserPhotosOfFavoriteMembersLink( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( "icons16/photos16.png" );
+		menuItem.setIcon( "menus/menu_photos.png" );
 
 		return menuItem;
 	}
