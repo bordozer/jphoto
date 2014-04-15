@@ -26,7 +26,7 @@
 			<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
 		</div>
 
-		<div style="float: left; width: 400px;">
+		<div style="float: left; width: 450px;">
 			<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
 		</div>
 	</div>
