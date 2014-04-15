@@ -57,6 +57,10 @@ public class TranslatorUtils {
 		return activityStreamEntry.getActivityText( getLanguage() );
 	}
 
+	public static String translateActivityStreamEntryForAdmin( final AbstractActivityStreamEntry activityStreamEntry ) {
+		return activityStreamEntry.getActivityTextForAdmin( getLanguage() );
+	}
+
 	public static String translatableMessage( final TranslatableMessage translatableMessage ) {
 		return translatableMessage.build( getLanguage() );
 	}

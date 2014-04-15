@@ -24,7 +24,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	protected final Date activityTime;
 	protected final ActivityType activityType;
 
-	protected TranslatableMessage activityTranslatableText;
+//	protected TranslatableMessage activityTranslatableText;
 
 	protected final Services services;
 
@@ -47,7 +47,9 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 
 	public String getActivityText( final Language language ) {
 
-		if ( activityTranslatableText != null ) {
+		return getActivityTranslatableText().build( language );
+
+		/*if ( activityTranslatableText != null ) {
 			return activityTranslatableText.build( language );
 		}
 
@@ -58,7 +60,11 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 		}
 		//activityTranslatableText = getActivityTranslatableText(); // to reload cached value just uncomment this
 
-		return activityTranslatableText.build( language );
+		return activityTranslatableText.build( language );*/
+	}
+
+	public String getActivityTextForAdmin( final Language language ) {
+		return StringUtils.EMPTY;
 	}
 
 	public TranslatableMessage getDisplayActivityUserLink() {

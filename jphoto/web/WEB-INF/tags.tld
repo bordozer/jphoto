@@ -102,6 +102,12 @@
 	</function>
 
 	<function>
+		<name>translateActivityStreamEntryForAdmin</name>
+		<function-class>utils.TranslatorUtils</function-class>
+		<function-signature>java.lang.String translateActivityStreamEntryForAdmin(ui.activity.AbstractActivityStreamEntry)</function-signature>
+	</function>
+
+	<function>
 		<name>translatableMessage</name>
 		<function-class>utils.TranslatorUtils</function-class>
 		<function-signature>java.lang.String translatableMessage(core.services.translator.message.TranslatableMessage)</function-signature>

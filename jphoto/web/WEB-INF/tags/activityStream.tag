@@ -34,6 +34,11 @@
 					</c:if>
 
 					${eco:translateActivityStreamEntry(activity)}
+
+					<div style="float: left; width: 95%;">
+						${eco:translateActivityStreamEntryForAdmin(activity)}
+					</div>
+
 				</table:td>
 
 				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">

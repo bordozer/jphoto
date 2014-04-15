@@ -18,7 +18,7 @@
 
 		<tags:paging showSummary="false"/>
 
-		<table:table width="800">
+		<table:table width="1000">
 			<table:tr>
 				<table:td>
 					<tags:activityStream activities="${activities}" hideUser="true"/>
