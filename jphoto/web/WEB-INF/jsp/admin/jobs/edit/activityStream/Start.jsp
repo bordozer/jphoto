@@ -6,13 +6,17 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
+<%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="activityStreamCleanupJobModel" type="admin.controllers.jobs.edit.activityStream.ActivityStreamCleanupJobModel" scope="request"/>
 
 <c:set var="leave_activity_for_days_control" value="<%=ActivityStreamCleanupJobModel.LEAVE_ACTIVITY_FOR_DAYS_CONTROL%>"/>
+<c:set var="activity_stream_type_ids_to_delete_control" value="<%=ActivityStreamCleanupJobModel.ACTIVITY_STREAM_TYPE_IDS_TO_DELETE_CONTROL%>"/>
+
 <c:set var="savedJob" value="${activityStreamCleanupJobModel.job}"/>
+<c:set var="activityTypes" value="${activityStreamCleanupJobModel.activityTypes}"/>
 
 <tags:page pageModel="${activityStreamCleanupJobModel.pageModel}">
 
@@ -42,6 +46,16 @@
 						</tags:inputHint>
 					</table:tddata>
 
+				</table:tr>
+
+				<table:tr>
+					<table:tdtext text_t="Actyvity types to delete" isMandatory="true"/>
+					<table:tddata>
+						<js:checkBoxChecker namePrefix="${activity_stream_type_ids_to_delete_control}"/>
+						<br/>
+						<br/>
+						<form:checkboxes path="${activity_stream_type_ids_to_delete_control}" items="${activityTypes}" itemValue="id" itemLabel="name" delimiter="<br />" cssErrorClass="invalid" />
+					</table:tddata>
 				</table:tr>
 
 			</table:table>

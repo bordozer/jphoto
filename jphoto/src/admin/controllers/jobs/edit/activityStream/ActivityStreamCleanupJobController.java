@@ -12,11 +12,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ui.activity.ActivityType;
+import utils.ListUtils;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @SessionAttributes( ActivityStreamCleanupJobController.JOB_MODEL_NAME )
 @Controller
@@ -91,6 +96,13 @@ public class ActivityStreamCleanupJobController extends AbstractJobController {
 
 		job.setLeaveActivityForDays( NumberUtils.convertToInt( aModel.getLeaveActivityForDays() ) );
 		job.setTotalJopOperations( 1 );
+
+		final List<ActivityType> activityTypes = newArrayList();
+		for ( final String activityTypeId : aModel.getActivityStreamTypeIdsToDelete() ) {
+			activityTypes.add( ActivityType.getById( Integer.parseInt( activityTypeId ) ) );
+		}
+		job.setActivityTypes( activityTypes );
+
 	}
 
 	@Override
@@ -99,6 +111,7 @@ public class ActivityStreamCleanupJobController extends AbstractJobController {
 		final Map<SavedJobParameterKey,CommonProperty> savedJobParametersMap = savedJobService.getSavedJobParametersMap( savedJobId );
 
 		aModel.setLeaveActivityForDays( savedJobParametersMap.get( SavedJobParameterKey.DAYS ).getValue() );
+		aModel.setActivityStreamTypeIdsToDelete( ListUtils.convertIntegerListToString( savedJobParametersMap.get( SavedJobParameterKey.ENTRY_TYPES ).getValueListInt() ) );
 	}
 
 	@Override

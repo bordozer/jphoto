@@ -8,6 +8,8 @@ import ui.context.EnvironmentContext;
 import utils.FormatUtils;
 import utils.NumberUtils;
 
+import java.util.List;
+
 public class ActivityStreamCleanupJobValidator implements Validator {
 	
 	@Autowired
@@ -23,12 +25,20 @@ public class ActivityStreamCleanupJobValidator implements Validator {
 		final ActivityStreamCleanupJobModel model = ( ActivityStreamCleanupJobModel ) target;
 
 		validateLeaveActivityForDays( model.getLeaveActivityForDays(), errors );
+		validateActivityTypes( model.getActivityStreamTypeIdsToDelete(), errors );
 	}
 
 	private void validateLeaveActivityForDays( final String leaveActivityForDays, final Errors errors ) {
-		if ( NumberUtils.convertToInt( leaveActivityForDays ) <= 0 ) {
+		if ( NumberUtils.convertToInt( leaveActivityForDays ) < 0 ) {
 			errors.rejectValue( ActivityStreamCleanupJobModel.LEAVE_ACTIVITY_FOR_DAYS_CONTROL,
 								translatorService.translate( "Please, enter $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "days" ) ) );
+		}
+	}
+
+	private void validateActivityTypes( final List<String> activityStreamTypeIdsToDelete, final Errors errors ) {
+		if ( activityStreamTypeIdsToDelete == null || activityStreamTypeIdsToDelete.size() == 0 ) {
+			errors.rejectValue( ActivityStreamCleanupJobModel.ACTIVITY_STREAM_TYPE_IDS_TO_DELETE_CONTROL,
+								translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "activity type" ) ) );
 		}
 	}
 }

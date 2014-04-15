@@ -13,6 +13,7 @@ import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
 import core.services.system.Services;
 import ui.activity.AbstractActivityStreamEntry;
+import ui.activity.ActivityType;
 
 import java.util.Date;
 import java.util.List;
@@ -45,5 +46,5 @@ public interface ActivityStreamService extends BaseEntityService<AbstractActivit
 
 	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final int qty );
 
-	void deleteEntriesOlderThen( final Date timeFrame );
+	void deleteEntriesOlderThen( final List<ActivityType> activityTypes, final Date timeFrame );
 }

@@ -29,7 +29,7 @@ public class JobExecutionHistoryCleanupJobValidator implements Validator {
 	}
 
 	private void validateDays( final String leaveActivityForDays, final Errors errors ) {
-		if ( ! NumberUtils.isNumeric( leaveActivityForDays ) ) {
+		if ( NumberUtils.convertToInt( leaveActivityForDays ) < 0 ) {
 			errors.rejectValue( JobExecutionHistoryCleanupJobModel.DELETE_ENTRIES_OLDER_THE_N_DAYS_CONTROL,
 								translatorService.translate( "$1 must be zero or a positive number", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "days" ) ) );
 		}

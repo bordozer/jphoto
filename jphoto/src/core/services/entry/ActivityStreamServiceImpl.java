@@ -127,7 +127,7 @@ public class ActivityStreamServiceImpl implements ActivityStreamService {
 	}
 
 	@Override
-	public void deleteEntriesOlderThen( final Date timeFrame ) {
-		activityStreamDao.deleteEntriesOlderThen( timeFrame );
+	public void deleteEntriesOlderThen( final List<ActivityType> activityTypes, final Date timeFrame ) {
+		activityStreamDao.deleteEntriesOlderThen( activityTypes, timeFrame );
 	}
 }

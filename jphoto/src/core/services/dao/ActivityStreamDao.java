@@ -1,6 +1,7 @@
 package core.services.dao;
 
 import ui.activity.AbstractActivityStreamEntry;
+import ui.activity.ActivityType;
 
 import java.util.Date;
 import java.util.List;
@@ -17,5 +18,5 @@ public interface ActivityStreamDao extends BaseEntityDao<AbstractActivityStreamE
 
 	List<AbstractActivityStreamEntry> getActivityForPhoto( final int photoId );
 
-	void deleteEntriesOlderThen( final Date timeFrame );
+	void deleteEntriesOlderThen( final List<ActivityType> activityTypes, final Date timeFrame );
 }

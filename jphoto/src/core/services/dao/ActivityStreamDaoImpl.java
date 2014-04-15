@@ -8,6 +8,7 @@ import core.log.LogHelper;
 import core.services.photo.PhotoService;
 import core.services.system.CacheService;
 import core.services.system.Services;
+import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStreamEntry> implements ActivityStreamDao {
@@ -115,13 +117,23 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 	}
 
 	@Override
-	public void deleteEntriesOlderThen( final Date timeFrame ) {
-		final String sql = String.format( "DELETE FROM %s WHERE %s < :timeFrame;", TABLE_ACTIVITY_STREAM, TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
+	public void deleteEntriesOlderThen( final List<ActivityType> activityTypes, final Date timeFrame ) {
+		final StringBuilder sql = new StringBuilder( String.format( "DELETE FROM %s WHERE %s < :timeFrame", TABLE_ACTIVITY_STREAM, TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME ) );
+
+		if ( activityTypes.size() < ActivityType.values().length ) {
+			sql.append( " AND " ).append( TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TYPE ).append( " IN ( " );
+			final List<Integer> ids = newArrayList();
+			for ( final ActivityType activityType : activityTypes ) {
+				ids.add( activityType.getId() );
+			}
+			sql.append( StringUtils.join( ids, "," ) ).append( " )" );
+		}
+		sql.append( ";" );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "timeFrame", timeFrame );
 
-		jdbcTemplate.update( sql, paramSource );
+		jdbcTemplate.update( sql.toString(), paramSource );
 	}
 
 	@Override

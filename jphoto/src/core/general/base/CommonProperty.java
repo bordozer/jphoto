@@ -107,6 +107,10 @@ public class CommonProperty {
 	}
 
 	public List<String> getValueListString() {
+		if ( StringUtils.isEmpty( value ) ) {
+			return newArrayList();
+		}
+
 		final String[] strings = value.split( VALUE_SEPARATOR );
 
 		final List<String> result = newArrayList();
@@ -118,6 +122,10 @@ public class CommonProperty {
 	}
 
 	public List<Integer> getValueListInt() {
+		if ( StringUtils.isEmpty( value ) ) {
+			return newArrayList();
+		}
+
 		final List<String> strings = Arrays.asList( value.split( VALUE_SEPARATOR ) );
 
 		final List<Integer> integers = newArrayList();
