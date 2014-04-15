@@ -277,14 +277,22 @@ public class MenuServiceImpl implements MenuService {
 //		final String caption = entityLinkUtilsService.getMembershipPhotosLinkText( membership); //translatorService.translate( String.format( MAIN_MENU_MEMBERSHIP_TYPE_NERD, url, membershipType.getName() ), getLanguage() );
 		final String caption = translatorService.translate( String.format( MAIN_MENU_MEMBERSHIP_TYPE_NERD, url, membershipType.getName() ), getLanguage() ); // TODO: try to use entityLinkUtilsService.getMembershipPhotosLinkText()
 		final String link = urlUtilsService.getPhotosByMembership( membershipType, url );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( String.format( "userMembershipType/%s", membershipType.getIcon() ) );
+
+		return menuItem;
 	}
 
 	private MenuItem membershipBestMenu( final UserMembershipType membershipType, final String url ) {
 		final String nerd = String.format( "Main menu: The best photos: %s", membershipType.getName() );
 		final String caption = translatorService.translate( nerd, getLanguage() );
 		final String link = urlUtilsService.getPhotosByMembershipBest( membershipType, url );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( String.format( "userMembershipType/%s", membershipType.getIcon() ) );
+
+		return menuItem;
 	}
 
 	private MenuItem genresMenu() {
