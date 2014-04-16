@@ -15,28 +15,44 @@
 		float: left;
 		width: 45%;
 		margin: 5px;
-		/*text-align: center;*/
-		/*border: 1px solid #bbbbbb;*/
-		/*height: 100%;*/
-		/*min-height: 100%; !important;*/
 	}
 </style>
 
-<div class="user-lock-area-header">
+<!--<script type="text/javascript">
+	jQuery().ready( function() {
+		$( "input[name=lockPeriodType][value='1']" ).attr( 'checked', 'checked' );
+	});
+</script>-->
 
-	<!--<div class="user-lock-area-header">Locking user: <%- userId %></div>-->
+<div class="user-lock-area-header">
 
 	<div class="user-lock-area">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user now</div>
 
-		TODO: Locking form
+		<input type="radio" name="lockPeriodType" value="1" class="lock-period-type"> Time period
+		<input type="radio" name="lockPeriodType" value="2" class="lock-period-type"> For date range
+
+		<div id="lockPeriodType_TimePeriod" style="display: none">
+			Lock user for
+			<input type="text" id="timePeriod_Period" size="4">
+			<select id="">
+				<option value="1">minutes</option>
+				<option value="2">days</option>
+				<option value="3">month</option>
+				<option value="4">years</option>
+			</select>
+		</div>
+
+		<div id="lockPeriodType_DateRange" style="display: none">
+			Till the end of the day:
+		</div>
 
 	</div>
 
 	<div class="user-lock-area" style="float: right;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
 
-		TODO: User locking history
+
 	</div>
 
 </div>
