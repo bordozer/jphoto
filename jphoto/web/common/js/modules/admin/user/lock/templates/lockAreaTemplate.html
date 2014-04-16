@@ -1,24 +1,41 @@
 <style type="text/css">
-	.userLockAreaTab {
-		float: left;
-		width: 49%;
+
+	.user-lock-area-header {
+		float:left;
+		width: 100%;
 		text-align: center;
-		border: 1px solid #bbbbbb;
+	}
+
+	.user-lock-area-tab {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+
+	.user-lock-area {
+		float: left;
+		width: 45%;
+		margin: 5px;
+		/*text-align: center;*/
+		/*border: 1px solid #bbbbbb;*/
 		/*height: 100%;*/
 		/*min-height: 100%; !important;*/
 	}
 </style>
 
-<div>
-	<div>
-		<div class="userLockAreaTab">
-			Form
-			<p/>
+<div class="user-lock-area-header">
 
-		</div>
-		<div class="userLockAreaTab">
-			Locking history
-		</div>
+	<!--<div class="user-lock-area-header">Locking user: <%- userId %></div>-->
+
+	<div class="user-lock-area">
+		<div class="user-lock-area-header block-background user-lock-area-tab">Form</div>
+
+		TODO: Locking form
+
 	</div>
-	<%- userId %>
+
+	<div class="user-lock-area" style="float: right;">
+		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
+
+	</div>
+
 </div>

@@ -13,6 +13,8 @@
 
 	<script type="text/javascript" src="${baseUrl}/common/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/common/js/lib/front-end/require.js"></script>
+
+	<link href="${baseUrl}/common/css/jphoto.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
