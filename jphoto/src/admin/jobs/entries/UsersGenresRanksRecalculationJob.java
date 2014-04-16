@@ -33,7 +33,6 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
 		final UserRankService userRankService = services.getUserRankService();
 		final ActivityStreamService activityStreamService = services.getActivityStreamService();
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		for ( final User user : beingProcessedUsers ) {

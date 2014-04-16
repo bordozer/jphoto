@@ -29,7 +29,6 @@ public class ActivityStreamController {
 
 	public static final String MODEL_NAME = "activityStreamModel";
 	private static final String VIEW = "/activity/list/ActivityStream";
-	private static final String VIEW_MOBILE = "mobile/activity/list/ActivityStream";
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
@@ -95,7 +94,7 @@ public class ActivityStreamController {
 
 		model.setPageTitleData( commonBreadcrumbsService.getActivityStreamBreadcrumbs( activityType ) );
 
-		return VIEW; //PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ) ? VIEW_MOBILE : VIEW;
+		return VIEW;
 	}
 
 	private List<AbstractActivityStreamEntry> getActivities( final SqlSelectIdsResult idsResult ) {
