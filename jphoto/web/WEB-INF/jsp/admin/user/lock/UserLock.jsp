@@ -15,19 +15,59 @@
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
 	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
+
+	<style type="text/css">
+
+		.user-lock-area-header {
+			float:left;
+			width: 100%;
+			text-align: center;
+		}
+
+		.user-lock-area-tab {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+		}
+
+		.user-lock-area {
+			float: left;
+			width: 45%;
+			margin: 5px;
+		}
+	</style>
+
 </head>
 
 <body>
 
+<div class="user-lock-area-header">
+<div class="user-lock-area">
+		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
+
+		<div id="user-lock-area-form-id" >
+			<img src="/images/progress.gif" title="Please, wait...">
+		</div>
+
+	</div>
+
+	<div class="user-lock-area" style="float: right;">
+		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
+		<div id="user-lock-history-id" >
+			<img src="/images/progress.gif" title="Please, wait...">
+		</div>
+
+	</div>
+</div>
+
 <script type="text/javascript">
 
 	require( ['modules/admin/user/lock/user-lock'], function ( userLock ) {
-		userLock( ${userLockModel.userId}, "${baseUrl}" );
+		userLock( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history-id' ) );
 	} );
 
-	/*require( ['components/time-range/time-range'], function ( timeRange ) {
-		timeRange( $( '#user-lock-area-id' ) );
-	} );*/
+	require( ['components/time-range/time-range'], function ( timeRange ) {
+		timeRange( $( '#user-lock-area-form-id' ) );
+	} );
 
 </script>
 

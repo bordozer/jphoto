@@ -11,7 +11,6 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 		},
 
 		render:function () {
-//			console.log( this.$el );
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 		}
