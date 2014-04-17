@@ -9,6 +9,10 @@
 <c:set var="userId" value="${userLockModel.userId}" />
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
+<%
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -46,10 +50,6 @@
 
 <body>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
-
 <div class="user-lock-area-header">
 <div class="user-lock-area">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
@@ -69,12 +69,14 @@
 	</div>
 </div>
 
+<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
+
 <script type="text/javascript">
 
 	var jsonRPC;
 	jQuery().ready( function() {
 
-		jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
 		require( ['components/time-range/time-range'], function ( timeRange ) {
 			timeRange( ${userId}, jsonRPC.ajaxService, $( '#user-lock-area-form-id' ) );
