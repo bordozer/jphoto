@@ -6,25 +6,15 @@
 	}
 </style>
 
-<!--<script type="text/javascript">
-
-	jQuery().ready( function() {
-		setDefaultLockPeriodType( 1 );
-	});
-
-	function setDefaultLockPeriodType( lockType ) {
-		$( "input[name=lockPeriodType][value='" + lockType + "']" ).attr( 'checked', 'checked' );
-	}
-
-</script>-->
-
-<div>
-	<input type="radio" name="lockPeriodType" value="1" class="lock-period-type"> Time period
-	<input type="radio" name="lockPeriodType" value="2" class="lock-period-type"> For date range
+<div style="padding: 10px;">
+	<input type="radio" id="lockPeriodType_timePeriod" name="lockPeriodType" value="1" class="lock-period-type"> <label for="lockPeriodType_timePeriod">Time period</label>
+	<input type="radio" id="lockPeriodType_dateRange" name="lockPeriodType" value="2" class="lock-period-type"> <label for="lockPeriodType_dateRange">For date range</label>
 </div>
 
 <div id="range-div">
 
 </div>
+
+<input type="button" value="Lock this bastard">
 
 
