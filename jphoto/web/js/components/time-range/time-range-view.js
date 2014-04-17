@@ -75,7 +75,8 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		save: function() {
-			console.log( "TimePeriodView: save" );
+//			console.log( "TimePeriodView: save" );
+			this.model.save();
 		}
 
 	} );
@@ -91,7 +92,8 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		save: function() {
-			console.log( "DateRangeView: save" );
+//			console.log( "DateRangeView: save" );
+			this.model.save();
 		}
 	} );
 

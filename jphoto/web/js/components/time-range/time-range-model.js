@@ -7,6 +7,13 @@ define( ["backbone"], function ( Backbone ) {
 				timePeriod: 2
 				, timeUnit: 3
 			};
+		},
+
+		save: function() {
+			var userId = this.get( 'userId' );
+			var ajaxService = this.get( 'ajaxService' );
+
+			ajaxService.lockUser( userId, new Date(), new Date() );
 		}
 	 } );
 
@@ -17,6 +24,13 @@ define( ["backbone"], function ( Backbone ) {
 				dateFrom: 1111
 				, dateTo: 2222
 			};
+		},
+
+		save: function() {
+			var userId = this.get( 'userId' );
+			var ajaxService = this.get( 'ajaxService' );
+
+			ajaxService.lockUser( userId, new Date(), new Date() );
 		}
 	 } );
 

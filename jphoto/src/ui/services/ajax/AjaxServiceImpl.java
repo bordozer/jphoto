@@ -395,12 +395,14 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public void lockUser( final int userId, final Date timeFrom, final Date timeTo ) {
-		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+	public void lockUser( final int userId, final String timeFrom, final String timeTo ) {
+		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
 	}
 
 	@Override
-	public void lockPhoto( final int photoId, final Date timeFrom, final Date timeTo ) {
-		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
+	public void lockPhoto( final int photoId, final String timeFrom, final String timeTo ) {
+		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+//		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
 	}
 }

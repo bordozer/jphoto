@@ -33,7 +33,7 @@ public interface AjaxService {
 
 	boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId );
 
-	void lockUser( final int userId, final Date timeFrom, final Date timeTo );
+	void lockUser( final int userId, final String timeFrom, final String timeTo );
 
-	void lockPhoto( final int photoId, final Date timeFrom, final Date timeTo );
+	void lockPhoto( final int photoId, final String timeFrom, final String timeTo );
 }
