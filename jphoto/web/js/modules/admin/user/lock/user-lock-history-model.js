@@ -1,6 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var UserLockModel = Backbone.Model.extend( {
+	var UserLockHistoryModel = Backbone.Model.extend( {
 
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/json/admin/members/" + options.userId + "/lock/";
@@ -8,5 +8,5 @@ define( ["backbone"], function ( Backbone ) {
 
 	 } );
 
-	return {UserLockModel:UserLockModel};
+	return {UserLockHistoryModel:UserLockHistoryModel};
 } );

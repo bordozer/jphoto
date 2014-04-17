@@ -1,9 +1,9 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/admin/user/lock/templates/lockAreaTemplate.html"], function ( Backbone, $, _, userLockTemplate ) {
+		, "text!modules/admin/user/lock/templates/user-lock-history-template.html"], function ( Backbone, $, _, userLockTemplate ) {
 
 	'use strict';
 
-	var UserLockView = Backbone.View.extend( {
+	var UserLockHistoryView = Backbone.View.extend( {
 
 		template:_.template( userLockTemplate ),
 
@@ -18,5 +18,5 @@ define( ["backbone", "jquery", "underscore"
 
 	} );
 
-	return { UserLockView:UserLockView };
+	return { UserLockHistoryView:UserLockHistoryView };
 } );
