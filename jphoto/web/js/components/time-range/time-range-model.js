@@ -33,7 +33,7 @@ define( ["backbone"], function ( Backbone ) {
 			var millisecondsPerDay = 1000 * 60 * 60 * 24;
 			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / millisecondsPerDay );
 
-//			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
+			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
 
 			this.set( { timePeriod: timePeriod, timeUnit: 2 }, { "silent": true } );
 		},
@@ -42,9 +42,12 @@ define( ["backbone"], function ( Backbone ) {
 			var dateFrom = new Date();
 			var dateTo = new Date( dateFrom.getTime() + ( this.get( 'timePeriod' ) ) * 1000 * 60 * 60 * 24 );
 
-//			console.log( 'RECALCULATE: dateFrom: ', dateFrom, ' dateTo: ', dateTo, ' timePeriod: ' );
+			console.log( 'RECALCULATE: dateFrom: ', dateFrom, ' dateTo: ', dateTo, ' timePeriod: ' );
 
-			this.set( { dateFrom: dateFrom, dateTo: dateTo }, { "silent": true } );
+			var dateFromFormatted = dateFrom.format( 'yyyy-mm-dd' );
+			var dateToFormatted = dateTo.format( 'yyyy-mm-dd' );
+
+			this.set( { dateFrom: dateFrom, dateTo: dateTo, dateFromFormatted: dateFromFormatted, dateToFormatted: dateToFormatted }, { "silent": true } );
 		},
 
 		save: function() {
