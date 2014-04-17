@@ -1,11 +1,18 @@
+<table width="400">
+	<tr>
 
-Lock user for
+		<td width="30%">Lock user for</td>
 
-<input type="text" class="time-period-value" size="4" value="<%=timePeriod%>">
+		<td width="30">
+			<input type="text" class="time-period-value" size="4" value="<%=timePeriod%>">
+		</td>
 
-<select class="time-period-unit">
-	<!--<option value="1">minutes</option>-->
-	<option value="2">days</option>
-	<!--<option value="3">month</option>-->
-	<!--<option value="4">years</option>-->
-</select>
+		<td align="left">
+			<input type="radio" id="time-period-unit-hours" name="time-period-unit-radio" value="1" class="time-period-unit"> <label for="time-period-unit-hours">hours</label>
+			<br />
+			<input type="radio" id="time-period-unit-days" name="time-period-unit-radio" value="2" class="time-period-unit"> <label for="time-period-unit-days">days</label>
+		</td>
+
+	</tr>
+
+</table>

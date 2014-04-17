@@ -64,7 +64,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		seTimeUnit:function() {
-			$( ".time-period-unit option" ).removeAttr( 'selected' ).filter( "[value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', true );
+			$( "input[name='time-period-unit-radio'][value='" + this.model.get( 'timeUnit' ) + "']" ).attr( "checked", true );
 		},
 
 		onTimePeriodValueChange: function( evt ) {
