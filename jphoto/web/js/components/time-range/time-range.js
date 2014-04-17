@@ -4,8 +4,7 @@ define( ["components/time-range/time-range-model"
 
 	function init( container ) {
 
-//		console.log( 'container: ', container );
-		var range = $( '#range-div', container );
+//		var range = $( '#range-div', container );
 
 		var timePeriodModel = new Model.TimePeriodModel();
 		var timePeriodView = new View.TimePeriodView( { model: timePeriodModel, el: container } );

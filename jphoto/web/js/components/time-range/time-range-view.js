@@ -14,12 +14,11 @@ define( ["backbone", "jquery", "underscore"
 			"change .lock-period-type" : "onTogglePeriodType"
 		},
 
-		initialize: function(){
+		initialize: function() {
 			this.listenTo( this.model, "change", this.render );
 		},
 
 		render:function () {
-			console.log( 'render: ', this.model );
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 
@@ -43,27 +42,33 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( timePeriodTemplate ),
 
-		events: {
+		/*events: {
 			"ready" : "onReady"
-		},
+		},*/
 
 		initialize: function(){
-			this.listenTo( this.model, "sync", this.render );
+			this.listenTo( this.model, "change", this.render );
 		},
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			$( '#range-div', this.$el).html( this.template( modelJSON ) );
+			this.setTimePeriod();
+			this.seTimeUnit();
 		},
 
-		setDefaultTimeUnit:function() {
+		setTimePeriod:function() {
+			$( "input[name='time-range-value']" ).val( this.model.get( 'timePeriod' ) );
+		},
+
+		seTimeUnit:function() {
 			$( "input[name='time-range-unit-id'][value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', 'true' );
-		},
-
-		onReady:function ( evt ) {
-			evt.preventDefault();
-			this.setDefaultTimeUnit( evt.target.value );
 		}
+
+		/*onReady:function ( evt ) {
+			evt.preventDefault();
+			this.seTimeUnit( evt.target.value );
+		}*/
 	} );
 
 
