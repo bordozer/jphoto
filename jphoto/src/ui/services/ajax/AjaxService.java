@@ -3,6 +3,7 @@ package ui.services.ajax;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
 import ui.dtos.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AjaxService {
@@ -31,4 +32,8 @@ public interface AjaxService {
 	boolean isUserCanCommentPhotosAjax( final int userId );
 
 	boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId );
+
+	void lockUser( final int userId, final Date timeFrom, final Date timeTo );
+
+	void lockPhoto( final int photoId, final Date timeFrom, final Date timeTo );
 }

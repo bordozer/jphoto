@@ -2,12 +2,13 @@ package core.general.restriction;
 
 import core.enums.RestrictionType;
 import core.general.base.AbstractBaseEntity;
+import core.interfaces.Restrictable;
 
 import java.util.Date;
 
-public class EntryRestriction extends AbstractBaseEntity {
+public class EntryRestriction<T extends Restrictable> extends AbstractBaseEntity {
 
-	private final int entryId;
+	private final T entry;
 	private final RestrictionType restrictionType;
 
 	private Date restrictionTimeFrom;
@@ -16,13 +17,13 @@ public class EntryRestriction extends AbstractBaseEntity {
 	private String restrictionMessage;
 	private String restrictionRestrictionComment;
 
-	public EntryRestriction( final int entryId, final RestrictionType restrictionType ) {
-		this.entryId = entryId;
+	public EntryRestriction( final T entry, final RestrictionType restrictionType ) {
+		this.entry = entry;
 		this.restrictionType = restrictionType;
 	}
 
-	public int getEntryId() {
-		return entryId;
+	public T getEntry() {
+		return entry;
 	}
 
 	public RestrictionType getRestrictionType() {

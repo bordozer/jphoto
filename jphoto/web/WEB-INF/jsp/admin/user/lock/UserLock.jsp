@@ -45,7 +45,7 @@
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
 
 		<div id="user-lock-area-form-id" >
-			<img src="/images/progress.gif" title="Please, wait...">
+			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
 
 	</div>
@@ -53,7 +53,7 @@
 	<div class="user-lock-area" style="float: right;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
 		<div id="user-lock-history-id" >
-			<img src="/images/progress.gif" title="Please, wait...">
+			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
 
 	</div>

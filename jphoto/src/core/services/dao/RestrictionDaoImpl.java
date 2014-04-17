@@ -2,7 +2,7 @@ package core.services.dao;
 
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
-import core.services.utils.DateUtilsService;
+import core.interfaces.Restrictable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -30,7 +30,10 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	public static final Map<Integer, String> updatableFields = newLinkedHashMap();
 
 	@Autowired
-	private DateUtilsService dateUtilsService;
+	private UserDao userDao;
+
+	@Autowired
+	private PhotoDao photoDao;
 
 	static {
 		fields.put( 1, TABLE_RESTRICTION_COLUMN_ENTRY_ID );
@@ -73,15 +76,15 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	}
 
 	@Override
-	protected MapSqlParameterSource getParameters( final EntryRestriction entry ) {
+	protected MapSqlParameterSource getParameters( final EntryRestriction restriction ) {
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_ENTRY_ID, entry.getEntryId() );
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID, entry.getRestrictionType().getId() );
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM, entry.getRestrictionTimeFrom() );
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_TO, entry.getRestrictionTimeTo() );
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_MESSAGE, entry.getRestrictionMessage() );
-		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_COMMENT, entry.getRestrictionRestrictionComment() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_ENTRY_ID, restriction.getEntry().getId() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID, restriction.getRestrictionType().getId() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM, restriction.getRestrictionTimeFrom() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_TO, restriction.getRestrictionTimeTo() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_MESSAGE, restriction.getRestrictionMessage() );
+		paramSource.addValue( TABLE_RESTRICTION_COLUMN_RESTRICTION_COMMENT, restriction.getRestrictionRestrictionComment() );
 
 		return paramSource;
 	}
@@ -101,12 +104,10 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 		@Override
 		public EntryRestriction mapRow( final ResultSet rs, final int rowNum ) throws SQLException {
 
-			final int id = rs.getInt( BaseEntityDao.ENTITY_ID );
 			final int entryId = rs.getInt( TABLE_RESTRICTION_COLUMN_ENTRY_ID );
 			final RestrictionType restrictionType = RestrictionType.getById( rs.getInt( TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID ) );
 
-			final EntryRestriction result = new EntryRestriction( entryId, restrictionType );
-			result.setId( id );
+			final EntryRestriction<Restrictable> result = getRestrictionEntry( entryId, restrictionType );
 
 			result.setRestrictionTimeFrom( rs.getTimestamp( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM ) );
 			result.setRestrictionTimeTo( rs.getTimestamp( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_TO ) );
@@ -115,6 +116,20 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 			result.setRestrictionRestrictionComment( rs.getString( TABLE_RESTRICTION_COLUMN_RESTRICTION_COMMENT ) );
 
 			return result;
+		}
+
+		private EntryRestriction<Restrictable> getRestrictionEntry( final int entryId, final RestrictionType restrictionType ) {
+
+			switch ( restrictionType ) {
+				case USER_LOGIN:
+				case USER_COMMENTING:
+					return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
+				case USER_PHOTO_UPLOADING:
+				case PHOTO_BE_PHOTO_OF_THE_DAY:
+					return new EntryRestriction<>( photoDao.load( entryId ), restrictionType );
+			}
+
+			throw new IllegalArgumentException( String.format( "Illegal restrictionType: '%s'", restrictionType ) );
 		}
 	}
 }

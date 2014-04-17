@@ -6,12 +6,13 @@ import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
+import core.interfaces.Restrictable;
 import utils.StringUtilities;
 
 import java.io.File;
 import java.util.Date;
 
-public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable {
+public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable, Restrictable {
 
 	private String name;
 

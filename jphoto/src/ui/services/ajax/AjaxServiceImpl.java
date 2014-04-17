@@ -19,6 +19,7 @@ import core.services.entry.PrivateMessageService;
 import core.services.notification.NotificationService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -84,6 +85,9 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
+
+	@Autowired
+	private RestrictionService restrictionService;
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -388,5 +392,15 @@ public class AjaxServiceImpl implements AjaxService {
 	@Override
 	public boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId ) {
 		return favoritesService.isEntryInFavorites( userWhoIsAddingToFavorites, beingAddedEntryId, entryTypeId );
+	}
+
+	@Override
+	public void lockUser( final int userId, final Date timeFrom, final Date timeTo ) {
+		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+	}
+
+	@Override
+	public void lockPhoto( final int photoId, final Date timeFrom, final Date timeTo ) {
+		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
 	}
 }

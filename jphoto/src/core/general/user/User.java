@@ -7,6 +7,7 @@ import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
+import core.interfaces.Restrictable;
 import core.services.translator.Language;
 import utils.StringUtilities;
 
@@ -14,7 +15,7 @@ import java.util.Date;
 import java.util.Set;
 
 
-public class User extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable {
+public class User extends AbstractBaseEntity implements Nameable, Favoritable, Cacheable, PopupMenuAssignable, Restrictable {
 
 	private String login;
 	private String name;
