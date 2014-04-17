@@ -11,7 +11,15 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 		},
 
 		initialize: function(){
-			this.listenTo( this.model, "sync", this.render );
+			_.bindAll( this, 'render', 'afterRender' );
+			var _this = this;
+			this.render = _.wrap( this.render, function( render ) {
+				render();
+				_this.afterRender();
+				return _this;
+			});
+			_this.listenTo( this.model, "sync", this.render );
+//			this.listenTo( this.model, "sync", this.render );
 		},
 
 		render:function () {
@@ -19,8 +27,12 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 			this.$el.html( this.template( modelJSON ) );
 		},
 
+		afterRender: function () {
+			console.log( 'afterRender' );
+		},
+
 		togglePeriodType:function( value ) {
-			this.model.get( 'rangeModel' ).set( 'rangeType', value ); // TODO: pass rangeModel here
+//			this.model.get( 'rangeModel' ).set( 'rangeType', value ); // TODO: pass rangeModel here
 		},
 
 		onTogglePeriodType:function ( evt ) {

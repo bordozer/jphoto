@@ -27,10 +27,6 @@
 		$( "input[name=lockPeriodType][value='" + lockType + "']" ).attr( 'checked', 'checked' );
 	}
 
-</script>
-
-<script type="text/javascript">
-
 	require( ['components/time-range/time-range'], function ( timeRange ) {
 		timeRange( $( '#user-lock-area-id' ) );
 	} );
