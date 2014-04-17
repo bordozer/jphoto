@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 
-@RequestMapping( "admin/members/{userId}/lock" )
+@RequestMapping( "admin/members/{userId}/lock/history" )
 @Controller
-public class UserLockController {
+public class UserLockHistoryController {
 
 	@Autowired
 	private UserService userService;

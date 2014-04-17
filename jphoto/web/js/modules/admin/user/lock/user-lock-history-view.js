@@ -18,5 +18,9 @@ define( ["backbone", "jquery", "underscore"
 
 	} );
 
+	var UserLockHistoryEntryView = Backbone.View.extend( {
+
+	});
+
 	return { UserLockHistoryView:UserLockHistoryView };
 } );

@@ -51,7 +51,7 @@
 	<div style="float: left; width: 300px; margin-right: 15px;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
 
-		<div id="user-lock-area-form-id" >
+		<div id="user-lock-form" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
 
@@ -59,7 +59,7 @@
 
 	<div style="float: right; width: 400px;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
-		<div id="user-lock-history-id" >
+		<div id="user-lock-history" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
 
@@ -77,11 +77,11 @@
 		jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
 		require( ['components/time-range/time-range'], function ( timeRange ) {
-			timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-area-form-id' ) );
+			timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-form' ) );
 		} );
 
 		require( ['modules/admin/user/lock/user-lock-history'], function ( userLock ) {
-			userLock( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history-id' ) );
+			userLock( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
 		} );
 
 	});
