@@ -595,12 +595,12 @@ CREATE TABLE `usersRanksByGenres` (
   `rank` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
+  UNIQUE KEY `fk_usersRanksByGenres_userId_genreid` (`userId`,`genreId`),
   KEY `fk_usersRanksByGenres_userId_users_id` (`userId`),
   KEY `fk_usersRanksByGenres_genreId_genres_id` (`genreId`),
-  KEY `idx_userId_genreId` (`userId`,`genreId`),
   CONSTRAINT `fk_usersRanksByGenres_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_usersRanksByGenres_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1305 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2027 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `usersRanksByGenresVoting` table :

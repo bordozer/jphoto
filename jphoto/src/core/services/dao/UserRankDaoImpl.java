@@ -100,15 +100,27 @@ public class UserRankDaoImpl extends BaseDaoImpl implements UserRankDao {
 
 	@Override
 	public boolean saveUserRankForGenre( final int userId, final int genreId, final int rank ) {
-		final String sql;
-		if ( ! doesUsersRanksByGenresRecordExist( userId, genreId ) ) {
-			sql = String.format( "INSERT INTO %s ( %s, %s, %s ) VALUES( :userId, :genreId, :rank );"
+
+		final String updateSql = String.format( "UPDATE %1$s SET %4$s = :rank WHERE %2$s = :userId AND %3$s = :genreId;"
 				, TABLE_USERS_RANKS_BY_GENRES, TABLE_URBG_COLUMN_USER_ID, TABLE_URBG_COLUMN_GENRE_ID, TABLE_URBG_COLUMN_USER_RANK_WHEN_VOTING );
-		} else {
-			sql = String.format( "UPDATE %1$s SET %4$s = :rank WHERE %2$s = :userId AND %3$s = :genreId;"
-				, TABLE_USERS_RANKS_BY_GENRES, TABLE_URBG_COLUMN_USER_ID, TABLE_URBG_COLUMN_GENRE_ID, TABLE_URBG_COLUMN_USER_RANK_WHEN_VOTING );
+
+		if ( doesUsersRanksByGenresRecordExist( userId, genreId ) ) {
+			return doSelect( userId, genreId, rank, updateSql );
 		}
 
+		synchronized ( this ) {
+			if ( doesUsersRanksByGenresRecordExist( userId, genreId ) ) {
+				return doSelect( userId, genreId, rank, updateSql );
+			}
+
+			final String insertSql = String.format( "INSERT INTO %s ( %s, %s, %s ) VALUES( :userId, :genreId, :rank );"
+				, TABLE_USERS_RANKS_BY_GENRES, TABLE_URBG_COLUMN_USER_ID, TABLE_URBG_COLUMN_GENRE_ID, TABLE_URBG_COLUMN_USER_RANK_WHEN_VOTING );
+
+			return doSelect( userId, genreId, rank, insertSql );
+		}
+	}
+
+	private boolean doSelect( final int userId, final int genreId, final int rank, final String sql ) {
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
 		paramSource.addValue( "genreId", genreId );
