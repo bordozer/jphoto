@@ -69,12 +69,12 @@ define( ["backbone", "jquery", "underscore"
 
 		onTimePeriodValueChange: function( evt ) {
 			evt.preventDefault();
-			console.log( 'onTimePeriodChange' );
+			this.model.set( { timePeriod: evt.target.value } );
 		},
 
 		onTimePeriodUnitChange: function( evt ) {
 			evt.preventDefault();
-			console.log( 'onTimePeriodUnitChange' );
+			this.model.set( { timeUnit: $( ".time-period-unit" ).val() } );
 		},
 
 		save: function() {
@@ -101,12 +101,12 @@ define( ["backbone", "jquery", "underscore"
 
 		onDateRangeFromValueChange: function( evt ) {
 			evt.preventDefault();
-			console.log( 'onDateRangeFromValueChange' );
+			this.model.set( { dateFrom: evt.target.value } );
 		},
 
 		onDateRangeToValueChange: function( evt ) {
 			evt.preventDefault();
-			console.log( 'onDateRangeToValueChange' );
+			this.model.set( { dateTo: evt.target.value } );
 		},
 
 		save: function() {
