@@ -4,10 +4,13 @@ define( ["modules/admin/user/lock/user-lock-history-model"
 
 	function init( userId, baseUrl, container ) {
 
-		var model = new Model.UserLockHistoryModel( {userId:userId, baseUrl:baseUrl} );
-		model.fetch( {cache: false} );
+		var userLockHistoryModel = new Model.UserLockHistoryModel( {userId:userId, baseUrl:baseUrl} );
+//		userLockHistoryModel.fetch( {cache: false} );
 
-		var view = new UserLockHistoryView.UserLockHistoryView( { model: model, el: container } );
+		var userLockHistoryView = new UserLockHistoryView.UserLockHistoryView( { model: userLockHistoryModel, el: container } );
+
+//		var userLockHistoryEntryModel = new Model.UserLockHistoryEntryModel();
+//		var userLockHistoryEntryView = new UserLockHistoryView.UserLockHistoryEntryView( { model: userLockHistoryEntryModel, el: container } );
 	}
 
 	return init;

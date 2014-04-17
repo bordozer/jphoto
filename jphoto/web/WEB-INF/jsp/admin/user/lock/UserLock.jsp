@@ -80,8 +80,8 @@
 			timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-form' ) );
 		} );
 
-		require( ['modules/admin/user/lock/user-lock-history'], function ( userLock ) {
-			userLock( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
+		require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
+			userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
 		} );
 
 	});

@@ -4,7 +4,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	});
 
-	var UserLockHistoryModel = Backbone.Model.extend( {
+	var UserLockHistoryModel = Backbone.Collection.extend( {
 
 		model: UserLockHistoryEntryModel,
 

@@ -1,4 +1,7 @@
-define( ["backbone", "jquery", "underscore", "text!users/card/genreRankVoting/votingArea/templates/icons.html", "text!users/card/genreRankVoting/votingArea/templates/votes.html", "text!users/card/genreRankVoting/votingArea/templates/canNotVote.html"], function ( Backbone, $, _, iconsTemplate, votesTemplate, canNotVoteTemplate ) {
+define( ["backbone", "jquery", "underscore"
+			, "text!users/card/genreRankVoting/votingArea/templates/icons.html"
+			, "text!users/card/genreRankVoting/votingArea/templates/votes.html"
+			, "text!users/card/genreRankVoting/votingArea/templates/canNotVote.html"], function ( Backbone, $, _, iconsTemplate, votesTemplate, canNotVoteTemplate ) {
 
 	var VotingAreaView = Backbone.View.extend( {
 												   iconsTemplate:_.template( iconsTemplate ),
