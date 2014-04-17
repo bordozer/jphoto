@@ -1,4 +1,5 @@
-define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templates/lockAreaTemplate.html"], function ( Backbone, $, _, userLockTemplate ) {
+define( ["backbone", "jquery", "underscore"
+		, "text!modules/admin/user/lock/templates/lockAreaTemplate.html"], function ( Backbone, $, _, userLockTemplate ) {
 
 	'use strict';
 

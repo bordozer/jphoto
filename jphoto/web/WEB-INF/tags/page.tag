@@ -125,8 +125,8 @@
 
 			$( function () {
 				$( "#${lockUserDivId}" ).dialog( {
-												height:300
-												, width:600
+												height:500
+												, width:800
 												, modal:true
 												, autoOpen:false
 											 } );
@@ -142,11 +142,11 @@
 						.dialog( 'option', 'buttons', {
 														Cancel:function () {
 															$( this ).dialog( "close" );
-														},
+														}/*,
 														"${eco:translate('Lock')}": function() {
 
 															$( this ).dialog( "close" );
-														}
+														}*/
 													} )
 						.dialog( "open" );
 			}

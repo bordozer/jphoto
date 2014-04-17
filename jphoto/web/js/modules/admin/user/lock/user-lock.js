@@ -1,6 +1,6 @@
 define( ["modules/admin/user/lock/user-lock-model"
-		 	, "modules/admin/user/lock/user-lock-view"
-			, "jquery"], function ( Model, UserLockView, $ ) {
+		, "modules/admin/user/lock/user-lock-view"
+		, "jquery"], function ( Model, UserLockView, $ ) {
 
 	function init( userId, baseUrl, container ) {
 

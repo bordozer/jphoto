@@ -6,8 +6,9 @@
 	}
 </style>
 
-<div style="padding: 10px;">
+<div style="padding: 10px; text-align: left;">
 	<input type="radio" id="lockPeriodType_timePeriod" name="lockPeriodType" value="1" class="lock-period-type"> <label for="lockPeriodType_timePeriod">Time period</label>
+	<br />
 	<input type="radio" id="lockPeriodType_dateRange" name="lockPeriodType" value="2" class="lock-period-type"> <label for="lockPeriodType_dateRange">For date range</label>
 </div>
 
@@ -15,6 +16,6 @@
 
 </div>
 
-<input type="button" class="lock-user-button" value="Lock this bastard">
+<input type="button" class="lock-user-button" value="Lock <%=userName%>">
 
 

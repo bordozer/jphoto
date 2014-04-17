@@ -2,16 +2,11 @@ define( ["backbone"], function ( Backbone ) {
 
 	var RangeModel = Backbone.Model.extend( {
 
-//		this.dateFrom   = new Date();
-//		this.dateTo = new Date();
-
 		initialize: function() {
 			this.listenTo( this, "change", this.recalculate );
 			this.recalculateDateRange();
 		},
 
-//		dateFromFormatted: dateFrom.format( 'yyyy-mm-dd' )
-//		, dateToFormatted: dateTo.format( 'yyyy-mm-dd' )
 		defaultOffset: function() {
 			return 3;
 		},

@@ -40,11 +40,6 @@
 			border-top-right-radius: 5px;
 		}
 
-		.user-lock-area {
-			float: left;
-			width: 45%;
-			margin: 5px;
-		}
 	</style>
 
 </head>
@@ -52,7 +47,8 @@
 <body>
 
 <div class="user-lock-area-header">
-<div class="user-lock-area">
+
+	<div style="float: left; width: 300px; margin-right: 15px;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
 
 		<div id="user-lock-area-form-id" >
@@ -61,13 +57,14 @@
 
 	</div>
 
-	<div class="user-lock-area" style="float: right;">
+	<div style="float: right; width: 400px;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
 		<div id="user-lock-history-id" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
 
 	</div>
+
 </div>
 
 <script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
@@ -80,7 +77,7 @@
 		jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
 		require( ['components/time-range/time-range'], function ( timeRange ) {
-			timeRange( ${userId}, jsonRPC.ajaxService, $( '#user-lock-area-form-id' ) );
+			timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-area-form-id' ) );
 		} );
 
 		require( ['modules/admin/user/lock/user-lock'], function ( userLock ) {
