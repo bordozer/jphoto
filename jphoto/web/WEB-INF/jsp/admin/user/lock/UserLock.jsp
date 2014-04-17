@@ -25,6 +25,10 @@
 		userLock( ${userLockModel.userId}, "${baseUrl}" );
 	} );
 
+	/*require( ['components/time-range/time-range'], function ( timeRange ) {
+		timeRange( $( '#user-lock-area-id' ) );
+	} );*/
+
 </script>
 
 </body>

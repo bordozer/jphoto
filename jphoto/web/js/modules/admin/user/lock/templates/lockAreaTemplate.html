@@ -24,34 +24,35 @@
 	});
 </script>-->
 
+<script type="text/javascript">
+
+	require( ['components/time-range/time-range'], function ( timeRange ) {
+		timeRange( $( '#user-lock-area-id' ) );
+	} );
+
+</script>
+
 <div class="user-lock-area-header">
 
 	<div class="user-lock-area">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user now</div>
 
-		<input type="radio" name="lockPeriodType" value="1" class="lock-period-type"> Time period
-		<input type="radio" name="lockPeriodType" value="2" class="lock-period-type"> For date range
-
-		<div id="lockPeriodType_TimePeriod" style="display: none">
-			Lock user for
-			<input type="text" id="timePeriod_Period" size="4">
-			<select id="">
-				<option value="1">minutes</option>
-				<option value="2">days</option>
-				<option value="3">month</option>
-				<option value="4">years</option>
-			</select>
+		<div id="user-lock-area-type-id" style="padding: 20px;" >
+			<input type="radio" name="lockPeriodType" value="1" class="lock-period-type"> Time period
+			<input type="radio" name="lockPeriodType" value="2" class="lock-period-type"> For date range
 		</div>
 
-		<div id="lockPeriodType_DateRange" style="display: none">
-			Till the end of the day:
+		<div id="user-lock-area-id" >
+			<img src="/images/progress.gif" title="Wait, please...">
 		</div>
 
 	</div>
 
 	<div class="user-lock-area" style="float: right;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
-
+		<div id="user-lock-history-id" >
+			<img src="/images/progress.gif" title="Wait, please...">
+		</div>
 
 	</div>
 

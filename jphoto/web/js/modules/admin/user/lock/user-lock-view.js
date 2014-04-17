@@ -14,15 +14,16 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 			this.listenTo( this.model, "sync", this.render );
 
 			$( "input[name=lockPeriodType][value='1']" ).attr( 'checked', 'checked' );
-			this.togglePeriodType( 1 ); // TODO: read from model
+//			this.togglePeriodType( 1 ); // TODO: read from model
 		},
 
 		render:function () {
+			console.log( 'UserLockView rendering' );
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 		},
 
-		togglePeriodType:function( value ) {
+		/*togglePeriodType:function( value ) {
 //			$( "input[name=lockPeriodType][value=" + value + "]" ).attr( 'checked', 'checked' );
 			if ( value == 1 ) {
 				$( "#lockPeriodType_DateRange" ).hide();
@@ -31,11 +32,12 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 				$( "#lockPeriodType_TimePeriod" ).hide();
 				$( "#lockPeriodType_DateRange" ).show();
 			}
-		},
+		},*/
 
 		onTogglePeriodType:function ( evt ) {
 			evt.preventDefault();
-			this.togglePeriodType( evt.target.value );
+//			console.log( 'onTogglePeriodType' );
+//			this.togglePeriodType( evt.target.value );
 		}
 	} );
 
