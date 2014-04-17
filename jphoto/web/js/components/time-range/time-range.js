@@ -2,9 +2,7 @@ define( ["components/time-range/time-range-model"
 		 	, "components/time-range/time-range-view"
 			, "jquery"], function ( Model, View, $ ) {
 
-	function init( container ) {
-
-//		var range = $( '#range-div', container );
+	function init( userId, ajaxService, container ) {
 
 		var timePeriodModel = new Model.TimePeriodModel();
 		var timePeriodView = new View.TimePeriodView( { model: timePeriodModel, el: container } );
@@ -13,6 +11,8 @@ define( ["components/time-range/time-range-model"
 		var dateRangeView = new View.DateRangeView( { model: dateRangeModel, el: container } );
 
 		var rangeModel = new Model.RangeModel();
+		rangeModel.set( "userId", userId );
+		rangeModel.set( "ajaxService", ajaxService );
 		rangeModel.set( "timePeriodView", timePeriodView );
 		rangeModel.set( "dateRangeView", dateRangeView );
 
