@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -65,10 +66,10 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	}
 
 	@Override
-	public boolean isRestrictedNow( final int entryId, final RestrictionType restrictionType ) {
+	public boolean isRestrictedNow( final int entryId, final RestrictionType restrictionType, final Date time ) {
 		final List<EntryRestriction> restrictions = loadRestrictions( entryId, restrictionType );
 
-		return restrictions != null && restrictions.get( restrictions.size() - 1 ).getRestrictionTimeTo().getTime() >= dateUtilsService.getCurrentTime().getTime();
+		return restrictions != null && restrictions.get( restrictions.size() - 1 ).getRestrictionTimeTo().getTime() >= time.getTime();
 	}
 
 	@Override

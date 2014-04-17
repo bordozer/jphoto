@@ -50,6 +50,8 @@
 
 	<bean id="mailService" class="core.services.mail.MailServiceImpl"/>
 
+	<bean id="restrictionService" class="core.services.security.RestrictionServiceImpl"/>
+
 	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
 		<property name="resourceLoaderPath" value="/WEB-INF/velocity/"/>
 		<property name="velocityProperties">
