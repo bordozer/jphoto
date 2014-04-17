@@ -1,21 +1,9 @@
 
-<!--<script type="text/javascript">
-
-	jQuery().ready( function() {
-		setiodType( <%=timeUnit%> );
-	});
-
-	function setDefaultLockPeriodType( lockType ) {
-		$( "input[name=lockPeriodType][value='" + lockType + "']" ).attr( 'checked', 'checked' );
-	}
-
-</script>-->
-
 Lock user for
 
-<input type="text" id="time-range-value" size="4" value="<%=timePeriod%>">
+<input type="text" class="time-period-value" size="4" value="<%=timePeriod%>">
 
-<select id="time-range-unit-id">
+<select class="time-period-unit">
 	<option value="1">minutes</option>
 	<option value="2">days</option>
 	<option value="3">month</option>

@@ -23,10 +23,7 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 
-			var rangeType = this.model.get( 'rangeType' );
-			console.log( rangeType );
-
-			$( "input[name='lockPeriodType'][value='" + rangeType + "']" ).attr( "checked", true );
+			$( "input[name='lockPeriodType'][value='" + this.model.get( 'rangeType' ) + "']" ).attr( "checked", true );
 
 			this.$el.append( this.getView().render() );
 		},
@@ -55,27 +52,32 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( timePeriodTemplate ),
 
-		initialize: function(){
-			this.listenTo( this.model, "change", this.render );
+		events: {
+			"change .time-period-value" : "onTimePeriodValueChange"
+			, "change .time-period-unit" : "onTimePeriodUnitChange"
 		},
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			$( '#range-div', this.$el).html( this.template( modelJSON ) );
-			this.setTimePeriod();
 			this.seTimeUnit();
 		},
 
-		setTimePeriod:function() {
-			$( "input[name='time-range-value']" ).val( this.model.get( 'timePeriod' ) );
+		seTimeUnit:function() {
+			$( ".time-period-unit option" ).removeAttr( 'selected' ).filter( "[value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', true );
 		},
 
-		seTimeUnit:function() {
-			$( "#time-range-unit-id option" ).removeAttr( 'selected' ).filter( "[value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', true );
+		onTimePeriodValueChange: function( evt ) {
+			evt.preventDefault();
+			console.log( 'onTimePeriodChange' );
+		},
+
+		onTimePeriodUnitChange: function( evt ) {
+			evt.preventDefault();
+			console.log( 'onTimePeriodUnitChange' );
 		},
 
 		save: function() {
-//			console.log( "TimePeriodView: save" );
 			this.model.save();
 		}
 
@@ -84,11 +86,27 @@ define( ["backbone", "jquery", "underscore"
 
 
 	var DateRangeView = Backbone.View.extend( {
+
 		template:_.template( dateRangeTemplate ),
+
+		events: {
+			"change .date-range-date-from" : "onDateRangeFromValueChange"
+			, "change .date-range-date-to" : "onDateRangeToValueChange"
+		},
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			$( '#range-div', this.$el).html( this.template( modelJSON ) );
+		},
+
+		onDateRangeFromValueChange: function( evt ) {
+			evt.preventDefault();
+			console.log( 'onDateRangeFromValueChange' );
+		},
+
+		onDateRangeToValueChange: function( evt ) {
+			evt.preventDefault();
+			console.log( 'onDateRangeToValueChange' );
 		},
 
 		save: function() {

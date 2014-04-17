@@ -4,17 +4,13 @@ define( ["components/time-range/time-range-model"
 
 	function init( userId, ajaxService, container ) {
 
-		var timePeriodModel = new Model.TimePeriodModel();
-		timePeriodModel.set( "userId", userId );
-		timePeriodModel.set( "ajaxService", ajaxService );
-		var timePeriodView = new View.TimePeriodView( { model: timePeriodModel, el: container } );
-
-		var dateRangeModel = new Model.DateRangeModel();
-		dateRangeModel.set( "userId", userId );
-		dateRangeModel.set( "ajaxService", ajaxService );
-		var dateRangeView = new View.DateRangeView( { model: dateRangeModel, el: container } );
-
 		var rangeModel = new Model.RangeModel();
+
+		var timePeriodView = new View.TimePeriodView( { model: rangeModel, el: container } );
+		var dateRangeView = new View.DateRangeView( { model: rangeModel, el: container } );
+
+		rangeModel.set( "userId", userId );
+		rangeModel.set( "ajaxService", ajaxService );
 		rangeModel.set( "timePeriodView", timePeriodView );
 		rangeModel.set( "dateRangeView", dateRangeView );
 
