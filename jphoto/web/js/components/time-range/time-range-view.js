@@ -1,7 +1,7 @@
 define( ["backbone", "jquery", "underscore"
-	        , "text!components/time-range/templates/rangeTemplate.html"
-	        , "text!components/time-range/templates/timePeriodTemplate.html"
-	        , "text!components/time-range/templates/dateRangeTemplate.html"]
+		, "text!components/time-range/templates/rangeTemplate.html"
+		, "text!components/time-range/templates/timePeriodTemplate.html"
+		, "text!components/time-range/templates/dateRangeTemplate.html"]
 		, function ( Backbone, $, _, rangeTemplate, timePeriodTemplate, dateRangeTemplate ) {
 
 	'use strict';

@@ -13,6 +13,7 @@ import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.log.LogHelper;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.FavoritesService;
 import core.services.entry.PrivateMessageService;
@@ -88,6 +89,8 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Autowired
 	private RestrictionService restrictionService;
+
+	private final LogHelper log = new LogHelper( AjaxServiceImpl.class );
 
 	@Override
 	public AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO ) {
@@ -396,13 +399,15 @@ public class AjaxServiceImpl implements AjaxService {
 
 	@Override
 	public void lockUser( final int userId, final String timeFrom, final String timeTo ) {
-		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
 		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
 	}
 
 	@Override
 	public void lockPhoto( final int photoId, final String timeFrom, final String timeTo ) {
-		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
 //		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
+		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, timeFrom, timeTo ) );
 	}
 }
