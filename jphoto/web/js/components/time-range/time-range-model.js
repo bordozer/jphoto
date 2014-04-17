@@ -10,8 +10,8 @@ define( ["backbone"], function ( Backbone ) {
 			return {
 				rangeType: 1
 
-				, timePeriod: 2
-				, timeUnit: 3
+				, timePeriod: 1
+				, timeUnit: 2
 
 				, dateFrom: '2014-04-01'
 				, dateTo: '2014-04-21'
@@ -27,11 +27,24 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		recalculateTimePeriod: function() {
-			console.log( 'recalculateTimePeriod: ', this );
+			var dateFrom = new Date( this.get( 'dateFrom' ) );
+			var dateTo = new Date( this.get( 'dateTo' ) );
+
+			var millisecondsPerDay = 1000 * 60 * 60 * 24;
+			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / millisecondsPerDay );
+
+//			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
+
+			this.set( { timePeriod: timePeriod, timeUnit: 2 }, { "silent": true } );
 		},
 
 		recalculateDateRange: function() {
-			console.log( 'recalculateDateRange: ', this );
+			var dateFrom = new Date();
+			var dateTo = new Date( dateFrom.getTime() + ( this.get( 'timePeriod' ) ) * 1000 * 60 * 60 * 24 );
+
+//			console.log( 'RECALCULATE: dateFrom: ', dateFrom, ' dateTo: ', dateTo, ' timePeriod: ' );
+
+			this.set( { dateFrom: dateFrom, dateTo: dateTo }, { "silent": true } );
 		},
 
 		save: function() {
@@ -40,6 +53,7 @@ define( ["backbone"], function ( Backbone ) {
 
 			ajaxService.lockUser( userId, new Date(), new Date() );
 		}
+
 	 } );
 
 	return { RangeModel:RangeModel };
