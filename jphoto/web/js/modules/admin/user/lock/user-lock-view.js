@@ -12,32 +12,23 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 
 		initialize: function(){
 			this.listenTo( this.model, "sync", this.render );
-
-			$( "input[name=lockPeriodType][value='1']" ).attr( 'checked', 'checked' );
-//			this.togglePeriodType( 1 ); // TODO: read from model
 		},
 
 		render:function () {
-			console.log( 'UserLockView rendering' );
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
+
+			this.togglePeriodType( 1 ); // TODO: read from model
 		},
 
-		/*togglePeriodType:function( value ) {
-//			$( "input[name=lockPeriodType][value=" + value + "]" ).attr( 'checked', 'checked' );
-			if ( value == 1 ) {
-				$( "#lockPeriodType_DateRange" ).hide();
-				$( "#lockPeriodType_TimePeriod" ).show();
-			} else {
-				$( "#lockPeriodType_TimePeriod" ).hide();
-				$( "#lockPeriodType_DateRange" ).show();
-			}
-		},*/
+		togglePeriodType:function( value ) {
+			$( "input[name=lockPeriodType][value='" + value + "']" ).attr( 'checked', 'checked' );
+			this.model.get( 'rangeModel' ).set( 'rangeType', value ); // TODO: pass rangeModel here
+		},
 
 		onTogglePeriodType:function ( evt ) {
 			evt.preventDefault();
-//			console.log( 'onTogglePeriodType' );
-//			this.togglePeriodType( evt.target.value );
+			this.togglePeriodType( evt.target.value );
 		}
 	} );
 

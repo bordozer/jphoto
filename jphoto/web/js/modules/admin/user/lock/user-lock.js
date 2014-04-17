@@ -5,7 +5,7 @@ define( ["modules/admin/user/lock/user-lock-model"
 	function init( userId, baseUrl ) {
 
 		var model = new Model.UserLockModel( {userId:userId, baseUrl:baseUrl} );
-		model.fetch( {cache:false} );
+		model.fetch( {cache: false} );
 
 		var view = new UserLockView.UserLockView( { model: model, el: $( "body" ) } );
 	}

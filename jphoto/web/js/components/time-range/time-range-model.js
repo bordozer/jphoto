@@ -27,9 +27,6 @@ define( ["backbone"], function ( Backbone ) {
 				rangeType: 1
 			};
 		}
-
-//		, timePeriodModel: TimePeriodModel
-//		, dateRangeModel: DateRangeModel
 	 } );
 
 	return { RangeModel:RangeModel, TimePeriodModel:TimePeriodModel, DateRangeModel:DateRangeModel };
