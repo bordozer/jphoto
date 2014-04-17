@@ -2,19 +2,30 @@ define( ["backbone"], function ( Backbone ) {
 
 	var RangeModel = Backbone.Model.extend( {
 
+//		this.dateFrom   = new Date();
+//		this.dateTo = new Date();
+
 		initialize: function() {
 			this.listenTo( this, "change", this.recalculate );
+			this.recalculateDateRange();
+		},
+
+//		dateFromFormatted: dateFrom.format( 'yyyy-mm-dd' )
+//		, dateToFormatted: dateTo.format( 'yyyy-mm-dd' )
+		defaultOffset: function() {
+			return 3;
 		},
 
 		defaults: function() {
+
 			return {
 				rangeType: 1
 
-				, timePeriod: 6
-				, timeUnit: 2
+				, timePeriod: this.defaultOffset()
+				, timeUnit: 2 /* 1 is HOURS, 2 is DAYS */
 
-				, dateFrom: '2014-04-01'
-				, dateTo: '2014-04-21'
+				, dateFrom: new Date()
+				, dateTo: new Date( new Date().getTime() + this.defaultOffset() * 1000 * 60 * 60 * 24 )
 			};
 		},
 
@@ -31,6 +42,8 @@ define( ["backbone"], function ( Backbone ) {
 			var dateTo = new Date( this.get( 'dateTo' ) );
 
 			var millisecondsPerDay = 1000 * 60 * 60 * 24;
+			/*if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {
+			}*/
 			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / millisecondsPerDay );
 
 //			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
