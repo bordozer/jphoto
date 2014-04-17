@@ -40,7 +40,12 @@ define( ["backbone", "jquery", "underscore"
 
 
 	var TimePeriodView = Backbone.View.extend( {
+
 		template:_.template( timePeriodTemplate ),
+
+		events: {
+			"ready" : "onReady"
+		},
 
 		initialize: function(){
 			this.listenTo( this.model, "sync", this.render );
@@ -49,6 +54,15 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			$( '#range-div', this.$el).html( this.template( modelJSON ) );
+		},
+
+		setDefaultTimeUnit:function() {
+			$( "input[name='time-range-unit-id'][value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', 'true' );
+		},
+
+		onReady:function ( evt ) {
+			evt.preventDefault();
+			this.setDefaultTimeUnit( evt.target.value );
 		}
 	} );
 
