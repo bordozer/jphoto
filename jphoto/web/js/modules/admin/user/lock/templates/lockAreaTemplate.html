@@ -19,16 +19,9 @@
 </style>
 
 <script type="text/javascript">
-	jQuery().ready( function() {
-		setDefaultLockPeriodType( 1 );
-	});
-
-	function setDefaultLockPeriodType( lockType ) {
-		$( "input[name=lockPeriodType][value='" + lockType + "']" ).attr( 'checked', 'checked' );
-	}
 
 	require( ['components/time-range/time-range'], function ( timeRange ) {
-		timeRange( $( '#user-lock-area-id' ) );
+		timeRange( $( '#user-lock-area-form-id' ) );
 	} );
 
 </script>
@@ -38,13 +31,8 @@
 	<div class="user-lock-area">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
 
-		<div id="user-lock-area-type-id" style="padding: 20px;" >
-			<input type="radio" name="lockPeriodType" value="1" class="lock-period-type"> Time period
-			<input type="radio" name="lockPeriodType" value="2" class="lock-period-type"> For date range
-		</div>
-
-		<div id="user-lock-area-id" >
-			<img src="/images/progress.gif" title="Wait, please...">
+		<div id="user-lock-area-form-id" >
+			<img src="/images/progress.gif" title="Please, wait...">
 		</div>
 
 	</div>
@@ -52,7 +40,7 @@
 	<div class="user-lock-area" style="float: right;">
 		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
 		<div id="user-lock-history-id" >
-			<img src="/images/progress.gif" title="Wait, please...">
+			<img src="/images/progress.gif" title="Please, wait...">
 		</div>
 
 	</div>

@@ -4,6 +4,9 @@ define( ["components/time-range/time-range-model"
 
 	function init( container ) {
 
+//		console.log( 'container: ', container );
+		var range = $( '#range-div', container );
+
 		var timePeriodModel = new Model.TimePeriodModel();
 		var timePeriodView = new View.TimePeriodView( { model: timePeriodModel, el: container } );
 
@@ -14,7 +17,7 @@ define( ["components/time-range/time-range-model"
 		rangeModel.set( "timePeriodView", timePeriodView );
 		rangeModel.set( "dateRangeView", dateRangeView );
 
-		var rangeView = new View.RangeView( {model: rangeModel, el: container} );
+		var rangeView = new View.RangeView( { model: rangeModel, el: container } );
 		rangeView.render();
 	}
 
