@@ -4,8 +4,8 @@ define( ["backbone"], function ( Backbone ) {
 
 		defaults: function() {
 			return {
-				timePeriod: 1
-				, timeUnit: 2
+				timePeriod: 2
+				, timeUnit: 3
 			};
 		}
 	 } );

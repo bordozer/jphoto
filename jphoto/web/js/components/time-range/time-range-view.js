@@ -42,10 +42,6 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( timePeriodTemplate ),
 
-		/*events: {
-			"ready" : "onReady"
-		},*/
-
 		initialize: function(){
 			this.listenTo( this.model, "change", this.render );
 		},
@@ -62,13 +58,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		seTimeUnit:function() {
-			$( "input[name='time-range-unit-id'][value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', 'true' );
+			$( "#time-range-unit-id option" ).removeAttr( 'selected' ).filter( "[value='" + this.model.get( 'timeUnit' ) + "']" ).attr( 'selected', true );
 		}
 
-		/*onReady:function ( evt ) {
-			evt.preventDefault();
-			this.seTimeUnit( evt.target.value );
-		}*/
 	} );
 
 
