@@ -4,7 +4,7 @@
 
 var require = {
 
-	baseUrl: '${eco:baseUrl()}/common/js',
+	baseUrl: '${eco:baseUrl()}/js',
 
 	paths: {
 		jquery: "lib/jquery/jquery-1.7.2"

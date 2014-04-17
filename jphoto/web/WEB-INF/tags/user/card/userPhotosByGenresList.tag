@@ -107,5 +107,5 @@
 		var userId_card = ${user.id};
 	</script>
 
-	<%--<script data-main="${eco:baseUrl()}/common/js/modules/users/card/genreRankVoting/votingArea/require-config-genreRank.js" src="${eco:baseUrl()}/common/js/lib/front-end/require.js"></script>--%>
+	<%--<script data-main="${eco:baseUrl()}/js/modules/users/card/genreRankVoting/votingArea/require-config-genreRank.js" src="${eco:baseUrl()}/js/lib/front-end/require.js"></script>--%>
 </div>

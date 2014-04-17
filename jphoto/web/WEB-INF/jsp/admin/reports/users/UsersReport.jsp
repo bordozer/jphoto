@@ -7,9 +7,9 @@
 
 <tags:page pageModel="${userReportModel.pageModel}">
 
-	<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/jQuery-Visualize-master/js/visualize.jQuery.js"></script>
-	<link rel="stylesheet" href="${eco:baseUrl()}/common/js/lib/jQuery-Visualize-master/css/basic.css" type="text/css"/>
-	<link rel="stylesheet" href="${eco:baseUrl()}/common/js/lib/jQuery-Visualize-master/css/visualize.css" type="text/css"/>
+	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jQuery-Visualize-master/js/visualize.jQuery.js"></script>
+	<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jQuery-Visualize-master/css/basic.css" type="text/css"/>
+	<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jQuery-Visualize-master/css/visualize.css" type="text/css"/>
 
 	<style type="text/css">
 		.rotate {

@@ -11,10 +11,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<script type="text/javascript" src="${baseUrl}/common/js/require-config.js.jsp"></script>
-	<script type="text/javascript" src="${baseUrl}/common/js/lib/front-end/require.js"></script>
+	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
-	<link href="${baseUrl}/common/css/jphoto.css" rel="stylesheet" type="text/css"/>
+	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>

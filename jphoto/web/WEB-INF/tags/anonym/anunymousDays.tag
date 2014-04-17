@@ -15,7 +15,7 @@
 <c:set var="systemDateFormat" value="<%=systemVarsService.getSystemDateFormat()%>"/>
 <c:set var="jsDateFormat" value="<%=systemVarsService.getJavaScriptDateFormat()%>"/>
 
-<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/date.js"></script>
+<script type="text/javascript" src="${eco:baseUrl()}/js/lib/date.js"></script>
 
 <style type="text/css">
 	.ui-datepicker-today {

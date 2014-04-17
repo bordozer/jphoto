@@ -5,51 +5,51 @@
 	<title>$title</title>
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
-	<link href="$baseUrl/common/css/jphoto.css" rel="stylesheet" type="text/css"/>
+	<link href="$baseUrl/css/jphoto.css" rel="stylesheet" type="text/css"/>
 
-	<script type="text/javascript" src="$baseUrl/common/js/lib/jquery/jquery-1.7.2.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/jquery/jquery-ui-1.8.21.custom.min.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/jquery/jquery-ui-1.8.17.easing.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="$baseUrl/common/js/lib/jquery/css/smootness/jquery-ui-1.8.21.custom.css"/>
+	<script type="text/javascript" src="$baseUrl/js/lib/jquery/jquery-1.7.2.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/jquery/jquery-ui-1.8.21.custom.min.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/jquery/jquery-ui-1.8.17.easing.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/jquery/css/smootness/jquery-ui-1.8.21.custom.css"/>
 
 	#* jAlert *#
-	<script type="text/javascript" src="$baseUrl/common/js/lib/jalert/jquery.alerts.js"></script>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/jalert/jquery.alerts.css" type="text/css"/>
+	<script type="text/javascript" src="$baseUrl/js/lib/jalert/jquery.alerts.js"></script>
+	<link rel="stylesheet" href="$baseUrl/js/lib/jalert/jquery.alerts.css" type="text/css"/>
 	#* /jAlert *#
 
 	#* jscal2 *#
-	<script type="text/javascript" src="$baseUrl/common/js/lib/JSCal2-1.9/js/jscal2.js"></script>
-	<script src="$baseUrl/common/js/lib/JSCal2-1.9/js/unicode-letter.js"></script>
-	<script src="$baseUrl/common/js/lib/JSCal2-1.9/js/lang/en.js"></script>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/JSCal2-1.9/css/jscal2.css" type="text/css"/>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/JSCal2-1.9/css/border-radius.css" type="text/css"/>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/JSCal2-1.9/css/steel/steel.css" type="text/css"/>
+	<script type="text/javascript" src="$baseUrl/js/lib/JSCal2-1.9/js/jscal2.js"></script>
+	<script src="$baseUrl/js/lib/JSCal2-1.9/js/unicode-letter.js"></script>
+	<script src="$baseUrl/js/lib/JSCal2-1.9/js/lang/en.js"></script>
+	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/jscal2.css" type="text/css"/>
+	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/border-radius.css" type="text/css"/>
+	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/steel/steel.css" type="text/css"/>
 	#* /jscal2 *#
 
 	#* notify *#
-	<script type="text/javascript" src="$baseUrl/common/js/lib/notify/jquery.noty.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/notify/layouts/bottomRight.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/notify/layouts/center.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/notify/themes/default.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/messages.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/notify/jquery.noty.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/notify/layouts/bottomRight.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/notify/layouts/center.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/notify/themes/default.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/messages.js"></script>
 	#* /notify *#
 
 	#* lightbox_me *#
-	<script type="text/javascript" src="$baseUrl/common/js/lib/lightbox_me/jquery.lightbox_me.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/messages.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/lightbox_me/jquery.lightbox_me.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/messages.js"></script>
 	#* /lightbox_me *#
 
-	<script type="text/javascript" src="$baseUrl/common/js/common.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/common.js"></script>
 
 	#* superfish *#
-	<script type="text/javascript" src="$baseUrl/common/js/lib/superfish/js/hoverIntent.js"></script>
-	<script type="text/javascript" src="$baseUrl/common/js/lib/superfish/js/superfish.js"></script>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/superfish/css/superfish.css" type="text/css"/>
+	<script type="text/javascript" src="$baseUrl/js/lib/superfish/js/hoverIntent.js"></script>
+	<script type="text/javascript" src="$baseUrl/js/lib/superfish/js/superfish.js"></script>
+	<link rel="stylesheet" href="$baseUrl/js/lib/superfish/css/superfish.css" type="text/css"/>
 #* / superfish *#
 
 ##	fg.menu
-	<script type="text/javascript" src="$baseUrl/common/js/lib/fg.menu/fg.menu.js"></script>
-	<link rel="stylesheet" href="$baseUrl/common/js/lib/fg.menu/fg.menu.css" type="text/css"/>
+	<script type="text/javascript" src="$baseUrl/js/lib/fg.menu/fg.menu.js"></script>
+	<link rel="stylesheet" href="$baseUrl/js/lib/fg.menu/fg.menu.css" type="text/css"/>
 ##	/ fg.menu
 
 	<style type="text/css">

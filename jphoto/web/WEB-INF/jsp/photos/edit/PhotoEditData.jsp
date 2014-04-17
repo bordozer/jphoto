@@ -107,7 +107,7 @@
 		<photo:photoAllowance uploadAllowance="${uploadAllowance}" />
 	</c:if>
 
-	<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/colorpicker/jscolor.js"></script>
+	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/colorpicker/jscolor.js"></script>
 
 	<tags:inputHintForm/>
 

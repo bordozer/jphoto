@@ -57,7 +57,7 @@ public class DownloadController {
 		File file  = beingDownloadedFile;
 
 		if ( !file.isFile() || !file.exists() ) {
-			file = new File( "../../common/images/imagenotfound.png" );
+			file = new File( "../../images/imagenotfound.png" );
 		}
 
 		final String fileName = file.getPath();

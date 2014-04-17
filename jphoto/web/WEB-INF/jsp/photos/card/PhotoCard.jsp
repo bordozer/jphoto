@@ -255,8 +255,8 @@
 	</div>
 
 	<c:if test="${isLoggedUser}">
-		<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/jcrop/js/jquery.Jcrop.js"></script>
-		<link rel="stylesheet" href="${eco:baseUrl()}/common/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>
+		<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>
+		<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>
 
 		<script type="text/javascript">
 			var cropBox = '#photo_${photo.id}';

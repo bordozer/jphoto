@@ -101,7 +101,7 @@ ${hint}--%>
 		<tr>
 			<td class="corner" id="bottomleft"></td>
 			<td class="bottom">
-				<img alt="popup tail" src="${eco:baseUrl()}/common/js/popup/files/bubble-t.png" height="29" width="30"/>
+				<img alt="popup tail" src="${eco:baseUrl()}/js/popup/files/bubble-t.png" height="29" width="30"/>
 			</td>
 			<td id="bottomright" class="corner"></td>
 		</tr>

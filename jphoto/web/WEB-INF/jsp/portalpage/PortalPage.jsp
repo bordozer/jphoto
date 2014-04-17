@@ -73,9 +73,9 @@
 
 	</style>
 
-	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/common/js/lib/smoothdiv/css/smoothDivScroll.css" />
-	<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/smoothdiv/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/smoothdiv/jquery.smoothDivScroll-1.2.js"></script>
+	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/smoothdiv/css/smoothDivScroll.css" />
+	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/smoothdiv/jquery.mousewheel.min.js"></script>
+	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/smoothdiv/jquery.smoothDivScroll-1.2.js"></script>
 
 	<h3>${eco:translate('Last uploaded photos')}</h3>
 
@@ -122,10 +122,10 @@
 
 						<h3>${eco:translate('The best photos')}</h3>
 
-						<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/galleryview/jquery.timers-1.2.js" ></script>
-						<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/jquery.easing.1.3.js" ></script>
-						<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/galleryview/jquery.galleryview-3.0-dev.js" ></script>
-						<link type="text/css" rel="stylesheet" href="${eco:baseUrl()}/common/js/lib/galleryview/jquery.galleryview-3.0-dev.css" />
+						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/galleryview/jquery.timers-1.2.js" ></script>
+						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jquery.easing.1.3.js" ></script>
+						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/galleryview/jquery.galleryview-3.0-dev.js" ></script>
+						<link type="text/css" rel="stylesheet" href="${eco:baseUrl()}/js/lib/galleryview/jquery.galleryview-3.0-dev.css" />
 
 						<script type="text/javascript">
 							$( function () {

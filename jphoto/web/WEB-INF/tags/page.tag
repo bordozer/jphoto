@@ -18,7 +18,7 @@
 
 <eco:page pageModel="${pageModel}">
 
-	<script type="text/javascript" src="${eco:baseUrl()}/common/js/lib/jsonrpc.js"></script>
+	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jsonrpc.js"></script>
 
 	<script type="text/javascript">
 
@@ -152,7 +152,7 @@
 			}
 		</script>
 
-		<script type="text/javascript" src="${eco:baseUrl()}/common/js/translationsReload.jsp"></script>
+		<script type="text/javascript" src="${eco:baseUrl()}/js/translationsReload.jsp"></script>
 	</c:if>
 
 	<jsp:doBody/>
