@@ -17,12 +17,9 @@ define( ["backbone", "jquery", "underscore", "text!modules/admin/user/lock/templ
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
-
-			this.togglePeriodType( 1 ); // TODO: read from model
 		},
 
 		togglePeriodType:function( value ) {
-			$( "input[name=lockPeriodType][value='" + value + "']" ).attr( 'checked', 'checked' );
 			this.model.get( 'rangeModel' ).set( 'rangeType', value ); // TODO: pass rangeModel here
 		},
 
