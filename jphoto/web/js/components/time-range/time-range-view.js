@@ -22,7 +22,12 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 
-			var view = this.model.get( 'rangeType' ) == 1 ? this.model.get( "timePeriodView" ) : this.model.get( "dateRangeView" );
+			var rangeType = this.model.get( 'rangeType' );
+			console.log( rangeType );
+
+			$( "input[name='lockPeriodType'][value='" + rangeType + "']" ).attr( "checked", true );
+
+			var view = rangeType == 1 ? this.model.get( "timePeriodView" ) : this.model.get( "dateRangeView" );
 			this.$el.append( view.render() );
 		},
 
