@@ -46,7 +46,7 @@
 						<div class="floatleft textcentered" style="height: auto; min-height: 230px;">
 
 							<links:photoCard id="${photo.id}">
-								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photopreview" style="vertical-align: middle;" title="${photo.nameEscaped}"/>
+								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${photo.nameEscaped}"/>
 							</links:photoCard>
 							<br/>
 							<br/>

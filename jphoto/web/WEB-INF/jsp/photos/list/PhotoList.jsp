@@ -8,41 +8,14 @@
 
 <jsp:useBean id="photoListModel" type="ui.controllers.photos.list.PhotoListModel" scope="request"/>
 
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
+
 <tags:page pageModel="${photoListModel.pageModel}">
 
-	<script type="text/javascript" src="${eco:baseUrl()}/js/require-config.js.jsp"></script>
-	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/front-end/require.js"></script>
+	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
-	<style type="text/css">
-
-		.photo-list-container {
-			float: left;
-			width: 98%;
-			padding: 20px;
-			/*border: 1px solid #880000;*/
-		}
-
-		.photo-list-title {
-			float: left;
-			width: 97%;
-			height: 30px;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-			padding-left: 25px;
-			padding-top: 10px;
-			font-size: 16px;
-			font-weight: bold;
-		}
-
-		.photo-container {
-			width: 200px;
-			height: 250px;
-			display: inline-block;
-			margin: 20px;
-			border: 1px solid #3388cc;
-		}
-
-	</style>
+	<link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
 	<tags:entryMenuJs />
 

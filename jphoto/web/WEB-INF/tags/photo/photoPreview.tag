@@ -82,7 +82,7 @@
 	<div class="containerPhotoImg">
 		<links:photoCard id="${photoId}">
 			<c:if test="${not photoInfo.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
-				<img src="${photoInfo.photoPreviewImgUrl}" class="photopreview"/>
+				<img src="${photoInfo.photoPreviewImgUrl}" class="photo-preview-image"/>
 			</c:if>
 			<c:if test="${photoInfo.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
 				<photo:nudeContentPreview />

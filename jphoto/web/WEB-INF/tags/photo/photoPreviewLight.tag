@@ -14,7 +14,7 @@
 
 <links:photoCard id="${photo.id}">
 	<c:if test="${not photoPreviewHasToBeHiddenBecauseOfNudeContent}">
-		<img src="${photoPreviewWrapper.photoPreviewImgUrl}" class="photopreview" style="vertical-align: middle;" title="${title}" />
+		<img src="${photoPreviewWrapper.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${title}" />
 	</c:if>
 	<c:if test="${photoPreviewHasToBeHiddenBecauseOfNudeContent}">
 		<photo:nudeContentPreview />

@@ -1,7 +1,18 @@
 package json.photo;
 
+import core.general.configuration.ConfigurationKey;
+import core.general.genre.Genre;
+import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
+import core.general.user.User;
+import core.services.entry.GenreService;
+import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoService;
+import core.services.system.ConfigurationService;
+import core.services.translator.Language;
+import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
+import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import ui.context.EnvironmentContext;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
@@ -18,7 +30,25 @@ public class PhotoEntryController {
 	private PhotoService photoService;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private GenreService genreService;
+
+	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private ConfigurationService configurationService;
+
+	@Autowired
+	private EntryMenuService entryMenuService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
@@ -28,9 +58,60 @@ public class PhotoEntryController {
 
 		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( photoId );
 
-		photoEntry.setName( photo.getNameEscaped() );
-		photoEntry.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
+		photoEntry.setPhotoUploadDate( dateUtilsService.formatDateTimeShort( photo.getUploadTime() ) );
+		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
+		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
+		photoEntry.setPhotoContextMenu( getPhotoContextMenu( photo ) );
+		photoEntry.setPhotoMarks( getPhotoMarks( photo ) );
+		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
+		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo.getUserId() ) );
+		photoEntry.setPhotoAuthorRank( getPhotoAuthorRank() );
 
 		return photoEntry;
+	}
+
+	private String getGroupOperationCheckbox( final Photo photo ) {
+		return String.format( "<input type='checkbox' value='%s' />", photo.getId() );
+	}
+
+	private String getPhotoCategory( final int genreId ) {
+		final Genre genre = genreService.load( genreId );
+		return entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() );
+	}
+
+	private String getPhotoPreview( final Photo photo ) {
+		return String.format( "<img src='%s' class='photo-preview-image'/>", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+	}
+
+	private String getPhotoContextMenu( final Photo photo ) {
+		if ( ! configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) ) { // TODO: no photo menu in photo card if it is switched off for photo list!!!!
+			return "";
+		}
+
+		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() );
+
+		return "menu :(";
+	}
+
+	private String getPhotoMarks( final Photo photo ) {
+		return "marks";
+	}
+
+	private String getPhotoAuthorLink( final int userId ) {
+		final User user = userService.load( userId );
+		return entityLinkUtilsService.getUserCardLink( user, getLanguage() );
+	}
+
+	private String getPhotoAuthorRank() {
+		return "rank";
+	}
+
+	private User getCurrentUser() {
+		return EnvironmentContext.getCurrentUser();
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }
