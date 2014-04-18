@@ -31,7 +31,6 @@ public class PhotoEntryController {
 		photoEntry.setName( photo.getNameEscaped() );
 		photoEntry.setPhotoImageUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 
-
 		return photoEntry;
 	}
 }

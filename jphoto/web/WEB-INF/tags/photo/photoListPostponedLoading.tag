@@ -42,11 +42,33 @@
 			<c:set var="photoId" value="${photoInfo.photo.id}" />
 
 			<div class="photo-container photo-container-${photoId}">
-				${photoId}
+
 			</div>
 
 		</c:forEach>
 
 	</div>
+
+	<script type="text/javascript">
+
+		var photosToRender = [];
+
+		<c:forEach var="photoInfo" items="${photoList.photoInfos}" varStatus="status">
+			photosToRender.push( ${photoInfo.photo.id} );
+		</c:forEach>
+
+		renderPhotos( photosToRender );
+
+		function renderPhotos( photosToRender ) {
+
+			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
+				for (var i = 0; i < photosToRender.length; i++) {
+					var photoId = photosToRender[i];
+					photoListEntry( photoId, '${eco:baseUrl()}', $( '.photo-container-' + photoId ) );
+				}
+			} );
+		}
+
+	</script>
 
 </eco:form>
