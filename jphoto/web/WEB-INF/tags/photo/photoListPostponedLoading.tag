@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
@@ -42,7 +43,9 @@
 			<c:set var="photoId" value="${photoInfo.photo.id}" />
 
 			<div class="photo-container photo-container-${photoId}">
-
+				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 110px;">
+					<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
+				</div>
 			</div>
 
 		</c:forEach>
