@@ -32,10 +32,12 @@
 				${photoListTitle}
 			</c:if>
 
+		</div>
+
+		<div class="empty-photo-list-text">
 			<c:if test="${totalPhotos == 0}">
 				${eco:translate(photoList.noPhotoText)}
 			</c:if>
-
 		</div>
 
 		<c:forEach var="photoInfo" items="${photoList.photoInfos}" varStatus="status">

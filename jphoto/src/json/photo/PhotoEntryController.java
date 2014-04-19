@@ -13,6 +13,7 @@ import core.services.translator.Language;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,9 @@ public class PhotoEntryController {
 	@Autowired
 	private EntryMenuService entryMenuService;
 
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
@@ -81,7 +85,11 @@ public class PhotoEntryController {
 	}
 
 	private String getPhotoPreview( final Photo photo ) {
-		return String.format( "<img src='%s' class='photo-preview-image'/>", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image'/></a>"
+			, urlUtilsService.getPhotoCardLink( photo.getId() )
+			, photo.getNameEscaped()
+			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
+		);
 	}
 
 	private String getPhotoContextMenu( final Photo photo ) {
