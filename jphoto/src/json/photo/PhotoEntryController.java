@@ -99,8 +99,8 @@ public class PhotoEntryController {
 
 		setPhotoAnonymousPeriodExpiration( photo, photoEntry );
 
-		photoEntry.setShowAdminFlag_Anonymous( photo.isAnonymousPosting() && ( securityService.isSuperAdminUser( getCurrentUser() ) || securityService.userOwnThePhoto( getCurrentUser(), photo ) ) );
-		photoEntry.setShowAdminFlag_AnonymousTitle( translatorService.translate( "The photo is posted anonymously", getLanguage() ) );
+		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( securityService.isSuperAdminUser( getCurrentUser() ) || securityService.userOwnThePhoto( getCurrentUser(), photo ) ) );
+		photoEntry.setShowAdminFlag_AnonymousTitle( translatorService.translate( "The photo is withing anonymous period", getLanguage() ) );
 
 		photoEntry.setShowAdminFlag_Nude( photo.isContainsNudeContent() && securityService.isSuperAdminUser( getCurrentUser() ) );
 		photoEntry.setShowAdminFlag_NudeTitle( translatorService.translate( "The photo has nude content", getLanguage() ) );

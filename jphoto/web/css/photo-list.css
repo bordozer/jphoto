@@ -106,8 +106,8 @@
 }
 
 .adminSpecialFlag {
-	display: inline-block;
-	position: relative;
+	/*display: inline-block;*/
+	position: inherit;
 	width: 3px;
 	height: 3px;
 	border-width: 5px;

@@ -84,6 +84,10 @@ public interface SecurityService {
 
 	boolean isPhotoAuthorNameMustBeHidden( final Photo photo, final User accessor, final Date onTime );
 
+	boolean isPhotoWithingAnonymousPeriod( Photo photo );
+
+	boolean isPhotoWithingAnonymousPeriod( Photo photo, Date onTime );
+
 	boolean forceAnonymousPosting( final int userId, final int genreId, final Date time );
 
 	AnonymousSettingsDTO forceAnonymousPostingAjax( final int userId, final int genreId, final Language language );

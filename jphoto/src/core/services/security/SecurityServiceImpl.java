@@ -544,11 +544,17 @@ public class SecurityServiceImpl implements SecurityService {
 			return false;
 		}
 
-		if ( photo.isAnonymousPosting() ) {
-			return onTime.getTime() < photoService.getPhotoAnonymousPeriodExpirationTime( photo ).getTime();
-		}
+		return isPhotoWithingAnonymousPeriod( photo, onTime );
+	}
 
-		return false;
+	@Override
+	public boolean isPhotoWithingAnonymousPeriod( final Photo photo ) {
+		return isPhotoWithingAnonymousPeriod( photo, dateUtilsService.getCurrentTime() );
+	}
+
+	@Override
+	public boolean isPhotoWithingAnonymousPeriod( final Photo photo, final Date onTime ) {
+		return photo.isAnonymousPosting() && onTime.getTime() < photoService.getPhotoAnonymousPeriodExpirationTime( photo ).getTime();
 	}
 
 	@Override

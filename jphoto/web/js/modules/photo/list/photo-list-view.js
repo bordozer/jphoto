@@ -64,11 +64,11 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-//				this.$el.append( this.adminFlagAnonymousTemplate( modelJSON ) );
+				this.$el.append( this.adminFlagAnonymousTemplate( modelJSON ) );
 			}
 
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-//				this.$el.append( this.adminFlagNudeTemplate( modelJSON ) );
+				this.$el.append( this.adminFlagNudeTemplate( modelJSON ) );
 			}
 		}
 	} );
