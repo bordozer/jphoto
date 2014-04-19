@@ -31,7 +31,7 @@
 .photo-container {
 	width: 250px;
 	height: auto;
-	min-height: 330px;
+	/*min-height: 330px;*/
 	display: inline-block;
 	margin: 20px;
 	padding: 10px;

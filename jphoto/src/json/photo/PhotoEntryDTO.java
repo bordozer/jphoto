@@ -14,6 +14,18 @@ public class PhotoEntryDTO {
 	private String photoAuthorLink;
 	private String photoAuthorRank;
 
+	private boolean showStatistics;
+	private int todayMarks;
+	private int periodMarks;
+	private int totalMarks;
+	private String todayMarksTitle;
+	private String periodMarksTitle;
+	private String totalMarksUrl;
+	private String totalMarksTitle;
+
+
+	private boolean showUserRank;
+
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
 	}
@@ -92,5 +104,77 @@ public class PhotoEntryDTO {
 
 	public void setPhotoAuthorRank( final String photoAuthorRank ) {
 		this.photoAuthorRank = photoAuthorRank;
+	}
+
+	public boolean isShowStatistics() {
+		return showStatistics;
+	}
+
+	public void setShowStatistics( final boolean showStatistics ) {
+		this.showStatistics = showStatistics;
+	}
+
+	public boolean isShowUserRank() {
+		return showUserRank;
+	}
+
+	public void setShowUserRank( final boolean showUserRank ) {
+		this.showUserRank = showUserRank;
+	}
+
+	public void setTodayMarks( final int todayMarks ) {
+		this.todayMarks = todayMarks;
+	}
+
+	public int getTodayMarks() {
+		return todayMarks;
+	}
+
+	public void setPeriodMarks( final int periodMarks ) {
+		this.periodMarks = periodMarks;
+	}
+
+	public int getPeriodMarks() {
+		return periodMarks;
+	}
+
+	public void setTotalMarks( final int totalMarks ) {
+		this.totalMarks = totalMarks;
+	}
+
+	public int getTotalMarks() {
+		return totalMarks;
+	}
+
+	public String getTodayMarksTitle() {
+		return todayMarksTitle;
+	}
+
+	public void setTodayMarksTitle( final String todayMarksTitle ) {
+		this.todayMarksTitle = todayMarksTitle;
+	}
+
+	public String getPeriodMarksTitle() {
+		return periodMarksTitle;
+	}
+
+	public void setPeriodMarksTitle( final String periodMarksTitle ) {
+		this.periodMarksTitle = periodMarksTitle;
+	}
+
+	public String getTotalMarksUrl() {
+		return totalMarksUrl;
+	}
+
+	public void setTotalMarksUrl( final String totalMarksUrl ) {
+		this.totalMarksUrl = totalMarksUrl;
+	}
+
+	public String getTotalMarksTitle() {
+		return totalMarksTitle;
+	}
+
+	public void setTotalMarksTitle( final String totalMarksTitle ) {
+		this.totalMarksTitle = totalMarksTitle;
 	}
 }

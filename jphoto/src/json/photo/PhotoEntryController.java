@@ -2,7 +2,6 @@ package json.photo;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GenreService;
@@ -10,15 +9,13 @@ import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
-import core.services.system.Services;
 import core.services.translator.Language;
-import core.services.translator.message.TranslatableMessage;
+import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,6 +60,9 @@ public class PhotoEntryController {
 	@Autowired
 	private PhotoVotingService photoVotingService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
@@ -76,12 +76,61 @@ public class PhotoEntryController {
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
 		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
 		photoEntry.setPhotoContextMenu( getPhotoContextMenu( photo ) );
-		photoEntry.setPhotoMarks( getPhotoMarks( photo ) );
 		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
 		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo.getUserId() ) );
-		photoEntry.setPhotoAuthorRank( getPhotoAuthorRank() );
+
+		setPhotoStatistics( photo, photoEntry );
+
+		setUserRank( photoEntry );
 
 		return photoEntry;
+	}
+
+	private void setUserRank( final PhotoEntryDTO photoEntry ) {
+		final boolean showUserRank = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE );
+		photoEntry.setShowUserRank( showUserRank );
+		if ( showUserRank ) {
+			photoEntry.setPhotoAuthorRank( getPhotoAuthorRank() );
+		}
+	}
+
+	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry ) {
+		final boolean showPhotoStatistics = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC );
+		photoEntry.setShowStatistics( showPhotoStatistics );
+
+		if ( !showPhotoStatistics ) {
+			return;
+		}
+
+		photoEntry.setTodayMarks( getTodayMarks( photo ) );
+		photoEntry.setTodayMarksTitle( translatorService.translate( "The photo's today's marks", getLanguage() ) );
+
+		photoEntry.setPeriodMarks( getPeriodMarks( photo ) );
+		final int period = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		photoEntry.setPeriodMarksTitle( translatorService.translate( "The photo's marks for period from $1 to $2"
+			, getLanguage()
+			, dateUtilsService.formatDate( dateUtilsService.getDatesOffsetFromCurrentDate( -period ) )
+			, dateUtilsService.formatDate( dateUtilsService.getCurrentTime() )
+		));
+
+		photoEntry.setTotalMarks( getTotalMarks( photo ) );
+		photoEntry.setTotalMarksUrl( urlUtilsService.getPhotoMarksListLink( photo.getId() ) );
+		photoEntry.setTotalMarksTitle( translatorService.translate( "The photo's total marks", getLanguage() ) );
+
+	}
+
+	private int getTodayMarks( final Photo photo ) {
+		return photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateUtilsService.getFirstSecondOfToday(), dateUtilsService.getLastSecondOfToday() );
+	}
+
+	private int getPeriodMarks( final Photo photo ) {
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
+		return photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateFrom, dateUtilsService.getLastSecondOfToday() );
+	}
+
+	private int getTotalMarks( final Photo photo ) {
+		return photoVotingService.getSummaryPhotoMark( photo );
 	}
 
 	private String getGroupOperationCheckbox( final Photo photo ) {
@@ -109,26 +158,6 @@ public class PhotoEntryController {
 //		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() ); // TODO
 
 		return "menu :(";
-	}
-
-	private String getPhotoMarks( final Photo photo ) {
-		if ( ! configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) ) {
-			return StringUtils.EMPTY;
-		}
-
-		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
-
-		final int photoId = photo.getId();
-
-		final int todayMarks = photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday );
-
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
-		final int competitionPeriodMarks = photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday );
-
-		final int totalMarks = photoVotingService.getSummaryPhotoMark( photo );
-
-		return String.format( "%d / %d / %d", todayMarks, competitionPeriodMarks, totalMarks );
 	}
 
 	private String getPhotoAuthorLink( final int userId ) {
