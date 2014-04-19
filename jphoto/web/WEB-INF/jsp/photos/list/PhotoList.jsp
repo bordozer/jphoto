@@ -29,8 +29,8 @@
 	</c:if>
 
 	<c:forEach var="photoList" items="${photoListModel.photoLists}">
-		<%--<photo:photoList photoList="${photoList}" />--%>
-		<photo:photoListPostponedLoading photoList="${photoList}" />
+		<photo:photoList photoList="${photoList}" />
+		<%--<photo:photoListPostponedLoading photoList="${photoList}" />--%>
 	</c:forEach>
 
 	<c:if test="${showUserPhotoGenres}">
