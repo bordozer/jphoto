@@ -30,11 +30,11 @@
 
 .photo-container {
 	width: 250px;
-	height: 330px;
+	height: auto;
+	min-height: 330px;
 	display: inline-block;
 	margin: 20px;
 	padding: 10px;
-	border: 1px solid #3388cc;
 	border-radius: 5px;
 }
 

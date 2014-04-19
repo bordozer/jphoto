@@ -14,6 +14,7 @@
 
 <c:set var="photoGroupOperationMenues" value="<%=photoList.getPhotoGroupOperationMenuContainer().getGroupOperationMenus()%>" />
 <c:set var="isGroupOperationEnabled" value="${not empty photoGroupOperationMenues}" />
+<c:set var="showPaging" value="${photoList.showPaging}"/>
 
 <c:set var="formAction" value="" />
 <c:if test="${isGroupOperationEnabled}">
@@ -23,6 +24,10 @@
 <eco:form action="${formAction}" formName="${groupOperationForm}">
 
 	<icons:favoritesJS />
+
+	<c:if test="${showPaging}">
+		<tags:paging showSummary="false"/>
+	</c:if>
 
 	<div class="photo-list-container">
 
@@ -44,7 +49,7 @@
 
 			<c:set var="photoId" value="${photoInfo.photo.id}" />
 
-			<div class="photo-container photo-container-${photoId}">
+			<div class="photo-container block-border block-shadow block-background photo-container-${photoId}">
 				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 110px;">
 					<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
 				</div>
@@ -53,6 +58,10 @@
 		</c:forEach>
 
 	</div>
+
+	<c:if test="${showPaging}">
+		<tags:paging showSummary="true"/>
+	</c:if>
 
 	<script type="text/javascript">
 
