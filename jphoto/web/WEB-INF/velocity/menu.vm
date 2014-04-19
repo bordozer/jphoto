@@ -24,9 +24,10 @@
 		/*border: dashed;*/
 	}
 
-	.uppercase {
-		text-transform: uppercase;
-		font-weight: bold;
+	.menu-title {
+		/*text-transform: uppercase;*/
+		/*font-weight: bold;*/
+		/*color: #b81900;*/
 	}
 </style>
 
@@ -48,7 +49,7 @@
 			<div class="menuItem">
 				<ul id="main-menu" class="sf-menu">
 					<li class="current">
-						<a class="uppercase" href="$menuItem.key.link">$menuItem.key.caption</a>
+						<a class="menu-title" href="$menuItem.key.link">$menuItem.key.caption</a>
 						<ul class="block-background block-border">
 							#foreach( $subMenuItem in $menuItem.value )
 								<li class="block-border">
