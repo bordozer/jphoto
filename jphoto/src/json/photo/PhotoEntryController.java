@@ -8,6 +8,7 @@ import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -17,6 +18,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,6 +71,9 @@ public class PhotoEntryController {
 	@Autowired
 	private UserRankService userRankService;
 
+	@Autowired
+	private SecurityService securityService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
@@ -85,11 +90,13 @@ public class PhotoEntryController {
 		setPhotoContextMenu( photo, photoEntry );
 
 		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
-		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo.getUserId() ) );
+		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo ) );
 
 		setPhotoStatistics( photo, photoEntry );
 
 		setUserRank( photo, photoEntry );
+
+		setPhotoAnonymousPeriodExpiration( photo, photoEntry );
 
 		return photoEntry;
 	}
@@ -162,8 +169,14 @@ public class PhotoEntryController {
 		photoEntry.setPhotoContextMenu( "menu" );
 	}
 
-	private String getPhotoAuthorLink( final int userId ) {
-		final User user = userService.load( userId );
+	private String getPhotoAuthorLink( final Photo photo ) {
+		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+
+		if ( hideAuthorName ) {
+			return configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
+		}
+
+		final User user = userService.load( photo.getUserId() );
 		return entityLinkUtilsService.getUserCardLink( user, getLanguage() );
 	}
 
@@ -178,10 +191,25 @@ public class PhotoEntryController {
 		final User user = userService.load( photo.getUserId() );
 		final UserRankIconContainer iconContainer = userRankService.getUserRankIconContainer( user, photo );
 		final StringBuilder builder = new StringBuilder();
+
 		for ( final AbstractUserRankIcon rankIcon : iconContainer.getRankIcons() ) {
-			builder.append( String.format( "<img src='%s/%s' height='8px'>", urlUtilsService.getSiteImagesPath(), rankIcon.getIcon() ) );
+			builder.append( String.format( "<img src='%s/%s' height='8px' title='%s'>"
+				, urlUtilsService.getSiteImagesPath()
+				, rankIcon.getIcon()
+				, rankIcon.getTitle()
+			));
 		}
+
 		photoEntry.setPhotoAuthorRank( builder.toString() );
+	}
+
+	private void setPhotoAnonymousPeriodExpiration( final Photo photo, final PhotoEntryDTO photoEntry ) {
+		final boolean showAnonymousPeriodExpirationInfo = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
+		if ( showAnonymousPeriodExpirationInfo ) {
+			photoEntry.setShowUserRank( false );
+			photoEntry.setPhotoAnonymousPeriodExpirationInfo( translatorService.translate( "Anonymous till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) ) );
+		}
 	}
 
 	private User getCurrentUser() {

@@ -12,7 +12,6 @@ public class PhotoEntryDTO {
 	private boolean showPhotoContextMenu;
 	private String photoContextMenu;
 
-	private String photoMarks;
 	private String photoName;
 	private String photoAuthorLink;
 
@@ -27,6 +26,9 @@ public class PhotoEntryDTO {
 	private String periodMarksTitle;
 	private String totalMarksUrl;
 	private String totalMarksTitle;
+
+	private boolean showAnonymousPeriodExpirationInfo;
+	private String photoAnonymousPeriodExpirationInfo;
 
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
@@ -82,14 +84,6 @@ public class PhotoEntryDTO {
 
 	public void setPhotoContextMenu( final String photoContextMenu ) {
 		this.photoContextMenu = photoContextMenu;
-	}
-
-	public String getPhotoMarks() {
-		return photoMarks;
-	}
-
-	public void setPhotoMarks( final String photoMarks ) {
-		this.photoMarks = photoMarks;
 	}
 
 	public String getPhotoName() {
@@ -186,5 +180,21 @@ public class PhotoEntryDTO {
 
 	public void setTotalMarksTitle( final String totalMarksTitle ) {
 		this.totalMarksTitle = totalMarksTitle;
+	}
+
+	public void setShowAnonymousPeriodExpirationInfo( final boolean showAnonymousPeriodExpirationInfo ) {
+		this.showAnonymousPeriodExpirationInfo = showAnonymousPeriodExpirationInfo;
+	}
+
+	public boolean isShowAnonymousPeriodExpirationInfo() {
+		return showAnonymousPeriodExpirationInfo;
+	}
+
+	public String getPhotoAnonymousPeriodExpirationInfo() {
+		return photoAnonymousPeriodExpirationInfo;
+	}
+
+	public void setPhotoAnonymousPeriodExpirationInfo( final String photoAnonymousPeriodExpirationInfo ) {
+		this.photoAnonymousPeriodExpirationInfo = photoAnonymousPeriodExpirationInfo;
 	}
 }
