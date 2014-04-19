@@ -8,13 +8,17 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoService;
+import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
+
+import java.util.Date;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
@@ -53,6 +59,9 @@ public class PhotoEntryController {
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
+
+	@Autowired
+	private PhotoVotingService photoVotingService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
@@ -97,13 +106,29 @@ public class PhotoEntryController {
 			return "";
 		}
 
-		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() );
+//		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() ); // TODO
 
 		return "menu :(";
 	}
 
 	private String getPhotoMarks( final Photo photo ) {
-		return "marks";
+		if ( ! configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) ) {
+			return StringUtils.EMPTY;
+		}
+
+		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
+
+		final int photoId = photo.getId();
+
+		final int todayMarks = photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday );
+
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
+		final int competitionPeriodMarks = photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday );
+
+		final int totalMarks = photoVotingService.getSummaryPhotoMark( photo );
+
+		return String.format( "%d / %d / %d", todayMarks, competitionPeriodMarks, totalMarks );
 	}
 
 	private String getPhotoAuthorLink( final int userId ) {
@@ -112,6 +137,7 @@ public class PhotoEntryController {
 	}
 
 	private String getPhotoAuthorRank() {
+		final boolean showUserRank = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE );
 		return "rank";
 	}
 
