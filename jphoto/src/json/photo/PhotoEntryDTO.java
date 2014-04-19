@@ -30,6 +30,12 @@ public class PhotoEntryDTO {
 	private boolean showAnonymousPeriodExpirationInfo;
 	private String photoAnonymousPeriodExpirationInfo;
 
+	private boolean showAdminFlag_Anonymous;
+	private String showAdminFlag_AnonymousTitle;
+
+	private boolean showAdminFlag_Nude;
+	private String showAdminFlag_NudeTitle;
+
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
 	}
@@ -196,5 +202,37 @@ public class PhotoEntryDTO {
 
 	public void setPhotoAnonymousPeriodExpirationInfo( final String photoAnonymousPeriodExpirationInfo ) {
 		this.photoAnonymousPeriodExpirationInfo = photoAnonymousPeriodExpirationInfo;
+	}
+
+	public void setShowAdminFlag_Anonymous( final boolean showAdminFlag_Anonymous ) {
+		this.showAdminFlag_Anonymous = showAdminFlag_Anonymous;
+	}
+
+	public boolean isShowAdminFlag_Anonymous() {
+		return showAdminFlag_Anonymous;
+	}
+
+	public String getShowAdminFlag_AnonymousTitle() {
+		return showAdminFlag_AnonymousTitle;
+	}
+
+	public void setShowAdminFlag_AnonymousTitle( final String showAdminFlag_AnonymousTitle ) {
+		this.showAdminFlag_AnonymousTitle = showAdminFlag_AnonymousTitle;
+	}
+
+	public boolean isShowAdminFlag_Nude() {
+		return showAdminFlag_Nude;
+	}
+
+	public void setShowAdminFlag_Nude( final boolean showAdminFlag_Nude ) {
+		this.showAdminFlag_Nude = showAdminFlag_Nude;
+	}
+
+	public String getShowAdminFlag_NudeTitle() {
+		return showAdminFlag_NudeTitle;
+	}
+
+	public void setShowAdminFlag_NudeTitle( final String showAdminFlag_NudeTitle ) {
+		this.showAdminFlag_NudeTitle = showAdminFlag_NudeTitle;
 	}
 }

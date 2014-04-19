@@ -1,9 +1,11 @@
+<%@ tag import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
@@ -21,13 +23,16 @@
 	<c:set var="formAction" value="${eco:baseUrl()}/photos/groupOperations/" />
 </c:if>
 
+<c:set var="photoGroupOperationMenues" value="<%=photoList.getPhotoGroupOperationMenuContainer().getGroupOperationMenus()%>" />
+<c:set var="isGroupOperationEnabled" value="${not empty photoGroupOperationMenues}" />
+
+<icons:favoritesJS />
+
+<c:if test="${showPaging}">
+	<tags:paging showSummary="false"/>
+</c:if>
+
 <eco:form action="${formAction}" formName="${groupOperationForm}">
-
-	<icons:favoritesJS />
-
-	<c:if test="${showPaging}">
-		<tags:paging showSummary="false"/>
-	</c:if>
 
 	<div class="photo-list-container">
 
@@ -78,11 +83,64 @@
 			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
 				for (var i = 0; i < photosToRender.length; i++) {
 					var photoId = photosToRender[i];
-					photoListEntry( photoId, '${eco:baseUrl()}', $( '.photo-container-' + photoId ) );
+					photoListEntry( photoId, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.photo-container-' + photoId ) );
 				}
 			} );
 		}
 
 	</script>
+
+	<js:confirmAction />
+
+	<c:set var="controlSelectedPhotoIds" value="<%=PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS%>"/>
+
+	<c:if test="${isGroupOperationEnabled}">
+
+		<div class="footerseparatorverysmall"></div>
+
+		<c:set var="controlPhotoGroupOperationId" value="<%=PhotoGroupOperationModel.FORM_CONTROL_PHOTO_GROUP_OPERATION_ID%>" />
+
+		<div style="float: left; width: 90%; padding-left: 50px;">
+
+			<js:checkBoxChecker namePrefix="${controlSelectedPhotoIds}" />
+
+			<label for="${controlPhotoGroupOperationId}">${eco:translate('Photo list: Group operations with selected photos')}</label>
+
+			<select id="${controlPhotoGroupOperationId}" name="${controlPhotoGroupOperationId}">
+				<option value="" selected="selected"></option>
+				<c:forEach var="photoGroupOperationMenu" items="${photoGroupOperationMenues}">
+					<c:set var="photoGroupOperation" value="${photoGroupOperationMenu.photoGroupOperation}"/>
+					<option value="${photoGroupOperation.id}">${eco:translate(photoGroupOperation.name)}</option>
+				</c:forEach>
+			</select>
+
+			<html:submitButton id="ok" caption_t="Photo list: Do group operations" onclick="return submitForm();" />
+		</div>
+
+		<script type="text/javascript">
+
+			function submitForm() {
+				var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
+				if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
+					showErrorMessage( '${eco:translate("Photo list: Please, select group operation first")}' );
+					return false;
+				}
+
+				var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
+				if ( controlSelectedPhotoIds.length == 0 ) {
+					showErrorMessage( '${eco:translate("Photo list: Please, select at least one photo first")}' );
+					return false;
+				}
+
+				var form = $( '#${groupOperationForm}' );
+				form.submit();
+
+				return true;
+			}
+
+		</script>
+
+		<div class="footerseparatorsmall"></div>
+	</c:if>
 
 </eco:form>

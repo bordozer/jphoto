@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
+import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
 import ui.userRankIcons.AbstractUserRankIcon;
 import ui.userRankIcons.UserRankIconContainer;
 
@@ -98,6 +99,12 @@ public class PhotoEntryController {
 
 		setPhotoAnonymousPeriodExpiration( photo, photoEntry );
 
+		photoEntry.setShowAdminFlag_Anonymous( photo.isAnonymousPosting() && ( securityService.isSuperAdminUser( getCurrentUser() ) || securityService.userOwnThePhoto( getCurrentUser(), photo ) ) );
+		photoEntry.setShowAdminFlag_AnonymousTitle( translatorService.translate( "The photo is posted anonymously", getLanguage() ) );
+
+		photoEntry.setShowAdminFlag_Nude( photo.isAnonymousPosting() && ( securityService.isSuperAdminUser( getCurrentUser() ) || securityService.userOwnThePhoto( getCurrentUser(), photo ) ) );
+		photoEntry.setShowAdminFlag_NudeTitle( translatorService.translate( "The photo has nude content", getLanguage() ) );
+
 		return photoEntry;
 	}
 
@@ -123,7 +130,6 @@ public class PhotoEntryController {
 		photoEntry.setTotalMarks( getTotalMarks( photo ) );
 		photoEntry.setTotalMarksUrl( urlUtilsService.getPhotoMarksListLink( photo.getId() ) );
 		photoEntry.setTotalMarksTitle( translatorService.translate( "The photo's total marks", getLanguage() ) );
-
 	}
 
 	private int getTodayMarks( final Photo photo ) {
@@ -141,7 +147,8 @@ public class PhotoEntryController {
 	}
 
 	private String getGroupOperationCheckbox( final Photo photo ) {
-		return String.format( "<input type='checkbox' value='%s' />", photo.getId() );
+		final String id = PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS;
+		return String.format( "<input type='checkbox' id='%s' name='%s' value='%s' />", id, id, photo.getId() );
 	}
 
 	private String getPhotoCategory( final int genreId ) {
@@ -208,7 +215,7 @@ public class PhotoEntryController {
 		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
 		if ( showAnonymousPeriodExpirationInfo ) {
 			photoEntry.setShowUserRank( false );
-			photoEntry.setPhotoAnonymousPeriodExpirationInfo( translatorService.translate( "Anonymous till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) ) );
+			photoEntry.setPhotoAnonymousPeriodExpirationInfo( translatorService.translate( "till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) ) );
 		}
 	}
 

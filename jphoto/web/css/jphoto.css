@@ -553,15 +553,6 @@ table.formtable {
 	text-align: center;
 }
 
-.adminSpecialFlag {
-	float: right;
-	width: 3px;
-	height: 3px;
-	border-width: 5px;
-	border-style: solid;
-	margin: 2px;
-}
-
 .justify-font {
 	text-align: justify;
 }

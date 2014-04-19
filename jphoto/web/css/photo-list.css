@@ -40,10 +40,6 @@
 }
 
 
-.photo-list-entry-header {
-	height: 25px;
-}
-
 .photo-list-entry-checkbox {
 	display: inline-block;
 	position: relative;
@@ -105,4 +101,14 @@
 
 .photo-preview-image{
 
+}
+
+.adminSpecialFlag {
+	display: inline-block;
+	position: relative;
+	width: 3px;
+	height: 3px;
+	border-width: 5px;
+	border-style: solid;
+	margin: 2px;
 }
