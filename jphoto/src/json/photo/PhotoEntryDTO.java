@@ -8,10 +8,15 @@ public class PhotoEntryDTO {
 	private String photoUploadDate;
 	private String photoCategory;
 	private String photoImage;
+
+	private boolean showPhotoContextMenu;
 	private String photoContextMenu;
+
 	private String photoMarks;
 	private String photoName;
 	private String photoAuthorLink;
+
+	private boolean showUserRank;
 	private String photoAuthorRank;
 
 	private boolean showStatistics;
@@ -22,9 +27,6 @@ public class PhotoEntryDTO {
 	private String periodMarksTitle;
 	private String totalMarksUrl;
 	private String totalMarksTitle;
-
-
-	private boolean showUserRank;
 
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
@@ -64,6 +66,14 @@ public class PhotoEntryDTO {
 
 	public void setPhotoImage( final String photoImage ) {
 		this.photoImage = photoImage;
+	}
+
+	public boolean isShowPhotoContextMenu() {
+		return showPhotoContextMenu;
+	}
+
+	public void setShowPhotoContextMenu( final boolean showPhotoContextMenu ) {
+		this.showPhotoContextMenu = showPhotoContextMenu;
 	}
 
 	public String getPhotoContextMenu() {

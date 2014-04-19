@@ -11,6 +11,7 @@ import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
+import ui.userRankIcons.AbstractUserRankIcon;
+import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.Date;
 
@@ -63,6 +66,9 @@ public class PhotoEntryController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private UserRankService userRankService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
@@ -75,23 +81,17 @@ public class PhotoEntryController {
 		photoEntry.setPhotoUploadDate( dateUtilsService.formatDateTimeShort( photo.getUploadTime() ) );
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
 		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
-		photoEntry.setPhotoContextMenu( getPhotoContextMenu( photo ) );
+
+		setPhotoContextMenu( photo, photoEntry );
+
 		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
 		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo.getUserId() ) );
 
 		setPhotoStatistics( photo, photoEntry );
 
-		setUserRank( photoEntry );
+		setUserRank( photo, photoEntry );
 
 		return photoEntry;
-	}
-
-	private void setUserRank( final PhotoEntryDTO photoEntry ) {
-		final boolean showUserRank = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE );
-		photoEntry.setShowUserRank( showUserRank );
-		if ( showUserRank ) {
-			photoEntry.setPhotoAuthorRank( getPhotoAuthorRank() );
-		}
 	}
 
 	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry ) {
@@ -150,14 +150,16 @@ public class PhotoEntryController {
 		);
 	}
 
-	private String getPhotoContextMenu( final Photo photo ) {
-		if ( ! configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) ) { // TODO: no photo menu in photo card if it is switched off for photo list!!!!
-			return "";
+	private void setPhotoContextMenu( final Photo photo, final PhotoEntryDTO photoEntry ) {
+		final boolean showPhotoContextMenu = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU );
+		photoEntry.setShowPhotoContextMenu( showPhotoContextMenu );
+		if ( !showPhotoContextMenu ) { // TODO: no photo menu in photo card if it is switched off for photo list!!!!
+			return;
 		}
 
 //		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() ); // TODO
 
-		return "menu :(";
+		photoEntry.setPhotoContextMenu( "menu" );
 	}
 
 	private String getPhotoAuthorLink( final int userId ) {
@@ -165,9 +167,21 @@ public class PhotoEntryController {
 		return entityLinkUtilsService.getUserCardLink( user, getLanguage() );
 	}
 
-	private String getPhotoAuthorRank() {
+	private void setUserRank( final Photo photo, final PhotoEntryDTO photoEntry ) {
 		final boolean showUserRank = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE );
-		return "rank";
+		photoEntry.setShowUserRank( showUserRank );
+
+		if ( !showUserRank ) {
+			return;
+		}
+
+		final User user = userService.load( photo.getUserId() );
+		final UserRankIconContainer iconContainer = userRankService.getUserRankIconContainer( user, photo );
+		final StringBuilder builder = new StringBuilder();
+		for ( final AbstractUserRankIcon rankIcon : iconContainer.getRankIcons() ) {
+			builder.append( String.format( "<img src='%s/%s' height='8px'>", urlUtilsService.getSiteImagesPath(), rankIcon.getIcon() ) );
+		}
+		photoEntry.setPhotoAuthorRank( builder.toString() );
 	}
 
 	private User getCurrentUser() {

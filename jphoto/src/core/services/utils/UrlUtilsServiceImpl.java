@@ -17,7 +17,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	public static final String USER_TEAM_URL = "team";
 	public static final String USER_PHOTO_ALBUM = "albums";
 
-	public static final String SITE_IMAGE_FOLDER_NAME = "/images";
+	public static final String SITE_IMAGE_FOLDER_NAME = "images";
 
 	public static final String UNDER_CONSTRUCTION_VIEW = "errors/UnderConstruction";
 	public static final String ACCESS_DENIED_VIEW = "errors/AccessDenied";
