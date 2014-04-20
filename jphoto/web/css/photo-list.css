@@ -88,6 +88,10 @@
 	/*background: #BAC8D9;*/
 }
 
+.photo-preview-image {
+
+}
+
 .photo-list-entry-name {
 	position: relative;
 	top: 1px;
@@ -106,10 +110,6 @@
 	width: 99%;
 	height: 20px;
 	/*background: #BAC8D9;*/
-}
-
-.photo-preview-image {
-
 }
 
 .admin-special-flag {
