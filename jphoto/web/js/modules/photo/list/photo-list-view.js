@@ -7,10 +7,8 @@ define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/list/templates/author-link.html"
 		, "text!modules/photo/list/templates/author-rank.html"
 		, "text!modules/photo/list/templates/anonymous-period-expiration-time.html"
-		, "text!modules/photo/list/templates/admin-flag-anonymous.html"
-		, "text!modules/photo/list/templates/admin-flag-nude.html"
 		], function ( Backbone, $, _, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate
-		, authorRankTemplate, anonymousPeriodExpirationTimeTemplate, adminFlagAnonymousTemplate, adminFlagNudeTemplate ) {
+		, authorRankTemplate, anonymousPeriodExpirationTimeTemplate ) {
 
 	'use strict';
 
@@ -24,8 +22,6 @@ define( ["backbone", "jquery", "underscore"
 		authorLinkTemplate:_.template( authorLinkTemplate ),
 		authorRankTemplate:_.template( authorRankTemplate ),
 		anonymousPeriodExpirationTimeTemplate:_.template( anonymousPeriodExpirationTimeTemplate ),
-		adminFlagAnonymousTemplate:_.template( adminFlagAnonymousTemplate ),
-		adminFlagNudeTemplate:_.template( adminFlagNudeTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
@@ -63,11 +59,11 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				this.$el.append( this.adminFlagAnonymousTemplate( modelJSON ) );
+				this.$el.addClass( 'admin-special-flag-anonymous-posting' );
 			}
 
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				this.$el.append( this.adminFlagNudeTemplate( modelJSON ) );
+				this.$el.addClass( 'admin-special-flag-nude-content' );
 			}
 
 			this.$el.append( '</div>' );

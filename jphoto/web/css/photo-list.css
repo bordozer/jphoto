@@ -83,7 +83,7 @@
 	top: 3px;
 	left: 1px;
 	width: 250px;
-	height: 210px;
+	height: 230px;
 	text-align: center;
 	/*background: #BAC8D9;*/
 }
@@ -108,7 +108,7 @@
 	/*background: #BAC8D9;*/
 }
 
-.photo-preview-image{
+.photo-preview-image {
 
 }
 
@@ -120,4 +120,18 @@
 	border-width: 5px;
 	border-style: solid;
 	margin: 2px;
+}
+
+.admin-special-flag-anonymous-posting {
+	background-image:url('/images/icons24/admin-special-flag-anonymous-posting.png');
+	background-repeat:no-repeat;
+	background-size: 24px 24px;
+	background-position: 200px 310px;
+}
+
+.admin-special-flag-nude-content {
+	background-image:url('/images/icons24/admin-special-flag-nude-content.png');
+	background-repeat:no-repeat;
+	background-size: 24px 24px;
+	background-position: 230px 315px;
 }
