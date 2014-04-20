@@ -22,24 +22,17 @@
 	<div class="floatleft" style="margin: 0 auto; margin-top: 30px;">
 
 		<c:if test="${selectedUserCardTab == 'PERSONAL_DATA'}">
-			<div style="width: 800px; margin: 0 auto;">
-				<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}"/>
-			</div>
+			<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}"/>
 
-			<div class="floatleft">
-				<div class="block-background block-border justify-font" style="padding: 40px;">
-					<b>${eco:translate('Member self description')}:</b>
-					<br/>
-						${eco:formatPhotoCommentText(user.selfDescription)}
-				</div>
+			<div class="user-card-block block-background block-border justify-font" style="width: 500px; margin-top: 20px;">
+				<b>${eco:translate('Member self description')}:</b>
+				<br/>
+				${eco:formatPhotoCommentText(user.selfDescription)}
 			</div>
 
 			<c:if test="${editingUserDataIsAccessible}">
-
 				<links:userEdit user="${user}">
-					<div class="floatleft" style="padding: 20px;">
-						${eco:translate('Edit data')}
-					</div>
+					${eco:translate('Edit data')}
 				</links:userEdit>
 			</c:if>
 		</c:if>

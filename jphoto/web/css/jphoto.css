@@ -587,4 +587,5 @@ table.formtable {
 	position: relative;
 	padding: 10px;
 	vertical-align: top;
+	/*border: 1px solid red;*/
 }
