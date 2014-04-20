@@ -16,20 +16,11 @@
 
 <tags:page pageModel="${userCardModel.pageModel}">
 
-	<tags:entryMenuJs />
-
 	<user:userCardTab user="${user}" selectedTab="${userCardModel.selectedUserCardTab}" />
 
-	<div style="width: 85%; margin: 0 auto;">
+	<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
 
-		<div style="float: left; width: 800px; padding-right: 20px;">
-			<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
-		</div>
-
-		<div style="float: left; width: 450px;">
-			<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
-		</div>
-	</div>
+	<user:userPhotosByGenresList user="${user}" userCardGenreInfoMap="${userCardModel.userCardGenreInfoMap}"/>
 
 	<photo:photoListsRender photoLists="${userCardModel.photoLists}" />
 

@@ -51,49 +51,32 @@
 		/*border: dotted;*/
 	}
 
-	.userCardUserAvatarFrame {
-		width: 100%;
-		min-width: 200px;
-		min-height: 200px;
-		line-height: 200px;
-		height: auto;
-		float: left;
-		margin-top: 15px;
-		padding: 5px;
-		text-align: center;
-		vertical-align: middle;
-		border: #8A8E99 1px solid;
-		/*border: dotted;*/
-	}
 </style>
+<div class="user-card-block">
 
-<div style="float: left; width: 220px; padding: 25px;">
-	<div style="float: left;">
-		<div class="userCardUserAvatarFrame">
-			<c:if test="${userHasAvatar}">
-				<c:set var="avatarTitle" value="${eco:translate('Click to see full size')}"/>
-				${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
-			</c:if>
+	<c:if test="${userHasAvatar}">
+		<c:set var="avatarTitle" value="${eco:translate('Click to see full size')}"/>
+		${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
+	</c:if>
 
-			<c:if test="${not userHasAvatar}">
-				<c:set var="noAvatar" value="noAvataBoy.png"/>
-				<c:if test="${user.gender == 'FEMALE'}">
-					<c:set var="noAvatar" value="noAvatarGirl.png"/>
-				</c:if>
+	<c:if test="${not userHasAvatar}">
+		<c:set var="noAvatar" value="noAvataBoy.png"/>
+		<c:if test="${user.gender == 'FEMALE'}">
+			<c:set var="noAvatar" value="noAvatarGirl.png"/>
+		</c:if>
 
-				<c:set var="avatarOnClick" value="alert('${eco:translate('Tme member has not downloaded avatar yet... :(')}');"/>
-				<c:set var="avatarHint" value="${eco:translate('Tme member has not downloaded avatar yet... :(')}"/>
-				<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
-			</c:if>
-		</div>
+		<c:set var="avatarOnClick" value="alert('${eco:translate('Tme member has not downloaded avatar yet... :(')}');"/>
+		<c:set var="avatarHint" value="${eco:translate('Tme member has not downloaded avatar yet... :(')}"/>
+		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
+	</c:if>
 
-		<div class="divPadd">
-			<c:if test="${isEditable}">
-				<c:set var="avatarHint" value="${eco:translate('Change avatar')}"/>
-				<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
-			</c:if>
-		</div>
-	</div>
+</div>
+
+<div class="divPadd">
+	<c:if test="${isEditable}">
+		<c:set var="avatarHint" value="${eco:translate('Change avatar')}"/>
+		<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
+	</c:if>
 </div>
 
 <div id="${fullAvatarDivId}" style="display: none;">

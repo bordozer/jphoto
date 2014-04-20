@@ -581,3 +581,10 @@ table.formtable {
 	border-style: solid;
 	margin: 2px;
 }
+
+.user-card-block {
+	display: inline-block;
+	position: relative;
+	padding: 10px;
+	vertical-align: top;
+}

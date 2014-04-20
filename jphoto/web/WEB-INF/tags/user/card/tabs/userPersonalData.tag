@@ -9,14 +9,7 @@
 <%@ attribute name="lastUserActivityTime" required="true" type="java.util.Date" %>
 <%@ attribute name="entryMenu" required="true" type="core.general.menus.EntryMenu" %>
 
-<div class="floatleft">
-	<div class="floatleft" style="padding-bottom: 20px;">
 
-		<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
+<user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
 
-		<div style="float: right; width: 500px;">
-			<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}"/>
-		</div>
-
-	</div>
-</div>
+<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}"/>

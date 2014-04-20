@@ -27,11 +27,11 @@
 <c:set var="isCurrentUserLoggedUser" value="<%=UserUtils.isCurrentUserLoggedUser()%>"/>
 <c:set var="userCanSeeUserRankVoteHistory" value="<%=ApplicationContextHelper.getSecurityService().userCanSeeUserRankVoteHistory( user, EnvironmentContext.getCurrentUser() )%>"/>
 
-<div id="userPhotosByGenreDiv">
+<div class="user-card-block">
 
 	<js:genreRankVotingJS />
 
-	<table:table border="0" width="100%" oddEven="true">
+	<table:table border="0" width="400px" oddEven="true">
 
 		<table:separatorInfo colspan="4" height="50" title="${eco:translate('Photos and ranks')}"/>
 
