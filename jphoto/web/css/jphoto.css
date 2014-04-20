@@ -572,3 +572,12 @@ table.formtable {
 .untranslated {
 	color: #AA0000;
 }
+
+.adminSpecialFlag {
+	float: right;
+	width: 3px;
+	height: 3px;
+	border-width: 5px;
+	border-style: solid;
+	margin: 2px;
+}

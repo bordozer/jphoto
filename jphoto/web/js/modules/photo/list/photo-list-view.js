@@ -37,7 +37,6 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( '' );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
-				console.log( this.model.get( 'isGroupOperationEnabled' ) );
 				this.$el.append( this.groupOperationsTemplate( modelJSON ) );
 			}
 
