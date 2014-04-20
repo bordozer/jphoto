@@ -18,7 +18,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.groupoperations.PhotoGroupOperationModel;
+import ui.services.security.SecurityUIService;
 import ui.userRankIcons.AbstractUserRankIcon;
 import ui.userRankIcons.UserRankIconContainer;
 
@@ -74,6 +74,9 @@ public class PhotoEntryController {
 
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private SecurityUIService securityUIService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
@@ -175,6 +178,15 @@ public class PhotoEntryController {
 	}
 
 	private String getPhotoPreview( final Photo photo ) {
+
+		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
+			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
+				, urlUtilsService.getPhotoCardLink( photo.getId() )
+				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Nude content", getLanguage() ) )
+				, urlUtilsService.getSiteImagesPath()
+			);
+		}
+
 		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image'/></a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
 			, photo.getNameEscaped()
