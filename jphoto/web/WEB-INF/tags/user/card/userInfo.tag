@@ -102,9 +102,10 @@
 
 	</table:table>
 
+	<%-- TODO: move this link to the user's context menu --%>
 	<c:if test="${isEditable}">
 		<links:userEdit user="${user}">
-			${eco:translate('Edit data')}
+			${eco:translate('User card: Edit member personal data')}
 		</links:userEdit>
 	</c:if>
 </div>

@@ -60,9 +60,10 @@
 		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
 	</c:if>
 
+	<%-- TODO: move this link to the user's context menu --%>
 	<c:if test="${isEditable}">
 		<div style="text-align: center; width: 200px; padding-top: 10px;">
-			<c:set var="avatarHint" value="${eco:translate('Change avatar')}"/>
+			<c:set var="avatarHint" value="${eco:translate('User card: Change avatar')}"/>
 			<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
 		</div>
 	</c:if>
