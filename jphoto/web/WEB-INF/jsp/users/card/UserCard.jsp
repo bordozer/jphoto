@@ -30,11 +30,6 @@
 				${eco:formatPhotoCommentText(user.selfDescription)}
 			</div>
 
-			<c:if test="${editingUserDataIsAccessible}">
-				<links:userEdit user="${user}">
-					${eco:translate('Edit data')}
-				</links:userEdit>
-			</c:if>
 		</c:if>
 
 		<c:if test="${selectedUserCardTab == 'PHOTOS_OVERVIEW'}">

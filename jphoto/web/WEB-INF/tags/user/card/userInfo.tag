@@ -14,6 +14,7 @@
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
 <%@ attribute name="entryMenu" required="true" type="core.general.menus.EntryMenu" %>
 <%@ attribute name="lastUserActivityTime" required="true" type="java.util.Date" %>
+<%@ attribute name="isEditable" required="true" type="java.lang.Boolean" %>
 
 <%
 	final SecurityService securityService = ApplicationContextHelper.getSecurityService();
@@ -100,4 +101,10 @@
 		</table:trinfo>
 
 	</table:table>
+
+	<c:if test="${isEditable}">
+		<links:userEdit user="${user}">
+			${eco:translate('Edit data')}
+		</links:userEdit>
+	</c:if>
 </div>

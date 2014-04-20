@@ -11,4 +11,4 @@
 
 <user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
 
-<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}"/>
+<user:userInfo user="${user}" lastUserActivityTime="${lastUserActivityTime}" entryMenu="${entryMenu}" isEditable="${editingUserDataIsAccessible}"/>

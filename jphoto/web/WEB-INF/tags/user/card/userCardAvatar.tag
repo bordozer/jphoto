@@ -42,16 +42,6 @@
 
 <c:set var="fullAvatarDivId" value="avatar_${user.id}" />
 
-<style type="text/css">
-	.divPadd {
-		float: left;
-		padding: 5px;
-		width: 100%;
-		text-align: center;
-		/*border: dotted;*/
-	}
-
-</style>
 <div class="user-card-block">
 
 	<c:if test="${userHasAvatar}">
@@ -70,12 +60,11 @@
 		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
 	</c:if>
 
-</div>
-
-<div class="divPadd">
 	<c:if test="${isEditable}">
-		<c:set var="avatarHint" value="${eco:translate('Change avatar')}"/>
-		<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
+		<div style="text-align: center; width: 200px; padding-top: 10px;">
+			<c:set var="avatarHint" value="${eco:translate('Change avatar')}"/>
+			<a href="${userAvatarLink}" title="${avatarHint}">${avatarHint}</a>
+		</div>
 	</c:if>
 </div>
 
