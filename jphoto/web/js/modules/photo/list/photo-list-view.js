@@ -30,43 +30,72 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( '<div' + ( this.model.get( 'userOwnThePhoto' ) ? " class='block-user-photo'" : "") + ' style="float: left; width: 100%; height: 100%;">' );
+			var photoId = this.model.get( 'photoId' );
 
-			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
-				this.$el.append( this.groupOperationsTemplate( modelJSON ) );
+			var element = this.$el;
+			element.html( '' );
+
+			if ( this.model.get( 'userOwnThePhoto' ) ) {
+				element.addClass( 'block-user-photo' );
 			}
 
-			this.$el.append( this.photoListEntryContainer( modelJSON ) );
+			element = this.addAdminFlagDiv( photoId, 'admin-special-empty-flag', element );
 
-			if ( this.model.get( 'showPhotoContextMenu' ) ) {
-				this.$el.append( this.contextMenuTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showStatistics' ) ) {
-				this.$el.append( this.statisticsTemplate( modelJSON ) );
-			}
-
-			this.$el.append( this.photoNameTemplate( modelJSON ) );
-
-			this.$el.append( this.authorLinkTemplate( modelJSON ) );
-
-			if ( this.model.get( 'showUserRank' ) ) {
-				this.$el.append( this.authorRankTemplate( modelJSON ) );
-			}
-
-			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
-				this.$el.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
+			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
+				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-nude-content', element );
 			}
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				this.$el.addClass( 'admin-special-flag-anonymous-posting' );
+				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-anonymous-posting', element );
 			}
 
-			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				this.$el.addClass( 'admin-special-flag-nude-content' );
+			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
+				element.append( this.groupOperationsTemplate( modelJSON ) );
 			}
 
-			this.$el.append( '</div>' );
+			element.append( this.photoListEntryContainer( modelJSON ) );
+
+			if ( this.model.get( 'showPhotoContextMenu' ) ) {
+				element.append( this.contextMenuTemplate( modelJSON ) );
+			}
+
+			if ( this.model.get( 'showStatistics' ) ) {
+				element.append( this.statisticsTemplate( modelJSON ) );
+			}
+
+			element.append( this.photoNameTemplate( modelJSON ) );
+
+			element.append( this.authorLinkTemplate( modelJSON ) );
+
+			if ( this.model.get( 'showUserRank' ) ) {
+				element.append( this.authorRankTemplate( modelJSON ) );
+			}
+
+			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
+				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
+			}
+
+//			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
+//				this.$el.addClass( 'admin-special-flag-anonymous-posting' );
+//			}
+
+//			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
+//				element.append( "</div>" );
+//				var div = $( "#photo-container-" + photoId );
+//				console.log( div );
+//				div.addClass( 'admin-special-flag-nude-content', this.$el );
+//				this.$el.addClass( 'admin-special-flag-nude-content' );
+//				this.addAdminFlag( 2, photoId, this.$el );
+//			}
+
+			element.append( '</div>' );
+		},
+
+		addAdminFlagDiv: function ( photoId, cssClass, el ) {
+			var adminFlagDivId = "admin-flag-" + photoId + "-" + cssClass;
+			el.append( "<div id='" + adminFlagDivId + "' class='" + cssClass + "'>" );
+
+			return $( "#" + adminFlagDivId );
 		}
 	} );
 
