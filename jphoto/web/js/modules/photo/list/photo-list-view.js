@@ -34,7 +34,7 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( '' );
+			this.$el.html( '<div' + ( this.model.get( 'userOwnThePhoto' ) ? " class='block-user-photo'" : "") + ' style="float: left; width: 100%; height: 100%;">' );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
 				this.$el.append( this.groupOperationsTemplate( modelJSON ) );
@@ -69,6 +69,8 @@ define( ["backbone", "jquery", "underscore"
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
 				this.$el.append( this.adminFlagNudeTemplate( modelJSON ) );
 			}
+
+			this.$el.append( '</div>' );
 		}
 	} );
 

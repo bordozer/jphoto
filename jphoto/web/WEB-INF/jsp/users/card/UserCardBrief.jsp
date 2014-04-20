@@ -31,9 +31,7 @@
 		</div>
 	</div>
 
-	<c:forEach var="photoList" items="${userCardModel.photoLists}">
-		<photo:photoList photoList="${photoList}" />
-	</c:forEach>
+	<photo:photoListsRender photoLists="${userCardModel.photoLists}" />
 
 	<div class="footerseparator"></div>
 

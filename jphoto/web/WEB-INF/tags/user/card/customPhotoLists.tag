@@ -9,13 +9,7 @@
 
 <c:set var="hasAtLeastNotEmptyPhotoList" value="${fn:length(photoLists) > 0}"/>
 
-<c:forEach var="userTeamMemberPhotoList" items="${photoLists}">
-
-	<tags:entryMenuJs />
-
-	<photo:photoList photoList="${userTeamMemberPhotoList}"/>
-
-</c:forEach>
+<photo:photoListsRender photoLists="${photoLists}"/>
 
 <c:if test="${not hasAtLeastNotEmptyPhotoList}">
 	<div style="text-align: center;">

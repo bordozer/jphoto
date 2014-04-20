@@ -36,6 +36,8 @@ public class PhotoEntryDTO {
 	private boolean showAdminFlag_Nude;
 	private String showAdminFlag_NudeTitle;
 
+	private boolean userOwnThePhoto;
+
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
 	}
@@ -234,5 +236,13 @@ public class PhotoEntryDTO {
 
 	public void setShowAdminFlag_NudeTitle( final String showAdminFlag_NudeTitle ) {
 		this.showAdminFlag_NudeTitle = showAdminFlag_NudeTitle;
+	}
+
+	public boolean isUserOwnThePhoto() {
+		return userOwnThePhoto;
+	}
+
+	public void setUserOwnThePhoto( final boolean userOwnThePhoto ) {
+		this.userOwnThePhoto = userOwnThePhoto;
 	}
 }

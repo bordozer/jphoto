@@ -12,12 +12,6 @@
 
 <photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}"/>
 
-<c:forEach var="photoList" items="${photoLists}">
-
-	<tags:entryMenuJs />
-
-	<photo:photoList photoList="${photoList}"/>
-
-</c:forEach>
+<photo:photoListsRender photoLists="${photoLists}"/>
 
 <photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}"/>

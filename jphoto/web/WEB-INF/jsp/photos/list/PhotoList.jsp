@@ -8,14 +8,7 @@
 
 <jsp:useBean id="photoListModel" type="ui.controllers.photos.list.PhotoListModel" scope="request"/>
 
-<c:set var="baseUrl" value="${eco:baseUrl()}" />
-
 <tags:page pageModel="${photoListModel.pageModel}">
-
-	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
-	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
-
-	<link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
 	<tags:entryMenuJs />
 
@@ -28,10 +21,7 @@
 		<photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}" />
 	</c:if>
 
-	<c:forEach var="photoList" items="${photoListModel.photoLists}">
-		<%--<photo:photoList photoList="${photoList}" />--%>
-		<photo:photoListPostponedLoading photoList="${photoList}" />
-	</c:forEach>
+	<photo:photoListsRender photoLists="${photoListModel.photoLists}" />
 
 	<c:if test="${showUserPhotoGenres}">
 		<photo:photosByUserByGenre user="${user}" userPhotosByGenres="${userPhotosByGenres}" />
