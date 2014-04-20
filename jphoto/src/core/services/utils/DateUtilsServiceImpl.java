@@ -406,6 +406,11 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 	}
 
 	@Override
+	public boolean isItToday( final Date time ) {
+		return getFirstSecondOfDay( time ).getTime() == getFirstSecondOfToday().getTime();
+	}
+
+	@Override
 	public Date getCurrentTime() {
 		return new Date();
 	}

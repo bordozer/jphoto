@@ -84,7 +84,7 @@ public class PhotoEntryController {
 		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( photoId );
 
 		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
-		photoEntry.setPhotoUploadDate( dateUtilsService.formatDateTimeShort( photo.getUploadTime() ) );
+		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo ) );
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
 		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
 
@@ -109,6 +109,21 @@ public class PhotoEntryController {
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 
 		return photoEntry;
+	}
+
+	private String getPhotoUploadDate( final Photo photo ) {
+		final Date uploadTime = photo.getUploadTime();
+
+		String shownTime = dateUtilsService.formatDateTimeShort( uploadTime );
+		if ( dateUtilsService.isItToday( uploadTime ) ) {
+			shownTime = dateUtilsService.formatTimeShort( uploadTime );
+		}
+
+		return String.format( "<a href='%s' title='%s'>%s</a>"
+			, urlUtilsService.getPhotosUploadedOnDateUrl( uploadTime )
+			, translatorService.translate( "Photo preview: show all photos uploaded at the day", getLanguage() )
+			, shownTime
+		);
 	}
 
 	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry ) {

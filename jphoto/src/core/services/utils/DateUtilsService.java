@@ -125,4 +125,6 @@ public interface DateUtilsService {
 	boolean isEmptyTime( final Date time );
 
 	boolean isNotEmptyTime( final Date time );
+
+	boolean isItToday( final Date time );
 }
