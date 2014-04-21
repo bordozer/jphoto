@@ -9,13 +9,8 @@
 <c:set var="container" value="entry-context-menu-${entryMenuType.id}-${entryId}" />
 
 <div class="${container}" style="display: inline-block;">
-	<a href="#" onclick="initContextMenu( ${entryId} ); return false;">
+	<a href="#" onclick="initContextMenuForEntry( ${entryId}, ${entryMenuType.id}, $( '.${container}' ) ); return false;">
 		<html:img16 src="ui-menu-blue.png" alt="${eco:translate('Entry Context menu hint')}"/>
 	</a>
 </div>
 
-<script type="text/javascript">
-	function initContextMenu( entryId ) {
-		initPhotoContextMenu( entryId, ${entryMenuType.id}, $( '.${container}' ) );
-	}
-</script>

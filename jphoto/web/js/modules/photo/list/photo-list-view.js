@@ -61,12 +61,13 @@ define( ["backbone", "jquery", "underscore"
 			if ( this.model.get( 'showPhotoContextMenu' ) ) {
 				element.append( this.contextMenuTemplate( modelJSON ) );
 
-				var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
+				// TODO: uncomment to render menu immediately
+				/*var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
 
 				var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) } );
 				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
 
-				photoContextMenuModel.fetch( { cache: false } );
+				photoContextMenuModel.fetch( { cache: false } );*/
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
@@ -85,19 +86,7 @@ define( ["backbone", "jquery", "underscore"
 				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
-//			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-//				this.$el.addClass( 'admin-special-flag-anonymous-posting' );
-//			}
-
-//			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-//				element.append( "</div>" );
-//				var div = $( "#photo-container-" + photoId );
-//				console.log( div );
-//				div.addClass( 'admin-special-flag-nude-content', this.$el );
-//				this.$el.addClass( 'admin-special-flag-nude-content' );
-//				this.addAdminFlag( 2, photoId, this.$el );
-//			}
-
+			element.append( '</div>' );
 			element.append( '</div>' );
 		},
 
@@ -106,6 +95,22 @@ define( ["backbone", "jquery", "underscore"
 			el.append( "<div id='" + adminFlagDivId + "' class='" + cssClass + "'>" );
 
 			return $( "#" + adminFlagDivId );
+		}
+
+		, events: {
+			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
+		}
+
+		, photoContextMenuIconClick: function() {
+			var photoId = this.model.get( 'photoId' );
+//			console.log( 'Init photo context menu: ' + photoId );
+			initContextMenuForEntry( photoId, 1, $( '.context-menu-photo-' + photoId, this.$el ) ); // TODO: EntryMenuType.PHOTO.getId is hardcoded
+		}
+
+		, onPhotoContextMenuIconClick: function( evt ) {
+//			console.log( 'photo context menu is clicked' );
+			evt.stopPropagation();
+			this.photoContextMenuIconClick();
 		}
 	} );
 

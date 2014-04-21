@@ -29,27 +29,14 @@
 
 <script type="text/javascript">
 
-	function initPhotoContextMenu( photoId, menuTypeId, container ) {
+	function initContextMenuForEntry( entryId, menuTypeId, container ) {
 		require( ['components/menu/context-menu'], function ( contextMenu ) {
-			contextMenu( photoId, menuTypeId, '${baseUrl}', container );
+			contextMenu( entryId, menuTypeId, '${baseUrl}', container );
 		} );
 	}
 </script>
 
 <script type="text/javascript">
-
-	function initContextMenu( menuId, menuDivId, entryMenuHeight ) {
-		$( function () {
-			var container = $( '#' + menuId );
-			console.log();
-			container.context_menu( {
-				content:$( '#' + menuDivId ).html()
-				  , showSpeed:400
-				  , width:350
-				  , maxHeight: entryMenuHeight
-			} );
-		} );
-	}
 
 	var complaintEntities = {<c:forEach var="complaintEntity" items="${complaintEntities}" varStatus="status"> '${complaintEntity.id}': "${eco:translate(complaintEntity.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 	var complaintReasonTypes = {<c:forEach var="complaintReasonType" items="${complaintReasonTypes}" varStatus="status"> '${complaintReasonType.id}': "${eco:translate(complaintReasonType.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
