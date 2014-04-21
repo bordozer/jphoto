@@ -14,7 +14,7 @@
 
 	<script type="text/javascript">
 		$( function () {
-			$( '#${menuId}' ).fgmenu( {
+			$( '#${menuId}' ).context_menu( {
 										content:$( '#${menuDivId}' ).html()
 										  , showSpeed:400
 										  , width:350

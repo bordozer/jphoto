@@ -37,6 +37,16 @@ public class MenuEntryController {
 		final EntryMenu entryMenu = getEntryMEnuInstance( entryMenuTypeId, entryId );
 
 		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryId );
+		entryMenuDTO.setMenuDivId( String.format( "%s-items", entryMenu.getMenuId() ) );
+		entryMenuDTO.setMenuId( entryMenu.getMenuId() );
+
+		entryMenuDTO.setEntryMenuTypeName( entryMenu.getEntryMenuType().getName() );
+		entryMenuDTO.setEntryMenuTitle( entryMenu.getMenuTitle() );
+		entryMenuDTO.setEntryMenuHeight( String.valueOf( entryMenu.getMenuHeight() ) );
+
+		entryMenuDTO.setMenuItemCssClass( "_class_" );
+		entryMenuDTO.setMenuItemCommand( "_command_" );
+		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
 		return entryMenuDTO;
 	}

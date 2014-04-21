@@ -12,10 +12,37 @@ define( ["backbone", "jquery", "underscore"
 			this.listenTo( this.model, "sync", this.render );
 		},
 
+		events: {
+			"click .entry-context-menu-icon": "onClickMenuIcon"
+		},
+
 		render:function () {
 			var modelJSON = this.model.toJSON();
 			this.$el = this.model.get( 'container' );
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
+
+			var menuId = this.model.get( 'menuId' );
+			var menuDivId = this.model.get( 'menuDivId' );
+			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
+
+			/*$( function () {
+				$( '#' + menuId ).context_menu( {
+					content:$( '#' + menuDivId ).html()
+					  , showSpeed:400
+					  , width:350
+					  , maxHeight: entryMenuHeight
+				} );
+			} );*/
+		},
+
+		clickMenuIcon: function() {
+			showAlertMessage( 'Is not implemented yet' );
+//			alert( 'Is not implemented yet' );
+		},
+
+		onClickMenuIcon: function( evt ) {
+			evt.stopPropagation();
+			this.clickMenuIcon();
 		}
 	});
 

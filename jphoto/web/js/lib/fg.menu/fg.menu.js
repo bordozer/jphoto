@@ -14,7 +14,7 @@ Dual licensed under the MIT (filamentgroup.com/examples/mit-license.txt) and GPL
 var allUIMenus = [];
 
 /* TODO: $.fn.menu is replaced with $.fn.menuA because a conflict with jquery.autocomplete*/
-$.fn.fgmenu = function(options){
+$.fn.context_menu = function(options){
 	var caller = this;
 	var options = options;
 	var m = new Menu(caller, options);	

@@ -1,3 +1,22 @@
-<span>
-	CONTEXT MENU <%=entryId%>
-</span>
+<div>
+	<a class="entry-context-menu-icon" tabindex="0" href="#" id="<%=menuId%>">
+		<img src="/images/ui-menu-blue.png" alt="<%=entryMenuTypeName%>">
+	</a>
+
+	<div id="<%=menuDivId%>" class="entry-popup-menu">
+
+		<div class="floatleft block-background entry-popup-menu-header"><%=entryMenuTitle%></div>
+
+		<ul class='top-menu-item'>
+
+			<li style="font-size: 10px;">
+
+				<a class="<%=menuItemCssClass%>" href="#" onclick="<%=menuItemCommand%>">
+					<img src="/images/add16.png">
+					&nbsp;
+					<%=menuItemCommandText%>
+				</a>
+
+		</ul>
+	</div>
+</div>
