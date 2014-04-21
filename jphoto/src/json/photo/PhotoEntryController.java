@@ -5,7 +5,6 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GenreService;
-import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
@@ -58,9 +57,6 @@ public class PhotoEntryController {
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private EntryMenuService entryMenuService;
-
-	@Autowired
 	private UrlUtilsService urlUtilsService;
 
 	@Autowired
@@ -91,7 +87,7 @@ public class PhotoEntryController {
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
 		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
 
-		setPhotoContextMenu( photo, photoEntry );
+		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
 		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
 		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo ) );
@@ -106,10 +102,8 @@ public class PhotoEntryController {
 		final boolean isSuperAdminUser = securityService.isSuperAdminUser( getCurrentUser() );
 
 		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
-		photoEntry.setShowAdminFlag_AnonymousTitle( translatorService.translate( "The photo is withing anonymous period", getLanguage() ) );
 
 		photoEntry.setShowAdminFlag_Nude( photo.isContainsNudeContent() && isSuperAdminUser );
-		photoEntry.setShowAdminFlag_NudeTitle( translatorService.translate( "The photo has nude content", getLanguage() ) );
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 
@@ -194,18 +188,6 @@ public class PhotoEntryController {
 			, photo.getNameEscaped()
 			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
 		);
-	}
-
-	private void setPhotoContextMenu( final Photo photo, final PhotoEntryDTO photoEntry ) {
-		final boolean showPhotoContextMenu = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU );
-		photoEntry.setShowPhotoContextMenu( showPhotoContextMenu );
-		if ( !showPhotoContextMenu ) { // TODO: no photo menu in photo card if it is switched off for photo list!!!!
-			return;
-		}
-
-//		final EntryMenu photoMenu = entryMenuService.getPhotoMenu( photo, getCurrentUser() ); // TODO
-
-		photoEntry.setPhotoContextMenu( "menu" );
 	}
 
 	private String getPhotoAuthorLink( final Photo photo ) {

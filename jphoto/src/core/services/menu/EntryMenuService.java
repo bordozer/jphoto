@@ -18,6 +18,8 @@ public interface EntryMenuService {
 
 	EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
+	EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor );
+
 	EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes );
 
 	List<EntryMenuOperationType> getPhotoFullMenuItems();

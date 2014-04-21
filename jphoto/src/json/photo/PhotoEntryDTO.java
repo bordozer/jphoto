@@ -10,7 +10,6 @@ public class PhotoEntryDTO {
 	private String photoImage;
 
 	private boolean showPhotoContextMenu;
-	private String photoContextMenu;
 
 	private String photoName;
 	private String photoAuthorLink;
@@ -31,10 +30,8 @@ public class PhotoEntryDTO {
 	private String photoAnonymousPeriodExpirationInfo;
 
 	private boolean showAdminFlag_Anonymous;
-	private String showAdminFlag_AnonymousTitle;
 
 	private boolean showAdminFlag_Nude;
-	private String showAdminFlag_NudeTitle;
 
 	private boolean userOwnThePhoto;
 
@@ -84,14 +81,6 @@ public class PhotoEntryDTO {
 
 	public void setShowPhotoContextMenu( final boolean showPhotoContextMenu ) {
 		this.showPhotoContextMenu = showPhotoContextMenu;
-	}
-
-	public String getPhotoContextMenu() {
-		return photoContextMenu;
-	}
-
-	public void setPhotoContextMenu( final String photoContextMenu ) {
-		this.photoContextMenu = photoContextMenu;
 	}
 
 	public String getPhotoName() {
@@ -214,28 +203,12 @@ public class PhotoEntryDTO {
 		return showAdminFlag_Anonymous;
 	}
 
-	public String getShowAdminFlag_AnonymousTitle() {
-		return showAdminFlag_AnonymousTitle;
-	}
-
-	public void setShowAdminFlag_AnonymousTitle( final String showAdminFlag_AnonymousTitle ) {
-		this.showAdminFlag_AnonymousTitle = showAdminFlag_AnonymousTitle;
-	}
-
 	public boolean isShowAdminFlag_Nude() {
 		return showAdminFlag_Nude;
 	}
 
 	public void setShowAdminFlag_Nude( final boolean showAdminFlag_Nude ) {
 		this.showAdminFlag_Nude = showAdminFlag_Nude;
-	}
-
-	public String getShowAdminFlag_NudeTitle() {
-		return showAdminFlag_NudeTitle;
-	}
-
-	public void setShowAdminFlag_NudeTitle( final String showAdminFlag_NudeTitle ) {
-		this.showAdminFlag_NudeTitle = showAdminFlag_NudeTitle;
 	}
 
 	public boolean isUserOwnThePhoto() {

@@ -40,6 +40,11 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
+	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor ) {
+		return getGenericMenu( photoComment, accessor, getCommentFullMenuItems(), EntryMenuType.COMMENT );
+	}
+
+	@Override
 	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
 		return getGenericMenu( photoComment, accessor, entryMenuOperationTypes, EntryMenuType.COMMENT );
 	}
