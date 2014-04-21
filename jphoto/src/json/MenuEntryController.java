@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 
-@RequestMapping( "menu/{entryTypeId}/{entryId}" )
+@RequestMapping( "menu/{entryMenuTypeId}/{entryId}" )
 @Controller
 public class MenuEntryController {
 
@@ -32,8 +32,19 @@ public class MenuEntryController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
-	public EntryMenu menuEntry( final @PathVariable( "entryTypeId" ) int entryTypeId, final @PathVariable( "entryId" ) int entryId ) {
-		final EntryMenuType menuType = EntryMenuType.getById( entryTypeId );
+	public EntryMenuDTO menuEntry( final @PathVariable( "entryMenuTypeId" ) int entryMenuTypeId, final @PathVariable( "entryId" ) int entryId ) {
+
+		final EntryMenu entryMenu = getEntryMEnuInstance( entryMenuTypeId, entryId );
+
+		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryId );
+
+		return entryMenuDTO;
+	}
+
+	private EntryMenu getEntryMEnuInstance( final int entryMenuTypeId, final int entryId ) {
+
+		final EntryMenuType menuType = EntryMenuType.getById( entryMenuTypeId );
+
 		switch ( menuType ) {
 			case USER:
 				return entryMenuService.getUserMenu( userService.load( entryId ), EnvironmentContext.getCurrentUser() );
@@ -42,6 +53,7 @@ public class MenuEntryController {
 			case COMMENT:
 				return entryMenuService.getCommentMenu( photoCommentService.load( entryId ), EnvironmentContext.getCurrentUser() );
 		}
-		throw new IllegalArgumentException( String.format( "Illegal EntryMenuType id: %d", entryTypeId ) );
+
+		throw new IllegalArgumentException( String.format( "Illegal EntryMenuType id: %d", entryMenuTypeId ) );
 	}
 }

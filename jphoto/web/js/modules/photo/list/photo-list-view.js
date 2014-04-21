@@ -57,6 +57,11 @@ define( ["backbone", "jquery", "underscore"
 
 			if ( this.model.get( 'showPhotoContextMenu' ) ) {
 				element.append( this.contextMenuTemplate( modelJSON ) );
+
+				var menuContainer = $( '.context-menu-photo-' + photoId, this.$el );
+				var contextModel = this.model.get( 'photoContextMenuModel' );
+				contextModel.set( { container: menuContainer } );
+				contextModel.fetch( { cache: false } );
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {

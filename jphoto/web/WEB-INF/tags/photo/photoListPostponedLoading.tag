@@ -88,6 +88,11 @@
 			} );
 		}
 
+		/*var entryMenuRender;
+		require( ['components/menu/context-menu'], function ( entryMenu ) {
+			entryMenuRender = entryMenu;
+		} );*/
+
 	</script>
 
 	<js:confirmAction />
