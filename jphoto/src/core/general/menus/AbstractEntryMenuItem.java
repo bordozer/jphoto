@@ -20,7 +20,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "adminMenuItem";
 	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = StringUtils.EMPTY;
 
-	public static final int MENU_ITEM_HEIGHT = 27;
+	public static final int MENU_ITEM_HEIGHT = 29;
 	public static final int MENU_SEPARATOR_HEIGHT = 3;
 
 	protected final T menuEntry;
