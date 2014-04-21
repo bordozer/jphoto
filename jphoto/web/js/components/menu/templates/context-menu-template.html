@@ -1,4 +1,5 @@
 <div>
+
 	<a class="entry-context-menu-icon" tabindex="0" href="#" id="<%=menuId%>">
 		<img class="entry-context-menu-icon" src="/images/ui-menu-blue.png" alt="<%=entryMenuTypeName%>">
 	</a>
@@ -7,18 +8,8 @@
 
 		<div class="floatleft block-background entry-popup-menu-header"><%=entryMenuTitle%></div>
 
-		<ul class='top-menu-item'>
+		<ul class='top-menu-item entry-context-menu-items'></ul>
 
-			<li style="font-size: 10px;">
-
-				<div class="entry-menu-items"></div>
-
-				<a class="entry-menu-item <%=menuItemCssClass%>" href="#" onclick="<%=menuItemCommand%>"> <!-- TODO: move handler to JS -->
-					<img src="/images/add16.png">
-					&nbsp;
-					<%=menuItemCommandText%>
-				</a>
-
-		</ul>
 	</div>
+
 </div>

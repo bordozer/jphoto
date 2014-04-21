@@ -1,12 +1,14 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!components/menu/templates/context-menu-template.html"
-		], function ( Backbone, $, _, contextMenuTemplate ) {
+		, "text!components/menu/templates/context-menu-item-template.html"
+		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemTemplate ) {
 
 	'use strict';
 
 	var ContextMenuView = Backbone.View.extend( {
 
 		contextMenuTemplate:_.template( contextMenuTemplate ),
+		contextMenuItemTemplate:_.template( contextMenuItemTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
@@ -16,11 +18,11 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
-			console.log( this.model );
-
 			var menuId = this.model.get( 'menuId' );
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
+
+			this.renderItems( modelJSON[ 'entryMenuItems' ], $( '.entry-context-menu-items', this.$el ) );
 
 			$( function () {
 				$( '#' + menuId ).context_menu( {
@@ -30,6 +32,15 @@ define( ["backbone", "jquery", "underscore"
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
+		}
+
+		, renderItems: function( contextMenuItems, container ) {
+
+			for ( var i in contextMenuItems ) {
+				var menuItem = contextMenuItems[ i ];
+				console.log( menuItem );
+				container.append( this.contextMenuItemTemplate( menuItem ) );
+			}
 		}
 
 		/*
