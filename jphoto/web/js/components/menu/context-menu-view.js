@@ -16,6 +16,8 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
+			console.log( this.model );
+
 			var menuId = this.model.get( 'menuId' );
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );

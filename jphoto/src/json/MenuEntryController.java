@@ -1,5 +1,6 @@
 package json;
 
+import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuType;
 import core.services.menu.EntryMenuService;
@@ -8,11 +9,10 @@ import core.services.photo.PhotoService;
 import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+
+import java.util.List;
 
 @RequestMapping( "menu/{entryMenuTypeId}/{entryId}" )
 @Controller
@@ -36,7 +36,7 @@ public class MenuEntryController {
 
 		final EntryMenu entryMenu = getEntryMenuInstance( entryMenuTypeId, entryId );
 
-		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryId );
+		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryMenuTypeId, entryId );
 		entryMenuDTO.setMenuDivId( String.format( "%s-items", entryMenu.getMenuId() ) );
 		entryMenuDTO.setMenuId( entryMenu.getMenuId() );
 
@@ -47,6 +47,9 @@ public class MenuEntryController {
 		entryMenuDTO.setMenuItemCssClass( "_class_" );
 		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
 		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
+
+		final List<? extends AbstractEntryMenuItem> menuItems = entryMenu.getEntryMenuItems();
+		entryMenuDTO.setEntryMenuItems( menuItems );
 
 		return entryMenuDTO;
 	}
