@@ -4,6 +4,7 @@
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -108,7 +109,8 @@
 
 			<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
 				/
-				<tags:entryMenu entryMenu="${commentInfo.entryMenu}" />
+				<%--<tags:entryMenu entryMenu="${commentInfo.entryMenu}" />--%>
+				<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>" />
 			</c:if>
 
 		</div>

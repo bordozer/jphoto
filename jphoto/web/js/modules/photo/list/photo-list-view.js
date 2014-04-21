@@ -103,12 +103,10 @@ define( ["backbone", "jquery", "underscore"
 
 		, photoContextMenuIconClick: function() {
 			var photoId = this.model.get( 'photoId' );
-//			console.log( 'Init photo context menu: ' + photoId );
 			initContextMenuForEntry( photoId, 1, $( '.context-menu-photo-' + photoId, this.$el ) ); // TODO: EntryMenuType.PHOTO.getId is hardcoded
 		}
 
 		, onPhotoContextMenuIconClick: function( evt ) {
-//			console.log( 'photo context menu is clicked' );
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
 		}

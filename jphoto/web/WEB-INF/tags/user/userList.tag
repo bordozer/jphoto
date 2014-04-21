@@ -1,3 +1,4 @@
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -81,7 +82,8 @@
 					<icons:userIcons user="${user}"
 									 hideIconSendPrivateMessage="true"
 							/>
-					<tags:entryMenu entryMenu="${userMenu}" />
+					<%--<tags:entryMenu entryMenu="${userMenu}" />--%>
+					<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
 				</table:td>
 
 				<table:td cssClass="text-centered">${eco:translate(user.userStatus.name)}</table:td>

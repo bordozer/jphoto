@@ -3,6 +3,7 @@
 <%@ tag import="core.general.img.Dimension" %>
 <%@ tag import="core.services.utils.ImageFileUtilsService" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -59,7 +60,8 @@
 										 hideIconSendPrivateMessage="true"
 										 hideIconToBlackList="true"
 								/>
-						<tags:entryMenu entryMenu="${photoInfo.photoAuthorMenu}" />
+						<%--<tags:entryMenu entryMenu="${photoInfo.photoAuthorMenu}" />--%>
+						<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
 					</c:if>
 
 					<c:if test="${isPhotoAuthorNameMustBeHidden}">

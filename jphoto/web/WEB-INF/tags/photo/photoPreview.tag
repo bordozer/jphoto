@@ -7,6 +7,7 @@
 <%@ tag import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
 <%@ tag import="java.util.Date" %>
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -97,7 +98,8 @@
 				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
 			</c:forEach>
 
-			<tags:entryMenu entryMenu="${photoInfo.photoMenu}" />
+			<%--<tags:entryMenu entryMenu="${photoInfo.photoMenu}" />--%>
+			<tags:contextMenu entryId="${photo.id}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
 
 		</div>
 	</div>

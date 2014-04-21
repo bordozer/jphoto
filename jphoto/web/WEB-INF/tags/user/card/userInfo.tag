@@ -2,6 +2,7 @@
 <%@ tag import="core.services.security.SecurityService" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -50,7 +51,8 @@
 			<table:td>
 				${eco:escapeHtml(user.name)}
 				<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" />
-				<tags:entryMenu entryMenu="${entryMenu}" />
+				<%--<tags:entryMenu entryMenu="${entryMenu}" />--%>
+				<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
 			</table:td>
 		</table:trinfo>
 
