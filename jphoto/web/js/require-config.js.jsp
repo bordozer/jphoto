@@ -11,11 +11,12 @@ var require = {
 		, underscore: "lib/front-end/underscore"
 		, backbone: "lib/front-end/backbone"
 		, text: "lib/front-end/text"
+		, context_menu: "lib/fg.menu/fg.menu"
 	},
 
 	shim: {
 		'backbone': {
-			deps: ['underscore', 'jquery'],
+			deps: ['underscore', 'jquery', 'context_menu'],
 			exports: 'Backbone'
 		},
 		underscore: {
