@@ -23,7 +23,7 @@ define( ["backbone", "jquery", "underscore"
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items', this.$el ) );
+			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', this.$el ) );
 
 			$( function () {
 				$( '#' + menuId ).context_menu( {
@@ -38,8 +38,11 @@ define( ["backbone", "jquery", "underscore"
 		, renderItems: function( entryMenuItemDTOs, container ) {
 
 			for ( var i in entryMenuItemDTOs ) {
-				var menuItemId = entryMenuItemDTOs[ i ][ 'menuItemId' ];
-				var menuItem = entryMenuItemDTOs[ i ][ 'menuItem' ];
+
+				var entryMenuItemDTO = entryMenuItemDTOs[ i ];
+
+				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
+				var menuItem = entryMenuItemDTO[ 'menuItem' ];
 
 				console.log( menuItem );
 
@@ -48,9 +51,11 @@ define( ["backbone", "jquery", "underscore"
 					continue;
 				}
 
-				container.append( "<li style='font-size: 10px;' class='entry-context-menu-item'>" );
+				var liID = 'li-' + menuItemId;
+				container.append( "<li style='font-size: 10px;' class='" + liID + "'>" );
+				var liElement = $( '.' + liID, container );
 
-				container.append( this.contextMenuItemTemplate( menuItem ) );
+				liElement.append( this.contextMenuItemTemplate( menuItem ) );
 
 				if ( menuItem[ 'subMenu' ] ) {
 //					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], container );
@@ -60,7 +65,6 @@ define( ["backbone", "jquery", "underscore"
 					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], subMenuContainer );
 					container.append( "</ul>" );*/
 				}
-				container.append( '</li>' );
 			}
 		}
 
