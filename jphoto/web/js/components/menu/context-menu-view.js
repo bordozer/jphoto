@@ -44,7 +44,7 @@ define( ["backbone", "jquery", "underscore"
 				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
 				var menuItem = entryMenuItemDTO[ 'menuItem' ];
 
-				console.log( menuItem );
+//				console.log( menuItem );
 
 				if ( menuItem[ 'entryMenuType' ] == "SEPARATOR" ) {
 					container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
@@ -52,18 +52,18 @@ define( ["backbone", "jquery", "underscore"
 				}
 
 				var liID = 'li-' + menuItemId;
-				container.append( "<li style='font-size: 10px;' class='" + liID + "'>" );
+				container.append( "<li style='font-size: 10px;' class='" + liID + "'></li>" );
 				var liElement = $( '.' + liID, container );
 
 				liElement.append( this.contextMenuItemTemplate( menuItem ) );
 
 				if ( menuItem[ 'subMenu' ] ) {
-//					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], container );
-					/*var ulID = 'ul-' + menuItemId;
-					container.append( "<ul class='top-menu-item '" + ulID + "'>" );
-					var subMenuContainer = $( "." + ulID, container );
-					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], subMenuContainer );
-					container.append( "</ul>" );*/
+
+					var ulID = 'ul-' + menuItemId;
+					liElement.append( "<ul class='top-menu-item '" + ulID + "'></ul>" );
+					var ulElement = $( "." + ulID, liElement );
+					console.log( menuItem[ 'entrySubMenu' ] );
+					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], ulElement );
 				}
 			}
 		}
