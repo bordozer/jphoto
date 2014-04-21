@@ -24,7 +24,7 @@ define( ["backbone", "jquery", "underscore"
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			this.renderItems( modelJSON[ 'entryMenuItems' ], $( '.entry-context-menu-items', this.$el ) );
+			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items', this.$el ) );
 
 			$( function () {
 				$( '#' + menuId ).context_menu( {
@@ -36,14 +36,15 @@ define( ["backbone", "jquery", "underscore"
 			} );
 		}
 
-		, renderItems: function( contextMenuItems, container ) {
+		, renderItems: function( entryMenuItemDTOs, container ) {
 
 //			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
 
 //			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
 
-			for ( var i in contextMenuItems ) {
-				var menuItem = contextMenuItems[ i ];
+			for ( var i in entryMenuItemDTOs ) {
+				var menuItemId = entryMenuItemDTOs[ 'menuItemId' ];
+				var menuItem = entryMenuItemDTOs[ i ][ 'menuItem' ];
 
 				console.log( menuItem );
 

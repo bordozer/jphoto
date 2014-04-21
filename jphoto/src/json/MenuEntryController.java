@@ -1,5 +1,7 @@
 package json;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.general.menus.AbstractEntryMenuItem;
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuType;
@@ -49,7 +51,15 @@ public class MenuEntryController {
 		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
 		final List<? extends AbstractEntryMenuItem> menuItems = entryMenu.getEntryMenuItems();
-		entryMenuDTO.setEntryMenuItems( menuItems );
+		entryMenuDTO.setEntryMenuItemDTOs( Lists.transform( menuItems, new Function<AbstractEntryMenuItem, EntryMenuItemDTO>() {
+
+			public int counter = 0;
+
+			@Override
+			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
+				return new EntryMenuItemDTO( counter++, entryMenuItem );
+			}
+		} ) );
 
 		return entryMenuDTO;
 	}

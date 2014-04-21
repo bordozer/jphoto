@@ -1,7 +1,5 @@
 package json;
 
-import core.general.menus.AbstractEntryMenuItem;
-
 import java.util.List;
 
 public class EntryMenuDTO {
@@ -19,7 +17,7 @@ public class EntryMenuDTO {
 	private String menuItemCssClass;
 	private String menuItemCommand;
 	private String menuItemCommandText;
-	private List<? extends AbstractEntryMenuItem> entryMenuItems;
+	private List<EntryMenuItemDTO> entryMenuItemDTOs;
 
 	public EntryMenuDTO( final int entryMenuTypeId, final int entryId ) {
 		this.entryId = entryId;
@@ -98,11 +96,11 @@ public class EntryMenuDTO {
 		this.menuItemCommandText = menuItemCommandText;
 	}
 
-	public void setEntryMenuItems( final List<? extends AbstractEntryMenuItem> entryMenuItems ) {
-		this.entryMenuItems = entryMenuItems;
+	public void setEntryMenuItemDTOs( final List<EntryMenuItemDTO> entryMenuItemDTOs ) {
+		this.entryMenuItemDTOs = entryMenuItemDTOs;
 	}
 
-	public List<? extends AbstractEntryMenuItem> getEntryMenuItems() {
-		return entryMenuItems;
+	public List<EntryMenuItemDTO> getEntryMenuItemDTOs() {
+		return entryMenuItemDTOs;
 	}
 }
