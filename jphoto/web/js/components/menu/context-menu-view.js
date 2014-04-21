@@ -35,6 +35,9 @@ define( ["backbone", "jquery", "underscore"
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
+
+//			console.log( menuId + ' has been clicked' );
+//			$( '.entry-menu-item', this.$el ).click();
 		}
 
 		, renderItems: function( entryMenuItemDTOs, container ) {
