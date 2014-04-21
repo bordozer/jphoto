@@ -42,7 +42,7 @@ define( ["backbone", "jquery", "underscore"
 				element.addClass( 'block-user-photo' );
 			}
 
-			element = this.addAdminFlagDiv( photoId, 'admin-special-empty-flag', element );
+			/*element = this.addAdminFlagDiv( photoId, 'admin-special-empty-flag', element );
 
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
 				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-nude-content', element );
@@ -50,7 +50,7 @@ define( ["backbone", "jquery", "underscore"
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
 				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-anonymous-posting', element );
-			}
+			}*/
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
 				element.append( this.groupOperationsTemplate( modelJSON ) );
@@ -86,8 +86,8 @@ define( ["backbone", "jquery", "underscore"
 				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
-			element.append( '</div>' );
-			element.append( '</div>' );
+//			element.append( '</div>' );
+//			element.append( '</div>' );
 		},
 
 		addAdminFlagDiv: function ( photoId, cssClass, el ) {
