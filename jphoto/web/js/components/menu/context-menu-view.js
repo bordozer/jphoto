@@ -14,6 +14,7 @@ define( ["backbone", "jquery", "underscore"
 
 		events: {
 			"click .entry-context-menu-icon": "onClickMenuIcon"
+			, "click .entry-menu-item": "onClickMenuItem"
 		},
 
 		render:function () {
@@ -36,13 +37,24 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		clickMenuIcon: function() {
-			showAlertMessage( 'Is not implemented yet' );
+			showAlertMessage( 'Menu icon has been clicked' );
+//			alert( 'Is not implemented yet' );
+		},
+
+		clickMenuItem: function() {
+			eval( this.model.get( 'menuItemCommand' ) );
+			showAlertMessage( 'Menu item has been clicked' );
 //			alert( 'Is not implemented yet' );
 		},
 
 		onClickMenuIcon: function( evt ) {
 			evt.stopPropagation();
 			this.clickMenuIcon();
+		},
+
+		onClickMenuItem: function( evt ) {
+			evt.stopPropagation();
+			this.clickMenuItem();
 		}
 	});
 

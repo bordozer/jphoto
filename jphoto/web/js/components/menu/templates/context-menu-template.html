@@ -1,6 +1,6 @@
 <div>
 	<a class="entry-context-menu-icon" tabindex="0" href="#" id="<%=menuId%>">
-		<img src="/images/ui-menu-blue.png" alt="<%=entryMenuTypeName%>">
+		<img class="entry-context-menu-icon" src="/images/ui-menu-blue.png" alt="<%=entryMenuTypeName%>">
 	</a>
 
 	<div id="<%=menuDivId%>" class="entry-popup-menu">
@@ -11,7 +11,7 @@
 
 			<li style="font-size: 10px;">
 
-				<a class="<%=menuItemCssClass%>" href="#" onclick="<%=menuItemCommand%>">
+				<a class="entry-menu-item <%=menuItemCssClass%>" href="#" onclick="return false;">
 					<img src="/images/add16.png">
 					&nbsp;
 					<%=menuItemCommandText%>
