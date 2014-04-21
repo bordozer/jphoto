@@ -4,6 +4,7 @@
 <%@ page import="utils.UserUtils" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.springframework.mobile.device.DeviceType" %>
+<%@ page import="core.general.menus.EntryMenuType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -49,8 +50,10 @@
 <c:set var="isLoggedUser" value="<%=UserUtils.isCurrentUserLoggedUser()%>" />
 <c:set var="loggedUser" value="<%=EnvironmentContext.getCurrentUser()%>" />
 <c:set var="blackListText" value="You are int the black list of photo\'s author" />
+<c:set var="photoMenuTypeId" value="<%=EntryMenuType.PHOTO.getId()%>" />
 
 <c:set var="isMobile" value="<%=EnvironmentContext.getDeviceType() == DeviceType.MOBILE%>"/>
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <tags:page pageModel="${photoCardModel.pageModel}">
 
@@ -79,7 +82,18 @@
 
 		<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
 
-		<tags:entryMenu entryMenu="${photoCardModel.entryMenu}" />
+		<%--<tags:entryMenu entryMenu="${photoCardModel.entryMenu}" />--%>
+
+		<div class="photo-context-menu" style="display: inline-block;">111</div>
+
+		<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
+		<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
+
+		<script type="text/javascript">
+			require( ['components/menu/context-menu'], function ( photoContextMenu ) {
+				photoContextMenu( ${photoId}, ${photoMenuTypeId}, '${baseUrl}', $( '.photo-context-menu' ) );
+			} );
+		</script>
 
 		<c:if test="${isLoggedUser}">
 			<br />

@@ -12,11 +12,13 @@ var require = {
 		, backbone: "lib/front-end/backbone"
 		, text: "lib/front-end/text"
 		, context_menu: "lib/fg.menu/fg.menu"
+		, superfish: "lib/superfish/js/superfish"
+		, dialog: "lib/jquery/jquery-ui-1.8.21.custom.min"
 	},
 
 	shim: {
 		'backbone': {
-			deps: ['underscore', 'jquery', 'context_menu'],
+			deps: ['underscore', 'jquery', 'context_menu', 'superfish', 'dialog'],
 			exports: 'Backbone'
 		},
 		underscore: {
