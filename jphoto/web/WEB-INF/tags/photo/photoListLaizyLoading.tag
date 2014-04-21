@@ -83,6 +83,7 @@
 			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
 				for (var i = 0; i < photosToRender.length; i++) {
 					var photoId = photosToRender[i];
+					console.log( photoId );
 					photoListEntry( photoId, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.photo-container-' + photoId ) );
 				}
 			} );
