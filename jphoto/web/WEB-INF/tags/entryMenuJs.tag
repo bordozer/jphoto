@@ -16,13 +16,25 @@
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <c:set var="complaintEntities" value="<%=EntryMenuType.values()%>"/>
 <c:set var="complaintReasonTypes" value="<%=ComplaintReasonType.values()%>"/>
 
+<c:set var="menuType_PhotoId" value="<%=EntryMenuType.PHOTO.getId()%>" />
+
 <div id="${sendComplaintDivId}" title="..." style="display: none;">
 	<html:textarea inputId="${customDescriptionTextId}" title="${eco:translate('Message')}" rows="7" cols="50" />
 </div>
+
+<script type="text/javascript">
+
+	function initPhotoContextMenu( photoId, menuTypeId, container ) {
+		require( ['components/menu/context-menu'], function ( contextMenu ) {
+			contextMenu( photoId, menuTypeId, '${baseUrl}', container );
+		} );
+	}
+</script>
 
 <script type="text/javascript">
 

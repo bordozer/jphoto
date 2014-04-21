@@ -82,18 +82,7 @@
 
 		<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryTypeBookmark}"/>
 
-		<%--<tags:entryMenu entryMenu="${photoCardModel.entryMenu}" />--%>
-
-		<div class="photo-context-menu" style="display: inline-block;">111</div>
-
-		<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
-		<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
-
-		<script type="text/javascript">
-			require( ['components/menu/context-menu'], function ( photoContextMenu ) {
-				photoContextMenu( ${photoId}, ${photoMenuTypeId}, '${baseUrl}', $( '.photo-context-menu' ) );
-			} );
-		</script>
+		<tags:contextMenu entryId="${photoId}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
 
 		<c:if test="${isLoggedUser}">
 			<br />

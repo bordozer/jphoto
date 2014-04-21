@@ -8,9 +8,6 @@
 
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
-<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
-
 <link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
 <tags:entryMenuJs />

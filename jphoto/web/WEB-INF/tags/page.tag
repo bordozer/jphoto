@@ -13,12 +13,15 @@
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
-
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 <c:set var="isSuperAdmin" value="<%=ApplicationContextHelper.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() )%>"/>
 
 <eco:page pageModel="${pageModel}">
 
 	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jsonrpc.js"></script>
+
+	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
 	<script type="text/javascript">
 

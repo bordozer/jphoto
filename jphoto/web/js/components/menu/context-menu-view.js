@@ -23,6 +23,8 @@ define( ["backbone", "jquery", "underscore"
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
+			console.log( 'The menu is creating... ', menuId );
+
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', this.$el ) );
 
 			$( function () {
@@ -45,7 +47,6 @@ define( ["backbone", "jquery", "underscore"
 
 				if ( entryMenuItemDTO[ 'menuTypeSeparator' ] ) {
 					container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
-					console.log( 'sepa' );
 					continue;
 				}
 
@@ -60,7 +61,6 @@ define( ["backbone", "jquery", "underscore"
 					var ulID = 'ul-' + menuItemId;
 					liElement.append( "<ul class='top-menu-item " + ulID + "'></ul>" );
 					var ulElement = $( "." + ulID, liElement );
-					console.log( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ] );
 					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ulElement );
 				}
 			}
