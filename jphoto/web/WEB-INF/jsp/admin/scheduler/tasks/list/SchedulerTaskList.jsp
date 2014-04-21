@@ -160,7 +160,7 @@
 								</a>
 							</table:tdicon>
 
-							<table:td cssClass="${css} textcentered">
+							<table:td cssClass="${css} text-centered">
 								<html:img32 src="scheduler/type/${schedulerTaskType.icon}" alt="${eco:translate(schedulerTaskType.name)}"/>
 							</table:td>
 
@@ -170,8 +170,8 @@
 								</a>
 							</table:td>
 
-							<table:td width="30" cssClass="textcentered ${css}"><c:if test="${isTaskActive}">Yes</c:if></table:td>
-							<table:td width="30" cssClass="textcentered ${css}"><c:if test="${scheduledTasksData.scheduled}">Yes</c:if></table:td>
+							<table:td width="30" cssClass="text-centered ${css}"><c:if test="${isTaskActive}">Yes</c:if></table:td>
+							<table:td width="30" cssClass="text-centered ${css}"><c:if test="${scheduledTasksData.scheduled}">Yes</c:if></table:td>
 
 							<table:td cssClass="${css}">${eco:translatableMessage(schedulerTask.description)}</table:td>
 

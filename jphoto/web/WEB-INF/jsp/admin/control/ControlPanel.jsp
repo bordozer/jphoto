@@ -20,7 +20,7 @@
 
 					<table:separatorInfo colspan="2" title="${eco:translate('System')}" />
 
-					<table:tr cssClass="textcentered">
+					<table:tr cssClass="text-centered">
 						<table:td>
 							<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
 											   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
@@ -28,13 +28,13 @@
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textcentered">
+						<table:td cssClass="text-centered">
 							<admin:reloadTranslationsButton />
 						</table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textcentered">
+						<table:td cssClass="text-centered">
 							<html:submitButton id="clear-cache" caption_t="Clear system cache"
 											   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
 						</table:td>

@@ -77,7 +77,7 @@
 									</c:if>
 								</table:tdunderlined>
 
-								<table:tdunderlined cssClass="textcentered">
+								<table:tdunderlined cssClass="text-centered">
 									<span title="${eco:translate1('Configuration key ID: #$1', configurationKey.id)}">${configurationKey.id}</span>
 								</table:tdunderlined>
 

@@ -4,7 +4,7 @@
 <%@ attribute name="title_t" required="false" type="java.lang.String" %>
 <%@ attribute name="validationMessage" required="true" type="java.lang.String" %>
 
-<div class="floatleft textcentered">
+<div class="floatleft text-centered">
 	<h3>${title_t}</h3>
 	<b>${validationMessage}</b>
 </div>

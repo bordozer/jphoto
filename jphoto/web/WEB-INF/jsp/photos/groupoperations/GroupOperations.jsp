@@ -43,7 +43,7 @@
 
 					<div class="floatleft block-border" style="width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
-						<div class="floatleft textcentered" style="height: auto; min-height: 230px;">
+						<div class="floatleft text-centered" style="height: auto; min-height: 230px;">
 
 							<links:photoCard id="${photo.id}">
 								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${photo.nameEscaped}"/>

@@ -59,7 +59,7 @@
 
 					<table:td>${eco:escapeHtml(userPhotoAlbum.description)}</table:td>
 
-					<table:td width="30" cssClass="textcentered">${userPhotoAlbumsQtyMap[userPhotoAlbum.id]}</table:td>
+					<table:td width="30" cssClass="text-centered">${userPhotoAlbumsQtyMap[userPhotoAlbum.id]}</table:td>
 
 				</table:tr>
 			</c:forEach>

@@ -83,11 +83,11 @@
 						${genre.name}
 					</table:td>
 
-					<table:td cssClass="textcentered">${genre.canContainNudeContent ? "Yes" : ""}</table:td>
-					<table:td cssClass="textcentered">${genre.containsNudeContent ? "Yes" : ""}</table:td>
+					<table:td cssClass="text-centered">${genre.canContainNudeContent ? "Yes" : ""}</table:td>
+					<table:td cssClass="text-centered">${genre.containsNudeContent ? "Yes" : ""}</table:td>
 
 					<table:td cssClass="textright">${photosQty} &nbsp;</table:td>
-					<table:td cssClass="textcentered">${genre.minMarksForBest > 0 ? genre.minMarksForBest : eco:translate('System default')} &nbsp;</table:td>
+					<table:td cssClass="text-centered">${genre.minMarksForBest > 0 ? genre.minMarksForBest : eco:translate('System default')} &nbsp;</table:td>
 					<table:td>
 						<ul>
 							<c:forEach var="photoVotingCategory" items="${genre.photoVotingCategories}">

@@ -118,13 +118,13 @@
 			<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}" />
 
 			<c:if test="${showCommentAuthorData && hasAvatar}">
-				<div class="textcentered" style="float: left; width: 90px;">
+				<div class="text-centered" style="float: left; width: 90px;">
 					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('$1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
 				</div>
 			</c:if>
 
 			<c:if test="${!showCommentAuthorData}">
-				<div class="textcentered" style="float: left; width: 90px;">
+				<div class="text-centered" style="float: left; width: 90px;">
 					<html:img src="hidden_picture.png" alt="${eco:translate('Author name is hidden due to anonymous period of photo')}"  id="avatar_${comment.id}" height="100" width="100"/>
 				</div>
 			</c:if>

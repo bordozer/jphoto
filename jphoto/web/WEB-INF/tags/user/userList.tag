@@ -84,16 +84,16 @@
 					<tags:entryMenu entryMenu="${userMenu}" />
 				</table:td>
 
-				<table:td cssClass="textcentered">${eco:translate(user.userStatus.name)}</table:td>
+				<table:td cssClass="text-centered">${eco:translate(user.userStatus.name)}</table:td>
 
 				<%--<table:td>${eco:escapeHtml(user.login)}</table:td>--%>
 				<%--<table:td>${eco:escapeHtml(user.email)}</table:td>--%>
 				<table:td>${eco:formatDate(user.dateOfBirth)}</table:td>
-				<table:td cssClass="textcentered">
+				<table:td cssClass="text-centered">
 					<icons:userGender user="${user}" />
 				</table:td>
-				<table:td cssClass="textcentered">${eco:translate(user.membershipType.name)}</table:td>
-				<table:td cssClass="textcentered">${user.photosInLine > 0 ? user.photosInLine : 'auto'}</table:td>
+				<table:td cssClass="text-centered">${eco:translate(user.membershipType.name)}</table:td>
+				<table:td cssClass="text-centered">${user.photosInLine > 0 ? user.photosInLine : 'auto'}</table:td>
 				<table:td cssClass="textright">${photosByUser}</table:td>
 			</table:tr>
 

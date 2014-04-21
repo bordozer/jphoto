@@ -75,14 +75,14 @@
 					<span title="${eco:translate2('Photos in category \'$1\': $2', genreNameTranslated, userCardGenreInfo.photosQty)}"><b>${userCardGenreInfo.photosQty}</b></span>
 				</table:td>
 
-				<table:td cssClass="textcentered user-genre-rank-voting-${user.id}-${genre.id}">
+				<table:td cssClass="text-centered user-genre-rank-voting-${user.id}-${genre.id}">
 					<%--<html:spinningWheel16 title="${eco:translate('Getting information from server...')}"/>--%>
 					<c:if test="${not isThisCardOfLoggedUser}">
 						<user:userRankInGenreVotingArea_ByUserAndGenre user="${user}" genre="${genre}" votingModel="${userCardGenreInfo.votingModel}" />
 					</c:if>
 				</table:td>
 
-				<table:td cssClass="textcentered">
+				<table:td cssClass="text-centered">
 					<c:set var="currentPoints" value="${userCardGenreInfo.votePointsForRankInGenre}" />
 					<c:set var="nextPoints" value="${userCardGenreInfo.votePointsToGetNextRankInGenre}" />
 					<c:if test="${( isThisCardOfLoggedUser && currentPoints != 0 ) || userCanSeeUserRankVoteHistory}">

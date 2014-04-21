@@ -179,7 +179,7 @@
 
 						<table:tdicon>${jobEntryId}</table:tdicon>
 
-						<table:td cssClass="textcentered">
+						<table:td cssClass="text-centered">
 							<c:if test="${not empty jobExecutionHistoryEntry.savedJob}">
 								${jobExecutionHistoryEntry.savedJob.id}
 							</c:if>
@@ -223,7 +223,7 @@
 						<%-- / Job reference  --%>
 
 						<%-- Job state icon --%>
-						<c:set var="resultCssClass" value="textcentered"/>
+						<c:set var="resultCssClass" value="text-centered"/>
 						<c:if test="${jobExecutionStatus == 'IN_PROGRESS'}">
 							<c:set var="resultCssClass" value=""/>
 						</c:if>
@@ -287,7 +287,7 @@
 						</table:tdunderlined>
 						<%-- / Job state icon --%>
 
-						<table:tdunderlined cssClass="textcentered">
+						<table:tdunderlined cssClass="text-centered">
 							<c:set var="scheduledTaskId" value="${jobExecutionHistoryEntry.scheduledTaskId}"/>
 							<c:set var="schedulerTask" value="${jobExecutionHistoryData.schedulerTask}"/>
 							<c:if test="${scheduledTaskId > 0 and not empty schedulerTask}">

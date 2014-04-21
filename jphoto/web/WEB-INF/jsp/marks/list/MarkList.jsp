@@ -72,7 +72,7 @@
 						<c:set var="mark" value="${userPhotoVote.mark}" />
 						<c:set var="maxAccessibleMark" value="${userPhotoVote.maxAccessibleMark}" />
 
-						<table:tdunderlined width="120" cssClass="textcentered">
+						<table:tdunderlined width="120" cssClass="text-centered">
 							<c:set var="isMaxAccessibleMark" value="${mark > 0 and maxAccessibleMark > 0 and mark == maxAccessibleMark}" />
 
 							<c:if test="${mark > 0}">
@@ -99,7 +99,7 @@
 						</c:if>
 					</c:forEach>
 
-					<table:tdunderlined cssClass="textcentered">
+					<table:tdunderlined cssClass="text-centered">
 						${eco:formatDate(votingTime)} &nbsp; ${eco:formatTimeShort(votingTime)}
 					</table:tdunderlined>
 
@@ -114,7 +114,7 @@
 				<c:forEach var="votingCategory" items="${votingCategories}">
 					<c:set var="total" value="${total + marksByCategoriesMap[votingCategory]}" />
 
-					<table:td cssClass="textcentered">
+					<table:td cssClass="text-centered">
 						<b>${marksByCategoriesMap[votingCategory]}</b>
 					</table:td>
 

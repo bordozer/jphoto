@@ -44,13 +44,13 @@
 			<table:separatorInfo colspan="2" title="${eco:translate( 'Nude content warning' ) }" />
 
 			<table:tr>
-				<table:td cssClass="textcentered"><img src="${eco:imageFolderURL()}/nude_content.jpg" title="${messageTranslated}" /></table:td>
-				<table:td cssClass="textcentered"><img src="${eco:imageFolderURL()}/no_nude_content.jpg" title="${messageTranslated}" /></table:td>
+				<table:td cssClass="text-centered"><img src="${eco:imageFolderURL()}/nude_content.jpg" title="${messageTranslated}" /></table:td>
+				<table:td cssClass="text-centered"><img src="${eco:imageFolderURL()}/no_nude_content.jpg" title="${messageTranslated}" /></table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td cssClass="textcentered"><html:submitButton id="IConfirmShowingNudeContent" caption_t="I am over 18. Show nude content" /></table:td>
-				<table:td cssClass="textcentered"><html:submitButton id="IDeclineShowingNudeContent" caption_t="Do NOT show nude content" /></table:td>
+				<table:td cssClass="text-centered"><html:submitButton id="IConfirmShowingNudeContent" caption_t="I am over 18. Show nude content" /></table:td>
+				<table:td cssClass="text-centered"><html:submitButton id="IDeclineShowingNudeContent" caption_t="Do NOT show nude content" /></table:td>
 			</table:tr>
 
 		</table:table>

@@ -18,13 +18,13 @@
 
 			<table:tr>
 
-				<table:td width="100" cssClass="small-text textcentered">
+				<table:td width="100" cssClass="small-text text-centered">
 					${eco:formatDate(activity.activityTime)}
 					<br/>
 					${eco:formatTime(activity.activityTime)}
 				</table:td>
 
-				<table:td cssClass="textcentered" width="30">${activity.displayActivityIcon}</table:td>
+				<table:td cssClass="text-centered" width="30">${activity.displayActivityIcon}</table:td>
 
 				<table:tdicon><html:img16 src="jobtype/${activity.activityType.icon}" alt="${activity.activityType.name}"/></table:tdicon>
 
@@ -45,7 +45,7 @@
 				</table:td>
 
 				<c:if test="${showUserActivityLink and activity.displayActivityUserId > 0}">
-					<table:td cssClass="textcentered" width="20">
+					<table:td cssClass="text-centered" width="20">
 						<a href="${eco:baseUrl()}/members/${activity.displayActivityUserId}/card/activity/"
 						   title="${eco:translate('Show full member activity stream')}">${eco:translate('Show full member activity stream (short)')}</a>
 					</table:td>

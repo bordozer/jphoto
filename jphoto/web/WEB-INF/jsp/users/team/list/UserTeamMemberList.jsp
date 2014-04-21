@@ -68,7 +68,7 @@
 						</table:tdicon>
 					</c:if>
 
-					<table:td cssClass="textcentered">
+					<table:td cssClass="text-centered">
 
 						<c:if test="${not empty userTeamMember.teamMemberUser}">
 							${eco:userAvatarImage(userTeamMember.teamMemberUser.id, 70, 70, '', '', '')}
@@ -94,11 +94,11 @@
 						<icons:teamMemberType teamMemberType="${userTeamMember.teamMemberType}" />
 					</table:tdicon>
 
-					<table:td cssClass="textcentered">
+					<table:td cssClass="text-centered">
 						${eco:translate(userTeamMember.teamMemberType.name)}
 					</table:td>
 
-					<table:td cssClass="textcentered">
+					<table:td cssClass="text-centered">
 						${userTeamMemberPhotosQty}
 					</table:td>
 

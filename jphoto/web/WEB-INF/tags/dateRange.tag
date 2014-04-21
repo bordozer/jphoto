@@ -97,7 +97,7 @@
 <div id="currentTimeDiv" <c:if test="${dateRangeTypeId != currentTimeId}">style="display: none;" </c:if> >
 	<table:table border="0" width="${tblWidth}">
 		<table:tr>
-			<table:td cssClass="textcentered">
+			<table:td cssClass="text-centered">
 				${eco:translate('Actual time will be used')}
 			</table:td>
 		</table:tr>

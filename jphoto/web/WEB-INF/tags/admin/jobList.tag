@@ -28,7 +28,7 @@
 <table:table width="90%" border="0">
 
 	<table:tr>
-		<table:tdunderlined colspan="${colspan}" cssClass="textcentered">
+		<table:tdunderlined colspan="${colspan}" cssClass="text-centered">
 			<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 
 				<c:set var="cssClass" value=""/>

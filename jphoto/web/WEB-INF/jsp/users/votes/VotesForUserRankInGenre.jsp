@@ -33,7 +33,7 @@
 					${separator}${userGenreRankViewEntry.column1}
 				</table:tdunderlined>
 
-				<table:tdunderlined cssClass="textcentered">
+				<table:tdunderlined cssClass="text-centered">
 					<c:if test="${userGenreRankViewEntry.statusChangeEntry}">
 						<user:userRankInGenreRenderer userRankIconContainer="${userGenreRankViewEntry.userRankWhenPhotoWasUploadedIconContainer}"/>
 					</c:if>
@@ -43,7 +43,7 @@
 					</c:if>
 				</table:tdunderlined>
 
-				<table:tdunderlined cssClass="textcentered">
+				<table:tdunderlined cssClass="text-centered">
 					${userGenreRankViewEntry.column3}
 				</table:tdunderlined>
 
@@ -53,7 +53,7 @@
 
 		<table:tr>
 			<table:td>${separator} ${eco:translate('Total points:')}</table:td>
-			<table:td cssClass="textcentered">
+			<table:td cssClass="text-centered">
 				<b>${votesForUserRankInGenreModel.sumPoints > 0 ? '+' : ''}${votesForUserRankInGenreModel.sumPoints}</b>
 			</table:td>
 			<table:td/>
@@ -62,7 +62,7 @@
 		<table:separatorInfo colspan="${colspan}" title="${eco:translate('Photo category points staircase:')}" />
 
 		<table:tr>
-			<table:td cssClass="textcentered" colspan="${colspan}">
+			<table:td cssClass="text-centered" colspan="${colspan}">
 				<tags:rankInGenrePointsMap
 						ranksInGenrePointsMap="${votesForUserRankInGenreModel.ranksInGenrePointsMap}"
 						hideTitle="true"

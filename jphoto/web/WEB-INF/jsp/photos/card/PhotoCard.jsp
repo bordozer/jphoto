@@ -266,7 +266,7 @@
 
 			function initJcrop() {
 				jcrop_api = $.Jcrop( cropBox, {
-					addClass:'textcentered', bgOpacity:0.3, bgFade:true, onDblClick:updateCoords
+					addClass:'text-centered', bgOpacity:0.3, bgFade:true, onDblClick:updateCoords
 				} );
 			}
 
