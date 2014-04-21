@@ -2,9 +2,7 @@ package json;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.EntryMenu;
-import core.general.menus.EntryMenuType;
+import core.general.menus.*;
 import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
@@ -50,18 +48,44 @@ public class MenuEntryController {
 		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
 		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
+		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu ) );
+
+		return entryMenuDTO;
+	}
+
+	private List<EntryMenuItemDTO> getMenuItemDTOs( final int entryId, final EntryMenu entryMenu ) {
+
 		final List<? extends AbstractEntryMenuItem> menuItems = entryMenu.getEntryMenuItems();
-		entryMenuDTO.setEntryMenuItemDTOs( Lists.transform( menuItems, new Function<AbstractEntryMenuItem, EntryMenuItemDTO>() {
+
+		return Lists.transform( menuItems, new Function<AbstractEntryMenuItem, EntryMenuItemDTO>() {
 
 			public int counter = 0;
 
 			@Override
 			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
-				return new EntryMenuItemDTO( String.format( "context-menu-item-%d-%d-%d", entryMenuTypeId, entryId, counter++ ), entryMenuItem );
-			}
-		} ) );
 
-		return entryMenuDTO;
+				final String menuItemId = String.format( "context-menu-item-%d-%d-%d", entryMenu.getEntryMenuType().getId(), entryId, counter++ );
+
+				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO( menuItemId );
+
+				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
+				menuItemDTO.setMenuCssClass( entryMenuItem.getMenuCssClass() );
+				menuItemDTO.setHasSumMenu( entryMenuItem.isSubMenu() );
+
+				if ( entryMenuItem instanceof SubmenuAccesible ) {
+					final SubmenuAccesible submenuAccesible = ( SubmenuAccesible ) entryMenuItem;
+					final EntryMenu entrySubMenu = submenuAccesible.getEntrySubMenu();
+					menuItemDTO.setEntrySubMenuItemDTOs( getMenuItemDTOs( entryId, entrySubMenu ) );
+				}
+
+				final AbstractEntryMenuItemCommand menuItemCommand = entryMenuItem.getMenuItemCommand();
+				menuItemDTO.setMenuCommand( menuItemCommand.getMenuCommand() );
+				menuItemDTO.setMenuCommandIcon( entryMenuItem.getCommandIcon() );
+				menuItemDTO.setMenuCommandText( menuItemCommand.getMenuText() );
+
+				return menuItemDTO;
+			}
+		} );
 	}
 
 	private EntryMenu getEntryMenuInstance( final int entryMenuTypeId, final int entryId ) {

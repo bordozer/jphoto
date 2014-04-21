@@ -42,12 +42,10 @@ define( ["backbone", "jquery", "underscore"
 				var entryMenuItemDTO = entryMenuItemDTOs[ i ];
 
 				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
-				var menuItem = entryMenuItemDTO[ 'menuItem' ];
 
-//				console.log( menuItem );
-
-				if ( menuItem[ 'entryMenuType' ] == "SEPARATOR" ) {
+				if ( entryMenuItemDTO[ 'menuTypeSeparator' ] ) {
 					container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
+					console.log( 'sepa' );
 					continue;
 				}
 
@@ -55,15 +53,15 @@ define( ["backbone", "jquery", "underscore"
 				container.append( "<li style='font-size: 10px;' class='" + liID + "'></li>" );
 				var liElement = $( '.' + liID, container );
 
-				liElement.append( this.contextMenuItemTemplate( menuItem ) );
+				liElement.append( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 
-				if ( menuItem[ 'subMenu' ] ) {
+				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 
 					var ulID = 'ul-' + menuItemId;
 					liElement.append( "<ul class='top-menu-item '" + ulID + "'></ul>" );
 					var ulElement = $( "." + ulID, liElement );
-					console.log( menuItem[ 'entrySubMenu' ] );
-					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], ulElement );
+					console.log( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ] );
+					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ulElement );
 				}
 			}
 		}
