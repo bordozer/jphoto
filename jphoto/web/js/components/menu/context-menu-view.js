@@ -38,8 +38,18 @@ define( ["backbone", "jquery", "underscore"
 
 			for ( var i in contextMenuItems ) {
 				var menuItem = contextMenuItems[ i ];
+
 				console.log( menuItem );
+
+				if ( menuItem[ 'entryMenuType' ] == "SEPARATOR" ) {
+					container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
+					continue;
+				}
+
 				container.append( this.contextMenuItemTemplate( menuItem ) );
+				if ( menuItem[ 'subMenu' ] ) {
+					this.renderItems( menuItem.entrySubMenu.entryMenuItems, container );
+				}
 			}
 		}
 
