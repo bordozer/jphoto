@@ -1,13 +1,15 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!components/menu/templates/context-menu-template.html"
+		, "text!components/menu/templates/context-menu-items-template.html"
 		, "text!components/menu/templates/context-menu-item-template.html"
-		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemTemplate ) {
+		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemsContainerTemplate, contextMenuItemTemplate ) {
 
 	'use strict';
 
 	var ContextMenuView = Backbone.View.extend( {
 
 		contextMenuTemplate:_.template( contextMenuTemplate ),
+		contextMenuItemsContainerTemplate:_.template( contextMenuItemsContainerTemplate ),
 		contextMenuItemTemplate:_.template( contextMenuItemTemplate ),
 
 		initialize: function() {
@@ -36,6 +38,10 @@ define( ["backbone", "jquery", "underscore"
 
 		, renderItems: function( contextMenuItems, container ) {
 
+//			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
+
+//			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
+
 			for ( var i in contextMenuItems ) {
 				var menuItem = contextMenuItems[ i ];
 
@@ -48,10 +54,12 @@ define( ["backbone", "jquery", "underscore"
 
 				container.append( this.contextMenuItemTemplate( menuItem ) );
 				if ( menuItem[ 'subMenu' ] ) {
-					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItems' ], container )
+//					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItems' ], container )
 //					container.append( "<ul class='top-menu-item entry-context-menu-items'>" + this.renderItems( menuItem.entrySubMenu.entryMenuItems, container ) + '</ul>' );
 				}
 			}
+
+//			container.append( "</ul>" );
 		}
 
 		/*
