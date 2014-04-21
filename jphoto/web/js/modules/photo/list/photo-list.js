@@ -7,7 +7,7 @@ define( ["modules/photo/list/photo-list-model"
 	function init( photoId, isGroupOperationEnabled, baseUrl, container ) {
 
 		var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: baseUrl });
-		var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel } );
+//		var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel } );
 
 		var photoListEntryModel = new Model.PhotoListEntryModel( { photoId: photoId, baseUrl: baseUrl });
 		photoListEntryModel.set( { isGroupOperationEnabled: isGroupOperationEnabled, photoContextMenuModel: photoContextMenuModel } );

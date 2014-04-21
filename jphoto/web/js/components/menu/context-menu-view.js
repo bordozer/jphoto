@@ -26,25 +26,25 @@ define( ["backbone", "jquery", "underscore"
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			/*$( function () {
+			$( function () {
 				$( '#' + menuId ).context_menu( {
 					content:$( '#' + menuDivId ).html()
 					  , showSpeed:400
 					  , width:350
 					  , maxHeight: entryMenuHeight
 				} );
-			} );*/
+			} );
 		},
 
 		clickMenuIcon: function() {
-			showAlertMessage( 'Menu icon has been clicked' );
-//			alert( 'Is not implemented yet' );
+//			showAlertMessage( 'Menu icon has been clicked' );
+			alert( 'Menu icon has been clicked' );
 		},
 
 		clickMenuItem: function() {
 			eval( this.model.get( 'menuItemCommand' ) );
-			showAlertMessage( 'Menu item has been clicked' );
-//			alert( 'Is not implemented yet' );
+//			showAlertMessage( 'Menu item has been clicked' );
+			alert( 'Menu item has been clicked' );
 		},
 
 		onClickMenuIcon: function( evt ) {

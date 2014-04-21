@@ -7,8 +7,9 @@ define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/list/templates/author-link.html"
 		, "text!modules/photo/list/templates/author-rank.html"
 		, "text!modules/photo/list/templates/anonymous-period-expiration-time.html"
+		, "components/menu/context-menu-view"
 		], function ( Backbone, $, _, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate
-		, authorRankTemplate, anonymousPeriodExpirationTimeTemplate ) {
+		, authorRankTemplate, anonymousPeriodExpirationTimeTemplate, ContextMenuView ) {
 
 	'use strict';
 
@@ -59,9 +60,13 @@ define( ["backbone", "jquery", "underscore"
 				element.append( this.contextMenuTemplate( modelJSON ) );
 
 				var menuContainer = $( '.context-menu-photo-' + photoId, this.$el );
-				var contextModel = this.model.get( 'photoContextMenuModel' );
-				contextModel.set( { container: menuContainer } );
-				contextModel.fetch( { cache: false } );
+
+				var contextMenuModel = this.model.get( 'photoContextMenuModel' );
+				contextMenuModel.set( { container: menuContainer } );
+
+				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: contextMenuModel, el: menuContainer } );
+
+				contextMenuModel.fetch( { cache: false } );
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
