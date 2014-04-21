@@ -98,7 +98,6 @@
 				<icons:favoritesPhoto photo="${photo}" entryType="${favoriteEntryType}"/>
 			</c:forEach>
 
-			<%--<tags:entryMenu entryMenu="${photoInfo.photoMenu}" />--%>
 			<tags:contextMenu entryId="${photo.id}" entryMenuType="<%=EntryMenuType.PHOTO%>" />
 
 		</div>

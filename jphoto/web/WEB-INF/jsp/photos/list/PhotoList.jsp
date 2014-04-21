@@ -10,7 +10,7 @@
 
 <tags:page pageModel="${photoListModel.pageModel}">
 
-	<tags:entryMenuJs />
+	<tags:contextMenuJs />
 
 	<c:set var="user" value="${photoListModel.user}" />
 

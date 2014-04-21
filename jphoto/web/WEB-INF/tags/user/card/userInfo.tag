@@ -25,7 +25,7 @@
 <c:set var="isLastUserActivityTime" value="<%=! dateUtilsService.isEmptyTime( lastUserActivityTime )%>"/>
 
 <icons:favoritesJS />
-<tags:entryMenuJs />
+<tags:contextMenuJs />
 
 <div class="user-card-block">
 	<table:table border="0" width="500px" oddEven="true">

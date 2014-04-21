@@ -10,7 +10,7 @@
 
 <link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
-<tags:entryMenuJs />
+<tags:contextMenuJs />
 
 <c:forEach var="photoList" items="${photoLists}">
 

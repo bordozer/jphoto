@@ -18,7 +18,7 @@
 
 <c:set var="colspan" value="12" />
 
-<tags:entryMenuJs />
+<tags:contextMenuJs />
 
 <table:table id="user_list_table" width="100%" oddEven="true">
 

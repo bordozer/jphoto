@@ -22,7 +22,7 @@
 <tags:page pageModel="${photoCommentsListModel.pageModel}">
 
 	<icons:favoritesJS/>
-	<tags:entryMenuJs />
+	<tags:contextMenuJs />
 
 	<c:set var="user" value="${photoCommentsListModel.user}" />
 	<c:set var="photoCommentInfoMap" value="${photoCommentsListModel.photoCommentInfoMap}" />

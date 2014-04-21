@@ -233,17 +233,6 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 			photoInfo.setPhotoAnonymousPeriodExpirationTime( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) );
 		}
 
-		// TODO: should it be non-cachable? -->
-		if ( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) ) { // TODO: no photo menu in photo card if it is switched off for photo list!!!!
-			photoInfo.setPhotoMenu( entryMenuService.getPhotoMenu( photo, accessor ) );
-		} else {
-			photoInfo.setPhotoMenu( null );
-		}
-
-		final User photoAuthor = userService.load( photo.getUserId() );
-		photoInfo.setPhotoAuthorMenu( entryMenuService.getUserMenu( photoAuthor, accessor ) );
-		// TODO: should it be non-cachable? <--
-
 		final Genre genre = genreService.load( photo.getGenreId() );
 
 		photoInfo.setGenre( genre );

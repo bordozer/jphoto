@@ -59,8 +59,6 @@ public class PhotoInfo implements Cacheable {
 
 	private String photoImgUrl;
 	private String photoPreviewImgUrl;
-	private EntryMenu photoMenu;
-	private EntryMenu photoAuthorMenu;
 
 	private List<FavoriteEntryType> photoIconsTypes = newArrayList();
 	private List<FavoriteEntryType> userIconsTypes = newArrayList();
@@ -288,22 +286,6 @@ public class PhotoInfo implements Cacheable {
 
 	public void setPhotoPreviewImgUrl( final String photoPreviewImgUrl ) {
 		this.photoPreviewImgUrl = photoPreviewImgUrl;
-	}
-
-	public EntryMenu getPhotoMenu() {
-		return photoMenu;
-	}
-
-	public void setPhotoMenu( final EntryMenu photoMenu ) {
-		this.photoMenu = photoMenu;
-	}
-
-	public EntryMenu getPhotoAuthorMenu() {
-		return photoAuthorMenu;
-	}
-
-	public void setPhotoAuthorMenu( final EntryMenu photoAuthorMenu ) {
-		this.photoAuthorMenu = photoAuthorMenu;
 	}
 
 	@Override
