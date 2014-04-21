@@ -48,7 +48,8 @@ define( ["backbone", "jquery", "underscore"
 
 				container.append( this.contextMenuItemTemplate( menuItem ) );
 				if ( menuItem[ 'subMenu' ] ) {
-					this.renderItems( menuItem.entrySubMenu.entryMenuItems, container );
+					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItems' ], container )
+//					container.append( "<ul class='top-menu-item entry-context-menu-items'>" + this.renderItems( menuItem.entrySubMenu.entryMenuItems, container ) + '</ul>' );
 				}
 			}
 		}
