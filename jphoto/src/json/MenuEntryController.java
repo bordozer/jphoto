@@ -48,12 +48,12 @@ public class MenuEntryController {
 		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
 		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
-		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu ) );
+		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu, 0 ) );
 
 		return entryMenuDTO;
 	}
 
-	private List<EntryMenuItemDTO> getMenuItemDTOs( final int entryId, final EntryMenu entryMenu ) {
+	private List<EntryMenuItemDTO> getMenuItemDTOs( final int entryId, final EntryMenu entryMenu, final int deep ) {
 
 		final List<? extends AbstractEntryMenuItem> menuItems = entryMenu.getEntryMenuItems();
 
@@ -64,7 +64,7 @@ public class MenuEntryController {
 			@Override
 			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
 
-				final String menuItemId = String.format( "context-menu-item-%d-%d-%d", entryMenu.getEntryMenuType().getId(), entryId, counter++ );
+				final String menuItemId = String.format( "context-menu-item-%d-%d-%d-%d", entryMenu.getEntryMenuType().getId(), entryId, counter++, deep );
 
 				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO( menuItemId );
 
@@ -75,7 +75,7 @@ public class MenuEntryController {
 				if ( entryMenuItem instanceof SubmenuAccesible ) {
 					final SubmenuAccesible submenuAccesible = ( SubmenuAccesible ) entryMenuItem;
 					final EntryMenu entrySubMenu = submenuAccesible.getEntrySubMenu();
-					menuItemDTO.setEntrySubMenuItemDTOs( getMenuItemDTOs( entryId, entrySubMenu ) );
+					menuItemDTO.setEntrySubMenuItemDTOs( getMenuItemDTOs( entryId, entrySubMenu, deep + 1 ) );
 				}
 
 				final AbstractEntryMenuItemCommand menuItemCommand = entryMenuItem.getMenuItemCommand();

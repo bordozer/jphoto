@@ -58,7 +58,7 @@ define( ["backbone", "jquery", "underscore"
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 
 					var ulID = 'ul-' + menuItemId;
-					liElement.append( "<ul class='top-menu-item '" + ulID + "'></ul>" );
+					liElement.append( "<ul class='top-menu-item " + ulID + "'></ul>" );
 					var ulElement = $( "." + ulID, liElement );
 					console.log( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ] );
 					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ulElement );
