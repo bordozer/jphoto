@@ -34,7 +34,7 @@ public class MenuEntryController {
 	@ResponseBody
 	public EntryMenuDTO menuEntry( final @PathVariable( "entryMenuTypeId" ) int entryMenuTypeId, final @PathVariable( "entryId" ) int entryId ) {
 
-		final EntryMenu entryMenu = getEntryMEnuInstance( entryMenuTypeId, entryId );
+		final EntryMenu entryMenu = getEntryMenuInstance( entryMenuTypeId, entryId );
 
 		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryId );
 		entryMenuDTO.setMenuDivId( String.format( "%s-items", entryMenu.getMenuId() ) );
@@ -51,7 +51,7 @@ public class MenuEntryController {
 		return entryMenuDTO;
 	}
 
-	private EntryMenu getEntryMEnuInstance( final int entryMenuTypeId, final int entryId ) {
+	private EntryMenu getEntryMenuInstance( final int entryMenuTypeId, final int entryId ) {
 
 		final EntryMenuType menuType = EntryMenuType.getById( entryMenuTypeId );
 
