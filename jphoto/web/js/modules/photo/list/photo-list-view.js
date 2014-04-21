@@ -7,9 +7,11 @@ define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/list/templates/author-link.html"
 		, "text!modules/photo/list/templates/author-rank.html"
 		, "text!modules/photo/list/templates/anonymous-period-expiration-time.html"
+		, "components/menu/context-menu-model"
 		, "components/menu/context-menu-view"
-		], function ( Backbone, $, _, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate
-		, authorRankTemplate, anonymousPeriodExpirationTimeTemplate, ContextMenuView ) {
+		], function ( Backbone, $, _
+		, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate, authorRankTemplate, anonymousPeriodExpirationTimeTemplate
+		, ContextMenuModel, ContextMenuView ) {
 
 	'use strict';
 
@@ -61,12 +63,12 @@ define( ["backbone", "jquery", "underscore"
 
 				var menuContainer = $( '.context-menu-photo-' + photoId, this.$el );
 
-				var contextMenuModel = this.model.get( 'photoContextMenuModel' );
-				contextMenuModel.set( { container: menuContainer } );
+				var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) });
+				photoContextMenuModel.set( { container: menuContainer } );
 
-				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: contextMenuModel, el: menuContainer } );
+				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuContainer } );
 
-				contextMenuModel.fetch( { cache: false } );
+				photoContextMenuModel.fetch( { cache: false } );
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
