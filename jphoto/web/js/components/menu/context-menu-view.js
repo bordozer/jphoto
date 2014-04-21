@@ -1,15 +1,13 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!components/menu/templates/context-menu-template.html"
-		, "text!components/menu/templates/context-menu-items-template.html"
 		, "text!components/menu/templates/context-menu-item-template.html"
-		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemsContainerTemplate, contextMenuItemTemplate ) {
+		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemTemplate ) {
 
 	'use strict';
 
 	var ContextMenuView = Backbone.View.extend( {
 
 		contextMenuTemplate:_.template( contextMenuTemplate ),
-		contextMenuItemsContainerTemplate:_.template( contextMenuItemsContainerTemplate ),
 		contextMenuItemTemplate:_.template( contextMenuItemTemplate ),
 
 		initialize: function() {
@@ -38,10 +36,6 @@ define( ["backbone", "jquery", "underscore"
 
 		, renderItems: function( entryMenuItemDTOs, container ) {
 
-//			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
-
-//			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
-
 			for ( var i in entryMenuItemDTOs ) {
 				var menuItemId = entryMenuItemDTOs[ i ][ 'menuItemId' ];
 				var menuItem = entryMenuItemDTOs[ i ][ 'menuItem' ];
@@ -53,14 +47,20 @@ define( ["backbone", "jquery", "underscore"
 					continue;
 				}
 
-				container.append( this.contextMenuItemTemplate( menuItem ) );
-				if ( menuItem[ 'subMenu' ] ) {
-//					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItems' ], container )
-//					container.append( "<ul class='top-menu-item entry-context-menu-items'>" + this.renderItems( menuItem.entrySubMenu.entryMenuItems, container ) + '</ul>' );
-				}
-			}
+				container.append( "<li style='font-size: 10px;' class='entry-context-menu-item'>" );
 
-//			container.append( "</ul>" );
+				container.append( this.contextMenuItemTemplate( menuItem ) );
+
+				if ( menuItem[ 'subMenu' ] ) {
+//					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], container );
+					/*var ulID = 'ul-' + menuItemId;
+					container.append( "<ul class='top-menu-item '" + ulID + "'>" );
+					var subMenuContainer = $( "." + ulID, container );
+					this.renderItems( menuItem[ 'entrySubMenu' ][ 'entryMenuItemDTOs' ], subMenuContainer );
+					container.append( "</ul>" );*/
+				}
+				container.append( '</li>' );
+			}
 		}
 
 		/*
