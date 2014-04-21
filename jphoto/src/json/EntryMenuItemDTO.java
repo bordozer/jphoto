@@ -4,15 +4,15 @@ import core.general.menus.AbstractEntryMenuItem;
 
 public class EntryMenuItemDTO {
 
-	private int menuItemId;
+	private String menuItemId;
 	private final AbstractEntryMenuItem menuItem;
 
-	public EntryMenuItemDTO( final int menuItemId, final AbstractEntryMenuItem menuItem ) {
+	public EntryMenuItemDTO( final String menuItemId, final AbstractEntryMenuItem menuItem ) {
 		this.menuItemId = menuItemId;
 		this.menuItem = menuItem;
 	}
 
-	public int getMenuItemId() {
+	public String getMenuItemId() {
 		return menuItemId;
 	}
 

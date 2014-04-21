@@ -57,7 +57,7 @@ public class MenuEntryController {
 
 			@Override
 			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
-				return new EntryMenuItemDTO( counter++, entryMenuItem );
+				return new EntryMenuItemDTO( String.format( "context-menu-item-%d-%d-%d", entryMenuTypeId, entryId, counter++ ), entryMenuItem );
 			}
 		} ) );
 

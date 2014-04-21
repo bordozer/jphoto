@@ -43,7 +43,7 @@ define( ["backbone", "jquery", "underscore"
 //			container.append( "<ul class='top-menu-item entry-context-menu-items'>" );
 
 			for ( var i in entryMenuItemDTOs ) {
-				var menuItemId = entryMenuItemDTOs[ 'menuItemId' ];
+				var menuItemId = entryMenuItemDTOs[ i ][ 'menuItemId' ];
 				var menuItem = entryMenuItemDTOs[ i ][ 'menuItem' ];
 
 				console.log( menuItem );
