@@ -45,7 +45,7 @@ public class MenuEntryController {
 		entryMenuDTO.setEntryMenuHeight( String.valueOf( entryMenu.getMenuHeight() ) );
 
 		entryMenuDTO.setMenuItemCssClass( "_class_" );
-		entryMenuDTO.setMenuItemCommand( "_command_" );
+		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
 		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
 		return entryMenuDTO;

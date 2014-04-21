@@ -63,7 +63,7 @@ define( ["backbone", "jquery", "underscore"
 
 				var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
 
-				var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) });
+				var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) } );
 				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
 
 				photoContextMenuModel.fetch( { cache: false } );

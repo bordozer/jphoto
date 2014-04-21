@@ -10,14 +10,9 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-		},
+		}
 
-		events: {
-			"click .entry-context-menu-icon": "onClickMenuIcon"
-			, "click .entry-menu-item": "onClickMenuItem"
-		},
-
-		render:function () {
+		, render:function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
@@ -33,28 +28,34 @@ define( ["backbone", "jquery", "underscore"
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
-		},
+		}
 
-		clickMenuIcon: function() {
+		/*
+		events: {
+			"click .entry-context-menu-icon": "onClickMenuIcon"
+			, "click .entry-menu-item": "onClickMenuItem"
+		}
+
+		,clickMenuIcon: function() {
 //			showAlertMessage( 'Menu icon has been clicked' );
 			alert( 'Menu icon has been clicked' );
-		},
+		}
 
-		clickMenuItem: function() {
-			eval( this.model.get( 'menuItemCommand' ) );
+		,clickMenuItem: function() {
+//			eval( this.model.get( 'menuItemCommand' ) );
 //			showAlertMessage( 'Menu item has been clicked' );
 			alert( 'Menu item has been clicked' );
-		},
+		}
 
-		onClickMenuIcon: function( evt ) {
+		,onClickMenuIcon: function( evt ) {
 			evt.stopPropagation();
 			this.clickMenuIcon();
-		},
+		}
 
-		onClickMenuItem: function( evt ) {
+		,onClickMenuItem: function( evt ) {
 			evt.stopPropagation();
 			this.clickMenuItem();
-		}
+		}*/
 	});
 
 	return { ContextMenuView:ContextMenuView };
