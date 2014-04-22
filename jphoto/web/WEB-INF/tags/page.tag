@@ -2,6 +2,7 @@
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="ui.services.ajax.AjaxService" %>
+<%@ tag import="core.general.menus.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -15,6 +16,7 @@
 %>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 <c:set var="isSuperAdmin" value="<%=ApplicationContextHelper.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser().getId() )%>"/>
+<c:set var="menuType_PhotoId" value="<%=EntryMenuType.PHOTO.getId()%>" />
 
 <eco:page pageModel="${pageModel}">
 
@@ -165,6 +167,11 @@
 			function adminSetPhotoNudeContent( photoId, isNudeContent ) {
 				jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
 
+				/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
+					var photoListId = 1;
+					var element = $( '.photo-container-' + 1 +'-' + photoId );
+					photoListEntry( photoId, photoListId, true, '${eco:baseUrl()}', element );
+				} );*/
 			}
 		</script>
 

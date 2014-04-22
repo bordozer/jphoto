@@ -7,6 +7,11 @@ define( ["backbone"], function ( Backbone ) {
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/json/photos/" + options.photoId + "/";
 		}
+
+		, refresh: function() {
+			console.log( 'refresh' );
+		}
+
 	});
 
 	return { PhotoListEntryModel:PhotoListEntryModel };

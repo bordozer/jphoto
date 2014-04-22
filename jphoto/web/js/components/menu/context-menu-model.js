@@ -7,6 +7,7 @@ define( ["backbone"], function ( Backbone ) {
 		, initialize:function ( options ) {
 			this.url = options.baseUrl + "/json/menu/" + options.entryMenuTypeId + "/" + options.entryId + "/";
 		}
+
 	});
 
 	return { ContextMenuModel:ContextMenuModel };

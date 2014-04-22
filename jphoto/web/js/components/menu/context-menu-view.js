@@ -36,6 +36,13 @@ define( ["backbone", "jquery", "underscore"
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
+			/*$(function() {
+				$( '#main-menu', element ).smartmenus({
+					mainMenuSubOffsetX: -1,
+					subMenusSubOffsetX: 10,
+					subMenusSubOffsetY: 0
+				});
+			});*/
 
 			var menuIconElement = $( '#' + menuId, this.$el );
 //			console.log( menuIconElement );
@@ -43,6 +50,8 @@ define( ["backbone", "jquery", "underscore"
 		}
 
 		, renderItems: function( entryMenuItemDTOs, container ) {
+
+			var model = this.model;
 
 			for ( var i in entryMenuItemDTOs ) {
 
@@ -57,9 +66,26 @@ define( ["backbone", "jquery", "underscore"
 
 				var liID = 'li-' + menuItemId;
 				container.append( "<li style='font-size: 10px;' class='" + liID + "'></li>" );
-				var liElement = $( '.' + liID, container );
 
-				liElement.append( this.contextMenuItemTemplate( entryMenuItemDTO ) );
+				var menuElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
+
+				menuElement.on( 'click',  function( evt ) {
+
+					console.log( model.get( 'menuCommand' ) );
+
+					evt.preventDefault();
+					evt.stopPropagation();
+
+					eval( model.get( 'menuCommand' ) );
+					model.get( "contextMenuEntryModel" ).refresh();
+				});
+//				console.log( menuElement.data( 'events' ) );
+//				console.log( menuElement );
+
+				var liElement = $( '.' + liID, container );
+				liElement.append( menuElement );
+
+//				$( ".entry-menu-item-" + this.model.get( 'uniqueMenuItemId' ), this.$el ).bind( "", );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 
@@ -70,33 +96,6 @@ define( ["backbone", "jquery", "underscore"
 				}
 			}
 		}
-
-		/*
-		events: {
-			"click .entry-context-menu-icon": "onClickMenuIcon"
-			, "click .entry-menu-item": "onClickMenuItem"
-		}
-
-		,clickMenuIcon: function() {
-//			showAlertMessage( 'Menu icon has been clicked' );
-			alert( 'Menu icon has been clicked' );
-		}
-
-		,clickMenuItem: function() {
-//			eval( this.model.get( 'menuItemCommand' ) );
-//			showAlertMessage( 'Menu item has been clicked' );
-			alert( 'Menu item has been clicked' );
-		}
-
-		,onClickMenuIcon: function( evt ) {
-			evt.stopPropagation();
-			this.clickMenuIcon();
-		}
-
-		,onClickMenuItem: function( evt ) {
-			evt.stopPropagation();
-			this.clickMenuItem();
-		}*/
 	});
 
 	return { ContextMenuView:ContextMenuView };
