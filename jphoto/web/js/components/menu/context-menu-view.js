@@ -28,7 +28,7 @@ define( ["backbone", "jquery", "underscore"
 
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', element ) );
 
-			var menu_a = $( '#entry-context-menu-a', element );
+			var menu_a = $( '#entry-context-menu-icon-a', element );
 
 			$( function () {
 				menu_a.context_menu( {

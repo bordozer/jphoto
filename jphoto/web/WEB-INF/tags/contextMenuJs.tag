@@ -143,9 +143,6 @@
 </script>
 
 <style type="text/css">
-	.top-menu-item {
-		margin-top: 20px;
-	}
 
 	.entry-popup-menu {
 		position: absolute;
