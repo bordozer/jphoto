@@ -57,16 +57,9 @@ define( ["backbone", "jquery", "underscore"
 					continue;
 				}
 
-				var liID = 'li-' + menuItemId;
-				container.append( "<li style='font-size: 10px;' class='" + liID + "'></li>" );
-
+				var li = $( "<li style='font-size: 10px;'></li>" );
 				var menuElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
-
-//				console.log( menuElement.data( 'events' ) );
-//				console.log( menuElement );
-
-				var liElement = $( '.' + liID, container );
-				liElement.append( menuElement );
+				li.append( menuElement );
 
 				menuElement.on( 'click',  function( evt ) {
 
@@ -79,15 +72,13 @@ define( ["backbone", "jquery", "underscore"
 					model.get( "contextMenuEntryModel" ).refresh();
 				});
 
-//				$( ".entry-menu-item-" + this.model.get( 'uniqueMenuItemId' ), this.$el ).bind( "", );
-
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
-
-					var ulID = 'ul-' + menuItemId;
-					liElement.append( "<ul class='top-menu-item " + ulID + "'></ul>" );
-					var ulElement = $( "." + ulID, liElement );
-					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ulElement );
+					var ul = $( "<ul class='top-menu-item'></ul>" );
+					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ul );
+					li.append( ul );
 				}
+
+				container.append( li );
 			}
 		}
 	});
