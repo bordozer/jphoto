@@ -62,6 +62,12 @@ define( ["backbone", "jquery", "underscore"
 
 				var menuElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 
+//				console.log( menuElement.data( 'events' ) );
+//				console.log( menuElement );
+
+				var liElement = $( '.' + liID, container );
+				liElement.append( menuElement );
+
 				menuElement.on( 'click',  function( evt ) {
 
 					console.log( model.get( 'menuCommand' ) );
@@ -72,11 +78,6 @@ define( ["backbone", "jquery", "underscore"
 					eval( model.get( 'menuCommand' ) );
 					model.get( "contextMenuEntryModel" ).refresh();
 				});
-//				console.log( menuElement.data( 'events' ) );
-//				console.log( menuElement );
-
-				var liElement = $( '.' + liID, container );
-				liElement.append( menuElement );
 
 //				$( ".entry-menu-item-" + this.model.get( 'uniqueMenuItemId' ), this.$el ).bind( "", );
 
