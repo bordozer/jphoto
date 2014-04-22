@@ -14,11 +14,12 @@ var require = {
 		, context_menu: "lib/fg.menu/fg.menu"
 		, superfish: "lib/superfish/js/superfish"
 		, dialog: "lib/jquery/jquery-ui-1.8.21.custom.min"
+		, lightbox_me: "lib/lightbox_me/jquery.lightbox_me"
 	},
 
 	shim: {
 		'backbone': {
-			deps: ['underscore', 'jquery', 'context_menu', 'superfish', 'dialog'],
+			deps: ['underscore', 'jquery', 'context_menu', 'superfish', 'dialog', 'lightbox_me'],
 			exports: 'Backbone'
 		},
 		underscore: {
