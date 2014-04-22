@@ -35,21 +35,22 @@ define( ["backbone", "jquery", "underscore"
 
 			var photoId = this.model.get( 'photoId' );
 
-			var element = this.$el;
-			element.html( '' );
-
 			if ( this.model.get( 'userOwnThePhoto' ) ) {
-				element.addClass( 'block-user-photo' );
+				this.$el.addClass( 'block-user-photo' );
 			}
 
-			element.append( "<div class='admin-special-empty-flag'>" );
+			var element = $( "<div class='admin-special-empty-flag'></div>" );
 
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				element.append( "<div class='admin-special-empty-flag admin-special-flag-nude-content'>" );
+				var element1 = $( "<div class='admin-special-empty-flag admin-special-flag-nude-content'></div>" );
+				element.append( element1 );
+				element = element1;
 			}
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				element.append( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'>" );
+				var element2 = $( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'></div>" );
+				element.append( element2 );
+				element = element2;
 			}
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
@@ -60,14 +61,6 @@ define( ["backbone", "jquery", "underscore"
 
 			if ( this.model.get( 'showPhotoContextMenu' ) ) {
 				element.append( this.contextMenuTemplate( modelJSON ) );
-
-				// TODO: uncomment to render menu immediately
-				/*var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
-
-				var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) } );
-				var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
-
-				photoContextMenuModel.fetch( { cache: false } );*/
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
@@ -86,7 +79,9 @@ define( ["backbone", "jquery", "underscore"
 				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
-			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
+			this.$el.html( element );
+
+			/*if ( this.model.get( 'showAdminFlag_Nude' ) ) {
 				element.append( '</div>' );
 			}
 
@@ -94,7 +89,7 @@ define( ["backbone", "jquery", "underscore"
 				element.append( '</div>' );
 			}
 
-			element.append( '</div>' );
+			element.append( '</div>' );*/
 		}
 
 		, events: {

@@ -113,11 +113,11 @@
 }
 
 .admin-special-empty-flag {
-	/*float: left;*/
+	float: left;
 	position: relative;
 	width: 100%;
 	height: 100%;
-	background: red;
+	/*background: red;*/
 }
 
 .admin-special-flag-anonymous-posting {
