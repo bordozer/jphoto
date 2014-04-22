@@ -17,18 +17,19 @@ define( ["backbone", "jquery", "underscore"
 		, render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( this.contextMenuTemplate( modelJSON ) );
+			var element = this.$el;
+			element.html( this.contextMenuTemplate( modelJSON ) );
 
 			var menuId = this.model.get( 'menuId' );
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			console.log( 'The menu is creating... ', menuId );
+			console.log( 'The menu is being initialized... ', menuId, element );
 
-			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', this.$el ) );
+			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', element ) );
 
 			$( function () {
-				$( '#' + menuId ).context_menu( {
+				$( '#' + menuId, element ).context_menu( {
 					content:$( '#' + menuDivId ).html()
 					  , showSpeed:400
 					  , width:350

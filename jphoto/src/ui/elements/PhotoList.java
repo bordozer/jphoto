@@ -8,6 +8,8 @@ import java.util.List;
 
 public class PhotoList {
 
+	private int photoListId;
+
 	final private List<PhotoInfo> photoInfos;
 	final private String photoListTitle;
 	private int photosInLine;
@@ -34,6 +36,14 @@ public class PhotoList {
 		this.photoInfos = photoInfos;
 		this.photoListTitle = photoListTitle;
 		this.showPaging = showPaging;
+	}
+
+	public void setPhotoListId( final int photoListId ) {
+		this.photoListId = photoListId;
+	}
+
+	public int getPhotoListId() {
+		return photoListId;
 	}
 
 	public List<PhotoInfo> getPhotoInfos() {

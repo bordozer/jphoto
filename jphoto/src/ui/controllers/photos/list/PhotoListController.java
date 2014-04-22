@@ -776,11 +776,13 @@ public class PhotoListController {
 
 	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<AbstractPhotoListData> photoListDatas, final PhotoFilterModel filterModel ) {
 
+		int listCounter = 0;
 		for ( final AbstractPhotoListData listData : photoListDatas ) {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
 			final List<Photo> pagePhotos = getPhotos( pagingModel, listData );
 			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias, EnvironmentContext.getLanguage() );
+			photoList.setPhotoListId( listCounter++ );
 
 			photoList.setPhotoGroupOperationMenuContainer( pagePhotos.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 

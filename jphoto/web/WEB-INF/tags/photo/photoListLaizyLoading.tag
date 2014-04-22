@@ -54,7 +54,7 @@
 
 			<c:set var="photoId" value="${photoInfo.photo.id}" />
 
-			<div class="photo-container block-border block-shadow block-background photo-container-${photoId}">
+			<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
 				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 110px;">
 					<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
 				</div>
@@ -83,7 +83,8 @@
 			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
 				for (var i = 0; i < photosToRender.length; i++) {
 					var photoId = photosToRender[i];
-					photoListEntry( photoId, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.photo-container-' + photoId ) );
+					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
+					photoListEntry( photoId, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.' + photoUniqueClass ) );
 				}
 			} );
 		}

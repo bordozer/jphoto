@@ -103,7 +103,14 @@ define( ["backbone", "jquery", "underscore"
 
 		, photoContextMenuIconClick: function() {
 			var photoId = this.model.get( 'photoId' );
-			initContextMenuForEntry( photoId, 1, $( '.context-menu-photo-' + photoId, this.$el ) ); // TODO: EntryMenuType.PHOTO.getId is hardcoded
+
+			var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
+//			console.log( 'Initializing a context menu for ', photoId, menuElement );
+
+			var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, baseUrl: this.model.get( 'baseUrl' ) } );
+			var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
+
+			photoContextMenuModel.fetch( { cache: false } );
 		}
 
 		, onPhotoContextMenuIconClick: function( evt ) {
