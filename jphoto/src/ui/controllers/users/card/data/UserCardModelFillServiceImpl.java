@@ -337,7 +337,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 
-		return getPhotoList( ids, link, title );
+		return getPhotoList( 0, ids, link, title );
 	}
 
 	private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
@@ -357,7 +357,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 
-		return getPhotoList( sqlSelectIdsResult.getIds(), linkBest, listTitle );
+		return getPhotoList( 2, sqlSelectIdsResult.getIds(), linkBest, listTitle );
 	}
 
 	@Override
@@ -368,7 +368,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 		final String listTitle = translatorService.translate( "The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 
-		return getPhotoList( photos, linkBest, listTitle );
+		return getPhotoList( 3, photos, linkBest, listTitle );
 	}
 
 	@Override
@@ -380,7 +380,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String listTitle = translatorService.translate( "Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		//		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
-		return getPhotoList( photos, linkBest, listTitle );
+		return getPhotoList( 4, photos, linkBest, listTitle );
 	}
 
 	@Override
@@ -389,7 +389,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		return getPhotoList( photos, linkBest, listTitle );
+		return getPhotoList( 5, photos, linkBest, listTitle );
 	}
 
 	@Override
@@ -398,12 +398,13 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final String linkBest = StringUtils.EMPTY;
 		final String listTitle = translatorService.translate( "Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		return getPhotoList( photos, linkBest, listTitle );
+		return getPhotoList( 6, photos, linkBest, listTitle );
 	}
 
-	private PhotoList getPhotoList( final List<Integer> photosIds, final String linkToFullPhotoList, final String listTitle ) {
+	private PhotoList getPhotoList( final int photoListId, final List<Integer> photosIds, final String linkToFullPhotoList, final String listTitle ) {
 
 		final PhotoList photoList = new PhotoList( photosIds, listTitle, false );
+		photoList.setPhotoListId( photoListId );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setLinkToFullList( linkToFullPhotoList );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
