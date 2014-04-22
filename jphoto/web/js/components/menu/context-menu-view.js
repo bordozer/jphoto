@@ -28,8 +28,10 @@ define( ["backbone", "jquery", "underscore"
 
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', element ) );
 
+			var menu_a = $( '#entry-context-menu-a', element );
+
 			$( function () {
-				$( '#' + menuId, element ).context_menu( {
+				menu_a.context_menu( {
 					content:$( '#' + menuDivId ).html()
 					  , showSpeed:400
 					  , width:350
@@ -37,9 +39,8 @@ define( ["backbone", "jquery", "underscore"
 				} );
 			} );
 
-			var menuIconElement = $( '#' + menuId, this.$el );
 //			console.log( menuIconElement );
-			menuIconElement.click();
+			menu_a.click();
 		}
 
 		, renderItems: function( entryMenuItemDTOs, container ) {
