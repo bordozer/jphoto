@@ -37,8 +37,8 @@ define( ["backbone", "jquery", "underscore"
 				} );
 			} );
 
-//			console.log( menuId + ' has been clicked' );
-//			$( '.entry-menu-item', this.$el ).click();
+			var menuIconElement = $( '#' + menuId, this.$el );
+			menuIconElement.click();
 		}
 
 		, renderItems: function( entryMenuItemDTOs, container ) {
