@@ -75,16 +75,15 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-		final PhotoList lastUploadedPhotoList = new PhotoList( photoUIService.getPhotoInfos( getLastUploadedPhotos(), EnvironmentContext.getCurrentUser() )
-			, translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
+		final PhotoList lastUploadedPhotoList = new PhotoList( getLastUploadedPhotos(), translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
 
 		lastUploadedPhotoList.setPhotosInLine( 4 );
 		model.setLastUploadedPhotoList( lastUploadedPhotoList );
-		Collections.shuffle( lastUploadedPhotoList.getPhotoInfos() );
+		Collections.shuffle( lastUploadedPhotoList.getPhotoIds() );
 
-		final PhotoList theBestPhotoList = new PhotoList( photoUIService.getPhotoInfos( getTheBestPhotos(), EnvironmentContext.getCurrentUser() ), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
+		final PhotoList theBestPhotoList = new PhotoList( getTheBestPhotos(), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
 		model.setTheBestPhotoList( theBestPhotoList );
-		Collections.shuffle( theBestPhotoList.getPhotoInfos() );
+		Collections.shuffle( theBestPhotoList.getPhotoIds() );
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );
 		model.setBestPhotosPeriod( configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS ) );
 
@@ -112,21 +111,21 @@ public class PortalPageController {
 		}
 
 		model.setPortalPageGenres( portalPageGenres );
-		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotoList.getPhotoInfos().size() - 1 ) );
+		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotoList.getTotalPhotos() - 1 ) );
 
 		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );
 
 		return VIEW;
 	}
 
-	private List<Photo> getLastUploadedPhotos() {
+	private List<Integer> getLastUploadedPhotos() {
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPortalPageLastUploadedPhotosSQL();
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
-		return photoService.load( selectResult.getIds() );
+		return selectResult.getIds();
 	}
 
-	private List<Photo> getTheBestPhotos() {
+	private List<Integer> getTheBestPhotos() {
 		final int minMarksTobeInPhotosOfTheDay = configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY );
 		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS );
 
@@ -134,6 +133,6 @@ public class PortalPageController {
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPortalPageBestPhotosIdsSQL( minMarksTobeInPhotosOfTheDay, timeFrom );
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectQuery );
 
-		return photoService.load( sqlSelectIdsResult.getIds() );
+		return sqlSelectIdsResult.getIds();
 	}
 }

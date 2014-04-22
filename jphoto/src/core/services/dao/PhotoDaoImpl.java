@@ -194,13 +194,13 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	}
 
 	@Override
-	public Photo getLastUserPhoto( final int userId ) {
-		final String sql = String.format( "SELECT * FROM %s WHERE %s=:userId ORDER BY %s DESC LIMIT 1;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_UPLOAD_TIME );
+	public int getLastUserPhotoId( final int userId ) {
+		final String sql = String.format( "SELECT %s FROM %s WHERE %s=:userId ORDER BY %s DESC LIMIT 1;", ENTITY_ID, TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_UPLOAD_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
 
-		return getEntryOrNull( sql, paramSource, new PhotoMapper() );
+		return getIntValueOrZero( sql, paramSource );
 	}
 
 	@Override

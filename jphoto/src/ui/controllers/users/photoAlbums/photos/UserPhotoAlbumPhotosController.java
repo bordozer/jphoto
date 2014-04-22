@@ -100,9 +100,7 @@ public class UserPhotoAlbumPhotosController {
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( photoAlbum.getUser().getId(), photoAlbum.getId(), pagingModel );
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
-		final List<Photo> photos = photoService.load( selectIdsResult.getIds() );
-
-		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), title );
+		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setBottomText( photoAlbum.getDescription() );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );

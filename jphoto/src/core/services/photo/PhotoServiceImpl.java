@@ -307,8 +307,8 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public Photo getLastUserPhoto( final int userId ) {
-		return photoDao.getLastUserPhoto( userId );
+	public int getLastUserPhotoId( final int userId ) {
+		return photoDao.getLastUserPhotoId( userId );
 	}
 
 	@Override
@@ -372,38 +372,41 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public List<Photo> getBestUserPhotos( final User user, final int photosQty, final User accessor ) {
+	public List<Integer> getBestUserPhotosIds( final User user, final int photosQty, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, accessor );
 		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel( photosQty ) );
-		return loadPhotosByIdsQuery( selectQuery );
+
+		return load( selectQuery ).getIds();
 	}
 
 	@Override
-	public List<Photo> getLastUserPhotos( final User user, final int photosQty, final User accessor ) {
+	public List<Integer> getLastUserPhotosIds( final User user, final int photosQty, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosLast( user, accessor );
 		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel( photosQty ) );
-		return loadPhotosByIdsQuery( selectQuery );
+
+		return load( selectQuery ).getIds();
 	}
 
 	@Override
-	public List<Photo> getLastVotedPhotos( final User user, final int photosQty, final User accessor ) {
+	public List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastVotedPhotos( user, accessor );
 		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel( photosQty ) );
-		return loadPhotosByIdsQuery( selectQuery );
+
+		return load( selectQuery ).getIds();
 	}
 
 	@Override
-	public List<Photo> getLastPhotosOfUserVisitors( final User user, final int photosQty ) {
+	public List<Integer> getLastPhotosOfUserVisitors( final User user, final int photosQty ) {
 		final List<Integer> userIds = photoPreviewService.getLastUsersWhoViewedUserPhotos( user.getId(), photosQty );
-		final List<Photo> photos = newArrayList();
+		final List<Integer> photosIds = newArrayList();
 		for ( final int userId : userIds ) {
-			final Photo lastUserPhoto = getLastUserPhoto( userId );
-			if ( lastUserPhoto != null ) {
-				photos.add( lastUserPhoto );
+			final int lastUserPhotoId = getLastUserPhotoId( userId );
+			if ( lastUserPhotoId > 0 ) {
+				photosIds.add( lastUserPhotoId );
 			}
 		}
 
-		return photos;
+		return photosIds;
 	}
 
 	private PagingModel getPagingModel( final int photosQty ) {

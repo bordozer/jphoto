@@ -184,13 +184,13 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 		final boolean isHasVotedUserGoingToDoTheActionForPhotosOfUserWhoHaveSeenAuthorPhotos = randomUtilsService.getRandomBoolean();
 		if ( isHasVotedUserGoingToDoTheActionForPhotosOfUserWhoHaveSeenAuthorPhotos ) {
-			final List<Photo> lastVotedPhotos = photoService.getLastVotedPhotos( photoAuthor, 4, actionCommitter );
+			final List<Integer> lastVotedPhotosIds = photoService.getLastVotedPhotosIds( photoAuthor, 4, actionCommitter );
 
-			if ( lastVotedPhotos == null || lastVotedPhotos.size() == 0 ) {
+			if ( lastVotedPhotosIds == null || lastVotedPhotosIds.size() == 0 ) {
 				return;
 			}
 
-			final Photo randomPhotoFromLastVoted = randomUtilsService.getRandomPhoto( lastVotedPhotos );
+			final Photo randomPhotoFromLastVoted = randomUtilsService.getRandomPhotoIds( lastVotedPhotosIds );
 			final int authorIdOfRandomPhotoFromLastVoted = randomPhotoFromLastVoted.getUserId();
 			final Photo randomPhoto = randomUtilsService.getRandomPhotoOfUser( authorIdOfRandomPhotoFromLastVoted );
 

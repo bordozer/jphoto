@@ -84,7 +84,7 @@
 
 				<table:td align="center" cssClass="photocell" width="${tdWidth}">
 					<c:if test="${not photoInfo.photoPreviewMustBeHidden}">
-						<photo:photoPreview photoInfo="${photoInfo}" isGroupOperationEnabled="${isGroupOperationEnabled}" sortColumnNumber="${photoList.sortColumnNumber}"/>
+						<photo:DEL_photoPreview photoInfo="${photoInfo}" isGroupOperationEnabled="${isGroupOperationEnabled}" sortColumnNumber="${photoList.sortColumnNumber}"/>
 					</c:if>
 
 					<c:if test="${photoInfo.photoPreviewMustBeHidden}">

@@ -165,13 +165,13 @@ public class UserBookmarksController {
 
 		model.clear();
 
-		final List<Photo> photos = selectDataFromDB( pagingModel, selectQuery );
+		final List<Integer> photosIds = selectDataFromDB( pagingModel, selectQuery );
 
 		final User user = userService.load( userId );
 
 		final String listTitle = String.format( "%s: %s", entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), translatorService.translate( entryType.getName(), EnvironmentContext.getLanguage() ) );
 
-		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, photoIconsTypes, userIconsTypes, EnvironmentContext.getCurrentUser() ), listTitle );
+		final PhotoList photoList = new PhotoList( photosIds, listTitle ); // TODO: do not ignore photoIconsTypes or userIconsTypes
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 
@@ -179,10 +179,10 @@ public class UserBookmarksController {
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 	}
 
-	private List<Photo> selectDataFromDB( final PagingModel pagingModel, final SqlIdsSelectQuery selectIdsQuery ) {
+	private List<Integer> selectDataFromDB( final PagingModel pagingModel, final SqlIdsSelectQuery selectIdsQuery ) {
 		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );
 		pagingModel.setTotalItems( selectResult.getRecordQty() );
 
-		return photoService.load( selectResult.getIds() );
+		return selectResult.getIds();
 	}
 }

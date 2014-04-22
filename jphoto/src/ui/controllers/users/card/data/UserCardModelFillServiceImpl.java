@@ -5,7 +5,6 @@ import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
-import core.general.photo.PhotoInfo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
@@ -318,10 +317,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PhotoList getCustomPhotoList( final SqlIdsSelectQuery selectIdsQuery, final String photoListTitle, final String userTeamMemberCardLink ) {
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
-		final List<Photo> photos = photoService.load( selectIdsResult.getIds() );
-
-		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
-		final PhotoList photoList = new PhotoList( photoInfos, photoListTitle, false );
+		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), photoListTitle, false );
 		photoList.setPhotosInLine( getUserPhotosInLine() );
 		photoList.setLinkToFullList( userTeamMemberCardLink );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
@@ -336,13 +332,13 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final SqlIdsSelectQuery idsSQL = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel() );
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
-		final List<Photo> photos = photoService.load( ids );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 		final String title = translatorService.translate( "$1: last photos. Total $2.", EnvironmentContext.getLanguage(), translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
-		return getPhotoList( photos, link, title );
+
+		return getPhotoList( ids, link, title );
 	}
 
 	private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
@@ -360,43 +356,37 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 		final String listTitle = translatorService.translate( "$1: the best photos. Total $2", EnvironmentContext.getLanguage(), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
-		final List<Photo> photos = photoService.loadPhotosByIdsQuery( selectIdsQuery );
+		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 
-		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
-
-		return photoList;
+		return getPhotoList( sqlSelectIdsResult.getIds(), linkBest, listTitle );
 	}
 
 	@Override
 	public PhotoList getBestUserPhotoList( final User user ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
-		final List<Photo> photos = photoService.getBestUserPhotos( user, getUserPhotosInLine(), currentUser );
+		final List<Integer> photos = photoService.getBestUserPhotosIds( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 		final String listTitle = translatorService.translate( "The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
-		return photoList;
+		return getPhotoList( photos, linkBest, listTitle );
 	}
 
 	@Override
 	public PhotoList getLastUserPhotoList( final User user ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
-		final List<Photo> photos = photoService.getLastUserPhotos( user, getUserPhotosInLine(), currentUser );
+		final List<Integer> photos = photoService.getLastUserPhotosIds( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		final PhotoList photoList = getPhotoList( photos, linkBest, listTitle );
-		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
+		//		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
-		return photoList;
+		return getPhotoList( photos, linkBest, listTitle );
 	}
 
 	@Override
 	public PhotoList getLastVotedPhotoList( final User user ) {
-		final List<Photo> photos = photoService.getLastVotedPhotos( user, getUserPhotosInLine(), EnvironmentContext.getCurrentUser() );
+		final List<Integer> photos = photoService.getLastVotedPhotosIds( user, getUserPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
@@ -405,16 +395,16 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public PhotoList getLastPhotosOfUserVisitors( final User user ) {
-		final List<Photo> photos = photoService.getLastPhotosOfUserVisitors( user, getUserPhotosInLine() );
+		final List<Integer> photos = photoService.getLastPhotosOfUserVisitors( user, getUserPhotosInLine() );
 
 		final String linkBest = StringUtils.EMPTY;
 		final String listTitle = translatorService.translate( "Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		return getPhotoList( photos, linkBest, listTitle );
 	}
 
-	private PhotoList getPhotoList( final List<Photo> photos, final String linkToFullPhotoList, final String listTitle ) {
+	private PhotoList getPhotoList( final List<Integer> photosIds, final String linkToFullPhotoList, final String listTitle ) {
 
-		final PhotoList photoList = new PhotoList( photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() ), listTitle, false );
+		final PhotoList photoList = new PhotoList( photosIds, listTitle, false );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setLinkToFullList( linkToFullPhotoList );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );

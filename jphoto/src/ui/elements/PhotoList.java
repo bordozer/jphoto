@@ -1,6 +1,5 @@
 package ui.elements;
 
-import core.general.photo.PhotoInfo;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import org.apache.commons.lang.StringUtils;
 
@@ -10,8 +9,8 @@ public class PhotoList {
 
 	private int photoListId;
 
-	final private List<PhotoInfo> photoInfos;
-	final private String photoListTitle;
+	private final List<Integer> photoIds;
+	private final String photoListTitle;
 	private int photosInLine;
 	private String noPhotoText = "No photos correspond to the criterias";
 
@@ -28,12 +27,12 @@ public class PhotoList {
 
 	private int sortColumnNumber;
 
-	public PhotoList( final List<PhotoInfo> photoInfos, final String photoListTitle ) {
-		this( photoInfos, photoListTitle, true );
+	public PhotoList( final List<Integer> photoIds, final String photoListTitle ) {
+		this( photoIds, photoListTitle, true );
 	}
 
-	public PhotoList( final List<PhotoInfo> photoInfos, final String photoListTitle, final boolean showPaging ) {
-		this.photoInfos = photoInfos;
+	public PhotoList( final List<Integer> photoIds, final String photoListTitle, final boolean showPaging ) {
+		this.photoIds = photoIds;
 		this.photoListTitle = photoListTitle;
 		this.showPaging = showPaging;
 	}
@@ -46,8 +45,8 @@ public class PhotoList {
 		return photoListId;
 	}
 
-	public List<PhotoInfo> getPhotoInfos() {
-		return photoInfos;
+	public List<Integer> getPhotoIds() {
+		return photoIds;
 	}
 
 	public String getPhotoListTitle() {
@@ -63,7 +62,7 @@ public class PhotoList {
 	}
 
 	public int getTotalPhotos() {
-		return photoInfos.size();
+		return photoIds.size();
 	}
 
 	public String getNoPhotoText() {
@@ -119,7 +118,7 @@ public class PhotoList {
 	}
 
 	public boolean hasPhotos() {
-		return photoInfos != null && ! photoInfos.isEmpty();
+		return photoIds != null && ! photoIds.isEmpty();
 	}
 
 	public int getSortColumnNumber() {

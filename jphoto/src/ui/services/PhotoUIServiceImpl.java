@@ -182,12 +182,12 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		return photoInfos;
 	}
 
-	@Override
+	/*@Override
 	public void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos ) {
 		for ( final PhotoInfo photoInfo : photoInfos ) {
 			photoInfo.setPhotoPreviewMustBeHidden( photoInfo.isPhotoAuthorNameMustBeHidden() );
 		}
-	}
+	}*/
 
 	@Override
 	public PhotoPreviewWrapper getPhotoPreviewWrapper( final Photo photo, final User user ) {

@@ -17,7 +17,7 @@ public interface PhotoDao extends BaseEntityDao<Photo> {
 
 	boolean updatePhotoFile( int photoId, final PhotoFile photoFile );
 
-	Photo getLastUserPhoto( final int userId );
+	int getLastUserPhotoId( final int userId );
 
 	List<Photo> getUserPhotos( final int userId );
 

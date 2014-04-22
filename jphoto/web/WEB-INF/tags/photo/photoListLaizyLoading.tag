@@ -50,9 +50,9 @@
 			</c:if>
 		</div>
 
-		<c:forEach var="photoInfo" items="${photoList.photoInfos}" varStatus="status">
+		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
 
-			<c:set var="photoId" value="${photoInfo.photo.id}" />
+			<c:set var="photoId" value="${photoId}" />
 
 			<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
 				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
@@ -72,8 +72,8 @@
 
 		var photosToRender = [];
 
-		<c:forEach var="photoInfo" items="${photoList.photoInfos}" varStatus="status">
-			photosToRender.push( ${photoInfo.photo.id} );
+		<c:forEach var="photoId" items="${photoList.photoIds}" varStatus="status">
+			photosToRender.push( ${photoId} );
 		</c:forEach>
 
 		renderPhotos( photosToRender );

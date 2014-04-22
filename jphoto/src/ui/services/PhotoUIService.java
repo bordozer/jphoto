@@ -24,7 +24,7 @@ public interface PhotoUIService {
 
 	List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes, final User accessor );
 
-	void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos );
+//	void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos );
 
 	PhotoPreviewWrapper getPhotoPreviewWrapper( final Photo photo, final User user );
 }

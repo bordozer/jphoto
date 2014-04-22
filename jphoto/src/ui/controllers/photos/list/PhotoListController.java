@@ -2,7 +2,6 @@ package ui.controllers.photos.list;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.general.data.TimeRange;
@@ -10,8 +9,6 @@ import core.general.data.photoList.AbstractPhotoListData;
 import core.general.data.photoList.BestPhotoListData;
 import core.general.data.photoList.PhotoListData;
 import core.general.genre.Genre;
-import core.general.photo.Photo;
-import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
@@ -592,9 +589,7 @@ public class PhotoListController {
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
-		final List<Photo> photos = photoService.load( selectResult.getIds() );
-		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, EnvironmentContext.getCurrentUser() );
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
+		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
@@ -748,10 +743,8 @@ public class PhotoListController {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );
-		final List<Photo> photos = photoService.load( selectResult.getIds() );
-		final List<PhotoInfo> photoInfos = photoUIService.getPhotoInfos( photos, currentUser );
 
-		final PhotoList photoList = new PhotoList( photoInfos, translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
+		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		model.addPhotoList( photoList );
@@ -780,15 +773,15 @@ public class PhotoListController {
 		for ( final AbstractPhotoListData listData : photoListDatas ) {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
-			final List<Photo> pagePhotos = getPhotos( pagingModel, listData );
-			final PhotoList photoList = getPhotoList( pagePhotos, listData, criterias, EnvironmentContext.getLanguage() );
+			final List<Integer> photosIds = getPhotosIds( pagingModel, listData );
+			final PhotoList photoList = getPhotoList( photosIds, listData, criterias, EnvironmentContext.getLanguage() );
 			photoList.setPhotoListId( listCounter++ );
 
-			photoList.setPhotoGroupOperationMenuContainer( pagePhotos.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+			photoList.setPhotoGroupOperationMenuContainer( photosIds.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
-			if ( listData.isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos() ) {
-				photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
-			}
+			/*if ( listData.isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos() ) {
+				photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoIds() );
+			}*/
 
 			model.addPhotoList( photoList );
 			model.setPageTitleData( listData.getTitleData() );
@@ -797,32 +790,30 @@ public class PhotoListController {
 		setDefaultOrdering( filterModel );
 	}
 
-	private List<Photo> getPhotos( final PagingModel pagingModel, final AbstractPhotoListData listData ) {
-		final List<Photo> pagePhotos;
+	private List<Integer> getPhotosIds( final PagingModel pagingModel, final AbstractPhotoListData listData ) {
 		final SqlIdsSelectQuery selectIdsQuery = listData.getPhotoListQuery();
 
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
-		pagePhotos = photoService.load( sqlSelectIdsResult.getIds() );
 		pagingModel.setTotalItems( sqlSelectIdsResult.getRecordQty() );
 
-		return pagePhotos;
+		return sqlSelectIdsResult.getIds();
 	}
 
-	private PhotoList getPhotoList( final List<Photo> pagePhotos, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
+	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final List<PhotoInfo> photoInfos;
+		/*final List<PhotoInfo> photoInfos;
 		if ( dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeFrom() ) && dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeTo() ) ) {
 			photoInfos = photoUIService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), currentUser );
 		} else {
 			photoInfos = photoUIService.getPhotoInfos( pagePhotos, currentUser );
-		}
+		}*/
 
-		addFavoriteIcons( photoInfos );
+//		addFavoriteIcons( photoInfos );
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
-		final PhotoList photoList = new PhotoList( photoInfos, photoListCriteriasService.getPhotoListTitle( criterias, EnvironmentContext.getLanguage() ), showPaging );
+		final PhotoList photoList = new PhotoList( photosIds, photoListCriteriasService.getPhotoListTitle( criterias, EnvironmentContext.getLanguage() ), showPaging );
 
 		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias, language ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
@@ -834,7 +825,7 @@ public class PhotoListController {
 		return photoList;
 	}
 
-	private void addFavoriteIcons( final List<PhotoInfo> photoInfos ) {
+	/*private void addFavoriteIcons( final List<PhotoInfo> photoInfos ) {
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
@@ -850,7 +841,7 @@ public class PhotoListController {
 			}
 			photoInfo.setPhotoIconsTypes( icons );
 		}
-	}
+	}*/
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
 		model.setUser( user );
