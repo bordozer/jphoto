@@ -24,7 +24,7 @@ define( ["backbone", "jquery", "underscore"
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			console.log( 'The menu is being initialized... ', menuId, element );
+//			console.log( 'The menu is being initialized... ', menuId, element );
 
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', element ) );
 
