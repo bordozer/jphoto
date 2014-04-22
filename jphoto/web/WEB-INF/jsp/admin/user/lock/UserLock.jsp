@@ -19,11 +19,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="${baseUrl}/js/lib/date.format.js"></script>
-
 	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
+
+	<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/date.format.js"></script>
 
 	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
 
