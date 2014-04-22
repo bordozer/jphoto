@@ -32,18 +32,18 @@ public enum EntryMenuOperationType {
 	, ADMIN_SUB_MENU_LOCK_USER( 81, "Lock user", "lock_user.png" )
 	, ADMIN_MENU_ITEM_EDIT( 82, "Edit", "menu_edit.png" )
 	, ADMIN_MENU_ITEM_DELETE( 83, "Delete", "menu_delete.png" )
+	, ADMIN_MENU_ITEM_NUDE_CONTENT_SET( 84, "Set nude content", "menu_photo_nude_content_set.png" )
+	, ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE( 85, "Remove nude content", "menu_photo_nude_content_remove.png" )
 
 	;
 
 	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( ADMIN_SUB_MENU );
 
 	private final int id;
-	private final String name;
 	private final String icon;
 
 	private EntryMenuOperationType( final int id, final String name, final String icon ) {
 		this.id = id;
-		this.name = name;
 		this.icon = icon;
 	}
 

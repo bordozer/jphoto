@@ -16,10 +16,7 @@ import core.general.menus.comment.operations.CommentMenuItemDelete;
 import core.general.menus.comment.operations.CommentMenuItemEdit;
 import core.general.menus.comment.operations.CommentMenuItemReply;
 import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
-import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
-import core.general.menus.photo.admin.PhotoAdminSubMenuItemLockPhotoAuthor;
-import core.general.menus.photo.admin.PhotoMenuItemDeleteAdmin;
-import core.general.menus.photo.admin.PhotoMenuItemEditAdmin;
+import core.general.menus.photo.admin.*;
 import core.general.menus.photo.complain.PhotoComplaintCopyrightMenuItem;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
@@ -127,6 +124,12 @@ public class MenuCreationFactory {
 					break;
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new PhotoAdminSubMenuItemLockPhotoAuthor( photo, accessor, services ) );
+					break;
+				case ADMIN_MENU_ITEM_NUDE_CONTENT_SET:
+					menuItems.add( new PhotoMenuItemAdminNudeContentSet( photo, accessor, services ) );
+					break;
+				case ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE:
+					menuItems.add( new PhotoMenuItemAdminNudeContentRemove( photo, accessor, services ) );
 					break;
 				case ADMIN_MENU_ITEM_EDIT:
 					menuItems.add( new PhotoMenuItemEditAdmin( photo, accessor, services ) );

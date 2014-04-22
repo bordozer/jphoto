@@ -80,16 +80,6 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			this.$el.html( element );
-
-			/*if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				element.append( '</div>' );
-			}
-
-			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				element.append( '</div>' );
-			}
-
-			element.append( '</div>' );*/
 		}
 
 		, events: {

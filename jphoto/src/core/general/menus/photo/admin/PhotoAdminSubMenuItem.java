@@ -17,6 +17,9 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
 		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
+		, EntryMenuOperationType.SEPARATOR
+		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_SET
+		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE
 	);
 
 	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {

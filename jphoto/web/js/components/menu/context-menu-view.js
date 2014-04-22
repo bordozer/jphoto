@@ -38,7 +38,7 @@ define( ["backbone", "jquery", "underscore"
 			} );
 
 			var menuIconElement = $( '#' + menuId, this.$el );
-			console.log( menuIconElement );
+//			console.log( menuIconElement );
 			menuIconElement.click();
 		}
 

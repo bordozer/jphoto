@@ -153,9 +153,14 @@
 													} )
 						.dialog( "open" );
 			}
+
+			function adminPhotoNudeContentSet( photoId ) {
+				console.log( photoId );
+			}
 		</script>
 
 		<script type="text/javascript" src="${eco:baseUrl()}/js/translationsReload.jsp"></script>
+
 	</c:if>
 
 	<jsp:doBody/>
