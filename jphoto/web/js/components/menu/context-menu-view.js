@@ -39,7 +39,7 @@ define( ["backbone", "jquery", "underscore"
 				} );
 			} );
 
-//			console.log( menuIconElement );
+//			console.log( menu_a );
 			menu_a.click();
 		}
 
