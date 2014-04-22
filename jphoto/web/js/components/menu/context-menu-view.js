@@ -61,16 +61,7 @@ define( ["backbone", "jquery", "underscore"
 				var menuElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuElement );
 
-				menuElement.on( 'click',  function( evt ) {
-
-					console.log( model.get( 'menuCommand' ) );
-
-					evt.preventDefault();
-					evt.stopPropagation();
-
-					eval( model.get( 'menuCommand' ) );
-					model.get( "contextMenuEntryModel" ).refresh();
-				});
+				this.bindMenuElementClick( menuElement );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 					var ul = $( "<ul class='top-menu-item'></ul>" );
@@ -80,6 +71,21 @@ define( ["backbone", "jquery", "underscore"
 
 				container.append( li );
 			}
+		}
+
+		, bindMenuElementClick: function( menuElement ) {
+			menuElement.on( 'click',  function( evt ) {
+
+				var model = this.model;
+
+				console.log( model.get( 'menuCommand' ) );
+
+				evt.preventDefault();
+				evt.stopPropagation();
+
+				eval( model.get( 'menuCommand' ) );
+				model.get( "contextMenuEntryModel" ).refresh();
+			});
 		}
 	});
 
