@@ -164,6 +164,7 @@
 
 			function adminSetPhotoNudeContent( photoId, isNudeContent ) {
 				jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
+
 			}
 		</script>
 

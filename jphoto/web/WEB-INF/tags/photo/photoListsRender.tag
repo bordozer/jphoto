@@ -14,6 +14,6 @@
 
 <c:forEach var="photoList" items="${photoLists}">
 
-	<photo:photoListLaizyLoading photoList="${photoList}" />
+	<photo:photoListLazyLoading photoList="${photoList}" />
 
 </c:forEach>
