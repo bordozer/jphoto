@@ -58,10 +58,10 @@ define( ["backbone", "jquery", "underscore"
 				}
 
 				var li = $( "<li style='font-size: 10px;'></li>" );
-				var menuItem = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
-				li.append( menuItem );
+				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
+				li.append( menuItemElement );
 
-				this.bindMenuElementClick( menuItem );
+				this.bindMenuElementClick( menuItemElement );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 					var ul = $( "<ul class='top-menu-item'></ul>" );
