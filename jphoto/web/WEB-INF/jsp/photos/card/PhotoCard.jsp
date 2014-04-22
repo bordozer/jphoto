@@ -67,7 +67,9 @@
 	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? '#'.concat(photo.bgColor) : 'transparent'};">
 
 		<div style="width: ${dimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
-			<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${dimension.width}" height="${dimension.height}" onclick="showPhoto();"/>
+			<a href="${imageUrl}" data-lightbox="image-${photo.id}" data-title="${photo.nameEscaped}">
+				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${dimension.width}" height="${dimension.height}"/>
+			</a>
 		</div>
 
 		<div class="footerseparatorverysmall"></div>
@@ -317,11 +319,5 @@
 	<div id="${photoDiv}" style="width: ${originalDimension.width}px; height:${originalDimension.height}px;display: none;" onclick="fadeoutAndCloseMessageBox( '${photoDiv}' );">
 		<img id="showPhoto_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${originalDimension.width}" height="${originalDimension.height}"/>
 	</div>
-
-	<script type="text/javascript">
-		function showPhoto() {
-			$( "#${photoDiv}" ).lightbox_me( { closeClick:true, closeEsc:true, centered:true, showOverlay:true, overlayCSS:{background: '${bgColor}',opacity: .95} } );
-		}
-	</script>
 
 </tags:page>

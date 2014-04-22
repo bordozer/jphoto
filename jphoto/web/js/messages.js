@@ -44,17 +44,22 @@ function showMessage( divId, message, params, autoCloseAfter ) {
 
 function showDiv( divId, params, autoCloseAfter ) {
 
-	$( "#" + divId ).lightbox_me( params );
+	/*$( "#" + divId ).attr( "data-lightbox", "divId" ); //.lightbox( params );
 
 	if ( autoCloseAfter > 0 ) {
 		setTimeout( function () {
 			fadeoutAndCloseMessageBox( divId );
 		}, autoCloseAfter );
-	}
+	}*/
 }
 
 function notifySuccessMessage( message ) {
-	noty( {
-			  text:message, type:'success', layout:'bottomRight', timeout:messageTimeout
-		  } );
+	var n = noty( {
+		text: message
+		, type: 'success'
+		, dismissQueue: true
+		, layout: 'bottomRight'
+		, theme: 'defaultTheme'
+		, timeout: messageTimeout
+	} );
 }

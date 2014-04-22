@@ -20,7 +20,7 @@
 
 <eco:page pageModel="${pageModel}">
 
-	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jsonrpc.js"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
 
 	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
