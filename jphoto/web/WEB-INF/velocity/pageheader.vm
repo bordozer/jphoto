@@ -52,24 +52,6 @@
 	<link rel="stylesheet" href="$baseUrl/js/lib/fg.menu/fg.menu.css" type="text/css"/>
 ##	/ fg.menu
 
-	#*<script type="text/javascript" src="$baseUrl/js/lib/smart-menus/src/jquery.smartmenus.js"></script>
-	<link rel="stylesheet" href="$baseUrl/js/lib/smart-menus/src/css/sm-core-css.css" type="text/css"/>
-	<link rel="stylesheet" href="$baseUrl/js/lib/smart-menus/src/css/sm-simple/sm-simple.css" type="text/css"/>
-	<style type="text/css">
-		#main-menu {
-			position: relative;
-			top: 0;
-			left: 0;
-			z-index: 9999;
-			width: auto;
-		}
-
-		#main-menu ul {
-			width: 12em;
-		}
-	</style>*#
-
-
 
 	<style type="text/css">
 		.language {

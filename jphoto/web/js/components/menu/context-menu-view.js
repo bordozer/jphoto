@@ -36,13 +36,6 @@ define( ["backbone", "jquery", "underscore"
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
-			/*$(function() {
-				$( '#main-menu', element ).smartmenus({
-					mainMenuSubOffsetX: -1,
-					subMenusSubOffsetX: 10,
-					subMenusSubOffsetY: 0
-				});
-			});*/
 
 			var menuIconElement = $( '#' + menuId, this.$el );
 //			console.log( menuIconElement );
