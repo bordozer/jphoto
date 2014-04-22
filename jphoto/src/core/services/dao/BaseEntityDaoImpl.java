@@ -6,7 +6,6 @@ import core.interfaces.IdsSqlSelectable;
 import core.log.LogHelper;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.entry.PrivateMessageService;
-import core.services.security.SecurityService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

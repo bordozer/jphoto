@@ -4,7 +4,6 @@ import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
-import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;

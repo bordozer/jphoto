@@ -2,7 +2,6 @@ package ui.controllers.users.bookmarks;
 
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
-import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoService;

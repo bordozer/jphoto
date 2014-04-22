@@ -1,6 +1,5 @@
 package ui.services;
 
-import core.enums.PrivateMessageType;
 import core.general.user.User;
 import ui.elements.MenuItem;
 

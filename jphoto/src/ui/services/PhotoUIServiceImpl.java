@@ -1,6 +1,5 @@
 package ui.services;
 
-import core.enums.FavoriteEntryType;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.configuration.ConfigurationKey;
@@ -13,7 +12,6 @@ import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
 import core.services.conversion.PhotoPreviewService;
 import core.services.entry.GenreService;
-import core.services.menu.EntryMenuService;
 import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
@@ -26,15 +24,11 @@ import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import sql.SqlSelectIdsResult;
-import sql.builder.SqlIdsSelectQuery;
 import ui.controllers.users.card.MarksByCategoryInfo;
 import ui.services.security.SecurityUIService;
 
 import java.util.Date;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoUIServiceImpl implements PhotoUIService {
 
@@ -87,20 +81,10 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 	private UserService userService;
 
 	@Autowired
-	private EntryMenuService entryMenuService;
-
-	@Autowired
 	private GenreService genreService;
 
 	@Autowired
 	private PhotoRatingService photoRatingService;
-
-	@Override
-	public List<PhotoInfo> getPhotoInfos( final SqlIdsSelectQuery selectQuery, final User user ) {
-		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
-		final List<Photo> photos = photoService.load( selectResult.getIds() );
-		return getPhotoInfos( photos, user );
-	}
 
 	@Override
 	public PhotoInfo getPhotoInfo( final Photo photo, final User accessor ) {
@@ -109,8 +93,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		return getPhotoInfo( photo, timeRangeToday.getTimeFrom(), timeRangeToday.getTimeTo(), accessor );
 	}
 
-	@Override
-	public PhotoInfo getPhotoInfo( final Photo photo, final Date timeFrom, final Date timeTo, final User accessor ) {
+	private PhotoInfo getPhotoInfo( final Photo photo, final Date timeFrom, final Date timeTo, final User accessor ) {
 		final PhotoInfo photoInfo = cacheServicePhotoInfo.getEntry( CacheKey.PHOTO_INFO, photo.getId(), new CacheEntryFactory<PhotoInfo>() {
 			@Override
 			public PhotoInfo createEntry() {
@@ -153,41 +136,6 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 
 		return photoInfo;
 	}
-
-	@Override
-	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final User accessor ) {
-		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeToday();
-
-		return getPhotoInfos( photos, timeRangeToday.getTimeFrom(), timeRangeToday.getTimeTo(), accessor );
-	}
-
-	@Override
-	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final Date timeFrom, final Date timeTo, final User accessor ) {
-		final List<PhotoInfo> photoInfos = newArrayList();
-		for ( Photo photo : photos ) {
-			photoInfos.add( getPhotoInfo( photo, timeFrom, timeTo, accessor ) );
-		}
-		return photoInfos;
-	}
-
-	@Override
-	public List<PhotoInfo> getPhotoInfos( final List<Photo> photos, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes, final User accessor ) {
-		final List<PhotoInfo> photoInfos = getPhotoInfos( photos, accessor );
-
-		for ( final PhotoInfo photoInfo : photoInfos ) {
-			photoInfo.setPhotoIconsTypes( photoIconsTypes );
-			photoInfo.setUserIconsTypes( userIconsTypes );
-		}
-
-		return photoInfos;
-	}
-
-	/*@Override
-	public void hidePhotoPreviewForAnonymouslyPostedPhotos( final List<PhotoInfo> photoInfos ) {
-		for ( final PhotoInfo photoInfo : photoInfos ) {
-			photoInfo.setPhotoPreviewMustBeHidden( photoInfo.isPhotoAuthorNameMustBeHidden() );
-		}
-	}*/
 
 	@Override
 	public PhotoPreviewWrapper getPhotoPreviewWrapper( final Photo photo, final User user ) {

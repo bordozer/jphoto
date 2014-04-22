@@ -15,7 +15,6 @@ import core.services.entry.ActivityStreamService;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 
 import java.util.List;
 import java.util.Map;

@@ -2,7 +2,6 @@ package ui.controllers.portalpage;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.photo.Photo;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;

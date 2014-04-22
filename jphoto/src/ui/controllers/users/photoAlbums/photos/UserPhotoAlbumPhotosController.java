@@ -1,7 +1,6 @@
 package ui.controllers.users.photoAlbums.photos;
 
 import core.general.base.PagingModel;
-import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.entry.GroupOperationService;
@@ -29,7 +28,6 @@ import utils.PagingUtils;
 import utils.StringUtilities;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping( "members/{userId}/albums/{albumId}" )

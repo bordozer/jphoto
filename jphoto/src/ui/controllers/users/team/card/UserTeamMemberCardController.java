@@ -1,7 +1,6 @@
 package ui.controllers.users.team.card;
 
 import core.general.base.PagingModel;
-import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
@@ -28,7 +27,6 @@ import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequestMapping( "members/{userId}/team" )
