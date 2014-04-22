@@ -41,42 +41,42 @@ define( ["backbone", "jquery", "underscore"
 
 			var element = $( "<div class='admin-special-empty-flag'></div>" );
 
+			var element_admin_flag_1 = $( "<div class='admin-special-empty-flag'></div>" );
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				var element1 = $( "<div class='admin-special-empty-flag admin-special-flag-nude-content'></div>" );
-				element.append( element1 );
-				element = element1;
+				element_admin_flag_1 = $( "<div class='admin-special-empty-flag admin-special-flag-nude-content'></div>" );
 			}
+			element.append( element_admin_flag_1 );
 
+			var element_admin_flag_2 = $( "<div class='admin-special-empty-flag'></div>" );
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				var element2 = $( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'></div>" );
-				element.append( element2 );
-				element = element2;
+				element_admin_flag_2 = $( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'></div>" );
 			}
+			element_admin_flag_1.append( element_admin_flag_2 );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
-				element.append( this.groupOperationsTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.groupOperationsTemplate( modelJSON ) );
 			}
 
-			element.append( this.photoListEntryContainer( modelJSON ) );
+			element_admin_flag_2.append( this.photoListEntryContainer( modelJSON ) );
 
 			if ( this.model.get( 'showPhotoContextMenu' ) ) {
-				element.append( this.contextMenuTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.contextMenuTemplate( modelJSON ) );
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
-				element.append( this.statisticsTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.statisticsTemplate( modelJSON ) );
 			}
 
-			element.append( this.photoNameTemplate( modelJSON ) );
+			element_admin_flag_2.append( this.photoNameTemplate( modelJSON ) );
 
-			element.append( this.authorLinkTemplate( modelJSON ) );
+			element_admin_flag_2.append( this.authorLinkTemplate( modelJSON ) );
 
 			if ( this.model.get( 'showUserRank' ) ) {
-				element.append( this.authorRankTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.authorRankTemplate( modelJSON ) );
 			}
 
 			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
-				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
 			this.$el.html( element );

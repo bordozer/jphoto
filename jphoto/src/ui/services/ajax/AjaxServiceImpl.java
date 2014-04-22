@@ -410,4 +410,12 @@ public class AjaxServiceImpl implements AjaxService {
 //		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
 		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, timeFrom, timeTo ) );
 	}
+
+	@Override
+	public void setPhotoNudeContent( final int photoId, final boolean isNudeContent ) {
+		final Photo photo = photoService.load( photoId );
+		photo.setContainsNudeContent( isNudeContent );
+
+		photoService.save( photo );
+	}
 }

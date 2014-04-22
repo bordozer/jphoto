@@ -155,7 +155,15 @@
 			}
 
 			function adminPhotoNudeContentSet( photoId ) {
-				console.log( photoId );
+				adminSetPhotoNudeContent( photoId, true );
+			}
+
+			function adminPhotoNudeContentRemove( photoId ) {
+				adminSetPhotoNudeContent( photoId, false );
+			}
+
+			function adminSetPhotoNudeContent( photoId, isNudeContent ) {
+				jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
 			}
 		</script>
 

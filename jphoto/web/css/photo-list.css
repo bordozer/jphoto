@@ -121,15 +121,21 @@
 }
 
 .admin-special-flag-anonymous-posting {
+	/*width: 220px;*/
 	background-image:url('/images/icons24/admin-special-flag-anonymous-posting.png');
 	background-repeat:no-repeat;
 	background-size: 24px 24px;
 	background-position: 190px 300px;
+	/*background: green;*/
+	/*border: 1px solid green;*/
 }
 
 .admin-special-flag-nude-content {
+	/*width: 240px;*/
 	background-image:url('/images/icons24/admin-special-flag-nude-content.png');
 	background-repeat:no-repeat;
 	background-size: 16px 16px;
 	background-position: 220px 303px;
+	/*background: red;*/
+	/*border: 1px solid red;*/
 }

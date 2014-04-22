@@ -35,4 +35,6 @@ public interface AjaxService {
 	void lockUser( final int userId, final String timeFrom, final String timeTo );
 
 	void lockPhoto( final int photoId, final String timeFrom, final String timeTo );
+
+	void setPhotoNudeContent( final int photoId, final boolean isNudeContent );
 }
