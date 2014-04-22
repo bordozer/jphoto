@@ -55,7 +55,7 @@
 			<c:set var="photoId" value="${photoInfo.photo.id}" />
 
 			<div class="photo-container block-border block-shadow block-background photo-container-${photoList.photoListId}-${photoId}">
-				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 110px;">
+				<div style="width: 16px; height: 16px; margin-left: auto; margin-right: auto; margin-top: 150px;">
 					<html:spinningWheel16 title="${eco:translate('The photo is being loaded...')}" />
 				</div>
 			</div>

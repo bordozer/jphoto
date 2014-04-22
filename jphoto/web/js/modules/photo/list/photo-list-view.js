@@ -42,15 +42,15 @@ define( ["backbone", "jquery", "underscore"
 				element.addClass( 'block-user-photo' );
 			}
 
-			/*element = this.addAdminFlagDiv( photoId, 'admin-special-empty-flag', element );
+			element.append( "<div class='admin-special-empty-flag'>" );
 
 			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
-				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-nude-content', element );
+				element.append( "<div class='admin-special-empty-flag admin-special-flag-nude-content'>" );
 			}
 
 			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
-				element = this.addAdminFlagDiv( photoId, 'admin-special-flag-anonymous-posting', element );
-			}*/
+				element.append( "<div class='admin-special-empty-flag admin-special-flag-anonymous-posting'>" );
+			}
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
 				element.append( this.groupOperationsTemplate( modelJSON ) );
@@ -86,15 +86,15 @@ define( ["backbone", "jquery", "underscore"
 				element.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
-//			element.append( '</div>' );
-//			element.append( '</div>' );
-		},
+			if ( this.model.get( 'showAdminFlag_Nude' ) ) {
+				element.append( '</div>' );
+			}
 
-		addAdminFlagDiv: function ( photoId, cssClass, el ) {
-			var adminFlagDivId = "admin-flag-" + photoId + "-" + cssClass;
-			el.append( "<div id='" + adminFlagDivId + "' class='" + cssClass + "'>" );
+			if ( this.model.get( 'showAdminFlag_Anonymous' ) ) {
+				element.append( '</div>' );
+			}
 
-			return $( "#" + adminFlagDivId );
+			element.append( '</div>' );
 		}
 
 		, events: {

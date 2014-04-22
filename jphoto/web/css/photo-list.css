@@ -32,7 +32,7 @@
 	width: 250px;
 	/*height: 500px;*/
 	height: auto;
-	/*min-height: 330px;*/
+	min-height: 330px;
 	display: inline-block;
 	margin: 20px;
 	padding-top: 10px;
@@ -112,26 +112,15 @@
 	/*background: #BAC8D9;*/
 }
 
-.admin-special-flag {
-	/*display: inline-block;*/
-	position: inherit;
-	width: 3px;
-	height: 3px;
-	border-width: 5px;
-	border-style: solid;
-	margin: 2px;
-}
-
 .admin-special-empty-flag {
-	float: left;
+	/*float: left;*/
+	position: relative;
 	width: 100%;
 	height: 100%;
+	background: red;
 }
 
 .admin-special-flag-anonymous-posting {
-	float: left;
-	width: 100%;
-	height: 100%;
 	background-image:url('/images/icons24/admin-special-flag-anonymous-posting.png');
 	background-repeat:no-repeat;
 	background-size: 24px 24px;
@@ -139,9 +128,6 @@
 }
 
 .admin-special-flag-nude-content {
-	float: left;
-	width: 100%;
-	height: 100%;
 	background-image:url('/images/icons24/admin-special-flag-nude-content.png');
 	background-repeat:no-repeat;
 	background-size: 16px 16px;
