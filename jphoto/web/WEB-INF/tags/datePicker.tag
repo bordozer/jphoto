@@ -12,20 +12,24 @@
 <button id="${triggerName}" name="${triggerName}" type="button">...</button>
 
 <script type="text/javascript">
-	new Calendar( {
-		inputField: "${fieldName}",
-		dateFormat: "%Y-%m-%d",
-		trigger: "${triggerName}",
-		bottomBar: true,
-		selection: Calendar.dateToInt( new Date() ),
-		weekNumbers: true,
-		onSelect: function() {
-			var date = Calendar.intToDate( this.selection.get() );
-			this.hide();
-			<c:if test="${not empty onchange}">
-				${onchange}
-			</c:if>
-		}
+
+	require( [ 'jquery', 'jquery_ui', 'jscal2', 'jscal2_lang' ], function ( $ ) {
+
+		new Calendar( {
+			inputField: "${fieldName}",
+			dateFormat: "%Y-%m-%d",
+			trigger: "${triggerName}",
+			bottomBar: true,
+			selection: Calendar.dateToInt( new Date() ),
+			weekNumbers: true,
+			onSelect: function() {
+				var date = Calendar.intToDate( this.selection.get() );
+				this.hide();
+				<c:if test="${not empty onchange}">
+					${onchange}
+				</c:if>
+			}
+		} );
 	} );
 </script>
 
