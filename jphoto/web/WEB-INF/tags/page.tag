@@ -23,7 +23,7 @@
 	<script type="text/javascript">
 
 		var jsonRPC;
-		require( ['jsonrpc'], function( jsonrpc ) {
+		require( ['jsonrpc'], function() {
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
@@ -44,108 +44,60 @@
 		});
 
 		function showUIMessage_Notification( messageText ) {
-			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
-				messages.showUIMessage_Notification( messageText );
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.showUIMessage_Notification( messageText );
 			} );
 		}
 
 		function showUIMessage_InformationMessage_ManualClosing( messageText ) {
-			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
-				messages.showUIMessage_InformationMessage_ManualClosing( messageText );
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.showUIMessage_InformationMessage_ManualClosing( messageText );
 			} );
 		}
 
 		function showUIMessage_Information( messageText ) {
-			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
-				messages.showUIMessage_Information( messageText );
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.showUIMessage_Information( messageText );
 			} );
 		}
 
 		function showUIMessage_Warning( messageText ) {
-			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
-				messages.showUIMessage_Warning( messageText );
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.showUIMessage_Warning( messageText );
 			} );
 		}
 
 		function showUIMessage_Error( messageText ) {
-			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
-				messages.showUIMessage_Error( messageText );
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.showUIMessage_Error( messageText );
 			} );
 		}
 	</script>
 
 	<tags:messageDivs />
 
-	<c:set var="privateMessageTextId" value="privateMessageTextId" />
-	<c:set var="sendPrivateMessageToUserDivId" value="sendPrivateMessageToUserDivId" />
-
-	<div id="${sendPrivateMessageToUserDivId}" title="..." style="display: none;">
-		<html:textarea inputId="${privateMessageTextId}" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />
+	<div id="sendPrivateMessageToUserDivId" title="..." style="display: none;">
+		<html:textarea inputId="privateMessageTextId" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />
 	</div>
 
 	<script type="text/javascript">
 
 		require( [ 'jquery', 'jquery_ui' ], function( $ ) {
-
 			$( function () {
-				$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
-												height:300
-												, width:600
-												, modal:true
-												, autoOpen:false
-											 } );
+				$( "#sendPrivateMessageToUserDivId" ).dialog( {
+					height:300
+					, width:600
+					, modal:true
+					, autoOpen:false
+				 } );
 			} );
-
-			function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
-
-				$( '#${privateMessageTextId}' ).val( '' );
-
-				$( "#${sendPrivateMessageToUserDivId}" )
-						.dialog( 'option', 'title', "${eco:translate('Send private message to')}" + ' ' + toUserName )
-						.dialog( 'option', 'buttons', {
-														Cancel:function () {
-															$( this ).dialog( "close" );
-														},
-														"${eco:translate('Send message')}": function() {
-															var privateMessageDTO = new PrivateMessageSendingDTO( fromUserId, toUserId, $( '#${privateMessageTextId}' ).val() );
-
-															var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
-
-															if ( ! ajaxResultDTO.successful ) {
-																showUIMessage_Error( ajaxResultDTO.message );
-																return false;
-															}
-
-															showUIMessage_Notification( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
-
-															$( this ).dialog( "close" );
-
-															if ( callback != undefined ) {
-																callback();
-															}
-														}
-													} )
-						.dialog( "open" );
-			}
-
-			function PrivateMessageSendingDTO( fromUserId, toUserId, privateMessageText ) {
-				this.fromUserId = fromUserId;
-				this.toUserId = toUserId;
-				this.privateMessageText = privateMessageText;
-
-				this.getFromUserId = function () {
-					return this.fromUserId;
-				};
-
-				this.getToUserId = function () {
-					return this.toUserId;
-				};
-
-				this.getPrivateMessageText = function () {
-					return this.privateMessageText;
-				};
-			}
 		} );
+
+		function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
+			require( [ 'jquery', '/js/send-private-message.js.jsp' ], function ( $, sendMessageFunction ) {
+				sendMessageFunction.sendPrivateMessage( fromUserId, toUserId, toUserName, callback );
+			} );
+		}
 
 	</script>
 
@@ -160,7 +112,7 @@
 
 		<script type="text/javascript">
 
-			require( ['jquery', 'jquery_ui'], function( $, ui ) {
+			require( ['jquery', 'jquery_ui'], function( $ ) {
 
 				$( function () {
 					$( "#${lockUserDivId}" ).dialog( {
@@ -181,11 +133,7 @@
 							.dialog( 'option', 'buttons', {
 															Cancel:function () {
 																$( this ).dialog( "close" );
-															}/*,
-															"${eco:translate('Lock')}": function() {
-
-																$( this ).dialog( "close" );
-															}*/
+															}
 														} )
 							.dialog( "open" );
 				}
@@ -201,6 +149,7 @@
 				function adminSetPhotoNudeContent( photoId, isNudeContent ) {
 					jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
 
+					// TODO: redraw photo preview
 					/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
 						var photoListId = 1;
 						var element = $( '.photo-container-' + 1 +'-' + photoId );
