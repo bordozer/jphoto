@@ -7,237 +7,232 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-	function init( entryId, entryMenuTypeId, baseUrl, container ) {
+	function FavoriteEntry( userId, favoriteTypeId, favoriteEntryId, favoriteEntryName, favoriteEntryAddIcon, favoriteEntryRemoveIcon, favoriteEntryTypeName, favoriteEntryAddText, favoriteEntryRemoveText ) {
+		this.userId = userId;
+		this.favoriteTypeId = favoriteTypeId;
+		this.favoriteEntryId = favoriteEntryId;
 
-		function FavoriteEntry( userId, favoriteTypeId, favoriteEntryId, favoriteEntryName, favoriteEntryAddIcon, favoriteEntryRemoveIcon, favoriteEntryTypeName, favoriteEntryAddText, favoriteEntryRemoveText ) {
-			this.userId = userId;
-			this.favoriteTypeId = favoriteTypeId;
-			this.favoriteEntryId = favoriteEntryId;
+		this.favoriteEntryName = favoriteEntryName;
+		this.favoriteEntryAddIcon = favoriteEntryAddIcon;
+		this.favoriteEntryRemoveIcon = favoriteEntryRemoveIcon;
+		this.favoriteEntryTypeName = favoriteEntryTypeName;
 
-			this.favoriteEntryName = favoriteEntryName;
-			this.favoriteEntryAddIcon = favoriteEntryAddIcon;
-			this.favoriteEntryRemoveIcon = favoriteEntryRemoveIcon;
-			this.favoriteEntryTypeName = favoriteEntryTypeName;
+		this.favoriteEntryAddText = favoriteEntryAddText;
+		this.favoriteEntryRemoveText = favoriteEntryRemoveText;
 
-			this.favoriteEntryAddText = favoriteEntryAddText;
-			this.favoriteEntryRemoveText = favoriteEntryRemoveText;
+		this.favoriteEntryIcons = [];
 
-			this.favoriteEntryIcons = [];
+		this.isIdentical = function ( favoriteEntry ) {
+			return this.favoriteTypeId == favoriteEntry.getFavoriteTypeId() && this.favoriteEntryId == favoriteEntry.getFavoriteEntryId();
+		};
 
-			this.isIdentical = function ( favoriteEntry ) {
-				return this.favoriteTypeId == favoriteEntry.getFavoriteTypeId() && this.favoriteEntryId == favoriteEntry.getFavoriteEntryId();
-			};
+		this.equals = function ( favoriteEntry ) {
+			if ( !favoriteEntry instanceof FavoriteEntry ) {
+				return false;
+			}
+			return this.isIdentical( favoriteEntry );
+		};
 
-			this.equals = function ( favoriteEntry ) {
-				if ( !favoriteEntry instanceof FavoriteEntry ) {
-					return false;
+		this.getUserId = function () {
+			return this.userId
+		};
+
+		this.getFavoriteTypeId = function () {
+			return this.favoriteTypeId
+		};
+
+		this.getFavoriteEntryId = function () {
+			return this.favoriteEntryId
+		};
+
+		this.addFavoriteEntryIcon = function ( favoriteIconId ) {
+			return this.favoriteEntryIcons.push( favoriteIconId );
+		};
+
+		this.getFavoriteEntryIcons = function () {
+			return this.favoriteEntryIcons;
+		};
+
+		this.getFavoriteEntryName = function () {
+			return this.favoriteEntryName;
+		};
+
+		this.getFavoriteEntryAddIcon = function () {
+			return this.favoriteEntryAddIcon;
+		};
+
+		this.getFavoriteEntryRemoveIcon = function () {
+			return this.favoriteEntryRemoveIcon;
+		};
+
+		this.getFavoriteEntryTypeName = function () {
+			return this.favoriteEntryTypeName;
+		};
+
+		this.getFavoriteEntryAddText = function () {
+			return this.favoriteEntryAddText;
+		};
+
+		this.getFavoriteEntryRemoveText = function () {
+			return this.favoriteEntryRemoveText;
+		};
+	}
+
+	var favoriteEntryModel = function () {
+
+		var favoriteEntries = [];
+
+		function findFavoriteEntry( favoriteEntry ) {
+			for ( var index = 0; index < favoriteEntries.length; index++ ) {
+				var entry = favoriteEntries[ index ];
+				if ( entry.equals( favoriteEntry ) ) {
+					return entry;
 				}
-				return this.isIdentical( favoriteEntry );
-			};
-
-			this.getUserId = function () {
-				return this.userId
-			};
-
-			this.getFavoriteTypeId = function () {
-				return this.favoriteTypeId
-			};
-
-			this.getFavoriteEntryId = function () {
-				return this.favoriteEntryId
-			};
-
-			this.addFavoriteEntryIcon = function ( favoriteIconId ) {
-				return this.favoriteEntryIcons.push( favoriteIconId );
-			};
-
-			this.getFavoriteEntryIcons = function () {
-				return this.favoriteEntryIcons;
-			};
-
-			this.getFavoriteEntryName = function () {
-				return this.favoriteEntryName;
-			};
-
-			this.getFavoriteEntryAddIcon = function () {
-				return this.favoriteEntryAddIcon;
-			};
-
-			this.getFavoriteEntryRemoveIcon = function () {
-				return this.favoriteEntryRemoveIcon;
-			};
-
-			this.getFavoriteEntryTypeName = function () {
-				return this.favoriteEntryTypeName;
-			};
-
-			this.getFavoriteEntryAddText = function () {
-				return this.favoriteEntryAddText;
-			};
-
-			this.getFavoriteEntryRemoveText = function () {
-				return this.favoriteEntryRemoveText;
-			};
+			}
+			return null;
 		}
 
-		var favoriteEntryModel = function () {
+		function isFavoriteEntryRegistered( favoriteEntry ) {
+			return findFavoriteEntry( favoriteEntry ) != null;
+		}
 
-			var favoriteEntries = [];
+		function registerFavoriteEntry( favoriteEntry ) {
+			favoriteEntries.push( favoriteEntry );
+		}
 
-			function findFavoriteEntry( favoriteEntry ) {
-				for ( var index = 0; index < favoriteEntries.length; index++ ) {
-					var entry = favoriteEntries[ index ];
-					if ( entry.equals( favoriteEntry ) ) {
-						return entry;
+		function processFavoriteEntryAction( favoriteEntry, isAddingFuncCalled ) {
+
+			var addFunc = function () {
+				favoriteEntryModel.addEntryToFavorites( favoriteEntry )
+			};
+
+			var removeFunc = function () {
+				favoriteEntryModel.removeEntryToFavorites( favoriteEntry );
+			};
+
+			var entry = findFavoriteEntry( favoriteEntry );
+			var favoriteEntryIcons = entry.getFavoriteEntryIcons();
+
+			var isEntryInFavorites = jsonRPC.ajaxService.isEntryInFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+
+			var isValid = validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled );
+
+
+			if ( isValid ) {
+				var isSavedSuccessfully = saveToDB( isEntryInFavorites, favoriteEntry );
+				if ( isSavedSuccessfully ) {
+					isEntryInFavorites = !isEntryInFavorites;
+
+					var m1 = ' ${eco:translate('add/remove bookmark: has been added to')} ';
+					if ( !isEntryInFavorites ) {
+						m1 = ' ${eco:translate('add/remove bookmark: has been removed from')} ';
 					}
+					var message = favoriteEntry.getFavoriteEntryName() + m1 + favoriteEntry.getFavoriteEntryTypeName();
+
+					notifySuccessMessage( message );
 				}
-				return null;
 			}
 
-			function isFavoriteEntryRegistered( favoriteEntry ) {
-				return findFavoriteEntry( favoriteEntry ) != null;
-			}
+			$( favoriteEntryIcons ).each( function () {
+				refreshFavoriteIcon( favoriteEntry, isEntryInFavorites, this );
+				rebindOnClick( isEntryInFavorites, this, addFunc, removeFunc );
+			} );
+		}
 
-			function registerFavoriteEntry( favoriteEntry ) {
-				favoriteEntries.push( favoriteEntry );
-			}
+		return {
+			registerFavoriteEntry: function ( favoriteEntry ) {
+				if ( !isFavoriteEntryRegistered( favoriteEntry ) ) {
+					registerFavoriteEntry( favoriteEntry );
+				}
+			},
 
-			function processFavoriteEntryAction( favoriteEntry, isAddingFuncCalled ) {
-
-				var addFunc = function () {
-					favoriteEntryModel.addEntryToFavorites( favoriteEntry )
-				};
-
-				var removeFunc = function () {
-					favoriteEntryModel.removeEntryToFavorites( favoriteEntry );
-				};
-
+			registerFavoriteIcon: function ( favoriteEntry, favoriteIconId ) {
 				var entry = findFavoriteEntry( favoriteEntry );
-				var favoriteEntryIcons = entry.getFavoriteEntryIcons();
+				entry.addFavoriteEntryIcon( favoriteIconId )
+			},
 
-				var isEntryInFavorites = jsonRPC.ajaxService.isEntryInFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+			addEntryToFavorites: function ( favoriteEntry ) {
+				processFavoriteEntryAction( favoriteEntry, true );
+			},
 
-				var isValid = validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled );
-
-
-				if ( isValid ) {
-					var isSavedSuccessfully = saveToDB( isEntryInFavorites, favoriteEntry );
-					if ( isSavedSuccessfully ) {
-						isEntryInFavorites = !isEntryInFavorites;
-
-						var m1 = ' ${eco:translate('add/remove bookmark: has been added to')} ';
-						if ( !isEntryInFavorites ) {
-							m1 = ' ${eco:translate('add/remove bookmark: has been removed from')} ';
-						}
-						var message = favoriteEntry.getFavoriteEntryName() + m1 + favoriteEntry.getFavoriteEntryTypeName();
-
-						notifySuccessMessage( message );
-					}
-				}
-
-				$( favoriteEntryIcons ).each( function () {
-					refreshFavoriteIcon( favoriteEntry, isEntryInFavorites, this );
-					rebindOnClick( isEntryInFavorites, this, addFunc, removeFunc );
-				} );
-			}
-
-			return {
-				registerFavoriteEntry: function ( favoriteEntry ) {
-					if ( !isFavoriteEntryRegistered( favoriteEntry ) ) {
-						registerFavoriteEntry( favoriteEntry );
-					}
-				},
-
-				registerFavoriteIcon: function ( favoriteEntry, favoriteIconId ) {
-					var entry = findFavoriteEntry( favoriteEntry );
-					entry.addFavoriteEntryIcon( favoriteIconId )
-				},
-
-				addEntryToFavorites: function ( favoriteEntry ) {
-					processFavoriteEntryAction( favoriteEntry, true );
-				},
-
-				removeEntryToFavorites: function ( favoriteEntry ) {
-					processFavoriteEntryAction( favoriteEntry, false );
-				}
-			}
-
-		}();
-
-		function saveToDB( isEntryInFavorites, favoriteEntry ) {
-			var ajaxResultDTO;
-			if ( isEntryInFavorites ) {
-				ajaxResultDTO = jsonRPC.ajaxService.removeEntryFromFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
-			} else {
-				ajaxResultDTO = jsonRPC.ajaxService.addEntryToFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
-			}
-
-			if ( !ajaxResultDTO.successful ) {
-				showErrorMessage( ajaxResultDTO.message );
-				return false;
-			}
-
-			return true;
-		}
-
-		function validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled ) {
-
-			if ( isAddingFuncCalled && isEntryInFavorites ) {
-				showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
-				return false;
-			}
-
-			var isRemoving = !isAddingFuncCalled;
-			if ( isRemoving && !isEntryInFavorites ) {
-				showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
-				return false;
-			}
-
-			return true;
-		}
-
-		function rebindOnClick( isEntryInFavorites, favoriteIconId, addFunc, removeFunc ) {
-			var selector = '#' + favoriteIconId;
-
-			if ( isEntryInFavorites ) {
-				$( selector ).unbind( "click" );
-				$( selector ).bind( "click", removeFunc );
-			} else {
-				$( selector ).unbind( "click" );
-				$( selector ).bind( "click", addFunc );
+			removeEntryToFavorites: function ( favoriteEntry ) {
+				processFavoriteEntryAction( favoriteEntry, false );
 			}
 		}
 
-		function refreshFavoriteIcon( favoriteEntry, isEntryInFavorites, favoriteIconId ) {
-			var image;
+	}();
 
-			var operation = "";
-			if ( isEntryInFavorites ) {
-				image = favoriteEntry.getFavoriteEntryRemoveIcon();
-				operation = favoriteEntry.getFavoriteEntryRemoveText();
-			} else {
-				image = favoriteEntry.getFavoriteEntryAddIcon();
-				operation = favoriteEntry.getFavoriteEntryAddText();
-			}
-
-			var imagePath = "${eco:imageFolderURL()}/${favoriteImagesFolder}/" + image;
-			var title = favoriteEntry.getFavoriteEntryName() + ": " + operation;
-
-			var selector = '#' + favoriteIconId;
-			$( selector ).attr( 'src', imagePath );
-			$( selector ).attr( 'alt', title );
-			$( selector ).attr( 'title', title );
+	function saveToDB( isEntryInFavorites, favoriteEntry ) {
+		var ajaxResultDTO;
+		if ( isEntryInFavorites ) {
+			ajaxResultDTO = jsonRPC.ajaxService.removeEntryFromFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
+		} else {
+			ajaxResultDTO = jsonRPC.ajaxService.addEntryToFavoritesAjax( favoriteEntry.getUserId(), favoriteEntry.getFavoriteEntryId(), favoriteEntry.getFavoriteTypeId() );
 		}
 
-		function registerFavoriteEntry( currentUserId, entryTypeId, favoriteEntryId, entryName, addIcon, removeIcon, entryTypeName, addText, removeText, favoriteIconId ) {
-			var favoriteEntry = new FavoriteEntry( currentUserId, entryTypeId, favoriteEntryId, entryName, addIcon, removeIcon, entryTypeName, addText, removeText );
+		if ( !ajaxResultDTO.successful ) {
+			showErrorMessage( ajaxResultDTO.message );
+			return false;
+		}
 
-			favoriteEntryModel.registerFavoriteEntry( favoriteEntry );
-			favoriteEntryModel.registerFavoriteIcon( favoriteEntry, favoriteIconId );
+		return true;
+	}
 
-			return favoriteEntry;
+	function validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled ) {
+
+		if ( isAddingFuncCalled && isEntryInFavorites ) {
+			showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+			return false;
+		}
+
+		var isRemoving = !isAddingFuncCalled;
+		if ( isRemoving && !isEntryInFavorites ) {
+			showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+			return false;
+		}
+
+		return true;
+	}
+
+	function rebindOnClick( isEntryInFavorites, favoriteIconId, addFunc, removeFunc ) {
+		var selector = '#' + favoriteIconId;
+
+		if ( isEntryInFavorites ) {
+			$( selector ).unbind( "click" );
+			$( selector ).bind( "click", removeFunc );
+		} else {
+			$( selector ).unbind( "click" );
+			$( selector ).bind( "click", addFunc );
 		}
 	}
 
-	return init();
+	function refreshFavoriteIcon( favoriteEntry, isEntryInFavorites, favoriteIconId ) {
+		var image;
+
+		var operation = "";
+		if ( isEntryInFavorites ) {
+			image = favoriteEntry.getFavoriteEntryRemoveIcon();
+			operation = favoriteEntry.getFavoriteEntryRemoveText();
+		} else {
+			image = favoriteEntry.getFavoriteEntryAddIcon();
+			operation = favoriteEntry.getFavoriteEntryAddText();
+		}
+
+		var imagePath = "${eco:imageFolderURL()}/${favoriteImagesFolder}/" + image;
+		var title = favoriteEntry.getFavoriteEntryName() + ": " + operation;
+
+		var selector = '#' + favoriteIconId;
+		$( selector ).attr( 'src', imagePath );
+		$( selector ).attr( 'alt', title );
+		$( selector ).attr( 'title', title );
+	}
+
+	function registerFavoriteEntry( currentUserId, entryTypeId, favoriteEntryId, entryName, addIcon, removeIcon, entryTypeName, addText, removeText, favoriteIconId ) {
+		var favoriteEntry = new FavoriteEntry( currentUserId, entryTypeId, favoriteEntryId, entryName, addIcon, removeIcon, entryTypeName, addText, removeText );
+
+		favoriteEntryModel.registerFavoriteEntry( favoriteEntry );
+		favoriteEntryModel.registerFavoriteIcon( favoriteEntry, favoriteIconId );
+
+		return favoriteEntry;
+	}
 });
