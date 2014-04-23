@@ -6,35 +6,35 @@
 <c:if test="${not empty(bindingResult)}">
 
 	<script type="text/javascript">
-		jQuery("document").ready( function() {
-			jQuery(".invalid").removeClass("invalid");
-			<c:if test="${ not empty(bindingResult.fieldErrors) }">
-				var fieldErrorMessage = "";
-				<c:forEach var="error" items="${bindingResult.fieldErrors}" varStatus="status">
-					jQuery("[name='${error.field}']").addClass("invalid");
-					fieldErrorMessage += "<div class=\"jalert\">${error.code}</div>";
-				</c:forEach>
-				fieldErrorMessage += "";
 
-				showUIMessage_Error( fieldErrorMessage );
+		require( ['jquery'], function ( $ ) {
 
-//				jQuery(".invalid:first").focus(); // Focusing does not work for some reason
-			</c:if>
+			$( document ).ready( function () {
 
-			<c:if test="${ empty(bindingResult.fieldErrors) and not empty bindingResult.allErrors }">
-				var generalErrorMessage = "";
+				$( ".invalid" ).removeClass( "invalid" );
 
-				<c:forEach var="error" items="${bindingResult.allErrors}" varStatus="status">
-					generalErrorMessage += "<div class=\"jalert\">${error.code}: ${error.defaultMessage}</div>";
-					<%--<c:if test="${not status.last}">
-						generalErrorMessage += "\n";
-					</c:if>--%>
-				</c:forEach>
+				<c:if test="${ not empty(bindingResult.fieldErrors) }">
+					var fieldErrorMessage = "";
+					<c:forEach var="error" items="${bindingResult.fieldErrors}" varStatus="status">
+						$( "[name='${error.field}']" ).addClass( "invalid" );
+						fieldErrorMessage += "<div class=\"jalert\">${error.code}</div>";
+					</c:forEach>
+					fieldErrorMessage += "";
 
-				showUIMessage_Error( generalErrorMessage );
-			</c:if>
+					showUIMessage_Error( fieldErrorMessage );
+				</c:if>
 
-		});
+				<c:if test="${ empty(bindingResult.fieldErrors) and not empty bindingResult.allErrors }">
+					var generalErrorMessage = "";
+
+					<c:forEach var="error" items="${bindingResult.allErrors}" varStatus="status">
+						generalErrorMessage += "<div class=\"jalert\">${error.code}: ${error.defaultMessage}</div>";
+					</c:forEach>
+
+					showUIMessage_Error( generalErrorMessage );
+				</c:if>
+			} );
+		} );
 	</script>
 
 </c:if>
