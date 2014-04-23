@@ -32,14 +32,11 @@ define( [ 'jquery' ], function ( $ ) {
 		}
 
 		function deselectAllCheckboxes() {
-			console.log( 'DEselect all' );
 			getElements().removeAttr( "checked" );
 		}
 
 		function setSelection( _selection, _suppressMassSelection ) {
 			selection = _selection;
-
-			console.log( 'Selected has changed: ', selection );
 
 			if ( selection ) {
 				setSelectedCheckerIcon();
