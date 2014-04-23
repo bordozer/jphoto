@@ -94,7 +94,7 @@
 		} );
 
 		function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
-			require( [ 'jquery', '/js/send-private-message.js.jsp' ], function ( $, sendMessageFunction ) {
+			require( [ 'jquery', '/js/pages/send-private-message.js.jsp' ], function ( $, sendMessageFunction ) {
 				sendMessageFunction.sendPrivateMessage( fromUserId, toUserId, toUserName, callback );
 			} );
 		}
@@ -122,19 +122,19 @@
 			});
 
 			function adminLockUser( userId, userName ) {
-				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
 					adminFunctions.adminLockUser( userId, userName );
 				} );
 			}
 
 			function adminPhotoNudeContentSet( photoId ) {
-				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentSet( photoId, jsonRPC );
 				} );
 			}
 
 			function adminPhotoNudeContentRemove( photoId ) {
-				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentRemove( photoId, jsonRPC );
 				} );
 			}

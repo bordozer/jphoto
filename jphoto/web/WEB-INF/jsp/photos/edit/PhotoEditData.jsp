@@ -78,20 +78,20 @@
 <script type="text/javascript">
 
 	require( [ 'jquery' ], function( $ ) {
-		$( document ).ready( function () {
-			<c:if test="${not photoEditDataModel.anonymousDay}">
-				$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
-				appendAnonymousDescription( "<br />" );
-				appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
-				appendAnonymousDescription( "<br />" );
-			 </c:if>
 
-			 <c:if test="${photoEditDataModel.anonymousDay}">
-				$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
-				$( "#dayAnonymousDescription" ).append( "<br/>" );
-			 </c:if>
-		} );
+		<c:if test="${not photoEditDataModel.anonymousDay}">
+			$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
+			appendAnonymousDescription( "<br />" );
+			appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
+			appendAnonymousDescription( "<br />" );
+		 </c:if>
+
+		 <c:if test="${photoEditDataModel.anonymousDay}">
+			$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
+			$( "#dayAnonymousDescription" ).append( "<br/>" );
+		 </c:if>
 	} );
+
 </script>
 
 <div style="float: left; width: 98%;">
