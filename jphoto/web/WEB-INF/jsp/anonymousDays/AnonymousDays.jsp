@@ -14,7 +14,8 @@
 
 			$( function () {
 				$( "#datepicker" ).datepicker( {
-												   inline: true, firstDay: 1
+												   inline: true
+												   , firstDay: 1
 												   , showOtherMonths: true
 												   , showWeek: true
 												   , showButtonPanel: true
@@ -24,7 +25,7 @@
 												   , dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 												   , dateFormat: "mm/dd/yy"
 												   , onSelect: showInfoAboutAnonymousDay
-												   , beforeShowDay: highlightAnonymousDays
+//												   , beforeShowDay: highlightAnonymousDays
 												   //selectOtherMonths: true
 											   } );
 			} );

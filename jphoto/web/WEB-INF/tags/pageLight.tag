@@ -17,10 +17,11 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 
+	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
+
 	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
-	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
