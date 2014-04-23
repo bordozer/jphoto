@@ -48,9 +48,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang', 'jsonrpc' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang, jsonrpc ) {
-
-			var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		require( [ 'jquery', 'jscal2' ], function( $ ) {
 
 			$( function () {
 				$( "#datepicker" ).datepicker( {

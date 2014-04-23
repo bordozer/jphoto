@@ -28,7 +28,7 @@
 
 	<script type="text/javascript">
 		var jsonRPC;
-		require( ['jsonrpc'], function( jsonrpc ) {
+		require( ['jsonrpc'], function() {
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 	</script>

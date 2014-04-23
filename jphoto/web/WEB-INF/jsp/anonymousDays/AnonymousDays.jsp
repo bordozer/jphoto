@@ -10,7 +10,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang', 'jsonrpc' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang, jsonrpc ) {
+		require( [ 'jquery', 'jscal2' ], function( $ ) {
 
 			$( function () {
 				$( "#datepicker" ).datepicker( {
