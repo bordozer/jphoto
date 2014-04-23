@@ -73,7 +73,7 @@
 
 <script type="text/javascript">
 
-	require( [ 'jquery' ], function( $ ) {
+	require( [ 'jquery', 'jquery_ui' ], function( $, ui ) {
 
 		$( document ).ready( function () {
 
@@ -112,7 +112,7 @@
 														   ${callbackJSFunction}( ui.item );
 														   </c:if>
 													   }
-												   } ).data( "autocomplete" )._renderItem = function ( ul, item ) {
+												   } ).data( "ui-autocomplete" )._renderItem = function ( ul, item ) {
 				return $( "<li></li>" ).data( "item.autocomplete", item ).append( "<a>" + "<img src='" + item.userAvatarUrl + "' width='30' /> " + item.userNameEscaped + "</a>" ).appendTo( ul );
 			};
 
