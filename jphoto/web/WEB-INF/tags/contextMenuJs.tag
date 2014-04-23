@@ -84,7 +84,7 @@
 															return false;
 														}
 
-														notifySuccessMessage( "${eco:translate('The message has been sent')}" );
+														showMessage_Notify( "${eco:translate('The message has been sent')}" );
 
 														$( this ).dialog( "close" );
 													}

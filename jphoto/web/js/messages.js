@@ -60,7 +60,7 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 				showDiv( divId, params, autoCloseAfter );
 			}
 
-			, notifySuccessMessage: function ( message ) {
+			, showMessage_Notify: function ( message ) {
 				console.log( 'notifySuccessMessage' );
 				var n = noty( {
 					text: message
@@ -72,5 +72,5 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 				} );
 			}
 		}
-	}
+	}();
 } );

@@ -44,9 +44,9 @@
 			}
 		});
 
-		function notifySuccessMessage( messageText ) {
+		function showMessage_Notify( messageText ) {
 			require( [ 'jquery', 'messages' ], function ( $, messages ) {
-				messages().notifySuccessMessage( messageText );
+				messages.showMessage_Notify( messageText );
 			} );
 		}
 	</script>
@@ -93,7 +93,7 @@
 																return false;
 															}
 
-															notifySuccessMessage( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
+															showMessage_Notify( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
 
 															$( this ).dialog( "close" );
 

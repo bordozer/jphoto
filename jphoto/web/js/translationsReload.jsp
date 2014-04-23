@@ -23,5 +23,5 @@ function reloadTranslations() {
 
 	jsonRPC.translatorService.reloadTranslationsAjax();
 
-	notifySuccessMessage( "${eco:translate('Translations have been reloaded')}" );
+	showMessage_Notify( "${eco:translate('Translations have been reloaded')}" );
 }

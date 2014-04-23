@@ -100,7 +100,7 @@
 					<script type="text/javascript">
 						require( [ 'jquery' ], function( $ ) {
 							$( document ).ready( function() {
-								notifySuccessMessage( "$hiMessage" );
+								showMessage_Notify( "$hiMessage" );
 							});
 						});
 					</script>
