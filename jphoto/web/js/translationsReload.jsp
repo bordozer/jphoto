@@ -11,7 +11,7 @@
 %>
 
 var jsonRPC;
-jQuery().ready( function () {
+define( 'jsonrpc', function( jsonrpc ) {
 	jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 } );
 

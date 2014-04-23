@@ -42,9 +42,6 @@
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
 <c:set var="photosightCategoriesSorted" value="<%=photosImportModel.getPhotosightCategoriesSorted()%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
@@ -269,11 +266,6 @@
 				$( '#${photosightImportDivId}' ).show();
 			}
 		}
-
-		var jsonRPC;
-		jQuery().ready( function () {
-			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-		} );
 
 		var photosightUserModel = function () {
 

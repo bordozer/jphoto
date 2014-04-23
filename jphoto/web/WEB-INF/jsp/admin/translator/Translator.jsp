@@ -12,21 +12,21 @@
 
 <jsp:useBean id="translatorModel" type="admin.controllers.translator.TranslatorModel" scope="request"/>
 
-<%
+<%--<%
 	JSONRPCBridge.getGlobalBridge().registerObject( "translatorService", ApplicationContextHelper.<TranslatorService>getBean( TranslatorService.BEAN_NAME ) );
-%>
+%>--%>
 
 <c:set var="languages" value="<%=Arrays.asList( Language.values() )%>"/>
 <c:set var="languageNerd" value="<%=Language.NERD%>"/>
 
 <tags:page pageModel="${translatorModel.pageModel}">
 	
-	<script type="text/javascript">
+	<%--<script type="text/javascript">
 		var jsonRPC;
 		jQuery().ready( function () {
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
-	</script>
+	</script>--%>
 
 	<style type="text/css">
 		.selected {

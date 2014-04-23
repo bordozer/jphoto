@@ -42,14 +42,19 @@
 	var complaintEntities = {<c:forEach var="complaintEntity" items="${complaintEntities}" varStatus="status"> '${complaintEntity.id}': "${eco:translate(complaintEntity.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 	var complaintReasonTypes = {<c:forEach var="complaintReasonType" items="${complaintReasonTypes}" varStatus="status"> '${complaintReasonType.id}': "${eco:translate(complaintReasonType.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 
-	$( function () {
+	define( 'jquery', function( $ ) {
+
+		$( function () {
 			$( "#${sendComplaintDivId}" ).dialog( {
-											height:300
-											, width:600
-											, modal:true
-											, autoOpen:false
-										 } );
+				height:300
+				, width:600
+				, modal:true
+				, autoOpen:false
+			 } );
 		} );
+	} );
+
+
 
 	function getEntityNameById( typeId, entities ) {
 		for ( var entity in entities ) {

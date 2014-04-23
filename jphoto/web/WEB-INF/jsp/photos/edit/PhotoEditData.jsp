@@ -26,10 +26,6 @@
 	final String genresHaveNudeContent = StringUtils.join( photoEditDataModel.getGenresHaveNudeContent(), ", " );
 %>
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "securityService", ApplicationContextHelper.<SecurityService>getBean( SecurityService.BEAN_NAME ) );
-%>
-
 <c:set var="accessibleCommentAllowances" value="${photoEditDataModel.accessibleCommentAllowances}"/>
 <c:set var="accessibleVotingAllowances" value="${photoEditDataModel.accessibleVotingAllowances}"/>
 
@@ -80,10 +76,6 @@
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 <script type="text/javascript">
-	var jsonRPC;
-	jQuery().ready( function () {
-		jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-	} );
 
 	 jQuery().ready( function () {
 		<c:if test="${not photoEditDataModel.anonymousDay}">
@@ -172,7 +164,7 @@
 
 					function setAnonymousPosting() {
 						<c:if test="${photoEditDataModel.anonymousDay}">
-							var anonymousSettingsDTO = jsonRPC.securityService.forceAnonymousPostingAjax( ${photoAuthorId}, getGenreId() );
+							var anonymousSettingsDTO = jsonRPC.securityService.forceAnonymousPostingAjax( ${photoAuthorId}, getGenreId() ); // TODO: JS error here! Must be moved to ajaxService
 							var forcedAnonymousPosting = anonymousSettingsDTO.forcedAnonymousPosting;
 							var messages = anonymousSettingsDTO.messages;
 

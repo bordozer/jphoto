@@ -23,7 +23,7 @@
 	<script type="text/javascript">
 
 		var jsonRPC;
-		jQuery().ready( function () {
+		define( 'jsonrpc', function( jsonrpc ) {
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
@@ -52,63 +52,66 @@
 
 	<script type="text/javascript">
 
-		$( function () {
-			$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
-											height:300
-											, width:600
-											, modal:true
-											, autoOpen:false
-										 } );
+		define( 'jquery', function( $ ) {
+
+			$( function () {
+				$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
+												height:300
+												, width:600
+												, modal:true
+												, autoOpen:false
+											 } );
+			} );
+
+			function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
+				$( '#${privateMessageTextId}' ).val( '' );
+
+				$( "#${sendPrivateMessageToUserDivId}" )
+						.dialog( 'option', 'title', "${eco:translate('Send private message to')}" + ' ' + toUserName )
+						.dialog( 'option', 'buttons', {
+														Cancel:function () {
+															$( this ).dialog( "close" );
+														},
+														"${eco:translate('Send message')}": function() {
+															var privateMessageDTO = new PrivateMessageSendingDTO( fromUserId, toUserId, $( '#${privateMessageTextId}' ).val() );
+
+															var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
+
+															if ( ! ajaxResultDTO.successful ) {
+																showErrorMessage( ajaxResultDTO.message );
+																return false;
+															}
+
+															notifySuccessMessage( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
+
+															$( this ).dialog( "close" );
+
+															if ( callback != undefined ) {
+																callback();
+															}
+														}
+													} )
+						.dialog( "open" );
+			}
+
+			function PrivateMessageSendingDTO( fromUserId, toUserId, privateMessageText ) {
+				this.fromUserId = fromUserId;
+				this.toUserId = toUserId;
+				this.privateMessageText = privateMessageText;
+
+				this.getFromUserId = function () {
+					return this.fromUserId;
+				};
+
+				this.getToUserId = function () {
+					return this.toUserId;
+				};
+
+				this.getPrivateMessageText = function () {
+					return this.privateMessageText;
+				};
+			}
 		} );
-
-		function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
-			$( '#${privateMessageTextId}' ).val( '' );
-
-			$( "#${sendPrivateMessageToUserDivId}" )
-					.dialog( 'option', 'title', "${eco:translate('Send private message to')}" + ' ' + toUserName )
-					.dialog( 'option', 'buttons', {
-													Cancel:function () {
-														$( this ).dialog( "close" );
-													},
-													"${eco:translate('Send message')}": function() {
-														var privateMessageDTO = new PrivateMessageSendingDTO( fromUserId, toUserId, $( '#${privateMessageTextId}' ).val() );
-
-														var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
-
-														if ( ! ajaxResultDTO.successful ) {
-															showErrorMessage( ajaxResultDTO.message );
-															return false;
-														}
-
-														notifySuccessMessage( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
-
-														$( this ).dialog( "close" );
-
-														if ( callback != undefined ) {
-															callback();
-														}
-													}
-												} )
-					.dialog( "open" );
-		}
-
-		function PrivateMessageSendingDTO( fromUserId, toUserId, privateMessageText ) {
-			this.fromUserId = fromUserId;
-			this.toUserId = toUserId;
-			this.privateMessageText = privateMessageText;
-
-			this.getFromUserId = function () {
-				return this.fromUserId;
-			};
-
-			this.getToUserId = function () {
-				return this.toUserId;
-			};
-
-			this.getPrivateMessageText = function () {
-				return this.privateMessageText;
-			};
-		}
 
 	</script>
 
@@ -123,51 +126,54 @@
 
 		<script type="text/javascript">
 
-			$( function () {
-				$( "#${lockUserDivId}" ).dialog( {
-												height:500
-												, width:800
-												, modal:true
-												, autoOpen:false
-											 } );
-			} );
+			define( 'jquery', function( $ ) {
 
-			function adminLockUser( userId, userName ) {
+				$( function () {
+					$( "#${lockUserDivId}" ).dialog( {
+													height:500
+													, width:800
+													, modal:true
+													, autoOpen:false
+												 } );
+				} );
 
-				var url = "${eco:baseAdminUrl()}/members/" + userId + "/lock/";
-				$( '#${lockUserIFrameId}' ).attr( 'src', url );
+				function adminLockUser( userId, userName ) {
 
-				$( "#${lockUserDivId}" )
-						.dialog( 'option', 'title', "${eco:translate('Lock user')}" + ' ' + userName + ' ( #' + userId + ' )' )
-						.dialog( 'option', 'buttons', {
-														Cancel:function () {
-															$( this ).dialog( "close" );
-														}/*,
-														"${eco:translate('Lock')}": function() {
+					var url = "${eco:baseAdminUrl()}/members/" + userId + "/lock/";
+					$( '#${lockUserIFrameId}' ).attr( 'src', url );
 
-															$( this ).dialog( "close" );
-														}*/
-													} )
-						.dialog( "open" );
-			}
+					$( "#${lockUserDivId}" )
+							.dialog( 'option', 'title', "${eco:translate('Lock user')}" + ' ' + userName + ' ( #' + userId + ' )' )
+							.dialog( 'option', 'buttons', {
+															Cancel:function () {
+																$( this ).dialog( "close" );
+															}/*,
+															"${eco:translate('Lock')}": function() {
 
-			function adminPhotoNudeContentSet( photoId ) {
-				adminSetPhotoNudeContent( photoId, true );
-			}
+																$( this ).dialog( "close" );
+															}*/
+														} )
+							.dialog( "open" );
+				}
 
-			function adminPhotoNudeContentRemove( photoId ) {
-				adminSetPhotoNudeContent( photoId, false );
-			}
+				function adminPhotoNudeContentSet( photoId ) {
+					adminSetPhotoNudeContent( photoId, true );
+				}
 
-			function adminSetPhotoNudeContent( photoId, isNudeContent ) {
-				jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
+				function adminPhotoNudeContentRemove( photoId ) {
+					adminSetPhotoNudeContent( photoId, false );
+				}
 
-				/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-					var photoListId = 1;
-					var element = $( '.photo-container-' + 1 +'-' + photoId );
-					photoListEntry( photoId, photoListId, true, '${eco:baseUrl()}', element );
-				} );*/
-			}
+				function adminSetPhotoNudeContent( photoId, isNudeContent ) {
+					jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
+
+					/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
+						var photoListId = 1;
+						var element = $( '.photo-container-' + 1 +'-' + photoId );
+						photoListEntry( photoId, photoListId, true, '${eco:baseUrl()}', element );
+					} );*/
+				}
+			});
 		</script>
 
 		<script type="text/javascript" src="${eco:baseUrl()}/js/translationsReload.jsp"></script>

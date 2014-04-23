@@ -114,27 +114,37 @@
 			<div id="commentList" style="float: left; width: 90%;">
 
 				<script type="text/javascript">
+
 					var rootComments = [ <c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}" varStatus="status">${commentId}<c:if test="${not status.last}">, </c:if></c:forEach> ];
-					renderComment( 0 );
 
-					function renderComment( index ) {
-						var commentId = rootComments[ index ];
-						if ( commentId == undefined ) {
-							return;
+					define( 'jquery', function( $ ) {
+
+						function renderComment( index ) {
+							var commentId = rootComments[ index ];
+							if ( commentId == undefined ) {
+								return;
+							}
+
+							$.ajax( {
+										type:'GET',
+										url:'${eco:baseUrl()}/photo/comment/' + commentId + "/",
+										success:function ( response ) {
+											$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
+											renderComment( index + 1 );
+										},
+										error:function () {
+											<%--showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );--%>
+											console.log( 'error executing ajax request' );
+										}
+									} );
 						}
+						return renderComment;
+					});
 
-						$.ajax( {
-									type:'GET',
-									url:'${eco:baseUrl()}/photo/comment/' + commentId + "/",
-									success:function ( response ) {
-										$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
-										renderComment( index + 1 );
-									},
-									error:function () {
-										<%--showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );--%>
-									}
-								} );
-					}
+					/*require( ['renderComment'], function( renderComment ) {
+						console.log( renderComment );
+						renderComment( 0 );
+					});*/
 				</script>
 
 				<div class="${commentsEndAnchor}"></div>
