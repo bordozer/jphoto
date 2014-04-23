@@ -78,9 +78,6 @@ var require = {
 		},
 		jscal2_lang: {
 			deps: [ 'jscal2' ]
-		},
-		messages: {
-			exports: "Messages"
 		}
 	},
 

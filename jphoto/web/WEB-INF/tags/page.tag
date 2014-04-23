@@ -27,17 +27,27 @@
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
-		function fadeoutAndCloseMessageBox( divId ) {
-			var fadeOutTime = 400;
-			$( "#" + divId ).fadeOut( fadeOutTime, "linear" );
 
-			setTimeout( function () {
-				closeMessageBox( divId )
-			}, fadeOutTime );
-		}
+		require( ['jquery'], function( $ ) {
 
-		function closeMessageBox( divId ) {
-			$( '#' + divId ).trigger( 'close' );
+			function fadeoutAndCloseMessageBox( divId ) {
+				var fadeOutTime = 400;
+				$( "#" + divId ).fadeOut( fadeOutTime, "linear" );
+
+				setTimeout( function () {
+					closeMessageBox( divId )
+				}, fadeOutTime );
+			}
+
+			function closeMessageBox( divId ) {
+				$( '#' + divId ).trigger( 'close' );
+			}
+		});
+
+		function notifySuccessMessage( messageText ) {
+			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+				messages().notifySuccessMessage( messageText );
+			} );
 		}
 	</script>
 
