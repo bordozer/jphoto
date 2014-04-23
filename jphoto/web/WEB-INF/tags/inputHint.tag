@@ -33,7 +33,7 @@
 		}
 
 		<c:if test="${focused}">
-			jQuery().ready( function(){
+			$( document ).ready( function(){
 				var focused = $( '#${inputId}' );
 				focused.focus();
 				focused.select();

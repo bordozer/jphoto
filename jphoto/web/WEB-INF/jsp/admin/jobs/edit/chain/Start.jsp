@@ -70,7 +70,7 @@
 
 	<script type="text/javascript">
 
-		jQuery().ready( function () {
+		$( document ).ready( function () {
 			setErrorHandlingVisibility();
 		} );
 

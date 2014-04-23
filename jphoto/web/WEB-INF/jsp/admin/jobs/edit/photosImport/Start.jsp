@@ -246,7 +246,7 @@
 	</admin:jobEditData>
 
 	<script type="text/javascript">
-		jQuery().ready( function () {
+		$( document ).ready( function () {
 			setFormsVisibility();
 			if ( $( "#${photosightUserIdControl}" ).val().trim() != '' ) {
 				showPhotosightUserInfoAsync();

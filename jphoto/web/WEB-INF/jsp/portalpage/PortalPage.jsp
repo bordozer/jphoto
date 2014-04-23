@@ -159,7 +159,7 @@
 						</div>
 
 						<script type="text/javascript">
-							jQuery().ready( function() {
+							$( document ).ready( function() {
 								$( 'img.bestphotos' ).each( function() {
 									this.bind( "click", function() {
 										alert( 1 );

@@ -107,7 +107,7 @@
 		var votingCategories = [ ${votingCategories[0].id}, ${votingCategories[1].id}, ${votingCategories[2].id} ];
 		var votingCategoryPreviousValues = [];
 
-		jQuery().ready(function() {
+		$( document ).ready(function() {
 			for( var i = 1; i <= ${votingMarkQty}; i++) {
 				initVotingCategoryValue( i );
 				setAccessToVotingCategoryMark( i );

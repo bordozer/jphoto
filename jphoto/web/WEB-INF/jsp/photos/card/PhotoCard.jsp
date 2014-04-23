@@ -223,7 +223,7 @@
 				}
 
 				<c:if test="${commentDelay > 0}">
-					jQuery().ready( function () {
+					$( document ).ready( function () {
 						disableCommentText();
 						countdownDelay( ${commentDelay} - 1000 );
 					} );
@@ -272,52 +272,47 @@
 		<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>
 
 		<script type="text/javascript">
-			var cropBox = '#photo_${photo.id}';
-			var jcrop_api;
 
-			$( '#cropEnabled16' ).hide();
+			/*require( [ 'jquery' ], function( $ ) {
 
-			function initJcrop() {
-				jcrop_api = $.Jcrop( cropBox, {
-					addClass:'text-centered', bgOpacity:0.3, bgFade:true, onDblClick:updateCoords
-				} );
-			}
+				var cropBox = '#photo_${photo.id}';
+				var jcrop_api;
 
-			function updateCoords( c ) {
-				var coord = '<!--x' + c.x + 'y' + c.y + 'w' + c.w + 'h' + c.h + '-->';
-				jQuery( '#commentTextArea' ).val( coord );
-			}
-
-			function cropDisable() {
-				jcrop_api.disable();
-				jcrop_api.destroy();
 				$( '#cropEnabled16' ).hide();
-				$( '#cropDisabled16' ).show();
-			}
 
-			function cropEnable() {
-				initJcrop();
-				$( '#cropDisabled16' ).hide();
-				$( '#cropEnabled16' ).show();
-			}
+				function initJcrop() {
+					jcrop_api = $.Jcrop( cropBox, {
+						addClass: 'text-centered', bgOpacity: 0.3, bgFade: true, onDblClick: updateCoords
+					} );
+				}
 
-			$( '#cropDisabled16' ).click( function ( e ) {
-				cropEnable();
-			} );
+				function updateCoords( c ) {
+					var coord = '<!--x' + c.x + 'y' + c.y + 'w' + c.w + 'h' + c.h + '-->';
+					jQuery( '#commentTextArea' ).val( coord );
+				}
 
-			$( '#cropEnabled16' ).click( function ( e ) {
-				cropDisable();
-			} );
+				function cropDisable() {
+					jcrop_api.disable();
+					jcrop_api.destroy();
+					$( '#cropEnabled16' ).hide();
+					$( '#cropDisabled16' ).show();
+				}
 
-			/*function cropRelease() {
-				cropDisable();
-				jcrop_api.release();
-			}*/
+				function cropEnable() {
+					initJcrop();
+					$( '#cropDisabled16' ).hide();
+					$( '#cropEnabled16' ).show();
+				}
 
-			/*$( '#release' ).click( function ( e ) {
-				jcrop_api.release();
-			} );*/
+				$( '#cropDisabled16' ).click( function ( e ) {
+					cropEnable();
+				} );
 
+				$( '#cropEnabled16' ).click( function ( e ) {
+					cropDisable();
+				} );
+
+			});*/
 		</script>
 	</c:if>
 

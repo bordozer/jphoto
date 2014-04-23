@@ -57,7 +57,7 @@
 
 <script type="text/javascript">
 
-	jQuery().ready( function() {
+	$( document ).ready( function() {
 		<%--var unit = $( '#${periodicalTaskPeriodUnitId}' ).val;--%>
 		showHideHours();
 	});

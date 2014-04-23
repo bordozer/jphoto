@@ -71,7 +71,7 @@
 
 <%--<c:if test="${not suppressAutoReloading}">
 	<script type="text/javascript">
-		jQuery().ready( function() {
+		$( document ).ready( function() {
 			setTimeout( function() {
 				document.location.reload();
 			}, ${interval} );

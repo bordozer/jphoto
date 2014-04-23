@@ -72,7 +72,7 @@
 <script type="text/javascript">
 
 	var jsonRPC;
-	jQuery().ready( function() {
+	$( document ).ready( function() {
 
 		jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 

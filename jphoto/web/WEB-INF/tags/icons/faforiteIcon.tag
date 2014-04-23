@@ -38,14 +38,16 @@
 
 <script type="text/javascript">
 
-	jQuery().ready( function() {
+	require( [ 'jquery' ], function( $ ) {
+		$( document ).ready( function() {
 
-		var favoriteEntry = registerFavoriteEntry( ${currentUser.id}, ${entryType.id}, ${favoriteEntry.id}, '${entryName}'
-				, '${entryType.addIcon}', '${entryType.removeIcon}', '${eco:translate(entryType.name)}', '${entryType.addText}', '${entryType.removeText}', '${favoriteIconId}' );
+			var favoriteEntry = registerFavoriteEntry( ${currentUser.id}, ${entryType.id}, ${favoriteEntry.id}, '${entryName}'
+					, '${entryType.addIcon}', '${entryType.removeIcon}', '${eco:translate(entryType.name)}', '${entryType.addText}', '${entryType.removeText}', '${favoriteIconId}' );
 
-		$( '#${favoriteIconId}' ).bind( "click", function() {
-			favoriteEntryModel.${jsFunction}( favoriteEntry );
-		} );
+			$( '#${favoriteIconId}' ).bind( "click", function() {
+				favoriteEntryModel.${jsFunction}( favoriteEntry );
+			} );
+		});
 	});
 
 </script>

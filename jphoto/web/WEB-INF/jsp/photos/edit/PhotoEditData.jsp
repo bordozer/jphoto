@@ -77,7 +77,7 @@
 
 <script type="text/javascript">
 
-	 jQuery().ready( function () {
+	 $( document ).ready( function () {
 		<c:if test="${not photoEditDataModel.anonymousDay}">
 		 	$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
 		 	appendAnonymousDescription( "<br />" );
@@ -153,7 +153,7 @@
 						genresHaveNudeContent = [];
 					</c:if>
 
-					jQuery().ready( function () {
+					$( document ).ready( function () {
 						processNudeContentControl( getGenreId() );
 					} );
 

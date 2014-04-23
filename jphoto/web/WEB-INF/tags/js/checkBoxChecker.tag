@@ -16,7 +16,7 @@
 
 	var isChecked = ${!isChecked};
 
-	jQuery().ready( function() {
+	$( document ).ready( function() {
 		var icon = $( '#${iconId}' );
 		icon.bind( 'click', checkAll${uniqueId} );
 //		switchIcon( icon );
