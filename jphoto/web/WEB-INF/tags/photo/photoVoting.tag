@@ -104,121 +104,124 @@
 <c:if test="${not hasUserAlreadyVotedForPhoto}">
 	<script type="text/javascript">
 
-		var votingCategories = [ ${votingCategories[0].id}, ${votingCategories[1].id}, ${votingCategories[2].id} ];
-		var votingCategoryPreviousValues = [];
+		require( [ 'jquery' ], function( $ ) {
 
-		$( document ).ready(function() {
-			for( var i = 1; i <= ${votingMarkQty}; i++) {
-				initVotingCategoryValue( i );
-				setAccessToVotingCategoryMark( i );
-			}
-		});
+			var votingCategories = [ ${votingCategories[0].id}, ${votingCategories[1].id}, ${votingCategories[2].id} ];
+			var votingCategoryPreviousValues = [];
 
-		function initVotingCategoryValue( i ) {
-			var categoryValue = votingCategories[ i - 1 ];
-			$( '#votingCategory' + i ).val( categoryValue );
-			votingCategoryPreviousValues[ i ] = categoryValue;
-		}
-
-		function setAccessToVotingCategoryMark( number ) {
-			var id = 'votingCategory' + number;
-			var votingCategory = $( '#' + id );
-			var votingCategoryMark = $( '#votingCategoryMark' + number );
-			var votingCategoryMarkContainer = $( '#votingCategoryMarkContainer' + number );
-
-			if ( votingCategory.val() == 0 ) {
-				hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer );
-				votingCategoryPreviousValues[ number ] = votingCategory.val();
-				return;
-			}
-
-			var hasErrors = false;
-
-			$( ".votingCategoryClass" ).each( function () {
-				var element = $( this );
-				if ( element.attr( 'id' ) != id && votingCategory.val() != 0 && element.val() == votingCategory.val() ) {
-					var optionText = $( "option[value='" + votingCategory.val() + "']", votingCategory ).text();
-					showWarningMessage( "'" + optionText + "' ${eco:translate('is duplicated value')}" );
-					hasErrors = true;
+			$( document ).ready( function () {
+				for ( var i = 1; i <= ${votingMarkQty}; i++ ) {
+					initVotingCategoryValue( i );
+					setAccessToVotingCategoryMark( i );
 				}
 			} );
 
-			if ( !hasErrors ) {
-				showVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer, number, votingCategory );
-			} else {
-				hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer );
-				resetVotingCategoryToPreviousValue( votingCategory, number );
+			function initVotingCategoryValue( i ) {
+				var categoryValue = votingCategories[ i - 1 ];
+				$( '#votingCategory' + i ).val( categoryValue );
+				votingCategoryPreviousValues[ i ] = categoryValue;
 			}
-		}
 
-		function resetVotingCategoryToPreviousValue( votingCategory, number ) {
-			votingCategory.val( votingCategoryPreviousValues[ number ] );
-			setAccessToVotingCategoryMark( number );
-		}
+			function setAccessToVotingCategoryMark( number ) {
+				var id = 'votingCategory' + number;
+				var votingCategory = $( '#' + id );
+				var votingCategoryMark = $( '#votingCategoryMark' + number );
+				var votingCategoryMarkContainer = $( '#votingCategoryMarkContainer' + number );
 
-		function showVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer, number, votingCategory ) {
-			votingCategoryMarkContainer.html( '' );
-			votingCategoryMark.show();
-//				votingCategoryMark.focus(); // Do not set the focus or Opera jumps to the control otherwise
-			votingCategoryPreviousValues[ number ] = votingCategory.val();
-		}
+				if ( votingCategory.val() == 0 ) {
+					hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer );
+					votingCategoryPreviousValues[ number ] = votingCategory.val();
+					return;
+				}
 
-		function hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer ) {
-			votingCategoryMark.hide();
-			votingCategoryMarkContainer.html( '<b>X</b>' );
-		}
+				var hasErrors = false;
 
-		function submitVotingForm() {
-			var hasErrors = validateVotingCategories();
-			if ( hasErrors ) {
-				showWarningMessage( '${eco:translate('Please, select at least one category')}' );
+				$( ".votingCategoryClass" ).each( function () {
+					var element = $( this );
+					if ( element.attr( 'id' ) != id && votingCategory.val() != 0 && element.val() == votingCategory.val() ) {
+						var optionText = $( "option[value='" + votingCategory.val() + "']", votingCategory ).text();
+						showWarningMessage( "'" + optionText + "' ${eco:translate('is duplicated value')}" );
+						hasErrors = true;
+					}
+				} );
+
+				if ( !hasErrors ) {
+					showVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer, number, votingCategory );
+				} else {
+					hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer );
+					resetVotingCategoryToPreviousValue( votingCategory, number );
+				}
+			}
+
+			function resetVotingCategoryToPreviousValue( votingCategory, number ) {
+				votingCategory.val( votingCategoryPreviousValues[ number ] );
+				setAccessToVotingCategoryMark( number );
+			}
+
+			function showVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer, number, votingCategory ) {
+				votingCategoryMarkContainer.html( '' );
+				votingCategoryMark.show();
+				//				votingCategoryMark.focus(); // Do not set the focus or Opera jumps to the control otherwise
+				votingCategoryPreviousValues[ number ] = votingCategory.val();
+			}
+
+			function hideVotingCategoryMark( votingCategoryMark, votingCategoryMarkContainer ) {
+				votingCategoryMark.hide();
+				votingCategoryMarkContainer.html( '<b>X</b>' );
+			}
+
+			function submitVotingForm() {
+				var hasErrors = validateVotingCategories();
+				if ( hasErrors ) {
+					showWarningMessage( '${eco:translate('Please, select at least one category')}' );
+					return false;
+				}
+
+				voteAndLoadResults();
+
 				return false;
 			}
 
-			voteAndLoadResults();
+			function voteAndLoadResults() {
+				$.ajax( {
+							type: 'POST',
+							url: '${voteUrl}',
+							data: $( '#${frmPhotoVoting}' ).serialize(),
+							success: function ( response ) {
+								$( '#photoVotingDiv' ).html( response ); // response == voting/PhotoVoting.jsp
 
-			return false;
-		}
-
-		function voteAndLoadResults() {
-			$.ajax( {
-						type:'POST',
-						url:'${voteUrl}',
-						data:$( '#${frmPhotoVoting}' ).serialize(),
-						success:function ( response ) {
-							$( '#photoVotingDiv' ).html( response ); // response == voting/PhotoVoting.jsp
-
-						},
-						error:function () {
-							showErrorMessage( '${eco:translate('Voting error')}' );
-						}
-					} ).done(function() {
-						refreshPhotoInfo();
-						noty( {
-								text:'${eco:translate('Your marks have been saved')}', type:'success', layout:'bottomRight', timeout:3000
-							} );
-					});
-		}
-
-		function validateVotingCategories() {
-			var hasErrors = true;
-
-			for ( var i = 1; i <= ${votingMarkQty}; i++ ) {
-				hasErrors = !doesVotingCategoryHaveValue( i );
-				if ( !hasErrors ) {
-					break;
-				}
+							},
+							error: function () {
+								showErrorMessage( '${eco:translate('Voting error')}' );
+							}
+						} ).done( function () {
+					refreshPhotoInfo();
+					noty( {
+							  text: '${eco:translate('Your marks have been saved')}', type: 'success', layout: 'bottomRight', timeout: 3000
+						  } );
+				} );
 			}
-			return hasErrors;
-		}
 
-		function doesVotingCategoryHaveValue( number ) {
-			var id = 'votingCategory' + number;
-			var votingCategory = $( '#' + id );
-			var votingCategoryMark = $( '#votingCategoryMark' + number );
+			function validateVotingCategories() {
+				var hasErrors = true;
 
-			return votingCategory.val() != 0; // || ( votingCategory.val() != 0 && votingCategoryMark.val == 0 );
-		}
+				for ( var i = 1; i <= ${votingMarkQty}; i++ ) {
+					hasErrors = !doesVotingCategoryHaveValue( i );
+					if ( !hasErrors ) {
+						break;
+					}
+				}
+				return hasErrors;
+			}
+
+			function doesVotingCategoryHaveValue( number ) {
+				var id = 'votingCategory' + number;
+				var votingCategory = $( '#' + id );
+				var votingCategoryMark = $( '#votingCategoryMark' + number );
+
+				return votingCategory.val() != 0; // || ( votingCategory.val() != 0 && votingCategoryMark.val == 0 );
+			}
+		});
 
 	</script>
 </c:if>

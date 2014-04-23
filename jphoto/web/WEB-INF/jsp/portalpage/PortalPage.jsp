@@ -98,13 +98,15 @@
 	</div>
 
 	<script type="text/javascript">
-		$( document ).ready( function() {
-			$( "#makeMeScrollable" ).smoothDivScroll( {
-														  mousewheelScrolling: true,
-														  manualContinuousScrolling: true,
-														  visibleHotSpotBackgrounds: "always",
-														  autoScrollingMode: "onstart"
-													  } );
+		require( [ 'jquery' ], function( $ ) {
+			$( document ).ready( function() {
+				$( "#makeMeScrollable" ).smoothDivScroll( {
+															  mousewheelScrolling: true,
+															  manualContinuousScrolling: true,
+															  visibleHotSpotBackgrounds: "always",
+															  autoScrollingMode: "onstart"
+														  } );
+			} );
 		} );
 	</script>
 
@@ -159,11 +161,13 @@
 						</div>
 
 						<script type="text/javascript">
-							$( document ).ready( function() {
-								$( 'img.bestphotos' ).each( function() {
-									this.bind( "click", function() {
-										alert( 1 );
-									})
+							require( [ 'jquery' ], function( $ ) {
+								$( document ).ready( function() {
+									$( 'img.bestphotos' ).each( function() {
+										this.bind( "click", function() {
+											alert( 1 );
+										})
+									});
 								});
 							});
 						</script>

@@ -77,18 +77,20 @@
 
 <script type="text/javascript">
 
-	 $( document ).ready( function () {
-		<c:if test="${not photoEditDataModel.anonymousDay}">
-		 	$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
-		 	appendAnonymousDescription( "<br />" );
-		 	appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
-		 	appendAnonymousDescription( "<br />" );
-		 </c:if>
+	require( [ 'jquery' ], function( $ ) {
+		$( document ).ready( function () {
+			<c:if test="${not photoEditDataModel.anonymousDay}">
+				$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
+				appendAnonymousDescription( "<br />" );
+				appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
+				appendAnonymousDescription( "<br />" );
+			 </c:if>
 
-		 <c:if test="${photoEditDataModel.anonymousDay}">
-		 	$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
-		 	$( "#dayAnonymousDescription" ).append( "<br/>" );
-		 </c:if>
+			 <c:if test="${photoEditDataModel.anonymousDay}">
+				$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
+				$( "#dayAnonymousDescription" ).append( "<br/>" );
+			 </c:if>
+		} );
 	} );
 </script>
 
@@ -136,41 +138,43 @@
 
 				<script type="text/javascript">
 
-					var genresCanHaveNudeContent;
-					var genresHaveNudeContent;
+					require( [ 'jquery' ], function( $ ) {
 
-					<c:if test="${not empty genresCanHaveNudeContent}">
+						var genresCanHaveNudeContent;
+						var genresHaveNudeContent;
+
+						<c:if test="${not empty genresCanHaveNudeContent}">
 						genresCanHaveNudeContent = new Array( -1, ${genresCanHaveNudeContent} );
-					</c:if>
-					<c:if test="${empty genresCanHaveNudeContent}">
+						</c:if>
+						<c:if test="${empty genresCanHaveNudeContent}">
 						genresCanHaveNudeContent = [];
-					</c:if>
+						</c:if>
 
-					<c:if test="${not empty genresHaveNudeContent}">
+						<c:if test="${not empty genresHaveNudeContent}">
 						genresHaveNudeContent = new Array( -1, ${genresHaveNudeContent} );
-					</c:if>
-					<c:if test="${empty genresHaveNudeContent}">
+						</c:if>
+						<c:if test="${empty genresHaveNudeContent}">
 						genresHaveNudeContent = [];
-					</c:if>
+						</c:if>
 
-					$( document ).ready( function () {
-						processNudeContentControl( getGenreId() );
-					} );
+						$( document ).ready( function () {
+							processNudeContentControl( getGenreId() );
+						} );
 
-					function performPhotoCategoryChange() {
-						setNudeControl();
-						setAnonymousPosting();
-					}
+						function performPhotoCategoryChange() {
+							setNudeControl();
+							setAnonymousPosting();
+						}
 
-					function setAnonymousPosting() {
-						<c:if test="${photoEditDataModel.anonymousDay}">
+						function setAnonymousPosting() {
+							<c:if test="${photoEditDataModel.anonymousDay}">
 							var anonymousSettingsDTO = jsonRPC.securityService.forceAnonymousPostingAjax( ${photoAuthorId}, getGenreId() ); // TODO: JS error here! Must be moved to ajaxService
 							var forcedAnonymousPosting = anonymousSettingsDTO.forcedAnonymousPosting;
 							var messages = anonymousSettingsDTO.messages;
 
 							clearAnonymousDescription();
 							var list = messages.list;
-							for( var key in list ) {
+							for ( var key in list ) {
 								appendAnonymousDescription( list[ key ] );
 								appendAnonymousDescription( "<br />" );
 							}
@@ -180,99 +184,101 @@
 							} else {
 								enableAnonymousPostingControl();
 							}
-						</c:if>
-					}
-
-					function setNudeControl() {
-						processNudeContentControl( getGenreId() );
-					}
-					function getGenreId() {
-						return $( "#${photoGenreIdControl}" ).val();
-					}
-
-					function processNudeContentControl( genreId ) {
-						if ( genreHaveNudeContent( genreId ) ) {
-							checkNudeContentControl();
-							disableNudeContentControl();
-							setNudeContentDescription( "${eco:translate('All photos in this category have nude content obviously')}" );
-							return;
+							</c:if>
 						}
 
-						if ( genreCanHaveNudeContent( genreId ) ) {
-							enableNudeContentControl();
-							setNudeContentDescription( "${eco:translate('The photo category can contains nude content')}" );
-						} else {
-							disableNudeContentControl();
-							uncheckNudeContentControl();
-							setNudeContentDescription( "${eco:translate('The photo category can not contains nude content')}" );
+						function setNudeControl() {
+							processNudeContentControl( getGenreId() );
 						}
 
-						function genreCanHaveNudeContent( genreId ) {
-							return containsValue( genresCanHaveNudeContent, genreId );
+						function getGenreId() {
+							return $( "#${photoGenreIdControl}" ).val();
 						}
 
-						function genreHaveNudeContent( genreId ) {
-							return containsValue( genresHaveNudeContent, genreId );
-						}
-
-						function checkNudeContentControl() {
-							$( "#${containsNudeContentControl}" ).attr( 'checked', 'checked' );
-						}
-
-						function uncheckNudeContentControl() {
-							$( "#${containsNudeContentControl}" ).removeAttr( 'checked' );
-						}
-
-						function containsValue( array, value ) {
-							for ( var i = 0; i < array.length; i++ ) {
-								if ( array[i] == value ) {
-									return true;
-								}
+						function processNudeContentControl( genreId ) {
+							if ( genreHaveNudeContent( genreId ) ) {
+								checkNudeContentControl();
+								disableNudeContentControl();
+								setNudeContentDescription( "${eco:translate('All photos in this category have nude content obviously')}" );
+								return;
 							}
-							return false;
+
+							if ( genreCanHaveNudeContent( genreId ) ) {
+								enableNudeContentControl();
+								setNudeContentDescription( "${eco:translate('The photo category can contains nude content')}" );
+							} else {
+								disableNudeContentControl();
+								uncheckNudeContentControl();
+								setNudeContentDescription( "${eco:translate('The photo category can not contains nude content')}" );
+							}
+
+							function genreCanHaveNudeContent( genreId ) {
+								return containsValue( genresCanHaveNudeContent, genreId );
+							}
+
+							function genreHaveNudeContent( genreId ) {
+								return containsValue( genresHaveNudeContent, genreId );
+							}
+
+							function checkNudeContentControl() {
+								$( "#${containsNudeContentControl}" ).attr( 'checked', 'checked' );
+							}
+
+							function uncheckNudeContentControl() {
+								$( "#${containsNudeContentControl}" ).removeAttr( 'checked' );
+							}
+
+							function containsValue( array, value ) {
+								for ( var i = 0; i < array.length; i++ ) {
+									if ( array[i] == value ) {
+										return true;
+									}
+								}
+								return false;
+							}
 						}
-					}
 
-					function forceCheckAnonymousPostingControl() {
-						checkAnonymousPostingControl();
-						disableAnonymousPostingControl();
-					}
+						function forceCheckAnonymousPostingControl() {
+							checkAnonymousPostingControl();
+							disableAnonymousPostingControl();
+						}
 
-					function checkAnonymousPostingControl() {
-						$( "#${anonymousPostingControl}" ).attr( 'checked', 'checked' );
-					}
+						function checkAnonymousPostingControl() {
+							$( "#${anonymousPostingControl}" ).attr( 'checked', 'checked' );
+						}
 
-					function uncheckAnonymousPostingControl() {
-						$( "#${anonymousPostingControl}" ).removeAttr( 'checked' );
-					}
+						function uncheckAnonymousPostingControl() {
+							$( "#${anonymousPostingControl}" ).removeAttr( 'checked' );
+						}
 
-					function enableNudeContentControl() {
-						$( "#${containsNudeContentControl}" ).removeAttr( 'disabled' );
-					}
+						function enableNudeContentControl() {
+							$( "#${containsNudeContentControl}" ).removeAttr( 'disabled' );
+						}
 
-					function disableNudeContentControl() {
-						$( "#${containsNudeContentControl}" ).attr( 'disabled', 'disabled' );
-					}
+						function disableNudeContentControl() {
+							$( "#${containsNudeContentControl}" ).attr( 'disabled', 'disabled' );
+						}
 
-					function enableAnonymousPostingControl() {
-						$( "#${anonymousPostingControl}" ).removeAttr( 'disabled' );
-					}
+						function enableAnonymousPostingControl() {
+							$( "#${anonymousPostingControl}" ).removeAttr( 'disabled' );
+						}
 
-					function disableAnonymousPostingControl() {
-						$( "#${anonymousPostingControl}" ).attr( 'disabled', 'disabled' );
-					}
+						function disableAnonymousPostingControl() {
+							$( "#${anonymousPostingControl}" ).attr( 'disabled', 'disabled' );
+						}
 
-					function setNudeContentDescription( text ) {
-						$( "#nudeContentDescription" ).html( text );
-					}
+						function setNudeContentDescription( text ) {
+							$( "#nudeContentDescription" ).html( text );
+						}
 
-					function clearAnonymousDescription() {
-						$( "#anonymousDescription" ).text( '' );
-					}
+						function clearAnonymousDescription() {
+							$( "#anonymousDescription" ).text( '' );
+						}
 
-					function appendAnonymousDescription( text ) {
-						$( "#anonymousDescription" ).append( text );
-					}
+						function appendAnonymousDescription( text ) {
+							$( "#anonymousDescription" ).append( text );
+						}
+					});
 				</script>
 
 				<table:tredit>

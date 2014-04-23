@@ -70,22 +70,25 @@
 
 	<script type="text/javascript">
 
-		$( document ).ready( function () {
-			setErrorHandlingVisibility();
-		} );
+		require( [ 'jquery' ], function( $ ) {
 
-		function setErrorHandlingVisibility() {
-			var stopNextJobsControl = $( "[name='${stopNextJobsInChainIfErrorControl}']" );
-
-			$( "input:radio[name=${jobRunModeIdControl}]" ).click( function () {
-				var value = $( this ).val();
-				if ( value == '${jobRunModeSeriallyId}' ) {
-					stopNextJobsControl.removeAttr( 'disabled' );
-				} else {
-					stopNextJobsControl.attr( 'disabled', true );
-				}
+			$( document ).ready( function () {
+				setErrorHandlingVisibility();
 			} );
-		}
+
+			function setErrorHandlingVisibility() {
+				var stopNextJobsControl = $( "[name='${stopNextJobsInChainIfErrorControl}']" );
+
+				$( "input:radio[name=${jobRunModeIdControl}]" ).click( function () {
+					var value = $( this ).val();
+					if ( value == '${jobRunModeSeriallyId}' ) {
+						stopNextJobsControl.removeAttr( 'disabled' );
+					} else {
+						stopNextJobsControl.attr( 'disabled', true );
+					}
+				} );
+			}
+		});
 	</script>
 
 </tags:page>

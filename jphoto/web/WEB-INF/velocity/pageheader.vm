@@ -111,8 +111,10 @@
 
 				#if ( $hiMessage )
 					<script type="text/javascript">
-						$( document ).ready( function() {
-							notifySuccessMessage( "$hiMessage" );
+						require( [ 'jquery' ], function( $ ) {
+							$( document ).ready( function() {
+								notifySuccessMessage( "$hiMessage" );
+							});
 						});
 					</script>
 				#end

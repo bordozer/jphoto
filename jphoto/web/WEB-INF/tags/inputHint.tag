@@ -33,10 +33,12 @@
 		}
 
 		<c:if test="${focused}">
-			$( document ).ready( function(){
-				var focused = $( '#${inputId}' );
-				focused.focus();
-				focused.select();
+			require( [ 'jquery' ], function( $ ) {
+				$( document ).ready( function(){
+					var focused = $( '#${inputId}' );
+					focused.focus();
+					focused.select();
+				} );
 			} );
 		</c:if>
 

@@ -223,9 +223,11 @@
 				}
 
 				<c:if test="${commentDelay > 0}">
-					$( document ).ready( function () {
-						disableCommentText();
-						countdownDelay( ${commentDelay} - 1000 );
+					require( [ 'jquery' ], function( $ ) {
+						$( document ).ready( function () {
+							disableCommentText();
+							countdownDelay( ${commentDelay} - 1000 );
+						} );
 					} );
 				</c:if>
 

@@ -159,7 +159,7 @@
 </div>
 
 <script type="text/javascript">
-//	$( document ).ready( function() {
+	require( [ 'jquery' ], function( $ ) {
 		$( '#${fullCommentDivId}' ).fadeIn( 700, "linear" );
-//	});
+	});
 </script>

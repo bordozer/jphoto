@@ -73,60 +73,62 @@
 
 <script type="text/javascript">
 
-	$( document ).ready( function () {
+	require( [ 'jquery' ], function( $ ) {
 
-		$( "#${searchControl}" ).autocomplete( {
-													 width:300,
-													 max:10,
-													 delay:100,
-													 minLength:0,
-													 autoFocus:true,
-													 cacheLength:1,
-													 scroll:true,
-													 highlight:false,
-													 source:function ( request, response ) {
-														 var searchString = $( '#${searchControl}' ).val();
-														 var userPickerDTOs = jsonRPC.ajaxService.userLinkAjax( searchString ).list;
+		$( document ).ready( function () {
 
-														 response( $.map( userPickerDTOs, function ( item ) {
-															 var img = "<img src='" + item.userAvatarUrl + "' />";
-															 return {
-																 label:item.userName + ", " + item.userGender,
-																 value:item.userName,
-																 userId:item.userId,
-																 userCardLink:item.userCardLink,
-																 userAvatarUrl:item.userAvatarUrl,
-																 userNameEscaped:item.userNameEscaped,
-																 userName:item.userName
-															 }
-														 } ) )
-													 },
-													 select:function ( event, ui ) {
-														 $( '#${userIdControl}' ).val( ui.item.userId );
-														 $( '#foundMemberCardLinkDiv' ).html( '${foundMemberText} ' + ui.item.userCardLink );
-														 $( '#foundMemberResetDiv' ).html( "<img src=\"${resetFoundMemberImg}\" alt=\"${resetFoundMemberHint}\"  title=\"${resetFoundMemberHint}\" width=\"16\" height=\"16\" onclick=\"resetFoundMember();\" />" );
-														 $( '#memberSearchAvatar' ).attr( 'src', ui.item.userAvatarUrl );
-														 <c:if test="${not empty callbackJSFunction}">
-														 	${callbackJSFunction}( ui.item );
-														 </c:if>
-													 }
-												 } ).data( "autocomplete" )._renderItem = function( ul, item ) {
-														return $( "<li></li>" )
-																.data( "item.autocomplete", item )
-																.append( "<a>" + "<img src='" + item.userAvatarUrl + "' width='30' /> " + item.userNameEscaped + "</a>" )
-																.appendTo( ul );
-												};
+			$( "#${searchControl}" ).autocomplete( {
+													   width: 300,
+													   max: 10,
+													   delay: 100,
+													   minLength: 0,
+													   autoFocus: true,
+													   cacheLength: 1,
+													   scroll: true,
+													   highlight: false,
+													   source: function ( request, response ) {
+														   var searchString = $( '#${searchControl}' ).val();
+														   var userPickerDTOs = jsonRPC.ajaxService.userLinkAjax( searchString ).list;
 
-		$( "#${searchControl}" ).bind( 'focus', function () { $( this ).autocomplete( "search" ); } );
-	} );
+														   response( $.map( userPickerDTOs, function ( item ) {
+															   var img = "<img src='" + item.userAvatarUrl + "' />";
+															   return {
+																   label: item.userName + ", " + item.userGender,
+																   value: item.userName,
+																   userId: item.userId,
+																   userCardLink: item.userCardLink,
+																   userAvatarUrl: item.userAvatarUrl,
+																   userNameEscaped: item.userNameEscaped,
+																   userName: item.userName
+															   }
+														   } ) )
+													   },
+													   select: function ( event, ui ) {
+														   $( '#${userIdControl}' ).val( ui.item.userId );
+														   $( '#foundMemberCardLinkDiv' ).html( '${foundMemberText} ' + ui.item.userCardLink );
+														   $( '#foundMemberResetDiv' ).html( "<img src=\"${resetFoundMemberImg}\" alt=\"${resetFoundMemberHint}\"  title=\"${resetFoundMemberHint}\" width=\"16\" height=\"16\" onclick=\"resetFoundMember();\" />" );
+														   $( '#memberSearchAvatar' ).attr( 'src', ui.item.userAvatarUrl );
+														   <c:if test="${not empty callbackJSFunction}">
+														   ${callbackJSFunction}( ui.item );
+														   </c:if>
+													   }
+												   } ).data( "autocomplete" )._renderItem = function ( ul, item ) {
+				return $( "<li></li>" ).data( "item.autocomplete", item ).append( "<a>" + "<img src='" + item.userAvatarUrl + "' width='30' /> " + item.userNameEscaped + "</a>" ).appendTo( ul );
+			};
 
-	function resetFoundMember() {
-		$( '#${userIdControl}' ).val( 0 );
-		$( '#${searchControl}' ).val( '' );
-		$( '#foundMemberResetDiv' ).text( '' );
-		$( '#foundMemberCardLinkDiv' ).text( '' );
-		$( '#memberSearchAvatar' ).attr( 'src', '${imageNotFoundImg}' );
-		$( '#${searchControl}' ).focus();
-	}
+			$( "#${searchControl}" ).bind( 'focus', function () {
+				$( this ).autocomplete( "search" );
+			} );
+		} );
+
+		function resetFoundMember() {
+			$( '#${userIdControl}' ).val( 0 );
+			$( '#${searchControl}' ).val( '' );
+			$( '#foundMemberResetDiv' ).text( '' );
+			$( '#foundMemberCardLinkDiv' ).text( '' );
+			$( '#memberSearchAvatar' ).attr( 'src', '${imageNotFoundImg}' );
+			$( '#${searchControl}' ).focus();
+		}
+	});
 
 </script>

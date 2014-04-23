@@ -57,17 +57,20 @@
 
 <script type="text/javascript">
 
-	$( document ).ready( function() {
-		<%--var unit = $( '#${periodicalTaskPeriodUnitId}' ).val;--%>
-		showHideHours();
-	});
+	require( [ 'jquery' ], function( $ ) {
 
-	function showHideHours() {
-		var unit = $( '#${periodicalTaskPeriodUnitId}' ).val();
-		if ( unit == ${hourUnitId} ) {
-			$( '#hoursDiv' ).hide();
-		} else {
-			$( '#hoursDiv' ).show();
+		$( document ).ready( function () {
+			<%--var unit = $( '#${periodicalTaskPeriodUnitId}' ).val;--%>
+			showHideHours();
+		} );
+
+		function showHideHours() {
+			var unit = $( '#${periodicalTaskPeriodUnitId}' ).val();
+			if ( unit == ${hourUnitId} ) {
+				$( '#hoursDiv' ).hide();
+			} else {
+				$( '#hoursDiv' ).show();
+			}
 		}
-	}
+	});
 </script>

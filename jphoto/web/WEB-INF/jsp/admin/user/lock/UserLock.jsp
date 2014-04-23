@@ -71,20 +71,21 @@
 
 <script type="text/javascript">
 
-	var jsonRPC;
-	$( document ).ready( function() {
+	require( [ 'jquery' ], function ( $ ) {
+		$( document ).ready( function () {
 
-		jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
+			var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
-		require( ['components/time-range/time-range'], function ( timeRange ) {
-			timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-form' ) );
+			require( ['components/time-range/time-range'], function ( timeRange ) {
+				timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-form' ) );
+			} );
+
+			require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
+				userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
+			} );
+
 		} );
-
-		require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
-			userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
-		} );
-
-	});
+	} );
 
 </script>
 

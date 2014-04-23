@@ -70,9 +70,11 @@
 
 	<script type="text/javascript">
 
-		$( document ).ready( function () {
-			var chartOptions = { type:'line', width:1300, height:300, lineWeight:2, barGroupMargin: 10 };
-			$( '#userRegistrationGraph' ).visualize( chartOptions );
+		require( [ 'jquery' ], function( $ ) {
+			$( document ).ready( function () {
+				var chartOptions = { type:'line', width:1300, height:300, lineWeight:2, barGroupMargin: 10 };
+				$( '#userRegistrationGraph' ).visualize( chartOptions );
+			} );
 		} );
 
 	</script>

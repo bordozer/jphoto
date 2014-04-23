@@ -71,10 +71,12 @@
 
 <%--<c:if test="${not suppressAutoReloading}">
 	<script type="text/javascript">
-		$( document ).ready( function() {
-			setTimeout( function() {
-				document.location.reload();
-			}, ${interval} );
+		require( [ 'jquery' ], function( $ ) {
+			$( document ).ready( function() {
+				setTimeout( function() {
+					document.location.reload();
+				}, ${interval} );
+			});
 		});
 	</script>
 </c:if>--%>

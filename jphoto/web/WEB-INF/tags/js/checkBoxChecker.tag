@@ -14,39 +14,42 @@
 
 <script type="text/javascript">
 
-	var isChecked = ${!isChecked};
+	require( [ 'jquery' ], function( $ ) {
 
-	$( document ).ready( function() {
-		var icon = $( '#${iconId}' );
-		icon.bind( 'click', checkAll${uniqueId} );
-//		switchIcon( icon );
+		var isChecked = ${!isChecked};
 
-		icon.click( function() {
-			switchIcon( icon );
+		$( document ).ready( function() {
+			var icon = $( '#${iconId}' );
+			icon.bind( 'click', checkAll${uniqueId} );
+	//		switchIcon( icon );
+
+			icon.click( function() {
+				switchIcon( icon );
+			});
 		});
-	});
 
-	function switchIcon( icon ) {
-		if ( isChecked ) {
-			icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
-			checkNone${uniqueId}();
-		} else {
-			icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
-			checkAll${uniqueId}();
+		function switchIcon( icon ) {
+			if ( isChecked ) {
+				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
+				checkNone${uniqueId}();
+			} else {
+				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
+				checkAll${uniqueId}();
+			}
+			isChecked = !isChecked;
 		}
-		isChecked = !isChecked;
-	}
 
-	function checkAll${uniqueId}() {
-		$( "[name*='${namePrefix}']" ).each( function () {
-			$( this ).attr( "checked", "checked" );
-		} );
-	}
+		function checkAll${uniqueId}() {
+			$( "[name*='${namePrefix}']" ).each( function () {
+				$( this ).attr( "checked", "checked" );
+			} );
+		}
 
-	function checkNone${uniqueId}() {
-		$( "[name*='${namePrefix}']" ).each( function () {
-			$( this ).removeAttr( 'checked' );
-		} );
-	}
+		function checkNone${uniqueId}() {
+			$( "[name*='${namePrefix}']" ).each( function () {
+				$( this ).removeAttr( 'checked' );
+			} );
+		}
+	});
 
 </script>

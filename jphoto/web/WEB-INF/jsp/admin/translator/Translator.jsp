@@ -23,8 +23,10 @@
 	
 	<%--<script type="text/javascript">
 		var jsonRPC;
-		$( document ).ready( function () {
-			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		require( [ 'jquery' ], function( $ ) {
+			$( document ).ready( function () {
+				jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+			} );
 		} );
 	</script>--%>
 
