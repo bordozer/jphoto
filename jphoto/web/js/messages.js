@@ -5,14 +5,15 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 		var parameters = { closeClick: true, closeEsc: true, centered: true, showOverlay: true, onLoad: function () {} };
 		var messageTimeout = 5000;
 
-		function showMessage ( divId, message, params, autoCloseAfter ) {
-			$( "#" + divId + "_message" ).html( message );
-			showDiv( divId, params, autoCloseAfter );
+		function showMessage ( divId, messageText, params, autoCloseAfter ) {
+			$( "#" + divId + "_message" ).html( messageText );
+			showDiv( divId, params, messageText, autoCloseAfter );
 		}
 
-		function showDiv( divId, params, autoCloseAfter ) {
+		function showDiv( divId, params, messageText, autoCloseAfter ) {
 
-			console.log( 'Shown message: ', message );
+//			console.log( 'Shown message: ', messageText );
+			this.showUIMessage_Notification( "TODO: use lightbox<br />" + messageText );
 
 			/*$( "#" + divId ).attr( "data-lightbox", "divId" ); //.lightbox( params );
 
@@ -25,40 +26,39 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 
 		return {
 
-			showUIMessage_InformationMessage_ManualClosing: function () { //showInformationMessageNoAutoClose
+			showUIMessage_InformationMessage_ManualClosing: function ( messageText ) { //showInformationMessageNoAutoClose
 				var divId = 'infoMessageDiv';
 				showMessage( divId, message, parameters );
 			},
 
-			showUIMessage_Information: function () { //showInformationMessage
+			showUIMessage_Information: function ( messageText ) { //showInformationMessage
 				var divId = 'infoMessageDiv';
 				showMessage( divId, message, parameters, messageTimeout );
 			},
 
-			showUIMessage_Success: function () { //showSuccessMessage
+			showUIMessage_Success: function ( messageText ) { //showSuccessMessage
 				var divId = 'successMessageDiv';
 				showMessage( divId, message, parameters, messageTimeout );
 			},
 
-			showUIMessage_Alert: function () { //showAlertMessage
+			showUIMessage_Alert: function ( messageText ) { //showAlertMessage
 				var divId = 'alertMessageDiv';
 				showMessage( divId, message, parameters );
 			},
 
-			showUIMessage_Warning: function () { //showWarningMessage
+			showUIMessage_Warning: function ( messageText ) { //showWarningMessage
 				var divId = 'warningMessageDiv';
 				showMessage( divId, message, parameters );
 			},
 
-			showUIMessage_Error: function () { //showErrorMessage
+			showUIMessage_Error: function ( messageText ) { //showErrorMessage
 				var divId = 'errorMessageDiv';
 				showMessage( divId, message, parameters );
 			},
 
-			showUIMessage_Notification: function ( message ) {
-				console.log( 'notifySuccessMessage' );
+			showUIMessage_Notification: function ( messageText ) {
 				var n = noty( {
-					text: message
+					text: messageText
 					, type: 'success'
 					, dismissQueue: true
 					, layout: 'bottomRight'
