@@ -17,18 +17,21 @@
 	<meta name="keywords" content=""/>
 	<meta name="description" content=""/>
 
-	<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-ui-1.10.4.js"></script>
-	<%--<script type="text/javascript" src="${baseUrl}/js/lib/jquery/jquery-ui-1.8.17.easing.min.js"></script>--%>
-	<script type="text/javascript" src="${baseUrl}/js/messages.js"></script>
-	<%--<script type="text/javascript" src="${baseUrl}/js/lib/lightbox/lightbox.js"></script>--%>
-	<link rel="stylesheet" type="text/css" href="${baseUrl}/js/lib/jquery/css/ui-lightness/jquery-ui-1.10.4.min.css"/>
+	<script type="text/javascript" src="${baseUrl}/js/require-config.js.jsp"></script>
+	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
 	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 	<tags:messageDivs />
+
+	<script type="text/javascript">
+		var jsonRPC;
+		require( ['jsonrpc'], function( jsonrpc ) {
+			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+		} );
+	</script>
 
 	<jsp:doBody />
 

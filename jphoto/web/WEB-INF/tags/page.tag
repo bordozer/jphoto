@@ -27,7 +27,6 @@
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
-
 		require( ['jquery'], function( $ ) {
 
 			function fadeoutAndCloseMessageBox( divId ) {

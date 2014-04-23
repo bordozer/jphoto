@@ -54,8 +54,19 @@
 
 			$( function () {
 				$( "#datepicker" ).datepicker( {
-												   inline: true, firstDay: 1, showOtherMonths: true, showWeek: true, showButtonPanel: true
-												   <%--, showCurrentAtPos: ${currentAtPos}--%>, numberOfMonths: [ 3, 4 ], dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], dateFormat: "${jsDateFormat}", onSelect: addAnonymousDay, beforeShowDay: highlightAnonymousDays, stepMonths: 0, minDate: new Date( '${calendarMinDate}' ), maxDate: new Date( '${calendarMaxDate}' )
+												   inline: true
+												   , firstDay: 1
+												   , showOtherMonths: true
+												   , showWeek: true
+												   , showButtonPanel: true
+												   <%--, showCurrentAtPos: ${currentAtPos}--%>
+												   , numberOfMonths: [ 3, 4 ]
+												   , dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+												   , dateFormat: "${jsDateFormat}"
+												   , onSelect: addAnonymousDay
+												   , beforeShowDay: highlightAnonymousDays
+												   , stepMonths: 0, minDate: new Date( '${calendarMinDate}' )
+												   , maxDate: new Date( '${calendarMaxDate}' )
 											   } );
 			} );
 

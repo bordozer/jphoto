@@ -10,12 +10,22 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang ) {
+		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang', 'jsonrpc' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang, jsonrpc ) {
 
 			$( function () {
 				$( "#datepicker" ).datepicker( {
-												   inline: true, firstDay: 1, showOtherMonths: true, showWeek: true, showButtonPanel: true, changeMonth: true, changeYear: true, numberOfMonths: 1, dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], dateFormat: "mm/dd/yy", onSelect: showInfoAboutAnonymousDay, beforeShowDay: highlightAnonymousDays
-												   //											, selectOtherMonths: true
+												   inline: true, firstDay: 1
+												   , showOtherMonths: true
+												   , showWeek: true
+												   , showButtonPanel: true
+												   , changeMonth: true
+												   , changeYear: true
+												   , numberOfMonths: 1
+												   , dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+												   , dateFormat: "mm/dd/yy"
+												   , onSelect: showInfoAboutAnonymousDay
+												   , beforeShowDay: highlightAnonymousDays
+												   //selectOtherMonths: true
 											   } );
 			} );
 
