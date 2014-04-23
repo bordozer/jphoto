@@ -56,7 +56,7 @@
 </style>
 
 <div style="width: 65%; margin: 0 auto;">
-	<div id="datepicker"></div>
+	<div id="date-picker-div"></div>
 </div>
 
 <script type="text/javascript">
@@ -84,6 +84,7 @@
 
 	function convertDateToPrint( date ) {
 		return $.datepicker.formatDate( '${jsDateFormat}', new Date( date ) );
+//		return 'TODO: anunymousDays.tag';
 	}
 
 </script>

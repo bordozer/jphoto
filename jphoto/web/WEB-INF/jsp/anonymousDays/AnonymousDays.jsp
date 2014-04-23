@@ -10,25 +10,28 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jscal2' ], function( $ ) {
+		require( [ 'jquery', 'jquery_ui', 'jscal2' ], function( $ ) {
 
-			$( function () {
-				$( "#datepicker" ).datepicker( {
-												   inline: true
-												   , firstDay: 1
-												   , showOtherMonths: true
-												   , showWeek: true
-												   , showButtonPanel: true
-												   , changeMonth: true
-												   , changeYear: true
-												   , numberOfMonths: 1
-												   , dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-												   , dateFormat: "mm/dd/yy"
-												   , onSelect: showInfoAboutAnonymousDay
-//												   , beforeShowDay: highlightAnonymousDays
-												   //selectOtherMonths: true
-											   } );
-			} );
+			$( document ).ready( function() {
+
+				$( function () {
+					$( "#date-picker-div" ).datepicker( {
+													   inline: true
+													   , firstDay: 1
+													   , showOtherMonths: true
+													   , showWeek: true
+													   , showButtonPanel: true
+													   , changeMonth: true
+													   , changeYear: true
+													   , numberOfMonths: 1
+													   , dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+													   , dateFormat: "mm/dd/yy"
+													   , onSelect: showInfoAboutAnonymousDay
+	//												   , beforeShowDay: highlightAnonymousDays
+													   //selectOtherMonths: true
+												   } );
+				} );
+			});
 
 			function showInfoAboutAnonymousDay( pickerDate ) {
 				if ( isAnonymousDay( pickerDate ) ) {

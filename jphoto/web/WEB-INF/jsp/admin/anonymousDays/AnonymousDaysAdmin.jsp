@@ -48,10 +48,10 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jscal2' ], function( $ ) {
+		require( [ 'jquery', 'jquery_ui','jscal2' ], function( $ ) {
 
 			$( function () {
-				$( "#datepicker" ).datepicker( {
+				$( "#date-picker-div" ).datepicker( {
 												   inline: true
 												   , firstDay: 1
 												   , showOtherMonths: true
