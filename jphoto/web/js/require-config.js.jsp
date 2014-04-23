@@ -48,6 +48,9 @@ var require = {
 		jquery_alerts: {
 			deps: [ 'jquery' ]
 		},
+		jquery_ui: {
+			deps: [ 'jquery' ]
+		},
 
 		lightbox: {
 			deps: [ 'jquery' ]

@@ -1,7 +1,7 @@
-define( ["backbone", "jquery", "underscore"
+define( ["backbone", "jquery", "underscore", 'context_menu'
 		, "text!components/menu/templates/context-menu-template.html"
 		, "text!components/menu/templates/context-menu-item-template.html"
-		], function ( Backbone, $, _, contextMenuTemplate, contextMenuItemTemplate ) {
+		], function ( Backbone, $, _, context_menu, contextMenuTemplate, contextMenuItemTemplate ) {
 
 	'use strict';
 

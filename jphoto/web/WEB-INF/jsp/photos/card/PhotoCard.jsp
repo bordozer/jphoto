@@ -289,7 +289,7 @@
 
 				function updateCoords( c ) {
 					var coord = '<!--x' + c.x + 'y' + c.y + 'w' + c.w + 'h' + c.h + '-->';
-					jQuery( '#commentTextArea' ).val( coord );
+					$( '#commentTextArea' ).val( coord );
 				}
 
 				function cropDisable() {
