@@ -6,8 +6,6 @@
 <%@ page import="core.general.configuration.ConfigurationKey" %>
 <%@ page import="ui.services.validation.PhotoRequirement" %>
 <%@ page import="ui.services.validation.DataRequirementService" %>
-<%@ page import="core.services.security.SecurityService" %>
-<%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -42,9 +40,6 @@
 <c:set var="notificationEmailAboutNewPhotoCommentControl" value="<%=PhotoEditDataModel.FORM_CONTROL_NOTIFICATION_EMAIL_ABOUT_NEW_COMMENT%>"/>
 <c:set var="photoBgColorControl" value="<%=PhotoEditDataModel.PHOTO_EDIT_DATA_BGCOLOR_FORM_CONTROL%>"/>
 
-<c:set var="containsNudeContentControl" value="containsNudeContent1"/>
-<c:set var="anonymousPostingControl" value="anonymousPosting1"/>
-
 <c:set var="photoTeamMembersIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_USER_TEAM_MEMBERS_IDS%>"/>
 <c:set var="photoAlbumsIdsControl" value="<%=PhotoEditDataModel.FORM_CONTROL_PHOTO_ALBUMS_IDS%>"/>
 
@@ -75,24 +70,41 @@
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
-<script type="text/javascript">
+<%--<script type="text/javascript">
 
 	require( [ 'jquery' ], function( $ ) {
 
-		<c:if test="${not photoEditDataModel.anonymousDay}">
-			$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
-			appendAnonymousDescription( "<br />" );
-			appendAnonymousDescription( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
-			appendAnonymousDescription( "<br />" );
-		 </c:if>
+		$( document ).ready( function () {
 
-		 <c:if test="${photoEditDataModel.anonymousDay}">
-			$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
-			$( "#dayAnonymousDescription" ).append( "<br/>" );
-		 </c:if>
+			<c:if test="${not photoEditDataModel.anonymousDay}">
+				$( "#dayAnonymousDescription" ).text( "${eco:translate('Today is not anonymous posting day')}" );
+				$( "#anonymousDescription" ).append( "<br />" );
+				$( "#anonymousDescription" ).append( "${eco:translate('You decide if you want to upload a photo anonymously')}" );
+				$( "#anonymousDescription" ).append( "<br />" );
+			 </c:if>
+
+			 <c:if test="${photoEditDataModel.anonymousDay}">
+				$( "#dayAnonymousDescription" ).append( "${eco:translate('Today is anonymous posting day')}" );
+				$( "#dayAnonymousDescription" ).append( "<br/>" );
+			 </c:if>
+
+			processNudeContentControl( getGenreId() );
+		} );
 	} );
 
-</script>
+	function performPhotoCategoryChange() {
+		require( [ 'jquery', '/js/pages/DEL_photo-data-edit.js.jsp' ], function( $, photoEditDataFunction ) {
+			photoEditDataFunction.performPhotoCategoryChange();
+		});
+	}
+
+	function processNudeContentControl( genreId ) {
+		require( [ 'jquery', '/js/pages/DEL_photo-data-edit.js.jsp' ], function( $, photoEditDataFunction ) {
+			photoEditDataFunction.processNudeContentControl( genreId );
+		});
+	}
+
+</script>--%>
 
 <div style="float: left; width: 98%;">
 	<c:if test="${isNew}">
@@ -107,7 +119,7 @@
 
 	<c:if test="${(isNew and userCanUploadPhoto) or not isNew}">
 
-		<eco:form action="${eco:baseUrl()}/photos/${photoEditDataModel.nextStep.urlPrefix}/">
+		<%--<eco:form action="${eco:baseUrl()}/photos/${photoEditDataModel.nextStep.urlPrefix}/">--%>
 
 			<input type="hidden" id="currentStepId" name="currentStepId" value="${editDataWizardStepId}">
 
@@ -136,157 +148,12 @@
 
 				<%-- Genres --%>
 
-				<script type="text/javascript">
-
-					require( [ 'jquery' ], function( $ ) {
-
-						var genresCanHaveNudeContent;
-						var genresHaveNudeContent;
-
-						<c:if test="${not empty genresCanHaveNudeContent}">
-						genresCanHaveNudeContent = new Array( -1, ${genresCanHaveNudeContent} );
-						</c:if>
-						<c:if test="${empty genresCanHaveNudeContent}">
-						genresCanHaveNudeContent = [];
-						</c:if>
-
-						<c:if test="${not empty genresHaveNudeContent}">
-						genresHaveNudeContent = new Array( -1, ${genresHaveNudeContent} );
-						</c:if>
-						<c:if test="${empty genresHaveNudeContent}">
-						genresHaveNudeContent = [];
-						</c:if>
-
-						$( document ).ready( function () {
-							processNudeContentControl( getGenreId() );
-						} );
-
-						function performPhotoCategoryChange() {
-							setNudeControl();
-							setAnonymousPosting();
-						}
-
-						function setAnonymousPosting() {
-							<c:if test="${photoEditDataModel.anonymousDay}">
-							var anonymousSettingsDTO = jsonRPC.securityService.forceAnonymousPostingAjax( ${photoAuthorId}, getGenreId() ); // TODO: JS error here! Must be moved to ajaxService
-							var forcedAnonymousPosting = anonymousSettingsDTO.forcedAnonymousPosting;
-							var messages = anonymousSettingsDTO.messages;
-
-							clearAnonymousDescription();
-							var list = messages.list;
-							for ( var key in list ) {
-								appendAnonymousDescription( list[ key ] );
-								appendAnonymousDescription( "<br />" );
-							}
-
-							if ( forcedAnonymousPosting ) {
-								forceCheckAnonymousPostingControl();
-							} else {
-								enableAnonymousPostingControl();
-							}
-							</c:if>
-						}
-
-						function setNudeControl() {
-							processNudeContentControl( getGenreId() );
-						}
-
-						function getGenreId() {
-							return $( "#${photoGenreIdControl}" ).val();
-						}
-
-						function processNudeContentControl( genreId ) {
-							if ( genreHaveNudeContent( genreId ) ) {
-								checkNudeContentControl();
-								disableNudeContentControl();
-								setNudeContentDescription( "${eco:translate('All photos in this category have nude content obviously')}" );
-								return;
-							}
-
-							if ( genreCanHaveNudeContent( genreId ) ) {
-								enableNudeContentControl();
-								setNudeContentDescription( "${eco:translate('The photo category can contains nude content')}" );
-							} else {
-								disableNudeContentControl();
-								uncheckNudeContentControl();
-								setNudeContentDescription( "${eco:translate('The photo category can not contains nude content')}" );
-							}
-
-							function genreCanHaveNudeContent( genreId ) {
-								return containsValue( genresCanHaveNudeContent, genreId );
-							}
-
-							function genreHaveNudeContent( genreId ) {
-								return containsValue( genresHaveNudeContent, genreId );
-							}
-
-							function checkNudeContentControl() {
-								$( "#${containsNudeContentControl}" ).attr( 'checked', 'checked' );
-							}
-
-							function uncheckNudeContentControl() {
-								$( "#${containsNudeContentControl}" ).removeAttr( 'checked' );
-							}
-
-							function containsValue( array, value ) {
-								for ( var i = 0; i < array.length; i++ ) {
-									if ( array[i] == value ) {
-										return true;
-									}
-								}
-								return false;
-							}
-						}
-
-						function forceCheckAnonymousPostingControl() {
-							checkAnonymousPostingControl();
-							disableAnonymousPostingControl();
-						}
-
-						function checkAnonymousPostingControl() {
-							$( "#${anonymousPostingControl}" ).attr( 'checked', 'checked' );
-						}
-
-						function uncheckAnonymousPostingControl() {
-							$( "#${anonymousPostingControl}" ).removeAttr( 'checked' );
-						}
-
-						function enableNudeContentControl() {
-							$( "#${containsNudeContentControl}" ).removeAttr( 'disabled' );
-						}
-
-						function disableNudeContentControl() {
-							$( "#${containsNudeContentControl}" ).attr( 'disabled', 'disabled' );
-						}
-
-						function enableAnonymousPostingControl() {
-							$( "#${anonymousPostingControl}" ).removeAttr( 'disabled' );
-						}
-
-						function disableAnonymousPostingControl() {
-							$( "#${anonymousPostingControl}" ).attr( 'disabled', 'disabled' );
-						}
-
-						function setNudeContentDescription( text ) {
-							$( "#nudeContentDescription" ).html( text );
-						}
-
-						function clearAnonymousDescription() {
-							$( "#anonymousDescription" ).text( '' );
-						}
-
-						function appendAnonymousDescription( text ) {
-							$( "#anonymousDescription" ).append( text );
-						}
-					});
-				</script>
-
 				<table:tredit>
 					<a name="photo-category" />
 					<table:tdtext text_t="Photo edit: Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
 
 					<table:tddata>
-						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24" onclick="performPhotoCategoryChange();"/>
+						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24"/>
 					</table:tddata>
 				</table:tredit>
 				<%-- / Genres --%>
@@ -295,7 +162,7 @@
 
 				<%-- Nude content --%>
 				<table:tredit>
-					<table:tdtext text_t="Contains nude content" labelFor="${containsNudeContentControl}"/>
+					<table:tdtext text_t="Contains nude content" labelFor="containsNudeContent1"/>
 
 					<table:tddata>
 						<form:checkbox path="photoEditDataModel.containsNudeContent"/>
@@ -357,7 +224,7 @@
 
 				<%-- Anonymous Posting --%>
 				<table:tredit>
-					<table:tdtext text_t="Anonymous posting" labelFor="${anonymousPostingControl}"/>
+					<table:tdtext text_t="Anonymous posting" labelFor="anonymousPosting1"/>
 
 					<table:tddata>
 						<c:if test="${not isNew}">
@@ -443,13 +310,13 @@
 				</table:tredit>
 				<%-- / Photo's albums --%>
 
-				<table:trok text_t="${isNew ? 'Next >>' : 'Save'}" onclick="return isGenreSelected();"/>
+				<table:trok text_t="${isNew ? 'Next >>' : 'Save'}" onclick="showUIMessage_InformationMessage_ManualClosing( 'There is more easilly to rewrite this page from scrach then trying to refactor the legasy code...' )"/>
 
 			</table:table>
 
-		</eco:form>
+		<%--</eco:form>--%>
 
-		<script type="text/javascript">
+		<%--<script type="text/javascript">
 
 			function isGenreSelected() {
 				$( '#${photoGenreIdControl}' ).removeClass( 'invalid' );
@@ -466,7 +333,7 @@
 
 				return true;
 			}
-		</script>
+		</script>--%>
 
 		<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
 
