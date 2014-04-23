@@ -259,8 +259,15 @@
 
 							<c:if test="${isJobFinishedWithAnyResult}">
 
+								<c:set var="jobInfoTitle" value="<b>${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}</b><br /><br />"/>
+								<c:set var="parametersDescription" value="${jobExecutionHistoryEntry.parametersDescription}<br /><br />"/>
+								<c:if test="${not empty jobExecutionHistoryEntry.jobMessage}">
+									<c:set var="jobMessage" value="${jobExecutionHistoryEntry.jobMessage}<br /><br />"/>
+								</c:if>
+								<c:set var="performedText" value="${eco:translate2('Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
+
 								<c:set var="jobInformation" value="${jobInfoTitle}${parametersDescription}${jobMessage}${performedText}"/>
-								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( \"${jobInformation}\" );"/>
+								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( 'TODO: find a way to pass dig text as parameter<br />${performedText}' );"/> <%-- TODO: pass ${jobInformation} --%>
 
 								<c:set var="bgColor" value="#CCE6FF"/>
 								<c:set var="fontColor" value="navy"/>
@@ -271,16 +278,6 @@
 									<c:set var="fontColor" value="#AA0000"/>
 									<c:set var="icon" value="error32.png"/>
 								</c:if>
-
-								<c:set var="jobInfoTitle" value="<b>${eco:translate(jobExecutionHistoryEntry.savedJobType.name)}</b><br /><br />"/>
-								<c:set var="parametersDescription" value="${jobExecutionHistoryEntry.parametersDescription}<br /><br />"/>
-								<c:if test="${not empty jobExecutionHistoryEntry.jobMessage}">
-									<c:set var="jobMessage" value="${jobExecutionHistoryEntry.jobMessage}<br /><br />"/>
-								</c:if>
-								<c:set var="performedText"
-									   value="${eco:translate2('Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
-
-								<%--<tags:message id="jobInfoDiv_${jobEntryId}" title_t="Job execution info" bgColor="${bgColor}" fontColor="${fontColor}" icon="${icon}" messageText="${jobInformation}"/>--%>
 
 							</c:if>
 						</table:tdunderlined>
