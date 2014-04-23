@@ -32,6 +32,7 @@ var require = {
 		<%--, jscal2_lang: "lib/JSCal2-1.9/js/lang/en"--%>
 
 		, ui_messages: "ui_messages"
+		, toastmessage: "lib/toastmessage/javascript/jquery.toastmessage"
 	},
 
 	shim: {

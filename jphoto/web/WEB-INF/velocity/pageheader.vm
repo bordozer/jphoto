@@ -27,6 +27,7 @@
 
 	<link rel="stylesheet" href="$baseUrl/js/lib/fg.menu/fg.menu.css" type="text/css"/>
 
+	<link rel="stylesheet" href="$baseUrl/js/lib/toastmessage/resources/css/jquery.toastmessage.css" type="text/css"/>
 
 	<style type="text/css">
 		.language {

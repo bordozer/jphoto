@@ -75,7 +75,7 @@
 
 <script type="text/javascript">
 	function showAvatarInFullSize() {
-		var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, overlayCSS:{background: 'black',opacity: .70} };
-		showDiv( '${fullAvatarDivId}', parameters, 0 );
+//		var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, overlayCSS:{background: 'black',opacity: .70} };
+		showMessage_CustomDiv( '${fullAvatarDivId}' );
 	}
 </script>

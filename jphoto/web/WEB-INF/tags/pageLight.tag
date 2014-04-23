@@ -26,8 +26,6 @@
 </head>
 <body>
 
-	<tags:messageDivs />
-
 	<script type="text/javascript">
 		var jsonRPC;
 		require( ['jsonrpc'], function() {

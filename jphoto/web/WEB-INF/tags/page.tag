@@ -27,22 +27,6 @@
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
-		require( ['jquery'], function( $ ) {
-
-			function fadeoutAndCloseMessageBox( divId ) {
-				var fadeOutTime = 400;
-				$( "#" + divId ).fadeOut( fadeOutTime, "linear" );
-
-				setTimeout( function () {
-					closeMessageBox( divId )
-				}, fadeOutTime );
-			}
-
-			function closeMessageBox( divId ) {
-				$( '#' + divId ).trigger( 'close' );
-			}
-		});
-
 		function showUIMessage_Notification( messageText ) {
 			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
 				ui_messages.showUIMessage_Notification( messageText );
@@ -72,9 +56,13 @@
 				ui_messages.showUIMessage_Error( messageText );
 			} );
 		}
-	</script>
 
-	<tags:messageDivs />
+		function fadeoutAndCloseMessageBox( divId ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
+				ui_messages.fadeoutAndCloseMessageBox( divId );
+			} );
+		}
+	</script>
 
 	<div id="sendPrivateMessageToUserDivId" title="..." style="display: none;">
 		<html:textarea inputId="privateMessageTextId" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />

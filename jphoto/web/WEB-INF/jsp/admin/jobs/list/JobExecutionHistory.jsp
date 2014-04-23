@@ -258,7 +258,9 @@
 							</c:if>
 
 							<c:if test="${isJobFinishedWithAnyResult}">
-								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( ${jobEntryId} );"/>
+
+								<c:set var="jobInformation" value="${jobInfoTitle}${parametersDescription}${jobMessage}${performedText}"/>
+								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( \"${jobInformation}\" );"/>
 
 								<c:set var="bgColor" value="#CCE6FF"/>
 								<c:set var="fontColor" value="navy"/>
@@ -278,10 +280,7 @@
 								<c:set var="performedText"
 									   value="${eco:translate2('Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
 
-								<c:set var="jobInformation" value="${jobInfoTitle}${parametersDescription}${jobMessage}${performedText}"/>
-
-								<tags:message id="jobInfoDiv_${jobEntryId}" title_t="Job execution info" bgColor="${bgColor}" fontColor="${fontColor}" icon="${icon}"
-											  messageText="${jobInformation}"/>
+								<%--<tags:message id="jobInfoDiv_${jobEntryId}" title_t="Job execution info" bgColor="${bgColor}" fontColor="${fontColor}" icon="${icon}" messageText="${jobInformation}"/>--%>
 
 							</c:if>
 						</table:tdunderlined>
@@ -324,11 +323,8 @@
 <tags:paging showSummary="true"/>
 
 <script type="text/javascript">
-	function showJobMessage( jobId ) {
-		var divId = 'jobInfoDiv_' + jobId;
-		var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, onLoad:function () {
-		} };
-		showDiv( divId, parameters );
+	function showJobMessage( jobInformation ) {
+		showUIMessage_InformationMessage_ManualClosing( jobInformation );
 	}
 </script>
 
