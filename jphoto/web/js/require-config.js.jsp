@@ -15,7 +15,6 @@ var require = {
 
 		, jsonrpc: "lib/jsonrpc"
 
-		, jquery_alerts: "lib/jalert/jquery.alerts" <%-- TODO: IS it used somewhere? --%>
 		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>
 
 		, context_menu: "lib/fg.menu/fg.menu"
@@ -45,9 +44,6 @@ var require = {
 		},
 		jquery: {
 			exports: '$'
-		},
-		jquery_alerts: {
-			deps: [ 'jquery' ]
 		},
 		jquery_ui: {
 			deps: [ 'jquery' ]

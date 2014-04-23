@@ -17,7 +17,7 @@
 					var fieldErrorMessage = "";
 					<c:forEach var="error" items="${bindingResult.fieldErrors}" varStatus="status">
 						$( "[name='${error.field}']" ).addClass( "invalid" );
-						fieldErrorMessage += "<div class=\"jalert\">${error.code}</div>";
+						fieldErrorMessage += "<div class=\"spring-error-highlight\">${error.code}</div>";
 					</c:forEach>
 					fieldErrorMessage += "";
 
@@ -28,7 +28,7 @@
 					var generalErrorMessage = "";
 
 					<c:forEach var="error" items="${bindingResult.allErrors}" varStatus="status">
-						generalErrorMessage += "<div class=\"jalert\">${error.code}: ${error.defaultMessage}</div>";
+						generalErrorMessage += "<div class=\"spring-error-highlight\">${error.code}: ${error.defaultMessage}</div>";
 					</c:forEach>
 
 					showUIMessage_Error( generalErrorMessage );

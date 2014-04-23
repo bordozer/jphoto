@@ -13,8 +13,6 @@
 
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/jquery/css/smoothness/jquery-ui-1.10.4.custom.css"/>
 
-##	<link rel="stylesheet" href="$baseUrl/js/lib/jalert/jquery.alerts.css" type="text/css"/>
-
 	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/jscal2.css" type="text/css"/>
 	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/border-radius.css" type="text/css"/>
 	<link rel="stylesheet" href="$baseUrl/js/lib/JSCal2-1.9/css/steel/steel.css" type="text/css"/>
