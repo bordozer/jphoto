@@ -103,60 +103,41 @@
 
 
 	<c:if test="${isSuperAdmin}">
-		<c:set var="lockUserDivId" value="lockUserDivId" />
-		<c:set var="lockUserIFrameId" value="lockUserIFrame" />
 
-		<div id="${lockUserDivId}" title="..." style="display: none;">
-			<iframe id="${lockUserIFrameId}" src="" width="98%" height="98%" style="border: none;"></iframe>
+		<div id="lockUserDivId" title="..." style="display: none;">
+			<iframe id="lockUserIFrame" src="" width="98%" height="98%" style="border: none;"></iframe>
 		</div>
 
 		<script type="text/javascript">
 
 			require( ['jquery', 'jquery_ui'], function( $ ) {
-
 				$( function () {
-					$( "#${lockUserDivId}" ).dialog( {
-													height:500
-													, width:800
-													, modal:true
-													, autoOpen:false
-												 } );
+					$( "#lockUserDivId" ).dialog( {
+						height:500
+						, width:800
+						, modal:true
+						, autoOpen:false
+					 } );
 				} );
-
-				function adminLockUser( userId, userName ) {
-
-					var url = "${eco:baseAdminUrl()}/members/" + userId + "/lock/";
-					$( '#${lockUserIFrameId}' ).attr( 'src', url );
-
-					$( "#${lockUserDivId}" )
-							.dialog( 'option', 'title', "${eco:translate('Lock user')}" + ' ' + userName + ' ( #' + userId + ' )' )
-							.dialog( 'option', 'buttons', {
-															Cancel:function () {
-																$( this ).dialog( "close" );
-															}
-														} )
-							.dialog( "open" );
-				}
-
-				function adminPhotoNudeContentSet( photoId ) {
-					adminSetPhotoNudeContent( photoId, true );
-				}
-
-				function adminPhotoNudeContentRemove( photoId ) {
-					adminSetPhotoNudeContent( photoId, false );
-				}
-
-				function adminSetPhotoNudeContent( photoId, isNudeContent ) {
-					jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
-
-					// TODO: redraw photo preview
-					/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-						var photoListId = 1;
-						var element = $( '.photo-container-' + 1 +'-' + photoId );
-						photoListEntry( photoId, photoListId, true, '${eco:baseUrl()}', element );
-					} );*/
-				}
 			});
+
+			function adminLockUser( userId, userName ) {
+				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+					adminFunctions.adminLockUser( userId, userName );
+				} );
+			}
+
+			function adminPhotoNudeContentSet( photoId ) {
+				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+					adminFunctions.adminPhotoNudeContentSet( photoId, jsonRPC );
+				} );
+			}
+
+			function adminPhotoNudeContentRemove( photoId ) {
+				require( [ 'jquery', '/js/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+					adminFunctions.adminPhotoNudeContentRemove( photoId, jsonRPC );
+				} );
+			}
 		</script>
 
 		<script type="text/javascript" src="${eco:baseUrl()}/js/translationsReload.jsp"></script>
