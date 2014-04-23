@@ -177,7 +177,7 @@
 						} else {
 							enableCommentText();
 							textareaInfo.html( '' );
-							<%--showInformationMessage( '${eco:translate( "You can add comments again" )}' ); --%> <%-- TODO: message that commenting is accessible--%>
+							<%--showUIMessage_Information( '${eco:translate( "You can add comments again" )}' ); --%> <%-- TODO: message that commenting is accessible--%>
 						}
 
 					}, 1000 );

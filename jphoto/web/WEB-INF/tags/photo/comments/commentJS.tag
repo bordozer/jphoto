@@ -35,7 +35,7 @@
 	function showMessageAboutDelayToNextComment() {
 		var userDelayToNextComment = jsonRPC.ajaxService.getUserDelayToNextCommentAjax( ${loggedUser.id} );
 		userDelayToNextComment = Math.round( userDelayToNextComment / 1000 );
-		showInformationMessage( "${eco:translate('You can leave a comment after')}" + ' ' + userDelayToNextComment + ' ' + "${eco:translate('second(s)')}" );
+		showUIMessage_Information( "${eco:translate('You can leave a comment after')}" + ' ' + userDelayToNextComment + ' ' + "${eco:translate('second(s)')}" );
 	}
 	function editComment( commentId ) {
 
@@ -74,7 +74,7 @@
 
 		var beingEditedCommentId = $( '#${beingEditedCommentIdFormControl}' ).val();
 		if ( beingEditedCommentId == commentId ) {
-			showInformationMessage( "${eco:translate('You can not delete a comment which you are editing now')}" );
+			showUIMessage_Information( "${eco:translate('You can not delete a comment which you are editing now')}" );
 			return;
 		}
 

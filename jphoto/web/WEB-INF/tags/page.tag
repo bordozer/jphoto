@@ -55,6 +55,12 @@
 				messages.showUIMessage_InformationMessage_ManualClosing( messageText );
 			} );
 		}
+
+		function showUIMessage_Information( messageText ) {
+			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+				messages.showUIMessage_Information( messageText );
+			} );
+		}
 	</script>
 
 	<tags:messageDivs />

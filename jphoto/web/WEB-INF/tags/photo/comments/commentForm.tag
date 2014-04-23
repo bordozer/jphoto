@@ -118,7 +118,7 @@
 			commentField.val( commentText );
 
 			if ( commentText.length < ${minCommentLength} ) {
-				showInformationMessage( "${eco:translate2('Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
+				showUIMessage_Information( "${eco:translate2('Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
 				return false;
 			}
 

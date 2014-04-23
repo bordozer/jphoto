@@ -31,7 +31,7 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 				showMessage( divId, message, parameters );
 			},
 
-			showUIMessage_Information: function ( messageText ) { //showInformationMessage
+			showUIMessage_Information: function ( messageText ) {
 				var divId = 'infoMessageDiv';
 				showMessage( divId, message, parameters, messageTimeout );
 			},
