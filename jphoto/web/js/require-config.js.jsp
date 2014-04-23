@@ -16,6 +16,7 @@ var require = {
 		, jsonrpc: "/js/lib/jsonrpc"
 
 		, jquery_alerts: "lib/jalert/jquery.alerts" <%-- TODO: IS it used somewhere? --%>
+		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>
 
 		, context_menu: "lib/fg.menu/fg.menu"
 
