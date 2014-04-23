@@ -267,7 +267,8 @@
 								<c:set var="performedText" value="${eco:translate2('Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
 
 								<c:set var="jobInformation" value="${jobInfoTitle}${parametersDescription}${jobMessage}${performedText}"/>
-								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( 'TODO: find a way to pass dig text as parameter<br />${performedText}' );"/> <%-- TODO: pass ${jobInformation} --%>
+								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( ${jobEntryId} );"/> <%-- TODO: pass ${jobInformation} --%>
+								<div id="job-execution-log-entry-${jobEntryId}" style="display: none;">${jobInformation}</div>
 
 								<c:set var="bgColor" value="#CCE6FF"/>
 								<c:set var="fontColor" value="navy"/>
@@ -320,8 +321,10 @@
 <tags:paging showSummary="true"/>
 
 <script type="text/javascript">
-	function showJobMessage( jobInformation ) {
-		showUIMessage_InformationMessage_ManualClosing( jobInformation );
+	function showJobMessage( divId ) {
+		require( [ 'jquery' ], function ( $ ) {
+			showUIMessage_FromCustomDiv( $( "#job-execution-log-entry-" + divId ) );
+		});
 	}
 </script>
 

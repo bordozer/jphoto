@@ -57,9 +57,9 @@
 			} );
 		}
 
-		function fadeoutAndCloseMessageBox( divId ) {
+		function showUIMessage_FromCustomDiv( element ) {
 			require( [ 'jquery', 'ui_messages' ], function ( $, ui_messages ) {
-				ui_messages.fadeoutAndCloseMessageBox( divId );
+				ui_messages.showUIMessage_FromCustomDiv( element );
 			} );
 		}
 	</script>

@@ -20,6 +20,10 @@ define( [ 'jquery', 'noty', 'toastmessage' ], function ( $ ) {
 				$().toastmessage( 'showErrorToast', messageText );
 			},
 
+			showUIMessage_FromCustomDiv: function ( element ) {
+				$().toastmessage( 'showNoticeToast', element.html() );
+			},
+
 			showUIMessage_Notification: function ( messageText ) {
 				var n = noty( {
 					text: messageText
