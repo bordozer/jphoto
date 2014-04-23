@@ -140,7 +140,7 @@
 					var element = $( this );
 					if ( element.attr( 'id' ) != id && votingCategory.val() != 0 && element.val() == votingCategory.val() ) {
 						var optionText = $( "option[value='" + votingCategory.val() + "']", votingCategory ).text();
-						showWarningMessage( "'" + optionText + "' ${eco:translate('is duplicated value')}" );
+						showUIMessage_Warning( "'" + optionText + "' ${eco:translate('is duplicated value')}" );
 						hasErrors = true;
 					}
 				} );
@@ -173,7 +173,7 @@
 			function submitVotingForm() {
 				var hasErrors = validateVotingCategories();
 				if ( hasErrors ) {
-					showWarningMessage( '${eco:translate('Please, select at least one category')}' );
+					showUIMessage_Warning( '${eco:translate('Please, select at least one category')}' );
 					return false;
 				}
 
@@ -192,7 +192,7 @@
 
 							},
 							error: function () {
-								showErrorMessage( '${eco:translate('Voting error')}' );
+								showUIMessage_Error( '${eco:translate('Voting error')}' );
 							}
 						} ).done( function () {
 					refreshPhotoInfo();

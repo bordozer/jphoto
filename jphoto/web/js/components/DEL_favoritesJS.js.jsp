@@ -171,7 +171,7 @@ define( [ 'jquery' ], function ( $ ) {
 		}
 
 		if ( !ajaxResultDTO.successful ) {
-			showErrorMessage( ajaxResultDTO.message );
+			showUIMessage_Error( ajaxResultDTO.message );
 			return false;
 		}
 
@@ -181,13 +181,13 @@ define( [ 'jquery' ], function ( $ ) {
 	function validateAndShowErrorMessage( favoriteEntry, isEntryInFavorites, isAddingFuncCalled ) {
 
 		if ( isAddingFuncCalled && isEntryInFavorites ) {
-			showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+			showUIMessage_Warning( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is already in")} " + favoriteEntry.getFavoriteEntryTypeName() );
 			return false;
 		}
 
 		var isRemoving = !isAddingFuncCalled;
 		if ( isRemoving && !isEntryInFavorites ) {
-			showWarningMessage( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
+			showUIMessage_Warning( "'" + favoriteEntry.getFavoriteEntryName() + "' ${eco:translate("add/remove bookmark: is NOT in")} " + favoriteEntry.getFavoriteEntryTypeName() );
 			return false;
 		}
 

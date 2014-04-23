@@ -16,8 +16,7 @@
 				</c:forEach>
 				fieldErrorMessage += "";
 
-				<%--jAlert( fieldErrorMessage, '${eco:translate( "Alert" )}' );--%>
-				showErrorMessage( fieldErrorMessage );
+				showUIMessage_Error( fieldErrorMessage );
 
 //				jQuery(".invalid:first").focus(); // Focusing does not work for some reason
 			</c:if>
@@ -32,7 +31,7 @@
 					</c:if>--%>
 				</c:forEach>
 
-				showErrorMessage( generalErrorMessage );
+				showUIMessage_Error( generalErrorMessage );
 			</c:if>
 
 		});

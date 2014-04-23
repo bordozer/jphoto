@@ -11,7 +11,7 @@
 						$( "#user_by_genre_voting_" + genreId ).html( response );
 					},
 					error:function () {
-						showErrorMessage( '${eco:translate('Error!')}' );
+						showUIMessage_Error( '${eco:translate('Error!')}' );
 					}
 				} );
 	}
@@ -25,7 +25,7 @@
 						$( "#user_by_genre_voting_" + genreId ).html( response );
 					},
 					error:function () {
-						showErrorMessage( '${eco:translate('Error!')}' );
+						showUIMessage_Error( '${eco:translate('Error!')}' );
 					}
 				} );
 	}

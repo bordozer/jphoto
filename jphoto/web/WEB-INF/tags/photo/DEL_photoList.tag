@@ -184,13 +184,13 @@
 			function submitForm() {
 				var groupOperationSelect = $( '#${controlPhotoGroupOperationId}' );
 				if ( groupOperationSelect.val() == '' || groupOperationSelect.val() == -1 ) {
-					showErrorMessage( '${eco:translate("Photo list: Please, select group operation first")}' );
+					showUIMessage_Error( '${eco:translate("Photo list: Please, select group operation first")}' );
 					return false;
 				}
 
 				var controlSelectedPhotoIds = $( '#${controlSelectedPhotoIds}:checked' );
 				if ( controlSelectedPhotoIds.length == 0 ) {
-					showErrorMessage( '${eco:translate("Photo list: Please, select at least one photo first")}' );
+					showUIMessage_Error( '${eco:translate("Photo list: Please, select at least one photo first")}' );
 					return false;
 				}
 

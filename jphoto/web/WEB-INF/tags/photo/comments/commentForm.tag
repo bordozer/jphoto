@@ -155,7 +155,7 @@
 							refreshPhotoInfo();
 						},
 						error:function () {
-							showErrorMessage( '${eco:translate('Error saving message')}' );
+							showUIMessage_Error( '${eco:translate('Error saving message')}' );
 							enableCommentText();
 						}
 					} );

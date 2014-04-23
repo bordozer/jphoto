@@ -81,7 +81,7 @@
 		if ( confirmDeletion( "${eco:translate('Delete comment?')}" ) ) {
 			var commentDTO = jsonRPC.ajaxService.markCommentAsDeletedAjax( ${loggedUser.id}, commentId );
 			if( commentDTO.errorMessage != undefined ) {
-				showErrorMessage( commentDTO.errorMessage );
+				showUIMessage_Error( commentDTO.errorMessage );
 				return;
 			}
 			$( '#photoCommentText_' + commentId ).html( commentDTO.commentText );

@@ -133,8 +133,7 @@
 											renderComment( index + 1 ); // TOD
 										},
 										error:function () {
-											<%--showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );--%>
-											console.log( 'error executing ajax request' );
+											showUIMessage_Error( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
 										}
 									} );
 						}
@@ -239,7 +238,7 @@
 
 								},
 								error:function () {
-									showErrorMessage( '${eco:translate('Error getting photo info')}' );
+									showUIMessage_Error( '${eco:translate('Error getting photo info')}' );
 								}
 							} );
 				}

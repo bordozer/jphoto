@@ -61,6 +61,18 @@
 				messages.showUIMessage_Information( messageText );
 			} );
 		}
+
+		function showUIMessage_Warning( messageText ) {
+			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+				messages.showUIMessage_Warning( messageText );
+			} );
+		}
+
+		function showUIMessage_Error( messageText ) {
+			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+				messages.showUIMessage_Error( messageText );
+			} );
+		}
 	</script>
 
 	<tags:messageDivs />
@@ -101,7 +113,7 @@
 															var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
 
 															if ( ! ajaxResultDTO.successful ) {
-																showErrorMessage( ajaxResultDTO.message );
+																showUIMessage_Error( ajaxResultDTO.message );
 																return false;
 															}
 

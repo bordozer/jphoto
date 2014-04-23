@@ -28,32 +28,32 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 
 			showUIMessage_InformationMessage_ManualClosing: function ( messageText ) {
 				var divId = 'infoMessageDiv';
-				showMessage( divId, message, parameters );
+				showMessage( divId, messageText, parameters );
 			},
 
 			showUIMessage_Information: function ( messageText ) {
 				var divId = 'infoMessageDiv';
-				showMessage( divId, message, parameters, messageTimeout );
+				showMessage( divId, messageText, parameters, messageTimeout );
 			},
 
-			showUIMessage_Success: function ( messageText ) { //showSuccessMessage
+			/*showUIMessage_Success: function ( messageText ) { //showSuccessMessage
 				var divId = 'successMessageDiv';
-				showMessage( divId, message, parameters, messageTimeout );
-			},
+				showMessage( divId, messageText, parameters, messageTimeout );
+			},*/
 
-			showUIMessage_Alert: function ( messageText ) { //showAlertMessage
+			/*showUIMessage_Alert: function ( messageText ) {
 				var divId = 'alertMessageDiv';
-				showMessage( divId, message, parameters );
-			},
+				showMessage( divId, messageText, parameters );
+			},*/
 
-			showUIMessage_Warning: function ( messageText ) { //showWarningMessage
+			showUIMessage_Warning: function ( messageText ) {
 				var divId = 'warningMessageDiv';
-				showMessage( divId, message, parameters );
+				showMessage( divId, messageText, parameters );
 			},
 
-			showUIMessage_Error: function ( messageText ) { //showErrorMessage
+			showUIMessage_Error: function ( messageText ) {
 				var divId = 'errorMessageDiv';
-				showMessage( divId, message, parameters );
+				showMessage( divId, messageText, parameters );
 			},
 
 			showUIMessage_Notification: function ( messageText ) {

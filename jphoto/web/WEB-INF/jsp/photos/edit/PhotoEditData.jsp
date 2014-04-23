@@ -458,7 +458,7 @@
 				if ( genreId == null ) {
 					$( '#${photoGenreIdControl}' ).addClass( 'invalid' );
 					document.location.href = document.location + '#photo-category';
-					showErrorMessage( "${eco:translate('Photo uploading validation message: Select genre')}" );
+					showUIMessage_Error( "${eco:translate('Photo uploading validation message: Select genre')}" );
 					return false;
 				}
 

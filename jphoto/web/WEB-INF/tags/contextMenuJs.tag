@@ -80,7 +80,7 @@
 														var ajaxResultDTO = jsonRPC.ajaxService.sendComplaintMessageAjax( complaintDTO );
 
 														if ( ! ajaxResultDTO.successful ) {
-															showErrorMessage( ajaxResultDTO.message );
+															showUIMessage_Error( ajaxResultDTO.message );
 															return false;
 														}
 
