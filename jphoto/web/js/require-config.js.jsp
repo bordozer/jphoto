@@ -32,8 +32,10 @@ var require = {
 		, jscal2_unicode_letter: "lib/JSCal2-1.9/js/unicode-letter"
 		, jscal2_lang: "lib/JSCal2-1.9/js/lang/en"
 
-		, ui_messages: "ui_messages"
 		, toastmessage: "lib/toastmessage/javascript/jquery.toastmessage"
+
+		, ui_messages: "ui_messages"
+		, mass_checker: "components/mass-checker"
 	},
 
 	shim: {
@@ -66,12 +68,14 @@ var require = {
 		superfish_hoverIntent: {
 			deps: [ 'superfish' ]
 		},
+
 		noty: {
 			deps: [ 'jquery' ]
 		},
 		noty_default: {
 			deps: [ 'noty' ]
 		},
+
 		jscal2: {
 			deps: [ 'jquery' ]
 		},
@@ -80,6 +84,13 @@ var require = {
 		},
 		jscal2_lang: {
 			deps: [ 'jscal2' ]
+		},
+
+		ui_messages: {
+			deps: [ 'jquery' ]
+		},
+		mass_checker: {
+			deps: [ 'jquery' ]
 		}
 	},
 

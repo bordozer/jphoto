@@ -228,7 +228,7 @@
 								<div style="float: left; width: 20%;">
 									${eco:translate('Import photos from photosight categories')}
 									<br />
-									<js:checkBoxChecker namePrefix="photosightCategoriesSorted" isChecked="true" />
+									<js:checkBoxChecker namePrefix="photosightCategories" initiallyChecked="true" />
 									<br />
 									<form:checkboxes path="${photosightCategoriesControl}" items="${photosightCategoriesSorted}" itemValue="id" itemLabel="name" delimiter="<br />" />
 								</div>

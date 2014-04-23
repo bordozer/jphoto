@@ -5,51 +5,77 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
 <%@ attribute name="namePrefix" type="java.lang.String" required="true" %>
-<%@ attribute name="uniqueId" type="java.lang.String" required="false" %>
-<%@ attribute name="isChecked" type="java.lang.Boolean" required="false" %>
+<%--<%@ attribute name="checkboxClass" type="java.lang.String" required="false" %>--%>
+<%--<%@ attribute name="container" type="java.lang.String" required="true" %>--%>
+<%@ attribute name="initiallyChecked" type="java.lang.Boolean" required="false" %>
 
-<c:set var="iconId" value="checkAllIcon${uniqueId}"/>
+<%--<c:set var="iconId" value="checkAllIcon${checkboxClass}"/>--%>
 
-<html:img id="${iconId}" src="icons16/notchecked.png" width="16" height="16" onclick="checkAll${uniqueId}();" alt="${eco:translate('Invert selection')}" />
+<img id="mass-selector-icon-${namePrefix}" width="16" height="16" />
 
 <script type="text/javascript">
 
+
+	require( [ 'jquery', 'mass_checker' ], function ( $, mass_checker ) {
+
+		var massChecker = mass_checker.getMassChecker();
+
+		console.log( 'MassChecker: ',  massChecker );
+
+		<c:if test="${initiallyChecked}">
+			massChecker.registerSelected( "${namePrefix}", "${eco:imageFolderURL()}" );
+		</c:if>
+
+		<c:if test="${not initiallyChecked}">
+			massChecker.registerUnselected( "${namePrefix}", "${eco:imageFolderURL()}" );
+		</c:if>
+
+	});
+
+	/*var func${checkboxClass} = define( [ 'jquery' ], function( $ ) {
+
+		var isChecked = ${!initiallyChecked};
+
+		return {
+			switchIcon: function ( icon ) {
+				if ( isChecked ) {
+					icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
+					checkNone${checkboxClass}();
+				} else {
+					icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
+					checkAll${checkboxClass}();
+				}
+				isChecked = !isChecked;
+			},
+
+			checkAll${checkboxClass}: function() {
+				$( "[name*='${namePrefix}']" ).each( function () {
+					$( this ).attr( "checked", "checked" );
+				} );
+			},
+
+			checkNone${checkboxClass}: function () {
+				$( "[name*='${namePrefix}']" ).each( function () {
+					$( this ).removeAttr( 'checked' );
+				} );
+			}
+		};
+	});
+
 	require( [ 'jquery' ], function( $ ) {
-
-		var isChecked = ${!isChecked};
-
 		$( document ).ready( function() {
 			var icon = $( '#${iconId}' );
-			icon.bind( 'click', checkAll${uniqueId} );
+			icon.bind( 'click', checkAll${checkboxClass} );
 	//		switchIcon( icon );
 
 			icon.click( function() {
-				switchIcon( icon );
+				func${checkboxClass}.switchIcon( icon );
 			});
 		});
-
-		function switchIcon( icon ) {
-			if ( isChecked ) {
-				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/uncheckAll.png' );
-				checkNone${uniqueId}();
-			} else {
-				icon.attr( 'src', '${eco:imageFolderURL()}/icons16/checkAll.png' );
-				checkAll${uniqueId}();
-			}
-			isChecked = !isChecked;
-		}
-
-		function checkAll${uniqueId}() {
-			$( "[name*='${namePrefix}']" ).each( function () {
-				$( this ).attr( "checked", "checked" );
-			} );
-		}
-
-		function checkNone${uniqueId}() {
-			$( "[name*='${namePrefix}']" ).each( function () {
-				$( this ).removeAttr( 'checked' );
-			} );
-		}
 	});
+
+	function checkAll${checkboxClass}() {
+		func${checkboxClass}.checkAll${checkboxClass}();
+	}*/
 
 </script>
