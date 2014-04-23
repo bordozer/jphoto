@@ -129,7 +129,7 @@ define( [ 'jquery' ], function ( $ ) {
 					}
 					var message = favoriteEntry.getFavoriteEntryName() + m1 + favoriteEntry.getFavoriteEntryTypeName();
 
-					showMessage_Notify( message );
+					showUIMessage_Notification( message );
 				}
 			}
 

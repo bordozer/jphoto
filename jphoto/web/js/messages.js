@@ -25,42 +25,37 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 
 		return {
 
-			showInformationMessage: function () {
-				var divId = 'infoMessageDiv';
-				showMessage( divId, message, parameters, messageTimeout );
-			}
-
-			, showInformationMessageNoAutoClose: function () {
+			showUIMessage_InformationMessage_ManualClosing: function () { //showInformationMessageNoAutoClose
 				var divId = 'infoMessageDiv';
 				showMessage( divId, message, parameters );
-			}
+			},
 
-			, showSuccessMessage: function () {
+			showUIMessage_Information: function () { //showInformationMessage
+				var divId = 'infoMessageDiv';
+				showMessage( divId, message, parameters, messageTimeout );
+			},
+
+			showUIMessage_Success: function () { //showSuccessMessage
 				var divId = 'successMessageDiv';
 				showMessage( divId, message, parameters, messageTimeout );
-			}
+			},
 
-			, showAlertMessage: function () {
+			showUIMessage_Alert: function () { //showAlertMessage
 				var divId = 'alertMessageDiv';
 				showMessage( divId, message, parameters );
-			}
+			},
 
-			, showWarningMessage: function () {
+			showUIMessage_Warning: function () { //showWarningMessage
 				var divId = 'warningMessageDiv';
 				showMessage( divId, message, parameters );
-			}
+			},
 
-			, showErrorMessage: function () {
+			showUIMessage_Error: function () { //showErrorMessage
 				var divId = 'errorMessageDiv';
 				showMessage( divId, message, parameters );
-			}
+			},
 
-			, showMessage: function ( divId, message, params, autoCloseAfter ) {
-				$( "#" + divId + "_message" ).html( message );
-				showDiv( divId, params, autoCloseAfter );
-			}
-
-			, showMessage_Notify: function ( message ) {
+			showUIMessage_Notification: function ( message ) {
 				console.log( 'notifySuccessMessage' );
 				var n = noty( {
 					text: message

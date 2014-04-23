@@ -75,7 +75,7 @@
 					message = "${eco:translate('was removed from anonymous days')}";
 				}
 
-				showMessage_Notify( pickerDate + ' ' + message );
+				showUIMessage_Notification( pickerDate + ' ' + message );
 			}
 
 			function saveAnonymousDayOnServer( anonymousDay ) {
