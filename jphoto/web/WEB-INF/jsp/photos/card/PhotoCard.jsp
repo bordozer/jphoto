@@ -275,7 +275,7 @@
 
 		<script type="text/javascript">
 
-			/*require( [ 'jquery' ], function( $ ) {
+			require( [ 'jquery' ], function( $ ) {
 
 				var cropBox = '#photo_${photo.id}';
 				var jcrop_api;
@@ -314,7 +314,7 @@
 					cropDisable();
 				} );
 
-			});*/
+			});
 		</script>
 	</c:if>
 

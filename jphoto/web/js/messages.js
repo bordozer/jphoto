@@ -1,65 +1,64 @@
 
-var parameters = { closeClick:true, closeEsc:true, centered:true, showOverlay:true, onLoad:function () {} };
-var messageTimeout = 5000;
+require( [ 'jquery', 'noty' ], function( $, noty ) {
 
-function showInformationMessage( message ) {
-	var divId = 'infoMessageDiv';
-	showMessage( divId, message, parameters, messageTimeout );
-}
+	var parameters = { closeClick: true, closeEsc: true, centered: true, showOverlay: true, onLoad: function () {
+	} };
+	var messageTimeout = 5000;
 
-function showInformationMessageNoAutoClose( message ) {
-	var divId = 'infoMessageDiv';
-	showMessage( divId, message, parameters );
-}
+	function showInformationMessage( message ) {
+		var divId = 'infoMessageDiv';
+		showMessage( divId, message, parameters, messageTimeout );
+	}
 
-function showSuccessMessage( message ) {
-	var divId = 'successMessageDiv';
-	showMessage( divId, message, parameters, messageTimeout );
-}
+	function showInformationMessageNoAutoClose( message ) {
+		var divId = 'infoMessageDiv';
+		showMessage( divId, message, parameters );
+	}
 
-function showAlertMessage( message ) {
-	var divId = 'alertMessageDiv';
-	showMessage( divId, message, parameters );
-}
+	function showSuccessMessage( message ) {
+		var divId = 'successMessageDiv';
+		showMessage( divId, message, parameters, messageTimeout );
+	}
 
-function showWarningMessage( message ) {
-	var divId = 'warningMessageDiv';
-	showMessage( divId, message, parameters );
-}
+	function showAlertMessage( message ) {
+		var divId = 'alertMessageDiv';
+		showMessage( divId, message, parameters );
+	}
 
-//function showValidationDataErrorMessage( message ) {
-//	var divId = 'validationDataErrorMessageDiv';
-//	showMessage( divId, message, parameters );
-//}
+	function showWarningMessage( message ) {
+		var divId = 'warningMessageDiv';
+		showMessage( divId, message, parameters );
+	}
 
-function showErrorMessage( message ) {
-	var divId = 'errorMessageDiv';
-	showMessage( divId, message, parameters );
-}
+	//function showValidationDataErrorMessage( message ) {
+	//	var divId = 'validationDataErrorMessageDiv';
+	//	showMessage( divId, message, parameters );
+	//}
 
-function showMessage( divId, message, params, autoCloseAfter ) {
-	$( "#" + divId + "_message" ).html( message );
-	showDiv( divId, params, autoCloseAfter );
-}
+	function showErrorMessage( message ) {
+		var divId = 'errorMessageDiv';
+		showMessage( divId, message, parameters );
+	}
 
-function showDiv( divId, params, autoCloseAfter ) {
+	function showMessage( divId, message, params, autoCloseAfter ) {
+		$( "#" + divId + "_message" ).html( message );
+		showDiv( divId, params, autoCloseAfter );
+	}
 
-	/*$( "#" + divId ).attr( "data-lightbox", "divId" ); //.lightbox( params );
+	function showDiv( divId, params, autoCloseAfter ) {
 
-	if ( autoCloseAfter > 0 ) {
-		setTimeout( function () {
-			fadeoutAndCloseMessageBox( divId );
-		}, autoCloseAfter );
-	}*/
-}
+		/*$( "#" + divId ).attr( "data-lightbox", "divId" ); //.lightbox( params );
 
-function notifySuccessMessage( message ) {
-	var n = noty( {
-		text: message
-		, type: 'success'
-		, dismissQueue: true
-		, layout: 'bottomRight'
-		, theme: 'defaultTheme'
-		, timeout: messageTimeout
-	} );
-}
+		 if ( autoCloseAfter > 0 ) {
+		 setTimeout( function () {
+		 fadeoutAndCloseMessageBox( divId );
+		 }, autoCloseAfter );
+		 }*/
+	}
+
+	function notifySuccessMessage( message ) {
+		noty( {
+			text: message, type: 'success', dismissQueue: true, layout: 'bottomRight', theme: 'defaultTheme', timeout: messageTimeout
+		} );
+	}
+});
