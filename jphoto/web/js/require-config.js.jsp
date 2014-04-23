@@ -16,6 +16,7 @@ var require = {
 		, jsonrpc: "lib/jsonrpc"
 
 		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>
+		, jquery_progressbar: "lib/progressbar/jquery.progressbar"
 
 		, context_menu: "lib/fg.menu/fg.menu"
 
@@ -57,6 +58,9 @@ var require = {
 			deps: [ 'jquery' ]
 		},
 		superfish: {
+			deps: [ 'jquery' ]
+		},
+		jquery_progressbar: {
 			deps: [ 'jquery' ]
 		},
 		superfish_hoverIntent: {
