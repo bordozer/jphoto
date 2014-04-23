@@ -23,8 +23,9 @@ var require = {
 		, superfish_hoverIntent: "lib/superfish/js/hoverIntent"
 
 		, lightbox: "lib/lightbox/lightbox"
-		, noty: "lib/noty-2.2.2/js/noty/packaged/jquery.noty.packaged"
-		, noty_default: "lib/noty-2.2.2/js/noty/themes/default"
+
+		, noty: "lib/noty-2.2.2/jquery.noty.packaged"
+		, noty_default: "lib/noty-2.2.2/themes/default"
 
 		, jscal2: "lib/JSCal2-1.9/js/jscal2"
 		, jscal2_unicode_letter: "lib/JSCal2-1.9/js/unicode-letter"
