@@ -40,7 +40,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 			@Override
 			public String getMenuCommand() {
 				if( isAccessorInTheBlackListOfCommentAuthor() ) {
-					return String.format( "showInformationMessageNoAutoClose( '%s' )"
+					return String.format( "showUIMessage_InformationMessage_ManualClosing( '%s' )"
 						, translatorService.translate( "You are in the black list of $1. You can not reply.", getLanguage(), menuEntry.getCommentAuthor().getNameEscaped() ) );
 				}
 

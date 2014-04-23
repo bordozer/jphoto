@@ -26,7 +26,7 @@ define( [ 'jquery', 'noty' ], function ( $ ) {
 
 		return {
 
-			showUIMessage_InformationMessage_ManualClosing: function ( messageText ) { //showInformationMessageNoAutoClose
+			showUIMessage_InformationMessage_ManualClosing: function ( messageText ) {
 				var divId = 'infoMessageDiv';
 				showMessage( divId, message, parameters );
 			},

@@ -351,7 +351,7 @@
 	}
 
 	function showDeletedTaskInfo( scheduledTaskId ) {
-		showInformationMessageNoAutoClose( "${eco:translate('Scheduler task is not found. It mush have been deleted.')}" );
+		showUIMessage_InformationMessage_ManualClosing( "${eco:translate('Scheduler task is not found. It mush have been deleted.')}" );
 	}
 </script>
 

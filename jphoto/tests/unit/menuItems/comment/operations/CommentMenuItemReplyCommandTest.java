@@ -81,7 +81,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final String message = String.format( translated( "You are in the black list of %s. You can not reply." ), testData.getCommentAuthor().getNameEscaped() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT
 			, new CommentMenuItemReply( testData.getComment(), accessor, services ).getMenuItemCommand().getMenuCommand()
-			, String.format( "showInformationMessageNoAutoClose( '%s' )", message  ) );
+			, String.format( "showUIMessage_InformationMessage_ManualClosing( '%s' )", message  ) );
 	}
 
 	private ServicesImpl getServicesForTest( final User user, final Boolean isCommentAuthorNameInAnonymousPeriod ) {
