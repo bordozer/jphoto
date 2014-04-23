@@ -58,7 +58,6 @@
 <tags:page pageModel="${photoCardModel.pageModel}">
 
 	<tags:contextMenuJs />
-	<icons:favoritesJS/>
 
 	<div class="photoCardPhotoName">${photoNameEscaped}</div>
 

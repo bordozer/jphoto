@@ -21,7 +21,6 @@
 
 <tags:page pageModel="${photoCommentsListModel.pageModel}">
 
-	<icons:favoritesJS/>
 	<tags:contextMenuJs />
 
 	<c:set var="user" value="${photoCommentsListModel.user}" />

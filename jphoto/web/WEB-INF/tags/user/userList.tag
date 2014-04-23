@@ -14,8 +14,6 @@
 <%@ attribute name="userListDataMap" required="true" type="java.util.Map" %>
 <%@ attribute name="showEditIcons" required="true" type="java.lang.Boolean" %>
 
-<icons:favoritesJS />
-
 <c:set var="colspan" value="12" />
 
 <tags:contextMenuJs />

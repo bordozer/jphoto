@@ -26,8 +26,6 @@
 <c:set var="photoGroupOperationMenues" value="<%=photoList.getPhotoGroupOperationMenuContainer().getGroupOperationMenus()%>" />
 <c:set var="isGroupOperationEnabled" value="${not empty photoGroupOperationMenues}" />
 
-<icons:favoritesJS />
-
 <c:if test="${showPaging}">
 	<tags:paging showSummary="false"/>
 </c:if>

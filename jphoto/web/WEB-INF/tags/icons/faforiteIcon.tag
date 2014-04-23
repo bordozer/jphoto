@@ -12,7 +12,9 @@
 <%@ attribute name="isEntryInUserFavorites" required="true" type="java.lang.Boolean" %>
 <%@ attribute name="entryName" required="true" type="java.lang.String" %>
 
-<c:set var="currentUser" value="<%=EnvironmentContext.getCurrentUser()%>"/>
+<%-- TODO: implement icon loading here --%>
+
+<%--<c:set var="currentUser" value="<%=EnvironmentContext.getCurrentUser()%>"/>
 <c:set var="favoriteImagesFolrer" value="<%=FavoriteEntryType.FAVORITES_IMAGE_FOLDER%>"/>
 <c:set var="unique" value="<%=ApplicationContextHelper.getDateUtilsService().getCurrentTime().getTime()%>"/>
 <c:set var="jsId" value="${entryType.id}_${favoriteEntry.id}_${unique}"/>
@@ -50,5 +52,5 @@
 		});
 	});
 
-</script>
+</script>--%>
 

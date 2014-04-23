@@ -24,7 +24,6 @@
 <c:set var="isSuperAdminUser" value="<%=securityService.isSuperAdminUser( EnvironmentContext.getCurrentUserId() )%>"/>
 <c:set var="isLastUserActivityTime" value="<%=! dateUtilsService.isEmptyTime( lastUserActivityTime )%>"/>
 
-<icons:favoritesJS />
 <tags:contextMenuJs />
 
 <div class="user-card-block">

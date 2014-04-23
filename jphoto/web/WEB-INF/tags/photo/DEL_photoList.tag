@@ -45,8 +45,6 @@
 
 <eco:form action="${formAction}" formName="${groupOperationForm}">
 
-	<icons:favoritesJS />
-
 	<c:set var="photoCellWidth" value="300" />
 
 	<div class="floatleft">
