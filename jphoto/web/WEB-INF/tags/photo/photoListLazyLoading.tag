@@ -81,7 +81,7 @@
 		function renderPhotos( photosToRender ) {
 
 			require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-				for (var i = 0; i < photosToRender.length; i++) {
+				for ( var i = 0; i < photosToRender.length; i++ ) {
 					var photoId = photosToRender[i];
 					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
 					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.' + photoUniqueClass ) );

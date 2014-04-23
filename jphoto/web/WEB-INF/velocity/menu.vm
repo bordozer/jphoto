@@ -33,8 +33,8 @@
 
 
 <script type="text/javascript">
-	define( 'jquery', 'superfish', function( $, superfish ) {
-		jQuery( 'ul.sf-menu' ).superfish( {
+	require( [ 'jquery', 'superfish' ], function( $, superfish ) {
+		$( 'ul.sf-menu' ).superfish( {
 			delay:1, // one second delay on mouseout
 			animation:{opacity:'show', height:'show'}, // fade-in and slide-down animation
 			speed:'fast', // faster animation speed

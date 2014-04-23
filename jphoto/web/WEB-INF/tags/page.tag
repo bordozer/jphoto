@@ -23,7 +23,7 @@
 	<script type="text/javascript">
 
 		var jsonRPC;
-		define( 'jsonrpc', function( jsonrpc ) {
+		require( ['jsonrpc'], function( jsonrpc ) {
 			jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 		} );
 
@@ -52,8 +52,7 @@
 
 	<script type="text/javascript">
 
-		define( 'jquery', function( $ ) {
-
+		require( [ 'jquery', 'jquery_ui' ], function( $, ui ) {
 			$( function () {
 				$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
 												height:300
@@ -126,7 +125,7 @@
 
 		<script type="text/javascript">
 
-			define( 'jquery', function( $ ) {
+			require( ['jquery', 'jquery_ui'], function( $, ui ) {
 
 				$( function () {
 					$( "#${lockUserDivId}" ).dialog( {

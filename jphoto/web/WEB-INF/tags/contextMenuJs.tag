@@ -42,7 +42,7 @@
 	var complaintEntities = {<c:forEach var="complaintEntity" items="${complaintEntities}" varStatus="status"> '${complaintEntity.id}': "${eco:translate(complaintEntity.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 	var complaintReasonTypes = {<c:forEach var="complaintReasonType" items="${complaintReasonTypes}" varStatus="status"> '${complaintReasonType.id}': "${eco:translate(complaintReasonType.name)}" <c:if test="${not status.last}">, </c:if> </c:forEach> };
 
-	define( 'jquery', function( $ ) {
+	require( ['jquery', 'jquery_ui' ], function( $, ui ) {
 
 		$( function () {
 			$( "#${sendComplaintDivId}" ).dialog( {

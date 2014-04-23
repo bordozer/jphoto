@@ -11,7 +11,7 @@
 %>
 
 var jsonRPC;
-define( 'jsonrpc', function( jsonrpc ) {
+require( ['jsonrpc'], function( jsonrpc ) {
 	jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 } );
 

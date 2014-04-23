@@ -117,9 +117,10 @@
 
 					var rootComments = [ <c:forEach var="commentId" items="${photoCardModel.rootCommentsIds}" varStatus="status">${commentId}<c:if test="${not status.last}">, </c:if></c:forEach> ];
 
-					define( 'jquery', function( $ ) {
+					require( [ 'jquery' ], function ( $ ) {
 
 						function renderComment( index ) {
+
 							var commentId = rootComments[ index ];
 							if ( commentId == undefined ) {
 								return;
@@ -130,7 +131,7 @@
 										url:'${eco:baseUrl()}/photo/comment/' + commentId + "/",
 										success:function ( response ) {
 											$( '.${commentsEndAnchor}' ).before( response ); // response == /comments/view/PhotoComment.jsp
-											renderComment( index + 1 );
+											renderComment( index + 1 ); // TOD
 										},
 										error:function () {
 											<%--showErrorMessage( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );--%>
@@ -138,13 +139,10 @@
 										}
 									} );
 						}
-						return renderComment;
-					});
 
-					/*require( ['renderComment'], function( renderComment ) {
-						console.log( renderComment );
 						renderComment( 0 );
-					});*/
+					} );
+
 				</script>
 
 				<div class="${commentsEndAnchor}"></div>
