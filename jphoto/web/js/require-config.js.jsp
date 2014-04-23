@@ -13,7 +13,7 @@ var require = {
 		, backbone: "lib/front-end/backbone"
 		, text: "lib/front-end/text"
 
-		, jsonrpc: "/js/lib/jsonrpc"
+		, jsonrpc: "lib/jsonrpc"
 
 		, jquery_alerts: "lib/jalert/jquery.alerts" <%-- TODO: IS it used somewhere? --%>
 		, jquery_form: "lib/jquery/jquery.form" <%-- TODO: IS it used somewhere? --%>

@@ -10,31 +10,23 @@
 
 	<script type="text/javascript">
 
-		$( function () {
-			$( "#datepicker" ).datepicker( {
-											  inline:true
-											, firstDay:1
-											, showOtherMonths:true
-											, showWeek: true
-											, showButtonPanel: true
-											, changeMonth: true
-											, changeYear: true
-											, numberOfMonths: 1
-											, dayNamesMin:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-											, dateFormat: "mm/dd/yy"
-											, onSelect: showInfoAboutAnonymousDay
-											, beforeShowDay: highlightAnonymousDays
-//											, selectOtherMonths: true
-										   } );
-		} );
+		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang ) {
 
-		function showInfoAboutAnonymousDay( pickerDate ) {
-			if ( isAnonymousDay( pickerDate ) ) {
-				alert( convertDateToPrint( pickerDate ) + ' ${eco:translate('is anonymous day')}' );
-			} else {
-				alert( convertDateToPrint( pickerDate ) + ' ${eco:translate('is not anonymous day')}' );
+			$( function () {
+				$( "#datepicker" ).datepicker( {
+												   inline: true, firstDay: 1, showOtherMonths: true, showWeek: true, showButtonPanel: true, changeMonth: true, changeYear: true, numberOfMonths: 1, dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], dateFormat: "mm/dd/yy", onSelect: showInfoAboutAnonymousDay, beforeShowDay: highlightAnonymousDays
+												   //											, selectOtherMonths: true
+											   } );
+			} );
+
+			function showInfoAboutAnonymousDay( pickerDate ) {
+				if ( isAnonymousDay( pickerDate ) ) {
+					alert( convertDateToPrint( pickerDate ) + ' ${eco:translate('is anonymous day')}' );
+				} else {
+					alert( convertDateToPrint( pickerDate ) + ' ${eco:translate('is not anonymous day')}' );
+				}
 			}
-		}
+		});
 
 	</script>
 

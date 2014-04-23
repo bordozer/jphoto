@@ -48,51 +48,44 @@
 
 	<script type="text/javascript">
 
-		$( function () {
-			$( "#datepicker" ).datepicker( {
-											  inline:true
-											, firstDay:1
-											, showOtherMonths:true
-											, showWeek: true
-											, showButtonPanel: true
-											<%--, showCurrentAtPos: ${currentAtPos}--%>
-											, numberOfMonths: [ 3, 4 ]
-											, dayNamesMin:['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-											, dateFormat: "${jsDateFormat}"
-											, onSelect: addAnonymousDay
-											, beforeShowDay: highlightAnonymousDays
-											, stepMonths: 0
-											, minDate: new Date( '${calendarMinDate}' )
-											, maxDate: new Date( '${calendarMaxDate}' )
-										   } );
-		} );
+		require( [ 'jquery', 'jscal2', 'jscal2_unicode_letter', 'jscal2_lang', 'jsonrpc' ], function( $, jscal2, jscal2_unicode_letter, jscal2_lang, jsonrpc ) {
 
-		function addAnonymousDay( pickerDate, instance ) {
-			var anonymousDay = convertDate( pickerDate );
+			var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 
-			var message;
-			if ( ! isAnonymousDay( pickerDate ) ) {
-				saveAnonymousDayOnServer( anonymousDay );
-				anonymousDays.push( anonymousDay );
+			$( function () {
+				$( "#datepicker" ).datepicker( {
+												   inline: true, firstDay: 1, showOtherMonths: true, showWeek: true, showButtonPanel: true
+												   <%--, showCurrentAtPos: ${currentAtPos}--%>, numberOfMonths: [ 3, 4 ], dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], dateFormat: "${jsDateFormat}", onSelect: addAnonymousDay, beforeShowDay: highlightAnonymousDays, stepMonths: 0, minDate: new Date( '${calendarMinDate}' ), maxDate: new Date( '${calendarMaxDate}' )
+											   } );
+			} );
 
-				message = "${eco:translate('was added to anonymous days')}";
-			} else {
-				deleteAnonymousDayOnServer( anonymousDay );
-				anonymousDays.splice( arrayIndex( anonymousDay ), 1 );
+			function addAnonymousDay( pickerDate, instance ) {
+				var anonymousDay = convertDate( pickerDate );
 
-				message = "${eco:translate('was removed from anonymous days')}";
+				var message;
+				if ( !isAnonymousDay( pickerDate ) ) {
+					saveAnonymousDayOnServer( anonymousDay );
+					anonymousDays.push( anonymousDay );
+
+					message = "${eco:translate('was added to anonymous days')}";
+				} else {
+					deleteAnonymousDayOnServer( anonymousDay );
+					anonymousDays.splice( arrayIndex( anonymousDay ), 1 );
+
+					message = "${eco:translate('was removed from anonymous days')}";
+				}
+
+				notifySuccessMessage( pickerDate + ' ' + message );
 			}
 
-			notifySuccessMessage( pickerDate + ' ' + message );
-		}
+			function saveAnonymousDayOnServer( anonymousDay ) {
+				jsonRPC.anonymousDaysService.saveAnonymousDayAjax( anonymousDay );
+			}
 
-		function saveAnonymousDayOnServer( anonymousDay ) {
-			jsonRPC.anonymousDaysService.saveAnonymousDayAjax( anonymousDay );
-		}
-
-		function deleteAnonymousDayOnServer( anonymousDay ) {
-			jsonRPC.anonymousDaysService.deleteAnonymousDayAjax( anonymousDay );
-		}
+			function deleteAnonymousDayOnServer( anonymousDay ) {
+				jsonRPC.anonymousDaysService.deleteAnonymousDayAjax( anonymousDay );
+			}
+		});
 
 	</script>
 

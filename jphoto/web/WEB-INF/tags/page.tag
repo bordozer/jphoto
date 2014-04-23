@@ -53,6 +53,7 @@
 	<script type="text/javascript">
 
 		require( [ 'jquery', 'jquery_ui' ], function( $, ui ) {
+
 			$( function () {
 				$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
 												height:300
@@ -63,6 +64,7 @@
 			} );
 
 			function sendPrivateMessage( fromUserId, toUserId, toUserName, callback ) {
+
 				$( '#${privateMessageTextId}' ).val( '' );
 
 				$( "#${sendPrivateMessageToUserDivId}" )
