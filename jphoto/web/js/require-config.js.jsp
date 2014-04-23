@@ -31,7 +31,7 @@ var require = {
 		<%--, jscal2_unicode_letter: "lib/JSCal2-1.9/js/unicode-letter"--%>
 		<%--, jscal2_lang: "lib/JSCal2-1.9/js/lang/en"--%>
 
-		, messages: "messages"
+		, ui_messages: "ui_messages"
 	},
 
 	shim: {

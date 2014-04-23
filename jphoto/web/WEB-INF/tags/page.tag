@@ -44,31 +44,31 @@
 		});
 
 		function showUIMessage_Notification( messageText ) {
-			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
 				messages.showUIMessage_Notification( messageText );
 			} );
 		}
 
 		function showUIMessage_InformationMessage_ManualClosing( messageText ) {
-			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
 				messages.showUIMessage_InformationMessage_ManualClosing( messageText );
 			} );
 		}
 
 		function showUIMessage_Information( messageText ) {
-			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
 				messages.showUIMessage_Information( messageText );
 			} );
 		}
 
 		function showUIMessage_Warning( messageText ) {
-			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
 				messages.showUIMessage_Warning( messageText );
 			} );
 		}
 
 		function showUIMessage_Error( messageText ) {
-			require( [ 'jquery', 'messages' ], function ( $, messages ) {
+			require( [ 'jquery', 'ui_messages' ], function ( $, messages ) {
 				messages.showUIMessage_Error( messageText );
 			} );
 		}
@@ -85,7 +85,7 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', 'jquery_ui' ], function( $, ui ) {
+		require( [ 'jquery', 'jquery_ui' ], function( $ ) {
 
 			$( function () {
 				$( "#${sendPrivateMessageToUserDivId}" ).dialog( {
