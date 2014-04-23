@@ -8,9 +8,9 @@
 
 <%@ attribute name="photoId" required="true" type="java.lang.Integer" %>
 
-<%
+<%--<%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
+%>--%>
 
 <c:set var="editUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>
 <c:set var="deleteUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>

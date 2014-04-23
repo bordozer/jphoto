@@ -30,6 +30,8 @@ var require = {
 		, jscal2: "lib/JSCal2-1.9/js/jscal2"
 		, jscal2_unicode_letter: "lib/JSCal2-1.9/js/unicode-letter"
 		, jscal2_lang: "lib/JSCal2-1.9/js/lang/en"
+
+		, messages: "messages"
 	},
 
 	shim: {
@@ -73,6 +75,9 @@ var require = {
 		},
 		jscal2_lang: {
 			deps: [ 'jscal2' ]
+		},
+		messages: {
+			exports: "Messages"
 		}
 	},
 

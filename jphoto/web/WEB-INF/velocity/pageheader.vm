@@ -42,7 +42,7 @@
 	<link rel="stylesheet" href="$baseUrl/js/lib/fg.menu/fg.menu.css" type="text/css"/>
 ##	/ fg.menu
 
-	<script type="text/javascript" src="$baseUrl/js/messages.js"></script>
+##	<script type="text/javascript" src="$baseUrl/js/messages.js"></script>
 
 
 	<style type="text/css">

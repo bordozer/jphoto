@@ -1,8 +1,7 @@
 
 require( [ 'jquery', 'noty' ], function( $, noty ) {
 
-	var parameters = { closeClick: true, closeEsc: true, centered: true, showOverlay: true, onLoad: function () {
-	} };
+	var parameters = { closeClick: true, closeEsc: true, centered: true, showOverlay: true, onLoad: function () {} };
 	var messageTimeout = 5000;
 
 	function showInformationMessage( message ) {
