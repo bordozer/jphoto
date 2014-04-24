@@ -36,6 +36,7 @@ var require = {
 
 		, ui_messages: "ui_messages"
 		, mass_checker: "components/mass-checker"
+		, photosight: "/admin/js/photosight.js"
 	},
 
 	shim: {
@@ -90,6 +91,9 @@ var require = {
 			deps: [ 'jquery' ]
 		},
 		mass_checker: {
+			deps: [ 'jquery' ]
+		},
+		photosight: {
 			deps: [ 'jquery' ]
 		}
 	},
