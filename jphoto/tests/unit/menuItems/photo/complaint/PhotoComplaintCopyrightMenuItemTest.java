@@ -18,7 +18,7 @@ public class PhotoComplaintCopyrightMenuItemTest extends AbstractPhotoMenuItemTe
 
 		final PhotoComplaintCopyrightMenuItem menuItem = new PhotoComplaintCopyrightMenuItem( testData.getPhoto(), accessor, getServices( accessor ) );
 
-		assertEquals( menuItem.getMenuItemCommand().getMenuText(), translated( "Complaint copyright" ) );
+		assertEquals( menuItem.getMenuItemCommand().getMenuText(), translated( "PhotoMenuItem: Complaint copyright" ) );
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class PhotoComplaintCopyrightMenuItemTest extends AbstractPhotoMenuItemTe
 		final PhotoComplaintCopyrightMenuItem menuItem = new PhotoComplaintCopyrightMenuItem( testData.getPhoto(), accessor, getServices( accessor ) );
 
 		assertEquals( menuItem.getMenuItemCommand().getMenuCommand()
-			, String.format( "sendComplaintMessage( %d, %d, %d, %d ); return false;"
+			, String.format( "sendComplaintMessage( %d, %d, %d, %d );"
 				, EntryMenuType.PHOTO.getId()
 				, testData.getPhoto().getId()
 				, accessor.getId()

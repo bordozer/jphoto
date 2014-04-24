@@ -67,7 +67,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT
 			, new CommentMenuItemReply( testData.getComment(), accessor, services ).getMenuItemCommand().getMenuCommand()
-			, String.format( "replyToComment( %d ); return false;", testData.getComment().getId() ) );
+			, String.format( "replyToComment( %d );", testData.getComment().getId() ) );
 	}
 
 	@Test

@@ -58,7 +58,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS
 				, command.getMenuCommand()
-				, String.format( "%s( %d, %d, %d, %d ); return false;"
+				, String.format( "%s( %d, %d, %d, %d );"
 				, AbstractEntryMenuItemComplaintCommand.COMPLAINT_MESSAGE_JS_FUNCTION
 				, EntryMenuType.COMMENT.getId()
 				, testData.getComment().getId()

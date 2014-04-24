@@ -70,7 +70,7 @@ public class AbstractEntryMenuItemComplaintCommandTest extends AbstractTestCase 
 		};
 
 		assertEquals( menuItem.getMenuCommand()
-			, String.format( "sendComplaintMessage( %d, %d, %d, %d ); return false;", comment.getId(), menuEntry.getId(), accessor.getId(), complaintReasonType.getId() )
+			, String.format( "sendComplaintMessage( %d, %d, %d, %d );", comment.getId(), menuEntry.getId(), accessor.getId(), complaintReasonType.getId() )
 		);
 	}
 }

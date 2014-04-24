@@ -19,7 +19,7 @@ public abstract class AbstractEntryMenuItemComplaintCommand<T extends PopupMenuA
 
 	@Override
 	public String getMenuCommand() {
-		return String.format( "%s( %d, %d, %d, %d ); return false;"
+		return String.format( "%s( %d, %d, %d, %d );"
 			, COMPLAINT_MESSAGE_JS_FUNCTION
 			, entryMenuType.getId()
 			, getId()

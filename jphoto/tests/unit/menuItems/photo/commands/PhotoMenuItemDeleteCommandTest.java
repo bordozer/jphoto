@@ -25,7 +25,7 @@ public class PhotoMenuItemDeleteCommandTest extends AbstractTestCase {
 		accessor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		final PhotoMenuItemDeleteCommand command = new PhotoMenuItemDeleteCommand( photo, accessor, getServices() );
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "Delete photo" ) );
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deletePhoto( %d ); return false;", photo.getId() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "PhotoMenuItem: Delete photo" ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "deletePhoto( %d );", photo.getId() ) );
 	}
 }

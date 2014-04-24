@@ -55,8 +55,8 @@ public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest
 
 		final User photoAuthor = testData.getPhotoAuthor();
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated(  String.format( "Lock photo author: %s", photoAuthor.getNameEscaped() ) ) );
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' ); return false;", photoAuthor.getId(), photoAuthor.getNameEscaped() ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated(  String.format( "PhotoMenuItem: Lock photo author: %s", photoAuthor.getNameEscaped() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "adminLockUser( %d, '%s' );", photoAuthor.getId(), photoAuthor.getNameEscaped() ) );
 	}
 
 	@Test

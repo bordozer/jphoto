@@ -25,7 +25,7 @@ public class PhotoMenuItemEditCommandTest extends AbstractTestCase {
 		accessor.setLanguage( AbstractTestCase.MENU_LANGUAGE );
 
 		final PhotoMenuItemEditCommand command = new PhotoMenuItemEditCommand( photo, accessor, getServices() );
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "Edit photo" ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuText(), translated( "PhotoMenuItem: Edit photo" ) );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "editPhotoData( %d );", photo.getId() ) );
 	}
 }
