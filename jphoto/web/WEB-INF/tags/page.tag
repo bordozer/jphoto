@@ -127,6 +127,12 @@
 				} );
 			}
 
+			function generatePhotoPreview( photoId, callback ) {
+				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+					adminFunctions.generatePhotoPreview( photoId, callback );
+				} );
+			}
+
 
 			function reloadTranslations( photoId, callback ) {
 				require( [ 'jquery', '/js/pages/translations-reload.js.jsp' ], function ( $, translations ) {

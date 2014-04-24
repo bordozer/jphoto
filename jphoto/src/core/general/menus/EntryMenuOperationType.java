@@ -34,6 +34,7 @@ public enum EntryMenuOperationType {
 	, ADMIN_MENU_ITEM_DELETE( 83, "menu_delete.png" )
 	, ADMIN_MENU_ITEM_NUDE_CONTENT_SET( 84, "menu_photo_nude_content_is_not_set.png" )
 	, ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE( 85, "menu_photo_nude_content_set.png" )
+	, ADMIN_MENU_ITEM_GENERATE_PREVIEW( 86, "generate_preview.png" )
 
 	;
 

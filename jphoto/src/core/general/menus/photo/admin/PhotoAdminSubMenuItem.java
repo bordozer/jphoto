@@ -16,10 +16,12 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
 		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
-		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_SET
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE
+		, EntryMenuOperationType.SEPARATOR
+		, EntryMenuOperationType.ADMIN_MENU_ITEM_GENERATE_PREVIEW
+		, EntryMenuOperationType.SEPARATOR
+		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
 	);
 
 	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {

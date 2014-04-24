@@ -5,13 +5,13 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-	function adminSetPhotoNudeContent( photoId, isNudeContent, callback ) {
+	function executeAjaxRequest( _url, callback ) {
 
 		<%--jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );--%>
 
 		$.ajax( {
 			type:'GET',
-			url: "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/" + isNudeContent + '/',
+			url: _url,
 			success:function ( response ) {
 				if ( callback ) {
 					callback();
@@ -40,11 +40,18 @@ define( [ 'jquery' ], function ( $ ) {
 		},
 
 		adminPhotoNudeContentSet: function ( photoId, callback ) {
-			adminSetPhotoNudeContent( photoId, true, callback );
+			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/true/";
+			executeAjaxRequest( url, callback );
 		},
 
 		adminPhotoNudeContentRemove: function ( photoId, callback ) {
-			adminSetPhotoNudeContent( photoId, false, callback );
+			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/false/";
+			executeAjaxRequest( url, callback );
+		},
+
+		generatePhotoPreview: function ( photoId, callback ) {
+			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/preview/";
+			executeAjaxRequest( url, callback );
 		}
 
 	}

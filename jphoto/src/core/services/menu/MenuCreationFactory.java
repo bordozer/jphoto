@@ -131,6 +131,9 @@ public class MenuCreationFactory {
 				case ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE:
 					menuItems.add( new PhotoMenuItemAdminNudeContentRemove( photo, accessor, services ) );
 					break;
+				case ADMIN_MENU_ITEM_GENERATE_PREVIEW:
+					menuItems.add( new PhotoMenuItemAdminGeneratePreview( photo, accessor, services ) );
+					break;
 				case ADMIN_MENU_ITEM_EDIT:
 					menuItems.add( new PhotoMenuItemEditAdmin( photo, accessor, services ) );
 					break;
