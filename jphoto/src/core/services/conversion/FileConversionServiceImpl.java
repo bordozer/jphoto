@@ -13,15 +13,39 @@ public class FileConversionServiceImpl implements FileConversionService {
 	private final LogHelper log  = new LogHelper( FileConversionServiceImpl.class );
 
 	@Override
-	public void convert( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+	public boolean convertSync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
 
-		final String resize = dimensionToCovertString( conversionOptions.getDimension() );
-		final String cmd = String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s %s %s"
-				, conversionOptions.getDensity(), resize, sourceFile.getPath(), destinationFile.getPath() );
+		final String cmd = getCommand( sourceFile, destinationFile, conversionOptions );
 
-		final String result = ShellUtils.executeCommand( cmd );
+		final String result = ShellUtils.executeCommandSync( cmd );
 
 		log.debug( result );
+
+		return true;
+	}
+
+	@Override
+	public void convertAsync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+		final String cmd = getCommand( sourceFile, destinationFile, conversionOptions );
+
+		new Thread(){
+			@Override
+			public void run() {
+				final String result;
+				try {
+					result = ShellUtils.executeCommandSync( cmd );
+					log.debug( result );
+				} catch ( final Exception e ) {
+					log.error( e );
+				}
+			}
+		}.start();
+	}
+
+	private String getCommand( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) {
+		final String resize = dimensionToCovertString( conversionOptions.getDimension() );
+		return String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s %s %s"
+				, conversionOptions.getDensity(), resize, sourceFile.getPath(), destinationFile.getPath() );
 	}
 
 	private static String dimensionToCovertString( Dimension dimension ) {

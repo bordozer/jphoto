@@ -104,7 +104,7 @@ public abstract class AbstractPhotoImportStrategy {
 
 		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
 			try {
-				services.getPreviewGenerationService().generatePreview( photo.getId() );
+				services.getPreviewGenerationService().generatePreviewSync( photo.getId() );
 			} catch ( final InterruptedException e ) {
 				final String message = String.format( "Error creating preview: %s ( %s )", photoFile.getCanonicalPath(), e.getMessage() );
 

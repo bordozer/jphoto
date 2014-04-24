@@ -303,7 +303,7 @@ public class PhotoEditDataController {
 					return FILE_UPLOAD_VIEW;
 				}
 
-				previewGenerationService.generatePreview( photo.getId() );
+				previewGenerationService.generatePreviewSync( photo.getId() );
 
 			} catch ( final IOException e ){
 				photoService.delete( photo.getId() );

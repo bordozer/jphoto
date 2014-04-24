@@ -36,8 +36,6 @@ public class DataHandlerController {
 	@ResponseBody
 	public boolean generatePreview( final @PathVariable( "photoId" ) int photoId ) throws IOException, InterruptedException {
 
-		previewGenerationService.generatePreview( photoId );
-
-		return true;
+		return previewGenerationService.generatePreviewSync( photoId );
 	}
 }

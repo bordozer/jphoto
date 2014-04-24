@@ -7,5 +7,7 @@ import java.io.IOException;
 
 public interface FileConversionService {
 
-	void convert( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
+	boolean convertSync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
+
+	void convertAsync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
 }

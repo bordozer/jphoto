@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface PreviewGenerationService {
 
-	void generatePreview( final int photoId ) throws IOException, InterruptedException;
+	boolean generatePreviewSync( final int photoId ) throws IOException, InterruptedException;
 
-	void generatePreview( final int photoId, final ConversionOptions options ) throws IOException, InterruptedException;
+	boolean generatePreviewSync( final int photoId, final ConversionOptions options ) throws IOException, InterruptedException;
 }

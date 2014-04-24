@@ -10,7 +10,7 @@ public class ShellUtils {
 
 	final static LogHelper log = new LogHelper( ShellUtils.class );
 
-	public static String executeCommand( final String cmd ) throws InterruptedException, IOException {
+	public static String executeCommandSync( final String cmd ) throws InterruptedException, IOException {
 		log.debug( cmd );
 
 		final Runtime run = Runtime.getRuntime();
@@ -18,7 +18,7 @@ public class ShellUtils {
 
 		try {
 			pr = run.exec( cmd );
-		} catch ( IOException e ) {
+		} catch ( final IOException e ) {
 			log.error( e );
 			return "";
 		}

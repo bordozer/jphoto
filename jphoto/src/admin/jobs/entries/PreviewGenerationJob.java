@@ -36,7 +36,7 @@ public class PreviewGenerationJob extends AbstractJob {
 			photo = services.getPhotoService().load( photoId );
 
 			if ( !skipPhotosWithExistingPreview || !services.getUserPhotoFilePathUtilsService().getPhotoPreviewFile( photo ).exists() ) {
-				services.getPreviewGenerationService().generatePreview( photo.getId(), options );
+				services.getPreviewGenerationService().generatePreviewSync( photo.getId(), options );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Generated preview for $1", services )
 					.addPhotoCardLinkParameter( photo )

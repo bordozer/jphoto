@@ -22,12 +22,12 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Override
-	public void generatePreview( final int photoId ) throws IOException, InterruptedException {
-		generatePreview( photoId, ConversionOptions.DEFAULT_PREVIEW_OPTION );
+	public boolean generatePreviewSync( final int photoId ) throws IOException, InterruptedException {
+		return generatePreviewSync( photoId, ConversionOptions.DEFAULT_PREVIEW_OPTION );
 	}
 
 	@Override
-	public void generatePreview( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+	public boolean generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
 		final Photo photo = photoService.load( photoId );
 
 		userPhotoFilePathUtilsService.createUserPhotoPreviewDirIfNeed( photo.getUserId() );
@@ -38,6 +38,6 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 			FileUtils.deleteQuietly( destinationFile );
 		}
 
-		fileConversionService.convert( photo.getFile(), destinationFile, conversionOptions );
+		return fileConversionService.convertSync( photo.getFile(), destinationFile, conversionOptions );
 	}
 }
