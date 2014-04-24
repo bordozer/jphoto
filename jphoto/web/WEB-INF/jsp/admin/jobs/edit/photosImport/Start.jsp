@@ -275,7 +275,10 @@
 			require( [ '/admin/js/photosight.js' ], function( photosight ) {
 				var usedIdsControl = $( "#${photosightUserIdControl}" );
 				if ( usedIdsControl.val().trim() != '' ) {
-					photosight.renderPhotosightUserInfo( usedIdsControl.val(), jsonRPC );
+					var data = photosight.renderPhotosightUserInfo( usedIdsControl.val(), jsonRPC );
+
+					$( 'input[name="${userGenderIdControl}"][value="' + data.userGenderId + '"]' ).attr( 'checked', 'checked' );
+					$( 'input[name="${userMembershipIdControl}"][value="' + data.userMembershipTypeId + '"]' ).attr( 'checked', 'checked' );
 				}
 			});
 		}

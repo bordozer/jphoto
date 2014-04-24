@@ -114,10 +114,7 @@ define( [ 'jquery', 'noty', 'toastmessage' ], function ( $ ) {
 
 					showPhotosightUserInfoDiv();
 
-					<%--if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
-						$( 'input[name="${userGenderIdControl}"][value="' + photosightUserDTO.userGender.id + '"]' ).attr( 'checked', 'checked' );
-						$( 'input[name="${userMembershipIdControl}"][value="' + photosightUserDTO.userMembershipType.id + '"]' ).attr( 'checked', 'checked' );
-					}--%>
+					return { userGenderId: photosightUserDTO.userGender.id, userMembershipTypeId: photosightUserDTO.userMembershipType.id };
 				}
 			}
 		}
@@ -127,7 +124,7 @@ define( [ 'jquery', 'noty', 'toastmessage' ], function ( $ ) {
 
 		renderPhotosightUserInfo: function ( _photosightUserIds, jsonRPC ) {
 			photosightUserModel.registerPhotosightUsers( _photosightUserIds );
-			photosightUserModel.renderPhotosightUsers( jsonRPC );
+			return photosightUserModel.renderPhotosightUsers( jsonRPC );
 		}
 	};
 } );
