@@ -31,7 +31,7 @@ public class PhotoMenuItemGoToAuthorPhotoByAlbum extends AbstractPhotoGoToAuthor
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "$1: photos from album '$2' ( $3 )", getLanguage(), photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), String.valueOf( getPhotosQty() ) );
+				return getTranslatorService().translate( "PhotoMenuItem: $1: photos from album '$2' ( $3 )", getLanguage(), photoAuthor.getNameEscaped(), userPhotoAlbum.getName(), String.valueOf( getPhotosQty() ) );
 			}
 
 			@Override

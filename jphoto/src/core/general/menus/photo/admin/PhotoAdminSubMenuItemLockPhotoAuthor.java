@@ -26,7 +26,7 @@ public class PhotoAdminSubMenuItemLockPhotoAuthor extends AbstractPhotoMenuItem 
 		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Lock photo author: $1", getLanguage(), photoAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "PhotoMenuItem: Lock photo author: $1", getLanguage(), photoAuthor.getNameEscaped() );
 			}
 
 			@Override

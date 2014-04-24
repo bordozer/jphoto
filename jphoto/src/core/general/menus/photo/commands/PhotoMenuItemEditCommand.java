@@ -12,7 +12,7 @@ public class PhotoMenuItemEditCommand extends AbstractEntryMenuItemCommand<Photo
 	}
 
 	public String getMenuText() {
-		return getTranslatorService().translate( "Edit photo", getLanguage() );
+		return getTranslatorService().translate( "PhotoMenuItem: Edit photo", getLanguage() );
 	}
 
 	@Override

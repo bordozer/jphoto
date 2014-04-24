@@ -126,9 +126,14 @@
 					adminFunctions.adminPhotoNudeContentRemove( photoId, callback );
 				} );
 			}
-		</script>
 
-		<script type="text/javascript" src="${eco:baseUrl()}/js/translationsReload.jsp"></script>
+
+			function reloadTranslations( photoId, callback ) {
+				require( [ 'jquery', '/js/pages/translations-reload.js.jsp' ], function ( $, translations ) {
+					translations.reloadTranslations( photoId, callback );
+				} );
+			}
+		</script>
 
 	</c:if>
 

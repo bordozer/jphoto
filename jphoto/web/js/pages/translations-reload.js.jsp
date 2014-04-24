@@ -10,18 +10,21 @@
 	JSONRPCBridge.getGlobalBridge().registerObject( "translatorService", ApplicationContextHelper.<TranslatorService>getBean( TranslatorService.BEAN_NAME ) );
 %>
 
-var jsonRPC;
-require( ['jsonrpc'], function( jsonrpc ) {
-	jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-} );
+define( [ 'jquery', 'jsonrpc' ], function ( $ ) {
 
-function reloadTranslations() {
+	return {
 
-	if ( !confirm( "${eco:translate('Reload translations?')}" ) ) {
-		return;
+		reloadTranslations: function () {
+
+			var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
+
+			if ( !confirm( "${eco:translate('Reload translations?')}" ) ) {
+				return;
+			}
+
+			jsonRPC.translatorService.reloadTranslationsAjax();
+
+			showUIMessage_Notification( "${eco:translate('Translations have been reloaded')}" );
+		}
 	}
-
-	jsonRPC.translatorService.reloadTranslationsAjax();
-
-	showUIMessage_Notification( "${eco:translate('Translations have been reloaded')}" );
-}
+});

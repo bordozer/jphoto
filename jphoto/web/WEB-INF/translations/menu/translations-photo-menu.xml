@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PhotoMenuItem: Photo info</nerd>
+		<ru><![CDATA[Информация о работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Lock photo author: $1</nerd>
+		<ru><![CDATA[Забанить автора работы: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Set nude content</nerd>
+		<ru><![CDATA[Установить НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Remove nude content</nerd>
+		<ru><![CDATA[Утрать НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Edit photo</nerd>
+		<ru><![CDATA[Редактировать работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Delete photo</nerd>
+		<ru><![CDATA[Удалить работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Complaint copyright</nerd>
+		<ru><![CDATA[Пожаловаться на нарушение авторских прав]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: $1: all photos ( $2 )</nerd>
+		<ru><![CDATA[$1: все работы ( $2 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: $1: photos with $2 $3 ( $4 )</nerd>
+		<ru><![CDATA[$1: работы с $2 $3 ( $4 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: $1: photos in category '$2' ( $3 )</nerd>
+		<ru><![CDATA[$1: работы из раздела $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: $1: photos from album '$2' ( $3 )</nerd>
+		<ru><![CDATA[$1: работы из альбома $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Send private message to $1</nerd>
+		<ru><![CDATA[Отправить личное сообщение $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

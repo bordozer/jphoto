@@ -26,7 +26,7 @@ public class PhotoMenuItemSendPrivateMessage extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Send private message to $1", getLanguage(), photoAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "PhotoMenuItem: Send private message to $1", getLanguage(), photoAuthor.getNameEscaped() );
 			}
 
 			@Override

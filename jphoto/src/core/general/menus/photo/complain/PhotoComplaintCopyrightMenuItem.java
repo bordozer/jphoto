@@ -22,7 +22,7 @@ public class PhotoComplaintCopyrightMenuItem extends AbstractPhotoComplaintMenuI
 
 	@Override
 	protected String getMenuItemText() {
-		return "Complaint copyright";
+		return "PhotoMenuItem: Complaint copyright";
 	}
 
 	@Override
