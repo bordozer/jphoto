@@ -2,7 +2,7 @@ package core.general.configuration;
 
 public enum ConfigurationKey {
 
-	SYSTEM_SESSION_TIMEOUT_IN_MINUTES( 110, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MIN, ConfigurationTab.SYSTEM, "Session timeout in minutes" )
+	SYSTEM_SESSION_TIMEOUT_IN_MINUTES( 110, "60", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MIN, ConfigurationTab.SYSTEM, "Session timeout in minutes" )
 	, SYSTEM_AUTO_START_SCHEDULER( 106, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Auto start scheduler when worker starts" )
 	, SYSTEM_LOGIN_MIN_LENGTH( 100, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Minimal length of member login" )
 	, SYSTEM_LOGIN_MAX_LENGTH( 101, "20", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.SYSTEM, "Max length of member login" )
