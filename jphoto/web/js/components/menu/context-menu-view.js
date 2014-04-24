@@ -24,8 +24,6 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-//			console.log( 'The menu is being initialized... ', menuId, element );
-
 			var ul = $( '.entry-context-menu-items-ul', element );
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
 
@@ -40,8 +38,6 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				} );
 			} );
 
-
-//			console.log( menu_a );
 			menu_a.click();
 		}
 
@@ -74,15 +70,12 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				container.append( li );
 
-//				console.log( 'bind event: ', menuItemElement, entryMenuItemDTO[ 'menuCommand' ], $._data( menuItemElement[0], "events" ) );
 			}
 		}
 
 		, bindMenuElementClick: function( menuElement, menuItemCommand ) {
 
 			var model = this.model;
-
-//			console.log( menuItemCommand );
 
 			menuElement.click( function( evt ) {
 
