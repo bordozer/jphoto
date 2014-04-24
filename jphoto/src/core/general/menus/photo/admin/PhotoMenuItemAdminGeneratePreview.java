@@ -37,4 +37,9 @@ public class PhotoMenuItemAdminGeneratePreview extends AbstractPhotoMenuItem {
 	public boolean isAccessibleFor() {
 		return isAccessorSuperAdmin();
 	}
+
+	@Override
+	public String getCallbackMessage() {
+		return translate( "PhotoMenuItem: The preview has been generated" );
+	}
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class SystemVarsServiceMock implements SystemVarsService  {
+public class SystemVarsServiceMock implements SystemVarsService {
 
 	@Override
 	public String getProjectUrl() {

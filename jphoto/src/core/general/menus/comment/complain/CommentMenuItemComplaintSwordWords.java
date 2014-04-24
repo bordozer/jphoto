@@ -24,6 +24,6 @@ public class CommentMenuItemComplaintSwordWords extends AbstractCommentComplaint
 
 	@Override
 	protected String getMenuItemText() {
-		return services.getTranslatorService().translate( "Report sword words or offence", getLanguage() );
+		return translate( "Report sword words or offence" );
 	}
 }

@@ -47,10 +47,6 @@ public class MenuEntryController {
 		entryMenuDTO.setEntryMenuTitle( entryMenu.getMenuTitle() );
 		entryMenuDTO.setEntryMenuHeight( String.valueOf( entryMenu.getMenuHeight() ) );
 
-//		entryMenuDTO.setMenuItemCssClass( "_class_" );
-//		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
-//		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
-
 		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu, 0 ) );
 
 		return entryMenuDTO;
@@ -73,6 +69,7 @@ public class MenuEntryController {
 
 				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
 				menuItemDTO.setMenuCssClass( String.format( "%s-%d-%d", entryMenuItem.getMenuCssClass(), deep, counter ) );
+				menuItemDTO.setCallbackMessage( entryMenuItem.getCallbackMessage() );
 				menuItemDTO.setHasSumMenu( entryMenuItem.isSubMenu() );
 
 				if ( entryMenuItem instanceof SubmenuAccesible ) {

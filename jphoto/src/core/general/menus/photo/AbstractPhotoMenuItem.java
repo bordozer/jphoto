@@ -46,4 +46,5 @@ public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo>
 	protected boolean isPhotoAuthorSuperAdmin() {
 		return getSecurityService().isSuperAdminUser( menuEntry.getUserId() );
 	}
+
 }

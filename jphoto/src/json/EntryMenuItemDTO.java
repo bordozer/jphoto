@@ -7,6 +7,7 @@ public class EntryMenuItemDTO {
 	private String menuItemId;
 	private boolean menuTypeSeparator;
 	private String menuCssClass;
+	private String callbackMessage;
 
 	private String menuCommand;
 	private String menuCommandIcon;
@@ -33,6 +34,14 @@ public class EntryMenuItemDTO {
 
 	public void setMenuCssClass( final String menuCssClass ) {
 		this.menuCssClass = menuCssClass;
+	}
+
+	public void setCallbackMessage( final String callbackMessage ) {
+		this.callbackMessage = callbackMessage;
+	}
+
+	public String getCallbackMessage() {
+		return callbackMessage;
 	}
 
 	public boolean isMenuTypeSeparator() {

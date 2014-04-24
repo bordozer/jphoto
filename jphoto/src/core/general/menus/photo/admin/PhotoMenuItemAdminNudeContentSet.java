@@ -37,4 +37,9 @@ public class PhotoMenuItemAdminNudeContentSet extends AbstractPhotoMenuItem {
 	public boolean isAccessibleFor() {
 		return isAccessorSuperAdmin() && ! menuEntry.isContainsNudeContent();
 	}
+
+	@Override
+	public String getCallbackMessage() {
+		return translate( "PhotoMenuItem: Nude context has been set" );
+	}
 }

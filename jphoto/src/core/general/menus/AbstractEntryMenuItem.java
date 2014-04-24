@@ -56,6 +56,10 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 		return String.format( "menus/%s", getEntryMenuType().getIcon() );
 	}
 
+	public String getCallbackMessage() {
+		return StringUtils.EMPTY;
+	}
+
 	final protected boolean isMenuAccessorLogged() {
 		return UserUtils.isLoggedUser( accessor );
 	}
@@ -107,5 +111,9 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	protected Language getLanguage() {
 		return accessor.getLanguage();
+	}
+
+	protected String translate( final String dd ) {
+		return services.getTranslatorService().translate( dd, getLanguage() );
 	}
 }

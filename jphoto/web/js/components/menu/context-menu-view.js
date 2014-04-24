@@ -60,7 +60,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuItemElement );
 
-				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ] );
+				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 					var ul = $( "<ul class='top-menu-item'></ul>" );
@@ -73,7 +73,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			}
 		}
 
-		, bindMenuElementClick: function( menuElement, menuItemCommand ) {
+		, bindMenuElementClick: function( menuElement, menuItemCommand, callbackMessage ) {
 
 			var model = this.model;
 
@@ -81,6 +81,9 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				function reloadPhotoCallback() {
 					model.get( "contextMenuEntryModel" ).refresh();
+					if ( callbackMessage ) {
+						showUIMessage_Notification( callbackMessage );
+					}
 				}
 
 				evt.preventDefault();

@@ -14,9 +14,6 @@ public class EntryMenuDTO {
 	private String entryMenuTitle;
 	private String entryMenuHeight;
 
-	private String menuItemCssClass;
-	private String menuItemCommand;
-	private String menuItemCommandText;
 	private List<EntryMenuItemDTO> entryMenuItemDTOs;
 
 	public EntryMenuDTO( final int entryMenuTypeId, final int entryId ) {
@@ -70,30 +67,6 @@ public class EntryMenuDTO {
 
 	public void setEntryMenuTitle( final String entryMenuTitle ) {
 		this.entryMenuTitle = entryMenuTitle;
-	}
-
-	public String getMenuItemCssClass() {
-		return menuItemCssClass;
-	}
-
-	public void setMenuItemCssClass( final String menuItemCssClass ) {
-		this.menuItemCssClass = menuItemCssClass;
-	}
-
-	public String getMenuItemCommand() {
-		return menuItemCommand;
-	}
-
-	public void setMenuItemCommand( final String menuItemCommand ) {
-		this.menuItemCommand = menuItemCommand;
-	}
-
-	public String getMenuItemCommandText() {
-		return menuItemCommandText;
-	}
-
-	public void setMenuItemCommandText( final String menuItemCommandText ) {
-		this.menuItemCommandText = menuItemCommandText;
 	}
 
 	public void setEntryMenuItemDTOs( final List<EntryMenuItemDTO> entryMenuItemDTOs ) {
