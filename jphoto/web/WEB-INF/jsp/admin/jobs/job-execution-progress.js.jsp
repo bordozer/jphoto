@@ -4,7 +4,7 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-	function updateProgress( jobId, updateInterval, callback ) {
+	function updateProgress( jobId, updateInterval, jsonRPC, callback ) {
 
 		var jobProgressDTO = jsonRPC.jobExecutionService.getJobProgressAjax( jobId ); // TODO: handle an exception
 
@@ -24,14 +24,14 @@ define( [ 'jquery' ], function ( $ ) {
 		callback( percentage );
 
 		setTimeout( function () {
-			updateProgress( jobId, updateInterval, callback );
+			updateProgress( jobId, updateInterval, jsonRPC, callback );
 		}, updateInterval );
 	}
 
 	return {
 
-		updateProgress: function ( jobId, updateInterval, callback ) {
-			updateProgress();
+		updateProgress: function ( jobId, updateInterval, jsonRPC, callback ) {
+			updateProgress( jobId, updateInterval, jsonRPC, callback );
 		}
 	}
 });

@@ -93,7 +93,7 @@
 			var updateJobExecutionIFrameUpdateInterval = 6000;
 
 			setTimeout( function () {
-				progress.updateProgress( ${jobExecutionHistoryEntry.id}, interval, updatePageTitle );
+				progress.updateProgress( ${jobExecutionHistoryEntry.id}, interval, jsonRPC, updatePageTitle );
 
 			}, interval );
 
