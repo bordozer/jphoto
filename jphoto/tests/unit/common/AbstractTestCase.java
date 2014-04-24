@@ -14,7 +14,7 @@ import mocks.SystemVarsServiceMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 
-public class AbstractTestCase {
+public class AbstractTestCase  {
 
 	public static final Language MENU_LANGUAGE = Language.EN;
 

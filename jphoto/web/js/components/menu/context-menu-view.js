@@ -79,7 +79,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 			menuElement.click( function( evt ) {
 
-				function nudeContentChangeCallback() {
+				function reloadPhotoCallback() {
 					model.get( "contextMenuEntryModel" ).refresh();
 				}
 

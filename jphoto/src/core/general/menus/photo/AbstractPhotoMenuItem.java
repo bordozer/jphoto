@@ -9,6 +9,8 @@ import utils.UserUtils;
 
 public abstract class AbstractPhotoMenuItem extends AbstractEntryMenuItem<Photo> {
 
+	public static final String RELOAD_PHOTO_CALLBACK = "reloadPhotoCallback";
+
 	public AbstractPhotoMenuItem( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
 	}

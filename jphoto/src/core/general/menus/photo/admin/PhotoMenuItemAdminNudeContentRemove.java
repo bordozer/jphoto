@@ -28,7 +28,7 @@ public class PhotoMenuItemAdminNudeContentRemove extends AbstractPhotoMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminPhotoNudeContentRemove( %d, nudeContentChangeCallback );", getId() );
+				return String.format( "adminPhotoNudeContentRemove( %d, %s );", getId(), RELOAD_PHOTO_CALLBACK );
 			}
 		};
 	}

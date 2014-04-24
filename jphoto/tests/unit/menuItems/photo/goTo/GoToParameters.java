@@ -2,7 +2,7 @@ package menuItems.photo.goTo;
 
 import core.general.user.User;
 
-class GoToParameters {
+class GoToParameters  {
 
 	private final User accessor;
 	private int photosQty;
