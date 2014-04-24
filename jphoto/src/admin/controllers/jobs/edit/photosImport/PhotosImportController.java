@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategoryToGenreMapping;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
 import admin.jobs.enums.DateRangeType;
@@ -17,7 +18,9 @@ import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
 import core.general.base.CommonProperty;
+import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
+import core.services.entry.GenreService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +34,7 @@ import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -52,6 +52,9 @@ public class PhotosImportController extends DateRangableController {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private GenreService genreService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -126,6 +129,47 @@ public class PhotosImportController extends DateRangableController {
 				return String.valueOf( photosightCategory.getId() );
 			}
 		} ) );
+
+		aModel.setPhotosightCategoryWrappers( getPhotosightCategoriesCheckboxes() );
+	}
+
+	private List<PhotosightCategoryWrapper> getPhotosightCategoriesCheckboxes() {
+		final List<PhotosightCategory> photosightCategoriesSorted = Arrays.asList( PhotosightCategory.values() );
+		Collections.sort( photosightCategoriesSorted, new Comparator<PhotosightCategory>() {
+			@Override
+			public int compare( final PhotosightCategory category1, final PhotosightCategory category2 ) {
+				return category1.name().compareTo( category2.name() );
+			}
+		} );
+
+		final List<PhotosightCategoryToGenreMapping> genreMapping = PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING;
+
+		final List<PhotosightCategoryWrapper> photosightCategoryWrappers = newArrayList();
+		for ( final PhotosightCategory photosightCategory : photosightCategoriesSorted ) {
+
+			final PhotosightCategoryWrapper categoryWrapper = new PhotosightCategoryWrapper( photosightCategory );
+
+			if ( photosightCategory == PhotosightCategory.PORTRAIT ) {
+				categoryWrapper.addCssClass( "photosight-category-portrait" );
+			}
+
+			for ( final PhotosightCategoryToGenreMapping entry : genreMapping ) {
+				if ( entry.getPhotosightCategory() == photosightCategory ) {
+
+					final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
+					final Genre genre = genreService.loadIdByName( genreDiscEntry.getName() );
+					if ( ! genre.isCanContainNudeContent() ) {
+						categoryWrapper.addCssClass( "photosight-category-no-nude" );
+					}
+
+					break;
+				}
+			}
+
+			photosightCategoryWrappers.add( categoryWrapper );
+		}
+
+		return photosightCategoryWrappers;
 	}
 
 	@Override

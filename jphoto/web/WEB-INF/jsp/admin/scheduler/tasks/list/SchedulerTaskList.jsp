@@ -93,7 +93,7 @@
 					<table:tdicon />
 
 					<table:tdicon >
-						<js:checkBoxChecker namePrefix="schedulerTaskCheckbox" />
+						<js:checkboxMassChecker checkboxClass="schedulerTaskCheckbox" />
 					</table:tdicon>
 
 					<table:th text_t="id" title_t="Scheduled task id" width="16" />

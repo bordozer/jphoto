@@ -99,7 +99,7 @@
 
 					<table:tr>
 						<table:td>
-							<js:checkBoxChecker namePrefix="selectedMessagesIds"/>
+							<js:checkboxMassChecker checkboxClass="selectedMessagesIds"/>
 						</table:td>
 					</table:tr>
 

@@ -3,10 +3,10 @@
 
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
-<%@ attribute name="namePrefix" type="java.lang.String" required="true" %>
+<%@ attribute name="checkboxClass" type="java.lang.String" required="true" %>
 <%@ attribute name="initiallyChecked" type="java.lang.Boolean" required="false" %>
 
-<img id="mass-selector-icon-${namePrefix}" width="16" height="16" />
+<img class="mass-selector-icon-${checkboxClass}" width="16" height="16" />
 
 <script type="text/javascript">
 
@@ -18,11 +18,11 @@
 		console.log( 'MassChecker: ',  massChecker );
 
 		<c:if test="${initiallyChecked}">
-			massChecker.registerSelected( "${namePrefix}", "${eco:imageFolderURL()}" );
+			massChecker.registerSelected( "${checkboxClass}", "${eco:imageFolderURL()}" );
 		</c:if>
 
 		<c:if test="${not initiallyChecked}">
-			massChecker.registerUnselected( "${namePrefix}", "${eco:imageFolderURL()}" );
+			massChecker.registerUnselected( "${checkboxClass}", "${eco:imageFolderURL()}" );
 		</c:if>
 
 	});

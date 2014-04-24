@@ -164,7 +164,7 @@
 
 		<div style="float: left; width: 90%; padding-left: 50px;">
 
-			<js:checkBoxChecker namePrefix="${controlSelectedPhotoIds}" />
+			<js:checkboxMassChecker checkboxClass="${controlSelectedPhotoIds}" />
 
 			<label for="${controlPhotoGroupOperationId}">${eco:translate('Photo list: Group operations with selected photos')}</label>
 

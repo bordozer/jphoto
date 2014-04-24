@@ -51,7 +51,7 @@
 				<table:tr>
 					<table:tdtext text_t="Actyvity types to delete" isMandatory="true"/>
 					<table:tddata>
-						<js:checkBoxChecker namePrefix="${activity_stream_type_ids_to_delete_control}"/>
+						<js:checkboxMassChecker checkboxClass="${activity_stream_type_ids_to_delete_control}"/>
 						<br/>
 						<br/>
 						<form:checkboxes path="${activity_stream_type_ids_to_delete_control}" items="${activityTypes}" itemValue="id" itemLabel="name" delimiter="<br />" cssErrorClass="invalid" />

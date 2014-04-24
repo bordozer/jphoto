@@ -40,7 +40,7 @@
 		<table:tdtext text_t="Days of week" isMandatory="true" />
 
 		<table:tddata>
-			<js:checkBoxChecker namePrefix="dailyTaskWeekdayIds" />
+			<js:checkboxMassChecker checkboxClass="dailyTaskWeekdayIds" />
 			<br />
 			<form:checkboxes path="${dailyTaskWeekdayIds}" items="${weekdays}" itemValue="id" itemLabel="name" delimiter="<br />" />
 		</table:tddata>

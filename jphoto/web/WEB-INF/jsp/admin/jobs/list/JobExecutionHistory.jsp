@@ -139,7 +139,7 @@
 
 			<jsp:attribute name="thead">
 				<table:tdicon>
-					<js:checkBoxChecker namePrefix="selectedJobsIds"/>
+					<js:checkboxMassChecker checkboxClass="selectedJobsIds"/>
 				</table:tdicon>
 
 				<table:tdicon/>

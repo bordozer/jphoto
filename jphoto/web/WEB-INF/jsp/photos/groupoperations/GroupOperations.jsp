@@ -95,7 +95,7 @@
 				<br />
 				<br />
 				<c:forEach var="userPhotoAlbum" items="${photoGroupOperationModel.userPhotoAlbums}">
-					<js:checkBoxChecker namePrefix="_${userPhotoAlbum.id}']" checkboxClass="${userPhotoAlbum.hashCode}" /> ${userPhotoAlbum.name}
+					<js:checkboxMassChecker checkboxClass="_${userPhotoAlbum.id}']" checkboxClass="${userPhotoAlbum.hashCode}" /> ${userPhotoAlbum.name}
 					<br />
 				</c:forEach>
 			</c:if>
@@ -105,13 +105,13 @@
 				<br />
 				<br />
 				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
-					<js:checkBoxChecker namePrefix="_${userTeamMember.id}']" checkboxClass="${userTeamMember.hashCode}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
+					<js:checkboxMassChecker checkboxClass="_${userTeamMember.id}']" checkboxClass="${userTeamMember.hashCode}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />
 				</c:forEach>
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">
-				<js:checkBoxChecker namePrefix="_1']" checkboxClass="1" /> ${eco:translate('Nude content')}
+				<js:checkboxMassChecker checkboxClass="_1']" checkboxClass="1" /> ${eco:translate('Nude content')}
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'DELETE_PHOTOS'}">

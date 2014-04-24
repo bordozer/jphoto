@@ -3,7 +3,7 @@ define( [ 'jquery' ], function ( $ ) {
 	var MassCheckerModel = function ( checkboxClass, imagePath ) {
 
 		var selection = false;
-		var checkerIcon = $( "#mass-selector-icon-" + checkboxClass );
+		var checkerIcon = $( ".mass-selector-icon-" + checkboxClass );
 
 		function setSelectedCheckerIcon () {
 			checkerIcon.attr( 'src', imagePath + '/icons16/checkAll.png' );
@@ -56,7 +56,7 @@ define( [ 'jquery' ], function ( $ ) {
 		}
 
 		function getElements() {
-			return $( '[name*=' + checkboxClass + ']' );
+			return $( '.' + checkboxClass );
 		}
 
 		return {

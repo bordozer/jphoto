@@ -63,7 +63,7 @@
 		<table:tdtext text_t="Months" isMandatory="true" />
 
 		<table:tddata>
-			<js:checkBoxChecker namePrefix="monthlyTaskMonthIds" />
+			<js:checkboxMassChecker checkboxClass="monthlyTaskMonthIds" />
 			<br />
 			<form:checkboxes path="${monthlyTaskMonthIds}" items="${months}" itemValue="id" itemLabel="name" delimiter="<br />" />
 		</table:tddata>

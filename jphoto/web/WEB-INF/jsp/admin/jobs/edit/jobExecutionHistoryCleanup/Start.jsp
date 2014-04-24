@@ -54,7 +54,7 @@
 					<table:tdtext text_t="Delete entries with statuses"/>
 
 					<table:tddata>
-						<js:checkBoxChecker namePrefix="${job_execution_status_ids_to_delete_control}"/>
+						<js:checkboxMassChecker checkboxClass="${job_execution_status_ids_to_delete_control}"/>
 						<br/>
 						<br/>
 						<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="name"

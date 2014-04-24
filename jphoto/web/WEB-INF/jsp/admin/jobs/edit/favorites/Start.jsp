@@ -50,7 +50,7 @@
 				<table:tr>
 					<table:tdtext text_t="Favorite entries"/>
 					<table:tddata>
-						<js:checkBoxChecker namePrefix="favoriteEntriesIds"/>
+						<js:checkboxMassChecker checkboxClass="favoriteEntriesIds"/>
 						<br/>
 						<form:checkboxes path="${favoriteEntriesIdsControl}" items="${favoriteEntriesIds}" itemValue="id" itemLabel="name" delimiter="<br />"/>
 						<br/>
