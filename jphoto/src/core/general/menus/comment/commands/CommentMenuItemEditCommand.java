@@ -18,6 +18,6 @@ public class CommentMenuItemEditCommand extends AbstractEntryMenuItemCommand<Pho
 
 	@Override
 	public String getMenuCommand() {
-		return String.format( "editComment( %d ); return false;", getId() );
+		return String.format( "editComment( %d );", getId() );
 	}
 }

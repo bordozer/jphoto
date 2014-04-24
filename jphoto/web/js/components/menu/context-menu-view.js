@@ -64,7 +64,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuItemElement );
 
-				this.bindMenuElementClick( menuItemElement );
+				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ] );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 					var ul = $( "<ul class='top-menu-item'></ul>" );
@@ -73,20 +73,24 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				}
 
 				container.append( li );
+
+//				console.log( 'bind event: ', menuItemElement, entryMenuItemDTO[ 'menuCommand' ], $._data( menuItemElement[0], "events" ) );
 			}
 		}
 
-		, bindMenuElementClick: function( menuElement ) {
-			menuElement.on( 'click',  function( evt ) {
+		, bindMenuElementClick: function( menuElement, menuItemCommand ) {
 
-				var model = this.model;
+			var model = this.model;
 
-				console.log( model.get( 'menuCommand' ) );
+//			console.log( menuItemCommand );
+
+			menuElement.click( function( evt ) {
 
 				evt.preventDefault();
 				evt.stopPropagation();
 
-				eval( model.get( 'menuCommand' ) );
+				eval( menuItemCommand );
+//				console.log( menuItemCommand );
 				model.get( "contextMenuEntryModel" ).refresh();
 			});
 		}

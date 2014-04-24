@@ -44,7 +44,7 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 						, translatorService.translate( "You are in the black list of $1. You can not reply.", getLanguage(), menuEntry.getCommentAuthor().getNameEscaped() ) );
 				}
 
-				return String.format( "replyToComment( %d ); return false;", menuEntry.getId() );
+				return String.format( "replyToComment( %d );", menuEntry.getId() );
 			}
 		};
 	}

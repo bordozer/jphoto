@@ -34,11 +34,11 @@ define( [ 'jquery' ], function ( $ ) {
 		},
 
 		adminPhotoNudeContentSet: function ( photoId, jsonRPC ) {
-			adminSetPhotoNudeContent( photoId, true );
+			adminSetPhotoNudeContent( photoId, true, jsonRPC );
 		},
 
 		adminPhotoNudeContentRemove: function ( photoId, jsonRPC ) {
-			adminSetPhotoNudeContent( photoId, false );
+			adminSetPhotoNudeContent( photoId, false, jsonRPC );
 		}
 
 	}

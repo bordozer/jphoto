@@ -9,7 +9,7 @@ define( ["backbone"], function ( Backbone ) {
 		}
 
 		, refresh: function() {
-			console.log( 'refresh' );
+			this.fetch( { reset: true } );
 		}
 
 	});

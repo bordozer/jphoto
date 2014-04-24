@@ -31,7 +31,7 @@ public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMen
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminLockUser( %d, '%s' ); return false;", commentAuthor.getId(), commentAuthor.getNameEscaped() );
+				return String.format( "adminLockUser( %d, '%s' );", commentAuthor.getId(), commentAuthor.getNameEscaped() );
 			}
 		};
 	}

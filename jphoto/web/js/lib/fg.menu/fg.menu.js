@@ -202,16 +202,35 @@ function Menu(caller, options){
 		container.find('a').attr('tabindex', '-1');
 		
 		// when there are multiple levels of hierarchy, create flyout or drilldown menu
-		if (container.find('ul').size() > 1) {
-			if (options.flyOut) { menu.flyout(container, options); }
-			else { menu.drilldown(container, options); }	
+		if ( container.find( 'ul' ).size() > 1 ) {
+			if ( options.flyOut ) {
+				menu.flyout( container, options );
+			} else {
+				menu.drilldown( container, options );
+			}
 		}
-		else {
-			container.find('a').click(function(){
+//		else {
+			/*container.find('a').click(function(){
 				menu.chooseItem(this);
 				return false;
-			});
-		};	
+			});*/
+		$.each( $( options.content ).find( 'a' ), function ( ei, element ) {
+				var classList = $( element ).attr( 'class' ).split( /\s+/ );
+				$.each( classList, function ( ci, item ) {
+					if ( $.trim( item ).length > 0 ) {
+						var events = $._data( $( 'a.' + item )[0], "events" );
+						if ( events ) {
+							for ( var type in events ) {
+								for ( var idx in events[type] ) {
+									container.find( 'a.' + item ).bind( type, events[type][idx].handler );
+									$( element, container ).bind( type, events[type][idx].handler );
+								}
+							}
+						}
+					}
+				} );
+			} );
+//		};
 		
 		if (options.linkHover) {
 			var allLinks = container.find('.fg-menu li a');

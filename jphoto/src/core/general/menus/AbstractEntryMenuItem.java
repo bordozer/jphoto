@@ -15,10 +15,10 @@ import utils.UserUtils;
 public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
 	public static final String ADMIN_SUB_MENU_ENTRY_TEXT = "ADMIN";
-	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = "return false;";
+	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = StringUtils.EMPTY;
 
-	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "adminMenuItem";
-	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = StringUtils.EMPTY;
+	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "context-menu-item-admin";
+	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = "context-menu-item";
 
 	public static final int MENU_ITEM_HEIGHT = 29;
 	public static final int MENU_SEPARATOR_HEIGHT = 3;

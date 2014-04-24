@@ -29,7 +29,7 @@ public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "deleteComment( %d ); return false;", getId() );
+				return String.format( "deleteComment( %d );", getId() );
 			}
 		};
 	}

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @RequestMapping( "menu/{entryMenuTypeId}/{entryId}" )
 @Controller
@@ -47,9 +50,9 @@ public class MenuEntryController {
 		entryMenuDTO.setEntryMenuTitle( entryMenu.getMenuTitle() );
 		entryMenuDTO.setEntryMenuHeight( String.valueOf( entryMenu.getMenuHeight() ) );
 
-		entryMenuDTO.setMenuItemCssClass( "_class_" );
-		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
-		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
+//		entryMenuDTO.setMenuItemCssClass( "_class_" );
+//		entryMenuDTO.setMenuItemCommand( "alert( 'Hardcoded menu command' );" );
+//		entryMenuDTO.setMenuItemCommandText( "_command_text_" );
 
 		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu, 0 ) );
 
@@ -72,7 +75,7 @@ public class MenuEntryController {
 				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO( menuItemId );
 
 				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
-				menuItemDTO.setMenuCssClass( entryMenuItem.getMenuCssClass() );
+				menuItemDTO.setMenuCssClass( String.format( "%s-%d-%d", entryMenuItem.getMenuCssClass(), deep, counter ) );
 				menuItemDTO.setHasSumMenu( entryMenuItem.isSubMenu() );
 
 				if ( entryMenuItem instanceof SubmenuAccesible ) {

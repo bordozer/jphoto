@@ -18,6 +18,6 @@ public class PhotoMenuItemDeleteCommand extends AbstractEntryMenuItemCommand<Pho
 
 	@Override
 	public String getMenuCommand() {
-		return String.format( "deletePhoto( %d ); return false;", getId() );
+		return String.format( "deletePhoto( %d );", getId() );
 	}
 }

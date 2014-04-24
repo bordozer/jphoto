@@ -31,7 +31,7 @@ public class PhotoAdminSubMenuItemLockPhotoAuthor extends AbstractPhotoMenuItem 
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminLockUser( %d, '%s' ); return false;", photoAuthor.getId(), photoAuthor.getNameEscaped() );
+				return String.format( "adminLockUser( %d, '%s' );", photoAuthor.getId(), photoAuthor.getNameEscaped() );
 			}
 		};
 	}

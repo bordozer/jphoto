@@ -82,4 +82,18 @@ public class EntryMenuItemDTO {
 	public void setEntrySubMenuItemDTOs( final List<EntryMenuItemDTO> entrySubMenuItemDTOs ) {
 		this.entrySubMenuItemDTOs = entrySubMenuItemDTOs;
 	}
+
+	@Override
+	public String toString() {
+
+		if ( menuTypeSeparator ) {
+			return "SEPARATOR";
+		}
+
+		if ( hasSumMenu ) {
+			String.format( "%s: submenu ( %d items )", menuCommandText, entrySubMenuItemDTOs.size() );
+		}
+
+		return String.format( "%s: %s", menuCommandText, menuCommand );
+	}
 }
