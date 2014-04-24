@@ -26,7 +26,8 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 //			console.log( 'The menu is being initialized... ', menuId, element );
 
-			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], $( '.entry-context-menu-items-ul', element ) );
+			var ul = $( '.entry-context-menu-items-ul', element );
+			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
 
 			var menu_a = $( '#entry-context-menu-icon-a', element );
 
@@ -38,6 +39,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					  , maxHeight: entryMenuHeight
 				} );
 			} );
+
 
 //			console.log( menu_a );
 			menu_a.click();
