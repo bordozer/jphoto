@@ -48,7 +48,7 @@
 			<div id="hoursDiv" style="display: none;">
 				<js:checkboxMassChecker checkboxClass="${periodicalTaskHours}" />
 				<br />
-				<form:checkboxes path="${periodicalTaskHours}" items="${hours}" />
+				<form:checkboxes path="${periodicalTaskHours}" items="${hours}" cssClass="${periodicalTaskHours}" />
 			</div>
 		</table:tddata>
 	</table:tr>

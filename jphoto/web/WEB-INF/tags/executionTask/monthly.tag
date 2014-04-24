@@ -65,7 +65,7 @@
 		<table:tddata>
 			<js:checkboxMassChecker checkboxClass="monthlyTaskMonthIds" />
 			<br />
-			<form:checkboxes path="${monthlyTaskMonthIds}" items="${months}" itemValue="id" itemLabel="name" delimiter="<br />" />
+			<form:checkboxes path="${monthlyTaskMonthIds}" items="${months}" itemValue="id" itemLabel="name" delimiter="<br />" cssClass="monthlyTaskMonthIds" />
 		</table:tddata>
 	</table:tr>
 

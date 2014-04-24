@@ -143,7 +143,7 @@
 							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">
-								<form:checkbox path="schedulerTaskCheckbox" value="${schedulerTaskId}" />
+								<form:checkbox path="schedulerTaskCheckbox" value="${schedulerTaskId}" cssClass="schedulerTaskCheckbox" />
 							</table:tdicon>
 
 							<table:tdicon cssClass="${css}">${schedulerTaskId}</table:tdicon>

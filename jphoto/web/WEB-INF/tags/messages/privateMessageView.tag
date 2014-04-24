@@ -20,7 +20,7 @@
 
 	<div style="float: left; width: 100%; height: 20px; border-bottom: 1px solid #CDCDCD;">
 
-		<form:checkbox path="selectedMessagesIds" value="${privateMessage.id}" />
+		<form:checkbox path="selectedMessagesIds" value="${privateMessage.id}" cssClass="selectedMessagesIds" />
 
 		<html:img16 src="messages/${privateMessageType.icon}" alt="${eco:translate(privateMessageType.name)}" />
 

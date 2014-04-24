@@ -170,7 +170,7 @@
 
 					<table:tr cssClass="${jobExecutionHistoryEntry.chainJob ? 'chainJob' : ''}">
 						<table:tdicon>
-							<form:checkbox path="selectedJobsIds" value="${jobEntryId}"/>
+							<form:checkbox path="selectedJobsIds" value="${jobEntryId}" cssClass="selectedJobsIds"/>
 						</table:tdicon>
 
 						<table:tdicon>

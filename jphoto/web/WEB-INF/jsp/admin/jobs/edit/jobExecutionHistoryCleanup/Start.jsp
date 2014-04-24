@@ -58,7 +58,7 @@
 						<br/>
 						<br/>
 						<form:checkboxes path="${job_execution_status_ids_to_delete_control}" items="${jobExecutionStatuses}" itemValue="id" itemLabel="name"
-										 delimiter="<br />" cssErrorClass="invalid"/>
+										 delimiter="<br />" cssClass="${job_execution_status_ids_to_delete_control}" cssErrorClass="invalid"/>
 					</table:tddata>
 
 				</table:tr>

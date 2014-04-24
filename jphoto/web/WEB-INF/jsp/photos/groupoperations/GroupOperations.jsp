@@ -41,7 +41,7 @@
 					<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 					<c:set var="isGroupOperationAccessible" value="${photoGroupOperationEntry.groupOperationAccessible}"/>
 
-					<div class="floatleft block-border" style="width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
+					<div class="block-border" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
 						<div class="floatleft text-centered" style="height: auto; min-height: 230px;">
 
@@ -66,7 +66,7 @@
 								<c:if test="${photoGroupOperationEntryProperty.photoId == photo.id}">
 									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${photoGroupOperationEntryProperty.entryId}'].value"/>
 
-									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> /> ${photoGroupOperationEntryProperty.name} <br />
+									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> /> ${photoGroupOperationEntryProperty.name} <br />
 									<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
 								</c:if>
 							</c:forEach>
@@ -95,7 +95,7 @@
 				<br />
 				<br />
 				<c:forEach var="userPhotoAlbum" items="${photoGroupOperationModel.userPhotoAlbums}">
-					<js:checkboxMassChecker checkboxClass="_${userPhotoAlbum.id}']" checkboxClass="${userPhotoAlbum.hashCode}" /> ${userPhotoAlbum.name}
+					<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> ${userPhotoAlbum.name}
 					<br />
 				</c:forEach>
 			</c:if>
@@ -105,13 +105,13 @@
 				<br />
 				<br />
 				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
-					<js:checkboxMassChecker checkboxClass="_${userTeamMember.id}']" checkboxClass="${userTeamMember.hashCode}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
+					<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />
 				</c:forEach>
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">
-				<js:checkboxMassChecker checkboxClass="_1']" checkboxClass="1" /> ${eco:translate('Nude content')}
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> ${eco:translate('Nude content')}
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'DELETE_PHOTOS'}">

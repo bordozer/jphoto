@@ -52,7 +52,7 @@
 					<table:tddata>
 						<js:checkboxMassChecker checkboxClass="favoriteEntriesIds"/>
 						<br/>
-						<form:checkboxes path="${favoriteEntriesIdsControl}" items="${favoriteEntriesIds}" itemValue="id" itemLabel="name" delimiter="<br />"/>
+						<form:checkboxes path="${favoriteEntriesIdsControl}" items="${favoriteEntriesIds}" itemValue="id" itemLabel="name" delimiter="<br />" cssClass="favoriteEntriesIds"/>
 						<br/>
 						<br/>
 						${eco:translate('Each action generates one of selected favorite entries randomly')}

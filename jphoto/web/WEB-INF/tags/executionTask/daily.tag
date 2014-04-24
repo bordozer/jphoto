@@ -42,7 +42,7 @@
 		<table:tddata>
 			<js:checkboxMassChecker checkboxClass="dailyTaskWeekdayIds" />
 			<br />
-			<form:checkboxes path="${dailyTaskWeekdayIds}" items="${weekdays}" itemValue="id" itemLabel="name" delimiter="<br />" />
+			<form:checkboxes path="${dailyTaskWeekdayIds}" items="${weekdays}" itemValue="id" itemLabel="name" delimiter="<br />" cssClass="dailyTaskWeekdayIds" />
 		</table:tddata>
 	</table:tr>
 

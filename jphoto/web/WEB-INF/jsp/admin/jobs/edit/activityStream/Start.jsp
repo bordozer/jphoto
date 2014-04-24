@@ -54,7 +54,8 @@
 						<js:checkboxMassChecker checkboxClass="${activity_stream_type_ids_to_delete_control}"/>
 						<br/>
 						<br/>
-						<form:checkboxes path="${activity_stream_type_ids_to_delete_control}" items="${activityTypes}" itemValue="id" itemLabel="name" delimiter="<br />" cssErrorClass="invalid" />
+						<form:checkboxes path="${activity_stream_type_ids_to_delete_control}" items="${activityTypes}" itemValue="id" itemLabel="name" delimiter="<br />"
+										cssClass="${activity_stream_type_ids_to_delete_control}"  cssErrorClass="invalid" />
 					</table:tddata>
 				</table:tr>
 

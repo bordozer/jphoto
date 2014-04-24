@@ -165,7 +165,7 @@ public class PhotoEntryController {
 
 	private String getGroupOperationCheckbox( final Photo photo ) {
 		final String id = PhotoGroupOperationModel.FORM_CONTROL_SELECTED_PHOTO_IDS;
-		return String.format( "<input type='checkbox' id='%s' name='%s' value='%s' />", id, id, photo.getId() );
+		return String.format( "<input type='checkbox' id='%s' name='%s' class='%s' value='%s' />", id, id, id, photo.getId() );
 	}
 
 	private String getPhotoCategory( final int genreId ) {
