@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="${baseUrl}/js/lib/front-end/require.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="${baseUrl}/css/jphoto.css"/>
-	<link rel="stylesheet" type="text/css" href="${baseUrl}/js/lib/jquery/css/ui-lightness/jquery-ui-1.10.4.css"/>
+	<link rel="stylesheet" type="text/css" href="${baseUrl}/js/lib/jquery/css/smoothness/jquery-ui-1.10.4.custom.css"/>
 
 </head>
 <body>

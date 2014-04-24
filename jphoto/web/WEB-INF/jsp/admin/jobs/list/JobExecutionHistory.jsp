@@ -24,7 +24,7 @@
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
-<script type="text/javascript" src="${eco:baseUrl()}/js/jobProgress.js"></script>
+<script type="text/javascript" src="${eco:baseUrl()}/js/DEL_jobProgress.js"></script>
 
 <script type="text/javascript">
 	var interval = ${jobProgressInterval};

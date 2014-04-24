@@ -35,12 +35,13 @@
 						 suppressAutoReloading="true"
 		/>
 
-	<script type="text/javascript" src="${eco:baseUrl()}/js/jobProgress.js"></script>
 	<script type="text/javascript">
-		$( function () {
-			$( "#progressbar_${id}" ).progressbar( {
-												 value:${percentage}
-											 } );
+		require( [ 'jquery' ], function( $ ) {
+			$( function () {
+				$( "#progressbar_${id}" ).progressbar( {
+					 value:${percentage}
+				 } );
+			} );
 		} );
 	</script>
 
@@ -85,36 +86,40 @@
 	</div>
 
 	<script type="text/javascript">
-		var interval = ${jobProgressInterval};
-		var updateJobExecutionIFrameUpdateInterval = 6000;
 
-		setTimeout( function() {
-			updateProgress( ${jobExecutionHistoryEntry.id}, updatePageTitle );
+		require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
 
-		}, interval );
+			var interval = ${jobProgressInterval};
+			var updateJobExecutionIFrameUpdateInterval = 6000;
 
-		function updatePageTitle( percentage ) {
-			document.title = "${eco:projectName()} / ${jobExecutionHistoryEntry.id} / " + percentage + "%";
-		}
+			setTimeout( function () {
+				progress.updateProgress( ${jobExecutionHistoryEntry.id}, interval, updatePageTitle );
 
-		setTimeout( function() {
-			updateJobExecutionIFrame();
-		}, updateJobExecutionIFrameUpdateInterval );
+			}, interval );
 
-		function updateJobExecutionIFrame() {
-			var jobExecutionLogIFrame = $( '#jobExecutionLogIFrame' );
-			jobExecutionLogIFrame.attr( "src", jobExecutionLogIFrame.attr( "src" ) );
+			function updatePageTitle( percentage ) {
+				document.title = "${eco:projectName()} / ${jobExecutionHistoryEntry.id} / " + percentage + "%";
+			}
 
-			setTimeout( function() {
+			setTimeout( function () {
 				updateJobExecutionIFrame();
 			}, updateJobExecutionIFrameUpdateInterval );
-		}
 
-		function stopTheJob() {
-			if ( confirm( "${eco:translate('Stop the job?')}" )) {
-				document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
+			function updateJobExecutionIFrame() {
+				var jobExecutionLogIFrame = $( '#jobExecutionLogIFrame' );
+				jobExecutionLogIFrame.attr( "src", jobExecutionLogIFrame.attr( "src" ) );
+
+				setTimeout( function () {
+					updateJobExecutionIFrame();
+				}, updateJobExecutionIFrameUpdateInterval );
 			}
-		}
+
+			function stopTheJob() {
+				if ( confirm( "${eco:translate('Stop the job?')}" ) ) {
+					document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
+				}
+			}
+		});
 
 	</script>
 
