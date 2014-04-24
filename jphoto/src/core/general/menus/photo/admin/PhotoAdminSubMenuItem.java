@@ -51,11 +51,12 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 	@Override
 	public boolean isAccessibleFor() {
 
-		if ( !isAccessorSuperAdmin() ) {
+		/*if ( !isAccessorSuperAdmin() ) {
 			return false;
 		}
 
-		return !isAccessorSeeingMenuOfOwnPhoto();
+		return !isAccessorSeeingMenuOfOwnPhoto();*/
+		return isAccessorSuperAdmin();
 	}
 
 	public EntryMenu getEntrySubMenu() {
