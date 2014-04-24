@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @RequestMapping( "menu/{entryMenuTypeId}/{entryId}" )
 @Controller

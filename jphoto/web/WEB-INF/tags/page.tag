@@ -115,15 +115,15 @@
 				} );
 			}
 
-			function adminPhotoNudeContentSet( photoId ) {
+			function adminPhotoNudeContentSet( photoId, callback ) {
 				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
-					adminFunctions.adminPhotoNudeContentSet( photoId, jsonRPC );
+					adminFunctions.adminPhotoNudeContentSet( photoId, callback );
 				} );
 			}
 
-			function adminPhotoNudeContentRemove( photoId ) {
+			function adminPhotoNudeContentRemove( photoId, callback ) {
 				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
-					adminFunctions.adminPhotoNudeContentRemove( photoId, jsonRPC );
+					adminFunctions.adminPhotoNudeContentRemove( photoId, callback );
 				} );
 			}
 		</script>

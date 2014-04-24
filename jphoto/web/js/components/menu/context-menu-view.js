@@ -86,12 +86,14 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 			menuElement.click( function( evt ) {
 
+				function nudeContentChangeCallback() {
+					model.get( "contextMenuEntryModel" ).refresh();
+				}
+
 				evt.preventDefault();
 				evt.stopPropagation();
 
 				eval( menuItemCommand );
-//				console.log( menuItemCommand );
-				model.get( "contextMenuEntryModel" ).refresh();
 			});
 		}
 	});

@@ -5,16 +5,22 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-	function adminSetPhotoNudeContent( photoId, isNudeContent, jsonRPC ) {
+	function adminSetPhotoNudeContent( photoId, isNudeContent, callback ) {
 
-		jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );
+		<%--jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );--%>
 
-		// TODO: redraw photo preview
-		/*require( ['modules/photo/list/photo-list'], function ( photoListEntry ) {
-			var photoListId = 1;
-			var element = $( '.photo-container-' + 1 +'-' + photoId );
-			photoListEntry( photoId, photoListId, true, '${eco:baseUrl()}', element );
-		} );*/
+		$.ajax( {
+			type:'GET',
+			url: "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/" + isNudeContent + '/',
+			success:function ( response ) {
+				if ( callback ) {
+					callback();
+				}
+			},
+			error:function () {
+				showUIMessage_Error( "${eco:translate('Error executing ajax query')}" );
+			}
+		} );
 	}
 
 	return {
@@ -33,12 +39,12 @@ define( [ 'jquery' ], function ( $ ) {
 					.dialog( "open" );
 		},
 
-		adminPhotoNudeContentSet: function ( photoId, jsonRPC ) {
-			adminSetPhotoNudeContent( photoId, true, jsonRPC );
+		adminPhotoNudeContentSet: function ( photoId, callback ) {
+			adminSetPhotoNudeContent( photoId, true, callback );
 		},
 
-		adminPhotoNudeContentRemove: function ( photoId, jsonRPC ) {
-			adminSetPhotoNudeContent( photoId, false, jsonRPC );
+		adminPhotoNudeContentRemove: function ( photoId, callback ) {
+			adminSetPhotoNudeContent( photoId, false, callback );
 		}
 
 	}
