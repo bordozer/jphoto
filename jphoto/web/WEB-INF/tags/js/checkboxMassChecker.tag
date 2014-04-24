@@ -15,8 +15,6 @@
 
 		var massChecker = mass_checker.getMassChecker();
 
-		console.log( 'MassChecker: ',  massChecker );
-
 		<c:if test="${initiallyChecked}">
 			massChecker.registerSelected( "${checkboxClass}", "${eco:imageFolderURL()}" );
 		</c:if>

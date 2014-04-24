@@ -23,10 +23,12 @@
 
 <script type="text/javascript">
 
-	$( function () {
-		$( "#${progressBarId}" ).progressbar( {
-												  value:${percentage}
-											  } ).addClass( 'customColor_${progressBarId}' );
-	} );
+	require( [ 'jquery' ], function( $ ) {
+		$( function () {
+			$( "#${progressBarId}" ).progressbar( {
+													  value:${percentage}
+												  } ).addClass( 'customColor_${progressBarId}' );
+		} );
+	});
 
 </script>

@@ -114,12 +114,13 @@
 				}, updateJobExecutionIFrameUpdateInterval );
 			}
 
-			function stopTheJob() {
-				if ( confirm( "${eco:translate('Stop the job?')}" ) ) {
-					document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
-				}
-			}
 		});
+
+		function stopTheJob() {
+			if ( confirm( "${eco:translate('Stop the job?')}" ) ) {
+				document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
+			}
+		}
 
 	</script>
 
