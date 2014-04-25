@@ -1,5 +1,4 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
-<%@ page import="core.general.user.UserMembershipType" %>
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
@@ -35,7 +34,6 @@
 <c:set var="delayBetweenRequestControl" value="<%=PhotosImportModel.DELAY_BETWEEN_REQUEST_FORM_CONTROL%>"/>
 
 <c:set var="userGenders" value="<%=UserGender.values()%>"/>
-<c:set var="userMembershipTypes" value="<%=UserMembershipType.values()%>"/>
 
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
@@ -220,7 +218,7 @@
 									<table:tr>
 										<table:tdtext text_t="Membership type" isMandatory="true"/>
 										<table:td>
-											<form:radiobuttons path="${userMembershipIdControl}" items="${userMembershipTypes}" itemValue="id" itemLabel="name" delimiter="<br />"
+											<form:radiobuttons path="${userMembershipIdControl}" items="${photosImportModel.userMembershipTypeTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />"
 															   htmlEscape="false"/>
 										</table:td>
 									</table:tr>

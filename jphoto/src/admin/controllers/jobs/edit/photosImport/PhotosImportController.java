@@ -21,6 +21,7 @@ import core.general.base.CommonProperty;
 import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
+import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ui.context.EnvironmentContext;
+import ui.translatable.UserMembershipTypeTranslatableList;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,6 +60,9 @@ public class PhotosImportController extends DateRangableController {
 	@Autowired
 	private GenreService genreService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
 		binder.setValidator( photosImportValidator );
@@ -65,7 +70,7 @@ public class PhotosImportController extends DateRangableController {
 
 	@ModelAttribute( JOB_MODEL_NAME )
 	public PhotosImportModel initModel() {
-		final PhotosImportModel model = new PhotosImportModel();
+		final PhotosImportModel model = new PhotosImportModel( new UserMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
 
 		final PhotosImportSource importSource = PhotosImportSource.PHOTOSIGHT;
 		model.setImportSource( importSource );

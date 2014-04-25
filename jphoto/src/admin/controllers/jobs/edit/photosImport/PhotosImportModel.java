@@ -3,6 +3,7 @@ package admin.controllers.jobs.edit.photosImport;
 import admin.controllers.jobs.edit.DateRangableModel;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
+import ui.translatable.UserMembershipTypeTranslatableList;
 
 import java.util.List;
 
@@ -49,6 +50,12 @@ public class PhotosImportModel extends DateRangableModel {
 	private boolean deletePictureFromDiskAfterImport;
 	
 	private List<PhotosightCategoryWrapper> photosightCategoryWrappers;
+
+	private final UserMembershipTypeTranslatableList userMembershipTypeTranslatableList;
+
+	public PhotosImportModel( final UserMembershipTypeTranslatableList userMembershipTypeTranslatableList ) {
+		this.userMembershipTypeTranslatableList = userMembershipTypeTranslatableList;
+	}
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -176,6 +183,10 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public List<PhotosightCategoryWrapper> getPhotosightCategoryWrappers() {
 		return photosightCategoryWrappers;
+	}
+
+	public UserMembershipTypeTranslatableList getUserMembershipTypeTranslatableList() {
+		return userMembershipTypeTranslatableList;
 	}
 
 	@Override
