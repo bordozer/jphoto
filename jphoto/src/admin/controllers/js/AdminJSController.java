@@ -10,11 +10,11 @@ public class AdminJSController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/photosight.js" )
 	public String photosightUserInfo() {
-		return "admin/jobs/edit/photosImport/photosight-user-info.js";
+		return "admin/js/photosight-user-info.js";
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/job-execution-progress.js" )
 	public String jobExecutionProgress() {
-		return "admin/jobs/job-execution-progress.js";
+		return "admin/js/job-execution-progress.js";
 	}
 }
