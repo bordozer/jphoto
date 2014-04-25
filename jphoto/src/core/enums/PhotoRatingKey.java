@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum PhotoRatingKey {
+import core.interfaces.IdentifiableNameable;
+
+public enum PhotoRatingKey implements IdentifiableNameable {
 	DAY( 1, "date" )
 	, WEEK( 2, "week" )
 	, MONTH( 3, "month" )

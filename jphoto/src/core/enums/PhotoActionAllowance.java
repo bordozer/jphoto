@@ -1,9 +1,12 @@
 package core.enums;
 
-public enum PhotoActionAllowance {
-	ACTIONS_DENIED( 1, "Not allowed" )
-	, CANDIDATES_AND_MEMBERS( 2, "Candidates and members" )
-	, MEMBERS_ONLY( 3, "Members only" );
+import core.interfaces.IdentifiableNameable;
+
+public enum PhotoActionAllowance implements IdentifiableNameable {
+
+	ACTIONS_DENIED( 1, "PhotoActionAllowance: Not allowed" )
+	, CANDIDATES_AND_MEMBERS( 2, "PhotoActionAllowance: Candidates and members" )
+	, MEMBERS_ONLY( 3, "PhotoActionAllowance: Members only" );
 
 	private final int id;
 	private final String name;

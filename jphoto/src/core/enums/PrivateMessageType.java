@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum PrivateMessageType {
+import core.interfaces.IdentifiableNameable;
+
+public enum PrivateMessageType implements IdentifiableNameable {
 
 	USER_PRIVATE_MESSAGE_IN( 1, "PrivateMessageType: Received messages", "privateIn.png" )
 	, USER_PRIVATE_MESSAGE_OUT( 4, "PrivateMessageType: Sent messages", "privateOut.png" )

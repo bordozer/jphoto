@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum PhotoAwardKey {
+import core.interfaces.IdentifiableNameable;
+
+public enum PhotoAwardKey implements IdentifiableNameable {
 
 	PHOTO_OF_THE_DAY( 1, "PhotoAwardKey: The photo of the day" )
 	, TOP_3_OF_THE_DAY( 2, "PhotoAwardKey: Top 3 of the day" )

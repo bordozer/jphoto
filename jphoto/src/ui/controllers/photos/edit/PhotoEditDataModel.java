@@ -9,6 +9,7 @@ import core.general.user.userTeam.UserTeamMember;
 import org.springframework.web.multipart.MultipartFile;
 import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
 import ui.services.validation.DataRequirementService;
+import ui.translatable.GenericTranslatableList;
 
 import java.util.Date;
 import java.util.List;
@@ -67,8 +68,8 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private boolean isAnonymousPosting; // photo posted anonymously
 	private boolean isAnonymousDay;		// posting day ai anonymous day
 
-	private List<PhotoActionAllowance> accessibleCommentAllowances;
-	private List<PhotoActionAllowance> accessibleVotingAllowances;
+	private GenericTranslatableList<PhotoActionAllowance> accessibleCommentAllowancesTranslatableList;
+	private GenericTranslatableList<PhotoActionAllowance> accessibleVotingAllowancesTranslatableList;
 
 	private Date photoUploadTime;
 
@@ -316,20 +317,20 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		isAnonymousDay = anonymousDay;
 	}
 
-	public List<PhotoActionAllowance> getAccessibleCommentAllowances() {
-		return accessibleCommentAllowances;
+	public GenericTranslatableList<PhotoActionAllowance> getAccessibleCommentAllowancesTranslatableList() {
+		return accessibleCommentAllowancesTranslatableList;
 	}
 
-	public void setAccessibleCommentAllowances( final List<PhotoActionAllowance> accessibleCommentAllowance ) {
-		this.accessibleCommentAllowances = accessibleCommentAllowance;
+	public void setAccessibleCommentAllowancesTranslatableList( final GenericTranslatableList<PhotoActionAllowance> accessibleCommentAllowancesTranslatableList ) {
+		this.accessibleCommentAllowancesTranslatableList = accessibleCommentAllowancesTranslatableList;
 	}
 
-	public List<PhotoActionAllowance> getAccessibleVotingAllowances() {
-		return accessibleVotingAllowances;
+	public GenericTranslatableList<PhotoActionAllowance> getAccessibleVotingAllowancesTranslatableList() {
+		return accessibleVotingAllowancesTranslatableList;
 	}
 
-	public void setAccessibleVotingAllowances( final List<PhotoActionAllowance> accessibleVotingAllowance ) {
-		this.accessibleVotingAllowances = accessibleVotingAllowance;
+	public void setAccessibleVotingAllowancesTranslatableList( final GenericTranslatableList<PhotoActionAllowance> accessibleVotingAllowancesTranslatableList ) {
+		this.accessibleVotingAllowancesTranslatableList = accessibleVotingAllowancesTranslatableList;
 	}
 
 	public Date getPhotoUploadTime() {

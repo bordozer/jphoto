@@ -6,6 +6,8 @@
 <%@ page import="core.general.configuration.ConfigurationKey" %>
 <%@ page import="ui.services.validation.PhotoRequirement" %>
 <%@ page import="ui.services.validation.DataRequirementService" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -24,8 +26,8 @@
 	final String genresHaveNudeContent = StringUtils.join( photoEditDataModel.getGenresHaveNudeContent(), ", " );
 %>
 
-<c:set var="accessibleCommentAllowances" value="${photoEditDataModel.accessibleCommentAllowances}"/>
-<c:set var="accessibleVotingAllowances" value="${photoEditDataModel.accessibleVotingAllowances}"/>
+<c:set var="accessibleCommentAllowancesTranslatableList" value="${photoEditDataModel.accessibleCommentAllowancesTranslatableList}"/>
+<c:set var="accessibleVotingAllowancesTranslatableList" value="${photoEditDataModel.accessibleVotingAllowancesTranslatableList}"/>
 
 <c:set var="isNew" value="<%=photoEditDataModel.isNew()%>"/>
 
@@ -60,7 +62,7 @@
 <c:set var="genresCanHaveNudeContent" value="<%=genresCanHaveNudeContent%>"/>
 <c:set var="genresHaveNudeContent" value="<%=genresHaveNudeContent%>"/>
 
-<c:set var="yesNoValues" value="<%=YesNo.values()%>"/>
+<c:set var="yesNoValues" value="<%=GenericTranslatableList.yesNoTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="editDataWizardStepId" value="<%=PhotoEditWizardStep.EDIT_PHOTO_DATA.getId()%>"/>
 
 <c:set var="uploadAllowance" value="${photoEditDataModel.uploadAllowance}"/>
@@ -252,7 +254,7 @@
 					<table:tdtext text_t="Photo uploading: Comments allowance"/>
 
 					<table:tddata>
-						<form:radiobuttons path="photoEditDataModel.commentsAllowanceId" items="${accessibleCommentAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />
+						<form:radiobuttons path="photoEditDataModel.commentsAllowanceId" items="${accessibleCommentAllowancesTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />" />
 					</table:tddata>
 				</table:tredit>
 				<%-- / Comments allowance --%>
@@ -277,7 +279,7 @@
 					<table:tdtext text_t="Photo uploading: Photo appraisal allowance"/>
 
 					<table:tddata>
-						<form:radiobuttons path="photoEditDataModel.votingAllowanceId" items="${accessibleVotingAllowances}" itemValue="id" itemLabel="name" delimiter="<br />" />
+						<form:radiobuttons path="photoEditDataModel.votingAllowanceId" items="${accessibleVotingAllowancesTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />" />
 					</table:tddata>
 				</table:tredit>
 				<%-- / voting allowance --%>

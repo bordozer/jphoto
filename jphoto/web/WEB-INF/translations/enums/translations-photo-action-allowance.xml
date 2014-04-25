@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PhotoActionAllowance: Not allowed</nerd>
+		<ru><![CDATA[Запрещено всем]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoActionAllowance: Candidates and members</nerd>
+		<ru><![CDATA[Разрешено кандидатам и членам клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoActionAllowance: Members only</nerd>
+		<ru><![CDATA[Разрешено только членам клуба]]></ru>
+	</translation>
+
+</translations>

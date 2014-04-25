@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum RestrictionType {
+import core.interfaces.IdentifiableNameable;
+
+public enum RestrictionType implements IdentifiableNameable {
 	USER_LOGIN( 1, "Login in" )
 	, USER_PHOTO_UPLOADING( 2, "Photo uploading" )
 	, USER_COMMENTING( 3, "Commenting" )

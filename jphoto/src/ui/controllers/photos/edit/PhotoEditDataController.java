@@ -1,5 +1,6 @@
 package ui.controllers.photos.edit;
 
+import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
@@ -36,6 +37,7 @@ import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
 import ui.controllers.photos.edit.description.UploadDescriptionFactory;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.validation.DataRequirementService;
+import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -339,8 +341,12 @@ public class PhotoEditDataController {
 	}
 
 	private void setAccessibleAllowances( final PhotoEditDataModel model ) {
-		model.setAccessibleCommentAllowances( configurationService.getAccessiblePhotoCommentAllowance() );
-		model.setAccessibleVotingAllowances( configurationService.getAccessiblePhotoVotingAllowance() );
+
+		final List<PhotoActionAllowance> accessiblePhotoCommentAllowance = configurationService.getAccessiblePhotoCommentAllowance();
+		model.setAccessibleCommentAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoCommentAllowance, EnvironmentContext.getLanguage(), translatorService ) );
+
+		final List<PhotoActionAllowance> accessiblePhotoVotingAllowance = configurationService.getAccessiblePhotoVotingAllowance();
+		model.setAccessibleVotingAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoVotingAllowance, EnvironmentContext.getLanguage(), translatorService ) );
 	}
 
 	private PhotoTeam getPhotoTeam( final Photo photo, final PhotoEditDataModel model ) {
