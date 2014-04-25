@@ -1,9 +1,10 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
+import core.enums.UserGender;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
-import ui.translatable.UserMembershipTypeTranslatableList;
+import ui.translatable.GenericTranslatableList;
 
 import java.util.List;
 
@@ -51,11 +52,8 @@ public class PhotosImportModel extends DateRangableModel {
 	
 	private List<PhotosightCategoryWrapper> photosightCategoryWrappers;
 
-	private final UserMembershipTypeTranslatableList userMembershipTypeTranslatableList;
-
-	public PhotosImportModel( final UserMembershipTypeTranslatableList userMembershipTypeTranslatableList ) {
-		this.userMembershipTypeTranslatableList = userMembershipTypeTranslatableList;
-	}
+	private GenericTranslatableList userMembershipTypeTranslatableList;
+	private GenericTranslatableList<UserGender> userGenderTranslatableList;
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -185,8 +183,20 @@ public class PhotosImportModel extends DateRangableModel {
 		return photosightCategoryWrappers;
 	}
 
-	public UserMembershipTypeTranslatableList getUserMembershipTypeTranslatableList() {
+	public void setUserMembershipTypeTranslatableList( final GenericTranslatableList userMembershipTypeTranslatableList ) {
+		this.userMembershipTypeTranslatableList = userMembershipTypeTranslatableList;
+	}
+
+	public GenericTranslatableList getUserMembershipTypeTranslatableList() {
 		return userMembershipTypeTranslatableList;
+	}
+
+	public void setUserGenderTranslatableList( final GenericTranslatableList<UserGender> userGenderTranslatableList ) {
+		this.userGenderTranslatableList = userGenderTranslatableList;
+	}
+
+	public GenericTranslatableList<UserGender> getUserGenderTranslatableList() {
+		return userGenderTranslatableList;
 	}
 
 	@Override

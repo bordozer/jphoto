@@ -33,7 +33,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ui.context.EnvironmentContext;
-import ui.translatable.UserMembershipTypeTranslatableList;
+import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,13 +70,16 @@ public class PhotosImportController extends DateRangableController {
 
 	@ModelAttribute( JOB_MODEL_NAME )
 	public PhotosImportModel initModel() {
-		final PhotosImportModel model = new PhotosImportModel( new UserMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
+		final PhotosImportModel model = new PhotosImportModel();
 
 		final PhotosImportSource importSource = PhotosImportSource.PHOTOSIGHT;
 		model.setImportSource( importSource );
 		model.setImportSourceId( importSource.getId() );
 
 		prepareDateRange( model );
+
+		model.setUserMembershipTypeTranslatableList( GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
+		model.setUserGenderTranslatableList( GenericTranslatableList.userGenderTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
 
 		return model;
 	}

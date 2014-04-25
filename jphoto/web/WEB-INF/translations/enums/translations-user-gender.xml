@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>UserGender: male</nerd>
+		<ru><![CDATA[мужской]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserGender: female</nerd>
+		<ru><![CDATA[женский]]></ru>
+	</translation>
+
+</translations>

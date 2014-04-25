@@ -33,8 +33,6 @@
 <c:set var="photosightCategoriesControl" value="<%=PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL%>"/>
 <c:set var="delayBetweenRequestControl" value="<%=PhotosImportModel.DELAY_BETWEEN_REQUEST_FORM_CONTROL%>"/>
 
-<c:set var="userGenders" value="<%=UserGender.values()%>"/>
-
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 
@@ -210,7 +208,7 @@
 									<table:tr>
 										<table:tdtext text_t="Gender" isMandatory="true"/>
 										<table:td>
-											<form:radiobuttons path="${userGenderIdControl}" items="${userGenders}" itemValue="id" itemLabel="name" delimiter="<br />"
+											<form:radiobuttons path="${userGenderIdControl}" items="${photosImportModel.userGenderTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />"
 															   htmlEscape="false"/>
 										</table:td>
 									</table:tr>

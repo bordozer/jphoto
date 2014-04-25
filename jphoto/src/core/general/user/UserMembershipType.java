@@ -1,10 +1,11 @@
 package core.general.user;
 
 import com.google.common.collect.Lists;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.List;
 
-public enum UserMembershipType {
+public enum UserMembershipType implements IdentifiableNameable {
 
 	AUTHOR( 1, "UserMembershipType: author", "UserMembershipType: author plural", "author.png" )
 	, MODEL( 2, "UserMembershipType: model", "UserMembershipType: model plural", "model.png" )

@@ -1,9 +1,11 @@
 package core.enums;
 
-public enum UserGender {
+import core.interfaces.IdentifiableNameable;
 
-	MALE( 1, "male" )
-	, FEMALE( 2, "female" )
+public enum UserGender implements IdentifiableNameable {
+
+	MALE( 1, "UserGender: male" )
+	, FEMALE( 2, "UserGender: female" )
 	;
 
 	private final int id;
