@@ -5,6 +5,7 @@ import core.general.base.AbstractGeneralModel;
 import core.general.user.User;
 import core.services.translator.Language;
 import ui.services.validation.DataRequirementService;
+import ui.translatable.GenericTranslatableList;
 
 import java.util.List;
 import java.util.Set;
@@ -42,7 +43,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	private boolean showNudeContent;
 	private int userUILanguageId;
 
-	private List<Language> usedLanguages;
+	private GenericTranslatableList<Language> usedLanguageTranslatableList;
 
 	private int photosInLine;
 	private int photoLines;
@@ -236,12 +237,12 @@ public class UserEditDataModel extends AbstractGeneralModel {
 		this.userUILanguageId = userUILanguageId;
 	}
 
-	public List<Language> getUsedLanguages() {
-		return usedLanguages;
+	public GenericTranslatableList<Language> getUsedLanguageTranslatableList() {
+		return usedLanguageTranslatableList;
 	}
 
-	public void setUsedLanguages( final List<Language> usedLanguages ) {
-		this.usedLanguages = usedLanguages;
+	public void setUsedLanguageTranslatableList( final GenericTranslatableList<Language> usedLanguageTranslatableList ) {
+		this.usedLanguageTranslatableList = usedLanguageTranslatableList;
 	}
 
 	public List<PhotoActionAllowance> getAccessibleCommentAllowances() {

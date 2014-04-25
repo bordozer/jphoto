@@ -7,6 +7,9 @@
 <%@ page import="core.general.user.EmailNotificationType" %>
 <%@ page import="ui.services.validation.UserRequirement" %>
 <%@ page import="ui.services.validation.DataRequirementService" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -57,7 +60,6 @@
 <c:set var="membershipTypeId1" value="membershipTypeId1"/>
 
 <c:set var="emailNotificationOptionIdsControl" value="<%=UserEditDataModel.FORM_CONTROL_EMAIL_NOTIFICATION_OPTION_IDS%>"/>
-<c:set var="emailNotificationOptionsValues" value="<%=EmailNotificationType.values()%>"/>
 
 <c:set var="defaultPhotoCommentsAllowanceIdControl" value="<%=UserEditDataModel.FORM_CONTROL_DEFAULT_COMMENTS_ALLOWANCE_ID%>"/>
 <c:set var="defaultPhotoVotingAllowanceIdControl" value="<%=UserEditDataModel.FORM_CONTROL_DEFAULT_VOTING_ALLOWANCE_ID%>"/>
@@ -67,10 +69,10 @@
 <c:set var="photoLinesValues" value="<%=photoLinesValues%>"/>
 <c:set var="photoLinesControl" value="userEditDataModel.photoLines"/>
 
-<c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
-
-<c:set var="userGenderValues" value="<%=UserGender.values()%>"/>
+<c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="userGenderValues" value="<%=GenericTranslatableList.userGenderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="yesNoValues" value="<%=YesNo.values()%>"/>
+<c:set var="emailNotificationOptionsValues" value="<%=EmailNotificationType.values()%>"/>
 
 <c:set var="accessibleCommentAllowances" value="${userEditDataModel.accessibleCommentAllowances}"/>
 <c:set var="accessibleVotingAllowances" value="${userEditDataModel.accessibleVotingAllowances}"/>
@@ -239,7 +241,7 @@
 			<table:tredit>
 				<table:tdtext text_t="User data edit: Language" labelFor="${photoLinesControl}" />
 				<table:tddata>
-					<form:radiobuttons items="${userEditDataModel.usedLanguages}" path="userEditDataModel.userUILanguageId" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
+					<form:radiobuttons path="userEditDataModel.userUILanguageId" items="${userEditDataModel.usedLanguageTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
 			</table:tredit>
 

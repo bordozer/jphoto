@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import ui.services.validation.DataRequirementService;
+import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 import utils.UserUtils;
 
@@ -91,8 +92,6 @@ public class UserEditDataController {
 		model.setMaxUserNameLength( configurationService.getInt( ConfigurationKey.SYSTEM_USER_NAME_MAX_LENGTH ) );
 
 		model.setDataRequirementService( dataRequirementService );
-
-		model.setUsedLanguages( systemVarsService.getActiveLanguages() );
 
 		return model;
 	}
@@ -231,6 +230,8 @@ public class UserEditDataController {
 		setCommentAllowance( model, user );
 
 		setVotingAllowance( model, user );
+
+		model.setUsedLanguageTranslatableList( GenericTranslatableList.languageTranslatableList( systemVarsService.getActiveLanguages(), translatorService ) );
 	}
 
 	private void initUserFromModel( final User user, final UserEditDataModel model ) {

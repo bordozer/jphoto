@@ -1,17 +1,17 @@
 package core.services.translator;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public enum Language implements Identifiable {
+public enum Language implements IdentifiableNameable {
 
-	NERD( 1, "nerd", "Nerd", "nerd.png" )
-	, UA( 4, "ua", "Ukrainian language name", "ua.png" )
-	, RU( 3, "ru", "Russian language name", "ru.png" )
-	, EN( 2, "en", "English language name", "en.png" )
+	NERD( 1, "nerd", "Language: Nerd", "nerd.png" )
+	, UA( 4, "ua", "Language: Ukrainian", "ua.png" )
+	, RU( 3, "ru", "Language: Russian", "ru.png" )
+	, EN( 2, "en", "Language: English", "en.png" )
 	;
 
 	private final int id;
