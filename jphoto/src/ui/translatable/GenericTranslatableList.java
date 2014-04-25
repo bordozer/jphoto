@@ -1,5 +1,7 @@
 package ui.translatable;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.jobs.enums.DateRangeType;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 import core.interfaces.IdentifiableNameable;
@@ -54,5 +56,13 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<UserGender> userGenderTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<UserGender>( UserGender.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<PhotosImportSource>( PhotosImportSource.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<DateRangeType> dateRangeTypeTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<DateRangeType>( DateRangeType.values(), language, translatorService );
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
 <%@ page import="core.enums.UserGender" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +17,6 @@
 
 <jsp:useBean id="photosImportModel" type="admin.controllers.jobs.edit.photosImport.PhotosImportModel" scope="request"/>
 
-<c:set var="photosImportSources" value="<%=PhotosImportSource.values()%>"/>
 <c:set var="importSourceIdControl" value="<%=PhotosImportModel.FORM_CONTROL_PHOTOS_IMPORT_SOURCE_ID%>"/>
 
 <c:set var="pictureDirFormControl" value="<%=PhotosImportModel.PICTURE_DIR_FORM_CONTROL%>"/>
@@ -60,7 +60,7 @@
 					<table:tr>
 						<table:tdtext text_t="Import sources" isMandatory="true"/>
 						<table:tddata>
-							<form:radiobuttons path="${importSourceIdControl}" items="${photosImportSources}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"
+							<form:radiobuttons path="${importSourceIdControl}" items="${photosImportModel.photosImportSourceTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"
 											   onchange="setFormsVisibility();"/>
 						</table:tddata>
 					</table:tr>

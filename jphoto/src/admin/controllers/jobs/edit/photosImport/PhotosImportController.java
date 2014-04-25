@@ -80,6 +80,7 @@ public class PhotosImportController extends DateRangableController {
 
 		model.setUserMembershipTypeTranslatableList( GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
 		model.setUserGenderTranslatableList( GenericTranslatableList.userGenderTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
+		model.setPhotosImportSourceTranslatableList( GenericTranslatableList.photosImportSourceTranslatableList( EnvironmentContext.getLanguage(), translatorService ) );
 
 		return model;
 	}

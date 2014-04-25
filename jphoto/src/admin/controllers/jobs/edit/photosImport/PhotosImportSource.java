@@ -1,8 +1,10 @@
 package admin.controllers.jobs.edit.photosImport;
 
-public enum PhotosImportSource {
-	FILE_SYSTEM( 1, "File system" )
-	, PHOTOSIGHT( 2, "Photosight" )
+import core.interfaces.IdentifiableNameable;
+
+public enum PhotosImportSource implements IdentifiableNameable {
+	FILE_SYSTEM( 1, "PhotosImportSource: File system" )
+	, PHOTOSIGHT( 2, "PhotosImportSource: Photosight" )
 	;
 
 	private final int id;

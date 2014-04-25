@@ -2,6 +2,8 @@
 <%@ tag import="core.services.utils.SystemVarsServiceImpl" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="admin.controllers.jobs.edit.DateRangableModel" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -20,7 +22,7 @@
 <c:set var="dateToControl" value="<%=DateRangableModel.DATE_TO_FORM_CONTROL%>" />
 <c:set var="timePeriodControl" value="<%=DateRangableModel.TIME_PERIOD_FORM_CONTROL%>" />
 
-<c:set var="dateRangeTypes" value="<%=DateRangeType.values()%>" />
+<c:set var="dateRangeTypes" value="<%=GenericTranslatableList.dateRangeTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() )%>" />
 <c:set var="dateRangeId" value="<%=DateRangeType.DATE_RANGE.getId()%>" />
 <c:set var="timePeriodId" value="<%=DateRangeType.TIME_PERIOD.getId()%>" />
 <c:set var="currentTimeId" value="<%=DateRangeType.CURRENT_TIME.getId()%>" />
@@ -29,7 +31,7 @@
 <c:set var="dateRangeDiffDiv" value="dateRangeDiffDiv" />
 
 <div class="centerAlign">
-	<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes}" itemValue="id" itemLabel="name" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
+	<form:radiobuttons path="${dateRangeTypeIdControl}" items="${dateRangeTypes.entries}" itemValue="id" itemLabel="name" onchange="setVisibility();" delimiter="&nbsp;&nbsp;&nbsp;" htmlEscape="false"/>
 </div>
 
 <c:set var="tblWidth" value="500"/>

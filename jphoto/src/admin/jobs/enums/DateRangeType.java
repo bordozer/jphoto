@@ -1,10 +1,12 @@
 package admin.jobs.enums;
 
-public enum DateRangeType {
+import core.interfaces.IdentifiableNameable;
 
-	DATE_RANGE( 1, "date range" )
-	, TIME_PERIOD( 2, "time period" )
-	, CURRENT_TIME( 3, "actual time" )
+public enum DateRangeType implements IdentifiableNameable {
+
+	DATE_RANGE( 1, "DateRangeType: date range" )
+	, TIME_PERIOD( 2, "DateRangeType: time period" )
+	, CURRENT_TIME( 3, "DateRangeType: actual time" )
 	;
 
 	private final int id;

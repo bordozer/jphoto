@@ -54,6 +54,7 @@ public class PhotosImportModel extends DateRangableModel {
 
 	private GenericTranslatableList userMembershipTypeTranslatableList;
 	private GenericTranslatableList<UserGender> userGenderTranslatableList;
+	private GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList;
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -206,5 +207,13 @@ public class PhotosImportModel extends DateRangableModel {
 		pageQty = StringUtils.EMPTY;
 		delayBetweenRequest = StringUtils.EMPTY;
 		deletePictureFromDiskAfterImport = false;
+	}
+
+	public void setPhotosImportSourceTranslatableList( final GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList ) {
+		this.photosImportSourceTranslatableList = photosImportSourceTranslatableList;
+	}
+
+	public GenericTranslatableList<PhotosImportSource> getPhotosImportSourceTranslatableList() {
+		return photosImportSourceTranslatableList;
 	}
 }

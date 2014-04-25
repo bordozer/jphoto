@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PhotosImportSource: File system</nerd>
+		<ru><![CDATA[Файловая система]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotosImportSource: Photosight</nerd>
+		<ru><![CDATA[photosight.ru]]></ru>
+	</translation>
+
+</translations>
