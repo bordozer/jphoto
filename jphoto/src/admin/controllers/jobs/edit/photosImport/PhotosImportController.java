@@ -22,6 +22,8 @@ import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
 import core.services.utils.DateUtilsService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -122,18 +124,36 @@ public class PhotosImportController extends DateRangableController {
 
 		aModel.setImportComments( true );
 
-		final List<PhotosightCategory> categoryList = Arrays.asList( PhotosightCategory.values() );
-		// Enable to select all categories by default
+		final List<PhotosightCategory> categoryList = newArrayList( Arrays.asList( PhotosightCategory.values() ) );
 
-		/*aModel.setPhotosightCategories( Lists.transform( categoryList, new Function<PhotosightCategory, String>() {
+		CollectionUtils.filter( categoryList, new Predicate<PhotosightCategory>() {
+			@Override
+			public boolean evaluate( final PhotosightCategory photosightCategory ) {
+				return ! getGenreByPhotosightCategory( photosightCategory ).isCanContainNudeContent();
+			}
+		} );
+
+		aModel.setPhotosightCategories( Lists.transform( categoryList, new Function<PhotosightCategory, String>() {
 			@Override
 			public String apply( final PhotosightCategory photosightCategory ) {
 				return String.valueOf( photosightCategory.getId() );
 			}
-		} ) );*/
-		aModel.setPhotosightCategories( newArrayList( String.valueOf( PhotosightCategory.PORTRAIT.getId() ) ) );
+		} ) );
 
 		aModel.setPhotosightCategoryWrappers( getPhotosightCategoriesCheckboxes() );
+	}
+
+	private Genre getGenreByPhotosightCategory( final PhotosightCategory photosightCategory ) {
+		final List<PhotosightCategoryToGenreMapping> genreMapping = PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING;
+
+		for ( final PhotosightCategoryToGenreMapping entry : genreMapping ) {
+			if ( entry.getPhotosightCategory() == photosightCategory ) {
+				final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
+				return genreService.loadIdByName( genreDiscEntry.getName() );
+			}
+		}
+
+		return null;
 	}
 
 	private List<PhotosightCategoryWrapper> getPhotosightCategoriesCheckboxes() {
@@ -145,28 +165,14 @@ public class PhotosImportController extends DateRangableController {
 			}
 		} );
 
-		final List<PhotosightCategoryToGenreMapping> genreMapping = PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING;
-
 		final List<PhotosightCategoryWrapper> photosightCategoryWrappers = newArrayList();
 		for ( final PhotosightCategory photosightCategory : photosightCategoriesSorted ) {
 
 			final PhotosightCategoryWrapper categoryWrapper = new PhotosightCategoryWrapper( photosightCategory );
 
-			if ( photosightCategory == PhotosightCategory.PORTRAIT ) {
-				categoryWrapper.addCssClass( "photosight-category-portrait" );
-			}
-
-			for ( final PhotosightCategoryToGenreMapping entry : genreMapping ) {
-				if ( entry.getPhotosightCategory() == photosightCategory ) {
-
-					final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
-					final Genre genre = genreService.loadIdByName( genreDiscEntry.getName() );
-					if ( ! genre.isCanContainNudeContent() ) {
-						categoryWrapper.addCssClass( "photosight-category-no-nude" );
-					}
-
-					break;
-				}
+			final Genre genre = getGenreByPhotosightCategory( photosightCategory );
+			if ( ! genre.isCanContainNudeContent() ) {
+				categoryWrapper.addCssClass( "photosight-category-no-nude" );
 			}
 
 			photosightCategoryWrappers.add( categoryWrapper );
