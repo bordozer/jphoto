@@ -1,6 +1,9 @@
 package core.general.user;
 
-public enum UserStatus {
+import core.interfaces.IdentifiableNameable;
+
+public enum UserStatus implements IdentifiableNameable {
+
 	CANDIDATE( 1, "UserStatus: candidate")
 	, MEMBER( 2, "UserStatus: member")
 	;

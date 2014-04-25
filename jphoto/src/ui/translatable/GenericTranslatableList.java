@@ -6,6 +6,7 @@ import core.enums.UserGender;
 import core.enums.YesNo;
 import core.general.user.EmailNotificationType;
 import core.general.user.UserMembershipType;
+import core.general.user.UserStatus;
 import core.interfaces.IdentifiableNameable;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -57,6 +58,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<UserStatus> userStatusTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<UserStatus>( UserStatus.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<EmailNotificationType> emailNotificationTypeTranslatableList( final Language language, final TranslatorService translatorService ) {
