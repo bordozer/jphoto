@@ -1,10 +1,10 @@
 package core.enums;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.EnumSet;
 
-public enum FavoriteEntryType implements Identifiable {
+public enum FavoriteEntryType implements IdentifiableNameable {
 
 	FAVORITE_MEMBERS( 1, "FavoriteEntryType: Favorite members", "add to favorite members", "The member is in your favorites. Click to remove.", "userAdd16x16.png", "userRemove16x16.png" )
 	, FAVORITE_PHOTOS( 2, "FavoriteEntryType: Favorite photos", "add to favorite photos", "The photo is in your favorites. Click to remove.", "photoAdd16x16.png", "photoRemove16x16.png" )

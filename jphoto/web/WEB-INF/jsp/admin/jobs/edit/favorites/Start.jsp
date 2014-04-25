@@ -1,5 +1,8 @@
 <%@ page import="admin.controllers.jobs.edit.favorites.FavoritesJobModel" %>
 <%@ page import="core.enums.FavoriteEntryType" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +19,7 @@
 <c:set var="photosQtyControl" value="<%=FavoritesJobModel.PHOTO_QTY_FORM_CONTROL%>"/>
 <c:set var="favoriteEntriesIdsControl" value="<%=FavoritesJobModel.FAVORITE_ENTRIES_IDS_FORM_CONTROL%>"/>
 
-<c:set var="favoriteEntriesIds" value="<%=FavoriteEntryType.values()%>"/>
+<c:set var="favoriteEntriesIds" value="<%=GenericTranslatableList.favoriteEntryTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <tags:page pageModel="${favoritesJobModel.pageModel}">
 
