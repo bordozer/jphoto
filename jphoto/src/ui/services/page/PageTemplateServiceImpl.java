@@ -185,6 +185,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 	}
 
 	private void fillUiLanguages( final Language language, final VelocityContext model ) {
+		// TODO: consider using GenericTranslatableList.languageTranslatableList( systemVarsService.getActiveLanguages(), translatorService )
 		final List<LanguageWrapper> uiLanguages = newArrayList();
 		for ( final Language lang : systemVarsService.getActiveLanguages() ) {
 			final LanguageWrapper wrapper = new LanguageWrapper( lang );

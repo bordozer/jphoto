@@ -1,17 +1,17 @@
 package core.general.user;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
-public enum EmailNotificationType implements Identifiable {
+public enum EmailNotificationType implements IdentifiableNameable {
 
-	NEW_PHOTO_OF_FAVORITE_MEMBER( 1, "New photo of one of your favorite members" )
-	, NEW_PHOTO_OF_FRIEND( 8, "New photo of your friend" )
-	, NEW_PHOTO_OF_TRACKING_MEMBER( 4, "New photo of member who's new photos you are tracking" )
-	, COMMENT_TO_USER_PHOTO( 2, "New comment to your photo" )
-	, COMMENT_TO_TRACKING_PHOTO( 3, "New comment to photo which comments you are tracking" )
-	, PRIVATE_MESSAGE( 5, "New private message" )
-	, ADMIN_MESSAGE( 6, "Messages from admin" )
-	, SYSTEM_INFORMATION( 7, "Messages from system" )
+	NEW_PHOTO_OF_FAVORITE_MEMBER( 1, "EmailNotificationType: New photo of one of your favorite members" )
+	, NEW_PHOTO_OF_FRIEND( 8, "EmailNotificationType: New photo of your friend" )
+	, NEW_PHOTO_OF_TRACKING_MEMBER( 4, "EmailNotificationType: New photo of member who's new photos you are tracking" )
+	, COMMENT_TO_USER_PHOTO( 2, "EmailNotificationType: New comment to your photo" )
+	, COMMENT_TO_TRACKING_PHOTO( 3, "EmailNotificationType: New comment to photo which comments you are tracking" )
+	, PRIVATE_MESSAGE( 5, "EmailNotificationType: New private message" )
+	, ADMIN_MESSAGE( 6, "EmailNotificationType: Messages from admin" )
+	, SYSTEM_INFORMATION( 7, "EmailNotificationType: Messages from system" )
 	;
 
 	private final int id;

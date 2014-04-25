@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>EmailNotificationType: New photo of one of your favorite members</nerd>
+		<ru><![CDATA[Новая работа избранного автора]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: New photo of your friend</nerd>
+		<ru><![CDATA[Новая работа друзей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: New photo of member who's new photos you are tracking</nerd>
+		<ru><![CDATA[Новая работа отслеживаемого автора]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: New comment to your photo</nerd>
+		<ru><![CDATA[Новый комментарий к вашим работам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: New comment to photo which comments you are tracking</nerd>
+		<ru><![CDATA[Новый комментарий к отслеживаемым работам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: New private message</nerd>
+		<ru><![CDATA[Новое личное сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: Messages from admin</nerd>
+		<ru><![CDATA[Сообщение от администрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>EmailNotificationType: Messages from system</nerd>
+		<ru><![CDATA[Системное сообщение]]></ru>
+	</translation>
+
+</translations>

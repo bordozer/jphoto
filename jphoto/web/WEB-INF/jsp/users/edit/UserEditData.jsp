@@ -71,8 +71,7 @@
 
 <c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="userGenderValues" value="<%=GenericTranslatableList.userGenderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
-<c:set var="yesNoValues" value="<%=YesNo.values()%>"/>
-<c:set var="emailNotificationOptionsValues" value="<%=EmailNotificationType.values()%>"/>
+<c:set var="emailNotificationOptionsValues" value="<%=GenericTranslatableList.emailNotificationTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <c:set var="accessibleCommentAllowances" value="${userEditDataModel.accessibleCommentAllowances}"/>
 <c:set var="accessibleVotingAllowances" value="${userEditDataModel.accessibleVotingAllowances}"/>
@@ -280,7 +279,6 @@
 				<table:tdtext text_t="User data edit: Send notification email about" />
 
 				<table:tddata>
-					<%--<form:radiobuttons items="${yesNoValues}" path="userEditDataModel.${emailNotificationOptionIdsControl}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>--%>
 					<form:checkboxes path="userEditDataModel.${emailNotificationOptionIdsControl}" items="${emailNotificationOptionsValues}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" />
 				</table:tddata>
 

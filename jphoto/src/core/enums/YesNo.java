@@ -1,12 +1,13 @@
 package core.enums;
 
-public enum YesNo {
+import core.interfaces.IdentifiableNameable;
 
-	YES( 1, "yes" )
-	, NO( -1, "no" )
-	;
+public enum YesNo implements IdentifiableNameable {
 
-		private final int id;
+	YES( 1, "YesNo: yes" )
+	, NO( -1, "YesNo: no" );
+
+	private final int id;
 	private final String name;
 
 	private YesNo( final int id, final String name ) {
