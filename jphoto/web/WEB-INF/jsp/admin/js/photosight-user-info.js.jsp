@@ -114,7 +114,11 @@ define( [ 'jquery' ], function ( $ ) {
 
 					showPhotosightUserInfoDiv();
 
-					return { userGenderId: photosightUserDTO.userGender.id, userMembershipTypeId: photosightUserDTO.userMembershipType.id };
+					if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
+						return { userGenderId: photosightUserDTO.userGender.id, userMembershipTypeId: photosightUserDTO.userMembershipType.id };
+					}
+
+					return {};
 				}
 			}
 		}
