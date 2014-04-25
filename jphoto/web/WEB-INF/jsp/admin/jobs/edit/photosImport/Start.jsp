@@ -247,29 +247,29 @@
 
 	<script type="text/javascript">
 
-		require( [ 'jquery', '/admin/js/photosight.js' ], function( $, photosight ) {
+		require( [ 'jquery' ], function( $ ) {
 
 			$( document ).ready( function () {
-
 				setFormsVisibility();
 				renderPhotosightUserInfo();
 			} );
+		});
 
-			function setFormsVisibility() {
+		function setFormsVisibility() {
+			require( [ 'jquery' ], function ( $ ) {
 				var type = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
 
 				if ( type == ${filesystemImportId} ) {
-					$( '#${photosightImportDivId}' ).hide();
-					$( '#${filesystemImportDivId}' ).show();
+					$( '#' + '${photosightImportDivId}' ).hide();
+					$( '#' + '${filesystemImportDivId}' ).show();
 				}
 
 				if ( type == ${photosightImportId} ) {
-					$( '#${filesystemImportDivId}' ).hide();
-					$( '#${photosightImportDivId}' ).show();
+					$( '#' + '${filesystemImportDivId}' ).hide();
+					$( '#' + '${photosightImportDivId}' ).show();
 				}
-			}
-
-		});
+			} );
+		}
 
 		function renderPhotosightUserInfo() {
 			require( [ '/admin/js/photosight.js' ], function( photosight ) {
