@@ -123,12 +123,15 @@ public class PhotosImportController extends DateRangableController {
 		aModel.setImportComments( true );
 
 		final List<PhotosightCategory> categoryList = Arrays.asList( PhotosightCategory.values() );
-		aModel.setPhotosightCategories( Lists.transform( categoryList, new Function<PhotosightCategory, String>() {
+		// Enable to select all categories by default
+
+		/*aModel.setPhotosightCategories( Lists.transform( categoryList, new Function<PhotosightCategory, String>() {
 			@Override
 			public String apply( final PhotosightCategory photosightCategory ) {
 				return String.valueOf( photosightCategory.getId() );
 			}
-		} ) );
+		} ) );*/
+		aModel.setPhotosightCategories( newArrayList( String.valueOf( PhotosightCategory.PORTRAIT.getId() ) ) );
 
 		aModel.setPhotosightCategoryWrappers( getPhotosightCategoriesCheckboxes() );
 	}

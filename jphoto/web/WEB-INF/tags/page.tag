@@ -110,32 +110,32 @@
 			});
 
 			function adminLockUser( userId, userName ) {
-				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminLockUser( userId, userName );
 				} );
 			}
 
 			function adminPhotoNudeContentSet( photoId, callback ) {
-				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentSet( photoId, callback );
 				} );
 			}
 
 			function adminPhotoNudeContentRemove( photoId, callback ) {
-				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentRemove( photoId, callback );
 				} );
 			}
 
 			function generatePhotoPreview( photoId, callback ) {
-				require( [ 'jquery', '/js/pages/admin-functions.js.jsp' ], function ( $, adminFunctions ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.generatePhotoPreview( photoId, callback );
 				} );
 			}
 
 
 			function reloadTranslations( photoId, callback ) {
-				require( [ 'jquery', '/js/pages/translations-reload.js.jsp' ], function ( $, translations ) {
+				require( [ 'jquery', '/admin/js/translations-reload.js' ], function ( $, translations ) {
 					translations.reloadTranslations( photoId, callback );
 				} );
 			}

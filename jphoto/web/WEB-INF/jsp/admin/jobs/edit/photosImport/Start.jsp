@@ -171,9 +171,9 @@
 
 									<table:tr>
 										<table:td colspan="2" >
-											<js:checkboxMassChecker checkboxClass="photosight-category-all" initiallyChecked="true" /> ${eco:translate('All categories')}
+											<js:checkboxMassChecker checkboxClass="photosight-category-all" initiallyChecked="false" /> ${eco:translate('All categories')}
 											&nbsp;&nbsp;
-											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="true" /> ${eco:translate('No nude categories')}
+											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="false" /> ${eco:translate('No nude categories')}
 											&nbsp;&nbsp;
 											<js:checkboxMassChecker checkboxClass="photosight-category-portrait" initiallyChecked="true" /> ${eco:translate('Portrait only')}
 										</table:td>

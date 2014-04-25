@@ -7,8 +7,6 @@ define( [ 'jquery' ], function ( $ ) {
 
 	function executeAjaxRequest( _url, callback ) {
 
-		<%--jsonRPC.ajaxService.setPhotoNudeContent( photoId, isNudeContent );--%>
-
 		$.ajax( {
 			type:'GET',
 			url: _url,
