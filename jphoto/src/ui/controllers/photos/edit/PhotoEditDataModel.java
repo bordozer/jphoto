@@ -56,7 +56,7 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private User photoAuthor;
 	private Genre genre;
 
-	private List<Genre> genres;
+	private List<GenreTranslated> genres;
 	private List<Integer> genresCanHaveNudeContent = newArrayList();
 	private List<Integer> genresHaveNudeContent = newArrayList();
 
@@ -157,11 +157,11 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.photoAuthor = userId;
 	}
 
-	public void setGenres( final List<Genre> genres ) {
+	public void setGenres( final List<GenreTranslated> genres ) {
 		this.genres = genres;
 	}
 
-	public List<Genre> getGenres() {
+	public List<GenreTranslated> getGenres() {
 		return genres;
 	}
 

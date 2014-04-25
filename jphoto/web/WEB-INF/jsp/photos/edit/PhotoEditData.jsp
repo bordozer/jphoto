@@ -31,7 +31,7 @@
 
 <c:set var="isNew" value="<%=photoEditDataModel.isNew()%>"/>
 
-<c:set var="genres" value="<%=photoEditDataModel.getGenres()%>"/>
+<c:set var="genresTranslated" value="<%=photoEditDataModel.getGenres()%>"/>
 <c:set var="photoAuthor" value="<%=photoEditDataModel.getPhotoAuthor()%>"/>
 
 <c:set var="photoIdControl" value="photoEditDataModel.<%=PhotoEditDataModel.PHOTO_EDIT_DATA_ID_FORM_CONTROL%>"/>
@@ -155,7 +155,7 @@
 					<table:tdtext text_t="Photo edit: Genre" labelFor="${photoGenreIdControl}" isMandatory="true"/>
 
 					<table:tddata>
-						<form:select path="photoEditDataModel.genreId" items="${genres}" itemLabel="name" itemValue="id" htmlEscape="false" size="24"/>
+						<form:select path="photoEditDataModel.genreId" items="${genresTranslated}" itemLabel="nameTranslated" itemValue="genre.id" htmlEscape="false" size="24"/>
 					</table:tddata>
 				</table:tredit>
 				<%-- / Genres --%>

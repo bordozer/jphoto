@@ -486,8 +486,14 @@ public class PhotoEditDataController {
 	}
 
 	private void initGenreLists( final PhotoEditDataModel model ) {
+		final Language language = EnvironmentContext.getLanguage();
+
 		final List<Genre> genres = genreService.loadAll();
-		model.setGenres( genres );
+		final List<GenreTranslated> genresTranslated = newArrayList();
+		for ( final Genre genre : genres ) {
+			genresTranslated.add( new GenreTranslated( genre, translatorService.translateGenre( genre, language ) ) );
+		}
+		model.setGenres( genresTranslated );
 
 		final List<Integer> genresCanHaveNudeContent = newArrayList();
 		final List<Integer> genresHaveNudeContent = newArrayList();
