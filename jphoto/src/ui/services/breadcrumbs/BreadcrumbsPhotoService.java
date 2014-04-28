@@ -7,7 +7,7 @@ import ui.elements.PageTitleData;
 
 public interface BreadcrumbsPhotoService {
 
-	PageTitleData getUploadPhotoBreadcrumbs( final User user, final PhotoEditWizardStep wizardStep );
+	PageTitleData getUploadPhotoBreadcrumbs( final User user );
 
 	PageTitleData getPhotoEditDataBreadcrumbs( final Photo photo );
 

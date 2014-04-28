@@ -27,7 +27,6 @@ import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -49,9 +48,9 @@ import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-@SessionAttributes( {PhotoEditDataController.MODEL_NAME} )
-@Controller
-@RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
+//@SessionAttributes( {PhotoEditDataController.MODEL_NAME} )
+//@Controller
+//@RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
 public class PhotoEditDataController {
 
 	public static final String MODEL_NAME = "photoEditDataModel";
@@ -175,7 +174,7 @@ public class PhotoEditDataController {
 
 		setAnonymousOptions( model, false );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser, model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser ) );
 
 		return DATA_VIEW;
 	}
@@ -251,7 +250,7 @@ public class PhotoEditDataController {
 		}
 		model.setPhotoAlbums( photoAlbums );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( model.getPhotoAuthor(), model.getCurrentStep() ) );
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( model.getPhotoAuthor() ) );
 
 		return FILE_UPLOAD_VIEW;
 	}

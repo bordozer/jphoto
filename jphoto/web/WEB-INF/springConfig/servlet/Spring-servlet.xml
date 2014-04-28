@@ -23,7 +23,7 @@
 	<bean id="userTeamMemberEditDataValidator" class="ui.controllers.users.team.edit.UserTeamMemberEditDataValidator"/>
 	<bean id="userPhotoAlbumEditDataValidator" class="ui.controllers.users.photoAlbums.edit.UserPhotoAlbumEditDataValidator"/>
 
-	<bean id="photoEditDataValidator" class="ui.controllers.photos.DEL_edit.PhotoEditDataValidator"/>
+	<!--<bean id="photoEditDataValidator" class="ui.controllers.photos.DEL_edit.PhotoEditDataValidator"/>-->
 	<bean id="photoCommentValidator" class="ui.controllers.comment.edit.PhotoCommentValidator"/>
 	<bean id="photoVotingValidator" class="ui.controllers.voting.PhotoVotingValidator"/>
 	<bean id="userGenreRankVotingValidator" class="ui.controllers.users.genreRank.UserGenreRankVotingValidator"/>

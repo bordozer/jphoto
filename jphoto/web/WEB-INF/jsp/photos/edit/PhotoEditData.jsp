@@ -1,23 +1,26 @@
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.DEL_edit.PhotoEditDataModel" scope="request"/>
+<%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-<c:set var="photoId" value="" />
+<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
-<div class="photo-edit-container"></div>
+<c:set var="photoId" value="${photoEditDataModel.photoId}"/>
 
+<tags:page pageModel="${photoEditDataModel.pageModel}">
+	<div class="photo-edit-container"></div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-	function renderPhotos( photosToRender ) {
+		renderPhotoEditForm();
 
-		require( ['modules/photo/edit/photo-edit'], function ( photoEdit ) {
-			for ( var i = 0; i < photosToRender.length; i++ ) {
+		function renderPhotoEditForm() {
 
+			require( [ 'jquery', 'modules/photo/edit/photo-edit'], function ( $, photoEdit ) {
 				photoEdit( ${photoId}, '${eco:baseUrl()}', $( '.photo-edit-container' ) );
-			}
-		} );
-	}
+			} );
+		}
 
-</script>
+	</script>
+
+</tags:page>

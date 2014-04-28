@@ -23,7 +23,7 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 	private SecurityService securityService;
 
 	@Override
-	public PageTitleData getUploadPhotoBreadcrumbs( final User user, final PhotoEditWizardStep wizardStep ) {
+	public PageTitleData getUploadPhotoBreadcrumbs( final User user ) {
 
 		final TranslatableStringBreadcrumb photoUploadingText = new TranslatableStringBreadcrumb( "Breadcrumbs: Photo uploading", services );
 
@@ -33,7 +33,6 @@ public class BreadcrumbsPhotoServiceImpl implements BreadcrumbsPhotoService {
 		final String breadcrumbs = portalPage( services )
 			.userCardLink( user )
 			.add( photoUploadingText )
-			.translatableString( wizardStep.getStepDescription() )
 			.build();
 
 		return new PageTitleData( title, header, breadcrumbs );
