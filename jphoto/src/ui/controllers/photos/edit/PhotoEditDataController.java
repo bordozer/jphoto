@@ -6,13 +6,17 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
+import core.services.user.UserTeamService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -72,6 +76,12 @@ public class PhotoEditDataController {
 	@Autowired
 	private ConfigurationService configurationService;
 
+	@Autowired
+	private UserTeamService userTeamService;
+
+	@Autowired
+	private UserPhotoAlbumService userPhotoAlbumService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
 		return new PhotoEditDataModel();
@@ -116,6 +126,9 @@ public class PhotoEditDataController {
 		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
 		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
 
+		model.setUserTeamMembers( getUserTeamMembers() );
+		model.setUserPhotoAlbums( getUserPhotoAlbums() );
+
 		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser ) );
 
 		return VIEW_EDIT_DATA;
@@ -143,6 +156,9 @@ public class PhotoEditDataController {
 
 		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
 		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
+
+		model.setUserTeamMembers( getUserTeamMembers() );
+		model.setUserPhotoAlbums( getUserPhotoAlbums() );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo ) );
 
@@ -191,5 +207,13 @@ public class PhotoEditDataController {
 
 		final List<PhotoActionAllowance> accessiblePhotoVotingAllowance = configurationService.getAccessiblePhotoVotingAllowance();
 		model.setAccessibleVotingAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoVotingAllowance, EnvironmentContext.getLanguage(), translatorService ) );
+	}
+
+	private List<UserTeamMember> getUserTeamMembers() {
+		return userTeamService.loadAllForEntry( EnvironmentContext.getCurrentUser().getId() );
+	}
+
+	private List<UserPhotoAlbum> getUserPhotoAlbums() {
+		return userPhotoAlbumService.loadAllForEntry( EnvironmentContext.getCurrentUser().getId() );
 	}
 }

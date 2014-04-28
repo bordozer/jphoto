@@ -3,11 +3,15 @@ package ui.controllers.photos.edit;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.photo.Photo;
+import core.general.user.userAlbums.UserPhotoAlbum;
+import core.general.user.userTeam.UserTeamMember;
 import org.springframework.web.multipart.MultipartFile;
 import ui.translatable.GenericTranslatableList;
 
 import java.io.File;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoEditDataModel extends AbstractGeneralModel {
 
@@ -32,6 +36,14 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	private GenericTranslatableList<PhotoActionAllowance> accessibleVotingAllowancesTranslatableList;
 	private PhotoActionAllowance votingAllowance;
+
+	private List<UserTeamMember> userTeamMembers; 						// all user team's members
+	private List<String> photoTeamMemberIds = newArrayList(); 			// selected as photo team user's members IDs
+	private List<UserTeamMember> photoTeamMembers = newArrayList();		// selected as photo team user's members
+
+	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
+	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
+	private List<UserPhotoAlbum> photoAlbums = newArrayList();			// selected usr photo's albums
 
 	public void setPhoto( final Photo photo ) {
 		this.photo = photo;
@@ -167,5 +179,53 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setVotingAllowance( final PhotoActionAllowance votingAllowance ) {
 		this.votingAllowance = votingAllowance;
+	}
+
+	public List<UserTeamMember> getUserTeamMembers() {
+		return userTeamMembers;
+	}
+
+	public void setUserTeamMembers( final List<UserTeamMember> userTeamMembers ) {
+		this.userTeamMembers = userTeamMembers;
+	}
+
+	public List<String> getPhotoTeamMemberIds() {
+		return photoTeamMemberIds;
+	}
+
+	public void setPhotoTeamMemberIds( final List<String> photoTeamMemberIds ) {
+		this.photoTeamMemberIds = photoTeamMemberIds;
+	}
+
+	public List<UserTeamMember> getPhotoTeamMembers() {
+		return photoTeamMembers;
+	}
+
+	public void setPhotoTeamMembers( final List<UserTeamMember> photoTeamMembers ) {
+		this.photoTeamMembers = photoTeamMembers;
+	}
+
+	public List<UserPhotoAlbum> getUserPhotoAlbums() {
+		return userPhotoAlbums;
+	}
+
+	public void setUserPhotoAlbums( final List<UserPhotoAlbum> userPhotoAlbums ) {
+		this.userPhotoAlbums = userPhotoAlbums;
+	}
+
+	public List<String> getPhotoAlbumIds() {
+		return photoAlbumIds;
+	}
+
+	public void setPhotoAlbumIds( final List<String> photoAlbumIds ) {
+		this.photoAlbumIds = photoAlbumIds;
+	}
+
+	public List<UserPhotoAlbum> getPhotoAlbums() {
+		return photoAlbums;
+	}
+
+	public void setPhotoAlbums( final List<UserPhotoAlbum> photoAlbums ) {
+		this.photoAlbums = photoAlbums;
 	}
 }
