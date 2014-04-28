@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -11,16 +12,19 @@
 
 	<form:form modelAttribute="photoEditDataModel" method="POST" action="${eco:baseUrl()}/photos/new/" enctype="multipart/form-data" >
 
-		<div class="floatleft">
+		<table:table>
 
-			${eco:translate('PhotoEditData: Select photo file')}:
-			<form:input path="photoFile" type="file" id="photoFile"/>
+			<table:separatorInfo colspan="1" title="${eco:translate('Photo uploading: Select file header')}" />
 
-			<br />
+			<table:tr>
+				<table:td>
+					<form:input path="photoFile" type="file" id="photoFile"/>
+				</table:td>
 
-			<html:submitButton id="" caption_t="PhotoEditData: Upload photo file button" />
+				<table:trok text_t="${eco:translate('Photo uploading: Upload file button')}" />
+			</table:tr>
 
-		</div>
+		</table:table>
 
 	</form:form>
 
