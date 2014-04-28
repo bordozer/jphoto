@@ -1,6 +1,7 @@
 define( ["backbone", "jquery", "underscore"
+		, "text!modules/photo/edit/templates/photo-file-upload-template.html"
 		, "text!modules/photo/edit/templates/photo-data-template.html"
-		], function ( Backbone, $, _, photoEditTemplate ) {
+		], function ( Backbone, $, _, photoFileUploadTemplate, photoEditTemplate ) {
 
 	'use strict';
 
@@ -20,5 +21,5 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
-	return { PhotoEditView:PhotoEditView };
+	return { PhotoEditView: PhotoEditView };
 });
