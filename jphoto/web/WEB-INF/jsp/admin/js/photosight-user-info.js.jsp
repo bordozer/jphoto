@@ -100,6 +100,9 @@ define( [ 'jquery' ], function ( $ ) {
 
 				clearPhotosightUserInfoDiv();
 
+				var userGenderId = 0;
+				var userMembershipTypeId = 0;
+
 				for ( var index = 0; index < photosightUsersIds.length; index++ ) {
 
 					var photosightUserId = photosightUsersIds[ index ];
@@ -115,11 +118,12 @@ define( [ 'jquery' ], function ( $ ) {
 					showPhotosightUserInfoDiv();
 
 					if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
-						return { userGenderId: photosightUserDTO.userGender.id, userMembershipTypeId: photosightUserDTO.userMembershipType.id };
+						userGenderId = photosightUserDTO.userGender.id;
+						userMembershipTypeId = photosightUserDTO.userMembershipType.id;
 					}
-
-					return {};
 				}
+
+				return { userGenderId: userGenderId, userMembershipTypeId: userMembershipTypeId };
 			}
 		}
 	}();
