@@ -1,5 +1,7 @@
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,6 +13,7 @@
 <%@ attribute name="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" %>
 
 <c:set var="photoNameMaxLength" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH )%>"/>
+<c:set var="yesNoValues" value="<%=GenericTranslatableList.yesNoTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/photos/save/">
 
@@ -64,6 +67,45 @@
 
 			<table:tddata>
 				<form:checkbox path="containsNudeContent"/>
+			</table:tddata>
+		</table:tredit>
+
+		<table:separator colspan="2" />
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Anonymous posting" labelFor="anonymousPosting1"/>
+
+			<table:tddata>
+				<form:checkbox path="anonymousPosting"/>
+			</table:tddata>
+		</table:tredit>
+
+		<table:separator colspan="2" />
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Comments allowance"/>
+
+			<table:tddata>
+				<form:radiobuttons path="commentsAllowanceId" items="${photoEditDataModel.accessibleCommentAllowancesTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />" />
+			</table:tddata>
+		</table:tredit>
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Sent notification email about new comments" />
+
+			<table:tddata>
+				<form:radiobuttons items="${yesNoValues}" path="sendNotificationEmailAboutNewPhotoComment" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+			</table:tddata>
+
+		</table:tredit>
+
+		<table:separator colspan="2" />
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Photo appraisal allowance"/>
+
+			<table:tddata>
+				<form:radiobuttons path="votingAllowanceId" items="${photoEditDataModel.accessibleVotingAllowancesTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />" />
 			</table:tddata>
 		</table:tredit>
 

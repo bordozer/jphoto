@@ -34,4 +34,6 @@
 
 	</div>
 
+	<div class="footerseparator"></div>
+
 </tags:page>

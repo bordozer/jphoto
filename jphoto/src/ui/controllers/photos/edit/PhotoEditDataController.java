@@ -1,12 +1,18 @@
 package ui.controllers.photos.edit;
 
+import core.enums.PhotoActionAllowance;
+import core.enums.YesNo;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.user.EmailNotificationType;
+import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -17,11 +23,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
+import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -44,6 +52,9 @@ public class PhotoEditDataController {
 	private PhotoService photoService;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private BreadcrumbsPhotoService breadcrumbsPhotoService;
 
 	@Autowired
@@ -57,6 +68,9 @@ public class PhotoEditDataController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
@@ -87,13 +101,22 @@ public class PhotoEditDataController {
 			return VIEW_UPLOAD_FILE;
 		}
 
-		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( EnvironmentContext.getCurrentUser(), photoFile.getOriginalFilename() );
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
+		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( currentUser, photoFile.getOriginalFilename() );
 
 		photoFile.transferTo( tempFile );
 		model.setTempPhotoFile( tempFile );
-		model.setGenreWrappers( getGenreWrappers() );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( EnvironmentContext.getCurrentUser() ) );
+		model.setGenreWrappers( getGenreWrappers() );
+		setAccessibleAllowances( model );
+		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
+		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
+
+		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
+		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
+
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser ) );
 
 		return VIEW_EDIT_DATA;
 	}
@@ -103,6 +126,8 @@ public class PhotoEditDataController {
 
 		assertPhotoExistsAndCurrentUserCanEditIt( _photoId );
 
+		final User currentUser = EnvironmentContext.getCurrentUser();
+
 		final int photoId = NumberUtils.convertToInt( _photoId );
 
 		final Photo photo = photoService.load( photoId );
@@ -110,7 +135,14 @@ public class PhotoEditDataController {
 		model.clear();
 		model.setNew( false );
 		model.setPhoto( photo );
+
 		model.setGenreWrappers( getGenreWrappers() );
+		setAccessibleAllowances( model );
+		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
+		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
+
+		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
+		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo ) );
 
@@ -150,5 +182,14 @@ public class PhotoEditDataController {
 		}
 
 		return result;
+	}
+
+	private void setAccessibleAllowances( final PhotoEditDataModel model ) {
+
+		final List<PhotoActionAllowance> accessiblePhotoCommentAllowance = configurationService.getAccessiblePhotoCommentAllowance();
+		model.setAccessibleCommentAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoCommentAllowance, EnvironmentContext.getLanguage(), translatorService ) );
+
+		final List<PhotoActionAllowance> accessiblePhotoVotingAllowance = configurationService.getAccessiblePhotoVotingAllowance();
+		model.setAccessibleVotingAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoVotingAllowance, EnvironmentContext.getLanguage(), translatorService ) );
 	}
 }
