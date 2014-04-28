@@ -18,9 +18,11 @@ import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
 import core.general.base.CommonProperty;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
+import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
@@ -62,6 +64,9 @@ public class PhotosImportController extends DateRangableController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -129,6 +134,8 @@ public class PhotosImportController extends DateRangableController {
 	@Override
 	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
 
+		final boolean nudeContentByDefault = configurationService.getBoolean( ConfigurationKey.ADMIN_PHOTOSIGHT_IMPORT_JOB_IMPORT_NUDE_CONTENT );
+
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
 
 		aModel.setImportComments( true );
@@ -138,7 +145,7 @@ public class PhotosImportController extends DateRangableController {
 		CollectionUtils.filter( categoryList, new Predicate<PhotosightCategory>() {
 			@Override
 			public boolean evaluate( final PhotosightCategory photosightCategory ) {
-				return ! getGenreByPhotosightCategory( photosightCategory ).isCanContainNudeContent();
+				return nudeContentByDefault || ! getGenreByPhotosightCategory( photosightCategory ).isCanContainNudeContent();
 			}
 		} );
 
@@ -150,6 +157,7 @@ public class PhotosImportController extends DateRangableController {
 		} ) );
 
 		aModel.setPhotosightCategoryWrappers( getPhotosightCategoriesCheckboxes() );
+		aModel.setPhotosightImport_importNudeContentByDefault( nudeContentByDefault );
 	}
 
 	private Genre getGenreByPhotosightCategory( final PhotosightCategory photosightCategory ) {
@@ -180,7 +188,9 @@ public class PhotosImportController extends DateRangableController {
 			final PhotosightCategoryWrapper categoryWrapper = new PhotosightCategoryWrapper( photosightCategory );
 
 			final Genre genre = getGenreByPhotosightCategory( photosightCategory );
-			if ( ! genre.isCanContainNudeContent() ) {
+			if ( genre.isCanContainNudeContent() ) {
+				categoryWrapper.addCssClass( "photosight-category-nude" );
+			} else {
 				categoryWrapper.addCssClass( "photosight-category-no-nude" );
 			}
 

@@ -56,6 +56,8 @@ public class PhotosImportModel extends DateRangableModel {
 	private GenericTranslatableList<UserGender> userGenderTranslatableList;
 	private GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList;
 
+	private boolean photosightImport_importNudeContentByDefault;
+
 	public PhotosImportSource getImportSource() {
 		return importSource;
 	}
@@ -215,5 +217,13 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public GenericTranslatableList<PhotosImportSource> getPhotosImportSourceTranslatableList() {
 		return photosImportSourceTranslatableList;
+	}
+
+	public boolean isPhotosightImport_importNudeContentByDefault() {
+		return photosightImport_importNudeContentByDefault;
+	}
+
+	public void setPhotosightImport_importNudeContentByDefault( final boolean photosightImport_importNudeContentByDefault ) {
+		this.photosightImport_importNudeContentByDefault = photosightImport_importNudeContentByDefault;
 	}
 }

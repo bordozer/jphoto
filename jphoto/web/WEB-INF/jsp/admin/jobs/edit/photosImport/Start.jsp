@@ -1,7 +1,5 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
-<%@ page import="core.enums.UserGender" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
-<%@ page import="ui.translatable.GenericTranslatableList" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -13,7 +11,6 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>--%>
 
 <jsp:useBean id="photosImportModel" type="admin.controllers.jobs.edit.photosImport.PhotosImportModel" scope="request"/>
 
@@ -167,7 +164,7 @@
 
 									<table:tr>
 										<table:td colspan="2" >
-											<js:checkboxMassChecker checkboxClass="photosight-category-all" initiallyChecked="false" /> ${eco:translate('All categories')}
+											<js:checkboxMassChecker checkboxClass="photosight-category-nude" initiallyChecked="${photosImportModel.photosightImport_importNudeContentByDefault}" /> ${eco:translate('Nude categories')}
 											&nbsp;&nbsp;
 											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="true" /> ${eco:translate('No nude categories')}
 										</table:td>
@@ -178,7 +175,7 @@
 											<%--<div style="float: left; width: 100%; height: 80px;">--%>
 												<c:forEach var="checkbox" items="${photosightCategoryWrappers}">
 													<div style="display: inline-block; width: 120px;">
-														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="photosight-category-all ${checkbox.cssClasses}" />
+														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
 													</div>
 												</c:forEach>
 											<%--</div>--%>
