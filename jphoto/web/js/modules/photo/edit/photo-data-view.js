@@ -1,5 +1,5 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/photo/edit/templates/photo-edit-data-template.html"
+		, "text!modules/photo/edit/templates/photo-data-template.html"
 		], function ( Backbone, $, _, photoEditTemplate ) {
 
 	'use strict';

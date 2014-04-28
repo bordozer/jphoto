@@ -8,6 +8,7 @@
 <c:set var="photoId" value="${photoEditDataModel.photoId}"/>
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
+
 	<div class="photo-edit-container"></div>
 
 	<script type="text/javascript">
@@ -16,7 +17,7 @@
 
 		function renderPhotoEditForm() {
 
-			require( [ 'jquery', 'modules/photo/edit/photo-edit'], function ( $, photoEdit ) {
+			require( [ 'jquery', 'modules/photo/edit/photo-data'], function ( $, photoEdit ) {
 				photoEdit( ${photoId}, '${eco:baseUrl()}', $( '.photo-edit-container' ) );
 			} );
 		}

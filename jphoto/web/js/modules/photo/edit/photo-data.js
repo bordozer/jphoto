@@ -1,5 +1,5 @@
-define( ["modules/photo/edit/photo-edit-model"
-		, "modules/photo/edit/photo-edit-view"
+define( ["modules/photo/edit/photo-data-model"
+		, "modules/photo/edit/photo-data-view"
 		, "jquery"], function ( Model, View, $ ) {
 
 	function init( photoId, baseUrl, container ) {
