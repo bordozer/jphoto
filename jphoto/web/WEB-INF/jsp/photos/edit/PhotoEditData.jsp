@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
+<%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -20,7 +21,15 @@
 					<table:separatorInfo colspan="1" title="${eco:translate(photo.id == 0 ? 'Photo uploading: Photo uploading' : 'Photo uploading: Photo data editing')}" />
 					<table:tr>
 						<table:td>
-							<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
+
+							<c:if test="${photo.id == 0}">
+								<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
+							</c:if>
+
+							<c:if test="${photo.id > 0}">
+								<photo:photoPreviewLight photo="${photo}" />
+							</c:if>
+
 						</table:td>
 					</table:tr>
 				</table:table>
