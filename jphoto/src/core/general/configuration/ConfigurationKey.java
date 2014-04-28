@@ -98,7 +98,7 @@ public enum ConfigurationKey {
 	, ADMIN_CAN_DELETE_OTHER_PHOTOS( 1022, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can delete other photos" )
 	, ADMIN_CAN_EDIT_PHOTO_COMMENTS( 1024, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit photo comments" )
 	, ADMIN_JOB_HISTORY_ITEMS_ON_PAGE( 1023, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.ADMIN, "Job history items on page" )
-	, ADMIN_PHOTOSIGHT_IMPORT_JOB_IMPORT_NUDE_CONTENT( 1025, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photosight import: import nude content by default" )
+	, ADMIN_PHOTOSIGHT_IMPORT_JOB_IMPORT_NUDE_CONTENT( 1025, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photosight import: select by default categories that may contains nude content" )
 
 	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
 	, EMAILING_SMTP_DEBUG_MODE( 1308, "jphoto2003", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP debug mode" )
