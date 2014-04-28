@@ -228,4 +228,22 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	public void setPhotoAlbums( final List<UserPhotoAlbum> photoAlbums ) {
 		this.photoAlbums = photoAlbums;
 	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		photo = null;
+		photoName = null;
+		photoDescription = null;
+		photoKeywords = null;
+		selectedGenreId = 0;
+
+		userTeamMembers = null;
+		photoTeamMemberIds = null;
+		photoTeamMembers = null;
+
+		userPhotoAlbums = newArrayList();
+		photoAlbumIds = null;
+		photoAlbums = null;
+	}
 }
