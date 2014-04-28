@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import core.general.user.User;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,9 +21,14 @@ public class TempFileUtilsServiceImpl implements TempFileUtilsService {
 	}
 
 	@Override
-	public File getTempFileWithOriginalExtension( final File file ) throws IOException {
-		final String extension = FilenameUtils.getExtension( file.getName() );
-		final String tmpFileName = String.format( "temp_%d.%s", dateUtilsService.getCurrentTime(), extension );
+	public File getTempFileWithOriginalExtension( final User user, final File file ) throws IOException {
+		return getTempFileWithOriginalExtension( user, file.getName() );
+	}
+
+	@Override
+	public File getTempFileWithOriginalExtension( final User user, final String fileName ) throws IOException {
+		final String extension = FilenameUtils.getExtension( fileName );
+		final String tmpFileName = String.format( "temp_%d_%d.%s", user.getId(), dateUtilsService.getCurrentTime().getTime(), extension );
 
 		return new File( getTmpDir(), tmpFileName );
 	}

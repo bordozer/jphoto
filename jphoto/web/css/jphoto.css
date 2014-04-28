@@ -589,3 +589,7 @@ table.formtable {
 	vertical-align: top;
 	/*border: 1px solid red;*/
 }
+
+.debug-border {
+	border: 1px solid red;
+}
