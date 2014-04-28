@@ -12,13 +12,13 @@
 
 <c:set var="photoNameMaxLength" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH )%>"/>
 
-<form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/save/">
+<form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/photos/save/">
 
 	<table:table width="700px" border="0">
 
-		<table:tr>
+		<table:separatorInfo colspan="2" title="${eco:translate('Photo data')}" />
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Photo data')}" />
+		<table:tr>
 
 			<table:tdtext text_t="Photo uploading: Name" labelFor="photoName" />
 			<table:tddata>
@@ -39,7 +39,8 @@
 
 		</table:tr>
 
-		<table:trok text_t="Photo uploading: Save button" onclick="alert( ';)' ); return false;"/>
+		<%--<table:trok text_t="Photo uploading: Save button" onclick="alert( ';)' ); return false;"/>--%>
+		<table:trok text_t="Photo uploading: Save button" />
 
 	</table:table>
 

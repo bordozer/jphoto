@@ -122,7 +122,8 @@ public class PhotoEditDataController {
 
 //		model.setPhoto(  ); // TODO: set saved photo
 
-		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( model.getPhoto().getId() ) );
+//		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( model.getPhoto().getId() ) );
+		return VIEW_EDIT_DATA;
 	}
 
 	private void assertPhotoExistsAndCurrentUserCanEditIt( final String _photoId ) {
