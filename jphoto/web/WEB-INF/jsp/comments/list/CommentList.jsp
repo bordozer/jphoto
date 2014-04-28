@@ -56,7 +56,7 @@
 			<div style="float: left; width: 100%; border: 1px solid #0070a3; padding-top: 10px; padding-bottom: 10px; margin-top: 10px; margin-bottom: 10px;">
 
 				<div class="text-centered" style="float: left; width: 25%;">
-					<photo:photoPreviewLight photoPreviewWrapper="${photoPreviewWrapper}" />
+					<photo:photoPreviewWithNudeControl photoPreviewWrapper="${photoPreviewWrapper}" />
 				</div>
 
 				<div style="float: left; width: 70%;">

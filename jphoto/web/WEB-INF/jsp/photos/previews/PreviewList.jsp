@@ -16,7 +16,7 @@
 	<c:set var="photoPreviews" value="${photoPreviewsModel.photoPreviews}" />
 
 	<div class="photoPreviewLight">
-		<photo:photoPreviewLight photoPreviewWrapper="${photoPreviewsModel.photoPreviewWrapper}" />
+		<photo:photoPreviewWithNudeControl photoPreviewWrapper="${photoPreviewsModel.photoPreviewWrapper}" />
 	</div>
 
 	<table:table>

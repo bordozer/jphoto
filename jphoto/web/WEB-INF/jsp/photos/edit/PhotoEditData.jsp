@@ -27,7 +27,10 @@
 							</c:if>
 
 							<c:if test="${photo.id > 0}">
-								<photo:photoPreviewLight photo="${photo}" />
+								<photo:photoPreview photo="${photo}" />
+								<br />
+								<br />
+								<photo:photoCard photo="${photo}" />
 							</c:if>
 
 						</table:td>

@@ -29,7 +29,7 @@
 	</style>
 
 	<div class="photoPreviewLight">
-		<photo:photoPreviewLight photoPreviewWrapper="${photoMarkListModel.photoPreviewWrapper}" />
+		<photo:photoPreviewWithNudeControl photoPreviewWrapper="${photoMarkListModel.photoPreviewWrapper}" />
 	</div>
 
 	<table:table width="1400" border="0">
