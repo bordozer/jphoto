@@ -2,6 +2,8 @@ package ui.controllers.portalpage;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
+import core.general.photo.Photo;
+import core.general.user.User;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
@@ -10,6 +12,7 @@ import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
-import ui.elements.PhotoList;
-import ui.services.PhotoUIService;
+import ui.services.security.SecurityUIService;
 
 import java.util.Collections;
 import java.util.Date;
@@ -36,9 +38,6 @@ public class PortalPageController {
 
 	@Autowired
 	private PhotoService photoService;
-
-	@Autowired
-	private PhotoUIService photoUIService;
 
 	@Autowired
 	private GenreService genreService;
@@ -63,6 +62,12 @@ public class PortalPageController {
 
 	@Autowired
 	private TranslatorService translatorService;
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
+
+	@Autowired
+	private SecurityUIService securityUIService;
+
 
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
@@ -74,15 +79,12 @@ public class PortalPageController {
 
 	@RequestMapping( "/" )
 	public String portalPage( @ModelAttribute( MODEL_NAME ) PortalPageModel model ) {
-		final PhotoList lastUploadedPhotoList = new PhotoList( getLastUploadedPhotos(), translatorService.translate( "Last uploaded photos", EnvironmentContext.getLanguage() ) );
 
-		lastUploadedPhotoList.setPhotosInLine( 4 );
-		model.setLastUploadedPhotoList( lastUploadedPhotoList );
-		Collections.shuffle( lastUploadedPhotoList.getPhotoIds() );
+		model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
 
-		final PhotoList theBestPhotoList = new PhotoList( getTheBestPhotos(), translatorService.translate( "The best photos", EnvironmentContext.getLanguage() ) );
-		model.setTheBestPhotoList( theBestPhotoList );
-		Collections.shuffle( theBestPhotoList.getPhotoIds() );
+		final List<Integer> theBestPhotos = getTheBestPhotos();
+		model.setBestPhotos( getPortalPagePhotos( theBestPhotos ) );
+
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );
 		model.setBestPhotosPeriod( configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS ) );
 
@@ -110,11 +112,28 @@ public class PortalPageController {
 		}
 
 		model.setPortalPageGenres( portalPageGenres );
-		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotoList.getTotalPhotos() - 1 ) );
+		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotos.size() - 1 ) );
 
 		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );
 
 		return VIEW;
+	}
+
+	private List<PortalPagePhoto> getPortalPagePhotos( final List<Integer> lastUploadedPhotosIds ) {
+		final User accessor = EnvironmentContext.getCurrentUser();
+		Collections.shuffle( lastUploadedPhotosIds );
+		final List<PortalPagePhoto> lastUploadedPhotos = newArrayList();
+		for ( final Integer photoId : lastUploadedPhotosIds ) {
+			final PortalPagePhoto portalPagePhoto = new PortalPagePhoto();
+			final Photo photo = photoService.load( photoId );
+
+			portalPagePhoto.setPhoto( photo );
+			portalPagePhoto.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+			portalPagePhoto.setPhotoPreviewHasToBeHiddenBecauseOfNudeContent( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, accessor ) );
+
+			lastUploadedPhotos.add( portalPagePhoto );
+		}
+		return lastUploadedPhotos;
 	}
 
 	private List<Integer> getLastUploadedPhotos() {

@@ -3,7 +3,6 @@ package ui.controllers.portalpage;
 import core.general.data.UserRating;
 import core.services.translator.TranslatorService;
 import ui.activity.AbstractActivityStreamEntry;
-import ui.elements.PhotoList;
 
 import java.util.List;
 
@@ -11,8 +10,9 @@ public class PortalPageModel {
 
 	public static final int TOP_BEST_USERS_QTY = 10;
 
-	private PhotoList lastUploadedPhotoList;
-	private PhotoList theBestPhotoList;
+	private List<PortalPagePhoto> lastUploadedPhotos;
+	private List<PortalPagePhoto> bestPhotos;
+
 	private List<UserRating> bestWeekUserRating;
 	private List<UserRating> bestMonthUserRating;
 
@@ -27,20 +27,20 @@ public class PortalPageModel {
 
 	private TranslatorService translatorService;
 
-	public PhotoList getLastUploadedPhotoList() {
-		return lastUploadedPhotoList;
+	public List<PortalPagePhoto> getLastUploadedPhotos() {
+		return lastUploadedPhotos;
 	}
 
-	public void setLastUploadedPhotoList( PhotoList lastUploadedPhotoList ) {
-		this.lastUploadedPhotoList = lastUploadedPhotoList;
+	public void setLastUploadedPhotos( final List<PortalPagePhoto> lastUploadedPhotos ) {
+		this.lastUploadedPhotos = lastUploadedPhotos;
 	}
 
-	public PhotoList getTheBestPhotoList() {
-		return theBestPhotoList;
+	public List<PortalPagePhoto> getBestPhotos() {
+		return bestPhotos;
 	}
 
-	public void setTheBestPhotoList( PhotoList theBestPhotoList ) {
-		this.theBestPhotoList = theBestPhotoList;
+	public void setBestPhotos( final List<PortalPagePhoto> bestPhotos ) {
+		this.bestPhotos = bestPhotos;
 	}
 
 	public List<UserRating> getBestWeekUserRating() {

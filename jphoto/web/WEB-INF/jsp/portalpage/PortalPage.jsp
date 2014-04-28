@@ -27,8 +27,8 @@
 
 <c:set var="pageModel" value="<%=pageModel%>" />
 <c:set var="randomBestPhoto" value="${portalPageModel.randomBestPhotoArrayIndex}" />
-<c:set var="lastUploadedPhotoList" value="${portalPageModel.lastUploadedPhotoList}" />
-<c:set var="theBestPhotoList" value="${portalPageModel.theBestPhotoList}" />
+<c:set var="lastUploadedPhotos" value="${portalPageModel.lastUploadedPhotos}" />
+<c:set var="bestPhotos" value="${portalPageModel.bestPhotos}" />
 <c:set var="lastActivities" value="${portalPageModel.lastActivities}" />
 
 <tags:page pageModel="${pageModel}">
@@ -74,18 +74,16 @@
 	</style>
 
 	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/smoothdiv/css/smoothDivScroll.css" />
-	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/smoothdiv/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/smoothdiv/jquery.smoothDivScroll-1.2.js"></script>
 
 	<h3>${eco:translate('Last uploaded photos')}</h3>
 
 	<div id="portalPageLastPhotos" class="portalPageLastPhotos">
 		<div id="makeMeScrollable">
-			<c:forEach var="photoInfo" items="${lastUploadedPhotoList.photoInfos}">
-				<c:set var="photo" value="${photoInfo.photo}" />
+			<c:forEach var="portalPagePhoto" items="${lastUploadedPhotos}">
+				<c:set var="photo" value="${portalPagePhoto.photo}" />
 
-				<c:set var="previewImgUrl" value="${photoInfo.photoPreviewImgUrl}" />
-				<c:if test="${photoInfo.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
+				<c:set var="previewImgUrl" value="${portalPagePhoto.photoImgUrl}" />
+				<c:if test="${portalPagePhoto.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
 					<c:set var="previewImgUrl" value="${eco:imageFolderURL()}/nude_content.jpg" />
 				</c:if>
 
@@ -98,7 +96,12 @@
 	</div>
 
 	<script type="text/javascript">
-		require( [ 'jquery' ], function( $ ) {
+
+		require( [ 'jquery'
+					 , '/js/lib/smoothdiv/jquery.mousewheel.min.js'
+					 , '/js/lib/smoothdiv/jquery.smoothDivScroll-1.2.js'
+				 ], function( $ ) {
+
 			$( document ).ready( function() {
 				$( "#makeMeScrollable" ).smoothDivScroll( {
 															  mousewheelScrolling: true,
@@ -116,7 +119,7 @@
 
 			<table:td valign="top" width="550">
 
-				<c:set var="isTheBestPhotosPresent" value="${not empty theBestPhotoList.photoInfos}" />
+				<c:set var="isTheBestPhotosPresent" value="${not empty bestPhotos}" />
 
 				<div class="floatleft" style="text-align: center;">
 
@@ -124,34 +127,38 @@
 
 						<h3>${eco:translate('The best photos')}</h3>
 
-						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/galleryview/jquery.timers-1.2.js" ></script>
-						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jquery.easing.1.3.js" ></script>
-						<script type="text/javascript" src="${eco:baseUrl()}/js/lib/galleryview/jquery.galleryview-3.0-dev.js" ></script>
 						<link type="text/css" rel="stylesheet" href="${eco:baseUrl()}/js/lib/galleryview/jquery.galleryview-3.0-dev.css" />
 
 						<script type="text/javascript">
-							$( function () {
-								$( '#myGallery' ).galleryView( {
-																   enable_overlays:true,
-																   frame_height:70,
-																   frame_width:50,
-																   panel_width:500,
-																   panel_height:300,
-																   panel_scale:'fit',
-																   frame_opacity:0.9,
-																   start_frame: ${randomBestPhoto},
-																   autoplay: true
-															   } );
-							} );
+							require( [ 'jquery'
+										 , '/js/lib/galleryview/jquery.timers-1.2.js'
+										 , '/js/lib/jquery.easing.1.3.js'
+										 , '/js/lib/galleryview/jquery.galleryview-3.0-dev.js'
+									 ], function( $ ) {
+
+								$( function () {
+									$( '#myGallery' ).galleryView( {
+																	   enable_overlays:true,
+																	   frame_height:70,
+																	   frame_width:50,
+																	   panel_width:500,
+																	   panel_height:300,
+																	   panel_scale:'fit',
+																	   frame_opacity:0.9,
+																	   start_frame: ${randomBestPhoto},
+																	   autoplay: true
+																   } );
+								} );
+							});
 						</script>
 
 						<div class="portalPageBestPhotos">
 							<ul id="myGallery">
-								<c:forEach var="photoInfo" items="${theBestPhotoList.photoInfos}">
-									<c:set var="photo" value="${photoInfo.photo}" />
+								<c:forEach var="portalPagePhoto" items="${bestPhotos}">
+									<c:set var="photo" value="${portalPagePhoto.photo}" />
 
-									<c:set var="imgUrl" value="${photoInfo.photoImgUrl}" />
-									<c:if test="${photoInfo.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
+									<c:set var="imgUrl" value="${portalPagePhoto.photoImgUrl}" />
+									<c:if test="${portalPagePhoto.photoPreviewHasToBeHiddenBecauseOfNudeContent}">
 										<c:set var="imgUrl" value="${eco:imageFolderURL()}/nude_content.jpg" />
 									</c:if>
 
@@ -160,7 +167,7 @@
 							</ul>
 						</div>
 
-						<script type="text/javascript">
+						<%--<script type="text/javascript">
 							require( [ 'jquery' ], function( $ ) {
 								$( document ).ready( function() {
 									$( 'img.bestphotos' ).each( function() {
@@ -170,7 +177,7 @@
 									});
 								});
 							});
-						</script>
+						</script>--%>
 					</c:if>
 
 					<c:if test="${not isTheBestPhotosPresent}">
