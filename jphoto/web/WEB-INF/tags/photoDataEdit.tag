@@ -8,6 +8,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="anonym" tagdir="/WEB-INF/tags/anonym" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ attribute name="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" %>
@@ -77,6 +78,8 @@
 
 			<table:tddata>
 				<form:checkbox path="anonymousPosting"/>
+				<br />
+				<anonym:anonymousDaySchedule />
 			</table:tddata>
 		</table:tredit>
 

@@ -150,6 +150,7 @@ public class PhotoEditDataController {
 		model.setPhoto( photo );
 
 		model.setGenreWrappers( getGenreWrappers() );
+		model.setSelectedGenreId( photo.getGenreId() );
 		setAccessibleAllowances( model );
 		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
 		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
