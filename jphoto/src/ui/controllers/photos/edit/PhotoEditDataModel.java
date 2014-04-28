@@ -8,19 +8,10 @@ import java.io.File;
 
 public class PhotoEditDataModel extends AbstractGeneralModel {
 
-	private int photoId;
 	private Photo photo;
 
 	private MultipartFile photoFile;
 	private File tempPhotoFile;
-
-	public int getPhotoId() {
-		return photoId;
-	}
-
-	public void setPhotoId( final int photoId ) {
-		this.photoId = photoId;
-	}
 
 	public void setPhoto( final Photo photo ) {
 		this.photo = photo;

@@ -5,6 +5,7 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,11 +43,7 @@ public class PhotoEditDataController {
 
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
-		final PhotoEditDataModel model = new PhotoEditDataModel();
-
-//		model.setDataRequirementService( dataRequirementService );
-
-		return model;
+		return new PhotoEditDataModel();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/new/" )
@@ -56,6 +53,8 @@ public class PhotoEditDataController {
 
 		model.clear();
 		model.setNew( true );
+
+		model.setPhoto( new Photo() );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( EnvironmentContext.getCurrentUser() ) );
 
@@ -67,7 +66,7 @@ public class PhotoEditDataController {
 
 		final MultipartFile photoFile = model.getPhotoFile();
 
-		if ( photoFile == null ) {
+		if ( photoFile == null || StringUtils.isEmpty( photoFile.getOriginalFilename() ) ) {
 			return VIEW_UPLOAD;
 		}
 

@@ -7,8 +7,6 @@
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
-<c:set var="photoId" value="${photoEditDataModel.photoId}"/>
-
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 	<form:form modelAttribute="photoEditDataModel" method="POST" action="${eco:baseUrl()}/photos/new/" enctype="multipart/form-data" >
