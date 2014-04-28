@@ -64,7 +64,7 @@ public class GenreServiceImpl implements GenreService {
 	}
 
 	@Override
-	public List<Genre> loadAll( final Language language ) {
+	public List<Genre> loadAllSortedByNameForLanguage( final Language language ) {
 		final List<Genre> result = loadAll();
 
 		Collections.sort( result, new Comparator<Genre>() {

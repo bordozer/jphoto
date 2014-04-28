@@ -12,5 +12,5 @@ public interface GenreService extends BaseEntityService<Genre>, AllEntriesLoadab
 
 	Genre loadIdByName( final String genreName );
 
-	List<Genre> loadAll( final Language language );
+	List<Genre> loadAllSortedByNameForLanguage( final Language language );
 }

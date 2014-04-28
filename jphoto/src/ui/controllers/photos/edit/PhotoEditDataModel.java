@@ -5,6 +5,7 @@ import core.general.photo.Photo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 
 public class PhotoEditDataModel extends AbstractGeneralModel {
 
@@ -12,6 +13,11 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	private MultipartFile photoFile;
 	private File tempPhotoFile;
+
+	private String photoName;
+
+	private int selectedGenreId;
+	private List<GenreWrapper> genreWrappers;
 
 	public void setPhoto( final Photo photo ) {
 		this.photo = photo;
@@ -35,5 +41,29 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public File getTempPhotoFile() {
 		return tempPhotoFile;
+	}
+
+	public String getPhotoName() {
+		return photoName;
+	}
+
+	public void setPhotoName( final String photoName ) {
+		this.photoName = photoName;
+	}
+
+	public int getSelectedGenreId() {
+		return selectedGenreId;
+	}
+
+	public void setSelectedGenreId( final int selectedGenreId ) {
+		this.selectedGenreId = selectedGenreId;
+	}
+
+	public List<GenreWrapper> getGenreWrappers() {
+		return genreWrappers;
+	}
+
+	public void setGenreWrappers( final List<GenreWrapper> genreWrappers ) {
+		this.genreWrappers = genreWrappers;
 	}
 }

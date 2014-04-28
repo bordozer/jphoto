@@ -137,7 +137,8 @@
 						<tags:inputHint inputId="${photoNameControl}" hintTitle_t="Photo edit: name hint"
 										hint="${nameRequirement}<br /><br />${mandatoryText}" focused="true">
 							<jsp:attribute name="inputField">
-								<html:textarea inputId="${photoNameControl}" inputValue="${photoEditDataModel.name}" title="${eco:translate('Photo name')}" hint="${eco:translate('Photo name')}" cols="51" rows="2" maxlength="${photoNameMaxLength}" />
+								<html:textarea inputId="${photoNameControl}" inputValue="${photoEditDataModel.name}" title="${eco:translate('Photo name')}" hint="${eco:translate('Photo name')}"
+											   cols="51" rows="2" maxlength="${photoNameMaxLength}" />
 							</jsp:attribute>
 						</tags:inputHint>
 						<br />

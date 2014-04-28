@@ -147,7 +147,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		addLoginSelectBox( model );
 		// TODO: TEMP <--
 
-		final List<Genre> genres = genreService.loadAll( language );
+		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( language );
 		final List<String> genreLinks = newArrayList();
 		for ( Genre genre : genres ) {
 			genreLinks.add( entityLinkUtilsService.getPhotosByGenreLink( genre, language ) );
