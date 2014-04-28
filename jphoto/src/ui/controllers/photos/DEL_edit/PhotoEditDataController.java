@@ -1,4 +1,4 @@
-package ui.controllers.photos.edit;
+package ui.controllers.photos.DEL_edit;
 
 import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
@@ -33,8 +33,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ui.context.EnvironmentContext;
-import ui.controllers.photos.edit.description.AbstractPhotoUploadAllowance;
-import ui.controllers.photos.edit.description.UploadDescriptionFactory;
+import ui.controllers.photos.DEL_edit.description.AbstractPhotoUploadAllowance;
+import ui.controllers.photos.DEL_edit.description.UploadDescriptionFactory;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.validation.DataRequirementService;
 import ui.translatable.GenericTranslatableList;

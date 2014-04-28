@@ -1,4 +1,4 @@
-package ui.controllers.photos.edit;
+package ui.controllers.photos.DEL_edit;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;

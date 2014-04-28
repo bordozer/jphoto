@@ -1,4 +1,4 @@
-package ui.controllers.photos.edit.description;
+package ui.controllers.photos.DEL_edit.description;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;

@@ -1,4 +1,4 @@
-package ui.controllers.photos.edit;
+package ui.controllers.photos.DEL_edit;
 
 public enum PhotoEditWizardStep {
 	EDIT_PHOTO_DATA( 1, "", "Step1: Photo's data" )

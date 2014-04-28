@@ -1,5 +1,5 @@
-<%@ page import="ui.controllers.photos.edit.PhotoEditDataModel" %>
-<%@ page import="ui.controllers.photos.edit.PhotoEditWizardStep" %>
+<%@ page import="ui.controllers.photos.DEL_edit.PhotoEditDataModel" %>
+<%@ page import="ui.controllers.photos.DEL_edit.PhotoEditWizardStep" %>
 <%@ page import="core.enums.YesNo" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +11,7 @@
 <%@ taglib prefix="anonym" tagdir="/WEB-INF/tags/anonym" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
+<jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.DEL_edit.PhotoEditDataModel" scope="request"/>
 
 <c:set var="photoFileControl" value="<%=PhotoEditDataModel.PHOTO_EDIT_DATA_FILE_FORM_CONTROL%>"/>
 <c:set var="photoFileUploadWizardStepId" value="<%=PhotoEditWizardStep.PHOTO_FILE_UPLOAD.getId()%>"/>

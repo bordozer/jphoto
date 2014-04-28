@@ -1,4 +1,4 @@
-<%@ page import="ui.controllers.photos.edit.PhotoEditDataModel"%><%@ page contentType="text/javascript" %>
+<%@ page import="ui.controllers.photos.DEL_edit.PhotoEditDataModel"%><%@ page contentType="text/javascript" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

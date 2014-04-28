@@ -5,7 +5,7 @@ import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.controllers.photos.edit.PhotoEditWizardStep;
+import ui.controllers.photos.DEL_edit.PhotoEditWizardStep;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.PhotoNameBreadcrumb;
