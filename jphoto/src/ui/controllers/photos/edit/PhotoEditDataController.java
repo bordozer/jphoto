@@ -119,7 +119,7 @@ public class PhotoEditDataController {
 		model.setTempPhotoFile( tempFile );
 
 		model.setGenreWrappers( getGenreWrappers() );
-		setAccessibleAllowances( model );
+		setAllowancesTranslatableLists( model );
 		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
 		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
 
@@ -149,13 +149,18 @@ public class PhotoEditDataController {
 		model.setNew( false );
 		model.setPhoto( photo );
 
+		model.setPhotoName( photo.getName() );
 		model.setGenreWrappers( getGenreWrappers() );
 		model.setSelectedGenreId( photo.getGenreId() );
 		model.setPhotoDescription( photo.getDescription() );
+		model.setPhotoKeywords( photo.getKeywords() );
+		model.setContainsNudeContent( photo.isContainsNudeContent() );
+		model.setAnonymousPosting( photo.isAnonymousPosting() );
 
-		setAccessibleAllowances( model );
-		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
-		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
+		setAllowancesTranslatableLists( model );
+
+		model.setCommentsAllowance( photoService.getPhotoCommentAllowance( photo ) );
+		model.setVotingAllowance( photoService.getPhotoVotingAllowance( photo ) );
 
 		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
 		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
@@ -203,7 +208,7 @@ public class PhotoEditDataController {
 		return result;
 	}
 
-	private void setAccessibleAllowances( final PhotoEditDataModel model ) {
+	private void setAllowancesTranslatableLists( final PhotoEditDataModel model ) {
 
 		final List<PhotoActionAllowance> accessiblePhotoCommentAllowance = configurationService.getAccessiblePhotoCommentAllowance();
 		model.setAccessibleCommentAllowancesTranslatableList( new GenericTranslatableList<PhotoActionAllowance>( accessiblePhotoCommentAllowance, EnvironmentContext.getLanguage(), translatorService ) );
