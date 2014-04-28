@@ -15,9 +15,13 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private File tempPhotoFile;
 
 	private String photoName;
+	private String photoDescription;
+	private String photoKeywords;
 
 	private int selectedGenreId;
 	private List<GenreWrapper> genreWrappers;
+
+	private boolean containsNudeContent;
 
 	public void setPhoto( final Photo photo ) {
 		this.photo = photo;
@@ -51,6 +55,22 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.photoName = photoName;
 	}
 
+	public String getPhotoDescription() {
+		return photoDescription;
+	}
+
+	public void setPhotoDescription( final String photoDescription ) {
+		this.photoDescription = photoDescription;
+	}
+
+	public String getPhotoKeywords() {
+		return photoKeywords;
+	}
+
+	public void setPhotoKeywords( final String photoKeywords ) {
+		this.photoKeywords = photoKeywords;
+	}
+
 	public int getSelectedGenreId() {
 		return selectedGenreId;
 	}
@@ -65,5 +85,13 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setGenreWrappers( final List<GenreWrapper> genreWrappers ) {
 		this.genreWrappers = genreWrappers;
+	}
+
+	public boolean isContainsNudeContent() {
+		return containsNudeContent;
+	}
+
+	public void setContainsNudeContent( final boolean containsNudeContent ) {
+		this.containsNudeContent = containsNudeContent;
 	}
 }

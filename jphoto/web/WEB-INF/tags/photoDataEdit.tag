@@ -14,20 +14,28 @@
 
 <form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/photos/save/">
 
-	<table:table width="700px" border="0">
+	<table:table width="800px" border="0">
 
 		<table:separatorInfo colspan="2" title="${eco:translate('Photo data')}" />
 
-		<table:tr>
+		<table:tredit>
 
 			<table:tdtext text_t="Photo uploading: Name" labelFor="photoName" />
 			<table:tddata>
 				<form:input path="photoName" maxlength="${photoNameMaxLength}" />
 			</table:tddata>
 
-		</table:tr>
+		</table:tredit>
 
-		<table:tr>
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Description" labelFor="photoDescription"/>
+
+			<table:tddata>
+				<form:textarea path="photoDescription" cols="50" rows="5" />
+			</table:tddata>
+		</table:tredit>
+
+		<table:tredit>
 
 			<table:tredit>
 				<table:tdtext text_t="Photo uploading: Genre" labelFor="selectedGenreId" isMandatory="true"/>
@@ -37,7 +45,29 @@
 				</table:tddata>
 			</table:tredit>
 
-		</table:tr>
+		</table:tredit>
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Keywords" labelFor="photoKeywords"/>
+
+			<table:tddata>
+				<form:input path="photoKeywords" size="50"/>
+				<br />
+				${eco:translate("Use comma ',' as separator")}
+			</table:tddata>
+		</table:tredit>
+
+		<table:separator colspan="2" />
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Contains nude content" labelFor="containsNudeContent1"/>
+
+			<table:tddata>
+				<form:checkbox path="containsNudeContent"/>
+			</table:tddata>
+		</table:tredit>
+
+		<table:separator colspan="2" />
 
 		<%--<table:trok text_t="Photo uploading: Save button" onclick="alert( ';)' ); return false;"/>--%>
 		<table:trok text_t="Photo uploading: Save button" />

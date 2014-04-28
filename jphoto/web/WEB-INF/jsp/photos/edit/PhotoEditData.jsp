@@ -7,15 +7,17 @@
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
+<c:set var="photo" value="${photoEditDataModel.photo}" />
+
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 	<div class="floatleft">
 
 		<div class="floatleft text-centered">
 
-			<div class="floatleft" style="width: 350px; vertical-align: top;">
-				<table:table width="350px" border="0">
-					<table:separatorInfo colspan="1" title="${eco:translate('Photo')}" />
+			<div class="floatleft" style="width: 400px; vertical-align: top;">
+				<table:table width="400px" border="0">
+					<table:separatorInfo colspan="1" title="${eco:translate(photo.id == 0 ? 'Photo uploading: Photo uploading' : 'Photo uploading: Photo data editing')}" />
 					<table:tr>
 						<table:td>
 							<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
