@@ -20,14 +20,14 @@
 
 			<form:form modelAttribute="photoEditDataModel">
 
-				<div class="photo-edit-container"></div>
+				<%--<div class="photo-edit-container"></div>--%>
 
 			</form:form>
 
 		</div>
 	</div>
 
-	<script type="text/javascript">
+	<%--<script type="text/javascript">
 
 		renderPhotoEditForm();
 
@@ -38,6 +38,6 @@
 			} );
 		}
 
-	</script>
+	</script>--%>
 
 </tags:page>
