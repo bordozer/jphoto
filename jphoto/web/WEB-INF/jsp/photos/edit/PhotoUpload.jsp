@@ -28,4 +28,6 @@
 
 	</form:form>
 
+	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
+
 </tags:page>

@@ -139,4 +139,4 @@
 
 </form:form>
 
-<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
+<%--<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>--%>

@@ -97,11 +97,14 @@ public class PhotoEditDataController {
 	private AnonymousDaysService anonymousDaysService;
 
 	@Autowired
+	PhotoEditFileValidator photoEditFileValidator;
+
+	@Autowired
 	PhotoEditDataValidator photoEditDataValidator;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
-		binder.setValidator( photoEditDataValidator );
+		binder.addValidators( photoEditFileValidator, photoEditDataValidator );
 	}
 
 	@ModelAttribute( MODEL_NAME )
@@ -116,6 +119,10 @@ public class PhotoEditDataController {
 
 		model.clear();
 
+		final User photoAuthor = EnvironmentContext.getCurrentUser();
+
+		model.setPhotoAuthor( photoAuthor );
+
 		model.setNew( true );
 		model.setPhoto( new Photo() );
 
@@ -127,25 +134,13 @@ public class PhotoEditDataController {
 	@RequestMapping( method = RequestMethod.POST, value = "/new/" )
 	public String photoUploaded( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result ) throws IOException {
 
-		final Language language = EnvironmentContext.getLanguage();
-
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
 			return VIEW_UPLOAD_FILE;
 		}
 
-		/*if ( photoFile == null || StringUtils.isEmpty( photoFile.getOriginalFilename() ) ) {
-//			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Error saving data to DB", language ) );
-			return VIEW_UPLOAD_FILE;
-		}*/
-
-		final User photoAuthor = EnvironmentContext.getCurrentUser();
-		model.setPhotoAuthor( photoAuthor );
-
-//		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( photoAuthor, photoFile.getOriginalFilename() );
-//		photoFile.transferTo( tempFile );
-//		model.setTempPhotoFile( tempFile );
+		final User photoAuthor = model.getPhotoAuthor();
 
 		model.setGenreWrappers( getGenreWrappers() );
 		setAllowancesTranslatableLists( model );
