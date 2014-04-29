@@ -250,12 +250,13 @@
 			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
 
 			<c:if test="${photoCardModel.votingValidationResult.validationPassed}">
-				<div class="votingDiv block-background block-border photo-appraisal-form-div">
-					<%--<photo:photoVoting photo="${photo}"
+				<%--<photo:DEL_photoVoting photo="${photo}"
 								   userPhotoVotes="${photoCardModel.userPhotoVotes}"
 								   minMarkForGenre="${photoCardModel.votingUserMinAccessibleMarkForGenre}"
 								   maxMarkForGenre="${photoCardModel.votingUserMaxAccessibleMarkForGenre}"
 						/>--%>
+				<div class="votingDiv block-background block-border photo-appraisal-form-div">
+
 					<div style="text-align: center;">
 						<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
 					</div>

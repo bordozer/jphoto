@@ -9,7 +9,7 @@ import core.interfaces.IdsSqlSelectable;
 public interface VotingCategoryService extends BaseEntityService<PhotoVotingCategory>, AllEntriesLoadable<PhotoVotingCategory>, IdsSqlSelectable {
 
 	String BEAN_NAME = "votingCategoryService";
-	int PHOTO_VOTING_CATEGORY_QTY = 3;
+	int PHOTO_VOTING_CATEGORY_QTY = 3; // TODO: make a system configuration
 
 	PhotoVotingCategory loadByName( final String name );
 

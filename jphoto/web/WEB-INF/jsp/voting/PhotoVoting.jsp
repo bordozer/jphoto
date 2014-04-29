@@ -9,7 +9,7 @@
 <c:set var="hasError" value="<%=photoVotingModel.getBindingResult().hasErrors()%>" />
 
 <c:if test="${photoVotingModel.showPhotoVotingForm}">
-	<photo:photoVoting photo="${photoVotingModel.photo}"
+	<photo:DEL_photoVoting photo="${photoVotingModel.photo}"
 					   userPhotoVotes="${photoVotingModel.userPhotoVotes}"
 					   minMarkForGenre="${photoVotingModel.votingUserMinAccessibleMarkForGenre}"
 					   maxMarkForGenre="${photoVotingModel.votingUserMaxAccessibleMarkForGenre}"

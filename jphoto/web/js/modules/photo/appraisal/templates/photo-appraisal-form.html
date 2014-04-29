@@ -1,1 +1,22 @@
-PHOTO-APPRAISAL-FORM.HTML <%=photoId%>
+
+<style type="text/css">
+	.photo-appraisal-container {
+		float: left;
+		width: 90%;
+		padding: 3px;
+		/*border: 1px solid red;;*/
+	}
+</style>
+
+<% _.each( appraisalCategories, function( count ) { %>
+<div class="photo-appraisal-container">
+	<select class="photo-appraisal-category-<%=count%>">
+		<% _.each( photoVotingCategories, function( photoVotingCategory ) { %>
+			<option value="<%=photoVotingCategory.id%>"><%=photoVotingCategory.nameTranslated%></option>
+		<% }) %>
+	</select>
+	<select class="photo-appraisal-mark-<%=count%>">
+
+	</select>
+</div>
+<% }) %>
