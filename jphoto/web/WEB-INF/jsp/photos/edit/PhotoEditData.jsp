@@ -9,6 +9,7 @@
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
 <c:set var="photo" value="${photoEditDataModel.photo}" />
+<c:set var="isNew" value="${photoEditDataModel.new}" />
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
@@ -18,15 +19,15 @@
 
 			<div class="floatleft" style="width: 400px; vertical-align: top;">
 				<table:table width="400px" border="0">
-					<table:separatorInfo colspan="1" title="${eco:translate(photo.id == 0 ? 'Photo uploading: Photo uploading' : 'Photo uploading: Photo data editing')}" />
+					<table:separatorInfo colspan="1" title="${eco:translate(isNew ? 'Photo uploading: Photo uploading' : 'Photo uploading: Photo data editing')}" />
 					<table:tr>
 						<table:td>
 
-							<c:if test="${photo.id == 0}">
+							<c:if test="${isNew}">
 								<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
 							</c:if>
 
-							<c:if test="${photo.id > 0}">
+							<c:if test="${not isNew}">
 								<photo:photoPreview photo="${photo}" />
 								<br />
 								<br />

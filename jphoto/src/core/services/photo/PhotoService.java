@@ -21,7 +21,7 @@ import java.util.Set;
 
 public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable {
 
-	void savePhotoWithTeamAndAlbums( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
+	void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
 
 	@Deprecated
 	SqlSelectResult<Photo> load( final SqlSelectQuery selectQuery );

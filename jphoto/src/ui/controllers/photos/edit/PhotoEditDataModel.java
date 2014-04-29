@@ -3,6 +3,7 @@ package ui.controllers.photos.edit;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
 import core.general.photo.Photo;
+import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,6 +21,8 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private MultipartFile photoFile;
 	private File tempPhotoFile;
 
+	private User photoAuthor;
+
 	private String photoName;
 	private String photoDescription;
 	private String photoKeywords;
@@ -29,6 +32,9 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	private boolean containsNudeContent;
 	private boolean anonymousPosting;
+	private boolean uploadDateIsAnonymousDay;
+
+	private String bgColor;
 
 	private GenericTranslatableList<PhotoActionAllowance> accessibleCommentAllowancesTranslatableList;
 	private PhotoActionAllowance commentsAllowance;
@@ -44,6 +50,14 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
 	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
 	private List<UserPhotoAlbum> photoAlbums = newArrayList();			// selected usr photo's albums
+
+	public User getPhotoAuthor() {
+		return photoAuthor;
+	}
+
+	public void setPhotoAuthor( final User photoAuthor ) {
+		this.photoAuthor = photoAuthor;
+	}
 
 	public void setPhoto( final Photo photo ) {
 		this.photo = photo;
@@ -123,6 +137,22 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setAnonymousPosting( final boolean anonymousPosting ) {
 		this.anonymousPosting = anonymousPosting;
+	}
+
+	public boolean isUploadDateIsAnonymousDay() {
+		return uploadDateIsAnonymousDay;
+	}
+
+	public void setUploadDateIsAnonymousDay( final boolean uploadDateIsAnonymousDay ) {
+		this.uploadDateIsAnonymousDay = uploadDateIsAnonymousDay;
+	}
+
+	public String getBgColor() {
+		return bgColor;
+	}
+
+	public void setBgColor( final String bgColor ) {
+		this.bgColor = bgColor;
 	}
 
 	public GenericTranslatableList<PhotoActionAllowance> getAccessibleCommentAllowancesTranslatableList() {

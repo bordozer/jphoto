@@ -97,10 +97,10 @@ public abstract class AbstractPhotoImportStrategy {
 		final PhotoTeam photoTeam = getPhotoTeam( photo, user );
 		final List<UserPhotoAlbum> albums = getPhotoAlbums( user );
 
-		photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, albums ); // SAVE PHOTO OR THROW EXCEPTION
-
 		final File imageFile = imageDiscEntry.getImageFile();
-		final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
+		photoService.uploadNewPhoto( photo, imageFile, photoTeam, albums );
+
+		/*final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
 
 		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
 			try {
@@ -114,9 +114,9 @@ public abstract class AbstractPhotoImportStrategy {
 				photoService.save( photo ); // SAVE ERROR TO DESCRIPTION
 				// TODO: delete photo from DB because is has no file
 			}
-		}
+		}*/
 
-		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime );
+		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 
 		photoToImport.setPhoto( photo );
 

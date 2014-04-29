@@ -141,7 +141,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public void savePhotoWithTeamAndAlbums( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
+	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
 
 		if ( ! save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
@@ -154,6 +154,22 @@ public class PhotoServiceImpl implements PhotoService {
 		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
 		}
+
+		/*final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
+
+		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
+			try {
+				services.getPreviewGenerationService().generatePreviewSync( photo.getId() );
+			} catch ( final InterruptedException e ) {
+				final String message = String.format( "Error creating preview: %s ( %s )", photoFile.getCanonicalPath(), e.getMessage() );
+
+				log.error( message );
+
+				photo.setDescription( message );
+				photoService.save( photo ); // SAVE ERROR TO DESCRIPTION
+				// TODO: delete photo from DB because is has no file
+			}
+		}*/
 	}
 
 	@Override

@@ -24,7 +24,7 @@
 			<tx:method name="createUser"/>
 			<tx:method name="saveUserPhotoVoting"/>
 			<tx:method name="recalculatePhotoRatingForPeriod"/>
-			<tx:method name="savePhotoWithTeamAndAlbums"/>
+			<tx:method name="uploadNewPhoto"/>
 			<tx:method name="sendPrivateMessageAjax"/>
 			<tx:method name="sendPrivateMessage"/>
 			<tx:method name="sendSystemNotificationMessage"/>
@@ -60,8 +60,8 @@
 	</aop:config>
 
 	<aop:config>
-		<aop:pointcut id="savePhotoWithTeamAndAlbums" expression="execution(* core.services.photo.PhotoService.savePhotoWithTeamAndAlbums(..))"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="savePhotoWithTeamAndAlbums"/>
+		<aop:pointcut id="uploadNewPhoto" expression="execution(* core.services.photo.PhotoService.uploadNewPhoto(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="uploadNewPhoto"/>
 	</aop:config>
 
 	<aop:config>

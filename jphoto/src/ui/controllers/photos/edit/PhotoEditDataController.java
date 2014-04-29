@@ -2,12 +2,16 @@ package ui.controllers.photos.edit;
 
 import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
+import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photoTeam.PhotoTeam;
+import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -17,6 +21,7 @@ import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
@@ -82,6 +87,12 @@ public class PhotoEditDataController {
 	@Autowired
 	private UserPhotoAlbumService userPhotoAlbumService;
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private AnonymousDaysService anonymousDaysService;
+
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
 		return new PhotoEditDataModel();
@@ -111,25 +122,29 @@ public class PhotoEditDataController {
 			return VIEW_UPLOAD_FILE;
 		}
 
-		final User currentUser = EnvironmentContext.getCurrentUser();
+		final User photoAuthor = EnvironmentContext.getCurrentUser();
+		model.setPhotoAuthor( photoAuthor );
 
-		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( currentUser, photoFile.getOriginalFilename() );
+		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( photoAuthor, photoFile.getOriginalFilename() );
 
 		photoFile.transferTo( tempFile );
 		model.setTempPhotoFile( tempFile );
 
 		model.setGenreWrappers( getGenreWrappers() );
 		setAllowancesTranslatableLists( model );
-		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( currentUser ) ); // From user defaults
-		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
+		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( photoAuthor ) ); // From user defaults
+		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( photoAuthor ) );    // From user defaults
 
-		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
+		final Set<EmailNotificationType> emailNotificationTypes = photoAuthor.getEmailNotificationTypes();
 		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
 
 		model.setUserTeamMembers( getUserTeamMembers() );
 		model.setUserPhotoAlbums( getUserPhotoAlbums() );
 
-		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( currentUser ) );
+		model.setUploadDateIsAnonymousDay( anonymousDaysService.isDayAnonymous( dateUtilsService.getCurrentTime() ) );
+		model.setAnonymousPosting( false );
+
+		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( photoAuthor ) );
 
 		return VIEW_EDIT_DATA;
 	}
@@ -139,34 +154,14 @@ public class PhotoEditDataController {
 
 		assertPhotoExistsAndCurrentUserCanEditIt( _photoId );
 
-		final User currentUser = EnvironmentContext.getCurrentUser();
-
 		final int photoId = NumberUtils.convertToInt( _photoId );
 
 		final Photo photo = photoService.load( photoId );
 
 		model.clear();
 		model.setNew( false );
-		model.setPhoto( photo );
 
-		model.setPhotoName( photo.getName() );
-		model.setGenreWrappers( getGenreWrappers() );
-		model.setSelectedGenreId( photo.getGenreId() );
-		model.setPhotoDescription( photo.getDescription() );
-		model.setPhotoKeywords( photo.getKeywords() );
-		model.setContainsNudeContent( photo.isContainsNudeContent() );
-		model.setAnonymousPosting( photo.isAnonymousPosting() );
-
-		setAllowancesTranslatableLists( model );
-
-		model.setCommentsAllowance( photoService.getPhotoCommentAllowance( photo ) );
-		model.setVotingAllowance( photoService.getPhotoVotingAllowance( photo ) );
-
-		final Set<EmailNotificationType> emailNotificationTypes = currentUser.getEmailNotificationTypes();
-		model.setSendNotificationEmailAboutNewPhotoComment( emailNotificationTypes.contains( EmailNotificationType.COMMENT_TO_USER_PHOTO ) ? YesNo.YES.getId() : YesNo.NO.getId() );
-
-		model.setUserTeamMembers( getUserTeamMembers() );
-		model.setUserPhotoAlbums( getUserPhotoAlbums() );
+		initModelFromPhoto( model, photo );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getPhotoEditDataBreadcrumbs( photo ) );
 
@@ -174,12 +169,91 @@ public class PhotoEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/save/" )
-	public String editPhoto( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) {
+	public String editPhoto( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) throws SaveToDBException {
 
-//		model.setPhoto(  ); // TODO: set saved photo
+		final Photo photo = new Photo();
+		initPhotoFromModel( photo, model );
 
-//		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( model.getPhoto().getId() ) );
-		return VIEW_EDIT_DATA;
+		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getPhotoTeamMembers() ), model.getPhotoAlbums() );
+
+		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
+	}
+
+	private PhotoTeam getPhotoTeam( final Photo photo, final List<UserTeamMember> userTeamMembers ) {
+		final List<PhotoTeamMember> photoTeamMembers = newArrayList();
+		for ( final UserTeamMember userTeamMember : userTeamMembers ) {
+			final PhotoTeamMember photoTeamMember = new PhotoTeamMember();
+			photoTeamMember.setUserTeamMember( userTeamMember );
+			photoTeamMembers.add( photoTeamMember );
+		}
+		return new PhotoTeam( photo, photoTeamMembers );
+	}
+
+	private void initModelFromPhoto( final PhotoEditDataModel model, final Photo photo ) {
+
+		model.setPhoto( photo );
+		model.setPhotoAuthor( userService.load( photo.getUserId() ) );
+
+		model.setPhotoName( photo.getName() );
+		model.setSelectedGenreId( photo.getGenreId() );
+		model.setPhotoKeywords( photo.getKeywords() );
+		model.setPhotoDescription( photo.getDescription() );
+		model.setContainsNudeContent( photo.isContainsNudeContent() );
+		model.setBgColor( photo.getBgColor() );
+
+
+		model.setCommentsAllowance( photoService.getPhotoCommentAllowance( photo ) );
+		model.setSendNotificationEmailAboutNewPhotoComment( photo.isNotificationEmailAboutNewPhotoComment() ? YesNo.YES.getId() : YesNo.NO.getId() );
+
+		model.setVotingAllowance( photoService.getPhotoVotingAllowance( photo ) );
+
+
+		setAllowancesTranslatableLists( model );
+
+		model.setUserTeamMembers( userTeamService.loadAllForEntry( photo.getUserId() ) );
+
+		final PhotoTeam photoTeam = userTeamService.getPhotoTeam( photo.getId() );
+		final List<String> photoTeamMemberIds = newArrayList();
+		final List<UserTeamMember> userTeamMembers = newArrayList();
+
+		for ( final PhotoTeamMember photoTeamMember : photoTeam.getPhotoTeamMembers() ) {
+			photoTeamMemberIds.add( String.valueOf( photoTeamMember.getUserTeamMember().getId() ) );
+			userTeamMembers.add( photoTeamMember.getUserTeamMember() );
+		}
+
+		model.setPhotoTeamMemberIds( photoTeamMemberIds );
+		model.setPhotoTeamMembers( userTeamMembers );
+
+		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
+		final List<String> photoAlbumsIds = newArrayList();
+		final List<UserPhotoAlbum> photoAlbums = newArrayList();
+
+		for ( final UserPhotoAlbum photoAlbum : userPhotoAlbums ) {
+			photoAlbumsIds.add( String.valueOf( photoAlbum.getId() ) );
+			photoAlbums.add( photoAlbum );
+		}
+
+		model.setPhotoAlbumIds( photoAlbumsIds );
+		model.setPhotoAlbums( photoAlbums );
+
+		model.setAnonymousPosting( photo.isAnonymousPosting() );
+		model.setUploadDateIsAnonymousDay( anonymousDaysService.isDayAnonymous( photo.getUploadTime() ) );
+	}
+
+	private void initPhotoFromModel( final Photo photo, final PhotoEditDataModel model ) {
+		photo.setId( model.getPhoto().getId() );
+		photo.setName( model.getPhotoName() );
+		photo.setUserId( model.getPhotoAuthor().getId() );
+		photo.setGenreId( model.getSelectedGenreId() );
+		photo.setKeywords( model.getPhotoKeywords() );
+		photo.setDescription( model.getPhotoDescription() );
+		photo.setUploadTime( dateUtilsService.getCurrentTime() );
+		photo.setContainsNudeContent( model.isContainsNudeContent() );
+		photo.setBgColor( model.getBgColor() );
+		photo.setCommentsAllowance( model.getCommentsAllowance() );
+		photo.setNotificationEmailAboutNewPhotoComment( model.getSendNotificationEmailAboutNewPhotoComment() == YesNo.YES.getId() );
+		photo.setVotingAllowance( model.getVotingAllowance() );
+		photo.setAnonymousPosting( model.isAnonymousPosting() );
 	}
 
 	private void assertPhotoExistsAndCurrentUserCanEditIt( final String _photoId ) {

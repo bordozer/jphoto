@@ -37,12 +37,12 @@ public class AnonymousDaysServiceImpl implements AnonymousDaysService {
 	}
 
 	@Override
-	public void saveAnonymousDayAjax( final String date ) {
+	public void saveAnonymousDayAjax( final String date ) { // TODO: move to AjaxService
 		addAnonymousDay( new AnonymousDay( dateUtilsService.parseDate( date ), dateUtilsService ) );
 	}
 
 	@Override
-	public void deleteAnonymousDayAjax( final String date ) {
+	public void deleteAnonymousDayAjax( final String date ) { // TODO: move to AjaxService
 		deleteAnonymousDay( new AnonymousDay( dateUtilsService.parseDate( date ), dateUtilsService ) );
 	}
 }

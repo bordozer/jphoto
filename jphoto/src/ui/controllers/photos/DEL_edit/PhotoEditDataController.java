@@ -283,8 +283,8 @@ public class PhotoEditDataController {
 		final List<UserPhotoAlbum> photoAlbums = getPhotoAlbums( model );
 
 		final Language language = EnvironmentContext.getLanguage();
-		try {
-			photoService.savePhotoWithTeamAndAlbums( photo, photoTeam, photoAlbums );
+		/*try {
+			photoService.uploadNewPhoto( photo, imageFile, photoTeam, photoAlbums );
 		} catch ( final SaveToDBException e ) {
 			photoService.delete( photo.getId() );
 			log.error( String.format( "Can not save photo data: %s", photo ), e );
@@ -317,7 +317,7 @@ public class PhotoEditDataController {
 				result.reject( translatorService.translate( "Photo preview generation", language ), translatorService.translate( "Photo #$1 preview generation error", language, String.valueOf( photo.getId() ) ) );
 				return FILE_UPLOAD_VIEW;
 			}
-		}
+		}*/
 
 		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseURL(), UrlUtilsServiceImpl.PHOTOS_URL );
 	}
