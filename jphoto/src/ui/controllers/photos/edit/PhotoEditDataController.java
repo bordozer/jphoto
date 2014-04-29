@@ -205,7 +205,7 @@ public class PhotoEditDataController {
 			return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
 		}
 
-		return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() );
+		return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() ); // TODO: figure out where from the request come
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )
