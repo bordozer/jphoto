@@ -143,7 +143,7 @@ public class FavoritesJob extends AbstractJob {
 			final Date currentTime = services.getDateUtilsService().getCurrentTime();
 
 			services.getFavoritesService().addEntryToFavorites( user.getId(), randomUser.getId(), currentTime, favoriteEntryType );
-			getLog().info( String.format( "Member %d has added member %d to %s", user.getId(), randomUser.getId(), favoriteEntryType ) );
+			getLog().info( String.format( "Member %s has added member %s to %s", user, randomUser, favoriteEntryType ) );
 
 			services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), currentTime );
 
@@ -164,7 +164,7 @@ public class FavoritesJob extends AbstractJob {
 			final Date currentTime = services.getDateUtilsService().getCurrentTime();
 
 			services.getFavoritesService().addEntryToFavorites( user.getId(), randomPhoto.getId(), currentTime, favoriteEntryType );
-			getLog().info( String.format( "User %d has added photo %d to %s", user.getId(), randomPhoto.getId(), favoriteEntryType ) );
+			getLog().info( String.format( "User %s has added photo %sd to %s", user, randomPhoto, favoriteEntryType ) );
 
 			services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), currentTime );
 
