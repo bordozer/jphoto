@@ -250,12 +250,21 @@
 			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
 
 			<c:if test="${photoCardModel.votingValidationResult.validationPassed}">
-				<div class="votingDiv block-background block-border">
-					<photo:photoVoting photo="${photo}"
+				<div class="votingDiv block-background block-border photo-appraisal-form-div">
+					<%--<photo:photoVoting photo="${photo}"
 								   userPhotoVotes="${photoCardModel.userPhotoVotes}"
 								   minMarkForGenre="${photoCardModel.votingUserMinAccessibleMarkForGenre}"
 								   maxMarkForGenre="${photoCardModel.votingUserMaxAccessibleMarkForGenre}"
-						/>
+						/>--%>
+					<div style="text-align: center;">
+						<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
+					</div>
+
+					<script type="text/javascript">
+						require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
+							photoAppraisal( ${photoId}, ${loggedUser.id}, '${eco:baseUrl()}', $( '.photo-appraisal-form-div' ) );
+						} );
+					</script>
 				</div>
 			</c:if>
 
@@ -271,7 +280,7 @@
 		<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>
 		<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>
 
-		<script type="text/javascript">
+		<%--<script type="text/javascript">
 
 			require( [ 'jquery' ], function( $ ) {
 
@@ -313,7 +322,7 @@
 				} );
 
 			});
-		</script>
+		</script>--%>
 	</c:if>
 
 	<c:set var="bgColor" value="${not empty photo.bgColor ? '#'.concat(photo.bgColor) : '#000000'}" />
