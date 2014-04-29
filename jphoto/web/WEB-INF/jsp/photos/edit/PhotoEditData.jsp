@@ -47,6 +47,8 @@
 
 	</div>
 
+	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
+
 	<div class="footerseparator"></div>
 
 </tags:page>

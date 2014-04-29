@@ -138,3 +138,5 @@
 	</table:table>
 
 </form:form>
+
+<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>

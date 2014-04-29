@@ -1,4 +1,4 @@
-package ui.controllers.photos.DEL_edit;
+package ui.controllers.photos.edit;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.img.Dimension;
@@ -35,33 +35,30 @@ public class PhotoEditDataValidator implements Validator {
 	@Override
 	public void validate( final Object target, final Errors errors ) {
 		final PhotoEditDataModel model = ( PhotoEditDataModel ) target;
-		final String photoName = model.getName();
+		final String photoName = model.getPhotoName();
 
-		validateUser( errors );
+		validateUserIsLogged( errors );
 
-		if ( model.getCurrentStep() == PhotoEditWizardStep.PHOTO_FILE_UPLOAD ) {
+		if ( ! model.isNew() ) {
 			validateFile( errors, model );
 		}
 
 		validateName( errors, photoName );
 
-		validateGenre( errors, model.getGenreId() );
+		validateGenre( errors, model.getSelectedGenreId() );
 	}
 
-	private void validateUser( final Errors errors ) {
+	private void validateUserIsLogged( final Errors errors ) {
 		if ( ! UserUtils.isCurrentUserLoggedUser() ) {
 			errors.reject( translatorService.translate( "Please, login", EnvironmentContext.getLanguage() ), translatorService.translate( "You are not logged in", EnvironmentContext.getLanguage() ) );
 		}
 	}
 
 	private void validateFile( final Errors errors, final PhotoEditDataModel model ) {
-		if ( model.getPhotoId() > 0 ) {
-			return;
-		}
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final MultipartFile multipartFile = model.getFile();
+		final MultipartFile multipartFile = model.getPhotoFile();
 		final ConfigurationKey fileMaxSizeKey = currentUser.getUserStatus() == UserStatus.CANDIDATE ? ConfigurationKey.CANDIDATES_FILE_MAX_SIZE_KB : ConfigurationKey.MEMBERS_FILE_MAX_SIZE_KB;
 		final long maxFileSizeKb = configurationService.getLong( fileMaxSizeKey );
 
@@ -69,26 +66,26 @@ public class PhotoEditDataValidator implements Validator {
 		final int maxFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MAX_HEIGHT );
 		final Dimension maxDimension = new Dimension( maxFileWidth, maxFileHeight );
 
-		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, PhotoEditDataModel.PHOTO_EDIT_DATA_FILE_FORM_CONTROL, EnvironmentContext.getLanguage() );
+		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, "photoFile", EnvironmentContext.getLanguage() );
 	}
 
 	private void validateName( final Errors errors, final String name ) {
 
 		if ( StringUtils.isEmpty( name ) ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( "%s should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ) ) );
+			errors.rejectValue( "photoName", translatorService.translate( "%s should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ) ) );
 			return;
 		}
 
 		final int photoNameMaxLength = configurationService.getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH );
 		if ( name.length() > photoNameMaxLength ) {
 			final String mess = translatorService.translate( "$1 ($2) should be less then %d symbols ( entered $2 symbols)", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ), String.valueOf( photoNameMaxLength ), name, String.valueOf( name.length() ) );
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_NAME_FORM_CONTROL, mess );
+			errors.rejectValue( "photoName", mess );
 		}
 	}
 
 	private void validateGenre( final Errors errors, final int genreId ) {
 		if ( genreId == 0 ) {
-			errors.rejectValue( PhotoEditDataModel.PHOTO_EDIT_DATA_GENRE_ID_FORM_CONTROL, translatorService.translate( "Select $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Genre" ) ) );
+			errors.rejectValue( "selectedGenreId", translatorService.translate( "Select $1", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Genre" ) ) );
 		}
 	}
 }

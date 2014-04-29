@@ -28,6 +28,8 @@ import core.services.utils.UrlUtilsServiceImpl;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ui.context.EnvironmentContext;
@@ -35,6 +37,7 @@ import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -93,6 +96,14 @@ public class PhotoEditDataController {
 	@Autowired
 	private AnonymousDaysService anonymousDaysService;
 
+	@Autowired
+	PhotoEditDataValidator photoEditDataValidator;
+
+	@InitBinder
+	protected void initBinder( final WebDataBinder binder ) {
+		binder.setValidator( photoEditDataValidator );
+	}
+
 	@ModelAttribute( MODEL_NAME )
 	public PhotoEditDataModel prepareModel() {
 		return new PhotoEditDataModel();
@@ -114,21 +125,27 @@ public class PhotoEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/new/" )
-	public String photoUploaded( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) throws IOException {
+	public String photoUploaded( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result ) throws IOException {
 
-		final MultipartFile photoFile = model.getPhotoFile();
+		final Language language = EnvironmentContext.getLanguage();
 
-		if ( photoFile == null || StringUtils.isEmpty( photoFile.getOriginalFilename() ) ) {
+		model.setBindingResult( result );
+
+		if ( result.hasErrors() ) {
 			return VIEW_UPLOAD_FILE;
 		}
+
+		/*if ( photoFile == null || StringUtils.isEmpty( photoFile.getOriginalFilename() ) ) {
+//			result.reject( translatorService.translate( "Saving data error", language ), translatorService.translate( "Error saving data to DB", language ) );
+			return VIEW_UPLOAD_FILE;
+		}*/
 
 		final User photoAuthor = EnvironmentContext.getCurrentUser();
 		model.setPhotoAuthor( photoAuthor );
 
-		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( photoAuthor, photoFile.getOriginalFilename() );
-
-		photoFile.transferTo( tempFile );
-		model.setTempPhotoFile( tempFile );
+//		final File tempFile = tempFileUtilsService.getTempFileWithOriginalExtension( photoAuthor, photoFile.getOriginalFilename() );
+//		photoFile.transferTo( tempFile );
+//		model.setTempPhotoFile( tempFile );
 
 		model.setGenreWrappers( getGenreWrappers() );
 		setAllowancesTranslatableLists( model );
@@ -169,12 +186,22 @@ public class PhotoEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/save/" )
-	public String editPhoto( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) throws SaveToDBException {
+	public String editPhoto( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result ) throws SaveToDBException, IOException {
+
+		model.setBindingResult( result );
+
+		if ( result.hasErrors() ) {
+			return VIEW_EDIT_DATA;
+		}
 
 		final Photo photo = new Photo();
 		initPhotoFromModel( photo, model );
 
-		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
+		final MultipartFile photoFile = model.getPhotoFile();
+		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );
+		photoFile.transferTo( tempPhotoFile );
+
+		photoService.uploadNewPhoto( photo, tempPhotoFile, getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
 
 		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
 //		return VIEW_EDIT_DATA;

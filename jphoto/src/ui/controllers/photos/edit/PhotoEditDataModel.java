@@ -19,7 +19,7 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private Photo photo;
 
 	private MultipartFile photoFile;
-	private File tempPhotoFile;
+//	private File tempPhotoFile;
 
 	private User photoAuthor;
 
@@ -75,13 +75,13 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.photoFile = photoFile;
 	}
 
-	public void setTempPhotoFile( final File tempPhotoFile ) {
+	/*public void setTempPhotoFile( final File tempPhotoFile ) {
 		this.tempPhotoFile = tempPhotoFile;
 	}
 
 	public File getTempPhotoFile() {
 		return tempPhotoFile;
-	}
+	}*/
 
 	public String getPhotoName() {
 		return photoName;

@@ -2,7 +2,6 @@ package ui.controllers.photos.DEL_edit;
 
 import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
-import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeam;
@@ -34,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.DEL_edit.description.AbstractPhotoUploadAllowance;
 import ui.controllers.photos.DEL_edit.description.UploadDescriptionFactory;
+import ui.controllers.photos.edit.PhotoEditDataValidator;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.validation.DataRequirementService;
 import ui.translatable.GenericTranslatableList;
