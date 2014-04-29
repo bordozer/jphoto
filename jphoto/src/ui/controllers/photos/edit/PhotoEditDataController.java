@@ -188,7 +188,7 @@ public class PhotoEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/save/" )
-	public String editPhoto( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result ) throws SaveToDBException, IOException {
+	public String editPhoto( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result, final HttpServletRequest request ) throws SaveToDBException, IOException {
 
 		model.setBindingResult( result );
 
@@ -201,11 +201,15 @@ public class PhotoEditDataController {
 
 		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
 
-		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
+		if ( model.isNew() ) {
+			return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
+		}
+
+		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )
-	public String deletePhoto( final @PathVariable( "photoId" ) String _photoId, final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) {
+	public String deletePhoto( final @PathVariable( "photoId" ) String _photoId, final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final HttpServletRequest request ) {
 
 		securityService.assertPhotoExists( _photoId );
 
@@ -218,7 +222,7 @@ public class PhotoEditDataController {
 
 		photoService.delete( photoId );
 
-		return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() );
+		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
 	private List<UserPhotoAlbum> getPhotoAlbums( final List<String> photoAlbumIds ) {
