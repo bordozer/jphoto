@@ -174,14 +174,37 @@ public class PhotoEditDataController {
 		final Photo photo = new Photo();
 		initPhotoFromModel( photo, model );
 
-		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getPhotoTeamMembers() ), model.getPhotoAlbums() );
+		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
 
 		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
+//		return VIEW_EDIT_DATA;
 	}
 
-	private PhotoTeam getPhotoTeam( final Photo photo, final List<UserTeamMember> userTeamMembers ) {
+	private List<UserPhotoAlbum> getPhotoAlbums( final List<String> photoAlbumIds ) {
+
+		if ( photoAlbumIds == null ) {
+			return newArrayList();
+		}
+
+		final List<UserPhotoAlbum> result = newArrayList();
+
+		for ( final String photoAlbumId : photoAlbumIds ) {
+			result.add( userPhotoAlbumService.load( Integer.parseInt( photoAlbumId ) ) );
+		}
+
+		return result;
+	}
+
+	private PhotoTeam getPhotoTeam( final Photo photo, final List<String> userTeamMembers ) {
+
 		final List<PhotoTeamMember> photoTeamMembers = newArrayList();
-		for ( final UserTeamMember userTeamMember : userTeamMembers ) {
+
+		if ( userTeamMembers == null ) {
+			return new PhotoTeam( photo, photoTeamMembers );
+		}
+
+		for ( final String userTeamMemberId : userTeamMembers ) {
+			final UserTeamMember userTeamMember = userTeamService.load( Integer.parseInt( userTeamMemberId ) );
 			final PhotoTeamMember photoTeamMember = new PhotoTeamMember();
 			photoTeamMember.setUserTeamMember( userTeamMember );
 			photoTeamMembers.add( photoTeamMember );
@@ -221,20 +244,20 @@ public class PhotoEditDataController {
 			userTeamMembers.add( photoTeamMember.getUserTeamMember() );
 		}
 
-		model.setPhotoTeamMemberIds( photoTeamMemberIds );
-		model.setPhotoTeamMembers( userTeamMembers );
+		model.setUserTeamMemberIds( photoTeamMemberIds );
+//		model.setPhotoTeamMembers( userTeamMembers );
 
 		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
 		final List<String> photoAlbumsIds = newArrayList();
-		final List<UserPhotoAlbum> photoAlbums = newArrayList();
+//		final List<UserPhotoAlbum> photoAlbums = newArrayList();
 
 		for ( final UserPhotoAlbum photoAlbum : userPhotoAlbums ) {
 			photoAlbumsIds.add( String.valueOf( photoAlbum.getId() ) );
-			photoAlbums.add( photoAlbum );
+//			photoAlbums.add( photoAlbum );
 		}
 
 		model.setPhotoAlbumIds( photoAlbumsIds );
-		model.setPhotoAlbums( photoAlbums );
+//		model.setPhotoAlbums( photoAlbums );
 
 		model.setAnonymousPosting( photo.isAnonymousPosting() );
 		model.setUploadDateIsAnonymousDay( anonymousDaysService.isDayAnonymous( photo.getUploadTime() ) );

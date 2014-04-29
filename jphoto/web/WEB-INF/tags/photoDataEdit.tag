@@ -118,7 +118,7 @@
 			<table:tdtext text_t="Photo uploading: Photo team" labelFor="photoTeamIds1"/>
 
 			<table:tddata>
-				<form:checkboxes items="${photoEditDataModel.userTeamMembers}" path="photoTeamMemberIds" itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="true"/>
+				<form:checkboxes path="userTeamMemberIds" items="${photoEditDataModel.userTeamMembers}" itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="true"/>
 			</table:tddata>
 		</table:tredit>
 

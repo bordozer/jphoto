@@ -44,12 +44,12 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private PhotoActionAllowance votingAllowance;
 
 	private List<UserTeamMember> userTeamMembers; 						// all user team's members
-	private List<String> photoTeamMemberIds = newArrayList(); 			// selected as photo team user's members IDs
-	private List<UserTeamMember> photoTeamMembers = newArrayList();		// selected as photo team user's members
+	private List<String> userTeamMemberIds = newArrayList(); 			// selected as photo team user's members IDs
+//	private List<UserTeamMember> photoTeamMembers = newArrayList();		// selected as photo team user's members
 
 	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
 	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
-	private List<UserPhotoAlbum> photoAlbums = newArrayList();			// selected usr photo's albums
+//	private List<UserPhotoAlbum> photoAlbums = newArrayList();			// selected usr photo's albums
 
 	public User getPhotoAuthor() {
 		return photoAuthor;
@@ -219,21 +219,21 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.userTeamMembers = userTeamMembers;
 	}
 
-	public List<String> getPhotoTeamMemberIds() {
-		return photoTeamMemberIds;
+	public List<String> getUserTeamMemberIds() {
+		return userTeamMemberIds;
 	}
 
-	public void setPhotoTeamMemberIds( final List<String> photoTeamMemberIds ) {
-		this.photoTeamMemberIds = photoTeamMemberIds;
+	public void setUserTeamMemberIds( final List<String> userTeamMemberIds ) {
+		this.userTeamMemberIds = userTeamMemberIds;
 	}
 
-	public List<UserTeamMember> getPhotoTeamMembers() {
+	/*public List<UserTeamMember> getPhotoTeamMembers() {
 		return photoTeamMembers;
 	}
 
 	public void setPhotoTeamMembers( final List<UserTeamMember> photoTeamMembers ) {
 		this.photoTeamMembers = photoTeamMembers;
-	}
+	}*/
 
 	public List<UserPhotoAlbum> getUserPhotoAlbums() {
 		return userPhotoAlbums;
@@ -251,13 +251,13 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.photoAlbumIds = photoAlbumIds;
 	}
 
-	public List<UserPhotoAlbum> getPhotoAlbums() {
+	/*public List<UserPhotoAlbum> getPhotoAlbums() {
 		return photoAlbums;
 	}
 
 	public void setPhotoAlbums( final List<UserPhotoAlbum> photoAlbums ) {
 		this.photoAlbums = photoAlbums;
-	}
+	}*/
 
 	@Override
 	public void clear() {
@@ -269,11 +269,11 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		selectedGenreId = 0;
 
 		userTeamMembers = null;
-		photoTeamMemberIds = null;
-		photoTeamMembers = null;
+		userTeamMemberIds = null;
+//		photoTeamMembers = null;
 
 		userPhotoAlbums = newArrayList();
 		photoAlbumIds = null;
-		photoAlbums = null;
+//		photoAlbums = null;
 	}
 }
