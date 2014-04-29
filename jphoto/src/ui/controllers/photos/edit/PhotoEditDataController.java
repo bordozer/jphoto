@@ -37,6 +37,7 @@ import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.translatable.GenericTranslatableList;
 import utils.NumberUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -104,7 +105,7 @@ public class PhotoEditDataController {
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
-		binder.addValidators( photoEditFileValidator, photoEditDataValidator );
+		binder.setValidator( photoEditDataValidator );
 	}
 
 	@ModelAttribute( MODEL_NAME )
@@ -132,13 +133,19 @@ public class PhotoEditDataController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/new/" )
-	public String photoUploaded( @Valid final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result ) throws IOException {
+	public String photoUploaded( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result/*, final PhotoEditFileValidator photoEditFileValidator*/ ) throws IOException {
 
+		photoEditFileValidator.validate( model, result );
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
 			return VIEW_UPLOAD_FILE;
 		}
+
+		final MultipartFile photoFile = model.getPhotoFile();
+		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );
+		photoFile.transferTo( tempPhotoFile );
+		model.setTempPhotoFile( tempPhotoFile );
 
 		final User photoAuthor = model.getPhotoAuthor();
 
@@ -192,14 +199,27 @@ public class PhotoEditDataController {
 		final Photo photo = new Photo();
 		initPhotoFromModel( photo, model );
 
-		final MultipartFile photoFile = model.getPhotoFile();
-		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );
-		photoFile.transferTo( tempPhotoFile );
-
-		photoService.uploadNewPhoto( photo, tempPhotoFile, getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
+		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
 
 		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
 //		return VIEW_EDIT_DATA;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )
+	public String deletePhoto( final @PathVariable( "photoId" ) String _photoId, final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model ) {
+
+		securityService.assertPhotoExists( _photoId );
+
+		final int photoId = NumberUtils.convertToInt( _photoId );
+
+		final Photo photo = photoService.load( photoId );
+
+		final User currentUser = EnvironmentContext.getCurrentUser();
+		securityService.assertUserCanDeletePhoto( currentUser, photo );
+
+		photoService.delete( photoId );
+
+		return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() );
 	}
 
 	private List<UserPhotoAlbum> getPhotoAlbums( final List<String> photoAlbumIds ) {
