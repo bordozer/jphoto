@@ -222,6 +222,10 @@ public class PhotoEditDataController {
 
 		photoService.delete( photoId );
 
+		if ( request.getHeader( "Referer" ).equals( urlUtilsService.getPhotoCardLink( photoId ) ) ) {
+			return String.format( "redirect:%s", urlUtilsService.getAllPhotosLink() );
+		}
+
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
 	}
 
