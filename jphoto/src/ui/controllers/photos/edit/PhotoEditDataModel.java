@@ -45,11 +45,9 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	private List<UserTeamMember> userTeamMembers; 						// all user team's members
 	private List<String> userTeamMemberIds = newArrayList(); 			// selected as photo team user's members IDs
-//	private List<UserTeamMember> photoTeamMembers = newArrayList();		// selected as photo team user's members
 
 	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
 	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
-//	private List<UserPhotoAlbum> photoAlbums = newArrayList();			// selected usr photo's albums
 
 	public User getPhotoAuthor() {
 		return photoAuthor;
@@ -227,14 +225,6 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.userTeamMemberIds = userTeamMemberIds;
 	}
 
-	/*public List<UserTeamMember> getPhotoTeamMembers() {
-		return photoTeamMembers;
-	}
-
-	public void setPhotoTeamMembers( final List<UserTeamMember> photoTeamMembers ) {
-		this.photoTeamMembers = photoTeamMembers;
-	}*/
-
 	public List<UserPhotoAlbum> getUserPhotoAlbums() {
 		return userPhotoAlbums;
 	}
@@ -251,14 +241,6 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		this.photoAlbumIds = photoAlbumIds;
 	}
 
-	/*public List<UserPhotoAlbum> getPhotoAlbums() {
-		return photoAlbums;
-	}
-
-	public void setPhotoAlbums( final List<UserPhotoAlbum> photoAlbums ) {
-		this.photoAlbums = photoAlbums;
-	}*/
-
 	@Override
 	public void clear() {
 		super.clear();
@@ -270,10 +252,8 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 		userTeamMembers = null;
 		userTeamMemberIds = null;
-//		photoTeamMembers = null;
 
 		userPhotoAlbums = newArrayList();
 		photoAlbumIds = null;
-//		photoAlbums = null;
 	}
 }

@@ -202,7 +202,6 @@ public class PhotoEditDataController {
 		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
 
 		return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );
-//		return VIEW_EDIT_DATA;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{photoId}/delete/" )
@@ -287,19 +286,16 @@ public class PhotoEditDataController {
 		}
 
 		model.setUserTeamMemberIds( photoTeamMemberIds );
-//		model.setPhotoTeamMembers( userTeamMembers );
 
 		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadPhotoAlbums( photo.getId() );
 		final List<String> photoAlbumsIds = newArrayList();
-//		final List<UserPhotoAlbum> photoAlbums = newArrayList();
 
 		for ( final UserPhotoAlbum photoAlbum : userPhotoAlbums ) {
 			photoAlbumsIds.add( String.valueOf( photoAlbum.getId() ) );
-//			photoAlbums.add( photoAlbum );
 		}
 
 		model.setPhotoAlbumIds( photoAlbumsIds );
-//		model.setPhotoAlbums( photoAlbums );
+		model.setUserPhotoAlbums( getUserPhotoAlbums() );
 
 		model.setAnonymousPosting( photo.isAnonymousPosting() );
 		model.setUploadDateIsAnonymousDay( anonymousDaysService.isDayAnonymous( photo.getUploadTime() ) );
