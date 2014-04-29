@@ -15,18 +15,19 @@ import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
+import core.log.LogHelper;
 import core.services.conversion.PhotoPreviewService;
+import core.services.conversion.PreviewGenerationService;
 import core.services.dao.PhotoDao;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
-import core.services.menu.EntryMenuService;
 import core.services.notification.NotificationService;
-import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.user.UserPhotoAlbumService;
+import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -40,6 +41,7 @@ import sql.SqlSelectResult;
 import sql.builder.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -110,6 +112,14 @@ public class PhotoServiceImpl implements PhotoService {
 	@Autowired
 	private Services services;
 
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private PreviewGenerationService previewGenerationService;
+
+	private final LogHelper log = new LogHelper( PhotoServiceImpl.class );
+
 	@Override
 	public boolean save( final Photo entry ) {
 
@@ -136,10 +146,31 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
+	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
 		if ( ! save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
+		}
+
+		final User photoAuthor = userService.load( photo.getUserId() );
+
+		final File userFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( photoFile, photo, photoAuthor );
+		photo.setFile( userFile );
+
+		if ( updatePhotoFileData( photo.getId(), userFile ) ) {
+			try {
+				if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
+					throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
+				}
+			} catch ( final InterruptedException e ) {
+				final String message = String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() );
+
+				log.error( message );
+
+				delete( photo.getId() );
+
+				return;
+			}
 		}
 
 		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
@@ -149,22 +180,6 @@ public class PhotoServiceImpl implements PhotoService {
 		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
 		}
-
-		/*final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
-
-		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
-			try {
-				services.getPreviewGenerationService().generatePreviewSync( photo.getId() );
-			} catch ( final InterruptedException e ) {
-				final String message = String.format( "Error creating preview: %s ( %s )", photoFile.getCanonicalPath(), e.getMessage() );
-
-				log.error( message );
-
-				photo.setDescription( message );
-				photoService.save( photo ); // SAVE ERROR TO DESCRIPTION
-				// TODO: delete photo from DB because is has no file
-			}
-		}*/
 	}
 
 	@Override

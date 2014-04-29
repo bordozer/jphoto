@@ -15,13 +15,14 @@ import sql.builder.SqlIdsSelectQuery;
 import sql.builder.SqlSelectQuery;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable {
 
-	void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
+	void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException;
 
 	@Deprecated
 	SqlSelectResult<Photo> load( final SqlSelectQuery selectQuery );
