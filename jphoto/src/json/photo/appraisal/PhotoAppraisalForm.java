@@ -11,6 +11,7 @@ public class PhotoAppraisalForm {
 
 	private String maxAppraisalText;
 	private String maxAppraisalTitle;
+	private int userHighestPositiveMarkInGenre;
 
 	public void setAppraisalSections( final List<AppraisalSection> appraisalSections ) {
 		this.appraisalSections = appraisalSections;
@@ -50,5 +51,13 @@ public class PhotoAppraisalForm {
 
 	public void setMaxAppraisalTitle( final String maxAppraisalTitle ) {
 		this.maxAppraisalTitle = maxAppraisalTitle;
+	}
+
+	public void setUserHighestPositiveMarkInGenre( final int userHighestPositiveMarkInGenre ) {
+		this.userHighestPositiveMarkInGenre = userHighestPositiveMarkInGenre;
+	}
+
+	public int getUserHighestPositiveMarkInGenre() {
+		return userHighestPositiveMarkInGenre;
 	}
 }

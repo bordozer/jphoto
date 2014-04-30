@@ -37,11 +37,11 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		doAppraiseThePhotoWithMaxMarks: function() {
-			this.bindModel();
+			this.bindModel( this.model.get( 'photoAppraisalForm' )[ 'userHighestPositiveMarkInGenre' ] );
 			this.saveAppraisal();
 		},
 
-		bindModel: function() {
+		bindModel: function( setMark ) {
 			var model = this.model;
 
 //			console.log( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ] );
@@ -50,7 +50,7 @@ define( ["backbone", "jquery", "underscore"
 
 				var number = section[ 'number' ];
 				var categoryId = this.$( '.photo-appraisal-category-' + number ).val();
-				var mark = this.$( '.photo-appraisal-mark-' + number ).val();
+				var mark = setMark != undefined ? setMark : this.$( '.photo-appraisal-mark-' + number ).val();
 
 				section[ 'selectedCategoryId' ] = categoryId;
 				section[ 'selectedMark' ] = mark;

@@ -218,6 +218,8 @@ public class PhotoAppraisalController {
 
 		final int userHighestPositiveMarkInGenre = userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
 		form.setMaxAppraisalText( String.format( "+%1$d +%1$d +%1$d", userHighestPositiveMarkInGenre ) );
+		form.setUserHighestPositiveMarkInGenre( userHighestPositiveMarkInGenre );
+
 		form.setMaxAppraisalTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks", language ) );
 
 		return form;
