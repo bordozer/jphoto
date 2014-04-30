@@ -164,8 +164,6 @@ define( ["backbone", "jquery", "underscore"
 
 		renderView: function( view ) {
 
-			var $el = view.render().$el;
-
 			var container = $( '<div></div>' );
 
 			var header = $( "<div class='block-background block-border block-shadow' style='padding: 7px; border-radius: 7px 7px 0 0'></div>" );
@@ -173,7 +171,7 @@ define( ["backbone", "jquery", "underscore"
 			container.html( header );
 
 			var body = $( "<div class='floatleft block-border' style='width: 418px; height: auto;'></div>" );
-			body.html( $el );
+			body.html( view.render().$el );
 
 			container.append( body );
 
