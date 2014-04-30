@@ -27,6 +27,7 @@ import static com.google.common.collect.Lists.newArrayList;
 @Controller
 public class PhotoAppraisalController {
 
+	public static final int DEFAULT_SELECTED_MARK = 1;
 	@Autowired
 	private PhotoService photoService;
 
@@ -73,14 +74,14 @@ public class PhotoAppraisalController {
 		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
 		final List<AppraisalSection> appraisalSections = newArrayList();
 		for ( int i = 0; i < categoriesCount; i++ ) {
-			appraisalSections.add( new AppraisalSection( i, getAccessibleAppraisalCategories( language, photo.getGenreId() ), getAccessibleMarks( photo, user ) ) );
+			appraisalSections.add( new AppraisalSection( i, getAccessibleAppraisalCategories( i, photo.getGenreId(), language ), getAccessibleMarks( photo, user ) ) );
 		}
 		form.setAppraisalSections( appraisalSections );
 
 		return form;
 	}
 
-	private List<PhotoAppraisalCategory> getAccessibleAppraisalCategories( final Language language, final int genreId ) {
+	private List<PhotoAppraisalCategory> getAccessibleAppraisalCategories( final int count, final int genreId, final Language language ) {
 
 		final List<PhotoVotingCategory> photoVotingCategories = votingCategoryService.getGenreVotingCategories( genreId ).getVotingCategories();
 
@@ -90,8 +91,11 @@ public class PhotoAppraisalController {
 			final PhotoAppraisalCategory category = new PhotoAppraisalCategory();
 			category.setId( photoVotingCategory.getId() );
 			category.setNameTranslated( translatorService.translatePhotoVotingCategory( photoVotingCategory, language ) );
+
 			photoAppraisalCategories.add( category );
 		}
+
+		photoAppraisalCategories.get( count ).setSelected( true );
 
 		return photoAppraisalCategories;
 	}
@@ -102,7 +106,10 @@ public class PhotoAppraisalController {
 
 		final List<Mark> accessibleMarks = newArrayList();
 		for ( int i = userHighestPositiveMarkInGenre; i >= userLowestNegativeMarkInGenre  ; i-- ) {
-			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
+			final Mark mark = new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) );
+			mark.setSelected( i == DEFAULT_SELECTED_MARK );
+
+			accessibleMarks.add( mark );
 		}
 		return accessibleMarks;
 	}

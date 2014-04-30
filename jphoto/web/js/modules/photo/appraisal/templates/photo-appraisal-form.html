@@ -6,19 +6,31 @@
 		padding: 3px;
 		/*border: 1px solid red;;*/
 	}
+	.photo-appraisal-section {
+		float: left;
+		/*width: 48%;*/
+		/*border: 1px solid red;;*/
+	}
 </style>
 
 <% _.each( appraisalSections, function( section ) { %>
 <div class="photo-appraisal-container">
-	<select class="photo-appraisal-category-<%=section.number%>">
-		<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
-			<option value="<%=category.id%>"><%=category.nameTranslated%></option>
-		<% }) %>
-	</select>
-	<select class="photo-appraisal-mark-<%=section.number%>">
-		<% _.each( section.accessibleMarks, function( mark ) { %>
-			<option value="<%=mark.value%>"><%=mark.text%></option>
-		<% }) %>
-	</select>
+
+	<div class="photo-appraisal-section" style="width: 65%; text-align: right;">
+		<select class="photo-appraisal-category-<%=section.number%>">
+			<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
+				<option value="<%=category.id%>"<%= category.selected ? ' selected' : ''%>><%=category.nameTranslated%></option>
+			<% }) %>
+		</select>
+	</div>
+
+	<div class="photo-appraisal-section" style="width: 30%;">
+		<select class="photo-appraisal-mark-<%=section.number%>">
+			<% _.each( section.accessibleMarks, function( mark ) { %>
+				<option value="<%=mark.value%>"<%= mark.selected ? ' selected' : ''%>><%=mark.text%></option>
+			<% }) %>
+		</select>
+	</div>
+
 </div>
 <% }) %>
