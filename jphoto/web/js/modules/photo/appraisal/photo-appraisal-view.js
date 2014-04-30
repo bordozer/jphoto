@@ -172,7 +172,7 @@ define( ["backbone", "jquery", "underscore"
 			header.html( "<div class='separatorInfo base-font-color'>" + this.model.get( 'appraisalBlockTitle' ) + "</div>" );
 			container.html( header );
 
-			var body = $( "<div class='block-border' style='width: 418px; height: 120px;'></div>" );
+			var body = $( "<div class='floatleft block-border' style='width: 418px; height: auto;'></div>" );
 			body.html( $el );
 
 			container.append( body );

@@ -48,9 +48,9 @@ public enum ConfigurationKey {
 	, PHOTO_LIST_PHOTOS_IN_LINE( 503, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty" )
 	, PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES( 504, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty for moble devices" )
 	, PHOTO_LIST_PHOTO_LINES( 505, "6", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default row qty" )
-	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
-	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
-	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: show user rank in photo category" )
+	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
+	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
+	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show user rank in photo category" )
 
 	, RANK_VOTING_FIRST_RANK_POINTS( 601, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.VOICE, ConfigurationTab.RANK_VOTING, "First rank points" )
 	, RANK_VOTING_POINTS_BASE_STEP( 602, "6", true, ConfigurationDataType.INTEGER, ConfigurationUnit.VOICE, ConfigurationTab.RANK_VOTING, "Rank voting base step points" )
@@ -69,6 +69,7 @@ public enum ConfigurationKey {
 	, PHOTO_VOTING_HIGHEST_NEGATIVE_MARK( 802, "-2", true, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_VOTING, "The lowest accessible negative mark even if a voting member's own rank in photo category is lower (adding an extra negative balls to the lowest mark if rank is too low)" )
 	, PHOTO_VOTING_LOWEST_NEGATIVE_MARK( 803, "-3", true, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_VOTING, "The lowest accessible negative mark even if a voting member's own rank in photo category is higher (cutting the lowest mark if rank is too hight)" )
 	, PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT( 804, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.PHOTO_VOTING, "Photo appraisal: categories count" )
+	, PHOTO_VOTING_ALLOW_MULTIPLE_APPRAISAL_CATEGORIES( 805, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_VOTING, "Allow appraisal a photo in multiple categories ( define a category more then one time )" )
 
 	, PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS( 1000, "3", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_RATING, "The best portal page photos based on a voting period in last N days" )
 	, PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY( 1001, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_RATING, "A photo must get this marks in voting period to pretend to be the best photo of the day" )

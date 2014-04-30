@@ -23,39 +23,44 @@
 </style>
 
 <!--<b><%=appraisalBlockTitle%></b>-->
+<!--<table>-->
+	<!--<tr>-->
+		<!--<td>-->
+		<% _.each( photoAppraisalForm.appraisalSections, function( section ) { %>
+			<div class="photo-appraisal-container">
 
-<% _.each( photoAppraisalForm.appraisalSections, function( section ) { %>
-	<div class="photo-appraisal-container">
+				<div class="photo-appraisal-category">
+					<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
+						<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
+							<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
+						<% }) %>
+					</select>
+				</div>
 
-		<div class="photo-appraisal-category">
-			<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
-				<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
-					<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
-				<% }) %>
-			</select>
+				<div class="photo-appraisal-mark">
+					<!--<% _.each( section.accessibleMarks, function( mark ) { %>
+						<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
+					<% }) %>-->
+					<select class="photo-appraisal-mark-<%=section.number%>">
+						<% _.each( section.accessibleMarks, function( mark ) { %>
+							<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
+						<% }) %>
+					</select>
+				</div>
+
+			</div>
+		<% }) %>
+
+		<div class="photo-appraisal-container">
+
+			<div class="photo-appraisal-category">
+				<input type="button" class="appraise-button" value="<%=photoAppraisalForm.appraisalText%>" title="<%=photoAppraisalForm.appraisalTitle%>" />
+			</div>
+
+			<div class="photo-appraisal-mark">
+				<input type="button" class="appraise-button-max" value="<%=photoAppraisalForm.maxAppraisalText%>" title="<%=photoAppraisalForm.maxAppraisalTitle%>" />
+			</div>
 		</div>
-
-		<div class="photo-appraisal-mark">
-			<!--<% _.each( section.accessibleMarks, function( mark ) { %>
-				<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
-			<% }) %>-->
-			<select class="photo-appraisal-mark-<%=section.number%>">
-				<% _.each( section.accessibleMarks, function( mark ) { %>
-					<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
-				<% }) %>
-			</select>
-		</div>
-
-	</div>
-<% }) %>
-
-<div class="photo-appraisal-container">
-
-	<div class="photo-appraisal-category">
-		<input type="button" class="appraise-button" value="<%=photoAppraisalForm.appraisalText%>" title="<%=photoAppraisalForm.appraisalTitle%>" />
-	</div>
-
-	<div class="photo-appraisal-mark">
-		<input type="button" class="appraise-button-max" value="<%=photoAppraisalForm.maxAppraisalText%>" title="<%=photoAppraisalForm.maxAppraisalTitle%>" />
-	</div>
-</div>
+		<!--</td>-->
+	<!--</tr>-->
+<!--</table>-->

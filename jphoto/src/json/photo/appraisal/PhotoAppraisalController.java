@@ -192,9 +192,11 @@ public class PhotoAppraisalController {
 		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
 		final List<AppraisalSection> appraisalSections = newArrayList();
 		for ( int i = 0; i < categoriesCount; i++ ) {
-			final List<PhotoAppraisalCategory> categories = getAccessibleAppraisalCategories( photo.getGenreId(), language );
-			final AppraisalSection section = new AppraisalSection( i, categories, getAccessibleMarks( photo, user ) );
-			section.setSelectedCategoryId( categories.get( i + 1 ).getId() );
+
+			final List<PhotoAppraisalCategory> accessibleAppraisalCategories = getAccessibleAppraisalCategories( photo.getGenreId(), language );
+
+			final AppraisalSection section = new AppraisalSection( i, accessibleAppraisalCategories, getAccessibleMarks( photo, user ) );
+			section.setSelectedCategoryId( accessibleAppraisalCategories.get( i ).getId() );
 			section.setSelectedMark( DEFAULT_SELECTED_MARK );
 
 			appraisalSections.add( section );
@@ -217,7 +219,7 @@ public class PhotoAppraisalController {
 
 		final List<PhotoAppraisalCategory> accessibleAppraisalCategories = newArrayList();
 		final PhotoAppraisalCategory noCategory = new PhotoAppraisalCategory();
-		noCategory.setId( -1 );
+		noCategory.setId( 0 );
 		noCategory.setNameTranslated( "--------" );
 		accessibleAppraisalCategories.add( noCategory );
 

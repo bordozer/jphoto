@@ -52,6 +52,7 @@ public class ConfigurationValidator implements Validator {
 		positiveConfigurationKeys.add( ConfigurationKey.ADMIN_JOB_HISTORY_ITEMS_ON_PAGE );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_HEIGHT );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_WIDTH );
+		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_ALLOW_MULTIPLE_APPRAISAL_CATEGORIES );
 
 		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
 
