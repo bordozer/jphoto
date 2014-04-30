@@ -70,7 +70,7 @@ define( ["backbone", "jquery", "underscore"
 
 		onAppraisalSaveError: function( response ){
 
-			if ( response.status === 422 ) {
+			if ( response.status === 422 || response.status === 500 ) {
 				var errorText = '';
 				var errors = response[ 'responseJSON' ];
 				for ( var i = 0; i < errors.length; i++ ) {
@@ -78,11 +78,6 @@ define( ["backbone", "jquery", "underscore"
 				}
 
 				showUIMessage_Error( errorText );
-			}
-
-			if ( response.status === 500 ) {
-				console.log( response );
-				showUIMessage_Notification( '417' );
 			}
 		},
 

@@ -22,6 +22,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -109,9 +110,8 @@ public class PhotoAppraisalController {
 	@ExceptionHandler( SaveToDBRuntimeException.class )
 	@ResponseStatus( HttpStatus.INTERNAL_SERVER_ERROR )
 	@ResponseBody
-	public String processSaveToDBError( final SaveToDBRuntimeException exception ) {
-//		return translatorService.translate( "/* ================= Error saving data 417 ================= */", EnvironmentContext.getLanguage() ); //newArrayList( exception.getMessage() );
-		return exception.getMessage();
+	public List<FieldError> processSaveToDBError( final SaveToDBRuntimeException exception ) {
+		return newArrayList( new FieldError( "SaveToDBRuntimeException", "", exception.getMessage() ) );
 	}
 
 	private PhotoAppraisalDTO getPhotoAppraisalDTO( final Photo photo, final User user ) {
