@@ -9,6 +9,9 @@ public class AppraisalSection {
 	private List<PhotoAppraisalCategory> accessibleAppraisalCategories;
 	private List<Mark> accessibleMarks;
 
+	private int selectedCategoryId;
+	private int selectedMark;
+
 	public AppraisalSection() {
 	}
 
@@ -40,5 +43,21 @@ public class AppraisalSection {
 
 	public void setAccessibleMarks( final List<Mark> accessibleMarks ) {
 		this.accessibleMarks = accessibleMarks;
+	}
+
+	public int getSelectedCategoryId() {
+		return selectedCategoryId;
+	}
+
+	public void setSelectedCategoryId( final int selectedCategoryId ) {
+		this.selectedCategoryId = selectedCategoryId;
+	}
+
+	public int getSelectedMark() {
+		return selectedMark;
+	}
+
+	public void setSelectedMark( final int selectedMark ) {
+		this.selectedMark = selectedMark;
 	}
 }

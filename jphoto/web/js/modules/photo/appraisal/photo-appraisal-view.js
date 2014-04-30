@@ -41,13 +41,13 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		bindModel: function() {
+			console.log( this.model );
 			/*this.model.set({
 				noteText: this.textEdit.html()
 			});*/
 		},
 
 		saveAppraisal: function() {
-			console.log( this.model );
 			this.model.save()
 				.done( _.bind( this.onAppraisalSave, this ) )
 				.fail( _.bind( this.onAppraisalSaveError, this ) );

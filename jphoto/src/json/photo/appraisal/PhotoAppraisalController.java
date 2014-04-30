@@ -101,7 +101,12 @@ public class PhotoAppraisalController {
 		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
 		final List<AppraisalSection> appraisalSections = newArrayList();
 		for ( int i = 0; i < categoriesCount; i++ ) {
-			appraisalSections.add( new AppraisalSection( i, getAccessibleAppraisalCategories( i, photo.getGenreId(), language ), getAccessibleMarks( photo, user ) ) );
+			final List<PhotoAppraisalCategory> categories = getAccessibleAppraisalCategories( i, photo.getGenreId(), language );
+			final AppraisalSection section = new AppraisalSection( i, categories, getAccessibleMarks( photo, user ) );
+			section.setSelectedCategoryId( categories.get( i + 1 ).getId() );
+			section.setSelectedMark( 1 );
+
+			appraisalSections.add( section );
 		}
 		form.setAppraisalSections( appraisalSections );
 
@@ -133,8 +138,6 @@ public class PhotoAppraisalController {
 			accessibleAppraisalCategories.add( category );
 		}
 
-		accessibleAppraisalCategories.get( count + 1 ).setSelected( true );
-
 		return accessibleAppraisalCategories;
 	}
 
@@ -143,17 +146,13 @@ public class PhotoAppraisalController {
 		final int userLowestNegativeMarkInGenre = userRankService.getUserLowestNegativeMarkInGenre( user.getId(), photo.getGenreId() );
 
 		final List<Mark> accessibleMarks = newArrayList();
-//		for ( int i = userLowestNegativeMarkInGenre; i <= userHighestPositiveMarkInGenre; i++ ) {
 		for ( int i = userHighestPositiveMarkInGenre; i >= userLowestNegativeMarkInGenre  ; i-- ) {
 
 			if ( i == 0 ) {
 				continue;
 			}
 
-			final Mark mark = new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) );
-			mark.setSelected( i == DEFAULT_SELECTED_MARK );
-
-			accessibleMarks.add( mark );
+			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
 		}
 		return accessibleMarks;
 	}

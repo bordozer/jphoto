@@ -27,7 +27,7 @@
 	<div class="photo-appraisal-category">
 		<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
 			<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
-				<option value="<%=category.id%>"<%= category.selected ? ' selected' : ''%>><%=category.nameTranslated%></option>
+				<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
 			<% }) %>
 		</select>
 	</div>
@@ -38,7 +38,7 @@
 		<% }) %>-->
 		<select class="photo-appraisal-mark-<%=section.number%>">
 			<% _.each( section.accessibleMarks, function( mark ) { %>
-				<option value="<%=mark.value%>"<%= mark.selected ? ' selected' : ''%>><%=mark.text%></option>
+				<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
 			<% }) %>
 		</select>
 	</div>
