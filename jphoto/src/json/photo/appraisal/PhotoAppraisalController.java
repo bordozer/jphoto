@@ -12,16 +12,16 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
@@ -46,14 +46,41 @@ public class PhotoAppraisalController {
 	@Autowired
 	private ConfigurationService configurationService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/appraisal/", produces = "application/json" )
+	@Autowired
+	private PhotoAppraisalFormValidator photoAppraisalFormValidator;
+
+	@RequestMapping( method = RequestMethod.GET, value = "/appraisal/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoAppraisalDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
+		return getPhotoAppraisalDTO( photoId );
+	}
 
+	@RequestMapping( method = RequestMethod.POST, value = "/appraisal/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public PhotoAppraisalDTO createNote( @RequestBody final PhotoAppraisalDTO appraisalDTO, final @PathVariable( "photoId" ) int photoId ) {
+		ValidationHelper.validate( appraisalDTO, photoAppraisalFormValidator );
+
+		// TODO: save results
+
+		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photoId );
+		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( true ); // TODO: temporary hack
+
+		return photoAppraisalDTO;
+	}
+
+	@ExceptionHandler( ValidationException.class )
+	@ResponseStatus( HttpStatus.UNPROCESSABLE_ENTITY )
+	@ResponseBody
+	public List<FieldError> processValidationError( final ValidationException validationException ) {
+		return validationException.getBindingResult().getFieldErrors();
+	}
+
+	private PhotoAppraisalDTO getPhotoAppraisalDTO( final int photoId ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final Photo photo = photoService.load( photoId );
 
-		final PhotoAppraisalDTO photoAppraisalDTO = new PhotoAppraisalDTO( photoId );
+		final PhotoAppraisalDTO photoAppraisalDTO = new PhotoAppraisalDTO();
+		photoAppraisalDTO.setPhotoId( photoId );
 
 		final boolean hasUserVotedForPhoto = photoVotingService.isUserVotedForPhoto( currentUser, photo );
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( hasUserVotedForPhoto );

@@ -1,15 +1,16 @@
 package json.photo.appraisal;
 
-import java.util.List;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class PhotoAppraisalDTO {
 
-	private final int photoId;
+	private int photoId;
 	private boolean userHasAlreadyAppraisedPhoto;
 
 	private PhotoAppraisalForm photoAppraisalForm;
 
-	public PhotoAppraisalDTO( final int photoId ) {
+	public void setPhotoId( final int photoId ) {
 		this.photoId = photoId;
 	}
 

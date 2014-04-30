@@ -8,6 +8,8 @@
 
 	<context:component-scan base-package="json"/>
 
+	<bean id="photoAppraisalFormValidator" class="json.photo.appraisal.PhotoAppraisalFormValidator"/>
+
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">
 			<map>

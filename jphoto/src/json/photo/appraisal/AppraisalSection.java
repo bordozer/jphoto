@@ -4,15 +4,22 @@ import java.util.List;
 
 public class AppraisalSection {
 
-	private final int number;
+	private int number;
 
-	private final List<PhotoAppraisalCategory> accessibleAppraisalCategories;
-	private final List<Mark> accessibleMarks;
+	private List<PhotoAppraisalCategory> accessibleAppraisalCategories;
+	private List<Mark> accessibleMarks;
+
+	public AppraisalSection() {
+	}
 
 	public AppraisalSection( final int number, final List<PhotoAppraisalCategory> accessibleAppraisalCategories, final List<Mark> accessibleMarks ) {
 		this.number = number;
 		this.accessibleAppraisalCategories = accessibleAppraisalCategories;
 		this.accessibleMarks = accessibleMarks;
+	}
+
+	public void setNumber( final int number ) {
+		this.number = number;
 	}
 
 	public int getNumber() {
@@ -23,7 +30,15 @@ public class AppraisalSection {
 		return accessibleAppraisalCategories;
 	}
 
+	public void setAccessibleAppraisalCategories( final List<PhotoAppraisalCategory> accessibleAppraisalCategories ) {
+		this.accessibleAppraisalCategories = accessibleAppraisalCategories;
+	}
+
 	public List<Mark> getAccessibleMarks() {
 		return accessibleMarks;
+	}
+
+	public void setAccessibleMarks( final List<Mark> accessibleMarks ) {
+		this.accessibleMarks = accessibleMarks;
 	}
 }
