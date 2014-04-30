@@ -41,10 +41,21 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		bindModel: function() {
-			console.log( this.model );
-			/*this.model.set({
-				noteText: this.textEdit.html()
-			});*/
+			var model = this.model;
+
+			console.log( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ] );
+
+			_.each( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ], function( section ) {
+
+				var number = section[ 'number' ];
+				var categoryId = this.$( '.photo-appraisal-category-' + number ).val();
+				var mark = this.$( '.photo-appraisal-mark-' + number ).val();
+
+				section[ 'selectedCategoryId' ] = categoryId;
+				section[ 'selectedMark' ] = mark;
+
+				console.log( number, ': ', categoryId, '', mark );
+			}, this );
 		},
 
 		saveAppraisal: function() {

@@ -60,7 +60,7 @@ public class PhotoAppraisalController {
 	public PhotoAppraisalDTO createNote( @RequestBody final PhotoAppraisalDTO appraisalDTO, final @PathVariable( "photoId" ) int photoId ) {
 		ValidationHelper.validate( appraisalDTO, photoAppraisalFormValidator );
 
-		// TODO: save results
+//		photoVotingService.saveUserPhotoVoting(  )
 
 		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photoId );
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( true ); // TODO: temporary hack
@@ -149,7 +149,7 @@ public class PhotoAppraisalController {
 		for ( int i = userHighestPositiveMarkInGenre; i >= userLowestNegativeMarkInGenre  ; i-- ) {
 
 			if ( i == 0 ) {
-				continue;
+				accessibleMarks.add( new Mark( i, "--" ) );
 			}
 
 			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
