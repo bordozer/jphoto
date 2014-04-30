@@ -55,4 +55,9 @@ public class UserPhotoVote {
 	public void setVotingTime( final Date votingTime ) {
 		this.votingTime = votingTime;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s ( %s )", user, photoVotingCategory, mark );
+	}
 }

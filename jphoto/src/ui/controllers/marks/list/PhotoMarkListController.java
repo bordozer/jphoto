@@ -124,6 +124,10 @@ public class PhotoMarkListController {
 				userVoteForCategoryMap = newLinkedHashMap();
 			}
 
+			if ( userVoteForCategoryMap.containsKey( photoVote.getPhotoVotingCategory() ) ) {
+				photoVote.setMark( userVoteForCategoryMap.get( photoVote.getPhotoVotingCategory() ).getMark() + photoVote.getMark() );
+				photoVote.setMaxAccessibleMark( userVoteForCategoryMap.get( photoVote.getPhotoVotingCategory() ).getMaxAccessibleMark() + photoVote.getMaxAccessibleMark() );
+			}
 			userVoteForCategoryMap.put( photoVote.getPhotoVotingCategory(), photoVote );
 
 			if ( ! isContainsUser ) {
