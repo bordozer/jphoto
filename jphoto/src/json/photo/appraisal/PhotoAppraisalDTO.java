@@ -5,10 +5,20 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class PhotoAppraisalDTO {
 
+	private int userId;
 	private int photoId;
+
 	private boolean userHasAlreadyAppraisedPhoto;
 
 	private PhotoAppraisalForm photoAppraisalForm;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId( final int userId ) {
+		this.userId = userId;
+	}
 
 	public void setPhotoId( final int photoId ) {
 		this.photoId = photoId;

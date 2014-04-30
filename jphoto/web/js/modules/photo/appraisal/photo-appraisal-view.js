@@ -54,7 +54,7 @@ define( ["backbone", "jquery", "underscore"
 				section[ 'selectedCategoryId' ] = categoryId;
 				section[ 'selectedMark' ] = mark;
 
-				console.log( number, ': ', categoryId, '', mark );
+//				console.log( number, ': ', categoryId, '', mark );
 			}, this );
 		},
 

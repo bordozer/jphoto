@@ -4,6 +4,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.UserPhotoVote;
 import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
@@ -11,6 +12,8 @@ import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
+import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -28,6 +31,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class PhotoAppraisalController {
 
 	public static final int DEFAULT_SELECTED_MARK = 1;
+
+	@Autowired
+	private UserService userService;
+
 	@Autowired
 	private PhotoService photoService;
 
@@ -47,25 +54,32 @@ public class PhotoAppraisalController {
 	private ConfigurationService configurationService;
 
 	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
 	private PhotoAppraisalFormValidator photoAppraisalFormValidator;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/appraisal/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoAppraisalDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
-		return getPhotoAppraisalDTO( photoId );
+		return getPhotoAppraisalDTO( photoService.load( photoId ), EnvironmentContext.getCurrentUser() );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/appraisal/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoAppraisalDTO createNote( @RequestBody final PhotoAppraisalDTO appraisalDTO, final @PathVariable( "photoId" ) int photoId ) {
+
 		ValidationHelper.validate( appraisalDTO, photoAppraisalFormValidator );
 
-//		photoVotingService.saveUserPhotoVoting(  )
+		final Photo photo = photoService.load( photoId );
+		final User user = userService.load( appraisalDTO.getUserId() );
 
-		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photoId );
-		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( true ); // TODO: temporary hack
+		savePhotoAppraisal( user, photo, appraisalDTO );
 
-		return photoAppraisalDTO;
+//		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photoId, user );
+//		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( true ); // TODO: temporary hack
+
+		return getPhotoAppraisalDTO( photo, user );
 	}
 
 	@ExceptionHandler( ValidationException.class )
@@ -75,18 +89,36 @@ public class PhotoAppraisalController {
 		return validationException.getBindingResult().getFieldErrors();
 	}
 
-	private PhotoAppraisalDTO getPhotoAppraisalDTO( final int photoId ) {
-		final User currentUser = EnvironmentContext.getCurrentUser();
-		final Photo photo = photoService.load( photoId );
+	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
+
+		final List<AppraisalSection> sections = appraisalDTO.getPhotoAppraisalForm().getAppraisalSections();
+
+		final List<UserPhotoVote> appraisals = newArrayList();
+		for ( final AppraisalSection section : sections ) {
+
+			final int selectedCategoryId = section.getSelectedCategoryId();
+
+			final PhotoVotingCategory category = votingCategoryService.load( selectedCategoryId );
+			appraisals.add( new UserPhotoVote( user, photo, category ) );
+		}
+
+		photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals );
+		/*if ( ! photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals ) ) {
+			throw new ValidationException( appraisalDTO, "" );
+		}*/
+	}
+
+	private PhotoAppraisalDTO getPhotoAppraisalDTO( final Photo photo, final User user ) {
 
 		final PhotoAppraisalDTO photoAppraisalDTO = new PhotoAppraisalDTO();
-		photoAppraisalDTO.setPhotoId( photoId );
+		photoAppraisalDTO.setUserId( user.getId() );
+		photoAppraisalDTO.setPhotoId( photo.getId() );
 
-		final boolean hasUserVotedForPhoto = photoVotingService.isUserVotedForPhoto( currentUser, photo );
+		final boolean hasUserVotedForPhoto = photoVotingService.isUserVotedForPhoto( user, photo );
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( hasUserVotedForPhoto );
 
 		if ( ! hasUserVotedForPhoto ) {
-			photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, currentUser ) );
+			photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 		}
 
 		return photoAppraisalDTO;
@@ -104,7 +136,7 @@ public class PhotoAppraisalController {
 			final List<PhotoAppraisalCategory> categories = getAccessibleAppraisalCategories( i, photo.getGenreId(), language );
 			final AppraisalSection section = new AppraisalSection( i, categories, getAccessibleMarks( photo, user ) );
 			section.setSelectedCategoryId( categories.get( i + 1 ).getId() );
-			section.setSelectedMark( 1 );
+			section.setSelectedMark( DEFAULT_SELECTED_MARK );
 
 			appraisalSections.add( section );
 		}
