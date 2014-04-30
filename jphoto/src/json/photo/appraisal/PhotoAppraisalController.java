@@ -138,6 +138,9 @@ public class PhotoAppraisalController {
 
 		if ( hasUserVotedForPhoto ) {
 			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You has already appraised the photo", getLanguage() ) );
+
+			final List<UserPhotoVote> userVotesForPhoto = photoVotingService.getUserVotesForPhoto( user, photo );
+
 			return photoAppraisalDTO;
 		}
 
