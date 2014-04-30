@@ -16,7 +16,7 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( this.appraisalFormTemplate( modelJSON ) );
+			this.$el.html( this.appraisalFormTemplate( modelJSON[ 'photoAppraisalForm' ] ) );
 			return this;
 		}
 	});

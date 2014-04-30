@@ -8,15 +8,17 @@
 	}
 </style>
 
-<% _.each( appraisalCategories, function( count ) { %>
+<% _.each( appraisalSections, function( count ) { %>
 <div class="photo-appraisal-container">
 	<select class="photo-appraisal-category-<%=count%>">
-		<% _.each( photoVotingCategories, function( photoVotingCategory ) { %>
-			<option value="<%=photoVotingCategory.id%>"><%=photoVotingCategory.nameTranslated%></option>
+		<% _.each( accessibleAppraisalCategories, function( category ) { %>
+			<option value="<%=category.id%>"><%=category.nameTranslated%></option>
 		<% }) %>
 	</select>
 	<select class="photo-appraisal-mark-<%=count%>">
-
+		<% _.each( accessibleMarks, function( mark ) { %>
+			<option value="<%=mark.value%>"><%=mark.text%></option>
+		<% }) %>
 	</select>
 </div>
 <% }) %>

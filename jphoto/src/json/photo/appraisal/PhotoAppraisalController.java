@@ -49,8 +49,6 @@ public class PhotoAppraisalController {
 	@ResponseBody
 	public PhotoAppraisalDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
 
-		final Language language = EnvironmentContext.getLanguage();
-
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final Photo photo = photoService.load( photoId );
 
@@ -60,24 +58,34 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( hasUserVotedForPhoto );
 
 		if ( ! hasUserVotedForPhoto ) {
-			final List<PhotoVotingCategory> photoVotingCategories = votingCategoryService.getGenreVotingCategories( photo.getGenreId() ).getVotingCategories();
-
-			final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
-			final List<Integer> categories = newArrayList();
-			for ( int i = 0; i < categoriesCount; i++ ) {
-				categories.add( i );
-			}
-			photoAppraisalDTO.setAppraisalCategories( categories );
-			photoAppraisalDTO.setPhotoVotingCategories( getAppraisalCategories( language, photoVotingCategories ) );
-
-			photoAppraisalDTO.setMinAccessibleMarkForGenre( userRankService.getUserLowestNegativeMarkInGenre( currentUser.getId(), photo.getGenreId() ) );
-			photoAppraisalDTO.setMaxAccessibleMarkForGenre( userRankService.getUserHighestPositiveMarkInGenre( currentUser.getId(), photo.getGenreId() ) );
+			photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, currentUser ) );
 		}
 
 		return photoAppraisalDTO;
 	}
 
-	private List<PhotoAppraisalCategory> getAppraisalCategories( final Language language, final List<PhotoVotingCategory> photoVotingCategories ) {
+	private PhotoAppraisalForm getPhotoAppraisalForm( final Photo photo, final User user ) {
+
+		final Language language = EnvironmentContext.getLanguage();
+
+		final PhotoAppraisalForm form = new PhotoAppraisalForm();
+
+		form.setAccessibleAppraisalCategories( getAccessibleAppraisalCategories( language, photo.getGenreId() ) );
+		form.setAccessibleMarks( getAccessibleMarks( photo, user ) );
+
+		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
+		final List<Integer> appraisalSections = newArrayList();
+		for ( int i = 0; i < categoriesCount; i++ ) {
+			appraisalSections.add( i );
+		}
+		form.setAppraisalSections( appraisalSections );
+
+		return form;
+	}
+
+	private List<PhotoAppraisalCategory> getAccessibleAppraisalCategories( final Language language, final int genreId ) {
+
+		final List<PhotoVotingCategory> photoVotingCategories = votingCategoryService.getGenreVotingCategories( genreId ).getVotingCategories();
 
 		final List<PhotoAppraisalCategory> photoAppraisalCategories = newArrayList();
 
@@ -89,5 +97,16 @@ public class PhotoAppraisalController {
 		}
 
 		return photoAppraisalCategories;
+	}
+
+	private List<Mark> getAccessibleMarks( final Photo photo, final User user ) {
+		final int userHighestPositiveMarkInGenre = userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
+		final int userLowestNegativeMarkInGenre = userRankService.getUserLowestNegativeMarkInGenre( user.getId(), photo.getGenreId() );
+
+		final List<Mark> accessibleMarks = newArrayList();
+		for ( int i = userHighestPositiveMarkInGenre; i >= userLowestNegativeMarkInGenre  ; i-- ) {
+			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
+		}
+		return accessibleMarks;
 	}
 }
