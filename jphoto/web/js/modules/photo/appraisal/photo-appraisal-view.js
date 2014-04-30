@@ -9,6 +9,11 @@ define( ["backbone", "jquery", "underscore"
 
 		appraisalFormTemplate:_.template( appraisalFormTemplate ),
 
+		events: {
+			"click .appraise-button": "onAppraise",
+			"click .appraise-button-max": "onAppraiseMax"
+		},
+
 		initialize: function() {
 			this.render();
 		},
@@ -18,6 +23,26 @@ define( ["backbone", "jquery", "underscore"
 
 			this.$el.html( this.appraisalFormTemplate( modelJSON[ 'photoAppraisalForm' ] ) );
 			return this;
+		},
+
+		appraise: function() {
+			alert( 'appraise' );
+		},
+
+		appraiseMax: function() {
+			alert( 'appraise max' );
+		},
+
+		onAppraise: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+			this.appraise();
+		},
+
+		onAppraiseMax: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+			this.appraiseMax();
 		}
 	});
 

@@ -78,6 +78,13 @@ public class PhotoAppraisalController {
 		}
 		form.setAppraisalSections( appraisalSections );
 
+		form.setAppraisalText( translatorService.translate( "Appraise the photo", language ) );
+		form.setAppraisalTitle( translatorService.translate( "Appraise the photo with custom marks", language ) );
+
+		final int userHighestPositiveMarkInGenre = userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
+		form.setMaxAppraisalText( String.format( "+%1$d +%1$d +%1$d", userHighestPositiveMarkInGenre ) );
+		form.setMaxAppraisalTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks", language ) );
+
 		return form;
 	}
 
@@ -105,7 +112,13 @@ public class PhotoAppraisalController {
 		final int userLowestNegativeMarkInGenre = userRankService.getUserLowestNegativeMarkInGenre( user.getId(), photo.getGenreId() );
 
 		final List<Mark> accessibleMarks = newArrayList();
+//		for ( int i = userLowestNegativeMarkInGenre; i <= userHighestPositiveMarkInGenre; i++ ) {
 		for ( int i = userHighestPositiveMarkInGenre; i >= userLowestNegativeMarkInGenre  ; i-- ) {
+
+			if ( i == 0 ) {
+				continue;
+			}
+
 			final Mark mark = new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) );
 			mark.setSelected( i == DEFAULT_SELECTED_MARK );
 

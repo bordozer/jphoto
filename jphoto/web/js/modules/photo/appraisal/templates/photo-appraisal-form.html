@@ -6,8 +6,16 @@
 		padding: 3px;
 		/*border: 1px solid red;;*/
 	}
-	.photo-appraisal-section {
+	.photo-appraisal-category {
 		float: left;
+		font-size: 12px;
+		width: 65%;
+		text-align: right;
+		/*border: 1px solid red;;*/
+	}
+	.photo-appraisal-mark {
+		float: left;
+		font-size: 12px;
 		/*width: 48%;*/
 		/*border: 1px solid red;;*/
 	}
@@ -16,7 +24,7 @@
 <% _.each( appraisalSections, function( section ) { %>
 <div class="photo-appraisal-container">
 
-	<div class="photo-appraisal-section" style="width: 65%; text-align: right;">
+	<div class="photo-appraisal-category">
 		<select class="photo-appraisal-category-<%=section.number%>">
 			<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
 				<option value="<%=category.id%>"<%= category.selected ? ' selected' : ''%>><%=category.nameTranslated%></option>
@@ -24,7 +32,10 @@
 		</select>
 	</div>
 
-	<div class="photo-appraisal-section" style="width: 30%;">
+	<div class="photo-appraisal-mark">
+		<!--<% _.each( section.accessibleMarks, function( mark ) { %>
+			<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
+		<% }) %>-->
 		<select class="photo-appraisal-mark-<%=section.number%>">
 			<% _.each( section.accessibleMarks, function( mark ) { %>
 				<option value="<%=mark.value%>"<%= mark.selected ? ' selected' : ''%>><%=mark.text%></option>
@@ -34,3 +45,14 @@
 
 </div>
 <% }) %>
+
+<div class="photo-appraisal-container">
+
+	<div class="photo-appraisal-category">
+		<input type="button" class="appraise-button" value="<%=appraisalText%>" title="<%=appraisalTitle%>" />
+	</div>
+
+	<div class="photo-appraisal-mark">
+		<input type="button" class="appraise-button-max" value="<%=maxAppraisalText%>" title="<%=maxAppraisalTitle%>" />
+	</div>
+</div>
