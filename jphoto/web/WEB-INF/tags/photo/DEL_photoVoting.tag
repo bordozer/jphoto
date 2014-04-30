@@ -6,6 +6,7 @@
 <%@ tag import="core.general.user.User" %>
 <%@ tag import="core.services.utils.UrlUtilsServiceImpl" %>
 <%@ tag import="ui.controllers.voting.PhotoVotingModel" %>
+<%@ tag import="core.general.configuration.ConfigurationKey" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -30,7 +31,7 @@
 <c:set var="hasUserAlreadyVotedForPhoto" value="<%=isUserVotedForPhoto%>"/>
 
 <c:set var="votingCategoryMarkControl" value="<%=PhotoVotingModel.VOTING_CATEGORY_MARK_CONTROL%>" />
-<c:set var="votingMarkQty" value="<%=VotingCategoryService.PHOTO_VOTING_CATEGORY_QTY%>"/>
+<c:set var="votingMarkQty" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT )%>"/>
 
 <c:set var="votingTitle" value="${eco:translate('Photo appraisal')}" />
 <c:if test="${hasUserAlreadyVotedForPhoto}">

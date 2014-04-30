@@ -1,5 +1,6 @@
 package ui.controllers.voting;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
@@ -8,6 +9,7 @@ import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
@@ -55,6 +57,9 @@ public class PhotoVotingController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -122,7 +127,9 @@ public class PhotoVotingController {
 	private List<UserPhotoVote> getUserPhotoVotes( final User user, final Photo photo, final HttpServletRequest request ) {
 		final List<UserPhotoVote> userVotes = newArrayList();
 
-		for ( int i = 1; i <= VotingCategoryService.PHOTO_VOTING_CATEGORY_QTY; i++ ) {
+		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
+
+		for ( int i = 1; i <= categoriesCount; i++ ) {
 			final UserPhotoVote userVote = getUserPhotoVote( user, photo, request, i );
 			if ( userVote != null ) {
 				userVotes.add( userVote );

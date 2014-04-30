@@ -1,9 +1,11 @@
-<%@ page import="ui.context.ApplicationContextHelper"%><%@ page import="core.services.entry.VotingCategoryService"%><%@ page contentType="text/javascript" %>
+<%@ page import="ui.context.ApplicationContextHelper"%>
+		<%@ page import="core.general.configuration.ConfigurationKey"%>
+		<%@ page contentType="text/javascript" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:set var="votingMarkQty" value="<%=VotingCategoryService.PHOTO_VOTING_CATEGORY_QTY%>"/>
+<c:set var="votingMarkQty" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT )%>"/>
 
 define( [ 'jquery' ], function ( $ ) {
 

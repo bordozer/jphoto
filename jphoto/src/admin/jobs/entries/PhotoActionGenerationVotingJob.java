@@ -3,6 +3,7 @@ package admin.jobs.entries;
 import admin.controllers.jobs.edit.action.PhotoStrategyType;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
+import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.ValidationResult;
@@ -51,7 +52,8 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 		final PhotoLikeStrategyFactory factory = new PhotoLikeStrategyFactory();
 		final AbstractPhotoLikeStrategy strategy = factory.getStrategy();
 
-		final List<PhotoVotingCategory> categories = services.getRandomUtilsService().getRandomNUniqueListElements( votingCategoriesForPhotoGenre, 3 );
+		final int categoriesCount = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
+		final List<PhotoVotingCategory> categories = services.getRandomUtilsService().getRandomNUniqueListElements( votingCategoriesForPhotoGenre, categoriesCount );
 		for ( final PhotoVotingCategory category : categories ) {
 
 			int mark = strategy.getRandomMark();
