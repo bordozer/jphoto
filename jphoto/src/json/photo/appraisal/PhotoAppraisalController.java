@@ -92,19 +92,23 @@ public class PhotoAppraisalController {
 
 		final List<PhotoVotingCategory> photoVotingCategories = votingCategoryService.getGenreVotingCategories( genreId ).getVotingCategories();
 
-		final List<PhotoAppraisalCategory> photoAppraisalCategories = newArrayList();
+		final List<PhotoAppraisalCategory> accessibleAppraisalCategories = newArrayList();
+		final PhotoAppraisalCategory noCategory = new PhotoAppraisalCategory();
+		noCategory.setId( -1 );
+		noCategory.setNameTranslated( "--------" );
+		accessibleAppraisalCategories.add( noCategory );
 
 		for ( final PhotoVotingCategory photoVotingCategory : photoVotingCategories ) {
 			final PhotoAppraisalCategory category = new PhotoAppraisalCategory();
 			category.setId( photoVotingCategory.getId() );
 			category.setNameTranslated( translatorService.translatePhotoVotingCategory( photoVotingCategory, language ) );
 
-			photoAppraisalCategories.add( category );
+			accessibleAppraisalCategories.add( category );
 		}
 
-		photoAppraisalCategories.get( count ).setSelected( true );
+		accessibleAppraisalCategories.get( count + 1 ).setSelected( true );
 
-		return photoAppraisalCategories;
+		return accessibleAppraisalCategories;
 	}
 
 	private List<Mark> getAccessibleMarks( final Photo photo, final User user ) {

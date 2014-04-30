@@ -10,6 +10,7 @@ define( ["backbone", "jquery", "underscore"
 		appraisalFormTemplate:_.template( appraisalFormTemplate ),
 
 		events: {
+			"change .photo-appraisal-category-select": "onCategoryChange",
 			"click .appraise-button": "onAppraise",
 			"click .appraise-button-max": "onAppraiseMax"
 		},
@@ -25,24 +26,56 @@ define( ["backbone", "jquery", "underscore"
 			return this;
 		},
 
-		appraise: function() {
-			alert( 'appraise' );
+		categoryChange: function( control ) {
+			console.log( 'category is changed: ', $( ':selected', control ).val(), ', class: ', $( control ).attr( 'class' ) );
 		},
 
-		appraiseMax: function() {
-			alert( 'appraise max' );
+		doAppraiseThePhoto: function() {
+			this.bindModel();
+			this.saveAppraisal();
+		},
+
+		doAppraiseThePhotoWithMaxMarks: function() {
+			this.bindModel();
+			this.saveAppraisal();
+		},
+
+		bindModel: function() {
+			this.model.set({
+//				noteText: this.textEdit.html()
+			});
+		},
+
+		saveAppraisal: function() {
+			this.model.save()
+				.done( _.bind( this.onAppraisalSave, this ) )
+				.fail( _.bind( this.onAppraisalSaveError, this ) );
+		},
+
+		onAppraisalSave: function( response ){
+			showUIMessage_Notification( 'Your photo appraisal has been saved successfully' );
+		},
+
+		onAppraisalSaveError: function( response ){
+			alert( 'Save error' );
+		},
+
+		onCategoryChange: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+			this.categoryChange( evt.target );
 		},
 
 		onAppraise: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
-			this.appraise();
+			this.doAppraiseThePhoto();
 		},
 
 		onAppraiseMax: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
-			this.appraiseMax();
+			this.doAppraiseThePhotoWithMaxMarks();
 		}
 	});
 

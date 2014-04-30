@@ -25,7 +25,7 @@
 <div class="photo-appraisal-container">
 
 	<div class="photo-appraisal-category">
-		<select class="photo-appraisal-category-<%=section.number%>">
+		<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
 			<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
 				<option value="<%=category.id%>"<%= category.selected ? ' selected' : ''%>><%=category.nameTranslated%></option>
 			<% }) %>
