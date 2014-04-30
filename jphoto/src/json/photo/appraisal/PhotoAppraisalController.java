@@ -70,13 +70,10 @@ public class PhotoAppraisalController {
 
 		final PhotoAppraisalForm form = new PhotoAppraisalForm();
 
-		form.setAccessibleAppraisalCategories( getAccessibleAppraisalCategories( language, photo.getGenreId() ) );
-		form.setAccessibleMarks( getAccessibleMarks( photo, user ) );
-
 		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
-		final List<Integer> appraisalSections = newArrayList();
+		final List<AppraisalSection> appraisalSections = newArrayList();
 		for ( int i = 0; i < categoriesCount; i++ ) {
-			appraisalSections.add( i );
+			appraisalSections.add( new AppraisalSection( i, getAccessibleAppraisalCategories( language, photo.getGenreId() ), getAccessibleMarks( photo, user ) ) );
 		}
 		form.setAppraisalSections( appraisalSections );
 
