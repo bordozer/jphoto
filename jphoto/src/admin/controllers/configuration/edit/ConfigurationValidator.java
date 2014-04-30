@@ -3,6 +3,9 @@ package admin.controllers.configuration.edit;
 import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationDataType;
 import core.general.configuration.ConfigurationKey;
+import core.general.genre.Genre;
+import core.services.entry.GenreService;
+import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class ConfigurationValidator implements Validator {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private GenreService genreService;
 
 	private List<ConfigurationKey> integerConfigurationKeys = newArrayList();
 	private List<ConfigurationKey> numericConfigurationKeys = newArrayList();
@@ -52,7 +58,7 @@ public class ConfigurationValidator implements Validator {
 		positiveConfigurationKeys.add( ConfigurationKey.ADMIN_JOB_HISTORY_ITEMS_ON_PAGE );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_HEIGHT );
 		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_CARD_MAX_WIDTH );
-		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_ALLOW_MULTIPLE_APPRAISAL_CATEGORIES );
+		positiveConfigurationKeys.add( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
 
 		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
 
@@ -136,6 +142,28 @@ public class ConfigurationValidator implements Validator {
 		validateIntegerValues( configurationMap, errors );
 
 		validateNumericValues( configurationMap, errors );
+
+		validatePhotoAppraisalCategoriesCount( configurationMap, errors );
+	}
+
+	private void validatePhotoAppraisalCategoriesCount( final Map<String, Configuration> configurationMap, final Errors errors ) {
+
+		final ConfigurationKey configurationKey = ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT;
+		final int photoAppraisalCategoriesCount = getConfiguration( configurationMap, configurationKey ).getValueInt();
+
+		final List<Genre> genres = genreService.loadAll();
+		for ( final Genre genre : genres ) {
+
+			final int categoriesChecked = genre.getPhotoVotingCategories().size();
+
+			if ( categoriesChecked < photoAppraisalCategoriesCount ) {
+				errors.rejectValue( "configurationMap", addConfigurationTab( translatorService.translate( "Genre '$1': add $2 appraisal category first"
+					, getLanguage()
+					, genre.getName()
+					, String.valueOf( photoAppraisalCategoriesCount - categoriesChecked )
+				), configurationKey ) );
+			}
+		}
 	}
 
 	private void validateMaxPhotoNameLength( final Map<String, Configuration> configurationMap, final Errors errors ) {

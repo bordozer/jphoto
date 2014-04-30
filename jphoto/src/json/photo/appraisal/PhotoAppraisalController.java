@@ -196,7 +196,7 @@ public class PhotoAppraisalController {
 			final List<PhotoAppraisalCategory> accessibleAppraisalCategories = getAccessibleAppraisalCategories( photo.getGenreId(), language );
 
 			final AppraisalSection section = new AppraisalSection( i, accessibleAppraisalCategories, getAccessibleMarks( photo, user ) );
-			section.setSelectedCategoryId( accessibleAppraisalCategories.get( i ).getId() );
+			section.setSelectedCategoryId( accessibleAppraisalCategories.get( i + 1 ).getId() );
 			section.setSelectedMark( DEFAULT_SELECTED_MARK );
 
 			appraisalSections.add( section );

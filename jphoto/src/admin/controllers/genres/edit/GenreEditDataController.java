@@ -5,7 +5,7 @@ import core.general.photo.PhotoVotingCategory;
 import core.services.entry.GenreService;
 import core.services.entry.VotingCategoryService;
 import core.services.translator.TranslatorService;
-import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class GenreEditDataController {
 	private VotingCategoryService votingCategoryService;
 
 	@Autowired
-	private SystemVarsService systemVarsService;
+	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private BreadcrumbsAdminPhotoCategoriesService breadcrumbsAdminPhotoCategoriesService;
@@ -123,7 +123,7 @@ public class GenreEditDataController {
 			return VIEW;
 		}
 
-		return String.format( "redirect:/%s/%s/", systemVarsService.getAdminPrefix(), UrlUtilsServiceImpl.GENRES_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseAdminURL(), UrlUtilsServiceImpl.GENRES_URL );
 	}
 
 }

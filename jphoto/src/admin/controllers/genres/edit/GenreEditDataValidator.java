@@ -1,7 +1,9 @@
 package admin.controllers.genres.edit;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
+import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class GenreEditDataValidator implements Validator {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -47,8 +52,16 @@ public class GenreEditDataValidator implements Validator {
 	}
 
 	private void validateAllowedVotingCategories( final Errors errors, final List<String> allowedVotingCategoryIDs ) {
-		if ( allowedVotingCategoryIDs == null || allowedVotingCategoryIDs.size() < 3 ) {
-			errors.rejectValue( GenreEditDataModel.GENRE_EDIT_DATA_ALLOWED_VOTING_CATEGORIES_FORM_CONTROL, translatorService.translate( "Check at least 3 $1.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "allowed voting category" ) ) );
+
+		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
+
+		if ( allowedVotingCategoryIDs == null || allowedVotingCategoryIDs.size() < categoriesCount ) {
+			errors.rejectValue( GenreEditDataModel.GENRE_EDIT_DATA_ALLOWED_VOTING_CATEGORIES_FORM_CONTROL, translatorService.translate( "Check at least $1 $2 or decrease the value in System configuration ( key $3 )"
+				, EnvironmentContext.getLanguage()
+				, String.valueOf( categoriesCount )
+				, FormatUtils.getFormattedFieldName( "allowed appraisal categories" )
+				, String.valueOf( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT.getId() )
+			));
 		}
 	}
 }
