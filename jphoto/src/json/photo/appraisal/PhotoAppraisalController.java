@@ -1,5 +1,7 @@
 package json.photo.appraisal;
 
+import core.general.photo.ValidationResult;
+import core.services.security.SecurityService;
 import json.exceptions.SaveToDBRuntimeException;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
@@ -22,7 +24,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -59,6 +60,9 @@ public class PhotoAppraisalController {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
+	private SecurityService securityService;
+
+	@Autowired
 	private PhotoAppraisalFormValidator photoAppraisalFormValidator;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/appraisal/", produces = APPLICATION_JSON_VALUE )
@@ -76,10 +80,10 @@ public class PhotoAppraisalController {
 		final Photo photo = photoService.load( photoId );
 		final User user = userService.load( appraisalDTO.getUserId() );
 
-//		savePhotoAppraisal( user, photo, appraisalDTO );
+//		savePhotoAppraisal( user, photo, appraisalDTO ); // TODO: saving is here
 
-//		return getPhotoAppraisalDTO( photo, user );
-		throw new SaveToDBRuntimeException( translatorService.translate( "Error saving data", EnvironmentContext.getLanguage() ) );
+		return getPhotoAppraisalDTO( photo, user );
+//		throw new SaveToDBRuntimeException( translatorService.translate( "Error saving data", EnvironmentContext.getLanguage() ) );
 	}
 
 	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
@@ -96,7 +100,7 @@ public class PhotoAppraisalController {
 		}
 
 		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals ) ) {
-			throw new SaveToDBRuntimeException( translatorService.translate( "", EnvironmentContext.getLanguage() ) );
+			throw new SaveToDBRuntimeException( translatorService.translate( "", getLanguage() ) );
 		}
 	}
 
@@ -117,29 +121,41 @@ public class PhotoAppraisalController {
 	private PhotoAppraisalDTO getPhotoAppraisalDTO( final Photo photo, final User user ) {
 
 		final PhotoAppraisalDTO photoAppraisalDTO = new PhotoAppraisalDTO();
+
 		photoAppraisalDTO.setUserId( user.getId() );
 		photoAppraisalDTO.setPhotoId( photo.getId() );
+
+		final ValidationResult validationResult = securityService.validateUserCanVoteForPhoto( user, photo, getLanguage() );
+		photoAppraisalDTO.setValidationResult( validationResult );
+		if ( validationResult.isValidationFailed() ) {
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You can not appraise the photo", getLanguage() ) );
+			return photoAppraisalDTO;
+		}
 
 		final boolean hasUserVotedForPhoto = photoVotingService.isUserVotedForPhoto( user, photo );
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( hasUserVotedForPhoto );
 
-		if ( ! hasUserVotedForPhoto ) {
-			photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
+		if ( hasUserVotedForPhoto ) {
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You has already appraised the photo", getLanguage() ) );
+			return photoAppraisalDTO;
 		}
+
+		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Appraise the photo", getLanguage() ) );
+		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;
 	}
 
 	private PhotoAppraisalForm getPhotoAppraisalForm( final Photo photo, final User user ) {
 
-		final Language language = EnvironmentContext.getLanguage();
+		final Language language = getLanguage();
 
 		final PhotoAppraisalForm form = new PhotoAppraisalForm();
 
 		final int categoriesCount = configurationService.getInt( ConfigurationKey.PHOTO_VOTING_APPRAISAL_CATEGORIES_COUNT );
 		final List<AppraisalSection> appraisalSections = newArrayList();
 		for ( int i = 0; i < categoriesCount; i++ ) {
-			final List<PhotoAppraisalCategory> categories = getAccessibleAppraisalCategories( i, photo.getGenreId(), language );
+			final List<PhotoAppraisalCategory> categories = getAccessibleAppraisalCategories( photo.getGenreId(), language );
 			final AppraisalSection section = new AppraisalSection( i, categories, getAccessibleMarks( photo, user ) );
 			section.setSelectedCategoryId( categories.get( i + 1 ).getId() );
 			section.setSelectedMark( DEFAULT_SELECTED_MARK );
@@ -158,7 +174,7 @@ public class PhotoAppraisalController {
 		return form;
 	}
 
-	private List<PhotoAppraisalCategory> getAccessibleAppraisalCategories( final int count, final int genreId, final Language language ) {
+	private List<PhotoAppraisalCategory> getAccessibleAppraisalCategories( final int genreId, final Language language ) {
 
 		final List<PhotoVotingCategory> photoVotingCategories = votingCategoryService.getGenreVotingCategories( genreId ).getVotingCategories();
 
@@ -193,5 +209,9 @@ public class PhotoAppraisalController {
 			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
 		}
 		return accessibleMarks;
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

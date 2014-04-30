@@ -21,7 +21,9 @@
 	}
 </style>
 
-<% _.each( appraisalSections, function( section ) { %>
+<b><%=appraisalBlockTitle%></b>
+
+<% _.each( photoAppraisalForm.appraisalSections, function( section ) { %>
 <div class="photo-appraisal-container">
 
 	<div class="photo-appraisal-category">
@@ -49,10 +51,10 @@
 <div class="photo-appraisal-container">
 
 	<div class="photo-appraisal-category">
-		<input type="button" class="appraise-button" value="<%=appraisalText%>" title="<%=appraisalTitle%>" />
+		<input type="button" class="appraise-button" value="<%=photoAppraisalForm.appraisalText%>" title="<%=photoAppraisalForm.appraisalTitle%>" />
 	</div>
 
 	<div class="photo-appraisal-mark">
-		<input type="button" class="appraise-button-max" value="<%=maxAppraisalText%>" title="<%=maxAppraisalTitle%>" />
+		<input type="button" class="appraise-button-max" value="<%=photoAppraisalForm.maxAppraisalText%>" title="<%=photoAppraisalForm.maxAppraisalTitle%>" />
 	</div>
 </div>

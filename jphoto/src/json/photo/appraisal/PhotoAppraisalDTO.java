@@ -1,5 +1,6 @@
 package json.photo.appraisal;
 
+import core.general.photo.ValidationResult;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
@@ -11,6 +12,8 @@ public class PhotoAppraisalDTO {
 	private boolean userHasAlreadyAppraisedPhoto;
 
 	private PhotoAppraisalForm photoAppraisalForm;
+	private ValidationResult validationResult;
+	private String appraisalBlockTitle;
 
 	public int getUserId() {
 		return userId;
@@ -42,5 +45,21 @@ public class PhotoAppraisalDTO {
 
 	public void setPhotoAppraisalForm( final PhotoAppraisalForm photoAppraisalForm ) {
 		this.photoAppraisalForm = photoAppraisalForm;
+	}
+
+	public void setValidationResult( final ValidationResult validationResult ) {
+		this.validationResult = validationResult;
+	}
+
+	public ValidationResult getValidationResult() {
+		return validationResult;
+	}
+
+	public void setAppraisalBlockTitle( final String appraisalBlockTitle ) {
+		this.appraisalBlockTitle = appraisalBlockTitle;
+	}
+
+	public String getAppraisalBlockTitle() {
+		return appraisalBlockTitle;
 	}
 }

@@ -476,6 +476,11 @@ td.trunderlined {
 	margin: 0 0 20px 0;
 }
 
+.photo-appraisal-form-div {
+	height: 150px;
+	text-align: center;
+}
+
 .cannotVoteDiv {
 	width: 420px; /*sync with votingDiv.width*/
 	float: right;

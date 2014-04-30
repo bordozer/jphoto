@@ -249,31 +249,31 @@
 		<div class="photoInfoAndVotingDiv">
 			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
 
-			<c:if test="${photoCardModel.votingValidationResult.validationPassed}">
+			<%--<c:if test="${photoCardModel.votingValidationResult.validationPassed}">--%>
 				<%--<photo:DEL_photoVoting photo="${photo}"
 								   userPhotoVotes="${photoCardModel.userPhotoVotes}"
 								   minMarkForGenre="${photoCardModel.votingUserMinAccessibleMarkForGenre}"
 								   maxMarkForGenre="${photoCardModel.votingUserMaxAccessibleMarkForGenre}"
 						/>--%>
-				<div class="votingDiv block-background block-border photo-appraisal-form-div">
+			<div class="votingDiv block-background block-border photo-appraisal-form-div">
 
-					<div style="text-align: center;">
-						<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
-					</div>
-
-					<script type="text/javascript">
-						require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
-							photoAppraisal( ${photoId}, ${loggedUser.id}, '${eco:baseUrl()}', $( '.photo-appraisal-form-div' ) );
-						} );
-					</script>
+				<div style="text-align: center;">
+					<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
 				</div>
-			</c:if>
 
-			<c:if test="${photoCardModel.votingValidationResult.validationFailed}">
+				<script type="text/javascript">
+					require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
+						photoAppraisal( ${photoId}, ${loggedUser.id}, '${eco:baseUrl()}', $( '.photo-appraisal-form-div' ) );
+					} );
+				</script>
+			</div>
+			<%--</c:if>--%>
+
+			<%--<c:if test="${photoCardModel.votingValidationResult.validationFailed}">
 				<div class="cannotVoteDiv block-background block-border">
 					<tags:validationResult title_t="You can not vote" validationMessage="${photoCardModel.votingValidationResult.validationMessage}" />
 				</div>
-			</c:if>
+			</c:if>--%>
 		</div>
 	</div>
 

@@ -1,7 +1,8 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/appraisal/templates/photo-appraisal-form.html"
 		, "text!modules/photo/appraisal/templates/photo-appraisal-results.html"
-		], function ( Backbone, $, _,  appraisalFormTemplate, appraisalResultTemplate ) {
+		, "text!modules/photo/appraisal/templates/photo-appraisal-inaccessible.html"
+		], function ( Backbone, $, _,  appraisalFormTemplate, appraisalResultTemplate, appraisalInaccessibleTemplate ) {
 
 	'use strict';
 
@@ -22,7 +23,7 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( this.appraisalFormTemplate( modelJSON[ 'photoAppraisalForm' ] ) );
+			this.$el.html( this.appraisalFormTemplate( modelJSON ) );
 			return this;
 		},
 
@@ -116,6 +117,22 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
+	var PhotoAppraisalInaccessibleView = Backbone.View.extend( {
+
+		appraisalInaccessibleTemplate:_.template( appraisalInaccessibleTemplate ),
+
+		initialize: function() {
+			this.render();
+		},
+
+		render:function () {
+			var modelJSON = this.model.toJSON();
+
+			this.$el.html( this.appraisalInaccessibleTemplate( modelJSON ) );
+			return this;
+		}
+	});
+
 	var PhotoAppraisalCompositeView = Backbone.View.extend( {
 
 		initialize: function() {
@@ -126,15 +143,24 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
+			var validationResult = modelJSON[ 'validationResult' ];
+			if ( ! validationResult[ 'validationPassed' ] ) {
+				this.renderView( new PhotoAppraisalInaccessibleView( {
+					model: this.model
+				}) );
+				return;
+			}
+
 			if ( modelJSON[ 'userHasAlreadyAppraisedPhoto' ] ) {
 				this.renderView( new PhotoAppraisalResultView( {
 					model: this.model
 				}) );
-			} else {
-				this.renderView( new PhotoAppraisalFormView( {
-					model: this.model
-				}) );
+				return;
 			}
+
+			this.renderView( new PhotoAppraisalFormView( {
+				model: this.model
+			}) );
 		},
 
 		renderView: function( view ) {
