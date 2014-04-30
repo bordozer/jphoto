@@ -255,10 +255,12 @@
 								   minMarkForGenre="${photoCardModel.votingUserMinAccessibleMarkForGenre}"
 								   maxMarkForGenre="${photoCardModel.votingUserMaxAccessibleMarkForGenre}"
 						/>--%>
-			<div class="votingDiv block-background block-border photo-appraisal-form-div">
+			<div class="votingDiv">
 
-				<div style="text-align: center;">
-					<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
+				<div class="block-border block-shadow photo-appraisal-form-div">
+					<div style="text-align: center;">
+						<html:spinningWheel16 title="${eco:translate('Photo appraisal form is being loaded...')}" />
+					</div>
 				</div>
 
 				<script type="text/javascript">

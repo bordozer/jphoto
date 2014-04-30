@@ -63,7 +63,7 @@ public class PhotoVotingServiceImpl implements PhotoVotingService {
 
 		activityStreamService.savePhotoVoting( user, photo, userPhotoVotes, votingTime );
 
-		return isSaved;
+		return true;
 	}
 
 	@Override

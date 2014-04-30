@@ -24,6 +24,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -80,13 +81,14 @@ public class PhotoAppraisalController {
 		final Photo photo = photoService.load( photoId );
 		final User user = userService.load( appraisalDTO.getUserId() );
 
-//		savePhotoAppraisal( user, photo, appraisalDTO ); // TODO: saving is here
+		savePhotoAppraisal( user, photo, appraisalDTO ); // TODO: saving is here
 
 		return getPhotoAppraisalDTO( photo, user );
-//		throw new SaveToDBRuntimeException( translatorService.translate( "Error saving data", EnvironmentContext.getLanguage() ) );
 	}
 
 	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
 
 		final List<AppraisalSection> sections = appraisalDTO.getPhotoAppraisalForm().getAppraisalSections();
 
@@ -96,10 +98,16 @@ public class PhotoAppraisalController {
 			final int selectedCategoryId = section.getSelectedCategoryId();
 
 			final PhotoVotingCategory category = votingCategoryService.load( selectedCategoryId );
-			appraisals.add( new UserPhotoVote( user, photo, category ) );
+
+			final UserPhotoVote photoVote = new UserPhotoVote( user, photo, category );
+			photoVote.setMark( section.getSelectedMark() );
+			photoVote.setMaxAccessibleMark( userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() ) );
+			photoVote.setVotingTime( currentTime );
+
+			appraisals.add( photoVote );
 		}
 
-		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals ) ) {
+		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, currentTime, appraisals ) ) {
 			throw new SaveToDBRuntimeException( translatorService.translate( "", getLanguage() ) );
 		}
 	}
@@ -137,9 +145,30 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( hasUserVotedForPhoto );
 
 		if ( hasUserVotedForPhoto ) {
-			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You has already appraised the photo", getLanguage() ) );
 
+			Date votingTime = dateUtilsService.getCurrentTime(); // TODO: this initialization is spare
+
+			final List<PhotoAppraisalResult> photoAppraisalResults = newArrayList();
 			final List<UserPhotoVote> userVotesForPhoto = photoVotingService.getUserVotesForPhoto( user, photo );
+			for ( final UserPhotoVote userPhotoVote : userVotesForPhoto ) {
+
+				votingTime = userPhotoVote.getVotingTime();
+
+				final PhotoVotingCategory photoVotingCategory = userPhotoVote.getPhotoVotingCategory();
+				final int mark = userPhotoVote.getMark();
+				final int maxAccessibleMark = userPhotoVote.getMaxAccessibleMark();
+				final String votingCategoryNameTranslated = translatorService.translatePhotoVotingCategory( photoVotingCategory, getLanguage() );
+
+				final PhotoAppraisalResult appraisalResult = new PhotoAppraisalResult();
+				appraisalResult.setAppraisalCategoryNameTranslated( votingCategoryNameTranslated );
+				appraisalResult.setMark( formatMark( mark ) );
+				appraisalResult.setMaxAccessibleMark( formatMark( maxAccessibleMark ) );
+
+				photoAppraisalResults.add( appraisalResult );
+			}
+			photoAppraisalDTO.setPhotoAppraisalResults( photoAppraisalResults );
+
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You has already make appraise at $1", getLanguage(), dateUtilsService.formatDateTimeShort( votingTime ) ) );
 
 			return photoAppraisalDTO;
 		}
@@ -148,6 +177,10 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;
+	}
+
+	private String formatMark( final int mark ) {
+		return mark > 0 ? String.format( "+%d", mark ) : String.format( "%d", mark );
 	}
 
 	private PhotoAppraisalForm getPhotoAppraisalForm( final Photo photo, final User user ) {

@@ -1,2 +1,22 @@
-<h3><%=appraisalBlockTitle%></h3>
-<%=photoId%>
+<style type="text/css">
+	.photo-appraisal-container {
+		float: left;
+		width: 90%;
+		padding: 3px;
+		text-align: left;
+		font-size: 18px;
+		/*border: 1px solid red;;*/
+	}
+</style>
+
+<div class="block-background block-border block-shadow" style="padding: 7px; border-radius: 7px 7px 0 0">
+	<div class="separatorInfo base-font-color"><%=appraisalBlockTitle%></div>
+</div>
+
+<ul>
+	<% _.each( photoAppraisalResults, function( result ) { %>
+		<div class="photo-appraisal-container">
+			<li><%=result.appraisalCategoryNameTranslated%>: <%=result.mark%> / <%=result.maxAccessibleMark%></li>
+		</div>
+	<% }) %>
+</ul>

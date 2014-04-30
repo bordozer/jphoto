@@ -11,7 +11,7 @@ public class UserPhotoVote {
 	private final Photo photo;
 	private final PhotoVotingCategory photoVotingCategory;
 	private int mark;
-	private long maxAccessibleMark;
+	private int maxAccessibleMark;
 	private Date votingTime;
 
 	public UserPhotoVote( final User user, final Photo photo, final PhotoVotingCategory photoVotingCategory ) {
@@ -40,11 +40,11 @@ public class UserPhotoVote {
 		this.mark = mark;
 	}
 
-	public long getMaxAccessibleMark() {
+	public int getMaxAccessibleMark() {
 		return maxAccessibleMark;
 	}
 
-	public void setMaxAccessibleMark( final long maxAccessibleMark ) {
+	public void setMaxAccessibleMark( final int maxAccessibleMark ) {
 		this.maxAccessibleMark = maxAccessibleMark;
 	}
 
