@@ -399,7 +399,7 @@ td.trunderlined {
 }
 
 .footerseparatorverysmall {
-	width: 99%;
+	width: 100%;
 	float: left;
 	margin: 10px 0 15px 0;
 	/*border: dotted;*/
@@ -474,6 +474,7 @@ td.trunderlined {
 	height: auto;
 	float: right;
 	margin: 0 0 20px 0;
+	/*border: 1px solid red;*/
 }
 
 .photo-appraisal-form-div {
