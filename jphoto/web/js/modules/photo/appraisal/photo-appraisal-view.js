@@ -43,7 +43,7 @@ define( ["backbone", "jquery", "underscore"
 		bindModel: function() {
 			var model = this.model;
 
-			console.log( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ] );
+//			console.log( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ] );
 
 			_.each( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ], function( section ) {
 
@@ -69,7 +69,21 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onAppraisalSaveError: function( response ){
-			alert( 'Save error' );
+
+			if ( response.status === 422 ) {
+				var errorText = '';
+				var errors = response[ 'responseJSON' ];
+				for ( var i = 0; i < errors.length; i++ ) {
+					errorText += errors[ i ][ 'defaultMessage' ] + "\n";
+				}
+
+				showUIMessage_Error( errorText );
+			}
+
+			if ( response.status === 500 ) {
+				console.log( response );
+				showUIMessage_Notification( '417' );
+			}
 		},
 
 		onCategoryChange: function( evt ) {

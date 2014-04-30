@@ -1,5 +1,6 @@
 package json.photo.appraisal;
 
+import json.exceptions.SaveToDBRuntimeException;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
@@ -74,19 +75,10 @@ public class PhotoAppraisalController {
 		final Photo photo = photoService.load( photoId );
 		final User user = userService.load( appraisalDTO.getUserId() );
 
-		savePhotoAppraisal( user, photo, appraisalDTO );
+//		savePhotoAppraisal( user, photo, appraisalDTO );
 
-//		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photoId, user );
-//		photoAppraisalDTO.setUserHasAlreadyAppraisedPhoto( true ); // TODO: temporary hack
-
-		return getPhotoAppraisalDTO( photo, user );
-	}
-
-	@ExceptionHandler( ValidationException.class )
-	@ResponseStatus( HttpStatus.UNPROCESSABLE_ENTITY )
-	@ResponseBody
-	public List<FieldError> processValidationError( final ValidationException validationException ) {
-		return validationException.getBindingResult().getFieldErrors();
+//		return getPhotoAppraisalDTO( photo, user );
+		throw new SaveToDBRuntimeException( translatorService.translate( "Error saving data", EnvironmentContext.getLanguage() ) );
 	}
 
 	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
@@ -102,10 +94,24 @@ public class PhotoAppraisalController {
 			appraisals.add( new UserPhotoVote( user, photo, category ) );
 		}
 
-		photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals );
-		/*if ( ! photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals ) ) {
-			throw new ValidationException( appraisalDTO, "" );
-		}*/
+		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, dateUtilsService.getCurrentTime(), appraisals ) ) {
+			throw new SaveToDBRuntimeException( translatorService.translate( "", EnvironmentContext.getLanguage() ) );
+		}
+	}
+
+	@ExceptionHandler( ValidationException.class )
+	@ResponseStatus( HttpStatus.UNPROCESSABLE_ENTITY )
+	@ResponseBody
+	public List<FieldError> processValidationError( final ValidationException validationException ) {
+		return validationException.getBindingResult().getFieldErrors();
+	}
+
+	@ExceptionHandler( SaveToDBRuntimeException.class )
+	@ResponseStatus( HttpStatus.INTERNAL_SERVER_ERROR )
+	@ResponseBody
+	public String processSaveToDBError( final SaveToDBRuntimeException exception ) {
+//		return translatorService.translate( "/* ================= Error saving data 417 ================= */", EnvironmentContext.getLanguage() ); //newArrayList( exception.getMessage() );
+		return exception.getMessage();
 	}
 
 	private PhotoAppraisalDTO getPhotoAppraisalDTO( final Photo photo, final User user ) {
