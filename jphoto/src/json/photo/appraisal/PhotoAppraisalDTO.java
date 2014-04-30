@@ -9,11 +9,14 @@ public class PhotoAppraisalDTO {
 	private int userId;
 	private int photoId;
 
+	private String appraisalBlockTitle;
+
+	private boolean userCanAppraiseThePhoto;
+	private String userCanNotAppraiseThePhotoText;
+
 	private boolean userHasAlreadyAppraisedPhoto;
 
 	private PhotoAppraisalForm photoAppraisalForm;
-	private ValidationResult validationResult;
-	private String appraisalBlockTitle;
 
 	public int getUserId() {
 		return userId;
@@ -39,20 +42,28 @@ public class PhotoAppraisalDTO {
 		this.userHasAlreadyAppraisedPhoto = userHasAlreadyAppraisedPhoto;
 	}
 
+	public boolean isUserCanAppraiseThePhoto() {
+		return userCanAppraiseThePhoto;
+	}
+
+	public void setUserCanAppraiseThePhoto( final boolean userCanAppraiseThePhoto ) {
+		this.userCanAppraiseThePhoto = userCanAppraiseThePhoto;
+	}
+
+	public String getUserCanNotAppraiseThePhotoText() {
+		return userCanNotAppraiseThePhotoText;
+	}
+
+	public void setUserCanNotAppraiseThePhotoText( final String userCanNotAppraiseThePhotoText ) {
+		this.userCanNotAppraiseThePhotoText = userCanNotAppraiseThePhotoText;
+	}
+
 	public PhotoAppraisalForm getPhotoAppraisalForm() {
 		return photoAppraisalForm;
 	}
 
 	public void setPhotoAppraisalForm( final PhotoAppraisalForm photoAppraisalForm ) {
 		this.photoAppraisalForm = photoAppraisalForm;
-	}
-
-	public void setValidationResult( final ValidationResult validationResult ) {
-		this.validationResult = validationResult;
-	}
-
-	public ValidationResult getValidationResult() {
-		return validationResult;
 	}
 
 	public void setAppraisalBlockTitle( final String appraisalBlockTitle ) {

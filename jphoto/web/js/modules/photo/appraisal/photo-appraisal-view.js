@@ -143,8 +143,7 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			var validationResult = modelJSON[ 'validationResult' ];
-			if ( ! validationResult[ 'validationPassed' ] ) {
+			if ( ! modelJSON[ 'userCanAppraiseThePhoto' ] ) {
 				this.renderView( new PhotoAppraisalInaccessibleView( {
 					model: this.model
 				}) );
