@@ -17,6 +17,8 @@ import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -92,8 +94,16 @@ public class PhotoAppraisalController {
 
 		final List<AppraisalSection> sections = appraisalDTO.getPhotoAppraisalForm().getAppraisalSections();
 
+		final List<AppraisalSection> notZeroSections = newArrayList( sections );
+		CollectionUtils.filter( notZeroSections, new Predicate<AppraisalSection>() {
+			@Override
+			public boolean evaluate( final AppraisalSection appraisalSection ) {
+				return appraisalSection.getSelectedCategoryId() != 0 && appraisalSection.getSelectedMark() != 0;
+			}
+		} );
+
 		final List<UserPhotoVote> appraisals = newArrayList();
-		for ( final AppraisalSection section : sections ) {
+		for ( final AppraisalSection section : notZeroSections ) {
 
 			final int selectedCategoryId = section.getSelectedCategoryId();
 
@@ -243,6 +253,7 @@ public class PhotoAppraisalController {
 
 			if ( i == 0 ) {
 				accessibleMarks.add( new Mark( i, "--" ) );
+				continue;
 			}
 
 			accessibleMarks.add( new Mark( i, ( i > 0 ? String.format( "+%d", i ) : String.format( "%d", i ) ) ) );
