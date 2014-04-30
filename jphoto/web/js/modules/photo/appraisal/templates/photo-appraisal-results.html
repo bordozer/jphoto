@@ -1,21 +1,12 @@
-
-<div class="block-background block-border block-shadow" style="padding: 7px; border-radius: 7px 7px 0 0">
-	<div class="separatorInfo base-font-color"><%=appraisalBlockTitle%></div>
-</div>
-
-<div class="block-border" style="width: 418px;">
-
-	<table style="font-size: 18px;">
-		<% _.each( photoAppraisalResults, function( result ) { %>
-			<tr style="height: 30px;">
-				<td style="text-align: right; width: 220px;">
-					<%=result.appraisalCategoryNameTranslated%>:
-				</td>
-				<td><%=result.mark%></td>
-				<td>/</td>
-				<td><%=result.maxAccessibleMark%></td>
-			</tr>
-		<% }) %>
-	</table>
-
-</div>
+<table style="font-size: 18px;">
+	<% _.each( photoAppraisalResults, function( result ) { %>
+		<tr style="height: 30px;">
+			<td style="text-align: right; width: 220px;">
+				<%=result.appraisalCategoryNameTranslated%>:
+			</td>
+			<td><%=result.mark%></td>
+			<td>/</td>
+			<td><%=result.maxAccessibleMark%></td>
+		</tr>
+	<% }) %>
+</table>

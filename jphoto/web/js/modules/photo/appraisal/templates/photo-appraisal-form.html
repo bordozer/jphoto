@@ -4,7 +4,7 @@
 		float: left;
 		width: 90%;
 		padding: 3px;
-		/*border: 1px solid red;;*/
+		/*border: 1px solid red;*/
 	}
 
 	.photo-appraisal-category {
@@ -12,41 +12,41 @@
 		font-size: 12px;
 		width: 65%;
 		text-align: right;
-		/*border: 1px solid red;;*/
+		/*border: 1px solid red;*/
 	}
 
 	.photo-appraisal-mark {
 		float: left;
 		font-size: 12px;
-		/*border: 1px solid red;;*/
+		/*border: 1px solid red;*/
 	}
 </style>
 
-<b><%=appraisalBlockTitle%></b>
+<!--<b><%=appraisalBlockTitle%></b>-->
 
 <% _.each( photoAppraisalForm.appraisalSections, function( section ) { %>
-<div class="photo-appraisal-container">
+	<div class="photo-appraisal-container">
 
-	<div class="photo-appraisal-category">
-		<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
-			<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
-				<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
-			<% }) %>
-		</select>
+		<div class="photo-appraisal-category">
+			<select class="photo-appraisal-category-select photo-appraisal-category-<%=section.number%>">
+				<% _.each( section.accessibleAppraisalCategories, function( category ) { %>
+					<option value="<%=category.id%>"<%= section.selectedCategoryId == category.id ? ' selected' : ''%>><%=category.nameTranslated%></option>
+				<% }) %>
+			</select>
+		</div>
+
+		<div class="photo-appraisal-mark">
+			<!--<% _.each( section.accessibleMarks, function( mark ) { %>
+				<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
+			<% }) %>-->
+			<select class="photo-appraisal-mark-<%=section.number%>">
+				<% _.each( section.accessibleMarks, function( mark ) { %>
+					<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
+				<% }) %>
+			</select>
+		</div>
+
 	</div>
-
-	<div class="photo-appraisal-mark">
-		<!--<% _.each( section.accessibleMarks, function( mark ) { %>
-			<input type="radio" name="photo-appraisal-mark-<%=section.number%>" value="<%=mark.value%>" <%= mark.selected ? ' checked' : ''%> /> <%=mark.text%>
-		<% }) %>-->
-		<select class="photo-appraisal-mark-<%=section.number%>">
-			<% _.each( section.accessibleMarks, function( mark ) { %>
-				<option value="<%=mark.value%>"<%= section.selectedMark == mark.value ? ' selected' : ''%>><%=mark.text%></option>
-			<% }) %>
-		</select>
-	</div>
-
-</div>
 <% }) %>
 
 <div class="photo-appraisal-container">

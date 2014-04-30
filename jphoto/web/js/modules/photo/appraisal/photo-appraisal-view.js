@@ -143,9 +143,6 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			this.$el.html( '' );
-			this.$el.append();
-
 			if ( ! modelJSON[ 'userCanAppraiseThePhoto' ] ) {
 				this.renderView( new PhotoAppraisalInaccessibleView( {
 					model: this.model
@@ -166,7 +163,22 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderView: function( view ) {
-			this.$el.html( view.render().$el );
+
+			var $el = view.render().$el;
+
+			var container = $( '<div></div>' );
+
+			var header = $( "<div class='block-background block-border block-shadow' style='padding: 7px; border-radius: 7px 7px 0 0'></div>" );
+			header.html( "<div class='separatorInfo base-font-color'>" + this.model.get( 'appraisalBlockTitle' ) + "</div>" );
+			container.html( header );
+
+			var body = $( "<div class='block-border' style='width: 418px; height: 120px;'></div>" );
+			body.html( $el );
+
+			container.append( body );
+
+			this.$el.html( container );
+
 			return this;
 		}
 	});
