@@ -2,6 +2,9 @@
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
 <%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -18,7 +21,7 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="months" value="<%=Month.values()%>"/>
+<c:set var="months" value="<%=GenericTranslatableList.schedulerMonthTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="monthlyTaskMonthIds" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_MONTHLY_TASK_WEEKDAY_IDS_CONTROL%>" />
 <c:set var="monthlyDayOfMonth" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_MONTHLY_TASK_DAY_OF_MONTH_CONTROL%>" />
 <c:set var="schedulerTaskTime" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_TIME_CONTROL%>" />

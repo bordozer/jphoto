@@ -7,6 +7,8 @@ import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.enums.YesNo;
 import core.general.executiontasks.ExecutionTaskType;
+import core.general.executiontasks.Month;
+import core.general.executiontasks.Weekday;
 import core.general.user.EmailNotificationType;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
@@ -45,6 +47,14 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<Month> schedulerMonthTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<Month>( Month.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<Weekday> schedulerWeekdayTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<Weekday>( Weekday.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<ExecutionTaskType> executionTaskTypeTranslatableList( final Language language, final TranslatorService translatorService ) {

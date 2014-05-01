@@ -1,23 +1,23 @@
 package core.general.executiontasks;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.Calendar;
 
-public enum Month implements Identifiable {
+public enum Month implements IdentifiableNameable {
 
-	JANUARY( Calendar.JANUARY, "january", "JAN" )
-	, FEBRUARY( Calendar.FEBRUARY, "february", "FEB" )
-	, MARCH( Calendar.MARCH, "march", "MAR" )
-	, APRIL( Calendar.APRIL, "april", "APR" )
-	, MAY( Calendar.MAY, "may", "MAY" )
-	, JUNE( Calendar.JUNE, "june", "JUN" )
-	, JULY( Calendar.JULY, "july", "JUL" )
-	, AUGUST( Calendar.AUGUST, "august", "AUG" )
-	, SEPTEMBER( Calendar.SEPTEMBER, "september", "SEP" )
-	, OCTOBER( Calendar.OCTOBER, "october", "OCT" )
-	, NOVEMBER( Calendar.NOVEMBER, "november", "NOV" )
-	, DECEMBER( Calendar.DECEMBER, "december", "DEC" )
+	JANUARY( Calendar.JANUARY, "Month: january", "JAN" )
+	, FEBRUARY( Calendar.FEBRUARY, "Month: february", "FEB" )
+	, MARCH( Calendar.MARCH, "Month: march", "MAR" )
+	, APRIL( Calendar.APRIL, "Month: april", "APR" )
+	, MAY( Calendar.MAY, "Month: may", "MAY" )
+	, JUNE( Calendar.JUNE, "Month: june", "JUN" )
+	, JULY( Calendar.JULY, "Month: july", "JUL" )
+	, AUGUST( Calendar.AUGUST, "Month: august", "AUG" )
+	, SEPTEMBER( Calendar.SEPTEMBER, "Month: september", "SEP" )
+	, OCTOBER( Calendar.OCTOBER, "Month: october", "OCT" )
+	, NOVEMBER( Calendar.NOVEMBER, "Month: november", "NOV" )
+	, DECEMBER( Calendar.DECEMBER, "Month: december", "DEC" )
 	;
 
 	private final int id;
@@ -36,6 +36,10 @@ public enum Month implements Identifiable {
 
 	public String getCroneSchedulerName() {
 		return croneSchedulerName;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public static Month getById( final int id ) {

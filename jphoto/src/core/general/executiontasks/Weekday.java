@@ -1,17 +1,18 @@
 package core.general.executiontasks;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.Calendar;
 
-public enum Weekday implements Identifiable {
-	MONDAY( Calendar.MONDAY, "monday", "MON" )
-	, TUESDAY( Calendar.TUESDAY, "tuesday", "TUE" )
-	, WEDNESDAY( Calendar.WEDNESDAY, "wednesday", "WED" )
-	, THURSDAY( Calendar.THURSDAY, "thursday", "THU" )
-	, FRIDAY( Calendar.FRIDAY, "friday", "FRI" )
-	, SATURDAY( Calendar.SATURDAY, "saturday", "SAT" )
-	, SUNDAY( Calendar.SUNDAY, "sunday", "SUN" )
+public enum Weekday implements IdentifiableNameable {
+
+	MONDAY( Calendar.MONDAY, "Weekday: monday", "MON" )
+	, TUESDAY( Calendar.TUESDAY, "Weekday: tuesday", "TUE" )
+	, WEDNESDAY( Calendar.WEDNESDAY, "Weekday: wednesday", "WED" )
+	, THURSDAY( Calendar.THURSDAY, "Weekday: thursday", "THU" )
+	, FRIDAY( Calendar.FRIDAY, "Weekday: friday", "FRI" )
+	, SATURDAY( Calendar.SATURDAY, "Weekday: saturday", "SAT" )
+	, SUNDAY( Calendar.SUNDAY, "Weekday: sunday", "SUN" )
 	;
 
 	private final int id;

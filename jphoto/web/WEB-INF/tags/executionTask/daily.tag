@@ -1,5 +1,8 @@
 <%@ tag import="core.general.executiontasks.Weekday" %>
 <%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +19,7 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:set var="weekdays" value="<%=Weekday.values()%>"/>
+<c:set var="weekdays" value="<%=GenericTranslatableList.schedulerWeekdayTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="dailyTaskWeekdayIds" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_DAILY_TASK_WEEKDAY_IDS_CONTROL%>" />
 <c:set var="schedulerTaskTime" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_TIME_CONTROL%>" />
 

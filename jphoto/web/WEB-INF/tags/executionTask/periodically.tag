@@ -46,7 +46,7 @@
 		<table:tdtext text_t="Time of day" isMandatory="true" /> <%-- TODO: hide this label when hoursDiv is hidden --%>
 		<table:tddata>
 			<div id="hoursDiv" style="display: none;">
-				<js:checkboxMassChecker checkboxClass="${periodicalTaskHours}" />
+				<js:checkboxMassChecker checkboxClass="${periodicalTaskHours}" initiallyChecked="true" />
 				<br />
 				<form:checkboxes path="${periodicalTaskHours}" items="${hours}" cssClass="${periodicalTaskHours}" />
 			</div>
