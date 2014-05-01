@@ -2,22 +2,22 @@ package core.general.configuration;
 
 public enum ConfigurationTab {
 
-	ALL( "all", "All tabs" )
-	, CHANGES_ONLY( "changes", "Changes only" )
-	, SYSTEM( "system", "System" )
-	, CANDIDATES( "candidates", "Candidates" )
-	, MEMBERS( "users", "Members" )
-	, AVATAR( "avatar", "Avatar" )
-	, PHOTO_UPLOAD( "photoUpload", "Photo upload" )
-	, PHOTOS( "photoLists", "Photo lists" )
-	, PHOTO_CARD( "photoCard", "Photo card" )
-	, COMMENTS( "photoComments", "Photo comments" )
-	, PHOTO_VOTING( "photoVoting", "Photo voting" )
-	, PHOTO_RATING( "photoRating", "Photo rating" )
-	, RANK_VOTING( "rankVoting", "Voting for members' ranks in a category" )
-	, CACHE( "cache", "Cache" )
-	, ADMIN( "admin", "Admin" )
-	, EMAILING( "emailing", "Emailing" )
+	ALL( "all", "ConfigurationTab: All tabs" )
+	, CHANGES_ONLY( "changes", "ConfigurationTab: Changes only" )
+	, SYSTEM( "system", "ConfigurationTab: System" )
+	, CANDIDATES( "candidates", "ConfigurationTab: Candidates" )
+	, MEMBERS( "users", "ConfigurationTab: Members" )
+	, AVATAR( "avatar", "ConfigurationTab: Avatar" )
+	, PHOTO_UPLOAD( "photoUpload", "ConfigurationTab: Photo upload" )
+	, PHOTOS( "photoLists", "ConfigurationTab: Photo lists" )
+	, PHOTO_CARD( "photoCard", "ConfigurationTab: Photo card" )
+	, COMMENTS( "photoComments", "ConfigurationTab: Photo comments" )
+	, PHOTO_VOTING( "photoVoting", "ConfigurationTab: Photo voting" )
+	, PHOTO_RATING( "photoRating", "ConfigurationTab: Photo rating" )
+	, RANK_VOTING( "rankVoting", "ConfigurationTab: Voting for members' ranks in a category" )
+	, CACHE( "cache", "ConfigurationTab: Cache" )
+	, ADMIN( "admin", "ConfigurationTab: Admin" )
+	, EMAILING( "emailing", "ConfigurationTab: Emailing" )
 	;
 
 	private final String key;

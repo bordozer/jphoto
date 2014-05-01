@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>ConfigurationTab: All tabs</nerd>
+		<ru><![CDATA[Все табы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Changes only</nerd>
+		<ru><![CDATA[Только изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: System</nerd>
+		<ru><![CDATA[Система]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Candidates</nerd>
+		<ru><![CDATA[Кандидаты]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Members</nerd>
+		<ru><![CDATA[Члены клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo upload</nerd>
+		<ru><![CDATA[Загрузка работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo lists</nerd>
+		<ru><![CDATA[Фотогалерея]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo card</nerd>
+		<ru><![CDATA[Карточка работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo comments</nerd>
+		<ru><![CDATA[Комментарии к работам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo voting</nerd>
+		<ru><![CDATA[Оценка работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Photo rating</nerd>
+		<ru><![CDATA[Фото рейтинг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Voting for members' ranks in a category</nerd>
+		<ru><![CDATA[Голосование за ранг пользователей в разделах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Cache</nerd>
+		<ru><![CDATA[Кэш]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Admin</nerd>
+		<ru><![CDATA[Администрирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationTab: Emailing</nerd>
+		<ru><![CDATA[Почтовый сервер]]></ru>
+	</translation>
+
+</translations>
