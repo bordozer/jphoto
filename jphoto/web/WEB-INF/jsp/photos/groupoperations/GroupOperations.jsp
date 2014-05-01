@@ -47,9 +47,9 @@
 					<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 					<c:set var="isGroupOperationAccessible" value="${photoGroupOperationEntry.groupOperationAccessible}"/>
 
-					<div class="block-border photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;" onclick="toggleCheckbox( '${photo.id}' );">
+					<div class="block-border photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
-						<div class="floatleft text-centered" style="height: auto; min-height: 230px;">
+						<div class="floatleft text-centered" style="height: auto; min-height: 230px;" onclick="toggleCheckbox( '${photo.id}' );">
 
 							<links:photoCard id="${photo.id}">
 								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${photo.nameEscaped}"/>
