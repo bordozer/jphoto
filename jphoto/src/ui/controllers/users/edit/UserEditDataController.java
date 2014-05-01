@@ -6,7 +6,6 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.EmailNotificationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.user.UserStatus;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -134,7 +133,6 @@ public class UserEditDataController {
 		securityService.assertUserCanEditUserData( EnvironmentContext.getCurrentUser(), beingChangedUser );
 
 		initModelFromUser( model, beingChangedUser );
-		beingChangedUser.setUserStatus( UserStatus.CANDIDATE );
 		beingChangedUser.setRegistrationTime( dateUtilsService.getCurrentTime() );
 
 		model.setBeingChangedUser( beingChangedUser );
@@ -178,17 +176,20 @@ public class UserEditDataController {
 			return VIEW;
 		}
 
-		updateUserUILanguageIfLoggedUserChangedHisLanguage( user );
+		updateUserUISettings( user );
 
 		return getRedirectToUserListView();
 	}
 
-	private void updateUserUILanguageIfLoggedUserChangedHisLanguage( final User user ) {
+	private void updateUserUISettings( final User user ) {
+
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		if ( UserUtils.isTheUserThatWhoIsCurrentUser( user ) ) {
 			currentUser.setLanguage( user.getLanguage() );
 			currentUser.setPhotoLines( user.getPhotoLines() );
 			currentUser.setPhotosInLine( user.getPhotosInLine() );
+
+			currentUser.setShowNudeContent( user.isShowNudeContent() );
 		}
 	}
 
