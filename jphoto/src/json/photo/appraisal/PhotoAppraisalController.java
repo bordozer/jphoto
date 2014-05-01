@@ -150,7 +150,8 @@ public class PhotoAppraisalController {
 		final ValidationResult validationResult = securityService.validateUserCanVoteForPhoto( user, photo, getLanguage() );
 		photoAppraisalDTO.setUserCanAppraiseThePhoto( validationResult.isValidationPassed() );
 		if ( validationResult.isValidationFailed() ) {
-			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( validationResult.getValidationMessage() );
+			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( translatorService.translate( "Photo appraisal: You can not appraise the photo", getLanguage() ) );
+			photoAppraisalDTO.setUserCanNotAppraiseThePhotoReason( validationResult.getValidationMessage() );
 			return photoAppraisalDTO;
 		}
 

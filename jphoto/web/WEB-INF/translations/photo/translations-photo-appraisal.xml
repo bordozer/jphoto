@@ -8,6 +8,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo appraisal: You can not appraise the photo</nerd>
+		<ru><![CDATA[Вы не можете оценить эту работу]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo appraisal: done at $1</nerd>
 		<ru><![CDATA[Оценка работы: выполнена $1]]></ru>
 	</translation>

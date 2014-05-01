@@ -2,7 +2,6 @@ package json.photo.appraisal;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
-import java.util.Date;
 import java.util.List;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
@@ -15,13 +14,14 @@ public class PhotoAppraisalDTO {
 	private String appraisalBlockTitle;
 
 	private boolean userCanAppraiseThePhoto;
-	private String userCanNotAppraiseThePhotoText;
+	private String userCanNotAppraiseThePhotoReason;
 
 	private boolean userHasAlreadyAppraisedPhoto;
 
 	private PhotoAppraisalForm photoAppraisalForm;
 
 	private List<PhotoAppraisalResult> photoAppraisalResults;
+	private String userCanNotAppraiseThePhotoText;
 
 	public int getUserId() {
 		return userId;
@@ -63,12 +63,12 @@ public class PhotoAppraisalDTO {
 		this.userCanAppraiseThePhoto = userCanAppraiseThePhoto;
 	}
 
-	public String getUserCanNotAppraiseThePhotoText() {
-		return userCanNotAppraiseThePhotoText;
+	public String getUserCanNotAppraiseThePhotoReason() {
+		return userCanNotAppraiseThePhotoReason;
 	}
 
-	public void setUserCanNotAppraiseThePhotoText( final String userCanNotAppraiseThePhotoText ) {
-		this.userCanNotAppraiseThePhotoText = userCanNotAppraiseThePhotoText;
+	public void setUserCanNotAppraiseThePhotoReason( final String userCanNotAppraiseThePhotoReason ) {
+		this.userCanNotAppraiseThePhotoReason = userCanNotAppraiseThePhotoReason;
 	}
 
 	public PhotoAppraisalForm getPhotoAppraisalForm() {
@@ -93,5 +93,13 @@ public class PhotoAppraisalDTO {
 
 	public void setPhotoAppraisalResults( final List<PhotoAppraisalResult> photoAppraisalResults ) {
 		this.photoAppraisalResults = photoAppraisalResults;
+	}
+
+	public void setUserCanNotAppraiseThePhotoText( final String userCanNotAppraiseThePhotoText ) {
+		this.userCanNotAppraiseThePhotoText = userCanNotAppraiseThePhotoText;
+	}
+
+	public String getUserCanNotAppraiseThePhotoText() {
+		return userCanNotAppraiseThePhotoText;
 	}
 }
