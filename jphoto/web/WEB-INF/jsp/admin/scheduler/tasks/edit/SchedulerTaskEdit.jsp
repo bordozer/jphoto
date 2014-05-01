@@ -1,5 +1,8 @@
 <%@ page import="core.general.executiontasks.ExecutionTaskType" %>
 <%@ page import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,7 +20,7 @@
 
 <tags:page pageModel="${schedulerTaskEditModel.pageModel}">
 
-	<c:set var="executionTaskTypes" value="<%=ExecutionTaskType.values()%>"/>
+	<c:set var="executionTaskTypes" value="<%=GenericTranslatableList.executionTaskTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 	<c:set var="executionTaskIdOnce" value="<%=ExecutionTaskType.ONCE.getId()%>"/>
 	<c:set var="executionTaskIdDaily" value="<%=ExecutionTaskType.DAILY.getId()%>"/>
 	<c:set var="executionTaskIdMonthly" value="<%=ExecutionTaskType.MONTHLY.getId()%>"/>

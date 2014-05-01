@@ -6,6 +6,7 @@ import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.enums.YesNo;
+import core.general.executiontasks.ExecutionTaskType;
 import core.general.user.EmailNotificationType;
 import core.general.user.UserMembershipType;
 import core.general.user.UserStatus;
@@ -44,6 +45,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<ExecutionTaskType> executionTaskTypeTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<ExecutionTaskType>( ExecutionTaskType.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<PhotoActionAllowance> photoActionAllowanceTranslatableList( final Language language, final TranslatorService translatorService ) {

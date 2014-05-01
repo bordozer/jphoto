@@ -1,6 +1,9 @@
 package core.general.executiontasks;
 
-public enum ExecutionTaskType {
+import core.interfaces.IdentifiableNameable;
+
+public enum ExecutionTaskType implements IdentifiableNameable {
+
 	ONCE( 1, "ExecutionTaskType: One time", "schedulerTaskOnce.png" )
 	, PERIODICAL( 2, "ExecutionTaskType: Periodically", "schedulerTaskPeriodical.png" )
 	, DAILY( 3, "ExecutionTaskType: Daily", "schedulerTaskDaily.png" )
