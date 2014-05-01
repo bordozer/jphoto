@@ -26,7 +26,7 @@ public class PhotoAppraisalFormValidator implements Validator {
 
 	private void validateUser( final int userId, final Errors errors ) {
 		if ( ! UserUtils.isTheUserThatWhoIsCurrentUser( userId ) ) {
-			final String errorMessage = translatorService.translate( "You are not the user who has loaded appraisal form. The user must have changed since then. Please, reload the page.", EnvironmentContext.getLanguage() );
+			final String errorMessage = translatorService.translate( "You are not the user who has loaded appraisal form. The user must have changed since then.", EnvironmentContext.getLanguage() );
 			errors.rejectValue( "userId", "error code", errorMessage );
 		}
 	}

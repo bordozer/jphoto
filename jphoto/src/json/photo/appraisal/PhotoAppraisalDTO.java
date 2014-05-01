@@ -10,6 +10,7 @@ public class PhotoAppraisalDTO {
 
 	private int userId;
 	private int photoId;
+	private int currentUserId;
 
 	private String appraisalBlockTitle;
 
@@ -36,6 +37,14 @@ public class PhotoAppraisalDTO {
 
 	public int getPhotoId() {
 		return photoId;
+	}
+
+	public int getCurrentUserId() {
+		return currentUserId;
+	}
+
+	public void setCurrentUserId( final int currentUserId ) {
+		this.currentUserId = currentUserId;
 	}
 
 	public boolean isUserHasAlreadyAppraisedPhoto() {

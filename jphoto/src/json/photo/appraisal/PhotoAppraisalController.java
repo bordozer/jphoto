@@ -78,6 +78,8 @@ public class PhotoAppraisalController {
 	@ResponseBody
 	public PhotoAppraisalDTO createNote( @RequestBody final PhotoAppraisalDTO appraisalDTO, final @PathVariable( "photoId" ) int photoId ) {
 
+		appraisalDTO.setCurrentUserId( EnvironmentContext.getCurrentUserId() );
+
 		ValidationHelper.validate( appraisalDTO, photoAppraisalFormValidator );
 
 		final Photo photo = photoService.load( photoId );

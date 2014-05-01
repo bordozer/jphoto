@@ -85,7 +85,14 @@ define( ["backbone", "jquery", "underscore"
 				}
 
 				showUIMessage_Error( errorText );
+
+				this.reloadForUser( this.model.get( 'currentUserId' ) );
 			}
+		},
+
+		reloadForUser: function( userId ) {
+			this.model.set( { userId: userId } );
+			this.model.refresh();
 		},
 
 		onCategoryChange: function( evt ) {

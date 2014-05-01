@@ -6,6 +6,10 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/json/photos/" + options.photoId + "/appraisal/";
+		},
+
+		refresh: function() {
+			this.fetch( { reset: true } );
 		}
 	});
 
