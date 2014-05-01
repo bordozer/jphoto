@@ -121,7 +121,7 @@
 								</span>
 							</table:tdunderlined>
 
-							<table:tdunderlined>
+							<table:tdunderlined width="120px">
 								<c:if test="${not configurationKey.editableInDefaultConfigurationOnly}">
 									<config:valueRendererEdit configuration="${configuration}"/>
 								</c:if>
