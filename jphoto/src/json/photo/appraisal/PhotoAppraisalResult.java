@@ -29,4 +29,9 @@ public class PhotoAppraisalResult {
 	public String getMaxAccessibleMark() {
 		return maxAccessibleMark;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s ( %s / %s )", appraisalCategoryNameTranslated, mark, maxAccessibleMark );
+	}
 }

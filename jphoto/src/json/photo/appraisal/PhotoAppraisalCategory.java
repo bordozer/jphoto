@@ -20,4 +20,9 @@ public class PhotoAppraisalCategory {
 	public void setNameTranslated( final String nameTranslated ) {
 		this.nameTranslated = nameTranslated;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d: %s", id, nameTranslated );
+	}
 }

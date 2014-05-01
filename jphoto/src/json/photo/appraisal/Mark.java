@@ -20,4 +20,9 @@ public class Mark {
 	public String getText() {
 		return text;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%d: %s", value, text );
+	}
 }
