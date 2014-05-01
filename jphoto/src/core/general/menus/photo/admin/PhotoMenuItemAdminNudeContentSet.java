@@ -35,11 +35,11 @@ public class PhotoMenuItemAdminNudeContentSet extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return isAccessorSuperAdmin() && ! menuEntry.isContainsNudeContent();
+		return isAccessorSuperAdmin() && ! menuEntry.isContainsNudeContent() && getGenreService().load( menuEntry.getGenreId() ).isCanContainNudeContent();
 	}
 
 	@Override
 	public String getCallbackMessage() {
-		return translate( "PhotoMenuItem: Nude context has been set" );
+		return services.getTranslatorService().translate( "PhotoMenuItem: $1: Nude context has been set", getLanguage(), menuEntry.getNameEscaped() );
 	}
 }

@@ -40,6 +40,6 @@ public class PhotoMenuItemAdminNudeContentRemove extends AbstractPhotoMenuItem {
 
 	@Override
 	public String getCallbackMessage() {
-		return translate( "PhotoMenuItem: Nude context has been removed" );
+		return services.getTranslatorService().translate( "PhotoMenuItem: $1: Nude context has been removed", getLanguage(), menuEntry.getNameEscaped() );
 	}
 }

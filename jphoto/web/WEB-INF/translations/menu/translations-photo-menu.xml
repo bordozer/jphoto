@@ -73,13 +73,13 @@
 	</translation>
 
 	<translation>
-		<nerd>PhotoMenuItem: Nude context has been set</nerd>
-		<ru><![CDATA[НЮ контент установлен]]></ru>
+		<nerd>PhotoMenuItem: $1: Nude context has been set</nerd>
+		<ru><![CDATA[$1: НЮ контент установлен]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>PhotoMenuItem: Nude context has been removed</nerd>
-		<ru><![CDATA[НЮ контент убран]]></ru>
+		<nerd>PhotoMenuItem: $1: Nude context has been removed</nerd>
+		<ru><![CDATA[$1: НЮ контент убран]]></ru>
 	</translation>
 
 	<translation>
