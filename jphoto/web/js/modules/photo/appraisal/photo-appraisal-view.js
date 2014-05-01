@@ -43,14 +43,12 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		appriseThePhoto_Good: function() {
-			this.bindModel( 2 ); // TODO: '2' is hardcoded!
+			this.bindModel( this.model.get( 'photoAppraisalForm' )[ 'goodButtonMark' ] );
 			this.saveAppraisal();
 		},
 
 		bindModel: function( setMark ) {
 			var model = this.model;
-
-//			console.log( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ] );
 
 			_.each( model.get( 'photoAppraisalForm' )[ 'appraisalSections' ], function( section ) {
 
@@ -61,7 +59,6 @@ define( ["backbone", "jquery", "underscore"
 				section[ 'selectedCategoryId' ] = categoryId;
 				section[ 'selectedMark' ] = mark;
 
-//				console.log( number, ': ', categoryId, '', mark );
 			}, this );
 		},
 

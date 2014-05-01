@@ -16,6 +16,7 @@ public class PhotoAppraisalForm {
 	private String excellentButtonTitle;
 
 	private int userHighestPositiveMarkInGenre;
+	private int goodButtonMark;
 
 	public void setAppraisalSections( final List<AppraisalSection> appraisalSections ) {
 		this.appraisalSections = appraisalSections;
@@ -79,5 +80,13 @@ public class PhotoAppraisalForm {
 
 	public int getUserHighestPositiveMarkInGenre() {
 		return userHighestPositiveMarkInGenre;
+	}
+
+	public void setGoodButtonMark( final int goodButtonMark ) {
+		this.goodButtonMark = goodButtonMark;
+	}
+
+	public int getGoodButtonMark() {
+		return goodButtonMark;
 	}
 }

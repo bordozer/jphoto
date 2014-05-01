@@ -221,12 +221,13 @@ public class PhotoAppraisalController {
 		form.setCustomButtonText( translatorService.translate( "Photo appraisal: Custom mark set", language ) );
 		form.setCustomButtonTitle( translatorService.translate( "Photo appraisal: Appraise the photo with custom marks", language ) );
 
+		final int goodButtonMark = userHighestPositiveMarkInGenre == 2 ? 1 : 2; // TODO: '2' is hardcoded!
+		form.setGoodButtonMark( goodButtonMark );
+		form.setGoodButtonText( translatorService.translate( "Photo appraisal: Good ( +$1 )", getLanguage(), String.valueOf( goodButtonMark ) ) );
+		form.setGoodButtonTitle( translatorService.translate( "Photo appraisal: Button Good title ( +$1 )", language, String.valueOf( goodButtonMark ) ) );
+
 		form.setExcellentButtonText( translatorService.translate( "Photo appraisal: Excellent ( +$1 )", getLanguage(), String.valueOf( userHighestPositiveMarkInGenre ) ) );
 		form.setExcellentButtonTitle( translatorService.translate( "Photo appraisal: Appraise the photo with maximum accessible for you marks ( +$1 )", language, String.valueOf( userHighestPositiveMarkInGenre ) ) );
-
-		final int goodMark = 2; // TODO: '2' is hardcoded!
-		form.setGoodButtonText( translatorService.translate( "Photo appraisal: Good ( +$1 )", getLanguage(), String.valueOf( goodMark ) ) ); // TODO: '2' is hardcoded!
-		form.setGoodButtonTitle( translatorService.translate( "Photo appraisal: Button Good title ( +$1 )", language, String.valueOf( goodMark ) ) );
 
 		return form;
 	}
