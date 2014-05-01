@@ -145,11 +145,12 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setUserId( user.getId() );
 		photoAppraisalDTO.setPhotoId( photo.getId() );
 
+		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Photo appraisal title", getLanguage() ) );
+
 		final ValidationResult validationResult = securityService.validateUserCanVoteForPhoto( user, photo, getLanguage() );
 		photoAppraisalDTO.setUserCanAppraiseThePhoto( validationResult.isValidationPassed() );
 		if ( validationResult.isValidationFailed() ) {
 			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( validationResult.getValidationMessage() );
-			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: You can not appraise the photo", getLanguage() ) );
 			return photoAppraisalDTO;
 		}
 
@@ -180,12 +181,12 @@ public class PhotoAppraisalController {
 			}
 			photoAppraisalDTO.setPhotoAppraisalResults( photoAppraisalResults );
 
-			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: You has already make appraise at $1", getLanguage(), dateUtilsService.formatDateTimeShort( votingTime ) ) );
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: done at $1", getLanguage(), dateUtilsService.formatDateTimeShort( votingTime ) ) );
 
 			return photoAppraisalDTO;
 		}
 
-		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Appraise the photo", getLanguage() ) );
+//		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Appraise the photo", getLanguage() ) );
 		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;

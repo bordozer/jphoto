@@ -3,13 +3,13 @@
 <translations>
 
 	<translation>
-		<nerd>Photo appraisal: You can not appraise the photo</nerd>
-		<ru><![CDATA[Вы не можете оценить работу]]></ru>
+		<nerd>Photo appraisal: Photo appraisal title</nerd>
+		<ru><![CDATA[Оценка работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Photo appraisal: You has already make appraise at $1</nerd>
-		<ru><![CDATA[Вы уже оценивали эту работу $1]]></ru>
+		<nerd>Photo appraisal: done at $1</nerd>
+		<ru><![CDATA[Оценка работы: выполнена $1]]></ru>
 	</translation>
 
 	<translation>
