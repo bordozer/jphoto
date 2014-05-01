@@ -2,7 +2,7 @@
 <style type="text/css">
 	.photo-appraisal-container {
 		float: left;
-		width: 90%;
+		width: 99%;
 		padding: 3px;
 		/*border: 1px solid red;*/
 	}
@@ -18,6 +18,16 @@
 	.photo-appraisal-mark {
 		float: left;
 		font-size: 12px;
+		/*border: 1px solid red;*/
+	}
+
+	.appraise-photo-button {
+		width: 120px;
+	}
+
+	.appraise-photo-button-container {
+		float: left;
+		width: 33%;
 		/*border: 1px solid red;*/
 	}
 </style>
@@ -48,8 +58,8 @@
 	</div>
 <% }) %>
 
-<div class="photo-appraisal-container">
-		<input type="button" class="custom-marks-button" value="<%=photoAppraisalForm.customButtonText%>" title="<%=photoAppraisalForm.customButtonTitle%>" />
-		<input type="button" class="good-button" value="<%=photoAppraisalForm.goodButtonText%>" title="<%=photoAppraisalForm.goodButtonTitle%>" />
-		<input type="button" class="excellent-button" value="<%=photoAppraisalForm.excellentButtonText%>" title="<%=photoAppraisalForm.excellentButtonTitle%>" />
+<div class="photo-appraisal-container block-border" style="border-bottom: none; border-right: none; border-left: none;">
+	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button custom-marks-button" value="<%=photoAppraisalForm.customButtonText%>" title="<%=photoAppraisalForm.customButtonTitle%>" /></div>
+	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button good-button " value="<%=photoAppraisalForm.goodButtonText%>" title="<%=photoAppraisalForm.goodButtonTitle%>" /></div>
+	<div class="appraise-photo-button-container"><input type="button" class="appraise-photo-button excellent-button" value="<%=photoAppraisalForm.excellentButtonText%>" title="<%=photoAppraisalForm.excellentButtonTitle%>" /></div>
 </div>
