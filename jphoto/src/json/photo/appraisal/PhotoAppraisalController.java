@@ -149,7 +149,7 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setUserCanAppraiseThePhoto( validationResult.isValidationPassed() );
 		if ( validationResult.isValidationFailed() ) {
 			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( validationResult.getValidationMessage() );
-			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You can not appraise the photo", getLanguage() ) );
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: You can not appraise the photo", getLanguage() ) );
 			return photoAppraisalDTO;
 		}
 
@@ -180,12 +180,12 @@ public class PhotoAppraisalController {
 			}
 			photoAppraisalDTO.setPhotoAppraisalResults( photoAppraisalResults );
 
-			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "You has already make appraise at $1", getLanguage(), dateUtilsService.formatDateTimeShort( votingTime ) ) );
+			photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: You has already make appraise at $1", getLanguage(), dateUtilsService.formatDateTimeShort( votingTime ) ) );
 
 			return photoAppraisalDTO;
 		}
 
-		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Appraise the photo", getLanguage() ) );
+		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Appraise the photo", getLanguage() ) );
 		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;
@@ -218,14 +218,15 @@ public class PhotoAppraisalController {
 		final int userHighestPositiveMarkInGenre = userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
 		form.setUserHighestPositiveMarkInGenre( userHighestPositiveMarkInGenre );
 
-		form.setCustomButtonText( translatorService.translate( "Custom mark set", language ) );
-		form.setCustomButtonTitle( translatorService.translate( "Appraise the photo with custom marks", language ) );
+		form.setCustomButtonText( translatorService.translate( "Photo appraisal: Custom mark set", language ) );
+		form.setCustomButtonTitle( translatorService.translate( "Photo appraisal: Appraise the photo with custom marks", language ) );
 
-		form.setExcellentButtonText( translatorService.translate( "Excellent ( +$1 )", getLanguage(), String.valueOf( userHighestPositiveMarkInGenre ) ) );
-		form.setExcellentButtonTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks ( +$1 )", language, String.valueOf( userHighestPositiveMarkInGenre ) ) );
+		form.setExcellentButtonText( translatorService.translate( "Photo appraisal: Excellent ( +$1 )", getLanguage(), String.valueOf( userHighestPositiveMarkInGenre ) ) );
+		form.setExcellentButtonTitle( translatorService.translate( "Photo appraisal: Appraise the photo with maximum accessible for you marks ( +$1 )", language, String.valueOf( userHighestPositiveMarkInGenre ) ) );
 
-		form.setGoodButtonText( translatorService.translate( "Good ( +2 )", getLanguage() ) ); // TODO: '2' is hardcoded!
-		form.setGoodButtonTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks ( +2 )", language ) );
+		final int goodMark = 2; // TODO: '2' is hardcoded!
+		form.setGoodButtonText( translatorService.translate( "Photo appraisal: Good ( +$1 )", getLanguage(), String.valueOf( goodMark ) ) ); // TODO: '2' is hardcoded!
+		form.setGoodButtonTitle( translatorService.translate( "Photo appraisal: Button Good title ( +$1 )", language, String.valueOf( goodMark ) ) );
 
 		return form;
 	}

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Photo appraisal: You can not appraise the photo</nerd>
+		<ru><![CDATA[Вы не можете оценить работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: You has already make appraise at $1</nerd>
+		<ru><![CDATA[Вы уже оценивали эту работу $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Appraise the photo</nerd>
+		<ru><![CDATA[Оцените работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Custom mark set</nerd>
+		<ru><![CDATA[Ваша оценка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Appraise the photo with custom marks</nerd>
+		<ru><![CDATA[Оценить работу согласно оценок в форме голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Excellent ( +$1 )</nerd>
+		<ru><![CDATA[Отлично( +$1 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Appraise the photo with maximum accessible for you marks ( +$1 )</nerd>
+		<ru><![CDATA[Оценить работу максимально высокими оценками( +$1 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Good ( +$1 )</nerd>
+		<ru><![CDATA[Хорошо( +$1 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Button Good title ( +$1 )</nerd>
+		<ru><![CDATA[Оценить работу средники оценками( +$1 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
