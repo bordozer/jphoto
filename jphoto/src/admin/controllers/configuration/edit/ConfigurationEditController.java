@@ -97,7 +97,7 @@ public class ConfigurationEditController {
 		model.setBindingResult( null );
 
 		final String tab = request.getParameter( "tab" );
-		final ConfigurationTab configurationTab = ConfigurationTab.getByKey( tab );
+		final ConfigurationTab configurationTab = tab == null ? ConfigurationTab.getDefaultConfigurationTab() : ConfigurationTab.getByKey( tab );
 
 		final SystemConfiguration systemConfiguration = systemConfigurationLoadService.load( systemConfigurationId );
 		if ( systemConfiguration == null ) {

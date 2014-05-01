@@ -36,6 +36,10 @@ public enum ConfigurationTab {
 		return name;
 	}
 
+	public static ConfigurationTab getDefaultConfigurationTab() {
+		return SYSTEM;
+	}
+
 	public static ConfigurationTab getByKey( final String tab ) {
 		for ( final ConfigurationTab configurationTab : ConfigurationTab.values() ) {
 			if ( configurationTab.getKey().equals( tab ) ) {
