@@ -19,7 +19,6 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -31,7 +30,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Lists.newArrayListWithExpectedSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "photos/{photoId}" )
@@ -220,14 +218,13 @@ public class PhotoAppraisalController {
 
 		final int userHighestPositiveMarkInGenre = userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
 
-		final List<String> texts = newArrayList();
-		for ( int i = 0; i < categoriesCount; i++ ) {
-			texts.add( String.format( "+%1$d", userHighestPositiveMarkInGenre ) );
-		}
-		form.setMaxAppraisalText( StringUtils.join( texts, " " ) );
-		form.setUserHighestPositiveMarkInGenre( userHighestPositiveMarkInGenre );
+		form.setGoodButtonText( translatorService.translate( "Good ( +2 )", getLanguage() ) ); // TODO: '2' is hardcoded!
+		form.setGoodButtonTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks ( +2 )", language ) );
 
-		form.setMaxAppraisalTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks", language ) );
+		form.setExcellentButtonText( translatorService.translate( "Excellent ( +$1 )", getLanguage(), String.valueOf( userHighestPositiveMarkInGenre ) ) );
+		form.setExcellentButtonTitle( translatorService.translate( "Appraise the photo with maximum accessible for you marks ( +$1 )", language, String.valueOf( userHighestPositiveMarkInGenre ) ) );
+
+		form.setUserHighestPositiveMarkInGenre( userHighestPositiveMarkInGenre );
 
 		return form;
 	}

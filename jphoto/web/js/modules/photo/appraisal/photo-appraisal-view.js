@@ -13,7 +13,8 @@ define( ["backbone", "jquery", "underscore"
 		events: {
 			"change .photo-appraisal-category-select": "onCategoryChange",
 			"click .appraise-button": "onAppraise",
-			"click .appraise-button-max": "onAppraiseMax"
+			"click .excellent-button": "onExcellentButtonClick",
+			"click .good-button": "onGoodButtonClick"
 		},
 
 		initialize: function() {
@@ -36,8 +37,13 @@ define( ["backbone", "jquery", "underscore"
 			this.saveAppraisal();
 		},
 
-		doAppraiseThePhotoWithMaxMarks: function() {
+		appriseThePhoto_Excellent: function() {
 			this.bindModel( this.model.get( 'photoAppraisalForm' )[ 'userHighestPositiveMarkInGenre' ] );
+			this.saveAppraisal();
+		},
+
+		appriseThePhoto_Good: function() {
+			this.bindModel( 2 );
 			this.saveAppraisal();
 		},
 
@@ -94,10 +100,16 @@ define( ["backbone", "jquery", "underscore"
 			this.doAppraiseThePhoto();
 		},
 
-		onAppraiseMax: function( evt ) {
+		onExcellentButtonClick: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
-			this.doAppraiseThePhotoWithMaxMarks();
+			this.appriseThePhoto_Excellent();
+		},
+
+		onGoodButtonClick: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+			this.appriseThePhoto_Good();
 		}
 	});
 
