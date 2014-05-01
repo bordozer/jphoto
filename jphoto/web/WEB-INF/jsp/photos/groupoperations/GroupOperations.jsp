@@ -29,6 +29,12 @@
 
 <tags:page pageModel="${photoGroupOperationModel.pageModel}">
 
+	<script type="text/javascript">
+		function toggleCheckbox( photoId ) {
+			$( ".checkbox-" + photoId ).trigger( 'click' );
+		}
+	</script>
+
 	<div style="width: 98%; margin-left: 50px;">
 
 		<form:form modelAttribute="photoGroupOperationModel" action="${eco:baseUrl()}/photos/groupOperations/confirm/">
@@ -43,7 +49,7 @@
 
 					<div class="block-border" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
-						<div class="floatleft text-centered" style="height: auto; min-height: 230px;">
+						<div class="floatleft text-centered" style="height: auto; min-height: 230px;" onclick="toggleCheckbox( '${photo.id}' );">
 
 							<links:photoCard id="${photo.id}">
 								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${photo.nameEscaped}"/>
@@ -66,7 +72,7 @@
 								<c:if test="${photoGroupOperationEntryProperty.photoId == photo.id}">
 									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${photoGroupOperationEntryProperty.entryId}'].value"/>
 
-									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> /> ${photoGroupOperationEntryProperty.name} <br />
+									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> /> ${photoGroupOperationEntryProperty.name} <br />
 									<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
 								</c:if>
 							</c:forEach>
