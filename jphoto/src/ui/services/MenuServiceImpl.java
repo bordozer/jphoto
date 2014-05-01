@@ -243,8 +243,8 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( jobsMenu() );
 		menuItems.add( schedulerMenu() );
 		menuItems.add( genresMenu() );
-		menuItems.add( anonymousDaysMenu() );
 		menuItems.add( votingCategoriesMenu() );
+		menuItems.add( anonymousDaysMenu() );
 		menuItems.add( translatorMenu() );
 		menuItems.add( reloadTranslatorMenu() );
 		menuItems.add( controlPanelMenu() );
