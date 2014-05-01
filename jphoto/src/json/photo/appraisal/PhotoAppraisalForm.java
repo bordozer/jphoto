@@ -6,14 +6,14 @@ public class PhotoAppraisalForm {
 
 	private List<AppraisalSection> appraisalSections;
 
-	private String appraisalText;
-	private String appraisalTitle;
-
-	private String excellentButtonText;
-	private String excellentButtonTitle;
+	private String customButtonText;
+	private String customButtonTitle;
 
 	private String goodButtonText;
 	private String goodButtonTitle;
+
+	private String excellentButtonText;
+	private String excellentButtonTitle;
 
 	private int userHighestPositiveMarkInGenre;
 
@@ -25,20 +25,20 @@ public class PhotoAppraisalForm {
 		return appraisalSections;
 	}
 
-	public String getAppraisalText() {
-		return appraisalText;
+	public String getCustomButtonText() {
+		return customButtonText;
 	}
 
-	public void setAppraisalText( final String appraisalText ) {
-		this.appraisalText = appraisalText;
+	public void setCustomButtonText( final String customButtonText ) {
+		this.customButtonText = customButtonText;
 	}
 
-	public String getAppraisalTitle() {
-		return appraisalTitle;
+	public String getCustomButtonTitle() {
+		return customButtonTitle;
 	}
 
-	public void setAppraisalTitle( final String appraisalTitle ) {
-		this.appraisalTitle = appraisalTitle;
+	public void setCustomButtonTitle( final String customButtonTitle ) {
+		this.customButtonTitle = customButtonTitle;
 	}
 
 	public String getExcellentButtonText() {

@@ -12,7 +12,7 @@ define( ["backbone", "jquery", "underscore"
 
 		events: {
 			"change .photo-appraisal-category-select": "onCategoryChange",
-			"click .appraise-button": "onAppraise",
+			"click .custom-marks-button": "onCustomMarksButtonClick",
 			"click .excellent-button": "onExcellentButtonClick",
 			"click .good-button": "onGoodButtonClick"
 		},
@@ -43,7 +43,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		appriseThePhoto_Good: function() {
-			this.bindModel( 2 );
+			this.bindModel( 2 ); // TODO: '2' is hardcoded!
 			this.saveAppraisal();
 		},
 
@@ -94,7 +94,7 @@ define( ["backbone", "jquery", "underscore"
 			this.categoryChange( evt.target );
 		},
 
-		onAppraise: function( evt ) {
+		onCustomMarksButtonClick: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 			this.doAppraiseThePhoto();
