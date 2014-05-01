@@ -5,6 +5,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
@@ -59,6 +60,14 @@
 			</div>
 
 		</c:forEach>
+
+		<div class="floatleft">
+			<c:if test="${totalPhotos > 0}">
+				<photo:photoAllBestLink linkToFullList="${photoList.linkToFullList}" linkToFullListText="${eco:translate(photoList.linkToFullListText)}" />
+			</c:if>
+
+			<photo:photoListBottomText bottomText="${photoList.bottomText}" photosCriteriasDescription="${photoList.photosCriteriasDescription}" />
+		</div>
 
 	</div>
 
