@@ -66,7 +66,7 @@
 	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? '#'.concat(photo.bgColor) : 'transparent'};">
 
 		<div style="width: ${dimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
-			<a href="${imageUrl}" data-lightbox="image-${photo.id}" data-title="${photo.nameEscaped}">
+			<a href="#" onclick="return false;">
 				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${dimension.width}" height="${dimension.height}"/>
 			</a>
 		</div>
