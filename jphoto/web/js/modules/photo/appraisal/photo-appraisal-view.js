@@ -182,11 +182,11 @@ define( ["backbone", "jquery", "underscore"
 
 			var container = $( '<div></div>' );
 
-			var header = $( "<div class='block-background block-border block-shadow' style='padding: 7px; border-radius: 7px 7px 0 0'></div>" );
+			var header = $( "<div class='block-background block-border' style='padding: 7px; border-radius: 7px 7px 0 0'></div>" );
 			header.html( "<div class='separatorInfo base-font-color'>" + this.model.get( 'appraisalBlockTitle' ) + "</div>" );
 			container.html( header );
 
-			var body = $( "<div class='floatleft block-border' style='width: 418px; height: auto;'></div>" );
+			var body = $( "<div class='floatleft block-background block-border' style='width: 418px; height: auto;'></div>" );
 			body.html( view.render().$el );
 
 			container.append( body );
