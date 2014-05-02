@@ -27,6 +27,7 @@
 <c:set var="userMembershipIdControl" value="<%=PhotosImportModel.USER_MEMBERSHIP_ID_FORM_CONTROL%>"/>
 <c:set var="pageQtyControl" value="<%=PhotosImportModel.ACTIONS_QTY_FORM_CONTROL%>"/>
 <c:set var="importCommentsControl" value="<%=PhotosImportModel.IMPORT_COMMENTS_FORM_CONTROL%>"/>
+<c:set var="breakImportIfAlreadyImportedPhotoFoundControl" value="<%=PhotosImportModel.BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND_FORM_CONTROL%>"/>
 <c:set var="photosightCategoriesControl" value="<%=PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL%>"/>
 <c:set var="delayBetweenRequestControl" value="<%=PhotosImportModel.DELAY_BETWEEN_REQUEST_FORM_CONTROL%>"/>
 
@@ -156,13 +157,6 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Import comments"/>
-										<table:td>
-											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
-										</table:td>
-									</table:tr>
-
-									<table:tr>
 										<table:td colspan="2" >
 											<js:checkboxMassChecker checkboxClass="photosight-category-nude" initiallyChecked="${photosImportModel.photosightImport_importNudeContentByDefault}" /> ${eco:translate('Nude categories')}
 											&nbsp;&nbsp;
@@ -179,6 +173,20 @@
 													</div>
 												</c:forEach>
 											<%--</div>--%>
+										</table:td>
+									</table:tr>
+
+									<table:tr>
+										<table:tdtext text_t="Import comments"/>
+										<table:td>
+											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
+										</table:td>
+									</table:tr>
+
+									<table:tr>
+										<table:tdtext text_t="Break current photosight user's photos import if already imported photo found"/>
+										<table:td>
+											<form:checkbox path="${breakImportIfAlreadyImportedPhotoFoundControl}" itemValue="true"/>
 										</table:td>
 									</table:tr>
 
@@ -246,7 +254,11 @@
 
 			$( document ).ready( function () {
 				setFormsVisibility();
-				renderPhotosightUserInfo();
+
+				var type = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
+				if ( type == ${photosightImportId} ) {
+					renderPhotosightUserInfo();
+				}
 			} );
 		});
 

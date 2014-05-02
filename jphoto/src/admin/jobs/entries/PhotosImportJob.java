@@ -127,6 +127,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final UserGender userGender = UserGender.getById( jobParameters.get( SavedJobParameterKey.USER_GENDER_ID ).getValueInt() );
 				final UserMembershipType membershipType = UserMembershipType.getById( jobParameters.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValueInt() );
 				final boolean importComments = jobParameters.get( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS ).getValueBoolean();
+				final boolean breakImportIfAlreadyImportedPhotoFound = jobParameters.get( SavedJobParameterKey.BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND ).getValueBoolean();
 				final int delayBetweenRequest = jobParameters.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueInt();
 				final int pageQty = jobParameters.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValueInt();
 
@@ -137,7 +138,8 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					}
 				} );
 
-				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty, getLanguage(), photosightCategories );
+				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories );
 
 				break;
 			default:

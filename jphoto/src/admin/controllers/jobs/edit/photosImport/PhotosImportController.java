@@ -139,6 +139,7 @@ public class PhotosImportController extends DateRangableController {
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
 
 		aModel.setImportComments( true );
+		aModel.setBreakImportIfAlreadyImportedPhotoFound( true );
 
 		final List<PhotosightCategory> categoryList = newArrayList( Arrays.asList( PhotosightCategory.values() ) );
 
@@ -257,7 +258,8 @@ public class PhotosImportController extends DateRangableController {
 				} );
 				job.setPhotosightCategories( categoryList );
 
-				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), categoryList );
+				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests
+					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

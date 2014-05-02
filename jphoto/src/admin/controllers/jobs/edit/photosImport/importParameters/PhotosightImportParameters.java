@@ -17,9 +17,11 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 	private final int delayBetweenRequest;
 	private final int pageQty;
 
+	private final boolean breakImportIfAlreadyImportedPhotoFound;
+
 	private List<PhotosightCategory> photosightCategories;
 
-	public PhotosightImportParameters( final List<Integer> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final List<PhotosightCategory> photosightCategories ) {
+	public PhotosightImportParameters( final List<Integer> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories ) {
 		super( language );
 		this.photosightUserIds = photosightUserIds;
 		this.userName = userName;
@@ -28,6 +30,7 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 		this.importComments = importComments;
 		this.delayBetweenRequest = delayBetweenRequest;
 		this.pageQty = pageQty;
+		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
 		this.photosightCategories = photosightCategories;
 	}
 
@@ -65,5 +68,9 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 
 	public List<PhotosightCategory> getPhotosightCategories() {
 		return photosightCategories;
+	}
+
+	public boolean isBreakImportIfAlreadyImportedPhotoFound() {
+		return breakImportIfAlreadyImportedPhotoFound;
 	}
 }

@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.jobs.entries.AbstractJob;
+import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
@@ -28,6 +29,7 @@ import utils.StringUtilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,7 +101,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				continue; // can not load page - just skipping
 			}
 
-			final List<Integer> photosightPagePhotosIds = extractUserPhotosIds( userPageContent );
+			final List<Integer> photosightPagePhotosIds = extractUserPhotosIdsFromPage( userPageContent );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -120,7 +122,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final List<PhotosightPhoto> photosightPagePhotos = getPhotosightPhotosToImport( photosightUser, photosightPagePhotosIds, cachedLocallyPhotosightPhotos, user );
+			final PhotosightPhotosFromPageToImport photosightPhotosToImport = getPhotosightPhotosToImport( photosightUser, photosightPagePhotosIds, cachedLocallyPhotosightPhotos, user );
+			final List<PhotosightPhoto> photosightPagePhotos = photosightPhotosToImport.getPhotosightPhotos();
 
 			filterDownloadedPhotosByPhotosightCategories( photosightPagePhotos );
 
@@ -147,6 +150,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				importComments( entries );
 			}
 
+			if ( photosightPhotosToImport.isBreakImportAfterThisPageProcessed() ) {
+				job.increment( userPagesQty - page + 1 );
+				return;
+			}
+
 			page++;
 			job.increment();
 		}
@@ -171,7 +179,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		return photosightPhotosOnDisk;
 	}
 
-	private List<PhotosightPhoto> getPhotosightPhotosToImport( final PhotosightUser photosightUser, final List<Integer> photosightPagePhotosIds, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos, final User user ) throws IOException {
+	private PhotosightPhotosFromPageToImport getPhotosightPhotosToImport( final PhotosightUser photosightUser, final List<Integer> photosightPagePhotosIds, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos, final User user ) throws IOException {
 		final List<PhotosightPhoto> photosightPagePhotos = newArrayList();
 
 		for ( final int photosightPhotoId : photosightPagePhotosIds ) {
@@ -194,6 +202,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 					.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
+
+				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
+					// break photos import of this photosight user
+					return new PhotosightPhotosFromPageToImport( photosightPagePhotos, true );
+				}
 
 				continue;
 			}
@@ -231,7 +244,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		}
 
-		return photosightPagePhotos;
+		return new PhotosightPhotosFromPageToImport( photosightPagePhotos, false );
 	}
 
 	private List<PhotosightPhotoOnDisk> getCachedPhotosightPhotosOnDisk( final List<PhotosightPhoto> photosightPagePhotos ) throws IOException {
@@ -425,7 +438,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		return String.format( "%s%d", PHOTOSIGHT_USER_LOGIN_PREFIX, photosightUserId );
 	}
 
-	private List<Integer> extractUserPhotosIds( final String userPageContent ) {
+	private List<Integer> extractUserPhotosIdsFromPage( final String userPageContent ) {
 		final List<Integer> result = newArrayList();
 
 		final Pattern pattern = Pattern.compile( PhotosightContentDataExtractor.getPhotoIdRegex() );
@@ -650,6 +663,25 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		return null;
+	}
+
+	private class PhotosightPhotosFromPageToImport {
+
+		private final List<PhotosightPhoto> photosightPhotos;
+		private final boolean breakImportAfterThisPageProcessed;
+
+		private PhotosightPhotosFromPageToImport( final List<PhotosightPhoto> photosightPhotos, final boolean breakImportAfterThisPageProcessed ) {
+			this.photosightPhotos = photosightPhotos;
+			this.breakImportAfterThisPageProcessed = breakImportAfterThisPageProcessed;
+		}
+
+		public List<PhotosightPhoto> getPhotosightPhotos() {
+			return photosightPhotos;
+		}
+
+		public boolean isBreakImportAfterThisPageProcessed() {
+			return breakImportAfterThisPageProcessed;
+		}
 	}
 }
 

@@ -34,6 +34,7 @@ public class PhotosImportModel extends DateRangableModel {
 	public final static String USER_GENDER_ID_FORM_CONTROL = "userGenderId";
 	public final static String USER_MEMBERSHIP_ID_FORM_CONTROL = "userMembershipId";
 	public final static String IMPORT_COMMENTS_FORM_CONTROL = "importComments";
+	public final static String BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND_FORM_CONTROL = "breakImportIfAlreadyImportedPhotoFound";
 	public static final String PHOTOSIGHT_CATEGORIES_FORM_CONTROL = "photosightCategories";
 
 	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
@@ -44,6 +45,7 @@ public class PhotosImportModel extends DateRangableModel {
 	private String userGenderId;
 	private String userMembershipId;
 	private boolean importComments;
+	private boolean breakImportIfAlreadyImportedPhotoFound;
 	private String delayBetweenRequest;
 	private List<String> photosightCategories;
 
@@ -152,6 +154,14 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setImportComments( final boolean importComments ) {
 		this.importComments = importComments;
+	}
+
+	public boolean isBreakImportIfAlreadyImportedPhotoFound() {
+		return breakImportIfAlreadyImportedPhotoFound;
+	}
+
+	public void setBreakImportIfAlreadyImportedPhotoFound( final boolean breakImportIfAlreadyImportedPhotoFound ) {
+		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
 	}
 
 	public String getDelayBetweenRequest() {

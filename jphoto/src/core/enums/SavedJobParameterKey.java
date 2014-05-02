@@ -30,7 +30,7 @@ public enum SavedJobParameterKey {
 	, DAYS( 27 )
 	, ENTRY_TYPES( 28 )
 	, PHOTOSIGHT_CATEGORIES( 29 )
-	;
+	, BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND( 30 );
 
 	private final int id;
 
