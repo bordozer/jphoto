@@ -190,6 +190,17 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			if ( getServices().getJobHelperService().doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
 
+				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
+					final TranslatableMessage message1 = new TranslatableMessage( "Already imported photo #$1 found. Skipping the import of the rest photos of $2", getServices() )
+						.addIntegerParameter( photosightPhotoId )
+						.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+						;
+
+					job.addJobRuntimeLogMessage( message1 );
+
+					return new PhotosightPhotosFromPageToImport( photosightPagePhotos, true );
+				}
+
 				final String message = services.getTranslatorService().translate( "Photo $1 of $2 has already been imported"
 					, language
 					, String.valueOf( photosightPhotoId )
@@ -202,11 +213,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 					.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
-
-				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
-					// break photos import of this photosight user
-					return new PhotosightPhotosFromPageToImport( photosightPagePhotos, true );
-				}
 
 				continue;
 			}
