@@ -100,22 +100,6 @@ public abstract class AbstractPhotoImportStrategy {
 		final File imageFile = imageDiscEntry.getImageFile();
 		photoService.uploadNewPhoto( photo, imageFile, photoTeam, albums );
 
-		/*final File photoFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( imageFile, photo, user );
-
-		if ( photoService.updatePhotoFileData( photo.getId(), photoFile ) ) {
-			try {
-				services.getPreviewGenerationService().generatePreviewSync( photo.getId() );
-			} catch ( final InterruptedException e ) {
-				final String message = String.format( "Error creating preview: %s ( %s )", photoFile.getCanonicalPath(), e.getMessage() );
-
-				log.error( message );
-
-				photo.setDescription( message );
-				photoService.save( photo ); // SAVE ERROR TO DESCRIPTION
-				// TODO: delete photo from DB because is has no file
-			}
-		}*/
-
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 
 		photoToImport.setPhoto( photo );

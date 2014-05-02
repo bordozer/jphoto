@@ -244,6 +244,10 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	@Override
 	public void clear() {
 		super.clear();
+
+		photoFile = null;
+		tempPhotoFile = null;
+
 		photo = null;
 		photoName = null;
 		photoDescription = null;

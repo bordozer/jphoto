@@ -199,7 +199,14 @@ public class PhotoEditDataController {
 		final Photo photo = new Photo();
 		initPhotoFromModel( photo, model );
 
-		photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), getPhotoTeam( photo, model.getUserTeamMemberIds() ), getPhotoAlbums( model.getPhotoAlbumIds() ) );
+		final PhotoTeam photoTeam = getPhotoTeam( photo, model.getUserTeamMemberIds() );
+		final List<UserPhotoAlbum> photoAlbums = getPhotoAlbums( model.getPhotoAlbumIds() );
+
+		if ( model.isNew() ) {
+			photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), photoTeam, photoAlbums );
+		} else {
+			photoService.save( photo, photoTeam, photoAlbums );
+		}
 
 		if ( model.isNew() ) {
 			return String.format( "redirect:%s", urlUtilsService.getPhotoCardLink( photo.getId() ) );

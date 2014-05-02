@@ -183,6 +183,21 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
+	public void save( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
+		if ( ! save( photo ) ) {
+			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
+		}
+
+		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
+			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
+		}
+
+		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
+			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
+		}
+	}
+
+	@Override
 	public Photo load( final int photoId ) {
 		return photoDao.load( photoId );
 	}
