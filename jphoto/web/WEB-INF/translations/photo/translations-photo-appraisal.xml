@@ -53,6 +53,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo appraisal: Your appraisal has been saved successfully</nerd>
+		<ru><![CDATA[Ваша оценка работы сохранена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: You are not the user who has loaded appraisal form. The user must have changed since then.</nerd>
+		<ru><![CDATA[Ошибка голосования. Неверный пользователь]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo appraisal: Select at least one pair of appraisal category and mark</nerd>
+		<ru><![CDATA[Выберите как минимум одну категорию голосования и установите вашу оценку]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

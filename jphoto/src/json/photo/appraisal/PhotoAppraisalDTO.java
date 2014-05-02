@@ -22,6 +22,7 @@ public class PhotoAppraisalDTO {
 
 	private List<PhotoAppraisalResult> photoAppraisalResults;
 	private String userCanNotAppraiseThePhotoText;
+	private String appraisalSaveCallbackMessage;
 
 	public int getUserId() {
 		return userId;
@@ -101,5 +102,13 @@ public class PhotoAppraisalDTO {
 
 	public String getUserCanNotAppraiseThePhotoText() {
 		return userCanNotAppraiseThePhotoText;
+	}
+
+	public void setAppraisalSaveCallbackMessage( final String appraisalSaveCallbackMessage ) {
+		this.appraisalSaveCallbackMessage = appraisalSaveCallbackMessage;
+	}
+
+	public String getAppraisalSaveCallbackMessage() {
+		return appraisalSaveCallbackMessage;
 	}
 }

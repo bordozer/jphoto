@@ -85,9 +85,12 @@ public class PhotoAppraisalController {
 		final Photo photo = photoService.load( photoId );
 		final User user = userService.load( appraisalDTO.getUserId() );
 
-		savePhotoAppraisal( user, photo, appraisalDTO ); // TODO: saving is here
+		savePhotoAppraisal( user, photo, appraisalDTO );
 
-		return getPhotoAppraisalDTO( photo, user );
+		final PhotoAppraisalDTO photoAppraisalDTO = getPhotoAppraisalDTO( photo, user );
+		photoAppraisalDTO.setAppraisalSaveCallbackMessage( translatorService.translate( "Photo appraisal: Your appraisal has been saved successfully", getLanguage() ) );
+
+		return photoAppraisalDTO;
 	}
 
 	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
@@ -187,7 +190,6 @@ public class PhotoAppraisalController {
 			return photoAppraisalDTO;
 		}
 
-//		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Appraise the photo", getLanguage() ) );
 		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;

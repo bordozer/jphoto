@@ -69,7 +69,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onAppraisalSave: function( response ){
-			showUIMessage_Notification( 'Your photo appraisal has been saved successfully' );
+			showUIMessage_Notification( this.model.get( 'appraisalSaveCallbackMessage' ) );
 		},
 
 		onAppraisalSaveError: function( response ){
