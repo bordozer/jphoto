@@ -23,8 +23,6 @@ var require = {
 		, superfish: "lib/superfish/js/superfish"
 		, superfish_hoverIntent: "lib/superfish/js/hoverIntent"
 
-		, lightbox: "lib/lightbox/lightbox"
-
 		, noty: "lib/noty-2.2.2/jquery.noty.packaged"
 		, noty_default: "lib/noty-2.2.2/themes/default"
 
@@ -54,9 +52,6 @@ var require = {
 			deps: [ 'jquery' ]
 		},
 
-		lightbox: {
-			deps: [ 'jquery' ]
-		},
 		context_menu: {
 			deps: [ 'jquery' ]
 		},
