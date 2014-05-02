@@ -36,8 +36,18 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 		final List<Integer> usersIds = getUsersIds();
 
 		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
-		final AbstractImportParameters importParameters = new PhotosightImportParameters( usersIds, "", UserGender.MALE, UserMembershipType.AUTHOR, true, 0, 0, getLanguage()
-			, false, photosightCategories );
+		final AbstractImportParameters importParameters = new PhotosightImportParameters(
+			usersIds
+			, ""
+			, UserGender.MALE
+			, UserMembershipType.AUTHOR
+			, true
+			, 0
+			, 0
+			, getLanguage()
+			, true
+			, photosightCategories
+		);
 
 		final AbstractPhotoImportStrategy importStrategy = new PhotosightImportStrategy( this, importParameters, services );
 
