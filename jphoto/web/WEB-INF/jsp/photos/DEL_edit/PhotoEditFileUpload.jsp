@@ -22,7 +22,7 @@
 
 	<h3>${eco:translate(photoEditDataModel.currentStep.stepDescription)}</h3>
 
-	<photo:photoAllowance uploadAllowance="${uploadAllowance}" />
+	<%--<photo:photoAllowance uploadAllowance="${uploadAllowance}" />--%>
 
 	<eco:form action="${eco:baseUrl()}/photos/save/" multipartForm="true">
 

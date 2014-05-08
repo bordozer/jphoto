@@ -7,7 +7,7 @@ import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import org.springframework.web.multipart.MultipartFile;
-import ui.controllers.photos.DEL_edit.description.AbstractPhotoUploadAllowance;
+import json.photo.upload.description.AbstractPhotoUploadAllowance;
 import ui.services.validation.DataRequirementService;
 import ui.translatable.GenericTranslatableList;
 

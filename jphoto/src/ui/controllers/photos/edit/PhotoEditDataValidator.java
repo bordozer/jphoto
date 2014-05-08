@@ -3,7 +3,6 @@ package ui.controllers.photos.edit;
 import core.general.configuration.ConfigurationKey;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
-import core.services.utils.ImageFileUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;

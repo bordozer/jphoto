@@ -25,7 +25,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

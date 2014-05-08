@@ -1,4 +1,4 @@
-package ui.controllers.photos.DEL_edit.description;
+package json.photo.upload.description;
 
 public class PhotoUploadDescription {
 

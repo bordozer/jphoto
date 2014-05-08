@@ -112,7 +112,7 @@
 	<c:if test="${isNew}">
 		<h3>${eco:translate(photoEditDataModel.currentStep.stepDescription)}</h3>
 
-		<photo:photoAllowance uploadAllowance="${uploadAllowance}" />
+		<%--<photo:photoAllowance uploadAllowance="${uploadAllowance}" />--%>
 	</c:if>
 
 	<script type="text/javascript" src="${eco:baseUrl()}/js/lib/colorpicker/jscolor.js"></script>

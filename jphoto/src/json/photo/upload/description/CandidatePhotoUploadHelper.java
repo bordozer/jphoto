@@ -1,4 +1,4 @@
-package ui.controllers.photos.DEL_edit.description;
+package json.photo.upload.description;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
