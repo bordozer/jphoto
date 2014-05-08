@@ -4,9 +4,9 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserStatus;
 
-public class CandidatePhotoUploadHelper extends AbstractPhotoUploadAllowance {
+public class CandidatePhotoUploadAllowance extends AbstractPhotoUploadAllowance {
 
-	public CandidatePhotoUploadHelper( final User user, final User accessor ) {
+	public CandidatePhotoUploadAllowance( final User user, final User accessor ) {
 		super( user, accessor );
 	}
 

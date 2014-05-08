@@ -11,9 +11,9 @@ public class UploadDescriptionFactory {
 
 		switch ( userStatus ) {
 			case CANDIDATE:
-				return new CandidatePhotoUploadHelper( user, accessor );
+				return new CandidatePhotoUploadAllowance( user, accessor );
 			case MEMBER:
-				return new MemberPhotoUploadHelper( user, accessor );
+				return new MemberPhotoUploadAllowance( user, accessor );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal user status: %s", userStatus ) );

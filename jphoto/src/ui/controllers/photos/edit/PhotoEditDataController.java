@@ -134,12 +134,16 @@ public class PhotoEditDataController {
 	@RequestMapping( method = RequestMethod.POST, value = "/new/" )
 	public String photoUploaded( final @ModelAttribute( MODEL_NAME ) PhotoEditDataModel model, final BindingResult result/*, final PhotoEditFileValidator photoEditFileValidator*/ ) throws IOException {
 
+		/*
+		// TODO: uncomment validation!!! -->
 		photoEditFileValidator.validate( model, result );
 		model.setBindingResult( result );
 
 		if ( result.hasErrors() ) {
 			return VIEW_UPLOAD_FILE;
 		}
+		// TODO: uncomment validation!!! <--
+		*/
 
 		final MultipartFile photoFile = model.getPhotoFile();
 		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );

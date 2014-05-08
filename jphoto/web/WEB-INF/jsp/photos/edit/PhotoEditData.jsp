@@ -4,6 +4,7 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -36,6 +37,28 @@
 
 						</table:td>
 					</table:tr>
+
+					<table:tr>
+						<table:td>
+							<div class="photo-upload-allowance">
+								<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
+							</div>
+
+							<script type="text/javascript">
+
+								renderPhotos( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
+
+								function renderPhotos( userId, genreId ) {
+									require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
+											photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
+									} );
+								}
+
+							</script>
+
+						</table:td>
+					</table:tr>
+
 				</table:table>
 			</div>
 
