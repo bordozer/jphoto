@@ -44,7 +44,12 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		int emptyIterations = 0;
 		while ( !isFinished() ) {
 
-			final Photo photo = randomUtilsService.getRandomPhotoIds( beingProcessedPhotosIds );
+			final Photo photo = randomUtilsService.getRandomPhotoId( beingProcessedPhotosIds );
+			if ( photo == null ) {
+				getLog().debug( String.format( "Random photo can not be found. Photos count: %s", beingProcessedPhotosIds.size() ) );
+				break;
+			}
+
 			final User actionCommitter = randomUtilsService.getRandomUser( beingProcessedUsers );
 
 			if ( doPhotoAction( photo, actionCommitter ) ) {
@@ -190,7 +195,7 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 				return;
 			}
 
-			final Photo randomPhotoFromLastVoted = randomUtilsService.getRandomPhotoIds( lastVotedPhotosIds );
+			final Photo randomPhotoFromLastVoted = randomUtilsService.getRandomPhotoId( lastVotedPhotosIds );
 			final int authorIdOfRandomPhotoFromLastVoted = randomPhotoFromLastVoted.getUserId();
 			final Photo randomPhoto = randomUtilsService.getRandomPhotoOfUser( authorIdOfRandomPhotoFromLastVoted );
 

@@ -35,7 +35,7 @@ public interface RandomUtilsService {
 
 	User getRandomUserButNotThisOne( final User exceptUser, final UserMembershipType exceptMembershipType, List<User> users );
 
-	Photo getRandomPhotoIds( final List<Integer> photosIds );
+	Photo getRandomPhotoId( final List<Integer> photosIds );
 
 	Photo getRandomPhoto( final List<Photo> photos );
 

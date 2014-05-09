@@ -125,7 +125,7 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 				break;
 			}
 
-			final Photo randomPhoto = getRandomPhotoIds( photosIds );
+			final Photo randomPhoto = getRandomPhotoId( photosIds );
 			if ( ! securityService.userOwnThePhoto( exceptUser, randomPhoto ) ) {
 				return randomPhoto;
 			}
@@ -174,8 +174,13 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 	}
 
 	@Override
-	public Photo getRandomPhotoIds( final List<Integer> photosIds ) {
-		final int randomPhotoId = getRandomGenericListElement( photosIds );
+	public Photo getRandomPhotoId( final List<Integer> photosIds ) {
+		final Integer randomPhotoId = getRandomGenericListElement( photosIds );
+
+		if ( randomPhotoId == null ) {
+			return null;
+		}
+
 		return photoService.load( randomPhotoId );
 	}
 
@@ -186,12 +191,12 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 	@Override
 	public Photo getRandomPhotoOfUser( final int userId ) {
-		return getRandomPhotoIds( photoService.getUserPhotosIds( userId ) );
+		return getRandomPhotoId( photoService.getUserPhotosIds( userId ) );
 	}
 
 	@Override
 	public  <T> T getRandomGenericListElement( final List<T> items ) {
-		if ( items.size() == 0 ) {
+		if ( items == null || items.size() == 0 ) {
 			return null;
 		}
 
