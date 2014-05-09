@@ -18,7 +18,7 @@
 
 <form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/photos/save/">
 
-	<table:table width="800px" border="0">
+	<table:table width="900px" border="0">
 
 		<table:separatorInfo colspan="2" title="${eco:translate('Photo data')}" />
 
@@ -45,13 +45,32 @@
 				<table:tdtext text_t="Photo uploading: Genre" labelFor="selectedGenreId" isMandatory="true"/>
 
 				<table:tddata>
-					<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
+
+					<div style="float: left;">
+						<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
 								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="23" cssClass="photo-genre"/>
+					</div>
+
+					<div class="photo-upload-allowance justify-font" style="float: left; margin-left: 10px; width: 320px;">
+						<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
+					</div>
+
 					<script type="text/javascript">
+
+						showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
+
+						function showPhotoAllowance( userId, genreId ) {
+							require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
+									photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
+							} );
+						}
+
 						function redrawPhotoAllowance() {
 							showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
 						}
+
 					</script>
+
 				</table:tddata>
 			</table:tredit>
 

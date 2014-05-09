@@ -7,10 +7,7 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.menu.EntryMenuService;
-import core.services.photo.PhotoCommentService;
-import core.services.photo.PhotoRatingService;
-import core.services.photo.PhotoService;
-import core.services.photo.PhotoVotingService;
+import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -149,6 +146,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private PhotoUploadService photoUploadService;
 
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -363,6 +363,11 @@ public class ServicesImpl implements Services {
 		return translatorService;
 	}
 
+	@Override
+	public PhotoUploadService getPhotoUploadService() {
+		return photoUploadService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -534,6 +539,10 @@ public class ServicesImpl implements Services {
 
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
+	}
+
+	public void setPhotoUploadService( final PhotoUploadService photoUploadService ) {
+		this.photoUploadService = photoUploadService;
 	}
 
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {

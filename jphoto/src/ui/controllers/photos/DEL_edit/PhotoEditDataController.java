@@ -166,7 +166,7 @@ public class PhotoEditDataController {
 		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( currentUser ) );    // From user defaults
 		setAccessibleAllowances( model );
 
- 		setPhotoUploadAllowance( model );
+// 		setPhotoUploadAllowance( model );
 
 		initUserTeamMembers( model );
 
@@ -227,7 +227,7 @@ public class PhotoEditDataController {
 		model.setNextStep( PhotoEditWizardStep.PHOTO_SAVING );
 		model.setGenre( genreService.load( model.getGenreId() ) );
 
-		setPhotoUploadAllowance( model );
+//		setPhotoUploadAllowance( model );
 
 		final List<UserTeamMember> photoTeamMembers = newArrayList();
 		final List<String> photoTeamMemberIds = model.getPhotoTeamMemberIds();
@@ -402,8 +402,8 @@ public class PhotoEditDataController {
 			model.setUserPhotoAlbums( userPhotoAlbumService.loadAllForEntry( EnvironmentContext.getCurrentUser().getId() ) );
 	}
 
-	private void setPhotoUploadAllowance( final PhotoEditDataModel model ) {
-		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( model.getPhotoAuthor(), EnvironmentContext.getCurrentUser() );
+	/*private void setPhotoUploadAllowance( final PhotoEditDataModel model ) {
+		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( model.getPhotoAuthor(), services, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage() );
 
 		uploadAllowance.setConfigurationService( configurationService );
 		uploadAllowance.setPhotoUploadService( photoUploadService );
@@ -416,7 +416,7 @@ public class PhotoEditDataController {
 		uploadAllowance.setGenre( model.getGenre() );
 
 		model.setUploadAllowance( uploadAllowance );
-	}
+	}*/
 
 	private void initModelFromPhoto( final PhotoEditDataModel model, final Photo photo ) {
 		model.setPhotoAuthor( EnvironmentContext.getCurrentUser() );

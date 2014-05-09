@@ -16,9 +16,16 @@ define( ["backbone", "jquery", "underscore"
 			el.html( '' );
 
 			_.each( this.model.get( 'photoUploadAllowance' ), function( allowance ) {
-				el.append( '&nbsp;&nbsp;' );
-				el.append( allowance[ 'uploadRuleDescription' ] );
-				el.append( '<br />' );
+
+				var div = $( "<div style='float: left; width: 99%; margin-bottom: 10px;'></div>" );
+
+				if ( ! allowance[ 'passed' ] ) {
+					div.addClass( 'redfont' );
+				}
+
+				div.html( '&nbsp;&nbsp;' + allowance[ 'uploadRuleDescription' ] );
+
+				el.append( div );
 			});
 		}
 	});

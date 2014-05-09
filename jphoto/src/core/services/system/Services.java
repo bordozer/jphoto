@@ -7,10 +7,7 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.menu.EntryMenuService;
-import core.services.photo.PhotoCommentService;
-import core.services.photo.PhotoRatingService;
-import core.services.photo.PhotoService;
-import core.services.photo.PhotoVotingService;
+import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -107,5 +104,7 @@ public interface Services {
 
 	TranslatorService getTranslatorService();
 
-//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
+	PhotoUploadService getPhotoUploadService();
+
+	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

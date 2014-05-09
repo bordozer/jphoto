@@ -5,13 +5,10 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserStatus;
-import core.services.photo.PhotoUploadService;
-import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
-import core.services.user.UserRankService;
-import core.services.utils.DateUtilsService;
-import core.services.utils.ImageFileUtilsService;
+import core.services.translator.message.TranslatableMessage;
 
 import java.util.Date;
 import java.util.List;
@@ -24,21 +21,12 @@ public abstract class AbstractPhotoUploadAllowance {
 	private User accessor;
 	private Genre genre;
 
+	protected Language language;
+	protected Services services;
+
 	private List<Photo> uploadThisWeekPhotos;
 	private boolean userCanUploadPhoto = true;
 	private Date nextPhotoUploadTime;
-
-	protected ConfigurationService configurationService;
-
-	protected PhotoUploadService photoUploadService;
-
-	private UserRankService userRankService;
-
-	private DateUtilsService dateUtilsService;
-
-	private ImageFileUtilsService imageFileUtilsService;
-
-	private TranslatorService translatorService;
 
 	public abstract UserStatus getUserStatus();
 
@@ -52,9 +40,11 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public abstract int getWeeklyLimitUploadSize();
 
-	public AbstractPhotoUploadAllowance( final User photoAuthor, final User accessor ) {
+	public AbstractPhotoUploadAllowance( final User photoAuthor, final User accessor, final Language language, final Services services ) {
 		this.photoAuthor = photoAuthor;
 		this.accessor = accessor;
+		this.language = language;
+		this.services = services;
 	}
 
 	public List<PhotoUploadDescription> getUploadAllowance() {
@@ -78,9 +68,15 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addMaxPhotoSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+
 		final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-		uploadDescription.setUploadRuleDescription( translatorService.translate( "Max photo's size you can upload is $1 $2.", accessor.getLanguage(), String.valueOf( getMaxPhotoSize() ), ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB.getUnit().getName() ) );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Max photo's size you can upload is $1 $2.", services )
+			.addIntegerParameter( getMaxPhotoSize() )
+			.translatableString( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB.getUnit().getName() )
+			;
+
+		uploadDescription.setUploadRuleDescription( translatableMessage.build( language ) );
 
 		photoUploadDescriptions.add( uploadDescription );
 	}
@@ -89,18 +85,18 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: today";
 		final String period2 = "photo uploading: day";
 		final int limitPhotosQty = getDailyLimitPhotosQty();
-		final List<Integer> uploadedPhotosIds = photoUploadService.getUploadedTodayPhotosIds( photoAuthor.getId() );
+		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedTodayPhotosIds( photoAuthor.getId() );
 
-		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), dateUtilsService.getFirstSecondOfTomorrow() );
+		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), services.getDateUtilsService().getFirstSecondOfTomorrow() );
 	}
 
 	private void addWeeklyPhotosQtyDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
 		final String period1 = "photo uploading: this week";
 		final String period2 = "photo uploading: week";
 		final int limitPhotosQty = getWeeklyLimitPhotosQty();
-		final List<Integer> uploadedPhotosIds = photoUploadService.getUploadedThisWeekPhotosIds( photoAuthor.getId() );
+		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedThisWeekPhotosIds( photoAuthor.getId() );
 
-		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), dateUtilsService.getFirstSecondOfNextMonday() );
+		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), services.getDateUtilsService().getFirstSecondOfNextMonday() );
 	}
 
 	private void addPhotoQtyLimitDescription( final List<PhotoUploadDescription> photoUploadDescriptions, final String period1, final String period2, final int limitPhotosQty, final int uploadedPhotosQty, final Date nextVotingTime ) {
@@ -112,6 +108,7 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final StringBuilder builder = new StringBuilder();
 
+			final TranslatorService translatorService = services.getTranslatorService();
 			final String period1_t = translatorService.translate( period1, language );
 			final String period2_t = translatorService.translate( period2, language );
 
@@ -139,18 +136,18 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: today";
 		final String period2 = "photo uploading: day";
 		final int uploadSizeLimit = getDailyLimitUploadSize();
-		final long uploadedSummarySize = photoUploadService.getUploadedTodayPhotosSummarySize( photoAuthor.getId() );
+		final long uploadedSummarySize = services.getPhotoUploadService().getUploadedTodayPhotosSummarySize( photoAuthor.getId() );
 
-		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, imageFileUtilsService.getFileSizeInKb( uploadedSummarySize ), dateUtilsService.getFirstSecondOfTomorrow() );
+		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, services.getImageFileUtilsService().getFileSizeInKb( uploadedSummarySize ), services.getDateUtilsService().getFirstSecondOfTomorrow() );
 	}
 
 	private void addWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
 		final String period1 = "photo uploading: week";
 		final String period2 = "photo uploading: this week";
 		final int uploadSizeLimit = getWeeklyLimitUploadSize();
-		final long uploadedSummarySize = photoUploadService.getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() );
+		final long uploadedSummarySize = services.getPhotoUploadService().getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() );
 
-		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, imageFileUtilsService.getFileSizeInKb( uploadedSummarySize ), dateUtilsService.getFirstSecondOfNextMonday() );
+		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, services.getImageFileUtilsService().getFileSizeInKb( uploadedSummarySize ), services.getDateUtilsService().getFirstSecondOfNextMonday() );
 	}
 
 	private void getPhotoSizeLimitDescription( final List<PhotoUploadDescription> photoUploadDescriptions, final String period1, final String period2, final int uploadSizeLimit, final float uploadedSummarySize, final Date nextVotingTime ) {
@@ -160,6 +157,7 @@ public abstract class AbstractPhotoUploadAllowance {
 			final StringBuilder builder = new StringBuilder();
 
 			final String unit = ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName();
+			final TranslatorService translatorService = services.getTranslatorService();
 			builder.append( translatorService.translate( "Your status' limit is $1 $2 per $3. ", accessor.getLanguage(), String.valueOf( uploadSizeLimit ), unit, period2 ) );
 			builder.append( translatorService.translate( "You uploaded $1 $2 $3. ", accessor.getLanguage(), String.valueOf( uploadedSummarySize ), unit, period1 ) );
 			if ( userCanUploadPhoto ) {
@@ -181,17 +179,18 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addAdditionalWeeklyKbByGenreDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final int additionalWeeklyLimitPerGenreRank = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
+		final int additionalWeeklyLimitPerGenreRank = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
 		if ( additionalWeeklyLimitPerGenreRank > 0 ) {
 
 			final Language language = accessor.getLanguage();
 
-			final int userRankInGenre = userRankService.getUserRankInGenre( photoAuthor.getId(), genre.getId() );
+			final int userRankInGenre = services.getUserRankService().getUserRankInGenre( photoAuthor.getId(), genre.getId() );
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
 			final StringBuilder builder = new StringBuilder();
 
+			final TranslatorService translatorService = services.getTranslatorService();
 			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", language, String.valueOf( additionalWeeklyLimitPerGenreRank ) ) );
 			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", language, translatorService.translateGenre( genre, language ), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
@@ -239,29 +238,5 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public Date getNextPhotoUploadTime() {
 		return nextPhotoUploadTime;
-	}
-
-	public void setConfigurationService( final ConfigurationService configurationService ) {
-		this.configurationService = configurationService;
-	}
-
-	public void setPhotoUploadService( final PhotoUploadService photoUploadService ) {
-		this.photoUploadService = photoUploadService;
-	}
-
-	public void setUserRankService( final UserRankService userRankService ) {
-		this.userRankService = userRankService;
-	}
-
-	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
-		this.dateUtilsService = dateUtilsService;
-	}
-
-	public void setImageFileUtilsService( final ImageFileUtilsService imageFileUtilsService ) {
-		this.imageFileUtilsService = imageFileUtilsService;
-	}
-
-	public void setTranslatorService( final TranslatorService translatorService ) {
-		this.translatorService = translatorService;
 	}
 }

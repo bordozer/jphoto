@@ -5,6 +5,7 @@ import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoUploadService;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
@@ -28,25 +29,13 @@ public class PhotoUploadAllowanceController {
 	private UserService userService;
 
 	@Autowired
-	private ConfigurationService configurationService;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private TranslatorService translatorService;
-
-	@Autowired
 	private GenreService genreService;
 
 	@Autowired
 	private PhotoUploadService photoUploadService;
 
 	@Autowired
-	private UserRankService userRankService;
-
-	@Autowired
-	private ImageFileUtilsService imageFileUtilsService;
+	private Services services;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
@@ -68,14 +57,8 @@ public class PhotoUploadAllowanceController {
 	}
 
 	private AbstractPhotoUploadAllowance getPhotoUploadAllowance( final User user, final Genre genre ) {
-		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser() );
 
-		uploadAllowance.setConfigurationService( configurationService );
-		uploadAllowance.setPhotoUploadService( photoUploadService );
-		uploadAllowance.setUserRankService( userRankService );
-		uploadAllowance.setDateUtilsService( dateUtilsService );
-		uploadAllowance.setImageFileUtilsService( imageFileUtilsService );
-		uploadAllowance.setTranslatorService( translatorService );
+		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage(), services );
 
 		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user.getId() ) );
 		uploadAllowance.setGenre( genre );

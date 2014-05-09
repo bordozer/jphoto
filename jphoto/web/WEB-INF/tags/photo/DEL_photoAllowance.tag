@@ -37,7 +37,7 @@
 			<table:tr>
 				<c:set var="css" value=""/>
 				<c:if test="${not uploadDescription.passed}">
-					<c:set var="css" value="redfont"/>
+						<c:set var="css" value="redfont"/>
 				</c:if>
 				<table:td cssClass="${css}">${uploadDescription.uploadRuleDescription}</table:td>
 			</table:tr>
