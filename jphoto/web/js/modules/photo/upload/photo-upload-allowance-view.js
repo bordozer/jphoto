@@ -11,8 +11,15 @@ define( ["backbone", "jquery", "underscore"
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
+			var el = this.$el;
 
-			this.$el.html( "Photo Upload Allowance" );
+			el.html( '' );
+
+			_.each( this.model.get( 'photoUploadAllowance' ), function( allowance ) {
+				el.append( '&nbsp;&nbsp;' );
+				el.append( allowance[ 'uploadRuleDescription' ] );
+				el.append( '<br />' );
+			});
 		}
 	});
 

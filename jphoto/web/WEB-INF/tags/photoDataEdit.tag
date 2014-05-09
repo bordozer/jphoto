@@ -45,7 +45,13 @@
 				<table:tdtext text_t="Photo uploading: Genre" labelFor="selectedGenreId" isMandatory="true"/>
 
 				<table:tddata>
-					<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}" itemLabel="genreNameTranslated" itemValue="genre.id" htmlEscape="false" size="23"/>
+					<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
+								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="23" cssClass="photo-genre"/>
+					<script type="text/javascript">
+						function redrawPhotoAllowance() {
+							showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
+						}
+					</script>
 				</table:tddata>
 			</table:tredit>
 

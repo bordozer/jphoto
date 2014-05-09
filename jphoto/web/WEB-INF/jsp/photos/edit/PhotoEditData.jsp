@@ -40,15 +40,15 @@
 
 					<table:tr>
 						<table:td>
-							<div class="photo-upload-allowance">
+							<div class="photo-upload-allowance justify-font">
 								<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
 							</div>
 
 							<script type="text/javascript">
 
-								renderPhotos( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
+								showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
 
-								function renderPhotos( userId, genreId ) {
+								function showPhotoAllowance( userId, genreId ) {
 									require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
 											photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
 									} );
