@@ -7,7 +7,6 @@ import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.system.Services;
 import core.services.translator.Language;
-import core.services.translator.TranslatorService;
 import core.services.translator.message.TranslatableMessage;
 
 import java.util.Date;
@@ -62,6 +61,8 @@ public abstract class AbstractPhotoUploadAllowance {
 
 		if ( genre != null ) {
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
+
+			addResultWeeklyPhotosSizeDescription( photoUploadDescriptions );
 		} else {
 			final PhotoUploadDescription description = new PhotoUploadDescription();
 			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
@@ -156,9 +157,10 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: week";
 		final String period2 = "photo uploading: this week";
 		final int uploadSizeLimit = getWeeklyLimitUploadSize();
-		final long uploadedSummarySize = services.getPhotoUploadService().getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() );
 
-		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, services.getImageFileUtilsService().getFileSizeInKb( uploadedSummarySize ), services.getDateUtilsService().getFirstSecondOfNextMonday() );
+		final float fileSizeInKb = getUploadedThisWeekInKB();
+
+		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, fileSizeInKb, services.getDateUtilsService().getFirstSecondOfNextMonday() );
 	}
 
 	private void getPhotoSizeLimitDescription( final List<PhotoUploadDescription> photoUploadDescriptions, final String period1, final String period2, final int uploadSizeLimit, final float uploadedSummarySize, final Date nextVotingTime ) {
@@ -218,9 +220,8 @@ public abstract class AbstractPhotoUploadAllowance {
 				;
 
 			if ( userRankInGenre > 0 ) {
-				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
 				final TranslatableMessage message = new TranslatableMessage( "So it gives you possibility to upload on $1 Kb more this week.", services )
-					.addIntegerParameter( additionalRankSize )
+					.addIntegerParameter( getUserRankAdditionalBonuses() )
 					;
 				translatableMessage.addTranslatableMessageParameter( message );
 			} else {
@@ -231,6 +232,30 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			photoUploadDescriptions.add( uploadDescription );
 		}
+	}
+
+	private void addResultWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+		final float totalWeekLimitKb = getUserRankAdditionalBonuses() + getWeeklyLimitUploadSize() - getUploadedThisWeekInKB();
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "You can upload $1 Kb this week in category '$2'.", services )
+			.addFloatParameter( totalWeekLimitKb )
+			.addPhotosByUserByGenreLinkParameter( accessor, genre )
+			;
+
+		final PhotoUploadDescription description = new PhotoUploadDescription();
+		description.setUploadRuleDescription( translatableMessage.build( language ) );
+
+		photoUploadDescriptions.add( description );
+	}
+
+	private int getUserRankAdditionalBonuses() {
+		final int userRankInGenre = services.getUserRankService().getUserRankInGenre( photoAuthor.getId(), genre.getId() );
+		final int additionalWeeklyLimitPerGenreRank = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
+
+		return userRankInGenre * additionalWeeklyLimitPerGenreRank;
+	}
+
+	private float getUploadedThisWeekInKB() {
+		return services.getImageFileUtilsService().getFileSizeInKb( services.getPhotoUploadService().getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() ) );
 	}
 
 	private void setNextPhotoUploadTime( final Date nextTime ) {

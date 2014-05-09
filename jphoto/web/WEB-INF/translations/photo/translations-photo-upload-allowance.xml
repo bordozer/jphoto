@@ -34,7 +34,7 @@
 
 	<translation>
 		<nerd>You can upload $1 Kb more $2.</nerd>
-		<ru><![CDATA[Вы можете загрузить еще $1 Кб $2.]]></ru>
+		<ru><![CDATA[<b>Ограничение по статусу $1 Кб $2</b>.]]></ru>
 	</translation>
 
 	<translation>
@@ -64,7 +64,7 @@
 
 	<translation>
 		<nerd>So it gives you possibility to upload on $1 Kb more this week.</nerd>
-		<ru><![CDATA[Это дает вам возможность загрузить еще $1 Кб на этой неделе.]]></ru>
+		<ru><![CDATA[Это дает вам <b>бонус $1 Кб</b> для загрузки на этой неделе.]]></ru>
 	</translation>
 
 	<translation>
@@ -73,8 +73,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>You can upload $1 Kb this week in category '$2'.</nerd>
+		<ru><![CDATA[Итого, <b>на этой неделе в '$2' вы можете загрузить $1 Кб</b>.]]></ru>
 	</translation>
 
 	<translation>
