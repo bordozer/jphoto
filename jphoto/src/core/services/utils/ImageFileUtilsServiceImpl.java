@@ -28,13 +28,13 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	private final LogHelper log = new LogHelper( ImageFileUtilsServiceImpl.class );
 
 	@Autowired
-	private SystemFilePathUtilsService systemFilePathUtilsService;
-
-	@Autowired
 	private ConfigurationService configurationService;
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private TempFileUtilsService tempFileUtilsService;
 
 	@Override
 	public String getContentType( final File file ) {
@@ -150,16 +150,17 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName, final Language language ) throws IOException {
 
 		final String originalFilename = multipartFile.getOriginalFilename();
-		final File uploadedFile = new File( systemFilePathUtilsService.getTempDir().getFile().getPath(), originalFilename );
-		if ( !uploadedFile.createNewFile() ) {
+		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( originalFilename );
+
+		if ( !tempPhotoFile.createNewFile() ) {
 			throw new IOException( String.format( "Can not create file '%s'", originalFilename ) );
 		}
 
-		final FileOutputStream fos = new FileOutputStream( uploadedFile );
+		final FileOutputStream fos = new FileOutputStream( tempPhotoFile );
 		fos.write( multipartFile.getBytes() );
 		fos.close();
 
-		final Dimension dimension = getImageDimension( uploadedFile );
+		final Dimension dimension = getImageDimension( tempPhotoFile );
 
 		if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
 			final String mess = translatorService.translate( "Max $1 dimension is $2 x $3, but uploaded file is $4 x %5", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
@@ -171,8 +172,12 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 		return getFileSizeInKb( multipartFile.getSize() ) > maxFileSizeKb;
 	}
 
-	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {
-		this.systemFilePathUtilsService = systemFilePathUtilsService;
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
+	}
+
+	public void setTempFileUtilsService( final TempFileUtilsService tempFileUtilsService ) {
+		this.tempFileUtilsService = tempFileUtilsService;
 	}
 
 	public void setConfigurationService( final ConfigurationService configurationService ) {

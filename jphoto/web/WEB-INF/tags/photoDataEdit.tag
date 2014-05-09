@@ -57,16 +57,20 @@
 
 					<script type="text/javascript">
 
-						showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
+						<c:if test="${photoEditDataModel.new}">
+							showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
 
-						function showPhotoAllowance( userId, genreId ) {
-							require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
-									photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
-							} );
-						}
+							function showPhotoAllowance( userId, genreId ) {
+								require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
+										photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
+								} );
+							}
+						</c:if>
 
 						function redrawPhotoAllowance() {
-							showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
+							<c:if test="${photoEditDataModel.new}">
+								showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
+							</c:if>
 						}
 
 					</script>

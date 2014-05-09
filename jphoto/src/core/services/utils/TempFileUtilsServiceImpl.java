@@ -20,10 +20,10 @@ public class TempFileUtilsServiceImpl implements TempFileUtilsService {
 		return systemFilePathUtilsService.getTempDir().getFile().getPath();
 	}
 
-	@Override
+	/*@Override
 	public File getTempFileWithOriginalExtension( final User user, final File file ) throws IOException {
 		return getTempFileWithOriginalExtension( user, file.getName() );
-	}
+	}*/
 
 	@Override
 	public File getTempFileWithOriginalExtension( final User user, final String fileName ) throws IOException {
@@ -31,6 +31,11 @@ public class TempFileUtilsServiceImpl implements TempFileUtilsService {
 		final String tmpFileName = String.format( "temp_%d_%d.%s", user.getId(), dateUtilsService.getCurrentTime().getTime(), extension );
 
 		return new File( getTmpDir(), tmpFileName );
+	}
+
+	@Override
+	public File getTempFileWithOriginalExtension( final String fileName ) throws IOException {
+		return getTempFileWithOriginalExtension( new User( 0 ), fileName );
 	}
 
 	@Override
