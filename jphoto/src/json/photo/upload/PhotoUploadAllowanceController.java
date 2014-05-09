@@ -48,10 +48,8 @@ public class PhotoUploadAllowanceController {
 		photoUploadAllowanceDTO.setUseId( userId );
 		photoUploadAllowanceDTO.setGenreId( genreId );
 
-//		if ( genre != null ) {
-			final AbstractPhotoUploadAllowance photoUploadAllowance = getPhotoUploadAllowance( user, genre );
-			photoUploadAllowanceDTO.setPhotoUploadAllowance( photoUploadAllowance.getUploadAllowance() );
-//		}
+		final AbstractPhotoUploadAllowance photoUploadAllowance = getPhotoUploadAllowance( user, genre );
+		photoUploadAllowanceDTO.setPhotoUploadAllowance( photoUploadAllowance.getUploadAllowance() );
 
 		return photoUploadAllowanceDTO;
 	}

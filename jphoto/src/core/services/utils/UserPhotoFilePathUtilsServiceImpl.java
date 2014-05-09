@@ -95,9 +95,8 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public void createUserPhotoDirIfNeed( final int userId ) {
-		final File photoStorageDir = systemFilePathUtilsService.createSystemPhotoDirIfNeed();
 
-		final File userPhotoDir = new File( photoStorageDir.getPath(), getUserPhotoPathPrefix( userId ) );
+		final File userPhotoDir = new File( systemFilePathUtilsService.getSystemPhotoDir().getPath(), getUserPhotoPathPrefix( userId ) );
 		if ( !userPhotoDir.exists() ) {
 			userPhotoDir.mkdir();
 		}

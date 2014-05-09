@@ -9,6 +9,4 @@ public interface SystemFilePathUtilsService {
 	Resource getTempDir();
 
 	File getSystemPhotoDir();
-
-	File createSystemPhotoDirIfNeed();
 }

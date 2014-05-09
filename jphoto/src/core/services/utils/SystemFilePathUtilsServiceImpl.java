@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -11,11 +12,6 @@ public class SystemFilePathUtilsServiceImpl implements SystemFilePathUtilsServic
 	@Autowired
 	private SystemVarsService systemVarsService;
 
-	public void createSystemDirectoriesOnStartup() {
-		createSystemPhotoDirIfNeed();
-		createSystemTempFolderIfNeed();
-	}
-
 	@Override
 	public Resource getTempDir() {
 		return new FileSystemResource( systemVarsService.getSystemTempFolder() );
@@ -26,8 +22,21 @@ public class SystemFilePathUtilsServiceImpl implements SystemFilePathUtilsServic
 		return new File( systemVarsService.getPhotoStoragePath() );
 	}
 
-	@Override
-	public File createSystemPhotoDirIfNeed() {
+	public void initFileSystemOnWorkerStartup() {
+
+		createSystemPhotoStorageFolderIfNeed();
+
+		deleteSystemTempDir();
+
+		createSystemTempFolder();
+	}
+
+	private void deleteSystemTempDir() {
+		final File photoStorageDir = new File( systemVarsService.getSystemTempFolder() );
+		FileUtils.deleteQuietly( photoStorageDir );
+	}
+
+	private File createSystemPhotoStorageFolderIfNeed() {
 		final File photoStorageDir = getSystemPhotoDir();
 		if ( !photoStorageDir.exists() ) {
 			photoStorageDir.mkdir();
@@ -35,7 +44,7 @@ public class SystemFilePathUtilsServiceImpl implements SystemFilePathUtilsServic
 		return photoStorageDir;
 	}
 
-	private File createSystemTempFolderIfNeed() {
+	private File createSystemTempFolder() {
 		final File tempFolder = new File( systemVarsService.getSystemTempFolder() );
 		if ( !tempFolder.exists() ) {
 			tempFolder.mkdir();

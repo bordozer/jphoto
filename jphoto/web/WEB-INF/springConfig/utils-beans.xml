@@ -12,7 +12,7 @@
 	<bean id="fakeUserService" class="core.services.user.FakeUserServiceImpl"/>
 	<bean id="randomUtilsService" class="core.services.utils.RandomUtilsServiceImpl"/>
 
-	<bean id="systemFilePathUtilsService" class="core.services.utils.SystemFilePathUtilsServiceImpl" init-method="createSystemDirectoriesOnStartup"/>
+	<bean id="systemFilePathUtilsService" class="core.services.utils.SystemFilePathUtilsServiceImpl" init-method="initFileSystemOnWorkerStartup"/>
 	<bean id="userPhotoFilePathUtilsService" class="core.services.utils.UserPhotoFilePathUtilsServiceImpl"/>
 
 	<bean id="commonBreadcrumbsService" class="ui.services.breadcrumbs.CommonBreadcrumbsServiceImpl"/>

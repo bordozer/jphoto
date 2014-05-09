@@ -20,11 +20,6 @@ public class TempFileUtilsServiceImpl implements TempFileUtilsService {
 		return systemFilePathUtilsService.getTempDir().getFile().getPath();
 	}
 
-	/*@Override
-	public File getTempFileWithOriginalExtension( final User user, final File file ) throws IOException {
-		return getTempFileWithOriginalExtension( user, file.getName() );
-	}*/
-
 	@Override
 	public File getTempFileWithOriginalExtension( final User user, final String fileName ) throws IOException {
 		final String extension = FilenameUtils.getExtension( fileName );

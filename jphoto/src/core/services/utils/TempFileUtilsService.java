@@ -9,8 +9,6 @@ public interface TempFileUtilsService {
 
 	String getTmpDir() throws IOException;
 
-//	File getTempFileWithOriginalExtension( final User user, final File file ) throws IOException;
-
 	File getTempFileWithOriginalExtension( final User user, final String fileName ) throws IOException;
 
 	File getTempFileWithOriginalExtension( final String fileName ) throws IOException;
