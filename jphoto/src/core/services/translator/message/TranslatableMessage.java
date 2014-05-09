@@ -56,6 +56,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addFloatParameter( final float value ) {
+		messageParameters.add( new FloatParameter( value, services ) );
+		return this;
+	}
+
 	public TranslatableMessage addUserCardLinkParameter( final User user ) {
 		messageParameters.add( new UserCardLinkParameter( user, services ) );
 		return this;

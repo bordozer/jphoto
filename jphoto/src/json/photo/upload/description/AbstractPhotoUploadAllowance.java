@@ -62,6 +62,10 @@ public abstract class AbstractPhotoUploadAllowance {
 			addWeeklyPhotosSizeDescription( photoUploadDescriptions );
 
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
+		} else {
+			final PhotoUploadDescription description = new PhotoUploadDescription();
+			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
+			photoUploadDescriptions.add( description );
 		}
 
 		return photoUploadDescriptions;
@@ -106,27 +110,33 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final StringBuilder builder = new StringBuilder();
-
-			final TranslatorService translatorService = services.getTranslatorService();
-			final String period1_t = translatorService.translate( period1, language );
-			final String period2_t = translatorService.translate( period2, language );
-
-			builder.append( translatorService.translate( "Your status' limit is $1 photo(s) per $2.", language, String.valueOf( limitPhotosQty ), period2_t ) ).append( " " );
-			builder.append( translatorService.translate( "You uploaded $1 photo(s) $2.", language, String.valueOf( uploadedPhotosQty ), period1_t ) ).append( " " );
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status' limit is $1 photo(s) per $2. You uploaded $3 photo(s) $4.", services )
+				.addIntegerParameter( limitPhotosQty )
+				.translatableString( period2 )
+				.addIntegerParameter( uploadedPhotosQty )
+				.translatableString( period1 )
+				;
 			if ( userCanUploadPhoto ) {
+				translatableMessage.string( " " );
 				final int canBeUploadedPhotos = limitPhotosQty - uploadedPhotosQty;
 				if ( canBeUploadedPhotos > 0 ) {
-					builder.append( translatorService.translate( "You can upload $1 photo(s) more $2.", language, String.valueOf( canBeUploadedPhotos ), period1_t ) );
+					final TranslatableMessage message = new TranslatableMessage( "You can upload $1 photo(s) more $2.", services )
+						.addIntegerParameter( canBeUploadedPhotos )
+						.translatableString( period1 )
+						;
+					translatableMessage.addTranslatableMessageParameter( message );
 				} else {
-					builder.append( translatorService.translate( "You can not upload photo $1.", language, period1_t ) );
+					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo $1.", services )
+						.translatableString( period1 )
+						;
+					translatableMessage.addTranslatableMessageParameter( message );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );
 				}
 			}
 
-			uploadDescription.setUploadRuleDescription( builder.toString() );
+			uploadDescription.setUploadRuleDescription( translatableMessage.build( language ) );
 
 			photoUploadDescriptions.add( uploadDescription );
 		}
@@ -154,25 +164,34 @@ public abstract class AbstractPhotoUploadAllowance {
 		if ( uploadSizeLimit > 0 ) {
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final StringBuilder builder = new StringBuilder();
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status' limit is $1 $2 per $3. You uploaded $4 $5 $6.", services )
+				.addIntegerParameter( uploadSizeLimit )
+				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
+				.translatableString( period1 )
+				.addFloatParameter( uploadedSummarySize )
+				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
+				.translatableString( period2 )
+				;
 
-			final String unit = ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName();
-			final TranslatorService translatorService = services.getTranslatorService();
-			builder.append( translatorService.translate( "Your status' limit is $1 $2 per $3. ", accessor.getLanguage(), String.valueOf( uploadSizeLimit ), unit, period2 ) );
-			builder.append( translatorService.translate( "You uploaded $1 $2 $3. ", accessor.getLanguage(), String.valueOf( uploadedSummarySize ), unit, period1 ) );
 			if ( userCanUploadPhoto ) {
+				translatableMessage.string( " " );
 				final float canUploadKb = uploadSizeLimit - uploadedSummarySize;
 				if ( canUploadKb > 0 ) {
-					builder.append( translatorService.translate( "You can upload $1 Kb more $3.", accessor.getLanguage(), String.valueOf( canUploadKb ), period1, period2 ) );
+					final TranslatableMessage message = new TranslatableMessage( "You can upload $1 Kb more $2.", services )
+						.addFloatParameter( canUploadKb )
+						.translatableString( period2 )
+						;
+					translatableMessage.addTranslatableMessageParameter( message );
 				} else {
-					builder.append( translatorService.translate( "You can not upload photo $1.", accessor.getLanguage(), period1 ) );
+					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo $1.", services ).translatableString( period1 );
+					translatableMessage.addTranslatableMessageParameter( message );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
 					setNextPhotoUploadTime( nextVotingTime );
 				}
 			}
 
-			uploadDescription.setUploadRuleDescription( builder.toString() );
+			uploadDescription.setUploadRuleDescription( translatableMessage.build( language ) );
 
 			photoUploadDescriptions.add( uploadDescription );
 		}
@@ -188,19 +207,24 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final StringBuilder builder = new StringBuilder();
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Each rank in a genre except first one increases your weekly limit on $1 Kb. Your rank in genre '$2' is $3.", services )
+				.addIntegerParameter( additionalWeeklyLimitPerGenreRank )
+				.addPhotosByUserByGenreLinkParameter( accessor, genre )
+				.addIntegerParameter( userRankInGenre )
+				.string( " " )
+				;
 
-			final TranslatorService translatorService = services.getTranslatorService();
-			builder.append( translatorService.translate( "Each rank in a genre except first ont increases your weekly limit on $1 Kb.", language, String.valueOf( additionalWeeklyLimitPerGenreRank ) ) );
-			builder.append( translatorService.translate( "Your rank in genre '$1' is $2.", language, translatorService.translateGenre( genre, language ), String.valueOf( userRankInGenre ) ) );
 			if ( userRankInGenre > 0 ) {
 				final int additionalRankSize = ( userRankInGenre ) * additionalWeeklyLimitPerGenreRank;
-				builder.append( translatorService.translate( "So it gives you possibility to upload on $1 Kb more this week.", language, String.valueOf( additionalRankSize ) ) );
+				final TranslatableMessage message = new TranslatableMessage( "So it gives you possibility to upload on $1 Kb more this week.", services )
+					.addIntegerParameter( additionalRankSize )
+					;
+				translatableMessage.addTranslatableMessageParameter( message );
 			} else {
-				builder.append( translatorService.translate( "So it is too small to give you any bonuses :(.", language ) );
+				translatableMessage.translatableString( "So it is too small yet to give you any bonuses :(." );
 			}
 
-			uploadDescription.setUploadRuleDescription( builder.toString() );
+			uploadDescription.setUploadRuleDescription( translatableMessage.build( language ) );
 
 			photoUploadDescriptions.add( uploadDescription );
 		}

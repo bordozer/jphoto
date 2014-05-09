@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Please, select a genre to see full photo upload allowance</nerd>
+		<ru><![CDATA[Пожалуйста, выберите раздел чтобы увидеть ограничения на загрузку работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Max photo's size you can upload is $1 $2.</nerd>
+		<ru><![CDATA[Максимальный размер файла который вы можете загрузить - $1 $2.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your status' limit is $1 photo(s) per $2. You uploaded $3 photo(s) $4.</nerd>
+		<ru><![CDATA[Ваш статус позволяет вам загружать $1 работ(ы) $2. Вы уже загрузили $3 работ(ы) $4.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can upload $1 photo(s) more $2.</nerd>
+		<ru><![CDATA[<b>Вы можете загрузить еще $1 работ(ы) $2</b>.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not upload photo $1.</nerd>
+		<ru><![CDATA[Вы не можете больше загружать рабты $1.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your status' limit is $1 $2 per $3. You uploaded $4 $5 $6.</nerd>
+		<ru><![CDATA[Ваш статус позволяет вам загружать $1 $2 $3. Вы уже загрузили $4 $5 $6.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can upload $1 Kb more $2.</nerd>
+		<ru><![CDATA[<b>Вы можете загрузить еще $1 Кб $2</b>.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: today</nerd>
+		<ru><![CDATA[сегодня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: day</nerd>
+		<ru><![CDATA[в день]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: week</nerd>
+		<ru><![CDATA[в неделю]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>photo uploading: this week</nerd>
+		<ru><![CDATA[на этой неделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Each rank in a genre except first one increases your weekly limit on $1 Kb. Your rank in genre '$2' is $3.</nerd>
+		<ru><![CDATA[Каждый ранг (кроме первого) дает возможность загрузить дополнительно $1 Кб в неделю. Ваш ранг в жанре '$2' $3.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>So it gives you possibility to upload on $1 Kb more this week.</nerd>
+		<ru><![CDATA[Это дает вам возможность загрузить на $1 Кб больше на этой неделе.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>So it is too small yet to give you any bonuses :(.</nerd>
+		<ru><![CDATA[Ваш ранг слишком мал, чтобы дать вам дополнительные бонусы :(.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
