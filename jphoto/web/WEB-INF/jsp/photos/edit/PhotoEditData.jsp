@@ -16,9 +16,9 @@
 
 	<div class="floatleft">
 
-		<div class="floatleft text-centered">
+		<div class="floatleft">
 
-			<div class="floatleft" style="width: 400px; vertical-align: top;">
+			<div class="floatleft text-centered" style="width: 400px; vertical-align: top;">
 				<table:table width="400px" border="0">
 					<table:separatorInfo colspan="1" title="${eco:translate(isNew ? 'Photo uploading: Photo uploading' : 'Photo uploading: Photo data editing')}" />
 					<table:tr>
@@ -38,28 +38,24 @@
 						</table:td>
 					</table:tr>
 
-					<table:tr>
-						<table:td>
-							<div class="photo-upload-allowance justify-font">
-								<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
-							</div>
-
-							<script type="text/javascript">
-
-								showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
-
-								function showPhotoAllowance( userId, genreId ) {
-									require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
-											photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
-									} );
-								}
-
-							</script>
-
-						</table:td>
-					</table:tr>
-
 				</table:table>
+
+				<div class="photo-upload-allowance justify-font">
+					<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
+				</div>
+
+				<script type="text/javascript">
+
+					showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
+
+					function showPhotoAllowance( userId, genreId ) {
+						require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
+								photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
+						} );
+					}
+
+				</script>
+
 			</div>
 
 			<div style="display: inline-block;">
