@@ -110,11 +110,12 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status' limit is $1 photo(s) per $2. You uploaded $3 photo(s) $4.", services )
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status '$5' limit is $1 photo(s) per $2. You uploaded $3 photo(s) $4.", services )
 				.addIntegerParameter( limitPhotosQty )
 				.translatableString( period2 )
 				.addIntegerParameter( uploadedPhotosQty )
 				.translatableString( period1 )
+				.translatableString( accessor.getUserStatus().getName() )
 				;
 			if ( userCanUploadPhoto ) {
 				translatableMessage.string( " " );
@@ -164,7 +165,8 @@ public abstract class AbstractPhotoUploadAllowance {
 		if ( uploadSizeLimit > 0 ) {
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status' limit is $1 $2 per $3. You uploaded $4 $5 $6.", services )
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your status '$1' limit is $2 $3 per $4. You uploaded $5 $6 $7.", services )
+				.translatableString( accessor.getUserStatus().getName() )
 				.addIntegerParameter( uploadSizeLimit )
 				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
 				.translatableString( period1 )
