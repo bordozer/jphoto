@@ -4,7 +4,7 @@
 
 	<translation>
 		<nerd>Please, select a genre to see full photo upload allowance</nerd>
-		<ru><![CDATA[Пожалуйста, выберите раздел чтобы увидеть ограничения на загрузку работы]]></ru>
+		<ru><![CDATA[Пожалуйста, выберите раздел чтобы увидеть какие бонусы вам дает ваш ранг в нем.]]></ru>
 	</translation>
 
 	<translation>
@@ -34,7 +34,7 @@
 
 	<translation>
 		<nerd>You can upload $1 Kb more $2.</nerd>
-		<ru><![CDATA[<b>Вы можете загрузить еще $1 Кб $2</b>.]]></ru>
+		<ru><![CDATA[Вы можете загрузить еще $1 Кб $2.]]></ru>
 	</translation>
 
 	<translation>

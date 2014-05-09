@@ -58,9 +58,9 @@ public abstract class AbstractPhotoUploadAllowance {
 
 		addDailyPhotosSizeDescription( photoUploadDescriptions );
 
-		if ( genre != null ) {
-			addWeeklyPhotosSizeDescription( photoUploadDescriptions );
+		addWeeklyPhotosSizeDescription( photoUploadDescriptions );
 
+		if ( genre != null ) {
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
 		} else {
 			final PhotoUploadDescription description = new PhotoUploadDescription();
@@ -162,6 +162,7 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void getPhotoSizeLimitDescription( final List<PhotoUploadDescription> photoUploadDescriptions, final String period1, final String period2, final int uploadSizeLimit, final float uploadedSummarySize, final Date nextVotingTime ) {
+
 		if ( uploadSizeLimit > 0 ) {
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
