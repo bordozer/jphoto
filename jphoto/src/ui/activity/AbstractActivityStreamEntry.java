@@ -12,9 +12,11 @@ import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import ui.context.EnvironmentContext;
 
 import java.util.Date;
 
+// TODO: should not be Cacheable!!!! Remove.
 public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity implements Cacheable {
 
 	private static final String ACTIVITY_XML_TAG_ROOT = "activity";
@@ -23,8 +25,6 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	protected final User activityOfUser;
 	protected final Date activityTime;
 	protected final ActivityType activityType;
-
-//	protected TranslatableMessage activityTranslatableText;
 
 	protected final Services services;
 
@@ -46,21 +46,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	}
 
 	public String getActivityText( final Language language ) {
-
 		return getActivityTranslatableText().build( language );
-
-		/*if ( activityTranslatableText != null ) {
-			return activityTranslatableText.build( language );
-		}
-
-		synchronized ( this ) {
-			if ( activityTranslatableText == null ) {
-				activityTranslatableText = getActivityTranslatableText();
-			}
-		}
-		//activityTranslatableText = getActivityTranslatableText(); // to reload cached value just uncomment this
-
-		return activityTranslatableText.build( language );*/
 	}
 
 	public String getActivityTextForAdmin( final Language language ) {
@@ -134,8 +120,10 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity imp
 	}
 
 	protected String getPhotoIcon( final Photo photo ) {
-		if( photo == null ) {
-			return StringUtils.EMPTY;
+
+		if( photo == null || ! services.getPhotoService().exists( photo.getId() ) ) {
+			final String title = services.getTranslatorService().translate( "AbstractActivityStreamEntry: the photo is deleted", EnvironmentContext.getLanguage() );
+			return String.format( "<img src='%s/entryNotFound.png' height='50' title='%s'/>", services.getUrlUtilsService().getSiteImagesPath(), title );
 		}
 
 		return String.format( "<a href='%1$s'><img src='%2$s' height='50' alt='%3$s' title='%3$s'/></a>"

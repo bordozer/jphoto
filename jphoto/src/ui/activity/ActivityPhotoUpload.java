@@ -7,7 +7,6 @@ import core.services.translator.message.TranslatableMessage;
 import org.dom4j.Document;
 import ui.context.EnvironmentContext;
 
-
 public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	public ActivityPhotoUpload( final Photo photo, final Services services ) {
@@ -36,7 +35,6 @@ public class ActivityPhotoUpload extends AbstractPhotoActivityStreamEntry {
 
 	@Override
 	public int getDisplayActivityUserId() {
-		// there is acceptable to use EnvironmentContext.getCurrentUser() because this is UI called method
 		return services.getSecurityService().isPhotoAuthorNameMustBeHidden( activityOfPhoto, EnvironmentContext.getCurrentUser() ) ? 0 : activityOfUser.getId();
 	}
 

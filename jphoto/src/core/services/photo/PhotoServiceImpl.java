@@ -174,10 +174,12 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
+			delete( photo.getId() );
 			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
 		}
 
 		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
+			delete( photo.getId() );
 			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
 		}
 	}

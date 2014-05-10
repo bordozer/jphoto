@@ -71,12 +71,13 @@ public class ActivityStreamDaoImpl extends BaseEntityDaoImpl<AbstractActivityStr
 
 	@Override
 	public AbstractActivityStreamEntry load( final int entryId ) {
-		return cacheService.getEntry( CacheKey.ACTIVITY_STREAM_ENTRY, entryId, new CacheEntryFactory<AbstractActivityStreamEntry>() {
+		return loadEntryById( entryId, new ActivityStreamEntryMapper() );
+		/*return cacheService.getEntry( CacheKey.ACTIVITY_STREAM_ENTRY, entryId, new CacheEntryFactory<AbstractActivityStreamEntry>() {
 			@Override
 			public AbstractActivityStreamEntry createEntry() {
 				return loadEntryById( entryId, new ActivityStreamEntryMapper() );
 			}
-		} );
+		} );*/
 	}
 
 	@Override
