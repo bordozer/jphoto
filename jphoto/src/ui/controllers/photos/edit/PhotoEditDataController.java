@@ -158,6 +158,7 @@ public class PhotoEditDataController {
 		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );
 		photoFile.transferTo( tempPhotoFile );
 		model.setTempPhotoFile( tempPhotoFile );
+		model.getPhoto().setFileSize( tempPhotoFile.length() );
 
 		final User photoAuthor = model.getPhotoAuthor();
 

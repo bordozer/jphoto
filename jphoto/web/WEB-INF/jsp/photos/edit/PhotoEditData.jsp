@@ -5,6 +5,7 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
+<%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -26,10 +27,15 @@
 
 							<c:if test="${isNew}">
 								<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
+								<br />
+								${eco:translate('Photo uploading: File size')}: ${eco:fileSizeToKb(photo.fileSize)} ${eco:translate('Kb')}
 							</c:if>
 
 							<c:if test="${not isNew}">
-								<photo:photoPreview photo="${photo}" />
+								<%--<photo:photoPreview photo="${photo}" />--%>
+								<links:photoCard id="${photo.id}">
+									<img src="${eco:baseUrl()}/download/photos/${photo.id}/" class="photo-preview-image" style="vertical-align: middle;" width="300px" />
+								</links:photoCard>
 								<br />
 								<br />
 								<photo:photoCard photo="${photo}" />
