@@ -102,7 +102,7 @@
 				</c:if>
 
 				<br />
-				${savedJob.jobType.name}
+				${eco:translate(savedJob.jobType.name)}
 
 				<c:if test="${isActiveSavedJob}">
 					<c:set var="percentage" value="${activeJobPercentageMap[jobTypeId]}" />
