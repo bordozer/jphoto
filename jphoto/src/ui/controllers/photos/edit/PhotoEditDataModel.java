@@ -6,6 +6,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import json.photo.upload.description.AbstractPhotoUploadAllowance;
 import org.springframework.web.multipart.MultipartFile;
 import ui.translatable.GenericTranslatableList;
 
@@ -48,6 +49,7 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
 	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
+	private AbstractPhotoUploadAllowance photoUploadAllowance;
 
 	public User getPhotoAuthor() {
 		return photoAuthor;
@@ -239,6 +241,14 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setPhotoAlbumIds( final List<String> photoAlbumIds ) {
 		this.photoAlbumIds = photoAlbumIds;
+	}
+
+	public void setPhotoUploadAllowance( final AbstractPhotoUploadAllowance photoUploadAllowance ) {
+		this.photoUploadAllowance = photoUploadAllowance;
+	}
+
+	public AbstractPhotoUploadAllowance getPhotoUploadAllowance() {
+		return photoUploadAllowance;
 	}
 
 	@Override

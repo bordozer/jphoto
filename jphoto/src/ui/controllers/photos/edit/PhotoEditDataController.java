@@ -14,8 +14,10 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.AnonymousDaysService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.photo.PhotoUploadService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
@@ -25,6 +27,8 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.TempFileUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
+import json.photo.upload.description.AbstractPhotoUploadAllowance;
+import json.photo.upload.description.UploadDescriptionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -97,6 +101,12 @@ public class PhotoEditDataController {
 	private AnonymousDaysService anonymousDaysService;
 
 	@Autowired
+	private PhotoUploadService photoUploadService;
+
+	@Autowired
+	private Services services;
+
+	@Autowired
 	PhotoEditFileValidator photoEditFileValidator;
 
 	@Autowired
@@ -125,6 +135,7 @@ public class PhotoEditDataController {
 
 		model.setNew( true );
 		model.setPhoto( new Photo() );
+		model.setPhotoUploadAllowance( getPhotoUploadAllowance( photoAuthor ) );
 
 		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( EnvironmentContext.getCurrentUser() ) );
 
@@ -236,6 +247,16 @@ public class PhotoEditDataController {
 		}
 
 		return String.format( "redirect:%s", request.getHeader( "Referer" ) );
+	}
+
+	private AbstractPhotoUploadAllowance getPhotoUploadAllowance( final User user ) {
+
+		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage(), services );
+
+		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user.getId() ) );
+		uploadAllowance.setSkipGenreSelectionInfo( true );
+
+		return uploadAllowance;
 	}
 
 	private List<UserPhotoAlbum> getPhotoAlbums( final List<String> photoAlbumIds ) {

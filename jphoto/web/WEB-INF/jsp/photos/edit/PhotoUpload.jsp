@@ -4,25 +4,42 @@
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
+<%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
+
+<c:set var="photoUploadAllowance" value="${photoEditDataModel.photoUploadAllowance}" />
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 	<form:form modelAttribute="photoEditDataModel" method="POST" action="${eco:baseUrl()}/photos/new/" enctype="multipart/form-data" >
 
-		<table:table>
+		<table:table width="900">
 
 			<table:separatorInfo colspan="1" title="${eco:translate('Photo uploading: Select file header')}" />
 
 			<table:tr>
+
 				<table:td>
-					<form:input path="photoFile" type="file" id="photoFile"/>
+					<photo:photoAllowance uploadAllowance="${photoUploadAllowance}" />
 				</table:td>
 
-				<table:trok text_t="${eco:translate('Photo uploading: Upload file button')}" />
 			</table:tr>
+
+			<c:if test="${photoUploadAllowance.userCanUploadPhoto}">
+
+				<table:tr>
+
+					<table:td>
+						<form:input path="photoFile" type="file" id="photoFile"/>
+					</table:td>
+
+				</table:tr>
+
+				<table:trok text_t="${eco:translate('Photo uploading: Upload file button')}" />
+
+			</c:if>
 
 		</table:table>
 

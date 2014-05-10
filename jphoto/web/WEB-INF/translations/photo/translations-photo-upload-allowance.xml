@@ -24,7 +24,7 @@
 
 	<translation>
 		<nerd>You can not upload photo $1.</nerd>
-		<ru><![CDATA[Вы не можете больше загружать рабты $1.]]></ru>
+		<ru><![CDATA[Вы не можете больше загружать работы $1.]]></ru>
 	</translation>
 
 	<translation>
@@ -75,6 +75,21 @@
 	<translation>
 		<nerd>You can upload $1 Kb this week in category '$2'.</nerd>
 		<ru><![CDATA[Итого, <b>на этой неделе в '$2' вы можете загрузить $1 Кб</b>.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Uploaded this week photos</nerd>
+		<ru><![CDATA[Работы, загруженные на этой неделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoUploadAllowance: uploaded</nerd>
+		<ru><![CDATA[загружена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoUploadAllowance: Uploaded this week</nerd>
+		<ru><![CDATA[Всего загружено на этой неделе]]></ru>
 	</translation>
 
 	<translation>

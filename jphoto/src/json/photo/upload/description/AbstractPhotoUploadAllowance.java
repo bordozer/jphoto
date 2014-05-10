@@ -27,6 +27,8 @@ public abstract class AbstractPhotoUploadAllowance {
 	private boolean userCanUploadPhoto = true;
 	private Date nextPhotoUploadTime;
 
+	private boolean skipGenreSelectionInfo;
+
 	public abstract UserStatus getUserStatus();
 
 	public abstract int getMaxPhotoSize();
@@ -63,13 +65,21 @@ public abstract class AbstractPhotoUploadAllowance {
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
 
 			addResultWeeklyPhotosSizeDescription( photoUploadDescriptions );
-		} else {
+		} else if ( ! skipGenreSelectionInfo) {
 			final PhotoUploadDescription description = new PhotoUploadDescription();
 			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
 			photoUploadDescriptions.add( description );
 		}
 
 		return photoUploadDescriptions;
+	}
+
+	public float getSummaryFilesSizeUploadedThisWeek() {
+		float result = 0;
+		for ( final Photo photo : uploadThisWeekPhotos ) {
+			result += photo.getFileSize();
+		}
+		return result;
 	}
 
 	private void addMaxPhotoSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
@@ -172,10 +182,10 @@ public abstract class AbstractPhotoUploadAllowance {
 				.translatableString( accessor.getUserStatus().getName() )
 				.addIntegerParameter( uploadSizeLimit )
 				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
-				.translatableString( period1 )
+				.translatableString( period2 )
 				.addFloatParameter( uploadedSummarySize )
 				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
-				.translatableString( period2 )
+				.translatableString( period1 )
 				;
 
 			if ( userCanUploadPhoto ) {
@@ -290,5 +300,13 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public Date getNextPhotoUploadTime() {
 		return nextPhotoUploadTime;
+	}
+
+	public boolean isSkipGenreSelectionInfo() {
+		return skipGenreSelectionInfo;
+	}
+
+	public void setSkipGenreSelectionInfo( final boolean skipGenreSelectionInfo ) {
+		this.skipGenreSelectionInfo = skipGenreSelectionInfo;
 	}
 }
