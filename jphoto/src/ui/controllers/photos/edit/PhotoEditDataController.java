@@ -4,6 +4,7 @@ import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
@@ -23,10 +24,7 @@ import core.services.translator.TranslatorService;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
-import core.services.utils.DateUtilsService;
-import core.services.utils.TempFileUtilsService;
-import core.services.utils.UrlUtilsService;
-import core.services.utils.UrlUtilsServiceImpl;
+import core.services.utils.*;
 import json.photo.upload.description.AbstractPhotoUploadAllowance;
 import json.photo.upload.description.UploadDescriptionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,6 +102,9 @@ public class PhotoEditDataController {
 	private PhotoUploadService photoUploadService;
 
 	@Autowired
+	private ImageFileUtilsService imageFileUtilsService;
+
+	@Autowired
 	private Services services;
 
 	@Autowired
@@ -158,7 +159,9 @@ public class PhotoEditDataController {
 		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( model.getPhotoAuthor(), photoFile.getOriginalFilename() );
 		photoFile.transferTo( tempPhotoFile );
 		model.setTempPhotoFile( tempPhotoFile );
+
 		model.getPhoto().setFileSize( tempPhotoFile.length() );
+		model.setPhotoDimension( imageFileUtilsService.getImageDimension( tempPhotoFile ) );
 
 		final User photoAuthor = model.getPhotoAuthor();
 

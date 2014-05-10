@@ -2,6 +2,7 @@ package ui.controllers.photos.edit;
 
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractGeneralModel;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -50,6 +51,7 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private List<UserPhotoAlbum> userPhotoAlbums;						// all user's photo albums
 	private List<String> photoAlbumIds = newArrayList();				// selected usr photo's album IDs
 	private AbstractPhotoUploadAllowance photoUploadAllowance;
+	private Dimension photoDimension;
 
 	public User getPhotoAuthor() {
 		return photoAuthor;
@@ -269,5 +271,13 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 		userPhotoAlbums = newArrayList();
 		photoAlbumIds = null;
+	}
+
+	public void setPhotoDimension( final Dimension photoDimension ) {
+		this.photoDimension = photoDimension;
+	}
+
+	public Dimension getPhotoDimension() {
+		return photoDimension;
 	}
 }

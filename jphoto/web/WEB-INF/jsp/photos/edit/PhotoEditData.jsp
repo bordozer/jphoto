@@ -28,7 +28,13 @@
 							<c:if test="${isNew}">
 								<img src="${eco:baseUrl()}/download/file/?filePath=${photoEditDataModel.tempPhotoFile}" alt="Photo file" width="300px">
 								<br />
+								<br />
 								${eco:translate('Photo uploading: File size')}: ${eco:fileSizeToKb(photo.fileSize)} ${eco:translate('Kb')}
+								<br />
+								<c:set var="dimension" value="${photoEditDataModel.photoDimension}" />
+								${eco:translate('Photo uploading: Image dimension width')}: ${dimension.width} ${eco:translate('px')}
+								<br />
+								${eco:translate('Photo uploading: Image dimension height')}: ${dimension.height} ${eco:translate('px')}
 							</c:if>
 
 							<c:if test="${not isNew}">
