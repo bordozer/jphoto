@@ -16,8 +16,7 @@ import ui.context.EnvironmentContext;
 
 import java.util.Date;
 
-// TODO: should not be Cacheable!!!! Remove.
-public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity implements Cacheable {
+public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 
 	private static final String ACTIVITY_XML_TAG_ROOT = "activity";
 	private static final String ACTIVITY_XML_TAG_USER_ID = "userId";
