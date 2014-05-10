@@ -63,18 +63,31 @@ public abstract class AbstractPhotoUploadAllowance {
 
 		addWeeklyPhotosSizeDescription( photoUploadDescriptions );
 
+		final int weeklyLimitUploadSize = getWeeklyLimitUploadSize();
+
+		final int weeklyLimitIncreasingPerRank = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
+		if ( weeklyLimitUploadSize > 0 && weeklyLimitIncreasingPerRank > 0 && ! skipGenreSelectionInfo && userCanUploadPhoto && weeklyLimitUploadSize > 0 ) {
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Each rank in a genre except first one increases your weekly limit on $1 Kb. Please, select a genre to see full photo upload allowance.", services )
+			.addIntegerParameter( weeklyLimitIncreasingPerRank )
+			;
+			final PhotoUploadDescription description = new PhotoUploadDescription();
+			description.setUploadRuleDescription( translatableMessage.build( language ) );
+			photoUploadDescriptions.add( description );
+		}
+
 		if ( genre != null ) {
+
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
 
 			addResultWeeklyPhotosSizeDescription( photoUploadDescriptions );
 
-			if ( fileSize > 0 ) {
+			if ( fileSize > 0 && weeklyLimitUploadSize > 0 ) {
 				addVerdictAboutFileUploading( photoUploadDescriptions );
 			}
-		} else if ( ! skipGenreSelectionInfo && userCanUploadPhoto && getWeeklyLimitUploadSize() > 0 ) {
-			final PhotoUploadDescription description = new PhotoUploadDescription();
-			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
-			photoUploadDescriptions.add( description );
+		}
+
+		if ( weeklyLimitUploadSize == 0 ) {
+			addVerdictAboutFileUploading( photoUploadDescriptions );
 		}
 
 		return photoUploadDescriptions;
@@ -101,7 +114,7 @@ public abstract class AbstractPhotoUploadAllowance {
 			;
 
 		final int weeklyLimitUploadSize = getWeeklyLimitUploadSize();
-		final float allowedToUploadThisWeekSize = getAllowedToUploadThisWeekSize();
+		final float allowedToUploadThisWeekSize = weeklyLimitUploadSize > 0 ? getAllowedToUploadThisWeekSize() : 0;
 		userCanUploadPhoto &= weeklyLimitUploadSize == 0 || ( fileSizeInKb <= allowedToUploadThisWeekSize );
 
 		translatableMessage.string( " " );
@@ -281,8 +294,7 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			final PhotoUploadDescription uploadDescription = new PhotoUploadDescription();
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Each rank in a genre except first one increases your weekly limit on $1 Kb. Your rank in genre '$2' is $3.", services )
-				.addIntegerParameter( additionalWeeklyLimitPerGenreRank )
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Your rank in genre '$1' is $2.", services )
 				.addPhotosByUserByGenreLinkParameter( accessor, genre )
 				.addIntegerParameter( userRankInGenre )
 				.string( " " )
@@ -294,7 +306,7 @@ public abstract class AbstractPhotoUploadAllowance {
 					;
 				translatableMessage.addTranslatableMessageParameter( message );
 			} else {
-				translatableMessage.translatableString( "So it is too small yet to give you any bonuses :(." );
+				translatableMessage.translatableString( "So it is too small yet to give you any bonuses." );
 			}
 
 			uploadDescription.setUploadRuleDescription( translatableMessage.build( language ) );

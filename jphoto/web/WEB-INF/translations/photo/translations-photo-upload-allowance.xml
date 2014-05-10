@@ -3,11 +3,6 @@
 <translations>
 
 	<translation>
-		<nerd>Please, select a genre to see full photo upload allowance</nerd>
-		<ru><![CDATA[Пожалуйста, выберите раздел чтобы увидеть какие бонусы вам дает ваш ранг в нем.]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Max photo's size you can upload is $1 $2.</nerd>
 		<ru><![CDATA[Максимальный размер файла который вы можете загрузить - $1 $2.]]></ru>
 	</translation>
@@ -58,8 +53,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Each rank in a genre except first one increases your weekly limit on $1 Kb. Your rank in genre '$2' is $3.</nerd>
-		<ru><![CDATA[Каждый ранг (кроме первого) дает возможность загрузить дополнительно $1 Кб в неделю. Ваш ранг в жанре '$2' $3.]]></ru>
+		<nerd>Each rank in a genre except first one increases your weekly limit on $1 Kb. Please, select a genre to see full photo upload allowance.</nerd>
+		<ru><![CDATA[Каждый ранг (кроме первого) дает возможность загрузить дополнительно $1 Кб в неделю. Выберите раздел чтобы посмотреть ваши бонусы.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Your rank in genre '$1' is $2.</nerd>
+		<ru><![CDATA[Ваш ранг в жанре '$1' $2.]]></ru>
 	</translation>
 
 	<translation>
@@ -68,8 +68,8 @@
 	</translation>
 
 	<translation>
-		<nerd>So it is too small yet to give you any bonuses :(.</nerd>
-		<ru><![CDATA[Ваш ранг слишком мал, чтобы дать вам дополнительные бонусы :(.]]></ru>
+		<nerd>So it is too small yet to give you any bonuses.</nerd>
+		<ru><![CDATA[Ваш ранг слишком мал, чтобы дать вам какие-либо бонусы.]]></ru>
 	</translation>
 
 	<translation>
