@@ -10,7 +10,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public enum ActivityType implements Identifiable {
 
 	USER_REGISTRATION( 1, "ActivityType: New member registration", SavedJobType.USER_GENERATION.getIcon() )
-	, PHOTO_UPLOAD( 2, "ActivityType: New photo upload", SavedJobType.PREVIEW_GENERATION.getIcon() )
+	, PHOTO_UPLOAD( 2, "ActivityType: New photo upload", SavedJobType.PHOTOS_IMPORT.getIcon() )
 	, PHOTO_VOTING( 3, "ActivityType: Photo voting", SavedJobType.ACTIONS_GENERATION.getIcon() )
 	, PHOTO_COMMENT( 4, "ActivityType: Photo comment", SavedJobType.ACTIONS_GENERATION_COMMENTS.getIcon() )
 	, PHOTO_PREVIEW( 5, "ActivityType: Photo preview", SavedJobType.ACTIONS_GENERATION_VIEWS.getIcon() )
