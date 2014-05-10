@@ -8,6 +8,7 @@ import core.general.user.UserStatus;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
+import utils.NumberUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,7 @@ public abstract class AbstractPhotoUploadAllowance {
 	private Date nextPhotoUploadTime;
 
 	private boolean skipGenreSelectionInfo;
+	private long fileSize;
 
 	public abstract UserStatus getUserStatus();
 
@@ -65,7 +67,11 @@ public abstract class AbstractPhotoUploadAllowance {
 			addAdditionalWeeklyKbByGenreDescription( photoUploadDescriptions );
 
 			addResultWeeklyPhotosSizeDescription( photoUploadDescriptions );
-		} else if ( ! skipGenreSelectionInfo) {
+
+			if ( fileSize > 0 ) {
+				addVerdictAboutFileUploading( photoUploadDescriptions );
+			}
+		} else if ( ! skipGenreSelectionInfo && userCanUploadPhoto ) {
 			final PhotoUploadDescription description = new PhotoUploadDescription();
 			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
 			photoUploadDescriptions.add( description );
@@ -80,6 +86,37 @@ public abstract class AbstractPhotoUploadAllowance {
 			result += photo.getFileSize();
 		}
 		return result;
+	}
+
+	private void addVerdictAboutFileUploading( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+
+		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
+		final float fileSizeInKb = services.getImageFileUtilsService().getFileSizeInKb( fileSize );
+
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Being uploaded file size is $1 Kb", services )
+			.addFloatParameter( fileSizeInKb )
+			;
+
+		final float allowedToUploadThisWeekSize = getAllowedToUploadThisWeekSize();
+		userCanUploadPhoto &= fileSizeInKb <= allowedToUploadThisWeekSize;
+
+		translatableMessage.string( " " );
+		if ( userCanUploadPhoto ) {
+			translatableMessage.translatableString( "The file can be uploaded" );
+		} else {
+			final float diff = NumberUtils.round( fileSizeInKb - allowedToUploadThisWeekSize, 1 );
+			final TranslatableMessage message = new TranslatableMessage( "The file can not be uploaded. You need more $1 Kb.", services ).addFloatParameter( diff );
+			translatableMessage.addTranslatableMessageParameter( message );
+		}
+
+		final PhotoUploadDescription description = new PhotoUploadDescription();
+		description.setUploadRuleDescription( translatableMessage.build( language ) );
+		description.setPassed( userCanUploadPhoto );
+
+		photoUploadDescriptions.add( description );
 	}
 
 	private void addMaxPhotoSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
@@ -106,6 +143,11 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addWeeklyPhotosQtyDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+
+		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
 		final String period1 = "photo uploading: this week";
 		final String period2 = "photo uploading: week";
 		final int limitPhotosQty = getWeeklyLimitPhotosQty();
@@ -138,8 +180,8 @@ public abstract class AbstractPhotoUploadAllowance {
 						;
 					translatableMessage.addTranslatableMessageParameter( message );
 				} else {
-					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo $1.", services )
-						.translatableString( period1 )
+					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo.", services )
+//						.translatableString( period2 )
 						;
 					translatableMessage.addTranslatableMessageParameter( message );
 					uploadDescription.setPassed( false );
@@ -164,8 +206,13 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final String period1 = "photo uploading: week";
-		final String period2 = "photo uploading: this week";
+
+		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
+		final String period1 = "photo uploading: this week";
+		final String period2 = "photo uploading: week";
 		final int uploadSizeLimit = getWeeklyLimitUploadSize();
 
 		final float fileSizeInKb = getUploadedThisWeekInKB();
@@ -182,7 +229,7 @@ public abstract class AbstractPhotoUploadAllowance {
 				.translatableString( accessor.getUserStatus().getName() )
 				.addIntegerParameter( uploadSizeLimit )
 				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
-				.translatableString( period2 )
+				.translatableString( period1 )
 				.addFloatParameter( uploadedSummarySize )
 				.translatableString( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT.getUnit().getName() )
 				.translatableString( period1 )
@@ -190,15 +237,17 @@ public abstract class AbstractPhotoUploadAllowance {
 
 			if ( userCanUploadPhoto ) {
 				translatableMessage.string( " " );
-				final float canUploadKb = uploadSizeLimit - uploadedSummarySize;
+				final float canUploadKb = NumberUtils.round( uploadSizeLimit - uploadedSummarySize, 1 );
 				if ( canUploadKb > 0 ) {
 					final TranslatableMessage message = new TranslatableMessage( "You can upload $1 Kb more $2.", services )
 						.addFloatParameter( canUploadKb )
-						.translatableString( period2 )
+						.translatableString( period1 )
 						;
 					translatableMessage.addTranslatableMessageParameter( message );
 				} else {
-					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo $1.", services ).translatableString( period1 );
+					final TranslatableMessage message = new TranslatableMessage( "You can not upload photo $1.", services )
+						.translatableString( period2 )
+						;
 					translatableMessage.addTranslatableMessageParameter( message );
 					uploadDescription.setPassed( false );
 					userCanUploadPhoto = false;
@@ -213,6 +262,11 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addAdditionalWeeklyKbByGenreDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+
+		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
 		final int additionalWeeklyLimitPerGenreRank = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
 		if ( additionalWeeklyLimitPerGenreRank > 0 ) {
 
@@ -245,7 +299,13 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private void addResultWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
-		final float totalWeekLimitKb = getUserRankAdditionalBonuses() + getWeeklyLimitUploadSize() - getUploadedThisWeekInKB();
+
+		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
+		final float totalWeekLimitKb = NumberUtils.round( getAllowedToUploadThisWeekSize(), 1 );
+
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "You can upload $1 Kb this week in category '$2'.", services )
 			.addFloatParameter( totalWeekLimitKb )
 			.addPhotosByUserByGenreLinkParameter( accessor, genre )
@@ -255,6 +315,10 @@ public abstract class AbstractPhotoUploadAllowance {
 		description.setUploadRuleDescription( translatableMessage.build( language ) );
 
 		photoUploadDescriptions.add( description );
+	}
+
+	private float getAllowedToUploadThisWeekSize() {
+		return getUserRankAdditionalBonuses() + getWeeklyLimitUploadSize() - getUploadedThisWeekInKB();
 	}
 
 	private int getUserRankAdditionalBonuses() {
@@ -308,5 +372,13 @@ public abstract class AbstractPhotoUploadAllowance {
 
 	public void setSkipGenreSelectionInfo( final boolean skipGenreSelectionInfo ) {
 		this.skipGenreSelectionInfo = skipGenreSelectionInfo;
+	}
+
+	public void setFileSize( final long fileSize ) {
+		this.fileSize = fileSize;
+	}
+
+	public long getFileSize() {
+		return fileSize;
 	}
 }

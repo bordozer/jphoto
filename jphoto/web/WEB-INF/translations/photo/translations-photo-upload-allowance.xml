@@ -14,7 +14,7 @@
 
 	<translation>
 		<nerd>Your status '$5' limit is $1 photo(s) per $2. You uploaded $3 photo(s) $4.</nerd>
-		<ru><![CDATA[Ваш статус '$5' позволяет вам загружать $1 работ(ы) $2. Вы уже загрузили $3 работ(ы) $4.]]></ru>
+		<ru><![CDATA[Ваш статус '$5' позволяет вам загрузить $1 работ(ы) $2. Вы уже загрузили $3 работ(ы) $4.]]></ru>
 	</translation>
 
 	<translation>
@@ -23,18 +23,18 @@
 	</translation>
 
 	<translation>
-		<nerd>You can not upload photo $1.</nerd>
-		<ru><![CDATA[Вы не можете больше загружать работы $1.]]></ru>
+		<nerd>You can not upload photo.</nerd>
+		<ru><![CDATA[Вы не можете больше загружать работы.]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Your status '$1' limit is $2 $3 per $4. You uploaded $5 $6 $7.</nerd>
-		<ru><![CDATA[Ваш статус '$1' позволяет вам загружать $2 $3 $4. Вы уже загрузили $5 $6 $7.]]></ru>
+		<ru><![CDATA[Ваш статус '$1' позволяет вам загрузить $2 $3 $4. Вы уже загрузили $5 $6 $7.]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>You can upload $1 Kb more $2.</nerd>
-		<ru><![CDATA[<b>Ограничение по статусу $1 Кб $2</b>.]]></ru>
+		<ru><![CDATA[<b>Осталось доступно к загрузке $1 Кб $2</b>.]]></ru>
 	</translation>
 
 	<translation>
@@ -48,13 +48,13 @@
 	</translation>
 
 	<translation>
-		<nerd>photo uploading: week</nerd>
-		<ru><![CDATA[в неделю]]></ru>
+		<nerd>photo uploading: this week</nerd>
+		<ru><![CDATA[на этой неделе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>photo uploading: this week</nerd>
-		<ru><![CDATA[на этой неделе]]></ru>
+		<nerd>photo uploading: week</nerd>
+		<ru><![CDATA[в неделю]]></ru>
 	</translation>
 
 	<translation>
@@ -90,6 +90,31 @@
 	<translation>
 		<nerd>PhotoUploadAllowance: Uploaded this week</nerd>
 		<ru><![CDATA[Всего загружено на этой неделе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Being uploaded file size is $1 Kb</nerd>
+		<ru><![CDATA[Размер загружаемого файла  $1 Кб.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The file can be uploaded</nerd>
+		<ru><![CDATA[<b>Файл может быть загружен<b>.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The file can not be uploaded. You need more $1 Kb.</nerd>
+		<ru><![CDATA[<b>Размер файла превышает доступный лимит на $1 Кб</b>]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

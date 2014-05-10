@@ -62,7 +62,7 @@
 
 							function showPhotoAllowance( userId, genreId ) {
 								require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
-										photoUploadAllowance( userId, genreId, '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
+										photoUploadAllowance( userId, genreId, '${photoEditDataModel.photo.fileSize}', '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
 								} );
 							}
 						</c:if>

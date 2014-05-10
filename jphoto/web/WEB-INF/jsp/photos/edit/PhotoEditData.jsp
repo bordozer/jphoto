@@ -31,6 +31,7 @@
 								<br />
 								${eco:translate('Photo uploading: File size')}: ${eco:fileSizeToKb(photo.fileSize)} ${eco:translate('Kb')}
 								<br />
+								<br />
 								<c:set var="dimension" value="${photoEditDataModel.photoDimension}" />
 								${eco:translate('Photo uploading: Image dimension width')}: ${dimension.width} ${eco:translate('px')}
 								<br />
