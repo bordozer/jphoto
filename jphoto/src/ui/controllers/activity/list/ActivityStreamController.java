@@ -59,18 +59,6 @@ public class ActivityStreamController {
 		return pagingModel;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/json/", produces = "application/json" )
-	@ResponseBody
-	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
-		return getActivities( getIds( model, pagingModel, null ) );
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "/type/{activityTypeId}/json/", produces = "application/json" )
-	@ResponseBody
-	public List<AbstractActivityStreamEntry> showActivityStreamJSON( final @PathVariable( "activityTypeId" ) int activityTypeId, final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
-		return getActivities( getIds( model, pagingModel, ActivityType.getById( activityTypeId ) ) );
-	}
-
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showActivityStream( final @ModelAttribute( MODEL_NAME ) ActivityStreamModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 		return showActivities( model, pagingModel, null );
