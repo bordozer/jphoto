@@ -71,7 +71,7 @@ public abstract class AbstractPhotoUploadAllowance {
 			if ( fileSize > 0 ) {
 				addVerdictAboutFileUploading( photoUploadDescriptions );
 			}
-		} else if ( ! skipGenreSelectionInfo && userCanUploadPhoto ) {
+		} else if ( ! skipGenreSelectionInfo && userCanUploadPhoto && getWeeklyLimitUploadSize() > 0 ) {
 			final PhotoUploadDescription description = new PhotoUploadDescription();
 			description.setUploadRuleDescription( services.getTranslatorService().translate( "Please, select a genre to see full photo upload allowance", language ) );
 			photoUploadDescriptions.add( description );
@@ -100,8 +100,9 @@ public abstract class AbstractPhotoUploadAllowance {
 			.addFloatParameter( fileSizeInKb )
 			;
 
+		final int weeklyLimitUploadSize = getWeeklyLimitUploadSize();
 		final float allowedToUploadThisWeekSize = getAllowedToUploadThisWeekSize();
-		userCanUploadPhoto &= fileSizeInKb <= allowedToUploadThisWeekSize;
+		userCanUploadPhoto &= weeklyLimitUploadSize == 0 || ( fileSizeInKb <= allowedToUploadThisWeekSize );
 
 		translatableMessage.string( " " );
 		if ( userCanUploadPhoto ) {
@@ -267,6 +268,10 @@ public abstract class AbstractPhotoUploadAllowance {
 			return;
 		}
 
+		if ( getWeeklyLimitUploadSize() == 0 ) {
+			return;
+		}
+
 		final int additionalWeeklyLimitPerGenreRank = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB );
 		if ( additionalWeeklyLimitPerGenreRank > 0 ) {
 
@@ -301,6 +306,10 @@ public abstract class AbstractPhotoUploadAllowance {
 	private void addResultWeeklyPhotosSizeDescription( final List<PhotoUploadDescription> photoUploadDescriptions ) {
 
 		if ( ! userCanUploadPhoto ) {
+			return;
+		}
+
+		if ( getWeeklyLimitUploadSize() == 0 ) {
 			return;
 		}
 
