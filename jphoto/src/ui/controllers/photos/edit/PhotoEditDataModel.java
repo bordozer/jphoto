@@ -265,6 +265,7 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 		photoDescription = null;
 		photoKeywords = null;
 		selectedGenreId = 0;
+		containsNudeContent = false;
 
 		userTeamMembers = null;
 		userTeamMemberIds = null;

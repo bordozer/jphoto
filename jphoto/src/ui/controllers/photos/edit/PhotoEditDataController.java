@@ -351,7 +351,9 @@ public class PhotoEditDataController {
 		photo.setKeywords( model.getPhotoKeywords() );
 		photo.setDescription( model.getPhotoDescription() );
 		photo.setUploadTime( dateUtilsService.getCurrentTime() );
-		photo.setContainsNudeContent( model.isContainsNudeContent() );
+
+		photo.setContainsNudeContent( model.isContainsNudeContent() || genreService.load( model.getSelectedGenreId() ).isContainsNudeContent() );
+
 		photo.setBgColor( model.getBgColor() );
 		photo.setCommentsAllowance( model.getCommentsAllowance() );
 		photo.setNotificationEmailAboutNewPhotoComment( model.getSendNotificationEmailAboutNewPhotoComment() == YesNo.YES.getId() );
