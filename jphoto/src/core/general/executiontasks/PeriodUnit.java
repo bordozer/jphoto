@@ -1,6 +1,8 @@
 package core.general.executiontasks;
 
-public enum PeriodUnit {
+import core.interfaces.IdentifiableNameable;
+
+public enum PeriodUnit implements IdentifiableNameable {
 
 	SECOND( 1, "PeriodUnit: second" )
 	, MINUTE( 2, "PeriodUnit: minute" )

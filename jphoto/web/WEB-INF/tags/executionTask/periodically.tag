@@ -1,5 +1,8 @@
 <%@ tag import="core.general.executiontasks.PeriodUnit" %>
 <%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,12 +20,13 @@
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<c:set var="periodUnits" value="<%=GenericTranslatableList.schedulerPeriodTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="periodicalTaskPeriod" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_PERIODICAL_TASK_PERIOD_CONTROL%>" />
 <c:set var="periodicalTaskPeriodUnitId" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_PERIODICAL_TASK_PERIOD_UNIT_CONTROL%>" />
 <c:set var="periodicalTaskHours" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_PERIODICAL_TASK_HOURS_CONTROL%>" />
 <c:set var="hours" value="<%=SchedulerTaskEditModel.HOURS%>"/>
 
-<c:set var="periodUnits" value="<%=PeriodUnit.values()%>"/>
+<%--<c:set var="periodUnits" value="<%=PeriodUnit.values()%>"/>--%>
 <c:set var="hourUnitId" value="<%=PeriodUnit.HOUR.getId()%>"/>
 
 <table:table border="0" width="100%">

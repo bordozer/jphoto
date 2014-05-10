@@ -8,6 +8,7 @@ import core.enums.UserGender;
 import core.enums.YesNo;
 import core.general.executiontasks.ExecutionTaskType;
 import core.general.executiontasks.Month;
+import core.general.executiontasks.PeriodUnit;
 import core.general.executiontasks.Weekday;
 import core.general.user.EmailNotificationType;
 import core.general.user.UserMembershipType;
@@ -47,6 +48,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<PeriodUnit> schedulerPeriodTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<PeriodUnit>( PeriodUnit.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<Month> schedulerMonthTranslatableList( final Language language, final TranslatorService translatorService ) {

@@ -4,17 +4,17 @@
 
 	<translation>
 		<nerd>PeriodUnit: second</nerd>
-		<ru><![CDATA[секунд(ы)]]></ru>
+		<ru><![CDATA[секунда]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>PeriodUnit: minute</nerd>
-		<ru><![CDATA[минут(ы)]]></ru>
+		<ru><![CDATA[минута]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>PeriodUnit: hour</nerd>
-		<ru><![CDATA[час(а)]]></ru>
+		<ru><![CDATA[час]]></ru>
 	</translation>
 
 </translations>
