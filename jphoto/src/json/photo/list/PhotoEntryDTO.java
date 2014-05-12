@@ -1,4 +1,4 @@
-package json.photo;
+package json.photo.list;
 
 public class PhotoEntryDTO {
 

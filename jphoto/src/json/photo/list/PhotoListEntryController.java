@@ -1,4 +1,4 @@
-package json.photo;
+package json.photo.list;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
@@ -33,7 +33,7 @@ import java.util.Date;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
-public class PhotoEntryController {
+public class PhotoListEntryController {
 
 	@Autowired
 	private PhotoService photoService;
