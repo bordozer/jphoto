@@ -62,6 +62,12 @@
 				ui_messages.showUIMessage_FromCustomDiv( element );
 			} );
 		}
+
+		function renderEntryIcon( userId, bookmarkEntryId, bookmarkEntryTypeId, isAdding, container ) {
+			require( [ 'jquery', 'modules/icon/entry-icon'], function ( $, bookmarking ) {
+				bookmarking( userId, bookmarkEntryId, bookmarkEntryTypeId, isAdding, '${eco:baseUrl()}', container );
+			} );
+		}
 	</script>
 
 	<div id="sendPrivateMessageToUserDivId" title="..." style="display: none;">

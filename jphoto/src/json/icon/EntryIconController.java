@@ -7,13 +7,18 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
+import json.photo.appraisal.ValidationException;
 import json.photo.appraisal.ValidationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -73,6 +78,13 @@ public class EntryIconController {
 		bookmarkEntryDTO.setSaveCallbackMessage( saveCallbackMessage );
 
 		return bookmarkEntryDTO;
+	}
+
+	@ExceptionHandler( ValidationException.class )
+	@ResponseStatus( HttpStatus.UNPROCESSABLE_ENTITY )
+	@ResponseBody
+	public List<FieldError> processValidationError( final ValidationException validationException ) {
+		return validationException.getBindingResult().getFieldErrors();
 	}
 
 	private BookmarkEntryDTO getBookmarkEntryDTO( final int userId, final int bookmarkEntryId, final int bookmarkEntryTypeId ) {
