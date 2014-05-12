@@ -120,7 +120,7 @@ public class PhotoListEntryController {
 		final List<FavoriteEntryDTO> favoriteEntryDTOs = newArrayList();
 		for ( final FavoriteEntryType favoriteEntryType : FavoriteEntryType.RELATED_TO_PHOTO ) {
 			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryType.getId() ) ) {
-				final String title = translatorService.translate( favoriteEntryType.getName(), getLanguage() );
+				final String title = translatorService.translate( favoriteEntryType.getRemoveText(), getLanguage() );
 				final String icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), favoriteEntryType.getRemoveIcon() );
 
 				favoriteEntryDTOs.add( new FavoriteEntryDTO( title, icon ) );

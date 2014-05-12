@@ -84,6 +84,7 @@ define( ["backbone", "jquery", "underscore"
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
+			, "click .bookmark-icon": "onBookmarkIconClick"
 		}
 
 		, photoContextMenuIconClick: function() {
@@ -98,9 +99,18 @@ define( ["backbone", "jquery", "underscore"
 			photoContextMenuModel.fetch( { cache: false } );
 		}
 
+		, bookmarkIconClick: function( icon ) {
+			console.log( icon );
+		}
+
 		, onPhotoContextMenuIconClick: function( evt ) {
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
+		}
+
+		, onBookmarkIconClick: function( evt ) {
+			evt.stopPropagation();
+			this.bookmarkIconClick( evt.target );
 		}
 	} );
 
