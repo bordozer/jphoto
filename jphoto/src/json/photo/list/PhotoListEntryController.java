@@ -35,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
@@ -82,7 +83,7 @@ public class PhotoListEntryController {
 	@Autowired
 	private FavoritesService favoritesService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
 
@@ -123,7 +124,7 @@ public class PhotoListEntryController {
 			final int favoriteEntryTypeId = favoriteEntryType.getId();
 
 			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryTypeId ) ) {
-				photoBookmarkIcons.add( new PhotoBookmarkIcon( favoriteEntryTypeId, false ) );
+				photoBookmarkIcons.add( new PhotoBookmarkIcon( favoriteEntryTypeId ) );
 			}
 		}
 		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );

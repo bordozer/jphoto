@@ -3,14 +3,12 @@ package json.photo.list;
 public class PhotoBookmarkIcon {
 
 	private int favoriteEntryTypeId;
-	private boolean isAdding;
 
 	public PhotoBookmarkIcon() {
 	}
 
-	public PhotoBookmarkIcon( final int favoriteEntryTypeId, final boolean isAdding ) {
+	public PhotoBookmarkIcon( final int favoriteEntryTypeId ) {
 		this.favoriteEntryTypeId = favoriteEntryTypeId;
-		this.isAdding = isAdding;
 	}
 
 	public int getFavoriteEntryTypeId() {
@@ -21,11 +19,8 @@ public class PhotoBookmarkIcon {
 		this.favoriteEntryTypeId = favoriteEntryTypeId;
 	}
 
-	public boolean isAdding() {
-		return isAdding;
-	}
-
-	public void setAdding( final boolean isAdding ) {
-		this.isAdding = isAdding;
+	@Override
+	public String toString() {
+		return String.format( "%d", favoriteEntryTypeId );
 	}
 }
