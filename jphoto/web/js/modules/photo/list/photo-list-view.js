@@ -85,7 +85,7 @@ define( ["backbone", "jquery", "underscore"
 
 			this.$el.html( element );
 
-			this.renderBookmarkIcons();
+			this.renderBookmarkIcons( this.$( '.photo-icons' ) );
 		}
 
 		, events: {
@@ -104,13 +104,20 @@ define( ["backbone", "jquery", "underscore"
 			photoContextMenuModel.fetch( { cache: false } );
 		}
 
-		, renderBookmarkIcons: function() {
-			var container = $( '.photo-icons', this.$el );
+		, renderBookmarkIcons: function( iconsContainer ) {
+
 			var model = this.model;
+			var el = this.$el;
 
 			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
+
+				var container = $( '<div style="display: inline-block; margin-right: 3px;"></div>', el );
+
 				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ], baseUrl: model.get( 'baseUrl' ) } );
 				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
+
+				iconsContainer.append( container );
+
 				entryIconModel.fetch( { cache: false } );
 			});
 		}

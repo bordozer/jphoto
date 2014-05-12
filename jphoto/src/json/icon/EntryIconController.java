@@ -108,8 +108,4 @@ public class EntryIconController {
 	private Language getLanguage() {
 		return EnvironmentContext.getLanguage();
 	}
-
-	/*private class BookmarkedEntryDTO extends BookmarkEntryDTO {
-
-	}*/
 }
