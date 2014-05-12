@@ -9,6 +9,8 @@ public class BookmarkEntryDTO {
 	private final String title;
 	private final String icon;
 
+	private String saveCallbackMessage;
+
 	public BookmarkEntryDTO( final int userId, final int bookmarkEntryId, final int bookmarkEntryTypeId, final String title, final String icon ) {
 		this.userId = userId;
 		this.bookmarkEntryId = bookmarkEntryId;
@@ -35,5 +37,13 @@ public class BookmarkEntryDTO {
 
 	public String getIcon() {
 		return icon;
+	}
+
+	public String getSaveCallbackMessage() {
+		return saveCallbackMessage;
+	}
+
+	public void setSaveCallbackMessage( final String saveCallbackMessage ) {
+		this.saveCallbackMessage = saveCallbackMessage;
 	}
 }
