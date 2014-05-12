@@ -7,7 +7,6 @@
 
 <%@ attribute name="favoriteEntry" required="true" type="core.interfaces.Favoritable" %>
 <%@ attribute name="entryType" required="true" type="core.enums.FavoriteEntryType" %>
-<%@ attribute name="isEntryInUserFavorites" required="true" type="java.lang.Boolean" %>
 <%@ attribute name="entryName" required="true" type="java.lang.String" %>
 
 <c:set var="userId" value="<%=EnvironmentContext.getCurrentUserId()%>" />

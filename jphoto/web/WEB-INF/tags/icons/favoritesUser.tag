@@ -1,5 +1,3 @@
-<%@ tag import="core.services.entry.FavoritesService" %>
-<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.general.user.User" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="utils.UserUtils" %>
@@ -12,19 +10,16 @@
 <%@ attribute name="entryType" required="true" type="core.enums.FavoriteEntryType" %>
 
 <%
-	final FavoritesService favoritesService = ApplicationContextHelper.getBean( FavoritesService.BEAN_NAME );
 	final User currentUser = EnvironmentContext.getCurrentUser();
 
 	final boolean isLoggedUser = UserUtils.isCurrentUserLoggedUser();
 	final boolean showAddToFavoritesIcon = isLoggedUser && ! UserUtils.isUsersEqual( user, currentUser );
-	final boolean isEntryInUserFavorites = isLoggedUser && favoritesService.isEntryInFavorites( currentUser.getId(), user.getId(), entryType.getId() );
 %>
 
 <c:set var="showAddUserToFavoritesIcon" value="<%=showAddToFavoritesIcon%>" />
-<c:set var="isEntryInUserFavorites" value="<%=isEntryInUserFavorites%>" />
 
 <c:set var="userName" value="${eco:escapeHtml(user.name)}"/>
 
 <c:if test="${showAddUserToFavoritesIcon}">
-	<icons:faforiteIcon favoriteEntry="${user}" entryType="${entryType}" isEntryInUserFavorites="${isEntryInUserFavorites}" entryName="${userName}" />
+	<icons:faforiteIcon favoriteEntry="${user}" entryType="${entryType}" entryName="${userName}" />
 </c:if>
