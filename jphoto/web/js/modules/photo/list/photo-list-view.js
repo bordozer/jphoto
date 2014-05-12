@@ -9,9 +9,13 @@ define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/list/templates/anonymous-period-expiration-time.html"
 		, "components/menu/context-menu-model"
 		, "components/menu/context-menu-view"
+		, "modules/icon/entry-icon-model"
+		, "modules/icon/entry-icon-view"
 		], function ( Backbone, $, _
 		, photoListEntryContainer, groupOperationsTemplate, contextMenuTemplate, statisticsTemplate, photoNameTemplate, authorLinkTemplate, authorRankTemplate, anonymousPeriodExpirationTimeTemplate
-		, ContextMenuModel, ContextMenuView ) {
+		, ContextMenuModel, ContextMenuView
+		, EntryIconModel, EntryIconView
+		) {
 
 	'use strict';
 
@@ -80,11 +84,12 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			this.$el.html( element );
+
+			this.renderBookmarkIcons();
 		}
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
-			, "click .bookmark-icon": "onBookmarkIconClick"
 		}
 
 		, photoContextMenuIconClick: function() {
@@ -99,18 +104,20 @@ define( ["backbone", "jquery", "underscore"
 			photoContextMenuModel.fetch( { cache: false } );
 		}
 
-		, bookmarkIconClick: function( icon ) {
-			console.log( icon );
+		, renderBookmarkIcons: function() {
+			var container = $( '.photo-icons', this.$el );
+			var model = this.model;
+
+			_.each( this.model.get( 'bookmarkPhotoTypeIds' ), function( bookmarkPhotoTypeId ) {
+				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: bookmarkPhotoTypeId, baseUrl: model.get( 'baseUrl' ) } );
+				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
+				entryIconModel.fetch( { cache: false } );
+			});
 		}
 
 		, onPhotoContextMenuIconClick: function( evt ) {
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
-		}
-
-		, onBookmarkIconClick: function( evt ) {
-			evt.stopPropagation();
-			this.bookmarkIconClick( evt.target );
 		}
 	} );
 

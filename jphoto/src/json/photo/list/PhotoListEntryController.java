@@ -90,7 +90,7 @@ public class PhotoListEntryController {
 
 		final Photo photo = photoService.load( photoId );
 
-		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( photoId );
+		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( currentUser.getId(), photoId );
 
 		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo ) );
@@ -117,16 +117,19 @@ public class PhotoListEntryController {
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 
-		final List<FavoriteEntryDTO> favoriteEntryDTOs = newArrayList();
+		final List<Integer> bookmarkPhotoTypeIds = newArrayList();
 		for ( final FavoriteEntryType favoriteEntryType : FavoriteEntryType.RELATED_TO_PHOTO ) {
-			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryType.getId() ) ) {
-				final String title = translatorService.translate( favoriteEntryType.getRemoveText(), getLanguage() );
-				final String icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), favoriteEntryType.getRemoveIcon() );
 
-				favoriteEntryDTOs.add( new FavoriteEntryDTO( title, icon ) );
+			final int favoriteEntryTypeId = favoriteEntryType.getId();
+
+			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryTypeId ) ) {
+//				final String title = translatorService.translate( favoriteEntryType.getRemoveText(), getLanguage() );
+//				final String icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), favoriteEntryType.getRemoveIcon() );
+
+				bookmarkPhotoTypeIds.add( favoriteEntryTypeId );
 			}
 		}
-		photoEntry.setFavoriteEntryDTOs( favoriteEntryDTOs );
+		photoEntry.setBookmarkPhotoTypeIds( bookmarkPhotoTypeIds );
 
 		return photoEntry;
 	}

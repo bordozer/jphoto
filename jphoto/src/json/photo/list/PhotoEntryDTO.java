@@ -1,11 +1,10 @@
 package json.photo.list;
 
-import core.enums.FavoriteEntryType;
-
 import java.util.List;
 
 public class PhotoEntryDTO {
 
+	private final int userId;
 	private final int photoId;
 
 	private String groupOperationCheckbox;
@@ -38,10 +37,15 @@ public class PhotoEntryDTO {
 	private boolean showAdminFlag_Nude;
 
 	private boolean userOwnThePhoto;
-	private List<FavoriteEntryDTO> favoriteEntryDTOs;
+	private List<Integer> bookmarkPhotoTypeIds;
 
-	public PhotoEntryDTO( final int photoId ) {
+	public PhotoEntryDTO( final int userId, final int photoId ) {
+		this.userId = userId;
 		this.photoId = photoId;
+	}
+
+	public int getUserId() {
+		return userId;
 	}
 
 	public int getPhotoId() {
@@ -224,11 +228,11 @@ public class PhotoEntryDTO {
 		this.userOwnThePhoto = userOwnThePhoto;
 	}
 
-	public List<FavoriteEntryDTO> getFavoriteEntryDTOs() {
-		return favoriteEntryDTOs;
+	public List<Integer> getBookmarkPhotoTypeIds() {
+		return bookmarkPhotoTypeIds;
 	}
 
-	public void setFavoriteEntryDTOs( final List<FavoriteEntryDTO> favoriteEntryDTOs ) {
-		this.favoriteEntryDTOs = favoriteEntryDTOs;
+	public void setBookmarkPhotoTypeIds( final List<Integer> bookmarkPhotoTypeIds ) {
+		this.bookmarkPhotoTypeIds = bookmarkPhotoTypeIds;
 	}
 }
