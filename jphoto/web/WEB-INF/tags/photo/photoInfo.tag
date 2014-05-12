@@ -58,7 +58,6 @@
 						<user:userCard user="${user}"/>
 						<icons:userIcons user="${user}"
 										 hideIconSendPrivateMessage="true"
-										 hideIconToBlackList="true"
 								/>
 						<%--<tags:entryMenu entryMenu="${photoInfo.photoAuthorMenu}" />--%>
 						<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
