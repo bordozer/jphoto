@@ -3,7 +3,7 @@ define( ["modules/icon/entry-icon-model"
 		, "jquery"], function ( Model, View, $ ) {
 
 	function init( userId, bookmarkEntryId, bookmarkEntryTypeId, baseUrl, container ) {
-		console.log( userId, bookmarkEntryId, bookmarkEntryTypeId );
+//		console.log( userId, bookmarkEntryId, bookmarkEntryTypeId );
 		var entryIconModel = new Model.EntryIconModel( { userId: userId, bookmarkEntryId: bookmarkEntryId, bookmarkEntryTypeId: bookmarkEntryTypeId, baseUrl: baseUrl } );
 		var entryIconView = new View.EntryIconView( { model: entryIconModel, el: container } );
 
