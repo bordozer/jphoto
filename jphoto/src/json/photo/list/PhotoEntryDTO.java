@@ -1,5 +1,9 @@
 package json.photo.list;
 
+import core.enums.FavoriteEntryType;
+
+import java.util.List;
+
 public class PhotoEntryDTO {
 
 	private final int photoId;
@@ -34,6 +38,7 @@ public class PhotoEntryDTO {
 	private boolean showAdminFlag_Nude;
 
 	private boolean userOwnThePhoto;
+	private List<FavoriteEntryDTO> favoriteEntryDTOs;
 
 	public PhotoEntryDTO( final int photoId ) {
 		this.photoId = photoId;
@@ -217,5 +222,13 @@ public class PhotoEntryDTO {
 
 	public void setUserOwnThePhoto( final boolean userOwnThePhoto ) {
 		this.userOwnThePhoto = userOwnThePhoto;
+	}
+
+	public List<FavoriteEntryDTO> getFavoriteEntryDTOs() {
+		return favoriteEntryDTOs;
+	}
+
+	public void setFavoriteEntryDTOs( final List<FavoriteEntryDTO> favoriteEntryDTOs ) {
+		this.favoriteEntryDTOs = favoriteEntryDTOs;
 	}
 }

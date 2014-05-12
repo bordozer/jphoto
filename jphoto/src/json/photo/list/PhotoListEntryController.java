@@ -1,9 +1,11 @@
 package json.photo.list;
 
+import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
@@ -30,6 +32,9 @@ import ui.userRankIcons.AbstractUserRankIcon;
 import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @RequestMapping( "photos/{photoId}" )
 @Controller
@@ -74,9 +79,14 @@ public class PhotoListEntryController {
 	@Autowired
 	private SecurityUIService securityUIService;
 
+	@Autowired
+	private FavoritesService favoritesService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
+
+		final User currentUser = getCurrentUser();
 
 		final Photo photo = photoService.load( photoId );
 
@@ -98,14 +108,25 @@ public class PhotoListEntryController {
 
 		setPhotoAnonymousPeriodExpiration( photo, photoEntry );
 
-		final boolean userOwnThePhoto = securityService.userOwnThePhoto( getCurrentUser(), photo );
-		final boolean isSuperAdminUser = securityService.isSuperAdminUser( getCurrentUser() );
+		final boolean userOwnThePhoto = securityService.userOwnThePhoto( currentUser, photo );
+		final boolean isSuperAdminUser = securityService.isSuperAdminUser( currentUser );
 
 		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
 
 		photoEntry.setShowAdminFlag_Nude( photo.isContainsNudeContent() && isSuperAdminUser );
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
+
+		final List<FavoriteEntryDTO> favoriteEntryDTOs = newArrayList();
+		for ( final FavoriteEntryType favoriteEntryType : FavoriteEntryType.RELATED_TO_PHOTO ) {
+			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryType.getId() ) ) {
+				final String title = translatorService.translate( favoriteEntryType.getName(), getLanguage() );
+				final String icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), favoriteEntryType.getRemoveIcon() );
+
+				favoriteEntryDTOs.add( new FavoriteEntryDTO( title, icon ) );
+			}
+		}
+		photoEntry.setFavoriteEntryDTOs( favoriteEntryDTOs );
 
 		return photoEntry;
 	}

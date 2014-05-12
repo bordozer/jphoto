@@ -5,3 +5,11 @@
 <div class="photo-list-entry-preview">
 	<%=photoImage%>
 </div>
+
+<div class="photo-list-entry-line text-centered">
+
+	<%_.each( favoriteEntryDTOs, function( favoriteEntryDTO ) { %>
+		<img src='<%=favoriteEntryDTO.icon%>' title='<%=favoriteEntryDTO.name%>' width="16">
+	<%});%>
+
+</div>

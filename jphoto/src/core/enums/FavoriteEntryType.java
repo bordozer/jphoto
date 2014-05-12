@@ -17,7 +17,7 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 
 	public static final String FAVORITES_IMAGE_FOLDER = "favorites";
 
-	private final static EnumSet RELATED_TO_PHOTO = EnumSet.of( FAVORITE_PHOTOS, BOOKMARKED_PHOTOS, NEW_COMMENTS_NOTIFICATION );
+	public final static EnumSet<FavoriteEntryType> RELATED_TO_PHOTO = EnumSet.<FavoriteEntryType>of( FAVORITE_PHOTOS, BOOKMARKED_PHOTOS, NEW_COMMENTS_NOTIFICATION );
 
 	private final int id;
 
@@ -48,15 +48,15 @@ public enum FavoriteEntryType implements IdentifiableNameable {
 	}
 
 	public String getAddText() {
-		return addText; // TODO: translate
+		return addText;
 	}
 
 	public String getRemoveText() {
-		return removeText; // TODO: translate
+		return removeText;
 	}
 
 	public String getAddIcon() {
-		return  addIcon;
+		return addIcon;
 	}
 
 	public String getRemoveIcon() {
