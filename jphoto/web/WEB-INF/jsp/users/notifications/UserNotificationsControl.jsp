@@ -37,12 +37,12 @@
 			<table:separatorInfo colspan="3" title="${eco:translate('Activity Notifications')}" />
 
 			<table:tr>
-				<table:td><a href="${usersNewPhotosNotificationMenuLink}">${eco:translate("New comments of the photos I\'m tracking which")}</a></table:td>
+				<table:td><a href="${photosWithSubscribeOnNewCommentsLink}">${eco:translate("New comments of the photos I\'m tracking which")}</a></table:td>
 				<table:td>${userNotificationsControlModel.photoQtyWhichCommentsUserIsTracking}</table:td>
 			</table:tr>
 
 			<table:tr>
-				<table:td><a href="${photosWithSubscribeOnNewCommentsLink}">${eco:translate("New photo of the member I'm tracking who's")}</a></table:td>
+				<table:td><a href="${usersNewPhotosNotificationMenuLink}">${eco:translate("New photo of the member I'm tracking who's")}</a></table:td>
 				<table:td>${userNotificationsControlModel.usersQtyWhoNewPhotoUserIsTracking}</table:td>
 			</table:tr>
 
