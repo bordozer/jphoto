@@ -3,7 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var EntryIconModel = Backbone.Model.extend( {
 
 		initialize:function ( options ) {
-			this.url = options.baseUrl + '/json/bookmarks/' + options.userId + '/' + options.bookmarkEntryId + '/' + options.bookmarkEntryTypeId + '/?isAdding=' + options.isAdding;
+			this.url = options.baseUrl + '/json/bookmarks/' + options.userId + '/' + options.bookmarkEntryId + '/' + options.bookmarkEntryTypeId + '/';
 		}
 
 		, refresh: function() {

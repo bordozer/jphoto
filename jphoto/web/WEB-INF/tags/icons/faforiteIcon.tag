@@ -16,6 +16,6 @@
 
 <script type="text/javascript">
 	require( [ 'jquery' ], function ( $ ) {
-		renderEntryIcon( ${userId}, ${favoriteEntry.id}, ${entryType.id}, ${not isEntryInUserFavorites}, $( '.bookmark-icon-div-${userId}-${favoriteEntry.id}-${entryType.id}' ) );
+		renderEntryIcon( ${userId}, ${favoriteEntry.id}, ${entryType.id}, $( '.bookmark-icon-div-${userId}-${favoriteEntry.id}-${entryType.id}' ) );
 	});
 </script>

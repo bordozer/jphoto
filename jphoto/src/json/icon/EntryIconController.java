@@ -53,10 +53,7 @@ public class EntryIconController {
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public BookmarkEntryDTO doEntryIconAction( @RequestBody final BookmarkEntryDTO entryDTO, final HttpServletRequest request ) {
-
-		final boolean isAdding = Boolean.valueOf( request.getParameter( "isAdding" ) );
-		entryDTO.setAdding( isAdding );
+	public BookmarkEntryDTO doEntryIconAction( @RequestBody final BookmarkEntryDTO entryDTO ) {
 
 		ValidationHelper.validate( entryDTO, entryIconValidator );
 
@@ -90,19 +87,22 @@ public class EntryIconController {
 	private BookmarkEntryDTO getBookmarkEntryDTO( final int userId, final int bookmarkEntryId, final int bookmarkEntryTypeId ) {
 
 		final FavoriteEntryType bookmarkEntryType = FavoriteEntryType.getById( bookmarkEntryTypeId );
-		final FavoriteEntry bookmarkEntry = favoritesService.getFavoriteEntry( userId, bookmarkEntryId, bookmarkEntryType );
+		final boolean isInBookmark = favoritesService.isEntryInFavorites( userId, bookmarkEntryId, bookmarkEntryTypeId );
 
 		String title;
 		String icon;
-		if ( bookmarkEntry == null ) {
-			title = translatorService.translate( bookmarkEntryType.getAddText(), getLanguage() );
-			icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), bookmarkEntryType.getAddIcon() );
-		} else {
+		if ( isInBookmark ) {
 			title = translatorService.translate( bookmarkEntryType.getRemoveText(), getLanguage() );
 			icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), bookmarkEntryType.getRemoveIcon() );
+		} else {
+			title = translatorService.translate( bookmarkEntryType.getAddText(), getLanguage() );
+			icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), bookmarkEntryType.getAddIcon() );
 		}
 
-		return new BookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId, title, icon );
+		final BookmarkEntryDTO entryDTO = new BookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId, title, icon );
+		entryDTO.setAdding( ! isInBookmark );
+
+		return entryDTO;
 	}
 
 	private Language getLanguage() {

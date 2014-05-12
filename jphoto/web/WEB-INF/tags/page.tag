@@ -63,9 +63,9 @@
 			} );
 		}
 
-		function renderEntryIcon( userId, bookmarkEntryId, bookmarkEntryTypeId, isAdding, container ) {
+		function renderEntryIcon( userId, bookmarkEntryId, bookmarkEntryTypeId, container ) {
 			require( [ 'jquery', 'modules/icon/entry-icon'], function ( $, bookmarking ) {
-				bookmarking( userId, bookmarkEntryId, bookmarkEntryTypeId, isAdding, '${eco:baseUrl()}', container );
+				bookmarking( userId, bookmarkEntryId, bookmarkEntryTypeId, '${eco:baseUrl()}', container );
 			} );
 		}
 	</script>

@@ -109,7 +109,7 @@ define( ["backbone", "jquery", "underscore"
 			var model = this.model;
 
 			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
-				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ], isAdding: photoBookmarkIcon[ 'adding' ], baseUrl: model.get( 'baseUrl' ) } );
+				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ], baseUrl: model.get( 'baseUrl' ) } );
 				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
 				entryIconModel.fetch( { cache: false } );
 			});
