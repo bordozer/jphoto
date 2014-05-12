@@ -10,7 +10,7 @@ define( ["backbone", "jquery", "underscore" ], function ( Backbone, $, _ ) {
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
-			console.log( modelJSON );
+//			console.log( modelJSON );
 
 			this.$el.html( "<img src='" + this.model.get( 'icon' ) + "' width='16' height='16' title='" + this.model.get( 'title' ) + "' class='bookmark-entry-icon' />" );
 		}

@@ -7,13 +7,15 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
+import json.photo.appraisal.ValidationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+
+import javax.servlet.http.HttpServletRequest;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "bookmarks/{userId}/{bookmarkEntryId}/{bookmarkEntryTypeId}" )
 @Controller
@@ -31,7 +33,10 @@ public class EntryIconController {
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
+	@Autowired
+	private EntryIconValidator entryIconValidator;
+
+	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public BookmarkEntryDTO renderEntryIcon(
 		final @PathVariable( "userId" ) int userId
@@ -41,27 +46,30 @@ public class EntryIconController {
 		return getBookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId );
 	}
 
-	@RequestMapping( method = RequestMethod.POST, value = "/", produces = "application/json" )
+	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public BookmarkEntryDTO doEntryIconAction(
-		final @PathVariable( "userId" ) int userId
-		, final @PathVariable( "bookmarkEntryId" ) int bookmarkEntryId
-		, final @PathVariable( "bookmarkEntryTypeId" ) int bookmarkEntryTypeId
-	) {
+	public BookmarkEntryDTO doEntryIconAction( @RequestBody final BookmarkEntryDTO entryDTO, final HttpServletRequest request ) {
 
-		final FavoriteEntryType bookmarkEntryType = FavoriteEntryType.getById( bookmarkEntryTypeId );
+		final boolean isAdding = Boolean.valueOf( request.getParameter( "isAdding" ) );
+		entryDTO.setAdding( isAdding );
+
+		ValidationHelper.validate( entryDTO, entryIconValidator );
+
+		final int userId = entryDTO.getUserId();
+
+		final FavoriteEntryType bookmarkEntryType = FavoriteEntryType.getById( entryDTO.getBookmarkEntryTypeId() );
 		final String typeName = translatorService.translate( bookmarkEntryType.getName(), getLanguage() );
 
 		String saveCallbackMessage = "";
-		if ( favoritesService.isEntryInFavorites( userId, bookmarkEntryId, bookmarkEntryTypeId ) ) {
-			favoritesService.removeEntryFromFavorites( userId, bookmarkEntryId, bookmarkEntryType );
+		if ( favoritesService.isEntryInFavorites( userId, entryDTO.getBookmarkEntryId(), entryDTO.getBookmarkEntryTypeId() ) ) {
+			favoritesService.removeEntryFromFavorites( userId, entryDTO.getBookmarkEntryId(), bookmarkEntryType );
 			saveCallbackMessage = translatorService.translate( "Successfully removed from $1", getLanguage(), typeName );
 		} else {
-			favoritesService.addEntryToFavorites( userId, bookmarkEntryId, dateUtilsService.getCurrentTime(), bookmarkEntryType );
+			favoritesService.addEntryToFavorites( userId, entryDTO.getBookmarkEntryId(), dateUtilsService.getCurrentTime(), bookmarkEntryType );
 			saveCallbackMessage = translatorService.translate( "Successfully added to $1", getLanguage(), typeName );
 		}
 
-		final BookmarkEntryDTO bookmarkEntryDTO = getBookmarkEntryDTO( userId, bookmarkEntryId, bookmarkEntryTypeId );
+		final BookmarkEntryDTO bookmarkEntryDTO = getBookmarkEntryDTO( userId, entryDTO.getBookmarkEntryId(), entryDTO.getBookmarkEntryTypeId() );
 		bookmarkEntryDTO.setSaveCallbackMessage( saveCallbackMessage );
 
 		return bookmarkEntryDTO;

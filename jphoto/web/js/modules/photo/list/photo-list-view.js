@@ -108,8 +108,8 @@ define( ["backbone", "jquery", "underscore"
 			var container = $( '.photo-icons', this.$el );
 			var model = this.model;
 
-			_.each( this.model.get( 'bookmarkPhotoTypeIds' ), function( bookmarkPhotoTypeId ) {
-				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: bookmarkPhotoTypeId, baseUrl: model.get( 'baseUrl' ) } );
+			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
+				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ], isAdding: photoBookmarkIcon[ 'adding' ], baseUrl: model.get( 'baseUrl' ) } );
 				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
 				entryIconModel.fetch( { cache: false } );
 			});

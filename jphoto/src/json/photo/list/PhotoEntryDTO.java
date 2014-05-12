@@ -37,7 +37,7 @@ public class PhotoEntryDTO {
 	private boolean showAdminFlag_Nude;
 
 	private boolean userOwnThePhoto;
-	private List<Integer> bookmarkPhotoTypeIds;
+	private List<PhotoBookmarkIcon> photoBookmarkIcons;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -228,11 +228,11 @@ public class PhotoEntryDTO {
 		this.userOwnThePhoto = userOwnThePhoto;
 	}
 
-	public List<Integer> getBookmarkPhotoTypeIds() {
-		return bookmarkPhotoTypeIds;
+	public List<PhotoBookmarkIcon> getPhotoBookmarkIcons() {
+		return photoBookmarkIcons;
 	}
 
-	public void setBookmarkPhotoTypeIds( final List<Integer> bookmarkPhotoTypeIds ) {
-		this.bookmarkPhotoTypeIds = bookmarkPhotoTypeIds;
+	public void setPhotoBookmarkIcons( final List<PhotoBookmarkIcon> photoBookmarkIcons ) {
+		this.photoBookmarkIcons = photoBookmarkIcons;
 	}
 }

@@ -117,19 +117,16 @@ public class PhotoListEntryController {
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 
-		final List<Integer> bookmarkPhotoTypeIds = newArrayList();
+		final List<PhotoBookmarkIcon> photoBookmarkIcons = newArrayList();
 		for ( final FavoriteEntryType favoriteEntryType : FavoriteEntryType.RELATED_TO_PHOTO ) {
 
 			final int favoriteEntryTypeId = favoriteEntryType.getId();
 
 			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryTypeId ) ) {
-//				final String title = translatorService.translate( favoriteEntryType.getRemoveText(), getLanguage() );
-//				final String icon = String.format( "%s/favorites/%s", urlUtilsService.getSiteImagesPath(), favoriteEntryType.getRemoveIcon() );
-
-				bookmarkPhotoTypeIds.add( favoriteEntryTypeId );
+				photoBookmarkIcons.add( new PhotoBookmarkIcon( favoriteEntryTypeId, false ) );
 			}
 		}
-		photoEntry.setBookmarkPhotoTypeIds( bookmarkPhotoTypeIds );
+		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );
 
 		return photoEntry;
 	}
