@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import ui.context.EnvironmentContext;
+import utils.UserUtils;
 
 public class EntryIconValidator implements Validator {
 
@@ -26,7 +27,25 @@ public class EntryIconValidator implements Validator {
 	public void validate( final Object target, final Errors errors ) {
 		final BookmarkEntryDTO entryDTO = ( BookmarkEntryDTO ) target;
 
+		validateUser( entryDTO, errors );
+
 		validateAction( entryDTO, errors );
+	}
+
+	private void validateUser( final BookmarkEntryDTO entryDTO, final Errors errors ) {
+		final Language language = EnvironmentContext.getLanguage();
+
+		if ( ! UserUtils.isLoggedUser( EnvironmentContext.getCurrentUserId() ) ) {
+			final String errorMessage = translatorService.translate( "You are not logged in.", language );
+			errors.rejectValue( "userId", "error code", errorMessage );
+
+			return;
+		}
+
+		if ( ! UserUtils.isTheUserThatWhoIsCurrentUser( entryDTO.getUserId() ) ) {
+			final String errorMessage = translatorService.translate( "Wrong user. The user must have changed since the page is loaded.", language );
+			errors.rejectValue( "userId", "error code", errorMessage );
+		}
 	}
 
 	private void validateAction( final BookmarkEntryDTO entryDTO, final Errors errors ) {
