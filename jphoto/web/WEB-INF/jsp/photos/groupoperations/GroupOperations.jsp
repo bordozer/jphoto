@@ -123,6 +123,8 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'DELETE_PHOTOS'}">
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" initiallyChecked="true" />
+				<br/>
 				${eco:translate('Selected photos will be deleted')}
 				<br/>
 				<br/>
@@ -150,6 +152,8 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'MOVE_TO_GENRE'}">
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" initiallyChecked="true" />
+				<br />
 				${eco:translate("Note. If a photo has 'Nude contain' option, then it is possible to move it only in category that supports nude content. Moving of unsuitable for the selected category photos will be skipped.")}
 				<br />
 				${eco:translate('Select the genre to move to:')}
