@@ -24,7 +24,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractGroupOperationHandler {
 
-	protected static final int ENTRY_ID = 1;
+	public static final int ENTRY_ID = 1;
+
 	protected final Services services;
 	protected final PhotoGroupOperationModel model;
 

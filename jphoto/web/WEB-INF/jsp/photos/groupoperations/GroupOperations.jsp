@@ -1,5 +1,6 @@
 <%@ page import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ page import="ui.controllers.photos.groupoperations.PhotoGroupOperationValidator" %>
+<%@ page import="ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -26,6 +27,8 @@
 
 <c:set var="photoGroupOperationType" value="${photoGroupOperationModel.photoGroupOperationType}"/>
 <c:set var="noGenreSelected" value="<%=PhotoGroupOperationValidator.NO_GENRE_SELECTED%>"/>
+
+<c:set var="singleEntryId" value="<%=AbstractGroupOperationHandler.ENTRY_ID%>" />
 
 <tags:page pageModel="${photoGroupOperationModel.pageModel}">
 
@@ -70,9 +73,11 @@
 
 								<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 								<c:if test="${photoGroupOperationEntryProperty.photoId == photo.id}">
-									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${photoGroupOperationEntryProperty.entryId}'].value"/>
+									<c:set var="entryId" value="${photoGroupOperationEntryProperty.entryId}" />
 
-									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
+									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${entryId}'].value"/>
+
+									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
 									${photoGroupOperationEntryProperty.name}
 									<br />
 									<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
@@ -103,7 +108,7 @@
 				<br />
 				<br />
 				<c:forEach var="userPhotoAlbum" items="${photoGroupOperationModel.userPhotoAlbums}">
-					<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> ${userPhotoAlbum.name}
+					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userPhotoAlbum.id}" /> ${userPhotoAlbum.name}
 					<br />
 				</c:forEach>
 			</c:if>
@@ -113,17 +118,17 @@
 				<br />
 				<br />
 				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
-					<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
+					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userTeamMember.id}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />
 				</c:forEach>
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">
-				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" /> ${eco:translate('Nude content')}
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${singleEntryId}" /> ${eco:translate('Nude content')}
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'DELETE_PHOTOS'}">
-				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" initiallyChecked="true" />
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${singleEntryId}" initiallyChecked="true" />
 				<br/>
 				${eco:translate('Selected photos will be deleted')}
 				<br/>
@@ -152,7 +157,7 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'MOVE_TO_GENRE'}">
-				<js:checkboxMassChecker checkboxClass="group-operation-checkbox" initiallyChecked="true" />
+				<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${singleEntryId}" initiallyChecked="true" />
 				<br />
 				${eco:translate("Note. If a photo has 'Nude contain' option, then it is possible to move it only in category that supports nude content. Moving of unsuitable for the selected category photos will be skipped.")}
 				<br />
