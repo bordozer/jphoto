@@ -213,7 +213,7 @@ public class PhotoListEntryController {
 		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 
 		if ( hideAuthorName ) {
-			return translatorService.translate( "Photo preview: Anonymous posting till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
+			return configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
 		}
 
 		final User user = userService.load( photo.getUserId() );
@@ -248,7 +248,7 @@ public class PhotoListEntryController {
 		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
 		if ( showAnonymousPeriodExpirationInfo ) {
 			photoEntry.setShowUserRank( false );
-			final String expirationInfo = translatorService.translate( "Photo preview: till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
+			final String expirationInfo = translatorService.translate( "Photo preview: Anonymous posting till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
 			photoEntry.setPhotoAnonymousPeriodExpirationInfo( expirationInfo );
 		}
 	}
