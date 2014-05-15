@@ -135,14 +135,11 @@ public class PhotoListEntryController {
 	private String getPhotoUploadDate( final Photo photo ) {
 		final Date uploadTime = photo.getUploadTime();
 
-		String shownTime = dateUtilsService.formatDateTimeShort( uploadTime );
-		if ( dateUtilsService.isItToday( uploadTime ) ) {
-			shownTime = dateUtilsService.formatTimeShort( uploadTime );
-		}
+		final String shownTime = dateUtilsService.isItToday( uploadTime ) ? dateUtilsService.formatTimeShort( uploadTime ) : dateUtilsService.formatDateTimeShort( uploadTime );
 
 		return String.format( "<a href='%s' title='%s'>%s</a>"
 			, urlUtilsService.getPhotosUploadedOnDateUrl( uploadTime )
-			, translatorService.translate( "Photo preview: show all photos uploaded at the day", getLanguage() )
+			, translatorService.translate( "Photo preview: show all photos uploaded at $1", getLanguage(), dateUtilsService.formatDate( uploadTime ) )
 			, shownTime
 		);
 	}
@@ -156,11 +153,11 @@ public class PhotoListEntryController {
 		}
 
 		photoEntry.setTodayMarks( getTodayMarks( photo ) );
-		photoEntry.setTodayMarksTitle( translatorService.translate( "The photo's today's marks", getLanguage() ) );
+		photoEntry.setTodayMarksTitle( translatorService.translate( "Photo preview: The photo's today's marks", getLanguage() ) );
 
 		photoEntry.setPeriodMarks( getPeriodMarks( photo ) );
 		final int period = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		photoEntry.setPeriodMarksTitle( translatorService.translate( "The photo's marks for period from $1 to $2"
+		photoEntry.setPeriodMarksTitle( translatorService.translate( "Photo preview: The photo's marks for period from $1 to $2"
 			, getLanguage()
 			, dateUtilsService.formatDate( dateUtilsService.getDatesOffsetFromCurrentDate( -period ) )
 			, dateUtilsService.formatDate( dateUtilsService.getCurrentTime() )
@@ -168,7 +165,7 @@ public class PhotoListEntryController {
 
 		photoEntry.setTotalMarks( getTotalMarks( photo ) );
 		photoEntry.setTotalMarksUrl( urlUtilsService.getPhotoMarksListLink( photo.getId() ) );
-		photoEntry.setTotalMarksTitle( translatorService.translate( "The photo's total marks", getLanguage() ) );
+		photoEntry.setTotalMarksTitle( translatorService.translate( "Photo preview: The photo's total marks", getLanguage() ) );
 	}
 
 	private int getTodayMarks( final Photo photo ) {
@@ -200,7 +197,7 @@ public class PhotoListEntryController {
 		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
 			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
 				, urlUtilsService.getPhotoCardLink( photo.getId() )
-				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Nude content", getLanguage() ) )
+				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", getLanguage() ) )
 				, urlUtilsService.getSiteImagesPath()
 			);
 		}
@@ -216,7 +213,7 @@ public class PhotoListEntryController {
 		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 
 		if ( hideAuthorName ) {
-			return configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
+			return translatorService.translate( "Photo preview: Anonymous posting till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
 		}
 
 		final User user = userService.load( photo.getUserId() );
@@ -251,7 +248,8 @@ public class PhotoListEntryController {
 		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
 		if ( showAnonymousPeriodExpirationInfo ) {
 			photoEntry.setShowUserRank( false );
-			photoEntry.setPhotoAnonymousPeriodExpirationInfo( translatorService.translate( "till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) ) );
+			final String expirationInfo = translatorService.translate( "Photo preview: till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
+			photoEntry.setPhotoAnonymousPeriodExpirationInfo( expirationInfo );
 		}
 	}
 

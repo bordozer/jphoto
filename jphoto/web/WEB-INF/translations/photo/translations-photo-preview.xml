@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Photo preview: show all photos uploaded at $1</nerd>
+		<ru><![CDATA[Показать все работы, загруженные $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: The photo's today's marks</nerd>
+		<ru><![CDATA[Сумма баллов, полученных сегодня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: The photo's marks for period from $1 to $2</nerd>
+		<ru><![CDATA[Оценки, полученные за период с $1 по $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: The photo's total marks</nerd>
+		<ru><![CDATA[Суммарная оценка работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: Nude content</nerd>
+		<ru><![CDATA[НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: Anonymous posting till $1</nerd>
+		<ru><![CDATA[Анонимный постинг до $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[до $1]]></ru>
+	</translation>
+
+</translations>
