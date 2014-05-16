@@ -13,7 +13,7 @@
 <tags:page pageModel="${systemConfigurationListModel.pageModel}">
 
 	<c:set var="systemConfigurations" value="${systemConfigurationListModel.systemConfigurations}" />
-	<c:set var="initialConfigurationTab" value="<%=ConfigurationTab.SYSTEM%>" />
+	<c:set var="initialConfigurationTab" value="<%=ConfigurationTab.getDefaultConfigurationTab()%>" />
 
 	<links:configurationNew>
 		<html:img id="addSystemConfigurationIcon" src="add32.png" width="32" height="32" alt="${eco:translate('Create new system configuration')}" />
@@ -24,7 +24,7 @@
 
 	<table:table width="100%" oddEven="true">
 
-		<table:separatorInfo colspan="5" title="${eco:translate('Saved system configurations')}" />
+		<table:separatorInfo colspan="6" title="${eco:translate('Saved system configurations')}" />
 
 		<c:forEach var="systemConfiguration" items="${systemConfigurations}">
 			<table:tr>
@@ -33,6 +33,26 @@
 					<links:configurationEdit systemConfigurationId="${systemConfiguration.id}">
 						<html:img id="edit_${systemConfiguration.id}" src="edit16.png" width="16" height="16" />
 					</links:configurationEdit>
+				</table:tdunderlined>
+
+				<table:tdunderlined width="20">
+
+					<c:if test="${!systemConfiguration.defaultConfiguration}">
+						<html:img16 src="delete16.png" onclick="deleteConfiguration();" />
+						<script type="text/javascript">
+							function deleteConfiguration() {
+								if ( confirm( "${eco:translate1('Delete system configuration $1?', systemConfiguration.name)}" ) ) {
+									document.location.href = "${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/delete/";
+								}
+							}
+						</script>
+					</c:if>
+
+					<c:if test="${systemConfiguration.defaultConfiguration}">
+						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted')}" />
+						<html:img16 src="delete16.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
+					</c:if>
+
 				</table:tdunderlined>
 
 				<table:tdunderlined width="20">
@@ -63,5 +83,7 @@
 		</c:forEach>
 
 	</table:table>
+
+	<tags:springErrorHighliting bindingResult="${configurationEditModel.bindingResult}"/>
 
 </tags:page>

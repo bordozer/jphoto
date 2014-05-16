@@ -1,11 +1,18 @@
 package admin.controllers.configuration.list;
 
+import core.general.configuration.SystemConfiguration;
 import core.services.system.ConfigurationService;
+import core.services.system.SystemConfigurationLoadService;
+import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 @Controller
@@ -16,7 +23,7 @@ public class SystemConfigurationListController {
 
 	public static final String REDIRECT_CONFIGURATION_LINK = "redirect:/admin/configuration/";
 
-	private static final String VIEW = "admin/configuration/list/ConfigurationList";
+	public static final String VIEW = "admin/configuration/list/ConfigurationList";
 
 	@Autowired
 	private ConfigurationService configurationService;
@@ -24,12 +31,50 @@ public class SystemConfigurationListController {
 	@Autowired
 	private BreadcrumbsAdminService breadcrumbsAdminService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String configurationInfo( final @ModelAttribute( MODEL_NAME ) SystemConfigurationListModel model ) {
+	@Autowired
+	private SystemConfigurationLoadService systemConfigurationLoadService;
+
+	@Autowired
+	private TranslatorService translatorService;
+
+	@ModelAttribute( MODEL_NAME )
+	public SystemConfigurationListModel prepareModel() {
+		final SystemConfigurationListModel model = new SystemConfigurationListModel();
 
 		model.setSystemConfigurations( configurationService.getAllSystemConfigurations() );
 
 		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminSystemConfigurationListBreadcrumbs() );
+
+		return model;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/" )
+	public String configurationList( final @ModelAttribute( MODEL_NAME ) SystemConfigurationListModel model ) {
+		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/{systemConfigurationId}/delete/" )
+	public String deleteConfiguration( final @PathVariable( "systemConfigurationId" ) int systemConfigurationId, final @ModelAttribute( MODEL_NAME ) SystemConfigurationListModel model ) {
+
+		final SystemConfiguration systemConfiguration = systemConfigurationLoadService.load( systemConfigurationId );
+
+		final boolean defaultConfiguration = systemConfiguration.isDefaultConfiguration();
+		final boolean activeConfiguration = systemConfiguration.isActiveConfiguration();
+
+		if ( defaultConfiguration ) {
+			final String error = translatorService.translate( "This is the default system configuration. It can not be deleted.", EnvironmentContext.getLanguage() );
+			EnvironmentContext.getEnvironment().setHiMessage( error );
+		}
+
+		if ( activeConfiguration ) {
+			final String error = translatorService.translate( "This is the active system configuration. It can not be deleted. Activate another configuration first.", EnvironmentContext.getLanguage() );
+			EnvironmentContext.getEnvironment().setHiMessage( error );
+		}
+
+		if ( ! activeConfiguration && ! defaultConfiguration ) {
+			systemConfigurationLoadService.delete( systemConfigurationId );
+			return REDIRECT_CONFIGURATION_LINK;
+		}
 
 		return VIEW;
 	}

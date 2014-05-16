@@ -1,15 +1,14 @@
 package admin.controllers.configuration.list;
 
+import core.general.base.AbstractGeneralModel;
+import core.general.base.AbstractGeneralPageModel;
 import core.general.configuration.SystemConfiguration;
-import ui.elements.PageModel;
 
 import java.util.List;
 
-public class SystemConfigurationListModel {
+public class SystemConfigurationListModel extends AbstractGeneralPageModel {
 
 	private List<SystemConfiguration> systemConfigurations;
-
-	private PageModel pageModel = new PageModel();
 
 	public List<SystemConfiguration> getSystemConfigurations() {
 		return systemConfigurations;
@@ -17,13 +16,5 @@ public class SystemConfigurationListModel {
 
 	public void setSystemConfigurations( final List<SystemConfiguration> systemConfigurations ) {
 		this.systemConfigurations = systemConfigurations;
-	}
-
-	public PageModel getPageModel() {
-		return pageModel;
-	}
-
-	public void setPageModel( final PageModel pageModel ) {
-		this.pageModel = pageModel;
 	}
 }

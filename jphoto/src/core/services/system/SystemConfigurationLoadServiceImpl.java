@@ -123,6 +123,7 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 	@Override
 	public boolean delete( final int entryId ) {
+		configurationDao.deleteSystemConfigurationKeys( entryId );
 		return configurationDao.delete( entryId );
 	}
 
