@@ -50,7 +50,7 @@
 
 					<c:if test="${systemConfiguration.defaultConfiguration}">
 						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted')}" />
-						<html:img16 src="delete16.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
+						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
 					</c:if>
 
 				</table:tdunderlined>
