@@ -62,18 +62,18 @@
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.defaultConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="defaultSystemConfiguration.png" width="16" height="16" alt="${eco:translate('The default configuration')}" />
+						<html:img id="${systemConfiguration.id}" src="system-configuration-default.png" width="16" height="16" alt="${eco:translate('The default configuration')}" />
 					</c:if>
 				</table:tdunderlined>
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.activeConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="activeSysConfig.png" width="16" height="16" alt="${eco:translate('The active configuration')}" />
+						<html:img id="${systemConfiguration.id}" src="system-configuration-active.png" width="16" height="16" alt="${eco:translate('The active configuration')}" />
 					</c:if>
 
 					<c:if test="${not systemConfiguration.activeConfiguration}">
 						<a href="${eco:baseAdminUrl()}/configuration/activation/?id=${systemConfiguration.id}" >
-							<html:img id="${systemConfiguration.id}" src="inactiveSysConfig.png" width="16" height="16" alt="${eco:translate('Activate configuration')}" />
+							<html:img id="${systemConfiguration.id}" src="system-configuration-inactive.png" width="16" height="16" alt="${eco:translate('Activate configuration')}" />
 						</a>
 					</c:if>
 				</table:tdunderlined>

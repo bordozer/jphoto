@@ -50,11 +50,11 @@
 				<td width="20">
 					<c:if test="${not empty upgradeTasksToPerform.upgradeTaskResult}">
 						<c:if test="${upgradeTasksToPerform.upgradeTaskResult == 'SUCCESSFUL'}">
-							<html:img id="" src="activeSysConfig.png" width="16" height="16" />
+							<html:img id="" src="system-configuration-active.png" width="16" height="16" />
 						</c:if>
 
 						<c:if test="${upgradeTasksToPerform.upgradeTaskResult == 'ERROR'}">
-							<html:img id="" src="inactiveSysConfig.png" width="16" height="16" />
+							<html:img id="" src="system-configuration-inactive.png" width="16" height="16" />
 						</c:if>
 					</c:if>
 
