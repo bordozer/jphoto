@@ -104,7 +104,7 @@ public class Configuration implements Cloneable {
 
 	@Override
 	public int hashCode() {
-		return configurationKey.hashCode() + 31 * value.hashCode();
+		return configurationKey.hashCode(); // + 31 * value.hashCode();
 	}
 
 	@Override
@@ -127,12 +127,16 @@ public class Configuration implements Cloneable {
 		}
 
 		final Configuration configuration = ( Configuration ) obj;
-		return configuration.getConfigurationKey().equals( configurationKey ) && configuration.getValue().equals( value );
+		if ( configuration.getConfigurationKey() == null ) {
+			return false;
+		}
+
+		return configuration.getConfigurationKey().equals( configurationKey ); // && configuration.getValue().equals( value );
 	}
 
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s", configurationKey.getId(), value );
+		return String.format( "%s: %s", configurationKey != null ? configurationKey.getId() : "UNKNOWN KEY", value );
 	}
 }

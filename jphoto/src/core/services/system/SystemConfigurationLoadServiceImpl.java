@@ -37,7 +37,7 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 			throw new BaseRuntimeException( "Can not save configuration" );
 		}
 
-		return result;
+		return true;
 	}
 
 	@Override
@@ -51,13 +51,20 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 		final List<Configuration> configurations = configurationDao.loadConfigurations( systemConfigurationId );
 
+		filterLegacyConfigurationKeys( configurations );
+
 		if ( systemConfiguration.isDefaultConfiguration() ) {
+
 			for ( final Configuration configuration : configurations ) {
 				configuration.setGotFromDefaultSystemConfiguration( true );
 			}
-			configurations.addAll( getMissedInDBConfigurations( systemConfigurationId ) );
+
+			configurations.addAll( getMissedInDBConfigurations( configurations ) );
+
 		} else {
+
 			final List<Configuration> defaultConfigurations = getDefaultSystemConfiguration().getConfigurations();
+
 			for ( final Configuration defaultConfiguration : defaultConfigurations ) {
 				if ( ! configurations.contains( defaultConfiguration ) ) {
 					final Configuration configuration = new Configuration( defaultConfiguration.getConfigurationKey(), defaultConfiguration.getValue() );
@@ -121,16 +128,16 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 		return configurationDao.exists( entry );
 	}
 
-	private List<Configuration> getMissedInDBConfigurations( final int systemConfigurationId ) {
-
-		// TODO: possible it had better do not load absent configuration
-		final List<Configuration> result = configurationDao.loadConfigurations( systemConfigurationId );
-		CollectionUtils.filter( result, new Predicate<Configuration>() {
+	private void filterLegacyConfigurationKeys( final List<Configuration> configurations ) {
+		CollectionUtils.filter( configurations, new Predicate<Configuration>() {
 			@Override
 			public boolean evaluate( final Configuration configuration ) {
 				return configuration.getConfigurationKey() != null;
 			}
 		} );
+	}
+
+	private List<Configuration> getMissedInDBConfigurations( final List<Configuration> configurations ) {
 
 		final List<Configuration> missedInDBConfigurations = newArrayList();
 
@@ -138,7 +145,7 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 			boolean configurationKeyExistsInDB = false;
 
-			for ( final Configuration configuration : result ) {
+			for ( final Configuration configuration : configurations ) {
 				if ( configuration.getConfigurationKey() == configurationKey ) {
 					configurationKeyExistsInDB = true;
 					break;
@@ -148,13 +155,10 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 			if ( ! configurationKeyExistsInDB ) {
 				final Configuration missedConfiguration = new Configuration( configurationKey, configurationKey.getDefaultValue() );
 				missedConfiguration.setMissedInDB( true );
-//				missedConfiguration.setGotFromDefaultSystemConfiguration( true );
 
 				missedInDBConfigurations.add( missedConfiguration );
 			}
 		}
-
-//		result.addAll( missedInDBConfigurations );
 
 		return missedInDBConfigurations;
 	}
