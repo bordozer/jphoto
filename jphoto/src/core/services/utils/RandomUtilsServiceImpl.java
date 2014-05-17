@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 public class RandomUtilsServiceImpl implements RandomUtilsService {
 
@@ -275,7 +276,10 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 	@Override
 	public <T extends Identifiable> Set<T> getRandomNUniqueSetElements( final Set<T> items ) {
-		return newHashSet( getRandomNUniqueListElements( newArrayList( items ) ) );
+		final Set<T> set = newHashSet();
+		set.addAll( getRandomNUniqueListElements( newArrayList( items ) ) );
+
+		return set;
 	}
 
 	@Override
