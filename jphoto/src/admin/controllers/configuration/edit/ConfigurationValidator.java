@@ -290,6 +290,6 @@ public class ConfigurationValidator implements Validator {
 	}
 
 	private String addConfigurationTab( final String message, final ConfigurationKey configurationKey ) {
-		return String.format( "%s. (Tab: %s)", message, configurationKey.getTab().getName() );
+		return String.format( "%s. (Tab: %s)", message, translatorService.translate( configurationKey.getTab().getName(), getLanguage() )  );
 	}
 }

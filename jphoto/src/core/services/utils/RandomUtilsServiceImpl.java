@@ -47,6 +47,14 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
 			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
 			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
+			, PhotoActionAllowance.CANDIDATES_AND_MEMBERS
 			, PhotoActionAllowance.MEMBERS_ONLY
 			, PhotoActionAllowance.MEMBERS_ONLY
 			, PhotoActionAllowance.MEMBERS_ONLY
