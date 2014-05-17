@@ -31,14 +31,14 @@
 
 				<table:tdunderlined width="20">
 					<links:configurationEdit systemConfigurationId="${systemConfiguration.id}">
-						<html:img id="edit_${systemConfiguration.id}" src="edit16.png" width="16" height="16" />
+						<html:img16 src="edit16.png" alt="${eco:translate1('System configuration list: Edit $1', systemConfiguration.name)}" />
 					</links:configurationEdit>
 				</table:tdunderlined>
 
 				<table:tdunderlined width="20">
 
 					<c:if test="${!systemConfiguration.defaultConfiguration && !systemConfiguration.activeConfiguration}">
-						<html:img16 src="delete16.png" onclick="deleteConfiguration();" />
+						<html:img16 src="delete16.png" onclick="deleteConfiguration();" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 						<script type="text/javascript">
 							function deleteConfiguration() {
 								if ( confirm( "${eco:translate1('Delete system configuration $1?', systemConfiguration.name)}" ) ) {
@@ -50,12 +50,12 @@
 
 					<c:if test="${systemConfiguration.defaultConfiguration}">
 						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted.')}" />
-						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
+						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 					</c:if>
 
 					<c:if test="${systemConfiguration.activeConfiguration}">
 						<c:set var="deleteMessage" value="${eco:translate('The active system configuration can not be deleted. Activate another configuration and then delete this one.')}" />
-						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
+						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 					</c:if>
 
 				</table:tdunderlined>
