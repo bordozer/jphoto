@@ -16,7 +16,7 @@
 	<c:set var="initialConfigurationTab" value="<%=ConfigurationTab.getDefaultConfigurationTab()%>" />
 
 	<links:configurationNew>
-		<html:img id="addSystemConfigurationIcon" src="add32.png" width="32" height="32" alt="${eco:translate('Create new system configuration')}" />
+		<html:img id="addSystemConfigurationIcon" src="add32.png" width="32" height="32" alt="${eco:translate('System configuration list: Create new system configuration')}" />
 	</links:configurationNew>
 
 	<br/>
@@ -24,14 +24,14 @@
 
 	<table:table width="100%" oddEven="true">
 
-		<table:separatorInfo colspan="6" title="${eco:translate('Saved system configurations')}" />
+		<table:separatorInfo colspan="6" title="${eco:translate('System configuration list: System configurations')}" />
 
 		<c:forEach var="systemConfiguration" items="${systemConfigurations}">
 			<table:tr>
 
 				<table:tdunderlined width="20">
 					<links:configurationEdit systemConfigurationId="${systemConfiguration.id}">
-						<html:img16 src="edit16.png" alt="${eco:translate1('System configuration list: Edit $1', systemConfiguration.name)}" />
+						<html:img16 src="edit16.png" alt="${eco:translate1('System configuration list: System configuration list: Edit $1', systemConfiguration.name)}" />
 					</links:configurationEdit>
 				</table:tdunderlined>
 
@@ -41,7 +41,7 @@
 						<html:img16 src="delete16.png" onclick="deleteConfiguration();" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 						<script type="text/javascript">
 							function deleteConfiguration() {
-								if ( confirm( "${eco:translate1('Delete system configuration $1?', systemConfiguration.name)}" ) ) {
+								if ( confirm( "${eco:translate1('System configuration list: Delete system configuration $1?', systemConfiguration.name)}" ) ) {
 									document.location.href = "${eco:baseAdminUrl()}/configuration/${systemConfiguration.id}/delete/";
 								}
 							}
@@ -49,12 +49,12 @@
 					</c:if>
 
 					<c:if test="${systemConfiguration.defaultConfiguration}">
-						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted.')}" />
+						<c:set var="deleteMessage" value="${eco:translate('System configuration list: The default system configuration can not be deleted.')}" />
 						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 					</c:if>
 
 					<c:if test="${systemConfiguration.activeConfiguration}">
-						<c:set var="deleteMessage" value="${eco:translate('The active system configuration can not be deleted. Activate another configuration and then delete this one.')}" />
+						<c:set var="deleteMessage" value="${eco:translate('System configuration list: The active system configuration can not be deleted. Activate another configuration and then delete this one.')}" />
 						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" alt="${eco:translate1('System configuration list: Delete $1', systemConfiguration.name)}" />
 					</c:if>
 
@@ -62,18 +62,18 @@
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.defaultConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="system-configuration-default.png" width="16" height="16" alt="${eco:translate('The default configuration')}" />
+						<html:img id="${systemConfiguration.id}" src="system-configuration-default.png" width="16" height="16" alt="${eco:translate('System configuration list: The default system configuration')}" />
 					</c:if>
 				</table:tdunderlined>
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.activeConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="system-configuration-active.png" width="16" height="16" alt="${eco:translate('The active configuration')}" />
+						<html:img id="${systemConfiguration.id}" src="system-configuration-active.png" width="16" height="16" alt="${eco:translate('System configuration list: The active system configuration')}" />
 					</c:if>
 
 					<c:if test="${not systemConfiguration.activeConfiguration}">
 						<a href="${eco:baseAdminUrl()}/configuration/activation/?id=${systemConfiguration.id}" >
-							<html:img id="${systemConfiguration.id}" src="system-configuration-inactive.png" width="16" height="16" alt="${eco:translate('Activate configuration')}" />
+							<html:img id="${systemConfiguration.id}" src="system-configuration-inactive.png" width="16" height="16" alt="${eco:translate1('System configuration list: Activate $1', systemConfiguration.name)}" />
 						</a>
 					</c:if>
 				</table:tdunderlined>

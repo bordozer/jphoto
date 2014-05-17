@@ -31,8 +31,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ui.context.EnvironmentContext;
-import json.photo.upload.description.AbstractPhotoUploadAllowance;
-import json.photo.upload.description.UploadDescriptionFactory;
 import ui.controllers.photos.edit.PhotoEditDataValidator;
 import ui.services.breadcrumbs.BreadcrumbsPhotoService;
 import ui.services.validation.DataRequirementService;

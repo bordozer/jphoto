@@ -3,7 +3,6 @@ package ui.activity;
 import core.general.base.AbstractBaseEntity;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.interfaces.Cacheable;
 import core.log.LogHelper;
 import core.services.system.Services;
 import core.services.translator.Language;

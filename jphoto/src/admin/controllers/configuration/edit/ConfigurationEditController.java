@@ -165,7 +165,7 @@ public class ConfigurationEditController {
 
 		save( model.getSystemConfiguration(), model.getConfigurationMap() );
 
-		return String.format( "redirect:%s", urlUtilsService.getAdminConfigurationTabsLink( model.getSystemConfiguration().getId() ) );
+		return SystemConfigurationListController.REDIRECT_CONFIGURATION_LINK;//String.format( "redirect:%s", urlUtilsService.getAdminConfigurationTabsLink( model.getSystemConfiguration().getId() ) );
 	}
 
 	private Map<Integer, Integer> getUserGenreRankPointsMap( final ConfigurationEditModel model ) {

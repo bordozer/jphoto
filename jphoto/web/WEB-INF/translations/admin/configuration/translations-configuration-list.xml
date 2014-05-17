@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>System configuration list: Create new system configuration</nerd>
+		<ru><![CDATA[Созданой новую системную конфигурация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: System configurations</nerd>
+		<ru><![CDATA[Системные конфигурации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: System configuration list: Edit $1</nerd>
+		<ru><![CDATA[Редактировать $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: Delete $1</nerd>
+		<ru><![CDATA[Удалить $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: Delete system configuration $1?</nerd>
+		<ru><![CDATA[Удалить $1?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: The default system configuration can not be deleted.</nerd>
+		<ru><![CDATA[Базовая системная конфигурация не может быть удалена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: The active system configuration can not be deleted. Activate another configuration and then delete this one.</nerd>
+		<ru><![CDATA[Активная системная конфигурация не может быть удалена. Активируйте другую конфигурацию и затем удалите эту.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: The default system configuration</nerd>
+		<ru><![CDATA[Базовая системная конфигурация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: The active system configuration</nerd>
+		<ru><![CDATA[Активная системная конфигурация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System configuration list: Activate $1</nerd>
+		<ru><![CDATA[Активировать $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

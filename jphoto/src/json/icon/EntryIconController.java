@@ -1,7 +1,6 @@
 package json.icon;
 
 import core.enums.FavoriteEntryType;
-import core.general.favorite.FavoriteEntry;
 import core.services.entry.FavoritesService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
-
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.List;
 

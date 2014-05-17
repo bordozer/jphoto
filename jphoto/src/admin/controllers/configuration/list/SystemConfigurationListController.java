@@ -3,14 +3,12 @@ package admin.controllers.configuration.list;
 import core.general.configuration.SystemConfiguration;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
-import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 @Controller
@@ -31,9 +29,6 @@ public class SystemConfigurationListController {
 
 	@Autowired
 	private SystemConfigurationLoadService systemConfigurationLoadService;
-
-	@Autowired
-	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public SystemConfigurationListModel prepareModel() {

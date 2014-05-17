@@ -1,22 +1,22 @@
 package json.photo.appraisal;
 
-import core.general.photo.ValidationResult;
-import core.services.security.SecurityService;
-import json.exceptions.SaveToDBRuntimeException;
 import core.general.configuration.ConfigurationKey;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
+import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
+import json.exceptions.SaveToDBRuntimeException;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;

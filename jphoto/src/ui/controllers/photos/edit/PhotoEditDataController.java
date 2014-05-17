@@ -4,7 +4,6 @@ import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
-import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;

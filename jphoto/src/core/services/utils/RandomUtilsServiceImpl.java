@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
 
 public class RandomUtilsServiceImpl implements RandomUtilsService {
 

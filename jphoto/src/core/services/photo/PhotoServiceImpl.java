@@ -35,7 +35,6 @@ import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
 import sql.builder.*;
