@@ -34,7 +34,7 @@ public class SystemConfigurationListController {
 	public SystemConfigurationListModel prepareModel() {
 		final SystemConfigurationListModel model = new SystemConfigurationListModel();
 
-		model.setSystemConfigurations( configurationService.getAllSystemConfigurations() );
+		model.setSystemConfigurations( systemConfigurationLoadService.getAllSystemConfigurations() );
 
 		model.getPageModel().setPageTitleData( breadcrumbsAdminService.getAdminSystemConfigurationListBreadcrumbs() );
 

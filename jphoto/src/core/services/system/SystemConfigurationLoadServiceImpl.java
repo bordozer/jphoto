@@ -109,6 +109,20 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 	}
 
 	@Override
+	public List<SystemConfiguration> getCustomSystemConfigurations() {
+		final List<SystemConfiguration> result = getAllSystemConfigurations();
+
+		CollectionUtils.filter( result, new Predicate<SystemConfiguration>() {
+			@Override
+			public boolean evaluate( final SystemConfiguration systemConfiguration ) {
+				return ! systemConfiguration.isDefaultConfiguration();
+			}
+		} );
+
+		return result;
+	}
+
+	@Override
 	public void activateSystemConfiguration( final int systemConfigurationId ) {
 		configurationDao.activateSystemConfiguration( systemConfigurationId, true );
 	}

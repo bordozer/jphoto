@@ -13,6 +13,8 @@ public interface SystemConfigurationLoadService extends BaseEntityService<System
 
 	SystemConfiguration getDefaultSystemConfiguration();
 
+	List<SystemConfiguration> getCustomSystemConfigurations();
+
 	int getActiveSystemConfigurationId();
 
 	void activateSystemConfiguration( final int systemConfigurationId );
