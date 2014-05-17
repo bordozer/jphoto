@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public class PhotosightImageFileUtils {
 
 	public static final String PHOTOSIGHT_LOCAL_IMAGE_DIR = "/home/blu"; // TODO:

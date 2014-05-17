@@ -1,6 +1,5 @@
 package admin.controllers.configuration.list;
 
-import core.general.base.AbstractGeneralModel;
 import core.general.base.AbstractGeneralPageModel;
 import core.general.configuration.SystemConfiguration;
 

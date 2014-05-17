@@ -7,7 +7,6 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.jobs.entries.AbstractJob;
-import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
@@ -29,7 +28,6 @@ import utils.StringUtilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
