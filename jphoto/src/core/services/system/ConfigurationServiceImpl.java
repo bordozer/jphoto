@@ -7,6 +7,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.log.LogHelper;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Iterator;
@@ -22,6 +23,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	@Autowired
 	private SystemConfigurationLoadService systemConfigurationLoadService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	private LogHelper log = new LogHelper( ConfigurationServiceImpl.class );
 
@@ -191,7 +195,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		systemConfiguration.setDefaultConfiguration( true );
 		systemConfiguration.setActiveConfiguration( true );
 		systemConfiguration.setName( "Default system configuration" );
-		systemConfiguration.setDescription( "Created automatically from hardcoded template" );
+		systemConfiguration.setDescription( String.format( "Created automatically from hardcoded template at %s", dateUtilsService.formatDateTimeShort( dateUtilsService.getCurrentTime() ) ) );
 		systemConfiguration.setConfigurations( configurations );
 
 		log.info( "Hardcoded configuration is loaded" );
