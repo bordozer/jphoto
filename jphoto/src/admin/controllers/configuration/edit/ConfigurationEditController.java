@@ -76,7 +76,7 @@ public class ConfigurationEditController {
 
 		final SystemConfiguration systemConfiguration = new SystemConfiguration();
 		systemConfiguration.setName( String.format( "%s copy", defaultSystemConfiguration.getName() ) );
-		systemConfiguration.setDescription( String.format( "%s copy", defaultSystemConfiguration.getDescription() ) );
+//		systemConfiguration.setDescription( String.format( "%s copy", defaultSystemConfiguration.getDescription() ) );
 		systemConfiguration.setDefaultConfiguration( false );
 
 		model.setSystemConfiguration( systemConfiguration );
