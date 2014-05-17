@@ -148,13 +148,15 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 			if ( ! configurationKeyExistsInDB ) {
 				final Configuration missedConfiguration = new Configuration( configurationKey, configurationKey.getDefaultValue() );
 				missedConfiguration.setMissedInDB( true );
+//				missedConfiguration.setGotFromDefaultSystemConfiguration( true );
+
 				missedInDBConfigurations.add( missedConfiguration );
 			}
 		}
 
-		result.addAll( missedInDBConfigurations );
+//		result.addAll( missedInDBConfigurations );
 
-		return result;
+		return missedInDBConfigurations;
 	}
 
 	private List<Configuration> getConfigurationSorted( final List<Configuration> configurations ) {

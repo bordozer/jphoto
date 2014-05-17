@@ -23,6 +23,13 @@
 	<c:set var="isChabgesOnly" value="${selectedConfigurationTab == 'CHANGES_ONLY'}"/>
 	<c:set var="colspan" value="5"/>
 
+	<style type="text/css">
+		.configurationMissedInDB {
+			font-style: italic;
+			color: #005599;
+		}
+	</style>
+
 	<links:configurationTabsLine systemConfiguration="${systemConfiguration}"
 								 activeConfigurationTab="${configurationTabsModel.configurationTab}"
 								 isEdit="false"
@@ -59,6 +66,7 @@
 						<c:set var="configurationKey" value="${configuration.configurationKey}"/>
 
 						<c:set var="gotFromDefaultSystemConfiguration" value="${configuration.gotFromDefaultSystemConfiguration}"/>
+						<c:set var="isConfigurationMissedInDB" value="${configuration.missedInDB}"/>
 
 						<c:if test="${configurationKey.tab == configurationTab}">
 							<table:tr>
@@ -84,6 +92,9 @@
 								<c:set var="css" value=""/>
 								<c:if test="${not gotFromDefaultSystemConfiguration}">
 									<c:set var="css" value="changedConfigurationValue"/>
+								</c:if>
+								<c:if test="${isConfigurationMissedInDB}">
+									<c:set var="css" value="${css} configurationMissedInDB"/>
 								</c:if>
 								<table:tdunderlined cssClass="${css}">
 									<span title="${configurationKey.id}: ${configurationKey}">${eco:translate(configurationKey.description)}
