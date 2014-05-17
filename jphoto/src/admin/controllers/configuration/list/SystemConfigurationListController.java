@@ -59,7 +59,8 @@ public class SystemConfigurationListController {
 		final boolean defaultConfiguration = systemConfiguration.isDefaultConfiguration();
 		final boolean activeConfiguration = systemConfiguration.isActiveConfiguration();
 
-		if ( defaultConfiguration ) {
+		// TODO: show error message
+		/*if ( defaultConfiguration ) {
 			final String error = translatorService.translate( "This is the default system configuration. It can not be deleted.", EnvironmentContext.getLanguage() );
 			EnvironmentContext.getEnvironment().setHiMessage( error );
 		}
@@ -67,7 +68,7 @@ public class SystemConfigurationListController {
 		if ( activeConfiguration ) {
 			final String error = translatorService.translate( "This is the active system configuration. It can not be deleted. Activate another configuration first.", EnvironmentContext.getLanguage() );
 			EnvironmentContext.getEnvironment().setHiMessage( error );
-		}
+		}*/
 
 		if ( ! activeConfiguration && ! defaultConfiguration ) {
 			systemConfigurationLoadService.delete( systemConfigurationId );

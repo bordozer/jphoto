@@ -37,7 +37,7 @@
 
 				<table:tdunderlined width="20">
 
-					<c:if test="${!systemConfiguration.defaultConfiguration}">
+					<c:if test="${!systemConfiguration.defaultConfiguration && !systemConfiguration.activeConfiguration}">
 						<html:img16 src="delete16.png" onclick="deleteConfiguration();" />
 						<script type="text/javascript">
 							function deleteConfiguration() {
@@ -49,7 +49,12 @@
 					</c:if>
 
 					<c:if test="${systemConfiguration.defaultConfiguration}">
-						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted')}" />
+						<c:set var="deleteMessage" value="${eco:translate('The default system configuration can not be deleted.')}" />
+						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
+					</c:if>
+
+					<c:if test="${systemConfiguration.activeConfiguration}">
+						<c:set var="deleteMessage" value="${eco:translate('The active system configuration can not be deleted. Activate another configuration and then delete this one.')}" />
 						<html:img16 src="cannotdelete.png" onclick="showUIMessage_Information( '${deleteMessage}' );" />
 					</c:if>
 
