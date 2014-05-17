@@ -13,6 +13,7 @@ public enum ConfigurationKey {
 	, SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH( 107, "15", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Portal page activity stream length" )
 	, SYSTEM_ACTIVITY_LOG_PHOTO_PREVIEWS( 108, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log photo preview activity" )
 	, SYSTEM_ACTIVITY_LOG_FAVORITE_ACTIONS( 109, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.SYSTEM, "Log favorite actions activity" )
+	, SYSTEM_TEMP( 10900, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.SYSTEM, "Test missing configuration" )
 
 	, MEMBERS_FILE_MAX_SIZE_KB( 200, "500", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Members max size of uploading file" )
 	, MEMBERS_DAILY_FILE_SIZE_LIMIT( 201, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.MEMBERS, "Max summary photos size that allowed to upload daily" )

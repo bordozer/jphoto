@@ -42,33 +42,30 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 
 	@Override
 	public SystemConfiguration load( final int systemConfigurationId ) {
+
 		final SystemConfiguration systemConfiguration = configurationDao.load( systemConfigurationId );
-		final List<Configuration> configurations = configurationDao.loadConfigurations( systemConfigurationId );
-
-		// TODO: possible it had better do not load absent configuration
-		CollectionUtils.filter( configurations, new Predicate<Configuration>() {
-			@Override
-			public boolean evaluate( final Configuration configuration ) {
-				return configuration.getConfigurationKey() != null;
-			}
-		} );
-
-		addMissedInDBConfigurations( configurations );
 
 		if ( systemConfiguration == null ) {
 			return null;
 		}
 
+		final List<Configuration> configurations = configurationDao.loadConfigurations( systemConfigurationId );
+
 		if ( systemConfiguration.isDefaultConfiguration() ) {
 			for ( final Configuration configuration : configurations ) {
 				configuration.setGotFromDefaultSystemConfiguration( true );
 			}
+			configurations.addAll( getMissedInDBConfigurations( systemConfigurationId ) );
 		} else {
-			final SystemConfiguration defaultSystemConfiguration = getDefaultSystemConfiguration();
-			final List<Configuration> defaultConfigurations = defaultSystemConfiguration.getConfigurations();
+			final List<Configuration> defaultConfigurations = getDefaultSystemConfiguration().getConfigurations();
 			for ( final Configuration defaultConfiguration : defaultConfigurations ) {
-				if ( ! containsConfiguration( configurations, defaultConfiguration ) ) {
-					configurations.add( defaultConfiguration );
+				if ( ! configurations.contains( defaultConfiguration ) ) {
+					final Configuration configuration = new Configuration( defaultConfiguration.getConfigurationKey(), defaultConfiguration.getValue() );
+					configuration.setGotFromDefaultSystemConfiguration( true );
+					configuration.setMissedInDB( defaultConfiguration.isMissedInDB() );
+					configuration.setDefaultSystemConfiguration( defaultConfiguration );
+
+					configurations.add( configuration );
 				}
 			}
 		}
@@ -76,49 +73,6 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 		systemConfiguration.setConfigurations( getConfigurationSorted( configurations ) );
 
 		return systemConfiguration;
-	}
-
-	private void addMissedInDBConfigurations( final List<Configuration> configurations ) {
-
-		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
-
-			boolean configurationKeyExistsInDB = false;
-
-			for ( final Configuration configuration : configurations ) {
-				if ( configuration.getConfigurationKey() == configurationKey ) {
-					configurationKeyExistsInDB = true;
-					break;
-				}
-			}
-			if ( ! configurationKeyExistsInDB ) {
-				final Configuration missedConfiguration = new Configuration( configurationKey, configurationKey.getDefaultValue() );
-				missedConfiguration.setMissedInDB( true );
-				configurations.add( missedConfiguration );
-			}
-		}
-	}
-
-	private List<Configuration> getConfigurationSorted( final List<Configuration> configurations ) {
-		final List<Configuration> sortedConfigurations = newArrayList();
-
-		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
-			for ( final Configuration configuration : configurations ) {
-				if ( configuration.getConfigurationKey().equals( configurationKey ) ) {
-					sortedConfigurations.add( configuration );
-					break;
-				}
-			}
-		}
-		return sortedConfigurations;
-	}
-
-	private boolean containsConfiguration( final List<Configuration> configurations, final Configuration beingCheckedConfiguration ) {
-		for ( final Configuration configuration : configurations ) {
-			if ( configuration.getConfigurationKey() == beingCheckedConfiguration.getConfigurationKey() ) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -165,5 +119,64 @@ public class SystemConfigurationLoadServiceImpl implements SystemConfigurationLo
 	@Override
 	public boolean exists( final SystemConfiguration entry ) {
 		return configurationDao.exists( entry );
+	}
+
+	private List<Configuration> getMissedInDBConfigurations( final int systemConfigurationId ) {
+
+		// TODO: possible it had better do not load absent configuration
+		final List<Configuration> result = configurationDao.loadConfigurations( systemConfigurationId );
+		CollectionUtils.filter( result, new Predicate<Configuration>() {
+			@Override
+			public boolean evaluate( final Configuration configuration ) {
+				return configuration.getConfigurationKey() != null;
+			}
+		} );
+
+		final List<Configuration> missedInDBConfigurations = newArrayList();
+
+		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
+
+			boolean configurationKeyExistsInDB = false;
+
+			for ( final Configuration configuration : result ) {
+				if ( configuration.getConfigurationKey() == configurationKey ) {
+					configurationKeyExistsInDB = true;
+					break;
+				}
+			}
+
+			if ( ! configurationKeyExistsInDB ) {
+				final Configuration missedConfiguration = new Configuration( configurationKey, configurationKey.getDefaultValue() );
+				missedConfiguration.setMissedInDB( true );
+				missedInDBConfigurations.add( missedConfiguration );
+			}
+		}
+
+		result.addAll( missedInDBConfigurations );
+
+		return result;
+	}
+
+	private List<Configuration> getConfigurationSorted( final List<Configuration> configurations ) {
+		final List<Configuration> sortedConfigurations = newArrayList();
+
+		for ( final ConfigurationKey configurationKey : ConfigurationKey.values() ) {
+			for ( final Configuration configuration : configurations ) {
+				if ( configuration.getConfigurationKey().equals( configurationKey ) ) {
+					sortedConfigurations.add( configuration );
+					break;
+				}
+			}
+		}
+		return sortedConfigurations;
+	}
+
+	private boolean containsConfiguration( final List<Configuration> configurations, final Configuration beingCheckedConfiguration ) {
+		for ( final Configuration configuration : configurations ) {
+			if ( configuration.getConfigurationKey() == beingCheckedConfiguration.getConfigurationKey() ) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
