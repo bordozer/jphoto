@@ -63,9 +63,8 @@
 <c:set var="defaultPhotoCommentsAllowanceIdControl" value="<%=UserEditDataModel.FORM_CONTROL_DEFAULT_COMMENTS_ALLOWANCE_ID%>"/>
 <c:set var="defaultPhotoVotingAllowanceIdControl" value="<%=UserEditDataModel.FORM_CONTROL_DEFAULT_VOTING_ALLOWANCE_ID%>"/>
 
-<c:set var="photosInLineControl" value="userEditDataModel.photosInLine"/>
+<c:set var="photosOnPageControl" value="userEditDataModel.photosOnPage"/>
 <c:set var="photosOnPageValues" value="<%=photosOnPageValues%>"/>
-<c:set var="photoLinesControl" value="userEditDataModel.photoLines"/>
 
 <c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 <c:set var="userGenderValues" value="<%=GenericTranslatableList.userGenderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
@@ -236,23 +235,23 @@
 			<table:separatorInfo colspan="2" height="${separatorHeight}" title="UI settings" />
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Language" labelFor="${photoLinesControl}" />
+				<table:tdtext text_t="User data edit: Language" />
 				<table:tddata>
 					<form:radiobuttons path="userEditDataModel.userUILanguageId" items="${userEditDataModel.usedLanguageTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
 			</table:tredit>
 
-			<%--Photos in line--%>
+			<%--Photos on page--%>
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Photos in line" labelFor="${photosInLineControl}" />
+				<table:tdtext text_t="User data edit: Photos in line" labelFor="${photosOnPageControl}" />
 
 				<table:tddata>
-					<form:radiobutton path="${photosInLineControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
-					<form:radiobuttons items="${photosOnPageValues}" path="${photosInLineControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+					<form:radiobutton path="${photosOnPageControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+					<form:radiobuttons items="${photosOnPageValues}" path="${photosOnPageControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
 				</table:tddata>
 
 			</table:tredit>
-			<%-- / Photos in line--%>
+			<%-- / Photos on page--%>
 
 			<table:tr>
 				<table:tdtext text_t="User data edit: Show nude content" />

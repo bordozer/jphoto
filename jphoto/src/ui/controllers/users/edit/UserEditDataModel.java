@@ -45,7 +45,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 
 	private GenericTranslatableList<Language> usedLanguageTranslatableList;
 
-	private int photosInLine;
+	private int photosOnPage;
 
 	private Set<String> emailNotificationOptionIds;
 
@@ -140,12 +140,12 @@ public class UserEditDataModel extends AbstractGeneralModel {
 		this.userGenderId = userGenderId;
 	}
 
-	public int getPhotosInLine() {
-		return photosInLine;
+	public int getPhotosOnPage() {
+		return photosOnPage;
 	}
 
-	public void setPhotosInLine( final int photosInLine ) {
-		this.photosInLine = photosInLine;
+	public void setPhotosOnPage( final int photosOnPage ) {
+		this.photosOnPage = photosOnPage;
 	}
 
 	public String getPassword() {

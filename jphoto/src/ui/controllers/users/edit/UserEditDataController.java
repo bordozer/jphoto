@@ -216,7 +216,7 @@ public class UserEditDataController {
 		model.setSelfDescription( user.getSelfDescription() );
 		model.setMembershipTypeId( user.getMembershipType().getId() );
 		model.setUserGenderId( user.getGender().getId() );
-		model.setPhotosInLine( user.getPhotosOnPage() );
+		model.setPhotosOnPage( user.getPhotosOnPage() );
 		model.setShowNudeContent( user.isShowNudeContent() );
 		model.setUserUILanguageId( user.getLanguage().getId() );
 
@@ -243,7 +243,7 @@ public class UserEditDataController {
 		user.setSelfDescription( model.getSelfDescription() );
 		user.setMembershipType( UserMembershipType.getById( model.getMembershipTypeId() ) );
 		user.setGender( UserGender.getById( model.getUserGenderId() ) );
-		user.setPhotosOnPage( model.getPhotosInLine() );
+		user.setPhotosOnPage( model.getPhotosOnPage() );
 		user.setShowNudeContent( model.isShowNudeContent() );
 		user.setLanguage( Language.getById( model.getUserUILanguageId() ) );
 
