@@ -145,38 +145,38 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Allowed uploaded photo file formats separated by comma</nerd>
+		<ru><![CDATA[Разрешенные к загрузки контенты, через запятую]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Additional summary photos size for file uploading for each rank in photo category per week</nerd>
+		<ru><![CDATA[Дополнительный объем для загрузки в неделю на каждый ранг в разделе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo max image width</nerd>
+		<ru><![CDATA[Максимальная ширина файла фотографии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo max image height</nerd>
+		<ru><![CDATA[Максимальная высота файла фотографии]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Anonymous period</nerd>
+		<ru><![CDATA[Длительность анонимного периода]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Anonymous posting name</nerd>
+		<ru><![CDATA[Имя автора, используемое в анонимном периоде]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Ignore anonymous global settings if user's rank in genre more then</nerd>
+		<ru><![CDATA[Игнорировать анонимные дни, если ранг пользователя в жанре выше чем]]></ru>
 	</translation>
 
 	<translation>
