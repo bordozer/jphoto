@@ -5,6 +5,7 @@ import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
+import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
@@ -38,6 +40,9 @@ public class ConfigurationTabsController {
 
 	@Autowired
 	private BreadcrumbsAdminService breadcrumbsAdminService;
+
+	@Autowired
+	private TranslatorService translatorService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ConfigurationTabsModel prepareModel( final @PathVariable( "systemConfigurationId" ) int systemConfigurationId ) {
@@ -93,7 +98,7 @@ public class ConfigurationTabsController {
 
 		model.setRankInGenrePointsMap( userRankService.getUserGenreRankPointsMap( model.getSystemConfiguration() ) );
 
-		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoTbBreadcrumbs( systemConfiguration, configurationTab.getName() );
+		final PageTitleData pageTitleData = breadcrumbsAdminService.getAdminConfigurationInfoTbBreadcrumbs( systemConfiguration, translatorService.translate( configurationTab.getName(), EnvironmentContext.getLanguage() ) );
 		model.getPageModel().setPageTitleData( pageTitleData );
 
 		return VIEW;
