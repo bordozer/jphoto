@@ -415,23 +415,53 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Emailing enabled</nerd>
+		<ru><![CDATA[Отправка писем включена]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SMTP debug mode</nerd>
+		<ru><![CDATA[SMTP debug mode]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Admin email write to</nerd>
+		<ru><![CDATA[Адрес администрации для переписки с пользователями]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>No reply email</nerd>
+		<ru><![CDATA[Адрес автоматической рассылки (no reply)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SMTP server</nerd>
+		<ru><![CDATA[SMTP сервер]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Transport protocol</nerd>
+		<ru><![CDATA[Протокол]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SMTP server port</nerd>
+		<ru><![CDATA[Порт SMTP сервера]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SMTP server timeout, milliseconds</nerd>
+		<ru><![CDATA[SMTP server timeout]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SMTP server user</nerd>
+		<ru><![CDATA[Пользователь SMTP сервера]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SMTP server password</nerd>
+		<ru><![CDATA[Пароль пользователя SMTP сервера]]></ru>
 	</translation>
 
 	<translation>
