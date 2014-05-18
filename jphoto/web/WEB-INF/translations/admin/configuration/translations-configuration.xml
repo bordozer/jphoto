@@ -80,7 +80,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Candidates max size of uploading file</nerd>
+		<nerd>Max size of uploading file</nerd>
 		<ru><![CDATA[Максимальный размер загружаемого файла]]></ru>
 	</translation>
 
@@ -95,12 +95,12 @@
 	</translation>
 
 	<translation>
-		<nerd>Candidates photos per day limit</nerd>
+		<nerd>Photos quantity per day limit</nerd>
 		<ru><![CDATA[Ограничение на загрузку количества работ в день]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Candidates photos per week limit</nerd>
+		<nerd>Photos quantity per week limit</nerd>
 		<ru><![CDATA[Ограничение на загрузку количества работ в неделю]]></ru>
 	</translation>
 
@@ -127,21 +127,6 @@
 	<translation>
 		<nerd>The lowest available mark in photo voting</nerd>
 		<ru><![CDATA[Минимальные доступные кандидатам баллы при оценке работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>
