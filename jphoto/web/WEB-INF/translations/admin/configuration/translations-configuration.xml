@@ -201,7 +201,7 @@
 
 	<translation>
 		<nerd>Photo list: show photo statistic (marks/previews/comments)</nerd>
-		<ru><![CDATA[Покащывать статисктику ( ценки / просмотры / комментарии )]]></ru>
+		<ru><![CDATA[Показывать статистику ( оценки / просмотры / комментарии )]]></ru>
 	</translation>
 
 	<translation>
@@ -210,28 +210,28 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo card: resize photo image width to</nerd>
+		<ru><![CDATA[Максимальный отображаемый размер фото: ширина]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo card: resize photo image height to</nerd>
+		<ru><![CDATA[Максимальный отображаемый размер фото: высота]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Min length of comment</nerd>
+		<ru><![CDATA[Минимальная длина комментария]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Max length of comment</nerd>
+		<ru><![CDATA[Максимальная длина комментария]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Delay after the last comment before member can leave a new one</nerd>
+		<ru><![CDATA[Задержка между комментариями]]></ru>
 	</translation>
 
 	<translation>

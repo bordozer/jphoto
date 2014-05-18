@@ -91,7 +91,7 @@ public class ConfigurationValidator implements Validator {
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_MIN_LENGTH );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_DELAY_AFTER_COMMENT_SEC );
-		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_USER_MUST_HAVE_N_APPROVED_PHOTOS_BEFORE_CAN_LEAVE_COMMENT );
+//		positiveOrZeroConfigurationKeys.add( ConfigurationKey.COMMENTS_USER_MUST_HAVE_N_APPROVED_PHOTOS_BEFORE_CAN_LEAVE_COMMENT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );

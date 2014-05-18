@@ -63,7 +63,7 @@ public enum ConfigurationKey {
 	, COMMENTS_MIN_LENGTH( 700, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.COMMENTS, "Min length of comment" )
 	, COMMENTS_MAX_LENGTH( 701, "777", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SYMBOL, ConfigurationTab.COMMENTS, "Max length of comment" )
 	, COMMENTS_DELAY_AFTER_COMMENT_SEC( 702, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.SECOND, ConfigurationTab.COMMENTS, "Delay after the last comment before member can leave a new one" )
-	, COMMENTS_USER_MUST_HAVE_N_APPROVED_PHOTOS_BEFORE_CAN_LEAVE_COMMENT( 703, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.COMMENTS, "Member must have N approved by admin photos before ability to comment of photos (to be implemented somedays)" )
+//	, COMMENTS_USER_MUST_HAVE_N_APPROVED_PHOTOS_BEFORE_CAN_LEAVE_COMMENT( 703, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.COMMENTS, "Member must have N approved by admin photos before ability to comment of photos (to be implemented somedays)" )
 
 	, PHOTO_VOTING_HIGHEST_POSITIVE_MARK( 800, "5", true, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_VOTING, "The highest accessible positive mark even if a voting member's own rank in photo category is higher (cutting the highest mark if rank is too hight)" )
 	, PHOTO_VOTING_LOWEST_POSITIVE_MARK( 801, "3", true, ConfigurationDataType.INTEGER, ConfigurationUnit.MARK, ConfigurationTab.PHOTO_VOTING, "The highest accessible positive mark even if a voting member's own rank in photo category is lower (adding an extra positive balls to the highest mark if rank is too low)" )

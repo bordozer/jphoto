@@ -28,7 +28,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 	public static final int MIN_MARKS = 17;
 	public static final int DAYS_OFFSET = 3;
-	public static final int PHOTOS_IN_LINE = 4;
+	public static final int PHOTO_LIST_PHOTO_TOP_QTY = 4;
 	public static final int CURRENT_PAGE = 3;
 	public static final int ITEMS_ON_PAGE = 20;
 	public static final int MIN_MARK_FOR_BEST = PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST;
@@ -63,7 +63,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 													 + "HAVING SUM( photoVoting.mark ) >= '%d' "
 													 + "ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime "
 													 + "DESC LIMIT %d;"
-			, getDateFrom(), getDateTo(), MIN_MARKS, PHOTOS_IN_LINE );
+			, getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -118,7 +118,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 
 		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photos.genreId = '777' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTOS_IN_LINE );
+		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photos.genreId = '777' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -180,7 +180,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 
 		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTOS_IN_LINE );
+		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -245,7 +245,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 
 		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTOS_IN_LINE );
+		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -385,7 +385,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 
 		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN users ON ( photos.userId = users.id ) INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( users.membershipType = '2' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTOS_IN_LINE );
+		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN users ON ( photos.userId = users.id ) INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( users.membershipType = '2' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -510,6 +510,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
 		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO ) ).andReturn( MIN_MARKS ).anyTimes();
 		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS ) ).andReturn( DAYS_OFFSET ).anyTimes();
+		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).andReturn( PHOTO_LIST_PHOTO_TOP_QTY ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
 		return configurationService;
