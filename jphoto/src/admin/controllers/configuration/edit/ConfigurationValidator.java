@@ -80,8 +80,8 @@ public class ConfigurationValidator implements Validator {
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.MEMBERS_WEEKLY_FILE_SIZE_LIMIT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.MEMBERS_PHOTOS_PER_DAY_LIMIT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.MEMBERS_PHOTOS_PER_WEEK_LIMIT );
-		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_ADMIN_MUST_CONFIRM_FIRST_N_PHOTOS_OF_CANDIDATE );
-		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER );
+//		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_ADMIN_MUST_CONFIRM_FIRST_N_PHOTOS_OF_CANDIDATE );
+//		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_DAILY_FILE_SIZE_LIMIT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_WEEKLY_FILE_SIZE_LIMIT );
 		positiveOrZeroConfigurationKeys.add( ConfigurationKey.CANDIDATES_PHOTOS_PER_DAY_LIMIT );

@@ -42,18 +42,13 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 			}
 
 			final int photoQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
-			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
+//			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
 				if ( userService.setUserStatus( user.getId(), UserStatus.MEMBER ) ) {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
 
 					getLog().info( String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() ) );
 
-					/*final String message = services.getTranslatorService().translate( "Member $1 has got new status: $2"
-						, getLanguage()
-						, String.valueOf( user.getId() )
-						, UserStatus.MEMBER.getName()
-					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
 						.addUserCardLinkParameter( user )
 						.translatableString( UserStatus.MEMBER.getName() );
@@ -63,14 +58,10 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 				} else {
 					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
 
-					/*final String message = services.getTranslatorService().translate( "Can not update member status. Id = #$1"
-						, getLanguage()
-						, String.valueOf( user.getId() )
-					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
-			}
+//			}
 
 			increment();
 

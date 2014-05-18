@@ -21,8 +21,8 @@ public enum ConfigurationKey {
 	, MEMBERS_PHOTOS_PER_DAY_LIMIT( 203, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.MEMBERS, "Members photos quantity per day limit" )
 	, MEMBERS_PHOTOS_PER_WEEK_LIMIT( 204, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.MEMBERS, "Members photos quantity per week limit" )
 
-	, CANDIDATES_ADMIN_MUST_CONFIRM_FIRST_N_PHOTOS_OF_CANDIDATE( 300, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.CANDIDATES, "Admin must approve first N photos of candidates before they are shown in photo lists" )
-	, CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER( 301, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.CANDIDATES, "Candidates must have at least N approved photos to become a member" )
+//	, CANDIDATES_ADMIN_MUST_CONFIRM_FIRST_N_PHOTOS_OF_CANDIDATE( 300, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.CANDIDATES, "Admin must approve first N photos of candidates before they are shown in photo lists" )
+//	, CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER( 301, "5", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.CANDIDATES, "Candidates must have at least N approved photos to become a member" )
 	, CANDIDATES_FILE_MAX_SIZE_KB( 302, "300", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.CANDIDATES, "Candidates max size of uploading file" )
 	, CANDIDATES_DAILY_FILE_SIZE_LIMIT( 303, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.CANDIDATES, "Max summary photos size that allowed to upload daily" )
 	, CANDIDATES_WEEKLY_FILE_SIZE_LIMIT( 304, "0", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.CANDIDATES, "Max summary photos size that allowed to upload weekly" )
