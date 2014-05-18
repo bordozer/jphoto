@@ -385,6 +385,46 @@
 	</translation>
 
 	<translation>
+		<nerd>Admin can edit other user data</nerd>
+		<ru><![CDATA[Админ может редавтировать пользовательские настройки и данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin can edit other photos</nerd>
+		<ru><![CDATA[Админ мжет редактировать данные фоторабот других пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin can delete other photos</nerd>
+		<ru><![CDATA[Админ может удалять работы других пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin can edit photo comments</nerd>
+		<ru><![CDATA[Админ может редактировать комментарии других пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job history items on page</nerd>
+		<ru><![CDATA[К-во отображаемый на странице записей лога выполнений заданий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photosight import: select by default categories that may contains nude content</nerd>
+		<ru><![CDATA[Фотосайт импорт: выделять по умолчанию разделы. которые могут содержать НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
