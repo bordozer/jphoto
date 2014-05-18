@@ -315,13 +315,73 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Use cache</nerd>
+		<ru><![CDATA[Использовать кеш]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Member cache length</nerd>
+		<ru><![CDATA[Кеш пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Member avatars cache length</nerd>
+		<ru><![CDATA[Кеш аватаров]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo category cache length</nerd>
+		<ru><![CDATA[Кеш фоторазделов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Accessible for a photo category voting categories cache length</nerd>
+		<ru><![CDATA[Кеш категорий голосования доступных для фоторазделов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo cache length</nerd>
+		<ru><![CDATA[Кеш фоторабот]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo voting category cache length</nerd>
+		<ru><![CDATA[Кеш категорий голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo info cache length</nerd>
+		<ru><![CDATA[Кеш фотоинфо]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo comment cache length</nerd>
+		<ru><![CDATA[Кеш комментариев к работам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User team member cache length</nerd>
+		<ru><![CDATA[Кеш членов пользовательских команд]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User photo album cache length</nerd>
+		<ru><![CDATA[Кеш фотоальбомов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User rank in a photo category cache length</nerd>
+		<ru><![CDATA[Кеш пользовательских рангов в фоторазделах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Rank in a photo category points cache length</nerd>
+		<ru><![CDATA[Кеш рангов в фоторазделах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User photos in a photo category quantity cache length</nerd>
+		<ru><![CDATA[Кеш к-ва работ пользователя по разделам]]></ru>
 	</translation>
 
 	<translation>
