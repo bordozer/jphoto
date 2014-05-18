@@ -235,33 +235,33 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The highest accessible positive mark even if a voting member's own rank in photo category is higher (cutting the highest mark if rank is too hight)</nerd>
+		<ru><![CDATA[Наивысший положительный доступный балл]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The highest accessible positive mark even if a voting member's own rank in photo category is lower (adding an extra positive balls to the highest mark if rank is too low)</nerd>
+		<ru><![CDATA[Гарантированный положительный доступный балл]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The lowest accessible negative mark even if a voting member's own rank in photo category is lower (adding an extra negative balls to the lowest mark if rank is too low)</nerd>
+		<ru><![CDATA[Гарантированный отрицательный доступный балл]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The lowest accessible negative mark even if a voting member's own rank in photo category is higher (cutting the lowest mark if rank is too hight)</nerd>
+		<ru><![CDATA[Наименьший отрицательный доступный балл]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo appraisal: categories count</nerd>
+		<ru><![CDATA[Количество единовременно доступных категорий для оценки работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Allow appraisal a photo in multiple categories ( define a category more then one time )</nerd>
+		<ru><![CDATA[Разрешить повторение категорий при оценке работ]]></ru>
 	</translation>
 
 	<translation>
