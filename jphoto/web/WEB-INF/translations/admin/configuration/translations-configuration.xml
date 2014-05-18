@@ -285,33 +285,33 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>First rank points</nerd>
+		<ru><![CDATA[Голоса, необходимые для получения первого ранга в разделе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Rank voting base step points</nerd>
+		<ru><![CDATA[Базовое к-во голосов необходимое для достижения нового ранга]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Rank voting coefficient</nerd>
+		<ru><![CDATA[Коэффициент. применяемый к базовому к-ву голосов между рангами на каждый ранг]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Max rank in photo category</nerd>
+		<ru><![CDATA[Наивысший ранг в разделе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Member must have this approved photos quantity in a photo category to make other members can vote for his rank in the category</nerd>
+		<ru><![CDATA[К-во работ, которые необходимо загрузить в разделе, чтобы другие пользователи могли голосовать за ранг пользователя в разделе]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Collapse user's rank in category with one icon (User card -> Photos and ranks -> Stars for genres)</nerd>
+		<ru><![CDATA[Схлопывать пользовательский ранг в категории в одну иконку, если ранг кратен]]></ru>
 	</translation>
 
 	<translation>
