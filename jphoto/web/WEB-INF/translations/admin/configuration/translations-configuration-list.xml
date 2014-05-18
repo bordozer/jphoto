@@ -53,6 +53,21 @@
 	</translation>
 
 	<translation>
+		<nerd>System configuration list: This configuration is active.</nerd>
+		<ru><![CDATA[Данная конфигурация является активной (используется в качестве конфигурации системы)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

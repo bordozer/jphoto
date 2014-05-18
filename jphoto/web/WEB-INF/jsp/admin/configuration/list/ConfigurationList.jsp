@@ -62,18 +62,19 @@
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.defaultConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="system-configuration-default.png" width="16" height="16" alt="${eco:translate('System configuration list: The default system configuration')}" />
+						<html:img16 src="system-configuration-default.png" alt="${eco:translate('System configuration list: The default system configuration')}" />
 					</c:if>
 				</table:tdunderlined>
 
 				<table:tdunderlined width="20">
 					<c:if test="${systemConfiguration.activeConfiguration}">
-						<html:img id="${systemConfiguration.id}" src="system-configuration-active.png" width="16" height="16" alt="${eco:translate('System configuration list: The active system configuration')}" />
+						<c:set var="message" value="${eco:translate('System configuration list: This configuration is active.')}" />
+						<html:img16 src="system-configuration-active.png" alt="${eco:translate('System configuration list: The active system configuration')}" onclick="showUIMessage_Information('${message}');" />
 					</c:if>
 
 					<c:if test="${not systemConfiguration.activeConfiguration}">
 						<a href="${eco:baseAdminUrl()}/configuration/activation/?id=${systemConfiguration.id}" >
-							<html:img id="${systemConfiguration.id}" src="system-configuration-inactive.png" width="16" height="16" alt="${eco:translate1('System configuration list: Activate $1', systemConfiguration.name)}" />
+							<html:img16 src="system-configuration-inactive.png" alt="${eco:translate1('System configuration list: Activate $1', systemConfiguration.name)}" />
 						</a>
 					</c:if>
 				</table:tdunderlined>
