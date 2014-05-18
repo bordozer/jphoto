@@ -22,8 +22,7 @@
 <jsp:useBean id="userEditDataModel" type="ui.controllers.users.edit.UserEditDataModel" scope="request" />
 
 <%
-	final Integer[] photosInLineValues = { 1, 2, 3, 4, 5 };
-	final Integer[] photoLinesValues = { 3, 4, 5, 6, 7 };
+	final Integer[] photosOnPageValues = { 16, 20, 24, 28, 32, 36, 40 };
 %>
 
 <%
@@ -65,8 +64,7 @@
 <c:set var="defaultPhotoVotingAllowanceIdControl" value="<%=UserEditDataModel.FORM_CONTROL_DEFAULT_VOTING_ALLOWANCE_ID%>"/>
 
 <c:set var="photosInLineControl" value="userEditDataModel.photosInLine"/>
-<c:set var="photosInLineValues" value="<%=photosInLineValues%>"/>
-<c:set var="photoLinesValues" value="<%=photoLinesValues%>"/>
+<c:set var="photosOnPageValues" value="<%=photosOnPageValues%>"/>
 <c:set var="photoLinesControl" value="userEditDataModel.photoLines"/>
 
 <c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
@@ -250,22 +248,11 @@
 
 				<table:tddata>
 					<form:radiobutton path="${photosInLineControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
-					<form:radiobuttons items="${photosInLineValues}" path="${photosInLineControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+					<form:radiobuttons items="${photosOnPageValues}" path="${photosInLineControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
 				</table:tddata>
 
 			</table:tredit>
 			<%-- / Photos in line--%>
-
-			<%--Photo Lines--%>
-			<table:tredit>
-				<table:tdtext text_t="User data edit: Photos lines" labelFor="${photoLinesControl}" />
-
-				<table:tddata>
-					<form:radiobuttons items="${photoLinesValues}" path="${photoLinesControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
-				</table:tddata>
-
-			</table:tredit>
-			<%-- / Photos Lines--%>
 
 			<table:tr>
 				<table:tdtext text_t="User data edit: Show nude content" />

@@ -37,12 +37,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	public void setup() {
 		super.setup();
 
-		final User user = new User() {
-			@Override
-			public int getPhotoQtyOnPage() {
-				return ITEMS_ON_PAGE;
-			}
-		};
+		final User user = new User();
 
 		final Environment environment = new Environment( user );
 		EnvironmentContext.setEnv( environment );
@@ -505,7 +500,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	private PhotoListCriteriasServiceImpl getPhotoListCriteriasService() {
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = new PhotoListCriteriasServiceImpl();
 		photoListCriteriasService.setConfigurationService( getConfigurationService() );
-		photoListCriteriasService.setUtilsService( getUtilsService() );
+//		photoListCriteriasService.setUtilsService( getUtilsService() );
 		photoListCriteriasService.setDateUtilsService( dateUtilsService );
 
 		return photoListCriteriasService;
@@ -520,14 +515,14 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		return configurationService;
 	}
 
-	private UtilsService getUtilsService() {
+	/*private UtilsService getUtilsService() {
 		final UtilsService utilsService = EasyMock.createMock( UtilsService.class );
 		EasyMock.expect( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) ).andReturn( PHOTOS_IN_LINE ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( utilsService );
 
 		return utilsService;
-	}
+	}*/
 
 	private String getDateTo() {
 		return dateUtilsService.formatDateTime( dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentDate() ) );

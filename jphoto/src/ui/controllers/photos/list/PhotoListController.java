@@ -590,7 +590,6 @@ public class PhotoListController {
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
 		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
 
@@ -746,7 +745,6 @@ public class PhotoListController {
 
 		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		model.addPhotoList( photoList );
 
 		pagingModel.setTotalItems( selectResult.getRecordQty() );
@@ -819,7 +817,6 @@ public class PhotoListController {
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
 		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias, EnvironmentContext.getLanguage() ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( currentUser ) );
 		photoList.setSortColumnNumber( listData.getSortColumnNumber() );
 
 		return photoList;

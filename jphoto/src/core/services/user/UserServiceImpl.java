@@ -215,8 +215,7 @@ public class UserServiceImpl implements UserService {
 		user.setLanguage( language );
 		user.setRegistrationTime( dateUtilsService.getCurrentTime() );
 		user.setName( "NOT LOGGED USER" );
-		user.setPhotoLines( systemVarsService.getPhotoLinesForNotLoggedUsers() );
-		user.setPhotosInLine( systemVarsService.getPhotosInLineForNotLoggedUsers() );
+		user.setPhotosOnPage( configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTOS_ON_PAGE ) );
 
 		return user;
 	}

@@ -24,8 +24,7 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 	private String homeSite;
 	private String selfDescription;
 	private UserMembershipType membershipType;
-	private int photosInLine;
-	private int photoLines;
+	private int photosOnPage;
 	private UserStatus userStatus;
 	private Date registrationTime;
 	private UserGender gender;
@@ -55,8 +54,7 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 		homeSite = user.getHomeSite();
 		selfDescription = user.getSelfDescription();
 		membershipType = user.getMembershipType();
-		photosInLine = user.getPhotosInLine();
-		photoLines = user.getPhotoLines();
+		photosOnPage = user.getPhotosOnPage();
 		userStatus = user.getUserStatus();
 		registrationTime = user.getRegistrationTime();
 		gender = user.getGender();
@@ -128,20 +126,12 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 		this.membershipType = membershipType;
 	}
 
-	public int getPhotosInLine() {
-		return photosInLine;
+	public int getPhotosOnPage() {
+		return photosOnPage;
 	}
 
-	public void setPhotosInLine( final int photosInLine ) {
-		this.photosInLine = photosInLine;
-	}
-
-	public int getPhotoLines() {
-		return photoLines;
-	}
-
-	public void setPhotoLines( final int photoLines ) {
-		this.photoLines = photoLines;
+	public void setPhotosOnPage( final int photosOnPage ) {
+		this.photosOnPage = photosOnPage;
 	}
 
 	public UserStatus getUserStatus() {
@@ -234,9 +224,5 @@ public class User extends AbstractBaseEntity implements Nameable, Favoritable, C
 	@Override
 	public String toString() {
 		return String.format( "#%d: %s", getId(), getName() );
-	}
-
-	public int getPhotoQtyOnPage() {
-		return getPhotosInLine() * getPhotoLines();
 	}
 }

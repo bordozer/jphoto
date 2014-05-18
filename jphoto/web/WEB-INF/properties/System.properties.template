@@ -19,12 +19,6 @@ datetime.SystemTimeFormatShort=HH:mm
 #JS Date format
 datetime.JavaScriptDateFormat=yy-mm-dd
 
-##Photos on page - default
-PhotoLines=5
-
-##Photos in line - default
-PhotosInLine=4
-
 # translator
 # show language code after translation true/false
 translator.showTranslationSigns=false

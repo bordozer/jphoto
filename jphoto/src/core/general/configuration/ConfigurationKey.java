@@ -38,7 +38,7 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB( 401, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.PHOTO_UPLOAD, "Additional summary photos size for file uploading for each rank in photo category per week" )
 	, PHOTO_UPLOAD_MAX_WIDTH( 402, "1800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image width" )
 	, PHOTO_UPLOAD_MAX_HEIGHT( 403, "1200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image height" )
-	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" )
+	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" ) // TODO: use an hours instead of days
 	, PHOTO_UPLOAD_ANONYMOUS_NAME( 408, "Anonymous posting", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous posting name" )
 	, PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN( 409, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.PHOTO_UPLOAD, "Ignore anonymous global settings if user's rank in genre more then" )
 
@@ -46,9 +46,9 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
 	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 
-	, PHOTO_LIST_PHOTOS_IN_LINE( 503, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty" )
-	, PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES( 504, "2", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default column qty for moble devices" )
-	, PHOTO_LIST_PHOTO_LINES( 505, "6", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: default row qty" )
+	, PHOTO_LIST_PHOTOS_ON_PAGE( 503, "20", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: photos on page by default" )
+	, PHOTO_LIST_PHOTOS_ON_PAGE_FOR_MOBILE_DEVICES( 504, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: photos on page by default for mobile devices" )
+	, PHOTO_LIST_PHOTO_TOP_QTY( 505, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: Photos qty in a TOP list" )
 	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
 	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
 	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show user rank in photo category" )

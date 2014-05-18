@@ -11,7 +11,6 @@ public class PhotoList {
 
 	private final List<Integer> photoIds;
 	private final String photoListTitle;
-	private int photosInLine;
 	private String noPhotoText = "No photos correspond to the criterias";
 
 	private final boolean showPaging;
@@ -51,14 +50,6 @@ public class PhotoList {
 
 	public String getPhotoListTitle() {
 		return photoListTitle;
-	}
-
-	public int getPhotosInLine() {
-		return photosInLine;
-	}
-
-	public void setPhotosInLine( int photosInLine ) {
-		this.photosInLine = photosInLine;
 	}
 
 	public int getTotalPhotos() {

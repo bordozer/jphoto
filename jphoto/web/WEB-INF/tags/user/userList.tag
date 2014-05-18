@@ -34,7 +34,7 @@
 			<table:td>${eco:translate( "Birthday" )}</table:td>
 			<table:td>${eco:translate( "Gender" )}</table:td>
 			<table:td>${eco:translate( "Membership type" )}</table:td>
-			<table:td>${eco:translate( "Photos in line" )}</table:td>
+			<table:td>${eco:translate( "Photos on page" )}</table:td>
 			<table:td>${eco:translate( "Photos Qty" )}</table:td>
 		</jsp:attribute>
 
@@ -93,7 +93,7 @@
 					<icons:userGender user="${user}" />
 				</table:td>
 				<table:td cssClass="text-centered">${eco:translate(user.membershipType.name)}</table:td>
-				<table:td cssClass="text-centered">${user.photosInLine > 0 ? user.photosInLine : 'auto'}</table:td>
+				<table:td cssClass="text-centered">${user.photosOnPage > 0 ? user.photosOnPage : 'auto'}</table:td>
 				<table:td cssClass="textright">${photosByUser}</table:td>
 			</table:tr>
 

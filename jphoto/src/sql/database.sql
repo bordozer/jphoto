@@ -57,8 +57,7 @@ CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `dateOfBirth` date NOT NULL DEFAULT '1000-01-01',
   `homeSite` varchar(100) DEFAULT '',
-  `photosInLine` tinyint(4) NOT NULL DEFAULT '4',
-  `photoLines` tinyint(4) DEFAULT '4',
+  `photosOnPage` tinyint(4) NOT NULL DEFAULT '4',
   `registerTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
   `membershipType` tinyint(4) NOT NULL DEFAULT '1',
   `userStatus` tinyint(4) NOT NULL,
@@ -75,7 +74,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `idx_login` (`login`) USING BTREE,
   UNIQUE KEY `idx_email` (`email`) USING BTREE,
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1089 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
+) ENGINE=InnoDB AUTO_INCREMENT=9248 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
 
 #
 # Structure for the `photos` table :

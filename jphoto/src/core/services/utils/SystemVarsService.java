@@ -31,10 +31,6 @@ public interface SystemVarsService {
 
 	String getJavaScriptDateFormat();
 
-	int getPhotoLinesForNotLoggedUsers();
-
-	int getPhotosInLineForNotLoggedUsers();
-
 	List<String> getAdminUserIds();
 
 	boolean isDevMode();

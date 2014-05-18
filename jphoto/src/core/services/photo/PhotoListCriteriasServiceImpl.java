@@ -475,7 +475,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 		criterias.setUser( cardOwner );
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setPhotoQtyLimit( accessor.getPhotoQtyOnPage() );
+		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 
 		return criterias;
 	}
@@ -485,7 +485,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
 
 		criterias.setUser( user );
-		criterias.setPhotoQtyLimit( accessor.getPhotoQtyOnPage() );
+		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 
 		return criterias;
 	}
@@ -495,7 +495,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
 
 		criterias.setVotedUser( user );
-		criterias.setPhotoQtyLimit( accessor.getPhotoQtyOnPage() );
+		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setPhotoSort( PhotoSort.VOTING_TIME );
 
@@ -578,7 +578,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 			addVotingDateCriteriaFromCurrentDate( criterias );
 			criterias.setTopBestPhotoList( true );
 
-			criterias.setPhotoQtyLimit( utilsService.getPhotosInLine( user ) );
+			criterias.setPhotoQtyLimit( configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
 
 			return criterias;
 		}
@@ -592,7 +592,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 			addVotingDateCriteriaFromCurrentDate( criterias );
 
-			criterias.setPhotoQtyLimit( user.getPhotoQtyOnPage() );
+			criterias.setPhotoQtyLimit( user.getPhotosOnPage() );
 
 			return criterias;
 		}
@@ -604,7 +604,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		public PhotoListCriterias getPhotoListCriterias( final User user ) {
 			final PhotoListCriterias criterias = super.getPhotoListCriterias( user );
 
-			criterias.setPhotoQtyLimit( user.getPhotoQtyOnPage() );
+			criterias.setPhotoQtyLimit( user.getPhotosOnPage() );
 
 			return criterias;
 		}

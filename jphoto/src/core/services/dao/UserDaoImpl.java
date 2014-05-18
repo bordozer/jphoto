@@ -35,8 +35,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 	public final static String TABLE_COLUMN_HOME_SITE = "homeSite";
 	public final static String TABLE_COLUMN_SELF_DESCRIPTION = "selfDescription";
 	public final static String TABLE_COLUMN_DATE_OF_BIRTH = "dateOfBirth";
-	public final static String TABLE_COLUMN_PHOTOS_IN_LINE = "photosInLine";
-	public final static String TABLE_COLUMN_PHOTOS_LINES = "photoLines";
+	public final static String TABLE_COLUMN_PHOTOS_ON_PAGE = "photosOnPage";
 	public final static String TABLE_COLUMN_MEMBERSHIP_TYPE = "membershipType";
 	public final static String TABLE_COLUMN_USER_STATUS = "userStatus";
 	public final static String TABLE_COLUMN_REGISTER_TIME = "registerTime";
@@ -61,8 +60,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		fields.put( 3, TABLE_COLUMN_EMAIL );
 		fields.put( 4, TABLE_COLUMN_HOME_SITE );
 		fields.put( 5, TABLE_COLUMN_DATE_OF_BIRTH );
-		fields.put( 6, TABLE_COLUMN_PHOTOS_IN_LINE );
-		fields.put( 7, TABLE_COLUMN_PHOTOS_LINES );
+		fields.put( 6, TABLE_COLUMN_PHOTOS_ON_PAGE );
 		fields.put( 8, TABLE_COLUMN_MEMBERSHIP_TYPE );
 		fields.put( 9, TABLE_COLUMN_USER_STATUS );
 		fields.put( 10, TABLE_COLUMN_REGISTER_TIME );
@@ -81,8 +79,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		updatableFields.put( 3, TABLE_COLUMN_EMAIL );
 		updatableFields.put( 4, TABLE_COLUMN_HOME_SITE );
 		updatableFields.put( 5, TABLE_COLUMN_DATE_OF_BIRTH );
-		updatableFields.put( 6, TABLE_COLUMN_PHOTOS_IN_LINE );
-		updatableFields.put( 7, TABLE_COLUMN_PHOTOS_LINES );
+		updatableFields.put( 6, TABLE_COLUMN_PHOTOS_ON_PAGE );
 		updatableFields.put( 8, TABLE_COLUMN_MEMBERSHIP_TYPE );
 		updatableFields.put( 11, TABLE_COLUMN_USER_GENDER );
 		updatableFields.put( 12, TABLE_COLUMN_EMAIL_NOTIFICATION_OPTIONS );
@@ -194,8 +191,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 		paramSource.addValue( TABLE_COLUMN_HOME_SITE, entry.getHomeSite() );
 		paramSource.addValue( TABLE_COLUMN_SELF_DESCRIPTION, entry.getSelfDescription() );
 		paramSource.addValue( TABLE_COLUMN_DATE_OF_BIRTH, entry.getDateOfBirth() );
-		paramSource.addValue( TABLE_COLUMN_PHOTOS_IN_LINE, entry.getPhotosInLine() );
-		paramSource.addValue( TABLE_COLUMN_PHOTOS_LINES, entry.getPhotoLines() );
+		paramSource.addValue( TABLE_COLUMN_PHOTOS_ON_PAGE, entry.getPhotosOnPage() );
 		paramSource.addValue( TABLE_COLUMN_MEMBERSHIP_TYPE, entry.getMembershipType().getId() );
 		paramSource.addValue( TABLE_COLUMN_USER_STATUS, entry.getUserStatus().getId() );
 		paramSource.addValue( TABLE_COLUMN_REGISTER_TIME, entry.getRegistrationTime() );
@@ -246,8 +242,7 @@ public class UserDaoImpl extends BaseEntityDaoImpl<User> implements UserDao {
 			result.setDateOfBirth( rs.getDate( TABLE_COLUMN_DATE_OF_BIRTH ) );
 			result.setHomeSite( rs.getString( TABLE_COLUMN_HOME_SITE ) );
 			result.setSelfDescription( rs.getString( TABLE_COLUMN_SELF_DESCRIPTION ) );
-			result.setPhotosInLine( rs.getInt( TABLE_COLUMN_PHOTOS_IN_LINE ) );
-			result.setPhotoLines( rs.getInt( TABLE_COLUMN_PHOTOS_LINES ) );
+			result.setPhotosOnPage( rs.getInt( TABLE_COLUMN_PHOTOS_ON_PAGE ) );
 
 			int membershipTypeId = rs.getInt( TABLE_COLUMN_MEMBERSHIP_TYPE );
 			result.setMembershipType( UserMembershipType.getById( membershipTypeId ) );

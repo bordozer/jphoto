@@ -1,6 +1,7 @@
 package ui.controllers.users.card.data;
 
 import core.general.base.PagingModel;
+import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.menus.EntryMenu;
@@ -317,7 +318,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
 		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), photoListTitle, false );
-		photoList.setPhotosInLine( getUserPhotosInLine() );
 		photoList.setLinkToFullList( userTeamMemberCardLink );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
@@ -405,7 +405,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final PhotoList photoList = new PhotoList( photosIds, listTitle, false );
 		photoList.setPhotoListId( photoListId );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setLinkToFullList( linkToFullPhotoList );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 		photoList.setSortColumnNumber( 3 );
@@ -421,7 +420,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	private int getUserPhotosInLine() {
-		return utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() );
+		return configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
 	}
 
 	protected User getUser( final UserCardModel model ) {

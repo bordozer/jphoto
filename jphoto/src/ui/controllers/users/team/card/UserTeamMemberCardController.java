@@ -98,7 +98,6 @@ public class UserTeamMemberCardController {
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
 		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );
 

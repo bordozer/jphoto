@@ -186,8 +186,7 @@ public class UserEditDataController {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		if ( UserUtils.isTheUserThatWhoIsCurrentUser( user ) ) {
 			currentUser.setLanguage( user.getLanguage() );
-			currentUser.setPhotoLines( user.getPhotoLines() );
-			currentUser.setPhotosInLine( user.getPhotosInLine() );
+			currentUser.setPhotosOnPage( user.getPhotosOnPage() );
 
 			currentUser.setShowNudeContent( user.isShowNudeContent() );
 		}
@@ -217,8 +216,7 @@ public class UserEditDataController {
 		model.setSelfDescription( user.getSelfDescription() );
 		model.setMembershipTypeId( user.getMembershipType().getId() );
 		model.setUserGenderId( user.getGender().getId() );
-		model.setPhotosInLine( user.getPhotosInLine() );
-		model.setPhotoLines( user.getPhotoLines() );
+		model.setPhotosInLine( user.getPhotosOnPage() );
 		model.setShowNudeContent( user.isShowNudeContent() );
 		model.setUserUILanguageId( user.getLanguage().getId() );
 
@@ -245,8 +243,7 @@ public class UserEditDataController {
 		user.setSelfDescription( model.getSelfDescription() );
 		user.setMembershipType( UserMembershipType.getById( model.getMembershipTypeId() ) );
 		user.setGender( UserGender.getById( model.getUserGenderId() ) );
-		user.setPhotosInLine( model.getPhotosInLine() );
-		user.setPhotoLines( model.getPhotoLines() );
+		user.setPhotosOnPage( model.getPhotosInLine() );
 		user.setShowNudeContent( model.isShowNudeContent() );
 		user.setLanguage( Language.getById( model.getUserUILanguageId() ) );
 

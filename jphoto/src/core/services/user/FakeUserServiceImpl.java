@@ -132,8 +132,7 @@ public class FakeUserServiceImpl implements FakeUserService {
 
 		user.setEmail( getRandomEmail() );
 
-		user.setPhotosInLine( -1 ); // TODO: ConfigurationServiceImpl.PHOTO_LIST_PHOTOS_IN_LINE
-		user.setPhotoLines( randomUtilsService.getRandomInt( 3, 7 ) );   // TODO: ConfigurationServiceImpl.PHOTO_LIST_PHOTO_LINES
+		user.setPhotosOnPage( -1 );
 
 		final int age = randomUtilsService.getRandomInt( 14, 75 );
 		final Date yearsOffsetFromCurrentDate = dateUtilsService.getYearsOffsetFromCurrentDate( -age );

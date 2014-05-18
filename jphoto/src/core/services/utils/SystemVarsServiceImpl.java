@@ -136,16 +136,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public int getPhotoLinesForNotLoggedUsers() {
-		return config.getInt( "PhotoLines" );
-	}
-
-	@Override
-	public int getPhotosInLineForNotLoggedUsers() {
-		return config.getInt( "PhotosInLine" );
-	}
-
-	@Override
 	public List<String> getAdminUserIds() {
 		final List<Object> adminUserIDs = config.getList( "SuperAdminUserIDs", new ArrayList<Object>() );
 		return ListUtils.convertObjectListToString( adminUserIDs );

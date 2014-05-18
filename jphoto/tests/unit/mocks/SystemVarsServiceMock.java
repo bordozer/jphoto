@@ -86,16 +86,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public int getPhotoLinesForNotLoggedUsers() {
-		return -1;
-	}
-
-	@Override
-	public int getPhotosInLineForNotLoggedUsers() {
-		return 4;
-	}
-
-	@Override
 	public List<String> getAdminUserIds() {
 		return newArrayList( String.valueOf( AbstractTestCase.SUPER_ADMIN_1.getId() ), String.valueOf( AbstractTestCase.SUPER_ADMIN_2.getId() ) );
 	}

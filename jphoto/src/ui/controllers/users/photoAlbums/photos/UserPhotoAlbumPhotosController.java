@@ -99,7 +99,6 @@ public class UserPhotoAlbumPhotosController {
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
 		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );
-		photoList.setPhotosInLine( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) );
 		photoList.setBottomText( photoAlbum.getDescription() );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );
 

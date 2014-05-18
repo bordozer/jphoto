@@ -14,28 +14,21 @@ public class UtilsServiceImpl implements UtilsService {
 	private ConfigurationService configurationService;
 
 	@Override
-	public int getPhotosInLine( final User user ) {
+	public int getPhotosOnPage( final User user ) {
+
+		if ( user.getPhotosOnPage() > 0 ) {
+			return user.getPhotosOnPage();
+		}
 
 		final boolean isMobileDevice = PhotoUtils.isMobileDevice( EnvironmentContext.getDeviceType() ); // TODO: EnvironmentContext in service
 
-		final int systemPhotosInLine = configurationService.getConfiguration( ConfigurationKey.PHOTO_LIST_PHOTOS_IN_LINE ).getValueInt();
-		final int systemPhotosInLineForMobileDevices = configurationService.getConfiguration( ConfigurationKey.PHOTO_LIST_PHOTOS_IN_LINE_FOR_MOBILE_DEVICES ).getValueInt();
+		final int systemPhotosOnPage = configurationService.getConfiguration( ConfigurationKey.PHOTO_LIST_PHOTOS_ON_PAGE ).getValueInt();
+		final int systemPhotosOnPageForMobileDevices = configurationService.getConfiguration( ConfigurationKey.PHOTO_LIST_PHOTOS_ON_PAGE_FOR_MOBILE_DEVICES ).getValueInt();
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {
-			return isMobileDevice ? systemPhotosInLineForMobileDevices : systemPhotosInLine;
+			return isMobileDevice ? systemPhotosOnPageForMobileDevices : systemPhotosOnPage;
 		}
 
-		int photosInLine = user.getPhotosInLine();
-
-		if ( photosInLine > 0 ) {
-			return photosInLine;
-		}
-
-		return isMobileDevice ? systemPhotosInLineForMobileDevices : systemPhotosInLine;
-	}
-
-	@Override
-	public int getPhotosOnPage( final User user ) {
-		return getPhotosInLine( user ) * user.getPhotoLines();
+		return isMobileDevice ? systemPhotosOnPageForMobileDevices : systemPhotosOnPage;
 	}
 }
