@@ -46,9 +46,9 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
 	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 
+	, PHOTO_LIST_PHOTO_TOP_QTY( 505, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: Photos qty in a TOP list" )
 	, PHOTO_LIST_PHOTOS_ON_PAGE( 503, "20", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: photos on page by default" )
 	, PHOTO_LIST_PHOTOS_ON_PAGE_FOR_MOBILE_DEVICES( 504, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: photos on page by default for mobile devices" )
-	, PHOTO_LIST_PHOTO_TOP_QTY( 505, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: Photos qty in a TOP list" )
 	, PHOTO_LIST_SHOW_PHOTO_MENU( 506, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo menu" )
 	, PHOTO_LIST_SHOW_STATISTIC( 507, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show photo statistic (marks/previews/comments)" )
 	, PHOTO_LIST_SHOW_USER_RANK_IN_GENRE( 508, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTOS, "Photo list: show user rank in photo category" )
