@@ -24,7 +24,6 @@
 	<property name="tomcat.lib" value="${tomcat.home}/lib"/>
 	<property name="web-inf.lib" value="web/WEB-INF/lib"/>
 	<property name="tests.lib" value="${basedir}/tests/lib"/>
-	<property name="tests.lib.runtime" value="${basedir}/tests/lib-runtime"/>
 
 	<property name="tests.kwaqua.build" value="${basedir}/tests/kwaqua.build"/>
 
