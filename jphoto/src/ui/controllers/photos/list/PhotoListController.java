@@ -817,7 +817,6 @@ public class PhotoListController {
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
 		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias, EnvironmentContext.getLanguage() ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
-		photoList.setSortColumnNumber( listData.getSortColumnNumber() );
 
 		return photoList;
 	}

@@ -407,7 +407,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		photoList.setPhotoListId( photoListId );
 		photoList.setLinkToFullList( linkToFullPhotoList );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
-		photoList.setSortColumnNumber( 3 );
 
 		return photoList;
 	}
