@@ -11,11 +11,11 @@ public class PhotoList {
 
 	private final List<Integer> photoIds;
 	private final String photoListTitle;
-	private String noPhotoText = "No photos correspond to the criterias";
+	private String noPhotoText = "PhotoList: No photos correspond to the criterias";
 
 	private final boolean showPaging;
 
-	private String linkToFullListText = "All photos";
+	private String linkToFullListText = "PhotoList: All photos";
 
 	private String linkToFullList = StringUtils.EMPTY;
 	private String photosCriteriasDescription = StringUtils.EMPTY;
