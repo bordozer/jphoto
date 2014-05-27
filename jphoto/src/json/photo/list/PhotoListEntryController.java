@@ -194,14 +194,6 @@ public class PhotoListEntryController {
 
 	private String getPhotoPreview( final Photo photo ) {
 
-		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
-			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
-				, urlUtilsService.getPhotoCardLink( photo.getId() )
-				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", getLanguage() ) )
-				, urlUtilsService.getSiteImagesPath()
-			);
-		}
-
 		/*
 		// TODO: need a flag to show or hide the preview
 		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() ) ) {
@@ -210,6 +202,14 @@ public class PhotoListEntryController {
 				, translatorService.translate( "The photo is within anonymous period", getLanguage() )
 			);
 		}*/
+
+		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
+			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
+				, urlUtilsService.getPhotoCardLink( photo.getId() )
+				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", getLanguage() ) )
+				, urlUtilsService.getSiteImagesPath()
+			);
+		}
 
 		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image'/></a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
