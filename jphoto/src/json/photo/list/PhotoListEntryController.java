@@ -202,6 +202,15 @@ public class PhotoListEntryController {
 			);
 		}
 
+		/*
+		// TODO: need a flag to show or hide the preview
+		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() ) ) {
+			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
+				, urlUtilsService.getSiteImagesPath()
+				, translatorService.translate( "The photo is within anonymous period", getLanguage() )
+			);
+		}*/
+
 		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image'/></a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
 			, photo.getNameEscaped()
