@@ -63,8 +63,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job $1 is performed successfully</nerd>
+		<ru><![CDATA[Задача $1 выполнена успешно]]></ru>
 	</translation>
 
 	<translation>
