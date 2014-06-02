@@ -73,8 +73,6 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 			if ( hasJobFinishedWithAnyResult() ) {
 				break;
 			}
-
-//			throw new BaseRuntimeException( "Planned exception" ); // TODO: remove!!!
 		}
 
 		services.getCacheService().expire( CacheKey.PHOTO_INFO );
@@ -83,6 +81,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 	}
 
 	private void sendSystemNotificationAboutGotNewRankToUser( final User user, final int userCurrentRank, final int userNewRank, final Genre genre ) {
+
 		final PrivateMessage message = new PrivateMessage();
 
 		message.setToUser( user );

@@ -8,8 +8,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )</nerd>
+		<ru><![CDATA[Пользователю $1 был присвоен новый ранг $2 в разделе $3 ( предыдущий был $4 )]]></ru>
 	</translation>
 
 	<translation>
