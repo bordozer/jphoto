@@ -8,9 +8,35 @@
 	</translation>
 
 	<translation>
+		<nerd>FavoriteEntryType: add to favorite members</nerd>
+		<ru><![CDATA[Добавить в избранные пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The member is in your favorites. Click to remove.</nerd>
+		<ru><![CDATA[Удалить пользователя из списка избранных]]></ru>
+	</translation>
+
+
+
+
+	<translation>
 		<nerd>FavoriteEntryType: Favorite photos</nerd>
 		<ru><![CDATA[Избранные работы]]></ru>
 	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: add to favorite photos</nerd>
+		<ru><![CDATA[Добавить в избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The photo is in your favorites. Click to remove.</nerd>
+		<ru><![CDATA[Удалить работу из списка избранных]]></ru>
+	</translation>
+
+
+
 
 	<translation>
 		<nerd>FavoriteEntryType: Friends</nerd>
@@ -18,9 +44,35 @@
 	</translation>
 
 	<translation>
+		<nerd>FavoriteEntryType: add to friends</nerd>
+		<ru><![CDATA[Добавить в друзья]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The member is your friend. Click to remove.</nerd>
+		<ru><![CDATA[Удалить пользователя из списка друзей]]></ru>
+	</translation>
+
+
+
+
+	<translation>
 		<nerd>FavoriteEntryType: Black list</nerd>
 		<ru><![CDATA[Черный список пользователей]]></ru>
 	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: add to black list</nerd>
+		<ru><![CDATA[Добавить пользователя в черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The member is in your black list. Click to remove.</nerd>
+		<ru><![CDATA[Удалить пользователя из черного списка]]></ru>
+	</translation>
+
+
+
 
 	<translation>
 		<nerd>FavoriteEntryType: Bookmarks</nerd>
@@ -28,9 +80,35 @@
 	</translation>
 
 	<translation>
+		<nerd>FavoriteEntryType: add photo to bookmarks</nerd>
+		<ru><![CDATA[Добавить работу в закладки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: The photo is in your bookmarks. Click to remove.</nerd>
+		<ru><![CDATA[Удалить работу из закладок]]></ru>
+	</translation>
+
+
+
+
+	<translation>
 		<nerd>FavoriteEntryType: New photos notification</nerd>
 		<ru><![CDATA[Пользователи, новые работы которых отслеживаются]]></ru>
 	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: add notification about new photos</nerd>
+		<ru><![CDATA[Добавить пользователя в список пользователей, работы которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: You get notification about new photos. Click to unsubscribe</nerd>
+		<ru><![CDATA[Удалить пользователя из списка пользователей, работы которых отслеживаются]]></ru>
+	</translation>
+
+
+
 
 	<translation>
 		<nerd>FavoriteEntryType: New comments notification</nerd>
@@ -38,8 +116,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>FavoriteEntryType: You did not subscribe notification about new comments</nerd>
+		<ru><![CDATA[Добавить работу в список работ, новые комментарии к которым отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoriteEntryType: You get notification about new comments. Click to unsubscribe</nerd>
+		<ru><![CDATA[Удалить работу из списка работ, новые комментарии к которым отслеживаются]]></ru>
 	</translation>
 
 </translations>
