@@ -2721,7 +2721,7 @@
 	</translation>
 
 	<translation>
-		<nerd>$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.</nerd>
+		<nerd>$1 has commented your photo</nerd>
 		<ru><![CDATA[$1 оставил комментарий к работе '$2'. Вы получили это сообщение поскольку вы следите за комментариями к этой работе.]]></ru>
 		<ua><![CDATA[$1 прокоментував роботу '$2'. Ви отримали це повiдомлення оскiльки ви спостерiгаете за комментарями до роботи.]]></ua>
 		<en><![CDATA[$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.]]></en>

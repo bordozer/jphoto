@@ -20,8 +20,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class UserNotificationsCollector {
 
-	private static final String CONTROL_EMAIL_NOTIFICATIONS_HINT = "You can control email notifications in the settings of your profile.";
-
 	protected Services services;
 
 	protected final LogHelper log = new LogHelper( this.getClass() );
@@ -86,8 +84,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "One of your favorite members $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "UserNotificationsCollector: One of your favorite members $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -112,8 +110,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "One of your friends $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "UserNotificationsCollector: One of your friends $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -138,8 +136,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).string( photoAuthor.getNameEscaped() );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "UserNotificationsCollector: $1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).string( photoAuthor.getNameEscaped() );
 
 				return new NotificationData( subject, message );
 			}
@@ -173,8 +171,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = getSubject( "$1 has commented photo '$2'.", commentAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "$1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", commentAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has commented photo '$2'", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "UserNotificationsCollector: $1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -199,8 +197,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage1( "One of your favorite member $1 has uploaded new photo '$2'. $3", photoAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "UserNotificationsCollector: One of your favorite members $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -225,8 +223,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage1( "One of your friend $1 has uploaded new photo '$2'. $3", photoAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "UserNotificationsCollector: One of your friends $1 has uploaded new photo '$2'.", photoAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -251,8 +249,8 @@ public abstract class UserNotificationsCollector {
 			public NotificationData getNotificationData() {
 				final User photoAuthor = getPhotoAuthor( photo );
 
-				final TranslatableMessage subject = getSubject( "$1 has uploaded new photo '$2'", photoAuthor, photo, services );
-				final TranslatableMessage message = getMessage1( "$1 has uploaded new photo '$2'. You got this message because you are tracking new photos of photo author. $3", photoAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has uploaded new photo '$2'", photoAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "UserNotificationsCollector: $1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.", photoAuthor, photo, services ).string( photoAuthor.getNameEscaped() );
 
 				return new NotificationData( subject, message );
 			}
@@ -290,8 +288,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = getSubject( "$1 has commented your photo '$2'", commentAuthor, photo, services );
-				final TranslatableMessage message = getMessage1( "$1 has commented your photo '$2'. $3", commentAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has commented your photo '$2'", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage1( "UserNotificationsCollector: $1 has commented your photo '$2'", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -321,8 +319,8 @@ public abstract class UserNotificationsCollector {
 				final User commentAuthor = comment.getCommentAuthor();
 				final Photo photo = services.getPhotoService().load( comment.getPhotoId() );
 
-				final TranslatableMessage subject = getSubject( "$1 has commented photo '$2'", commentAuthor, photo, services );
-				final TranslatableMessage message = getMessage( "$1 has commented photo '$2'. You got this email because you are tracking new comments to the photo.", commentAuthor, photo, services );
+				final TranslatableMessage subject = getSubject( "UserNotificationsCollector: $1 has commented photo '$2'", commentAuthor, photo, services );
+				final TranslatableMessage message = getMessage( "UserNotificationsCollector: $1 has commented photo '$2'. You got this message because you are tracking new comments to the photo.", commentAuthor, photo, services );
 
 				return new NotificationData( subject, message );
 			}
@@ -381,6 +379,6 @@ public abstract class UserNotificationsCollector {
 	}
 
 	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
-		return getMessage( nerd, photoAuthor, photo, services ).string( CONTROL_EMAIL_NOTIFICATIONS_HINT );
+		return getMessage( nerd, photoAuthor, photo, services ).translatableString( "UserNotificationsCollector: You can control email notifications in the settings of your profile." );
 	}
 }
