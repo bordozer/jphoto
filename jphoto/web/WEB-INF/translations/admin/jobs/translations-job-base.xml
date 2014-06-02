@@ -3,6 +3,31 @@
 <translations>
 
 	<translation>
+		<nerd>UsersGenresRanksRecalculationJob: You have bees given a new rank $1 in category $2 ( the previous one was $3 )</nerd>
+		<ru><![CDATA[Вам был присвоен новый ранг $1 в разделе $2 ( предыдущий был $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

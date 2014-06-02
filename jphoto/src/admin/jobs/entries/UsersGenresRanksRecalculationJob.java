@@ -53,14 +53,6 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 
 					getLog().info( String.format( "User %s has bees given a new rank %s in %s (the previous one was %s)", user, userNewRank, genre, userCurrentRank ) );
 
-					/*final Language language = getLanguage();
-					addJobRuntimeLogMessage( services.getTranslatorService().translate( "User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )"
-						, language
-						, entityLinkUtilsService.getUserCardLink( user, language )
-						, String.valueOf( userNewRank )
-						, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, language )
-						, String.valueOf( userCurrentRank ) )
-					);*/
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )", services )
 						.addUserCardLinkParameter( user )
 						.addIntegerParameter( userNewRank )
@@ -96,9 +88,13 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
 		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
-		message.setMessageText( String.format( "You have bees given a new rank %s in category %s ( the previous one was %s )"
-			, userNewRank, services.getEntityLinkUtilsService().getPhotosByGenreLink( genre, getLanguage() ), userCurrentRank )
-		);
+
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "UsersGenresRanksRecalculationJob: You have bees given a new rank $1 in category $2 ( the previous one was $3 )", services )
+			.addIntegerParameter( userNewRank )
+			.string( services.getEntityLinkUtilsService().getPhotosByGenreLink( genre, getLanguage() ) )
+			.addIntegerParameter( userCurrentRank )
+			;
+		message.setMessageText( translatableMessage.build( getLanguage() ) );
 
 		services.getPrivateMessageService().save( message );
 	}
