@@ -105,7 +105,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "registerurl", urlUtilsService.getUserNewLink() );
 
 		model.put( "progectname", systemVarsService.getProjectName() );
-		model.put( "slogan", translatorService.translate( "Post your soul here", language ) );
+		model.put( "slogan", translatorService.translate( "System slogan: Post your soul here", language ) );
 
 		final Map<MenuItem,List<MenuItem>> menuElements = menuService.getMenuElements( currentUser );
 		final int menuElementsQty = menuElements.size();
@@ -130,7 +130,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		model.put( "loggedUserId", currentUser.getId() );
 		model.put( "loggedUserName", StringUtilities.escapeHtml( currentUser.getName() ) );
 		model.put( "loggedUserCardUrl", urlUtilsService.getUserCardLink( currentUser.getId() ) );
-		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Your card", language ) );
+		model.put( "loggedUserCardUrlTitle", translatorService.translate( "Login info: Your card", language ) );
 
 		model.put( "uploadPhotoText", translatorService.translate( "Main menu: Upload photo", language ) );
 		model.put( "baseAdminPrefix", urlUtilsService.getBaseAdminURL() );
