@@ -121,7 +121,7 @@
 
 			<c:if test="${showCommentAuthorData && hasAvatar}">
 				<div class="text-centered" style="float: left; width: 90px;">
-					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('$1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
+					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
 				</div>
 			</c:if>
 

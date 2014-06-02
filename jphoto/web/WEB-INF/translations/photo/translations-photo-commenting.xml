@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Comment view: $1 - avatar</nerd>
+		<ru><![CDATA[$1 - аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Add a new comment</nerd>
+		<ru><![CDATA[Добавить комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Comment from</nerd>
+		<ru><![CDATA[От]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Comment text</nerd>
+		<ru><![CDATA[Текст]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Comments length: $1 - $2 symbols</nerd>
+		<ru><![CDATA[Длина комментария: $1 - $2 символов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Your delay between comments: $1 seconds</nerd>
+		<ru><![CDATA[Задержка между комментариями: $1 секунд(а)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Comments subscribe</nerd>
+		<ru><![CDATA[Подписаться на комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: To the top of page</nerd>
+		<ru><![CDATA[Наверх]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Comment form: Comment must be more then $1 and less then $2 symbols</nerd>
+		<ru><![CDATA[Длина комментария должна быть не менее $1 и не более $2 смволов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

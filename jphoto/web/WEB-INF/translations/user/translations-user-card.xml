@@ -58,18 +58,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>There are $1 point(s) more is necessary to achieve rank $2 in category '$3'</nerd>
+		<ru><![CDATA[Необходимо еще набрать $1 голосов чтобы достич ранга $2 в разделе '$3']]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User card: Change avatar</nerd>
+		<ru><![CDATA[Изменить аватар]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Click to see who voted for the rank in category $1</nerd>
+		<ru><![CDATA[Показать историю голосования за ранг в разделе $1]]></ru>
 	</translation>
 
 	<translation>

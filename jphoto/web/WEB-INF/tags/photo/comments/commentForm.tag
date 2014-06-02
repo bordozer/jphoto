@@ -32,7 +32,7 @@
 <c:set var="commentEndAnchor" value="<%=PhotoCommentModel.COMMENT_END_ANCHOR%>"/>
 <c:set var="commentsEndAnchor" value="<%=PhotoCommentModel.COMMENTS_END_ANCHOR%>"/>
 
-<c:set var="addButtonCaption" value="Add a new comment"/>
+<c:set var="addButtonCaption" value="Comment form: Add a new comment"/>
 <c:set var="addButtonCaptionTranslated" value="${eco:translate( addButtonCaption )}"/>
 
 <c:set var="newCommentsNotificationEntryType" value="<%=FavoriteEntryType.NEW_COMMENTS_NOTIFICATION%>"/>
@@ -68,22 +68,22 @@
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Comment from"/>
+					<table:tdtext text_t="Comment form: Comment from"/>
 					<table:td>
 						<user:userCard user="${loggedUser}"/>
 					</table:td>
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Comment" isMandatory="true" labelFor="${commentTextFormControl}"/>
+					<table:tdtext text_t="Comment form: Comment text" isMandatory="true" labelFor="${commentTextFormControl}"/>
 					<table:tddata>
 						<tags:inputHint inputId="${commentTextFormControl}">
 						<jsp:attribute name="inputField">
 							<html:textarea inputId="${commentTextFormControl}" inputValue="" cols="40" rows="5"/>
 							<div style="float: left; width: 100%; height: 20px;">
-								${eco:translate2( "Comments length: $1 - $2 symbols", minCommentLength, maxCommentLength )}
+								${eco:translate2( "Comment form: Comments length: $1 - $2 symbols", minCommentLength, maxCommentLength )}
 								<br />
-								${eco:translate1( "Your delay between comments: $1 seconds", usedDelayBetweenComments )}
+								${eco:translate1( "Comment form: Your delay between comments: $1 seconds", usedDelayBetweenComments )}
 							</div>
 						</jsp:attribute>
 						</tags:inputHint>
@@ -94,12 +94,12 @@
 
 				<table:tr>
 					<table:td colspan="2">
-						${eco:translate('Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
+						${eco:translate('Comment form: Comments subscribe')}: <icons:favoritesPhoto photo="${photo}" entryType="${newCommentsNotificationEntryType}"/>
 					</table:td>
 				</table:tr>
 
 				<table:tr>
-					<table:td colspan="2"><a href="#">${eco:translate('To the top of page')}</a></table:td>
+					<table:td colspan="2"><a href="#">${eco:translate('Comment form: To the top of page')}</a></table:td>
 				</table:tr>
 
 			</table:table>
@@ -118,7 +118,7 @@
 			commentField.val( commentText );
 
 			if ( commentText.length < ${minCommentLength} ) {
-				showUIMessage_Information( "${eco:translate2('Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
+				showUIMessage_Information( "${eco:translate2('Comment form: Comment must be more then $1 and less then $2 symbols', minCommentLength, maxCommentLength)}" );
 				return false;
 			}
 
@@ -155,7 +155,7 @@
 							refreshPhotoInfo();
 						},
 						error:function () {
-							showUIMessage_Error( '${eco:translate('Error saving message')}' );
+							showUIMessage_Error( '${eco:translate('Comment form: Error saving message')}' );
 							enableCommentText();
 						}
 					} );

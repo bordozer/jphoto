@@ -28,7 +28,7 @@
 
 <c:set var="submitCommentButton" value="<%=PhotoCommentModel.SUBMIT_COMMENT_BUTTON_ID%>"/>
 
-<c:set var="addButtonCaption" value="${eco:translate('Add a new comment')}"/>
+<c:set var="addButtonCaption" value="${eco:translate('Comment form: Add a new comment')}"/>
 
 <script type="text/javascript">
 

@@ -38,7 +38,6 @@
 			<c:if test="${doesAvatarExist}">
 				<table:tr>
 					<table:td colspan="2" cssClass="text-centered">
-						<%--<img id="avatar_${userAvatarModel.user.id}" src="${userAvatarFileUrl}" width="${dimension.width}" height="${dimension.height}" alt="${eco:translate1('$1 - avatar', eco:escapeHtml(user.name))}" />--%>
 						${eco:userAvatarImage(user.id, dimension.width, dimension.height, '', '', '')}
 					</table:td>
 				</table:tr>
