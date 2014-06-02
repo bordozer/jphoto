@@ -38,6 +38,56 @@
 	</translation>
 
 	<translation>
+		<nerd>User card: Edit member personal data</nerd>
+		<ru><![CDATA[Редактировать персональные данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not vote for the member rank in category $1:</nerd>
+		<ru><![CDATA[Вы не можете голосовать за ранг пользователя в разделе $1:]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You can not vote for the member's rank in category. Click to see detailed message</nerd>
+		<ru><![CDATA[Вы не можете голосовать за ранг пользователя в разделе. Кликните, чтобы увидеть почему]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You have already voted when member's rank is $1 in category '$2'</nerd>
+		<ru><![CDATA[Вы уже голосовали при нынешнем ранге пользователя $1 в разделе '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
