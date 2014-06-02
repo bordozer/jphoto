@@ -48,6 +48,16 @@
 	</translation>
 
 	<translation>
+		<nerd>PhotoList: All photos</nerd>
+		<ru><![CDATA[Все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show all photos of the list</nerd>
+		<ru><![CDATA[Все работы по критерию]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

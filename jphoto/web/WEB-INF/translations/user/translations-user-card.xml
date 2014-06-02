@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>The member deserves higher rank than his current one $1 (+$2) in category '$3'</nerd>
+		<ru><![CDATA[Пользователь заслуживает больший ранг, чем его текущий $1 (+$2) в разделе '$3]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The member does not deserve his rank $1 (-$2) in category '$3'</nerd>
+		<ru><![CDATA[Пользователь не достоин своего текущего ранга $1 (-$2) в разделе '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones ).</nerd>
+		<ru><![CDATA[У пользователя недостаточно работ в разделе $1 ( загружено $2 работ(ы), для ранга должно быть не менее, чем $3 ).]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The very best of $1</nerd>
+		<ru><![CDATA[$1: лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos of $1</nerd>
+		<ru><![CDATA[$1: последние работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The photos $1 has appraised recently</nerd>
+		<ru><![CDATA[$1: недавно оцененные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Last photos of visitors who viewed $1's photos recently</nerd>
+		<ru><![CDATA[Последние работы пользователей, которые недавно смотрели работы $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
