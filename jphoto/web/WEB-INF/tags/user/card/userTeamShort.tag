@@ -17,7 +17,7 @@
 
 	<table:table width="100%" oddEven="true">
 
-		<table:separatorInfo colspan="3" title="${eco:translate('Team')}" />
+		<table:separatorInfo colspan="3" title="${eco:translate('User Statistics: Tab: Team')}" />
 
 		<c:if test="${not empty userTeamMembers}">
 

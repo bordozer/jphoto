@@ -8,6 +8,6 @@
 
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
 
-<c:set var="text" value="${eco:translate('Notifications about new comments')}" />
+<c:set var="text" value="${eco:translate('Links: Notifications about new comments')}" />
 
-<a href ="${link}" title="${eco:translate1("$1\'s notifications about new comments", userNameEscaped)}">${text}</a>
+<a href ="${link}" title="${eco:translate1("Links: $1: notifications about new comments", userNameEscaped)}">${text}</a>

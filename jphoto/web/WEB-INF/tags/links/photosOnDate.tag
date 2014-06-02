@@ -7,7 +7,7 @@
 
 <c:set var="uploadDate" value="${eco:formatDate(uploadTime)}" />
 
-<a href="${eco:baseUrl()}/photos/date/${uploadDate}/uploaded/" title="${eco:translate1('Show photos on $1', uploadDate)}">
+<a href="${eco:baseUrl()}/photos/date/${uploadDate}/uploaded/" title="${eco:translate1('Links: Show photos on date $1', uploadDate)}">
 	<c:if test="${not empty text}">${text}</c:if>
 	<c:if test="${empty text}">${uploadDate}</c:if>
 </a>

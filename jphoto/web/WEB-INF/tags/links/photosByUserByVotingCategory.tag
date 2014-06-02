@@ -9,4 +9,4 @@
 
 <c:set var="votingCategoryNameTranslated" value="${eco:translateVotingCategory(votingCategory.id)}"/>
 
-<a href ="${link}" title="${eco:translate2('Photos was appraised \'$1\' by $2', votingCategoryNameTranslated, eco:escapeHtml(user.name))}">${votingCategoryNameTranslated}</a>
+<a href ="${link}" title="${eco:translate2('User Statistics: Links: Photos was appraised $1 by $2', votingCategoryNameTranslated, eco:escapeHtml(user.name))}">${votingCategoryNameTranslated}</a>

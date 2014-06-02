@@ -15,7 +15,7 @@
 
 <table:table width="100%" oddEven="true">
 
-	<table:separatorInfo colspan="3" title="${eco:translate('Photo albums')}"/>
+	<table:separatorInfo colspan="3" title="${eco:translate('User Statistics: Tab: Photo albums')}"/>
 
 	<c:if test="${not empty userPhotoAlbums}">
 

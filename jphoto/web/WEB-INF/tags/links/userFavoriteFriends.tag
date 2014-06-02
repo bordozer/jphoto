@@ -10,4 +10,4 @@
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
 <c:set var="favoriteEntryTypeName" value="<%=FavoriteEntryType.FRIENDS.getName()%>"/>
 
-<a href ="${link}" title="${eco:translate1("Friends of $1", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>
+<a href ="${link}" title="${eco:translate1("Links: Friends of $1", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>

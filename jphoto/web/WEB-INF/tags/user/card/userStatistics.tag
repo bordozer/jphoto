@@ -13,7 +13,7 @@
 
 <table:table border="0" width="100%" oddEven="true">
 
-	<table:separatorInfo colspan="2" height="50" title="${eco:translate('Statistics')}"/>
+	<table:separatorInfo colspan="2" height="50" title="${eco:translate('User Statistics: Tab: Statistics')}"/>
 
 	<table:trinfo>
 		<table:td cssClass="${cssClass}" width="${width}"><links:userFavoritePhotos user="${user}"/></table:td>

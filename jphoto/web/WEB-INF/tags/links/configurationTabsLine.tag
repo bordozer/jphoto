@@ -49,7 +49,7 @@
 
 			<c:if test="${not isEdit}">
 				<links:configurationTabEdit systemConfigurationId="${systemConfiguration.id}" configurationTab="${configurationTab}">
-					<html:img8 src="edit16.png" alt="${eco:translate1('Edit configuration tab: $1', configurationTab.name)}"/>
+					<html:img8 src="edit16.png" alt="${eco:translate1('Links: Edit configuration tab: $1', configurationTab.name)}"/>
 				</links:configurationTabEdit>
 
 				<links:configurationInfo systemConfigurationId="${systemConfigurationId}" configurationTab="${configurationTab}">

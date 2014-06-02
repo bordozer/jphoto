@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Links: Edit configuration tab: $1</nerd>
+		<ru><![CDATA[Редактировать табу: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: Show photos by genre: $1</nerd>
+		<ru><![CDATA[$1: все работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: $1 - photo preview, set marks link title</nerd>
+		<ru><![CDATA[$1: история голосования за работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: $1 - photo preview, previews link title</nerd>
+		<ru><![CDATA[$1: история просмотров работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: Show photos on date $1</nerd>
+		<ru><![CDATA[Работы, загруженные $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: Edit member data: $1</nerd>
+		<ru><![CDATA[$1: редактировать данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

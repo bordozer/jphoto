@@ -6,6 +6,6 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoPreviewsListLink( photoInfo.getPhoto().getId() )%>" />
 
-<c:set var="buttonTitle" value="${eco:translate1('$1 - previews', eco:escapeHtml(photoInfo.photo.name))}" />
+<c:set var="buttonTitle" value="${eco:translate1('Links: $1 - photo preview, previews link title', eco:escapeHtml(photoInfo.photo.name))}" />
 
 <a href ="${link}" title="${buttonTitle}">${photoInfo.previewCount}</a>

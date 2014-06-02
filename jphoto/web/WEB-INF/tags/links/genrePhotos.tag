@@ -8,6 +8,6 @@
 
 <c:set var="genreNameTranslated" value="${eco:translateGenre(genre.id)}"/>
 
-<c:set var="buttonTitle" value="${eco:translate1('Show photos: $1', genreNameTranslated)}" />
+<c:set var="buttonTitle" value="${eco:translate1('Links: Show photos by genre: $1', genreNameTranslated)}" />
 
 <a href ="${link}" title="${buttonTitle}">${genreNameTranslated}</a>

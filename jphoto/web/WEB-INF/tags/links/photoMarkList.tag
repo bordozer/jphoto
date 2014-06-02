@@ -6,6 +6,6 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoMarksListLink( photo.getId() )%>" />
 
-<c:set var="buttonTitle" value="${eco:translate1('$1 - votes', eco:escapeHtml(photo.name))}" />
+<c:set var="buttonTitle" value="${eco:translate1('Links: $1 - photo preview, set marks link title', eco:escapeHtml(photo.name))}" />
 
 <a href ="${link}" title="${buttonTitle}"><jsp:doBody /></a>

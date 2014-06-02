@@ -10,4 +10,4 @@
 <c:set var="userNameEscaped" value="${eco:escapeHtml(user.name)}" />
 <c:set var="favoriteEntryTypeName" value="<%=FavoriteEntryType.BLACKLIST.getName()%>"/>
 
-<a href ="${link}" title="${eco:translate1("$1\'s black list", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>
+<a href ="${link}" title="${eco:translate1("Links: black list of $1", userNameEscaped)}">${eco:translate(favoriteEntryTypeName)}</a>

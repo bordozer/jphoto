@@ -53,6 +53,101 @@
 	</translation>
 
 	<translation>
+		<nerd>User Statistics: $1 marked $2 photo(s) as $3</nerd>
+		<ru><![CDATA[$1 отметил $2 работ(ы) критерием '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Summary marks set for $1: $2</nerd>
+		<ru><![CDATA[Суммарный выставленный балл по критерию '$1': $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Links: Photos was appraised $1 by $2</nerd>
+		<ru><![CDATA[Работы, оцененные по критерию '$1' пользователем $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Tab: Last set marks</nerd>
+		<ru><![CDATA[Выставленные оценки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Tab: Photo albums</nerd>
+		<ru><![CDATA[Альбомы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Tab: Team</nerd>
+		<ru><![CDATA[Коданда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User Statistics: Tab: Statistics</nerd>
+		<ru><![CDATA[Статистика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: black list of $1</nerd>
+		<ru><![CDATA[$1: черный список]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: bookmarked photos of $1</nerd>
+		<ru><![CDATA[$1: работы в закладках]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: Friends of $1</nerd>
+		<ru><![CDATA[$1: список друзей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: favorite members of $1</nerd>
+		<ru><![CDATA[$1: избранные пользователи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: favorite photos of $1</nerd>
+		<ru><![CDATA[$1: избранные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: Notifications about new comments</nerd>
+		<ru><![CDATA[Работы, новые комментарии которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: $1: notifications about new comments</nerd>
+		<ru><![CDATA[$1: работы, новые комментарии которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: $1: Notifications about new photos</nerd>
+		<ru><![CDATA[Пользователи, новые работы которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Links: $1: notifications about new photos</nerd>
+		<ru><![CDATA[$1: пользователи, новые работы которых отслеживаются]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

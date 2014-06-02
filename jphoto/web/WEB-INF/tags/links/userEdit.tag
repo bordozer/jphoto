@@ -6,4 +6,4 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserEditLink( user.getId() )%>" />
 
-<a href="${link}" title="${eco:translate1('Edit member data: $1', user.name)}"><jsp:doBody/></a>
+<a href="${link}" title="${eco:translate1('Links: Edit member data: $1', user.name)}"><jsp:doBody/></a>
