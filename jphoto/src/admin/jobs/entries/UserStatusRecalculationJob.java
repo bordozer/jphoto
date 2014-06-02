@@ -7,7 +7,6 @@ import core.enums.PrivateMessageType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.cache.CacheKey;
-import core.general.configuration.ConfigurationKey;
 import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.general.user.UserStatus;
@@ -49,7 +48,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 					getLog().info( String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() ) );
 
-					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services )
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services )
 						.addUserCardLinkParameter( user )
 						.translatableString( UserStatus.MEMBER.getName() );
 					addJobRuntimeLogMessage( translatableMessage );
@@ -58,7 +57,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 				} else {
 					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
 
-					final TranslatableMessage translatableMessage = new TranslatableMessage( "Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
 //			}
@@ -79,12 +78,17 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 	}
 
 	private void sendSystemNotificationAboutGotMembershipToUser( final User user ) {
+
 		final PrivateMessage message = new PrivateMessage();
 
 		message.setToUser( user );
 		message.setCreationTime( services.getDateUtilsService().getCurrentTime() );
 		message.setPrivateMessageType( PrivateMessageType.SYSTEM_NOTIFICATIONS );
-		message.setMessageText( String.format( "You have bees given a new club status: %s", UserStatus.MEMBER.getName() ) );
+
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: You have bees given a new club status: $1", services )
+			.translatableString( UserStatus.MEMBER.getName() )
+			;
+		message.setMessageText( translatableMessage.build( getLanguage() ) );
 
 		services.getPrivateMessageService().save( message );
 	}

@@ -340,9 +340,7 @@ public abstract class AbstractJob extends Thread {
 	}
 
 	public void addJobRuntimeLogMessage( final TranslatableMessage translatableMessage ) {
-//		synchronized ( jobRuntimeLogs ) {
-			jobRuntimeLogs.add( new JobRuntimeLog( translatableMessage, services.getDateUtilsService().getCurrentTime() ) );
-//		}
+		jobRuntimeLogs.add( new JobRuntimeLog( translatableMessage, services.getDateUtilsService().getCurrentTime() ) );
 	}
 
 	public int getScheduledTaskId() {

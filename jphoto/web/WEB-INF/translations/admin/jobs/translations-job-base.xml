@@ -13,6 +13,66 @@
 	</translation>
 
 	<translation>
+		<nerd>User $1 is going to do the action for another photo of $2</nerd>
+		<ru><![CDATA[Пользователь $1 решил повторить действие для другой работы $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently</nerd>
+		<ru><![CDATA[Пользователь $1 решил повторить действие для другой работы $2 потому, что $3 оценил его рабоу недавно]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has left a comment for photo $2 ( time: $3 )</nerd>
+		<ru><![CDATA[Пользователь $1 оставил комментарий к работу $2 ( время: $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has seen photo $2 ( time: $3 )</nerd>
+		<ru><![CDATA[Пользователь $1 посмотрел работу $2 ( время: $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has appraised photo $2 of $3 ( time: $4 )</nerd>
+		<ru><![CDATA[Пользователь $1 оценил работу $2 автора $3 ( время: $4 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Generated preview for $1</nerd>
+		<ru><![CDATA[Сгенерировано превью для $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User $1 has voted for $2's rank in $3 ( $4 )</nerd>
+		<ru><![CDATA[Пользователь $1 проголосовал за ранг $2 в разделе $3 ( $4 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Error creating user $1</nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserStatusRecalculationJob: Member $1 has got new status: $2</nerd>
+		<ru><![CDATA[Пользователь $1 получил новый статус: $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>UserStatusRecalculationJob: You have bees given a new club status: $1</nerd>
+		<ru><![CDATA[Вам присвоен новый статус в клубе: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -158,14 +158,6 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		final boolean isHasVotedUserGoingToDoTheActionForAnotherPhotoOfPhotoAuthor = randomUtilsService.getRandomBoolean();
 		if ( isHasVotedUserGoingToDoTheActionForAnotherPhotoOfPhotoAuthor ) {
 
-			final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
-
-			/*final Language language = getLanguage();
-			final String message = services.getTranslatorService().translate( "User $1 is going to do the action for another photo of $2"
-				, language
-				, entityLinkUtilsService.getUserCardLink( actionCommitter, language )
-				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
-			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for another photo of $2", services )
 				.addUserCardLinkParameter( actionCommitter )
 				.addUserCardLinkParameter( photoAuthor )
@@ -201,13 +193,6 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 
 			final User authorOfRandomPhotoFromLastVoted = userService.load( authorIdOfRandomPhotoFromLastVoted );
 
-			/*final Language language = getLanguage();
-			final String message = services.getTranslatorService().translate( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently"
-				, language
-				, entityLinkUtilsService.getUserCardLink( actionCommitter, language )
-				, entityLinkUtilsService.getUserCardLink( authorOfRandomPhotoFromLastVoted, language )
-				, entityLinkUtilsService.getUserCardLink( photoAuthor, language )
-			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently", services )
 				.addUserCardLinkParameter( actionCommitter )
 				.addUserCardLinkParameter( authorOfRandomPhotoFromLastVoted )
