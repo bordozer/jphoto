@@ -3,6 +3,7 @@ package core.general.menus;
 import core.general.photo.PhotoComment;
 import core.services.system.Services;
 import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 
 import java.util.List;
 
@@ -24,15 +25,18 @@ public class EntryMenu {
 	}
 
 	public String getMenuTitle() {
+
+		final TranslatorService translatorService = services.getTranslatorService();
+
 		final StringBuilder builder = new StringBuilder();
-		builder.append( entryMenuType.getName() ).append( ": " ).append( "#" ).append( menuEntry.getId() );
+		builder.append( translatorService.translate( entryMenuType.getName(), language ) ).append( ": " ).append( "#" ).append( menuEntry.getId() );
 
 		/*if ( menuEntry instanceof User ) {
 			builder.append( ); // TODO: show ADMIN prefix
 		}*/
 
-		if ( menuEntry instanceof PhotoComment ) {
-			builder.append( ( ( PhotoComment ) menuEntry ).isCommentDeleted() ? services.getTranslatorService().translate( " ( deleted )", language ) : "" );
+		if ( menuEntry instanceof PhotoComment && ( ( PhotoComment ) menuEntry ).isCommentDeleted() ) {
+			builder.append( " " ).append(  translatorService.translate( "( MenuTitle: the comment is deleted )", language ) );
 		}
 
 		return builder.toString();

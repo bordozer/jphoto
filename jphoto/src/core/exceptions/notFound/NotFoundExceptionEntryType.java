@@ -1,9 +1,9 @@
 package core.exceptions.notFound;
 
 public enum NotFoundExceptionEntryType {
-	USER( "Member" )
-	, PHOTO( "Photo" )
-	, GENRE( "Photo category" );
+	USER( "NotFoundExceptionEntryType: Member" )
+	, PHOTO( "NotFoundExceptionEntryType: Photo" )
+	, GENRE( "NotFoundExceptionEntryType: Photo category" );
 
 	private final String name;
 

@@ -2,9 +2,9 @@ package core.general.menus;
 
 public enum EntryMenuType {
 
-	PHOTO( 1, "Photo" )
-	, COMMENT( 2, "Comment" )
-	, USER( 3, "Member" )
+	PHOTO( 1, "EntryMenuType: Photo" )
+	, COMMENT( 2, "EntryMenuType: Comment" )
+	, USER( 3, "EntryMenuType: Member" )
 	;
 
 	private final int id;

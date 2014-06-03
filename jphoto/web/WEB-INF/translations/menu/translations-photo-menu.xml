@@ -83,6 +83,16 @@
 	</translation>
 
 	<translation>
+		<nerd>( MenuTitle: the comment is deleted )</nerd>
+		<ru><![CDATA[( удален )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

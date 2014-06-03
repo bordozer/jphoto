@@ -10,7 +10,7 @@
 <c:set var="photoPreviewHasToBeHiddenBecauseOfNudeContent" value="${photoPreviewWrapper.photoPreviewHasToBeHiddenBecauseOfNudeContent}"/>
 
 <c:set var="photoNameEscaped" value="${eco:escapeHtml(photo.name)}" />
-<c:set var="title" value="${eco:translate1('Photo: $1', photoNameEscaped)}" />
+<c:set var="title" value="${eco:translate1('Photo card link: $1', photoNameEscaped)}" />
 
 <links:photoCard id="${photo.id}">
 	<c:if test="${not photoPreviewHasToBeHiddenBecauseOfNudeContent}">
