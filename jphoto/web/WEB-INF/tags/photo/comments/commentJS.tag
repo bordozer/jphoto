@@ -35,7 +35,7 @@
 	function showMessageAboutDelayToNextComment() {
 		var userDelayToNextComment = jsonRPC.ajaxService.getUserDelayToNextCommentAjax( ${loggedUser.id} );
 		userDelayToNextComment = Math.round( userDelayToNextComment / 1000 );
-		showUIMessage_Information( "${eco:translate('You can leave a comment after')}" + ' ' + userDelayToNextComment + ' ' + "${eco:translate('second(s)')}" );
+		showUIMessage_Information( "${eco:translate('Photo Comment: You can leave a comment after')}" + ' ' + userDelayToNextComment + ' ' + "${eco:translate('second(s)')}" );
 	}
 	function editComment( commentId ) {
 
@@ -51,9 +51,9 @@
 		$( '#${beingEditedCommentIdFormControl}' ).val( commentDTO.commentId );
 		$( '#${commentTextFormControl}' ).val( commentDTO.commentText );
 
-		$( '#${submitCommentButton}' ).html( '${eco:translate('Save changes')}' );
+		$( '#${submitCommentButton}' ).html( '${eco:translate('Photo Comment: Save changes')}' );
 
-		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Editing comment")}' + ' #' + commentDTO.commentId + '</b> &nbsp/&nbsp;' + '<a href=\"#${photoCommentFormAnchor}\" onclick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
+		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Photo Comment: Editing comment")}' + ' #' + commentDTO.commentId + '</b> &nbsp/&nbsp;' + '<a href=\"#${photoCommentFormAnchor}\" onclick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
 
 		$( '#${commentTextFormControl}' ).focus();
 		$( '#${commentTextFormControl}' ).select();
@@ -66,19 +66,19 @@
 		}
 
 		$( '#${replyToCommentIdFormControl}' ).val( commentId );
-		$( '#${submitCommentButton}' ).html( '${eco:translate('Reply to the comment')}' );
-		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Reply to the comment")}' + ' #' + commentId + '</b>' + '<br /><a href=\"#${photoCommentFormAnchor}\" onClick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
+		$( '#${submitCommentButton}' ).html( '${eco:translate('Photo Comment: Reply to the comment')}' );
+		$( '#${photoCommentFormInfoDiv}' ).html( '<b>${eco:translate( "Photo Comment: Reply to the comment")}' + ' #' + commentId + '</b>' + '<br /><a href=\"#${photoCommentFormAnchor}\" onClick=\"resetPhotoCommentForm();\">${eco:translate('Reset comment form')}</a>' );
 	}
 
 	function deleteComment( commentId ) {
 
 		var beingEditedCommentId = $( '#${beingEditedCommentIdFormControl}' ).val();
 		if ( beingEditedCommentId == commentId ) {
-			showUIMessage_Information( "${eco:translate('You can not delete a comment which you are editing now')}" );
+			showUIMessage_Information( "${eco:translate('Photo Comment: You can not delete a comment which you are editing now')}" );
 			return;
 		}
 
-		if ( confirmDeletion( "${eco:translate('Delete comment?')}" ) ) {
+		if ( confirmDeletion( "${eco:translate('Photo Comment: Delete comment?')}" ) ) {
 			var commentDTO = jsonRPC.ajaxService.markCommentAsDeletedAjax( ${loggedUser.id}, commentId );
 			if( commentDTO.errorMessage != undefined ) {
 				showUIMessage_Error( commentDTO.errorMessage );

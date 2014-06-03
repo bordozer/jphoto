@@ -48,13 +48,38 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo Comment: You can leave a comment after</nerd>
+		<ru><![CDATA[Вы сможете оставить новый комментарий через]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo Comment: Save changes</nerd>
+		<ru><![CDATA[Сохранить изменения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo Comment: Editing comment</nerd>
+		<ru><![CDATA[Редактирование комментария]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo Comment: Reply to the comment</nerd>
+		<ru><![CDATA[Ответить на комментарий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo Comment: You can not delete a comment which you are editing now</nerd>
+		<ru><![CDATA[Вы не можете удалить комментарий, который в данный момент редактируете]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo Comment: Delete comment?</nerd>
+		<ru><![CDATA[Удалить комментарий?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo card: Error getting photo comment</nerd>
+		<ru><![CDATA[Ошибка загрузки комментария]]></ru>
 	</translation>
 
 	<translation>

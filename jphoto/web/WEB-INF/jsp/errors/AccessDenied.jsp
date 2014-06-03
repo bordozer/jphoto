@@ -13,7 +13,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = exceptionModel.getTranslatorService().translate( "Access denied", EnvironmentContext.getLanguage() );
+	final String title = exceptionModel.getTranslatorService().translate( "Access denied page title", EnvironmentContext.getLanguage() );
 	final PageModel pageModel = new PageModel();
 	pageModel.setPageTitleData( new PageTitleData( title, title, title ) );
 %>

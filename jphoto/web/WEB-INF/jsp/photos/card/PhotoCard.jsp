@@ -133,7 +133,7 @@
 											renderComment( index + 1 ); // TOD
 										},
 										error:function () {
-											showUIMessage_Error( '${eco:translate('Error getting photo comment')}' + ' ' + commentId );
+											showUIMessage_Error( '${eco:translate('Photo card: Error getting photo comment')}' + ' ' + commentId );
 										}
 									} );
 						}
@@ -238,7 +238,7 @@
 
 								},
 								error:function () {
-									showUIMessage_Error( '${eco:translate('Error getting photo info')}' );
+									showUIMessage_Error( '${eco:translate('Photo info: Error getting photo info')}' );
 								}
 							} );
 				}
