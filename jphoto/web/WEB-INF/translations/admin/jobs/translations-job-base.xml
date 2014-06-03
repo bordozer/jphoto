@@ -78,6 +78,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo actions job parameters: Actions type</nerd>
+		<ru><![CDATA[Тип действия]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions job parameters: Photos</nerd>
+		<ru><![CDATA[К-во работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions job parameters: Photos action to generate</nerd>
+		<ru><![CDATA[К-во действий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
