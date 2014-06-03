@@ -103,6 +103,16 @@
 	</translation>
 
 	<translation>
+		<nerd>DataRequirement: The field is mandatory</nerd>
+		<ru><![CDATA[Обязательно к заполнению]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>DataRequirement: The field is optional</nerd>
+		<ru><![CDATA[Необязательно к заполнению]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
