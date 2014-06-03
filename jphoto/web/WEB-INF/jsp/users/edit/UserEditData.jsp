@@ -1,15 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="ui.controllers.users.edit.UserEditDataModel" %>
-<%@ page import="core.general.user.UserMembershipType" %>
 <%@ page import="core.services.utils.UrlUtilsServiceImpl" %>
-<%@ page import="core.enums.UserGender" %>
-<%@ page import="core.enums.YesNo" %>
-<%@ page import="core.general.user.EmailNotificationType" %>
 <%@ page import="ui.services.validation.UserRequirement" %>
 <%@ page import="ui.services.validation.DataRequirementService" %>
 <%@ page import="ui.translatable.GenericTranslatableList" %>
 <%@ page import="ui.context.EnvironmentContext" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
+<%@ page import="ui.controllers.users.edit.UserEditDataValidator" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -113,50 +110,62 @@
 
 		<table:table width="800">
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Login information')}" />
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('User edit data tab: Account information')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Login" labelFor="${userLoginControl}" isMandatory="true" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LOGIN%>" labelFor="${userLoginControl}" isMandatory="true" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${userLoginControl}" hintTitle_t="Login" hint="${loginRequirement}<br /><br />${mandatoryText}" focused="true">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${userLoginControl}" hintTitle_t="<%=UserEditDataValidator.USER_DATA_LOGIN%>" hint="${loginRequirement}<br /><br />${mandatoryText}" focused="true">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<html:input fieldId="${userLoginControl}" fieldValue="${userLogin}" maxLength="${maxUserNameLength}" />
-						</jsp:attribute>
-					</tags:inputHint>
+							<br />
+							${loginRequirement}
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<c:if test="${isNew}">
 				<table:tredit>
-					<table:tdtext text_t="User data edit: Password" labelFor="${userPasswordControl}" isMandatory="true" />
+					<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LAST_PASSWORD%>" labelFor="${userPasswordControl}" isMandatory="true" />
 
 					<table:tddata>
-						<tags:inputHint inputId="${userPasswordControl}" hintTitle_t="Password" hint="${passwordRequirement}<br /><br />${mandatoryText}">
-							<jsp:attribute name="inputField">
+						<%--<tags:inputHint inputId="${userPasswordControl}" hintTitle_t="Password" hint="${passwordRequirement}<br /><br />${mandatoryText}">--%>
+							<%--<jsp:attribute name="inputField">--%>
 								<html:password fieldId="${userPasswordControl}" fieldValue="${password}" />
-							</jsp:attribute>
-						</tags:inputHint>
+							<%--</jsp:attribute>--%>
+						<%--</tags:inputHint>--%>
 					</table:tddata>
 				</table:tredit>
 
 				<table:tredit>
-					<table:tdtext text_t="User data edit: Confirm password" labelFor="${userConfirmPasswordControl}" isMandatory="true" />
+					<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LAST_PASSWORD_REPEAT%>" labelFor="${userConfirmPasswordControl}" isMandatory="true" />
 
 					<table:tddata>
-						<tags:inputHint inputId="${userConfirmPasswordControl}" hintTitle_t="Confirm Password" hint="${confirmPasswordRequirement}<br /><br />${mandatoryText}">
-							<jsp:attribute name="inputField">
+						<%--<tags:inputHint inputId="${userConfirmPasswordControl}" hintTitle_t="Confirm Password" hint="${confirmPasswordRequirement}<br /><br />${mandatoryText}">--%>
+							<%--<jsp:attribute name="inputField">--%>
 								<html:password fieldId="${userConfirmPasswordControl}" fieldValue="${confirmPassword}" />
-							</jsp:attribute>
-						</tags:inputHint>
+						<br />
+						${passwordRequirement}
+							<%--</jsp:attribute>--%>
+						<%--</tags:inputHint>--%>
 					</table:tddata>
 				</table:tredit>
 			</c:if>
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Personal information')}" />
+			<table:tredit>
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>" labelFor="${membershipTypeId1}" />
+
+				<table:tddata>
+					<form:radiobuttons items="${membershipTypeListValues}" path="userEditDataModel.${membershipTypeControl}" itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="false" />
+				</table:tddata>
+			</table:tredit>
+
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('User edit data tab: Personal information')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Gender" labelFor="${userGenderId1}" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_GENDER%>" labelFor="${userGenderId1}" />
 
 				<table:tddata>
 					<form:radiobuttons path="${userGenderControl}" items="${userGenderValues}" itemValue="id" itemLabel="name" delimiter="<br/>" htmlEscape="false" />
@@ -164,50 +173,58 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Name" labelFor="${filterUserNameControl}" isMandatory="true" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_NAME%>" labelFor="${filterUserNameControl}" isMandatory="true" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="Name" hint="${nameRequirement}<br /><br />${mandatoryText}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="Name" hint="${nameRequirement}<br /><br />${mandatoryText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<html:input fieldId="${filterUserNameControl}" fieldValue="${userName}" maxLength="${maxUserNameLength}" />
-						</jsp:attribute>
-					</tags:inputHint>
+					<br />
+					${nameRequirement}
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Email" labelFor="${userEmailControl}" isMandatory="true" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_EMAIL%>" labelFor="${userEmailControl}" isMandatory="true" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${userEmailControl}" hintTitle_t="Email" hint="${emailRequirement}<br /><br />${mandatoryText}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${userEmailControl}" hintTitle_t="Email" hint="${emailRequirement}<br /><br />${mandatoryText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<html:input fieldId="${userEmailControl}" fieldValue="${userEmail}" size="40" maxLength="50" />
-						</jsp:attribute>
-					</tags:inputHint>
+					<br />
+					${emailRequirement}
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Birthday" labelFor="${userDateOfBirthControl}" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_BIRTHDAY%>" labelFor="${userDateOfBirthControl}" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${userDateOfBirthControl}" hintTitle_t="Birthday" hint="${birthdayRequirement}<br /><br />${mandatoryText}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${userDateOfBirthControl}" hintTitle_t="Birthday" hint="${birthdayRequirement}<br /><br />${mandatoryText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<tags:datePicker fieldName="${userDateOfBirthControl}" fieldValue="${userDateOfBirth}"/>
-						</jsp:attribute>
-					</tags:inputHint>
+					<br />
+					${birthdayRequirement}
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Home site" labelFor="${userHomeSiteControl}" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_SITE%>" labelFor="${userHomeSiteControl}" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${userHomeSiteControl}" hintTitle_t="Personal site" hint="${homeSiteRequirement}<br /><br />${optionalText}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${userHomeSiteControl}" hintTitle_t="Personal site" hint="${homeSiteRequirement}<br /><br />${optionalText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<html:input fieldId="${userHomeSiteControl}" fieldValue="${userHomeSite}" size="40" maxLength="255" />
-						</jsp:attribute>
-					</tags:inputHint>
+					<br />
+					${homeSiteRequirement}
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
@@ -221,21 +238,10 @@
 				</table:td>
 			</table:tredit>
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Account information')}" />
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('User edit data tab: UI settings')}" />
 
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Membership type" labelFor="${membershipTypeId1}" />
-
-				<table:tddata>
-					<form:radiobuttons items="${membershipTypeListValues}" path="userEditDataModel.${membershipTypeControl}"
-									 itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="false" />
-				</table:tddata>
-			</table:tredit>
-
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="UI settings" />
-
-			<table:tredit>
-				<table:tdtext text_t="User data edit: Language" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_UI_LANGUAGE%>" />
 				<table:tddata>
 					<form:radiobuttons path="userEditDataModel.userUILanguageId" items="${userEditDataModel.usedLanguageTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"/>
 				</table:tddata>
@@ -243,7 +249,7 @@
 
 			<%--Photos on page--%>
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Photos in line" labelFor="${photosOnPageControl}" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_PHOTOS_ON_PAGE%>" labelFor="${photosOnPageControl}" />
 
 				<table:tddata>
 					<form:radiobutton path="${photosOnPageControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
@@ -254,15 +260,15 @@
 			<%-- / Photos on page--%>
 
 			<table:tr>
-				<table:tdtext text_t="User data edit: Show nude content" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_SHOW_NUDE_CONTENT%>" />
 				<table:tddata><form:checkbox path="userEditDataModel.${showNudeContentControl}" value="true"/></table:tddata>
 			</table:tr>
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Email notification options')}" />
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('User edit data tab: Email notification options')}" />
 
 			<%-- notification Message About New Photos Of Favorite Members --%>
 			<table:tredit>
-				<table:tdtext text_t="User data edit: Send notification email about" />
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_NOTIFICATION_EMAIL%>" />
 
 				<table:tddata>
 					<form:checkboxes path="userEditDataModel.${emailNotificationOptionIdsControl}" items="${emailNotificationOptionsValues}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />" />
@@ -271,7 +277,7 @@
 			</table:tredit>
 			<%-- / notification Message About New Photos Of Favorite Members --%>
 
-			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('Default values')}" />
+			<table:separatorInfo colspan="2" height="${separatorHeight}" title="${eco:translate('User edit data tab: Default values')}" />
 
 			<%-- default Photo Comments Allowance --%>
 			<table:tredit>

@@ -1,4 +1,5 @@
 <%@ tag import="core.general.menus.EntryMenuType" %>
+<%@ tag import="ui.controllers.users.edit.UserEditDataValidator" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -18,24 +19,30 @@
 
 <tags:contextMenuJs />
 
+<c:set var="userData_avatar" value="<%=UserEditDataValidator.USER_DATA_AVATAR%>" />
+<c:set var="userData_name" value="<%=UserEditDataValidator.USER_DATA_NAME%>" />
+<c:set var="userData_status" value="<%=UserEditDataValidator.USER_DATA_STATUS%>" />
+<c:set var="userData_birthday" value="<%=UserEditDataValidator.USER_DATA_BIRTHDAY%>" />
+<c:set var="userData_gender" value="<%=UserEditDataValidator.USER_DATA_GENDER%>" />
+<c:set var="userData_membershipType" value="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>" />
+<c:set var="userData_registrationTime" value="<%=UserEditDataValidator.USER_DATA_REGISTRATION_TIME%>" />
+
 <table:table id="user_list_table" width="100%" oddEven="true">
 
 		<jsp:attribute name="thead">
 			<c:if test="${showEditIcons}">
 				<table:td>&nbsp;</table:td>
 			</c:if>
-			<table:td>${eco:translate( "id" )}</table:td>
-			<table:td>${eco:translate( "Avatar" )}</table:td>
-			<table:td>${eco:translate( "Member name" )}</table:td>
+			<table:td>${eco:translate( "User data: id" )}</table:td>
+			<table:td>${eco:translate( userData_avatar )}</table:td>
+			<table:td>${eco:translate( userData_name )}</table:td>
 			<table:td />
-			<table:td>${eco:translate( "Status" )}</table:td>
-			<%--<table:td>${eco:translate( "Login" )}</table:td>--%>
-			<%--<table:td>${eco:translate( "Email" )}</table:td>--%>
-			<table:td>${eco:translate( "Birthday" )}</table:td>
-			<table:td>${eco:translate( "Gender" )}</table:td>
-			<table:td>${eco:translate( "Membership type" )}</table:td>
-			<table:td>${eco:translate( "Photos on page" )}</table:td>
-			<table:td>${eco:translate( "Photos Qty" )}</table:td>
+			<table:td>${eco:translate( userData_registrationTime )}</table:td>
+			<table:td>${eco:translate( userData_status )}</table:td>
+			<table:td>${eco:translate( userData_birthday )}</table:td>
+			<table:td>${eco:translate( userData_gender )}</table:td>
+			<table:td>${eco:translate( userData_membershipType )}</table:td>
+			<table:td>${eco:translate( "User data: Photos Qty" )}</table:td>
 		</jsp:attribute>
 
 	<jsp:body>
@@ -74,26 +81,24 @@
 						<html:img id="member_default_avatar_${user.id}" src="icons48/${noAvatar}" width="48" height="48" />
 					</c:if>
 				</table:tdicon>
-				<table:td cssClass="member_list_column_member_card_link"><user:userCard user="${user}" /></table:td>
+
+				<table:td cssClass="member_list_column_member_card_link">
+					<user:userCard user="${user}" />
+				</table:td>
 
 				<table:td>
-					<icons:userIcons user="${user}"
-									 hideIconSendPrivateMessage="true"
-							/>
-					<%--<tags:entryMenu entryMenu="${userMenu}" />--%>
+					<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" />
 					<tags:contextMenu entryId="${user.id}" entryMenuType="<%=EntryMenuType.USER%>" />
 				</table:td>
 
+				<table:td cssClass="text-centered">${eco:formatDateTimeShort(user.registrationTime)}</table:td>
 				<table:td cssClass="text-centered">${eco:translate(user.userStatus.name)}</table:td>
 
-				<%--<table:td>${eco:escapeHtml(user.login)}</table:td>--%>
-				<%--<table:td>${eco:escapeHtml(user.email)}</table:td>--%>
 				<table:td>${eco:formatDate(user.dateOfBirth)}</table:td>
 				<table:td cssClass="text-centered">
 					<icons:userGender user="${user}" />
 				</table:td>
 				<table:td cssClass="text-centered">${eco:translate(user.membershipType.name)}</table:td>
-				<table:td cssClass="text-centered">${user.photosOnPage > 0 ? user.photosOnPage : 'auto'}</table:td>
 				<table:td cssClass="textright">${photosByUser}</table:td>
 			</table:tr>
 

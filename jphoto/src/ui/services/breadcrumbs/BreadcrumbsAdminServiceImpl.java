@@ -325,6 +325,6 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Deprecated
 	private String getAdminTranslatedRoot() {
-		return translatorService.translate( "Administration", EnvironmentContext.getLanguage() );
+		return translatorService.translate( "Breadcrumbs: Administration", EnvironmentContext.getLanguage() );
 	}
 }

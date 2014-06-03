@@ -3,6 +3,7 @@
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
 <%@ tag import="core.general.menus.EntryMenuType" %>
+<%@ tag import="ui.controllers.users.edit.UserEditDataValidator" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -38,7 +39,7 @@
 
 		<c:if test="${isSuperAdminUser}">
 			<table:trinfo>
-				<table:tdtext text_t="Login"/>
+				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LOGIN%>"/>
 				<table:td>
 					${eco:escapeHtml(user.login)}
 				</table:td>
@@ -46,7 +47,7 @@
 		</c:if>
 
 		<table:trinfo>
-			<table:tdtext text_t="Member name"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_NAME%>"/>
 			<table:td>
 				${eco:escapeHtml(user.name)}
 				<icons:userIcons user="${user}" hideIconSendPrivateMessage="true" />
@@ -56,7 +57,7 @@
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Last activity time"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_LAST_ACTIVITY_TIME%>"/>
 			<table:td>
 				<c:if test="${isLastUserActivityTime}">
 					${eco:formatDateTimeShort(lastUserActivityTime)}
@@ -66,38 +67,38 @@
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Status"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_STATUS%>"/>
 			<table:td>${eco:translate(user.userStatus.name)}</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Gender"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_GENDER%>"/>
 			<table:td>
 				<icons:userGender user="${user}" />
 			</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Email"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_EMAIL%>"/>
 			<table:td>
 				${eco:escapeHtml(user.email)}
-				<br />
-				<a href="" title="${eco:translate("Send email")}" onclick="alert( '${eco:translate('This functionality has not been implemented yet...')}' ); return false;">${eco:translate("Send email")}</a>
+				<%--<br />--%>
+				<%--<a href="" title="${eco:translate("Send email")}" onclick="alert( '${eco:translate('This functionality has not been implemented yet...')}' ); return false;">${eco:translate("Send email")}</a>--%>
 			</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Birthday"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_BIRTHDAY%>"/>
 			<table:td>${eco:formatDate(user.dateOfBirth)}</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Membership type"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>"/>
 			<table:td>${user.membershipType.name}</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
-			<table:tdtext text_t="Registered"/>
+			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_REGISTRATION_TIME%>"/>
 			<table:td>${eco:formatDateTimeShort(user.registrationTime)}</table:td>
 		</table:trinfo>
 

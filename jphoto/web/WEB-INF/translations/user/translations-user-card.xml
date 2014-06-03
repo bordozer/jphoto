@@ -93,6 +93,141 @@
 	</translation>
 
 	<translation>
+		<nerd>User data: Login</nerd>
+		<ru><![CDATA[Логин]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Email</nerd>
+		<ru><![CDATA[Email]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Birthday</nerd>
+		<ru><![CDATA[Дата рождения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Membership type</nerd>
+		<ru><![CDATA[Тип членства]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Gender</nerd>
+		<ru><![CDATA[Пол]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Status</nerd>
+		<ru><![CDATA[Статус]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Registered</nerd>
+		<ru><![CDATA[Время регистрации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Last activity time</nerd>
+		<ru><![CDATA[Время моследней активности]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: id</nerd>
+		<ru><![CDATA[ID]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Photos Qty</nerd>
+		<ru><![CDATA[К-во работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Password</nerd>
+		<ru><![CDATA[Пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Repeat password</nerd>
+		<ru><![CDATA[Повторите пароль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Site</nerd>
+		<ru><![CDATA[Домашняя страничка]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: UI Language</nerd>
+		<ru><![CDATA[Язык интерфейса]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Photos on page</nerd>
+		<ru><![CDATA[Показывать работ в фотогралерее]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Show nude content</nerd>
+		<ru><![CDATA[Отображать НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data: Notification email</nerd>
+		<ru><![CDATA[Уведомление на email]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data edit: Any information you wouls like to show about yourself</nerd>
+		<ru><![CDATA[Любая дополнительная информация о вас]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data edit: Register</nerd>
+		<ru><![CDATA[Зарегистрироваться]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User data edit: Save</nerd>
+		<ru><![CDATA[Сохранить данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User edit data tab: Account information</nerd>
+		<ru><![CDATA[Данные учетной записи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User edit data tab: Personal information</nerd>
+		<ru><![CDATA[Персональные данные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User edit data tab: UI settings</nerd>
+		<ru><![CDATA[Настройки интерфейса]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User edit data tab: Email notification options</nerd>
+		<ru><![CDATA[Уведомления на email]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User edit data tab: Default values</nerd>
+		<ru><![CDATA[Значения по-умолчанию]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
