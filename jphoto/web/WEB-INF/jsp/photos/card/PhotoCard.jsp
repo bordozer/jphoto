@@ -152,7 +152,7 @@
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationFailed}">
 				<div class="footerseparatorsmall"></div>
-				<tags:validationResult title_t="You can not leave comments" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
+				<tags:validationResult title_t="ValidationResult: You can not leave comments" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
 			</c:if>
 
 			<div class="footerseparator"></div>
@@ -165,7 +165,7 @@
 						if ( commentDelay > 0 ) {
 
 							var commentDelayTxt = Math.round( commentDelay / 1000 );
-							textareaInfo.html( "${eco:translate( "Time to the next comment" )}: " + commentDelayTxt + " ${eco:translate( "seconds" )}" );
+							textareaInfo.html( "${eco:translate( "Photo commenting: Time to the next comment" )}: " + commentDelayTxt + " ${eco:translate( "second(s)" )}" );
 
 							commentDelay = commentDelay - 1000;
 							if ( commentDelay < 0 ) {

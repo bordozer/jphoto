@@ -87,6 +87,24 @@
 		<ru><![CDATA[Вы в черном списке $1]]></ru>
 	</translation>
 
+
+
+
+	<translation>
+		<nerd>ValidationResult: You can not leave comments</nerd>
+		<ru><![CDATA[Вы не можете комментировать работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
