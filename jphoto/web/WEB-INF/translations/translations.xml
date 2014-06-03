@@ -63,18 +63,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send private message: UI notification: The message has been sent to</nerd>
+		<ru><![CDATA[Сообщение отправлено]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send private message: Form title: Send private message to</nerd>
+		<ru><![CDATA[Отправить личное сообщение]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send private message: Button text: Send message</nerd>
+		<ru><![CDATA[Отправить]]></ru>
 	</translation>
 
 	<translation>

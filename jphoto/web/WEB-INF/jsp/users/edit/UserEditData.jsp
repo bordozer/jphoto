@@ -252,7 +252,7 @@
 				<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_PHOTOS_ON_PAGE%>" labelFor="${photosOnPageControl}" />
 
 				<table:tddata>
-					<form:radiobutton path="${photosOnPageControl}" id="photosInuserGenderLine" label="${eco:translate('auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
+					<form:radiobutton path="${photosOnPageControl}" id="photosInuserGenderLine" label="${eco:translate('User data edit: photos on page - auto')}" value="-1" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
 					<form:radiobuttons items="${photosOnPageValues}" path="${photosOnPageControl}" htmlEscape="false" delimiter="&nbsp;&nbsp;&nbsp;&nbsp;"/>
 				</table:tddata>
 

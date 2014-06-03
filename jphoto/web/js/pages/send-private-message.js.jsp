@@ -30,12 +30,12 @@ define( [ 'jquery' ], function ( $ ) {
 			$( '#privateMessageTextId' ).val( '' );
 
 			$( "#sendPrivateMessageToUserDivId" )
-					.dialog( 'option', 'title', "${eco:translate('Send private message to')}" + ' ' + toUserName )
+					.dialog( 'option', 'title', "${eco:translate('Send private message: Form title: Send private message to')}" + ' ' + toUserName )
 					.dialog( 'option', 'buttons', {
 								Cancel:function () {
 									$( this ).dialog( "close" );
 								},
-								"${eco:translate('Send message')}": function() {
+								"${eco:translate('Send private message: Button text: Send message')}": function() {
 									var privateMessageDTO = new PrivateMessageSendingDTO( fromUserId, toUserId, $( '#privateMessageTextId' ).val() );
 
 									var ajaxResultDTO = jsonRPC.ajaxService.sendPrivateMessageAjax( privateMessageDTO );
@@ -45,7 +45,7 @@ define( [ 'jquery' ], function ( $ ) {
 										return false;
 									}
 
-									showUIMessage_Notification( "${eco:translate('The message has been sent to')}" + ' ' + toUserName );
+									showUIMessage_Notification( "${eco:translate('Send private message: UI notification: The message has been sent to')}" + ' ' + toUserName );
 
 									$( this ).dialog( "close" );
 

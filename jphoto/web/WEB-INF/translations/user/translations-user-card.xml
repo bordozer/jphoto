@@ -13,11 +13,6 @@
 	</translation>
 
 	<translation>
-		<nerd>The member does not have enough photos in category $1 ( there are $2 photos but has to be at least $3 ones ).</nerd>
-		<ru><![CDATA[У пользователя недостаточно работ в разделе $1 ( загружено $2 работ(ы), для ранга должно быть не менее, чем $3 ).]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>User card: The very best of $1</nerd>
 		<ru><![CDATA[$1: лучшие работы]]></ru>
 	</translation>
