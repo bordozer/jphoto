@@ -30,7 +30,7 @@
 <div class="user-card-block">
 	<table:table border="0" width="500px" oddEven="true">
 
-		<table:separatorInfo colspan="2" height="50" title="${eco:translate('Personal information')}"/>
+		<table:separatorInfo colspan="2" height="50" title="${eco:translate('User edit data tab: Personal information')}"/>
 
 		<table:trinfo>
 			<table:tdtext text_t="id"/>

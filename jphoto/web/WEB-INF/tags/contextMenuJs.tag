@@ -141,7 +141,7 @@
 	}
 
 	function deletePhoto( photoId ) {
-		if ( confirmDeletion( '${eco:translate("Delete photo?")}' ) ) {
+		if ( confirmDeletion( '${eco:translate("Context menu: Delete photo?")}' ) ) {
 			document.location.href = '${eco:baseUrl()}/photos/' + photoId + '/delete/';
 		}
 	}
