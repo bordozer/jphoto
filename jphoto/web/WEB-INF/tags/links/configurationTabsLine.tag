@@ -19,7 +19,7 @@
 	<c:if test="${isEdit}">
 
 		<c:if test="${empty activeConfigurationTab}"><b></c:if>
-			<a href="#" onclick="submitProperties();">${eco:translate('Properties')}</a>
+			<a href="#" onclick="submitProperties();">${eco:translate('Configuration tabs: Properties')}</a>
 		<c:if test="${empty activeConfigurationTab}"></b></c:if>
 
 		<script type="text/javascript">

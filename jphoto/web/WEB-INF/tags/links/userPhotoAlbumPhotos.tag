@@ -9,4 +9,4 @@
 <c:set var="albumNameEscaped" value="${eco:escapeHtml(userPhotoAlbum.name)}" />
 <c:set var="userNameEscaped" value="${eco:escapeHtml(userPhotoAlbum.user.name)}" />
 
-<a href ="${link}" title="${eco:translate2("Member $1, photo album '$2'", userNameEscaped, albumNameEscaped)}">${albumNameEscaped}</a>
+<a href ="${link}" title="${eco:translate2("User card: Member $1, photo album '$2'", userNameEscaped, albumNameEscaped)}">${albumNameEscaped}</a>

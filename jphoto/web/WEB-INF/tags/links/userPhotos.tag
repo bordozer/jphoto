@@ -6,4 +6,4 @@
 
 <c:set var="link" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotosByUserLink( user.getId() )%>" />
 
-<a class="photos-by-user-by-genre-link" href ="${link}" title="${eco:translate1("$1: show all photos", eco:escapeHtml(user.name))}">${eco:translate("All photos")}</a>
+<a class="photos-by-user-by-genre-link" href ="${link}" title="${eco:translate1("Links: $1: show all photos of user", eco:escapeHtml(user.name))}">${eco:translate("Links: Show all photos of user")}</a>

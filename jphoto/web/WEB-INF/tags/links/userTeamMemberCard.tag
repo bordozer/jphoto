@@ -11,4 +11,4 @@
 <c:set var="teamMemberNameEscaped" value="${eco:escapeHtml(userTeamMember.teamMemberName)}" />
 <c:set var="teamMemberTypeName" value="${eco:translate(userTeamMember.teamMemberType.name)}"/>
 
-<a href ="${link}" title="${eco:translate2('Member\'s team member: $1 - $2', teamMemberNameEscaped, teamMemberTypeName)}">${teamMemberNameEscaped}</a>
+<a href ="${link}" title="${eco:translate2('Links: The team member of user: $1 - $2', teamMemberNameEscaped, teamMemberTypeName)}">${teamMemberNameEscaped}</a>

@@ -78,7 +78,7 @@
 	</translation>
 
 	<translation>
-		<nerd>Member $1, photo album '$2'</nerd>
+		<nerd>User card: Member $1, photo album '$2'</nerd>
 		<ru><![CDATA[Член команды $1, альбом '$2']]></ru>
 	</translation>
 
