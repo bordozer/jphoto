@@ -116,16 +116,16 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 		model.put( "loginFormAction", urlUtilsService.getUserLoginLink() );
 		model.put( "showLoginForm", pageModel.isShowLoginForm() );
-		model.put( "loginFormLogin", translatorService.translate( "Login", language ) );
-		model.put( "rememberMeText", translatorService.translate( "Remember me", language ) );
+		model.put( "loginFormLogin", translatorService.translate( "System login form: Login", language ) );
+		model.put( "rememberMeText", translatorService.translate( "System login form: Remember me", language ) );
 
-		model.put( "loginFormPassword", translatorService.translate( "Password", language ) );
+		model.put( "loginFormPassword", translatorService.translate( "System login form: Password", language ) );
 		model.put( "defaultDebugPassword", UsersSecurity.DEFAULT_DEBUG_PASSWORD );
 		model.put( "loginFormLoginControl", UserLoginModel.LOGIN_FORM_LOGIN_CONTROL );
 		model.put( "loginFormPasswordControl", UserLoginModel.LOGIN_FORM_PASSWORD_CONTROL );
 		model.put( "loginUserAutomaticallyControl", UserLoginModel.LOGIN_FORM_LOGIN_USER_AUTOMATICALLY_CONTROL );
 
-		model.put( "logoutText", translatorService.translate( "Logout", language ) );
+		model.put( "logoutText", translatorService.translate( "System login form: Logout", language ) );
 
 		model.put( "loggedUserId", currentUser.getId() );
 		model.put( "loggedUserName", StringUtilities.escapeHtml( currentUser.getName() ) );

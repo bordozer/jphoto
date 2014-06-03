@@ -3,19 +3,18 @@
 <translations>
 
 	<translation>
-		<nerd>Login</nerd>
+		<nerd>System login form: Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Logout</nerd>
+		<nerd>System login form: Logout</nerd>
 		<ru><![CDATA[Выход]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>The field is optional</nerd>
-		<ru><![CDATA[Поле необязательно к заполнению]]></ru>
-		<en><![CDATA[The field is optional]]></en>
+		<nerd>System login form: Remember me</nerd>
+		<ru><![CDATA[Запомнить меня]]></ru>
 	</translation>
 
 	<translation>
@@ -24,18 +23,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Password</nerd>
+		<nerd>System login form: Password</nerd>
 		<ru><![CDATA[Пароль]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Sorry, but page not found on the server</nerd>
 		<ru><![CDATA[Извините, но такой страницы на сервере нет]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>There are $1 untranslated nerds are found</nerd>
-		<ru><![CDATA[Найдено $1 непереведенных фраз]]></ru>
 	</translation>
 
 	<translation>
@@ -46,11 +40,6 @@
 	<translation>
 		<nerd>System slogan: Post your soul here</nerd>
 		<ru><![CDATA[Опубликуй мечту здесь]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Remember me</nerd>
-		<ru><![CDATA[Запомнить меня]]></ru>
 	</translation>
 
 	<translation>
