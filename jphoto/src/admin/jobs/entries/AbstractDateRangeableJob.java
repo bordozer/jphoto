@@ -26,8 +26,9 @@ public abstract class AbstractDateRangeableJob extends AbstractJob {
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		final String dateRangeText = dateRangeType.getName();
-		final String timePeriodText = translatorService.translate( "$1 $2 days", getLanguage(), dateRangeType.getName(), String.valueOf( jobDateRange.getTimePeriod() ) );
-		final String currentTimeText = translatorService.translate( "Time: $1", getLanguage(), DateRangeType.CURRENT_TIME.getName() );
+		final String timePeriodText = translatorService.translate( "Job DateRangeParameters: $1 $2 days", getLanguage(), dateRangeText, String.valueOf( jobDateRange.getTimePeriod() ) );
+		final String name = translatorService.translate( DateRangeType.CURRENT_TIME.getName(), getLanguage() );
+		final String currentTimeText = translatorService.translate( "Job DateRangeParameters: Time: $1", getLanguage(), name );
 
 		final String dateRange = dateRangeType == DateRangeType.DATE_RANGE ? dateRangeText : dateRangeType == DateRangeType.TIME_PERIOD ? timePeriodText : currentTimeText;
 

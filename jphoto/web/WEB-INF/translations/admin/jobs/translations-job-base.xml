@@ -68,13 +68,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job DateRangeParameters: $1 $2 days</nerd>
+		<ru><![CDATA[$1 $2 дня(дней)]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job DateRangeParameters: Time: $1</nerd>
+		<ru><![CDATA[Время: $1]]></ru>
 	</translation>
 
 	<translation>
