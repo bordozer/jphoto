@@ -18,22 +18,22 @@
 	</translation>
 
 	<translation>
-		<nerd>The very best of $1</nerd>
+		<nerd>User card: The very best of $1</nerd>
 		<ru><![CDATA[$1: лучшие работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Last photos of $1</nerd>
+		<nerd>User card: Last photos of $1</nerd>
 		<ru><![CDATA[$1: последние работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>The photos $1 has appraised recently</nerd>
+		<nerd>User card: The photos $1 has appraised recently</nerd>
 		<ru><![CDATA[$1: недавно оцененные работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Last photos of visitors who viewed $1's photos recently</nerd>
+		<nerd>User card: Last photos of visitors who viewed $1's photos recently</nerd>
 		<ru><![CDATA[Последние работы пользователей, которые недавно смотрели работы $1]]></ru>
 	</translation>
 
@@ -80,6 +80,36 @@
 	<translation>
 		<nerd>User card: Member $1, photo album '$2'</nerd>
 		<ru><![CDATA[Член команды $1, альбом '$2']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: $1: the best photos. Total $2</nerd>
+		<ru><![CDATA[$1: лучшие работы. Всего работ $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: $1: last photos. Total $2.</nerd>
+		<ru><![CDATA[$1: последние работы. Всего работ $2.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

@@ -333,7 +333,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String title = translatorService.translate( "$1: last photos. Total $2.", EnvironmentContext.getLanguage(), translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
+		final String title = translatorService.translate( "User card: $1: last photos. Total $2.", EnvironmentContext.getLanguage(), translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 
@@ -353,7 +353,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 
 		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String listTitle = translatorService.translate( "$1: the best photos. Total $2", EnvironmentContext.getLanguage(), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
+		final String listTitle = translatorService.translate( "User card: $1: the best photos. Total $2", EnvironmentContext.getLanguage(), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 
@@ -366,7 +366,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> photos = photoService.getBestUserPhotosIds( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
-		final String listTitle = translatorService.translate( "The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
+		final String listTitle = translatorService.translate( "User card: The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 
 		return getPhotoList( 3, photos, linkBest, listTitle );
 	}
@@ -377,7 +377,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> photos = photoService.getLastUserPhotosIds( user, getUserPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
+		final String listTitle = translatorService.translate( "User card: Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		//		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
 		return getPhotoList( 4, photos, linkBest, listTitle );
@@ -388,7 +388,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> photos = photoService.getLastVotedPhotosIds( user, getUserPhotosInLine(), EnvironmentContext.getCurrentUser() );
 
 		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
+		final String listTitle = translatorService.translate( "User card: The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		return getPhotoList( 5, photos, linkBest, listTitle );
 	}
 
@@ -397,7 +397,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> photos = photoService.getLastPhotosOfUserVisitors( user, getUserPhotosInLine() );
 
 		final String linkBest = StringUtils.EMPTY;
-		final String listTitle = translatorService.translate( "Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
+		final String listTitle = translatorService.translate( "User card: Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		return getPhotoList( 6, photos, linkBest, listTitle );
 	}
 
