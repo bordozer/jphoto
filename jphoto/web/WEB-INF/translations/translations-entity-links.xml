@@ -83,8 +83,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>EntityLinkUtilsService: Job type $1: job name '$2'</nerd>
+		<ru><![CDATA[Задача '$1': '$2']]></ru>
 	</translation>
 
 	<translation>

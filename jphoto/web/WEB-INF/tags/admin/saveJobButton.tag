@@ -44,7 +44,8 @@
 		</table:td>
 
 		<table:td>
-			<input type="hidden" id="${saveJobActiveFormControl}" name="${saveJobActiveFormControl}" value="${jobModel.active}">
+			<form:checkbox path="${saveJobActiveFormControl}" />
+			<%--<input type="hidden" id="${saveJobActiveFormControl}" name="${saveJobActiveFormControl}" value="${jobModel.active}">
 			<html:checkbox inputId="_${saveJobActiveFormControl}" inputValue="true" isChecked="${jobModel.active}" onClick="setActive()" />
 			<script type="text/javascript">
 				function setActive() {
@@ -55,7 +56,7 @@
 						$( '#${saveJobActiveFormControl}' ).val( false );
 					}
 				}
-			</script>
+			</script>--%>
 		</table:td>
 	</table:tr>
 

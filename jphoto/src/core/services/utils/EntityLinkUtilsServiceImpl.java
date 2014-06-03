@@ -265,11 +265,10 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		final String link = String.format( "%s", urlUtilsService.getAdminSavedJobEditLink( jobType, savedJob.getId() ) );
 
 		final String jobTypeNameTranslated = translatorService.translate( savedJob.getJobType().getName(), language );
-		final String savedJobName = StringEscapeUtils.escapeHtml( savedJob.getName() );
+		final String savedJobNameEscaped = StringEscapeUtils.escapeHtml( savedJob.getName() );
 
-		final String inactive = "(inactive)";
-		final String linkTitle = translatorService.translate( "$1: '$2' $3", language, jobTypeNameTranslated, savedJobName, ( !savedJob.isActive() ? inactive : StringUtils.EMPTY ) );
-		final String result = String.format( "<a href=\"%s\" title=\"%s\">%s</a>", link, linkTitle, savedJobName );
+		final String linkTitle = translatorService.translate( "EntityLinkUtilsService: Job type $1: job name '$2'", language, jobTypeNameTranslated, savedJobNameEscaped );
+		final String result = String.format( "<a href=\"%s\" title=\"%s\">%s</a>", link, linkTitle, savedJobNameEscaped );
 
 		if ( savedJob.isActive() ) {
 			return result;
