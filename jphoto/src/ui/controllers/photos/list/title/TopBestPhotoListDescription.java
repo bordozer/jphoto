@@ -4,15 +4,15 @@ import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 
-public class PhotoListDescription extends AbstractPhotoListTitle {
+public class TopBestPhotoListDescription extends AbstractPhotoListTitle {
 
-	public PhotoListDescription( final PhotoListCriterias criterias, final Services services ) {
+	public TopBestPhotoListDescription( final PhotoListCriterias criterias, final Services services ) {
 		super( criterias, services );
 	}
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "The photo list description", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "TOP best photos description", services );
 
 
 

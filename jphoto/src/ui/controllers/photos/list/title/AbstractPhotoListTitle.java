@@ -1,33 +1,45 @@
 package ui.controllers.photos.list.title;
 
 import core.general.data.PhotoListCriterias;
+import core.services.system.Services;
 import core.services.translator.Language;
+import ui.context.EnvironmentContext;
 
 public abstract class AbstractPhotoListTitle {
 
-	protected Language language;
-
-	public AbstractPhotoListTitle( final Language language ) {
-		this.language = language;
-	}
+	protected PhotoListCriterias criterias;
+	protected Services services;
 
 	public abstract String getPhotoListTitle();
 
-	public static AbstractPhotoListTitle getInstance( final PhotoListCriterias criterias, final boolean isDescription, final Language language ) {
+	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Services services ) {
+		this.criterias = criterias;
+		this.services = services;
+	}
+
+	public static AbstractPhotoListTitle getInstance( final PhotoListCriterias criterias, final boolean isDescription, final Language language, final Services services ) {
 
 		if ( criterias.isTopBestPhotoList() ) {
 
 			if ( isDescription ) {
-				return new BestPhotoListDescription( language );
+				return new TopBestPhotoListDescription( criterias, services );
 			}
 
-			return new BestPhotoListTitle( language );
+			return new TopBestPhotoListTitle( criterias, services );
 		}
 
 		if ( isDescription ) {
-			return new PhotoListDescription( language );
+			return new PhotoListDescription( criterias, services );
 		}
 
-		return new PhotoListTitle( language );
+		return new PhotoListTitle( criterias, services );
+	}
+
+	public static AbstractPhotoListTitle getEmptyPhotoListTitle() {
+		return new EmptyPhotoListTitle();
+	}
+
+	public Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

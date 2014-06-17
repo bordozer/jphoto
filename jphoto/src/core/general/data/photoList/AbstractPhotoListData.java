@@ -3,6 +3,7 @@ package core.general.data.photoList;
 import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import sql.builder.SqlIdsSelectQuery;
+import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PageTitleData;
 
 import java.util.Date;
@@ -19,6 +20,9 @@ public abstract class AbstractPhotoListData {
 	protected boolean isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos;
 	protected PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
 	private int sortColumnNumber;
+
+	private AbstractPhotoListTitle photoListTitle;
+	private AbstractPhotoListTitle photoListDescription;
 
 	public abstract boolean isGroupOperationEnabled();
 
@@ -100,5 +104,21 @@ public abstract class AbstractPhotoListData {
 
 	public void setSortColumnNumber( final int sortColumnNumber ) {
 		this.sortColumnNumber = sortColumnNumber;
+	}
+
+	public AbstractPhotoListTitle getPhotoListTitle() {
+		return photoListTitle;
+	}
+
+	public void setPhotoListTitle( final AbstractPhotoListTitle photoListTitle ) {
+		this.photoListTitle = photoListTitle;
+	}
+
+	public AbstractPhotoListTitle getPhotoListDescription() {
+		return photoListDescription;
+	}
+
+	public void setPhotoListDescription( final AbstractPhotoListTitle photoListDescription ) {
+		this.photoListDescription = photoListDescription;
 	}
 }

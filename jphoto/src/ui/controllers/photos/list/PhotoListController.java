@@ -41,7 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
-import ui.controllers.photos.list.title.AbstractPhotoListTitle;
+import ui.controllers.photos.list.title.*;
 import ui.elements.PhotoList;
 import ui.services.PhotoUIService;
 import ui.services.UtilsService;
@@ -69,9 +69,6 @@ public class PhotoListController {
 
 	@Autowired
 	private PhotoService photoService;
-
-	@Autowired
-	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UserService userService;
@@ -178,6 +175,9 @@ public class PhotoListController {
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosBestInPeriodUrl( topBestCriterias.getVotingTimeFrom(), topBestCriterias.getVotingTimeTo() ) );
 			topBestData.setSortColumnNumber( 2 );
 
+			topBestData.setPhotoListTitle( new TopBestPhotoListTitle( topBestCriterias, services ) );
+			topBestData.setPhotoListDescription( new TopBestPhotoListDescription( topBestCriterias, services ) );
+
 			photoListDatas.add( topBestData );
 		}
 
@@ -185,6 +185,9 @@ public class PhotoListController {
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
 
 		photoListDatas.add( data );
 
@@ -206,6 +209,9 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
+
 		return VIEW;
 	}
 	// all <--
@@ -226,6 +232,9 @@ public class PhotoListController {
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByGenreLinkBest( genreId ) );
 			topBestData.setSortColumnNumber( 2 );
 
+			topBestData.setPhotoListTitle( new TopBestPhotoListTitle( topBestCriterias, services ) );
+			topBestData.setPhotoListDescription( new TopBestPhotoListDescription( topBestCriterias, services ) );
+
 			photoListDatas.add( topBestData );
 		}
 
@@ -234,6 +243,9 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
 		data.setPhotoListBottomText( genre.getDescription() );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
 
 		photoListDatas.add( data );
 
@@ -256,6 +268,9 @@ public class PhotoListController {
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
 		data.setPhotoListBottomText( genre.getDescription() );
 		data.setSortColumnNumber( 2 );
+
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -285,6 +300,9 @@ public class PhotoListController {
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 			topBestData.setSortColumnNumber( 3 );
 
+			topBestData.setPhotoListTitle( new TopBestPhotoListTitle( topBestCriterias, services ) );
+			topBestData.setPhotoListDescription( new TopBestPhotoListDescription( topBestCriterias, services ) );
+
 			photoListDatas.add( topBestData );
 		}
 
@@ -293,6 +311,10 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBreadcrumbs( user ) );
 		data.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
+
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
 
 		photoListDatas.add( data );
@@ -320,6 +342,9 @@ public class PhotoListController {
 		data.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
 		data.setSortColumnNumber( 2 );
+
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -353,6 +378,9 @@ public class PhotoListController {
 			topBestData.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
 			topBestData.setSortColumnNumber( 3 );
 
+			topBestData.setPhotoListTitle( new TopBestPhotoListTitle( topBestCriterias, services ) );
+			topBestData.setPhotoListDescription( new TopBestPhotoListDescription( topBestCriterias, services ) );
+
 			photoListDatas.add( topBestData );
 		}
 
@@ -362,6 +390,10 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBreadcrumbs( user, genre ) );
 		data.setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( true );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
+
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
 
 		photoListDatas.add( data );
@@ -393,6 +425,9 @@ public class PhotoListController {
 		setUserOwnPhotosGroupOperationMenuContainer( user, data );
 		data.setSortColumnNumber( 2 );
 
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
+
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
 		initUserGenres( model, user );
@@ -418,6 +453,9 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosAppraisedByUserBreadcrumbs( user ) );
 
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
+
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
@@ -439,6 +477,9 @@ public class PhotoListController {
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -463,6 +504,18 @@ public class PhotoListController {
 		return processPhotosOnPeriod( dateFrom, dateTo, model, pagingModel, filterModel );
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/best/" )
+	public String showBestPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
+		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
+		return processBestPhotosOnPeriod( date, date, model, pagingModel, filterModel );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/best/" )
+	public String showBestPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
+		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
+		return processBestPhotosOnPeriod( dateFrom, dateTo, model, pagingModel, filterModel );
+	}
+
 	private String processPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel, final PhotoFilterModel filterModel ) {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
@@ -478,23 +531,14 @@ public class PhotoListController {
 		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
 		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
 
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
+
 		photoListDatas.add( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		return VIEW;
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/best/" )
-	public String showBestPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
-		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processBestPhotosOnPeriod( date, date, model, pagingModel, filterModel );
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "from/{datefrom}/to/{dateto}/best/" )
-	public String showBestPhotosByPeriod( final @PathVariable( "datefrom" ) String dateFrom, final @PathVariable( "dateto" ) String dateTo
-		, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
-		return processBestPhotosOnPeriod( dateFrom, dateTo, model, pagingModel, filterModel );
 	}
 
 	private String processBestPhotosOnPeriod( final String dateFrom, final String dateTo, final PhotoListModel model, final PagingModel pagingModel, final PhotoFilterModel filterModel ) {
@@ -509,7 +553,9 @@ public class PhotoListController {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( fDateFrom, fDateTo );
 		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
 		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
-//		data.setSortColumnNumber( 2 ); //TODO: highlight sort column ( it is not shown yet )
+
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -534,6 +580,9 @@ public class PhotoListController {
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 			topBestData.setSortColumnNumber( 2 );
 
+			topBestData.setPhotoListTitle( new TopBestPhotoListTitle( topBestCriterias, services ) );
+			topBestData.setPhotoListDescription( new TopBestPhotoListDescription( topBestCriterias, services ) );
+
 			photoListDatas.add( topBestData );
 		}
 
@@ -541,6 +590,9 @@ public class PhotoListController {
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
+
+		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new PhotoListDescription( criterias, services ) );
 
 		photoListDatas.add( data );
 
@@ -559,6 +611,9 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
 		data.setSortColumnNumber( 3 );
+
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
+		data.setPhotoListDescription( new BestPhotoListDescription( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
@@ -586,7 +641,7 @@ public class PhotoListController {
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
-		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", EnvironmentContext.getLanguage() ) );
+		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Photo list: Search result title", EnvironmentContext.getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
 
@@ -794,20 +849,20 @@ public class PhotoListController {
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 
-		final PhotoList photoList = new PhotoList( photosIds, getPhotoListTitle( criterias, false ), showPaging );
+		final PhotoList photoList = new PhotoList( photosIds, listData.getPhotoListTitle().getPhotoListTitle(), showPaging );
 
 		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias, language ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
-		photoList.setPhotosCriteriasDescription( getPhotoListTitle( criterias, true ) );
+		photoList.setPhotosCriteriasDescription( listData.getPhotoListDescription().getPhotoListTitle() );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 
 		return photoList;
 	}
 
-	private String getPhotoListTitle( final PhotoListCriterias criterias, final boolean isDescription ) {
-		final AbstractPhotoListTitle listTitle = AbstractPhotoListTitle.getInstance( criterias, isDescription, EnvironmentContext.getLanguage() );
+	/*private String getPhotoListTitle( final PhotoListCriterias criterias, final boolean isDescription ) {
+		final AbstractPhotoListTitle listTitle = AbstractPhotoListTitle.getInstance( criterias, isDescription, EnvironmentContext.getLanguage(), services );
 		return listTitle.getPhotoListTitle();
-	}
+	}*/
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
 		model.setUser( user );
