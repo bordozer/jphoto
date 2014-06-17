@@ -12,6 +12,8 @@ public abstract class AbstractPhotoListTitle {
 
 	public abstract String getPhotoListTitle();
 
+	public abstract String getPhotoListDescription();
+
 	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Services services ) {
 		this.criterias = criterias;
 		this.services = services;

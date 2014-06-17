@@ -73,6 +73,41 @@
 	</translation>
 
 	<translation>
+		<nerd>Top best photo list title: description</nerd>
+		<ru><![CDATA[Показаны лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top best photo list title: that got at least</nerd>
+		<ru><![CDATA[получившие не менее ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top best photo list title: for the last</nerd>
+		<ru><![CDATA[за последние]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -41,6 +41,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage worldSeparator() {
+		messageParameters.add( new StringParameter( " ", services ) );
+		return this;
+	}
+
 	public TranslatableMessage translatableString( final String value ) {
 		messageParameters.add( new StringTranslatableParameter( value, services ) );
 		return this;

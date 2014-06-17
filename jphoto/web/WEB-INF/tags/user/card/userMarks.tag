@@ -26,7 +26,7 @@
 			</table:td>
 
 			<table:td cssClass="textright">
-				<span title="${eco:translate2('User Statistics: Summary marks set for $1: $2', photoVotingCategoryName, marksByCategoryInfo.sumMark)}">${marksByCategoryInfo.sumMark} ${eco:translate('ROD PLURAL  marks')}</span>
+				<span title="${eco:translate2('User Statistics: Summary marks set for $1: $2', photoVotingCategoryName, marksByCategoryInfo.sumMark)}">${marksByCategoryInfo.sumMark} ${eco:translate('ROD PLURAL marks')}</span>
 			</table:td>
 
 		</table:trinfo>

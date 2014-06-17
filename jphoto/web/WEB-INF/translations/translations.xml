@@ -53,8 +53,13 @@
 	</translation>
 
 	<translation>
-		<nerd>ROD PLURAL  marks</nerd>
-		<ru><![CDATA[баллов]]></ru>
+		<nerd>ROD PLURAL marks</nerd>
+		<ru><![CDATA[балл(ов)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ROD PLURAL days</nerd>
+		<ru><![CDATA[дня(ей)]]></ru>
 	</translation>
 
 	<translation>

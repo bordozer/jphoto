@@ -19,4 +19,9 @@ public class PhotoListTitle extends AbstractPhotoListTitle {
 
 		return translatableMessage.build( getLanguage() );
 	}
+
+	@Override
+	public String getPhotoListDescription() {
+		return null;
+	}
 }

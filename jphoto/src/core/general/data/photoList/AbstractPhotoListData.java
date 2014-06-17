@@ -22,7 +22,6 @@ public abstract class AbstractPhotoListData {
 	private int sortColumnNumber;
 
 	private AbstractPhotoListTitle photoListTitle;
-	private AbstractPhotoListTitle photoListDescription;
 
 	public abstract boolean isGroupOperationEnabled();
 
@@ -112,13 +111,5 @@ public abstract class AbstractPhotoListData {
 
 	public void setPhotoListTitle( final AbstractPhotoListTitle photoListTitle ) {
 		this.photoListTitle = photoListTitle;
-	}
-
-	public AbstractPhotoListTitle getPhotoListDescription() {
-		return photoListDescription;
-	}
-
-	public void setPhotoListDescription( final AbstractPhotoListTitle photoListDescription ) {
-		this.photoListDescription = photoListDescription;
 	}
 }
