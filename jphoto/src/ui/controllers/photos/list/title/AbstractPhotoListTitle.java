@@ -31,6 +31,10 @@ public abstract class AbstractPhotoListTitle {
 
 		addGenre( translatableMessage );
 
+		addUploadingDateRange( translatableMessage );
+
+		addVotingDateRange( translatableMessage );
+
 		addVotingCategoryTitle( translatableMessage );
 
 		return translatableMessage.build( getLanguage() );
@@ -44,6 +48,8 @@ public abstract class AbstractPhotoListTitle {
 		addGenre( translatableMessage );
 
 		addMarks( translatableMessage );
+
+		addUploadingDateRange( translatableMessage );
 
 		addVotingDateRange( translatableMessage );
 
@@ -98,29 +104,83 @@ public abstract class AbstractPhotoListTitle {
 		;
 	}
 
-	private void addVotingDateRange( final TranslatableMessage translatableMessage ) {
+	private void addUploadingDateRange( final TranslatableMessage translatableMessage ) {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-		final Date votingTimeFrom = criterias.getVotingTimeFrom();
-		final Date votingTimeTo = criterias.getVotingTimeTo();
+		final Date timeFrom = criterias.getUploadDateFrom();
+		final Date timeTo = criterias.getUploadDateTo();
 
-		if ( dateUtilsService.isEmptyTime( votingTimeFrom ) || dateUtilsService.isEmptyTime( votingTimeTo ) ) {
+		if ( dateUtilsService.isEmptyTime( timeFrom ) || dateUtilsService.isEmptyTime( timeTo ) ) {
 			return;
 		}
 
-		final Date votingDateFrom = dateUtilsService.getFirstSecondOfDay( votingTimeFrom );
-		final Date votingDateTo = dateUtilsService.getFirstSecondOfDay( votingTimeTo );
+		final Date dateFrom = dateUtilsService.getFirstSecondOfDay( timeFrom );
+		final Date dateTo = dateUtilsService.getFirstSecondOfDay( timeTo );
 
-		if ( votingDateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
+		/*if ( dateUtilsService.isNotEmptyTime( timeFrom ) && dateFrom.getTime() == dateTo.getTime() ) {
 			translatableMessage
 				.worldSeparator()
-				.translatableString( "Top best photo list title: for the last" )
+				.translatableString( "Top best photo list title: for date" )
 				.worldSeparator()
-				.addIntegerParameter( dateUtilsService.getDifferenceInDays( votingDateFrom, votingDateTo ) )
+				.dateTimeFormatted( dateFrom )
+			;
+		}*/
+
+		if ( dateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: uploaded from to" )
+				.worldSeparator()
+				.dateFormatted( dateFrom )
+				.string( " - " )
+				.dateFormatted( dateTo )
+			;
+		}
+	}
+
+	private void addVotingDateRange( final TranslatableMessage translatableMessage ) {
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+
+		final Date timeFrom = criterias.getVotingTimeFrom();
+		final Date timeTo = criterias.getVotingTimeTo();
+
+		if ( dateUtilsService.isEmptyTime( timeFrom ) || dateUtilsService.isEmptyTime( timeTo ) ) {
+			return;
+		}
+
+		final Date dateFrom = dateUtilsService.getFirstSecondOfDay( timeFrom );
+		final Date dateTo = dateUtilsService.getFirstSecondOfDay( timeTo );
+
+		/*if ( dateUtilsService.isNotEmptyTime( timeFrom ) && dateFrom.getTime() == dateTo.getTime() ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: for date" )
+				.worldSeparator()
+				.dateTimeFormatted( dateFrom )
+			;
+		}*/
+
+		if ( dateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: appraised for the last" )
+				.worldSeparator()
+				.addIntegerParameter( dateUtilsService.getDifferenceInDays( dateFrom, dateTo ) )
 				.worldSeparator()
 				.translatableString( "ROD PLURAL days" )
 			;
+
+			return;
 		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: appraised from to" )
+			.worldSeparator()
+			.dateFormatted( dateFrom )
+			.string( " - " )
+			.dateFormatted( dateTo )
+		;
 	}
 
 	private void addVotingCategoryTitle( final TranslatableMessage translatableMessage ) {

@@ -82,9 +82,24 @@
 		<ru><![CDATA[получившие не менее ]]></ru>
 	</translation>
 
-	<translation>
-		<nerd>Top best photo list title: for the last</nerd>
+	<!--<translation>
+		<nerd>Top best photo list title: for date</nerd>
 		<ru><![CDATA[за последние]]></ru>
+	</translation>-->
+
+	<translation>
+		<nerd>Top best photo list title: appraised for the last</nerd>
+		<ru><![CDATA[за последние]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top best photo list title: appraised from to</nerd>
+		<ru><![CDATA[за период]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Top best photo list title: uploaded from to</nerd>
+		<ru><![CDATA[загруженные в период]]></ru>
 	</translation>
 
 	<translation>

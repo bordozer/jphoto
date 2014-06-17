@@ -111,6 +111,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage dateFormatted( final Date actionTime ) {
+		messageParameters.add( new FormattedDateParameter( actionTime, services ) );
+		return this;
+	}
+
 	public TranslatableMessage dateTimeFormatted( final Date actionTime ) {
 		messageParameters.add( new FormattedDateTimeParameter( actionTime, services ) );
 		return this;
