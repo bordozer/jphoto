@@ -17,7 +17,11 @@ public abstract class AbstractPhotoListTitle {
 		this.services = services;
 	}
 
-	public static AbstractPhotoListTitle getInstance( final PhotoListCriterias criterias, final boolean isDescription, final Language language, final Services services ) {
+	public Language getLanguage() {
+		return EnvironmentContext.getLanguage();
+	}
+
+	/*public static AbstractPhotoListTitle getInstance( final PhotoListCriterias criterias, final boolean isDescription, final Language language, final Services services ) {
 
 		if ( criterias.isTopBestPhotoList() ) {
 
@@ -33,13 +37,9 @@ public abstract class AbstractPhotoListTitle {
 		}
 
 		return new PhotoListTitle( criterias, services );
-	}
+	}*/
 
-	public static AbstractPhotoListTitle getEmptyPhotoListTitle() {
+	/*public static AbstractPhotoListTitle getEmptyPhotoListTitle() {
 		return new EmptyPhotoListTitle();
-	}
-
-	public Language getLanguage() {
-		return EnvironmentContext.getLanguage();
-	}
+	}*/
 }

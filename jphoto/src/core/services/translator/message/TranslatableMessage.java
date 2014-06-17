@@ -71,6 +71,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage addGenreNameParameter( final Genre genre ) {
+		messageParameters.add( new GenreNameParameter( genre, services ) );
+		return this;
+	}
+
 	public TranslatableMessage addPhotosByGenreLinkParameter( final int genreId ) {
 		messageParameters.add( new PhotosByGenreLinkParameter( getGenre( genreId ), services ) );
 		return this;

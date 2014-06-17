@@ -12,9 +12,11 @@ public class TopBestPhotoListDescription extends AbstractPhotoListTitle {
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "TOP best photos description", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Top best photo list description: Photos", services );
 
-
+		if ( criterias.getGenre() != null ) {
+			translatableMessage.string( " " ).translatableString( "in category" ).string( " " ).addGenreNameParameter( criterias.getGenre() );
+		}
 
 		return translatableMessage.build( getLanguage() );
 	}
