@@ -130,18 +130,22 @@
 
 								<c:if test="${not empty privateMessageListModel.privateMessageType}">
 
+									<c:set var="privateMessageTypeName" value="${eco:translate(privateMessageListModel.privateMessageType.name)}" />
+
 									<html:submitButton
 											id="deleteAllMessagesButton"
-											caption_t="Delete ALL ${eco:translate(privateMessageListModel.privateMessageType.name)}"
+											caption_t="${eco:translate1('Delete ALL $1', privateMessageTypeName)}"
 											onclick="return deleteAllPrivateMessages();"
 											icon="deleteAll.png"
+											doNotTranslate="true"
 											/>
 
 									<html:submitButton
 											id="markAllMessagesAsReadButton"
-											caption_t="Mark all ${eco:translate(privateMessageListModel.privateMessageType.name)} as read"
+											caption_t="${eco:translate1('Mark ALL $1 as read', privateMessageTypeName)}"
 											onclick="return markAllMessagesAsRead();"
 											icon="markAsRead.png"
+											doNotTranslate="true"
 											/>
 								</c:if>
 							</c:if>
