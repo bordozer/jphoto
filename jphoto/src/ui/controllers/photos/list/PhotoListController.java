@@ -14,7 +14,6 @@ import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.dao.*;
-import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
 import core.services.entry.VotingCategoryService;
@@ -105,9 +104,6 @@ public class PhotoListController {
 	
 	@Autowired
 	private PhotoCriteriasSqlService photoCriteriasSqlService;
-
-	@Autowired
-	private FavoritesService favoritesService;
 
 	@Autowired
 	private Services services;
@@ -777,10 +773,6 @@ public class PhotoListController {
 
 			photoList.setPhotoGroupOperationMenuContainer( photosIds.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, EnvironmentContext.getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
-			/*if ( listData.isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos() ) {
-				photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoIds() );
-			}*/
-
 			model.addPhotoList( photoList );
 			model.setPageTitleData( listData.getTitleData() );
 		}
@@ -799,17 +791,6 @@ public class PhotoListController {
 
 	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
 
-		final User currentUser = EnvironmentContext.getCurrentUser();
-
-		/*final List<PhotoInfo> photoInfos;
-		if ( dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeFrom() ) && dateUtilsService.isEmptyTime( listData.getPhotoRatingTimeTo() ) ) {
-			photoInfos = photoUIService.getPhotoInfos( pagePhotos, listData.getPhotoRatingTimeFrom(), listData.getPhotoRatingTimeTo(), currentUser );
-		} else {
-			photoInfos = photoUIService.getPhotoInfos( pagePhotos, currentUser );
-		}*/
-
-//		addFavoriteIcons( photoInfos );
-
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 		final PhotoList photoList = new PhotoList( photosIds, photoListCriteriasService.getPhotoListTitle( criterias, EnvironmentContext.getLanguage() ), showPaging );
 
@@ -820,24 +801,6 @@ public class PhotoListController {
 
 		return photoList;
 	}
-
-	/*private void addFavoriteIcons( final List<PhotoInfo> photoInfos ) {
-
-		final User currentUser = EnvironmentContext.getCurrentUser();
-
-		for ( final PhotoInfo photoInfo : photoInfos ) {
-			final Photo photo = photoInfo.getPhoto();
-			final List<FavoriteEntryType> icons = newArrayList();
-			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.FAVORITE_PHOTOS.getId() ) ) {
-				icons.add( FavoriteEntryType.FAVORITE_PHOTOS );
-			}
-
-			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), FavoriteEntryType.NEW_COMMENTS_NOTIFICATION.getId() ) ) {
-				icons.add( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
-			}
-			photoInfo.setPhotoIconsTypes( icons );
-		}
-	}*/
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
 		model.setUser( user );
