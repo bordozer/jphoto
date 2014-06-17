@@ -87,9 +87,14 @@
 		<ru><![CDATA[за последние]]></ru>
 	</translation>-->
 
-	<translation>
+	<!--<translation>
 		<nerd>Top best photo list title: appraised for the last</nerd>
 		<ru><![CDATA[за последние]]></ru>
+	</translation>-->
+
+	<translation>
+		<nerd>Top best photo list title: appraised at</nerd>
+		<ru><![CDATA[за]]></ru>
 	</translation>
 
 	<translation>
@@ -138,8 +143,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Top best photo list description: with membership type</nerd>
+		<ru><![CDATA[загруженные пользователями с типом участия]]></ru>
 	</translation>
 
 	<translation>

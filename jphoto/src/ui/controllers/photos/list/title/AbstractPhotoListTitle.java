@@ -37,6 +37,8 @@ public abstract class AbstractPhotoListTitle {
 
 		addVotingCategoryTitle( translatableMessage );
 
+//		addMembershipType( translatableMessage );
+
 		return translatableMessage.build( getLanguage() );
 	}
 
@@ -56,6 +58,8 @@ public abstract class AbstractPhotoListTitle {
 		addVotingCategoryTitle( translatableMessage );
 
 		addVotingCategoryDescription( translatableMessage );
+
+		addMembershipType( translatableMessage );
 
 		return translatableMessage.build( getLanguage() );
 	}
@@ -126,16 +130,14 @@ public abstract class AbstractPhotoListTitle {
 			;
 		}*/
 
-		if ( dateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
-			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: uploaded from to" )
-				.worldSeparator()
-				.dateFormatted( dateFrom )
-				.string( " - " )
-				.dateFormatted( dateTo )
-			;
-		}
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: uploaded from to" )
+			.worldSeparator()
+			.dateFormatted( dateFrom )
+			.string( " - " )
+			.dateFormatted( dateTo )
+		;
 	}
 
 	private void addVotingDateRange( final TranslatableMessage translatableMessage ) {
@@ -151,23 +153,13 @@ public abstract class AbstractPhotoListTitle {
 		final Date dateFrom = dateUtilsService.getFirstSecondOfDay( timeFrom );
 		final Date dateTo = dateUtilsService.getFirstSecondOfDay( timeTo );
 
-		/*if ( dateUtilsService.isNotEmptyTime( timeFrom ) && dateFrom.getTime() == dateTo.getTime() ) {
+		final boolean isPeriodInOneDay = dateFrom.getTime() == dateTo.getTime();
+		if ( isPeriodInOneDay ) {
 			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: for date" )
-				.worldSeparator()
-				.dateTimeFormatted( dateFrom )
-			;
-		}*/
-
-		if ( dateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
-			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: appraised for the last" )
-				.worldSeparator()
-				.addIntegerParameter( dateUtilsService.getDifferenceInDays( dateFrom, dateTo ) )
-				.worldSeparator()
-				.translatableString( "ROD PLURAL days" )
+			.worldSeparator()
+			.translatableString( "Top best photo list title: appraised at" )
+			.worldSeparator()
+			.dateFormatted( dateFrom )
 			;
 
 			return;
@@ -219,6 +211,19 @@ public abstract class AbstractPhotoListTitle {
 			.translatableString( "Top best photo list description: has appraised as" )
 			.worldSeparator()
 			.addPhotoVotingCategoryParameterParameter( criterias.getVotingCategory() )
+		;
+	}
+
+	private void addMembershipType( final TranslatableMessage translatableMessage ) {
+		if ( criterias.getMembershipType() == null ) {
+			return;
+		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list description: with membership type" )
+			.worldSeparator()
+			.translatableString( criterias.getMembershipType().getNamePlural() )
 		;
 	}
 

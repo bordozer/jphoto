@@ -201,6 +201,7 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
 		data.setSortColumnNumber( 3 );
+		data.setPhotoListTitle( new BestPhotoListTitle( criterias, services ) );
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
