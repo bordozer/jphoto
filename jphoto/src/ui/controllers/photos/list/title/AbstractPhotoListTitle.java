@@ -31,6 +31,8 @@ public abstract class AbstractPhotoListTitle {
 
 		addGenre( translatableMessage );
 
+		addVotingCategoryTitle( translatableMessage );
+
 		return translatableMessage.build( getLanguage() );
 	}
 
@@ -45,46 +47,55 @@ public abstract class AbstractPhotoListTitle {
 
 		addVotingDateRange( translatableMessage );
 
+		addVotingCategoryTitle( translatableMessage );
+
+		addVotingCategoryDescription( translatableMessage );
+
 		return translatableMessage.build( getLanguage() );
 	}
 
-	public Language getLanguage() {
-		return EnvironmentContext.getLanguage();
+	private void addUser( final TranslatableMessage translatableMessage ) {
+
+		if ( criterias.getUser() == null ) {
+			return;
+		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: of member" )
+			.worldSeparator()
+			.addUserCardLinkParameter( criterias.getUser() )
+		;
 	}
 
 	private void addGenre( final TranslatableMessage translatableMessage ) {
-		if ( criterias.getGenre() != null ) {
-			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: in category" )
-				.worldSeparator()
-				.addGenreNameParameter( criterias.getGenre() )
-			;
-		}
-	}
 
-	private void addUser( final TranslatableMessage translatableMessage ) {
-		if ( criterias.getUser() != null ) {
-			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: of member" )
-				.worldSeparator()
-				.addUserCardLinkParameter( criterias.getUser() )
-			;
+		if ( criterias.getGenre() == null ) {
+			return;
 		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: in category" )
+			.worldSeparator()
+			.addGenreNameParameter( criterias.getGenre() )
+		;
 	}
 
 	private void addMarks( final TranslatableMessage translatableMessage ) {
-		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
-			translatableMessage
-				.worldSeparator()
-				.translatableString( "Top best photo list title: that got at least" )
-				.string( " " )
-				.addIntegerParameter( criterias.getMinimalMarks() )
-				.worldSeparator()
-				.translatableString( "ROD PLURAL marks" )
-			;
+
+		if ( criterias.getMinimalMarks() <= PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
+			return;
 		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: that got at least" )
+			.worldSeparator()
+			.addIntegerParameter( criterias.getMinimalMarks() )
+			.worldSeparator()
+			.translatableString( "ROD PLURAL marks" )
+		;
 	}
 
 	private void addVotingDateRange( final TranslatableMessage translatableMessage ) {
@@ -110,5 +121,48 @@ public abstract class AbstractPhotoListTitle {
 				.translatableString( "ROD PLURAL days" )
 			;
 		}
+	}
+
+	private void addVotingCategoryTitle( final TranslatableMessage translatableMessage ) {
+
+		if ( criterias.getVotedUser() == null ) {
+			return;
+		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: appraised by member" )
+			.worldSeparator()
+			.addUserCardLinkParameter( criterias.getVotedUser() )
+		;
+	}
+
+	private void addVotingCategoryDescription( final TranslatableMessage translatableMessage ) {
+
+		/*if ( criterias.getVotedUser() == null ) {
+			return;
+		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list title: appraised by member" )
+			.worldSeparator()
+			.addUserCardLinkParameter( criterias.getVotedUser() )
+		;*/
+
+		if ( criterias.getVotingCategory() == null ) {
+			return;
+		}
+
+		translatableMessage
+			.worldSeparator()
+			.translatableString( "Top best photo list description: has appraised as" )
+			.worldSeparator()
+			.addPhotoVotingCategoryParameterParameter( criterias.getVotingCategory() )
+		;
+	}
+
+	protected Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

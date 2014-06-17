@@ -2,7 +2,6 @@ package ui.controllers.photos.list.title;
 
 import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
-import core.services.translator.message.TranslatableMessage;
 
 public class BestPhotoListTitle extends AbstractPhotoListTitle {
 
