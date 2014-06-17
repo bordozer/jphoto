@@ -12,25 +12,11 @@ public class PhotoListTitle extends AbstractPhotoListTitle {
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo list title", services );
-
-		addUser( translatableMessage );
-
-		addGenre( translatableMessage );
-
-		return translatableMessage.build( getLanguage() );
+		return getTitle( "Photo list title" );
 	}
 
 	@Override
 	public String getPhotoListDescription() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo list description", services );
-
-		addUser( translatableMessage );
-
-		addGenre( translatableMessage );
-
-		addMarks( translatableMessage );
-
-		return translatableMessage.build( getLanguage() );
+		return addDescription( "Photo list description" );
 	}
 }

@@ -12,27 +12,11 @@ public class TopBestPhotoListTitle extends AbstractPhotoListTitle {
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Top best photo list title: TOP best photos", services );
-
-		addUser( translatableMessage );
-
-		addGenre( translatableMessage );
-
-		return translatableMessage.build( getLanguage() );
+		return getTitle( "Top best photo list title" );
 	}
 
 	@Override
 	public String getPhotoListDescription() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Top best photo list title: description", services );
-
-		addUser( translatableMessage );
-
-		addGenre( translatableMessage );
-
-		addMarks( translatableMessage );
-
-		addVotingDateRange( translatableMessage );
-
-		return translatableMessage.build( getLanguage() );
+		return addDescription( "Top best photo list description" );
 	}
 }

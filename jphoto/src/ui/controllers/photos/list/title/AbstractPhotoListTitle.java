@@ -24,11 +24,35 @@ public abstract class AbstractPhotoListTitle {
 		this.services = services;
 	}
 
+	protected String getTitle( final String nerd ) {
+		final TranslatableMessage translatableMessage = new TranslatableMessage( nerd, services );
+
+		addUser( translatableMessage );
+
+		addGenre( translatableMessage );
+
+		return translatableMessage.build( getLanguage() );
+	}
+
+	protected String addDescription( final String nerd ) {
+		final TranslatableMessage translatableMessage = new TranslatableMessage( nerd, services );
+
+		addUser( translatableMessage );
+
+		addGenre( translatableMessage );
+
+		addMarks( translatableMessage );
+
+		addVotingDateRange( translatableMessage );
+
+		return translatableMessage.build( getLanguage() );
+	}
+
 	public Language getLanguage() {
 		return EnvironmentContext.getLanguage();
 	}
 
-	protected void addGenre( final TranslatableMessage translatableMessage ) {
+	private void addGenre( final TranslatableMessage translatableMessage ) {
 		if ( criterias.getGenre() != null ) {
 			translatableMessage
 				.worldSeparator()
@@ -39,7 +63,7 @@ public abstract class AbstractPhotoListTitle {
 		}
 	}
 
-	protected void addUser( final TranslatableMessage translatableMessage ) {
+	private void addUser( final TranslatableMessage translatableMessage ) {
 		if ( criterias.getUser() != null ) {
 			translatableMessage
 				.worldSeparator()
@@ -50,7 +74,7 @@ public abstract class AbstractPhotoListTitle {
 		}
 	}
 
-	protected void addMarks( final TranslatableMessage translatableMessage ) {
+	private void addMarks( final TranslatableMessage translatableMessage ) {
 		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
 			translatableMessage
 				.worldSeparator()
@@ -63,7 +87,7 @@ public abstract class AbstractPhotoListTitle {
 		}
 	}
 
-	protected void addVotingDateRange( final TranslatableMessage translatableMessage ) {
+	private void addVotingDateRange( final TranslatableMessage translatableMessage ) {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 		final Date votingTimeFrom = criterias.getVotingTimeFrom();
