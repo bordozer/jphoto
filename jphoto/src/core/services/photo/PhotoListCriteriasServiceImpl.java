@@ -14,10 +14,7 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.services.UtilsService;
-import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.PhotoUtils;
-import utils.StringUtilities;
 
 import java.util.Date;
 
@@ -28,16 +25,14 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private ConfigurationService configurationService;
 
 	@Autowired
-	private UtilsService utilsService;
-	
-	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
 	private TranslatorService translatorService;
 
-	@Override
+	/*@Override
 	public String getPhotoListTitle( final PhotoListCriterias criterias, final Language language ) {
+
 		final StringBuilder builder = new StringBuilder();
 
 		if ( criterias.getUser() != null && criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
@@ -72,10 +67,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 
 		return builder.toString();
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public String getPhotoListCriteriasDescription( final PhotoListCriterias criterias, final Language language ) {
+
 		final StringBuilder builder = new StringBuilder();
 
 		if ( criterias.isTopBestPhotoList() ) {
@@ -138,7 +134,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 
 		return builder.toString();
-	}
+	}*/
 
 	private void addVotingTimeText( final PhotoListCriterias criterias, final StringBuilder builder, final Language language ) {
 		final Date votingTimeFrom = criterias.getVotingTimeFrom();
@@ -612,10 +608,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	public void setConfigurationService( final ConfigurationService configurationService ) {
 		this.configurationService = configurationService;
-	}
-
-	public void setUtilsService( final UtilsService utilsService ) {
-		this.utilsService = utilsService;
 	}
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {

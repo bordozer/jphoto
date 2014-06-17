@@ -11,10 +11,6 @@ import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	String getPhotoListTitle( final PhotoListCriterias criterias, final Language language );
-
-	String getPhotoListCriteriasDescription( final PhotoListCriterias criterias, final Language language );
-
 	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias, final Language language );
 
 	PhotoListCriterias getForAllPhotos( final User user );

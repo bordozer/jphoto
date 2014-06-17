@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
+import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PhotoList;
 import ui.services.PhotoUIService;
 import ui.services.UtilsService;
@@ -792,14 +793,20 @@ public class PhotoListController {
 	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
-		final PhotoList photoList = new PhotoList( photosIds, photoListCriteriasService.getPhotoListTitle( criterias, EnvironmentContext.getLanguage() ), showPaging );
+
+		final PhotoList photoList = new PhotoList( photosIds, getPhotoListTitle( criterias, false ), showPaging );
 
 		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias, language ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
-		photoList.setPhotosCriteriasDescription( photoListCriteriasService.getPhotoListCriteriasDescription( criterias, EnvironmentContext.getLanguage() ) );
+		photoList.setPhotosCriteriasDescription( getPhotoListTitle( criterias, true ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 
 		return photoList;
+	}
+
+	private String getPhotoListTitle( final PhotoListCriterias criterias, final boolean isDescription ) {
+		final AbstractPhotoListTitle listTitle = AbstractPhotoListTitle.getInstance( criterias, isDescription, EnvironmentContext.getLanguage() );
+		return listTitle.getPhotoListTitle();
 	}
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
