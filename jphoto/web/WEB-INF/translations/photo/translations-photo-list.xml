@@ -59,7 +59,7 @@
 
 	<translation>
 		<nerd>Top best photo list title: TOP best photos</nerd>
-		<ru><![CDATA[Лучшие работы]]></ru>
+		<ru><![CDATA[Самые лучшие работы]]></ru>
 	</translation>
 
 	<translation>
@@ -74,7 +74,7 @@
 
 	<translation>
 		<nerd>Top best photo list title: description</nerd>
-		<ru><![CDATA[Показаны лучшие работы]]></ru>
+		<ru><![CDATA[Показаны самые лучшие работы]]></ru>
 	</translation>
 
 	<translation>
@@ -88,18 +88,28 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list title</nerd>
+		<ru><![CDATA[Работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list description</nerd>
+		<ru><![CDATA[Показаны работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Best photo list title</nerd>
+		<ru><![CDATA[Лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Best photo list description</nerd>
+		<ru><![CDATA[Показаны лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo gallery title: descriptions</nerd>
+		<ru><![CDATA[Показаны все работы]]></ru>
 	</translation>
 
 	<translation>

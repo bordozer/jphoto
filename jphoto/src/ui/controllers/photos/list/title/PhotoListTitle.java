@@ -3,7 +3,6 @@ package ui.controllers.photos.list.title;
 import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
-import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 public class PhotoListTitle extends AbstractPhotoListTitle {
 
@@ -13,15 +12,25 @@ public class PhotoListTitle extends AbstractPhotoListTitle {
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo list title", services );
 
+		addUser( translatableMessage );
 
+		addGenre( translatableMessage );
 
 		return translatableMessage.build( getLanguage() );
 	}
 
 	@Override
 	public String getPhotoListDescription() {
-		return null;
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo list description", services );
+
+		addUser( translatableMessage );
+
+		addGenre( translatableMessage );
+
+		addMarks( translatableMessage );
+
+		return translatableMessage.build( getLanguage() );
 	}
 }

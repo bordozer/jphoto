@@ -184,7 +184,7 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
 
-		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
+		data.setPhotoListTitle( new PhotoGalleryTitle( criterias, services ) );
 
 		photoListDatas.add( data );
 

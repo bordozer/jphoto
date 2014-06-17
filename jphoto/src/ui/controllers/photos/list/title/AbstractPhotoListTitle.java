@@ -3,7 +3,12 @@ package ui.controllers.photos.list.title;
 import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
+import core.services.utils.DateUtilsService;
+import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import ui.context.EnvironmentContext;
+
+import java.util.Date;
 
 public abstract class AbstractPhotoListTitle {
 
@@ -23,25 +28,63 @@ public abstract class AbstractPhotoListTitle {
 		return EnvironmentContext.getLanguage();
 	}
 
-	/*public static AbstractPhotoListTitle getInstance( final PhotoListCriterias criterias, final boolean isDescription, final Language language, final Services services ) {
+	protected void addGenre( final TranslatableMessage translatableMessage ) {
+		if ( criterias.getGenre() != null ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: in category" )
+				.worldSeparator()
+				.addGenreNameParameter( criterias.getGenre() )
+			;
+		}
+	}
 
-		if ( criterias.isTopBestPhotoList() ) {
+	protected void addUser( final TranslatableMessage translatableMessage ) {
+		if ( criterias.getUser() != null ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: of member" )
+				.worldSeparator()
+				.addUserCardLinkParameter( criterias.getUser() )
+			;
+		}
+	}
 
-			if ( isDescription ) {
-				return new TopBestPhotoListDescription( criterias, services );
-			}
+	protected void addMarks( final TranslatableMessage translatableMessage ) {
+		if ( criterias.getMinimalMarks() > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: that got at least" )
+				.string( " " )
+				.addIntegerParameter( criterias.getMinimalMarks() )
+				.worldSeparator()
+				.translatableString( "ROD PLURAL marks" )
+			;
+		}
+	}
 
-			return new TopBestPhotoListTitle( criterias, services );
+	protected void addVotingDateRange( final TranslatableMessage translatableMessage ) {
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+
+		final Date votingTimeFrom = criterias.getVotingTimeFrom();
+		final Date votingTimeTo = criterias.getVotingTimeTo();
+
+		if ( dateUtilsService.isEmptyTime( votingTimeFrom ) || dateUtilsService.isEmptyTime( votingTimeTo ) ) {
+			return;
 		}
 
-		if ( isDescription ) {
-			return new PhotoListDescription( criterias, services );
+		final Date votingDateFrom = dateUtilsService.getFirstSecondOfDay( votingTimeFrom );
+		final Date votingDateTo = dateUtilsService.getFirstSecondOfDay( votingTimeTo );
+
+		if ( votingDateTo.getTime() == dateUtilsService.getFirstSecondOfToday().getTime() ) {
+			translatableMessage
+				.worldSeparator()
+				.translatableString( "Top best photo list title: for the last" )
+				.worldSeparator()
+				.addIntegerParameter( dateUtilsService.getDifferenceInDays( votingDateFrom, votingDateTo ) )
+				.worldSeparator()
+				.translatableString( "ROD PLURAL days" )
+			;
 		}
-
-		return new PhotoListTitle( criterias, services );
-	}*/
-
-	/*public static AbstractPhotoListTitle getEmptyPhotoListTitle() {
-		return new EmptyPhotoListTitle();
-	}*/
+	}
 }

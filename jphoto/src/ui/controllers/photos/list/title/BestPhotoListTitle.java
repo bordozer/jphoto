@@ -12,17 +12,25 @@ public class BestPhotoListTitle extends AbstractPhotoListTitle {
 
 	@Override
 	public String getPhotoListTitle() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "The best photos", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Best photo list title", services );
 
-		if ( criterias.getUser() != null ) {
-//			translatableMessage.string(  )
-		}
+		addUser( translatableMessage );
+
+		addGenre( translatableMessage );
 
 		return translatableMessage.build( getLanguage() );
 	}
 
 	@Override
 	public String getPhotoListDescription() {
-		return null;
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "Best photo list description", services );
+
+		addUser( translatableMessage );
+
+		addGenre( translatableMessage );
+
+		addMarks( translatableMessage );
+
+		return translatableMessage.build( getLanguage() );
 	}
 }
