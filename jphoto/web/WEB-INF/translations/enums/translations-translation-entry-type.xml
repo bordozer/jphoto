@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>TranslationEntryType: Translated</nerd>
+		<ru><![CDATA[Переведено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>TranslationEntryType: Nerd</nerd>
+		<ru><![CDATA[Нёрд]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>TranslationEntryType: Language tag is missed in translation.xml</nerd>
+		<ru><![CDATA[Тэг языка пропущен в xml-файле перевода]]></ru>
+	</translation>
+
+</translations>

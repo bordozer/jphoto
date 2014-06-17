@@ -71,7 +71,7 @@
 	</script>
 
 	<div id="sendPrivateMessageToUserDivId" title="..." style="display: none;">
-		<html:textarea inputId="privateMessageTextId" title="${eco:translate('Message')}" hint="${eco:translate('Private message text')}" rows="7" cols="50" />
+		<html:textarea inputId="privateMessageTextId" title="${eco:translate('Private message form: Title')}" hint="${eco:translate('Private message form: Text')}" rows="7" cols="50" />
 	</div>
 
 	<script type="text/javascript">

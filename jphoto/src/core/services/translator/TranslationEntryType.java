@@ -2,9 +2,9 @@ package core.services.translator;
 
 public enum TranslationEntryType {
 
-	TRANSLATED( "Translated" )
-	, NERD_TRANSLATION( "Nerd" )
-	, MISSED_LANGUAGE( "Language tag is missed in translation.xml" )
+	TRANSLATED( "TranslationEntryType: Translated" )
+	, NERD_TRANSLATION( "TranslationEntryType: Nerd" )
+	, MISSED_LANGUAGE( "TranslationEntryType: Language tag is missed in translation.xml" )
 	;
 
 	private final String description;

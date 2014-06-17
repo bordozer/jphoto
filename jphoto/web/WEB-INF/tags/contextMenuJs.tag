@@ -24,7 +24,7 @@
 <c:set var="menuType_PhotoId" value="<%=EntryMenuType.PHOTO.getId()%>" />
 
 <div id="${sendComplaintDivId}" title="..." style="display: none;">
-	<html:textarea inputId="${customDescriptionTextId}" title="${eco:translate('Message')}" rows="7" cols="50" />
+	<html:textarea inputId="${customDescriptionTextId}" title="${eco:translate('Send complaint form: Message')}" rows="7" cols="50" />
 </div>
 
 <script type="text/javascript">

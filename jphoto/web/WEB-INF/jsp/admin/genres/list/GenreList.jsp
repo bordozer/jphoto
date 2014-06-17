@@ -25,7 +25,7 @@
 	</links:genreNew>
 
 	<translations:genres>
-		<html:img32 src="icons32/translate.png" alt="${eco:translate('Genres translations')}" />
+		<html:img32 src="icons32/translate.png" alt="${eco:translate('Genre list: Genres translations')}" />
 	</translations:genres>
 
 	<br/>
@@ -39,14 +39,14 @@
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "id" )}</table:td>
-			<table:td width="200">${eco:translate( "Member name" )}</table:td>
+			<table:td width="200">${eco:translate( "Genre list: Member name" )}</table:td>
 
-			<table:td>${eco:translate( "Can contain nude" )}</table:td>
-			<table:td>${eco:translate( "Contains nude" )}</table:td>
+			<table:td>${eco:translate( "Genre list: Can contain nude" )}</table:td>
+			<table:td>${eco:translate( "Genre list: Contains nude" )}</table:td>
 
-			<table:td>${eco:translate( "Photos Qty" )}</table:td>
-			<table:td>${eco:translate( "Min marks" )}</table:td>
-			<table:td>${eco:translate( "Voting categories" )}</table:td>
+			<table:td>${eco:translate( "Genre list: Photos Qty" )}</table:td>
+			<table:td>${eco:translate( "Genre list: Min marks" )}</table:td>
+			<table:td>${eco:translate( "Genre list: Voting categories" )}</table:td>
 		</jsp:attribute>
 
 		<jsp:body>

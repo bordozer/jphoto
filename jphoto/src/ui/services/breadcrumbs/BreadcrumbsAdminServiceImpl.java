@@ -264,7 +264,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAnonymousDaysBreadcrumbs() {
-		final String nerd = translatorService.translate( "Anonymous Posting Days", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Anonymous Posting Days", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -274,7 +274,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getTranslatorBreadcrumbs() {
-		final String nerd = translatorService.translate( "Translator", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Translator", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -284,7 +284,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getControlPanelTitleBreadcrumbs() {
-		final String nerd = translatorService.translate( "Control panel", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Control panel", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -294,8 +294,8 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getUsersReportBreadcrumbs() {
-		final String root = translatorService.translate( "Tile data: Reports", EnvironmentContext.getLanguage() );
-		final String nerd = translatorService.translate( "Tile data: Users", EnvironmentContext.getLanguage() );
+		final String root = translatorService.translate( "Breadcrumbs: Reports", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Users", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), root, nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), root, nerd );
@@ -305,7 +305,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getGenresTranslationsBreadcrumbs() {
-		final String nerd = translatorService.translate( "Genres translations", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Genres translations", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminGenresRootLink( EnvironmentContext.getLanguage() ), nerd );

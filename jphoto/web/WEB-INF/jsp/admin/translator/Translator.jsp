@@ -58,11 +58,11 @@
 		<div class="left-pane">
 
 			<c:if test="${isTranslatedMode}"><span class='selected'></c:if>
-			<a href="${eco:baseAdminUrl()}/translator/">${eco:translate('Translated')}</a>
+			<a href="${eco:baseAdminUrl()}/translator/">${eco:translate('Translator: Translated')}</a>
 			<c:if test="${isTranslatedMode}"></span></c:if>
 			&nbsp;&nbsp;
 			<c:if test="${isUntranslatedMode}"><span class='selected'></c:if>
-			<a href="${eco:baseAdminUrl()}/translator/untranslated/">${eco:translate('Untranslated')}</a>
+			<a href="${eco:baseAdminUrl()}/translator/untranslated/">${eco:translate('Translator: Untranslated')}</a>
 			<c:if test="${isUntranslatedMode}"></span></c:if>
 
 			<br/>
