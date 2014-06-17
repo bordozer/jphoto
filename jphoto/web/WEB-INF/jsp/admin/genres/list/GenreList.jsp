@@ -39,7 +39,7 @@
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "" )}</table:td>
 			<table:td>${eco:translate( "id" )}</table:td>
-			<table:td width="200">${eco:translate( "Genre list: Member name" )}</table:td>
+			<table:td width="200">${eco:translate( "Genre list: Genre system name" )}</table:td>
 
 			<table:td>${eco:translate( "Genre list: Can contain nude" )}</table:td>
 			<table:td>${eco:translate( "Genre list: Contains nude" )}</table:td>
