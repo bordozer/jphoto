@@ -25,7 +25,7 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, MENU_LANGUAGE, getServices() );
 
-		assertEquals( WRONG_MENU_TITLE, String.format( "Comment: #%d", comment.getId() ), entryMenu.getMenuTitle() );
+		assertEquals( WRONG_MENU_TITLE, String.format( "EntryMenuType: Comment: #%d", comment.getId() ), entryMenu.getMenuTitle() );
 	}
 
 	@Test
@@ -38,6 +38,6 @@ public class EntryMenuTest extends AbstractTestCase {
 
 		final EntryMenu entryMenu = new EntryMenu( comment, EntryMenuType.COMMENT, menuEntries, MENU_LANGUAGE, getServices() );
 
-		assertEquals( WRONG_MENU_TITLE, translated( String.format( "Comment: #%d ( deleted )", comment.getId()) ), entryMenu.getMenuTitle() );
+		assertEquals( WRONG_MENU_TITLE, translated( String.format( "EntryMenuType: Comment: #%d ( MenuTitle: the comment is deleted )", comment.getId()) ), entryMenu.getMenuTitle() );
 	}
 }
