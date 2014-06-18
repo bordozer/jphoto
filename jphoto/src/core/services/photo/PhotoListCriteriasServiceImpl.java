@@ -136,7 +136,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		return builder.toString();
 	}*/
 
-	private void addVotingTimeText( final PhotoListCriterias criterias, final StringBuilder builder, final Language language ) {
+	/*private void addVotingTimeText( final PhotoListCriterias criterias, final StringBuilder builder, final Language language ) {
 		final Date votingTimeFrom = criterias.getVotingTimeFrom();
 		final Date votingTimeTo = criterias.getVotingTimeTo();
 
@@ -158,7 +158,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 				builder.append( String.format( " - %s ", dateUtilsService.formatDate( votingTimeTo ) ) );
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias, final Language language ) {

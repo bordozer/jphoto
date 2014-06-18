@@ -6,21 +6,22 @@ import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
-import ui.context.EnvironmentContext;
 
 import java.util.Date;
 
 public abstract class AbstractPhotoListTitle {
 
 	protected PhotoListCriterias criterias;
+	protected Language language;
 	protected Services services;
 
 	public abstract String getPhotoListTitle();
 
 	public abstract String getPhotoListDescription();
 
-	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Services services ) {
+	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Language language, final Services services ) {
 		this.criterias = criterias;
+		this.language = language;
 		this.services = services;
 	}
 
@@ -36,8 +37,6 @@ public abstract class AbstractPhotoListTitle {
 		addVotingDateRange( translatableMessage );
 
 		addVotingCategoryTitle( translatableMessage );
-
-//		addMembershipType( translatableMessage );
 
 		return translatableMessage.build( getLanguage() );
 	}
@@ -228,6 +227,6 @@ public abstract class AbstractPhotoListTitle {
 	}
 
 	protected Language getLanguage() {
-		return EnvironmentContext.getLanguage();
+		return language;
 	}
 }

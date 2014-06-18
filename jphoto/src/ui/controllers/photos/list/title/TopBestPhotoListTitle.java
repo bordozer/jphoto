@@ -2,11 +2,12 @@ package ui.controllers.photos.list.title;
 
 import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
+import core.services.translator.Language;
 
 public class TopBestPhotoListTitle extends AbstractPhotoListTitle {
 
-	public TopBestPhotoListTitle( final PhotoListCriterias criterias, final Services services ) {
-		super( criterias, services );
+	public TopBestPhotoListTitle( final PhotoListCriterias criterias, final Language language, final Services services ) {
+		super( criterias, language, services );
 	}
 
 	@Override
