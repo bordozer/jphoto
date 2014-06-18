@@ -2,7 +2,6 @@ package ui.controllers.photos.list.title;
 
 import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
-import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
@@ -12,20 +11,18 @@ import java.util.Date;
 public abstract class AbstractPhotoListTitle {
 
 	protected PhotoListCriterias criterias;
-	protected Language language;
 	protected Services services;
 
-	public abstract String getPhotoListTitle();
+	public abstract TranslatableMessage getPhotoListTitle();
 
-	public abstract String getPhotoListDescription();
+	public abstract TranslatableMessage getPhotoListDescription();
 
-	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Language language, final Services services ) {
+	public AbstractPhotoListTitle( final PhotoListCriterias criterias, final Services services ) {
 		this.criterias = criterias;
-		this.language = language;
 		this.services = services;
 	}
 
-	protected String getTitle( final String nerd ) {
+	protected TranslatableMessage getTitle( final String nerd ) {
 		final TranslatableMessage translatableMessage = new TranslatableMessage( nerd, services );
 
 		addUser( translatableMessage );
@@ -38,10 +35,12 @@ public abstract class AbstractPhotoListTitle {
 
 		addVotingCategoryTitle( translatableMessage );
 
-		return translatableMessage.build( getLanguage() );
+//		addMembershipType( translatableMessage );
+
+		return translatableMessage;
 	}
 
-	protected String addDescription( final String nerd ) {
+	protected TranslatableMessage addDescription( final String nerd ) {
 		final TranslatableMessage translatableMessage = new TranslatableMessage( nerd, services );
 
 		addUser( translatableMessage );
@@ -60,7 +59,7 @@ public abstract class AbstractPhotoListTitle {
 
 		addMembershipType( translatableMessage );
 
-		return translatableMessage.build( getLanguage() );
+		return translatableMessage;
 	}
 
 	private void addUser( final TranslatableMessage translatableMessage ) {
@@ -224,9 +223,5 @@ public abstract class AbstractPhotoListTitle {
 			.worldSeparator()
 			.translatableString( criterias.getMembershipType().getNamePlural() )
 		;
-	}
-
-	protected Language getLanguage() {
-		return language;
 	}
 }

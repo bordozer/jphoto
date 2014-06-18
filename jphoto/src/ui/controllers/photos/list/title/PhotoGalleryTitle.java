@@ -8,17 +8,17 @@ import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 public class PhotoGalleryTitle extends AbstractPhotoListTitle {
 
-	public PhotoGalleryTitle( final PhotoListCriterias criterias, final Language language, final Services services ) {
-		super( criterias, language, services );
+	public PhotoGalleryTitle( final PhotoListCriterias criterias, final Services services ) {
+		super( criterias, services );
 	}
 
 	@Override
-	public String getPhotoListTitle() {
-		return new TranslatableMessage( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services ).build( getLanguage() );
+	public TranslatableMessage getPhotoListTitle() {
+		return new TranslatableMessage( BreadcrumbsBuilder.BREADCRUMBS_PHOTO_GALLERY_ROOT, services );
 	}
 
 	@Override
-	public String getPhotoListDescription() {
-		return new TranslatableMessage( "Photo gallery title: descriptions", services ).build( getLanguage() );
+	public TranslatableMessage getPhotoListDescription() {
+		return new TranslatableMessage( "Photo gallery title: descriptions", services );
 	}
 }

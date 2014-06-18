@@ -108,7 +108,11 @@ public class AbstractTestCase {
 
 	protected ServicesImpl getServices() {
 		final ServicesImpl services = new ServicesImpl();
+
 		services.setTranslatorService( translatorService );
+		services.setDateUtilsService( dateUtilsService );
+		services.setEntityLinkUtilsService( entityLinkUtilsService );
+		services.setSystemVarsService( systemVarsServiceMock );
 
 		return services;
 	}
