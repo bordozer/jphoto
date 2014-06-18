@@ -181,7 +181,11 @@ public class PhotoListEntryController {
 			, translatorService.translate( "Photo preview: Previews count: $1", getLanguage(), previewsCount )
 			)
 		);
-		photoEntry.setPreviewsCount( previewsCount );
+		photoEntry.setPreviewsCount( String.format( "<a href='%s' title='%s'>%s<a/>"
+			, urlUtilsService.getPhotoPreviewsListLink( photo.getId() )
+			, translatorService.translate( "Photo preview: Show preview history", getLanguage() )
+			, previewsCount
+		) );
 
 		final String commentsCount = String.valueOf( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 		photoEntry.setCommentsIcon( String.format( "<img src='%s/photo_preview_comments_icon.png' height='8' title='%s'>"
