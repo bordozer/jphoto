@@ -41,7 +41,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( validationResult.getValidationMessage(), translated( "You are not logged in." ) );
+		assertEquals( validationResult.getValidationMessage(), translated( "ValidationResult: You are not logged in." ) );
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( "You can not vote for your own rank." ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( "ValidationResult: You can not vote for your own rank." ) );
 	}
 
 	@Test
@@ -77,7 +77,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( "You are not the member yet. Voting for member ranks in photo categories is not allowed to candidates." ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( "ValidationResult: You are not the member yet. Voting for member ranks in photo categories is not allowed to candidates." ) );
 	}
 
 	@Test
@@ -107,7 +107,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You have an negative rank in category '%s'.", translatorService.translateGenre( genre, Language.EN ) ) ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "ValidationResult: You have an negative rank in category '%s'.", translatorService.translateGenre( genre, Language.EN ) ) ) );
 	}
 
 	@Test
@@ -143,7 +143,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
-				, translated( String.format( "You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), translatorService.translateGenre( genre, Language.EN ) ) ) );
+				, translated( String.format( "ValidationResult: You have already voted when member's rank is %s in category '%s'", String.valueOf( userRankInGenre ), translatorService.translateGenre( genre, Language.EN ) ) ) );
 	}
 
 	@Test
@@ -189,7 +189,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
 		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage()
-			, translated( String.format( "The member does not have enough photos in category %s ( there are %s photos but has to be at least %s ones )."
+			, translated( String.format( "ValidationResult: The member does not have enough photos in category %s ( there are %s photos but has to be at least %s ones )."
 			, translatorService.translateGenre( genre, Language.EN ), String.valueOf( userPhotosInGenre ), String.valueOf( minPhotosQtyForGenreRankVoting ) ) )
 		);
 	}
@@ -242,7 +242,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "You are in the black list of %s.", user.getNameEscaped() ) ) );
+		assertEquals( VALIDATION_MESSAGE_IS_WRONG, validationResult.getValidationMessage(), translated( String.format( "ValidationResult: You are in the black list of %s.", user.getNameEscaped() ) ) );
 	}
 
 	@Test

@@ -108,7 +108,7 @@ public class AbstractCommentGoToAuthorPhotosTest extends AbstractCommentMenuItem
 			}
 
 			@Override
-			public AbstractEntryMenuItemCommand getMenuItemCommand() {
+			public AbstractEntryMenuItemCommand<PhotoComment> getMenuItemCommand() {
 				return null; // does not matter
 			}
 		};
