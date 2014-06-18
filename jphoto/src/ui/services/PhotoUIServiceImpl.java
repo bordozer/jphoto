@@ -10,7 +10,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
-import core.services.conversion.PhotoPreviewService;
+import core.services.photo.PhotoPreviewService;
 import core.services.entry.GenreService;
 import core.services.photo.*;
 import core.services.security.SecurityService;

@@ -22,7 +22,7 @@
 	<bean id="notificationService" class="core.services.notification.NotificationServiceImpl"/>
 	<bean id="userRankService" class="core.services.user.UserRankServiceImpl"/>
 	<bean id="photoUploadService" class="core.services.photo.PhotoUploadServiceImpl"/>
-	<bean id="photoPreviewService" class="core.services.conversion.PhotoPreviewServiceImpl"/>
+	<bean id="photoPreviewService" class="core.services.photo.PhotoPreviewServiceImpl"/>
 	<bean id="photoRatingService" class="core.services.photo.PhotoRatingServiceImpl"/>
 	<bean id="photoAwardService" class="core.services.photo.PhotoAwardServiceImpl"/>
 	<bean id="userTeamService" class="core.services.user.UserTeamServiceImpl"/>

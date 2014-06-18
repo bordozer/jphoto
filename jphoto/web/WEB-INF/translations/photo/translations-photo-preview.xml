@@ -33,8 +33,33 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo preview: Previews count: $1</nerd>
+		<ru><![CDATA[К-во просмотров: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview: Comments count: $1</nerd>
+		<ru><![CDATA[К-во комментариев: $1]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
-		<ru><![CDATA[до $1]]></ru>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 </translations>

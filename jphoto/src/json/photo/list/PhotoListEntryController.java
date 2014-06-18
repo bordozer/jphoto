@@ -5,8 +5,10 @@ import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.photo.PhotoPreviewService;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
+import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
@@ -43,6 +45,12 @@ public class PhotoListEntryController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private PhotoCommentService photoCommentService;
+
+	@Autowired
+	private PhotoPreviewService photoPreviewService;
 
 	@Autowired
 	private UserService userService;
@@ -166,6 +174,23 @@ public class PhotoListEntryController {
 		photoEntry.setTotalMarks( getTotalMarks( photo ) );
 		photoEntry.setTotalMarksUrl( urlUtilsService.getPhotoMarksListLink( photo.getId() ) );
 		photoEntry.setTotalMarksTitle( translatorService.translate( "Photo preview: The photo's total marks", getLanguage() ) );
+
+		final String previewsCount = String.valueOf( photoPreviewService.getPreviewCount( photo.getId() ) );
+		photoEntry.setPreviewsIcon( String.format( "<img src='%s/photo_preview_views_icon.png' height='8' title='%s'>"
+			, urlUtilsService.getSiteImagesPath()
+			, translatorService.translate( "Photo preview: Previews count: $1", getLanguage(), previewsCount )
+			)
+		);
+		photoEntry.setPreviewsCount( previewsCount );
+
+		final String commentsCount = String.valueOf( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
+		photoEntry.setCommentsIcon( String.format( "<img src='%s/photo_preview_comments_icon.png' height='8' title='%s'>"
+			, urlUtilsService.getSiteImagesPath()
+			, translatorService.translate( "Photo preview: Comments count: $1", getLanguage(), commentsCount )
+			)
+		);
+		photoEntry.setCommentsCount( commentsCount );
+
 	}
 
 	private int getTodayMarks( final Photo photo ) {

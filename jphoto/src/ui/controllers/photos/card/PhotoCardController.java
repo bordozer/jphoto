@@ -8,7 +8,7 @@ import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.log.LogHelper;
-import core.services.conversion.PhotoPreviewService;
+import core.services.photo.PhotoPreviewService;
 import core.services.entry.GenreService;
 import core.services.menu.EntryMenuService;
 import core.services.photo.PhotoCommentService;

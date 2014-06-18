@@ -9,7 +9,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.log.LogHelper;
-import core.services.conversion.PhotoPreviewService;
+import core.services.photo.PhotoPreviewService;
 import core.services.photo.PhotoService;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;

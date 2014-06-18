@@ -1,7 +1,7 @@
 package admin.controllers.control;
 
 import core.general.cache.CacheKey;
-import core.services.conversion.PhotoPreviewService;
+import core.services.photo.PhotoPreviewService;
 import core.services.entry.PrivateMessageService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;

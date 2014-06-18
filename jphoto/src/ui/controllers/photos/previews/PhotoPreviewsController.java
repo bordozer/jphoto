@@ -3,7 +3,7 @@ package ui.controllers.photos.previews;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
-import core.services.conversion.PhotoPreviewService;
+import core.services.photo.PhotoPreviewService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;

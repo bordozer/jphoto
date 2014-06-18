@@ -29,6 +29,12 @@ public class PhotoEntryDTO {
 	private String totalMarksUrl;
 	private String totalMarksTitle;
 
+	private String previewsIcon;
+	private String commentsIcon;
+
+	private String previewsCount;
+	private String commentsCount;
+
 	private boolean showAnonymousPeriodExpirationInfo;
 	private String photoAnonymousPeriodExpirationInfo;
 
@@ -234,5 +240,37 @@ public class PhotoEntryDTO {
 
 	public void setPhotoBookmarkIcons( final List<PhotoBookmarkIcon> photoBookmarkIcons ) {
 		this.photoBookmarkIcons = photoBookmarkIcons;
+	}
+
+	public String getPreviewsIcon() {
+		return previewsIcon;
+	}
+
+	public void setPreviewsIcon( final String previewsIcon ) {
+		this.previewsIcon = previewsIcon;
+	}
+
+	public String getCommentsIcon() {
+		return commentsIcon;
+	}
+
+	public void setCommentsIcon( final String commentsIcon ) {
+		this.commentsIcon = commentsIcon;
+	}
+
+	public String getPreviewsCount() {
+		return previewsCount;
+	}
+
+	public void setPreviewsCount( final String previewsCount ) {
+		this.previewsCount = previewsCount;
+	}
+
+	public String getCommentsCount() {
+		return commentsCount;
+	}
+
+	public void setCommentsCount( final String commentsCount ) {
+		this.commentsCount = commentsCount;
 	}
 }

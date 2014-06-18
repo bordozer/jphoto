@@ -1,4 +1,4 @@
-package core.services.conversion;
+package core.services.photo;
 
 import core.general.photo.PhotoPreview;
 import core.interfaces.BaseEntityService;
