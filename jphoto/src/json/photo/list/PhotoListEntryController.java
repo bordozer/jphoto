@@ -94,35 +94,40 @@ public class PhotoListEntryController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
-
-		final User currentUser = getCurrentUser();
+	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
 
 		final Photo photo = photoService.load( photoId );
 
 		final boolean doesPreviewHasToBeHidden = doesPreviewHasToBeHidden( photo, request );
 
-		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( currentUser.getId(), photoId );
+		return photoListEntry( photo, doesPreviewHasToBeHidden, EnvironmentContext.getLanguage() );
+	}
+
+	public PhotoEntryDTO photoListEntry( final Photo photo, final boolean doesPreviewHasToBeHidden, final Language language ) {
+
+		final User currentUser = getCurrentUser();
+
+		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( currentUser.getId(), photo.getId() );
 
 		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
-		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo ) );
-		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
-		photoEntry.setPhotoImage( getPhotoPreview( photo, doesPreviewHasToBeHidden ) );
+		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
+		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
+		photoEntry.setPhotoImage( getPhotoPreview( photo, doesPreviewHasToBeHidden, language ) );
 
 		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
 		if ( doesPreviewHasToBeHidden ) {
-			photoEntry.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", getLanguage() ) );
+			photoEntry.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
 		} else {
-			photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
+			photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
 		}
-		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo ) );
+		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo, language ) );
 
-		setPhotoStatistics( photo, photoEntry, doesPreviewHasToBeHidden );
+		setPhotoStatistics( photo, photoEntry, doesPreviewHasToBeHidden, language );
 
 		setUserRank( photo, photoEntry );
 
-		setPhotoAnonymousPeriodExpiration( photo, photoEntry );
+		setPhotoAnonymousPeriodExpiration( photo, photoEntry, language );
 
 		final boolean userOwnThePhoto = securityService.userOwnThePhoto( currentUser, photo );
 		final boolean isSuperAdminUser = securityService.isSuperAdminUser( currentUser );
@@ -151,19 +156,19 @@ public class PhotoListEntryController {
 		return request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() ) && securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 	}
 
-	private String getPhotoUploadDate( final Photo photo ) {
+	private String getPhotoUploadDate( final Photo photo, final Language language ) {
 		final Date uploadTime = photo.getUploadTime();
 
 		final String shownTime = dateUtilsService.isItToday( uploadTime ) ? dateUtilsService.formatTimeShort( uploadTime ) : dateUtilsService.formatDateTimeShort( uploadTime );
 
 		return String.format( "<a href='%s' title='%s'>%s</a>"
 			, urlUtilsService.getPhotosUploadedOnDateUrl( uploadTime )
-			, translatorService.translate( "Photo preview: show all photos uploaded at $1", getLanguage(), dateUtilsService.formatDate( uploadTime ) )
+			, translatorService.translate( "Photo preview: show all photos uploaded at $1", language, dateUtilsService.formatDate( uploadTime ) )
 			, shownTime
 		);
 	}
 
-	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry, final boolean doesPreviewHasToBeHidden ) {
+	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry, final boolean doesPreviewHasToBeHidden, final Language language ) {
 		final boolean showPhotoStatistics = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC );
 		photoEntry.setShowStatistics( showPhotoStatistics );
 
@@ -172,17 +177,17 @@ public class PhotoListEntryController {
 		}
 
 		photoEntry.setTodayMarks( getTodayMarks( photo ) );
-		photoEntry.setTodayMarksTitle( translatorService.translate( "Photo preview: The photo's today's marks", getLanguage() ) );
+		photoEntry.setTodayMarksTitle( translatorService.translate( "Photo preview: The photo's today's marks", language ) );
 
 		photoEntry.setPeriodMarks( getPeriodMarks( photo ) );
 		final int period = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 		photoEntry.setPeriodMarksTitle( translatorService.translate( "Photo preview: The photo's marks for period from $1 to $2"
-			, getLanguage()
+			, language
 			, dateUtilsService.formatDate( dateUtilsService.getDatesOffsetFromCurrentDate( -period ) )
 			, dateUtilsService.formatDate( dateUtilsService.getCurrentTime() )
 		));
 
-		final String totalMarksTitle = translatorService.translate( "Photo preview: The photo's total marks", getLanguage() );
+		final String totalMarksTitle = translatorService.translate( "Photo preview: The photo's total marks", language );
 		final int totalMarks = getTotalMarks( photo );
 		if ( doesPreviewHasToBeHidden ) {
 			photoEntry.setTotalMarks( String.format( "<span title='%s'>%d</span>", totalMarksTitle, totalMarks ) );
@@ -195,19 +200,19 @@ public class PhotoListEntryController {
 		final String previewsCount = String.valueOf( photoPreviewService.getPreviewCount( photo.getId() ) );
 		photoEntry.setPreviewsIcon( String.format( "<img src='%s/photo_preview_views_icon.png' height='8' title='%s'>"
 			, urlUtilsService.getSiteImagesPath()
-			, translatorService.translate( "Photo preview: Previews count: $1", getLanguage(), previewsCount )
+			, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
 			)
 		);
 		if ( doesPreviewHasToBeHidden ) {
 			photoEntry.setPreviewsCount( String.format( "<span title='%s'>%s</span>"
-				, translatorService.translate( "Photo preview: Previews count: $1", getLanguage(), previewsCount )
+				, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
 				, previewsCount
 				)
 			);
 		} else {
 			photoEntry.setPreviewsCount( String.format( "<a href='%s' title='%s'>%s</a>"
 				, urlUtilsService.getPhotoPreviewsListLink( photo.getId() )
-				, translatorService.translate( "Photo preview: Show preview history", getLanguage() )
+				, translatorService.translate( "Photo preview: Show preview history", language )
 				, previewsCount
 			) );
 		}
@@ -216,11 +221,11 @@ public class PhotoListEntryController {
 		final String commentsCount = String.valueOf( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 		photoEntry.setCommentsIcon( String.format( "<img src='%s/photo_preview_comments_icon.png' height='8' title='%s'>"
 			, urlUtilsService.getSiteImagesPath()
-			, translatorService.translate( "Photo preview: Comments count: $1", getLanguage(), commentsCount )
+			, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
 			)
 		);
 		photoEntry.setCommentsCount( String.format( "<span title='%s'>%s</span>"
-			, translatorService.translate( "Photo preview: Comments count: $1", getLanguage(), commentsCount )
+			, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
 			, commentsCount
 			)
 		);
@@ -246,24 +251,24 @@ public class PhotoListEntryController {
 		return String.format( "<input type='checkbox' id='%s' name='%s' class='%s' value='%s' />", id, id, id, photo.getId() );
 	}
 
-	private String getPhotoCategory( final int genreId ) {
+	private String getPhotoCategory( final int genreId, Language language ) {
 		final Genre genre = genreService.load( genreId );
-		return entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() );
+		return entityLinkUtilsService.getPhotosByGenreLink( genre, language );
 	}
 
-	private String getPhotoPreview( final Photo photo, final boolean doesPreviewHasToBeHidden ) {
+	private String getPhotoPreview( final Photo photo, final boolean doesPreviewHasToBeHidden, final Language language ) {
 
 		if ( doesPreviewHasToBeHidden ) {
 			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
 				, urlUtilsService.getSiteImagesPath()
-				, translatorService.translate( "Photo preview: The photo is within anonymous period", getLanguage() )
+				, translatorService.translate( "Photo preview: The photo is within anonymous period", language )
 			);
 		}
 
 		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
 			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
 				, urlUtilsService.getPhotoCardLink( photo.getId() )
-				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", getLanguage() ) )
+				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", language ) )
 				, urlUtilsService.getSiteImagesPath()
 			);
 		}
@@ -275,7 +280,7 @@ public class PhotoListEntryController {
 		);
 	}
 
-	private String getPhotoAuthorLink( final Photo photo ) {
+	private String getPhotoAuthorLink( final Photo photo, final Language language ) {
 		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 
 		if ( hideAuthorName ) {
@@ -283,7 +288,7 @@ public class PhotoListEntryController {
 		}
 
 		final User user = userService.load( photo.getUserId() );
-		return entityLinkUtilsService.getUserCardLink( user, getLanguage() );
+		return entityLinkUtilsService.getUserCardLink( user, language );
 	}
 
 	private void setUserRank( final Photo photo, final PhotoEntryDTO photoEntry ) {
@@ -309,12 +314,12 @@ public class PhotoListEntryController {
 		photoEntry.setPhotoAuthorRank( builder.toString() );
 	}
 
-	private void setPhotoAnonymousPeriodExpiration( final Photo photo, final PhotoEntryDTO photoEntry ) {
+	private void setPhotoAnonymousPeriodExpiration( final Photo photo, final PhotoEntryDTO photoEntry, final Language language ) {
 		final boolean showAnonymousPeriodExpirationInfo = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
 		if ( showAnonymousPeriodExpirationInfo ) {
 			photoEntry.setShowUserRank( false );
-			final String expirationInfo = translatorService.translate( "Photo preview: Anonymous posting till $1", getLanguage(), dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
+			final String expirationInfo = translatorService.translate( "Photo preview: Anonymous posting till $1", language, dateUtilsService.formatDateTimeShort( photoService.getPhotoAnonymousPeriodExpirationTime( photo ) ) );
 			photoEntry.setPhotoAnonymousPeriodExpirationInfo( expirationInfo );
 		}
 	}
