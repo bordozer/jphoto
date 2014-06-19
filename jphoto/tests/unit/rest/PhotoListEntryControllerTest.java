@@ -333,6 +333,19 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Comments count: 67'>67</span>", dto.getCommentsCount() );
 	}
 
+	@Test
+	public void showPostedAnonymouslyIfAnonymousPeriodHasNotPassedYetTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.photoAuthorNameMustBeHidden = true; // TRUE
+		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 ); // Anonymous period is expiring in 15 minutes
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: Anonymous posting till 20014-03-08 12:28", dto.getPhotoAnonymousPeriodExpirationInfo() );
+	}
+
 	private PhotoListEntryController getController( final TestData testData ) {
 
 		final PhotoListEntryController controller = new PhotoListEntryController();
