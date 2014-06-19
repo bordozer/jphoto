@@ -97,22 +97,21 @@ public class PhotoListEntryController {
 	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
 
 		final Photo photo = photoService.load( photoId );
+		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final boolean doesPreviewHasToBeHidden = doesPreviewHasToBeHidden( photo, request );
+		final boolean doesPreviewHasToBeHidden = request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() ) && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
 
-		return photoListEntry( photo, doesPreviewHasToBeHidden, EnvironmentContext.getLanguage() );
+		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, EnvironmentContext.getLanguage() );
 	}
 
-	public PhotoEntryDTO photoListEntry( final Photo photo, final boolean doesPreviewHasToBeHidden, final Language language ) {
+	public PhotoEntryDTO photoListEntry( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
 
-		final User currentUser = getCurrentUser();
-
-		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( currentUser.getId(), photo.getId() );
+		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( accessor.getId(), photo.getId() );
 
 		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
-		photoEntry.setPhotoImage( getPhotoPreview( photo, doesPreviewHasToBeHidden, language ) );
+		photoEntry.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language ) );
 
 		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
@@ -121,16 +120,16 @@ public class PhotoListEntryController {
 		} else {
 			photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
 		}
-		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo, language ) );
+		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo, accessor, language ) );
 
 		setPhotoStatistics( photo, photoEntry, doesPreviewHasToBeHidden, language );
 
 		setUserRank( photo, photoEntry );
 
-		setPhotoAnonymousPeriodExpiration( photo, photoEntry, language );
+		setPhotoAnonymousPeriodExpiration( photo, accessor, photoEntry, language );
 
-		final boolean userOwnThePhoto = securityService.userOwnThePhoto( currentUser, photo );
-		final boolean isSuperAdminUser = securityService.isSuperAdminUser( currentUser );
+		final boolean userOwnThePhoto = securityService.userOwnThePhoto( accessor, photo );
+		final boolean isSuperAdminUser = securityService.isSuperAdminUser( accessor );
 
 		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
 
@@ -143,17 +142,13 @@ public class PhotoListEntryController {
 
 			final int favoriteEntryTypeId = favoriteEntryType.getId();
 
-			if ( favoritesService.isEntryInFavorites( currentUser.getId(), photo.getId(), favoriteEntryTypeId ) ) {
+			if ( favoritesService.isEntryInFavorites( accessor.getId(), photo.getId(), favoriteEntryTypeId ) ) {
 				photoBookmarkIcons.add( new PhotoBookmarkIcon( favoriteEntryTypeId ) );
 			}
 		}
 		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );
 
 		return photoEntry;
-	}
-
-	private boolean doesPreviewHasToBeHidden( final Photo photo, final HttpServletRequest request ) {
-		return request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() ) && securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
 	}
 
 	private String getPhotoUploadDate( final Photo photo, final Language language ) {
@@ -256,7 +251,7 @@ public class PhotoListEntryController {
 		return entityLinkUtilsService.getPhotosByGenreLink( genre, language );
 	}
 
-	private String getPhotoPreview( final Photo photo, final boolean doesPreviewHasToBeHidden, final Language language ) {
+	private String getPhotoPreview( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
 
 		if ( doesPreviewHasToBeHidden ) {
 			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
@@ -265,7 +260,7 @@ public class PhotoListEntryController {
 			);
 		}
 
-		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
+		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, accessor ) ) {
 			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
 				, urlUtilsService.getPhotoCardLink( photo.getId() )
 				, String.format( "%s ( %s )", photo.getNameEscaped(), translatorService.translate( "Photo preview: Nude content", language ) )
@@ -280,15 +275,15 @@ public class PhotoListEntryController {
 		);
 	}
 
-	private String getPhotoAuthorLink( final Photo photo, final Language language ) {
-		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+	private String getPhotoAuthorLink( final Photo photo, final User accessor, final Language language ) {
+		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 
 		if ( hideAuthorName ) {
 			return configurationService.getString( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_NAME );
 		}
 
-		final User user = userService.load( photo.getUserId() );
-		return entityLinkUtilsService.getUserCardLink( user, language );
+		final User photoAuthor = userService.load( photo.getUserId() );
+		return entityLinkUtilsService.getUserCardLink( photoAuthor, language );
 	}
 
 	private void setUserRank( final Photo photo, final PhotoEntryDTO photoEntry ) {
@@ -299,8 +294,8 @@ public class PhotoListEntryController {
 			return;
 		}
 
-		final User user = userService.load( photo.getUserId() );
-		final UserRankIconContainer iconContainer = userRankService.getUserRankIconContainer( user, photo );
+		final User photoAuthor = userService.load( photo.getUserId() );
+		final UserRankIconContainer iconContainer = userRankService.getUserRankIconContainer( photoAuthor, photo );
 		final StringBuilder builder = new StringBuilder();
 
 		for ( final AbstractUserRankIcon rankIcon : iconContainer.getRankIcons() ) {
@@ -314,8 +309,8 @@ public class PhotoListEntryController {
 		photoEntry.setPhotoAuthorRank( builder.toString() );
 	}
 
-	private void setPhotoAnonymousPeriodExpiration( final Photo photo, final PhotoEntryDTO photoEntry, final Language language ) {
-		final boolean showAnonymousPeriodExpirationInfo = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+	private void setPhotoAnonymousPeriodExpiration( final Photo photo, User accessor, final PhotoEntryDTO photoEntry, final Language language ) {
+		final boolean showAnonymousPeriodExpirationInfo = securityService.isPhotoAuthorNameMustBeHidden( photo, accessor );
 		photoEntry.setShowAnonymousPeriodExpirationInfo( showAnonymousPeriodExpirationInfo );
 		if ( showAnonymousPeriodExpirationInfo ) {
 			photoEntry.setShowUserRank( false );
@@ -328,7 +323,67 @@ public class PhotoListEntryController {
 		return EnvironmentContext.getCurrentUser();
 	}
 
-	private Language getLanguage() {
-		return EnvironmentContext.getLanguage();
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
+
+	public void setPhotoCommentService( final PhotoCommentService photoCommentService ) {
+		this.photoCommentService = photoCommentService;
+	}
+
+	public void setPhotoPreviewService( final PhotoPreviewService photoPreviewService ) {
+		this.photoPreviewService = photoPreviewService;
+	}
+
+	public void setUserService( final UserService userService ) {
+		this.userService = userService;
+	}
+
+	public void setGenreService( final GenreService genreService ) {
+		this.genreService = genreService;
+	}
+
+	public void setUserPhotoFilePathUtilsService( final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService ) {
+		this.userPhotoFilePathUtilsService = userPhotoFilePathUtilsService;
+	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setEntityLinkUtilsService( final EntityLinkUtilsService entityLinkUtilsService ) {
+		this.entityLinkUtilsService = entityLinkUtilsService;
+	}
+
+	public void setConfigurationService( final ConfigurationService configurationService ) {
+		this.configurationService = configurationService;
+	}
+
+	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
+		this.urlUtilsService = urlUtilsService;
+	}
+
+	public void setPhotoVotingService( final PhotoVotingService photoVotingService ) {
+		this.photoVotingService = photoVotingService;
+	}
+
+	public void setTranslatorService( final TranslatorService translatorService ) {
+		this.translatorService = translatorService;
+	}
+
+	public void setUserRankService( final UserRankService userRankService ) {
+		this.userRankService = userRankService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
+
+	public void setSecurityUIService( final SecurityUIService securityUIService ) {
+		this.securityUIService = securityUIService;
+	}
+
+	public void setFavoritesService( final FavoritesService favoritesService ) {
+		this.favoritesService = favoritesService;
 	}
 }

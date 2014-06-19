@@ -11,6 +11,7 @@ import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
 import mocks.SystemVarsServiceMock;
+import mocks.UserMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 
@@ -168,4 +169,8 @@ public class AbstractTestCase {
 			return 1111;
 		}
 	};
+
+	protected boolean isSuperAdmin( UserMock user ) {
+		return user == SUPER_ADMIN_1 || user == SUPER_ADMIN_2;
+	}
 }
