@@ -15,6 +15,7 @@ import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
+import json.photo.list.PhotoBookmarkIcon;
 import json.photo.list.PhotoEntryDTO;
 import json.photo.list.PhotoListEntryController;
 import mocks.GenreMock;
@@ -29,7 +30,9 @@ import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
 
 public class PhotoListEntryControllerTest extends AbstractTestCase {
@@ -441,6 +444,31 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
+	}
+
+	@Test
+	public void emptyPhotoBookmarkIconsTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		final List<PhotoBookmarkIcon> array = newArrayList();
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, array, dto.getPhotoBookmarkIcons() );
+	}
+
+	@Test
+	public void favoritePhotoBookmarkIconTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.favorites = EnumSet.<FavoriteEntryType>of( FavoriteEntryType.FAVORITE_PHOTOS );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		final List<PhotoBookmarkIcon> array = newArrayList( new PhotoBookmarkIcon( FavoriteEntryType.FAVORITE_PHOTOS.getId() ) );
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, array.get( 0 ).getFavoriteEntryTypeId(), dto.getPhotoBookmarkIcons().get( 0 ).getFavoriteEntryTypeId() );
 	}
 
 	private PhotoListEntryController getController( final TestData testData ) {
