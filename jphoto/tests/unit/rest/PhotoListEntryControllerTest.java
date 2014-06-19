@@ -105,10 +105,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL
-			, String.format( "<a href='http://127.0.0.1:8085/worker/photos/date/%1$s/uploaded/' title='Photo preview: show all photos uploaded at %1$s'>00:15</a>", dateUtilsService.formatDate( firstSecondOfToday ) )
-			, dto.getPhotoUploadDate()
-		);
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, String.format( "<a href='http://127.0.0.1:8085/worker/photos/date/%1$s/uploaded/' title='Photo preview: show all photos uploaded at %1$s'>00:15</a>", dateUtilsService.formatDate( firstSecondOfToday ) ), dto.getPhotoUploadDate() );
 	}
 
 	@Test
@@ -328,7 +325,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.confKeyPhotoListShowStatistic = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Comments count: 67'>67</span>", dto.getCommentsCount() );
 	}
@@ -341,9 +338,109 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoAnonymousPeriodExpirationTime = dateUtilsService.getTimeOffsetInMinutes( dateUtilsService.parseDateTime( "20014-03-08", "12:13:14" ), 15 ); // Anonymous period is expiring in 15 minutes
 
 		final PhotoListEntryController controller = getController( testData );
-		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: Anonymous posting till 20014-03-08 12:28", dto.getPhotoAnonymousPeriodExpirationInfo() );
+	}
+
+	@Test
+	public void anonymousIconShouldBeHiddenForUsualUserTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void anonymousIconShouldBeShownForPhotoAuthorTest() {
+
+		final TestData testData = new TestData( photo, photoAuthor );
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void anonymousIconShouldBeShownForAdminTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.photoWithingAnonymousPeriod = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void anonymousIconShouldNotBeShownEvenForAdminTest() {
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+		testData.photoWithingAnonymousPeriod = false; // FALSE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Anonymous() );
+	}
+
+	@Test
+	public void nudeIconShouldBeShownForAdminTest() {
+
+		photo.setContainsNudeContent( true ); // TRUE
+		
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Nude() );
+	}
+
+	@Test
+	public void nudeIconShouldNotBeShownForAdminTest() {
+
+		photo.setContainsNudeContent( false ); // FALSE
+
+		final TestData testData = new TestData( photo, SUPER_ADMIN_1 );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
+	}
+
+	@Test
+	public void nudeIconShouldNotBeShownForPhotoAuthorTest() {
+
+		photo.setContainsNudeContent( false ); // FALSE
+
+		final TestData testData = new TestData( photo, photoAuthor );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
+	}
+
+	@Test
+	public void nudeIconShouldNotBeShownForUsualUserTest() {
+
+		photo.setContainsNudeContent( false ); // FALSE
+
+		final TestData testData = new TestData( photo, accessor );
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, false, dto.isShowAdminFlag_Nude() );
 	}
 
 	private PhotoListEntryController getController( final TestData testData ) {
