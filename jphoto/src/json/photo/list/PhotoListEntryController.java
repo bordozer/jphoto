@@ -33,6 +33,7 @@ import ui.services.security.SecurityUIService;
 import ui.userRankIcons.AbstractUserRankIcon;
 import ui.userRankIcons.UserRankIconContainer;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 
@@ -93,22 +94,29 @@ public class PhotoListEntryController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId ) {
+	public PhotoEntryDTO userCardVotingAreas( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
 
 		final User currentUser = getCurrentUser();
 
 		final Photo photo = photoService.load( photoId );
+
+		final boolean hideAuthorName = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+		final boolean isRequestedFromUserCard = isRequestedFromUserCard( request );
 
 		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( currentUser.getId(), photoId );
 
 		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
 		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo ) );
 		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId() ) );
-		photoEntry.setPhotoImage( getPhotoPreview( photo ) );
+		photoEntry.setPhotoImage( getPhotoPreview( photo, isRequestedFromUserCard ) );
 
 		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
-		photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
+		if ( isRequestedFromUserCard && hideAuthorName ) {
+			photoEntry.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", getLanguage() ) );
+		} else {
+			photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
+		}
 		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo ) );
 
 		setPhotoStatistics( photo, photoEntry );
@@ -138,6 +146,10 @@ public class PhotoListEntryController {
 		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );
 
 		return photoEntry;
+	}
+
+	private boolean isRequestedFromUserCard( final HttpServletRequest request ) {
+		return request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() );
 	}
 
 	private String getPhotoUploadDate( final Photo photo ) {
@@ -221,16 +233,15 @@ public class PhotoListEntryController {
 		return entityLinkUtilsService.getPhotosByGenreLink( genre, getLanguage() );
 	}
 
-	private String getPhotoPreview( final Photo photo ) {
+	private String getPhotoPreview( final Photo photo, final boolean isRequestedFromUserCard ) {
 
-		/*
-		// TODO: need a flag to show or hide the preview
-		if ( securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() ) ) {
+		final boolean photoAuthorNameMustBeHidden = securityService.isPhotoAuthorNameMustBeHidden( photo, getCurrentUser() );
+		if ( photoAuthorNameMustBeHidden && isRequestedFromUserCard ) {
 			return String.format( "<img src='%s/hidden_picture.png' class='photo-preview-image' title='%s'/>"
 				, urlUtilsService.getSiteImagesPath()
-				, translatorService.translate( "The photo is within anonymous period", getLanguage() )
+				, translatorService.translate( "Photo preview: The photo is within anonymous period", getLanguage() )
 			);
-		}*/
+		}
 
 		if ( securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, getCurrentUser() ) ) {
 			return String.format( "<a href='%s' title='%s'><img src='%s/nude_content.jpg' class='photo-preview-image block-border'/></a>"
