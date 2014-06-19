@@ -273,6 +273,30 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo preview: The photo's marks for period from $1 to $2", dto.getPeriodMarksTitle() );
 	}
 
+	@Test
+	public void previewsIconTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowStatistic = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/photo_preview_views_icon.png' height='8' title='Photo preview: Previews count: 143'>", dto.getPreviewsIcon() );
+	}
+
+	@Test
+	public void commentsIconTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowStatistic = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/photo_preview_comments_icon.png' height='8' title='Photo preview: Comments count: 67'>", dto.getCommentsIcon() );
+	}
+
 	private PhotoListEntryController getController( final TestData testData ) {
 
 		final PhotoListEntryController controller = new PhotoListEntryController();
