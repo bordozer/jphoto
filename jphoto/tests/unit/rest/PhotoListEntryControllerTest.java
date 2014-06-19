@@ -297,6 +297,42 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<img src='http://127.0.0.1:8085/worker/images/photo_preview_comments_icon.png' height='8' title='Photo preview: Comments count: 67'>", dto.getCommentsIcon() );
 	}
 
+	@Test
+	public void previewsCountShouldBeShownAsLinkIfPreviewHasNotToBeHiddenTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowStatistic = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden = FALSE
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/previews/' title='Photo preview: Show preview history'>143</a>", dto.getPreviewsCount() );
+	}
+
+	@Test
+	public void previewsCountShouldBeShownAsTextIfPreviewHasToBeHiddenTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowStatistic = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Previews count: 143'>143</span>", dto.getPreviewsCount() );
+	}
+
+	@Test
+	public void commentsCountTest() {
+
+		final TestData testData = new TestData( photo, accessor );
+		testData.confKeyPhotoListShowStatistic = true; // TRUE
+
+		final PhotoListEntryController controller = getController( testData );
+		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, true, LANGUAGE ); // doesPreviewHasToBeHidden = TRUE
+
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<span title='Photo preview: Comments count: 67'>67</span>", dto.getCommentsCount() );
+	}
+
 	private PhotoListEntryController getController( final TestData testData ) {
 
 		final PhotoListEntryController controller = new PhotoListEntryController();
