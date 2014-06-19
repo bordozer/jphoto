@@ -23,11 +23,9 @@ public class PhotoEntryDTO {
 	private boolean showStatistics;
 	private int todayMarks;
 	private int periodMarks;
-	private int totalMarks;
+	private String totalMarks;
 	private String todayMarksTitle;
 	private String periodMarksTitle;
-	private String totalMarksUrl;
-	private String totalMarksTitle;
 
 	private String previewsIcon;
 	private String commentsIcon;
@@ -154,11 +152,11 @@ public class PhotoEntryDTO {
 		return periodMarks;
 	}
 
-	public void setTotalMarks( final int totalMarks ) {
+	public void setTotalMarks( final String totalMarks ) {
 		this.totalMarks = totalMarks;
 	}
 
-	public int getTotalMarks() {
+	public String getTotalMarks() {
 		return totalMarks;
 	}
 
@@ -176,22 +174,6 @@ public class PhotoEntryDTO {
 
 	public void setPeriodMarksTitle( final String periodMarksTitle ) {
 		this.periodMarksTitle = periodMarksTitle;
-	}
-
-	public String getTotalMarksUrl() {
-		return totalMarksUrl;
-	}
-
-	public void setTotalMarksUrl( final String totalMarksUrl ) {
-		this.totalMarksUrl = totalMarksUrl;
-	}
-
-	public String getTotalMarksTitle() {
-		return totalMarksTitle;
-	}
-
-	public void setTotalMarksTitle( final String totalMarksTitle ) {
-		this.totalMarksTitle = totalMarksTitle;
 	}
 
 	public void setShowAnonymousPeriodExpirationInfo( final boolean showAnonymousPeriodExpirationInfo ) {
