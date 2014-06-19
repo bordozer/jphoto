@@ -170,7 +170,7 @@ public class AbstractTestCase {
 		}
 	};
 
-	protected boolean isSuperAdmin( UserMock user ) {
+	protected boolean isSuperAdmin( final User user ) {
 		return user == SUPER_ADMIN_1 || user == SUPER_ADMIN_2;
 	}
 }

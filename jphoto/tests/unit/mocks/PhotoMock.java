@@ -15,4 +15,9 @@ public class PhotoMock extends Photo {
 		setName( String.format( "Photo #%d", id ) );
 		setGenreId( new GenreMock().getId() );
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "Photo #%d, author #%d", getId(), getUserId() );
+	}
 }
