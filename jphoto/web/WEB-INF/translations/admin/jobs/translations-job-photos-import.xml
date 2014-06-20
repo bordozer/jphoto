@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Break current photosight user's photos import if already imported photo found</nerd>
+		<ru><![CDATA[Прервать импорт если встретится уже импортированная работа]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Created photo #$1 '$2' of $3, category: $4</nerd>
+		<ru><![CDATA[Создана работа #$1 '$2' пользователя $3, раздел: $4]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delay between requests</nerd>
+		<ru><![CDATA[Задержка между запросами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delay between requests in seconds</nerd>
+		<ru><![CDATA[Задержка между запросами в секундах]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete picture after import</nerd>
+		<ru><![CDATA[Удалить файл картинки после импорта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Downloaded from photosight: $1 of $2, photosight category: $3</nerd>
+		<ru><![CDATA[Загружено с Photosight: $1 пользователя $2, раздел фотосайта: $3]]></ru>
+	</translation>
+
+</translations>
