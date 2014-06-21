@@ -31,8 +31,36 @@
 	}
 </style>
 
+<div id='cssmenu'>
 
-<script type="text/javascript">
+	<ul>
+		#foreach( $menuItem in $menuElements.entrySet() )
+
+			#*<li class='active'>
+				<a href='$menuItem.key.link'>
+					<span>
+						$menuItem.key.caption
+					</span>
+				</a>
+			</li>*#
+
+			<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
+				<ul>
+					#foreach( $subMenuItem in $menuItem.value )
+						<li>
+							<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
+								<span>$subMenuItem.caption</span>
+							</a>
+						</li>
+					#end
+				</ul>
+			</li>
+		#end
+	</ul>
+</div>
+
+
+#*<script type="text/javascript">
 	require( [ 'jquery', 'superfish' ], function( $, superfish ) {
 		$( 'ul.sf-menu' ).superfish( {
 			delay:1, // one second delay on mouseout
@@ -70,4 +98,4 @@
 			</div>
 		#end
 	</div>
-</div>
+</div>*#
