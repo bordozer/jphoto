@@ -39,7 +39,7 @@
 			<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
 				<ul>
 					#foreach( $subMenuItem in $menuItem.value )
-						<li class="base-font-color block-border block-background" style="border-top: none;">
+						<li class="base-font-color block-background">
 							<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
 								<span>
 
