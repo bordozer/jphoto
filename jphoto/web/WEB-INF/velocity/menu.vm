@@ -1,4 +1,4 @@
-<style type="text/css">
+#*<style type="text/css">
 	.mainMenu {
 		float: left;
 		width: 100%;
@@ -29,27 +29,30 @@
 		/*font-weight: bold;*/
 		/*color: #b81900;*/
 	}
-</style>
+</style>*#
 
-<div id='cssmenu'>
+<div id='cssmenu' class="block-background block-border" style="width: 100%;">
 
 	<ul>
 		#foreach( $menuItem in $menuElements.entrySet() )
 
-			#*<li class='active'>
-				<a href='$menuItem.key.link'>
-					<span>
-						$menuItem.key.caption
-					</span>
-				</a>
-			</li>*#
-
 			<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
 				<ul>
 					#foreach( $subMenuItem in $menuItem.value )
-						<li>
+						<li class="base-font-color block-border block-background" style="border-top: none;">
 							<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
-								<span>$subMenuItem.caption</span>
+								<span>
+
+									#if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
+										<img src="$imagePath/$subMenuItem.icon" height="16" width="16" />
+									#end
+
+									#if ( $StringUtils.isEmpty( $subMenuItem.icon ) )
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									#end
+
+									$subMenuItem.caption
+								</span>
 							</a>
 						</li>
 					#end
