@@ -152,7 +152,7 @@
 
 #cssmenu ul ul li a {
 	width: 270px; /* Menu sub items width */
-	border: 1px solid #cccc99;
+	/*border: 1px solid #cccc99;*/
 	/*border-bottom: 2px solid #cccc99;*/
 	/*border-left: 2px solid #cccc99;*/
 	/*border-right: 2px solid #cccc99;*/
