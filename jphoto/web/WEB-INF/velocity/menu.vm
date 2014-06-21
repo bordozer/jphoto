@@ -48,7 +48,7 @@
 									#end
 
 									#if ( $StringUtils.isEmpty( $subMenuItem.icon ) )
-										&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									#end
 
 									$subMenuItem.caption
