@@ -20,8 +20,6 @@
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/JSCal2-1.9/css/border-radius.css" />
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/JSCal2-1.9/css/steel/steel.css" />
 
-	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/superfish/css/superfish.css"/>
-
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/fg.menu/fg.menu.css" />
 
 	<link rel="stylesheet" type="text/css" href="$baseUrl/js/lib/toastmessage/resources/css/jquery.toastmessage.css" />

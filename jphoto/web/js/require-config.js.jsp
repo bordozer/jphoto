@@ -20,9 +20,6 @@ var require = {
 
 		, context_menu: "lib/fg.menu/fg.menu"
 
-		, superfish: "lib/superfish/js/superfish"
-		, superfish_hoverIntent: "lib/superfish/js/hoverIntent"
-
 		, noty: "lib/noty-2.2.2/jquery.noty.packaged"
 		, noty_default: "lib/noty-2.2.2/themes/default"
 
@@ -55,14 +52,8 @@ var require = {
 		context_menu: {
 			deps: [ 'jquery' ]
 		},
-		superfish: {
-			deps: [ 'jquery' ]
-		},
 		jquery_progressbar: {
 			deps: [ 'jquery' ]
-		},
-		superfish_hoverIntent: {
-			deps: [ 'superfish' ]
 		},
 
 		noty: {
