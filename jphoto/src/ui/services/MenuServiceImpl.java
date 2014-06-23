@@ -198,19 +198,31 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem getReceivedCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED.getText(), getLanguage() );
 		final String link = urlUtilsService.getReceivedComments( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-comments-received.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem getReceivedUnreadCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED_UNREAD.getText(), getLanguage() );
 		final String link = urlUtilsService.getReceivedUnreadComments( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-comments-received-unread.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem getWrittenCommentsMenu( final User user ) {
 		final String caption = translatorService.translate( LinkNerdText.USER_STATISTICS_COMMENTS_WRITTEN.getText(), getLanguage() );
 		final String link = urlUtilsService.getWrittenComments( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-comments-written.png" );
+
+		return menuItem;
 	}
 
 	private List<MenuItem> getPrivateMessagesMenus( final User user ) {
