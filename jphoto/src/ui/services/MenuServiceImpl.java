@@ -210,7 +210,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getReceivedUnreadComments( user.getId() );
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( "menus/main-menu-user-comments-received-unread.png" );
+		menuItem.setIcon( "icons16/newComments16.png" );
 
 		return menuItem;
 	}
