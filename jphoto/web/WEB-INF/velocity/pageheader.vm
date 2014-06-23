@@ -36,7 +36,7 @@
 </head>
 <body class="base-font-color">
 
-	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 3px 7px; padding: 5px; height: 90px;">
+	<div class="floatleft block-border" style="border-left: none; border-top: none; border-right: none; margin: 3px 3px 7px 7px; padding: 5px; height: 90px;">
 
 		<div class="header block-border">
 			<h1><a href="$portalpageurl">$progectname</a></h1>
@@ -93,7 +93,10 @@
 	</div>
 
 	#parse( "menu.vm" )
-	#parse( "genrelist.vm" )
+
+	#if ( $showPhotoCategoriesToolbar )
+		#parse( "genrelist.vm" )
+	#end
 
 	<div class="floatleft">
 		<div style="margin-bottom: 20px; padding-bottom: 20px;padding-left: 20px;">

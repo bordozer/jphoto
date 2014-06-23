@@ -2,11 +2,13 @@ package ui.services;
 
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.translator.nerds.LinkNerdText;
@@ -42,13 +44,20 @@ public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private ConfigurationService configurationService;
+
 	@Override
 	public Map<MenuItem, List<MenuItem>> getMenuElements( final User user ) {
 
 		final Map<MenuItem, List<MenuItem>> menus = newLinkedHashMap();
 
 		createPhotosMenu( menus );
-//		createPhotosByGenreMenu( menus );
+
+		if ( configurationService.getBoolean( ConfigurationKey.SYSTEM_UI_SHOW_PHOTOS_BY_CATEGORIES_MENU_ITEM ) ) {
+			createPhotosByGenreMenu( menus, getLanguage() );
+		}
+
 		createBestPhotosMenu( menus );
 		createMembersMenu( menus );
 		createLoggedUserMenu( menus, user );
@@ -81,14 +90,14 @@ public class MenuServiceImpl implements MenuService {
 	private void createPhotosByGenreMenu( final Map<MenuItem, List<MenuItem>> menus, final Language language ) {
 		final List<MenuItem> menuItems = newArrayList();
 
-		final List<Genre> genres = genreService.loadAll();
+		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( language );
 		for ( final Genre genre : genres ) {
 			final String caption = translatorService.translateGenre( genre, language );
 			final String link = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 			menuItems.add( new MenuItem( caption, link ) );
 		}
 
-		menus.put( new MenuItem( translatorService.translate( "Categories", getLanguage() ), "" ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( "Main menu: Photos by categories", getLanguage() ), "" ), menuItems );
 	}
 
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {

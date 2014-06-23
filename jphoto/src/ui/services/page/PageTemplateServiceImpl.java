@@ -1,12 +1,14 @@
 package ui.services.page;
 
 import admin.services.scheduler.ScheduledTasksExecutionService;
+import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UsersSecurity;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
+import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -73,6 +75,9 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	private final LogHelper log = new LogHelper( PageTemplateServiceImpl.class );
 
@@ -154,6 +159,8 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		}
 		model.put( "genres", genres );
 		model.put( "genreLinks", genreLinks );
+
+		model.put( "showPhotoCategoriesToolbar", configurationService.getBoolean( ConfigurationKey.SYSTEM_UI_SHOW_PHOTO_CATEGORIES_TOOLBAR ) );
 
 		model.put( "pageHatMaxWidth", EnvironmentContext.getDeviceType() == DeviceType.MOBILE ? "400px" : "950px"  ); // TODO: should be a separate view for mobile devices
 
