@@ -319,7 +319,11 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem translatorMenu() {
 		final String caption = translatorService.translate( "Main menu: Translator", getLanguage() );
 		final String link = urlUtilsService.getAdminTranslatorLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "icons32/translate.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem reloadTranslatorMenu() {
@@ -336,79 +340,131 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem jobsMenu() {
 		final String caption = translatorService.translate( "Main menu: Jobs", getLanguage() );
 		final String link = urlUtilsService.getAdminJobsLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "jobTemplate16x16.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem schedulerMenu() {
 		final String caption = translatorService.translate( "Main menu: Scheduler", getLanguage() );
 		final String link = urlUtilsService.getAdminSchedulerTaskListLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "scheduler/SchedulerIsRunning.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem upgradeMenu() {
 		final String caption = translatorService.translate( "Main menu: DB upgrade", getLanguage() );
 		final String link = urlUtilsService.getAdminUpgradeLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-update-db.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem anonymousDaysMenu() {
 		final String caption = translatorService.translate( "Main menu: Anonymous Days", getLanguage() );
 		final String link = urlUtilsService.getAdminAnonymousDaysLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "icons24/admin-special-flag-anonymous-posting.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem configurationMenu() {
 		final String caption = translatorService.translate( "Main menu: Configuration", getLanguage() );
 		final String link = urlUtilsService.getAdminSystemConfigurationListLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "system-configuration-default.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem uploadPhotoMenu() {
 		final String caption = translatorService.translate( MAIN_MENU_UPLOAD_PHOTO, getLanguage() );
 		final String link = urlUtilsService.getPhotoNewLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-upload-photo.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userCardMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: My Card", getLanguage() );
 		final String link = urlUtilsService.getUserCardLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-profile.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userPhotosMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: My Photos", getLanguage() );
 		final String link = urlUtilsService.getPhotosByUserLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-photos.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userDataMenu( final User user ) {
 		final String caption = translatorService.translate( MAIN_MENU_PROFILE_SETTINGS, getLanguage() );
 		final String link = urlUtilsService.getUserEditLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-settings.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem changePasswordMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: Change password", getLanguage() );
 		final String link = urlUtilsService.getChangeUserPasswordLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-password.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userAvatarMenu( final User user ) {
 		final String caption = translatorService.translate( MAIN_MENU_MY_AVATAR, getLanguage() );
 		final String link = urlUtilsService.getEditUserAvatarLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-avatar.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userTeamMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: My Team", getLanguage() );
 		final String link = urlUtilsService.getUserTeamMembersLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-team.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userPhotoAlbumsMenu( final User user ) {
 		final String caption = translatorService.translate( "Main menu: My Albums", getLanguage() );
 		final String link = urlUtilsService.getUserPhotoAlbumListLink( user.getId() );
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/main-menu-user-albums.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem userTechMenu( final User user ) {
