@@ -2,9 +2,11 @@
 	/*position: relative;*/
 	/*background: #2b2f3a;*/
 	float: left;
+	display: inline;
 	margin-left: 10px;
-	height: 44px;
-	width: auto;
+	height: auto;
+	min-height: 44px;
+	width: 100%;
 }
 
 #cssmenu ul {

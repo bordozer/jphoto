@@ -340,7 +340,11 @@ public class MenuServiceImpl implements MenuService {
 
 	private MenuItem reloadTranslatorMenu() {
 		final String caption = translatorService.translate( "Main menu: Reload translations", getLanguage() );
-		return MenuItem.jsFunctionLinkMenu( caption, "reloadTranslations(); return false;" );
+
+		final MenuItem menuItem = MenuItem.jsFunctionLinkMenu( caption, "reloadTranslations(); return false;" );
+		menuItem.setIcon( "menus/main-menu-translation-reload.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem controlPanelMenu() {

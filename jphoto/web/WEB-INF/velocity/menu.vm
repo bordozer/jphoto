@@ -1,20 +1,17 @@
+<div id='cssmenu' class="block-background block-border">
 
-##<div class="genreList block-border" >
+	<ul>
+		#foreach( $menuItem in $menuElements.entrySet() )
 
-	<div id='cssmenu' class="block-background block-border" style="width: 100%;">
-
-		<ul>
-			#foreach( $menuItem in $menuElements.entrySet() )
-
-				<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
-					<ul>
-						#foreach( $subMenuItem in $menuItem.value )
-							<li class="base-font-color block-background block-shadow">
-								<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
+			<li class='has-sub'><a href='$menuItem.key.link'><span>$menuItem.key.caption</span></a>
+				<ul>
+					#foreach( $subMenuItem in $menuItem.value )
+						<li class="base-font-color block-background block-shadow">
+							<a href='$subMenuItem.link' onclick='$subMenuItem.jsFunction'>
 									<span>
 
 										#if ( $StringUtils.isNotEmpty( $subMenuItem.icon ) )
-											<img src="$imagePath/$subMenuItem.icon" height="16" width="16" />
+											<img src="$imagePath/$subMenuItem.icon" height="16" width="16"/>
 										#end
 
 										#if ( $StringUtils.isEmpty( $subMenuItem.icon ) )
@@ -23,15 +20,12 @@
 
 										$subMenuItem.caption
 									</span>
-								</a>
-							</li>
-						#end
-					</ul>
-				</li>
-			#end
-		</ul>
+							</a>
+						</li>
+					#end
+				</ul>
+			</li>
+		#end
+	</ul>
 
-	</div>
-
-##</div>
-
+</div>
