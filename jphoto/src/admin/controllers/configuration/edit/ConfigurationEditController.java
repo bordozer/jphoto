@@ -7,6 +7,7 @@ import core.general.configuration.Configuration;
 import core.general.configuration.ConfigurationKey;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
+import core.log.LogHelper;
 import core.services.system.CacheServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.system.SystemConfigurationLoadService;
@@ -56,8 +57,7 @@ public class ConfigurationEditController {
 	@Autowired
 	private BreadcrumbsAdminService breadcrumbsAdminService;
 
-	@Autowired
-	private UrlUtilsService urlUtilsService;
+	private final LogHelper log = new LogHelper( ConfigurationEditController.class );
 
 	@InitBinder
 	protected void initBinder( final ServletRequestDataBinder binder ) {
@@ -224,9 +224,11 @@ public class ConfigurationEditController {
 
 		systemConfigurationLoadService.save( systemConfiguration );
 
-		final int hasChangedSystemConfigurationId = systemConfiguration.getId();
 		if ( systemConfiguration.isDefaultConfiguration() || systemConfiguration.isActiveConfiguration() ) {
-			configurationService.reloadSystemConfiguration( hasChangedSystemConfigurationId );
+			final int activeSystemConfigurationId = systemConfigurationLoadService.getActiveSystemConfigurationId();
+			configurationService.reloadSystemConfiguration( activeSystemConfigurationId );
+
+			log.debug( String.format( "Configuration #%d has been reloaded", activeSystemConfigurationId ) );
 		}
 	}
 
