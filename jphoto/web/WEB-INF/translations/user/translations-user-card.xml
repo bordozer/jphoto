@@ -273,6 +273,46 @@
 	</translation>
 
 	<translation>
+		<nerd>User card: Create new team member</nerd>
+		<ru><![CDATA[Создать нового члена команды]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Delete user team member?</nerd>
+		<ru><![CDATA[Удалить члена команды?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Avatar</nerd>
+		<ru><![CDATA[Аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Member</nerd>
+		<ru><![CDATA[Член клуба]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Member name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Photos qty</nerd>
+		<ru><![CDATA[К-во работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Type</nerd>
+		<ru><![CDATA[Роль]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: You have already assigned this member to one or more photos</nerd>
+		<ru><![CDATA[Удаление невозможно т.к. вы уже ассоциировали этого члена команды с одной или более работ]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

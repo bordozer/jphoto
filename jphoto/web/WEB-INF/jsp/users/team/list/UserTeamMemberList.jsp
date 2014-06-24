@@ -18,7 +18,7 @@
 <tags:page pageModel="${userTeamMemberListModel.pageModel}">
 
 	<links:userTeamMemberNew userId="${userTeamMemberListModel.user.id}">
-		<html:img id="addUserTeamMember" src="add32.png" width="32" height="32" alt="${eco:translate('Create new team member')}" />
+		<html:img id="addUserTeamMember" src="add32.png" width="32" height="32" alt="${eco:translate('User card: Create new team member')}" />
 	</links:userTeamMemberNew>
 
 	<br/>
@@ -32,12 +32,12 @@
 				<table:td />
 			</c:if>
 
-			<table:td>${eco:translate( "Avatar" )}</table:td>
-			<table:td>${eco:translate( "Member name" )}</table:td>
-			<table:td>${eco:translate( "Member" )}</table:td>
+			<table:td>${eco:translate( "User card: Avatar" )}</table:td>
+			<table:td>${eco:translate( "User card: Member name" )}</table:td>
+			<table:td>${eco:translate( "User card: Member" )}</table:td>
 			<table:td />
-			<table:td>${eco:translate( "Type" )}</table:td>
-			<table:td>${eco:translate( "Photos qty" )}</table:td>
+			<table:td>${eco:translate( "User card: Type" )}</table:td>
+			<table:td>${eco:translate( "User card: Photos qty" )}</table:td>
 		</jsp:attribute>
 
 		<jsp:body>
@@ -63,7 +63,7 @@
 							</c:if>
 
 							<c:if test="${userTeamMemberPhotosQty > 0}">
-								<icons:canNotDelete hint="${eco:translate('You have already assigned this member to one or more photos')}"/>
+								<icons:canNotDelete hint="${eco:translate('User card: You have already assigned this member to one or more photos')}"/>
 							</c:if>
 						</table:tdicon>
 					</c:if>
@@ -112,7 +112,7 @@
 
 	<script type="text/javascript">
 		function deleteUserTeamMember() {
-			return confirm( "${eco:translate('Delete user team member?')}" );
+			return confirm( "${eco:translate('User card: Delete user team member?')}" );
 		}
 	</script>
 
