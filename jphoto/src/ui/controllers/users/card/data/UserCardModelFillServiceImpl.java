@@ -61,13 +61,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PhotoService photoService;
 
 	@Autowired
-	private PhotoUIService photoUIService;
-
-	@Autowired
 	private PhotoListCriteriasService photoListCriteriasService;
-
-	@Autowired
-	private UtilsService utilsService;
 
 	@Autowired
 	private ConfigurationService configurationService;
@@ -238,8 +232,14 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public PhotoList getUserTeamMemberLastPhotos( final int userId, final UserTeamMember userTeamMember, final Map<UserTeamMember, Integer> teamMemberPhotosQtyMap ) {
 		final int photosQty = teamMemberPhotosQtyMap.get( userTeamMember );
-		final String photoListTitle = translatorService.translate( "Last photos with $1 $2 - $3 photos", EnvironmentContext.getLanguage()
-			, translatorService.translate( userTeamMember.getTeamMemberType().getName(), EnvironmentContext.getLanguage() ), StringUtilities.escapeHtml( userTeamMember.getName() ), String.valueOf( photosQty ) );
+
+		final String photoListTitle = translatorService.translate( "User team: Last photos with $1 ( $2 ) - $3 photos"
+			, EnvironmentContext.getLanguage()
+			, StringUtilities.escapeHtml( userTeamMember.getName() )
+			, translatorService.translate( userTeamMember.getTeamMemberType().getName(), EnvironmentContext.getLanguage() )
+			, String.valueOf( photosQty )
+		);
+
 		final String userTeamMemberCardLink = urlUtilsService.getUserTeamMemberCardLink( userId, userTeamMember.getId() );
 
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserTeamMemberLastPhotosQuery( userId, userTeamMember.getId(), getPagingModel() );
@@ -250,7 +250,13 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public PhotoList getUserPhotoAlbumLastPhotos( final int userId, final UserPhotoAlbum userPhotoAlbum, final Map<UserPhotoAlbum, Integer> userPhotoAlbumsQtyMap ) {
 		final int photosQty = userPhotoAlbumsQtyMap.get( userPhotoAlbum );
-		final String photoListTitle = translatorService.translate( "Last photos from album '$1' - $2 photos", EnvironmentContext.getLanguage(), StringUtilities.escapeHtml( userPhotoAlbum.getName() ), String.valueOf( photosQty ) );
+
+		final String photoListTitle = translatorService.translate( "User team: Last photos from album '$1' - $2 photos"
+			, EnvironmentContext.getLanguage()
+			, StringUtilities.escapeHtml( userPhotoAlbum.getName() )
+			, String.valueOf( photosQty )
+		);
+
 		final String userTeamMemberCardLink = urlUtilsService.getUserPhotoAlbumPhotosLink( userId, userPhotoAlbum.getId() );
 
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( userId, userPhotoAlbum.getId(), getPagingModel() );

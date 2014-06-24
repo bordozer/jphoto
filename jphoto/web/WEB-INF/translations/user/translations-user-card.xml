@@ -263,6 +263,31 @@
 	</translation>
 
 	<translation>
+		<nerd>User team: Last photos with $1 ( $2 ) - $3 photos</nerd>
+		<ru><![CDATA[Последние работы с $1 ( $2 ) - $3 работ(ы)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User team: Last photos from album '$1' - $2 photos</nerd>
+		<ru><![CDATA[Последние работы из альбома '$1' - $2 работ(ы)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

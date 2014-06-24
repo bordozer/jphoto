@@ -2,10 +2,10 @@ package core.enums;
 
 public enum UserTeamMemberType {
 
-	MODEL( 1, "Model", "model.png" )
-	, PHOTOGRAPH( 2, "Photograph", "photo.png" )
-	, MAKEUP_MASTER( 3, "Makeup master", "makeup.png" )
-	, HAIR_DRESSER( 4, "Hair dresser", "hair.png" )
+	MODEL( 1, "UserTeamMemberType: Model", "model.png" )
+	, PHOTOGRAPH( 2, "UserTeamMemberType: Photograph", "photo.png" )
+	, MAKEUP_MASTER( 3, "UserTeamMemberType: Makeup master", "makeup.png" )
+	, HAIR_DRESSER( 4, "UserTeamMemberType: Hair dresser", "hair.png" )
 	;
 
 	private final int id;
