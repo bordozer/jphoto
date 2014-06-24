@@ -45,7 +45,7 @@
 <div class="user-card-block">
 
 	<c:if test="${userHasAvatar}">
-		<c:set var="avatarTitle" value="${eco:translate('Click to see full size')}"/>
+		<c:set var="avatarTitle" value="${eco:translate('User card avatar: Click to see full size')}"/>
 		${eco:userAvatarImage(user.id, 200, 200, '', 'showAvatarInFullSize();', 'vertical-align: middle;' )}
 	</c:if>
 
@@ -55,8 +55,8 @@
 			<c:set var="noAvatar" value="noAvatarGirl.png"/>
 		</c:if>
 
-		<c:set var="avatarOnClick" value="alert('${eco:translate('Tme member has not downloaded avatar yet... :(')}');"/>
-		<c:set var="avatarHint" value="${eco:translate('Tme member has not downloaded avatar yet... :(')}"/>
+		<c:set var="avatarHint" value="${eco:translate('User card avatar: The member has not downloaded avatar yet...')}"/>
+		<c:set var="avatarOnClick" value="alert('${avatarHint}');"/>
 		<html:img id="" src="icons48/${noAvatar}" width="48" height="48" onclick="${avatarOnClick}" alt="${avatarHint}"/>
 	</c:if>
 

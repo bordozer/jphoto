@@ -69,12 +69,12 @@
 			$( '#${customDescriptionTextId}' ).val( '' );
 
 		$( "#${sendComplaintDivId}" )
-					.dialog( 'option', 'title', "${eco:translate('Send complaint message:')}" + getEntityNameById( complaintEntityTypeId, complaintEntities ) + ' => ' + getEntityNameById( complaintReasonTypeId, complaintReasonTypes ) + ', ID=' + entryId )
+					.dialog( 'option', 'title', "${eco:translate('Send Complaint Message: Send complaint message dialog title')}" + getEntityNameById( complaintEntityTypeId, complaintEntities ) + ' => ' + getEntityNameById( complaintReasonTypeId, complaintReasonTypes ) + ', ID=' + entryId )
 					.dialog( 'option', 'buttons', {
 													Cancel:function () {
 														$( this ).dialog( "close" );
 													},
-													"${eco:translate('Send message')}": function() {
+													"${eco:translate('Send Complaint Message: Send message button text')}": function() {
 														var complaintDTO = new ComplaintMessageDTO( complaintEntityTypeId, entryId, fromUserId, complaintReasonTypeId, $( '#${customDescriptionTextId}' ).val() );
 
 														var ajaxResultDTO = jsonRPC.ajaxService.sendComplaintMessageAjax( complaintDTO );
@@ -84,7 +84,7 @@
 															return false;
 														}
 
-														showUIMessage_Notification( "${eco:translate('The message has been sent')}" );
+														showUIMessage_Notification( "${eco:translate('Send Complaint Message: The message has been sent')}" );
 
 														$( this ).dialog( "close" );
 													}

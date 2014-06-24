@@ -67,7 +67,7 @@ public class PagingModel {
 
 		if ( firstBunchPageNumber > EXTREME_LEFT_PAGES_MIN_QTY + 1 ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", language, String.valueOf( EXTREME_LEFT_PAGES_MIN_QTY + 1 ), String.valueOf( firstBunchPageNumber - 1 ) ) );
+			lastSeparator.setTitle( translatorService.translate( "Paging: Pages $1 - $2", language, String.valueOf( EXTREME_LEFT_PAGES_MIN_QTY + 1 ), String.valueOf( firstBunchPageNumber - 1 ) ) );
 
 			pageItems.add( lastSeparator );
 		}
@@ -79,7 +79,7 @@ public class PagingModel {
 		int limit = totalPages - EXTREME_RIGHT_PAGES_MIN_QTY;
 		if ( lastBunchPageNumber < limit ) {
 			final PageItem lastSeparator = PageItem.getSeparatorPage();
-			lastSeparator.setTitle( translatorService.translate( "Pages $1 - $2", language, String.valueOf( lastBunchPageNumber + 1 ), String.valueOf( totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) ) );
+			lastSeparator.setTitle( translatorService.translate( "Paging: Pages $1 - $2", language, String.valueOf( lastBunchPageNumber + 1 ), String.valueOf( totalPages - EXTREME_RIGHT_PAGES_MIN_QTY ) ) );
 
 			pageItems.add( lastSeparator );
 		}

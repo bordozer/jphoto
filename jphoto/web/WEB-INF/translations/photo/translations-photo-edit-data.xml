@@ -59,6 +59,27 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo uploading: Photo team</nerd>
+		<ru><![CDATA[Команда, участвовавшая в съемке]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Photo albums</nerd>
+		<ru><![CDATA[Работа входит в альбомы]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Save button</nerd>
+		<ru><![CDATA[Сохранить]]></ru>
+		<ua><![CDATA[]]></ua>
+		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 		<ua><![CDATA[]]></ua>

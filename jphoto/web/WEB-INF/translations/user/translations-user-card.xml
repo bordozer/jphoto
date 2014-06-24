@@ -223,8 +223,43 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>User card avatar: Click to see full size</nerd>
+		<ru><![CDATA[Кликните, чтобы посмотреть в полном аватар размере]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Rank in category '$1': $2</nerd>
+		<ru><![CDATA[Ранг в разделе '$1': $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card avatar: The member has not downloaded avatar yet...</nerd>
+		<ru><![CDATA[Пользователь не загрузил аватар]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Genres and ranks</nerd>
+		<ru><![CDATA[Ранги по разделам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Total photos</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ForUserRankInGenre: Error!</nerd>
+		<ru><![CDATA[Ошибка голосования]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User card: Member self description</nerd>
+		<ru><![CDATA[Дополнительная информация о пользователе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Custom photo list: No items</nerd>
+		<ru><![CDATA[Ничего нет]]></ru>
 	</translation>
 
 	<translation>

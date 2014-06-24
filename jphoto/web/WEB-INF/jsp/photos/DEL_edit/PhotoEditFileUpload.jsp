@@ -116,7 +116,7 @@
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:tdtext text_t="Photo albums"/>
+				<table:tdtext text_t="Photo uploading: Photo albums"/>
 				<table:tddata>
 					<c:forEach var="photoAlbum" items="${photoEditDataModel.photoAlbums}" >
 						<links:userPhotoAlbumPhotos userPhotoAlbum="${photoAlbum}" />

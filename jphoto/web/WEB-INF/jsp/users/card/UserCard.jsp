@@ -25,7 +25,7 @@
 			<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}"/>
 
 			<div class="user-card-block block-background block-border justify-font" style="width: 500px; margin-top: 20px;">
-				<b>${eco:translate('Member self description')}:</b>
+				<b>${eco:translate('User card: Member self description')}:</b>
 				<br/>
 				${eco:formatPhotoCommentText(user.selfDescription)}
 			</div>

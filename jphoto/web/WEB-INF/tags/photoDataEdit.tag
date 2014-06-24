@@ -154,7 +154,7 @@
 		<table:separatorInfo colspan="2" height="50" title="${eco:translate('Photo uploading: Photo albums header')}"/>
 
 		<table:tredit>
-			<table:tdtext text_t="Photo albums" labelFor="photoAlbumIds1"/>
+			<table:tdtext text_t="Photo uploading: Photo albums" labelFor="photoAlbumIds1"/>
 
 			<table:tddata>
 				<form:checkboxes items="${photoEditDataModel.userPhotoAlbums}" path="photoAlbumIds" itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="true"/>

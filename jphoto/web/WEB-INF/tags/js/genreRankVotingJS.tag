@@ -11,7 +11,7 @@
 						$( "#user_by_genre_voting_" + genreId ).html( response );
 					},
 					error:function () {
-						showUIMessage_Error( '${eco:translate('Error!')}' );
+						showUIMessage_Error( '${eco:translate('ForUserRankInGenre: Error!')}' );
 					}
 				} );
 	}
@@ -25,7 +25,7 @@
 						$( "#user_by_genre_voting_" + genreId ).html( response );
 					},
 					error:function () {
-						showUIMessage_Error( '${eco:translate('Error!')}' );
+						showUIMessage_Error( '${eco:translate('ForUserRankInGenre: Error!')}' );
 					}
 				} );
 	}

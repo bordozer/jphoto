@@ -128,33 +128,28 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send Complaint Message: Send complaint message dialog title</nerd>
+		<ru><![CDATA[Пожаловаться]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send Complaint Message: The message has been sent</nerd>
+		<ru><![CDATA[Сообщение отправлено]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Send Complaint Message: Send message button text</nerd>
+		<ru><![CDATA[Отправить]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Paging: Pages $1 - $2</nerd>
+		<ru><![CDATA[Страницы $1 - $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photos in category '$1': $2</nerd>
+		<ru><![CDATA[Работ в раздере '$1': $2]]></ru>
 	</translation>
 
 	<translation>

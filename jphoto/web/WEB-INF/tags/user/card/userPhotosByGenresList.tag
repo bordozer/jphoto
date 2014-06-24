@@ -33,7 +33,7 @@
 
 	<table:table border="0" width="400px" oddEven="true">
 
-		<table:separatorInfo colspan="4" height="50" title="${eco:translate('Photos and ranks')}"/>
+		<table:separatorInfo colspan="4" height="50" title="${eco:translate('User card: Genres and ranks')}"/>
 
 		<table:trinfo>
 			<table:td>
@@ -41,7 +41,7 @@
 			</table:td>
 
 			<table:td cssClass="textright" width="30">
-				<b title="${eco:translate('Total photos')}">${totalPhotos}</b>
+				<b title="${eco:translate('User card: Total photos')}">${totalPhotos}</b>
 			</table:td>
 
 			<table:td width="100"/>

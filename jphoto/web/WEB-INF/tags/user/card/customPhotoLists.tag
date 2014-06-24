@@ -13,6 +13,6 @@
 
 <c:if test="${not hasAtLeastNotEmptyPhotoList}">
 	<div style="text-align: center;">
-		<h3>${eco:translate("No items")}</h3>
+		<h3>${eco:translate("Custom photo list: No items")}</h3>
 	</div>
 </c:if>

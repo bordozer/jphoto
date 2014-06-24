@@ -7,6 +7,6 @@
 
 <c:set var="nameEscaped" value="${eco:escapeHtml(user.name)}" />
 
-<links:userCard id="${user.id}" title="${eco:translate1('Show member card: $1', nameEscaped)}">
+<links:userCard id="${user.id}" title="${eco:translate1('EntityLinkUtilsService: $1: user card link title', nameEscaped)}">
 	${nameEscaped}
 </links:userCard>
