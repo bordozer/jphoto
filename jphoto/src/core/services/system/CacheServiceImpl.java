@@ -42,13 +42,13 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 		}
 
 		if ( hasEntry( key, compositeKey )  ) {
-			return getEntry( key, compositeKey );
+			return updateLastAccessTimeAndReturnCachedEntry( key, compositeKey );
 		}
 
 		synchronized ( cache.get( key ) ) {
 
 			if ( hasEntry( key, compositeKey )  ) {
-				return getEntry( key, compositeKey );
+				return updateLastAccessTimeAndReturnCachedEntry( key, compositeKey );
 			}
 
 			if ( cache.get( key ).size() >= getCacheMaxSize( key ) ) {
@@ -71,6 +71,7 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 
 	@Override
 	public void expire( final CacheKey key, final CacheCompositeKey compositeKey ) {
+
 		if ( !hasEntry( key, compositeKey ) ) {
 			return;
 		}
@@ -108,9 +109,12 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 		return cache.get( key ).containsKey( compositeKey );
 	}
 
-	private T getEntry( final CacheKey key, final CacheCompositeKey compositeKey ) {
+	private T updateLastAccessTimeAndReturnCachedEntry( final CacheKey key, final CacheCompositeKey compositeKey ) {
+
 		final CacheEntry cacheEntry = cache.get( key ).get( compositeKey );
-		cacheEntry.setLastAccessTime( dateUtilsService.getCurrentTime() );
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
+		cacheEntry.setLastAccessTime( currentTime );
 
 		return cacheEntry.getEntry();
 	}
