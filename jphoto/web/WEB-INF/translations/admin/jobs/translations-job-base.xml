@@ -138,11 +138,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Avatars dir</nerd>
-		<ru><![CDATA[Каталог аватаров]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Job execution log</nerd>
 		<ru><![CDATA[Лог выполнения задач]]></ru>
 	</translation>
@@ -220,6 +215,26 @@
 	<translation>
 		<nerd>There are active jobs</nerd>
 		<ru><![CDATA[Есть выполняющиеся задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Total job steps</nerd>
+		<ru><![CDATA[К-во действий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

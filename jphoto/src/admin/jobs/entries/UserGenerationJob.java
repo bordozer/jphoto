@@ -222,8 +222,8 @@ public class UserGenerationJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Users to generate", getLanguage() ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
-		builder.append( translatorService.translate( "Avatars dir", getLanguage() ) ).append( ": " ).append( avatarsDir );
+		builder.append( translatorService.translate( "User generate job parameter: Users to generate", getLanguage() ) ).append( ": " ).append( totalJopOperations ).append( "<br />" );
+		builder.append( translatorService.translate( "User generate job parameter: Avatars dir", getLanguage() ) ).append( ": " ).append( avatarsDir );
 
 		return builder.toString();
 	}

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User generate job parameter: Users to generate</nerd>
+		<ru><![CDATA[К-во пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User generate job parameter: Avatars dir</nerd>
+		<ru><![CDATA[Каталог с аватарами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
