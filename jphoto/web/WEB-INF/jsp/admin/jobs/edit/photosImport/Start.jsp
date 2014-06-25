@@ -177,7 +177,7 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Photo import job parameter: "/>
+										<table:tdtext text_t="Photo import job parameter: Import comments"/>
 										<table:td>
 											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
 										</table:td>

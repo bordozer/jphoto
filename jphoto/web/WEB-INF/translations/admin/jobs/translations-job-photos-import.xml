@@ -129,7 +129,7 @@
 
 	<translation>
 		<nerd>Photo import job JSP: Photosight user name is used if leave empty</nerd>
-		<ru><![CDATA[Юудет использовано имя пользователя с фотосайта если оставить пустым]]></ru>
+		<ru><![CDATA[Оставьте поле пустым чтобы использовать имя пользователя с фотосайта]]></ru>
 	</translation>
 
 	<translation>
@@ -150,11 +150,6 @@
 	<translation>
 		<nerd>Photo import job JSP: Photosight user ids</nerd>
 		<ru><![CDATA[Коды пользователей фотосайта]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Break current photosight user's photos import if already imported photo found</nerd>
-		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>
