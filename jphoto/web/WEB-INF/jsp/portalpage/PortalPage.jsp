@@ -75,7 +75,7 @@
 
 	<link rel="Stylesheet" type="text/css" href="${eco:baseUrl()}/js/lib/smoothdiv/css/smoothDivScroll.css" />
 
-	<h3>${eco:translate('Last uploaded photos')}</h3>
+	<h3>${eco:translate('Portal page: Last uploaded photos')}</h3>
 
 	<div id="portalPageLastPhotos" class="portalPageLastPhotos">
 		<div id="makeMeScrollable">
@@ -125,7 +125,7 @@
 
 					<c:if test="${isTheBestPhotosPresent}">
 
-						<h3>${eco:translate('The best photos')}</h3>
+						<h3>${eco:translate('Portal page: The best photos')}</h3>
 
 						<link type="text/css" rel="stylesheet" href="${eco:baseUrl()}/js/lib/galleryview/jquery.galleryview-3.0-dev.css" />
 
@@ -184,7 +184,7 @@
 						<div style="float: left; width: 300px; border: solid 1px #999999; height: 300px; margin-left: 37px; margin-top: 15px;">
 							<br />
 							<br />
-							<h3>${eco:translate('The best photos are not defined')}</h3>
+							<h3>${eco:translate('Portal page: The best photos are not defined')}</h3>
 							<br />
 							<html:img id="bestphoto" src="icons128/bestphoto.png" width="128" height="128"/>
 						</div>
@@ -193,7 +193,7 @@
 				</div>
 
 				<div class="floatleft" style="height: 30px; text-align: center; padding-top: 10px;">
-					${eco:translate2('The photos that have got $1 marks for last $2 days', portalPageModel.bestPhotosMinMarks, portalPageModel.bestPhotosPeriod) }
+					${eco:translate2('Portal page: The photos that have got $1 marks for last $2 days', portalPageModel.bestPhotosMinMarks, portalPageModel.bestPhotosPeriod) }
 				</div>
 
 			</table:td>
@@ -203,7 +203,7 @@
 			<table:td valign="top" width="${ratingWirth}">
 
 				<table:table width="100%">
-					<table:separatorInfo colspan="3" title="${eco:translate('Photos')}"/>
+					<table:separatorInfo colspan="3" title="${eco:translate('Portal page: Photo categories')}"/>
 					<c:forEach var="portalPageGenre" items="${portalPageModel.portalPageGenres}">
 						<table:tr>
 							<table:tdunderlined><links:genrePhotos genre="${portalPageGenre.genre}" /></table:tdunderlined>
@@ -222,16 +222,16 @@
 			<c:set var="topBestUsersQty" value="<%=PortalPageModel.TOP_BEST_USERS_QTY%>"/>
 
 			<table:td width="${ratingWirth}" valign="top">
-				<user:userRating userRatings="${portalPageModel.bestWeekUserRating}" listTitle="${eco:translate('Top authors of the week')}" />
+				<user:userRating userRatings="${portalPageModel.bestWeekUserRating}" listTitle="${eco:translate('Portal page: Top authors of the week')}" />
 			</table:td>
 
 			<table:td width="${ratingWirth}" valign="top">
-				<user:userRating userRatings="${portalPageModel.bestMonthUserRating}" listTitle="${eco:translate('Top authors of the month')}" />
+				<user:userRating userRatings="${portalPageModel.bestMonthUserRating}" listTitle="${eco:translate('Portal page: Top authors of the month')}" />
 			</table:td>
 
 		</table:tr>
 
-		<table:separatorInfo colspan="1" title="${eco:translate('Activity stream')}" />
+		<table:separatorInfo colspan="1" title="${eco:translate('Portal page: Activity stream')}" />
 
 		<table:tr>
 
@@ -241,7 +241,7 @@
 
 				<br />
 
-				<a href="${eco:baseUrl()}/activityStream/">${eco:translate('Full activity stream')}</a>
+				<a href="${eco:baseUrl()}/activityStream/">${eco:translate('Portal page: Full activity stream')}</a>
 
 			</table:td>
 
