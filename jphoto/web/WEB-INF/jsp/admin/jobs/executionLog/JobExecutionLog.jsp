@@ -5,7 +5,7 @@
 
 <jsp:useBean id="jobExecutionLogModel" type="admin.controllers.jobs.executionLog.JobExecutionLogModel" scope="request"/>
 
-<tags:pageLight title="${eco:translate('Job execution log')}">
+<tags:pageLight title="${eco:translate('Job execution log: Job execution log')}">
 
 	<c:set var="job" value="${jobExecutionLogModel.job}" />
 	<c:set var="jobNotFoundError" value="${jobExecutionLogModel.jobNotFoundError}" />
@@ -14,7 +14,7 @@
 	<div style="float: left;; width: 100%; padding: 10px;">
 
 		<c:if test="${jobNotFoundError}">
-			<h3>${eco:translate('Job not found. It must be finished.')}</h3>
+			<h3>${eco:translate('Job execution log: Job not found. It must be finished.')}</h3>
 		</c:if>
 
 		<c:if test="${not empty jobRuntimeLogs}">
@@ -28,7 +28,7 @@
 		</c:if>
 
 		<c:if test="${not jobNotFoundError and empty jobRuntimeLogs}">
-			<h3>${eco:translate('No messages found')}</h3>
+			<h3>${eco:translate('Job execution log: No messages found')}</h3>
 		</c:if>
 
 	</div>

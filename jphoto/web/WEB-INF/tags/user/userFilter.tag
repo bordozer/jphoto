@@ -25,25 +25,25 @@
 
 			<tr>
 				<td colspan="2">
-					<h3>${eco:translate( 'Members search' )}:</h3>
+					<h3>${eco:translate( 'User list filter: Members search' )}:</h3>
 				</td>
 			</tr>
 
 			<tr>
 				<td align="right" width="320px">
-					<label for="${filterUserNameControl}">${eco:translate( 'Member name' )}</label>
+					<label for="${filterUserNameControl}">${eco:translate( 'User list filter: Member name' )}</label>
 				</td>
 				<td class="datacolumn">
-					<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="Members search" hint="${eco:translate('Filter by member name')}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${filterUserNameControl}" hintTitle_t="User list filter: Members search" hint="${eco:translate('User list filter: Filter by member name')}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<input id="${filterUserNameControl}" type="text" name="${filterUserNameControl}" value="${userFilterModel.filterUserName}"/>
-						</jsp:attribute>
-					</tags:inputHint>
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</td>
 			</tr>
 
 			<table:tredit>
-				<table:tdtext text_t="Membership type" labelFor="membershipTypeId" />
+				<table:tdtext text_t="User list filter: Membership type" labelFor="membershipTypeId" />
 
 				<table:tddata>
 					<form:checkboxes items="${membershipTypeListValues}" path="${membershipTypeControl}" itemLabel="name" itemValue="id" delimiter="<br/>" />
@@ -56,10 +56,10 @@
 
 			<table:tredit>
 				<td class="buttoncolumn">
-					<html:submitButton id="applyUserListFilterButton" caption_t="Search members"/>
+					<html:submitButton id="applyUserListFilterButton" caption_t="User list filter: Search members"/>
 				</td>
 				<table:td>
-					<html:resetButton caption_t="Reset filter"/>
+					<html:resetButton caption_t="User list filter: Reset filter"/>
 				</table:td>
 			</table:tredit>
 

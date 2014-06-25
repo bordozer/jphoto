@@ -29,12 +29,12 @@
 </style>
 
 <c:set var="searchControl" value="${userIdControl}_search"/>
-<c:set var="foundMemberText" value="${eco:translate('Found member:')}"/>
+<c:set var="foundMemberText" value="${eco:translate('User picker: Found member:')}"/>
 
 <c:set var="imageNotFoundImg" value="${eco:imageFolderURL()}/imagenotfound.png"/>
 
 <c:set var="resetFoundMemberImg" value="${eco:imageFolderURL()}/icons16/resetFoundMember.png"/>
-<c:set var="resetFoundMemberHint" value="${eco:translate('Reset found member in user picker')}"/>
+<c:set var="resetFoundMemberHint" value="${eco:translate('User picker: Reset found member in user picker')}"/>
 
 <c:set var="avatarHeight" value="150"/>
 

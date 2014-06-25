@@ -3,6 +3,7 @@ package admin.jobs.entries;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
+import core.enums.YesNo;
 import core.general.base.CommonProperty;
 import core.general.conversion.ConversionOptions;
 import core.general.photo.Photo;
@@ -82,7 +83,7 @@ public class PreviewGenerationJob extends AbstractJob {
 
 		final Language language = getLanguage();
 		builder.append( translatorService.translate( "Preview size", language ) ).append( ": " ).append( previewSize ).append( "<br />" );
-		builder.append( translatorService.translate( "Skip, if preview exists", language ) ).append( ": " ).append( translatorService.translate( skipPhotosWithExistingPreview ? "Yes" : "No", language ) ).append( "<br />" );
+		builder.append( translatorService.translate( "Skip, if preview exists", language ) ).append( ": " ).append( translatorService.translate( skipPhotosWithExistingPreview ? YesNo.YES.getName() : YesNo.NO.getName(), language ) ).append( "<br />" );
 
 		return builder.toString();
 	}

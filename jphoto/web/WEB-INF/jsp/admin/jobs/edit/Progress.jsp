@@ -56,14 +56,14 @@
 	</div>
 
 	<div style="float: left; width: 100%;">
-	${eco:translate('Job type')} :${jobTypeNameTranslated}
+	${eco:translate('Job JSP: Job type')} :${jobTypeNameTranslated}
 	<br />
-	${eco:translate('Start time')}: <b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
+	${eco:translate('Job JSP: Start time')}: <b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
 
 	<br />
 	<br />
 
-	<b>${eco:translate('Job progress')}:
+	<b>${eco:translate('Job JSP: Job progress')}:
 		<span id="progressStatusFullDescription_${id}"></span>
 	</b>
 
@@ -117,7 +117,7 @@
 		});
 
 		function stopTheJob() {
-			if ( confirm( "${eco:translate('Stop the job?')}" ) ) {
+			if ( confirm( "${eco:translate('Job JSP: Stop the job?')}" ) ) {
 				document.location.href = "${eco:baseAdminUrl()}/jobs/${jobType.prefix}/stop/${jobExecutionHistoryEntry.id}/";
 			}
 		}

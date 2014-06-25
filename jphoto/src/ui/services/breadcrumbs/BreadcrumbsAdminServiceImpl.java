@@ -157,7 +157,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated, nerd );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), nerd, translatorService.translate( "Job template", EnvironmentContext.getLanguage()) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), nerd, translatorService.translate( "Breadcrumbs: Job template", EnvironmentContext.getLanguage()) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -226,7 +226,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	}
 
 	private String getJobsRootTranslated() {
-		return translatorService.translate( "Jobs", EnvironmentContext.getLanguage() );
+		return translatorService.translate( "Breadcrumbs: Jobs", EnvironmentContext.getLanguage() );
 	}
 
 	@Override

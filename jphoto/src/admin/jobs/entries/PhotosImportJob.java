@@ -159,7 +159,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final FileSystemImportParameters fsParameters = ( FileSystemImportParameters ) importParameters;
 
 				builder.append( translatorService.translate( "Photo import job parameter: Dir", getLanguage() ) ).append( ": " ).append( fsParameters.getPictureDir() ).append( "<br />" );
-				builder.append( translatorService.translate( "Photo import job parameter: Generate preview", getLanguage() ) ).append( ": " ).append( translatorService.translate( fsParameters.isDeletePictureAfterImport() ? "Yes" : "No", getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Generate preview", getLanguage() ) ).append( ": " ).append( translatorService.translate( fsParameters.isDeletePictureAfterImport() ? YesNo.YES.getName() : YesNo.NO.getName(), getLanguage() ) ).append( "<br />" );
 				final int userId = fsParameters.getAssignAllGeneratedPhotosToUserId();
 				if ( userId > 0 ) {
 					final User user = services.getUserService().load( userId );
@@ -203,7 +203,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				builder.append( catText ).append( "<br />" );
 
 				final int pageQty = photosightParameters.getPageQty();
-				builder.append( translatorService.translate( "Photo import job parameter: Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages", getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Photo import job parameter: Process all pages", getLanguage() ) ).append( "<br />" );
 
 				builder.append( translatorService.translate( "Photo import job parameter: Import comments", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? YesNo.YES.getName() : YesNo.NO.getName(), getLanguage() ) ).append( "<br />" );
 

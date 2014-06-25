@@ -18,6 +18,9 @@
 <c:set var="yesId" value="<%=YesNo.YES.getId()%>"/>
 <c:set var="uploadAllowance" value="${photoEditDataModel.uploadAllowance}"/>
 
+<c:set var="yes" value="<%=YesNo.YES.getName()%>" />
+<c:set var="no" value="<%=YesNo.NO.getName()%>" />
+
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 	<h3>${eco:translate(photoEditDataModel.currentStep.stepDescription)}</h3>
@@ -78,7 +81,7 @@
 			<table:tr>
 				<table:tdtext text_t="Anonymous posting"/>
 				<table:tddata>
-					${eco:translate(isAnonymousPosting ? "Yes" : "No")}
+					${eco:translate(isAnonymousPosting ? yes : no)}
 					<br />
 					<anonym:anonymousDaySchedule />
 				</table:tddata>

@@ -133,28 +133,93 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Already imported photo #$1 found. Skipping the import of the rest photos of $2</nerd>
+		<ru><![CDATA[Найдена ранее импортированная работа #$1. Импорт остальных работ $2 пропущен.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Avatars dir</nerd>
+		<ru><![CDATA[Каталог аватаров]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job execution log</nerd>
+		<ru><![CDATA[Лог выполнения задач]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job JSP: Execution time</nerd>
+		<ru><![CDATA[Время выполнения]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Existing user found: $1</nerd>
+		<ru><![CDATA[Найден существующий пользователь: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User picker: Found member:</nerd>
+		<ru><![CDATA[Найденный пользователь]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User picker: Reset found member in user picker</nerd>
+		<ru><![CDATA[Сбросить пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: Job progress</nerd>
+		<ru><![CDATA[Прогресс выполнения задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: Job type</nerd>
+		<ru><![CDATA[Тип задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: total users</nerd>
+		<ru><![CDATA[Всего пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: total Photos</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>New user has been created: $1</nerd>
+		<ru><![CDATA[Создан новый пользователь: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job execution log: Job execution log</nerd>
+		<ru><![CDATA[Лог выполнения задач]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job execution log: Job not found. It must be finished.</nerd>
+		<ru><![CDATA[Задача не найдена. Вероятно, она завершила свое выполнение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job execution log: No messages found</nerd>
+		<ru><![CDATA[Записей в логе выполнения нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: Performed $1 from $2</nerd>
+		<ru><![CDATA[Выполнено $1 из $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The job execution finished</nerd>
+		<ru><![CDATA[Выполнение задачи завершено]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>There are active jobs</nerd>
+		<ru><![CDATA[Есть выполняющиеся задачи]]></ru>
 	</translation>
 
 	<translation>

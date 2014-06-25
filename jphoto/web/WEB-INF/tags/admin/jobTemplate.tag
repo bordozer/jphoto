@@ -5,5 +5,5 @@
 
 <c:set var="savedJobTypeName" value="${eco:translate(savedJobType.name)}"/>
 
-<a href="${eco:baseAdminUrl()}/jobs/${savedJobType.prefix}/" title="${eco:translate1('Job template: $1', savedJobTypeName)}">${savedJobTypeName}</a>
+<a href="${eco:baseAdminUrl()}/jobs/${savedJobType.prefix}/" title="${eco:translate1('Job template: $1 link title', savedJobTypeName)}">${savedJobTypeName}</a>
 

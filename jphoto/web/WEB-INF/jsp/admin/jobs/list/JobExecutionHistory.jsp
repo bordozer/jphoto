@@ -264,7 +264,7 @@
 								<c:if test="${not empty jobExecutionHistoryEntry.jobMessage}">
 									<c:set var="jobMessage" value="${jobExecutionHistoryEntry.jobMessage}<br /><br />"/>
 								</c:if>
-								<c:set var="performedText" value="${eco:translate2('Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
+								<c:set var="performedText" value="${eco:translate2('Job JSP: Performed $1 from $2', jobExecutionHistoryEntry.currentJobStep, jobExecutionHistoryEntry.totalJobSteps)}"/>
 
 								<c:set var="jobInformation" value="${jobInfoTitle}${parametersDescription}${jobMessage}${performedText}"/>
 								<html:img16 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate(jobExecutionStatus.name)}" onclick="showJobMessage( ${jobEntryId} );"/> <%-- TODO: pass ${jobInformation} --%>

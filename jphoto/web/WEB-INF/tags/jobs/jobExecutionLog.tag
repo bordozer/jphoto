@@ -3,7 +3,7 @@
 
 <%@ attribute name="jobId" type="java.lang.Integer" required="true" %>
 
-${eco:translate('Execution log')}:
+${eco:translate('Job execution log')}:
 
 <br />
 

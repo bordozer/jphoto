@@ -5,6 +5,7 @@ import admin.jobs.enums.JobRunMode;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import core.enums.SavedJobParameterKey;
+import core.enums.YesNo;
 import core.general.base.CommonProperty;
 import core.log.LogHelper;
 import core.services.utils.DateUtilsService;
@@ -109,7 +110,7 @@ public class JobChainJob extends AbstractJob {
 		final StringBuilder builder = new StringBuilder();
 
 		builder.append( translate( "Run mode:" ) ).append( jobRunMode.getName() ).append( "<br />" );
-		builder.append( translate( "Stop dependant jobs if error:" ) ).append( translate( breakChainExecutionIfError ? "Yes" : "No" ) ).append( "<br />" );
+		builder.append( translate( "Stop dependant jobs if error:" ) ).append( translate( breakChainExecutionIfError ? YesNo.YES.getName() : YesNo.NO.getName() ) ).append( "<br />" );
 		builder.append( translate( "Jobs:" ) ).append( "<br />" );
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {
 			final SavedJob savedJob = services.getSavedJobService().load( savedJobToExecuteId );

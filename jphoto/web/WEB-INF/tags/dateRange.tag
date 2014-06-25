@@ -41,33 +41,33 @@
 
 		<%--TODO: translate--%>
 		<table:tr>
-			<table:tdtext text_t="Date from" isMandatory="true"/>
+			<table:tdtext text_t="Date range: Date from" isMandatory="true"/>
 			<table:tddata>
-				<tags:inputHint inputId="${dateFromControl}" hintTitle_t="Date from" hint="Date from">
-					<jsp:attribute name="inputField">
+				<%--<tags:inputHint inputId="${dateFromControl}" hintTitle_t="Date from" hint="Date from">--%>
+					<%--<jsp:attribute name="inputField">--%>
 						<tags:datePicker fieldName="${dateFromControl}" fieldValue="${dateFrom}" onchange="processDateRangeChange();" />
-					</jsp:attribute>
-				</tags:inputHint>
+					<%--</jsp:attribute>--%>
+				<%--</tags:inputHint>--%>
 			</table:tddata>
 		</table:tr>
 
 		<table:tr>
-			<table:tdtext text_t="Date to" isMandatory="true"/>
+			<table:tdtext text_t="Date range: Date to" isMandatory="true"/>
 			<table:tddata>
-				<tags:inputHint inputId="${dateToControl}" hintTitle_t="Date to" hint="Date from">
-					<jsp:attribute name="inputField">
+				<%--<tags:inputHint inputId="${dateToControl}" hintTitle_t="Date to" hint="Date from">--%>
+					<%--<jsp:attribute name="inputField">--%>
 						<tags:datePicker fieldName="${dateToControl}" fieldValue="${dateTo}" onchange="processDateRangeChange();"/>
-					</jsp:attribute>
-				</tags:inputHint>
+					<%--</jsp:attribute>--%>
+				<%--</tags:inputHint>--%>
 			</table:tddata>
 		</table:tr>
 	</table:table>
 
 	<table:table border="0" width="${tblWidth}">
 		<table:tr>
-			<table:tdtext text_t="Time period"/>
+			<table:tdtext text_t="Date range: Time period"/>
 			<table:tddata>
-				<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('date range tag => parameters => days')}</div>
+				<div id="${dateRangeDiffDiv}">${timePeriod} ${eco:translate('Date range: date range tag => parameters => days')}</div>
 			</table:tddata>
 		</table:tr>
 	</table:table>
@@ -79,16 +79,16 @@
 
 	<table:table border="0" width="${tblWidth}">
 		<table:tr>
-			<table:tdtext text_t="Time period"/>
+			<table:tdtext text_t="Date range: Time period"/>
 			<table:tddata>
-				<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('date range tag => parameters => days')}
+				<html:input fieldId="${timePeriodControl}" fieldValue="${timePeriod}" size="3" onchange="processTimePeriodChange();"/> ${eco:translate('Date range: date range tag => parameters => days')}
 			</table:tddata>
 		</table:tr>
 	</table:table>
 
 	<table:table border="0" width="${tblWidth}">
 		<table:tr>
-			<table:tdtext text_t="Date range"/>
+			<table:tdtext text_t="Date range: Date range"/>
 			<table:tddata>
 				<div id="${timePeriodDateRangeDiv}">${dateFrom} - ${dateTo}</div>
 			</table:tddata>
@@ -100,7 +100,7 @@
 	<table:table border="0" width="${tblWidth}">
 		<table:tr>
 			<table:td cssClass="text-centered">
-				${eco:translate('Actual time will be used')}
+				${eco:translate('Date range: Actual time will be used')}
 			</table:td>
 		</table:tr>
 		<table:tr>

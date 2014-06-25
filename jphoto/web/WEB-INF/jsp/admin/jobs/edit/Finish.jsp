@@ -57,14 +57,14 @@
 		<br/>
 		<h3>${jobStatusNameTranslated}</h3>
 		<br/>
-		<b>${eco:translate2('Performed $1 from $2', current, total)}</b>
+		<b>${eco:translate2('Job JSP: Performed $1 from $2', current, total)}</b>
 		<br/>
 		<br/>
 		<b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} &nbsp; ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
 		&nbsp;&nbsp; - &nbsp;&nbsp; <b>${eco:formatDate(jobExecutionHistoryEntry.endTime)} &nbsp; ${eco:formatTime(jobExecutionHistoryEntry.endTime)}</b>
 		<br/>
 		<br/>
-		${eco:translate('Execution time')}: <b>${eco:formatTime(executionTime)}</b>
+		${eco:translate('Job JSP: Execution time')}: <b>${eco:formatTime(executionTime)}</b>
 
 		<br />
 		<br />
@@ -77,7 +77,7 @@
 		${errorMessage}
 	</c:if>
 
-	<h3>${eco:translate('Job parameters')}:</h3>
+	<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
 	${jobExecutionHistoryEntry.jobParametersDescription}
 
 	<br />

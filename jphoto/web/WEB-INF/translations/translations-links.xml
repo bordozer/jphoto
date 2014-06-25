@@ -103,8 +103,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job template: $1 link title</nerd>
+		<ru><![CDATA[Шаблон задачи: $1]]></ru>
 	</translation>
 
 	<translation>
