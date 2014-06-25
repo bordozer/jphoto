@@ -30,24 +30,20 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 
 	public CacheServiceImpl() {
 		for ( final CacheKey cacheKey : CacheKey.values() ) {
-			cache.put( cacheKey, Maps.<CacheCompositeKey, CacheEntry>newHashMap() );
+			cache.put( cacheKey, Maps.<CacheCompositeKey, CacheEntry> newHashMap() );
 		}
 	}
 
 	@Override
 	public T getEntry( final CacheKey key, final CacheCompositeKey compositeKey, final CacheEntryFactory<T> entryFactory ) {
 
-		if ( ! configurationService.getBoolean( ConfigurationKey.CACHE_USE_CACHE ) ) {
+		if ( !configurationService.getBoolean( ConfigurationKey.CACHE_USE_CACHE ) ) {
 			return entryFactory.createEntry();
-		}
-
-		if ( hasEntry( key, compositeKey )  ) {
-			return updateLastAccessTimeAndReturnCachedEntry( key, compositeKey );
 		}
 
 		synchronized ( cache.get( key ) ) {
 
-			if ( hasEntry( key, compositeKey )  ) {
+			if ( hasEntry( key, compositeKey ) ) {
 				return updateLastAccessTimeAndReturnCachedEntry( key, compositeKey );
 			}
 
@@ -61,12 +57,17 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 				return null;
 			}
 
-			cache.get( key ).put( compositeKey, new CacheEntry( compositeKey, item ) ); // TODO: MUST BE
+			cache.get( key ).put( compositeKey, new CacheEntry( compositeKey, item ) );
 
-//			log.debug( String.format( "CACHE -> %s -> entry #%s has been PUT in the cache", key, id ) );
+			log.debug( String.format( "CACHE -> %s -> entry #%s has been PUT", key, compositeKey ) );
 
 			return item;
 		}
+	}
+
+	@Override
+	public T getEntry( final CacheKey key, final int id, final CacheEntryFactory<T> entryFactory ) {
+		return getEntry( key, new IntegerCacheKey( id ), entryFactory );
 	}
 
 	@Override
@@ -84,13 +85,9 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 
 			if ( cache.get( key ).containsKey( compositeKey ) ) {
 				cache.get( key ).remove( compositeKey );
+				log.debug( String.format( "CACHE -> %s -> entry #%s has been REMOVED", key, compositeKey ) );
 			}
 		}
-	}
-
-	@Override
-	public T getEntry( final CacheKey key, final int id, final CacheEntryFactory<T> entryFactory ) {
-		return getEntry( key, new IntegerCacheKey( id ), entryFactory );
 	}
 
 	@Override
@@ -102,6 +99,7 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 	public void expire( final CacheKey key ) {
 		synchronized ( cache.get( key ) ) {
 			cache.get( key ).clear();
+			log.debug( String.format( "CACHE -> key %s -> has been CLEARED", key ) );
 		}
 	}
 
@@ -113,41 +111,38 @@ public class CacheServiceImpl<T extends Cacheable> implements CacheService<T> {
 
 		final CacheEntry cacheEntry = cache.get( key ).get( compositeKey );
 
-		final Date currentTime = dateUtilsService.getCurrentTime();
-		cacheEntry.setLastAccessTime( currentTime );
+		cacheEntry.setLastAccessTime( dateUtilsService.getCurrentTime() );
 
 		return cacheEntry.getEntry();
 	}
 
 	private void removeTheOldestEntriesFromCache( final CacheKey key ) {
-		synchronized ( cache.get( key ) ) {
-			final int cacheMaxSize = getCacheMaxSize( key );
+		final int cacheMaxSize = getCacheMaxSize( key );
 
-			while ( cache.get( key ).size() >= cacheMaxSize ) {
-				final CacheEntry theEldestEntry = getTheEldestCacheEntry( key );
+		while ( cache.get( key ).size() >= cacheMaxSize ) {
+			final CacheEntry theEldestEntry = getTheEldestCacheEntry( key );
 
-				if ( theEldestEntry != null ) {
-					expire( key, theEldestEntry.getCompositeKey() );
-				}
+			if ( theEldestEntry != null ) {
+				expire( key, theEldestEntry.getCompositeKey() );
 			}
 		}
 	}
 
 	private CacheEntry getTheEldestCacheEntry( final CacheKey key ) {
 		CacheEntry theEldestEntry = null;
-		synchronized ( cache.get( key ) ) {
-			for ( final CacheCompositeKey compositeKey : cache.get( key ).keySet() ) {
 
-				if ( theEldestEntry == null ) {
-					theEldestEntry = cache.get( key ).get( compositeKey );
-					continue;
-				}
+		for ( final CacheCompositeKey compositeKey : cache.get( key ).keySet() ) {
 
-				if ( cache.get( key ).get( compositeKey ).getLastAccessTime().getTime() > theEldestEntry.getLastAccessTime().getTime() ) {
-					theEldestEntry = cache.get( key ).get( compositeKey );
-				}
+			if ( theEldestEntry == null ) {
+				theEldestEntry = cache.get( key ).get( compositeKey );
+				continue;
+			}
+
+			if ( cache.get( key ).get( compositeKey ).getLastAccessTime().getTime() > theEldestEntry.getLastAccessTime().getTime() ) {
+				theEldestEntry = cache.get( key ).get( compositeKey );
 			}
 		}
+
 		return theEldestEntry;
 	}
 

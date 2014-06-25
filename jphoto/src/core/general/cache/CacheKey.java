@@ -1,7 +1,8 @@
 package core.general.cache;
 
 public enum CacheKey {
-	USER, USER_AVATAR
+	USER
+	, USER_AVATAR
 	, GENRE
 	, PHOTO
 	, PHOTO_INFO
