@@ -32,4 +32,184 @@
 		<ru><![CDATA[Загружено с Photosight: $1 пользователя $2, раздел фотосайта: $3]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>Photo import job parameter: Dir</nerd>
+		<ru><![CDATA[Каталог с импортируемыми фотографиями]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Generate preview</nerd>
+		<ru><![CDATA[Генерировать превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: User Id</nerd>
+		<ru><![CDATA[Код локального пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: photos to process</nerd>
+		<ru><![CDATA[К-во работ к импорту]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Photosight user ids</nerd>
+		<ru><![CDATA[Код пользователя фотосайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Import photos from categories</nerd>
+		<ru><![CDATA[Разделы фотосайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: All categories</nerd>
+		<ru><![CDATA[Все разделы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Pages to process</nerd>
+		<ru><![CDATA[К-во страниц]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Import comments</nerd>
+		<ru><![CDATA[Импортировать комментарии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Being imported user parameters section</nerd>
+		<ru><![CDATA[Параметры создаваемого локального пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: User name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Gender</nerd>
+		<ru><![CDATA[Пол]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Membership</nerd>
+		<ru><![CDATA[Тип членства]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job parameter: Delay between requests</nerd>
+		<ru><![CDATA[Задержка между запросами ( сек )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Assign all generated photos to member</nerd>
+		<ru><![CDATA[Присвоить импортированные работы пользователю]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Leave empty to process all images</nerd>
+		<ru><![CDATA[Оставьте пустым поле чтобы импортировать все фотографии из папки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Use ',' as separator</nerd>
+		<ru><![CDATA[Используйте запятую ',' как разделитель]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Nude categories</nerd>
+		<ru><![CDATA[Разделы могущие содержать НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: No nude categories</nerd>
+		<ru><![CDATA[Разделы без НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Photosight user name is used if leave empty</nerd>
+		<ru><![CDATA[Юудет использовано имя пользователя с фотосайта если оставить пустым]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Import sources</nerd>
+		<ru><![CDATA[Источники импорта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Total job steps</nerd>
+		<ru><![CDATA[Импортировать к-во фотографий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Delete picture after import</nerd>
+		<ru><![CDATA[Удалить файл фотографии после импорта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo import job JSP: Photosight user ids</nerd>
+		<ru><![CDATA[Коды пользователей фотосайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Break current photosight user's photos import if already imported photo found</nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
 </translations>

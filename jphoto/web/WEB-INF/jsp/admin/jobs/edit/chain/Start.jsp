@@ -35,7 +35,7 @@
 						</table:td>
 					</table:tr>
 
-					<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
+					<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 					<table:tr>
 						<table:tdtext text_t="Jobs chain" isMandatory="true"/>

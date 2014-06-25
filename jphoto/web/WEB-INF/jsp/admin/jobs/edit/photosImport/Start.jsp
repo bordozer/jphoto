@@ -53,10 +53,10 @@
 						</table:td>
 					</table:tr>
 
-					<table:separatorInfo colspan="2" title="${eco:translate('Job parameters')}"/>
+					<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 					<table:tr>
-						<table:tdtext text_t="Import sources" isMandatory="true"/>
+						<table:tdtext text_t="Photo import job JSP: Import sources" isMandatory="true"/>
 						<table:tddata>
 							<form:radiobuttons path="${importSourceIdControl}" items="${photosImportModel.photosImportSourceTranslatableList.entries}" itemValue="id" itemLabel="name" htmlEscape="false" delimiter="<br />"
 											   onchange="setFormsVisibility();"/>
@@ -73,9 +73,9 @@
 								<table:table width="100%">
 									<%--TODO: translate--%>
 									<table:tr>
-										<table:tdtext text_t="Folder with test pictures" isMandatory="true"/>
+										<table:tdtext text_t="Photo import job parameter: Dir" isMandatory="true"/>
 										<table:tddata>
-											<tags:inputHint inputId="${pictureDirFormControl}" hintTitle_t="Folder with test pictures" hint="Folder with test pictures">
+											<tags:inputHint inputId="${pictureDirFormControl}" hintTitle_t="Photo import job parameter: Dir" hint="Photo import job parameter: Dir">
 										<jsp:attribute name="inputField">
 											<html:input fieldId="${pictureDirFormControl}" fieldValue="${photosImportModel.pictureDir}" size="60"/>
 										</jsp:attribute>
@@ -86,7 +86,7 @@
 									<table:separator colspan="2"/>
 
 									<table:tr>
-										<table:td colspan="2">${eco:translate('Assign all generated photos to member')}?</table:td>
+										<table:td colspan="2">${eco:translate('Photo import job JSP: Assign all generated photos to member')}</table:td>
 									</table:tr>
 
 									<table:tr>
@@ -108,23 +108,23 @@
 
 									<%--TODO: translate--%>
 									<table:tr>
-										<table:tdtext text_t="Total job steps"/>
+										<table:tdtext text_t="Photo import job JSP: Total job steps"/>
 										<table:tddata>
-											<tags:inputHint inputId="${userQtyLimitControl}" hintTitle_t="Total job steps"
-															hint="Photo qty<br />Leave empty to process all images in the folder">
+											<tags:inputHint inputId="${userQtyLimitControl}" hintTitle_t="Photo import job JSP: Total job steps"
+															hint="Photo import job JSP: Photo qty<br />Leave empty to process all images in the folder">
 										<jsp:attribute name="inputField">
 											<html:input fieldId="${userQtyLimitControl}" fieldValue="${photosImportModel.photoQtyLimit}" size="3"/>
 										</jsp:attribute>
 											</tags:inputHint>
 											<br/>
-											${eco:translate('Leave empty to process all images')}
+											${eco:translate('Photo import job JSP: Leave empty to process all images')}
 										</table:tddata>
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Delete picture after import"/>
+										<table:tdtext text_t="Photo import job JSP: Delete picture after import"/>
 										<table:tddata>
-											<tags:inputHint inputId="${deletePictureAfterImportControl}" hintTitle_t="Delete picture after import" hint="Delete picture after import">
+											<tags:inputHint inputId="${deletePictureAfterImportControl}" hintTitle_t="Photo import job JSP: Delete picture after import" hint="Photo import job JSP: Delete picture after import">
 										<jsp:attribute name="inputField">
 											<form:checkbox path="${deletePictureAfterImportControl}" value="true"/>
 										</jsp:attribute>
@@ -147,20 +147,20 @@
 								<div style="float: left; width: 100%;">
 								<table:table width="100%">
 									<table:tr>
-										<table:tdtext text_t="Photosight user ids" isMandatory="true"/>
+										<table:tdtext text_t="Photo import job JSP: Photosight user ids" isMandatory="true"/>
 										<table:td>
 											<form:input path="${photosightUserIdControl}" size="60" onchange="renderPhotosightUserInfo();"/>
 											<br/>
-											${eco:translate("Use ',' as separator")}
+											${eco:translate("Photo import job JSP: Use ',' as separator")}
 											<div id="photosightUserInfoDiv" class="floatleft" style="display: none;"></div>
 										</table:td>
 									</table:tr>
 
 									<table:tr>
 										<table:td colspan="2" >
-											<js:checkboxMassChecker checkboxClass="photosight-category-nude" initiallyChecked="${photosImportModel.photosightImport_importNudeContentByDefault}" /> ${eco:translate('Nude categories')}
+											<js:checkboxMassChecker checkboxClass="photosight-category-nude" initiallyChecked="${photosImportModel.photosightImport_importNudeContentByDefault}" /> ${eco:translate('Photo import job JSP: Nude categories')}
 											&nbsp;&nbsp;
-											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="true" /> ${eco:translate('No nude categories')}
+											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
 										</table:td>
 									</table:tr>
 
@@ -177,7 +177,7 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Import comments"/>
+										<table:tdtext text_t="Photo import job parameter: "/>
 										<table:td>
 											<form:checkbox path="${importCommentsControl}" itemValue="true"/>
 										</table:td>
@@ -191,7 +191,7 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Photosight import: Page qty"/>
+										<table:tdtext text_t="Photo import job parameter: Pages to process"/>
 										<table:td>
 											<form:input path="${pageQtyControl}" size="4"/>
 										</table:td>
@@ -200,16 +200,16 @@
 									<table:separator colspan="2" />
 
 									<table:tr>
-										<table:tdtext text_t="Photosight import: Custom user name"/>
+										<table:tdtext text_t="Photo import job parameter: User name"/>
 										<table:td>
 											<form:input path="${userNameControl}"/>
 											<br/>
-											${eco:translate('Photosight user name is used if leave empty')}
+											${eco:translate('Photo import job JSP: Photosight user name is used if leave empty')}
 										</table:td>
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Gender" isMandatory="true"/>
+										<table:tdtext text_t="Photo import job parameter: Gender" isMandatory="true"/>
 										<table:td>
 											<form:radiobuttons path="${userGenderIdControl}" items="${photosImportModel.userGenderTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />"
 															   htmlEscape="false"/>
@@ -217,7 +217,7 @@
 									</table:tr>
 
 									<table:tr>
-										<table:tdtext text_t="Membership type" isMandatory="true"/>
+										<table:tdtext text_t="Photo import job parameter: Membership" isMandatory="true"/>
 										<table:td>
 											<form:radiobuttons path="${userMembershipIdControl}" items="${photosImportModel.userMembershipTypeTranslatableList.entries}" itemValue="id" itemLabel="name" delimiter="<br />"
 															   htmlEscape="false"/>
@@ -227,7 +227,7 @@
 									<table:separator colspan="2" />
 
 									<table:tr>
-										<table:tdtext text_t="Delay between requests in seconds"/>
+										<table:tdtext text_t="Photo import job parameter: Delay between requests"/>
 										<table:td>
 											<form:input path="${delayBetweenRequestControl}" size="4"/>
 										</table:td>

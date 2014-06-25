@@ -93,6 +93,71 @@
 	</translation>
 
 	<translation>
+		<nerd>Job: Job name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job: This is an active job</nerd>
+		<ru><![CDATA[Задача активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job: Save "$1" as copy?</nerd>
+		<ru><![CDATA[Сохранить "$1" как копию?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job: Run "$1?"</nerd>
+		<ru><![CDATA[Выполнить "$1?"]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job JSP: Job parameters</nerd>
+		<ru><![CDATA[Параметры задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

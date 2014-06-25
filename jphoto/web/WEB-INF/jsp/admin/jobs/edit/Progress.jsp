@@ -71,7 +71,7 @@
 	<br />
 	<div id="progressbar_${jobExecutionHistoryEntry.id}" style="width: 400px; height: 7px; text-align: center;"></div>
 
-	<h3>${eco:translate('Job parameters')}:</h3>
+	<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
 	${jobExecutionHistoryEntry.jobParametersDescription}
 
 	<br />

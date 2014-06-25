@@ -15,6 +15,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
+import core.enums.YesNo;
 import core.general.base.CommonProperty;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
@@ -157,29 +158,29 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case FILE_SYSTEM:
 				final FileSystemImportParameters fsParameters = ( FileSystemImportParameters ) importParameters;
 
-				builder.append( translatorService.translate( "Dir", getLanguage() ) ).append( ": " ).append( fsParameters.getPictureDir() ).append( "<br />" );
-				builder.append( translatorService.translate( "Generate preview", getLanguage() ) ).append( ": " ).append( translatorService.translate( fsParameters.isDeletePictureAfterImport() ? "Yes" : "No", getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Dir", getLanguage() ) ).append( ": " ).append( fsParameters.getPictureDir() ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Generate preview", getLanguage() ) ).append( ": " ).append( translatorService.translate( fsParameters.isDeletePictureAfterImport() ? "Yes" : "No", getLanguage() ) ).append( "<br />" );
 				final int userId = fsParameters.getAssignAllGeneratedPhotosToUserId();
 				if ( userId > 0 ) {
 					final User user = services.getUserService().load( userId );
-					builder.append( translatorService.translate( "User Id", getLanguage() ) ).append( ": " ).append( services.getEntityLinkUtilsService().getUserCardLink( user, getLanguage() ) ).append( "<br />" );
+					builder.append( translatorService.translate( "Photo import job parameter: User Id", getLanguage() ) ).append( ": " ).append( services.getEntityLinkUtilsService().getUserCardLink( user, getLanguage() ) ).append( "<br />" );
 				}
 
 				addDateRangeParameters( builder );
 
-				builder.append( translatorService.translate( "Total job's steps: photos to process", getLanguage() ) ).append( ": " ).append( fsParameters.getPhotoQtyLimit() );
+				builder.append( translatorService.translate( "Photo import job parameter: photos to process", getLanguage() ) ).append( ": " ).append( fsParameters.getPhotoQtyLimit() );
 
 				break;
 			case PHOTOSIGHT:
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
-				builder.append( translatorService.translate( "Photosight user ids", getLanguage() ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Photosight user ids", getLanguage() ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
 
 				final List<PhotosightCategory> photosightCategories = photosightParameters.getPhotosightCategories();
-				builder.append( translatorService.translate( "Import photos from categories", getLanguage() ) ).append( ": " );
+				builder.append( translatorService.translate( "Photo import job parameter: Import photos from categories", getLanguage() ) ).append( ": " );
 				final String catText;
 				if ( photosightCategories.size() == PhotosightCategory.values().length ) {
-					catText = translatorService.translate( "All categories", getLanguage() );
+					catText = translatorService.translate( "Photo import job parameter: All categories", getLanguage() );
 				} else {
 					if ( photosightCategories.size() < PhotosightCategory.values().length / 2 ) {
 						final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
@@ -202,16 +203,16 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				builder.append( catText ).append( "<br />" );
 
 				final int pageQty = photosightParameters.getPageQty();
-				builder.append( translatorService.translate( "Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages", getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Process all pages", getLanguage() ) ).append( "<br />" );
 
-				builder.append( translatorService.translate( "Import comments", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? "Yes" : "No", getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Import comments", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? YesNo.YES.getName() : YesNo.NO.getName(), getLanguage() ) ).append( "<br />" );
 
-				builder.append( translatorService.translate( "Being imported user", getLanguage() ) ).append( ": " ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "User name", getLanguage() ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Gender", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName(), getLanguage() ) ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Membership", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName(), getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Being imported user parameters section", getLanguage() ) ).append( ": " ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: User name", getLanguage() ) ).append( ": " ).append( photosightParameters.getUserName() ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Gender", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName(), getLanguage() ) ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Membership", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName(), getLanguage() ) ).append( "<br />" );
 
-				builder.append( translatorService.translate( "Delay between requests", getLanguage() ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Delay between requests", getLanguage() ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
 
 				break;
 			default:

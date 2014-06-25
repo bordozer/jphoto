@@ -30,7 +30,7 @@
 
 	<table:tr>
 		<table:td width="120">
-			${eco:translate('Job name')}
+			${eco:translate('Job: Job name')}
 		</table:td>
 
 		<table:td>
@@ -40,7 +40,7 @@
 
 	<table:tr>
 		<table:td>
-			${eco:translate('This is an active job')}
+			${eco:translate('Job: This is an active job')}
 		</table:td>
 
 		<table:td>
@@ -70,7 +70,7 @@
 	}
 
 	function saveJobAsCopy() {
-		if( confirmDeletion( '${eco:translate1('Save "$1" as copy?', jobModel.job.jobName)}' ) ) {
+		if( confirmDeletion( '${eco:translate1('Job: Save "$1" as copy?', jobModel.job.jobName)}' ) ) {
 			$( '#${saveAsCopyFormControl}' ).val( true );
 			saveJob();
 		}
@@ -80,7 +80,7 @@
 		$( '#${saveJobModeFormControl}' ).val( false );
 		$( '#FormName' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/${jobModel.job.jobType.prefix}/' );
 
-		if( confirmDeletion( '${eco:translate1('Run "$1?"', jobModel.job.jobName)}' ) ) {
+		if( confirmDeletion( '${eco:translate1('Job: Run "$1?"', jobModel.job.jobName)}' ) ) {
 			$( '#FormName' ).submit();
 		}
 	}
