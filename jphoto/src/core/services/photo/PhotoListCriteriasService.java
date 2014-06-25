@@ -11,7 +11,7 @@ import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias, final Language language );
+	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias );
 
 	PhotoListCriterias getForAllPhotos( final User user );
 

@@ -46,7 +46,7 @@
 		<c:if test="${empty userTeamMembers}">
 			<table:tr>
 				<table:td colspan="2" cssClass="text-centered">
-					${eco:translate('No team')}
+					${eco:translate('User card: No team')}
 				</table:td>
 			</table:tr>
 		</c:if>

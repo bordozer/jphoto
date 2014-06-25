@@ -27,12 +27,9 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
-	@Autowired
-	private TranslatorService translatorService;
-
 	@Override
-	public String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias, final Language language ) {
-		return translatorService.translate( "PhotoList: All photos", language );
+	public String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias ) {
+		return "PhotoList: All photos";
 	}
 
 	private boolean thereAreNoFilterCriterias( final PhotoListCriterias criterias ) {

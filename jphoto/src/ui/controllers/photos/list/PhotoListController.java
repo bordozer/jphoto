@@ -823,18 +823,13 @@ public class PhotoListController {
 		final AbstractPhotoListTitle photoListTitle = listData.getPhotoListTitle();
 		final PhotoList photoList = new PhotoList( photosIds, photoListTitle.getPhotoListTitle().build( language ), showPaging );
 
-		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias, language ) );
+		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
 		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( language ) );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 
 		return photoList;
 	}
-
-	/*private String getPhotoListTitle( final PhotoListCriterias criterias, final boolean isDescription ) {
-		final AbstractPhotoListTitle listTitle = AbstractPhotoListTitle.getInstance( criterias, isDescription, EnvironmentContext.getLanguage(), services );
-		return listTitle.getPhotoListTitle();
-	}*/
 
 	private void initUserGenres( final PhotoListModel model, final User user ) {
 		model.setUser( user );
