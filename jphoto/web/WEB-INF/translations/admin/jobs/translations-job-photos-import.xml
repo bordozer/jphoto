@@ -109,7 +109,7 @@
 
 	<translation>
 		<nerd>Photo import job JSP: Leave empty to process all images</nerd>
-		<ru><![CDATA[Оставьте пустым поле чтобы импортировать все фотографии из папки]]></ru>
+		<ru><![CDATA[Чтобы импортировать все фотографии из папки оставьте поле пустым]]></ru>
 	</translation>
 
 	<translation>
@@ -144,7 +144,7 @@
 
 	<translation>
 		<nerd>Photo import job JSP: Delete picture after import</nerd>
-		<ru><![CDATA[Удалить файл фотографии после импорта]]></ru>
+		<ru><![CDATA[Удалять файл фотографии после импорта]]></ru>
 	</translation>
 
 	<translation>
