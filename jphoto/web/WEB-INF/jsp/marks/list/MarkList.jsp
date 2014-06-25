@@ -17,6 +17,7 @@
 <c:set var="marksByCategoriesMap" value="${photoMarkListModel.marksByCategoriesMap}" />
 
 <c:set var="currentUser" value="<%=EnvironmentContext.getCurrentUser()%>" />
+<c:set var="colspan" value="6" />
 
 <tags:page pageModel="${photoMarkListModel.pageModel}">
 
@@ -28,7 +29,7 @@
 		}
 	</style>
 
-	<div class="photoPreviewLight">
+	<div class="photoPreviewLight" style="margin-top: 20px;">
 		<photo:photoPreviewWithNudeControl photoPreviewWrapper="${photoMarkListModel.photoPreviewWrapper}" />
 	</div>
 
@@ -36,13 +37,13 @@
 
 		<jsp:attribute name="thead">
 
-			<table:td>${eco:translate( "Voter" )}</table:td>
+			<table:td>${eco:translate( "MarkList: Voter" )}</table:td>
 
 			<c:forEach var="votingCategory" items="${votingCategories}">
-				<table:td width="160px">${votingCategory.name}</table:td>
+				<table:td width="160px">${eco:translateVotingCategory(votingCategory.id)}</table:td>
 			</c:forEach>
 
-			<table:td width="160px">${eco:translate( "Vote time" )}</table:td>
+			<table:td width="160px">${eco:translate( "MarkList: Vote time" )}</table:td>
 
 		</jsp:attribute>
 
@@ -76,17 +77,17 @@
 							<c:set var="isMaxAccessibleMark" value="${mark > 0 and maxAccessibleMark > 0 and mark == maxAccessibleMark}" />
 
 							<c:if test="${mark > 0}">
-								<span style="color: darkgreen" title="${eco:translate1('Set mark', maxAccessibleMark)}">
+								<span style="color: darkgreen" title="${eco:translate1('MarkList: Set mark', maxAccessibleMark)}">
 									+${mark}
 								</span>
 								<c:if test="${maxAccessibleMark > 0 and not isMaxAccessibleMark}">
-									<span style="color:gray" title="${eco:translate('Max accessible for voter mark')}"> / ${maxAccessibleMark}</span>
+									<span style="color:gray" title="${eco:translate('MarkList: Max accessible for voter mark')}"> / ${maxAccessibleMark}</span>
 								</c:if>
 							</c:if>
 
 							<c:if test="${isMaxAccessibleMark}">
 								<%--<span style="color: red" title="${eco:translate1('$1 set max accessible for him at voting time mark', eco:escapeHtml(user.name))}">MAX!</span>--%>
-								<html:img16 src="icons16/top-points.png" alt="${eco:translate1('$1 set max accessible for him at voting time mark', eco:escapeHtml(user.name))}" />
+								<html:img16 src="icons16/top-points.png" alt="${eco:translate1('MarkList: $1 set max accessible for him at voting time mark', eco:escapeHtml(user.name))}" />
 							</c:if>
 
 							<c:if test="${mark < 0}">
@@ -125,7 +126,7 @@
 
 			<table:tr>
 				<table:td colspan="${colspan}">
-					<b>${eco:translate1("Total marks: $1", total)}</b>
+					<b>${eco:translate1("MarkList: Total marks: $1", total)}</b>
 				</table:td>
 			</table:tr>
 

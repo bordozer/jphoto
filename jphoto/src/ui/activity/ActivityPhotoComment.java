@@ -51,7 +51,7 @@ public class ActivityPhotoComment extends AbstractPhotoActivityStreamEntry {
 	@Override
 	public String getActivityTextForAdmin( final Language language ) {
 		if ( services.getSecurityService().isSuperAdminUser( EnvironmentContext.getCurrentUser() ) ) {
-			return new TranslatableMessage( "<div class='photoCommentText'>", services ).string( comment.getCommentText() ).string( "</div>" ).build( language );
+			return new TranslatableMessage( services ).string( "<div class='photoCommentText'>" ).string( comment.getCommentText() ).string( "</div>" ).build( language );
 		}
 
 		return super.getActivityTextForAdmin( language );
