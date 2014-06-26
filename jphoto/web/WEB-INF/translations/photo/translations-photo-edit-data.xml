@@ -75,29 +75,111 @@
 	<translation>
 		<nerd>Photo uploading: Save button</nerd>
 		<ru><![CDATA[Сохранить]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Anonymous posting</nerd>
+		<ru><![CDATA[Анонимное размещение работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Comments and appraisal allowances</nerd>
+		<ru><![CDATA[Комментарии и оценки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Contains nude content</nerd>
+		<ru><![CDATA[Работа содержит НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Description</nerd>
+		<ru><![CDATA[Дополнительная информация о работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Genre</nerd>
+		<ru><![CDATA[Раздел]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Keywords</nerd>
+		<ru><![CDATA[Ключевые слова]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Loading photo upload allowance spinning wheel title</nerd>
+		<ru><![CDATA[Проверка возможности размещения работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Name</nerd>
+		<ru><![CDATA[Название]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Photo albums header</nerd>
+		<ru><![CDATA[Фотоальбомы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Select file header</nerd>
+		<ru><![CDATA[Файл фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Sent notification email about new comments</nerd>
+		<ru><![CDATA[Уведомлять на email о новых комментариях к работе]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Upload file button</nerd>
+		<ru><![CDATA[Загрузить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Use comma ',' as separator</nerd>
+		<ru><![CDATA[Используйте запятую ',' в качестве разделителя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Anonymous posting schedule</nerd>
+		<ru><![CDATA[Расписание анонимных дней]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Photo team header</nerd>
+		<ru><![CDATA[Команда]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Photo data section header</nerd>
+		<ru><![CDATA[Параметры работы]]></ru>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
 	</translation>
 
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
-		<ua><![CDATA[]]></ua>
-		<en><![CDATA[]]></en>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 </translations>

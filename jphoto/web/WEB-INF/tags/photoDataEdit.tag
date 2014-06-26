@@ -18,9 +18,9 @@
 
 <form:form modelAttribute="photoEditDataModel" method="post" action="${eco:baseUrl()}/photos/save/">
 
-	<table:table width="900px" border="0">
+	<table:table width="1000px" border="0">
 
-		<table:separatorInfo colspan="2" title="${eco:translate('Photo data')}" />
+		<table:separatorInfo colspan="2" title="${eco:translate('Photo uploading: Photo data section header')}" />
 
 		<table:tredit>
 
@@ -51,9 +51,11 @@
 								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="23" cssClass="photo-genre"/>
 					</div>
 
-					<div class="photo-upload-allowance justify-font" style="float: left; margin-left: 10px; width: 320px;">
-						<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
-					</div>
+					<c:if test="${photoEditDataModel.new}">
+						<div class="photo-upload-allowance justify-font" style="float: left; margin-left: 10px; width: 320px;">
+							<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
+						</div>
+					</c:if>
 
 					<script type="text/javascript">
 
