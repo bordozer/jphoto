@@ -17,10 +17,12 @@ public enum DateRangeType implements IdentifiableNameable {
 		this.name = name;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

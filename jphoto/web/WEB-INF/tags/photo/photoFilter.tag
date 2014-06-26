@@ -1,6 +1,9 @@
 <%@ tag import="core.general.user.UserMembershipType" %>
 <%@ tag import="ui.controllers.photos.list.PhotoFilterSortColumn" %>
 <%@ tag import="ui.controllers.photos.list.PhotoFilterSortOrder" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,9 +14,9 @@
 
 <jsp:useBean id="photoFilterModel" type="ui.controllers.photos.list.PhotoFilterModel" scope="request"/>
 
-<c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
-<c:set var="photoFilterSortColumnsValues" value="<%=PhotoFilterSortColumn.values()%>"/>
-<c:set var="photoFilterSortOrderValues" value="<%=PhotoFilterSortOrder.values()%>"/>
+<c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="photoFilterSortColumnsValues" value="<%=GenericTranslatableList.photoFilterSortColumnTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+<c:set var="photoFilterSortOrderValues" value="<%=GenericTranslatableList.photoFilterSortOrderTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <form:form modelAttribute="photoFilterModel" method="POST" action="${eco:baseUrl()}/photos/filter/">
 

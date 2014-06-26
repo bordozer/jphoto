@@ -145,8 +145,8 @@ public class PhotoListController {
 		if ( filterData == null ) {
 			setDefaultOrdering( filterModel );
 		} else {
-			filterModel.setPhotosSortColumn( filterData.getPhotosSortColumn().getId() );
-			filterModel.setPhotosSortOrder( filterData.getPhotosSortOrder().getId() );
+			filterModel.setPhotosSortColumn( String.valueOf( filterData.getPhotosSortColumn().getId() ) );
+			filterModel.setPhotosSortOrder( String.valueOf( filterData.getPhotosSortOrder().getId() ) );
 		}
 
 		filterModel.setFilterGenres( genreService.loadAll() );
@@ -648,8 +648,8 @@ public class PhotoListController {
 		final boolean showPhotosWithNudeContent = photoFilterModel.isShowPhotosWithNudeContent();
 		final String filterByAuthorName = photoFilterModel.getFilterAuthorName();
 		final List<Integer> filterByPhotoAuthorMembershipTypeIds = photoFilterModel.getPhotoAuthorMembershipTypeIds();
-		final PhotoFilterSortColumn sortColumn = PhotoFilterSortColumn.getById( photoFilterModel.getPhotosSortColumn() );
-		final PhotoFilterSortOrder sortOrder = PhotoFilterSortOrder.getById( photoFilterModel.getPhotosSortOrder() );
+		final PhotoFilterSortColumn sortColumn = PhotoFilterSortColumn.getById( Integer.parseInt( photoFilterModel.getPhotosSortColumn() ) );
+		final PhotoFilterSortOrder sortOrder = PhotoFilterSortOrder.getById( Integer.parseInt( photoFilterModel.getPhotosSortOrder() ) );
 
 		final SqlTable tPhotos = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlIdsSelectQuery selectIdsQuery = new SqlIdsSelectQuery( tPhotos );
@@ -853,8 +853,8 @@ public class PhotoListController {
 	}
 
 	private void setDefaultOrdering( final PhotoFilterModel filterModel ) {
-		filterModel.setPhotosSortColumn( PhotoFilterSortColumn.POSTING_TIME.getId() );
-		filterModel.setPhotosSortOrder( PhotoFilterSortOrder.DESC.getId() );
+		filterModel.setPhotosSortColumn( String.valueOf( PhotoFilterSortColumn.POSTING_TIME.getId() ) );
+		filterModel.setPhotosSortOrder( String.valueOf( PhotoFilterSortOrder.DESC.getId() ) );
 	}
 
 	private void fillFilterModelWithUserData( final PhotoFilterModel filterModel, final User user ) {

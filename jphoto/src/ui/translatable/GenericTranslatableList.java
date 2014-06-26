@@ -16,6 +16,8 @@ import core.general.user.UserStatus;
 import core.interfaces.IdentifiableNameable;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import ui.controllers.photos.list.PhotoFilterSortColumn;
+import ui.controllers.photos.list.PhotoFilterSortOrder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -100,6 +102,14 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<Language> languageTranslatableList( final TranslatorService translatorService ) {
 		return languageTranslatableList( Arrays.asList( Language.values() ), translatorService );
+	}
+
+	public static GenericTranslatableList<PhotoFilterSortColumn> photoFilterSortColumnTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<PhotoFilterSortColumn>( PhotoFilterSortColumn.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<PhotoFilterSortOrder> photoFilterSortOrderTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<PhotoFilterSortOrder>( PhotoFilterSortOrder.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<Language> languageTranslatableList( final List<Language> values, final TranslatorService translatorService ) {

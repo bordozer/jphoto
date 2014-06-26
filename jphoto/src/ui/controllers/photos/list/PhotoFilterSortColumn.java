@@ -1,36 +1,40 @@
 package ui.controllers.photos.list;
 
-public enum PhotoFilterSortColumn {
+import core.interfaces.IdentifiableNameable;
 
-	POSTING_TIME( "1", "PhotoFilterSortColumn: Posing time" )
-	, COMMENTS_COUNT( "2", "PhotoFilterSortColumn: Count of comment" )
-	, VIEWS_COUNT( "3", "PhotoFilterSortColumn: Count of views" )
-	, RATING( "4", "PhotoFilterSortColumn: Rating" )
+public enum PhotoFilterSortColumn implements IdentifiableNameable {
+
+	POSTING_TIME( 1, "PhotoFilterSortColumn: Posing time" )
+	, COMMENTS_COUNT( 2, "PhotoFilterSortColumn: Count of comment" )
+	, VIEWS_COUNT( 3, "PhotoFilterSortColumn: Count of views" )
+	, RATING( 4, "PhotoFilterSortColumn: Rating" )
 	;
 
-	private final String id;
+	private final int id;
 	private final String name;
 
-	private PhotoFilterSortColumn( final String id, final String name ) {
+	private PhotoFilterSortColumn( final int id, final String name ) {
 		this.id = id;
 		this.name = name;
 	}
 
-	public String getId() {
+	@Override
+	public int getId() {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
-	public static PhotoFilterSortColumn getById( final String id ) {
+	public static PhotoFilterSortColumn getById( final int id ) {
 		for ( final PhotoFilterSortColumn sortOrder : PhotoFilterSortColumn.values() ) {
-			if ( sortOrder.getId().equals( id ) ) {
+			if ( sortOrder.getId() == id ) {
 				return sortOrder;
 			}
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal PhotoFilterSortColumn: %s", id ) );
+		throw new IllegalArgumentException( String.format( "Illegal PhotoFilterSortColumn: %d", id ) );
 	}
 }

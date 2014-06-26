@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PhotoFilterSortOrder: Ascending</nerd>
+		<ru><![CDATA[По возрастанию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoFilterSortOrder: Descending</nerd>
+		<ru><![CDATA[По убыванию]]></ru>
+	</translation>
+
+</translations>

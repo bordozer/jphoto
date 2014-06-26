@@ -94,7 +94,7 @@
 
 		<table:trinfo>
 			<table:tdtext text_t="<%=UserEditDataValidator.USER_DATA_MEMBERSHIP_TYPE%>"/>
-			<table:td>${user.membershipType.name}</table:td>
+			<table:td>${eco:translate(user.membershipType.name)}</table:td>
 		</table:trinfo>
 
 		<table:trinfo>
