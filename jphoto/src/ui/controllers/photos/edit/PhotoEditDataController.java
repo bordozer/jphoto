@@ -194,6 +194,7 @@ public class PhotoEditDataController {
 
 		model.clear();
 		model.setNew( false );
+		model.setGenreWrappers( getGenreWrappers() );
 
 		initModelFromPhoto( model, photo );
 
