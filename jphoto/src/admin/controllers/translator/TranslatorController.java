@@ -113,6 +113,14 @@ public class TranslatorController {
 		return VIEW;
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/unused/letter/{letter}/")
+	public String getUnusedTranslations( final @PathVariable( "letter" ) String letter, final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+
+		initModel( model.filter( letter ), TranslationMode.UNUSED_TRANSLATIONS, TranslationMapLoadStrategy.getInstance( translatorService, TranslationMode.TRANSLATED ).filterUnused() );
+
+		return VIEW;
+	}
+
 	private void initModel( final TranslatorModel model, final TranslationMode mode, final TranslationMapLoadStrategy loadStrategy ) {
 
 		final TranslationMapLoadStrategy loader = loadStrategy;

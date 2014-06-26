@@ -54,14 +54,18 @@
 				&nbsp;
 			</c:forEach>
 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<c:if test="${translatorModel.translationMode != 'UNUSED_TRANSLATIONS' }">
 
-			<c:forEach var="language" items="${languages}" >
-				<c:if test="${language == translatorModel.language}"><span class='selected'></c:if>
-				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.translationMode.prefix}/language/${language.code}/" class="block-background">${eco:translate(language.name)}</a>
-				<c:if test="${language == translatorModel.language}"></span></c:if>
-				&nbsp;&nbsp;
-			</c:forEach>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+				<c:forEach var="language" items="${languages}" >
+					<c:if test="${language == translatorModel.language}"><span class='selected'></c:if>
+					<a href="${eco:baseAdminUrl()}/translator/${translatorModel.translationMode.prefix}/language/${language.code}/" class="block-background">${eco:translate(language.name)}</a>
+					<c:if test="${language == translatorModel.language}"></span></c:if>
+					&nbsp;&nbsp;
+				</c:forEach>
+
+			</c:if>
 
 			<br/>
 			<br/>

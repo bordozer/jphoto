@@ -14,7 +14,7 @@
 <jsp:useBean id="exceptionModel" type="core.exceptions.ExceptionModel" scope="request"/>
 
 <%
-	final String title = exceptionModel.getTranslatorService().translate( "Oops!", EnvironmentContext.getLanguage() );
+	final String title = exceptionModel.getTranslatorService().translate( "General exception: Oops!", EnvironmentContext.getLanguage() );
 
 	final String[] traceElements = ExceptionUtils.getStackFrames( exception );
 
@@ -35,7 +35,7 @@
 <c:set var="rootCause" value="<%=rootCause%>"/>
 <c:set var="traceElements" value="<%=traceElements%>"/>
 
-<c:set var="messageOops" value="Oops!" />
+<c:set var="messageOops" value="General exception: Oops!" />
 
 <tags:page pageModel="${pageModel}">
 
