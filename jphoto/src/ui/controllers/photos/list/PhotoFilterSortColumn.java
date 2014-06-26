@@ -2,10 +2,10 @@ package ui.controllers.photos.list;
 
 public enum PhotoFilterSortColumn {
 
-	POSTING_TIME( "1", "Posing time" )
-	, COMMENTS_COUNT( "2", "Count of comment" )
-	, VIEWS_COUNT( "3", "Count of views" )
-	, RATING( "4", "Rating" )
+	POSTING_TIME( "1", "PhotoFilterSortColumn: Posing time" )
+	, COMMENTS_COUNT( "2", "PhotoFilterSortColumn: Count of comment" )
+	, VIEWS_COUNT( "3", "PhotoFilterSortColumn: Count of views" )
+	, RATING( "4", "PhotoFilterSortColumn: Rating" )
 	;
 
 	private final String id;
