@@ -23,17 +23,41 @@ public abstract class TranslationMapLoadStrategy {
 		translationMap = loadTranslationMapSorted();
 	}
 
-	public static TranslationMapLoadStrategy getTranslatedMapLoader( final TranslatorService translatorService ) {
+	public static TranslationMapLoadStrategy getTranslatedMapLoadStrategy( final TranslatorService translatorService ) {
+
 		return new TranslationMapLoadStrategy( translatorService ) {
+
 			@Override
 			protected Map<NerdKey, TranslationData> loadTranslationMap() {
-				return translatorService.getTranslationsMap();
+
+				final Map<NerdKey, TranslationData> translationMap = translatorService.getTranslationsMap();
+				final HashMap<NerdKey, TranslationData> translatedDataOnlyMap = newHashMap();
+
+				for ( final NerdKey nerdKey : translationMap.keySet() ) {
+					final TranslationData translationData = translationMap.get( nerdKey );
+					final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
+
+					CollectionUtils.filter( translations, new Predicate<TranslationEntry>() {
+						@Override
+						public boolean evaluate( final TranslationEntry translationEntry ) {
+							return ! ( translationEntry instanceof TranslationEntryMissed ) && ! ( translationEntry instanceof TranslationEntryNerd );
+						}
+					} );
+
+					if ( ! translations.isEmpty() ) {
+						translatedDataOnlyMap.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations ) );
+					}
+				}
+
+				return translatedDataOnlyMap;
 			}
 		};
 	}
 
-	public static TranslationMapLoadStrategy getUntranslatedMapLoader( final TranslatorService translatorService ) {
+	public static TranslationMapLoadStrategy getUntranslatedMapLoadStrategy( final TranslatorService translatorService ) {
+
 		return new TranslationMapLoadStrategy( translatorService ) {
+
 			@Override
 			protected Map<NerdKey, TranslationData> loadTranslationMap() {
 				return translatorService.getUntranslatedMap();
@@ -46,6 +70,7 @@ public abstract class TranslationMapLoadStrategy {
 		final HashMap<NerdKey, TranslationData> map = newHashMap( translationMap );
 
 		for ( final NerdKey nerdKey : translationMap.keySet() ) {
+
 			final TranslationData translationData = translationMap.get( nerdKey );
 
 			final String nerd = translationData.getTranslationEntry( Language.NERD ).getNerd();

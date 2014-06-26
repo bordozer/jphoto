@@ -9,7 +9,7 @@
 
 <jsp:useBean id="translatorModel" type="admin.controllers.translator.TranslatorModel" scope="request"/>
 
-<c:set var="languages" value="<%=Arrays.asList( Language.values() )%>"/>
+<c:set var="languages" value="<%=Language.getUILanguages()%>"/>
 <c:set var="languageNerd" value="<%=Language.NERD%>"/>
 
 <tags:page pageModel="${translatorModel.pageModel}">
