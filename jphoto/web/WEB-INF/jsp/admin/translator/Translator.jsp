@@ -38,6 +38,9 @@
 				<c:if test="${translationMode == translatorModel.translationMode}"><span class='selected'></c:if>
 				<a href="${eco:baseAdminUrl()}/translator/${translationMode.prefix}/">${eco:translate(translationMode.name)}</a> ( ${translatorModel.modeRecordsCount[translationMode]} )
 				<c:if test="${translationMode == translatorModel.translationMode}"></span></c:if>
+
+				&nbsp;&nbsp;&nbsp;&nbsp;
+
 			</c:forEach>
 
 			<br/>
@@ -67,7 +70,7 @@
 				<c:set var="nerdKey" value="${entry.key}"/>
 				<c:set var="translationData" value="${entry.value}"/>
 
-				<span class="selected base-font-color photo-category-link">${nerdKey.nerd}</span> ( usage index: ${translationData.usageIndex} )
+				<span class="selected base-font-color photo-category-link">${nerdKey.nerd}</span> ( usage index: <b>${translationData.usageIndex}</b> )
 				<br/>
 				<c:forEach var="translations" items="${translationData.translations}">
 					<span title="${eco:translate(translations.translationEntryType.description)}">

@@ -107,7 +107,7 @@ public class Translator {
 		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
 
 			final TranslationData translationData = translationsMap.get( nerdKey );
-			final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
+			final List<TranslationEntry> translations = newArrayList( new TranslationEntryNerd( nerdKey.getNerd() ) ); // translationData.getTranslations()
 
 			if ( translationData.getUsageIndex() == 0 ) {
 				map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
