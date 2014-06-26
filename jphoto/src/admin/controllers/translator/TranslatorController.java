@@ -1,6 +1,7 @@
 package admin.controllers.translator;
 
 import core.services.translator.*;
+import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,70 +31,113 @@ public class TranslatorController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/")
 	public String getTranslatedRoot( final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
-		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoadStrategy( translatorService ) );
+
+		initModel( model, TranslationMode.TRANSLATED );
+
+		return VIEW;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/translated/")
 	public String getTranslated( final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
-		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoadStrategy( translatorService ) );
+
+		initModel( model, TranslationMode.TRANSLATED );
+
+		return VIEW;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "translated/language/{languageCode}/")
 	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
-		final Language language = Language.getByCode( languageCode );
-		model.setLanguage( language );
-		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoadStrategy( translatorService ).filter( language ) );
+
+		initModel( model, TranslationMode.TRANSLATED, Language.getByCode( languageCode ) );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "translated/letter/{letter}/" )
 	public String getTranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		model.setFilterByLetter( letter );
-		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoadStrategy( translatorService ).filter( letter ) );
+
+		initModel( model, TranslationMode.TRANSLATED, letter );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "translated/language/{languageCode}/letter/{letter}/" )
 	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		final Language language = Language.getByCode( languageCode );
-		model.setLanguage( language );
-		model.setFilterByLetter( letter );
-		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoadStrategy( translatorService ).filter( letter ).filter( language ) );
+
+		initModel( model, TranslationMode.TRANSLATED, Language.getByCode( languageCode ), letter );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/" )
 	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoadStrategy( translatorService ) );
+
+		initModel( model, TranslationMode.UNTRANSLATED );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/" )
 	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		final Language language = Language.getByCode( languageCode );
-		model.setLanguage( language );
-		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoadStrategy( translatorService ).filter( language ) );
+
+		initModel( model, TranslationMode.UNTRANSLATED, Language.getByCode( languageCode ) );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/letter/{letter}/" )
 	public String getUntranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		model.setFilterByLetter( letter );
-		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoadStrategy( translatorService ).filter( letter ) );
+
+		initModel( model, TranslationMode.UNTRANSLATED, letter );
+
+		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/letter/{letter}/" )
 	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
-		final Language language = Language.getByCode( languageCode );
-		model.setLanguage( language );
-		model.setFilterByLetter( letter );
-		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoadStrategy( translatorService ).filter( letter ).filter( language ) );
+
+		initModel( model, TranslationMode.UNTRANSLATED, Language.getByCode( languageCode ), letter );
+
+		return VIEW;
 	}
 
-	private String getView( final TranslatorModel model, final TranslationMode mode, final TranslationMapLoadStrategy loader ) {
+	private void initModel( final TranslatorModel model, final TranslationMode mode, final Language language ) {
+		model.setLanguage( language );
+
+		initModel( model, mode );
+	}
+
+	private void initModel( final TranslatorModel model, final TranslationMode mode, final String letter ) {
+		model.setFilterByLetter( letter );
+
+		initModel( model, mode );
+	}
+
+	private void initModel( final TranslatorModel model, final TranslationMode mode, final Language language, final String letter ) {
+		model.setLanguage( language );
+		model.setFilterByLetter( letter );
+
+		initModel( model, mode );
+	}
+
+	private void initModel( final TranslatorModel model, final TranslationMode mode ) {
+
+		final TranslationMapLoadStrategy loader = TranslationMapLoadStrategy.getInstance( translatorService, mode );
+
+		if ( model.getLanguage() != null ) {
+			loader.filter( model.getLanguage() );
+		}
+
+		if ( StringUtils.isNotEmpty( model.getFilterByLetter() ) ) {
+			loader.filter( model.getFilterByLetter() );
+		}
+
 		model.setTranslationsMap( loader.getTranslationMap() );
 
 		model.setLetters( loader.getLetters() );
 		model.setTranslationMode( mode );
 
 		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
-
-		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
