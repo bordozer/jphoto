@@ -38,7 +38,7 @@
 
 		<form:hidden path="formAction"/>
 
-		<table:table border="0" width="700">
+		<table:table border="0" width="750">
 
 			<table:tr>
 			<table:td colspan="2">

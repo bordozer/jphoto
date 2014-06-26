@@ -194,7 +194,7 @@
 
 	<translation>
 		<nerd>ExecutionTask: Interval: $1 $2</nerd>
-		<ru><![CDATA[Интервал $1 $2]]></ru>
+		<ru><![CDATA[Интервал: $1 $2]]></ru>
 	</translation>
 
 	<translation>
@@ -204,7 +204,7 @@
 
 	<translation>
 		<nerd>ExecutionTask: Every hour during the day</nerd>
-		<ru><![CDATA[Каждый час втечение дня]]></ru>
+		<ru><![CDATA[В начале каждого часа втечение дня]]></ru>
 	</translation>
 
 	<translation>
