@@ -1,10 +1,12 @@
 package core.services.translator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public class Translator {
 
@@ -23,7 +25,10 @@ public class Translator {
 			return new TranslationEntryMissed( nerd, language );
 		}
 
-		return translationsMap.get( key ).getTranslationEntry( language );
+		final TranslationData translationData = translationsMap.get( key );
+		translationData.increaseUseIndex();
+
+		return translationData.getTranslationEntry( language );
 	}
 
 	public String translate( final String nerd, final Language language ) {
@@ -93,6 +98,23 @@ public class Translator {
 
 	public Map<NerdKey, TranslationData> getUntranslatedMap() {
 		return untranslatedMap;
+	}
+
+	public Map<NerdKey, TranslationData> getUnusedTranslationsMap() {
+		final Map<NerdKey, TranslationData> translationsMap = getTranslationsMap();
+		final HashMap<NerdKey, TranslationData> map = newLinkedHashMap();
+
+		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
+
+			final TranslationData translationData = translationsMap.get( nerdKey );
+			final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
+
+			if ( translationData.getUsageIndex() == 0 ) {
+				map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
+			}
+		}
+
+		return map;
 	}
 
 	public void clearUntranslatedMap() {

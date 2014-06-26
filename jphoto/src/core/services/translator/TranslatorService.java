@@ -18,6 +18,8 @@ public interface TranslatorService {
 
 	Map<NerdKey, TranslationData> getUntranslatedMap();
 
+	Map<NerdKey, TranslationData> getUnusedTranslationsMap();
+
 	void initTranslations() throws DocumentException;
 
 	void reloadTranslations() throws DocumentException;

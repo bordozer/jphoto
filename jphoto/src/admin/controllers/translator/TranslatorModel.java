@@ -17,6 +17,8 @@ public class TranslatorModel extends AbstractGeneralModel {
 	private String filterByLetter;
 	private Language language;
 
+	private Map<TranslationMode, Integer> modeRecordsCount;
+
 	public TranslatorModel filter( final Language language ) {
 		this.language = language;
 		return this;
@@ -65,5 +67,13 @@ public class TranslatorModel extends AbstractGeneralModel {
 
 	public void setLanguage( final Language language ) {
 		this.language = language;
+	}
+
+	public Map<TranslationMode, Integer> getModeRecordsCount() {
+		return modeRecordsCount;
+	}
+
+	public void setModeRecordsCount( final Map<TranslationMode, Integer> modeRecordsCount ) {
+		this.modeRecordsCount = modeRecordsCount;
 	}
 }

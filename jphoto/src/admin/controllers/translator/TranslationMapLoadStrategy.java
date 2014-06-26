@@ -42,22 +42,22 @@ public abstract class TranslationMapLoadStrategy {
 			@Override
 			protected Map<NerdKey, TranslationData> loadTranslationMap() {
 
-				final Map<NerdKey, TranslationData> translationMap = translatorService.getTranslationsMap();
+				final Map<NerdKey, TranslationData> translationMap1 = translatorService.getTranslationsMap();
 				final HashMap<NerdKey, TranslationData> translatedDataOnlyMap = newHashMap();
 
-				for ( final NerdKey nerdKey : translationMap.keySet() ) {
-					final TranslationData translationData = translationMap.get( nerdKey );
+				for ( final NerdKey nerdKey : translationMap1.keySet() ) {
+					final TranslationData translationData = translationMap1.get( nerdKey );
 					final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
 
 					CollectionUtils.filter( translations, new Predicate<TranslationEntry>() {
 						@Override
 						public boolean evaluate( final TranslationEntry translationEntry ) {
-							return ! ( translationEntry instanceof TranslationEntryMissed ) && ! ( translationEntry instanceof TranslationEntryNerd );
+							return !( translationEntry instanceof TranslationEntryMissed ) && !( translationEntry instanceof TranslationEntryNerd );
 						}
 					} );
 
 					if ( ! translations.isEmpty() ) {
-						translatedDataOnlyMap.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations ) );
+						translatedDataOnlyMap.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
 					}
 				}
 
@@ -120,11 +120,18 @@ public abstract class TranslationMapLoadStrategy {
 			} );
 
 			if ( ! translations.isEmpty() ) {
-				map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations ) );
+				map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
 			}
 		}
 
 		translationMap = map;
+
+		return this;
+	}
+
+	public TranslationMapLoadStrategy filterUnused() {
+
+		translationMap = translatorService.getUnusedTranslationsMap();
 
 		return this;
 	}
@@ -159,10 +166,6 @@ public abstract class TranslationMapLoadStrategy {
 		return result;
 	}
 
-	public Map<NerdKey, TranslationData> getTranslationMap() {
-		return translationMap;
-	}
-
 	private  Map<NerdKey, TranslationData> loadTranslationMapSorted() {
 
 		final TreeMap<NerdKey, TranslationData> sortedMap = new TreeMap<NerdKey, TranslationData>( new Comparator<NerdKey>() {
@@ -175,5 +178,9 @@ public abstract class TranslationMapLoadStrategy {
 		sortedMap.putAll( loadTranslationMap() );
 
 		return sortedMap;
+	}
+
+	public Map<NerdKey, TranslationData> getTranslationMap() {
+		return translationMap;
 	}
 }

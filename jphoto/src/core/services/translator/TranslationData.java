@@ -8,9 +8,17 @@ public class TranslationData {
 
 	private final List<TranslationEntry> translations;
 
+	private Integer usageIndex = 0;
+
 	public TranslationData( final String nerd, final List<TranslationEntry> translations ) {
 		this.nerd = nerd;
 		this.translations = translations;
+	}
+
+	public TranslationData( final String nerd, final List<TranslationEntry> translations, final int usageIndex ) {
+		this.nerd = nerd;
+		this.translations = translations;
+		this.usageIndex = usageIndex;
 	}
 
 	public TranslationEntry getTranslationEntry( final Language language ) {
@@ -29,5 +37,15 @@ public class TranslationData {
 
 	public List<TranslationEntry> getTranslations() {
 		return translations;
+	}
+
+	public int getUsageIndex() {
+		return usageIndex;
+	}
+
+	public void increaseUseIndex() {
+		synchronized ( usageIndex ) {
+			usageIndex++;
+		}
 	}
 }

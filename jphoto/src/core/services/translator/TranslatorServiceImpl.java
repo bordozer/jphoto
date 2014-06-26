@@ -69,6 +69,11 @@ public class TranslatorServiceImpl implements TranslatorService {
 	}
 
 	@Override
+	public Map<NerdKey, TranslationData> getUnusedTranslationsMap() {
+		return translator.getUnusedTranslationsMap();
+	}
+
+	@Override
 	public void initTranslations() throws DocumentException {
 
 		final Map<NerdKey, TranslationData> translationsMap = newHashMap();

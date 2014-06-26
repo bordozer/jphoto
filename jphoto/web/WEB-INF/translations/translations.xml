@@ -116,6 +116,10 @@
 		<nerd>Translator: Untranslated</nerd>
 		<ru><![CDATA[Непереведенные]]></ru>
 	</translation>
+	<translation>
+		<nerd>Translator: unused translations</nerd>
+		<ru><![CDATA[Неиспользуемые]]></ru>
+	</translation>
 
 	<translation>
 		<nerd>Error 404 - Page not found</nerd>
