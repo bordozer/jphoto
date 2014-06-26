@@ -23,6 +23,17 @@ public abstract class TranslationMapLoadStrategy {
 		translationMap = loadTranslationMapSorted();
 	}
 
+	public static TranslationMapLoadStrategy getInstance( final TranslatorService translatorService, final TranslationMode translationMode ) {
+		switch ( translationMode ) {
+			case TRANSLATED:
+				return getTranslatedMapLoadStrategy( translatorService );
+			case UNTRANSLATED:
+				return getUntranslatedMapLoadStrategy( translatorService );
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal TranslationMode: #%s", translationMode ) );
+	}
+
 	public static TranslationMapLoadStrategy getTranslatedMapLoadStrategy( final TranslatorService translatorService ) {
 
 		return new TranslationMapLoadStrategy( translatorService ) {
