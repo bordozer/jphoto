@@ -5,96 +5,115 @@
 	<translation>
 		<nerd>Breadcrumbs: Portal page</nerd>
 		<ru><![CDATA[Главная страница]]></ru>
+		<ua><![CDATA[Головна сторiнка]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Page title: $1: Portal page</nerd>
 		<ru><![CDATA[$1: Главная страница]]></ru>
+		<ua><![CDATA[$1: Головна сторiнка]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Photo uploading</nerd>
 		<ru><![CDATA[Загрузка работы]]></ru>
+		<ua><![CDATA[Завантаження роботи]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Photo editing</nerd>
 		<ru><![CDATA[Редактирование]]></ru>
+		<ua><![CDATA[Редагування]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Photo activities</nerd>
 		<ru><![CDATA[Лента событий]]></ru>
+		<ua><![CDATA[Струм подiй]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Photo previews</nerd>
 		<ru><![CDATA[Просмотры]]></ru>
+		<ua><![CDATA[Перегляди]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Photo appraisement</nerd>
 		<ru><![CDATA[Оценки]]></ru>
+		<ua><![CDATA[Оцiнки]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Activity stream</nerd>
 		<ru><![CDATA[Лента событий]]></ru>
+		<ua><![CDATA[Струм подiй]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Votes for rank in genre</nerd>
 		<ru><![CDATA[Голоса за ранг в разделе]]></ru>
+		<ua><![CDATA[Голосування за ранг у роздiлi]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: user edit data</nerd>
-		<ru><![CDATA[Редактирование ]]></ru>
+		<ru><![CDATA[Редактирование]]></ru>
+		<ua><![CDATA[Редагування]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: User avatar</nerd>
 		<ru><![CDATA[Аватар]]></ru>
+		<ua><![CDATA[Аватар]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: messaging with user $1</nerd>
 		<ru><![CDATA[Переписка с $1]]></ru>
+		<ua><![CDATA[Листування з $1]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: User team</nerd>
 		<ru><![CDATA[Команда]]></ru>
+		<ua><![CDATA[Команда]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: New member of user team</nerd>
 		<ru><![CDATA[Новый член команды]]></ru>
+		<ua><![CDATA[Новий член команди]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Editing user team member's data</nerd>
 		<ru><![CDATA[Редактирование]]></ru>
+		<ua><![CDATA[Редагування]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Create new user photo album</nerd>
 		<ru><![CDATA[Новый фотоальбом]]></ru>
+		<ua><![CDATA[Новий фотоальбом]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: User photo album edit</nerd>
 		<ru><![CDATA[Редактирование]]></ru>
+		<ua><![CDATA[Редагування]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Wrong user name or password</nerd>
 		<ru><![CDATA[Неверный логин или пароль]]></ru>
+		<ua><![CDATA[Невiрний логiн ибо пароль]]></ua>
 	</translation>
 
 	<translation>
 		<nerd>Breadcrumbs: Authorization</nerd>
 		<ru><![CDATA[Авторизация]]></ru>
+		<ua><![CDATA[Авторизацiя]]></ua>
 	</translation>
 
 	<translation>
