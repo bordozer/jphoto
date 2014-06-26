@@ -84,7 +84,7 @@ public class SchedulerTaskEditController {
 
 		final ExecutionTaskType initTaskType = ExecutionTaskType.ONCE;
 
-		model.setSchedulerTaskName( translatorService.translate( "New scheduler task", EnvironmentContext.getLanguage() ) );
+		model.setSchedulerTaskName( translatorService.translate( "SchedulerTask: New scheduler task", EnvironmentContext.getLanguage() ) );
 		model.setExecutionTaskTypeId( initTaskType.getId() );
 		model.setStartTaskDate( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ) );
 		model.setSchedulerTaskTime( dateUtilsService.formatTimeShort( dateUtilsService.getFirstSecondOfToday() ) );
@@ -92,6 +92,7 @@ public class SchedulerTaskEditController {
 		model.setSavedJobs( getSavedJobs() );
 		model.setSelectedTaskType( initTaskType );
 		model.setPeriodicalTaskHours( SchedulerTaskEditModel.HOURS );
+		model.setSchedulerTaskSavedParameters( translatorService.translate( "SchedulerTask: New scheduler task does not have original parameters", EnvironmentContext.getLanguage() ) );
 
 		model.setPageTitleData( breadcrumbsAdminService.getAdminSchedulerNewBreadcrumbs() );
 

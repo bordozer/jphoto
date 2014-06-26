@@ -1,4 +1,3 @@
-<%@ tag import="core.general.executiontasks.Weekday" %>
 <%@ tag import="admin.controllers.scheduler.tasks.edit.SchedulerTaskEditModel" %>
 <%@ tag import="ui.translatable.GenericTranslatableList" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
@@ -32,7 +31,7 @@
 			/>
 
 	<table:tr>
-		<table:tdtext text_t="Execution time" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Execution time" isMandatory="true" />
 
 		<table:tddata>
 			<html:input fieldId="${schedulerTaskTime}" size="6" fieldValue="${startTaskTime}"/> <tasks:executionTaskTime />
@@ -40,7 +39,7 @@
 	</table:tr>
 
 	<table:tr>
-		<table:tdtext text_t="Days of week" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Days of week" isMandatory="true" />
 
 		<table:tddata>
 			<js:checkboxMassChecker checkboxClass="dailyTaskWeekdayIds" />

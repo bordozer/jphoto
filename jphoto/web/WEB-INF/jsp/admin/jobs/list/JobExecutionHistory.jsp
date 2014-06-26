@@ -81,7 +81,7 @@
 <div class="jobHistoryToolbar">
 	<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == 0}">${selectedIconCss}</c:if>">
 		<a href="${eco:baseAdminUrl()}/jobs/done/${jobTypeIdUrlFilter}">
-			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('Reset filter by execution status')}"/>
+			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by execution status')}"/>
 		</a>
 	</div>
 
@@ -89,7 +89,7 @@
 		<div class="jobHistoryButton <c:if test="${jobExecutionStatusIdFilter == jobExecutionStatus.id}">${selectedIconCss}</c:if>">
 			<a href="${eco:baseAdminUrl()}/jobs/done/status/${jobExecutionStatus.id}/${jobTypeIdUrlFilter}">
 				<c:set var="jobExecutionStatusNameTranslated" value="${eco:translate(jobExecutionStatus.name)}"/>
-				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
+				<html:img32 src="jobExecutionStatus/${jobExecutionStatus.icon}" alt="${eco:translate1('JobExecutionHistory: Filter by job status: $1', jobExecutionStatusNameTranslated)}"/>
 			</a>
 		</div>
 	</c:forEach>
@@ -97,21 +97,21 @@
 	<div class="jobHistoryButton wdth">&nbsp;</div>
 	<div class="jobHistoryButton wdth">
 		<a href="${eco:baseAdminUrl()}/jobs/done/">
-			<html:img32 src="jobExecutionStatus/allEntries.png" alt="${eco:translate('Reset all filters')}"/>
+			<html:img32 src="jobExecutionStatus/allEntries.png" alt="${eco:translate('JobExecutionHistory: Reset all filters')}"/>
 		</a>
 	</div>
 	<div class="jobHistoryButton wdth">&nbsp;</div>
 
 	<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == 0}">${selectedIconCss}</c:if>">
 		<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}">
-			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('Reset filter by job type')}"/>
+			<html:img32 src="jobExecutionStatus/all.png" alt="${eco:translate('JobExecutionHistory: Reset filter by job type')}"/>
 		</a>
 	</div>
 
 	<c:forEach var="savedJobType" items="${savedJobTypeValues}">
 		<div class="jobHistoryButton <c:if test="${jobTypeIdFilter == savedJobType.id}">${selectedIconCss}</c:if>">
 			<c:set var="savedJobTypeNameTranslated" value="${eco:translate(savedJobType.name)}"/>
-			<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('Filter by job type: $1', savedJobTypeNameTranslated)}">
+			<a href="${eco:baseAdminUrl()}/jobs/done/${jobExecutionStatusIdUrlFilter}type/${savedJobType.id}/" title="${eco:translate1('JobExecutionHistory: Filter by job type: $1', savedJobTypeNameTranslated)}">
 				<html:img32 src="jobtype/${savedJobType.icon}"/>
 			</a>
 		</div>
@@ -126,7 +126,7 @@
 	<form:hidden path="formAction"/>
 
 	<div style="float: left; width: 100%; text-align: center; margin: 10px;">
-			${eco:translate('Filter by scheduler task')}:
+			${eco:translate('JobExecutionHistory: Filter by scheduler task')}:
 		<form:select path="schedulerTaskId" onchange="filterBySchedulerTask();">
 			<form:option value="0" label=""/>
 			<form:options itemValue="id" itemLabel="name" items="${savedJobListModel.schedulerTasks}"/>
@@ -144,13 +144,13 @@
 
 				<table:tdicon/>
 				<table:tdicon>${eco:translate( "id" )}</table:tdicon>
-				<table:td width="50">${eco:translate( "Saved job id" )}</table:td>
+				<table:td width="50">${eco:translate( "JobExecutionHistory: Saved job id" )}</table:td>
 				<table:tdicon/>
-				<table:td>${eco:translate( "Start time" )}</table:td>
-				<table:td>${eco:translate( "Finish time" )}</table:td>
-				<table:td>${eco:translate( "Job" )}</table:td>
-				<table:th text_t="State" width="20"/>
-				<table:th text_t="Scheduler task" width="20"/>
+				<table:td>${eco:translate( "JobExecutionHistory: Start time" )}</table:td>
+				<table:td>${eco:translate( "JobExecutionHistory: Finish time" )}</table:td>
+				<table:td>${eco:translate( "JobExecutionHistory: Job" )}</table:td>
+				<table:th text_t="JobExecutionHistory: State" width="20"/>
+				<table:th text_t="JobExecutionHistory: Scheduler task" width="20"/>
 
 			</jsp:attribute>
 
@@ -230,8 +230,8 @@
 						<table:tdunderlined cssClass="${resultCssClass}">
 
 							<c:if test="${jobExecutionStatus == 'WAITING_FOR_START'}">
-								<c:set var="watingMessage" value="${eco:translate('The job is waiting for start')}"/>
-								<html:img16 src="jobExecutionStatus/hourglass.png" alt="${eco:translate('Is waiting for notification from the parent job to run')}"
+								<c:set var="watingMessage" value="${eco:translate('JobExecutionHistory: The job is waiting for start')}"/>
+								<html:img16 src="jobExecutionStatus/hourglass.png" alt="${eco:translate('JobExecutionHistory: Is waiting for notification from the parent job to run')}"
 											onclick="alert( '${watingMessage}' );"/>
 							</c:if>
 
@@ -293,7 +293,7 @@
 								</admin:schedulerTaskEdit>
 							</c:if>
 							<c:if test="${scheduledTaskId > 0 and empty schedulerTask}">
-								<html:img16 src="error16x16.png" alt="${eco:translate1('Scheduled task $1 is deleted', scheduledTaskId)}"
+								<html:img16 src="error16x16.png" alt="${eco:translate1('JobExecutionHistory: Scheduled task $1 is deleted', scheduledTaskId)}"
 											onclick="showDeletedTaskInfo( ${scheduledTaskId} );"/>
 							</c:if>
 						</table:tdunderlined>
@@ -330,14 +330,14 @@
 
 <script type="text/javascript">
 	function deleteJobExecutionHistoryEntry( jobEntryId ) {
-		if ( confirm( "${eco:translate('Delete job execution history entry?')}" ) ) {
+		if ( confirm( "${eco:translate('JobExecutionHistory: Delete job execution history entry?')}" ) ) {
 			document.location.href = "${eco:baseAdminUrl()}/jobs/delete/" + jobEntryId + "/";
 		}
 	}
 
 	function deleteSelectedHistoryEntries() {
 		$( '#savedJobListModel' ).attr( 'action', '${eco:baseAdminUrl()}/jobs/delete/' );
-		return confirm( "${eco:translate('Delete selected history entries?')}" );
+		return confirm( "${eco:translate('JobExecutionHistory: Delete selected history entries?')}" );
 	}
 
 	function filterBySchedulerTask() {
@@ -347,7 +347,7 @@
 	}
 
 	function showDeletedTaskInfo( scheduledTaskId ) {
-		showUIMessage_InformationMessage_ManualClosing( "${eco:translate('Scheduler task is not found. It mush have been deleted.')}" );
+		showUIMessage_InformationMessage_ManualClosing( "${eco:translate('JobExecutionHistory: Scheduler task is not found. It mush have been deleted.')}" );
 	}
 </script>
 

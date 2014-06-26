@@ -49,14 +49,14 @@
 			<table:separatorInfo colspan="2" title="${schedulerTaskEditModel.schedulerTaskName}" />
 
 			<table:tr>
-				<table:tdtext text_t="Task name" isMandatory="true"/>
+				<table:tdtext text_t="SchedulerTaskEdit: Task name" isMandatory="true"/>
 				<table:tddata>
 					<form:input path="${schedulerTaskName}" size="47" maxlength="255"/>
 				</table:tddata>
 			</table:tr>
 
 			<table:tr>
-				<table:tdtext text_t="Job" isMandatory="true"/>
+				<table:tdtext text_t="SchedulerTaskEdit: Job" isMandatory="true"/>
 				<table:tddata>
 					<form:select path="${savedJobId}" onchange="setTaskName();" >
 						<form:option value="0" label=""/>
@@ -68,7 +68,7 @@
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:tdtext text_t="Execute task"/>
+				<table:tdtext text_t="SchedulerTaskEdit: Execute task"/>
 				<table:tddata>
 					<div style="float: left; width: 200px; font-weight: bold;">
 						<form:radiobuttons path="executionTaskTypeId" items="${executionTaskTypes}"  itemValue="id" itemLabel="name" onchange="submitFormData();" delimiter="<br />" />
@@ -118,7 +118,7 @@
 			<table:separator colspan="2" />
 
 			<table:tr>
-				<table:tdtext text_t="Saved parameters"/>
+				<table:tdtext text_t="SchedulerTaskEdit: Saved original parameters"/>
 				<table:tddata>
 					${schedulerTaskEditModel.schedulerTaskSavedParameters}
 				</table:tddata>

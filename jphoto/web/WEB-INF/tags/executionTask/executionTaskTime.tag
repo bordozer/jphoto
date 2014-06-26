@@ -4,7 +4,7 @@
 
 <c:set var="schedulerTaskTime" value="<%=SchedulerTaskEditModel.SCHEDULER_TASK_TIME_CONTROL%>" />
 
-<span onclick="setExecutionTime( '00:00:00' );" title="${eco:translate('Set execution time to midnight')}">00:00:00</span>
+<span onclick="setExecutionTime( '00:00:00' );" title="${eco:translate('ExecutionTask: Set execution time to midnight')}">00:00:00</span>
 
 <script type="text/javascript">
 	function setExecutionTime( executionTime ) {

@@ -28,7 +28,7 @@
 <table:separator colspan="2" />
 
 <table:tr>
-	<table:tdtext text_t="Start date" isMandatory="true" />
+	<table:tdtext text_t="ExecutionTask: Start date" isMandatory="true" />
 
 	<table:tddata>
 		<tags:datePicker fieldName="${startTaskDateControl}" fieldValue="${startTaskDate}"/>
@@ -37,7 +37,7 @@
 
 <c:if test="${not hideStartTaskTime}">
 	<table:tr>
-		<table:tdtext text_t="Start time" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Start time" isMandatory="true" />
 
 		<table:tddata>
 			<html:input fieldId="${schedulerTaskTime}" size="6" fieldValue="${startTaskTime}"/> <tasks:executionTaskTime />
@@ -47,7 +47,7 @@
 
 <c:if test="${not hideEndTaskDate}">
 	<table:tr>
-		<table:tdtext text_t="End date" />
+		<table:tdtext text_t="ExecutionTask: End date" />
 
 		<table:tddata>
 			<tags:datePicker fieldName="${endTaskDateControl}" fieldValue="${endTaskDate}"/>
@@ -60,7 +60,7 @@
 	<%--<table:separator colspan="2" />--%>
 
 	<table:tr>
-		<table:tdtext text_t="End time" />
+		<table:tdtext text_t="ExecutionTask: End time" />
 
 		<table:tddata>
 			<html:input fieldId="${endTaskTimeControl}" size="6" fieldValue="${endTaskTime}"/>
@@ -79,11 +79,11 @@
 </table:tr>--%>
 
 <table:tr>
-	<table:tdtext text_t="Task is active" labelFor="${isTaskActiveControl}"/>
+	<table:tdtext text_t="ExecutionTask: Task is active" labelFor="${isTaskActiveControl}"/>
 
 	<table:tddata>
 		<form:checkbox path="${isTaskActiveControl}"/>
 	</table:tddata>
 </table:tr>
 
-<table:separatorInfo colspan="2" title="${eco:translate('Custom job parameters')}" />
+<table:separatorInfo colspan="2" title="${eco:translate('ExecutionTask: Custom job parameters')}" />

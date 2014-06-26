@@ -48,6 +48,11 @@
 	</translation>
 
 	<translation>
+		<nerd>SchedulerTask: New scheduler task</nerd>
+		<ru><![CDATA[Новая задача планировщика]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>SchedulerTaskList: View info '$1'</nerd>
 		<ru><![CDATA[Посмотреть информацию по '$1']]></ru>
 	</translation>
@@ -174,16 +179,16 @@
 
 	<translation>
 		<nerd>ExecutionTask: Execution time: $1</nerd>
-		<ru><![CDATA[Время выполнения]]></ru>
+		<ru><![CDATA[Время выполнения: $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>ExecutionTask: Start time:</nerd>
-		<ru><![CDATA[Время первого выполнения]]></ru>
+		<nerd>ExecutionTask: Start date time</nerd>
+		<ru><![CDATA[Дата и время первого выполнения]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>ExecutionTask: End time:</nerd>
+		<nerd>ExecutionTask: End time</nerd>
 		<ru><![CDATA[Время последнего выполнения]]></ru>
 	</translation>
 
@@ -218,8 +223,103 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>ExecutionTask: Custom job parameters</nerd>
+		<ru><![CDATA[Дополнительные параметры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Start date</nerd>
+		<ru><![CDATA[Дата начала]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Start time</nerd>
+		<ru><![CDATA[Время начала]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: End date</nerd>
+		<ru><![CDATA[Дата завершения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: End time</nerd>
+		<ru><![CDATA[Время завершения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Task is active</nerd>
+		<ru><![CDATA[Задача активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Set execution time to midnight</nerd>
+		<ru><![CDATA[Установить время 00:00:00]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: There are no additional parameters for this kind of task</nerd>
+		<ru><![CDATA[Дополнительных параметров у данного типа задачи нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Execution time</nerd>
+		<ru><![CDATA[Время выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Days of week</nerd>
+		<ru><![CDATA[Дни недели]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Days of month</nerd>
+		<ru><![CDATA[Дни месяца]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Months</nerd>
+		<ru><![CDATA[Месяцы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Last day of month</nerd>
+		<ru><![CDATA[Последний день]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Interval</nerd>
+		<ru><![CDATA[Интервал]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Time of day</nerd>
+		<ru><![CDATA[Время]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskEdit: Task name</nerd>
+		<ru><![CDATA[Имя задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskEdit: Job</nerd>
+		<ru><![CDATA[Задача]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskEdit: Execute task</nerd>
+		<ru><![CDATA[Тип выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskEdit: Saved original parameters</nerd>
+		<ru><![CDATA[Оригинальные параметры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTask: New scheduler task does not have original parameters</nerd>
+		<ru><![CDATA[Отсутствуют]]></ru>
 	</translation>
 
 	<translation>

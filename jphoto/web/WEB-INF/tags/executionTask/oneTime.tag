@@ -19,7 +19,7 @@
 
 	<table:tr>
 		<table:td colspan="2">
-			${eco:translate('There are no additional parameters for this kind of task')}
+			${eco:translate('ExecutionTask: There are no additional parameters for this kind of task')}
 		</table:td>
 	</table:tr>
 

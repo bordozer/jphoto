@@ -38,7 +38,7 @@
 			/>
 
 	<table:tr>
-		<table:tdtext text_t="Interval" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Interval" isMandatory="true" />
 
 		<table:tddata>
 			<html:input fieldId="${periodicalTaskPeriod}" size="4" fieldValue="${period}"/>
@@ -47,7 +47,7 @@
 	</table:tr>
 
 	<table:tr>
-		<table:tdtext text_t="Time of day" isMandatory="true" /> <%-- TODO: hide this label when hoursDiv is hidden --%>
+		<table:tdtext text_t="ExecutionTask: Time of day" isMandatory="true" /> <%-- TODO: hide this label when hoursDiv is hidden --%>
 		<table:tddata>
 			<div id="hoursDiv" style="display: none;">
 				<js:checkboxMassChecker checkboxClass="${periodicalTaskHours}" initiallyChecked="true" />

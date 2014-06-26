@@ -64,7 +64,7 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 
 	@Override
 	public TranslatableMessage getDescription() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "ExecutionTask: Start time:", services ).worldSeparator();
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "ExecutionTask: Start date time", services ).string( ":" ).worldSeparator();
 		translatableMessage.dateTimeFormatted( startTaskTime );
 		translatableMessage.string( "<br />" );
 
@@ -76,7 +76,7 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 
 		if ( endTaskTime != null ) {
 			translatableMessage.string( "<br />" );
-			translatableMessage.translatableString( "ExecutionTask: End time:" ).worldSeparator().dateTimeFormatted( endTaskTime );
+			translatableMessage.translatableString( "ExecutionTask: End time" ).string( ":" ).worldSeparator().dateTimeFormatted( endTaskTime );
 		}
 
 		if ( periodUnit != PeriodUnit.HOUR ) {

@@ -43,7 +43,7 @@
 			/>
 
 	<table:tr>
-		<table:tdtext text_t="Execution time" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Execution time" isMandatory="true" />
 
 		<table:tddata>
 			<html:input fieldId="${schedulerTaskTime}" size="6" fieldValue="${startTaskTime}"/> <tasks:executionTaskTime />
@@ -51,19 +51,19 @@
 	</table:tr>
 
 	<table:tr>
-		<table:tdtext text_t="Day of month" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Days of month" isMandatory="true" />
 
 		<table:tddata>
 			<form:select path="${monthlyDayOfMonth}" >
 				<form:option value="0" label=""/>
 				<form:options items="${daysOfMonth}"/>
-				<form:option value="-1" label="${eco:translate('Last day of month')}"/>
+				<form:option value="-1" label="${eco:translate('ExecutionTask: Last day of month')}"/>
 			</form:select>
 		</table:tddata>
 	</table:tr>
 
 	<table:tr>
-		<table:tdtext text_t="Months" isMandatory="true" />
+		<table:tdtext text_t="ExecutionTask: Months" isMandatory="true" />
 
 		<table:tddata>
 			<js:checkboxMassChecker checkboxClass="monthlyTaskMonthIds" />
