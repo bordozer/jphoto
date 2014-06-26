@@ -56,11 +56,11 @@
 				&nbsp;
 			</c:forEach>
 
-			<%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 			<c:forEach var="language" items="${languages}" >
 				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.translationMode.prefix}/language/${language.code}/"> ${eco:translate(language.name)}</a> &nbsp;&nbsp;
-			</c:forEach>--%>
+			</c:forEach>
 
 			<br/>
 			<br/>

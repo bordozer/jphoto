@@ -67,14 +67,13 @@ public abstract class TranslationMapLoadStrategy {
 
 	public TranslationMapLoadStrategy filter( final Language language ) {
 
-		final HashMap<NerdKey, TranslationData> map = newHashMap( translationMap );
+		final HashMap<NerdKey, TranslationData> map = newHashMap();
 
-		for ( final NerdKey nerdKey : map.keySet() ) {
+		for ( final NerdKey nerdKey : translationMap.keySet() ) {
 
-			final TranslationData translationData = map.get( nerdKey );
+			final TranslationData translationData = translationMap.get( nerdKey );
 
 			final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
-
 
 			CollectionUtils.filter( translations, new Predicate<TranslationEntry>() {
 				@Override
@@ -83,7 +82,9 @@ public abstract class TranslationMapLoadStrategy {
 				}
 			} );
 
-			map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations ) );
+			if ( ! translations.isEmpty() ) {
+				map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations ) );
+			}
 		}
 
 		translationMap = map;
