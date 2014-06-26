@@ -470,6 +470,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Show photo categories toolbar</nerd>
+		<ru><![CDATA[Показывать панель с разделами фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Show photos by categories site menu item</nerd>
+		<ru><![CDATA[Показывать в главном меню пункт с фотографиями по разделам]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

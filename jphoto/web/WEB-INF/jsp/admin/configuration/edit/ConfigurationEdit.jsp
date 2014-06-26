@@ -62,7 +62,7 @@
 						<h3>
 							${eco:translate1('Edit configuration: $1', systemConfiguration.name)}
 							<c:if test="${systemConfiguration.defaultConfiguration}">
-								- <span style="color: red">${eco:translate('default')}</span>
+								- <span style="color: red">${eco:translate('Configuration: default configuration sign')}</span>
 							</c:if>
 						</h3>
 					</table:td>
@@ -153,7 +153,7 @@
 						<table:td/>
 						<table:td/>
 						<table:td>
-							<html:submitButton id="save" caption_t="Save configuration" onclick="submitAndSaveConfiguration();"/>
+							<html:submitButton id="save" caption_t="Configuration edit: Save configuration" onclick="submitAndSaveConfiguration();"/>
 							<script type="text/javascript">
 								function submitAndSaveConfiguration() {
 									var form = $( '#configurationEditModel' );

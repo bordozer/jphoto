@@ -58,6 +58,66 @@
 	</translation>
 
 	<translation>
+		<nerd>Configuration key ID: #$1</nerd>
+		<ru><![CDATA[Конфигурационный ключ #$1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Edit configuration: $1</nerd>
+		<ru><![CDATA[Редактировать конфигурацию: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Editable only for default system configuration</nerd>
+		<ru><![CDATA[Настройка общая для всех конфигураций (устанавливается в базовой конфигурации)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Reset value to the value of the default configuration?</nerd>
+		<ru><![CDATA[Установить значение из базовой конфигурации]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Configuration edit: Save configuration</nerd>
+		<ru><![CDATA[Сохранить конфигурацию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Configuration: default configuration sign</nerd>
+		<ru><![CDATA[базовая]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Configuration: active configuration sign</nerd>
+		<ru><![CDATA[активная]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

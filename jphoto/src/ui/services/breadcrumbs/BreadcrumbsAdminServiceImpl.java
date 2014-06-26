@@ -68,12 +68,12 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminConfigurationInfoBreadcrumbs( final SystemConfiguration systemConfiguration ) {
-		final String tran = translatorService.translate( "Configuration", EnvironmentContext.getLanguage() );
+		final String tran = translatorService.translate( "Breadcrumbs: Configuration", EnvironmentContext.getLanguage() );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, systemConfiguration.getName()
-			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default", EnvironmentContext.getLanguage() ) : ""
-			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active", EnvironmentContext.getLanguage() ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? getDefaultConfigurationSign() : ""
+			, systemConfiguration.isActiveConfiguration() ? getConfigurationActiveSign() : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), systemConfiguration.getName() );
@@ -89,8 +89,8 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran, configTabName );
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default", EnvironmentContext.getLanguage() ) : ""
-			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active", EnvironmentContext.getLanguage() ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? getDefaultConfigurationSign() : ""
+			, systemConfiguration.isActiveConfiguration() ? getConfigurationActiveSign() : ""
 		);
 
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSystemConfigurationListLink( EnvironmentContext.getLanguage() ), sysConfigName, configTabName );
@@ -100,7 +100,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminSystemConfigurationListBreadcrumbs() {
-		final String tran = translatorService.translate( "System configuration", EnvironmentContext.getLanguage() );
+		final String tran = translatorService.translate( "Breadcrumbs: System configuration", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), tran );
@@ -115,8 +115,8 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default", EnvironmentContext.getLanguage() ) : ""
-			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active", EnvironmentContext.getLanguage() ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? getDefaultConfigurationSign() : ""
+			, systemConfiguration.isActiveConfiguration() ? getConfigurationActiveSign() : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), configuration, edit );
@@ -127,13 +127,13 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminConfigurationEditDataBreadcrumbs( final SystemConfiguration systemConfiguration ) {
-		final String configuration = translatorService.translate( "Configuration", EnvironmentContext.getLanguage() );
+		final String configuration = translatorService.translate( "Breadcrumbs: Configuration", EnvironmentContext.getLanguage() );
 		final String edit = translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
-			, systemConfiguration.isDefaultConfiguration() ? translatorService.translate( " - default", EnvironmentContext.getLanguage() ) : ""
-			, systemConfiguration.isActiveConfiguration() ? translatorService.translate( " - active", EnvironmentContext.getLanguage() ) : ""
+			, systemConfiguration.isDefaultConfiguration() ? getDefaultConfigurationSign() : ""
+			, systemConfiguration.isActiveConfiguration() ? getConfigurationActiveSign() : ""
 		);
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), configuration, edit );
@@ -223,10 +223,6 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminVotingCategoriesRootLink( EnvironmentContext.getLanguage() ), photoVotingCategory.getName() );
 
 		return new PageTitleData( title, nerd, breadcrumbs );
-	}
-
-	private String getJobsRootTranslated() {
-		return translatorService.translate( "Breadcrumbs: Jobs", EnvironmentContext.getLanguage() );
 	}
 
 	@Override
@@ -326,5 +322,18 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	@Deprecated
 	private String getAdminTranslatedRoot() {
 		return translatorService.translate( "Breadcrumbs: Administration", EnvironmentContext.getLanguage() );
+	}
+
+	@Deprecated
+	private String getJobsRootTranslated() {
+		return translatorService.translate( "Breadcrumbs: Jobs", EnvironmentContext.getLanguage() );
+	}
+
+	private String getDefaultConfigurationSign() {
+		return String.format( " - %s", translatorService.translate( "Configuration: default configuration sign", EnvironmentContext.getLanguage() ) );
+	}
+
+	private String getConfigurationActiveSign() {
+		return String.format( " - %s", translatorService.translate( "Configuration: active configuration sign", EnvironmentContext.getLanguage() ) );
 	}
 }

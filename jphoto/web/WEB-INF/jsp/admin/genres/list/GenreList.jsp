@@ -1,3 +1,4 @@
+<%@ page import="core.enums.YesNo" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -83,8 +84,9 @@
 						${genre.name}
 					</table:td>
 
-					<table:td cssClass="text-centered">${genre.canContainNudeContent ? "Yes" : ""}</table:td>
-					<table:td cssClass="text-centered">${genre.containsNudeContent ? "Yes" : ""}</table:td>
+					<c:set var="yes" value="<%=YesNo.YES.getName()%>" />
+					<table:td cssClass="text-centered">${genre.canContainNudeContent ? eco:translate(yes) : ""}</table:td>
+					<table:td cssClass="text-centered">${genre.containsNudeContent ? eco:translate(yes) : ""}</table:td>
 
 					<table:td cssClass="textright">${photosQty} &nbsp;</table:td>
 					<table:td cssClass="text-centered">${genre.minMarksForBest > 0 ? genre.minMarksForBest : eco:translate('System default')} &nbsp;</table:td>

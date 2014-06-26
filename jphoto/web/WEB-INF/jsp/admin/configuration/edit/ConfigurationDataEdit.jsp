@@ -63,7 +63,7 @@
 
 			<br />
 
-			<html:submitButton id="save" caption_t="Save configuration" onclick="submitAndSaveConfiguration();"/>
+			<html:submitButton id="save" caption_t="Configuration edit: Save configuration" onclick="submitAndSaveConfiguration();"/>
 
 			<script type="text/javascript">
 				function submitAndSaveConfiguration() {
