@@ -462,7 +462,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 
 	@Override
 	public String getAdminUntranslatedLink() {
-		return String.format( "%s/untranslated/", getAdminTranslatorLink() );
+		return String.format( "%s" + "untranslated/", getAdminTranslatorLink() );
 	}
 
 	@Override

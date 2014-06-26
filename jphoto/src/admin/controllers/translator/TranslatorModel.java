@@ -1,6 +1,7 @@
 package admin.controllers.translator;
 
 import core.general.base.AbstractGeneralModel;
+import core.services.translator.Language;
 import core.services.translator.NerdKey;
 import core.services.translator.TranslationData;
 
@@ -12,10 +13,9 @@ public class TranslatorModel extends AbstractGeneralModel {
 	private Map<NerdKey, TranslationData> translationsMap;
 	private List<String> letters;
 
-	private String urlPrefix;
-
 	private TranslationMode translationMode;
 	private String filterByLetter;
+	private Language language;
 
 	public void setTranslationsMap( final Map<NerdKey,TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
@@ -33,14 +33,6 @@ public class TranslatorModel extends AbstractGeneralModel {
 		this.letters = letters;
 	}
 
-	public String getUrlPrefix() {
-		return urlPrefix;
-	}
-
-	public void setUrlPrefix( final String urlPrefix ) {
-		this.urlPrefix = urlPrefix;
-	}
-
 	public String getFilterByLetter() {
 		return filterByLetter;
 	}
@@ -55,5 +47,13 @@ public class TranslatorModel extends AbstractGeneralModel {
 
 	public void setTranslationMode( final TranslationMode translationMode ) {
 		this.translationMode = translationMode;
+	}
+
+	public Language getLanguage() {
+		return language;
+	}
+
+	public void setLanguage( final Language language ) {
+		this.language = language;
 	}
 }

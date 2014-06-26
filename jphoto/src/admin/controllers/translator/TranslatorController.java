@@ -1,7 +1,6 @@
 package admin.controllers.translator;
 
 import core.services.translator.*;
-import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +12,10 @@ import ui.services.breadcrumbs.BreadcrumbsAdminService;
 
 import java.util.*;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
 
 @Controller
-@RequestMapping( "translator" )
+@RequestMapping("translator")
 public class TranslatorController {
 
 	private static final String MODEL_NAME = "translatorModel";
@@ -29,15 +27,73 @@ public class TranslatorController {
 	@Autowired
 	private BreadcrumbsAdminService breadcrumbsAdminService;
 
-	@ModelAttribute( MODEL_NAME )
+	@ModelAttribute(MODEL_NAME)
 	public TranslatorModel prepareModel() {
 		return new TranslatorModel();
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String getTranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
+	@RequestMapping(method = RequestMethod.GET, value = "/")
+	public String getTranslatedRoot( final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoader( translatorService ) );
+	}
 
-		final Map<NerdKey, TranslationData> translationsMap = getTranslatedSortedMap();
+	@RequestMapping(method = RequestMethod.GET, value = "/translated/")
+	public String getTranslated( final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoader( translatorService ) );
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "translated//language/{languageCode}/")
+	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoader( translatorService ).filter( Language.getByCode( languageCode ) ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "translated//letter/{letter}/" )
+	public String getTranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoader( translatorService ).filter( letter ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "translated//language/{languageCode}/letter/{letter}/" )
+	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.TRANSLATED, TranslationMapLoadStrategy.getTranslatedMapLoader( translatorService ).filter( letter ).filter( Language.getByCode( languageCode ) ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/" )
+	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoader( translatorService ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/" )
+	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoader( translatorService ).filter( Language.getByCode( languageCode ) ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/letter/{letter}/" )
+	public String getUntranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoader( translatorService ).filter( letter ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/letter/{letter}/" )
+	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return getView( model, TranslationMode.UNTRANSLATED, TranslationMapLoadStrategy.getUntranslatedMapLoader( translatorService ).filter( letter ).filter( Language.getByCode( languageCode ) ) );
+	}
+
+	private String getView( final TranslatorModel model, final TranslationMode mode, final TranslationMapLoadStrategy loader ) {
+		model.setTranslationsMap( loader.getTranslationMap() );
+
+		model.setLetters( loader.getLetters() );
+		model.setTranslationMode( mode );
+
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
+
+		return VIEW;
+	}
+
+	/*@RequestMapping(method = RequestMethod.GET, value = "/")
+	public String getTranslated( final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+
+		final TranslationMapLoader mapLoader = TranslationMapLoader.getInstance( TranslationMode.TRANSLATED, translatorService );
+
+		final Map<NerdKey, TranslationData> translationsMap = mapLoader.getTranslatedSortedMap();
 		model.setLetters( getLetters( translationsMap ) );
 		model.setTranslationsMap( translationsMap );
 
@@ -49,9 +105,11 @@ public class TranslatorController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/{letter}/" )
-	public String getTranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
+	public String getTranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		final Map<NerdKey, TranslationData> translatedMap = getTranslatedSortedMap();
+		final TranslationMapLoader mapLoader = TranslationMapLoader.getInstance( TranslationMode.TRANSLATED, translatorService );
+
+		final Map<NerdKey, TranslationData> translatedMap = mapLoader.getTranslatedSortedMap();
 
 		model.setLetters( getLetters( translatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( translatedMap, letter ) );
@@ -65,9 +123,11 @@ public class TranslatorController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/" )
-	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
+	public String getUntranslated( final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		final Map<NerdKey, TranslationData> untranslatedMap = getUntranslatedSortedMap();
+		final TranslationMapLoader mapLoader = TranslationMapLoader.getInstance( TranslationMode.UNTRANSLATED, translatorService );
+
+		final Map<NerdKey, TranslationData> untranslatedMap = mapLoader.getUntranslatedSortedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( untranslatedMap );
@@ -81,10 +141,32 @@ public class TranslatorController {
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{letter}/" )
-	public String getUntranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model) {
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{languageCode}/" )
+	public String getUntranslated_Language( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		final Map<NerdKey, TranslationData> untranslatedMap = getUntranslatedSortedMap();
+		final TranslationMapLoader mapLoader = TranslationMapLoader.getInstance( TranslationMode.UNTRANSLATED, translatorService );
+
+		final Map<NerdKey, TranslationData> untranslatedMap = mapLoader.getUntranslatedSortedMap();
+
+		model.setLetters( getLetters( untranslatedMap ) );
+		model.setTranslationsMap( untranslatedMap );
+
+		model.setLanguage( Language.getByCode( languageCode ) );
+		model.setTranslationMode( TranslationMode.UNTRANSLATED );
+
+		model.setUrlPrefix( "untranslated" );
+
+		model.setPageTitleData( breadcrumbsAdminService.getTranslatorBreadcrumbs() );
+
+		return VIEW;
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{letter}/" )
+	public String getUntranslatedByFirstLetter( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+
+		final TranslationMapLoader mapLoader = TranslationMapLoader.getInstance( TranslationMode.UNTRANSLATED, translatorService );
+
+		final Map<NerdKey, TranslationData> untranslatedMap = mapLoader.getUntranslatedSortedMap();
 
 		model.setLetters( getLetters( untranslatedMap ) );
 		model.setTranslationsMap( filterByFirstLetter( untranslatedMap, letter ) );
@@ -99,71 +181,13 @@ public class TranslatorController {
 		return VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/{languageCode}/{letter}/" )
+	public String getUntranslated_LanguageByFirstLetter( final @PathVariable( "languageCode" ) String languageCode , final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+		return VIEW;
+	}*/
+
 	@RequestMapping( method = RequestMethod.GET, value = "/reload/" )
 	public void reloadTranslationsAjax() throws DocumentException {
 		translatorService.reloadTranslations();
-	}
-
-	private Map<NerdKey, TranslationData> getTranslatedSortedMap() {
-		return getSortedMap( translatorService.getTranslationsMap() );
-	}
-
-	private Map<NerdKey, TranslationData> getUntranslatedSortedMap() {
-		return getSortedMap( translatorService.getUntranslatedMap() );
-	}
-
-	private Map<NerdKey, TranslationData> getSortedMap( final Map<NerdKey, TranslationData> untranslatedMap ) {
-		final TreeMap<NerdKey, TranslationData> sortedMap = new TreeMap<NerdKey, TranslationData>( new Comparator<NerdKey>() {
-			@Override
-			public int compare( final NerdKey o1, final NerdKey o2 ) {
-				return o1.getNerd().compareTo( o2.getNerd() );
-			}
-		} );
-
-		sortedMap.putAll( untranslatedMap );
-
-		return sortedMap;
-	}
-
-	private Map<NerdKey, TranslationData> filterByFirstLetter( final Map<NerdKey, TranslationData> translationsMap, final String letter ) {
-
-		final HashMap<NerdKey,TranslationData> map = newHashMap( translationsMap );
-
-		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
-			final TranslationData translationData = translationsMap.get( nerdKey );
-			final String firstLetter = translationData.getTranslationEntry( Language.NERD ).getNerd().substring( 0, 1 );
-			if ( ! firstLetter.equalsIgnoreCase( letter ) ) {
-				map.remove( nerdKey );
-			}
-		}
-
-		return map;
-	}
-
-	private List<String> getLetters( final Map<NerdKey, TranslationData> translationsMap ) {
-		final List<String> result = newArrayList();
-
-		for ( final NerdKey nerdKey : translationsMap.keySet() ) {
-			final TranslationData translationData = translationsMap.get( nerdKey );
-			final TranslationEntry translationEntry = translationData.getTranslationEntry( Language.NERD );
-
-			if ( translationEntry == null || StringUtils.isEmpty( translationEntry.getNerd() ) ) {
-				continue;
-			}
-
-			final String letter = translationEntry.getNerd().substring( 0, 1 ).toUpperCase();
-			if ( ! result.contains( letter ) ) {
-				result.add( letter );
-			}
-		}
-
-		Collections.sort( result, new Comparator<String>() {
-			@Override
-			public int compare( final String o1, final String o2 ) {
-				return o1.compareTo( o2 );
-			}
-		} );
-
-		return result;
 	}
 }

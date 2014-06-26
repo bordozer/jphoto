@@ -1,7 +1,4 @@
 <%@ page import="core.services.translator.Language" %>
-<%@ page import="core.services.translator.TranslatorService" %>
-<%@ page import="ui.context.ApplicationContextHelper" %>
-<%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ page import="java.util.Arrays" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,24 +9,11 @@
 
 <jsp:useBean id="translatorModel" type="admin.controllers.translator.TranslatorModel" scope="request"/>
 
-<%--<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "translatorService", ApplicationContextHelper.<TranslatorService>getBean( TranslatorService.BEAN_NAME ) );
-%>--%>
-
 <c:set var="languages" value="<%=Arrays.asList( Language.values() )%>"/>
 <c:set var="languageNerd" value="<%=Language.NERD%>"/>
 
 <tags:page pageModel="${translatorModel.pageModel}">
 	
-	<%--<script type="text/javascript">
-		var jsonRPC;
-		require( [ 'jquery' ], function( $ ) {
-			$( document ).ready( function () {
-				jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
-			} );
-		} );
-	</script>--%>
-
 	<style type="text/css">
 		.selected {
 			font-weight: bold;
@@ -40,10 +24,6 @@
 			width: 100%;
 		}
 
-		/*.right-pane{
-			float: left;
-			width: 400%;
-		}*/
 	</style>
 
 	<c:set var="mode" value="${translatorModel.translationMode}"/>
@@ -53,12 +33,12 @@
 	<c:set var="translatorNerd" value="translatorNerd"/>
 	<c:set var="translatorNerdAnchor" value="translatorNerdAnchor"/>
 
-	<div class="floatleft">
+	<div class="floatleft" style="margin-top: 20px;">
 
 		<div class="left-pane">
 
 			<c:if test="${isTranslatedMode}"><span class='selected'></c:if>
-			<a href="${eco:baseAdminUrl()}/translator/">${eco:translate('Translator: Translated')}</a>
+			<a href="${eco:baseAdminUrl()}/translator/translated/">${eco:translate('Translator: Translated')}</a>
 			<c:if test="${isTranslatedMode}"></span></c:if>
 			&nbsp;&nbsp;
 			<c:if test="${isUntranslatedMode}"><span class='selected'></c:if>
@@ -71,10 +51,16 @@
 			<c:forEach var="letter" items="${translatorModel.letters}">
 				<c:set var="isSelected" value="${translatorModel.filterByLetter == letter}"/>
 				<c:if test="${isSelected}"><span class='selected'></c:if>
-				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.urlPrefix}/${letter}/">${letter}</a>
+				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.translationMode.prefix}/letter/${letter}/">${letter}</a>
 				<c:if test="${isSelected}"></span></c:if>
 				&nbsp;
 			</c:forEach>
+
+			<%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+			<c:forEach var="language" items="${languages}" >
+				<a href="${eco:baseAdminUrl()}/translator/${translatorModel.translationMode.prefix}/language/${language.code}/"> ${eco:translate(language.name)}</a> &nbsp;&nbsp;
+			</c:forEach>--%>
 
 			<br/>
 			<br/>
