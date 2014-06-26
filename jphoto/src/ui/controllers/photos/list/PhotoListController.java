@@ -665,7 +665,7 @@ public class PhotoListController {
 
 		if ( filterByGenre != null ) {
 			final SqlColumnSelectable tPhotoColGenreId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
-			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColGenreId, SqlCriteriaOperator.LIKE, filterByGenre.getId(), dateUtilsService );
+			final SqlLogicallyJoinable photoNameCondition = new SqlCondition( tPhotoColGenreId, SqlCriteriaOperator.EQUALS, filterByGenre.getId(), dateUtilsService );
 			selectIdsQuery.addWhereAnd( photoNameCondition );
 		}
 

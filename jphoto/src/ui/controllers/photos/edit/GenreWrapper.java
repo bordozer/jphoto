@@ -2,6 +2,7 @@ package ui.controllers.photos.edit;
 
 import core.general.genre.Genre;
 
+// TODO: move somewhere because it is used in /home/blu/dev/src/jphoto/jphoto/src/ui/controllers/photos/list/PhotoListController.java
 public class GenreWrapper {
 
 	private final Genre genre;
