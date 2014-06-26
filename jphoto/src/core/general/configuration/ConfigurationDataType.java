@@ -4,13 +4,13 @@ import java.util.EnumSet;
 
 public enum ConfigurationDataType {
 
-	INTEGER( 1, "Int number" )
-	, STRING( 2, "String" )
-	, BYTE( 3, "Bytes" )
-	, FLOAT( 4, "Float number" )
-	, ARRAY_OF_STRINGS( 5, "String array")
-	, ARRAY_OF_INTEGERS( 6, "Integer Array")
-	, YES_NO( 7, "Yes/No")
+	INTEGER( 1, "ConfigurationDataType: Int number" )
+	, STRING( 2, "ConfigurationDataType: String" )
+	, BYTE( 3, "ConfigurationDataType: Bytes" )
+	, FLOAT( 4, "ConfigurationDataType: Float number" )
+	, ARRAY_OF_STRINGS( 5, "ConfigurationDataType: String array")
+	, ARRAY_OF_INTEGERS( 6, "ConfigurationDataType: Integer Array")
+	, YES_NO( 7, "ConfigurationDataType: Yes/No")
 	;
 
 	private final int id;

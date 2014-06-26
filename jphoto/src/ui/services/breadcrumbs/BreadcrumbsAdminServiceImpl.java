@@ -110,7 +110,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminConfigurationEditTabBreadcrumbs( final int systemConfigurationId, final SystemConfiguration systemConfiguration, final ConfigurationTab configTab ) {
-		final String configuration = translatorService.translate( "Configuration", EnvironmentContext.getLanguage() );
+		final String configuration = translatorService.translate( "Breadcrumbs: Configuration", EnvironmentContext.getLanguage() );
 		final String edit = translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() );
 
 		final String sysConfigName = String.format( "%s%s%s"
