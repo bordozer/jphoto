@@ -83,6 +83,161 @@
 	</translation>
 
 	<translation>
+		<nerd>SchedulerTaskList: Scheduled task type column title</nerd>
+		<ru><![CDATA[Код задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Task type</nerd>
+		<ru><![CDATA[Тип]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task type column title</nerd>
+		<ru><![CDATA[Тип выполнения задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Task name</nerd>
+		<ru><![CDATA[Имя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task name column title</nerd>
+		<ru><![CDATA[Имя задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Active</nerd>
+		<ru><![CDATA[Активна]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task is active column title</nerd>
+		<ru><![CDATA[Активность задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled</nerd>
+		<ru><![CDATA[Запланирована]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task is scheduled column title</nerd>
+		<ru><![CDATA[Запланированность задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Task parameters</nerd>
+		<ru><![CDATA[Параметры]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task' parameters column title</nerd>
+		<ru><![CDATA[Параметры задачи планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Job type</nerd>
+		<ru><![CDATA[Тип задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task job type column title</nerd>
+		<ru><![CDATA[Тип выполняемой задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Job id</nerd>
+		<ru><![CDATA[Код задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task job id column title</nerd>
+		<ru><![CDATA[Код выполняемой задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Job</nerd>
+		<ru><![CDATA[Задача]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>SchedulerTaskList: Scheduled task job column title</nerd>
+		<ru><![CDATA[Выполняемая задача]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Execution time: $1</nerd>
+		<ru><![CDATA[Время выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Start time:</nerd>
+		<ru><![CDATA[Время первого выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: End time:</nerd>
+		<ru><![CDATA[Время последнего выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Interval: $1 $2</nerd>
+		<ru><![CDATA[Интервал $1 $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Hours:</nerd>
+		<ru><![CDATA[Часы выполнения:]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Every hour during the day</nerd>
+		<ru><![CDATA[Каждый час втечение дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Week days:</nerd>
+		<ru><![CDATA[Дни недели:]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ExecutionTask: Whole week</nerd>
+		<ru><![CDATA[Вся неделя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

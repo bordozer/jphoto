@@ -64,23 +64,26 @@ public class PeriodicalExecutionTask extends AbstractPeriodicalExecutionTask {
 
 	@Override
 	public TranslatableMessage getDescription() {
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "ExecutionTask: Start time:", services ).worldSeparator();
 		translatableMessage.dateTimeFormatted( startTaskTime );
 		translatableMessage.string( "<br />" );
 
-		final TranslatableMessage mess = new TranslatableMessage( "Interval: $1 $2", services ).addIntegerParameter( period ).translatableString( periodUnit.getName() );
+		final TranslatableMessage mess = new TranslatableMessage( "ExecutionTask: Interval: $1 $2", services )
+			.addIntegerParameter( period )
+			.translatableString( periodUnit.getName() )
+			;
 		translatableMessage.addTranslatableMessageParameter( mess );
 
 		if ( endTaskTime != null ) {
 			translatableMessage.string( "<br />" );
-			translatableMessage.translatableString( "End time: " ).dateTimeFormatted( endTaskTime );
+			translatableMessage.translatableString( "ExecutionTask: End time:" ).worldSeparator().dateTimeFormatted( endTaskTime );
 		}
 
 		if ( periodUnit != PeriodUnit.HOUR ) {
 			translatableMessage.string( "<br />" );
-			translatableMessage.translatableString( "Hours: " );
+			translatableMessage.translatableString( "ExecutionTask: Hours:" ).worldSeparator();
 			if ( executionHours.size() == 24 ) {
-				translatableMessage.translatableString( "Every hour during the day" );
+				translatableMessage.translatableString( "ExecutionTask: Every hour during the day" );
 			} else {
 				translatableMessage.string( StringUtils.join( executionHours, "," ) ); // TODO: translate executionHours
 			}

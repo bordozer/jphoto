@@ -96,17 +96,17 @@
 						<js:checkboxMassChecker checkboxClass="schedulerTaskCheckbox" />
 					</table:tdicon>
 
-					<table:th text_t="id" title_t="Scheduled task id" width="16" />
+					<table:th text_t="id" title_t="SchedulerTaskList: Scheduled task id column title" width="16" />
 					<table:tdicon />
 					<table:tdicon />
-					<table:th text_t="Task type" title_t="Scheduled task type" width="32"/>
-					<table:th text_t="Task name" title_t="Scheduled task name" />
-					<table:th text_t="Active"  title_t="Scheduled task is active" width="30" />
-					<table:th text_t="Scheduled" title_t="Scheduled task is scheduled" width="30" />
-					<table:th text_t="Task parameters" title_t="Scheduled task' parameters" />
-					<table:th text_t="Job type" width="32" title_t="Scheduled task job type" />
-					<table:th text_t="Job id" width="32" title_t="Scheduled task job id"/>
-					<table:th text_t="Job" width="250" title_t="Scheduled task job"/>
+					<table:th text_t="SchedulerTaskList: Task type" title_t="SchedulerTaskList: Scheduled task type column title" width="32"/>
+					<table:th text_t="SchedulerTaskList: Task name" title_t="SchedulerTaskList: Scheduled task name column title" />
+					<table:th text_t="SchedulerTaskList: Active"  title_t="SchedulerTaskList: Scheduled task is active column title" width="30" />
+					<table:th text_t="SchedulerTaskList: Scheduled" title_t="SchedulerTaskList: Scheduled task is scheduled column title" width="30" />
+					<table:th text_t="SchedulerTaskList: Task parameters" title_t="SchedulerTaskList: Scheduled task' parameters column title" width="400" />
+					<table:th text_t="SchedulerTaskList: Job type" width="32" title_t="SchedulerTaskList: Scheduled task job type column title" />
+					<table:th text_t="SchedulerTaskList: Job id" width="32" title_t="SchedulerTaskList: Scheduled task job id column title"/>
+					<table:th text_t="SchedulerTaskList: Job" width="250" title_t="SchedulerTaskList: Scheduled task job column title"/>
 				</jsp:attribute>
 
 				<jsp:body>

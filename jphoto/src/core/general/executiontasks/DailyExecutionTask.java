@@ -55,13 +55,13 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 	@Override
 	public TranslatableMessage getDescription() {
 
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "ExecutionTask: Start time:", services ).worldSeparator();
 		translatableMessage.dateTimeFormatted( startTaskTime );
 		translatableMessage.string( "<br />" );
 
-		translatableMessage.translatableString( "Week days: " );
+		translatableMessage.translatableString( "ExecutionTask: Week days:" ).worldSeparator();
 		if ( weekdays.size() == 7 ) {
-			translatableMessage.translatableString( "Whole week" );
+			translatableMessage.translatableString( "ExecutionTask: Whole week" );
 		} else {
 			final List<String> cronWeeks = newArrayList();
 			for ( final Weekday weekday : weekdays ) {
@@ -72,7 +72,7 @@ public class DailyExecutionTask extends AbstractPeriodicalExecutionTask {
 		translatableMessage.string( "<br />" );
 
 		if ( endTaskTime != null ) {
-			translatableMessage.translatableString( "End time:" );
+			translatableMessage.translatableString( "ExecutionTask: End time:" );
 			translatableMessage.dateTimeFormatted( endTaskTime );
 		}
 

@@ -31,6 +31,6 @@ public class OnceExecutionTask extends AbstractExecutionTask {
 
 	@Override
 	public TranslatableMessage getDescription() {
-		return new TranslatableMessage( "Execution time: $1", services ).dateTimeFormatted( startTaskTime ).string( "<br />" );
+		return new TranslatableMessage( "ExecutionTask: Execution time: $1", services ).dateTimeFormatted( startTaskTime ).string( "<br />" );
 	}
 }

@@ -72,18 +72,18 @@ public class MonthlyExecutionTask extends AbstractPeriodicalExecutionTask {
 			cronMonths.add( String.valueOf( month.getId() + 1 ) );
 		}
 
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Start time: ", services );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "ExecutionTask: Start time:", services ).worldSeparator();
 		translatableMessage.dateTimeFormatted( startTaskTime );
 		translatableMessage.string( "<br />" );
 
-		final String dayOfMont = dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "Last day";
+		final String dayOfMont = dayOfMonth > 0 ? String.valueOf( dayOfMonth ) : "ExecutionTask: Last day";
 		final String months = StringUtils.join( cronMonths, "," );
 
-		final TranslatableMessage mess = new TranslatableMessage( "Day $1 of $2", services ).string( dayOfMont ).string( months );
+		final TranslatableMessage mess = new TranslatableMessage( "ExecutionTask: Day $1 of $2", services ).string( dayOfMont ).string( months );
 		translatableMessage.addTranslatableMessageParameter( mess );
 		translatableMessage.string( "<br />" );
 		if ( endTaskTime != null ) {
-			translatableMessage.translatableString( "End time: " ).dateTimeFormatted( endTaskTime );
+			translatableMessage.translatableString( "ExecutionTask: End time:" ).worldSeparator().dateTimeFormatted( endTaskTime );
 		}
 
 		return translatableMessage;
