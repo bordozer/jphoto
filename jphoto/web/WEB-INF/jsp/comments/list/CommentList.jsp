@@ -79,7 +79,7 @@
 
 		<html:submitButton
 				id="markAllAsReadButton"
-				caption_t="Mark all as read"
+				caption_t="Mark all unread comments as read"
 				onclick="return markAllAsRead();"
 				doNotTranslate="true"
 				icon="markAsRead.png"

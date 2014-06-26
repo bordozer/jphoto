@@ -93,6 +93,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Mark ALL unread comments as read?</nerd>
+		<ru><![CDATA[Пометить ВСЕ непрочитанные комментарии как прочитанные?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Mark all unread comments as read</nerd>
+		<ru><![CDATA[Пометить все как прочитанные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
