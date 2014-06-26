@@ -9,6 +9,7 @@ import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Maps.newLinkedHashMap;
 
 public abstract class TranslationMapLoadStrategy {
 
@@ -78,7 +79,7 @@ public abstract class TranslationMapLoadStrategy {
 
 	public TranslationMapLoadStrategy filter( final String letter ) {
 
-		final HashMap<NerdKey, TranslationData> map = newHashMap( translationMap );
+		final HashMap<NerdKey, TranslationData> map = newLinkedHashMap( translationMap );
 
 		for ( final NerdKey nerdKey : translationMap.keySet() ) {
 
@@ -103,7 +104,7 @@ public abstract class TranslationMapLoadStrategy {
 
 	public TranslationMapLoadStrategy filter( final Language language ) {
 
-		final HashMap<NerdKey, TranslationData> map = newHashMap();
+		final HashMap<NerdKey, TranslationData> map = newLinkedHashMap();
 
 		for ( final NerdKey nerdKey : translationMap.keySet() ) {
 
@@ -162,7 +163,7 @@ public abstract class TranslationMapLoadStrategy {
 		return translationMap;
 	}
 
-	protected Map<NerdKey, TranslationData> loadTranslationMapSorted() {
+	private  Map<NerdKey, TranslationData> loadTranslationMapSorted() {
 
 		final TreeMap<NerdKey, TranslationData> sortedMap = new TreeMap<NerdKey, TranslationData>( new Comparator<NerdKey>() {
 			@Override
