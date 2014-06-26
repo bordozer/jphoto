@@ -72,10 +72,11 @@
 				<c:set var="nerdKey" value="${entry.key}"/>
 				<c:set var="translationData" value="${entry.value}"/>
 
-				<a href="#${translatorNerdAnchor}" onclick="placeToTranslatorForm( '${eco:escapeJavaScript(nerdKey.nerd)}' );">${nerdKey.nerd}</a>
+				<%--<a href="#${translatorNerdAnchor}" onclick="placeToTranslatorForm( '${eco:escapeJavaScript(nerdKey.nerd)}' );">${nerdKey.nerd}</a>--%>
+				<span class="selected base-font-color photo-category-link">${nerdKey.nerd}</span>
 				<br/>
 				<c:forEach var="translations" items="${translationData.translations}">
-					<span title="${eco:translate(translations.translationEntryType.description)}">${translations.language}: "${eco:escapeHtml(translations.value)}"</span>
+					<span title="${eco:translate(translations.translationEntryType.description)}"><span class="selected block-background">${translations.language}</span>: "${eco:escapeHtml(translations.value)}"</span>
 					<br/>
 				</c:forEach>
 				<br/>

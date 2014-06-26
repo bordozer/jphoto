@@ -35,9 +35,10 @@ a {
 	box-shadow: 3px 3px 10px #848078;
 }
 
-.photo-category-link{
+.photo-category-link {
 	color: #6F7A9F;
 }
+
 .photos-by-user-by-genre-link {
 	color: #6F7A9F;
 }
@@ -376,7 +377,7 @@ td.trunderlined {
 .pagingsummary {
 	text-align: left;
 	font-size: 11pt;
-	font-family: "Bitstream Charter",serif;
+	font-family: "Bitstream Charter", serif;
 }
 
 .photocell {
@@ -564,7 +565,7 @@ table.formtable {
 }
 
 .underlined {
-	text-decoration:underline;
+	text-decoration: underline;
 }
 
 .photoPreviewMarks {
