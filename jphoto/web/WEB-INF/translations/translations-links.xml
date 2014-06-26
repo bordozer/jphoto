@@ -108,8 +108,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Links: Edit scheduler task $1: '$2'</nerd>
+		<ru><![CDATA[Редактировать задачу планировщика $1: '$2']]></ru>
 	</translation>
 
 	<translation>

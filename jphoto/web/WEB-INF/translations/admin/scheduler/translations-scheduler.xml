@@ -58,6 +58,11 @@
 	</translation>
 
 	<translation>
+		<nerd>SchedulerTaskList: The task is inactive</nerd>
+		<ru><![CDATA[Задача планировщика неактивна]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>SchedulerTaskList: The task is active</nerd>
 		<ru><![CDATA[Задача активна]]></ru>
 	</translation>
@@ -208,13 +213,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
-	</translation>
-
-	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskList: Scheduled task id column title</nerd>
+		<ru><![CDATA[Код задачи планировщика]]></ru>
 	</translation>
 
 	<translation>

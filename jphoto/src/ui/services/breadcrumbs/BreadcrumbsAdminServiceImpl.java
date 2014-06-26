@@ -164,7 +164,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminSchedulerTaskListBreadcrumbs() {
-		final String nerd = translatorService.translate( "Scheduler tasks", EnvironmentContext.getLanguage() );
+		final String nerd = translatorService.translate( "Breadcrumbs: Scheduler tasks", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), nerd );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), nerd );
@@ -174,7 +174,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminSchedulerNewBreadcrumbs() {
-		final String scheduler = translatorService.translate( "Scheduler tasks", EnvironmentContext.getLanguage() );
+		final String scheduler = translatorService.translate( "Breadcrumbs: Scheduler tasks", EnvironmentContext.getLanguage() );
 		final String aNew = translatorService.translate( "New", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), scheduler, aNew );
@@ -185,7 +185,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminSchedulerEditBreadcrumbs( final String scheduledTaskName ) {
-		final String scheduler = translatorService.translate( "Scheduler tasks", EnvironmentContext.getLanguage() );
+		final String scheduler = translatorService.translate( "Breadcrumbs: Scheduler tasks", EnvironmentContext.getLanguage() );
 		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), scheduledTaskName, scheduler );
