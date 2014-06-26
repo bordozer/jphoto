@@ -46,9 +46,9 @@ public class TranslatorController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "translated/language/{languageCode}/")
-	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
+	public String getTranslated( final @PathVariable( "languageCode" ) String lang, final @ModelAttribute(MODEL_NAME) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.TRANSLATED, Language.getByCode( languageCode ) );
+		initModel( model.filter( Language.getByCode( lang ) ), TranslationMode.TRANSLATED );
 
 		return VIEW;
 	}
@@ -56,15 +56,15 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "translated/letter/{letter}/" )
 	public String getTranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.TRANSLATED, letter );
+		initModel( model.filter( letter ), TranslationMode.TRANSLATED );
 
 		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "translated/language/{languageCode}/letter/{letter}/" )
-	public String getTranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+	public String getTranslated( final @PathVariable( "languageCode" ) String lang, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.TRANSLATED, Language.getByCode( languageCode ), letter );
+		initModel( model.filter( Language.getByCode( lang ) ).filter( letter ), TranslationMode.TRANSLATED );
 
 		return VIEW;
 	}
@@ -78,9 +78,9 @@ public class TranslatorController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/" )
-	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+	public String getUntranslated( final @PathVariable( "languageCode" ) String lang, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.UNTRANSLATED, Language.getByCode( languageCode ) );
+		initModel( model.filter( Language.getByCode( lang ) ), TranslationMode.UNTRANSLATED );
 
 		return VIEW;
 	}
@@ -88,36 +88,17 @@ public class TranslatorController {
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/letter/{letter}/" )
 	public String getUntranslated1( final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.UNTRANSLATED, letter );
+		initModel( model.filter( letter ), TranslationMode.UNTRANSLATED );
 
 		return VIEW;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/untranslated/language/{languageCode}/letter/{letter}/" )
-	public String getUntranslated( final @PathVariable( "languageCode" ) String languageCode, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
+	public String getUntranslated( final @PathVariable( "languageCode" ) String lang, final @PathVariable( "letter" ) String letter, final @ModelAttribute( MODEL_NAME ) TranslatorModel model ) {
 
-		initModel( model, TranslationMode.UNTRANSLATED, Language.getByCode( languageCode ), letter );
+		initModel( model.filter( Language.getByCode( lang ) ).filter( letter ), TranslationMode.UNTRANSLATED );
 
 		return VIEW;
-	}
-
-	private void initModel( final TranslatorModel model, final TranslationMode mode, final Language language ) {
-		model.setLanguage( language );
-
-		initModel( model, mode );
-	}
-
-	private void initModel( final TranslatorModel model, final TranslationMode mode, final String letter ) {
-		model.setFilterByLetter( letter );
-
-		initModel( model, mode );
-	}
-
-	private void initModel( final TranslatorModel model, final TranslationMode mode, final Language language, final String letter ) {
-		model.setLanguage( language );
-		model.setFilterByLetter( letter );
-
-		initModel( model, mode );
 	}
 
 	private void initModel( final TranslatorModel model, final TranslationMode mode ) {

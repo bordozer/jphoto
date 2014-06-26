@@ -17,6 +17,16 @@ public class TranslatorModel extends AbstractGeneralModel {
 	private String filterByLetter;
 	private Language language;
 
+	public TranslatorModel filter( final Language language ) {
+		this.language = language;
+		return this;
+	}
+
+	public TranslatorModel filter( final String letter ) {
+		this.filterByLetter = letter;
+		return this;
+	}
+
 	public void setTranslationsMap( final Map<NerdKey,TranslationData> translationsMap ) {
 		this.translationsMap = translationsMap;
 	}
