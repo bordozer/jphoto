@@ -1,4 +1,5 @@
 <%@ tag import="admin.controllers.configuration.edit.ConfigurationEditModel" %>
+<%@ tag import="core.enums.YesNo" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -46,6 +47,9 @@
 <c:set var="fieldCurrentValueDivId" value="${configurationInfoDivId}_${configurationKeyId}" />
 <c:set var="fieldId" value="configurationMap['${configurationKeyId}'].value" />
 
+<c:set var="yes" value="<%=YesNo.YES.getName()%>" />
+<c:set var="no" value="<%=YesNo.NO.getName()%>" />
+
 <div style="text-align: right;">
 
 	<c:if test="${!isCheckboxDataType}">
@@ -53,8 +57,8 @@
 	</c:if>
 
 	<c:if test="${isCheckboxDataType}">
-		<input id="${fieldId}" name="${fieldId}" type="radio" value="1" ${configuration.valueYesNo ? 'checked' : ''} /> ${eco:translate('Yes')}
-		<input id="${fieldId}" name="${fieldId}" type="radio" value="0" ${not configuration.valueYesNo ? 'checked' : ''} /> ${eco:translate('No')}
+		<input id="${fieldId}" name="${fieldId}" type="radio" value="1" ${configuration.valueYesNo ? 'checked' : ''} /> ${eco:translate(yes)}
+		<input id="${fieldId}" name="${fieldId}" type="radio" value="0" ${not configuration.valueYesNo ? 'checked' : ''} /> ${eco:translate(no)}
 	</c:if>
 
 </div>

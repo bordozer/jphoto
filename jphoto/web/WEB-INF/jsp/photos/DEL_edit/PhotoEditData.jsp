@@ -70,6 +70,9 @@
 
 <c:set var="photoNameMaxLength" value="<%=ApplicationContextHelper.getConfigurationService().getInt( ConfigurationKey.SYSTEM_PHOTO_NAME_MAX_LENGTH )%>"/>
 
+<c:set var="yes" value="<%=YesNo.YES.getName()%>" />
+<c:set var="no" value="<%=YesNo.NO.getName()%>" />
+
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
 <%--<script type="text/javascript">
@@ -231,7 +234,7 @@
 
 					<table:tddata>
 						<c:if test="${not isNew}">
-							${eco:translate1('$1', photoEditDataModel.anonymousPosting ? 'Yes' : 'No')}
+							${eco:translate1('$1', photoEditDataModel.anonymousPosting ? yes : no)}
 						</c:if>
 
 						<c:if test="${isNew}">

@@ -48,7 +48,7 @@
 
 							<table:tdunderlined width="20">
 								<links:configurationTabEdit systemConfigurationId="${systemConfiguration.id}" configurationTab="${configurationTab}">
-									<html:img id="configure" src="edit16.png" width="16" height="16" alt="${eco:translate1('Edit configuration tab: $1', configurationTab.name)}"/>
+									<html:img id="configure" src="edit16.png" width="16" height="16" alt="${eco:translate1('Links: Edit configuration tab: $1', configurationTab.name)}"/>
 								</links:configurationTabEdit>
 							</table:tdunderlined>
 
@@ -107,7 +107,7 @@
 								<table:tdunderlined cssClass="textright">
 									<c:if test="${configuration.defaultSystemConfiguration != null}">
 										<config:valueRendererInfo configuration="${configuration.defaultSystemConfiguration}"
-																  titlePrefix="${eco:translate('Default system configuration value: ')}"/>
+																  titlePrefix="${eco:translate('Configuration: Default system configuration value:')}"/>
 									</c:if>
 								</table:tdunderlined>
 

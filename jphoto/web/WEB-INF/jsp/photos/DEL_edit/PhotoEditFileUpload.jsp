@@ -57,7 +57,7 @@
 
 			<table:tr>
 				<table:tdtext text_t="Contains nude content"/>
-				<table:tddata>${eco:translate(photoEditDataModel.containsNudeContent ? 'Yes' : 'No')}</table:tddata>
+				<table:tddata>${eco:translate(photoEditDataModel.containsNudeContent ? yes : no)}</table:tddata>
 			</table:tr>
 
 			<table:tr>
@@ -96,7 +96,7 @@
 
 			<table:tr>
 				<table:tdtext text_t="Notification about new comments"/>
-				<table:tddata>${eco:translate(photoEditDataModel.notificationEmailAboutNewPhotoComment == yesId ? 'Yes' : 'No')}</table:tddata>
+				<table:tddata>${eco:translate(photoEditDataModel.notificationEmailAboutNewPhotoComment == yesId ? yes : no)}</table:tddata>
 			</table:tr>
 
 			<table:tr>

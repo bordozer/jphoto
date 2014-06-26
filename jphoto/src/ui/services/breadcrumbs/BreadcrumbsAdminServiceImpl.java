@@ -84,7 +84,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	@Override
 	public PageTitleData getAdminConfigurationInfoTbBreadcrumbs( final SystemConfiguration systemConfiguration, final String configTabName ) {
-		final String tran = translatorService.translate( "Tabs", EnvironmentContext.getLanguage() );
+		final String tran = translatorService.translate( "Breadcrumbs: System configuration Tabs", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), tran, configTabName );
 		final String sysConfigName = String.format( "%s%s%s"

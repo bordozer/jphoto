@@ -93,18 +93,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Configuration: Default system configuration value:</nerd>
+		<ru><![CDATA[Значение базовой конфигурации: ]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Overrides value of default system configuration. Click to reset to default value.</nerd>
+		<ru><![CDATA[Перекрывает значение базовой системной конфигурации. Кликните, чтобы сбросить установленное значение.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Overrides value of default system configuration.</nerd>
+		<ru><![CDATA[Перекрывает значение базовой системной конфигурации.]]></ru>
 	</translation>
 
 	<translation>

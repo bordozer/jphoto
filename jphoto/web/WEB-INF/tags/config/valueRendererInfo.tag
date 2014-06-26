@@ -1,3 +1,4 @@
+<%@ tag import="core.enums.YesNo" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -48,8 +49,11 @@
 	</c:forEach>
 </c:if>
 
+<c:set var="yes" value="<%=YesNo.YES.getName()%>" />
+<c:set var="no" value="<%=YesNo.NO.getName()%>" />
+
 <c:if test="${isCheckboxDataType}">
-	<c:set var="value" value="${configuration.valueYesNo ? eco:translate('Yes') : eco:translate('No')}" />
+	<c:set var="value" value="${configuration.valueYesNo ? eco:translate(yes) : eco:translate(no)}" />
 </c:if>
 
 <c:set var="css" value=""/>
@@ -57,7 +61,7 @@
 	<c:set var="css" value="changedConfigurationValue"/>
 </c:if>
 
-<div align="${align}" class="${css}" title="${titlePrefix}${title}">
+<div align="${align}" class="${css}" title="${titlePrefix} ${title}">
 	${value}
 </div>
 

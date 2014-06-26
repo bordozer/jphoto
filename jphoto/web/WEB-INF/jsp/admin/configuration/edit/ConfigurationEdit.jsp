@@ -90,7 +90,7 @@
 							<table:td width="20">
 								<c:if test="${not gotFromDefaultSystemConfiguration}">
 									<a href="#" onclick="resetValueToDefault( ${configurationKey.id} );">
-										<html:img id="conf_${configurationKey.id}" src="edited16.png" width="16" height="16" alt="${eco:translate('Overrided value of default system configuration. Click to reset to default value.')}" />
+										<html:img id="conf_${configurationKey.id}" src="edited16.png" width="16" height="16" alt="${eco:translate('Overrides value of default system configuration. Click to reset to default value.')}" />
 									</a>
 								</c:if>
 
