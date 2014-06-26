@@ -51,7 +51,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String rootTranslated = getJobsRootTranslated();
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), savedJob.getName(), translatorService.translate( "Edit", EnvironmentContext.getLanguage() ) );
+		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() ), savedJob.getName(), translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() ) );
 
 		return new PageTitleData( title, rootTranslated, breadcrumbs );
 	}
@@ -111,7 +111,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	@Override
 	public PageTitleData getAdminConfigurationEditTabBreadcrumbs( final int systemConfigurationId, final SystemConfiguration systemConfiguration, final ConfigurationTab configTab ) {
 		final String configuration = translatorService.translate( "Configuration", EnvironmentContext.getLanguage() );
-		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
+		final String edit = translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
@@ -128,7 +128,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	@Override
 	public PageTitleData getAdminConfigurationEditDataBreadcrumbs( final SystemConfiguration systemConfiguration ) {
 		final String configuration = translatorService.translate( "Configuration", EnvironmentContext.getLanguage() );
-		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
+		final String edit = translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() );
 
 		final String sysConfigName = String.format( "%s%s%s"
 			, entityLinkUtilsService.getAdminConfigurationTabsLink( systemConfiguration )
@@ -186,7 +186,7 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	@Override
 	public PageTitleData getAdminSchedulerEditBreadcrumbs( final String scheduledTaskName ) {
 		final String scheduler = translatorService.translate( "Breadcrumbs: Scheduler tasks", EnvironmentContext.getLanguage() );
-		final String edit = translatorService.translate( "Edit", EnvironmentContext.getLanguage() );
+		final String edit = translatorService.translate( "Breadcrumbs: Edit", EnvironmentContext.getLanguage() );
 
 		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), scheduledTaskName, scheduler );
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminSchedulerTaskListLink( EnvironmentContext.getLanguage() ), scheduledTaskName, edit );

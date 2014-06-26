@@ -42,7 +42,7 @@
 
 			<table:tr>
 			<table:td colspan="2">
-				<html:img32 src="/icons32/save32.png" onclick="saveSchedulerTask();" alt="${eco:translate('Save scheduler task')}"/>
+				<html:img32 src="/icons32/save32.png" onclick="saveSchedulerTask();" alt="${eco:translate('SchedulerTaskEdit: Save scheduler task button title')}"/>
 			</table:td>
 		</table:tr>
 

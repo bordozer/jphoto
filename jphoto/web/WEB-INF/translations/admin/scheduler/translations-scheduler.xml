@@ -208,7 +208,7 @@
 	</translation>
 
 	<translation>
-		<nerd>ExecutionTask: Week days:</nerd>
+		<nerd>ExecutionTask: Week days</nerd>
 		<ru><![CDATA[Дни недели:]]></ru>
 	</translation>
 
@@ -323,8 +323,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>SchedulerTaskEdit: Save scheduler task button title</nerd>
+		<ru><![CDATA[Сохранить задачу планировщика]]></ru>
 	</translation>
 
 	<translation>
