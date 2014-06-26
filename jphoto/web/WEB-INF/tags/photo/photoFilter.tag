@@ -36,7 +36,7 @@
 			<table:tddata>
 				<form:select path="filterGenreId" >
 					<form:option value="-1" label="- - - - - -"/>
-					<form:options items="${photoFilterModel.filterGenres}" itemValue="id" itemLabel="name"/>
+					<form:options items="${photoFilterModel.genreWrappers}" itemValue="genre.id" itemLabel="genreNameTranslated"/>
 				</form:select>
 			</table:tddata>
 		</table:tr>

@@ -2,6 +2,7 @@ package ui.controllers.photos.list;
 
 import core.general.genre.Genre;
 import org.springframework.validation.BindingResult;
+import ui.controllers.photos.edit.GenreWrapper;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class PhotoFilterModel {
 	private String photosSortColumn;
 	private String photosSortOrder;
 
-	private List<Genre> filterGenres;
+	private List<GenreWrapper> genreWrappers;
 	private BindingResult bindingResult;
 
 	public String getFilterPhotoName() {
@@ -76,12 +77,12 @@ public class PhotoFilterModel {
 		this.photosSortOrder = photosSortOrder;
 	}
 
-	public List<Genre> getFilterGenres() {
-		return filterGenres;
+	public List<GenreWrapper> getGenreWrappers() {
+		return genreWrappers;
 	}
 
-	public void setFilterGenres( final List<Genre> filterGenres ) {
-		this.filterGenres = filterGenres;
+	public void setGenreWrappers( final List<GenreWrapper> genreWrappers ) {
+		this.genreWrappers = genreWrappers;
 	}
 
 	public BindingResult getBindingResult() {

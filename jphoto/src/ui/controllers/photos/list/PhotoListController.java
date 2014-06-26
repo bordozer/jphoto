@@ -41,6 +41,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
+import ui.controllers.photos.edit.GenreWrapper;
 import ui.controllers.photos.list.title.*;
 import ui.elements.PhotoList;
 import ui.services.UtilsService;
@@ -149,7 +150,7 @@ public class PhotoListController {
 			filterModel.setPhotosSortOrder( String.valueOf( filterData.getPhotosSortOrder().getId() ) );
 		}
 
-		filterModel.setFilterGenres( genreService.loadAll() );
+		filterModel.setGenreWrappers( getGenreWrappers() );
 
 		filterModel.setPhotoAuthorMembershipTypeIds( Lists.transform( Arrays.asList( UserMembershipType.values() ), new Function<UserMembershipType, Integer>() {
 			@Override
@@ -860,5 +861,22 @@ public class PhotoListController {
 	private void fillFilterModelWithUserData( final PhotoFilterModel filterModel, final User user ) {
 		filterModel.setFilterAuthorName( user.getName() );
 		filterModel.setPhotoAuthorMembershipTypeIds( newArrayList( user.getMembershipType().getId() ) );
+	}
+
+	// TODO: duplecated in /home/blu/dev/src/jphoto/jphoto/src/ui/controllers/photos/edit/PhotoEditDataController.java
+	private List<GenreWrapper> getGenreWrappers() {
+		final Language language = EnvironmentContext.getLanguage();
+
+		final List<GenreWrapper> result = newArrayList();
+
+		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( language );
+		for ( final Genre genre : genres ) {
+			final GenreWrapper wrapper = new GenreWrapper( genre );
+			wrapper.setGenreNameTranslated( translatorService.translateGenre( genre, language ) );
+
+			result.add( wrapper );
+		}
+
+		return result;
 	}
 }
