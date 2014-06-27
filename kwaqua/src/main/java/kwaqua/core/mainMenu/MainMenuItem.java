@@ -10,6 +10,6 @@ public abstract class MainMenuItem extends AbstractMainMenuItem {
 
 	@Override
 	final protected String getSelector() {
-		return String.format( "//div[contains(@class,'mainMenu')]/div/div[contains(@class,'menuItem')]/ul/li/a[contains(text(),\"%s\")]", title.getTitle() );
+		return String.format( "//div[@id='cssmenu']/ul/li/a/span[text()='%s']/..", title.getTitle() );
 	}
 }

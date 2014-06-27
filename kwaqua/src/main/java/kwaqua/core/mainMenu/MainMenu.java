@@ -8,9 +8,11 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MainMenu {
 
-	private final List<AbstractMainMenuItem> menuItems;
+	private List<AbstractMainMenuItem> menuItems = newArrayList();
+//	private final WebDriver webDriver;
 
 	public MainMenu( final WebDriver webDriver ) {
+//		this.webDriver = webDriver;
 
 		final MainMenuFactory menuFactory = new MainMenuFactory( webDriver );
 

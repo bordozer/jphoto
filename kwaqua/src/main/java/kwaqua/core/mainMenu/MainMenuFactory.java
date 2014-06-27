@@ -21,14 +21,14 @@ public class MainMenuFactory {
 			@Override
 			public List<AbstractMainMenuItem> getSubMenuItems() {
 				final List<AbstractMainMenuItem> result = newArrayList();
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_ALL, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_TODAY, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_YESTERDAY, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_WEEK, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_THIS_MONTH, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_AUTHORS, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_MODELS, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.PHOTOS_MAKEUP_MASTERS, menuTitle, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_ALL, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_TODAY, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_YESTERDAY, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_WEEK, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_THIS_MONTH, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_AUTHORS, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_MODELS, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_MAKEUP_MASTERS, webDriver ) );
 
 				return result;
 			}
@@ -42,10 +42,10 @@ public class MainMenuFactory {
 			@Override
 			public List<AbstractMainMenuItem> getSubMenuItems() {
 				final List<AbstractMainMenuItem> result = newArrayList();
-				result.add( new MainSubMenuItem( MainMenuTitle.MEMBERS_ALL, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.MEMBERS_AUTHORS, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.MEMBERS_MODELS, menuTitle, webDriver ) );
-				result.add( new MainSubMenuItem( MainMenuTitle.MEMBERS_MAKEUP_MASTER, menuTitle, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_ALL, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_AUTHORS, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_MODELS, webDriver ) );
+				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_MAKEUP_MASTER, webDriver ) );
 
 				return result;
 			}

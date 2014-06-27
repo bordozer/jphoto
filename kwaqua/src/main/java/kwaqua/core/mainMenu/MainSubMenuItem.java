@@ -10,11 +10,11 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MainSubMenuItem extends AbstractMainMenuItem {
 
-	private final MainMenuTitle parentMenuTitle;
+	private final MainMenuTitle mainMenuTitle;
 
-	public MainSubMenuItem( final MainMenuTitle title, final MainMenuTitle parentMenuTitle, final WebDriver webDriver ) {
-		super( title, webDriver );
-		this.parentMenuTitle = parentMenuTitle;
+	public MainSubMenuItem( final MainMenuTitle mainMenuTitle, final MainMenuTitle submenuTitle, final WebDriver webDriver ) {
+		super( submenuTitle, webDriver );
+		this.mainMenuTitle = mainMenuTitle;
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class MainSubMenuItem extends AbstractMainMenuItem {
 	@Override
 	final protected String getSelector() {
 		return String.format( "//div[contains(@class,'mainMenu')]/div/div[contains(@class,'menuItem')]/ul/li/a[contains(text(),\"%s\")]/../ul/li//a[contains(text(),\"%s\")]"
-			, parentMenuTitle, title.getTitle() );
+			, mainMenuTitle, title.getTitle() );
 	}
 
 	@Override
