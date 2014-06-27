@@ -8,7 +8,6 @@
 	<artifactId>kwaqua</artifactId>
 	<version>1.0</version>
 	<description>Automated UI testing for JPhoto</description>
-	<url>http://some.url.ua</url>
 
 	<properties>
 		<encoding>UTF-8</encoding>
@@ -138,19 +137,19 @@
 		<dependency>
 			<groupId>net.thucydides</groupId>
 			<artifactId>thucydides-core</artifactId>
-			<version>0.9.125</version>
+			<version>${thucydides.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.thucydides</groupId>
 			<artifactId>thucydides-jbehave-plugin</artifactId>
-			<version>0.9.204</version>
+			<version>${thucydides.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>net.thucydides</groupId>
 			<artifactId>thucydides-junit</artifactId>
-			<version>0.9.204</version>
+			<version>${thucydides.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -190,6 +189,36 @@
 			<artifactId>selenium-ie-driver</artifactId>
 			<version>${selenium.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-android-driver</artifactId>
+			<version>2.39.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-iphone-driver</artifactId>
+			<version>2.39.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.5.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.owlike</groupId>
+			<artifactId>genson</artifactId>
+			<version>0.99</version>
+		</dependency>
 	</dependencies>
 
 	<reporting>
@@ -223,38 +252,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
-	<!--<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<configuration>
-					<docencoding>${encoding}</docencoding>
-					<source>${java.version}</source>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.0.1</version>
-				<configuration>
-					<outputEncoding>${encoding}</outputEncoding>
-					<targetJdk>${java.version}</targetJdk>
-					<linkXRef>true</linkXRef>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<outputEncoding>${encoding}</outputEncoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</reporting>-->
 
 	<profiles>
 		<profile>
