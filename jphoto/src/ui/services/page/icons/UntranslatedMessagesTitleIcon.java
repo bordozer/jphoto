@@ -1,29 +1,32 @@
 package ui.services.page.icons;
 
 import core.services.system.Services;
+import core.services.translator.Language;
 
 public class UntranslatedMessagesTitleIcon extends AbstractTitleIcon {
 
+	private Language language;
 	private int untranslatedMessagesCount;
 
-	public UntranslatedMessagesTitleIcon( final int untranslatedMessagesCount, final Services services ) {
+	public UntranslatedMessagesTitleIcon( final Language language, final int untranslatedMessagesCount, final Services services ) {
 		super( services );
+		this.language = language;
 		this.untranslatedMessagesCount = untranslatedMessagesCount;
 	}
 
 	@Override
 	protected String getIconPath() {
-		return "icons32/translate.png";
+		return String.format( "languages/%s", language.getIcon() );
 	}
 
 	@Override
 	protected String getIconTitle() {
-		return getTranslatorService().translate( "There are $1 untranslated nerds are found", getLanguage(), String.valueOf( untranslatedMessagesCount ) );
+		return getTranslatorService().translate( "$1: there are $2 untranslated nerds are found", getLanguage(), getTranslatorService().translate( language.getName(), language ), String.valueOf( untranslatedMessagesCount ) );
 	}
 
 	@Override
 	protected String getIconUrl() {
-		return getUrlUtilsService().getAdminUntranslatedLink();
+		return String.format( "%s" + "language/%s/", getUrlUtilsService().getAdminUntranslatedLink(), language.getCode() );
 	}
 
 	@Override

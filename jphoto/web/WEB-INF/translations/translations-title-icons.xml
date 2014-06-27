@@ -13,8 +13,8 @@
 	</translation>
 
 	<translation>
-		<nerd>There are $1 untranslated nerds are found</nerd>
-		<ru><![CDATA[Найдено $1 непереведенных фраз]]></ru>
+		<nerd>$1: there are $2 untranslated nerds are found</nerd>
+		<ru><![CDATA[$1: найдено $2 непереведенных фраз]]></ru>
 	</translation>
 
 	<translation>

@@ -5,14 +5,18 @@ import core.enums.PrivateMessageType;
 import core.general.user.User;
 import core.services.entry.PrivateMessageService;
 import core.services.system.Services;
-import core.services.translator.TranslatorService;
+import core.services.translator.*;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.quartz.SchedulerException;
 import ui.context.EnvironmentContext;
 import utils.UserUtils;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
 
 public class TitleIconLoader {
 
@@ -25,7 +29,7 @@ public class TitleIconLoader {
 
 		addUnreadPrivateMessagesIcon( result, services );
 
-		addUntranslatedMessagesIcon( result, services );
+		addUntranslatedMessagesIcons( result, services );
 
 		return result;
 	}
@@ -76,15 +80,39 @@ public class TitleIconLoader {
 		}
 	}
 
-	private static void addUntranslatedMessagesIcon( final List<AbstractTitleIcon> result, final Services services ) {
+	private static void addUntranslatedMessagesIcons( final List<AbstractTitleIcon> result, final Services services ) {
+
 		if ( services.getSecurityService().isSuperAdminUser( getCurrentUser() ) ) {
-			final int untranslatedMessagesCount = getTranslatorService( services ).getUntranslatedMap().size();
 
-			if ( untranslatedMessagesCount == 0 ) {
-				return;
+			final Map<NerdKey, TranslationData> untranslatedMap = getTranslatorService( services ).getUntranslatedMap();
+
+			for ( final Language language : Language.getUILanguages() ) {
+				int untranslatedMessagesCount = 0;
+//				final Map<NerdKey, TranslationData> map = newHashMap( untranslatedMap );
+
+				for ( final NerdKey nerdKey : untranslatedMap.keySet() ) {
+
+					final TranslationData translationData = untranslatedMap.get( nerdKey );
+					final List<TranslationEntry> translations = newArrayList( translationData.getTranslations() );
+					CollectionUtils.filter( translations, new Predicate<TranslationEntry>() {
+						@Override
+						public boolean evaluate( final TranslationEntry translationEntry ) {
+							return translationEntry instanceof TranslationEntryMissed && translationEntry.getLanguage() == language;
+						}
+					} );
+					untranslatedMessagesCount += translations.size();
+
+//					map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
+				}
+
+//				final int untranslatedMessagesCount = map.size();
+
+				if ( untranslatedMessagesCount == 0 ) {
+					continue;
+				}
+
+				result.add( new UntranslatedMessagesTitleIcon( language, untranslatedMessagesCount, services ) );
 			}
-
-			result.add( new UntranslatedMessagesTitleIcon( untranslatedMessagesCount, services ) );
 		}
 	}
 
