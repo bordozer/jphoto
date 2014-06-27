@@ -65,15 +65,15 @@ define( [ 'jquery' ], function ( $ ) {
 			var photosightUserCardUrl = photosightUserDTO.photosightUserCardUrl;
 
 			var div = getPhotosightUserInfoDiv();
-			div.append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" + ", " + photosightUserDTO.photosightUserPhotosCount + " ${eco:translate('photos')}" );
+			div.append( "#" + photosightUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" + ", " + photosightUserDTO.photosightUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
 
 			if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
-				div.append( ' ( ' + photosightUserDTO.userCardLink + ", <a href='" + photosightUserDTO.userPhotosUrl + "'>" + photosightUserDTO.photosCount + " ${eco:translate('photos')}</a> )" );
+				div.append( ' ( ' + photosightUserDTO.userCardLink + ", <a href='" + photosightUserDTO.userPhotosUrl + "'>" + photosightUserDTO.photosCount + " ${eco:translate('ROD PLURAL photos')}</a> )" );
 			}
 		}
 
 		function renderNotExistingPhotosightUser( photosightUserId ) {
-			getPhotosightUserInfoDiv().append( "#" + photosightUserId + ": <span class='newInsertedComment'>${eco:translate('Not found')}</span>" );
+			getPhotosightUserInfoDiv().append( "#" + photosightUserId + ": <span class='newInsertedComment'>${eco:translate('Photosight import -> Photo sight user info: User not found')}</span>" );
 		}
 
 		return {

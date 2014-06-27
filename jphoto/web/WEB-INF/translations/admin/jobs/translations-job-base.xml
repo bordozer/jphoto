@@ -223,18 +223,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job JSP: Start time</nerd>
+		<ru><![CDATA[Время начала]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job JSP: Stop the job?</nerd>
+		<ru><![CDATA[Прервать выполнение задачи?]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job JSP: Stop the Job button title</nerd>
+		<ru><![CDATA[Прервать выполнение задачи]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>jobListHeader: Show active jobs</nerd>
+		<ru><![CDATA[Показать активные задачи]]></ru>
 	</translation>
 
 	<translation>

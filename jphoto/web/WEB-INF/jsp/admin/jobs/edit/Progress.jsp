@@ -76,7 +76,7 @@
 
 	<br />
 
-	<html:submitButton id="buttomStopJob" caption_t="Stop the Job" onclick="stopTheJob();" />
+	<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" />
 
 	<br />
 	<br />
