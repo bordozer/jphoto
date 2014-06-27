@@ -16,7 +16,7 @@ public class MainMenu {
 
 	private MainMenuItem getMenu( final MainMenuTitle menuTitle ) {
 
-		final List<MainMenuItem> menuItems = getMainMenu();
+		final List<MainMenuItem> menuItems = getMainMenus();
 
 		for ( final MainMenuItem mainMenuItem : menuItems ) {
 			if ( mainMenuItem.getTitle() == menuTitle ) {
@@ -27,7 +27,7 @@ public class MainMenu {
 		return null;
 	}
 
-	private List<MainMenuItem> getMainMenu() {
+	private List<MainMenuItem> getMainMenus() {
 
 		final MainMenuFactory menuFactory = new MainMenuFactory( webDriver );
 
@@ -41,6 +41,7 @@ public class MainMenu {
 	}
 
 	private AbstractMainMenuItem getMenu( final MainMenuTitle menuTitle, final MainMenuTitle subMenuTitle ) {
+
 		final MainMenuItem menu = getMenu( menuTitle );
 
 		if ( menu == null ) {

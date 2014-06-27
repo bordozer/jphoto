@@ -21,7 +21,9 @@ public class MainSubMenuItem extends AbstractMainMenuItem {
 	public void click() {
 		final Actions hover = new Actions( webDriver );
 
-		hover.moveToElement( mainMenuItem.getElement(), 10, 10 )
+		hover
+			.moveToElement( mainMenuItem.getElement(), 10, 10 )
+			.moveToElement( getElement(), 10, 10 )
 			.click()
 			.perform();
 	}

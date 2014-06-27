@@ -13,10 +13,11 @@ public enum MainMenuTitle {
 	, PHOTOS_MAKEUP_MASTERS( "Makeup masters" )
 
 	, MEMBERS( "Main menu: Members" )
-	, MEMBERS_ALL( "All Members" )
-	, MEMBERS_AUTHORS( "Authors" )
-	, MEMBERS_MODELS( "Models" )
-	, MEMBERS_MAKEUP_MASTER( "Makeup masters" )
+	, MEMBERS_ALL( "Main menu: All members" )
+	, MEMBERS_AUTHORS( "Main menu: members: UserMembershipType: author" )
+	, MEMBERS_MODELS( "Main menu: members: UserMembershipType: model" )
+	, MEMBERS_MAKEUP_MASTER( "Main menu: members: UserMembershipType: makeup master" )
+	, MEMBERS_ACTIVITY_STREAM( "Main menu: Activity stream" )
 	;
 
 	private final String title;
