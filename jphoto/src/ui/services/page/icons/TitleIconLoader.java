@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.newHashMap;
 
 public class TitleIconLoader {
 
@@ -88,7 +87,6 @@ public class TitleIconLoader {
 
 			for ( final Language language : Language.getUILanguages() ) {
 				int untranslatedMessagesCount = 0;
-//				final Map<NerdKey, TranslationData> map = newHashMap( untranslatedMap );
 
 				for ( final NerdKey nerdKey : untranslatedMap.keySet() ) {
 
@@ -101,11 +99,7 @@ public class TitleIconLoader {
 						}
 					} );
 					untranslatedMessagesCount += translations.size();
-
-//					map.put( nerdKey, new TranslationData( nerdKey.getNerd(), translations, translationData.getUsageIndex() ) );
 				}
-
-//				final int untranslatedMessagesCount = map.size();
 
 				if ( untranslatedMessagesCount == 0 ) {
 					continue;
