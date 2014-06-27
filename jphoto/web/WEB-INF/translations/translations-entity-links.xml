@@ -10,6 +10,7 @@
 	<translation>
 		<nerd>EntityLinkUtilsService: $1: user card link title</nerd>
 		<ru><![CDATA[$1: карточка пользлвателя]]></ru>
+		<ua><![CDATA[$1: картка користувача]]></ua>
 	</translation>
 
 	<translation>
@@ -20,6 +21,7 @@
 	<translation>
 		<nerd>EntityLinkUtilsService: $1: photo card link title</nerd>
 		<ru><![CDATA[$1: карточка работы]]></ru>
+		<ua><![CDATA[$1: картка роботи]]></ua>
 	</translation>
 
 	<translation>

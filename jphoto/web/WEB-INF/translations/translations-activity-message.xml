@@ -15,11 +15,13 @@
 	<translation>
 		<nerd>UserNotificationsCollector: One of your friends $1 has uploaded new photo '$2'.</nerd>
 		<ru><![CDATA[Один из ваших друзей $1 загрузил новую работу '$2']]></ru>
+		<ua><![CDATA[Один з ваших друзiв $1 завантажив нову роботу '$2']]></ua>
 	</translation>
 
 	<translation>
 		<nerd>UserNotificationsCollector: $1 has uploaded new photo '$2'. You got this message because you are tracking new photos of $3.</nerd>
 		<ru><![CDATA[$1 Загрузил новую работу '$2'. Вы получили это сообщение т.к. подписаны на отслеживание новых работ $3.]]></ru>
+		<ua><![CDATA[$1 Завантажив нову роботу '$2'. Ви отримали це повiдомлення оскiльки пiдписанi на відстеження новых робот $3.]]></ua>
 	</translation>
 
 
