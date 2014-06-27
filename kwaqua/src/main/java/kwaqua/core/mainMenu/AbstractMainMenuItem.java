@@ -19,23 +19,11 @@ public abstract class AbstractMainMenuItem {
 
 	protected final MainMenuTitle title;
 
-	protected final WebElement element;
-
-	protected final AbstractMainMenuItem parentMenuItem;
-	public abstract List<AbstractMainMenuItem> getSubMenuItems();
-
 	protected abstract String getSelector();
 
-	public AbstractMainMenuItem( final MainMenuTitle title, final AbstractMainMenuItem parentMenuItem, final WebDriver webDriver ) {
-		this.title = title;
-		this.parentMenuItem = parentMenuItem;
-		this.webDriver = webDriver;
-
-		element = findBy( getSelector() );
-	}
-
 	public AbstractMainMenuItem( final MainMenuTitle title, final WebDriver webDriver ) {
-		this( title, null, webDriver );
+		this.title = title;
+		this.webDriver = webDriver;
 	}
 
 	public MainMenuTitle getTitle() {
@@ -43,33 +31,18 @@ public abstract class AbstractMainMenuItem {
 	}
 
 	public void click() {
-		element.click();
+		getElement().click();
 	}
 
 	public WebElement getElement() {
-		return element;
-	}
-
-	public AbstractMainMenuItem getSubMenuItem( final MainMenuTitle subMenuTitle ) {
-		final List<AbstractMainMenuItem> subMenuItems = getSubMenuItems();
-		for ( final AbstractMainMenuItem subMenuItem : subMenuItems ) {
-			if ( subMenuItem.getTitle() == subMenuTitle ) {
-				return subMenuItem;
-			}
-		}
-
-		return null;
-	}
-
-	public AbstractMainMenuItem getParentMenuItem() {
-		return parentMenuItem;
+		return findBy( getSelector() );
 	}
 
 	protected final WebElement findBy( final String xpath ) {
 		return findBy( By.xpath( xpath ), FIND_ELEMENT_TIMEOUT_IN_MILLISECONDS, TimeUnit.MILLISECONDS );
 	}
 
-	protected final WebElement findBy( final By xpath ) {
+	/*protected final WebElement findBy( final By xpath ) {
 		return findBy( xpath, FIND_ELEMENT_TIMEOUT_IN_MILLISECONDS, TimeUnit.MILLISECONDS );
 	}
 
@@ -83,7 +56,7 @@ public abstract class AbstractMainMenuItem {
 
 	protected final WebElement findBy( final String xpath, final long timeout, final TimeUnit timeUnit ) {
 		return findBy( By.xpath( xpath ), timeout, timeUnit );
-	}
+	}*/
 
 	protected final WebElement findBy( final By xpath, final long timeout, final TimeUnit timeUnit ) {
 
@@ -103,10 +76,6 @@ public abstract class AbstractMainMenuItem {
 
 	@Override
 	public String toString() {
-		if ( parentMenuItem == null ) {
-			return title.getTitle();
-		}
-
-		return String.format( "%s: %s", parentMenuItem, title );
+		return String.format( "Main menu: %s", title.getTitle() );
 	}
 }

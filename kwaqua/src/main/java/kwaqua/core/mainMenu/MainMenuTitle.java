@@ -2,37 +2,27 @@ package kwaqua.core.mainMenu;
 
 public enum MainMenuTitle {
 
-	PHOTOS( "Photos" )
-	, PHOTOS_ALL( PHOTOS, "All photos" )
-	, PHOTOS_TODAY( PHOTOS, "Today's photos" )
-	, PHOTOS_YESTERDAY( PHOTOS, "Yesterday's photos" )
-	, PHOTOS_WEEK( PHOTOS, "This week's photos" )
-	, PHOTOS_THIS_MONTH( PHOTOS, "This month's photos" )
-	, PHOTOS_AUTHORS( PHOTOS, "Authors" )
-	, PHOTOS_MODELS( PHOTOS, "Models" )
-	, PHOTOS_MAKEUP_MASTERS( PHOTOS, "Makeup masters" )
+	PHOTOS( "Photo gallery root" )
+	, PHOTOS_ALL( "Photo gallery root" )
+	, PHOTOS_TODAY( "Main menu: Today's photos" )
+	, PHOTOS_YESTERDAY( "Yesterday's photos" )
+	, PHOTOS_WEEK( "This week's photos" )
+	, PHOTOS_THIS_MONTH( "This month's photos" )
+	, PHOTOS_AUTHORS( "Authors" )
+	, PHOTOS_MODELS( "Models" )
+	, PHOTOS_MAKEUP_MASTERS( "Makeup masters" )
 
-	, MEMBERS( "Members" )
-	, MEMBERS_ALL( MEMBERS, "All Members" )
-	, MEMBERS_AUTHORS( MEMBERS, "Authors" )
-	, MEMBERS_MODELS( MEMBERS, "Models" )
-	, MEMBERS_MAKEUP_MASTER( MEMBERS, "Makeup masters" )
+	, MEMBERS( "Main menu: Members" )
+	, MEMBERS_ALL( "All Members" )
+	, MEMBERS_AUTHORS( "Authors" )
+	, MEMBERS_MODELS( "Models" )
+	, MEMBERS_MAKEUP_MASTER( "Makeup masters" )
 	;
 
-	private final MainMenuTitle parent;
 	private final String title;
 
 	private MainMenuTitle( final String title ) {
-		this( null, title );
-	}
-
-	private MainMenuTitle( final MainMenuTitle parent, final String title ) {
-		this.parent = parent;
 		this.title = title;
-	}
-
-	public MainMenuTitle getParent() {
-		return parent;
 	}
 
 	public String getTitle() {
@@ -40,12 +30,8 @@ public enum MainMenuTitle {
 	}
 
 	public static MainMenuTitle getByTitle( final String title ) {
-		return getByTitle( null, title );
-	}
-
-	public static MainMenuTitle getByTitle( final MainMenuTitle parent, final String title ) {
 		for ( final MainMenuTitle mainMenuTitle : MainMenuTitle.values() ) {
-			if ( mainMenuTitle.getParent() == parent && mainMenuTitle.getTitle().equals( title ) ) {
+			if ( mainMenuTitle.getTitle().equals( title ) ) {
 				return mainMenuTitle;
 			}
 		}

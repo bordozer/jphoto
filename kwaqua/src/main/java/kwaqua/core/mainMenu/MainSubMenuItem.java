@@ -3,36 +3,30 @@ package kwaqua.core.mainMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 
-
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-
 public class MainSubMenuItem extends AbstractMainMenuItem {
 
-	private final MainMenuTitle mainMenuTitle;
+	protected MainMenuItem mainMenuItem;
 
-	public MainSubMenuItem( final MainMenuTitle mainMenuTitle, final MainMenuTitle submenuTitle, final WebDriver webDriver ) {
-		super( submenuTitle, webDriver );
-		this.mainMenuTitle = mainMenuTitle;
-	}
-
-	@Override
-	public List<AbstractMainMenuItem> getSubMenuItems() {
-		return newArrayList();
+	public MainSubMenuItem( final MainMenuItem mainMenuItem, final MainMenuTitle title, final WebDriver webDriver ) {
+		super( title, webDriver );
+		this.mainMenuItem = mainMenuItem;
 	}
 
 	@Override
 	final protected String getSelector() {
-		return String.format( "//div[contains(@class,'mainMenu')]/div/div[contains(@class,'menuItem')]/ul/li/a[contains(text(),\"%s\")]/../ul/li//a[contains(text(),\"%s\")]"
-			, mainMenuTitle, title.getTitle() );
+		return String.format( "//div[@id='cssmenu']/ul/li/a/span[text()='%s']/../../ul/li/a/span[contains(text(), '%s')]/..", mainMenuItem.getTitle().getTitle(), title.getTitle() );
 	}
 
 	@Override
 	public void click() {
-		final Actions builder = new Actions( webDriver ); // TODO: exception
+		final Actions hover = new Actions( webDriver );
 
-		final Actions hoverOverRegistrar = builder.moveToElement( parentMenuItem.getElement() );
-		hoverOverRegistrar.perform();
+		hover.moveToElement( mainMenuItem.getElement(), 10, 10 )
+			.click()
+			.perform();
+	}
+
+	public AbstractMainMenuItem getMainMenuItem() {
+		return mainMenuItem;
 	}
 }

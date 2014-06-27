@@ -14,41 +14,41 @@ public class MainMenuFactory {
 		this.webDriver = webDriver;
 	}
 
-	public AbstractMainMenuItem getPhotosMenu() {
-		final MainMenuTitle menuTitle = MainMenuTitle.PHOTOS;
-		
-		return new MainMenuItem( menuTitle, webDriver ) {
-			@Override
-			public List<AbstractMainMenuItem> getSubMenuItems() {
-				final List<AbstractMainMenuItem> result = newArrayList();
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_ALL, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_TODAY, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_YESTERDAY, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_WEEK, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_THIS_MONTH, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_AUTHORS, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_MODELS, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.PHOTOS_MAKEUP_MASTERS, webDriver ) );
+	public MainMenuItem getPhotosMenu() {
 
-				return result;
-			}
-		};
+		final MainMenuTitle menuTitle = MainMenuTitle.PHOTOS;
+
+		final MainMenuItem mainMenuItem = new MainMenuItem( menuTitle, webDriver );
+
+		final List<MainSubMenuItem> submenus = newArrayList();
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_ALL, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_TODAY, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_YESTERDAY, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_WEEK, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_THIS_MONTH, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_AUTHORS, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_MODELS, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.PHOTOS_MAKEUP_MASTERS, webDriver ) );
+
+		mainMenuItem.setSubMenuItems( submenus );
+
+		return mainMenuItem;
 	}
 
-	public AbstractMainMenuItem getMembersMenu() {
+	public MainMenuItem getMembersMenu() {
+
 		final MainMenuTitle menuTitle = MainMenuTitle.MEMBERS;
 
-		return new MainMenuItem( menuTitle, webDriver ) {
-			@Override
-			public List<AbstractMainMenuItem> getSubMenuItems() {
-				final List<AbstractMainMenuItem> result = newArrayList();
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_ALL, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_AUTHORS, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_MODELS, webDriver ) );
-				result.add( new MainSubMenuItem( menuTitle, MainMenuTitle.MEMBERS_MAKEUP_MASTER, webDriver ) );
+		final MainMenuItem mainMenuItem = new MainMenuItem( menuTitle, webDriver );
 
-				return result;
-			}
-		};
+		final List<MainSubMenuItem> submenus = newArrayList();
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.MEMBERS_ALL, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.MEMBERS_AUTHORS, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.MEMBERS_MODELS, webDriver ) );
+		submenus.add( new MainSubMenuItem( mainMenuItem, MainMenuTitle.MEMBERS_MAKEUP_MASTER, webDriver ) );
+
+		mainMenuItem.setSubMenuItems( submenus );
+
+		return mainMenuItem;
 	}
 }

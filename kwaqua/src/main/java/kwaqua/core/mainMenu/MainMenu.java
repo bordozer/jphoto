@@ -8,22 +8,17 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MainMenu {
 
-	private List<AbstractMainMenuItem> menuItems = newArrayList();
-//	private final WebDriver webDriver;
+	private final WebDriver webDriver;
 
 	public MainMenu( final WebDriver webDriver ) {
-//		this.webDriver = webDriver;
-
-		final MainMenuFactory menuFactory = new MainMenuFactory( webDriver );
-
-		menuItems = newArrayList();
-
-		menuItems.add( menuFactory.getPhotosMenu() );
-		menuItems.add( menuFactory.getMembersMenu() );
+		this.webDriver = webDriver;
 	}
 
-	private AbstractMainMenuItem getMenu( final MainMenuTitle menuTitle ) {
-		for ( final AbstractMainMenuItem mainMenuItem : menuItems ) {
+	private MainMenuItem getMenu( final MainMenuTitle menuTitle ) {
+
+		final List<MainMenuItem> menuItems = getMainMenu();
+
+		for ( final MainMenuItem mainMenuItem : menuItems ) {
 			if ( mainMenuItem.getTitle() == menuTitle ) {
 				return mainMenuItem;
 			}
@@ -32,15 +27,28 @@ public class MainMenu {
 		return null;
 	}
 
+	private List<MainMenuItem> getMainMenu() {
+
+		final MainMenuFactory menuFactory = new MainMenuFactory( webDriver );
+
+		final List<MainMenuItem> menuItems = newArrayList();
+
+		menuItems.add( menuFactory.getPhotosMenu() );
+		menuItems.add( menuFactory.getMembersMenu() );
+		// TODO: add remain menus
+
+		return menuItems;
+	}
+
 	private AbstractMainMenuItem getMenu( final MainMenuTitle menuTitle, final MainMenuTitle subMenuTitle ) {
-		final AbstractMainMenuItem menu = getMenu( menuTitle );
+		final MainMenuItem menu = getMenu( menuTitle );
 
 		if ( menu == null ) {
 			return null;
 		}
 
-		final List<AbstractMainMenuItem> subMenuItems = menu.getSubMenuItems();
-		for ( final AbstractMainMenuItem subMenuItem : subMenuItems ) {
+		final List<MainSubMenuItem> subMenuItems = menu.getSubMenuItems();
+		for ( final MainSubMenuItem subMenuItem : subMenuItems ) {
 			if ( subMenuItem.getTitle() == subMenuTitle ) {
 				return subMenuItem;
 			}
