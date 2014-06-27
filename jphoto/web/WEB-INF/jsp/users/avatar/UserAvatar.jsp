@@ -33,7 +33,7 @@
 
 		<table:table width="800" border="0">
 
-			<table:separatorInfo colspan="2" height="50" title="${eco:translate('Avatar')}"/>
+			<table:separatorInfo colspan="2" height="50" title="${eco:translate('User avatar: Avatar section title')}"/>
 
 			<c:if test="${doesAvatarExist}">
 				<table:tr>
@@ -46,7 +46,7 @@
 			</c:if>
 
 			<table:tredit>
-				<table:tdtext text_t="File"/>
+				<table:tdtext text_t="User avatar: Avatar file field"/>
 
 				<table:tddata>
 					<form:input path="userAvatarModel.avatarFile" type="file" id="${avatarFileControl}" />
@@ -56,10 +56,10 @@
 			<c:if test="${doesAvatarExist}">
 				<table:tr>
 					<table:td colspan="2">
-						<a href="#" onclick="return deleteAvatar();">${eco:translate('Delete avatar')}</a>
+						<a href="#" onclick="return deleteAvatar();">${eco:translate('User avatar: Delete avatar')}</a>
 						<script type="text/javascript">
 							function deleteAvatar() {
-								if ( confirm( '${eco:translate('Delete your avatar?')}' ) ) {
+								if ( confirm( '${eco:translate('User avatar: Delete your avatar?')}' ) ) {
 									document.location.href = '${eco:baseUrl()}/members/${userAvatarModel.user.id}/avatar/delete/';
 								}
 								return false;
@@ -69,7 +69,7 @@
 				</table:tr>
 			</c:if>
 
-			<table:trok text_t="Save" />
+			<table:trok text_t="User avatar: Save" />
 
 		</table:table>
 

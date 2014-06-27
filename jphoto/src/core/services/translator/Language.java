@@ -9,8 +9,8 @@ import static com.google.common.collect.Lists.newArrayList;
 public enum Language implements IdentifiableNameable {
 
 	NERD( 1, "nerd", "Language: Nerd", "nerd.png" )
-	, UA( 4, "ua", "Language: Ukrainian", "ua.png" )
 	, RU( 3, "ru", "Language: Russian", "ru.png" )
+	, UA( 4, "ua", "Language: Ukrainian", "ua.png" )
 	, EN( 2, "en", "Language: English", "en.png" )
 	;
 
