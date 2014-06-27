@@ -4,7 +4,6 @@ import kwaqua.KwaquaStory;
 import kwaqua.core.mainMenu.MainMenuTitle;
 import kwaqua.pages.MemberListPage;
 import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 
 import static junit.framework.Assert.assertTrue;

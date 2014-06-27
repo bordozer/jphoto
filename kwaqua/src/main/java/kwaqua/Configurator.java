@@ -18,33 +18,40 @@ public final class Configurator {
 
 	private void apply() {
 		for ( Map.Entry<String, String> parameter : loadParameters() ) {
-			System.setProperty( parameter.getKey(), parameter.getValue() );
+			final String name = parameter.getKey();
+			final String value = parameter.getValue();
+			System.setProperty( name, value );
+			if ( name.startsWith( "webdriver" ) || name.startsWith( "thucydides" ) ) {
+				LOGGER.debug( "Configuration property {} -> {}", name, value );
+			}
 		}
 	}
 
 	private Set<Map.Entry<String, String>> loadParameters() {
 		final Map<String, String> parameters = new HashMap<>();
-
-		loadCustomParameters( parameters );
-
+		loadDefaultParameters( parameters );
 		loadSystemParameters( parameters );
-
+//		loadCustomParameters( parameters );
 		return parameters.entrySet();
 	}
 
-	private void loadCustomParameters( Map<String, String> parameters ) {
+	private void loadDefaultParameters( Map<String, String> parameters ) {
 		try {
 			parameters.putAll( fromPropertyFile( "kwaqua" ) );
 		} catch ( MissingResourceException ex ) {
-			final String message = "kwaqua.properties file cannot be found";
-
-			LOGGER.error( message );
-
-			throw new ConfigurationException( message, ex );
+			throw new ConfigurationException( "Missing file with configuration defaults.", ex );
 		}
 	}
 
-	private void loadSystemParameters( final Map<String, String> parameters ) {
+	/*private void loadCustomParameters( Map<String, String> parameters ) {
+		try {
+			parameters.putAll( fromPropertyFile( "kwaqua" ) );
+		} catch ( MissingResourceException ex ) {
+			LOGGER.warn( "kwaqua.properties file cannot be found." );
+		}
+	}*/
+
+	private void loadSystemParameters( Map<String, String> parameters ) {
 		final Properties properties = System.getProperties();
 		for ( String key : properties.stringPropertyNames() ) {
 			final String value = properties.getProperty( key );
@@ -52,7 +59,7 @@ public final class Configurator {
 		}
 	}
 
-	private Map<? extends String, ? extends String> fromPropertyFile( final String resourcePath ) throws MissingResourceException {
+	private Map<? extends String, ? extends String> fromPropertyFile( String resourcePath ) throws MissingResourceException {
 		final ResourceBundle properties = ResourceBundle.getBundle( resourcePath );
 
 		final Map<String, String> parameters = new HashMap<>();

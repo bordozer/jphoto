@@ -14,9 +14,9 @@
 		<encoding>UTF-8</encoding>
 		<embeddables>kwaqua/stories/**/*.java</embeddables>
 		<java.version>1.8</java.version>
-		<!-- Thucydides of version 0.9.125 is not working with selenium version 2.35.0
-		please do not upgrade until Thucydides support for newer selenium will be added -->
-		<selenium.version>2.34.0</selenium.version>
+		<selenium.version>2.40.0</selenium.version>
+		<thucydides.version>0.9.235</thucydides.version>
+		<platform>;platform=ANY</platform>
 	</properties>
 
 	<build>
@@ -39,28 +39,56 @@
 					<encoding>${encoding}</encoding>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>net.thucydides.maven.plugins</groupId>
 				<artifactId>maven-thucydides-plugin</artifactId>
-				<version>0.9.125</version>
+				<version>${thucydides.version}</version>
 				<executions>
 					<execution>
 						<id>report</id>
 						<goals>
 							<goal>aggregate</goal>
 						</goals>
-						<phase>test</phase>
+						<phase>post-integration-test</phase>
 					</execution>
 				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.15</version>
+				<version>2.16</version>
+				<configuration>
+					<excludes>
+						<exclude>${embeddables}</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.16</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<includes>
+						<!--<include>dk/encode/aqua/stories/**/*.java</include>-->
 						<include>${embeddables}</include>
 					</includes>
+					<systemProperties>
+						<webdriver.driver>${webdriver.driver}</webdriver.driver>
+						<remote.webdriver.driver>${remote.webdriver.driver}</remote.webdriver.driver>
+						<webdriver.remote.url>${webdriver.remote.url}</webdriver.remote.url>
+						<thucydides.driver.capabilities>${thucydides.driver.capabilities}${platform}</thucydides.driver.capabilities>
+					</systemProperties>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -195,5 +223,119 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<!--<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+					<docencoding>${encoding}</docencoding>
+					<source>${java.version}</source>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<outputEncoding>${encoding}</outputEncoding>
+					<targetJdk>${java.version}</targetJdk>
+					<linkXRef>true</linkXRef>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<outputEncoding>${encoding}</outputEncoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>-->
+
+	<profiles>
+		<profile>
+			<id>firefox</id>
+			<properties>
+				<webdriver.driver>firefox</webdriver.driver>
+				<remote.webdriver.driver>firefox</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore</thucydides.driver.capabilities>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>chrome</id>
+			<properties>
+				<webdriver.driver>chrome</webdriver.driver>
+				<remote.webdriver.driver>chrome</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore</thucydides.driver.capabilities>
+			</properties>
+		</profile>
+		<profile>
+			<id>safari</id>
+			<properties>
+				<webdriver.driver>safari</webdriver.driver>
+				<remote.webdriver.driver>safari</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore</thucydides.driver.capabilities>
+				<platform>;platform:MAC</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>explorer-11</id>
+			<properties>
+				<webdriver.driver>iexplorer</webdriver.driver>
+				<remote.webdriver.driver>iexplorer</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore;version:11</thucydides.driver.capabilities>
+				<platform>;platform:WINDOWS</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>explorer-9</id>
+			<properties>
+				<webdriver.driver>iexplorer</webdriver.driver>
+				<remote.webdriver.driver>iexplorer</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore;version:9</thucydides.driver.capabilities>
+				<platform>;platform:WINDOWS</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>explorer-8</id>
+			<properties>
+				<webdriver.driver>iexplorer</webdriver.driver>
+				<remote.webdriver.driver>iexplorer</remote.webdriver.driver>
+				<thucydides.driver.capabilities>unexpectedAlertBehaviour:ignore;version:8</thucydides.driver.capabilities>
+				<platform>;platform:WINDOWS</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>remote</id>
+			<properties>
+				<webdriver.remote.url>http://192.168.69.10:4444/wd/hub</webdriver.remote.url>
+			</properties>
+		</profile>
+		<profile>
+			<id>windows</id>
+			<properties>
+				<platform>;platform:WINDOWS</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>linux</id>
+			<properties>
+				<platform>;platform:Linux</platform>
+			</properties>
+		</profile>
+		<profile>
+			<id>mac</id>
+			<properties>
+				<platform>;platform:MAC</platform>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

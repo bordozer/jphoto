@@ -9,6 +9,7 @@ import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.pages.Pages;
 import net.thucydides.jbehave.ThucydidesJUnitStory;
 import org.jbehave.core.annotations.AfterScenario;
+import org.jbehave.core.steps.InjectableStepsFactory;
 import org.openqa.selenium.WebDriver;
 
 public class KwaquaStory extends ThucydidesJUnitStory {
@@ -57,5 +58,10 @@ public class KwaquaStory extends ThucydidesJUnitStory {
 
 	protected void clickMainMenuMembers() {
 		clickMainMenu( MainMenuTitle.MEMBERS );
+	}
+
+	@Override
+	public InjectableStepsFactory stepsFactory() {
+		return new SingleTestStepsFactory( this.getClass(), configuration(), getRootPackage(), getClassLoader() );
 	}
 }
