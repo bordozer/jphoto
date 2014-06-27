@@ -44,7 +44,7 @@
 
 		<c:set var="errorMessage" value="${eco:translate1('You can not vote for the member rank in category $1:', genreNameTranslated)}<br /><br />${votingModel.validationResult.validationMessage}"/>
 
-		<span title="${eco:translate('Not accessible')}">${eco:translate('N/A')}</span>
+		<span title="${eco:translate('userRankInGenreVotingArea: Not accessible')}">${eco:translate('userRankInGenreVotingArea: N/A')}</span>
 		<a href="#" title="${eco:translate('You can not vote for the member\'s rank in category. Click to see detailed message')}" onclick="return false;">
 			<html:img12 src="icons16/help16.png" onclick="showUIMessage_InformationMessage_ManualClosing('${errorMessage}');" />
 		</a>
