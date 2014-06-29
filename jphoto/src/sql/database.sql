@@ -685,6 +685,8 @@ COMMIT;
 DELETE FROM favorites;
 DELETE FROM comments;
 
+DELETE FROM `activityStream`;
+
 DELETE FROM `photoPreview`;
 DELETE FROM `photoVoting`;
 DELETE FROM `photoVotingSummary`;
@@ -701,6 +703,7 @@ DELETE FROM `usersRanksByGenres`;
 DELETE FROM `usersRankHistory`;
 DELETE FROM `userPhotoAlbum`;
 DELETE FROM `userTeam`;
+DELETE FROM `userSecurity`;
 DELETE FROM users;
 
 DELETE FROM userSecurity;
