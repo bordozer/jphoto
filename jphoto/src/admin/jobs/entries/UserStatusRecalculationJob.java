@@ -7,6 +7,7 @@ import core.enums.PrivateMessageType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.cache.CacheKey;
+import core.general.configuration.ConfigurationKey;
 import core.general.message.PrivateMessage;
 import core.general.user.User;
 import core.general.user.UserStatus;
@@ -41,7 +42,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 			}
 
 			final int photoQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
-//			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
+			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
 				if ( userService.setUserStatus( user.getId(), UserStatus.MEMBER ) ) {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
@@ -60,7 +61,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
-//			}
+			}
 
 			increment();
 
