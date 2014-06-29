@@ -33,7 +33,6 @@
 
 .photo-container {
 	width: 310px; /* MATTER OF DIMENSION */
-	/*height: 500px;*/
 	height: auto;
 	min-height: 440px; /* MATTER OF DIMENSION */
 	display: inline-block;
