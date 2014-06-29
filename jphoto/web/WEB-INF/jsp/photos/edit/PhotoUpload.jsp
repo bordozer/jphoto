@@ -37,7 +37,7 @@
 
 				</table:tr>
 
-				<table:trok text_t="${eco:translate('Photo uploading: Upload file button')}" />
+				<table:trok text_t="Photo uploading: Upload file button" />
 
 			</c:if>
 

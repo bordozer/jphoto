@@ -14,7 +14,7 @@ import utils.UserUtils;
 
 public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 
-	public static final String ADMIN_SUB_MENU_ENTRY_TEXT = "ADMIN";
+	public static final String ADMIN_SUB_MENU_ENTRY_TEXT = "ADMIN submenu text";
 	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = StringUtils.EMPTY;
 
 	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "context-menu-item-admin";
