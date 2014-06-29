@@ -131,7 +131,7 @@ public class UserSelectionHelper {
 
 					@Override
 					public List<UserMembershipType> getSupportedMembershipType() {
-						return newArrayList( UserMembershipType.AUTHOR, UserMembershipType.MODEL );
+						return newArrayList( UserMembershipType.AUTHOR );
 					}
 				};
 			case CITY_TRAVELLING:

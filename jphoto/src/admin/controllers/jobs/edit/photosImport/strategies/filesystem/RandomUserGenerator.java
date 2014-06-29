@@ -92,6 +92,8 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			}
 		}
 
+		log.debug( String.format( "Can not find a suitable user for genre '%s'. The random user is going to be selected.", genre.getName() ) );
+
 		return getRandomNonPhotosightUser( 0 ); // This genre might have been missed in configuration...
 	}
 
