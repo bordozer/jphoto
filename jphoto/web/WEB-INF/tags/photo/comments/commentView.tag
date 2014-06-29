@@ -72,13 +72,13 @@
 			<c:if test="${not isCommentOfPhotoAuthor}">
 				<c:if test="${commentReadTime == 0}">
 					<c:if test="${isThisPhotoOfCurrentUser}">
-						<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('New comment')}" />
+						<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${eco:translate('Comment View: New comment')}" />
 					</c:if>
 
 					<c:if test="${not isThisPhotoOfCurrentUser}">
-						<c:set var="readHint" value="${eco:translate1('$1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
+						<c:set var="readHint" value="${eco:translate1('Comment View: $1 has not read this comment yet', eco:escapeHtml(photoAuthor.name))}"/>
 						<c:if test="${not showCommentAuthorData}">
-							<c:set var="readHint" value="${eco:translate('Photo\\\'s author has not read this comment yet')}"/>
+							<c:set var="readHint" value="${eco:translate('Comment View: Photo_s author has not read this comment yet')}"/>
 						</c:if>
 						<html:img id="" src="icons16/photoCommentNew.png" width="16" height="16" alt="${readHint}" />
 					</c:if>
@@ -86,7 +86,7 @@
 
 				<c:if test="${commentReadTime > 0}">
 					<html:img id="" src="icons16/photoCommentRead.png" width="16" height="16"
-							  alt="${eco:translate3('$1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}" />
+							  alt="${eco:translate3('Comment View: $1 read this comment at $2 $3', eco:escapeHtml(photoAuthor.name), eco:formatDate(comment.readTime), eco:formatTime(comment.readTime))}" />
 				</c:if>
 			</c:if>
 
@@ -96,9 +96,9 @@
 			</c:if>
 
 			<c:if test="${isCommentOfPhotoAuthor}">
-				<span title="${eco:translate('The photo is posted anonymously')}">${anonymouslyPostedName}</span>
+				<span title="${eco:translate('Photo info: The photo is posted anonymously')}">${anonymouslyPostedName}</span>
 				/
-				<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Photo\\\'s author comment')}" />
+				<html:img id="" src="icons16/photoCommentAuthor.png" width="16" height="16" alt="${eco:translate('Comment View: Photo_s author comment')}" />
 			</c:if>
 
 			<c:if test="${showCommentAuthorData}">
@@ -127,7 +127,7 @@
 
 			<c:if test="${!showCommentAuthorData}">
 				<div class="text-centered" style="float: left; width: 90px;">
-					<html:img src="hidden_picture.png" alt="${eco:translate('Author name is hidden due to anonymous period of photo')}"  id="avatar_${comment.id}" height="100" width="100"/>
+					<html:img src="hidden_picture.png" alt="${eco:translate('Comment View: Author name is hidden due to anonymous period of photo')}"  id="avatar_${comment.id}" height="100" width="100"/>
 				</div>
 			</c:if>
 
@@ -139,9 +139,9 @@
 				<div style="float: left; width: 100%; padding-top: 15px; font-size: 10px;">
 					<c:forEach var="userPhotoVote" items="${commentInfo.commentAuthorVotes}" varStatus="status">
 						${eco:translateVotingCategory(userPhotoVote.photoVotingCategory.id)}:
-						<span title="${eco:translate1('Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
+						<span title="${eco:translate1('Comment View: Set by $1 mark', commentAuthor.nameEscaped)}">${userPhotoVote.mark > 0 ? '+' : ''}${userPhotoVote.mark}</span>
 						/
-						<span title="${eco:translate1('Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
+						<span title="${eco:translate1('Comment View: Max accessible at voting time for $1 mark', commentAuthor.nameEscaped)}">+${userPhotoVote.maxAccessibleMark}</span>
 						<c:if test="${not status.last}">
 							,
 						</c:if>
