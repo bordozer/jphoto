@@ -1,48 +1,16 @@
-SET FOREIGN_KEY_CHECKS=0;
-
 # SQL Manager 2007 for MySQL 4.5.0.7
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306
-# Database : jphoto
+# Database : jphoto_v1
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES latin1 */;
+/*!40101 SET NAMES utf8 */;
 
 SET FOREIGN_KEY_CHECKS=0;
-
-#
-# Structure for the `anonymousDay` table :
-#
-
-DROP TABLE IF EXISTS `anonymousDay`;
-
-CREATE TABLE `anonymousDay` (
-  `anonymousDayDate` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
-  PRIMARY KEY (`anonymousDayDate`),
-  UNIQUE KEY `anonymousDayDate` (`anonymousDayDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-#
-# Structure for the `genres` table :
-#
-
-DROP TABLE IF EXISTS `genres`;
-
-CREATE TABLE `genres` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  `minmarksforbest` tinyint(4) DEFAULT NULL,
-  `description` text,
-  `canContainNudeContent` tinyint(1) NOT NULL DEFAULT '0',
-  `containsNudeContent` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `idx_id` (`id`) USING BTREE,
-  UNIQUE KEY `idx_name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=910;
 
 #
 # Structure for the `users` table :
@@ -74,7 +42,58 @@ CREATE TABLE `users` (
   UNIQUE KEY `idx_login` (`login`) USING BTREE,
   UNIQUE KEY `idx_email` (`email`) USING BTREE,
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9248 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
+) ENGINE=InnoDB AUTO_INCREMENT=9527 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=203;
+
+#
+# Structure for the `activityStream` table :
+#
+
+DROP TABLE IF EXISTS `activityStream`;
+
+CREATE TABLE `activityStream` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activityType` tinyint(4) NOT NULL,
+  `activityTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
+  `userId` int(11) DEFAULT NULL,
+  `photoId` int(11) DEFAULT NULL,
+  `activityXML` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  KEY `userId` (`userId`),
+  KEY `photoId` (`photoId`),
+  KEY `activityTime` (`activityTime`),
+  CONSTRAINT `fk_activityStream_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2249086 DEFAULT CHARSET=utf8;
+
+#
+# Structure for the `anonymousDay` table :
+#
+
+DROP TABLE IF EXISTS `anonymousDay`;
+
+CREATE TABLE `anonymousDay` (
+  `anonymousDayDate` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
+  PRIMARY KEY (`anonymousDayDate`),
+  UNIQUE KEY `anonymousDayDate` (`anonymousDayDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#
+# Structure for the `genres` table :
+#
+
+DROP TABLE IF EXISTS `genres`;
+
+CREATE TABLE `genres` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `minmarksforbest` tinyint(4) DEFAULT NULL,
+  `description` text,
+  `canContainNudeContent` tinyint(1) NOT NULL DEFAULT '0',
+  `containsNudeContent` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_id` (`id`) USING BTREE,
+  UNIQUE KEY `idx_name` (`name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=182 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=910;
 
 #
 # Structure for the `photos` table :
@@ -107,7 +126,7 @@ CREATE TABLE `photos` (
   KEY `idx_uploadTime` (`uploadTime`) USING BTREE,
   CONSTRAINT `fk_photos_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_photos_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=102642 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=223435 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `comments` table :
@@ -130,7 +149,7 @@ CREATE TABLE `comments` (
   KEY `fk_comments_authorId_users_id` (`authorId`),
   CONSTRAINT `fk_comments_authorId_users_id` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_comments_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=995045 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
+) ENGINE=InnoDB AUTO_INCREMENT=2865612 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
 
 #
 # Structure for the `favorites` table :
@@ -150,7 +169,7 @@ CREATE TABLE `favorites` (
   KEY `photoId` (`favoriteEntryId`) USING BTREE,
   KEY `userIdPhotoId` (`userId`,`favoriteEntryId`) USING BTREE,
   CONSTRAINT `favoritePhoto_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=773 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6653 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `votingCategories` table :
@@ -165,7 +184,7 @@ CREATE TABLE `votingCategories` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   UNIQUE KEY `idx_name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=2730;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=2730;
 
 #
 # Structure for the `genreVotingCategories` table :
@@ -183,7 +202,7 @@ CREATE TABLE `genreVotingCategories` (
   KEY `votingCategoryId` (`votingCategoryId`) USING BTREE,
   CONSTRAINT `genreVotingCategories_fk` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `genreVotingCategories_fk1` FOREIGN KEY (`votingCategoryId`) REFERENCES `votingCategories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=846 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=154;
+) ENGINE=InnoDB AUTO_INCREMENT=1138 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=154;
 
 #
 # Structure for the `job` table :
@@ -198,7 +217,7 @@ CREATE TABLE `job` (
   `jobType` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `jobExecutionHistory` table :
@@ -213,14 +232,14 @@ CREATE TABLE `jobExecutionHistory` (
   `startTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
   `endTime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
   `jobStatusId` int(11) NOT NULL,
-  `jobMessage` longtext,
+  `jobMessage` text,
   `savedJobId` int(11) DEFAULT NULL,
   `currentJobStep` int(11) DEFAULT NULL,
   `totalJobSteps` int(11) DEFAULT NULL,
   `schedulerTaskId` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=367623 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111695 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `jobExecutionHistoryParameters` table :
@@ -237,7 +256,7 @@ CREATE TABLE `jobExecutionHistoryParameters` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `jobExecutionHistoryId` (`jobExecutionHistoryId`),
   CONSTRAINT `[jobExecutionHistoryId]_fk[num_for_dup]` FOREIGN KEY (`jobExecutionHistoryId`) REFERENCES `jobExecutionHistory` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8724 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=528339 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `jobParameters` table :
@@ -254,7 +273,7 @@ CREATE TABLE `jobParameters` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_jobParameters_jobId_job_id` (`jobId`),
   CONSTRAINT `fk_jobParameters_jobId_job_id` FOREIGN KEY (`jobId`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=342 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `userPhotoAlbum` table :
@@ -272,7 +291,7 @@ CREATE TABLE `userPhotoAlbum` (
   UNIQUE KEY `idx_userId_name` (`userId`,`name`),
   KEY `fk_userPhotoAlbum_userId_users_id` (`userId`),
   CONSTRAINT `fk_userPhotoAlbum_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1464 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=572 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoAlbums` table :
@@ -306,7 +325,7 @@ CREATE TABLE `photoAwards` (
   KEY `idx_photoId` (`photoId`) USING BTREE,
   KEY `idx_photoId_awardId_timeFrom_timeTo` (`photoId`,`awardId`,`timeFrom`,`timeTo`) USING BTREE,
   CONSTRAINT `fk_photoAwards_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoPreview` table :
@@ -323,7 +342,7 @@ CREATE TABLE `photoPreview` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `idx_photoId` (`photoId`) USING BTREE,
   CONSTRAINT `photoPreview_photoId` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=265463 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=530898 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoRatings` table :
@@ -360,7 +379,7 @@ CREATE TABLE `userTeam` (
   UNIQUE KEY `idx_userId_teamMemberName` (`userId`,`teamMemberName`) USING BTREE,
   KEY `idx_userId` (`userId`) USING BTREE,
   KEY `idx_teamMemberUserId` (`teamMemberUserId`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoTeam` table :
@@ -402,7 +421,7 @@ CREATE TABLE `photoVoting` (
   CONSTRAINT `fk_photoVoting_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`),
   CONSTRAINT `fk_photoVoting_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_photoVoting_votingCategoryId_votingCategories_id` FOREIGN KEY (`votingCategoryId`) REFERENCES `votingCategories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=167137 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=441284 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `photoVotingSummary` table :
@@ -420,7 +439,7 @@ CREATE TABLE `photoVotingSummary` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   UNIQUE KEY `idx_photoId_photoVotingCategoryId` (`photoId`,`photoVotingCategoryId`) USING BTREE,
   CONSTRAINT `fk_photoVotingSummary_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36679 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55224 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `privateMessage` table :
@@ -442,7 +461,7 @@ CREATE TABLE `privateMessage` (
   KEY `forUserId` (`toUserId`),
   KEY `fromUserId` (`fromUserId`),
   CONSTRAINT `[OwnerNameToUserId]_fk[num_for_dup]` FOREIGN KEY (`toUserId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4590 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=102947 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `restriction` table :
@@ -478,7 +497,7 @@ CREATE TABLE `schedulerTasks` (
   UNIQUE KEY `idx_name` (`name`) USING BTREE,
   KEY `fk_schedulerTasks_jobId_job_id` (`jobId`),
   CONSTRAINT `fk_schedulerTasks_jobId_job_id` FOREIGN KEY (`jobId`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `schedulerTasksProperties` table :
@@ -495,7 +514,7 @@ CREATE TABLE `schedulerTasksProperties` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_schedulerTasksProperties_schedulerTaskId_schedulerTasks_id` (`schedulerTaskId`),
   CONSTRAINT `fk_schedulerTasksProperties_schedulerTaskId_schedulerTasks_id` FOREIGN KEY (`schedulerTaskId`) REFERENCES `schedulerTasks` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=537 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `systemConfiguration` table :
@@ -511,7 +530,7 @@ CREATE TABLE `systemConfiguration` (
   `isactive` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `systemConfigurationKeys` table :
@@ -528,7 +547,23 @@ CREATE TABLE `systemConfigurationKeys` (
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   UNIQUE KEY `idx_systemConfigurationId_configurationKeyId` (`systemConfigurationId`,`configurationKeyId`) USING BTREE,
   CONSTRAINT `fk_systemConfigurationId_systemConfiguration_id` FOREIGN KEY (`systemConfigurationId`) REFERENCES `systemConfiguration` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14594 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22794 DEFAULT CHARSET=utf8;
+
+#
+# Structure for the `translations` table :
+#
+
+DROP TABLE IF EXISTS `translations`;
+
+CREATE TABLE `translations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entryTypeId` int(11) NOT NULL,
+  `entryId` int(11) NOT NULL,
+  `languageId` tinyint(4) NOT NULL,
+  `translation` varchar(1000) NOT NULL,
+  PRIMARY KEY (`entryTypeId`,`entryId`,`languageId`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `upgradeLog` table :
@@ -594,12 +629,12 @@ CREATE TABLE `usersRanksByGenres` (
   `rank` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
-  UNIQUE KEY `fk_usersRanksByGenres_userId_genreid` (`userId`,`genreId`),
   KEY `fk_usersRanksByGenres_userId_users_id` (`userId`),
   KEY `fk_usersRanksByGenres_genreId_genres_id` (`genreId`),
+  KEY `idx_userId_genreId` (`userId`,`genreId`),
   CONSTRAINT `fk_usersRanksByGenres_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_usersRanksByGenres_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2027 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1407 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `usersRanksByGenresVoting` table :
@@ -623,36 +658,21 @@ CREATE TABLE `usersRanksByGenresVoting` (
   CONSTRAINT `fk_usersRanksByGenresVoting_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_usersRanksByGenresVoting_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_usersRanksByGenresVoting_voterId_users_id` FOREIGN KEY (`voterId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34950 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=79588 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `activityStream` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `activityType` tinyint(4) NOT NULL,
-  `activityTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
-  `userId` int(11) DEFAULT NULL,
-  `photoId` int(11) DEFAULT NULL,
-  `activityXML` text NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `userId` (`userId`),
-  KEY `photoId` (`photoId`),
-  KEY `activityTime` (`activityTime`),
-  CONSTRAINT `fk_activityStream_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48352 DEFAULT CHARSET=utf8;
 
-CREATE TABLE `translations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `entryTypeId` int(11) NOT NULL,
-  `entryId` int(11) NOT NULL,
-  `languageId` tinyint(4) NOT NULL,
-  `translation` varchar(1000) NOT NULL,
-  PRIMARY KEY (`entryTypeId`,`entryId`,`languageId`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+
+
+
+
+
 
 INSERT INTO `votingCategories` (`name`, `description`) VALUES
   ('Categoriy-1',''),
