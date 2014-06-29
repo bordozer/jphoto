@@ -7,7 +7,7 @@ public class PreviewGenerationModel extends AbstractAdminJobModel {
 
 	public final static String PREVIEW_SIZE_FORM_CONTROL = "previewSize";
 
-	private String previewSize = String.valueOf( ConversionOptions.DEFAULT_PREVIEW_SIZE );
+	private String previewSize;
 	private boolean skipPhotosWithExistingPreview = true;
 
 	public String getPreviewSize() {
@@ -29,6 +29,5 @@ public class PreviewGenerationModel extends AbstractAdminJobModel {
 	@Override
 	public void clear() {
 		super.clear();
-		previewSize = String.valueOf( ConversionOptions.DEFAULT_PREVIEW_SIZE );
 	}
 }

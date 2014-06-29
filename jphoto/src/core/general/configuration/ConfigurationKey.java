@@ -103,6 +103,8 @@ public enum ConfigurationKey {
 	, ADMIN_CAN_EDIT_PHOTO_COMMENTS( 1024, "1", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Admin can edit photo comments" )
 	, ADMIN_JOB_HISTORY_ITEMS_ON_PAGE( 1023, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.ADMIN, "Job history items on page" )
 	, ADMIN_PHOTOSIGHT_IMPORT_JOB_IMPORT_NUDE_CONTENT( 1025, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photosight import: select by default categories that may contains nude content" )
+	, ADMIN_PHOTO_PREVIEW_DENSITY( 1026, "72", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.ADMIN, "Photo preview density" )
+	, ADMIN_PHOTO_PREVIEW_DIMENSION( 1027, "200", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.ADMIN, "Photo preview dimension" )
 
 	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
 	, EMAILING_SMTP_DEBUG_MODE( 1308, "jphoto2003", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP debug mode" )

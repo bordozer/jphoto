@@ -6,7 +6,9 @@ import admin.jobs.entries.PreviewGenerationJob;
 import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
+import core.general.configuration.ConfigurationKey;
 import core.general.conversion.ConversionOptions;
+import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -31,6 +33,9 @@ public class PreviewGenerationController extends AbstractJobController {
 
 	@Autowired
 	private PreviewGenerationValidator previewGenerationValidator;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -85,6 +90,9 @@ public class PreviewGenerationController extends AbstractJobController {
 
 	@Override
 	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
+		final PreviewGenerationModel aModel = ( PreviewGenerationModel ) model;
+
+		aModel.setPreviewSize( configurationService.getString( ConfigurationKey.ADMIN_PHOTO_PREVIEW_DIMENSION ) );
 	}
 
 	@Override
