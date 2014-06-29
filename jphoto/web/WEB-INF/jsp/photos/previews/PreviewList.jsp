@@ -33,7 +33,7 @@
 		</c:forEach>
 
 		<table:tr>
-			<table:td>${eco:translate('Total:')}</table:td>
+			<table:td>${eco:translate('PreviewList: Total previews')}:</table:td>
 			<table:td>${fn:length(photoPreviews)}</table:td>
 		</table:tr>
 

@@ -9,7 +9,7 @@
 
 	<translation>
 		<nerd>EntityLinkUtilsService: $1: user card link title</nerd>
-		<ru><![CDATA[$1: карточка пользлвателя]]></ru>
+		<ru><![CDATA[$1: карточка пользователя]]></ru>
 		<ua><![CDATA[$1: картка користувача]]></ua>
 	</translation>
 

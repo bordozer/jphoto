@@ -29,17 +29,17 @@
 		<c:if test="${privateMessageType != 'USER_PRIVATE_MESSAGE_OUT'}">
 
 			<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_IN'}">
-				${eco:translate('From')} <user:userCard user="${fromUser}"/> /
+				${eco:translate('PrivateMessage: From')} <user:userCard user="${fromUser}"/> /
 			</c:if>
 
 			<b>${eco:formatDate(privateMessage.creationTime)} ${eco:formatTimeShort(privateMessage.creationTime)}</b>
 
 			<c:if test="${empty privateMessage.readTime.time}">
-				/ <span class="newInsertedComment">${eco:translate('New')}</span>
+				/ <span class="newInsertedComment">${eco:translate('PrivateMessage: New')}</span>
 			</c:if>
 
 			<c:if test="${privateMessage.readTime.time > 0}">
-				/ ${eco:translate('You read this message at')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
+				/ ${eco:translate('PrivateMessage: You read this message at')} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
 			</c:if>
 
 			<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_IN'}">
@@ -49,18 +49,18 @@
 		</c:if>
 
 		<c:if test="${privateMessageType == 'USER_PRIVATE_MESSAGE_OUT'}">
-			${eco:translate('To')} <user:userCard user="${toUser}"/> /
+			${eco:translate('PrivateMessage: To')} <user:userCard user="${toUser}"/> /
 
 			<b>${eco:formatDate(privateMessage.creationTime)} ${eco:formatTimeShort(privateMessage.creationTime)}</b>
 
 			<c:if test="${privateMessage.readTime.time > 0}">
-				/ ${eco:translate1('$1 read this message at ', toUser.nameEscaped)} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
+				/ ${eco:translate1('PrivateMessage: $1 read this message at', toUser.nameEscaped)} ${eco:formatDate(privateMessage.readTime)} ${eco:formatTimeShort(privateMessage.readTime)}
 			</c:if>
 
 			<c:if test="${privateMessage.readTime.time == 0}">
-				${eco:translate1('$1 has not read this message yet ', toUser.nameEscaped)}
+				${eco:translate1('PrivateMessage: $1 has not read this message yet', toUser.nameEscaped)}
 			</c:if>
-			/
+			&nbsp;/
 			<icons:sendPrivateMessage toUser="${toUser}" callback="reloadPageCallbackFunction" />
 		</c:if>
 

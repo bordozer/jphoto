@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>PrivateMessage: New</nerd>
+		<ru><![CDATA[Новое]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: $1 read this message at</nerd>
+		<ru><![CDATA[$1 прочитал(а) это сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: $1 has not read this message yet</nerd>
+		<ru><![CDATA[$1 еще не прочитал(а) это сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: You read this message at</nerd>
+		<ru><![CDATA[Вы прочитали это сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: From</nerd>
+		<ru><![CDATA[от]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: To</nerd>
+		<ru><![CDATA[к]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
