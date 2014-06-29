@@ -26,7 +26,7 @@
 <c:set var="title" value="<%=title%>" />
 <c:set var="pageModel" value="<%=pageModel%>" />
 
-<c:set var="messageTranslated" value="${eco:translate( title ) }" />
+<c:set var="messageTranslated" value="title" />
 <c:set var="redirectToIfAcceptUrl" value="${exceptionModel.exceptionUrl}" />
 <c:set var="redirectToIfDeclineUrl" value="${exceptionModel.refererUrl}" />
 
@@ -59,7 +59,12 @@
 
 	<c:if test="${isLoggedUserMode}">
 		<br />
-		${eco:translate('* If you want to swith nude content on by defaule, you can do this in the settings of your account')}
+		${eco:translate('* If you want to switch nude content on by default, you can do this in the settings of your account')}
+	</c:if>
+
+	<c:if test="${not isLoggedUserMode}">
+		<br />
+		${eco:translate('* This choice of NUDE visibility will be applied for all photos for your current session')}
 	</c:if>
 
 </tags:page>

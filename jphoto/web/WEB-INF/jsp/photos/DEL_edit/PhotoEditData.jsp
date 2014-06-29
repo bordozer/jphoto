@@ -198,7 +198,7 @@
 					<table:tddata>
 						<tags:inputHint inputId="${photoDescriptionControl}" hintTitle_t="Photo uploading: description hint" hint="${descriptionRequirement}<br /><br />${optionalText}">
 							<jsp:attribute name="inputField">
-								<html:textarea inputId="${photoDescriptionControl}" inputValue="${photoEditDataModel.description}" title="${eco:translate('Photo description')}" hint="${eco:translate('Photo description')}" />
+								<html:textarea inputId="${photoDescriptionControl}" inputValue="${photoEditDataModel.description}" title="${eco:translate('Photo info: Photo description')}" hint="${eco:translate('Photo info: Photo description')}" />
 							</jsp:attribute>
 						</tags:inputHint>
 						<br />

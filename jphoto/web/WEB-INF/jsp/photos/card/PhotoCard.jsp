@@ -103,7 +103,7 @@
 			<c:if test="${not empty photo.description}">
 				<div class="floatleft photoCommentContainerInner block-background block-border base-font-color">
 					<div style="padding: 15px;">
-						<b>${eco:translate('Photo description')}:</b>
+						<b>${eco:translate('Photo info: Photo description')}:</b>
 						<br />
 						${eco:formatPhotoCommentText(photo.description)}
 					</div>
