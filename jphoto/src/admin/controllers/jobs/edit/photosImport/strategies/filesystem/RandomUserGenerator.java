@@ -58,9 +58,8 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			final User user = getRandomNonPhotosightUser( 0 );
 
 			final int userPhotosQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
-			final boolean doesUserHavePhotos = userPhotosQty > 0;
 
-			if ( !doesUserHavePhotos ) {
+			if ( userPhotosQty == 0 ) {
 				// no photo at all yet. This randomly selected user is about to upload his first photo in this genre
 				if ( ! isGenreSuitableForUserMembershipType( user.getMembershipType(), genre ) ) {
 					continue; // genre is nor suitable, try to find another user
