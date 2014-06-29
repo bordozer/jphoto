@@ -28,6 +28,10 @@ public class Translator {
 		final TranslationData translationData = translationsMap.get( key );
 		translationData.increaseUseIndex();
 
+		if ( untranslatedMap.containsKey( key ) ) {
+			untranslatedMap.get( key ).increaseUseIndex();
+		}
+
 		return translationData.getTranslationEntry( language );
 	}
 
@@ -40,7 +44,7 @@ public class Translator {
 		if ( ! translationsMap.containsKey( nerdKey ) ) {
 			synchronized ( translationsMap ) {
 				if ( ! translationsMap.containsKey( nerdKey ) ) {
-					addToMap( translationsMap, translationEntry );
+					addTranslationEntryToMap( translationsMap, translationEntry );
 				}
 			}
 		}
@@ -54,7 +58,7 @@ public class Translator {
 		if ( ! untranslatedMap.containsKey( nerdKey ) ) {
 			synchronized ( untranslatedMap ) {
 				if ( ! untranslatedMap.containsKey( nerdKey ) ) {
-					addToMap( untranslatedMap, translationEntry );
+					addTranslationEntryToMap( untranslatedMap, translationEntry );
 				}
 			}
 		}
@@ -64,7 +68,7 @@ public class Translator {
 		this.translationsMap.putAll( translationsMap );
 	}
 
-	private void addToMap( final Map<NerdKey, TranslationData> map, final TranslationEntry translationEntry ) {
+	private void addTranslationEntryToMap( final Map<NerdKey, TranslationData> map, final TranslationEntry translationEntry ) {
 		final String nerd = translationEntry.getNerd();
 		final NerdKey nerdKey = new NerdKey( nerd );
 		final TranslationData translationData = map.get( nerdKey );
