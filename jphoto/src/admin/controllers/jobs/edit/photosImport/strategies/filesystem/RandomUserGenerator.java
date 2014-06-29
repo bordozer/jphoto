@@ -65,6 +65,8 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 				if ( ! isGenreSuitableForUserMembershipType( user.getMembershipType(), genre ) ) {
 					continue; // genre is nor suitable, try to find another user
 				}
+
+				return user; // there are no photos and the genre is suitable for user's membership type
 			}
 
 			// already has photo(s) int this or another genre(s)
