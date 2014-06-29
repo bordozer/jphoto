@@ -26,7 +26,7 @@
 		</table:td>
 	</table:tr>
 
-	<table:separatorInfo colspan="2" title="${jobModel.job.jobName}" />
+	<table:separatorInfo colspan="2" title="${eco:translate(jobModel.job.jobName)}" />
 
 	<table:tr>
 		<table:td width="120">

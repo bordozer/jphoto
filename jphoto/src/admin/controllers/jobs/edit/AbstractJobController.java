@@ -76,7 +76,7 @@ public abstract class AbstractJobController {
 		final AbstractJob job = createInstance( jobType, getCurrentUserJobRuntimeEnvironment() );
 
 		model.setJob( job );
-		model.setJobName( job.getJobType().getName() );
+		model.setJobName( translatorService.translate( job.getJobType().getName(), getLanguage() ) );
 		model.setActive( true );
 
 		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsDataTemplateBreadcrumbs( services.getTranslatorService().translate( job.getJobName(), getLanguage() ) ) );
