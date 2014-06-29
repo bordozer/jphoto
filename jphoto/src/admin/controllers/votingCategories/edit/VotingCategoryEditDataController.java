@@ -5,6 +5,7 @@ import core.services.entry.VotingCategoryService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class VotingCategoryEditDataController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private DataRequirementService dataRequirementService;
@@ -95,7 +99,7 @@ public class VotingCategoryEditDataController {
 			return VIEW;
 		}
 
-		return String.format( "redirect:/%s/%s/", systemVarsService.getAdminPrefix(), UrlUtilsServiceImpl.VOTING_CATEGORIES_URL );
+		return String.format( "redirect:%s/%s/", urlUtilsService.getBaseAdminURL(), UrlUtilsServiceImpl.VOTING_CATEGORIES_URL );
 	}
 
 	private void initModelFromObject( final VotingCategoryEditDataModel model, final PhotoVotingCategory photoVotingCategory ) {

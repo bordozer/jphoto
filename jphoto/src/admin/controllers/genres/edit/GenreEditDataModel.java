@@ -39,6 +39,9 @@ public class GenreEditDataModel extends AbstractGeneralModel {
 		genreId = 0;
 		genreName = null;
 		allowedVotingCategoryIDs = newArrayList();
+
+		canContainNudeContent = false;
+		ContainsNudeContent = false; // TODO: decapitalaize this
 	}
 
 	public int getGenreId() {
