@@ -1,5 +1,8 @@
 <%@ tag import="ui.controllers.users.list.UserFilterModel" %>
 <%@ tag import="core.general.user.UserMembershipType" %>
+<%@ tag import="ui.context.ApplicationContextHelper" %>
+<%@ tag import="ui.context.EnvironmentContext" %>
+<%@ tag import="ui.translatable.GenericTranslatableList" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,12 +14,13 @@
 
 <jsp:useBean id="userFilterModel" type="ui.controllers.users.list.UserFilterModel" scope="request"/>
 
+<c:set var="membershipTypeListValues" value="<%=GenericTranslatableList.userMembershipTypeTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
+
 <c:if test="${userFilterModel.visible}">
 	<tags:inputHintForm/>
 
 	<c:set var="filterUserNameControl" value="<%=UserFilterModel.USER_NAME_FORM_CONTROL%>"/>
 
-	<c:set var="membershipTypeListValues" value="<%=UserMembershipType.values()%>"/>
 	<c:set var="membershipTypeControl" value="userFilterModel.membershipTypeList"/>
 
 	<eco:form action="${eco:baseUrl()}/members/filter/">
