@@ -153,13 +153,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Next $1 of $2 >></nerd>
+		<ru><![CDATA[Следующие $1 из $2 >>]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Shown $1 of $2 unread comments</nerd>
+		<ru><![CDATA[Показаны $1 из $2 непрочитанных комментариев]]></ru>
 	</translation>
 
 	<translation>

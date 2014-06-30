@@ -173,8 +173,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1 User: $2; photo: $3. Photo import skipped.</nerd>
+		<ru><![CDATA[$1 пользователь: $2; фотограия: $3. Импорт не выполнен.]]></ru>
 	</translation>
 
 	<translation>

@@ -217,13 +217,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Error executing ajax query</nerd>
+		<ru><![CDATA[Ошибка выполнения AJAX-запроса]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Admin Lock User: Lock user</nerd>
+		<ru><![CDATA[Забанить пользователя]]></ru>
 	</translation>
 
 	<translation>
