@@ -15,9 +15,9 @@
 <c:set var="defaultMinimalMarksForGenreBest" value="<%=genreListModel.getSystemMinMarksToBeInTheBestPhotoOfGenre()%>"/>
 <c:set var="separatorHeight" value="1"/>
 
-<c:set var="newGenreButtonHint" value="${eco:translate( 'Create new genre' )}"/>
-<c:set var="deleteGenreButtonHint" value="${eco:translate( 'Delete genre' )}"/>
-<c:set var="cannotdeleteGenreButtonHint" value="${eco:translate( 'Deletion is not accessible' )}"/>
+<c:set var="newGenreButtonHint" value="${eco:translate( 'Genre list: Create new genre button title' )}"/>
+<c:set var="deleteGenreButtonHint" value="${eco:translate( 'Genre list: Delete genre button title' )}"/>
+<c:set var="cannotdeleteGenreButtonHint" value="${eco:translate( 'Genre list: Deletion is not accessible' )}"/>
 
 <tags:page pageModel="${genreListModel.pageModel}" >
 
@@ -61,19 +61,20 @@
 
 					<table:tdicon>
 						<links:genreEdit id="${genre.id}">
-							<html:img id="editGenreIcon" src="edit16.png" width="16" height="16" alt="${eco:translate('Edit')}" />
+							<html:img id="editGenreIcon" src="edit16.png" width="16" height="16" alt="${eco:translate('Genre list: Edit')}" />
 						</links:genreEdit>
 					</table:tdicon>
 
 					<table:tdicon>
 						<c:if test="${photosQty == 0}">
 							<links:genreDelete id="${genre.id}">
-								<html:img id="deleteGenreIcon" src="delete16.png" width="16" height="16" alt="${deleteGenreButtonHint}" onclick="return confirmDeletion( 'Delete ${eco:translateGenre(genre.id)}?' );" />
+								<c:set var="deleteConfirmation" value="${eco:translate1('Genre list: Delete genre $1', eco:translateGenre(genre.id))}" />
+								<html:img id="deleteGenreIcon" src="delete16.png" width="16" height="16" alt="${deleteGenreButtonHint}" onclick="return confirmDeletion( '${deleteConfirmation}' );" />
 							</links:genreDelete>
 						</c:if>
 
 						<c:if test="${photosQty > 0}">
-							<html:img id="cannotDeleteGenreIcon" src="cannotdelete.png" width="16" height="16" alt="${cannotdeleteGenreButtonHint}" onclick="alert('${eco:translate('The genre has uploaded photos! Can not be deleted.')}');" />
+							<html:img id="cannotDeleteGenreIcon" src="cannotdelete.png" width="16" height="16" alt="${cannotdeleteGenreButtonHint}" onclick="alert('${eco:translate('Genre list: The genre has uploaded photos! Can not be deleted.')}');" />
 						</c:if>
 					</table:tdicon>
 
@@ -89,7 +90,7 @@
 					<table:td cssClass="text-centered">${genre.containsNudeContent ? eco:translate(yes) : ""}</table:td>
 
 					<table:td cssClass="textright">${photosQty} &nbsp;</table:td>
-					<table:td cssClass="text-centered">${genre.minMarksForBest > 0 ? genre.minMarksForBest : eco:translate('System default')} &nbsp;</table:td>
+					<table:td cssClass="text-centered">${genre.minMarksForBest > 0 ? genre.minMarksForBest : eco:translate('Genre list: System default marks to be in the best photos')} &nbsp;</table:td>
 					<table:td>
 						<ul>
 							<c:forEach var="photoVotingCategory" items="${genre.photoVotingCategories}">

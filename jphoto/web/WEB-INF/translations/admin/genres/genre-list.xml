@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Genre list: Genre system name</nerd>
+		<ru><![CDATA[Название]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Can contain nude</nerd>
+		<ru><![CDATA[Может содержать НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Contains nude</nerd>
+		<ru><![CDATA[Содержит НЮ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Photos Qty</nerd>
+		<ru><![CDATA[Всего работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Min marks</nerd>
+		<ru><![CDATA[Мин. оценка для попадания в ТОП]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Voting categories</nerd>
+		<ru><![CDATA[Критерии оценки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Edit</nerd>
+		<ru><![CDATA[Редактирование]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: Delete genre $1</nerd>
+		<ru><![CDATA[Удалить раздел $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: The genre has uploaded photos! Can not be deleted.</nerd>
+		<ru><![CDATA[В данном разделе уже загружены работы. Удаление раздела невозможно.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Genre list: System default marks to be in the best photos</nerd>
+		<ru><![CDATA[По-умолчанию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
