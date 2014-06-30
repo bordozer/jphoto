@@ -33,6 +33,56 @@
 	</translation>
 
 	<translation>
+		<nerd>PrivateMessage: Delete ALL $1</nerd>
+		<ru><![CDATA[Удалить все $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Delete ALL $1?</nerd>
+		<ru><![CDATA[Удалить все $1?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Delete selected messages</nerd>
+		<ru><![CDATA[Удалить выделенные сообщения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Delete selected messages?</nerd>
+		<ru><![CDATA[Удалить выделенные сообщения?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Mark ALL $1 as read</nerd>
+		<ru><![CDATA[Пометить все $1 как прочитанные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Mark all $1 as read?</nerd>
+		<ru><![CDATA[Пометить все $1 как прочитанные?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Total messages</nerd>
+		<ru><![CDATA[Всего сообщений]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: New messages</nerd>
+		<ru><![CDATA[Новых сообщений]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

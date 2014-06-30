@@ -7,9 +7,9 @@
 <%@ attribute name="doNotTranslate" type="java.lang.Boolean" required="false" %>
 <%@ attribute name="icon" type="java.lang.String" required="false" %>
 
-<c:set var="buttonTitle" value="${eco:translate(caption_t)}" />
-<c:if test="${doNotTranslate}">
-	<c:set var="buttonTitle" value="${caption_t}" />
+<c:set var="buttonTitle" value="${caption_t}" />
+<c:if test="${not doNotTranslate}">
+	<c:set var="buttonTitle" value="${eco:translate(caption_t)}" />
 </c:if>
 
 <c:set var="imgClass" value="imgClass_${id}"/>

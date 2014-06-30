@@ -78,9 +78,9 @@
 										<br/>
 										${eco:translate(privateMessageType.name)}
 										<br/>
-										<span title="${eco:translate('Total messages')}">${messageTypeData.messages}</span>
+										<span title="${eco:translate('PrivateMessage: Total messages')}">${messageTypeData.messages}</span>
 										<c:if test="${messageTypeData.newMessages > 0}">
-											( <span title="${eco:translate('New messages')}">${messageTypeData.newMessages > 0 ? '+' : ''}${messageTypeData.newMessages}</span> )
+											( <span title="${eco:translate('PrivateMessage: New messages')}">${messageTypeData.newMessages > 0 ? '+' : ''}${messageTypeData.newMessages}</span> )
 										</c:if>
 									</div>
 								</c:forEach>
@@ -123,7 +123,7 @@
 							<c:if test="${not empty privateMessages}">
 								<html:submitButton
 										id="deleteSelectedMessagesButton"
-										caption_t="Delete selected messages"
+										caption_t="PrivateMessage: Delete selected messages"
 										onclick="return deleteSelectedPrivateMessages();"
 										icon="delete16.png"
 										/>
@@ -134,7 +134,7 @@
 
 									<html:submitButton
 											id="deleteAllMessagesButton"
-											caption_t="${eco:translate1('Delete ALL $1', privateMessageTypeName)}"
+											caption_t="${eco:translate1('PrivateMessage: Delete ALL $1', privateMessageTypeName)}"
 											onclick="return deleteAllPrivateMessages();"
 											icon="deleteAll.png"
 											doNotTranslate="true"
@@ -142,7 +142,7 @@
 
 									<html:submitButton
 											id="markAllMessagesAsReadButton"
-											caption_t="${eco:translate1('Mark ALL $1 as read', privateMessageTypeName)}"
+											caption_t="${eco:translate1('PrivateMessage: Mark ALL $1 as read', privateMessageTypeName)}"
 											onclick="return markAllMessagesAsRead();"
 											icon="markAsRead.png"
 											doNotTranslate="true"
@@ -160,7 +160,7 @@
 					<c:if test="${not empty privateMessages}">
 						function deleteSelectedPrivateMessages() {
 							var action = "${eco:baseUrl()}/members/${forUserId}/messages/delete/selected/";
-							var message = "${eco:translate('Delete selected messages?')}";
+							var message = "${eco:translate('PrivateMessage: Delete selected messages?')}";
 
 							return performAction( action, message );
 						}
@@ -169,14 +169,14 @@
 							<c:set var="privateMessageTypeName" value="${eco:translate(privateMessageListModel.privateMessageType.name)}" />
 							function deleteAllPrivateMessages() {
 								var action = "${eco:baseUrl()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/delete/all/";
-								var message = "${eco:translate1('Delete ALL $1?', privateMessageTypeName)}";
+								var message = "${eco:translate1('PrivateMessage: Delete ALL $1?', privateMessageTypeName)}";
 
 								return performAction( action, message );
 							}
 
 							function markAllMessagesAsRead() {
 								var action = "${eco:baseUrl()}/members/${forUserId}/messages/type/${privateMessageListModel.privateMessageType.id}/markAllAsRead/";
-								var message = "${eco:translate1('Mark all $1 as read?', privateMessageTypeName)}";
+								var message = "${eco:translate1('PrivateMessage: Mark all $1 as read?', privateMessageTypeName)}";
 
 								return performAction( action, message );
 							}
