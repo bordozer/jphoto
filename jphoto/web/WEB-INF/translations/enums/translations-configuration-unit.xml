@@ -4,72 +4,77 @@
 
 	<translation>
 		<nerd>ConfigurationUnit: Items</nerd>
-		<ru><![CDATA[]]>Items</ru>
+		<ru><![CDATA[Items]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Days</nerd>
-		<ru><![CDATA[]]>День</ru>
+		<ru><![CDATA[День]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Marks</nerd>
-		<ru><![CDATA[]]>Балл</ru>
+		<ru><![CDATA[Балл]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Symbols</nerd>
-		<ru><![CDATA[]]>Символ</ru>
+		<ru><![CDATA[Символ]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Bytes</nerd>
-		<ru><![CDATA[]]>Байт</ru>
+		<ru><![CDATA[Байт]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Photos</nerd>
-		<ru><![CDATA[]]>Фоторабота</ru>
+		<ru><![CDATA[Фоторабота]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Minutes</nerd>
-		<ru><![CDATA[]]>Минута</ru>
+		<ru><![CDATA[Минута]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Seconds</nerd>
-		<ru><![CDATA[]]>Секунда</ru>
+		<ru><![CDATA[Секунда]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Milliseconds</nerd>
-		<ru><![CDATA[]]>Миллисекунда</ru>
+		<ru><![CDATA[Миллисекунда]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Voices</nerd>
-		<ru><![CDATA[]]>Голос</ru>
+		<ru><![CDATA[Голос]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Kb</nerd>
-		<ru><![CDATA[]]>Кб</ru>
+		<ru><![CDATA[Кб]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Mb</nerd>
-		<ru><![CDATA[]]>Мб</ru>
+		<ru><![CDATA[Мб]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Pixel</nerd>
-		<ru><![CDATA[]]>Пиксель</ru>
+		<ru><![CDATA[Пиксель]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>ConfigurationUnit: Rank</nerd>
-		<ru><![CDATA[]]>Ранг</ru>
+		<ru><![CDATA[Ранг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>ConfigurationUnit: DPI</nerd>
+		<ru><![CDATA[dpi]]></ru>
 	</translation>
 
 </translations>

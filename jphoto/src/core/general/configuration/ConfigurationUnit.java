@@ -17,6 +17,7 @@ public enum ConfigurationUnit {
 	, MEGABYTE( 11, "ConfigurationUnit: Mb" )
 	, PIXEL( 12, "ConfigurationUnit: Pixel" )
 	, RANK( 13, "ConfigurationUnit: Rank" )
+	, DPI( 14, "ConfigurationUnit: DPI" )
 	;
 
 	private final int id;

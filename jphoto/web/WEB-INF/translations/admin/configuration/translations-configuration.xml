@@ -485,6 +485,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo preview density</nerd>
+		<ru><![CDATA[Разрешение превью]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo preview dimension</nerd>
+		<ru><![CDATA[Размер превью в пикселях]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
