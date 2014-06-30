@@ -18,7 +18,6 @@ import core.services.photo.PhotoCommentService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
