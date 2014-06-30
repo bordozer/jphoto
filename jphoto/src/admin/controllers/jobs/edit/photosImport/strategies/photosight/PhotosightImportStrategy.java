@@ -313,8 +313,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			final String message = String.format( "Can not extract photosight user name from page content. Photosight user: %s.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
 			log.error( message );
 
-			/*final String execMessage = services.getTranslatorService().translate( "Can not extract photosight user name from page content. Photosight user: $1."
-				, language, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract photosight user name from page content. Photosight user: $1.", services )
 				.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 				;
