@@ -265,6 +265,11 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final PhotosightPhoto photosightPhoto : cachedPhotosightPagePhoto ) {
 			final File imageFile = PhotosightImageFileUtils.getPhotosightPhotoLocalImageFile( photosightPhoto );
+
+			if ( ! imageFile.exists() ) {
+				continue;
+			}
+
 			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, PhotosightImageFileUtils.getGenreDiscEntry( photosightPhoto.getPhotosightCategory() ) );
 			result.add( new PhotosightPhotoOnDisk( photosightPhoto, imageDiscEntry ) );
 		}
