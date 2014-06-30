@@ -234,7 +234,7 @@
 				<table:td colspan="2">
 					${eco:translate('User data edit: Any information you wouls like to show about yourself')}
 					<br />
-					<html:textarea inputId="${selfDescriptionControl}" inputValue="${selfDescription}" cols="80" rows="5" hint="${eco:translate('User card: Member self description')}" title="${eco:translate('Self description')}" />
+					<html:textarea inputId="${selfDescriptionControl}" inputValue="${selfDescription}" cols="80" rows="5" hint="${eco:translate('User card: Member self description')}" title="${eco:translate('User card: Member self description')}" />
 				</table:td>
 			</table:tredit>
 
