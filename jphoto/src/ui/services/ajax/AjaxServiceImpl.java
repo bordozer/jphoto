@@ -108,19 +108,19 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId ) {
-		final int photosightUserId = NumberUtils.convertToInt(_photosightUserId);
+	public PhotosightUserDTO getPhotosightUserDTO( final String photosightUserId ) {
 
-		if ( photosightUserId == 0 ) {
-			final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( 0 );
+		if ( StringUtils.isEmpty( photosightUserId ) ) {
+			final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( "0" );
 			photosightUserDTO.setPhotosightUserFound( false );
 			return photosightUserDTO;
 		}
 
 		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( photosightUserId );
 
-		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUserId );
-		final String photosightUserCardUrl = PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId );
+		final String userId = String.valueOf( photosightUserId );
+		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( userId );
+		final String photosightUserCardUrl = PhotosightRemoteContentHelper.getUserCardUrl( userId );
 
 		photosightUserDTO.setPhotosightUserName( photosightUserName );
 		photosightUserDTO.setPhotosightUserCardUrl( photosightUserCardUrl );
@@ -132,7 +132,7 @@ public class AjaxServiceImpl implements AjaxService {
 			photosightUserDTO.setPhotosightUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( photosightUserId ) );
 		}
 
-		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( photosightUserId );
+		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( userId );
 		final User user = userService.loadByLogin( userLogin );
 		final boolean userExistsInTheSystem = user != null;
 		photosightUserDTO.setPhotosightUserExistsInTheSystem( userExistsInTheSystem );

@@ -78,7 +78,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
-				parametersMap.put( SavedJobParameterKey.PARAM_USER_ID, CommonProperty.createFromIntegerList( SavedJobParameterKey.PARAM_USER_ID.getId(), photosightParameters.getPhotosightUserIds(), dateUtilsService ) );
+				parametersMap.put( SavedJobParameterKey.PARAM_USER_ID, new CommonProperty( SavedJobParameterKey.PARAM_USER_ID.getId(), photosightParameters.getPhotosightUserIds() ) );
 				parametersMap.put( SavedJobParameterKey.USER_NAME, new CommonProperty( SavedJobParameterKey.USER_NAME.getId(), photosightParameters.getUserName() ) );
 				parametersMap.put( SavedJobParameterKey.USER_GENDER_ID, new CommonProperty( SavedJobParameterKey.USER_GENDER_ID.getId(), photosightParameters.getUserGender().getId() ) );
 				parametersMap.put( SavedJobParameterKey.USER_MEMBERSHIP_ID, new CommonProperty( SavedJobParameterKey.USER_MEMBERSHIP_ID.getId(), photosightParameters.getMembershipType().getId() ) );
@@ -123,7 +123,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				break;
 			case PHOTOSIGHT:
-				final List<Integer> photosightUserId = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueListInt();
+				final List<String> photosightUserId = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueListString();
 				final String userName = jobParameters.get( SavedJobParameterKey.USER_NAME ).getValue();
 				final UserGender userGender = UserGender.getById( jobParameters.get( SavedJobParameterKey.USER_GENDER_ID ).getValueInt() );
 				final UserMembershipType membershipType = UserMembershipType.getById( jobParameters.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValueInt() );

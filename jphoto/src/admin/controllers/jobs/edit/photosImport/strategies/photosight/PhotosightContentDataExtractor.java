@@ -66,10 +66,10 @@ public class PhotosightContentDataExtractor {
 		return null;
 	}
 
-	public static int extractPhotosightUserPhotosCount( final int photosightUserId ) {
+	public static int extractPhotosightUserPhotosCount( final String photosightUserId ) {
 		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
 		// <a href="/users/344981/" class="uploaded current"><div>196</div>
-		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/users/%d/\" class=\"uploaded current\">\\s+<div>(.+?)</div>", photosightUserId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/users/%s/\" class=\"uploaded current\">\\s+<div>(.+?)</div>", photosightUserId ) );
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		if ( matcher.find() ) {

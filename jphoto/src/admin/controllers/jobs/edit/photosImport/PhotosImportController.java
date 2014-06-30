@@ -232,14 +232,11 @@ public class PhotosImportController extends DateRangableController {
 				job.setTotalJopOperations( photoQtyLimit > 0 ? photoQtyLimit : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;
 			case PHOTOSIGHT:
-				final List<Integer> photosightUserIds = newArrayList();
+				final List<String> photosightUserIds = newArrayList();
 				final String photosightUserIdsText = aModel.getPhotosightUserId();
 				final String[] ids = photosightUserIdsText.split( "," );
 				for ( final String idTxt : ids ) {
-					final String idTrim = idTxt.trim();
-					if ( NumberUtils.isNumeric( idTrim ) ) {
-						photosightUserIds.add( NumberUtils.convertToInt( idTrim ) );
-					}
+					photosightUserIds.add( idTxt.trim() );
 				}
 
 				final String userName = aModel.getUserName();

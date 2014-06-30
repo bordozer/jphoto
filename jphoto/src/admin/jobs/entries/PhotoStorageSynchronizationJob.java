@@ -15,7 +15,6 @@ import core.enums.UserGender;
 import core.general.base.CommonProperty;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
-import utils.NumberUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +32,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 	@Override
 	protected void runJob() throws Throwable {
-		final List<Integer> usersIds = getUsersIds();
+		final List<String> usersIds = getUsersIds();
 
 		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
 
@@ -78,13 +77,13 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 		log.debug( String.format( "Update operation count: %d", totalJopOperations ) );
 	}
 
-	private List<Integer> getUsersIds() {
-		final List<Integer> usersIds = newArrayList();
+	private List<String> getUsersIds() {
+		final List<String> usersIds = newArrayList();
 		final File storage = PhotosightImageFileUtils.getPhotoStorage();
 
 		final File[] userDirList = storage.listFiles( services.getPredicateUtilsService().getDirFilter() );
 		for ( final File file : userDirList ) {
-			usersIds.add( NumberUtils.convertToInt( file.getName() ) );
+			usersIds.add( file.getName() );
 		}
 		return usersIds;
 	}

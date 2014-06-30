@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PhotosightImportParameters extends AbstractImportParameters {
 
-	private final List<Integer> photosightUserIds;
+	private final List<String> photosightUserIds;
 	private final String userName;
 	private final UserGender userGender;
 	private final UserMembershipType membershipType;
@@ -21,7 +21,7 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 
 	private List<PhotosightCategory> photosightCategories;
 
-	public PhotosightImportParameters( final List<Integer> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories ) {
+	public PhotosightImportParameters( final List<String> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories ) {
 		super( language );
 		this.photosightUserIds = photosightUserIds;
 		this.userName = userName;
@@ -34,7 +34,7 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 		this.photosightCategories = photosightCategories;
 	}
 
-	public List<Integer> getPhotosightUserIds() {
+	public List<String> getPhotosightUserIds() {
 		return photosightUserIds;
 	}
 

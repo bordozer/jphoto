@@ -180,6 +180,6 @@ public class PhotosightXmlUtils {
 	}
 
 	private static String getUserInfoFileName( final PhotosightUser photosightUser ) {
-		return String.format( "%d.xml", photosightUser.getId() );
+		return String.format( "%s.xml", photosightUser.getId() );
 	}
 }

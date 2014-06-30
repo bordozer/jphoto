@@ -84,7 +84,7 @@ public class PhotosightImageFileUtils {
 	}
 
 	public static File getUserFolderForPhotoDownloading( final PhotosightUser photosightUser ) throws IOException {
-		final String userFolderName = String.format( "%d", photosightUser.getId() );
+		final String userFolderName = String.format( "%s", photosightUser.getId() );
 		return new File( getPhotoStorage().getPath(), userFolderName );
 	}
 

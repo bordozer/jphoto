@@ -14,9 +14,9 @@ public class PhotosightContentHelper {
 
 	public static final String NO_PHOTO_NAME = "-no name-";
 
-	public static int getTotalPagesQty( final String userCardContent, int photosightUserId ) {
+	public static int getTotalPagesQty( final String userCardContent, final String photosightUserId ) {
 		// <a class="" href="/users/316896/?pager=8">8</a>
-		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%d/\\?pager=(.+?)\">", photosightUserId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%s/\\?pager=(.+?)\">", photosightUserId ) );
 		final Matcher matcher = pattern.matcher( userCardContent );
 
 		int result = 1;

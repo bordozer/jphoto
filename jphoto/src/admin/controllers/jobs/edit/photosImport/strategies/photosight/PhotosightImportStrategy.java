@@ -58,7 +58,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	@Override
 	public void doImport() throws IOException, SaveToDBException {
 
-		for ( final int photosightUserId : importParameters.getPhotosightUserIds() ) {
+		for ( final String photosightUserId : importParameters.getPhotosightUserIds() ) {
 
 			final PhotosightUser photosightUser = new PhotosightUser( photosightUserId );
 
@@ -408,18 +408,18 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		int countedTotal = 0;
 
-		final List<Integer> photosightUserIds = importParameters.getPhotosightUserIds();
-		for ( final int photosightUserId : photosightUserIds ) {
+		final List<String> photosightUserIds = importParameters.getPhotosightUserIds();
+		for ( final String photosightUserId : photosightUserIds ) {
 
 			final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
 
 			if ( StringUtils.isEmpty( userPageContent ) ) {
-				log.error( String.format( "ERROR getting photosight user #%d pages qty. Photos import of the user will be skipped.", photosightUserId ) );
+				log.error( String.format( "ERROR getting photosight user #%s pages qty. Photos import of the user will be skipped.", photosightUserId ) );
 
 				/*final String message = services.getTranslatorService().translate( "ERROR getting photosight user #$1 pages qty. Photos import of the user will be skipped."
 					, language, String.valueOf( photosightUserId ) );*/
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "ERROR getting photosight user #$1 pages qty. Photos import of the user will be skipped.", services )
-					.addIntegerParameter( photosightUserId )
+					.string( photosightUserId )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -428,7 +428,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			final int qty = PhotosightContentHelper.getTotalPagesQty( userPageContent, photosightUserId );
 			countedTotal += qty;
-			log.info( String.format( "Getting photosight user #%d pages qty: %d ( summary: %d )", photosightUserId, qty, countedTotal ) );
+			log.info( String.format( "Getting photosight user #%s pages qty: %d ( summary: %d )", photosightUserId, qty, countedTotal ) );
 
 			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
 				break;
@@ -438,8 +438,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		return countedTotal;
 	}
 
-	public static String getPhotosightUserLogin( final int photosightUserId ) {
-		return String.format( "%s%d", PHOTOSIGHT_USER_LOGIN_PREFIX, photosightUserId );
+	public static String getPhotosightUserLogin( final String photosightUserId ) {
+		return String.format( "%s%s", PHOTOSIGHT_USER_LOGIN_PREFIX, photosightUserId );
 	}
 
 	private List<Integer> extractUserPhotosIdsFromPage( final String userPageContent ) {
@@ -573,7 +573,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private String getUserCardFileName( final PhotosightUser photosightUser, final int page ) {
-		return String.format( "userCard_%d_page_%d", photosightUser.getId(), page );
+		return String.format( "userCard_%s_page_%d", photosightUser.getId(), page );
 	}
 
 	private String getPhotoCardFileName( final PhotosightPhoto photosightPhoto ) {
@@ -591,11 +591,8 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		final String userLogin = getPhotosightUserLogin( photosightUser.getId() );
 		final User existingUser = services.getUserService().loadByLogin( userLogin );
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 		if ( existingUser != null ) {
 
-			/*final String translate = services.getTranslatorService().translate( "Existing user found: $1"
-				, importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( existingUser, language ) );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found: $1", services )
 				.addUserCardLinkParameter( existingUser )
 				;
@@ -610,7 +607,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		user.setName( userName );
 		user.setMembershipType( parameters.getMembershipType() );
 		user.setGender( parameters.getUserGender() );
-		user.setSelfDescription( String.format( "Photosight user: %d ( %s )", photosightUser.getId(), PhotosightRemoteContentHelper.getUserCardUrl( photosightUser.getId(), 1 ) ) );
+		user.setSelfDescription( String.format( "Photosight user: %s ( %s )", photosightUser.getId(), PhotosightRemoteContentHelper.getUserCardUrl( photosightUser.getId(), 1 ) ) );
 
 		if ( ! services.getUserService().save( user ) ) {
 			throw new BaseRuntimeException( "Can not create user" );

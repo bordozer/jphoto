@@ -41,20 +41,20 @@ public class PhotosightRemoteContentHelper {
 		return null;
 	}
 
-	public static String getPhotoCardUrl( final int photoId ) {
-		return getPageUrl( photoId, PhotosightImportStrategy.PHOTOS );
+	private static String getPhotoCardUrl( final int photoId ) {
+		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photoId );
 	}
 
-	public static String getUserCardUrl( final int userId ) {
+	public static String getUserCardUrl( final String userId ) {
 		return getUserCardUrl( userId, 0 );
 	}
 
-	public static String getUserCardUrl( final int userId, final int page ) {
-		return String.format( "%s/?pager=%d", getPageUrl( userId, PhotosightImportStrategy.USERS ), page );
+	public static String getUserCardUrl( final String userId, final int page ) {
+		return String.format( "%s/?pager=%d", getUserCardPageUrl( userId ), page );
 	}
 
-	private static String getPageUrl( final int photoId, final String photos ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, photos, photoId );
+	private static String getUserCardPageUrl( final String userId ) {
+		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.USERS, userId );
 	}
 
 	public static String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
@@ -65,7 +65,7 @@ public class PhotosightRemoteContentHelper {
 		return getPhotosightUserName( photosightUser.getId() );
 	}
 
-	public static String getPhotosightUserName( final int photosightUserId ) {
+	public static String getPhotosightUserName( final String photosightUserId ) {
 		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
@@ -74,8 +74,8 @@ public class PhotosightRemoteContentHelper {
 	}
 
 	public static String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
-		final int photosightUserId = photosightUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
+		final String photosightUserId = photosightUser.getId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
 	}
 
 	public static String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
@@ -95,7 +95,7 @@ public class PhotosightRemoteContentHelper {
 		return String.format( "<a href='%s'>%d</a>", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
 	}
 
-	public static String getUserPageContent( final int page, int photosightUserId ) {
+	public static String getUserPageContent( final int page, final String photosightUserId ) {
 		return getContent( photosightUserId, getUserCardUrl( photosightUserId, page ) );
 	}
 
@@ -103,10 +103,10 @@ public class PhotosightRemoteContentHelper {
 		return getContent( photosightUser.getId(), getPhotoCardUrl( photoId ) );
 	}
 
-	private static void setCookie( final DefaultHttpClient httpClient, final int userId ) {
+	private static void setCookie( final DefaultHttpClient httpClient, final String userId ) {
 		final CookieStore cookieStore = new BasicCookieStore();
 
-		final BasicClientCookie cookieIsDisabledNude = getCookie( String.format( "is_disabled_nude_profile_%d", userId ), "1" );
+		final BasicClientCookie cookieIsDisabledNude = getCookie( String.format( "is_disabled_nude_profile_%s", userId ), "1" );
 		cookieStore.addCookie( cookieIsDisabledNude );
 
 		final BasicClientCookie cookieShowNude = getCookie( "show_nude", "1" );
@@ -115,7 +115,7 @@ public class PhotosightRemoteContentHelper {
 		httpClient.setCookieStore( cookieStore );
 	}
 
-	private static String getContent( final int userId, final String pageUrl ) {
+	private static String getContent( final String userId, final String pageUrl ) {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final HttpGet httpGet = new HttpGet( pageUrl );

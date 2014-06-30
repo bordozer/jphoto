@@ -2,14 +2,14 @@ package admin.controllers.jobs.edit.photosImport.strategies.photosight;
 
 public class PhotosightUser {
 
-	private final int id;
+	private final String id;
 	private String name;
 
-	public PhotosightUser( final int id ) {
+	public PhotosightUser( final String id ) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
@@ -23,6 +23,6 @@ public class PhotosightUser {
 
 	@Override
 	public String toString() {
-		return String.format( "Photosight user #%d: %s", id, name );
+		return String.format( "Photosight user #%s: %s", id, name );
 	}
 }

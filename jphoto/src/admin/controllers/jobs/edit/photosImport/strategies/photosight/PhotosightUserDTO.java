@@ -5,7 +5,7 @@ import core.general.user.UserMembershipType;
 
 public class PhotosightUserDTO {
 
-	private final int photosightUserId;
+	private final String photosightUserId;
 	private String photosightUserName;
 	private String photosightUserCardUrl;
 
@@ -20,11 +20,11 @@ public class PhotosightUserDTO {
 	private UserGender userGender;
 	private UserMembershipType userMembershipType;
 
-	public PhotosightUserDTO( final int photosightUserId ) {
+	public PhotosightUserDTO( final String photosightUserId ) {
 		this.photosightUserId = photosightUserId;
 	}
 
-	public int getPhotosightUserId() {
+	public String getPhotosightUserId() {
 		return photosightUserId;
 	}
 
