@@ -20,9 +20,6 @@
 
 <c:set var="allowedVotingCategoriesControl" value="<%=GenreEditDataModel.GENRE_EDIT_DATA_ALLOWED_VOTING_CATEGORIES_FORM_CONTROL%>"/>
 
-<c:set var="minMarksRequirement" value="${eco:translate( 'Photos of this ganre has to have minimal marks to be in genre\\\'s best. <br />0 - use default system\\\'s value.' )}"/>
-<c:set var="descriptionRequirement" value="${eco:translate( 'Any information about genre' )}"/>
-
 <c:set var="mandatoryText" value="<%=genreEditDataModel.getDataRequirementService().getFieldIsMandatoryText()%>"/>
 <c:set var="optionalText" value="<%=genreEditDataModel.getDataRequirementService().getFieldIsOptionalText()%>"/>
 
@@ -36,22 +33,22 @@
 
 		<table:table width="680" border="0">
 
-			<table:separatorInfo colspan="2" height="50" title="${eco:translate('Genre data')}"/>
+			<table:separatorInfo colspan="2" height="50" title="${isNew ? eco:translate('Genre edit: new genre') : genreEditDataModel.genreName}"/>
 
 			<table:tredit>
-				<table:tdtext text_t="Genre edit: Name" labelFor="${genreNameControl}" isMandatory="true"/>
+				<table:tdtext text_t="Genre list: Genre system name" labelFor="${genreNameControl}" isMandatory="true"/>
 
 				<table:tddata>
-					<tags:inputHint inputId="${genreNameControl}" hintTitle_t="Genre name" hint="${eco:translate( 'Genre name.' )}<br /><br />${mandatoryText}" focused="true">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${genreNameControl}" hintTitle_t="Genre name" hint="${eco:translate( 'Genre name.' )}<br /><br />${mandatoryText}" focused="true">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<form:input path="${genreNameControl}"/>
-						</jsp:attribute>
-					</tags:inputHint>
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Allowed voiting categories" labelFor="allowedVotingCategoryIDs1"/>
+				<table:tdtext text_t="Genre list: Voting categories" labelFor="allowedVotingCategoryIDs1"/>
 
 				<table:tddata>
 					<form:checkboxes items="${genreEditDataModel.photoVotingCategories}"
@@ -61,21 +58,21 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Minimal mark" labelFor="${genreMinMarksControl}"/>
+				<table:tdtext text_t="Genre list: Min marks" labelFor="${genreMinMarksControl}"/>
 
 				<table:tddata>
-					<tags:inputHint inputId="${genreMinMarksControl}" hintTitle_t="Minimal marks" hint="${minMarksRequirement}<br /><br />${optionalText}">
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${genreMinMarksControl}" hintTitle_t="Minimal marks" hint="${minMarksRequirement}<br /><br />${optionalText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<form:input path="${genreMinMarksControl}" size="3" maxLength="3"/>
-						</jsp:attribute>
-					</tags:inputHint>
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:separator colspan="2" />
 
 			<table:tredit>
-				<table:tdtext text_t="Can contain nude content" labelFor="canContainNudeContent1"/>
+				<table:tdtext text_t="Genre list: Can contain nude" labelFor="canContainNudeContent1"/>
 
 				<table:tddata>
 					<form:checkbox path="canContainNudeContent"/>
@@ -83,7 +80,7 @@
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Contains nude content" labelFor="containsNudeContent1"/>
+				<table:tdtext text_t="Genre list: Contains nude" labelFor="containsNudeContent1"/>
 
 				<table:tddata>
 					<form:checkbox path="containsNudeContent"/>
@@ -93,19 +90,18 @@
 			<table:separator colspan="2" />
 
 			<table:tredit>
-				<table:tdtext text_t="Description" labelFor="${genreDescriptionControl}"/>
+				<table:tdtext text_t="Genre edit: Description" labelFor="${genreDescriptionControl}"/>
 
 				<table:tddata>
-					<tags:inputHint inputId="${genreDescriptionControl}" hintTitle_t="Description"
-									hint="${eco:translate( 'Genre description.' )}<br /><br />${optionalText}">
-									<jsp:attribute name="inputField">
-										<form:textarea path="${genreDescriptionControl}"/>
-									</jsp:attribute>
-					</tags:inputHint>
+					<%--<tags:inputHint inputId="${genreDescriptionControl}" hintTitle_t="Description" hint="${eco:translate( 'Genre description.' )}<br /><br />${optionalText}">--%>
+						<%--<jsp:attribute name="inputField">--%>
+							<form:textarea path="${genreDescriptionControl}"/>
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
-			<table:trok text_t="${isNew ? 'Create new genre' : 'Save'}"/>
+			<table:trok text_t="${isNew ? 'Genre edit: Create new genre button title' : 'Genre edit: Save button title'}"/>
 
 		</table:table>
 
