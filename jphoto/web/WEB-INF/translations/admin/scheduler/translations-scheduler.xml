@@ -328,13 +328,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The scheduler has been started</nerd>
+		<ru><![CDATA[Планировщик запущен]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The scheduler has been stopped</nerd>
+		<ru><![CDATA[Планировщий остановлен]]></ru>
 	</translation>
 
 	<translation>
