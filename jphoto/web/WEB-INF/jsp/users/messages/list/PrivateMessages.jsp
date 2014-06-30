@@ -48,13 +48,13 @@
 
 					<div style="float: left; width: 100%; border-bottom: 1px solid #d3d3d3;" class="${css}">
 						<a class="${css}" href="${eco:baseUrl()}/members/${forUserId}/messages/with/${withUser.id}/"
-						   title="${eco:translate1('Show messaging with $1', withUser.nameEscaped)}">
+						   title="${eco:translate1('PrivateMessage: Show messaging with $1', withUser.nameEscaped)}">
 								${withUser.nameEscaped}
 						</a>
 						<br />
-						<span style="margin-left: 5px;" title="${eco:translate1('Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('Sent: $1', communicator.sentMessagesCount)}</span>
+						<span style="margin-left: 5px;" title="${eco:translate1('PrivateMessage: Sent: $1', communicator.sentMessagesCount)}">${eco:translate1('PrivateMessage: Sent: $1', communicator.sentMessagesCount)}</span>
 						<br/>
-						<span style="margin-left: 5px;" title="${eco:translate1('Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('Received: $1', communicator.receivedMessagesCount)}</span>
+						<span style="margin-left: 5px;" title="${eco:translate1('PrivateMessage: Received: $1', communicator.receivedMessagesCount)}">${eco:translate1('PrivateMessage: Received: $1', communicator.receivedMessagesCount)}</span>
 					</div>
 					<br/>
 				</c:forEach>

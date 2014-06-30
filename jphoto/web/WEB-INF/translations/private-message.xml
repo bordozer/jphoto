@@ -73,13 +73,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PrivateMessage: Show messaging with $1</nerd>
+		<ru><![CDATA[Показать переписку с $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PrivateMessage: Sent: $1</nerd>
+		<ru><![CDATA[Отправленных: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PrivateMessage: Received: $1</nerd>
+		<ru><![CDATA[Полученных: $1]]></ru>
 	</translation>
 
 	<translation>

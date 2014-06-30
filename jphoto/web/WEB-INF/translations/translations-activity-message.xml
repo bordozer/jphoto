@@ -52,6 +52,19 @@
 		<ua><![CDATA[Ви можете змiнити повiдомлення на електронну пошту в налаштуваннi вашого профайлу.]]></ua>
 	</translation>
 
+
+
+
+	<translation>
+		<nerd>Private message notification: New private message subject</nerd>
+		<ru><![CDATA[Новое личное сообщение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Private message notification: $1 has sent you a private message</nerd>
+		<ru><![CDATA[$1 отправил вам личное сообщение]]></ru>
+	</translation>
+
 	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>

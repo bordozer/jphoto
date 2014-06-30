@@ -15,4 +15,4 @@
 	<c:set var="callbackText" value=", ${callback}"/>
 </c:if>
 
-<html:img16 src="sendPrivateMessageToUser16.png" alt="${eco:translate('Send private message')}" onclick="sendPrivateMessage( ${fromUserId}, ${toUserId}, '${eco:escapeHtml(toUser.name)}'${callbackText} );"/>
+<html:img16 src="sendPrivateMessageToUser16.png" alt="${eco:translate('Links: Send private message')}" onclick="sendPrivateMessage( ${fromUserId}, ${toUserId}, '${eco:escapeHtml(toUser.name)}'${callbackText} );"/>

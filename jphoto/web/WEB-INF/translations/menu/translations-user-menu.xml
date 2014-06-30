@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Lock member: $1</nerd>
+		<ru><![CDATA[Забанить $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Send private message to $1</nerd>
+		<ru><![CDATA[Отправить личное сообщение $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
