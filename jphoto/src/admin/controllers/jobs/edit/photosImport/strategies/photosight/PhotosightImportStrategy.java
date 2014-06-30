@@ -338,8 +338,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		try {
 			return PhotosightXmlUtils.getPhotosFromPhotosightUserInfoFile( photosightUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
-			/*final String message = services.getTranslatorService().translate( "Error reading user info file: $1<br />$2"
-				, language, PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath(), e.getMessage() );*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
 				.string( PhotosightXmlUtils.getUserInfoFile( photosightUser ).getAbsolutePath() )
 				.string( e.getMessage() )
