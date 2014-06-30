@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.jobs.entries.AbstractJob;
+import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
@@ -181,6 +182,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private PhotosightPhotosFromPageToImport getPhotosightPhotosToImport( final PhotosightUser photosightUser, final List<Integer> photosightPagePhotosIds, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos, final User user ) throws IOException {
+		final JobHelperService jobHelperService = getServices().getJobHelperService();
 		final List<PhotosightPhoto> photosightPagePhotos = newArrayList();
 
 		for ( final int photosightPhotoId : photosightPagePhotosIds ) {
@@ -189,7 +191,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			if ( getServices().getJobHelperService().doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
+			if ( jobHelperService.doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
 
 				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
 					final TranslatableMessage message1 = new TranslatableMessage( "Already imported photo #$1 found. Skipping the import of the rest photos of $2", getServices() )
