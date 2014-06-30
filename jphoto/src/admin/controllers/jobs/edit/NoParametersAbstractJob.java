@@ -23,7 +23,7 @@ public abstract class NoParametersAbstractJob extends AbstractJob {
 
 	@Override
 	final public String getJobParametersDescription() {
-		return services.getTranslatorService().translate( "No parameters", getLanguage() );
+		return services.getTranslatorService().translate( "NoParametersAbstractJob: No parameters", getLanguage() );
 	}
 
 	@Override

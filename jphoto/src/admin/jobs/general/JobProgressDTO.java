@@ -74,7 +74,7 @@ public class JobProgressDTO {
 
 		final double percentage = getJobExecutionPercentage();
 
-		builder.append( current ).append( " / " ).append( total > 0 ? total : translatorService.translate( "Calculating...", language ) );
+		builder.append( current ).append( " / " ).append( total > 0 ? total : translatorService.translate( "Job steps qty: Calculating...", language ) );
 		builder.append( ", " ).append( percentage ).append( "%, " );
 		builder.append( jobExecutionDuration );
 

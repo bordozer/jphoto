@@ -243,6 +243,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Job steps qty: Calculating...</nerd>
+		<ru><![CDATA[Высчитывается...]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>NoParametersAbstractJob: No parameters</nerd>
+		<ru><![CDATA[Параметров нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The job has no parameters</nerd>
+		<ru><![CDATA[Задача не имеет параметров]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
