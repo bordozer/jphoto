@@ -96,7 +96,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( page, photosightUser.getId() );
 			if ( StringUtils.isEmpty( userPageContent ) ) {
-				continue; // can not load page - just skipping
+
+				log.info( "Can not load photosight user first page - skipping import user's photos" );
+
+				continue;
 			}
 
 			final List<Integer> photosightPagePhotosIds = extractUserPhotosIdsFromPage( userPageContent );
