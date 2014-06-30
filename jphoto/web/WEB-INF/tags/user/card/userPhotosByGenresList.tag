@@ -31,7 +31,7 @@
 
 	<js:genreRankVotingJS />
 
-	<table:table border="0" width="400px" oddEven="true">
+	<table:table border="0" width="500px" oddEven="true">
 
 		<table:separatorInfo colspan="4" height="50" title="${eco:translate('User card: Genres and ranks')}"/>
 

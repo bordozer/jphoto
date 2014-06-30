@@ -168,8 +168,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo $1 of $2 has already been imported</nerd>
+		<ru><![CDATA[Фотография $1 автора $2 уже импортирована ранее]]></ru>
 	</translation>
 
 	<translation>
