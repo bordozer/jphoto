@@ -252,8 +252,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Breadcrumbs: Voting categories</nerd>
+		<ru><![CDATA[Критерии оценки работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: New system configuration</nerd>
+		<ru><![CDATA[Новая системная конфигурация]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: New Scheduler tasks</nerd>
+		<ru><![CDATA[Новая задача планировщика]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Breadcrumbs: New Voting category</nerd>
+		<ru><![CDATA[Новый]]></ru>
 	</translation>
 
 	<translation>

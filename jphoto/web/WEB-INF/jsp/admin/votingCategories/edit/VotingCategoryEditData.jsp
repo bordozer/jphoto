@@ -16,7 +16,7 @@
 <c:set var="votingCategoryIdControl" value="<%=VotingCategoryEditDataModel.VOTING_CATEGORIES_ID_FORM_CONTROL%>" />
 <c:set var="votingCategoryNameControl" value="<%=VotingCategoryEditDataModel.VOTING_CATEGORIES_NAME_FORM_CONTROL%>" />
 <c:set var="votingCategoryDescriptionControl" value="<%=VotingCategoryEditDataModel.VOTING_CATEGORIES_DESCRIPTION_FORM_CONTROL%>" />
-<c:set var="descriptionRequirement" value="${eco:translate( 'Description of voting category' )}" />
+<c:set var="descriptionRequirement" value="${eco:translate( 'Appraisal categories: Description' )}" />
 
 <c:set var="mandatoryText" value="<%=votingCategoryEditDataModel.getDataRequirementService().getFieldIsMandatoryText()%>"/>
 <c:set var="optionalText" value="<%=votingCategoryEditDataModel.getDataRequirementService().getFieldIsOptionalText()%>"/>
@@ -31,33 +31,33 @@
 
 		<table:table width="600" border="0">
 
-			<table:separatorInfo colspan="2" height="50" title="${eco:translate('Voting category data')}" />
+			<table:separatorInfo colspan="2" height="50" title="${isNew ? eco:translate('Voting category edit: New voting category')  : votingCategoryEditDataModel.votingCategoryName}" />
 
 			<table:tredit>
-				<table:tdtext text_t="Voting category name" labelFor="${votingCategoryNameControl}" isMandatory="true" />
+				<table:tdtext text_t="Appraisal categories: Name" labelFor="${votingCategoryNameControl}" isMandatory="true" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${votingCategoryNameControl}" hintTitle_t="Voting category name" hint="${eco:translate( 'Voting category name' )}<br /><br />${mandatoryText}" focused="true" >
-						<jsp:attribute name="inputField">
+					<%--<tags:inputHint inputId="${votingCategoryNameControl}" hintTitle_t="Voting category name" hint="${eco:translate( 'Appraisal categories: Name' )}<br /><br />${mandatoryText}" focused="true" >--%>
+						<%--<jsp:attribute name="inputField">--%>
 							<html:input fieldId="${votingCategoryNameControl}" fieldValue="${votingCategoryEditDataModel.votingCategoryName}" />
-						</jsp:attribute>
-					</tags:inputHint>
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
 			<table:tredit>
-				<table:tdtext text_t="Voting category description" labelFor="${votingCategoryDescriptionControl}" />
+				<table:tdtext text_t="Appraisal categories: Description" labelFor="${votingCategoryDescriptionControl}" />
 
 				<table:tddata>
-					<tags:inputHint inputId="${votingCategoryDescriptionControl}" hintTitle_t="Voting category description" hint="${eco:translate( 'Voting category description' )}<br /><br />${optionalText}" >
-						<jsp:attribute name="inputField">
-							<html:textarea inputId="${votingCategoryDescriptionControl}" inputValue="${votingCategoryEditDataModel.votingCategoryDescription}" title="Description" hint="${descriptionRequirement}" />
-						</jsp:attribute>
-					</tags:inputHint>
+					<%--<tags:inputHint inputId="${votingCategoryDescriptionControl}" hintTitle_t="Voting category description" hint="${eco:translate( 'Appraisal categories: Description' )}<br /><br />${optionalText}" >--%>
+						<%--<jsp:attribute name="inputField">--%>
+							<html:textarea inputId="${votingCategoryDescriptionControl}" inputValue="${votingCategoryEditDataModel.votingCategoryDescription}" title="${eco:translate( 'Appraisal categories: Description' )}" hint="${descriptionRequirement}" />
+						<%--</jsp:attribute>--%>
+					<%--</tags:inputHint>--%>
 				</table:tddata>
 			</table:tredit>
 
-			<table:trok text_t="${isNew ? 'Create new voting category' : 'Save voting category '}" />
+			<table:trok text_t="${isNew ? 'Voting category edit: Create new voting category' : 'Voting category edit: Save voting category'}" />
 
 		</table:table>
 

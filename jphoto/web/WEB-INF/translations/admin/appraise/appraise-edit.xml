@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Voting category edit: Voting category data</nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting category edit: Create new voting category</nerd>
+		<ru><![CDATA[Создать]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting category edit: Save voting category</nerd>
+		<ru><![CDATA[Сохранить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Voting category edit: New voting category</nerd>
+		<ru><![CDATA[Новый критерий оценки работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
