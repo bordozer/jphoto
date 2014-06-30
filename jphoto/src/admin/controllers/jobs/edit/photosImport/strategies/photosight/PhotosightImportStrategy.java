@@ -191,12 +191,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
+			final String photosightUserPageLink = PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser );
+
 			if ( jobHelperService.doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
 
 				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
 					final TranslatableMessage message1 = new TranslatableMessage( "Already imported photo #$1 found. Skipping the import of the rest photos of $2", getServices() )
 						.addIntegerParameter( photosightPhotoId )
-						.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+						.string( photosightUserPageLink )
 						;
 
 					job.addJobRuntimeLogMessage( message1 );
@@ -204,16 +206,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 					return new PhotosightPhotosFromPageToImport( photosightPagePhotos, true );
 				}
 
-				final String message = services.getTranslatorService().translate( "Photo $1 of $2 has already been imported"
-					, language
-					, String.valueOf( photosightPhotoId )
-					, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser )
-				);
-				log.debug( message );
+				log.debug( String.format( "Photo %d of %s has already been imported"
+					, photosightPhotoId
+					, photosightUserPageLink
+				) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
 					.addIntegerParameter( photosightPhotoId )
-					.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+					.string( photosightUserPageLink )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -222,13 +222,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			final PhotosightPhoto photosightPhoto;
 
-			final PhotosightPhoto cachedPhotosightPhoto = getsPhotosightPhotoFromCache( photosightPhotoId, cachedLocallyPhotosightPhotos );
+			final PhotosightPhoto cachedPhotosightPhoto = getPhotosightPhotoFromCache( photosightPhotoId, cachedLocallyPhotosightPhotos );
 			if ( cachedPhotosightPhoto != null ) {
 				photosightPhoto = cachedPhotosightPhoto;
-				log.debug( String.format( "Photo %d of %s has been found in the local cache.", photosightPhotoId, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) ) );
-
-				/*final String message = services.getTranslatorService().translate( "Found in the local cache: $1"
-					, language, PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) );*/
+				log.debug( String.format( "Photo %d of %s has been found in the local cache.", photosightPhotoId, photosightUserPageLink ) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
 					.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
@@ -291,7 +288,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		return notCachedPhotosightPhotosOnDisk;
 	}
 
-	private PhotosightPhoto getsPhotosightPhotoFromCache( final int photosightPhotoId, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos ) {
+	private PhotosightPhoto getPhotosightPhotoFromCache( final int photosightPhotoId, final List<PhotosightPhoto> cachedLocallyPhotosightPhotos ) {
 		for ( final PhotosightPhoto cachedLocallyPhotosightPhoto : cachedLocallyPhotosightPhotos ) {
 			if ( cachedLocallyPhotosightPhoto.getPhotoId() == photosightPhotoId ) {
 				return cachedLocallyPhotosightPhoto;
