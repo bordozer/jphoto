@@ -268,7 +268,7 @@ public class PhotoListEntryController {
 			);
 		}
 
-		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image'/></a>"
+		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>"
 			, urlUtilsService.getPhotoCardLink( photo.getId() )
 			, photo.getNameEscaped()
 			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
