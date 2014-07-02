@@ -39,7 +39,7 @@
 
 	<translation>
 		<nerd>Chain jobs was stopped because of error in child job</nerd>
-		<ru><![CDATA[Задача остановленная по причине ошибки в одной из подзадач]]></ru>
+		<ru><![CDATA[Задача остановлена по причине ошибки в одной из подзадач]]></ru>
 		<ua><![CDATA[Завдання зупинено по причинi помилки в однiЕI з пiдзачач]]></ua>
 		<en><![CDATA[Chain jobs was stopped because of error in child job]]></en>
 	</translation>
@@ -51,15 +51,15 @@
 
 	<translation>
 		<nerd>Jobs that have not started yet and execution was cancelled because of error in previous job in the chain</nerd>
-		<ru><![CDATA[Задача не была запущена, и ее выполнение отменено по причине ошибки в другной подзадаче комплексной задаче]]></ru>
+		<ru><![CDATA[Задача не была запущена, и ее выполнение отменено по причине ошибки в другой подзадаче комплексной задачи]]></ru>
 		<ua><![CDATA[Завдання не було розпочате та його виконання було вiдмiнено тому що трапилась помилка у комплексноI задачi ранiше]]></ua>
 		<en><![CDATA[Jobs that have not started yet and execution was cancelled because of error in previous job in the chain]]></en>
 	</translation>
 
 	<translation>
 		<nerd>Finished with error</nerd>
-		<ru><![CDATA[Возникла ошибка в процессе выполнения задания]]></ru>
-		<ua><![CDATA[Виникла помилка в процессi виконання завдання]]></ua>
+		<ru><![CDATA[Возникла ошибка в процессе выполнения задачи]]></ru>
+		<ua><![CDATA[Виникла помилка в процессi виконання задачi]]></ua>
 		<en><![CDATA[Finished with error]]></en>
 	</translation>
 

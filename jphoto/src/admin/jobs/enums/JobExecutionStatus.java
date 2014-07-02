@@ -1,10 +1,10 @@
 package admin.jobs.enums;
 
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.EnumSet;
 
-public enum JobExecutionStatus implements Identifiable {
+public enum JobExecutionStatus implements IdentifiableNameable {
 
 	WAITING_FOR_START( 5, "Jobs are waiting for start", "hourglass.png" )
 	, IN_PROGRESS( 1, "Jobs in progress", "progress.png" )

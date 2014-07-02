@@ -1,5 +1,8 @@
 <%@ page import="admin.controllers.jobs.edit.jobExecutionHistoryCleanup.JobExecutionHistoryCleanupJobModel" %>
 <%@ page import="admin.jobs.enums.JobExecutionStatus" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +19,7 @@
 <c:set var="leave_activity_for_days_control" value="<%=JobExecutionHistoryCleanupJobModel.DELETE_ENTRIES_OLDER_THE_N_DAYS_CONTROL%>"/>
 <c:set var="job_execution_status_ids_to_delete_control" value="<%=JobExecutionHistoryCleanupJobModel.JOB_EXECUTION_STATUS_IDS_TO_DELETE_CONTROL%>"/>
 
-<c:set var="jobExecutionStatuses" value="<%=JobExecutionStatus.values()%>"/>
+<c:set var="jobExecutionStatuses" value="<%=GenericTranslatableList.jobExecutionStatusList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <c:set var="savedJob" value="${jobExecutionHistoryCleanupJobModel.job}"/>
 
@@ -34,24 +37,19 @@
 					</table:td>
 				</table:tr>
 
-				<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
+				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Delete entries that finished early then" isMandatory="true"/>
+					<table:tdtext text_t="JobExecutionHistoryCleanupJob: Delete entries that finished early then" isMandatory="true"/>
 
 					<table:tddata>
-						<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave entries older then"
-										hint="${eco:translate('Delete entries older then')}">
-						<jsp:attribute name="inputField">
-							<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('day(s) ago')}
-						</jsp:attribute>
-						</tags:inputHint>
+						<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('ROD PLURAL days')}
 					</table:tddata>
 
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Delete entries with statuses"/>
+					<table:tdtext text_t="JobExecutionHistoryCleanupJob: Job statuses to delete"/>
 
 					<table:tddata>
 						<js:checkboxMassChecker checkboxClass="${job_execution_status_ids_to_delete_control}"/>

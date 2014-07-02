@@ -2,6 +2,7 @@ package ui.translatable;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.jobs.enums.DateRangeType;
+import admin.jobs.enums.JobExecutionStatus;
 import core.enums.FavoriteEntryType;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
@@ -55,6 +56,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<ActivityType> activityTypeList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<ActivityType>( ActivityType.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<JobExecutionStatus> jobExecutionStatusList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<JobExecutionStatus>( JobExecutionStatus.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<PeriodUnit> schedulerPeriodTranslatableList( final Language language, final TranslatorService translatorService ) {

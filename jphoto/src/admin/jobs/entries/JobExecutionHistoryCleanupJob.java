@@ -98,8 +98,8 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translatorService.translate( "Delete entries that finished early then $1 day(s) ago", getLanguage(), String.valueOf( deleteEntriesOlderThenDays ) ) ).append( "<br />" );
-		builder.append( translatorService.translate( "Job statuses to delete: ", getLanguage() ) );
+		builder.append( translatorService.translate( "JobExecutionHistoryCleanupJob: Delete entries that finished early then $1 day(s) ago", getLanguage(), String.valueOf( deleteEntriesOlderThenDays ) ) ).append( "<br />" );
+		builder.append( translatorService.translate( "JobExecutionHistoryCleanupJob: Job statuses to delete", getLanguage() ) ).append( ": " );
 
 		if ( jobExecutionStatusesToDelete.size() < JobExecutionStatus.values().length ) {
 			builder.append( "<br />" );
@@ -111,7 +111,7 @@ public class JobExecutionHistoryCleanupJob extends AbstractJob {
 				builder.append( "<br />" );
 			}
 		} else {
-			builder.append( translatorService.translate( "All job execution statuses", getLanguage() ) );
+			builder.append( translatorService.translate( "JobExecutionHistoryCleanupJob: All job execution statuses", getLanguage() ) );
 		}
 
 		/*builder.append( "<br />" );
