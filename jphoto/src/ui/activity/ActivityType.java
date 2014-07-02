@@ -1,13 +1,13 @@
 package ui.activity;
 
 import admin.jobs.enums.SavedJobType;
-import core.interfaces.Identifiable;
+import core.interfaces.IdentifiableNameable;
 
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public enum ActivityType implements Identifiable {
+public enum ActivityType implements IdentifiableNameable {
 
 	USER_REGISTRATION( 1, "ActivityType: New member registration", SavedJobType.USER_GENERATION.getIcon() )
 	, PHOTO_UPLOAD( 2, "ActivityType: New photo upload", SavedJobType.PHOTOS_IMPORT.getIcon() )

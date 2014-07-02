@@ -64,10 +64,10 @@ public class ActivityStreamCleanupJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( services.getTranslatorService().translate( "Delete activities older then $1 days", language, String.valueOf( leaveActivityForDays ) ) );
+		builder.append( services.getTranslatorService().translate( "ActivityStreamCleanupJob: Delete activities older then $1 days", language, String.valueOf( leaveActivityForDays ) ) );
 		builder.append( "<br />" );
 
-		builder.append( services.getTranslatorService().translate( "Activity types to delete", language ) ).append( ": " );
+		builder.append( services.getTranslatorService().translate( "ActivityStreamCleanupJob: Activity types to delete", language ) ).append( ": " );
 		if ( activityTypes.size() == ActivityType.values().length ) {
 			builder.append( services.getTranslatorService().translate( "ActivityStreamCleanupJob: All activity types", language ) );
 		}  else {

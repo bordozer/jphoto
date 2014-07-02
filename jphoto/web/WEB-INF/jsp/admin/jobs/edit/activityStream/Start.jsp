@@ -1,4 +1,7 @@
 <%@ page import="admin.controllers.jobs.edit.activityStream.ActivityStreamCleanupJobModel" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -16,7 +19,7 @@
 <c:set var="activity_stream_type_ids_to_delete_control" value="<%=ActivityStreamCleanupJobModel.ACTIVITY_STREAM_TYPE_IDS_TO_DELETE_CONTROL%>"/>
 
 <c:set var="savedJob" value="${activityStreamCleanupJobModel.job}"/>
-<c:set var="activityTypes" value="${activityStreamCleanupJobModel.activityTypes}"/>
+<c:set var="activityTypes" value="<%=GenericTranslatableList.activityTypeList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries()%>"/>
 
 <tags:page pageModel="${activityStreamCleanupJobModel.pageModel}">
 
@@ -32,24 +35,19 @@
 					</table:td>
 				</table:tr>
 
-				<table:separatorInfo colspan="2" title="${eco:translate('Delete activities older then')}"/>
+				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Delete activities older then" isMandatory="true"/>
+					<table:tdtext text_t="ActivityStreamCleanupJob: Delete activities older then" isMandatory="true"/>
 
 					<table:tddata>
-						<tags:inputHint inputId="${leave_activity_for_days_control}" focused="true" hintTitle_t="Leave Activity For Days"
-										hint="${eco:translate('Delete activities older then')}">
-							<jsp:attribute name="inputField">
-								<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('activity cleanup job => parameter => days')}
-							</jsp:attribute>
-						</tags:inputHint>
+						<form:input path="${leave_activity_for_days_control}" cssErrorClass="invalid" size="4"/> ${eco:translate('ROD PLURAL days')}
 					</table:tddata>
 
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Actyvity types to delete" isMandatory="true"/>
+					<table:tdtext text_t="ActivityStreamCleanupJob: Activity types to delete" isMandatory="true"/>
 					<table:tddata>
 						<js:checkboxMassChecker checkboxClass="${activity_stream_type_ids_to_delete_control}"/>
 						<br/>

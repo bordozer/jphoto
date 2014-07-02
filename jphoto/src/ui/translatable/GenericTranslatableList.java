@@ -16,6 +16,7 @@ import core.general.user.UserStatus;
 import core.interfaces.IdentifiableNameable;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import ui.activity.ActivityType;
 import ui.controllers.photos.list.PhotoFilterSortColumn;
 import ui.controllers.photos.list.PhotoFilterSortOrder;
 
@@ -50,6 +51,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<ActivityType> activityTypeList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<ActivityType>( ActivityType.values(), language, translatorService );
 	}
 
 	public static GenericTranslatableList<PeriodUnit> schedulerPeriodTranslatableList( final Language language, final TranslatorService translatorService ) {

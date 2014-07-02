@@ -3,7 +3,6 @@ package admin.controllers.jobs.edit.activityStream;
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import ui.activity.ActivityType;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -15,7 +14,6 @@ public class ActivityStreamCleanupJobModel extends AbstractAdminJobModel {
 
 	private String leaveActivityForDays;
 	private List<String> activityStreamTypeIdsToDelete;
-	private final List<ActivityType> activityTypes  = Arrays.asList( ActivityType.values() );
 
 	public String getLeaveActivityForDays() {
 		return leaveActivityForDays;
@@ -35,10 +33,6 @@ public class ActivityStreamCleanupJobModel extends AbstractAdminJobModel {
 
 	public static String getLeaveActivityForDaysControl() {
 		return LEAVE_ACTIVITY_FOR_DAYS_CONTROL;
-	}
-
-	public List<ActivityType> getActivityTypes() {
-		return activityTypes;
 	}
 
 	@Override
