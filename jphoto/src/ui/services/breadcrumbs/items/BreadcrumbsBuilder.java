@@ -1,5 +1,7 @@
 package ui.services.breadcrumbs.items;
 
+import admin.jobs.enums.JobListTab;
+import admin.jobs.enums.SavedJobType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -197,16 +199,6 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
-	public BreadcrumbsBuilder adminRoot() {
-		breadcrumbs.add( new AdminRootBreadcrumbs( services ) );
-		return this;
-	}
-
-	public BreadcrumbsBuilder adminJobList() {
-		breadcrumbs.add( new AdminJobListBreadcrumbs( services ) );
-		return this;
-	}
-
 	public String build() {
 		return build( EnvironmentContext.getLanguage() );
 	}
@@ -228,5 +220,36 @@ public class BreadcrumbsBuilder {
 
 	private Genre getGenre( final int genreId ) {
 		return services.getGenreService().load( genreId );
+	}
+
+	public BreadcrumbsBuilder adminRoot() {
+		breadcrumbs.add( new AdminRootBreadcrumbs( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder adminJobsText() {
+		breadcrumbs.add( new AdminJobsTextBreadcrumbs( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder adminJobsLink() {
+		breadcrumbs.add( new AdminJobsLinkBreadcrumbs( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder adminJobsOnTab( final JobListTab jobListTab ) {
+		breadcrumbs.add( new AdminJobsOnTabBreadcrumbs( jobListTab, services ) );
+		return this;
+	}
+
+
+	public BreadcrumbsBuilder adminJobsOnTabLink( final JobListTab jobListTab ) {
+		breadcrumbs.add( new AdminJobsOnTabLinkBreadcrumbs( jobListTab, services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder adminSavedJobType( final SavedJobType savedJobType ) {
+		breadcrumbs.add( new AdminSavedJobTypeBreadcrumbs( savedJobType, services ) );
+		return this;
 	}
 }

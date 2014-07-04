@@ -145,7 +145,7 @@ public class SavedJobListController {
 
 		prepareJobs( model, jobListTab, savedJobs );
 
-		model.setPageTitleData( breadcrumbsAdminService.getJobListFilteredByTypeBreadcrumbs( jobListTab, savedJobType ) );
+		model.setPageTitleData( breadcrumbsAdminService.getSavedJobListFilteredByJobTypeBreadcrumbs( jobListTab, savedJobType ) );
 
 		return SAVED_JOBS_VIEW;
 	}

@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import admin.jobs.enums.JobListTab;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import core.general.configuration.ConfigurationTab;
@@ -275,6 +276,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		}
 
 		return String.format( "<span style=\"text-decoration: line-through\">%s</span>", result );
+	}
+
+	@Override
+	public String getAdminJobsOnTabLink( final JobListTab jobListTab, final Language language ) {
+		return String.format( "<a href='%s/jobs/%s/'>%s</a>", urlUtilsService.getBaseAdminURL(), jobListTab.getKey(), translatorService.translate( jobListTab.getName(), language ) );
 	}
 
 	@Override

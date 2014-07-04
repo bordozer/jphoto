@@ -1,5 +1,6 @@
 package core.services.utils;
 
+import admin.jobs.enums.JobListTab;
 import admin.jobs.enums.SavedJobType;
 import admin.jobs.general.SavedJob;
 import core.enums.UserCardTab;
@@ -77,6 +78,8 @@ public interface EntityLinkUtilsService {
 	String getAdminUpgradeLink( final Language language );
 
 	String getAdminSavedJobLink( SavedJobType jobType, SavedJob savedJob, final Language language );
+
+	String getAdminJobsOnTabLink( final JobListTab jobListTab, final Language language );
 
 	String getActivityStreamRootLink( final Language language );
 

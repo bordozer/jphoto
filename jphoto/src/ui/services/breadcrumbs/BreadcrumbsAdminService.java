@@ -13,7 +13,7 @@ public interface BreadcrumbsAdminService {
 
 	PageTitleData getJobListBreadcrumbs( final JobListTab jobListTab );
 
-	PageTitleData getJobListFilteredByTypeBreadcrumbs( final JobListTab jobListTab, final SavedJobType savedJobType );
+	PageTitleData getSavedJobListFilteredByJobTypeBreadcrumbs( final JobListTab jobListTab, final SavedJobType savedJobType );
 
 	PageTitleData getJobEditBreadcrumbs( final SavedJob savedJob );
 

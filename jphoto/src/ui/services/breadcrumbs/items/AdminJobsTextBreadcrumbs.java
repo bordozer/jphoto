@@ -4,9 +4,9 @@ import core.services.system.Services;
 import core.services.translator.Language;
 import ui.services.MenuService;
 
-public class AdminJobListBreadcrumbs extends AbstractBreadcrumb {
+public class AdminJobsTextBreadcrumbs extends AbstractBreadcrumb {
 
-	public AdminJobListBreadcrumbs( final Services services ) {
+	public AdminJobsTextBreadcrumbs( final Services services ) {
 		super( services );
 	}
 

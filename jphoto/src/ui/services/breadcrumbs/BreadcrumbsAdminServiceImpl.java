@@ -37,24 +37,35 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String title = title( jobTabName ).build();
 		final String header = header( jobTabName ).build();
 
-		final String breadcrumbs = new BreadcrumbsBuilder( services )
-			.adminRoot()
-			.adminJobList()
-			.translatableString( jobTabName )
-			.build();
+		final BreadcrumbsBuilder builder = new BreadcrumbsBuilder( services ).adminRoot();
 
-		return new PageTitleData( title, header, breadcrumbs );
+		if ( jobListTab == JobListTab.TEMPLATES ) {
+			builder.adminJobsText();
+		} else {
+			builder.adminJobsLink();
+		}
+
+		builder.adminJobsOnTab( jobListTab );
+
+		return new PageTitleData( title, header, builder.build() );
 	}
 
 	@Override
-	public PageTitleData getJobListFilteredByTypeBreadcrumbs( final JobListTab jobListTab, final SavedJobType savedJobType ) {
-		final String rootTranslated = getJobsRootTranslated();
+	public PageTitleData getSavedJobListFilteredByJobTypeBreadcrumbs( final JobListTab jobListTab, final SavedJobType savedJobType ) {
 
-		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() )
-			, translatorService.translate( jobListTab.getName(), EnvironmentContext.getLanguage() ), translatorService.translate( savedJobType.getName(), EnvironmentContext.getLanguage() ) );
+		final String jobTabName = jobListTab.getName();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String title = title( jobTabName ).build();
+		final String header = header( jobTabName ).build();
+
+		final String breadcrumbs = new BreadcrumbsBuilder( services )
+			.adminRoot()
+			.adminJobsLink()
+			.adminJobsOnTabLink( jobListTab )
+			.adminSavedJobType( savedJobType )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
