@@ -8,6 +8,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportSt
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
@@ -174,7 +175,16 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case PHOTOSIGHT:
 				final PhotosightImportParameters photosightParameters = ( PhotosightImportParameters ) importParameters;
 
-				builder.append( translatorService.translate( "Photo import job parameter: Photosight user ids", getLanguage() ) ).append( ": " ).append( StringUtils.join( photosightParameters.getPhotosightUserIds(), ", " ) ).append( "<br />" );
+				final List<String> photosightUserIds = Lists.transform( photosightParameters.getPhotosightUserIds(), new Function<String, String>() {
+					@Override
+					public String apply( final String photosightUserId ) {
+						return String.format( "<a href='%s'>%s</a>", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ), photosightUserId );
+					}
+				} );
+				final String photosightUserLinks = StringUtils.join( photosightUserIds, ", " );
+				builder.append( translatorService.translate( "Photo import job parameter: Photosight user ids", getLanguage() ) )
+					   .append( ": " )
+					   .append( photosightUserLinks ).append( "<br />" );
 
 				final List<PhotosightCategory> photosightCategories = photosightParameters.getPhotosightCategories();
 				builder.append( translatorService.translate( "Photo import job parameter: Import photos from categories", getLanguage() ) ).append( ": " );
