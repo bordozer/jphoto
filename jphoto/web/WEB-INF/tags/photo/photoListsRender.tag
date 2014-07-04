@@ -16,4 +16,6 @@
 
 	<photo:photoListLazyLoading photoList="${photoList}" />
 
+	<div style="float: left; width: 100%; border-bottom: 1px dashed #848078; margin-bottom: 15px;"></div>
+
 </c:forEach>
