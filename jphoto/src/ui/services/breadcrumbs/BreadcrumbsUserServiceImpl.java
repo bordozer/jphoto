@@ -78,13 +78,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 
 	@Override
 	public PageTitleData getUserEditBreadcrumbs( final User user ) {
-
 		return getUserBreadcrumbs( user, MenuService.MAIN_MENU_PROFILE_SETTINGS );
 	}
 
 	@Override
 	public PageTitleData setUserAvatarBreadcrumbs( final User user ) {
-
 		return getUserBreadcrumbs( user, "Breadcrumbs: User avatar" );
 	}
 

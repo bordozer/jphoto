@@ -197,6 +197,16 @@ public class BreadcrumbsBuilder {
 		return this;
 	}
 
+	public BreadcrumbsBuilder adminRoot() {
+		breadcrumbs.add( new AdminRootBreadcrumbs( services ) );
+		return this;
+	}
+
+	public BreadcrumbsBuilder adminJobList() {
+		breadcrumbs.add( new AdminJobListBreadcrumbs( services ) );
+		return this;
+	}
+
 	public String build() {
 		return build( EnvironmentContext.getLanguage() );
 	}

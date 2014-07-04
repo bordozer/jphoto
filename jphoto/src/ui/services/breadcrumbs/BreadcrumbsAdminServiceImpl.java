@@ -7,11 +7,13 @@ import admin.services.services.UpgradeState;
 import core.general.configuration.ConfigurationTab;
 import core.general.configuration.SystemConfiguration;
 import core.general.photo.PhotoVotingCategory;
+import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
+import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
 public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	
@@ -24,15 +26,24 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private Services services;
+
 	@Override
 	public PageTitleData getJobListBreadcrumbs( final JobListTab jobListTab ) {
-		final String rootTranslated = getJobsRootTranslated();
 
-		final String title = pageTitleUtilsService.getTitleDataString( getAdminTranslatedRoot(), rootTranslated );
-		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminJobsRootLink( EnvironmentContext.getLanguage() )
-			, translatorService.translate( jobListTab.getName(), EnvironmentContext.getLanguage() )  );
+		final String jobTabName = jobListTab.getName();
 
-		return new PageTitleData( title, rootTranslated, breadcrumbs );
+		final String title = title( jobTabName ).build();
+		final String header = header( jobTabName ).build();
+
+		final String breadcrumbs = new BreadcrumbsBuilder( services )
+			.adminRoot()
+			.adminJobList()
+			.translatableString( jobTabName )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Override
@@ -335,5 +346,18 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 
 	private String getConfigurationActiveSign() {
 		return String.format( " - %s", translatorService.translate( "Configuration: active configuration sign", EnvironmentContext.getLanguage() ) );
+	}
+
+	private BreadcrumbsBuilder title( final String text ) {
+		return new BreadcrumbsBuilder( services )
+			.projectName()
+			.translatableString( text )
+			;
+	}
+
+	private BreadcrumbsBuilder header( final String text ) {
+		return new BreadcrumbsBuilder( services )
+			.translatableString( text )
+			;
 	}
 }

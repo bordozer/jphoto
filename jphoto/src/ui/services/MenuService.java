@@ -16,5 +16,8 @@ public interface MenuService {
 	String MAIN_MENU_ABSOLUTE_BEST = "Main menu: Absolute best";
 	String MAIN_MENU_MEMBERSHIP_TYPE_NERD = "Main menu: %s: %s";
 
+	String MAIN_MENU_ADMIN_ROOT = "Main menu: Administration";
+	String MAIN_MENU_ADMIN_JOBS = "Main menu: Jobs";
+
 	Map<MenuItem, List<MenuItem>> getMenuElements( final User user );
 }

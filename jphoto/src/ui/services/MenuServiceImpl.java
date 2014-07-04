@@ -271,7 +271,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( controlPanelMenu() );
 		menuItems.add( upgradeMenu() );
 
-		menus.put( MenuItem.noLinkMenu( translatorService.translate( "Main menu: Administration", getLanguage() ) ), menuItems );
+		menus.put( MenuItem.noLinkMenu( translatorService.translate( MAIN_MENU_ADMIN_ROOT, getLanguage() ) ), menuItems );
 	}
 
 	private List<MenuItem> byMembershipMenus( final String url ) {
@@ -354,7 +354,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem jobsMenu() {
-		final String caption = translatorService.translate( "Main menu: Jobs", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_ADMIN_JOBS, getLanguage() );
 		final String link = urlUtilsService.getAdminJobsLink();
 
 		final MenuItem menuItem = new MenuItem( caption, link );

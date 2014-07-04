@@ -28,9 +28,7 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	public static final String PHOTO_GALLERY_THE_BEST = "Breadcrumbs: The best";
 	public static final String BREADCRUMBS_GROUP_OPERATIONS = "Breadcrumbs: Group operations";
-	@Autowired
-	private PageTitleUtilsService pageTitleUtilsService;
-	
+
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
