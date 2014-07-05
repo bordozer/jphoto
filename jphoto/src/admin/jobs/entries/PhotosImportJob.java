@@ -55,8 +55,6 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 	@Override
 	public Map<SavedJobParameterKey, CommonProperty> getParametersMap() {
 
-		final DateUtilsService dateUtilsService = services.getDateUtilsService();
-
 		final Map<SavedJobParameterKey, CommonProperty> parametersMap = newHashMap();
 
 		parametersMap.put( SavedJobParameterKey.PHOTOS_IMPORT_SOURCE, new CommonProperty( SavedJobParameterKey.PHOTOS_IMPORT_SOURCE.getId(), getImportSource().getId() ) );
@@ -178,7 +176,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final List<String> photosightUserIds = Lists.transform( photosightParameters.getPhotosightUserIds(), new Function<String, String>() {
 					@Override
 					public String apply( final String photosightUserId ) {
-						return String.format( "<a href='%s'>%s</a>", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ), photosightUserId );
+						return String.format( "<a href='%s' title='%s'>%s</a>", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ), translatorService.translate( "Photo import job parameter: Photosight user ID", getLanguage() ), photosightUserId );
 					}
 				} );
 				final String photosightUserLinks = StringUtils.join( photosightUserIds, ", " );
