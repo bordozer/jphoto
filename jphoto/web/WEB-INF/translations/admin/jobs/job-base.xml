@@ -38,11 +38,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Generated preview for $1</nerd>
-		<ru><![CDATA[Сгенерировано превью для $1]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>User $1 has voted for $2's rank in $3 ( $4 )</nerd>
 		<ru><![CDATA[Пользователь $1 проголосовал за ранг $2 в разделе $3 ( $4 )]]></ru>
 	</translation>

@@ -32,22 +32,18 @@
 
 				<table:tr>
 					<table:td>
-						${eco:translate('Preview size')}:
+						${eco:translate('Preview generation job: Preview size')}:
 					</table:td>
 
 					<table:td>
-						<tags:inputHint inputId="${previewSizeControl}" focused="true" hintTitle_t="Preview size" hint="${eco:translate('Preview size')}">
-						<jsp:attribute name="inputField">
-							<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4"/>
-						</jsp:attribute>
-						</tags:inputHint>
+						<form:input path="${previewSizeControl}" cssErrorClass="invalid" size="4"/>
 					</table:td>
 
 				</table:tr>
 
 				<table:tr>
 					<table:td>
-						${eco:translate('Skip generation if preview already exists')}
+						${eco:translate('Preview generation job: Skip generation if preview already exists')}
 					</table:td>
 					<table:td>
 						<form:checkbox path="skipPhotosWithExistingPreview"/>
