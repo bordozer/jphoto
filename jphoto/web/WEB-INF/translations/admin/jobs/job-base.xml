@@ -258,8 +258,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Job $1 is stopped by user</nerd>
+		<ru><![CDATA[Задача $1 прервана пользователем]]></ru>
 	</translation>
 
 	<translation>
