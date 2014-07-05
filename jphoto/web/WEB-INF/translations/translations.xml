@@ -232,13 +232,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Successfully removed from $1</nerd>
+		<ru><![CDATA[Удалено из $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Successfully added to $1</nerd>
+		<ru><![CDATA[Добавлено в $1]]></ru>
 	</translation>
 
 	<translation>
