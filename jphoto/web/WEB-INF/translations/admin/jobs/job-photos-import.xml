@@ -183,8 +183,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Can not get photosight photo image content: '$1'</nerd>
+		<ru><![CDATA[Ошибка получения фотографии с photosight.ru: '$1'.]]></ru>
 	</translation>
 
 	<translation>
