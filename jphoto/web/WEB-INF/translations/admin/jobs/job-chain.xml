@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Jobs chain: Jobs to execute</nerd>
+		<ru><![CDATA[Задачи к выполнению]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Jobs chain: Jobs execution mode</nerd>
+		<ru><![CDATA[Режим выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Jobs chain: Break chain execution if error</nerd>
+		<ru><![CDATA[Прервать комплексную задачу в случае ошибки в подзадаче]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>

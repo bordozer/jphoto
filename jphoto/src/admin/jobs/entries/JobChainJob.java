@@ -109,9 +109,9 @@ public class JobChainJob extends AbstractJob {
 	public String getJobParametersDescription() {
 		final StringBuilder builder = new StringBuilder();
 
-		builder.append( translate( "Run mode:" ) ).append( jobRunMode.getName() ).append( "<br />" );
-		builder.append( translate( "Stop dependant jobs if error:" ) ).append( translate( breakChainExecutionIfError ? YesNo.YES.getName() : YesNo.NO.getName() ) ).append( "<br />" );
-		builder.append( translate( "Jobs:" ) ).append( "<br />" );
+		builder.append( translate( "Jobs chain: Jobs execution mode" ) ).append( ": " ).append( jobRunMode.getName() ).append( "<br />" );
+		builder.append( translate( "Jobs chain: Break chain execution if error" ) ).append( ": " ).append( translate( breakChainExecutionIfError ? YesNo.YES.getName() : YesNo.NO.getName() ) ).append( "<br />" );
+		builder.append( translate( "Jobs chain: Jobs to execute" ) ).append( ": " ).append( "<br />" );
 		for ( final int savedJobToExecuteId : savedJobToExecuteIds ) {
 			final SavedJob savedJob = services.getSavedJobService().load( savedJobToExecuteId );
 			final String img = String.format( "<img width='16' height='16' src='%s/jobtype/%s' title='%s'>", services.getUrlUtilsService().getSiteImagesPath(), savedJob.getJobType().getIcon(), translate( savedJob.getJobType().getName() ) );

@@ -38,7 +38,7 @@
 					<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 					<table:tr>
-						<table:tdtext text_t="Jobs chain" isMandatory="true"/>
+						<table:tdtext text_t="Jobs chain: Jobs to execute" isMandatory="true"/>
 						<table:td>
 							<c:forEach var="savedJob" items="${savedRealJobs}">
 								<form:checkbox path="${selectedSavedJobsIdsControl}" value="${savedJob.id}"/>
@@ -49,14 +49,14 @@
 					</table:tr>
 
 					<table:tr>
-						<table:tdtext text_t="Job run mode"/>
+						<table:tdtext text_t="Jobs chain: Jobs execution mode"/>
 						<table:td>
 							<form:radiobuttons path="${jobRunModeIdControl}" items="${jobRunModeValues}" itemValue="id" itemLabel="name" delimiter="<br />" htmlEscape="false"/>
 						</table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:tdtext text_t="Break chain execution if error"/>
+						<table:tdtext text_t="Jobs chain: Break chain execution if error"/>
 						<table:td>
 							<form:checkbox path="${stopNextJobsInChainIfErrorControl}" value="ON" disabled="${jobChainJobModel.jobRunModeId != jobRunModeSeriallyId}"/>
 						</table:td>
