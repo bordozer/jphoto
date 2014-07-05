@@ -216,12 +216,13 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		} );
 
 		for ( final Genre genre : genres ) {
-			final PhotoList userBestPhotosByGenrePhotoList = getUserBestPhotosByGenrePhotoList( user, genre );
+			photoLists.add( getUserPhotosByGenrePhotoList( user, genre ) );
+			/*final PhotoList userBestPhotosByGenrePhotoList = getUserBestPhotosByGenrePhotoList( user, genre );
 			if ( userBestPhotosByGenrePhotoList.hasPhotos() ) {
 				photoLists.add( userBestPhotosByGenrePhotoList );
 			} else {
 				photoLists.add( getUserPhotosByGenrePhotoList( user, genre ) );
-			}
+			}*/
 		}
 
 		model.setPhotoLists( photoLists );
