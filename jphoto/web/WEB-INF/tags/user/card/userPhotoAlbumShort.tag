@@ -40,7 +40,7 @@
 	<c:if test="${empty userPhotoAlbums}">
 		<table:tr>
 			<table:td colspan="2" cssClass="text-centered">
-				${eco:translate('No albums')}
+				${eco:translate('User card albums preview: No albums')}
 			</table:td>
 		</table:tr>
 	</c:if>
