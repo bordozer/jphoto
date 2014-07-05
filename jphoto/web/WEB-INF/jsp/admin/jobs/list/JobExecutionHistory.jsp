@@ -148,7 +148,7 @@
 				<table:tdicon/>
 				<table:td>${eco:translate( "JobExecutionHistory: Start time" )}</table:td>
 				<table:td>${eco:translate( "JobExecutionHistory: Finish time" )}</table:td>
-				<table:td>${eco:translate( "JobExecutionHistory: Job" )}</table:td>
+				<table:td>${eco:translate( "JobExecutionHistory: Job name" )}</table:td>
 				<table:th text_t="JobExecutionHistory: State" width="20"/>
 				<table:th text_t="JobExecutionHistory: Scheduler task" width="20"/>
 
@@ -305,7 +305,7 @@
 				<c:if test="${not empty jobExecutionHistoryDatas}">
 					<table:tr>
 						<table:td colspan="${colspan}">
-							<html:submitButton id="deleteEntries" caption_t="Delete selected history entries" onclick="return deleteSelectedHistoryEntries();"/>
+							<html:submitButton id="deleteEntries" caption_t="JobExecutionHistory: Delete selected history entries" onclick="return deleteSelectedHistoryEntries();"/>
 						</table:td>
 					</table:tr>
 				</c:if>
