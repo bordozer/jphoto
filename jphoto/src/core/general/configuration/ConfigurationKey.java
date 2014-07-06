@@ -38,7 +38,7 @@ public enum ConfigurationKey {
 
 	, PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS( 400, "image/jpeg", true, ConfigurationDataType.ARRAY_OF_STRINGS, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Allowed uploaded photo file formats separated by comma" )
 	, PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB( 401, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.PHOTO_UPLOAD, "Additional summary photos size for file uploading for each rank in photo category per week" )
-	, PHOTO_UPLOAD_MUN_WIDTH( 410, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
+	, PHOTO_UPLOAD_MIN_WIDTH( 410, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
 	, PHOTO_UPLOAD_MIN_HEIGHT( 411, "600", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image height" )
 	, PHOTO_UPLOAD_MAX_WIDTH( 402, "1800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image width" )
 	, PHOTO_UPLOAD_MAX_HEIGHT( 403, "1200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image height" )
@@ -47,8 +47,8 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN( 409, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.PHOTO_UPLOAD, "Ignore anonymous global settings if user's rank in genre more then" )
 
 	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
-	, PHOTO_UPLOAD_AVATAR_MIN_WIDTH( 404, "400", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image width" )
-	, PHOTO_UPLOAD_AVATAR_MIN_HEIGHT( 405, "400", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image height" )
+	, PHOTO_UPLOAD_AVATAR_MIN_WIDTH( 404, "100", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image width" )
+	, PHOTO_UPLOAD_AVATAR_MIN_HEIGHT( 405, "100", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image height" )
 	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 412, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
 	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 413, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 

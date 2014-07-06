@@ -34,8 +34,8 @@ public class UserAvatarValidator implements Validator {
 		final MultipartFile multipartFile = model.getAvatarFile();
 		final long maxFileSizeKb = configurationService.getLong( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB );
 
-		final int minFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MUN_WIDTH );
-		final int minFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MIN_HEIGHT );
+		final int minFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MIN_WIDTH );
+		final int minFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MIN_HEIGHT );
 		final Dimension minDimension = new Dimension( minFileWidth, minFileHeight );
 
 		final int maxFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_WIDTH );
