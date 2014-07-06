@@ -155,6 +155,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo min image height</nerd>
+		<ru><![CDATA[Минимальная ширина файла фотографии]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo min image height</nerd>
+		<ru><![CDATA[Минимальная высота файла фотографии]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo max image width</nerd>
 		<ru><![CDATA[Максимальная ширина файла фотографии]]></ru>
 	</translation>
@@ -492,6 +502,26 @@
 	<translation>
 		<nerd>Photo preview dimension</nerd>
 		<ru><![CDATA[Размер превью в пикселях]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

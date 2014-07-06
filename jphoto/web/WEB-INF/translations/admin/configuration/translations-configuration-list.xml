@@ -108,8 +108,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>The key is not stored in db. The default value is used.</nerd>
+		<ru><![CDATA[Значение по данному ключу отсутствует в БД. Скорее всего, это новый ключ. Используется захардкоженое значение.]]></ru>
 	</translation>
 
 	<translation>
