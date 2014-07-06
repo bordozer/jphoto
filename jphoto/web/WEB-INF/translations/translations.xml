@@ -242,18 +242,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Max $1 dimension is $2 x $3, but uploaded file is $4 x $5</nerd>
+		<ru><![CDATA[$1: разрешение должно быть не больше чем $2 x $3, загруженный файл имеет $4 x $5]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Min $1 dimension is $2 x $3, but uploaded file is $4 x $5</nerd>
+		<ru><![CDATA[$1: разрешение должно быть не меньше чем $2 x $3, загруженный файл имеет $4 x $5]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>File field name: File</nerd>
+		<ru><![CDATA[Файл]]></ru>
 	</translation>
 
 	<translation>

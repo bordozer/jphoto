@@ -162,15 +162,16 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 
 		final Dimension dimension = getImageDimension( tempPhotoFile );
 
+		final String formattedFieldName = FormatUtils.getFormattedFieldName( translatorService.translate( "File field name: File", language ) );
 		if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
 			final String mess = translatorService.translate( "Max $1 dimension is $2 x $3, but uploaded file is $4 x $5"
-				, language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
+				, language, formattedFieldName, String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
 			errors.rejectValue( fileControlName, mess );
 		}
 
 		if ( dimension.getWidth() < minDimension.getWidth() || dimension.getHeight() < minDimension.getHeight()) {
 			final String mess = translatorService.translate( "Min $1 dimension is $2 x $3, but uploaded file is $4 x $5"
-				, language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( minDimension.getWidth() ), String.valueOf( minDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
+				, language, formattedFieldName, String.valueOf( minDimension.getWidth() ), String.valueOf( minDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
 			errors.rejectValue( fileControlName, mess );
 		}
 	}
