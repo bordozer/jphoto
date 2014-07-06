@@ -263,6 +263,26 @@
 	</translation>
 
 	<translation>
+		<nerd>'$1' - progress</nerd>
+		<ru><![CDATA['$1' - прогресс выполнения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Delete job '$1'</nerd>
+		<ru><![CDATA[Удалить задачу '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Stopped by parent job #$1</nerd>
+		<ru><![CDATA[Остановлена родительской задачей #$1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Job '$1' can not be deleted. It mush have been assigned to a scheduler task or is a parameter of another job</nerd>
+		<ru><![CDATA[Задача '$1' не может быть удалена. Вероятно, она используется планировщиком или является подзадачей комплексной задачи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

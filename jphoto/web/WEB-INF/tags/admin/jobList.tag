@@ -47,15 +47,6 @@
 
 		<c:set var="savedJobId" value="${savedJob.id}" />
 
-		<c:set var="image" value="jobConfig.png"/>
-		<c:set var="cssClass" value="jobActive"/>
-		<c:set var="title" value="${eco:translate('Saved job')}"/>
-		<c:if test="${not savedJob.active}">
-			<c:set var="image" value="jobConfigInactive.png"/>
-			<c:set var="cssClass" value="jobInactive"/>
-			<c:set var="title" value="${title} - ${eco:translate('inactive')}"/>
-		</c:if>
-
 		<c:set var="job" value="${savedJob.job}"/>
 		<c:set var="jobType" value="${job.jobType}"/>
 		<c:set var="jobTypeId" value="${jobType.id}" />
@@ -65,9 +56,6 @@
 		<table:tr>
 
 			<table:tdicon>
-				<%--<c:if test="${not isJobTypeActive}">
-					<html:img16 src="${image}" alt="${title}" />
-				</c:if>--%>
 
 				<c:if test="${isActiveSavedJob}">
 					<html:spinningWheel16 title="${eco:translate('The job is executing')}" />
