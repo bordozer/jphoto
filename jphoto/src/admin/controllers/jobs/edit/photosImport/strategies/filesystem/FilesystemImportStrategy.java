@@ -154,6 +154,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			if ( files == null ) {
 				return newArrayList();
 			}
+
 			for ( File file : files ) {
 
 				final List<String> allowedExtensions = services.getConfigurationService().getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
