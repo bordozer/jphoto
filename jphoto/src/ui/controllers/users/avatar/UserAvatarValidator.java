@@ -34,10 +34,14 @@ public class UserAvatarValidator implements Validator {
 		final MultipartFile multipartFile = model.getAvatarFile();
 		final long maxFileSizeKb = configurationService.getLong( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB );
 
+		final int minFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MUN_WIDTH );
+		final int minFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MIN_HEIGHT );
+		final Dimension minDimension = new Dimension( minFileWidth, minFileHeight );
+
 		final int maxFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_WIDTH );
 		final int maxFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_AVATAR_MAX_HEIGHT );
 		final Dimension maxDimension = new Dimension( maxFileWidth, maxFileHeight );
 
-		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, UserAvatarModel.AVATAR_FILE_FORM_CONTROL, EnvironmentContext.getLanguage() );
+		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, minDimension, UserAvatarModel.AVATAR_FILE_FORM_CONTROL, EnvironmentContext.getLanguage() );
 	}
 }

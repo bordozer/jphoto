@@ -117,7 +117,7 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 	}
 
 	@Override
-	public void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final String fileControlName, final Language language ) {
+	public void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final Dimension minDimension, final String fileControlName, final Language language ) {
 
 		final String fileName = multipartFile.getOriginalFilename();
 
@@ -141,13 +141,13 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 		}
 
 		try {
-			checkFileDimension( multipartFile, maxDimension, errors, fileControlName, language );
+			checkFileDimension( multipartFile, maxDimension, minDimension, errors, fileControlName, language );
 		} catch ( IOException e ) {
 			errors.rejectValue( fileControlName, translatorService.translate( "Can not upload file", language ) );
 		}
 	}
 
-	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Errors errors, final String fileControlName, final Language language ) throws IOException {
+	private void checkFileDimension( final MultipartFile multipartFile, final Dimension maxDimension, final Dimension minDimension, final Errors errors, final String fileControlName, final Language language ) throws IOException {
 
 		final String originalFilename = multipartFile.getOriginalFilename();
 		final File tempPhotoFile = tempFileUtilsService.getTempFileWithOriginalExtension( originalFilename );
@@ -163,7 +163,14 @@ public class ImageFileUtilsServiceImpl implements ImageFileUtilsService {
 		final Dimension dimension = getImageDimension( tempPhotoFile );
 
 		if ( dimension.getWidth() > maxDimension.getWidth() || dimension.getHeight() > maxDimension.getHeight()) {
-			final String mess = translatorService.translate( "Max $1 dimension is $2 x $3, but uploaded file is $4 x %5", language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
+			final String mess = translatorService.translate( "Max $1 dimension is $2 x $3, but uploaded file is $4 x %5"
+				, language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( maxDimension.getWidth() ), String.valueOf( maxDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
+			errors.rejectValue( fileControlName, mess );
+		}
+
+		if ( dimension.getWidth() < minDimension.getWidth() || dimension.getHeight() < minDimension.getHeight()) {
+			final String mess = translatorService.translate( "Min $1 dimension is $2 x $3, but uploaded file is $4 x %5"
+				, language, FormatUtils.getFormattedFieldName( "File" ), String.valueOf( minDimension.getWidth() ), String.valueOf( minDimension.getHeight() ), String.valueOf( dimension.getWidth() ), String.valueOf( dimension.getHeight() ) );
 			errors.rejectValue( fileControlName, mess );
 		}
 	}

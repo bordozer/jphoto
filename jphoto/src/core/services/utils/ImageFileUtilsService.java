@@ -26,5 +26,5 @@ public interface ImageFileUtilsService {
 
 	Dimension resizeImageToDimensionAndReturnResultDimension( File imageFile, Dimension toDimension ) throws IOException;
 
-	void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final String fileControlName, final Language language );
+	void validateUploadedFile( final Errors errors, final MultipartFile multipartFile, final long maxFileSizeKb, final Dimension maxDimension, final Dimension minDimension, final String fileControlName, final Language language );
 }

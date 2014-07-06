@@ -49,10 +49,14 @@ public class PhotoEditFileValidator implements Validator {
 		final ConfigurationKey fileMaxSizeKey = model.getPhotoAuthor().getUserStatus() == UserStatus.CANDIDATE ? ConfigurationKey.CANDIDATES_FILE_MAX_SIZE_KB : ConfigurationKey.MEMBERS_FILE_MAX_SIZE_KB;
 		final long maxFileSizeKb = configurationService.getLong( fileMaxSizeKey );
 
+		final int minFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MUN_WIDTH );
+		final int minFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MIN_HEIGHT );
+		final Dimension minDimension = new Dimension( minFileWidth, minFileHeight );
+
 		final int maxFileWidth = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MAX_WIDTH );
 		final int maxFileHeight = configurationService.getInt( ConfigurationKey.PHOTO_UPLOAD_MAX_HEIGHT );
 		final Dimension maxDimension = new Dimension( maxFileWidth, maxFileHeight );
 
-		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, "photoFile", EnvironmentContext.getLanguage() );
+		imageFileUtilsService.validateUploadedFile( errors, multipartFile, maxFileSizeKb, maxDimension, minDimension, "photoFile", EnvironmentContext.getLanguage() );
 	}
 }

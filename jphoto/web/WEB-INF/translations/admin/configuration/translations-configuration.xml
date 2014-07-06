@@ -135,6 +135,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Avatar min image width</nerd>
+		<ru><![CDATA[Аватар: минимальная ширина картинки]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Avatar min image height</nerd>
+		<ru><![CDATA[Аватар: минимальная высота картинки]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Avatar max image width</nerd>
 		<ru><![CDATA[Аватар: максимальнай ширина картинки]]></ru>
 	</translation>

@@ -47,8 +47,10 @@ public enum ConfigurationKey {
 	, PHOTO_UPLOAD_IGNORE_ANONYMOUS_GLOBAL_SETTINGS_IF_USER_RANK_IN_GENRE_MORE_THEN( 409, "10", false, ConfigurationDataType.INTEGER, ConfigurationUnit.RANK, ConfigurationTab.PHOTO_UPLOAD, "Ignore anonymous global settings if user's rank in genre more then" )
 
 	, PHOTO_UPLOAD_AVATAR_MAX_SIZE_KB( 406, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.AVATAR, "Avatar picture max file size" )
-	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 404, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
-	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 405, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
+	, PHOTO_UPLOAD_AVATAR_MIN_WIDTH( 404, "400", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image width" )
+	, PHOTO_UPLOAD_AVATAR_MIN_HEIGHT( 405, "400", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar min image height" )
+	, PHOTO_UPLOAD_AVATAR_MAX_WIDTH( 412, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image width" )
+	, PHOTO_UPLOAD_AVATAR_MAX_HEIGHT( 413, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.AVATAR, "Avatar max image height" )
 
 	, PHOTO_LIST_PHOTO_TOP_QTY( 505, "4", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: Photos qty in a TOP list" )
 	, PHOTO_LIST_PHOTOS_ON_PAGE( 503, "20", false, ConfigurationDataType.INTEGER, ConfigurationUnit.PHOTO, ConfigurationTab.PHOTOS, "Photo list: photos on page by default" )
