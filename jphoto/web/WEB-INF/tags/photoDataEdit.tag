@@ -104,16 +104,16 @@
 				<script type="text/javascript">
 
 					<c:if test="${photoEditDataModel.selectedGenreId > 0}">
-						renderNudeContent( ${photoEditDataModel.selectedGenreId} );
+						renderNudeContent( ${photoEditDataModel.photo.id}, ${photoEditDataModel.selectedGenreId} );
 					</c:if>
 
 					function refreshNudeContent() {
-						renderNudeContent( $( '#selectedGenreId' ).val() );
+						renderNudeContent( ${photoEditDataModel.photo.id}, $( '#selectedGenreId' ).val() );
 					}
 
-					function renderNudeContent( genreId ) {
+					function renderNudeContent( photoId, genreId ) {
 						require( ['modules/photo/upload/photo-upload-nude-content'], function ( nudeContent ) {
-								nudeContent( genreId, '${eco:baseUrl()}', $( '#nude-content-container' ) );
+								nudeContent( photoId, genreId, '${eco:baseUrl()}', $( '#nude-content-container' ) );
 						} );
 					}
 				</script>

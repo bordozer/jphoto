@@ -159,12 +159,12 @@
 
 	<translation>
 		<nerd>Photo edit: Category can not contains nude</nerd>
-		<ru><![CDATA[Работы в этой категории не могут содержать НЮ]]></ru>
+		<ru><![CDATA[НЕТ ( Работы в этой категории не могут содержать НЮ )]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo edit: Category always contains nude</nerd>
-		<ru><![CDATA[Работы в этой категории по-определению содержат НЮ]]></ru>
+		<ru><![CDATA[ДА ( Работы в этой категории по-определению содержат НЮ )]]></ru>
 	</translation>
 
 	<translation>

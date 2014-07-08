@@ -12,21 +12,22 @@ define( ["backbone", "jquery", "underscore"
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
-			var canContainsNude = modelJSON[ 'canContainsNude' ];
-			var containsNude = modelJSON[ 'containsNude' ];
+			var genreCanContainsNude = modelJSON[ 'genreCanContainsNude' ];
+			var genreObviouslyContainsNude = modelJSON[ 'genreObviouslyContainsNude' ];
+			var photoContainsNude = modelJSON[ 'photoContainsNude' ];
 
-			if ( ! canContainsNude ) {
+			if ( ! genreCanContainsNude ) {
 				this.$el.html( "<input type='hidden' name='containsNudeContent' value='false' >" );
 				this.$el.html( modelJSON[ 'noTranslated' ] );
 				return;
 			}
 
-			if ( containsNude ) {
+			if ( genreObviouslyContainsNude ) {
 				this.$el.html( modelJSON[ 'yesTranslated' ] );
 				return;
 			}
 
-			this.$el.html( "<input type='checkbox' name='containsNudeContent' value='true' " + ( containsNude ? "checked='checked'" : "" ) + " >" );
+			this.$el.html( "<input type='checkbox' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
 		}
 	});
 

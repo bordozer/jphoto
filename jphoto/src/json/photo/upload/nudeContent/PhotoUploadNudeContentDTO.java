@@ -2,26 +2,36 @@ package json.photo.upload.nudeContent;
 
 public class PhotoUploadNudeContentDTO {
 
-	private boolean canContainsNude;
-	private boolean containsNude;
+	private boolean genreCanContainsNude;
+	private boolean genreObviouslyContainsNude;
+
+	private boolean photoContainsNude;
 
 	private String yesTranslated;
 	private String noTranslated;
 
-	public boolean isCanContainsNude() {
-		return canContainsNude;
+	public boolean isGenreCanContainsNude() {
+		return genreCanContainsNude;
 	}
 
-	public void setCanContainsNude( final boolean canContainsNude ) {
-		this.canContainsNude = canContainsNude;
+	public void setGenreCanContainsNude( final boolean genreCanContainsNude ) {
+		this.genreCanContainsNude = genreCanContainsNude;
 	}
 
-	public boolean isContainsNude() {
-		return containsNude;
+	public boolean isGenreObviouslyContainsNude() {
+		return genreObviouslyContainsNude;
 	}
 
-	public void setContainsNude( final boolean containsNude ) {
-		this.containsNude = containsNude;
+	public void setGenreObviouslyContainsNude( final boolean genreObviouslyContainsNude ) {
+		this.genreObviouslyContainsNude = genreObviouslyContainsNude;
+	}
+
+	public boolean isPhotoContainsNude() {
+		return photoContainsNude;
+	}
+
+	public void setPhotoContainsNude( final boolean photoContainsNude ) {
+		this.photoContainsNude = photoContainsNude;
 	}
 
 	public String getYesTranslated() {
