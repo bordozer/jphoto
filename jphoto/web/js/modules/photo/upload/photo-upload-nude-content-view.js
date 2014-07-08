@@ -5,6 +5,10 @@ define( ["backbone", "jquery", "underscore"
 
 	var PhotoUploadNudeContentView = Backbone.View.extend( {
 
+		events: {
+			"change #containsNudeContent": "onNudeContentChange"
+		},
+
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
 		},
@@ -27,7 +31,35 @@ define( ["backbone", "jquery", "underscore"
 				return;
 			}
 
-			this.$el.html( "<input type='checkbox' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
+			this.$el.html( "<input type='checkbox' id='containsNudeContent' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
+		},
+
+		nudeContentChange: function( control ) {
+			this.bindModel( control );
+			this.save();
+		},
+
+		onNudeContentChange: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.nudeContentChange( $( evt.target ) );
+		},
+
+		bindModel: function( control ) {
+			this.model.set( { photoContainsNude: prop( 'checked' ) } );
+		},
+
+		save: function() {
+			this.model.save()
+				.done( _.bind( this.onSave, this ) )
+				.fail( _.bind( this.onSaveError, this ) );
+		},
+
+		onSave: function() {},
+
+		onSaveError: function() {
+			showUIMessage_Error( 'Server update error' );
 		}
 	});
 

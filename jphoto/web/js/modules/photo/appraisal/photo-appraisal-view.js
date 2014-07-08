@@ -29,7 +29,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		categoryChange: function( control ) {
-			console.log( 'category is changed: ', $( ':selected', control ).val(), ', class: ', $( control ).attr( 'class' ) );
+//			console.log( 'category is changed: ', $( ':selected', control ).val(), ', class: ', $( control ).attr( 'class' ) );
 		},
 
 		doAppraiseThePhoto: function() {
