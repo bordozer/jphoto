@@ -48,7 +48,7 @@
 
 					<div style="float: left;">
 						<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
-								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="23" cssClass="photo-genre"/>
+								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="27" cssClass="photo-genre"/>
 					</div>
 
 					<c:if test="${photoEditDataModel.new}">
@@ -73,6 +73,7 @@
 							<c:if test="${photoEditDataModel.new}">
 								showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
 							</c:if>
+							refreshNudeContent();
 						}
 
 					</script>
@@ -98,7 +99,24 @@
 			<table:tdtext text_t="Photo uploading: Contains nude content" labelFor="containsNudeContent1"/>
 
 			<table:tddata>
-				<form:checkbox path="containsNudeContent"/>
+				<div id="nude-content-container"></div>
+
+				<script type="text/javascript">
+
+					<c:if test="${photoEditDataModel.selectedGenreId > 0}">
+						renderNudeContent( ${photoEditDataModel.selectedGenreId} );
+					</c:if>
+
+					function refreshNudeContent() {
+						renderNudeContent( $( '#selectedGenreId' ).val() );
+					}
+
+					function renderNudeContent( genreId ) {
+						require( ['modules/photo/upload/photo-upload-nude-content'], function ( nudeContent ) {
+								nudeContent( genreId, '${eco:baseUrl()}', $( '#nude-content-container' ) );
+						} );
+					}
+				</script>
 			</table:tddata>
 		</table:tredit>
 
