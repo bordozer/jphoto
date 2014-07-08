@@ -38,8 +38,8 @@ public enum ConfigurationKey {
 
 	, PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS( 400, "image/jpeg", true, ConfigurationDataType.ARRAY_OF_STRINGS, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Allowed uploaded photo file formats separated by comma" )
 	, PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB( 401, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.PHOTO_UPLOAD, "Additional summary photos size for file uploading for each rank in photo category per week" )
-	, PHOTO_UPLOAD_MIN_WIDTH( 410, "800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
-	, PHOTO_UPLOAD_MIN_HEIGHT( 411, "600", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image height" )
+	, PHOTO_UPLOAD_MIN_WIDTH( 410, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
+	, PHOTO_UPLOAD_MIN_HEIGHT( 411, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image height" )
 	, PHOTO_UPLOAD_MAX_WIDTH( 402, "1800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image width" )
 	, PHOTO_UPLOAD_MAX_HEIGHT( 403, "1200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image height" )
 	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" ) // TODO: use an hours instead of days
