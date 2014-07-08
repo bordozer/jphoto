@@ -1,5 +1,8 @@
 package json.photo.upload.nudeContent;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class PhotoUploadNudeContentDTO {
 
 	private boolean genreCanContainsNude;

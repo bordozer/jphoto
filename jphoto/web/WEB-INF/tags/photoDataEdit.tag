@@ -39,6 +39,8 @@
 			</table:tddata>
 		</table:tredit>
 
+		<table:separator colspan="2" />
+
 		<table:tredit>
 
 			<table:tredit>
@@ -84,18 +86,6 @@
 		</table:tredit>
 
 		<table:tredit>
-			<table:tdtext text_t="Photo uploading: Keywords" labelFor="photoKeywords"/>
-
-			<table:tddata>
-				<form:input path="photoKeywords" size="50"/>
-				<br />
-				${eco:translate("Use comma ',' as separator")}
-			</table:tddata>
-		</table:tredit>
-
-		<table:separator colspan="2" />
-
-		<table:tredit>
 			<table:tdtext text_t="Photo uploading: Contains nude content" labelFor="containsNudeContent1"/>
 
 			<table:tddata>
@@ -117,6 +107,18 @@
 						} );
 					}
 				</script>
+			</table:tddata>
+		</table:tredit>
+
+		<table:separator colspan="2" />
+
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Keywords" labelFor="photoKeywords"/>
+
+			<table:tddata>
+				<form:input path="photoKeywords" size="50"/>
+				<br />
+				${eco:translate("Use comma ',' as separator")}
 			</table:tddata>
 		</table:tredit>
 

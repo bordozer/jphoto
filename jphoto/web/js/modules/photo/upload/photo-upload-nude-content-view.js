@@ -47,7 +47,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		bindModel: function( control ) {
-			this.model.set( { photoContainsNude: prop( 'checked' ) } );
+			this.model.set( { photoContainsNude: control.prop( 'checked' ) } );
 		},
 
 		save: function() {
