@@ -25,7 +25,7 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItemOperationAdmi
 	}
 
 	@Override
-	protected boolean isOperationConfigurationOn() {
+	protected boolean isSystemConfigurationKeyIsOn() {
 		return services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_DELETE_OTHER_PHOTOS );
 	}
 

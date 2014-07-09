@@ -36,12 +36,17 @@ public enum EntryMenuOperationType {
 	, ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE( 85, "menu_photo_nude_content_set.png" )
 	, ADMIN_MENU_ITEM_GENERATE_PREVIEW( 86, "generate_preview.png" )
 
+	, ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU( 91, "menu_sub_menu.png" )
+	, ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM( 92, "menu_sub_menu.png" ) // TODO: icon
+
 	;
 
-	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( ADMIN_SUB_MENU );
+	private static EnumSet<EntryMenuOperationType> SUB_MENUS = EnumSet.of( ADMIN_SUB_MENU, ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU );
 
 	private final int id;
 	private final String icon;
+
+	private Object customObject;
 
 	private EntryMenuOperationType( final int id, final String icon ) {
 		this.id = id;
@@ -68,5 +73,13 @@ public enum EntryMenuOperationType {
 
 	public boolean isSubMenu() {
 		return SUB_MENUS.contains( this );
+	}
+
+	public Object getCustomObject() {
+		return customObject;
+	}
+
+	public void setCustomObject( final Object customObject ) {
+		this.customObject = customObject;
 	}
 }

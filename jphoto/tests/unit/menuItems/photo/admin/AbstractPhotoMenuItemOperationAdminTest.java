@@ -98,7 +98,7 @@ public class AbstractPhotoMenuItemOperationAdminTest extends AbstractPhotoMenuIt
 		return new AbstractPhotoMenuItemOperationAdmin( testData.getPhoto(), parameters.getAccessor(), services ) {
 
 			@Override
-			protected boolean isOperationConfigurationOn() {
+			protected boolean isSystemConfigurationKeyIsOn() {
 				return parameters.isOperationConfigurationOn();
 			}
 

@@ -11,7 +11,7 @@ public abstract class AbstractPhotoMenuItemOperationAdmin extends AbstractPhotoM
 		super( photo, accessor, services );
 	}
 
-	protected abstract boolean isOperationConfigurationOn();
+	protected abstract boolean isSystemConfigurationKeyIsOn();
 
 	@Override
 	public boolean isAccessibleFor() {
@@ -20,6 +20,6 @@ public abstract class AbstractPhotoMenuItemOperationAdmin extends AbstractPhotoM
 			return false;
 		}
 
-		return isAccessorSuperAdmin() && isOperationConfigurationOn();
+		return isAccessorSuperAdmin() && isSystemConfigurationKeyIsOn();
 	}
 }

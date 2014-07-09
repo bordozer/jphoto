@@ -1,5 +1,6 @@
 package core.services.menu;
 
+import core.general.genre.Genre;
 import core.general.menus.*;
 import core.general.menus.comment.admin.CommentAdminSubMenuItem;
 import core.general.menus.comment.admin.CommentAdminSubMenuItemLockCommentAuthor;
@@ -103,6 +104,13 @@ public class MenuCreationFactory {
 					break;
 				case MENU_ITEM_DELETE:
 					menuItems.add( new PhotoMenuItemDelete( photo, accessor, services ) );
+					break;
+				case ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU:
+					menuItems.add( new PhotoAdminMovePhotoToGenreSubMenu( photo, accessor, services ) );
+					break;
+				case ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM:
+					final Genre genre = ( Genre ) entryMenuOperationType.getCustomObject();
+					menuItems.add( new PhotoAdminMovePhotoToGenreSubMenuItem( photo, accessor, genre, services ) );
 					break;
 				case PHOTO_COMPLAINT_COPYRIGHT:
 					menuItems.add( new PhotoComplaintCopyrightMenuItem( photo, accessor, services ) );

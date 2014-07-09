@@ -25,7 +25,7 @@ public class PhotoMenuItemEditAdmin extends AbstractPhotoMenuItemOperationAdmin 
 	}
 
 	@Override
-	protected boolean isOperationConfigurationOn() {
+	protected boolean isSystemConfigurationKeyIsOn() {
 		return services.getConfigurationService().getBoolean( ConfigurationKey.ADMIN_CAN_EDIT_OTHER_PHOTOS );
 	}
 
