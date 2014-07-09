@@ -33,7 +33,7 @@
 				</a>
 
 				<c:if test="${entryMenuItem.subMenu}">
-					<tags:entryMenuRenderer entryMenu="${entryMenuItem.entrySubMenu}"/>
+					<tags:DEL_entryMenuRenderer entryMenu="${entryMenuItem.entrySubMenu}"/>
 				</c:if>
 
 			</li>
