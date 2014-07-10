@@ -18,7 +18,7 @@
 	<c:set var="userPhotoAlbumsQtyMap" value="${userPhotoAlbumListModel.userPhotoAlbumsQtyMap}" />
 
 	<links:userPhotoAlbumNew userId="${user.id}">
-		<html:img id="addUserPhotoAlbum" src="add32.png" width="32" height="32" alt="${eco:translate('Create new photo album')}" />
+		<html:img id="addUserPhotoAlbum" src="add32.png" width="32" height="32" alt="${eco:translate('PhotoAlbum: Create new photo album')}" />
 	</links:userPhotoAlbumNew>
 
 	<table:table width="700">
@@ -29,9 +29,9 @@
 				<table:td />
 			</c:if>
 
-			<table:td width="200">${eco:translate( "Album name" )}</table:td>
-			<table:td>${eco:translate( "Description" )}</table:td>
-			<table:td>${eco:translate( "Photos" )}</table:td>
+			<table:td width="200">${eco:translate( "PhotoAlbum: Album name" )}</table:td>
+			<table:td>${eco:translate( "PhotoAlbum: Description" )}</table:td>
+			<table:td>${eco:translate( "PhotoAlbum: Photos" )}</table:td>
 		</jsp:attribute>
 
 		<jsp:body>
@@ -70,7 +70,7 @@
 
 	<script type="text/javascript">
 		function deleteUserPhotoAlbum() {
-			return confirm( "${eco:translate('Delete photo album?')}" );
+			return confirm( "${eco:translate('PhotoAlbum: Delete photo album?')}" );
 		}
 	</script>
 

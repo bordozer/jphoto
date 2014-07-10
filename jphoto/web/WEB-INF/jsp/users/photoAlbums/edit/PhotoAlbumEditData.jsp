@@ -25,23 +25,23 @@
 
 		<table:table width="700">
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Member parameters')}" />
+			<table:separatorInfo colspan="2" title="${eco:translate('PhotoAlbum: Album parameters')}" />
 
 			<table:tr>
-				<table:tdtext text_t="Member name" />
+				<table:tdtext text_t="PhotoAlbum: Album name" />
 				<table:tddata>
 					<form:input path="${albumNameControl}" />
 				</table:tddata>
 			</table:tr>
 
 			<table:tr>
-				<table:tdtext text_t="Description" />
+				<table:tdtext text_t="PhotoAlbum: Description" />
 				<table:tddata>
 					<form:textarea path="${albumDescriptionControl}" cols="60" rows="5"/>
 				</table:tddata>
 			</table:tr>
 
-			<table:trok text_t="Save" />
+			<table:trok text_t="PhotoAlbum: Save button text" />
 
 		</table:table>
 
