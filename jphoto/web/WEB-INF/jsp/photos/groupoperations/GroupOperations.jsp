@@ -104,9 +104,6 @@
 			<h3>${eco:translate('Group operation details')}:</h3>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_PHOTO_ALBUMS'}">
-				${eco:translate('Switch for all photos:')}
-				<br />
-				<br />
 				<c:forEach var="userPhotoAlbum" items="${photoGroupOperationModel.userPhotoAlbums}">
 					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userPhotoAlbum.id}" /> ${userPhotoAlbum.name}
 					<br />
@@ -114,9 +111,6 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
-				${eco:translate('Switch for all photos:')}
-				<br />
-				<br />
 				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
 					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userTeamMember.id}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />

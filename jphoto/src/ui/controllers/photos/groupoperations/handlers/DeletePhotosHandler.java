@@ -50,7 +50,7 @@ public class DeletePhotosHandler extends AbstractGroupOperationHandler {
 		final Map<String, PhotoGroupOperationEntryProperty> map = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		final String key = getDefaultEntryKey( photo );
-		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, getTranslatorService().translate( "Delete", getLanguage() ) );
+		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, getTranslatorService().translate( "Group deletion: To be deleted check box", getLanguage() ) );
 		entryProperty.setValue( true );
 
 		map.put( key, entryProperty );
