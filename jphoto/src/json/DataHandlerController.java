@@ -36,9 +36,10 @@ public class DataHandlerController {
 	@ResponseBody
 	public boolean setPhotoNudeContext( final @PathVariable( "photoId" ) int photoId, final @PathVariable( "isNudeContent" ) boolean isNudeContent ) {
 
-		assertSuperAdminAccess();
-
 		final Photo photo = photoService.load( photoId );
+
+		assertUserCanEditPhoto( photo );
+
 		photo.setContainsNudeContent( isNudeContent );
 
 		return photoService.save( photo );
@@ -57,18 +58,15 @@ public class DataHandlerController {
 	@ResponseBody
 	public boolean movePhotoToGenrePreview( final @PathVariable( "photoId" ) int photoId, final @PathVariable( "genreId" ) int genreId ) {
 
-		assertSuperAdminAccess();
+		final Photo photo = photoService.load( photoId );
 
-		final Genre genre = genreService.load( genreId );
-		if ( genre == null ) {
-			return false;
-		}
+		assertUserCanEditPhoto( photo );
 
 		if ( ! photoService.movePhotoToGenreWithNotification( photoId, genreId, EnvironmentContext.getCurrentUser() ) ) {
 			return false;
 		}
 
-		final Photo photo = photoService.load( photoId );
+		final Genre genre = genreService.load( genreId );
 		photo.setContainsNudeContent( genre.isContainsNudeContent() || ( photo.isContainsNudeContent() && genre.isCanContainNudeContent() ) );
 
 		return photoService.save( photo );
@@ -76,5 +74,9 @@ public class DataHandlerController {
 
 	private void assertSuperAdminAccess() {
 		securityService.assertSuperAdminAccess( EnvironmentContext.getCurrentUser() );
+	}
+
+	private void assertUserCanEditPhoto( final Photo photo ) {
+		securityService.assertUserCanEditPhoto( EnvironmentContext.getCurrentUser(), photo );
 	}
 }

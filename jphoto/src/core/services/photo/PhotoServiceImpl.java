@@ -468,6 +468,11 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		final Photo photo = load( photoId );
+
+		/*if ( ! securityService.userCanEditPhoto( userWhoIsMoving, photo ) ) {
+			return false;
+		}*/
+
 		photo.setGenreId( genreId );
 
 		if ( ! securityService.userOwnThePhoto( userWhoIsMoving, photoId ) ) { // TODO: assertSuperAdminAccess?
