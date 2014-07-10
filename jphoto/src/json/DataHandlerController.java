@@ -1,7 +1,9 @@
 package json;
 
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.services.conversion.PreviewGenerationService;
+import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class DataHandlerController {
 
 	@Autowired
 	private PhotoService photoService;
+
+	@Autowired
+	private GenreService genreService;
 
 	@Autowired
 	private PreviewGenerationService previewGenerationService;
@@ -37,5 +42,20 @@ public class DataHandlerController {
 	public boolean generatePreview( final @PathVariable( "photoId" ) int photoId ) throws IOException, InterruptedException {
 
 		return previewGenerationService.generatePreviewSync( photoId );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "photos/{photoId}/move-to-genre/{genreId}/", produces = "application/json" )
+	@ResponseBody
+	public boolean movePhotoToGenrePreview( final @PathVariable( "photoId" ) int photoId, final @PathVariable( "genreId" ) int genreId ) {
+
+		final Genre genre = genreService.load( genreId );
+		if ( genre == null ) {
+			return false;
+		}
+
+		final Photo photo = photoService.load( photoId );
+		photo.setGenreId( genre.getId() );
+
+		return photoService.save( photo );
 	}
 }

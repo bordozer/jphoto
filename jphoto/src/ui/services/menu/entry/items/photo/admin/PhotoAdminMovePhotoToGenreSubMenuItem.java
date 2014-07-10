@@ -32,19 +32,42 @@ public class PhotoAdminMovePhotoToGenreSubMenuItem extends AbstractPhotoMenuItem
 		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-//				return getTranslatorService().translateGenre( genre, getLanguage() );
-				return String.format( "#%d: %s", genre.getId(), genre.getName() );
+				final String translateGenre = getTranslatorService().translateGenre( genre, getLanguage() );
+
+				if ( isPhotoGenre() ) {
+					return getTranslatorService().translate( "PhotoMenuItem: $1 - current photo category", getLanguage(), translateGenre );
+				}
+
+				return translateGenre;
 			}
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "alert( 'Move to genre #%d menu item' );", genre.getId() );
+				if ( isPhotoGenre() ) {
+					return "return false;";
+				}
+
+				return String.format( "movePhotoToCategory( %d, %d, %s );", getId(), genre.getId(), RELOAD_PHOTO_CALLBACK );
 			}
 		};
 	}
 
 	@Override
-	public String getMenuCssClass() {
-		return MENU_ITEM_ADMIN_CSS_CLASS;
+	public boolean isAccessibleFor() {
+		return isAccessorSuperAdmin();
 	}
+
+	@Override
+	public String getMenuCssClass() {
+		return isPhotoGenre() ? MENU_ITEM_DISABLED_CSS_CLASS : MENU_ITEM_ADMIN_CSS_CLASS;
+	}
+
+	private boolean isPhotoGenre() {
+		return menuEntry.getGenreId() == genre.getId();
+	}
+
+	/*@Override
+	public String getCallbackMessage() {
+		return services.getTranslatorService().translate( "PhotoMenuItem: photo $1: has been moved to genre '$2'", getLanguage(), menuEntry.getNameEscaped(), getGenreNameTranslated( genre) );
+	}*/
 }

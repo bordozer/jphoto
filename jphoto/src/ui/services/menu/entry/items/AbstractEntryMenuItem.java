@@ -19,6 +19,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = StringUtils.EMPTY;
 
 	public static final String MENU_ITEM_CSS_CLASS = "context-menu-item";
+	public static final String MENU_ITEM_DISABLED_CSS_CLASS = "context-menu-item-disabled";
 	public static final String MENU_ITEM_WITH_SUBMENU_CSS_CLASS = "context-menu-item-with-submenu";
 	public static final String MENU_ITEM_ADMIN_CSS_CLASS = "context-menu-item-admin";
 

@@ -47,10 +47,14 @@ define( [ 'jquery' ], function ( $ ) {
 			executeAjaxRequest( url, callback );
 		},
 
+		movePhotoToCategory: function ( photoId, genreId, callback ) {
+			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/move-to-genre/" + genreId + "/";
+			executeAjaxRequest( url, callback );
+		},
+
 		generatePhotoPreview: function ( photoId, callback ) {
 			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/preview/";
 			executeAjaxRequest( url, callback );
 		}
-
 	}
 });

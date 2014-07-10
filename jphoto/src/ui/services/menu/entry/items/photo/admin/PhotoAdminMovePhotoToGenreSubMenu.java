@@ -23,9 +23,9 @@ public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem imp
 		final List<Genre> genres = services.getGenreService().loadAllSortedByNameForLanguage( getLanguage() );
 		for ( final Genre genre : genres ) {
 
-			if ( menuEntry.getGenreId() == genre.getId() ) {
+			/*if ( menuEntry.getGenreId() == genre.getId() ) {
 				continue;
-			}
+			}*/
 
 			final EntryMenuData entryMenuData = new EntryMenuData( EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM );
 			entryMenuData.setCustomObject( genre );

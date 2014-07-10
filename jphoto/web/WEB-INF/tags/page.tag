@@ -127,6 +127,12 @@
 				} );
 			}
 
+			function movePhotoToCategory( photoId, genreId, callback ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
+					adminFunctions.movePhotoToCategory( photoId, genreId, callback );
+				} );
+			}
+
 			function adminPhotoNudeContentRemove( photoId, callback ) {
 				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentRemove( photoId, callback );
@@ -138,7 +144,6 @@
 					adminFunctions.generatePhotoPreview( photoId, callback );
 				} );
 			}
-
 
 			function reloadTranslations( photoId, callback ) {
 				require( [ 'jquery', '/admin/js/translations-reload.js' ], function ( $, translations ) {

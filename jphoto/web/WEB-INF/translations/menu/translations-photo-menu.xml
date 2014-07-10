@@ -103,13 +103,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PhotoMenuItem: photo $1: has been moved to genre '$2'</nerd>
+		<ru><![CDATA[$1: Перемещена в категорию '$2']]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PhotoMenuItem: $1 - current photo category</nerd>
+		<ru><![CDATA[$1 - текущая]]></ru>
 	</translation>
 
 	<translation>

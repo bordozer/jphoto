@@ -57,7 +57,6 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				var li = $( "<li style='font-size: 10px;'></li>" );
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
-				console.log( menuItemElement.html() );
 				li.append( menuItemElement );
 
 				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
