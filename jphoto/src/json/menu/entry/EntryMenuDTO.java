@@ -1,4 +1,4 @@
-package json;
+package json.menu.entry;
 
 import java.util.List;
 

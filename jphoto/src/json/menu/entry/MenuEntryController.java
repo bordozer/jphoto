@@ -1,4 +1,4 @@
-package json;
+package json.menu.entry;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
