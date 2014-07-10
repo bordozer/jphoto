@@ -68,7 +68,7 @@ public class MenuEntryController {
 				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO( menuItemId );
 
 				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
-				menuItemDTO.setMenuCssClass( String.format( "%s %s-%d-%d", entryMenuItem.getMenuCssClass(), entryMenuItem.getMenuCssClass(), deep, counter ) );
+				menuItemDTO.setMenuCssClass( String.format( "%s-%d-%d", entryMenuItem.getMenuCssClass(), deep, counter ) );
 				menuItemDTO.setCallbackMessage( entryMenuItem.getCallbackMessage() );
 				menuItemDTO.setHasSumMenu( entryMenuItem.isSubMenu() );
 
