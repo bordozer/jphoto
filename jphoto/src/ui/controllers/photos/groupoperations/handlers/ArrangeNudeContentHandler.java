@@ -59,8 +59,7 @@ public class ArrangeNudeContentHandler extends AbstractGroupOperationHandler {
 
 		final Genre genre = getGenre( photo );
 		final String key = getDefaultEntryKey( photo );
-		final String entryName = String.format( "%s%s",  getTranslatorService().translate( "Nude content", getUser().getLanguage() ), ( ! genre.isCanContainNudeContent() ? "<br />&nbsp;&nbsp;Nude content is not allowed for the photo's category and can be only unset" : "" ) );
-//		final String entryName = getTranslatorService().translate( "Nude content" );
+		final String entryName = String.format( "%s%s",  getTranslatorService().translate( "Group operations: Nude content", getUser().getLanguage() ), ( ! genre.isCanContainNudeContent() ? "<br />&nbsp;&nbsp;Nude content is not allowed for the photo's category and can be only unset" : "" ) );
 		final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), ENTRY_ID, entryName );
 		entryProperty.setValue( photo.isContainsNudeContent() );
 

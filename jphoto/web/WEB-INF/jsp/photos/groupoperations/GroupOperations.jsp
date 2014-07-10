@@ -23,7 +23,7 @@
 <c:set var="selectedPhotosQty" value="${fn:length(photoGroupOperationEntries)}"/>
 
 <c:set var="customPercent" value="${eco:floor(100 / selectedPhotosQty) - 3}"/>
-<c:set var="width" value="${selectedPhotosQty < 5 ? customPercent : 18}"/>
+<c:set var="width" value="${selectedPhotosQty < 5 ? customPercent : 23}"/>
 
 <c:set var="photoGroupOperationType" value="${photoGroupOperationModel.photoGroupOperationType}"/>
 <c:set var="noGenreSelected" value="<%=PhotoGroupOperationValidator.NO_GENRE_SELECTED%>"/>

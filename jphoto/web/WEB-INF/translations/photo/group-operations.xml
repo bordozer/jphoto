@@ -48,6 +48,36 @@
 	</translation>
 
 	<translation>
+		<nerd>The photo has category '$1' and must have 'Nude content' option.</nerd>
+		<ru><![CDATA[Работа размещена в разделе '$1', все работы в котором по-определению имеют НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd><![CDATA[You can not set 'Nude content' option for photo with category '$1'.<br />Nude content is not allowed for the category.<br />If the photo does contains nude, then remove the photo to appropriate category.]]></nerd>
+		<ru><![CDATA[Вы не можете установить 'НЮ контент' для работ из раздела '$1'.<br />НЮ контент запрещен для этой категории. Если же работа содержит НЮ, то переместите ее сперва в соответствующую категорию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group operations: Nude content</nerd>
+		<ru><![CDATA[Ню контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
