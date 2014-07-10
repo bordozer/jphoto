@@ -29,7 +29,7 @@ import ui.controllers.users.login.UserLoginModel;
 import ui.elements.MenuItem;
 import ui.elements.PageModel;
 import ui.elements.PageTitleData;
-import ui.services.MenuService;
+import ui.services.menu.main.MenuService;
 import ui.services.page.icons.TitleIconLoader;
 import utils.StringUtilities;
 

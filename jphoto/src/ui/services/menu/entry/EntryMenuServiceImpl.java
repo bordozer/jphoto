@@ -1,4 +1,4 @@
-package ui.menu;
+package ui.services.menu.entry;
 
 import core.general.menus.*;
 import core.general.photo.Photo;

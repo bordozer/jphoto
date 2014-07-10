@@ -14,7 +14,7 @@ import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
-import ui.menu.EntryMenuService;
+import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;

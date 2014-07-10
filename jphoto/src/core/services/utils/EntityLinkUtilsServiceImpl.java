@@ -14,9 +14,8 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringEscapeUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.services.MenuService;
+import ui.services.menu.main.MenuService;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import utils.StringUtilities;
 

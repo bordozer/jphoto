@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.menu.main;
 
 import core.general.user.User;
 import ui.elements.MenuItem;

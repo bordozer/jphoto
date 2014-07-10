@@ -3,7 +3,7 @@ package json;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import core.general.menus.*;
-import ui.menu.EntryMenuService;
+import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;

@@ -1,4 +1,4 @@
-package ui.services;
+package ui.services.menu.main;
 
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;

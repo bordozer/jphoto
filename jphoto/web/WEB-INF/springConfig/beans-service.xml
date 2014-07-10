@@ -5,7 +5,7 @@
 	   default-autowire="byName">
 
 	<bean id="pageTemplateService" class="ui.services.page.PageTemplateServiceImpl"/>
-	<bean id="menuService" class="ui.services.MenuServiceImpl"/>
+	<bean id="menuService" class="ui.services.menu.main.MenuServiceImpl"/>
 
 	<bean id="services" class="core.services.system.ServicesImpl"/>
 
@@ -37,7 +37,7 @@
 	<bean id="groupOperationService" class="core.services.entry.GroupOperationServiceImpl"/>
 
 	<bean id="anonymousDaysService" class="core.services.entry.AnonymousDaysServiceImpl"/>
-	<bean id="entryMenuService" class="ui.menu.EntryMenuServiceImpl"/>
+	<bean id="entryMenuService" class="ui.services.menu.entry.EntryMenuServiceImpl"/>
 
 	<bean id="cacheService" class="core.services.system.CacheServiceImpl" />
 

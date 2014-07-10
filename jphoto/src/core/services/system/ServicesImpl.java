@@ -6,7 +6,7 @@ import core.services.photo.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
-import ui.menu.EntryMenuService;
+import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;

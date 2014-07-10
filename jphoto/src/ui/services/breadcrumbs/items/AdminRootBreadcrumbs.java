@@ -2,7 +2,7 @@ package ui.services.breadcrumbs.items;
 
 import core.services.system.Services;
 import core.services.translator.Language;
-import ui.services.MenuService;
+import ui.services.menu.main.MenuService;
 
 public class AdminRootBreadcrumbs extends AbstractBreadcrumb {
 
