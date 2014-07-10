@@ -2,7 +2,7 @@ package ui.controllers.comment.edit;
 
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.services.menu.EntryMenuService;
+import ui.menu.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;

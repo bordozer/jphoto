@@ -10,7 +10,7 @@ import core.general.user.User;
 import core.services.dao.PhotoCommentDao;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
-import core.services.menu.EntryMenuService;
+import ui.menu.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;

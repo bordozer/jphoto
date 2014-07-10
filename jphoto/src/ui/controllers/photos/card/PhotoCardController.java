@@ -10,7 +10,7 @@ import core.general.user.User;
 import core.log.LogHelper;
 import core.services.photo.PhotoPreviewService;
 import core.services.entry.GenreService;
-import core.services.menu.EntryMenuService;
+import ui.menu.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;

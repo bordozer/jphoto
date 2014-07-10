@@ -7,7 +7,7 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.dao.UserDaoImpl;
-import core.services.menu.EntryMenuService;
+import ui.menu.EntryMenuService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;

@@ -37,7 +37,7 @@
 	<bean id="groupOperationService" class="core.services.entry.GroupOperationServiceImpl"/>
 
 	<bean id="anonymousDaysService" class="core.services.entry.AnonymousDaysServiceImpl"/>
-	<bean id="entryMenuService" class="core.services.menu.EntryMenuServiceImpl"/>
+	<bean id="entryMenuService" class="ui.menu.EntryMenuServiceImpl"/>
 
 	<bean id="cacheService" class="core.services.system.CacheServiceImpl" />
 

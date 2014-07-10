@@ -1,4 +1,4 @@
-package core.services.menu;
+package ui.menu;
 
 import core.general.menus.EntryMenu;
 import core.general.menus.EntryMenuOperationType;
