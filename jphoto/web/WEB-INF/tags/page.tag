@@ -127,16 +127,18 @@
 				} );
 			}
 
-			function movePhotoToCategory( photoId, genreId, callback ) {
-				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
-					adminFunctions.movePhotoToCategory( photoId, genreId, callback );
-				} );
-			}
-
 			function adminPhotoNudeContentRemove( photoId, callback ) {
 				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentRemove( photoId, callback );
 				} );
+			}
+
+			function movePhotoToCategory( photoId, genreId, callback ) {
+				if ( confirm( '${eco:translate( 'Move photo to the selected category?' )}' ) ) {
+					require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
+						adminFunctions.movePhotoToCategory( photoId, genreId, callback );
+					} );
+				}
 			}
 
 			function generatePhotoPreview( photoId, callback ) {
