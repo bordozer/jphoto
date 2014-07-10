@@ -66,8 +66,8 @@ public class PhotoAdminMovePhotoToGenreSubMenuItem extends AbstractPhotoMenuItem
 		return menuEntry.getGenreId() == genre.getId();
 	}
 
-	/*@Override
+	@Override
 	public String getCallbackMessage() {
 		return services.getTranslatorService().translate( "PhotoMenuItem: photo $1: has been moved to genre '$2'", getLanguage(), menuEntry.getNameEscaped(), getGenreNameTranslated( genre) );
-	}*/
+	}
 }

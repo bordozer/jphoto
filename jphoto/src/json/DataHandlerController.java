@@ -56,6 +56,8 @@ public class DataHandlerController {
 		final Photo photo = photoService.load( photoId );
 		photo.setGenreId( genre.getId() );
 
+		photo.setContainsNudeContent( genre.isContainsNudeContent() || photo.isContainsNudeContent() );
+
 		return photoService.save( photo );
 	}
 }
