@@ -4,6 +4,7 @@ import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.interfaces.BaseEntityService;
 import ui.controllers.comment.edit.PhotoCommentInfo;
+import ui.services.menu.entry.items.EntryMenuData;
 import ui.services.menu.entry.items.EntryMenuOperationType;
 
 import java.util.Date;
@@ -43,11 +44,11 @@ public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
 
 	PhotoCommentInfo getPhotoCommentInfo( final PhotoComment photoComment, final User accessor );
 
-	PhotoCommentInfo getPhotoCommentInfo( final PhotoComment photoComment, final List<EntryMenuOperationType> allowedMenuItems, final User accessor );
+	PhotoCommentInfo getPhotoCommentInfo( final PhotoComment photoComment, final List<EntryMenuData> entryMenuDataList, final User accessor );
 
 	PhotoCommentInfo getPhotoCommentInfoWithChild( final PhotoComment photoComment, final User accessor );
 
-	PhotoCommentInfo getPhotoCommentInfoWithChild( final PhotoComment photoComment, final List<EntryMenuOperationType> allowedMenuItems, final User accessor );
+	PhotoCommentInfo getPhotoCommentInfoWithChild( final PhotoComment photoComment, final List<EntryMenuData> entryMenuDataList, final User accessor );
 
 	void deletePhotoComments( final int photoId );
 

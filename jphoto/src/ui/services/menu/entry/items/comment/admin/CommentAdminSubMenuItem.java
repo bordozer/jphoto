@@ -12,11 +12,11 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class CommentAdminSubMenuItem extends AbstractCommentMenuItem implements SubmenuAccesible {
 
-	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
+	private final List<EntryMenuData> entryMenuOperationTypes = newArrayList(
+		new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE )
+		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER )
 	);
 
 	public CommentAdminSubMenuItem( final PhotoComment photoComment, final User accessor, final Services services ) {

@@ -25,7 +25,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
-	public EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getUserMenu( final User user, final User accessor, final List<EntryMenuData> entryMenuOperationTypes ) {
 		return getGenericMenu( user, accessor, entryMenuOperationTypes, EntryMenuType.USER );
 	}
 
@@ -35,7 +35,7 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
-	public EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getPhotoMenu( final Photo photo, final User accessor, final List<EntryMenuData> entryMenuOperationTypes ) {
 		return getGenericMenu( photo, accessor, entryMenuOperationTypes, EntryMenuType.PHOTO );
 	}
 
@@ -45,66 +45,66 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
-	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes ) {
+	public EntryMenu getCommentMenu( final PhotoComment photoComment, final User accessor, final List<EntryMenuData> entryMenuOperationTypes ) {
 		return getGenericMenu( photoComment, accessor, entryMenuOperationTypes, EntryMenuType.COMMENT );
 	}
 
 	@Override
-	public List<EntryMenuOperationType> getPhotoFullMenuItems() {
-		final List<EntryMenuOperationType> menuItems = newArrayList();
+	public List<EntryMenuData> getPhotoFullMenuItems() {
+		final List<EntryMenuData> menuItems = newArrayList();
 
-		menuItems.add( EntryMenuOperationType.PHOTO_INFO );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.PHOTO_INFO ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.MENU_ITEM_EDIT ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.MENU_ITEM_DELETE ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.PHOTO_COMPLAINT_COPYRIGHT );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.PHOTO_COMPLAINT_COPYRIGHT ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS );
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_GENRE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_GENRE ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_TEAM_MEMBER );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_TEAM_MEMBER ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_ALBUM );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_ALBUM ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEND_PRIVATE_MESSAGE ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU ) );
 
 		return menuItems;
 	}
 
 	@Override
-	public List<EntryMenuOperationType> getCommentFullMenuItems() {
-		final List<EntryMenuOperationType> menuItems = newArrayList();
+	public List<EntryMenuData> getCommentFullMenuItems() {
+		final List<EntryMenuData> menuItems = newArrayList();
 
-		menuItems.add( EntryMenuOperationType.COMMENT_REPLY );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.COMMENT_REPLY ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_EDIT );
-		menuItems.add( EntryMenuOperationType.MENU_ITEM_DELETE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.MENU_ITEM_EDIT ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.MENU_ITEM_DELETE ) );
 
 //		menuItems.add( EntryMenuOperationType.SEPARATOR );
 
 //		menuItems.add( EntryMenuOperationType.BLACK_LIST_ADD );
 //		menuItems.add( EntryMenuOperationType.BLACK_LIST_REMOVE );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
 		menuItems.addAll( getCommentComplaintOnlyMenuItems() );
 
@@ -112,51 +112,51 @@ public class EntryMenuServiceImpl implements EntryMenuService {
 	}
 
 	@Override
-	public List<EntryMenuOperationType> getCommentComplaintOnlyMenuItems() {
-		final List<EntryMenuOperationType> menuItems = newArrayList();
+	public List<EntryMenuData> getCommentComplaintOnlyMenuItems() {
+		final List<EntryMenuData> menuItems = newArrayList();
 
-		menuItems.add( EntryMenuOperationType.COMMENT_COMPLAINT_SPAM );
-		menuItems.add( EntryMenuOperationType.COMMENT_COMPLAINT_SWORD_WORDS );
-		menuItems.add( EntryMenuOperationType.COMMENT_COMPLAINT_CUSTOM );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.COMMENT_COMPLAINT_SPAM ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.COMMENT_COMPLAINT_SWORD_WORDS ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.COMMENT_COMPLAINT_CUSTOM ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS );
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_GENRE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS ) );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS_BY_GENRE ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEND_PRIVATE_MESSAGE ) );
 
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
 
-		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
-
-		return menuItems;
-	}
-
-	private List<EntryMenuOperationType> getUserFullMenuItems() {
-		final List<EntryMenuOperationType> menuItems = newArrayList();
-
-		menuItems.add( EntryMenuOperationType.GO_TO_USER_PHOTOS );
-
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
-
-		menuItems.add( EntryMenuOperationType.SEND_PRIVATE_MESSAGE );
-
-		menuItems.add( EntryMenuOperationType.SEPARATOR );
-
-		menuItems.add( EntryMenuOperationType.ADMIN_SUB_MENU );
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU ) );
 
 		return menuItems;
 	}
 
-	private EntryMenu getGenericMenu( final PopupMenuAssignable menuEntry, final User accessor, final List<EntryMenuOperationType> entryMenuOperationTypes, final EntryMenuType menuType ) {
+	private List<EntryMenuData> getUserFullMenuItems() {
+		final List<EntryMenuData> menuItems = newArrayList();
+
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.GO_TO_USER_PHOTOS ) );
+
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
+
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEND_PRIVATE_MESSAGE ) );
+
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.SEPARATOR ) );
+
+		menuItems.add( new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU ) );
+
+		return menuItems;
+	}
+
+	private EntryMenu getGenericMenu( final PopupMenuAssignable menuEntry, final User accessor, final List<EntryMenuData> entryMenuDataList, final EntryMenuType menuType ) {
 
 		final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
-		for ( final EntryMenuOperationType entryMenuOperationType : entryMenuOperationTypes ) {
-			menuItems.addAll( MenuCreationFactory.getAllMenuEntries( menuEntry, accessor, entryMenuOperationType, menuType, services ) );
+		for ( final EntryMenuData entryMenuData : entryMenuDataList ) {
+			menuItems.addAll( MenuCreationFactory.getAllMenuEntries( menuEntry, accessor, entryMenuData, menuType, services ) );
 		}
 
 		CollectionUtils.filter( menuItems, new Predicate<AbstractEntryMenuItem<? extends PopupMenuAssignable>>() {

@@ -11,9 +11,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class UserAdminSubMenuItem extends AbstractUserMenuItem implements SubmenuAccesible {
 
-	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
-	);
+	private final List<EntryMenuData> entryMenuOperationTypes = newArrayList( new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER ) );
 
 	public UserAdminSubMenuItem( final User user, final User accessor, final Services services ) {
 		super( user, accessor, services );

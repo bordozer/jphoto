@@ -12,18 +12,18 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements SubmenuAccesible {
 
-	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
-		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_SET
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_MENU_ITEM_GENERATE_PREVIEW
-		, EntryMenuOperationType.SEPARATOR
-		, EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER
+	private final List<EntryMenuData> entryMenuOperationTypes = newArrayList(
+		new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE )
+		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU )
+		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_SET )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_REMOVE )
+		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_GENERATE_PREVIEW )
+		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER )
 	);
 
 	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {

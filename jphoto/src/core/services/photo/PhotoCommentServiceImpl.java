@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.menu.entry.items.EntryMenu;
-import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.EntryMenuData;
 import utils.NumberUtils;
 
 import java.util.Date;
@@ -231,7 +231,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	}
 
 	@Override
-	public PhotoCommentInfo getPhotoCommentInfo( final PhotoComment photoComment, final List<EntryMenuOperationType> allowedMenuItems, final User accessor ) {
+	public PhotoCommentInfo getPhotoCommentInfo( final PhotoComment photoComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {
 
 		final Photo photo = photoService.load( photoComment.getPhotoId() );
 
@@ -254,7 +254,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		photoCommentInfo.setCommentAuthorVotes( photoVotingService.getUserVotesForPhoto( photoComment.getCommentAuthor(), photo ) );
 
-		final EntryMenu entryMenu = entryMenuService.getCommentMenu( photoComment, accessor, allowedMenuItems );
+		final EntryMenu entryMenu = entryMenuService.getCommentMenu( photoComment, accessor, entryMenuDataList );
 		photoCommentInfo.setEntryMenu( entryMenu );
 
 		photoCommentInfo.setAuthorNameMustBeHidden( securityService.isCommentAuthorMustBeHiddenBecauseThisIsCommentOfPhotoAuthorAndPhotoIsWithinAnonymousPeriod( photoComment, accessor ) );
@@ -270,10 +270,10 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	}
 
 	@Override
-	public PhotoCommentInfo getPhotoCommentInfoWithChild( final PhotoComment photoComment, final List<EntryMenuOperationType> allowedMenuItems, final User accessor ) {
-		final PhotoCommentInfo photoCommentInfo = getPhotoCommentInfo( photoComment, allowedMenuItems, accessor );
+	public PhotoCommentInfo getPhotoCommentInfoWithChild( final PhotoComment photoComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {
+		final PhotoCommentInfo photoCommentInfo = getPhotoCommentInfo( photoComment, entryMenuDataList, accessor );
 
-		photoCommentInfo.setChildrenComments( loadChildrenPhotoComments( photoComment, allowedMenuItems, accessor ) );
+		photoCommentInfo.setChildrenComments( loadChildrenPhotoComments( photoComment, entryMenuDataList, accessor ) );
 
 		return photoCommentInfo;
 	}
@@ -298,13 +298,13 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		return photoCommentDao.exists( entry );
 	}
 
-	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuOperationType> entryMenuItems, final User accessor ) {
+	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {
 		final List<PhotoComment> children = loadAnswersOnComment( parentComment.getId() );
 		final List<PhotoCommentInfo> commentInfos = newArrayList();
 
 		for ( final PhotoComment child : children ) {
-			final PhotoCommentInfo photoCommentInfo = getPhotoCommentInfo( child, entryMenuItems, accessor );
-			photoCommentInfo.setChildrenComments( loadChildrenPhotoComments( child, entryMenuItems, accessor ) );
+			final PhotoCommentInfo photoCommentInfo = getPhotoCommentInfo( child, entryMenuDataList, accessor );
+			photoCommentInfo.setChildrenComments( loadChildrenPhotoComments( child, entryMenuDataList, accessor ) );
 
 			commentInfos.add( photoCommentInfo );
 		}

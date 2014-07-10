@@ -13,35 +13,24 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem implements SubmenuAccesible  {
 
-	private final List<EntryMenuOperationType> entryMenuOperationTypes;
+	private final List<EntryMenuData> entryMenuDatas;
 
 	public PhotoAdminMovePhotoToGenreSubMenu( final Photo photo, final User accessor, final Services services ) {
 		super( photo, accessor, services );
 
-		entryMenuOperationTypes = newArrayList();
+		entryMenuDatas = newArrayList();
 
-		final EntryMenuOperationType menuItem = EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM;
-
-		// TODO: fake test data
-		final Genre genre = new Genre();
-		genre.setId( 666 );
-		genre.setName( "Fake genre" );
-		menuItem.setCustomObject( genre );
-
-		entryMenuOperationTypes.add( menuItem );
-
-		// TODO: real scenario
-		/*final List<Genre> genres = services.getGenreService().loadAllSortedByNameForLanguage( getLanguage() );
+		final List<Genre> genres = services.getGenreService().loadAllSortedByNameForLanguage( getLanguage() );
 		for ( final Genre genre : genres ) {
 
 			if ( menuEntry.getGenreId() == genre.getId() ) {
 				continue;
 			}
 
-			final EntryMenuOperationType menuItem = EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM;
-			menuItem.setCustomObject( genre );
-			entryMenuOperationTypes.add( menuItem );
-		}*/
+			final EntryMenuData entryMenuData = new EntryMenuData( EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM );
+			entryMenuData.setCustomObject( genre );
+			entryMenuDatas.add( entryMenuData );
+		}
 	}
 
 	@Override
@@ -80,6 +69,6 @@ public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem imp
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {
-		return services.getEntryMenuService().getPhotoMenu( menuEntry, accessor, entryMenuOperationTypes ).getEntryMenuItems();
+		return services.getEntryMenuService().getPhotoMenu( menuEntry, accessor, entryMenuDatas ).getEntryMenuItems();
 	}
 }

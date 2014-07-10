@@ -44,15 +44,15 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class MenuCreationFactory {
 
-	static List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getAllMenuEntries( final PopupMenuAssignable menuEntry, final User accessor, final EntryMenuOperationType entryMenuOperationType, final EntryMenuType menuType, final Services services ) {
+	static List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getAllMenuEntries( final PopupMenuAssignable menuEntry, final User accessor, final EntryMenuData entryMenuData, final EntryMenuType menuType, final Services services ) {
 
 		switch ( menuType ) {
 			case USER:
-				return USER_MENU_CREATION_STRATEGY.getMenuEntries( ( User ) menuEntry, accessor, entryMenuOperationType, services );
+				return USER_MENU_CREATION_STRATEGY.getMenuEntries( ( User ) menuEntry, accessor, entryMenuData, services );
 			case PHOTO:
-				return PHOTO_MENU_CREATION_STRATEGY.getMenuEntries( ( Photo ) menuEntry, accessor, entryMenuOperationType, services );
+				return PHOTO_MENU_CREATION_STRATEGY.getMenuEntries( ( Photo ) menuEntry, accessor, entryMenuData, services );
 			case COMMENT:
-				return COMMENT_MENU_CREATION_STRATEGY.getMenuEntries( ( PhotoComment ) menuEntry, accessor, entryMenuOperationType, services );
+				return COMMENT_MENU_CREATION_STRATEGY.getMenuEntries( ( PhotoComment ) menuEntry, accessor, entryMenuData, services );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal popup menu entry type: %s", menuEntry ) );
@@ -60,11 +60,11 @@ public class MenuCreationFactory {
 
 	static final AbstractMenuCreationStrategy<User> USER_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<User>() {
 		@Override
-		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final User user, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final User user, final User accessor, final EntryMenuData entryMenuData, final Services services ) {
 
 			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
-			switch ( entryMenuOperationType ) {
+			switch ( entryMenuData.getEntryMenuItemType() ) {
 				case SEPARATOR:
 					menuItems.add( new MenuItemSeparator<>( user, accessor, services ) );
 					break;
@@ -81,7 +81,7 @@ public class MenuCreationFactory {
 					menuItems.add( new UserAdminSubMenuItemLockUser( user, accessor, services ) );
 					break;
 				default:
-					throw new IllegalArgumentException( String.format( "Illegal user EntryMenuOperationType: %s", entryMenuOperationType ) );
+					throw new IllegalArgumentException( String.format( "Illegal user EntryMenuOperationType: %s", entryMenuData ) );
 			}
 
 			return menuItems;
@@ -91,11 +91,11 @@ public class MenuCreationFactory {
 	static final AbstractMenuCreationStrategy<Photo> PHOTO_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<Photo>() {
 
 		@Override
-		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final Photo photo, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final Photo photo, final User accessor, final EntryMenuData entryMenuData, final Services services ) {
 
 			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
-			switch ( entryMenuOperationType ) {
+			switch ( entryMenuData.getEntryMenuItemType() ) {
 				case SEPARATOR:
 					menuItems.add( new MenuItemSeparator<>( photo, accessor, services ) );
 					break;
@@ -109,7 +109,7 @@ public class MenuCreationFactory {
 					menuItems.add( new PhotoAdminMovePhotoToGenreSubMenu( photo, accessor, services ) );
 					break;
 				case ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ITEM:
-					final Genre genre = ( Genre ) entryMenuOperationType.getCustomObject();
+					final Genre genre = ( Genre ) entryMenuData.getCustomObject();
 					menuItems.add( new PhotoAdminMovePhotoToGenreSubMenuItem( photo, accessor, genre, services ) );
 					break;
 				case PHOTO_COMPLAINT_COPYRIGHT:
@@ -161,7 +161,7 @@ public class MenuCreationFactory {
 					}
 					break;
 				default:
-					throw new IllegalArgumentException( String.format( "Illegal photo EntryMenuOperationType: %s", entryMenuOperationType ) );
+					throw new IllegalArgumentException( String.format( "Illegal photo EntryMenuOperationType: %s", entryMenuData ) );
 			}
 
 			return menuItems;
@@ -171,11 +171,11 @@ public class MenuCreationFactory {
 	static final AbstractMenuCreationStrategy<PhotoComment> COMMENT_MENU_CREATION_STRATEGY = new AbstractMenuCreationStrategy<PhotoComment>() {
 
 		@Override
-		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final PhotoComment photoComment, final User accessor, final EntryMenuOperationType entryMenuOperationType, final Services services ) {
+		List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> getMenuEntries( final PhotoComment photoComment, final User accessor, final EntryMenuData entryMenuData, final Services services ) {
 
 			final List<AbstractEntryMenuItem<? extends PopupMenuAssignable>> menuItems = newArrayList();
 
-			switch ( entryMenuOperationType ) {
+			switch ( entryMenuData.getEntryMenuItemType() ) {
 				case SEPARATOR:
 					menuItems.add( new MenuItemSeparator<>( photoComment, accessor, services ) );
 					break;
@@ -225,7 +225,7 @@ public class MenuCreationFactory {
 					menuItems.add( new CommentAdminSubMenuItemLockCommentAuthor( photoComment, accessor, services ) );
 					break;
 				default:
-					throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuOperationType ) );
+					throw new IllegalArgumentException( String.format( "Illegal comment EntryMenuOperationType: %s", entryMenuData ) );
 			}
 
 			return menuItems;
