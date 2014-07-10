@@ -63,23 +63,43 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Group deletion: All selected photos will be deleted FOREVER. It is the last chance to prevent this. Proceed?</nerd>
+		<ru><![CDATA[Все отмеченные работы будут удалены навсегда. Это - последний шанс сказать 'нет'. Продолжить и удалить работы?]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Group deletion: Also will be deleted:</nerd>
+		<ru><![CDATA[Так же будут удалены:]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Group deletion: Comments to photos</nerd>
+		<ru><![CDATA[Комментарии к работам]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Group deletion: Voting information</nerd>
+		<ru><![CDATA[Информация о голосовани за работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group deletion: Photos awards</nerd>
+		<ru><![CDATA[Информация о наградах, полученных работами]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group deletion: Photos will be deleted from all albums</nerd>
+		<ru><![CDATA[Работы будут исключены из всех альбомов]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group deletion: Operation can NOT be undone</nerd>
+		<ru><![CDATA[Данная операция НЕ может быть отменена]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group deletion: Selected photos will be deleted</nerd>
+		<ru><![CDATA[Отмеченные работы будут удалены]]></ru>
 	</translation>
 
 	<translation>

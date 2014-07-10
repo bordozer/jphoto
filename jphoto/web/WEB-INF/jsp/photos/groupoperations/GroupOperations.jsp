@@ -130,21 +130,21 @@
 			<c:if test="${photoGroupOperationType == 'DELETE_PHOTOS'}">
 				<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${singleEntryId}" initiallyChecked="true" />
 				<br/>
-				${eco:translate('Selected photos will be deleted')}
+				${eco:translate('Group deletion: Selected photos will be deleted')}
 				<br/>
 				<br/>
-				${eco:translate('Also will be deleted:')}
+				${eco:translate('Group deletion: Also will be deleted:')}
 				<ul>
-					<li>${eco:translate('Comments to photos')}</li>
-					<li>${eco:translate('Voting information')}</li>
-					<li>${eco:translate('Photos\' awards')}</li>
-					<li>${eco:translate('Photos will be deleted from all albums')}</li>
+					<li>${eco:translate('Group deletion: Comments to photos')}</li>
+					<li>${eco:translate('Group deletion: Voting information')}</li>
+					<li>${eco:translate('Group deletion: Photos awards')}</li>
+					<li>${eco:translate('Group deletion: Photos will be deleted from all albums')}</li>
 				</ul>
-				<b>${eco:translate('Operation can NOT be undone')}</b>
+				<b>${eco:translate('Group deletion: Operation can NOT be undone')}</b>
 
 				<script type="text/javascript">
 					function performGroupOperation() {
-						return confirm( "${eco:translate('All selected photos will be deleted FOREVER. It is the last chance to prevent this. Proceed?')}" );
+						return confirm( "${eco:translate('Group deletion: All selected photos will be deleted FOREVER. It is the last chance to prevent this. Proceed?')}" );
 					}
 				</script>
 			</c:if>
