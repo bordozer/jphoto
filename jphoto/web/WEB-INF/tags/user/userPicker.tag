@@ -121,14 +121,17 @@
 			} );
 		} );
 
-		function resetFoundMember() {
+	});
+
+	function resetFoundMember() {
+		require( [ 'jquery' ], function( $ ) {
 			$( '#${userIdControl}' ).val( 0 );
 			$( '#${searchControl}' ).val( '' );
 			$( '#foundMemberResetDiv' ).text( '' );
 			$( '#foundMemberCardLinkDiv' ).text( '' );
 			$( '#memberSearchAvatar' ).attr( 'src', '${imageNotFoundImg}' );
 			$( '#${searchControl}' ).focus();
-		}
-	});
+		})
+	}
 
 </script>

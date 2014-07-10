@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum UserTeamMemberType {
+import core.interfaces.IdentifiableNameable;
+
+public enum UserTeamMemberType implements IdentifiableNameable {
 
 	MODEL( 1, "UserTeamMemberType: Model", "model.png" )
 	, PHOTOGRAPH( 2, "UserTeamMemberType: Photograph", "photo.png" )

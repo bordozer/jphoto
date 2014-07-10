@@ -1,5 +1,8 @@
 <%@ page import="ui.controllers.users.team.edit.UserTeamMemberEditDataModel" %>
 <%@ page import="core.enums.UserTeamMemberType" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -18,7 +21,7 @@
 <c:set var="teamMemberUserIdControl" value="<%=UserTeamMemberEditDataModel.FORM_CONTROL_TEAM_MEMBER_USER_ID%>"/>
 <c:set var="teamMemberTypeIdControl" value="<%=UserTeamMemberEditDataModel.FORM_CONTROL_TEAM_MEMBER_TYPE_ID%>"/>
 
-<c:set var="userTeamMemberTypeValues" value="<%=UserTeamMemberType.values()%>"/>
+<c:set var="userTeamMemberTypeValues" value="<%=GenericTranslatableList.userTeamMemberTypeList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService()).getEntries()%>"/>
 
 <tags:page pageModel="${userTeamMemberEditDataModel.pageModel}">
 
@@ -26,19 +29,21 @@
 
 		<table:table width="500">
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Member parameters')}" />
+			<table:separatorInfo colspan="2" title="${eco:translate('UserTeamMemberEditData: Member parameters')}" />
 
 			<table:tr>
-				<table:tdtext text_t="Team member custom name" isMandatory="true" />
+				<table:tdtext text_t="UserTeamMemberEditData: Team member custom name" isMandatory="true" />
 				<table:tddata><form:input path="${teamMemberNameControl}" /></table:tddata>
 			</table:tr>
 
 			<table:tr>
-				<table:tdtext text_t="Model name" />
-				<table:tddata><form:radiobuttons path="${teamMemberTypeIdControl}" items="${userTeamMemberTypeValues}" itemValue="id" itemLabel="name" delimiter="<br />" htmlEscape="false"/></table:tddata>
+				<table:tdtext text_t="UserTeamMemberEditData: Model type" />
+				<table:tddata>
+					<form:radiobuttons path="${teamMemberTypeIdControl}" items="${userTeamMemberTypeValues}" itemValue="id" itemLabel="name" delimiter="<br />" htmlEscape="false"/>
+				</table:tddata>
 			</table:tr>
 
-			<table:separatorInfo colspan="2" title="${eco:translate('Member')}" />
+			<table:separatorInfo colspan="2" title="${eco:translate('UserTeamMemberEditData: Member')}" />
 
 			<table:tr>
 				<table:td colspan="2">
@@ -46,7 +51,7 @@
 				</table:td>
 			</table:tr>
 
-			<table:trok text_t="Save" />
+			<table:trok text_t="UserTeamMemberEditData: Save button text" />
 
 		</table:table>
 
