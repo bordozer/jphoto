@@ -262,8 +262,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1 is moved your photo '$2' to genre '$3'</nerd>
+		<ru><![CDATA[$1 переместил(а) вашу работу '$2' в раздел '$3']]></ru>
 	</translation>
 
 	<translation>
