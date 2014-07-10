@@ -41,23 +41,23 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			menu_a.click();
 		}
 
-		, renderItems: function( entryMenuItemDTOs, container ) {
+		, renderItems: function( entryMenuItemDTOs, ul_container ) {
 
 			var model = this.model;
-
 			for ( var i in entryMenuItemDTOs ) {
 
 				var entryMenuItemDTO = entryMenuItemDTOs[ i ];
 
-				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
+//				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
 
 				if ( entryMenuItemDTO[ 'menuTypeSeparator' ] ) {
-					container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
+					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
 					continue;
 				}
 
 				var li = $( "<li style='font-size: 10px;'></li>" );
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
+				console.log( menuItemElement.html() );
 				li.append( menuItemElement );
 
 				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
@@ -68,7 +68,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					li.append( ul );
 				}
 
-				container.append( li );
+				ul_container.append( li );
 
 			}
 		}

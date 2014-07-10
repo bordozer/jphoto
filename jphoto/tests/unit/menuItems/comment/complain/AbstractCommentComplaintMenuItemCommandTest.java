@@ -52,7 +52,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 
 		final AbstractEntryMenuItemCommand command = menuItem.getMenuItemCommand();
 
-		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
+		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS );
 
 		assertEquals( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, translated( expected ), command.getMenuText() );
 

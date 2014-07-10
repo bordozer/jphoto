@@ -64,7 +64,7 @@ public class PhotoAdminSubMenuItemLockUserTest extends AbstractPhotoMenuItemTest
 		final User accessor = NOT_LOGGED_USER; // does not matter
 		final PhotoAdminSubMenuItemLockPhotoAuthor menuItem = new PhotoAdminSubMenuItemLockPhotoAuthor( testData.getPhoto(), accessor, getServicesForTest( accessor ) );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_ADMIN_CSS_CLASS );
 	}
 
 	private ServicesImpl getServicesForTest( final User accessor ) {

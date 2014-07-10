@@ -71,7 +71,7 @@ public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem imp
 
 	@Override
 	public String getMenuCssClass() {
-		return MENU_ITEM_CSS_CLASS_ADMIN;
+		return MENU_ITEM_WITH_SUBMENU_CSS_CLASS;
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenreTest extends AbstractPhotoMenuIt
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, command.getMenuCommand(), String.format( "goToMemberPhotosByGenre( %d, %d );", photoAuthor.getId(), genre.getId() ) );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_DEFAULT );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS );
 	}
 
 	private ServicesImpl getServicesGoTo( final GoToParameters parameters ) {

@@ -15,6 +15,7 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 	private final List<EntryMenuOperationType> entryMenuOperationTypes = newArrayList(
 		EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_DELETE
+		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU
 		, EntryMenuOperationType.SEPARATOR
 		, EntryMenuOperationType.ADMIN_MENU_ITEM_NUDE_CONTENT_SET
@@ -61,7 +62,7 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 
 	@Override
 	public String getMenuCssClass() {
-		return MENU_ITEM_CSS_CLASS_ADMIN;
+		return MENU_ITEM_WITH_SUBMENU_CSS_CLASS;
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {

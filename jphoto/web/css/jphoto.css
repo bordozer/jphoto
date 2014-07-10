@@ -572,8 +572,17 @@ table.formtable {
 	font-weight: bold;;
 }
 
+.context-menu-item {
+}
+
+.context-menu-item-with-submenu {
+	font-weight: bold;
+	background: #e7e4d3;
+}
+
 .context-menu-item-admin {
 	font-weight: bold;
+	color: darkred;
 }
 
 .untranslated {

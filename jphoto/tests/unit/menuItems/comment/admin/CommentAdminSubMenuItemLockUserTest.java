@@ -70,6 +70,6 @@ public class CommentAdminSubMenuItemLockUserTest extends AbstractCommentMenuItem
 		final Services services = getServices( user );
 		final CommentAdminSubMenuItemLockCommentAuthor menuItem = new CommentAdminSubMenuItemLockCommentAuthor( testData.getComment(), user, services );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_CSS_CLASS_ADMIN );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, menuItem.getMenuCssClass(), AbstractEntryMenuItem.MENU_ITEM_ADMIN_CSS_CLASS );
 	}
 }

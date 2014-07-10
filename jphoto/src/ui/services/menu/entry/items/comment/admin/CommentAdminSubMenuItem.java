@@ -60,7 +60,7 @@ public class CommentAdminSubMenuItem extends AbstractCommentMenuItem implements 
 
 	@Override
 	public String getMenuCssClass() {
-		return MENU_ITEM_CSS_CLASS_ADMIN;
+		return MENU_ITEM_ADMIN_CSS_CLASS;
 	}
 
 	private List<? extends AbstractEntryMenuItem> getSubMenus() {

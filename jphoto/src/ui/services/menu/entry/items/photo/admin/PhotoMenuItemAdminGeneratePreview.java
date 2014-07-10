@@ -34,6 +34,11 @@ public class PhotoMenuItemAdminGeneratePreview extends AbstractPhotoMenuItem {
 	}
 
 	@Override
+	public String getMenuCssClass() {
+		return MENU_ITEM_ADMIN_CSS_CLASS;
+	}
+
+	@Override
 	public boolean isAccessibleFor() {
 		return isAccessorSuperAdmin();
 	}

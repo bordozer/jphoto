@@ -18,10 +18,11 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	public static final String ADMIN_MOVE_PHOTO_TO_GENRE_SUB_MENU_ENTRY_TEXT = "ADMIN submenu: Move to genre";
 	public static final String ADMIN_SUB_MENU_ENTRY_COMMAND = StringUtils.EMPTY;
 
-	public static final String MENU_ITEM_CSS_CLASS_ADMIN = "context-menu-item-admin";
-	public static final String MENU_ITEM_CSS_CLASS_DEFAULT = "context-menu-item";
+	public static final String MENU_ITEM_CSS_CLASS = "context-menu-item";
+	public static final String MENU_ITEM_WITH_SUBMENU_CSS_CLASS = "context-menu-item-with-submenu";
+	public static final String MENU_ITEM_ADMIN_CSS_CLASS = "context-menu-item-admin";
 
-	public static final int MENU_ITEM_HEIGHT = 29;
+	public static final int MENU_ITEM_HEIGHT = 30;
 	public static final int MENU_SEPARATOR_HEIGHT = 3;
 
 	protected final T menuEntry;
@@ -50,7 +51,7 @@ public abstract class AbstractEntryMenuItem<T extends PopupMenuAssignable> {
 	}
 
 	public String getMenuCssClass() {
-		return MENU_ITEM_CSS_CLASS_DEFAULT;
+		return MENU_ITEM_CSS_CLASS;
 	}
 
 	public String getCommandIcon() {
