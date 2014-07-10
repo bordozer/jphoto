@@ -113,6 +113,26 @@
 	</translation>
 
 	<translation>
+		<nerd>PhotoMenuItem: Nude content has been set after the photo moving to the new category</nerd>
+		<ru><![CDATA[Ню контент был установлен]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>PhotoMenuItem: Nude content has been removed after the photo moving to the new category</nerd>
+		<ru><![CDATA[Ню контент был убран]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

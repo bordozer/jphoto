@@ -46,6 +46,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage lineBreakHtml() {
+		messageParameters.add( new StringParameter( "<br />", services ) );
+		return this;
+	}
+
 	public TranslatableMessage translatableString( final String value ) {
 		messageParameters.add( new StringTranslatableParameter( value, services ) );
 		return this;

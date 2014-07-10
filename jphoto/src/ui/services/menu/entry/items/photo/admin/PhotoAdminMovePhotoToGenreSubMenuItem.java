@@ -4,6 +4,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.system.Services;
+import core.services.translator.message.TranslatableMessage;
 import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
 import ui.services.menu.entry.items.EntryMenuOperationType;
 
@@ -68,6 +69,26 @@ public class PhotoAdminMovePhotoToGenreSubMenuItem extends AbstractPhotoMenuItem
 
 	@Override
 	public String getCallbackMessage() {
-		return services.getTranslatorService().translate( "PhotoMenuItem: photo $1: has been moved to genre '$2'", getLanguage(), menuEntry.getNameEscaped(), getGenreNameTranslated( genre) );
+		final TranslatableMessage translatableMessage = new TranslatableMessage( "PhotoMenuItem: photo $1: has been moved to genre '$2'", services )
+			.addPhotoCardLinkParameter( menuEntry.getId() )
+			.addPhotosByGenreLinkParameter( genre )
+			;
+
+		if ( genre.isContainsNudeContent() && ! menuEntry.isContainsNudeContent() ) {
+			translatableMessage
+				.lineBreakHtml()
+				.translatableString( "PhotoMenuItem: Nude content has been set after the photo moving to the new category" )
+			;
+		}
+
+		if ( ! genre.isCanContainNudeContent() && menuEntry.isContainsNudeContent() ) {
+			translatableMessage
+				.lineBreakHtml()
+				.translatableString( "PhotoMenuItem: Nude content has been removed after the photo moving to the new category" )
+			;
+		}
+
+		return translatableMessage.build( getLanguage() );
+//		return services.getTranslatorService().translate( "PhotoMenuItem: photo $1: has been moved to genre '$2'", getLanguage(), menuEntry.getNameEscaped(), getGenreNameTranslated( genre) );
 	}
 }
