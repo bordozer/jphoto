@@ -2,7 +2,6 @@ package ui.controllers.comment.edit;
 
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+import ui.services.menu.entry.EntryMenuService;
 
 import javax.validation.Valid;
 

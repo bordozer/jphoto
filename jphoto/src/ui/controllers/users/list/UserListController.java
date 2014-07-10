@@ -7,7 +7,6 @@ import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.dao.UserDaoImpl;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
@@ -33,6 +32,7 @@ import sql.builder.*;
 import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.services.menu.entry.EntryMenuService;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;

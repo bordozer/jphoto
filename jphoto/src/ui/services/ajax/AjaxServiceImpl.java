@@ -7,8 +7,6 @@ import admin.controllers.jobs.edit.photosImport.strategies.photosight.Photosight
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
-import core.general.menus.EntryMenuType;
-import core.general.menus.comment.ComplaintReasonType;
 import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -34,7 +32,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.dtos.*;
-import utils.NumberUtils;
+import ui.services.menu.entry.items.EntryMenuType;
+import ui.services.menu.entry.items.comment.ComplaintReasonType;
 import utils.StringUtilities;
 import utils.UserUtils;
 

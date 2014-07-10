@@ -1,9 +1,9 @@
 package core.general.photo;
 
 import core.general.base.AbstractBaseEntity;
-import core.general.menus.PopupMenuAssignable;
 import core.general.user.User;
 import core.interfaces.Cacheable;
+import ui.services.menu.entry.items.PopupMenuAssignable;
 
 import java.util.Date;
 

@@ -1,10 +1,10 @@
 package core.services.photo;
 
-import core.general.menus.EntryMenuOperationType;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.interfaces.BaseEntityService;
 import ui.controllers.comment.edit.PhotoCommentInfo;
+import ui.services.menu.entry.items.EntryMenuOperationType;
 
 import java.util.Date;
 import java.util.List;

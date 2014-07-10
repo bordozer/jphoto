@@ -1,8 +1,8 @@
 package menuItems.photo.goTo;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.goTo.PhotoMenuItemGoToAuthorPhotoByAlbum;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.system.ServicesImpl;

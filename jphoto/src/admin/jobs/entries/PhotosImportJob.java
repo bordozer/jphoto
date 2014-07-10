@@ -22,7 +22,6 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.translator.TranslatorService;
-import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;

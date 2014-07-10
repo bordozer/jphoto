@@ -1,7 +1,7 @@
 package menuItems.photo.operation;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.operation.PhotoMenuItemDelete;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.operation.PhotoMenuItemDelete;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;

@@ -4,7 +4,7 @@
 <%@ page import="utils.UserUtils" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.springframework.mobile.device.DeviceType" %>
-<%@ page import="core.general.menus.EntryMenuType" %>
+<%@ page import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

@@ -1,8 +1,8 @@
 package menuItems.photo.operation;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.photo.operation.AbstractPhotoUserOperationsMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.photo.operation.AbstractPhotoUserOperationsMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import menuItems.photo.AbstractPhotoMenuItemTest_;

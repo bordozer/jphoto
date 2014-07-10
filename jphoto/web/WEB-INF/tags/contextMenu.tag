@@ -4,7 +4,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
 <%@ attribute name="entryId" required="false" type="java.lang.Integer" %>
-<%@ attribute name="entryMenuType" required="false" type="core.general.menus.EntryMenuType" %>
+<%@ attribute name="entryMenuType" required="false" type="ui.services.menu.entry.items.EntryMenuType" %>
 
 <c:set var="container" value="entry-context-menu-${entryMenuType.id}-${entryId}" />
 

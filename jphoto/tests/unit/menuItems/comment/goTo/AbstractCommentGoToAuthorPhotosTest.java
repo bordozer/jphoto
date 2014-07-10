@@ -1,9 +1,9 @@
 package menuItems.comment.goTo;
 
 import core.general.configuration.ConfigurationKey;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.goTo.AbstractCommentGoToAuthorPhotos;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.comment.goTo.AbstractCommentGoToAuthorPhotos;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.security.SecurityService;

@@ -1,6 +1,5 @@
 package ui.controllers.photos.list;
 
-import core.general.genre.Genre;
 import org.springframework.validation.BindingResult;
 import ui.controllers.photos.edit.GenreWrapper;
 

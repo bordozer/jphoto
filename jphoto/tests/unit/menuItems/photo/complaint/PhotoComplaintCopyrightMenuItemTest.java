@@ -1,9 +1,9 @@
 package menuItems.photo.complaint;
 
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.EntryMenuType;
-import core.general.menus.comment.ComplaintReasonType;
-import core.general.menus.photo.complain.PhotoComplaintCopyrightMenuItem;
+import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.EntryMenuType;
+import ui.services.menu.entry.items.comment.ComplaintReasonType;
+import ui.services.menu.entry.items.photo.complain.PhotoComplaintCopyrightMenuItem;
 import core.general.user.User;
 import menuItems.photo.AbstractPhotoMenuItemTest_;
 import org.junit.Test;

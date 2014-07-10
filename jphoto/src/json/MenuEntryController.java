@@ -2,8 +2,6 @@ package json;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
-import core.general.menus.*;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.user.UserService;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
+import ui.services.menu.entry.EntryMenuService;
+import ui.services.menu.entry.items.*;
 
 import java.util.List;
 

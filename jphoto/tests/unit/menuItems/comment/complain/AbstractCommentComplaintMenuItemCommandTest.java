@@ -1,14 +1,14 @@
 package menuItems.comment.complain;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.AbstractEntryMenuItemComplaintCommand;
-import core.general.menus.EntryMenuType;
-import core.general.menus.comment.ComplaintReasonType;
-import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
-import core.general.menus.comment.complain.CommentMenuItemComplaintCustom;
-import core.general.menus.comment.complain.CommentMenuItemComplaintSpam;
-import core.general.menus.comment.complain.CommentMenuItemComplaintSwordWords;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.AbstractEntryMenuItemComplaintCommand;
+import ui.services.menu.entry.items.EntryMenuType;
+import ui.services.menu.entry.items.comment.ComplaintReasonType;
+import ui.services.menu.entry.items.comment.complain.AbstractCommentComplaintMenuItem;
+import ui.services.menu.entry.items.comment.complain.CommentMenuItemComplaintCustom;
+import ui.services.menu.entry.items.comment.complain.CommentMenuItemComplaintSpam;
+import ui.services.menu.entry.items.comment.complain.CommentMenuItemComplaintSwordWords;
 import core.general.user.User;
 import core.services.system.Services;
 import menuItems.comment.AbstractCommentMenuItemTest_;

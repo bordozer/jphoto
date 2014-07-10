@@ -1,7 +1,7 @@
 package menuItems.comment.operations;
 
 import common.AbstractTestCase;
-import core.general.menus.comment.operations.CommentMenuItemReply;
+import ui.services.menu.entry.items.comment.operations.CommentMenuItemReply;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.services.security.SecurityService;

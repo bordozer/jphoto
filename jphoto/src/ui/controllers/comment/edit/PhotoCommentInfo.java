@@ -1,12 +1,12 @@
 package ui.controllers.comment.edit;
 
 import core.general.genre.Genre;
-import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.general.user.UserAvatar;
 import core.general.user.UserPhotoVote;
+import ui.services.menu.entry.items.EntryMenu;
 import ui.userRankIcons.UserRankIconContainer;
 
 import java.util.List;

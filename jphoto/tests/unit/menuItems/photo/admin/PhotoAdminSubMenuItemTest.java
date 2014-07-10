@@ -1,8 +1,8 @@
 package menuItems.photo.admin;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.admin.PhotoAdminSubMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.admin.PhotoAdminSubMenuItem;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.system.Services;

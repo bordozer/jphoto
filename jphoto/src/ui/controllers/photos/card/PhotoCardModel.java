@@ -3,13 +3,13 @@ package ui.controllers.photos.card;
 import core.general.base.AbstractGeneralModel;
 import core.general.genre.Genre;
 import core.general.img.Dimension;
-import core.general.menus.EntryMenu;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.photo.ValidationResult;
 import core.general.user.User;
 import core.general.user.UserPhotoVote;
 import ui.controllers.users.genreRank.VotingModel;
+import ui.services.menu.entry.items.EntryMenu;
 
 import java.util.Date;
 import java.util.List;

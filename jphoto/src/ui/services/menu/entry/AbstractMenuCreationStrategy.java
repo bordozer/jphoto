@@ -1,10 +1,10 @@
 package ui.services.menu.entry;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.PopupMenuAssignable;
 import core.general.user.User;
 import core.services.system.Services;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.PopupMenuAssignable;
 
 import java.util.List;
 

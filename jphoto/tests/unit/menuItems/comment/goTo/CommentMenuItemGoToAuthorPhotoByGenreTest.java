@@ -1,8 +1,8 @@
 package menuItems.comment.goTo;
 
 import common.AbstractTestCase;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.goTo.CommentMenuItemGoToAuthorPhotoByGenre;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.comment.goTo.CommentMenuItemGoToAuthorPhotoByGenre;
 import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;

@@ -1,7 +1,7 @@
 package menuItems.comment.goTo;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.goTo.CommentMenuItemGoToCommentAuthorPhotos;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.comment.goTo.CommentMenuItemGoToCommentAuthorPhotos;
 import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.system.ServicesImpl;

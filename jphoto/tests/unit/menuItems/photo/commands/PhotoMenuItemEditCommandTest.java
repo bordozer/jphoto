@@ -1,7 +1,7 @@
 package menuItems.photo.commands;
 
 import common.AbstractTestCase;
-import core.general.menus.photo.commands.PhotoMenuItemEditCommand;
+import ui.services.menu.entry.items.photo.commands.PhotoMenuItemEditCommand;
 import core.general.photo.Photo;
 import core.general.user.User;
 import org.junit.Before;

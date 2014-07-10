@@ -7,7 +7,7 @@ public class MyContextLoaderListener extends ContextLoaderListener {
 	public MyContextLoaderListener() {
 
 		System.out.println( "====================================================================================================================================" );
-		System.out.println( "                                                       SPRING CONTEXT START                                                         " );
+		System.out.println( "                                                    STARTING SPRING CONTEXT                                                         " );
 		System.out.println( "====================================================================================================================================" );
 	}
 }

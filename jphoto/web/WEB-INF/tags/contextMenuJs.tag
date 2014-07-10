@@ -1,8 +1,8 @@
 <%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="ui.services.ajax.AjaxService" %>
-<%@ tag import="core.general.menus.EntryMenuType" %>
-<%@ tag import="core.general.menus.comment.ComplaintReasonType" %>
+<%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
+<%@ tag import="ui.services.menu.entry.items.comment.ComplaintReasonType" %>
 <%@ tag import="core.services.utils.UrlUtilsService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

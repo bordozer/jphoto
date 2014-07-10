@@ -3,12 +3,12 @@ package core.general.user;
 import core.enums.PhotoActionAllowance;
 import core.enums.UserGender;
 import core.general.base.AbstractBaseEntity;
-import core.general.menus.PopupMenuAssignable;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
 import core.interfaces.Restrictable;
 import core.services.translator.Language;
+import ui.services.menu.entry.items.PopupMenuAssignable;
 import utils.StringUtilities;
 
 import java.util.Date;

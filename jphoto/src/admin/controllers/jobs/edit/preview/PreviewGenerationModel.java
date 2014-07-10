@@ -1,7 +1,6 @@
 package admin.controllers.jobs.edit.preview;
 
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
-import core.general.conversion.ConversionOptions;
 
 public class PreviewGenerationModel extends AbstractAdminJobModel {
 

@@ -2,9 +2,9 @@ package menuItems.photo.goTo;
 
 import common.AbstractTestCase;
 import core.general.genre.Genre;
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.goTo.PhotoMenuItemGoToAuthorPhotoByGenre;
 import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;

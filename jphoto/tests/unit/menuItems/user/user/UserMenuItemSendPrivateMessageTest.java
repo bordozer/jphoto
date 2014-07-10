@@ -1,7 +1,7 @@
 package menuItems.user.user;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.user.user.UserMenuItemSendPrivateMessage;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.user.user.UserMenuItemSendPrivateMessage;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;

@@ -15,10 +15,10 @@ import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
-import ui.services.menu.main.MenuService;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.StringBreadcrumb;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
+import ui.services.menu.main.MenuService;
 
 import java.util.Date;
 

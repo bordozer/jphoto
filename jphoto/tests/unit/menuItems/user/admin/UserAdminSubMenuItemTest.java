@@ -1,8 +1,8 @@
 package menuItems.user.admin;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.user.admin.UserAdminSubMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.user.admin.UserAdminSubMenuItem;
 import core.general.user.User;
 import core.services.system.Services;
 import menuItems.user.AbstractUserMenuItemTest_;

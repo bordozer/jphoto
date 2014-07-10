@@ -1,7 +1,7 @@
 package menuItems.comment.user;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.user.CommentMenuItemSendPrivateMessage;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.comment.user.CommentMenuItemSendPrivateMessage;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.entry.FavoritesService;

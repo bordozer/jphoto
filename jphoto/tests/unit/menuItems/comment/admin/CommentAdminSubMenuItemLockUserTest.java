@@ -1,8 +1,8 @@
 package menuItems.comment.admin;
 
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.admin.CommentAdminSubMenuItemLockCommentAuthor;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.comment.admin.CommentAdminSubMenuItemLockCommentAuthor;
 import core.general.user.User;
 import core.services.system.Services;
 import menuItems.comment.AbstractCommentMenuItemTest_;

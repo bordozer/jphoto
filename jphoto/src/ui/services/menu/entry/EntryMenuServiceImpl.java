@@ -1,6 +1,5 @@
 package ui.services.menu.entry;
 
-import core.general.menus.*;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -8,6 +7,7 @@ import core.services.system.Services;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.menu.entry.items.*;
 
 import java.util.Iterator;
 import java.util.List;

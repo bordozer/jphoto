@@ -4,7 +4,7 @@
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="core.services.system.ConfigurationService" %>
 <%@ tag import="core.general.configuration.ConfigurationKey" %>
-<%@ tag import="core.general.menus.EntryMenuType" %>
+<%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

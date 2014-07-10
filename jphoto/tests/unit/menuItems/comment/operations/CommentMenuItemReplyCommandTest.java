@@ -1,6 +1,6 @@
 package menuItems.comment.operations;
 
-import core.general.menus.comment.operations.CommentMenuItemReply;
+import ui.services.menu.entry.items.comment.operations.CommentMenuItemReply;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.entry.FavoritesService;

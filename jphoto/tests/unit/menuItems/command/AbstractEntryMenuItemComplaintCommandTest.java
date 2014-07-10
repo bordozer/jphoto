@@ -1,10 +1,10 @@
 package menuItems.command;
 
 import common.AbstractTestCase;
-import core.general.menus.AbstractEntryMenuItemComplaintCommand;
-import core.general.menus.EntryMenuType;
-import core.general.menus.PopupMenuAssignable;
-import core.general.menus.comment.ComplaintReasonType;
+import ui.services.menu.entry.items.AbstractEntryMenuItemComplaintCommand;
+import ui.services.menu.entry.items.EntryMenuType;
+import ui.services.menu.entry.items.PopupMenuAssignable;
+import ui.services.menu.entry.items.comment.ComplaintReasonType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;

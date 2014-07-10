@@ -2,15 +2,12 @@ package core.services.photo;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.menus.EntryMenu;
-import core.general.menus.EntryMenuOperationType;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.dao.PhotoCommentDao;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
@@ -20,6 +17,9 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.comment.edit.PhotoCommentInfo;
+import ui.services.menu.entry.EntryMenuService;
+import ui.services.menu.entry.items.EntryMenu;
+import ui.services.menu.entry.items.EntryMenuOperationType;
 import utils.NumberUtils;
 
 import java.util.Date;

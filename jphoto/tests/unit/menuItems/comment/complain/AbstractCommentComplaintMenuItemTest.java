@@ -1,9 +1,9 @@
 package menuItems.comment.complain;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.EntryMenuOperationType;
-import core.general.menus.comment.ComplaintReasonType;
-import core.general.menus.comment.complain.AbstractCommentComplaintMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.EntryMenuOperationType;
+import ui.services.menu.entry.items.comment.ComplaintReasonType;
+import ui.services.menu.entry.items.comment.complain.AbstractCommentComplaintMenuItem;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.system.Services;

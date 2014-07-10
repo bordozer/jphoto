@@ -2,7 +2,7 @@
 <%@ tag import="core.services.security.SecurityService" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
-<%@ tag import="core.general.menus.EntryMenuType" %>
+<%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ tag import="ui.controllers.users.edit.UserEditDataValidator" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,7 +14,7 @@
 <%@ taglib prefix="icons" tagdir="/WEB-INF/tags/icons" %>
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
-<%@ attribute name="entryMenu" required="true" type="core.general.menus.EntryMenu" %>
+<%@ attribute name="entryMenu" required="true" type="ui.services.menu.entry.items.EntryMenu" %>
 <%@ attribute name="lastUserActivityTime" required="true" type="java.util.Date" %>
 <%@ attribute name="isEditable" required="true" type="java.lang.Boolean" %>
 

@@ -1,9 +1,9 @@
 package menuItems;
 
 import common.AbstractTestCase;
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.EntryMenu;
-import core.general.menus.EntryMenuType;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.EntryMenu;
+import ui.services.menu.entry.items.EntryMenuType;
 import core.general.photo.PhotoComment;
 import org.junit.Test;
 

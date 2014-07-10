@@ -1,6 +1,6 @@
 package menuItems.photo.user;
 
-import core.general.menus.photo.user.PhotoMenuItemSendPrivateMessage;
+import ui.services.menu.entry.items.photo.user.PhotoMenuItemSendPrivateMessage;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;

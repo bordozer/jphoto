@@ -9,8 +9,6 @@ import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
-import core.services.translator.Language;
-import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

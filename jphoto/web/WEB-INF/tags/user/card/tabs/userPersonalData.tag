@@ -7,7 +7,7 @@
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
 <%@ attribute name="editingUserDataIsAccessible" required="true" type="java.lang.Boolean" %>
 <%@ attribute name="lastUserActivityTime" required="true" type="java.util.Date" %>
-<%@ attribute name="entryMenu" required="true" type="core.general.menus.EntryMenu" %>
+<%@ attribute name="entryMenu" required="true" type="ui.services.menu.entry.items.EntryMenu" %>
 
 <user:userCardAvatar user="${user}" userAvatar="${userCardModel.userAvatar}" isEditable="${editingUserDataIsAccessible}"/>
 

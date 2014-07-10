@@ -15,8 +15,8 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.services.menu.main.MenuService;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.menu.main.MenuService;
 import utils.StringUtilities;
 
 import java.util.Date;

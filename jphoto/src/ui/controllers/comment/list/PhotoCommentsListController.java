@@ -5,7 +5,6 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -23,6 +22,7 @@ import ui.context.EnvironmentContext;
 import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.services.PhotoUIService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
+import ui.services.menu.entry.EntryMenuService;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;

@@ -2,11 +2,9 @@ package core.services.system;
 
 import admin.services.jobs.*;
 import admin.services.services.SqlUtilsService;
-import core.services.photo.PhotoPreviewService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
-import ui.services.menu.entry.EntryMenuService;
 import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
@@ -17,6 +15,7 @@ import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.UserSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.UsersSecurityService;
 
 public class ServicesImpl implements Services {

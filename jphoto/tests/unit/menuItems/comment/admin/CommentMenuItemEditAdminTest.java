@@ -1,9 +1,9 @@
 package menuItems.comment.admin;
 
 import core.general.configuration.ConfigurationKey;
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.comment.admin.CommentMenuItemEditAdmin;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.comment.admin.CommentMenuItemEditAdmin;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
 import core.services.system.Services;

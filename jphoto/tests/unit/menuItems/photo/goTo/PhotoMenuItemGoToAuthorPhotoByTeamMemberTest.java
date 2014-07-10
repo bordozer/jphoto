@@ -1,9 +1,9 @@
 package menuItems.photo.goTo;
 
 import core.enums.UserTeamMemberType;
-import core.general.menus.AbstractEntryMenuItem;
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
+import ui.services.menu.entry.items.AbstractEntryMenuItem;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.goTo.PhotoMenuItemGoToAuthorPhotoByTeamMember;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;

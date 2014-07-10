@@ -1,7 +1,7 @@
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ attribute name="entryMenu" required="true" type="core.general.menus.EntryMenu" %>
+<%@ attribute name="entryMenu" required="true" type="ui.services.menu.entry.items.EntryMenu" %>
 
 <%@ taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>

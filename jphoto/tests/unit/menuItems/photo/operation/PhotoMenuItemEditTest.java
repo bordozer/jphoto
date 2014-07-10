@@ -1,6 +1,6 @@
 package menuItems.photo.operation;
 
-import core.general.menus.photo.operation.PhotoMenuItemEdit;
+import ui.services.menu.entry.items.photo.operation.PhotoMenuItemEdit;
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.SecurityService;

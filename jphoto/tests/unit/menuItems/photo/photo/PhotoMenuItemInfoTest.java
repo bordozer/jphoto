@@ -1,7 +1,7 @@
 package menuItems.photo.photo;
 
-import core.general.menus.AbstractEntryMenuItemCommand;
-import core.general.menus.photo.photo.PhotoMenuItemInfo;
+import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.photo.PhotoMenuItemInfo;
 import core.general.user.User;
 import core.services.system.ServicesImpl;
 import core.services.utils.UrlUtilsService;

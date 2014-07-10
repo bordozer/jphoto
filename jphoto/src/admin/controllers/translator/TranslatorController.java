@@ -1,6 +1,7 @@
 package admin.controllers.translator;
 
-import core.services.translator.*;
+import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -5,7 +5,6 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.services.translator.Language;
 
 import java.util.Date;
 

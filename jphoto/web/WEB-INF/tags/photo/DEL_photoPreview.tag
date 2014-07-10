@@ -7,7 +7,7 @@
 <%@ tag import="ui.controllers.photos.groupoperations.PhotoGroupOperationModel" %>
 <%@ tag import="core.services.utils.DateUtilsService" %>
 <%@ tag import="java.util.Date" %>
-<%@ tag import="core.general.menus.EntryMenuType" %>
+<%@ tag import="ui.services.menu.entry.items.EntryMenuType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
