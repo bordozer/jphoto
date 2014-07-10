@@ -21,10 +21,13 @@ import core.services.dao.PhotoDao;
 import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
+import core.services.entry.PrivateMessageService;
 import core.services.notification.NotificationService;
+import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
+import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
@@ -115,6 +118,12 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private PreviewGenerationService previewGenerationService;
+
+	@Autowired
+	private SecurityService securityService;
+
+	@Autowired
+	private PrivateMessageService privateMessageService;
 
 	private final LogHelper log = new LogHelper( PhotoServiceImpl.class );
 
@@ -448,6 +457,33 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		return photosIds;
+	}
+
+	@Override
+	public boolean movePhotoToGenreWithNotification( final int photoId, final int genreId, final User userWhoIsMoving ) {
+		final Genre genre = genreService.load( genreId );
+
+		if ( genre == null ) {
+			return false;
+		}
+
+		final Photo photo = load( photoId );
+		photo.setGenreId( genreId );
+
+		if ( ! securityService.userOwnThePhoto( userWhoIsMoving, photoId ) ) { // TODO: assertSuperAdminAccess?
+
+			final User photoAuthor = userService.load( photo.getUserId() );
+
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 is moved your photo '$2' to genre '$3'", services )
+				.addUserCardLinkParameter( userWhoIsMoving )
+				.addPhotoCardLinkParameter( photo )
+				.addPhotosByGenreLinkParameter( genre )
+				;
+
+			privateMessageService.sendSystemNotificationMessage( photoAuthor, translatableMessage.build( photoAuthor.getLanguage() ) );
+		}
+
+		return save( photo );
 	}
 
 	private PagingModel getPagingModel( final int photosQty ) {
