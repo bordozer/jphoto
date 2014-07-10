@@ -91,8 +91,7 @@ public class MoveToGenreHandler extends AbstractGroupOperationHandler {
 			return operationResults;
 		}
 
-		photo.setGenreId( moveToGenreId );
-		if ( !photoService.save( photo ) ) {
+		if ( !photoService.movePhotoToGenreWithNotification( photo.getId(), moveToGenreId, getUser() ) ) {
 			operationResults.add( GroupOperationResult.error( "Photo data saving error" ) );
 			return operationResults;
 		}
