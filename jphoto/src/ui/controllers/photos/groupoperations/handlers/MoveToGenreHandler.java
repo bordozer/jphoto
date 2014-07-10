@@ -33,9 +33,10 @@ public class MoveToGenreHandler extends AbstractGroupOperationHandler {
 		final List<GenreEntry> genreEntries = newArrayList();
 
 		for ( final Genre genre : genres ) {
-			final String genreName = String.format( "%s%s", genre.getName(), genre.isCanContainNudeContent() ? getTranslatorService().translate( "( nude )", getLanguage() ) : StringUtils.EMPTY );
+			final String genreNameTranslated = getTranslatorService().translateGenre( genre, getLanguage() );
+			final String genreNameShown = String.format( "%s%s", genreNameTranslated, genre.isCanContainNudeContent() ? getTranslatorService().translate( "Move to genre: ( nude flag )", getLanguage() ) : StringUtils.EMPTY );
 
-			genreEntries.add( new GenreEntry( genre.getId(), genreName ) );
+			genreEntries.add( new GenreEntry( genre.getId(), genreNameShown ) );
 		}
 
 		model.setGenreEntries( genreEntries );

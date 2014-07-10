@@ -101,7 +101,7 @@
 
 			</div>
 
-			<h3>${eco:translate('Group operation detailes: ')}</h3>
+			<h3>${eco:translate('Group operation details')}:</h3>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_PHOTO_ALBUMS'}">
 				${eco:translate('Switch for all photos:')}
@@ -161,7 +161,8 @@
 				<br />
 				${eco:translate("Note. If a photo has 'Nude contain' option, then it is possible to move it only in category that supports nude content. Moving of unsuitable for the selected category photos will be skipped.")}
 				<br />
-				${eco:translate('Select the genre to move to:')}
+				<br />
+				${eco:translate('Select the genre to move to')}:
 				<br />
 				<br />
 				<form:select path="moveToGenreId">

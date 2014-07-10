@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Move to genre: ( nude flag )</nerd>
+		<ru><![CDATA[ ( НЮ )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Click the button below to perform group operation</nerd>
+		<ru><![CDATA[Кликните на кнопке ниже, чтобы выполнить групповые операции]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group operation '$1'\n\nPerform?</nerd>
+		<ru><![CDATA[Над выделенными работами будет выполнена операци '$1'\n\nПродолжать?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Group operation details</nerd>
+		<ru><![CDATA[Параметры групповой операции]]></ru>
+	</translation>
+
+	<translation>
+		<nerd><![CDATA[Move<br />&nbsp;Current category: '$1'$2]]></nerd>
+		<ru><![CDATA[Переместить<br />&nbsp;Текущий раздел: '$1'$2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Note. If a photo has 'Nude contain' option, then it is possible to move it only in category that supports nude content. Moving of unsuitable for the selected category photos will be skipped.</nerd>
+		<ru><![CDATA[<b>Важное правило</b>. Если работа имеет 'НЮ контент', то ее можно переместить только в раздел, который поддерживают ню контент ( см наличие НЮ после имени раздела в списке ниже). Перемещение противоречащих этому правилу работ выполнено не будет.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Select the genre to move to</nerd>
+		<ru><![CDATA[Выберите категорию, куда перемещать]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Selected photos</nerd>
+		<ru><![CDATA[Выделенные работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd><![CDATA[<br />&nbsp;Nude content!]]></nerd>
+		<ru><![CDATA[<br />&nbsp;НЮ контент!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
