@@ -123,13 +123,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PhotoMenuItem: ( + NUDE content will be set after photo moving to the new genre)</nerd>
+		<ru><![CDATA[ ( + добавить поментку 'НЮ контент' )]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>PhotoMenuItem: ( - NUDE content will be removed after photo moving to the new genre)</nerd>
+		<ru><![CDATA[( + убрать пометку 'НЮ контент' )]]></ru>
 	</translation>
 
 	<translation>

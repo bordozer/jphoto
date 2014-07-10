@@ -33,13 +33,23 @@ public class PhotoAdminMovePhotoToGenreSubMenuItem extends AbstractPhotoMenuItem
 		return new AbstractEntryMenuItemCommand<Photo>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				final String translateGenre = getTranslatorService().translateGenre( genre, getLanguage() );
+				final String genreToMoveName = getTranslatorService().translateGenre( genre, getLanguage() );
 
 				if ( isPhotoGenre() ) {
-					return getTranslatorService().translate( "PhotoMenuItem: $1 - current photo category", getLanguage(), translateGenre );
+					return getTranslatorService().translate( "PhotoMenuItem: $1 - current photo category", getLanguage(), genreToMoveName );
 				}
 
-				return translateGenre;
+				final TranslatableMessage translatableMessage = new TranslatableMessage( "", services ).string( genreToMoveName );
+
+				if ( genre.isContainsNudeContent() && ! menuEntry.isContainsNudeContent() ) {
+					translatableMessage.worldSeparator().translatableString( "PhotoMenuItem: ( + NUDE content will be set after photo moving to the new genre)" );
+				}
+
+				if ( ! genre.isCanContainNudeContent() && menuEntry.isContainsNudeContent() ) {
+					translatableMessage.worldSeparator().translatableString( "PhotoMenuItem: ( - NUDE content will be removed after photo moving to the new genre)" );
+				}
+
+				return translatableMessage.build( getLanguage() );
 			}
 
 			@Override
