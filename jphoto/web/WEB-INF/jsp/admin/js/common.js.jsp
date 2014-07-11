@@ -38,22 +38,22 @@ define( [ 'jquery' ], function ( $ ) {
 		},
 
 		adminPhotoNudeContentSet: function ( photoId, callback ) {
-			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/true/";
+			var url = "${eco:baseUrl()}/rest/photos/" + photoId + "/nude-content/true/";
 			executeAjaxRequest( url, callback );
 		},
 
 		adminPhotoNudeContentRemove: function ( photoId, callback ) {
-			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/nude-content/false/";
+			var url = "${eco:baseUrl()}/rest/photos/" + photoId + "/nude-content/false/";
 			executeAjaxRequest( url, callback );
 		},
 
 		movePhotoToCategory: function ( photoId, genreId, callback ) {
-			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/move-to-genre/" + genreId + "/";
+			var url = "${eco:baseUrl()}/rest/photos/" + photoId + "/move-to-genre/" + genreId + "/";
 			executeAjaxRequest( url, callback );
 		},
 
 		generatePhotoPreview: function ( photoId, callback ) {
-			var url = "${eco:baseUrl()}/json/photos/" + photoId + "/preview/";
+			var url = "${eco:baseUrl()}/rest/photos/" + photoId + "/preview/";
 			executeAjaxRequest( url, callback );
 		}
 	}

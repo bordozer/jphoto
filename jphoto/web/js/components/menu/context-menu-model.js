@@ -5,7 +5,7 @@ define( ["backbone"], function ( Backbone ) {
 		idAttribute: 'entryId'
 
 		, initialize:function ( options ) {
-			this.url = options.baseUrl + "/json/menu/" + options.entryMenuTypeId + "/" + options.entryId + "/";
+			this.url = options.baseUrl + "/rest/menu/" + options.entryMenuTypeId + "/" + options.entryId + "/";
 		}
 
 	});

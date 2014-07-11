@@ -5,7 +5,7 @@ define( ["backbone"], function ( Backbone ) {
 		idAttribute: 'userId',
 
 		initialize:function ( options ) {
-			this.url = options.baseUrl + "/json/users/" + options.userId + "/photo-upload-allowance/" + options.genreId + "/?filesize=" + options.fileSize;
+			this.url = options.baseUrl + "/rest/users/" + options.userId + "/photo-upload-allowance/" + options.genreId + "/?filesize=" + options.fileSize;
 		}
 
 		, refresh: function() {

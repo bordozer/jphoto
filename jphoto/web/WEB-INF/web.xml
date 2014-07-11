@@ -201,18 +201,18 @@
 
 	<!-- JSON -->
 	<servlet>
-		<servlet-name>JSON</servlet-name>
+		<servlet-name>REST</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/springConfig/servlet/JSON-servlet.xml</param-value>
+			<param-value>/WEB-INF/springConfig/servlet/REST-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>JSON</servlet-name>
-		<url-pattern>/json/*</url-pattern>
+		<servlet-name>REST</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	<!-- / JSON -->
 

@@ -6,7 +6,7 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import json.photo.upload.description.AbstractPhotoUploadAllowance;
+import rest.photo.upload.description.AbstractPhotoUploadAllowance;
 import org.springframework.web.multipart.MultipartFile;
 import ui.services.validation.DataRequirementService;
 import ui.translatable.GenericTranslatableList;
