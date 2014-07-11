@@ -1,7 +1,7 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/photo/upload/user-team/templates/user-team-template.html"
-		, "text!modules/photo/upload/user-team/templates/user-team-member-template.html"
-		, "text!modules/photo/upload/user-team/templates/user-team-member-edit-template.html"
+		, "text!modules/photo/upload/userTeam/templates/user-team-template.html"
+		, "text!modules/photo/upload/userTeam/templates/user-team-member-template.html"
+		, "text!modules/photo/upload/userTeam/templates/user-team-member-edit-template.html"
 		], function ( Backbone, $, _, userTeamTemplate, userTeamMemberTemplate, userTeamMemberEditTemplate ) {
 
 	'use strict';
@@ -15,6 +15,8 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.listenTo( this.model, "request", this.renderUserTeam );
 			this.listenTo( this.model, "add", this.renderUserTeamMember );
+
+			this.model.fetch( {cache: false} );
 		},
 
 		renderUserTeam:function () {

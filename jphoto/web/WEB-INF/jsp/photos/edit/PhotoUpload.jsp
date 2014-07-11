@@ -45,10 +45,12 @@
 		</table:table>
 
 	</form:form>
-tratata
+
+	<div class="user-team" style="float: left; border: 1px solid red; padding: 5px;"></div>
+
 	<script type="text/javascript">
-		require( ['modules/photo/upload/user-team/user-team'], function ( userTeam ) {
-			userTeam( ${photoEditDataModel.photoAuthor.id}, "${baseUrl}", $( '#user-lock-history' ) );
+		require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
+			userTeam( ${photoEditDataModel.photoAuthor.id}, "${baseUrl}", $( '.user-team' ) );
 		} );
 	</script>
 

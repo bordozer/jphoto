@@ -3,7 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var UserTeamModel = Backbone.Collection.extend( {
 
 		initialize:function ( options ) {
-			this.url = options.baseUrl + "/json/user/" + options.userId + "/team/";
+			this.url = options.baseUrl + "/json/users/" + options.userId + "/team/";
 		},
 
 		refresh: function() {
@@ -13,7 +13,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	var UserTeamMemberModel = Backbone.Model.extend( {
 
-		idAttribute: 'userId'
+		idAttribute: 'userTeamMemberId'
 
 	});
 
