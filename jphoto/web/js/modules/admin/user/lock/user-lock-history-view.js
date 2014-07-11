@@ -18,13 +18,11 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderHistory:function () {
-			console.log( 'renderHistory' );
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.historyTemplate( modelJSON ) );
 		},
 
 		renderHistoryEntry:function ( historyEntry ) {
-			console.log( 'renderHistoryEntry' );
 			var modelJSON = historyEntry.toJSON();
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
 		}

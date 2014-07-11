@@ -10,6 +10,7 @@
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
 
 <c:set var="photoUploadAllowance" value="${photoEditDataModel.photoUploadAllowance}" />
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <tags:page pageModel="${photoEditDataModel.pageModel}">
 
@@ -44,6 +45,12 @@
 		</table:table>
 
 	</form:form>
+tratata
+	<script type="text/javascript">
+		require( ['modules/photo/upload/user-team/user-team'], function ( userTeam ) {
+			userTeam( ${photoEditDataModel.photoAuthor.id}, "${baseUrl}", $( '#user-lock-history' ) );
+		} );
+	</script>
 
 	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
 
