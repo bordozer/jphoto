@@ -46,7 +46,7 @@
 
 	</form:form>
 
-	<div class="user-team" style="float: left; border: 1px solid red; padding: 5px;"></div>
+	<div class="user-team" style="float: left; border: 1px solid #9ea2a5; padding: 5px;"></div>
 
 	<script type="text/javascript">
 		require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {

@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class UserTeamMemberDTO {
 
 	private int userTeamMemberId;
+	private String userTeamMemberName;
 
 	public UserTeamMemberDTO() {
 	}
@@ -20,5 +21,13 @@ public class UserTeamMemberDTO {
 
 	public void setUserTeamMemberId( final int userTeamMemberId ) {
 		this.userTeamMemberId = userTeamMemberId;
+	}
+
+	public String getUserTeamMemberName() {
+		return userTeamMemberName;
+	}
+
+	public void setUserTeamMemberName( final String userTeamMemberName ) {
+		this.userTeamMemberName = userTeamMemberName;
 	}
 }
