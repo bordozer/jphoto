@@ -582,6 +582,7 @@ table.formtable {
 .context-menu-item-with-submenu {
 	font-weight: bold;
 	background: #e7e4d3;
+	border-radius: 5px 5px 5px 5px;
 }
 
 .context-menu-item-admin {
