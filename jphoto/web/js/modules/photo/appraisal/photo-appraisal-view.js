@@ -72,7 +72,7 @@ define( ["backbone", "jquery", "underscore"
 			showUIMessage_Notification( this.model.get( 'appraisalSaveCallbackMessage' ) );
 		},
 
-		onAppraisalSaveError: function( response ){
+		onAppraisalSaveError: function( response ) {
 
 			if ( response.status === 422 || response.status === 500 ) {
 				var errorText = '';
