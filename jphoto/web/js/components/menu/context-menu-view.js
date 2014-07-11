@@ -51,7 +51,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 //				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
 
 				if ( entryMenuItemDTO[ 'menuTypeSeparator' ] ) {
-					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 95%;'></div></li>" );
+					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 99%;'></div></li>" );
 					continue;
 				}
 
