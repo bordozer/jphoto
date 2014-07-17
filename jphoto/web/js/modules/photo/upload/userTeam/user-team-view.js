@@ -72,6 +72,7 @@ define( ["backbone", "jquery", "underscore"
 		events: {
 			"click .user-team-member-info": "onToggleInfo",
 			"click .user-team-member-edit": "onToggleEditor",
+			"change .user-team-member-checkbox": "onToggleCheckbox",
 
 			"keydown .user-team-member-data": "onDataChange",
 
@@ -103,6 +104,10 @@ define( ["backbone", "jquery", "underscore"
 		toggleEditor: function() {
 			var isOpenEditor = this.model.get( 'openEditor' );
 			this.model.set( { openEditor: isOpenEditor == undefined || ! isOpenEditor } );
+		},
+
+		toggleCheckbox: function() {
+			this.model.set( { checked: ! this.model.get( 'checked' ) }, { silent: true } );
 		},
 
 		doSaveData: function() {
@@ -147,6 +152,13 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.toggleEditor();
+		},
+
+		onToggleCheckbox: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.toggleCheckbox();
 		},
 
 		onDataChange: function() {

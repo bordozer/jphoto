@@ -6,7 +6,14 @@ define( ["backbone"], function ( Backbone ) {
 
 		openInfo: false,
 		openEditor: false,
-		hasUnsavedChanged: false
+		hasUnsavedChanged: false,
+//		checked: false,
+
+		defaults: function() {
+			return {
+				checked: false
+			};
+		}
 	});
 
 	var EntriesModel = Backbone.Collection.extend( {
@@ -18,7 +25,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		refresh: function() {
-			this.fetch( { reset: true, cache: false } );
+//			this.fetch( { reset: true, cache: false } );
 		}
 	});
 
