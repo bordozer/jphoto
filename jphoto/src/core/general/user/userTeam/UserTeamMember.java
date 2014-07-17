@@ -53,7 +53,11 @@ public class UserTeamMember extends AbstractBaseEntity implements Nameable, Favo
 			return name;
 		}
 
-		return teamMemberUser.getName();
+		if ( teamMemberUser != null ) {
+			return teamMemberUser.getName();
+		}
+
+		return "ERROR";
 	}
 
 	public String getTeamMemberNameWithType() {

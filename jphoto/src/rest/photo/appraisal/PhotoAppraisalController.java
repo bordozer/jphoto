@@ -93,40 +93,6 @@ public class PhotoAppraisalController {
 		return photoAppraisalDTO;
 	}
 
-	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
-
-		final Date currentTime = dateUtilsService.getCurrentTime();
-
-		final List<AppraisalSection> sections = appraisalDTO.getPhotoAppraisalForm().getAppraisalSections();
-
-		final List<AppraisalSection> notZeroSections = newArrayList( sections );
-		CollectionUtils.filter( notZeroSections, new Predicate<AppraisalSection>() {
-			@Override
-			public boolean evaluate( final AppraisalSection appraisalSection ) {
-				return appraisalSection.getSelectedCategoryId() != 0 && appraisalSection.getSelectedMark() != 0;
-			}
-		} );
-
-		final List<UserPhotoVote> appraisals = newArrayList();
-		for ( final AppraisalSection section : notZeroSections ) {
-
-			final int selectedCategoryId = section.getSelectedCategoryId();
-
-			final PhotoVotingCategory category = votingCategoryService.load( selectedCategoryId );
-
-			final UserPhotoVote photoVote = new UserPhotoVote( user, photo, category );
-			photoVote.setMark( section.getSelectedMark() );
-			photoVote.setMaxAccessibleMark( userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() ) );
-			photoVote.setVotingTime( currentTime );
-
-			appraisals.add( photoVote );
-		}
-
-		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, currentTime, appraisals ) ) {
-			throw new SaveToDBRuntimeException( translatorService.translate( "", getLanguage() ) );
-		}
-	}
-
 	@ExceptionHandler( ValidationException.class )
 	@ResponseStatus( HttpStatus.UNPROCESSABLE_ENTITY )
 	@ResponseBody
@@ -193,6 +159,40 @@ public class PhotoAppraisalController {
 		photoAppraisalDTO.setPhotoAppraisalForm( getPhotoAppraisalForm( photo, user ) );
 
 		return photoAppraisalDTO;
+	}
+
+	private void savePhotoAppraisal( final User user, final Photo photo, final PhotoAppraisalDTO appraisalDTO ) {
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
+
+		final List<AppraisalSection> sections = appraisalDTO.getPhotoAppraisalForm().getAppraisalSections();
+
+		final List<AppraisalSection> notZeroSections = newArrayList( sections );
+		CollectionUtils.filter( notZeroSections, new Predicate<AppraisalSection>() {
+			@Override
+			public boolean evaluate( final AppraisalSection appraisalSection ) {
+				return appraisalSection.getSelectedCategoryId() != 0 && appraisalSection.getSelectedMark() != 0;
+			}
+		} );
+
+		final List<UserPhotoVote> appraisals = newArrayList();
+		for ( final AppraisalSection section : notZeroSections ) {
+
+			final int selectedCategoryId = section.getSelectedCategoryId();
+
+			final PhotoVotingCategory category = votingCategoryService.load( selectedCategoryId );
+
+			final UserPhotoVote photoVote = new UserPhotoVote( user, photo, category );
+			photoVote.setMark( section.getSelectedMark() );
+			photoVote.setMaxAccessibleMark( userRankService.getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() ) );
+			photoVote.setVotingTime( currentTime );
+
+			appraisals.add( photoVote );
+		}
+
+		if ( ! photoVotingService.saveUserPhotoVoting( user, photo, currentTime, appraisals ) ) {
+			throw new SaveToDBRuntimeException( translatorService.translate( "", getLanguage() ) );
+		}
 	}
 
 	private String formatMark( final int mark ) {

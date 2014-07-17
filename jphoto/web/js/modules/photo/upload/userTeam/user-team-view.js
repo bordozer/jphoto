@@ -56,7 +56,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		createNewUserTeamMember: function() {
-			console.log( 'create new user team member' );
+//			console.log( 'create new user team member' );
 		}
 	});
 
@@ -76,10 +76,10 @@ define( ["backbone", "jquery", "underscore"
 			"click .user-team-member-info": "onToggleInfo",
 			"click .user-team-member-edit": "onToggleEditor",
 
-			"change .user-team-member-data": "onDataChange",
+			"keydown .user-team-member-data": "onDataChange",
 
 			"click .user-team-member-close": "onCloseEditorWithoutChanges",
-			"click .user-team-member-save": "onSaveData",
+			"click .user-team-member-save": "onSaveDataClick",
 			"click .user-team-member-discard-changes": "onDiscardEditedData"
 		},
 
@@ -108,8 +108,33 @@ define( ["backbone", "jquery", "underscore"
 			this.model.set( { openEditor: isOpenEditor == undefined || ! isOpenEditor } );
 		},
 
-		saveData: function() {
-			console.log( 'saving...' );
+		doSaveData: function() {
+			this.bindModel();
+			this.save();
+		},
+
+		bindModel: function(  ) {
+			this.model.set( { userTeamMemberName: this.$( '.user-team-member-name' ).val() } );
+		},
+
+		save: function() {
+			this.model.save()
+				.done( _.bind( this.onSaveSuccess, this ) )
+				.fail( _.bind( this.onSaveError, this ) );
+		},
+
+		onSaveSuccess: function() {
+			showUIMessage_Notification( "Team member changes has been saved successfully" );
+		},
+
+		onSaveError: function() {
+			var errorText = '';
+			var errors = response[ 'responseJSON' ];
+			for ( var i = 0; i < errors.length; i++ ) {
+				errorText += errors[ i ][ 'defaultMessage' ] + "\n";
+			}
+
+			showUIMessage_Error( errorText );
 		},
 
 		onToggleInfo: function( evt ) {
@@ -128,19 +153,18 @@ define( ["backbone", "jquery", "underscore"
 
 		onDataChange: function() {
 			this.model.set( { hasUnsavedChanged: true } );
-			console.log( 'onDataChange' );
 
-			$( '.user-team-member-close', this.$el ).hide();
+			this.$( '.user-team-member-close' ).hide();
 
-			$( '.user-team-member-save', this.$el ).show();
-			$( '.user-team-member-discard-changes', this.$el ).show();
+			this.$( '.user-team-member-save' ).show();
+			this.$( '.user-team-member-discard-changes' ).show();
 		},
 
 		onCloseEditorWithoutChanges: function() {
 			this.closeEditor();
 		},
 
-		onSaveData: function( evt ) {
+		onSaveDataClick: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
@@ -148,7 +172,7 @@ define( ["backbone", "jquery", "underscore"
 				return;
 			}
 
-			this.saveData();
+			this.doSaveData();
 
 			this.closeEditor();
 		},
