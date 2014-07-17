@@ -1,45 +1,48 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/photo/upload/userTeam/templates/user-team-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-footer-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-list-entry-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-member-info-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-member-edit-template.html"
-		], function ( Backbone, $, _, userTeamHeaderTemplate, userTeamFooterTemplate, userTeamListEntryTemplate, userTeamMemberInfoTemplate, userTeamMemberEditorTemplate ) {
+		, "text!modules/photo/upload/userTeam/templates/header-template.html"
+		, "text!modules/photo/upload/userTeam/templates/footer-template.html"
+		, "text!modules/photo/upload/userTeam/templates/list-entry-template.html"
+		, "text!modules/photo/upload/userTeam/templates/entry-info-template.html"
+		, "text!modules/photo/upload/userTeam/templates/entry-edit-template.html"
+		], function ( Backbone, $, _, headerTemplate, footerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
 	var UserTeamView = Backbone.View.extend( {
 
-		userTeamHeaderTemplate:_.template( userTeamHeaderTemplate ),
-		userTeamFooterTemplate:_.template( userTeamFooterTemplate ),
+		userTeamHeaderTemplate:_.template( headerTemplate ),
+		userTeamFooterTemplate:_.template( footerTemplate ),
 
 		events: {
 			"click .create-new-user-team-member-link": "onCreateNewTeamMember"
 		},
 
 		initialize: function() {
-			this.listenTo( this.model, "request", this.renderUserTeamHeader );
-			this.listenTo( this.model, "add", this.renderUserTeamListEntry );
-			this.listenTo( this.model, "sync", this.renderUserTeamFooter );
+			this.listenTo( this.model, "request", this.renderHeader );
+			this.listenTo( this.model, "add", this.renderEntry );
+			this.listenTo( this.model, "sync", this.renderFooter );
 
 			this.listenTo( this.model, "event:create_new_user_team_member", this.createNewUserTeamMember );
 
 			this.model.fetch( {cache: false} );
 		},
 
-		renderUserTeamHeader:function () {
+		renderHeader:function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.userTeamHeaderTemplate( modelJSON ) );
 		},
 
-		renderUserTeamListEntry:function ( teamMember ) {
+		renderEntry:function ( teamMember ) {
+
 			var userTeamListEntryView = new UserTeamListEntryView( {
 				model: teamMember
 			} );
+			userTeamListEntryView.on( "event:render_list", this.model.refresh, this.model );
+
 			this.$el.append( userTeamListEntryView.render().$el );
 		},
 
-		renderUserTeamFooter:function () {
+		renderFooter:function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.append( this.userTeamFooterTemplate( modelJSON ) );
 		},
@@ -63,9 +66,9 @@ define( ["backbone", "jquery", "underscore"
 
 	var UserTeamListEntryView = Backbone.View.extend({
 
-		userTeamListEntryTemplate:_.template( userTeamListEntryTemplate ),
-		userTeamMemberViewTemplate:_.template( userTeamMemberInfoTemplate ),
-		userTeamMemberEditorTemplate:_.template( userTeamMemberEditorTemplate ),
+		userTeamListEntryTemplate:_.template( listEntryTemplate ),
+		userTeamMemberViewTemplate:_.template( entryInfoTemplate ),
+		userTeamMemberEditorTemplate:_.template( entryEditorTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
@@ -125,6 +128,7 @@ define( ["backbone", "jquery", "underscore"
 
 		onSaveSuccess: function() {
 			showUIMessage_Notification( "Team member changes has been saved successfully" );
+			this.trigger( "event:render_list" );
 		},
 
 		onSaveError: function() {
@@ -173,8 +177,6 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			this.doSaveData();
-
-			this.closeEditor();
 		},
 
 		onDiscardEditedData: function( evt ) {

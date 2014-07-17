@@ -3,6 +3,7 @@ define( ["backbone"], function ( Backbone ) {
 	var UserTeamMemberModel = Backbone.Model.extend( {
 
 		idAttribute: 'userTeamMemberId',
+
 		openInfo: false,
 		openEditor: false,
 		hasUnsavedChanged: false
@@ -17,7 +18,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		refresh: function() {
-			this.fetch( { reset: true } );
+			this.fetch( { reset: true, cache: false } );
 		}
 	});
 
