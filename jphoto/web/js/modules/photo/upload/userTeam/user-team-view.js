@@ -76,8 +76,8 @@ define( ["backbone", "jquery", "underscore"
 			"click .user-team-member-info": "onToggleUserTeamMemberInfo",
 			"click .user-team-member-edit": "onToggleUserTeamMemberEdit",
 
-			"click .save-user-team-member": "onSaveUserTeamMember",
-			"click .cancel-user-team-member-changes": "onCancelUserTeamMember"
+			"click .user-team-member-save": "onSaveUserTeamMember",
+			"click .user-team-member-discard-changes": "onCancelUserTeamMember"
 		},
 
 		render:function () {
@@ -127,9 +127,11 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( confirm( 'Save changes?' ) ) {
-				this.saveUserTeamMember();
+			if ( ! confirm( 'Save changes?' ) ) {
+				return;
 			}
+
+			this.saveUserTeamMember();
 
 			this.model.set( { openInfo: false, openEditor: false } );
 
@@ -139,6 +141,10 @@ define( ["backbone", "jquery", "underscore"
 		onCancelUserTeamMember: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
+
+			if ( ! confirm( 'Discard changes?' ) ) {
+				return;
+			}
 
 			this.model.set( { openInfo: false, openEditor: false } );
 

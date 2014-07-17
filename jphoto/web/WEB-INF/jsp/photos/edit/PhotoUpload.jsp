@@ -46,12 +46,19 @@
 
 	</form:form>
 
-	<div class="user-team" style="float: left; border: 1px solid #9ea2a5; padding: 5px;"></div>
+	<div class="user-team block-border" style="float: left; padding: 5px; width: 300px;"></div>
 
 	<style type="text/css">
 		.user-team-member-details {
 			display: inline-block;
-			padding-left: 20px;
+			width: 280px;
+			padding-left: 23px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			border-left: none;
+			border-right: none;
+			line-height: 20px;
+			/*border-bottom: none;*/
 		}
 	</style>
 
