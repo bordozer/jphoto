@@ -14,15 +14,13 @@ define( ["backbone", "jquery", "underscore"
 		userTeamFooterTemplate:_.template( footerTemplate ),
 
 		events: {
-			"click .create-new-user-team-member-link": "onCreateNewTeamMember"
+			"click .create-new-user-team-member-link": "onCreateNewEntry"
 		},
 
 		initialize: function() {
 			this.listenTo( this.model, "request", this.renderHeader );
 			this.listenTo( this.model, "add", this.renderEntry );
 			this.listenTo( this.model, "sync", this.renderFooter );
-
-			this.listenTo( this.model, "event:create_new_user_team_member", this.createNewUserTeamMember );
 
 			this.model.fetch( {cache: false} );
 		},
@@ -47,19 +45,15 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.append( this.userTeamFooterTemplate( modelJSON ) );
 		},
 
-		createNewTeamMember: function() {
-			this.model.trigger( 'event:create_new_user_team_member' );
+		createEntry: function() {
+			// TODO: create new
 		},
 
-		onCreateNewTeamMember: function( evt ) {
+		onCreateNewEntry: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			this.createNewTeamMember();
-		},
-
-		createNewUserTeamMember: function() {
-//			console.log( 'create new user team member' );
+			this.createEntry();
 		}
 	});
 
