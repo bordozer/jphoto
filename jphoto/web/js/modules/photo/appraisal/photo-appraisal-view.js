@@ -153,7 +153,7 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-			this.listenTo( this.model, "onPhotoAppraisal", this.render );
+//			this.listenTo( this.model, "onPhotoAppraisal", this.render );
 		},
 
 		render:function () {

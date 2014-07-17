@@ -4,7 +4,7 @@ define( ["backbone"], function ( Backbone ) {
 
 //		idAttribute: 'photoId',
 
-		initialize:function ( options ) {
+		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/photos/" + options.photoId + "/appraisal/";
 		},
 

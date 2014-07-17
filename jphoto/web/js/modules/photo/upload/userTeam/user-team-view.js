@@ -9,52 +9,33 @@ define( ["backbone", "jquery", "underscore"
 
 	var UserTeamView = Backbone.View.extend( {
 
-		userTeamTemplate:_.template( userTeamTemplate ),
-		userTeamMemberTemplate:_.template( userTeamMemberTemplate ),
-		userTeamMemberEditTemplate:_.template( userTeamMemberEditTemplate ),
-		userTeamFooter:_.template( userTeamFooter ),
+		userTeamTemplate: _.template( userTeamTemplate )
+		, userTeamMemberTemplate: _.template( userTeamMemberTemplate )
 
-		events: {
-			"click .create-new-user-team-member-link": "onCreateNewTeamMember"
-		},
+		, initialize: function() {
+			this.listenTo( this.model, "add", this.addTeamMember );
+			this.model.fetch({ cache: false });
+		}
 
-		initialize: function() {
-			this.listenTo( this.model, "request", this.renderUserTeam );
-			this.listenTo( this.model, "add", this.renderUserTeamMember );
-			this.listenTo( this.model, "sync", this.renderFooter );
+		, render: function() {
 
-			this.model.fetch( {cache: false} );
-		},
+			console.log( 'User team rendering' );
 
-		renderUserTeam:function () {
 			var modelJSON = this.model.toJSON();
+
 			this.$el.html( this.userTeamTemplate( modelJSON ) );
-		},
+			return this;
+		}
 
-		renderUserTeamMember:function ( teamMember ) {
+		, addTeamMember: function( teamMember ) {
 			var modelJSON = teamMember.toJSON();
+
+			console.log( 'teamMember: ', teamMember );
+			console.log( 'modelJSON: ', modelJSON );
+
 			this.$el.append( this.userTeamMemberTemplate( modelJSON ) );
-		},
-
-		renderFooter:function () {
-			var modelJSON = this.model.toJSON();
-			this.$el.append( this.userTeamFooter( modelJSON ) );
-		},
-
-		createNewTeamMember: function() {
-//			this.trigger( 'create-new-user' );
-			console.log( 'Create new user' );
-		},
-
-		onCreateNewTeamMember: function( evt ) {
-			evt.preventDefault();
-			evt.stopImmediatePropagation();
-
-			this.createNewTeamMember();
 		}
 	});
 
-	return { UserTeamView: UserTeamView };
+	return { UserTeamView: UserTeamView};
 });
-
-//http://fahad19.tumblr.com/post/28158699664/afterrender-callback-in-backbone-js-views
