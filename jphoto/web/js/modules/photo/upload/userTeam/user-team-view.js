@@ -89,10 +89,10 @@ define( ["backbone", "jquery", "underscore"
 			var listEntryTemplate = this.userTeamListEntryTemplate( modelJSON );
 			this.$el.html( listEntryTemplate );
 
-			if ( this.model.get( 'openInfo' ) ) {
-				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
-			} else if ( this.model.get( 'openEditor' ) ) {
+			if ( this.model.get( 'openEditor' ) ) {
 				this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
+			} else if ( this.model.get( 'openInfo' ) ) {
+				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
 
 			return this;
@@ -105,7 +105,7 @@ define( ["backbone", "jquery", "underscore"
 
 		toggleEditor: function() {
 			var isOpenEditor = this.model.get( 'openEditor' );
-			this.model.set( { openInfo: false, openEditor: isOpenEditor == undefined || ! isOpenEditor } );
+			this.model.set( { openEditor: isOpenEditor == undefined || ! isOpenEditor } );
 		},
 
 		saveData: function() {
@@ -137,9 +137,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onCloseEditorWithoutChanges: function() {
-			this.model.set( { openInfo: false, openEditor: false } );
-
-			this.render();
+			this.closeEditor();
 		},
 
 		onSaveData: function( evt ) {
@@ -152,9 +150,7 @@ define( ["backbone", "jquery", "underscore"
 
 			this.saveData();
 
-			this.model.set( { openInfo: false, openEditor: false } );
-
-			this.render();
+			this.closeEditor();
 		},
 
 		onDiscardEditedData: function( evt ) {
@@ -165,7 +161,11 @@ define( ["backbone", "jquery", "underscore"
 				return;
 			}
 
-			this.model.set( { openInfo: false, openEditor: false } );
+			this.closeEditor();
+		},
+
+		closeEditor: function() {
+			this.model.set( { openEditor: false } );
 
 			this.render();
 		}
