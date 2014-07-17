@@ -1,6 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var UserTeamMemberModel = Backbone.Model.extend( {
+	var EntryModel = Backbone.Model.extend( {
 
 		idAttribute: 'userTeamMemberId',
 
@@ -9,9 +9,9 @@ define( ["backbone"], function ( Backbone ) {
 		hasUnsavedChanged: false
 	});
 
-	var UserTeamModel = Backbone.Collection.extend( {
+	var EntriesModel = Backbone.Collection.extend( {
 
-		model: UserTeamMemberModel,
+		model: EntryModel,
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/users/" + options.userId + "/team/";
@@ -22,5 +22,5 @@ define( ["backbone"], function ( Backbone ) {
 		}
 	});
 
-	return { UserTeamModel:UserTeamModel, UserTeamMemberModel: UserTeamMemberModel };
+	return { EntriesModel:EntriesModel, EntryModel: EntryModel };
 } );

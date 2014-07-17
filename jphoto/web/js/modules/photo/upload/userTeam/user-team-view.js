@@ -8,7 +8,7 @@ define( ["backbone", "jquery", "underscore"
 
 	'use strict';
 
-	var UserTeamView = Backbone.View.extend( {
+	var EntryListView = Backbone.View.extend( {
 
 		userTeamHeaderTemplate:_.template( headerTemplate ),
 		userTeamFooterTemplate:_.template( footerTemplate ),
@@ -32,12 +32,12 @@ define( ["backbone", "jquery", "underscore"
 
 		renderEntry:function ( teamMember ) {
 
-			var userTeamListEntryView = new UserTeamListEntryView( {
+			var entryView = new EntryView( {
 				model: teamMember
 			} );
-			userTeamListEntryView.on( "event:render_list", this.model.refresh, this.model );
+			entryView.on( "event:render_list", this.model.refresh, this.model );
 
-			this.$el.append( userTeamListEntryView.render().$el );
+			this.$el.append( entryView.render().$el );
 		},
 
 		renderFooter:function () {
@@ -58,7 +58,7 @@ define( ["backbone", "jquery", "underscore"
 	});
 
 
-	var UserTeamListEntryView = Backbone.View.extend({
+	var EntryView = Backbone.View.extend({
 
 		userTeamListEntryTemplate:_.template( listEntryTemplate ),
 		userTeamMemberViewTemplate:_.template( entryInfoTemplate ),
@@ -191,5 +191,5 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
-	return { UserTeamView: UserTeamView };
+	return { EntryListView: EntryListView };
 });

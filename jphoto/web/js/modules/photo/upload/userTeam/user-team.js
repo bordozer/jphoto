@@ -4,10 +4,10 @@ define( ["modules/photo/upload/userTeam/user-team-model"
 
 	function init( userId, baseUrl, container ) {
 
-		var userTeamModel = new Model.UserTeamModel( { userId: userId, baseUrl: baseUrl } );
+		var entriesModel = new Model.EntriesModel( { userId: userId, baseUrl: baseUrl } );
 
-		var userTeamView = new View.UserTeamView( { model: userTeamModel, el: container } );
-		userTeamView.render();
+		var entryListView = new View.EntryListView( { model: entriesModel, el: container } );
+		entryListView.render();
 	}
 
 	return init;
