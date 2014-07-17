@@ -267,6 +267,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Logged user only area</nerd>
+		<ru><![CDATA[Территория авторизированных пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Sorry, this operation can perform only logged users</nerd>
+		<ru><![CDATA[Извините, но данная операция доступна только авторизированным пользователям]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The entry is already in $1. You mush have already added it.</nerd>
+		<ru><![CDATA[Уже находится в $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The entry is not in $1. You mush have already removed it.</nerd>
+		<ru><![CDATA[Не найдено в $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
