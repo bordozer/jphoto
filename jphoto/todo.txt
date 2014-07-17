@@ -1,0 +1,60 @@
+
+Base functionality
+
+1. User rank in genre voting
+	- Rewrite Front/Back end
+	- User card: voting by userId and genreId, update voting statistics
+	- Photo card: voting by photoId and genreId, update photo info
+
+2. Photo upload:
+	- Join genre list, photo upload allowance and nude content in one model
+	- Force set anonymous setting for anonymous days, respecting user status
+	- Finish managing user's team members from upload page
+	- Implement managing user's albums from upload page
+	- Implement ability of background set
+
+3. Photo card:
+	- Rewrite photo info, cover by tests (split the information by tabs)
+	- Implement crop/zoom functionality
+
+4. Photo comments:
+	- Rewrite commenting
+
+5. Messaging
+	- Rewrite Front/Back end
+
+6. Complain functionality
+	- Photo complain
+	- Comment complain
+
+7. Portal page
+
+
+ADMIN functions
+
+1. Locking functionality
+	- User
+	- Photo of the day
+	- Top photos of a category
+	- Commenting
+	- Messaging
+	- Photo voting
+	- Voting for another users ranks in genre
+
+2. Archiving
+	- Photo view history
+	- Photo voting history
+	- Voting for user rank in genre history (?)
+
+3. Clean up:
+	- Photo view history
+	- Photo voting history
+	- Voting for user rank in genre history (?)
+
+
+Technical debt
+
+- Missing Context menu item unit tests
+- Basic kwaqua tests
+- Missing Breadcrumbs new implementation
+- User picker Front/Back end
