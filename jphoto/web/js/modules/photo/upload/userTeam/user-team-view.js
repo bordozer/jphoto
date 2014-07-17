@@ -152,7 +152,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onDataChange: function() {
-			this.model.set( { hasUnsavedChanged: true } );
+			this.model.set( { hasUnsavedChanged: true }, { silent: true } );
 
 			this.$( '.user-team-member-close' ).hide();
 

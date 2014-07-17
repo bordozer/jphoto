@@ -30,4 +30,9 @@ public class UserTeamMemberDTO {
 	public void setUserTeamMemberName( final String userTeamMemberName ) {
 		this.userTeamMemberName = userTeamMemberName;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d: '%s'", userTeamMemberId, userTeamMemberName );
+	}
 }
