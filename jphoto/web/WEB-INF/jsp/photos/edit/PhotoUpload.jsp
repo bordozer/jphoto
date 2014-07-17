@@ -48,6 +48,13 @@
 
 	<div class="user-team" style="float: left; border: 1px solid #9ea2a5; padding: 5px;"></div>
 
+	<style type="text/css">
+		.user-team-member-details {
+			display: inline-block;
+			padding-left: 20px;
+		}
+	</style>
+
 	<script type="text/javascript">
 		require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
 			userTeam( ${photoEditDataModel.photoAuthor.id}, "${baseUrl}", $( '.user-team' ) );

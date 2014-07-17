@@ -73,18 +73,23 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		events: {
-			"click .user-team-member-name": "onToggleUserTeamMemberInfo"
+			"click .user-team-member-info": "onToggleUserTeamMemberInfo",
+			"click .user-team-member-edit": "onToggleUserTeamMemberEdit",
+
+			"click .save-user-team-member": "onSaveUserTeamMember",
+			"click .cancel-user-team-member-changes": "onCancelUserTeamMember"
 		},
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
 
+			var listEntryTemplate = this.userTeamListEntryTemplate( modelJSON );
+			this.$el.html( listEntryTemplate );
+
 			if ( this.model.get( 'openInfo' ) ) {
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			} else if ( this.model.get( 'openEditor' ) ) {
-				this.$el.html( this.userTeamMemberEditorTemplate( modelJSON ) );
-			} else {
-				this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
+				this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
 			}
 
 			return this;
@@ -92,7 +97,16 @@ define( ["backbone", "jquery", "underscore"
 
 		toggleUserTeamMemberInfo: function() {
 			var isOpenInfo = this.model.get( 'openInfo' );
-			this.model.set( { openInfo: isOpenInfo == undefined || ! isOpenInfo } );
+			this.model.set( { openInfo: isOpenInfo == undefined || ! isOpenInfo, openEditor: false } );
+		},
+
+		toggleUserTeamMemberEdit: function() {
+			var isOpenEditor = this.model.get( 'openEditor' );
+			this.model.set( { openInfo: false, openEditor: isOpenEditor == undefined || ! isOpenEditor } );
+		},
+
+		saveUserTeamMember: function() {
+			console.log( 'saving...' );
 		},
 
 		onToggleUserTeamMemberInfo: function( evt ) {
@@ -100,71 +114,37 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.toggleUserTeamMemberInfo();
+		},
+
+		onToggleUserTeamMemberEdit: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.toggleUserTeamMemberEdit();
+		},
+
+		onSaveUserTeamMember: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			if ( confirm( 'Save changes?' ) ) {
+				this.saveUserTeamMember();
+			}
+
+			this.model.set( { openInfo: false, openEditor: false } );
+
+			this.render();
+		},
+
+		onCancelUserTeamMember: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.model.set( { openInfo: false, openEditor: false } );
+
+			this.render();
 		}
 	});
-
-	/*var UserTeamMemberInfoView = Backbone.View.extend({
-
-		userTeamMemberViewTemplate:_.template( userTeamMemberInfoTemplate ),
-
-		initialize: function() {
-
-		},
-
-		render: function() {
-
-			this.model.set( {  } );
-
-			var modelJSON = this.model.toJSON();
-			this.$el.html( this.userTeamMemberViewTemplate( modelJSON ) );
-			console.log( this.$el.html() );
-//			return this;
-		}
-	});*/
-
-
-
-	/*var UserTeamMemberEditorView = Backbone.View.extend( {
-
-		userTeamMemberEditorTemplate:_.template( userTeamMemberEditorTemplate ),
-
-		initialize: function() {
-
-		},
-
-		render: function() {
-			this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
-		}
-	});*/
-
-
-
-
-	/*var CompositeUserTeamMemberView = Backbone.View.extend({
-
-		initialize: function() {
-			this.model.fetch( { cache: false } );
-		},
-
-		render: function() {
-			if ( ! this.model.isOpenForEdit() ) {
-				return this.renderView( new UserTeamMemberView( {
-					model: this.model
-				}));
-			} else {
-				return this.renderView( new UserTeamMemberEditorView( {
-					model: this.model
-				}));
-			}
-		},
-
-		renderView: function( view ) {
-			this.$el.html( view.render().$el );
-			return this;
-		}
-	});*/
-
-
 
 	return { UserTeamView: UserTeamView };
 });
