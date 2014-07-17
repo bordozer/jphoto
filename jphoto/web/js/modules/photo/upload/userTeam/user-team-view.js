@@ -31,12 +31,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderUserTeamListEntry:function ( teamMember ) {
-			var listEntryContainer = $( "<div style='float: left; width: 98%;'></div>" );
-
 			this.$el.append( new UserTeamListEntryView( {
-				model: teamMember,
-				el: listEntryContainer
-			} ).render().$el );
+				model: teamMember
+			} ).render() );
 		},
 
 		renderUserTeamFooter:function () {
@@ -64,23 +61,7 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-		},
-
-		render:function () {
-			var modelJSON = this.model.toJSON();
-//			console.log( this.model );
-//			console.log( modelJSON );
-			this.$el.html( this.userTeamMemberListEntryTemplate( modelJSON ) );
-			return this;
-		}
-	});
-
-	var UserTeamMemberView = Backbone.View.extend({
-
-		userTeamMemberViewTemplate:_.template( userTeamMemberViewTemplate ),
-
-		initialize: function() {
-
+//			this.listenTo( this.notesView, "createNote:start", this.showAnnotations );
 		},
 
 		events: {
@@ -88,18 +69,18 @@ define( ["backbone", "jquery", "underscore"
 			"mouseleave .user-team-member-name": "onTeamMemberInfoClose"
 		},
 
-		render: function() {
+		render:function () {
 			var modelJSON = this.model.toJSON();
-			this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
-			return this;
+			this.$el.html( this.userTeamMemberListEntryTemplate( modelJSON ) );
+			return this.$el;
 		},
 
 		teamMemberInfo: function() {
-			console.log( 'team member info' );
+			this.trigger( "event:show_user_team_member_info" );
 		},
 
 		teamMemberInfoClose: function() {
-			console.log( 'team member info close' );
+			this.trigger( "event:hide_user_team_member_info" );
 		},
 
 		onTeamMemberInfo: function( evt ) {
@@ -114,6 +95,21 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.teamMemberInfoClose();
+		}
+	});
+
+	var UserTeamMemberView = Backbone.View.extend({
+
+		userTeamMemberViewTemplate:_.template( userTeamMemberViewTemplate ),
+
+		initialize: function() {
+
+		},
+
+		render: function() {
+			var modelJSON = this.model.toJSON();
+			this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
+			return this;
 		}
 	});
 
@@ -135,16 +131,13 @@ define( ["backbone", "jquery", "underscore"
 
 
 
-	var CompositeUserTeamMemberView = Backbone.View.extend({
+	/*var CompositeUserTeamMemberView = Backbone.View.extend({
 
 		initialize: function() {
 			this.model.fetch( { cache: false } );
 		},
 
 		render: function() {
-			console.log( 'Composite view rendering' );
-			console.log( this.model );
-
 			if ( ! this.model.isOpenForEdit() ) {
 				return this.renderView( new UserTeamMemberView( {
 					model: this.model
@@ -160,7 +153,7 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( view.render().$el );
 			return this;
 		}
-	});
+	});*/
 
 
 
