@@ -73,11 +73,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		events: {
-			"click .user-team-member-info": "onToggleUserTeamMemberInfo",
-			"click .user-team-member-edit": "onToggleUserTeamMemberEdit",
+			"click .user-team-member-info": "onToggleInfo",
+			"click .user-team-member-edit": "onToggleEditor",
 
-			"click .user-team-member-save": "onSaveUserTeamMember",
-			"click .user-team-member-discard-changes": "onCancelUserTeamMember"
+			"change .user-team-member-data": "onDataChange",
+
+			"click .user-team-member-close": "onCloseEditorWithoutChanges",
+			"click .user-team-member-save": "onSaveData",
+			"click .user-team-member-discard-changes": "onDiscardEditedData"
 		},
 
 		render:function () {
@@ -95,54 +98,70 @@ define( ["backbone", "jquery", "underscore"
 			return this;
 		},
 
-		toggleUserTeamMemberInfo: function() {
+		toggleInfo: function() {
 			var isOpenInfo = this.model.get( 'openInfo' );
 			this.model.set( { openInfo: isOpenInfo == undefined || ! isOpenInfo, openEditor: false } );
 		},
 
-		toggleUserTeamMemberEdit: function() {
+		toggleEditor: function() {
 			var isOpenEditor = this.model.get( 'openEditor' );
 			this.model.set( { openInfo: false, openEditor: isOpenEditor == undefined || ! isOpenEditor } );
 		},
 
-		saveUserTeamMember: function() {
+		saveData: function() {
 			console.log( 'saving...' );
 		},
 
-		onToggleUserTeamMemberInfo: function( evt ) {
+		onToggleInfo: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			this.toggleUserTeamMemberInfo();
+			this.toggleInfo();
 		},
 
-		onToggleUserTeamMemberEdit: function( evt ) {
+		onToggleEditor: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			this.toggleUserTeamMemberEdit();
+			this.toggleEditor();
 		},
 
-		onSaveUserTeamMember: function( evt ) {
+		onDataChange: function() {
+			this.model.set( { hasUnsavedChanged: true } );
+			console.log( 'onDataChange' );
+
+			$( '.user-team-member-close', this.$el ).hide();
+
+			$( '.user-team-member-save', this.$el ).show();
+			$( '.user-team-member-discard-changes', this.$el ).show();
+		},
+
+		onCloseEditorWithoutChanges: function() {
+			this.model.set( { openInfo: false, openEditor: false } );
+
+			this.render();
+		},
+
+		onSaveData: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( ! confirm( 'Save changes?' ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( 'Save changes?' ) ) {
 				return;
 			}
 
-			this.saveUserTeamMember();
+			this.saveData();
 
 			this.model.set( { openInfo: false, openEditor: false } );
 
 			this.render();
 		},
 
-		onCancelUserTeamMember: function( evt ) {
+		onDiscardEditedData: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( ! confirm( 'Discard changes?' ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( 'Discard changes?' ) ) {
 				return;
 			}
 
