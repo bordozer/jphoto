@@ -2,10 +2,10 @@ define( ["backbone"], function ( Backbone ) {
 
 	var UserTeamMemberModel = Backbone.Model.extend( {
 
-		idAttribute: 'userTeamMemberId'
-		, openForEdit: false
+		idAttribute: 'userTeamMemberId',
+		openForEdit: false,
 
-		, isOpenForEdit: function() {
+		isOpenForEdit: function() {
 			return this.openForEdit;
 		}
 	});
@@ -16,9 +16,9 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/users/" + options.userId + "/team/";
-		}
+		},
 
-		, refresh: function() {
+		refresh: function() {
 			this.fetch( { reset: true } );
 		}
 	});
