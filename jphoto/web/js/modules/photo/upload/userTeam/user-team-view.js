@@ -1,10 +1,10 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/upload/userTeam/templates/user-team-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-footer-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-member-template.html"
+		, "text!modules/photo/upload/userTeam/templates/user-team-list-entry-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-member-view-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-member-edit-template.html"
-		], function ( Backbone, $, _, userTeamHeaderTemplate, userTeamFooterTemplate, userTeamMemberListEntryTemplate, userTeamMemberViewTemplate, userTeamMemberEditorTemplate ) {
+		], function ( Backbone, $, _, userTeamHeaderTemplate, userTeamFooterTemplate, userTeamListEntryTemplate, userTeamMemberViewTemplate, userTeamMemberEditorTemplate ) {
 
 	'use strict';
 
@@ -21,6 +21,8 @@ define( ["backbone", "jquery", "underscore"
 			this.listenTo( this.model, "request", this.renderUserTeamHeader );
 			this.listenTo( this.model, "add", this.renderUserTeamListEntry );
 			this.listenTo( this.model, "sync", this.renderUserTeamFooter );
+
+			this.listenTo( this.model, "event:create_new_user_team_member", this.createNewUserTeamMember );
 
 			this.model.fetch( {cache: false} );
 		},
@@ -42,8 +44,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		createNewTeamMember: function() {
-//			this.trigger( 'create-new-user' );
-			console.log( 'Create new user' );
+			this.model.trigger( 'event:create_new_user_team_member' );
 		},
 
 		onCreateNewTeamMember: function( evt ) {
@@ -51,13 +52,17 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.createNewTeamMember();
+		},
+
+		createNewUserTeamMember: function() {
+			console.log( 'create new user team member' );
 		}
 	});
 
 
 	var UserTeamListEntryView = Backbone.View.extend({
 
-		userTeamMemberListEntryTemplate:_.template( userTeamMemberListEntryTemplate ),
+		userTeamListEntryTemplate:_.template( userTeamListEntryTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
@@ -65,36 +70,24 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		events: {
-			"mouseenter .user-team-member-name": "onTeamMemberInfo",
-			"mouseleave .user-team-member-name": "onTeamMemberInfoClose"
+			"click .user-team-member-name": "onToggleUserTeamMemberInfo"
 		},
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
-			this.$el.html( this.userTeamMemberListEntryTemplate( modelJSON ) );
+			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
 			return this.$el;
 		},
 
-		teamMemberInfo: function() {
-			this.trigger( "event:show_user_team_member_info" );
+		toggleUserTeamMemberInfo: function() {
+			console.log( 'toggle_user_team_member_info', this.model.id );
 		},
 
-		teamMemberInfoClose: function() {
-			this.trigger( "event:hide_user_team_member_info" );
-		},
-
-		onTeamMemberInfo: function( evt ) {
+		onToggleUserTeamMemberInfo: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			this.teamMemberInfo();
-		},
-
-		onTeamMemberInfoClose: function( evt ) {
-			evt.preventDefault();
-			evt.stopImmediatePropagation();
-
-			this.teamMemberInfoClose();
+			this.toggleUserTeamMemberInfo();
 		}
 	});
 
