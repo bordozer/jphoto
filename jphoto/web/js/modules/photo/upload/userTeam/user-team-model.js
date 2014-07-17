@@ -3,11 +3,16 @@ define( ["backbone"], function ( Backbone ) {
 	var UserTeamMemberModel = Backbone.Model.extend( {
 
 		idAttribute: 'userTeamMemberId',
-		openForEdit: false,
+		openInfo: false,
+		openEditor: false/*,
 
-		isOpenForEdit: function() {
-			return this.openForEdit;
-		}
+		isOpenInfo: function() {
+			return this.openInfo;
+		},
+
+		isOpenEditor: function() {
+			return this.openEditor;
+		}*/
 	});
 
 	var UserTeamModel = Backbone.Collection.extend( {

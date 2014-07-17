@@ -2,9 +2,9 @@ define( ["backbone", "jquery", "underscore"
 		, "text!modules/photo/upload/userTeam/templates/user-team-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-footer-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-list-entry-template.html"
-		, "text!modules/photo/upload/userTeam/templates/user-team-member-view-template.html"
+		, "text!modules/photo/upload/userTeam/templates/user-team-member-info-template.html"
 		, "text!modules/photo/upload/userTeam/templates/user-team-member-edit-template.html"
-		], function ( Backbone, $, _, userTeamHeaderTemplate, userTeamFooterTemplate, userTeamListEntryTemplate, userTeamMemberViewTemplate, userTeamMemberEditorTemplate ) {
+		], function ( Backbone, $, _, userTeamHeaderTemplate, userTeamFooterTemplate, userTeamListEntryTemplate, userTeamMemberInfoTemplate, userTeamMemberEditorTemplate ) {
 
 	'use strict';
 
@@ -33,9 +33,10 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderUserTeamListEntry:function ( teamMember ) {
-			this.$el.append( new UserTeamListEntryView( {
+			var userTeamListEntryView = new UserTeamListEntryView( {
 				model: teamMember
-			} ).render() );
+			} );
+			this.$el.append( userTeamListEntryView.render().$el );
 		},
 
 		renderUserTeamFooter:function () {
@@ -63,10 +64,12 @@ define( ["backbone", "jquery", "underscore"
 	var UserTeamListEntryView = Backbone.View.extend({
 
 		userTeamListEntryTemplate:_.template( userTeamListEntryTemplate ),
+		userTeamMemberViewTemplate:_.template( userTeamMemberInfoTemplate ),
+		userTeamMemberEditorTemplate:_.template( userTeamMemberEditorTemplate ),
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-//			this.listenTo( this.notesView, "createNote:start", this.showAnnotations );
+			this.listenTo( this.model, "change", this.render );
 		},
 
 		events: {
@@ -75,12 +78,21 @@ define( ["backbone", "jquery", "underscore"
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
-			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
-			return this.$el;
+
+			if ( this.model.get( 'openInfo' ) ) {
+				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
+			} else if ( this.model.get( 'openEditor' ) ) {
+				this.$el.html( this.userTeamMemberEditorTemplate( modelJSON ) );
+			} else {
+				this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
+			}
+
+			return this;
 		},
 
 		toggleUserTeamMemberInfo: function() {
-			console.log( 'toggle_user_team_member_info', this.model.id );
+			var isOpenInfo = this.model.get( 'openInfo' );
+			this.model.set( { openInfo: isOpenInfo == undefined || ! isOpenInfo } );
 		},
 
 		onToggleUserTeamMemberInfo: function( evt ) {
@@ -91,24 +103,28 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
-	var UserTeamMemberView = Backbone.View.extend({
+	/*var UserTeamMemberInfoView = Backbone.View.extend({
 
-		userTeamMemberViewTemplate:_.template( userTeamMemberViewTemplate ),
+		userTeamMemberViewTemplate:_.template( userTeamMemberInfoTemplate ),
 
 		initialize: function() {
 
 		},
 
 		render: function() {
+
+			this.model.set( {  } );
+
 			var modelJSON = this.model.toJSON();
-			this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
-			return this;
+			this.$el.html( this.userTeamMemberViewTemplate( modelJSON ) );
+			console.log( this.$el.html() );
+//			return this;
 		}
-	});
+	});*/
 
 
 
-	var UserTeamMemberEditorView = Backbone.View.extend( {
+	/*var UserTeamMemberEditorView = Backbone.View.extend( {
 
 		userTeamMemberEditorTemplate:_.template( userTeamMemberEditorTemplate ),
 
@@ -119,7 +135,7 @@ define( ["backbone", "jquery", "underscore"
 		render: function() {
 			this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
 		}
-	});
+	});*/
 
 
 
