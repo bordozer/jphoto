@@ -9,33 +9,50 @@ define( ["backbone", "jquery", "underscore"
 
 	var UserTeamView = Backbone.View.extend( {
 
-		userTeamTemplate: _.template( userTeamTemplate )
-		, userTeamMemberTemplate: _.template( userTeamMemberTemplate )
+		userTeamTemplate:_.template( userTeamTemplate ),
+		userTeamMemberTemplate:_.template( userTeamMemberTemplate ),
+		userTeamMemberEditTemplate:_.template( userTeamMemberEditTemplate ),
+		userTeamFooter:_.template( userTeamFooter ),
 
-		, initialize: function() {
-			this.listenTo( this.model, "add", this.addTeamMember );
-			this.model.fetch({ cache: false });
-		}
+		events: {
+			"click .create-new-user-team-member-link": "onCreateNewTeamMember"
+		},
 
-		, render: function() {
+		initialize: function() {
+			this.listenTo( this.model, "request", this.renderUserTeam );
+			this.listenTo( this.model, "add", this.renderUserTeamMember );
+			this.listenTo( this.model, "sync", this.renderFooter );
 
-			console.log( 'User team rendering' );
+			this.model.fetch( {cache: false} );
+		},
 
+		renderUserTeam:function () {
 			var modelJSON = this.model.toJSON();
-
 			this.$el.html( this.userTeamTemplate( modelJSON ) );
-			return this;
-		}
+		},
 
-		, addTeamMember: function( teamMember ) {
+		renderUserTeamMember:function ( teamMember ) {
 			var modelJSON = teamMember.toJSON();
-
-			console.log( 'teamMember: ', teamMember );
-			console.log( 'modelJSON: ', modelJSON );
-
 			this.$el.append( this.userTeamMemberTemplate( modelJSON ) );
+		},
+
+		renderFooter:function () {
+			var modelJSON = this.model.toJSON();
+			this.$el.append( this.userTeamFooter( modelJSON ) );
+		},
+
+		createNewTeamMember: function() {
+//			this.trigger( 'create-new-user' );
+			console.log( 'Create new user' );
+		},
+
+		onCreateNewTeamMember: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.createNewTeamMember();
 		}
 	});
 
-	return { UserTeamView: UserTeamView};
+	return { UserTeamView: UserTeamView };
 });
