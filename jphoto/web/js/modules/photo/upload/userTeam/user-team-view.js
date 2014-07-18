@@ -1,18 +1,16 @@
 define( ["backbone", "jquery", "underscore"
 		, "modules/photo/upload/userTeam/user-team-model"
 		, "text!modules/photo/upload/userTeam/templates/header-template.html"
-		, "text!modules/photo/upload/userTeam/templates/footer-template.html"
 		, "text!modules/photo/upload/userTeam/templates/list-entry-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-info-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-edit-template.html"
-		], function ( Backbone, $, _, Model, headerTemplate, footerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
+		], function ( Backbone, $, _, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
 	var EntryListView = Backbone.View.extend( {
 
 		userTeamHeaderTemplate:_.template( headerTemplate ),
-		userTeamFooterTemplate:_.template( footerTemplate ),
 
 		events: {
 			"click .create-new-user-team-member-link": "onCreateNewEntry"
@@ -37,11 +35,6 @@ define( ["backbone", "jquery", "underscore"
 //			entryView.on( "event:render_list", this.model.refresh, this.model );
 
 			this.$el.append( entryView.render().$el );
-		},
-
-		renderFooter:function () {
-			var modelJSON = this.model.toJSON();
-			this.$el.append( this.userTeamFooterTemplate( modelJSON ) );
 		},
 
 		createEntry: function() {
@@ -77,6 +70,7 @@ define( ["backbone", "jquery", "underscore"
 		events: {
 			"click .user-team-member-info": "onToggleInfo",
 			"click .user-team-member-edit": "onToggleEditor",
+			"click .user-team-member-delete": "onEntryDelete",
 			"change .user-team-member-checkbox": "onToggleCheckbox",
 
 			"keydown .user-team-member-data": "onDataChange",
@@ -110,6 +104,12 @@ define( ["backbone", "jquery", "underscore"
 		toggleEditor: function() {
 			var isOpenEditor = this.model.get( 'openEditor' );
 			this.model.set( { openEditor: isOpenEditor == undefined || ! isOpenEditor } );
+		},
+
+		deleteEntry: function() {
+			if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
+				return;
+			}
 		},
 
 		toggleCheckbox: function() {
@@ -158,6 +158,13 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.toggleEditor();
+		},
+
+		onEntryDelete: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			this.deleteEntry();
 		},
 
 		onToggleCheckbox: function( evt ) {
