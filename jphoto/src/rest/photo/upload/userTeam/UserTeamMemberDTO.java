@@ -11,6 +11,8 @@ public class UserTeamMemberDTO {
 	private boolean checked;
 	private String userTeamMemberCardUrl;
 	private int teamMemberPhotosQty;
+	private String teamMemberTypeName;
+	private String siteMemberLink;
 
 	public UserTeamMemberDTO() {
 	}
@@ -62,5 +64,21 @@ public class UserTeamMemberDTO {
 
 	public int getTeamMemberPhotosQty() {
 		return teamMemberPhotosQty;
+	}
+
+	public void setTeamMemberTypeName( final String teamMemberTypeName ) {
+		this.teamMemberTypeName = teamMemberTypeName;
+	}
+
+	public String getTeamMemberTypeName() {
+		return teamMemberTypeName;
+	}
+
+	public void setSiteMemberLink( final String siteMemberLink ) {
+		this.siteMemberLink = siteMemberLink;
+	}
+
+	public String getSiteMemberLink() {
+		return siteMemberLink;
 	}
 }

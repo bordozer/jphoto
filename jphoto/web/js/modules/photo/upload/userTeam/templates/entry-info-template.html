@@ -1,8 +1,22 @@
 <div class="user-team-member-details">
-	<div style="display: inline; padding-left: 5px;">
-		<a href="<%- userTeamMemberCardUrl %>"><img src="/images/icons16/images.png" alt="Card" title="Show team member card" height="12"></a>
-		<img src="/images/edit16.png" alt="Edit" class="user-team-member-edit"  title="Edit team member" height="12">
-		<img src="/images/delete16.png" class="user-team-member-delete" alt="Delete" title="Delete team member" height="12">
+
+	<div style="float: left; text-align: center; width: 20px; border-right: 1px dashed #848078">
+		<a href="<%- userTeamMemberCardUrl %>"><img src="/images/icons16/images.png" alt="Card" title="Show team member card" height="16"></a>
+		<br />
+		<img src="/images/edit16.png" alt="Edit" class="user-team-member-edit"  title="Edit team member" height="16">
+		<br />
+		<img src="/images/delete16.png" class="user-team-member-delete" alt="Delete" title="Delete team member" height="16">
 	</div>
-	Name: <div class="user-team-member-edit" style="display: inline;"><%-userTeamMemberName%></div>
+
+	<div style="float: left; padding-left: 3px;">
+		Name: <div class="user-team-member-edit" style="display: inline;"><%-userTeamMemberName%></div>
+		<br />
+		Role: <%- teamMemberTypeName %>
+
+		<% if ( siteMemberLink != '' ) { %>
+			<br />
+			Member: <%- siteMemberLink %>
+		<% } %>
+	</div>
+
 </div>
