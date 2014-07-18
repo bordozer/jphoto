@@ -9,6 +9,7 @@ public class UserTeamMemberDTO {
 	private String userTeamMemberName;
 
 	private boolean checked;
+	private String userTeamMemberCardUrl;
 
 	public UserTeamMemberDTO() {
 	}
@@ -44,5 +45,13 @@ public class UserTeamMemberDTO {
 	@Override
 	public String toString() {
 		return String.format( "#%d: '%s'", userTeamMemberId, userTeamMemberName );
+	}
+
+	public void setUserTeamMemberCardUrl( final String userTeamMemberCardUrl ) {
+		this.userTeamMemberCardUrl = userTeamMemberCardUrl;
+	}
+
+	public String getUserTeamMemberCardUrl() {
+		return userTeamMemberCardUrl;
 	}
 }

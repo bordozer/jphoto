@@ -9,6 +9,7 @@ import core.services.photo.PhotoService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserTeamService;
+import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class UserTeamController {
 
 	@Autowired
 	private UserTeamService userTeamService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -75,10 +79,12 @@ public class UserTeamController {
 
 	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
 
+		final int currentUserId = EnvironmentContext.getCurrentUserId();
+
 		final Photo photo = photoService.load( photoId );
 		final boolean isNewPhoto = photo == null;
 
-		final int userId = isNewPhoto ? EnvironmentContext.getCurrentUserId() : photo.getUserId();
+		final int userId = isNewPhoto ? currentUserId : photo.getUserId();
 		final UserTeam userTeam = userTeamService.loadUserTeam( userId );
 		final List<PhotoTeamMember> photoTeamMembers = userTeamService.getPhotoTeam( photoId ).getPhotoTeamMembers();
 
@@ -88,6 +94,7 @@ public class UserTeamController {
 			final UserTeamMemberDTO dto = new UserTeamMemberDTO( userTeamMember.getId() );
 			dto.setUserTeamMemberName( userTeamMember.getTeamMemberName() );
 			dto.setChecked( ! isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
+			dto.setUserTeamMemberCardUrl( urlUtilsService.getUserTeamMemberCardLink( currentUserId, userTeamMember.getId() ) );
 
 //			dto.setTextNewMemberDefaultName( translatorService.translate( "Photo data / Photo team: New team member default name", getLanguage() ) );
 
