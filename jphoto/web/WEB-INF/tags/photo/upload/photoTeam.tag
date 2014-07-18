@@ -46,7 +46,7 @@
 		border-bottom: 1px dashed #848078;
 	}
 </style>
-${userTeamMemberTypes}
+
 <script type="text/javascript">
 	require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
 		var userTeamMemberTypes = ${userTeamMemberTypes};
