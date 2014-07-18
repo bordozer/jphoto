@@ -12,7 +12,7 @@
 	.user-team-member-details {
 		display: inline-block;
 		width: 280px;
-		padding-left: 23px;
+		/*padding-left: 23px;*/
 		padding-top: 10px;
 		padding-bottom: 5px;
 		line-height: 20px;
