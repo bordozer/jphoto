@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -35,31 +34,35 @@ public class UserTeamController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserTeamMemberDTO> userTeam( final @PathVariable("photoId") int photoId ) {
+	public List<UserTeamMemberDTO> userTeam( final @PathVariable( "photoId" ) int photoId ) {
 
 		return getUserTeamMemberDTOs( photoId );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserTeamMemberDTO createUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
-
-		final UserTeamMember teamMember = new UserTeamMember();
-		teamMember.setUser( EnvironmentContext.getCurrentUser() );
-		teamMember.setName( userTeamMemberDTO.getUserTeamMemberName() );
-		teamMember.setTeamMemberType( UserTeamMemberType.PHOTOGRAPH ); // TODO
-//		teamMember.setTeamMemberUser(  ); // TODO
-
-		userTeamService.save( teamMember );
-
+	public UserTeamMemberDTO createUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO ) {
+		doSaveUserTeamMember( userTeamMemberDTO );
 		return userTeamMemberDTO;
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/{userTeamMemberId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserTeamMemberDTO saveUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "photoId" ) int photoId, final @PathVariable( "userTeamMemberId" ) int userTeamMemberId, final HttpServletRequest request ) {
+	public UserTeamMemberDTO saveUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO ) {
+		doSaveUserTeamMember( userTeamMemberDTO );
+		return userTeamMemberDTO;
+	}
+
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{userTeamMemberId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public boolean deleteUserTeamMember( final @PathVariable( "userTeamMemberId" ) int userTeamMemberId ) {
+		return userTeamService.delete( userTeamMemberId );
+	}
+
+	private void doSaveUserTeamMember( final UserTeamMemberDTO userTeamMemberDTO ) {
 
 		final UserTeamMember teamMember = new UserTeamMember();
+
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
 		teamMember.setId( userTeamMemberDTO.getUserTeamMemberId() );
 		teamMember.setName( userTeamMemberDTO.getUserTeamMemberName() );
@@ -67,8 +70,6 @@ public class UserTeamController {
 //		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
-
-		return userTeamMemberDTO;
 	}
 
 	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {

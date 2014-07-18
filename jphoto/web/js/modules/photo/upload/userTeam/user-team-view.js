@@ -32,19 +32,24 @@ define( ["backbone", "jquery", "underscore"
 			var entryView = new EntryView( {
 				model: teamMember
 			} );
-//			entryView.on( "event:render_list", this.model.refresh, this.model );
+			entryView.on( "event:delete", this.deleteEntry );
 
 			this.$el.append( entryView.render().$el );
 		},
 
 		createEntry: function() {
-			var teamMember = new Model.EntryModel( { userTeamMemberId: 0, userTeamMemberName: 'New team member', checked: true, openEditor: true } );
-			/*var entryView = new EntryView( {
-				model: teamMember
+			var teamMember = new Model.EntryModel( {
+				  userTeamMemberId: 0
+				, userTeamMemberName: 'New team member'
+				, checked: true
+				, openEditor: true
 			} );
-
-			this.$el.append( entryView.render().$el );*/
 			this.model.add( teamMember );
+		},
+
+		deleteEntry: function( teamMember ) {
+//			console.log( teamMember );
+			this.model.remove( teamMember.get( 'userTeamMemberId' ) );
 		},
 
 		onCreateNewEntry: function( evt ) {
@@ -107,9 +112,13 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		deleteEntry: function() {
-			if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
+			// TODO: confirmation!
+			/*if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
 				return;
-			}
+			}*/
+
+//			this.trigger( "event:delete", this.model );
+			this.model.destroy();
 		},
 
 		toggleCheckbox: function() {
@@ -184,7 +193,13 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onCloseEditorWithoutChanges: function() {
-			this.closeEditor();
+
+			if ( this.model.get( 'userTeamMemberId' ) > 0 ) {
+				this.closeEditor(); // close editor of an existing team member
+				return;
+			}
+
+			this.model.destroy(); // cancel creating of new team member, { silent: true } no instance on the server
 		},
 
 		onSaveDataClick: function( evt ) {
@@ -206,7 +221,12 @@ define( ["backbone", "jquery", "underscore"
 				return;
 			}
 
-			this.closeEditor();
+			if ( this.model.get( 'userTeamMemberId' ) > 0 ) {
+				this.closeEditor(); // discard unsaved changes of an existing team member
+				return;
+			}
+
+			this.model.destroy(); // discard unsaved changes of new team member
 		},
 
 		closeEditor: function() {
