@@ -70,6 +70,8 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
 			this.listenTo( this.model, "change", this.render );
+
+			this.listenTo( this.model, "destroy", this.removeView );
 		},
 
 		events: {
@@ -109,16 +111,6 @@ define( ["backbone", "jquery", "underscore"
 		toggleEditor: function() {
 			var isOpenEditor = this.model.get( 'openEditor' );
 			this.model.set( { openEditor: isOpenEditor == undefined || ! isOpenEditor } );
-		},
-
-		deleteEntry: function() {
-			// TODO: confirmation!
-			/*if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
-				return;
-			}*/
-
-//			this.trigger( "event:delete", this.model );
-			this.model.destroy();
 		},
 
 		toggleCheckbox: function() {
@@ -200,6 +192,19 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			this.model.destroy(); // cancel creating of new team member, { silent: true } no instance on the server
+		},
+
+		removeView: function() {
+			this.remove();
+		},
+
+		deleteEntry: function() {
+			// TODO: confirmation!
+			/*if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
+				return;
+			}*/
+
+			this.model.destroy();
 		},
 
 		onSaveDataClick: function( evt ) {

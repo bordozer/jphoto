@@ -6,11 +6,11 @@ define( ["backbone"], function ( Backbone ) {
 
 		openInfo: false,
 		openEditor: false,
-		hasUnsavedChanged: false,
+		hasUnsavedChanged: false
 
-		isNew: function() {
-			return this.get( 'userTeamMemberId') == 0;
-		}
+		/*, isNew: function() {
+			return this.get( this.idAttribute ) == 0;
+		}*/
 
 		/*, defaults: function() {
 			return {
