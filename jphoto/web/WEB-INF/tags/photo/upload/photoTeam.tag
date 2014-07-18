@@ -8,16 +8,23 @@
 <div class="user-team-container" style="float: left; padding: 5px; width: 300px;"></div>
 
 <style type="text/css">
+
 	.user-team-member-details {
 		display: inline-block;
 		width: 280px;
 		padding-left: 23px;
 		padding-top: 10px;
-		padding-bottom: 10px;
-		border-left: none;
-		border-right: none;
+		padding-bottom: 5px;
 		line-height: 20px;
-		/*border-bottom: none;*/
+	}
+
+	.user-team-list-entry {
+		float: left;
+		width: 100%;
+		padding-top: 2px;
+		padding-bottom: 2px;
+		margin-bottom: 2px;
+		border-bottom: 1px dashed #848078;
 	}
 </style>
 
