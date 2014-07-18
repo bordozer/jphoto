@@ -20,13 +20,15 @@ import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
 import ui.elements.PhotoList;
-import ui.services.PhotoUIService;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Controller
 @RequestMapping( "members/{userId}/team" )
@@ -40,9 +42,6 @@ public class UserTeamMemberCardController {
 
 	@Autowired
 	private PhotoService photoService;
-
-	@Autowired
-	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UtilsService utilsService;
@@ -101,7 +100,8 @@ public class UserTeamMemberCardController {
 
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );
 
-		model.setPhotoList( photoList );
+		final List<PhotoList> photoLists = newArrayList( photoList );
+		model.setPhotoLists( photoLists );
 
 		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
 

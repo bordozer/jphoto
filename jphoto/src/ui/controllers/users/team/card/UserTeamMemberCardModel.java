@@ -4,10 +4,12 @@ import core.general.base.AbstractGeneralModel;
 import core.general.user.userTeam.UserTeamMember;
 import ui.elements.PhotoList;
 
+import java.util.List;
+
 public class UserTeamMemberCardModel extends AbstractGeneralModel {
 
 	private UserTeamMember userTeamMember;
-	private PhotoList photoList;
+	private List<PhotoList> photoLists;
 
 	public UserTeamMember getUserTeamMember() {
 		return userTeamMember;
@@ -17,11 +19,11 @@ public class UserTeamMemberCardModel extends AbstractGeneralModel {
 		this.userTeamMember = userTeamMember;
 	}
 
-	public PhotoList getPhotoList() {
-		return photoList;
+	public List<PhotoList> getPhotoLists() {
+		return photoLists;
 	}
 
-	public void setPhotoList( final PhotoList photoList ) {
-		this.photoList = photoList;
+	public void setPhotoLists( final List<PhotoList> photoLists ) {
+		this.photoLists = photoLists;
 	}
 }

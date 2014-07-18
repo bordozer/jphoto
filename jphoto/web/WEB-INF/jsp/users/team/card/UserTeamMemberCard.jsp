@@ -1,6 +1,3 @@
-<%@ page import="ui.elements.PhotoList" %>
-<%@ page import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ page import="java.util.List" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,14 +6,8 @@
 
 <jsp:useBean id="userTeamMemberCardModel" type="ui.controllers.users.team.card.UserTeamMemberCardModel" scope="request" />
 
-<%
-	final List<PhotoList> photoLists = newArrayList();
-	photoLists.add( userTeamMemberCardModel.getPhotoList() );
-%>
-<c:set var="photoLists" value="<%=photoLists%>" />
-
 <tags:page pageModel="${userTeamMemberCardModel.pageModel}">
 
-	<photo:photoListsRender photoLists="${userTeamMemberCardModel.photoList}" />
+	<photo:photoListsRender photoLists="${userTeamMemberCardModel.photoLists}" />
 
 </tags:page>
