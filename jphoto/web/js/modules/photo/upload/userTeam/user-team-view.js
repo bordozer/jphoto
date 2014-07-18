@@ -25,17 +25,17 @@ define( ["backbone", "jquery", "underscore"
 			this.model.fetch( {cache: false} );
 		},
 
-		renderHeader:function () {
+		renderHeader: function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.userTeamHeaderTemplate( modelJSON ) );
 		},
 
-		renderEntry:function ( teamMember ) {
+		renderEntry: function ( teamMember ) {
 
 			var entryView = new EntryView( {
 				model: teamMember
 			} );
-			entryView.on( "event:render_list", this.model.refresh, this.model );
+//			entryView.on( "event:render_list", this.model.refresh, this.model );
 
 			this.$el.append( entryView.render().$el );
 		},
@@ -127,7 +127,8 @@ define( ["backbone", "jquery", "underscore"
 
 		onSaveSuccess: function() {
 			showUIMessage_Notification( "Team member changes has been saved successfully" );
-			this.trigger( "event:render_list" );
+//			this.trigger( "event:render_list" );
+			this.render();
 		},
 
 		onSaveError: function() {

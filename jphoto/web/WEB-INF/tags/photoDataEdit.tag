@@ -9,6 +9,7 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="anonym" tagdir="/WEB-INF/tags/anonym" %>
+<%@ taglib prefix="photoUpload" tagdir="/WEB-INF/tags/photo/upload" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ attribute name="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" %>
@@ -169,7 +170,8 @@
 			<table:tdtext text_t="Photo uploading: Photo team" labelFor="photoTeamIds1"/>
 
 			<table:tddata>
-				<form:checkboxes path="userTeamMemberIds" items="${photoEditDataModel.userTeamMembers}" itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="true"/>
+				<%--<form:checkboxes path="userTeamMemberIds" items="${photoEditDataModel.userTeamMembers}" itemLabel="teamMemberNameWithType" itemValue="id" delimiter="<br/>" htmlEscape="true"/>--%>
+				<photoUpload:photoTeam photoId="${photoEditDataModel.photo.id}" />
 			</table:tddata>
 		</table:tredit>
 

@@ -1,8 +1,11 @@
 package rest.photo.upload.userTeam;
 
 import core.enums.UserTeamMemberType;
+import core.general.photo.Photo;
+import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.photo.PhotoService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserTeamService;
@@ -18,8 +21,11 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/users/{userId}/team/" )
+@RequestMapping( "/photos/{photoId}/team/" )
 public class UserTeamController {
+
+	@Autowired
+	private PhotoService photoService;
 
 	@Autowired
 	private UserTeamService userTeamService;
@@ -29,14 +35,14 @@ public class UserTeamController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserTeamMemberDTO> userTeam( final @PathVariable( "userId" ) int userId, final HttpServletRequest request ) {
+	public List<UserTeamMemberDTO> userTeam( final @PathVariable("photoId") int photoId ) {
 
-		return getUserTeamMemberDTOs( userId );
+		return getUserTeamMemberDTOs( photoId );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserTeamMemberDTO> createUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "userId" ) int userId, final HttpServletRequest request ) {
+	public UserTeamMemberDTO createUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
 
 		final UserTeamMember teamMember = new UserTeamMember();
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
@@ -46,12 +52,12 @@ public class UserTeamController {
 
 		userTeamService.save( teamMember );
 
-		return getUserTeamMemberDTOs( userId );
+		return userTeamMemberDTO;
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/{userTeamMemberId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserTeamMemberDTO> saveUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "userId" ) int userId, final @PathVariable( "userTeamMemberId" ) int userTeamMemberId, final HttpServletRequest request ) {
+	public UserTeamMemberDTO saveUserTeamMember( @RequestBody final UserTeamMemberDTO userTeamMemberDTO, final @PathVariable( "photoId" ) int photoId, final @PathVariable( "userTeamMemberId" ) int userTeamMemberId, final HttpServletRequest request ) {
 
 		final UserTeamMember teamMember = new UserTeamMember();
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
@@ -62,22 +68,38 @@ public class UserTeamController {
 
 		userTeamService.save( teamMember );
 
-		return getUserTeamMemberDTOs( userId );
+		return userTeamMemberDTO;
 	}
 
-	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int userId ) {
+	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
+
+		final Photo photo = photoService.load( photoId );
+		final boolean isNewPhoto = photo == null;
+
+		final int userId = isNewPhoto ? EnvironmentContext.getCurrentUserId() : photo.getUserId();
 		final UserTeam userTeam = userTeamService.loadUserTeam( userId );
+		final List<PhotoTeamMember> photoTeamMembers = userTeamService.getPhotoTeam( photoId ).getPhotoTeamMembers();
 
 		final List<UserTeamMemberDTO> result = newArrayList();
 
 		for ( final UserTeamMember userTeamMember : userTeam.getUserTeamMembers() ) {
 			final UserTeamMemberDTO dto = new UserTeamMemberDTO( userTeamMember.getId() );
 			dto.setUserTeamMemberName( userTeamMember.getTeamMemberName() );
+			dto.setChecked( ! isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
 
 			result.add( dto );
 		}
 
 		return result;
+	}
+
+	private boolean isTeamMemberTookParticipationInProcess( final UserTeamMember userTeamMember, final List<PhotoTeamMember> photoTeamMembers ) {
+		for ( final PhotoTeamMember photoTeamMember : photoTeamMembers ) {
+			if (photoTeamMember.getUserTeamMember().equals( userTeamMember ) ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private Language getLanguage() {

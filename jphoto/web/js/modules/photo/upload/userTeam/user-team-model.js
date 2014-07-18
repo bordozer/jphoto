@@ -6,14 +6,13 @@ define( ["backbone"], function ( Backbone ) {
 
 		openInfo: false,
 		openEditor: false,
-		hasUnsavedChanged: false,
-//		checked: false,
+		hasUnsavedChanged: false
 
-		defaults: function() {
+		/*, defaults: function() {
 			return {
 				checked: false
 			};
-		}
+		}*/
 	});
 
 	var EntriesModel = Backbone.Collection.extend( {
@@ -21,7 +20,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: EntryModel,
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/users/" + options.userId + "/team/";
+			this.url = options.baseUrl + "/rest/photos/" + options.photoId + "/team/";
 		},
 
 		refresh: function() {

@@ -8,6 +8,8 @@ public class UserTeamMemberDTO {
 	private int userTeamMemberId;
 	private String userTeamMemberName;
 
+	private boolean checked;
+
 	public UserTeamMemberDTO() {
 	}
 
@@ -29,6 +31,14 @@ public class UserTeamMemberDTO {
 
 	public void setUserTeamMemberName( final String userTeamMemberName ) {
 		this.userTeamMemberName = userTeamMemberName;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked( final boolean checked ) {
+		this.checked = checked;
 	}
 
 	@Override

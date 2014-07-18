@@ -5,6 +5,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
+<%@ taglib prefix="photoUpload" tagdir="/WEB-INF/tags/photo/upload" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -46,27 +47,7 @@
 
 	</form:form>
 
-	<div class="user-team block-border" style="float: left; padding: 5px; width: 300px;"></div>
-
-	<style type="text/css">
-		.user-team-member-details {
-			display: inline-block;
-			width: 280px;
-			padding-left: 23px;
-			padding-top: 10px;
-			padding-bottom: 10px;
-			border-left: none;
-			border-right: none;
-			line-height: 20px;
-			/*border-bottom: none;*/
-		}
-	</style>
-
-	<script type="text/javascript">
-		require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
-			userTeam( ${photoEditDataModel.photoAuthor.id}, "${baseUrl}", $( '.user-team' ) );
-		} );
-	</script>
+	<photoUpload:photoTeam photoId="${photoEditDataModel.photo.id}" />
 
 	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
 
