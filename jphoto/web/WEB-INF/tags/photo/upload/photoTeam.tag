@@ -5,7 +5,7 @@
 
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<div class="user-team block-border" style="float: left; padding: 5px; width: 300px;"></div>
+<div class="user-team-container" style="float: left; padding: 5px; width: 300px;"></div>
 
 <style type="text/css">
 	.user-team-member-details {
@@ -23,6 +23,6 @@
 
 <script type="text/javascript">
 	require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
-		userTeam( ${photoId}, "${baseUrl}", $( '.user-team' ) );
+		userTeam( ${photoId}, "${baseUrl}", $( '.user-team-container' ) );
 	} );
 </script>

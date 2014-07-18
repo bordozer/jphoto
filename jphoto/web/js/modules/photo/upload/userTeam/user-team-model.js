@@ -7,19 +7,6 @@ define( ["backbone"], function ( Backbone ) {
 		openInfo: false,
 		openEditor: false,
 		hasUnsavedChanged: false
-
-		/*, isNew: function() {
-			return this.get( this.idAttribute ) == 0;
-		}*/
-
-		/*, defaults: function() {
-			return {
-				  userTeamMemberId: 0
-				, userTeamMemberName: 'New team member'
-				, checked: true
-				, openEditor: false
-			};
-		}*/
 	});
 
 	var EntriesModel = Backbone.Collection.extend( {

@@ -40,7 +40,7 @@ define( ["backbone", "jquery", "underscore"
 		createEntry: function() {
 			var teamMember = new Model.EntryModel( {
 				  userTeamMemberId: 0
-				, userTeamMemberName: 'New team member'
+				, userTeamMemberName: ''
 				, checked: true
 				, openEditor: true
 			} );
@@ -199,10 +199,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		deleteEntry: function() {
-			// TODO: confirmation!
-			/*if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
+			if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
 				return;
-			}*/
+			}
 
 			this.model.destroy();
 		},

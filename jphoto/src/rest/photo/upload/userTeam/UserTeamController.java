@@ -53,7 +53,7 @@ public class UserTeamController {
 		return userTeamMemberDTO;
 	}
 
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{userTeamMemberId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{userTeamMemberId}" )
 	@ResponseBody
 	public boolean deleteUserTeamMember( final @PathVariable( "userTeamMemberId" ) int userTeamMemberId ) {
 		return userTeamService.delete( userTeamMemberId );
