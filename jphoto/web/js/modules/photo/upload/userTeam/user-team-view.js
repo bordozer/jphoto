@@ -82,18 +82,14 @@ define( ["backbone", "jquery", "underscore"
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
-//			console.log( 'render list entry: ', this.model.get( 'userTeamMemberId' ) );
 			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
 
 			if ( this.model.get( 'openEditor' ) ) {
-//				console.log( 'render editor: ', this.model.get( 'userTeamMemberId' ) );
 				this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
 			} else if ( this.model.get( 'openInfo' ) ) {
-//				console.log( 'render info: ', this.model.get( 'userTeamMemberId' ) );
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
 
-//			console.log( this.$el.html() );
 			return this;
 		},
 
@@ -117,19 +113,16 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		bindModel: function(  ) {
-//			console.log( 'bind', this.model.get( 'userTeamMemberId' ) );
 			this.model.set( { userTeamMemberName: this.$( '.user-team-member-name' ).val() }, { silent: true } );
 		},
 
 		save: function() {
-//			console.log( 'before save: ', this.model.get( 'userTeamMemberId' ) );
 			this.model.save()
 				.done( _.bind( this.onSaveSuccess, this ) )
 				.fail( _.bind( this.onSaveError, this ) );
 		},
 
 		onSaveSuccess: function() {
-//			console.log( 'save success: ', this.model.get( 'userTeamMemberId' ) );
 			this.closeEditor();
 			showUIMessage_Notification( "Team member changes has been saved successfully" );
 		},
@@ -202,8 +195,6 @@ define( ["backbone", "jquery", "underscore"
 
 		closeEditor: function() {
 			this.model.set( { openEditor: false } );
-
-//			this.render();
 		}
 	});
 
