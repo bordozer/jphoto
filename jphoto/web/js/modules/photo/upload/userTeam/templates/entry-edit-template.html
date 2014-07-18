@@ -1,5 +1,5 @@
 <div class="block-border user-team-member-details">
-	Name: <input type="text" class="user-team-member-data user-team-member-name" value="<%-userTeamMemberName%>">
+	Name: <input type="text" class="user-team-member-data user-team-member-name" value="<%-userTeamMemberName%>"> <%- hasUnsavedChanged ?  "*" : "" %>
 	<img src="/images/icons16/close16.png" class="user-team-member-close" alt="Close" title="Close" height="16" width="16" >
 	<img src="/images/icons16/save.png" class="user-team-member-save" alt="Save" title="Save" height="16" width="16" style="display: none">
 	<img src="/images/icons16/cancel.png" class="user-team-member-discard-changes" alt="Discard changes" title="Discard changes" height="16" width="16" style="display: none">

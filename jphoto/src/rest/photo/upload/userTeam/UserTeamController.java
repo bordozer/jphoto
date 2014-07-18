@@ -35,7 +35,6 @@ public class UserTeamController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<UserTeamMemberDTO> userTeam( final @PathVariable( "photoId" ) int photoId ) {
-
 		return getUserTeamMemberDTOs( photoId );
 	}
 
@@ -89,6 +88,8 @@ public class UserTeamController {
 			final UserTeamMemberDTO dto = new UserTeamMemberDTO( userTeamMember.getId() );
 			dto.setUserTeamMemberName( userTeamMember.getTeamMemberName() );
 			dto.setChecked( ! isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
+
+//			dto.setTextNewMemberDefaultName( translatorService.translate( "Photo data / Photo team: New team member default name", getLanguage() ) );
 
 			result.add( dto );
 		}
