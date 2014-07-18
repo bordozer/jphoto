@@ -82,7 +82,7 @@ define( ["backbone", "jquery", "underscore"
 
 			"keydown .user-team-member-data": "onDataChange",
 
-			"click .user-team-member-close": "onCloseEditorWithoutChanges",
+			"click .user-team-member-cancel": "onCloseEditorWithoutChanges",
 			"click .user-team-member-save": "onSaveDataClick",
 			"click .user-team-member-discard-changes": "onDiscardEditedData"
 		},
@@ -178,7 +178,7 @@ define( ["backbone", "jquery", "underscore"
 		onDataChange: function() {
 			this.model.set( { hasUnsavedChanged: true }, { silent: true } );
 
-			this.$( '.user-team-member-close' ).hide();
+			this.$( '.user-team-member-' ).hide();
 
 			this.$( '.user-team-member-save' ).show();
 			this.$( '.user-team-member-discard-changes' ).show();
