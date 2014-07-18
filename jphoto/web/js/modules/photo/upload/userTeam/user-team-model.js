@@ -15,6 +15,7 @@ define( ["backbone"], function ( Backbone ) {
 		, defaults: function() {
 			return {
 				openEditor: false
+				, setTeamMemberTypeId: 1
 			};
 		}
 	});

@@ -1,6 +1,10 @@
 package rest.photo.upload.userTeam;
 
+import core.enums.UserTeamMemberType;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import ui.translatable.GenericTranslatableEntry;
+
+import java.util.List;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserTeamMemberDTO {
@@ -13,6 +17,8 @@ public class UserTeamMemberDTO {
 	private int teamMemberPhotosQty;
 	private String teamMemberTypeName;
 	private String siteMemberLink;
+	private List<GenericTranslatableEntry> userTeamMemberTypes;
+	private int teamMemberTypeId;
 
 	public UserTeamMemberDTO() {
 	}
@@ -80,5 +86,22 @@ public class UserTeamMemberDTO {
 
 	public String getSiteMemberLink() {
 		return siteMemberLink;
+	}
+
+
+	public void setUserTeamMemberTypes( final List<GenericTranslatableEntry> userTeamMemberTypes ) {
+		this.userTeamMemberTypes = userTeamMemberTypes;
+	}
+
+	public List<GenericTranslatableEntry> getUserTeamMemberTypes() {
+		return userTeamMemberTypes;
+	}
+
+	public void setTeamMemberTypeId( final int teamMemberTypeId ) {
+		this.teamMemberTypeId = teamMemberTypeId;
+	}
+
+	public int getTeamMemberTypeId() {
+		return teamMemberTypeId;
 	}
 }

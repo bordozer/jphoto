@@ -81,6 +81,7 @@ define( ["backbone", "jquery", "underscore"
 			"change .user-team-member-checkbox": "onToggleCheckbox",
 
 			"keydown .user-team-member-data": "onDataChange",
+			"change .user-team-member-data-type": "onDataChange",
 
 			"click .user-team-member-cancel": "onCloseEditorWithoutChanges",
 			"click .user-team-member-save": "onSaveDataClick",
@@ -137,7 +138,7 @@ define( ["backbone", "jquery", "underscore"
 			showUIMessage_Notification( "Team member changes has been saved successfully" );
 		},
 
-		onSaveError: function() {
+		onSaveError: function( response ) {
 			var errorText = '';
 			var errors = response[ 'responseJSON' ];
 			for ( var i = 0; i < errors.length; i++ ) {
@@ -178,7 +179,7 @@ define( ["backbone", "jquery", "underscore"
 		onDataChange: function() {
 			this.model.set( { hasUnsavedChanged: true }, { silent: true } );
 
-			this.$( '.user-team-member-' ).hide();
+			this.$( '.user-team-member-cancel' ).hide();
 
 			this.$( '.user-team-member-save' ).show();
 			this.$( '.user-team-member-discard-changes' ).show();

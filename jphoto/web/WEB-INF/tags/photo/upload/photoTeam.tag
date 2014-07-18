@@ -5,7 +5,7 @@
 
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<div class="user-team-container" style="float: left; padding: 5px; width: 300px;"></div>
+<div class="user-team-container" style="float: left; padding: 5px; width: 400px;"></div>
 
 <style type="text/css">
 

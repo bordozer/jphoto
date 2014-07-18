@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+import ui.translatable.GenericTranslatableEntry;
+import ui.translatable.GenericTranslatableList;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -73,7 +76,7 @@ public class UserTeamController {
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
 		teamMember.setId( userTeamMemberDTO.getUserTeamMemberId() );
 		teamMember.setName( userTeamMemberDTO.getUserTeamMemberName() );
-		teamMember.setTeamMemberType( UserTeamMemberType.PHOTOGRAPH ); // TODO
+		teamMember.setTeamMemberType( UserTeamMemberType.getById( userTeamMemberDTO.getTeamMemberTypeId() ) );
 //		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
@@ -100,13 +103,17 @@ public class UserTeamController {
 			dto.setChecked( !isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
 			dto.setUserTeamMemberCardUrl( urlUtilsService.getUserTeamMemberCardLink( currentUserId, userTeamMember.getId() ) );
 			dto.setTeamMemberPhotosQty( userTeamService.getTeamMemberPhotosQty( userTeamMember.getId() ) );
-			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
 
 			if ( userTeamMember.getTeamMemberUser() != null ) {
 				dto.setSiteMemberLink( entityLinkUtilsService.getUserCardLink( userTeamMember.getTeamMemberUser(), getLanguage() ) );
 			} else {
 				dto.setSiteMemberLink( "" );
 			}
+			final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
+			dto.setUserTeamMemberTypes( entries );
+
+			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
+			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );
 
 //			dto.setTextNewMemberDefaultName( translatorService.translate( "Photo data / Photo team: New team member default name", getLanguage() ) );
 
