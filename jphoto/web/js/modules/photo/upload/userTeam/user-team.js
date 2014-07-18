@@ -9,7 +9,7 @@ define( ["modules/photo/upload/userTeam/user-team-model"
 		var entryListView = new View.EntryListView( { model: entriesModel, el: container } );
 		entryListView.renderHeader();
 		entryListView.render();
-		entryListView.renderFooter();
+//		entryListView.renderFooter();
 	}
 
 	return init;

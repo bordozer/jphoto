@@ -1,10 +1,11 @@
 define( ["backbone", "jquery", "underscore"
+		, "modules/photo/upload/userTeam/user-team-model"
 		, "text!modules/photo/upload/userTeam/templates/header-template.html"
 		, "text!modules/photo/upload/userTeam/templates/footer-template.html"
 		, "text!modules/photo/upload/userTeam/templates/list-entry-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-info-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-edit-template.html"
-		], function ( Backbone, $, _, headerTemplate, footerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
+		], function ( Backbone, $, _, Model, headerTemplate, footerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
@@ -44,7 +45,12 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		createEntry: function() {
-			// TODO: create new
+			var teamMember = new Model.EntryModel( { userTeamMemberId: 0, userTeamMemberName: 'test', checked: true } );
+			var entryView = new EntryView( {
+				model: teamMember
+			} );
+
+			this.$el.append( entryView.render().$el );
 		},
 
 		onCreateNewEntry: function( evt ) {
