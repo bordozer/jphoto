@@ -76,12 +76,15 @@ public class UserTeamController {
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
 		teamMember.setId( userTeamMemberDTO.getUserTeamMemberId() );
 		teamMember.setName( userTeamMemberDTO.getUserTeamMemberName() );
-		teamMember.setTeamMemberType( UserTeamMemberType.getById( userTeamMemberDTO.getTeamMemberTypeId() ) );
+
+		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( userTeamMemberDTO.getTeamMemberTypeId() );
+		teamMember.setTeamMemberType( teamMemberType );
 //		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
 
 		userTeamMemberDTO.setUserTeamMemberId( teamMember.getId() );
+		userTeamMemberDTO.setTeamMemberTypeName( translatorService.translate( teamMemberType.getName(), getLanguage() ) );
 	}
 
 	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
@@ -109,12 +112,12 @@ public class UserTeamController {
 			} else {
 				dto.setSiteMemberLink( "" );
 			}
-			final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
+			/*final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
 			final List<TeamMemberTypeDTO> teamMemberTypeDTOs = newArrayList();
 			for ( final GenericTranslatableEntry entry : entries ) {
 				teamMemberTypeDTOs.add( new TeamMemberTypeDTO( entry.getId(), entry.getName() ) );
 			}
-			dto.setUserTeamMemberTypes( teamMemberTypeDTOs );
+			dto.setUserTeamMemberTypes( teamMemberTypeDTOs );*/
 
 			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
 			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );

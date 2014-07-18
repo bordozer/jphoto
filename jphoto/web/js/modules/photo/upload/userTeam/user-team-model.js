@@ -19,9 +19,11 @@ define( ["backbone"], function ( Backbone ) {
 	var EntriesModel = Backbone.Collection.extend( {
 
 		model: EntryModel,
+		userTeamMemberTypes: [],
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/photos/" + options.photoId + "/team/";
+			this.userTeamMemberTypes = options.userTeamMemberTypes;
 		},
 
 		refresh: function() {

@@ -28,7 +28,6 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderEntry: function ( teamMember ) {
-
 			var entryView = new EntryView( {
 				model: teamMember
 			} );
@@ -38,11 +37,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		createEntry: function() {
+			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
+
 			var teamMember = new Model.EntryModel( {
 				  userTeamMemberId: 0
 				, userTeamMemberName: ''
 				, checked: true
 				, openEditor: true
+				, userTeamMemberTypes: userTeamMemberTypes
 			} );
 			this.model.add( teamMember );
 		},

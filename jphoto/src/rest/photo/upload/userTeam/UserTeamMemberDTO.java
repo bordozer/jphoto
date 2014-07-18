@@ -1,9 +1,6 @@
 package rest.photo.upload.userTeam;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import ui.translatable.GenericTranslatableEntry;
 
 import java.util.List;
 
@@ -19,8 +16,6 @@ public class UserTeamMemberDTO {
 	private int teamMemberPhotosQty;
 	private String teamMemberTypeName;
 	private String siteMemberLink;
-
-	private List<TeamMemberTypeDTO> userTeamMemberTypes;
 
 	public UserTeamMemberDTO() {
 	}
@@ -91,14 +86,6 @@ public class UserTeamMemberDTO {
 
 	public String getSiteMemberLink() {
 		return siteMemberLink;
-	}
-
-	public void setUserTeamMemberTypes( final List<TeamMemberTypeDTO> userTeamMemberTypes ) {
-		this.userTeamMemberTypes = userTeamMemberTypes;
-	}
-
-	public List<TeamMemberTypeDTO> getUserTeamMemberTypes() {
-		return userTeamMemberTypes;
 	}
 
 	@Override
