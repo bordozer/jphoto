@@ -70,6 +70,8 @@ public class UserTeamController {
 //		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
+
+		userTeamMemberDTO.setUserTeamMemberId( teamMember.getId() );
 	}
 
 	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
