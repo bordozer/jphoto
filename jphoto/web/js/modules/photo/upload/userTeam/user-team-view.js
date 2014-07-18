@@ -28,6 +28,8 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderEntry: function ( teamMember ) {
+			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ] } );
+
 			var entryView = new EntryView( {
 				model: teamMember
 			} );
