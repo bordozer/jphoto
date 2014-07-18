@@ -12,15 +12,11 @@ define( ["backbone"], function ( Backbone ) {
 			return this.get( this.idAttribute ) == 0;
 		}*/
 
-		/*, defaults: function() {
+		, defaults: function() {
 			return {
-				  userTeamMemberId: 0
-				, userTeamMemberName: ''
-				, checked: false
-				, openEditor: false
-				, hasUnsavedChanged: false
+				openEditor: false
 			};
-		}*/
+		}
 	});
 
 	var EntriesModel = Backbone.Collection.extend( {

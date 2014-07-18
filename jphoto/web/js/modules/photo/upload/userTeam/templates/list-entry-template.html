@@ -1,8 +1,13 @@
 <div style="float: left; width: 100%; padding-top: 2px; padding-bottom: 2px; margin-bottom: 2px;">
+
 	<input type="checkbox" name="userTeamMemberIds" class="user-team-member-checkbox" value="<%-userTeamMemberId%>" <%- checked ?  "checked='checked'" : "" %> >
 
-	<% if ( userTeamMemberId > 0 ) { %>
+	<% if ( userTeamMemberId > 0 && ! openEditor ) { %>
 		<a href="#" class="user-team-member-info" onclick="return false;"><%-userTeamMemberName%></a>
+	<% } %>
+
+	<% if ( userTeamMemberId > 0 && openEditor ) { %>
+		<%-userTeamMemberName%>
 	<% } %>
 
 	<% if ( userTeamMemberId == 0 ) { %>
