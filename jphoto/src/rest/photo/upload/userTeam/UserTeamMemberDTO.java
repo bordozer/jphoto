@@ -10,6 +10,7 @@ public class UserTeamMemberDTO {
 
 	private boolean checked;
 	private String userTeamMemberCardUrl;
+	private int teamMemberPhotosQty;
 
 	public UserTeamMemberDTO() {
 	}
@@ -53,5 +54,13 @@ public class UserTeamMemberDTO {
 
 	public String getUserTeamMemberCardUrl() {
 		return userTeamMemberCardUrl;
+	}
+
+	public void setTeamMemberPhotosQty( final int teamMemberPhotosQty ) {
+		this.teamMemberPhotosQty = teamMemberPhotosQty;
+	}
+
+	public int getTeamMemberPhotosQty() {
+		return teamMemberPhotosQty;
 	}
 }
