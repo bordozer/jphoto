@@ -45,12 +45,13 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		createEntry: function() {
-			var teamMember = new Model.EntryModel( { userTeamMemberId: 0, userTeamMemberName: 'test', checked: true } );
-			var entryView = new EntryView( {
+			var teamMember = new Model.EntryModel( { userTeamMemberId: 0, userTeamMemberName: 'New team member', checked: true, openEditor: true } );
+			/*var entryView = new EntryView( {
 				model: teamMember
 			} );
 
-			this.$el.append( entryView.render().$el );
+			this.$el.append( entryView.render().$el );*/
+			this.model.add( teamMember );
 		},
 
 		onCreateNewEntry: function( evt ) {
@@ -92,6 +93,8 @@ define( ["backbone", "jquery", "underscore"
 
 			if ( this.model.get( 'openEditor' ) ) {
 				this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
+				this.$( '.user-team-member-name' ).focus();
+				this.$( '.user-team-member-name' ).select();
 			} else if ( this.model.get( 'openInfo' ) ) {
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
