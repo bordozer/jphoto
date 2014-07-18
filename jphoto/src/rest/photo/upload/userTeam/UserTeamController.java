@@ -109,7 +109,12 @@ public class UserTeamController {
 			} else {
 				dto.setSiteMemberLink( "" );
 			}
-			dto.setUserTeamMemberTypes( GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries() );
+			final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
+			final List<TeamMemberTypeDTO> teamMemberTypeDTOs = newArrayList();
+			for ( final GenericTranslatableEntry entry : entries ) {
+				teamMemberTypeDTOs.add( new TeamMemberTypeDTO( entry.getId(), entry.getName() ) );
+			}
+			dto.setUserTeamMemberTypes( teamMemberTypeDTOs );
 
 			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
 			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );

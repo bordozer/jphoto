@@ -20,8 +20,7 @@ public class UserTeamMemberDTO {
 	private String teamMemberTypeName;
 	private String siteMemberLink;
 
-	@JsonIgnore
-	private List<GenericTranslatableEntry> userTeamMemberTypes;
+	private List<TeamMemberTypeDTO> userTeamMemberTypes;
 
 	public UserTeamMemberDTO() {
 	}
@@ -94,13 +93,11 @@ public class UserTeamMemberDTO {
 		return siteMemberLink;
 	}
 
-	@JsonIgnore
-	public void setUserTeamMemberTypes( final List<GenericTranslatableEntry> userTeamMemberTypes ) {
+	public void setUserTeamMemberTypes( final List<TeamMemberTypeDTO> userTeamMemberTypes ) {
 		this.userTeamMemberTypes = userTeamMemberTypes;
 	}
 
-	@JsonProperty
-	public List<GenericTranslatableEntry> getUserTeamMemberTypes() {
+	public List<TeamMemberTypeDTO> getUserTeamMemberTypes() {
 		return userTeamMemberTypes;
 	}
 

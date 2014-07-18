@@ -125,6 +125,7 @@ define( ["backbone", "jquery", "underscore"
 
 		bindModel: function(  ) {
 			this.model.set( { userTeamMemberName: this.$( '.user-team-member-name' ).val() }, { silent: true } );
+			this.model.set( { teamMemberTypeId: this.$( 'input[name=teamMemberTypeId]:checked' ).val() }, { silent: true } );
 		},
 
 		save: function() {

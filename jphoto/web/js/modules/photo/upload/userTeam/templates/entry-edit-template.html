@@ -8,7 +8,7 @@
 	<b>Role:</b>
 	<br />
 	<% _.each( userTeamMemberTypes, function( result ) { %>
-		<input type="radio" id="teamMemberTypeId" name="teamMemberTypeId" class="user-team-member-data-type" value="<%=result.id%>" <%= teamMemberTypeId == result.id ? "checked='checked'" : "" %> > <%=result.name%>
+		<input type="radio" name="teamMemberTypeId" class="user-team-member-data-type" value="<%=result.id%>" <%= teamMemberTypeId == result.id ? "checked='checked'" : "" %> > <%=result.name%>
 		<br/>
 	<% }) %>
 </div>
