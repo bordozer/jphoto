@@ -4,18 +4,14 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'userTeamMemberId',
 
-		openInfo: false,
-		openEditor: false,
-		hasUnsavedChanged: false
-
-		/*, isNew: function() {
-			return this.get( this.idAttribute ) == 0;
-		}*/
+		openInfo: false
+		, openEditor: false
+		, hasUnsavedChanged: false
 
 		, defaults: function() {
 			return {
 				openEditor: false
-				, setTeamMemberTypeId: 1
+				, teamMemberTypeId: 1
 			};
 		}
 	});

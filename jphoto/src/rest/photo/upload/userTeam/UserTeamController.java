@@ -109,8 +109,7 @@ public class UserTeamController {
 			} else {
 				dto.setSiteMemberLink( "" );
 			}
-			final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
-			dto.setUserTeamMemberTypes( entries );
+			dto.setUserTeamMemberTypes( GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries() );
 
 			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
 			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );

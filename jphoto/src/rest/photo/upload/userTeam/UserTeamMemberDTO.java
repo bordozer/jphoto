@@ -1,7 +1,8 @@
 package rest.photo.upload.userTeam;
 
-import core.enums.UserTeamMemberType;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import ui.translatable.GenericTranslatableEntry;
 
 import java.util.List;
@@ -11,14 +12,16 @@ public class UserTeamMemberDTO {
 
 	private int userTeamMemberId;
 	private String userTeamMemberName;
-
 	private boolean checked;
 	private String userTeamMemberCardUrl;
+	private int teamMemberTypeId;
+
 	private int teamMemberPhotosQty;
 	private String teamMemberTypeName;
 	private String siteMemberLink;
+
+	@JsonIgnore
 	private List<GenericTranslatableEntry> userTeamMemberTypes;
-	private int teamMemberTypeId;
 
 	public UserTeamMemberDTO() {
 	}
@@ -51,9 +54,12 @@ public class UserTeamMemberDTO {
 		this.checked = checked;
 	}
 
-	@Override
-	public String toString() {
-		return String.format( "#%d: '%s'", userTeamMemberId, userTeamMemberName );
+	public void setTeamMemberTypeId( final int teamMemberTypeId ) {
+		this.teamMemberTypeId = teamMemberTypeId;
+	}
+
+	public int getTeamMemberTypeId() {
+		return teamMemberTypeId;
 	}
 
 	public void setUserTeamMemberCardUrl( final String userTeamMemberCardUrl ) {
@@ -88,20 +94,18 @@ public class UserTeamMemberDTO {
 		return siteMemberLink;
 	}
 
-
+	@JsonIgnore
 	public void setUserTeamMemberTypes( final List<GenericTranslatableEntry> userTeamMemberTypes ) {
 		this.userTeamMemberTypes = userTeamMemberTypes;
 	}
 
+	@JsonProperty
 	public List<GenericTranslatableEntry> getUserTeamMemberTypes() {
 		return userTeamMemberTypes;
 	}
 
-	public void setTeamMemberTypeId( final int teamMemberTypeId ) {
-		this.teamMemberTypeId = teamMemberTypeId;
-	}
-
-	public int getTeamMemberTypeId() {
-		return teamMemberTypeId;
+	@Override
+	public String toString() {
+		return String.format( "#%d: '%s'", userTeamMemberId, userTeamMemberName );
 	}
 }
