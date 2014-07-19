@@ -118,6 +118,7 @@ define( ["backbone", "jquery", "underscore"
 				return this;
 			}
 
+			div.append( "<input type='hidden' id='_containsNudeContent' name='_containsNudeContent' value='true' >" );
 			div.append( "<input type='checkbox' class='contains-nude-content-checkbox' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
 			this.$el.html( div );
 
@@ -125,7 +126,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		nudeContentChange: function( control ) {
-			this.model.set( { photoContainsNude: control.prop( 'checked' ) }, { silent: true } );
+			var isNudeContent = control.prop( 'checked' );
+			this.model.set( { photoContainsNude: isNudeContent }, { silent: true } );
+			this.$( '#_containsNudeContent' ).val( isNudeContent );
 		},
 
 		onNudeContentChange: function( evt ) {
