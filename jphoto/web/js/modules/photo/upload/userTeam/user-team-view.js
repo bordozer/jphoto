@@ -26,7 +26,6 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 
 			var translationsDTO = this.model[ 'translationDTO' ];
-			modelJSON[ 'headerTitle' ] = translationsDTO[ 'headerTitle' ];
 			modelJSON[ 'headerTitleCreateNewMemberButtonTitle' ] = translationsDTO[ 'headerTitleCreateNewMemberButtonTitle' ];
 
 			this.$el.html( this.userTeamHeaderTemplate( modelJSON ) );

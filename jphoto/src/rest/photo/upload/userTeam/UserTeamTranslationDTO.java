@@ -5,7 +5,6 @@ import core.services.translator.TranslatorService;
 
 public class UserTeamTranslationDTO {
 
-	private final String headerTitle;
 	private final String headerTitleCreateNewMemberButtonTitle;
 
 	private final String listEntryPhotos;
@@ -31,7 +30,7 @@ public class UserTeamTranslationDTO {
 	private final String discardChangesConfirmation;
 
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
-		headerTitle = translatorService.translate( "Photo data / Photo team/ Header title: Select existing members", language );
+
 		headerTitleCreateNewMemberButtonTitle = translatorService.translate( "Photo data / Photo team/ Header title: Create new team member", language );
 
 		listEntryPhotos = translatorService.translate( "ROD PLURAL photos", language );
@@ -55,10 +54,6 @@ public class UserTeamTranslationDTO {
 
 		saveChangesConfirmation = translatorService.translate( "Photo data / Photo team: Save changes confirmation", language );
 		discardChangesConfirmation = translatorService.translate( "Photo data / Photo team: Discard changes confirmation", language );
-	}
-
-	public String getHeaderTitle() {
-		return headerTitle;
 	}
 
 	public String getHeaderTitleCreateNewMemberButtonTitle() {
