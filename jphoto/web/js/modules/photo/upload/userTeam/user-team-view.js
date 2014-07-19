@@ -25,7 +25,9 @@ define( ["backbone", "jquery", "underscore"
 		renderHeader: function () {
 			var modelJSON = this.model.toJSON();
 
-			modelJSON[ 'headerTitle' ] = this.model[ 'translationDTO' ][ 'headerTitle' ];
+			var translationsDTO = this.model[ 'translationDTO' ];
+			modelJSON[ 'headerTitle' ] = translationsDTO[ 'headerTitle' ];
+			modelJSON[ 'headerTitleCreateNewMemberButtonTitle' ] = translationsDTO[ 'headerTitleCreateNewMemberButtonTitle' ];
 
 			this.$el.html( this.userTeamHeaderTemplate( modelJSON ) );
 		},
