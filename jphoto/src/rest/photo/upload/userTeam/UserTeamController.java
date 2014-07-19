@@ -100,9 +100,18 @@ public class UserTeamController {
 
 		for ( final UserTeamMember userTeamMember : userTeam.getUserTeamMembers() ) {
 			final UserTeamMemberDTO dto = new UserTeamMemberDTO( userTeamMember.getId() );
-			dto.setUserTeamMemberName( userTeamMember.getTeamMemberName() );
+
+			final String teamMemberName = userTeamMember.getTeamMemberName();
+			dto.setUserTeamMemberName( teamMemberName );
+
 			dto.setChecked( !isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
 			dto.setUserTeamMemberCardUrl( urlUtilsService.getUserTeamMemberCardLink( currentUserId, userTeamMember.getId() ) );
+
+			final String memberTypeName = translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() );
+			dto.setTeamMemberTypeName( memberTypeName );
+			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );
+
+			dto.setUserTeamMemberNameTitle( translatorService.translate( "$1: $2", getLanguage(), teamMemberName, memberTypeName ) );
 			dto.setTeamMemberPhotosQty( userTeamService.getTeamMemberPhotosQty( userTeamMember.getId() ) );
 
 			if ( userTeamMember.getTeamMemberUser() != null ) {
@@ -110,15 +119,6 @@ public class UserTeamController {
 			} else {
 				dto.setSiteMemberLink( "" );
 			}
-			/*final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( getLanguage(), translatorService ).getEntries();
-			final List<TeamMemberTypeDTO> teamMemberTypeDTOs = newArrayList();
-			for ( final GenericTranslatableEntry entry : entries ) {
-				teamMemberTypeDTOs.add( new TeamMemberTypeDTO( entry.getId(), entry.getName() ) );
-			}
-			dto.setUserTeamMemberTypes( teamMemberTypeDTOs );*/
-
-			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
-			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );
 
 			result.add( dto );
 		}

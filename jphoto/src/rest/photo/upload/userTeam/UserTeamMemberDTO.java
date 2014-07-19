@@ -13,6 +13,7 @@ public class UserTeamMemberDTO {
 	private String userTeamMemberCardUrl;
 	private int teamMemberTypeId;
 
+	private String userTeamMemberNameTitle;
 	private int teamMemberPhotosQty;
 	private String teamMemberTypeName;
 	private String siteMemberLink;
@@ -62,6 +63,14 @@ public class UserTeamMemberDTO {
 
 	public String getUserTeamMemberCardUrl() {
 		return userTeamMemberCardUrl;
+	}
+
+	public String getUserTeamMemberNameTitle() {
+		return userTeamMemberNameTitle;
+	}
+
+	public void setUserTeamMemberNameTitle( final String userTeamMemberNameTitle ) {
+		this.userTeamMemberNameTitle = userTeamMemberNameTitle;
 	}
 
 	public void setTeamMemberPhotosQty( final int teamMemberPhotosQty ) {

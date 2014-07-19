@@ -3,7 +3,7 @@
 	<input type="checkbox" name="userTeamMemberIds" class="user-team-member-checkbox" value="<%-userTeamMemberId%>" <%- checked ?  "checked='checked'" : "" %> >
 
 	<% if ( userTeamMemberId > 0 && ! openEditor ) { %>
-		<a href="#" class="user-team-member-info" onclick="return false;"><%-userTeamMemberName%></a> - <%- teamMemberPhotosQty %> <%- listEntryPhotos %>
+		<a href="#" class="user-team-member-info" onclick="return false;" title="<%-userTeamMemberNameTitle%>"><%-userTeamMemberName%></a> - <%- teamMemberPhotosQty %> <%- listEntryPhotos %>
 	<% } %>
 
 	<% if ( userTeamMemberId > 0 && openEditor ) { %>
