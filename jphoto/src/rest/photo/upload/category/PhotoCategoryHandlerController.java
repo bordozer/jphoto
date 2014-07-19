@@ -13,9 +13,9 @@ import core.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import rest.photo.upload.description.AbstractPhotoUploadAllowance;
-import rest.photo.upload.description.PhotoUploadDescription;
-import rest.photo.upload.description.UploadDescriptionFactory;
+import rest.photo.upload.category.allowance.AbstractPhotoUploadAllowance;
+import rest.photo.upload.category.allowance.PhotoUploadDescription;
+import rest.photo.upload.category.allowance.UploadDescriptionFactory;
 import ui.context.EnvironmentContext;
 import utils.NumberUtils;
 

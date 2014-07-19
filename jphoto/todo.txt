@@ -8,7 +8,7 @@ Base functionality
 
 2. Photo upload:
 	- Force set anonymous setting for anonymous days, respecting user status
-	- Finish managing user's team members from upload page
+	- User's team managing: user picker
 	- Implement managing user's albums from upload page
 	- Implement ability of background set
 

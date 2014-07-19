@@ -1,4 +1,4 @@
-package rest.photo.upload.description;
+package rest.photo.upload.category.allowance;
 
 import core.general.user.User;
 import core.general.user.UserStatus;

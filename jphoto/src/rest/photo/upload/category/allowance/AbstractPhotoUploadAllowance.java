@@ -1,4 +1,4 @@
-package rest.photo.upload.description;
+package rest.photo.upload.category.allowance;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;

@@ -1,6 +1,6 @@
 package rest.photo.upload.category;
 
-import rest.photo.upload.description.PhotoUploadDescription;
+import rest.photo.upload.category.allowance.PhotoUploadDescription;
 
 import java.util.List;
 

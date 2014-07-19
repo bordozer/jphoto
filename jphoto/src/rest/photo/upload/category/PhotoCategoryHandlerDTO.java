@@ -1,8 +1,7 @@
 package rest.photo.upload.category;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import rest.photo.upload.description.PhotoUploadDescription;
-import ui.controllers.photos.edit.GenreWrapper;
+import rest.photo.upload.category.allowance.PhotoUploadDescription;
 
 import java.util.List;
 

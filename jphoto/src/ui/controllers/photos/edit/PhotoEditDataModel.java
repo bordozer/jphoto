@@ -7,7 +7,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import rest.photo.upload.description.AbstractPhotoUploadAllowance;
+import rest.photo.upload.category.allowance.AbstractPhotoUploadAllowance;
 import org.springframework.web.multipart.MultipartFile;
 import ui.translatable.GenericTranslatableList;
 
