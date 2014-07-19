@@ -7,7 +7,7 @@
 	<% } %>
 
 	<% if ( userTeamMemberId > 0 && openEditor ) { %>
-		<%-userTeamMemberName%> - <%- teamMemberPhotosQty %> photo(s)
+		<%-userTeamMemberName%> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>
 	<% } %>
 
 	<% if ( userTeamMemberId == 0 ) { %>
