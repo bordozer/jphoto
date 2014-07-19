@@ -5,8 +5,6 @@ public class PhotoUploadNudeContentDTO {
 	private boolean genreCanContainsNude;
 	private boolean genreObviouslyContainsNude;
 
-	private boolean photoContainsNude;
-
 	private String yesTranslated;
 	private String noTranslated;
 
@@ -24,14 +22,6 @@ public class PhotoUploadNudeContentDTO {
 
 	public void setGenreObviouslyContainsNude( final boolean genreObviouslyContainsNude ) {
 		this.genreObviouslyContainsNude = genreObviouslyContainsNude;
-	}
-
-	public boolean isPhotoContainsNude() {
-		return photoContainsNude;
-	}
-
-	public void setPhotoContainsNude( final boolean photoContainsNude ) {
-		this.photoContainsNude = photoContainsNude;
 	}
 
 	public String getYesTranslated() {

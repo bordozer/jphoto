@@ -28,7 +28,7 @@ define( ["backbone", "jquery", "underscore"
 			var nudeContentView = new NudeContentHandlerView( {
 				model: model
 			} );
-			div.append( nudeContentView.renderNudeContent().$el.html() );
+			div.append( nudeContentView.renderNudeContent().$el );
 
 			this.$el.html( div );
 		},
@@ -53,11 +53,13 @@ define( ["backbone", "jquery", "underscore"
 	var NudeContentHandlerView = Backbone.View.extend( {
 
 		events: {
-			"change #containsNudeContent": "onNudeContentChange"
+			"change .contains-nude-content-checkbox": "onNudeContentChange"
 		},
 
 		renderNudeContent: function () {
+
 			var div = $( "<div style='float: left; width: 100%;'></div>" );
+
 			div.append( "Nude content:" ); // TODO: translate
 			div.append( "<br />" );
 
@@ -65,7 +67,7 @@ define( ["backbone", "jquery", "underscore"
 
 			var genreCanContainsNude = modelJSON[ 'genreCanContainsNude' ];
 			var genreObviouslyContainsNude = modelJSON[ 'genreObviouslyContainsNude' ];
-			var photoContainsNude = modelJSON[ 'photoContainsNude' ];
+			var photoContainsNude = this.model.get( 'photoContainsNude' );
 
 			if ( ! genreCanContainsNude ) {
 				div.append( "<input type='hidden' name='containsNudeContent' value='false' >" );
@@ -80,15 +82,14 @@ define( ["backbone", "jquery", "underscore"
 				return this;
 			}
 
-			div.append( "<input type='checkbox' id='containsNudeContent' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
+			div.append( "<input type='checkbox' class='contains-nude-content-checkbox' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
 			this.$el.html( div );
 
 			return this;
 		},
 
 		nudeContentChange: function( control ) {
-			this.bindModel( control );
-			this.save();
+			this.model.set( { photoContainsNude: control.prop( 'checked' ) }, { silent: true } );
 		},
 
 		onNudeContentChange: function( evt ) {
@@ -96,22 +97,6 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.nudeContentChange( $( evt.target ) );
-		},
-
-		bindModel: function( control ) {
-			this.model.set( { photoContainsNude: control.prop( 'checked' ) }, { silent: true } );
-		},
-
-		save: function() {
-			this.model.save()
-				.done( _.bind( this.onSave, this ) )
-				.fail( _.bind( this.onSaveError, this ) );
-		},
-
-		onSave: function() {},
-
-		onSaveError: function() {
-			showUIMessage_Error( 'Server update error' );
 		}
 	});
 

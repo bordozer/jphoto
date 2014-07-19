@@ -37,7 +37,13 @@ public class PhotoCategoryHandlerController {
 
 		dto.setPhotoId( photoId );
 		dto.setPhotoCategoryDTOs( getPhotoCategoryDTOs() );
-		dto.setNudeContentDTO( getNudeContentDTO( categoryId, photoId ) );
+
+		final PhotoUploadNudeContentDTO nudeContentDTO = getNudeContentDTO( categoryId, photoId );
+		if ( photoId > 0 ) {
+			final Photo photo = photoService.load( photoId );
+			dto.setPhotoContainsNude( photo.isContainsNudeContent() );
+		}
+		dto.setNudeContentDTO( nudeContentDTO );
 
 		final Photo photo = photoService.load( photoId );
 		if ( photo != null ) {
@@ -68,11 +74,6 @@ public class PhotoCategoryHandlerController {
 
 		dto.setYesTranslated( translatorService.translate( "Photo edit: Category always contains nude", EnvironmentContext.getLanguage() ) );
 		dto.setNoTranslated( translatorService.translate( "Photo edit: Category can not contains nude", EnvironmentContext.getLanguage() ) );
-
-		if ( photoId > 0 ) {
-			final Photo photo = photoService.load( photoId );
-			dto.setPhotoContainsNude( photo.isContainsNudeContent() );
-		}
 
 		return dto;
 	}
