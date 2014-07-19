@@ -102,6 +102,9 @@ define( ["backbone", "jquery", "underscore"
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
+			var translationsDTO = this.model.get( 'translationDTO' );
+			modelJSON[ 'listEntryPhotos' ] = translationsDTO[ 'listEntryPhotos' ];
+
 			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
 
 			if ( this.model.get( 'openEditor' ) ) {
