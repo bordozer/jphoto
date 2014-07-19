@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
-import ui.translatable.GenericTranslatableEntry;
-import ui.translatable.GenericTranslatableList;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -69,22 +66,23 @@ public class UserTeamController {
 		return userTeamService.delete( userTeamMemberId );
 	}
 
-	private void doSaveUserTeamMember( final UserTeamMemberDTO userTeamMemberDTO ) {
+	private void doSaveUserTeamMember( final UserTeamMemberDTO dto ) {
 
 		final UserTeamMember teamMember = new UserTeamMember();
 
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
-		teamMember.setId( userTeamMemberDTO.getUserTeamMemberId() );
-		teamMember.setName( userTeamMemberDTO.getUserTeamMemberName() );
+		teamMember.setId( dto.getUserTeamMemberId() );
+		teamMember.setName( dto.getUserTeamMemberName() );
 
-		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( userTeamMemberDTO.getTeamMemberTypeId() );
+		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( dto.getTeamMemberTypeId() );
 		teamMember.setTeamMemberType( teamMemberType );
 //		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
 
-		userTeamMemberDTO.setUserTeamMemberId( teamMember.getId() );
-		userTeamMemberDTO.setTeamMemberTypeName( translatorService.translate( teamMemberType.getName(), getLanguage() ) );
+		dto.setUserTeamMemberId( teamMember.getId() );
+		dto.setTeamMemberTypeName( translatorService.translate( teamMemberType.getName(), getLanguage() ) );
+		dto.setTeamMemberPhotosQty( userTeamService.getTeamMemberPhotosQty( teamMember.getId() ) );
 	}
 
 	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
