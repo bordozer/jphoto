@@ -64,67 +64,10 @@
 						}
 					</script>
 
-					<%--<div style="float: left;">
-						<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
-								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="27" cssClass="photo-genre"/>
-					</div>
-
-					<c:if test="${photoEditDataModel.new}">
-						<div class="photo-upload-allowance justify-font" style="float: left; margin-left: 10px; width: 320px;">
-							<html:spinningWheel16 title="${eco:translate('Photo uploading: Loading photo upload allowance spinning wheel title')}" />
-						</div>
-					</c:if>
-
-					<script type="text/javascript">
-
-						<c:if test="${photoEditDataModel.new}">
-							showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.selectedGenreId} );
-
-							function showPhotoAllowance( userId, genreId ) {
-								require( ['modules/photo/upload/photo-upload-allowance'], function ( photoUploadAllowance ) {
-										photoUploadAllowance( userId, genreId, '${photoEditDataModel.photo.fileSize}', '${eco:baseUrl()}', $( '.photo-upload-allowance' ) );
-								} );
-							}
-						</c:if>
-
-						function redrawPhotoAllowance() {
-							<c:if test="${photoEditDataModel.new}">
-								showPhotoAllowance( ${photoEditDataModel.photoAuthor.id}, $( ".photo-genre" ).val() );
-							</c:if>
-							refreshNudeContent();
-						}
-
-					</script>--%>
-
 				</table:tddata>
 			</table:tredit>
 
 		</table:tredit>
-
-		<%--<table:tredit>
-			<table:tdtext text_t="Photo uploading: Contains nude content" labelFor="containsNudeContent1"/>
-
-			<table:tddata>
-				<div id="nude-content-container"></div>
-
-				<script type="text/javascript">
-
-					<c:if test="${photoEditDataModel.selectedGenreId > 0}">
-						renderNudeContent( ${photoEditDataModel.photo.id}, ${photoEditDataModel.selectedGenreId} );
-					</c:if>
-
-					function refreshNudeContent() {
-						renderNudeContent( ${photoEditDataModel.photo.id}, $( '#selectedGenreId' ).val() );
-					}
-
-					function renderNudeContent( photoId, genreId ) {
-						require( ['modules/photo/upload/photo-upload-nude-content'], function ( nudeContent ) {
-								nudeContent( photoId, genreId, '${eco:baseUrl()}', $( '#nude-content-container' ) );
-						} );
-					}
-				</script>
-			</table:tddata>
-		</table:tredit>--%>
 
 		<table:separator colspan="2" />
 
