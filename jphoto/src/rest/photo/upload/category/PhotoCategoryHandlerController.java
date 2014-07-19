@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import rest.photo.upload.description.AbstractPhotoUploadAllowance;
+import rest.photo.upload.description.PhotoUploadDescription;
 import rest.photo.upload.description.UploadDescriptionFactory;
 import ui.context.EnvironmentContext;
 import utils.NumberUtils;
@@ -53,6 +54,7 @@ public class PhotoCategoryHandlerController {
 		final PhotoCategoryHandlerDTO dto = new PhotoCategoryHandlerDTO();
 
 		dto.setPhotoId( photoId );
+		dto.setUserId( userId );
 		dto.setPhotoCategoryDTOs( getPhotoCategoryDTOs() );
 
 		if ( categoryId > 0 ) {
@@ -71,7 +73,8 @@ public class PhotoCategoryHandlerController {
 
 		if ( photoId == 0 ) {
 			final long fileSize = NumberUtils.convertToLong( request.getParameter( "filesize" ) );
-			dto.setPhotoUploadAllowanceDTO( photoUploadAllowance( userId, categoryId, fileSize ) );
+			dto.setFileSize( fileSize );
+			dto.setPhotoUploadDescriptions( photoUploadAllowance( userId, categoryId, fileSize ) );
 		}
 
 		return dto;
@@ -81,7 +84,10 @@ public class PhotoCategoryHandlerController {
 	@ResponseBody
 	public PhotoCategoryHandlerDTO onChangePhotoCategory( @RequestBody final PhotoCategoryHandlerDTO dto ) {
 
-		// TODO: set photo upload allowance
+		if ( dto.getPhotoId() == 0 ) {
+			dto.setPhotoUploadDescriptions( photoUploadAllowance( dto.getUserId(), dto.getSelectedCategoryId(), dto.getFileSize() ) );
+		}
+
 		dto.setNudeContentDTO( getNudeContentDTO( dto.getSelectedCategoryId(), dto.getPhotoId() ) );
 
 		return dto;
@@ -119,22 +125,10 @@ public class PhotoCategoryHandlerController {
 		return result;
 	}
 
-	public PhotoUploadAllowanceDTO photoUploadAllowance( final int photoAuthorId, final int categoryId, final long fileSize ) {
+	public List<PhotoUploadDescription> photoUploadAllowance( final int userId, final int categoryId, final long fileSize ) {
 
-		final User user = userService.load( photoAuthorId );
+		final User user = userService.load( userId );
 		final Genre genre = genreService.load( categoryId );
-
-		final PhotoUploadAllowanceDTO photoUploadAllowanceDTO = new PhotoUploadAllowanceDTO();
-		photoUploadAllowanceDTO.setUseId( photoAuthorId );
-		photoUploadAllowanceDTO.setGenreId( categoryId );
-
-		final AbstractPhotoUploadAllowance photoUploadAllowance = getPhotoUploadAllowance( user, genre, fileSize );
-		photoUploadAllowanceDTO.setPhotoUploadAllowance( photoUploadAllowance.getUploadAllowance() );
-
-		return photoUploadAllowanceDTO;
-	}
-
-	private AbstractPhotoUploadAllowance getPhotoUploadAllowance( final User user, final Genre genre, final long fileSize ) {
 
 		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage(), services );
 
@@ -142,6 +136,6 @@ public class PhotoCategoryHandlerController {
 		uploadAllowance.setGenre( genre );
 		uploadAllowance.setFileSize( fileSize );
 
-		return uploadAllowance;
+		return uploadAllowance.getUploadAllowance();
 	}
 }

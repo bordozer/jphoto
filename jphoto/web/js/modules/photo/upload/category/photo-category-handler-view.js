@@ -62,12 +62,11 @@ define( ["backbone", "jquery", "underscore"
 
 		renderPhotoAllowance: function () {
 
-			var div = $( "<div style='display: inline; width: 40%; vertical-align: top; border: dotted;'></div>" );
+			var div = $( "<div style='float:left; width: 300px; vertical-align: top;'></div>" );
 
-			var modelJSON = this.model.toJSON()[ 'photoUploadAllowanceDTO' ];
-			console.log( modelJSON );
+			var modelJSON = this.model.toJSON();
 
-			_.each( modelJSON[ 'photoUploadAllowance' ], function( allowance ) {
+			_.each( modelJSON[ 'photoUploadDescriptions' ], function( allowance ) {
 
 				var paragraphDiv = $( "<div style='float: left; width: 99%; margin-bottom: 10px;'></div>" );
 
@@ -96,7 +95,8 @@ define( ["backbone", "jquery", "underscore"
 
 			var div = $( "<div style='float: left; width: 100%;'></div>" );
 
-			div.append( "Nude content:" ); // TODO: translate
+			div.append( '<hr />' );
+			div.append( "<b>Nude content:</b>" ); // TODO: translate
 			div.append( "<br />" );
 
 			var modelJSON = this.model.toJSON()[ 'nudeContentDTO' ];

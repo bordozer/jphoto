@@ -1,6 +1,7 @@
 package rest.photo.upload.category;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import rest.photo.upload.description.PhotoUploadDescription;
 import ui.controllers.photos.edit.GenreWrapper;
 
 import java.util.List;
@@ -16,7 +17,9 @@ public class PhotoCategoryHandlerDTO {
 	private List<PhotoCategoryDTO> photoCategoryDTOs;
 
 	private PhotoUploadNudeContentDTO nudeContentDTO;
-	private PhotoUploadAllowanceDTO photoUploadAllowanceDTO;
+	private List<PhotoUploadDescription> photoUploadDescriptions;
+	private int userId;
+	private long fileSize;
 
 	public void setPhotoId( final int photoId ) {
 		this.photoId = photoId;
@@ -58,11 +61,27 @@ public class PhotoCategoryHandlerDTO {
 		this.nudeContentDTO = nudeContentDTO;
 	}
 
-	public PhotoUploadAllowanceDTO getPhotoUploadAllowanceDTO() {
-		return photoUploadAllowanceDTO;
+	public List<PhotoUploadDescription> getPhotoUploadDescriptions() {
+		return photoUploadDescriptions;
 	}
 
-	public void setPhotoUploadAllowanceDTO( final PhotoUploadAllowanceDTO photoUploadAllowanceDTO ) {
-		this.photoUploadAllowanceDTO = photoUploadAllowanceDTO;
+	public void setPhotoUploadDescriptions( final List<PhotoUploadDescription> photoUploadDescriptions ) {
+		this.photoUploadDescriptions = photoUploadDescriptions;
+	}
+
+	public void setUserId( final int userId ) {
+		this.userId = userId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setFileSize( final long fileSize ) {
+		this.fileSize = fileSize;
+	}
+
+	public long getFileSize() {
+		return fileSize;
 	}
 }
