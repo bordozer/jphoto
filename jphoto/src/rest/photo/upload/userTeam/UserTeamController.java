@@ -120,8 +120,6 @@ public class UserTeamController {
 			dto.setTeamMemberTypeName( translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() ) );
 			dto.setTeamMemberTypeId( userTeamMember.getTeamMemberType().getId() );
 
-//			dto.setTextNewMemberDefaultName( translatorService.translate( "Photo data / Photo team: New team member default name", getLanguage() ) );
-
 			result.add( dto );
 		}
 

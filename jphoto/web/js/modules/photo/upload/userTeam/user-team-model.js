@@ -7,6 +7,7 @@ define( ["backbone"], function ( Backbone ) {
 		openInfo: false
 		, openEditor: false
 		, hasUnsavedChanged: false
+		, translationDTO: []
 
 		, defaults: function() {
 			return {
@@ -20,10 +21,12 @@ define( ["backbone"], function ( Backbone ) {
 
 		model: EntryModel,
 		userTeamMemberTypes: [],
+		translationDTO: [],
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/photos/" + options.photoId + "/team/";
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
+			this.translationDTO = options.translationDTO;
 		},
 
 		refresh: function() {

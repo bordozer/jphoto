@@ -6,13 +6,19 @@
 <%@ tag import="ui.translatable.GenericTranslatableEntry" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
+<%@ tag import="rest.photo.upload.userTeam.UserTeamTranslationDTO" %>
+<%@ tag import="core.services.translator.Language" %>
+<%@ tag import="core.services.translator.TranslatorService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="photoId" type="java.lang.Integer" required="true" %>
 
 <%
-	final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries();
+	final Language language = EnvironmentContext.getLanguage();
+	final TranslatorService translatorService = ApplicationContextHelper.getTranslatorService();
+
+	final List<GenericTranslatableEntry> entries = GenericTranslatableList.userTeamMemberTypeList( language, translatorService ).getEntries();
 
 	final List<JSONObject> jsonObjects = newArrayList();
 	for ( final GenericTranslatableEntry entry : entries ) {
@@ -21,8 +27,13 @@
 	final JSONArray userTeamMemberTypes = new JSONArray( jsonObjects );
 %>
 
+<%
+	final UserTeamTranslationDTO translationDTO = new UserTeamTranslationDTO( translatorService, language );
+%>
+
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 <c:set var="userTeamMemberTypes" value="<%=userTeamMemberTypes%>" />
+<c:set var="translationDTO" value="<%=new JSONObject( translationDTO )%>" />
 
 <div class="user-team-container" style="float: left; padding: 5px; width: 400px;"></div>
 
@@ -50,6 +61,8 @@
 <script type="text/javascript">
 	require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
 		var userTeamMemberTypes = ${userTeamMemberTypes};
-		userTeam( ${photoId}, "${baseUrl}", $( '.user-team-container' ), userTeamMemberTypes );
+		var translationDTO = ${translationDTO};
+
+		userTeam( ${photoId}, "${baseUrl}", $( '.user-team-container' ), userTeamMemberTypes, translationDTO );
 	} );
 </script>

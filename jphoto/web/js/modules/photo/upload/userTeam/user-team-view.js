@@ -24,11 +24,14 @@ define( ["backbone", "jquery", "underscore"
 
 		renderHeader: function () {
 			var modelJSON = this.model.toJSON();
+
+			modelJSON[ 'headerTitle' ] = this.model[ 'translationDTO' ][ 'headerTitle' ];
+
 			this.$el.html( this.userTeamHeaderTemplate( modelJSON ) );
 		},
 
 		renderEntry: function ( teamMember ) {
-			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ] } );
+			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
 
 			var entryView = new EntryView( {
 				model: teamMember
@@ -40,6 +43,7 @@ define( ["backbone", "jquery", "underscore"
 
 		createEntry: function() {
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
+			var translationDTO = this.model[ 'translationDTO' ];
 
 			var teamMember = new Model.EntryModel( {
 				  userTeamMemberId: 0
@@ -47,6 +51,7 @@ define( ["backbone", "jquery", "underscore"
 				, checked: true
 				, openEditor: true
 				, userTeamMemberTypes: userTeamMemberTypes
+				, translationDTO: translationDTO
 			} );
 			this.model.add( teamMember );
 		},
