@@ -1,14 +1,15 @@
 	<div class="user-team-member-details">
-	<b>Name:</b> <input type="text" class="user-team-member-data user-team-member-name" value="<%-userTeamMemberName%>">
-	<img src="/images/icons16/close16.png" class="user-team-member-cancel" alt="Cancel" title="Cancel" height="16" width="16" >
-	<img src="/images/icons16/save.png" class="user-team-member-save" alt="Save" title="Save" height="16" width="16" style="display: none">
-	<img src="/images/icons16/cancel.png" class="user-team-member-discard-changes" alt="Discard changes" title="Discard changes" height="16" width="16" style="display: none">
+	<%-translationsDTO.entryInfoName%>: <input type="text" class="user-team-member-data user-team-member-name" value="<%-userTeamMemberName%>">
+	<img src="/images/icons16/close16.png" class="user-team-member-cancel" alt="Cancel" title="<%-translationsDTO.entryEditIconCancelCard%>" height="16" width="16" >
+	<img src="/images/icons16/save.png" class="user-team-member-save" alt="Save" title="<%-translationsDTO.entryEditIconSaveCard%>" height="16" width="16" style="display: none">
+	<img src="/images/icons16/cancel.png" class="user-team-member-discard-changes" alt="Discard" title="<%-translationsDTO.entryEditIconDiscardCard%>" height="16" width="16" style="display: none">
 
 	<br />
-	<b>Role:</b>
+	<%-translationsDTO.entryInfoRole%>:
 	<br />
 	<% _.each( userTeamMemberTypes, function( result ) { %>
-		<input type="radio" name="teamMemberTypeId" class="user-team-member-data-type" value="<%=result.id%>" <%= teamMemberTypeId == result.id ? "checked='checked'" : "" %> > <%=result.name%>
+		<input type="radio" id="teamMemberTypeId<%=result.id%>" name="teamMemberTypeId" class="user-team-member-data-type" value="<%=result.id%>" <%= teamMemberTypeId == result.id ? "checked='checked'" : "" %> >
+		<label for="teamMemberTypeId<%=result.id%>"><%=result.name%></label>
 		<br/>
 	<% }) %>
 </div>

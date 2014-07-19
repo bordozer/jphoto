@@ -102,8 +102,7 @@ define( ["backbone", "jquery", "underscore"
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
-			var translationsDTO = this.model.get( 'translationDTO' );
-			modelJSON[ 'listEntryPhotos' ] = translationsDTO[ 'listEntryPhotos' ];
+			modelJSON[ 'translationsDTO' ] = this.model.get( 'translationDTO' );
 
 			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
 
@@ -112,14 +111,6 @@ define( ["backbone", "jquery", "underscore"
 				this.$( '.user-team-member-name' ).focus();
 				this.$( '.user-team-member-name' ).select();
 			} else if ( this.model.get( 'openInfo' ) ) {
-				modelJSON[ 'entryInfoName' ] = translationsDTO[ 'entryInfoName' ];
-				modelJSON[ 'entryInfoRole' ] = translationsDTO[ 'entryInfoRole' ];
-				modelJSON[ 'entryInfoMember' ] = translationsDTO[ 'entryInfoMember' ];
-
-				modelJSON[ 'entryInfoIconTitleCard' ] = translationsDTO[ 'entryInfoIconTitleCard' ];
-				modelJSON[ 'entryInfoIconTitleEdit' ] = translationsDTO[ 'entryInfoIconTitleEdit' ];
-				modelJSON[ 'entryInfoIconTitleDelete' ] = translationsDTO[ 'entryInfoIconTitleDelete' ];
-
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
 
