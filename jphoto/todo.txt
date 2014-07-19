@@ -7,7 +7,6 @@ Base functionality
 	- Photo card: voting by photoId and genreId, update photo info
 
 2. Photo upload:
-	- Join genre list, photo upload allowance and nude content in one model
 	- Force set anonymous setting for anonymous days, respecting user status
 	- Finish managing user's team members from upload page
 	- Implement managing user's albums from upload page

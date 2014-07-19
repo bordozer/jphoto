@@ -21,6 +21,9 @@ public class PhotoCategoryHandlerDTO {
 	private int userId;
 	private long fileSize;
 
+	private String textNudeContent;
+	private String textNudeContentDescription;
+
 	public void setPhotoId( final int photoId ) {
 		this.photoId = photoId;
 	}
@@ -83,5 +86,21 @@ public class PhotoCategoryHandlerDTO {
 
 	public long getFileSize() {
 		return fileSize;
+	}
+
+	public String getTextNudeContent() {
+		return textNudeContent;
+	}
+
+	public void setTextNudeContent( final String textNudeContent ) {
+		this.textNudeContent = textNudeContent;
+	}
+
+	public void setTextNudeContentDescription( final String textNudeContentDescription ) {
+		this.textNudeContentDescription = textNudeContentDescription;
+	}
+
+	public String getTextNudeContentDescription() {
+		return textNudeContentDescription;
 	}
 }

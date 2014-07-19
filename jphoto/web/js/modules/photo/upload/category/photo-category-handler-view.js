@@ -96,7 +96,7 @@ define( ["backbone", "jquery", "underscore"
 			var div = $( "<div style='float: left; width: 100%;'></div>" );
 
 			div.append( '<hr />' );
-			div.append( "<b>Nude content:</b>" ); // TODO: translate
+			div.append( "<b>" + this.model.get( 'textNudeContent' ) + "</b>" );
 			div.append( "<br />" );
 
 			var modelJSON = this.model.toJSON()[ 'nudeContentDTO' ];
@@ -120,6 +120,8 @@ define( ["backbone", "jquery", "underscore"
 
 			div.append( "<input type='hidden' id='_containsNudeContent' name='_containsNudeContent' value='true' >" );
 			div.append( "<input type='checkbox' class='contains-nude-content-checkbox' name='containsNudeContent' value='true' " + ( photoContainsNude ? "checked='checked'" : "" ) + " >" );
+			div.append( this.model.get( 'textNudeContentDescription' ) );
+
 			this.$el.html( div );
 
 			return this;

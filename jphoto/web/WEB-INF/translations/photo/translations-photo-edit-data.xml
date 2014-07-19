@@ -89,7 +89,12 @@
 
 	<translation>
 		<nerd>Photo uploading: Contains nude content</nerd>
-		<ru><![CDATA[Работа содержит НЮ]]></ru>
+		<ru><![CDATA[НЮ контент]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo uploading: Check this if the photo contains nude content</nerd>
+		<ru><![CDATA[Поставьте галочку, если работа содержит обнаженную натуру]]></ru>
 	</translation>
 
 	<translation>

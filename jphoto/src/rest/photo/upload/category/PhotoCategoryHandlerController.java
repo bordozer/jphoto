@@ -77,6 +77,9 @@ public class PhotoCategoryHandlerController {
 			dto.setPhotoUploadDescriptions( photoUploadAllowance( userId, categoryId, fileSize ) );
 		}
 
+		dto.setTextNudeContent( translatorService.translate( "Photo uploading: Contains nude content", getLanguage() ) );
+		dto.setTextNudeContentDescription( translatorService.translate( "Photo uploading: Check this if the photo contains nude content", getLanguage() ) );
+
 		return dto;
 	}
 
@@ -102,14 +105,14 @@ public class PhotoCategoryHandlerController {
 		dto.setGenreCanContainsNude( genre.isCanContainNudeContent() );
 		dto.setGenreObviouslyContainsNude( genre.isContainsNudeContent() );
 
-		dto.setYesTranslated( translatorService.translate( "Photo edit: Category always contains nude", EnvironmentContext.getLanguage() ) );
-		dto.setNoTranslated( translatorService.translate( "Photo edit: Category can not contains nude", EnvironmentContext.getLanguage() ) );
+		dto.setYesTranslated( translatorService.translate( "Photo edit: Category always contains nude", getLanguage() ) );
+		dto.setNoTranslated( translatorService.translate( "Photo edit: Category can not contains nude", getLanguage() ) );
 
 		return dto;
 	}
 
 	private List<PhotoCategoryDTO> getPhotoCategoryDTOs() {
-		final Language language = EnvironmentContext.getLanguage();
+		final Language language = getLanguage();
 
 		final List<PhotoCategoryDTO> result = newArrayList();
 
@@ -130,12 +133,16 @@ public class PhotoCategoryHandlerController {
 		final User user = userService.load( userId );
 		final Genre genre = genreService.load( categoryId );
 
-		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage(), services );
+		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), getLanguage(), services );
 
 		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user.getId() ) );
 		uploadAllowance.setGenre( genre );
 		uploadAllowance.setFileSize( fileSize );
 
 		return uploadAllowance.getUploadAllowance();
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }
