@@ -231,7 +231,7 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( 'Save changes?' ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'saveChangesConfirmation' ] ) ) {
 				return;
 			}
 
@@ -242,7 +242,7 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( 'Discard changes?' ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'discardChangesConfirmation' ] ) ) {
 				return;
 			}
 
