@@ -9,13 +9,13 @@
 	</div>
 
 	<div style="float: left; padding-left: 10px;">
-		Name: <div class="user-team-member-edit" style="display: inline;"><%-userTeamMemberName%></div>
+		<%-entryInfoName%>: <div class="user-team-member-edit" style="display: inline;"><%-userTeamMemberName%></div>
 		<br />
-		Role: <%- teamMemberTypeName %>
+		<%-entryInfoRole%>: <%- teamMemberTypeName %>
 
 		<% if ( siteMemberLink != '' ) { %>
 			<br />
-			Member: <%= siteMemberLink %>
+			<%-entryInfoMember%>: <%= siteMemberLink %>
 		<% } %>
 	</div>
 

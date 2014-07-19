@@ -112,6 +112,10 @@ define( ["backbone", "jquery", "underscore"
 				this.$( '.user-team-member-name' ).focus();
 				this.$( '.user-team-member-name' ).select();
 			} else if ( this.model.get( 'openInfo' ) ) {
+				modelJSON[ 'entryInfoName' ] = translationsDTO[ 'entryInfoName' ];
+				modelJSON[ 'entryInfoRole' ] = translationsDTO[ 'entryInfoRole' ];
+				modelJSON[ 'entryInfoMember' ] = translationsDTO[ 'entryInfoMember' ];
+
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
 
