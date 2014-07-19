@@ -1,4 +1,4 @@
-package rest.photo.upload;
+package rest.photo.upload.category;
 
 import rest.photo.upload.description.PhotoUploadDescription;
 

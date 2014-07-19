@@ -14,7 +14,9 @@ public class PhotoCategoryHandlerDTO {
 	private boolean photoContainsNude;
 
 	private List<PhotoCategoryDTO> photoCategoryDTOs;
+
 	private PhotoUploadNudeContentDTO nudeContentDTO;
+	private PhotoUploadAllowanceDTO photoUploadAllowanceDTO;
 
 	public void setPhotoId( final int photoId ) {
 		this.photoId = photoId;
@@ -54,5 +56,13 @@ public class PhotoCategoryHandlerDTO {
 
 	public void setNudeContentDTO( final PhotoUploadNudeContentDTO nudeContentDTO ) {
 		this.nudeContentDTO = nudeContentDTO;
+	}
+
+	public PhotoUploadAllowanceDTO getPhotoUploadAllowanceDTO() {
+		return photoUploadAllowanceDTO;
+	}
+
+	public void setPhotoUploadAllowanceDTO( final PhotoUploadAllowanceDTO photoUploadAllowanceDTO ) {
+		this.photoUploadAllowanceDTO = photoUploadAllowanceDTO;
 	}
 }
