@@ -214,7 +214,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		deleteEntry: function() {
-			if ( ! confirm( "Delete '" + this.model.get( 'userTeamMemberName' ) + "'?" ) ) {
+			if ( ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
 				return;
 			}
 

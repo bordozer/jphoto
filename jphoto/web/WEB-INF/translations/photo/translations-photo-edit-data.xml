@@ -228,6 +228,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo data / Photo team: delete this member?</nerd>
+		<ru><![CDATA[Удалить этого члена команды? Внимание! Так же будет удалена информация об участии этого члена команды в создании других работ! Продолжить и удалить?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

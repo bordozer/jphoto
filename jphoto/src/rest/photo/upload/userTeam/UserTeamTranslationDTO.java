@@ -24,6 +24,9 @@ public class UserTeamTranslationDTO {
 
 	private final String newEntryDefaultName;
 
+	private final String deleteEntryConfirmation;
+	private final String discardChanges;
+
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
 		headerTitle = translatorService.translate( "Photo data / Photo team/ Header title: Select existing members", language );
 		headerTitleCreateNewMemberButtonTitle = translatorService.translate( "Photo data / Photo team/ Header title: Create new team member", language );
@@ -43,6 +46,9 @@ public class UserTeamTranslationDTO {
 		entryEditIconDiscardCard = translatorService.translate( "Photo data / Photo team / Entry edit / Icon: Discard", language );
 
 		newEntryDefaultName = translatorService.translate( "Photo data / Photo team: New team member default name", language );
+
+		deleteEntryConfirmation = translatorService.translate( "Photo data / Photo team: delete this member?", language );
+		discardChanges = translatorService.translate( "Photo data / Photo team: New team member default name", language );
 	}
 
 	public String getHeaderTitle() {
@@ -95,5 +101,13 @@ public class UserTeamTranslationDTO {
 
 	public String getNewEntryDefaultName() {
 		return newEntryDefaultName;
+	}
+
+	public String getDeleteEntryConfirmation() {
+		return deleteEntryConfirmation;
+	}
+
+	public String getDiscardChanges() {
+		return discardChanges;
 	}
 }
