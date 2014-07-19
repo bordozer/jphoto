@@ -198,6 +198,31 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo data / Photo team / Entry info / Icon: Card</nerd>
+		<ru><![CDATA[Карточка члена команды]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo data / Photo team / Entry info / Icon: Edit</nerd>
+		<ru><![CDATA[Редактировать даные]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo data / Photo team / Entry info / Icon: Delete</nerd>
+		<ru><![CDATA[Удалить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

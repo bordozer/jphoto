@@ -14,6 +14,10 @@ public class UserTeamTranslationDTO {
 	private final String entryInfoRole;
 	private final String entryInfoMember;
 
+	private final String entryInfoIconTitleCard;
+	private final String entryInfoIconTitleEdit;
+	private final String entryInfoIconTitleDelete;
+
 	private final String newMemberDefaultName;
 
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
@@ -25,6 +29,10 @@ public class UserTeamTranslationDTO {
 		entryInfoName = translatorService.translate( "Photo data / Photo team / Entry info: Name", language );
 		entryInfoRole = translatorService.translate( "Photo data / Photo team / Entry info: Role", language );
 		entryInfoMember = translatorService.translate( "Photo data / Photo team / Entry info: Member", language );
+
+		entryInfoIconTitleCard = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Card", language );
+		entryInfoIconTitleEdit = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Edit", language );
+		entryInfoIconTitleDelete = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Delete", language );
 
 		newMemberDefaultName = translatorService.translate( "Photo data / Photo team: New team member default name", language );
 	}
@@ -51,6 +59,18 @@ public class UserTeamTranslationDTO {
 
 	public String getEntryInfoMember() {
 		return entryInfoMember;
+	}
+
+	public String getEntryInfoIconTitleCard() {
+		return entryInfoIconTitleCard;
+	}
+
+	public String getEntryInfoIconTitleEdit() {
+		return entryInfoIconTitleEdit;
+	}
+
+	public String getEntryInfoIconTitleDelete() {
+		return entryInfoIconTitleDelete;
 	}
 
 	public String getNewMemberDefaultName() {

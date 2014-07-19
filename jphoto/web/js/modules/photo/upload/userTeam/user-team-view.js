@@ -116,6 +116,10 @@ define( ["backbone", "jquery", "underscore"
 				modelJSON[ 'entryInfoRole' ] = translationsDTO[ 'entryInfoRole' ];
 				modelJSON[ 'entryInfoMember' ] = translationsDTO[ 'entryInfoMember' ];
 
+				modelJSON[ 'entryInfoIconTitleCard' ] = translationsDTO[ 'entryInfoIconTitleCard' ];
+				modelJSON[ 'entryInfoIconTitleEdit' ] = translationsDTO[ 'entryInfoIconTitleEdit' ];
+				modelJSON[ 'entryInfoIconTitleDelete' ] = translationsDTO[ 'entryInfoIconTitleDelete' ];
+
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
 			}
 
