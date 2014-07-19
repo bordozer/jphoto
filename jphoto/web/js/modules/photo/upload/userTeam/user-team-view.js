@@ -148,7 +148,7 @@ define( ["backbone", "jquery", "underscore"
 
 		onSaveSuccess: function() {
 			this.closeEditor();
-			showUIMessage_Notification( "Team member changes has been saved successfully" );
+			showUIMessage_Notification( this.model.get( 'translationDTO' )[ 'dataSavedSuccessfully' ] );
 		},
 
 		onSaveError: function( response ) {

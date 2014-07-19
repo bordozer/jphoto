@@ -29,6 +29,8 @@ public class UserTeamTranslationDTO {
 	private final String saveChangesConfirmation;
 	private final String discardChangesConfirmation;
 
+	private final String dataSavedSuccessfully;
+
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
 
 		headerTitleCreateNewMemberButtonTitle = translatorService.translate( "Photo data / Photo team/ Header title: Create new team member", language );
@@ -54,6 +56,8 @@ public class UserTeamTranslationDTO {
 
 		saveChangesConfirmation = translatorService.translate( "Photo data / Photo team: Save changes confirmation", language );
 		discardChangesConfirmation = translatorService.translate( "Photo data / Photo team: Discard changes confirmation", language );
+
+		dataSavedSuccessfully = translatorService.translate( "Photo data / Photo team: Team member changes has been saved successfully", language );
 	}
 
 	public String getHeaderTitleCreateNewMemberButtonTitle() {
@@ -118,5 +122,9 @@ public class UserTeamTranslationDTO {
 
 	public String getDiscardChangesConfirmation() {
 		return discardChangesConfirmation;
+	}
+
+	public String getDataSavedSuccessfully() {
+		return dataSavedSuccessfully;
 	}
 }
