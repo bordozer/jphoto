@@ -5,7 +5,6 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
-<%@ taglib prefix="photoUpload" tagdir="/WEB-INF/tags/photo/upload" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -46,8 +45,6 @@
 		</table:table>
 
 	</form:form>
-
-	<photoUpload:photoTeam photoId="${photoEditDataModel.photo.id}" />
 
 	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
 
