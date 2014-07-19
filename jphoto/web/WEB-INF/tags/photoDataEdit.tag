@@ -49,7 +49,22 @@
 
 				<table:tddata>
 
-					<div style="float: left;">
+					<div class="photo-category-handler-container justify-font" style="float: left; margin-left: 10px; width: 100%">
+						<html:spinningWheel16 title="${eco:translate('Photo data: Photo categories is being loaded')}" />
+					</div>
+
+					<script type="text/javascript">
+
+						photoCategoryHandler( ${photoEditDataModel.photoAuthor.id}, ${photoEditDataModel.photo.id}, ${photoEditDataModel.selectedGenreId} );
+
+						function photoCategoryHandler( authorId, photoId, categoryId ) {
+							require( ['modules/photo/upload/category/photo-category-handler'], function ( categoryHandler ) {
+								categoryHandler( authorId, photoId, categoryId, '${photoEditDataModel.photo.fileSize}', '${eco:baseUrl()}', $( '.photo-category-handler-container' ) );
+							} );
+						}
+					</script>
+
+					<%--<div style="float: left;">
 						<form:select path="selectedGenreId" items="${photoEditDataModel.genreWrappers}"
 								 itemLabel="genreNameTranslated" itemValue="genre.id" onchange="redrawPhotoAllowance();" htmlEscape="false" size="27" cssClass="photo-genre"/>
 					</div>
@@ -79,14 +94,14 @@
 							refreshNudeContent();
 						}
 
-					</script>
+					</script>--%>
 
 				</table:tddata>
 			</table:tredit>
 
 		</table:tredit>
 
-		<table:tredit>
+		<%--<table:tredit>
 			<table:tdtext text_t="Photo uploading: Contains nude content" labelFor="containsNudeContent1"/>
 
 			<table:tddata>
@@ -109,7 +124,7 @@
 					}
 				</script>
 			</table:tddata>
-		</table:tredit>
+		</table:tredit>--%>
 
 		<table:separator colspan="2" />
 

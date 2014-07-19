@@ -8,6 +8,7 @@ import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import rest.photo.upload.category.PhotoUploadNudeContentDTO;
 import ui.context.EnvironmentContext;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

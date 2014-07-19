@@ -164,7 +164,6 @@ public class PhotoEditDataController {
 
 		final User photoAuthor = model.getPhotoAuthor();
 
-		model.setGenreWrappers( getGenreWrappers() );
 		setAllowancesTranslatableLists( model );
 		model.setCommentsAllowance( userService.getUserPhotoCommentAllowance( photoAuthor ) ); // From user defaults
 		model.setVotingAllowance( userService.getUserPhotoVotingAllowance( photoAuthor ) );    // From user defaults
@@ -194,7 +193,6 @@ public class PhotoEditDataController {
 
 		model.clear();
 		model.setNew( false );
-		model.setGenreWrappers( getGenreWrappers() );
 
 		initModelFromPhoto( model, photo );
 
@@ -369,22 +367,6 @@ public class PhotoEditDataController {
 		final Photo photo = photoService.load( photoId );
 
 		securityService.assertUserCanEditPhoto( EnvironmentContext.getCurrentUser(), photo );
-	}
-
-	private List<GenreWrapper> getGenreWrappers() {
-		final Language language = EnvironmentContext.getLanguage();
-
-		final List<GenreWrapper> result = newArrayList();
-
-		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( language );
-		for ( final Genre genre : genres ) {
-			final GenreWrapper wrapper = new GenreWrapper( genre );
-			wrapper.setGenreNameTranslated( translatorService.translateGenre( genre, language ) );
-
-			result.add( wrapper );
-		}
-
-		return result;
 	}
 
 	private void setAllowancesTranslatableLists( final PhotoEditDataModel model ) {

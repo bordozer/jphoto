@@ -30,7 +30,6 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 	private String photoKeywords;
 
 	private int selectedGenreId;
-	private List<GenreWrapper> genreWrappers;
 
 	private boolean containsNudeContent;
 	private boolean anonymousPosting;
@@ -115,14 +114,6 @@ public class PhotoEditDataModel extends AbstractGeneralModel {
 
 	public void setSelectedGenreId( final int selectedGenreId ) {
 		this.selectedGenreId = selectedGenreId;
-	}
-
-	public List<GenreWrapper> getGenreWrappers() {
-		return genreWrappers;
-	}
-
-	public void setGenreWrappers( final List<GenreWrapper> genreWrappers ) {
-		this.genreWrappers = genreWrappers;
 	}
 
 	public boolean isContainsNudeContent() {
