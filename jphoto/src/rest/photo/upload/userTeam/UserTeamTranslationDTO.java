@@ -22,7 +22,7 @@ public class UserTeamTranslationDTO {
 	private final String entryEditIconSaveCard;
 	private final String entryEditIconDiscardCard;
 
-	private final String newMemberDefaultName;
+	private final String newEntryDefaultName;
 
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
 		headerTitle = translatorService.translate( "Photo data / Photo team/ Header title: Select existing members", language );
@@ -42,7 +42,7 @@ public class UserTeamTranslationDTO {
 		entryEditIconSaveCard = translatorService.translate( "Photo data / Photo team / Entry edit / Icon: Save", language );
 		entryEditIconDiscardCard = translatorService.translate( "Photo data / Photo team / Entry edit / Icon: Discard", language );
 
-		newMemberDefaultName = translatorService.translate( "Photo data / Photo team: New team member default name", language );
+		newEntryDefaultName = translatorService.translate( "Photo data / Photo team: New team member default name", language );
 	}
 
 	public String getHeaderTitle() {
@@ -93,7 +93,7 @@ public class UserTeamTranslationDTO {
 		return entryEditIconDiscardCard;
 	}
 
-	public String getNewMemberDefaultName() {
-		return newMemberDefaultName;
+	public String getNewEntryDefaultName() {
+		return newEntryDefaultName;
 	}
 }
