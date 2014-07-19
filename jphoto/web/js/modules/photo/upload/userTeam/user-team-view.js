@@ -214,6 +214,12 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		deleteEntry: function() {
+
+			if ( this.model.get( 'teamMemberPhotosQty' ) > 0 ) {
+				alert( this.model.get( 'translationDTO' )[ 'deleteEntryImpossible' ] );
+				return;
+			}
+
 			if ( ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
 				return;
 			}

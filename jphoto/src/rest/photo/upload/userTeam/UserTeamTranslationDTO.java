@@ -25,6 +25,7 @@ public class UserTeamTranslationDTO {
 	private final String newEntryDefaultName;
 
 	private final String deleteEntryConfirmation;
+	private final String deleteEntryImpossible;
 	private final String discardChanges;
 
 	public UserTeamTranslationDTO( final TranslatorService translatorService, final Language language ) {
@@ -48,6 +49,7 @@ public class UserTeamTranslationDTO {
 		newEntryDefaultName = translatorService.translate( "Photo data / Photo team: New team member default name", language );
 
 		deleteEntryConfirmation = translatorService.translate( "Photo data / Photo team: delete this member?", language );
+		deleteEntryImpossible = translatorService.translate( "User card: You have already assigned this member to one or more photos", language );
 		discardChanges = translatorService.translate( "Photo data / Photo team: New team member default name", language );
 	}
 
@@ -105,6 +107,10 @@ public class UserTeamTranslationDTO {
 
 	public String getDeleteEntryConfirmation() {
 		return deleteEntryConfirmation;
+	}
+
+	public String getDeleteEntryImpossible() {
+		return deleteEntryImpossible;
 	}
 
 	public String getDiscardChanges() {

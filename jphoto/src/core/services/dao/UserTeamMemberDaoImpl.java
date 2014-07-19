@@ -101,6 +101,7 @@ public class UserTeamMemberDaoImpl extends BaseEntityDaoImpl<UserTeamMember> imp
 
 	@Override
 	public boolean delete( final int entryId ) {
+
 		final boolean isDeleted = deleteEntryById( entryId );
 
 		if ( isDeleted ) {
