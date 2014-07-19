@@ -55,20 +55,24 @@ public class PhotoCategoryHandlerController {
 		dto.setPhotoId( photoId );
 		dto.setPhotoCategoryDTOs( getPhotoCategoryDTOs() );
 
-		final PhotoUploadNudeContentDTO nudeContentDTO = getNudeContentDTO( categoryId, photoId );
-		if ( photoId > 0 ) {
-			final Photo photo = photoService.load( photoId );
-			dto.setPhotoContainsNude( photo.isContainsNudeContent() );
+		if ( categoryId > 0 ) {
+			final PhotoUploadNudeContentDTO nudeContentDTO = getNudeContentDTO( categoryId, photoId );
+			if ( photoId > 0 ) {
+				final Photo photo = photoService.load( photoId );
+				dto.setPhotoContainsNude( photo.isContainsNudeContent() );
+			}
+			dto.setNudeContentDTO( nudeContentDTO );
 		}
-		dto.setNudeContentDTO( nudeContentDTO );
 
 		final Photo photo = photoService.load( photoId );
 		if ( photo != null ) {
 			dto.setSelectedCategoryId( photo.getGenreId() );
 		}
 
-		final long fileSize = NumberUtils.convertToLong( request.getParameter( "filesize" ) );
-		dto.setPhotoUploadAllowanceDTO( photoUploadAllowance( userId, categoryId, fileSize ) );
+		if ( photoId == 0 ) {
+			final long fileSize = NumberUtils.convertToLong( request.getParameter( "filesize" ) );
+			dto.setPhotoUploadAllowanceDTO( photoUploadAllowance( userId, categoryId, fileSize ) );
+		}
 
 		return dto;
 	}
@@ -123,7 +127,6 @@ public class PhotoCategoryHandlerController {
 		final PhotoUploadAllowanceDTO photoUploadAllowanceDTO = new PhotoUploadAllowanceDTO();
 		photoUploadAllowanceDTO.setUseId( photoAuthorId );
 		photoUploadAllowanceDTO.setGenreId( categoryId );
-
 
 		final AbstractPhotoUploadAllowance photoUploadAllowance = getPhotoUploadAllowance( user, genre, fileSize );
 		photoUploadAllowanceDTO.setPhotoUploadAllowance( photoUploadAllowance.getUploadAllowance() );

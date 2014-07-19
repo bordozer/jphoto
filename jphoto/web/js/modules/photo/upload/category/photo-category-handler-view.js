@@ -14,7 +14,6 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-//			this.listenTo( this.model, "change", this.render );
 		},
 
 		render: function() {
@@ -22,13 +21,22 @@ define( ["backbone", "jquery", "underscore"
 			var model = this.model;
 			var modelJSON = model.toJSON();
 
-			var div = $( "<div style='display: inline; width: 30%;'></div>" );
+			var div = $( "<div style='float:left; width: 100%;'></div>" );
 			div.append( this.template( modelJSON ) );
 
-			var nudeContentView = new NudeContentHandlerView( {
-				model: model
-			} );
-			div.append( nudeContentView.renderNudeContent().$el );
+			if ( model.get( 'photoId' ) == 0 ) {
+				var uploadAllowanceHandlerView = new UploadAllowanceHandlerView( {
+					model: model
+				} );
+				div.append( uploadAllowanceHandlerView.renderPhotoAllowance().$el );
+			}
+
+			if ( model.get( 'selectedCategoryId' ) > 0 ) {
+				var nudeContentView = new NudeContentHandlerView( {
+					model: model
+				} );
+				div.append( nudeContentView.renderNudeContent().$el );
+			}
 
 			this.$el.html( div );
 		},
@@ -47,6 +55,34 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.categoryChange( $( "option:selected", evt.target ).val() );
+		}
+	});
+
+	var UploadAllowanceHandlerView = Backbone.View.extend( {
+
+		renderPhotoAllowance: function () {
+
+			var div = $( "<div style='display: inline; width: 40%; vertical-align: top; border: dotted;'></div>" );
+
+			var modelJSON = this.model.toJSON()[ 'photoUploadAllowanceDTO' ];
+			console.log( modelJSON );
+
+			_.each( modelJSON[ 'photoUploadAllowance' ], function( allowance ) {
+
+				var paragraphDiv = $( "<div style='float: left; width: 99%; margin-bottom: 10px;'></div>" );
+
+				if ( ! allowance[ 'passed' ] ) {
+					paragraphDiv.addClass( 'redfont' );
+				}
+
+				paragraphDiv.html( '&nbsp;&nbsp;' + allowance[ 'uploadRuleDescription' ] );
+
+				div.append( paragraphDiv );
+			});
+
+			this.$el.html( div );
+
+			return this;
 		}
 	});
 

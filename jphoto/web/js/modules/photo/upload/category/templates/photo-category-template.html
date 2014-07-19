@@ -1,4 +1,4 @@
-<div style="display: inline; width: 30%;">
+<div style="display: inline-block; width: 200px; border: dashed;">
 	<select name="selectedGenreId" class="photo-data-category-id" size="23">
 		<% _.each( photoCategoryDTOs, function( category ) { %>
 		<option value="<%-category.categoryId%>" <%= category.categoryId == selectedCategoryId ? "selected='selected'" : ""%> ><%-category.name%></option>
