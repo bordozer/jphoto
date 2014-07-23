@@ -58,7 +58,12 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var isFound = modelJSON[ 'userDTOs' ].length > 0;
 
 			if ( ! isFound ) {
-//				this.closePickerSearchResult();
+
+				if ( forceCloseSearchResult ) {
+					this.closePickerSearchResult();
+					return;
+				}
+
 				this.nothingFound();
 				return;
 			}
