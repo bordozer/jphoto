@@ -123,7 +123,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var modelJSON = this.model.toJSON();
 
 			var userId = evt.target.id;
-			console.log( this.callbackFunction );
+
 			this.callbackFunction( userId );
 		}
 	});

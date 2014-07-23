@@ -100,7 +100,7 @@
 
 												function callbackFunction( userId ) {
 													console.log( 'callback: ', userId );
-													alert( 'callback: ' + userId );
+//													alert( 'callback: ' + userId );
 												}
 											</script>
 										</table:td>
