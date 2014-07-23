@@ -8,6 +8,8 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,17 +39,30 @@ public class UserListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserPickerDTO getUsers() {
+	public UserPickerDTO showUserPicker() {
+		return getUserPickerDTO( "" );
+	}
 
-		final String searchString = "ad"; // TODO: pass this from client
+	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public UserPickerDTO search( @RequestBody final UserPickerDTO requestDTO ) {
+		final UserPickerDTO dto = getUserPickerDTO( requestDTO.getSearchString() );
+		dto.setCallback( requestDTO.getCallback() );
+		requestDTO.setUserDTOs( requestDTO.getUserDTOs() );
+
+		return dto;
+	}
+
+	private UserPickerDTO getUserPickerDTO( final String searchString ) {
+
+		if ( StringUtils.isEmpty( searchString ) ) {
+			return getEmptyUserPickerDTO( searchString );
+		}
 
 		final List<User> users = userService.searchByPartOfName( searchString );
 
 		if ( users.size() == 0 ) {
-			final UserPickerDTO userPickerDTO = new UserPickerDTO();
-			userPickerDTO.setUserDTOs( newArrayList() );
-
-			return userPickerDTO;
+			return getEmptyUserPickerDTO( searchString );
 		}
 
 		final List<UserDTO> userDTOs = newArrayList();
@@ -67,6 +82,17 @@ public class UserListController {
 
 		final UserPickerDTO userPickerDTO = new UserPickerDTO();
 		userPickerDTO.setUserDTOs( userDTOs );
+		userPickerDTO.setFound( true );
+		userPickerDTO.setSearchString( searchString );
+
+		return userPickerDTO;
+	}
+
+	private UserPickerDTO getEmptyUserPickerDTO( final String searchString ) {
+		final UserPickerDTO userPickerDTO = new UserPickerDTO();
+		userPickerDTO.setUserDTOs( newArrayList() );
+		userPickerDTO.setFound( false );
+		userPickerDTO.setSearchString( searchString );
 
 		return userPickerDTO;
 	}

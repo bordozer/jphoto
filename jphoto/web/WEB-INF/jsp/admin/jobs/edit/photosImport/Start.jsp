@@ -72,7 +72,6 @@
 							<%-- FILE SYSTEM IMPORT --%>
 							<div id="${filesystemImportDivId}" style="float: left; width: 100%; display: none;">
 								<table:table width="100%">
-									<%--TODO: translate--%>
 									<table:tr>
 										<table:tdtext text_t="Photo import job parameter: Dir" isMandatory="true"/>
 										<table:tddata>
@@ -96,8 +95,12 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( "${baseUrl}", $( '.user-picker-container' ) );
+													userPicker( 'callback', '${baseUrl}', $( '.user-picker-container' ) );
 												} );
+
+												function callback() {
+													console.log( 'callback' );
+												}
 											</script>
 										</table:td>
 									</table:tr>
@@ -113,7 +116,6 @@
 
 									<table:separator colspan="2"/>
 
-									<%--TODO: translate--%>
 									<table:tr>
 										<table:tdtext text_t="Photo import job JSP: Total job steps"/>
 										<table:tddata>

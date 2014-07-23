@@ -1,5 +1,8 @@
 package rest.users.picker;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class UserDTO {
 
 	private String userId;

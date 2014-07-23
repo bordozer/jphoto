@@ -1,13 +1,19 @@
 define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		, "components/user-picker/user-picker-model"
-		, "text!components/user-picker/template/template.html"
-		], function ( Backbone, $, _, ui, Model, Template ) {
+		, "text!components/user-picker/template/search-form-template.html"
+		, "text!components/user-picker/template/user-list-template.html"
+		, "text!components/user-picker/template/user-template.html"
+		], function ( Backbone, $, _, ui, Model, SearchFormTemplate, UserListTemplate, UserTemplate ) {
 
 	'use strict';
 
 	var UserPickerView = Backbone.View.extend( {
 
-		template:_.template( Template ),
+		searchFormTemplate:_.template( SearchFormTemplate ),
+
+		events: {
+			"keyup.user-picker-filter": "onSearch"
+		},
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
@@ -15,61 +21,79 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		render: function () {
-			var selector = '.user-picker-filter';
-
-			var model = this.model;
 			var modelJSON = this.model.toJSON();
 
-			var userPickerDTOs = this.model.get( 'userDTOs' );
-//			console.log( userPickerDTOs );
+			if( this.$( '.user-picker-filter' ).length == 0 ) {
+//				console.log( 'render search field' );
+				this.$el.html( this.searchFormTemplate( modelJSON ) );
+			}
 
-			var obj = $( selector ).autocomplete( {
-				width: 300,
-				max: 10,
-				delay: 100,
-				minLength: 0, // TODO: set min
-				autoFocus: true,
-				cacheLength: 1,
-				scroll: true,
-				highlight: false,
-				source: function ( request, response ) {
-					var searchString = $( selector ).val();
-					console.log( 'search string: ', searchString );
+			this.renderUserList();
+		},
 
-					response( $.map( userPickerDTOs, function ( item ) {
-						var img = "<img src='" + item.userAvatarUrl + "' />";
-						return {
-							label: item.userName + ", " + item.userGender,
-							value: item.userName,
-							userId: item.userId,
-							userCardLink: item.userCardLink,
-							userAvatarUrl: item.userAvatarUrl,
-							userNameEscaped: item.userNameEscaped,
-							userName: item.userName
-						   }
-					   } ) )
-				   },
-				select: function ( event, ui ) {
-					console.log( 'Selected: ', $( selector ).val( ui.item.userId ) );
-					/*$( userIdControl ).val( ui.item.userId );
-					$( '#foundMemberCardLinkDiv' ).html( '${foundMemberText} ' + ui.item.userCardLink );
-					$( '#foundMemberResetDiv' ).html( "<img src=\"${resetFoundMemberImg}\" alt=\"${resetFoundMemberHint}\"  title=\"${resetFoundMemberHint}\" width=\"16\" height=\"16\" onclick=\"resetFoundMember();\" />" );
-					$( '#memberSearchAvatar' ).attr( 'src', ui.item.userAvatarUrl );
-					if( model.get( 'callback' ) ) {
-						callback( ui.item );
-					}*/
-				   }
-			} ).data( "ui-autocomplete" );
+		renderUserList: function() {
 
-			obj._renderItem = function ( ul, item ) {
-						return $( "<li></li>" )
-								.data( "ui-autocomplete-item", item )
-								.append( "<a>" + "<img src='" + item.userAvatarUrl + "' height='70' /> " + item.userNameEscaped + "</a>" ).appendTo( ul );
-					};
+//			console.log( this.model );
+//			var modelJSON = this.model.toJSON();
 
-			$( selector ).bind( 'focus', function () {
-				$( this ).autocomplete( "search" );
-			} );
+			var resultContainer = this.$( ".user-list-container" );
+			if ( ! this.model.get( 'found' ) ) {
+				this.clearResult();
+				return;
+			}
+
+			resultContainer.html( new UserListView( {
+				model: this.model
+			} ).render().$el );
+		},
+
+		clearResult: function() {
+//			console.log( 'Nothing is found' );
+			this.$( ".user-list-container" ).html( 'Nothing is found' );
+		},
+
+		doSearch: function() {
+			var searchString = this.$( '.user-picker-filter' ).val();
+			if ( searchString.length >= 3 ) {
+//				console.log( 'sending request to server: ', searchString );
+				this.model.set( { searchString: searchString, userDTOs: [] } );
+				this.model.save();
+			} else {
+				this.clearResult();
+			}
+		},
+
+		onSearch: function () {
+//			console.log( 'the criteria is changed' );
+			this.doSearch();
+		}
+	});
+
+	var UserListView = Backbone.View.extend( {
+
+		userListTemplate:_.template( UserListTemplate ),
+		userTemplate:_.template( UserTemplate ),
+
+		initialize: function() {
+			this.render();
+		},
+
+		render: function () {
+//			console.log( 'render user list' );
+
+			var modelJSON = this.model.toJSON();
+			this.$el.html( this.userListTemplate( modelJSON ) );
+
+			var el = this.$el;
+			var userTemplate = this.userTemplate;
+
+			var foundUsers = modelJSON[ 'userDTOs' ];
+//			console.log( modelJSON );
+			_.each( foundUsers, function( user ) {
+				el.append( userTemplate( user ) );
+			});
+
+			return this;
 		}
 	});
 
