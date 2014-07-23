@@ -38,12 +38,12 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
 
-				/*var userListContainer = this.$( this.searchResultContainer );
-				var invisibility = this.invisibility;
-				var model = this.model;
-				$( document ).click( function ( event ) {
-					model.trigger( 'hide_search_result' );
-					userListContainer.addClass( invisibility );
+				/*var model = this.model;
+				$( 'body' ).click( function ( evt ) {
+					evt.preventDefault();
+					evt.stopImmediatePropagation();
+
+					model.closeSearchResult();
 				});*/
 			}
 
@@ -58,12 +58,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 				this.closePickerSearchResult();
 				return;
 			}
-
-			/*if ( ! this.model.searchResultExpanded ) {
-				return;
-			}*/
-
-//			this.openPickerSearchResult();
 
 			resultContainer.html( new UserListView( {
 				model: this.model
