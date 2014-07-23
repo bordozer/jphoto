@@ -4,6 +4,7 @@ public class UserDTO {
 
 	private int userId;
 	private String userName;
+	private String userMembershipTypeName;
 
 	public void setUserId( final int userId ) {
 		this.userId = userId;
@@ -24,5 +25,13 @@ public class UserDTO {
 	@Override
 	public String toString() {
 		return String.format( "%d: %s", userId, userName );
+	}
+
+	public void setUserMembershipTypeName( final String userMembershipTypeName ) {
+		this.userMembershipTypeName = userMembershipTypeName;
+	}
+
+	public String getUserMembershipTypeName() {
+		return userMembershipTypeName;
 	}
 }

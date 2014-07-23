@@ -14,16 +14,13 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		render: function () {
-			var div = $( "<div style='float: left; width: 100%; border: dashed;'></div>" );
+			var div = $( "<div style='float: left; width: 100%;'></div>" );
 
 			this.$el.html( div );
 		},
 
 		renderEntry: function ( user ) {
-			var modelJSON = user.toJSON();
-			console.log( modelJSON );
-
-			var div = $( "<div style='float: left; width: 100%; border: dotted;'>" + user.get( 'userName' ) + "</div>" );
+			var div = $( "<div style='float: left; width: 100%;'>" + user.get( 'userName' ) + "</div>" );
 
 			this.$el.append( div );
 		}
