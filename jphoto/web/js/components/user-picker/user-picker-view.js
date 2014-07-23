@@ -10,14 +10,16 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 	var UserPickerView = Backbone.View.extend( {
 
 		searchFormTemplate:_.template( SearchFormTemplate ),
+		invisibility: 'invisibility',
 
 		events: {
-			"keyup.user-picker-filter": "onSearch"
+			"keyup .user-picker-filter": "onSearch"
+			, "click .user-picker-filter": "onPickerToggle"
+			, "click .user-picker-close": "onPickerClose"
 		},
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
-			console.log( this.model );
 			this.model.fetch( { cache: false } );
 		},
 
@@ -36,17 +38,27 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var resultContainer = this.$( ".user-list-container" );
 
 			if ( ! this.model.get( 'found' ) ) {
-				this.clearResult();
+				this.closePicker();
 				return;
 			}
+
+			this.openPicker();
 
 			resultContainer.html( new UserListView( {
 				model: this.model
 			} ).render().$el );
 		},
 
-		clearResult: function() {
-			this.$( ".user-list-container" ).html( 'Nothing is found' );
+		openPicker: function() {
+			this.$( ".user-list-container" ).removeClass( this.invisibility );
+		},
+
+		closePicker: function() {
+			this.$( ".user-list-container" ).addClass( this.invisibility );
+		},
+
+		onPickerToggle: function() {
+			this.$( ".user-list-container" ).toggleClass( this.invisibility )
 		},
 
 		doSearch: function() {
@@ -56,12 +68,16 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 				this.model.save();
 
 			} else {
-				this.clearResult();
+				this.closePicker();
 			}
 		},
 
 		onSearch: function () {
 			this.doSearch();
+		},
+
+		onPickerClose: function () {
+			this.closePicker();
 		}
 	});
 
@@ -81,15 +97,16 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		render: function () {
 
 			var modelJSON = this.model.toJSON();
-			this.$el.html( this.userListTemplate( modelJSON ) );
+			var userListContainer = $( this.userListTemplate( modelJSON ) );
 
-			var el = this.$el;
 			var userTemplate = this.userTemplate;
 
 			var foundUsers = modelJSON[ 'userDTOs' ];
 			_.each( foundUsers, function( user ) {
-				el.append( userTemplate( user ) );
+				userListContainer.append( userTemplate( user ) );
 			});
+
+			this.$el.html( userListContainer );
 
 			return this;
 		},
