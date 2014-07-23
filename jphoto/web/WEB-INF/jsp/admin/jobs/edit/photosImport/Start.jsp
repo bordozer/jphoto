@@ -95,7 +95,7 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( 'callback', '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( 'ole', 'callback', '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
 												function callback() {

@@ -12,8 +12,9 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/users/";
+			this.url = options.baseUrl + "/rest/users/?searchString=" + options.searchString;
 			this.callback = options.callback;
+//			this.set( { searchString: options.searchString } );
 		}
 	});
 

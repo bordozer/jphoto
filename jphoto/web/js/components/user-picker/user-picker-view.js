@@ -17,6 +17,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.render );
+			console.log( this.model );
 			this.model.fetch( { cache: false } );
 		},
 
@@ -32,9 +33,8 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		renderUserList: function() {
 
-//			var modelJSON = this.model.toJSON();
-
 			var resultContainer = this.$( ".user-list-container" );
+
 			if ( ! this.model.get( 'found' ) ) {
 				this.clearResult();
 				return;
@@ -54,6 +54,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			if ( searchString.length >= 3 ) {
 				this.model.set( { searchString: searchString, userDTOs: [] } );
 				this.model.save();
+
 			} else {
 				this.clearResult();
 			}
@@ -68,6 +69,10 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		userListTemplate:_.template( UserListTemplate ),
 		userTemplate:_.template( UserTemplate ),
+
+		events: {
+			"click .user-picker-found-entry": "onFoundUserClick"
+		},
 
 		initialize: function() {
 			this.render();
@@ -87,6 +92,10 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			});
 
 			return this;
+		},
+
+		onFoundUserClick: function( evt ) {
+			var userId = evt.target.id;
 		}
 	});
 

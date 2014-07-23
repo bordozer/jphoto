@@ -1,3 +1,10 @@
-<div style='float: left; width: 100%;'>
-	<%-userName%>
+<div style='float: left; width: 100%; border-bottom: 1px silver dotted;'>
+
+	<div style='display: inline-block; width: 50px; text-align: center;'>
+		<img src="<%=userAvatarUrl%>" alt="<%-userId%>" height="30px">
+	</div>
+
+	<div style='display: inline-block;'>
+		<a href="#" id="<%-userId%>" class="user-picker-found-entry" onclick="return false;"><%-userName%></a>
+	</div>
 </div>

@@ -9,13 +9,11 @@ import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 import utils.StringUtilities;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -39,8 +37,8 @@ public class UserListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserPickerDTO showUserPicker() {
-		return getUserPickerDTO( "" );
+	public UserPickerDTO showUserPicker( final HttpServletRequest request ) {
+		return getUserPickerDTO( request.getParameter( "searchString" ) );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
