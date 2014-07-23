@@ -24,7 +24,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var modelJSON = this.model.toJSON();
 
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
-//				console.log( 'render search field' );
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
 			}
 
@@ -33,7 +32,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		renderUserList: function() {
 
-//			console.log( this.model );
 //			var modelJSON = this.model.toJSON();
 
 			var resultContainer = this.$( ".user-list-container" );
@@ -55,7 +53,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		doSearch: function() {
 			var searchString = this.$( '.user-picker-filter' ).val();
 			if ( searchString.length >= 3 ) {
-//				console.log( 'sending request to server: ', searchString );
 				this.model.set( { searchString: searchString, userDTOs: [] } );
 				this.model.save();
 			} else {
@@ -64,7 +61,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onSearch: function () {
-//			console.log( 'the criteria is changed' );
 			this.doSearch();
 		}
 	});
@@ -79,7 +75,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		render: function () {
-//			console.log( 'render user list' );
 
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.userListTemplate( modelJSON ) );
@@ -88,7 +83,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var userTemplate = this.userTemplate;
 
 			var foundUsers = modelJSON[ 'userDTOs' ];
-//			console.log( modelJSON );
 			_.each( foundUsers, function( user ) {
 				el.append( userTemplate( user ) );
 			});
