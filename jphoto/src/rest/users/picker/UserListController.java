@@ -4,12 +4,15 @@ import core.general.user.User;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
+import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
+import utils.StringUtilities;
 
 import java.util.List;
 
@@ -24,22 +27,42 @@ public class UserListController {
 	private UserService userService;
 
 	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
+
+	@Autowired
 	private TranslatorService translatorService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public UserPickerDTO getUsers() {
 
+		final String searchString = "ad"; // TODO: pass this from client
+
+		final List<User> users = userService.searchByPartOfName( searchString );
+
+		if ( users.size() == 0 ) {
+			final UserPickerDTO userPickerDTO = new UserPickerDTO();
+			userPickerDTO.setUserDTOs( newArrayList() );
+
+			return userPickerDTO;
+		}
+
 		final List<UserDTO> userDTOs = newArrayList();
 
-		final List<User> users = userService.loadAll().subList( 0, 10 );
 		for ( final User user : users ) {
-			final UserDTO dto = new UserDTO();
-			dto.setUserId( user.getId() );
-			dto.setUserName( user.getNameEscaped() );
-			dto.setUserMembershipTypeName( translatorService.translate( user.getMembershipType().getName(), getLanguage() ) );
+			final UserDTO userDTO = new UserDTO();
 
-			userDTOs.add( dto );
+			userDTO.setUserId( String.valueOf( user.getId() ) );
+			userDTO.setUserName( user.getName() );
+			userDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
+			userDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
+			userDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
+			userDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
+
+			userDTOs.add( userDTO );
 		}
 
 		final UserPickerDTO userPickerDTO = new UserPickerDTO();

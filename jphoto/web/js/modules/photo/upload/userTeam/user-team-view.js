@@ -58,7 +58,6 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		deleteEntry: function( teamMember ) {
-//			console.log( teamMember );
 			this.model.remove( teamMember.get( 'userTeamMemberId' ) );
 		},
 

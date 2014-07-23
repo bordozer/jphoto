@@ -4,16 +4,25 @@ import java.util.List;
 
 public class UserPickerDTO {
 
-	private String filter;
+	private String searchString;
+	private String callback;
 
 	private List<UserDTO> userDTOs;
 
-	public String getFilter() {
-		return filter;
+	public String getSearchString() {
+		return searchString;
 	}
 
-	public void setFilter( final String filter ) {
-		this.filter = filter;
+	public void setSearchString( final String searchString ) {
+		this.searchString = searchString;
+	}
+
+	public String getCallback() {
+		return callback;
+	}
+
+	public void setCallback( final String callback ) {
+		this.callback = callback;
 	}
 
 	public List<UserDTO> getUserDTOs() {

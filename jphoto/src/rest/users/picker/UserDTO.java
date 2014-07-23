@@ -2,36 +2,58 @@ package rest.users.picker;
 
 public class UserDTO {
 
-	private int userId;
+	private String userId;
 	private String userName;
-	private String userMembershipTypeName;
+	private String userNameEscaped;
+	private String userCardLink;
+	private String userAvatarUrl;
+	private String userGender;
 
-	public void setUserId( final int userId ) {
-		this.userId = userId;
-	}
-
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserName( final String userName ) {
-		this.userName = userName;
+	public void setUserId( final String userId ) {
+		this.userId = userId;
 	}
 
 	public String getUserName() {
 		return userName;
 	}
 
-	@Override
-	public String toString() {
-		return String.format( "%d: %s", userId, userName );
+	public void setUserName( final String userName ) {
+		this.userName = userName;
 	}
 
-	public void setUserMembershipTypeName( final String userMembershipTypeName ) {
-		this.userMembershipTypeName = userMembershipTypeName;
+	public String getUserNameEscaped() {
+		return userNameEscaped;
 	}
 
-	public String getUserMembershipTypeName() {
-		return userMembershipTypeName;
+	public void setUserNameEscaped( final String userNameEscaped ) {
+		this.userNameEscaped = userNameEscaped;
+	}
+
+	public String getUserCardLink() {
+		return userCardLink;
+	}
+
+	public void setUserCardLink( final String userCardLink ) {
+		this.userCardLink = userCardLink;
+	}
+
+	public String getUserAvatarUrl() {
+		return userAvatarUrl;
+	}
+
+	public void setUserAvatarUrl( final String userAvatarUrl ) {
+		this.userAvatarUrl = userAvatarUrl;
+	}
+
+	public String getUserGender() {
+		return userGender;
+	}
+
+	public void setUserGender( final String userGender ) {
+		this.userGender = userGender;
 	}
 }

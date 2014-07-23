@@ -1,6 +1,7 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
+import rest.users.picker.UserDTO;
 import ui.dtos.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface AjaxService {
 
 	CommentDTO markCommentAsDeletedAjax( final int userId, final int commentId );
 
-	List<UserPickerDTO> userLinkAjax( final String searchString );
+	List<UserDTO> userLinkAjax( final String searchString );
 
 	long getUserDelayToNextCommentAjax( final int userId );
 

@@ -30,6 +30,7 @@ import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import rest.users.picker.UserDTO;
 import ui.context.EnvironmentContext;
 import ui.dtos.*;
 import ui.services.menu.entry.items.EntryMenuType;
@@ -349,30 +350,30 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public List<UserPickerDTO> userLinkAjax( final String searchString ) {
+	public List<UserDTO> userLinkAjax( final String searchString ) {
 
 		final List<User> users = userService.searchByPartOfName( searchString );
 
-		final List<UserPickerDTO> userPickerDTOs = newArrayList();
+		final List<UserDTO> userDTOs = newArrayList();
 
 		if ( users.size() == 0 ) {
 			return newArrayList();
 		}
 
 		for ( final User user : users ) {
-			final UserPickerDTO userPickerDTO = new UserPickerDTO();
+			final UserDTO userDTO = new UserDTO();
 
-			userPickerDTO.setUserId( String.valueOf( user.getId() ) );
-			userPickerDTO.setUserName( user.getName() );
-			userPickerDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
-			userPickerDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
-			userPickerDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
-			userPickerDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
+			userDTO.setUserId( String.valueOf( user.getId() ) );
+			userDTO.setUserName( user.getName() );
+			userDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
+			userDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
+			userDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
+			userDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
 
-			userPickerDTOs.add( userPickerDTO );
+			userDTOs.add( userDTO );
 		}
 
-		return userPickerDTOs;
+		return userDTOs;
 	}
 
 	@Override
