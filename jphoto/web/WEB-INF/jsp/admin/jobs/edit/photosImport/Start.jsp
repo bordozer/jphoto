@@ -95,11 +95,12 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( 'ole', 'callback', '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( 'ole', callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
-												function callback() {
-													console.log( 'callback' );
+												function callbackFunction( userId ) {
+													console.log( 'callback: ', userId );
+													alert( 'callback: ' + userId );
 												}
 											</script>
 										</table:td>

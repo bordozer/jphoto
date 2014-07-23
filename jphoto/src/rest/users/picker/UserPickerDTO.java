@@ -8,7 +8,7 @@ import java.util.List;
 public class UserPickerDTO {
 
 	private String searchString;
-	private String callback;
+//	private String callback;
 	private boolean found;
 
 	private List<UserDTO> userDTOs;
@@ -21,13 +21,13 @@ public class UserPickerDTO {
 		this.searchString = searchString;
 	}
 
-	public String getCallback() {
+	/*public String getCallback() {
 		return callback;
 	}
 
 	public void setCallback( final String callback ) {
 		this.callback = callback;
-	}
+	}*/
 
 	public boolean isFound() {
 		return found;

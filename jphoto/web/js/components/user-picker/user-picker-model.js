@@ -2,9 +2,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	var UserPickerModel = Backbone.Model.extend( {
 
-		callback: ''
-
-		, defaults: function() {
+		defaults: function() {
 			return {
 				searchString: ''
 				, found: false
@@ -13,8 +11,6 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/users/?searchString=" + options.searchString;
-			this.callback = options.callback;
-//			this.set( { searchString: options.searchString } );
 		}
 	});
 

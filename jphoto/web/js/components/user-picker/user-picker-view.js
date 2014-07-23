@@ -11,6 +11,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		searchFormTemplate:_.template( SearchFormTemplate ),
 		invisibility: 'invisibility',
+		callbackFunction: '',
 
 		events: {
 			"keyup .user-picker-filter": "onSearch"
@@ -18,13 +19,16 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			, "click .user-picker-close": "onPickerClose"
 		},
 
-		initialize: function() {
+		initialize: function( options ) {
+			this.callbackFunction = options.callbackFunction;
+
 			this.listenTo( this.model, "sync", this.render );
 			this.model.fetch( { cache: false } );
 		},
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
+			console.log( this );
 
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
@@ -46,6 +50,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 			resultContainer.html( new UserListView( {
 				model: this.model
+				, callbackFunction: this.callbackFunction
 			} ).render().$el );
 		},
 
@@ -86,11 +91,14 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		userListTemplate:_.template( UserListTemplate ),
 		userTemplate:_.template( UserTemplate ),
 
+		callbackFunction: '',
+
 		events: {
 			"click .user-picker-found-entry": "onFoundUserClick"
 		},
 
-		initialize: function() {
+		initialize: function( options ) {
+			this.callbackFunction = options.callbackFunction;
 			this.render();
 		},
 
@@ -112,7 +120,11 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onFoundUserClick: function( evt ) {
+			var modelJSON = this.model.toJSON();
+
 			var userId = evt.target.id;
+			console.log( this.callbackFunction );
+			this.callbackFunction( userId );
 		}
 	});
 
