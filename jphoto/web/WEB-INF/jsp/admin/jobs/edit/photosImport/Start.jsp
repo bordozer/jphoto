@@ -38,6 +38,7 @@
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <tags:page pageModel="${photosImportModel.pageModel}">
 
@@ -91,7 +92,13 @@
 
 									<table:tr>
 										<table:td colspan="2">
-											<user:userPicker userIdControl="${userIdControl}" user="${photosImportModel.assignAllGeneratedPhotosToUser}"/>
+											<%--<user:userPicker userIdControl="${userIdControl}" user="${photosImportModel.assignAllGeneratedPhotosToUser}"/>--%>
+											<div class="user-picker-container" style="float: left; width: 100%;"></div>
+											<script type="text/javascript">
+												require( ['components/user-picker/user-picker'], function ( userPicker ) {
+													userPicker( "${baseUrl}", $( '.user-picker-container' ) );
+												} );
+											</script>
 										</table:td>
 									</table:tr>
 
