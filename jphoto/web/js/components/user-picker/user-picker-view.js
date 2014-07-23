@@ -15,7 +15,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		events: {
 			"keyup .user-picker-filter": "onSearch"
-			, "click .user-picker-filter": "onPickerToggle"
+			, "click .user-picker-filter": "onSearchFieldClick"
 			, "click .user-picker-close": "onPickerClose"
 		},
 
@@ -28,10 +28,15 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-			console.log( this );
 
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
+
+				var userListContainer = this.$( ".user-list-container" );
+				var invisibility = this.invisibility;
+				$( document ).click( function ( event ) {
+					userListContainer.addClass( invisibility );
+				});
 			}
 
 			this.renderUserList();
@@ -62,10 +67,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			this.$( ".user-list-container" ).addClass( this.invisibility );
 		},
 
-		onPickerToggle: function() {
-			this.$( ".user-list-container" ).toggleClass( this.invisibility )
-		},
-
 		doSearch: function() {
 			var searchString = this.$( '.user-picker-filter' ).val();
 			if ( searchString.length >= 3 ) {
@@ -75,6 +76,10 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			} else {
 				this.closePicker();
 			}
+		},
+
+		onSearchFieldClick: function() {
+			this.$( ".user-list-container" ).toggleClass( this.invisibility );
 		},
 
 		onSearch: function () {

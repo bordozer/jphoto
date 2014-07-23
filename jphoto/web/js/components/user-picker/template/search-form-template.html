@@ -4,6 +4,12 @@
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
+
+	div.user-picker-found-entry:hover {
+		background: #c4c5c3;
+		cursor: pointer;
+	}
+
 	* html .ui-autocomplete {
 		height: 100px;
 	}
@@ -16,7 +22,7 @@
 <div style='float: left; width: 100%;'>
 	<input type="text" class="user-picker-filter" value="<%=searchString%>">
 
-	<div class="user-list-container" style="float: left; width: 100%;">
+	<div class="user-list-container invisibility" style="float: left; width: 100%;">
 
 	</div>
 </div>

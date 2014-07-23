@@ -39,6 +39,7 @@ public class UserListController {
 	@ResponseBody
 	public UserPickerDTO showUserPicker( final HttpServletRequest request ) {
 		final UserPickerDTO dto = getUserPickerDTO( request.getParameter( "searchString" ) );
+		dto.setFound( false );
 //		dto.setCallback( request.getParameter( "callback" ) );
 		return dto;
 	}
