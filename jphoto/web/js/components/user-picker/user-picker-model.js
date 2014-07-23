@@ -2,13 +2,11 @@ define( ["backbone"], function ( Backbone ) {
 
 	var UserPickerModel = Backbone.Model.extend( {
 
-		searchPerformed: false
-		, searchResultExpanded: false
-
-		, defaults: function() {
+		defaults: function() {
 			return {
 				searchString: ''
-				, found: false
+				, searchPerformed: false
+				, searchResultExpanded: false
 			};
 		},
 
@@ -24,6 +22,10 @@ define( ["backbone"], function ( Backbone ) {
 		closeSearchResult: function() {
 			this.searchResultExpanded = false;
 			this.trigger( 'close_search_result' );
+		},
+
+		isSearchResultExpanded: function() {
+			return this.searchResultExpanded;
 		},
 
 		performSearch: function () {

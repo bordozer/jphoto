@@ -98,8 +98,8 @@
 													userPicker( 'ole', callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
-												function callbackFunction( userId ) {
-													console.log( 'callback: ', userId );
+												function callbackFunction( user ) {
+													console.log( 'callback: ', user.userId );
 //													alert( 'callback: ' + userId );
 												}
 											</script>

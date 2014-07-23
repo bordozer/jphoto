@@ -79,7 +79,6 @@ public class UserListController {
 
 		final UserPickerDTO userPickerDTO = new UserPickerDTO();
 		userPickerDTO.setUserDTOs( userDTOs );
-		userPickerDTO.setFound( true );
 		userPickerDTO.setSearchString( searchString );
 
 		return userPickerDTO;
@@ -88,7 +87,6 @@ public class UserListController {
 	private UserPickerDTO getEmptyUserPickerDTO( final String searchString ) {
 		final UserPickerDTO userPickerDTO = new UserPickerDTO();
 		userPickerDTO.setUserDTOs( newArrayList() );
-		userPickerDTO.setFound( false );
 		userPickerDTO.setSearchString( searchString );
 
 		return userPickerDTO;

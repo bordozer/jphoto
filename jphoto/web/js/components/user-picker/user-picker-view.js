@@ -35,8 +35,10 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		render: function () {
 			var modelJSON = this.model.toJSON();
 
+			var forceCloseSearchResult = false;
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
+				forceCloseSearchResult = true;
 
 				/*var model = this.model;
 				$( 'body' ).click( function ( evt ) {
@@ -47,18 +49,24 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 				});*/
 			}
 
-			this.renderUserList();
+			this.renderUserList( forceCloseSearchResult );
 		},
 
-		renderUserList: function() {
+		renderUserList: function( forceCloseSearchResult ) {
 
-			var resultContainer = this.$( this.searchResultContainer );
+			var modelJSON = this.model.toJSON();
+			var isFound = modelJSON[ 'userDTOs' ].length > 0;
 
-			if ( ! this.model.get( 'found' ) ) {
+			if ( ! isFound ) {
 				this.closePickerSearchResult();
 				return;
 			}
 
+			if ( ! forceCloseSearchResult ) {
+				this.model.openSearchResult();
+			}
+
+			var resultContainer = this.$( this.searchResultContainer );
 			resultContainer.html( new UserListView( {
 				model: this.model
 				, callbackFunction: this.callbackFunction
@@ -76,7 +84,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		doSearch: function() {
 			var searchString = this.$( '.user-picker-filter' ).val();
 			if ( searchString.length >= 3 ) {
-				this.model.openSearchResult();
 				this.performSearch();
 			} else {
 				this.model.closeSearchResult();
@@ -153,7 +160,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 			var userId = evt.target.id;
 
-			this.callbackFunction( userId );
+			this.callbackFunction( { userId: userId } );
 		}
 	});
 
