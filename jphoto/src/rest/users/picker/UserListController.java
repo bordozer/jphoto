@@ -1,4 +1,4 @@
-package rest.users.list;
+package rest.users.picker;
 
 import core.general.user.User;
 import core.services.translator.Language;
@@ -28,9 +28,9 @@ public class UserListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserDTO> getUsers() {
+	public UserPickerDTO getUsers() {
 
-		final List<UserDTO> result = newArrayList();
+		final List<UserDTO> userDTOs = newArrayList();
 
 		final List<User> users = userService.loadAll().subList( 0, 10 );
 		for ( final User user : users ) {
@@ -39,10 +39,13 @@ public class UserListController {
 			dto.setUserName( user.getNameEscaped() );
 			dto.setUserMembershipTypeName( translatorService.translate( user.getMembershipType().getName(), getLanguage() ) );
 
-			result.add( dto );
+			userDTOs.add( dto );
 		}
 
-		return result;
+		final UserPickerDTO userPickerDTO = new UserPickerDTO();
+		userPickerDTO.setUserDTOs( userDTOs );
+
+		return userPickerDTO;
 	}
 
 	private Language getLanguage() {

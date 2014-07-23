@@ -7,7 +7,7 @@ define( ["components/user-picker/user-picker-model"
 		var userPickerModel = new Model.UserPickerModel( { baseUrl: baseUrl } );
 
 		var userPickerView = new View.UserPickerView( { model: userPickerModel, el: container } );
-		userPickerView.render();
+		userPickerView.renderPicker();
 	}
 
 	return init;

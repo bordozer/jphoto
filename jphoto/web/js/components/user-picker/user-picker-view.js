@@ -7,22 +7,30 @@ define( ["backbone", "jquery", "underscore"
 
 	var UserPickerView = Backbone.View.extend( {
 
+		template:_.template( Template ),
+
+		events: {
+			"keydown .filter-by-name": "onFilterKeyDown"
+		},
+
 		initialize: function() {
-			this.listenTo( this.model, "add", this.renderEntry );
-
-			this.model.fetch( { cache: false } );
+//			this.listenTo( this.model, "sync", this.renderEntry );
+//			this.model.fetch( { cache: false } );
 		},
 
-		render: function () {
-			var div = $( "<div style='float: left; width: 100%;'></div>" );
-
-			this.$el.html( div );
+		renderPicker: function () {
+			this.$el.html( this.template() );
 		},
 
-		renderEntry: function ( user ) {
-			var div = $( "<div style='float: left; width: 100%;'>" + user.get( 'userName' ) + "</div>" );
+		filterKeyDown: function () {
+			console.log( 'filter' );
+		},
 
-			this.$el.append( div );
+		onFilterKeyDown: function ( evt ) {
+//			evt.preventDefault();
+//			evt.stopImmediatePropagation();
+
+			this.filterKeyDown();
 		}
 	});
 

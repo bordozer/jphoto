@@ -1,4 +1,4 @@
-package rest.users.list;
+package rest.users.picker;
 
 public class UserDTO {
 
