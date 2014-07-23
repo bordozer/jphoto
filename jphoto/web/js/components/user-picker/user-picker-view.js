@@ -1,9 +1,9 @@
 define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		, "components/user-picker/user-picker-model"
 		, "text!components/user-picker/template/search-form-template.html"
-		, "text!components/user-picker/template/user-list-template.html"
-		, "text!components/user-picker/template/user-template.html"
-		], function ( Backbone, $, _, ui, Model, SearchFormTemplate, UserListTemplate, UserTemplate ) {
+		, "text!components/user-picker/template/search-result-template.html"
+		, "text!components/user-picker/template/found-user-template.html"
+		], function ( Backbone, $, _, ui, Model, SearchFormTemplate, SearchResultTemplate, FoundUserTemplate ) {
 
 	'use strict';
 
@@ -23,6 +23,11 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			this.callbackFunction = options.callbackFunction;
 
 			this.listenTo( this.model, "sync", this.render );
+
+			this.listenTo( this.model, "perform_search", this.performSearch );
+			this.listenTo( this.model, "open_search_result", this.openPickerSearchResult );
+			this.listenTo( this.model, "close_search_result", this.closePickerSearchResult );
+
 			this.model.fetch( { cache: false } );
 		},
 
@@ -32,11 +37,13 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			if( this.$( '.user-picker-filter' ).length == 0 ) {
 				this.$el.html( this.searchFormTemplate( modelJSON ) );
 
-				var userListContainer = this.$( ".user-list-container" );
+				/*var userListContainer = this.$( ".user-list-container" );
 				var invisibility = this.invisibility;
+				var model = this.model;
 				$( document ).click( function ( event ) {
+					model.trigger( 'hide_search_result' );
 					userListContainer.addClass( invisibility );
-				});
+				});*/
 			}
 
 			this.renderUserList();
@@ -47,11 +54,15 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var resultContainer = this.$( ".user-list-container" );
 
 			if ( ! this.model.get( 'found' ) ) {
-				this.closePicker();
+				this.closePickerSearchResult();
 				return;
 			}
 
-			this.openPicker();
+			/*if ( ! this.model.searchResultExpanded ) {
+				return;
+			}*/
+
+//			this.openPickerSearchResult();
 
 			resultContainer.html( new UserListView( {
 				model: this.model
@@ -59,27 +70,44 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			} ).render().$el );
 		},
 
-		openPicker: function() {
+		openPickerSearchResult: function() {
 			this.$( ".user-list-container" ).removeClass( this.invisibility );
 		},
 
-		closePicker: function() {
+		closePickerSearchResult: function() {
 			this.$( ".user-list-container" ).addClass( this.invisibility );
 		},
 
 		doSearch: function() {
 			var searchString = this.$( '.user-picker-filter' ).val();
 			if ( searchString.length >= 3 ) {
-				this.model.set( { searchString: searchString, userDTOs: [] } );
-				this.model.save();
-
+				this.performSearch();
 			} else {
-				this.closePicker();
+				this.model.closeSearchResult();
 			}
+		},
+
+		performSearch: function() {
+			var searchString = this.$( '.user-picker-filter' ).val();
+			this.model.set( { searchString: searchString, userDTOs: [] } );
+			this.model.save();
 		},
 
 		onSearchFieldClick: function() {
 			this.$( ".user-list-container" ).toggleClass( this.invisibility );
+			var searchResultExpanded = this.model.searchResultExpanded;
+
+			if ( searchResultExpanded ) {
+				this.model.closeSearchResult();
+				return;
+			}
+
+			if ( this.model.isSearchPerformed() ) {
+				this.model.openSearchResult();
+				return;
+			}
+
+			this.performSearch();
 		},
 
 		onSearch: function () {
@@ -87,14 +115,14 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onPickerClose: function () {
-			this.closePicker();
+			this.model.closeSearchResult();
 		}
 	});
 
 	var UserListView = Backbone.View.extend( {
 
-		userListTemplate:_.template( UserListTemplate ),
-		userTemplate:_.template( UserTemplate ),
+		searchResultTemplate:_.template( SearchResultTemplate ),
+		foundUserTemplate:_.template( FoundUserTemplate ),
 
 		callbackFunction: '',
 
@@ -110,16 +138,16 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		render: function () {
 
 			var modelJSON = this.model.toJSON();
-			var userListContainer = $( this.userListTemplate( modelJSON ) );
+			var searchResultContainer = $( this.searchResultTemplate( modelJSON ) );
 
-			var userTemplate = this.userTemplate;
+			var userTemplate = this.foundUserTemplate;
 
 			var foundUsers = modelJSON[ 'userDTOs' ];
 			_.each( foundUsers, function( user ) {
-				userListContainer.append( userTemplate( user ) );
+				searchResultContainer.append( userTemplate( user ) );
 			});
 
-			this.$el.html( userListContainer );
+			this.$el.html( searchResultContainer );
 
 			return this;
 		},

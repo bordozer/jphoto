@@ -38,17 +38,13 @@ public class UserListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public UserPickerDTO showUserPicker( final HttpServletRequest request ) {
-		final UserPickerDTO dto = getUserPickerDTO( request.getParameter( "searchString" ) );
-		dto.setFound( false );
-//		dto.setCallback( request.getParameter( "callback" ) );
-		return dto;
+		return getUserPickerDTO( request.getParameter( "searchString" ) );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public UserPickerDTO search( @RequestBody final UserPickerDTO requestDTO ) {
 		final UserPickerDTO dto = getUserPickerDTO( requestDTO.getSearchString() );
-//		dto.setCallback( requestDTO.getCallback() );
 		requestDTO.setUserDTOs( requestDTO.getUserDTOs() );
 
 		return dto;
