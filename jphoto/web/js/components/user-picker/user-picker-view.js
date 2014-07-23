@@ -82,6 +82,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		doSearch: function() {
 			var searchString = this.$( '.user-picker-filter' ).val();
 			if ( searchString.length >= 3 ) {
+				this.model.openSearchResult();
 				this.performSearch();
 			} else {
 				this.model.closeSearchResult();
