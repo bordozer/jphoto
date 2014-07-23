@@ -46,7 +46,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		clearResult: function() {
-//			console.log( 'Nothing is found' );
 			this.$( ".user-list-container" ).html( 'Nothing is found' );
 		},
 
