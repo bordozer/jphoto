@@ -58,7 +58,8 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var isFound = modelJSON[ 'userDTOs' ].length > 0;
 
 			if ( ! isFound ) {
-				this.closePickerSearchResult();
+//				this.closePickerSearchResult();
+				this.nothingFound();
 				return;
 			}
 
@@ -82,8 +83,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		doSearch: function() {
-			var searchString = this.$( '.user-picker-filter' ).val();
-			if ( searchString.length >= 3 ) {
+			if ( this.getSearchValue().length >= 3 ) {
 				this.performSearch();
 			} else {
 				this.model.closeSearchResult();
@@ -91,9 +91,25 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		performSearch: function() {
-			var searchString = this.$( '.user-picker-filter' ).val();
-			this.model.set( { searchString: searchString, userDTOs: [] } );
+			this.showSpinningWheel();
+
+			this.model.set( { searchString: this.getSearchValue(), userDTOs: [] } );
 			this.model.save();
+		},
+
+		nothingFound: function() {
+			this.model.openSearchResult();
+			this.$( this.searchResultContainer ).html( 'Nothing found' )
+		},
+
+		showSpinningWheel: function() {
+			var wheel = this.model.get( 'baseUrl' ) + "/images/progress.gif";
+			this.$( this.searchResultContainer ).html( "<img src='" + wheel +"' width='16' height='16'>" );
+			this.model.openSearchResult();
+		},
+
+		getSearchValue: function() {
+			return this.$( '.user-picker-filter' ).val();
 		},
 
 		onSearchFieldClick: function() {
