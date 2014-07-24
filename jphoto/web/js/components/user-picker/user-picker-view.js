@@ -56,6 +56,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			var resultContainer = this.$( this.searchResultContainer );
 			resultContainer.html( new UserListView( {
 				model: this.model
+				, pickerElement: this.$el
 				, callbackFunction: this.callbackFunction
 			} ).render().$el );
 		},
@@ -140,6 +141,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		foundUserTemplate:_.template( FoundUserTemplate ),
 
 		callbackFunction: '',
+		pickerElement: '',
 
 		events: {
 			"click .user-picker-found-entry": "onFoundUserClick"
@@ -147,6 +149,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		initialize: function( options ) {
 			this.callbackFunction = options.callbackFunction;
+			this.pickerElement = options.pickerElement;
 			this.render();
 		},
 
@@ -168,14 +171,21 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onFoundUserClick: function( evt ) {
-			var modelJSON = this.model.toJSON();
+//			var modelJSON = this.model.toJSON();
 
 			var userId = evt.target.id;
 
-			this.$( "[name='" + this.model.controlName + "']" ).val( userId );
+			var selectedUser = _.find( this.model.get( 'userDTOs' ), function ( user ) {
+				return user.userId == userId;
+			} );
+
+			this.$( "[name='" + this.model.controlName + "']" ).val( selectedUser.userId );
+			$( 'div.user-picker-found-user', this.pickerElement ).html( selectedUser.userCardLink );
+			console.log( $( 'div.user-picker-found-user', this.pickerElement ) );
+
 			this.model.closeSearchResult();
 
-			this.callbackFunction( { userId: userId } );
+			this.callbackFunction( { userId: selectedUser.userId } );
 		}
 	});
 

@@ -9,6 +9,7 @@ public class UserDTO {
 	private String userName;
 	private String userNameEscaped;
 	private String userCardLink;
+	private String userCardLinkList;
 	private String userAvatarUrl;
 	private String userGender;
 	private String userGenderIcon;
@@ -43,6 +44,14 @@ public class UserDTO {
 
 	public void setUserCardLink( final String userCardLink ) {
 		this.userCardLink = userCardLink;
+	}
+
+	public String getUserCardLinkList() {
+		return userCardLinkList;
+	}
+
+	public void setUserCardLinkList( final String userCardLinkList ) {
+		this.userCardLinkList = userCardLinkList;
 	}
 
 	public String getUserAvatarUrl() {
