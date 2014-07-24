@@ -95,12 +95,11 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( '${photosImportModel.assignAllGeneratedPhotosToUser}', callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( 530, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
 												function callbackFunction( user ) {
 													console.log( 'callback: ', user.userId );
-//													alert( 'callback: ' + userId );
 												}
 											</script>
 										</table:td>

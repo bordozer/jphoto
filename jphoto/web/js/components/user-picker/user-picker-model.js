@@ -11,7 +11,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/users/?searchString=" + options.searchString;
+			this.url = options.baseUrl + "/rest/users/?userId=" + options.initialUserId;
 		},
 
 		openSearchResult: function() {

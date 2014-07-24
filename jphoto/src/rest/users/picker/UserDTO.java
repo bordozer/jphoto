@@ -11,6 +11,7 @@ public class UserDTO {
 	private String userCardLink;
 	private String userAvatarUrl;
 	private String userGender;
+	private String userGenderIcon;
 
 	public String getUserId() {
 		return userId;
@@ -58,5 +59,13 @@ public class UserDTO {
 
 	public void setUserGender( final String userGender ) {
 		this.userGender = userGender;
+	}
+
+	public void setUserGenderIcon( final String userGenderIcon ) {
+		this.userGenderIcon = userGenderIcon;
+	}
+
+	public String getUserGenderIcon() {
+		return userGenderIcon;
 	}
 }

@@ -31,7 +31,7 @@ public interface EntityLinkUtilsService {
 
 	String getUserCardLink( User user, final Language language );
 
-	String getUserCardLink( User user, String name, final Language language );
+	String getUserCardLink( User user, String customName, final Language language );
 
 	String getPhotosByUserLink( User user, final Language language );
 

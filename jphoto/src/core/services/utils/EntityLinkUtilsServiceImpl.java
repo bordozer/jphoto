@@ -51,11 +51,11 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 	}
 
 	@Override
-	public String getUserCardLink( final User user, final String name, final Language language ) {
+	public String getUserCardLink( final User user, final String customName, final Language language ) {
 		return String.format( "<a class=\"member-link\" href=\"%s\" title=\"%s\">%s</a>"
 			, urlUtilsService.getUserCardLink( user.getId() )
 			, translatorService.translate( "EntityLinkUtilsService: $1: user card link title", language, StringUtilities.escapeHtml( user.getName() ) )
-			, StringUtilities.escapeHtml( name )
+			, StringUtilities.escapeHtml( customName )
 		);
 	}
 

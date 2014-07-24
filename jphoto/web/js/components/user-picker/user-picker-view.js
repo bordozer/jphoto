@@ -23,53 +23,35 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		initialize: function( options ) {
 			this.callbackFunction = options.callbackFunction;
 
-			this.listenTo( this.model, "sync", this.render );
+			this.listenTo( this.model, "sync", this.renderUserList );
 
 			this.listenTo( this.model, "perform_search", this.performSearch );
 			this.listenTo( this.model, "open_search_result", this.openPickerSearchResult );
 			this.listenTo( this.model, "close_search_result", this.closePickerSearchResult );
 
 			this.model.fetch( { cache: false } );
+
+			this.render();
 		},
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-
-			var forceCloseSearchResult = false;
-			if( this.$( '.user-picker-filter' ).length == 0 ) {
-				this.$el.html( this.searchFormTemplate( modelJSON ) );
-				forceCloseSearchResult = true;
-
-				/*var model = this.model;
-				$( 'body' ).click( function ( evt ) {
-					evt.preventDefault();
-					evt.stopImmediatePropagation();
-
-					model.closeSearchResult();
-				});*/
-			}
-
-			this.renderUserList( forceCloseSearchResult );
+			this.$el.html( this.searchFormTemplate( modelJSON ) );
 		},
 
-		renderUserList: function( forceCloseSearchResult ) {
+		renderUserList: function() {
+
+			if ( ! this.isSearchStringLongEnough() ) {
+				this.model.closeSearchResult();
+				return;
+			}
 
 			var modelJSON = this.model.toJSON();
 			var isFound = modelJSON[ 'userDTOs' ].length > 0;
 
 			if ( ! isFound ) {
-
-				if ( forceCloseSearchResult ) {
-					this.closePickerSearchResult();
-					return;
-				}
-
 				this.nothingFound();
 				return;
-			}
-
-			if ( ! forceCloseSearchResult ) {
-				this.model.openSearchResult();
 			}
 
 			var resultContainer = this.$( this.searchResultContainer );
@@ -88,11 +70,15 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		doSearch: function() {
-			if ( this.getSearchValue().length >= 3 ) {
+			if ( this.isSearchStringLongEnough() ) {
 				this.performSearch();
 			} else {
 				this.model.closeSearchResult();
 			}
+		},
+
+		isSearchStringLongEnough: function() {
+			return this.getSearchValue().length >= 3;
 		},
 
 		performSearch: function() {
@@ -118,6 +104,12 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onSearchFieldClick: function() {
+
+			if ( ! this.isSearchStringLongEnough() ) {
+				this.model.closeSearchResult();
+				return;
+			}
+
 			this.$( this.searchResultContainer ).toggleClass( this.invisibility );
 			var searchResultExpanded = this.model.searchResultExpanded;
 

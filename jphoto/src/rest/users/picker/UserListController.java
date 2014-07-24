@@ -1,16 +1,20 @@
 package rest.users.picker;
 
+import core.enums.UserGender;
 import core.general.user.User;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+import utils.NumberUtils;
 import utils.StringUtilities;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,12 +37,19 @@ public class UserListController {
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Autowired
+	private UrlUtilsService urlUtilsService;
+
+	@Autowired
 	private TranslatorService translatorService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public UserPickerDTO showUserPicker( final HttpServletRequest request ) {
-		return getUserPickerDTO( request.getParameter( "searchString" ) );
+		final int userId = NumberUtils.convertToInt( request.getParameter( "userId" ) );
+
+		final User user = userService.load( userId );
+
+		return getUserPickerDTO( user != null ? user.getNameEscaped() : "" );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
@@ -70,9 +81,10 @@ public class UserListController {
 			userDTO.setUserId( String.valueOf( user.getId() ) );
 			userDTO.setUserName( user.getName() );
 			userDTO.setUserNameEscaped( StringUtilities.escapeHtml( user.getName() ) );
-			userDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
+			userDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, "card", EnvironmentContext.getLanguage() ) );
 			userDTO.setUserAvatarUrl( userPhotoFilePathUtilsService.getUserAvatarFileUrl( user.getId() ) );
 			userDTO.setUserGender( translatorService.translate( user.getGender().getName(), EnvironmentContext.getLanguage() ) );
+			userDTO.setUserGenderIcon( String.format( "<img src='%s/icons16/%s' alt='gender' width='16' height='16' />", urlUtilsService.getSiteImagesPath(), ( user.getGender() == UserGender.MALE ? "male.png" : "female.png" ) ) );
 
 			userDTOs.add( userDTO );
 		}
