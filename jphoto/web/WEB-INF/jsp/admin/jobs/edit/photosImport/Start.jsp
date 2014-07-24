@@ -95,7 +95,7 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( 530, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( ${not empty photosImportModel.assignAllGeneratedPhotosToUser ? photosImportModel.assignAllGeneratedPhotosToUser.id : 0}, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
 												function callbackFunction( user ) {

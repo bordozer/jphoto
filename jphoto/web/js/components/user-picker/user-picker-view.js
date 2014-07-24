@@ -29,9 +29,8 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			this.listenTo( this.model, "open_search_result", this.openPickerSearchResult );
 			this.listenTo( this.model, "close_search_result", this.closePickerSearchResult );
 
-			this.model.fetch( { cache: false } );
-
-			this.render();
+			_.bindAll( this, "render" );
+			this.model.fetch( { cache: false, success: this.render } );
 		},
 
 		render: function () {
