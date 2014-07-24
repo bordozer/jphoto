@@ -21,10 +21,13 @@
 
 <div style='float: left; width: 300px; padding: 10px;' class="block-border">
 
-	<div class="user-picker-found-user" style="height: 20px; width: 200px;">No user selected</div>
+	<div class="user-picker-found-user" style="height: 20px; width: 200px;">
+		 No user selected
+	</div>
 
 	<input type="hidden" name="<%-controlName%>" value="<%=selectedUserId%>">
 	<input type="text" class="user-picker-filter" value="<%=searchString%>">
+	<img src="/images/icons16/resetFoundMember.png" class="user-picker-reset-found-user invisibility" alt="Close" title="Reset selected user" style="margin-top: 5px; margin-right: 5px;">
 
 	<div class="search-result-container invisibility" style="float: left; width: 100%;">
 

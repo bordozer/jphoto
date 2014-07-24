@@ -18,6 +18,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			"keyup .user-picker-filter": "onSearch"
 			, "click .user-picker-filter": "onSearchFieldClick"
 			, "click .user-picker-close": "onPickerClose"
+			, "click .user-picker-reset-found-user": "onResetFoundUser"
 		},
 
 		initialize: function( options ) {
@@ -36,6 +37,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		render: function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.searchFormTemplate( modelJSON ) );
+			this.selectUser( this.model.get( 'selectedUserDTO' ) );
 		},
 
 		renderUserList: function() {
@@ -57,6 +59,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			resultContainer.html( new UserListView( {
 				model: this.model
 				, pickerElement: this.$el
+				, picker: this
 				, callbackFunction: this.callbackFunction
 			} ).render().$el );
 		},
@@ -103,6 +106,18 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 			return this.$( '.user-picker-filter' ).val();
 		},
 
+		selectUser: function ( user ) {
+			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( user.userId );
+			this.$( 'div.user-picker-found-user' ).html( user.userCardLink );
+			this.$( '.user-picker-reset-found-user' ).removeClass( 'invisibility' );
+		},
+
+		resetSelectedUser: function ( user ) {
+			this.$( '.user-picker-found-user' ).html( 'No user selected' );
+			this.$( '.user-picker-reset-found-user' ).addClass( 'invisibility' );
+			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( '0' );
+		},
+
 		onSearchFieldClick: function() {
 
 			if ( ! this.isSearchStringLongEnough() ) {
@@ -132,6 +147,10 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		onPickerClose: function () {
 			this.model.closeSearchResult();
+		},
+
+		onResetFoundUser: function () {
+			this.resetSelectedUser();
 		}
 	});
 
@@ -141,7 +160,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		foundUserTemplate:_.template( FoundUserTemplate ),
 
 		callbackFunction: '',
-		pickerElement: '',
+		picker: '',
 
 		events: {
 			"click .user-picker-found-entry": "onFoundUserClick"
@@ -149,7 +168,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		initialize: function( options ) {
 			this.callbackFunction = options.callbackFunction;
-			this.pickerElement = options.pickerElement;
+			this.picker = options.picker;
 			this.render();
 		},
 
@@ -171,7 +190,6 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		onFoundUserClick: function( evt ) {
-//			var modelJSON = this.model.toJSON();
 
 			var userId = evt.target.id;
 
@@ -179,9 +197,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 				return user.userId == userId;
 			} );
 
-			this.$( "[name='" + this.model.controlName + "']" ).val( selectedUser.userId );
-			$( 'div.user-picker-found-user', this.pickerElement ).html( selectedUser.userCardLink );
-			console.log( $( 'div.user-picker-found-user', this.pickerElement ) );
+			this.picker.selectUser( selectedUser );
 
 			this.model.closeSearchResult();
 

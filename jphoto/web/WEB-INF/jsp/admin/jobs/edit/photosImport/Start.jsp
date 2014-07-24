@@ -96,7 +96,7 @@
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( "${userIdControl}", 530, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( "${userIdControl}", ${userPickerId}, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
 												function callbackFunction( user ) {
