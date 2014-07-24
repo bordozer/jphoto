@@ -108,14 +108,19 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 		selectUser: function ( user ) {
 			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( user.userId );
+
 			this.$( 'div.user-picker-found-user' ).html( user.userCardLink );
-			this.$( '.user-picker-reset-found-user' ).removeClass( 'invisibility' );
+			this.$( '.user-picker-selected-user-avatar' ).attr( 'src', user.userAvatarUrl );
+			this.$( '.user-picker-selected-user-avatar' ).removeClass( this.invisibility );
+
+			this.$( '.user-picker-reset-found-user' ).removeClass( this.invisibility );
 		},
 
-		resetSelectedUser: function ( user ) {
+		resetSelectedUser: function () {
 			this.$( '.user-picker-found-user' ).html( 'No user selected' );
-			this.$( '.user-picker-reset-found-user' ).addClass( 'invisibility' );
-			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( '0' );
+			this.$( '.user-picker-reset-found-user' ).addClass( this.invisibility );
+			this.$( '.user-picker-selected-user-avatar' ).addClass( this.invisibility );
+			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( 0 );
 		},
 
 		onSearchFieldClick: function() {
