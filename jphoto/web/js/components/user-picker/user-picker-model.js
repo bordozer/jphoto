@@ -2,7 +2,10 @@ define( ["backbone"], function ( Backbone ) {
 
 	var UserPickerModel = Backbone.Model.extend( {
 
-		defaults: function() {
+		controlName: ''
+		, selectedUserId: 0
+
+		, defaults: function() {
 			return {
 				searchString: ''
 				, searchPerformed: false
@@ -12,6 +15,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/users/?userId=" + options.initialUserId;
+			this.set( { controlName: options.controlName, selectedUserId: options.initialUserId } );
 		},
 
 		openSearchResult: function() {

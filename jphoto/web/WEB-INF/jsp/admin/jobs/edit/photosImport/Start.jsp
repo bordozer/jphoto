@@ -92,10 +92,11 @@
 									<table:tr>
 										<table:td colspan="2">
 											<%--<user:userPicker userIdControl="${userIdControl}" user="${photosImportModel.assignAllGeneratedPhotosToUser}"/>--%>
+											<c:set var="userPickerId" value="${not empty photosImportModel.assignAllGeneratedPhotosToUser ? photosImportModel.assignAllGeneratedPhotosToUser.id : 0}" />
 											<div class="user-picker-container" style="float: left; width: 100%;"></div>
 											<script type="text/javascript">
 												require( ['components/user-picker/user-picker'], function ( userPicker ) {
-													userPicker( ${not empty photosImportModel.assignAllGeneratedPhotosToUser ? photosImportModel.assignAllGeneratedPhotosToUser.id : 0}, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
+													userPicker( "${userIdControl}", 530, callbackFunction, '${baseUrl}', $( '.user-picker-container' ) );
 												} );
 
 												function callbackFunction( user ) {

@@ -172,6 +172,9 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 
 			var userId = evt.target.id;
 
+			this.$( "[name='" + this.model.controlName + "']" ).val( userId );
+			this.model.closeSearchResult();
+
 			this.callbackFunction( { userId: userId } );
 		}
 	});
