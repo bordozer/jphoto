@@ -310,10 +310,10 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUser );
 
 		if ( StringUtils.isEmpty( photosightUserName ) ) {
-			final String message = String.format( "Can not extract photosight user name from page content. Photosight user: %s.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
+			final String message = String.format( "Can not extract a name photosight user #%s from page content. Photos import of the user will be skipped.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
 			log.error( message );
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract photosight user name from page content. Photosight user: $1.", services )
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract a name of photosight user #$1 from page content. Photos import of the user will be skipped.", services )
 				.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
@@ -416,8 +416,6 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			if ( StringUtils.isEmpty( userPageContent ) ) {
 				log.error( String.format( "ERROR getting photosight user #%s pages qty. Photos import of the user will be skipped.", photosightUserId ) );
 
-				/*final String message = services.getTranslatorService().translate( "ERROR getting photosight user #$1 pages qty. Photos import of the user will be skipped."
-					, language, String.valueOf( photosightUserId ) );*/
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "ERROR getting photosight user #$1 pages qty. Photos import of the user will be skipped.", services )
 					.string( photosightUserId )
 					;
