@@ -1,4 +1,4 @@
-package admin.controllers.jobs.edit.photosImport.strategies.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 

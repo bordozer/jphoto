@@ -1,4 +1,4 @@
-package admin.controllers.jobs.edit.photosImport.strategies.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import org.apache.commons.lang.StringUtils;
 import utils.NumberUtils;

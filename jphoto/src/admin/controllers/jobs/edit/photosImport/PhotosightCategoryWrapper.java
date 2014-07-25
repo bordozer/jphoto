@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport;
 
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 
 public class PhotosightCategoryWrapper {
 

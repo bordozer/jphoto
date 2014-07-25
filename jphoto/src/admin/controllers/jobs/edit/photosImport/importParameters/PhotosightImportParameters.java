@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.importParameters;
 
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 import core.services.translator.Language;

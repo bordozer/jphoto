@@ -1,9 +1,9 @@
 package ui.services.ajax;
 
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightUserDTO;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;

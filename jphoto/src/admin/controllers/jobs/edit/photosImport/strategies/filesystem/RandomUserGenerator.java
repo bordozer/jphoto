@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
 import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
 import core.general.user.User;

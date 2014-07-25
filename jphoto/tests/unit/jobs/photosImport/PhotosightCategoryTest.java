@@ -1,8 +1,8 @@
 package jobs.photosImport;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImageFileUtils;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImageFileUtils;
 import common.AbstractTestCase;
 import org.junit.Test;
 

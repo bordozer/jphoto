@@ -1,4 +1,4 @@
-package admin.controllers.jobs.edit.photosImport.strategies.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
@@ -73,7 +73,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		final User user = findByNameOrCreateUser( photosightUser, importParameters );
 		if ( user == null ) {
-			log.error( String.format( "User %s can not be created. Skipping user's photos import.", photosightUser ) );
+			log.error( String.format( "%s can not be created. Skipping user's photos import.", photosightUser ) );
 			return;
 		}
 
@@ -319,7 +319,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
 
-		return StringUtils.EMPTY;
+		return photosightUserName;
 	}
 
 	private void prepareFolderForImageDownloading( final PhotosightUser photosightUser ) throws IOException {

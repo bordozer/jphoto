@@ -6,9 +6,9 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.photosight.PhotosightRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
