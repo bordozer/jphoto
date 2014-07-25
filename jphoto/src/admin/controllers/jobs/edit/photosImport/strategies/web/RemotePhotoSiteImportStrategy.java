@@ -131,7 +131,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		while ( ! job.isFinished() && ! job.hasJobFinishedWithAnyResult() && page <= userPagesQty ) {
 
-			log.debug( String.format( "Getting page %d context of %s", page, importParameters.getRemoteContentHelper().getRemotePhotoSiteUserPageLink( remotePhotoSiteUser ) ) );
+			log.debug( String.format( "Getting page %d context of %s", page, importParameters.getRemoteContentHelper().getUserCardLink( remotePhotoSiteUser ) ) );
 
 			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( page, remotePhotoSiteUser.getId() );
 			if ( StringUtils.isEmpty( userPageContent ) ) {
@@ -230,7 +230,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			final String remotePhotoSiteUserPageLink = importParameters.getRemoteContentHelper().getRemotePhotoSiteUserPageLink( remotePhotoSiteUser );
+			final String remotePhotoSiteUserPageLink = importParameters.getRemoteContentHelper().getUserCardLink( remotePhotoSiteUser );
 
 			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoSitePhotoId ) ) {
 
@@ -267,7 +267,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				log.debug( String.format( "Photo %d of %s has been found in the local cache.", remotePhotoSitePhotoId, remotePhotoSiteUserPageLink ) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
-					.string( importParameters.getRemoteContentHelper().getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto ) )
+					.string( importParameters.getRemoteContentHelper().getPhotoCardLink( remotePhotoSitePhoto ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 			} else {
@@ -346,14 +346,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
-		final String remotePhotoSiteUserName = importParameters.getRemoteContentHelper().getRemotePhotoSiteUserName( remotePhotoSiteUser );
+		final String remotePhotoSiteUserName = importParameters.getRemoteContentHelper().getUserName( remotePhotoSiteUser );
 
 		if ( StringUtils.isEmpty( remotePhotoSiteUserName ) ) {
-			final String message = String.format( "Can not extract a name of a remote photo site user #%s from a page content. Photos import of the user will be skipped.", importParameters.getRemoteContentHelper().getRemotePhotoSiteUserPageLink( remotePhotoSiteUser ) );
+			final String message = String.format( "Can not extract a name of a remote photo site user #%s from a page content. Photos import of the user will be skipped.", importParameters.getRemoteContentHelper().getUserCardLink( remotePhotoSiteUser ) );
 			log.error( message );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract a name of a remote photo site user #$1 from page content. Photos import of the user will be skipped.", services )
-				.string( importParameters.getRemoteContentHelper().getRemotePhotoSiteUserPageLink( remotePhotoSiteUser ) )
+				.string( importParameters.getRemoteContentHelper().getUserCardLink( remotePhotoSiteUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -436,7 +436,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
 				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() )
-				, importParameters.getRemoteContentHelper().getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto )
+				, importParameters.getRemoteContentHelper().getPhotoCardLink( remotePhotoSitePhoto )
 				, genreDiscEntry.getName()
 			);
 			imageToImport.setPhotoDescription( description );
@@ -501,7 +501,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			remotePhotoSitePhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
-				.string( remoteContentHelper.getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto ) )
+				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -519,9 +519,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
 			.string( remoteContentHelper.getPhotosImportSource().getUrl() )
-			.string( remoteContentHelper.getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto ) )
-			.string( remoteContentHelper.getRemotePhotoSiteUserPageLink( remotePhotoSiteUser ) )
-			.string( remoteContentHelper.getRemotePhotoSiteCategoryPageLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
+			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
+			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
+			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -628,8 +628,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			throw new BaseRuntimeException( "Can not create user" );
 		}
 
-		/*final String translate = services.getTranslatorService().translate( "New user has been created: $1"
-			, importParameters.getLanguage(), entityLinkUtilsService.getUserCardLink( user, language ) );*/
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "New user has been created: $1", services )
 			.addUserCardLinkParameter( user )
 			;

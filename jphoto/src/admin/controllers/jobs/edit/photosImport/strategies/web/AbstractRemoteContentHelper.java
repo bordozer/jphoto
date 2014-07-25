@@ -10,6 +10,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 import java.io.IOException;
 
@@ -23,27 +24,31 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract PhotosImportSource getPhotosImportSource();
 
-	public abstract String getUserCardUrl( final String userId );
+	public abstract String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser );
 
-	public abstract String getUserCardUrl( final String userId, int page );
+	public abstract String getUserCardUrl( final String remotePhotoSiteUserId );
 
-	public abstract String getRemotePhotoSiteCategoryPageUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
+	public abstract String getUserCardUrl( final String remotePhotoSiteUserId, int page );
 
-	public abstract String getRemotePhotoSiteUserName( final RemotePhotoSiteUser remotePhotoSiteUser );
+	public abstract String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser );
 
-	public abstract String getRemotePhotoSiteUserName( final String remotePhotoSiteUserId );
+	public abstract String getUserName( final String remotePhotoSiteUserId );
 
-	public abstract String getRemotePhotoSiteUserPageLink( final RemotePhotoSiteUser remotePhotoSiteUser );
+	public abstract String getUserPageContent( final int pageNumber, final String remotePhotoSiteUserId );
 
-	public abstract String getRemotePhotoSitePhotoPageLink( final RemotePhotoSitePhoto remotePhotoSitePhoto );
-
-	public abstract String getRemotePhotoSiteCategoryPageLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
+	public abstract String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto );
 
 	public abstract String getPhotoCardLink( final int remotePhotoSitePhotoId );
 
-	public abstract String getUserPageContent( final int page, final String remotePhotoSiteUserId );
+	public abstract String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId );
 
-	public abstract String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId );
+	public abstract String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
+
+	public abstract String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
+
+	protected abstract void setCookie( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId );
+
+	protected abstract BasicClientCookie getCookie( final String cookieName, final String remotePhotoSiteUserId );
 
 	public String getImageContentFromUrl( final String cardUrl ) {
 
@@ -60,6 +65,24 @@ public abstract class AbstractRemoteContentHelper {
 			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
 		} catch ( final IOException e ) {
 			log.error( String.format( "Can not get image content: '%s'", cardUrl ), e );
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+
+		return null;
+	}
+
+	protected String getContent( final String userId, final String pageUrl ) {
+		final DefaultHttpClient httpClient = new DefaultHttpClient();
+
+		final HttpGet httpGet = new HttpGet( pageUrl );
+		setCookie( httpClient, userId );
+
+		try {
+			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
+		} catch ( final IOException e ) {
+			log.error( String.format( "Can not get photosight page content: '%s'", pageUrl ), e );
 		} finally {
 			httpClient.getConnectionManager().shutdown();
 		}
