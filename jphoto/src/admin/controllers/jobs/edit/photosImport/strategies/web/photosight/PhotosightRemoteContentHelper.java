@@ -32,8 +32,8 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSiteCategory.getId() );
+	public String getPhotoCategoryUrl( final PhotosightCategory photosightCategory ) {
+		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", photosightCategory.getId() );
 	}
 
 	@Override

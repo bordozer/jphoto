@@ -1,5 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +9,7 @@ public class RemotePhotoSitePhoto {
 
 	private final RemotePhotoSiteUser remotePhotoSiteUser;
 	private final int photoId;
-	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
+	private final PhotosightCategory photosightCategory;
 	private String name;
 	private Date uploadTime;
 	private String imageUrl;
@@ -16,10 +18,10 @@ public class RemotePhotoSitePhoto {
 
 	private boolean isCached;
 
-	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final PhotosightCategory photosightCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
 		this.photoId = photoId;
-		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
+		this.photosightCategory = photosightCategory;
 	}
 
 	public RemotePhotoSiteUser getRemotePhotoSiteUser() {
@@ -30,8 +32,8 @@ public class RemotePhotoSitePhoto {
 		return photoId;
 	}
 
-	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
-		return remotePhotoSiteCategory;
+	public PhotosightCategory getPhotosightCategory() {
+		return photosightCategory;
 	}
 
 	public String getName() {

@@ -5,7 +5,7 @@ import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhotoImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
@@ -37,7 +37,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 	protected void runJob() throws Throwable {
 		final List<String> usersIds = getUsersIds();
 
-		final List<RemotePhotoSiteCategory> photosightCategories = Arrays.asList( RemotePhotoSiteCategory.values() );
+		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
 
 		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters(
 			usersIds

@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
@@ -204,7 +205,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		CollectionUtils.filter( remotePhotoSitePagePhotos, new Predicate<RemotePhotoSitePhoto>() {
 			@Override
 			public boolean evaluate( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
-				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoSitePhoto.getPhotosightCategory() );
 			}
 		} );
 	}
@@ -311,7 +312,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ) );
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
 		}
 
@@ -428,10 +429,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			imageToImport.setUser( localUser );
 			imageToImport.setName( remotePhotoSitePhoto.getName() );
 
-			final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
+			final PhotosightCategory photosightCategory = remotePhotoSitePhoto.getPhotosightCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory );
+			final GenreDiscEntry genreDiscEntry = RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( photosightCategory );
 			final String siteUrl = importParameters.getRemoteContentHelper().getRemotePhotoSiteHost();
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
@@ -485,13 +486,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentHelper = getRemotePhotoSitePageContentDataExtractor();
 
-		final RemotePhotoSiteCategory remotePhotoSiteCategory = RemotePhotoSiteCategory.getById( remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
-		if( remotePhotoSiteCategory == null ) {
+		final PhotosightCategory photosightCategory = PhotosightCategory.getById( remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
+		if( photosightCategory == null ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo category from page content." );
 			return null;
 		}
 
-		final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, remotePhotoSiteCategory );
+		final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
 		remotePhotoSitePhoto.setName( remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ) );
 
 		final Date uploadTime = extractUploadTime( photoPageContent );
@@ -521,7 +522,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			.string( remoteContentHelper.getRemotePhotoSiteHost() )
 			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
-			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
+			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 

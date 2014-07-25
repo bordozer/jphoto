@@ -179,7 +179,7 @@
 											<%--<div style="float: left; width: 100%; height: 80px;">--%>
 												<c:forEach var="checkbox" items="${remotePhotoSiteCategoryWrapper}">
 													<div style="display: inline-block; width: 120px;">
-														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.remotePhotoSiteCategory.id}" label="${checkbox.remotePhotoSiteCategory.name}" cssClass="${checkbox.cssClasses}" />
+														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
 													</div>
 												</c:forEach>
 											<%--</div>--%>

@@ -3,6 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import core.log.LogHelper;
 
 import java.io.File;
@@ -26,7 +27,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
 			final File userFolder = getUserFolderForPhotoDownloading( remotePhotoSiteUser );
-			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() );
 
 			final File userGenrePath = new File( userFolder, genreDiscEntry.getName() );
 			if ( ! userGenrePath.exists() ) {
@@ -45,7 +46,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 	}
 
 	private ImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
-		final RemotePhotoSiteCategory category = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
+		final PhotosightCategory category = remotePhotoSitePhoto.getPhotosightCategory();
 
 		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( category );
 
@@ -59,7 +60,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
 		final String imageFileName = getRemoteSitePhotoFileName( remotePhotoSitePhoto.getPhotoId() );
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() );
 		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
 		final File imageFolder = new File( userFolderForPhotoDownloading, genreDiscEntry.getName() );
 		return new File( imageFolder, imageFileName );
@@ -69,14 +70,14 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		return String.format( "%d.jpg", photoId );
 	}
 
-	public static GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public static GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
 		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoryToGenreMapping.getRemotePhotoSiteCategoryToGenreMapping() ) {
-			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
+			if ( photoCategoryMapping.getPhotosightCategory() == photosightCategory ) {
 				return photoCategoryMapping.getGenreDiscEntry();
 			}
 		}
 
-		log.warn( String.format( "Photosight category %s does not mach any genre", remotePhotoSiteCategory ) );
+		log.warn( String.format( "Photosight category %s does not mach any genre", photosightCategory ) );
 
 		return GenreDiscEntry.OTHER;
 	}

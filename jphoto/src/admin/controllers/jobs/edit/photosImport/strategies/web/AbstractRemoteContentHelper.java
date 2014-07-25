@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import core.log.LogHelper;
@@ -30,7 +31,7 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getPhotoCardUrl( int remotePhotoSitePhotoId );
 
-	public abstract String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
+	public abstract String getPhotoCategoryUrl( final PhotosightCategory photosightCategory );
 
 	protected abstract PhotosightContentDataExtractor getPhotosightContentDataExtractor();
 
@@ -89,11 +90,11 @@ public abstract class AbstractRemoteContentHelper {
 		);
 	}
 
-	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
+	public String getPhotoCategoryLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
-			, getPhotoCategoryUrl( remotePhotoSiteCategory )
-			, remotePhotoSiteCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() )
+			, getPhotoCategoryUrl( photosightCategory )
+			, photosightCategory.getName()
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() )
 			, language )
 		);
 	}
