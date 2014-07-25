@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 
-public class RemoteUserDTO {
+public class RemotePhotoSiteUserDTO {
 
 	private final String remoteUserId;
 	private String remoteUserName;
@@ -20,7 +20,7 @@ public class RemoteUserDTO {
 	private UserGender userGender;
 	private UserMembershipType userMembershipType;
 
-	public RemoteUserDTO( final String remoteUserId ) {
+	public RemotePhotoSiteUserDTO( final String remoteUserId ) {
 		this.remoteUserId = remoteUserId;
 	}
 

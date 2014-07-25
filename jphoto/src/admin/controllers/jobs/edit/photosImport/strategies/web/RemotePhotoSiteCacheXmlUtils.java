@@ -28,7 +28,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class RemoteSiteCacheXmlUtils {
+public class RemotePhotoSiteCacheXmlUtils {
 
 	private static final String USER_INFO_FILE_ROOT_ELEMENT = "author";
 	private static final String USER_INFO_FILE_USER_ID = "id";
@@ -50,7 +50,7 @@ public class RemoteSiteCacheXmlUtils {
 	private final PhotosImportSource photosImportSource;
 	private final File remotePhotoSitesCachePath;
 
-	public RemoteSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath ) {
+	public RemotePhotoSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath ) {
 		this.photosImportSource = photosImportSource;
 		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
 	}

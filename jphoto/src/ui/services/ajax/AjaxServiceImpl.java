@@ -4,7 +4,7 @@ import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemoteUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
@@ -109,15 +109,15 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public RemoteUserDTO getRemoteUserDTO( final String _remoteUserId, final String _importSourceId ) {
+	public RemotePhotoSiteUserDTO getRemoteUserDTO( final String _remoteUserId, final String _importSourceId ) {
 
 		if ( StringUtils.isEmpty( _remoteUserId ) ) {
-			final RemoteUserDTO remoteUserDTO = new RemoteUserDTO( "0" );
-			remoteUserDTO.setRemoteUserFound( false );
-			return remoteUserDTO;
+			final RemotePhotoSiteUserDTO remotePhotoSiteUserDTO = new RemotePhotoSiteUserDTO( "0" );
+			remotePhotoSiteUserDTO.setRemoteUserFound( false );
+			return remotePhotoSiteUserDTO;
 		}
 
-		final RemoteUserDTO remoteUserDTO = new RemoteUserDTO( _remoteUserId );
+		final RemotePhotoSiteUserDTO remotePhotoSiteUserDTO = new RemotePhotoSiteUserDTO( _remoteUserId );
 
 		final String userId = String.valueOf( _remoteUserId );
 
@@ -125,30 +125,30 @@ public class AjaxServiceImpl implements AjaxService {
 		final String remoteUserName = remoteContentHelper.getRemotePhotoSiteUserName( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
-		remoteUserDTO.setRemoteUserName( remoteUserName );
-		remoteUserDTO.setRemoteUserCardUrl( remoteUserCardUrl );
+		remotePhotoSiteUserDTO.setRemoteUserName( remoteUserName );
+		remotePhotoSiteUserDTO.setRemoteUserCardUrl( remoteUserCardUrl );
 
 		final boolean photosightUserFound = StringUtils.isNotEmpty( remoteUserName );
-		remoteUserDTO.setRemoteUserFound( photosightUserFound );
+		remotePhotoSiteUserDTO.setRemoteUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			remoteUserDTO.setRemoteUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( _remoteUserId ) );
+			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( _remoteUserId ) );
 		}
 
 		final String userLogin = RemotePhotoSiteImportStrategy.getPhotosightUserLogin( userId );
 		final User user = userService.loadByLogin( userLogin );
 		final boolean userExistsInTheSystem = user != null;
-		remoteUserDTO.setRemoteUserExistsInTheSystem( userExistsInTheSystem );
+		remotePhotoSiteUserDTO.setRemoteUserExistsInTheSystem( userExistsInTheSystem );
 
 		if ( userExistsInTheSystem ) {
-			remoteUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
-			remoteUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
-			remoteUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
-			remoteUserDTO.setUserGender( user.getGender() );
-			remoteUserDTO.setUserMembershipType( user.getMembershipType() );
+			remotePhotoSiteUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
+			remotePhotoSiteUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
+			remotePhotoSiteUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
+			remotePhotoSiteUserDTO.setUserGender( user.getGender() );
+			remotePhotoSiteUserDTO.setUserMembershipType( user.getMembershipType() );
 		}
 
-		return remoteUserDTO;
+		return remotePhotoSiteUserDTO;
 	}
 
 	@Override

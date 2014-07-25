@@ -331,18 +331,18 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyPhotosightPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
-		final RemoteSiteCacheXmlUtils remoteSiteCacheXmlUtils = getPhotosightXmlUtils();
+		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = getPhotosightXmlUtils();
 
 		try {
-			return remoteSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
+			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
-				.string( remoteSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
+				.string( remotePhotoSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
 				.string( e.getMessage() )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
-			log.error( String.format( "Error reading user info file: %s<br />", remoteSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() ), e );
+			log.error( String.format( "Error reading user info file: %s<br />", remotePhotoSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() ), e );
 
 			throw new BaseRuntimeException( e );
 		}
@@ -692,8 +692,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 	}
 
-	private RemoteSiteCacheXmlUtils getPhotosightXmlUtils() {
-		return new RemoteSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+	private RemotePhotoSiteCacheXmlUtils getPhotosightXmlUtils() {
+		return new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 	}
 }
 

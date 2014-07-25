@@ -55,7 +55,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 
 		final File imageFile = getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
-		RemoteSiteCacheXmlUtils.writeImageContentToFile( imageFile, imageContent, "ISO-8859-1" );
+		RemotePhotoSiteCacheXmlUtils.writeImageContentToFile( imageFile, imageContent, "ISO-8859-1" );
 
 		return new ImageDiscEntry( imageFile, genreDiscEntry );
 	}

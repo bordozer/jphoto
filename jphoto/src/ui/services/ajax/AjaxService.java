@@ -1,6 +1,6 @@
 package ui.services.ajax;
 
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemoteUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
 import rest.users.picker.UserDTO;
 import ui.dtos.*;
 
@@ -12,7 +12,7 @@ public interface AjaxService {
 
 	AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO );
 
-	RemoteUserDTO getRemoteUserDTO( final String _remoteUserId, final String _importSourceId );
+	RemotePhotoSiteUserDTO getRemoteUserDTO( final String _remoteUserId, final String _importSourceId );
 
 	AjaxResultDTO addEntryToFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
 
