@@ -317,11 +317,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
-
-			throw new BaseRuntimeException( message );
 		}
 
-		return photosightUserName;
+		return StringUtils.EMPTY;
 	}
 
 	private void prepareFolderForImageDownloading( final PhotosightUser photosightUser ) throws IOException {
