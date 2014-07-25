@@ -6,7 +6,6 @@ import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.*;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
@@ -56,11 +55,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	@Override
 	public void doImport() throws IOException, SaveToDBException {
 
-		for ( final String photosightUserId : importParameters.getRemoteUserIds() ) {
+		for ( final String remotePhotoSiteUserId : importParameters.getRemoteUserIds() ) {
 
-			final RemotePhotoSiteUser remotePhotoSiteUser = new RemotePhotoSiteUser( photosightUserId );
+			final RemotePhotoSiteUser remotePhotoSiteUser = new RemotePhotoSiteUser( remotePhotoSiteUserId );
 
-			importPhotosightUserPhotos( remotePhotoSiteUser );
+			importRemotePhotoSiteUserPhotos( remotePhotoSiteUser );
 
 			if( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -68,7 +67,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	private void importPhotosightUserPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException, SaveToDBException {
+	private void importRemotePhotoSiteUserPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException, SaveToDBException {
 
 		final User user = findByNameOrCreateUser( remotePhotoSiteUser, importParameters );
 		if ( user == null ) {
@@ -78,7 +77,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		prepareFolderForImageDownloading( remotePhotoSiteUser );
 
-		final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos = getCachedLocallyPhotosightPhotos( remotePhotoSiteUser );
+		final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos = getCachedLocallyRemotePhotoSitePhotos( remotePhotoSiteUser );
 
 		int page = 1;
 
@@ -96,20 +95,20 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( page, remotePhotoSiteUser.getId() );
 			if ( StringUtils.isEmpty( userPageContent ) ) {
 
-				log.info( "Can not load photosight user first page - skipping import user's photos" );
+				log.info( "Can not load remote photo site user first page - skipping import user's photos" );
 
 				continue;
 			}
 
-			final List<Integer> photosightPagePhotosIds = extractUserPhotosIdsFromPage( userPageContent );
+			final List<Integer> remotePhotoSitePagePhotosIds = extractUserPhotosIdsFromPage( userPageContent );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			if ( photosightPagePhotosIds.size() == 0 ) {
+			if ( remotePhotoSitePagePhotosIds.size() == 0 ) {
 				final String userCardFileName = getUserCardFileName( remotePhotoSiteUser, page );
-				final File file = getPhotosightImageFileUtils().writePageContentToFile( userCardFileName, userPageContent );
+				final File file = getRemotePhotoSitePhotoImageFileUtils().writePageContentToFile( userCardFileName, userPageContent );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "No photo have been found on page $1. User page content saved. See $2", services )
 					.addIntegerParameter( page )
@@ -122,18 +121,18 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final PhotosightPhotosFromPageToImport photosightPhotosToImport = getPhotosightPhotosToImport( remotePhotoSiteUser, photosightPagePhotosIds, cachedLocallyRemotePhotoSitePhotos, user );
-			final List<RemotePhotoSitePhoto> photosightPagePhotos = photosightPhotosToImport.getRemotePhotoSitePhotos();
+			final RemotePhotoSitePhotosFromPageToImport remotePhotoSitePhotosToImport = getRemotePhotoSitePhotosToImport( remotePhotoSiteUser, remotePhotoSitePagePhotosIds, cachedLocallyRemotePhotoSitePhotos, user );
+			final List<RemotePhotoSitePhoto> remotePhotoSitePagePhotos = remotePhotoSitePhotosToImport.getRemotePhotoSitePhotos();
 
-			filterDownloadedPhotosByPhotosightCategories( photosightPagePhotos );
+			filterDownloadedPhotosByCategories( remotePhotoSitePagePhotos );
 
-			final List<RemotePhotoSitePhotoDiskEntry> photosightPhotosOnDisk = getPhotosightPhotoOnDisk( remotePhotoSiteUser, photosightPagePhotos, cachedLocallyRemotePhotoSitePhotos );
+			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remotePhotoSiteUser, remotePhotoSitePagePhotos, cachedLocallyRemotePhotoSitePhotos );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			final List<RemotePhotoSiteDBEntry> entries = prepareImagesToImport( remotePhotoSiteUser, user, photosightPhotosOnDisk );
+			final List<RemotePhotoSiteDBEntry> entries = prepareImagesToImport( remotePhotoSiteUser, user, remotePhotoSitePhotoDiskEntries );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -150,7 +149,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				importComments( entries );
 			}
 
-			if ( photosightPhotosToImport.isBreakImportAfterThisPageProcessed() ) {
+			if ( remotePhotoSitePhotosToImport.isBreakImportAfterThisPageProcessed() ) {
 				job.increment( userPagesQty - page + 1 );
 				return;
 			}
@@ -160,8 +159,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	private void filterDownloadedPhotosByPhotosightCategories( final List<RemotePhotoSitePhoto> photosightPagePhotos ) {
-		CollectionUtils.filter( photosightPagePhotos, new Predicate<RemotePhotoSitePhoto>() {
+	private void filterDownloadedPhotosByCategories( final List<RemotePhotoSitePhoto> remotePhotoSitePagePhotos ) {
+		CollectionUtils.filter( remotePhotoSitePagePhotos, new Predicate<RemotePhotoSitePhoto>() {
 			@Override
 			public boolean evaluate( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
 				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
@@ -169,21 +168,22 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		} );
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getPhotosightPhotoOnDisk( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> photosightPagePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
-		final List<RemotePhotoSitePhotoDiskEntry> photosightPhotosOnDisk = newArrayList();
-		final List<RemotePhotoSitePhotoDiskEntry> notCachedPhotosightPhotosOnDisk = getNotCachedPhotosightPhotosOnDisk( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, photosightPagePhotos );
-		final List<RemotePhotoSitePhotoDiskEntry> cachedPhotosightPhotosOnDisk = getCachedPhotosightPhotosOnDisk( photosightPagePhotos );
+	private List<RemotePhotoSitePhotoDiskEntry> getRemotePhotoSitePhotoDiskEntries( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
+		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
+		final List<RemotePhotoSitePhotoDiskEntry> notCachedRemotePhotoSitePhotoDiskEntries = getNotCachedRemotePhotoSitePhotoDiskEntries( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, remotePhotoSitePhotos );
+		final List<RemotePhotoSitePhotoDiskEntry> cachedRemotePhotoSitePhotoDiskEntries = getCachedRemotePhotoSitePhotoDiskEntries( remotePhotoSitePhotos );
 
-		photosightPhotosOnDisk.addAll( notCachedPhotosightPhotosOnDisk );
-		photosightPhotosOnDisk.addAll( cachedPhotosightPhotosOnDisk );
-		return photosightPhotosOnDisk;
+		result.addAll( notCachedRemotePhotoSitePhotoDiskEntries );
+		result.addAll( cachedRemotePhotoSitePhotoDiskEntries );
+
+		return result;
 	}
 
-	private PhotosightPhotosFromPageToImport getPhotosightPhotosToImport( final RemotePhotoSiteUser remotePhotoSiteUser, final List<Integer> photosightPagePhotosIds, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos, final User user ) throws IOException {
+	private RemotePhotoSitePhotosFromPageToImport getRemotePhotoSitePhotosToImport( final RemotePhotoSiteUser remotePhotoSiteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos, final User user ) throws IOException {
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
-		final List<RemotePhotoSitePhoto> photosightPagePhotos = newArrayList();
+		final List<RemotePhotoSitePhoto> remotePhotoSitePagePhotosToImport = newArrayList();
 
-		for ( final int photosightPhotoId : photosightPagePhotosIds ) {
+		for ( final int remotePhotoSitePhotoId : remotePhotoSitePhotosIds ) {
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -191,26 +191,26 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final String photosightUserPageLink = importParameters.getRemoteContentHelper().getRemotePhotoSiteUserPageLink( remotePhotoSiteUser );
 
-			if ( jobHelperService.doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
+			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoSitePhotoId ) ) {
 
 				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
 					final TranslatableMessage message1 = new TranslatableMessage( "Already imported photo #$1 found. Skipping the import of the rest photos of $2", getServices() )
-						.addIntegerParameter( photosightPhotoId )
+						.addIntegerParameter( remotePhotoSitePhotoId )
 						.string( photosightUserPageLink )
 						;
 
 					job.addJobRuntimeLogMessage( message1 );
 
-					return new PhotosightPhotosFromPageToImport( photosightPagePhotos, true );
+					return new RemotePhotoSitePhotosFromPageToImport( remotePhotoSitePagePhotosToImport, true );
 				}
 
 				log.debug( String.format( "Photo %d of %s has already been imported"
-					, photosightPhotoId
+					, remotePhotoSitePhotoId
 					, photosightUserPageLink
 				) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
-					.addIntegerParameter( photosightPhotoId )
+					.addIntegerParameter( remotePhotoSitePhotoId )
 					.string( photosightUserPageLink )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
@@ -220,10 +220,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto;
 
-			final RemotePhotoSitePhoto cachedRemotePhotoSitePhoto = getPhotosightPhotoFromCache( photosightPhotoId, cachedLocallyRemotePhotoSitePhotos );
+			final RemotePhotoSitePhoto cachedRemotePhotoSitePhoto = getPhotosightPhotoFromCache( remotePhotoSitePhotoId, cachedLocallyRemotePhotoSitePhotos );
 			if ( cachedRemotePhotoSitePhoto != null ) {
 				remotePhotoSitePhoto = cachedRemotePhotoSitePhoto;
-				log.debug( String.format( "Photo %d of %s has been found in the local cache.", photosightPhotoId, photosightUserPageLink ) );
+				log.debug( String.format( "Photo %d of %s has been found in the local cache.", remotePhotoSitePhotoId, photosightUserPageLink ) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
 					.string( importParameters.getRemoteContentHelper().getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto ) )
@@ -240,18 +240,18 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 					}
 				}
 
-				remotePhotoSitePhoto = importPhotoFromPhotosight( remotePhotoSiteUser, photosightPhotoId );
+				remotePhotoSitePhoto = importPhotoFromPhotosight( remotePhotoSiteUser, remotePhotoSitePhotoId );
 			}
 
 			if ( remotePhotoSitePhoto != null ) {
-				photosightPagePhotos.add( remotePhotoSitePhoto );
+				remotePhotoSitePagePhotosToImport.add( remotePhotoSitePhoto );
 			}
 		}
 
-		return new PhotosightPhotosFromPageToImport( photosightPagePhotos, false );
+		return new RemotePhotoSitePhotosFromPageToImport( remotePhotoSitePagePhotosToImport, false );
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getCachedPhotosightPhotosOnDisk( final List<RemotePhotoSitePhoto> photosightPagePhotos ) throws IOException {
+	private List<RemotePhotoSitePhotoDiskEntry> getCachedRemotePhotoSitePhotoDiskEntries( final List<RemotePhotoSitePhoto> photosightPagePhotos ) throws IOException {
 		final List<RemotePhotoSitePhoto> cachedPhotosightPagePhoto = newArrayList( photosightPagePhotos );
 		CollectionUtils.filter( cachedPhotosightPagePhoto, new Predicate<RemotePhotoSitePhoto>() {
 			@Override
@@ -263,7 +263,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : cachedPhotosightPagePhoto ) {
-			final File imageFile = getPhotosightImageFileUtils().getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
+			final File imageFile = getRemotePhotoSitePhotoImageFileUtils().getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
 			if ( ! imageFile.exists() ) {
 				continue;
@@ -276,7 +276,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getNotCachedPhotosightPhotosOnDisk( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos, final List<RemotePhotoSitePhoto> photosightPagePhotos ) throws IOException {
+	private List<RemotePhotoSitePhotoDiskEntry> getNotCachedRemotePhotoSitePhotoDiskEntries( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos, final List<RemotePhotoSitePhoto> photosightPagePhotos ) throws IOException {
 		final List<RemotePhotoSitePhoto> notCachedPhotosightPagePhoto = newArrayList( photosightPagePhotos );
 		CollectionUtils.filter( notCachedPhotosightPagePhoto, new Predicate<RemotePhotoSitePhoto>() {
 			@Override
@@ -285,7 +285,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		} );
 
-		getPhotosightImageFileUtils().prepareUserGenreFolders( remotePhotoSiteUser, notCachedPhotosightPagePhoto );
+		getRemotePhotoSitePhotoImageFileUtils().prepareUserGenreFolders( remotePhotoSiteUser, notCachedPhotosightPagePhoto );
 		final List<RemotePhotoSitePhotoDiskEntry> notCachedPhotosightPhotosOnDisk = downloadPhotosightPhotosOnDisk( notCachedPhotosightPagePhoto );
 		cachePagePhotosightPhotosLocally( remotePhotoSiteUser, notCachedPhotosightPagePhoto, cachedLocallyRemotePhotoSitePhotos );
 		return notCachedPhotosightPhotosOnDisk;
@@ -318,20 +318,20 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private void prepareFolderForImageDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		getPhotosightImageFileUtils().createUserFolderForPhotoDownloading( remotePhotoSiteUser );
-		getPhotosightXmlUtils().createUserInfoFile( remotePhotoSiteUser );
+		getRemotePhotoSitePhotoImageFileUtils().createUserFolderForPhotoDownloading( remotePhotoSiteUser );
+		getRemotePhotoSiteCacheXmlUtils().createUserInfoFile( remotePhotoSiteUser );
 	}
 
 	private void cachePagePhotosightPhotosLocally( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> photosightPagePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
 
 		cachedLocallyRemotePhotoSitePhotos.addAll( photosightPagePhotos );
 
-		getPhotosightXmlUtils().cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
+		getRemotePhotoSiteCacheXmlUtils().cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
 	}
 
-	private List<RemotePhotoSitePhoto> getCachedLocallyPhotosightPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+	private List<RemotePhotoSitePhoto> getCachedLocallyRemotePhotoSitePhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
-		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = getPhotosightXmlUtils();
+		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = getRemotePhotoSiteCacheXmlUtils();
 
 		try {
 			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
@@ -358,7 +358,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			log.debug( String.format( "Getting photo %s content", imageUrl ) );
 
 			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
-			final ImageDiscEntry imageDiscEntry = getPhotosightImageFileUtils().downloadPhotoOnDisk( remotePhotoSitePhoto, imageContent );
+			final ImageDiscEntry imageDiscEntry = getRemotePhotoSitePhotoImageFileUtils().downloadPhotoOnDisk( remotePhotoSitePhoto, imageContent );
 			if ( imageDiscEntry == null ) {
 				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get photosight photo image content: '$1'", services ).string( remotePhotoSitePhoto.getImageUrl() ) );
 				continue;
@@ -669,12 +669,12 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return null;
 	}
 
-	private class PhotosightPhotosFromPageToImport {
+	private class RemotePhotoSitePhotosFromPageToImport {
 
 		private final List<RemotePhotoSitePhoto> remotePhotoSitePhotos;
 		private final boolean breakImportAfterThisPageProcessed;
 
-		private PhotosightPhotosFromPageToImport( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final boolean breakImportAfterThisPageProcessed ) {
+		private RemotePhotoSitePhotosFromPageToImport( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final boolean breakImportAfterThisPageProcessed ) {
 			this.remotePhotoSitePhotos = remotePhotoSitePhotos;
 			this.breakImportAfterThisPageProcessed = breakImportAfterThisPageProcessed;
 		}
@@ -688,11 +688,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	private RemotePhotoSitePhotoImageFileUtils getPhotosightImageFileUtils() {
+	private RemotePhotoSitePhotoImageFileUtils getRemotePhotoSitePhotoImageFileUtils() {
 		return new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 	}
 
-	private RemotePhotoSiteCacheXmlUtils getPhotosightXmlUtils() {
+	private RemotePhotoSiteCacheXmlUtils getRemotePhotoSiteCacheXmlUtils() {
 		return new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 	}
 
