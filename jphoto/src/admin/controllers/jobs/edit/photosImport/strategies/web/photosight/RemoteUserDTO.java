@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 
-public class PhotosightUserDTO {
+public class RemoteUserDTO {
 
 	private final String photosightUserId;
 	private String photosightUserName;
@@ -20,7 +20,7 @@ public class PhotosightUserDTO {
 	private UserGender userGender;
 	private UserMembershipType userMembershipType;
 
-	public PhotosightUserDTO( final String photosightUserId ) {
+	public RemoteUserDTO( final String photosightUserId ) {
 		this.photosightUserId = photosightUserId;
 	}
 
