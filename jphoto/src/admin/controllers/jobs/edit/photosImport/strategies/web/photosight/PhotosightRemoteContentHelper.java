@@ -7,7 +7,6 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import utils.StringUtilities;
 
 public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
@@ -24,17 +23,17 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
-		return String.format( "%s/?pager=%d", getUserCardPageUrl( remotePhotoSiteUserId ), pageNumber );
+		return String.format( "http://www.%s/%s/%s/?pager=%d", getRemotePhotoSiteHost(), "users", remotePhotoSiteUserId, pageNumber );
 	}
 
 	@Override
 	public String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSitePhotoId );
+		return String.format( "http://www.%s/%s/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSitePhotoId );
 	}
 
 	@Override
 	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSiteCategory.getId() );
+		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSiteCategory.getId() );
 	}
 
 	@Override
@@ -50,21 +49,17 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 		httpClient.setCookieStore( cookieStore );
 	}
 
-	private BasicClientCookie getRemoteUserCardCookie( final String cookieName, final String remotePhotoSiteUserId ) {
-		final BasicClientCookie cookie = new BasicClientCookie( cookieName, remotePhotoSiteUserId );
-		cookie.setVersion( 0 );
-		cookie.setDomain( String.format( "www.%s", PhotosImportSource.PHOTOSIGHT.getUrl() ) );
-		cookie.setPath( "/" );
-
-		return cookie;
-	}
-
-	private String getUserCardPageUrl( final String remotePhotoSiteUserId ) {
-		return String.format( "http://www.%s/%s/%s/", PhotosImportSource.PHOTOSIGHT.getUrl(), "users", remotePhotoSiteUserId );
-	}
-
 	@Override
 	protected PhotosightContentDataExtractor getPhotosightContentDataExtractor() {
 		return photosightContentDataExtractor;
+	}
+
+	private BasicClientCookie getRemoteUserCardCookie( final String cookieName, final String remotePhotoSiteUserId ) {
+		final BasicClientCookie cookie = new BasicClientCookie( cookieName, remotePhotoSiteUserId );
+		cookie.setVersion( 0 );
+		cookie.setDomain( String.format( "www.%s", getRemotePhotoSiteHost() ) );
+		cookie.setPath( "/" );
+
+		return cookie;
 	}
 }

@@ -432,7 +432,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 			final GenreDiscEntry genreDiscEntry = RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory );
-			final String siteUrl = importParameters.getRemoteContentHelper().getPhotosImportSource().getUrl();
+			final String siteUrl = importParameters.getRemoteContentHelper().getRemotePhotoSiteHost();
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
 				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() )
@@ -518,7 +518,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		log.debug( String.format( "Photo %d has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
-			.string( remoteContentHelper.getPhotosImportSource().getUrl() )
+			.string( remoteContentHelper.getRemotePhotoSiteHost() )
 			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
 			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
@@ -622,7 +622,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		user.setName( userName );
 		user.setMembershipType( parameters.getMembershipType() );
 		user.setGender( parameters.getUserGender() );
-		user.setSelfDescription( String.format( "A user of %s: %s ( %s )", importParameters.getRemoteContentHelper().getPhotosImportSource().getUrl(), remotePhotoSiteUser.getId(), importParameters.getRemoteContentHelper().getUserCardUrl( remotePhotoSiteUser.getId(), 1 ) ) );
+		user.setSelfDescription( String.format( "A user of %s: %s ( %s )", importParameters.getRemoteContentHelper().getRemotePhotoSiteHost(), remotePhotoSiteUser.getId(), importParameters.getRemoteContentHelper().getUserCardUrl( remotePhotoSiteUser.getId(), 1 ) ) );
 
 		if ( ! services.getUserService().save( user ) ) {
 			throw new BaseRuntimeException( "Can not create user" );

@@ -37,6 +37,10 @@ public abstract class AbstractRemoteContentHelper {
 	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
 	}
 
+	public String getRemotePhotoSiteHost() {
+		return getPhotosImportSource().getUrl();
+	}
+
 	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
 
 		switch ( importSource ) {
