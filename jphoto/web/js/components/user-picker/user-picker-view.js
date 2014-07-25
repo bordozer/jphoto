@@ -107,6 +107,9 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		selectUser: function ( user ) {
+			if ( user == null ) {
+				return;
+			}
 			this.$( "[name='" + this.model.get( 'controlName' ) + "']" ).val( user.userId );
 
 			this.$( 'div.user-picker-found-user' ).html( user.userCardLink );

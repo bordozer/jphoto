@@ -138,7 +138,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				} );
 
 				importParameters = new PhotosightImportParameters( photosightUserId, userName, userGender, membershipType, importComments, delayBetweenRequest, pageQty
-					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories );
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories, new PhotosightRemoteContentHelper() );
 
 				break;
 			default:
@@ -175,7 +175,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final List<String> photosightUserIds = Lists.transform( photosightParameters.getPhotosightUserIds(), new Function<String, String>() {
 					@Override
 					public String apply( final String photosightUserId ) {
-						return String.format( "<a href='%s' title='%s'>%s</a>", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId ), translatorService.translate( "Photo import job parameter: Photosight user ID", getLanguage() ), photosightUserId );
+						return String.format( "<a href='%s' title='%s'>%s</a>", new PhotosightRemoteContentHelper().getUserCardUrl( photosightUserId ), translatorService.translate( "Photo import job parameter: Photosight user ID", getLanguage() ), photosightUserId );
 					}
 				} );
 				final String photosightUserLinks = StringUtils.join( photosightUserIds, ", " );

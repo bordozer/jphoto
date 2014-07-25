@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
 import admin.jobs.enums.DateRangeType;
@@ -256,7 +257,7 @@ public class PhotosImportController extends DateRangableController {
 				job.setPhotosightCategories( categoryList );
 
 				importParameters = new PhotosightImportParameters( photosightUserIds, userName, userGender, membershipType, importComments, delayBetweenRequests
-					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList );
+					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList, new PhotosightRemoteContentHelper() );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

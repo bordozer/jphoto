@@ -12,7 +12,7 @@ public interface AjaxService {
 
 	AjaxResultDTO sendComplaintMessageAjax( final ComplaintMessageDTO complaintMessageDTO );
 
-	PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId );
+	PhotosightUserDTO getPhotosightUserDTO( final String _photosightUserId, final String _importSourceId );
 
 	AjaxResultDTO addEntryToFavoritesAjax( final int userId, final int photoId, final int entryTypeId );
 

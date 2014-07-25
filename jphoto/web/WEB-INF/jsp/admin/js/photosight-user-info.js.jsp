@@ -4,7 +4,6 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-
 	var photosightUserModel = function () {
 
 		var photosightUsersIds = [];
@@ -78,7 +77,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 		return {
 
-			registerPhotosightUsers: function ( _photosightUserIds ) {
+			registerPhotosightUsers: function ( _photosightUserIds, photosImportSourceId ) {
 
 				resetPhotosightUser();
 
@@ -95,7 +94,7 @@ define( [ 'jquery' ], function ( $ ) {
 				}
 			},
 
-			renderPhotosightUsers: function () {
+			renderPhotosightUsers: function ( jsonRPC, photosImportSourceId ) {
 				var photosightUserInfoDiv = $( photosightUserInfoDivSelector );
 
 				clearPhotosightUserInfoDiv();
@@ -107,7 +106,8 @@ define( [ 'jquery' ], function ( $ ) {
 
 					var photosightUserId = photosightUsersIds[ index ];
 
-					var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId );
+					console.log( photosImportSourceId );
+					var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( photosightUserId, photosImportSourceId );
 					if ( photosightUserDTO.photosightUserFound ) {
 						renderExistingPhotosightUser( photosightUserDTO );
 					} else {
@@ -130,9 +130,9 @@ define( [ 'jquery' ], function ( $ ) {
 
 	return {
 
-		renderPhotosightUserInfo: function ( _photosightUserIds, jsonRPC ) {
-			photosightUserModel.registerPhotosightUsers( _photosightUserIds );
-			return photosightUserModel.renderPhotosightUsers( jsonRPC );
+		renderRemoteUserInfo: function ( _remoteUsersIds, photosImportSourceId, jsonRPC ) {
+			photosightUserModel.registerPhotosightUsers( _remoteUsersIds );
+			return photosightUserModel.renderPhotosightUsers( jsonRPC, photosImportSourceId );
 		}
 	};
 } );

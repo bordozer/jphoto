@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.importParameters;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
@@ -21,7 +22,9 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 
 	private List<PhotosightCategory> photosightCategories;
 
-	public PhotosightImportParameters( final List<String> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories ) {
+	private final AbstractRemoteContentHelper remoteContentHelper;
+
+	public PhotosightImportParameters( final List<String> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories, final AbstractRemoteContentHelper remoteContentHelper ) {
 		super( language );
 		this.photosightUserIds = photosightUserIds;
 		this.userName = userName;
@@ -32,6 +35,7 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 		this.pageQty = pageQty;
 		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
 		this.photosightCategories = photosightCategories;
+		this.remoteContentHelper = remoteContentHelper;
 	}
 
 	public List<String> getPhotosightUserIds() {
@@ -72,5 +76,9 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 
 	public boolean isBreakImportIfAlreadyImportedPhotoFound() {
 		return breakImportIfAlreadyImportedPhotoFound;
+	}
+
+	public AbstractRemoteContentHelper getRemoteContentHelper() {
+		return remoteContentHelper;
 	}
 }

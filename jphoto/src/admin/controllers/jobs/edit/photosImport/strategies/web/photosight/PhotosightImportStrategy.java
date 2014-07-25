@@ -83,7 +83,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		int page = 1;
 
-		final String userFirstPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUser.getId() );
+		final String userFirstPageContent = importParameters.getRemoteContentHelper().getUserPageContent( 1, photosightUser.getId() );
 		if ( StringUtils.isEmpty( userFirstPageContent ) ) {
 			return; // can not load page - just skipping
 		}
@@ -92,9 +92,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		while ( ! job.isFinished() && ! job.hasJobFinishedWithAnyResult() && page <= userPagesQty ) {
 
-			log.debug( String.format( "Getting page %d context of %s", page, PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) ) );
+			log.debug( String.format( "Getting page %d context of %s", page, importParameters.getRemoteContentHelper().getPhotosightUserPageLink( photosightUser ) ) );
 
-			final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( page, photosightUser.getId() );
+			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( page, photosightUser.getId() );
 			if ( StringUtils.isEmpty( userPageContent ) ) {
 
 				log.info( "Can not load photosight user first page - skipping import user's photos" );
@@ -190,7 +190,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			final String photosightUserPageLink = PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser );
+			final String photosightUserPageLink = importParameters.getRemoteContentHelper().getPhotosightUserPageLink( photosightUser );
 
 			if ( jobHelperService.doesUserPhotoExist( user.getId(), photosightPhotoId ) ) {
 
@@ -227,7 +227,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 				log.debug( String.format( "Photo %d of %s has been found in the local cache.", photosightPhotoId, photosightUserPageLink ) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
-					.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
+					.string( importParameters.getRemoteContentHelper().getPhotosightPhotoPageLink( photosightPhoto ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 			} else {
@@ -307,14 +307,14 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			return importParameters.getUserName();
 		}
 
-		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( photosightUser );
+		final String photosightUserName = importParameters.getRemoteContentHelper().getPhotosightUserName( photosightUser );
 
 		if ( StringUtils.isEmpty( photosightUserName ) ) {
-			final String message = String.format( "Can not extract a name photosight user #%s from page content. Photos import of the user will be skipped.", PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) );
+			final String message = String.format( "Can not extract a name photosight user #%s from page content. Photos import of the user will be skipped.", importParameters.getRemoteContentHelper().getPhotosightUserPageLink( photosightUser ) );
 			log.error( message );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract a name of photosight user #$1 from page content. Photos import of the user will be skipped.", services )
-				.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
+				.string( importParameters.getRemoteContentHelper().getPhotosightUserPageLink( photosightUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -355,7 +355,12 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final List<PhotosightPhotoOnDisk> result = newArrayList();
 
 		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
-			final ImageDiscEntry imageDiscEntry = PhotosightImageFileUtils.downloadPhotosightPhotoOnDisk( photosightPhoto );
+
+			final String imageUrl = photosightPhoto.getImageUrl();
+			log.debug( String.format( "Getting photo %s content", imageUrl ) );
+
+			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
+			final ImageDiscEntry imageDiscEntry = PhotosightImageFileUtils.downloadPhotoOnDisk( photosightPhoto, imageContent );
 			if ( imageDiscEntry == null ) {
 				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get photosight photo image content: '$1'", services ).string( photosightPhoto.getImageUrl() ) );
 				continue;
@@ -383,7 +388,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 			final GenreDiscEntry genreDiscEntry = PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory );
 			final String description = String.format( "Imported from photosight at %s ( %s ). Photo category: %s."
-				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ), PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ), genreDiscEntry.getName()
+				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ), importParameters.getRemoteContentHelper().getPhotosightPhotoPageLink( photosightPhoto ), genreDiscEntry.getName()
 			);
 			imageToImport.setPhotoDescription( description );
 
@@ -411,7 +416,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final List<String> photosightUserIds = importParameters.getPhotosightUserIds();
 		for ( final String photosightUserId : photosightUserIds ) {
 
-			final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
+			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( 1, photosightUserId );
 
 			if ( StringUtils.isEmpty( userPageContent ) ) {
 				log.error( String.format( "ERROR getting photosight user #%s pages qty. Photos import of the user will be skipped.", photosightUserId ) );
@@ -457,7 +462,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 	private PhotosightPhoto importPhotoFromPhotosight( final PhotosightUser photosightUser, final int photosightPhotoId ) throws IOException {
 
-		final String photoPageContent = PhotosightRemoteContentHelper.getPhotoPageContent( photosightUser, photosightPhotoId );
+		final String photoPageContent = importParameters.getRemoteContentHelper().getPhotoPageContent( photosightUser, photosightPhotoId );
 		if ( StringUtils.isEmpty( photoPageContent ) ) {
 			logPhotoSkipping( photosightUser, photosightPhotoId, "Can't load photo page content." );
 			return null;
@@ -485,7 +490,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 			photosightPhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from photosight photo page. Random time is used.", services )
-				.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
+				.string( importParameters.getRemoteContentHelper().getPhotosightPhotoPageLink( photosightPhoto ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -502,9 +507,9 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		log.debug( String.format( "Photo %d has been downloaded from photosight", photosightPhoto.getPhotoId() ) );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from photosight: $1 of $2, photosight category: $3", services )
-			.string( PhotosightRemoteContentHelper.getPhotosightPhotoPageLink( photosightPhoto ) )
-			.string( PhotosightRemoteContentHelper.getPhotosightUserPageLink( photosightUser ) )
-			.string( PhotosightRemoteContentHelper.getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
+			.string( importParameters.getRemoteContentHelper().getPhotosightPhotoPageLink( photosightPhoto ) )
+			.string( importParameters.getRemoteContentHelper().getPhotosightUserPageLink( photosightUser ) )
+			.string( importParameters.getRemoteContentHelper().getPhotosightCategoryPageLink( photosightPhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -517,7 +522,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 User: $2; photo: $3. Photo import skipped.", services )
 			.string( s )
 			.string( photosightUser.toString() ) // TODO: ?
-			.string( PhotosightRemoteContentHelper.getPhotoCardLink( photosightPhotoId ) )
+			.string( importParameters.getRemoteContentHelper().getPhotoCardLink( photosightPhotoId ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -605,7 +610,7 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 		user.setName( userName );
 		user.setMembershipType( parameters.getMembershipType() );
 		user.setGender( parameters.getUserGender() );
-		user.setSelfDescription( String.format( "Photosight user: %s ( %s )", photosightUser.getId(), PhotosightRemoteContentHelper.getUserCardUrl( photosightUser.getId(), 1 ) ) );
+		user.setSelfDescription( String.format( "Photosight user: %s ( %s )", photosightUser.getId(), importParameters.getRemoteContentHelper().getUserCardUrl( photosightUser.getId(), 1 ) ) );
 
 		if ( ! services.getUserService().save( user ) ) {
 			throw new BaseRuntimeException( "Can not create user" );

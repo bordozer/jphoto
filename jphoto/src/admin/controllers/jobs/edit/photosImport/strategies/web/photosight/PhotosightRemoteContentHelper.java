@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.translator.Language;
@@ -16,11 +17,14 @@ import utils.StringUtilities;
 
 import java.io.IOException;
 
-public class PhotosightRemoteContentHelper {
+public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
-	private static final LogHelper log = new LogHelper( PhotosightRemoteContentHelper.class );
+	public PhotosightRemoteContentHelper() {
+		super( new LogHelper( PhotosightRemoteContentHelper.class ) );
+	}
 
-	public static String getImageContentFromUrl( final String cardUrl ) {
+	@Override
+	public String getImageContentFromUrl( final String cardUrl ) {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final String uri = String.format( "http://%s", cardUrl );
@@ -41,69 +45,68 @@ public class PhotosightRemoteContentHelper {
 		return null;
 	}
 
-	private static String getPhotoCardUrl( final int photoId ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photoId );
-	}
-
-	public static String getUserCardUrl( final String userId ) {
+	@Override
+	public String getUserCardUrl( final String userId ) {
 		return getUserCardUrl( userId, 0 );
 	}
 
-	public static String getUserCardUrl( final String userId, final int page ) {
+	@Override
+	public String getUserCardUrl( final String userId, final int page ) {
 		return String.format( "%s/?pager=%d", getUserCardPageUrl( userId ), page );
 	}
 
-	private static String getUserCardPageUrl( final String userId ) {
-		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.USERS, userId );
-	}
-
-	public static String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
+	@Override
+	public String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
 		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photosightCategory.getId() );
 	}
 
-	public static String getPhotosightUserName( final PhotosightUser photosightUser ) {
+	@Override
+	public String getPhotosightUserName( final PhotosightUser photosightUser ) {
 		return getPhotosightUserName( photosightUser.getId() );
 	}
 
-	public static String getPhotosightUserName( final String photosightUserId ) {
-		final String userPageContent = PhotosightRemoteContentHelper.getUserPageContent( 1, photosightUserId );
+	@Override
+	public String getPhotosightUserName( final String photosightUserId ) {
+		final String userPageContent = getUserPageContent( 1, photosightUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
 		}
 		return PhotosightContentDataExtractor.extractPhotosightUserName( userPageContent );
 	}
 
-	public static String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
+	@Override
+	public String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
 		final String photosightUserId = photosightUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", PhotosightRemoteContentHelper.getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
 	}
 
-	public static String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
+	@Override
+	public String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
 		final int photosightPhotoId = photosightPhoto.getPhotoId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( photosightPhoto.getName() ), photosightPhotoId );
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( photosightPhoto.getName() ), photosightPhotoId );
 	}
 
-	public static String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
-			, PhotosightRemoteContentHelper.getPhotosightCategoryPageUrl( photosightCategory )
-			, photosightCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ), language )
-		);
+	@Override
+	public String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getPhotosightCategoryPageUrl( photosightCategory ), photosightCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ), language ) );
 	}
 
-	public static String getPhotoCardLink( final int photosightPhotoId ) {
-		return String.format( "<a href='%s'>%d</a>", PhotosightRemoteContentHelper.getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
+	@Override
+	public String getPhotoCardLink( final int photosightPhotoId ) {
+		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
 	}
 
-	public static String getUserPageContent( final int page, final String photosightUserId ) {
+	@Override
+	public String getUserPageContent( final int page, final String photosightUserId ) {
 		return getContent( photosightUserId, getUserCardUrl( photosightUserId, page ) );
 	}
 
-	public static String getPhotoPageContent( final PhotosightUser photosightUser, final int photoId ) {
+	@Override
+	public String getPhotoPageContent( final PhotosightUser photosightUser, final int photoId ) {
 		return getContent( photosightUser.getId(), getPhotoCardUrl( photoId ) );
 	}
 
-	private static void setCookie( final DefaultHttpClient httpClient, final String userId ) {
+	private void setCookie( final DefaultHttpClient httpClient, final String userId ) {
 		final CookieStore cookieStore = new BasicCookieStore();
 
 		final BasicClientCookie cookieIsDisabledNude = getCookie( String.format( "is_disabled_nude_profile_%s", userId ), "1" );
@@ -115,7 +118,7 @@ public class PhotosightRemoteContentHelper {
 		httpClient.setCookieStore( cookieStore );
 	}
 
-	private static String getContent( final String userId, final String pageUrl ) {
+	private String getContent( final String userId, final String pageUrl ) {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final HttpGet httpGet = new HttpGet( pageUrl );
@@ -133,12 +136,20 @@ public class PhotosightRemoteContentHelper {
 		return null;
 	}
 
-	private static BasicClientCookie getCookie( final String w3t_myname, final String bordark ) {
+	private BasicClientCookie getCookie( final String w3t_myname, final String bordark ) {
 		final BasicClientCookie cookie = new BasicClientCookie( w3t_myname, bordark );
 		cookie.setVersion( 0 );
 		cookie.setDomain( String.format( "www.%s", PhotosightImageFileUtils.PHOTOSIGHT_HOST ) );
 		cookie.setPath( "/" );
 
 		return cookie;
+	}
+
+	private String getPhotoCardUrl( final int photoId ) {
+		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photoId );
+	}
+
+	private String getUserCardPageUrl( final String userId ) {
+		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.USERS, userId );
 	}
 }

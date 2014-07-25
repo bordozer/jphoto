@@ -1,8 +1,9 @@
 package ui.services.ajax;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightUserDTO;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
@@ -108,28 +109,30 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public PhotosightUserDTO getPhotosightUserDTO( final String photosightUserId ) {
+	public PhotosightUserDTO getPhotosightUserDTO( final String remoteUserId, final String _importSourceId ) {
 
-		if ( StringUtils.isEmpty( photosightUserId ) ) {
+		if ( StringUtils.isEmpty( remoteUserId ) ) {
 			final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( "0" );
 			photosightUserDTO.setPhotosightUserFound( false );
 			return photosightUserDTO;
 		}
 
-		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( photosightUserId );
+		final PhotosightUserDTO photosightUserDTO = new PhotosightUserDTO( remoteUserId );
 
-		final String userId = String.valueOf( photosightUserId );
-		final String photosightUserName = PhotosightRemoteContentHelper.getPhotosightUserName( userId );
-		final String photosightUserCardUrl = PhotosightRemoteContentHelper.getUserCardUrl( userId );
+		final String userId = String.valueOf( remoteUserId );
 
-		photosightUserDTO.setPhotosightUserName( photosightUserName );
-		photosightUserDTO.setPhotosightUserCardUrl( photosightUserCardUrl );
+		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( PhotosImportSource.getById( _importSourceId ) );
+		final String remoteUserName = remoteContentHelper.getPhotosightUserName( userId );
+		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
-		final boolean photosightUserFound = StringUtils.isNotEmpty( photosightUserName );
+		photosightUserDTO.setPhotosightUserName( remoteUserName );
+		photosightUserDTO.setPhotosightUserCardUrl( remoteUserCardUrl );
+
+		final boolean photosightUserFound = StringUtils.isNotEmpty( remoteUserName );
 		photosightUserDTO.setPhotosightUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			photosightUserDTO.setPhotosightUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( photosightUserId ) );
+			photosightUserDTO.setPhotosightUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( remoteUserId ) );
 		}
 
 		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( userId );

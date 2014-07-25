@@ -159,7 +159,7 @@
 									<table:tr>
 										<table:tdtext text_t="Photo import job JSP: Photosight user ids" isMandatory="true"/>
 										<table:td>
-											<form:input path="${photosightUserIdControl}" size="60" onchange="renderPhotosightUserInfo();"/>
+											<form:input path="${photosightUserIdControl}" size="60" onchange="renderRemoteUserInfo();"/>
 											<br/>
 											${eco:translate("Photo import job JSP: Use ',' as separator")}
 											<div id="photosightUserInfoDiv" class="floatleft" style="display: none;"></div>
@@ -267,7 +267,7 @@
 
 				var type = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
 				if ( type == ${photosightImportId} ) {
-					renderPhotosightUserInfo();
+					renderRemoteUserInfo();
 				}
 			} );
 		});
@@ -288,11 +288,12 @@
 			} );
 		}
 
-		function renderPhotosightUserInfo() {
+		function renderRemoteUserInfo() {
 			require( [ '/admin/js/photosight.js' ], function( photosight ) {
 				var usedIdsControl = $( "#${photosightUserIdControl}" );
 				if ( usedIdsControl.val().trim() != '' ) {
-					var data = photosight.renderPhotosightUserInfo( usedIdsControl.val(), jsonRPC );
+					var photosImportSourceId = $( "[name='${importSourceIdControl}']:checked" ).val();
+					var data = photosight.renderRemoteUserInfo( usedIdsControl.val(), photosImportSourceId, jsonRPC );
 
 					$( 'input[name="${userGenderIdControl}"][value="' + data.userGenderId + '"]' ).attr( 'checked', 'checked' );
 					$( 'input[name="${userMembershipIdControl}"][value="' + data.userMembershipTypeId + '"]' ).attr( 'checked', 'checked' );
