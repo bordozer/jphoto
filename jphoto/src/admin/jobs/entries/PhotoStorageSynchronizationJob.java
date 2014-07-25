@@ -5,8 +5,8 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImageFileUtils;
-import admin.controllers.jobs.edit.photosImport.strategies.web.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
@@ -49,7 +49,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 			, photosightCategories
 			, new PhotosightRemoteContentHelper() ); // TODO: send this as parameter selected on UI
 
-		final AbstractPhotoImportStrategy importStrategy = new PhotosightImportStrategy( this, importParameters, services );
+		final AbstractPhotoImportStrategy importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 
 		updateTotalOperations( importStrategy );
 

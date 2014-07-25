@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.strategies.web.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -117,7 +117,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
 
 		final User randomUser = randomUtilsService.getRandomUser( beingProcessedUsers );
-		if ( randomUser.getLogin().startsWith( PhotosightImportStrategy.REMOTE_SITE_USER_LOGIN_PREFIX ) ) {
+		if ( randomUser.getLogin().startsWith( RemotePhotoSiteImportStrategy.REMOTE_SITE_USER_LOGIN_PREFIX ) ) {
 			return getRandomNonPhotosightUser( counter + 1 );
 		}
 

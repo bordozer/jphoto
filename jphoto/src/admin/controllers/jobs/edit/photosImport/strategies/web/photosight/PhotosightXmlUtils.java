@@ -81,7 +81,7 @@ public class PhotosightXmlUtils {
 		}
 	}
 
-	public static void cachePhotosightPhotosLocally( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
+	public static void cachedLocallyPhotos( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -114,7 +114,7 @@ public class PhotosightXmlUtils {
 		output.close();
 	}
 
-	public static List<RemotePhotoSitePhoto> getPhotosFromPhotosightUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
+	public static List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
@@ -126,12 +126,12 @@ public class PhotosightXmlUtils {
 		final List<RemotePhotoSitePhoto> result = newArrayList();
 		while ( photosIterator.hasNext() ) {
 			final Element photoElement = ( Element ) photosIterator.next();
-			final int photosightPhotoId = NumberUtils.convertToInt( photoElement.element( USER_INFO_FILE_PHOTO_ID ).getText() );
+			final int remoteUserPhotoId = NumberUtils.convertToInt( photoElement.element( USER_INFO_FILE_PHOTO_ID ).getText() );
 
 			final String savedCategoryId = photoElement.element( USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
 			final RemotePhotoSiteCategory category = RemotePhotoSiteCategory.getById( NumberUtils.convertToInt( savedCategoryId ) );
 			if ( category == null ) {
-				final String message = translatorService.translate( "File '$1' contains unknown photosight categoryId '$2'. Note: file deletion may solve the problem because the import will be done again", language
+				final String message = translatorService.translate( "File '$1' contains unknown remote photo site categoryId '$2'. Note: file deletion may solve the problem because the import will be done again", language
 					, userInfoFile.getAbsolutePath()
 					, savedCategoryId
 				);
@@ -149,7 +149,7 @@ public class PhotosightXmlUtils {
 			}
 			final String imageUrl = photoElement.element( USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
 
-			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, photosightPhotoId, category );
+			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remoteUserPhotoId, category );
 			remotePhotoSitePhoto.setName( photoName );
 			remotePhotoSitePhoto.setUploadTime( uploadTime );
 			remotePhotoSitePhoto.setImageUrl( imageUrl );

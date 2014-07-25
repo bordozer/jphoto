@@ -7,7 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhoto
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
@@ -267,7 +267,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				importStrategy = new FilesystemImportStrategy( this, importParameters, services );
 				break;
 			case PHOTOSIGHT:
-				importStrategy = new PhotosightImportStrategy( this, importParameters, services );
+				importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 				break;
 			default:
 				throw new IllegalArgumentException( String.format( "Unsupported import source: %s", importSource ) );

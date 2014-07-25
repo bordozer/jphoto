@@ -35,18 +35,18 @@ import java.util.regex.Pattern;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
+public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	public static final String REMOTE_SITE_USER_LOGIN_PREFIX = "PS_";
 
 	private RemoteSitePhotosImportParameters importParameters;
 
-	final LogHelper log = new LogHelper( PhotosightImportStrategy.class );
+	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
 
 	private final Date firstPhotoUploadTime;
 
-	public PhotosightImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
-		super( job, services, new LogHelper( PhotosightImportStrategy.class ), parameters.getLanguage() );
+	public RemotePhotoSiteImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
+		super( job, services, new LogHelper( RemotePhotoSiteImportStrategy.class ), parameters.getLanguage() );
 
 		importParameters = ( RemoteSitePhotosImportParameters ) parameters;
 
@@ -326,12 +326,12 @@ public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
 		cachedLocallyRemotePhotoSitePhotos.addAll( photosightPagePhotos );
 
-		PhotosightXmlUtils.cachePhotosightPhotosLocally( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
+		PhotosightXmlUtils.cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
 	}
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyPhotosightPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 		try {
-			return PhotosightXmlUtils.getPhotosFromPhotosightUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
+			return PhotosightXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
 				.string( PhotosightXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
