@@ -1,5 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
+
 import java.util.List;
 
 public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
@@ -27,4 +30,14 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 	public abstract String extractPhotoName( String photoPageContent );
 
 	public abstract List<String> extractComments( String photoPageContent );
+
+	public static AbstractRemotePhotoSitePageContentDataExtractor getInstance( final PhotosImportSource photosImportSource ) {
+
+		switch ( photosImportSource ) {
+			case PHOTOSIGHT:
+				return new PhotosightContentDataExtractor();
+		}
+
+		throw new IllegalArgumentException( String.format( "PhotosImportSource '%s' does not have matched page data extractor", photosImportSource ) );
+	}
 }

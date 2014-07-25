@@ -2,6 +2,7 @@ package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
@@ -121,7 +122,9 @@ public class AjaxServiceImpl implements AjaxService {
 
 		final String userId = String.valueOf( _remoteUserId );
 
-		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( PhotosImportSource.getById( _importSourceId ) );
+		final PhotosImportSource importSource = PhotosImportSource.getById( _importSourceId );
+
+		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
 		final String remoteUserName = remoteContentHelper.getRemotePhotoSiteUserName( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
@@ -132,7 +135,7 @@ public class AjaxServiceImpl implements AjaxService {
 		remotePhotoSiteUserDTO.setRemoteUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( new PhotosightContentDataExtractor().extractPhotosightUserPhotosCount( _remoteUserId ) ); // TODO: get correct instance of extractor ( _importSourceId )
+			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( AbstractRemotePhotoSitePageContentDataExtractor.getInstance( importSource ).extractPhotosightUserPhotosCount( _remoteUserId ) );
 		}
 
 		final String userLogin = RemotePhotoSiteImportStrategy.getPhotosightUserLogin( userId );
