@@ -57,7 +57,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photosightCategory.getId() );
+		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", photosightCategory.getId() );
 	}
 
 	@Override
@@ -146,10 +146,10 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	private String getPhotoCardUrl( final int photoId ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.PHOTOS, photoId );
+		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", photoId );
 	}
 
 	private String getUserCardPageUrl( final String userId ) {
-		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, PhotosightImportStrategy.USERS, userId );
+		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "users", userId );
 	}
 }

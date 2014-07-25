@@ -36,8 +36,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotosightImportStrategy extends AbstractPhotoImportStrategy {
 
-	public static final String USERS = "users";
-	public static final String PHOTOS = "photos";
 	public static final String PHOTOSIGHT_USER_LOGIN_PREFIX = "PS_";
 
 	private PhotosightImportParameters importParameters;
