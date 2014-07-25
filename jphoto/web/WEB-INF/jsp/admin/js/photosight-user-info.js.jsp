@@ -13,27 +13,27 @@ define( [ 'jquery' ], function ( $ ) {
 			remoteUsersIds = [];
 		}
 
-		function registerRemoteUser( photosightUserId ) {
-			if ( !isPhotosightUserRegistered( photosightUserId ) ) {
-				remoteUsersIds.push( photosightUserId );
+		function registerRemoteUser( remoteUserId ) {
+			if ( !isRemoteUserRegistered( remoteUserId ) ) {
+				remoteUsersIds.push( remoteUserId );
 			}
 		}
 
-		function isPhotosightUserRegistered( photosightUserId ) {
-			return findPhotosightUser( photosightUserId ) != null;
+		function isRemoteUserRegistered( remoteUserId ) {
+			return findRemoteUser( remoteUserId ) != null;
 		}
 
-		function findPhotosightUser( photosightUserId ) {
+		function findRemoteUser( remoteUserId ) {
 			for ( var index = 0; index < remoteUsersIds.length; index++ ) {
 				var entry = remoteUsersIds[ index ];
-				if ( entry == photosightUserId ) {
+				if ( entry == remoteUserId ) {
 					return entry;
 				}
 			}
 			return null;
 		}
 
-		function getremoteUsersIds( _remoteUserIds ) {
+		function getRemoteUsersIds( _remoteUserIds ) {
 			var arr = _remoteUserIds.split( ',' );
 			var remoteUserIds = [];
 			for ( var i = 0; i < arr.length; i++ ) {
@@ -60,13 +60,13 @@ define( [ 'jquery' ], function ( $ ) {
 
 		function renderExistingRemotetUser( remoteUserDTO ) {
 
-			var remoteUserName = remoteUserDTO.photosightUserName;
-			var remoteUserCardUrl = remoteUserDTO.photosightUserCardUrl;
+			var remoteUserName = remoteUserDTO.remoteUserName;
+			var remoteUserCardUrl = remoteUserDTO.remoteUserCardUrl;
 
 			var div = getRemoteUserInfoDiv();
-			div.append( "#" + remoteUserDTO.photosightUserId + ": <a href=\"" + remoteUserCardUrl + "\" target=\"_blank\">" + remoteUserName + "</a>" + ", " + remoteUserDTO.photosightUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
+			div.append( "#" + remoteUserDTO.remoteUserId + ": <a href=\"" + remoteUserCardUrl + "\" target=\"_blank\">" + remoteUserName + "</a>" + ", " + remoteUserDTO.remoteUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
 
-			if ( remoteUserDTO.photosightUserExistsInTheSystem ) {
+			if ( remoteUserDTO.remoteUserExistsInTheSystem ) {
 				div.append( ' ( ' + remoteUserDTO.userCardLink + ", <a href='" + remoteUserDTO.userPhotosUrl + "'>" + remoteUserDTO.photosCount + " ${eco:translate('ROD PLURAL photos')}</a> )" );
 			}
 		}
@@ -88,7 +88,7 @@ define( [ 'jquery' ], function ( $ ) {
 					return;
 				}
 
-				var remoteUserIds = getremoteUsersIds( ids );
+				var remoteUserIds = getRemoteUsersIds( ids );
 				for ( var i = 0; i < remoteUserIds.length; i++ ) {
 					registerRemoteUser( remoteUserIds[i] );
 				}
@@ -106,9 +106,8 @@ define( [ 'jquery' ], function ( $ ) {
 
 					var remoteUserId = remoteUsersIds[ index ];
 
-					console.log( photosImportSourceId );
 					var remoteUserDTO = jsonRPC.ajaxService.getRemoteUserDTO( remoteUserId, photosImportSourceId );
-					if ( remoteUserDTO.photosightUserFound ) {
+					if ( remoteUserDTO.remoteUserFound ) {
 						renderExistingRemotetUser( remoteUserDTO );
 					} else {
 						renderNotExistingRemotetUser( remoteUserId );
@@ -117,7 +116,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 					showRemoteUserInfoDiv();
 
-					if ( remoteUserDTO.photosightUserExistsInTheSystem ) {
+					if ( remoteUserDTO.remoteUserExistsInTheSystem ) {
 						userGenderId = remoteUserDTO.userGender.id;
 						userMembershipTypeId = remoteUserDTO.userMembershipType.id;
 					}

@@ -113,7 +113,7 @@ public class AjaxServiceImpl implements AjaxService {
 
 		if ( StringUtils.isEmpty( _remoteUserId ) ) {
 			final RemoteUserDTO remoteUserDTO = new RemoteUserDTO( "0" );
-			remoteUserDTO.setPhotosightUserFound( false );
+			remoteUserDTO.setRemoteUserFound( false );
 			return remoteUserDTO;
 		}
 
@@ -125,20 +125,20 @@ public class AjaxServiceImpl implements AjaxService {
 		final String remoteUserName = remoteContentHelper.getPhotosightUserName( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
-		remoteUserDTO.setPhotosightUserName( remoteUserName );
-		remoteUserDTO.setPhotosightUserCardUrl( remoteUserCardUrl );
+		remoteUserDTO.setRemoteUserName( remoteUserName );
+		remoteUserDTO.setRemoteUserCardUrl( remoteUserCardUrl );
 
 		final boolean photosightUserFound = StringUtils.isNotEmpty( remoteUserName );
-		remoteUserDTO.setPhotosightUserFound( photosightUserFound );
+		remoteUserDTO.setRemoteUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			remoteUserDTO.setPhotosightUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( _remoteUserId ) );
+			remoteUserDTO.setRemoteUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( _remoteUserId ) );
 		}
 
 		final String userLogin = PhotosightImportStrategy.getPhotosightUserLogin( userId );
 		final User user = userService.loadByLogin( userLogin );
 		final boolean userExistsInTheSystem = user != null;
-		remoteUserDTO.setPhotosightUserExistsInTheSystem( userExistsInTheSystem );
+		remoteUserDTO.setRemoteUserExistsInTheSystem( userExistsInTheSystem );
 
 		if ( userExistsInTheSystem ) {
 			remoteUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );

@@ -5,64 +5,64 @@ import core.general.user.UserMembershipType;
 
 public class RemoteUserDTO {
 
-	private final String photosightUserId;
-	private String photosightUserName;
-	private String photosightUserCardUrl;
+	private final String remoteUserId;
+	private String remoteUserName;
+	private String remoteUserCardUrl;
 
-	private boolean photosightUserFound;
+	private boolean remoteUserFound;
 
-	private boolean photosightUserExistsInTheSystem;
+	private boolean remoteUserExistsInTheSystem;
 	private String userCardLink;
 	private int photosCount;
 	private String userPhotosUrl;
-	private int photosightUserPhotosCount;
+	private int remoteUserPhotosCount;
 
 	private UserGender userGender;
 	private UserMembershipType userMembershipType;
 
-	public RemoteUserDTO( final String photosightUserId ) {
-		this.photosightUserId = photosightUserId;
+	public RemoteUserDTO( final String remoteUserId ) {
+		this.remoteUserId = remoteUserId;
 	}
 
-	public String getPhotosightUserId() {
-		return photosightUserId;
+	public String getRemoteUserId() {
+		return remoteUserId;
 	}
 
-	public String getPhotosightUserName() {
-		return photosightUserName;
+	public String getRemoteUserName() {
+		return remoteUserName;
 	}
 
-	public void setPhotosightUserName( final String photosightUserName ) {
-		this.photosightUserName = photosightUserName;
+	public void setRemoteUserName( final String remoteUserName ) {
+		this.remoteUserName = remoteUserName;
 	}
 
-	public String getPhotosightUserCardUrl() {
-		return photosightUserCardUrl;
+	public String getRemoteUserCardUrl() {
+		return remoteUserCardUrl;
 	}
 
-	public void setPhotosightUserCardUrl( final String photosightUserCardUrl ) {
-		this.photosightUserCardUrl = photosightUserCardUrl;
+	public void setRemoteUserCardUrl( final String remoteUserCardUrl ) {
+		this.remoteUserCardUrl = remoteUserCardUrl;
 	}
 
-	public boolean isPhotosightUserFound() {
-		return photosightUserFound;
+	public boolean isRemoteUserFound() {
+		return remoteUserFound;
 	}
 
-	public void setPhotosightUserFound( final boolean photosightUserFound ) {
-		this.photosightUserFound = photosightUserFound;
+	public void setRemoteUserFound( final boolean remoteUserFound ) {
+		this.remoteUserFound = remoteUserFound;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s", photosightUserName );
+		return String.format( "%s", remoteUserName );
 	}
 
-	public boolean isPhotosightUserExistsInTheSystem() {
-		return photosightUserExistsInTheSystem;
+	public boolean isRemoteUserExistsInTheSystem() {
+		return remoteUserExistsInTheSystem;
 	}
 
-	public void setPhotosightUserExistsInTheSystem( final boolean photosightUserExistsInTheSystem ) {
-		this.photosightUserExistsInTheSystem = photosightUserExistsInTheSystem;
+	public void setRemoteUserExistsInTheSystem( final boolean remoteUserExistsInTheSystem ) {
+		this.remoteUserExistsInTheSystem = remoteUserExistsInTheSystem;
 	}
 
 	public void setUserCardLink( final String userCardLink ) {
@@ -89,12 +89,12 @@ public class RemoteUserDTO {
 		return userPhotosUrl;
 	}
 
-	public void setPhotosightUserPhotosCount( final int photosightUserPhotosCount ) {
-		this.photosightUserPhotosCount = photosightUserPhotosCount;
+	public void setRemoteUserPhotosCount( final int remoteUserPhotosCount ) {
+		this.remoteUserPhotosCount = remoteUserPhotosCount;
 	}
 
-	public int getPhotosightUserPhotosCount() {
-		return photosightUserPhotosCount;
+	public int getRemoteUserPhotosCount() {
+		return remoteUserPhotosCount;
 	}
 
 	public UserGender getUserGender() {
