@@ -1,14 +1,14 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
 
-public class PhotosightPhotoOnDisk {
+public class RemotePhotoSitePhotoDiskEntry {
 
 	private final RemotePhotoSitePhoto remotePhotoSitePhoto;
 	private final ImageDiscEntry imageDiscEntry;
 
-	public PhotosightPhotoOnDisk( final RemotePhotoSitePhoto remotePhotoSitePhoto, final ImageDiscEntry imageDiscEntry ) {
+	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final ImageDiscEntry imageDiscEntry ) {
 		this.remotePhotoSitePhoto = remotePhotoSitePhoto;
 		this.imageDiscEntry = imageDiscEntry;
 	}

@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentHelper;
 import core.exceptions.BaseRuntimeException;
 import utils.NumberUtils;
 import utils.StringUtilities;
@@ -10,11 +11,10 @@ import java.util.regex.Pattern;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class PhotosightContentHelper {
+public class PhotosightPageContentHelper extends AbstractRemotePhotoSitePageContentHelper {
 
-	public static final String NO_PHOTO_NAME = "-no name-";
-
-	public static int getTotalPagesQty( final String userCardContent, final String photosightUserId ) {
+	@Override
+	public int getTotalPagesQty( final String userCardContent, final String photosightUserId ) {
 		// <a class="" href="/users/316896/?pager=8">8</a>
 		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%s/\\?pager=(.+?)\">", photosightUserId ) );
 		final Matcher matcher = pattern.matcher( userCardContent );
@@ -27,7 +27,8 @@ public class PhotosightContentHelper {
 		return result;
 	}
 
-	public static int extractPhotoCategoryId( final String photoPageContent ) {
+	@Override
+	public int extractPhotoCategoryId( final String photoPageContent ) {
 		final Pattern pattern = Pattern.compile( "href=\"/photos/category/(.+?)/\" id=\"currentcat\"" );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
@@ -39,7 +40,8 @@ public class PhotosightContentHelper {
 		throw new BaseRuntimeException( "Can not find photosight photo category in the page context" );
 	}
 
-	public static String extractPhotoName( final String photoPageContent ) {
+	@Override
+	public String extractPhotoName( final String photoPageContent ) {
 
 		final Pattern pattern = Pattern.compile( "<div class=\"photoinfobox\">\\s+<h1>(.+?)</h1>" );
 		final Matcher matcher = pattern.matcher( photoPageContent );
@@ -53,7 +55,8 @@ public class PhotosightContentHelper {
 		return NO_PHOTO_NAME;
 	}
 
-	public static List<String> extractComments( final String photoPageContent ) {
+	@Override
+	public List<String> extractComments( final String photoPageContent ) {
 		final List<String> result = newArrayList();
 
 		final Pattern pattern = Pattern.compile( "<div class=\"commenttext\">(.+?)</div>" );

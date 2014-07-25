@@ -6,7 +6,8 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemotePhotoSiteCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightPageContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
@@ -257,7 +258,7 @@ public class PhotosImportController extends DateRangableController {
 				job.setPhotosightCategories( categoryList );
 
 				importParameters = new RemoteSitePhotosImportParameters( photosightUserIds, userGender, membershipType, importComments, delayBetweenRequests
-					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList, new PhotosightRemoteContentHelper() );
+					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList, new PhotosightRemoteContentHelper(), new PhotosightPageContentHelper() );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

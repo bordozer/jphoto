@@ -3,7 +3,6 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemotePhotoSiteCategoryToGenreMapping;
 import core.log.LogHelper;
 
 import java.io.File;
