@@ -1,9 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUser;
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.translator.Language;
@@ -24,6 +22,11 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	public PhotosightRemoteContentHelper() {
 		super( new LogHelper( PhotosightRemoteContentHelper.class ) );
+	}
+
+	@Override
+	public PhotosImportSource getPhotosImportSource() {
+		return PhotosImportSource.PHOTOSIGHT;
 	}
 
 	@Override
@@ -60,7 +63,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getRemotePhotoSiteCategoryPageUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", remotePhotoSiteCategory.getId() );
+		return String.format( "http://www.%s/%s/category/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSiteCategory.getId() );
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getRemotePhotoSiteCategoryPageLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getRemotePhotoSiteCategoryPageUrl( remotePhotoSiteCategory ), remotePhotoSiteCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() ), language ) );
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getRemotePhotoSiteCategoryPageUrl( remotePhotoSiteCategory ), remotePhotoSiteCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() ), language ) );
 	}
 
 	@Override
@@ -142,17 +145,17 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	private BasicClientCookie getCookie( final String w3t_myname, final String bordark ) {
 		final BasicClientCookie cookie = new BasicClientCookie( w3t_myname, bordark );
 		cookie.setVersion( 0 );
-		cookie.setDomain( String.format( "www.%s", PhotosightImageFileUtils.PHOTOSIGHT_HOST ) );
+		cookie.setDomain( String.format( "www.%s", PhotosImportSource.PHOTOSIGHT.getUrl() ) );
 		cookie.setPath( "/" );
 
 		return cookie;
 	}
 
 	private String getPhotoCardUrl( final int photoId ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", photoId );
+		return String.format( "http://www.%s/%s/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", photoId );
 	}
 
 	private String getUserCardPageUrl( final String userId ) {
-		return String.format( "http://www.%s/%s/%s/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "users", userId );
+		return String.format( "http://www.%s/%s/%s/", PhotosImportSource.PHOTOSIGHT.getUrl(), "users", userId );
 	}
 }

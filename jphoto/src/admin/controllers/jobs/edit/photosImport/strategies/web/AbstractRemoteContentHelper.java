@@ -15,6 +15,8 @@ public abstract class AbstractRemoteContentHelper {
 		this.log = log;
 	}
 
+	public abstract PhotosImportSource getPhotosImportSource();
+
 	public abstract String getImageContentFromUrl( final String cardUrl );
 
 	public abstract String getUserCardUrl( final String userId );

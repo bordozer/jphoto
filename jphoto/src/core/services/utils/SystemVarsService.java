@@ -3,6 +3,7 @@ package core.services.utils;
 import core.services.translator.Language;
 import org.apache.commons.configuration.ConfigurationException;
 
+import java.io.File;
 import java.util.List;
 
 public interface SystemVarsService {
@@ -20,6 +21,8 @@ public interface SystemVarsService {
 	String getSystemTempFolder();
 
 	String getPreviewFolderName();
+
+	File getRemotePhotoSitesCacheFolder();
 
 	String getProjectName();
 

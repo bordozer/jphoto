@@ -18,3 +18,6 @@ PreviewFolderName=preview
 
 # Temp files path
 SystemTempFolder=../Files/temp
+
+# Local storage with imported from remote photo sites photos folder name
+RemotePhotoSitesCachePath=/home/blu/jphoto/remote_sites_cache/

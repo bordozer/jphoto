@@ -1,12 +1,13 @@
 package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImageFileUtils;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhotoImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
@@ -79,7 +80,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 	private List<String> getUsersIds() {
 		final List<String> usersIds = newArrayList();
-		final File storage = PhotosightImageFileUtils.getPhotoStorage();
+		final File storage = new RemotePhotoSitePhotoImageFileUtils( PhotosImportSource.PHOTOSIGHT, services.getSystemVarsService().getRemotePhotoSitesCacheFolder() ).getPhotoStorage();
 
 		final File[] userDirList = storage.listFiles( services.getPredicateUtilsService().getDirFilter() );
 		for ( final File file : userDirList ) {

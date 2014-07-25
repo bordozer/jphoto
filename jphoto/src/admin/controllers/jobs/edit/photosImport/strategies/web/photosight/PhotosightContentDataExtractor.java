@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import org.apache.commons.lang.StringUtils;
 import utils.NumberUtils;
 
@@ -22,14 +23,14 @@ public class PhotosightContentDataExtractor {
 
 	public static String extractImageUrlByNewRules( final int photosightPhotoId, final String photoPageContent ) {
 		// <img src="http://icon.s.photosight.ru/img/8/f4f/3725335_large.jpeg"
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosightImageFileUtils.PHOTOSIGHT_HOST, photosightPhotoId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), photosightPhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosightImageFileUtils.PHOTOSIGHT_HOST, someShit, photosightPhotoId, extension );
+			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, photosightPhotoId, extension );
 		}
 
 		return null;
@@ -37,14 +38,14 @@ public class PhotosightContentDataExtractor {
 
 	public static String extractImageUrlByOldRules( final int photosightPhotoId, final String photoPageContent ) {
 		//<img src="http://img-2007-09.photosight.ru/24/2318529.jpg" alt="
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosightImageFileUtils.PHOTOSIGHT_HOST, photosightPhotoId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), photosightPhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosightImageFileUtils.PHOTOSIGHT_HOST, someShit, photosightPhotoId, extension );
+			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, photosightPhotoId, extension );
 		}
 
 		return null;

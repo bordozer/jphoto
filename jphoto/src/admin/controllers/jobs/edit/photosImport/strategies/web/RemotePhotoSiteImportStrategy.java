@@ -109,7 +109,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			if ( photosightPagePhotosIds.size() == 0 ) {
 				final String userCardFileName = getUserCardFileName( remotePhotoSiteUser, page );
-				final File file = PhotosightImageFileUtils.writePageContentToFile( userCardFileName, userPageContent );
+				final File file = getPhotosightImageFileUtils().writePageContentToFile( userCardFileName, userPageContent );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "No photo have been found on page $1. User page content saved. See $2", services )
 					.addIntegerParameter( page )
@@ -263,13 +263,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<PhotosightPhotoOnDisk> result = newArrayList();
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : cachedPhotosightPagePhoto ) {
-			final File imageFile = PhotosightImageFileUtils.getPhotosightPhotoLocalImageFile( remotePhotoSitePhoto );
+			final File imageFile = getPhotosightImageFileUtils().getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
 			if ( ! imageFile.exists() ) {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, PhotosightImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
 			result.add( new PhotosightPhotoOnDisk( remotePhotoSitePhoto, imageDiscEntry ) );
 		}
 
@@ -285,7 +285,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		} );
 
-		PhotosightImageFileUtils.prepareUserGenreFolders( remotePhotoSiteUser, notCachedPhotosightPagePhoto );
+		getPhotosightImageFileUtils().prepareUserGenreFolders( remotePhotoSiteUser, notCachedPhotosightPagePhoto );
 		final List<PhotosightPhotoOnDisk> notCachedPhotosightPhotosOnDisk = downloadPhotosightPhotosOnDisk( notCachedPhotosightPagePhoto );
 		cachePagePhotosightPhotosLocally( remotePhotoSiteUser, notCachedPhotosightPagePhoto, cachedLocallyRemotePhotoSitePhotos );
 		return notCachedPhotosightPhotosOnDisk;
@@ -318,28 +318,31 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private void prepareFolderForImageDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		PhotosightImageFileUtils.createUserFolderForPhotoDownloading( remotePhotoSiteUser );
-		PhotosightXmlUtils.createUserInfoFile( remotePhotoSiteUser );
+		getPhotosightImageFileUtils().createUserFolderForPhotoDownloading( remotePhotoSiteUser );
+		getPhotosightXmlUtils().createUserInfoFile( remotePhotoSiteUser );
 	}
 
 	private void cachePagePhotosightPhotosLocally( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> photosightPagePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
 
 		cachedLocallyRemotePhotoSitePhotos.addAll( photosightPagePhotos );
 
-		PhotosightXmlUtils.cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
+		getPhotosightXmlUtils().cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
 	}
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyPhotosightPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+
+		final RemoteSiteCacheXmlUtils remoteSiteCacheXmlUtils = getPhotosightXmlUtils();
+
 		try {
-			return PhotosightXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
+			return remoteSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
-				.string( PhotosightXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
+				.string( remoteSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
 				.string( e.getMessage() )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
-			log.error( String.format( "Error reading user info file: %s<br />", PhotosightXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() ), e );
+			log.error( String.format( "Error reading user info file: %s<br />", remoteSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() ), e );
 
 			throw new BaseRuntimeException( e );
 		}
@@ -355,7 +358,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			log.debug( String.format( "Getting photo %s content", imageUrl ) );
 
 			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
-			final ImageDiscEntry imageDiscEntry = PhotosightImageFileUtils.downloadPhotoOnDisk( remotePhotoSitePhoto, imageContent );
+			final ImageDiscEntry imageDiscEntry = getPhotosightImageFileUtils().downloadPhotoOnDisk( remotePhotoSitePhoto, imageContent );
 			if ( imageDiscEntry == null ) {
 				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get photosight photo image content: '$1'", services ).string( remotePhotoSitePhoto.getImageUrl() ) );
 				continue;
@@ -381,7 +384,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = PhotosightImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory );
+			final GenreDiscEntry genreDiscEntry = RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory );
 			final String description = String.format( "Imported from photosight at %s ( %s ). Photo category: %s."
 				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ), importParameters.getRemoteContentHelper().getRemotePhotoSitePhotoPageLink( remotePhotoSitePhoto ), genreDiscEntry.getName()
 			);
@@ -681,6 +684,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		public boolean isBreakImportAfterThisPageProcessed() {
 			return breakImportAfterThisPageProcessed;
 		}
+	}
+
+	private RemotePhotoSitePhotoImageFileUtils getPhotosightImageFileUtils() {
+		return new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+	}
+
+	private RemoteSiteCacheXmlUtils getPhotosightXmlUtils() {
+		return new RemoteSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 	}
 }
 

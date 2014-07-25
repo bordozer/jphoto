@@ -5,6 +5,7 @@ import core.services.translator.Language;
 import core.services.utils.SystemVarsService;
 import org.apache.commons.configuration.ConfigurationException;
 
+import java.io.File;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -49,6 +50,11 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	@Override
 	public String getSystemTempFolder() {
 		return "system/temp/folder/";
+	}
+
+	@Override
+	public File getRemotePhotoSitesCacheFolder() {
+		return new File( "/home/user/jphoto/storage" );
 	}
 
 	@Override

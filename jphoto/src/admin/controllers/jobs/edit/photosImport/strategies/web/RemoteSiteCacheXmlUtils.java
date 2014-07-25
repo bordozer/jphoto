@@ -1,7 +1,9 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhotoImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUser;
 import core.exceptions.BaseRuntimeException;
 import core.services.system.Services;
@@ -26,7 +28,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class PhotosightXmlUtils {
+public class RemoteSiteCacheXmlUtils {
 
 	private static final String USER_INFO_FILE_ROOT_ELEMENT = "author";
 	private static final String USER_INFO_FILE_USER_ID = "id";
@@ -45,7 +47,15 @@ public class PhotosightXmlUtils {
 
 	private static final String XML_FILE_PHOTO_UPLOAD_TIME_FORMAT = "EEE MMM d HH:mm:ss Z yyyy";
 
-	public static void createUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+	private final PhotosImportSource photosImportSource;
+	private final File remotePhotoSitesCachePath;
+
+	public RemoteSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath ) {
+		this.photosImportSource = photosImportSource;
+		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
+	}
+
+	public void createUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -81,7 +91,7 @@ public class PhotosightXmlUtils {
 		}
 	}
 
-	public static void cachedLocallyPhotos( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
+	public void cachedLocallyPhotos( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -93,7 +103,7 @@ public class PhotosightXmlUtils {
 			final Element photoElement = rootElement.addElement( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotoId() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( PhotosightImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getImageUrl() );
@@ -114,7 +124,7 @@ public class PhotosightXmlUtils {
 		output.close();
 	}
 
-	public static List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
+	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
@@ -178,8 +188,8 @@ public class PhotosightXmlUtils {
 		return result;
 	}
 
-	public static File getUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		return new File( PhotosightImageFileUtils.getUserFolderForPhotoDownloading( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
+	public File getUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+		return new File( new RemotePhotoSitePhotoImageFileUtils( photosImportSource, remotePhotoSitesCachePath ).getUserFolderForPhotoDownloading( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
 	}
 
 	private static String getUserInfoFileName( final RemotePhotoSiteUser remotePhotoSiteUser ) {
