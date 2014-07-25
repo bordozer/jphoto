@@ -7,6 +7,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryWrapper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightPageContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.entries.AbstractJob;
@@ -159,7 +160,7 @@ public class PhotosImportController extends DateRangableController {
 			}
 		} ) );
 
-		aModel.setPhotosightCategoryWrappers( getPhotosightCategoriesCheckboxes() );
+		aModel.setRemotePhotoSiteCategoryWrappers( getPhotosightCategoriesCheckboxes() );
 		aModel.setPhotosightImport_importNudeContentByDefault( nudeContentByDefault );
 	}
 
@@ -176,7 +177,7 @@ public class PhotosImportController extends DateRangableController {
 		return null;
 	}
 
-	private List<PhotosightCategoryWrapper> getPhotosightCategoriesCheckboxes() {
+	private List<RemotePhotoSiteCategoryWrapper> getPhotosightCategoriesCheckboxes() {
 		final List<RemotePhotoSiteCategory> photosightCategoriesSorted = Arrays.asList( RemotePhotoSiteCategory.values() );
 		Collections.sort( photosightCategoriesSorted, new Comparator<RemotePhotoSiteCategory>() {
 			@Override
@@ -185,10 +186,10 @@ public class PhotosImportController extends DateRangableController {
 			}
 		} );
 
-		final List<PhotosightCategoryWrapper> photosightCategoryWrappers = newArrayList();
+		final List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers = newArrayList();
 		for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : photosightCategoriesSorted ) {
 
-			final PhotosightCategoryWrapper categoryWrapper = new PhotosightCategoryWrapper( remotePhotoSiteCategory );
+			final RemotePhotoSiteCategoryWrapper categoryWrapper = new RemotePhotoSiteCategoryWrapper( remotePhotoSiteCategory );
 
 			final Genre genre = getGenreByPhotosightCategory( remotePhotoSiteCategory );
 			if ( genre.isCanContainNudeContent() ) {
@@ -197,10 +198,10 @@ public class PhotosImportController extends DateRangableController {
 				categoryWrapper.addCssClass( "photosight-category-no-nude" );
 			}
 
-			photosightCategoryWrappers.add( categoryWrapper );
+			remotePhotoSiteCategoryWrappers.add( categoryWrapper );
 		}
 
-		return photosightCategoryWrappers;
+		return remotePhotoSiteCategoryWrappers;
 	}
 
 	@Override

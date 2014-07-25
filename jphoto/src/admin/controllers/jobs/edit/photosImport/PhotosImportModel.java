@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryWrapper;
 import core.enums.UserGender;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
@@ -52,7 +53,7 @@ public class PhotosImportModel extends DateRangableModel {
 	// photosight import fields <--
 	private boolean deletePictureFromDiskAfterImport;
 	
-	private List<PhotosightCategoryWrapper> photosightCategoryWrappers;
+	private List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers;
 
 	private GenericTranslatableList userMembershipTypeTranslatableList;
 	private GenericTranslatableList<UserGender> userGenderTranslatableList;
@@ -188,12 +189,12 @@ public class PhotosImportModel extends DateRangableModel {
 		this.photosightCategories = photosightCategories;
 	}
 
-	public void setPhotosightCategoryWrappers( final List<PhotosightCategoryWrapper> photosightCategoryWrappers ) {
-		this.photosightCategoryWrappers = photosightCategoryWrappers;
+	public void setRemotePhotoSiteCategoryWrappers( final List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers ) {
+		this.remotePhotoSiteCategoryWrappers = remotePhotoSiteCategoryWrappers;
 	}
 
-	public List<PhotosightCategoryWrapper> getPhotosightCategoryWrappers() {
-		return photosightCategoryWrappers;
+	public List<RemotePhotoSiteCategoryWrapper> getRemotePhotoSiteCategoryWrappers() {
+		return remotePhotoSiteCategoryWrappers;
 	}
 
 	public void setUserMembershipTypeTranslatableList( final GenericTranslatableList userMembershipTypeTranslatableList ) {

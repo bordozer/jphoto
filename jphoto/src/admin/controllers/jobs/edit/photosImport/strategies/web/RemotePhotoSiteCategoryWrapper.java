@@ -1,13 +1,13 @@
-package admin.controllers.jobs.edit.photosImport;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 
-public class PhotosightCategoryWrapper {
+public class RemotePhotoSiteCategoryWrapper {
 
 	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private String cssClasses;
 
-	public PhotosightCategoryWrapper( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public RemotePhotoSiteCategoryWrapper( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 	}
 

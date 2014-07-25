@@ -34,7 +34,7 @@
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 
-<c:set var="photosightCategoryWrappers" value="<%=photosImportModel.getPhotosightCategoryWrappers()%>"/>
+<c:set var="remotePhotoSiteCategoryWrapper" value="<%=photosImportModel.getRemotePhotoSiteCategoryWrappers()%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
@@ -177,7 +177,7 @@
 									<table:tr>
 										<table:td colspan="2">
 											<%--<div style="float: left; width: 100%; height: 80px;">--%>
-												<c:forEach var="checkbox" items="${photosightCategoryWrappers}">
+												<c:forEach var="checkbox" items="${remotePhotoSiteCategoryWrapper}">
 													<div style="display: inline-block; width: 120px;">
 														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.remotePhotoSiteCategory.id}" label="${checkbox.remotePhotoSiteCategory.name}" cssClass="${checkbox.cssClasses}" />
 													</div>
