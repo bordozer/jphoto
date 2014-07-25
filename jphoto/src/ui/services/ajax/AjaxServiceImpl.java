@@ -5,7 +5,6 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteCon
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
@@ -138,7 +137,7 @@ public class AjaxServiceImpl implements AjaxService {
 			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( AbstractRemotePhotoSitePageContentDataExtractor.getInstance( importSource ).extractPhotosightUserPhotosCount( _remoteUserId ) );
 		}
 
-		final String userLogin = RemotePhotoSiteImportStrategy.getPhotosightUserLogin( userId );
+		final String userLogin = RemotePhotoSiteImportStrategy.createLoginForRemotePhotoSiteUser( userId );
 		final User user = userService.loadByLogin( userLogin );
 		final boolean userExistsInTheSystem = user != null;
 		remotePhotoSiteUserDTO.setRemoteUserExistsInTheSystem( userExistsInTheSystem );

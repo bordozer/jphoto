@@ -28,8 +28,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Downloaded from photosight: $1 of $2, photosight category: $3</nerd>
-		<ru><![CDATA[Загружено с Photosight: $1 пользователя $2, раздел фотосайта: $3]]></ru>
+		<nerd>Downloaded from '$1': $2 of $3, photo category: $4</nerd>
+		<ru><![CDATA[Загружено с '$1': работа '$2' пользователя $3, раздел фото сайта: $4]]></ru>
 	</translation>
 
 	<translation>
