@@ -3,10 +3,6 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import core.log.LogHelper;
-import core.services.entry.GenreService;
-import core.services.translator.Language;
-import core.services.utils.EntityLinkUtilsService;
-import org.apache.commons.lang.StringUtils;
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -14,6 +10,8 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import utils.StringUtilities;
 
 public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
+
+	private final PhotosightContentDataExtractor photosightContentDataExtractor = new PhotosightContentDataExtractor();
 
 	public PhotosightRemoteContentHelper() {
 		super( new LogHelper( PhotosightRemoteContentHelper.class ) );
@@ -25,38 +23,13 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getUserCardUrl( final String remotePhotoSiteUserId ) {
-		return getUserCardUrl( remotePhotoSiteUserId, 0 );
+	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
+		return String.format( "%s/?pager=%d", getUserCardPageUrl( remotePhotoSiteUserId ), pageNumber );
 	}
 
 	@Override
-	public String getUserCardUrl( final String remotePhotoSiteUserId, final int page ) {
-		return String.format( "%s/?pager=%d", getUserCardPageUrl( remotePhotoSiteUserId ), page );
-	}
-
-	@Override
-	public String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		final String photosightUserId = remotePhotoSiteUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( remotePhotoSiteUser.getName() ), photosightUserId );
-	}
-
-	@Override
-	public String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		return getUserName( remotePhotoSiteUser.getId() );
-	}
-
-	@Override
-	public String getUserName( final String remotePhotoSiteUserId ) {
-		final String userPageContent = getUserPageContent( 1, remotePhotoSiteUserId );
-		if ( StringUtils.isEmpty( userPageContent ) ) {
-			return null;
-		}
-		return new PhotosightContentDataExtractor().extractPhotosightUserName( userPageContent );
-	}
-
-	@Override
-	public String getUserPageContent( final int pageNumber, final String remotePhotoSiteUserId ) {
-		return getRemotePageContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
+	public String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
+		return String.format( "http://www.%s/%s/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSitePhotoId );
 	}
 
 	@Override
@@ -68,11 +41,6 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	@Override
 	public String getPhotoCardLink( final int remotePhotoSitePhotoId ) {
 		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
-	}
-
-	@Override
-	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
-		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
 	}
 
 	@Override
@@ -102,11 +70,12 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 		return cookie;
 	}
 
-	private String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
-		return String.format( "http://www.%s/%s/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSitePhotoId );
-	}
-
 	private String getUserCardPageUrl( final String remotePhotoSiteUserId ) {
 		return String.format( "http://www.%s/%s/%s/", PhotosImportSource.PHOTOSIGHT.getUrl(), "users", remotePhotoSiteUserId );
+	}
+
+	@Override
+	protected PhotosightContentDataExtractor getPhotosightContentDataExtractor() {
+		return photosightContentDataExtractor;
 	}
 }
