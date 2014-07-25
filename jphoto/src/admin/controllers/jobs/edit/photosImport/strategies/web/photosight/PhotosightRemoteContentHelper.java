@@ -30,28 +30,6 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getImageContentFromUrl( final String cardUrl ) {
-		final DefaultHttpClient httpClient = new DefaultHttpClient();
-
-		final String uri = String.format( "http://%s", cardUrl );
-
-		log.debug( String.format( "Getting content: %s", uri ) );
-
-		final HttpGet httpGet = new HttpGet( uri );
-
-		try {
-			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
-			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
-		} catch ( final IOException e ) {
-			log.error( String.format( "Can not get image content: '%s'", cardUrl ), e );
-		} finally {
-			httpClient.getConnectionManager().shutdown();
-		}
-
-		return null;
-	}
-
-	@Override
 	public String getUserCardUrl( final String userId ) {
 		return getUserCardUrl( userId, 0 );
 	}
@@ -77,7 +55,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
 		}
-		return PhotosightContentDataExtractor.extractPhotosightUserName( userPageContent );
+		return new PhotosightContentDataExtractor().extractPhotosightUserName( userPageContent );
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return; // can not load page - just skipping
 		}
 
-		final int userPagesQty = importParameters.getRemotePhotoSitePageContentHelper().getTotalPagesQty( userFirstPageContent, remotePhotoSiteUser.getId() );
+		final int userPagesQty = getRemotePhotoSitePageContentDataExtractor().getTotalPagesQty( userFirstPageContent, remotePhotoSiteUser.getId() );
 
 		while ( ! job.isFinished() && ! job.hasJobFinishedWithAnyResult() && page <= userPagesQty ) {
 
@@ -427,7 +427,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final int qty = importParameters.getRemotePhotoSitePageContentHelper().getTotalPagesQty( userPageContent, photosightUserId );
+			final int qty = getRemotePhotoSitePageContentDataExtractor().getTotalPagesQty( userPageContent, photosightUserId );
 			countedTotal += qty;
 			log.info( String.format( "Getting photosight user #%s pages qty: %d ( summary: %d )", photosightUserId, qty, countedTotal ) );
 
@@ -446,12 +446,12 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	private List<Integer> extractUserPhotosIdsFromPage( final String userPageContent ) {
 		final List<Integer> result = newArrayList();
 
-		final Pattern pattern = Pattern.compile( PhotosightContentDataExtractor.getPhotoIdRegex() );
+		final Pattern pattern = Pattern.compile( getRemotePhotoSitePageContentDataExtractor().getPhotoIdRegex() );
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		while ( matcher.find() && ! job.hasJobFinishedWithAnyResult() ) {
 			final String group = matcher.group( 1 );
-			final int photosightPhotoId = PhotosightContentDataExtractor.extractPhotosightPhotoId( group );
+			final int photosightPhotoId = getRemotePhotoSitePageContentDataExtractor().extractPhotosightPhotoId( group );
 
 			result.add( photosightPhotoId );
 		}
@@ -466,13 +466,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return null;
 		}
 
-		final String imageUrl = PhotosightContentDataExtractor.extractImageUrl( photosightPhotoId, photoPageContent );
+		final String imageUrl = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( photosightPhotoId, photoPageContent );
 		if ( StringUtils.isEmpty( imageUrl ) ) {
 			logPhotoSkipping( remotePhotoSiteUser, photosightPhotoId, "Can not extract photo image URL from page content." );
 			return null;
 		}
 
-		final AbstractRemotePhotoSitePageContentHelper remotePhotoSitePageContentHelper = importParameters.getRemotePhotoSitePageContentHelper();
+		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentHelper = getRemotePhotoSitePageContentDataExtractor();
 
 		final RemotePhotoSiteCategory remotePhotoSiteCategory = RemotePhotoSiteCategory.getById( remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
 		if( remotePhotoSiteCategory == null ) {
@@ -498,7 +498,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		remotePhotoSitePhoto.setImageUrl( imageUrl );
 
 		if ( importParameters.isImportComments() ) {
-			final List<String> comments = importParameters.getRemotePhotoSitePageContentHelper().extractComments( photoPageContent );
+			final List<String> comments = getRemotePhotoSitePageContentDataExtractor().extractComments( photoPageContent );
 			remotePhotoSitePhoto.setComments( comments );
 		}
 
@@ -694,6 +694,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private RemotePhotoSiteCacheXmlUtils getPhotosightXmlUtils() {
 		return new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+	}
+
+	private AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSitePageContentDataExtractor() {
+		return importParameters.getRemotePhotoSitePageContentDataExtractor();
 	}
 }
 

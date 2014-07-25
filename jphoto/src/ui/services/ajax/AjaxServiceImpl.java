@@ -3,8 +3,8 @@ package ui.services.ajax;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
@@ -132,7 +132,7 @@ public class AjaxServiceImpl implements AjaxService {
 		remotePhotoSiteUserDTO.setRemoteUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( PhotosightContentDataExtractor.extractPhotosightUserPhotosCount( _remoteUserId ) );
+			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( new PhotosightContentDataExtractor().extractPhotosightUserPhotosCount( _remoteUserId ) ); // TODO: get correct instance of extractor ( _importSourceId )
 		}
 
 		final String userLogin = RemotePhotoSiteImportStrategy.getPhotosightUserLogin( userId );

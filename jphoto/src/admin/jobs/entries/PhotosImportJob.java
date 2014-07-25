@@ -8,7 +8,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportSt
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightPageContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
@@ -138,7 +138,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				} );
 
 				importParameters = new RemoteSitePhotosImportParameters( photosightUserId, userGender, membershipType, importComments, delayBetweenRequest, pageQty
-					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories, new PhotosightRemoteContentHelper(), new PhotosightPageContentHelper() );
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories, new PhotosightRemoteContentHelper(), new PhotosightContentDataExtractor() );
 
 				break;
 			default:

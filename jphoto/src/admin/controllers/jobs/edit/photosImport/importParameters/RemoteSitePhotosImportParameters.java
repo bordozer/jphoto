@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.importParameters;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
@@ -23,9 +23,9 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 	private List<RemotePhotoSiteCategory> remotePhotoSiteCategories;
 
 	private final AbstractRemoteContentHelper remoteContentHelper;
-	private final AbstractRemotePhotoSitePageContentHelper remotePhotoSitePageContentHelper;
+	private final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor;
 
-	public RemoteSitePhotosImportParameters( final List<String> remoteUserIds, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<RemotePhotoSiteCategory> remotePhotoSiteCategories, final AbstractRemoteContentHelper remoteContentHelper, final AbstractRemotePhotoSitePageContentHelper remotePhotoSitePageContentHelper ) {
+	public RemoteSitePhotosImportParameters( final List<String> remoteUserIds, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<RemotePhotoSiteCategory> remotePhotoSiteCategories, final AbstractRemoteContentHelper remoteContentHelper, final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor ) {
 		super( language );
 		this.remoteUserIds = remoteUserIds;
 		this.userGender = userGender;
@@ -36,7 +36,7 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
 		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
 		this.remoteContentHelper = remoteContentHelper;
-		this.remotePhotoSitePageContentHelper = remotePhotoSitePageContentHelper;
+		this.remotePhotoSitePageContentDataExtractor = remotePhotoSitePageContentDataExtractor;
 	}
 
 	public List<String> getRemoteUserIds() {
@@ -79,7 +79,7 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 		return remoteContentHelper;
 	}
 
-	public AbstractRemotePhotoSitePageContentHelper getRemotePhotoSitePageContentHelper() {
-		return remotePhotoSitePageContentHelper;
+	public AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSitePageContentDataExtractor() {
+		return remotePhotoSitePageContentDataExtractor;
 	}
 }
