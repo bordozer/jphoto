@@ -622,7 +622,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		user.setName( userName );
 		user.setMembershipType( parameters.getMembershipType() );
 		user.setGender( parameters.getUserGender() );
-		user.setSelfDescription( String.format( "Photosight user: %s ( %s )", remotePhotoSiteUser.getId(), importParameters.getRemoteContentHelper().getUserCardUrl( remotePhotoSiteUser.getId(), 1 ) ) );
+		user.setSelfDescription( String.format( "A user of %s: %s ( %s )", importParameters.getRemoteContentHelper().getPhotosImportSource().getUrl(), remotePhotoSiteUser.getId(), importParameters.getRemoteContentHelper().getUserCardUrl( remotePhotoSiteUser.getId(), 1 ) ) );
 
 		if ( ! services.getUserService().save( user ) ) {
 			throw new BaseRuntimeException( "Can not create user" );
