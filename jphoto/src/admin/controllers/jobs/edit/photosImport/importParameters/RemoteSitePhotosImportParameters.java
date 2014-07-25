@@ -1,17 +1,16 @@
 package admin.controllers.jobs.edit.photosImport.importParameters;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 import core.services.translator.Language;
 
 import java.util.List;
 
-public class PhotosightImportParameters extends AbstractImportParameters {
+public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 
-	private final List<String> photosightUserIds;
-	private final String userName;
+	private final List<String> remoteUserIds;
 	private final UserGender userGender;
 	private final UserMembershipType membershipType;
 	private final boolean importComments;
@@ -20,30 +19,25 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 
 	private final boolean breakImportIfAlreadyImportedPhotoFound;
 
-	private List<PhotosightCategory> photosightCategories;
+	private List<RemotePhotoSiteCategory> remotePhotoSiteCategories;
 
 	private final AbstractRemoteContentHelper remoteContentHelper;
 
-	public PhotosightImportParameters( final List<String> photosightUserIds, final String userName, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<PhotosightCategory> photosightCategories, final AbstractRemoteContentHelper remoteContentHelper ) {
+	public RemoteSitePhotosImportParameters( final List<String> remoteUserIds, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<RemotePhotoSiteCategory> remotePhotoSiteCategories, final AbstractRemoteContentHelper remoteContentHelper ) {
 		super( language );
-		this.photosightUserIds = photosightUserIds;
-		this.userName = userName;
+		this.remoteUserIds = remoteUserIds;
 		this.userGender = userGender;
 		this.membershipType = membershipType;
 		this.importComments = importComments;
 		this.delayBetweenRequest = delayBetweenRequest;
 		this.pageQty = pageQty;
 		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
-		this.photosightCategories = photosightCategories;
+		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
 		this.remoteContentHelper = remoteContentHelper;
 	}
 
-	public List<String> getPhotosightUserIds() {
-		return photosightUserIds;
-	}
-
-	public String getUserName() {
-		return userName;
+	public List<String> getRemoteUserIds() {
+		return remoteUserIds;
 	}
 
 	public UserGender getUserGender() {
@@ -70,8 +64,8 @@ public class PhotosightImportParameters extends AbstractImportParameters {
 		return language;
 	}
 
-	public List<PhotosightCategory> getPhotosightCategories() {
-		return photosightCategories;
+	public List<RemotePhotoSiteCategory> getRemotePhotoSiteCategories() {
+		return remotePhotoSiteCategories;
 	}
 
 	public boolean isBreakImportIfAlreadyImportedPhotoFound() {

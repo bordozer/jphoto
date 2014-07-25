@@ -1,13 +1,13 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import java.util.Date;
 import java.util.List;
 
-public class PhotosightPhoto {
+public class RemotePhotoSitePhoto {
 
-	private final PhotosightUser photosightUser;
+	private final RemotePhotoSiteUser remotePhotoSiteUser;
 	private final int photoId;
-	private final PhotosightCategory photosightCategory;
+	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private String name;
 	private Date uploadTime;
 	private String imageUrl;
@@ -16,22 +16,22 @@ public class PhotosightPhoto {
 
 	private boolean isCached;
 
-	public PhotosightPhoto( final PhotosightUser photosightUser, final int photoId, final PhotosightCategory photosightCategory ) {
-		this.photosightUser = photosightUser;
+	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+		this.remotePhotoSiteUser = remotePhotoSiteUser;
 		this.photoId = photoId;
-		this.photosightCategory = photosightCategory;
+		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 	}
 
-	public PhotosightUser getPhotosightUser() {
-		return photosightUser;
+	public RemotePhotoSiteUser getRemotePhotoSiteUser() {
+		return remotePhotoSiteUser;
 	}
 
 	public int getPhotoId() {
 		return photoId;
 	}
 
-	public PhotosightCategory getPhotosightCategory() {
-		return photosightCategory;
+	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
+		return remotePhotoSiteCategory;
 	}
 
 	public String getName() {
@@ -99,7 +99,7 @@ public class PhotosightPhoto {
 			return false;
 		}
 
-		final PhotosightPhoto photosightPhoto = ( PhotosightPhoto ) obj;
-		return photoId == photosightPhoto.getPhotoId();
+		final RemotePhotoSitePhoto remotePhotoSitePhoto = ( RemotePhotoSitePhoto ) obj;
+		return photoId == remotePhotoSitePhoto.getPhotoId();
 	}
 }

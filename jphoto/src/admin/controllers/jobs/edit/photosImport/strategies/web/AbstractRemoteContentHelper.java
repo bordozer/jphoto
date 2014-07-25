@@ -1,10 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightPhoto;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightUser;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.translator.Language;
@@ -24,25 +21,26 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getUserCardUrl( final String userId, int page );
 
-	public abstract String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory );
+	public abstract String getRemotePhotoSiteCategoryPageUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
 
-	public abstract String getPhotosightUserName( final PhotosightUser photosightUser );
+	public abstract String getRemotePhotoSiteUserName( final RemotePhotoSiteUser remotePhotoSiteUser );
 
-	public abstract String getPhotosightUserName( final String photosightUserId );
+	public abstract String getRemotePhotoSiteUserName( final String remotePhotoSiteUserId );
 
-	public abstract String getPhotosightUserPageLink( final PhotosightUser photosightUser );
+	public abstract String getRemotePhotoSiteUserPageLink( final RemotePhotoSiteUser remotePhotoSiteUser );
 
-	public abstract String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto );
+	public abstract String getRemotePhotoSitePhotoPageLink( final RemotePhotoSitePhoto remotePhotoSitePhoto );
 
-	public abstract String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
+	public abstract String getRemotePhotoSiteCategoryPageLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
 
-	public abstract String getPhotoCardLink( final int photosightPhotoId );
+	public abstract String getPhotoCardLink( final int remotePhotoSitePhotoId );
 
-	public abstract String getUserPageContent( final int page, final String photosightUserId );
+	public abstract String getUserPageContent( final int page, final String remotePhotoSiteUserId );
 
-	public abstract String getPhotoPageContent( final PhotosightUser photosightUser, final int photoId );
+	public abstract String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId );
 
 	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
+
 		switch ( importSource ) {
 			case PHOTOSIGHT:
 				return new PhotosightRemoteContentHelper();

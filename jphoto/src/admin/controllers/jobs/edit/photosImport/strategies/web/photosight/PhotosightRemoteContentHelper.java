@@ -1,6 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUser;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.translator.Language;
@@ -56,18 +59,18 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotosightCategoryPageUrl( final PhotosightCategory photosightCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", photosightCategory.getId() );
+	public String getRemotePhotoSiteCategoryPageUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+		return String.format( "http://www.%s/%s/category/%d/", PhotosightImageFileUtils.PHOTOSIGHT_HOST, "photos", remotePhotoSiteCategory.getId() );
 	}
 
 	@Override
-	public String getPhotosightUserName( final PhotosightUser photosightUser ) {
-		return getPhotosightUserName( photosightUser.getId() );
+	public String getRemotePhotoSiteUserName( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+		return getRemotePhotoSiteUserName( remotePhotoSiteUser.getId() );
 	}
 
 	@Override
-	public String getPhotosightUserName( final String photosightUserId ) {
-		final String userPageContent = getUserPageContent( 1, photosightUserId );
+	public String getRemotePhotoSiteUserName( final String remotePhotoSiteUserId ) {
+		final String userPageContent = getUserPageContent( 1, remotePhotoSiteUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
 		}
@@ -75,35 +78,35 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotosightUserPageLink( final PhotosightUser photosightUser ) {
-		final String photosightUserId = photosightUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( photosightUser.getName() ), photosightUserId );
+	public String getRemotePhotoSiteUserPageLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+		final String photosightUserId = remotePhotoSiteUser.getId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( remotePhotoSiteUser.getName() ), photosightUserId );
 	}
 
 	@Override
-	public String getPhotosightPhotoPageLink( final PhotosightPhoto photosightPhoto ) {
-		final int photosightPhotoId = photosightPhoto.getPhotoId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( photosightPhoto.getName() ), photosightPhotoId );
+	public String getRemotePhotoSitePhotoPageLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
+		final int photosightPhotoId = remotePhotoSitePhoto.getPhotoId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() ), photosightPhotoId );
 	}
 
 	@Override
-	public String getPhotosightCategoryPageLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getPhotosightCategoryPageUrl( photosightCategory ), photosightCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() ), language ) );
+	public String getRemotePhotoSiteCategoryPageLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getRemotePhotoSiteCategoryPageUrl( remotePhotoSiteCategory ), remotePhotoSiteCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( PhotosightImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() ), language ) );
 	}
 
 	@Override
-	public String getPhotoCardLink( final int photosightPhotoId ) {
-		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( photosightPhotoId ), photosightPhotoId );
+	public String getPhotoCardLink( final int remotePhotoSitePhotoId ) {
+		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
 	}
 
 	@Override
-	public String getUserPageContent( final int page, final String photosightUserId ) {
-		return getContent( photosightUserId, getUserCardUrl( photosightUserId, page ) );
+	public String getUserPageContent( final int page, final String remotePhotoSiteUserId ) {
+		return getContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, page ) );
 	}
 
 	@Override
-	public String getPhotoPageContent( final PhotosightUser photosightUser, final int photoId ) {
-		return getContent( photosightUser.getId(), getPhotoCardUrl( photoId ) );
+	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId ) {
+		return getContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( photoId ) );
 	}
 
 	private void setCookie( final DefaultHttpClient httpClient, final String userId ) {

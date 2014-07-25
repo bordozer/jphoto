@@ -1,6 +1,6 @@
 package ui.services.ajax;
 
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemoteUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemoteUserDTO;
 import rest.users.picker.UserDTO;
 import ui.dtos.*;
 

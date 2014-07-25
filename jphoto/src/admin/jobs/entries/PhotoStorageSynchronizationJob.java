@@ -2,11 +2,11 @@ package admin.jobs.entries;
 
 import admin.controllers.jobs.edit.NoParametersAbstractJob;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
-import admin.controllers.jobs.edit.photosImport.importParameters.PhotosightImportParameters;
+import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImageFileUtils;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.PhotosightImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
@@ -35,11 +35,10 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 	protected void runJob() throws Throwable {
 		final List<String> usersIds = getUsersIds();
 
-		final List<PhotosightCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
+		final List<RemotePhotoSiteCategory> photosightCategories = Arrays.asList( RemotePhotoSiteCategory.values() );
 
-		final AbstractImportParameters importParameters = new PhotosightImportParameters(
+		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters(
 			usersIds
-			, ""
 			, UserGender.MALE
 			, UserMembershipType.AUTHOR
 			, true

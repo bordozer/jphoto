@@ -179,7 +179,7 @@
 											<%--<div style="float: left; width: 100%; height: 80px;">--%>
 												<c:forEach var="checkbox" items="${photosightCategoryWrappers}">
 													<div style="display: inline-block; width: 120px;">
-														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
+														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.remotePhotoSiteCategory.id}" label="${checkbox.remotePhotoSiteCategory.name}" cssClass="${checkbox.cssClasses}" />
 													</div>
 												</c:forEach>
 											<%--</div>--%>
@@ -208,15 +208,6 @@
 									</table:tr>
 
 									<table:separator colspan="2" />
-
-									<table:tr>
-										<table:tdtext text_t="Photo import job parameter: User name"/>
-										<table:td>
-											<form:input path="${userNameControl}"/>
-											<br/>
-											${eco:translate('Photo import job JSP: Photosight user name is used if leave empty')}
-										</table:td>
-									</table:tr>
 
 									<table:tr>
 										<table:tdtext text_t="Photo import job parameter: Gender" isMandatory="true"/>

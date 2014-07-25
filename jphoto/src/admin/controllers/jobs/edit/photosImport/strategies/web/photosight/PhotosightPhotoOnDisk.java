@@ -1,19 +1,20 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
 
 public class PhotosightPhotoOnDisk {
 
-	private final PhotosightPhoto photosightPhoto;
+	private final RemotePhotoSitePhoto remotePhotoSitePhoto;
 	private final ImageDiscEntry imageDiscEntry;
 
-	public PhotosightPhotoOnDisk( final PhotosightPhoto photosightPhoto, final ImageDiscEntry imageDiscEntry ) {
-		this.photosightPhoto = photosightPhoto;
+	public PhotosightPhotoOnDisk( final RemotePhotoSitePhoto remotePhotoSitePhoto, final ImageDiscEntry imageDiscEntry ) {
+		this.remotePhotoSitePhoto = remotePhotoSitePhoto;
 		this.imageDiscEntry = imageDiscEntry;
 	}
 
-	public PhotosightPhoto getPhotosightPhoto() {
-		return photosightPhoto;
+	public RemotePhotoSitePhoto getRemotePhotoSitePhoto() {
+		return remotePhotoSitePhoto;
 	}
 
 	public ImageDiscEntry getImageDiscEntry() {
@@ -22,6 +23,6 @@ public class PhotosightPhotoOnDisk {
 
 	@Override
 	public String toString() {
-		return String.format( "%s", photosightPhoto );
+		return String.format( "%s", remotePhotoSitePhoto );
 	}
 }

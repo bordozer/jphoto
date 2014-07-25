@@ -1,4 +1,4 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;

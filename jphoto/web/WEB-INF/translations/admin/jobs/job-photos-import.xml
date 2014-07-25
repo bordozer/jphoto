@@ -128,11 +128,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo import job JSP: Photosight user name is used if leave empty</nerd>
-		<ru><![CDATA[Оставьте поле пустым чтобы использовать имя пользователя с фотосайта]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Photo import job JSP: Import sources</nerd>
 		<ru><![CDATA[Источники импорта]]></ru>
 	</translation>

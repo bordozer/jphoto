@@ -1,8 +1,8 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import utils.NumberUtils;
 
-public enum PhotosightCategory {
+public enum RemotePhotoSiteCategory {
 
 	NUDE( 15, "Nude" )
 	, GLAMOUR( 18, "Glamour" )
@@ -39,7 +39,7 @@ public enum PhotosightCategory {
 	private final String name;
 
 
-	private PhotosightCategory( final int id, final String name ) {
+	private RemotePhotoSiteCategory( final int id, final String name ) {
 		this.id = id;
 		this.name = name;
 	}
@@ -52,8 +52,8 @@ public enum PhotosightCategory {
 		return name;
 	}
 
-	public static PhotosightCategory getById( final int id ) {
-		for ( final PhotosightCategory category : PhotosightCategory.values() ) {
+	public static RemotePhotoSiteCategory getById( final int id ) {
+		for ( final RemotePhotoSiteCategory category : RemotePhotoSiteCategory.values() ) {
 			if ( category.getId() == id ) {
 				return category;
 			}
@@ -63,7 +63,7 @@ public enum PhotosightCategory {
 		return null;
 	}
 
-	public static PhotosightCategory getById( final String id ) {
+	public static RemotePhotoSiteCategory getById( final String id ) {
 		return getById( NumberUtils.convertToInt( id ) );
 	}
 }

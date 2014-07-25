@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 
 import java.util.List;
 
@@ -10,48 +11,48 @@ public class PhotosightCategoryToGenreMapping {
 
 	public static List<PhotosightCategoryToGenreMapping> PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING = newArrayList();
 
-	private final PhotosightCategory photosightCategory;
+	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private final GenreDiscEntry genreDiscEntry;
 
 	static {
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.NUDE, GenreDiscEntry.NUDE ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.CITY, GenreDiscEntry.CITY ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.CHILDREN, GenreDiscEntry.CHILDREN ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.GENRE, GenreDiscEntry.GENRE ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.ANIMALS, GenreDiscEntry.ANIMALS ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.DIGITAL_ART, GenreDiscEntry.DIGITAL_ART ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.MACRO, GenreDiscEntry.MACRO ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.STILL, GenreDiscEntry.STILL ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.ADVERTISING, GenreDiscEntry.ADVERTISING ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.REPORTING, GenreDiscEntry.REPORTING ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.WEDDING, GenreDiscEntry.WEDDING ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.SPORT, GenreDiscEntry.SPORT ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.PHOTOSIGHT, GenreDiscEntry.GENRE ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.PHOTO_HUNTING, GenreDiscEntry.ANIMALS ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.ARCHITECTURE, GenreDiscEntry.CITY ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.MODELS, GenreDiscEntry.MODELS ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.HUMOR, GenreDiscEntry.HUMOR ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.MOBILE_PHOTO, GenreDiscEntry.OTHER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.MUSEUM, GenreDiscEntry.OTHER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.NATURE, GenreDiscEntry.OTHER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.TECH, GenreDiscEntry.OTHER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.REST, GenreDiscEntry.OTHER ) );
-		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( PhotosightCategory.PAPARAZZI, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.NUDE, GenreDiscEntry.NUDE ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.CITY, GenreDiscEntry.CITY ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.CHILDREN, GenreDiscEntry.CHILDREN ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.GENRE, GenreDiscEntry.GENRE ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.ANIMALS, GenreDiscEntry.ANIMALS ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.DIGITAL_ART, GenreDiscEntry.DIGITAL_ART ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.MACRO, GenreDiscEntry.MACRO ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.STILL, GenreDiscEntry.STILL ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.ADVERTISING, GenreDiscEntry.ADVERTISING ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.REPORTING, GenreDiscEntry.REPORTING ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.WEDDING, GenreDiscEntry.WEDDING ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.SPORT, GenreDiscEntry.SPORT ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.PHOTOSIGHT, GenreDiscEntry.GENRE ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.PHOTO_HUNTING, GenreDiscEntry.ANIMALS ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.ARCHITECTURE, GenreDiscEntry.CITY ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.MODELS, GenreDiscEntry.MODELS ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.HUMOR, GenreDiscEntry.HUMOR ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.MOBILE_PHOTO, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.MUSEUM, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.NATURE, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.TECH, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.REST, GenreDiscEntry.OTHER ) );
+		PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING.add( new PhotosightCategoryToGenreMapping( RemotePhotoSiteCategory.PAPARAZZI, GenreDiscEntry.OTHER ) );
 	}
 
-	public PhotosightCategoryToGenreMapping( final PhotosightCategory photosightCategory, final GenreDiscEntry genreDiscEntry ) {
-		this.photosightCategory = photosightCategory;
+	public PhotosightCategoryToGenreMapping( final RemotePhotoSiteCategory remotePhotoSiteCategory, final GenreDiscEntry genreDiscEntry ) {
+		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 		this.genreDiscEntry = genreDiscEntry;
 	}
 
-	public PhotosightCategory getPhotosightCategory() {
-		return photosightCategory;
+	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
+		return remotePhotoSiteCategory;
 	}
 
 	public GenreDiscEntry getGenreDiscEntry() {
@@ -60,6 +61,6 @@ public class PhotosightCategoryToGenreMapping {
 
 	@Override
 	public String toString() {
-		return String.format( "%s => %s", photosightCategory, genreDiscEntry.getName() );
+		return String.format( "%s => %s", remotePhotoSiteCategory, genreDiscEntry.getName() );
 	}
 }

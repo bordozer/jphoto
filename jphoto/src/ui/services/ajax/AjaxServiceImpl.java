@@ -3,8 +3,8 @@ package ui.services.ajax;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemoteUserDTO;
+import admin.controllers.jobs.edit.photosImport.strategies.web.PhotosightImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemoteUserDTO;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
@@ -122,7 +122,7 @@ public class AjaxServiceImpl implements AjaxService {
 		final String userId = String.valueOf( _remoteUserId );
 
 		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( PhotosImportSource.getById( _importSourceId ) );
-		final String remoteUserName = remoteContentHelper.getPhotosightUserName( userId );
+		final String remoteUserName = remoteContentHelper.getRemotePhotoSiteUserName( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
 		remoteUserDTO.setRemoteUserName( remoteUserName );

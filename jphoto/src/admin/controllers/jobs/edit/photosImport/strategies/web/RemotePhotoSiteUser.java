@@ -1,11 +1,11 @@
-package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
+package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-public class PhotosightUser {
+public class RemotePhotoSiteUser {
 
 	private final String id;
 	private String name;
 
-	public PhotosightUser( final String id ) {
+	public RemotePhotoSiteUser( final String id ) {
 		this.id = id;
 	}
 

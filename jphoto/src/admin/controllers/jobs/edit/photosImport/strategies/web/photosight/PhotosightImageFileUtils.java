@@ -2,6 +2,9 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUser;
 import core.log.LogHelper;
 
 import java.io.File;
@@ -16,11 +19,11 @@ public class PhotosightImageFileUtils {
 
 	private final static LogHelper log = new LogHelper( PhotosightImageFileUtils.class );
 
-	public static void prepareUserGenreFolders( final PhotosightUser photosightUser, final List<PhotosightPhoto> photosightPhotos ) throws IOException {
+	public static void prepareUserGenreFolders( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
 
-		for ( final PhotosightPhoto photosightPhoto : photosightPhotos ) {
-			final File userFolder = getUserFolderForPhotoDownloading( photosightUser );
-			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategory() );
+		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
+			final File userFolder = getUserFolderForPhotoDownloading( remotePhotoSiteUser );
+			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 
 			final File userGenrePath = new File( userFolder, genreDiscEntry.getName() );
 			if ( ! userGenrePath.exists() ) {
@@ -29,36 +32,36 @@ public class PhotosightImageFileUtils {
 		}
 	}
 
-	public static ImageDiscEntry downloadPhotoOnDisk( final PhotosightPhoto photosightPhoto, final String imageContent ) throws IOException {
+	public static ImageDiscEntry downloadPhotoOnDisk( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 
 		if ( imageContent == null ) {
 			return null;
 		}
 
-		final ImageDiscEntry imageDiscEntry = getImageFile( photosightPhoto, imageContent );
+		final ImageDiscEntry imageDiscEntry = getImageFile( remotePhotoSitePhoto, imageContent );
 
-		log.debug( String.format( "Photo %s has been saved on disc: %s", photosightPhoto, imageDiscEntry.getImageFile().getCanonicalPath() ) );
+		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, imageDiscEntry.getImageFile().getCanonicalPath() ) );
 
 		return imageDiscEntry;
 	}
 
-	private static ImageDiscEntry getImageFile( final PhotosightPhoto photosightPhoto, final String imageContent ) throws IOException {
-		final PhotosightCategory category = photosightPhoto.getPhotosightCategory();
+	private static ImageDiscEntry getImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+		final RemotePhotoSiteCategory category = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
 		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( category );
 
-		final File imageFile = getPhotosightPhotoLocalImageFile( photosightPhoto );
+		final File imageFile = getPhotosightPhotoLocalImageFile( remotePhotoSitePhoto );
 
 		PhotosightXmlUtils.writeImageContentToFile( imageFile, imageContent, "ISO-8859-1" );
 
 		return new ImageDiscEntry( imageFile, genreDiscEntry );
 	}
 
-	public static File getPhotosightPhotoLocalImageFile( final PhotosightPhoto photosightPhoto ) throws IOException {
-		final String imageFileName = getPhotosightPhotoFileName( photosightPhoto.getPhotoId() );
+	public static File getPhotosightPhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
+		final String imageFileName = getPhotosightPhotoFileName( remotePhotoSitePhoto.getPhotoId() );
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( photosightPhoto.getPhotosightCategory() );
-		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( photosightPhoto.getPhotosightUser() );
+		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
 		final File imageFolder = new File( userFolderForPhotoDownloading, genreDiscEntry.getName() );
 		return new File( imageFolder, imageFileName );
 	}
@@ -67,20 +70,20 @@ public class PhotosightImageFileUtils {
 		return String.format( "%d.jpg", photoId );
 	}
 
-	public static GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
+	public static GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		for ( final PhotosightCategoryToGenreMapping photoCategoryMapping : PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING ) {
-			if ( photoCategoryMapping.getPhotosightCategory() == photosightCategory ) {
+			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
 				return photoCategoryMapping.getGenreDiscEntry();
 			}
 		}
 
-		log.warn( String.format( "Photosight category %s does not mach any genre", photosightCategory ) );
+		log.warn( String.format( "Photosight category %s does not mach any genre", remotePhotoSiteCategory ) );
 
 		return GenreDiscEntry.OTHER;
 	}
 
-	public static File getUserFolderForPhotoDownloading( final PhotosightUser photosightUser ) throws IOException {
-		final String userFolderName = String.format( "%s", photosightUser.getId() );
+	public static File getUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+		final String userFolderName = String.format( "%s", remotePhotoSiteUser.getId() );
 		return new File( getPhotoStorage().getPath(), userFolderName );
 	}
 
@@ -99,8 +102,8 @@ public class PhotosightImageFileUtils {
 		return file;
 	}
 
-	public static void createUserFolderForPhotoDownloading( final PhotosightUser photosightUser ) throws IOException {
-		final File userFolder = getUserFolderForPhotoDownloading( photosightUser );
+	public static void createUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+		final File userFolder = getUserFolderForPhotoDownloading( remotePhotoSiteUser );
 		if ( ! userFolder.exists() ) {
 			userFolder.mkdirs();
 		}
