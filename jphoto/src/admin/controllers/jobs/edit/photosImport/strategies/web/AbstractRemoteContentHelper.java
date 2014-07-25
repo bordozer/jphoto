@@ -46,6 +46,7 @@ public abstract class AbstractRemoteContentHelper {
 	public abstract String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId );
 
 	public String getImageContentFromUrl( final String cardUrl ) {
+
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final String uri = String.format( "http://%s", cardUrl );
