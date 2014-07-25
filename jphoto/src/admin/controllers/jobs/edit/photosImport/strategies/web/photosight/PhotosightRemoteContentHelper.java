@@ -25,12 +25,6 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		final String photosightUserId = remotePhotoSiteUser.getId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( remotePhotoSiteUser.getName() ), photosightUserId );
-	}
-
-	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId ) {
 		return getUserCardUrl( remotePhotoSiteUserId, 0 );
 	}
@@ -38,6 +32,12 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int page ) {
 		return String.format( "%s/?pager=%d", getUserCardPageUrl( remotePhotoSiteUserId ), page );
+	}
+
+	@Override
+	public String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+		final String photosightUserId = remotePhotoSiteUser.getId();
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )", getUserCardUrl( photosightUserId, 1 ), StringUtilities.unescapeHtml( remotePhotoSiteUser.getName() ), photosightUserId );
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getUserPageContent( final int pageNumber, final String remotePhotoSiteUserId ) {
-		return getContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
+		return getRemotePageContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
-		return getContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
+		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
 	}
 
 	@Override
@@ -86,7 +86,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	protected void setCookie( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
+	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
 		final CookieStore cookieStore = new BasicCookieStore();
 
 		final BasicClientCookie cookieIsDisabledNude = getCookie( String.format( "is_disabled_nude_profile_%s", remotePhotoSiteUserId ), "1" );

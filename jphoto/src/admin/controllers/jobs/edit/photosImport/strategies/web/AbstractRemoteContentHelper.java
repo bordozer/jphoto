@@ -24,11 +24,11 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract PhotosImportSource getPhotosImportSource();
 
-	public abstract String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser );
-
 	public abstract String getUserCardUrl( final String remotePhotoSiteUserId );
 
 	public abstract String getUserCardUrl( final String remotePhotoSiteUserId, int page );
+
+	public abstract String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser );
 
 	public abstract String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser );
 
@@ -46,15 +46,13 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
 
-	protected abstract void setCookie( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId );
-
 	protected abstract BasicClientCookie getCookie( final String cookieName, final String remotePhotoSiteUserId );
 
-	public String getImageContentFromUrl( final String cardUrl ) {
+	public String getImageContentFromUrl( final String imageUrl ) {
 
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
-		final String uri = String.format( "http://%s", cardUrl );
+		final String uri = String.format( "http://%s", imageUrl );
 
 		log.debug( String.format( "Getting content: %s", uri ) );
 
@@ -64,7 +62,7 @@ public abstract class AbstractRemoteContentHelper {
 			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
 			return httpClient.execute( httpGet, responseHandler ); // -XX:-LoopUnswitching
 		} catch ( final IOException e ) {
-			log.error( String.format( "Can not get image content: '%s'", cardUrl ), e );
+			log.error( String.format( "Can not get image content: '%s'", imageUrl ), e );
 		} finally {
 			httpClient.getConnectionManager().shutdown();
 		}
@@ -72,11 +70,11 @@ public abstract class AbstractRemoteContentHelper {
 		return null;
 	}
 
-	protected String getContent( final String userId, final String pageUrl ) {
+	protected String getRemotePageContent( final String userId, final String pageUrl ) {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final HttpGet httpGet = new HttpGet( pageUrl );
-		setCookie( httpClient, userId );
+		addNecessaryCookies( httpClient, userId );
 
 		try {
 			final ResponseHandler<String> responseHandler = new BasicResponseHandler();
@@ -88,6 +86,10 @@ public abstract class AbstractRemoteContentHelper {
 		}
 
 		return null;
+	}
+
+	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
+
 	}
 
 	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
