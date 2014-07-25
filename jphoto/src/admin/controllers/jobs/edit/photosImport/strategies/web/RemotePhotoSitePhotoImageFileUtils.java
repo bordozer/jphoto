@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemotePhotoSiteCategoryToGenreMapping;
 import core.log.LogHelper;
 
 import java.io.File;
@@ -75,7 +75,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 	}
 
 	public static GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		for ( final PhotosightCategoryToGenreMapping photoCategoryMapping : PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING ) {
+		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoryToGenreMapping.getRemotePhotoSiteCategoryToGenreMapping() ) {
 			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
 				return photoCategoryMapping.getGenreDiscEntry();
 			}

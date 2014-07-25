@@ -6,7 +6,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.RemotePhotoSiteCategoryToGenreMapping;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
@@ -163,9 +163,9 @@ public class PhotosImportController extends DateRangableController {
 	}
 
 	private Genre getGenreByPhotosightCategory( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		final List<PhotosightCategoryToGenreMapping> genreMapping = PhotosightCategoryToGenreMapping.PHOTOSIGHT_CATEGORY_TO_GENRE_MAPPING;
+		final List<RemotePhotoSiteCategoryToGenreMapping> genreMapping = RemotePhotoSiteCategoryToGenreMapping.getRemotePhotoSiteCategoryToGenreMapping();
 
-		for ( final PhotosightCategoryToGenreMapping entry : genreMapping ) {
+		for ( final RemotePhotoSiteCategoryToGenreMapping entry : genreMapping ) {
 			if ( entry.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
 				final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
 				return genreService.loadIdByName( genreDiscEntry.getName() );
