@@ -30,13 +30,22 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getPhotoCardUrl( int remotePhotoSitePhotoId );
 
-	public abstract String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto );
-
-	public abstract String getPhotoCardLink( final int remotePhotoSitePhotoId );
-
 	public abstract String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
 
 	protected abstract PhotosightContentDataExtractor getPhotosightContentDataExtractor();
+
+	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
+	}
+
+	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
+
+		switch ( importSource ) {
+			case PHOTOSIGHT:
+				return new PhotosightRemoteContentHelper();
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );
+	}
 
 	public String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
 
@@ -47,7 +56,11 @@ public abstract class AbstractRemoteContentHelper {
 		);
 	}
 
-	public String getUserName( final String remotePhotoSiteUserId ) {
+	public String getUserCardUrl( final String remotePhotoSiteUserId ) {
+		return getUserCardUrl( remotePhotoSiteUserId, 0 );
+	}
+
+	public String extractUserNameFromRemoteSite( final String remotePhotoSiteUserId ) {
 		final String userPageContent = getUserPageContent( 1, remotePhotoSiteUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
@@ -55,12 +68,21 @@ public abstract class AbstractRemoteContentHelper {
 		return getPhotosightContentDataExtractor().extractPhotosightUserName( userPageContent );
 	}
 
-	public String getUserCardUrl( final String remotePhotoSiteUserId ) {
-		return getUserCardUrl( remotePhotoSiteUserId, 0 );
+	public String extractUserNameFromRemoteSite( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+		return extractUserNameFromRemoteSite( remotePhotoSiteUser.getId() );
 	}
 
-	public String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		return getUserName( remotePhotoSiteUser.getId() );
+	public String getPhotoCardLink( final int remotePhotoSitePhotoId ) {
+		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
+	}
+
+	public String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
+
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
+			, getPhotoCardUrl( remotePhotoSitePhoto.getPhotoId() )
+			, StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() )
+			, remotePhotoSitePhoto.getPhotoId()
+		);
 	}
 
 	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
@@ -70,6 +92,14 @@ public abstract class AbstractRemoteContentHelper {
 			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() )
 			, language )
 		);
+	}
+
+	public String getUserPageContent( final int pageNumber, final String remotePhotoSiteUserId ) {
+		return getRemotePageContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
+	}
+
+	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
+		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
 	}
 
 	public String getImageContentFromUrl( final String imageUrl ) {
@@ -94,15 +124,8 @@ public abstract class AbstractRemoteContentHelper {
 		return null;
 	}
 
-	public String getUserPageContent( final int pageNumber, final String remotePhotoSiteUserId ) {
-		return getRemotePageContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
-	}
+	private  String getRemotePageContent( final String remotePhotoSiteUserId, final String pageUrl ) {
 
-	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
-		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
-	}
-
-	protected String getRemotePageContent( final String remotePhotoSiteUserId, final String pageUrl ) {
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		final HttpGet httpGet = new HttpGet( pageUrl );
@@ -118,19 +141,5 @@ public abstract class AbstractRemoteContentHelper {
 		}
 
 		return null;
-	}
-
-	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
-
-	}
-
-	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
-
-		switch ( importSource ) {
-			case PHOTOSIGHT:
-				return new PhotosightRemoteContentHelper();
-		}
-
-		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );
 	}
 }

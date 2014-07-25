@@ -33,17 +33,6 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
-		final int photosightPhotoId = remotePhotoSitePhoto.getPhotoId();
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )", getPhotoCardUrl( photosightPhotoId ), StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() ), photosightPhotoId );
-	}
-
-	@Override
-	public String getPhotoCardLink( final int remotePhotoSitePhotoId ) {
-		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
-	}
-
-	@Override
 	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		return String.format( "http://www.%s/%s/category/%d/", PhotosImportSource.PHOTOSIGHT.getUrl(), "photos", remotePhotoSiteCategory.getId() );
 	}

@@ -346,7 +346,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private String getUserName( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
-		final String remotePhotoSiteUserName = importParameters.getRemoteContentHelper().getUserName( remotePhotoSiteUser );
+		final String remotePhotoSiteUserName = importParameters.getRemoteContentHelper().extractUserNameFromRemoteSite( remotePhotoSiteUser );
 
 		if ( StringUtils.isEmpty( remotePhotoSiteUserName ) ) {
 			final String message = String.format( "Can not extract a name of a remote photo site user #%s from a page content. Photos import of the user will be skipped.", importParameters.getRemoteContentHelper().getUserCardLink( remotePhotoSiteUser ) );

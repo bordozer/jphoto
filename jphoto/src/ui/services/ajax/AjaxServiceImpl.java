@@ -124,7 +124,7 @@ public class AjaxServiceImpl implements AjaxService {
 		final PhotosImportSource importSource = PhotosImportSource.getById( _importSourceId );
 
 		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
-		final String remoteUserName = remoteContentHelper.getUserName( userId );
+		final String remoteUserName = remoteContentHelper.extractUserNameFromRemoteSite( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 
 		remotePhotoSiteUserDTO.setRemoteUserName( remoteUserName );
