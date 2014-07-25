@@ -44,12 +44,10 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 	private static final String XML_FILE_PHOTO_UPLOAD_TIME_FORMAT = "EEE MMM d HH:mm:ss Z yyyy";
 
-	private final PhotosImportSource photosImportSource;
-	private final File remotePhotoSitesCachePath;
+	private final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils;
 
 	public RemotePhotoSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath ) {
-		this.photosImportSource = photosImportSource;
-		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
+		this.remotePhotoSitePhotoImageFileUtils = new RemotePhotoSitePhotoImageFileUtils( photosImportSource, remotePhotoSitesCachePath );
 	}
 
 	public void createUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
@@ -100,7 +98,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			final Element photoElement = rootElement.addElement( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotoId() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotosightCategory().getId() ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ).getName() );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ).getName() );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getImageUrl() );
@@ -186,7 +184,11 @@ public class RemotePhotoSiteCacheXmlUtils {
 	}
 
 	public File getUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		return new File( new RemotePhotoSitePhotoImageFileUtils( photosImportSource, remotePhotoSitesCachePath ).getUserFolderForPhotoDownloading( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
+		return new File( getRemotePhotoSitePhotoImageFileUtils().getUserFolderForPhotoDownloading( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
+	}
+
+	private RemotePhotoSitePhotoImageFileUtils getRemotePhotoSitePhotoImageFileUtils() {
+		return remotePhotoSitePhotoImageFileUtils;
 	}
 
 	private static String getUserInfoFileName( final RemotePhotoSiteUser remotePhotoSiteUser ) {

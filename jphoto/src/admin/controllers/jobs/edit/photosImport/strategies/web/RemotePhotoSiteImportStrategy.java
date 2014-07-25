@@ -44,11 +44,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
 
 	private final Date firstPhotoUploadTime;
+	private final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils;
+	private final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils;
 
 	public RemotePhotoSiteImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
 		super( job, services, new LogHelper( RemotePhotoSiteImportStrategy.class ), parameters.getLanguage() );
 
 		importParameters = ( RemoteSitePhotosImportParameters ) parameters;
+
+		remotePhotoSitePhotoImageFileUtils = new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
 
 		firstPhotoUploadTime = getServices().getJobHelperService().getFirstPhotoUploadTime();
 	}
@@ -312,7 +317,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ) );
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
 		}
 
@@ -432,7 +437,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final PhotosightCategory photosightCategory = remotePhotoSitePhoto.getPhotosightCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( photosightCategory );
+			final GenreDiscEntry genreDiscEntry = getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( photosightCategory );
 			final String siteUrl = importParameters.getRemoteContentHelper().getRemotePhotoSiteHost();
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
@@ -522,7 +527,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			.string( remoteContentHelper.getRemotePhotoSiteHost() )
 			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
-			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage() ) )
+			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -700,11 +705,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private RemotePhotoSitePhotoImageFileUtils getRemotePhotoSitePhotoImageFileUtils() {
-		return new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+		return remotePhotoSitePhotoImageFileUtils;
 	}
 
 	private RemotePhotoSiteCacheXmlUtils getRemotePhotoSiteCacheXmlUtils() {
-		return new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+		return remotePhotoSiteCacheXmlUtils;
 	}
 
 	private AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSitePageContentDataExtractor() {

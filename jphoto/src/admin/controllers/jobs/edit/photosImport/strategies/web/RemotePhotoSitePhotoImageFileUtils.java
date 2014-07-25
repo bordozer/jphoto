@@ -70,8 +70,8 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		return String.format( "%d.jpg", photoId );
 	}
 
-	public static GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
-		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoryToGenreMapping.getRemotePhotoSiteCategoryToGenreMapping() ) {
+	public GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
+		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( photosImportSource ).getMapping() ) {
 			if ( photoCategoryMapping.getPhotosightCategory() == photosightCategory ) {
 				return photoCategoryMapping.getGenreDiscEntry();
 			}

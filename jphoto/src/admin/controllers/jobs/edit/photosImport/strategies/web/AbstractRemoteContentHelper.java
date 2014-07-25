@@ -90,11 +90,11 @@ public abstract class AbstractRemoteContentHelper {
 		);
 	}
 
-	public String getPhotoCategoryLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
+	public String getPhotoCategoryLink( final PhotosightCategory photosightCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language, final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils ) {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
 			, getPhotoCategoryUrl( photosightCategory )
 			, photosightCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() )
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( remotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( photosightCategory ).getName() )
 			, language )
 		);
 	}

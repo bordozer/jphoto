@@ -1,8 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import utils.NumberUtils;
 
-public enum PhotosightCategory {
+public enum PhotosightCategory implements RemotePhotoSiteCategory {
 
 	NUDE( 15, "Nude" )
 	, GLAMOUR( 18, "Glamour" )
