@@ -4,18 +4,18 @@
 
 define( [ 'jquery' ], function ( $ ) {
 
-	var photosightUserModel = function () {
+	var remoteUserModel = function () {
 
-		var photosightUsersIds = [];
-		var photosightUserInfoDivSelector = "#photosightUserInfoDiv";
+		var remoteUsersIds = [];
+		var remoteUserInfoDivSelector = "#photosightUserInfoDiv";
 
-		function resetPhotosightUser( photosightUserId ) {
-			photosightUsersIds = [];
+		function resetRemoteUser() {
+			remoteUsersIds = [];
 		}
 
-		function registerPhotosightUser( photosightUserId ) {
+		function registerRemoteUser( photosightUserId ) {
 			if ( !isPhotosightUserRegistered( photosightUserId ) ) {
-				photosightUsersIds.push( photosightUserId );
+				remoteUsersIds.push( photosightUserId );
 			}
 		}
 
@@ -24,8 +24,8 @@ define( [ 'jquery' ], function ( $ ) {
 		}
 
 		function findPhotosightUser( photosightUserId ) {
-			for ( var index = 0; index < photosightUsersIds.length; index++ ) {
-				var entry = photosightUsersIds[ index ];
+			for ( var index = 0; index < remoteUsersIds.length; index++ ) {
+				var entry = remoteUsersIds[ index ];
 				if ( entry == photosightUserId ) {
 					return entry;
 				}
@@ -33,24 +33,24 @@ define( [ 'jquery' ], function ( $ ) {
 			return null;
 		}
 
-		function getPhotosightUsersIds( _photosightUserIds ) {
-			var arr = _photosightUserIds.split( ',' );
-			var photosightUserIds = [];
+		function getremoteUsersIds( _remoteUserIds ) {
+			var arr = _remoteUserIds.split( ',' );
+			var remoteUserIds = [];
 			for ( var i = 0; i < arr.length; i++ ) {
-				photosightUserIds.push( arr[i].trim() );
+				remoteUserIds.push( arr[i].trim() );
 			}
-			return photosightUserIds;
+			return remoteUserIds;
 		}
 
 		function getRemoteUserInfoDiv() {
-			return $( photosightUserInfoDivSelector );
+			return $( remoteUserInfoDivSelector );
 		}
 
 		function showRemoteUserInfoDiv() {
 			getRemoteUserInfoDiv().show();
 		}
 
-		function hidePhotosightUserInfoDiv() {
+		function hideRemoteUserInfoDiv() {
 			getRemoteUserInfoDiv().hide();
 		}
 
@@ -58,68 +58,68 @@ define( [ 'jquery' ], function ( $ ) {
 			getRemoteUserInfoDiv().html( '' );
 		}
 
-		function renderExistingPhotosightUser( remoteUserDTO ) {
+		function renderExistingRemotetUser( remoteUserDTO ) {
 
-			var photosightUserName = remoteUserDTO.photosightUserName;
-			var photosightUserCardUrl = remoteUserDTO.photosightUserCardUrl;
+			var remoteUserName = remoteUserDTO.photosightUserName;
+			var remoteUserCardUrl = remoteUserDTO.photosightUserCardUrl;
 
 			var div = getRemoteUserInfoDiv();
-			div.append( "#" + remoteUserDTO.photosightUserId + ": <a href=\"" + photosightUserCardUrl + "\" target=\"_blank\">" + photosightUserName + "</a>" + ", " + remoteUserDTO.photosightUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
+			div.append( "#" + remoteUserDTO.photosightUserId + ": <a href=\"" + remoteUserCardUrl + "\" target=\"_blank\">" + remoteUserName + "</a>" + ", " + remoteUserDTO.photosightUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
 
 			if ( remoteUserDTO.photosightUserExistsInTheSystem ) {
 				div.append( ' ( ' + remoteUserDTO.userCardLink + ", <a href='" + remoteUserDTO.userPhotosUrl + "'>" + remoteUserDTO.photosCount + " ${eco:translate('ROD PLURAL photos')}</a> )" );
 			}
 		}
 
-		function renderNotExistingPhotosightUser( remoteUserId ) {
+		function renderNotExistingRemotetUser( remoteUserId ) {
 			getRemoteUserInfoDiv().append( "#" + remoteUserId + ": <span class='newInsertedComment'>${eco:translate('Remote web site import -> user info: User not found')}</span>" );
 		}
 
 		return {
 
-			registerPhotosightUsers: function ( _photosightUserIds, photosImportSourceId ) {
+			registerRemoteUsers: function ( _remoteUserIds ) {
 
-				resetPhotosightUser();
+				resetRemoteUser();
 
-				var ids = _photosightUserIds.trim();
+				var ids = _remoteUserIds.trim();
 
 				if ( ids == '' ) {
-					hidePhotosightUserInfoDiv();
+					hideRemoteUserInfoDiv();
 					return;
 				}
 
-				var photosightUserIds = getPhotosightUsersIds( ids );
-				for ( var i = 0; i < photosightUserIds.length; i++ ) {
-					registerPhotosightUser( photosightUserIds[i] );
+				var remoteUserIds = getremoteUsersIds( ids );
+				for ( var i = 0; i < remoteUserIds.length; i++ ) {
+					registerRemoteUser( remoteUserIds[i] );
 				}
 			},
 
 			renderRemoteUsers: function ( jsonRPC, photosImportSourceId ) {
-				var photosightUserInfoDiv = $( photosightUserInfoDivSelector );
+				var remoteUserInfoDiv = $( remoteUserInfoDivSelector );
 
 				clearRemoteUserInfoDiv();
 
 				var userGenderId = 0;
 				var userMembershipTypeId = 0;
 
-				for ( var index = 0; index < photosightUsersIds.length; index++ ) {
+				for ( var index = 0; index < remoteUsersIds.length; index++ ) {
 
-					var remoteUserId = photosightUsersIds[ index ];
+					var remoteUserId = remoteUsersIds[ index ];
 
 					console.log( photosImportSourceId );
-					var photosightUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( remoteUserId, photosImportSourceId );
-					if ( photosightUserDTO.photosightUserFound ) {
-						renderExistingPhotosightUser( photosightUserDTO );
+					var remoteUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( remoteUserId, photosImportSourceId );
+					if ( remoteUserDTO.photosightUserFound ) {
+						renderExistingRemotetUser( remoteUserDTO );
 					} else {
-						renderNotExistingPhotosightUser( remoteUserId );
+						renderNotExistingRemotetUser( remoteUserId );
 					}
-					photosightUserInfoDiv.append( '<br />' );
+					remoteUserInfoDiv.append( '<br />' );
 
 					showRemoteUserInfoDiv();
 
-					if ( photosightUserDTO.photosightUserExistsInTheSystem ) {
-						userGenderId = photosightUserDTO.userGender.id;
-						userMembershipTypeId = photosightUserDTO.userMembershipType.id;
+					if ( remoteUserDTO.photosightUserExistsInTheSystem ) {
+						userGenderId = remoteUserDTO.userGender.id;
+						userMembershipTypeId = remoteUserDTO.userMembershipType.id;
 					}
 				}
 
@@ -131,8 +131,8 @@ define( [ 'jquery' ], function ( $ ) {
 	return {
 
 		renderRemoteUserInfo: function ( _remoteUsersIds, photosImportSourceId, jsonRPC ) {
-			photosightUserModel.registerPhotosightUsers( _remoteUsersIds );
-			return photosightUserModel.renderRemoteUsers( jsonRPC, photosImportSourceId );
+			remoteUserModel.registerRemoteUsers( _remoteUsersIds );
+			return remoteUserModel.renderRemoteUsers( jsonRPC, photosImportSourceId );
 		}
 	};
 } );
