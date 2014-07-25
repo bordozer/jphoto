@@ -107,7 +107,7 @@ define( [ 'jquery' ], function ( $ ) {
 					var remoteUserId = remoteUsersIds[ index ];
 
 					console.log( photosImportSourceId );
-					var remoteUserDTO = jsonRPC.ajaxService.getPhotosightUserDTO( remoteUserId, photosImportSourceId );
+					var remoteUserDTO = jsonRPC.ajaxService.getRemoteUserDTO( remoteUserId, photosImportSourceId );
 					if ( remoteUserDTO.photosightUserFound ) {
 						renderExistingRemotetUser( remoteUserDTO );
 					} else {
