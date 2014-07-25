@@ -178,13 +178,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Can not get photosight photo image content: '$1'</nerd>
-		<ru><![CDATA[Ошибка получения фотографии с photosight.ru: '$1'.]]></ru>
+		<nerd>Can not get remote photo site image content: '$1'</nerd>
+		<ru><![CDATA[Ошибка получения контента картинки с удаленного фото сайта: '$1']]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Can not extract a name of a remote photo site user #$1 from page content. Photos import of the user will be skipped.</nerd>
+		<ru><![CDATA[Невозможно получить имя пользователя ( #$1 ) удаленного фото сайта из контекста страницы. Импорт работ пользователя выполнен не будет.]]></ru>
 	</translation>
 
 	<translation>

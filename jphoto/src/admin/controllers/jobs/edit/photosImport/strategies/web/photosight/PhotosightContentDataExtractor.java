@@ -25,7 +25,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public int extractPhotosightPhotoId( final String group ) {
+	public int extractRemotePhotoSitePhotoId( final String group ) {
 		return NumberUtils.convertToInt( group );
 	}
 

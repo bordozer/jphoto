@@ -35,20 +35,16 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		}
 	}
 
-	public ImageDiscEntry downloadPhotoOnDisk( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	public ImageDiscEntry createRemotePhotoSiteDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 
-		if ( imageContent == null ) {
-			return null;
-		}
-
-		final ImageDiscEntry imageDiscEntry = getImageFile( remotePhotoSitePhoto, imageContent );
+		final ImageDiscEntry imageDiscEntry = writeImageContentOnDiskAndReturnDiskEntry( remotePhotoSitePhoto, imageContent );
 
 		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, imageDiscEntry.getImageFile().getCanonicalPath() ) );
 
 		return imageDiscEntry;
 	}
 
-	private ImageDiscEntry getImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	private ImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 		final RemotePhotoSiteCategory category = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
 		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( category );

@@ -11,7 +11,7 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public abstract String extractImageUrl( int photosightPhotoId, String photoPageContent );
 
-	public abstract int extractPhotosightPhotoId( String group );
+	public abstract int extractRemotePhotoSitePhotoId( String group );
 
 	public abstract String extractImageUrlByNewRules( int photosightPhotoId, String photoPageContent );
 
