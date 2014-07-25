@@ -58,7 +58,7 @@ define( [ 'jquery' ], function ( $ ) {
 			getRemoteUserInfoDiv().html( '' );
 		}
 
-		function renderExistingRemotetUser( remoteUserDTO ) {
+		function renderExistingRemoteUser( remoteUserDTO ) {
 
 			var remoteUserName = remoteUserDTO.remoteUserName;
 			var remoteUserCardUrl = remoteUserDTO.remoteUserCardUrl;
@@ -108,7 +108,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 					var remoteUserDTO = jsonRPC.ajaxService.getRemoteUserDTO( remoteUserId, photosImportSourceId );
 					if ( remoteUserDTO.remoteUserFound ) {
-						renderExistingRemotetUser( remoteUserDTO );
+						renderExistingRemoteUser( remoteUserDTO );
 					} else {
 						renderNotExistingRemotetUser( remoteUserId );
 					}

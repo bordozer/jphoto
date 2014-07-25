@@ -109,6 +109,17 @@ public class RemotePhotoSitePhotoImageFileUtils {
 	}
 
 	public File getPhotoStorage() {
-		return new File( String.format( "%s/%s", remotePhotoSitesCachePath.getPath(), photosImportSource.getLocalStorageFolder() ) );
+
+		if ( ! remotePhotoSitesCachePath.exists() ) {
+			remotePhotoSitesCachePath.mkdir();
+		}
+
+		final File remotePhotoSiteCacheFolder = new File( String.format( "%s/%s", remotePhotoSitesCachePath.getPath(), photosImportSource.getLocalStorageFolder() ) );
+
+		if ( ! remotePhotoSiteCacheFolder.exists() ) {
+			remotePhotoSiteCacheFolder.mkdir();
+		}
+
+		return remotePhotoSiteCacheFolder;
 	}
 }
