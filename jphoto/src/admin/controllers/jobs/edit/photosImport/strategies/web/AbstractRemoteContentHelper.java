@@ -10,7 +10,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 import java.io.IOException;
 
@@ -44,9 +43,14 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
 
-	public abstract String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, Language language );
-
-	protected abstract BasicClientCookie getCookie( final String cookieName, final String remotePhotoSiteUserId );
+	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
+		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
+			, getPhotoCategoryUrl( remotePhotoSiteCategory )
+			, remotePhotoSiteCategory.getName()
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() )
+			, language )
+		);
+	}
 
 	public String getImageContentFromUrl( final String imageUrl ) {
 

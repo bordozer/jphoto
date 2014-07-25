@@ -81,25 +81,19 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language ) {
-		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )", getPhotoCategoryUrl( remotePhotoSiteCategory ), remotePhotoSiteCategory.getName(), entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( RemotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() ), language ) );
-	}
-
-	@Override
 	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
 		final CookieStore cookieStore = new BasicCookieStore();
 
-		final BasicClientCookie cookieIsDisabledNude = getCookie( String.format( "is_disabled_nude_profile_%s", remotePhotoSiteUserId ), "1" );
+		final BasicClientCookie cookieIsDisabledNude = getRemoteUserCardCookie( String.format( "is_disabled_nude_profile_%s", remotePhotoSiteUserId ), "1" );
 		cookieStore.addCookie( cookieIsDisabledNude );
 
-		final BasicClientCookie cookieShowNude = getCookie( "show_nude", "1" );
+		final BasicClientCookie cookieShowNude = getRemoteUserCardCookie( "show_nude", "1" );
 		cookieStore.addCookie( cookieShowNude );
 
 		httpClient.setCookieStore( cookieStore );
 	}
 
-	@Override
-	protected BasicClientCookie getCookie( final String cookieName, final String remotePhotoSiteUserId ) {
+	private BasicClientCookie getRemoteUserCardCookie( final String cookieName, final String remotePhotoSiteUserId ) {
 		final BasicClientCookie cookie = new BasicClientCookie( cookieName, remotePhotoSiteUserId );
 		cookie.setVersion( 0 );
 		cookie.setDomain( String.format( "www.%s", PhotosImportSource.PHOTOSIGHT.getUrl() ) );
