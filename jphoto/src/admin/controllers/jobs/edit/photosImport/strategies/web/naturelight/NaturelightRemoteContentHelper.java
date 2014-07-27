@@ -21,7 +21,7 @@ public class NaturelightRemoteContentHelper extends AbstractRemoteContentHelper 
 
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
-		return String.format( "http://%s/author/%s.html", getRemotePhotoSiteHost(), remotePhotoSiteUserId );
+		return String.format( "http://%s/author/%s/page%d.html", getRemotePhotoSiteHost(), remotePhotoSiteUserId, pageNumber );
 	}
 
 	@Override
