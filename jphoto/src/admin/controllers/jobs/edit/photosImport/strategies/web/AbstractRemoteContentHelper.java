@@ -12,6 +12,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import utils.StringUtilities;
 
 import java.io.IOException;
@@ -151,5 +152,18 @@ public abstract class AbstractRemoteContentHelper {
 		}
 
 		return null;
+	}
+
+	protected BasicClientCookie getRemoteUserCardCookie( final String cookieName, final String remotePhotoSiteUserId ) {
+		return getRemoteUserCardCookie( "/", cookieName, remotePhotoSiteUserId );
+	}
+
+	protected BasicClientCookie getRemoteUserCardCookie( final String path, final String cookieName, final String remotePhotoSiteUserId ) {
+		final BasicClientCookie cookie = new BasicClientCookie( cookieName, remotePhotoSiteUserId );
+		cookie.setVersion( 0 );
+		cookie.setDomain( String.format( "www.%s", getRemotePhotoSiteHost() ) );
+		cookie.setPath( path );
+
+		return cookie;
 	}
 }

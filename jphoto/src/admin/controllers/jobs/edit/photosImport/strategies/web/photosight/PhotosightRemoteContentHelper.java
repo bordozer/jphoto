@@ -54,12 +54,4 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 		return photosightContentDataExtractor;
 	}
 
-	private BasicClientCookie getRemoteUserCardCookie( final String cookieName, final String remotePhotoSiteUserId ) {
-		final BasicClientCookie cookie = new BasicClientCookie( cookieName, remotePhotoSiteUserId );
-		cookie.setVersion( 0 );
-		cookie.setDomain( String.format( "www.%s", getRemotePhotoSiteHost() ) );
-		cookie.setPath( "/" );
-
-		return cookie;
-	}
 }

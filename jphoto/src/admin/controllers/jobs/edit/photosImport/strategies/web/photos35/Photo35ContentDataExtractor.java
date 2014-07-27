@@ -37,7 +37,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
-			return String.format( "http://%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), matcher.group( 2 ),  remotePhotoSitePhotoId );
+			return String.format( "%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), matcher.group( 2 ),  remotePhotoSitePhotoId );
 		}
 
 		return null;
@@ -54,7 +54,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 		while ( matcher.find() ) {
 			final String series = matcher.group( 1 );
 			final String photoId = matcher.group( 2 );
-			result.add( String.format( "http://%s/photos_series/%s/%s.jpg", getHost(), series, photoId ) );
+			result.add( String.format( "%s/photos_series/%s/%s.jpg", getHost(), series, photoId ) );
 		}
 
 		return result;

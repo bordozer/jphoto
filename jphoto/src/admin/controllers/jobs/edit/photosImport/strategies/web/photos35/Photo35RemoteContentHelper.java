@@ -5,6 +5,10 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteCon
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.log.LogHelper;
+import org.apache.http.client.CookieStore;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
 public class Photo35RemoteContentHelper extends AbstractRemoteContentHelper {
 
@@ -37,5 +41,16 @@ public class Photo35RemoteContentHelper extends AbstractRemoteContentHelper {
 	@Override
 	protected AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSiteContentDataExtractor() {
 		return photosightContentDataExtractor;
+	}
+
+	@Override
+	protected void addNecessaryCookies( final DefaultHttpClient httpClient, final String remotePhotoSiteUserId ) {
+		final CookieStore cookieStore = new BasicCookieStore();
+
+		cookieStore.addCookie( getRemoteUserCardCookie( "nude", "true" ) );
+		cookieStore.addCookie( getRemoteUserCardCookie( "user_lang", "en" ) );
+//		cookieStore.addCookie( getRemoteUserCardCookie( String.format( "%s.%s", remotePhotoSiteUserId, getPhotosImportSource().getUrl() ), "PHPSESSID", "666" ) );
+
+		httpClient.setCookieStore( cookieStore );
 	}
 }
