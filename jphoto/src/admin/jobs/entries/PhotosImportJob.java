@@ -135,14 +135,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES ).getValueListInt(), new Function<Integer, RemotePhotoSiteCategory>() {
 					@Override
 					public RemotePhotoSiteCategory apply( final Integer id ) {
-						switch ( importSource ) {
-							case PHOTOSIGHT:
-								return PhotosightCategory.getById( id );
-							case PHOTO35:
-								return Photo35Category.getById( id );
-						}
-
-						throw new IllegalArgumentException( String.format( "Unsupported photos import source: %s", importSource ) );
+						return RemotePhotoSiteCategory.getById( importSource, id );
 					}
 				} );
 

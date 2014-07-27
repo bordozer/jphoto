@@ -134,7 +134,7 @@ public class AjaxServiceImpl implements AjaxService {
 		remotePhotoSiteUserDTO.setRemoteUserFound( photosightUserFound );
 
 		if ( photosightUserFound ) {
-			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( AbstractRemotePhotoSitePageContentDataExtractor.getInstance( importSource ).extractPhotosightUserPhotosCount( _remoteUserId ) );
+			remotePhotoSiteUserDTO.setRemoteUserPhotosCount( AbstractRemotePhotoSitePageContentDataExtractor.getInstance( importSource ).extractRemotePhotoSiteUserPhotosCount( _remoteUserId ) );
 		}
 
 		final String userLogin = RemotePhotoSiteImportStrategy.createLoginForRemotePhotoSiteUser( userId );

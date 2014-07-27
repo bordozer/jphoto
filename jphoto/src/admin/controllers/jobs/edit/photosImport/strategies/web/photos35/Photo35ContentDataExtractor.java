@@ -7,7 +7,7 @@ import java.util.List;
 public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public String extractImageUrl( final int photosightPhotoId, final String photoPageContent ) {
+	public String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		return null;
 	}
 
@@ -17,12 +17,12 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 	}
 
 	@Override
-	public String extractImageUrlByNewRules( final int photosightPhotoId, final String photoPageContent ) {
+	public String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		return null;
 	}
 
 	@Override
-	public String extractImageUrlByOldRules( final int photosightPhotoId, final String photoPageContent ) {
+	public String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		return null;
 	}
 
@@ -32,17 +32,17 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 	}
 
 	@Override
-	public String extractPhotosightUserName( final String userPageContent ) {
+	public String extractRemotePhotoSiteUserName( final String userPageContent ) {
 		return null;
 	}
 
 	@Override
-	public int extractPhotosightUserPhotosCount( final String photosightUserId ) {
+	public int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId ) {
 		return 0;
 	}
 
 	@Override
-	public int getTotalPagesQty( final String userCardContent, final String photosightUserId ) {
+	public int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId ) {
 		return 0;
 	}
 

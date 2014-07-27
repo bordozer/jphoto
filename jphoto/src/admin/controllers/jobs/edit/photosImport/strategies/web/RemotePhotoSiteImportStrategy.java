@@ -210,7 +210,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		CollectionUtils.filter( remotePhotoSitePagePhotos, new Predicate<RemotePhotoSitePhoto>() {
 			@Override
 			public boolean evaluate( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
-				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoSitePhoto.getPhotosightCategory() );
+				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 			}
 		} );
 	}
@@ -317,7 +317,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getPhotosightCategory() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
 		}
 
@@ -434,7 +434,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			imageToImport.setUser( localUser );
 			imageToImport.setName( remotePhotoSitePhoto.getName() );
 
-			final PhotosightCategory photosightCategory = remotePhotoSitePhoto.getPhotosightCategory();
+			final RemotePhotoSiteCategory photosightCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
 			final GenreDiscEntry genreDiscEntry = getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( photosightCategory );
@@ -527,7 +527,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			.string( remoteContentHelper.getRemotePhotoSiteHost() )
 			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
-			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getPhotosightCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
+			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 

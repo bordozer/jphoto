@@ -9,7 +9,7 @@ public class RemotePhotoSitePhoto {
 
 	private final RemotePhotoSiteUser remotePhotoSiteUser;
 	private final int photoId;
-	private final PhotosightCategory photosightCategory;
+	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private String name;
 	private Date uploadTime;
 	private String imageUrl;
@@ -18,10 +18,10 @@ public class RemotePhotoSitePhoto {
 
 	private boolean isCached;
 
-	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final PhotosightCategory photosightCategory ) {
+	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final PhotosightCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
 		this.photoId = photoId;
-		this.photosightCategory = photosightCategory;
+		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 	}
 
 	public RemotePhotoSiteUser getRemotePhotoSiteUser() {
@@ -32,8 +32,8 @@ public class RemotePhotoSitePhoto {
 		return photoId;
 	}
 
-	public PhotosightCategory getPhotosightCategory() {
-		return photosightCategory;
+	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
+		return remotePhotoSiteCategory;
 	}
 
 	public String getName() {

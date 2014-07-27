@@ -16,12 +16,12 @@ import static com.google.common.collect.Lists.newArrayList;
 public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public String extractImageUrl( final int photosightPhotoId, final String photoPageContent ) {
-		final String imageUrlNew = extractImageUrlByNewRules( photosightPhotoId, photoPageContent );
+	public String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+		final String imageUrlNew = extractImageUrlByNewRules( remotePhotoSitePhotoId, photoPageContent );
 		if ( StringUtils.isNotEmpty( imageUrlNew ) ) {
 			return imageUrlNew;
 		}
-		return extractImageUrlByOldRules( photosightPhotoId, photoPageContent );
+		return extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent );
 	}
 
 	@Override
@@ -30,32 +30,32 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public String extractImageUrlByNewRules( final int photosightPhotoId, final String photoPageContent ) {
+	public String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		// <img src="http://icon.s.photosight.ru/img/8/f4f/3725335_large.jpeg"
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), photosightPhotoId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, photosightPhotoId, extension );
+			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
 		}
 
 		return null;
 	}
 
 	@Override
-	public String extractImageUrlByOldRules( final int photosightPhotoId, final String photoPageContent ) {
+	public String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		//<img src="http://img-2007-09.photosight.ru/24/2318529.jpg" alt="
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), photosightPhotoId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, photosightPhotoId, extension );
+			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
 		}
 
 		return null;
@@ -67,7 +67,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public String extractPhotosightUserName( final String userPageContent ) {
+	public String extractRemotePhotoSiteUserName( final String userPageContent ) {
 		final Pattern pattern = Pattern.compile(  "<div class=\"usertitle\">(.+?)<h1>(.+?)</h1>" );
 		final Matcher matcher = pattern.matcher( userPageContent );
 
@@ -80,10 +80,10 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public int extractPhotosightUserPhotosCount( final String photosightUserId ) {
-		final String userPageContent = new PhotosightRemoteContentHelper().getUserPageContent( 1, photosightUserId );
+	public int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId ) {
+		final String userPageContent = new PhotosightRemoteContentHelper().getUserPageContent( 1, remotePhotoSiteUserId );
 		// <a href="/users/344981/" class="uploaded current"><div>196</div>
-		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/users/%s/\" class=\"uploaded current\">\\s+<div>(.+?)</div>", photosightUserId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/users/%s/\" class=\"uploaded current\">\\s+<div>(.+?)</div>", remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		if ( matcher.find() ) {
@@ -95,9 +95,9 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public int getTotalPagesQty( final String userCardContent, final String photosightUserId ) {
+	public int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId ) {
 		// <a class="" href="/users/316896/?pager=8">8</a>
-		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%s/\\?pager=(.+?)\">", photosightUserId ) );
+		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%s/\\?pager=(.+?)\">", remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userCardContent );
 
 		int result = 1;

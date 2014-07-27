@@ -10,27 +10,27 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public static final String NO_PHOTO_NAME = "-no name-";
 
-	public abstract String extractImageUrl( int photosightPhotoId, String photoPageContent );
+	public abstract String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent );
 
-	public abstract int extractRemotePhotoSitePhotoId( String group );
+	public abstract int extractRemotePhotoSitePhotoId( final String group );
 
-	public abstract String extractImageUrlByNewRules( int photosightPhotoId, String photoPageContent );
+	public abstract String extractImageUrlByNewRules( int remotePhotoSitePhotoId, final String photoPageContent );
 
-	public abstract String extractImageUrlByOldRules( int photosightPhotoId, String photoPageContent );
+	public abstract String extractImageUrlByOldRules( int remotePhotoSitePhotoId, final String photoPageContent );
 
 	public abstract String getPhotoIdRegex();
 
-	public abstract String extractPhotosightUserName( String userPageContent );
+	public abstract String extractRemotePhotoSiteUserName( final String userPageContent );
 
-	public abstract int extractPhotosightUserPhotosCount( String photosightUserId );
+	public abstract int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId );
 
-	public abstract int getTotalPagesQty( String userCardContent, String photosightUserId );
+	public abstract int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId );
 
-	public abstract int extractPhotoCategoryId( String photoPageContent );
+	public abstract int extractPhotoCategoryId( final String photoPageContent );
 
-	public abstract String extractPhotoName( String photoPageContent );
+	public abstract String extractPhotoName( final String photoPageContent );
 
-	public abstract List<String> extractComments( String photoPageContent );
+	public abstract List<String> extractComments( final String photoPageContent );
 
 	public static AbstractRemotePhotoSitePageContentDataExtractor getInstance( final PhotosImportSource photosImportSource ) {
 

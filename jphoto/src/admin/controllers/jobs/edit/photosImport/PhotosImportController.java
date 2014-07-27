@@ -133,7 +133,7 @@ public class PhotosImportController extends DateRangableController {
 	@Override
 	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
 
-		final boolean nudeContentByDefault = configurationService.getBoolean( ConfigurationKey.ADMIN_PHOTOSIGHT_IMPORT_JOB_IMPORT_NUDE_CONTENT );
+		final boolean nudeContentByDefault = configurationService.getBoolean( ConfigurationKey.ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT );
 
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
 

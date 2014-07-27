@@ -10,7 +10,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 
 public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
-	private final PhotosightContentDataExtractor photosightContentDataExtractor = new PhotosightContentDataExtractor();
+	private final AbstractRemotePhotoSitePageContentDataExtractor photosightContentDataExtractor = new PhotosightContentDataExtractor();
 
 	public PhotosightRemoteContentHelper() {
 		super( new LogHelper( PhotosightRemoteContentHelper.class ) );
@@ -32,8 +32,8 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCategoryUrl( final PhotosightCategory photosightCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", photosightCategory.getId() );
+	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSiteCategory.getId() );
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	protected PhotosightContentDataExtractor getPhotosightContentDataExtractor() {
+	protected AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSiteContentDataExtractor() {
 		return photosightContentDataExtractor;
 	}
 
