@@ -58,7 +58,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
-				validatePhotosightUserIds( model.getPhotosightUserId(), errors );
+				validatePhotosightUserIds( model.getRemotePhotoSiteUserIds(), errors );
 
 				validatePhotoSightCategories( model, errors );
 
@@ -74,7 +74,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 	}
 
 	private void validatePhotoSightCategories( final PhotosImportModel model, final Errors errors ) {
-		final List<String> photosightCategories = model.getPhotosightCategories();
+		final List<String> photosightCategories = model.getRemotePhotoSiteCategories();
 		if ( photosightCategories == null || photosightCategories.isEmpty() ) {
 			errors.rejectValue( PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL, translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage()
 				, FormatUtils.getFormattedFieldName( "Photosight category" ) ) );

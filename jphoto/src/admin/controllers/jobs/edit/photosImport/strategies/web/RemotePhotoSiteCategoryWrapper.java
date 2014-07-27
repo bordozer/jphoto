@@ -1,17 +1,15 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
-
 public class RemotePhotoSiteCategoryWrapper {
 
-	private final PhotosightCategory photosightCategory;
+	private final RemotePhotoSiteCategory photosightCategory;
 	private String cssClasses;
 
-	public RemotePhotoSiteCategoryWrapper( final PhotosightCategory photosightCategory ) {
+	public RemotePhotoSiteCategoryWrapper( final RemotePhotoSiteCategory photosightCategory ) {
 		this.photosightCategory = photosightCategory;
 	}
 
-	public PhotosightCategory getPhotosightCategory() {
+	public RemotePhotoSiteCategory getPhotosightCategory() {
 		return photosightCategory;
 	}
 

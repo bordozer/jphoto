@@ -72,7 +72,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 
 	public GenreDiscEntry getGenreDiscEntry( final PhotosightCategory photosightCategory ) {
 		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( photosImportSource ).getMapping() ) {
-			if ( photoCategoryMapping.getPhotosightCategory() == photosightCategory ) {
+			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == photosightCategory ) {
 				return photoCategoryMapping.getGenreDiscEntry();
 			}
 		}

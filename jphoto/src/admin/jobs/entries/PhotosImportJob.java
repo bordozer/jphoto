@@ -7,15 +7,10 @@ import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhoto
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35ContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35RemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
@@ -151,25 +146,8 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					}
 				} );
 
-				final AbstractRemoteContentHelper remoteContentHelper;
-				final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor;
-
-				switch ( importSource ) {
-					case PHOTOSIGHT:
-						remoteContentHelper = new PhotosightRemoteContentHelper();
-						remotePhotoSitePageContentDataExtractor = new PhotosightContentDataExtractor();
-						break;
-					case PHOTO35:
-						remoteContentHelper = new Photo35RemoteContentHelper();
-						remotePhotoSitePageContentDataExtractor = new Photo35ContentDataExtractor();
-						break;
-					default:
-						throw new IllegalArgumentException( String.format( "Unsupported photos import source: %s", importSource ) );
-				}
-
-
-				importParameters = new RemoteSitePhotosImportParameters( remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequest, pageQty
-					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, remotePhotoSiteCategories, remoteContentHelper, remotePhotoSitePageContentDataExtractor );
+				importParameters = new RemoteSitePhotosImportParameters( importSource, remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequest, pageQty
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, remotePhotoSiteCategories );
 
 				break;
 			default:

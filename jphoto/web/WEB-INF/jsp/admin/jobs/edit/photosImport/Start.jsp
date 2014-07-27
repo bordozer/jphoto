@@ -21,14 +21,14 @@
 <c:set var="deletePictureAfterImportControl" value="<%=PhotosImportModel.DELETE_PICTURE_AFTER_IMPORT_CONTROL%>"/>
 <c:set var="userIdControl" value="<%=PhotosImportModel.USER_ID_FORM_CONTROL%>"/>
 
-<c:set var="photosightUserIdControl" value="<%=PhotosImportModel.FORM_CONTROL_PHOTOSIGHT_USER_ID%>"/>
+<c:set var="remotePhotoSiteUserIdsControl" value="<%=PhotosImportModel.FORM_CONTROL_PHOTOSIGHT_USER_ID%>"/>
 <c:set var="userNameControl" value="<%=PhotosImportModel.FORM_CONTROL_USER_NAME%>"/>
 <c:set var="userGenderIdControl" value="<%=PhotosImportModel.USER_GENDER_ID_FORM_CONTROL%>"/>
 <c:set var="userMembershipIdControl" value="<%=PhotosImportModel.USER_MEMBERSHIP_ID_FORM_CONTROL%>"/>
 <c:set var="pageQtyControl" value="<%=PhotosImportModel.ACTIONS_QTY_FORM_CONTROL%>"/>
 <c:set var="importCommentsControl" value="<%=PhotosImportModel.IMPORT_COMMENTS_FORM_CONTROL%>"/>
 <c:set var="breakImportIfAlreadyImportedPhotoFoundControl" value="<%=PhotosImportModel.BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND_FORM_CONTROL%>"/>
-<c:set var="photosightCategoriesControl" value="<%=PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL%>"/>
+<c:set var="remotePhotoSiteCategoriesControl" value="<%=PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL%>"/>
 <c:set var="delayBetweenRequestControl" value="<%=PhotosImportModel.DELAY_BETWEEN_REQUEST_FORM_CONTROL%>"/>
 
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
@@ -159,7 +159,7 @@
 									<table:tr>
 										<table:tdtext text_t="Photo import job JSP: Photosight user ids" isMandatory="true"/>
 										<table:td>
-											<form:input path="${photosightUserIdControl}" size="60" onchange="renderRemoteUserInfo();"/>
+											<form:input path="${remotePhotoSiteUserIdsControl}" size="60" onchange="renderRemoteUserInfo();"/>
 											<br/>
 											${eco:translate("Photo import job JSP: Use ',' as separator")}
 											<div id="photosightUserInfoDiv" class="floatleft" style="display: none;"></div>
@@ -168,9 +168,9 @@
 
 									<table:tr>
 										<table:td colspan="2" >
-											<js:checkboxMassChecker checkboxClass="photosight-category-nude" initiallyChecked="${photosImportModel.photosightImport_importNudeContentByDefault}" /> ${eco:translate('Photo import job JSP: Nude categories')}
+											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-nude" initiallyChecked="${photosImportModel.remotePhotoSiteImport_importNudeContentByDefault}" /> ${eco:translate('Photo import job JSP: Nude categories')}
 											&nbsp;&nbsp;
-											<js:checkboxMassChecker checkboxClass="photosight-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
+											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
 										</table:td>
 									</table:tr>
 
@@ -179,7 +179,7 @@
 											<%--<div style="float: left; width: 100%; height: 80px;">--%>
 												<c:forEach var="checkbox" items="${remotePhotoSiteCategoryWrapper}">
 													<div style="display: inline-block; width: 120px;">
-														<form:checkbox path="${photosightCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
+														<form:checkbox path="${remotePhotoSiteCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
 													</div>
 												</c:forEach>
 											<%--</div>--%>
@@ -281,7 +281,7 @@
 
 		function renderRemoteUserInfo() {
 			require( [ '/admin/js/photosight.js' ], function( photosight ) {
-				var usedIdsControl = $( "#${photosightUserIdControl}" );
+				var usedIdsControl = $( "#${remotePhotoSiteUserIdsControl}" );
 				if ( usedIdsControl.val().trim() != '' ) {
 					var photosImportSourceId = $( "[name='${importSourceIdControl}']:checked" ).val();
 					var data = photosight.renderRemoteUserInfo( usedIdsControl.val(), photosImportSourceId, jsonRPC );

@@ -4,18 +4,18 @@ import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 
 public class RemotePhotoSiteCategoryToGenreMapping {
 
-	private final RemotePhotoSiteCategory photosightCategory;
+	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 
 	private final GenreDiscEntry genreDiscEntry;
 
 
-	public RemotePhotoSiteCategoryToGenreMapping( final RemotePhotoSiteCategory photosightCategory, final GenreDiscEntry genreDiscEntry ) {
-		this.photosightCategory = photosightCategory;
+	public RemotePhotoSiteCategoryToGenreMapping( final RemotePhotoSiteCategory remotePhotoSiteCategory, final GenreDiscEntry genreDiscEntry ) {
+		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 		this.genreDiscEntry = genreDiscEntry;
 	}
 
-	public RemotePhotoSiteCategory getPhotosightCategory() {
-		return photosightCategory;
+	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
+		return remotePhotoSiteCategory;
 	}
 
 	public GenreDiscEntry getGenreDiscEntry() {
@@ -24,6 +24,6 @@ public class RemotePhotoSiteCategoryToGenreMapping {
 
 	@Override
 	public String toString() {
-		return String.format( "%s => %s", photosightCategory, genreDiscEntry.getName() );
+		return String.format( "%s => %s", remotePhotoSiteCategory, genreDiscEntry.getName() );
 	}
 }

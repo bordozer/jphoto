@@ -29,17 +29,17 @@ public class PhotosImportModel extends DateRangableModel {
 	// file system import fields<--
 
 	// photosight import fields -->
-	public final static String FORM_CONTROL_PHOTOSIGHT_USER_ID = "photosightUserId";
+	public final static String FORM_CONTROL_PHOTOSIGHT_USER_ID = "remotePhotoSiteUserIds";
 	public final static String FORM_CONTROL_USER_NAME = "userName";
 	public final static String ACTIONS_QTY_FORM_CONTROL = "pageQty";
 	public final static String USER_GENDER_ID_FORM_CONTROL = "userGenderId";
 	public final static String USER_MEMBERSHIP_ID_FORM_CONTROL = "userMembershipId";
 	public final static String IMPORT_COMMENTS_FORM_CONTROL = "importComments";
 	public final static String BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND_FORM_CONTROL = "breakImportIfAlreadyImportedPhotoFound";
-	public static final String PHOTOSIGHT_CATEGORIES_FORM_CONTROL = "photosightCategories";
+	public static final String PHOTOSIGHT_CATEGORIES_FORM_CONTROL = "remotePhotoSiteCategories";
 
 	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
-	private String photosightUserId;
+	private String remotePhotoSiteUserIds;
 
 	private String pageQty;
 	private String userGenderId;
@@ -47,7 +47,7 @@ public class PhotosImportModel extends DateRangableModel {
 	private boolean importComments;
 	private boolean breakImportIfAlreadyImportedPhotoFound;
 	private String delayBetweenRequest;
-	private List<String> photosightCategories;
+	private List<String> remotePhotoSiteCategories;
 
 	// photosight import fields <--
 	private boolean deletePictureFromDiskAfterImport;
@@ -58,7 +58,7 @@ public class PhotosImportModel extends DateRangableModel {
 	private GenericTranslatableList<UserGender> userGenderTranslatableList;
 	private GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList;
 
-	private boolean photosightImport_importNudeContentByDefault;
+	private boolean remotePhotoSiteImport_importNudeContentByDefault;
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -108,12 +108,12 @@ public class PhotosImportModel extends DateRangableModel {
 		this.assignAllGeneratedPhotosToUser = assignAllGeneratedPhotosToUser;
 	}
 
-	public String getPhotosightUserId() {
-		return photosightUserId;
+	public String getRemotePhotoSiteUserIds() {
+		return remotePhotoSiteUserIds;
 	}
 
-	public void setPhotosightUserId( final String photosightUserId ) {
-		this.photosightUserId = photosightUserId;
+	public void setRemotePhotoSiteUserIds( final String remotePhotoSiteUserIds ) {
+		this.remotePhotoSiteUserIds = remotePhotoSiteUserIds;
 	}
 
 	public String getPageQty() {
@@ -172,12 +172,12 @@ public class PhotosImportModel extends DateRangableModel {
 		this.deletePictureFromDiskAfterImport = deletePictureFromDiskAfterImport;
 	}
 
-	public List<String> getPhotosightCategories() {
-		return photosightCategories;
+	public List<String> getRemotePhotoSiteCategories() {
+		return remotePhotoSiteCategories;
 	}
 
-	public void setPhotosightCategories( final List<String> photosightCategories ) {
-		this.photosightCategories = photosightCategories;
+	public void setRemotePhotoSiteCategories( final List<String> remotePhotoSiteCategories ) {
+		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
 	}
 
 	public void setRemotePhotoSiteCategoryWrappers( final List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers ) {
@@ -221,11 +221,11 @@ public class PhotosImportModel extends DateRangableModel {
 		return photosImportSourceTranslatableList;
 	}
 
-	public boolean isPhotosightImport_importNudeContentByDefault() {
-		return photosightImport_importNudeContentByDefault;
+	public boolean isRemotePhotoSiteImport_importNudeContentByDefault() {
+		return remotePhotoSiteImport_importNudeContentByDefault;
 	}
 
-	public void setPhotosightImport_importNudeContentByDefault( final boolean photosightImport_importNudeContentByDefault ) {
-		this.photosightImport_importNudeContentByDefault = photosightImport_importNudeContentByDefault;
+	public void setRemotePhotoSiteImport_importNudeContentByDefault( final boolean remotePhotoSiteImport_importNudeContentByDefault ) {
+		this.remotePhotoSiteImport_importNudeContentByDefault = remotePhotoSiteImport_importNudeContentByDefault;
 	}
 }

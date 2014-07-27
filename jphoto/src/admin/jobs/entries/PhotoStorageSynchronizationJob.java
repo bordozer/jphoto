@@ -9,8 +9,6 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCa
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhotoImageFileUtils;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
 import admin.services.jobs.JobExecutionHistoryEntry;
@@ -40,8 +38,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 		final List<RemotePhotoSiteCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
 
-		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters(
-			usersIds
+		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters( PhotosImportSource.PHOTOSIGHT, usersIds
 			, UserGender.MALE
 			, UserMembershipType.AUTHOR
 			, true
@@ -49,8 +46,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 			, 0
 			, getLanguage()
 			, true
-			, photosightCategories
-			, new PhotosightRemoteContentHelper(), new PhotosightContentDataExtractor() ); // TODO: send this as parameter selected on UI
+			, photosightCategories ); // TODO: send this as parameter selected on UI
 
 		final AbstractPhotoImportStrategy importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 
