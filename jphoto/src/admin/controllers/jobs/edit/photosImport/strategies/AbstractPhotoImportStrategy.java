@@ -124,14 +124,12 @@ public abstract class AbstractPhotoImportStrategy {
 
 		photoToImport.setPhoto( photo );
 
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
+		job.addJobRuntimeLogMessage( new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
 			.addIntegerParameter( photo.getId() )
 			.addPhotoCardLinkParameter( photo )
 			.addUserCardLinkParameter( user )
 			.addPhotosByGenreLinkParameter( genre )
-			;
-
-		job.addJobRuntimeLogMessage( translatableMessage );
+		);
 
 		log.debug( String.format( "Photo %s is generated for user %s", photo.getNameEscaped(), user.getNameEscaped() ) );
 	}

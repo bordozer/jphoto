@@ -497,6 +497,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
 		final String series = imageUrls.size() == 0 ? "" : String.format( "Series #%d", services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
+		int counter = 1;
 
 		for ( final String imageUrl : imageUrls ) {
 
@@ -506,7 +507,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				job.addJobRuntimeLogMessage( translatableMessage );
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
-			remotePhotoSitePhoto.setName( remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ) );
+			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ), counter ) );
 
 			final Date uploadTime = importParameters.getRemotePhotoSitePageContentDataExtractor().extractPhotoUploadTime( photoPageContent, services );
 			if ( uploadTime != null ) {
@@ -541,6 +542,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			job.addJobRuntimeLogMessage( translatableMessage2 );
 
 			result.add( remotePhotoSitePhoto );
+
+			counter++;
 		}
 
 		return result;

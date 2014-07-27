@@ -97,7 +97,7 @@ public class RemotePhotoSitePhoto {
 
 	@Override
 	public String toString() {
-		return String.format( "Photosight photo #%d", photoId );
+		return String.format( "Photosight photo #%d ( %s )", photoId, name );
 	}
 
 	@Override
