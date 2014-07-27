@@ -175,6 +175,8 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 			case PHOTO35:
 				final RemoteSitePhotosImportParameters remoteSitePhotosImportParameters = ( RemoteSitePhotosImportParameters ) importParameters;
 
+				builder.append( translatorService.translate( "Photo import job parameter: remote site", getLanguage() ) ).append( ": " ).append( translatorService.translate( importSource.getName(), getLanguage() ) ).append( "<br />" );
+
 				final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
 
 				final List<String> remotePhotoSiteUserIds = Lists.transform( remoteSitePhotosImportParameters.getRemoteUserIds(), new Function<String, String>() {
