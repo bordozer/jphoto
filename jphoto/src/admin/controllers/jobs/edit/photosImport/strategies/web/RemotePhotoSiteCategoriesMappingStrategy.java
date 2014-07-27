@@ -78,7 +78,7 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.ANIMALS, GenreDiscEntry.ANIMALS ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COLLAGE, GenreDiscEntry.DIGITAL_ART ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.STILL_LIFE, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.STILL_LIFE, GenreDiscEntry.STILL ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTICA, GenreDiscEntry.NUDE ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.OTHER, GenreDiscEntry.OTHER ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
