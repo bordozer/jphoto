@@ -184,7 +184,7 @@
 
 	<translation>
 		<nerd>$1: can not get upload time from remote photo page. Random time is used.</nerd>
-		<ru><![CDATA[$1: время комментария определить не удалось. Будет использовано случайное.]]></ru>
+		<ru><![CDATA[$1: время загрузки работы определить не удалось. Будет использовано случайное.]]></ru>
 	</translation>
 
 	<translation>
@@ -193,8 +193,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Remote photo site site photos import: Importing image '$1'</nerd>
+		<ru><![CDATA[Импортируется фотография '$1']]></ru>
 	</translation>
 
 	<translation>

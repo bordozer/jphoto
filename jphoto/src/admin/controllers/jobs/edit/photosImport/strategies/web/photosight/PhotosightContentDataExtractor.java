@@ -3,10 +3,13 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import core.exceptions.BaseRuntimeException;
+import core.services.system.Services;
+import core.services.utils.DateUtilsService;
 import org.apache.commons.lang.StringUtils;
 import utils.NumberUtils;
 import utils.StringUtilities;
 
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -148,5 +151,49 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	@Override
 	protected String getHost() {
 		return PhotosImportSource.PHOTOSIGHT.getUrl();
+	}
+
+	@Override
+	public Date extractPhotoUploadTime( final String photoPageContent, final Services services ) {
+		final Pattern pattern = Pattern.compile( "\\d{2}\\.\\d{2}\\.\\d{4}\\s\\d{2}\\:\\d{2}" );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		if ( matcher.find() ) {
+			final String uploadDateTime = matcher.group();
+
+			if ( StringUtils.isEmpty( uploadDateTime )) {
+				return null;
+			}
+
+			final String[] dateAndTime = uploadDateTime.split( "\\s" );
+
+			if ( dateAndTime.length < 2) {
+				return null;
+			}
+
+			return services.getDateUtilsService().parseDateTime( dateAndTime[0], dateAndTime[1], "dd.MM.yyyy HH:mm" );
+		}
+
+		return extractUploadTodayTime( photoPageContent, services );
+	}
+
+	private Date extractUploadTodayTime( final String photoPageContent, final Services services ) {
+		final Pattern pattern = Pattern.compile( "\\s\\d{2}\\:\\d{2}(\\s*?)</b>" );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		if ( matcher.find() ) {
+			final String uploadDateTime = matcher.group();
+
+			if ( StringUtils.isEmpty( uploadDateTime )) {
+				return null;
+			}
+
+			final String time = uploadDateTime.substring( 0, uploadDateTime.length() -4 ).trim();
+
+			final DateUtilsService dateUtilsService = services.getDateUtilsService();
+			return dateUtilsService.parseDateTime( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ), String.format( "%s:00", time ) );
+		}
+
+		return null;
 	}
 }

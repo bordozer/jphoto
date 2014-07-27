@@ -2,9 +2,11 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photos35;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import core.services.system.Services;
 import utils.NumberUtils;
 import utils.StringUtilities;
 
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -129,5 +131,11 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 	@Override
 	protected String getHost() {
 		return PhotosImportSource.PHOTO35.getUrl();
+	}
+
+	@Override
+	public Date extractPhotoUploadTime( final String photoPageContent, final Services services ) {
+		// <div class="transperent60" style="font-size:11px;margin-top:5px;float:right">uploaded 15 ???, 2014</div>
+		return null;
 	}
 }

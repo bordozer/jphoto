@@ -500,19 +500,24 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final String imageUrl : imageUrls ) {
 
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Remote photo site site photos import: Importing image '$1'", services )
+					.string( imageUrl )
+					;
+				job.addJobRuntimeLogMessage( translatableMessage );
+
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
 			remotePhotoSitePhoto.setName( remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ) );
 
-			final Date uploadTime = extractUploadTime( photoPageContent );
+			final Date uploadTime = importParameters.getRemotePhotoSitePageContentDataExtractor().extractPhotoUploadTime( photoPageContent, services );
 			if ( uploadTime != null ) {
 				remotePhotoSitePhoto.setUploadTime( uploadTime );
 			} else {
 				remotePhotoSitePhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
+				final TranslatableMessage translatableMessage1 = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
 					.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 					;
-				job.addJobRuntimeLogMessage( translatableMessage );
+				job.addJobRuntimeLogMessage( translatableMessage1 );
 			}
 
 			remotePhotoSitePhoto.setImageUrl( imageUrl );
@@ -527,13 +532,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
+			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 				.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
 				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
 				;
-			job.addJobRuntimeLogMessage( translatableMessage );
+			job.addJobRuntimeLogMessage( translatableMessage2 );
 
 			result.add( remotePhotoSitePhoto );
 		}
@@ -669,49 +674,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		job.addJobRuntimeLogMessage( translatableMessage );
 
 		return user;
-	}
-
-	private Date extractUploadTime( final String photoPageContent ) {
-		final Pattern pattern = Pattern.compile( "\\d{2}\\.\\d{2}\\.\\d{4}\\s\\d{2}\\:\\d{2}" );
-		final Matcher matcher = pattern.matcher( photoPageContent );
-
-		if ( matcher.find() ) {
-			final String uploadDateTime = matcher.group();
-
-			if ( StringUtils.isEmpty( uploadDateTime )) {
-				return null;
-			}
-
-			final String[] dateAndTime = uploadDateTime.split( "\\s" );
-
-			if ( dateAndTime.length < 2) {
-				return null;
-			}
-
-			return services.getDateUtilsService().parseDateTime( dateAndTime[0], dateAndTime[1], "dd.MM.yyyy HH:mm" );
-		}
-
-		return extractUploadTodayTime( photoPageContent );
-	}
-
-	private Date extractUploadTodayTime( final String photoPageContent ) {
-		final Pattern pattern = Pattern.compile( "\\s\\d{2}\\:\\d{2}(\\s*?)</b>" );
-		final Matcher matcher = pattern.matcher( photoPageContent );
-
-		if ( matcher.find() ) {
-			final String uploadDateTime = matcher.group();
-
-			if ( StringUtils.isEmpty( uploadDateTime )) {
-				return null;
-			}
-
-			final String time = uploadDateTime.substring( 0, uploadDateTime.length() -4 ).trim();
-
-			final DateUtilsService dateUtilsService = services.getDateUtilsService();
-			return dateUtilsService.parseDateTime( dateUtilsService.formatDate( dateUtilsService.getCurrentDate() ), String.format( "%s:00", time ) );
-		}
-
-		return null;
 	}
 
 	private class RemotePhotoSitePhotosFromPageToImport {

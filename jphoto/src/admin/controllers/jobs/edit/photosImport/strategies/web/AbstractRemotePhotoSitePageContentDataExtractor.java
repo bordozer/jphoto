@@ -3,7 +3,9 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35ContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
+import core.services.system.Services;
 
+import java.util.Date;
 import java.util.List;
 
 public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
@@ -25,6 +27,8 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 	public abstract String extractPhotoName( final String photoPageContent );
 
 	public abstract List<String> extractComments( final String photoPageContent );
+
+	public abstract Date extractPhotoUploadTime( final String photoPageContent, final Services services );
 
 	protected abstract String getHost();
 
