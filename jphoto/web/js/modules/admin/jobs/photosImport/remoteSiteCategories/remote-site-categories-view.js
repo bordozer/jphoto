@@ -6,14 +6,19 @@ define( ["backbone", "jquery", "underscore"
 	var RemoteSiteCategoriesView = Backbone.View.extend( {
 
 		initialize: function() {
+			this.$el.html( '' );
+
 			this.listenTo( this.model, "add", this.render );
-			this.model.fetch( {cache: false} );
+			this.model.fetch( { cache: false } );
 		},
 
 		render: function ( category ) {
-//			var container = $( "<div style='display: inline-block; width: 120px;'></div>" );
-			var el = $( "<input type='checkbox' value='" + category.get( 'remotePhotoSiteCategoryId' ) + "'> " + category.get( 'remotePhotoSiteCategoryName' ) );
-			this.$el.append( el );
+			var container = $( "<div style='display: inline-block; width: 200px;'></div>" );
+
+			container.append( "<input checked='" + ( category.get( 'checked' ) ? 'checked' : '' ) + "' type='checkbox' value='" + category.get( 'remotePhotoSiteCategoryId' ) + "'>" );
+			container.append( category.get( 'remotePhotoSiteCategoryName' ) );
+
+			this.$el.append( container );
 		}
 	} );
 

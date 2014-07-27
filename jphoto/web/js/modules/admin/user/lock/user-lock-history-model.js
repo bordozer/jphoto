@@ -9,7 +9,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: UserLockHistoryEntryModel,
 
 		initialize:function ( options ) {
-			this.url = options.baseUrl + "/json/admin/members/" + options.userId + "/lock/history/";
+			this.url = options.baseUrl + "/rest/admin/members/" + options.userId + "/lock/history/";
 		}
 
 	 } );
