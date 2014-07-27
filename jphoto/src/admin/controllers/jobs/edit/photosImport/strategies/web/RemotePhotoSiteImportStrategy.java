@@ -506,7 +506,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
-		final String series = imageUrls.size() == 0 ? "" : String.format( "Series #%d", services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
+		final String series = imageUrls.size() == 0 ? "" : String.format( "%s #%d", photosightCategory.getName(), services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
 		int numberInSeries = 1;
 
 		for ( final String imageUrl : imageUrls ) {
