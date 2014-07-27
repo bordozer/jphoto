@@ -1,7 +1,6 @@
 package admin.controllers.jobs.edit.photosImport;
 
 import admin.controllers.jobs.edit.DateRangableModel;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryWrapper;
 import core.enums.UserGender;
 import core.general.user.User;
 import org.apache.commons.lang.StringUtils;
@@ -52,13 +51,9 @@ public class PhotosImportModel extends DateRangableModel {
 	// photosight import fields <--
 	private boolean deletePictureFromDiskAfterImport;
 	
-	private List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers;
-
 	private GenericTranslatableList userMembershipTypeTranslatableList;
 	private GenericTranslatableList<UserGender> userGenderTranslatableList;
 	private GenericTranslatableList<PhotosImportSource> photosImportSourceTranslatableList;
-
-	private boolean remotePhotoSiteImport_importNudeContentByDefault;
 
 	public PhotosImportSource getImportSource() {
 		return importSource;
@@ -180,14 +175,6 @@ public class PhotosImportModel extends DateRangableModel {
 		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
 	}
 
-	public void setRemotePhotoSiteCategoryWrappers( final List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers ) {
-		this.remotePhotoSiteCategoryWrappers = remotePhotoSiteCategoryWrappers;
-	}
-
-	public List<RemotePhotoSiteCategoryWrapper> getRemotePhotoSiteCategoryWrappers() {
-		return remotePhotoSiteCategoryWrappers;
-	}
-
 	public void setUserMembershipTypeTranslatableList( final GenericTranslatableList userMembershipTypeTranslatableList ) {
 		this.userMembershipTypeTranslatableList = userMembershipTypeTranslatableList;
 	}
@@ -219,13 +206,5 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public GenericTranslatableList<PhotosImportSource> getPhotosImportSourceTranslatableList() {
 		return photosImportSourceTranslatableList;
-	}
-
-	public boolean isRemotePhotoSiteImport_importNudeContentByDefault() {
-		return remotePhotoSiteImport_importNudeContentByDefault;
-	}
-
-	public void setRemotePhotoSiteImport_importNudeContentByDefault( final boolean remotePhotoSiteImport_importNudeContentByDefault ) {
-		this.remotePhotoSiteImport_importNudeContentByDefault = remotePhotoSiteImport_importNudeContentByDefault;
 	}
 }

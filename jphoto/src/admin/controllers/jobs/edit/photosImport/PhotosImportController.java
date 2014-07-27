@@ -133,75 +133,10 @@ public class PhotosImportController extends DateRangableController {
 	@Override
 	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
 
-		final boolean nudeContentByDefault = configurationService.getBoolean( ConfigurationKey.ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT );
-
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
-
-		final RemotePhotoSiteCategory[] values = RemotePhotoSiteCategory.getRemotePhotoSiteCategories( aModel.getImportSource() );
 
 		aModel.setImportComments( true );
 		aModel.setBreakImportIfAlreadyImportedPhotoFound( true );
-
-		final List<RemotePhotoSiteCategory> categoryList = newArrayList( Arrays.asList( values ) );
-
-		CollectionUtils.filter( categoryList, new Predicate<RemotePhotoSiteCategory>() {
-			@Override
-			public boolean evaluate( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-				return nudeContentByDefault || ! getGenreByByRemotePhotoSiteCategory( remotePhotoSiteCategory, aModel.getImportSource() ).isCanContainNudeContent();
-			}
-		} );
-
-		aModel.setRemotePhotoSiteCategories( Lists.transform( categoryList, new Function<RemotePhotoSiteCategory, String>() {
-			@Override
-			public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-				return String.valueOf( remotePhotoSiteCategory.getId() );
-			}
-		} ) );
-
-		aModel.setRemotePhotoSiteCategoryWrappers( getRemotePhotoSiteCategoriesCheckboxes( aModel.getImportSource() ) );
-		aModel.setRemotePhotoSiteImport_importNudeContentByDefault( nudeContentByDefault );
-	}
-
-	private Genre getGenreByByRemotePhotoSiteCategory( final RemotePhotoSiteCategory remotePhotoSiteCategory, final PhotosImportSource importSource ) {
-		final List<RemotePhotoSiteCategoryToGenreMapping> genreMapping = RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( importSource ).getMapping();
-
-		for ( final RemotePhotoSiteCategoryToGenreMapping entry : genreMapping ) {
-			if ( entry.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
-				final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
-				return genreService.loadIdByName( genreDiscEntry.getName() );
-			}
-		}
-
-		return null;
-	}
-
-	private List<RemotePhotoSiteCategoryWrapper> getRemotePhotoSiteCategoriesCheckboxes( final PhotosImportSource importSource ) {
-
-		final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Arrays.asList( RemotePhotoSiteCategory.getRemotePhotoSiteCategories( importSource ) );
-
-		Collections.sort( remotePhotoSiteCategories, new Comparator<RemotePhotoSiteCategory>() {
-			@Override
-			public int compare( final RemotePhotoSiteCategory category1, final RemotePhotoSiteCategory category2 ) {
-				return category1.getName().compareTo( category2.getName() );
-			}
-		} );
-
-		final List<RemotePhotoSiteCategoryWrapper> remotePhotoSiteCategoryWrappers = newArrayList();
-		for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remotePhotoSiteCategories ) {
-
-			final RemotePhotoSiteCategoryWrapper categoryWrapper = new RemotePhotoSiteCategoryWrapper( remotePhotoSiteCategory );
-
-			final Genre genre = getGenreByByRemotePhotoSiteCategory( remotePhotoSiteCategory, importSource );
-			if ( genre.isCanContainNudeContent() ) {
-				categoryWrapper.addCssClass( "remote-photo-site-category-nude" );
-			} else {
-				categoryWrapper.addCssClass( "remote-photo-site-category-no-nude" );
-			}
-
-			remotePhotoSiteCategoryWrappers.add( categoryWrapper );
-		}
-
-		return remotePhotoSiteCategoryWrappers;
 	}
 
 	@Override
@@ -249,17 +184,17 @@ public class PhotosImportController extends DateRangableController {
 				final int delayBetweenRequests = NumberUtils.convertToInt( aModel.getDelayBetweenRequest() );
 				final int pageQty = NumberUtils.convertToInt( aModel.getPageQty() );
 
-				final List<String> remotePhotoSiteCategories = aModel.getRemotePhotoSiteCategories();
-				final List<RemotePhotoSiteCategory> categoryList = Lists.transform( remotePhotoSiteCategories, new Function<String, RemotePhotoSiteCategory>() {
+				final List<String> reqRemotePhotoSiteCategories = aModel.getRemotePhotoSiteCategories();
+				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Lists.transform( reqRemotePhotoSiteCategories, new Function<String, RemotePhotoSiteCategory>() {
 					@Override
 					public RemotePhotoSiteCategory apply( final String id ) {
 						return RemotePhotoSiteCategory.getById( importSource, NumberUtils.convertToInt( id ) );
 					}
 				} );
-				job.setRemotePhotoSiteCategories( categoryList );
+				job.setRemotePhotoSiteCategories( remotePhotoSiteCategories );
 
 				importParameters = new RemoteSitePhotosImportParameters( importSource, remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequests
-					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList );
+					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), remotePhotoSiteCategories );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

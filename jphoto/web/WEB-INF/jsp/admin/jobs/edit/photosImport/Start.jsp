@@ -35,8 +35,6 @@
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 <c:set var="photo35ImportId" value="<%=PhotosImportSource.PHOTO35.getId()%>"/>
 
-<c:set var="remotePhotoSiteCategoryWrapper" value="<%=photosImportModel.getRemotePhotoSiteCategoryWrappers()%>"/>
-
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
@@ -168,22 +166,17 @@
 									</table:tr>
 
 									<table:tr>
-										<table:td colspan="2" >
-											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-nude" initiallyChecked="${photosImportModel.remotePhotoSiteImport_importNudeContentByDefault}" /> ${eco:translate('Photo import job JSP: Nude categories')}
-											&nbsp;&nbsp;
-											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
-										</table:td>
-									</table:tr>
-
-									<table:tr>
 										<table:td colspan="2">
-											<%--<div style="float: left; width: 100%; height: 80px;">--%>
-												<c:forEach var="checkbox" items="${remotePhotoSiteCategoryWrapper}">
-													<div style="display: inline-block; width: 120px;">
-														<form:checkbox path="${remotePhotoSiteCategoriesControl}" value="${checkbox.photosightCategory.id}" label="${checkbox.photosightCategory.name}" cssClass="${checkbox.cssClasses}" />
-													</div>
-												</c:forEach>
-											<%--</div>--%>
+											<div class="remote-site-categories-container" style="float: left; width: 100%;"></div>
+											<script type="text/javascript">
+
+												function renderRemoteSiteCategories() {
+													require( [ 'jquery', 'modules/admin/jobs/photosImport/remoteSiteCategories/remote-site-categories'], function ( $, func ) {
+														var importSourceId = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
+														func( importSourceId, "${baseUrl}", $( '.remote-site-categories-container' ) );
+													} );
+												}
+											</script>
 										</table:td>
 									</table:tr>
 
@@ -276,6 +269,7 @@
 				if ( type == ${photosightImportId} || type == ${photo35ImportId} ) {
 					$( '#' + '${filesystemImportDivId}' ).hide();
 					$( '#' + '${photosightImportDivId}' ).show();
+					renderRemoteSiteCategories();
 				}
 			} );
 		}
