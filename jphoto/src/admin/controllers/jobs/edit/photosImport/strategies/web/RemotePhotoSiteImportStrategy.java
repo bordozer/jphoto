@@ -148,7 +148,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final List<Integer> remotePhotoSitePagePhotosIds = extractUserPhotosIdsFromPage( userPageContent );
+			final List<Integer> remotePhotoSitePagePhotosIds = extractUserPhotosIdsFromPage( remotePhotoSiteUser.getId(), userPageContent );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -459,15 +459,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return photosToImport;
 	}
 
-	private List<Integer> extractUserPhotosIdsFromPage( final String userPageContent ) {
+	private List<Integer> extractUserPhotosIdsFromPage( final String remotePhotoSiteUserId, final String userPageContent ) {
 		final List<Integer> result = newArrayList();
 
-		final Pattern pattern = Pattern.compile( getRemotePhotoSitePageContentDataExtractor().getPhotoIdRegex() );
+		final Pattern pattern = Pattern.compile( getRemotePhotoSitePageContentDataExtractor().getPhotoIdRegex( remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		while ( matcher.find() && ! job.hasJobFinishedWithAnyResult() ) {
 			result.add( NumberUtils.convertToInt( matcher.group( 1 ) ) );
 		}
+
 		return result;
 	}
 
@@ -481,7 +482,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return null;
 		}
 
-		final String imageUrl = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSitePhotoId, photoPageContent );
+		final String imageUrl = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
 		if ( StringUtils.isEmpty( imageUrl ) ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
 			return null;

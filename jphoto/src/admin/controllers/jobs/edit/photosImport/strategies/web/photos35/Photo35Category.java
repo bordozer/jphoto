@@ -5,11 +5,24 @@ import utils.NumberUtils;
 
 public enum Photo35Category implements RemotePhotoSiteCategory {
 
-	PORTRAIT( 1, "Portrait" )
-	, EROTIC_GLAMOUR( 2, "Erotic, Glamour" )
-	, NATURE( 3, "Nature" )
-	, LANDSCAPES( 4, "Landscapes" )
-	, OTHER( 5, "Other" )
+	GLAMOUR( 97, "Glamour" )
+	, CITY( 101, "City" )
+	, GENRE( 95, "Genre" )
+	, GENRE_PORTRAIT( 114, "Genre portrait" )
+	, ANIMALS( 103, "Animals" )
+	, COLLAGE( 115, "Collage" )
+	, MACRO( 102, "Macro" )
+	, STILL_LIFE( 104, "Still life" )
+	, EROTICA( 98, "Erotica" )
+	, OTHER( 108, "Other" )
+	, LANDSCAPE( 99, "Landscape" )
+	, UNDERWATER( 109, "Underwater" )
+	, PORTRAIT( 96, "Portrait" )
+	, NATURE( 111, "Nature" )
+	, TRAVEL( 110, "Travel" )
+	, COMMERCIAL_PHOTOGRAPHY( 100, "Commercial photography" )
+	, REPORTAGE( 94, "Reportage" )
+	, SPORT( 105, "Sport" )
 	;
 
 	private final int id;

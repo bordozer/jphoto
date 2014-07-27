@@ -71,11 +71,24 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 		return new RemotePhotoSiteCategoriesMappingStrategy() {
 
 			{
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTIC_GLAMOUR, GenreDiscEntry.GLAMOUR ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPES, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.CITY, GenreDiscEntry.CITY ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.ANIMALS, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COLLAGE, GenreDiscEntry.DIGITAL_ART ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.MACRO, GenreDiscEntry.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.STILL_LIFE, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTICA, GenreDiscEntry.NUDE ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.OTHER, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.TRAVEL, GenreDiscEntry.TRAVELLING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.REPORTAGE, GenreDiscEntry.REPORTING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.SPORT, GenreDiscEntry.SPORT ) );
 			}
 		};
 	}

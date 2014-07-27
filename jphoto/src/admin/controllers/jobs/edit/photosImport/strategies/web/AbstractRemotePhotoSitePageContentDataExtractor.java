@@ -10,7 +10,9 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public static final String NO_PHOTO_NAME = "-no name-";
 
-	public abstract String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent );
+	public abstract String extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent );
+
+	public abstract String getPhotoIdRegex( final String remotePhotoSiteUserId );
 
 	public abstract String extractRemotePhotoSiteUserName( final String userPageContent );
 
@@ -24,7 +26,7 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public abstract List<String> extractComments( final String photoPageContent );
 
-	public abstract String getPhotoIdRegex();
+	protected abstract String getHost();
 
 	public static AbstractRemotePhotoSitePageContentDataExtractor getInstance( final PhotosImportSource photosImportSource ) {
 
