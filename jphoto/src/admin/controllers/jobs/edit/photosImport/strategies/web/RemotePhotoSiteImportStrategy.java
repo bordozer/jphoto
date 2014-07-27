@@ -155,16 +155,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			if ( remotePhotoSitePagePhotosIds.size() == 0 ) {
-				final String userCardFileName = getUserCardFileName( remotePhotoSiteUser, page );
+				/*final String userCardFileName = getUserCardFileName( remotePhotoSiteUser, page );
 				final File file = getRemotePhotoSitePhotoImageFileUtils().writePageContentToFile( userCardFileName, userPageContent );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "No photo have been found on page $1. User page content saved. See $2", services )
 					.addIntegerParameter( page )
 					.string( file.getAbsolutePath() )
 					;
-				job.addJobRuntimeLogMessage( translatableMessage );
+				job.addJobRuntimeLogMessage( translatableMessage );*/
 
-				log.info( String.format( "No photo have been found on page %d. User page content saved. See %s", page, file.getCanonicalPath() ) );
+				log.info( String.format( "No photo have been found on page %d.", page ) );
 
 				continue;
 			}

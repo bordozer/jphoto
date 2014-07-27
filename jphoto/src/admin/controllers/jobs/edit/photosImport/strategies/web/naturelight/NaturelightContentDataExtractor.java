@@ -33,7 +33,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 	@Override
 	public String getPhotoIdRegex( final String remotePhotoSiteUserId ) {
 		// <a href="/show_photo/56743.html"><img src="http://naturelight.ru/photo/2014-07-26/pv56743_w320.jpg" title="?????? ? ??????" border="0"/></a>
-		return String.format( "<a href=\"http://%s//show_photo/(.+?).html/", getHost() );
+		return "<a href=\"/show_photo/(.+?).html";
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 
 		String pages = "";
 		while ( matcher.find() ) {
-			pages = matcher.group( 2 );
+			pages = matcher.group( 1 );
 		}
 
 		return NumberUtils.convertToInt( pages );
@@ -82,7 +82,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 	@Override
 	public int extractPhotoCategoryId( final String photoPageContent ) {
 		// <b id="group_value"><a href="/show_group/1.html">?????</a></b><br/>
-		final Pattern pattern = Pattern.compile( "<b id=\"group_value\"><a href=\"/show_group/(.+?).html\">(.+?)</a></b>" );
+		final Pattern pattern = Pattern.compile( "<a href=\"/show_group/(.+?).html\"\\s+>(.+?)</a>" );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
@@ -113,7 +113,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 		// <div class="sp-comment-text"> ?????? ???????)<div class="pad15"><a href="javascript:setAnswerCommentID(271352);" id="answer_button271352" class="answer-link"></div></div>
 		final List<String> result = newArrayList();
 
-		final Pattern pattern = Pattern.compile( "<div class=\"sp-comment-text\">(.+?)<div class=\"pad15\">" );
+		final Pattern pattern = Pattern.compile( "<div class=\"sp-comment-text\">\\s+(.+?)\\s+<div class=\"pad15\">" );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 		while ( matcher.find() ) {
 			result.add( matcher.group( 1 ).trim() );
@@ -130,6 +130,6 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 
 	@Override
 	protected String getHost() {
-		return PhotosImportSource.PHOTO35.getUrl();
+		return PhotosImportSource.NATURELIGHT.getUrl();
 	}
 }
