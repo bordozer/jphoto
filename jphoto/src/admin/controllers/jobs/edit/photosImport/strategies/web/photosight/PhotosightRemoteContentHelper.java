@@ -23,7 +23,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
-		return String.format( "http://www.%s/%s/%s/?pager=%d", getRemotePhotoSiteHost(), "users", remotePhotoSiteUserId, pageNumber );
+		return String.format( "http://www.%s/users/%s/?pager=%d", getRemotePhotoSiteHost(),remotePhotoSiteUserId, pageNumber );
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSiteCategory.getId() );
+		return String.format( "http://www.%s/photos/category/%d/", getRemotePhotoSiteHost(), remotePhotoSiteCategory.getId() );
 	}
 
 	@Override

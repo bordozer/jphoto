@@ -21,17 +21,17 @@ public class Photo35RemoteContentHelper extends AbstractRemoteContentHelper {
 
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
-		return String.format( "http://www.%s/%s/%s/?pager=%d", getRemotePhotoSiteHost(), "users", remotePhotoSiteUserId, pageNumber );
+		return String.format( "http://www.%s.%s/", remotePhotoSiteUserId, getRemotePhotoSiteHost() );
 	}
 
 	@Override
 	public String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
-		return String.format( "http://www.%s/%s/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSitePhotoId );
+		return String.format( "http://%s.%s/photo_%d/", remotePhotoSiteUserId, getRemotePhotoSiteHost(), remotePhotoSitePhotoId );
 	}
 
 	@Override
 	public String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		return String.format( "http://www.%s/%s/category/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSiteCategory.getId() );
+		return String.format( "http://www.%s/rating/photo_day/cat%d/", getRemotePhotoSiteHost(), remotePhotoSiteCategory.getId() );
 	}
 
 	@Override
