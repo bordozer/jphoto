@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
@@ -36,7 +37,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 	private PhotosImportSource importSource;
 	private AbstractImportParameters importParameters;
-	private List<PhotosightCategory> photosightCategories;
+	private List<RemotePhotoSiteCategory> remotePhotoSiteCategories;
 
 	public PhotosImportJob( final JobRuntimeEnvironment jobEnvironment ) {
 		super( new LogHelper( PhotosImportJob.class ), jobEnvironment );
@@ -86,10 +87,10 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				parametersMap.put( SavedJobParameterKey.IMPORT_PAGE_QTY, new CommonProperty( SavedJobParameterKey.IMPORT_PAGE_QTY.getId(), pageQty ) );
 
 
-				final List<String> photosightCategoryIds = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
+				final List<String> photosightCategoryIds = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 					@Override
-					public String apply( final PhotosightCategory photosightCategory ) {
-						return String.valueOf( photosightCategory.getId() );
+					public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+						return String.valueOf( remotePhotoSiteCategory.getId() );
 					}
 				} );
 				parametersMap.put( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES, new CommonProperty( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES.getId(), photosightCategoryIds ) );
@@ -130,7 +131,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final int delayBetweenRequest = jobParameters.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueInt();
 				final int pageQty = jobParameters.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValueInt();
 
-				final List<PhotosightCategory> photosightCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListInt(), new Function<Integer, PhotosightCategory>() {
+				final List<RemotePhotoSiteCategory> photosightCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListInt(), new Function<Integer, PhotosightCategory>() {
 					@Override
 					public PhotosightCategory apply( final Integer id ) {
 						return PhotosightCategory.getById( id );
@@ -183,17 +184,17 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					   .append( ": " )
 					   .append( photosightUserLinks ).append( "<br />" );
 
-				final List<PhotosightCategory> photosightCategories = photosightParameters.getRemotePhotoSiteCategories();
+				final List<RemotePhotoSiteCategory> photosightCategories = photosightParameters.getRemotePhotoSiteCategories();
 				builder.append( translatorService.translate( "Photo import job parameter: Import photos from categories", getLanguage() ) ).append( ": " );
 				final String catText;
 				if ( photosightCategories.size() == PhotosightCategory.values().length ) {
 					catText = translatorService.translate( "Photo import job parameter: All categories", getLanguage() );
 				} else {
 					if ( photosightCategories.size() < PhotosightCategory.values().length / 2 ) {
-						final List<String> categories = Lists.transform( photosightCategories, new Function<PhotosightCategory, String>() {
+						final List<String> categories = Lists.transform( photosightCategories, new Function<RemotePhotoSiteCategory, String>() {
 							@Override
-							public String apply( final PhotosightCategory photosightCategory ) {
-								return photosightCategory.getName();
+							public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+								return remotePhotoSiteCategory.getName();
 							}
 						} );
 						catText = StringUtils.join( categories, ", " );
@@ -276,7 +277,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 		return importStrategy;
 	}
 
-	public void setPhotosightCategories( final List<PhotosightCategory> photosightCategories ) {
-		this.photosightCategories = photosightCategories;
+	public void setRemotePhotoSiteCategories( final List<RemotePhotoSiteCategory> remotePhotoSiteCategories ) {
+		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
 	}
 }

@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportP
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoriesMappingStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryToGenreMapping;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryWrapper;
@@ -243,7 +244,6 @@ public class PhotosImportController extends DateRangableController {
 					photosightUserIds.add( idTxt.trim() );
 				}
 
-				final String userName = aModel.getUserName();
 				final UserGender userGender = UserGender.getById( NumberUtils.convertToInt( aModel.getUserGenderId() ) );
 				final UserMembershipType membershipType = UserMembershipType.getById( NumberUtils.convertToInt( aModel.getUserMembershipId() ) );
 				final boolean importComments = aModel.isImportComments();
@@ -251,13 +251,13 @@ public class PhotosImportController extends DateRangableController {
 				final int pageQty = NumberUtils.convertToInt( aModel.getPageQty() );
 
 				final List<String> photosightCategories = aModel.getPhotosightCategories();
-				final List<PhotosightCategory> categoryList = Lists.transform( photosightCategories, new Function<String, PhotosightCategory>() {
+				final List<RemotePhotoSiteCategory> categoryList = Lists.transform( photosightCategories, new Function<String, PhotosightCategory>() {
 					@Override
 					public PhotosightCategory apply( final String id ) {
 						return PhotosightCategory.getById( NumberUtils.convertToInt( id ) );
 					}
 				} );
-				job.setPhotosightCategories( categoryList );
+				job.setRemotePhotoSiteCategories( categoryList );
 
 				importParameters = new RemoteSitePhotosImportParameters( photosightUserIds, userGender, membershipType, importComments, delayBetweenRequests
 					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), categoryList, new PhotosightRemoteContentHelper(), new PhotosightContentDataExtractor() );
@@ -299,7 +299,6 @@ public class PhotosImportController extends DateRangableController {
 				break;
 			case PHOTOSIGHT:
 				final String photosightUserId = savedJobParametersMap.get( SavedJobParameterKey.PARAM_USER_ID ).getValue();
-				final String userName = savedJobParametersMap.get( SavedJobParameterKey.USER_NAME ).getValue();
 				final String genderId = savedJobParametersMap.get( SavedJobParameterKey.USER_GENDER_ID ).getValue();
 				final String membershipId = savedJobParametersMap.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValue();
 				final boolean importComments = savedJobParametersMap.get( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS ).getValueBoolean();
@@ -307,7 +306,6 @@ public class PhotosImportController extends DateRangableController {
 				final String delayBetweenRequests = savedJobParametersMap.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValue();
 
 				aModel.setPhotosightUserId( photosightUserId );
-				aModel.setUserName( userName );
 				aModel.setUserGenderId( genderId );
 				aModel.setUserMembershipId( membershipId );
 				aModel.setImportComments( importComments );

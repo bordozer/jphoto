@@ -45,10 +45,12 @@ public enum PhotosightCategory implements RemotePhotoSiteCategory {
 		this.name = name;
 	}
 
+	@Override
 	public int getId() {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

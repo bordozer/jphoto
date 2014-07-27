@@ -40,7 +40,6 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
 	private String photosightUserId;
-	private String userName;
 
 	private String pageQty;
 	private String userGenderId;
@@ -115,14 +114,6 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setPhotosightUserId( final String photosightUserId ) {
 		this.photosightUserId = photosightUserId;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName( final String userName ) {
-		this.userName = userName;
 	}
 
 	public String getPageQty() {
