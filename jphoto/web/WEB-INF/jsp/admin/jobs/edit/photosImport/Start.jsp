@@ -270,6 +270,7 @@
 					$( '#' + '${filesystemImportDivId}' ).hide();
 					$( '#' + '${photosightImportDivId}' ).show();
 					renderRemoteSiteCategories();
+					renderRemoteUserInfo();
 				}
 			} );
 		}
