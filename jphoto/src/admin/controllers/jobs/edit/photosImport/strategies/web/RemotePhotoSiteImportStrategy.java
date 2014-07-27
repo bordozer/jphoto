@@ -487,13 +487,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final String photoPageContent = remoteContentHelper.getPhotoPageContent( remotePhotoSiteUser, remotePhotoSitePhotoId );
 		if ( StringUtils.isEmpty( photoPageContent ) ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can't load photo page content." );
-			return null;
+			return newArrayList();
 		}
 
 		final List<String> imageUrls = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
 		if ( imageUrls == null || imageUrls.isEmpty() ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
-			return null;
+			return newArrayList();
 		}
 
 		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentHelper = getRemotePhotoSitePageContentDataExtractor();
@@ -501,7 +501,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
 		if( photosightCategory == null ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo category from page content." );
-			return null;
+			return newArrayList();
 		}
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
@@ -558,7 +558,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		return result;
-
 	}
 
 	private void logPhotoSkipping( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId, final String s ) {
