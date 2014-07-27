@@ -600,6 +600,34 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return String.format( "photoCard_%d", remotePhotoSitePhoto.getPhotoId() );
 	}
 
+	private User tryToFindThisUser( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+
+		final String userLogin = createLoginForRemotePhotoSiteUser( remotePhotoSiteUser.getId() );
+		final User foundByLoginUser = services.getUserService().loadByLogin( userLogin );
+		if ( foundByLoginUser != null ) {
+
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found. Login: $1", services )
+				.addUserCardLinkParameter( foundByLoginUser )
+				;
+			job.addJobRuntimeLogMessage( translatableMessage );
+
+			return foundByLoginUser;
+		}
+
+		final User foundByNameUser = services.getUserService().loadByName( remotePhotoSiteUser.getName() );
+		if ( foundByNameUser != null ) {
+
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found. Name: $1", services )
+				.addUserCardLinkParameter( foundByNameUser )
+				;
+			job.addJobRuntimeLogMessage( translatableMessage );
+
+			return foundByNameUser;
+		}
+
+		return null;
+	}
+
 	private User findByNameOrCreateUser( final RemotePhotoSiteUser remotePhotoSiteUser, final RemoteSitePhotosImportParameters parameters ) throws IOException {
 
 		final String userName = getUserName( remotePhotoSiteUser );
@@ -610,15 +638,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		remotePhotoSiteUser.setName( userName );
 
 		final String userLogin = createLoginForRemotePhotoSiteUser( remotePhotoSiteUser.getId() );
-		final User existingUser = services.getUserService().loadByLogin( userLogin );
-		if ( existingUser != null ) {
-
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found: $1", services )
-				.addUserCardLinkParameter( existingUser )
-				;
-			job.addJobRuntimeLogMessage( translatableMessage );
-
-			return existingUser;
+		final User foundUser = tryToFindThisUser( remotePhotoSiteUser );
+		if ( foundUser != null ) {
+			return foundUser;
 		}
 
 		final User user = services.getFakeUserService().getRandomUser();

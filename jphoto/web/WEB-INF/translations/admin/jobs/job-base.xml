@@ -143,8 +143,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Existing user found: $1</nerd>
-		<ru><![CDATA[Найден существующий пользователь: $1]]></ru>
+		<nerd>Existing user found. Login: $1</nerd>
+		<ru><![CDATA[Найден существующий пользователью Логин: $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Existing user found. Name: $1</nerd>
+		<ru><![CDATA[Найден существующий пользователь. Имя: $1]]></ru>
 	</translation>
 
 	<translation>

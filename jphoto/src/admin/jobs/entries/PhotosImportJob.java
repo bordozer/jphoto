@@ -184,7 +184,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 					}
 				} );
 				final String remoteSiteUserLinks = StringUtils.join( remotePhotoSiteUserIds, ", " );
-				builder.append( translatorService.translate( "Photo import job parameter: Remote photo site users ids", getLanguage() ) )
+				builder.append( translatorService.translate( "Photo import job parameter: Remote photo site users IDs", getLanguage() ) )
 					   .append( ": " )
 					   .append( remoteSiteUserLinks ).append( "<br />" );
 
