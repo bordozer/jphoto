@@ -47,4 +47,8 @@ public interface UserCardModelFillService {
 	EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu );
 
 	List<AbstractActivityStreamEntry> getUserLastActivities( final int userId, final int activityTypeId, final PagingModel pagingModel );
+
+	List<UserPhotoAlbum> getUserPhotoAlbums( final int userId );
+
+	Map<Integer, Integer> setUserPhotosCountByAlbums( final int userId );
 }

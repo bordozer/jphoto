@@ -59,6 +59,7 @@ public class UserCardModel extends AbstractGeneralModel {
 	private List<AbstractActivityStreamEntry> userLastActivities;
 
 	private int filterActivityTypeId;
+	private Map<Integer, Integer> userPhotosCountByAlbums;
 
 	public User getUser() {
 		return user;
@@ -254,5 +255,13 @@ public class UserCardModel extends AbstractGeneralModel {
 
 	public void setFilterActivityTypeId( final int filterActivityTypeId ) {
 		this.filterActivityTypeId = filterActivityTypeId;
+	}
+
+	public void setUserPhotosCountByAlbums( final Map<Integer, Integer> userPhotosCountByAlbums ) {
+		this.userPhotosCountByAlbums = userPhotosCountByAlbums;
+	}
+
+	public Map<Integer, Integer> getUserPhotosCountByAlbums() {
+		return userPhotosCountByAlbums;
 	}
 }

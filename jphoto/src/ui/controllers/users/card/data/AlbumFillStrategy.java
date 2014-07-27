@@ -29,5 +29,7 @@ public class AlbumFillStrategy extends AbstractUserCardModelFillStrategy {
 			}
 		}
 		model.setUserPhotoAlbumsPhotoLists( userPhotoAlbumsPhotoLists );
+		model.setUserPhotoAlbums( userCardModelFillService.getUserPhotoAlbums( getUserId() ) );
+		model.setUserPhotosCountByAlbums( userCardModelFillService.setUserPhotosCountByAlbums( getUserId() ) );
 	}
 }

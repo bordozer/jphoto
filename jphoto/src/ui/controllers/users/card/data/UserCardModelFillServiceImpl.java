@@ -299,6 +299,20 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return activities;
 	}
 
+	@Override
+	public List<UserPhotoAlbum> getUserPhotoAlbums( final int userId ) {
+		return userPhotoAlbumService.loadAllForEntry( userId );
+	}
+
+	@Override
+	public Map<Integer, Integer> setUserPhotosCountByAlbums( final int userId ) {
+		final Map<Integer, Integer> userPhotoAlbumsQtyMap = newLinkedHashMap();
+		for ( final UserPhotoAlbum userPhotoAlbum : getUserPhotoAlbums( userId ) ) {
+			userPhotoAlbumsQtyMap.put( userPhotoAlbum.getId(), userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() ) );
+		}
+		return userPhotoAlbumsQtyMap;
+	}
+
 	private UserCardGenreInfo getUserCardGenreInfo( final User user, final Genre genre, final User accessor ) {
 		final int userId = user.getId();
 		final int genreId = genre.getId();
