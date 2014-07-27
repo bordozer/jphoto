@@ -183,6 +183,21 @@
 	</translation>
 
 	<translation>
+		<nerd>$1: can not get upload time from remote photo page. Random time is used.</nerd>
+		<ru><![CDATA[$1: время комментария определить не удалось. Будет использовано случайное.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>File '$1' contains unknown remote photo site categoryId '$2'. Note: file deletion may solve the problem because the import will be done again</nerd>
+		<ru><![CDATA[Файл '$1' содержит неизвестный раздел удаленного фото сайта '$2'. Совет: После удаления файла, импорт будет выполнен снова, что, возможно, исправит проблему]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
