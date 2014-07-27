@@ -6,7 +6,6 @@ import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
@@ -373,11 +372,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		getRemotePhotoSiteCacheXmlUtils().createUserInfoFile( remotePhotoSiteUser );
 	}
 
-	private void addRemotePhotoSitePhotosToTheLocalStorage( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
+	private void addRemotePhotoSitePhotosToTheLocalStorage( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> notCachedRemotePhotoSitePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
 
-		cachedLocallyRemotePhotoSitePhotos.addAll( remotePhotoSitePhotos );
+		cachedLocallyRemotePhotoSitePhotos.addAll( notCachedRemotePhotoSitePhotos );
 
-		getRemotePhotoSiteCacheXmlUtils().cachedLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
+		getRemotePhotoSiteCacheXmlUtils().cacheLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
 	}
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyRemotePhotoSitePhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
@@ -410,6 +409,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
 			if ( imageContent == null ) {
+				remotePhotoSitePhoto.setHasError( true );
 				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get remote photo site image content: '$1'", services ).string( remotePhotoSitePhoto.getImageUrl() ) );
 				continue;
 			}

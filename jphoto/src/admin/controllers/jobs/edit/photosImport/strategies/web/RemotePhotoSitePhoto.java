@@ -18,6 +18,8 @@ public class RemotePhotoSitePhoto {
 
 	private boolean isCached;
 
+	private boolean hasError;
+
 	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
 		this.photoId = photoId;
@@ -74,6 +76,14 @@ public class RemotePhotoSitePhoto {
 
 	public void setCached( final boolean cached ) {
 		isCached = cached;
+	}
+
+	public boolean isHasError() {
+		return hasError;
+	}
+
+	public void setHasError( final boolean hasError ) {
+		this.hasError = hasError;
 	}
 
 	@Override

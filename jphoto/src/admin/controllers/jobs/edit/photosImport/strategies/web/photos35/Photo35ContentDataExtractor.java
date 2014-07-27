@@ -101,7 +101,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 			return NumberUtils.convertToInt( _categoryId );
 		}
 
-		throw new BaseRuntimeException( String.format( "%s: can not find photo category from the page context", getHost() ) );
+		return Photo35Category.OTHER.getId();
 	}
 
 	@Override
