@@ -34,6 +34,7 @@
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
 <c:set var="photo35ImportId" value="<%=PhotosImportSource.PHOTO35.getId()%>"/>
+<c:set var="naturelightImportId" value="<%=PhotosImportSource.NATURELIGHT.getId()%>"/>
 
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
@@ -251,7 +252,7 @@
 				setFormsVisibility();
 
 				var type = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
-				if ( type == ${photosightImportId} || type == ${photo35ImportId} ) {
+				if ( type == ${photosightImportId} || type == ${photo35ImportId} || type == ${naturelightImportId} ) {
 					renderRemoteUserInfo();
 				}
 			} );
@@ -266,7 +267,7 @@
 					$( '#' + '${filesystemImportDivId}' ).show();
 				}
 
-				if ( type == ${photosightImportId} || type == ${photo35ImportId} ) {
+				if ( type == ${photosightImportId} || type == ${photo35ImportId} || type == ${naturelightImportId} ) {
 					$( '#' + '${filesystemImportDivId}' ).hide();
 					$( '#' + '${photosightImportDivId}' ).show();
 					renderRemoteSiteCategories();

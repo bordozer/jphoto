@@ -58,6 +58,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				validatePhotosightUserIds( model.getImportSource(), model.getRemotePhotoSiteUserIds(), errors );
 
 				validatePhotoSightCategories( model, errors );

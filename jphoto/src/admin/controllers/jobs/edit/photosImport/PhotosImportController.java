@@ -171,6 +171,7 @@ public class PhotosImportController extends DateRangableController {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				final List<String> remotePhotoSiteUserIds = newArrayList();
 				final String remotePhotoSiteUserIdsText = aModel.getRemotePhotoSiteUserIds();
 				final String[] ids = remotePhotoSiteUserIdsText.split( "," );
@@ -233,6 +234,7 @@ public class PhotosImportController extends DateRangableController {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				final String remotePhotoSiteUserId = savedJobParametersMap.get( SavedJobParameterKey.PARAM_USER_ID ).getValue();
 				final String genderId = savedJobParametersMap.get( SavedJobParameterKey.USER_GENDER_ID ).getValue();
 				final String membershipId = savedJobParametersMap.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValue();

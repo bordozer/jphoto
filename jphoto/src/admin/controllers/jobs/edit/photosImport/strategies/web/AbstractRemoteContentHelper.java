@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35RemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import core.log.LogHelper;
@@ -51,6 +52,8 @@ public abstract class AbstractRemoteContentHelper {
 				return new PhotosightRemoteContentHelper();
 			case PHOTO35:
 				return new Photo35RemoteContentHelper();
+			case NATURELIGHT:
+				return new NaturelightRemoteContentHelper();
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );

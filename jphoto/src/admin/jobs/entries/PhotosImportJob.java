@@ -76,6 +76,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 
 				final RemoteSitePhotosImportParameters remoteSitePhotosImportParameters = ( RemoteSitePhotosImportParameters ) importParameters;
 
@@ -124,6 +125,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				final List<String> remotePhotoSiteUserIds = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueListString();
 				final UserGender userGender = UserGender.getById( jobParameters.get( SavedJobParameterKey.USER_GENDER_ID ).getValueInt() );
 				final UserMembershipType membershipType = UserMembershipType.getById( jobParameters.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValueInt() );
@@ -173,6 +175,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				final RemoteSitePhotosImportParameters remoteSitePhotosImportParameters = ( RemoteSitePhotosImportParameters ) importParameters;
 
 				builder.append( translatorService.translate( "Photo import job parameter: remote site", getLanguage() ) ).append( ": " ).append( translatorService.translate( importSource.getName(), getLanguage() ) ).append( "<br />" );
@@ -193,18 +196,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = remoteSitePhotosImportParameters.getRemotePhotoSiteCategories();
 				builder.append( translatorService.translate( "Photo import job parameter: Import photos from categories", getLanguage() ) ).append( ": " );
 
-				final RemotePhotoSiteCategory[] remoteCategories;
-
-				switch ( importSource ) {
-					case PHOTOSIGHT:
-						remoteCategories = PhotosightCategory.values();
-						break;
-					case PHOTO35:
-						remoteCategories = Photo35Category.values();
-						break;
-					default:
-						throw new IllegalArgumentException( String.format( "Unexpected importSource: %s", importSource ) );
-				}
+				final RemotePhotoSiteCategory[] remoteCategories = RemotePhotoSiteCategory.getRemotePhotoSiteCategories( importSource );
 
 				final String catText;
 
@@ -291,6 +283,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				break;
 			case PHOTOSIGHT:
 			case PHOTO35:
+			case NATURELIGHT:
 				importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 				break;
 			default:

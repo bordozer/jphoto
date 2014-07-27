@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 
@@ -23,6 +24,8 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				return getPhotosightStrategy();
 			case PHOTO35:
 				return getPhoto35Strategy();
+			case NATURELIGHT:
+				return getNaturelightStrategy();
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal PhotosImportSource: '%s'", importSource ) );
@@ -89,6 +92,32 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, GenreDiscEntry.OTHER ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.REPORTAGE, GenreDiscEntry.REPORTING ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.SPORT, GenreDiscEntry.SPORT ) );
+			}
+		};
+	}
+
+	private static RemotePhotoSiteCategoriesMappingStrategy getNaturelightStrategy() {
+
+		return new RemotePhotoSiteCategoriesMappingStrategy() {
+			{
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.BIRDS, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MACRO, GenreDiscEntry.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.CREEP, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MAMMAL, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FLORA, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.HUMAN_AND_NATURE, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.OTHER, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ARTHROPODA, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.AMPHIBIA, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.Action, GenreDiscEntry.REPORTING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.APERIODICITIES, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER_MACRO, GenreDiscEntry.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.STARS, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FACES, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TECH, GenreDiscEntry.GENRE ) );
 			}
 		};
 	}

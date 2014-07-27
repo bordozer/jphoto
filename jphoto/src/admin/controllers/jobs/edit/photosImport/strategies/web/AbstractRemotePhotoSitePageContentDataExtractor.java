@@ -1,6 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35ContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import core.services.system.Services;
@@ -39,6 +40,8 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 				return new PhotosightContentDataExtractor();
 			case PHOTO35:
 				return new Photo35ContentDataExtractor();
+			case NATURELIGHT:
+				return new NaturelightContentDataExtractor();
 		}
 
 		throw new IllegalArgumentException( String.format( "PhotosImportSource '%s' does not have matched page data extractor", photosImportSource ) );
