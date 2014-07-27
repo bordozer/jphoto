@@ -57,7 +57,7 @@ public class RemotePhotoSitePhotoImageFileUtils {
 	}
 
 	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
-		final String imageFileName = getRemoteSitePhotoFileName( remotePhotoSitePhoto.getPhotoId() );
+		final String imageFileName = getRemoteSitePhotoFileName( remotePhotoSitePhoto );
 
 		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
@@ -65,8 +65,8 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		return new File( imageFolder, imageFileName );
 	}
 
-	public static String getRemoteSitePhotoFileName( final int photoId ) {
-		return String.format( "%d.jpg", photoId );
+	public static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
+		return String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
 	}
 
 	public GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {

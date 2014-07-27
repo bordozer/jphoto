@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+
 public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	public static final String REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX = "PS_";
@@ -174,7 +175,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			filterDownloadedPhotosByCategories( remotePhotoSitePagePhotos );
 
 			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remotePhotoSiteUser, remotePhotoSitePagePhotos, cachedLocallyRemotePhotoSitePhotos );
-
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
@@ -397,12 +397,20 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private List<RemotePhotoSitePhotoDiskEntry> downloadRemotePhotoSitePhotoAndCreateDiskEntry( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
 
-		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
+		final int toAddCount = remotePhotoSitePhotos.size();
+		job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
 
+		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
+		int counter = 1;
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
 
 			final String imageUrl = remotePhotoSitePhoto.getImageUrl();
 			log.debug( String.format( "Getting photo %s content", imageUrl ) );
+			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Getting image '$3' content", services )
+				.addIntegerParameter( counter )
+				.addIntegerParameter( toAddCount )
+				.link( remotePhotoSitePhoto.getImageUrl(), remotePhotoSitePhoto.getImageUrl() )
+			);
 
 			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
 			if ( imageContent == null ) {
@@ -414,6 +422,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final ImageDiscEntry imageDiscEntry = getRemotePhotoSitePhotoImageFileUtils().createRemotePhotoSiteDiskEntry( remotePhotoSitePhoto, imageContent );
 
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
+
+			counter++;
 		}
 
 		return result;
@@ -497,7 +507,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
 		final String series = imageUrls.size() == 0 ? "" : String.format( "Series #%d", services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
-		int counter = 1;
+		int numberInSeries = 1;
 
 		for ( final String imageUrl : imageUrls ) {
 
@@ -507,7 +517,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				job.addJobRuntimeLogMessage( translatableMessage );
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
-			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ), counter ) );
+			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ), numberInSeries ) );
 
 			final Date uploadTime = importParameters.getRemotePhotoSitePageContentDataExtractor().extractPhotoUploadTime( photoPageContent, services );
 			if ( uploadTime != null ) {
@@ -522,6 +532,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			remotePhotoSitePhoto.setImageUrl( imageUrl );
+			remotePhotoSitePhoto.setNumberInSeries( numberInSeries );
 
 			if ( importParameters.isImportComments() ) {
 				final List<String> comments = getRemotePhotoSitePageContentDataExtractor().extractComments( photoPageContent );
@@ -533,7 +544,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 
-			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
+			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "Got data of '$1': $2 of $3, photo category: $4", services )
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 				.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
@@ -543,7 +554,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			result.add( remotePhotoSitePhoto );
 
-			counter++;
+			numberInSeries++;
 		}
 
 		return result;

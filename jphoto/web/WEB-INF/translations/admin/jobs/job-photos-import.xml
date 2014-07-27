@@ -28,8 +28,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Downloaded from '$1': $2 of $3, photo category: $4</nerd>
-		<ru><![CDATA[Загружено с '$1': работа '$2' пользователя $3, раздел фото сайта: $4]]></ru>
+		<nerd>Got data of '$1': $2 of $3, photo category: $4</nerd>
+		<ru><![CDATA['$1': получены данные работы '$2' пользователя $3, раздел '$4']]></ru>
 	</translation>
 
 	<translation>
@@ -195,6 +195,21 @@
 	<translation>
 		<nerd>Remote photo site site photos import: Importing image '$1'</nerd>
 		<ru><![CDATA[Импортируется фотография '$1']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 / $2: Getting image '$3' content</nerd>
+		<ru><![CDATA[$1 / $2: Получение контента картинки '$3']]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 images about to be downloaded</nerd>
+		<ru><![CDATA[$1 изображений будет загружено с удаленного фото сайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

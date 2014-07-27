@@ -160,7 +160,7 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 			, TABLE_USER_PHOTO_ALBUM_COL_NAME
 		);
 
-		return getEntryOrNull( sql, new MapSqlParameterSource( "name", name ), new PhotoAlbumMapper() );
+		return getEntryOrNull( sql, new MapSqlParameterSource( "name", name ), new UserPhotoAlbumMapper() );
 	}
 
 	@Override

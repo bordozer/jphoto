@@ -131,6 +131,11 @@ public class TranslatableMessage {
 		return this;
 	}
 
+	public TranslatableMessage link( final String url, final String text ) {
+		messageParameters.add( new UrlLinkParameter( url, text ) );
+		return this;
+	}
+
 	public String build( final Language language ) {
 
 		final StringBuilder builder = new StringBuilder( services.getTranslatorService().translate( nerd, language ) );

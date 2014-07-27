@@ -20,6 +20,7 @@ public class RemotePhotoSitePhoto {
 
 	private boolean hasError;
 	private String series;
+	private int numberInSeries;
 
 	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
@@ -122,5 +123,13 @@ public class RemotePhotoSitePhoto {
 
 		final RemotePhotoSitePhoto remotePhotoSitePhoto = ( RemotePhotoSitePhoto ) obj;
 		return photoId == remotePhotoSitePhoto.getPhotoId() && imageUrl.equals( remotePhotoSitePhoto.getImageUrl() );
+	}
+
+	public int getNumberInSeries() {
+		return numberInSeries;
+	}
+
+	public void setNumberInSeries( final int numberInSeries ) {
+		this.numberInSeries = numberInSeries;
 	}
 }
