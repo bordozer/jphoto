@@ -15,6 +15,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import utils.StringUtilities;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class AbstractRemoteContentHelper {
 
@@ -67,10 +69,12 @@ public abstract class AbstractRemoteContentHelper {
 	}
 
 	public String extractUserNameFromRemoteSite( final String remotePhotoSiteUserId ) {
+
 		final String userPageContent = getUserPageContent( 1, remotePhotoSiteUserId );
 		if ( StringUtils.isEmpty( userPageContent ) ) {
 			return null;
 		}
+
 		return getRemotePhotoSiteContentDataExtractor().extractRemotePhotoSiteUserName( userPageContent );
 	}
 

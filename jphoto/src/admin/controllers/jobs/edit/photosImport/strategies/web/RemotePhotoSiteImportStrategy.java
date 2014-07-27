@@ -24,6 +24,7 @@ import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
+import utils.NumberUtils;
 import utils.StringUtilities;
 
 import java.io.File;
@@ -465,10 +466,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		while ( matcher.find() && ! job.hasJobFinishedWithAnyResult() ) {
-			final String _remotePhotoSitePhotoId = matcher.group( 1 );
-			final int remotePhotoSitePhotoId = getRemotePhotoSitePageContentDataExtractor().extractRemotePhotoSitePhotoId( _remotePhotoSitePhotoId );
-
-			result.add( remotePhotoSitePhotoId );
+			result.add( NumberUtils.convertToInt( matcher.group( 1 ) ) );
 		}
 		return result;
 	}

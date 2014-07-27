@@ -12,17 +12,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 	}
 
 	@Override
-	public int extractRemotePhotoSitePhotoId( final String group ) {
-		return 0;
-	}
-
-	@Override
 	public String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
-		return null;
-	}
-
-	@Override
-	public String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		return null;
 	}
 

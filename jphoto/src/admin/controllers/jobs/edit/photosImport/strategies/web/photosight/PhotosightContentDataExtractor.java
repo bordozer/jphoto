@@ -17,16 +17,13 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 
 	@Override
 	public String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+
 		final String imageUrlNew = extractImageUrlByNewRules( remotePhotoSitePhotoId, photoPageContent );
 		if ( StringUtils.isNotEmpty( imageUrlNew ) ) {
 			return imageUrlNew;
 		}
-		return extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent );
-	}
 
-	@Override
-	public int extractRemotePhotoSitePhotoId( final String group ) {
-		return NumberUtils.convertToInt( group );
+		return extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent );
 	}
 
 	@Override
@@ -40,22 +37,6 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
 			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
-		}
-
-		return null;
-	}
-
-	@Override
-	public String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
-		//<img src="http://img-2007-09.photosight.ru/24/2318529.jpg" alt="
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
-		final Matcher matcher = pattern.matcher( photoPageContent );
-
-		if ( matcher.find() ) {
-			final String photoImageServerUrl = matcher.group( 1 );
-			final String someShit = matcher.group( 2 );
-			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
 		}
 
 		return null;
@@ -147,5 +128,20 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 		}
 
 		return result;
+	}
+
+	private String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+		//<img src="http://img-2007-09.photosight.ru/24/2318529.jpg" alt="
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		if ( matcher.find() ) {
+			final String photoImageServerUrl = matcher.group( 1 );
+			final String someShit = matcher.group( 2 );
+			final String extension = matcher.group( 3 );
+			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
+		}
+
+		return null;
 	}
 }

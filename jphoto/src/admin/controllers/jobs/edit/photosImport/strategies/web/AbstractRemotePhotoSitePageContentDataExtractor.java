@@ -12,13 +12,7 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public abstract String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent );
 
-	public abstract int extractRemotePhotoSitePhotoId( final String group );
-
 	public abstract String extractImageUrlByNewRules( int remotePhotoSitePhotoId, final String photoPageContent );
-
-	public abstract String extractImageUrlByOldRules( int remotePhotoSitePhotoId, final String photoPageContent );
-
-	public abstract String getPhotoIdRegex();
 
 	public abstract String extractRemotePhotoSiteUserName( final String userPageContent );
 
@@ -31,6 +25,8 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 	public abstract String extractPhotoName( final String photoPageContent );
 
 	public abstract List<String> extractComments( final String photoPageContent );
+
+	public abstract String getPhotoIdRegex();
 
 	public static AbstractRemotePhotoSitePageContentDataExtractor getInstance( final PhotosImportSource photosImportSource ) {
 
