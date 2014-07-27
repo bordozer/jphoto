@@ -16,14 +16,14 @@ import static com.google.common.collect.Lists.newArrayList;
 public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public String extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	public List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 
 		final String imageUrlNew = extractImageUrlByNewRules( remotePhotoSitePhotoId, photoPageContent );
 		if ( StringUtils.isNotEmpty( imageUrlNew ) ) {
-			return imageUrlNew;
+			return newArrayList( imageUrlNew );
 		}
 
-		return extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent );
+		return newArrayList( extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent ) );
 	}
 
 	@Override

@@ -93,7 +93,7 @@ public class RemotePhotoSitePhoto {
 
 	@Override
 	public int hashCode() {
-		return photoId * 31;
+		return photoId * 31 + imageUrl.hashCode();
 	}
 
 	@Override
@@ -112,6 +112,6 @@ public class RemotePhotoSitePhoto {
 		}
 
 		final RemotePhotoSitePhoto remotePhotoSitePhoto = ( RemotePhotoSitePhoto ) obj;
-		return photoId == remotePhotoSitePhoto.getPhotoId();
+		return photoId == remotePhotoSitePhoto.getPhotoId() && imageUrl.equals( remotePhotoSitePhoto.getImageUrl() );
 	}
 }

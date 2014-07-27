@@ -15,19 +15,14 @@ import static com.google.common.collect.Lists.newArrayList;
 public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public String extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	public List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 
 		final String singlePhoto = getSinglePhoto( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
 		if ( singlePhoto != null ) {
-			return singlePhoto;
+			return newArrayList( singlePhoto );
 		}
 
-		final List<String> photoSeries = getPhotoSeries( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
-		if ( photoSeries != null && photoSeries.size() > 0 ) {
-			return photoSeries.get( 0 );
-		}
-
-		return null;
+		return getPhotoSeries( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
 	}
 
 	private String getSinglePhoto( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {

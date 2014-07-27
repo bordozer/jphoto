@@ -265,15 +265,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final RemotePhotoSitePhoto remotePhotoSitePhoto;
-
 			final RemotePhotoSitePhoto cachedRemotePhotoSitePhoto = getCachedRemotePhotoSitePhotos( remotePhotoSitePhotoId, cachedLocallyRemotePhotoSitePhotos );
+
 			if ( cachedRemotePhotoSitePhoto != null ) {
-				remotePhotoSitePhoto = cachedRemotePhotoSitePhoto;
+
+				remotePhotoSitePagePhotosToImport.add( cachedRemotePhotoSitePhoto );
+
 				log.debug( String.format( "Photo %d of %s has been found in the local cache.", remotePhotoSitePhotoId, remotePhotoSiteUserPageLink ) );
 
 				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
-					.string( importParameters.getRemoteContentHelper().getPhotoCardLink( remotePhotoSitePhoto ) )
+					.string( importParameters.getRemoteContentHelper().getPhotoCardLink( cachedRemotePhotoSitePhoto ) )
 					;
 				job.addJobRuntimeLogMessage( translatableMessage );
 			} else {
@@ -287,11 +288,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 					}
 				}
 
-				remotePhotoSitePhoto = makeImportPhotoFromRemotePhotoSite( remotePhotoSiteUser, remotePhotoSitePhotoId );
-			}
-
-			if ( remotePhotoSitePhoto != null ) {
-				remotePhotoSitePagePhotosToImport.add( remotePhotoSitePhoto );
+				remotePhotoSitePagePhotosToImport.addAll(  makeImportPhotoFromRemotePhotoSite( remotePhotoSiteUser, remotePhotoSitePhotoId ) );
 			}
 		}
 
@@ -472,7 +469,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private RemotePhotoSitePhoto makeImportPhotoFromRemotePhotoSite( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) throws IOException {
+	private List<RemotePhotoSitePhoto> makeImportPhotoFromRemotePhotoSite( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) throws IOException {
 
 		final AbstractRemoteContentHelper remoteContentHelper = importParameters.getRemoteContentHelper();
 
@@ -482,8 +479,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return null;
 		}
 
-		final String imageUrl = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
-		if ( StringUtils.isEmpty( imageUrl ) ) {
+		final List<String> imageUrls = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
+		if ( imageUrls.isEmpty() ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
 			return null;
 		}
@@ -496,41 +493,48 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return null;
 		}
 
-		final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
-		remotePhotoSitePhoto.setName( remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ) );
+		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
-		final Date uploadTime = extractUploadTime( photoPageContent );
-		if ( uploadTime != null ) {
-			remotePhotoSitePhoto.setUploadTime( uploadTime );
-		} else {
-			remotePhotoSitePhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
+		for ( final String imageUrl : imageUrls ) {
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
+			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
+			remotePhotoSitePhoto.setName( remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ) );
+
+			final Date uploadTime = extractUploadTime( photoPageContent );
+			if ( uploadTime != null ) {
+				remotePhotoSitePhoto.setUploadTime( uploadTime );
+			} else {
+				remotePhotoSitePhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
+
+				final TranslatableMessage translatableMessage = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
+					.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
+					;
+				job.addJobRuntimeLogMessage( translatableMessage );
+			}
+
+			remotePhotoSitePhoto.setImageUrl( imageUrl );
+
+			if ( importParameters.isImportComments() ) {
+				final List<String> comments = getRemotePhotoSitePageContentDataExtractor().extractComments( photoPageContent );
+				remotePhotoSitePhoto.setComments( comments );
+			}
+
+			remotePhotoSitePhoto.setCached( false );
+
+			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
+
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
+				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
+				.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
+				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
+
+			result.add( remotePhotoSitePhoto );
 		}
 
-		remotePhotoSitePhoto.setImageUrl( imageUrl );
-
-		if ( importParameters.isImportComments() ) {
-			final List<String> comments = getRemotePhotoSitePageContentDataExtractor().extractComments( photoPageContent );
-			remotePhotoSitePhoto.setComments( comments );
-		}
-
-		remotePhotoSitePhoto.setCached( false );
-
-		log.debug( String.format( "Photo %d has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
-
-		final TranslatableMessage translatableMessage = new TranslatableMessage( "Downloaded from '$1': $2 of $3, photo category: $4", services )
-			.string( remoteContentHelper.getRemotePhotoSiteHost() )
-			.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
-			.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
-			.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
-			;
-		job.addJobRuntimeLogMessage( translatableMessage );
-
-		return remotePhotoSitePhoto;
+		return result;
 
 	}
 
