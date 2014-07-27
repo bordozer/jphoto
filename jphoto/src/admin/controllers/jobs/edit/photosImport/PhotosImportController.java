@@ -237,6 +237,7 @@ public class PhotosImportController extends DateRangableController {
 				job.setTotalJopOperations( photoQtyLimit > 0 ? photoQtyLimit : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;
 			case PHOTOSIGHT:
+			case PHOTO35:
 				final List<String> photosightUserIds = newArrayList();
 				final String photosightUserIdsText = aModel.getPhotosightUserId();
 				final String[] ids = photosightUserIdsText.split( "," );
@@ -298,10 +299,11 @@ public class PhotosImportController extends DateRangableController {
 				initModelDateRange( aModel, savedJobParametersMap );
 				break;
 			case PHOTOSIGHT:
+			case PHOTO35:
 				final String photosightUserId = savedJobParametersMap.get( SavedJobParameterKey.PARAM_USER_ID ).getValue();
 				final String genderId = savedJobParametersMap.get( SavedJobParameterKey.USER_GENDER_ID ).getValue();
 				final String membershipId = savedJobParametersMap.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValue();
-				final boolean importComments = savedJobParametersMap.get( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS ).getValueBoolean();
+				final boolean importComments = savedJobParametersMap.get( SavedJobParameterKey.IMPORT_REMOTE_PHOTO_SITE_COMMENTS ).getValueBoolean();
 				final String pageQty = savedJobParametersMap.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValue();
 				final String delayBetweenRequests = savedJobParametersMap.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValue();
 
@@ -312,14 +314,7 @@ public class PhotosImportController extends DateRangableController {
 				aModel.setPageQty( pageQty );
 				aModel.setDelayBetweenRequest( delayBetweenRequests );
 
-				final List<String> categories = savedJobParametersMap.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListString();
-				/*Collections.sort( categories, new Comparator<String>() {
-					@Override
-					public int compare( final String id1, final String id2 ) {
-						return PhotosightCategory.getById( id1 ).name().compareTo( PhotosightCategory.getById( id2 ).name() );
-					}
-				} );*/
-
+				final List<String> categories = savedJobParametersMap.get( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES ).getValueListString();
 				aModel.setPhotosightCategories( categories );
 				break;
 			default:

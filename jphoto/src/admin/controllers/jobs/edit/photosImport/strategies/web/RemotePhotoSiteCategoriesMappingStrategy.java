@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 
 import java.util.List;
@@ -10,21 +11,26 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 
-	public abstract List<RemotePhotoSiteCategoryToGenreMapping> getMapping();
+	protected final List<RemotePhotoSiteCategoryToGenreMapping> categoryToGenreMapping = newArrayList();
+
+	public List<RemotePhotoSiteCategoryToGenreMapping> getMapping() {
+		return categoryToGenreMapping;
+	}
 
 	public static RemotePhotoSiteCategoriesMappingStrategy getStrategyFor( final PhotosImportSource importSource ) {
 		switch ( importSource ) {
 			case PHOTOSIGHT:
 				return getPhotosightStrategy();
+			case PHOTO35:
+				return getPhoto35Strategy();
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal PhotosImportSource: '%s'", importSource ) );
 	}
 
 	private static RemotePhotoSiteCategoriesMappingStrategy getPhotosightStrategy() {
-		return new RemotePhotoSiteCategoriesMappingStrategy() {
 
-			private final List<RemotePhotoSiteCategoryToGenreMapping> categoryToGenreMapping = newArrayList();
+		return new RemotePhotoSiteCategoriesMappingStrategy() {
 
 			{
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.NUDE, GenreDiscEntry.NUDE ) );
@@ -57,10 +63,19 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.REST, GenreDiscEntry.OTHER ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PAPARAZZI, GenreDiscEntry.OTHER ) );
 			}
+		};
+	}
 
-			@Override
-			public List<RemotePhotoSiteCategoryToGenreMapping> getMapping() {
-				return categoryToGenreMapping;
+	private static RemotePhotoSiteCategoriesMappingStrategy getPhoto35Strategy() {
+
+		return new RemotePhotoSiteCategoriesMappingStrategy() {
+
+			{
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTIC_GLAMOUR, GenreDiscEntry.GLAMOUR ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, GenreDiscEntry.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPES, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.OTHER, GenreDiscEntry.OTHER ) );
 			}
 		};
 	}

@@ -56,13 +56,12 @@ public enum PhotosightCategory implements RemotePhotoSiteCategory {
 	}
 
 	public static PhotosightCategory getById( final int id ) {
-		for ( final PhotosightCategory category : PhotosightCategory.values() ) {
+		for ( final PhotosightCategory category : values() ) {
 			if ( category.getId() == id ) {
 				return category;
 			}
 		}
 
-//		throw new IllegalArgumentException( String.format( "Illegal PhotosightCategory id: %d", id ));
 		return null;
 	}
 

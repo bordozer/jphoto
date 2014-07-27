@@ -6,6 +6,7 @@ public enum PhotosImportSource implements IdentifiableNameable {
 
 	FILE_SYSTEM( 1, "PhotosImportSource: File system", "", "" )
 	, PHOTOSIGHT( 2, "PhotosImportSource: Photosight", "photosight.ru", "photosight.ru" )
+	, PHOTO35( 3, "PhotosImportSource: 35photo", "35photo.ru", "35photo.ru" )
 	;
 
 	private final int id;

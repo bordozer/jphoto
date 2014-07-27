@@ -57,9 +57,8 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 
 				break;
 			case PHOTOSIGHT:
+			case PHOTO35:
 				validatePhotosightUserIds( model.getPhotosightUserId(), errors );
-
-//				validateUserName( model, errors );
 
 				validatePhotoSightCategories( model, errors );
 
@@ -138,13 +137,6 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 			validateNonZeroPositiveNumber( idTxt.trim(), errors, "Photosight user id", PhotosImportModel.FORM_CONTROL_PHOTOSIGHT_USER_ID );
 		}
 	}
-
-	/*private void validateUserName( final PhotosImportModel model, final Errors errors ) {
-		final String userName = model.getUserName();
-		if ( StringUtils.isEmpty( userName ) ) {
-			errors.rejectValue( PhotosImportModel.FORM_CONTROL_USER_NAME, translatorService.translate( String.format( "Enter %s.", FormatUtils.getFormattedFieldName( "user name" ) ) ) );
-		}
-	}*/
 
 	private void validateGender( final PhotosImportModel model, final Errors errors ) {
 		final String _genderId = model.getUserGenderId();

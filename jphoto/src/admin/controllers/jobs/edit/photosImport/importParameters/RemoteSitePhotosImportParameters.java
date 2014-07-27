@@ -3,7 +3,6 @@ package admin.controllers.jobs.edit.photosImport.importParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import core.enums.UserGender;
 import core.general.user.UserMembershipType;
 import core.services.translator.Language;

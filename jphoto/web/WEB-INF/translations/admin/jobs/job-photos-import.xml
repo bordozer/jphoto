@@ -53,11 +53,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo import job parameter: Photosight user ids</nerd>
-		<ru><![CDATA[Код пользователя фотосайта]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Photo import job parameter: Import photos from categories</nerd>
 		<ru><![CDATA[Разделы фотосайта]]></ru>
 	</translation>
@@ -173,8 +168,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo import job parameter: Photosight user ID</nerd>
-		<ru><![CDATA[ID пользователя photosight.ru]]></ru>
+		<nerd>Photo import job parameter: Remote photo site users IDs</nerd>
+		<ru><![CDATA[ID пользователя удаленного фото сайта]]></ru>
 	</translation>
 
 	<translation>

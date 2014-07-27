@@ -6,7 +6,12 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35ContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35RemoteContentHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
@@ -75,25 +80,26 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				totalJopOperations = qtyLimit;
 				break;
 			case PHOTOSIGHT:
+			case PHOTO35:
 
-				final RemoteSitePhotosImportParameters photosightParameters = ( RemoteSitePhotosImportParameters ) importParameters;
+				final RemoteSitePhotosImportParameters remoteSitePhotosImportParameters = ( RemoteSitePhotosImportParameters ) importParameters;
 
-				parametersMap.put( SavedJobParameterKey.PARAM_USER_ID, new CommonProperty( SavedJobParameterKey.PARAM_USER_ID.getId(), photosightParameters.getRemoteUserIds() ) );
-				parametersMap.put( SavedJobParameterKey.USER_GENDER_ID, new CommonProperty( SavedJobParameterKey.USER_GENDER_ID.getId(), photosightParameters.getUserGender().getId() ) );
-				parametersMap.put( SavedJobParameterKey.USER_MEMBERSHIP_ID, new CommonProperty( SavedJobParameterKey.USER_MEMBERSHIP_ID.getId(), photosightParameters.getMembershipType().getId() ) );
-				parametersMap.put( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS, new CommonProperty( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS.getId(), photosightParameters.isImportComments() ) );
-				parametersMap.put( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS, new CommonProperty( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS.getId(), photosightParameters.getDelayBetweenRequest() ) );
-				final int pageQty = photosightParameters.getPageQty();
+				parametersMap.put( SavedJobParameterKey.PARAM_USER_ID, new CommonProperty( SavedJobParameterKey.PARAM_USER_ID.getId(), remoteSitePhotosImportParameters.getRemoteUserIds() ) );
+				parametersMap.put( SavedJobParameterKey.USER_GENDER_ID, new CommonProperty( SavedJobParameterKey.USER_GENDER_ID.getId(), remoteSitePhotosImportParameters.getUserGender().getId() ) );
+				parametersMap.put( SavedJobParameterKey.USER_MEMBERSHIP_ID, new CommonProperty( SavedJobParameterKey.USER_MEMBERSHIP_ID.getId(), remoteSitePhotosImportParameters.getMembershipType().getId() ) );
+				parametersMap.put( SavedJobParameterKey.IMPORT_REMOTE_PHOTO_SITE_COMMENTS, new CommonProperty( SavedJobParameterKey.IMPORT_REMOTE_PHOTO_SITE_COMMENTS.getId(), remoteSitePhotosImportParameters.isImportComments() ) );
+				parametersMap.put( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS, new CommonProperty( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS.getId(), remoteSitePhotosImportParameters.getDelayBetweenRequest() ) );
+				final int pageQty = remoteSitePhotosImportParameters.getPageQty();
 				parametersMap.put( SavedJobParameterKey.IMPORT_PAGE_QTY, new CommonProperty( SavedJobParameterKey.IMPORT_PAGE_QTY.getId(), pageQty ) );
 
 
-				final List<String> photosightCategoryIds = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
+				final List<String> remotePhotoSiteCategoryIds = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 					@Override
 					public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 						return String.valueOf( remotePhotoSiteCategory.getId() );
 					}
 				} );
-				parametersMap.put( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES, new CommonProperty( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES.getId(), photosightCategoryIds ) );
+				parametersMap.put( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES, new CommonProperty( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES.getId(), remotePhotoSiteCategoryIds ) );
 
 				totalJopOperations = pageQty;
 				break;
@@ -122,24 +128,48 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				break;
 			case PHOTOSIGHT:
-				final List<String> photosightUserId = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueListString();
-				final String userName = jobParameters.get( SavedJobParameterKey.USER_NAME ).getValue();
+			case PHOTO35:
+				final List<String> remotePhotoSiteUserIds = jobParameters.get( SavedJobParameterKey.PARAM_USER_ID ).getValueListString();
 				final UserGender userGender = UserGender.getById( jobParameters.get( SavedJobParameterKey.USER_GENDER_ID ).getValueInt() );
 				final UserMembershipType membershipType = UserMembershipType.getById( jobParameters.get( SavedJobParameterKey.USER_MEMBERSHIP_ID ).getValueInt() );
-				final boolean importComments = jobParameters.get( SavedJobParameterKey.IMPORT_PHOTOSIGHT_COMMENTS ).getValueBoolean();
+				final boolean importComments = jobParameters.get( SavedJobParameterKey.IMPORT_REMOTE_PHOTO_SITE_COMMENTS ).getValueBoolean();
 				final boolean breakImportIfAlreadyImportedPhotoFound = jobParameters.get( SavedJobParameterKey.BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND ).getValueBoolean();
 				final int delayBetweenRequest = jobParameters.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueInt();
 				final int pageQty = jobParameters.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValueInt();
 
-				final List<RemotePhotoSiteCategory> photosightCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.PHOTOSIGHT_CATEGORIES ).getValueListInt(), new Function<Integer, PhotosightCategory>() {
+				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES ).getValueListInt(), new Function<Integer, RemotePhotoSiteCategory>() {
 					@Override
-					public PhotosightCategory apply( final Integer id ) {
-						return PhotosightCategory.getById( id );
+					public RemotePhotoSiteCategory apply( final Integer id ) {
+						switch ( importSource ) {
+							case PHOTOSIGHT:
+								return PhotosightCategory.getById( id );
+							case PHOTO35:
+								return Photo35Category.getById( id );
+						}
+
+						throw new IllegalArgumentException( String.format( "Unsupported photos import source: %s", importSource ) );
 					}
 				} );
 
-				importParameters = new RemoteSitePhotosImportParameters( photosightUserId, userGender, membershipType, importComments, delayBetweenRequest, pageQty
-					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, photosightCategories, new PhotosightRemoteContentHelper(), new PhotosightContentDataExtractor() );
+				final AbstractRemoteContentHelper remoteContentHelper;
+				final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor;
+
+				switch ( importSource ) {
+					case PHOTOSIGHT:
+						remoteContentHelper = new PhotosightRemoteContentHelper();
+						remotePhotoSitePageContentDataExtractor = new PhotosightContentDataExtractor();
+						break;
+					case PHOTO35:
+						remoteContentHelper = new Photo35RemoteContentHelper();
+						remotePhotoSitePageContentDataExtractor = new Photo35ContentDataExtractor();
+						break;
+					default:
+						throw new IllegalArgumentException( String.format( "Unsupported photos import source: %s", importSource ) );
+				}
+
+
+				importParameters = new RemoteSitePhotosImportParameters( remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequest, pageQty
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, remotePhotoSiteCategories, remoteContentHelper, remotePhotoSitePageContentDataExtractor );
 
 				break;
 			default:
@@ -171,27 +201,45 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				break;
 			case PHOTOSIGHT:
-				final RemoteSitePhotosImportParameters photosightParameters = ( RemoteSitePhotosImportParameters ) importParameters;
+			case PHOTO35:
+				final RemoteSitePhotosImportParameters remoteSitePhotosImportParameters = ( RemoteSitePhotosImportParameters ) importParameters;
 
-				final List<String> photosightUserIds = Lists.transform( photosightParameters.getRemoteUserIds(), new Function<String, String>() {
+				final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
+
+				final List<String> remotePhotoSiteUserIds = Lists.transform( remoteSitePhotosImportParameters.getRemoteUserIds(), new Function<String, String>() {
 					@Override
-					public String apply( final String photosightUserId ) {
-						return String.format( "<a href='%s' title='%s'>%s</a>", new PhotosightRemoteContentHelper().getUserCardUrl( photosightUserId ), translatorService.translate( "Photo import job parameter: Photosight user ID", getLanguage() ), photosightUserId );
+					public String apply( final String remotePhotoSiteUserId ) {
+						return String.format( "<a href='%s' title='%s'>%s</a>", remoteContentHelper.getUserCardUrl( remotePhotoSiteUserId ), translatorService.translate( "Photo import job parameter: Remote photo site users IDs", getLanguage() ), remotePhotoSiteUserId );
 					}
 				} );
-				final String photosightUserLinks = StringUtils.join( photosightUserIds, ", " );
-				builder.append( translatorService.translate( "Photo import job parameter: Photosight user ids", getLanguage() ) )
+				final String remoteSiteUserLinks = StringUtils.join( remotePhotoSiteUserIds, ", " );
+				builder.append( translatorService.translate( "Photo import job parameter: Remote photo site users ids", getLanguage() ) )
 					   .append( ": " )
-					   .append( photosightUserLinks ).append( "<br />" );
+					   .append( remoteSiteUserLinks ).append( "<br />" );
 
-				final List<RemotePhotoSiteCategory> photosightCategories = photosightParameters.getRemotePhotoSiteCategories();
+				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = remoteSitePhotosImportParameters.getRemotePhotoSiteCategories();
 				builder.append( translatorService.translate( "Photo import job parameter: Import photos from categories", getLanguage() ) ).append( ": " );
+
+				final RemotePhotoSiteCategory[] remoteCategories;
+
+				switch ( importSource ) {
+					case PHOTOSIGHT:
+						remoteCategories = PhotosightCategory.values();
+						break;
+					case PHOTO35:
+						remoteCategories = Photo35Category.values();
+						break;
+					default:
+						throw new IllegalArgumentException( String.format( "Unexpected importSource: %s", importSource ) );
+				}
+
 				final String catText;
-				if ( photosightCategories.size() == PhotosightCategory.values().length ) {
+
+				if ( remotePhotoSiteCategories.size() == remoteCategories.length ) {
 					catText = translatorService.translate( "Photo import job parameter: All categories", getLanguage() );
 				} else {
-					if ( photosightCategories.size() < PhotosightCategory.values().length / 2 ) {
-						final List<String> categories = Lists.transform( photosightCategories, new Function<RemotePhotoSiteCategory, String>() {
+					if ( remotePhotoSiteCategories.size() < remoteCategories.length / 2 ) {
+						final List<String> categories = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 							@Override
 							public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 								return remotePhotoSiteCategory.getName();
@@ -200,9 +248,9 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 						catText = StringUtils.join( categories, ", " );
 					} else {
 						final List<String> excludedCategories = newArrayList();
-						for ( final PhotosightCategory photosightCategory : PhotosightCategory.values() ) {
-							if ( ! photosightCategories.contains( photosightCategory ) ) {
-								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", photosightCategory.getName() ) );
+						for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remoteCategories ) {
+							if ( ! remotePhotoSiteCategories.contains( remotePhotoSiteCategory ) ) {
+								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", remotePhotoSiteCategory.getName() ) );
 							}
 						}
 						catText = StringUtils.join( excludedCategories, ", " );
@@ -210,16 +258,16 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				}
 				builder.append( catText ).append( "<br />" );
 
-				final int pageQty = photosightParameters.getPageQty();
+				final int pageQty = remoteSitePhotosImportParameters.getPageQty();
 				builder.append( translatorService.translate( "Photo import job parameter: Pages to process", getLanguage() ) ).append( ": " ).append( pageQty > 0 ? pageQty : translatorService.translate( "Photo import job parameter: Process all pages", getLanguage() ) ).append( "<br />" );
 
-				builder.append( translatorService.translate( "Photo import job parameter: Import comments", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.isImportComments() ? YesNo.YES.getName() : YesNo.NO.getName(), getLanguage() ) ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Import comments", getLanguage() ) ).append( ": " ).append( translatorService.translate( remoteSitePhotosImportParameters.isImportComments() ? YesNo.YES.getName() : YesNo.NO.getName(), getLanguage() ) ).append( "<br />" );
 
 				builder.append( translatorService.translate( "Photo import job parameter: Being imported user parameters section", getLanguage() ) ).append( ": " ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Gender", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getUserGender().getName(), getLanguage() ) ).append( "<br />" );
-				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Membership", getLanguage() ) ).append( ": " ).append( translatorService.translate( photosightParameters.getMembershipType().getName(), getLanguage() ) ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Gender", getLanguage() ) ).append( ": " ).append( translatorService.translate( remoteSitePhotosImportParameters.getUserGender().getName(), getLanguage() ) ).append( "<br />" );
+				builder.append( "&nbsp;" ).append( translatorService.translate( "Photo import job parameter: Membership", getLanguage() ) ).append( ": " ).append( translatorService.translate( remoteSitePhotosImportParameters.getMembershipType().getName(), getLanguage() ) ).append( "<br />" );
 
-				builder.append( translatorService.translate( "Photo import job parameter: Delay between requests", getLanguage() ) ).append( ": " ).append( photosightParameters.getDelayBetweenRequest() ).append( "<br />" );
+				builder.append( translatorService.translate( "Photo import job parameter: Delay between requests", getLanguage() ) ).append( ": " ).append( remoteSitePhotosImportParameters.getDelayBetweenRequest() ).append( "<br />" );
 
 				break;
 			default:
@@ -269,6 +317,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				importStrategy = new FilesystemImportStrategy( this, importParameters, services );
 				break;
 			case PHOTOSIGHT:
+			case PHOTO35:
 				importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 				break;
 			default:
