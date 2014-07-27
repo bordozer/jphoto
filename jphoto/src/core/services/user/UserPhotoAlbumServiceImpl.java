@@ -51,6 +51,11 @@ public class UserPhotoAlbumServiceImpl implements UserPhotoAlbumService {
 	}
 
 	@Override
+	public UserPhotoAlbum loadPhotoAlbumByName( final String name ) {
+		return userPhotoAlbumDao.loadPhotoAlbumByName( name );
+	}
+
+	@Override
 	public void deletePhotoFromAllAlbums( final int photoId ) {
 		userPhotoAlbumDao.deletePhotoFromAllAlbums( photoId );
 	}

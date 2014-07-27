@@ -14,6 +14,8 @@ public interface UserPhotoAlbumService extends BaseEntityService<UserPhotoAlbum>
 
 	List<UserPhotoAlbum> loadPhotoAlbums( final int photoId );
 
+	UserPhotoAlbum loadPhotoAlbumByName( final String name );
+
 	void deletePhotoFromAllAlbums( final int photoId );
 
 	int getUserPhotoAlbumPhotosQty( final int userPhotoAlbumId );

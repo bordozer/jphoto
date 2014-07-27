@@ -431,6 +431,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final ImageToImport imageToImport = new ImageToImport( imageDiscEntry );
 			imageToImport.setUser( localUser );
 			imageToImport.setName( remotePhotoSitePhoto.getName() );
+			imageToImport.setPhotoAlbum( remotePhotoSitePhoto.getSeries() );
 
 			final RemotePhotoSiteCategory photosightCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
@@ -480,7 +481,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		final List<String> imageUrls = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
-		if ( imageUrls.isEmpty() ) {
+		if ( imageUrls == null || imageUrls.isEmpty() ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
 			return null;
 		}
@@ -494,6 +495,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
+
+		final String series = imageUrls.size() == 0 ? "" : String.format( "Series #%d", services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
 
 		for ( final String imageUrl : imageUrls ) {
 
@@ -520,6 +523,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			remotePhotoSitePhoto.setCached( false );
+			remotePhotoSitePhoto.setSeries( series );
 
 			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 

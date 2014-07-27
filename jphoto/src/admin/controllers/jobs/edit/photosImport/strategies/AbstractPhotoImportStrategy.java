@@ -20,9 +20,11 @@ import core.services.photo.PhotoService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,13 +94,31 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
 		photo.setImportId( photoToImport.getImportId() );
 
-		final PhotoService photoService = services.getPhotoService();
-
 		final PhotoTeam photoTeam = getPhotoTeam( photo, user );
-		final List<UserPhotoAlbum> albums = getPhotoAlbums( user );
+
+		final List<UserPhotoAlbum> albums = newArrayList();
+		if ( StringUtils.isNotEmpty( photoToImport.getPhotoAlbum() ) ) {
+
+			final UserPhotoAlbum userPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( photoToImport.getPhotoAlbum() );
+			if ( userPhotoAlbum != null ) {
+				albums.add( userPhotoAlbum );
+				log.debug( String.format( "The photo will be added to the existing album with name '%s'", userPhotoAlbum.getName() ) );
+			} else {
+				final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
+				photoAlbum.setName( photoToImport.getPhotoAlbum() );
+				photoAlbum.setUser( user );
+				photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
+
+				services.getUserPhotoAlbumService().save( photoAlbum );
+
+				albums.add( photoAlbum );
+			}
+		} else {
+			albums.addAll( getPhotoAlbums( user ) );
+		}
 
 		final File imageFile = imageDiscEntry.getImageFile();
-		photoService.uploadNewPhoto( photo, imageFile, photoTeam, albums );
+		services.getPhotoService().uploadNewPhoto( photo, imageFile, photoTeam, albums );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 

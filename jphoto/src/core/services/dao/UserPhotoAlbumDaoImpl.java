@@ -154,6 +154,16 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 	}
 
 	@Override
+	public UserPhotoAlbum loadPhotoAlbumByName( final String name ) {
+		final String sql = String.format( "SELECT * FROM %s WHERE %s=:name;"
+			, TABLE_USER_PHOTO_ALBUM
+			, TABLE_USER_PHOTO_ALBUM_COL_NAME
+		);
+
+		return getEntryOrNull( sql, new MapSqlParameterSource( "name", name ), new PhotoAlbumMapper() );
+	}
+
+	@Override
 	public int getUserPhotoAlbumPhotosQty( final int userPhotoAlbumId ) {
 		final String sql = String.format( "SELECT COUNT(%s) FROM %s WHERE %s=:userPhotoAlbumId;"
 			, TABLE_PHOTO_ALBUMS_COL_PHOTO_ID

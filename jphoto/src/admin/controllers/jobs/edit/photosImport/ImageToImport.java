@@ -18,6 +18,7 @@ public class ImageToImport {
 	private Photo photo;
 
 	private int importId;
+	private String photoAlbum;
 
 	public ImageToImport( final ImageDiscEntry imageDiscEntry ) {
 		this.imageDiscEntry = imageDiscEntry;
@@ -81,6 +82,14 @@ public class ImageToImport {
 
 	public void setImportId( final int importId ) {
 		this.importId = importId;
+	}
+
+	public void setPhotoAlbum( final String photoAlbum ) {
+		this.photoAlbum = photoAlbum;
+	}
+
+	public String getPhotoAlbum() {
+		return photoAlbum;
 	}
 
 	@Override

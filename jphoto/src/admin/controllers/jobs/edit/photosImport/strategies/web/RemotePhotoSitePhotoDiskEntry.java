@@ -1,7 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSitePhoto;
 
 public class RemotePhotoSitePhotoDiskEntry {
 

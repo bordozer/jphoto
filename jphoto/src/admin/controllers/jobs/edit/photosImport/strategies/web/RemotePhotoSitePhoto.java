@@ -19,6 +19,7 @@ public class RemotePhotoSitePhoto {
 	private boolean isCached;
 
 	private boolean hasError;
+	private String series;
 
 	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
@@ -84,6 +85,14 @@ public class RemotePhotoSitePhoto {
 
 	public void setHasError( final boolean hasError ) {
 		this.hasError = hasError;
+	}
+
+	public void setSeries( final String series ) {
+		this.series = series;
+	}
+
+	public String getSeries() {
+		return series;
 	}
 
 	@Override

@@ -15,6 +15,8 @@ public interface UserPhotoAlbumDao extends BaseEntityDao<UserPhotoAlbum> {
 
 	List<UserPhotoAlbum> loadPhotoAlbums( final int photoId );
 
+	UserPhotoAlbum loadPhotoAlbumByName( String name );
+
 	int getUserPhotoAlbumPhotosQty( final int userPhotoAlbumId );
 
 	boolean isPhotoInAlbum( final int photoId, final int photoAlbumId );
