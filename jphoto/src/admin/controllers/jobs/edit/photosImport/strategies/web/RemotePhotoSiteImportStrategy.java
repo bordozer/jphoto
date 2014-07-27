@@ -482,6 +482,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private List<RemotePhotoSitePhoto> makeImportPhotoFromRemotePhotoSite( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) throws IOException {
 
+		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor = getRemotePhotoSitePageContentDataExtractor();
+
 		final AbstractRemoteContentHelper remoteContentHelper = importParameters.getRemoteContentHelper();
 
 		final String photoPageContent = remoteContentHelper.getPhotoPageContent( remotePhotoSiteUser, remotePhotoSitePhotoId );
@@ -490,15 +492,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return newArrayList();
 		}
 
-		final List<String> imageUrls = getRemotePhotoSitePageContentDataExtractor().extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
+		final List<String> imageUrls = remotePhotoSitePageContentDataExtractor.extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
 		if ( imageUrls == null || imageUrls.isEmpty() ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
 			return newArrayList();
 		}
 
-		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentHelper = getRemotePhotoSitePageContentDataExtractor();
-
-		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
+		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentDataExtractor.extractPhotoCategoryId( photoPageContent ) );
 		if( photosightCategory == null ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo category from page content." );
 			return newArrayList();
@@ -506,7 +506,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
-		final String series = imageUrls.size() == 0 ? "" : String.format( "%s #%d", photosightCategory.getName(), services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
+		final String series = imageUrls.size() == 1 ? "" : String.format( "%s #%d", photosightCategory.getName(), services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
 		int numberInSeries = 1;
 
 		for ( final String imageUrl : imageUrls ) {
@@ -514,10 +514,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Remote photo site site photos import: Importing image '$1'", services )
 					.string( imageUrl )
 					;
-				job.addJobRuntimeLogMessage( translatableMessage );
+			job.addJobRuntimeLogMessage( translatableMessage );
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
-			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentHelper.extractPhotoName( photoPageContent ), numberInSeries ) );
+			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent ), numberInSeries ) );
 
 			final Date uploadTime = importParameters.getRemotePhotoSitePageContentDataExtractor().extractPhotoUploadTime( photoPageContent, services );
 			if ( uploadTime != null ) {
