@@ -23,7 +23,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 		}
 
 		final List<String> photoSeries = getPhotoSeries( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
-		if ( photoSeries != null ) {
+		if ( photoSeries != null && photoSeries.size() > 0 ) {
 			return photoSeries.get( 0 );
 		}
 
@@ -47,7 +47,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576169.jpg" id="mainPhoto576169" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
 		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576170.jpg" id="mainPhoto576170" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
 
-		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\" src=\"http://%s/photos_series/(.+?)/(.+?).jpg\"(.+?)\"/>", getHost() ) );
+		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\" src=\"http://%s/photos_series/(.+?)/(.+?).jpg\"", getHost() ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		final List<String> result = newArrayList();

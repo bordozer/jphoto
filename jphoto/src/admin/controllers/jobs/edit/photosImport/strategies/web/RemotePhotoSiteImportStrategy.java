@@ -385,7 +385,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = getRemotePhotoSiteCacheXmlUtils();
 
 		try {
-			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
+			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( importParameters.getImportSource(), remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
 				.string( remotePhotoSiteCacheXmlUtils.getUserInfoFile( remotePhotoSiteUser ).getAbsolutePath() )
@@ -490,7 +490,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentHelper = getRemotePhotoSitePageContentDataExtractor();
 
-		final PhotosightCategory photosightCategory = PhotosightCategory.getById( remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
+		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentHelper.extractPhotoCategoryId( photoPageContent ) );
 		if( photosightCategory == null ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo category from page content." );
 			return null;

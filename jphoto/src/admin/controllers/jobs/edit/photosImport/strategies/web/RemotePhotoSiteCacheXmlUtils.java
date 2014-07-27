@@ -119,7 +119,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
+	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final PhotosImportSource importSource, final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
@@ -134,7 +134,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			final int remoteUserPhotoId = NumberUtils.convertToInt( photoElement.element( USER_INFO_FILE_PHOTO_ID ).getText() );
 
 			final String savedCategoryId = photoElement.element( USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
-			final PhotosightCategory category = PhotosightCategory.getById( NumberUtils.convertToInt( savedCategoryId ) );
+			final RemotePhotoSiteCategory category = RemotePhotoSiteCategory.getById( importSource, NumberUtils.convertToInt( savedCategoryId ) );
 			if ( category == null ) {
 				final String message = translatorService.translate( "File '$1' contains unknown remote photo site categoryId '$2'. Note: file deletion may solve the problem because the import will be done again", language
 					, userInfoFile.getAbsolutePath()

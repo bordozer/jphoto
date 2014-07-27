@@ -18,7 +18,7 @@ public class RemotePhotoSitePhoto {
 
 	private boolean isCached;
 
-	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final PhotosightCategory remotePhotoSiteCategory ) {
+	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remotePhotoSiteUser = remotePhotoSiteUser;
 		this.photoId = photoId;
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
