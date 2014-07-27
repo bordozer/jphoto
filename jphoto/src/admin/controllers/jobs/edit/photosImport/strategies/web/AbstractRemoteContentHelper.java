@@ -28,7 +28,7 @@ public abstract class AbstractRemoteContentHelper {
 
 	public abstract String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber );
 
-	public abstract String getPhotoCardUrl( int remotePhotoSitePhotoId );
+	public abstract String getPhotoCardUrl( final String remotePhotoSiteUserId, int remotePhotoSitePhotoId );
 
 	public abstract String getPhotoCategoryUrl( final RemotePhotoSiteCategory remotePhotoSiteCategory );
 
@@ -78,14 +78,14 @@ public abstract class AbstractRemoteContentHelper {
 		return extractUserNameFromRemoteSite( remotePhotoSiteUser.getId() );
 	}
 
-	public String getPhotoCardLink( final int remotePhotoSitePhotoId ) {
-		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
+	public String getPhotoCardLink( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId ) {
+		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSiteUserId, remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
 	}
 
 	public String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
-			, getPhotoCardUrl( remotePhotoSitePhoto.getPhotoId() )
+			, getPhotoCardUrl( remotePhotoSitePhoto.getRemotePhotoSiteUser().getId(), remotePhotoSitePhoto.getPhotoId() )
 			, StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() )
 			, remotePhotoSitePhoto.getPhotoId()
 		);
@@ -105,7 +105,7 @@ public abstract class AbstractRemoteContentHelper {
 	}
 
 	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
-		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSitePhotoId ) );
+		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId ) );
 	}
 
 	public String getImageContentFromUrl( final String imageUrl ) {

@@ -25,7 +25,7 @@ public class Photo35RemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
+	public String getPhotoCardUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId ) {
 		return String.format( "http://%s.%s/photo_%d/", remotePhotoSiteUserId, getRemotePhotoSiteHost(), remotePhotoSitePhotoId );
 	}
 

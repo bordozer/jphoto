@@ -27,7 +27,7 @@ public class PhotosightRemoteContentHelper extends AbstractRemoteContentHelper {
 	}
 
 	@Override
-	public String getPhotoCardUrl( final int remotePhotoSitePhotoId ) {
+	public String getPhotoCardUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId ) {
 		return String.format( "http://www.%s/%s/%d/", getRemotePhotoSiteHost(), "photos", remotePhotoSitePhotoId );
 	}
 

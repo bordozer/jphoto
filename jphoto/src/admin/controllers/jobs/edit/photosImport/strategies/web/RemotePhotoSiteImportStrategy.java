@@ -540,7 +540,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 User: $2; photo: $3. Photo import skipped.", services )
 			.string( s )
 			.string( remotePhotoSiteUser.toString() ) // TODO: ?
-			.string( importParameters.getRemoteContentHelper().getPhotoCardLink( remotePhotoSitePhotoId ) )
+			.string( importParameters.getRemoteContentHelper().getPhotoCardLink( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId ) )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 
