@@ -2,7 +2,6 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photos35;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import core.exceptions.BaseRuntimeException;
 import utils.NumberUtils;
 import utils.StringUtilities;
@@ -17,16 +16,48 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 
 	@Override
 	public String extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
-		// <img class="mainPhoto" id="mainPhoto" src="http://babakfatholahi.35photo.ru/photos/20140723/743798.jpg" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
-		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\" id=\"mainPhoto\" src=\"http://%s.%s/photos/(.+?)/%s.jpg\""
-			, remotePhotoSiteUserId, getHost(), remotePhotoSitePhotoId ) );
-		final Matcher matcher = pattern.matcher( photoPageContent );
 
-		if ( matcher.find() ) {
-			return String.format( "http://%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), matcher.group( 1 ),  remotePhotoSitePhotoId );
+		final String singlePhoto = getSinglePhoto( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
+		if ( singlePhoto != null ) {
+			return singlePhoto;
+		}
+
+		final List<String> photoSeries = getPhotoSeries( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
+		if ( photoSeries != null ) {
+			return photoSeries.get( 0 );
 		}
 
 		return null;
+	}
+
+	private String getSinglePhoto( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+		// <img class="mainPhoto" id="mainPhoto" src="http://babakfatholahi.35photo.ru/photos/20140723/743798.jpg" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
+
+		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\"(.+?)src=\"http://%s.%s/photos/(.+?)/%s.jpg\"", remotePhotoSiteUserId, getHost(), remotePhotoSitePhotoId ) );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		if ( matcher.find() ) {
+			return String.format( "http://%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), matcher.group( 2 ),  remotePhotoSitePhotoId );
+		}
+
+		return null;
+	}
+
+	private List<String> getPhotoSeries( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576169.jpg" id="mainPhoto576169" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
+		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576170.jpg" id="mainPhoto576170" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
+
+		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\" src=\"http://%s/photos_series/(.+?)/(.+?).jpg\"(.+?)\"/>", getHost() ) );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		final List<String> result = newArrayList();
+		while ( matcher.find() ) {
+			final String series = matcher.group( 1 );
+			final String photoId = matcher.group( 2 );
+			result.add( String.format( "http://%s/photos_series/%s/%s.jpg", getHost(), series, photoId ) );
+		}
+
+		return result;
 	}
 
 	@Override
