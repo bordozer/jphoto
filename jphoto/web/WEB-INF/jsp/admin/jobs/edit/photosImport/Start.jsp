@@ -33,6 +33,7 @@
 
 <c:set var="filesystemImportId" value="<%=PhotosImportSource.FILE_SYSTEM.getId()%>"/>
 <c:set var="photosightImportId" value="<%=PhotosImportSource.PHOTOSIGHT.getId()%>"/>
+<c:set var="photo35ImportId" value="<%=PhotosImportSource.PHOTO35.getId()%>"/>
 
 <c:set var="remotePhotoSiteCategoryWrapper" value="<%=photosImportModel.getRemotePhotoSiteCategoryWrappers()%>"/>
 
@@ -152,7 +153,7 @@
 					<table:tr>
 						<table:td colspan="2">
 
-							<%-- PHOTOSIGHT IMPORT --%>
+							<%-- REMOTE PHOTO SITE IMPORT --%>
 							<div id="${photosightImportDivId}" style="float: left; width: 100%; display: none;">
 								<div style="float: left; width: 100%;">
 								<table:table width="100%">
@@ -238,7 +239,7 @@
 								</div>
 
 							</div>
-							<%-- / PHOTOSIGHT IMPORT --%>
+							<%-- / REMOTE PHOTO SITE IMPORT --%>
 
 						</table:td>
 					</table:tr>
@@ -257,7 +258,7 @@
 				setFormsVisibility();
 
 				var type = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
-				if ( type == ${photosightImportId} ) {
+				if ( type == ${photosightImportId} || type == ${photo35ImportId} ) {
 					renderRemoteUserInfo();
 				}
 			} );
@@ -272,7 +273,7 @@
 					$( '#' + '${filesystemImportDivId}' ).show();
 				}
 
-				if ( type == ${photosightImportId} ) {
+				if ( type == ${photosightImportId} || type == ${photo35ImportId} ) {
 					$( '#' + '${filesystemImportDivId}' ).hide();
 					$( '#' + '${photosightImportDivId}' ).show();
 				}
