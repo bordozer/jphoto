@@ -29,7 +29,7 @@
 
 	<translation>
 		<nerd>Got data of '$1': $2 of $3, photo category: $4</nerd>
-		<ru><![CDATA['$1': получены данные работы '$2' пользователя $3, раздел '$4']]></ru>
+		<ru><![CDATA[$1: получены данные работы '$2' пользователя $3, раздел '$4']]></ru>
 	</translation>
 
 	<translation>
