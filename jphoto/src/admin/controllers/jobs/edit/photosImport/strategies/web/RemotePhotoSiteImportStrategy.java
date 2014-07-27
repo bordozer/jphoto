@@ -465,8 +465,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		while ( matcher.find() && ! job.hasJobFinishedWithAnyResult() ) {
-			final String group = matcher.group( 1 );
-			final int remotePhotoSitePhotoId = getRemotePhotoSitePageContentDataExtractor().extractRemotePhotoSitePhotoId( group );
+			final String _remotePhotoSitePhotoId = matcher.group( 1 );
+			final int remotePhotoSitePhotoId = getRemotePhotoSitePageContentDataExtractor().extractRemotePhotoSitePhotoId( _remotePhotoSitePhotoId );
 
 			result.add( remotePhotoSitePhotoId );
 		}
