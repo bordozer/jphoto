@@ -27,22 +27,6 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
-		// <img src="http://icon.s.photosight.ru/img/8/f4f/3725335_large.jpeg"
-		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
-		final Matcher matcher = pattern.matcher( photoPageContent );
-
-		if ( matcher.find() ) {
-			final String photoImageServerUrl = matcher.group( 1 );
-			final String someShit = matcher.group( 2 );
-			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
-		}
-
-		return null;
-	}
-
-	@Override
 	public String getPhotoIdRegex() {
 		return "<a href=\"/photos/(.+?)/\\?from_member\" class=\"preview230\">";
 	}
@@ -128,6 +112,21 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 		}
 
 		return result;
+	}
+
+	private String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+		// <img src="http://icon.s.photosight.ru/img/8/f4f/3725335_large.jpeg"
+		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", PhotosImportSource.PHOTOSIGHT.getUrl(), remotePhotoSitePhotoId ) );
+		final Matcher matcher = pattern.matcher( photoPageContent );
+
+		if ( matcher.find() ) {
+			final String photoImageServerUrl = matcher.group( 1 );
+			final String someShit = matcher.group( 2 );
+			final String extension = matcher.group( 3 );
+			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, PhotosImportSource.PHOTOSIGHT.getUrl(), someShit, remotePhotoSitePhotoId, extension );
+		}
+
+		return null;
 	}
 
 	private String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {

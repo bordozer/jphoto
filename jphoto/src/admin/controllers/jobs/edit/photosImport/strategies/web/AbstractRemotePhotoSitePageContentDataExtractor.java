@@ -12,8 +12,6 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public abstract String extractImageUrl( final int remotePhotoSitePhotoId, final String photoPageContent );
 
-	public abstract String extractImageUrlByNewRules( int remotePhotoSitePhotoId, final String photoPageContent );
-
 	public abstract String extractRemotePhotoSiteUserName( final String userPageContent );
 
 	public abstract int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId );
