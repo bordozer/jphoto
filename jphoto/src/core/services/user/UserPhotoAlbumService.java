@@ -1,6 +1,7 @@
 package core.services.user;
 
 import core.general.photo.Photo;
+import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.AllEntriesByIdLoadable;
 import core.interfaces.BaseEntityService;
@@ -14,7 +15,7 @@ public interface UserPhotoAlbumService extends BaseEntityService<UserPhotoAlbum>
 
 	List<UserPhotoAlbum> loadPhotoAlbums( final int photoId );
 
-	UserPhotoAlbum loadPhotoAlbumByName( final String name );
+	UserPhotoAlbum loadPhotoAlbumByName( final User user, final String albumName );
 
 	void deletePhotoFromAllAlbums( final int photoId );
 

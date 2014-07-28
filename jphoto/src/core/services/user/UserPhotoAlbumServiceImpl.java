@@ -1,6 +1,7 @@
 package core.services.user;
 
 import core.general.photo.Photo;
+import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.dao.UserPhotoAlbumDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +52,8 @@ public class UserPhotoAlbumServiceImpl implements UserPhotoAlbumService {
 	}
 
 	@Override
-	public UserPhotoAlbum loadPhotoAlbumByName( final String name ) {
-		return userPhotoAlbumDao.loadPhotoAlbumByName( name );
+	public UserPhotoAlbum loadPhotoAlbumByName( final User user, final String albumName ) {
+		return userPhotoAlbumDao.loadPhotoAlbumByName( user.getId(), albumName );
 	}
 
 	@Override

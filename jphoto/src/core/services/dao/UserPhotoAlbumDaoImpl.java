@@ -154,13 +154,18 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 	}
 
 	@Override
-	public UserPhotoAlbum loadPhotoAlbumByName( final String name ) {
-		final String sql = String.format( "SELECT * FROM %s WHERE %s=:name;"
+	public UserPhotoAlbum loadPhotoAlbumByName( final int userId, final String albumName ) {
+		final String sql = String.format( "SELECT * FROM %s WHERE %s=:userId AND %s=:name;"
 			, TABLE_USER_PHOTO_ALBUM
+			, TABLE_USER_PHOTO_ALBUM_COL_USER_ID
 			, TABLE_USER_PHOTO_ALBUM_COL_NAME
 		);
 
-		return getEntryOrNull( sql, new MapSqlParameterSource( "name", name ), new UserPhotoAlbumMapper() );
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource(  );
+		paramSource.addValue( "userId", userId );
+		paramSource.addValue( "name", albumName );
+
+		return getEntryOrNull( sql, paramSource, new UserPhotoAlbumMapper() );
 	}
 
 	@Override

@@ -16,11 +16,9 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.log.LogHelper;
-import core.services.photo.PhotoService;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
-import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
@@ -94,31 +92,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
 		photo.setImportId( photoToImport.getImportId() );
 
-		final PhotoTeam photoTeam = getPhotoTeam( photo, user );
-
-		final List<UserPhotoAlbum> albums = newArrayList();
-		if ( StringUtils.isNotEmpty( photoToImport.getPhotoAlbum() ) ) {
-
-			final UserPhotoAlbum userPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( photoToImport.getPhotoAlbum() );
-			if ( userPhotoAlbum != null ) {
-				albums.add( userPhotoAlbum );
-				log.debug( String.format( "The photo will be added to the existing album with name '%s'", userPhotoAlbum.getName() ) );
-			} else {
-				final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
-				photoAlbum.setName( photoToImport.getPhotoAlbum() );
-				photoAlbum.setUser( user );
-				photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
-
-				services.getUserPhotoAlbumService().save( photoAlbum );
-
-				albums.add( photoAlbum );
-			}
-		} else {
-			albums.addAll( getPhotoAlbums( user ) );
-		}
-
-		final File imageFile = imageDiscEntry.getImageFile();
-		services.getPhotoService().uploadNewPhoto( photo, imageFile, photoTeam, albums );
+		services.getPhotoService().uploadNewPhoto( photo, imageDiscEntry.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 
@@ -185,13 +159,37 @@ public abstract class AbstractPhotoImportStrategy {
 		return new PhotoTeam( photo, photoTeamMembers );
 	}
 
-	private List<UserPhotoAlbum> getPhotoAlbums( final User user ) {
+	private List<UserPhotoAlbum> getPhotoAlbumsAssignTo( final ImageToImport photoToImport, final User user ) {
+
+		final String detectedOnRemoteSiteSeriesName = photoToImport.getPhotoAlbum();
+		if ( StringUtils.isNotEmpty( detectedOnRemoteSiteSeriesName ) ) {
+
+			final UserPhotoAlbum existingPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( user, detectedOnRemoteSiteSeriesName );
+			if ( existingPhotoAlbum != null ) {
+				log.debug( String.format( "The photo will be added to the existing album with name '%s'", existingPhotoAlbum.getName() ) );
+				return newArrayList( existingPhotoAlbum );
+			} else {
+				final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
+				photoAlbum.setName( detectedOnRemoteSiteSeriesName );
+				photoAlbum.setUser( user );
+				photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
+
+				services.getUserPhotoAlbumService().save( photoAlbum );
+
+				return newArrayList( photoAlbum );
+			}
+		}
+
+		return getRandomPhotoAlbums( user );
+	}
+
+	private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
 		final List<UserPhotoAlbum> userPhotoAlbums = services.getUserPhotoAlbumService().loadAllForEntry( user.getId() );
 
 		if ( userPhotoAlbums.isEmpty() ) {
 			return Collections.<UserPhotoAlbum>emptyList();
 		}
 
-		return services.getRandomUtilsService().getRandomNUniqueListElements( userPhotoAlbums );
+		return services.getRandomUtilsService().getRandomNUniqueListElements( userPhotoAlbums, 3 );
 	}
 }
