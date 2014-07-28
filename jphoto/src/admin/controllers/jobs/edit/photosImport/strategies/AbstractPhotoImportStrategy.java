@@ -53,12 +53,15 @@ public abstract class AbstractPhotoImportStrategy {
 	protected void createPhotosDBEntries( final List<ImageToImport> imageToImports ) throws IOException, SaveToDBException {
 		log.debug( "Creating photos" );
 
+		int counter = 1;
+		final int total = imageToImports.size();
 		for ( final ImageToImport imageToImport : imageToImports ) {
-			createPhotoDBEntry( imageToImport );
+			createPhotoDBEntry( imageToImport, counter, total );
+			counter++;
 		}
 	}
 
-	protected void createPhotoDBEntry( final ImageToImport photoToImport ) throws IOException, SaveToDBException {
+	protected void createPhotoDBEntry( final ImageToImport photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
 		final ImageDiscEntry imageDiscEntry = photoToImport.getImageDiscEntry();
 
 		final User user = photoToImport.getUser();
@@ -97,7 +100,9 @@ public abstract class AbstractPhotoImportStrategy {
 
 		photoToImport.setPhoto( photo );
 
-		job.addJobRuntimeLogMessage( new TranslatableMessage( "Created photo #$1 '$2' of $3, category: $4", services )
+		job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Created photo #$3 '$4' of $5, category: $6", services )
+			.addIntegerParameter( counter )
+			.addIntegerParameter( total )
 			.addIntegerParameter( photo.getId() )
 			.addPhotoCardLinkParameter( photo )
 			.addUserCardLinkParameter( user )

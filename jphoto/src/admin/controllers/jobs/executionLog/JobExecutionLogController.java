@@ -63,7 +63,7 @@ public class JobExecutionLogController {
 		final List<String> jobRuntimeLogsMessage = newArrayList();
 		for ( final JobRuntimeLog jobRuntimeLog : jobRuntimeLogs ) {
 			final String translation = jobRuntimeLog.getTranslatableMessage().build( language );
-			jobRuntimeLogsMessage.add( String.format( "%s %s", dateUtilsService.formatTime( jobRuntimeLog.getJobRuntimeLogEntryTime() ), translation ) );
+			jobRuntimeLogsMessage.add( String.format( "%s &nbsp;&nbsp; %s", dateUtilsService.formatTime( jobRuntimeLog.getJobRuntimeLogEntryTime() ), translation ) );
 		}
 
 		model.setJobRuntimeLogsMessages( jobRuntimeLogsMessage.size() < LOG_MESSAGE_QTY ? jobRuntimeLogsMessage : jobRuntimeLogsMessage.subList( 0, LOG_MESSAGE_QTY ) );

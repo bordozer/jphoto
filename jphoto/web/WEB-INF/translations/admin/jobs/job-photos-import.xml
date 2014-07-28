@@ -8,8 +8,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Created photo #$1 '$2' of $3, category: $4</nerd>
-		<ru><![CDATA[Создана работа #$1 '$2' пользователя $3, раздел: $4]]></ru>
+		<nerd>$1 / $2: Created photo #$3 '$4' of $5, category: $6</nerd>
+		<ru><![CDATA[$1 / $2: Создана работа #$3 '$4' пользователя $5, раздел: $6]]></ru>
 	</translation>
 
 	<translation>

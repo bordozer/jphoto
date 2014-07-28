@@ -57,6 +57,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 
 		log.debug( "Processing images" );
 
+		int counter = 1;
+		final int total = imageToImports.size();
 		while( pictureIterator.hasNext() ) {
 			final ImageToImport imageToImport = pictureIterator.next();
 
@@ -76,7 +78,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 
 			pictureIterator.remove();
 
-			createPhotoDBEntry( imageToImport );
+			createPhotoDBEntry( imageToImport, counter, total );
+			counter++;
 
 			if ( importParameters.isDeletePictureAfterImport() ) {
 				FileUtils.deleteQuietly( imageToImport.getImageDiscEntry().getImageFile() );
