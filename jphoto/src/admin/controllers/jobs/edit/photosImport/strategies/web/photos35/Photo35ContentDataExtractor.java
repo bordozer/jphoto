@@ -78,7 +78,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 
 	@Override
 	public int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId ) {
-		return 28; // TODO
+		return 0;
 	}
 
 	@Override

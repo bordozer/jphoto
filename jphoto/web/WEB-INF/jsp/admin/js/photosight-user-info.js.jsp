@@ -64,7 +64,9 @@ define( [ 'jquery' ], function ( $ ) {
 			var remoteUserCardUrl = remoteUserDTO.remoteUserCardUrl;
 
 			var div = getRemoteUserInfoDiv();
-			div.append( "#" + remoteUserDTO.remoteUserId + ": <a href=\"" + remoteUserCardUrl + "\" target=\"_blank\">" + remoteUserName + "</a>" + ", " + remoteUserDTO.remoteUserPhotosCount + " ${eco:translate('ROD PLURAL photos')}" );
+			div.append( "#" + remoteUserDTO.remoteUserId + ": <a href=\"" + remoteUserCardUrl + "\" target=\"_blank\">" + remoteUserName + "</a>" + ", "
+								+ ( remoteUserDTO.remoteUserPhotosCount > 0 ? remoteUserDTO.remoteUserPhotosCount : '???' )
+								+ " ${eco:translate('ROD PLURAL photos')}" );
 
 			if ( remoteUserDTO.remoteUserExistsInTheSystem ) {
 				div.append( ' ( ' + remoteUserDTO.userCardLink + ", <a href='" + remoteUserDTO.userPhotosUrl + "'>" + remoteUserDTO.photosCount + " ${eco:translate('ROD PLURAL photos')}</a> )" );
