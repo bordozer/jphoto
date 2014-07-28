@@ -14,8 +14,7 @@ import java.io.IOException;
 
 public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtilsService {
 
-	@Autowired
-	private SystemVarsService systemVarsService;
+	private  static final String PREVIEW_FOLDER_NAME = "preview";
 
 	@Autowired
 	private SystemFilePathUtilsService systemFilePathUtilsService;
@@ -64,7 +63,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public File getUserPhotoPreviewDir( final int userId ) {
-		return new File( getUserPhotoDir( userId ).getPath(), systemVarsService.getPreviewFolderName() );
+		return new File( getUserPhotoDir( userId ).getPath(), PREVIEW_FOLDER_NAME );
 	}
 
 	@Override
@@ -172,10 +171,6 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		}
 
 		return destFile;
-	}
-
-	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
-		this.systemVarsService = systemVarsService;
 	}
 
 	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {

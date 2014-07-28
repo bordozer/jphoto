@@ -59,9 +59,6 @@ public class PhotosImportController extends DateRangableController {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private GenreService genreService;
-
-	@Autowired
 	private TranslatorService translatorService;
 
 	@Autowired
@@ -136,6 +133,7 @@ public class PhotosImportController extends DateRangableController {
 		final PhotosImportModel aModel = ( PhotosImportModel ) model;
 
 		aModel.setImportComments( true );
+		aModel.setPictureDir( configurationService.getString( ConfigurationKey.ADMIN_PHOTO_FILE_IMPORT_DEFAULT_DIR ) );
 		aModel.setBreakImportIfAlreadyImportedPhotoFound( true );
 	}
 

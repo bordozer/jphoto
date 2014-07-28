@@ -13,9 +13,6 @@ AdminPrefix=/admin
 # Photo storage path
 PhotoStoragePath=/home/blu/src/userPhotos
 
-## Preview folder name
-PreviewFolderName=preview
-
 # Temp files path
 SystemTempFolder=../Files/temp
 

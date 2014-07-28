@@ -88,11 +88,6 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	}
 
 	@Override
-	public String getPreviewFolderName() {
-		return config.getString( "PreviewFolderName" );
-	}
-
-	@Override
 	public File getRemotePhotoSitesCacheFolder() {
 		return new File( config.getString( "RemotePhotoSitesCachePath" ) );
 	}

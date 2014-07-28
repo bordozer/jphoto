@@ -58,11 +58,6 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
-	public String getPreviewFolderName() {
-		return "previews";
-	}
-
-	@Override
 	public String getProjectName() {
 		return "Test jPhoto";
 	}

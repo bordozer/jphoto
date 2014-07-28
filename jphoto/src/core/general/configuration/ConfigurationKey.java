@@ -109,6 +109,7 @@ public enum ConfigurationKey {
 	, ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT( 1025, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photosight import: select by default categories that may contains nude content" )
 	, ADMIN_PHOTO_PREVIEW_DENSITY( 1026, "72", true, ConfigurationDataType.INTEGER, ConfigurationUnit.DPI, ConfigurationTab.ADMIN, "Photo preview density" )
 	, ADMIN_PHOTO_PREVIEW_DIMENSION( 1027, "200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.ADMIN, "Photo preview dimension" )
+	, ADMIN_PHOTO_FILE_IMPORT_DEFAULT_DIR( 1028, "", true, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photo file import default dir" )
 
 	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
 	, EMAILING_SMTP_DEBUG_MODE( 1308, "jphoto2003", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP debug mode" )

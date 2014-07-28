@@ -21,7 +21,7 @@ public class PhotosImportModel extends DateRangableModel {
 	public final static String DELETE_PICTURE_AFTER_IMPORT_CONTROL = "deletePictureFromDiskAfterImport";
 	public final static String USER_ID_FORM_CONTROL = "assignAllGeneratedPhotosToUserId";
 
-	private String pictureDir = "/home/blu/Pictures/"; // TODO: this is default value for dev time
+	private String pictureDir;
 	private String photoQtyLimit = "5";
 	private int assignAllGeneratedPhotosToUserId;
 	private User assignAllGeneratedPhotosToUser;

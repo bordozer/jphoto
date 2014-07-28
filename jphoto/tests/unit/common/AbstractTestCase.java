@@ -70,7 +70,6 @@ public class AbstractTestCase {
 
 		// userPhotoFilePathUtilsService -->
 		userPhotoFilePathUtilsService = new UserPhotoFilePathUtilsServiceImpl();
-		userPhotoFilePathUtilsService.setSystemVarsService( systemVarsServiceMock );
 
 		userPhotoFilePathUtilsService.setDateUtilsService( dateUtilsService );
 

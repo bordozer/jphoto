@@ -20,8 +20,6 @@ public interface SystemVarsService {
 
 	String getSystemTempFolder();
 
-	String getPreviewFolderName();
-
 	File getRemotePhotoSitesCacheFolder();
 
 	String getProjectName();
