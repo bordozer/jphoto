@@ -90,17 +90,13 @@ public class RemoteSiteCategoriesController {
 
 		final boolean selectCategoriesWithNudeContent = configurationService.getBoolean( ConfigurationKey.ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT );
 
-		final List<RemotePhotoSiteCategory> selectedCategories = Arrays.asList( RemotePhotoSiteCategory.getRemotePhotoSiteCategories( importSource ) );
+		final List<RemotePhotoSiteCategory> selectedCategories = newArrayList( RemotePhotoSiteCategory.getRemotePhotoSiteCategories( importSource ) );
 
 		CollectionUtils.filter( selectedCategories, new Predicate<RemotePhotoSiteCategory>() {
 
 			@Override
 			public boolean evaluate( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-				return isCategorySelected( remotePhotoSiteCategory );
-			}
-
-			private boolean isCategorySelected( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-				return selectCategoriesWithNudeContent || !canContainNudeContent( remotePhotoSiteCategory, importSource );
+				return selectCategoriesWithNudeContent || ! canContainNudeContent( remotePhotoSiteCategory, importSource );
 			}
 		} );
 
