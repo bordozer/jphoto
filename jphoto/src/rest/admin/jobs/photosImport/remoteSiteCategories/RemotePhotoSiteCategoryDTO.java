@@ -47,4 +47,9 @@ public class RemotePhotoSiteCategoryDTO {
 	public void addCssClass( final String cssClass ) {
 		cssClasses = String.format( "%s %s", cssClasses, cssClass );
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%d %s - %s", remotePhotoSiteCategoryId, remotePhotoSiteCategoryName, checked );
+	}
 }
