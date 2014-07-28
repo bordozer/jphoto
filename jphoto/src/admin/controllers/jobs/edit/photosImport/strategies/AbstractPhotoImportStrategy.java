@@ -62,6 +62,7 @@ public abstract class AbstractPhotoImportStrategy {
 	}
 
 	protected void createPhotoDBEntry( final ImageToImport photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
+
 		final ImageDiscEntry imageDiscEntry = photoToImport.getImageDiscEntry();
 
 		final User user = photoToImport.getUser();
@@ -188,6 +189,7 @@ public abstract class AbstractPhotoImportStrategy {
 	}
 
 	private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
+
 		final List<UserPhotoAlbum> userPhotoAlbums = services.getUserPhotoAlbumService().loadAllForEntry( user.getId() );
 
 		if ( userPhotoAlbums.isEmpty() ) {

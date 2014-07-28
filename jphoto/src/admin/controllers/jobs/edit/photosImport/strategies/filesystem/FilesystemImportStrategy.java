@@ -58,7 +58,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		log.debug( "Processing images" );
 
 		int counter = 1;
-		final int total = imageToImports.size();
+		final int total = job.getTotalJopOperations();
 		while( pictureIterator.hasNext() ) {
 			final ImageToImport imageToImport = pictureIterator.next();
 

@@ -254,8 +254,10 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 		final List<Integer> chosenIds = newArrayList();
 		int i = 0;
-		while( i < qty ) {
+		final int count = qty < items.size() ? qty : items.size();
+		while( i < count ) {
 			final T randomUserTeamMember = getRandomGenericListElement( items );
+
 			if ( chosenIds.contains( randomUserTeamMember.getId() ) ) {
 				continue;
 			}
