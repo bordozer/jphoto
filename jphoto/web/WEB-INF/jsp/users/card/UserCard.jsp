@@ -49,13 +49,18 @@
 		<c:if test="${selectedUserCardTab == 'ALBUMS'}">
 			<div class="divPadd">
 				<c:set var="userPhotosCountByAlbums" value="${userCardModel.userPhotosCountByAlbums}" />
-				<h3>${eco:translate('User photo albums')}:</h3>
-				<br />
-				<c:forEach var="userPhotoAlbum" items="${userCardModel.userPhotoAlbums}">
-					<div style="display: inline-block; width: 250px;">
-						<links:userPhotoAlbumPhotos userPhotoAlbum="${userPhotoAlbum}"/> - ${userPhotosCountByAlbums[userPhotoAlbum.id]} ${eco:translate('ROD PLURAL photos')}
-					</div>
-				</c:forEach>
+				${eco:translate('User photo albums')}:
+				<select id="userAlbums" onchange="scrollToAlbum();">
+					<option value="0"></option>
+					<c:forEach var="userPhotoAlbum" items="${userCardModel.userPhotoAlbums}">
+						<option value="${userPhotoAlbum.id}">${eco:escapeHtml(userPhotoAlbum.name)}</option>
+					</c:forEach>
+				</select>
+				<script type="text/javascript">
+					function scrollToAlbum() {
+						this.document.location.href = "#" + $( '#userAlbums' ).find( ":selected" ).val();
+					}
+				</script>
 
 				<userCard:customPhotoLists photoLists="${userCardModel.userPhotoAlbumsPhotoLists}"/>
 			</div>

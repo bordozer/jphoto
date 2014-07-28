@@ -260,7 +260,9 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( userId, userPhotoAlbum.getId(), getPagingModel() );
 
-		return getCustomPhotoList( selectIdsQuery, photoListTitle, userTeamMemberCardLink );
+		final PhotoList customPhotoList = getCustomPhotoList( selectIdsQuery, photoListTitle, userTeamMemberCardLink );
+		customPhotoList.setPhotoListId( userPhotoAlbum.getId() );
+		return customPhotoList;
 	}
 
 	@Override

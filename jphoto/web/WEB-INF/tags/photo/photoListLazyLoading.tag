@@ -32,7 +32,7 @@
 </c:if>
 
 <eco:form action="${formAction}" formName="${groupOperationForm}">
-
+	<a name="${photoList.photoListId}"></a>
 	<div class="photo-list-container">
 
 		<div class="photo-list-title block-background block-border block-shadow">
