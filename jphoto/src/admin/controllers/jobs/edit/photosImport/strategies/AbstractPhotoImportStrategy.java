@@ -24,7 +24,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import org.apache.commons.lang.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;

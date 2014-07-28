@@ -147,6 +147,7 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
 	@Override
 	public JobProgressDTO getJobProgressAjax( final int jobId ) {
+
 		final JobProgressDTO result = new JobProgressDTO( translatorService, EnvironmentContext.getLanguage() );
 
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
