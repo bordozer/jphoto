@@ -49,12 +49,13 @@
 		<c:if test="${selectedUserCardTab == 'ALBUMS'}">
 			<div class="divPadd">
 				<c:set var="userPhotosCountByAlbums" value="${userCardModel.userPhotosCountByAlbums}" />
-				${eco:translate('User photo albums')}:
-				<ul>
+				<h3>${eco:translate('User photo albums')}:</h3>
+				<br />
 				<c:forEach var="userPhotoAlbum" items="${userCardModel.userPhotoAlbums}">
-					<li><links:userPhotoAlbumPhotos userPhotoAlbum="${userPhotoAlbum}"/> - ${userPhotosCountByAlbums[userPhotoAlbum.id]} ${eco:translate('ROD PLURAL photos')}</li>
+					<div style="display: inline-block; width: 250px;">
+						<links:userPhotoAlbumPhotos userPhotoAlbum="${userPhotoAlbum}"/> - ${userPhotosCountByAlbums[userPhotoAlbum.id]} ${eco:translate('ROD PLURAL photos')}
+					</div>
 				</c:forEach>
-				</ul>
 
 				<userCard:customPhotoLists photoLists="${userCardModel.userPhotoAlbumsPhotoLists}"/>
 			</div>
