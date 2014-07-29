@@ -1,23 +1,23 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.RemoteImageDiscEntry;
 
 public class RemotePhotoSitePhotoDiskEntry {
 
 	private final RemotePhotoSitePhoto remotePhotoSitePhoto;
-	private final ImageDiscEntry imageDiscEntry;
+	private final RemoteImageDiscEntry remoteImageDiscEntry;
 
-	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final ImageDiscEntry imageDiscEntry ) {
+	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final RemoteImageDiscEntry remoteImageDiscEntry ) {
 		this.remotePhotoSitePhoto = remotePhotoSitePhoto;
-		this.imageDiscEntry = imageDiscEntry;
+		this.remoteImageDiscEntry = remoteImageDiscEntry;
 	}
 
 	public RemotePhotoSitePhoto getRemotePhotoSitePhoto() {
 		return remotePhotoSitePhoto;
 	}
 
-	public ImageDiscEntry getImageDiscEntry() {
-		return imageDiscEntry;
+	public RemoteImageDiscEntry getRemoteImageDiscEntry() {
+		return remoteImageDiscEntry;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class ImageToImport {
 
-	private final ImageDiscEntry imageDiscEntry;
+	private final RemoteImageDiscEntry remoteImageDiscEntry;
 
 	private String name;
 
@@ -20,12 +20,12 @@ public class ImageToImport {
 	private int importId;
 	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 
-	public ImageToImport( final ImageDiscEntry imageDiscEntry ) {
-		this.imageDiscEntry = imageDiscEntry;
+	public ImageToImport( final RemoteImageDiscEntry remoteImageDiscEntry ) {
+		this.remoteImageDiscEntry = remoteImageDiscEntry;
 	}
 
-	public ImageDiscEntry getImageDiscEntry() {
-		return imageDiscEntry;
+	public RemoteImageDiscEntry getRemoteImageDiscEntry() {
+		return remoteImageDiscEntry;
 	}
 
 	public String getName() {
@@ -94,12 +94,12 @@ public class ImageToImport {
 
 	@Override
 	public String toString() {
-		return String.format( "Photo to import: %s", imageDiscEntry );
+		return String.format( "Photo to import: %s", remoteImageDiscEntry );
 	}
 
 	@Override
 	public int hashCode() {
-		return 31 * imageDiscEntry.hashCode();
+		return 31 * remoteImageDiscEntry.hashCode();
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class ImageToImport {
 		}
 
 		final ImageToImport imageToImport = ( ImageToImport ) obj;
-		return imageDiscEntry == imageToImport.getImageDiscEntry();
+		return remoteImageDiscEntry == imageToImport.getRemoteImageDiscEntry();
 	}
 }
 

@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.RemoteImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
@@ -62,8 +62,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		while( pictureIterator.hasNext() ) {
 			final ImageToImport imageToImport = pictureIterator.next();
 
-			final ImageDiscEntry imageDiscEntry = imageToImport.getImageDiscEntry();
-			final Genre genre = getGenreByName( genres, imageDiscEntry.getGenreDiscEntry().getName() );
+			final RemoteImageDiscEntry remoteImageDiscEntry = imageToImport.getRemoteImageDiscEntry();
+			final Genre genre = getGenreByName( genres, remoteImageDiscEntry.getGenreDiscEntry().getName() );
 
 			final User user = userGenerator.getUser( genre );
 			imageToImport.setUser( user );
@@ -73,7 +73,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			final JobDateRange jobDateRange = importParameters.getJobDateRange();
 			imageToImport.setUploadTime( services.getRandomUtilsService().getRandomDate( jobDateRange.getStartDate(), jobDateRange.getEndDate() ) );
 
-			imageToImport.setPhotoDescription( String.format( "The photo is imported from disk: %s", imageDiscEntry.getImageFile().getCanonicalPath() ) );
+			imageToImport.setPhotoDescription( String.format( "The photo is imported from disk: %s", remoteImageDiscEntry.getImageFile().getCanonicalPath() ) );
 			imageToImport.setPhotoKeywords( "imported, from, disk" );
 
 			pictureIterator.remove();
@@ -82,7 +82,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			counter++;
 
 			if ( importParameters.isDeletePictureAfterImport() ) {
-				FileUtils.deleteQuietly( imageToImport.getImageDiscEntry().getImageFile() );
+				FileUtils.deleteQuietly( imageToImport.getRemoteImageDiscEntry().getImageFile() );
 			}
 
 			job.increment();
@@ -163,8 +163,8 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 				final List<String> allowedExtensions = services.getConfigurationService().getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
 				if ( PhotoUtils.isPhotoContentTypeSupported( allowedExtensions, services.getImageFileUtilsService().getContentType( file ) ) ) {
 
-					final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( file, GenreDiscEntry.getByName( genreName ) );
-					final ImageToImport imageToImport = new ImageToImport( imageDiscEntry );
+					final RemoteImageDiscEntry remoteImageDiscEntry = new RemoteImageDiscEntry( file, GenreDiscEntry.getByName( genreName ) );
+					final ImageToImport imageToImport = new ImageToImport( remoteImageDiscEntry );
 
 					importedPictures.add( imageToImport );
 				}

@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.RemoteImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.exceptions.BaseRuntimeException;
 import core.log.LogHelper;
@@ -38,8 +38,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 	private static final String USER_INFO_FILE_PHOTO_ID = "photoId";
 
 	private static final String USER_INFO_FILE_REMOTE_CATEGORY_ID = "categoryId";
-	private static final String USER_INFO_FILE_REMOTE_CATEGORY_NAME = "categoryName";
-	private static final String USER_INFO_FILE_LOCAL_CATEGORY_NAME = "localCategoryName";
+	private static final String USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME = "categoryName";
+	private static final String USER_INFO_FILE_LOCAL_CATEGORY = "localCategoryName";
 
 	private static final String USER_INFO_FILE_PHOTO_NAME = "name";
 	private static final String USER_INFO_FILE_PHOTO_UPLOAD_TIME = "uploadTime";
@@ -112,8 +112,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotoId() ) );
 
 			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
-			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_NAME ).addText( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getName() );
-			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY_NAME ).addText( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME ).addText( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getFolder() );
+			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY ).addText( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
 
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
@@ -213,13 +213,13 @@ public class RemotePhotoSiteCacheXmlUtils {
 		}
 	}
 
-	public ImageDiscEntry createRemotePhotoSiteDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	public RemoteImageDiscEntry createRemotePhotoSiteDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 
-		final ImageDiscEntry imageDiscEntry = writeImageContentOnDiskAndReturnDiskEntry( remotePhotoSitePhoto, imageContent );
+		final RemoteImageDiscEntry remoteImageDiscEntry = writeImageContentOnDiskAndReturnDiskEntry( remotePhotoSitePhoto, imageContent );
 
-		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, imageDiscEntry.getImageFile().getCanonicalPath() ) );
+		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, remoteImageDiscEntry.getImageFile().getCanonicalPath() ) );
 
-		return imageDiscEntry;
+		return remoteImageDiscEntry;
 	}
 
 	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
@@ -231,16 +231,16 @@ public class RemotePhotoSiteCacheXmlUtils {
 		return new File( imageFolder, imageFileName );
 	}
 
-	private ImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
-		final RemotePhotoSiteCategory category = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
+	private RemoteImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
-		final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( category );
+		final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSiteCategory );
 
 		final File imageFile = getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
 		writeImageContentToFile( imageFile, imageContent, "ISO-8859-1" );
 
-		return new ImageDiscEntry( imageFile, genreDiscEntry );
+		return new RemoteImageDiscEntry( imageFile, genreDiscEntry );
 	}
 
 	public static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
