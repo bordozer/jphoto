@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
+import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -48,13 +49,10 @@ public class RemoteSiteCategoriesController {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	@Autowired
-	private SystemVarsService systemVarsService;
-
-	@Autowired
 	private UrlUtilsService urlUtilsService;
+
+	@Autowired
+	private RemotePhotoCategoryService remotePhotoCategoryService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -105,9 +103,7 @@ public class RemoteSiteCategoriesController {
 		final String remoteCategoryName = translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
 		final AbstractRemoteContentHelper contentHelper = AbstractRemoteContentHelper.getInstance( importSource );
 
-		final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils = new RemotePhotoSitePhotoImageFileUtils( importSource, systemVarsService.getRemotePhotoSitesCacheFolder() );
-//		final String photoCategoryLink = contentHelper.getPhotoCategoryLink( remotePhotoSiteCategory, entityLinkUtilsService, genreService, getLanguage(), remotePhotoSitePhotoImageFileUtils );
-		final Genre genre = genreService.loadIdByName( remotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() );
+		final Genre genre = remotePhotoCategoryService.getGenre( remotePhotoSiteCategory );
 		final String photoCategoryLink = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> [<a href='%s' title='%s' target='_blank'> i </a>]"

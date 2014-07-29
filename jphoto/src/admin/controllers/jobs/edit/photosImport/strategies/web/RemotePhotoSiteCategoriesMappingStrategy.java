@@ -31,6 +31,23 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 		throw new IllegalArgumentException( String.format( "Illegal PhotosImportSource: '%s'", importSource ) );
 	}
 
+	public static RemotePhotoSiteCategoriesMappingStrategy getStrategyFor( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+
+		if ( remotePhotoSiteCategory instanceof PhotosightCategory ) {
+			return getPhotosightStrategy();
+		}
+
+		if ( remotePhotoSiteCategory instanceof Photo35Category ) {
+			return getPhoto35Strategy();
+		}
+
+		if ( remotePhotoSiteCategory instanceof NaturelightCategory ) {
+			return getNaturelightStrategy();
+		}
+
+		throw new IllegalArgumentException( String.format( "Unsupported remote photo site category class: '%s'", remotePhotoSiteCategory.getClass().getName() ) );
+	}
+
 	private static RemotePhotoSiteCategoriesMappingStrategy getPhotosightStrategy() {
 
 		return new RemotePhotoSiteCategoriesMappingStrategy() {

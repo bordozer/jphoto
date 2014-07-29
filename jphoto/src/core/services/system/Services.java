@@ -6,6 +6,7 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
+import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -104,6 +105,8 @@ public interface Services {
 	TranslatorService getTranslatorService();
 
 	PhotoUploadService getPhotoUploadService();
+
+	RemotePhotoCategoryService getRemotePhotoCategoryService();
 
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

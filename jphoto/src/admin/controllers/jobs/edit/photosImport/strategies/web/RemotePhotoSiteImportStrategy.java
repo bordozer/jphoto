@@ -1,9 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImageToImport;
-import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
+import admin.controllers.jobs.edit.photosImport.*;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
@@ -46,7 +43,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
 
 	private final Date firstPhotoUploadTime;
-	private final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils;
 	private final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils;
 
 	public RemotePhotoSiteImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
@@ -54,8 +50,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		importParameters = ( RemoteSitePhotosImportParameters ) parameters;
 
-		remotePhotoSitePhotoImageFileUtils = new RemotePhotoSitePhotoImageFileUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
-		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils( importParameters.getRemoteContentHelper().getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder() );
+		final PhotosImportSource photosImportSource = importParameters.getRemoteContentHelper().getPhotosImportSource();
+		final File remotePhotoSitesCacheFolder = services.getSystemVarsService().getRemotePhotoSitesCacheFolder();
+
+		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils(
+			photosImportSource
+			, remotePhotoSitesCacheFolder
+			, services.getRemotePhotoCategoryService()
+		);
 
 		firstPhotoUploadTime = getServices().getJobHelperService().getFirstPhotoUploadTime();
 	}
@@ -124,7 +126,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return;
 		}
 
-		prepareFolderForImageDownloading( remotePhotoSiteUser );
+		remotePhotoSiteCacheXmlUtils.initRemoteUserFileStructure( remotePhotoSiteUser );
 
 		final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos = getCachedLocallyRemotePhotoSitePhotos( remotePhotoSiteUser );
 
@@ -309,13 +311,13 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : cachedRemotePhotoSitePhotos ) {
-			final File imageFile = getRemotePhotoSitePhotoImageFileUtils().getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
+			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
 			if ( ! imageFile.exists() ) {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
+			final ImageDiscEntry imageDiscEntry = new ImageDiscEntry( imageFile, services.getRemotePhotoCategoryService().getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
 		}
 
@@ -332,7 +334,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		} );
 
-		getRemotePhotoSitePhotoImageFileUtils().prepareUserGenreFolders( remotePhotoSiteUser, notCachedRemotePhotoSitePhotos );
+		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remotePhotoSiteUser, notCachedRemotePhotoSitePhotos );
 		final List<RemotePhotoSitePhotoDiskEntry> notCachedRemotePhotoSitePhotosDiskEntries = downloadRemotePhotoSitePhotoAndCreateDiskEntry( notCachedRemotePhotoSitePhotos );
 		addRemotePhotoSitePhotosToTheLocalStorage( remotePhotoSiteUser, notCachedRemotePhotoSitePhotos, cachedLocallyRemotePhotoSitePhotos );
 
@@ -365,21 +367,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return remotePhotoSiteUserName;
 	}
 
-	private void prepareFolderForImageDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		getRemotePhotoSitePhotoImageFileUtils().createUserFolderForPhotoDownloading( remotePhotoSiteUser );
-		getRemotePhotoSiteCacheXmlUtils().createUserInfoFile( remotePhotoSiteUser );
-	}
-
 	private void addRemotePhotoSitePhotosToTheLocalStorage( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> notCachedRemotePhotoSitePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
 
 		cachedLocallyRemotePhotoSitePhotos.addAll( notCachedRemotePhotoSitePhotos );
 
-		getRemotePhotoSiteCacheXmlUtils().cacheLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
+		remotePhotoSiteCacheXmlUtils.cacheLocallyPhotos( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, services.getDateUtilsService() );
 	}
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyRemotePhotoSitePhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 
-		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = getRemotePhotoSiteCacheXmlUtils();
+		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = this.remotePhotoSiteCacheXmlUtils;
 
 		try {
 			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( importParameters.getImportSource(), remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
@@ -420,7 +417,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImageDiscEntry imageDiscEntry = getRemotePhotoSitePhotoImageFileUtils().createRemotePhotoSiteDiskEntry( remotePhotoSitePhoto, imageContent );
+			final ImageDiscEntry imageDiscEntry = remotePhotoSiteCacheXmlUtils.createRemotePhotoSiteDiskEntry( remotePhotoSitePhoto, imageContent );
 
 			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageDiscEntry ) );
 
@@ -447,7 +444,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final RemotePhotoSiteCategory photosightCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( photosightCategory );
+			final GenreDiscEntry genreDiscEntry = services.getRemotePhotoCategoryService().getGenreDiscEntryOrOther( photosightCategory );
 			final String siteUrl = importParameters.getRemoteContentHelper().getRemotePhotoSiteHost();
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
@@ -559,7 +556,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 				.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
-				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), remotePhotoSitePhotoImageFileUtils ) )
+				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), services.getRemotePhotoCategoryService() ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage2 );
 
@@ -717,14 +714,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		public boolean isBreakImportAfterThisPageProcessed() {
 			return breakImportAfterThisPageProcessed;
 		}
-	}
-
-	private RemotePhotoSitePhotoImageFileUtils getRemotePhotoSitePhotoImageFileUtils() {
-		return remotePhotoSitePhotoImageFileUtils;
-	}
-
-	private RemotePhotoSiteCacheXmlUtils getRemotePhotoSiteCacheXmlUtils() {
-		return remotePhotoSiteCacheXmlUtils;
 	}
 
 	private AbstractRemotePhotoSitePageContentDataExtractor getRemotePhotoSitePageContentDataExtractor() {

@@ -6,6 +6,7 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
+import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -148,6 +149,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private PhotoUploadService photoUploadService;
+
+	@Autowired
+	private RemotePhotoCategoryService remotePhotoCategoryService;
 
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -367,6 +371,11 @@ public class ServicesImpl implements Services {
 		return photoUploadService;
 	}
 
+	@Override
+	public RemotePhotoCategoryService getRemotePhotoCategoryService() {
+		return remotePhotoCategoryService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -544,6 +553,9 @@ public class ServicesImpl implements Services {
 		this.photoUploadService = photoUploadService;
 	}
 
+	public void setRemotePhotoCategoryService( final RemotePhotoCategoryService remotePhotoCategoryService ) {
+		this.remotePhotoCategoryService = remotePhotoCategoryService;
+	}
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
 		this.scheduledTasksExecutionService = scheduledTasksExecutionService;
 	}*/

@@ -6,6 +6,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35R
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
+import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.translator.Language;
 import core.services.utils.EntityLinkUtilsService;
 import org.apache.commons.lang.StringUtils;
@@ -97,11 +98,11 @@ public abstract class AbstractRemoteContentHelper {
 		);
 	}
 
-	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language, final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils ) {
+	public String getPhotoCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory, final EntityLinkUtilsService entityLinkUtilsService, final GenreService genreService, final Language language, final RemotePhotoCategoryService remotePhotoCategoryService) {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
 			, getPhotoCategoryUrl( remotePhotoSiteCategory )
 			, remotePhotoSiteCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( remotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() )
+			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSiteCategory ).getName() )
 			, language )
 		);
 	}

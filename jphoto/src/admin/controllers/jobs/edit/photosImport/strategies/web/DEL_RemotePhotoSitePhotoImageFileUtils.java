@@ -1,32 +1,31 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.log.LogHelper;
+import core.services.remotePhotoSite.RemotePhotoCategoryService;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
-public class RemotePhotoSitePhotoImageFileUtils {
+public class DEL_RemotePhotoSitePhotoImageFileUtils {
 
 	private final PhotosImportSource photosImportSource;
 	private final File remotePhotoSitesCachePath;
+	private final RemotePhotoCategoryService remotePhotoCategoryService;
 
-	private final static LogHelper log = new LogHelper( RemotePhotoSitePhotoImageFileUtils.class );
+	private final static LogHelper log = new LogHelper( DEL_RemotePhotoSitePhotoImageFileUtils.class );
 
-	public RemotePhotoSitePhotoImageFileUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath ) {
+	public DEL_RemotePhotoSitePhotoImageFileUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath, final RemotePhotoCategoryService remotePhotoCategoryService ) {
 		this.photosImportSource = photosImportSource;
 		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
+		this.remotePhotoCategoryService = remotePhotoCategoryService;
 	}
 
-	public void prepareUserGenreFolders( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
+	/*public void prepareUserGenreFolders( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
+
+		final File userFolder = getUserFolderForPhotoDownloading( remotePhotoSiteUser );
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
-			final File userFolder = getUserFolderForPhotoDownloading( remotePhotoSiteUser );
-			final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+			final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 
 			final File userGenrePath = new File( userFolder, genreDiscEntry.getName() );
 			if ( ! userGenrePath.exists() ) {
@@ -44,10 +43,19 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		return imageDiscEntry;
 	}
 
+	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
+		final String imageFileName = getRemoteSitePhotoFileName( remotePhotoSitePhoto );
+
+		final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
+		final File imageFolder = new File( userFolderForPhotoDownloading, genreDiscEntry.getName() );
+		return new File( imageFolder, imageFileName );
+	}
+
 	private ImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 		final RemotePhotoSiteCategory category = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( category );
+		final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( category );
 
 		final File imageFile = getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
 
@@ -56,45 +64,13 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		return new ImageDiscEntry( imageFile, genreDiscEntry );
 	}
 
-	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
-		final String imageFileName = getRemoteSitePhotoFileName( remotePhotoSitePhoto );
-
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
-		final File userFolderForPhotoDownloading = getUserFolderForPhotoDownloading( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
-		final File imageFolder = new File( userFolderForPhotoDownloading, genreDiscEntry.getName() );
-		return new File( imageFolder, imageFileName );
-	}
-
 	public static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
 		return String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
-	}
-
-	public GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( photosImportSource ).getMapping() ) {
-			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
-				return photoCategoryMapping.getGenreDiscEntry();
-			}
-		}
-
-		log.warn( String.format( "Remote photo site category %s does not mach any genre", remotePhotoSiteCategory ) );
-
-		return GenreDiscEntry.OTHER;
 	}
 
 	public File getUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 		final String userFolderName = String.format( "%s", remotePhotoSiteUser.getId() );
 		return new File( getPhotoStorage().getPath(), userFolderName );
-	}
-
-	public File writePageContentToFile( final String fileName, final String content ) throws IOException {
-		final String filePath = String.format( "%s/%s/%s.html", getPhotoStorage().getPath(), photosImportSource.getUrl(), fileName );
-		final File file = new File( filePath );
-
-		final PrintWriter writer = new PrintWriter( file, "UTF-8" );
-		writer.println( content );
-		writer.close();
-
-		return file;
 	}
 
 	public void createUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
@@ -117,5 +93,5 @@ public class RemotePhotoSitePhotoImageFileUtils {
 		}
 
 		return remotePhotoSiteCacheFolder;
-	}
+	}*/
 }

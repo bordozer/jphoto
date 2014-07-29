@@ -51,16 +51,8 @@ public class JobExecutionLogController {
 			return VIEW;
 		}
 
-		final List<JobRuntimeLog> jobRuntimeLogs = Lists.reverse( newArrayList( job.getJobRuntimeLogs() ) );
-		/*Collections.sort( jobRuntimeLogs, new Comparator<JobRuntimeLog>() {
-			@Override
-			public int compare( final JobRuntimeLog o1, final JobRuntimeLog o2 ) {
-				return o2.getJobRuntimeLogEntryTime().compareTo( o1.getJobRuntimeLogEntryTime() );
-			}
-		} );*/
-
 		final List<String> jobRuntimeLogsMessage = newArrayList();
-		for ( final JobRuntimeLog jobRuntimeLog : jobRuntimeLogs ) {
+		for ( final JobRuntimeLog jobRuntimeLog : Lists.reverse( newArrayList( job.getJobRuntimeLogs() ) ) ) {
 			final String translation = jobRuntimeLog.getTranslatableMessage().build( EnvironmentContext.getLanguage() );
 			jobRuntimeLogsMessage.add( String.format( "%s &nbsp;&nbsp; %s", dateUtilsService.formatTime( jobRuntimeLog.getJobRuntimeLogEntryTime() ), translation ) );
 		}
