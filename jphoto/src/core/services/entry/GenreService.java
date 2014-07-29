@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface GenreService extends BaseEntityService<Genre>, AllEntriesLoadable<Genre>, IdsSqlSelectable {
 
-	Genre loadIdByName( final String genreName );
+	Genre loadByName( final String genreName );
 
 	List<Genre> loadAllSortedByNameForLanguage( final Language language );
 }

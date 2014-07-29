@@ -1,7 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
-import admin.controllers.jobs.edit.photosImport.ImportedImage;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.ImageToImportData;
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
@@ -31,7 +32,7 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 
-	private final List<ImageToImport> imageToImports;
+	private final List<ImageToImportData> imageToImportDatas;
 
 	protected FileSystemImportParameters importParameters;
 
@@ -40,7 +41,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 
 		importParameters = (FileSystemImportParameters) parameters;
 
-		imageToImports = collectFileSystemImages( new File( importParameters.getPictureDir() ) );
+		imageToImportDatas = collectFileSystemImages( new File( importParameters.getPictureDir() ) );
 
 		createNecessaryGenres();
 	}
@@ -52,36 +53,36 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		final UserGeneratorFactory factory = new UserGeneratorFactory();
 		final AbstractUserGenerator userGenerator = factory.getInstance( importParameters.getAssignAllGeneratedPhotosToUserId(), genres, services, job.getBeingProcessedUsers() );
 
-		final Iterator<ImageToImport> pictureIterator = imageToImports.iterator();
+		final Iterator<ImageToImportData> pictureIterator = imageToImportDatas.iterator();
 
 		log.debug( "Processing images" );
 
 		int counter = 1;
 		final int total = job.getTotalJopOperations();
 		while( pictureIterator.hasNext() ) {
-			final ImageToImport imageToImport = pictureIterator.next();
+			final ImageToImportData imageToImportData = pictureIterator.next();
 
-			final ImportedImage importedImage = imageToImport.getImportedImage();
-			final Genre genre = getGenreByName( genres, importedImage.getGenreName() );
+			final ImageToImport imageToImport = imageToImportData.getImageToImport();
+			final Genre genre = getGenreByName( genres, imageToImport.getGenreName() );
 
 			final User user = userGenerator.getUser( genre );
-			imageToImport.setUser( user );
+			imageToImportData.setUser( user );
 
-			imageToImport.setName( getRandomPhotoName( genre ) );
+			imageToImportData.setName( getRandomPhotoName( genre ) );
 
 			final JobDateRange jobDateRange = importParameters.getJobDateRange();
-			imageToImport.setUploadTime( services.getRandomUtilsService().getRandomDate( jobDateRange.getStartDate(), jobDateRange.getEndDate() ) );
+			imageToImportData.setUploadTime( services.getRandomUtilsService().getRandomDate( jobDateRange.getStartDate(), jobDateRange.getEndDate() ) );
 
-			imageToImport.setPhotoDescription( String.format( "The photo is imported from disk: %s", importedImage.getImageFile().getCanonicalPath() ) );
-			imageToImport.setPhotoKeywords( "imported, from, disk" );
+			imageToImportData.setPhotoDescription( String.format( "The photo is imported from disk: %s", imageToImport.getImageFile().getCanonicalPath() ) );
+			imageToImportData.setPhotoKeywords( "imported, from, disk" );
 
 			pictureIterator.remove();
 
-			createPhotoDBEntry( imageToImport, counter, total );
+			createPhotoDBEntry( imageToImportData, counter, total );
 			counter++;
 
 			if ( importParameters.isDeletePictureAfterImport() ) {
-				FileUtils.deleteQuietly( imageToImport.getImportedImage().getImageFile() );
+				FileUtils.deleteQuietly( imageToImportData.getImageToImport().getImageFile() );
 			}
 
 			job.increment();
@@ -102,7 +103,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 			return operationsLimitByProperties;
 		}
 
-		return imageToImports.size();
+		return imageToImportDatas.size();
 	}
 
 	private void createNecessaryGenres() {
@@ -112,7 +113,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		final File pictureRoot = new File( importParameters.getPictureDir() );
 		final File[] genreDirList = pictureRoot.listFiles( getPredicateUtilsService().getDirFilter() );
 		for ( File genreDir : genreDirList ) {
-			createNecessaryGenre( genreDir.getName() );
+			loadGenre( genreDir.getName() );
 		}
 	}
 
@@ -137,11 +138,11 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 		throw new BaseRuntimeException( String.format( "Can not find genre by name: '%s'", genreName ) );
 	}
 
-	private List<ImageToImport> collectFileSystemImages( final File pictureRoot ) {
+	private List<ImageToImportData> collectFileSystemImages( final File pictureRoot ) {
 
 		log.debug( "Collecting images on disk info" );
 
-		final List<ImageToImport> importedPictures = newArrayList();
+		final List<ImageToImportData> importedPictures = newArrayList();
 
 		final File[] genreDirList = pictureRoot.listFiles( getPredicateUtilsService().getDirFilter() );
 		if ( genreDirList == null ) {
@@ -162,10 +163,10 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 				final List<String> allowedExtensions = services.getConfigurationService().getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
 				if ( PhotoUtils.isPhotoContentTypeSupported( allowedExtensions, services.getImageFileUtilsService().getContentType( file ) ) ) {
 
-					final ImportedImage importedImage = new ImportedImage( file, genreName );
-					final ImageToImport imageToImport = new ImageToImport( importedImage );
+					final ImageToImport imageToImport = new ImageToImport( PhotosImportSource.FILE_SYSTEM, genreName, file );
+					final ImageToImportData imageToImportData = new ImageToImportData( imageToImport );
 
-					importedPictures.add( imageToImport );
+					importedPictures.add( imageToImportData );
 				}
 			}
 		}

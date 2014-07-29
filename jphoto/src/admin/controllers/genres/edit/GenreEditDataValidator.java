@@ -45,7 +45,7 @@ public class GenreEditDataValidator implements Validator {
 			errors.rejectValue( GenreEditDataModel.GENRE_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( "$1 should not be empty.", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ) ) );
 		}
 
-		final Genre checkGenre = genreService.loadIdByName( genreName );
+		final Genre checkGenre = genreService.loadByName( genreName );
 		if ( checkGenre != null && checkGenre.getId() > 0 && checkGenre.getId() != genreId ) {
 			errors.rejectValue( GenreEditDataModel.GENRE_EDIT_DATA_NAME_FORM_CONTROL, translatorService.translate( "$1 ($2) already exists!", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Name" ), genreName ), genreName );
 		}

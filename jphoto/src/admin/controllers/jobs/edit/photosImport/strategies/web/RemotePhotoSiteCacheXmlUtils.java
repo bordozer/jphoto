@@ -1,9 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.ImportedImage;
+import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.exceptions.BaseRuntimeException;
+import core.general.genre.Genre;
 import core.log.LogHelper;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.system.Services;
@@ -106,7 +106,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
 			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME ).addText( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
-			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY ).addText( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY ).addText( remotePhotoCategoryService.getMappedGenreOrNull( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
 
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
@@ -197,16 +197,16 @@ public class RemotePhotoSiteCacheXmlUtils {
 		final File userFolder = getRemoteUserCacheFolder( remotePhotoSiteUser );
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
-			final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+			final Genre genre = remotePhotoCategoryService.getMappedGenreOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 
-			final File userGenrePath = new File( userFolder, genreDiscEntry.getName() );
+			final File userGenrePath = new File( userFolder, genre.getName() );
 			if ( ! userGenrePath.exists() ) {
 				userGenrePath.mkdirs();
 			}
 		}
 	}
 
-	public ImportedImage createRemotePhotoCacheEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	public ImageToImport createRemotePhotoCacheEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 
 		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
@@ -214,11 +214,11 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 		writeImageContentToFile( remotePhotoCacheFile, imageContent, "ISO-8859-1" );
 
-		final ImportedImage importedImage = new ImportedImage( remotePhotoCacheFile, remotePhotoSiteCategory.getKey() );
+		final ImageToImport imageToImport = new ImageToImport( photosImportSource, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile );
 
-		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, importedImage.getImageFile().getCanonicalPath() ) );
+		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, imageToImport.getImageFile().getCanonicalPath() ) );
 
-		return importedImage;
+		return imageToImport;
 	}
 
 	public File getRemotePhotoCacheFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {

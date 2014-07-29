@@ -102,8 +102,7 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( mapped to %s )"
 			, getPhotoCategoryUrl( remotePhotoSiteCategory )
 			, remotePhotoSiteCategory.getName()
-			, entityLinkUtilsService.getPhotosByGenreLink( genreService.loadIdByName( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSiteCategory ).getName() )
-			, language )
+			, entityLinkUtilsService.getPhotosByGenreLink( remotePhotoCategoryService.getMappedGenreOrNull( remotePhotoSiteCategory ), language )
 		);
 	}
 

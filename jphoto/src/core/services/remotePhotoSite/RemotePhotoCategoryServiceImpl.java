@@ -1,6 +1,7 @@
 package core.services.remotePhotoSite;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoriesMappingStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryToGenreMapping;
@@ -17,34 +18,73 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 	private final LogHelper log = new LogHelper( RemotePhotoCategoryServiceImpl.class );
 
 	@Override
-	public Genre getMappedGenre( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public GenreDiscEntry getMappedGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSiteCategory );
-		if ( genreDiscEntry != null ) {
-			return genreService.loadIdByName( genreDiscEntry.getName() );
+		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( remotePhotoSiteCategory ).getMapping() ) {
+			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
+				return photoCategoryMapping.getGenreDiscEntry();
+			}
 		}
 
 		return null;
 	}
 
 	@Override
-	public GenreDiscEntry getGenreDiscEntryOrOther( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public Genre getMappedGenreOrOther( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
-		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSiteCategory );
+		final GenreDiscEntry genreDiscEntry = getMappedGenreDiscEntry( remotePhotoSiteCategory );
 		if ( genreDiscEntry != null ) {
-			return genreDiscEntry;
+			final Genre genre = getGenreBy( genreDiscEntry );
+			if ( genre != null ) {
+				return genre;
+			}
 		}
 
 		log.warn( String.format( "Remote photo site category %s does not mach any genre", remotePhotoSiteCategory ) );
 
-		return GenreDiscEntry.OTHER;
+		return getGenreBy( GenreDiscEntry.OTHER );
 	}
 
-	private GenreDiscEntry getGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( remotePhotoSiteCategory ).getMapping() ) {
-			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
-				return photoCategoryMapping.getGenreDiscEntry();
+	@Override
+	public Genre getMappedGenreOrOther( final PhotosImportSource photosImportSource, final String genreName ) {
+
+		final Genre genre = getMappedGenreOrNull( photosImportSource, genreName );
+		if ( genre != null ) {
+			return genre;
+		}
+
+		return getGenreBy( GenreDiscEntry.OTHER );
+	}
+
+	@Override
+	public Genre getMappedGenreOrNull( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+
+		final GenreDiscEntry genreDiscEntry = getMappedGenreDiscEntry( remotePhotoSiteCategory );
+		if ( genreDiscEntry != null ) {
+			return genreService.loadByName( genreDiscEntry.getName() );
+		}
+
+		return null;
+	}
+
+	@Override
+	public Genre getMappedGenreOrNull( final PhotosImportSource photosImportSource, final String genreName ) {
+
+		final RemotePhotoSiteCategory[] remotePhotoSiteCategories = RemotePhotoSiteCategory.getRemotePhotoSiteCategories( photosImportSource );
+
+		for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remotePhotoSiteCategories ) {
+			if ( remotePhotoSiteCategory.getName().equals( genreName ) ) {
+				return getMappedGenreOrNull( remotePhotoSiteCategory );
 			}
+		}
+
+		return null;
+	}
+
+	private Genre getGenreBy( final GenreDiscEntry genreDiscEntry ) {
+		final Genre genre = genreService.loadByName( genreDiscEntry.getName() );
+		if ( genre != null ) {
+			return genre;
 		}
 
 		return null;

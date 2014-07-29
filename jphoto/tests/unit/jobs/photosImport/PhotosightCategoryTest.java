@@ -13,6 +13,8 @@ public class PhotosightCategoryTest extends AbstractTestCase {
 
 	public static final String WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING = "Wrong photosight photo category mapping";
 
+	private RemotePhotoCategoryServiceImpl remotePhotoCategoryService = new RemotePhotoCategoryServiceImpl();
+
 	@Test
 	public void photosightCategoryMappingTest() {
 		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.NUDE ), GenreDiscEntry.NUDE );
@@ -47,6 +49,6 @@ public class PhotosightCategoryTest extends AbstractTestCase {
 	}
 
 	private GenreDiscEntry getDiscEntry( final RemotePhotoSiteCategory photosightCategory ) {
-		return new RemotePhotoCategoryServiceImpl().getGenreDiscEntryOrOther( photosightCategory );
+		return remotePhotoCategoryService.getMappedGenreDiscEntry( photosightCategory );
 	}
 }

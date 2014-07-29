@@ -1,7 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies;
 
-import admin.controllers.jobs.edit.photosImport.ImportedImage;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.ImageToImportData;
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
@@ -50,27 +51,32 @@ public abstract class AbstractPhotoImportStrategy {
 		this.language = language;
 	}
 
-	protected void createPhotosDBEntries( final List<ImageToImport> imageToImports ) throws IOException, SaveToDBException {
+	protected void createPhotosDBEntries( final List<ImageToImportData> imageToImportDatas ) throws IOException, SaveToDBException {
 		log.debug( "Creating photos" );
 
 		int counter = 1;
-		final int total = imageToImports.size();
-		for ( final ImageToImport imageToImport : imageToImports ) {
-			createPhotoDBEntry( imageToImport, counter, total );
+		final int total = imageToImportDatas.size();
+		for ( final ImageToImportData imageToImportData : imageToImportDatas ) {
+			createPhotoDBEntry( imageToImportData, counter, total );
 			counter++;
 		}
 	}
 
-	protected void createPhotoDBEntry( final ImageToImport photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
+	protected void createPhotoDBEntry( final ImageToImportData photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
 
-		final ImportedImage importedImage = photoToImport.getImportedImage();
+		final ImageToImport imageToImport = photoToImport.getImageToImport();
 
 		final User user = photoToImport.getUser();
 
 		final Photo photo = new Photo();
 		photo.setUserId( user.getId() );
 
-		final Genre genre = createNecessaryGenre( importedImage.getGenreName() );
+		Genre genre;
+		if ( imageToImport.getPhotosImportSource() == PhotosImportSource.FILE_SYSTEM ) {
+			genre = loadGenre( imageToImport.getGenreName() );
+		} else {
+			genre = loadGenre( imageToImport.getPhotosImportSource(), imageToImport.getGenreName() );
+		}
 
 		photo.setGenreId( genre.getId() );
 
@@ -94,7 +100,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
 		photo.setImportId( photoToImport.getImportId() );
 
-		services.getPhotoService().uploadNewPhoto( photo, importedImage.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
+		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 
@@ -116,26 +122,44 @@ public abstract class AbstractPhotoImportStrategy {
 		return services;
 	}
 
-	public Genre createNecessaryGenre( final String genreName ) {
-		Genre genre = services.getGenreService().loadIdByName( genreName );
-		if ( genre == null || genre.getId() == 0 ) {
-			genre = new Genre();
-			genre.setName( genreName );
-			final DateUtilsService dateUtilsService = services.getDateUtilsService();
-			genre.setDescription( String.format( "Created by FilesystemImportStrategy at %s", dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ) ) );
-
-			final List<PhotoVotingCategory> votingCategories = services.getVotingCategoryService().loadAll();
-			if ( votingCategories.size() == 0 ) {
-				throw new BaseRuntimeException( "There are at least three voting categories have to be configured in the system" );
-			}
-
-			genre.setPhotoVotingCategories( votingCategories );
-			if ( !services.getGenreService().save( genre ) ) {
-				throw new BaseRuntimeException( String.format( "Can not create genre by name: '%s'", genreName ) );
-			}
-
-			log.debug( String.format( "New genre '%s' has been created", genre.getName() ) );
+	public Genre loadGenre( final String genreName ) {
+		final Genre genre = services.getGenreService().loadByName( genreName );
+		if ( genre != null ) {
+			return genre;
 		}
+
+		return createNecessaryGenre( genreName );
+	}
+
+	public Genre loadGenre( final PhotosImportSource photosImportSource, final String genreName ) {
+		final Genre mappedGenre = services.getRemotePhotoCategoryService().getMappedGenreOrNull( photosImportSource, genreName );
+
+		if ( mappedGenre != null && mappedGenre.getId() != 0 ) {
+			return mappedGenre;
+		}
+
+		return createNecessaryGenre( genreName );
+	}
+
+	public Genre createNecessaryGenre( final String genreName ) {
+
+		final Genre genre = new Genre();
+		genre.setName( genreName );
+
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+		genre.setDescription( String.format( "Created by FilesystemImportStrategy at %s", dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() ) ) );
+
+		final List<PhotoVotingCategory> votingCategories = services.getVotingCategoryService().loadAll();
+		if ( votingCategories.size() == 0 ) {
+			throw new BaseRuntimeException( "There are at least three voting categories have to be configured in the system" );
+		}
+
+		genre.setPhotoVotingCategories( votingCategories );
+		if ( !services.getGenreService().save( genre ) ) {
+			throw new BaseRuntimeException( String.format( "Can not create genre by name: '%s'", genreName ) );
+		}
+
+		log.debug( String.format( "New genre '%s' has been created", genre.getName() ) );
 
 		return genre;
 	}
@@ -163,7 +187,7 @@ public abstract class AbstractPhotoImportStrategy {
 		return new PhotoTeam( photo, photoTeamMembers );
 	}
 
-	private List<UserPhotoAlbum> getPhotoAlbumsAssignTo( final ImageToImport photoToImport, final User user ) {
+	private List<UserPhotoAlbum> getPhotoAlbumsAssignTo( final ImageToImportData photoToImport, final User user ) {
 
 		final RemotePhotoSiteSeries remotePhotoSiteSeries = photoToImport.getRemotePhotoSiteSeries();
 

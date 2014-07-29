@@ -9,6 +9,7 @@ import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
+import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
@@ -149,9 +150,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			final List<ImageToImport> imagesToImport = newArrayList();
+			final List<ImageToImportData> imagesToImport = newArrayList();
 			for ( final RemotePhotoSiteDBEntry dbEntry : entries ) {
-				imagesToImport.add( dbEntry.getImageToImport() );
+				imagesToImport.add( dbEntry.getImageToImportData() );
 			}
 
 			createPhotosDBEntries( imagesToImport );
@@ -319,8 +320,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImportedImage importedImage = new ImportedImage( imageFile, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, importedImage ) );
+			final ImageToImport imageToImport = new ImageToImport( importParameters.getImportSource(), remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey(), imageFile );
+			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageToImport ) );
 		}
 
 		return result;
@@ -417,9 +418,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final ImportedImage importedImage = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoSitePhoto, imageContent );
+			final ImageToImport imageToImport = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoSitePhoto, imageContent );
 
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, importedImage ) );
+			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, imageToImport ) );
 
 			counter++;
 		}
@@ -434,32 +435,32 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		for ( final RemotePhotoSitePhotoDiskEntry remotePhotoSitePhotoDiskEntry : remotePhotoSitePhotoDiskEntries ) {
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = remotePhotoSitePhotoDiskEntry.getRemotePhotoSitePhoto();
-			final ImportedImage importedImage = remotePhotoSitePhotoDiskEntry.getImportedImage();
+			final ImageToImport imageToImport = remotePhotoSitePhotoDiskEntry.getImageToImport();
 
-			final ImageToImport imageToImport = new ImageToImport( importedImage );
-			imageToImport.setUser( localUser );
-			imageToImport.setName( remotePhotoSitePhoto.getName() );
-			imageToImport.setRemotePhotoSiteSeries( remotePhotoSitePhoto.getRemotePhotoSiteSeries() );
+			final ImageToImportData imageToImportData = new ImageToImportData( imageToImport );
+			imageToImportData.setUser( localUser );
+			imageToImportData.setName( remotePhotoSitePhoto.getName() );
+			imageToImportData.setRemotePhotoSiteSeries( remotePhotoSitePhoto.getRemotePhotoSiteSeries() );
 
 			final RemotePhotoSiteCategory photosightCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
 
-			final GenreDiscEntry genreDiscEntry = services.getRemotePhotoCategoryService().getGenreDiscEntryOrOther( photosightCategory );
+			final Genre genre = services.getRemotePhotoCategoryService().getMappedGenreOrOther( photosightCategory );
 			final String siteUrl = remoteContentHelper.getRemotePhotoSiteHost();
 			final String description = String.format( "Imported from '%s' at %s ( %s ). Photo category: %s."
 				, siteUrl
 				, dateUtilsService.formatDateTime( dateUtilsService.getCurrentTime() )
 				, remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto )
-				, genreDiscEntry.getName()
+				, genre.getName()
 			);
-			imageToImport.setPhotoDescription( description );
+			imageToImportData.setPhotoDescription( description );
 
-			final String keywords = StringUtilities.truncateString( String.format( "%s, %s, %s", siteUrl, remotePhotoSiteUser.getName(), imageToImport.getName() ), 255 );
-			imageToImport.setPhotoKeywords( keywords );
-			imageToImport.setUploadTime( remotePhotoSitePhoto.getUploadTime() );
-			imageToImport.setImportId( remotePhotoSitePhotoDiskEntry.getRemotePhotoSitePhoto().getPhotoId() );
+			final String keywords = StringUtilities.truncateString( String.format( "%s, %s, %s", siteUrl, remotePhotoSiteUser.getName(), imageToImportData.getName() ), 255 );
+			imageToImportData.setPhotoKeywords( keywords );
+			imageToImportData.setUploadTime( remotePhotoSitePhoto.getUploadTime() );
+			imageToImportData.setImportId( remotePhotoSitePhotoDiskEntry.getRemotePhotoSitePhoto().getPhotoId() );
 
-			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhotoSitePhotoDiskEntry, imageToImport ) );
+			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhotoSitePhotoDiskEntry, imageToImportData ) );
 		}
 
 		return photosToImport;
@@ -591,7 +592,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final RemotePhotoSitePhoto remotePhotoSitePhoto = dbEntry.getRemotePhotoSitePhotoDiskEntry().getRemotePhotoSitePhoto();
 		log.debug( String.format( "Importing comments for photo %d", remotePhotoSitePhoto.getPhotoId() ) );
 
-		final Photo photo = dbEntry.getImageToImport().getPhoto();
+		final Photo photo = dbEntry.getImageToImportData().getPhoto();
 
 		final Date photoUploadTime = photo.getUploadTime();
 

@@ -39,7 +39,7 @@ public class GenreServiceImpl implements GenreService {
 	}
 
 	@Override
-	public Genre loadIdByName( final String genreName ) {
+	public Genre loadByName( final String genreName ) {
 		return load( genreDao.loadIdByName( genreName ) );
 	}
 

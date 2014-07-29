@@ -101,7 +101,7 @@ public class RemoteSiteCategoriesController {
 		final String remoteCategoryName = translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
 		final AbstractRemotePhotoSiteUrlHelper contentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importSource );
 
-		final Genre genre = remotePhotoCategoryService.getMappedGenre( remotePhotoSiteCategory );
+		final Genre genre = remotePhotoCategoryService.getMappedGenreOrNull( remotePhotoSiteCategory );
 		final String photoCategoryLink = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> [<a href='%s' title='%s' target='_blank'> i </a>]"
@@ -139,7 +139,7 @@ public class RemoteSiteCategoriesController {
 		for ( final RemotePhotoSiteCategoryToGenreMapping entry : genreMapping ) {
 			if ( entry.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
 				final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
-				return genreService.loadIdByName( genreDiscEntry.getName() );
+				return genreService.loadByName( genreDiscEntry.getName() );
 			}
 		}
 
