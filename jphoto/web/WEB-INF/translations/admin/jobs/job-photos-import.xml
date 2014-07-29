@@ -193,8 +193,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Remote photo site site photos import: Importing image '$1'</nerd>
-		<ru><![CDATA[Импортируется фотография '$1']]></ru>
+		<nerd>Collecting data of remote photo site photo #$1 ( $2 )</nerd>
+		<ru><![CDATA[Сбор данных о фотографии #$1 ( $2 )]]></ru>
 	</translation>
 
 	<translation>

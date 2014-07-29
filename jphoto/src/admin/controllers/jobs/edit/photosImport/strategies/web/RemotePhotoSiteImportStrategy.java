@@ -511,7 +511,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoSiteImages ) {
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Remote photo site site photos import: Importing image '$1'", services )
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
+					.addIntegerParameter( remotePhotoSitePhotoId )
 					.string( remotePhotoSiteImage.getImageUrl() )
 					;
 			job.addJobRuntimeLogMessage( translatableMessage );
