@@ -5,24 +5,24 @@ import utils.NumberUtils;
 
 public enum NaturelightCategory implements RemotePhotoSiteCategory {
 
-	BIRDS( 1, "Birds" )
-	, MACRO( 4, "Macro" )
-	, LANDSCAPE( 5, "Landscape" )
-	, CREEP( 11, "Creep" ) // presmykaychiesya
-	, MAMMAL( 2, "Mammal" ) // mlekopitauschee
-	, FLORA( 12, "Flora" )
-	, HUMAN_AND_NATURE( 15, "Human and nature" )
-	, OTHER( 18, "Other" )
-	, UNDERWATER( 6, "Underwater" )
-	, TRAVELLING( 14, "Travelling" )
-	, ARTHROPODA( 20, "Athropoda" ) // chlenistonogie
-	, AMPHIBIA( 9, "Amphibia" ) // zemnovodmye
-	, Action( 19, "Action" )
-	, APERIODICITIES( 13, "Nature aperiodicities" ) // anomalii
-	, UNDERWATER_MACRO( 16, "Underwater macro" )
-	, STARS( 7, "Stars" )
-	, FACES( 8, "Faces" )
-	, TECH( 17, "Tech" )
+	BIRDS( 1, "NaturelightCategory: Birds" )
+	, MACRO( 4, "NaturelightCategory: Macro" )
+	, LANDSCAPE( 5, "NaturelightCategory: Landscape" )
+	, CREEP( 11, "NaturelightCategory: Creep" ) // presmykaychiesya
+	, MAMMAL( 2, "NaturelightCategory: Mammal" ) // mlekopitauschee
+	, FLORA( 12, "NaturelightCategory: Flora" )
+	, HUMAN_AND_NATURE( 15, "NaturelightCategory: Human and nature" )
+	, OTHER( 18, "NaturelightCategory: Other" )
+	, UNDERWATER( 6, "NaturelightCategory: Underwater" )
+	, TRAVELLING( 14, "NaturelightCategory: Travelling" )
+	, ARTHROPODA( 20, "NaturelightCategory: Athropoda" ) // chlenistonogie
+	, AMPHIBIA( 9, "NaturelightCategory: Amphibia" ) // zemnovodmye
+	, Action( 19, "NaturelightCategory: Action" )
+	, APERIODICITIES( 13, "NaturelightCategory: Nature aperiodicities" ) // anomalii
+	, UNDERWATER_MACRO( 16, "NaturelightCategory: Underwater macro" )
+	, STARS( 7, "NaturelightCategory: Stars" )
+	, FACES( 8, "NaturelightCategory: Faces" )
+	, TECH( 17, "NaturelightCategory: Tech" )
 	;
 
 	private final int id;
