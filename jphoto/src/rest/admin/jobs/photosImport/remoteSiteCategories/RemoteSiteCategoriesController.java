@@ -10,6 +10,8 @@ import core.general.genre.Genre;
 import core.services.entry.GenreService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
+import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class RemoteSiteCategoriesController {
 	@Autowired
 	private SecurityService securityService;
 
+	@Autowired
+	private TranslatorService translatorService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RemotePhotoSiteCategoryDTO> userCardVotingAreas( final @PathVariable( "importSourceId" ) int importSourceId ) {
@@ -70,7 +75,7 @@ public class RemoteSiteCategoriesController {
 
 			final RemotePhotoSiteCategoryDTO categoryDTO = new RemotePhotoSiteCategoryDTO();
 			categoryDTO.setRemotePhotoSiteCategoryId( remotePhotoSiteCategory.getId() );
-			categoryDTO.setRemotePhotoSiteCategoryName( remotePhotoSiteCategory.getName() );
+			categoryDTO.setRemotePhotoSiteCategoryName( translatorService.translate(  remotePhotoSiteCategory.getName(), getLanguage() ) );
 			categoryDTO.setChecked( selectedCategories.contains( remotePhotoSiteCategory ) ); // TODO: will be 'contains' working for interface?
 
 			final Genre genre = getGenreByByRemotePhotoSiteCategory( remotePhotoSiteCategory, importSource );
@@ -118,5 +123,9 @@ public class RemoteSiteCategoriesController {
 		}
 
 		return null;
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }
