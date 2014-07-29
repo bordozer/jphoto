@@ -37,8 +37,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 	private static final String USER_INFO_FILE_PHOTO_ELEMENT_NAME = "photo";
 	private static final String USER_INFO_FILE_PHOTO_ID = "photoId";
 
-	private static final String USER_INFO_FILE_REMOTE_CATEGORY_ID = "categoryId";
-	private static final String USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME = "categoryName";
+	private static final String USER_INFO_FILE_REMOTE_CATEGORY_ID = "remoteCategoryId";
+	private static final String USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME = "remoteCategoryName";
 	private static final String USER_INFO_FILE_LOCAL_CATEGORY = "localCategoryName";
 
 	private static final String USER_INFO_FILE_PHOTO_NAME = "name";
@@ -87,7 +87,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public void cacheLocallyPhotos( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
+	public void createPhotosCache( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -197,9 +197,9 @@ public class RemotePhotoSiteCacheXmlUtils {
 		final File userFolder = getRemoteUserCacheFolder( remotePhotoSiteUser );
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
-			final Genre genre = remotePhotoCategoryService.getMappedGenreOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
+//			final Genre genre = remotePhotoCategoryService.getMappedGenreOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 
-			final File userGenrePath = new File( userFolder, genre.getName() );
+			final File userGenrePath = new File( userFolder, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
 			if ( ! userGenrePath.exists() ) {
 				userGenrePath.mkdirs();
 			}

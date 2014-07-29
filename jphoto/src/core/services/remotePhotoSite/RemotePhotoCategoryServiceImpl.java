@@ -61,7 +61,7 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 
 		final LocalCategory localCategory = getMappedGenreDiscEntry( remotePhotoSiteCategory );
 		if ( localCategory != null ) {
-			return genreService.loadByName( localCategory.getName() );
+			return genreService.loadByName( localCategory.getKey() );
 		}
 
 		return null;
@@ -69,11 +69,10 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 
 	@Override
 	public Genre getMappedGenreOrNull( final PhotosImportSource photosImportSource, final String genreName ) {
-
 		final RemotePhotoSiteCategory[] remotePhotoSiteCategories = RemotePhotoSiteCategory.getRemotePhotoSiteCategories( photosImportSource );
 
 		for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remotePhotoSiteCategories ) {
-			if ( remotePhotoSiteCategory.getName().equals( genreName ) ) {
+			if ( remotePhotoSiteCategory.getKey().equals( genreName ) ) {
 				return getMappedGenreOrNull( remotePhotoSiteCategory );
 			}
 		}
@@ -82,7 +81,7 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 	}
 
 	private Genre getGenreBy( final LocalCategory localCategory ) {
-		final Genre genre = genreService.loadByName( localCategory.getName() );
+		final Genre genre = genreService.loadByName( localCategory.getKey() );
 		if ( genre != null ) {
 			return genre;
 		}
