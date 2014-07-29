@@ -405,7 +405,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	private List<RemotePhotoSitePhotoDiskEntry> downloadRemotePhotoSitePhotoAndCache( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
 
 		final int toAddCount = remotePhotoSitePhotos.size();
-		job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
+
+		if ( toAddCount > 0 ) {
+			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
+		}
 
 		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
 		int counter = 1;
