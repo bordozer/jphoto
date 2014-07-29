@@ -89,7 +89,7 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, GenreDiscEntry.ANIMALS ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.TRAVEL, GenreDiscEntry.TRAVELLING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, GenreDiscEntry.ADVERTISING ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.REPORTAGE, GenreDiscEntry.REPORTING ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.SPORT, GenreDiscEntry.SPORT ) );
 			}

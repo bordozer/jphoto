@@ -75,7 +75,7 @@ public class RemoteSiteCategoriesController {
 
 			final RemotePhotoSiteCategoryDTO categoryDTO = new RemotePhotoSiteCategoryDTO();
 			categoryDTO.setRemotePhotoSiteCategoryId( remotePhotoSiteCategory.getId() );
-			categoryDTO.setRemotePhotoSiteCategoryName( translatorService.translate(  remotePhotoSiteCategory.getName(), getLanguage() ) );
+			categoryDTO.setRemotePhotoSiteCategoryName( translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() ) );
 			categoryDTO.setChecked( selectedCategories.contains( remotePhotoSiteCategory ) ); // TODO: will be 'contains' working for interface?
 
 			final Genre genre = getGenreByByRemotePhotoSiteCategory( remotePhotoSiteCategory, importSource );
