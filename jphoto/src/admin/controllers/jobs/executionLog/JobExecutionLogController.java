@@ -3,6 +3,7 @@ package admin.controllers.jobs.executionLog;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
+import com.google.common.collect.Lists;
 import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,17 @@ public class JobExecutionLogController {
 			return VIEW;
 		}
 
-		final List<JobRuntimeLog> jobRuntimeLogs = newArrayList( job.getJobRuntimeLogs() );
-		Collections.sort( jobRuntimeLogs, new Comparator<JobRuntimeLog>() {
+		final List<JobRuntimeLog> jobRuntimeLogs = Lists.reverse( newArrayList( job.getJobRuntimeLogs() ) );
+		/*Collections.sort( jobRuntimeLogs, new Comparator<JobRuntimeLog>() {
 			@Override
 			public int compare( final JobRuntimeLog o1, final JobRuntimeLog o2 ) {
 				return o2.getJobRuntimeLogEntryTime().compareTo( o1.getJobRuntimeLogEntryTime() );
 			}
-		} );
-
-		final Language language = EnvironmentContext.getLanguage();
+		} );*/
 
 		final List<String> jobRuntimeLogsMessage = newArrayList();
 		for ( final JobRuntimeLog jobRuntimeLog : jobRuntimeLogs ) {
-			final String translation = jobRuntimeLog.getTranslatableMessage().build( language );
+			final String translation = jobRuntimeLog.getTranslatableMessage().build( EnvironmentContext.getLanguage() );
 			jobRuntimeLogsMessage.add( String.format( "%s &nbsp;&nbsp; %s", dateUtilsService.formatTime( jobRuntimeLog.getJobRuntimeLogEntryTime() ), translation ) );
 		}
 
