@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photos35;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.log.LogHelper;
@@ -9,12 +9,12 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-public class Photo35RemoteContentHelper extends AbstractRemoteContentHelper {
+public class Photo35UrlHelper extends AbstractRemotePhotoSiteUrlHelper {
 
 	private final AbstractRemotePhotoSitePageContentDataExtractor photosightContentDataExtractor = new Photo35ContentDataExtractor();
 
-	public Photo35RemoteContentHelper() {
-		super( new LogHelper( Photo35RemoteContentHelper.class ) );
+	public Photo35UrlHelper() {
+		super( new LogHelper( Photo35UrlHelper.class ) );
 	}
 
 	@Override

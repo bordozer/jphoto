@@ -17,7 +17,7 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 	private final LogHelper log = new LogHelper( RemotePhotoCategoryServiceImpl.class );
 
 	@Override
-	public Genre getGenre( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public Genre getMappedGenre( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
 		final GenreDiscEntry genreDiscEntry = getGenreDiscEntry( remotePhotoSiteCategory );
 		if ( genreDiscEntry != null ) {

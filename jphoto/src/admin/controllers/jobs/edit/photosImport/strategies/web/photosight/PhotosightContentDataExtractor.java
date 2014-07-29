@@ -51,7 +51,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 
 	@Override
 	public int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId ) {
-		final String userPageContent = new PhotosightRemoteContentHelper().getUserPageContent( 1, remotePhotoSiteUserId );
+		final String userPageContent = new PhotosightUrlHelper().getUserPageContent( 1, remotePhotoSiteUserId );
 		// <a href="/users/344981/" class="uploaded current"><div>196</div>
 		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/users/%s/\" class=\"uploaded current\">\\s+<div>(.+?)</div>", remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userPageContent );

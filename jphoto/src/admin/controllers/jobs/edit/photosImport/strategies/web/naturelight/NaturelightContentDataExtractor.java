@@ -54,7 +54,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 	@Override
 	public int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId ) {
 		// <li>????? ??????????:<b>412</b></li>
-		final String userPageContent = new NaturelightRemoteContentHelper().getUserPageContent( 1, remotePhotoSiteUserId );
+		final String userPageContent = new NaturelightUrlHelper().getUserPageContent( 1, remotePhotoSiteUserId );
 		final Pattern pattern = Pattern.compile( "<li>(.+?):\\s+<b>(.+?)</b></li>" );
 		final Matcher matcher = pattern.matcher( userPageContent );
 

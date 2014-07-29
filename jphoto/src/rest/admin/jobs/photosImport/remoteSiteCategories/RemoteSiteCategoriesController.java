@@ -11,8 +11,6 @@ import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
-import core.services.utils.EntityLinkUtilsService;
-import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -101,9 +99,9 @@ public class RemoteSiteCategoriesController {
 
 	private String getCategoryLabel( final RemotePhotoSiteCategory remotePhotoSiteCategory, final PhotosImportSource importSource ) {
 		final String remoteCategoryName = translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
-		final AbstractRemoteContentHelper contentHelper = AbstractRemoteContentHelper.getInstance( importSource );
+		final AbstractRemotePhotoSiteUrlHelper contentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importSource );
 
-		final Genre genre = remotePhotoCategoryService.getGenre( remotePhotoSiteCategory );
+		final Genre genre = remotePhotoCategoryService.getMappedGenre( remotePhotoSiteCategory );
 		final String photoCategoryLink = urlUtilsService.getPhotosByGenreLink( genre.getId() );
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> [<a href='%s' title='%s' target='_blank'> i </a>]"

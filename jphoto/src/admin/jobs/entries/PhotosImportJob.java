@@ -6,7 +6,7 @@ import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImpor
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.filesystem.FilesystemImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.jobs.JobRuntimeEnvironment;
@@ -178,7 +178,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 				builder.append( translatorService.translate( "Photo import job parameter: remote site", getLanguage() ) ).append( ": " ).append( translatorService.translate( importSource.getName(), getLanguage() ) ).append( "<br />" );
 
-				final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
+				final AbstractRemotePhotoSiteUrlHelper remoteContentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importSource );
 
 				final List<String> remotePhotoSiteUserIds = Lists.transform( remoteSitePhotosImportParameters.getRemoteUserIds(), new Function<String, String>() {
 					@Override

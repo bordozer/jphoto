@@ -6,7 +6,7 @@ import core.general.genre.Genre;
 
 public interface RemotePhotoCategoryService {
 
-	Genre getGenre( final RemotePhotoSiteCategory remotePhotoSiteCategory );
+	Genre getMappedGenre( final RemotePhotoSiteCategory remotePhotoSiteCategory );
 
 	GenreDiscEntry getGenreDiscEntryOrOther( RemotePhotoSiteCategory remotePhotoSiteCategory );
 }

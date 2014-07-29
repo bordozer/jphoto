@@ -43,7 +43,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	private final Date firstPhotoUploadTime;
 
 	private final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor;
-	private final AbstractRemoteContentHelper remoteContentHelper;
+	private final AbstractRemotePhotoSiteUrlHelper remoteContentHelper;
 	private final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils;
 
 	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
@@ -54,7 +54,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		importParameters = ( RemoteSitePhotosImportParameters ) parameters;
 
 		this.remotePhotoSitePageContentDataExtractor = PhotosightContentDataExtractor.getInstance( importParameters.getImportSource() );
-		this.remoteContentHelper = AbstractRemoteContentHelper.getInstance( importParameters.getImportSource() );
+		this.remoteContentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importParameters.getImportSource() );
 
 		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils (
 			remoteContentHelper.getPhotosImportSource()

@@ -1,7 +1,7 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
@@ -123,7 +123,7 @@ public class AjaxServiceImpl implements AjaxService {
 
 		final PhotosImportSource importSource = PhotosImportSource.getById( _importSourceId );
 
-		final AbstractRemoteContentHelper remoteContentHelper = AbstractRemoteContentHelper.getInstance( importSource );
+		final AbstractRemotePhotoSiteUrlHelper remoteContentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importSource );
 		final String remoteUserName = remoteContentHelper.extractUserNameFromRemoteSite( userId );
 		final String remoteUserCardUrl = remoteContentHelper.getUserCardUrl( userId );
 

@@ -1,9 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightRemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35RemoteContentHelper;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightUrlHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35UrlHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightUrlHelper;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
@@ -19,11 +19,11 @@ import utils.StringUtilities;
 
 import java.io.IOException;
 
-public abstract class AbstractRemoteContentHelper {
+public abstract class AbstractRemotePhotoSiteUrlHelper {
 
 	protected final LogHelper log;
 
-	protected AbstractRemoteContentHelper( final LogHelper log ) {
+	protected AbstractRemotePhotoSiteUrlHelper( final LogHelper log ) {
 		this.log = log;
 	}
 
@@ -44,15 +44,15 @@ public abstract class AbstractRemoteContentHelper {
 		return getPhotosImportSource().getUrl();
 	}
 
-	public static AbstractRemoteContentHelper getInstance( final PhotosImportSource importSource ) {
+	public static AbstractRemotePhotoSiteUrlHelper getInstance( final PhotosImportSource importSource ) {
 
 		switch ( importSource ) {
 			case PHOTOSIGHT:
-				return new PhotosightRemoteContentHelper();
+				return new PhotosightUrlHelper();
 			case PHOTO35:
-				return new Photo35RemoteContentHelper();
+				return new Photo35UrlHelper();
 			case NATURELIGHT:
-				return new NaturelightRemoteContentHelper();
+				return new NaturelightUrlHelper();
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );
