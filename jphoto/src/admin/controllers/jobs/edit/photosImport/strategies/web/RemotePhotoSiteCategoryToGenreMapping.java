@@ -1,29 +1,29 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 
 public class RemotePhotoSiteCategoryToGenreMapping {
 
 	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 
-	private final GenreDiscEntry genreDiscEntry;
+	private final LocalCategory localCategory;
 
 
-	public RemotePhotoSiteCategoryToGenreMapping( final RemotePhotoSiteCategory remotePhotoSiteCategory, final GenreDiscEntry genreDiscEntry ) {
+	public RemotePhotoSiteCategoryToGenreMapping( final RemotePhotoSiteCategory remotePhotoSiteCategory, final LocalCategory localCategory ) {
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
-		this.genreDiscEntry = genreDiscEntry;
+		this.localCategory = localCategory;
 	}
 
 	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
 		return remotePhotoSiteCategory;
 	}
 
-	public GenreDiscEntry getGenreDiscEntry() {
-		return genreDiscEntry;
+	public LocalCategory getLocalCategory() {
+		return localCategory;
 	}
 
 	@Override
 	public String toString() {
-		return String.format( "%s => %s", remotePhotoSiteCategory, genreDiscEntry.getName() );
+		return String.format( "%s => %s", remotePhotoSiteCategory, localCategory.getName() );
 	}
 }

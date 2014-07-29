@@ -71,12 +71,7 @@ public abstract class AbstractPhotoImportStrategy {
 		final Photo photo = new Photo();
 		photo.setUserId( user.getId() );
 
-		Genre genre;
-		if ( imageToImport.getPhotosImportSource() == PhotosImportSource.FILE_SYSTEM ) {
-			genre = loadGenre( imageToImport.getGenreName() );
-		} else {
-			genre = loadGenre( imageToImport.getPhotosImportSource(), imageToImport.getGenreName() );
-		}
+		final Genre genre = loadGenre( imageToImport.getPhotosImportSource(), imageToImport.getGenreName() );
 
 		photo.setGenreId( genre.getId() );
 

@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
 import core.services.system.Services;
@@ -53,8 +53,8 @@ public class UserSelectionHelper {
 			case NATURE_ANIMALS_UNDERWATER:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.LANDSCAPE, GenreDiscEntry.ANIMALS, GenreDiscEntry.UNDERWATER );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.LANDSCAPE, LocalCategory.ANIMALS, LocalCategory.UNDERWATER );
 					}
 
 					@Override
@@ -65,8 +65,8 @@ public class UserSelectionHelper {
 			case NUDE_GLAMOUR_PORTRAIT:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.NUDE, GenreDiscEntry.GLAMOUR, GenreDiscEntry.PORTRAIT );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.NUDE, LocalCategory.GLAMOUR, LocalCategory.PORTRAIT );
 					}
 
 					@Override
@@ -77,8 +77,8 @@ public class UserSelectionHelper {
 			case SPORT_REPORTING_GENRE:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.SPORT, GenreDiscEntry.REPORTING, GenreDiscEntry.GENRE );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.SPORT, LocalCategory.REPORTING, LocalCategory.GENRE );
 					}
 
 					@Override
@@ -89,8 +89,8 @@ public class UserSelectionHelper {
 			case STILL:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.STILL );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.STILL );
 					}
 
 					@Override
@@ -101,8 +101,8 @@ public class UserSelectionHelper {
 			case HDR_DIGITAL_ART:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.HDR, GenreDiscEntry.DIGITAL_ART );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.HDR, LocalCategory.DIGITAL_ART );
 					}
 
 					@Override
@@ -113,8 +113,8 @@ public class UserSelectionHelper {
 			case ADVERTISING:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.ADVERTISING );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.ADVERTISING );
 					}
 
 					@Override
@@ -125,8 +125,8 @@ public class UserSelectionHelper {
 			case CHILDREN:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.CHILDREN );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.CHILDREN );
 					}
 
 					@Override
@@ -137,8 +137,8 @@ public class UserSelectionHelper {
 			case CITY_TRAVELLING:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.CITY, GenreDiscEntry.TRAVELLING );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.CITY, LocalCategory.TRAVELLING );
 					}
 
 					@Override
@@ -149,8 +149,8 @@ public class UserSelectionHelper {
 			case HUMOR_WALLPAPER_OTHER:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.HUMOR, GenreDiscEntry.WALLPAPERS, GenreDiscEntry.OTHER );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.HUMOR, LocalCategory.WALLPAPERS, LocalCategory.OTHER );
 					}
 
 					@Override
@@ -161,8 +161,8 @@ public class UserSelectionHelper {
 			case MACRO:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.MACRO );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.MACRO );
 					}
 
 					@Override
@@ -173,8 +173,8 @@ public class UserSelectionHelper {
 			case WEDDING:
 				return new AbstractPhotographStrategy() {
 					@Override
-					public List<GenreDiscEntry> getSupportedGenres() {
-						return newArrayList( GenreDiscEntry.WEDDING );
+					public List<LocalCategory> getSupportedGenres() {
+						return newArrayList( LocalCategory.WEDDING );
 					}
 
 					@Override

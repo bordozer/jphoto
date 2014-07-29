@@ -1,5 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
@@ -16,6 +17,8 @@ public interface RemotePhotoSiteCategory {
 	public static RemotePhotoSiteCategory[] getRemotePhotoSiteCategories( final PhotosImportSource photosImportSource ) {
 
 		switch ( photosImportSource ) {
+			case FILE_SYSTEM:
+				return LocalCategory.values();
 			case PHOTOSIGHT:
 				return PhotosightCategory.values();
 			case PHOTO35:
@@ -29,6 +32,8 @@ public interface RemotePhotoSiteCategory {
 
 	public static RemotePhotoSiteCategory getById( final PhotosImportSource photosImportSource, final int id ) {
 		switch ( photosImportSource ) {
+			case FILE_SYSTEM:
+				return LocalCategory.getById( id );
 			case PHOTOSIGHT:
 				return PhotosightCategory.getById( id );
 			case PHOTO35:

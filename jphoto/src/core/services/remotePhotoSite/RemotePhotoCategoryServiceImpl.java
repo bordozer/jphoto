@@ -1,6 +1,6 @@
 package core.services.remotePhotoSite;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoriesMappingStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
@@ -18,11 +18,11 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 	private final LogHelper log = new LogHelper( RemotePhotoCategoryServiceImpl.class );
 
 	@Override
-	public GenreDiscEntry getMappedGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public LocalCategory getMappedGenreDiscEntry( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
 		for ( final RemotePhotoSiteCategoryToGenreMapping photoCategoryMapping : RemotePhotoSiteCategoriesMappingStrategy.getStrategyFor( remotePhotoSiteCategory ).getMapping() ) {
 			if ( photoCategoryMapping.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
-				return photoCategoryMapping.getGenreDiscEntry();
+				return photoCategoryMapping.getLocalCategory();
 			}
 		}
 
@@ -32,9 +32,9 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 	@Override
 	public Genre getMappedGenreOrOther( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
-		final GenreDiscEntry genreDiscEntry = getMappedGenreDiscEntry( remotePhotoSiteCategory );
-		if ( genreDiscEntry != null ) {
-			final Genre genre = getGenreBy( genreDiscEntry );
+		final LocalCategory localCategory = getMappedGenreDiscEntry( remotePhotoSiteCategory );
+		if ( localCategory != null ) {
+			final Genre genre = getGenreBy( localCategory );
 			if ( genre != null ) {
 				return genre;
 			}
@@ -42,7 +42,7 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 
 		log.warn( String.format( "Remote photo site category %s does not mach any genre", remotePhotoSiteCategory ) );
 
-		return getGenreBy( GenreDiscEntry.OTHER );
+		return getGenreBy( LocalCategory.OTHER );
 	}
 
 	@Override
@@ -53,15 +53,15 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 			return genre;
 		}
 
-		return getGenreBy( GenreDiscEntry.OTHER );
+		return getGenreBy( LocalCategory.OTHER );
 	}
 
 	@Override
 	public Genre getMappedGenreOrNull( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 
-		final GenreDiscEntry genreDiscEntry = getMappedGenreDiscEntry( remotePhotoSiteCategory );
-		if ( genreDiscEntry != null ) {
-			return genreService.loadByName( genreDiscEntry.getName() );
+		final LocalCategory localCategory = getMappedGenreDiscEntry( remotePhotoSiteCategory );
+		if ( localCategory != null ) {
+			return genreService.loadByName( localCategory.getName() );
 		}
 
 		return null;
@@ -81,8 +81,8 @@ public class RemotePhotoCategoryServiceImpl implements RemotePhotoCategoryServic
 		return null;
 	}
 
-	private Genre getGenreBy( final GenreDiscEntry genreDiscEntry ) {
-		final Genre genre = genreService.loadByName( genreDiscEntry.getName() );
+	private Genre getGenreBy( final LocalCategory localCategory ) {
+		final Genre genre = genreService.loadByName( localCategory.getName() );
 		if ( genre != null ) {
 			return genre;
 		}

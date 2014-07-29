@@ -1,6 +1,6 @@
 package rest.admin.jobs.photosImport.remoteSiteCategories;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import core.general.configuration.ConfigurationKey;
@@ -138,8 +138,8 @@ public class RemoteSiteCategoriesController {
 
 		for ( final RemotePhotoSiteCategoryToGenreMapping entry : genreMapping ) {
 			if ( entry.getRemotePhotoSiteCategory() == remotePhotoSiteCategory ) {
-				final GenreDiscEntry genreDiscEntry = entry.getGenreDiscEntry();
-				return genreService.loadByName( genreDiscEntry.getName() );
+				final LocalCategory localCategory = entry.getLocalCategory();
+				return genreService.loadByName( localCategory.getName() );
 			}
 		}
 

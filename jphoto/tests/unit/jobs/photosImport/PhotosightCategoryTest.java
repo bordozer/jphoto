@@ -1,6 +1,6 @@
 package jobs.photosImport;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import common.AbstractTestCase;
@@ -17,38 +17,38 @@ public class PhotosightCategoryTest extends AbstractTestCase {
 
 	@Test
 	public void photosightCategoryMappingTest() {
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.NUDE ), GenreDiscEntry.NUDE );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GLAMOUR ), GenreDiscEntry.GLAMOUR );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.CITY ), GenreDiscEntry.CITY );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.CHILDREN ), GenreDiscEntry.CHILDREN );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GENRE ), GenreDiscEntry.GENRE );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GENRE_PORTRAIT ), GenreDiscEntry.GENRE );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ANIMALS ), GenreDiscEntry.ANIMALS );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.DIGITAL_ART ), GenreDiscEntry.DIGITAL_ART );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MACRO ), GenreDiscEntry.MACRO );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.STILL ), GenreDiscEntry.STILL );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.LANDSCAPE ), GenreDiscEntry.LANDSCAPE );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.UNDERWATER ), GenreDiscEntry.UNDERWATER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PORTRAIT ), GenreDiscEntry.PORTRAIT );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.TRAVELLING ), GenreDiscEntry.TRAVELLING );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ADVERTISING ), GenreDiscEntry.ADVERTISING );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.REPORTING ), GenreDiscEntry.REPORTING );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.WEDDING ), GenreDiscEntry.WEDDING );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.SPORT ), GenreDiscEntry.SPORT );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PHOTOSIGHT ), GenreDiscEntry.GENRE );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PHOTO_HUNTING ), GenreDiscEntry.ANIMALS );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ARCHITECTURE ), GenreDiscEntry.CITY );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MODELS ), GenreDiscEntry.MODELS );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.HUMOR ), GenreDiscEntry.HUMOR );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MOBILE_PHOTO ), GenreDiscEntry.OTHER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MUSEUM ), GenreDiscEntry.OTHER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.NATURE ), GenreDiscEntry.OTHER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.TECH ), GenreDiscEntry.OTHER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.REST ), GenreDiscEntry.OTHER );
-		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PAPARAZZI ), GenreDiscEntry.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.NUDE ), LocalCategory.NUDE );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GLAMOUR ), LocalCategory.GLAMOUR );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.CITY ), LocalCategory.CITY );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.CHILDREN ), LocalCategory.CHILDREN );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GENRE ), LocalCategory.GENRE );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.GENRE_PORTRAIT ), LocalCategory.GENRE );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ANIMALS ), LocalCategory.ANIMALS );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.DIGITAL_ART ), LocalCategory.DIGITAL_ART );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MACRO ), LocalCategory.MACRO );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.STILL ), LocalCategory.STILL );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.LANDSCAPE ), LocalCategory.LANDSCAPE );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.UNDERWATER ), LocalCategory.UNDERWATER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PORTRAIT ), LocalCategory.PORTRAIT );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.TRAVELLING ), LocalCategory.TRAVELLING );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ADVERTISING ), LocalCategory.ADVERTISING );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.REPORTING ), LocalCategory.REPORTING );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.WEDDING ), LocalCategory.WEDDING );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.SPORT ), LocalCategory.SPORT );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PHOTOSIGHT ), LocalCategory.GENRE );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PHOTO_HUNTING ), LocalCategory.ANIMALS );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.ARCHITECTURE ), LocalCategory.CITY );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MODELS ), LocalCategory.MODELS );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.HUMOR ), LocalCategory.HUMOR );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MOBILE_PHOTO ), LocalCategory.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.MUSEUM ), LocalCategory.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.NATURE ), LocalCategory.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.TECH ), LocalCategory.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.REST ), LocalCategory.OTHER );
+		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PAPARAZZI ), LocalCategory.OTHER );
 	}
 
-	private GenreDiscEntry getDiscEntry( final RemotePhotoSiteCategory photosightCategory ) {
+	private LocalCategory getDiscEntry( final RemotePhotoSiteCategory photosightCategory ) {
 		return remotePhotoCategoryService.getMappedGenreDiscEntry( photosightCategory );
 	}
 }

@@ -1,6 +1,6 @@
 package admin.jobs.entries.resources.photos;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.jobs.entries.resources.FakePhotoCommentLoader;
 import core.general.genre.Genre;
 import core.log.LogHelper;
@@ -38,7 +38,7 @@ public class FakePhotoNameGenerator {
 
 	public static void main( String[] args ) throws UnsupportedEncodingException {
 		final Genre genre = new Genre();
-		genre.setName( GenreDiscEntry.ANIMALS.getName() );
+		genre.setName( LocalCategory.ANIMALS.getName() );
 
 		final String name = getFakePhotoName( genre, new RandomUtilsServiceImpl() );
 
@@ -85,7 +85,7 @@ public class FakePhotoNameGenerator {
 
 		if ( sbj.size() == 0 ) {
 			for ( final PhotoNameXMLData subject : subjects ) {
-				if ( subject.getKey().equals( GenreDiscEntry.OTHER.getName() ) ) {
+				if ( subject.getKey().equals( LocalCategory.OTHER.getName() ) ) {
 					return randomUtilsService.getRandomGenericListElement( subject.getValues() );
 				}
 			}

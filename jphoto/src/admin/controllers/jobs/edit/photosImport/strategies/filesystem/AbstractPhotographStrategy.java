@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class AbstractPhotographStrategy {
 
-	public abstract List<GenreDiscEntry> getSupportedGenres();
+	public abstract List<LocalCategory> getSupportedGenres();
 
 	public abstract List<UserMembershipType> getSupportedMembershipType();
 
@@ -17,8 +17,8 @@ public abstract class AbstractPhotographStrategy {
 	}
 
 	public boolean doesSupportGenre( final Genre genre ) {
-		for ( final GenreDiscEntry genreDiscEntry : getSupportedGenres() ) {
-			if ( genreDiscEntry.getName().equalsIgnoreCase( genre.getName() ) ) {
+		for ( final LocalCategory localCategory : getSupportedGenres() ) {
+			if ( localCategory.getName().equalsIgnoreCase( genre.getName() ) ) {
 				return true;
 			}
 		}

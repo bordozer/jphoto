@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.filesystem;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import core.exceptions.BaseRuntimeException;
 import core.general.genre.Genre;
@@ -30,7 +30,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 
 	protected final LogHelper log = new LogHelper( RandomUserGenerator.class );
 
-	private final static EnumSet<GenreDiscEntry> allowedForModelsAndMakeupMastersGenres = EnumSet.of( GenreDiscEntry.ADVERTISING, GenreDiscEntry.CHILDREN, GenreDiscEntry.GLAMOUR, GenreDiscEntry.MODELS, GenreDiscEntry.NUDE, GenreDiscEntry.PORTRAIT, GenreDiscEntry.WEDDING, GenreDiscEntry.HDR );
+	private final static EnumSet<LocalCategory> allowedForModelsAndMakeupMastersGenres = EnumSet.of( LocalCategory.ADVERTISING, LocalCategory.CHILDREN, LocalCategory.GLAMOUR, LocalCategory.MODELS, LocalCategory.NUDE, LocalCategory.PORTRAIT, LocalCategory.WEDDING, LocalCategory.HDR );
 
 	public RandomUserGenerator( final Set<Genre> genres, final List<User> beingProcessedUsers, final Services services ) {
 		this.services = services;
@@ -103,7 +103,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 				return true;
 			case MODEL:
 			case MAKEUP_MASTER:
-				return allowedForModelsAndMakeupMastersGenres.contains( GenreDiscEntry.getByName( genre.getName() ) );
+				return allowedForModelsAndMakeupMastersGenres.contains( LocalCategory.getByName( genre.getName() ) );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal membershipType: %s", membershipType ) );

@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.LocalCategory;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.naturelight.NaturelightCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photos35.Photo35Category;
@@ -20,6 +20,8 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 
 	public static RemotePhotoSiteCategoriesMappingStrategy getStrategyFor( final PhotosImportSource importSource ) {
 		switch ( importSource ) {
+			case FILE_SYSTEM:
+				return getLocalStrategy();
 			case PHOTOSIGHT:
 				return getPhotosightStrategy();
 			case PHOTO35:
@@ -32,6 +34,10 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 	}
 
 	public static RemotePhotoSiteCategoriesMappingStrategy getStrategyFor( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+
+		if ( remotePhotoSiteCategory instanceof LocalCategory ) {
+			return getLocalStrategy();
+		}
 
 		if ( remotePhotoSiteCategory instanceof PhotosightCategory ) {
 			return getPhotosightStrategy();
@@ -48,40 +54,52 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 		throw new IllegalArgumentException( String.format( "Unsupported remote photo site category class: '%s'", remotePhotoSiteCategory.getClass().getName() ) );
 	}
 
+	private static RemotePhotoSiteCategoriesMappingStrategy getLocalStrategy() {
+
+		return new RemotePhotoSiteCategoriesMappingStrategy() {
+
+			{
+				for ( final LocalCategory localCategory : LocalCategory.values() ) {
+					categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( localCategory, localCategory ) );
+				}
+			}
+		};
+	}
+
 	private static RemotePhotoSiteCategoriesMappingStrategy getPhotosightStrategy() {
 
 		return new RemotePhotoSiteCategoriesMappingStrategy() {
 
 			{
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.NUDE, GenreDiscEntry.NUDE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.CITY, GenreDiscEntry.CITY ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.CHILDREN, GenreDiscEntry.CHILDREN ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GENRE, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ANIMALS, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.DIGITAL_ART, GenreDiscEntry.DIGITAL_ART ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.STILL, GenreDiscEntry.STILL ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ADVERTISING, GenreDiscEntry.ADVERTISING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.REPORTING, GenreDiscEntry.REPORTING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.WEDDING, GenreDiscEntry.WEDDING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.SPORT, GenreDiscEntry.SPORT ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PHOTOSIGHT, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PHOTO_HUNTING, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ARCHITECTURE, GenreDiscEntry.CITY ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MODELS, GenreDiscEntry.MODELS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.HUMOR, GenreDiscEntry.HUMOR ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MOBILE_PHOTO, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MUSEUM, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.NATURE, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.TECH, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.REST, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PAPARAZZI, GenreDiscEntry.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.NUDE, LocalCategory.NUDE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GLAMOUR, LocalCategory.GLAMOUR ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.CITY, LocalCategory.CITY ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.CHILDREN, LocalCategory.CHILDREN ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GENRE, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.GENRE_PORTRAIT, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ANIMALS, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.DIGITAL_ART, LocalCategory.DIGITAL_ART ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MACRO, LocalCategory.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.STILL, LocalCategory.STILL ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.LANDSCAPE, LocalCategory.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.UNDERWATER, LocalCategory.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PORTRAIT, LocalCategory.PORTRAIT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.TRAVELLING, LocalCategory.TRAVELLING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ADVERTISING, LocalCategory.ADVERTISING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.REPORTING, LocalCategory.REPORTING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.WEDDING, LocalCategory.WEDDING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.SPORT, LocalCategory.SPORT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PHOTOSIGHT, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PHOTO_HUNTING, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.ARCHITECTURE, LocalCategory.CITY ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MODELS, LocalCategory.MODELS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.HUMOR, LocalCategory.HUMOR ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MOBILE_PHOTO, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.MUSEUM, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.NATURE, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.TECH, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.REST, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( PhotosightCategory.PAPARAZZI, LocalCategory.OTHER ) );
 			}
 		};
 	}
@@ -91,24 +109,24 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 		return new RemotePhotoSiteCategoriesMappingStrategy() {
 
 			{
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GLAMOUR, GenreDiscEntry.GLAMOUR ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.CITY, GenreDiscEntry.CITY ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE_PORTRAIT, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.ANIMALS, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COLLAGE, GenreDiscEntry.DIGITAL_ART ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.STILL_LIFE, GenreDiscEntry.STILL ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTICA, GenreDiscEntry.NUDE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.OTHER, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, GenreDiscEntry.PORTRAIT ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.TRAVEL, GenreDiscEntry.TRAVELLING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, GenreDiscEntry.ADVERTISING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.REPORTAGE, GenreDiscEntry.REPORTING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.SPORT, GenreDiscEntry.SPORT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GLAMOUR, LocalCategory.GLAMOUR ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.CITY, LocalCategory.CITY ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.GENRE_PORTRAIT, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.ANIMALS, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COLLAGE, LocalCategory.DIGITAL_ART ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.MACRO, LocalCategory.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.STILL_LIFE, LocalCategory.STILL ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.EROTICA, LocalCategory.NUDE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.OTHER, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.LANDSCAPE, LocalCategory.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.UNDERWATER, LocalCategory.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.PORTRAIT, LocalCategory.PORTRAIT ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.NATURE, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.TRAVEL, LocalCategory.TRAVELLING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.COMMERCIAL_PHOTOGRAPHY, LocalCategory.ADVERTISING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.REPORTAGE, LocalCategory.REPORTING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( Photo35Category.SPORT, LocalCategory.SPORT ) );
 			}
 		};
 	}
@@ -117,24 +135,24 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 
 		return new RemotePhotoSiteCategoriesMappingStrategy() {
 			{
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.BIRDS, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.LANDSCAPE, GenreDiscEntry.LANDSCAPE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.CREEP, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MAMMAL, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FLORA, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.HUMAN_AND_NATURE, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.OTHER, GenreDiscEntry.OTHER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER, GenreDiscEntry.UNDERWATER ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TRAVELLING, GenreDiscEntry.TRAVELLING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ARTHROPODA, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.AMPHIBIA, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.Action, GenreDiscEntry.REPORTING ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.APERIODICITIES, GenreDiscEntry.ANIMALS ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER_MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ASTROPHOTOGRAPHY, GenreDiscEntry.LANDSCAPE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FACES, GenreDiscEntry.GENRE ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TECH, GenreDiscEntry.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.BIRDS, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MACRO, LocalCategory.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.LANDSCAPE, LocalCategory.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.CREEP, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.MAMMAL, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FLORA, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.HUMAN_AND_NATURE, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.OTHER, LocalCategory.OTHER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER, LocalCategory.UNDERWATER ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TRAVELLING, LocalCategory.TRAVELLING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ARTHROPODA, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.AMPHIBIA, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.Action, LocalCategory.REPORTING ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.APERIODICITIES, LocalCategory.ANIMALS ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER_MACRO, LocalCategory.MACRO ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ASTROPHOTOGRAPHY, LocalCategory.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FACES, LocalCategory.GENRE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TECH, LocalCategory.GENRE ) );
 			}
 		};
 	}
