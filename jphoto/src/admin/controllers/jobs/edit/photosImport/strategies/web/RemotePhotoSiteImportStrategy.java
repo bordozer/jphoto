@@ -514,6 +514,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		int numberInSeries = 1;
 
+		final int total = remotePhotoSiteImages.size();
+		int counter = 1;
+
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoSiteImages ) {
 
 			/*final TranslatableMessage translatableMessage = new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
@@ -560,13 +563,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			log.debug( String.format( "Photo %d has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 
-			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "Got data of '$1': $2 of $3, photo category: $4", services )
+			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "$1 / $2 Got data of '$3': $4 of $5, photo category: $6", services )
+				.addIntegerParameter( counter )
+				.addIntegerParameter( total )
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 				.string( remoteContentHelper.getUserCardLink( remotePhotoSiteUser ) )
 				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoSitePhoto.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), services.getRemotePhotoCategoryService() ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage2 );
+			counter++;
 
 			result.add( remotePhotoSitePhoto );
 

@@ -28,8 +28,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Got data of '$1': $2 of $3, photo category: $4</nerd>
-		<ru><![CDATA[$1: получены данные работы '$2' пользователя $3, раздел '$4']]></ru>
+		<nerd>$1 / $2 Got data of '$3': $4 of $5, photo category: $6</nerd>
+		<ru><![CDATA[$1 / $2 получены данные работы '$4' пользователя $5, раздел '$6']]></ru>
 	</translation>
 
 	<translation>
