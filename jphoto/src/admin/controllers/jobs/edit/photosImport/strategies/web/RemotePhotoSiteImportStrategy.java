@@ -77,7 +77,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private void importRemotePhotoSiteUserPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException, SaveToDBException {
 
-		final User user = findByNameOrCreateUser( remotePhotoSiteUser, importParameters );
+		final User user = findExistingOrCreateUser( remotePhotoSiteUser, importParameters );
 		if ( user == null ) {
 			log.error( String.format( "%s can not be created. Skipping user's photos import.", remotePhotoSiteUser ) );
 			return;
@@ -658,7 +658,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return null;
 	}
 
-	private User findByNameOrCreateUser( final RemotePhotoSiteUser remotePhotoSiteUser, final RemoteSitePhotosImportParameters parameters ) throws IOException {
+	private User findExistingOrCreateUser( final RemotePhotoSiteUser remotePhotoSiteUser, final RemoteSitePhotosImportParameters parameters ) throws IOException {
 
 		final String userName = getUserName( remotePhotoSiteUser );
 		if ( StringUtils.isEmpty( userName ) ) {
