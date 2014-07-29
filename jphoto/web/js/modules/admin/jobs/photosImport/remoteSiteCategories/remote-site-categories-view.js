@@ -13,9 +13,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		render: function ( category ) {
-			var container = $( "<div style='display: inline-block; width: 200px;'></div>" );
+			var container = $( "<div style='display: inline-block; width: 300px;'></div>" );
 
-			container.append( "<input name='remotePhotoSiteCategories' " + ( category.get( 'checked' ) ? "checked='checked'" : '' ) + " type='checkbox' value='" + category.get( 'remotePhotoSiteCategoryId' ) + "'>" );
+			container.append( "<input name='remotePhotoSiteCategories' class='" + category.get( 'cssClasses' ) + "' " + ( category.get( 'checked' ) ? "checked='checked'" : '' ) + " type='checkbox' value='" + category.get( 'remotePhotoSiteCategoryId' ) + "'>" );
 			container.append( category.get( 'remotePhotoSiteCategoryName' ) );
 
 			this.$el.append( container );

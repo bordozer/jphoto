@@ -168,7 +168,12 @@
 
 									<table:tr>
 										<table:td colspan="2">
+											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-nude" initiallyChecked="${photosImportModel.remotePhotoSiteImport_importNudeContentByDefault}" /> ${eco:translate('Photo import job JSP: Nude categories')}
+											&nbsp;&nbsp;
+											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
+
 											<div class="remote-site-categories-container" style="float: left; width: 100%; height: auto; min-height: 120px;"></div>
+
 											<script type="text/javascript">
 
 												function renderRemoteSiteCategories() {

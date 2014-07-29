@@ -132,6 +132,7 @@ public class PhotosImportController extends DateRangableController {
 
 		aModel.setImportComments( true );
 		aModel.setPictureDir( configurationService.getString( ConfigurationKey.ADMIN_PHOTO_FILE_IMPORT_DEFAULT_DIR ) );
+		aModel.setRemotePhotoSiteImport_importNudeContentByDefault( configurationService.getBoolean( ConfigurationKey.ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT ) );
 		aModel.setBreakImportIfAlreadyImportedPhotoFound( true );
 	}
 

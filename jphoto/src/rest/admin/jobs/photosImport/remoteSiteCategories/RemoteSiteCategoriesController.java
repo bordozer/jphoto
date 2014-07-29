@@ -2,9 +2,7 @@ package rest.admin.jobs.photosImport.remoteSiteCategories;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoriesMappingStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
-import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategoryToGenreMapping;
+import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.services.entry.GenreService;
@@ -12,6 +10,9 @@ import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.SystemVarsService;
+import core.services.utils.UrlUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,15 @@ public class RemoteSiteCategoriesController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private SystemVarsService systemVarsService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RemotePhotoSiteCategoryDTO> userCardVotingAreas( final @PathVariable( "importSourceId" ) int importSourceId ) {
@@ -75,7 +85,7 @@ public class RemoteSiteCategoriesController {
 
 			final RemotePhotoSiteCategoryDTO categoryDTO = new RemotePhotoSiteCategoryDTO();
 			categoryDTO.setRemotePhotoSiteCategoryId( remotePhotoSiteCategory.getId() );
-			categoryDTO.setRemotePhotoSiteCategoryName( translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() ) );
+			categoryDTO.setRemotePhotoSiteCategoryName( getCategoryLabel( remotePhotoSiteCategory, importSource ) );
 			categoryDTO.setChecked( selectedCategories.contains( remotePhotoSiteCategory ) ); // TODO: will be 'contains' working for interface?
 
 			final Genre genre = getGenreByByRemotePhotoSiteCategory( remotePhotoSiteCategory, importSource );
@@ -89,6 +99,23 @@ public class RemoteSiteCategoriesController {
 		}
 
 		return remotePhotoSiteCategoryDTOs;
+	}
+
+	private String getCategoryLabel( final RemotePhotoSiteCategory remotePhotoSiteCategory, final PhotosImportSource importSource ) {
+		final String remoteCategoryName = translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
+		final AbstractRemoteContentHelper contentHelper = AbstractRemoteContentHelper.getInstance( importSource );
+
+		final RemotePhotoSitePhotoImageFileUtils remotePhotoSitePhotoImageFileUtils = new RemotePhotoSitePhotoImageFileUtils( importSource, systemVarsService.getRemotePhotoSitesCacheFolder() );
+//		final String photoCategoryLink = contentHelper.getPhotoCategoryLink( remotePhotoSiteCategory, entityLinkUtilsService, genreService, getLanguage(), remotePhotoSitePhotoImageFileUtils );
+		final Genre genre = genreService.loadIdByName( remotePhotoSitePhotoImageFileUtils.getGenreDiscEntry( remotePhotoSiteCategory ).getName() );
+		final String photoCategoryLink = urlUtilsService.getPhotosByGenreLink( genre.getId() );
+
+		return String.format( "<a href='%s' target='_blank'>%s</a> [<a href='%s' title='%s' target='_blank'> i </a>]"
+			, contentHelper.getPhotoCategoryUrl( remotePhotoSiteCategory )
+			, remoteCategoryName
+			, photoCategoryLink
+			, translatorService.translate( "Remote category label: Mapped to $1", getLanguage(), translatorService.translateGenre( genre, getLanguage() ) )
+		);
 	}
 
 	private List<RemotePhotoSiteCategory> getSelectedCategories( final PhotosImportSource importSource ) {
