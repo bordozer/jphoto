@@ -51,12 +51,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		importParameters = ( RemoteSitePhotosImportParameters ) parameters;
 
-		final PhotosImportSource photosImportSource = importParameters.getRemoteContentHelper().getPhotosImportSource();
-		final File remotePhotoSitesCacheFolder = services.getSystemVarsService().getRemotePhotoSitesCacheFolder();
-
 		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils (
-			photosImportSource
-			, remotePhotoSitesCacheFolder
+			importParameters.getRemoteContentHelper().getPhotosImportSource()
+			, services.getSystemVarsService().getRemotePhotoSitesCacheFolder()
 			, services.getRemotePhotoCategoryService()
 		);
 
