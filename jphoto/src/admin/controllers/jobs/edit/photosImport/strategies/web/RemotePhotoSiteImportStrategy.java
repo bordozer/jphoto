@@ -40,10 +40,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private RemoteSitePhotosImportParameters importParameters;
 
-	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
-
 	private final Date firstPhotoUploadTime;
+
 	private final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils;
+
+	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
 
 	public RemotePhotoSiteImportStrategy( final AbstractJob job, final AbstractImportParameters parameters, final Services services ) {
 		super( job, services, new LogHelper( RemotePhotoSiteImportStrategy.class ), parameters.getLanguage() );
@@ -53,7 +54,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final PhotosImportSource photosImportSource = importParameters.getRemoteContentHelper().getPhotosImportSource();
 		final File remotePhotoSitesCacheFolder = services.getSystemVarsService().getRemotePhotoSitesCacheFolder();
 
-		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils(
+		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils (
 			photosImportSource
 			, remotePhotoSitesCacheFolder
 			, services.getRemotePhotoCategoryService()
@@ -375,8 +376,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	private List<RemotePhotoSitePhoto> getCachedLocallyRemotePhotoSitePhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-
-		final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils = this.remotePhotoSiteCacheXmlUtils;
 
 		try {
 			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( importParameters.getImportSource(), remotePhotoSiteUser, services, job.getJobEnvironment().getLanguage() );
