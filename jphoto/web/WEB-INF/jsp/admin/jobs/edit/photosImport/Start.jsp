@@ -172,7 +172,7 @@
 											&nbsp;&nbsp;
 											<js:checkboxMassChecker checkboxClass="remote-photo-site-category-no-nude" initiallyChecked="true" /> ${eco:translate('Photo import job JSP: No nude categories')}
 
-											<div class="remote-site-categories-container" style="float: left; width: 100%; height: auto; min-height: 120px;"></div>
+											<div class="remote-site-categories-container" style="float: left; width: 100%; height: auto; min-height: 120px; padding-top: 10px;"></div>
 
 											<script type="text/javascript">
 
