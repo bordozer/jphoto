@@ -91,15 +91,6 @@ public class RemotePhotoSiteCacheXmlUtils {
 		bos.close();
 	}
 
-	private static String escapeFileName( final String param ) {
-		final String currentEncoding = "UTF-8";
-		try {
-			return new String( Charset.forName( currentEncoding ).encode( param ).array(), currentEncoding ).trim().replaceAll( "[\\\\/*?|!-&:-@']", "_" );
-		} catch ( UnsupportedEncodingException e ) {
-			throw new BaseRuntimeException( e );
-		}
-	}
-
 	public void cacheLocallyPhotos( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
@@ -248,6 +239,15 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 	public static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
 		return String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
+	}
+
+	private static String escapeFileName( final String param ) {
+		final String currentEncoding = "UTF-8";
+		try {
+			return new String( Charset.forName( currentEncoding ).encode( param ).array(), currentEncoding ).trim().replaceAll( "[\\\\/*?|!-&:-@']", "_" );
+		} catch ( UnsupportedEncodingException e ) {
+			throw new BaseRuntimeException( e );
+		}
 	}
 
 	public File getUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
