@@ -75,47 +75,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	@Override
-	public int getTotalOperations( final int totalJopOperations ) throws IOException {
-
-		if ( totalJopOperations > 0 && totalJopOperations != AbstractJob.OPERATION_COUNT_UNKNOWN ) {
-			return totalJopOperations;
-		}
-
-		int countedTotal = 0;
-
-		final List<String> remotePhotoSiteUsersIds = importParameters.getRemoteUserIds();
-		for ( final String remotePhotoSiteUserId : remotePhotoSiteUsersIds ) {
-
-			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( 1, remotePhotoSiteUserId );
-
-			if ( StringUtils.isEmpty( userPageContent ) ) {
-				log.error( String.format( "ERROR getting remote photo site user #%s pages qty. Photos import of the user will be skipped.", remotePhotoSiteUserId ) );
-
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "ERROR getting remote photo site user #$1 pages qty. Photos import of the user will be skipped.", services )
-					.string( remotePhotoSiteUserId )
-					;
-				job.addJobRuntimeLogMessage( translatableMessage );
-
-				continue;
-			}
-
-			final int qty = getRemotePhotoSitePageContentDataExtractor().getTotalPagesQty( userPageContent, remotePhotoSiteUserId );
-			countedTotal += qty;
-			log.info( String.format( "Getting remote photo site user #%s pages qty: %d ( summary: %d )", remotePhotoSiteUserId, qty, countedTotal ) );
-
-			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
-				break;
-			}
-		}
-
-		return countedTotal;
-	}
-
-	public static String createLoginForRemotePhotoSiteUser( final String remotePhotoSiteUserId ) {
-		return String.format( "%s%s", REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX, remotePhotoSiteUserId );
-	}
-
 	private void importRemotePhotoSiteUserPhotos( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException, SaveToDBException {
 
 		final User user = findByNameOrCreateUser( remotePhotoSiteUser, importParameters );
@@ -205,6 +164,47 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			page++;
 			job.increment();
 		}
+	}
+
+	@Override
+	public int getTotalOperations( final int totalJopOperations ) throws IOException {
+
+		if ( totalJopOperations > 0 && totalJopOperations != AbstractJob.OPERATION_COUNT_UNKNOWN ) {
+			return totalJopOperations;
+		}
+
+		int countedTotal = 0;
+
+		final List<String> remotePhotoSiteUsersIds = importParameters.getRemoteUserIds();
+		for ( final String remotePhotoSiteUserId : remotePhotoSiteUsersIds ) {
+
+			final String userPageContent = importParameters.getRemoteContentHelper().getUserPageContent( 1, remotePhotoSiteUserId );
+
+			if ( StringUtils.isEmpty( userPageContent ) ) {
+				log.error( String.format( "ERROR getting remote photo site user #%s pages qty. Photos import of the user will be skipped.", remotePhotoSiteUserId ) );
+
+				final TranslatableMessage translatableMessage = new TranslatableMessage( "ERROR getting remote photo site user #$1 pages qty. Photos import of the user will be skipped.", services )
+					.string( remotePhotoSiteUserId )
+					;
+				job.addJobRuntimeLogMessage( translatableMessage );
+
+				continue;
+			}
+
+			final int qty = getRemotePhotoSitePageContentDataExtractor().getTotalPagesQty( userPageContent, remotePhotoSiteUserId );
+			countedTotal += qty;
+			log.info( String.format( "Getting remote photo site user #%s pages qty: %d ( summary: %d )", remotePhotoSiteUserId, qty, countedTotal ) );
+
+			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
+				break;
+			}
+		}
+
+		return countedTotal;
+	}
+
+	public static String createLoginForRemotePhotoSiteUser( final String remotePhotoSiteUserId ) {
+		return String.format( "%s%s", REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX, remotePhotoSiteUserId );
 	}
 
 	private void filterDownloadedPhotosByCategories( final List<RemotePhotoSitePhoto> remotePhotoSitePagePhotos ) {
