@@ -1,5 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
+import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class RemotePhotoSitePhoto {
 	private boolean isCached;
 
 	private boolean hasError;
-	private String series;
+	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 	private int numberInSeries;
 
 	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
@@ -86,12 +88,12 @@ public class RemotePhotoSitePhoto {
 		this.hasError = hasError;
 	}
 
-	public void setSeries( final String series ) {
-		this.series = series;
+	public void setRemotePhotoSiteSeries( final RemotePhotoSiteSeries remotePhotoSiteSeries ) {
+		this.remotePhotoSiteSeries = remotePhotoSiteSeries;
 	}
 
-	public String getSeries() {
-		return series;
+	public RemotePhotoSiteSeries getRemotePhotoSiteSeries() {
+		return remotePhotoSiteSeries;
 	}
 
 	@Override

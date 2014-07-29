@@ -29,6 +29,10 @@ public class RemotePhotoSiteImage {
 		this.series = series;
 	}
 
+	public boolean hasSeries() {
+		return series != null;
+	}
+
 	@Override
 	public String toString() {
 		return imageUrl;

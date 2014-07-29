@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies;
 
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
 import core.exceptions.BaseRuntimeException;
@@ -166,29 +167,29 @@ public abstract class AbstractPhotoImportStrategy {
 
 	private List<UserPhotoAlbum> getPhotoAlbumsAssignTo( final ImageToImport photoToImport, final User user ) {
 
-		final String detectedOnRemoteSiteSeriesName = photoToImport.getPhotoAlbum();
-		if ( StringUtils.isNotEmpty( detectedOnRemoteSiteSeriesName ) ) {
+		final RemotePhotoSiteSeries remotePhotoSiteSeries = photoToImport.getRemotePhotoSiteSeries();
 
-			final UserPhotoAlbum existingPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( user, detectedOnRemoteSiteSeriesName );
-			if ( existingPhotoAlbum != null ) {
-				log.debug( String.format( "The photo will be added to the existing album with name '%s'", existingPhotoAlbum.getName() ) );
-				return newArrayList( existingPhotoAlbum );
-			} else {
-				final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
-				photoAlbum.setName( detectedOnRemoteSiteSeriesName );
-				photoAlbum.setUser( user );
-				photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
-
-				services.getUserPhotoAlbumService().save( photoAlbum );
-
-				return newArrayList( photoAlbum );
-			}
+		if ( remotePhotoSiteSeries == null ) {
+			return newArrayList();
 		}
 
-		return getRandomPhotoAlbums( user );
+		final UserPhotoAlbum existingPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( user, remotePhotoSiteSeries.getName() );
+		if ( existingPhotoAlbum != null ) {
+			log.debug( String.format( "The photo will be added to the existing album with name '%s'", existingPhotoAlbum.getName() ) );
+			return newArrayList( existingPhotoAlbum );
+		}
+
+		final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
+		photoAlbum.setName( remotePhotoSiteSeries.getName() );
+		photoAlbum.setUser( user );
+		photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
+
+		services.getUserPhotoAlbumService().save( photoAlbum );
+
+		return newArrayList( photoAlbum );
 	}
 
-	private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
+	/*private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
 
 		final List<UserPhotoAlbum> userPhotoAlbums = services.getUserPhotoAlbumService().loadAllForEntry( user.getId() );
 
@@ -197,5 +198,5 @@ public abstract class AbstractPhotoImportStrategy {
 		}
 
 		return services.getRandomUtilsService().getRandomNUniqueListElements( userPhotoAlbums, 3 );
-	}
+	}*/
 }

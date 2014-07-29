@@ -3,6 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageDiscEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
@@ -441,7 +442,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final ImageToImport imageToImport = new ImageToImport( imageDiscEntry );
 			imageToImport.setUser( localUser );
 			imageToImport.setName( remotePhotoSitePhoto.getName() );
-			imageToImport.setPhotoAlbum( remotePhotoSitePhoto.getSeries() );
+			imageToImport.setRemotePhotoSiteSeries( remotePhotoSitePhoto.getRemotePhotoSiteSeries() );
 
 			final RemotePhotoSiteCategory photosightCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();
@@ -506,7 +507,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
-		final boolean isImageAssignedToSeries = remotePhotoSiteImages.size() == 1;
 		int numberInSeries = 1;
 
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoSiteImages ) {
@@ -518,9 +518,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
 			final String photoName = remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent );
-			if ( isImageAssignedToSeries ) {
+
+			if ( remotePhotoSiteImage.hasSeries() ) {
 				remotePhotoSitePhoto.setName( String.format( "%s #%d", photoName, numberInSeries ) );
-				remotePhotoSitePhoto.setSeries( photoName );
+
+				final RemotePhotoSiteSeries series = remotePhotoSiteImage.getSeries();
+				series.setName( photoName );
+
+				remotePhotoSitePhoto.setRemotePhotoSiteSeries( series );
 			} else {
 				remotePhotoSitePhoto.setName( photoName );
 			}
