@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImage;
 import core.exceptions.BaseRuntimeException;
 import core.services.system.Services;
 import core.services.utils.DateUtilsService;
@@ -19,11 +20,11 @@ import static com.google.common.collect.Lists.newArrayList;
 public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	public List<RemotePhotoSiteImage> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 
-		final String imageUrlNew = extractImageUrlByNewRules( remotePhotoSitePhotoId, photoPageContent );
-		if ( StringUtils.isNotEmpty( imageUrlNew ) ) {
-			return newArrayList( imageUrlNew );
+		final RemotePhotoSiteImage remotePhotoSiteImage = extractImageUrlByNewRules( remotePhotoSitePhotoId, photoPageContent );
+		if ( remotePhotoSiteImage != null ) {
+			return newArrayList( remotePhotoSiteImage );
 		}
 
 		return newArrayList( extractImageUrlByOldRules( remotePhotoSitePhotoId, photoPageContent ) );
@@ -118,7 +119,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 		return result;
 	}
 
-	private String extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	private RemotePhotoSiteImage extractImageUrlByNewRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		// <img src="http://icon.s.photosight.ru/img/8/f4f/3725335_large.jpeg"
 		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d_large.jp(e*?)g\"", getHost(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
@@ -127,13 +128,13 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, getHost(), someShit, remotePhotoSitePhotoId, extension );
+			return new RemotePhotoSiteImage( String.format( "%s.%s/%s/%d_large.jp%sg", photoImageServerUrl, getHost(), someShit, remotePhotoSitePhotoId, extension ) );
 		}
 
 		return null;
 	}
 
-	private String extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	private RemotePhotoSiteImage extractImageUrlByOldRules( final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		//<img src="http://img-2007-09.photosight.ru/24/2318529.jpg" alt="
 		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://(.+?).%s/(.+?)/%d.jp(e*?)g\"", getHost(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
@@ -142,7 +143,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 			final String photoImageServerUrl = matcher.group( 1 );
 			final String someShit = matcher.group( 2 );
 			final String extension = matcher.group( 3 );
-			return String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, getHost(), someShit, remotePhotoSitePhotoId, extension );
+			return new RemotePhotoSiteImage( String.format( "%s.%s/%s/%d.jp%sg", photoImageServerUrl, getHost(), someShit, remotePhotoSitePhotoId, extension ) );
 		}
 
 		return null;

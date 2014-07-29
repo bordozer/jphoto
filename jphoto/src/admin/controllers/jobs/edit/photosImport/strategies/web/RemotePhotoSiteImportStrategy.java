@@ -404,18 +404,18 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		int counter = 1;
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
 
-			final String imageUrl = remotePhotoSitePhoto.getImageUrl();
-			log.debug( String.format( "Getting photo %s content", imageUrl ) );
+			final RemotePhotoSiteImage remotePhotoSiteImage = remotePhotoSitePhoto.getRemotePhotoSiteImage();
+			log.debug( String.format( "Getting photo %s content", remotePhotoSiteImage.getImageUrl() ) );
 			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Getting image '$3' content", services )
 				.addIntegerParameter( counter )
 				.addIntegerParameter( toAddCount )
-				.link( remotePhotoSitePhoto.getImageUrl(), remotePhotoSitePhoto.getImageUrl() )
+				.link( remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl(), remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl() )
 			);
 
-			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( imageUrl );
+			final String imageContent = importParameters.getRemoteContentHelper().getImageContentFromUrl( remotePhotoSiteImage.getImageUrl() );
 			if ( imageContent == null ) {
 				remotePhotoSitePhoto.setHasError( true );
-				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get remote photo site image content: '$1'", services ).string( remotePhotoSitePhoto.getImageUrl() ) );
+				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get remote photo site image content: '$1'", services ).string( remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl() ) );
 				continue;
 			}
 
@@ -492,8 +492,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return newArrayList();
 		}
 
-		final List<String> imageUrls = remotePhotoSitePageContentDataExtractor.extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
-		if ( imageUrls == null || imageUrls.isEmpty() ) {
+		final List<RemotePhotoSiteImage> remotePhotoSiteImages = remotePhotoSitePageContentDataExtractor.extractImageUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId, photoPageContent );
+		if ( remotePhotoSiteImages == null || remotePhotoSiteImages.isEmpty() ) {
 			logPhotoSkipping( remotePhotoSiteUser, remotePhotoSitePhotoId, "Can not extract photo image URL from page content." );
 			return newArrayList();
 		}
@@ -506,18 +506,24 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoSitePhoto> result = newArrayList( );
 
-		final String series = imageUrls.size() == 1 ? "" : String.format( "%s #%d", photosightCategory.getName(), services.getRandomUtilsService().getRandomInt( 1000, 10000 ) );
+		final boolean isImageAssignedToSeries = remotePhotoSiteImages.size() == 1;
 		int numberInSeries = 1;
 
-		for ( final String imageUrl : imageUrls ) {
+		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoSiteImages ) {
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Remote photo site site photos import: Importing image '$1'", services )
-					.string( imageUrl )
+					.string( remotePhotoSiteImage.getImageUrl() )
 					;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
-			remotePhotoSitePhoto.setName( String.format( "%s #%d", remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent ), numberInSeries ) );
+			final String photoName = remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent );
+			if ( isImageAssignedToSeries ) {
+				remotePhotoSitePhoto.setName( String.format( "%s #%d", photoName, numberInSeries ) );
+				remotePhotoSitePhoto.setSeries( photoName );
+			} else {
+				remotePhotoSitePhoto.setName( photoName );
+			}
 
 			final Date uploadTime = importParameters.getRemotePhotoSitePageContentDataExtractor().extractPhotoUploadTime( photoPageContent, services );
 			if ( uploadTime != null ) {
@@ -531,7 +537,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				job.addJobRuntimeLogMessage( translatableMessage1 );
 			}
 
-			remotePhotoSitePhoto.setImageUrl( imageUrl );
+			remotePhotoSitePhoto.setRemotePhotoSiteImage( remotePhotoSiteImage );
 			remotePhotoSitePhoto.setNumberInSeries( numberInSeries );
 
 			if ( importParameters.isImportComments() ) {
@@ -540,7 +546,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			remotePhotoSitePhoto.setCached( false );
-			remotePhotoSitePhoto.setSeries( series );
 
 			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 

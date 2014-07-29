@@ -105,7 +105,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( getRemotePhotoSitePhotoImageFileUtils().getGenreDiscEntry( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getImageUrl() );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl() );
 
 			final List<String> comments = remotePhotoSitePhoto.getComments();
 			if ( comments != null ) {
@@ -161,7 +161,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remoteUserPhotoId, category );
 			remotePhotoSitePhoto.setName( photoName );
 			remotePhotoSitePhoto.setUploadTime( uploadTime );
-			remotePhotoSitePhoto.setImageUrl( imageUrl );
+			remotePhotoSitePhoto.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
 
 			final List<String> comments = newArrayList();
 			final Element commentsElement = photoElement.element( USER_INFO_FILE_PHOTO_COMMENT_ELEMENT_NAME );

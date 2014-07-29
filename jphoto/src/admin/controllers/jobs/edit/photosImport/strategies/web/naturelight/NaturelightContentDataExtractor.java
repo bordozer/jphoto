@@ -2,6 +2,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web.naturelight;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImage;
 import core.exceptions.BaseRuntimeException;
 import core.services.system.Services;
 import utils.NumberUtils;
@@ -17,14 +18,14 @@ import static com.google.common.collect.Lists.newArrayList;
 public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	public List<RemotePhotoSiteImage> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		// <img src="http://naturelight.ru/photo/2014-05-18/56073.jpg"
 
 		final Pattern pattern = Pattern.compile( String.format( "<img src=\"http://%s/photo/(.+?)/%s.jpg\"", getHost(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
-			return newArrayList( String.format( "%s/photo/%s/%s.jpg", getHost(), matcher.group( 1 ), remotePhotoSitePhotoId ) );
+			return newArrayList( new RemotePhotoSiteImage( String.format( "%s/photo/%s/%s.jpg", getHost(), matcher.group( 1 ), remotePhotoSitePhotoId ) ) );
 		}
 
 		return null;

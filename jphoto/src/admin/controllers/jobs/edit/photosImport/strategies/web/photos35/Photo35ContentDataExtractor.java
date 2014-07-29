@@ -1,7 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photos35;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
+import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImage;
 import core.services.system.Services;
 import utils.NumberUtils;
 import utils.StringUtilities;
@@ -16,41 +18,42 @@ import static com.google.common.collect.Lists.newArrayList;
 public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageContentDataExtractor {
 
 	@Override
-	public List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	public List<RemotePhotoSiteImage> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 
-		final String singlePhoto = getSinglePhoto( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
-		if ( singlePhoto != null ) {
-			return newArrayList( singlePhoto );
+		final RemotePhotoSiteImage remotePhotoSiteImage = getSinglePhoto( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
+		if ( remotePhotoSiteImage != null ) {
+			return newArrayList( remotePhotoSiteImage );
 		}
 
 		return getPhotoSeries( remotePhotoSiteUserId, remotePhotoSitePhotoId, photoPageContent );
 	}
 
-	private String getSinglePhoto( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	private RemotePhotoSiteImage getSinglePhoto( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		// <img class="mainPhoto" id="mainPhoto" src="http://babakfatholahi.35photo.ru/photos/20140723/743798.jpg" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
 
 		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\"(.+?)src=\"http://%s.%s/photos/(.+?)/%s.jpg\"", remotePhotoSiteUserId, getHost(), remotePhotoSitePhotoId ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
 		if ( matcher.find() ) {
-			return String.format( "%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), matcher.group( 2 ),  remotePhotoSitePhotoId );
+			final String _uploadDate = matcher.group( 2 );
+			return new RemotePhotoSiteImage( String.format( "%s.%s/photos/%s/%d.jpg", remotePhotoSiteUserId, getHost(), _uploadDate,  remotePhotoSitePhotoId ) );
 		}
 
 		return null;
 	}
 
-	private List<String> getPhotoSeries( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
+	private List<RemotePhotoSiteImage> getPhotoSeries( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent ) {
 		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576169.jpg" id="mainPhoto576169" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
 		// <img class="mainPhoto" src="http://35photo.ru/photos_series/576/576170.jpg" id="mainPhoto576170" alt="" style="cursor: pointer; max-width: 1387px; max-height: 814px;"/>
 
 		final Pattern pattern = Pattern.compile( String.format( "<img class=\"mainPhoto\" src=\"http://%s/photos_series/(.+?)/(.+?).jpg\"", getHost() ) );
 		final Matcher matcher = pattern.matcher( photoPageContent );
 
-		final List<String> result = newArrayList();
+		final List<RemotePhotoSiteImage> result = newArrayList();
 		while ( matcher.find() ) {
-			final String series = matcher.group( 1 );
+			final int seriesId = Integer.parseInt( matcher.group( 1 ) );
 			final String photoId = matcher.group( 2 );
-			result.add( String.format( "%s/photos_series/%s/%s.jpg", getHost(), series, photoId ) );
+			result.add( new RemotePhotoSiteImage( String.format( "%s/photos_series/%s/%s.jpg", getHost(), seriesId, photoId ), new RemotePhotoSiteSeries( seriesId ) ) );
 		}
 
 		return result;

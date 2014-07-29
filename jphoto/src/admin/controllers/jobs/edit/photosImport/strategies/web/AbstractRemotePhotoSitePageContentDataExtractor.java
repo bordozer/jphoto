@@ -13,7 +13,7 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public static final String NO_PHOTO_NAME = "-no name-";
 
-	public abstract List<String> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent );
+	public abstract List<RemotePhotoSiteImage> extractImageUrl( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId, final String photoPageContent );
 
 	public abstract String getPhotoIdRegex( final String remotePhotoSiteUserId );
 

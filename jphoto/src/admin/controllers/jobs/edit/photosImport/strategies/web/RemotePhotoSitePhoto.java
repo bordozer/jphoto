@@ -10,7 +10,7 @@ public class RemotePhotoSitePhoto {
 	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private String name;
 	private Date uploadTime;
-	private String imageUrl;
+	private RemotePhotoSiteImage remotePhotoSiteImage;
 
 	private List<String> comments;
 
@@ -54,12 +54,12 @@ public class RemotePhotoSitePhoto {
 		this.uploadTime = uploadTime;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public RemotePhotoSiteImage getRemotePhotoSiteImage() {
+		return remotePhotoSiteImage;
 	}
 
-	public void setImageUrl( final String imageUrl ) {
-		this.imageUrl = imageUrl;
+	public void setRemotePhotoSiteImage( final RemotePhotoSiteImage remotePhotoSiteImage ) {
+		this.remotePhotoSiteImage = remotePhotoSiteImage;
 	}
 
 	public List<String> getComments() {
@@ -101,7 +101,7 @@ public class RemotePhotoSitePhoto {
 
 	@Override
 	public int hashCode() {
-		return photoId * 31 + imageUrl.hashCode();
+		return photoId * 31 + remotePhotoSiteImage.hashCode();
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class RemotePhotoSitePhoto {
 		}
 
 		final RemotePhotoSitePhoto remotePhotoSitePhoto = ( RemotePhotoSitePhoto ) obj;
-		return photoId == remotePhotoSitePhoto.getPhotoId() && imageUrl.equals( remotePhotoSitePhoto.getImageUrl() );
+		return photoId == remotePhotoSitePhoto.getPhotoId() && remotePhotoSiteImage.equals( remotePhotoSitePhoto.getRemotePhotoSiteImage() );
 	}
 
 	public int getNumberInSeries() {
