@@ -36,8 +36,11 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 	private static final String USER_INFO_FILE_PHOTO_ELEMENT_NAME = "photo";
 	private static final String USER_INFO_FILE_PHOTO_ID = "photoId";
-	private static final String USER_INFO_FILE_PHOTO_CATEGORY_NAME = "categoryName";
-	private static final String USER_INFO_FILE_PHOTO_CATEGORY_ID = "categoryId";
+
+	private static final String USER_INFO_FILE_REMOTE_CATEGORY_ID = "categoryId";
+	private static final String USER_INFO_FILE_REMOTE_CATEGORY_NAME = "categoryName";
+	private static final String USER_INFO_FILE_LOCAL_CATEGORY_NAME = "localCategoryName";
+
 	private static final String USER_INFO_FILE_PHOTO_NAME = "name";
 	private static final String USER_INFO_FILE_PHOTO_UPLOAD_TIME = "uploadTime";
 	private static final String USER_INFO_FILE_PHOTO_IMAGE_URL = "imageUrl";
@@ -107,8 +110,11 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 			final Element photoElement = rootElement.addElement( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotoId() ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_CATEGORY_NAME ).addText( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+
+			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
+			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_NAME ).addText( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getName() );
+			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY_NAME ).addText( remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl() );
@@ -143,7 +149,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			final Element photoElement = ( Element ) photosIterator.next();
 			final int remoteUserPhotoId = NumberUtils.convertToInt( photoElement.element( USER_INFO_FILE_PHOTO_ID ).getText() );
 
-			final String savedCategoryId = photoElement.element( USER_INFO_FILE_PHOTO_CATEGORY_ID ).getText();
+			final String savedCategoryId = photoElement.element( USER_INFO_FILE_REMOTE_CATEGORY_ID ).getText();
 			final RemotePhotoSiteCategory category = RemotePhotoSiteCategory.getById( importSource, NumberUtils.convertToInt( savedCategoryId ) );
 			if ( category == null ) {
 				final String message = translatorService.translate( "File '$1' contains unknown remote photo site categoryId '$2'. Note: file deletion may solve the problem because the import will be done again", language

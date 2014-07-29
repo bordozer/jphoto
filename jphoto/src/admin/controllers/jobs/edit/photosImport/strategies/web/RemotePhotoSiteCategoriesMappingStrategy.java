@@ -132,7 +132,7 @@ public abstract class RemotePhotoSiteCategoriesMappingStrategy {
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.Action, GenreDiscEntry.REPORTING ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.APERIODICITIES, GenreDiscEntry.ANIMALS ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.UNDERWATER_MACRO, GenreDiscEntry.MACRO ) );
-				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.STARS, GenreDiscEntry.LANDSCAPE ) );
+				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.ASTROPHOTOGRAPHY, GenreDiscEntry.LANDSCAPE ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.FACES, GenreDiscEntry.GENRE ) );
 				categoryToGenreMapping.add( new RemotePhotoSiteCategoryToGenreMapping( NaturelightCategory.TECH, GenreDiscEntry.GENRE ) );
 			}
