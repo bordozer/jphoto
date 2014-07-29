@@ -537,10 +537,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			} else {
 				remotePhotoSitePhoto.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
 
-				final TranslatableMessage translatableMessage1 = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
+				/*final TranslatableMessage translatableMessage1 = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
 					.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
 					;
-				job.addJobRuntimeLogMessage( translatableMessage1 );
+				job.addJobRuntimeLogMessage( translatableMessage1 );*/
 			}
 
 			remotePhotoSitePhoto.setRemotePhotoSiteImage( remotePhotoSiteImage );
