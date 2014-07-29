@@ -1,7 +1,9 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.photosight;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.*;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemoteContentHelper;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.log.LogHelper;
 import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;

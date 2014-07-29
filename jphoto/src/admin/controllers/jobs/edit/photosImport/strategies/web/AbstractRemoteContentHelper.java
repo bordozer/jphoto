@@ -17,8 +17,6 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import utils.StringUtilities;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public abstract class AbstractRemoteContentHelper {
 

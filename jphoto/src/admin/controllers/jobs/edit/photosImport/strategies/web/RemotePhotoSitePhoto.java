@@ -1,7 +1,5 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
-
 import java.util.Date;
 import java.util.List;
 

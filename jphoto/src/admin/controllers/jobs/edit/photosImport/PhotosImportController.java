@@ -5,7 +5,7 @@ import admin.controllers.jobs.edit.DateRangableController;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.FileSystemImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
-import admin.controllers.jobs.edit.photosImport.strategies.web.*;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.jobs.entries.AbstractJob;
 import admin.jobs.entries.PhotosImportJob;
 import admin.jobs.enums.DateRangeType;
@@ -18,14 +18,10 @@ import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
 import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
-import core.general.genre.Genre;
 import core.general.user.UserMembershipType;
-import core.services.entry.GenreService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +35,9 @@ import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
 

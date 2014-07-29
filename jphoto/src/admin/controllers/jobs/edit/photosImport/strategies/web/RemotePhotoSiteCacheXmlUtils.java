@@ -1,7 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import core.exceptions.BaseRuntimeException;
 import core.services.system.Services;
 import core.services.translator.Language;
