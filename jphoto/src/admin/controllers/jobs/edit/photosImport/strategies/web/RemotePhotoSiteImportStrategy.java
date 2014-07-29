@@ -511,11 +511,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoSiteImages ) {
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
+			/*final TranslatableMessage translatableMessage = new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
 					.addIntegerParameter( remotePhotoSitePhotoId )
 					.string( remotePhotoSiteImage.getImageUrl() )
 					;
-			job.addJobRuntimeLogMessage( translatableMessage );
+			job.addJobRuntimeLogMessage( translatableMessage );*/
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remotePhotoSitePhotoId, photosightCategory );
 			final String photoName = remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent );
@@ -553,7 +553,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			remotePhotoSitePhoto.setCached( false );
 
-			log.debug( String.format( "Photo %d () has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
+			log.debug( String.format( "Photo %d has been downloaded from remote photo site", remotePhotoSitePhoto.getPhotoId() ) );
 
 			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "Got data of '$1': $2 of $3, photo category: $4", services )
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
