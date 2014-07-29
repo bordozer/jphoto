@@ -1,7 +1,7 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
-import admin.controllers.jobs.edit.photosImport.RemoteImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.RemoteImageLocalEntry;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.exceptions.BaseRuntimeException;
 import core.log.LogHelper;
@@ -213,13 +213,13 @@ public class RemotePhotoSiteCacheXmlUtils {
 		}
 	}
 
-	public RemoteImageDiscEntry createRemotePhotoSiteDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	public RemoteImageLocalEntry createRemotePhotoSiteDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 
-		final RemoteImageDiscEntry remoteImageDiscEntry = writeImageContentOnDiskAndReturnDiskEntry( remotePhotoSitePhoto, imageContent );
+		final RemoteImageLocalEntry remoteImageLocalEntry = writeImageContentOnDiskAndReturnDiskEntry( remotePhotoSitePhoto, imageContent );
 
-		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, remoteImageDiscEntry.getImageFile().getCanonicalPath() ) );
+		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, remoteImageLocalEntry.getImageFile().getCanonicalPath() ) );
 
-		return remoteImageDiscEntry;
+		return remoteImageLocalEntry;
 	}
 
 	public File getRemoteSitePhotoLocalImageFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
@@ -231,7 +231,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		return new File( imageFolder, imageFileName );
 	}
 
-	private RemoteImageDiscEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	private RemoteImageLocalEntry writeImageContentOnDiskAndReturnDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
 		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
 
 		final GenreDiscEntry genreDiscEntry = remotePhotoCategoryService.getGenreDiscEntryOrOther( remotePhotoSiteCategory );
@@ -240,20 +240,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 		writeImageContentToFile( imageFile, imageContent, "ISO-8859-1" );
 
-		return new RemoteImageDiscEntry( imageFile, genreDiscEntry );
-	}
-
-	public static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
-		return String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
-	}
-
-	private static String escapeFileName( final String param ) {
-		final String currentEncoding = "UTF-8";
-		try {
-			return new String( Charset.forName( currentEncoding ).encode( param ).array(), currentEncoding ).trim().replaceAll( "[\\\\/*?|!-&:-@']", "_" );
-		} catch ( UnsupportedEncodingException e ) {
-			throw new BaseRuntimeException( e );
-		}
+		return new RemoteImageLocalEntry( imageFile, genreDiscEntry );
 	}
 
 	public File getUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
@@ -285,6 +272,19 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 	public File getUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
 		return new File( getUserFolderForPhotoDownloading( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
+	}
+
+	private  static String getRemoteSitePhotoFileName( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
+		return String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
+	}
+
+	private static String escapeFileName( final String param ) {
+		final String currentEncoding = "UTF-8";
+		try {
+			return new String( Charset.forName( currentEncoding ).encode( param ).array(), currentEncoding ).trim().replaceAll( "[\\\\/*?|!-&:-@']", "_" );
+		} catch ( UnsupportedEncodingException e ) {
+			throw new BaseRuntimeException( e );
+		}
 	}
 
 	private static String getUserInfoFileName( final RemotePhotoSiteUser remotePhotoSiteUser ) {

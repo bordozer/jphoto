@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport.strategies;
 
-import admin.controllers.jobs.edit.photosImport.RemoteImageDiscEntry;
+import admin.controllers.jobs.edit.photosImport.RemoteImageLocalEntry;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.jobs.entries.AbstractJob;
@@ -63,14 +63,14 @@ public abstract class AbstractPhotoImportStrategy {
 
 	protected void createPhotoDBEntry( final ImageToImport photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
 
-		final RemoteImageDiscEntry remoteImageDiscEntry = photoToImport.getRemoteImageDiscEntry();
+		final RemoteImageLocalEntry remoteImageLocalEntry = photoToImport.getRemoteImageLocalEntry();
 
 		final User user = photoToImport.getUser();
 
 		final Photo photo = new Photo();
 		photo.setUserId( user.getId() );
 
-		final String genreName = remoteImageDiscEntry.getGenreDiscEntry().getName();
+		final String genreName = remoteImageLocalEntry.getGenreDiscEntry().getName();
 		final Genre genre = createNecessaryGenre( genreName );
 
 		photo.setGenreId( genre.getId() );
@@ -95,7 +95,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
 		photo.setImportId( photoToImport.getImportId() );
 
-		services.getPhotoService().uploadNewPhoto( photo, remoteImageDiscEntry.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
+		services.getPhotoService().uploadNewPhoto( photo, remoteImageLocalEntry.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 

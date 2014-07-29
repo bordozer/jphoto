@@ -2,12 +2,12 @@ package admin.controllers.jobs.edit.photosImport;
 
 import java.io.File;
 
-public class RemoteImageDiscEntry {
+public class RemoteImageLocalEntry {
 
 	private final GenreDiscEntry genreDiscEntry;
 	private final File imageFile;
 
-	public RemoteImageDiscEntry( final File imageFile, final GenreDiscEntry genreDiscEntry ) {
+	public RemoteImageLocalEntry( final File imageFile, final GenreDiscEntry genreDiscEntry ) {
 		this.imageFile = imageFile;
 		this.genreDiscEntry = genreDiscEntry;
 	}
@@ -45,7 +45,7 @@ public class RemoteImageDiscEntry {
 			return false;
 		}
 
-		final RemoteImageDiscEntry remoteImageDiscEntry = ( RemoteImageDiscEntry ) obj;
-		return imageFile == remoteImageDiscEntry.getImageFile() && genreDiscEntry == remoteImageDiscEntry.getGenreDiscEntry();
+		final RemoteImageLocalEntry remoteImageLocalEntry = ( RemoteImageLocalEntry ) obj;
+		return imageFile == remoteImageLocalEntry.getImageFile() && genreDiscEntry == remoteImageLocalEntry.getGenreDiscEntry();
 	}
 }
