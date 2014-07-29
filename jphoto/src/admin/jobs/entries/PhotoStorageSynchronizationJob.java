@@ -5,7 +5,6 @@ import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
-import admin.controllers.jobs.edit.photosImport.strategies.web.DEL_RemotePhotoSitePhotoImageFileUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCacheXmlUtils;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;

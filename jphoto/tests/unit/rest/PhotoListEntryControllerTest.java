@@ -139,7 +139,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image'/></a>", dto.getPhotoImage() );
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image block-border'/></a>", dto.getPhotoImage() );
 	}
 
 	@Test
@@ -161,7 +161,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // photoPreviewShouldBeHidden = FALSE
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image'/></a>", dto.getPhotoImage() );
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a href='http://127.0.0.1:8085/worker/photos/777/card/' title='Photo #777'><img src='http://127.0.0.1:8085/worker/download/photos/777/preview/' class='photo-preview-image block-border'/></a>", dto.getPhotoImage() );
 	}
 
 	@Test

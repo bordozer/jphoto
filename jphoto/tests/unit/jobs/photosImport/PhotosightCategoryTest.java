@@ -1,6 +1,7 @@
 package jobs.photosImport;
 
 import admin.controllers.jobs.edit.photosImport.GenreDiscEntry;
+import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightCategory;
 import common.AbstractTestCase;
 import core.services.remotePhotoSite.RemotePhotoCategoryServiceImpl;
@@ -45,7 +46,7 @@ public class PhotosightCategoryTest extends AbstractTestCase {
 		assertEquals( WRONG_PHOTOSIGHT_PHOTO_CATEGORY_MAPPING, getDiscEntry( PhotosightCategory.PAPARAZZI ), GenreDiscEntry.OTHER );
 	}
 
-	private GenreDiscEntry getDiscEntry( final PhotosightCategory photosightCategory ) {
+	private GenreDiscEntry getDiscEntry( final RemotePhotoSiteCategory photosightCategory ) {
 		return new RemotePhotoCategoryServiceImpl().getGenreDiscEntryOrOther( photosightCategory );
 	}
 }
