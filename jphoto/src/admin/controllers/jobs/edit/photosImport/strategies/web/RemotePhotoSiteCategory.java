@@ -11,7 +11,7 @@ public interface RemotePhotoSiteCategory {
 
 	String getName();
 
-	String getFolder();
+	String getKey();
 
 	public static RemotePhotoSiteCategory[] getRemotePhotoSiteCategories( final PhotosImportSource photosImportSource ) {
 

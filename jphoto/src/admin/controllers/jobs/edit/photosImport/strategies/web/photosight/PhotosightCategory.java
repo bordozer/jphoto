@@ -38,12 +38,12 @@ public enum PhotosightCategory implements RemotePhotoSiteCategory {
 
 	private final int id;
 	private final String name;
-	private final String folder;
+	private final String key;
 
-	private PhotosightCategory( final int id, final String name, final String folder ) {
+	private PhotosightCategory( final int id, final String name, final String key ) {
 		this.id = id;
 		this.name = name;
-		this.folder = folder;
+		this.key = key;
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public enum PhotosightCategory implements RemotePhotoSiteCategory {
 	}
 
 	@Override
-	public String getFolder() {
-		return folder;
+	public String getKey() {
+		return key;
 	}
 
 	public static PhotosightCategory getById( final int id ) {

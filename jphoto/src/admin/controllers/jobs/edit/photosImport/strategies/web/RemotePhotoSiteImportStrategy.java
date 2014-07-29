@@ -34,7 +34,6 @@ import java.util.regex.Pattern;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-
 public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	public static final String REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX = "PS_";
@@ -224,7 +223,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	private List<RemotePhotoSitePhotoDiskEntry> getRemotePhotoSitePhotoDiskEntries( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final List<RemotePhotoSitePhoto> cachedLocallyRemotePhotoSitePhotos ) throws IOException {
 		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
 		final List<RemotePhotoSitePhotoDiskEntry> notCachedRemotePhotoSitePhotoDiskEntries = getNotCachedRemotePhotoSitePhotoDiskEntries( remotePhotoSiteUser, cachedLocallyRemotePhotoSitePhotos, remotePhotoSitePhotos );
-		final List<RemotePhotoSitePhotoDiskEntry> cachedRemotePhotoSitePhotoDiskEntries = getCachedRemotePhotoSitePhotoDiskEntries( remotePhotoSitePhotos );
+		final List<RemotePhotoSitePhotoDiskEntry> cachedRemotePhotoSitePhotoDiskEntries = getRemotePhotoCacheEntry( remotePhotoSitePhotos );
 
 		result.addAll( notCachedRemotePhotoSitePhotoDiskEntries );
 		result.addAll( cachedRemotePhotoSitePhotoDiskEntries );
@@ -301,7 +300,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return new RemotePhotoSitePhotosFromPageToImport( remotePhotoSitePagePhotosToImport, false );
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getCachedRemotePhotoSitePhotoDiskEntries( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
+	private List<RemotePhotoSitePhotoDiskEntry> getRemotePhotoCacheEntry( final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
 
 		final List<RemotePhotoSitePhoto> cachedRemotePhotoSitePhotos = newArrayList( remotePhotoSitePhotos );
 		CollectionUtils.filter( cachedRemotePhotoSitePhotos, new Predicate<RemotePhotoSitePhoto>() {
@@ -314,14 +313,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : cachedRemotePhotoSitePhotos ) {
-			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemoteSitePhotoLocalImageFile( remotePhotoSitePhoto );
+			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoSitePhoto );
 
 			if ( ! imageFile.exists() ) {
 				continue;
 			}
 
-			final RemoteImageLocalEntry remoteImageLocalEntry = new RemoteImageLocalEntry( imageFile, services.getRemotePhotoCategoryService().getGenreDiscEntryOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ) );
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, remoteImageLocalEntry ) );
+			final ImportedImage importedImage = new ImportedImage( imageFile, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
+			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, importedImage ) );
 		}
 
 		return result;
@@ -418,9 +417,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
-			final RemoteImageLocalEntry remoteImageLocalEntry = remotePhotoSiteCacheXmlUtils.createRemotePhotoSiteDiskEntry( remotePhotoSitePhoto, imageContent );
+			final ImportedImage importedImage = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoSitePhoto, imageContent );
 
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, remoteImageLocalEntry ) );
+			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoSitePhoto, importedImage ) );
 
 			counter++;
 		}
@@ -435,9 +434,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		for ( final RemotePhotoSitePhotoDiskEntry remotePhotoSitePhotoDiskEntry : remotePhotoSitePhotoDiskEntries ) {
 
 			final RemotePhotoSitePhoto remotePhotoSitePhoto = remotePhotoSitePhotoDiskEntry.getRemotePhotoSitePhoto();
-			final RemoteImageLocalEntry remoteImageLocalEntry = remotePhotoSitePhotoDiskEntry.getRemoteImageLocalEntry();
+			final ImportedImage importedImage = remotePhotoSitePhotoDiskEntry.getImportedImage();
 
-			final ImageToImport imageToImport = new ImageToImport( remoteImageLocalEntry );
+			final ImageToImport imageToImport = new ImageToImport( importedImage );
 			imageToImport.setUser( localUser );
 			imageToImport.setName( remotePhotoSitePhoto.getName() );
 			imageToImport.setRemotePhotoSiteSeries( remotePhotoSitePhoto.getRemotePhotoSiteSeries() );
