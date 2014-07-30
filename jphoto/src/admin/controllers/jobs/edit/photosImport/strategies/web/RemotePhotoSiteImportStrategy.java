@@ -100,42 +100,25 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		int page = 1;
 
-		int userPagesQty = getUserPagesToProcess( remoteUser );
+		int userPagesToProcessCount = getUserPagesToProcessCount( remoteUser );
 
-		while ( !job.isFinished() && !job.hasJobFinishedWithAnyResult() && page <= userPagesQty ) {
+		while ( !job.isFinished() && !job.hasJobFinishedWithAnyResult() && page <= userPagesToProcessCount ) {
 
-			//			log.debug( String.format( "Getting page %d context of %s", page, remoteContentHelper.getUserCardLink( remoteUser ) ) );
+			// log.debug( String.format( "Getting page %d context of %s", page, remoteContentHelper.getUserCardLink( remoteUser ) ) );
 
-			final String userPageContent = remoteContentHelper.getUserPageContent( page, remoteUser.getId() );
-			if ( StringUtils.isEmpty( userPageContent ) ) {
+			final List<Integer> collectedRemotePhotoIds = collectPhotoIdsFromPage( remoteUser, page );
 
-				//				log.info( "Can not load remote photo site user first page - skipping import user's photos" );
+			if ( collectedRemotePhotoIds.size() == 0 ) {
+				logger.logNoPhotosOnPageFound( remoteUser, page );
 
 				continue;
 			}
-
-			final List<Integer> photosOnPageIds = extractUserPhotosIdsFromPage( remoteUser.getId(), userPageContent );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			if ( photosOnPageIds.size() == 0 ) {
-				/*final String userCardFileName = getUserCardFileName( remotePhotoSiteUser, page );
-				final File file = getRemotePhotoSitePhotoImageFileUtils().writePageContentToFile( userCardFileName, userPageContent );
-
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "No photo have been found on page $1. User page content saved. See $2", services )
-					.addIntegerParameter( page )
-					.string( file.getAbsolutePath() )
-					;
-				job.addJobRuntimeLogMessage( translatableMessage );*/
-
-				log.info( String.format( "No photo have been found on page %d.", page ) );
-
-				continue;
-			}
-
-			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = getRemotePhotoSitePhotosToImport( remoteUser, photosOnPageIds, cacheUserPhotos, user );
+			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = getRemotePhotoSitePhotosToImport( remoteUser, collectedRemotePhotoIds, cacheUserPhotos, user );
 			final List<RemotePhotoData> notImportedPhotosFromPage = remoteNotImportedPhotos.getRemotePhotoDatas();
 
 			filterOutPhotosWithWrongCategories( notImportedPhotosFromPage );
@@ -163,13 +146,25 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			if ( remoteNotImportedPhotos.isBreakImportAfterThisPageProcessed() ) {
-				job.increment( userPagesQty - page + 1 );
+				job.increment( userPagesToProcessCount - page + 1 );
 				return;
 			}
 
 			page++;
 			job.increment();
 		}
+	}
+
+	private List<Integer> collectPhotoIdsFromPage( final RemoteUser remoteUser, final int page ) {
+
+		final String userPageContent = remoteContentHelper.getUserPageContent( page, remoteUser.getId() );
+		if ( StringUtils.isEmpty( userPageContent ) ) {
+			// log.info( "Can not load remote photo site user first page - skipping import user's photos" );
+
+			return newArrayList();
+		}
+
+		return collectUserPhotosIdsFromPage( remoteUser.getId(), userPageContent );
 	}
 
 	@Override
@@ -201,7 +196,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return totalPages;
 	}
 
-	private int getUserPagesToProcess( final RemoteUser remoteUser ) {
+	private int getUserPagesToProcessCount( final RemoteUser remoteUser ) {
 
 		final String userFirstPageContent = remoteContentHelper.getUserPageContent( 1, remoteUser.getId() );
 		final boolean doesUserPageExist = StringUtils.isEmpty( userFirstPageContent );
@@ -486,7 +481,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return photosToImport;
 	}
 
-	private List<Integer> extractUserPhotosIdsFromPage( final String remotePhotoSiteUserId, final String userPageContent ) {
+	private List<Integer> collectUserPhotosIdsFromPage( final String remotePhotoSiteUserId, final String userPageContent ) {
 		final List<Integer> result = newArrayList();
 
 		final Pattern pattern = Pattern.compile( remotePhotoSitePageContentDataExtractor.getPhotoIdRegex( remotePhotoSiteUserId ) );

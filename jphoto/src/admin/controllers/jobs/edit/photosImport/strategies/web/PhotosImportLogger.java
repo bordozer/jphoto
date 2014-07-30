@@ -100,6 +100,18 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
+	public void logNoPhotosOnPageFound( final RemoteUser remoteUser, final int page ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "User #$2: no photo have been found on page $1", services )
+					.string( remoteUser.getId() )
+					.addIntegerParameter( page )
+					;
+			}
+		}.log();
+	}
+
 	private abstract class LogMessenger {
 
 		private final LogHelper log = new LogHelper( PhotosImportLogger.class );
