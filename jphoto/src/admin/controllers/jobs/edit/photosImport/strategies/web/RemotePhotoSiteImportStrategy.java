@@ -118,7 +118,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = getRemotePhotoSitePhotosToImport( remoteUser, collectedRemotePhotoIds, cacheUserPhotos, user );
+			filterOutAlreadyDownLoadedPhotos( remoteUser, collectedRemotePhotoIds, user );
+
+			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos, user );
 			final List<RemotePhotoData> notImportedPhotosFromPage = remoteNotImportedPhotos.getRemotePhotoDatas();
 
 			filterOutPhotosWithWrongCategories( notImportedPhotosFromPage );
@@ -291,7 +293,39 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private RemotePhotoSitePhotosFromPageToImport getRemotePhotoSitePhotosToImport( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas, final User user ) throws IOException {
+	private boolean filterOutAlreadyDownLoadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {
+
+		final JobHelperService jobHelperService = getServices().getJobHelperService();
+		final String remotePhotoSiteUserPageLink = remoteContentHelper.getUserCardLink( remoteUser );
+
+		final List<Integer> result = newArrayList();
+
+		for ( final int remotePhotoId : remotePhotoIds ) {
+
+			if ( job.hasJobFinishedWithAnyResult() ) {
+				break;
+			}
+
+			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoId ) ) {
+
+				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
+					logger.logSkippingTheRestPhotosBecauseAlreadyImportedPhotoFound( remotePhotoSiteUserPageLink, remotePhotoId );
+
+					return true;
+				}
+
+				logger.logSkippingPhotoImportBecauseItHasBeenAlreadyImported( remotePhotoSiteUserPageLink, remotePhotoId );
+
+				continue;
+			}
+
+			result.add( remotePhotoId );
+		}
+
+		return false;
+	}
+
+	private RemotePhotoSitePhotosFromPageToImport collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas, final User user ) throws IOException {
 
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
 
@@ -305,34 +339,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoSitePhotoId ) ) {
-
-				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
-					final TranslatableMessage message1 = new TranslatableMessage( "Already imported photo #$1 found. Skipping the import of the rest photos of $2", getServices() )
-						.addIntegerParameter( remotePhotoSitePhotoId )
-						.string( remotePhotoSiteUserPageLink )
-						;
-
-					job.addJobRuntimeLogMessage( message1 );
-
-					return new RemotePhotoSitePhotosFromPageToImport( result, true );
-				}
-
-				log.debug( String.format( "Photo %d of %s has already been imported"
-					, remotePhotoSitePhotoId
-					, remotePhotoSiteUserPageLink
-				) );
-
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
-					.addIntegerParameter( remotePhotoSitePhotoId )
-					.string( remotePhotoSiteUserPageLink )
-					;
-				job.addJobRuntimeLogMessage( translatableMessage );
-
-				continue;
-			}
-
-			final RemotePhotoData cachedRemotePhotoData = getCachedRemotePhotoSitePhotos( remotePhotoSitePhotoId, cachedLocallyRemotePhotoDatas );
+			final RemotePhotoData cachedRemotePhotoData = getCachedRemotePhotos( remotePhotoSitePhotoId, cachedLocallyRemotePhotoDatas );
 
 			if ( cachedRemotePhotoData != null ) {
 
@@ -362,7 +369,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return new RemotePhotoSitePhotosFromPageToImport( result, false );
 	}
 
-	private RemotePhotoData getCachedRemotePhotoSitePhotos( final int remotePhotoSitePhotoId, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) {
+	private RemotePhotoData getCachedRemotePhotos( final int remotePhotoSitePhotoId, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) {
 		for ( final RemotePhotoData cachedLocallyRemotePhotoData : cachedLocallyRemotePhotoDatas ) {
 			if ( cachedLocallyRemotePhotoData.getPhotoId() == remotePhotoSitePhotoId ) {
 				return cachedLocallyRemotePhotoData;

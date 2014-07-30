@@ -112,6 +112,22 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
+	public void logSkippingTheRestPhotosBecauseAlreadyImportedPhotoFound( final String remotePhotoSiteUserPageLink, final int remotePhotoId ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "Photo $1 of $2 has already been imported", services )
+					.addIntegerParameter( remotePhotoId )
+					.string( remotePhotoSiteUserPageLink )
+					;
+			}
+		}.log();
+	}
+
+	public void logSkippingPhotoImportBecauseItHasBeenAlreadyImported( final String remotePhotoSiteUserPageLink, final int remotePhotoId ) {
+
+	}
+
 	private abstract class LogMessenger {
 
 		private final LogHelper log = new LogHelper( PhotosImportLogger.class );
