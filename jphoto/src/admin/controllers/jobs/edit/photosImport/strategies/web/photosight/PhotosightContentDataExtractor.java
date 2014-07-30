@@ -65,7 +65,7 @@ public class PhotosightContentDataExtractor extends AbstractRemotePhotoSitePageC
 	}
 
 	@Override
-	public int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId ) {
+	public int getRemoteUserPagesCount( final String userCardContent, final String remotePhotoSiteUserId ) {
 		// <a class="" href="/users/316896/?pager=8">8</a>
 		final Pattern pattern = Pattern.compile( String.format( "<a class=\"(.*?)\" href=\"/users/%s/\\?pager=(.+?)\">", remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userCardContent );

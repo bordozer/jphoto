@@ -5,7 +5,7 @@ import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import java.util.Date;
 import java.util.List;
 
-public class RemotePhotoSitePhoto {
+public class RemotePhotoData {
 
 	private final RemoteUser remoteUser;
 	private final int photoId;
@@ -22,7 +22,7 @@ public class RemotePhotoSitePhoto {
 	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 	private int numberInSeries;
 
-	public RemotePhotoSitePhoto( final RemoteUser remoteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public RemotePhotoData( final RemoteUser remoteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
 		this.remoteUser = remoteUser;
 		this.photoId = photoId;
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
@@ -121,8 +121,8 @@ public class RemotePhotoSitePhoto {
 			return false;
 		}
 
-		final RemotePhotoSitePhoto remotePhotoSitePhoto = ( RemotePhotoSitePhoto ) obj;
-		return photoId == remotePhotoSitePhoto.getPhotoId() && remotePhotoSiteImage.equals( remotePhotoSitePhoto.getRemotePhotoSiteImage() );
+		final RemotePhotoData remotePhotoData = ( RemotePhotoData ) obj;
+		return photoId == remotePhotoData.getPhotoId() && remotePhotoSiteImage.equals( remotePhotoData.getRemotePhotoSiteImage() );
 	}
 
 	public int getNumberInSeries() {

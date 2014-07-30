@@ -42,7 +42,7 @@ public abstract class AbstractPhotoImportStrategy {
 
 	public abstract void doImport() throws IOException, SaveToDBException;
 
-	public abstract int getTotalOperations( final int totalJopOperations ) throws IOException;
+	public abstract int calculateTotalPagesToProcess( final int totalJopOperations ) throws IOException;
 
 	public AbstractPhotoImportStrategy( final AbstractJob job, final Services services, final LogHelper log, final Language language ) {
 		this.job = job;

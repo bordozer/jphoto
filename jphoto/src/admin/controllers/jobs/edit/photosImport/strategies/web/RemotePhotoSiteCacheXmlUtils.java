@@ -86,7 +86,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public void createPhotosCache( final RemoteUser remoteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
+	public void createPhotosCache( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -94,24 +94,24 @@ public class RemotePhotoSiteCacheXmlUtils {
 		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remoteUser.getId() ) );
 		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remoteUser.getName() ) );
 
-		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
+		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
 
-			if ( remotePhotoSitePhoto.isHasError() ) {
+			if ( remotePhotoData.isHasError() ) {
 				continue;
 			}
 
 			final Element photoElement = rootElement.addElement( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoSitePhoto.getPhotoId() ) );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_ID ).addText( String.valueOf( remotePhotoData.getPhotoId() ) );
 
-			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_ID ).addText( String.valueOf( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getId() ) );
-			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME ).addText( remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
-			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY ).addText( remotePhotoCategoryService.getMappedGenreOrNull( remotePhotoSitePhoto.getRemotePhotoSiteCategory() ).getName() );
+			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_ID ).addText( String.valueOf( remotePhotoData.getRemotePhotoSiteCategory().getId() ) );
+			photoElement.addElement( USER_INFO_FILE_REMOTE_CATEGORY_FOLDER_NAME ).addText( remotePhotoData.getRemotePhotoSiteCategory().getKey() );
+			photoElement.addElement( USER_INFO_FILE_LOCAL_CATEGORY ).addText( remotePhotoCategoryService.getMappedGenreOrNull( remotePhotoData.getRemotePhotoSiteCategory() ).getName() );
 
-			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSitePhoto.getName() ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoSitePhoto.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
-			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoSitePhoto.getRemotePhotoSiteImage().getImageUrl() );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoData.getName() ) );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoData.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoData.getRemotePhotoSiteImage().getImageUrl() );
 
-			final List<String> comments = remotePhotoSitePhoto.getComments();
+			final List<String> comments = remotePhotoData.getComments();
 			if ( comments != null ) {
 				final Element commentElement = photoElement.addElement( USER_INFO_FILE_PHOTO_COMMENT_ELEMENT_NAME );
 				for ( final String comment : comments ) {
@@ -127,7 +127,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final PhotosImportSource importSource, final RemoteUser remoteUser, final Services services, final Language language ) throws IOException, DocumentException {
+	public List<RemotePhotoData> getPhotosFromRemoteSiteUserInfoFile( final PhotosImportSource importSource, final RemoteUser remoteUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
@@ -136,7 +136,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		final Document document = reader.read( userInfoFile );
 
 		final Iterator photosIterator = document.getRootElement().elementIterator( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
-		final List<RemotePhotoSitePhoto> result = newArrayList();
+		final List<RemotePhotoData> result = newArrayList();
 		while ( photosIterator.hasNext() ) {
 			final Element photoElement = ( Element ) photosIterator.next();
 			final int remoteUserPhotoId = NumberUtils.convertToInt( photoElement.element( USER_INFO_FILE_PHOTO_ID ).getText() );
@@ -162,10 +162,10 @@ public class RemotePhotoSiteCacheXmlUtils {
 			}
 			final String imageUrl = photoElement.element( USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
 
-			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remoteUser, remoteUserPhotoId, category );
-			remotePhotoSitePhoto.setName( photoName );
-			remotePhotoSitePhoto.setUploadTime( uploadTime );
-			remotePhotoSitePhoto.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
+			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remoteUserPhotoId, category );
+			remotePhotoData.setName( photoName );
+			remotePhotoData.setUploadTime( uploadTime );
+			remotePhotoData.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
 
 			final List<String> comments = newArrayList();
 			final Element commentsElement = photoElement.element( USER_INFO_FILE_PHOTO_COMMENT_ELEMENT_NAME );
@@ -180,50 +180,50 @@ public class RemotePhotoSiteCacheXmlUtils {
 					comments.add( comment );
 				}
 			}
-			remotePhotoSitePhoto.setComments( comments );
+			remotePhotoData.setComments( comments );
 
-			remotePhotoSitePhoto.setCached( true );
+			remotePhotoData.setCached( true );
 
-			result.add( remotePhotoSitePhoto );
+			result.add( remotePhotoData );
 		}
 
 
 		return result;
 	}
 
-	public void prepareUserGenreFolders( final RemoteUser remoteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
+	public void prepareUserGenreFolders( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
 
 		final File userFolder = getRemoteUserCacheFolder( remoteUser );
 
-		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
+		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
 //			final Genre genre = remotePhotoCategoryService.getMappedGenreOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
 
-			final File userGenrePath = new File( userFolder, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
+			final File userGenrePath = new File( userFolder, remotePhotoData.getRemotePhotoSiteCategory().getKey() );
 			if ( ! userGenrePath.exists() ) {
 				userGenrePath.mkdirs();
 			}
 		}
 	}
 
-	public ImageToImport createRemotePhotoCacheEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final String imageContent ) throws IOException {
+	public ImageToImport createRemotePhotoCacheEntry( final RemotePhotoData remotePhotoData, final String imageContent ) throws IOException {
 
-		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoSitePhoto.getRemotePhotoSiteCategory();
+		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoData.getRemotePhotoSiteCategory();
 
-		final File remotePhotoCacheFile = getRemotePhotoCacheFile( remotePhotoSitePhoto );
+		final File remotePhotoCacheFile = getRemotePhotoCacheFile( remotePhotoData );
 
 		writeImageContentToFile( remotePhotoCacheFile, imageContent, "ISO-8859-1" );
 
 		final ImageToImport imageToImport = new ImageToImport( photosImportSource, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile );
 
-		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoSitePhoto, imageToImport.getImageFile().getCanonicalPath() ) );
+		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoData, imageToImport.getImageFile().getCanonicalPath() ) );
 
 		return imageToImport;
 	}
 
-	public File getRemotePhotoCacheFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
-		final String remotePhotoCacheFileName = String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
-		final File folderForRemoteUserCachedPhotos = getRemoteUserCacheFolder( remotePhotoSitePhoto.getRemoteUser() );
-		final File folderForRemoteUserCachedPhotosForGenre = new File( folderForRemoteUserCachedPhotos, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
+	public File getRemotePhotoCacheFile( final RemotePhotoData remotePhotoData ) throws IOException {
+		final String remotePhotoCacheFileName = String.format( "%d_%d.jpg", remotePhotoData.getPhotoId(), remotePhotoData.getNumberInSeries() );
+		final File folderForRemoteUserCachedPhotos = getRemoteUserCacheFolder( remotePhotoData.getRemoteUser() );
+		final File folderForRemoteUserCachedPhotosForGenre = new File( folderForRemoteUserCachedPhotos, remotePhotoData.getRemotePhotoSiteCategory().getKey() );
 		return new File( folderForRemoteUserCachedPhotosForGenre, remotePhotoCacheFileName );
 	}
 

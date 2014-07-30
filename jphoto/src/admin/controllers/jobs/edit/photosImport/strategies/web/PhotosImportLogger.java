@@ -1,0 +1,115 @@
+package admin.controllers.jobs.edit.photosImport.strategies.web;
+
+import admin.jobs.entries.AbstractJob;
+import core.log.LogHelper;
+import core.services.system.Services;
+import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
+import org.dom4j.DocumentException;
+
+import java.io.File;
+
+public class PhotosImportLogger {
+
+	private AbstractJob job;
+	private final Services services;
+
+	public PhotosImportLogger( final AbstractJob job, final Services services ) {
+		this.job = job;
+		this.services = services;
+	}
+
+	public void logUserImportImportStart( final RemoteUser remoteUser ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "TODO", services );
+			}
+		}.log();
+	}
+
+	public void logUserCanNotBeCreated( final RemoteUser remoteUser ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "TODO", services );
+			}
+		}.log();
+	}
+
+	public void logInitRemoteUserCacheFileStructure( final RemoteUser remoteUser ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "TODO", services );
+			}
+		}.log();
+	}
+
+	public void logErrorReadingUserDataFile( final RemoteUser remoteUser, final File userDataFile, final DocumentException e ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
+					.string( userDataFile.getAbsolutePath() )
+					.string( e.getMessage() )
+					;
+			}
+		}.log();
+	}
+
+	public void logUserPageCountError( final RemoteUser remoteUser ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "TODO", services );
+			}
+		}.log();
+	}
+
+	public void logUserPageCountGotSuccessfully( final RemoteUser remoteUser, final int totalPagesQty ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "TODO", services );
+			}
+		}.log();
+	}
+
+	public void logErrorGettingUserPagesCount( final String remotePhotoSiteUserId ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "ERROR getting remote photo site user #$1 pages qty. Photos import of the user will be skipped.", services )
+					.string( remotePhotoSiteUserId )
+					;
+			}
+		}.log();
+	}
+
+	public void logGettingUserPagesCount( final String remotePhotoSiteUserId, final int userPagesCount, final int totalPages ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "Getting remote photo site user #$1 pages qty: $2 ( total: $3 )", services )
+					.string( remotePhotoSiteUserId )
+					.addIntegerParameter( userPagesCount )
+					.addIntegerParameter( totalPages )
+					;
+			}
+		}.log();
+	}
+
+	private abstract class LogMessenger {
+
+		private final LogHelper log = new LogHelper( PhotosImportLogger.class );
+
+		abstract TranslatableMessage getMessage();
+
+		void log() {
+			job.addJobRuntimeLogMessage( getMessage() );
+
+			log.debug( getMessage().build( Language.NERD ) ); // TODO: language?
+		}
+	}
+}

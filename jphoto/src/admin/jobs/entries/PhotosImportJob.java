@@ -263,7 +263,11 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 
 	// TODO: the same is in PhotoStorageSynchronizationJob
 	private void updateTotalOperations( final AbstractPhotoImportStrategy importStrategy ) throws IOException {
-		totalJopOperations = importStrategy.getTotalOperations( totalJopOperations );
+
+		final boolean operationCountIsDefinedByUser = totalJopOperations > 0 && totalJopOperations != AbstractJob.OPERATION_COUNT_UNKNOWN;
+		if ( !operationCountIsDefinedByUser ) {
+			totalJopOperations = importStrategy.calculateTotalPagesToProcess( totalJopOperations );
+		}
 
 		generationMonitor.setTotal( totalJopOperations ); // TODO: do I need this?
 

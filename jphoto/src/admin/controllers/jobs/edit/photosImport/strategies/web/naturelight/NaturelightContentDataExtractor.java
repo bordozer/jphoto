@@ -67,7 +67,7 @@ public class NaturelightContentDataExtractor extends AbstractRemotePhotoSitePage
 	}
 
 	@Override
-	public int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId ) {
+	public int getRemoteUserPagesCount( final String userCardContent, final String remotePhotoSiteUserId ) {
 		// <a href="/author/2608/page5.html">5</a>
 		final Pattern pattern = Pattern.compile( String.format( "<a href=\"/author/%s/page(.+?).html\">(.+?)</a>", remotePhotoSiteUserId ) );
 		final Matcher matcher = pattern.matcher( userCardContent );

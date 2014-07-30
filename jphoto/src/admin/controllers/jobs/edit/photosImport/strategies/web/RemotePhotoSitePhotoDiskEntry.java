@@ -4,16 +4,16 @@ import admin.controllers.jobs.edit.photosImport.ImageToImport;
 
 public class RemotePhotoSitePhotoDiskEntry {
 
-	private final RemotePhotoSitePhoto remotePhotoSitePhoto;
+	private final RemotePhotoData remotePhotoData;
 	private final ImageToImport imageToImport;
 
-	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoSitePhoto remotePhotoSitePhoto, final ImageToImport imageToImport ) {
-		this.remotePhotoSitePhoto = remotePhotoSitePhoto;
+	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoData remotePhotoData, final ImageToImport imageToImport ) {
+		this.remotePhotoData = remotePhotoData;
 		this.imageToImport = imageToImport;
 	}
 
-	public RemotePhotoSitePhoto getRemotePhotoSitePhoto() {
-		return remotePhotoSitePhoto;
+	public RemotePhotoData getRemotePhotoData() {
+		return remotePhotoData;
 	}
 
 	public ImageToImport getImageToImport() {
@@ -22,6 +22,6 @@ public class RemotePhotoSitePhotoDiskEntry {
 
 	@Override
 	public String toString() {
-		return String.format( "%s", remotePhotoSitePhoto );
+		return String.format( "%s", remotePhotoData );
 	}
 }

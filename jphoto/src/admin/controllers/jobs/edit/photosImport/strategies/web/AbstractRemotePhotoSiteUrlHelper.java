@@ -89,12 +89,12 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		return String.format( "<a href='%s'>%d</a>", getPhotoCardUrl( remotePhotoSiteUserId, remotePhotoSitePhotoId ), remotePhotoSitePhotoId );
 	}
 
-	public String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
+	public String getPhotoCardLink( final RemotePhotoData remotePhotoData ) {
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
-			, getPhotoCardUrl( remotePhotoSitePhoto.getRemoteUser().getId(), remotePhotoSitePhoto.getPhotoId() )
-			, StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() )
-			, remotePhotoSitePhoto.getPhotoId()
+			, getPhotoCardUrl( remotePhotoData.getRemoteUser().getId(), remotePhotoData.getPhotoId() )
+			, StringUtilities.unescapeHtml( remotePhotoData.getName() )
+			, remotePhotoData.getPhotoId()
 		);
 	}
 

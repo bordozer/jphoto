@@ -85,7 +85,7 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 	}
 
 	@Override
-	public int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId ) {
+	public int getRemoteUserPagesCount( final String userCardContent, final String remotePhotoSiteUserId ) {
 		return 1;
 	}
 

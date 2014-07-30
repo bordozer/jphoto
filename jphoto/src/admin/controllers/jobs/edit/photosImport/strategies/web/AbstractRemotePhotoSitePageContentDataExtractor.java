@@ -21,7 +21,7 @@ public abstract class AbstractRemotePhotoSitePageContentDataExtractor {
 
 	public abstract int extractRemotePhotoSiteUserPhotosCount( final String remotePhotoSiteUserId );
 
-	public abstract int getTotalPagesQty( final String userCardContent, final String remotePhotoSiteUserId );
+	public abstract int getRemoteUserPagesCount( final String userCardContent, final String remotePhotoSiteUserId );
 
 	public abstract int extractPhotoCategoryId( final String photoPageContent );
 

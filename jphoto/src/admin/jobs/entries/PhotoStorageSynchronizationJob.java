@@ -66,7 +66,11 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 	// TODO: the same is in PhotosImportJob
 	private void updateTotalOperations( final AbstractPhotoImportStrategy importStrategy ) throws IOException {
-		totalJopOperations = importStrategy.getTotalOperations( totalJopOperations );
+
+		final boolean operationCountIsDefinedByUser = totalJopOperations > 0 && totalJopOperations != AbstractJob.OPERATION_COUNT_UNKNOWN;
+		if ( !operationCountIsDefinedByUser ) {
+			totalJopOperations = importStrategy.calculateTotalPagesToProcess( totalJopOperations );
+		}
 
 		generationMonitor.setTotal( totalJopOperations );
 
