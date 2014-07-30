@@ -25,7 +25,9 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Remote photos import: $1: starting import", services );
+				return new TranslatableMessage( "Remote photos import: $1: starting import", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					;
 			}
 		}.log();
 	}
@@ -34,7 +36,9 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Remote photos import: $1: error creating an local user", services );
+				return new TranslatableMessage( "Remote photos import: $1: error creating an local user", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					;
 			}
 		}.log();
 	}
