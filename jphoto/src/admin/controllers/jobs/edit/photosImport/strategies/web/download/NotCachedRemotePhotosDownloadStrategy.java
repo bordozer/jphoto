@@ -24,7 +24,7 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 		this.remoteUser = remoteUser;
 		this.remoteContentHelper = remoteContentHelper;
 		this.services = services;
-		this.remotePhotosData = getNotCachedRemotePhotosData( remotePhotosData );
+		this.remotePhotosData = filterRemotePhotosData( remotePhotosData, false );
 	}
 
 	@Override
@@ -67,19 +67,5 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 		}
 
 		return result;
-	}
-
-	private List<RemotePhotoData> getNotCachedRemotePhotosData( final List<RemotePhotoData> remotePhotosData ) {
-
-		final List<RemotePhotoData> notCachedRemotePhotosData = newArrayList( remotePhotosData );
-
-		CollectionUtils.filter( notCachedRemotePhotosData, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return !remotePhotoData.isCached();
-			}
-		} );
-
-		return notCachedRemotePhotosData;
 	}
 }

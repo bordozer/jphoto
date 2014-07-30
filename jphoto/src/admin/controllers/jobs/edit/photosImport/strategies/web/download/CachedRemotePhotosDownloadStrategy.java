@@ -6,8 +6,6 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhoto;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoData;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCacheXmlUtils;
 import admin.jobs.entries.AbstractJob;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class CachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadStra
 
 	public CachedRemotePhotosDownloadStrategy( final AbstractJob job, final PhotosImportSource importSource, final List<RemotePhotoData> remotePhotosData, final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils ) {
 		super( job, remotePhotoSiteCacheXmlUtils );
-		this.remotePhotosData = getCachedRemotePhotosData( remotePhotosData );
+		this.remotePhotosData = filterRemotePhotosData( remotePhotosData, true );
 		this.importSource = importSource;
 	}
 
@@ -41,19 +39,5 @@ public class CachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadStra
 		}
 
 		return result;
-	}
-
-	private List<RemotePhotoData> getCachedRemotePhotosData( final List<RemotePhotoData> remotePhotoDatas ) {
-
-		final List<RemotePhotoData> cachedRemotePhotosData = newArrayList( remotePhotoDatas );
-
-		CollectionUtils.filter( cachedRemotePhotosData, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return remotePhotoData.isCached();
-			}
-		} );
-
-		return cachedRemotePhotosData;
 	}
 }
