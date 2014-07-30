@@ -88,7 +88,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	@Override
-	public int calculateTotalPagesToProcess( final int totalJopOperations ) throws IOException {
+	public int calculateTotalPagesToProcess() throws IOException {
 
 		int totalPages = 0;
 

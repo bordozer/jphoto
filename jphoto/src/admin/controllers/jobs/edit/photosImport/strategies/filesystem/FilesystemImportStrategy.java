@@ -98,11 +98,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 	}
 
 	@Override
-	public int calculateTotalPagesToProcess( final int operationsLimitByProperties ) throws IOException {
-		if ( operationsLimitByProperties > 0 && operationsLimitByProperties != AbstractJob.OPERATION_COUNT_UNKNOWN ) {
-			return operationsLimitByProperties;
-		}
-
+	public int calculateTotalPagesToProcess() throws IOException {
 		return imageToImportDatas.size();
 	}
 

@@ -69,7 +69,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 		final boolean operationCountIsDefinedByUser = totalJopOperations > 0 && totalJopOperations != AbstractJob.OPERATION_COUNT_UNKNOWN;
 		if ( !operationCountIsDefinedByUser ) {
-			totalJopOperations = importStrategy.calculateTotalPagesToProcess( totalJopOperations );
+			totalJopOperations = importStrategy.calculateTotalPagesToProcess();
 		}
 
 		generationMonitor.setTotal( totalJopOperations );
