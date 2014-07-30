@@ -1,6 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-import admin.controllers.jobs.edit.photosImport.*;
+import admin.controllers.jobs.edit.photosImport.ImageToImport;
+import admin.controllers.jobs.edit.photosImport.ImageToImportData;
+import admin.controllers.jobs.edit.photosImport.RemotePhotoSiteSeries;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
@@ -148,7 +150,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
-			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotosData );
+			final List<RemotePhotoData> photosToImportData = getRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotosData );
 
 			filterOutPhotosWithWrongCategories( photosToImportData );
 
@@ -260,7 +262,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return false;
 	}
 
-	private List<RemotePhotoData> collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
+	private List<RemotePhotoData> getRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
 
 		final List<RemotePhotoData> result = newArrayList();
 
@@ -291,7 +293,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				}
 			}
 
-			result.addAll( makeImportPhotoFromRemotePhotoSite( remoteUser, remotePhotoSitePhotoId ) );
+			result.addAll( collectRemotePhotosDataFromRemoteSite( remoteUser, remotePhotoSitePhotoId ) );
 		}
 
 		return result;
@@ -385,7 +387,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private List<RemotePhotoData> makeImportPhotoFromRemotePhotoSite( final RemoteUser remoteUser, final int remotePhotoSitePhotoId ) throws IOException {
+	private List<RemotePhotoData> collectRemotePhotosDataFromRemoteSite( final RemoteUser remoteUser, final int remotePhotoSitePhotoId ) throws IOException {
 
 		final String photoPageContent = remoteContentHelper.getPhotoPageContent( remoteUser, remotePhotoSitePhotoId );
 		if ( StringUtils.isEmpty( photoPageContent ) ) {

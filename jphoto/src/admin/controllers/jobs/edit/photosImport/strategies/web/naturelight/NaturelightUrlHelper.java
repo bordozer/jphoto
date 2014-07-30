@@ -1,8 +1,8 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web.naturelight;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.log.LogHelper;
 

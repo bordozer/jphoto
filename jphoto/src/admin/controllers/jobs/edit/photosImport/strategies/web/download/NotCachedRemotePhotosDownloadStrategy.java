@@ -5,8 +5,6 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.*;
 import admin.jobs.entries.AbstractJob;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 
 import java.io.IOException;
 import java.util.List;
