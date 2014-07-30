@@ -262,20 +262,20 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return false;
 	}
 
-	private List<RemotePhotoData> getRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
+	private List<RemotePhotoData> getRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
 
 		final List<RemotePhotoData> result = newArrayList();
 
 		final int delayBetweenRequest = importParameters.getDelayBetweenRequest();
 		final String remotePhotoSiteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
 
-		for ( final int remotePhotoSitePhotoId : remotePhotoSitePhotosIds ) {
+		for ( final int remotePhotoId : remotePhotoIds ) {
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			final RemotePhotoData cachedRemotePhotoData = findRemotePhotoInCache( remotePhotoSitePhotoId, cachedRemotePhotosData );
+			final RemotePhotoData cachedRemotePhotoData = findRemotePhotoInCache( remotePhotoId, cachedRemotePhotosData );
 
 			if ( cachedRemotePhotoData != null ) {
 				result.add( cachedRemotePhotoData );
@@ -293,7 +293,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				}
 			}
 
-			result.addAll( collectRemotePhotosDataFromRemoteSite( remoteUser, remotePhotoSitePhotoId ) );
+			result.addAll( collectRemotePhotosDataFromRemoteSite( remoteUser, remotePhotoId ) );
 		}
 
 		return result;
