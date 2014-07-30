@@ -148,6 +148,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				continue;
 			}
 
+			logger.logFoundPhotosOnRemoteUserCardPage( remoteUser, page, collectedRemotePhotoIds.size() );
+
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
 			final List<RemotePhotoData> photosToImportData = getRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotosData );

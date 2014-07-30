@@ -210,8 +210,21 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "$1: remote user card page ( #$2 ) content is empty - skipping import user's photos", services )
+				return new TranslatableMessage( "$1: remote user card page ( $2 ) content is empty - skipping import user's photos", services )
 					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.addIntegerParameter( page )
+					;
+			}
+		}.log();
+	}
+
+	public void logFoundPhotosOnRemoteUserCardPage( final RemoteUser remoteUser, final int page, final int count ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "$1: There are $2 photo(s) found on page $3", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.addIntegerParameter( count )
 					.addIntegerParameter( page )
 					;
 			}
