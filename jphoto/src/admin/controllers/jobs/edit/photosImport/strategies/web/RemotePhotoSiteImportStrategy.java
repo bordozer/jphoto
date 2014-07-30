@@ -4,6 +4,7 @@ import admin.controllers.jobs.edit.photosImport.*;
 import admin.controllers.jobs.edit.photosImport.importParameters.AbstractImportParameters;
 import admin.controllers.jobs.edit.photosImport.importParameters.RemoteSitePhotosImportParameters;
 import admin.controllers.jobs.edit.photosImport.strategies.AbstractPhotoImportStrategy;
+import admin.controllers.jobs.edit.photosImport.strategies.web.download.RemotePhotoDownloader;
 import admin.controllers.jobs.edit.photosImport.strategies.web.photosight.PhotosightContentDataExtractor;
 import admin.jobs.entries.AbstractJob;
 import admin.services.jobs.JobHelperService;
@@ -26,7 +27,6 @@ import org.dom4j.DocumentException;
 import utils.NumberUtils;
 import utils.StringUtilities;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
@@ -45,7 +45,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private final AbstractRemotePhotoSitePageContentDataExtractor remotePhotoSitePageContentDataExtractor;
 	private final AbstractRemotePhotoSiteUrlHelper remoteContentHelper;
-	private final RemotePhotoSiteCacheXmlUtils remotePhotoSiteCacheXmlUtils;
+	private final RemotePhotoSiteCacheXmlUtils xmlUtils;
 
 	final LogHelper log = new LogHelper( RemotePhotoSiteImportStrategy.class );
 
@@ -61,7 +61,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		this.remotePhotoSitePageContentDataExtractor = PhotosightContentDataExtractor.getInstance( importParameters.getImportSource() );
 		this.remoteContentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importParameters.getImportSource() );
 
-		remotePhotoSiteCacheXmlUtils = new RemotePhotoSiteCacheXmlUtils (
+		xmlUtils = new RemotePhotoSiteCacheXmlUtils (
 			remoteContentHelper.getPhotosImportSource()
 			, services.getSystemVarsService().getRemotePhotoSitesCacheFolder()
 			, services.getRemotePhotoCategoryService()
@@ -124,9 +124,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			return;
 		}
 
-		remotePhotoSiteCacheXmlUtils.initRemoteUserCacheFileStructure( remoteUser );
+		xmlUtils.initRemoteUserCacheFileStructure( remoteUser );
 
-		final List<RemotePhotoData> cachedUserPhotos = getCachedRemotePhotosData( remoteUser );
+		final List<RemotePhotoData> cachedUserPhotosData = getCachedRemotePhotosData( remoteUser );
 
 		int page = 1;
 
@@ -148,21 +148,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
-			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotos );
+			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotosData );
 
 			filterOutPhotosWithWrongCategories( photosToImportData );
 
-			final List<RemotePhotoData> cachedRemotePhotosData = getCachedRemotePhotosData( photosToImportData );
-			final List<RemotePhoto> cachedRemotePhotos = getCachedRemotePhotos( cachedRemotePhotosData );
+			final RemotePhotoDownloader photoDownloader = new RemotePhotoDownloader( job, remoteUser, photosToImportData, xmlUtils, remoteContentHelper, importParameters.getImportSource(), services );
 
-			final List<RemotePhotoData> notCachedRemotePhotosData = getNotCachedRemotePhotosData( photosToImportData );
-			final List<RemotePhoto> notCachedPhotos = downloadNotCachedPhotos( remoteUser, notCachedRemotePhotosData );
+			cachedUserPhotosData.addAll( photoDownloader.getNotCachedRemotePhotosData() );
+			xmlUtils.recreateUserCacheFile( remoteUser, cachedUserPhotosData, services.getDateUtilsService() );
 
-			cachedUserPhotos.addAll( notCachedRemotePhotosData );
-			remotePhotoSiteCacheXmlUtils.recreateUserCacheFile( remoteUser, cachedUserPhotos, services.getDateUtilsService() );
-
-			final List<RemotePhoto> remotePhotosToImport = newArrayList( cachedRemotePhotos );
-			remotePhotosToImport.addAll( notCachedPhotos );
+			final List<RemotePhoto> remotePhotosToImport = newArrayList( photoDownloader.getRemotePhotos() );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -229,54 +224,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				return importParameters.getRemotePhotoSiteCategories().contains( remotePhotoData.getRemotePhotoSiteCategory() );
 			}
 		} );
-	}
-
-	private List<RemotePhoto> downloadNotCachedPhotos( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotosData ) throws IOException {
-
-		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remoteUser, remotePhotosData );
-
-		return downloadRemotePhotoSitePhotoAndCache( remotePhotosData );
-	}
-
-	private List<RemotePhoto> getCachedRemotePhotos( final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
-
-		final List<RemotePhoto> result = newArrayList();
-
-		for ( final RemotePhotoData remotePhotoData : cachedRemotePhotosData ) {
-			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoData );
-
-			if ( ! imageFile.exists() ) {
-				continue;
-			}
-
-			final ImageToImport imageToImport = new ImageToImport( importParameters.getImportSource(), remotePhotoData.getRemotePhotoSiteCategory().getKey(), imageFile );
-			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
-		}
-
-		return result;
-	}
-
-	private List<RemotePhotoData> getNotCachedRemotePhotosData( final List<RemotePhotoData> remotePhotosData ) {
-		final List<RemotePhotoData> notCachedRemotePhotosData = newArrayList( remotePhotosData );
-		CollectionUtils.filter( notCachedRemotePhotosData, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return !remotePhotoData.isCached();
-			}
-		} );
-
-		return notCachedRemotePhotosData;
-	}
-
-	private List<RemotePhotoData> getCachedRemotePhotosData( final List<RemotePhotoData> remotePhotoDatas ) {
-		final List<RemotePhotoData> cachedRemotePhotosData = newArrayList( remotePhotoDatas );
-		CollectionUtils.filter( cachedRemotePhotosData, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return remotePhotoData.isCached();
-			}
-		} );
-		return cachedRemotePhotosData;
 	}
 
 	private boolean filterOutAlreadyDownloadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {
@@ -384,56 +331,12 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 	private List<RemotePhotoData> getCachedRemotePhotosData( final RemoteUser remoteUser ) throws IOException {
 
 		try {
-			return remotePhotoSiteCacheXmlUtils.getPhotosFromRemoteSiteUserInfoFile( importParameters.getImportSource(), remoteUser, services, job.getJobEnvironment().getLanguage() );
+			return xmlUtils.getPhotosFromRemoteSiteUserInfoFile( importParameters.getImportSource(), remoteUser, services, job.getJobEnvironment().getLanguage() );
 		} catch ( DocumentException e ) {
-			/*final TranslatableMessage translatableMessage = new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
-				.string( remotePhotoSiteCacheXmlUtils.getUserInfoFile( remoteUser ).getAbsolutePath() )
-				.string( e.getMessage() )
-				;*/
-			//			job.addJobRuntimeLogMessage( translatableMessage );
-			logger.logErrorReadingUserDataFile( remoteUser, remotePhotoSiteCacheXmlUtils.getUserInfoFile( remoteUser ), e );
-
-			log.error( String.format( "Error reading user info file: %s<br />", remotePhotoSiteCacheXmlUtils.getUserInfoFile( remoteUser ).getAbsolutePath() ), e );
+			logger.logErrorReadingUserDataFile( remoteUser, xmlUtils.getUserInfoFile( remoteUser ), e );
 
 			throw new BaseRuntimeException( e );
 		}
-	}
-
-	private List<RemotePhoto> downloadRemotePhotoSitePhotoAndCache( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
-
-		final int toAddCount = remotePhotoDatas.size();
-
-		if ( toAddCount > 0 ) {
-			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
-		}
-
-		final List<RemotePhoto> result = newArrayList();
-		int counter = 1;
-		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
-
-			final RemotePhotoSiteImage remotePhotoSiteImage = remotePhotoData.getRemotePhotoSiteImage();
-			log.debug( String.format( "Getting photo %s content", remotePhotoSiteImage.getImageUrl() ) );
-			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Getting image '$3' content", services )
-				.addIntegerParameter( counter )
-				.addIntegerParameter( toAddCount )
-				.link( remotePhotoData.getRemotePhotoSiteImage().getImageUrl(), remotePhotoData.getRemotePhotoSiteImage().getImageUrl() )
-			);
-
-			final String imageContent = remoteContentHelper.getImageContentFromUrl( remotePhotoSiteImage.getImageUrl() );
-			if ( imageContent == null ) {
-				remotePhotoData.setHasError( true );
-				job.addJobRuntimeLogMessage( new TranslatableMessage( "Can not get remote photo site image content: '$1'", services ).string( remotePhotoData.getRemotePhotoSiteImage().getImageUrl() ) );
-				continue;
-			}
-
-			final ImageToImport imageToImport = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoData, imageContent );
-
-			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
-
-			counter++;
-		}
-
-		return result;
 	}
 
 	private List<RemotePhotoSiteDBEntry> preparePhotosToImport( final RemoteUser remoteUser, final User localUser, final List<RemotePhoto> remotePhotoSitePhotoDiskEntries ) throws IOException {
