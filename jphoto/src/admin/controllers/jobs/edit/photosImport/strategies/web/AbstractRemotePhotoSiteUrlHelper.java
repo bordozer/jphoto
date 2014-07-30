@@ -67,6 +67,14 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		);
 	}
 
+	public String getRemoteUserCardLink( final String remoteUserId ) {
+
+		return String.format( "<a href='%s' target='_blank'>%s</a>"
+			, getUserCardUrl( remoteUserId )
+			, remoteUserId
+		);
+	}
+
 	public String getUserCardUrl( final String remotePhotoSiteUserId ) {
 		return getUserCardUrl( remotePhotoSiteUserId, 0 );
 	}

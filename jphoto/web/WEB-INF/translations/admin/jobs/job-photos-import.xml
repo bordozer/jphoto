@@ -218,8 +218,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Remote photos import: $1: starting import</nerd>
-		<ru><![CDATA[$1: начат импорт]]></ru>
+		<nerd>Remote photos import: $1 $2: starting import</nerd>
+		<ru><![CDATA[$1 $2: начат импорт]]></ru>
 	</translation>
 
 	<translation>
@@ -230,6 +230,31 @@
 	<translation>
 		<nerd>$1: remote user card page ( $2 ) content is empty - skipping import user's photos</nerd>
 		<ru><![CDATA[$1: невозможно получить контент страницы ( $2 ) пользователя удаленного сайта. Ипорт работ пользователя не выполнен.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: can not extract photos count from user card</nerd>
+		<ru><![CDATA[$1: ошибка определения к-ва работ пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: pages to import $2</nerd>
+		<ru><![CDATA[$1: будут импортированы работы с $2 странц(ы)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1: initialization of user cache file structure failed</nerd>
+		<ru><![CDATA[$1: ошибка инициализации файловой струкруты кеша. Ипорт работ пользователя не выполнен.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

@@ -21,12 +21,13 @@ public class PhotosImportLogger {
 		this.services = services;
 	}
 
-	public void logUserImportImportStart( final RemoteUser remoteUser ) {
+	public void logUserImportImportStart( final String remoteUserId ) {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Remote photos import: $1: starting import", services )
-					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+				return new TranslatableMessage( "Remote photos import: $1 $2: starting import", services )
+					.link( remoteContentHelper.getRemotePhotoSiteHost() )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUserId ) )
 					;
 			}
 		}.log();
@@ -47,7 +48,9 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "TODO", services );
+				return new TranslatableMessage( "$1: initialization of user cache file structure failed", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					;
 			}
 		}.log();
 	}
@@ -68,7 +71,9 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "TODO", services );
+				return new TranslatableMessage( "$1: can not extract photos count from user card", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					;
 			}
 		}.log();
 	}
@@ -77,7 +82,9 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "TODO", services );
+				return new TranslatableMessage( "$1: pages to import $2", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					;
 			}
 		}.log();
 	}

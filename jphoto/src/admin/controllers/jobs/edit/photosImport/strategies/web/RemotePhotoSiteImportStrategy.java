@@ -118,7 +118,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private void importRemotePhotoSiteUserPhotos( final RemoteUser remoteUser ) throws IOException, SaveToDBException {
 
-		logger.logUserImportImportStart( remoteUser );
+		logger.logUserImportImportStart( remoteUser.getId() );
 
 		final User user = findExistingOrCreateUser( remoteUser, importParameters );
 		if ( user == null ) {
