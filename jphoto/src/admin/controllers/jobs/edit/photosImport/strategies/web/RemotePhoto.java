@@ -2,12 +2,12 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 
-public class RemotePhotoSitePhotoDiskEntry {
+public class RemotePhoto {
 
 	private final RemotePhotoData remotePhotoData;
 	private final ImageToImport imageToImport;
 
-	public RemotePhotoSitePhotoDiskEntry( final RemotePhotoData remotePhotoData, final ImageToImport imageToImport ) {
+	public RemotePhoto( final RemotePhotoData remotePhotoData, final ImageToImport imageToImport ) {
 		this.remotePhotoData = remotePhotoData;
 		this.imageToImport = imageToImport;
 	}

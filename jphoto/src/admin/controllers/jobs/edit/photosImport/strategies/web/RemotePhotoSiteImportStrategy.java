@@ -123,7 +123,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			filterOutPhotosWithWrongCategories( photosToImportData );
 
-			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, photosToImportData, cacheUserPhotos );
+			final List<RemotePhoto> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, photosToImportData, cacheUserPhotos );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -225,17 +225,17 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		} );
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getRemotePhotoSitePhotoDiskEntries( final RemoteUser remoteUser, final List<RemotePhotoData> notImportedPhotos, final List<RemotePhotoData> cacheUserPhotos ) throws IOException {
+	private List<RemotePhoto> getRemotePhotoSitePhotoDiskEntries( final RemoteUser remoteUser, final List<RemotePhotoData> notImportedPhotos, final List<RemotePhotoData> cacheUserPhotos ) throws IOException {
 
-		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
-		final List<RemotePhotoSitePhotoDiskEntry> newlyCollectedEntries = getNotCachedEntries( remoteUser, notImportedPhotos );
+		final List<RemotePhoto> result = newArrayList();
+		final List<RemotePhoto> newlyCollectedEntries = getNotCachedEntries( remoteUser, notImportedPhotos );
 
 		final List<RemotePhotoData> photosToAddToCache = getPhotos( newlyCollectedEntries );
 		cacheUserPhotos.addAll( photosToAddToCache );
 
 		remotePhotoSiteCacheXmlUtils.createPhotosCache( remoteUser, cacheUserPhotos, services.getDateUtilsService() );
 
-		final List<RemotePhotoSitePhotoDiskEntry> cachedEarlieEntries = getCachedEntries( notImportedPhotos );
+		final List<RemotePhoto> cachedEarlieEntries = getCachedEntries( notImportedPhotos );
 
 		result.addAll( newlyCollectedEntries );
 		result.addAll( cachedEarlieEntries );
@@ -243,15 +243,15 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private List<RemotePhotoData> getPhotos( final List<RemotePhotoSitePhotoDiskEntry> newlyCollectedEntries ) {
+	private List<RemotePhotoData> getPhotos( final List<RemotePhoto> newlyCollectedEntries ) {
 		final List<RemotePhotoData> photosToAddToCache = newArrayList();
-		for ( final RemotePhotoSitePhotoDiskEntry newlyCollectedEntry : newlyCollectedEntries ) {
+		for ( final RemotePhoto newlyCollectedEntry : newlyCollectedEntries ) {
 			photosToAddToCache.add( newlyCollectedEntry.getRemotePhotoData() );
 		}
 		return photosToAddToCache;
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getNotCachedEntries( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
+	private List<RemotePhoto> getNotCachedEntries( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
 
 		final List<RemotePhotoData> notCachedRemotePhotoDatas = newArrayList( remotePhotoDatas );
 		CollectionUtils.filter( notCachedRemotePhotoDatas, new Predicate<RemotePhotoData>() {
@@ -266,7 +266,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return downloadRemotePhotoSitePhotoAndCache( notCachedRemotePhotoDatas );
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> getCachedEntries( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
+	private List<RemotePhoto> getCachedEntries( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
 
 		final List<RemotePhotoData> cachedRemotePhotoDatas = newArrayList( remotePhotoDatas );
 		CollectionUtils.filter( cachedRemotePhotoDatas, new Predicate<RemotePhotoData>() {
@@ -276,7 +276,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		} );
 
-		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
+		final List<RemotePhoto> result = newArrayList();
 
 		for ( final RemotePhotoData remotePhotoData : cachedRemotePhotoDatas ) {
 			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoData );
@@ -286,7 +286,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 
 			final ImageToImport imageToImport = new ImageToImport( importParameters.getImportSource(), remotePhotoData.getRemotePhotoSiteCategory().getKey(), imageFile );
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoData, imageToImport ) );
+			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
 		}
 
 		return result;
@@ -412,7 +412,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
-	private List<RemotePhotoSitePhotoDiskEntry> downloadRemotePhotoSitePhotoAndCache( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
+	private List<RemotePhoto> downloadRemotePhotoSitePhotoAndCache( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
 
 		final int toAddCount = remotePhotoDatas.size();
 
@@ -420,7 +420,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
 		}
 
-		final List<RemotePhotoSitePhotoDiskEntry> result = newArrayList();
+		final List<RemotePhoto> result = newArrayList();
 		int counter = 1;
 		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
 
@@ -441,7 +441,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final ImageToImport imageToImport = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoData, imageContent );
 
-			result.add( new RemotePhotoSitePhotoDiskEntry( remotePhotoData, imageToImport ) );
+			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
 
 			counter++;
 		}
@@ -449,14 +449,14 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private List<RemotePhotoSiteDBEntry> preparePhotosToImport( final RemoteUser remoteUser, final User localUser, final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries ) throws IOException {
+	private List<RemotePhotoSiteDBEntry> preparePhotosToImport( final RemoteUser remoteUser, final User localUser, final List<RemotePhoto> remotePhotoSitePhotoDiskEntries ) throws IOException {
 
 		final List<RemotePhotoSiteDBEntry> photosToImport = newArrayList();
 
-		for ( final RemotePhotoSitePhotoDiskEntry remotePhotoSitePhotoDiskEntry : remotePhotoSitePhotoDiskEntries ) {
+		for ( final RemotePhoto remotePhoto : remotePhotoSitePhotoDiskEntries ) {
 
-			final RemotePhotoData remotePhotoData = remotePhotoSitePhotoDiskEntry.getRemotePhotoData();
-			final ImageToImport imageToImport = remotePhotoSitePhotoDiskEntry.getImageToImport();
+			final RemotePhotoData remotePhotoData = remotePhoto.getRemotePhotoData();
+			final ImageToImport imageToImport = remotePhoto.getImageToImport();
 
 			final ImageToImportData imageToImportData = new ImageToImportData( imageToImport );
 			imageToImportData.setUser( localUser );
@@ -479,9 +479,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final String keywords = StringUtilities.truncateString( String.format( "%s, %s, %s", siteUrl, remoteUser.getName(), imageToImportData.getName() ), 255 );
 			imageToImportData.setPhotoKeywords( keywords );
 			imageToImportData.setUploadTime( remotePhotoData.getUploadTime() );
-			imageToImportData.setImportId( remotePhotoSitePhotoDiskEntry.getRemotePhotoData().getPhotoId() );
+			imageToImportData.setImportId( remotePhoto.getRemotePhotoData().getPhotoId() );
 
-			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhotoSitePhotoDiskEntry, imageToImportData ) );
+			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhoto, imageToImportData ) );
 		}
 
 		return photosToImport;
@@ -616,7 +616,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final PhotoCommentService photoCommentService = services.getPhotoCommentService();
 
-		final RemotePhotoData remotePhotoData = dbEntry.getRemotePhotoSitePhotoDiskEntry().getRemotePhotoData();
+		final RemotePhotoData remotePhotoData = dbEntry.getRemotePhoto().getRemotePhotoData();
 		log.debug( String.format( "Importing comments for photo %d", remotePhotoData.getPhotoId() ) );
 
 		final Photo photo = dbEntry.getImageToImportData().getPhoto();
