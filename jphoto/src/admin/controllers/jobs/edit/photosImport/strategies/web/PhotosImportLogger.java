@@ -59,7 +59,8 @@ public class PhotosImportLogger {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Error reading user info file: $1<br />$2", services )
+				return new TranslatableMessage( "$1: Error reading user info file: $2<br />$3", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
 					.string( userDataFile.getAbsolutePath() )
 					.string( e.getMessage() )
 					;

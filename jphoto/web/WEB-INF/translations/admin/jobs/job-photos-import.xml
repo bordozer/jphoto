@@ -248,8 +248,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1: Error reading user info file: $2<br />$3</nerd>
+		<ru><![CDATA[$1: Ошибка чтения файла информации о кешированных работах ( '$2' )<br />$3]]></ru>
 	</translation>
 
 	<translation>
