@@ -97,7 +97,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		remotePhotoSiteCacheXmlUtils.initRemoteUserCacheFileStructure( remoteUser );
 
-		final List<RemotePhotoData> cacheUserPhotos = getCachedRemotePhotosData( remoteUser );
+		final List<RemotePhotoData> cachedUserPhotos = getCachedRemotePhotosData( remoteUser );
 
 		int page = 1;
 
@@ -119,17 +119,27 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
-			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos );
+			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cachedUserPhotos );
 
 			filterOutPhotosWithWrongCategories( photosToImportData );
 
-			final List<RemotePhoto> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, photosToImportData, cacheUserPhotos );
+			final List<RemotePhotoData> cachedRemotePhotosData = getCachedRemotePhotosData( photosToImportData );
+			final List<RemotePhoto> cachedRemotePhotos = getCachedRemotePhotos( cachedRemotePhotosData );
+
+			final List<RemotePhotoData> notCachedRemotePhotosData = getNotCachedRemotePhotosData( photosToImportData );
+			final List<RemotePhoto> notCachedPhotos = downloadNotCachedPhotos( remoteUser, notCachedRemotePhotosData );
+
+			cachedUserPhotos.addAll( notCachedRemotePhotosData );
+			remotePhotoSiteCacheXmlUtils.recreateUserCacheFile( remoteUser, cachedUserPhotos, services.getDateUtilsService() );
+
+			final List<RemotePhoto> remotePhotosToImport = newArrayList( cachedRemotePhotos );
+			remotePhotosToImport.addAll( notCachedPhotos );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			final List<RemotePhotoSiteDBEntry> entries = preparePhotosToImport( remoteUser, user, remotePhotoSitePhotoDiskEntries );
+			final List<RemotePhotoSiteDBEntry> entries = preparePhotosToImport( remoteUser, user, remotePhotosToImport );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
@@ -225,60 +235,18 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		} );
 	}
 
-	private List<RemotePhoto> getRemotePhotoSitePhotoDiskEntries( final RemoteUser remoteUser, final List<RemotePhotoData> notImportedPhotos, final List<RemotePhotoData> cacheUserPhotos ) throws IOException {
+	private List<RemotePhoto> downloadNotCachedPhotos( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotosData ) throws IOException {
 
-		final List<RemotePhoto> result = newArrayList();
-		final List<RemotePhoto> newlyCollectedEntries = getNotCachedEntries( remoteUser, notImportedPhotos );
+		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remoteUser, remotePhotosData );
 
-		final List<RemotePhotoData> photosToAddToCache = getPhotos( newlyCollectedEntries );
-		cacheUserPhotos.addAll( photosToAddToCache );
-
-		remotePhotoSiteCacheXmlUtils.createPhotosCache( remoteUser, cacheUserPhotos, services.getDateUtilsService() );
-
-		final List<RemotePhoto> cachedEarlieEntries = getCachedEntries( notImportedPhotos );
-
-		result.addAll( newlyCollectedEntries );
-		result.addAll( cachedEarlieEntries );
-
-		return result;
+		return downloadRemotePhotoSitePhotoAndCache( remotePhotosData );
 	}
 
-	private List<RemotePhotoData> getPhotos( final List<RemotePhoto> newlyCollectedEntries ) {
-		final List<RemotePhotoData> photosToAddToCache = newArrayList();
-		for ( final RemotePhoto newlyCollectedEntry : newlyCollectedEntries ) {
-			photosToAddToCache.add( newlyCollectedEntry.getRemotePhotoData() );
-		}
-		return photosToAddToCache;
-	}
-
-	private List<RemotePhoto> getNotCachedEntries( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
-
-		final List<RemotePhotoData> notCachedRemotePhotoDatas = newArrayList( remotePhotoDatas );
-		CollectionUtils.filter( notCachedRemotePhotoDatas, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return ! remotePhotoData.isCached();
-			}
-		} );
-
-		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remoteUser, notCachedRemotePhotoDatas );
-
-		return downloadRemotePhotoSitePhotoAndCache( notCachedRemotePhotoDatas );
-	}
-
-	private List<RemotePhoto> getCachedEntries( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
-
-		final List<RemotePhotoData> cachedRemotePhotoDatas = newArrayList( remotePhotoDatas );
-		CollectionUtils.filter( cachedRemotePhotoDatas, new Predicate<RemotePhotoData>() {
-			@Override
-			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
-				return remotePhotoData.isCached();
-			}
-		} );
+	private List<RemotePhoto> getCachedRemotePhotos( final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
 
 		final List<RemotePhoto> result = newArrayList();
 
-		for ( final RemotePhotoData remotePhotoData : cachedRemotePhotoDatas ) {
+		for ( final RemotePhotoData remotePhotoData : cachedRemotePhotosData ) {
 			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoData );
 
 			if ( ! imageFile.exists() ) {
@@ -290,6 +258,29 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		return result;
+	}
+
+	private List<RemotePhotoData> getNotCachedRemotePhotosData( final List<RemotePhotoData> remotePhotosData ) {
+		final List<RemotePhotoData> notCachedRemotePhotosData = newArrayList( remotePhotosData );
+		CollectionUtils.filter( notCachedRemotePhotosData, new Predicate<RemotePhotoData>() {
+			@Override
+			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
+				return !remotePhotoData.isCached();
+			}
+		} );
+
+		return notCachedRemotePhotosData;
+	}
+
+	private List<RemotePhotoData> getCachedRemotePhotosData( final List<RemotePhotoData> remotePhotoDatas ) {
+		final List<RemotePhotoData> cachedRemotePhotosData = newArrayList( remotePhotoDatas );
+		CollectionUtils.filter( cachedRemotePhotosData, new Predicate<RemotePhotoData>() {
+			@Override
+			public boolean evaluate( final RemotePhotoData remotePhotoData ) {
+				return remotePhotoData.isCached();
+			}
+		} );
+		return cachedRemotePhotosData;
 	}
 
 	private boolean filterOutAlreadyDownloadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {

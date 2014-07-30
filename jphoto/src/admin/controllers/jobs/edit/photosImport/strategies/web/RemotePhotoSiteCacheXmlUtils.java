@@ -86,7 +86,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public void createPhotosCache( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas, final DateUtilsService dateUtilsService ) throws IOException {
+	public void recreateUserCacheFile( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
