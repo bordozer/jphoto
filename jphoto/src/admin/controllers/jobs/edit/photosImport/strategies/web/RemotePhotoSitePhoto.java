@@ -7,7 +7,7 @@ import java.util.List;
 
 public class RemotePhotoSitePhoto {
 
-	private final RemotePhotoSiteUser remotePhotoSiteUser;
+	private final RemoteUser remoteUser;
 	private final int photoId;
 	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
 	private String name;
@@ -22,14 +22,14 @@ public class RemotePhotoSitePhoto {
 	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 	private int numberInSeries;
 
-	public RemotePhotoSitePhoto( final RemotePhotoSiteUser remotePhotoSiteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-		this.remotePhotoSiteUser = remotePhotoSiteUser;
+	public RemotePhotoSitePhoto( final RemoteUser remoteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+		this.remoteUser = remoteUser;
 		this.photoId = photoId;
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
 	}
 
-	public RemotePhotoSiteUser getRemotePhotoSiteUser() {
-		return remotePhotoSiteUser;
+	public RemoteUser getRemoteUser() {
+		return remoteUser;
 	}
 
 	public int getPhotoId() {

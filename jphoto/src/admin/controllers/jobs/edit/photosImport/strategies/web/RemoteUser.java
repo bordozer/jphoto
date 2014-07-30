@@ -1,11 +1,11 @@
 package admin.controllers.jobs.edit.photosImport.strategies.web;
 
-public class RemotePhotoSiteUser {
+public class RemoteUser {
 
 	private final String id;
 	private String name;
 
-	public RemotePhotoSiteUser( final String id ) {
+	public RemoteUser( final String id ) {
 		this.id = id;
 	}
 

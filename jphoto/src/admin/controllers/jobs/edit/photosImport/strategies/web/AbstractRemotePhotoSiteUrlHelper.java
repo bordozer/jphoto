@@ -58,12 +58,12 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );
 	}
 
-	public String getUserCardLink( final RemotePhotoSiteUser remotePhotoSiteUser ) {
+	public String getUserCardLink( final RemoteUser remoteUser ) {
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )"
-			, getUserCardUrl( remotePhotoSiteUser.getId(), 1 )
-			, StringUtilities.unescapeHtml( remotePhotoSiteUser.getName() )
-			, remotePhotoSiteUser.getId()
+			, getUserCardUrl( remoteUser.getId(), 1 )
+			, StringUtilities.unescapeHtml( remoteUser.getName() )
+			, remoteUser.getId()
 		);
 	}
 
@@ -81,8 +81,8 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		return getRemotePhotoSiteContentDataExtractor().extractRemotePhotoSiteUserName( userPageContent );
 	}
 
-	public String extractUserNameFromRemoteSite( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		return extractUserNameFromRemoteSite( remotePhotoSiteUser.getId() );
+	public String extractUserNameFromRemoteSite( final RemoteUser remoteUser ) {
+		return extractUserNameFromRemoteSite( remoteUser.getId() );
 	}
 
 	public String getPhotoCardLink( final String remotePhotoSiteUserId, final int remotePhotoSitePhotoId ) {
@@ -92,7 +92,7 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 	public String getPhotoCardLink( final RemotePhotoSitePhoto remotePhotoSitePhoto ) {
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%d</b> )"
-			, getPhotoCardUrl( remotePhotoSitePhoto.getRemotePhotoSiteUser().getId(), remotePhotoSitePhoto.getPhotoId() )
+			, getPhotoCardUrl( remotePhotoSitePhoto.getRemoteUser().getId(), remotePhotoSitePhoto.getPhotoId() )
 			, StringUtilities.unescapeHtml( remotePhotoSitePhoto.getName() )
 			, remotePhotoSitePhoto.getPhotoId()
 		);
@@ -110,8 +110,8 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		return getRemotePageContent( remotePhotoSiteUserId, getUserCardUrl( remotePhotoSiteUserId, pageNumber ) );
 	}
 
-	public String getPhotoPageContent( final RemotePhotoSiteUser remotePhotoSiteUser, final int remotePhotoSitePhotoId ) {
-		return getRemotePageContent( remotePhotoSiteUser.getId(), getPhotoCardUrl( remotePhotoSiteUser.getId(), remotePhotoSitePhotoId ) );
+	public String getPhotoPageContent( final RemoteUser remoteUser, final int remotePhotoSitePhotoId ) {
+		return getRemotePageContent( remoteUser.getId(), getPhotoCardUrl( remoteUser.getId(), remotePhotoSitePhotoId ) );
 	}
 
 	public String getImageContentFromUrl( final String imageUrl ) {

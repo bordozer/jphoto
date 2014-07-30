@@ -3,7 +3,6 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.exceptions.BaseRuntimeException;
-import core.general.genre.Genre;
 import core.log.LogHelper;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.system.Services;
@@ -62,20 +61,20 @@ public class RemotePhotoSiteCacheXmlUtils {
 		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
 	}
 
-	public void initRemoteUserFileStructure( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		createUserFolderForPhotoDownloading( remotePhotoSiteUser );
-		createUserInfoFile( remotePhotoSiteUser );
+	public void initRemoteUserCacheFileStructure( final RemoteUser remoteUser ) throws IOException {
+		createUserFolderForPhotoDownloading( remoteUser );
+		createUserInfoFile( remoteUser );
 	}
 
-	public void createUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
+	public void createUserInfoFile( final RemoteUser remoteUser ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
 
-		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remotePhotoSiteUser.getId() ) );
-		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSiteUser.getName() ) );
+		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remoteUser.getId() ) );
+		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remoteUser.getName() ) );
 
-		final File userInfoFile = getUserInfoFile( remotePhotoSiteUser );
+		final File userInfoFile = getUserInfoFile( remoteUser );
 		if ( userInfoFile.exists() ) {
 			return;
 		}
@@ -87,13 +86,13 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public void createPhotosCache( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
+	public void createPhotosCache( final RemoteUser remoteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
 
-		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remotePhotoSiteUser.getId() ) );
-		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoSiteUser.getName() ) );
+		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remoteUser.getId() ) );
+		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remoteUser.getName() ) );
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
 
@@ -121,19 +120,19 @@ public class RemotePhotoSiteCacheXmlUtils {
 			}
 		}
 
-		final FileWriter fileWriter = new FileWriter( getUserInfoFile( remotePhotoSiteUser ) );
+		final FileWriter fileWriter = new FileWriter( getUserInfoFile( remoteUser ) );
 		final OutputFormat format = OutputFormat.createPrettyPrint();
 		final XMLWriter output = new XMLWriter( fileWriter, format );
 		output.write( document );
 		output.close();
 	}
 
-	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final PhotosImportSource importSource, final RemotePhotoSiteUser remotePhotoSiteUser, final Services services, final Language language ) throws IOException, DocumentException {
+	public List<RemotePhotoSitePhoto> getPhotosFromRemoteSiteUserInfoFile( final PhotosImportSource importSource, final RemoteUser remoteUser, final Services services, final Language language ) throws IOException, DocumentException {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final TranslatorService translatorService = services.getTranslatorService();
 
 		final SAXReader reader = new SAXReader( false );
-		final File userInfoFile = getUserInfoFile( remotePhotoSiteUser );
+		final File userInfoFile = getUserInfoFile( remoteUser );
 		final Document document = reader.read( userInfoFile );
 
 		final Iterator photosIterator = document.getRootElement().elementIterator( USER_INFO_FILE_PHOTO_ELEMENT_NAME );
@@ -163,7 +162,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			}
 			final String imageUrl = photoElement.element( USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
 
-			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remotePhotoSiteUser, remoteUserPhotoId, category );
+			final RemotePhotoSitePhoto remotePhotoSitePhoto = new RemotePhotoSitePhoto( remoteUser, remoteUserPhotoId, category );
 			remotePhotoSitePhoto.setName( photoName );
 			remotePhotoSitePhoto.setUploadTime( uploadTime );
 			remotePhotoSitePhoto.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
@@ -192,9 +191,9 @@ public class RemotePhotoSiteCacheXmlUtils {
 		return result;
 	}
 
-	public void prepareUserGenreFolders( final RemotePhotoSiteUser remotePhotoSiteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
+	public void prepareUserGenreFolders( final RemoteUser remoteUser, final List<RemotePhotoSitePhoto> remotePhotoSitePhotos ) throws IOException {
 
-		final File userFolder = getRemoteUserCacheFolder( remotePhotoSiteUser );
+		final File userFolder = getRemoteUserCacheFolder( remoteUser );
 
 		for ( final RemotePhotoSitePhoto remotePhotoSitePhoto : remotePhotoSitePhotos ) {
 //			final Genre genre = remotePhotoCategoryService.getMappedGenreOrOther( remotePhotoSitePhoto.getRemotePhotoSiteCategory() );
@@ -223,7 +222,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 	public File getRemotePhotoCacheFile( final RemotePhotoSitePhoto remotePhotoSitePhoto ) throws IOException {
 		final String remotePhotoCacheFileName = String.format( "%d_%d.jpg", remotePhotoSitePhoto.getPhotoId(), remotePhotoSitePhoto.getNumberInSeries() );
-		final File folderForRemoteUserCachedPhotos = getRemoteUserCacheFolder( remotePhotoSitePhoto.getRemotePhotoSiteUser() );
+		final File folderForRemoteUserCachedPhotos = getRemoteUserCacheFolder( remotePhotoSitePhoto.getRemoteUser() );
 		final File folderForRemoteUserCachedPhotosForGenre = new File( folderForRemoteUserCachedPhotos, remotePhotoSitePhoto.getRemotePhotoSiteCategory().getKey() );
 		return new File( folderForRemoteUserCachedPhotosForGenre, remotePhotoCacheFileName );
 	}
@@ -243,8 +242,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 		return remotePhotoSiteCacheFolder;
 	}
 
-	public File getUserInfoFile( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		return new File( getRemoteUserCacheFolder( remotePhotoSiteUser ), getUserInfoFileName( remotePhotoSiteUser ) );
+	public File getUserInfoFile( final RemoteUser remoteUser ) throws IOException {
+		return new File( getRemoteUserCacheFolder( remoteUser ), getUserInfoFileName( remoteUser ) );
 	}
 
 	private static String escapeFileName( final String param ) {
@@ -263,16 +262,16 @@ public class RemotePhotoSiteCacheXmlUtils {
 		bos.close();
 	}
 
-	private static String getUserInfoFileName( final RemotePhotoSiteUser remotePhotoSiteUser ) {
-		return String.format( "%s.xml", remotePhotoSiteUser.getId() );
+	private static String getUserInfoFileName( final RemoteUser remoteUser ) {
+		return String.format( "%s.xml", remoteUser.getId() );
 	}
 
-	private  File getRemoteUserCacheFolder( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		return new File( getPhotoStorage().getPath(), String.format( "%s", remotePhotoSiteUser.getId() ) );
+	private  File getRemoteUserCacheFolder( final RemoteUser remoteUser ) throws IOException {
+		return new File( getPhotoStorage().getPath(), String.format( "%s", remoteUser.getId() ) );
 	}
 
-	private  void createUserFolderForPhotoDownloading( final RemotePhotoSiteUser remotePhotoSiteUser ) throws IOException {
-		final File userFolder = getRemoteUserCacheFolder( remotePhotoSiteUser );
+	private  void createUserFolderForPhotoDownloading( final RemoteUser remoteUser ) throws IOException {
+		final File userFolder = getRemoteUserCacheFolder( remoteUser );
 		if ( ! userFolder.exists() ) {
 			userFolder.mkdirs();
 		}
