@@ -49,7 +49,7 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Getting image '$3' content", services )
 				.addIntegerParameter( counter )
 				.addIntegerParameter( toAddCount )
-				.link( remotePhotoData.getRemotePhotoSiteImage().getImageUrl(), remotePhotoData.getRemotePhotoSiteImage().getImageUrl() )
+				.link( remotePhotoData.getRemotePhotoSiteImage().getImageUrl() )
 			);
 
 			final String imageContent = remoteContentHelper.getImageContentFromUrl( remotePhotoSiteImage.getImageUrl() );

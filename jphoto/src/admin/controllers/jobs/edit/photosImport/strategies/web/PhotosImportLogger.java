@@ -12,10 +12,12 @@ import java.io.File;
 public class PhotosImportLogger {
 
 	private AbstractJob job;
+	private AbstractRemotePhotoSiteUrlHelper remoteContentHelper;
 	private final Services services;
 
-	public PhotosImportLogger( final AbstractJob job, final Services services ) {
+	public PhotosImportLogger( final AbstractJob job, final AbstractRemotePhotoSiteUrlHelper remoteContentHelper, final Services services ) {
 		this.job = job;
+		this.remoteContentHelper = remoteContentHelper;
 		this.services = services;
 	}
 
@@ -136,13 +138,38 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
-	public void logRemotePhotoHasBeenFoundInTheCache( final String remotePhotoSiteUserPageLink, final String photoCardLink ) {
+	public void logRemotePhotoHasBeenFoundInTheCache( final RemoteUser remoteUser, final RemotePhotoData remotePhotoData ) {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
 				return new TranslatableMessage( "$1: Found in the local cache: $2", services )
-					.string( remotePhotoSiteUserPageLink )
-					.string( photoCardLink )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.string( remoteContentHelper.getPhotoCardLink( remotePhotoData ) )
+					;
+			}
+		}.log();
+	}
+
+	public void logPhotoSkipping( final RemoteUser remoteUser, final int remotePhotoId, final String customReason ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "$1 User: $2; photo: $3. Photo import skipped.", services )
+					.string( customReason )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.string( remoteContentHelper.getPhotoCardLink( remoteUser.getId(), remotePhotoId ) )
+					;
+			}
+		}.log();
+	}
+
+	public void logCollectingRemotePhotoData( final int remotePhotoId, final String imageUrl ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
+					.addIntegerParameter( remotePhotoId )
+					.link( imageUrl )
 					;
 			}
 		}.log();
