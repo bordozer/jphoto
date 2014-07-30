@@ -228,8 +228,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1: remote user card page ( #$2 ) content is empty - skipping import user's photos</nerd>
+		<ru><![CDATA[$1: невозможно получить контент страницы ( #$2 ) пользователя удаленного сайта. Ипорт работ пользователя не выполнен.]]></ru>
 	</translation>
 
 	<translation>

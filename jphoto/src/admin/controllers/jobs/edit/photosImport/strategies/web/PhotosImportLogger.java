@@ -206,6 +206,18 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
+	public void logEmptyRemoteUserCardPageContent( final RemoteUser remoteUser, final int page ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "$1: remote user card page ( #$2 ) content is empty - skipping import user's photos", services )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.addIntegerParameter( page )
+					;
+			}
+		}.log();
+	}
+
 	private abstract class LogMessenger {
 
 		private final LogHelper log = new LogHelper( PhotosImportLogger.class );
