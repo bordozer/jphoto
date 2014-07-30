@@ -163,14 +163,41 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
-	public void logCollectingRemotePhotoData( final int remotePhotoId, final String imageUrl ) {
+	public void logCollectingRemotePhotoDataForImage( final String remoteUserId, final int remotePhotoId, final String imageUrl ) {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Collecting data of remote photo site photo #$1 ( $2 )", services )
-					.addIntegerParameter( remotePhotoId )
+				return new TranslatableMessage( "Collecting data of remote photo site photo $1: $2", services )
+					.string( remoteContentHelper.getPhotoCardLink( remoteUserId, remotePhotoId ) )
 					.link( imageUrl )
 					;
+			}
+		}.log();
+	}
+
+	public void logErrorGettingPhotoUploadTime( final String remoteUserId, final int remotePhotoId ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "Can not get upload time from remote photo page ( $1 ). Random time is used.", services )
+					.string( remoteContentHelper.getPhotoCardLink( remoteUserId, remotePhotoId ) )
+					;
+			}
+		}.log();
+	}
+
+	public void logSuccessDataCollectingOfRemotePhoto( final int counter, final int total, final RemotePhotoData remotePhotoData, final RemoteUser remoteUser, final Language language ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "$1 / $2 Got data of '$3': $4 of $5, photo category: $6", services )
+					.addIntegerParameter( counter )
+					.addIntegerParameter( total )
+					.string( remoteContentHelper.getRemotePhotoSiteHost() )
+					.string( remoteContentHelper.getPhotoCardLink( remotePhotoData ) )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
+					.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoData.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), language, services.getRemotePhotoCategoryService() ) )
+				;
 			}
 		}.log();
 	}

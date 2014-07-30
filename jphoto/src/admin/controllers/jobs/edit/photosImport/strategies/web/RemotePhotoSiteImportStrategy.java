@@ -387,19 +387,20 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private List<RemotePhotoData> collectRemotePhotosDataFromRemoteSite( final RemoteUser remoteUser, final int remotePhotoId ) throws IOException {
 
-		final String photoPageContent = remoteContentHelper.getPhotoPageContent( remoteUser, remotePhotoId );
-		if ( StringUtils.isEmpty( photoPageContent ) ) {
+		final String photoCardPageContent = remoteContentHelper.getPhotoPageContent( remoteUser, remotePhotoId );
+
+		if ( StringUtils.isEmpty( photoCardPageContent ) ) {
 			logger.logPhotoSkipping( remoteUser, remotePhotoId, "Can't load photo page content." );
 			return newArrayList();
 		}
 
-		final List<RemotePhotoSiteImage> remotePhotoImages = remotePhotoSitePageContentDataExtractor.extractImageUrl( remoteUser.getId(), remotePhotoId, photoPageContent );
+		final List<RemotePhotoSiteImage> remotePhotoImages = remotePhotoSitePageContentDataExtractor.extractImageUrl( remoteUser.getId(), remotePhotoId, photoCardPageContent );
 		if ( remotePhotoImages == null || remotePhotoImages.isEmpty() ) {
 			logger.logPhotoSkipping( remoteUser, remotePhotoId, "Can not extract photo image URL from page content." );
 			return newArrayList();
 		}
 
-		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentDataExtractor.extractPhotoCategoryId( photoPageContent ) );
+		final RemotePhotoSiteCategory photosightCategory = RemotePhotoSiteCategory.getById( importParameters.getImportSource(), remotePhotoSitePageContentDataExtractor.extractPhotoCategoryId( photoCardPageContent ) );
 		if( photosightCategory == null ) {
 			logger.logPhotoSkipping( remoteUser, remotePhotoId, "Can not extract photo category from page content." );
 			return newArrayList();
@@ -407,17 +408,16 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoData> result = newArrayList( );
 
-		int photoNumberInSeries = 1;
 
 		final int total = remotePhotoImages.size();
-		int counter = 1;
+		int photoNumberInSeries = 1;
 
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoImages ) {
 
-			logger.logCollectingRemotePhotoData( remotePhotoId, remotePhotoSiteImage.getImageUrl() );
+			logger.logCollectingRemotePhotoDataForImage( remoteUser.getId(), remotePhotoId, remotePhotoSiteImage.getImageUrl() );
 
 			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remotePhotoId, photosightCategory );
-			final String photoName = remotePhotoSitePageContentDataExtractor.extractPhotoName( photoPageContent );
+			final String photoName = remotePhotoSitePageContentDataExtractor.extractPhotoName( photoCardPageContent );
 
 			if ( remotePhotoSiteImage.hasSeries() ) {
 				remotePhotoData.setName( String.format( "%s #%d", photoName, photoNumberInSeries ) );
@@ -430,42 +430,27 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				remotePhotoData.setName( photoName );
 			}
 
-			final Date uploadTime = remotePhotoSitePageContentDataExtractor.extractPhotoUploadTime( photoPageContent, services );
+			final Date uploadTime = remotePhotoSitePageContentDataExtractor.extractPhotoUploadTime( photoCardPageContent, services );
 			if ( uploadTime != null ) {
 				remotePhotoData.setUploadTime( uploadTime );
 			} else {
 				remotePhotoData.setUploadTime( services.getRandomUtilsService().getRandomDate( firstPhotoUploadTime, services.getDateUtilsService().getCurrentTime() ) );
-
-				/*final TranslatableMessage translatableMessage1 = new TranslatableMessage( "$1: can not get upload time from remote photo page. Random time is used.", services )
-					.string( remoteContentHelper.getPhotoCardLink( remotePhotoSitePhoto ) )
-					;
-				job.addJobRuntimeLogMessage( translatableMessage1 );*/
+				logger.logErrorGettingPhotoUploadTime( remoteUser.getId(), remotePhotoId );
 			}
 
 			remotePhotoData.setRemotePhotoSiteImage( remotePhotoSiteImage );
 			remotePhotoData.setNumberInSeries( photoNumberInSeries );
 
 			if ( importParameters.isImportComments() ) {
-				final List<String> comments = remotePhotoSitePageContentDataExtractor.extractComments( photoPageContent );
+				final List<String> comments = remotePhotoSitePageContentDataExtractor.extractComments( photoCardPageContent );
 				remotePhotoData.setComments( comments );
 			}
 
 			remotePhotoData.setCached( false );
 
-			log.debug( String.format( "Photo %d has been downloaded from remote photo site", remotePhotoData.getPhotoId() ) );
-
-			final TranslatableMessage translatableMessage2 = new TranslatableMessage( "$1 / $2 Got data of '$3': $4 of $5, photo category: $6", services )
-				.addIntegerParameter( counter )
-				.addIntegerParameter( total )
-				.string( remoteContentHelper.getRemotePhotoSiteHost() )
-				.string( remoteContentHelper.getPhotoCardLink( remotePhotoData ) )
-				.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
-				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoData.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), services.getRemotePhotoCategoryService() ) )
-				;
-			job.addJobRuntimeLogMessage( translatableMessage2 );
-			counter++;
-
 			result.add( remotePhotoData );
+
+			logger.logSuccessDataCollectingOfRemotePhoto( photoNumberInSeries, total, remotePhotoData, remoteUser, importParameters.getLanguage() );
 
 			photoNumberInSeries++;
 		}

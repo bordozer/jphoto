@@ -183,8 +183,8 @@
 	</translation>
 
 	<translation>
-		<nerd>$1: can not get upload time from remote photo page. Random time is used.</nerd>
-		<ru><![CDATA[$1: время загрузки работы определить не удалось. Будет использовано случайное.]]></ru>
+		<nerd>Can not get upload time from remote photo page ( $1 ). Random time is used.</nerd>
+		<ru><![CDATA[Время загрузки работы определить не удалось ( $1 ). Выбрано случайное время.]]></ru>
 	</translation>
 
 	<translation>
@@ -192,10 +192,10 @@
 		<ru><![CDATA[Файл '$1' содержит неизвестный раздел удаленного фото сайта '$2'. Совет: После удаления файла, импорт будет выполнен снова, что, возможно, исправит проблему]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd>Collecting data of remote photo site photo #$1 ( $2 )</nerd>
-		<ru><![CDATA[Сбор данных о фотографии #$1 ( $2 )]]></ru>
-	</translation>-->
+	<translation>
+		<nerd>Collecting data of remote photo site photo $1: $2</nerd>
+		<ru><![CDATA[Сбор данных о фотографии '$1': $2]]></ru>
+	</translation>
 
 	<translation>
 		<nerd>$1 / $2: Getting image '$3' content</nerd>
