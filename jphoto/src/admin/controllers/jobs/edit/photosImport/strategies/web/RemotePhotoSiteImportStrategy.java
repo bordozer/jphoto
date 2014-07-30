@@ -119,12 +119,12 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
-			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos, user );
-			final List<RemotePhotoData> notImportedPhotosFromPage = remoteNotImportedPhotos.getRemotePhotoDatas();
+			final List<RemotePhotoData> notImportedPhotosFromPage = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos );
 
 			filterOutPhotosWithWrongCategories( notImportedPhotosFromPage );
 
 			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, notImportedPhotosFromPage, cacheUserPhotos );
+
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
@@ -326,7 +326,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return false;
 	}
 
-	private RemotePhotoSitePhotosFromPageToImport collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas, final User user ) throws IOException {
+	private List<RemotePhotoData> collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) throws IOException {
 
 		final List<RemotePhotoData> result = newArrayList();
 
@@ -365,7 +365,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		}
 
-		return new RemotePhotoSitePhotosFromPageToImport( result, false );
+		return result;
 	}
 
 	private RemotePhotoData getCachedRemotePhotos( final int remotePhotoSitePhotoId, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) {
@@ -723,25 +723,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		job.addJobRuntimeLogMessage( translatableMessage );
 
 		return user;
-	}
-
-	private class RemotePhotoSitePhotosFromPageToImport {
-
-		private final List<RemotePhotoData> remotePhotoDatas;
-		private final boolean breakImportAfterThisPageProcessed;
-
-		private RemotePhotoSitePhotosFromPageToImport( final List<RemotePhotoData> remotePhotoDatas, final boolean breakImportAfterThisPageProcessed ) {
-			this.remotePhotoDatas = remotePhotoDatas;
-			this.breakImportAfterThisPageProcessed = breakImportAfterThisPageProcessed;
-		}
-
-		public List<RemotePhotoData> getRemotePhotoDatas() {
-			return remotePhotoDatas;
-		}
-
-		public boolean isBreakImportAfterThisPageProcessed() {
-			return breakImportAfterThisPageProcessed;
-		}
 	}
 }
 
