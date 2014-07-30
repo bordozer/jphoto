@@ -65,7 +65,7 @@ public class UserTeamMember extends AbstractBaseEntity implements Nameable, Favo
 
 		// TODO
 		/*if ( teamMemberUser != null ) {
-			teamMemberName = EntityLinkUtilsService.getUserCardLink( teamMemberUser, teamMemberName );
+			teamMemberName = EntityLinkUtilsService.getRemoteUserCardLink( teamMemberUser, teamMemberName );
 		}*/
 		return String.format( "%s ( %s )", StringUtilities.escapeHtml( teamMemberName ), teamMemberType.getName() ); // TODO: translate teamMemberType.getName()
 	}

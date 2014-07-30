@@ -29,6 +29,7 @@ import utils.StringUtilities;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -104,21 +105,19 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		while ( !job.isFinished() && !job.hasJobFinishedWithAnyResult() && page <= userPagesToProcessCount ) {
 
-			// log.debug( String.format( "Getting page %d context of %s", page, remoteContentHelper.getUserCardLink( remoteUser ) ) );
-
 			final List<Integer> collectedRemotePhotoIds = collectPhotoIdsFromPage( remoteUser, page );
-
-			if ( collectedRemotePhotoIds.size() == 0 ) {
-				logger.logNoPhotosOnPageFound( remoteUser, page );
-
-				continue;
-			}
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			filterOutAlreadyDownLoadedPhotos( remoteUser, collectedRemotePhotoIds, user );
+			if ( collectedRemotePhotoIds.size() == 0 ) {
+				logger.logNoPhotosFoundOnPage( remoteUser, page );
+
+				continue;
+			}
+
+			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
 			final RemotePhotoSitePhotosFromPageToImport remoteNotImportedPhotos = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos, user );
 			final List<RemotePhotoData> notImportedPhotosFromPage = remoteNotImportedPhotos.getRemotePhotoDatas();
@@ -147,7 +146,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				importComments( entries );
 			}
 
-			if ( remoteNotImportedPhotos.isBreakImportAfterThisPageProcessed() ) {
+			if ( breakImportAfterThisPageProcessed ) {
 				job.increment( userPagesToProcessCount - page + 1 );
 				return;
 			}
@@ -293,33 +292,35 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return result;
 	}
 
-	private boolean filterOutAlreadyDownLoadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {
+	private boolean filterOutAlreadyDownloadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {
 
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
-		final String remotePhotoSiteUserPageLink = remoteContentHelper.getUserCardLink( remoteUser );
+		final String remoteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
 
-		final List<Integer> result = newArrayList();
-
-		for ( final int remotePhotoId : remotePhotoIds ) {
+		final Iterator<Integer> iterator = remotePhotoIds.iterator();
+		while ( iterator.hasNext() ) {
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
+			final int remotePhotoId = iterator.next();
+
 			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoId ) ) {
 
 				if ( importParameters.isBreakImportIfAlreadyImportedPhotoFound() ) {
-					logger.logSkippingTheRestPhotosBecauseAlreadyImportedPhotoFound( remotePhotoSiteUserPageLink, remotePhotoId );
+
+					logger.logSkippingTheRestPhotosBecauseAlreadyImportedPhotoFound( remoteUserPageLink, remotePhotoId );
+
+					iterator.remove();
 
 					return true;
 				}
 
-				logger.logSkippingPhotoImportBecauseItHasBeenAlreadyImported( remotePhotoSiteUserPageLink, remotePhotoId );
+				logger.logSkippingPhotoImportBecauseItHasBeenAlreadyImported( remoteUserPageLink, remotePhotoId );
 
-				continue;
+				iterator.remove();
 			}
-
-			result.add( remotePhotoId );
 		}
 
 		return false;
@@ -327,11 +328,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private RemotePhotoSitePhotosFromPageToImport collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas, final User user ) throws IOException {
 
-		final JobHelperService jobHelperService = getServices().getJobHelperService();
-
 		final List<RemotePhotoData> result = newArrayList();
 
-		final String remotePhotoSiteUserPageLink = remoteContentHelper.getUserCardLink( remoteUser );
+		final String remotePhotoSiteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
 
 		for ( final int remotePhotoSitePhotoId : remotePhotoSitePhotosIds ) {
 
@@ -383,11 +382,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final String remotePhotoSiteUserName = remoteContentHelper.extractUserNameFromRemoteSite( remoteUser );
 
 		if ( StringUtils.isEmpty( remotePhotoSiteUserName ) ) {
-			final String message = String.format( "Can not extract a name of a remote photo site user #%s from a page content. Photos import of the user will be skipped.", remoteContentHelper.getUserCardLink( remoteUser ) );
+			final String message = String.format( "Can not extract a name of a remote photo site user #%s from a page content. Photos import of the user will be skipped.", remoteContentHelper.getRemoteUserCardLink( remoteUser ) );
 			log.error( message );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Can not extract a name of a remote photo site user #$1 from page content. Photos import of the user will be skipped.", services )
-				.string( remoteContentHelper.getUserCardLink( remoteUser ) )
+				.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 		}
@@ -579,7 +578,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				.addIntegerParameter( total )
 				.string( remoteContentHelper.getRemotePhotoSiteHost() )
 				.string( remoteContentHelper.getPhotoCardLink( remotePhotoData ) )
-				.string( remoteContentHelper.getUserCardLink( remoteUser ) )
+				.string( remoteContentHelper.getRemoteUserCardLink( remoteUser ) )
 				.string( remoteContentHelper.getPhotoCategoryLink( remotePhotoData.getRemotePhotoSiteCategory(), services.getEntityLinkUtilsService(), services.getGenreService(), importParameters.getLanguage(), services.getRemotePhotoCategoryService() ) )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage2 );

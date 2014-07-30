@@ -58,7 +58,7 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		throw new IllegalArgumentException( String.format( "Illegal web photos import source: '%s'", importSource ) );
 	}
 
-	public String getUserCardLink( final RemoteUser remoteUser ) {
+	public String getRemoteUserCardLink( final RemoteUser remoteUser ) {
 
 		return String.format( "<a href='%s' target='_blank'>%s</a> ( #<b>%s</b> )"
 			, getUserCardUrl( remoteUser.getId(), 1 )

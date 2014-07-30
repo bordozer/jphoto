@@ -90,8 +90,8 @@ public class RankVotingJob extends AbstractJob {
 			/*final Language language = getLanguage();
 			addJobRuntimeLogMessage( services.getTranslatorService().translate( "User $1 has voted for $2's rank in $3 ( $4 )"
 				, language
-				, entityLinkUtilsService.getUserCardLink( votingUser, language )
-				, entityLinkUtilsService.getUserCardLink( beingVotedUser, language )
+				, entityLinkUtilsService.getRemoteUserCardLink( votingUser, language )
+				, entityLinkUtilsService.getRemoteUserCardLink( beingVotedUser, language )
 				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, language )
 				, String.valueOf( randomVotingPoints ) )
 			);*/
