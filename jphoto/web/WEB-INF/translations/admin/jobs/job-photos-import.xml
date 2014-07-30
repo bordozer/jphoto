@@ -153,8 +153,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Found in the local cache: $1</nerd>
-		<ru><![CDATA[Фотография найдена в локальном кеше: $1]]></ru>
+		<nerd>$1: Found in the local cache: $2</nerd>
+		<ru><![CDATA[$1: Фотография найдена в локальном кеше: $2]]></ru>
 	</translation>
 
 	<translation>

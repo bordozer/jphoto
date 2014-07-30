@@ -260,10 +260,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return false;
 	}
 
-	private List<RemotePhotoData> collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) throws IOException {
+	private List<RemotePhotoData> collectRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoSitePhotosIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
 
 		final List<RemotePhotoData> result = newArrayList();
 
+		final int delayBetweenRequest = importParameters.getDelayBetweenRequest();
 		final String remotePhotoSiteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
 
 		for ( final int remotePhotoSitePhotoId : remotePhotoSitePhotosIds ) {
@@ -272,37 +273,31 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				break;
 			}
 
-			final RemotePhotoData cachedRemotePhotoData = getCachedRemotePhotos( remotePhotoSitePhotoId, cachedLocallyRemotePhotoDatas );
+			final RemotePhotoData cachedRemotePhotoData = findRemotePhotoInCache( remotePhotoSitePhotoId, cachedRemotePhotosData );
 
 			if ( cachedRemotePhotoData != null ) {
-
 				result.add( cachedRemotePhotoData );
+				logger.logRemotePhotoHasBeenFoundInTheCache( remotePhotoSiteUserPageLink, remoteContentHelper.getPhotoCardLink( cachedRemotePhotoData ) );
 
-				log.debug( String.format( "Photo %d of %s has been found in the local cache.", remotePhotoSitePhotoId, remotePhotoSiteUserPageLink ) );
-
-				final TranslatableMessage translatableMessage = new TranslatableMessage( "Found in the local cache: $1", services )
-					.string( remoteContentHelper.getPhotoCardLink( cachedRemotePhotoData ) )
-					;
-				job.addJobRuntimeLogMessage( translatableMessage );
-			} else {
-				final int delayBetweenRequest = importParameters.getDelayBetweenRequest();
-				if ( delayBetweenRequest > 0 ) {
-					log.debug( String.format( "Waiting %s secs", delayBetweenRequest ) );
-					try {
-						Thread.sleep( delayBetweenRequest * 1000 );
-					} catch ( InterruptedException e ) {
-						log.error( e );
-					}
-				}
-
-				result.addAll( makeImportPhotoFromRemotePhotoSite( remoteUser, remotePhotoSitePhotoId ) );
+				continue;
 			}
+
+			if ( delayBetweenRequest > 0 ) {
+				log.debug( String.format( "Waiting %s secs", delayBetweenRequest ) );
+				try {
+					Thread.sleep( delayBetweenRequest * 1000 );
+				} catch ( InterruptedException e ) {
+					log.error( e );
+				}
+			}
+
+			result.addAll( makeImportPhotoFromRemotePhotoSite( remoteUser, remotePhotoSitePhotoId ) );
 		}
 
 		return result;
 	}
 
-	private RemotePhotoData getCachedRemotePhotos( final int remotePhotoSitePhotoId, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) {
+	private RemotePhotoData findRemotePhotoInCache( final int remotePhotoSitePhotoId, final List<RemotePhotoData> cachedLocallyRemotePhotoDatas ) {
 		for ( final RemotePhotoData cachedLocallyRemotePhotoData : cachedLocallyRemotePhotoDatas ) {
 			if ( cachedLocallyRemotePhotoData.getPhotoId() == remotePhotoSitePhotoId ) {
 				return cachedLocallyRemotePhotoData;

@@ -136,6 +136,18 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
+	public void logRemotePhotoHasBeenFoundInTheCache( final String remotePhotoSiteUserPageLink, final String photoCardLink ) {
+		new LogMessenger() {
+			@Override
+			TranslatableMessage getMessage() {
+				return new TranslatableMessage( "$1: Found in the local cache: $2", services )
+					.string( remotePhotoSiteUserPageLink )
+					.string( photoCardLink )
+					;
+			}
+		}.log();
+	}
+
 	private abstract class LogMessenger {
 
 		private final LogHelper log = new LogHelper( PhotosImportLogger.class );
