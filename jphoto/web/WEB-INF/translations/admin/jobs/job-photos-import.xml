@@ -218,6 +218,41 @@
 	</translation>
 
 	<translation>
+		<nerd>Remote photos import: $1: starting import</nerd>
+		<ru><![CDATA[$1: начат импорт]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Remote photos import: $1: error creating an local user</nerd>
+		<ru><![CDATA[$1: ошибка создания локального пользователя. Ипорт работ пользователя не выполнен.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
