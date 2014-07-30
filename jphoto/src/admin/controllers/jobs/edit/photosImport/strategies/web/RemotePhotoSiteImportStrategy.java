@@ -85,6 +85,35 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 	}
 
+	@Override
+	public int calculateTotalPagesToProcess( final int totalJopOperations ) throws IOException {
+
+		int totalPages = 0;
+
+		final List<String> remotePhotoSiteUsersIds = importParameters.getRemoteUserIds();
+		for ( final String remotePhotoSiteUserId : remotePhotoSiteUsersIds ) {
+
+			final String userPageContent = remoteContentHelper.getUserPageContent( 1, remotePhotoSiteUserId );
+
+			if ( StringUtils.isEmpty( userPageContent ) ) {
+				logger.logErrorGettingUserPagesCount( remotePhotoSiteUserId );
+
+				continue;
+			}
+
+			final int userPagesCount = remotePhotoSitePageContentDataExtractor.getRemoteUserPagesCount( userPageContent, remotePhotoSiteUserId );
+			totalPages += userPagesCount;
+
+			logger.logGettingUserPagesCount( remotePhotoSiteUserId, userPagesCount, totalPages );
+
+			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
+				break;
+			}
+		}
+
+		return totalPages;
+	}
+
 	private void importRemotePhotoSiteUserPhotos( final RemoteUser remoteUser ) throws IOException, SaveToDBException {
 
 		logger.logUserImportImportStart( remoteUser );
@@ -178,35 +207,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		return collectUserPhotosIdsFromPage( remoteUser.getId(), userPageContent );
 	}
 
-	@Override
-	public int calculateTotalPagesToProcess( final int totalJopOperations ) throws IOException {
-
-		int totalPages = 0;
-
-		final List<String> remotePhotoSiteUsersIds = importParameters.getRemoteUserIds();
-		for ( final String remotePhotoSiteUserId : remotePhotoSiteUsersIds ) {
-
-			final String userPageContent = remoteContentHelper.getUserPageContent( 1, remotePhotoSiteUserId );
-
-			if ( StringUtils.isEmpty( userPageContent ) ) {
-				logger.logErrorGettingUserPagesCount( remotePhotoSiteUserId );
-
-				continue;
-			}
-
-			final int userPagesCount = remotePhotoSitePageContentDataExtractor.getRemoteUserPagesCount( userPageContent, remotePhotoSiteUserId );
-			totalPages += userPagesCount;
-
-			logger.logGettingUserPagesCount( remotePhotoSiteUserId, userPagesCount, totalPages );
-
-			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
-				break;
-			}
-		}
-
-		return totalPages;
-	}
-
 	private int getUserPagesToProcessCount( final RemoteUser remoteUser ) {
 
 		final String userFirstPageContent = remoteContentHelper.getUserPageContent( 1, remoteUser.getId() );
@@ -220,10 +220,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		logger.logUserPageCountGotSuccessfully( remoteUser, totalPagesQty );
 
 		return totalPagesQty;
-	}
-
-	public static String createLoginForRemotePhotoSiteUser( final String remotePhotoSiteUserId ) {
-		return String.format( "%s%s", REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX, remotePhotoSiteUserId );
 	}
 
 	private void filterOutPhotosWithWrongCategories( final List<RemotePhotoData> remotePhotoSitePagePhotos ) {
@@ -714,6 +710,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		job.addJobRuntimeLogMessage( translatableMessage );
 
 		return user;
+	}
+
+	public static String createLoginForRemotePhotoSiteUser( final String remotePhotoSiteUserId ) {
+		return String.format( "%s%s", REMOTE_PHOTO_SITE_USER_LOGIN_PREFIX, remotePhotoSiteUserId );
 	}
 }
 
