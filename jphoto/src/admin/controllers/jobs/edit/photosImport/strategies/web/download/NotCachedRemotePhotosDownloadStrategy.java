@@ -27,11 +27,13 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 
 	@Override
 	public List<RemotePhoto> download() throws IOException {
+
 		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remoteUser, remotePhotosData );
-		return downloadRemotePhotoSitePhotoAndCache( remotePhotosData );
+
+		return downloadAndCacheRemoteImages( remotePhotosData );
 	}
 
-	private List<RemotePhoto> downloadRemotePhotoSitePhotoAndCache( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
+	private List<RemotePhoto> downloadAndCacheRemoteImages( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
 
 		final int toAddCount = remotePhotoDatas.size();
 
@@ -57,7 +59,7 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 				continue;
 			}
 
-			final ImageToImport imageToImport = remotePhotoSiteCacheXmlUtils.createRemotePhotoCacheEntry( remotePhotoData, imageContent );
+			final ImageToImport imageToImport = remotePhotoSiteCacheXmlUtils.placeRemoteImageToCache( remotePhotoData, imageContent );
 
 			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
 

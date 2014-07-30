@@ -205,7 +205,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		}
 	}
 
-	public ImageToImport createRemotePhotoCacheEntry( final RemotePhotoData remotePhotoData, final String imageContent ) throws IOException {
+	public ImageToImport placeRemoteImageToCache( final RemotePhotoData remotePhotoData, final String imageContent ) throws IOException {
 
 		final RemotePhotoSiteCategory remotePhotoSiteCategory = remotePhotoData.getRemotePhotoSiteCategory();
 
