@@ -119,11 +119,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			final boolean breakImportAfterThisPageProcessed = filterOutAlreadyDownloadedPhotos( remoteUser, collectedRemotePhotoIds, user );
 
-			final List<RemotePhotoData> notImportedPhotosFromPage = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos );
+			final List<RemotePhotoData> photosToImportData = collectRemotePhotosData( remoteUser, collectedRemotePhotoIds, cacheUserPhotos );
 
-			filterOutPhotosWithWrongCategories( notImportedPhotosFromPage );
+			filterOutPhotosWithWrongCategories( photosToImportData );
 
-			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, notImportedPhotosFromPage, cacheUserPhotos );
+			final List<RemotePhotoSitePhotoDiskEntry> remotePhotoSitePhotoDiskEntries = getRemotePhotoSitePhotoDiskEntries( remoteUser, photosToImportData, cacheUserPhotos );
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
