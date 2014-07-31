@@ -253,8 +253,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1: There are $2 photo(s) found on page $3</nerd>
+		<ru><![CDATA[$1: $2 работ(ы) найдено на странице $3]]></ru>
 	</translation>
 
 	<translation>
