@@ -66,9 +66,6 @@ public class PhotoServiceImpl implements PhotoService {
 	private PhotoCommentService photoCommentService;
 
 	@Autowired
-	private CacheService<PhotoInfo> cacheServicePhotoInfo;
-
-	@Autowired
 	private NotificationService notificationService;
 
 	@Autowired
@@ -176,18 +173,16 @@ public class PhotoServiceImpl implements PhotoService {
 		final File userFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photo, photoFile );
 		photo.setPhotoImageFile( userFile );
 
-		if ( photo.getPhotoImageSourceType() == PhotoImageSourceType.FILE ) {
-			if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
-				try {
-					if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
-						throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
-					}
-				} catch ( final InterruptedException e ) {
-					log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
-					delete( photo.getId() );
-
-					return;
+		if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
+			try {
+				if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
+					throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
 				}
+			} catch ( final InterruptedException e ) {
+				log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
+				delete( photo.getId() );
+
+				return;
 			}
 		}
 
@@ -203,7 +198,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public void save( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
+	public void updatePhoto( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
 		if ( ! save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
 		}

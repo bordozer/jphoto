@@ -25,6 +25,7 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	private File photoImageFile;
 	private long fileSize;
+	private String photoImageUrl;
 
 	private Date uploadTime;
 
@@ -54,6 +55,7 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 		keywords = photo.getKeywords();
 		description = photo.getDescription();
 		photoImageFile = photo.getPhotoImageFile();
+		photoImageUrl = photo.getPhotoImageUrl();
 		fileSize = photo.getFileSize();
 		uploadTime = photo.getUploadTime();
 		containsNudeContent = photo.isContainsNudeContent();
@@ -116,6 +118,14 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	public void setPhotoImageFile( final File photoImageFile ) {
 		this.photoImageFile = photoImageFile;
+	}
+
+	public String getPhotoImageUrl() {
+		return photoImageUrl;
+	}
+
+	public void setPhotoImageUrl( final String photoImageUrl ) {
+		this.photoImageUrl = photoImageUrl;
 	}
 
 	public long getFileSize() {

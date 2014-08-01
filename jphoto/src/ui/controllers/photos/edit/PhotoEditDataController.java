@@ -218,7 +218,7 @@ public class PhotoEditDataController {
 		if ( model.isNew() ) {
 			photoService.uploadNewPhoto( photo, model.getTempPhotoFile(), photoTeam, photoAlbums );
 		} else {
-			photoService.save( photo, photoTeam, photoAlbums );
+			photoService.updatePhoto( photo, photoTeam, photoAlbums );
 		}
 
 		if ( model.isNew() ) {

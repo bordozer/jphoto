@@ -24,8 +24,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException;
 
-	// TODO: make transactional
-	void save( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
+	void updatePhoto( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
 
 	@Deprecated
 	SqlSelectResult<Photo> load( final SqlSelectQuery selectQuery );

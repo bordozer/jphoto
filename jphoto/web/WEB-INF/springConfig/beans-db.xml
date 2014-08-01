@@ -65,6 +65,11 @@
 	</aop:config>
 
 	<aop:config>
+		<aop:pointcut id="updatePhoto" expression="execution(* core.services.photo.PhotoService.updatePhoto(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="updatePhoto"/>
+	</aop:config>
+
+	<aop:config>
 		<aop:pointcut id="sendPrivateMessageAjax" expression="execution(* ui.services.ajax.AjaxService.sendPrivateMessageAjax(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="sendPrivateMessageAjax"/>
 	</aop:config>
