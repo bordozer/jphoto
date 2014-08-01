@@ -157,7 +157,8 @@ public class PhotoServiceImpl implements PhotoService {
 	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
 		switch ( photo.getPhotoImageSourceType() ) {
-			case FILE:
+
+			case FILE_SYSTEM:
 				final User photoAuthor = userService.load( photo.getUserId() );
 
 				final File userPhotoFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photoImageFile );
@@ -174,7 +175,7 @@ public class PhotoServiceImpl implements PhotoService {
 				}
 
 				break;
-			case WEB:
+			default:
 				break;
 		}
 

@@ -1,5 +1,6 @@
 package core.services.dao;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.enums.PhotoActionAllowance;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
@@ -7,7 +8,6 @@ import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.img.Dimension;
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageSourceType;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -267,7 +267,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setImportId( rs.getInt( TABLE_COLUMN_IMPORT_ID ) );
 
 			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
-			result.setPhotoImageSourceType( PhotoImageSourceType.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) ) );
+			result.setPhotoImageSourceType( PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) ) );
 
 			return result;
 		}

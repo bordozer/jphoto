@@ -96,6 +96,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setImportId( photoToImportData.getImportId() );
 
 		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
+		photo.setPhotoImageSourceType( imageToImport.getPhotosImportSource() );
 
 		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 
