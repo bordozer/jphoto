@@ -50,9 +50,17 @@ public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecuti
 
 		loadSchedulerTasks();
 
-		if ( systemVarsService.isSchedulerEnabled() && configurationService.getBoolean( ConfigurationKey.SYSTEM_AUTO_START_SCHEDULER ) ) {
-			scheduler.start();
+		if ( ! systemVarsService.isSchedulerEnabled() ) {
+			log.info( "THE SCHEDULER IS DISABLED" );
+			return;
 		}
+
+		if ( ! configurationService.getBoolean( ConfigurationKey.SYSTEM_AUTO_START_SCHEDULER ) ) {
+			log.info( "THE SCHEDULER: AUTOSTART IS SWITCHED OFF" );
+			return;
+		}
+
+		scheduler.start();
 	}
 
 	@Override
