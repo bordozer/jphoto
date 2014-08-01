@@ -57,7 +57,8 @@ public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecuti
 
 	@Override
 	public void start() throws SchedulerException {
-		scheduler.start(); // When you call start() after standby(), any misfires, which appear while standby, will be ignored.
+		// When you call start() after standby(), any misfires, which appear while standby, will be ignored.
+		scheduler.start();
 	}
 
 	@Override
