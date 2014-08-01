@@ -166,7 +166,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 				photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
 				break;
 			default:
-				photoInfo.setPhotoImgUrl( photo.getPhotoImageUrl() );
+				photoInfo.setPhotoImgUrl( String.format( "http://%s", photo.getPhotoImageUrl() ) );
 				break;
 		}
 		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
