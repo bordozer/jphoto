@@ -1,6 +1,7 @@
 package ui.controllers.photos.groupoperations;
 
 import core.general.photo.group.PhotoGroupOperationType;
+import core.services.security.SecurityService;
 import core.services.system.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,8 @@ public class PhotoGroupOperationController {
 
 	@RequestMapping( method = RequestMethod.POST, value = "/" )
 	public String showSelectedPhotos( final @ModelAttribute( MODEL_NAME ) PhotoGroupOperationModel model, final HttpServletRequest request ) {
+
+		// TODO: validate operations?
 
 		model.clear();
 
