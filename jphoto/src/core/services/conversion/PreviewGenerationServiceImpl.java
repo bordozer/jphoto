@@ -35,6 +35,7 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 
 	@Override
 	public File generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+
 		final Photo photo = photoService.load( photoId );
 
 		userPhotoFilePathUtilsService.createUserPhotoPreviewDirIfNeed( photo.getUserId() );
@@ -46,13 +47,16 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 
 	@Override
 	public File generatePreviewSync( final User photoAuthor, final File photoFile ) throws IOException, InterruptedException {
+
 		userPhotoFilePathUtilsService.createUserPhotoPreviewDirIfNeed( photoAuthor.getId() );
 
-		final File photoPreviewFile = userPhotoFilePathUtilsService.generatePhotoPreviewName( photoAuthor.getId() );
+		synchronized ( photoAuthor.getName() ) {
 
-		generatePreviewSync( photoFile, photoPreviewFile, getConversionOptions() );
+			final File photoPreviewFile = userPhotoFilePathUtilsService.generatePhotoPreviewName( photoAuthor.getId() );
+			generatePreviewSync( photoFile, photoPreviewFile, getConversionOptions() );
 
-		return photoPreviewFile;
+			return photoPreviewFile;
+		}
 	}
 
 	@Override

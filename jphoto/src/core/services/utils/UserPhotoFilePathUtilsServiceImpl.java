@@ -11,6 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtilsService {
 
@@ -58,7 +62,40 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public File generatePhotoPreviewName( final int userId ) {
-		return new File( getUserPhotoPreviewDir( userId ).getPath(), String.format( "%s", dateUtilsService.getCurrentTime().getTime() ) );
+		// Invoke from synchronised context only
+
+		final File userPhotoPreviewDir = getUserPhotoPreviewDir( userId );
+
+		class PreviewNameGenerator {
+
+			private File generate( final int number ) {
+				return new File( userPhotoPreviewDir.getPath(), String.format( "%d_%d", userId, number ) );
+			}
+
+			private boolean doesPreviewWithNumberExists( final int number ) {
+				return generate( number ).exists();
+			}
+		}
+
+		final PreviewNameGenerator generator = new PreviewNameGenerator();
+
+		final File[] existingPreviews = userPhotoPreviewDir.listFiles();
+
+		if ( existingPreviews == null ) {
+			return generator.generate( 1 );
+		}
+
+		int number = existingPreviews.length + 1;
+
+		do {
+
+			if ( ! generator.doesPreviewWithNumberExists( number ) ) {
+				return generator.generate( number );
+			}
+
+			number++;
+
+		} while ( true );
 	}
 
 	@Override
