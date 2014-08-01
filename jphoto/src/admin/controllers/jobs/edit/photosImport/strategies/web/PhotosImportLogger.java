@@ -101,11 +101,11 @@ public class PhotosImportLogger {
 		}.log();
 	}
 
-	public void logGettingUserPagesCount( final String remotePhotoSiteUserId, final int userPagesCount, final int totalPages ) {
+	public void logUserPagesCountToProcessHasGotFromThePageContext( final String remotePhotoSiteUserId, final int userPagesCount, final int totalPages ) {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
-				return new TranslatableMessage( "Getting remote photo site user #$1 pages qty: $2 ( total: $3 )", services )
+				return new TranslatableMessage( "$1: user pages count to process has got from the page context - $2 ( total: $3 )", services )
 					.string( remotePhotoSiteUserId )
 					.addIntegerParameter( userPagesCount )
 					.addIntegerParameter( totalPages )

@@ -258,8 +258,8 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>$1: user pages count to process has got from the page context - $2 ( total: $3 )</nerd>
+		<ru><![CDATA[$1: определено к-во страниц пользователя - $2 ( всего: $3 )]]></ru>
 	</translation>
 
 	<translation>

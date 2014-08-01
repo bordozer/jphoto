@@ -98,7 +98,14 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
 		photo.setPhotoImageSourceType( imageToImport.getPhotosImportSource() );
 
-		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), imageToImport.getPhotoImageUrl(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
+		switch ( photo.getPhotoImageSourceType() ) {
+			case FILE_SYSTEM:
+				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
+				break;
+			default:
+				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), imageToImport.getPhotoImageUrl(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
+				break;
+		}
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 

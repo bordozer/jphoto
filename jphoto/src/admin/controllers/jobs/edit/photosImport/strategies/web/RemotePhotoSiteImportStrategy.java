@@ -106,7 +106,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final int userPagesCount = pageContentDataExtractor.getRemoteUserPagesCount( userPageContent, remotePhotoSiteUserId );
 			totalPages += userPagesCount;
 
-			logger.logGettingUserPagesCount( remotePhotoSiteUserId, userPagesCount, totalPages );
+			logger.logUserPagesCountToProcessHasGotFromThePageContext( remotePhotoSiteUserId, userPagesCount, totalPages );
 
 			if ( job.getGenerationMonitor().getStatus().isNotActive() ) {
 				break;
