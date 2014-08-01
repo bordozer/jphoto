@@ -1,5 +1,6 @@
 package ui.controllers.photos.card;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
@@ -108,7 +109,9 @@ public class PhotoCardController {
 
 		final Photo photo = photoService.load( photoId );
 
-		securityService.assertPhotoFileExists( photo );
+		if ( photo.getPhotoImageSourceType() == PhotosImportSource.FILE_SYSTEM ) {
+			securityService.assertPhotoFileExists( photo );
+		}
 
 		securityUIService.assertUserWantSeeNudeContent( EnvironmentContext.getCurrentUser(), photo, urlUtilsService.getPhotoCardLink( photoId ) );
 

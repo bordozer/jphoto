@@ -248,9 +248,19 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setKeywords( rs.getString( TABLE_COLUMN_KEYWORDS ) );
 			result.setDescription( rs.getString( TABLE_COLUMN_DESCRIPTION ) );
 
+
+			final PhotosImportSource photoImageSourceType = PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) );
+			result.setPhotoImageSourceType( photoImageSourceType );
+
 			final String fileName = rs.getString( TABLE_COLUMN_FILE_NAME );
-			final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
-			result.setPhotoImageFile( file );
+			switch ( photoImageSourceType ) {
+				case FILE_SYSTEM:
+					final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
+					result.setPhotoImageFile( file );
+					break;
+				default:
+					result.setPhotoImageUrl( fileName );
+			}
 			result.setFileSize( rs.getLong( TABLE_COLUMN_FILE_SIZE ) );
 
 			result.setUploadTime( rs.getTimestamp( TABLE_COLUMN_UPLOAD_TIME ) );
@@ -267,7 +277,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setImportId( rs.getInt( TABLE_COLUMN_IMPORT_ID ) );
 
 			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
-			result.setPhotoImageSourceType( PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) ) );
 
 			return result;
 		}

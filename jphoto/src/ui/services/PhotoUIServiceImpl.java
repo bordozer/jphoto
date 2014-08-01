@@ -161,7 +161,14 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 
 		photoInfo.setPhotoAwards( photoAwardService.getPhotoAwards( photoId ) );
 
-		photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
+		switch ( photo.getPhotoImageSourceType() ) {
+			case FILE_SYSTEM:
+				photoInfo.setPhotoImgUrl( userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
+				break;
+			default:
+				photoInfo.setPhotoImgUrl( photo.getPhotoImageUrl() );
+				break;
+		}
 		photoInfo.setPhotoPreviewImgUrl( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 
 		return photoInfo;
