@@ -4,6 +4,7 @@ import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
+import core.general.photo.PhotoImageSourceType;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.EmailNotificationType;
@@ -355,6 +356,8 @@ public class PhotoEditDataController {
 		photo.setNotificationEmailAboutNewPhotoComment( model.getSendNotificationEmailAboutNewPhotoComment() == YesNo.YES.getId() );
 		photo.setVotingAllowance( model.getVotingAllowance() );
 		photo.setAnonymousPosting( model.isAnonymousPosting() );
+
+		photo.setPhotoImageSourceType( PhotoImageSourceType.FILE );
 	}
 
 	private void assertPhotoExistsAndCurrentUserCanEditIt( final String _photoId ) {

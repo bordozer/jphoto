@@ -182,10 +182,7 @@ public class PhotoServiceImpl implements PhotoService {
 					throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
 				}
 			} catch ( final InterruptedException e ) {
-				final String message = String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() );
-
-				log.error( message );
-
+				log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
 				delete( photo.getId() );
 
 				return;
