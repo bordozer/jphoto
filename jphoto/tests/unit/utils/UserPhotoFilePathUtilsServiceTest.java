@@ -31,12 +31,13 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setUserId( userId );
 		photo.setName( "Photo name" );
 		photo.setPhotoImageFile( new File( "/photoDir", "photoFileName" ) );
+		photo.setPhotoPreviewName( "preview_name_saved_in_db.jpg" );
 
 		assertEquals( "photo/storage/path/111", userPhotoFilePathUtilsService.getUserPhotoDir( userId ).getPath() );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/", userPhotoFilePathUtilsService.getPhotoUrl( photo ) );
-		assertEquals( "photoFileName_preview.jpg", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ) );
-		assertEquals( "photo/storage/path/111/preview/photoFileName_preview.jpg", userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
+		assertEquals( "photo/storage/path/111/preview/111_1", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ).getPath() );
+		assertEquals( "photo/storage/path/111/preview/preview_name_saved_in_db.jpg", userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
 		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
 	}
