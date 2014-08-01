@@ -119,6 +119,9 @@ CREATE TABLE `photos` (
   `isAnonymousPosting` tinyint(1) DEFAULT '0',
   `userGenreRank` tinyint(4) DEFAULT NULL,
   `importId` bigint(20) DEFAULT NULL,
+  `image_width` smallint(6) NOT NULL,
+  `image_height` smallint(6) NOT NULL,
+  `imageSourceType` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`,`keywords`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_photos_genreId_genres_id` (`genreId`),
@@ -126,7 +129,7 @@ CREATE TABLE `photos` (
   KEY `idx_uploadTime` (`uploadTime`) USING BTREE,
   CONSTRAINT `fk_photos_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_photos_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=223435 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122136 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `comments` table :

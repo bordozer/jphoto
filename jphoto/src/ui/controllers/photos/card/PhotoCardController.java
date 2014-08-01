@@ -155,17 +155,7 @@ public class PhotoCardController {
 
 		model.setEntryMenu( entryMenuService.getPhotoMenu( photo, currentUser ) );
 
-		final File photoFile = photo.getFile();
-		Dimension originalDimension;
-		try {
-			originalDimension = imageFileUtilsService.getImageDimension( photoFile );
-		} catch ( IOException e ) {
-			log.error( String.format( "Can not get image dimension: '%s'", photoFile ) );
-			originalDimension = new Dimension( 1, 1 );
-		}
-		final Dimension dimension = imageFileUtilsService.resizePhotoImage( originalDimension );
-		model.setDimension( dimension );
-		model.setOriginalDimension( originalDimension );
+		model.setDimension( imageFileUtilsService.resizePhotoImage( photo.getImageDimension() ) );
 
 		return VIEW;
 	}

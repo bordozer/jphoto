@@ -5,8 +5,10 @@ import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoFile;
+import core.general.photo.PhotoImageSourceType;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -43,6 +45,9 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	public final static String TABLE_COLUMN_IS_ANONYMOUS_POSTING = "isAnonymousPosting";
 	public final static String TABLE_COLUMN_USER_GENRE_RANK = "userGenreRank";
 	public final static String TABLE_COLUMN_IMPORT_ID = "importId";
+	public final static String TABLE_COLUMN_IMAGE_WIDTH = "image_width";
+	public final static String TABLE_COLUMN_IMAGE_HEIGHT = "image_height";
+	public final static String TABLE_COLUMN_IMAGE_SOURCE_TYPE = "imageSourceType";
 
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 	public static final Map<Integer, String> updatableFields = newLinkedHashMap();
@@ -72,6 +77,9 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 15, TABLE_COLUMN_IS_ANONYMOUS_POSTING );
 		fields.put( 16, TABLE_COLUMN_USER_GENRE_RANK );
 		fields.put( 17, TABLE_COLUMN_IMPORT_ID );
+		fields.put( 18, TABLE_COLUMN_IMAGE_WIDTH );
+		fields.put( 19, TABLE_COLUMN_IMAGE_HEIGHT );
+		fields.put( 20, TABLE_COLUMN_IMAGE_SOURCE_TYPE );
 	}
 
 	static {
@@ -190,6 +198,10 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_USER_GENRE_RANK, entry.getUserGenreRank() );
 		paramSource.addValue( TABLE_COLUMN_IMPORT_ID, entry.getImportId() );
 
+		paramSource.addValue( TABLE_COLUMN_IMAGE_WIDTH, entry.getImageDimension().getWidth() );
+		paramSource.addValue( TABLE_COLUMN_IMAGE_HEIGHT, entry.getImageDimension().getHeight() );
+		paramSource.addValue( TABLE_COLUMN_IMAGE_SOURCE_TYPE, entry.getPhotoImageSourceType().getId() );
+
 		return paramSource;
 	}
 
@@ -266,6 +278,9 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setAnonymousPosting( rs.getBoolean( TABLE_COLUMN_IS_ANONYMOUS_POSTING ) );
 			result.setUserGenreRank( rs.getInt( TABLE_COLUMN_USER_GENRE_RANK ) );
 			result.setImportId( rs.getInt( TABLE_COLUMN_IMPORT_ID ) );
+
+			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
+			result.setPhotoImageSourceType( PhotoImageSourceType.getById( rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
 
 			return result;
 		}

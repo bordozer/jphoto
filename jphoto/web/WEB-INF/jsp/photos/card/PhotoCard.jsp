@@ -24,7 +24,7 @@
 <c:set var="photoInfoUrl" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoInfoLink( photoCardModel.getPhoto().getId() )%>"/>
 
 <c:set var="dimension" value="<%=photoCardModel.getDimension()%>"/>
-<c:set var="originalDimension" value="<%=photoCardModel.getOriginalDimension()%>"/>
+<c:set var="originalDimension" value="${photo.imageDimension}"/>
 
 <c:set var="commentDelay" value="<%=photoCardModel.getCommentDelay()%>"/>
 <c:set var="nextCommentTime" value="<%=photoCardModel.getUserNextCommentTime()%>"/>

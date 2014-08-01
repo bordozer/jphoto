@@ -2,6 +2,7 @@ package core.general.photo;
 
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractBaseEntity;
+import core.general.img.Dimension;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
@@ -38,6 +39,9 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	private int userGenreRank;
 	private int importId;
+
+	private Dimension imageDimension;
+	private PhotoImageSourceType photoImageSourceType;
 
 	public Photo() {
 	}
@@ -192,6 +196,22 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	public void setImportId( final int importId ) {
 		this.importId = importId;
+	}
+
+	public Dimension getImageDimension() {
+		return imageDimension;
+	}
+
+	public void setImageDimension( final Dimension imageDimension ) {
+		this.imageDimension = imageDimension;
+	}
+
+	public PhotoImageSourceType getPhotoImageSourceType() {
+		return photoImageSourceType;
+	}
+
+	public void setPhotoImageSourceType( final PhotoImageSourceType photoImageSourceType ) {
+		this.photoImageSourceType = photoImageSourceType;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package core.services.photo;
 
 import core.enums.PhotoActionAllowance;
+import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.base.PagingModel;
 import core.general.cache.CacheKey;
@@ -8,6 +9,7 @@ import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
+import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoFile;
 import core.general.photo.PhotoInfo;
@@ -32,6 +34,7 @@ import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
@@ -125,6 +128,9 @@ public class PhotoServiceImpl implements PhotoService {
 	@Autowired
 	private PrivateMessageService privateMessageService;
 
+	@Autowired
+	private ImageFileUtilsService imageFileUtilsService;
+
 	private final LogHelper log = new LogHelper( PhotoServiceImpl.class );
 
 	@Override
@@ -154,6 +160,12 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
+
+		try {
+			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoFile ) );
+		} catch ( IOException e ) {
+			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoFile ) );
+		}
 
 		if ( ! save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
