@@ -2,7 +2,6 @@ package ui.controllers.photos.card;
 
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreview;
@@ -34,9 +33,6 @@ import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.SecurityUIService;
 import utils.NumberUtils;
 import utils.UserUtils;
-
-import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.PHOTOS_URL )
@@ -155,7 +151,7 @@ public class PhotoCardController {
 
 		model.setEntryMenu( entryMenuService.getPhotoMenu( photo, currentUser ) );
 
-		model.setDimension( imageFileUtilsService.resizePhotoImage( photo.getImageDimension() ) );
+		model.setShownDimension( imageFileUtilsService.resizePhotoImage( photo.getImageDimension() ) );
 
 		return VIEW;
 	}

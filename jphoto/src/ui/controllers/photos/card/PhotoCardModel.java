@@ -43,7 +43,7 @@ public class PhotoCardModel extends AbstractGeneralModel {
 
 	private List<Integer> rootCommentsIds;
 
-	private Dimension dimension;
+	private Dimension shownDimension;
 
 	public Photo getPhoto() {
 		return photo;
@@ -181,12 +181,12 @@ public class PhotoCardModel extends AbstractGeneralModel {
 		this.rootCommentsIds = rootCommentsIds;
 	}
 
-	public Dimension getDimension() {
-		return dimension;
+	public Dimension getShownDimension() {
+		return shownDimension;
 	}
 
-	public void setDimension( final Dimension dimension ) {
-		this.dimension = dimension;
+	public void setShownDimension( final Dimension shownDimension ) {
+		this.shownDimension = shownDimension;
 	}
 
 	@Override

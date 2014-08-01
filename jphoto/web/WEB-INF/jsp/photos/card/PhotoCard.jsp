@@ -23,7 +23,7 @@
 <c:set var="photoInfo" value="${photoCardModel.photoInfo}"/>
 <c:set var="photoInfoUrl" value="<%=ApplicationContextHelper.getUrlUtilsService().getPhotoInfoLink( photoCardModel.getPhoto().getId() )%>"/>
 
-<c:set var="dimension" value="<%=photoCardModel.getDimension()%>"/>
+<c:set var="shownDimension" value="<%=photoCardModel.getShownDimension()%>"/>
 <c:set var="originalDimension" value="${photo.imageDimension}"/>
 
 <c:set var="commentDelay" value="<%=photoCardModel.getCommentDelay()%>"/>
@@ -65,9 +65,9 @@
 
 	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? '#'.concat(photo.bgColor) : 'transparent'};">
 
-		<div style="width: ${dimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
+		<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
 			<a href="#" onclick="return false;">
-				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${dimension.width}" height="${dimension.height}"/>
+				<img id="photo_${photo.id}" src="${imageUrl}" alt="${photoNameEscaped}" title="${photoNameEscaped}" width="${shownDimension.width}" height="${shownDimension.height}"/>
 			</a>
 		</div>
 
