@@ -72,7 +72,9 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public void deletePhotoFileWithPreview( final Photo photo ) {
+
 		final File previewFile = new File( getUserPhotoPreviewDir( photo.getUserId() ).getPath(), photo.getPhotoPreviewName() );
+
 		if ( previewFile.exists() && previewFile.isFile() ) {
 			FileUtils.deleteQuietly( previewFile );
 		}
