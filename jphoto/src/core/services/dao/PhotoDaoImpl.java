@@ -7,7 +7,6 @@ import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.img.Dimension;
 import core.general.photo.Photo;
-import core.general.photo.PhotoFile;
 import core.general.photo.PhotoImageSourceType;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
@@ -80,6 +79,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 18, TABLE_COLUMN_IMAGE_WIDTH );
 		fields.put( 19, TABLE_COLUMN_IMAGE_HEIGHT );
 		fields.put( 20, TABLE_COLUMN_IMAGE_SOURCE_TYPE );
+		fields.put( 21, TABLE_COLUMN_FILE_SIZE );
 	}
 
 	static {
@@ -154,19 +154,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 				return new UserGenrePhotosQty( userId, genreId, getUserGenrePhotosQty( userId, genreId ) );
 			}
 		} ).getPhotosQty();
-	}
-
-	@Override
-	public boolean updatePhotoFile( final int photoId, final PhotoFile photoFile ) {
-		final String sql = String.format( "UPDATE %s SET %s=:fileName, %s=:fileSize WHERE %s=:photoId;"
-			, TABLE_PHOTOS, TABLE_COLUMN_FILE_NAME, TABLE_COLUMN_FILE_SIZE, ENTITY_ID );
-
-		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue( "photoId", photoId );
-		paramSource.addValue( "fileName", photoFile.getFile().getName() );
-		paramSource.addValue( "fileSize", photoFile.getFileSize() );
-
-		return jdbcTemplate.update( sql, paramSource ) > 0;
 	}
 
 	@Override
@@ -264,7 +251,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			final String fileName = rs.getString( TABLE_COLUMN_FILE_NAME );
 			final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
 			result.setPhotoImageFile( file );
-			result.setFileSize( rs.getInt( TABLE_COLUMN_FILE_SIZE ) );
+			result.setFileSize( rs.getLong( TABLE_COLUMN_FILE_SIZE ) );
 
 			result.setUploadTime( rs.getTimestamp( TABLE_COLUMN_UPLOAD_TIME ) );
 

@@ -72,13 +72,18 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public String generateUserPhotoPreviewFileName( final Photo photo ) {
-		return String.format( "%s_preview.jpg", FilenameUtils.getBaseName( photo.getPhotoImageFile().getName() ) );
+	public String generateUserPhotoPreviewFileName( final File photoImageFile ) {
+		return String.format( "%s_preview.jpg", FilenameUtils.getBaseName( photoImageFile.getName() ) );
+	}
+
+	@Override
+	public File getPhotoPreviewFile( final int userId, final File photoImageFile ) {
+		return new File( getUserPhotoPreviewDir( userId ), generateUserPhotoPreviewFileName( photoImageFile ) );
 	}
 
 	@Override
 	public File getPhotoPreviewFile( final Photo photo ) {
-		return new File( getUserPhotoPreviewDir( photo.getUserId() ), generateUserPhotoPreviewFileName( photo ) );
+		return getPhotoPreviewFile( photo.getUserId(), photo.getPhotoImageFile() );
 	}
 
 	@Override
@@ -92,7 +97,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public void deletePhotoFileWithPreview( final Photo photo ) {
-		final File previewFile = getPhotoPreviewFile( photo );
+		final File previewFile = getPhotoPreviewFile( photo.getUserId(), photo.getPhotoImageFile() );
 		if ( previewFile.exists() && previewFile.isFile() ) {
 			FileUtils.deleteQuietly( previewFile );
 		}

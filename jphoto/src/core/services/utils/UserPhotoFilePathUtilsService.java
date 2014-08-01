@@ -26,9 +26,11 @@ public interface UserPhotoFilePathUtilsService {
 
 	boolean isUserPhotoDirExist( int userId );
 
-	String generateUserPhotoPreviewFileName( Photo photo );
+	String generateUserPhotoPreviewFileName( final File photoImageFile );
 
-	File getPhotoPreviewFile( Photo photo );
+	File getPhotoPreviewFile( final int userId, final File photoImageFile );
+
+	File getPhotoPreviewFile( final Photo photo );
 
 	void createUserPhotoDirIfNeed( int userId );
 

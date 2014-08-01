@@ -10,9 +10,6 @@ import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.photo.PhotoFile;
-import core.general.photo.PhotoImageSourceType;
-import core.general.photo.PhotoInfo;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
 import core.general.user.UserPhotosByGenre;
@@ -157,34 +154,34 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
+	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
 		switch ( photo.getPhotoImageSourceType() ) {
 			case FILE:
 				final User photoAuthor = userService.load( photo.getUserId() );
 
-				final File userFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photoFile );
-				photo.setPhotoImageFile( userFile );
+				final File userPhotoFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photoImageFile );
+				photo.setPhotoImageFile( userPhotoFile );
+				photo.setFileSize( userPhotoFile.length() );
 
-				if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
-					try {
-						if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
-							throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
-						}
-					} catch ( final InterruptedException e ) {
-						FileUtils.deleteQuietly( photoFile );
-						throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoFile.getAbsolutePath() ) );
+				try {
+					if ( ! previewGenerationService.generatePreviewSync( photoAuthor, userPhotoFile ) ) {
+						throw new IOException( String.format( "Can not generate photo preview for '%s'", userPhotoFile.getCanonicalPath() ) );
 					}
+				} catch ( final InterruptedException e ) {
+					FileUtils.deleteQuietly( userPhotoFile );
+					throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoImageFile.getAbsolutePath() ) );
 				}
+
 				break;
 			case WEB:
 				break;
 		}
 
 		try {
-			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoFile ) );
+			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoImageFile ) );
 		} catch ( IOException e ) {
-			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoFile.getAbsolutePath() ) );
+			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoImageFile.getAbsolutePath() ) );
 		}
 
 		if ( ! save( photo ) ) {
@@ -199,6 +196,10 @@ public class PhotoServiceImpl implements PhotoService {
 		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
 			delete( photo.getId() );
 			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
+		}
+
+		switch ( photo.getPhotoImageSourceType() ) {
+
 		}
 	}
 
