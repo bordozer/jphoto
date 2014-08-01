@@ -51,7 +51,7 @@ public class DataHandlerController {
 
 		assertSuperAdminAccess();
 
-		return previewGenerationService.generatePreviewSync( photoId );
+		return previewGenerationService.generatePreviewSync( photoId ) != null;
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "photos/{photoId}/move-to-genre/{genreId}/", produces = "application/json" )

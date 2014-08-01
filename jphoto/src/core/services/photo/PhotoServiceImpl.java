@@ -86,19 +86,19 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private CacheService cacheService;
-	
+
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
 	private PhotoListCriteriasService photoListCriteriasService;
-	
+
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
-	
+
 	@Autowired
 	private PhotoSqlFilterService photoSqlFilterService;
-	
+
 	@Autowired
 	private PhotoCriteriasSqlService photoCriteriasSqlService;
 
@@ -156,65 +156,54 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
-		switch ( photo.getPhotoImageSourceType() ) {
+		final User photoAuthor = userService.load( photo.getUserId() );
 
-			case FILE_SYSTEM:
-				final User photoAuthor = userService.load( photo.getUserId() );
-
-				final File userPhotoFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photoImageFile );
-				photo.setPhotoImageFile( userPhotoFile );
-				photo.setFileSize( userPhotoFile.length() );
-
-				try {
-					if ( ! previewGenerationService.generatePreviewSync( photoAuthor, userPhotoFile ) ) {
-						throw new IOException( String.format( "Can not generate photo preview for '%s'", userPhotoFile.getCanonicalPath() ) );
-					}
-				} catch ( final InterruptedException e ) {
-					FileUtils.deleteQuietly( userPhotoFile );
-					throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoImageFile.getAbsolutePath() ) );
-				}
-
-				break;
-			default:
-				break;
-		}
+		final File copiedToUserFolderFile = userPhotoFilePathUtilsService.copyPhotoImageFileToUserFolder( photoAuthor, photoImageFile );
+		photo.setPhotoImageFile( copiedToUserFolderFile );
 
 		try {
-			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoImageFile ) );
-		} catch ( IOException e ) {
-			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoImageFile.getAbsolutePath() ) );
+			final File preview = previewGenerationService.generatePreviewSync( photoAuthor, copiedToUserFolderFile );
+			createPhotoDBEntry( photo, copiedToUserFolderFile, preview, photoTeam, photoAlbums );
+			if ( preview == null ) {
+				throw new IOException( String.format( "Can not generate photo preview for '%s'", copiedToUserFolderFile.getCanonicalPath() ) );
+			}
+		} catch ( final InterruptedException e ) {
+			FileUtils.deleteQuietly( copiedToUserFolderFile );
+			throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoImageFile.getAbsolutePath() ) );
 		}
+	}
 
-		if ( ! save( photo ) ) {
-			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
-		}
+	@Override
+	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final String photoImageUrl, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
-		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
-			delete( photo.getId() );
-			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
-		}
+		final User photoAuthor = userService.load( photo.getUserId() );
 
-		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
-			delete( photo.getId() );
-			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
-		}
+		try {
+			final File preview = previewGenerationService.generatePreviewSync( photoAuthor, photoImageFile );
 
-		switch ( photo.getPhotoImageSourceType() ) {
+			photo.setPhotoImageUrl( photoImageUrl );
 
+			createPhotoDBEntry( photo, photoImageFile, preview, photoTeam, photoAlbums );
+			if ( preview == null ) {
+				throw new IOException( String.format( "Can not generate photo preview for '%s'", photoImageFile.getCanonicalPath() ) );
+			}
+		} catch ( final InterruptedException e ) {
+			throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoImageFile.getAbsolutePath() ) );
 		}
 	}
 
 	@Override
 	public void updatePhoto( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
-		if ( ! save( photo ) ) {
+
+		if ( !save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
 		}
 
-		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {
+		if ( !userTeamService.savePhotoTeam( photoTeam ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
 		}
 
-		if ( ! userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
+		if ( !userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
 		}
 	}
@@ -369,7 +358,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public PhotoActionAllowance getPhotoCommentAllowance( final Photo photo ) {
 		final PhotoActionAllowance allowance = photo.getCommentsAllowance();
 
-		if ( allowance == PhotoActionAllowance.CANDIDATES_AND_MEMBERS && ! configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ) {
+		if ( allowance == PhotoActionAllowance.CANDIDATES_AND_MEMBERS && !configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ) {
 			return PhotoActionAllowance.MEMBERS_ONLY;
 		}
 
@@ -380,7 +369,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public PhotoActionAllowance getPhotoVotingAllowance( final Photo photo ) {
 		final PhotoActionAllowance allowance = photo.getVotingAllowance();
 
-		if ( allowance == PhotoActionAllowance.CANDIDATES_AND_MEMBERS && ! configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ) {
+		if ( allowance == PhotoActionAllowance.CANDIDATES_AND_MEMBERS && !configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ) {
 			return PhotoActionAllowance.MEMBERS_ONLY;
 		}
 
@@ -473,20 +462,42 @@ public class PhotoServiceImpl implements PhotoService {
 
 		photo.setGenreId( genreId );
 
-		if ( ! securityService.userOwnThePhoto( userWhoIsMoving, photoId ) ) { // TODO: assertSuperAdminAccess?
+		if ( !securityService.userOwnThePhoto( userWhoIsMoving, photoId ) ) { // TODO: assertSuperAdminAccess?
 
 			final User photoAuthor = userService.load( photo.getUserId() );
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 is moved your photo '$2' to genre '$3'", services )
-				.addUserCardLinkParameter( userWhoIsMoving )
-				.addPhotoCardLinkParameter( photo )
-				.addPhotosByGenreLinkParameter( genre )
-				;
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 is moved your photo '$2' to genre '$3'", services ).addUserCardLinkParameter( userWhoIsMoving ).addPhotoCardLinkParameter( photo ).addPhotosByGenreLinkParameter( genre );
 
 			privateMessageService.sendSystemNotificationMessage( photoAuthor, translatableMessage.build( photoAuthor.getLanguage() ) );
 		}
 
 		return save( photo );
+	}
+
+	private void createPhotoDBEntry( final Photo photo, final File photoImageFile, final File preview, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
+
+		photo.setFileSize( photoImageFile.length() );
+		photo.setPhotoPreviewName( preview.getName() );
+
+		try {
+			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoImageFile ) );
+		} catch ( IOException e ) {
+			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoImageFile.getAbsolutePath() ) );
+		}
+
+		if ( !save( photo ) ) {
+			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
+		}
+
+		if ( !userTeamService.savePhotoTeam( photoTeam ) ) {
+			delete( photo.getId() );
+			throw new SaveToDBException( String.format( "Can not save photo team: %s", photoTeam ) );
+		}
+
+		if ( !userPhotoAlbumService.savePhotoAlbums( photo, photoAlbums ) ) {
+			delete( photo.getId() );
+			throw new SaveToDBException( String.format( "Can not save photo albums: %s", photoAlbums ) );
+		}
 	}
 
 	private PagingModel getPagingModel( final int photosQty ) {

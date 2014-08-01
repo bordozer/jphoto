@@ -29,12 +29,12 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 	private ConfigurationService configurationService;
 
 	@Override
-	public boolean generatePreviewSync( final int photoId ) throws IOException, InterruptedException {
+	public File generatePreviewSync( final int photoId ) throws IOException, InterruptedException {
 		return generatePreviewSync( photoId, getConversionOptions() );
 	}
 
 	@Override
-	public boolean generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+	public File generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
 		final Photo photo = photoService.load( photoId );
 
 		userPhotoFilePathUtilsService.createUserPhotoPreviewDirIfNeed( photo.getUserId() );
@@ -45,22 +45,26 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 	}
 
 	@Override
-	public boolean generatePreviewSync( final User photoAuthor, final File photoFile ) throws IOException, InterruptedException {
+	public File generatePreviewSync( final User photoAuthor, final File photoFile ) throws IOException, InterruptedException {
 		userPhotoFilePathUtilsService.createUserPhotoPreviewDirIfNeed( photoAuthor.getId() );
 
-		final File photoPreviewFile = userPhotoFilePathUtilsService.getPhotoPreviewFile( photoAuthor.getId(), photoFile );
+		final File photoPreviewFile = userPhotoFilePathUtilsService.generatePhotoPreviewName( photoAuthor.getId() );
 
-		return generatePreviewSync( photoFile, photoPreviewFile, getConversionOptions() );
+		generatePreviewSync( photoFile, photoPreviewFile, getConversionOptions() );
+
+		return photoPreviewFile;
 	}
 
 	@Override
-	public boolean generatePreviewSync( final File photoImageFile, final File photoPreviewFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
+	public File generatePreviewSync( final File photoImageFile, final File photoPreviewFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
 
 		if ( photoPreviewFile.exists() ) {
 			FileUtils.deleteQuietly( photoPreviewFile );
 		}
 
-		return fileConversionService.convertSync( photoImageFile, photoPreviewFile, conversionOptions );
+		fileConversionService.convertSync( photoImageFile, photoPreviewFile, conversionOptions );
+
+		return photoPreviewFile;
 	}
 
 	private ConversionOptions getConversionOptions() {

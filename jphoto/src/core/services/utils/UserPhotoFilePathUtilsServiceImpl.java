@@ -34,16 +34,6 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public String getUserPhotoPathPrefix( final int userId ) {
-		return String.valueOf( userId );
-	}
-
-	@Override
-	public File getPhotoFile( final Photo photo ) {
-		return new File ( String.format( "%s", photo.getPhotoImageFile() ) );
-	}
-
-	@Override
 	public String getPhotoPreviewUrl( final Photo photo ) {
 		return String.format( "%s/download/photos/%s/preview/", urlUtilsService.getBaseURL(), photo.getId() );
 	}
@@ -62,28 +52,13 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public File getUserPhotoPreviewDir( final int userId ) {
-		return new File( getUserPhotoDir( userId ).getPath(), PREVIEW_FOLDER_NAME );
-	}
-
-	@Override
-	public boolean isUserPhotoDirExist( final int userId ) {
-		return getUserPhotoDir( userId ).exists();
-	}
-
-	@Override
-	public String generateUserPhotoPreviewFileName( final File photoImageFile ) {
-		return String.format( "%s_preview.jpg", FilenameUtils.getBaseName( photoImageFile.getName() ) );
-	}
-
-	@Override
-	public File getPhotoPreviewFile( final int userId, final File photoImageFile ) {
-		return new File( getUserPhotoPreviewDir( userId ), generateUserPhotoPreviewFileName( photoImageFile ) );
-	}
-
-	@Override
 	public File getPhotoPreviewFile( final Photo photo ) {
-		return getPhotoPreviewFile( photo.getUserId(), photo.getPhotoImageFile() );
+		return new File( getUserPhotoPreviewDir( photo.getUserId() ).getPath(), photo.getPhotoPreviewName() );
+	}
+
+	@Override
+	public File generatePhotoPreviewName( final int userId ) {
+		return new File( getUserPhotoPreviewDir( userId ).getPath(), String.format( "%s", dateUtilsService.getCurrentTime().getTime() ) );
 	}
 
 	@Override
@@ -97,7 +72,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public void deletePhotoFileWithPreview( final Photo photo ) {
-		final File previewFile = getPhotoPreviewFile( photo.getUserId(), photo.getPhotoImageFile() );
+		final File previewFile = new File( getUserPhotoPreviewDir( photo.getUserId() ).getPath(), photo.getPhotoPreviewName() );
 		if ( previewFile.exists() && previewFile.isFile() ) {
 			FileUtils.deleteQuietly( previewFile );
 		}
@@ -149,7 +124,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public File copyFileToUserFolder( final User user, final File picture ) throws IOException {
+	public File copyPhotoImageFileToUserFolder( final User user, final File photoImageFile ) throws IOException {
 
 		if ( !isUserPhotoDirExist( user.getId() ) ) {
 			createUserPhotoDirIfNeed( user.getId() );
@@ -158,9 +133,9 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		final File userPhotoImageFile = getUniqueUserPhotoFile( user );
 
 		try {
-			FileUtils.copyFile( picture, userPhotoImageFile );
+			FileUtils.copyFile( photoImageFile, userPhotoImageFile );
 		} catch ( final IOException e ) {
-			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy photo file: '%s' to '%s'", picture.getPath(), userPhotoImageFile.getPath() ), e );
+			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy photo file: '%s' to '%s'", photoImageFile.getPath(), userPhotoImageFile.getPath() ), e );
 			throw e;
 		}
 
@@ -174,6 +149,18 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	private  File getUniqueUserPhotoFile( final User user ) {
 		final String photoFileName = generateUserPhotoFileName( user );
 		return new File( getUserPhotoDir( user.getId() ), photoFileName );
+	}
+
+	private  File getUserPhotoPreviewDir( final int userId ) {
+		return new File( getUserPhotoDir( userId ).getPath(), PREVIEW_FOLDER_NAME );
+	}
+
+	private  String getUserPhotoPathPrefix( final int userId ) {
+		return String.valueOf( userId );
+	}
+
+	private  boolean isUserPhotoDirExist( final int userId ) {
+		return getUserPhotoDir( userId ).exists();
 	}
 
 	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {

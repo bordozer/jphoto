@@ -108,7 +108,8 @@ CREATE TABLE `photos` (
   `genreId` int(11) NOT NULL,
   `keywords` varchar(255) NOT NULL DEFAULT '',
   `description` text,
-  `fileName` varchar(255) NOT NULL DEFAULT '',
+  `photoImageSource` varchar(255) NOT NULL DEFAULT '',
+  `photoPreviewName` varchar(255) NOT NULL,
   `fileSize` int(11) DEFAULT '0',
   `uploadTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
   `containsNudeContent` tinyint(1) NOT NULL DEFAULT '0',
@@ -129,7 +130,7 @@ CREATE TABLE `photos` (
   KEY `idx_uploadTime` (`uploadTime`) USING BTREE,
   CONSTRAINT `fk_photos_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_photos_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122136 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=122182 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `comments` table :

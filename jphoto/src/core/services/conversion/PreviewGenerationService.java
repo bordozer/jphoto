@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public interface PreviewGenerationService {
 
-	boolean generatePreviewSync( final int photoId ) throws IOException, InterruptedException;
+	File generatePreviewSync( final int photoId ) throws IOException, InterruptedException;
 
-	boolean generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
+	File generatePreviewSync( final int photoId, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
 
-	boolean generatePreviewSync( final User photoAuthor, final File photoFile ) throws IOException, InterruptedException;
+	File generatePreviewSync( final User photoAuthor, final File photoFile ) throws IOException, InterruptedException;
 
-	boolean generatePreviewSync( final File photoImageFile, final File photoPreviewFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
+	File generatePreviewSync( final File photoImageFile, final File photoPreviewFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException;
 }

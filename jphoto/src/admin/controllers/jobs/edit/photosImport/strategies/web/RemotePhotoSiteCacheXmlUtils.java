@@ -43,6 +43,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 	private static final String USER_INFO_FILE_PHOTO_NAME = "name";
 	private static final String USER_INFO_FILE_PHOTO_UPLOAD_TIME = "uploadTime";
 	private static final String USER_INFO_FILE_PHOTO_IMAGE_URL = "imageUrl";
+	private static final String USER_INFO_FILE_PHOTO_IMAGE_FILE = "fileName";
+	private static final String USER_INFO_FILE_PHOTO_NUMBER_IN_SERIES = "numberInSeries";
 
 	private static final String USER_INFO_FILE_PHOTO_COMMENT_ELEMENT_NAME = "comments";
 	private static final String USER_INFO_FILE_PHOTO_COMMENT_TEXT = "commentText";
@@ -110,6 +112,8 @@ public class RemotePhotoSiteCacheXmlUtils {
 			photoElement.addElement( USER_INFO_FILE_PHOTO_NAME ).addText( StringEscapeUtils.escapeXml( remotePhotoData.getName() ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_UPLOAD_TIME ).addText( dateUtilsService.formatDateTime( remotePhotoData.getUploadTime(), XML_FILE_PHOTO_UPLOAD_TIME_FORMAT ) );
 			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_URL ).addText( remotePhotoData.getRemotePhotoSiteImage().getImageUrl() );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_IMAGE_FILE ).addText( getRemotePhotoCacheFileName( remotePhotoData ) );
+			photoElement.addElement( USER_INFO_FILE_PHOTO_NUMBER_IN_SERIES ).addText( String.valueOf( remotePhotoData.getNumberInSeries() ) );
 
 			final List<String> comments = remotePhotoData.getComments();
 			if ( comments != null ) {
@@ -161,11 +165,13 @@ public class RemotePhotoSiteCacheXmlUtils {
 				uploadTime = dateUtilsService.parseDateTimeWithFormat( textUploadTime, XML_FILE_PHOTO_UPLOAD_TIME_FORMAT );
 			}
 			final String imageUrl = photoElement.element( USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
+			final int numberInSeries = Integer.parseInt( photoElement.element( USER_INFO_FILE_PHOTO_NUMBER_IN_SERIES ).getText() );
 
 			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remoteUserPhotoId, category, imageUrl );
 			remotePhotoData.setName( photoName );
 			remotePhotoData.setUploadTime( uploadTime );
 			remotePhotoData.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
+			remotePhotoData.setNumberInSeries( numberInSeries );
 
 			final List<String> comments = newArrayList();
 			final Element commentsElement = photoElement.element( USER_INFO_FILE_PHOTO_COMMENT_ELEMENT_NAME );
@@ -221,10 +227,14 @@ public class RemotePhotoSiteCacheXmlUtils {
 	}
 
 	public File getRemotePhotoCacheFile( final RemotePhotoData remotePhotoData ) throws IOException {
-		final String remotePhotoCacheFileName = String.format( "%d_%d.jpg", remotePhotoData.getPhotoId(), remotePhotoData.getNumberInSeries() );
 		final File folderForRemoteUserCachedPhotos = getRemoteUserCacheFolder( remotePhotoData.getRemoteUser() );
 		final File folderForRemoteUserCachedPhotosForGenre = new File( folderForRemoteUserCachedPhotos, remotePhotoData.getRemotePhotoSiteCategory().getKey() );
-		return new File( folderForRemoteUserCachedPhotosForGenre, remotePhotoCacheFileName );
+
+		return new File( folderForRemoteUserCachedPhotosForGenre, getRemotePhotoCacheFileName( remotePhotoData ) );
+	}
+
+	private String getRemotePhotoCacheFileName( final RemotePhotoData remotePhotoData ) {
+		return String.format( "%d_%d.jpg", remotePhotoData.getPhotoId(), remotePhotoData.getNumberInSeries() );
 	}
 
 	public File getPhotoStorage() {

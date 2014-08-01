@@ -40,4 +40,9 @@ public class Dimension {
 		final Dimension dimension = ( Dimension ) obj;
 		return dimension.getWidth() == width && dimension.getHeight() == height;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%d x %d", width, height );
+	}
 }

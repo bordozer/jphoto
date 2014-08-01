@@ -51,12 +51,12 @@ public abstract class AbstractPhotoImportStrategy {
 		this.language = language;
 	}
 
-	protected void createPhotosDBEntries( final List<ImageToImportData> imageToImportDatas ) throws IOException, SaveToDBException {
+	protected void createPhotosDBEntries( final List<ImageToImportData> imagesToImportData ) throws IOException, SaveToDBException {
 		log.debug( "Creating photos" );
 
 		int counter = 1;
-		final int total = imageToImportDatas.size();
-		for ( final ImageToImportData imageToImportData : imageToImportDatas ) {
+		final int total = imagesToImportData.size();
+		for ( final ImageToImportData imageToImportData : imagesToImportData ) {
 			createPhotoDBEntry( imageToImportData, counter, total );
 			counter++;
 		}
@@ -98,7 +98,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
 		photo.setPhotoImageSourceType( imageToImport.getPhotosImportSource() );
 
-		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
+		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), imageToImport.getPhotoImageUrl(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 

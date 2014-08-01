@@ -8,7 +8,6 @@ public class ImageToImport {
 	private final String genreName;
 	private final File imageFile;
 	private String photoImageUrl;
-	private String imageUrl;
 
 	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File imageFile ) {
 		this.photosImportSource = photosImportSource;
@@ -16,9 +15,9 @@ public class ImageToImport {
 		this.imageFile = imageFile;
 	}
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File remotePhotoCacheFile, final String imageUrl ) {
+	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
 		this( photosImportSource, genreName, remotePhotoCacheFile);
-		this.imageUrl = imageUrl;
+		this.photoImageUrl = photoImageUrl;
 	}
 
 	public PhotosImportSource getPhotosImportSource() {
@@ -27,14 +26,6 @@ public class ImageToImport {
 
 	public String getGenreName() {
 		return genreName;
-	}
-
-	public String getImageUrl() {
-		return imageUrl;
-	}
-
-	public void setImageUrl( final String imageUrl ) {
-		this.imageUrl = imageUrl;
 	}
 
 	public File getImageFile() {

@@ -11,7 +11,6 @@ import core.general.photo.Photo;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -33,7 +32,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	public final static String TABLE_COLUMN_GENRE_ID = "genreId";
 	public final static String TABLE_COLUMN_KEYWORDS = "keywords";
 	public final static String TABLE_COLUMN_DESCRIPTION = "description";
-	public final static String TABLE_COLUMN_FILE_NAME = "fileName";
+	public final static String TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE = "photoImageSource";
+	public final static String TABLE_COLUMN_PHOTO_PREVIEW_NAME = "photoPreviewName";
 	public final static String TABLE_COLUMN_FILE_SIZE = "fileSize";
 	public final static String TABLE_COLUMN_UPLOAD_TIME = "uploadTime";
 	public final static String TABLE_COLUMN_CONTAINS_NUDE_CONTENT = "containsNudeContent";
@@ -66,7 +66,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 3, TABLE_COLUMN_GENRE_ID );
 		fields.put( 4, TABLE_COLUMN_KEYWORDS );
 		fields.put( 5, TABLE_COLUMN_DESCRIPTION );
-		fields.put( 6, TABLE_COLUMN_FILE_NAME );
+		fields.put( 6, TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE );
 		fields.put( 8, TABLE_COLUMN_UPLOAD_TIME );
 		fields.put( 9, TABLE_COLUMN_CONTAINS_NUDE_CONTENT );
 		fields.put( 10, TABLE_COLUMN_BGCOLOR );
@@ -80,6 +80,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 19, TABLE_COLUMN_IMAGE_HEIGHT );
 		fields.put( 20, TABLE_COLUMN_IMAGE_SOURCE_TYPE );
 		fields.put( 21, TABLE_COLUMN_FILE_SIZE );
+		fields.put( 22, TABLE_COLUMN_PHOTO_PREVIEW_NAME );
 	}
 
 	static {
@@ -165,13 +166,19 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_KEYWORDS, entry.getKeywords() );
 		paramSource.addValue( TABLE_COLUMN_DESCRIPTION, entry.getDescription() );
 
-		String fileName = StringUtils.EMPTY;
-		final File file = entry.getPhotoImageFile();
-		if ( file != null ) {
-			fileName = file.getName();
+		switch ( entry.getPhotoImageSourceType() ) {
+			case FILE_SYSTEM:
+				if ( entry.getPhotoImageFile() != null ) {
+					paramSource.addValue( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE, entry.getPhotoImageFile().getName() );
+				}
+				break;
+			default:
+				paramSource.addValue( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE, entry.getPhotoImageUrl() );
+				break;
 		}
-		paramSource.addValue( TABLE_COLUMN_FILE_NAME, fileName );
+
 		paramSource.addValue( TABLE_COLUMN_FILE_SIZE, entry.getFileSize() );
+		paramSource.addValue( TABLE_COLUMN_PHOTO_PREVIEW_NAME, entry.getPhotoPreviewName() );
 
 		paramSource.addValue( TABLE_COLUMN_UPLOAD_TIME, entry.getUploadTime() );
 
@@ -252,7 +259,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			final PhotosImportSource photoImageSourceType = PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) );
 			result.setPhotoImageSourceType( photoImageSourceType );
 
-			final String fileName = rs.getString( TABLE_COLUMN_FILE_NAME );
+			final String fileName = rs.getString( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE );
 			switch ( photoImageSourceType ) {
 				case FILE_SYSTEM:
 					final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
@@ -262,6 +269,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 					result.setPhotoImageUrl( fileName );
 			}
 			result.setFileSize( rs.getLong( TABLE_COLUMN_FILE_SIZE ) );
+			result.setPhotoPreviewName( rs.getString( TABLE_COLUMN_PHOTO_PREVIEW_NAME ) );
 
 			result.setUploadTime( rs.getTimestamp( TABLE_COLUMN_UPLOAD_TIME ) );
 

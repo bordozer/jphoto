@@ -27,6 +27,7 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	private File photoImageFile;
 	private long fileSize;
 	private String photoImageUrl;
+	private String photoPreviewName;
 
 	private Date uploadTime;
 
@@ -127,6 +128,14 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	public void setPhotoImageUrl( final String photoImageUrl ) {
 		this.photoImageUrl = photoImageUrl;
+	}
+
+	public String getPhotoPreviewName() {
+		return photoPreviewName;
+	}
+
+	public void setPhotoPreviewName( final String photoPreviewName ) {
+		this.photoPreviewName = photoPreviewName;
 	}
 
 	public long getFileSize() {

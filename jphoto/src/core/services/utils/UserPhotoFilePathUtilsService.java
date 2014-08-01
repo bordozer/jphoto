@@ -10,43 +10,33 @@ public interface UserPhotoFilePathUtilsService {
 
 	String BEAN_NAME = "userPhotoFilePathUtilsService";
 
-	File getUserPhotoDir( int userId );
+	File getUserPhotoDir( final int userId );
 
-	String getUserPhotoPathPrefix( int userId );
+	String getPhotoPreviewUrl( final Photo photo );
 
-	File getPhotoFile( Photo photo );
+	String getPhotoUrl( final Photo photo );
 
-	String getPhotoPreviewUrl( Photo photo );
-
-	String getPhotoUrl( Photo photo );
-
-	void createUserPhotoPreviewDirIfNeed( int userId );
-
-	File getUserPhotoPreviewDir( int userId );
-
-	boolean isUserPhotoDirExist( int userId );
-
-	String generateUserPhotoPreviewFileName( final File photoImageFile );
-
-	File getPhotoPreviewFile( final int userId, final File photoImageFile );
+	void createUserPhotoPreviewDirIfNeed( final int userId );
 
 	File getPhotoPreviewFile( final Photo photo );
 
-	void createUserPhotoDirIfNeed( int userId );
+	File generatePhotoPreviewName( final int userId );
 
-	void deletePhotoFileWithPreview( Photo photo );
+	void createUserPhotoDirIfNeed( final int userId );
 
-	String getUserAvatarFileName( int userId );
+	void deletePhotoFileWithPreview( final Photo photo );
 
-	File getUserAvatarDir( int userId );
+	String getUserAvatarFileName( final int userId );
 
-	File getUserAvatarFile( int userId );
+	File getUserAvatarDir( final int userId );
 
-	String getUserAvatarFileUrl( int userId );
+	File getUserAvatarFile( final int userId );
 
-	boolean isUserHasAvatar( int userId );
+	String getUserAvatarFileUrl( final int userId );
 
-	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) throws IOException;
+	boolean isUserHasAvatar( final int userId );
 
-	File copyFileToUserFolder( final User user, final File picture ) throws IOException;
+	String getUserAvatarImage( final int userId, final int width, final int height, final String imageId, final String onClick, final String cssStyle ) throws IOException;
+
+	File copyPhotoImageFileToUserFolder( final User user, final File photoImageFile ) throws IOException;
 }

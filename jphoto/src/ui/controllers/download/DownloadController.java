@@ -30,9 +30,7 @@ public class DownloadController {
 
 		final Photo photo = photoService.load( photoId );
 
-		final File file = userPhotoFilePathUtilsService.getPhotoFile( photo );
-
-		downloadPhoto( file, response );
+		downloadPhoto( photo.getPhotoImageFile(), response );
 	}
 
 	@RequestMapping( "/photos/{photoId}/preview/" )
@@ -59,8 +57,6 @@ public class DownloadController {
 		if ( !file.isFile() || !file.exists() ) {
 			file = new File( "../../images/imagenotfound.png" );
 		}
-
-		final String fileName = file.getPath();
 
 		response.setContentLength( ( int ) file.length() );
 		response.setContentType( CONTENT_TYPE );

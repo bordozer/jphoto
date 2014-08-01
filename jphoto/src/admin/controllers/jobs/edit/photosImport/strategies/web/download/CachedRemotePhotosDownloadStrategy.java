@@ -30,11 +30,11 @@ public class CachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadStra
 		for ( final RemotePhotoData remotePhotoData : remotePhotosData ) {
 			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoData );
 
-			if ( !imageFile.exists() ) {
+			if ( ! imageFile.exists() ) {
 				continue;
 			}
 
-			final ImageToImport imageToImport = new ImageToImport( importSource, remotePhotoData.getRemotePhotoSiteCategory().getKey(), imageFile );
+			final ImageToImport imageToImport = new ImageToImport( importSource, remotePhotoData.getRemotePhotoSiteCategory().getKey(), imageFile, remotePhotoData.getImageUrl() );
 			result.add( new RemotePhoto( remotePhotoData, imageToImport ) );
 		}
 
