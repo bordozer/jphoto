@@ -126,7 +126,7 @@ public abstract class AbstractActivityStreamEntry extends AbstractBaseEntity {
 
 		return String.format( "<a href='%1$s'><img src='%2$s' height='50' alt='%3$s' title='%3$s'/></a>"
 			, services.getUrlUtilsService().getPhotoCardLink( photo.getId() )
-			, services.getUserPhotoFilePathUtilsService().getPhotoImageUrl( photo )
+			, services.getUserPhotoFilePathUtilsService().getPhotoPreviewUrl( photo )
 			, photo.getNameEscaped()
 		);
 	}
