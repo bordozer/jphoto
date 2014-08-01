@@ -43,11 +43,6 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public String getPhotoUrl( final Photo photo ) {
-		return String.format( "%s/download/photos/%s/", urlUtilsService.getBaseURL(), photo.getId() );
-	}
-
-	@Override
 	public void createUserPhotoPreviewDirIfNeed( final int userId ) {
 		final File userPhotoPreviewDir = getUserPhotoPreviewDir( userId );
 		if ( !userPhotoPreviewDir.exists() ) {
@@ -58,6 +53,16 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	@Override
 	public File getPhotoPreviewFile( final Photo photo ) {
 		return new File( getUserPhotoPreviewDir( photo.getUserId() ).getPath(), photo.getPhotoPreviewName() );
+	}
+
+	@Override
+	public String getPhotoImageUrl( final Photo photo ) {
+		switch ( photo.getPhotoImageSourceType() ) {
+			case FILE_SYSTEM:
+				return getPhotoUrl( photo );
+			default:
+				return String.format( "http://%s", photo.getPhotoImageUrl() );
+		}
 	}
 
 	@Override
@@ -200,6 +205,10 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	private  boolean isUserPhotoDirExist( final int userId ) {
 		return getUserPhotoDir( userId ).exists();
+	}
+
+	private  String getPhotoUrl( final Photo photo ) {
+		return String.format( "%s/download/photos/%s/", urlUtilsService.getBaseURL(), photo.getId() );
 	}
 
 	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {

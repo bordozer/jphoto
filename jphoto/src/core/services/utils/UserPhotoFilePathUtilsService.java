@@ -14,11 +14,11 @@ public interface UserPhotoFilePathUtilsService {
 
 	String getPhotoPreviewUrl( final Photo photo );
 
-	String getPhotoUrl( final Photo photo );
-
 	void createUserPhotoPreviewDirIfNeed( final int userId );
 
 	File getPhotoPreviewFile( final Photo photo );
+
+	String getPhotoImageUrl( final Photo photo );
 
 	File generatePhotoPreviewName( final int userId );
 

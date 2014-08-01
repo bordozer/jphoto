@@ -10,6 +10,7 @@ import core.services.entry.ActivityStreamService;
 import core.services.security.SecurityService;
 import core.services.system.CacheService;
 import core.services.system.ConfigurationService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -33,6 +34,9 @@ public class PhotoPreviewServiceImpl implements PhotoPreviewService {
 
 	@Autowired
 	private ConfigurationService configurationService;
+
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@Override
 	public boolean hasUserAlreadySeenThisPhoto( final int photoId, final int userId ) {
