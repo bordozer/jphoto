@@ -1,5 +1,6 @@
 package utils;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import common.AbstractTestCase;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -30,15 +31,25 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setId( photoId );
 		photo.setUserId( userId );
 		photo.setName( "Photo name" );
+
+		photo.setPhotoImageSourceType( PhotosImportSource.FILE_SYSTEM );
 		photo.setPhotoImageFile( new File( "/photoDir", "photoFileName" ) );
+		photo.setPhotoImageUrl( "some.host.ua/remote/url/image.jpg" );
 		photo.setPhotoPreviewName( "preview_name_saved_in_db.jpg" );
 
 		assertEquals( "photo/storage/path/111", userPhotoFilePathUtilsService.getUserPhotoDir( userId ).getPath() );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
-//		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/", userPhotoFilePathUtilsService.getPhotoUrl( photo ) ); // TODO: check getPhotoImageUrl()
-		assertEquals( "photo/storage/path/111/preview/111_1", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ).getPath() );
+
+		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/", userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
+		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+
+		assertEquals( "photo/storage/path/111/preview/111_00001", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ).getPath() );
 		assertEquals( "photo/storage/path/111/preview/preview_name_saved_in_db.jpg", userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
 		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
+
+		photo.setPhotoImageSourceType( PhotosImportSource.PHOTO35 );
+		assertEquals( "http://some.host.ua/remote/url/image.jpg", userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
+		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 	}
 }
