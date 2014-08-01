@@ -58,6 +58,6 @@ public class PreviewGenerationServiceImpl implements PreviewGenerationService {
 			FileUtils.deleteQuietly( destinationFile );
 		}
 
-		return fileConversionService.convertSync( photo.getFile(), destinationFile, conversionOptions );
+		return fileConversionService.convertSync( photo.getPhotoImageFile(), destinationFile, conversionOptions );
 	}
 }

@@ -188,7 +188,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Override
 	public void assertPhotoFileExists( final Photo photo ) {
-		final File photoFile = photo.getFile();
+		final File photoFile = photo.getPhotoImageFile();
 		if ( photoFile == null || ! photoFile.isFile() || ! photoFile.exists() ) {
 			throw new PhotoNotFoundException( photo.getId() );
 		}

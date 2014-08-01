@@ -9,9 +9,9 @@ import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
-import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoFile;
+import core.general.photo.PhotoImageSourceType;
 import core.general.photo.PhotoInfo;
 import core.general.photoTeam.PhotoTeam;
 import core.general.user.User;
@@ -96,9 +96,6 @@ public class PhotoServiceImpl implements PhotoService {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
-
-	@Autowired
 	private PhotoListCriteriasService photoListCriteriasService;
 	
 	@Autowired
@@ -130,6 +127,9 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private ImageFileUtilsService imageFileUtilsService;
+
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	private final LogHelper log = new LogHelper( PhotoServiceImpl.class );
 
@@ -173,19 +173,21 @@ public class PhotoServiceImpl implements PhotoService {
 
 		final User photoAuthor = userService.load( photo.getUserId() );
 
-		final File userFile = services.getUserPhotoFilePathUtilsService().copyFileToUserFolder( photoFile, photo, photoAuthor );
-		photo.setFile( userFile );
+		final File userFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photo, photoFile );
+		photo.setPhotoImageFile( userFile );
 
-		if ( updatePhotoFileData( photo.getId(), userFile ) ) {
-			try {
-				if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
-					throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
+		if ( photo.getPhotoImageSourceType() == PhotoImageSourceType.FILE ) {
+			if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
+				try {
+					if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
+						throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
+					}
+				} catch ( final InterruptedException e ) {
+					log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
+					delete( photo.getId() );
+
+					return;
 				}
-			} catch ( final InterruptedException e ) {
-				log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
-				delete( photo.getId() );
-
-				return;
 			}
 		}
 
@@ -336,21 +338,6 @@ public class PhotoServiceImpl implements PhotoService {
 
 		final List<Integer> photoIds = load( selectQuery ).getIds();
 		return load( photoIds );
-	}
-
-
-
-	@Override
-	public boolean updatePhotoFileData( final int photoId, final File file ) {
-		final PhotoFile photoFile = new PhotoFile( file );
-
-		final boolean result = photoDao.updatePhotoFile( photoId, photoFile );
-
-		if ( result ) {
-			cacheServicePhotoInfo.expire( CacheKey.PHOTO_INFO, photoId );
-		}
-
-		return result;
 	}
 
 	@Override

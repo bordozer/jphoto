@@ -40,7 +40,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public File getPhotoFile( final Photo photo ) {
-		return new File ( String.format( "%s", photo.getFile() ) );
+		return new File ( String.format( "%s", photo.getPhotoImageFile() ) );
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String generateUserPhotoPreviewFileName( final Photo photo ) {
-		return String.format( "%s_preview.jpg", FilenameUtils.getBaseName( photo.getFile().getName() ) );
+		return String.format( "%s_preview.jpg", FilenameUtils.getBaseName( photo.getPhotoImageFile().getName() ) );
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 			FileUtils.deleteQuietly( previewFile );
 		}
 
-		final File file = photo.getFile();
+		final File file = photo.getPhotoImageFile();
 		if ( file.exists() && file.isFile() ) {
 			FileUtils.deleteQuietly( file );
 		}
@@ -155,22 +155,22 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public File copyFileToUserFolder( final File picture, final Photo photo, final User user ) throws IOException {
+	public File copyFileToUserFolder( final User user, final Photo photo, final File picture ) throws IOException {
+
 		if ( !isUserPhotoDirExist( user.getId() ) ) {
 			createUserPhotoDirIfNeed( user.getId() );
 		}
 
-		final File destFile = getUserPhotoFile( user, photo );
+		final File userPhotoImageFile = getUserPhotoFile( user, photo );
 
 		try {
-			FileUtils.copyFile( picture, destFile );
-			photo.setFile( destFile );
+			FileUtils.copyFile( picture, userPhotoImageFile );
 		} catch ( final IOException e ) {
-			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy photo file: '%s' to '%s'", picture.getPath(), destFile.getPath() ), e );
+			new LogHelper( UserPhotoFilePathUtilsServiceImpl.class ).error( String.format( "Can not copy photo file: '%s' to '%s'", picture.getPath(), userPhotoImageFile.getPath() ), e );
 			throw e;
 		}
 
-		return destFile;
+		return userPhotoImageFile;
 	}
 
 	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {

@@ -30,7 +30,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setId( photoId );
 		photo.setUserId( userId );
 		photo.setName( "Photo name" );
-		photo.setFile( new File( "/photoDir", "photoFileName" ) );
+		photo.setPhotoImageFile( new File( "/photoDir", "photoFileName" ) );
 
 		assertEquals( "photo/storage/path/111", userPhotoFilePathUtilsService.getUserPhotoDir( userId ).getPath() );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );

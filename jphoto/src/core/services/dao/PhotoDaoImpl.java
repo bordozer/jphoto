@@ -179,7 +179,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_DESCRIPTION, entry.getDescription() );
 
 		String fileName = StringUtils.EMPTY;
-		final File file = entry.getFile();
+		final File file = entry.getPhotoImageFile();
 		if ( file != null ) {
 			fileName = file.getName();
 		}
@@ -263,7 +263,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 			final String fileName = rs.getString( TABLE_COLUMN_FILE_NAME );
 			final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
-			result.setFile( file );
+			result.setPhotoImageFile( file );
 			result.setFileSize( rs.getInt( TABLE_COLUMN_FILE_SIZE ) );
 
 			result.setUploadTime( rs.getTimestamp( TABLE_COLUMN_UPLOAD_TIME ) );

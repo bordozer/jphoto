@@ -21,7 +21,7 @@
 <%
 	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
 
-	final File picture = photoInfo.getPhoto().getFile();
+	final File picture = photoInfo.getPhoto().getPhotoImageFile();
 	final Dimension originalDimension = imageFileUtilsService.getImageDimension( picture ); /* TODO: move to controller! */
 	final Dimension resizedDimension = imageFileUtilsService.resizePhotoImage( originalDimension ); /* TODO: move to controller! */
 %>

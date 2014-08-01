@@ -50,5 +50,5 @@ public interface UserPhotoFilePathUtilsService {
 
 	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) throws IOException;
 
-	File copyFileToUserFolder( File picture, Photo photo, User user ) throws IOException;
+	File copyFileToUserFolder( final User user, final Photo photo, final File picture ) throws IOException;
 }
