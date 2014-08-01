@@ -406,7 +406,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		final List<RemotePhotoData> result = newArrayList( );
 
-
 		final int total = remotePhotoImages.size();
 		int photoNumberInSeries = 1;
 
@@ -414,7 +413,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 			logger.logCollectingRemotePhotoDataForImage( remoteUser.getId(), remotePhotoId, remotePhotoSiteImage.getImageUrl() );
 
-			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remotePhotoId, photosightCategory );
+			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remotePhotoId, photosightCategory, remotePhotoSiteImage.getImageUrl() );
 			final String photoName = pageContentDataExtractor.extractPhotoName( photoCardPageContent );
 
 			if ( remotePhotoSiteImage.hasSeries() ) {

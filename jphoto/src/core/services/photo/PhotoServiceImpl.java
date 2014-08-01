@@ -39,6 +39,7 @@ import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.SqlSelectResult;
@@ -158,32 +159,36 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public void uploadNewPhoto( final Photo photo, final File photoFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
+		switch ( photo.getPhotoImageSourceType() ) {
+			case FILE:
+				final User photoAuthor = userService.load( photo.getUserId() );
+
+				final File userFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photoFile );
+				photo.setPhotoImageFile( userFile );
+
+				if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
+					try {
+						if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
+							throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
+						}
+					} catch ( final InterruptedException e ) {
+						FileUtils.deleteQuietly( photoFile );
+						throw new BaseRuntimeException( String.format( "Can not copy file to user folder: '%s'", photoFile.getAbsolutePath() ) );
+					}
+				}
+				break;
+			case WEB:
+				break;
+		}
+
 		try {
 			photo.setImageDimension( imageFileUtilsService.getImageDimension( photoFile ) );
 		} catch ( IOException e ) {
-			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoFile ) );
+			throw new BaseRuntimeException( String.format( "Can not get image dimension: '%s'", photoFile.getAbsolutePath() ) );
 		}
 
 		if ( ! save( photo ) ) {
 			throw new SaveToDBException( String.format( "Can not save photo: %s", photo ) );
-		}
-
-		final User photoAuthor = userService.load( photo.getUserId() );
-
-		final File userFile = userPhotoFilePathUtilsService.copyFileToUserFolder( photoAuthor, photo, photoFile );
-		photo.setPhotoImageFile( userFile );
-
-		if ( photoDao.updatePhotoFile( photo.getId(), new PhotoFile( userFile ) ) ) {
-			try {
-				if ( ! previewGenerationService.generatePreviewSync( photo.getId() ) ) {
-					throw new IOException( String.format( "Can not generate photo preview for '%s'", userFile.getCanonicalPath() ) );
-				}
-			} catch ( final InterruptedException e ) {
-				log.error( String.format( "Error creating preview: %s ( %s )", userFile.getCanonicalPath(), e.getMessage() ) );
-				delete( photo.getId() );
-
-				return;
-			}
 		}
 
 		if ( ! userTeamService.savePhotoTeam( photoTeam ) ) {

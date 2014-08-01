@@ -162,7 +162,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 			}
 			final String imageUrl = photoElement.element( USER_INFO_FILE_PHOTO_IMAGE_URL ).getText();
 
-			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remoteUserPhotoId, category );
+			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remoteUserPhotoId, category, imageUrl );
 			remotePhotoData.setName( photoName );
 			remotePhotoData.setUploadTime( uploadTime );
 			remotePhotoData.setRemotePhotoSiteImage( new RemotePhotoSiteImage( imageUrl ) );
@@ -213,7 +213,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 		writeImageContentToFile( remotePhotoCacheFile, imageContent, "ISO-8859-1" );
 
-		final ImageToImport imageToImport = new ImageToImport( photosImportSource, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile );
+		final ImageToImport imageToImport = new ImageToImport( photosImportSource, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile, remotePhotoData.getImageUrl() );
 
 		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoData, imageToImport.getImageFile().getCanonicalPath() ) );
 

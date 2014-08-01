@@ -82,17 +82,6 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public String generateUserPhotoFileName( final User user, final int photoId ) {
-		return String.format( "u%s_p%s_%s.jpg", user.getId(), photoId, dateUtilsService.getCurrentTime().getTime() );
-	}
-
-	@Override
-	public File getUserPhotoFile( final User user, final Photo photo ) {
-		final String photoFileName = generateUserPhotoFileName( user, photo.getId() );
-		return new File( getUserPhotoDir( user.getId() ), photoFileName );
-	}
-
-	@Override
 	public void createUserPhotoDirIfNeed( final int userId ) {
 
 		final File userPhotoDir = new File( systemFilePathUtilsService.getSystemPhotoDir().getPath(), getUserPhotoPathPrefix( userId ) );
@@ -155,13 +144,13 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	@Override
-	public File copyFileToUserFolder( final User user, final Photo photo, final File picture ) throws IOException {
+	public File copyFileToUserFolder( final User user, final File picture ) throws IOException {
 
 		if ( !isUserPhotoDirExist( user.getId() ) ) {
 			createUserPhotoDirIfNeed( user.getId() );
 		}
 
-		final File userPhotoImageFile = getUserPhotoFile( user, photo );
+		final File userPhotoImageFile = getUniqueUserPhotoFile( user );
 
 		try {
 			FileUtils.copyFile( picture, userPhotoImageFile );
@@ -171,6 +160,15 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		}
 
 		return userPhotoImageFile;
+	}
+
+	private  String generateUserPhotoFileName( final User user ) {
+		return String.format( "u%s_%s.jpg", user.getId(), dateUtilsService.getCurrentTime().getTime() );
+	}
+
+	private  File getUniqueUserPhotoFile( final User user ) {
+		final String photoFileName = generateUserPhotoFileName( user );
+		return new File( getUserPhotoDir( user.getId() ), photoFileName );
 	}
 
 	public void setSystemFilePathUtilsService( final SystemFilePathUtilsService systemFilePathUtilsService ) {

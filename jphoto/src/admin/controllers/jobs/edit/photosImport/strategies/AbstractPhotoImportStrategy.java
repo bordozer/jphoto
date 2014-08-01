@@ -62,11 +62,11 @@ public abstract class AbstractPhotoImportStrategy {
 		}
 	}
 
-	protected void createPhotoDBEntry( final ImageToImportData photoToImport, final int counter, final int total ) throws IOException, SaveToDBException {
+	protected void createPhotoDBEntry( final ImageToImportData photoToImportData, final int counter, final int total ) throws IOException, SaveToDBException {
 
-		final ImageToImport imageToImport = photoToImport.getImageToImport();
+		final ImageToImport imageToImport = photoToImportData.getImageToImport();
 
-		final User user = photoToImport.getUser();
+		final User user = photoToImportData.getUser();
 
 		final Photo photo = new Photo();
 		photo.setUserId( user.getId() );
@@ -75,13 +75,13 @@ public abstract class AbstractPhotoImportStrategy {
 
 		photo.setGenreId( genre.getId() );
 
-		photo.setName( photoToImport.getName() );
+		photo.setName( photoToImportData.getName() );
 
-		final Date uploadTime = photoToImport.getUploadTime();
+		final Date uploadTime = photoToImportData.getUploadTime();
 
 		photo.setUploadTime( uploadTime );
-		photo.setDescription( photoToImport.getPhotoDescription() );
-		photo.setKeywords( photoToImport.getPhotoKeywords() );
+		photo.setDescription( photoToImportData.getPhotoDescription() );
+		photo.setKeywords( photoToImportData.getPhotoKeywords() );
 
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
 		final JobHelperService jobHelperService = services.getJobHelperService();
@@ -93,13 +93,15 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setVotingAllowance( randomUtilsService.getRandomPhotoAllowance() );
 		jobHelperService.initPhotoNudeContentOption( photo );
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
-		photo.setImportId( photoToImport.getImportId() );
+		photo.setImportId( photoToImportData.getImportId() );
 
-		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImport, user ) );
+		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
+
+		services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 
 		services.getUsersSecurityService().saveLastUserActivityTime( user.getId(), uploadTime ); // TODO: set last activity only if previous one is less then this photo uploading
 
-		photoToImport.setPhoto( photo );
+		photoToImportData.setPhoto( photo );
 
 		job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Created photo #$3 '$4' of $5, category: $6", services )
 			.addIntegerParameter( counter )

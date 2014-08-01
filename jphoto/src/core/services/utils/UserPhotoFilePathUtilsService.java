@@ -30,10 +30,6 @@ public interface UserPhotoFilePathUtilsService {
 
 	File getPhotoPreviewFile( Photo photo );
 
-	String generateUserPhotoFileName( User user, int photoId );
-
-	File getUserPhotoFile( User user, Photo photo );
-
 	void createUserPhotoDirIfNeed( int userId );
 
 	void deletePhotoFileWithPreview( Photo photo );
@@ -50,5 +46,5 @@ public interface UserPhotoFilePathUtilsService {
 
 	String getUserAvatarImage( int userId, int width, int height, String imageId, String onClick, String cssStyle ) throws IOException;
 
-	File copyFileToUserFolder( final User user, final Photo photo, final File picture ) throws IOException;
+	File copyFileToUserFolder( final User user, final File picture ) throws IOException;
 }

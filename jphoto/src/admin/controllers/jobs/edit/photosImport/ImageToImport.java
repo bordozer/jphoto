@@ -7,11 +7,18 @@ public class ImageToImport {
 	private PhotosImportSource photosImportSource;
 	private final String genreName;
 	private final File imageFile;
+	private String photoImageUrl;
+	private String imageUrl;
 
 	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File imageFile ) {
 		this.photosImportSource = photosImportSource;
 		this.genreName = genreName;
 		this.imageFile = imageFile;
+	}
+
+	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File remotePhotoCacheFile, final String imageUrl ) {
+		this( photosImportSource, genreName, remotePhotoCacheFile);
+		this.imageUrl = imageUrl;
 	}
 
 	public PhotosImportSource getPhotosImportSource() {
@@ -22,8 +29,24 @@ public class ImageToImport {
 		return genreName;
 	}
 
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl( final String imageUrl ) {
+		this.imageUrl = imageUrl;
+	}
+
 	public File getImageFile() {
 		return imageFile;
+	}
+
+	public String getPhotoImageUrl() {
+		return photoImageUrl;
+	}
+
+	public void setPhotoImageUrl( final String photoImageUrl ) {
+		this.photoImageUrl = photoImageUrl;
 	}
 
 	@Override

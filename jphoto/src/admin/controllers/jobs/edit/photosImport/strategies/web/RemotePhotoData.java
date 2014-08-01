@@ -10,6 +10,7 @@ public class RemotePhotoData {
 	private final RemoteUser remoteUser;
 	private final int photoId;
 	private final RemotePhotoSiteCategory remotePhotoSiteCategory;
+	private String imageUrl;
 	private String name;
 	private Date uploadTime;
 	private RemotePhotoSiteImage remotePhotoSiteImage;
@@ -22,10 +23,11 @@ public class RemotePhotoData {
 	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 	private int numberInSeries;
 
-	public RemotePhotoData( final RemoteUser remoteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+	public RemotePhotoData( final RemoteUser remoteUser, final int photoId, final RemotePhotoSiteCategory remotePhotoSiteCategory, final String imageUrl ) {
 		this.remoteUser = remoteUser;
 		this.photoId = photoId;
 		this.remotePhotoSiteCategory = remotePhotoSiteCategory;
+		this.imageUrl = imageUrl;
 	}
 
 	public RemoteUser getRemoteUser() {
@@ -38,6 +40,14 @@ public class RemotePhotoData {
 
 	public RemotePhotoSiteCategory getRemotePhotoSiteCategory() {
 		return remotePhotoSiteCategory;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl( final String imageUrl ) {
+		this.imageUrl = imageUrl;
 	}
 
 	public String getName() {
