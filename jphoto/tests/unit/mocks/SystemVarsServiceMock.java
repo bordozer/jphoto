@@ -102,6 +102,11 @@ public class SystemVarsServiceMock implements SystemVarsService {
 	}
 
 	@Override
+	public boolean isSchedulerEnabled() {
+		return false;
+	}
+
+	@Override
 	public String getPropertiesPath() {
 		return "/path/to/properties";
 	}

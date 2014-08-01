@@ -10,6 +10,7 @@ import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.SystemVarsService;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,13 +41,16 @@ public class ScheduledTasksExecutionServiceImpl implements ScheduledTasksExecuti
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
+	@Autowired
+	private SystemVarsService systemVarsService;
+
 	private LogHelper log = new LogHelper( ScheduledTasksExecutionServiceImpl.class );
 
 	public void loadSchedulerTasksAndStartScheduler() throws SchedulerException {
 
 		loadSchedulerTasks();
 
-		if ( configurationService.getBoolean( ConfigurationKey.SYSTEM_AUTO_START_SCHEDULER ) ) {
+		if ( systemVarsService.isSchedulerEnabled() && configurationService.getBoolean( ConfigurationKey.SYSTEM_AUTO_START_SCHEDULER ) ) {
 			scheduler.start();
 		}
 	}

@@ -131,6 +131,11 @@ public class SystemVarsServiceImpl implements SystemVarsService {
 	// Date/time format properties <--
 
 	@Override
+	public boolean isSchedulerEnabled() {
+		return config.getBoolean( "scheduler.enabled" );
+	}
+
+	@Override
 	public boolean isShowTranslationSigns() {
 		return config.getBoolean( "translator.showTranslationSigns" );
 	}

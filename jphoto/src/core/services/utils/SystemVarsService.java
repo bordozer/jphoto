@@ -46,5 +46,7 @@ public interface SystemVarsService {
 
 	List<Language> getActiveLanguages();
 
+	boolean isSchedulerEnabled();
+
 	boolean isShowTranslationSigns();
 }

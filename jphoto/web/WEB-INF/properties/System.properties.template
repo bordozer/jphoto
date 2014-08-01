@@ -28,3 +28,6 @@ SuperAdminUserIDs=8455
 
 #Is dev mode
 isDevMode=true
+
+#Scheduler is enabled
+scheduler.enabled = true
