@@ -16,12 +16,13 @@ public enum PhotoImageSourceType {
 	}
 
 	public static PhotoImageSourceType getById( final int id ) {
+
 		for ( final PhotoImageSourceType photoImageSourceType : values() ) {
 			if ( photoImageSourceType.getId() == id ) {
 				return photoImageSourceType;
 			}
 		}
 
-		throw new IllegalArgumentException( String.format( "Illegal PhotoImageSourceTypeId: %D", id ) );
+		throw new IllegalArgumentException( String.format( "Illegal PhotoImageSourceTypeId: %d", id ) );
 	}
 }

@@ -246,9 +246,9 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	}
 
 	private class PhotoMapper implements RowMapper<Photo> {
-
 		@Override
 		public Photo mapRow( final ResultSet rs, final int rowNum ) throws SQLException {
+
 			final Photo result = new Photo();
 
 			result.setId( rs.getInt( BaseEntityDao.ENTITY_ID ) );
@@ -280,7 +280,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setImportId( rs.getInt( TABLE_COLUMN_IMPORT_ID ) );
 
 			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
-			result.setPhotoImageSourceType( PhotoImageSourceType.getById( rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
+			result.setPhotoImageSourceType( PhotoImageSourceType.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) ) );
 
 			return result;
 		}
