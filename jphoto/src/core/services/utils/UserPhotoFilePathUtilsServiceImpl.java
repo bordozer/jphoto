@@ -78,7 +78,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		}
 
 		final File file = photo.getPhotoImageFile();
-		if ( file.exists() && file.isFile() ) {
+		if ( file != null && file.exists() && file.isFile() ) {
 			FileUtils.deleteQuietly( file );
 		}
 	}
