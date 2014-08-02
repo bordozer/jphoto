@@ -33,9 +33,9 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 		return downloadAndCacheRemoteImages( remotePhotosData );
 	}
 
-	private List<RemotePhoto> downloadAndCacheRemoteImages( final List<RemotePhotoData> remotePhotoDatas ) throws IOException {
+	private List<RemotePhoto> downloadAndCacheRemoteImages( final List<RemotePhotoData> remotePhotosData ) throws IOException {
 
-		final int toAddCount = remotePhotoDatas.size();
+		final int toAddCount = remotePhotosData.size();
 
 		if ( toAddCount > 0 ) {
 			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 images about to be downloaded", services ).addIntegerParameter( toAddCount ) );
@@ -43,7 +43,7 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 
 		final List<RemotePhoto> result = newArrayList();
 		int counter = 1;
-		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
+		for ( final RemotePhotoData remotePhotoData : remotePhotosData ) {
 
 			final RemotePhotoSiteImage remotePhotoSiteImage = remotePhotoData.getRemotePhotoSiteImage();
 			job.addJobRuntimeLogMessage( new TranslatableMessage( "$1 / $2: Getting image '$3' content", services )
