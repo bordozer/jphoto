@@ -13,7 +13,7 @@
 
 	<div style="float: left; width: 80%; margin-left: 50px;">
 
-		<h3>${eco:translate('Group operation result')}</h3>
+		<h3>${eco:translate('Group operation are finished')}</h3>
 
 		<c:set var="operationResults" value="${photoGroupOperationModel.operationResults}" />
 
@@ -25,7 +25,7 @@
 			</c:forEach>
 		</ul>
 
-		<a href="${photoGroupOperationModel.returnUrl}">${eco:translate('Return')}</a>
+		<a href="${photoGroupOperationModel.returnUrl}">${eco:translate('Group operation: Return back')}</a>
 
 	</div>
 
