@@ -287,13 +287,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Genre list: photos in genre count</nerd>
+		<ru><![CDATA[К-во работ]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Genre list: LAst uploaded photo. Author $1</nerd>
+		<ru><![CDATA[Последняя загруженная работа. Автор $1]]></ru>
 	</translation>
 
 	<translation>

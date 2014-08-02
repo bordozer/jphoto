@@ -3,9 +3,12 @@ package ui.controllers.genres;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoPreviewWrapper;
+import core.general.user.User;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +40,9 @@ public class GenreListController {
 	private PhotoService photoService;
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private PhotoUIService photoUIService;
 
 	@Autowired
@@ -50,11 +56,11 @@ public class GenreListController {
 
 		final List<GenreListEntry> genreListEntries = newArrayList();
 
-		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( EnvironmentContext.getLanguage() );
+		final List<Genre> genres = genreService.loadAllSortedByNameForLanguage( getLanguage() );
 		for ( final Genre genre : genres ) {
 
 			final GenreListEntry entry = new GenreListEntry( genre );
-			entry.setGenreNameTranslated( translatorService.translateGenre( genre, EnvironmentContext.getLanguage() ) );
+			entry.setGenreNameTranslated( translatorService.translateGenre( genre, getLanguage() ) );
 
 			final int lastGenrePhotoId = photoService.getLastGenrePhotoId( genre.getId() );
 			if ( lastGenrePhotoId == 0 ) {
@@ -64,6 +70,10 @@ public class GenreListController {
 			final Photo photo = photoService.load( lastGenrePhotoId );
 			final PhotoPreviewWrapper previewWrapper = photoUIService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() );
 			entry.setPhotoPreviewWrapper( previewWrapper );
+			entry.setPhotosCount( photoService.getPhotoQtyByGenre( genre.getId() ) );
+
+			final User photoAuthor = userService.load( photo.getUserId() );
+			entry.setGenreIconTitle( translatorService.translate( "Genre list: LAst uploaded photo. Author $1", getLanguage(), photoAuthor.getNameEscaped() ) );
 
 			entry.setPhotosByGenreURL( urlUtilsService.getPhotosByGenreLink( genre.getId() ) );
 
@@ -71,6 +81,10 @@ public class GenreListController {
 		}
 
 		return new GenreListModel( genreListEntries );
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )

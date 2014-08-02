@@ -15,10 +15,18 @@
 		<c:forEach var="genreListEntry" items="${genreListEntries}">
 
 			<div class="block-background block-shadow" style="display: inline-block; width: 30%; text-align: center; vertical-align: top; height: 400px;  border: 1px dotted #cccccc; margin: 10px;">
-				<h2 class=""><links:genrePhotos genre="${genreListEntry.genre}"/></h2>
-				<a href="${genreListEntry.photosByGenreURL}">
-					<img src="${genreListEntry.photoPreviewWrapper.photoPreviewImgUrl}" alt="">
-				</a>
+
+				<div style="float: left; width: 100%; height: 370px;">
+					<h2 class=""><links:genrePhotos genre="${genreListEntry.genre}"/></h2>
+					<a href="${genreListEntry.photosByGenreURL}">
+						<img src="${genreListEntry.photoPreviewWrapper.photoPreviewImgUrl}" alt="" title="${genreListEntry.genreIconTitle}">
+					</a>
+				</div>
+
+				<div style="float: left; width: 100%; text-align: left; padding-left: 30px;">
+					${eco:translate("Genre list: photos in genre count")}: ${genreListEntry.photosCount}
+				</div>
+
 			</div>
 
 		</c:forEach>

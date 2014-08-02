@@ -9,6 +9,8 @@ public class GenreListEntry {
 	private String genreNameTranslated;
 	private PhotoPreviewWrapper photoPreviewWrapper;
 	private String photosByGenreURL;
+	private int photosCount;
+	private String genreIconTitle;
 
 	public GenreListEntry( final Genre genre ) {
 		this.genre = genre;
@@ -40,5 +42,21 @@ public class GenreListEntry {
 
 	public String getPhotosByGenreURL() {
 		return photosByGenreURL;
+	}
+
+	public void setPhotosCount( final int photosCount ) {
+		this.photosCount = photosCount;
+	}
+
+	public int getPhotosCount() {
+		return photosCount;
+	}
+
+	public void setGenreIconTitle( final String genreIconTitle ) {
+		this.genreIconTitle = genreIconTitle;
+	}
+
+	public String getGenreIconTitle() {
+		return genreIconTitle;
 	}
 }
