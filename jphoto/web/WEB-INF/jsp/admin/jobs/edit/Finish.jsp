@@ -46,7 +46,15 @@
 						 suppressAutoReloading="true"
 		/>
 
-	<div class="centerAlign">
+	<div style="display: inline-block; width: 500px; margin-left: 40px;">
+
+		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
+		${jobExecutionHistoryEntry.jobParametersDescription}
+
+	</div>
+
+	<div style="display: inline-block; width: 400px; vertical-align: top; text-align: center">
+
 		<h3>${eco:translate(jobType.name)}</h3>
 
 		<a href="${eco:baseAdminUrl()}/jobs/${jobType.prefix}/">
@@ -69,16 +77,14 @@
 		<br />
 		<br />
 
+
+		<c:if test="${isStoppedOrErrorOrCancelled}">
+			<br/>
+			<br/>
+			${errorMessage}
+		</c:if>
+
 	</div>
-
-	<c:if test="${isStoppedOrErrorOrCancelled}">
-		<br/>
-		<br/>
-		${errorMessage}
-	</c:if>
-
-	<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
-	${jobExecutionHistoryEntry.jobParametersDescription}
 
 	<br />
 	<br />
