@@ -4,7 +4,12 @@
 
 	<translation>
 		<nerd>The scheduler is stopped!</nerd>
-		<ru><![CDATA[]]></ru>
+		<ru><![CDATA[Планировщик остановлен!]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>The scheduled is disabled!</nerd>
+		<ru><![CDATA[Планировщик выключен в System.properties!]]></ru>
 	</translation>
 
 	<translation>

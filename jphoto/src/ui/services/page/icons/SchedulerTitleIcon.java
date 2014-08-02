@@ -15,7 +15,7 @@ public class SchedulerTitleIcon extends AbstractTitleIcon {
 
 	@Override
 	protected String getIconTitle() {
-		return getTranslatorService().translate( "The scheduler is stopped!", getLanguage() );
+		return getTranslatorService().translate( ! services.getSystemVarsService().isSchedulerEnabled() ? "The scheduled is disabled!" : "The scheduler is stopped!", getLanguage() );
 	}
 
 	@Override
