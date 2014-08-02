@@ -10,7 +10,7 @@
 
 <tags:page pageModel="${genreListModel.pageModel}">
 
-	<div style="width: 80%; margin-left: auto; margin-right: auto; padding-top: 50px;">
+	<div style="width: 90%; margin-left: auto; margin-right: auto; padding-top: 50px;">
 
 		<c:forEach var="genreListEntry" items="${genreListEntries}">
 
