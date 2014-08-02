@@ -9,7 +9,7 @@ public class UserGenerationModel extends AbstractAdminJobModel {
 	public final static String AVATAR_DIR_FORM_CONTROL = "avatarsDir";
 
 	private String userQtyLimit = "5";
-	private String avatarsDir = "/home/blu/Temp/avatars/"; // TODO:
+	private String avatarsDir = "/home/blu/jphoto/avatars/"; // TODO:
 
 	private JobExecutionStatus generationResult;
 
