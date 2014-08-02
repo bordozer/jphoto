@@ -15,18 +15,16 @@ public class FileConversionServiceImpl implements FileConversionService {
 	@Override
 	public boolean convertSync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
 
-		final String cmd = getCommand( sourceFile, destinationFile, conversionOptions );
+		final String[] cmd = getCommand( sourceFile, destinationFile, conversionOptions );
 
-		final String result = ShellUtils.executeCommandSync( cmd );
-
-		log.debug( result );
+		ShellUtils.executeCommandSync( cmd );
 
 		return true;
 	}
 
 	@Override
 	public void convertAsync( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) throws IOException, InterruptedException {
-		final String cmd = getCommand( sourceFile, destinationFile, conversionOptions );
+		final String[] cmd = getCommand( sourceFile, destinationFile, conversionOptions );
 
 		new Thread(){
 			@Override
@@ -42,14 +40,31 @@ public class FileConversionServiceImpl implements FileConversionService {
 		}.start();
 	}
 
-	private String getCommand( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) {
+	private String[] getCommand( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) {
 
-		return String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s '%s' '%s'"
+		return new String[]{
+			"convert"
+			, "-alpha"
+			, "off"
+			, "-strip"
+			, "+profile"
+			, "iptc"
+			, "-density"
+			, String.valueOf( conversionOptions.getDensity() )
+			, "-units"
+			, "PixelsPerInch"
+			, "-resize"
+			, dimensionToCovertString( conversionOptions.getDimension() )
+			, sourceFile.getPath()
+			, destinationFile.getPath()
+		};
+
+		/*return String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s '%s' '%s'"
 			, conversionOptions.getDensity()
 			, dimensionToCovertString( conversionOptions.getDimension() )
 			, sourceFile.getPath()
 			, destinationFile.getPath()
-		);
+		);*/
 	}
 
 	private static String dimensionToCovertString( final Dimension dimension ) {

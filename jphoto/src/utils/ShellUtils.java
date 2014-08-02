@@ -2,21 +2,20 @@ package utils;
 
 import core.log.LogHelper;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class ShellUtils {
 
 	final static LogHelper log = new LogHelper( ShellUtils.class );
 
-	public static String executeCommandSync( final String cmd ) throws InterruptedException, IOException {
-		log.debug( cmd );
+	public static String executeCommandSync( final String[] cmd ) throws InterruptedException, IOException {
 
-		final Runtime run = Runtime.getRuntime();
+//		log.debug( cmd );
+
 		final Process pr;
 
 		try {
+			final Runtime run = Runtime.getRuntime();
 			pr = run.exec( cmd );
 		} catch ( final IOException e ) {
 			log.error( e );
