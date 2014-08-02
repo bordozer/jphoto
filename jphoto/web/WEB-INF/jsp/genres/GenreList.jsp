@@ -14,8 +14,8 @@
 
 		<c:forEach var="genreListEntry" items="${genreListEntries}">
 
-			<div style="display: inline-block; width: 30%; text-align: center; vertical-align: top;">
-				<h2><links:genrePhotos genre="${genreListEntry.genre}"/></h2>
+			<div class="block-background block-shadow" style="display: inline-block; width: 30%; text-align: center; vertical-align: top; height: 400px;  border: 1px dotted #cccccc; margin: 10px;">
+				<h2 class=""><links:genrePhotos genre="${genreListEntry.genre}"/></h2>
 				<a href="${genreListEntry.photosByGenreURL}">
 					<img src="${genreListEntry.photoPreviewWrapper.photoPreviewImgUrl}" alt="">
 				</a>
