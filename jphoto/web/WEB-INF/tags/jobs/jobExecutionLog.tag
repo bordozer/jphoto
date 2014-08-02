@@ -7,4 +7,4 @@ ${eco:translate('Job execution log')}:
 
 <br />
 
-<iframe id="jobExecutionLogIFrame" src="${eco:baseAdminUrl()}/jobs/execution/${jobId}/log/" frameborder="1" width="90%" height="300px"></iframe>
+<iframe id="jobExecutionLogIFrame" src="${eco:baseAdminUrl()}/jobs/execution/${jobId}/log/" frameborder="1" width="90%" height="390px"></iframe>

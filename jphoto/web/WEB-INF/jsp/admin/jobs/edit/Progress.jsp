@@ -50,36 +50,41 @@
 
 	<c:set var="jobTypeNameTranslated" value="${eco:translate(jobType.name)}"/>
 
-	<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
-		<div style="float: left; width: 32px; margin-right: 10px;"><html:img32 src="jobtype/${jobType.icon}" alt="${jobTypeNameTranslated}" /></div>
-		${jobTypeNameTranslated}
+	<div style="display: inline-block; width: 600px; margin-left: 40px;">
+		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
+		${jobExecutionHistoryEntry.jobParametersDescription}
+
+		<br />
+
+		<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" />
 	</div>
 
-	<div style="float: left; width: 100%;">
-	${eco:translate('Job JSP: Job type')} :${jobTypeNameTranslated}
-	<br />
-	${eco:translate('Job JSP: Start time')}: <b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
 
-	<br />
-	<br />
+	<div style="display: inline-block; width: 600px; vertical-align: top;">
 
-	<b>${eco:translate('Job JSP: Job progress')}:
-		<span id="progressStatusFullDescription_${id}"></span>
-	</b>
+		<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
+			<div style="float: left; width: 32px; margin-right: 10px;"><html:img32 src="jobtype/${jobType.icon}" alt="${jobTypeNameTranslated}" /></div>
+			${jobTypeNameTranslated}
+		</div>
 
-	<br />
-	<br />
-	<div id="progressbar_${jobExecutionHistoryEntry.id}" style="width: 400px; height: 7px; text-align: center;"></div>
+		${eco:translate('Job JSP: Job type')} :${jobTypeNameTranslated}
+		<br />
+		${eco:translate('Job JSP: Start time')}: <b>${eco:formatDate(jobExecutionHistoryEntry.startTime)} ${eco:formatTime(jobExecutionHistoryEntry.startTime)}</b>
 
-	<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
-	${jobExecutionHistoryEntry.jobParametersDescription}
+		<br />
+		<br />
 
-	<br />
+		<b>${eco:translate('Job JSP: Job progress')}:
+			<span id="progressStatusFullDescription_${id}"></span>
+		</b>
 
-	<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" />
+		<br />
+		<br />
+		<div id="progressbar_${jobExecutionHistoryEntry.id}" style="width: 400px; height: 7px; text-align: center;"></div>
 
-	<br />
-	<br />
+	</div>
+
+	<div style="padding-top: 20px;">
 
 	<jobs:jobExecutionLog jobId="${command.job.jobId}" />
 
