@@ -74,7 +74,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		class PreviewNameGenerator {
 
 			private File generate( final int number ) {
-				return new File( userPhotoPreviewDir.getPath(), String.format( "%d_%05d", userId, number ) );
+				return new File( userPhotoPreviewDir.getPath(), String.format( "%d_%05d.jpg", userId, number ) );
 			}
 
 			private boolean doesPreviewWithNumberExists( final int number ) {

@@ -43,12 +43,16 @@ public class FileConversionServiceImpl implements FileConversionService {
 	}
 
 	private String getCommand( final File sourceFile, final File destinationFile, final ConversionOptions conversionOptions ) {
-		final String resize = dimensionToCovertString( conversionOptions.getDimension() );
-		return String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s %s %s"
-				, conversionOptions.getDensity(), resize, sourceFile.getPath(), destinationFile.getPath() );
+
+		return String.format( "convert -alpha off -strip +profile iptc -density %s -units PixelsPerInch -resize %s '%s' '%s'"
+			, conversionOptions.getDensity()
+			, dimensionToCovertString( conversionOptions.getDimension() )
+			, sourceFile.getPath()
+			, destinationFile.getPath()
+		);
 	}
 
-	private static String dimensionToCovertString( Dimension dimension ) {
+	private static String dimensionToCovertString( final Dimension dimension ) {
 		return String.format( "%sx%s", dimension.getWidth(), dimension.getHeight() );
 	}
 }
