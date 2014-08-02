@@ -50,16 +50,6 @@
 
 	<c:set var="jobTypeNameTranslated" value="${eco:translate(jobType.name)}"/>
 
-	<div style="display: inline-block; width: 600px; margin-left: 40px;">
-		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
-		${jobExecutionHistoryEntry.jobParametersDescription}
-
-		<br />
-
-		<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" />
-	</div>
-
-
 	<div style="display: inline-block; width: 600px; vertical-align: top;">
 
 		<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
@@ -82,6 +72,15 @@
 		<br />
 		<div id="progressbar_${jobExecutionHistoryEntry.id}" style="width: 400px; height: 7px; text-align: center;"></div>
 
+	</div>
+
+	<div style="display: inline-block; width: 600px;">
+		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
+		${jobExecutionHistoryEntry.jobParametersDescription}
+
+		<br />
+
+		<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" />
 	</div>
 
 	<div style="padding-top: 20px;">

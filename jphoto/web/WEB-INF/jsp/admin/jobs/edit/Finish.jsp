@@ -46,14 +46,7 @@
 						 suppressAutoReloading="true"
 		/>
 
-	<div style="display: inline-block; width: 500px; margin-left: 40px;">
-
-		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
-		${jobExecutionHistoryEntry.jobParametersDescription}
-
-	</div>
-
-	<div style="display: inline-block; width: 400px; vertical-align: top; text-align: center">
+	<div style="display: inline-block; width: 600px; vertical-align: top; text-align: center">
 
 		<h3>${eco:translate(jobType.name)}</h3>
 
@@ -83,6 +76,13 @@
 			<br/>
 			${errorMessage}
 		</c:if>
+
+	</div>
+
+	<div style="display: inline-block; width: 500px;">
+
+		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
+		${jobExecutionHistoryEntry.jobParametersDescription}
 
 	</div>
 
