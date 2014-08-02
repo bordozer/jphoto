@@ -107,6 +107,10 @@ public abstract class AbstractJobController {
 
 		final AbstractJob job = model.getJob();
 
+		if ( job == null ) {
+			return getView( getStartViewName(), model );
+		}
+
 		model.setPageTitleData( breadcrumbsAdminService.getAdminJobsBreadcrumbs( job.getJobName() ) );
 
 		initJobFromModel( model );

@@ -411,6 +411,11 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 		for ( final RemotePhotoSiteImage remotePhotoSiteImage : remotePhotoImages ) {
 
+			if ( remotePhotoSiteImage == null ) {
+				photoNumberInSeries++;
+				continue;
+			}
+
 			logger.logCollectingRemotePhotoDataForImage( remoteUser.getId(), remotePhotoId, remotePhotoSiteImage.getImageUrl() );
 
 			final RemotePhotoData remotePhotoData = new RemotePhotoData( remoteUser, remotePhotoId, photosightCategory, remotePhotoSiteImage.getImageUrl() );
