@@ -46,7 +46,7 @@
 						 suppressAutoReloading="true"
 		/>
 
-	<div style="display: inline-block; width: 600px; vertical-align: top; text-align: center">
+	<div style="display: inline-block; width: 500px; vertical-align: top; text-align: center">
 
 		<h3>${eco:translate(jobType.name)}</h3>
 

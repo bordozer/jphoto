@@ -50,7 +50,7 @@
 
 	<c:set var="jobTypeNameTranslated" value="${eco:translate(jobType.name)}"/>
 
-	<div style="display: inline-block; width: 600px; vertical-align: top;">
+	<div style="display: inline-block; width: 500px; vertical-align: top;">
 
 		<div style="float: left; font-size: x-large; margin: 20px; width: 90%;">
 			<div style="float: left; width: 32px; margin-right: 10px;"><html:img32 src="jobtype/${jobType.icon}" alt="${jobTypeNameTranslated}" /></div>
