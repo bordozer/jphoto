@@ -40,7 +40,7 @@ public class UserGenerationValidator extends SavedJobValidator implements Valida
 		final File avatarDir = new File( avatarPath );
 		if ( ! avatarDir.exists() ) {
 			errors.rejectValue( UserGenerationModel.AVATAR_DIR_FORM_CONTROL
-				, translatorService.translate( "$1 does not exist", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Avatar dir" ) ) );
+				, translatorService.translate( "Folder $1 does not exist", EnvironmentContext.getLanguage(), FormatUtils.getFormattedFieldName( "Avatar dir" ) ) );
 			return;
 		}
 

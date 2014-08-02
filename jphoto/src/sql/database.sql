@@ -710,7 +710,8 @@ DELETE FROM `userTeam`;
 DELETE FROM `userSecurity`;
 DELETE FROM users;
 
-DELETE FROM userSecurity;
+
+
 
 DELETE FROM `schedulerTasksProperties`;
 DELETE FROM `schedulerTasks`;
