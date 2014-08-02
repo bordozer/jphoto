@@ -349,6 +349,11 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
+	public int getLastGenrePhotoId( final int genreId ) {
+		return photoDao.getLastGenrePhotoId( genreId );
+	}
+
+	@Override
 	public Date getPhotoAnonymousPeriodExpirationTime( final Photo photo ) {
 		final int anonymousPeriod = configurationService.getConfiguration( ConfigurationKey.PHOTO_UPLOAD_ANONYMOUS_PERIOD ).getValueInt();
 		return dateUtilsService.getDatesOffset( photo.getUploadTime(), anonymousPeriod );

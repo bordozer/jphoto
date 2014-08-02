@@ -55,6 +55,8 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	int getLastUserPhotoId( final int userId );
 
+	int getLastGenrePhotoId( final int genreId );
+
 	Date getPhotoAnonymousPeriodExpirationTime( final Photo photo );
 
 	PhotoActionAllowance getPhotoCommentAllowance( final Photo photo );
