@@ -47,7 +47,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 					sendSystemNotificationAboutGotMembershipToUser( user );
 
-					getLog().info( String.format( "Member %s has got new status: %s", user.getId(), UserStatus.MEMBER.getName() ) );
+					getLog().info( String.format( "Member %s has got new status: %s", user, UserStatus.MEMBER.getName() ) );
 
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services )
 						.addUserCardLinkParameter( user )
@@ -56,7 +56,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 
 					activityStreamService.saveUserStatusChange( user, UserStatus.CANDIDATE, UserStatus.MEMBER, dateUtilsService.getCurrentTime(), services );
 				} else {
-					getLog().error( String.format( "Can not update member status. Id = # %s", user.getId() ) );
+					getLog().error( String.format( "Can not update member status. Id = # %s", user ) );
 
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
 					addJobRuntimeLogMessage( translatableMessage );
