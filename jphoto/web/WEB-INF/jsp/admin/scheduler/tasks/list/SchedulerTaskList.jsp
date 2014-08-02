@@ -46,18 +46,26 @@
 			${separator}
 
 			<c:set var="schedulerRunning" value="${schedulerTaskListModel.schedulerRunning}"/>
+			<c:set var="schedulerEnabled" value="${schedulerTaskListModel.schedulerEnabled}"/>
 
-			<c:if test="${schedulerRunning}">
-				<links:schedulerStop>
-					<html:img32 src="scheduler/SchedulerIsRunning.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is running. Click to stop scheduler.')}" />
-				</links:schedulerStop>
+			<c:if test="${schedulerEnabled}">
+				<c:if test="${schedulerRunning}">
+					<links:schedulerStop>
+						<html:img32 src="scheduler/SchedulerIsRunning.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is running. Click to stop scheduler.')}" />
+					</links:schedulerStop>
+				</c:if>
+
+				<c:if test="${not schedulerRunning}">
+					<links:schedulerRun>
+						<html:img32 src="scheduler/SchedulerIsStopped.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is stopped. Click to run scheduler.')}" />
+					</links:schedulerRun>
+				</c:if>
 			</c:if>
 
-			<c:if test="${not schedulerRunning}">
-				<links:schedulerRun>
-					<html:img32 src="scheduler/SchedulerIsStopped.png" alt="${eco:translate('SchedulerTaskList: The Scheduler is stopped. Click to run scheduler.')}" />
-				</links:schedulerRun>
+			<c:if test="${! schedulerEnabled}">
+				<html:img32 src="scheduler/SchedulerIsStopped.png" alt="${eco:translate('The scheduled is disabled!')}" />
 			</c:if>
+
 
 			${separator}
 

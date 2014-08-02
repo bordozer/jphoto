@@ -8,6 +8,7 @@ import core.general.scheduler.SchedulerTask;
 import core.log.LogHelper;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,9 @@ public class SchedulerTaskListController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private SystemVarsService systemVarsService;
+
 	private final LogHelper log = new LogHelper( SchedulerTaskListController.class );
 
 	@ModelAttribute( MODEL_NAME )
@@ -73,6 +77,7 @@ public class SchedulerTaskListController {
 		model.setSavedJobMap( map );
 
 		model.setSchedulerRunning( scheduledTasksExecutionService.isRunning() );
+		model.setSchedulerEnabled( systemVarsService.isSchedulerEnabled() );
 
 		return model;
 	}
@@ -84,6 +89,11 @@ public class SchedulerTaskListController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/run/" )
 	public String schedulerStart( final @ModelAttribute( MODEL_NAME ) SchedulerTaskListModel model ) {
+
+		if ( ! systemVarsService.isSchedulerEnabled() ) {
+			return getForwardToListView();
+		}
+
 		final Language language = EnvironmentContext.getLanguage();
 		try {
 			log.info( "Starting scheduler" );

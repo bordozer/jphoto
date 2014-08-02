@@ -16,6 +16,7 @@ public class SchedulerTaskListModel extends AbstractGeneralModel {
 	private String schedulerTasksFormAction;
 
 	private boolean schedulerRunning;
+	private boolean schedulerEnabled;
 
 	public Map<Integer, SavedJob> getSavedJobMap() {
 		return savedJobMap;
@@ -55,5 +56,13 @@ public class SchedulerTaskListModel extends AbstractGeneralModel {
 
 	public void setSchedulerTasksFormAction( final String schedulerTasksFormAction ) {
 		this.schedulerTasksFormAction = schedulerTasksFormAction;
+	}
+
+	public boolean isSchedulerEnabled() {
+		return schedulerEnabled;
+	}
+
+	public void setSchedulerEnabled( final boolean schedulerEnabled ) {
+		this.schedulerEnabled = schedulerEnabled;
 	}
 }
