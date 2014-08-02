@@ -21,9 +21,8 @@
 <%
 	final ImageFileUtilsService imageFileUtilsService = ApplicationContextHelper.getImageFileUtilsService();
 
-	final File picture = photoInfo.getPhoto().getPhotoImageFile();
-	final Dimension originalDimension = imageFileUtilsService.getImageDimension( picture ); /* TODO: move to controller! */
-	final Dimension resizedDimension = imageFileUtilsService.resizePhotoImage( originalDimension ); /* TODO: move to controller! */
+	final Dimension originalDimension = photoInfo.getPhoto().getImageDimension();
+	final Dimension shownDimension = imageFileUtilsService.resizePhotoImage( originalDimension );
 %>
 
 <c:set var="photo" value="${photoInfo.photo}" />
@@ -35,7 +34,7 @@
 <c:set var="isPhotoAuthorNameMustBeHidden" value="${photoInfo.photoAuthorNameMustBeHidden}" />
 
 <c:set var="originalDimension" value="<%=originalDimension%>" />
-<c:set var="resizedDimension" value="<%=resizedDimension%>" />
+<c:set var="resizedDimension" value="<%=shownDimension%>" />
 
 <div id="photoInfoDiv">
 	<div class="votingDiv block-background block-border">
