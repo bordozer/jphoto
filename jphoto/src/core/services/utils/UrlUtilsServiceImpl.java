@@ -505,6 +505,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 		return String.format( "%s/translations/custom/voting-categories/", getBaseAdminURL() );
 	}
 
+	@Override
+	public String getGenreListLink() {
+		return String.format( "%s/genres/", getBaseURL() );
+	}
+
 	public void setSystemVarsService( final SystemVarsService systemVarsService ) {
 		this.systemVarsService = systemVarsService;
 	}

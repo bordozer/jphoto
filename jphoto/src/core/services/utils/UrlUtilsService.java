@@ -197,4 +197,6 @@ public interface UrlUtilsService {
 	String getAdminGenresTranslationsUrl();
 
 	String getAdminVotingCategoriesTranslationsUrl();
+
+	String getGenreListLink();
 }

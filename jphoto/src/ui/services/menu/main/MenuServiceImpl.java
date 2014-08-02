@@ -97,7 +97,7 @@ public class MenuServiceImpl implements MenuService {
 			menuItems.add( new MenuItem( caption, link ) );
 		}
 
-		menus.put( new MenuItem( translatorService.translate( "Main menu: Photos by categories", getLanguage() ), "" ), menuItems );
+		menus.put( new MenuItem( translatorService.translate( "Main menu: Photos by categories", getLanguage() ), urlUtilsService.getGenreListLink() ), menuItems );
 	}
 
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
