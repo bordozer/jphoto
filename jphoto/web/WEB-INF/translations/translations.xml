@@ -293,7 +293,7 @@
 
 	<translation>
 		<nerd>Genre list: LAst uploaded photo. Author $1</nerd>
-		<ru><![CDATA[Последняя загруженная работа. Автор $1]]></ru>
+		<ru><![CDATA[Последняя загруженная работа. Автор - $1]]></ru>
 	</translation>
 
 	<translation>
