@@ -32,4 +32,17 @@ public class CommonBreadcrumbsServiceImpl implements CommonBreadcrumbsService {
 
 		return new PageTitleData( title, header, breadcrumbs.build() );
 	}
+
+	@Override
+	public PageTitleData genGenreListBreadcrumbs() {
+
+		final TranslatableStringBreadcrumb text = new TranslatableStringBreadcrumb( "Breadcrumbs: Genre list", services );
+
+		final String title = BreadcrumbsBuilder.pageTitle( text, services ).build();
+		final String header = BreadcrumbsBuilder.pageHeader( text, services ).build();
+
+		final BreadcrumbsBuilder breadcrumbs = portalPage( services ).translatableString( "Breadcrumbs: Genre list" );
+
+		return new PageTitleData( title, header, breadcrumbs.build() );
+	}
 }

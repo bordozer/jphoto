@@ -6,4 +6,6 @@ import ui.elements.PageTitleData;
 public interface CommonBreadcrumbsService {
 
 	PageTitleData getActivityStreamBreadcrumbs( final ActivityType activityType );
+
+	PageTitleData genGenreListBreadcrumbs();
 }
