@@ -242,7 +242,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private boolean filterOutAlreadyDownloadedPhotos( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final User user ) {
 
-		/*final int wasCty = remotePhotoIds.size();
+		/*final int wasCount = remotePhotoIds.size();
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
 
 		CollectionUtils.filter( remotePhotoIds, new Predicate<Integer>() {
@@ -252,7 +252,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		} );
 
-		return importParameters.isBreakImportIfAlreadyImportedPhotoFound() && wasCty < remotePhotoIds.size();*/
+		return importParameters.isBreakImportIfAlreadyImportedPhotoFound() && wasCount > remotePhotoIds.size();*/
 
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
 		final String remoteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
