@@ -244,9 +244,11 @@
 									<table:tr>
 										<table:tdtext text_t="Photo import job parameter: Image import strategy"/>
 										<table:td>
-											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyFile.id}" /> ${eco:translate(photoImageImportStrategyFile.description)}
+											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyFile.id}" />
+											<label for="photoImageImportStrategyTypeId1">${eco:translate(photoImageImportStrategyFile.description)}</label>
 											<br />
-											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyWeb.id}" /> ${eco:translate(photoImageImportStrategyWeb.description)}
+											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyWeb.id}" />
+											<label for="photoImageImportStrategyTypeId2">${eco:translate(photoImageImportStrategyWeb.description)}</label>
 										</table:td>
 									</table:tr>
 
