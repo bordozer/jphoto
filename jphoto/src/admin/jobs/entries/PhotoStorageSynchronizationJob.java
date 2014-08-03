@@ -39,7 +39,8 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 		final List<RemotePhotoSiteCategory> photosightCategories = Arrays.asList( PhotosightCategory.values() );
 
-		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters( PhotosImportSource.PHOTOSIGHT, usersIds
+		final AbstractImportParameters importParameters = new RemoteSitePhotosImportParameters( getPhotosImportSource()
+			, usersIds
 			, UserGender.MALE
 			, UserMembershipType.AUTHOR
 			, true
@@ -84,12 +85,16 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 	private List<String> getUsersIds() {
 		final List<String> usersIds = newArrayList();
-		final File storage = new RemotePhotoSiteCacheXmlUtils( PhotosImportSource.PHOTOSIGHT, services.getSystemVarsService().getRemotePhotoSitesCacheFolder(), services.getRemotePhotoCategoryService(), PhotoImageLocationType.WEB ).getPhotoStorage();
+		final File storage = new RemotePhotoSiteCacheXmlUtils( getPhotosImportSource(), services.getSystemVarsService().getRemotePhotoSitesCacheFolder(), services.getRemotePhotoCategoryService(), PhotoImageLocationType.WEB ).getPhotoStorage();
 
 		final File[] userDirList = storage.listFiles( services.getPredicateUtilsService().getDirFilter() );
 		for ( final File file : userDirList ) {
 			usersIds.add( file.getName() );
 		}
 		return usersIds;
+	}
+
+	private PhotosImportSource getPhotosImportSource() {
+		return PhotosImportSource.PHOTOSIGHT;
 	}
 }
