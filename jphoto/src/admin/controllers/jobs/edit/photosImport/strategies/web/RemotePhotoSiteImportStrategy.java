@@ -245,14 +245,22 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final JobHelperService jobHelperService = getServices().getJobHelperService();
 		final String remoteUserPageLink = remoteContentHelper.getRemoteUserCardLink( remoteUser );
 
+		boolean hasAlreadyUploadedPhotoFound = false;
+
 		final Iterator<Integer> iterator = remotePhotoIds.iterator();
 		while ( iterator.hasNext() ) {
+
+			final int remotePhotoId = iterator.next();
 
 			if ( job.hasJobFinishedWithAnyResult() ) {
 				break;
 			}
 
-			final int remotePhotoId = iterator.next();
+			if ( hasAlreadyUploadedPhotoFound ) {
+				iterator.remove();
+
+				continue;
+			}
 
 			if ( jobHelperService.doesUserPhotoExist( user.getId(), remotePhotoId ) ) {
 
@@ -262,7 +270,9 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 					iterator.remove();
 
-					return true;
+					hasAlreadyUploadedPhotoFound = true;
+
+					continue;
 				}
 
 				logger.logSkippingPhotoImportBecauseItHasBeenAlreadyImported( remoteUserPageLink, remotePhotoId );
@@ -271,7 +281,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			}
 		}
 
-		return false;
+		return hasAlreadyUploadedPhotoFound;
 	}
 
 	private List<RemotePhotoData> getRemotePhotosData( final RemoteUser remoteUser, final List<Integer> remotePhotoIds, final List<RemotePhotoData> cachedRemotePhotosData ) throws IOException {
