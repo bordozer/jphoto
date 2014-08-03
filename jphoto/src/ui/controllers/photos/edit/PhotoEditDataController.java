@@ -1,10 +1,11 @@
 package ui.controllers.photos.edit;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.enums.PhotoActionAllowance;
 import core.enums.YesNo;
 import core.exceptions.SaveToDBException;
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.EmailNotificationType;
@@ -357,7 +358,8 @@ public class PhotoEditDataController {
 		photo.setVotingAllowance( model.getVotingAllowance() );
 		photo.setAnonymousPosting( model.isAnonymousPosting() );
 
-		photo.setPhotoImageImportStrategyType( PhotoImageImportStrategyType.FILE );
+		photo.setPhotoImageLocationType( PhotoImageLocationType.FILE );
+		photo.setPhotosImportSource( PhotosImportSource.FILE_SYSTEM );
 	}
 
 	private void assertPhotoExistsAndCurrentUserCanEditIt( final String _photoId ) {

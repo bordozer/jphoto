@@ -1,5 +1,6 @@
 package core.general.photo;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractBaseEntity;
 import core.general.img.Dimension;
@@ -43,30 +44,8 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	private int importId;
 
 	private Dimension imageDimension;
-	private PhotoImageImportStrategyType photoImageImportStrategyType;
-
-	public Photo() {
-	}
-
-	public Photo( final Photo photo ) {
-		setId( photo.getId() );
-		name = photo.getName();
-		userId = photo.getUserId();
-		genreId = photo.getGenreId();
-		keywords = photo.getKeywords();
-		description = photo.getDescription();
-		photoImageFile = photo.getPhotoImageFile();
-		photoImageUrl = photo.getPhotoImageUrl();
-		fileSize = photo.getFileSize();
-		uploadTime = photo.getUploadTime();
-		containsNudeContent = photo.isContainsNudeContent();
-		bgColor = photo.getBgColor();
-		commentsAllowance = photo.getCommentsAllowance();
-		notificationEmailAboutNewPhotoComment = photo.isNotificationEmailAboutNewPhotoComment();
-		votingAllowance = photo.getVotingAllowance();
-		isAnonymousPosting = photo.isAnonymousPosting();
-		userGenreRank = photo.getUserGenreRank();
-	}
+	private PhotoImageLocationType photoImageLocationType;
+	private PhotosImportSource photosImportSource;
 
 	@Override
 	public String getName() {
@@ -225,12 +204,20 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 		this.imageDimension = imageDimension;
 	}
 
-	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
-		return photoImageImportStrategyType;
+	public PhotoImageLocationType getPhotoImageLocationType() {
+		return photoImageLocationType;
 	}
 
-	public void setPhotoImageImportStrategyType( final PhotoImageImportStrategyType photoImageImportStrategyType ) {
-		this.photoImageImportStrategyType = photoImageImportStrategyType;
+	public void setPhotoImageLocationType( final PhotoImageLocationType photoImageLocationType ) {
+		this.photoImageLocationType = photoImageLocationType;
+	}
+
+	public PhotosImportSource getPhotosImportSource() {
+		return photosImportSource;
+	}
+
+	public void setPhotosImportSource( final PhotosImportSource photosImportSource ) {
+		this.photosImportSource = photosImportSource;
 	}
 
 	@Override

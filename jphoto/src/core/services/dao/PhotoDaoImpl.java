@@ -1,5 +1,6 @@
 package core.services.dao;
 
+import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.enums.PhotoActionAllowance;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
@@ -7,7 +8,7 @@ import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.img.Dimension;
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -46,7 +47,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	public final static String TABLE_COLUMN_IMPORT_ID = "importId";
 	public final static String TABLE_COLUMN_IMAGE_WIDTH = "image_width";
 	public final static String TABLE_COLUMN_IMAGE_HEIGHT = "image_height";
-	public final static String TABLE_COLUMN_IMAGE_SOURCE_TYPE = "imageSourceType";
+	public final static String TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID = "imageLocationTypeId";
+	public final static String TABLE_COLUMN_IMAGE_SOURCE_ID = "imageSourceId";
 
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 	public static final Map<Integer, String> updatableFields = newLinkedHashMap();
@@ -78,9 +80,10 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 17, TABLE_COLUMN_IMPORT_ID );
 		fields.put( 18, TABLE_COLUMN_IMAGE_WIDTH );
 		fields.put( 19, TABLE_COLUMN_IMAGE_HEIGHT );
-		fields.put( 20, TABLE_COLUMN_IMAGE_SOURCE_TYPE );
+		fields.put( 20, TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID );
 		fields.put( 21, TABLE_COLUMN_FILE_SIZE );
 		fields.put( 22, TABLE_COLUMN_PHOTO_PREVIEW_NAME );
+		fields.put( 23, TABLE_COLUMN_IMAGE_SOURCE_ID );
 	}
 
 	static {
@@ -166,7 +169,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_KEYWORDS, entry.getKeywords() );
 		paramSource.addValue( TABLE_COLUMN_DESCRIPTION, entry.getDescription() );
 
-		switch ( entry.getPhotoImageImportStrategyType() ) {
+		switch ( entry.getPhotoImageLocationType() ) {
 			case FILE:
 				if ( entry.getPhotoImageFile() != null ) {
 					paramSource.addValue( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE, entry.getPhotoImageFile().getName() );
@@ -194,7 +197,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 		paramSource.addValue( TABLE_COLUMN_IMAGE_WIDTH, entry.getImageDimension().getWidth() );
 		paramSource.addValue( TABLE_COLUMN_IMAGE_HEIGHT, entry.getImageDimension().getHeight() );
-		paramSource.addValue( TABLE_COLUMN_IMAGE_SOURCE_TYPE, entry.getPhotoImageImportStrategyType().getId() );
+		paramSource.addValue( TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID, entry.getPhotoImageLocationType().getId() );
+		paramSource.addValue( TABLE_COLUMN_IMAGE_SOURCE_ID, entry.getPhotosImportSource().getId() );
 
 		return paramSource;
 	}
@@ -265,12 +269,13 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setKeywords( rs.getString( TABLE_COLUMN_KEYWORDS ) );
 			result.setDescription( rs.getString( TABLE_COLUMN_DESCRIPTION ) );
 
+			result.setPhotosImportSource( PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_ID ) ) );
 
-			final PhotoImageImportStrategyType photoImageImportStrategyType = PhotoImageImportStrategyType.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) );
-			result.setPhotoImageImportStrategyType( photoImageImportStrategyType );
+			final PhotoImageLocationType photoImageLocationType = PhotoImageLocationType.getById( rs.getInt( TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID ) );
+			result.setPhotoImageLocationType( photoImageLocationType );
 
 			final String fileName = rs.getString( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE );
-			switch ( photoImageImportStrategyType ) {
+			switch ( photoImageLocationType ) {
 				case FILE:
 					final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
 					result.setPhotoImageFile( file );

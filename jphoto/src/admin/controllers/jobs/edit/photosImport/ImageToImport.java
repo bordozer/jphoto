@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport;
 
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 
 import java.io.File;
 
@@ -9,20 +9,20 @@ public class ImageToImport {
 	private final PhotosImportSource photosImportSource;
 	private final String genreName;
 	private final File imageFile;
-	private final PhotoImageImportStrategyType photoImageImportStrategyType;
+	private final PhotoImageLocationType photoImageLocationType;
 
 	private String photoImageUrl;
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageImportStrategyType photoImageImportStrategyType, final String genreName, final File imageFile ) {
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageLocationType photoImageLocationType, final String genreName, final File imageFile ) {
 		this.photosImportSource = photosImportSource;
 		this.genreName = genreName;
 		this.imageFile = imageFile;
 
-		this.photoImageImportStrategyType = photoImageImportStrategyType;
+		this.photoImageLocationType = photoImageLocationType;
 	}
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageImportStrategyType photoImageImportStrategyType, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
-		this( photosImportSource, photoImageImportStrategyType, genreName, remotePhotoCacheFile );
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageLocationType photoImageLocationType, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
+		this( photosImportSource, photoImageLocationType, genreName, remotePhotoCacheFile );
 		this.photoImageUrl = photoImageUrl;
 	}
 
@@ -46,8 +46,8 @@ public class ImageToImport {
 		this.photoImageUrl = photoImageUrl;
 	}
 
-	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
-		return photoImageImportStrategyType;
+	public PhotoImageLocationType getPhotoImageLocationType() {
+		return photoImageLocationType;
 	}
 
 	@Override

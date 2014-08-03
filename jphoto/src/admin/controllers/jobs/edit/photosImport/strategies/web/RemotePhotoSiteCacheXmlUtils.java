@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.strategies.web;
 import admin.controllers.jobs.edit.photosImport.ImageToImport;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.exceptions.BaseRuntimeException;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.log.LogHelper;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.system.Services;
@@ -55,15 +55,15 @@ public class RemotePhotoSiteCacheXmlUtils {
 	private PhotosImportSource photosImportSource;
 	private final RemotePhotoCategoryService remotePhotoCategoryService;
 	private final File remotePhotoSitesCachePath;
-	private final PhotoImageImportStrategyType photoImageImportStrategyType;
+	private final PhotoImageLocationType photoImageLocationType;
 
 	private final static LogHelper log = new LogHelper( RemotePhotoSiteCacheXmlUtils.class );
 
-	public RemotePhotoSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath, final RemotePhotoCategoryService remotePhotoCategoryService, final PhotoImageImportStrategyType photoImageImportStrategyType ) {
+	public RemotePhotoSiteCacheXmlUtils( final PhotosImportSource photosImportSource, final File remotePhotoSitesCachePath, final RemotePhotoCategoryService remotePhotoCategoryService, final PhotoImageLocationType photoImageLocationType ) {
 		this.photosImportSource = photosImportSource;
 		this.remotePhotoCategoryService = remotePhotoCategoryService;
 		this.remotePhotoSitesCachePath = remotePhotoSitesCachePath;
-		this.photoImageImportStrategyType = photoImageImportStrategyType;
+		this.photoImageLocationType = photoImageLocationType;
 	}
 
 	public void initRemoteUserCacheFileStructure( final RemoteUser remoteUser ) throws IOException {
@@ -222,7 +222,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 
 		writeImageContentToFile( remotePhotoCacheFile, imageContent, "ISO-8859-1" );
 
-		final ImageToImport imageToImport = new ImageToImport( photosImportSource, photoImageImportStrategyType, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile, remotePhotoData.getImageUrl() );
+		final ImageToImport imageToImport = new ImageToImport( photosImportSource, photoImageLocationType, remotePhotoSiteCategory.getKey(), remotePhotoCacheFile, remotePhotoData.getImageUrl() );
 
 		log.debug( String.format( "Photo %s has been saved on disc: %s", remotePhotoData, imageToImport.getImageFile().getCanonicalPath() ) );
 
@@ -290,7 +290,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		}
 	}
 
-	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
-		return photoImageImportStrategyType;
+	public PhotoImageLocationType getPhotoImageLocationType() {
+		return photoImageLocationType;
 	}
 }

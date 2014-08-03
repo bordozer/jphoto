@@ -2,7 +2,7 @@ package utils;
 
 import common.AbstractTestCase;
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.general.user.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setUserId( userId );
 		photo.setName( "Photo name" );
 
-		photo.setPhotoImageImportStrategyType( PhotoImageImportStrategyType.FILE );
+		photo.setPhotoImageLocationType( PhotoImageLocationType.FILE );
 		photo.setPhotoImageFile( new File( "/photoDir", "photoFileName" ) );
 		photo.setPhotoImageUrl( "some.host.ua/remote/url/image.jpg" );
 		photo.setPhotoPreviewName( "preview_name_saved_in_db.jpg" );
@@ -48,7 +48,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
 
-		photo.setPhotoImageImportStrategyType( PhotoImageImportStrategyType.WEB );
+		photo.setPhotoImageLocationType( PhotoImageLocationType.WEB );
 		assertEquals( "http://some.host.ua/remote/url/image.jpg", userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 	}

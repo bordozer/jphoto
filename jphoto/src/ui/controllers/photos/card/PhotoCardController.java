@@ -3,7 +3,7 @@ package ui.controllers.photos.card;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreview;
 import core.general.user.User;
@@ -109,7 +109,7 @@ public class PhotoCardController {
 
 		final Photo photo = photoService.load( photoId );
 
-		if ( photo.getPhotoImageImportStrategyType() == PhotoImageImportStrategyType.FILE ) {
+		if ( photo.getPhotoImageLocationType() == PhotoImageLocationType.FILE ) {
 			securityService.assertPhotoFileExists( photo );
 		}
 

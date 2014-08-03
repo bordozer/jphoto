@@ -1,7 +1,7 @@
 package ui.services.menu.entry.items.photo.admin;
 
 import core.general.photo.Photo;
-import core.general.photo.PhotoImageImportStrategyType;
+import core.general.photo.PhotoImageLocationType;
 import core.general.user.User;
 import core.services.system.Services;
 import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
@@ -41,7 +41,7 @@ public class PhotoMenuItemAdminGeneratePreview extends AbstractPhotoMenuItem {
 
 	@Override
 	public boolean isAccessibleFor() {
-		return isAccessorSuperAdmin() && menuEntry.getPhotoImageImportStrategyType() == PhotoImageImportStrategyType.FILE; // TODO: implement preview regeneration
+		return isAccessorSuperAdmin() && menuEntry.getPhotoImageLocationType() == PhotoImageLocationType.FILE; // TODO: implement preview regeneration
 	}
 
 	@Override

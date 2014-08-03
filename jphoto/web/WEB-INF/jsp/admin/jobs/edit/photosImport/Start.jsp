@@ -1,6 +1,6 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
-<%@ page import="core.general.photo.PhotoImageImportStrategyType" %>
+<%@ page import="core.general.photo.PhotoImageLocationType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -41,8 +41,8 @@
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<c:set var="photoImageImportStrategyFile" value="<%=PhotoImageImportStrategyType.FILE%>" />
-<c:set var="photoImageImportStrategyWeb" value="<%=PhotoImageImportStrategyType.WEB%>" />
+<c:set var="photoImageImportStrategyFile" value="<%=PhotoImageLocationType.FILE%>" />
+<c:set var="photoImageImportStrategyWeb" value="<%=PhotoImageLocationType.WEB%>" />
 
 <tags:page pageModel="${photosImportModel.pageModel}">
 

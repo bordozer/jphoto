@@ -54,7 +54,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String getPhotoImageUrl( final Photo photo ) {
-		switch ( photo.getPhotoImageImportStrategyType() ) {
+		switch ( photo.getPhotoImageLocationType() ) {
 			case FILE:
 				return getPhotoUrl( photo );
 			default:
