@@ -145,14 +145,17 @@ public class PhotoServiceImpl implements PhotoService {
 			}.start();
 		}
 
+		cacheService.expire( CacheKey.PHOTO, entry.getId() );
+		cacheService.expire( CacheKey.PHOTO_INFO, entry.getId() );
+
+		expireUserPhotosCountByGenreCache( entry.getUserId() );
+
 		if ( isNew ) {
-			cacheService.expire( CacheKey.USER_GENRE_PHOTOS_QTY, new UserGenreCompositeKey( entry.getUserId(), entry.getGenreId() ) );
 			activityStreamService.savePhotoUpload( entry );
 		}
 
 		return isSaved;
 	}
-
 	@Override
 	public void uploadNewPhoto( final Photo photo, final File photoImageFile, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException, IOException {
 
@@ -239,7 +242,8 @@ public class PhotoServiceImpl implements PhotoService {
 
 			cacheService.expire( CacheKey.PHOTO, entryId );
 			cacheService.expire( CacheKey.PHOTO_INFO, entryId );
-			cacheService.expire( CacheKey.USER_GENRE_PHOTOS_QTY, new UserGenreCompositeKey( photo.getUserId(), photo.getGenreId() ) );
+
+			expireUserPhotosCountByGenreCache( photo.getUserId() );
 		}
 
 		return isDeleted;
@@ -511,5 +515,11 @@ public class PhotoServiceImpl implements PhotoService {
 		pagingModel.setItemsOnPage( photosQty );
 
 		return pagingModel;
+	}
+
+	private void expireUserPhotosCountByGenreCache( final int userId ) {
+		for ( final Genre genre : genreService.loadAll() ) {
+			cacheService.expire( CacheKey.USER_GENRE_PHOTOS_QTY, new UserGenreCompositeKey( userId, genre.getId() ) );
+		}
 	}
 }
