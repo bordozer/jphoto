@@ -31,6 +31,8 @@ public class CachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadStra
 			final File imageFile = remotePhotoSiteCacheXmlUtils.getRemotePhotoCacheFile( remotePhotoData );
 
 			if ( ! imageFile.exists() ) {
+				// The image presents in XML-filen but there is no image file stored locally
+				// TODO: maybe it's logically to try to download the image again
 				continue;
 			}
 
