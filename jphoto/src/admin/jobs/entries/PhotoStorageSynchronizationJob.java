@@ -15,6 +15,7 @@ import admin.services.jobs.JobExecutionHistoryEntry;
 import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.general.base.CommonProperty;
+import core.general.photo.PhotoImageSourceType;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 
@@ -46,7 +47,8 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 			, 0
 			, getLanguage()
 			, true
-			, photosightCategories ); // TODO: send this as parameter selected on UI
+			, photosightCategories
+			, PhotoImageSourceType.WEB ); // TODO: send this as parameter selected on UI
 
 		final AbstractPhotoImportStrategy importStrategy = new RemotePhotoSiteImportStrategy( this, importParameters, services );
 
@@ -82,7 +84,7 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 
 	private List<String> getUsersIds() {
 		final List<String> usersIds = newArrayList();
-		final File storage = new RemotePhotoSiteCacheXmlUtils( PhotosImportSource.PHOTOSIGHT, services.getSystemVarsService().getRemotePhotoSitesCacheFolder(), services.getRemotePhotoCategoryService() ).getPhotoStorage();
+		final File storage = new RemotePhotoSiteCacheXmlUtils( PhotosImportSource.PHOTOSIGHT, services.getSystemVarsService().getRemotePhotoSitesCacheFolder(), services.getRemotePhotoCategoryService(), PhotoImageSourceType.WEB ).getPhotoStorage();
 
 		final File[] userDirList = storage.listFiles( services.getPredicateUtilsService().getDirFilter() );
 		for ( final File file : userDirList ) {

@@ -1,22 +1,28 @@
 package admin.controllers.jobs.edit.photosImport;
 
+import core.general.photo.PhotoImageSourceType;
+
 import java.io.File;
 
 public class ImageToImport {
 
-	private PhotosImportSource photosImportSource;
+	private final PhotosImportSource photosImportSource;
 	private final String genreName;
 	private final File imageFile;
+	private final PhotoImageSourceType photoImageSourceType;
+
 	private String photoImageUrl;
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File imageFile ) {
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageSourceType photoImageSourceType, final String genreName, final File imageFile ) {
 		this.photosImportSource = photosImportSource;
 		this.genreName = genreName;
 		this.imageFile = imageFile;
+
+		this.photoImageSourceType = photoImageSourceType;
 	}
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
-		this( photosImportSource, genreName, remotePhotoCacheFile);
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageSourceType photoImageSourceType, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
+		this( photosImportSource, photoImageSourceType, genreName, remotePhotoCacheFile );
 		this.photoImageUrl = photoImageUrl;
 	}
 
@@ -38,6 +44,10 @@ public class ImageToImport {
 
 	public void setPhotoImageUrl( final String photoImageUrl ) {
 		this.photoImageUrl = photoImageUrl;
+	}
+
+	public PhotoImageSourceType getPhotoImageSourceType() {
+		return photoImageSourceType;
 	}
 
 	@Override

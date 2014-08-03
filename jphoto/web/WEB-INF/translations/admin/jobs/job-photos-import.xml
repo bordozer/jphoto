@@ -273,18 +273,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo import job parameter: Image import strategy</nerd>
+		<ru><![CDATA[Стратегия сохранения изображения]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo import job parameter / Image import strategy; File</nerd>
+		<ru><![CDATA[Сохранить как локальный файл]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo import job parameter / Image import strategy: Web</nerd>
+		<ru><![CDATA[Сохранить как ссылку]]></ru>
 	</translation>
 
 	<translation>

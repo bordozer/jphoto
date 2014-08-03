@@ -58,7 +58,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	@Override
 	public String getPhotoImageUrl( final Photo photo ) {
 		switch ( photo.getPhotoImageSourceType() ) {
-			case FILE_SYSTEM:
+			case FILE:
 				return getPhotoUrl( photo );
 			default:
 				return String.format( "http://%s", photo.getPhotoImageUrl() );

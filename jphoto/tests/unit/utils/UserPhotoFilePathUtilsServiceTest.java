@@ -3,6 +3,7 @@ package utils;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import common.AbstractTestCase;
 import core.general.photo.Photo;
+import core.general.photo.PhotoImageSourceType;
 import core.general.user.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		photo.setUserId( userId );
 		photo.setName( "Photo name" );
 
-		photo.setPhotoImageSourceType( PhotosImportSource.FILE_SYSTEM );
+		photo.setPhotoImageSourceType( PhotoImageSourceType.FILE );
 		photo.setPhotoImageFile( new File( "/photoDir", "photoFileName" ) );
 		photo.setPhotoImageUrl( "some.host.ua/remote/url/image.jpg" );
 		photo.setPhotoPreviewName( "preview_name_saved_in_db.jpg" );
@@ -48,7 +49,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
 
-		photo.setPhotoImageSourceType( PhotosImportSource.PHOTO35 );
+		photo.setPhotoImageSourceType( PhotoImageSourceType.WEB );
 		assertEquals( "http://some.host.ua/remote/url/image.jpg", userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 	}

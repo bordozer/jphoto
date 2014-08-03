@@ -8,6 +8,7 @@ import core.general.cache.entries.UserGenrePhotosQty;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.img.Dimension;
 import core.general.photo.Photo;
+import core.general.photo.PhotoImageSourceType;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
@@ -167,7 +168,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_DESCRIPTION, entry.getDescription() );
 
 		switch ( entry.getPhotoImageSourceType() ) {
-			case FILE_SYSTEM:
+			case FILE:
 				if ( entry.getPhotoImageFile() != null ) {
 					paramSource.addValue( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE, entry.getPhotoImageFile().getName() );
 				}
@@ -266,12 +267,12 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setDescription( rs.getString( TABLE_COLUMN_DESCRIPTION ) );
 
 
-			final PhotosImportSource photoImageSourceType = PhotosImportSource.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) );
+			final PhotoImageSourceType photoImageSourceType = PhotoImageSourceType.getById( rs.getInt( TABLE_COLUMN_IMAGE_SOURCE_TYPE ) );
 			result.setPhotoImageSourceType( photoImageSourceType );
 
 			final String fileName = rs.getString( TABLE_COLUMN_FILE_PHOTO_IMAGE_SOURCE );
 			switch ( photoImageSourceType ) {
-				case FILE_SYSTEM:
+				case FILE:
 					final File file = new File( userPhotoFilePathUtilsService.getUserPhotoDir( rs.getInt( TABLE_COLUMN_USER_ID ) ), fileName );
 					result.setPhotoImageFile( file );
 					break;

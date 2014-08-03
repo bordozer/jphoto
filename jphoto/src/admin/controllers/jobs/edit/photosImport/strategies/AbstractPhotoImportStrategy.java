@@ -96,10 +96,10 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setImportId( photoToImportData.getImportId() );
 
 		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
-		photo.setPhotoImageSourceType( imageToImport.getPhotosImportSource() );
+		photo.setPhotoImageSourceType( imageToImport.getPhotoImageSourceType() );
 
-		switch ( photo.getPhotoImageSourceType() ) {
-			case FILE_SYSTEM:
+		switch ( imageToImport.getPhotoImageSourceType() ) {
+			case FILE:
 				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 				break;
 			default:

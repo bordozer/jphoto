@@ -57,6 +57,8 @@ public class PhotosImportModel extends DateRangableModel {
 
 	private boolean remotePhotoSiteImport_importNudeContentByDefault;
 
+	private int photoImageSourceTypeId;
+
 	public PhotosImportSource getImportSource() {
 		return importSource;
 	}
@@ -199,6 +201,14 @@ public class PhotosImportModel extends DateRangableModel {
 
 	public void setRemotePhotoSiteImport_importNudeContentByDefault( final boolean remotePhotoSiteImport_importNudeContentByDefault ) {
 		this.remotePhotoSiteImport_importNudeContentByDefault = remotePhotoSiteImport_importNudeContentByDefault;
+	}
+
+	public int getPhotoImageSourceTypeId() {
+		return photoImageSourceTypeId;
+	}
+
+	public void setPhotoImageSourceTypeId( final int photoImageSourceTypeId ) {
+		this.photoImageSourceTypeId = photoImageSourceTypeId;
 	}
 
 	@Override

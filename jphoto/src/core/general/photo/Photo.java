@@ -44,7 +44,7 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	private int importId;
 
 	private Dimension imageDimension;
-	private PhotosImportSource photoImageSourceType;
+	private PhotoImageSourceType photoImageSourceType;
 
 	public Photo() {
 	}
@@ -226,11 +226,11 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 		this.imageDimension = imageDimension;
 	}
 
-	public PhotosImportSource getPhotoImageSourceType() {
+	public PhotoImageSourceType getPhotoImageSourceType() {
 		return photoImageSourceType;
 	}
 
-	public void setPhotoImageSourceType( final PhotosImportSource photoImageSourceType ) {
+	public void setPhotoImageSourceType( final PhotoImageSourceType photoImageSourceType ) {
 		this.photoImageSourceType = photoImageSourceType;
 	}
 

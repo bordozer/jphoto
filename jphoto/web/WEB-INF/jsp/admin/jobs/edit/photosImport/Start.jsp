@@ -1,5 +1,6 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
+<%@ page import="core.general.photo.PhotoImageSourceType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -39,6 +40,9 @@
 <c:set var="filesystemImportDivId" value="importFormDiv_${filesystemImportId}"/>
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
+
+<c:set var="photoImageSourceTypeFileId" value="<%=PhotoImageSourceType.FILE.getId()%>" />
+<c:set var="photoImageSourceTypeWebId" value="<%=PhotoImageSourceType.WEB.getId()%>" />
 
 <tags:page pageModel="${photosImportModel.pageModel}">
 
@@ -155,6 +159,7 @@
 							<%-- REMOTE PHOTO SITE IMPORT --%>
 							<div id="${photosightImportDivId}" style="float: left; width: 100%; display: none;">
 								<div style="float: left; width: 100%;">
+
 								<table:table width="100%">
 									<table:tr>
 										<table:tdtext text_t="Photo import job JSP: Photosight user ids" isMandatory="true"/>
@@ -231,6 +236,17 @@
 										<table:tdtext text_t="Photo import job parameter: Delay between requests"/>
 										<table:td>
 											<form:input path="${delayBetweenRequestControl}" size="4"/>
+										</table:td>
+									</table:tr>
+
+									<table:separator colspan="2" />
+
+									<table:tr>
+										<table:tdtext text_t="Photo import job parameter: Image import strategy"/>
+										<table:td>
+											<form:radiobutton path="photoImageSourceTypeId" value="${photoImageSourceTypeFileId}" /> ${eco:translate("Photo import job parameter / Image import strategy; File")}
+											<br />
+											<form:radiobutton path="photoImageSourceTypeId" value="${photoImageSourceTypeWebId}" /> ${eco:translate("Photo import job parameter / Image import strategy: Web")}
 										</table:td>
 									</table:tr>
 
