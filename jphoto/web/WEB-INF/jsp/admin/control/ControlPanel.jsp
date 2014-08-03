@@ -8,6 +8,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="controlPanelModel" type="admin.controllers.control.ControlPanelModel" scope="request"/>
+<c:set var="tabWidth" value="450" />
 
 <tags:page pageModel="${controlPanelModel.pageModel}">
 
@@ -16,14 +17,14 @@
 		<div class="floatleft">
 
 			<div class="floatleft" style="width: 30%;">
-				<table:table width="350">
+				<table:table width="${tabWidth}">
 
-					<table:separatorInfo colspan="2" title="${eco:translate('System')}" />
+					<table:separatorInfo colspan="2" title="${eco:translate('Control panel: System tab')}" />
 
 					<table:tr cssClass="text-centered">
 						<table:td>
-							<html:submitButton id="reload-system-properties" caption_t="Reload system properties"
-											   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Reload system properties?')}' );"/>
+							<html:submitButton id="reload-system-properties" caption_t="Control panel: Reload system properties"
+											   onclick="return submitControlPanelForm( 'reload-system-properties', '${eco:translate('Control panel: Reload system properties')}?' );"/>
 						</table:td>
 					</table:tr>
 
@@ -35,48 +36,48 @@
 
 					<table:tr>
 						<table:td cssClass="text-centered">
-							<html:submitButton id="clear-cache" caption_t="Clear system cache"
-											   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Clear system cache?')}' );"/>
+							<html:submitButton id="clear-cache" caption_t="Control panel: Clear system cache"
+											   onclick="return submitControlPanelForm( 'clear-cache', '${eco:translate('Control panel: Clear system cache')}?' );"/>
 						</table:td>
 					</table:tr>
 				</table:table>
 			</div>
 
 			<div class="floatleft" style="width: 30%;">
-				<table:table width="350">
+				<table:table width="${tabWidth}">
 
-					<table:separatorInfo colspan="3" title="${eco:translate('Statistics')}" />
+					<table:separatorInfo colspan="3" title="${eco:translate('Control panel: Statistics tab')}" />
 
 					<table:tr>
-						<table:td cssClass="textright">${eco:translate('Users total')}</table:td>
+						<table:td cssClass="textright">${eco:translate('Control panel: Users total')}</table:td>
 						<table:td>${controlPanelModel.usersTotal}</table:td>
 						<table:td>
-							<a href="${eco:baseAdminUrl()}/reports/users/"> ${eco:translate('Statistic')}</a>
+							<a href="${eco:baseAdminUrl()}/reports/users/"> ${eco:translate('Control panel: Registration graph')}</a>
 						</table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textright">${eco:translate('Photos total')}</table:td>
+						<table:td cssClass="textright">${eco:translate('Control panel: Photos total')}</table:td>
 						<table:td>${controlPanelModel.photosTotal}</table:td>
-						<table:td>${eco:translate('Statistic')}</table:td>
+						<table:td></table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textright">${eco:translate('Photo previews total')}</table:td>
+						<table:td cssClass="textright">${eco:translate('Control panel: Photo previews total')}</table:td>
 						<table:td>${controlPanelModel.photoPreviewsTotal}</table:td>
-						<table:td>${eco:translate('Statistic')}</table:td>
+						<table:td></table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textright">${eco:translate('Photo comments total')}</table:td>
+						<table:td cssClass="textright">${eco:translate('Control panel: Photo comments total')}</table:td>
 						<table:td>${controlPanelModel.photoCommentsTotal}</table:td>
-						<table:td>${eco:translate('Statistic')}</table:td>
+						<table:td></table:td>
 					</table:tr>
 
 					<table:tr>
-						<table:td cssClass="textright">${eco:translate('Private messages total')}</table:td>
+						<table:td cssClass="textright">${eco:translate('Control panel: Private messages total')}</table:td>
 						<table:td>${controlPanelModel.privateMessagesTotal}</table:td>
-						<table:td>${eco:translate('Statistic')}</table:td>
+						<table:td></table:td>
 					</table:tr>
 
 				</table:table>
