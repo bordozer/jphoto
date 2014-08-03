@@ -13,7 +13,7 @@ import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
-import core.general.photo.PhotoImageSourceType;
+import core.general.photo.PhotoImageImportStrategyType;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.system.Services;
@@ -160,7 +160,7 @@ public class FilesystemImportStrategy extends AbstractPhotoImportStrategy {
 				final List<String> allowedExtensions = services.getConfigurationService().getListString( ConfigurationKey.PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS );
 				if ( PhotoUtils.isPhotoContentTypeSupported( allowedExtensions, services.getImageFileUtilsService().getContentType( file ) ) ) {
 
-					final ImageToImport imageToImport = new ImageToImport( PhotosImportSource.FILE_SYSTEM, PhotoImageSourceType.FILE, genreName, file );
+					final ImageToImport imageToImport = new ImageToImport( PhotosImportSource.FILE_SYSTEM, PhotoImageImportStrategyType.FILE, genreName, file );
 					final ImageToImportData imageToImportData = new ImageToImportData( imageToImport );
 
 					importedPictures.add( imageToImportData );

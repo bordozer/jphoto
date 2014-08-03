@@ -1,6 +1,5 @@
 package core.general.photo;
 
-import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import core.enums.PhotoActionAllowance;
 import core.general.base.AbstractBaseEntity;
 import core.general.img.Dimension;
@@ -44,7 +43,7 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	private int importId;
 
 	private Dimension imageDimension;
-	private PhotoImageSourceType photoImageSourceType;
+	private PhotoImageImportStrategyType photoImageImportStrategyType;
 
 	public Photo() {
 	}
@@ -226,12 +225,12 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 		this.imageDimension = imageDimension;
 	}
 
-	public PhotoImageSourceType getPhotoImageSourceType() {
-		return photoImageSourceType;
+	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
+		return photoImageImportStrategyType;
 	}
 
-	public void setPhotoImageSourceType( final PhotoImageSourceType photoImageSourceType ) {
-		this.photoImageSourceType = photoImageSourceType;
+	public void setPhotoImageImportStrategyType( final PhotoImageImportStrategyType photoImageImportStrategyType ) {
+		this.photoImageImportStrategyType = photoImageImportStrategyType;
 	}
 
 	@Override

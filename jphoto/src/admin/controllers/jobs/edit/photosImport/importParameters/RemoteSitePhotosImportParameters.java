@@ -3,7 +3,7 @@ package admin.controllers.jobs.edit.photosImport.importParameters;
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteCategory;
 import core.enums.UserGender;
-import core.general.photo.PhotoImageSourceType;
+import core.general.photo.PhotoImageImportStrategyType;
 import core.general.user.UserMembershipType;
 import core.services.translator.Language;
 
@@ -25,9 +25,9 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 	private final UserGender userGender;
 	private final UserMembershipType membershipType;
 
-	private final PhotoImageSourceType photoImageSourceType;
+	private final PhotoImageImportStrategyType photoImageImportStrategyType;
 
-	public RemoteSitePhotosImportParameters( final PhotosImportSource importSource, final List<String> remoteUserIds, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<RemotePhotoSiteCategory> remotePhotoSiteCategories, final PhotoImageSourceType photoImageSourceType ) {
+	public RemoteSitePhotosImportParameters( final PhotosImportSource importSource, final List<String> remoteUserIds, final UserGender userGender, final UserMembershipType membershipType, final boolean importComments, final int delayBetweenRequest, final int pageQty, final Language language, final boolean breakImportIfAlreadyImportedPhotoFound, final List<RemotePhotoSiteCategory> remotePhotoSiteCategories, final PhotoImageImportStrategyType photoImageImportStrategyType ) {
 		super( language );
 
 		this.importSource = importSource;
@@ -40,7 +40,7 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 		this.pageQty = pageQty;
 		this.breakImportIfAlreadyImportedPhotoFound = breakImportIfAlreadyImportedPhotoFound;
 		this.remotePhotoSiteCategories = remotePhotoSiteCategories;
-		this.photoImageSourceType = photoImageSourceType;
+		this.photoImageImportStrategyType = photoImageImportStrategyType;
 	}
 
 	public List<String> getRemoteUserIds() {
@@ -83,7 +83,7 @@ public class RemoteSitePhotosImportParameters extends AbstractImportParameters {
 		return importSource;
 	}
 
-	public PhotoImageSourceType getPhotoImageSourceType() {
-		return photoImageSourceType;
+	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
+		return photoImageImportStrategyType;
 	}
 }

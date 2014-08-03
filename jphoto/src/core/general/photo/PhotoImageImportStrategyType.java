@@ -1,6 +1,6 @@
 package core.general.photo;
 
-public enum PhotoImageSourceType {
+public enum PhotoImageImportStrategyType {
 
 	FILE( 1, "PhotoImageSourceType: file" )
 	, WEB( 2, "PhotoImageSourceType: web" );
@@ -8,7 +8,7 @@ public enum PhotoImageSourceType {
 	private final int id;
 	private final String description;
 
-	PhotoImageSourceType( final int id, final String description ) {
+	PhotoImageImportStrategyType( final int id, final String description ) {
 		this.id = id;
 		this.description = description;
 	}
@@ -21,8 +21,8 @@ public enum PhotoImageSourceType {
 		return description;
 	}
 
-	public static PhotoImageSourceType getById( int id ) {
-		for ( PhotoImageSourceType importSource : PhotoImageSourceType.values() ) {
+	public static PhotoImageImportStrategyType getById( int id ) {
+		for ( PhotoImageImportStrategyType importSource : PhotoImageImportStrategyType.values() ) {
 			if ( importSource.getId() == id ) {
 				return importSource;
 			}

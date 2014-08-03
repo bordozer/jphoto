@@ -18,7 +18,7 @@ import core.enums.UserGender;
 import core.exceptions.BaseRuntimeException;
 import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
-import core.general.photo.PhotoImageSourceType;
+import core.general.photo.PhotoImageImportStrategyType;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
@@ -135,7 +135,7 @@ public class PhotosImportController extends DateRangableController {
 		aModel.setPictureDir( configurationService.getString( ConfigurationKey.ADMIN_PHOTO_FILE_IMPORT_DEFAULT_DIR ) );
 		aModel.setRemotePhotoSiteImport_importNudeContentByDefault( configurationService.getBoolean( ConfigurationKey.ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT ) );
 		aModel.setBreakImportIfAlreadyImportedPhotoFound( true );
-		aModel.setPhotoImageSourceTypeId( PhotoImageSourceType.WEB.getId() );
+		aModel.setPhotoImageImportStrategyTypeId( PhotoImageImportStrategyType.WEB.getId() );
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class PhotosImportController extends DateRangableController {
 				final boolean importComments = aModel.isImportComments();
 				final int delayBetweenRequests = NumberUtils.convertToInt( aModel.getDelayBetweenRequest() );
 				final int pageQty = NumberUtils.convertToInt( aModel.getPageQty() );
-				final PhotoImageSourceType photoImageSourceType = PhotoImageSourceType.getById( aModel.getPhotoImageSourceTypeId() );
+				final PhotoImageImportStrategyType photoImageImportStrategyType = PhotoImageImportStrategyType.getById( aModel.getPhotoImageImportStrategyTypeId() );
 
 				final List<String> reqRemotePhotoSiteCategories = aModel.getRemotePhotoSiteCategories();
 				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Lists.transform( reqRemotePhotoSiteCategories, new Function<String, RemotePhotoSiteCategory>() {
@@ -195,7 +195,7 @@ public class PhotosImportController extends DateRangableController {
 				job.setRemotePhotoSiteCategories( remotePhotoSiteCategories );
 
 				importParameters = new RemoteSitePhotosImportParameters( importSource, remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequests
-					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), remotePhotoSiteCategories, photoImageSourceType );
+					, pageQty, EnvironmentContext.getCurrentUser().getLanguage(), aModel.isBreakImportIfAlreadyImportedPhotoFound(), remotePhotoSiteCategories, photoImageImportStrategyType );
 
 				job.setTotalJopOperations( pageQty > 0 ? pageQty : AbstractJob.OPERATION_COUNT_UNKNOWN );
 				break;

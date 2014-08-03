@@ -5,14 +5,11 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.log.LogHelper;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -57,7 +54,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public String getPhotoImageUrl( final Photo photo ) {
-		switch ( photo.getPhotoImageSourceType() ) {
+		switch ( photo.getPhotoImageImportStrategyType() ) {
 			case FILE:
 				return getPhotoUrl( photo );
 			default:

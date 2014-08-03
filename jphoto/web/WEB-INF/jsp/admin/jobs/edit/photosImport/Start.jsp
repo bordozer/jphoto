@@ -1,6 +1,6 @@
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportModel" %>
 <%@ page import="admin.controllers.jobs.edit.photosImport.PhotosImportSource" %>
-<%@ page import="core.general.photo.PhotoImageSourceType" %>
+<%@ page import="core.general.photo.PhotoImageImportStrategyType" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -41,8 +41,8 @@
 <c:set var="photosightImportDivId" value="importFormDiv_${photosightImportId}"/>
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<c:set var="photoImageSourceTypeFileId" value="<%=PhotoImageSourceType.FILE.getId()%>" />
-<c:set var="photoImageSourceTypeWebId" value="<%=PhotoImageSourceType.WEB.getId()%>" />
+<c:set var="photoImageImportStrategyFile" value="<%=PhotoImageImportStrategyType.FILE%>" />
+<c:set var="photoImageImportStrategyWeb" value="<%=PhotoImageImportStrategyType.WEB%>" />
 
 <tags:page pageModel="${photosImportModel.pageModel}">
 
@@ -244,9 +244,9 @@
 									<table:tr>
 										<table:tdtext text_t="Photo import job parameter: Image import strategy"/>
 										<table:td>
-											<form:radiobutton path="photoImageSourceTypeId" value="${photoImageSourceTypeFileId}" /> ${eco:translate("Photo import job parameter / Image import strategy; File")}
+											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyFile.id}" /> ${eco:translate(photoImageImportStrategyFile.description)}
 											<br />
-											<form:radiobutton path="photoImageSourceTypeId" value="${photoImageSourceTypeWebId}" /> ${eco:translate("Photo import job parameter / Image import strategy: Web")}
+											<form:radiobutton path="photoImageImportStrategyTypeId" value="${photoImageImportStrategyWeb.id}" /> ${eco:translate(photoImageImportStrategyWeb.description)}
 										</table:td>
 									</table:tr>
 

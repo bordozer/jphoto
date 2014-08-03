@@ -1,6 +1,6 @@
 package admin.controllers.jobs.edit.photosImport;
 
-import core.general.photo.PhotoImageSourceType;
+import core.general.photo.PhotoImageImportStrategyType;
 
 import java.io.File;
 
@@ -9,20 +9,20 @@ public class ImageToImport {
 	private final PhotosImportSource photosImportSource;
 	private final String genreName;
 	private final File imageFile;
-	private final PhotoImageSourceType photoImageSourceType;
+	private final PhotoImageImportStrategyType photoImageImportStrategyType;
 
 	private String photoImageUrl;
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageSourceType photoImageSourceType, final String genreName, final File imageFile ) {
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageImportStrategyType photoImageImportStrategyType, final String genreName, final File imageFile ) {
 		this.photosImportSource = photosImportSource;
 		this.genreName = genreName;
 		this.imageFile = imageFile;
 
-		this.photoImageSourceType = photoImageSourceType;
+		this.photoImageImportStrategyType = photoImageImportStrategyType;
 	}
 
-	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageSourceType photoImageSourceType, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
-		this( photosImportSource, photoImageSourceType, genreName, remotePhotoCacheFile );
+	public ImageToImport( final PhotosImportSource photosImportSource, final PhotoImageImportStrategyType photoImageImportStrategyType, final String genreName, final File remotePhotoCacheFile, final String photoImageUrl ) {
+		this( photosImportSource, photoImageImportStrategyType, genreName, remotePhotoCacheFile );
 		this.photoImageUrl = photoImageUrl;
 	}
 
@@ -46,8 +46,8 @@ public class ImageToImport {
 		this.photoImageUrl = photoImageUrl;
 	}
 
-	public PhotoImageSourceType getPhotoImageSourceType() {
-		return photoImageSourceType;
+	public PhotoImageImportStrategyType getPhotoImageImportStrategyType() {
+		return photoImageImportStrategyType;
 	}
 
 	@Override

@@ -18,7 +18,7 @@ import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.enums.YesNo;
 import core.general.base.CommonProperty;
-import core.general.photo.PhotoImageSourceType;
+import core.general.photo.PhotoImageImportStrategyType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
@@ -86,7 +86,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				parametersMap.put( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS, new CommonProperty( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS.getId(), remoteSitePhotosImportParameters.getDelayBetweenRequest() ) );
 				final int pageQty = remoteSitePhotosImportParameters.getPageQty();
 				parametersMap.put( SavedJobParameterKey.IMPORT_PAGE_QTY, new CommonProperty( SavedJobParameterKey.IMPORT_PAGE_QTY.getId(), pageQty ) );
-				parametersMap.put( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY, new CommonProperty( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY.getId(), remoteSitePhotosImportParameters.getPhotoImageSourceType().getId() ) );
+				parametersMap.put( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY, new CommonProperty( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY.getId(), remoteSitePhotosImportParameters.getPhotoImageImportStrategyType().getId() ) );
 
 				final List<String> remotePhotoSiteCategoryIds = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 					@Override
@@ -132,7 +132,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				final boolean breakImportIfAlreadyImportedPhotoFound = jobParameters.get( SavedJobParameterKey.BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND ).getValueBoolean();
 				final int delayBetweenRequest = jobParameters.get( SavedJobParameterKey.DELAY_BETWEEN_REQUESTS ).getValueInt();
 				final int pageQty = jobParameters.get( SavedJobParameterKey.IMPORT_PAGE_QTY ).getValueInt();
-				final PhotoImageSourceType photoImageSourceType = PhotoImageSourceType.getById( jobParameters.get( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY ).getValueInt() );
+				final PhotoImageImportStrategyType photoImageImportStrategyType = PhotoImageImportStrategyType.getById( jobParameters.get( SavedJobParameterKey.PHOTO_IMAGE_IMPORT_STRATEGY ).getValueInt() );
 
 				final List<RemotePhotoSiteCategory> remotePhotoSiteCategories = Lists.transform( jobParameters.get( SavedJobParameterKey.REMOTE_PHOTO_SITE_CATEGORIES ).getValueListInt(), new Function<Integer, RemotePhotoSiteCategory>() {
 					@Override
@@ -142,7 +142,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				} );
 
 				importParameters = new RemoteSitePhotosImportParameters( importSource, remotePhotoSiteUserIds, userGender, membershipType, importComments, delayBetweenRequest, pageQty
-					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, remotePhotoSiteCategories, photoImageSourceType );
+					, getLanguage(), breakImportIfAlreadyImportedPhotoFound, remotePhotoSiteCategories, photoImageImportStrategyType );
 
 				break;
 			default:
@@ -235,7 +235,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				builder.append( translatorService.translate( "Photo import job parameter: Delay between requests", getLanguage() ) ).append( ": " ).append( remoteSitePhotosImportParameters.getDelayBetweenRequest() ).append( "<br />" );
 
 				builder.append( translatorService.translate( "Photo import job parameter: Image import strategy", getLanguage() ) ).append( ": " )
-					   .append( translatorService.translate( remoteSitePhotosImportParameters.getPhotoImageSourceType().getDescription(), getLanguage() ) ).append( "<br />" );
+					   .append( translatorService.translate( remoteSitePhotosImportParameters.getPhotoImageImportStrategyType().getDescription(), getLanguage() ) ).append( "<br />" );
 
 				break;
 			default:

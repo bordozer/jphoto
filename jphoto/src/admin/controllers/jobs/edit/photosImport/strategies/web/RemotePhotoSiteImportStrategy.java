@@ -67,7 +67,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			remoteContentHelper.getPhotosImportSource()
 			, services.getSystemVarsService().getRemotePhotoSitesCacheFolder()
 			, services.getRemotePhotoCategoryService()
-			, importParameters.getPhotoImageSourceType()
+			, importParameters.getPhotoImageImportStrategyType()
 		);
 
 		firstPhotoUploadTime = getServices().getJobHelperService().getFirstPhotoUploadTime();
