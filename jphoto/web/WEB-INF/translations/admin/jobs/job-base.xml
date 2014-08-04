@@ -79,7 +79,12 @@
 
 	<translation>
 		<nerd>Photo actions job parameters: Photos</nerd>
-		<ru><![CDATA[К-во работ]]></ru>
+		<ru><![CDATA[К-во работ из последних]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo actions job parameters: Leave empty to select all photos</nerd>
+		<ru><![CDATA[Чтобы включить в обработку все работы, оставьте поле пустым]]></ru>
 	</translation>
 
 	<translation>

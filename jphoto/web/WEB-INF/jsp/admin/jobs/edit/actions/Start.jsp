@@ -37,28 +37,18 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Photos action to generate" isMandatory="true"/>
+					<table:tdtext text_t="Photo actions job parameters: Photos action to generate" isMandatory="true"/>
 					<table:tddata>
-						<tags:inputHint inputId="${totalActionFormControl}" hintTitle_t="Latest photo qty"
-										hint="${eco:translate('Quantity of generated actions')}">
-						<jsp:attribute name="inputField">
-							<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
-						</jsp:attribute>
-						</tags:inputHint>
+						<html:input fieldId="${totalActionFormControl}" fieldValue="${jobModelPhotoAction.totalActions}" size="7"/>
 					</table:tddata>
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Latest photo qty"/>
+					<table:tdtext text_t="Photo actions job parameters: Photos"/>
 					<table:tddata>
-						<tags:inputHint inputId="${photosQtyFormControl}" hintTitle_t="Latest photo qty"
-										hint="${eco:translate('Going to be affected photos (all if empty)')}">
-						<jsp:attribute name="inputField">
-							<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
-						</jsp:attribute>
-						</tags:inputHint>
+						<html:input fieldId="${photosQtyFormControl}" fieldValue="${jobModelPhotoAction.photosQty}" size="7"/>
 						<br/>
-						${eco:translate('Leave empty to select all photos')}
+						${eco:translate('Photo actions job parameters: Leave empty to select all photos')}
 					</table:tddata>
 				</table:tr>
 
