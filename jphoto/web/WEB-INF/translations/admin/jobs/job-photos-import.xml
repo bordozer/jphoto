@@ -263,11 +263,6 @@
 	</translation>
 
 	<translation>
-		<nerd>The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)</nerd>
-		<ru><![CDATA[Папка с аватарами должна содержать две другие папки <b>male</b> и <b>female</b>, имена должны быть в нижнем регистре]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Folder $1 does not exist</nerd>
 		<ru><![CDATA[Каталог '$1' не существует]]></ru>
 	</translation>

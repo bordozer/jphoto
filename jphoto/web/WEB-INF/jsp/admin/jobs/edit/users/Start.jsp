@@ -32,18 +32,18 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Total job steps" isMandatory="true"/>
+					<table:tdtext text_t="User generation job: Users count to generate" isMandatory="true"/>
 					<table:tddata>
 						<form:input path="${userQtyLimitControl}" size="4"/>
 					</table:tddata>
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Avatar dir"/>
+					<table:tdtext text_t="User generation job: Avatar dir"/>
 					<table:tddata>
 						<form:input path="${avatarDirControl}" size="40"/>
 						<br/>
-						${eco:translate('The folder must contain <b>male</b> and <b>female</b> folders with avatars (case does matter)')}
+						${eco:translate('The folder must contain male and female folders with avatars (case does matter)')}
 					</table:tddata>
 				</table:tr>
 
