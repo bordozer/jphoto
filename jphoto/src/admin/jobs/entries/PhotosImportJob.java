@@ -18,6 +18,7 @@ import core.enums.SavedJobParameterKey;
 import core.enums.UserGender;
 import core.enums.YesNo;
 import core.general.base.CommonProperty;
+import core.general.genre.Genre;
 import core.general.photo.PhotoImageLocationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
@@ -203,11 +204,12 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 				if ( remotePhotoSiteCategories.size() == remoteCategories.length ) {
 					catText = translatorService.translate( "Photo import job parameter: All categories", getLanguage() );
 				} else {
+
 					if ( remotePhotoSiteCategories.size() < remoteCategories.length / 2 ) {
 						final List<String> categories = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 							@Override
 							public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-								return translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
+								return getRemotePhotoSiteCategoryLink( remotePhotoSiteCategory );
 							}
 						} );
 						catText = StringUtils.join( categories, ", " );
@@ -215,7 +217,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 						final List<String> excludedCategories = newArrayList();
 						for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remoteCategories ) {
 							if ( ! remotePhotoSiteCategories.contains( remotePhotoSiteCategory ) ) {
-								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() ) ) );
+								excludedCategories.add( getRemotePhotoSiteCategoryLink( remotePhotoSiteCategory ) );
 							}
 						}
 						catText = StringUtils.join( excludedCategories, ", " );
@@ -243,6 +245,21 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 		}
 
 		return builder.toString();
+	}
+
+	private String getRemotePhotoSiteCategoryLink( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
+		final TranslatorService translatorService = services.getTranslatorService();
+
+		final AbstractRemotePhotoSiteUrlHelper contentHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( importSource );
+		final String remoteCategoryNameTranslated = translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
+		final Genre genre = services.getRemotePhotoCategoryService().getMappedGenreOrNull( remotePhotoSiteCategory );
+
+		return String.format( "<a href='%s' target='_blank'>%s</a> [<a href='%s' title='%s' target='_blank'> i </a>]"
+			, contentHelper.getPhotoCategoryUrl( remotePhotoSiteCategory )
+			, remoteCategoryNameTranslated
+			, services.getUrlUtilsService().getPhotosByGenreLink( genre.getId() )
+			, translatorService.translate( "Remote category label: Mapped to $1", getLanguage(), translatorService.translateGenre( genre, getLanguage() ) )
+		);
 	}
 
 	@Override

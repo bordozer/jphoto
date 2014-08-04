@@ -74,7 +74,7 @@
 
 	</div>
 
-	<div style="display: inline-block; width: 600px;">
+	<div style="display: inline-block; width: 900px;">
 		<h3>${eco:translate('Job JSP: Job parameters')}:</h3>
 		${jobExecutionHistoryEntry.jobParametersDescription}
 
