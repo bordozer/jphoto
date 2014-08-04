@@ -207,7 +207,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 						final List<String> categories = Lists.transform( remotePhotoSiteCategories, new Function<RemotePhotoSiteCategory, String>() {
 							@Override
 							public String apply( final RemotePhotoSiteCategory remotePhotoSiteCategory ) {
-								return remotePhotoSiteCategory.getName();
+								return translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() );
 							}
 						} );
 						catText = StringUtils.join( categories, ", " );
@@ -215,7 +215,7 @@ public class PhotosImportJob extends AbstractDateRangeableJob {
 						final List<String> excludedCategories = newArrayList();
 						for ( final RemotePhotoSiteCategory remotePhotoSiteCategory : remoteCategories ) {
 							if ( ! remotePhotoSiteCategories.contains( remotePhotoSiteCategory ) ) {
-								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", remotePhotoSiteCategory.getName() ) );
+								excludedCategories.add( String.format( "<span style='text-decoration: line-through;'>%s</span>", translatorService.translate( remotePhotoSiteCategory.getName(), getLanguage() ) ) );
 							}
 						}
 						catText = StringUtils.join( excludedCategories, ", " );
