@@ -33,7 +33,7 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Total job steps" isMandatory="true"/>
+					<table:tdtext text_t="RankVotingJob: Actions count" isMandatory="true"/>
 					<table:tddata>
 						<form:input path="${actionsQtyControl}" size="4"/>
 					</table:tddata>
