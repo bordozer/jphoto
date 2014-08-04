@@ -80,7 +80,7 @@
 
 		<br />
 
-		<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" icon="error16x16.png" />
+		<html:submitButton id="buttomStopJob" caption_t="Job JSP: Stop the Job button title" onclick="stopTheJob();" icon="stop_16x16.png" />
 	</div>
 
 	<div style="padding-top: 20px;">
