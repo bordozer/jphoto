@@ -298,6 +298,26 @@
 	</translation>
 
 	<translation>
+		<nerd>FavoritesJob: Total job steps</nerd>
+		<ru><![CDATA[К-во действий]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoritesJob: Photos</nerd>
+		<ru><![CDATA[К-во последних работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>FavoritesJob: Favorite entries</nerd>
+		<ru><![CDATA[Типы избранного]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

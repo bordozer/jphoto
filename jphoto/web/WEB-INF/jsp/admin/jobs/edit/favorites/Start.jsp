@@ -37,21 +37,21 @@
 				<table:separatorInfo colspan="2" title="${eco:translate('Job JSP: Job parameters')}"/>
 
 				<table:tr>
-					<table:tdtext text_t="Total job steps" isMandatory="true"/>
+					<table:tdtext text_t="FavoritesJob: Total job steps" isMandatory="true"/>
 					<table:tddata>
 						<form:input path="${actionsQtyControl}" size="4"/>
 					</table:tddata>
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Photos"/>
+					<table:tdtext text_t="FavoritesJob: Photos"/>
 					<table:tddata>
 						<form:input path="${photosQtyControl}" size="4"/>
 					</table:tddata>
 				</table:tr>
 
 				<table:tr>
-					<table:tdtext text_t="Favorite entries"/>
+					<table:tdtext text_t="FavoritesJob: Favorite entries"/>
 					<table:tddata>
 						<js:checkboxMassChecker checkboxClass="favoriteEntriesIds"/>
 						<br/>
