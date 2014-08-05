@@ -81,6 +81,20 @@
 				<table:td><links:genrePhotos genre="${photoInfo.genre}"/></table:td>
 			</table:tr>
 
+			<c:if test="${not empty photo.photoImportData}">
+
+				<table:separator colspan="2" />
+
+				<table:tr>
+					<table:td colspan="2">
+						${eco:translate("Photo info: The photo is taken from remote source")} ${photoInfo.remoteSourceLink}
+						${eco:translate("Photo info: The photo remote user link")} ${photoInfo.remoteUserLink}
+						<br />
+						${eco:translate("Photo info: The photo remote photo link")}: '${photoInfo.remotePhotoLink}'
+					</table:td>
+				</table:tr>
+			</c:if>
+
 			<table:separator colspan="2" />
 
 			<table:tr>

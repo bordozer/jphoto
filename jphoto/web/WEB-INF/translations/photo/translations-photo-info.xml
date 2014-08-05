@@ -138,6 +138,36 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo info: The photo is taken from remote source</nerd>
+		<ru><![CDATA[Работа взята с сайта]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo info: The photo remote photo link</nerd>
+		<ru><![CDATA[Ссылка на оригинальную работу]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo info: The photo remote user link</nerd>
+		<ru><![CDATA[у пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

@@ -27,7 +27,6 @@ public class PhotoInfo implements Cacheable {
 
 	private int todayMarks;
 	private int topBestMarks;
-	private int totalMarks;
 
 	private int previewCount;
 
@@ -64,6 +63,10 @@ public class PhotoInfo implements Cacheable {
 
 	private UserRankIconContainer userRankIconContainer;
 	private UserRankIconContainer userRankWhenPhotoWasUploadedIconContainer;
+
+	private String remoteSourceLink;
+	private String remoteUserLink;
+	private String remotePhotoLink;
 
 	public PhotoInfo( final Photo photo ) {
 		this.photo = photo;
@@ -338,5 +341,29 @@ public class PhotoInfo implements Cacheable {
 
 	public void setUserRankWhenPhotoWasUploadedIconContainer( final UserRankIconContainer userRankWhenPhotoWasUploadedIconContainer ) {
 		this.userRankWhenPhotoWasUploadedIconContainer = userRankWhenPhotoWasUploadedIconContainer;
+	}
+
+	public String getRemoteSourceLink() {
+		return remoteSourceLink;
+	}
+
+	public void setRemoteSourceLink( final String remoteSourceLink ) {
+		this.remoteSourceLink = remoteSourceLink;
+	}
+
+	public String getRemoteUserLink() {
+		return remoteUserLink;
+	}
+
+	public void setRemoteUserLink( final String remoteUserLink ) {
+		this.remoteUserLink = remoteUserLink;
+	}
+
+	public String getRemotePhotoLink() {
+		return remotePhotoLink;
+	}
+
+	public void setRemotePhotoLink( final String remotePhotoLink ) {
+		this.remotePhotoLink = remotePhotoLink;
 	}
 }

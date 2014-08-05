@@ -1,5 +1,6 @@
 package ui.services;
 
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.configuration.ConfigurationKey;
@@ -7,6 +8,7 @@ import core.general.data.PhotoRating;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photo.PhotoImportData;
 import core.general.photo.PhotoInfo;
 import core.general.photo.PhotoPreviewWrapper;
 import core.general.user.User;
@@ -132,6 +134,17 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 
 		photoInfo.setShowStatisticInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
 		photoInfo.setShowUserRankInGenreInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) );
+
+		final PhotoImportData photoImportData = photo.getPhotoImportData();
+		final AbstractRemotePhotoSiteUrlHelper remotePhotoSiteUrlHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( photoImportData.getPhotosImportSource() );
+
+		photoInfo.setRemoteSourceLink( String.format( "<a href='http://%1$s' target='_blank'>%1$s</a>", remotePhotoSiteUrlHelper.getRemotePhotoSiteHost() ) );
+		photoInfo.setRemoteUserLink( remotePhotoSiteUrlHelper.getRemoteUserCardLink( photoImportData.getRemoteUserId() ) );
+		photoInfo.setRemotePhotoLink( String.format( "<a href='%s' target='_blank'>%s</a>"
+			, remotePhotoSiteUrlHelper.getPhotoCardUrl( photoImportData.getRemoteUserId(), photoImportData.getRemotePhotoId() )
+			, photo.getNameEscaped()
+			)
+		);
 
 		return photoInfo;
 	}
