@@ -82,9 +82,7 @@
 			</table:tr>
 
 			<c:if test="${not empty photo.photoImportData}">
-
 				<table:separator colspan="2" />
-
 				<table:tr>
 					<table:td colspan="2">
 						${eco:translate("Photo info: The photo is taken from remote source")} ${photoInfo.remoteSourceLink}

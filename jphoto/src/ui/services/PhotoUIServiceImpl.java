@@ -136,15 +136,17 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		photoInfo.setShowUserRankInGenreInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) );
 
 		final PhotoImportData photoImportData = photo.getPhotoImportData();
-		final AbstractRemotePhotoSiteUrlHelper remotePhotoSiteUrlHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( photoImportData.getPhotosImportSource() );
+		if ( photoImportData != null ) {
+			final AbstractRemotePhotoSiteUrlHelper remotePhotoSiteUrlHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( photoImportData.getPhotosImportSource() );
 
-		photoInfo.setRemoteSourceLink( String.format( "<a href='http://%1$s' target='_blank'>%1$s</a>", remotePhotoSiteUrlHelper.getRemotePhotoSiteHost() ) );
-		photoInfo.setRemoteUserLink( remotePhotoSiteUrlHelper.getRemoteUserCardLink( photoImportData.getRemoteUserId() ) );
-		photoInfo.setRemotePhotoLink( String.format( "<a href='%s' target='_blank'>%s</a>"
-			, remotePhotoSiteUrlHelper.getPhotoCardUrl( photoImportData.getRemoteUserId(), photoImportData.getRemotePhotoId() )
-			, photo.getNameEscaped()
-			)
-		);
+			photoInfo.setRemoteSourceLink( String.format( "<a href='http://%1$s' target='_blank'>%1$s</a>", remotePhotoSiteUrlHelper.getRemotePhotoSiteHost() ) );
+			photoInfo.setRemoteUserLink( remotePhotoSiteUrlHelper.getRemoteUserCardLink( photoImportData.getRemoteUserId() ) );
+			photoInfo.setRemotePhotoLink( String.format( "<a href='%s' target='_blank'>%s</a>"
+				, remotePhotoSiteUrlHelper.getPhotoCardUrl( photoImportData.getRemoteUserId(), photoImportData.getRemotePhotoId() )
+				, photo.getNameEscaped()
+				)
+			);
+		}
 
 		return photoInfo;
 	}
