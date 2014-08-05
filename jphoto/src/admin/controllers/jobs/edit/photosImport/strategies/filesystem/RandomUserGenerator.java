@@ -8,7 +8,11 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.system.Services;
+import core.services.translator.Language;
 import core.services.utils.RandomUtilsService;
+import rest.photo.upload.category.allowance.AbstractPhotoUploadAllowance;
+import rest.photo.upload.category.allowance.UploadDescriptionFactory;
+import ui.context.EnvironmentContext;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -62,7 +66,8 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			if ( userPhotosQty == 0 ) {
 				// no photo at all yet. This randomly selected user is about to upload his first photo in this genre
 				if ( ! isGenreSuitableForUserMembershipType( user.getMembershipType(), genre ) ) {
-					continue; // genre is nor suitable, try to find another user
+					log.debug( String.format( "Trying to pick up suitable user for uploading photo in category %s: Randomly selected user %s has no photos yet, but his membership type is not suitable for the genre. Trying to find another one...", genre, user ) );
+					continue;
 				}
 
 				return user; // there are no photos and the genre is suitable for user's membership type
@@ -72,6 +77,12 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			final int photosByGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 			if ( photosByGenre > 0 ) {
 				// already has photo(s) in this photo category - user suitable for the category and can upload another photo of this category
+				final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), Language.EN, services );
+				if ( ! uploadAllowance.isUserCanUploadPhoto() ) {
+					log.debug( String.format( "Trying to pick up suitable user for uploading photo in category %s: Randomly selected user %s has uploaded photos in the suitable genres, but the user does not have photo upload allowances. Trying to find another one...", genre, user ) );
+					continue;
+				}
+
 				return user;
 			}
 
@@ -82,6 +93,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 				final boolean genresSimilar = helper.isGenresSimilar( genreWhereUserHasPhotos, genre );
 				if ( genresSimilar ) {
 					// user has photo from similar genre - user fits our genre
+					log.debug( String.format( "Trying to pick up suitable user for uploading photo in category %s: Randomly selected user %s is suitable enough for", genre, user ) );
 					return user;
 				}
 			}
@@ -92,7 +104,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			}
 		}
 
-		log.debug( String.format( "Can not find a suitable user for genre '%s'. The random user is going to be selected.", genre.getName() ) );
+		log.debug( String.format( "Can not find a suitable user for uploading photo in category '%s'. An any random user is going to be selected.", genre.getName() ) );
 
 		return getRandomNonPhotosightUser( 0 ); // This genre might have been missed in configuration...
 	}
@@ -110,6 +122,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 	}
 
 	private User getRandomNonPhotosightUser( final int counter ) {
+
 		if ( counter > 100 ) {
 			throw new BaseRuntimeException( "Max iteration reached. Can not find non-photosight user. Check if at least one not imported user exists." );
 		}
