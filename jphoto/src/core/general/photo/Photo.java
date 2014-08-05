@@ -47,6 +47,8 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	private PhotoImageLocationType photoImageLocationType;
 	private PhotosImportSource photosImportSource;
 
+	private PhotoImportData photoImportData;
+
 	@Override
 	public String getName() {
 		return name;
@@ -218,6 +220,14 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	public void setPhotosImportSource( final PhotosImportSource photosImportSource ) {
 		this.photosImportSource = photosImportSource;
+	}
+
+	public PhotoImportData getPhotoImportData() {
+		return photoImportData;
+	}
+
+	public void setPhotoImportData( final PhotoImportData photoImportData ) {
+		this.photoImportData = photoImportData;
 	}
 
 	@Override

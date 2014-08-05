@@ -398,7 +398,8 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final String keywords = StringUtilities.truncateString( String.format( "%s, %s, %s", siteUrl, remoteUser.getName(), imageToImportData.getName() ), 255 );
 			imageToImportData.setPhotoKeywords( keywords );
 			imageToImportData.setUploadTime( remotePhotoData.getUploadTime() );
-			imageToImportData.setImportId( remotePhoto.getRemotePhotoData().getPhotoId() );
+			imageToImportData.setRemoteUserId( remotePhoto.getRemotePhotoData().getRemoteUser().getId() );
+			imageToImportData.setRemotePhotoId( remotePhoto.getRemotePhotoData().getPhotoId() );
 
 			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhoto, imageToImportData ) );
 		}

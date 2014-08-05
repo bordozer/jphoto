@@ -17,7 +17,8 @@ public class ImageToImportData {
 	private String photoKeywords;
 	private Photo photo;
 
-	private int importId;
+	private String remoteUserId;
+	private int remotePhotoId;
 	private RemotePhotoSiteSeries remotePhotoSiteSeries;
 
 	public ImageToImportData( final ImageToImport imageToImport ) {
@@ -76,12 +77,20 @@ public class ImageToImportData {
 		this.photo = photo;
 	}
 
-	public int getImportId() {
-		return importId;
+	public String getRemoteUserId() {
+		return remoteUserId;
 	}
 
-	public void setImportId( final int importId ) {
-		this.importId = importId;
+	public void setRemoteUserId( final String remoteUserId ) {
+		this.remoteUserId = remoteUserId;
+	}
+
+	public int getRemotePhotoId() {
+		return remotePhotoId;
+	}
+
+	public void setRemotePhotoId( final int remotePhotoId ) {
+		this.remotePhotoId = remotePhotoId;
 	}
 
 	public void setRemotePhotoSiteSeries( final RemotePhotoSiteSeries remotePhotoSiteSeries ) {

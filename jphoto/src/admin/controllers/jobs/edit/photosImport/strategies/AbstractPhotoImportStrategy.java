@@ -10,6 +10,7 @@ import core.exceptions.BaseRuntimeException;
 import core.exceptions.SaveToDBException;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.photo.PhotoImportData;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photoTeam.PhotoTeam;
 import core.general.photoTeam.PhotoTeamMember;
@@ -93,7 +94,7 @@ public abstract class AbstractPhotoImportStrategy {
 		photo.setVotingAllowance( randomUtilsService.getRandomPhotoAllowance() );
 		jobHelperService.initPhotoNudeContentOption( photo );
 		photo.setUserGenreRank( userRankService.getUserRankInGenre( user.getId(), genre.getId() ) );
-		photo.setImportId( photoToImportData.getImportId() );
+		photo.setImportId( photoToImportData.getRemotePhotoId() );
 
 		photo.setPhotoImageUrl( imageToImport.getPhotoImageUrl() );
 		photo.setPhotoImageLocationType( imageToImport.getPhotoImageLocationType() );
@@ -104,6 +105,8 @@ public abstract class AbstractPhotoImportStrategy {
 				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 				break;
 			default:
+				final PhotoImportData photoImportData = new PhotoImportData( imageToImport.getPhotosImportSource(), photoToImportData.getRemoteUserId(), photoToImportData.getRemotePhotoId() );
+				photo.setPhotoImportData( photoImportData );
 				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), imageToImport.getPhotoImageUrl(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 				break;
 		}

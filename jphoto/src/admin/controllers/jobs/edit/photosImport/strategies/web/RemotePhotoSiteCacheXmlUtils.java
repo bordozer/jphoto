@@ -91,7 +91,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		output.close();
 	}
 
-	public void recreateUserCacheFile( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotoDatas, final DateUtilsService dateUtilsService ) throws IOException {
+	public void recreateUserCacheFile( final RemoteUser remoteUser, final List<RemotePhotoData> remotePhotosData, final DateUtilsService dateUtilsService ) throws IOException {
 
 		final Document document = DocumentHelper.createDocument();
 		final Element rootElement = document.addElement( USER_INFO_FILE_ROOT_ELEMENT );
@@ -99,7 +99,7 @@ public class RemotePhotoSiteCacheXmlUtils {
 		rootElement.addElement( USER_INFO_FILE_USER_ID ).addText( String.valueOf( remoteUser.getId() ) );
 		rootElement.addElement( USER_INFO_FILE_USER_NAME ).addText( StringEscapeUtils.escapeXml( remoteUser.getName() ) );
 
-		for ( final RemotePhotoData remotePhotoData : remotePhotoDatas ) {
+		for ( final RemotePhotoData remotePhotoData : remotePhotosData ) {
 
 			if ( remotePhotoData.isHasError() ) {
 				continue;

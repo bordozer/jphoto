@@ -9,9 +9,16 @@ import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.img.Dimension;
 import core.general.photo.Photo;
 import core.general.photo.PhotoImageLocationType;
+import core.general.photo.PhotoImportData;
+import core.log.LogHelper;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import org.apache.commons.lang.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -49,9 +56,15 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	public final static String TABLE_COLUMN_IMAGE_HEIGHT = "image_height";
 	public final static String TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID = "imageLocationTypeId";
 	public final static String TABLE_COLUMN_IMAGE_SOURCE_ID = "imageSourceId";
+	public final static String TABLE_COLUMN_IMPORT_DATA = "importData";
 
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 	public static final Map<Integer, String> updatableFields = newLinkedHashMap();
+
+	private static final String PHOTO_IMPORT_DATA_ROOT_ELEMENT = "photo";
+	private static final String PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID = "importSourceId";
+	private static final String PHOTO_IMPORT_DATA_REMOTE_USER_ID = "remoteUserId";
+	private static final String PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID = "remotePhotoId";
 
 	@Autowired
 	private CacheService<Photo> cacheService;
@@ -61,6 +74,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
+
+	private final LogHelper log = new LogHelper( PhotoDaoImpl.class );
 
 	static {
 		fields.put( 1, TABLE_COLUMN_NAME );
@@ -84,6 +99,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 21, TABLE_COLUMN_FILE_SIZE );
 		fields.put( 22, TABLE_COLUMN_PHOTO_PREVIEW_NAME );
 		fields.put( 23, TABLE_COLUMN_IMAGE_SOURCE_ID );
+		fields.put( 24, TABLE_COLUMN_IMPORT_DATA );
 	}
 
 	static {
@@ -200,6 +216,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID, entry.getPhotoImageLocationType().getId() );
 		paramSource.addValue( TABLE_COLUMN_IMAGE_SOURCE_ID, entry.getPhotosImportSource().getId() );
 
+		paramSource.addValue( TABLE_COLUMN_IMPORT_DATA, toXml( entry.getPhotoImportData() ) );
+
 		return paramSource;
 	}
 
@@ -253,6 +271,45 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		return jdbcTemplate.queryForInt( sql, paramSource );
 	}
 
+	private String toXml( final PhotoImportData photoImportData ) {
+
+		if ( photoImportData == null ) {
+			return "";
+		}
+
+		final Document document = DocumentHelper.createDocument();
+		final Element rootElement = document.addElement( PHOTO_IMPORT_DATA_ROOT_ELEMENT );
+
+		rootElement.addElement( PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID ).addText( String.valueOf( photoImportData.getPhotosImportSource().getId() ) );
+		rootElement.addElement( PHOTO_IMPORT_DATA_REMOTE_USER_ID ).addText( String.valueOf( photoImportData.getRemoteUserId() ) );
+		rootElement.addElement( PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID ).addText( String.valueOf( photoImportData.getRemotePhotoId() ) );
+
+		return document.asXML();
+	}
+
+	private PhotoImportData fromXML( final String xml ) {
+
+		if ( StringUtils.isEmpty( xml ) ) {
+			return null;
+		}
+
+		final Document document;
+		try {
+			document = DocumentHelper.parseText( xml );
+		} catch ( final DocumentException e ) {
+			log.error( String.format( "Can npt parce XML: %s", xml ), e );
+			return null;
+		}
+
+		final Element rootElement = document.getRootElement();
+
+		final PhotosImportSource photosImportSource = PhotosImportSource.getById( rootElement.element( PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID ).getText() );
+		final String remoteUserId = rootElement.element( PHOTO_IMPORT_DATA_REMOTE_USER_ID ).getText();
+		final int remotePhotoId = Integer.parseInt( rootElement.element( PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID ).getText() );
+
+		return new PhotoImportData( photosImportSource, remoteUserId, remotePhotoId );
+	}
+
 	private class PhotoMapper implements RowMapper<Photo> {
 		@Override
 		public Photo mapRow( final ResultSet rs, final int rowNum ) throws SQLException {
@@ -300,6 +357,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setImportId( rs.getInt( TABLE_COLUMN_IMPORT_ID ) );
 
 			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
+
+			result.setPhotoImportData( fromXML( rs.getString( TABLE_COLUMN_IMPORT_DATA ) ) );
 
 			return result;
 		}

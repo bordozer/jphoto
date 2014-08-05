@@ -124,6 +124,7 @@ CREATE TABLE `photos` (
   `image_height` smallint(6) NOT NULL,
   `imageLocationTypeId` tinyint(4) NOT NULL,
   `imageSourceId` tinyint(4) NOT NULL,
+  `importData` text,
   PRIMARY KEY (`id`,`keywords`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_photos_genreId_genres_id` (`genreId`),
@@ -131,7 +132,7 @@ CREATE TABLE `photos` (
   KEY `idx_uploadTime` (`uploadTime`) USING BTREE,
   CONSTRAINT `fk_photos_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_photos_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=304500 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130921 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `comments` table :
