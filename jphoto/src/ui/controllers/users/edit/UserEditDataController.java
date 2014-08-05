@@ -105,9 +105,12 @@ public class UserEditDataController {
 
 		model.setNew( true );
 
-		final User user = fakeUserService.getRandomUser(); // TODO: for debug only!
+		final boolean devMode = systemVarsService.isDevMode();
+		final User user = devMode ? fakeUserService.getRandomUser() : new User();
 
-		initModelFromUser( model, user );
+		if ( devMode ) {
+			initModelFromUser( model, user );
+		}
 
 		model.setBeingChangedUser( user );
 

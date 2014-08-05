@@ -81,7 +81,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	}
 
 	public void setLogin( final String login ) {
-		this.login = login.trim();
+		this.login = login != null ? login.trim() : "";
 	}
 
 	public String getName() {
@@ -89,7 +89,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	}
 
 	public void setName( final String name ) {
-		this.name = name.trim();
+		this.name = name != null ? name.trim() : "";
 	}
 
 	public String getEmail() {
@@ -97,7 +97,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	}
 
 	public void setEmail( final String email ) {
-		this.email = email.trim();
+		this.email = email != null ? email.trim() : "";
 	}
 
 	public String getDateOfBirth() {
@@ -113,7 +113,7 @@ public class UserEditDataModel extends AbstractGeneralModel {
 	}
 
 	public void setHomeSite( final String homeSite ) {
-		this.homeSite = homeSite.trim();
+		this.homeSite = homeSite != null ? homeSite.trim() : "";
 	}
 
 	public String getSelfDescription() {
