@@ -10,16 +10,15 @@ import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.SystemVarsService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.fakeUser.AbstractFakeMember;
 import utils.fakeUser.FakeMakeUpMaster;
 import utils.fakeUser.FakeModel;
 import utils.fakeUser.FakePhotographer;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
@@ -159,7 +158,11 @@ public class FakeUserServiceImpl implements FakeUserService {
 	}
 
 	private Language getRandomLanguage() {
-		return randomUtilsService.getRandomGenericSetElement( newHashSet( systemVarsService.getActiveLanguages() ) );
+		final Set<Language> activeLanguages = newHashSet( systemVarsService.getActiveLanguages() );
+
+		CollectionUtils.filter( activeLanguages, language -> language != Language.NERD );
+
+		return randomUtilsService.getRandomGenericSetElement( activeLanguages );
 	}
 
 	private String getRandomEmail() {
