@@ -77,11 +77,12 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			final int photosByGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
 			if ( photosByGenre > 0 ) {
 				// already has photo(s) in this photo category - user suitable for the category and can upload another photo of this category
-				final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), Language.EN, services );
+				// TODO: respect photo upload allowances
+				/*final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, user, Language.EN, services );
 				if ( ! uploadAllowance.isUserCanUploadPhoto() ) {
 					log.debug( String.format( "Trying to pick up suitable user for uploading photo in category %s: Randomly selected user %s has uploaded photos in the suitable genres, but the user does not have photo upload allowances. Trying to find another one...", genre, user ) );
 					continue;
-				}
+				}*/
 
 				return user;
 			}
