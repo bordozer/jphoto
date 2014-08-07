@@ -29,6 +29,7 @@ public class JobChainJob extends AbstractJob {
 	protected void runJob() throws Throwable {
 
 		if ( jobRunMode == JobRunMode.PARALLEL ) {
+
 			notifyAllChildrenJobsForParallelExecution();
 
 			while( true ) {

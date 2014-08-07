@@ -92,10 +92,6 @@ public abstract class AbstractJobController {
 		return getView( getStartViewName(), model );
 	}
 
-	private Language getLanguage() {
-		return EnvironmentContext.getLanguage();
-	}
-
 	protected ModelAndView doPostForm( final AbstractAdminJobModel model, final BindingResult result ) {
 
 		setTabInfo( model );
@@ -329,5 +325,9 @@ public abstract class AbstractJobController {
 
 	private JobRuntimeEnvironment getCurrentUserJobRuntimeEnvironment() {
 		return new JobRuntimeEnvironment( EnvironmentContext.getCurrentUser().getLanguage() );
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

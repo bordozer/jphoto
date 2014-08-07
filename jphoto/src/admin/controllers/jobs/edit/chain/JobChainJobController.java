@@ -107,6 +107,7 @@ public class JobChainJobController extends AbstractJobController {
 
 	@Override
 	protected void initJobFromModel( final AbstractAdminJobModel model ) {
+
 		final JobChainJobModel aModel = ( JobChainJobModel ) model;
 		final JobChainJob job = ( JobChainJob ) model.getJob();
 
