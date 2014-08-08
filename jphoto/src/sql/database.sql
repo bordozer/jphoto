@@ -766,3 +766,8 @@ DELETE
 FROM `photos`
 	WHERE photos.uploadTime = 0;
 /* / delete photos with ZERO upload time */
+
+
+UPDATE  photos
+SET photos.bgcolor = CONCAT( "#", photos.bgcolor )
+WHERE photos.`bgcolor` <> '""
