@@ -35,8 +35,8 @@ public abstract class AbstractDateRangeableJob extends AbstractJob {
 		builder.append( dateRange ).append( "<br />" );
 
 		if ( dateRangeType != DateRangeType.CURRENT_TIME ) {
-			builder.append( translate( "from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
-			builder.append( translate( "to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
+			builder.append( translate( "Job DateRangeParameters: from" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getStartDate() ) ).append( "<br />" );
+			builder.append( translate( "Job DateRangeParameters: to" ) ).append( ": " ).append( services.getDateUtilsService().formatDate( jobDateRange.getEndDate() ) ).append( "<br />" );
 		}
 	}
 
