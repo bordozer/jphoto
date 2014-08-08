@@ -10,7 +10,6 @@ Base functionality
 	- Force set anonymous setting for anonymous days, respecting user status
 	- User's team managing: user picker
 	- Implement managing user's albums from upload page
-	- Implement ability of background set
 
 3. Photo card:
 	- Rewrite photo info, cover by tests (split the information by tabs)
