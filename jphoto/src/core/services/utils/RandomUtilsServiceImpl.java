@@ -76,7 +76,7 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 	public String getPhotoBackgroundRandomColor() {
 		final int randomIndex = getRandomInt( 0, PHOTO_BACKGROUND_COLORS.length - 1 );
-		return PHOTO_BACKGROUND_COLORS[ randomIndex ];
+		return String.format( "#%s", PHOTO_BACKGROUND_COLORS[ randomIndex ] );
 	}
 
 	@Override
