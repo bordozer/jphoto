@@ -211,10 +211,14 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( TABLE_COLUMN_USER_GENRE_RANK, entry.getUserGenreRank() );
 		paramSource.addValue( TABLE_COLUMN_IMPORT_ID, entry.getImportId() );
 
-		paramSource.addValue( TABLE_COLUMN_IMAGE_WIDTH, entry.getImageDimension().getWidth() );
-		paramSource.addValue( TABLE_COLUMN_IMAGE_HEIGHT, entry.getImageDimension().getHeight() );
 		paramSource.addValue( TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID, entry.getPhotoImageLocationType().getId() );
 		paramSource.addValue( TABLE_COLUMN_IMAGE_SOURCE_ID, entry.getPhotosImportSource().getId() );
+
+		final Dimension imageDimension = entry.getImageDimension();
+		if ( imageDimension != null ) {
+			paramSource.addValue( TABLE_COLUMN_IMAGE_WIDTH, imageDimension.getWidth() );
+			paramSource.addValue( TABLE_COLUMN_IMAGE_HEIGHT, imageDimension.getHeight() );
+		}
 
 		paramSource.addValue( TABLE_COLUMN_IMPORT_DATA, toXml( entry.getPhotoImportData() ) );
 

@@ -81,6 +81,29 @@
 			</table:tddata>
 		</table:tredit>
 
+		<table:tredit>
+			<table:tdtext text_t="Photo uploading: Background"/>
+
+			<table:tddata>
+				<link rel='stylesheet' href='${eco:baseUrl()}/js/lib/spectrum/spectrum.css' />
+
+				<input type="hidden" id="bgColor" name="bgColor" value="${photoEditDataModel.bgColor}"/>
+				<input type="text" class="color-picker" style="display: none;"/>
+
+				<script type="text/javascript">
+					require( [ 'jquery', 'spectrum'], function ( $, spectrum ) {
+						$( '.color-picker' ).spectrum( {
+							color: "${photoEditDataModel.bgColor}"
+							, change: function( color ) {
+								$( '#bgColor' ).val( color.toHexString() );
+							}
+						});
+					} );
+				</script>
+			</table:tddata>
+		</table:tredit>
+
+
 		<table:separator colspan="2" />
 
 		<table:tredit>

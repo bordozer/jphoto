@@ -19,6 +19,7 @@ var require = {
 		, jquery_progressbar: "lib/progressbar/jquery.progressbar"
 
 		, context_menu: "lib/fg.menu/fg.menu"
+		, spectrum: "lib/spectrum/spectrum"
 
 		, noty: "lib/noty-2.2.2/jquery.noty.packaged"
 		, noty_default: "lib/noty-2.2.2/themes/default"
@@ -53,6 +54,9 @@ var require = {
 			deps: [ 'jquery' ]
 		},
 		jquery_progressbar: {
+			deps: [ 'jquery' ]
+		},
+		spectrum: {
 			deps: [ 'jquery' ]
 		},
 

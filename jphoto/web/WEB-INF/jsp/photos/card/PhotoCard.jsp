@@ -63,7 +63,7 @@
 
 	<div class="footerseparatorsmall"></div>
 
-	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? '#'.concat(photo.bgColor) : 'transparent'};">
+	<div class="photoCardPhotoDiv" style="background-color: ${not empty photo.bgColor ? photo.bgColor : 'transparent'};">
 
 		<div style="width: ${shownDimension.width}px; margin-top: 0; margin-right: auto; margin-bottom: 0; margin-left: auto;">
 			<a href="#" onclick="return false;">
@@ -278,8 +278,8 @@
 	</div>
 
 	<c:if test="${isLoggedUser}">
-		<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>
-		<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>
+		<%--<script type="text/javascript" src="${eco:baseUrl()}/js/lib/jcrop/js/jquery.Jcrop.js"></script>--%>
+		<%--<link rel="stylesheet" href="${eco:baseUrl()}/js/lib/jcrop/css/jquery.Jcrop.css" type="text/css"/>--%>
 
 		<%--<script type="text/javascript">
 

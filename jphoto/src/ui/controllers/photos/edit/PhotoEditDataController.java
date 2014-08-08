@@ -177,6 +177,8 @@ public class PhotoEditDataController {
 		model.setUploadDateIsAnonymousDay( anonymousDaysService.isDayAnonymous( dateUtilsService.getCurrentTime() ) );
 		model.setAnonymousPosting( false );
 
+		model.setBgColor( "#000000" );
+
 		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( photoAuthor ) );
 
 		return VIEW_EDIT_DATA;
