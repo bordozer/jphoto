@@ -45,7 +45,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		onButtonClick: function() {
-			eval ( this.model.get( 'callback' ) );
+			var model = {
+				rangeType: this.model.get( 'rangeType' )
+				, timePeriod: this.model.get( 'timePeriod' )
+				, timeUnit: this.model.get( 'timeUnit' )
+				, dateFrom: this.model.get( 'dateFrom' )
+				, dateTo: this.model.get( 'dateTo' )
+			};
+			eval ( this.model.get( 'callback' )( model ) );
 		}
 	} );
 
@@ -77,12 +84,8 @@ define( ["backbone", "jquery", "underscore"
 
 		onTimePeriodUnitChange: function( evt ) {
 			evt.preventDefault();
-			this.model.set( { timeUnit: $( ".time-period-unit" ).val() } );
-		}/*,
-
-		save: function() {
-			this.model.save();
-		}*/
+			this.model.set( { timeUnit: $( ".time-period-unit:checked" ).val() } );
+		}
 	} );
 
 
@@ -109,12 +112,7 @@ define( ["backbone", "jquery", "underscore"
 		onDateRangeToValueChange: function( evt ) {
 			evt.preventDefault();
 			this.model.set( { dateTo: evt.target.value } );
-		}/*,
-
-		save: function() {
-//			console.log( "DateRangeView: save" );
-			this.model.save();
-		}*/
+		}
 	} );
 
 	return { TimePeriodView:TimePeriodView, DateRangeView:DateRangeView, RangeView:RangeView };

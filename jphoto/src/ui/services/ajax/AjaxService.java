@@ -33,7 +33,9 @@ public interface AjaxService {
 
 	boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId );
 
-	void lockUser( final int userId, final String timeFrom, final String timeTo );
+	void restrictUser( final int userId, final String timeFrom, final String timeTo );
+
+	void restrictUser( final int userId, final int period, final int unitId );
 
 	void lockPhoto( final int photoId, final String timeFrom, final String timeTo );
 

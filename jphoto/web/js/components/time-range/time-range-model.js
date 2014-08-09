@@ -14,7 +14,7 @@ define( ["backbone"], function ( Backbone ) {
 		defaults: function() {
 
 			return {
-				rangeType: 1
+				rangeType: 1 /* 1 - time period, 2 - date range */
 
 				, timePeriod: this.defaultOffset()
 				, timeUnit: 2 /* 1 is HOURS, 2 is DAYS, 3 is MONTH, 4 is YEAR */

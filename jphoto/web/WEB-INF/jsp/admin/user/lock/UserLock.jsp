@@ -73,10 +73,6 @@
 
 	var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
-	var userId = ${userId};
-	var userName = "${userLockModel.userName}";
-	var ajaxService = jsonRPC.ajaxService;
-
 	require( ["components/time-range/time-range-model"
 		 	, "components/time-range/time-range-view"
 			, "jquery"], function ( Model, View, $ ) {
@@ -98,11 +94,19 @@
 	} );
 
 	require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
-		userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
+		userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
 	} );
 
-	function restrictUser() {
-		console.log( 'restrict user' );
+	function restrictUser( model ) {
+		console.log( 'restrict user:', model );
+
+		var ajaxService = jsonRPC.ajaxService;
+
+		if ( model.rangeType == 1 ) {
+			ajaxService.restrictUser( ${userId}, model.timePeriod, model.timeUnit );
+		} else {
+			ajaxService.restrictUser( ${userId}, model.dateFrom, model.dateTo );
+		}
 	}
 
 </script>

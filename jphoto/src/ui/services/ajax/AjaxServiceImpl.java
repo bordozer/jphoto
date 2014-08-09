@@ -8,6 +8,7 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUs
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
+import core.general.executiontasks.PeriodUnit;
 import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
@@ -403,11 +404,17 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public void lockUser( final int userId, final String timeFrom, final String timeTo ) {
+	public void restrictUser( final int userId, final String timeFrom, final String timeTo ) {
 //		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
 		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
 
 		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
+	}
+
+	@Override
+	public void restrictUser( final int userId, final int period, final int unitId ) {
+		final PeriodUnit periodUnit = PeriodUnit.getById( unitId );
+		log.debug( String.format( "userId: %d, period: '%s', uit: '%s'", userId, period, periodUnit ) );
 	}
 
 	@Override
