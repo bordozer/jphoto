@@ -24,6 +24,6 @@ public class CommentMenuItemComplaintSpam extends AbstractCommentComplaintMenuIt
 
 	@Override
 	protected String getMenuItemText() {
-		return translate( "Report spam" );
+		return translate( "CommentMenuItemComplaint: Spam" );
 	}
 }

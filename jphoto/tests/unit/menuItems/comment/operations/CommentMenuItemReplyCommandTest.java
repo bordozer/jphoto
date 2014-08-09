@@ -42,7 +42,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 		final Services services = getServicesForTest( user, true );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( "Reply to photo author ( anonymous )" ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( "CommentMenuItemReply: Reply to photo author ( anonymous )" ) );
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( user );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), translated( "Reply to photo author ( anonymous )" ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), translated( "CommentMenuItemReply: Reply to photo author ( anonymous )" ) );
 	}
 
 	@Test

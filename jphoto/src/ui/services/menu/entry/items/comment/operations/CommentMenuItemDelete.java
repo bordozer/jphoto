@@ -26,10 +26,10 @@ public class CommentMenuItemDelete extends AbstractCommentMenuItem {
 			@Override
 			public String getMenuText() {
 				if ( isCommentLeftByAccessor() ) {
-					return getTranslatorService().translate( "Delete comment", getLanguage() );
+					return getTranslatorService().translate( "CommentMenuItemDelete: Delete comment", getLanguage() );
 				}
 
-				return getTranslatorService().translate( "Delete comment (as photo author)", getLanguage() );
+				return getTranslatorService().translate( "CommentMenuItemDelete: Delete comment (as photo author)", getLanguage() );
 			}
 
 			@Override

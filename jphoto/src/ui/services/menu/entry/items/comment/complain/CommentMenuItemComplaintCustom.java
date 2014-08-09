@@ -24,6 +24,6 @@ public class CommentMenuItemComplaintCustom extends AbstractCommentComplaintMenu
 
 	@Override
 	protected String getMenuItemText() {
-		return translate( "Custom complaint" );
+		return translate( "CommentMenuItemComplaint: Custom complaint" );
 	}
 }

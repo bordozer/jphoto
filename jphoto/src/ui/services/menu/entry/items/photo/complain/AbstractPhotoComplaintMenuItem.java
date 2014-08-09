@@ -23,6 +23,10 @@ public abstract class AbstractPhotoComplaintMenuItem extends AbstractPhotoMenuIt
 			return false;
 		}
 
+		if ( isAccessorSuperAdmin() ) {
+			return false;
+		}
+
 		if ( isPhotoOfMenuAccessor() ) {
 			return false;
 		}

@@ -24,7 +24,7 @@ public class CommentMenuItemDeleteAdmin extends AbstractCommentMenuItem {
 
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Delete comment", getLanguage() );
+				return getTranslatorService().translate( "CommentMenuItemDelete: Delete comment", getLanguage() );
 			}
 
 			@Override

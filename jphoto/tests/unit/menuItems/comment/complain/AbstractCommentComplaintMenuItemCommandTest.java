@@ -25,7 +25,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 
 		final CommentMenuItemComplaintCustom menuItem = new CommentMenuItemComplaintCustom( testData.getComment(), accessor, services );
 
-		doAssert( accessor, menuItem, "Custom complaint", ComplaintReasonType.COMMENT_CUSTOM_COMPLAINT );
+		doAssert( accessor, menuItem, "CommentMenuItemComplaint: Custom complaint", ComplaintReasonType.COMMENT_CUSTOM_COMPLAINT );
 	}
 
 	@Test
@@ -35,7 +35,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 
 		final CommentMenuItemComplaintSpam menuItem = new CommentMenuItemComplaintSpam( testData.getComment(), accessor, services );
 
-		doAssert( accessor, menuItem, "Report spam", ComplaintReasonType.COMMENT_SPAM );
+		doAssert( accessor, menuItem, "CommentMenuItemComplaint: Spam", ComplaintReasonType.COMMENT_SPAM );
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class AbstractCommentComplaintMenuItemCommandTest extends AbstractComment
 
 		final CommentMenuItemComplaintSwordWords menuItem = new CommentMenuItemComplaintSwordWords( testData.getComment(), accessor, services );
 
-		doAssert( accessor, menuItem, "Report sword words or offence", ComplaintReasonType.COMMENT_SWORD_WORDS );
+		doAssert( accessor, menuItem, "CommentMenuItemComplaint: Report sword words or offence", ComplaintReasonType.COMMENT_SWORD_WORDS );
 	}
 
 	private void doAssert( final User accessor, final AbstractCommentComplaintMenuItem menuItem, final String expected, final ComplaintReasonType complaintReasonType ) {
