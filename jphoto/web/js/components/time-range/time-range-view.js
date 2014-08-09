@@ -19,10 +19,11 @@ define( ["backbone", "jquery", "underscore"
 			this.timePeriodView = new TimePeriodView( { model: this.model, el: this.$el } );
 			this.dateRangeView = new DateRangeView( { model: this.model, el: this.$el } );
 
-			this.listenTo( this.model, "change", this.render );
+			this.timePeriodView.on( "recalculate", this.model.recalculateDateRange, this.model );
+			this.dateRangeView.on( "recalculate", this.model.recalculateTimePeriod, this.model );
 		},
 
-		render:function () {
+		render: function () {
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 
@@ -36,7 +37,8 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		togglePeriodType:function( value ) {
-			this.model.set( {rangeType: value} );
+			this.model.set( { rangeType: value } );
+			this.render();
 		},
 
 		onTogglePeriodType:function ( evt ) {
@@ -69,7 +71,7 @@ define( ["backbone", "jquery", "underscore"
 
 		render:function () {
 			var modelJSON = this.model.toJSON();
-			$( '#range-div', this.$el).html( this.template( modelJSON ) );
+			$( '#range-div', this.$el ).html( this.template( modelJSON ) );
 			this.seTimeUnit();
 		},
 
@@ -79,12 +81,18 @@ define( ["backbone", "jquery", "underscore"
 
 		onTimePeriodValueChange: function( evt ) {
 			evt.preventDefault();
+
 			this.model.set( { timePeriod: evt.target.value } );
+
+			this.trigger( 'recalculate' );
 		},
 
 		onTimePeriodUnitChange: function( evt ) {
 			evt.preventDefault();
+
 			this.model.set( { timeUnit: $( ".time-period-unit:checked" ).val() } );
+
+			this.trigger( 'recalculate' );
 		}
 	} );
 
@@ -106,12 +114,18 @@ define( ["backbone", "jquery", "underscore"
 
 		onDateRangeFromValueChange: function( evt ) {
 			evt.preventDefault();
+
 			this.model.set( { dateFrom: evt.target.value } );
+
+			this.trigger( 'recalculate' );
 		},
 
 		onDateRangeToValueChange: function( evt ) {
 			evt.preventDefault();
+
 			this.model.set( { dateTo: evt.target.value } );
+
+			this.trigger( 'recalculate' );
 		}
 	} );
 

@@ -87,7 +87,7 @@
 			, daysYear: "${eco:translate('Time period component: year')}"
 		};
 
-		var rangeModel = new Model.RangeModel( { callback: restrictUser, translations: translations } );
+		var rangeModel = new Model.RangeModel( { callback: saveUserRestriction, translations: translations } );
 
 		var rangeView = new View.RangeView( { model: rangeModel, el: $( '#user-lock-form' ) } );
 		rangeView.render();
@@ -97,7 +97,7 @@
 		userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
 	} );
 
-	function restrictUser( model ) {
+	function saveUserRestriction( model ) {
 		console.log( 'restrict user:', model );
 
 		var ajaxService = jsonRPC.ajaxService;

@@ -3,7 +3,8 @@ define( ["backbone"], function ( Backbone ) {
 	var RangeModel = Backbone.Model.extend( {
 
 		initialize: function() {
-			this.listenTo( this, "change", this.recalculate );
+//			this.listenTo( this, "change", this.recalculate );
+			this.recalculateTimePeriod();
 			this.recalculateDateRange();
 		},
 
@@ -20,7 +21,7 @@ define( ["backbone"], function ( Backbone ) {
 				, timeUnit: 2 /* 1 is HOURS, 2 is DAYS, 3 is MONTH, 4 is YEAR */
 
 				, dateFrom: new Date()
-				, dateTo: new Date( new Date().getTime() + this.defaultOffset() * 1000 * 60 * 60 * 24 )
+				, dateTo: new Date( new Date().getTime() + this.defaultOffset() * this.millisecondsPerDay() )
 			};
 		},
 
@@ -33,39 +34,42 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		recalculateTimePeriod: function() {
+
 			var dateFrom = new Date( this.get( 'dateFrom' ) );
 			var dateTo = new Date( this.get( 'dateTo' ) );
 
-			var millisecondsPerDay = 1000 * 60 * 60 * 24;
+			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / this.millisecondsPerDay() );
 			if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {
-				this.set( { timeUnit: 1 } )
+				this.set( { timePeriod: 1, timeUnit: 2 }, { silent: true } );
+			} else {
+				this.set( { timePeriod: timePeriod }, { silent: true } );
 			}
-			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / millisecondsPerDay );
 
-//			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
-
-			this.set( { timePeriod: timePeriod, timeUnit: 2 }, { "silent": true } );
+//			console.log( 'RECALCULATE: timePeriod: ', timePeriod, 'timeUnit: ', this.get( 'timeUnit' ) );
 		},
 
 		recalculateDateRange: function() {
-			var dateFrom = new Date();
-			var dateTo = new Date( dateFrom.getTime() + ( this.get( 'timePeriod' ) ) * 1000 * 60 * 60 * 24 );
 
-//			console.log( 'RECALCULATE: dateFrom: ', dateFrom, ' dateTo: ', dateTo, ' timePeriod: ' );
+			var dateFrom = new Date();
+			var delta = this.get( 'timePeriod' );
+
+			if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {
+				delta = 1;
+			}
+
+			var dateTo = new Date( dateFrom.getTime() + delta * this.millisecondsPerDay() );
+
+//			console.log( 'RECALCULATE: dateFrom: ', dateFrom, ' dateTo: ', dateTo );
 
 			var dateFromFormatted = dateFrom.format( 'yyyy-mm-dd' );
 			var dateToFormatted = dateTo.format( 'yyyy-mm-dd' );
 
 			this.set( { dateFrom: dateFrom, dateTo: dateTo, dateFromFormatted: dateFromFormatted, dateToFormatted: dateToFormatted }, { "silent": true } );
-		}/*,
+		},
 
-		save: function() {
-			var userId = this.get( 'userId' );
-			var ajaxService = this.get( 'ajaxService' );
-
-			ajaxService.lockUser( userId, new Date(), new Date() );
-		}*/
-
+		millisecondsPerDay: function() {
+			return 1000 * 60 * 60 * 24;
+		}
 	 } );
 
 	return { RangeModel:RangeModel };
