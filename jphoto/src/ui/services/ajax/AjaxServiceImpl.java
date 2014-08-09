@@ -404,17 +404,17 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public void restrictUser( final int userId, final String timeFrom, final String timeTo ) {
-//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
-		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
-
-		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
+	public void restrictUserPeriod( final int userId, final int period, final int unitId ) {
+		final PeriodUnit periodUnit = PeriodUnit.getById( unitId );
+		log.debug( String.format( "userId: %d, period: '%s', uit: '%s'", userId, period, periodUnit ) );
 	}
 
 	@Override
-	public void restrictUser( final int userId, final int period, final int unitId ) {
-		final PeriodUnit periodUnit = PeriodUnit.getById( unitId );
-		log.debug( String.format( "userId: %d, period: '%s', uit: '%s'", userId, period, periodUnit ) );
+	public void restrictUserRange( final int userId, final String timeFrom, final String timeTo ) {
+		//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+
+		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
 	}
 
 	@Override

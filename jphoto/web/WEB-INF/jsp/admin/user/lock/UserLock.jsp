@@ -98,14 +98,14 @@
 	} );
 
 	function saveUserRestriction( model ) {
-		console.log( 'restrict user:', model );
+		console.log( model );
 
 		var ajaxService = jsonRPC.ajaxService;
 
 		if ( model.rangeType == 1 ) {
-			ajaxService.restrictUser( ${userId}, model.timePeriod, model.timeUnit );
+			ajaxService.restrictUserPeriod( ${userId}, model.timePeriod, model.timeUnit );
 		} else {
-			ajaxService.restrictUser( ${userId}, model.dateFrom, model.dateTo );
+			ajaxService.restrictUserRange( ${userId}, model.dateFrom, model.dateTo );
 		}
 	}
 
