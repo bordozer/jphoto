@@ -1,4 +1,4 @@
-package rest.admin.user.lock;
+package rest.admin.restriction;
 
 public enum DateRange {
 

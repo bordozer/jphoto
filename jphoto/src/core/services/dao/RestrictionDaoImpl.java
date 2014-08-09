@@ -69,13 +69,6 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	}
 
 	@Override
-	public boolean isRestrictedNow( final int entryId, final RestrictionType restrictionType, final Date time ) {
-		final List<EntryRestriction> restrictions = loadRestrictions( entryId, restrictionType );
-
-		return restrictions != null && restrictions.get( restrictions.size() - 1 ).getRestrictionTimeTo().getTime() >= time.getTime();
-	}
-
-	@Override
 	protected MapSqlParameterSource getParameters( final EntryRestriction restriction ) {
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
@@ -122,10 +115,11 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 
 			switch ( restrictionType ) {
 				case USER_LOGIN:
-				case USER_COMMENTING:
-					return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
 				case USER_PHOTO_UPLOADING:
-				case PHOTO_BE_PHOTO_OF_THE_DAY:
+				case USER_COMMENTING:
+				case USER_MESSAGING:
+					return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
+				case PHOTO_TO_BE_PHOTO_OF_THE_DAY:
 					return new EntryRestriction<>( photoDao.load( entryId ), restrictionType );
 			}
 

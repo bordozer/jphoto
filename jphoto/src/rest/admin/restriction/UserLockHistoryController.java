@@ -1,4 +1,4 @@
-package rest.admin.user.lock;
+package rest.admin.restriction;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

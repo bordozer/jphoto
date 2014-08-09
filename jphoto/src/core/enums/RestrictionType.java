@@ -3,10 +3,16 @@ package core.enums;
 import core.interfaces.IdentifiableNameable;
 
 public enum RestrictionType implements IdentifiableNameable {
-	USER_LOGIN( 1, "Login in" )
-	, USER_PHOTO_UPLOADING( 2, "Photo uploading" )
-	, USER_COMMENTING( 3, "Commenting" )
-	, PHOTO_BE_PHOTO_OF_THE_DAY( 4, "Be photo of the day" )
+
+	USER_LOGIN( 1, "RestrictionType: User login in" )
+	, USER_PHOTO_UPLOADING( 2, "RestrictionType: User photo uploading" )
+	, USER_COMMENTING( 3, "RestrictionType: User commenting" )
+	, USER_MESSAGING( 4, "RestrictionType: User messaging" )
+	, USER_PHOTO_APPRAISAL( 5, "RestrictionType: User photo appraisal" )
+	, USER_VOTING_FOR_RANK_IN_GENRE( 6, "RestrictionType: User voting fo rank in genre" )
+	, PHOTO_TO_BE_PHOTO_OF_THE_DAY( 7, "RestrictionType: Photo: To be photo of the day" )
+	, PHOTO_TO_BE_BEST_IN_GENRE( 8, "RestrictionType: Photo: To show in the best photos of genre" )
+	, PHOTO_COMMENTING( 9, "RestrictionType: Photo: Commenting" )
 	;
 
 	private final int id;
