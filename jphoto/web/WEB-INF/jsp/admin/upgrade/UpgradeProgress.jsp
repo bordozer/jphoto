@@ -7,7 +7,7 @@
 
 <jsp:useBean id="upgradeModel" type="admin.controllers.upgrade.UpgradeModel" scope="request"/>
 
-<tags:pageLight title="${eco:translate('System update')}">
+<tags:pageLight title="${eco:translate('System upgrade: Page title')}">
 
 	<style type="text/css">
 

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Performed upgrade tasks</nerd>
+		<ru><![CDATA[Выполненные задачи обновления системы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Run upgrade tasks</nerd>
+		<ru><![CDATA[Выполнить задачи обновления системы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>System upgrade: Page title</nerd>
+		<ru><![CDATA[Обновление системы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>There are no unperformed upgrade tasks</nerd>
+		<ru><![CDATA[Невыполненных задач обновления системы нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Upgrade log is empty</nerd>
+		<ru><![CDATA[В логе обновления системы записей нет]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Upgrade task to perform</nerd>
+		<ru><![CDATA[Задачи обновления системы к выполнению]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Upgrade tasks</nerd>
+		<ru><![CDATA[Задачи обновления системы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
