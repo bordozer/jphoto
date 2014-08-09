@@ -12,7 +12,7 @@ define( ["backbone", "jquery", "underscore"
 
 		events: {
 			"change .lock-period-type" : "onTogglePeriodType"
-			, "click .lock-user-button" : "onSave"
+			, "click .date-range-action-button" : "onButtonClick"
 		},
 
 		initialize: function() {
@@ -23,7 +23,7 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			this.$el.html( this.template( modelJSON ) );
 
-			$( "input[name='lockPeriodType'][value='" + this.model.get( 'rangeType' ) + "']" ).attr( "checked", true );
+			$( "input[name='periodType'][value='" + this.model.get( 'rangeType' ) + "']" ).attr( "checked", true );
 
 			this.$el.append( this.getView().render() );
 		},
@@ -41,8 +41,8 @@ define( ["backbone", "jquery", "underscore"
 			this.togglePeriodType( evt.target.value );
 		},
 
-		onSave: function() {
-			this.getView().save();
+		onButtonClick: function() {
+			eval ( this.model.get( 'callback' ) );
 		}
 	} );
 
@@ -75,12 +75,11 @@ define( ["backbone", "jquery", "underscore"
 		onTimePeriodUnitChange: function( evt ) {
 			evt.preventDefault();
 			this.model.set( { timeUnit: $( ".time-period-unit" ).val() } );
-		},
+		}/*,
 
 		save: function() {
 			this.model.save();
-		}
-
+		}*/
 	} );
 
 
@@ -107,12 +106,12 @@ define( ["backbone", "jquery", "underscore"
 		onDateRangeToValueChange: function( evt ) {
 			evt.preventDefault();
 			this.model.set( { dateTo: evt.target.value } );
-		},
+		}/*,
 
 		save: function() {
 //			console.log( "DateRangeView: save" );
 			this.model.save();
-		}
+		}*/
 	} );
 
 	return { TimePeriodView:TimePeriodView, DateRangeView:DateRangeView, RangeView:RangeView };

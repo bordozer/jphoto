@@ -406,6 +406,7 @@ public class AjaxServiceImpl implements AjaxService {
 	public void lockUser( final int userId, final String timeFrom, final String timeTo ) {
 //		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
 		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+
 		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
 	}
 

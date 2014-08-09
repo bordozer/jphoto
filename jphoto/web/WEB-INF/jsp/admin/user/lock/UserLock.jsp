@@ -49,7 +49,7 @@
 <div class="user-lock-area-header">
 
 	<div style="float: left; width: 300px; margin-right: 15px;">
-		<div class="user-lock-area-header block-background user-lock-area-tab">Lock user</div>
+		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Lock $1', userLockModel.userName)}</div>
 
 		<div id="user-lock-form" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
@@ -71,21 +71,23 @@
 
 <script type="text/javascript">
 
-	require( [ 'jquery' ], function ( $ ) {
-		$( document ).ready( function () {
+	var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
-			var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
+	var userId = ${userId};
+	var userName = "${userLockModel.userName}";
+	var ajaxService = jsonRPC.ajaxService;
 
-			require( ['components/time-range/time-range'], function ( timeRange ) {
-				timeRange( ${userId}, "${userLockModel.userName}", jsonRPC.ajaxService, $( '#user-lock-form' ) );
-			} );
-
-			require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
-				userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
-			} );
-
-		} );
+	require( ['components/time-range/time-range'], function ( timeRange ) {
+		timeRange( "${eco:translate1('User restriction: Lock $1', userLockModel.userName)}", restrictUser, $( '#user-lock-form' ) );
 	} );
+
+	require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
+		userLockHistory( ${userLockModel.userId}, "${baseUrl}", $( '#user-lock-history' ) );
+	} );
+
+	function restrictUser() {
+		console.log( 'restrict user' );
+	}
 
 </script>
 

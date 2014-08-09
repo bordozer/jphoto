@@ -8,7 +8,7 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		defaultOffset: function() {
-			return 3;
+			return 1;
 		},
 
 		defaults: function() {
@@ -37,8 +37,9 @@ define( ["backbone"], function ( Backbone ) {
 			var dateTo = new Date( this.get( 'dateTo' ) );
 
 			var millisecondsPerDay = 1000 * 60 * 60 * 24;
-			/*if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {
-			}*/
+			if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {
+				this.set( { timeUnit: 1 } )
+			}
 			var timePeriod = Math.round( ( dateTo.getTime() - dateFrom.getTime() ) / millisecondsPerDay );
 
 //			console.log( 'RECALCULATE: timePeriod: ', timePeriod );
@@ -56,14 +57,14 @@ define( ["backbone"], function ( Backbone ) {
 			var dateToFormatted = dateTo.format( 'yyyy-mm-dd' );
 
 			this.set( { dateFrom: dateFrom, dateTo: dateTo, dateFromFormatted: dateFromFormatted, dateToFormatted: dateToFormatted }, { "silent": true } );
-		},
+		}/*,
 
 		save: function() {
 			var userId = this.get( 'userId' );
 			var ajaxService = this.get( 'ajaxService' );
 
 			ajaxService.lockUser( userId, new Date(), new Date() );
-		}
+		}*/
 
 	 } );
 
