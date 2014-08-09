@@ -1,6 +1,15 @@
 <%@ page import="ui.services.ajax.AjaxService" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
+<%@ page import="ui.translatable.GenericTranslatableList" %>
+<%@ page import="ui.context.EnvironmentContext" %>
+<%@ page import="ui.translatable.GenericTranslatableEntry" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.json.JSONArray" %>
+<%@ page import="org.json.JSONObject" %>
+<%@ page import="static com.google.common.collect.Lists.newArrayList" %>
+<%@ page import="core.enums.RestrictionType" %>
+<%@ page import="rest.admin.restriction.RestrictionTypeDTO" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -11,7 +20,16 @@
 
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
+	final List<GenericTranslatableEntry> restrictionTypes = GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), ApplicationContextHelper.getTranslatorService() ).getEntries();
+
+	final List<JSONObject> jsonObjects = newArrayList();
+	for ( final GenericTranslatableEntry restrictionType : restrictionTypes ) {
+		jsonObjects.add( new JSONObject( new RestrictionTypeDTO( restrictionType.getId(), restrictionType.getName() ) ) );
+	}
+
+	final JSONArray restrictionTypesJSON = new JSONArray( jsonObjects );
 %>
+<c:set var="restrictionTypesJSON" value="<%=restrictionTypesJSON%>" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -46,66 +64,63 @@
 
 <body>
 
-<div class="user-lock-area-header">
+	<div class="user-lock-area-header">
 
-	<div style="float: left; width: 300px; margin-right: 15px;">
-		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: Lock $1', userLockModel.userName)}</div>
+		<div style="float: left; width: 300px; margin-right: 15px;">
+			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: Lock $1', userLockModel.userName)}</div>
 
-		<div id="user-lock-form" >
-			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
+			<div id="user-lock-form" >
+				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
+			</div>
+
+		</div>
+
+		<div style="float: right; width: 400px;">
+			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate('User restriction: Restriction history title')}</div>
+			<div id="user-lock-history" >
+				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
+			</div>
+
 		</div>
 
 	</div>
 
-	<div style="float: right; width: 400px;">
-		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate('User restriction: Restriction history title')}</div>
-		<div id="user-lock-history" >
-			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
-		</div>
+	<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
 
-	</div>
+	<script type="text/javascript">
 
-</div>
+		var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
-<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
+		require( ['modules/admin/user/restriction/user-restriction'], function ( func ) {
+			var translations = {
+				timePeriod: "${eco:translate('Time period component: Time period')}"
+				, dateRange: "${eco:translate('Time period component: Date range')}"
+				, buttonTitle: "${eco:translate1('User restriction: Do restriction $1 button title', userLockModel.userName)}"
+				, hoursUnit: "${eco:translate('Time period component: hours')}"
+				, daysUnit: "${eco:translate('Time period component: days')}"
+				, daysMonth: "${eco:translate('Time period component: month')}"
+				, daysYear: "${eco:translate('Time period component: year')}"
+			};
 
-<script type="text/javascript">
+			var restrictionTypes = ${restrictionTypesJSON};
+			console.log( restrictionTypes );
 
-	var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
+			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ) );
+		} );
 
-	require( ["components/time-range/time-range-model"
-		 	, "components/time-range/time-range-view"
-			, "jquery"], function ( Model, View, $ ) {
+		require( ['modules/admin/user/restriction-history/user-lock-history'], function ( userLockHistory ) {
+			userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
+		} );
 
-		var translations = {
-			timePeriod: "${eco:translate('Time period component: Time period')}"
-			, dateRange: "${eco:translate('Time period component: Date range')}"
-			, buttonTitle: "${eco:translate1('User restriction: Do restriction $1 button title', userLockModel.userName)}"
-			, hoursUnit: "${eco:translate('Time period component: hours')}"
-			, daysUnit: "${eco:translate('Time period component: days')}"
-			, daysMonth: "${eco:translate('Time period component: month')}"
-			, daysYear: "${eco:translate('Time period component: year')}"
-		};
-
-		var rangeModel = new Model.RangeModel( { callback: saveUserRestriction, translations: translations } );
-
-		var rangeView = new View.RangeView( { model: rangeModel, el: $( '#user-lock-form' ) } );
-		rangeView.render();
-	} );
-
-	require( ['modules/admin/user/restriction-history/user-lock-history'], function ( userLockHistory ) {
-		userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
-	} );
-
-	function saveUserRestriction( model ) {
-		if ( model.rangeType == 1 ) {
-			jsonRPC.ajaxService.restrictUserPeriod( ${userId}, model.timePeriod, model.timeUnit, 1 );
-		} else {
-			jsonRPC.ajaxService.restrictUserRange( ${userId}, model.dateFrom, model.dateTo, 1 );
+		function saveUserRestriction( model ) {
+			if ( model.rangeType == 1 ) {
+				jsonRPC.ajaxService.restrictUserPeriod( ${userId}, model.timePeriod, model.timeUnit, 1 );
+			} else {
+				jsonRPC.ajaxService.restrictUserRange( ${userId}, model.dateFrom, model.dateTo, 1 );
+			}
 		}
-	}
 
-</script>
+	</script>
 
 </body>
 </html>

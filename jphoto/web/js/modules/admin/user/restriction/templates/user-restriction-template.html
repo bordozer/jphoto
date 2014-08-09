@@ -1,0 +1,9 @@
+
+<div style="float: left; padding-bottom: 10px; text-align: left;">
+	<% _.each( restrictionTypes, function( restrictionType ) { %>
+		<input type="radio" name="restrictionType" value="<%=restrictionType.id%>" <%=restrictionTypeId == restrictionType.id ? "checked='checked'": ""%> > <%=restrictionType.name%>
+		<br />
+	<% }) %>
+</div>
+<br />
+<input type="button" class="date-range-action-button" value="<%=translations.buttonTitle%>">

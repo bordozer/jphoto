@@ -8,11 +8,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.log.LogHelper;
 import core.services.system.Services;
-import core.services.translator.Language;
 import core.services.utils.RandomUtilsService;
-import rest.photo.upload.category.allowance.AbstractPhotoUploadAllowance;
-import rest.photo.upload.category.allowance.UploadDescriptionFactory;
-import ui.context.EnvironmentContext;
 
 import java.util.EnumSet;
 import java.util.List;

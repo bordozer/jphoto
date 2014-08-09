@@ -7,15 +7,13 @@
 </style>
 
 <div style="padding: 10px; text-align: left;">
-	<input type="radio" id="timePeriod" name="periodType" value="1" class="lock-period-type"> <label for="timePeriod"><%=translations.timePeriod%></label>
+	<input type="radio" id="timePeriod" name="periodType" value="1" class="lock-period-type" <%=rangeType == 1 ? "checked='checked'": ""%> > <label for="timePeriod"><%=translations.timePeriod%></label>
 	<br />
-	<input type="radio" id="dateRange" name="periodType" value="2" class="lock-period-type"> <label for="dateRange"><%=translations.dateRange%></label>
+	<input type="radio" id="dateRange" name="periodType" value="2" class="lock-period-type"  <%=rangeType == 2 ? "checked='checked'": ""%> > <label for="dateRange"><%=translations.dateRange%></label>
 </div>
 
-<div id="range-div">
+<div id="range-div" style="height: 90px;">
 
 </div>
-
-<input type="button" class="date-range-action-button" value="<%=translations.buttonTitle%>">
 
 

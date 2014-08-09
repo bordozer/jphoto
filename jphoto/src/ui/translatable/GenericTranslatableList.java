@@ -19,6 +19,7 @@ import ui.controllers.photos.list.PhotoFilterSortColumn;
 import ui.controllers.photos.list.PhotoFilterSortOrder;
 
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -49,6 +50,14 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 
 	public static GenericTranslatableList<YesNo> yesNoTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
+	}
+
+	public static GenericTranslatableList<RestrictionType> restrictionUserTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<RestrictionType>( RestrictionType.FOR_USERS, language, translatorService );
+	}
+
+	public static GenericTranslatableList<RestrictionType> restrictionPhotosTranslatableList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<RestrictionType>( RestrictionType.FOR_PHOTOS, language, translatorService );
 	}
 
 	public static GenericTranslatableList<UserTeamMemberType> userTeamMemberTypeList( final Language language, final TranslatorService translatorService ) {

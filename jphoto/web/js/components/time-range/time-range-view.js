@@ -12,7 +12,7 @@ define( ["backbone", "jquery", "underscore"
 
 		events: {
 			"change .lock-period-type" : "onTogglePeriodType"
-			, "click .date-range-action-button" : "onButtonClick"
+//			, "click .date-range-action-button" : "onButtonClick"
 		},
 
 		initialize: function() {
@@ -30,6 +30,8 @@ define( ["backbone", "jquery", "underscore"
 			$( "input[name='periodType'][value='" + this.model.get( 'rangeType' ) + "']" ).attr( "checked", true );
 
 			this.$el.append( this.getView().render() );
+
+			return this.$el;
 		},
 
 		getView: function() {
@@ -44,17 +46,6 @@ define( ["backbone", "jquery", "underscore"
 		onTogglePeriodType:function ( evt ) {
 			evt.preventDefault();
 			this.togglePeriodType( evt.target.value );
-		},
-
-		onButtonClick: function() {
-			var model = {
-				rangeType: this.model.get( 'rangeType' )
-				, timePeriod: this.model.get( 'timePeriod' )
-				, timeUnit: this.model.get( 'timeUnit' )
-				, dateFrom: this.model.get( 'dateFrom' )
-				, dateTo: this.model.get( 'dateTo' )
-			};
-			eval ( this.model.get( 'callback' )( model ) );
 		}
 	} );
 

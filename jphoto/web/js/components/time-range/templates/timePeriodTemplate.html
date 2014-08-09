@@ -6,13 +6,13 @@
 		</td>
 
 		<td align="left">
-			<input type="radio" id="time-period-unit-hours" name="time-period-unit-radio" value="1" class="time-period-unit"> <label for="time-period-unit-hours"><%=translations.hoursUnit%></label>
+			<input type="radio" id="time-period-unit-hours" name="time-period-unit-radio" value="1" class="time-period-unit" <%=timeUnit == 1 ? "checked='checked'": ""%> > <label for="time-period-unit-hours"><%=translations.hoursUnit%></label>
 			<br />
-			<input type="radio" id="time-period-unit-days" name="time-period-unit-radio" value="2" class="time-period-unit"> <label for="time-period-unit-days"><%=translations.daysUnit%></label>
+			<input type="radio" id="time-period-unit-days" name="time-period-unit-radio" value="2" class="time-period-unit" <%=timeUnit == 2 ? "checked='checked'": ""%> > <label for="time-period-unit-days"><%=translations.daysUnit%></label>
 			<br />
-			<input type="radio" id="time-period-unit-month" name="time-period-unit-radio" value="3" class="time-period-unit"> <label for="time-period-unit-month"><%=translations.daysMonth%></label>
+			<input type="radio" id="time-period-unit-month" name="time-period-unit-radio" value="3" class="time-period-unit" <%=timeUnit == 3 ? "checked='checked'": ""%> > <label for="time-period-unit-month"><%=translations.daysMonth%></label>
 			<br />
-			<input type="radio" id="time-period-unit-year" name="time-period-unit-radio" value="4" class="time-period-unit"> <label for="time-period-unit-year"><%=translations.daysYear%></label>
+			<input type="radio" id="time-period-unit-year" name="time-period-unit-radio" value="4" class="time-period-unit" <%=timeUnit == 4 ? "checked='checked'": ""%> > <label for="time-period-unit-year"><%=translations.daysYear%></label>
 		</td>
 
 	</tr>
