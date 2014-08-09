@@ -77,7 +77,9 @@
 	var userName = "${userLockModel.userName}";
 	var ajaxService = jsonRPC.ajaxService;
 
-	require( ['components/time-range/time-range'], function ( timeRange ) {
+	require( ["components/time-range/time-range-model"
+		 	, "components/time-range/time-range-view"
+			, "jquery"], function ( Model, View, $ ) {
 
 		var translations = {
 			timePeriod: "${eco:translate('Time period component: Time period')}"
@@ -89,7 +91,10 @@
 			, daysYear: "${eco:translate('Time period component: year')}"
 		};
 
-		timeRange( translations, restrictUser, $( '#user-lock-form' ) );
+		var rangeModel = new Model.RangeModel( { callback: restrictUser, translations: translations } );
+
+		var rangeView = new View.RangeView( { model: rangeModel, el: $( '#user-lock-form' ) } );
+		rangeView.render();
 	} );
 
 	require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
