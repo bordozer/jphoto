@@ -11,21 +11,44 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( template ),
 
+		events: {
+			"click .user-restrict-button" : "restrictUserButtonClick"
+		},
+
 		initialize: function() {
+			this.timeBoxModel = new TimeBoxModel.RangeModel( { translations: this.model.get( 'translations' ) } );
+
 			this.render();
 		},
 
 		render: function() {
 
 			var timeBox = $( "<div></div>" );
-
-			var timeBoxModel = new TimeBoxModel.RangeModel( { translations: this.model.get( 'translations' ) } );
-
-			var timeBoxView = new TimeBoxView.RangeView( { model: timeBoxModel, el: timeBox } );
+			var timeBoxView = new TimeBoxView.RangeView( { model: this.timeBoxModel, el: timeBox } );
 			this.$el.html( timeBoxView.render() );
 
 			var modelJSON = this.model.toJSON();
 			this.$el.append( this.template( modelJSON ) );
+		},
+
+		restrictUserButtonClick: function ( evt ) {
+			evt.preventDefault();
+
+			var matches = [];
+			$( ".restriction-type:checked" ).each( function () {
+				matches.push( this.value );
+			} );
+
+			var data = {
+				rangeType: this.timeBoxModel.get( 'rangeType' )
+				, timePeriod: this.timeBoxModel.get( 'timePeriod' )
+				, timeUnit: this.timeBoxModel.get( 'timeUnit' )
+				, dateFrom: this.timeBoxModel.get( 'dateFrom' )
+				, dateTo: this.timeBoxModel.get( 'dateTo' )
+				, restrictionTypeIds: matches
+			};
+
+			this.model.saveUserRestriction( data );
 		}
 	});
 

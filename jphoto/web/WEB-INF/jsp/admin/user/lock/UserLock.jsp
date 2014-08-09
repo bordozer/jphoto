@@ -103,22 +103,13 @@
 			};
 
 			var restrictionTypes = ${restrictionTypesJSON};
-			console.log( restrictionTypes );
 
-			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ) );
+			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ), jsonRPC.ajaxService );
 		} );
 
 		require( ['modules/admin/user/restriction-history/user-lock-history'], function ( userLockHistory ) {
 			userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
 		} );
-
-		function saveUserRestriction( model ) {
-			if ( model.rangeType == 1 ) {
-				jsonRPC.ajaxService.restrictUserPeriod( ${userId}, model.timePeriod, model.timeUnit, 1 );
-			} else {
-				jsonRPC.ajaxService.restrictUserRange( ${userId}, model.dateFrom, model.dateTo, 1 );
-			}
-		}
 
 	</script>
 

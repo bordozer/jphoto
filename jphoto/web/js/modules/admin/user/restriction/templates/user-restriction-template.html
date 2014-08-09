@@ -1,9 +1,10 @@
 
 <div style="float: left; padding-bottom: 10px; text-align: left;">
 	<% _.each( restrictionTypes, function( restrictionType ) { %>
-		<input type="radio" name="restrictionType" value="<%=restrictionType.id%>" <%=restrictionTypeId == restrictionType.id ? "checked='checked'": ""%> > <%=restrictionType.name%>
+		<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type">
+		<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
 		<br />
 	<% }) %>
 </div>
 <br />
-<input type="button" class="date-range-action-button" value="<%=translations.buttonTitle%>">
+<input type="button" class="user-restrict-button" value="<%=translations.buttonTitle%>">
