@@ -8,21 +8,23 @@ import java.util.Date;
 
 public interface RestrictionService {
 
-	void lockUser( final User user, final Date timeFrom, final Date timeTo );
+	void restrictUser( final User user, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo );
 
-	void lockUserPhotoUploading( final User user, final Date timeFrom, final Date timeTo );
+	void restrictUser( final User user, final Date timeFrom, final Date timeTo );
 
-	void lockUserCommenting( final User user, final Date timeFrom, final Date timeTo );
+	void restrictUserPhotoUploading( final User user, final Date timeFrom, final Date timeTo );
 
-	void lockUserPhotoAppraisal( final User user, final Date timeFrom, final Date timeTo );
+	void restrictUserCommenting( final User user, final Date timeFrom, final Date timeTo );
 
-	void lockUserVotingForRanksInGenres( final User user, final Date timeFrom, final Date timeTo );
+	void restrictUserPhotoAppraisal( final User user, final Date timeFrom, final Date timeTo );
 
-	void lockPhotoToBePhotoOfTheDay( final Photo photo, final Date timeFrom, final Date timeTo );
+	void restrictUserVotingForRanksInGenres( final User user, final Date timeFrom, final Date timeTo );
 
-	void lockPhotoToBeInTheBestPhotosOfGenre( final Photo photo, final Date timeFrom, final Date timeTo );
+	void restrictPhotoToBePhotoOfTheDay( final Photo photo, final Date timeFrom, final Date timeTo );
 
-	void lockPhotoCommenting( final Photo photo, final Date timeFrom, final Date timeTo );
+	void restrictPhotoToBeInTheBestPhotosOfGenre( final Photo photo, final Date timeFrom, final Date timeTo );
 
-	boolean isRestrictedNow( final int entryId, final RestrictionType restrictionType, final Date time );
+	void restrictPhotoCommenting( final Photo photo, final Date timeFrom, final Date timeTo );
+
+	boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time );
 }

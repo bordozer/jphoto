@@ -33,11 +33,11 @@ public interface AjaxService {
 
 	boolean isEntryInFavoritesAjax( final int userWhoIsAddingToFavorites, final int beingAddedEntryId, final int entryTypeId );
 
-	void restrictUserPeriod( final int userId, final int period, final int unitId );
-
-	void restrictUserRange( final int userId, final String timeFrom, final String timeTo );
-
-	void lockPhoto( final int photoId, final String timeFrom, final String timeTo );
-
 	void setPhotoNudeContent( final int photoId, final boolean isNudeContent );
+
+	void restrictUserPeriod( final int userId, final int period, final int unitId, final int restrictionTypeId );
+
+	void restrictUserRange( final int userId, final String timeFrom, final String timeTo, final int restrictionTypeId );
+
+	void lockPhoto( final int photoId, final String timeFrom, final String timeTo, final int restrictionTypeId );
 }

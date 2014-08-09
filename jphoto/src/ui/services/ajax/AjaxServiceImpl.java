@@ -7,11 +7,12 @@ import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteIm
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
+import core.enums.RestrictionType;
 import core.general.configuration.ConfigurationKey;
-import core.general.executiontasks.PeriodUnit;
 import core.general.message.PrivateMessage;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
+import core.general.restriction.RestrictionTimeUnit;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.entry.ActivityStreamService;
@@ -404,31 +405,56 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public void restrictUserPeriod( final int userId, final int period, final int unitId ) {
-		final PeriodUnit periodUnit = PeriodUnit.getById( unitId );
-		log.debug( String.format( "userId: %d, period: '%s', uit: '%s'", userId, period, periodUnit ) );
-	}
-
-	@Override
-	public void restrictUserRange( final int userId, final String timeFrom, final String timeTo ) {
-		//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
-		//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
-
-		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
-	}
-
-	@Override
-	public void lockPhoto( final int photoId, final String timeFrom, final String timeTo ) {
-//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
-//		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
-		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, timeFrom, timeTo ) );
-	}
-
-	@Override
 	public void setPhotoNudeContent( final int photoId, final boolean isNudeContent ) {
 		final Photo photo = photoService.load( photoId );
 		photo.setContainsNudeContent( isNudeContent );
 
 		photoService.save( photo );
+	}
+
+	@Override
+	public void restrictUserPeriod( final int userId, final int period, final int unitId, final int restrictionTypeId ) {
+
+		final RestrictionTimeUnit periodUnit = RestrictionTimeUnit.getById( unitId );
+
+		final Date timeFrom = dateUtilsService.getCurrentTime();
+		final Date timeTo;
+
+		switch ( periodUnit ) {
+			case HOUR:
+				timeTo = dateUtilsService.getTimeOffsetInHours( timeFrom, unitId );
+				break;
+			case DAY:
+				timeTo = dateUtilsService.getDatesOffset( timeFrom, unitId );
+				break;
+			case MONTH:
+				timeTo = dateUtilsService.getTimeOffsetInMonth( timeFrom, unitId );
+				break;
+			case YEAR:
+				timeTo = dateUtilsService.getTimeOffsetInYear( timeFrom, unitId );
+				break;
+			default:
+				throw new IllegalArgumentException( String.format( "Illegal RestrictionTimeUnit id: %d", unitId ) );
+		}
+
+		final RestrictionType restrictionType = RestrictionType.getById( restrictionTypeId );
+		restrictionService.restrictUser( userService.load( userId ), restrictionType, timeFrom, timeTo );
+
+		log.debug( String.format( "userId: %d, period: '%s', uit: '%s', type of restriction: '%s'", userId, period, periodUnit, restrictionType ) );
+	}
+
+	@Override
+	public void restrictUserRange( final int userId, final String timeFrom, final String timeTo, final int restrictionTypeId ) {
+//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+
+		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
+	}
+
+	@Override
+	public void lockPhoto( final int photoId, final String timeFrom, final String timeTo, final int restrictionTypeId ) {
+//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
+//		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
+		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, timeFrom, timeTo ) );
 	}
 }

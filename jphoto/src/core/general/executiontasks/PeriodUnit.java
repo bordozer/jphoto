@@ -7,7 +7,7 @@ public enum PeriodUnit implements IdentifiableNameable {
 	SECOND( 1, "PeriodUnit: second" )
 	, MINUTE( 2, "PeriodUnit: minute" )
 	, HOUR( 3, "PeriodUnit: hour" )
-	, DAY( 4, "PeriodUnit: day" )
+//	, DAY( 4, "PeriodUnit: day" )
 	;
 
 	private final int id;

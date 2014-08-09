@@ -22,11 +22,17 @@ public interface DateUtilsService {
 
 	Date extractDate( final Date time );
 
-	Date getDatesOffset( final Date date, final int offsetInDays );
-
 	Date getTimeOffsetInSeconds( final Date date, final int offsetInSeconds );
 
+	Date getDatesOffset( final Date date, final int offsetInDays );
+
 	Date getTimeOffsetInMinutes( final Date date, final int offsetInMinutes );
+
+	Date getTimeOffsetInHours( final Date date, final int offsetInHours );
+
+	Date getTimeOffsetInMonth( final Date date, final int offsetInMonth );
+
+	Date getTimeOffsetInYear( final Date date, final int offsetInYear );
 
 	Date getDatesOffsetFromCurrentDate( final int offsetInDays );
 
