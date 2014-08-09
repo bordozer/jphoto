@@ -17,6 +17,8 @@
 
 <tags:page pageModel="${userPhotoAlbumPhotosModel.pageModel}">
 
+	<tags:contextMenuJs />
+
 	<photo:photoListsRender photoLists="${photoLists}" />
 
 </tags:page>

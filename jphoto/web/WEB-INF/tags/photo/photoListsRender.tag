@@ -10,8 +10,6 @@
 
 <link rel="stylesheet" href="${baseUrl}/css/photo-list.css" type="text/css"/>
 
-<tags:contextMenuJs />
-
 <c:forEach var="photoList" items="${photoLists}">
 
 	<photo:photoListLazyLoading photoList="${photoList}" />

@@ -146,25 +146,3 @@
 		}
 	}
 </script>
-
-<style type="text/css">
-
-	.entry-popup-menu {
-		position: absolute;
-		top: 0;
-		left: -9999px;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		padding-bottom: 20px;
-		margin-bottom: 30px;
-	}
-
-	.entry-popup-menu-header {
-		text-align: center;
-		font-size: 10px;
-		padding-top: 3px;
-		padding-bottom: 3px;
-		margin-bottom: 5px;
-	}
-</style>

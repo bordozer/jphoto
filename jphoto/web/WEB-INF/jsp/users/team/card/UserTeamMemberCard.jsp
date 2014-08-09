@@ -8,6 +8,8 @@
 
 <tags:page pageModel="${userTeamMemberCardModel.pageModel}">
 
+	<tags:contextMenuJs />
+
 	<photo:photoListsRender photoLists="${userTeamMemberCardModel.photoLists}" />
 
 </tags:page>

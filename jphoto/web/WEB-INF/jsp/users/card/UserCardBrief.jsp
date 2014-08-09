@@ -16,6 +16,8 @@
 
 <tags:page pageModel="${userCardModel.pageModel}">
 
+	<tags:contextMenuJs />
+
 	<user:userCardTab user="${user}" selectedTab="${userCardModel.selectedUserCardTab}" />
 
 	<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />

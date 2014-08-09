@@ -98,6 +98,6 @@
 		#parse( "genrelist.vm" )
 	#end
 
-	<div class="floatleft">
+	<div class="floatleft" style="margin-top: 20px;">
 		<div style="margin-bottom: 20px; padding-bottom: 20px;padding-left: 20px;">
 

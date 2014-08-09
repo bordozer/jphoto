@@ -17,6 +17,8 @@
 
 <tags:page pageModel="${userCardModel.pageModel}">
 
+	<tags:contextMenuJs />
+
 	<userCard:userCardTab user="${user}" selectedTab="${userCardModel.selectedUserCardTab}" />
 
 	<div class="floatleft" style="margin: 0 auto; margin-top: 30px;">
