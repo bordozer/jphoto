@@ -49,7 +49,7 @@
 <div class="user-lock-area-header">
 
 	<div style="float: left; width: 300px; margin-right: 15px;">
-		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Lock $1', userLockModel.userName)}</div>
+		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: Lock $1', userLockModel.userName)}</div>
 
 		<div id="user-lock-form" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
@@ -58,7 +58,7 @@
 	</div>
 
 	<div style="float: right; width: 400px;">
-		<div class="user-lock-area-header block-background user-lock-area-tab">Locking history</div>
+		<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate('User restriction: Restriction history title')}</div>
 		<div id="user-lock-history" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
@@ -78,7 +78,18 @@
 	var ajaxService = jsonRPC.ajaxService;
 
 	require( ['components/time-range/time-range'], function ( timeRange ) {
-		timeRange( "${eco:translate1('User restriction: Lock $1', userLockModel.userName)}", restrictUser, $( '#user-lock-form' ) );
+
+		var translations = {
+			timePeriod: "${eco:translate('Time period component: Time period')}"
+			, dateRange: "${eco:translate('Time period component: Date range')}"
+			, buttonTitle: "${eco:translate1('User restriction: Do restriction $1 button title', userLockModel.userName)}"
+			, hoursUnit: "${eco:translate('Time period component: hours')}"
+			, daysUnit: "${eco:translate('Time period component: days')}"
+			, daysMonth: "${eco:translate('Time period component: month')}"
+			, daysYear: "${eco:translate('Time period component: year')}"
+		};
+
+		timeRange( translations, restrictUser, $( '#user-lock-form' ) );
 	} );
 
 	require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {

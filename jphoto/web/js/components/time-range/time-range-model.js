@@ -17,7 +17,7 @@ define( ["backbone"], function ( Backbone ) {
 				rangeType: 1
 
 				, timePeriod: this.defaultOffset()
-				, timeUnit: 2 /* 1 is HOURS, 2 is DAYS */
+				, timeUnit: 2 /* 1 is HOURS, 2 is DAYS, 3 is MONTH, 4 is YEAR */
 
 				, dateFrom: new Date()
 				, dateTo: new Date( new Date().getTime() + this.defaultOffset() * 1000 * 60 * 60 * 24 )

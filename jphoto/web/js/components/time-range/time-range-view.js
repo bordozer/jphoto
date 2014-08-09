@@ -16,6 +16,9 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function() {
+			this.timePeriodView = new TimePeriodView( { model: this.model, el: this.$el } );
+			this.dateRangeView = new DateRangeView( { model: this.model, el: this.$el } );
+
 			this.listenTo( this.model, "change", this.render );
 		},
 
@@ -29,7 +32,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		getView: function() {
-			return this.model.get( 'rangeType' ) == 1 ? this.model.get( "timePeriodView" ) : this.model.get( "dateRangeView" );
+			return this.model.get( 'rangeType' ) == 1 ? this.timePeriodView : this.dateRangeView;
 		},
 
 		togglePeriodType:function( value ) {

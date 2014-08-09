@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>User restriction: Range form title: Lock $1</nerd>
+		<ru><![CDATA[Ограничение возможностей пользователя $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User restriction: Restriction history title</nerd>
+		<ru><![CDATA[История ограничения возможностей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>User restriction: Do restriction $1 button title</nerd>
+		<ru><![CDATA[Создать ограничение для $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: Time period</nerd>
+		<ru><![CDATA[На период времени]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: Date range</nerd>
+		<ru><![CDATA[Диапазон дат]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: hours</nerd>
+		<ru><![CDATA[час]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: days</nerd>
+		<ru><![CDATA[день]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: month</nerd>
+		<ru><![CDATA[месяц]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Time period component: year</nerd>
+		<ru><![CDATA[год]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
