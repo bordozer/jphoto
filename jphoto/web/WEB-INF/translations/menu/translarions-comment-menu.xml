@@ -48,6 +48,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Lock comment author: $1</nerd>
+		<ru><![CDATA[Заблокировать автора комментария: $1]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
