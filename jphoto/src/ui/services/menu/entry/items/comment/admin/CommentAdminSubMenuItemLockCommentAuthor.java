@@ -26,7 +26,7 @@ public class CommentAdminSubMenuItemLockCommentAuthor extends AbstractCommentMen
 		return new AbstractEntryMenuItemCommand<PhotoComment>( menuEntry, accessor, services ) {
 			@Override
 			public String getMenuText() {
-				return getTranslatorService().translate( "Lock comment author: $1", getLanguage(), commentAuthor.getNameEscaped() );
+				return getTranslatorService().translate( "Restrict comment author: $1", getLanguage(), commentAuthor.getNameEscaped() );
 			}
 
 			@Override

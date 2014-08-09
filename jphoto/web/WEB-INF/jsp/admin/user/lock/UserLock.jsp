@@ -67,7 +67,7 @@
 	<div class="user-lock-area-header">
 
 		<div style="float: left; width: 300px; margin-right: 15px;">
-			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: Lock $1', userLockModel.userName)}</div>
+			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: New restriction of $1', userLockModel.userName)}</div>
 
 			<div id="user-lock-form" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">

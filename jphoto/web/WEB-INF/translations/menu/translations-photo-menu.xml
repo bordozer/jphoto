@@ -8,8 +8,8 @@
 	</translation>
 
 	<translation>
-		<nerd>PhotoMenuItem: Lock photo author: $1</nerd>
-		<ru><![CDATA[Забанить автора работы: $1]]></ru>
+		<nerd>PhotoMenuItem: Restrict photo author: $1</nerd>
+		<ru><![CDATA[$1: Ограничение возможнойтей автора работы]]></ru>
 	</translation>
 
 	<translation>

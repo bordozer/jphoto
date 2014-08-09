@@ -3,8 +3,8 @@
 <translations>
 
 	<translation>
-		<nerd>Lock member: $1</nerd>
-		<ru><![CDATA[Забанить $1]]></ru>
+		<nerd>Restrict user: $1</nerd>
+		<ru><![CDATA[ $1: Ограничение возможностей пользователя]]></ru>
 	</translation>
 
 	<translation>

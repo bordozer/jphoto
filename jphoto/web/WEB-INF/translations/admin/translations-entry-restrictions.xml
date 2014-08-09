@@ -3,8 +3,8 @@
 <translations>
 
 	<translation>
-		<nerd>User restriction: Range form title: Lock $1</nerd>
-		<ru><![CDATA[Ограничение возможностей пользователя $1]]></ru>
+		<nerd>User restriction: Range form title: New restriction of $1</nerd>
+		<ru><![CDATA[Добавить ограничение возможностей пользователя $1]]></ru>
 	</translation>
 
 	<translation>

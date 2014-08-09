@@ -222,8 +222,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Admin Lock User: Lock user</nerd>
-		<ru><![CDATA[Забанить пользователя]]></ru>
+		<nerd>Admin User Restriction: Restrict user</nerd>
+		<ru><![CDATA[Ограничение возможностей пользователя]]></ru>
 	</translation>
 
 	<translation>
