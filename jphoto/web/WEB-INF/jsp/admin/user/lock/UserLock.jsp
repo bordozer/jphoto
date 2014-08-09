@@ -93,7 +93,7 @@
 		rangeView.render();
 	} );
 
-	require( ['modules/admin/user/lock/user-lock-history'], function ( userLockHistory ) {
+	require( ['modules/admin/user/restriction-history/user-lock-history'], function ( userLockHistory ) {
 		userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
 	} );
 
