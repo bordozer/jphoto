@@ -2,7 +2,6 @@ package admin.controllers.user.restriction;
 
 import core.general.user.User;
 import core.services.user.UserService;
-import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping( "members/{userId}/lock" )
 @Controller
 public class UserRestrictionController {
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Autowired
 	private UserService userService;

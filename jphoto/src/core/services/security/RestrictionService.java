@@ -2,9 +2,11 @@ package core.services.security;
 
 import core.enums.RestrictionType;
 import core.general.photo.Photo;
+import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 
 import java.util.Date;
+import java.util.List;
 
 public interface RestrictionService {
 
@@ -27,4 +29,8 @@ public interface RestrictionService {
 	void restrictPhotoCommenting( final Photo photo, final Date timeFrom, final Date timeTo );
 
 	boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time );
+
+	List<EntryRestriction> loadUserRestrictions( final int userId );
+
+	List<EntryRestriction> loadPhotoRestrictions( final int userId );
 }

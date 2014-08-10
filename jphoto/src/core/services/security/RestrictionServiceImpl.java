@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
+
 public class RestrictionServiceImpl implements RestrictionService {
 
 	@Autowired
@@ -69,6 +71,26 @@ public class RestrictionServiceImpl implements RestrictionService {
 		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
 
 		return restrictions != null && restrictions.get( restrictions.size() - 1 ).getRestrictionTimeTo().getTime() >= time.getTime();
+	}
+
+	@Override
+	public List<EntryRestriction> loadUserRestrictions( final int userId ) {
+		return loadRestrictions( userId, RestrictionType.FOR_USERS );
+	}
+
+	@Override
+	public List<EntryRestriction> loadPhotoRestrictions( final int userId ) {
+		return loadRestrictions( userId, RestrictionType.FOR_PHOTOS );
+	}
+
+	private List<EntryRestriction> loadRestrictions( final int userId, final List<RestrictionType> restrictionTypes ) {
+		final List<EntryRestriction> result = newArrayList();
+
+		for ( final RestrictionType restrictionType : restrictionTypes ) {
+			result.addAll( restrictionDao.loadRestrictions( userId, restrictionType ) );
+		}
+
+		return result;
 	}
 
 	private void savePhotoRestriction( final Photo photo, final Date timeFrom, final Date timeTo, final RestrictionType photoToBePhotoOfTheDay ) {

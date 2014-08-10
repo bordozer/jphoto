@@ -61,4 +61,9 @@ public class EntryRestriction<T extends Restrictable> extends AbstractBaseEntity
 	public void setRestrictionRestrictionComment( final String restrictionRestrictionComment ) {
 		this.restrictionRestrictionComment = restrictionRestrictionComment;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "%s: %s from %s to %s", entry, restrictionType, restrictionTimeFrom, restrictionTimeTo );
+	}
 }

@@ -82,6 +82,17 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 		return paramSource;
 	}
 
+	/*@Override
+	public List<EntryRestriction> loadRestrictions( final int entryId ) {
+		final String sql = String.format( "SELECT * FROM %s WHERE %s=:entryId ORDER BY %s;"
+			, TABLE_RESTRICTION, TABLE_RESTRICTION_COLUMN_ENTRY_ID, TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "entryId", entryId );
+
+		return jdbcTemplate.query( sql, paramSource, getRowMapper() );
+	}
+*/
 	@Override
 	protected String getTableName() {
 		return TABLE_RESTRICTION;
@@ -118,8 +129,12 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 				case USER_PHOTO_UPLOADING:
 				case USER_COMMENTING:
 				case USER_MESSAGING:
+				case USER_PHOTO_APPRAISAL:
+				case USER_VOTING_FOR_RANK_IN_GENRE:
 					return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
 				case PHOTO_TO_BE_PHOTO_OF_THE_DAY:
+				case PHOTO_TO_BE_BEST_IN_GENRE:
+				case PHOTO_COMMENTING:
 					return new EntryRestriction<>( photoDao.load( entryId ), restrictionType );
 			}
 
