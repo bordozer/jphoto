@@ -69,6 +69,8 @@ public class UserLockHistoryController {
 			dto.setCreationDate( dateUtilsService.formatDate( userRestriction.getCreatingTime() ) );
 			dto.setCreationTime( dateUtilsService.formatTimeShort( userRestriction.getCreatingTime() ) );
 
+			dto.setCssClass( dateUtilsService.getCurrentTime().getTime() < userRestriction.getRestrictionTimeTo().getTime() ? "block-background" : "" );
+
 			if ( userRestriction.getCanceller() != null ) {
 				dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCanceller(), getLanguage() ) );
 				dto.setCancellingTime( dateUtilsService.formatDateTime( userRestriction.getCancellingTime() ) );

@@ -25,6 +25,8 @@ public class UserRestrictionHistoryEntryDTO {
 	private String cancellerLink;
 	private String cancellingTime;
 
+	private String cssClass;
+
 	public int getId() {
 		return id;
 	}
@@ -143,6 +145,14 @@ public class UserRestrictionHistoryEntryDTO {
 
 	public void setCancellingTime( final String cancellingTime ) {
 		this.cancellingTime = cancellingTime;
+	}
+
+	public String getCssClass() {
+		return cssClass;
+	}
+
+	public void setCssClass( final String cssClass ) {
+		this.cssClass = cssClass;
 	}
 
 	@Override
