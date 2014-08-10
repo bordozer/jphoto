@@ -17,7 +17,6 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.listenTo( this.model, "request", this.renderHistory );
 			this.listenTo( this.model, "add", this.renderHistoryEntry );
-			this.listenTo( this.model, "delete", this.renderHistoryEntry );
 
 			this.model.fetch( {cache: false} );
 
@@ -33,18 +32,26 @@ define( ["backbone", "jquery", "underscore"
 			modelJSON.translations = this.translations;
 
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
+
+//			this.model.on( "deactivate_entry", this.deleteRestrictionHistoryEntry, historyEntry );
+//			this.listenTo( this.model, "deactivate_entry", this.deleteRestrictionHistoryEntry, historyEntry );
+//			this.on( "deactivate_entry", this.deleteRestrictionHistoryEntry, historyEntry )
 		},
 
-		deleteRestrictionHistoryEntry: function( entryId ) {
-			this.model.remove( entryId );
+		deleteRestrictionHistoryEntry: function( historyEntry ) {
+//			console.log( historyEntry );
+//			console.log( this.model );
+//			this.model.remove( historyEntry );
 		},
 
 		onDeleteClick: function( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			var entryId = $( evt.target ).attr( 'id' );
-			this.deleteRestrictionHistoryEntry( entryId );
+			this.trigger( 'deactivate_entry' );
+
+//			var entryId = $( evt.target ).attr( 'id' );
+//			this.deleteRestrictionHistoryEntry( entryId );
 		}
 	} );
 
