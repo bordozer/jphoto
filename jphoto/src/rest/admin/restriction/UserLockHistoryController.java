@@ -17,7 +17,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RequestMapping( "admin/members/{userId}/restriction-history/history" )
+@RequestMapping( "admin/members/{userId}/restriction/history" )
 @Controller
 public class UserLockHistoryController {
 

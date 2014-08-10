@@ -1,7 +1,5 @@
 package rest.admin.restriction;
 
-import core.enums.RestrictionType;
-
 public class UserRestrictionHistoryEntryDTO {
 
 	private int id;
@@ -45,6 +43,6 @@ public class UserRestrictionHistoryEntryDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "%s: from %s to %s", restrictionName, timeFrom, timeTo );
+		return String.format( "#%d %s: from %s to %s", id, restrictionName, timeFrom, timeTo );
 	}
 }

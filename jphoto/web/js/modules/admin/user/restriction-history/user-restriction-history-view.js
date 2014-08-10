@@ -18,12 +18,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		renderHistory:function () {
-			var modelJSON = this.model.toJSON();
-			this.$el.html( this.historyTemplate( modelJSON ) );
+			/*var modelJSON = this.model.toJSON();
+			this.$el.html( this.historyTemplate( modelJSON ) );*/
+			this.$el.html( "" );
 		},
 
 		renderHistoryEntry:function ( historyEntry ) {
 			var modelJSON = historyEntry.toJSON();
+			console.log( modelJSON );
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
 		}
 	} );

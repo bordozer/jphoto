@@ -112,6 +112,7 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 			final RestrictionType restrictionType = RestrictionType.getById( rs.getInt( TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID ) );
 
 			final EntryRestriction<Restrictable> result = getRestrictionEntry( entryId, restrictionType );
+			result.setId( rs.getInt( ENTITY_ID ) );
 
 			result.setRestrictionTimeFrom( rs.getTimestamp( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM ) );
 			result.setRestrictionTimeTo( rs.getTimestamp( TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_TO ) );
