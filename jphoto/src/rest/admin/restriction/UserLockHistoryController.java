@@ -64,34 +64,43 @@ public class UserLockHistoryController {
 		return getUserRestrictionHistoryEntryDTO( restrictionService.load( restrictionDTO.getId() ) );
 	}
 
-	private UserRestrictionHistoryEntryDTO getUserRestrictionHistoryEntryDTO( final EntryRestriction userRestriction ) {
+	private UserRestrictionHistoryEntryDTO getUserRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final UserRestrictionHistoryEntryDTO dto = new UserRestrictionHistoryEntryDTO();
 
-		dto.setId( userRestriction.getId() );
-		dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), getLanguage() ) );
-		dto.setRestrictionIcon( String.format( "%s/%s", urlUtilsService.getSiteImagesPath(), userRestriction.getRestrictionType().getIcon() ) );
+		dto.setId( restriction.getId() );
+		dto.setRestrictionName( translatorService.translate( restriction.getRestrictionType().getName(), getLanguage() ) );
+		dto.setRestrictionIcon( String.format( "%s/%s", urlUtilsService.getSiteImagesPath(), restriction.getRestrictionType().getIcon() ) );
 
-		dto.setDateFrom( dateUtilsService.formatDate( userRestriction.getRestrictionTimeFrom() ) );
-		dto.setTimeFrom( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeFrom() ) );
-		dto.setDateTo( dateUtilsService.formatDate( userRestriction.getRestrictionTimeTo() ) );
-		dto.setTimeTo( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeTo() ) );
+		dto.setDateFrom( dateUtilsService.formatDate( restriction.getRestrictionTimeFrom() ) );
+		dto.setTimeFrom( dateUtilsService.formatTimeShort( restriction.getRestrictionTimeFrom() ) );
+		dto.setDateTo( dateUtilsService.formatDate( restriction.getRestrictionTimeTo() ) );
+		dto.setTimeTo( dateUtilsService.formatTimeShort( restriction.getRestrictionTimeTo() ) );
 
-		dto.setRestrictionDuration( getFormattedTimeDifference( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() ) );
-		dto.setExpiresAfter( getFormattedTimeDifference( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() ) );
+		dto.setRestrictionDuration( getFormattedTimeDifference( restriction.getRestrictionTimeFrom(), restriction.getRestrictionTimeTo() ) );
+		dto.setExpiresAfter( getFormattedTimeDifference( dateUtilsService.getCurrentTime(), restriction.getRestrictionTimeTo() ) );
 
-		dto.setActive( userRestriction.isActive() );
-		dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCreator(), getLanguage() ) );
-		dto.setCreationDate( dateUtilsService.formatDate( userRestriction.getCreatingTime() ) );
-		dto.setCreationTime( dateUtilsService.formatTimeShort( userRestriction.getCreatingTime() ) );
+		dto.setActive( restriction.isActive() );
+		dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( restriction.getCreator(), getLanguage() ) );
+		dto.setCreationDate( dateUtilsService.formatDate( restriction.getCreatingTime() ) );
+		dto.setCreationTime( dateUtilsService.formatTimeShort( restriction.getCreatingTime() ) );
 
-		dto.setCssClass( getCssClass( userRestriction ) );
+		dto.setCssClass( getCssClass( restriction ) );
 
-		dto.setActive( userRestriction.isActive() );
-		if ( ! userRestriction.isActive() ) {
+		dto.setActive( restriction.isActive() );
+		dto.setFinished( isFinished( restriction ) );
+
+		if ( ! dto.isActive() ) {
 			dto.setActive( false );
-			dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCanceller(), getLanguage() ) );
-			dto.setCancellingTime( dateUtilsService.formatDateTime( userRestriction.getCancellingTime() ) );
+			dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( restriction.getCanceller(), getLanguage() ) );
+			dto.setCancellingTime( dateUtilsService.formatDateTime( restriction.getCancellingTime() ) );
+
+			dto.setExpiresAfter( "" );
 		}
+
+		if ( dto.isFinished() ) {
+			dto.setExpiresAfter( "" );
+		}
+
 		return dto;
 	}
 
@@ -152,11 +161,15 @@ public class UserLockHistoryController {
 			return "block-background-inactive-restriction";
 		}
 
-		if ( dateUtilsService.getCurrentTime().getTime() < userRestriction.getRestrictionTimeTo().getTime() ) {
+		if ( ! isFinished( userRestriction ) ) {
 			return "block-background";
 		}
 
 		return "";
+	}
+
+	private boolean isFinished( final EntryRestriction userRestriction ) {
+		return dateUtilsService.getCurrentTime().getTime() > userRestriction.getRestrictionTimeTo().getTime();
 	}
 
 	private Language getLanguage() {

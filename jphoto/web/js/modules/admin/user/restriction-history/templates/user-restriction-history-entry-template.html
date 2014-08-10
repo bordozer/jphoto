@@ -14,6 +14,8 @@
 		<%=translations.expiresAfter%>: <b><%=expiresAfter%></b>
 		<br />
 		<span style="font-size: 10px;"><%=translations.createdBy%>: <%=creatorLink%>, <%=translations.restrictedAtTime%> <%=creationDate%> <sup style="font-size: 9px;"><%=creationTime%></sup></span>
-		[ <a href="#" id="<%=id%>" class="cancel-restriction" onclick="return false;" title="<%=translations.cancelTitle%>"><%=translations.cancel%></a> ]
+		<% if( active && ! finished ) { %>
+			[ <a href="#" id="<%=id%>" class="cancel-restriction" onclick="return false;" title="<%=translations.cancelTitle%>"><%=translations.cancel%></a> ]
+		<% } %>
 	</div>
 </div>

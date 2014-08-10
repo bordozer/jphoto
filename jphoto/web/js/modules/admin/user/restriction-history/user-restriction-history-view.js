@@ -20,12 +20,16 @@ define( ["backbone", "jquery", "underscore"
 
 			var translations = this.model.translations;
 
+			var el = $( "<div></div>" );
+
 			var entryView = new UserLockHistoryEntryView( {
 				model: historyEntry
+				, el: el
 				, translations: translations
 			} );
+			entryView.render();
 
-			this.$el.append( entryView.render().$el );
+			this.$el.append( el );
 		}
 	} );
 
@@ -47,7 +51,7 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 			modelJSON.translations = this.translations;
 
-			this.$el.append( this.historyEntryTemplate( modelJSON ) );
+			this.$el.html( this.historyEntryTemplate( modelJSON ) );
 
 			return this;
 		},

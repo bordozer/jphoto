@@ -21,6 +21,7 @@ public class UserRestrictionHistoryEntryDTO {
 	private String creationTime;
 
 	private boolean active;
+	private boolean finished;
 
 	private String cancellerLink;
 	private String cancellingTime;
@@ -129,6 +130,14 @@ public class UserRestrictionHistoryEntryDTO {
 
 	public void setActive( final boolean active ) {
 		this.active = active;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished( final boolean finished ) {
+		this.finished = finished;
 	}
 
 	public String getCancellerLink() {
