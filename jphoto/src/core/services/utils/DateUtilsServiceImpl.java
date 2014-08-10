@@ -361,7 +361,7 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 	@Override
 	public Date getTimeBetween( final Date timeFrom, final Date timeTo ) {
 		final Calendar calendar = getCalendar();
-		final long diff = timeFrom.getTime() - timeTo.getTime();
+		final long diff = timeTo.getTime() - timeFrom.getTime();
 		calendar.setTimeInMillis( diff - TimeZone.getDefault().getRawOffset() - ONE_HOUR ); // TODO: ONE_HOUR is a hack
 		return calendar.getTime();
 	}

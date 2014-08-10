@@ -16,7 +16,7 @@
 	JobExecutionHistoryEntry jobExecutionHistoryEntry = command.getJobExecutionHistoryEntry();
 
 	final JobExecutionStatus jobStatus = jobExecutionHistoryEntry.getJobExecutionStatus();
-	final Date executionTime = ApplicationContextHelper.getDateUtilsService().getTimeBetween( jobExecutionHistoryEntry.getEndTime(), jobExecutionHistoryEntry.getStartTime() );
+	final Date executionTime = ApplicationContextHelper.getDateUtilsService().getTimeBetween( jobExecutionHistoryEntry.getStartTime(), jobExecutionHistoryEntry.getEndTime() );
 %>
 <c:set var="jobExecutionHistoryEntry" value="<%=jobExecutionHistoryEntry%>" />
 

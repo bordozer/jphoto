@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ui.context.EnvironmentContext;
 
+import java.util.Date;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -24,6 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 public class UserLockHistoryController {
 
+	public static final int DAYS_IN_MONTH = 30;
 	@Autowired
 	private RestrictionService restrictionService;
 
@@ -59,8 +61,8 @@ public class UserLockHistoryController {
 			dto.setDateTo( dateUtilsService.formatDate( userRestriction.getRestrictionTimeTo() ) );
 			dto.setTimeTo( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeTo() ) );
 
-			dto.setRestrictionDuration( getRestrictionDuration( userRestriction ) );
-			dto.setExpiresAfter( getExpiresAfter( userRestriction ) );
+			dto.setRestrictionDuration( getFormattedTimeDifference( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() ) );
+			dto.setExpiresAfter( getFormattedTimeDifference( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() ) );
 
 			dto.setActive( userRestriction.isActive() );
 			dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCreator(), getLanguage() ) );
@@ -78,26 +80,49 @@ public class UserLockHistoryController {
 		return result;
 	}
 
-	private String getRestrictionDuration( final EntryRestriction userRestriction ) {
+	private String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
 
-		final int differenceInHours = dateUtilsService.getDifferenceInHours( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() );
+		final Date timeBetween = dateUtilsService.getTimeBetween( timeFrom, timeTo );
 
-		if ( differenceInHours < 24 ) {
-			return String.format( "%s hours", differenceInHours );
+		if ( lessThenOneDay( timeBetween ) ) {
+			return dateUtilsService.formatTime( timeBetween );
 		}
 
-		return String.format( "%s days", dateUtilsService.getDifferenceInDays( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() ) );
+		final int fuckingOffset = 3 * 60 * 60 * 1000; // TODO: critical: make this in the proper way
+
+		final long diffInMilliseconds = timeBetween.getTime() + fuckingOffset;
+		if ( lessThenOneMonth( timeBetween ) ) {
+			final long diffSeconds = diffInMilliseconds / 1000 % 60;
+			final long diffMinutes = diffInMilliseconds / ( 60 * 1000 ) % 60;
+			final long diffHours = diffInMilliseconds / ( 60 * 60 * 1000 ) % 24;
+			final long diffDays = diffInMilliseconds / ( 24 * 60 * 60 * 1000 );
+
+			if ( diffSeconds == 0 && diffMinutes == 0 && diffHours == 0 ) {
+				return String.format( "%d days", diffDays );
+			}
+
+			return String.format( "%d days %02d:%02d:%02d", diffDays, diffHours, diffMinutes, diffSeconds );
+		}
+
+		if ( lessThenOneYear( timeBetween ) ) {
+			final long diffMonth = diffInMilliseconds / DAYS_IN_MONTH / 24 / 60 / 60 / 1000;
+
+			return String.format( "~ %d month", diffMonth );
+		}
+
+		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
 	}
 
-	private String getExpiresAfter( final EntryRestriction userRestriction ) {
+	private boolean lessThenOneDay( final Date timeBetween ) {
+		return timeBetween.getTime() < 24 * 60 * 60 * 1000;
+	}
 
-		final int differenceInHours = dateUtilsService.getDifferenceInHours( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() );
+	private boolean lessThenOneMonth( final Date timeBetween ) {
+		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < DAYS_IN_MONTH;
+	}
 
-		if ( differenceInHours < 24 ) {
-			return String.format( "%s hours", differenceInHours );
-		}
-
-		return String.format( "%s days", dateUtilsService.getDifferenceInDays( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() ) );
+	private boolean lessThenOneYear( final Date timeBetween ) {
+		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
 	}
 
 	private Language getLanguage() {

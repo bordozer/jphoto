@@ -31,7 +31,7 @@ public class JobExecutionHistoryEntry extends AbstractBaseEntity {
 
 	public Date getExecutionDuration() {
 		final DateUtilsService dateUtilsService = ApplicationContextHelper.getDateUtilsService();
-		return dateUtilsService.getTimeBetween( dateUtilsService.getCurrentTime(), startTime );
+		return dateUtilsService.getTimeBetween( startTime, dateUtilsService.getCurrentTime() );
 	}
 
 	public Date getStartTime() {
