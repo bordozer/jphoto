@@ -10,12 +10,25 @@
 		<%=dateFrom%> <sup style="font-size: 9px;"><%=timeFrom%> </sup> - <%=dateTo%> <sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
 		<%=translations.restrictionDuration%>: <%=restrictionDuration%>
-		<br />
-		<%=translations.expiresAfter%>: <b><%=expiresAfter%></b>
+
+		<% if( active && ! finished ) { %>
+			<br />
+			<%=translations.expiresAfter%>: <b><%=expiresAfter%></b>
+		<% } %>
+
 		<br />
 		<span style="font-size: 10px;"><%=translations.createdBy%>: <%=creatorLink%>, <%=translations.restrictedAtTime%> <%=creationDate%> <sup style="font-size: 9px;"><%=creationTime%></sup></span>
 		<% if( active && ! finished ) { %>
 			[ <a href="#" id="<%=id%>" class="cancel-restriction" onclick="return false;" title="<%=translations.cancelTitle%>"><%=translations.cancel%></a> ]
+		<% } %>
+
+		<% if( ! active ) { %>
+			<br />
+			<span style="font-size: 10px;">
+				<%=translations.cancelledBy%>: <%=cancellerLink%>, <%=translations.cancelledAtTime%> <%=cancellingDate%> <sup style="font-size: 9px;"><%=cancellingTime%></sup>
+				<br />
+				<%=translations.wasRestrictedTitle%> <%=wasRestricted%>
+			</span>
 		<% } %>
 	</div>
 </div>

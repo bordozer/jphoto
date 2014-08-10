@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -43,13 +45,17 @@ public class UserLockHistoryController {
 	public List<UserRestrictionHistoryEntryDTO> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
 
 		final List<EntryRestriction> userRestrictions = restrictionService.loadUserRestrictions( userId );
+		Collections.sort( userRestrictions, new Comparator<EntryRestriction>() {
+			@Override
+			public int compare( final EntryRestriction o1, final EntryRestriction o2 ) {
+				return o2.getId() - o1.getId();
+			}
+		} );
 
 		final List<UserRestrictionHistoryEntryDTO> result = newArrayList();
 
 		for ( final EntryRestriction userRestriction : userRestrictions ) {
-			final UserRestrictionHistoryEntryDTO dto = getUserRestrictionHistoryEntryDTO( userRestriction );
-
-			result.add( dto );
+			result.add( getUserRestrictionHistoryEntryDTO( userRestriction ) );
 		}
 
 		return result;
@@ -92,7 +98,9 @@ public class UserLockHistoryController {
 		if ( ! dto.isActive() ) {
 			dto.setActive( false );
 			dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( restriction.getCanceller(), getLanguage() ) );
-			dto.setCancellingTime( dateUtilsService.formatDateTime( restriction.getCancellingTime() ) );
+			dto.setCancellingDate( dateUtilsService.formatDate( restriction.getCancellingTime() ) );
+			dto.setCancellingTime( dateUtilsService.formatTimeShort( restriction.getCancellingTime() ) );
+			dto.setWasRestricted( getFormattedTimeDifference( restriction.getRestrictionTimeFrom(), restriction.getCancellingTime() ) );
 
 			dto.setExpiresAfter( "" );
 		}

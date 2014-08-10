@@ -24,9 +24,11 @@ public class UserRestrictionHistoryEntryDTO {
 	private boolean finished;
 
 	private String cancellerLink;
+	private String cancellingDate;
 	private String cancellingTime;
 
 	private String cssClass;
+	private String wasRestricted;
 
 	public int getId() {
 		return id;
@@ -148,6 +150,14 @@ public class UserRestrictionHistoryEntryDTO {
 		this.cancellerLink = cancellerLink;
 	}
 
+	public String getCancellingDate() {
+		return cancellingDate;
+	}
+
+	public void setCancellingDate( final String cancellingDate ) {
+		this.cancellingDate = cancellingDate;
+	}
+
 	public String getCancellingTime() {
 		return cancellingTime;
 	}
@@ -162,6 +172,14 @@ public class UserRestrictionHistoryEntryDTO {
 
 	public void setCssClass( final String cssClass ) {
 		this.cssClass = cssClass;
+	}
+
+	public void setWasRestricted( final String wasRestricted ) {
+		this.wasRestricted = wasRestricted;
+	}
+
+	public String getWasRestricted() {
+		return wasRestricted;
 	}
 
 	@Override

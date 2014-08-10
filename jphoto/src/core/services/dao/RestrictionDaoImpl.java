@@ -70,7 +70,7 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	@Override
 	public List<EntryRestriction> loadRestrictions( final int entryId, final RestrictionType restrictionType ) {
 		final String sql = String.format( "SELECT * FROM %s WHERE %s=:entryId AND %s=:restrictionTypeId ORDER BY %s;"
-			, TABLE_RESTRICTION, TABLE_RESTRICTION_COLUMN_ENTRY_ID, TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID, TABLE_RESTRICTION_COLUMN_RESTRICTION_TIME_FROM );
+			, TABLE_RESTRICTION, TABLE_RESTRICTION_COLUMN_ENTRY_ID, TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID, ENTITY_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "entryId", entryId );

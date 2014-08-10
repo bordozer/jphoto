@@ -112,6 +112,6 @@ public class EntryRestriction<T extends Restrictable> extends AbstractBaseEntity
 
 	@Override
 	public String toString() {
-		return String.format( "%s: %s from %s to %s", entry, restrictionType, restrictionTimeFrom, restrictionTimeTo );
+		return String.format( "#%d %s: %s from %s to %s", getId(), entry, restrictionType, restrictionTimeFrom, restrictionTimeTo );
 	}
 }

@@ -118,6 +118,9 @@
 				, restrictedAtTime: "${eco:translate('Restriction history: restricted at time')}"
 				, cancel: "${eco:translate('Restriction history: cancel restriction')}"
 				, cancelTitle: "${eco:translate('Restriction history: cancel title')}"
+				, cancelledBy: "${eco:translate('Time period component: cancelled by')}"
+				, cancelledAtTime: "${eco:translate('Time period component: cancelled at time')}"
+				, wasRestrictedTitle: "${eco:translate('Time period component: was restricted title')}"
 			};
 			userLockHistory( ${userId}, translations, "${baseUrl}", $( '#user-restriction-history' ) );
 		} );
