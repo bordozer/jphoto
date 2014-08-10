@@ -2,8 +2,10 @@ package rest.admin.restriction;
 
 import core.general.restriction.EntryRestriction;
 import core.services.security.RestrictionService;
+import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,9 @@ public class UserLockHistoryController {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<UserRestrictionHistoryEntryDTO> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
@@ -42,13 +47,26 @@ public class UserLockHistoryController {
 			final UserRestrictionHistoryEntryDTO dto = new UserRestrictionHistoryEntryDTO();
 
 			dto.setId( userRestriction.getId() );
-			dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), EnvironmentContext.getLanguage() ) );
+			dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), getLanguage() ) );
 			dto.setTimeFrom( dateUtilsService.formatDateTime( userRestriction.getRestrictionTimeFrom() ) );
 			dto.setTimeTo( dateUtilsService.formatDateTime( userRestriction.getRestrictionTimeTo() ) );
+
+			dto.setActive( userRestriction.isActive() );
+			dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCreator(), getLanguage() ) );
+			dto.setCreationTime( dateUtilsService.formatDateTime( userRestriction.getCreatingTime() ) );
+
+			if ( userRestriction.getCanceller() != null ) {
+				dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCanceller(), getLanguage() ) );
+				dto.setCancellingTime( dateUtilsService.formatDateTime( userRestriction.getCancellingTime() ) );
+			}
 
 			result.add( dto );
 		}
 
 		return result;
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

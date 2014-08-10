@@ -25,7 +25,6 @@ define( ["backbone", "jquery", "underscore"
 
 		renderHistoryEntry:function ( historyEntry ) {
 			var modelJSON = historyEntry.toJSON();
-			console.log( modelJSON );
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
 		}
 	} );
