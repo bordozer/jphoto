@@ -32,14 +32,14 @@ public class UserLockHistoryController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserLockHistoryDTO> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
+	public List<UserRestrictionHistoryEntryDTO> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
 
 		final List<EntryRestriction> userRestrictions = restrictionService.loadUserRestrictions( userId );
 
-		final List<UserLockHistoryDTO> result = newArrayList();
+		final List<UserRestrictionHistoryEntryDTO> result = newArrayList();
 
 		for ( final EntryRestriction userRestriction : userRestrictions ) {
-			final UserLockHistoryDTO dto = new UserLockHistoryDTO();
+			final UserRestrictionHistoryEntryDTO dto = new UserRestrictionHistoryEntryDTO();
 
 			dto.setId( userRestriction.getId() );
 			dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), EnvironmentContext.getLanguage() ) );

@@ -2,7 +2,7 @@ package rest.admin.restriction;
 
 import core.enums.RestrictionType;
 
-public class UserLockHistoryDTO {
+public class UserRestrictionHistoryEntryDTO {
 
 	private int id;
 

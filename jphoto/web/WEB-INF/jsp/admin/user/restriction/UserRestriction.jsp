@@ -76,7 +76,7 @@
 
 		<div style="float: right; width: 400px;">
 			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate('User restriction: Restriction history title')}</div>
-			<div id="user-lock-history" >
+			<div id="user-restriction-history" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 			</div>
 
@@ -106,8 +106,8 @@
 			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ), jsonRPC.ajaxService );
 		} );
 
-		require( ['modules/admin/user/restriction-history/user-lock-history'], function ( userLockHistory ) {
-			userLockHistory( ${userId}, "${baseUrl}", $( '#user-lock-history' ) );
+		require( ['modules/admin/user/restriction-history/user-restriction-history'], function ( userLockHistory ) {
+			userLockHistory( ${userId}, "${baseUrl}", $( '#user-restriction-history' ) );
 		} );
 
 	</script>
