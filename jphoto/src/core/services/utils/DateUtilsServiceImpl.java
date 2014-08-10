@@ -343,6 +343,12 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 	}
 
 	@Override
+	public int getDifferenceInHours( final Date timeFrom, final Date timeTo ) {
+		final long diffTime = timeTo.getTime() - timeFrom.getTime();
+		return ( int ) ( diffTime / ( 1000 * 60 * 60 ) );
+	}
+
+	@Override
 	public int getDifferenceInSeconds( final Date timeFrom, final Date timeTo ) {
 		return ( int ) ( getDifferenceInMilliseconds( timeFrom, timeTo ) / 1000 );
 	}

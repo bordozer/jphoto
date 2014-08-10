@@ -6,6 +6,7 @@ import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
+import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,9 @@ public class UserLockHistoryController {
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
 
+	@Autowired
+	private UrlUtilsService urlUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<UserRestrictionHistoryEntryDTO> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
@@ -48,11 +52,15 @@ public class UserLockHistoryController {
 
 			dto.setId( userRestriction.getId() );
 			dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), getLanguage() ) );
+			dto.setRestrictionIcon( String.format( "%s/%s", urlUtilsService.getSiteImagesPath(), userRestriction.getRestrictionType().getIcon() ) );
 
 			dto.setDateFrom( dateUtilsService.formatDate( userRestriction.getRestrictionTimeFrom() ) );
 			dto.setTimeFrom( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeFrom() ) );
 			dto.setDateTo( dateUtilsService.formatDate( userRestriction.getRestrictionTimeTo() ) );
 			dto.setTimeTo( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeTo() ) );
+
+			dto.setRestrictionDuration( getRestrictionDuration( userRestriction ) );
+			dto.setExpiresAfter( getExpiresAfter( userRestriction ) );
 
 			dto.setActive( userRestriction.isActive() );
 			dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCreator(), getLanguage() ) );
@@ -68,6 +76,28 @@ public class UserLockHistoryController {
 		}
 
 		return result;
+	}
+
+	private String getRestrictionDuration( final EntryRestriction userRestriction ) {
+
+		final int differenceInHours = dateUtilsService.getDifferenceInHours( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() );
+
+		if ( differenceInHours < 24 ) {
+			return String.format( "%s hours", differenceInHours );
+		}
+
+		return String.format( "%s days", dateUtilsService.getDifferenceInDays( userRestriction.getRestrictionTimeFrom(), userRestriction.getRestrictionTimeTo() ) );
+	}
+
+	private String getExpiresAfter( final EntryRestriction userRestriction ) {
+
+		final int differenceInHours = dateUtilsService.getDifferenceInHours( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() );
+
+		if ( differenceInHours < 24 ) {
+			return String.format( "%s hours", differenceInHours );
+		}
+
+		return String.format( "%s days", dateUtilsService.getDifferenceInDays( dateUtilsService.getCurrentTime(), userRestriction.getRestrictionTimeTo() ) );
 	}
 
 	private Language getLanguage() {

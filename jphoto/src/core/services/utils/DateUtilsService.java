@@ -106,6 +106,8 @@ public interface DateUtilsService {
 
 	int getDifferenceInDays( final Date dateFrom, final Date dateTo );
 
+	int getDifferenceInHours( final Date timeFrom, final Date timeTo );
+
 	int getDifferenceInSeconds( final Date timeFrom, final Date timeTo );
 
 	long getDifferenceInMilliseconds( final Date timeFrom, final Date timeTo );

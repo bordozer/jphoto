@@ -10,7 +10,11 @@ public class UserRestrictionHistoryEntryDTO {
 	private String dateTo;
 	private String timeTo;
 
+	private String restrictionDuration;
+	private String expiresAfter;
+
 	private String restrictionName;
+	private String restrictionIcon;
 
 	private String creatorLink;
 	private String creationDate;
@@ -61,12 +65,36 @@ public class UserRestrictionHistoryEntryDTO {
 		this.timeTo = timeTo;
 	}
 
+	public String getRestrictionDuration() {
+		return restrictionDuration;
+	}
+
+	public void setRestrictionDuration( final String restrictionDuration ) {
+		this.restrictionDuration = restrictionDuration;
+	}
+
+	public String getExpiresAfter() {
+		return expiresAfter;
+	}
+
+	public void setExpiresAfter( final String expiresAfter ) {
+		this.expiresAfter = expiresAfter;
+	}
+
 	public String getRestrictionName() {
 		return restrictionName;
 	}
 
 	public void setRestrictionName( final String restrictionName ) {
 		this.restrictionName = restrictionName;
+	}
+
+	public String getRestrictionIcon() {
+		return restrictionIcon;
+	}
+
+	public void setRestrictionIcon( final String restrictionIcon ) {
+		this.restrictionIcon = restrictionIcon;
 	}
 
 	public String getCreatorLink() {

@@ -1,14 +1,17 @@
 <div class="block-shadow block-border block-background"  style="float: left; width: 97%; text-align: left; margin-bottom: 5px; margin-top: 5px; padding: 5px;">
 
 	<div style="float: left; width: 20px;">
-		<img src="/images/deleteAll.png" alt="Deactivate" title="Deactivate this restriction">
+		<img src="<%=restrictionIcon%>" alt="<%=restrictionName%>" width="16" height="16" title="<%=restrictionName%>">
 	</div>
 
 	<div style="float: left; width: 90%;">
-		<%=restrictionName%>:
+		From <%=dateFrom%><sup style="font-size: 9px;"><%=timeFrom%></sup> to <%=dateTo%><sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
-		<%=dateFrom%><sup style="font-size: 9px;"><%=timeFrom%></sup> - <%=dateTo%><sup style="font-size: 9px;"><%=timeTo%></sup>
+		Restriction duration: <%=restrictionDuration%>
+		<br />
+		Expires after: <b><%=expiresAfter%></b>
 		<br />
 		<span style="font-size: 10px;">Created by <%=creatorLink%> at <%=creationDate%><sup style="font-size: 9px;"><%=creationTime%></sup></span>
+		[ <a href="#" class="delete-restriction" onclick="return false;">cancel</a> ]
 	</div>
 </div>
