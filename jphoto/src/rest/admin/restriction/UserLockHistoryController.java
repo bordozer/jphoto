@@ -118,9 +118,7 @@ public class UserLockHistoryController {
 			return dateUtilsService.formatTime( timeBetween );
 		}
 
-		final int fuckingOffset = 3 * 60 * 60 * 1000; // TODO: critical: make this in the proper way
-
-		final long diffInMilliseconds = timeBetween.getTime() + fuckingOffset;
+		final long diffInMilliseconds = timeBetween.getTime() + offset();
 		if ( lessThenOneMonth( timeBetween ) ) {
 			final long diffSeconds = diffInMilliseconds / 1000 % 60;
 			final long diffMinutes = diffInMilliseconds / ( 60 * 1000 ) % 60;
@@ -143,8 +141,12 @@ public class UserLockHistoryController {
 		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
 	}
 
+	private int offset() {
+		return 3 * 60 * 60 * 1000; // TODO: critical: make this in the proper way
+	}
+
 	private boolean lessThenOneDay( final Date timeBetween ) {
-		return timeBetween.getTime() < 24 * 60 * 60 * 1000;
+		return timeBetween.getTime() + offset() < 24 * 60 * 60 * 1000;
 	}
 
 	private boolean lessThenOneMonth( final Date timeBetween ) {
