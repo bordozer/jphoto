@@ -422,16 +422,16 @@ public class AjaxServiceImpl implements AjaxService {
 
 		switch ( periodUnit ) {
 			case HOUR:
-				timeTo = dateUtilsService.getTimeOffsetInHours( timeFrom, unitId );
+				timeTo = dateUtilsService.getTimeOffsetInHours( timeFrom, period );
 				break;
 			case DAY:
-				timeTo = dateUtilsService.getDatesOffset( timeFrom, unitId );
+				timeTo = dateUtilsService.getDatesOffset( timeFrom, period );
 				break;
 			case MONTH:
-				timeTo = dateUtilsService.getTimeOffsetInMonth( timeFrom, unitId );
+				timeTo = dateUtilsService.getTimeOffsetInMonth( timeFrom, period );
 				break;
 			case YEAR:
-				timeTo = dateUtilsService.getTimeOffsetInYear( timeFrom, unitId );
+				timeTo = dateUtilsService.getTimeOffsetInYear( timeFrom, period );
 				break;
 			default:
 				throw new IllegalArgumentException( String.format( "Illegal RestrictionTimeUnit id: %d", unitId ) );

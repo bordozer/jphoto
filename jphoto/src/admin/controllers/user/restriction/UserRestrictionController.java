@@ -1,4 +1,4 @@
-package admin.controllers.user.lock;
+package admin.controllers.user.restriction;
 
 import core.general.user.User;
 import core.services.user.UserService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping( "members/{userId}/lock" )
 @Controller
-public class UserLockController {
+public class UserRestrictionController {
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
@@ -20,15 +20,15 @@ public class UserLockController {
 	@Autowired
 	private UserService userService;
 
-	private static final String MODEL_NAME = "userLockModel";
+	private static final String MODEL_NAME = "userRestrictionModel";
 
-	private static final String VIEW = "admin/user/lock/UserLock";
+	private static final String VIEW = "admin/user/restriction/UserRestriction";
 
 	@ModelAttribute( MODEL_NAME )
-	public UserLockModel prepareModel( final @PathVariable( "userId" ) int userId ) {
+	public UserRestrictionModel prepareModel( final @PathVariable( "userId" ) int userId ) {
 		final User user = userService.load( userId );
 
-		final UserLockModel model = new UserLockModel( userId );
+		final UserRestrictionModel model = new UserRestrictionModel( userId );
 
 		model.setUserName( user.getNameEscaped() );
 
@@ -36,7 +36,7 @@ public class UserLockController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String showActivityStream( final @ModelAttribute( MODEL_NAME ) UserLockModel model ) {
+	public String showUserRestrictions( final @ModelAttribute( MODEL_NAME ) UserRestrictionModel model ) {
 		return VIEW;
 	}
 }

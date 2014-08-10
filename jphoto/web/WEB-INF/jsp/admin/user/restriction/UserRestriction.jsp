@@ -8,14 +8,13 @@
 <%@ page import="org.json.JSONArray" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ page import="core.enums.RestrictionType" %>
 <%@ page import="rest.admin.restriction.RestrictionTypeDTO" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="userLockModel" type="admin.controllers.user.lock.UserLockModel" scope="request"/>
+<jsp:useBean id="userRestrictionModel" type="admin.controllers.user.restriction.UserRestrictionModel" scope="request"/>
 
-<c:set var="userId" value="${userLockModel.userId}" />
+<c:set var="userId" value="${userRestrictionModel.userId}" />
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 <%
@@ -67,7 +66,7 @@
 	<div class="user-lock-area-header">
 
 		<div style="float: left; width: 300px; margin-right: 15px;">
-			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: New restriction of $1', userLockModel.userName)}</div>
+			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: New restriction of $1', userRestrictionModel.userName)}</div>
 
 			<div id="user-lock-form" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
@@ -95,7 +94,7 @@
 			var translations = {
 				timePeriod: "${eco:translate('Time period component: Time period')}"
 				, dateRange: "${eco:translate('Time period component: Date range')}"
-				, buttonTitle: "${eco:translate1('User restriction: Do restriction $1 button title', userLockModel.userName)}"
+				, buttonTitle: "${eco:translate1('User restriction: Do restriction $1 button title', userRestrictionModel.userName)}"
 				, hoursUnit: "${eco:translate('Time period component: hours')}"
 				, daysUnit: "${eco:translate('Time period component: days')}"
 				, daysMonth: "${eco:translate('Time period component: month')}"
