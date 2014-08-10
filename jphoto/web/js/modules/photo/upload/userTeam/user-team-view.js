@@ -37,7 +37,6 @@ define( ["backbone", "jquery", "underscore"
 			var entryView = new EntryView( {
 				model: teamMember
 			} );
-			entryView.on( "event:delete", this.deleteEntry );
 
 			this.$el.append( entryView.render().$el );
 		},
