@@ -15,16 +15,18 @@ define( ["backbone", "jquery", "underscore"
 			this.listenTo( this.model, "add", this.renderHistoryEntry );
 
 			this.model.fetch( {cache: false} );
+
+			this.translations = this.model.translations;
 		},
 
 		renderHistory:function () {
-			/*var modelJSON = this.model.toJSON();
-			this.$el.html( this.historyTemplate( modelJSON ) );*/
 			this.$el.html( "" );
 		},
 
 		renderHistoryEntry:function ( historyEntry ) {
 			var modelJSON = historyEntry.toJSON();
+			modelJSON.translations = this.translations;
+
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
 		}
 	} );

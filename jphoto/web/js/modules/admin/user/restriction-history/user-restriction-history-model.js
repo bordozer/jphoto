@@ -10,6 +10,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/rest/admin/members/" + options.userId + "/restriction/history/";
+			this.translations = options.translations;
 		}
 
 	 } );

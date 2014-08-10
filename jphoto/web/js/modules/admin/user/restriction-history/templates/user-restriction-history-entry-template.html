@@ -5,13 +5,13 @@
 	</div>
 
 	<div style="float: left; width: 90%;">
-		From <%=dateFrom%><sup style="font-size: 9px;"><%=timeFrom%></sup> to <%=dateTo%><sup style="font-size: 9px;"><%=timeTo%></sup>
+		<%=dateFrom%> <sup style="font-size: 9px;"><%=timeFrom%> </sup> - <%=dateTo%> <sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
-		Restriction duration: <%=restrictionDuration%>
+		<%=translations.restrictionDuration%>: <%=restrictionDuration%>
 		<br />
-		Expires after: <b><%=expiresAfter%></b>
+		<%=translations.expiresAfter%>: <b><%=expiresAfter%></b>
 		<br />
-		<span style="font-size: 10px;">Created by <%=creatorLink%> at <%=creationDate%><sup style="font-size: 9px;"><%=creationTime%></sup></span>
-		[ <a href="#" class="delete-restriction" onclick="return false;">cancel</a> ]
+		<span style="font-size: 10px;"><%=translations.createdBy%>: <%=creatorLink%>, <%=translations.restrictedAtTime%> <%=creationDate%> <sup style="font-size: 9px;"><%=creationTime%></sup></span>
+		[ <a href="#" class="delete-restriction" onclick="return false;" title="<%=translations.cancelTitle%>"><%=translations.cancel%></a> ]
 	</div>
 </div>

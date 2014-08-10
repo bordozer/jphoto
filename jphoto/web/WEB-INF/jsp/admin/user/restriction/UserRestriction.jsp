@@ -111,7 +111,15 @@
 		} );
 
 		require( ['modules/admin/user/restriction-history/user-restriction-history'], function ( userLockHistory ) {
-			userLockHistory( ${userId}, "${baseUrl}", $( '#user-restriction-history' ) );
+			var translations = {
+				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
+				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
+				, createdBy: "${eco:translate('Restriction history: Created by')}"
+				, restrictedAtTime: "${eco:translate('Restriction history: restricted at time')}"
+				, cancel: "${eco:translate('Restriction history: cancel restriction')}"
+				, cancelTitle: "${eco:translate('Restriction history: cancel title')}"
+			};
+			userLockHistory( ${userId}, translations, "${baseUrl}", $( '#user-restriction-history' ) );
 		} );
 
 	</script>

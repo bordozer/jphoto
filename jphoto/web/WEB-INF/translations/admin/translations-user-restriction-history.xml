@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+
+<translations>
+
+	<translation>
+		<nerd>Restriction history: Restriction duration</nerd>
+		<ru><![CDATA[Лишен права на срок]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: Expires after</nerd>
+		<ru><![CDATA[Осталось до окончания]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: Created by</nerd>
+		<ru><![CDATA[Админ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: cancel restriction</nerd>
+		<ru><![CDATA[отменить]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: restricted at time</nerd>
+		<ru><![CDATA[время]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: cancel title</nerd>
+		<ru><![CDATA[Отменить данное лишение прав]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+</translations>
