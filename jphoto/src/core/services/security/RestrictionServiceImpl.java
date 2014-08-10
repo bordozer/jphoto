@@ -94,6 +94,42 @@ public class RestrictionServiceImpl implements RestrictionService {
 		return loadRestrictions( userId, RestrictionType.FOR_PHOTOS );
 	}
 
+	@Override
+	public boolean deactivate( final int entryId, final User cancellingUser, final Date cancellingTime ) {
+		final EntryRestriction entryRestriction = load( entryId );
+
+		entryRestriction.setActive( false );
+		entryRestriction.setCanceller( cancellingUser );
+		entryRestriction.setCancellingTime( cancellingTime );
+
+		return save( entryRestriction );
+	}
+
+	@Override
+	public boolean save( final EntryRestriction entry ) {
+		return restrictionDao.saveToDB( entry );
+	}
+
+	@Override
+	public EntryRestriction load( final int entryId ) {
+		return restrictionDao.load( entryId );
+	}
+
+	@Override
+	public boolean delete( final int restrictionHistoryEntryId ) {
+		throw new IllegalStateException( "Restriction history entry can not be deleted. Deactivation is allowed only!" );
+	}
+
+	@Override
+	public boolean exists( final int entryId ) {
+		return restrictionDao.exists( entryId );
+	}
+
+	@Override
+	public boolean exists( final EntryRestriction entry ) {
+		return restrictionDao.exists( entry );
+	}
+
 	private List<EntryRestriction> loadRestrictions( final int userId, final List<RestrictionType> restrictionTypes ) {
 		final List<EntryRestriction> result = newArrayList();
 

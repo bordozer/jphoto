@@ -4,11 +4,12 @@ import core.enums.RestrictionType;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
+import core.interfaces.BaseEntityService;
 
 import java.util.Date;
 import java.util.List;
 
-public interface RestrictionService {
+public interface RestrictionService extends BaseEntityService<EntryRestriction> {
 
 	void restrictUser( final User user, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo );
 
@@ -33,4 +34,6 @@ public interface RestrictionService {
 	List<EntryRestriction> loadUserRestrictions( final int userId );
 
 	List<EntryRestriction> loadPhotoRestrictions( final int userId );
+
+	boolean deactivate( int entryId, final User cancellingUser, final Date cancellingTime );
 }

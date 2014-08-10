@@ -69,7 +69,7 @@ public class UserLockHistoryController {
 			dto.setCreationDate( dateUtilsService.formatDate( userRestriction.getCreatingTime() ) );
 			dto.setCreationTime( dateUtilsService.formatTimeShort( userRestriction.getCreatingTime() ) );
 
-			dto.setCssClass( dateUtilsService.getCurrentTime().getTime() < userRestriction.getRestrictionTimeTo().getTime() ? "block-background" : "" );
+			dto.setCssClass( getCssClass( userRestriction ) );
 
 			if ( userRestriction.getCanceller() != null ) {
 				dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCanceller(), getLanguage() ) );
@@ -80,6 +80,12 @@ public class UserLockHistoryController {
 		}
 
 		return result;
+	}
+
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{restrictionHistoryEntryId}" )
+	@ResponseBody
+	public boolean deleteUserTeamMember( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
+		return restrictionService.deactivate( restrictionHistoryEntryId, EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() );
 	}
 
 	private String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
@@ -125,6 +131,19 @@ public class UserLockHistoryController {
 
 	private boolean lessThenOneYear( final Date timeBetween ) {
 		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
+	}
+
+	private String getCssClass( final EntryRestriction userRestriction ) {
+
+		if ( ! userRestriction.isActive() ) {
+			return "block-background-inactive-restriction";
+		}
+
+		if ( dateUtilsService.getCurrentTime().getTime() < userRestriction.getRestrictionTimeTo().getTime() ) {
+			return "block-background";
+		}
+
+		return "";
 	}
 
 	private Language getLanguage() {

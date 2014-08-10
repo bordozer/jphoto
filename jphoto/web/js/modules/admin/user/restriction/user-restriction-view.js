@@ -33,6 +33,7 @@ define( ["backbone", "jquery", "underscore"
 
 		restrictUserButtonClick: function ( evt ) {
 			evt.preventDefault();
+			evt.stopImmediatePropagation();
 
 			var matches = [];
 			$( ".restriction-type:checked" ).each( function () {

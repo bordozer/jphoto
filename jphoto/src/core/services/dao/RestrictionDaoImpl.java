@@ -112,6 +112,11 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 		return new EntryRestrictionRowMapper();
 	}
 
+	@Override
+	public boolean delete( final int entryId ) {
+		throw new IllegalStateException( "Restriction history entry can not be deleted. Deactivation is allowed only!" );
+	}
+
 	private class EntryRestrictionRowMapper implements RowMapper<EntryRestriction> {
 
 		@Override

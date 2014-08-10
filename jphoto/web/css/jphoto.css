@@ -26,6 +26,10 @@ a {
 	background: #e7e4d3;
 }
 
+.block-background-inactive-restriction {
+	background: #d6d6d6;
+}
+
 .block-user-photo {
 	background: #cccc99;
 }

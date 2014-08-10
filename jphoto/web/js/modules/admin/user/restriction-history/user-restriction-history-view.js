@@ -10,9 +10,14 @@ define( ["backbone", "jquery", "underscore"
 		historyTemplate:_.template( userLockHistoryTemplate ),
 		historyEntryTemplate:_.template( userLockHistoryEntryTemplate ),
 
+		events: {
+			"click .delete-restriction" : "onDeleteClick"
+		},
+
 		initialize: function() {
 			this.listenTo( this.model, "request", this.renderHistory );
 			this.listenTo( this.model, "add", this.renderHistoryEntry );
+			this.listenTo( this.model, "delete", this.renderHistoryEntry );
 
 			this.model.fetch( {cache: false} );
 
@@ -28,6 +33,18 @@ define( ["backbone", "jquery", "underscore"
 			modelJSON.translations = this.translations;
 
 			this.$el.append( this.historyEntryTemplate( modelJSON ) );
+		},
+
+		deleteRestrictionHistoryEntry: function( entryId ) {
+			this.model.remove( entryId );
+		},
+
+		onDeleteClick: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			var entryId = $( evt.target ).attr( 'id' );
+			this.deleteRestrictionHistoryEntry( entryId );
 		}
 	} );
 
