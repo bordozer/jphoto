@@ -4,17 +4,17 @@
 
 	<translation>
 		<nerd>User restriction: Range form title: New restriction of $1</nerd>
-		<ru><![CDATA[Добавить ограничение возможностей пользователя $1]]></ru>
+		<ru><![CDATA[Лишение прав $1]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>User restriction: Restriction history title</nerd>
-		<ru><![CDATA[История ограничения возможностей]]></ru>
+		<ru><![CDATA[История лишения прав]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>User restriction: Do restriction $1 button title</nerd>
-		<ru><![CDATA[Создать ограничение для $1]]></ru>
+		<ru><![CDATA[Лишить $1 выбранных прав]]></ru>
 	</translation>
 
 	<translation>

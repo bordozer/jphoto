@@ -49,7 +49,7 @@
 
 	<translation>
 		<nerd>Restrict comment author: $1</nerd>
-		<ru><![CDATA[$1: Ограничение возможностей автора комментария]]></ru>
+		<ru><![CDATA[$1: Лишение прав автора комментария]]></ru>
 	</translation>
 
 	<translation>

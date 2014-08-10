@@ -4,7 +4,7 @@
 
 	<translation>
 		<nerd>Restrict user: $1</nerd>
-		<ru><![CDATA[ $1: Ограничение возможностей пользователя]]></ru>
+		<ru><![CDATA[ $1: Лишение прав пользователя]]></ru>
 	</translation>
 
 	<translation>

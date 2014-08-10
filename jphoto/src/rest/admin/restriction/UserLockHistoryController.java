@@ -48,12 +48,16 @@ public class UserLockHistoryController {
 
 			dto.setId( userRestriction.getId() );
 			dto.setRestrictionName( translatorService.translate( userRestriction.getRestrictionType().getName(), getLanguage() ) );
-			dto.setTimeFrom( dateUtilsService.formatDateTime( userRestriction.getRestrictionTimeFrom() ) );
-			dto.setTimeTo( dateUtilsService.formatDateTime( userRestriction.getRestrictionTimeTo() ) );
+
+			dto.setDateFrom( dateUtilsService.formatDate( userRestriction.getRestrictionTimeFrom() ) );
+			dto.setTimeFrom( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeFrom() ) );
+			dto.setDateTo( dateUtilsService.formatDate( userRestriction.getRestrictionTimeTo() ) );
+			dto.setTimeTo( dateUtilsService.formatTimeShort( userRestriction.getRestrictionTimeTo() ) );
 
 			dto.setActive( userRestriction.isActive() );
 			dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCreator(), getLanguage() ) );
-			dto.setCreationTime( dateUtilsService.formatDateTime( userRestriction.getCreatingTime() ) );
+			dto.setCreationDate( dateUtilsService.formatDate( userRestriction.getCreatingTime() ) );
+			dto.setCreationTime( dateUtilsService.formatTimeShort( userRestriction.getCreatingTime() ) );
 
 			if ( userRestriction.getCanceller() != null ) {
 				dto.setCancellerLink( entityLinkUtilsService.getUserCardLink( userRestriction.getCanceller(), getLanguage() ) );

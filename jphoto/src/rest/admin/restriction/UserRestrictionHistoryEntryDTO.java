@@ -4,12 +4,16 @@ public class UserRestrictionHistoryEntryDTO {
 
 	private int id;
 
+	private String dateFrom;
 	private String timeFrom;
+
+	private String dateTo;
 	private String timeTo;
 
 	private String restrictionName;
 
 	private String creatorLink;
+	private String creationDate;
 	private String creationTime;
 
 	private boolean active;
@@ -25,12 +29,28 @@ public class UserRestrictionHistoryEntryDTO {
 		this.id = id;
 	}
 
+	public String getDateFrom() {
+		return dateFrom;
+	}
+
+	public void setDateFrom( final String dateFrom ) {
+		this.dateFrom = dateFrom;
+	}
+
 	public String getTimeFrom() {
 		return timeFrom;
 	}
 
 	public void setTimeFrom( final String timeFrom ) {
 		this.timeFrom = timeFrom;
+	}
+
+	public String getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo( final String dateTo ) {
+		this.dateTo = dateTo;
 	}
 
 	public String getTimeTo() {
@@ -55,6 +75,14 @@ public class UserRestrictionHistoryEntryDTO {
 
 	public void setCreatorLink( final String creatorLink ) {
 		this.creatorLink = creatorLink;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate( final String creationDate ) {
+		this.creationDate = creationDate;
 	}
 
 	public String getCreationTime() {

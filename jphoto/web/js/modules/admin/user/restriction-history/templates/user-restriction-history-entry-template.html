@@ -1,14 +1,14 @@
-<div style="float: left; width: 100%; text-align: left; padding-bottom: 5px; padding-top: 5px;">
+<div class="block-shadow block-border block-background"  style="float: left; width: 97%; text-align: left; margin-bottom: 5px; margin-top: 5px; padding: 5px;">
 
 	<div style="float: left; width: 20px;">
-		<img src="/images/delete16.png" alt="">
+		<img src="/images/deleteAll.png" alt="Deactivate" title="Deactivate this restriction">
 	</div>
 
 	<div style="float: left; width: 90%;">
-		<%=id%>: <%=restrictionName%>:
+		<%=restrictionName%>:
 		<br />
-		<%=timeFrom%> - <%=timeTo%>
+		<%=dateFrom%><sup style="font-size: 9px;"><%=timeFrom%></sup> - <%=dateTo%><sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
-		<span style="font-size: 10px;">Created by <%=creatorLink%> at <%=creationTime%></span>
+		<span style="font-size: 10px;">Created by <%=creatorLink%> at <%=creationDate%><sup style="font-size: 9px;"><%=creationTime%></sup></span>
 	</div>
 </div>

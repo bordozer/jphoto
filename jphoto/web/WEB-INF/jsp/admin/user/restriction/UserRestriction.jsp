@@ -66,7 +66,9 @@
 	<div class="user-lock-area-header">
 
 		<div style="float: left; width: 300px; margin-right: 15px;">
-			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate1('User restriction: Range form title: New restriction of $1', userRestrictionModel.userName)}</div>
+			<div class="user-lock-area-header block-shadow block-background user-lock-area-tab" style="height: 20px;">
+				${eco:translate1('User restriction: Range form title: New restriction of $1', userRestrictionModel.userName)}
+			</div>
 
 			<div id="user-lock-form" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
@@ -75,7 +77,9 @@
 		</div>
 
 		<div style="float: right; width: 400px;">
-			<div class="user-lock-area-header block-background user-lock-area-tab">${eco:translate('User restriction: Restriction history title')}</div>
+			<div class="user-lock-area-header block-shadow block-background user-lock-area-tab" style="height: 20px;">
+				${eco:translate('User restriction: Restriction history title')}
+			</div>
 			<div id="user-restriction-history" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 			</div>
