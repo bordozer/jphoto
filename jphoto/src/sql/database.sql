@@ -483,9 +483,14 @@ CREATE TABLE `restriction` (
   `restrictionTimeTo` timestamp NULL DEFAULT '1970-01-01 03:00:01',
   `restrictionMessage` text,
   `restrictionComment` text,
+  `active` tinyint(1) DEFAULT NULL,
+  `creatingTime` timestamp NULL DEFAULT '0000-00-00 00:00:00',
+  `createdUserId` int(11) NOT NULL,
+  `cancelledUserId` int(11) DEFAULT NULL,
+  `cancellingTime` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `schedulerTasks` table :

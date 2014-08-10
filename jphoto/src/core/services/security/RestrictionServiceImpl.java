@@ -5,7 +5,9 @@ import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.services.dao.RestrictionDao;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.context.EnvironmentContext;
 
 import java.util.Date;
 import java.util.List;
@@ -17,11 +19,20 @@ public class RestrictionServiceImpl implements RestrictionService {
 	@Autowired
 	private RestrictionDao restrictionDao;
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
 	@Override
 	public void restrictUser( final User user, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo ) {
+
 		final EntryRestriction<User> restriction = new EntryRestriction<>( user, restrictionType );
+
 		restriction.setRestrictionTimeFrom( timeFrom );
 		restriction.setRestrictionTimeTo( timeTo );
+
+		restriction.setActive( true );
+		restriction.setCreatingTime( dateUtilsService.getCurrentTime() );
+		restriction.setCreator( EnvironmentContext.getCurrentUser() );
 
 		restrictionDao.saveToDB( restriction );
 	}
