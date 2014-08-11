@@ -7,6 +7,8 @@ import core.general.user.User;
 import core.interfaces.Restrictable;
 import core.services.dao.RestrictionDao;
 import core.services.utils.DateUtilsService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 
@@ -42,7 +44,37 @@ public class RestrictionServiceImpl implements RestrictionService {
 	public boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
 		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
 
-		return restrictions != null && restrictions.get( restrictions.size() - 1 ).getRestrictionTimeTo().getTime() >= time.getTime();
+		if ( restrictions == null || restrictions.size() == 0 ) {
+			return false;
+		}
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
+
+		final List<EntryRestriction> activeRestrictions = newArrayList( restrictions );
+		CollectionUtils.filter( activeRestrictions, new Predicate<EntryRestriction>() {
+			@Override
+			public boolean evaluate( final EntryRestriction restriction ) {
+
+				if ( restriction.isCancelled() ) {
+					// cancelled
+					return false;
+				}
+
+				if ( restriction.getRestrictionTimeFrom().getTime() > currentTime.getTime() ) {
+					// time from has not came yet
+					return false;
+				}
+
+				if ( restriction.getRestrictionTimeTo().getTime() < currentTime.getTime() ) {
+					// expired
+					return false;
+				}
+
+				return true;
+			}
+		} );
+
+		return activeRestrictions != null && activeRestrictions.size() > 0;
 	}
 
 	@Override

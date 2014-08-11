@@ -1,7 +1,6 @@
 package core.services.security;
 
 import core.enums.RestrictionType;
-import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.interfaces.BaseEntityService;

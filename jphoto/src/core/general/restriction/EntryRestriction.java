@@ -74,6 +74,10 @@ public class EntryRestriction<T extends Restrictable> extends AbstractBaseEntity
 		return active;
 	}
 
+	public boolean isCancelled() {
+		return ! active;
+	}
+
 	public void setActive( final boolean active ) {
 		this.active = active;
 	}
