@@ -1,13 +1,13 @@
 <div class="block-shadow block-border <%=cssClass%>"  style="float: left; width: 97%; text-align: left; margin-bottom: 5px; margin-top: 5px; padding: 5px;">
 
-	<div style="float: left; width: 20px;">
-		<%=id%>
+	<div style="float: left; width: 30px; text-align: center;">
+		#<%=id%>
 		<br />
 		<img src="<%=restrictionIcon%>" alt="<%=restrictionName%>" width="16" height="16" title="<%=restrictionName%>">
 	</div>
 
 	<div style="float: left; width: 90%;">
-		<%=restrictionName%> - <%=status%>
+		<div class="block-border" style="border-right: none; border-left: none; border-top: none; margin-bottom: 5px;"><%=restrictionName%> - <%=status%></div>
 		<br />
 		<%=dateFrom%> <sup style="font-size: 9px;"><%=timeFrom%> </sup> - <%=dateTo%> <sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
