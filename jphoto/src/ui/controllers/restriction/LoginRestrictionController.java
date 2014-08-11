@@ -60,15 +60,6 @@ public class LoginRestrictionController {
 		}*/
 
 		final EntryRestriction restriction = restrictionService.load( model.getRestrictionEntryId() );
-
-		/*final TranslatableMessage translatableMessage = new TranslatableMessage( "You are logged out because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.", services )
-			.translatableString( restriction.getRestrictionType().getName() )
-			.addUserCardLinkParameter( restriction.getCreator() )
-			.dateTimeFormatted( restriction.getCreatingTime() )
-			.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
-			.dateTimeFormatted( restriction.getRestrictionTimeTo() )
-			;
-		model.setLoginRestrictionMessage( translatableMessage.build( EnvironmentContext.getLanguage() ) );*/
 		model.setRestriction( restriction );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserLoginRestrictionBreadCrumbs( EnvironmentContext.getCurrentUser() ) );

@@ -12,35 +12,15 @@
 
 <tags:page pageModel="${loginRestrictionModel.pageModel}">
 
-	<table:table width="700px;">
-
-		<table:tr>
-			<table:td colspan="2">
-				${eco:translate("LoginRestriction: You are logged out because you are restricted in this right.")}
-			</table:td>
-		</table:tr>
-
-		<table:tr>
-			<table:td >${eco:translate("LoginRestriction: Login restriction creator")}</table:td>
-			<table:td ><user:userCard user="${restriction.creator}" /></table:td>
-		</table:tr>
-
-		<table:tr>
-			<table:td colspan="2">
-				${eco:translate("LoginRestriction: The restriction period is")}
-			</table:td>
-		</table:tr>
-
-		<table:tr>
-			<table:td >${eco:translate("LoginRestriction: Login restriction from")}</table:td>
-			<table:td >${eco:formatDateTimeShort(restriction.restrictionTimeFrom)}</table:td>
-		</table:tr>
-
-		<table:tr>
-			<table:td >${eco:translate("LoginRestriction: Login restriction to")}</table:td>
-			<table:td >${eco:formatDateTimeShort(restriction.restrictionTimeTo)}</table:td>
-		</table:tr>
-
-	</table:table>
+	<div style="width: 700px;">
+		${eco:translate("LoginRestriction: You are logged out because you are restricted in this right.")}
+		<p>
+		${eco:translate("LoginRestriction: Login restriction creator")}
+		<user:userCard user="${restriction.creator}" />
+		<p>
+		${eco:translate("LoginRestriction: The restriction period is")}
+		${eco:translate("LoginRestriction: Login restriction from")} ${eco:formatDateTimeShort(restriction.restrictionTimeFrom)}
+		${eco:translate("LoginRestriction: Login restriction to")} ${eco:formatDateTimeShort(restriction.restrictionTimeTo)}
+	</div>
 
 </tags:page>

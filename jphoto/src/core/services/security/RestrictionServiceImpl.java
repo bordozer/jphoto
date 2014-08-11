@@ -51,6 +51,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public boolean isUserCommentingRestricted( final int userId, final Date time ) {
+		return isRestrictedOn( userId, RestrictionType.USER_COMMENTING, time );
+	}
+
+	@Override
 	public void assertUserLoginIsNotRestricted( final User user, final Date time ) {
 		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( user.getId(), RestrictionType.USER_LOGIN, time );
 		if ( activeRestrictions != null && activeRestrictions.size() > 0 ) {
