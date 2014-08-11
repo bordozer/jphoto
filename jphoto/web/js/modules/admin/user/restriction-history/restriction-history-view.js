@@ -9,14 +9,14 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.$el.html( "" );
 
-			this.listenTo( this.model, "add", this.renderHistoryEntry );
+			this.listenTo( this.model, "add", this.render );
 
 			this.model.fetch( {cache: false} );
 
 			this.translations = this.model.translations;
 		},
 
-		renderHistoryEntry: function ( historyEntry ) {
+		render: function ( historyEntry ) {
 
 			var translations = this.model.translations;
 
