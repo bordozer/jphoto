@@ -23,8 +23,8 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	public static final String ACCESS_DENIED_VIEW = "errors/AccessDenied";
 	public static final String ENTRY_NOT_FOUND_VIEW = "errors/EntryNotFound";
 	public static final String NOT_LOGGED_USER_VIEW = "errors/NotLoggedUser";
+	public static final String RESTRICTION_VIEW = "errors/RestrictionException";
 	public static final String NUDE_CONTENT_WARNING_VIEW = "NudeContentWarning";
-	public static final String RESTRICTION_VIEW = "RestrictionException";
 
 	@Autowired
 	private SystemVarsService systemVarsService;

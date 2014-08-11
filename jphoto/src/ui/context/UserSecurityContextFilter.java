@@ -32,7 +32,7 @@ public class UserSecurityContextFilter extends OncePerRequestFilter implements F
 
 		usersSecurityService.assertLoggedUserRequestSecurityPassed( currentUser, request );
 
-		restrictionService.isUserLoginRestricted( currentUser.getId(), dateUtilsService.getCurrentTime() );
+		restrictionService.assertUserLoginIsNotRestricted( currentUser.getId(), dateUtilsService.getCurrentTime() );
 
 		filterChain.doFilter( request, response );
 	}

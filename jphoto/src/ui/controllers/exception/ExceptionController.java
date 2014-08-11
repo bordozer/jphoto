@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ui.context.EnvironmentContext;
+import ui.services.security.UsersSecurityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +23,9 @@ public class ExceptionController {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private UsersSecurityService usersSecurityService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ExceptionModel prepareModel( final HttpServletRequest request ) {
@@ -91,14 +96,18 @@ public class ExceptionController {
 		return UrlUtilsServiceImpl.NUDE_CONTENT_WARNING_VIEW;
 	}
 
+	@RequestMapping( "/restrictionException/" )
+	public String restrictionExceptionHandler( final HttpServletRequest request ) {
+		// TODO: repeated twice #4576885
+//		usersSecurityService.resetEnvironmentAndLogOutUser( EnvironmentContext.getCurrentUser() );
+//		request.getSession().invalidate();
+
+		return UrlUtilsServiceImpl.RESTRICTION_VIEW;
+	}
+
 	@RequestMapping( "/userRequestSecurityException/" )
 	public String userRequestSecurityExceptionHandler( final HttpServletRequest request ) {
 		return String.format( "redirect:%s", request.getHeader( "referer" ) );
-	}
-
-	@RequestMapping( "/restrictionException/" )
-	public String restrictionExceptionHandler( final HttpServletRequest request ) {
-		return UrlUtilsServiceImpl.RESTRICTION_VIEW;
 	}
 }
 

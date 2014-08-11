@@ -101,8 +101,8 @@ public class UserLoginController {
 
 		response.addCookie( cookie );
 
+		// TODO: repeated twice #4576885
 		usersSecurityService.resetEnvironmentAndLogOutUser( EnvironmentContext.getCurrentUser() );
-
 		request.getSession().invalidate();
 
 		return String.format( "redirect:%s", request.getHeader( "referer" ) );
