@@ -68,7 +68,7 @@
 
 		<div style="float: left; width: 300px; margin-right: 15px;">
 			<div class="restriction-area-header block-shadow block-background restriction-area-tab" style="height: 20px;">
-				${eco:translate1('Restriction: Range form title: New restriction of $1', restrictionModel.entryName)}
+				${eco:translate1('Restriction: New restriction form tab title', restrictionModel.entryName)}
 			</div>
 
 			<div id="new-restriction-form" >
@@ -99,7 +99,7 @@
 			var translations = {
 				timePeriod: "${eco:translate('Time period component: Time period')}"
 				, dateRange: "${eco:translate('Time period component: Date range')}"
-				, buttonTitle: "${eco:translate1('Restriction: Do restriction $1 button title', restrictionModel.entryName)}"
+				, buttonTitle: "${eco:translate1('Restriction: Do restriction', restrictionModel.entryName)}"
 				, hoursUnit: "${eco:translate('Time period component: hours')}"
 				, daysUnit: "${eco:translate('Time period component: days')}"
 				, daysMonth: "${eco:translate('Time period component: month')}"

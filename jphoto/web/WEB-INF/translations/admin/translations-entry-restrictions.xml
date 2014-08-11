@@ -13,8 +13,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Restriction: Range form title: New restriction of $1</nerd>
-		<ru><![CDATA[Лишение прав $1]]></ru>
+		<nerd>Restriction: New restriction form tab title</nerd>
+		<ru><![CDATA[Добавление лишения прав]]></ru>
 	</translation>
 
 	<translation>
@@ -23,8 +23,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Restriction: Do restriction $1 button title</nerd>
-		<ru><![CDATA[Лишить $1 выбранных прав]]></ru>
+		<nerd>Restriction: Do restriction</nerd>
+		<ru><![CDATA[Лишить выбранных прав]]></ru>
 	</translation>
 
 	<translation>
