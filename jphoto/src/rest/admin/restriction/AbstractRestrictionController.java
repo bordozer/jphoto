@@ -62,39 +62,6 @@ public abstract class AbstractRestrictionController {
 		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
 	}
 
-	protected int offset() {
-		return 3 * 60 * 60 * 1000; // TODO: critical: make this in the proper way
-	}
-
-	protected boolean lessThenOneDay( final Date timeBetween ) {
-		return timeBetween.getTime() + offset() < 24 * 60 * 60 * 1000;
-	}
-
-	protected boolean lessThenOneMonth( final Date timeBetween ) {
-		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < DAYS_IN_MONTH;
-	}
-
-	protected boolean lessThenOneYear( final Date timeBetween ) {
-		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
-	}
-
-	protected String getCssClass( final EntryRestriction restriction ) {
-
-		if ( ! restriction.isActive() ) {
-			return "block-background-inactive-restriction";
-		}
-
-		if ( ! isFinished( restriction ) ) {
-			return "block-background";
-		}
-
-		return "";
-	}
-
-	protected boolean isFinished( final EntryRestriction restriction ) {
-		return dateUtilsService.getCurrentTime().getTime() > restriction.getRestrictionTimeTo().getTime();
-	}
-
 	protected RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 
@@ -115,7 +82,7 @@ public abstract class AbstractRestrictionController {
 		dto.setCreationDate( dateUtilsService.formatDate( restriction.getCreatingTime() ) );
 		dto.setCreationTime( dateUtilsService.formatTimeShort( restriction.getCreatingTime() ) );
 
-		dto.setCssClass( getCssClass( restriction ) );
+		initCssClassAndStatus( restriction, dto );
 
 		dto.setActive( restriction.isActive() );
 		dto.setFinished( isFinished( restriction ) );
@@ -135,6 +102,50 @@ public abstract class AbstractRestrictionController {
 		}
 
 		return dto;
+	}
+
+	protected long offset() {
+		return dateUtilsService.getTimeZoneOffset();
+	}
+
+	protected boolean lessThenOneDay( final Date timeBetween ) {
+		return timeBetween.getTime() + offset() < 24 * 60 * 60 * 1000;
+	}
+
+	protected boolean lessThenOneMonth( final Date timeBetween ) {
+		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < DAYS_IN_MONTH;
+	}
+
+	protected boolean lessThenOneYear( final Date timeBetween ) {
+		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
+	}
+
+	protected void initCssClassAndStatus( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
+
+		if ( ! restriction.isActive() ) {
+			dto.setStatus( translatorService.translate( "Restriction history entry status: cancelled", getLanguage() ) );
+			dto.setCssClass( "block-background-inactive-restriction" );
+			return;
+		}
+
+		if ( restriction.getRestrictionTimeFrom().getTime() > dateUtilsService.getCurrentTime().getTime() ) {
+			dto.setStatus( translatorService.translate( "Restriction history entry status: postponed", getLanguage() ) );
+			dto.setCssClass( "block-background-postponed-restriction" );
+			return;
+		}
+
+		if ( ! isFinished( restriction ) ) {
+			dto.setStatus( translatorService.translate( "Restriction history entry status: in progress", getLanguage() ) );
+			dto.setCssClass( "block-background" );
+			return;
+		}
+
+		dto.setStatus( translatorService.translate( "Restriction history entry status: passed", getLanguage() ) );
+		dto.setStatus( translatorService.translate( "", getLanguage() ) );
+	}
+
+	protected boolean isFinished( final EntryRestriction restriction ) {
+		return dateUtilsService.getCurrentTime().getTime() > restriction.getRestrictionTimeTo().getTime();
 	}
 
 	protected Language getLanguage() {

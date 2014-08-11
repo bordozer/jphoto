@@ -135,4 +135,6 @@ public interface DateUtilsService {
 	boolean isNotEmptyTime( final Date time );
 
 	boolean isItToday( final Date time );
+
+	long getTimeZoneOffset();
 }

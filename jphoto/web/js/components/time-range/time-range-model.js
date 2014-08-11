@@ -50,7 +50,17 @@ define( ["backbone"], function ( Backbone ) {
 
 		recalculateDateRange: function() {
 
+//			var _now = new Date();
+
 			var dateFrom = new Date();
+//			dateFrom.setYear( _now.getYear() );
+//			dateFrom.setMonth( _now.getMonth() );
+//			dateFrom.setDate( _now.getDay() );
+			dateFrom.setHours( 0 );
+			dateFrom.setMinutes( 0 );
+			dateFrom.setSeconds( 0 );
+			dateFrom.setMilliseconds( 0 );
+
 			var delta = this.get( 'timePeriod' );
 
 			if ( this.get( 'timeUnit' ) == 1 && this.get( 'timePeriod' ) < 24 ) {

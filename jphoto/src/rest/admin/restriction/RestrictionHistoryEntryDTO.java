@@ -30,6 +30,8 @@ public class RestrictionHistoryEntryDTO {
 	private String cssClass;
 	private String wasRestricted;
 
+	private String status;
+
 	public int getId() {
 		return id;
 	}
@@ -180,6 +182,14 @@ public class RestrictionHistoryEntryDTO {
 
 	public String getWasRestricted() {
 		return wasRestricted;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus( final String status ) {
+		this.status = status;
 	}
 
 	@Override

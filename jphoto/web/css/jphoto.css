@@ -30,6 +30,10 @@ a {
 	background: #d6d6d6;
 }
 
+.block-background-postponed-restriction {
+	background: #5A9D1A;
+}
+
 .block-user-photo {
 	background: #cccc99;
 }

@@ -41,6 +41,7 @@ import ui.services.menu.entry.items.comment.ComplaintReasonType;
 import utils.StringUtilities;
 import utils.UserUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -443,21 +444,33 @@ public class AjaxServiceImpl implements AjaxService {
 
 			log.debug( String.format( "userId: %d, period: '%s', uit: '%s', type of restriction: '%s'", userId, period, periodUnit, restrictionType ) );
 		}
-
 	}
 
 	@Override
-	public void restrictUserRange( final int userId, final String timeFrom, final String timeTo, final List<Integer> restrictionTypeIds ) {
-//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
-//		restrictionService.lockUser( userService.load( userId ), timeFrom, timeTo );
+	public void restrictUserRange( final int userId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds ) {
 
-		log.debug( String.format( "userId: %d, timeFrom: '%s', timeTo: '%s'", userId, timeFrom, timeTo ) );
+		final long timeZoneOffset = dateUtilsService.getTimeZoneOffset();
+
+		final Calendar instance = Calendar.getInstance();
+		instance.setTimeInMillis( _timeFrom - timeZoneOffset );
+
+		final Date from = instance.getTime();
+
+		instance.setTimeInMillis( _timeTo - timeZoneOffset );
+		final Date to = instance.getTime();
+
+		for ( final String restrictionTypeId : restrictionTypeIds ) {
+			final RestrictionType restrictionType = RestrictionType.getById( Integer.parseInt( restrictionTypeId ) );
+			restrictionService.restrictUser( userService.load( userId ), restrictionType, from, to );
+
+			log.debug( String.format( "userId: %d, time from: '%s', time to: '%s', type of restriction: '%s'", userId, _timeFrom, _timeTo, restrictionType ) );
+		}
 	}
 
 	@Override
-	public void lockPhoto( final int photoId, final String timeFrom, final String timeTo, final List<Integer> restrictionTypeIds ) {
+	public void restrictPhoto( final int photoId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds ) {
 //		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
 //		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
-		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, timeFrom, timeTo ) );
+		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, _timeFrom, _timeTo ) );
 	}
 }

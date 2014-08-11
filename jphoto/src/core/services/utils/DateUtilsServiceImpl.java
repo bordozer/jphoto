@@ -445,6 +445,11 @@ public class DateUtilsServiceImpl implements DateUtilsService {
 		return new Date();
 	}
 
+	@Override
+	public long getTimeZoneOffset() {
+		return 3 * 60 * 60 * 1000; // TODO: critical: make this in the proper way
+	}
+
 	private Calendar getCalendar() {
 		final Calendar calendar = Calendar.getInstance();
 		calendar.setFirstDayOfWeek( Calendar.MONDAY );

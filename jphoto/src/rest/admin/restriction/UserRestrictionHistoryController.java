@@ -51,5 +51,4 @@ public class UserRestrictionHistoryController extends AbstractRestrictionControl
 	public boolean deleteUserTeamMember( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
-
 }

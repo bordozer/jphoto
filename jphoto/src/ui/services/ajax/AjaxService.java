@@ -37,7 +37,7 @@ public interface AjaxService {
 
 	void restrictUserPeriod( final int userId, final int period, final int unitId, final String[] restrictionTypeIds );
 
-	void restrictUserRange( final int userId, final String timeFrom, final String timeTo, final List<Integer> restrictionTypeIds );
+	void restrictUserRange( final int userId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
 
-	void lockPhoto( final int photoId, final String timeFrom, final String timeTo, final List<Integer> restrictionTypeIds );
+	void restrictPhoto( final int photoId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
 }

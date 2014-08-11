@@ -15,9 +15,12 @@ define( ["backbone"], function ( Backbone ) {
 			if ( data.rangeType == 1 ) {
 				this.ajaxService.restrictUserPeriod( this.userId, data.timePeriod, data.timeUnit, data.restrictionTypeIds );
 			} else {
-				this.ajaxService.restrictUserRange( this.userId, data.dateFrom, data.dateTo, data.restrictionTypeIds );
+				console.log( data.dateFrom, data.dateTo );
+				var from = new Date( data.dateFrom ).getTime();
+				var to = new Date( data.dateTo ).getTime();
+				this.ajaxService.restrictUserRange( this.userId, from, to, data.restrictionTypeIds );
 			}
-			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading
+//			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading
 		}
 	});
 
