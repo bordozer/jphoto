@@ -110,7 +110,7 @@
 			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ), jsonRPC.ajaxService );
 		} );
 
-		require( ['modules/admin/user/restriction-history/user-restriction-history'], function ( userLockHistory ) {
+		require( ['modules/admin/user/restriction-history/restriction-history'], function ( userLockHistory ) {
 			var translations = {
 				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
 				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
