@@ -51,8 +51,8 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public List<EntryRestriction> loadPhotoRestrictions( final int userId ) {
-		return loadRestrictions( userId, RestrictionType.FOR_PHOTOS );
+	public List<EntryRestriction> loadPhotoRestrictions( final int photoId ) {
+		return loadRestrictions( photoId, RestrictionType.FOR_PHOTOS );
 	}
 
 	@Override

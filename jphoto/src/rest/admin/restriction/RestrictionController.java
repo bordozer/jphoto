@@ -8,11 +8,21 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
-public abstract class AbstractRestrictionController {
+import static com.google.common.collect.Lists.newArrayList;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
+@RequestMapping( "admin/restriction" )
+@Controller
+public class RestrictionController {
 
 	public static final int DAYS_IN_MONTH = 30;
 
@@ -30,6 +40,31 @@ public abstract class AbstractRestrictionController {
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
+
+	@RequestMapping( method = RequestMethod.GET, value = "/members/{userId}/history/", produces = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public List<RestrictionHistoryEntryDTO> showUserRestriction( final @PathVariable( "userId" ) int userId ) {
+		return getRestrictionHistoryEntryDTOs( restrictionService.loadUserRestrictions( userId ) );
+	}
+
+	@RequestMapping( method = RequestMethod.GET, value = "/photos/{photoId}/history/", produces = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public List<RestrictionHistoryEntryDTO> showPhotoRestriction( final @PathVariable( "photoId" ) int photoId ) {
+		return getRestrictionHistoryEntryDTOs( restrictionService.loadPhotoRestrictions( photoId ) );
+	}
+
+	@RequestMapping( method = RequestMethod.PUT, value = "/*/{entryId}/history/{restrictionHistoryEntryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public RestrictionHistoryEntryDTO inactivateRestriction( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
+		restrictionService.deactivate( restrictionDTO.getId(), EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() );
+		return getRestrictionHistoryEntryDTO( restrictionService.load( restrictionDTO.getId() ) );
+	}
+
+	@RequestMapping( method = RequestMethod.DELETE, value = "/*/{entryId}/history/{restrictionHistoryEntryId}" )
+	@ResponseBody
+	public boolean deleteRestriction( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
+		return restrictionService.delete( restrictionHistoryEntryId );
+	}
 
 	protected RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
@@ -150,5 +185,23 @@ public abstract class AbstractRestrictionController {
 
 	protected Language getLanguage() {
 		return EnvironmentContext.getLanguage();
+	}
+
+	protected List<RestrictionHistoryEntryDTO> getRestrictionHistoryEntryDTOs( final List<EntryRestriction> restrictions ) {
+
+		Collections.sort( restrictions, new Comparator<EntryRestriction>() {
+			@Override
+			public int compare( final EntryRestriction o1, final EntryRestriction o2 ) {
+				return o2.getId() - o1.getId();
+			}
+		} );
+
+		final List<RestrictionHistoryEntryDTO> result = newArrayList();
+
+		for ( final EntryRestriction restriction : restrictions ) {
+			result.add( getRestrictionHistoryEntryDTO( restriction ) );
+		}
+
+		return result;
 	}
 }

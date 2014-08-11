@@ -127,7 +127,7 @@
 				, cancelConfirmation: "${eco:translate('Restriction history: cancel confirmation')}"
 				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
-			func( ${entryId}, translations, "${baseUrl}", $( '#restriction-history-container' ) );
+			func( ${entryId}, ${restrictionEntryTypeId}, translations, "${baseUrl}", $( '#restriction-history-container' ) );
 		} );
 
 	</script>

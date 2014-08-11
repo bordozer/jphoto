@@ -18,7 +18,7 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	List<EntryRestriction> loadUserRestrictions( final int userId );
 
-	List<EntryRestriction> loadPhotoRestrictions( final int userId );
+	List<EntryRestriction> loadPhotoRestrictions( final int photoId );
 
 	boolean deactivate( final int entryId, final User cancellingUser, final Date cancellingTime );
 }
