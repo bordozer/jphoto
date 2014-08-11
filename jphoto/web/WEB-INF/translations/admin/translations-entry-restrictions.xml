@@ -58,6 +58,21 @@
 	</translation>
 
 	<translation>
+		<nerd>Access right is restricted exception page</nerd>
+		<ru><![CDATA[Вы лишены права доступа к этой функциональности]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>You are logged out because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.</nerd>
+		<ru><![CDATA[Вы видите эту страницу, т.к. $2 $3 ограничил вас в возможности пользоваться вашей учетной записью. Ограничение действует с $4 по $5.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

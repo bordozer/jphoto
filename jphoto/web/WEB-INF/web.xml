@@ -46,6 +46,11 @@
 	</error-page>
 
 	<error-page>
+		<exception-type>core.exceptions.RestrictionException</exception-type>
+		<location>/error/restrictionException/</location>
+	</error-page>
+
+	<error-page>
 		<error-code>500</error-code>
 		<location>/error/general/</location>
 	</error-page>

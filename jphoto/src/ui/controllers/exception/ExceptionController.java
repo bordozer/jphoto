@@ -93,7 +93,12 @@ public class ExceptionController {
 
 	@RequestMapping( "/userRequestSecurityException/" )
 	public String userRequestSecurityExceptionHandler( final HttpServletRequest request ) {
-		return String.format( "redirect:%s", request.getHeader( "referer" ) ); //UrlUtilsServiceImpl.ACCESS_DENIED_VIEW;
+		return String.format( "redirect:%s", request.getHeader( "referer" ) );
+	}
+
+	@RequestMapping( "/restrictionException/" )
+	public String restrictionExceptionHandler( final HttpServletRequest request ) {
+		return UrlUtilsServiceImpl.RESTRICTION_VIEW;
 	}
 }
 
