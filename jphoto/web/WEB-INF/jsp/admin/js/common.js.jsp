@@ -24,7 +24,7 @@ define( [ 'jquery' ], function ( $ ) {
 	return {
 		adminLockUser: function ( userId, userName ) {
 
-			var url = "${eco:baseAdminUrl()}/members/" + userId + "/lock/";
+			var url = "${eco:baseAdminUrl()}/restriction/members/" + userId + "/";
 			$( '#lockUserIFrame' ).attr( 'src', url );
 
 			$( "#lockUserDivId" )

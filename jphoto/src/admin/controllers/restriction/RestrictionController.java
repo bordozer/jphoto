@@ -1,4 +1,4 @@
-package admin.controllers.user.restriction;
+package admin.controllers.restriction;
 
 import core.general.user.User;
 import core.services.user.UserService;
@@ -9,22 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping( "members/{userId}/lock" )
+@RequestMapping( "restriction/members/{userId}" )
 @Controller
-public class UserRestrictionController {
+public class RestrictionController {
 
 	@Autowired
 	private UserService userService;
 
-	private static final String MODEL_NAME = "userRestrictionModel";
+	private static final String MODEL_NAME = "restrictionModel";
 
-	private static final String VIEW = "admin/user/restriction/UserRestriction";
+	private static final String VIEW = "admin/restriction/UserRestriction";
 
 	@ModelAttribute( MODEL_NAME )
-	public UserRestrictionModel prepareModel( final @PathVariable( "userId" ) int userId ) {
+	public RestrictionModel prepareModel( final @PathVariable( "userId" ) int userId ) {
 		final User user = userService.load( userId );
 
-		final UserRestrictionModel model = new UserRestrictionModel( userId );
+		final RestrictionModel model = new RestrictionModel( userId );
 
 		model.setUserName( user.getNameEscaped() );
 
@@ -32,7 +32,7 @@ public class UserRestrictionController {
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
-	public String showUserRestrictions( final @ModelAttribute( MODEL_NAME ) UserRestrictionModel model ) {
+	public String showUserRestrictions( final @ModelAttribute( MODEL_NAME ) RestrictionModel model ) {
 		return VIEW;
 	}
 }

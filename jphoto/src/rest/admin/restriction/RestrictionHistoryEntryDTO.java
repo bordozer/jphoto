@@ -1,6 +1,6 @@
 package rest.admin.restriction;
 
-public class UserRestrictionHistoryEntryDTO {
+public class RestrictionHistoryEntryDTO {
 
 	private int id;
 

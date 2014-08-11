@@ -1,11 +1,11 @@
-package admin.controllers.user.restriction;
+package admin.controllers.restriction;
 
-public class UserRestrictionModel {
+public class RestrictionModel {
 
 	private int userId;
 	private String userName;
 
-	public UserRestrictionModel( final int userId ) {
+	public RestrictionModel( final int userId ) {
 
 		this.userId = userId;
 	}
