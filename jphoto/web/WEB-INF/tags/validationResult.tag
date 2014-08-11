@@ -6,5 +6,5 @@
 
 <div class="floatleft text-centered">
 	<h3>${title_t}</h3>
-	<b>${validationMessage}</b>
+	<span class="restriction-message">${validationMessage}</span>
 </div>

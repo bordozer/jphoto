@@ -644,3 +644,8 @@ table.formtable {
 	padding-bottom: 3px;
 	margin-bottom: 5px;
 }
+
+.restriction-message {
+	font-size: 12px;
+}
+

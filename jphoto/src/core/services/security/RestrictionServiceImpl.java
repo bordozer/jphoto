@@ -52,13 +52,17 @@ public class RestrictionServiceImpl implements RestrictionService {
 
 	@Override
 	public EntryRestriction getUserPhotoAppraisalRestrictionOn( final int userId, final Date time ) {
-		final List<EntryRestriction> restrictions = getRestrictionsOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time );
+		return getEntryRestriction( getRestrictionsOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time ) );
+	}
 
-		if ( restrictions == null || restrictions.size() == 0 ) {
-			return null;
-		}
+	@Override
+	public EntryRestriction getUserPhotoCommentingRestrictionOn( final int userId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( userId, RestrictionType.USER_COMMENTING, time ) );
+	}
 
-		return restrictions.get( 0 );
+	@Override
+	public EntryRestriction getUserRankVotingRestrictionOn( final int userId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( userId, RestrictionType.USER_VOTING_FOR_RANK_IN_GENRE, time ) );
 	}
 
 	@Override
@@ -133,7 +137,7 @@ public class RestrictionServiceImpl implements RestrictionService {
 	public TranslatableMessage getRestrictionMessage( final EntryRestriction restriction ) {
 		return new TranslatableMessage( "You are restricted in $1 because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.", services )
 				.translatableString( restriction.getRestrictionType().getName() )
-				.addUserCardLinkParameter( restriction.getCreator() )
+				.string( restriction.getCreator().getNameEscaped() )
 				.dateTimeFormatted( restriction.getCreatingTime() )
 				.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
 				.dateTimeFormatted( restriction.getRestrictionTimeTo() )
@@ -196,5 +200,13 @@ public class RestrictionServiceImpl implements RestrictionService {
 		restriction.setRestrictionTimeTo( timeTo );
 
 		restrictionDao.saveToDB( restriction );
+	}
+
+	private EntryRestriction getEntryRestriction( final List<EntryRestriction> restrictions ) {
+		if ( restrictions == null || restrictions.size() == 0 ) {
+			return null;
+		}
+
+		return restrictions.get( 0 );
 	}
 }

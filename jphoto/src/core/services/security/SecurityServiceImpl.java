@@ -326,6 +326,14 @@ public class SecurityServiceImpl implements SecurityService {
 			return allowanceValidationResult;
 		}
 
+		final EntryRestriction restrictionOn = restrictionService.getUserPhotoCommentingRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
+		if ( restrictionOn != null ) {
+			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
+			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
+
+			return result;
+		}
+
 		return allowanceValidationResult;
 	}
 
@@ -384,9 +392,9 @@ public class SecurityServiceImpl implements SecurityService {
 			return allowanceValidationResult;
 		}
 
-		final EntryRestriction userPhotoAppraisalRestriction = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
-		if ( userPhotoAppraisalRestriction != null ) {
-			allowanceValidationResult.failValidation( restrictionService.getRestrictionMessage( userPhotoAppraisalRestriction ).build( language ) );
+		final EntryRestriction restrictionOn = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
+		if ( restrictionOn != null ) {
+			allowanceValidationResult.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
 
 			return allowanceValidationResult;
 		}
@@ -466,6 +474,15 @@ public class SecurityServiceImpl implements SecurityService {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
 			result.setValidationMessage( translatorService.translate( "ValidationResult: You are in the black list of $1.", language, user.getNameEscaped() ) );
+			result.setUiVotingIsInaccessible( true );
+
+			return result;
+		}
+
+		final EntryRestriction restrictionOn = restrictionService.getUserRankVotingRestrictionOn( voter.getId(), dateUtilsService.getCurrentTime() );
+		if ( restrictionOn != null ) {
+			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
+			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;

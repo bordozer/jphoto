@@ -116,6 +116,7 @@ public class UserRankServiceImpl implements UserRankService {
 
 	@Override
 	public VotingModel getVotingModel( final int userId, final int genreId, final User votingUser ) {
+
 		final int voterId = votingUser.getId();
 
 		final int userCurrentRankInGenre = getUserRankInGenre( userId, genreId );

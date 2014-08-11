@@ -104,7 +104,7 @@
 
 	<translation>
 		<nerd>You are restricted in $1 because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.</nerd>
-		<ru><![CDATA[Вы лишены возможности '$1' потому, что $2 $3 ограничил вас в этом праве. Ограничение действует с $4 по $5.]]></ru>
+		<ru><![CDATA[Вы лишены возможности $1, $2 $3 ограничил вас в этом праве. Ограничение действует с $4 по $5.]]></ru>
 	</translation>
 
 	<translation>
