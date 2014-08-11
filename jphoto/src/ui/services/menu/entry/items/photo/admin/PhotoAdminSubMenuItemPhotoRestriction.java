@@ -6,6 +6,7 @@ import core.services.system.Services;
 import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
 import ui.services.menu.entry.items.EntryMenuOperationType;
 import ui.services.menu.entry.items.photo.AbstractPhotoMenuItem;
+import utils.StringUtilities;
 
 public class PhotoAdminSubMenuItemPhotoRestriction extends AbstractPhotoMenuItem {
 
@@ -28,7 +29,7 @@ public class PhotoAdminSubMenuItemPhotoRestriction extends AbstractPhotoMenuItem
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminRestrictPhoto( %d, '%s' );", menuEntry.getId(), menuEntry.getNameEscaped() );
+				return String.format( "adminRestrictPhoto( %d, '%s' );", menuEntry.getId(), StringUtilities.escapeJavaScript( menuEntry.getName() ) );
 			}
 		};
 	}

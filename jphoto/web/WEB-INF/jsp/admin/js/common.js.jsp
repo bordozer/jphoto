@@ -43,7 +43,7 @@ define( [ 'jquery' ], function ( $ ) {
 			$( '#restrictEntryIFrame' ).attr( 'src', url );
 
 			$( "#restrictEntryIFrameDivId" )
-					.dialog( 'option', 'title', "${eco:translate('Admin Photo Restriction: Restrict photo dialog title')}" + ' ' + photoName + ' ( #' + photoId + ' )' )
+					.dialog( 'option', 'title', "${eco:translate('Admin Photo Restriction: Restrict photo dialog title')}: " + " '" + photoName + "' ( #" + photoId + ' )' )
 					.dialog( 'option', 'buttons', {
 													Cancel:function () {
 														$( this ).dialog( "close" );
