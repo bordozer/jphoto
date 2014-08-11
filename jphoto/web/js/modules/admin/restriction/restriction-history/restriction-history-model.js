@@ -9,7 +9,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: RestrictionHistoryEntryModel,
 
 		initialize:function ( options ) {
-			this.url = options.baseUrl + "/rest/admin/restriction/members/" + options.userId + "/history/";
+			this.url = options.baseUrl + "/rest/admin/restriction/members/" + options.entryId + "/history/";
 			this.translations = options.translations;
 		}
 

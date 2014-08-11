@@ -1,6 +1,6 @@
 define( ["backbone", "jquery", "underscore"
 		, "text!modules/admin/restriction/restriction-history/templates/restriction-history-entry-template.html"
-		], function ( Backbone, $, _, userLockHistoryEntryTemplate ) {
+		], function ( Backbone, $, _, restrictionHistoryEntryTemplate ) {
 
 	'use strict';
 
@@ -35,7 +35,7 @@ define( ["backbone", "jquery", "underscore"
 
 	var RestrictionHistoryEntryView = Backbone.View.extend( {
 
-		historyEntryTemplate:_.template( userLockHistoryEntryTemplate ),
+		historyEntryTemplate:_.template( restrictionHistoryEntryTemplate ),
 
 		events: {
 			"click .cancel-restriction" : "onCancelClick"
