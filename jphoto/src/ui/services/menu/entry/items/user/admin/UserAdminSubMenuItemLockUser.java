@@ -28,7 +28,7 @@ public class UserAdminSubMenuItemLockUser extends AbstractUserMenuItem {
 
 			@Override
 			public String getMenuCommand() {
-				return String.format( "adminLockUser( %d, '%s' );", menuEntry.getId(), menuEntry.getNameEscaped() );
+				return String.format( "adminRestrictUser( %d, '%s' );", menuEntry.getId(), menuEntry.getNameEscaped() );
 			}
 		};
 	}

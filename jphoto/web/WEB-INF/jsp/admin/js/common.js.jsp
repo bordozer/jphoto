@@ -22,13 +22,28 @@ define( [ 'jquery' ], function ( $ ) {
 	}
 
 	return {
-		adminLockUser: function ( userId, userName ) {
+		adminRestrictUser: function ( userId, userName ) {
 
 			var url = "${eco:baseAdminUrl()}/restriction/members/" + userId + "/";
-			$( '#lockUserIFrame' ).attr( 'src', url );
+			$( '#restrictEntryIFrame' ).attr( 'src', url );
 
-			$( "#lockUserDivId" )
-					.dialog( 'option', 'title', "${eco:translate('Admin User Restriction: Restrict user')}" + ' ' + userName + ' ( #' + userId + ' )' )
+			$( "#restrictEntryIFrameDivId" )
+					.dialog( 'option', 'title', "${eco:translate('Admin User Restriction: Restrict user dialog title')}" + ' ' + userName + ' ( #' + userId + ' )' )
+					.dialog( 'option', 'buttons', {
+													Cancel:function () {
+														$( this ).dialog( "close" );
+													}
+												} )
+					.dialog( "open" );
+		},
+
+		adminRestrictPhoto: function ( photoId, photoName ) {
+
+			var url = "${eco:baseAdminUrl()}/restriction/photos/" + photoId + "/";
+			$( '#restrictEntryIFrame' ).attr( 'src', url );
+
+			$( "#restrictEntryIFrameDivId" )
+					.dialog( 'option', 'title', "${eco:translate('Admin Photo Restriction: Restrict photo dialog title')}" + ' ' + photoName + ' ( #' + photoId + ' )' )
 					.dialog( 'option', 'buttons', {
 													Cancel:function () {
 														$( this ).dialog( "close" );

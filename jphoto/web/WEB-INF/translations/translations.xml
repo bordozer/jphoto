@@ -222,11 +222,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Admin User Restriction: Restrict user</nerd>
-		<ru><![CDATA[Лишение прав пользователя]]></ru>
-	</translation>
-
-	<translation>
 		<nerd>Enter $1.</nerd>
 		<ru><![CDATA[Введите $1.]]></ru>
 	</translation>

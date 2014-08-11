@@ -3,6 +3,16 @@
 <translations>
 
 	<translation>
+		<nerd>Admin User Restriction: Restrict user dialog title</nerd>
+		<ru><![CDATA[Лишение прав пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Admin Photo Restriction: Restrict photo dialog title</nerd>
+		<ru><![CDATA[Ограничение работы]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Restriction: Range form title: New restriction of $1</nerd>
 		<ru><![CDATA[Лишение прав $1]]></ru>
 	</translation>

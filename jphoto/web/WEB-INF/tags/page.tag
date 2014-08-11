@@ -98,15 +98,15 @@
 
 	<c:if test="${isSuperAdmin}">
 
-		<div id="lockUserDivId" title="..." style="display: none;">
-			<iframe id="lockUserIFrame" src="" width="98%" height="98%" style="border: none;"></iframe>
+		<div id="restrictEntryIFrameDivId" title="..." style="display: none;">
+			<iframe id="restrictEntryIFrame" src="" width="98%" height="98%" style="border: none;"></iframe>
 		</div>
 
 		<script type="text/javascript">
 
 			require( ['jquery', 'jquery_ui'], function( $ ) {
 				$( function () {
-					$( "#lockUserDivId" ).dialog( {
+					$( "#restrictEntryIFrameDivId" ).dialog( {
 						height:500
 						, width:800
 						, modal:true
@@ -115,9 +115,9 @@
 				} );
 			});
 
-			function adminLockUser( userId, userName ) {
+			function adminRestrictUser( userId, userName ) {
 				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
-					adminFunctions.adminLockUser( userId, userName );
+					adminFunctions.adminRestrictUser( userId, userName );
 				} );
 			}
 
