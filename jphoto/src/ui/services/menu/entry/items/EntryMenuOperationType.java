@@ -30,6 +30,7 @@ public enum EntryMenuOperationType {
 	, ADMIN_SUB_MENU( 71, "menu_sub_menu.png" )
 
 	, ADMIN_SUB_MENU_LOCK_USER( 81, "lock_user.png" )
+	, ADMIN_SUB_MENU_LOCK_PHOTO( 80, "lock_user.png" )
 	, ADMIN_MENU_ITEM_EDIT( 82, "menu_edit.png" )
 	, ADMIN_MENU_ITEM_DELETE( 83, "menu_delete.png" )
 	, ADMIN_MENU_ITEM_NUDE_CONTENT_SET( 84, "menu_photo_nude_content_is_not_set.png" )

@@ -133,6 +133,9 @@ public class MenuCreationFactory {
 				case ADMIN_SUB_MENU_LOCK_USER:
 					menuItems.add( new PhotoAdminSubMenuItemLockPhotoAuthor( photo, accessor, services ) );
 					break;
+				case ADMIN_SUB_MENU_LOCK_PHOTO:
+					menuItems.add( new PhotoAdminSubMenuItemPhotoRestriction( photo, accessor, services ) );
+					break;
 				case ADMIN_MENU_ITEM_NUDE_CONTENT_SET:
 					menuItems.add( new PhotoMenuItemAdminNudeContentSet( photo, accessor, services ) );
 					break;

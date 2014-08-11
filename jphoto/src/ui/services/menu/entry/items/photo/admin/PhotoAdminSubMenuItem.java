@@ -24,6 +24,7 @@ public class PhotoAdminSubMenuItem extends AbstractPhotoMenuItem implements Subm
 		, new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_GENERATE_PREVIEW )
 		, new EntryMenuData( EntryMenuOperationType.SEPARATOR )
 		, new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER )
+		, new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_PHOTO )
 	);
 
 	public PhotoAdminSubMenuItem( final Photo photo, final User accessor, final Services services ) {

@@ -121,6 +121,12 @@
 				} );
 			}
 
+			function adminRestrictPhoto( photoId, photoName ) {
+				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
+					adminFunctions.adminRestrictPhoto( photoId, photoName );
+				} );
+			}
+
 			function adminPhotoNudeContentSet( photoId, callback ) {
 				require( [ 'jquery', '/admin/js/common.js' ], function ( $, adminFunctions ) {
 					adminFunctions.adminPhotoNudeContentSet( photoId, callback );
