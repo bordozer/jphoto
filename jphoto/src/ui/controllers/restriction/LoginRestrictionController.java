@@ -54,9 +54,10 @@ public class LoginRestrictionController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showAvatar( final @ModelAttribute( MODEL_NAME ) LoginRestrictionModel model ) {
 
-		if ( ! UserUtils.isCurrentUserLoggedUser() ) {
+		// TODO: do not show this to any user
+		/*if ( ! UserUtils.isCurrentUserLoggedUser() ) {
 			return String.format( "redirect:/photos/" );
-		}
+		}*/
 
 		final EntryRestriction restriction = restrictionService.load( model.getRestrictionEntryId() );
 

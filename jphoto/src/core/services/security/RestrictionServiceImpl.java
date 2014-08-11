@@ -46,50 +46,6 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public List<EntryRestriction> getRestrictionsOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
-
-		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
-
-		if ( restrictions == null || restrictions.size() == 0 ) {
-			return newArrayList();
-		}
-
-		final Date currentTime = dateUtilsService.getCurrentTime();
-
-		final List<EntryRestriction> activeRestrictions = newArrayList( restrictions );
-		CollectionUtils.filter( activeRestrictions, new Predicate<EntryRestriction>() {
-			@Override
-			public boolean evaluate( final EntryRestriction restriction ) {
-
-				if ( restriction.isCancelled() ) {
-					// cancelled
-					return false;
-				}
-
-				if ( restriction.getRestrictionTimeFrom().getTime() > currentTime.getTime() ) {
-					// time from has not came yet
-					return false;
-				}
-
-				if ( restriction.getRestrictionTimeTo().getTime() < currentTime.getTime() ) {
-					// expired
-					return false;
-				}
-
-				return true;
-			}
-		} );
-
-		return activeRestrictions;
-	}
-
-	@Override
-	public boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
-		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( entryId, restrictionType, time );
-		return activeRestrictions != null && activeRestrictions.size() > 0;
-	}
-
-	@Override
 	public boolean isUserLoginRestricted( final int userId, final Date time ) {
 		return isRestrictedOn( userId, RestrictionType.USER_LOGIN, time );
 	}
@@ -150,6 +106,48 @@ public class RestrictionServiceImpl implements RestrictionService {
 	@Override
 	public boolean exists( final EntryRestriction entry ) {
 		return restrictionDao.exists( entry );
+	}
+
+	private  List<EntryRestriction> getRestrictionsOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
+
+		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
+
+		if ( restrictions == null || restrictions.size() == 0 ) {
+			return newArrayList();
+		}
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
+
+		final List<EntryRestriction> activeRestrictions = newArrayList( restrictions );
+		CollectionUtils.filter( activeRestrictions, new Predicate<EntryRestriction>() {
+			@Override
+			public boolean evaluate( final EntryRestriction restriction ) {
+
+				if ( restriction.isCancelled() ) {
+					// cancelled
+					return false;
+				}
+
+				if ( restriction.getRestrictionTimeFrom().getTime() > currentTime.getTime() ) {
+					// time from has not came yet
+					return false;
+				}
+
+				if ( restriction.getRestrictionTimeTo().getTime() < currentTime.getTime() ) {
+					// expired
+					return false;
+				}
+
+				return true;
+			}
+		} );
+
+		return activeRestrictions;
+	}
+
+	private boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
+		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( entryId, restrictionType, time );
+		return activeRestrictions != null && activeRestrictions.size() > 0;
 	}
 
 	private List<EntryRestriction> loadRestrictions( final int userId, final List<RestrictionType> restrictionTypes ) {
