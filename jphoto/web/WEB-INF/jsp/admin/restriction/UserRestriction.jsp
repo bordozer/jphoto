@@ -46,15 +46,32 @@
 
 	<style type="text/css">
 
-		.user-lock-area-header {
+		.restriction-area-header {
 			float:left;
 			width: 100%;
 			text-align: center;
 		}
 
-		.user-lock-area-tab {
+		.restriction-area-tab {
 			border-top-left-radius: 5px;
 			border-top-right-radius: 5px;
+		}
+
+		.restriction-history-entry-container {
+			float: left;
+			width: 97%;
+			text-align: left;
+			margin-bottom: 5px;
+			margin-top: 5px;
+			padding: 5px;
+		}
+
+		.restriction-history-entry-header {
+			border-right: none;
+			border-left: none;
+			border-top: none;
+			padding-bottom: 2px;
+			margin-bottom: 5px;
 		}
 
 	</style>
@@ -63,21 +80,21 @@
 
 <body>
 
-	<div class="user-lock-area-header">
+	<div class="restriction-area-header">
 
 		<div style="float: left; width: 300px; margin-right: 15px;">
-			<div class="user-lock-area-header block-shadow block-background user-lock-area-tab" style="height: 20px;">
+			<div class="restriction-area-header block-shadow block-background restriction-area-tab" style="height: 20px;">
 				${eco:translate1('User restriction: Range form title: New restriction of $1', restrictionModel.userName)}
 			</div>
 
-			<div id="user-lock-form" >
+			<div id="new-restriction-form" >
 				<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 			</div>
 
 		</div>
 
 		<div style="float: right; width: 400px;">
-			<div class="user-lock-area-header block-shadow block-background user-lock-area-tab" style="height: 20px;">
+			<div class="restriction-area-header block-shadow block-background restriction-area-tab" style="height: 20px;">
 				${eco:translate('User restriction: Restriction history title')}
 			</div>
 			<div id="user-restriction-history" >
@@ -107,7 +124,7 @@
 
 			var restrictionTypes = ${restrictionTypesJSON};
 
-			func( ${userId}, restrictionTypes, translations, $( '#user-lock-form' ), jsonRPC.ajaxService );
+			func( ${userId}, restrictionTypes, translations, $( '#new-restriction-form' ), jsonRPC.ajaxService );
 		} );
 
 		require( ['modules/admin/user/restriction-history/restriction-history'], function ( userLockHistory ) {
