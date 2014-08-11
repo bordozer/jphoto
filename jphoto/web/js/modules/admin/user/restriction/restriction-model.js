@@ -17,6 +17,7 @@ define( ["backbone"], function ( Backbone ) {
 			} else {
 				this.ajaxService.restrictUserRange( this.userId, data.dateFrom, data.dateTo, data.restrictionTypeIds );
 			}
+			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading
 		}
 	});
 
