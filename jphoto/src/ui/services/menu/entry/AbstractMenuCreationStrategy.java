@@ -4,7 +4,6 @@ import core.general.user.User;
 import core.services.system.Services;
 import ui.services.menu.entry.items.AbstractEntryMenuItem;
 import ui.services.menu.entry.items.EntryMenuData;
-import ui.services.menu.entry.items.EntryMenuOperationType;
 import ui.services.menu.entry.items.PopupMenuAssignable;
 
 import java.util.List;

@@ -8,7 +8,6 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import ui.elements.PageModel;
 import ui.elements.PageTitleData;
 
 public interface BreadcrumbsUserService {

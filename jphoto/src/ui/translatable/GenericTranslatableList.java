@@ -19,7 +19,6 @@ import ui.controllers.photos.list.PhotoFilterSortColumn;
 import ui.controllers.photos.list.PhotoFilterSortOrder;
 
 import java.util.Arrays;
-import java.util.EnumSet;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

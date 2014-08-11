@@ -1,11 +1,8 @@
 package ui.context;
 
-import core.enums.RestrictionType;
-import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.services.security.RestrictionService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.UrlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ui.services.security.UsersSecurityService;

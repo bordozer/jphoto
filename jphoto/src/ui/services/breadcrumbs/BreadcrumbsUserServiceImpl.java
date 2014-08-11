@@ -15,7 +15,6 @@ import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
-import ui.elements.PageModel;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;

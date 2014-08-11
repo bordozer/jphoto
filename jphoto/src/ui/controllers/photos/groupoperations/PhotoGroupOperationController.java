@@ -1,7 +1,6 @@
 package ui.controllers.photos.groupoperations;
 
 import core.general.photo.group.PhotoGroupOperationType;
-import core.services.security.SecurityService;
 import core.services.system.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

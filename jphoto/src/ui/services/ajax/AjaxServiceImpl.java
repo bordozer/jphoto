@@ -1,8 +1,8 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.PhotosImportSource;
-import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSitePageContentDataExtractor;
+import admin.controllers.jobs.edit.photosImport.strategies.web.AbstractRemotePhotoSiteUrlHelper;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteImportStrategy;
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
 import core.enums.FavoriteEntryType;
@@ -36,7 +36,10 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import rest.users.picker.UserDTO;
 import ui.context.EnvironmentContext;
-import ui.dtos.*;
+import ui.dtos.AjaxResultDTO;
+import ui.dtos.CommentDTO;
+import ui.dtos.ComplaintMessageDTO;
+import ui.dtos.PrivateMessageSendingDTO;
 import ui.services.menu.entry.items.EntryMenuType;
 import ui.services.menu.entry.items.comment.ComplaintReasonType;
 import utils.StringUtilities;
