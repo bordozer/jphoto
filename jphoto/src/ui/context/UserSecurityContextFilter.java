@@ -30,7 +30,7 @@ public class UserSecurityContextFilter extends OncePerRequestFilter implements F
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		restrictionService.assertUserLoginIsNotRestricted( currentUser.getId(), dateUtilsService.getCurrentTime() );
+		restrictionService.assertUserLoginIsNotRestricted( currentUser, dateUtilsService.getCurrentTime() );
 
 		usersSecurityService.assertLoggedUserRequestSecurityPassed( currentUser, request );
 

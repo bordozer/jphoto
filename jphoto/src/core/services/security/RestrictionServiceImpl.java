@@ -95,14 +95,14 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public void assertUserLoginIsNotRestricted( final int userId, final Date time ) {
-		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( userId, RestrictionType.USER_LOGIN, time );
+	public void assertUserLoginIsNotRestricted( final User user, final Date time ) {
+		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( user.getId(), RestrictionType.USER_LOGIN, time );
 		if ( activeRestrictions != null && activeRestrictions.size() > 0 ) {
 			final EntryRestriction restriction = activeRestrictions.get( 0 );
 
 			usersSecurityService.resetEnvironmentAndLogOutUser( EnvironmentContext.getCurrentUser() );
 
-			throw new RestrictionException( restriction.getId(), String.format( "User ID #%d - login is restricted", userId ) );
+			throw new RestrictionException( restriction.getId(), String.format( "User #%s - login is restricted", user ) );
 		}
 	}
 

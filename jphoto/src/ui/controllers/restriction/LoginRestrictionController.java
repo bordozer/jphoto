@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
+import utils.UserUtils;
 
 @Controller
 @RequestMapping( "/restriction/{restrictionEntryId}/" )
@@ -52,6 +53,10 @@ public class LoginRestrictionController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showAvatar( final @ModelAttribute( MODEL_NAME ) LoginRestrictionModel model ) {
+
+		if ( ! UserUtils.isCurrentUserLoggedUser() ) {
+			return String.format( "redirect:/photos/" );
+		}
 
 		final EntryRestriction restriction = restrictionService.load( model.getRestrictionEntryId() );
 
