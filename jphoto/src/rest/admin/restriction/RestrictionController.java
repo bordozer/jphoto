@@ -27,10 +27,10 @@ public class RestrictionController {
 	public static final int DAYS_IN_MONTH = 30;
 
 	@Autowired
-	protected RestrictionService restrictionService;
+	private RestrictionService restrictionService;
 
 	@Autowired
-	protected DateUtilsService dateUtilsService;
+	private DateUtilsService dateUtilsService;
 
 	@Autowired
 	private TranslatorService translatorService;
@@ -66,7 +66,7 @@ public class RestrictionController {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
-	protected RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
+	private RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 
 		dto.setId( restriction.getId() );
@@ -108,7 +108,7 @@ public class RestrictionController {
 		return dto;
 	}
 
-	protected String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
+	private String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
 
 		final Date timeBetween = dateUtilsService.getTimeBetween( timeFrom, timeTo );
 
@@ -139,23 +139,23 @@ public class RestrictionController {
 		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
 	}
 
-	protected long offset() {
+	private long offset() {
 		return dateUtilsService.getTimeZoneOffset();
 	}
 
-	protected boolean lessThenOneDay( final Date timeBetween ) {
+	private boolean lessThenOneDay( final Date timeBetween ) {
 		return timeBetween.getTime() + offset() < 24 * 60 * 60 * 1000;
 	}
 
-	protected boolean lessThenOneMonth( final Date timeBetween ) {
+	private boolean lessThenOneMonth( final Date timeBetween ) {
 		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < DAYS_IN_MONTH;
 	}
 
-	protected boolean lessThenOneYear( final Date timeBetween ) {
+	private boolean lessThenOneYear( final Date timeBetween ) {
 		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
 	}
 
-	protected void initCssClassAndStatus( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
+	private void initCssClassAndStatus( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
 
 		if ( ! restriction.isActive() ) {
 			dto.setStatus( translatorService.translate( "Restriction history entry status: cancelled", getLanguage() ) );
@@ -179,15 +179,15 @@ public class RestrictionController {
 		dto.setStatus( translatorService.translate( "", getLanguage() ) );
 	}
 
-	protected boolean isFinished( final EntryRestriction restriction ) {
+	private boolean isFinished( final EntryRestriction restriction ) {
 		return dateUtilsService.getCurrentTime().getTime() > restriction.getRestrictionTimeTo().getTime();
 	}
 
-	protected Language getLanguage() {
+	private Language getLanguage() {
 		return EnvironmentContext.getLanguage();
 	}
 
-	protected List<RestrictionHistoryEntryDTO> getRestrictionHistoryEntryDTOs( final List<EntryRestriction> restrictions ) {
+	private List<RestrictionHistoryEntryDTO> getRestrictionHistoryEntryDTOs( final List<EntryRestriction> restrictions ) {
 
 		Collections.sort( restrictions, new Comparator<EntryRestriction>() {
 			@Override
