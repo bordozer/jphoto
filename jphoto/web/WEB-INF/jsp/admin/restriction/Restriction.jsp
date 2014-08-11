@@ -12,6 +12,7 @@
 <%
 	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
 %>
+<c:set var="restrictionEntryTypeId" value="${restrictionModel.restrictionEntryType.id}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -107,7 +108,7 @@
 
 			var restrictionTypes = ${restrictionModel.restrictionTypes};
 
-			func( ${entryId}, restrictionTypes, translations, $( '#new-restriction-form' ), jsonRPC.ajaxService );
+			func( ${entryId}, ${restrictionEntryTypeId}, restrictionTypes, translations, $( '#new-restriction-form' ), jsonRPC.ajaxService );
 		} );
 
 		require( ['modules/admin/restriction/restriction-history/restriction-history'], function ( func ) {

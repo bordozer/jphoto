@@ -35,9 +35,7 @@ public interface AjaxService {
 
 	void setPhotoNudeContent( final int photoId, final boolean isNudeContent );
 
-	void restrictUserPeriod( final int userId, final int period, final int unitId, final String[] restrictionTypeIds );
+	void restrictEntryForPeriod( final int entryId, final int period, final int unitId, final String[] restrictionTypeIds );
 
-	void restrictUserRange( final int userId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
-
-	void restrictPhoto( final int photoId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
+	void restrictEntryForRange( final int entryId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
 }

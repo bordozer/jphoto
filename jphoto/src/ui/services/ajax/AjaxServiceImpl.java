@@ -414,7 +414,7 @@ public class AjaxServiceImpl implements AjaxService {
 	}
 
 	@Override
-	public void restrictUserPeriod( final int userId, final int period, final int unitId, String[] restrictionTypeIds ) {
+	public void restrictEntryForPeriod( final int entryId, final int period, final int unitId, String[] restrictionTypeIds ) {
 
 		final RestrictionTimeUnit periodUnit = RestrictionTimeUnit.getById( unitId );
 
@@ -440,14 +440,14 @@ public class AjaxServiceImpl implements AjaxService {
 
 		for ( final String restrictionTypeId : restrictionTypeIds ) {
 			final RestrictionType restrictionType = RestrictionType.getById( Integer.parseInt( restrictionTypeId ) );
-			restrictionService.restrictUser( userService.load( userId ), restrictionType, timeFrom, timeTo );
+			restrictionService.restrictUser( userService.load( entryId ), restrictionType, timeFrom, timeTo );
 
-			log.debug( String.format( "userId: %d, period: '%s', uit: '%s', type of restriction: '%s'", userId, period, periodUnit, restrictionType ) );
+			log.debug( String.format( "userId: %d, period: '%s', uit: '%s', type of restriction: '%s'", entryId, period, periodUnit, restrictionType ) );
 		}
 	}
 
 	@Override
-	public void restrictUserRange( final int userId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds ) {
+	public void restrictEntryForRange( final int entryId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds ) {
 
 		final long timeZoneOffset = dateUtilsService.getTimeZoneOffset();
 
@@ -461,16 +461,9 @@ public class AjaxServiceImpl implements AjaxService {
 
 		for ( final String restrictionTypeId : restrictionTypeIds ) {
 			final RestrictionType restrictionType = RestrictionType.getById( Integer.parseInt( restrictionTypeId ) );
-			restrictionService.restrictUser( userService.load( userId ), restrictionType, from, to );
+			restrictionService.restrictUser( userService.load( entryId ), restrictionType, from, to );
 
-			log.debug( String.format( "userId: %d, time from: '%s', time to: '%s', type of restriction: '%s'", userId, _timeFrom, _timeTo, restrictionType ) );
+			log.debug( String.format( "userId: %d, time from: '%s', time to: '%s', type of restriction: '%s'", entryId, _timeFrom, _timeTo, restrictionType ) );
 		}
-	}
-
-	@Override
-	public void restrictPhoto( final int photoId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds ) {
-//		final Date dateFrom = dateUtilsService.parseDate( timeFrom );
-//		restrictionService.lockPhotoToBePhotoOfTheDay( photoService.load( photoId ), timeFrom, timeTo );
-		log.debug( String.format( "photoId: %d, timeFrom: '%s', timeTo: '%s'", photoId, _timeFrom, _timeTo ) );
 	}
 }

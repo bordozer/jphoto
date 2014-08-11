@@ -2,12 +2,12 @@ define( ["modules/admin/restriction/restriction/restriction-model"
 		 	, "modules/admin/restriction/restriction/restriction-view"
 			, "jquery"], function ( Model, View, $ ) {
 
-	function init( userId, restrictionTypes, translations, container, ajaxService ) {
+	function init( entryId, restrictionEntryTypeId, restrictionTypes, translations, container, ajaxService ) {
 
-		var userRestrictionModel = new Model.UserRestrictionModel( { userId: userId, restrictionTypes: restrictionTypes, translations: translations, ajaxService: ajaxService } );
+		var userRestrictionModel = new Model.UserRestrictionModel( { entryId: entryId, restrictionEntryTypeId: restrictionEntryTypeId, restrictionTypes: restrictionTypes, translations: translations, ajaxService: ajaxService } );
 
-		var userRestrictionView = new View.UserRestrictionView( { model: userRestrictionModel, el: container } );
-		userRestrictionView.render();
+		var restrictionView = new View.RestrictionView( { model: userRestrictionModel, el: container } );
+		restrictionView.render();
 	}
 
 	return init;

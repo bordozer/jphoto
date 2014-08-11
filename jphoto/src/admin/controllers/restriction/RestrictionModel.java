@@ -8,6 +8,8 @@ public class RestrictionModel {
 	private String entryName;
 	private JSONArray restrictionTypes;
 
+	private RestrictionEntryType restrictionEntryType;
+
 	public void setEntryId( final int entryId ) {
 		this.entryId = entryId;
 	}
@@ -30,5 +32,13 @@ public class RestrictionModel {
 
 	public JSONArray getRestrictionTypes() {
 		return restrictionTypes;
+	}
+
+	public RestrictionEntryType getRestrictionEntryType() {
+		return restrictionEntryType;
+	}
+
+	public void setRestrictionEntryType( final RestrictionEntryType restrictionEntryType ) {
+		this.restrictionEntryType = restrictionEntryType;
 	}
 }

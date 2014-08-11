@@ -7,12 +7,12 @@ define( ["backbone", "jquery", "underscore"
 
 	'use strict';
 
-	var UserRestrictionView = Backbone.View.extend( {
+	var RestrictionView = Backbone.View.extend( {
 
 		template:_.template( template ),
 
 		events: {
-			"click .user-restrict-button" : "restrictUserButtonClick"
+			"click .do-restriction-button" : "restrictButtonClick"
 		},
 
 		initialize: function() {
@@ -31,7 +31,7 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.append( this.template( modelJSON ) );
 		},
 
-		restrictUserButtonClick: function ( evt ) {
+		restrictButtonClick: function ( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
@@ -49,9 +49,9 @@ define( ["backbone", "jquery", "underscore"
 				, restrictionTypeIds: matches
 			};
 
-			this.model.saveUserRestriction( data );
+			this.model.saveRestriction( data );
 		}
 	});
 
-	return { UserRestrictionView:UserRestrictionView };
+	return { RestrictionView:RestrictionView };
 } );
