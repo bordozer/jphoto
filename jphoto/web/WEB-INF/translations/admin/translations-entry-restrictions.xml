@@ -88,8 +88,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>LoginRestriction: Login is restricted</nerd>
+		<ru><![CDATA[Вы лишены права входа в систему]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: The reason of restriction</nerd>
+		<ru><![CDATA[Причина ограничения]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: unknown reason of restriction</nerd>
+		<ru><![CDATA[Неизвестна... Возможно, плохое настроение админа или ваше поведение...]]></ru>
 	</translation>
 
 	<translation>

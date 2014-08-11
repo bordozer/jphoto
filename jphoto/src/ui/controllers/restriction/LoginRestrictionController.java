@@ -5,6 +5,7 @@ import core.general.restriction.EntryRestriction;
 import core.services.security.RestrictionService;
 import core.services.system.Services;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,13 +33,7 @@ public class LoginRestrictionController {
 	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
-
-	@Autowired
-	private Services services;
+	private DateUtilsService dateUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	private LoginRestrictionModel prepareModel( final @PathVariable( "restrictionEntryId" ) String _restrictionEntryId ) {
@@ -61,6 +56,12 @@ public class LoginRestrictionController {
 
 		final EntryRestriction restriction = restrictionService.load( model.getRestrictionEntryId() );
 		model.setRestriction( restriction );
+
+		model.setRestrictionDateFrom( dateUtilsService.formatDate( restriction.getRestrictionTimeFrom() ) );
+		model.setRestrictionTimeFrom( dateUtilsService.formatTimeShort( restriction.getRestrictionTimeFrom() ) );
+
+		model.setRestrictionDateTo( dateUtilsService.formatDate( restriction.getRestrictionTimeTo() ) );
+		model.setRestrictionTimeTo( dateUtilsService.formatTimeShort( restriction.getRestrictionTimeTo() ) );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserLoginRestrictionBreadCrumbs( EnvironmentContext.getCurrentUser() ) );
 

@@ -12,15 +12,29 @@
 
 <tags:page pageModel="${loginRestrictionModel.pageModel}">
 
-	<div style="width: 700px;">
+	<div style="float: left; width: 150px;">
+		<html:img128 src="icons128/notlogged.png" />
+	</div>
+
+	<div style="width: 800px;">
+		<h3>${eco:translate("LoginRestriction: Login is restricted")}</h3>
 		${eco:translate("LoginRestriction: You are logged out because you are restricted in this right.")}
+
 		<p>
 		${eco:translate("LoginRestriction: Login restriction creator")}
 		<user:userCard user="${restriction.creator}" />
+
 		<p>
 		${eco:translate("LoginRestriction: The restriction period is")}
-		${eco:translate("LoginRestriction: Login restriction from")} ${eco:formatDateTimeShort(restriction.restrictionTimeFrom)}
-		${eco:translate("LoginRestriction: Login restriction to")} ${eco:formatDateTimeShort(restriction.restrictionTimeTo)}
+		${eco:translate("LoginRestriction: Login restriction from")} <b>${loginRestrictionModel.restrictionDateFrom}</b><sup>${loginRestrictionModel.restrictionTimeFrom}</sup>
+		${eco:translate("LoginRestriction: Login restriction to")} <b>${loginRestrictionModel.restrictionDateTo}</b><sup>${loginRestrictionModel.restrictionTimeTo}</sup>
+
+		<p>
+		${eco:translate("LoginRestriction: The reason of restriction")}:
+		<p>
+
+		${not empty restriction.restrictionMessage ? restriction.restrictionMessage : eco:translate("LoginRestriction: unknown reason of restriction")}
+
 	</div>
 
 </tags:page>
