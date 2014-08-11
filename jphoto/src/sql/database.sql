@@ -489,8 +489,9 @@ CREATE TABLE `restriction` (
   `cancelledUserId` int(11) DEFAULT NULL,
   `cancellingTime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `id` (`id`),
+  KEY `entryId` (`entryId`,`restrictionTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `schedulerTasks` table :

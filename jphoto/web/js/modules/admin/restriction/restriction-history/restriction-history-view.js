@@ -1,5 +1,5 @@
 define( ["backbone", "jquery", "underscore"
-		, "text!modules/admin/user/restriction-history/templates/restriction-history-entry-template.html"
+		, "text!modules/admin/restriction/restriction-history/templates/restriction-history-entry-template.html"
 		], function ( Backbone, $, _, userLockHistoryEntryTemplate ) {
 
 	'use strict';

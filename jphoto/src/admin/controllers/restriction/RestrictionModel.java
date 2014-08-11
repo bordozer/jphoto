@@ -1,24 +1,34 @@
 package admin.controllers.restriction;
 
+import org.json.JSONArray;
+
 public class RestrictionModel {
 
-	private int userId;
-	private String userName;
+	private int entryId;
+	private String entryName;
+	private JSONArray restrictionTypes;
 
-	public RestrictionModel( final int userId ) {
-
-		this.userId = userId;
+	public void setEntryId( final int entryId ) {
+		this.entryId = entryId;
 	}
 
-	public int getUserId() {
-		return userId;
+	public int getEntryId() {
+		return entryId;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getEntryName() {
+		return entryName;
 	}
 
-	public void setUserName( final String userName ) {
-		this.userName = userName;
+	public void setEntryName( final String entryName ) {
+		this.entryName = entryName;
+	}
+
+	public void setRestrictionTypes( final JSONArray restrictionTypes ) {
+		this.restrictionTypes = restrictionTypes;
+	}
+
+	public JSONArray getRestrictionTypes() {
+		return restrictionTypes;
 	}
 }

@@ -1,5 +1,5 @@
-define( ["modules/admin/user/restriction/restriction-model"
-		 	, "modules/admin/user/restriction/restriction-view"
+define( ["modules/admin/restriction/restriction/restriction-model"
+		 	, "modules/admin/restriction/restriction/restriction-view"
 			, "jquery"], function ( Model, View, $ ) {
 
 	function init( userId, restrictionTypes, translations, container, ajaxService ) {

@@ -1,5 +1,5 @@
-define( ["modules/admin/user/restriction-history/restriction-history-model"
-		, "modules/admin/user/restriction-history/restriction-history-view"
+define( ["modules/admin/restriction/restriction-history/restriction-history-model"
+		, "modules/admin/restriction/restriction-history/restriction-history-view"
 		, "jquery"], function ( Model, UserLockHistoryView, $ ) {
 
 	function init( userId, translations, baseUrl, container ) {
