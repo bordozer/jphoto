@@ -33,18 +33,38 @@
 	</translation>
 
 	<translation>
-		<nerd>Time period component: cancelled by</nerd>
+		<nerd>Restriction history: cancelled by</nerd>
 		<ru><![CDATA[Отменено]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Time period component: cancelled at time</nerd>
+		<nerd>Restriction history: cancelled at time</nerd>
 		<ru><![CDATA[время]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Time period component: was restricted title</nerd>
+		<nerd>Restriction history: was restricted title</nerd>
 		<ru><![CDATA[Ограничение действовало втечение]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: cancel confirmation</nerd>
+		<ru><![CDATA[ОТМЕНИТЬ данное лишение прав?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: was delete confirmation</nerd>
+		<ru><![CDATA[УДАЛИТЬ запись о лишении прав?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

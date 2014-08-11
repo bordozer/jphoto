@@ -39,6 +39,7 @@ define( ["backbone", "jquery", "underscore"
 
 		events: {
 			"click .cancel-restriction" : "onCancelClick"
+			, "click .delete-restriction" : "onDeleteClick"
 		},
 
 		initialize: function( options ) {
@@ -48,6 +49,7 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		render: function () {
+			console.log( 'render' );
 			var modelJSON = this.model.toJSON();
 			modelJSON.translations = this.translations;
 
@@ -60,7 +62,23 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
+			if ( ! confirm( this.translations.cancelConfirmation ) ) {
+				return;
+			}
+
 			this.model.save();
+		},
+
+		onDeleteClick: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			if ( ! confirm( this.translations.deleteConfirmation ) ) {
+				return;
+			}
+
+			this.model.destroy();
+			this.remove();
 		}
 	});
 

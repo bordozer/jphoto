@@ -118,9 +118,13 @@
 				, restrictedAtTime: "${eco:translate('Restriction history: restricted at time')}"
 				, cancel: "${eco:translate('Restriction history: cancel restriction')}"
 				, cancelTitle: "${eco:translate('Restriction history: cancel title')}"
-				, cancelledBy: "${eco:translate('Time period component: cancelled by')}"
-				, cancelledAtTime: "${eco:translate('Time period component: cancelled at time')}"
-				, wasRestrictedTitle: "${eco:translate('Time period component: was restricted title')}"
+				, deleteRestriction: "${eco:translate('Restriction history: delete restriction')}"
+				, deleteTitle: "${eco:translate('Restriction history: delete title')}"
+				, cancelledBy: "${eco:translate('Restriction history: cancelled by')}"
+				, cancelledAtTime: "${eco:translate('Restriction history: cancelled at time')}"
+				, wasRestrictedTitle: "${eco:translate('Restriction history: was restricted title')}"
+				, cancelConfirmation: "${eco:translate('Restriction history: cancel confirmation')}"
+				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
 			userLockHistory( ${userId}, translations, "${baseUrl}", $( '#user-restriction-history' ) );
 		} );

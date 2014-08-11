@@ -49,7 +49,7 @@ public class UserRestrictionHistoryController extends AbstractRestrictionControl
 	@RequestMapping( method = RequestMethod.DELETE, value = "/{restrictionHistoryEntryId}" )
 	@ResponseBody
 	public boolean deleteUserTeamMember( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
-		return restrictionService.deactivate( restrictionHistoryEntryId, EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() );
+		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
 }

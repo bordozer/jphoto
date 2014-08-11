@@ -48,6 +48,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Restriction history: delete title</nerd>
+		<ru><![CDATA[Удалить запись о лишении прав]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: delete restriction</nerd>
+		<ru><![CDATA[удалить]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

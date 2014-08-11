@@ -117,7 +117,7 @@ public class RestrictionServiceImpl implements RestrictionService {
 
 	@Override
 	public boolean delete( final int restrictionHistoryEntryId ) {
-		throw new IllegalStateException( "Restriction history entry can not be deleted. Deactivation is allowed only!" );
+		return restrictionDao.delete( restrictionHistoryEntryId );
 	}
 
 	@Override
