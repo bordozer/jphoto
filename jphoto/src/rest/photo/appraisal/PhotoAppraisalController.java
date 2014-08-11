@@ -121,6 +121,7 @@ public class PhotoAppraisalController {
 		if ( validationResult.isValidationFailed() ) {
 			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( translatorService.translate( "Photo appraisal: You can not appraise the photo", getLanguage() ) );
 			photoAppraisalDTO.setUserCanNotAppraiseThePhotoReason( validationResult.getValidationMessage() );
+
 			return photoAppraisalDTO;
 		}
 

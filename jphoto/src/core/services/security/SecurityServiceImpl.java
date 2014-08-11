@@ -12,6 +12,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.photo.UserRankInGenreVotingValidationResult;
 import core.general.photo.ValidationResult;
+import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.general.user.UserStatus;
 import core.services.entry.AnonymousDaysService;
@@ -75,6 +76,9 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private AnonymousDaysService anonymousDaysService;
+
+	@Autowired
+	private RestrictionService restrictionService;
 
 	@Override
 	public boolean userCanEditPhoto( final User user, final Photo photo ) {
@@ -376,6 +380,13 @@ public class SecurityServiceImpl implements SecurityService {
 			allowanceValidationResult.failValidation(
 				translatorService.translate( "ValidationResult: You have negative rank ( $1 ) in category $2", language, String.valueOf( userRankInGenre )
 					, entityLinkUtilsService.getPhotosByGenreLink( genre, language ) ) );
+
+			return allowanceValidationResult;
+		}
+
+		final EntryRestriction userPhotoAppraisalRestriction = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
+		if ( userPhotoAppraisalRestriction != null ) {
+			allowanceValidationResult.failValidation( restrictionService.getRestrictionMessage( userPhotoAppraisalRestriction ).build( language ) );
 
 			return allowanceValidationResult;
 		}

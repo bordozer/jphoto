@@ -7,6 +7,8 @@ import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.interfaces.Restrictable;
 import core.services.dao.RestrictionDao;
+import core.services.system.Services;
+import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -30,6 +32,9 @@ public class RestrictionServiceImpl implements RestrictionService {
 	@Autowired
 	private UsersSecurityService usersSecurityService;
 
+	@Autowired
+	private Services services;
+
 	@Override
 	public void restrictEntry( final Restrictable entry, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo ) {
 
@@ -46,13 +51,24 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public EntryRestriction getUserPhotoAppraisalRestrictionOn( final int userId, final Date time ) {
+		final List<EntryRestriction> restrictions = getRestrictionsOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time );
+
+		if ( restrictions == null || restrictions.size() == 0 ) {
+			return null;
+		}
+
+		return restrictions.get( 0 );
+	}
+
+	@Override
 	public boolean isUserLoginRestricted( final int userId, final Date time ) {
 		return isRestrictedOn( userId, RestrictionType.USER_LOGIN, time );
 	}
 
 	@Override
-	public boolean isUserCommentingRestricted( final int userId, final Date time ) {
-		return isRestrictedOn( userId, RestrictionType.USER_COMMENTING, time );
+	public boolean isUserPhotoAppraisalRestrictedOn( final int userId, final Date time ) {
+		return isRestrictedOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time );
 	}
 
 	@Override
@@ -113,6 +129,17 @@ public class RestrictionServiceImpl implements RestrictionService {
 		return restrictionDao.exists( entry );
 	}
 
+	@Override
+	public TranslatableMessage getRestrictionMessage( final EntryRestriction restriction ) {
+		return new TranslatableMessage( "You are restricted in $1 because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.", services )
+				.translatableString( restriction.getRestrictionType().getName() )
+				.addUserCardLinkParameter( restriction.getCreator() )
+				.dateTimeFormatted( restriction.getCreatingTime() )
+				.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
+				.dateTimeFormatted( restriction.getRestrictionTimeTo() )
+				;
+	}
+
 	private  List<EntryRestriction> getRestrictionsOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
 
 		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
@@ -120,8 +147,6 @@ public class RestrictionServiceImpl implements RestrictionService {
 		if ( restrictions == null || restrictions.size() == 0 ) {
 			return newArrayList();
 		}
-
-		final Date currentTime = dateUtilsService.getCurrentTime();
 
 		final List<EntryRestriction> activeRestrictions = newArrayList( restrictions );
 		CollectionUtils.filter( activeRestrictions, new Predicate<EntryRestriction>() {
@@ -133,12 +158,12 @@ public class RestrictionServiceImpl implements RestrictionService {
 					return false;
 				}
 
-				if ( restriction.getRestrictionTimeFrom().getTime() > currentTime.getTime() ) {
+				if ( restriction.getRestrictionTimeFrom().getTime() > time.getTime() ) {
 					// time from has not came yet
 					return false;
 				}
 
-				if ( restriction.getRestrictionTimeTo().getTime() < currentTime.getTime() ) {
+				if ( restriction.getRestrictionTimeTo().getTime() < time.getTime() ) {
 					// expired
 					return false;
 				}
