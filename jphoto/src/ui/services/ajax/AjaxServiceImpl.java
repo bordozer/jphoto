@@ -14,6 +14,7 @@ import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.restriction.RestrictionTimeUnit;
 import core.general.user.User;
+import core.interfaces.Restrictable;
 import core.log.LogHelper;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.FavoritesService;
@@ -440,9 +441,12 @@ public class AjaxServiceImpl implements AjaxService {
 
 		for ( final String restrictionTypeId : restrictionTypeIds ) {
 			final RestrictionType restrictionType = RestrictionType.getById( Integer.parseInt( restrictionTypeId ) );
-			restrictionService.restrictUser( userService.load( entryId ), restrictionType, timeFrom, timeTo );
 
-			log.debug( String.format( "userId: %d, period: '%s', uit: '%s', type of restriction: '%s'", entryId, period, periodUnit, restrictionType ) );
+			final Restrictable entry = getRestrictableEntry( entryId, restrictionType );
+
+			restrictionService.restrictEntry( entry, restrictionType, timeFrom, timeTo );
+
+			log.debug( String.format( "Entry restriction: %s, period: '%s', uit: '%s', type of restriction: '%s'", entry, period, periodUnit, restrictionType ) );
 		}
 	}
 
@@ -461,9 +465,16 @@ public class AjaxServiceImpl implements AjaxService {
 
 		for ( final String restrictionTypeId : restrictionTypeIds ) {
 			final RestrictionType restrictionType = RestrictionType.getById( Integer.parseInt( restrictionTypeId ) );
-			restrictionService.restrictUser( userService.load( entryId ), restrictionType, from, to );
 
-			log.debug( String.format( "userId: %d, time from: '%s', time to: '%s', type of restriction: '%s'", entryId, _timeFrom, _timeTo, restrictionType ) );
+			final Restrictable entry = getRestrictableEntry( entryId, restrictionType );
+
+			restrictionService.restrictEntry( entry, restrictionType, from, to );
+
+			log.debug( String.format( "Entry restriction: %s, time from: '%s', time to: '%s', type of restriction: '%s'", entry, _timeFrom, _timeTo, restrictionType ) );
 		}
+	}
+
+	private Restrictable getRestrictableEntry( final int entryId, final RestrictionType restrictionType ) {
+		return RestrictionType.FOR_USERS.contains( restrictionType ) ? userService.load( entryId ) : photoService.load( entryId );
 	}
 }

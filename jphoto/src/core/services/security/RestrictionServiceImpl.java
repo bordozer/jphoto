@@ -4,6 +4,7 @@ import core.enums.RestrictionType;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
+import core.interfaces.Restrictable;
 import core.services.dao.RestrictionDao;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class RestrictionServiceImpl implements RestrictionService {
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public void restrictUser( final User user, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo ) {
+	public void restrictEntry( final Restrictable entry, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo ) {
 
-		final EntryRestriction<User> restriction = new EntryRestriction<>( user, restrictionType );
+		final EntryRestriction<Restrictable> restriction = new EntryRestriction<>( entry, restrictionType );
 
 		restriction.setRestrictionTimeFrom( timeFrom );
 		restriction.setRestrictionTimeTo( timeTo );
@@ -35,46 +36,6 @@ public class RestrictionServiceImpl implements RestrictionService {
 		restriction.setCreator( EnvironmentContext.getCurrentUser() );
 
 		restrictionDao.saveToDB( restriction );
-	}
-
-	@Override
-	public void restrictUser( final User user, final Date timeFrom, final Date timeTo ) {
-		restrictUser( user, RestrictionType.USER_LOGIN, timeFrom, timeTo );
-	}
-
-	@Override
-	public void restrictUserPhotoUploading( final User user, final Date timeFrom, final Date timeTo ) {
-		restrictUser( user, RestrictionType.USER_PHOTO_UPLOADING, timeFrom, timeTo );
-	}
-
-	@Override
-	public void restrictUserCommenting( final User user, final Date timeFrom, final Date timeTo ) {
-		restrictUser( user, RestrictionType.USER_COMMENTING, timeFrom, timeTo );
-	}
-
-	@Override
-	public void restrictUserPhotoAppraisal( final User user, final Date timeFrom, final Date timeTo ) {
-		restrictUser( user, RestrictionType.USER_PHOTO_APPRAISAL, timeFrom, timeTo );
-	}
-
-	@Override
-	public void restrictUserVotingForRanksInGenres( final User user, final Date timeFrom, final Date timeTo ) {
-		restrictUser( user, RestrictionType.USER_VOTING_FOR_RANK_IN_GENRE, timeFrom, timeTo );
-	}
-
-	@Override
-	public void restrictPhotoToBePhotoOfTheDay( final Photo photo, final Date timeFrom, final Date timeTo ) {
-		savePhotoRestriction( photo, timeFrom, timeTo, RestrictionType.PHOTO_TO_BE_PHOTO_OF_THE_DAY );
-	}
-
-	@Override
-	public void restrictPhotoToBeInTheBestPhotosOfGenre( final Photo photo, final Date timeFrom, final Date timeTo ) {
-		savePhotoRestriction( photo, timeFrom, timeTo, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE );
-	}
-
-	@Override
-	public void restrictPhotoCommenting( final Photo photo, final Date timeFrom, final Date timeTo ) {
-		savePhotoRestriction( photo, timeFrom, timeTo, RestrictionType.PHOTO_COMMENTING );
 	}
 
 	@Override
