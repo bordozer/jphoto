@@ -15,6 +15,7 @@ import core.services.translator.nerds.LinkNerdText;
 import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
+import ui.elements.PageModel;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 import ui.services.breadcrumbs.items.TranslatableStringBreadcrumb;
@@ -263,6 +264,11 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 	@Override
 	public PageTitleData getUserWrittenUnreadCommentsBreadcrumb( final User user ) {
 		return getUserBreadcrumbs( user, LinkNerdText.USER_STATISTICS_COMMENTS_RECEIVED_UNREAD.getText() );
+	}
+
+	@Override
+	public PageTitleData getUserLoginRestrictionBreadCrumbs( final User user ) {
+		return getUserBreadcrumbs( user, translatorService.translate( "Login is restricted", EnvironmentContext.getLanguage() ) );
 	}
 
 	@Override

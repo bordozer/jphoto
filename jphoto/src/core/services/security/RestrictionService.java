@@ -19,7 +19,9 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	boolean isUserLoginRestricted( final int userId, final Date time );
 
-	void assertUserLoginIsNotRestricted( final int userId, final Date time );
+//	void assertUserLoginIsNotRestricted( final int userId, final Date time );
+
+	void assertUserLoginIsNotRestricted( int userId, Date time );
 
 	List<EntryRestriction> loadUserRestrictions( final int userId );
 

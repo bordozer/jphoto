@@ -2,15 +2,15 @@ package ui.controllers.exception;
 
 import core.exceptions.BaseRuntimeException;
 import core.exceptions.ExceptionModel;
+import core.exceptions.RestrictionException;
 import core.exceptions.notFound.NotFoundExceptionEntryType;
 import core.services.translator.TranslatorService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ui.context.EnvironmentContext;
-import ui.services.security.UsersSecurityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +25,7 @@ public class ExceptionController {
 	private TranslatorService translatorService;
 
 	@Autowired
-	private UsersSecurityService usersSecurityService;
+	private UrlUtilsService urlUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ExceptionModel prepareModel( final HttpServletRequest request ) {
@@ -35,8 +35,10 @@ public class ExceptionController {
 		final ExceptionModel model = new ExceptionModel();
 
 		if ( exception instanceof BaseRuntimeException ) {
-			final String exceptionMessage = ( ( BaseRuntimeException ) exception ).getMessage();
+			final BaseRuntimeException runtimeException = ( BaseRuntimeException ) exception;
+			final String exceptionMessage = runtimeException.getMessage();
 			model.setExceptionMessage( exceptionMessage );
+			model.setException( runtimeException );
 		}
 
 		model.setExceptionUrl( url );
@@ -97,12 +99,10 @@ public class ExceptionController {
 	}
 
 	@RequestMapping( "/restrictionException/" )
-	public String restrictionExceptionHandler( final HttpServletRequest request ) {
-		// TODO: repeated twice #4576885
-//		usersSecurityService.resetEnvironmentAndLogOutUser( EnvironmentContext.getCurrentUser() );
-//		request.getSession().invalidate();
+	public String restrictionExceptionHandler( final @ModelAttribute( MODEL_NAME ) ExceptionModel model ) {
+		final RestrictionException exception = ( RestrictionException ) model.getException();
 
-		return UrlUtilsServiceImpl.RESTRICTION_VIEW;
+		return String.format( "redirect:%s/restriction/%d/", urlUtilsService.getBaseURL(), exception.getRestrictionHistoryEntryId() );
 	}
 
 	@RequestMapping( "/userRequestSecurityException/" )

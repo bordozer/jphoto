@@ -63,8 +63,28 @@
 	</translation>
 
 	<translation>
-		<nerd>You are logged out because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.</nerd>
-		<ru><![CDATA[Вы видите эту страницу, т.к. $2 $3 ограничил вас в возможности пользоваться вашей учетной записью. Ограничение действует с $4 по $5.]]></ru>
+		<nerd>LoginRestriction: You are logged out because you are restricted in this right.</nerd>
+		<ru><![CDATA[Вы видите эту страницу, т.к. вы лишены возможности пользоваться вашей учетной записью.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: Login restriction creator</nerd>
+		<ru><![CDATA[Данное ограничение создал]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: Login restriction from</nerd>
+		<ru><![CDATA[с]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: Login restriction to</nerd>
+		<ru><![CDATA[по]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>LoginRestriction: The restriction period is</nerd>
+		<ru><![CDATA[Ограничение действительно]]></ru>
 	</translation>
 
 	<translation>

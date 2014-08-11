@@ -8,6 +8,7 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import ui.elements.PageModel;
 import ui.elements.PageTitleData;
 
 public interface BreadcrumbsUserService {
@@ -65,4 +66,6 @@ public interface BreadcrumbsUserService {
 	PageTitleData getUserReceivedCommentsBreadcrumb( final User user );
 
 	PageTitleData getUserWrittenUnreadCommentsBreadcrumb( final User user );
+
+	PageTitleData getUserLoginRestrictionBreadCrumbs( final User user );
 }

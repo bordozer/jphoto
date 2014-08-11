@@ -7,14 +7,12 @@ import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.interfaces.Restrictable;
 import core.services.dao.RestrictionDao;
-import core.services.system.Services;
-import core.services.translator.Language;
-import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
+import ui.services.security.UsersSecurityService;
 
 import java.util.Date;
 import java.util.List;
@@ -30,7 +28,7 @@ public class RestrictionServiceImpl implements RestrictionService {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private Services services;
+	private UsersSecurityService usersSecurityService;
 
 	@Override
 	public void restrictEntry( final Restrictable entry, final RestrictionType restrictionType, final Date timeFrom, final Date timeTo ) {
@@ -102,15 +100,9 @@ public class RestrictionServiceImpl implements RestrictionService {
 		if ( activeRestrictions != null && activeRestrictions.size() > 0 ) {
 			final EntryRestriction restriction = activeRestrictions.get( 0 );
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "You are logged out because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.", services )
-				.translatableString( restriction.getRestrictionType().getName() )
-				.addUserCardLinkParameter( restriction.getCreator() )
-				.dateTimeFormatted( restriction.getCreatingTime() )
-				.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
-				.dateTimeFormatted( restriction.getRestrictionTimeTo() )
-				;
+			usersSecurityService.resetEnvironmentAndLogOutUser( EnvironmentContext.getCurrentUser() );
 
-			throw new RestrictionException( translatableMessage.build( Language.RU ) ); // TODO: language
+			throw new RestrictionException( restriction.getId(), String.format( "User ID #%d - login is restricted", userId ) );
 		}
 	}
 

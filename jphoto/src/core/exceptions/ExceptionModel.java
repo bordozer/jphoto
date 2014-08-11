@@ -11,6 +11,7 @@ public class ExceptionModel {
 	private NotFoundExceptionEntryType notFoundExceptionEntryType;
 
 	private TranslatorService translatorService;
+	private BaseRuntimeException exception;
 
 	public String getExceptionUrl() {
 		return exceptionUrl;
@@ -50,5 +51,13 @@ public class ExceptionModel {
 
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
+	}
+
+	public void setException( final BaseRuntimeException exception ) {
+		this.exception = exception;
+	}
+
+	public BaseRuntimeException getException() {
+		return exception;
 	}
 }
