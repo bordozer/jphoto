@@ -1,14 +1,6 @@
 <%@ page import="ui.services.ajax.AjaxService" %>
 <%@ page import="ui.context.ApplicationContextHelper" %>
 <%@ page import="org.jabsorb.JSONRPCBridge" %>
-<%@ page import="ui.translatable.GenericTranslatableList" %>
-<%@ page import="ui.context.EnvironmentContext" %>
-<%@ page import="ui.translatable.GenericTranslatableEntry" %>
-<%@ page import="java.util.List" %>
-<%@ page import="org.json.JSONArray" %>
-<%@ page import="org.json.JSONObject" %>
-<%@ page import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ page import="rest.admin.restriction.RestrictionTypeDTO" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
