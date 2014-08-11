@@ -4,12 +4,6 @@ define( ["backbone"], function ( Backbone ) {
 
 		idAttribute: 'userId',
 
-		/*defaults: function() {
-			return {
-				restrictionTypeIds: []
-			}
-		},*/
-
 		initialize: function( options ) {
 			this.userId = options.userId;
 			this.translations = options.translations;

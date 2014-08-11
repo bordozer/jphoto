@@ -94,7 +94,7 @@
 
 		var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
-		require( ['modules/admin/user/restriction/user-restriction'], function ( func ) {
+		require( ['modules/admin/user/restriction/restriction'], function ( func ) {
 			var translations = {
 				timePeriod: "${eco:translate('Time period component: Time period')}"
 				, dateRange: "${eco:translate('Time period component: Date range')}"

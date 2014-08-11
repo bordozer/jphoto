@@ -49,7 +49,6 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		render: function () {
-			console.log( 'render' );
 			var modelJSON = this.model.toJSON();
 			modelJSON.translations = this.translations;
 
