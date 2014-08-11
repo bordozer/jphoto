@@ -1,12 +1,12 @@
 define( ["modules/admin/restriction/restriction-history/restriction-history-model"
 		, "modules/admin/restriction/restriction-history/restriction-history-view"
-		, "jquery"], function ( Model, UserLockHistoryView, $ ) {
+		, "jquery"], function ( Model, View, $ ) {
 
 	function init( userId, translations, baseUrl, container ) {
 
-		var userLockHistoryModel = new Model.UserLockHistoryModel( {userId:userId, translations: translations, baseUrl:baseUrl} );
+		var restrictionHistoryModel = new Model.RestrictionHistoryModel( {userId:userId, translations: translations, baseUrl:baseUrl} );
 
-		var userLockHistoryView = new UserLockHistoryView.UserLockHistoryView( { model: userLockHistoryModel, el: container } );
+		var restrictionHistoryView = new View.RestrictionHistoryView( { model: restrictionHistoryModel, el: container } );
 	}
 
 	return init;

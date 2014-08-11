@@ -1,12 +1,12 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var UserLockHistoryEntryModel = Backbone.Model.extend( {
+	var RestrictionHistoryEntryModel = Backbone.Model.extend( {
 
 	});
 
-	var UserLockHistoryModel = Backbone.Collection.extend( {
+	var RestrictionHistoryModel = Backbone.Collection.extend( {
 
-		model: UserLockHistoryEntryModel,
+		model: RestrictionHistoryEntryModel,
 
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/rest/admin/restriction/members/" + options.userId + "/history/";
@@ -15,5 +15,5 @@ define( ["backbone"], function ( Backbone ) {
 
 	 } );
 
-	return { UserLockHistoryEntryModel:UserLockHistoryEntryModel, UserLockHistoryModel:UserLockHistoryModel};
+	return { RestrictionHistoryEntryModel:RestrictionHistoryEntryModel, RestrictionHistoryModel:RestrictionHistoryModel};
 } );

@@ -4,7 +4,7 @@ define( ["backbone", "jquery", "underscore"
 
 	'use strict';
 
-	var UserLockHistoryView = Backbone.View.extend( {
+	var RestrictionHistoryView = Backbone.View.extend( {
 
 		initialize: function() {
 			this.$el.html( "" );
@@ -22,7 +22,7 @@ define( ["backbone", "jquery", "underscore"
 
 			var el = $( "<div></div>" );
 
-			var entryView = new UserLockHistoryEntryView( {
+			var entryView = new RestrictionHistoryEntryView( {
 				model: historyEntry
 				, el: el
 				, translations: translations
@@ -33,7 +33,7 @@ define( ["backbone", "jquery", "underscore"
 		}
 	} );
 
-	var UserLockHistoryEntryView = Backbone.View.extend( {
+	var RestrictionHistoryEntryView = Backbone.View.extend( {
 
 		historyEntryTemplate:_.template( userLockHistoryEntryTemplate ),
 
@@ -81,5 +81,5 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
-	return { UserLockHistoryView:UserLockHistoryView };
+	return { RestrictionHistoryView:RestrictionHistoryView };
 } );
