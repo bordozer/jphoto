@@ -31,37 +31,6 @@ public abstract class AbstractRestrictionController {
 	@Autowired
 	private UrlUtilsService urlUtilsService;
 
-	protected String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
-
-		final Date timeBetween = dateUtilsService.getTimeBetween( timeFrom, timeTo );
-
-		if ( lessThenOneDay( timeBetween ) ) {
-			return dateUtilsService.formatTime( timeBetween );
-		}
-
-		final long diffInMilliseconds = timeBetween.getTime() + offset();
-		if ( lessThenOneMonth( timeBetween ) ) {
-			final long diffSeconds = diffInMilliseconds / 1000 % 60;
-			final long diffMinutes = diffInMilliseconds / ( 60 * 1000 ) % 60;
-			final long diffHours = diffInMilliseconds / ( 60 * 60 * 1000 ) % 24;
-			final long diffDays = diffInMilliseconds / ( 24 * 60 * 60 * 1000 );
-
-			if ( diffSeconds == 0 && diffMinutes == 0 && diffHours == 0 ) {
-				return String.format( "%d days", diffDays );
-			}
-
-			return String.format( "%d days %02d:%02d:%02d", diffDays, diffHours, diffMinutes, diffSeconds );
-		}
-
-		if ( lessThenOneYear( timeBetween ) ) {
-			final long diffMonth = diffInMilliseconds / DAYS_IN_MONTH / 24 / 60 / 60 / 1000;
-
-			return String.format( "~ %d month", diffMonth );
-		}
-
-		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
-	}
-
 	protected RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 
@@ -102,6 +71,37 @@ public abstract class AbstractRestrictionController {
 		}
 
 		return dto;
+	}
+
+	protected String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
+
+		final Date timeBetween = dateUtilsService.getTimeBetween( timeFrom, timeTo );
+
+		if ( lessThenOneDay( timeBetween ) ) {
+			return dateUtilsService.formatTime( timeBetween );
+		}
+
+		final long diffInMilliseconds = timeBetween.getTime() + offset();
+		if ( lessThenOneMonth( timeBetween ) ) {
+			final long diffSeconds = diffInMilliseconds / 1000 % 60;
+			final long diffMinutes = diffInMilliseconds / ( 60 * 1000 ) % 60;
+			final long diffHours = diffInMilliseconds / ( 60 * 60 * 1000 ) % 24;
+			final long diffDays = diffInMilliseconds / ( 24 * 60 * 60 * 1000 );
+
+			if ( diffSeconds == 0 && diffMinutes == 0 && diffHours == 0 ) {
+				return String.format( "%d days", diffDays );
+			}
+
+			return String.format( "%d days %02d:%02d:%02d", diffDays, diffHours, diffMinutes, diffSeconds );
+		}
+
+		if ( lessThenOneYear( timeBetween ) ) {
+			final long diffMonth = diffInMilliseconds / DAYS_IN_MONTH / 24 / 60 / 60 / 1000;
+
+			return String.format( "~ %d month", diffMonth );
+		}
+
+		return String.format( "~ %d years", diffInMilliseconds / 12 / DAYS_IN_MONTH / 24 / 60 / 60 / 1000 );
 	}
 
 	protected long offset() {
