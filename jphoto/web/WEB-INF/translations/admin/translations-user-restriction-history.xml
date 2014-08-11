@@ -29,7 +29,7 @@
 
 	<translation>
 		<nerd>Restriction history: cancel title</nerd>
-		<ru><![CDATA[Отменить данное лишение прав]]></ru>
+		<ru><![CDATA[Прекратить действие данного лишения прав, оставив запись о его применении и отмене]]></ru>
 	</translation>
 
 	<translation>
@@ -49,12 +49,22 @@
 
 	<translation>
 		<nerd>Restriction history: cancel confirmation</nerd>
-		<ru><![CDATA[ОТМЕНИТЬ данное лишение прав?]]></ru>
+		<ru><![CDATA[ОТМЕНИТЬ данное лишение прав? Запись останется в личном деле пользователя]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Restriction history: was delete confirmation</nerd>
-		<ru><![CDATA[УДАЛИТЬ запись о лишении прав?]]></ru>
+		<ru><![CDATA[УДАЛИТЬ запись о лишении прав? После этой операции никакого упоминания о данном лишении прав пользователя не останется.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: delete title</nerd>
+		<ru><![CDATA[Удалить запись о лишении прав, не сохряняя запись о его применении и отмене]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction history: delete restriction</nerd>
+		<ru><![CDATA[удалить]]></ru>
 	</translation>
 
 	<translation>
