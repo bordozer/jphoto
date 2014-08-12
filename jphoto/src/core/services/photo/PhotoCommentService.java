@@ -5,7 +5,6 @@ import core.general.user.User;
 import core.interfaces.BaseEntityService;
 import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.services.menu.entry.items.EntryMenuData;
-import ui.services.menu.entry.items.EntryMenuOperationType;
 
 import java.util.Date;
 import java.util.List;

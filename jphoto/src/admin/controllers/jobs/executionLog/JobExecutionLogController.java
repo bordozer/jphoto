@@ -4,7 +4,6 @@ import admin.jobs.entries.AbstractJob;
 import admin.jobs.general.JobRuntimeLog;
 import admin.services.jobs.JobExecutionService;
 import com.google.common.collect.Lists;
-import core.services.translator.Language;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

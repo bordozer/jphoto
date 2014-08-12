@@ -1,4 +1,4 @@
-package admin.controllers.restriction;
+package admin.controllers.restriction.entry;
 
 import org.json.JSONArray;
 

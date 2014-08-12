@@ -1,11 +1,10 @@
-package admin.controllers.restriction;
+package admin.controllers.restriction.entry;
 
 import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.photo.PhotoService;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
-import org.jabsorb.JSONRPCBridge;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import rest.admin.restriction.RestrictionTypeDTO;
-import ui.context.ApplicationContextHelper;
 import ui.context.EnvironmentContext;
 import ui.translatable.GenericTranslatableEntry;
 import ui.translatable.GenericTranslatableList;

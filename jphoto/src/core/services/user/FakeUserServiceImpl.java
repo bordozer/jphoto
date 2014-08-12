@@ -11,7 +11,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.SystemVarsService;
 import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.fakeUser.AbstractFakeMember;
 import utils.fakeUser.FakeMakeUpMaster;

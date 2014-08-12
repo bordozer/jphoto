@@ -4,7 +4,7 @@
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:useBean id="restrictionModel" type="admin.controllers.restriction.RestrictionModel" scope="request"/>
+<jsp:useBean id="restrictionModel" type="admin.controllers.restriction.entry.RestrictionModel" scope="request"/>
 
 <c:set var="entryId" value="${restrictionModel.entryId}" />
 <c:set var="baseUrl" value="${eco:baseUrl()}" />

@@ -3,10 +3,7 @@ package ui.controllers.restriction;
 import core.exceptions.AccessDeniedException;
 import core.general.restriction.EntryRestriction;
 import core.services.security.RestrictionService;
-import core.services.system.Services;
-import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
-import utils.UserUtils;
 
 @Controller
 @RequestMapping( "/restriction/{restrictionEntryId}/" )
