@@ -32,6 +32,8 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	List<EntryRestriction> loadAll();
 
+	List<EntryRestriction> load( final List<RestrictionType> restrictionTypes );
+
 	List<EntryRestriction> loadUserRestrictions( final int userId );
 
 	List<EntryRestriction> loadPhotoRestrictions( final int photoId );

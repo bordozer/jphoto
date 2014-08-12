@@ -1,18 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var RestrictionListEntryModel = Backbone.Model.extend( {
-
-	});
-
-	var RestrictionListModel = Backbone.Collection.extend( {
-
-		model: RestrictionListEntryModel,
-
-		defaults: function() {
-			return {
-				selectedTypeIds: []
-			}
-		},
+	var RestrictionListModel = Backbone.Model.extend( {
 
 		initialize: function ( options ) {
 

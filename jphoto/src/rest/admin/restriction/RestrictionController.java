@@ -1,5 +1,7 @@
 package rest.admin.restriction;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
 import core.services.photo.PhotoService;
@@ -80,7 +82,8 @@ public class RestrictionController {
 	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RestrictionHistoryEntryDTO> showEmptySearchForm() {
-		return getRestrictionHistoryEntryDTOs( restrictionService.loadAll() );
+		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
+		return getRestrictionHistoryEntryDTOs( restrictionService.load( defaultTypes ) );
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
@@ -100,6 +103,24 @@ public class RestrictionController {
 	public boolean deleteRestrictionFromSearch( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
+
+	/*@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public RestrictionFilterFormDTO showEmptySearchForm() {
+		final RestrictionFilterFormDTO dto = new RestrictionFilterFormDTO();
+
+		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
+
+		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictionService.load( defaultTypes ) ) );
+		dto.setSelectedRestrictionTypeIds( Lists.transform( defaultTypes, new Function<RestrictionType, String>() {
+			@Override
+			public String apply( final RestrictionType restrictionType ) {
+				return String.valueOf( restrictionType.getId() );
+			}
+		} ) );
+
+		return dto;
+	}*/
 
 
 

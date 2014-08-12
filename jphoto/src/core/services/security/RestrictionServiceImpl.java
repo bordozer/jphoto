@@ -103,6 +103,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public List<EntryRestriction> load( final List<RestrictionType> restrictionTypes ) {
+		return restrictionDao.load( restrictionTypes );
+	}
+
+	@Override
 	public List<EntryRestriction> loadUserRestrictions( final int userId ) {
 		return loadRestrictions( userId, RestrictionType.FOR_USERS );
 	}

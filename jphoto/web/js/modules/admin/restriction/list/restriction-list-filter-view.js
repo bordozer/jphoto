@@ -14,15 +14,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function() {
-			this.renderFilterForm();
+//			this.listenTo( this.model, "sync", this.renderSearchResult );
 
-			this.restrictionsContainer = this.$( ".search-result-container" );
+			this.renderSearchForm();
 
-			new HistoryView.RestrictionHistoryView( { model: this.model, el: this.restrictionsContainer } );
 			this.model.fetch( { reset: true, cache: false } );
 		},
 
-		renderFilterForm: function() {
+		renderSearchForm: function() {
 			var modelJSON = this.model.toJSON();
 
 			modelJSON.restrictionTypes = this.model.restrictionTypes;
@@ -31,20 +30,55 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( this.template( modelJSON ) );
 		},
 
+		renderSearchResult: function() {
+			var model = this.model;
+			var historyEntryTranslations = this.historyEntryTranslations;
+
+			var $searchResultContainer = this.$( ".search-result-container" );
+			$searchResultContainer.html( '' );
+
+			_.each( this.model.get( 'searchResultEntryDTOs' ), function( searchResultEntryDTO ) {
+				var entryContainer = $( "<div></div>" );
+				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
+					model: searchResultEntryDTO
+					, el: entryContainer
+					, historyEntryTranslations: historyEntryTranslations
+				} );
+
+				$searchResultContainer.append( restrictionHistoryEntryView.render().$el );
+			});
+		},
+
 		onApplyClick: function ( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			this.restrictionsContainer.html( "" );
-
-			var selectedTypeIds = [];
+			var selectedRestrictionTypeIds = [];
 			$( ".restriction-type:checked" ).each( function () {
-				selectedTypeIds.push( this.value );
+				selectedRestrictionTypeIds.push( this.value );
 			} );
 
-			var filterForm = { restrictionTypeIds: selectedTypeIds };
+			this.model.save( { selectedRestrictionTypeIds: selectedRestrictionTypeIds } );
 
-			this.model.set( { filterForm: filterForm } );
+			/*var entryContainer = this.searchResultContainer;
+			var model = this.model;
+			var historyEntryTranslations = this.historyEntryTranslations;
+			this.searchResultContainer.html( "" );
+
+			var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
+				model: model
+				, el: entryContainer
+				, historyEntryTranslations: historyEntryTranslations
+			} );*/
+
+			/*var selectedRestrictionTypeIds = [];
+			$( ".restriction-type:checked" ).each( function () {
+				selectedRestrictionTypeIds.push( this.value );
+			} );
+
+			var filterForm = { restrictionTypeIds: selectedRestrictionTypeIds };
+
+			this.model.set( { filterForm: filterForm } );*/
 
 
 //			this.model.fetch( { reset: true, cache: false } );

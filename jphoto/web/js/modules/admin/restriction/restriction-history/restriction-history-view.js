@@ -16,6 +16,7 @@ define( ["backbone", "jquery", "underscore"
 
 		render: function () {
 			var container = this.$el;
+			container.html( '' );
 			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			this.model.each( function ( historyEntry ) {
@@ -44,7 +45,7 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function( options ) {
 			this.historyEntryTranslations = options.historyEntryTranslations;
 
-			this.listenTo( this.model, "sync", this.render );
+//			this.listenTo( this.model, "sync", this.render );
 		},
 
 		render: function () {

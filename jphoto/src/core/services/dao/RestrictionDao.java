@@ -10,4 +10,6 @@ public interface RestrictionDao extends BaseEntityDao<EntryRestriction> {
 	List<EntryRestriction> loadRestrictions( final int entryId, final RestrictionType restrictionType );
 
 	List<EntryRestriction> loadAll();
+
+	List<EntryRestriction> load( final List<RestrictionType> defaultTypes );
 }

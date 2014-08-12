@@ -1,8 +1,12 @@
 package core.services.dao;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
 import core.interfaces.Restrictable;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -82,6 +86,27 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	@Override
 	public List<EntryRestriction> loadAll() {
 		final String sql = String.format( "SELECT * FROM %s ORDER BY %s DESC;", TABLE_RESTRICTION, ENTITY_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
+		return jdbcTemplate.query( sql, paramSource, getRowMapper() );
+	}
+
+	@Override
+	public List<EntryRestriction> load( final List<RestrictionType> defaultTypes ) {
+		final String ids = StringUtils.join( Lists.transform( defaultTypes, new Function<RestrictionType, Integer>() {
+			@Override
+			public Integer apply( final RestrictionType restrictionType ) {
+				return restrictionType.getId();
+			}
+		} ), ", " );
+
+		final String sql = String.format( "SELECT * FROM %s WHERE %s IN ( %s ) ORDER BY %s DESC;"
+			, TABLE_RESTRICTION
+			, TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID
+			, ids
+			, ENTITY_ID
+		);
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
