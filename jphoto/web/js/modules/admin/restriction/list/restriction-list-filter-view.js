@@ -18,6 +18,7 @@ define( ["backbone", "jquery", "underscore"
 //			this.listenTo( this.model, "add", this.renderSearchResult );
 
 			this.renderSearchForm();
+			this.$( ".search-result-container" ).html( '' );
 
 			this.model.fetch( { cache: false } );
 		},
@@ -31,18 +32,14 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( this.template( modelJSON ) );
 		},
 
-		renderSearchResult: function( entryModel ) {
+		renderSearchResult: function() {
 			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			var $searchResultContainer = this.$( ".search-result-container" );
-			$searchResultContainer.html( '' );
 
 			this.model.each( function( entryModel ) {
-//				console.log( entryModel );
-//				var entryContainer = $( "<div></div>" );
 				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
 					model: entryModel
-//					, el: entryContainer
 					, historyEntryTranslations: historyEntryTranslations
 				} );
 
