@@ -16,8 +16,8 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.renderFilterForm();
 
-			this.restrictionsContainer = $( "<div></div>" );
-			this.$el.append( this.restrictionsContainer );
+			this.restrictionsContainer = this.$( ".search-result-container" ); //$( "<div></div>" );
+//			this.$el.append( this.restrictionsContainer );
 
 			new HistoryView.RestrictionHistoryView( { model: this.model, el: this.restrictionsContainer } );
 		},
