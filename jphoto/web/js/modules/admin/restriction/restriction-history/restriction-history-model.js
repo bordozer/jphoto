@@ -8,8 +8,10 @@ define( ["backbone"], function ( Backbone ) {
 
 		model: RestrictionHistoryEntryModel,
 
-		initialize:function ( options ) {
+		initialize: function ( options ) {
+
 			this.url = options.baseUrl + "/rest/admin/restrictions/" + ( options.filter.restrictionEntryTypeId == 1 ? "members" : "photos" ) + "/" + options.filter.entryId + "/history/";
+
 			this.historyEntryTranslations = options.historyEntryTranslations;
 		}
 

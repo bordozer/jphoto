@@ -1,6 +1,12 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var RestrictionListModel = Backbone.Model.extend( {
+	var RestrictionSearchResultEntryModel = Backbone.Model.extend( {
+
+	});
+
+	var RestrictionListModel = Backbone.Collection.extend( {
+
+		model: RestrictionSearchResultEntryModel,
 
 		initialize: function ( options ) {
 
@@ -13,5 +19,5 @@ define( ["backbone"], function ( Backbone ) {
 
 	 } );
 
-	return { RestrictionListModel:RestrictionListModel };
+	return { RestrictionListModel :RestrictionListModel, RestrictionSearchResultEntryModel: RestrictionSearchResultEntryModel };
 } );

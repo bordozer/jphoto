@@ -14,11 +14,12 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function() {
-//			this.listenTo( this.model, "sync", this.renderSearchResult );
+			this.listenTo( this.model, "sync", this.renderSearchResult );
+//			this.listenTo( this.model, "add", this.renderSearchResult );
 
 			this.renderSearchForm();
 
-			this.model.fetch( { reset: true, cache: false } );
+			this.model.fetch( { cache: false } );
 		},
 
 		renderSearchForm: function() {
@@ -30,18 +31,18 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( this.template( modelJSON ) );
 		},
 
-		renderSearchResult: function() {
-			var model = this.model;
-			var historyEntryTranslations = this.historyEntryTranslations;
+		renderSearchResult: function( entryModel ) {
+			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			var $searchResultContainer = this.$( ".search-result-container" );
 			$searchResultContainer.html( '' );
 
-			_.each( this.model.get( 'searchResultEntryDTOs' ), function( searchResultEntryDTO ) {
-				var entryContainer = $( "<div></div>" );
+			this.model.each( function( entryModel ) {
+//				console.log( entryModel );
+//				var entryContainer = $( "<div></div>" );
 				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
-					model: searchResultEntryDTO
-					, el: entryContainer
+					model: entryModel
+//					, el: entryContainer
 					, historyEntryTranslations: historyEntryTranslations
 				} );
 
@@ -58,7 +59,7 @@ define( ["backbone", "jquery", "underscore"
 				selectedRestrictionTypeIds.push( this.value );
 			} );
 
-			this.model.save( { selectedRestrictionTypeIds: selectedRestrictionTypeIds } );
+//			this.model.save( { selectedRestrictionTypeIds: selectedRestrictionTypeIds } );
 
 			/*var entryContainer = this.searchResultContainer;
 			var model = this.model;
