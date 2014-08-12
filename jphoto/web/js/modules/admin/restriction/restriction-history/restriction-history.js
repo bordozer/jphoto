@@ -7,6 +7,8 @@ define( ["modules/admin/restriction/restriction-history/restriction-history-mode
 		var restrictionHistoryModel = new Model.RestrictionHistoryModel( { filter:filter, historyEntryTranslations: historyEntryTranslations, baseUrl:baseUrl } );
 
 		var restrictionHistoryView = new View.RestrictionHistoryView( { model: restrictionHistoryModel, el: container } );
+
+		restrictionHistoryModel.fetch( { cache: false } );
 	}
 
 	return init;

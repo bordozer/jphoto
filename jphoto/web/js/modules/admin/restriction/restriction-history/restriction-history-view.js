@@ -9,27 +9,29 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.$el.html( "" );
 
-			this.listenTo( this.model, "add", this.render );
+//			this.listenTo( this.model, "add", this.render );
+			this.listenTo( this.model, "sync", this.render );
 
-			this.model.fetch( {cache: false} );
+//			this.model.fetch( { cache: false } );
 
 			this.historyEntryTranslations = this.model.historyEntryTranslations;
 		},
 
-		render: function ( historyEntry ) {
-
+		render: function () {
+			var container = this.$el;
 			var historyEntryTranslations = this.model.historyEntryTranslations;
 
-			var el = $( "<div></div>" );
+			this.model.each( function ( historyEntry ) {
+				var entryContainer = $( "<div></div>" );
 
-			var entryView = new RestrictionHistoryEntryView( {
-				model: historyEntry
-				, el: el
-				, historyEntryTranslations: historyEntryTranslations
-			} );
-			entryView.render();
-
-			this.$el.append( el );
+				var entryView = new RestrictionHistoryEntryView( {
+					model: historyEntry
+					, el: entryContainer
+					, historyEntryTranslations: historyEntryTranslations
+				} );
+				entryView.render();
+				container.append( entryContainer );
+			});
 		}
 	} );
 

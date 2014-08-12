@@ -14,9 +14,12 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function() {
-//			this.listenTo( this.model, "add", this.render );
-
 			this.renderFilterForm();
+
+			this.restrictionsContainer = $( "<div></div>" );
+			this.$el.append( this.restrictionsContainer );
+
+			this.restrictionHistoryView = new HistoryView.RestrictionHistoryView( { model: this.model, el: this.restrictionsContainer } );
 		},
 
 		renderFilterForm: function() {
@@ -32,11 +35,8 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			var restrictionsContainer = $( "<div></div>" );
-			this.$el.append( restrictionsContainer );
-			this.restrictionHistoryView = new HistoryView.RestrictionHistoryView( { model: this.model, el: restrictionsContainer } );
-
-//			this.model.fetch( {  reset: true , cache: false } );
+			this.restrictionsContainer.html( "" );
+			this.model.fetch( { reset: true, cache: false } );
 		}
 	} );
 
