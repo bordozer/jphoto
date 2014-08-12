@@ -62,4 +62,6 @@ public interface BreadcrumbsAdminService {
 	PageTitleData getGenresTranslationsBreadcrumbs();
 
 	PageTitleData getVotingCategoriesTranslationsBreadcrumbs();
+
+	PageTitleData getRestrictionListBreadcrumbs();
 }

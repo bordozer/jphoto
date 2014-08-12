@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
 import ui.elements.PageTitleData;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
+import ui.services.menu.main.MenuService;
 
 public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 	
@@ -339,6 +340,20 @@ public class BreadcrumbsAdminServiceImpl implements BreadcrumbsAdminService {
 		final String breadcrumbs = pageTitleUtilsService.getBreadcrumbsDataString( getAdminTranslatedRoot(), entityLinkUtilsService.getAdminVotingCategoriesRootLink( EnvironmentContext.getLanguage() ), nerd );
 
 		return new PageTitleData( title, nerd, breadcrumbs );
+	}
+
+	@Override
+	public PageTitleData getRestrictionListBreadcrumbs() {
+
+		final String title = title( MenuService.MAIN_MENU_RESTRICTION_LIST ).build();
+		final String header = header( MenuService.MAIN_MENU_RESTRICTION_LIST ).build();
+
+		final String breadcrumbs = new BreadcrumbsBuilder( services )
+			.adminRoot()
+			.translatableString( MenuService.MAIN_MENU_RESTRICTION_LIST )
+			.build();
+
+		return new PageTitleData( title, header, breadcrumbs );
 	}
 
 	@Deprecated

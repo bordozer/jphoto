@@ -386,6 +386,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getRestrictionListLink() {
+		return String.format( "%s/restrictions/", getBaseAdminURL() );
+	}
+
+	@Override
 	public String getAdminJobsLink() {
 		return String.format( "%s/jobs/", getBaseAdminURL() );
 	}

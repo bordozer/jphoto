@@ -150,6 +150,8 @@ public interface UrlUtilsService {
 
 	String getAdminAnonymousDaysLink();
 
+	String getRestrictionListLink();
+
 	String getAdminJobsLink();
 
 	String getAdminSchedulerTaskListLink();

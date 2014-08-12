@@ -22,7 +22,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-@RequestMapping( "restriction" )
+@RequestMapping( "restrictions" )
 @Controller
 public class RestrictionController {
 
@@ -37,7 +37,7 @@ public class RestrictionController {
 
 	private static final String MODEL_NAME = "restrictionModel";
 
-	private static final String VIEW = "admin/restriction/Restriction";
+	private static final String VIEW = "admin/restriction/entry/Restriction";
 
 	@ModelAttribute( MODEL_NAME )
 	public RestrictionModel prepareModel() {

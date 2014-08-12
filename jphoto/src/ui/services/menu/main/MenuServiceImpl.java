@@ -266,6 +266,7 @@ public class MenuServiceImpl implements MenuService {
 		menuItems.add( genresMenu() );
 		menuItems.add( votingCategoriesMenu() );
 		menuItems.add( anonymousDaysMenu() );
+		menuItems.add( restrictionListMenu() );
 		menuItems.add( translatorMenu() );
 		menuItems.add( reloadTranslatorMenu() );
 		menuItems.add( controlPanelMenu() );
@@ -389,6 +390,16 @@ public class MenuServiceImpl implements MenuService {
 
 		final MenuItem menuItem = new MenuItem( caption, link );
 		menuItem.setIcon( "icons24/admin-special-flag-anonymous-posting.png" );
+
+		return menuItem;
+	}
+
+	private MenuItem restrictionListMenu() {
+		final String caption = translatorService.translate( MAIN_MENU_RESTRICTION_LIST, getLanguage() );
+		final String link = urlUtilsService.getRestrictionListLink();
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+//		menuItem.setIcon( "icons24/admin-special-flag-anonymous-posting.png" );
 
 		return menuItem;
 	}
