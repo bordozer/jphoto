@@ -1,8 +1,16 @@
-<div style="float: left; padding-bottom: 10px; text-align: left;">
-	<% _.each( restrictionTypes, function( restrictionType ) { %>
-		<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type">
-		<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
-		<br />
-	<% }) %>
+<div style="float: left; width: 100%; text-align: left;">
+
+	<div style="float: left; width: 350px; text-align: left;">
+		<% _.each( restrictionTypes, function( restrictionType ) { %>
+			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type">
+			<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
+			<br />
+		<% }) %>
+		<input type="button" class="apply-filter-restriction-button" value="<%=translations.filterButtonTitle%>">
+	</div>
+
+	<div class="search-result-container" style="float: left; text-align: left;">
+		<%=translations.emptySearchResultText%>
+	</div>
+
 </div>
-<input type="button" class="apply-filter-restriction-button" value="<%=translations.filterButtonTitle%>">

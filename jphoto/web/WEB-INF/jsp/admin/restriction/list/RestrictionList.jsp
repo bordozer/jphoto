@@ -12,7 +12,7 @@
 
 	<link href="${baseUrl}/css/restriction.css" rel="stylesheet" type="text/css"/>
 
-	<div style="float: left; width: 400px;">
+	<div style="float: left; width: 100%;">
 		<div id="restriction-list-container" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
@@ -41,6 +41,7 @@
 
 			var translations = {
 				filterButtonTitle: "${eco:translate('Restriction filter form: Filter button title')}"
+				, emptySearchResultText: "${eco:translate('Restriction filter form: Empty Search Result Text')}"
 			};
 
 			var restrictionTypes = ${restrictionListModel.restrictionTypes};

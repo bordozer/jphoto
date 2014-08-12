@@ -9,10 +9,7 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.$el.html( "" );
 
-//			this.listenTo( this.model, "add", this.render );
 			this.listenTo( this.model, "sync", this.render );
-
-//			this.model.fetch( { cache: false } );
 
 			this.historyEntryTranslations = this.model.historyEntryTranslations;
 		},

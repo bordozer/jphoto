@@ -8,7 +8,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		model: RestrictionListEntryModel,
 
-		initialize:function ( options ) {
+		initialize: function ( options ) {
 			this.url = options.baseUrl + "/rest/admin/restrictions/photos/138137/history/";
 
 			this.restrictionTypes = options.restrictionTypes;
