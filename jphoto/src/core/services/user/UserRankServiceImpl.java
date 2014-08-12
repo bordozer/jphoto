@@ -23,6 +23,7 @@ import ui.controllers.users.genreRank.VotingModel;
 import ui.userRankIcons.UserRankIconContainer;
 import utils.UserUtils;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -115,7 +116,7 @@ public class UserRankServiceImpl implements UserRankService {
 	}
 
 	@Override
-	public VotingModel getVotingModel( final int userId, final int genreId, final User votingUser ) {
+	public VotingModel getVotingModel( final int userId, final int genreId, final User votingUser, final Date time ) {
 
 		final int voterId = votingUser.getId();
 
@@ -132,7 +133,7 @@ public class UserRankServiceImpl implements UserRankService {
 
 		final User user = userService.load( userId );
 		final Genre genre = genreService.load( genreId );
-		votingModel.setValidationResult( securityService.getUserRankInGenreVotingValidationResult( user, votingUser, genre, votingUser.getLanguage() ) );
+		votingModel.setValidationResult( securityService.getUserRankInGenreVotingValidationResult( user, votingUser, genre, time, votingUser.getLanguage() ) );
 
 		if ( userAlreadyVoted ) {
 			votingModel.setLastVotingPoints( setUserLastVotingResult( voterId, userId, genreId ) );

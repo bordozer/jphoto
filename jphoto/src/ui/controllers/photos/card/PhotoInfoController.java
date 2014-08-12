@@ -3,6 +3,7 @@ package ui.controllers.photos.card;
 import core.general.photo.Photo;
 import core.services.photo.PhotoService;
 import core.services.user.UserRankService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,11 +28,14 @@ public class PhotoInfoController {
 	@Autowired
 	private UserRankService userRankService;
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/info/" )
 	public String getPhotoInfo( final @PathVariable( "photoId" ) int photoId, final @ModelAttribute( "photoInfoModel" ) PhotoInfoModel model ) {
 		final Photo photo = photoService.load( photoId );
 		model.setPhotoInfo( photoUIService.getPhotoInfo( photo, EnvironmentContext.getCurrentUser() ) );
-		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), EnvironmentContext.getCurrentUser() ) );
+		model.setVotingModel( userRankService.getVotingModel( photo.getUserId(), photo.getGenreId(), EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() ) );
 
 		return PHOTO_INFO_VIEW;
 	}

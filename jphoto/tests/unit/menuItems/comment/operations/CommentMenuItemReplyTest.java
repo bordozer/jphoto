@@ -71,7 +71,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ValidationResult validationResult = new ValidationResult();
 		validationResult.setValidationPassed( parameters.isUserCanCommentPhoto() );
 
-		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), AbstractTestCase.MENU_LANGUAGE ) ).andReturn( validationResult ).anyTimes();
+		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), dateUtilsService.getCurrentTime(), AbstractTestCase.MENU_LANGUAGE ) ).andReturn( validationResult ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );

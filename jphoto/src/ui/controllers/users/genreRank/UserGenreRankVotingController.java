@@ -84,7 +84,7 @@ public class UserGenreRankVotingController {
 		model.setGenre( genreService.load( genreId ) );
 		model.setVotingForRankIncreasing( points > 0 );
 
-		model.setVotingModel( userRankService.getVotingModel( userId, genreId, EnvironmentContext.getCurrentUser() ) );
+		model.setVotingModel( userRankService.getVotingModel( userId, genreId, EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() ) );
 
 		return model;
 	}
@@ -120,7 +120,7 @@ public class UserGenreRankVotingController {
 			return VIEW;
 		}
 
-		model.setVotingModel( userRankService.getVotingModel( model.getUser().getId(), model.getGenre().getId(), votingUser ) );
+		model.setVotingModel( userRankService.getVotingModel( model.getUser().getId(), model.getGenre().getId(), votingUser, dateUtilsService.getCurrentTime() ) );
 
 		return VIEW;
 	}

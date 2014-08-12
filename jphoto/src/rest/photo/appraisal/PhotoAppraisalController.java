@@ -116,7 +116,7 @@ public class PhotoAppraisalController {
 
 		photoAppraisalDTO.setAppraisalBlockTitle( translatorService.translate( "Photo appraisal: Photo appraisal title", getLanguage() ) );
 
-		final ValidationResult validationResult = securityService.validateUserCanVoteForPhoto( user, photo, getLanguage() );
+		final ValidationResult validationResult = securityService.validateUserCanVoteForPhoto( user, photo, dateUtilsService.getCurrentTime(), getLanguage() );
 		photoAppraisalDTO.setUserCanAppraiseThePhoto( validationResult.isValidationPassed() );
 		if ( validationResult.isValidationFailed() ) {
 			photoAppraisalDTO.setUserCanNotAppraiseThePhotoText( translatorService.translate( "Photo appraisal: You can not appraise the photo", getLanguage() ) );

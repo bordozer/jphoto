@@ -4,6 +4,7 @@ import core.general.photo.ValidationResult;
 import core.services.entry.FavoritesService;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -20,6 +21,9 @@ public class UserGenreRankVotingValidator implements Validator {
 
 	@Autowired
 	private TranslatorService translatorService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@Override
 	public boolean supports( final Class<?> clazz ) {
@@ -67,7 +71,8 @@ public class UserGenreRankVotingValidator implements Validator {
 			return;
 		}
 
-		final ValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( model.getUser(), EnvironmentContext.getCurrentUser(), model.getGenre(), model.getVoter().getLanguage() );
+		final ValidationResult validationResult
+			= securityService.getUserRankInGenreVotingValidationResult( model.getUser(), EnvironmentContext.getCurrentUser(), model.getGenre(), dateUtilsService.getCurrentTime(), model.getVoter().getLanguage() );
 
 		if ( validationResult.isValidationFailed() ) {
 			errors.reject( validationResult.getValidationMessage() );

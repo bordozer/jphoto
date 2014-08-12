@@ -37,7 +37,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User voter = NOT_LOGGED_USER;
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -51,7 +51,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final User voter = new User( 11 ); // the same user ID
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -73,7 +73,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setConfigurationService( configurationService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, getGenre(), dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -103,7 +103,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -138,7 +138,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setConfigurationService( configurationService );
 		securityService.setUserRankService( userRankService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -184,7 +184,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setUserRankService( userRankService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -238,7 +238,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setFavoritesService( favoritesService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
@@ -289,7 +289,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 		securityService.setFavoritesService( favoritesService );
 		securityService.setPhotoService( photoService );
 
-		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, Language.EN );
+		final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), Language.EN );
 
 		assertTrue( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertFalse( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );

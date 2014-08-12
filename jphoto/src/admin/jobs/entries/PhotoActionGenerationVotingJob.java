@@ -31,11 +31,13 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 				return false;
 			}*/
 
+		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
+
 		if ( services.getPhotoVotingService().isUserVotedForPhoto( user, photo ) ) {
 			return false;
 		}
 
-		final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto( user, photo, getSystemDefaultLanguage() );
+		final ValidationResult validationResult = services.getSecurityService().validateUserCanVoteForPhoto( user, photo, actionTime, getSystemDefaultLanguage() );
 		if ( validationResult.isValidationFailed() ) {
 			//				getLog().debug( String.format( "Voting fot a photo: %s", validation.getValidationMessage() ) );
 			return false;
@@ -46,8 +48,6 @@ public class PhotoActionGenerationVotingJob extends AbstractPhotoActionGeneratio
 
 		final int maxAccessibleMark = services.getUserRankService().getUserHighestPositiveMarkInGenre( user.getId(), photo.getGenreId() );
 		final int minAccessibleMark = services.getUserRankService().getUserLowestNegativeMarkInGenre( user.getId(), photo.getGenreId() );
-
-		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
 		final PhotoLikeStrategyFactory factory = new PhotoLikeStrategyFactory();
 		final AbstractPhotoLikeStrategy strategy = factory.getStrategy();

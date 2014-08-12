@@ -8,6 +8,7 @@ import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,9 @@ public class UserGenreRankVotingController {
 	@Autowired
 	private SecurityService securityService;
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = "application/json" )
 	@ResponseBody
 	public List<UserCardVotingAreaModel> userCardVotingAreas( final @PathVariable( "userId" ) int userId ) {
@@ -62,7 +66,7 @@ public class UserGenreRankVotingController {
 				votingAreaModel.setVoterId( voterId );
 				votingAreaModel.setVoterRankInGenreVotingPoints( userRankService.getUserRankInGenreVotingPoints( voterId, genre.getId() ) );
 
-				final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, voter.getLanguage() );
+				final UserRankInGenreVotingValidationResult validationResult = securityService.getUserRankInGenreVotingValidationResult( user, voter, genre, dateUtilsService.getCurrentTime(), voter.getLanguage() );
 				votingAreaModel.setUiVotingIsInaccessible( validationResult.isUiVotingIsInaccessible() );
 				votingAreaModel.setValidationMessage( validationResult.getValidationMessage() );
 

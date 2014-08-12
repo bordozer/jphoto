@@ -62,11 +62,11 @@ public interface SecurityService {
 
 	void assertGenreExists( final String _genreId );
 
-	ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Language language );
+	ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Date time, final Language language );
 
-	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Language language );
+	ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Date time, final Language language );
 
-	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Language language );
+	UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Date time, final Language language );
 
 	boolean isSuperAdminUser( final int userId );
 

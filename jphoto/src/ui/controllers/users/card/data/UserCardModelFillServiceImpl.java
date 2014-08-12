@@ -322,7 +322,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
 
 		genreInfo.setPhotosQty( photoService.getPhotoQtyByUserAndGenre( userId, genreId ) );
-		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, accessor ) );
+		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, accessor, dateUtilsService.getCurrentTime() ) );
 		genreInfo.setUserRankInGenre( userRankService.getUserRankInGenre( userId, genreId ) );
 
 		final int userVotePointsForRankInGenre = userRankService.getUserVotePointsForRankInGenre( userId, genreId );

@@ -10,6 +10,7 @@ import core.general.user.UserRankPhotoVote;
 import ui.controllers.users.genreRank.VotingModel;
 import ui.userRankIcons.UserRankIconContainer;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public interface UserRankService {
 
 	int setUserLastVotingResult( int voterId, int userId, int genreId );
 
-	VotingModel getVotingModel( final int userId, final int genreId, final User votingUser );
+	VotingModel getVotingModel( final int userId, final int genreId, final User votingUser, final Date time );
 
 	int getUserRankInGenreVotingPoints( final int userId, final int genreId );
 

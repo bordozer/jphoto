@@ -32,7 +32,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = getSecurityService();
 
-		assertTrue( "Not Logged User Can leave comment", securityService.validateUserCanCommentPhoto( NOT_LOGGED_USER, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Not Logged User Can leave comment", securityService.validateUserCanCommentPhoto( NOT_LOGGED_USER, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setFavoritesService( favoritesService );
 
-		assertTrue( "User from photo author's black list Can Leave Comment", securityService.validateUserCanCommentPhoto( photoAuthorBlackListUser, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "User from photo author's black list Can Leave Comment", securityService.validateUserCanCommentPhoto( photoAuthorBlackListUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -86,7 +86,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
 
-		assertTrue( "Candidates Can Leave Comment If It Is Denied On The System Level", securityService.validateUserCanCommentPhoto( candidateUser, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Candidates Can Leave Comment If It Is Denied On The System Level", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanCommentPhoto( user, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanCommentPhoto( user, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	@Test
@@ -158,7 +158,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		securityService.setConfigurationService( configurationService );
 		securityService.setPhotoService( photoService );
 
-		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanCommentPhoto( candidateUser, photo, Language.EN ).isValidationFailed() );
+		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	private SecurityServiceImpl getSecurityService() {

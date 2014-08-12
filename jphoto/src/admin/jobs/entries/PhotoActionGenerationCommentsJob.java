@@ -31,7 +31,7 @@ public class PhotoActionGenerationCommentsJob extends AbstractPhotoActionGenerat
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
 		final Language language = getLanguage();
-		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo, language ).isValidationFailed() ) {
+		if ( services.getSecurityService().validateUserCanCommentPhoto( user, photo, actionTime, language ).isValidationFailed() ) {
 			return false;
 		}
 

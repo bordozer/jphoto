@@ -8,6 +8,7 @@ import core.services.security.SecurityService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -30,6 +31,9 @@ public class PhotoVotingValidator implements Validator {
 	@Autowired
 	private TranslatorService translatorService;
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
 	@Override
 	public boolean supports( final Class<?> clazz ) {
 		return PhotoVotingModel.class.equals( clazz );
@@ -51,7 +55,7 @@ public class PhotoVotingValidator implements Validator {
 			return;
 		}
 
-		final ValidationResult votingValidationResult = securityService.validateUserCanVoteForPhoto( EnvironmentContext.getCurrentUser(), model.getPhoto(), getLanguage() );
+		final ValidationResult votingValidationResult = securityService.validateUserCanVoteForPhoto( EnvironmentContext.getCurrentUser(), model.getPhoto(), dateUtilsService.getCurrentTime(), getLanguage() );
 		if ( votingValidationResult.isValidationFailed() ) {
 			errors.reject( votingValidationResult.getValidationMessage() );
 		}

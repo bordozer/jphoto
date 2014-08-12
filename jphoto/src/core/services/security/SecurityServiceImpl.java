@@ -274,7 +274,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Language language ) {
+	public ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Date time, final Language language ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( isSuperAdminUser( user.getId() ) ) {
@@ -326,7 +326,7 @@ public class SecurityServiceImpl implements SecurityService {
 			return allowanceValidationResult;
 		}
 
-		final EntryRestriction restrictionOn = restrictionService.getUserPhotoCommentingRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
+		final EntryRestriction restrictionOn = restrictionService.getUserPhotoCommentingRestrictionOn( user.getId(), time ); //
 		if ( restrictionOn != null ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
@@ -338,7 +338,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Language language ) {
+	public ValidationResult validateUserCanVoteForPhoto( final User user, final Photo photo, final Date time, final Language language ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( ! UserUtils.isLoggedUser( user ) ) {
@@ -392,7 +392,7 @@ public class SecurityServiceImpl implements SecurityService {
 			return allowanceValidationResult;
 		}
 
-		final EntryRestriction restrictionOn = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), dateUtilsService.getCurrentTime() ); //
+		final EntryRestriction restrictionOn = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), time );
 		if ( restrictionOn != null ) {
 			allowanceValidationResult.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
 
@@ -403,7 +403,7 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	@Override
-	public UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Language language ) {
+	public UserRankInGenreVotingValidationResult getUserRankInGenreVotingValidationResult( final User user, final User voter, final Genre genre, final Date time, final Language language ) {
 
 		if ( ! UserUtils.isLoggedUser( voter ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
@@ -479,7 +479,7 @@ public class SecurityServiceImpl implements SecurityService {
 			return result;
 		}
 
-		final EntryRestriction restrictionOn = restrictionService.getUserRankVotingRestrictionOn( voter.getId(), dateUtilsService.getCurrentTime() );
+		final EntryRestriction restrictionOn = restrictionService.getUserRankVotingRestrictionOn( voter.getId(), time );
 		if ( restrictionOn != null ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
