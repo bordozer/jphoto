@@ -1,5 +1,6 @@
 package admin.controllers.restriction.list;
 
+import admin.controllers.restriction.entry.RestrictionController;
 import core.services.translator.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,7 +41,8 @@ public class RestrictionListController {
 		final List<GenericTranslatableEntry> restrictions = newArrayList();
 		restrictions.addAll( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
 		restrictions.addAll( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
-		model.setRestrictions( restrictions );
+
+		model.setRestrictionTypes( RestrictionController.getRestrictionTypesJSON( restrictions ) );
 
 		model.setPageTitleData( breadcrumbsAdminService.getRestrictionListBreadcrumbs() );
 

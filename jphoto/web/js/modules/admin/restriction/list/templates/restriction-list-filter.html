@@ -1,0 +1,7 @@
+<div style="float: left; padding-bottom: 10px; text-align: left;">
+	<% _.each( restrictionTypes, function( restrictionType ) { %>
+		<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type">
+		<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
+		<br />
+	<% }) %>
+</div>

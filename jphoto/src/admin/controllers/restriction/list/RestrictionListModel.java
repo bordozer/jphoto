@@ -1,19 +1,17 @@
 package admin.controllers.restriction.list;
 
 import core.general.base.AbstractGeneralPageModel;
-import ui.translatable.GenericTranslatableEntry;
-
-import java.util.List;
+import org.json.JSONArray;
 
 public class RestrictionListModel extends AbstractGeneralPageModel {
 
-	private List<GenericTranslatableEntry> restrictions;
+	private JSONArray restrictionTypes;
 
-	public void setRestrictions( final List<GenericTranslatableEntry> restrictions ) {
-		this.restrictions = restrictions;
+	public void setRestrictionTypes( final JSONArray restrictionTypes ) {
+		this.restrictionTypes = restrictionTypes;
 	}
 
-	public List<GenericTranslatableEntry> getRestrictions() {
-		return restrictions;
+	public JSONArray getRestrictionTypes() {
+		return restrictionTypes;
 	}
 }

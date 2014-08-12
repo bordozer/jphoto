@@ -81,5 +81,5 @@ define( ["backbone", "jquery", "underscore"
 		}
 	});
 
-	return { RestrictionHistoryView:RestrictionHistoryView };
+	return { RestrictionHistoryView:RestrictionHistoryView, RestrictionHistoryEntryView: RestrictionHistoryEntryView };
 } );
