@@ -44,8 +44,6 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function( options ) {
 			this.historyEntryTranslations = options.historyEntryTranslations;
-
-//			this.listenTo( this.model, "sync", this.render );
 		},
 
 		render: function () {
