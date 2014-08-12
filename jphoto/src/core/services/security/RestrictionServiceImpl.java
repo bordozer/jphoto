@@ -66,8 +66,18 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public boolean isUserLoginRestricted( final int userId, final Date time ) {
+	public EntryRestriction getPhotoOfTheDayRestrictionOn( final int photoId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( photoId, RestrictionType.PHOTO_TO_BE_PHOTO_OF_THE_DAY, time ) );
+	}
+
+	@Override
+	public boolean isUserLoginRestrictedOn( final int userId, final Date time ) {
 		return isRestrictedOn( userId, RestrictionType.USER_LOGIN, time );
+	}
+
+	@Override
+	public boolean isPhotoOfTheDayRestrictedOn( final int photoId, final Date time ) {
+		return isRestrictedOn( photoId, RestrictionType.PHOTO_TO_BE_PHOTO_OF_THE_DAY, time );
 	}
 
 	@Override

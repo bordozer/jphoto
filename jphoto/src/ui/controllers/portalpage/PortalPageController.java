@@ -8,12 +8,15 @@ import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.RestrictionService;
 import core.services.system.ConfigurationService;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.PhotoSqlHelperService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -68,6 +71,8 @@ public class PortalPageController {
 	@Autowired
 	private SecurityUIService securityUIService;
 
+	@Autowired
+	private RestrictionService restrictionService;
 
 	@ModelAttribute( MODEL_NAME )
 	public PortalPageModel prepareModel() {
@@ -82,8 +87,8 @@ public class PortalPageController {
 
 		model.setLastUploadedPhotos( getPortalPagePhotos( getLastUploadedPhotos() ) );
 
-		final List<Integer> theBestPhotos = getTheBestPhotos();
-		model.setBestPhotos( getPortalPagePhotos( theBestPhotos ) );
+		final List<Integer> theBestPhotosIds = getTheBestPhotosIds();
+		model.setBestPhotos( getPortalPagePhotos( theBestPhotosIds ) );
 
 		model.setBestPhotosMinMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) );
 		model.setBestPhotosPeriod( configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS ) );
@@ -112,18 +117,18 @@ public class PortalPageController {
 		}
 
 		model.setPortalPageGenres( portalPageGenres );
-		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotos.size() - 1 ) );
+		model.setRandomBestPhotoArrayIndex( randomUtilsService.getRandomInt( 0, theBestPhotosIds.size() - 1 ) );
 
 		model.setLastActivities( activityStreamService.getLastActivities( configurationService.getInt( ConfigurationKey.SYSTEM_ACTIVITY_PORTAL_PAGE_STREAM_LENGTH ) ) );
 
 		return VIEW;
 	}
 
-	private List<PortalPagePhoto> getPortalPagePhotos( final List<Integer> lastUploadedPhotosIds ) {
+	private List<PortalPagePhoto> getPortalPagePhotos( final List<Integer> photosIds ) {
 		final User accessor = EnvironmentContext.getCurrentUser();
-		Collections.shuffle( lastUploadedPhotosIds );
+		Collections.shuffle( photosIds );
 		final List<PortalPagePhoto> lastUploadedPhotos = newArrayList();
-		for ( final Integer photoId : lastUploadedPhotosIds ) {
+		for ( final Integer photoId : photosIds ) {
 			final PortalPagePhoto portalPagePhoto = new PortalPagePhoto();
 			final Photo photo = photoService.load( photoId );
 
@@ -137,13 +142,10 @@ public class PortalPageController {
 	}
 
 	private List<Integer> getLastUploadedPhotos() {
-		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPortalPageLastUploadedPhotosSQL();
-		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
-
-		return selectResult.getIds();
+		return photoService.load( photoSqlHelperService.getPortalPageLastUploadedPhotosSQL() ).getIds();
 	}
 
-	private List<Integer> getTheBestPhotos() {
+	private List<Integer> getTheBestPhotosIds() {
 		final int minMarksTobeInPhotosOfTheDay = configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY );
 		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS );
 
@@ -151,6 +153,15 @@ public class PortalPageController {
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPortalPageBestPhotosIdsSQL( minMarksTobeInPhotosOfTheDay, timeFrom );
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectQuery );
 
-		return sqlSelectIdsResult.getIds();
+		final Date currentTime = dateUtilsService.getCurrentTime();
+		final List<Integer> ids = sqlSelectIdsResult.getIds();
+		CollectionUtils.filter( ids, new Predicate<Integer>() {
+			@Override
+			public boolean evaluate( final Integer photoId ) {
+				return ! restrictionService.isPhotoOfTheDayRestrictedOn( photoId, currentTime );
+			}
+		} );
+
+		return ids;
 	}
 }
