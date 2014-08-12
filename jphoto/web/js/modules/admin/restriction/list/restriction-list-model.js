@@ -13,6 +13,7 @@ define( ["backbone"], function ( Backbone ) {
 
 			this.restrictionTypes = options.restrictionTypes;
 			this.translations = options.translations;
+			this.historyEntryTranslations = options.historyEntryTranslations;
 		}
 
 	 } );

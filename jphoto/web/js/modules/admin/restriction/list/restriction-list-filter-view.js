@@ -9,26 +9,34 @@ define( ["backbone", "jquery", "underscore"
 
 		template:_.template( template ),
 
+		events: {
+			"click .apply-filter-restriction-button" : "onApplyClick"
+		},
+
 		initialize: function() {
-
-			var restrictionsContainer = $( "<div></div>" );
-
-//			this.restrictionHistoryView = new HistoryView.RestrictionHistoryView( { model: this.model, el: restrictionsContainer } );
 //			this.listenTo( this.model, "add", this.render );
 
 			this.renderFilterForm();
-
-			this.model.fetch( { cache: false } );
 		},
 
 		renderFilterForm: function() {
 			var modelJSON = this.model.toJSON();
 
-			modelJSON.translations = this.translations;
-			modelJSON.restrictionTypes = this.model.get( 'restrictionTypes' );
+			modelJSON.restrictionTypes = this.model.restrictionTypes;
+			modelJSON.translations = this.model.translations;
 
-			console.log( this.template( modelJSON ) );
 			this.$el.html( this.template( modelJSON ) );
+		},
+
+		onApplyClick: function ( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			var restrictionsContainer = $( "<div></div>" );
+			this.$el.append( restrictionsContainer );
+			this.restrictionHistoryView = new HistoryView.RestrictionHistoryView( { model: this.model, el: restrictionsContainer } );
+
+//			this.model.fetch( {  reset: true , cache: false } );
 		}
 	} );
 

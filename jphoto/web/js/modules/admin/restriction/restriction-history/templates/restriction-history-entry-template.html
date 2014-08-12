@@ -15,30 +15,30 @@
 
 		<%=dateFrom%> <sup style="font-size: 9px;"><%=timeFrom%> </sup> - <%=dateTo%> <sup style="font-size: 9px;"><%=timeTo%></sup>
 		<br />
-		<%=translations.restrictionDuration%>: <%=restrictionDuration%>
+		<%=historyEntryTranslations.restrictionDuration%>: <%=restrictionDuration%>
 
 		<% if( active && ! finished ) { %>
 			<br />
-			<%=translations.expiresAfter%>: <b><%=expiresAfter%></b>
+			<%=historyEntryTranslations.expiresAfter%>: <b><%=expiresAfter%></b>
 		<% } %>
 
 		<br />
-		<span style="font-size: 10px;"><%=translations.createdBy%>: <%=creatorLink%>, <%=translations.restrictedAtTime%> <%=creationDate%> <sup style="font-size: 9px;"><%=creationTime%></sup></span>
+		<span style="font-size: 10px;"><%=historyEntryTranslations.createdBy%>: <%=creatorLink%>, <%=historyEntryTranslations.restrictedAtTime%> <%=creationDate%> <sup style="font-size: 9px;"><%=creationTime%></sup></span>
 
 		<% if( ! active ) { %>
 			<br />
 			<span style="font-size: 10px;">
-				<%=translations.cancelledBy%>: <%=cancellerLink%>, <%=translations.cancelledAtTime%> <%=cancellingDate%> <sup style="font-size: 9px;"><%=cancellingTime%></sup>
+				<%=historyEntryTranslations.cancelledBy%>: <%=cancellerLink%>, <%=historyEntryTranslations.cancelledAtTime%> <%=cancellingDate%> <sup style="font-size: 9px;"><%=cancellingTime%></sup>
 				<br />
-				<%=translations.wasRestrictedTitle%> <%=wasRestricted%>
+				<%=historyEntryTranslations.wasRestrictedTitle%> <%=wasRestricted%>
 			</span>
 		<% } %>
 
 		<br />
 		<% if( active && ! finished ) { %>
-			[ <a href="#" class="cancel-restriction" onclick="return false;" title="<%=translations.cancelTitle%>"><%=translations.cancel%></a> ]
+			[ <a href="#" class="cancel-restriction" onclick="return false;" title="<%=historyEntryTranslations.cancelTitle%>"><%=historyEntryTranslations.cancel%></a> ]
 		<% } %>
-		[ <a href="#" class="delete-restriction" onclick="return false;" title="<%=translations.deleteTitle%>"><%=translations.deleteRestriction%></a> ]
+		[ <a href="#" class="delete-restriction" onclick="return false;" title="<%=historyEntryTranslations.deleteTitle%>"><%=historyEntryTranslations.deleteRestriction%></a> ]
 
 	</div>
 </div>

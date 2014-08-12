@@ -87,7 +87,7 @@
 				, restrictionEntryTypeId: ${restrictionEntryTypeId}
 			};
 
-			var translations = {
+			var historyEntryTranslations = {
 				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
 				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
 				, createdBy: "${eco:translate('Restriction history: Created by')}"
@@ -103,7 +103,7 @@
 				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
 
-			func( filter, translations, "${baseUrl}", $( '#restriction-history-container' ) );
+			func( filter, historyEntryTranslations, "${baseUrl}", $( '#restriction-history-container' ) );
 		} );
 
 	</script>

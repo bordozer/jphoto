@@ -13,19 +13,19 @@ define( ["backbone", "jquery", "underscore"
 
 			this.model.fetch( {cache: false} );
 
-			this.translations = this.model.translations;
+			this.historyEntryTranslations = this.model.historyEntryTranslations;
 		},
 
 		render: function ( historyEntry ) {
 
-			var translations = this.model.translations;
+			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			var el = $( "<div></div>" );
 
 			var entryView = new RestrictionHistoryEntryView( {
 				model: historyEntry
 				, el: el
-				, translations: translations
+				, historyEntryTranslations: historyEntryTranslations
 			} );
 			entryView.render();
 
@@ -43,14 +43,14 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function( options ) {
-			this.translations = options.translations;
+			this.historyEntryTranslations = options.historyEntryTranslations;
 
 			this.listenTo( this.model, "sync", this.render );
 		},
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-			modelJSON.translations = this.translations;
+			modelJSON.historyEntryTranslations = this.historyEntryTranslations;
 
 			this.$el.html( this.historyEntryTemplate( modelJSON ) );
 
@@ -61,7 +61,7 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( ! confirm( this.translations.cancelConfirmation ) ) {
+			if ( ! confirm( this.historyEntryTranslations.cancelConfirmation ) ) {
 				return;
 			}
 
@@ -72,7 +72,7 @@ define( ["backbone", "jquery", "underscore"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( ! confirm( this.translations.deleteConfirmation ) ) {
+			if ( ! confirm( this.historyEntryTranslations.deleteConfirmation ) ) {
 				return;
 			}
 

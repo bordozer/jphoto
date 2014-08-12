@@ -10,7 +10,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize:function ( options ) {
 			this.url = options.baseUrl + "/rest/admin/restrictions/" + ( options.filter.restrictionEntryTypeId == 1 ? "members" : "photos" ) + "/" + options.filter.entryId + "/history/";
-			this.translations = options.translations;
+			this.historyEntryTranslations = options.historyEntryTranslations;
 		}
 
 	 } );

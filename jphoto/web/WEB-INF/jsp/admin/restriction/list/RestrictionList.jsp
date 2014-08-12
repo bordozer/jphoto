@@ -12,7 +12,7 @@
 
 	<link href="${baseUrl}/css/restriction.css" rel="stylesheet" type="text/css"/>
 
-	<div style="float: right; width: 400px;">
+	<div style="float: left; width: 400px;">
 		<div id="restriction-list-container" >
 			<img src="${eco:imageFolderURL()}/progress.gif" title="Please, wait...">
 		</div>
@@ -22,7 +22,8 @@
 
 		require( ['modules/admin/restriction/list/restriction-list'], function ( func ) {
 
-			var translations = {
+			// TODO: duplicates!
+			var historyEntryTranslations = {
 				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
 				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
 				, createdBy: "${eco:translate('Restriction history: Created by')}"
@@ -38,9 +39,13 @@
 				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
 
+			var translations = {
+				filterButtonTitle: "${eco:translate('Restriction filter form: Filter button title')}"
+			};
+
 			var restrictionTypes = ${restrictionListModel.restrictionTypes};
 
-			func( restrictionTypes, translations, "${baseUrl}", $( '#restriction-list-container' ) );
+			func( restrictionTypes, translations, historyEntryTranslations, "${baseUrl}", $( '#restriction-list-container' ) );
 		} );
 
 	</script>
