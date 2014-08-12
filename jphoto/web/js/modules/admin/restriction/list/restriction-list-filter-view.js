@@ -18,7 +18,7 @@ define( ["backbone", "jquery", "underscore"
 //			this.listenTo( this.model, "add", this.renderSearchResult );
 
 			this.renderSearchForm();
-			this.$( ".search-result-container" ).html( '' );
+			this.clearSearchResult();
 
 			this.model.fetch( { cache: false } );
 		},
@@ -47,6 +47,10 @@ define( ["backbone", "jquery", "underscore"
 			});
 		},
 
+		clearSearchResult: function() {
+			this.$( ".search-result-container" ).html( '' );
+		},
+
 		onApplyClick: function ( evt ) {
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
@@ -55,6 +59,10 @@ define( ["backbone", "jquery", "underscore"
 			$( ".restriction-type:checked" ).each( function () {
 				selectedRestrictionTypeIds.push( this.value );
 			} );
+
+			this.clearSearchResult();
+
+			this.model.fetch( { cache: false } );
 
 //			this.model.save( { selectedRestrictionTypeIds: selectedRestrictionTypeIds } );
 
