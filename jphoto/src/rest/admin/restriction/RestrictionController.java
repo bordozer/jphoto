@@ -82,8 +82,8 @@ public class RestrictionController {
 	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RestrictionHistoryEntryDTO> showEmptySearchForm() {
-		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
-		return getRestrictionHistoryEntryDTOs( restrictionService.load( defaultTypes ) );
+//		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
+		return getRestrictionHistoryEntryDTOs( restrictionService.loadAll() );
 	}
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
@@ -244,7 +244,6 @@ public class RestrictionController {
 		}
 
 		dto.setStatus( translatorService.translate( "Restriction history entry status: passed", getLanguage() ) );
-		dto.setStatus( translatorService.translate( "", getLanguage() ) );
 	}
 
 	private boolean isFinished( final EntryRestriction restriction ) {
