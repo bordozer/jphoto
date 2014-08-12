@@ -297,6 +297,11 @@
 	</translation>
 
 	<translation>
+		<nerd>$1 '$2' should be more then $3 symbols</nerd>
+		<ru><![CDATA[$1 '$2' должно быть длиннее $3 символов]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
