@@ -42,12 +42,12 @@ define( ["backbone", "jquery", "underscore"
 				selectedTypeIds.push( this.value );
 			} );
 
-			/*var filterForm = { restrictionTypeIds: selectedTypeIds };
+			var filterForm = { restrictionTypeIds: selectedTypeIds };
 
 			this.model.set( { filterForm: filterForm } );
-			this.model.fetch( { reset: true, cache: false } );*/
-//			this.model.save( { selectedTypeIds: selectedTypeIds } );
-			this.model.fetch( { reset: true, cache: false } );
+
+
+//			this.model.fetch( { reset: true, cache: false } );
 		}
 	} );
 
