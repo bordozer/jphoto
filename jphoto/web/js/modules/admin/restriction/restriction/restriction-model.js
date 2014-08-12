@@ -22,7 +22,7 @@ define( ["backbone"], function ( Backbone ) {
 				this.ajaxService.restrictEntryForRange( this.entryId, from, to, data.restrictionTypeIds );
 			}
 
-//			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading
+			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading
 		}
 	});
 
