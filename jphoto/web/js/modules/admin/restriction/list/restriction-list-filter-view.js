@@ -16,10 +16,10 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.renderFilterForm();
 
-			this.restrictionsContainer = this.$( ".search-result-container" ); //$( "<div></div>" );
-//			this.$el.append( this.restrictionsContainer );
+			this.restrictionsContainer = this.$( ".search-result-container" );
 
 			new HistoryView.RestrictionHistoryView( { model: this.model, el: this.restrictionsContainer } );
+			this.model.fetch( { reset: true, cache: false } );
 		},
 
 		renderFilterForm: function() {
@@ -36,6 +36,17 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopImmediatePropagation();
 
 			this.restrictionsContainer.html( "" );
+
+			var selectedTypeIds = [];
+			$( ".restriction-type:checked" ).each( function () {
+				selectedTypeIds.push( this.value );
+			} );
+
+			/*var filterForm = { restrictionTypeIds: selectedTypeIds };
+
+			this.model.set( { filterForm: filterForm } );
+			this.model.fetch( { reset: true, cache: false } );*/
+//			this.model.save( { selectedTypeIds: selectedTypeIds } );
 			this.model.fetch( { reset: true, cache: false } );
 		}
 	} );

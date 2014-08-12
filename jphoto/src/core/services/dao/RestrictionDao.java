@@ -8,4 +8,6 @@ import java.util.List;
 public interface RestrictionDao extends BaseEntityDao<EntryRestriction> {
 
 	List<EntryRestriction> loadRestrictions( final int entryId, final RestrictionType restrictionType );
+
+	List<EntryRestriction> loadAll();
 }

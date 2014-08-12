@@ -75,6 +75,24 @@ public class RestrictionController {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public List<RestrictionHistoryEntryDTO> showEmptySearchForm() {
+		return getRestrictionHistoryEntryDTOs( restrictionService.loadAll() );
+	}
+
+	@RequestMapping( method = RequestMethod.PUT, value = "/search/{restrictionHistoryEntryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public RestrictionHistoryEntryDTO doSearch( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
+		return inactivateRestriction( restrictionDTO );
+	}
+
+	@RequestMapping( method = RequestMethod.DELETE, value = "/search/{restrictionHistoryEntryId}" )
+	@ResponseBody
+	public boolean deleteRestrictionFromSearch( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
+		return restrictionService.delete( restrictionHistoryEntryId );
+	}
+
 	private RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 

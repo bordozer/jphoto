@@ -8,8 +8,15 @@ define( ["backbone"], function ( Backbone ) {
 
 		model: RestrictionListEntryModel,
 
+		defaults: function() {
+			return {
+				selectedTypeIds: []
+			}
+		},
+
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/admin/restrictions/photos/138137/history/";
+
+			this.url = options.baseUrl + "/rest/admin/restrictions/search/";
 
 			this.restrictionTypes = options.restrictionTypes;
 			this.translations = options.translations;

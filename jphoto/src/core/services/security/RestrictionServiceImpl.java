@@ -98,6 +98,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public List<EntryRestriction> loadAll() {
+		return restrictionDao.loadAll();
+	}
+
+	@Override
 	public List<EntryRestriction> loadUserRestrictions( final int userId ) {
 		return loadRestrictions( userId, RestrictionType.FOR_USERS );
 	}
@@ -198,7 +203,7 @@ public class RestrictionServiceImpl implements RestrictionService {
 		final List<EntryRestriction> result = newArrayList();
 
 		for ( final RestrictionType restrictionType : restrictionTypes ) {
-			result.addAll( restrictionDao.loadRestrictions( userId, restrictionType ) );
+			result.addAll( restrictionDao.loadRestrictions( userId, restrictionType ) ); // TODO: load all in one query
 		}
 
 		return result;

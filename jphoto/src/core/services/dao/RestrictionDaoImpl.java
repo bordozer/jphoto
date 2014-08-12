@@ -80,6 +80,15 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 	}
 
 	@Override
+	public List<EntryRestriction> loadAll() {
+		final String sql = String.format( "SELECT * FROM %s ORDER BY %s DESC;", TABLE_RESTRICTION, ENTITY_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+
+		return jdbcTemplate.query( sql, paramSource, getRowMapper() );
+	}
+
+	@Override
 	protected MapSqlParameterSource getParameters( final EntryRestriction restriction ) {
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 
