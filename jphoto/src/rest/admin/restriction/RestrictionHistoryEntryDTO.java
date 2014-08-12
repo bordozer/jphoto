@@ -31,6 +31,7 @@ public class RestrictionHistoryEntryDTO {
 	private String wasRestricted;
 
 	private String status;
+	private String entryLink;
 
 	public int getId() {
 		return id;
@@ -195,5 +196,13 @@ public class RestrictionHistoryEntryDTO {
 	@Override
 	public String toString() {
 		return String.format( "#%d %s: from %s to %s", id, restrictionName, timeFrom, timeTo );
+	}
+
+	public void setEntryLink( final String entryLink ) {
+		this.entryLink = entryLink;
+	}
+
+	public String getEntryLink() {
+		return entryLink;
 	}
 }

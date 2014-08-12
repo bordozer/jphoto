@@ -1,0 +1,27 @@
+.restriction-area-header {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+.restriction-area-tab {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.restriction-history-entry-container {
+	float: left;
+	width: 97%;
+	text-align: left;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	padding: 5px;
+}
+
+.restriction-history-entry-header {
+	border-right: none;
+	border-left: none;
+	border-top: none;
+	padding-bottom: 2px;
+	margin-bottom: 5px;
+}

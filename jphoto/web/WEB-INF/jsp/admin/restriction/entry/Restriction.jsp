@@ -27,38 +27,7 @@
 	<script type="text/javascript" src="${baseUrl}/js/lib/date.format.js"></script>
 
 	<link href="${baseUrl}/css/jphoto.css" rel="stylesheet" type="text/css"/>
-
-	<style type="text/css">
-
-		.restriction-area-header {
-			float:left;
-			width: 100%;
-			text-align: center;
-		}
-
-		.restriction-area-tab {
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
-
-		.restriction-history-entry-container {
-			float: left;
-			width: 97%;
-			text-align: left;
-			margin-bottom: 5px;
-			margin-top: 5px;
-			padding: 5px;
-		}
-
-		.restriction-history-entry-header {
-			border-right: none;
-			border-left: none;
-			border-top: none;
-			padding-bottom: 2px;
-			margin-bottom: 5px;
-		}
-
-	</style>
+	<link href="${baseUrl}/css/restriction.css" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -112,6 +81,12 @@
 		} );
 
 		require( ['modules/admin/restriction/restriction-history/restriction-history'], function ( func ) {
+
+			var filter = {
+				entryId: ${entryId}
+				, restrictionEntryTypeId: ${restrictionEntryTypeId}
+			};
+
 			var translations = {
 				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
 				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
@@ -127,7 +102,8 @@
 				, cancelConfirmation: "${eco:translate('Restriction history: cancel confirmation')}"
 				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
-			func( ${entryId}, ${restrictionEntryTypeId}, translations, "${baseUrl}", $( '#restriction-history-container' ) );
+
+			func( filter, translations, "${baseUrl}", $( '#restriction-history-container' ) );
 		} );
 
 	</script>

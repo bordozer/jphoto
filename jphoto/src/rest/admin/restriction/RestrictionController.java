@@ -1,9 +1,12 @@
 package rest.admin.restriction;
 
+import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
+import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -25,6 +28,12 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class RestrictionController {
 
 	public static final int DAYS_IN_MONTH = 30;
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private PhotoService photoService;
 
 	@Autowired
 	private RestrictionService restrictionService;
@@ -70,6 +79,7 @@ public class RestrictionController {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 
 		dto.setId( restriction.getId() );
+		dto.setEntryLink( getEntryLink( restriction.getEntry().getId(), restriction.getRestrictionType() ) );
 		dto.setRestrictionName( translatorService.translate( restriction.getRestrictionType().getName(), getLanguage() ) );
 		dto.setRestrictionIcon( String.format( "%s/%s", urlUtilsService.getSiteImagesPath(), restriction.getRestrictionType().getIcon() ) );
 
@@ -106,6 +116,15 @@ public class RestrictionController {
 		}
 
 		return dto;
+	}
+
+	private String getEntryLink( final int entryId, final RestrictionType restrictionType ) {
+
+		if ( RestrictionType.FOR_USERS.contains( restrictionType ) ) {
+			return entityLinkUtilsService.getUserCardLink( userService.load( entryId ), getLanguage() );
+		}
+
+		return entityLinkUtilsService.getPhotoCardLink( photoService.load( entryId ), getLanguage() );
 	}
 
 	private String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {
