@@ -32,7 +32,7 @@
 	function initContextMenuForEntry( entryId, menuTypeId, container ) {
 		require( ['components/menu/context-menu'], function ( contextMenu ) {
 //			console.log( 'Initializing a context menu for ', container );
-			contextMenu( entryId, menuTypeId, '${baseUrl}', container );
+			contextMenu( entryId, menuTypeId, container );
 		} );
 	}
 </script>

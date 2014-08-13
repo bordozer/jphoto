@@ -1,10 +1,20 @@
+<%@ page import="ui.services.ajax.AjaxService"%>
+<%@ page import="ui.context.ApplicationContextHelper"%>
+<%@ page import="org.jabsorb.JSONRPCBridge"%>
 <%@ page contentType="text/javascript" %>
 
 <%@ taglib prefix="eco" uri="http://taglibs" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%
+	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
+%>
+
+<c:set var="baseUrl" value="${eco:baseUrl()}" />
 
 var require = {
 
-	baseUrl: '${eco:baseUrl()}/js',
+	baseUrl: '${baseUrl}/js',
 
 	paths: {
 		jquery: "lib/jquery/jquery-1.10.2"
@@ -33,6 +43,7 @@ var require = {
 		, ui_messages: "ui_messages"
 		, mass_checker: "components/mass-checker"
 		, photosight: "/admin/js/photosight.js"
+		, 'core.jphoto': 'core/core.jphoto'
 	},
 
 	shim: {
@@ -88,9 +99,18 @@ var require = {
 		}
 	},
 
-	deps: ["jquery", "backbone", "underscore", "text"],
+	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto" ],
 
-	callback: function ( $, Backbone, _, text ) {
+	callback: function ( $, Backbone, _, text, core ) {
+
+		var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
+
+		var options = {
+			baseUrl: '${baseUrl}'
+			, ajaxService: jsonRPC.ajaxService
+		};
+
+		core( options );
 	}
 
 };
