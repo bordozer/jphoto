@@ -1,9 +1,9 @@
-define( ["backbone", "jquery", "underscore"
+define( ["backbone", "jquery", "underscore", "mass_checker"
 		, "modules/admin/restriction/restriction-history/restriction-history-view"
 		, "text!modules/admin/restriction/list/templates/restriction-list-filter.html"
 		, "components/user-picker/user-picker-model"
 		, "components/user-picker/user-picker-view"
-		], function ( Backbone, $, _, HistoryView, template, UserPickerModel, UserPickerView ) {
+		], function ( Backbone, $, _, mass_checker, HistoryView, template, UserPickerModel, UserPickerView ) {
 
 	'use strict';
 
@@ -32,6 +32,10 @@ define( ["backbone", "jquery", "underscore"
 			modelJSON.translations = this.model.translations;
 
 			this.$el.html( this.template( modelJSON ) );
+
+			var massSelector = mass_checker.getMassChecker();
+			massSelector.registerUnselected( "restriction-type", "/images" );
+			massSelector.registerUnselected( "restriction-status", "/images" );
 
 			this.renderUserPicker();
 		},
