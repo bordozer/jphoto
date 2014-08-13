@@ -22,23 +22,6 @@
 
 		require( ['modules/admin/restriction/list/restriction-list'], function ( func ) {
 
-			// TODO: duplicates!
-			var historyEntryTranslations = {
-				restrictionDuration: "${eco:translate('Restriction history: Restriction duration')}"
-				, expiresAfter: "${eco:translate('Restriction history: Expires after')}"
-				, createdBy: "${eco:translate('Restriction history: Created by')}"
-				, restrictedAtTime: "${eco:translate('Restriction history: restricted at time')}"
-				, cancel: "${eco:translate('Restriction history: cancel restriction')}"
-				, cancelTitle: "${eco:translate('Restriction history: cancel title')}"
-				, deleteRestriction: "${eco:translate('Restriction history: delete restriction')}"
-				, deleteTitle: "${eco:translate('Restriction history: delete title')}"
-				, cancelledBy: "${eco:translate('Restriction history: cancelled by')}"
-				, cancelledAtTime: "${eco:translate('Restriction history: cancelled at time')}"
-				, wasRestrictedTitle: "${eco:translate('Restriction history: was restricted title')}"
-				, cancelConfirmation: "${eco:translate('Restriction history: cancel confirmation')}"
-				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
-			};
-
 			var translations = {
 				filterButtonTitle: "${eco:translate('Restriction filter form: Filter button title')}"
 				, emptySearchResultText: "${eco:translate('Restriction filter form: Empty Search Result Text')}"
@@ -49,7 +32,7 @@
 			var restrictionTypes = ${restrictionListModel.restrictionTypes};
 			var restrictionStatuses = ${restrictionListModel.restrictionStatuses};
 
-			func( restrictionTypes, restrictionStatuses, translations, historyEntryTranslations, $( '#restriction-list-container' ) );
+			func( restrictionTypes, restrictionStatuses, translations, $( '#restriction-list-container' ) );
 		} );
 
 	</script>

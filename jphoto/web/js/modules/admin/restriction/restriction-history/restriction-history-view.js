@@ -10,14 +10,11 @@ define( ["backbone", "jquery", "underscore"
 			this.$el.html( "" );
 
 			this.listenTo( this.model, "sync", this.render );
-
-			this.historyEntryTranslations = this.model.historyEntryTranslations;
 		},
 
 		render: function () {
 			var container = this.$el;
 			container.html( '' );
-			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			this.model.each( function ( historyEntry ) {
 				var entryContainer = $( "<div></div>" );
@@ -25,7 +22,6 @@ define( ["backbone", "jquery", "underscore"
 				var entryView = new RestrictionHistoryEntryView( {
 					model: historyEntry
 					, el: entryContainer
-					, historyEntryTranslations: historyEntryTranslations
 				} );
 				entryView.render();
 				container.append( entryContainer );
@@ -43,7 +39,23 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function( options ) {
-			this.historyEntryTranslations = options.historyEntryTranslations;
+			var historyEntryTranslations = {
+				restrictionDuration: 'Restriction history: Restriction duration'
+				, expiresAfter: 'Restriction history: Expires after'
+				, createdBy: 'Restriction history: Created by'
+				, restrictedAtTime: 'Restriction history: restricted at time'
+				, cancel: 'Restriction history: cancel restriction'
+				, cancelTitle: 'Restriction history: cancel title'
+				, deleteRestriction: 'Restriction history: delete restriction'
+				, deleteTitle: 'Restriction history: delete title'
+				, cancelledBy: 'Restriction history: cancelled by'
+				, cancelledAtTime: 'Restriction history: cancelled at time'
+				, wasRestrictedTitle: 'Restriction history: was restricted title'
+				, cancelConfirmation: 'Restriction history: cancel confirmation'
+				, deleteConfirmation: 'Restriction history: was delete confirmation'
+			};
+
+			this.historyEntryTranslations = Backbone.JPhoto.ajaxService().translateAll( historyEntryTranslations );
 		},
 
 		render: function () {

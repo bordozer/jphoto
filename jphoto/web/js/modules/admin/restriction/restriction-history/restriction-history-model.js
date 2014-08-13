@@ -9,10 +9,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: RestrictionHistoryEntryModel,
 
 		initialize: function ( options ) {
-
 			this.url = Backbone.JPhoto.url( "/rest/admin/restrictions/" + ( options.filter.restrictionEntryTypeId == 1 ? "members" : "photos" ) + "/" + options.filter.entryId + "/history/" );
-
-			this.historyEntryTranslations = options.historyEntryTranslations;
 		}
 
 	 } );

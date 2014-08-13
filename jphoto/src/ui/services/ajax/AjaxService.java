@@ -1,6 +1,8 @@
 package ui.services.ajax;
 
 import admin.controllers.jobs.edit.photosImport.strategies.web.RemotePhotoSiteUserDTO;
+import org.json.JSONException;
+import org.json.JSONObject;
 import rest.users.picker.UserDTO;
 import ui.dtos.AjaxResultDTO;
 import ui.dtos.CommentDTO;
@@ -8,6 +10,7 @@ import ui.dtos.ComplaintMessageDTO;
 import ui.dtos.PrivateMessageSendingDTO;
 
 import java.util.List;
+import java.util.Map;
 
 public interface AjaxService {
 
@@ -43,4 +46,6 @@ public interface AjaxService {
 	void restrictEntryForRange( final int entryId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
 
 	String translate( final String nerd );
+
+	JSONObject translateAll( final JSONObject nerds ) throws JSONException;
 }

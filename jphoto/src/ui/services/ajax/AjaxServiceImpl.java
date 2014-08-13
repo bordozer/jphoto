@@ -33,6 +33,8 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import rest.users.picker.UserDTO;
 import ui.context.EnvironmentContext;
@@ -45,11 +47,10 @@ import ui.services.menu.entry.items.comment.ComplaintReasonType;
 import utils.StringUtilities;
 import utils.UserUtils;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
 
 public class AjaxServiceImpl implements AjaxService {
 
@@ -480,6 +481,20 @@ public class AjaxServiceImpl implements AjaxService {
 	@Override
 	public String translate( final String nerd ) {
 		return translatorService.translate( nerd, EnvironmentContext.getLanguage() );
+	}
+
+	@Override
+	public JSONObject translateAll( final JSONObject nerds ) throws JSONException {
+
+		final Map<String, String> result = newHashMap();
+
+		final Iterator iterator = nerds.sortedKeys();
+		while ( iterator.hasNext() ) {
+			final String nerd = ( String ) iterator.next();
+			result.put( nerd, translate( nerds.getString( nerd ) ) );
+		}
+
+		return new JSONObject( result );
 	}
 
 	private Restrictable getRestrictableEntry( final int entryId, final RestrictionType restrictionType ) {
