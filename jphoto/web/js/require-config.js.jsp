@@ -99,11 +99,11 @@ var require = {
 		}
 	},
 
-	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto" ],
+	deps: [ "jquery", "backbone", "underscore", "text", "core.jphoto", 'jsonrpc' ],
 
-	callback: function ( $, Backbone, _, text, core ) {
+	callback: function ( $, Backbone, _, text, core, jsonrpc ) {
 
-		var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
+		var jsonRPC = new JSONRpcClient( "${eco:baseUrl()}/JSON-RPC" );
 
 		var options = {
 			baseUrl: '${baseUrl}'

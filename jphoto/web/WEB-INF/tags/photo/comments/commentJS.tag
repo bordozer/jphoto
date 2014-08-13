@@ -1,16 +1,10 @@
 <%@ tag import="ui.controllers.comment.edit.PhotoCommentModel" %>
-<%@ tag import="ui.context.ApplicationContextHelper" %>
-<%@ tag import="org.jabsorb.JSONRPCBridge" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="ui.services.ajax.AjaxService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="photoId" required="true" type="java.lang.Integer" %>
-
-<%--<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>--%>
 
 <c:set var="editUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>
 <c:set var="deleteUrl" value="${eco:baseUrl()}/photos/${photoId}/comments/"/>
