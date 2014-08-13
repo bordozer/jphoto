@@ -1,7 +1,9 @@
 define( ["backbone", "jquery", "underscore"
 		, "modules/admin/restriction/restriction-history/restriction-history-view"
 		, "text!modules/admin/restriction/list/templates/restriction-list-filter.html"
-		], function ( Backbone, $, _, HistoryView, template ) {
+		, "components/user-picker/user-picker-model"
+		, "components/user-picker/user-picker-view"
+		], function ( Backbone, $, _, HistoryView, template, UserPickerModel, UserPickerView ) {
 
 	'use strict';
 
@@ -15,7 +17,6 @@ define( ["backbone", "jquery", "underscore"
 
 		initialize: function() {
 			this.listenTo( this.model, "sync", this.renderSearchResult );
-//			this.listenTo( this.model, "add", this.renderSearchResult );
 
 			this.renderSearchForm();
 			this.clearSearchResult();
@@ -31,6 +32,19 @@ define( ["backbone", "jquery", "underscore"
 			modelJSON.translations = this.model.translations;
 
 			this.$el.html( this.template( modelJSON ) );
+
+			this.renderUserPicker();
+		},
+
+		renderUserPicker: function() {
+			var userPickerContainer = this.$( ".user-picker-container" );
+
+			var userPickerModel = new UserPickerModel.UserPickerModel( { controlName: "userPicker", initialUserId: 0, baseUrl: this.model.baseUrl } );
+			var userPickerView = new UserPickerView.UserPickerView( { model: userPickerModel, el: userPickerContainer, callbackFunction: this.onUserPickerSelect } );
+		},
+
+		onUserPickerSelect: function() {
+
 		},
 
 		renderSearchResult: function() {

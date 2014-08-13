@@ -11,6 +11,7 @@ define( ["backbone"], function ( Backbone ) {
 		initialize: function ( options ) {
 
 			this.url = options.baseUrl + "/rest/admin/restrictions/search/";
+			this.baseUrl = options.baseUrl;
 
 			this.restrictionTypes = options.restrictionTypes;
 			this.restrictionStatuses = options.restrictionStatuses;
