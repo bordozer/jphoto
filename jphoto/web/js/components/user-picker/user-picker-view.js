@@ -1,9 +1,8 @@
 define( ["backbone", "jquery", "underscore", 'jquery_ui'
-		, "components/user-picker/user-picker-model"
 		, "text!components/user-picker/template/search-form-template.html"
 		, "text!components/user-picker/template/search-result-template.html"
 		, "text!components/user-picker/template/found-user-template.html"
-		], function ( Backbone, $, _, ui, Model, SearchFormTemplate, SearchResultTemplate, FoundUserTemplate ) {
+		], function ( Backbone, $, _, ui, SearchFormTemplate, SearchResultTemplate, FoundUserTemplate ) {
 
 	'use strict';
 

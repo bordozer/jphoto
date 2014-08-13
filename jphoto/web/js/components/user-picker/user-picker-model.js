@@ -14,7 +14,9 @@ define( ["backbone"], function ( Backbone ) {
 		},
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/users/?userId=" + options.initialUserId;
+
+			this.url = Backbone.JPhoto.url( "/rest/users/?userId=" + options.initialUserId );
+
 			this.set( { controlName: options.controlName, selectedUserId: options.initialUserId } );
 		},
 
