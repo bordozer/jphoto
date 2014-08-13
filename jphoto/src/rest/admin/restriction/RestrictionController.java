@@ -2,6 +2,7 @@ package rest.admin.restriction;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
 import core.services.photo.PhotoService;
@@ -226,24 +227,24 @@ public class RestrictionController {
 	private void initCssClassAndStatus( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
 
 		if ( ! restriction.isActive() ) {
-			dto.setStatus( translatorService.translate( "Restriction history entry status: cancelled", getLanguage() ) );
+			dto.setStatus( translatorService.translate( RestrictionStatus.CANCELLED.getName(), getLanguage() ) );
 			dto.setCssClass( "block-background-inactive-restriction" );
 			return;
 		}
 
 		if ( restriction.getRestrictionTimeFrom().getTime() > dateUtilsService.getCurrentTime().getTime() ) {
-			dto.setStatus( translatorService.translate( "Restriction history entry status: postponed", getLanguage() ) );
+			dto.setStatus( translatorService.translate( RestrictionStatus.POSTPONED.getName(), getLanguage() ) );
 			dto.setCssClass( "block-background-postponed-restriction" );
 			return;
 		}
 
 		if ( ! isFinished( restriction ) ) {
-			dto.setStatus( translatorService.translate( "Restriction history entry status: in progress", getLanguage() ) );
+			dto.setStatus( translatorService.translate( RestrictionStatus.PROGRESS.getName(), getLanguage() ) );
 			dto.setCssClass( "block-background" );
 			return;
 		}
 
-		dto.setStatus( translatorService.translate( "Restriction history entry status: passed", getLanguage() ) );
+		dto.setStatus( translatorService.translate( RestrictionStatus.PASSED.getName(), getLanguage() ) );
 	}
 
 	private boolean isFinished( final EntryRestriction restriction ) {

@@ -68,26 +68,6 @@
 	</translation>
 
 	<translation>
-		<nerd>Restriction history entry status: cancelled</nerd>
-		<ru><![CDATA[отменено]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Restriction history entry status: postponed</nerd>
-		<ru><![CDATA[отложено]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Restriction history entry status: in progress</nerd>
-		<ru><![CDATA[в процессе]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Restriction history entry status: passed</nerd>
-		<ru><![CDATA[истекло]]></ru>
-	</translation>
-
-	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
