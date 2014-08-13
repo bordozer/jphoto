@@ -90,7 +90,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				function deletePhotoFromContextMenu() {
 
-					if ( ! confirm( "Delete photo?" ) ) {
+					if ( ! confirm( Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						return;
 					}
 					if ( model.get( "contextMenuEntryView" ) != undefined ) {
