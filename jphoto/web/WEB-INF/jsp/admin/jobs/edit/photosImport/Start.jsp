@@ -184,7 +184,7 @@
 												function renderRemoteSiteCategories() {
 													require( [ 'jquery', 'modules/admin/jobs/photosImport/remoteSiteCategories/remote-site-categories'], function ( $, func ) {
 														var importSourceId = $( 'input[name=' + '${importSourceIdControl}' + ']:checked' ).val();
-														func( importSourceId, "${baseUrl}", $( '.remote-site-categories-container' ) );
+														func( importSourceId, $( '.remote-site-categories-container' ) );
 													} );
 												}
 											</script>

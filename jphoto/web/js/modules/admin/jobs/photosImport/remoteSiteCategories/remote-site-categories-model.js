@@ -10,7 +10,7 @@ define( ["backbone"], function ( Backbone ) {
 		model: RemoteSiteCategoryModel,
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/admin/jobs/photos-import/" + options.importSourceId + "/categories/";
+			this.url = Backbone.JPhoto.url( "/rest/admin/jobs/photos-import/" + options.importSourceId + "/categories/" );
 		}
 
 	 } );
