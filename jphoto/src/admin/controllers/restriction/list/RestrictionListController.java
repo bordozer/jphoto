@@ -42,7 +42,9 @@ public class RestrictionListController {
 		restrictions.addAll( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
 		restrictions.addAll( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
 
-		model.setRestrictionTypes( RestrictionController.getRestrictionTypesJSON( restrictions ) );
+		model.setRestrictionStatuses( RestrictionController.convertToJSON( GenericTranslatableList.restrictionStatusList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
+
+		model.setRestrictionTypes( RestrictionController.convertToJSON( restrictions ) );
 
 		model.setPageTitleData( breadcrumbsAdminService.getRestrictionListBreadcrumbs() );
 

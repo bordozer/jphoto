@@ -51,6 +51,10 @@ public class GenericTranslatableList<T extends IdentifiableNameable> {
 		return new GenericTranslatableList<YesNo>( YesNo.values(), language, translatorService );
 	}
 
+	public static GenericTranslatableList<RestrictionStatus> restrictionStatusList( final Language language, final TranslatorService translatorService ) {
+		return new GenericTranslatableList<RestrictionStatus>( RestrictionStatus.values(), language, translatorService );
+	}
+
 	public static GenericTranslatableList<RestrictionType> restrictionUserTranslatableList( final Language language, final TranslatorService translatorService ) {
 		return new GenericTranslatableList<RestrictionType>( RestrictionType.FOR_USERS, language, translatorService );
 	}

@@ -27,6 +27,7 @@ define( ["backbone", "jquery", "underscore"
 			var modelJSON = this.model.toJSON();
 
 			modelJSON.restrictionTypes = this.model.restrictionTypes;
+			modelJSON.restrictionStatuses = this.model.restrictionStatuses;
 			modelJSON.translations = this.model.translations;
 
 			this.$el.html( this.template( modelJSON ) );

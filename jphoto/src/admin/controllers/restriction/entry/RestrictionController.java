@@ -52,7 +52,7 @@ public class RestrictionController {
 		model.setEntryId( user.getId() );
 		model.setEntryName( user.getNameEscaped() );
 
-		model.setRestrictionTypes( getRestrictionTypesJSON( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
+		model.setRestrictionTypes( convertToJSON( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
 		model.setRestrictionEntryType( RestrictionEntryType.USER );
 
 		return VIEW;
@@ -66,13 +66,13 @@ public class RestrictionController {
 		model.setEntryId( photo.getId() );
 		model.setEntryName( photo.getNameEscaped() );
 
-		model.setRestrictionTypes( getRestrictionTypesJSON( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
+		model.setRestrictionTypes( convertToJSON( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
 		model.setRestrictionEntryType( RestrictionEntryType.PHOTO );
 
 		return VIEW;
 	}
 
-	public static JSONArray getRestrictionTypesJSON( final List<GenericTranslatableEntry> restrictionTypes ) {
+	public static JSONArray convertToJSON( final List<GenericTranslatableEntry> restrictionTypes ) {
 
 		final List<JSONObject> jsonObjects = newArrayList();
 

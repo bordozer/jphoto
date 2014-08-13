@@ -1,6 +1,8 @@
 package core.enums;
 
-public enum RestrictionStatus {
+import core.interfaces.IdentifiableNameable;
+
+public enum RestrictionStatus implements IdentifiableNameable {
 
 	PROGRESS( 1, "RestrictionStatus: Progress" )
 	, POSTPONED( 2, "RestrictionStatus: Postponed" )
