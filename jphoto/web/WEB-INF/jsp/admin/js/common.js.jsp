@@ -24,7 +24,7 @@ define( [ 'jquery' ], function ( $ ) {
 	return {
 		adminRestrictUser: function ( userId, userName ) {
 
-			var url = "${eco:baseAdminUrl()}/restriction/members/" + userId + "/";
+			var url = "${eco:baseAdminUrl()}/restrictions/members/" + userId + "/";
 			$( '#restrictEntryIFrame' ).attr( 'src', url );
 
 			$( "#restrictEntryIFrameDivId" )
@@ -39,7 +39,7 @@ define( [ 'jquery' ], function ( $ ) {
 
 		adminRestrictPhoto: function ( photoId, photoName ) {
 
-			var url = "${eco:baseAdminUrl()}/restriction/photos/" + photoId + "/";
+			var url = "${eco:baseAdminUrl()}/restrictions/photos/" + photoId + "/";
 			$( '#restrictEntryIFrame' ).attr( 'src', url );
 
 			$( "#restrictEntryIFrameDivId" )
