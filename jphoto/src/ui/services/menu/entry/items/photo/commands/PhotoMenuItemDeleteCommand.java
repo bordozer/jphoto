@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.system.Services;
 import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
+import ui.services.menu.entry.items.photo.AbstractPhotoMenuItem;
 
 public class PhotoMenuItemDeleteCommand extends AbstractEntryMenuItemCommand<Photo> {
 
@@ -18,6 +19,6 @@ public class PhotoMenuItemDeleteCommand extends AbstractEntryMenuItemCommand<Pho
 
 	@Override
 	public String getMenuCommand() {
-		return String.format( "deletePhoto( %d );", getId() );
+		return String.format( "deletePhotoFromContextMenu();" );
 	}
 }

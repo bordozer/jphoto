@@ -75,12 +75,28 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 		, bindMenuElementClick: function( menuElement, menuItemCommand, callbackMessage ) {
 
 			var model = this.model;
+			var view = this;
 
 			menuElement.click( function( evt ) {
 
 				function reloadPhotoCallback() {
 					if ( model.get( "contextMenuEntryModel" ) != undefined ) {
 						model.get( "contextMenuEntryModel" ).refresh();
+					}
+					if ( callbackMessage ) {
+						showUIMessage_Notification( callbackMessage );
+					}
+				}
+
+				function deletePhotoFromContextMenu() {
+
+					if ( ! confirm( "Delete photo?" ) ) {
+						return;
+					}
+					if ( model.get( "contextMenuEntryView" ) != undefined ) {
+						model.get( "contextMenuEntryModel" ).destroy();
+						view.remove();
+						model.get( "contextMenuEntryView" ).remove();
 					}
 					if ( callbackMessage ) {
 						showUIMessage_Notification( callbackMessage );

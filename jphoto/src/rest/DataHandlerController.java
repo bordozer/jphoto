@@ -54,6 +54,17 @@ public class DataHandlerController {
 		return previewGenerationService.generatePreviewSync( photoId ) != null;
 	}
 
+	@RequestMapping( method = RequestMethod.DELETE, value = "photos/{photoId}/" )
+	@ResponseBody
+	public boolean deletePhoto( final @PathVariable( "photoId" ) int photoId ) throws IOException, InterruptedException {
+
+		final Photo photo = photoService.load( photoId );
+
+		securityService.assertUserCanDeletePhoto( EnvironmentContext.getCurrentUser(), photo );
+
+		return photoService.delete( photoId );
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "photos/{photoId}/move-to-genre/{genreId}/", produces = "application/json" )
 	@ResponseBody
 	public boolean movePhotoToGenrePreview( final @PathVariable( "photoId" ) int photoId, final @PathVariable( "genreId" ) int genreId ) {

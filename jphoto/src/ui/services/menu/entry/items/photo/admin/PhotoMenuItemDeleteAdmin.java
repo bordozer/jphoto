@@ -33,4 +33,9 @@ public class PhotoMenuItemDeleteAdmin extends AbstractPhotoMenuItemOperationAdmi
 	public String getMenuCssClass() {
 		return MENU_ITEM_ADMIN_CSS_CLASS;
 	}
+
+	@Override
+	public String getCallbackMessage() {
+		return services.getTranslatorService().translate( "PhotoMenuItem: Photo $1 has been deleted", getLanguage(), menuEntry.getNameEscaped() );
+	}
 }

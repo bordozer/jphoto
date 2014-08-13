@@ -33,6 +33,11 @@
 	</translation>
 
 	<translation>
+		<nerd>PhotoMenuItem: Photo $1 has been deleted</nerd>
+		<ru><![CDATA[Работа $1 удалена]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>PhotoMenuItem: Complaint copyright</nerd>
 		<ru><![CDATA[Пожаловаться на нарушение авторских прав]]></ru>
 	</translation>
