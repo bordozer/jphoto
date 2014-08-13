@@ -39,6 +39,10 @@ define( ["backbone", "jquery", "underscore"
 		},
 
 		initialize: function( options ) {
+			this.initTranslations();
+		},
+
+		initTranslations: function() {
 			var historyEntryTranslations = {
 				restrictionDuration: 'Restriction history: Restriction duration'
 				, expiresAfter: 'Restriction history: Expires after'

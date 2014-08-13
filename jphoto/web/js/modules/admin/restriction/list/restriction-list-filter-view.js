@@ -16,6 +16,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		initialize: function() {
+
+			this.initTranslations();
+
 			this.listenTo( this.model, "sync", this.renderSearchResult );
 
 			this.renderSearchForm();
@@ -24,12 +27,23 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			this.model.fetch( { cache: false } );
 		},
 
+		initTranslations: function() {
+			var historyEntryTranslations = {
+				filterButtonTitle: 'Restriction filter form: Filter button title'
+				, emptySearchResultText: 'Restriction filter form: Empty Search Result Text'
+				, filterByTypeTitle: 'Restriction filter form: Filter by type title'
+				, filterByStatusTitle: 'Restriction filter form: Filter by status title'
+			};
+
+			this.translations = Backbone.JPhoto.ajaxService().translateAll( historyEntryTranslations );
+		},
+
 		renderSearchForm: function() {
 			var modelJSON = this.model.toJSON();
 
 			modelJSON.restrictionTypes = this.model.restrictionTypes;
 			modelJSON.restrictionStatuses = this.model.restrictionStatuses;
-			modelJSON.translations = this.model.translations;
+			modelJSON.translations = this.translations
 
 			this.$el.html( this.template( modelJSON ) );
 
