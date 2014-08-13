@@ -15,6 +15,7 @@ public class PhotoEntryDTO {
 	private boolean showPhotoContextMenu;
 
 	private String photoName;
+	private String photoLink;
 	private String photoAuthorLink;
 
 	private boolean showUserRank;
@@ -102,6 +103,14 @@ public class PhotoEntryDTO {
 
 	public void setPhotoName( final String photoName ) {
 		this.photoName = photoName;
+	}
+
+	public String getPhotoLink() {
+		return photoLink;
+	}
+
+	public void setPhotoLink( final String photoLink ) {
+		this.photoLink = photoLink;
 	}
 
 	public String getPhotoAuthorLink() {

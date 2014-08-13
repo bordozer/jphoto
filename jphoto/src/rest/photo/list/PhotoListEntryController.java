@@ -116,9 +116,11 @@ public class PhotoListEntryController {
 		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
 		if ( doesPreviewHasToBeHidden ) {
-			photoEntry.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
+			photoEntry.setPhotoName( photo.getName() ); // escaping!
+			photoEntry.setPhotoLink( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
 		} else {
-			photoEntry.setPhotoName( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
+			photoEntry.setPhotoName( photo.getName() ); // escaping!
+			photoEntry.setPhotoLink( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
 		}
 		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo, accessor, language ) );
 
