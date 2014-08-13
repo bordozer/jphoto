@@ -96,7 +96,7 @@ define( ["backbone", "jquery", "underscore", 'jquery_ui'
 		},
 
 		showSpinningWheel: function() {
-			var wheel = this.model.get( 'baseUrl' ) + "/images/progress.gif";
+			var wheel = Backbone.JPhoto.url( "/images/progress.gif" ); // TODO: take '/images' from settings
 			this.$( this.searchResultContainer ).html( "<img src='" + wheel +"' width='16' height='16'>" );
 			this.model.openSearchResult();
 		},

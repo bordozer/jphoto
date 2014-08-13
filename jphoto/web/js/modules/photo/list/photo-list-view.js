@@ -113,7 +113,7 @@ define( ["backbone", "jquery", "underscore"
 
 				var container = $( '<div style="display: inline-block; margin-right: 3px;"></div>', el );
 
-				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ], baseUrl: model.get( 'baseUrl' ) } );
+				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ] } );
 				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
 
 				iconsContainer.append( container );

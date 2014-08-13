@@ -91,7 +91,7 @@
 				for ( var i = 0; i < photosToRender.length; i++ ) {
 					var photoId = photosToRender[i];
 					var photoUniqueClass = 'photo-container-' + ${photoList.photoListId} +'-' + photoId;
-					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, '${eco:baseUrl()}', $( '.' + photoUniqueClass ) );
+					photoListEntry( photoId, ${photoList.photoListId}, ${isGroupOperationEnabled}, $( '.' + photoUniqueClass ) );
 				}
 			} );
 		}

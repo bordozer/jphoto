@@ -263,7 +263,7 @@
 
 				<script type="text/javascript">
 					require( ['modules/photo/appraisal/photo-appraisal'], function ( photoAppraisal ) {
-						photoAppraisal( ${photoId}, ${loggedUser.id}, '${eco:baseUrl()}', $( '.photo-appraisal-form-div' ) );
+						photoAppraisal( ${photoId}, ${loggedUser.id}, $( '.photo-appraisal-form-div' ) );
 					} );
 				</script>
 			</div>

@@ -15,11 +15,11 @@ define( ["backbone"], function ( Backbone ) {
 		saveRestriction: function( data ) {
 
 			if ( data.rangeType == 1 ) {
-				this.ajaxService.restrictEntryForPeriod( this.entryId, data.timePeriod, data.timeUnit, data.restrictionTypeIds );
+				Backbone.JPhoto.ajaxService.restrictEntryForPeriod( this.entryId, data.timePeriod, data.timeUnit, data.restrictionTypeIds );
 			} else {
 				var from = new Date( data.dateFrom ).getTime();
 				var to = new Date( data.dateTo ).getTime();
-				this.ajaxService.restrictEntryForRange( this.entryId, from, to, data.restrictionTypeIds );
+				Backbone.JPhoto.restrictEntryForRange( this.entryId, from, to, data.restrictionTypeIds );
 			}
 
 			document.location.reload(); // TODO: find out hot to refresh restriction history without page reloading

@@ -63,6 +63,6 @@
 		var userTeamMemberTypes = ${userTeamMemberTypes};
 		var translationDTO = ${translationDTO};
 
-		userTeam( ${photoId}, "${baseUrl}", $( '.user-team-container' ), userTeamMemberTypes, translationDTO );
+		userTeam( ${photoId}, $( '.user-team-container' ), userTeamMemberTypes, translationDTO );
 	} );
 </script>

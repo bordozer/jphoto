@@ -24,7 +24,7 @@ define( ["backbone"], function ( Backbone ) {
 		translationDTO: [],
 
 		initialize: function ( options ) {
-			this.url = options.baseUrl + "/rest/photos/" + options.photoId + "/team/";
+			this.url = Backbone.JPhoto.url( "/rest/photos/" + options.photoId + "/team/" );
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
 			this.translationDTO = options.translationDTO;
 		},

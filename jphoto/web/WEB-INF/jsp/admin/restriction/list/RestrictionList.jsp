@@ -49,7 +49,7 @@
 			var restrictionTypes = ${restrictionListModel.restrictionTypes};
 			var restrictionStatuses = ${restrictionListModel.restrictionStatuses};
 
-			func( restrictionTypes, restrictionStatuses, translations, historyEntryTranslations, "${baseUrl}", $( '#restriction-list-container' ) );
+			func( restrictionTypes, restrictionStatuses, translations, historyEntryTranslations, $( '#restriction-list-container' ) );
 		} );
 
 	</script>

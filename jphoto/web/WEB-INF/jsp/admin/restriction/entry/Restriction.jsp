@@ -1,6 +1,3 @@
-<%@ page import="ui.services.ajax.AjaxService" %>
-<%@ page import="ui.context.ApplicationContextHelper" %>
-<%@ page import="org.jabsorb.JSONRPCBridge" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -9,9 +6,6 @@
 <c:set var="entryId" value="${restrictionModel.entryId}" />
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 
-<%
-	JSONRPCBridge.getGlobalBridge().registerObject( "ajaxService", ApplicationContextHelper.<AjaxService>getBean( AjaxService.BEAN_NAME ) );
-%>
 <c:set var="restrictionEntryTypeId" value="${restrictionModel.restrictionEntryType.id}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -58,11 +52,7 @@
 
 	</div>
 
-	<script type="text/javascript" src="${baseUrl}/js/lib/jsonrpc.js"></script>
-
 	<script type="text/javascript">
-
-		var jsonRPC = new JSONRpcClient( "${baseUrl}/JSON-RPC" );
 
 		require( ['modules/admin/restriction/restriction/restriction'], function ( func ) {
 			var translations = {
@@ -77,7 +67,7 @@
 
 			var restrictionTypes = ${restrictionModel.restrictionTypes};
 
-			func( ${entryId}, ${restrictionEntryTypeId}, restrictionTypes, translations, $( '#new-restriction-form' ), jsonRPC.ajaxService );
+			func( ${entryId}, ${restrictionEntryTypeId}, restrictionTypes, translations, $( '#new-restriction-form' ) );
 		} );
 
 		require( ['modules/admin/restriction/restriction-history/restriction-history'], function ( func ) {
@@ -103,7 +93,7 @@
 				, deleteConfirmation: "${eco:translate('Restriction history: was delete confirmation')}"
 			};
 
-			func( filter, historyEntryTranslations, "${baseUrl}", $( '#restriction-history-container' ) );
+			func( filter, historyEntryTranslations, $( '#restriction-history-container' ) );
 		} );
 
 	</script>

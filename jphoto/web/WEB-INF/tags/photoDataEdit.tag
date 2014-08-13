@@ -59,7 +59,7 @@
 
 						function photoCategoryHandler( authorId, photoId, categoryId ) {
 							require( ['modules/photo/upload/category/photo-category-handler'], function ( categoryHandler ) {
-								categoryHandler( authorId, photoId, categoryId, '${photoEditDataModel.photo.fileSize}', '${eco:baseUrl()}', $( '.photo-category-handler-container' ) );
+								categoryHandler( authorId, photoId, categoryId, '${photoEditDataModel.photo.fileSize}', $( '.photo-category-handler-container' ) );
 							} );
 						}
 					</script>
