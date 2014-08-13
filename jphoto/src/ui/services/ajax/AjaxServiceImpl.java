@@ -477,6 +477,11 @@ public class AjaxServiceImpl implements AjaxService {
 		}
 	}
 
+	@Override
+	public String translate( final String nerd ) {
+		return translatorService.translate( nerd, EnvironmentContext.getLanguage() );
+	}
+
 	private Restrictable getRestrictableEntry( final int entryId, final RestrictionType restrictionType ) {
 		return RestrictionType.FOR_USERS.contains( restrictionType ) ? userService.load( entryId ) : photoService.load( entryId );
 	}

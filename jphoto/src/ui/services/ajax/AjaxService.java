@@ -41,4 +41,6 @@ public interface AjaxService {
 	void restrictEntryForPeriod( final int entryId, final int period, final int unitId, final String[] restrictionTypeIds );
 
 	void restrictEntryForRange( final int entryId, final long _timeFrom, final long _timeTo, final String[] restrictionTypeIds );
+
+	String translate( final String nerd );
 }

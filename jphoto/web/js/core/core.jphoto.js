@@ -16,6 +16,10 @@ define( [ 'backbone', 'underscore' ], function ( Backbone, _ ) {
 
 		ajaxService: function() {
 			return this.options.ajaxService;
+		},
+
+		translate: function( nerd ) {
+			return this.options.ajaxService.translate( nerd );
 		}
 	} );
 
