@@ -5,15 +5,24 @@ import org.json.JSONArray;
 
 public class RestrictionListModel extends AbstractGeneralPageModel {
 
-	private JSONArray restrictionTypes;
+	private JSONArray restrictionTypesUser;
+	private JSONArray restrictionTypesPhoto;
 	private JSONArray restrictionStatuses;
 
-	public void setRestrictionTypes( final JSONArray restrictionTypes ) {
-		this.restrictionTypes = restrictionTypes;
+	public JSONArray getRestrictionTypesUser() {
+		return restrictionTypesUser;
 	}
 
-	public JSONArray getRestrictionTypes() {
-		return restrictionTypes;
+	public void setRestrictionTypesUser( final JSONArray restrictionTypesUser ) {
+		this.restrictionTypesUser = restrictionTypesUser;
+	}
+
+	public JSONArray getRestrictionTypesPhoto() {
+		return restrictionTypesPhoto;
+	}
+
+	public void setRestrictionTypesPhoto( final JSONArray restrictionTypesPhoto ) {
+		this.restrictionTypesPhoto = restrictionTypesPhoto;
 	}
 
 	public void setRestrictionStatuses( final JSONArray restrictionStatuses ) {

@@ -4,18 +4,37 @@
 
 		<div class="user-picker-container" style="float: left; width: 100%; margin-bottom: 10px;"></div>
 
-		<img class="mass-selector-icon-restriction-type" width="16" height="16" /> <b><%=translations.filterByTypeTitle%></b>:
+		<img class="mass-selector-icon-restriction-type-user" width="16" height="16" /> <b><%=translations.filterByUserRestrictionsTitle%></b>:
 
 		<br />
 		<br />
 
-		<% _.each( restrictionTypes, function( restrictionType ) { %>
-			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type">
+		<% _.each( restrictionTypesUser, function( restrictionType ) { %>
+			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-user">
 			<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
 			<br />
 		<% }) %>
 
 		<br />
+
+
+
+
+		<img class="mass-selector-icon-restriction-type-photo" width="16" height="16" /> <b><%=translations.filterByPhotoRestrictionsTitle%></b>:
+
+		<br />
+		<br />
+
+		<% _.each( restrictionTypesPhoto, function( restrictionType ) { %>
+			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-photo">
+			<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
+			<br />
+		<% }) %>
+
+		<br />
+
+
+
 
 		<img class="mass-selector-icon-restriction-status" width="16" height="16" />  <b><%=translations.filterByStatusTitle%></b>:
 

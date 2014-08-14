@@ -22,17 +22,11 @@
 
 		require( ['modules/admin/restriction/list/restriction-list'], function ( func ) {
 
-			/*var translations = {
-				filterButtonTitle: "${eco:translate('Restriction filter form: Filter button title')}"
-				, emptySearchResultText: "${eco:translate('Restriction filter form: Empty Search Result Text')}"
-				, filterByTypeTitle: "${eco:translate('Restriction filter form: Filter by type title')}"
-				, filterByStatusTitle: "${eco:translate('Restriction filter form: Filter by status title')}"
-			};*/
-
-			var restrictionTypes = ${restrictionListModel.restrictionTypes};
+			var restrictionTypesUser = ${restrictionListModel.restrictionTypesUser};
+			var restrictionTypesPhoto = ${restrictionListModel.restrictionTypesPhoto};
 			var restrictionStatuses = ${restrictionListModel.restrictionStatuses};
 
-			func( restrictionTypes, restrictionStatuses, $( '#restriction-list-container' ) );
+			func( restrictionTypesUser, restrictionTypesPhoto, restrictionStatuses, $( '#restriction-list-container' ) );
 		} );
 
 	</script>

@@ -9,12 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
-import ui.translatable.GenericTranslatableEntry;
 import ui.translatable.GenericTranslatableList;
-
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @RequestMapping( "restrictions" )
 @Controller
@@ -38,13 +33,10 @@ public class RestrictionListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showRestrictions( final @ModelAttribute( MODEL_NAME ) RestrictionListModel model ) {
 
-		final List<GenericTranslatableEntry> restrictions = newArrayList();
-		restrictions.addAll( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
-		restrictions.addAll( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() );
+		model.setRestrictionTypesUser( RestrictionController.convertToJSON( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
+		model.setRestrictionTypesPhoto( RestrictionController.convertToJSON( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
 
 		model.setRestrictionStatuses( RestrictionController.convertToJSON( GenericTranslatableList.restrictionStatusList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
-
-		model.setRestrictionTypes( RestrictionController.convertToJSON( restrictions ) );
 
 		model.setPageTitleData( breadcrumbsAdminService.getRestrictionListBreadcrumbs() );
 

@@ -13,13 +13,18 @@
 	</translation>
 
 	<translation>
-		<nerd>Restriction filter form: Filter by type title</nerd>
-		<ru><![CDATA[Фильтр по типу]]></ru>
+		<nerd>Restriction filter form: Filter by user restrictions title</nerd>
+		<ru><![CDATA[Ограничения пользователей]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Restriction filter form: Filter by photo restrictions title</nerd>
+		<ru><![CDATA[Ограничения работ]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Restriction filter form: Filter by status title</nerd>
-		<ru><![CDATA[Фильтр по статусу]]></ru>
+		<ru><![CDATA[Статус]]></ru>
 	</translation>
 
 	<translation>

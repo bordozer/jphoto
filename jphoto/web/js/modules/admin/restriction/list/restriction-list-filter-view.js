@@ -31,7 +31,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var historyEntryTranslations = {
 				filterButtonTitle: 'Restriction filter form: Filter button title'
 				, emptySearchResultText: 'Restriction filter form: Empty Search Result Text'
-				, filterByTypeTitle: 'Restriction filter form: Filter by type title'
+				, filterByUserRestrictionsTitle: 'Restriction filter form: Filter by user restrictions title'
+				, filterByPhotoRestrictionsTitle: 'Restriction filter form: Filter by photo restrictions title'
 				, filterByStatusTitle: 'Restriction filter form: Filter by status title'
 			};
 
@@ -41,14 +42,16 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderSearchForm: function() {
 			var modelJSON = this.model.toJSON();
 
-			modelJSON.restrictionTypes = this.model.restrictionTypes;
+			modelJSON.restrictionTypesUser = this.model.restrictionTypesUser;
+			modelJSON.restrictionTypesPhoto = this.model.restrictionTypesPhoto;
 			modelJSON.restrictionStatuses = this.model.restrictionStatuses;
-			modelJSON.translations = this.translations
+			modelJSON.translations = this.translations;
 
 			this.$el.html( this.template( modelJSON ) );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerUnselected( "restriction-type", "/images" );
+			massSelector.registerUnselected( "restriction-type-user", "/images" );
+			massSelector.registerUnselected( "restriction-type-photo", "/images" );
 			massSelector.registerUnselected( "restriction-status", "/images" );
 
 			this.renderUserPicker();
@@ -89,7 +92,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.stopImmediatePropagation();
 
 			var selectedRestrictionTypeIds = [];
-			$( ".restriction-type:checked" ).each( function () {
+			$( ".restriction-type-user:checked" ).each( function () {
 				selectedRestrictionTypeIds.push( this.value );
 			} );
 
