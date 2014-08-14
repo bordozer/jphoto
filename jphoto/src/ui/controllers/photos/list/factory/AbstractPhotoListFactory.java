@@ -18,9 +18,9 @@ public abstract class AbstractPhotoListFactory {
 	protected AbstractPhotoListTitle photoListTitle;
 
 	protected Services services;
-	protected final User user;
+	protected final User accessor;
 
-	protected abstract PhotoListMetrics filterOutRestrictedPhotos( final SqlSelectIdsResult selectIdsResult );
+	protected abstract PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery );
 
 	protected abstract String getLinkToFullList();
 
@@ -28,16 +28,14 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
 
-	public AbstractPhotoListFactory( final User user, final Services services ) {
+	public AbstractPhotoListFactory( final User accessor, final Services services ) {
 		this.services = services;
-		this.user = user;
+		this.accessor = accessor;
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language ) {
 
-		final SqlSelectIdsResult selectResult = services.getPhotoService().load( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
-
-		final PhotoListMetrics metrics = filterOutRestrictedPhotos( selectResult );
+		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), photoListTitle.getPhotoListTitle().build( language ), showPaging() );
 
@@ -52,5 +50,9 @@ public abstract class AbstractPhotoListFactory {
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
+	}
+
+	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
+		return services.getPhotoService().load( selectIdsQuery );
 	}
 }

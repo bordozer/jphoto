@@ -839,23 +839,6 @@ public class PhotoListController {
 
 		final List<Integer> ids = sqlSelectIdsResult.getIds();
 
-//		final int photosCountToShow = ids.size();
-
-		final Date currentTime = dateUtilsService.getCurrentTime();
-		CollectionUtils.filter( ids, new Predicate<Integer>() {
-			@Override
-			public boolean evaluate( final Integer photoId ) {
-				return ! restrictionService.isPhotoBeingInTopRestrictedOn( photoId, currentTime )
-					&& ! restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
-			}
-		} );
-		// TODO: add another photos if something was filtered && filter only TOP
-
-		/*final int diff = ids.size() - photosCountToShow;
-		if ( diff > 0 ) {
-			addAnotherPhotosToList( diff );
-		}*/
-
 		return ids;
 	}
 
