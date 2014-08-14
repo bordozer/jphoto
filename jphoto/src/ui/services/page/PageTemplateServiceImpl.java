@@ -176,10 +176,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 		final List<User> users = userService.loadAll();
 		final List<UserLogin> userLogins = newArrayList();
 		for ( final User user : users ) {
-			String role = user.getUserStatus().getName().substring( 0, 1 );
-			if ( securityService.isSuperAdminUser( user.getId() ) ) {
-				role = "SA";
-			}
+			final String role = securityService.isSuperAdminUser( user.getId() ) ? "SA" : translatorService.translate( user.getUserStatus().getName(), EnvironmentContext.getLanguage() ).substring( 0, 1 );
 			userLogins.add( new UserLogin( String.format( "%s (%s)", StringUtilities.escapeHtml( StringUtilities.truncateString( user.getName(), 13 ) ), role ), user.getLogin() ) );
 		}
 		Collections.sort( userLogins, new Comparator<UserLogin>() {

@@ -152,7 +152,7 @@
 
 			<c:if test="${photoCardModel.commentingValidationResult.validationFailed}">
 				<div class="footerseparatorsmall"></div>
-				<tags:validationResult title_t="ValidationResult: You can not leave comments" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
+				<tags:validationResult title_t="ValidationResult: You can not comment the photo" validationMessage="${photoCardModel.commentingValidationResult.validationMessage}" />
 			</c:if>
 
 			<div class="footerseparator"></div>
@@ -249,12 +249,6 @@
 		<div class="photoInfoAndVotingDiv">
 			<photo:photoInfo photoInfo="${photoCardModel.photoInfo}" votingModel="${photoCardModel.votingModel}" />
 
-			<%--<c:if test="${photoCardModel.votingValidationResult.validationPassed}">--%>
-				<%--<photo:DEL_photoVoting photo="${photo}"
-								   userPhotoVotes="${photoCardModel.userPhotoVotes}"
-								   minMarkForGenre="${photoCardModel.votingUserMinAccessibleMarkForGenre}"
-								   maxMarkForGenre="${photoCardModel.votingUserMaxAccessibleMarkForGenre}"
-						/>--%>
 			<div class="votingDiv photo-appraisal-form-div">
 
 				<div style="text-align: center;">
@@ -267,13 +261,7 @@
 					} );
 				</script>
 			</div>
-			<%--</c:if>--%>
 
-			<%--<c:if test="${photoCardModel.votingValidationResult.validationFailed}">
-				<div class="cannotVoteDiv block-background block-border">
-					<tags:validationResult title_t="You can not vote" validationMessage="${photoCardModel.votingValidationResult.validationMessage}" />
-				</div>
-			</c:if>--%>
 		</div>
 	</div>
 

@@ -4,7 +4,7 @@
 <%@ attribute name="title_t" required="false" type="java.lang.String" %>
 <%@ attribute name="validationMessage" required="true" type="java.lang.String" %>
 
-<div class="floatleft text-centered">
-	<h3>${title_t}</h3>
+<div class="text-centered" style="width: 90%;">
+	<h6>${eco:translate(title_t)}</h6>
 	<span class="restriction-message">${validationMessage}</span>
 </div>

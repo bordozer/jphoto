@@ -22,6 +22,10 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	EntryRestriction getPhotoOfTheDayRestrictionOn( int photoId, Date time );
 
+	EntryRestriction getPhotoAppraisalRestrictionOn( int photoId, Date time );
+
+	EntryRestriction getPhotoCommentingRestrictionOn( int photoId, Date time );
+
 	boolean isUserLoginRestrictedOn( final int userId, final Date time );
 
 	boolean isPhotoOfTheDayRestrictedOn( int photoId, Date time );
@@ -40,5 +44,7 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	boolean deactivate( final int entryId, final User cancellingUser, final Date cancellingTime );
 
-	TranslatableMessage getRestrictionMessage( EntryRestriction restriction );
+	TranslatableMessage getUserRestrictionMessage( EntryRestriction restriction );
+
+	TranslatableMessage getPhotoRestrictionMessage( EntryRestriction restriction );
 }

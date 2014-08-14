@@ -71,6 +71,16 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public EntryRestriction getPhotoAppraisalRestrictionOn( final int photoId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( photoId, RestrictionType.PHOTO_APPRAISAL, time ) );
+	}
+
+	@Override
+	public EntryRestriction getPhotoCommentingRestrictionOn( final int photoId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( photoId, RestrictionType.PHOTO_COMMENTING, time ) );
+	}
+
+	@Override
 	public boolean isUserLoginRestrictedOn( final int userId, final Date time ) {
 		return isRestrictedOn( userId, RestrictionType.USER_LOGIN, time );
 	}
@@ -154,14 +164,25 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public TranslatableMessage getRestrictionMessage( final EntryRestriction restriction ) {
+	public TranslatableMessage getUserRestrictionMessage( final EntryRestriction restriction ) {
 		return new TranslatableMessage( "You are restricted in $1 because $2 on $3 restricted you in this rights. The restriction is active from $4 till $5.", services )
-				.translatableString( restriction.getRestrictionType().getName() )
-				.string( restriction.getCreator().getNameEscaped() )
-				.dateTimeFormatted( restriction.getCreatingTime() )
-				.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
-				.dateTimeFormatted( restriction.getRestrictionTimeTo() )
-				;
+			.translatableString( restriction.getRestrictionType().getName() )
+			.string( restriction.getCreator().getNameEscaped() )
+			.dateTimeFormatted( restriction.getCreatingTime() )
+			.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
+			.dateTimeFormatted( restriction.getRestrictionTimeTo() )
+			;
+	}
+
+	@Override
+	public TranslatableMessage getPhotoRestrictionMessage( final EntryRestriction restriction ) {
+		return new TranslatableMessage( "$1 is disabled for the photo by $2 on $3. The restriction is active from $4 till $5.", services )
+			.translatableString( restriction.getRestrictionType().getName() )
+			.string( restriction.getCreator().getNameEscaped() )
+			.dateTimeFormatted( restriction.getCreatingTime() )
+			.dateTimeFormatted( restriction.getRestrictionTimeFrom() )
+			.dateTimeFormatted( restriction.getRestrictionTimeTo() )
+			;
 	}
 
 	private  List<EntryRestriction> getRestrictionsOn( final int entryId, final RestrictionType restrictionType, final Date time ) {

@@ -184,18 +184,12 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 
 		private EntryRestriction<Restrictable> getRestrictionEntry( final int entryId, final RestrictionType restrictionType ) {
 
-			switch ( restrictionType ) {
-				case USER_LOGIN:
-				case USER_PHOTO_UPLOADING:
-				case USER_COMMENTING:
-				case USER_MESSAGING:
-				case USER_PHOTO_APPRAISAL:
-				case USER_VOTING_FOR_RANK_IN_GENRE:
-					return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
-				case PHOTO_TO_BE_PHOTO_OF_THE_DAY:
-				case PHOTO_TO_BE_BEST_IN_GENRE:
-				case PHOTO_COMMENTING:
-					return new EntryRestriction<>( photoDao.load( entryId ), restrictionType );
+			if ( RestrictionType.FOR_USERS.contains( restrictionType ) ) {
+				return new EntryRestriction<>( userDao.load( entryId ), restrictionType );
+			}
+
+			if ( RestrictionType.FOR_PHOTOS.contains( restrictionType ) ) {
+				return new EntryRestriction<>( photoDao.load( entryId ), restrictionType );
 			}
 
 			throw new IllegalArgumentException( String.format( "Illegal restrictionType: '%s'", restrictionType ) );

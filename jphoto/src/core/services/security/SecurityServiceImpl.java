@@ -326,10 +326,18 @@ public class SecurityServiceImpl implements SecurityService {
 			return allowanceValidationResult;
 		}
 
-		final EntryRestriction restrictionOn = restrictionService.getUserPhotoCommentingRestrictionOn( user.getId(), time ); //
-		if ( restrictionOn != null ) {
+		final EntryRestriction userCommentingRestrictionOn = restrictionService.getUserPhotoCommentingRestrictionOn( user.getId(), time );
+		if ( userCommentingRestrictionOn != null ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
-			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
+			result.failValidation( restrictionService.getUserRestrictionMessage( userCommentingRestrictionOn ).build( language ) );
+
+			return result;
+		}
+
+		final EntryRestriction photoCommentingRestrictionOn = restrictionService.getPhotoCommentingRestrictionOn( photo.getId(), time );
+		if ( photoCommentingRestrictionOn != null ) {
+			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
+			result.failValidation( restrictionService.getPhotoRestrictionMessage( photoCommentingRestrictionOn ).build( language ) );
 
 			return result;
 		}
@@ -394,7 +402,14 @@ public class SecurityServiceImpl implements SecurityService {
 
 		final EntryRestriction restrictionOn = restrictionService.getUserPhotoAppraisalRestrictionOn( user.getId(), time );
 		if ( restrictionOn != null ) {
-			allowanceValidationResult.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
+			allowanceValidationResult.failValidation( restrictionService.getUserRestrictionMessage( restrictionOn ).build( language ) );
+
+			return allowanceValidationResult;
+		}
+
+		final EntryRestriction photoCommentingRestrictionOn = restrictionService.getPhotoAppraisalRestrictionOn( photo.getId(), time );
+		if ( photoCommentingRestrictionOn != null ) {
+			allowanceValidationResult.failValidation( restrictionService.getPhotoRestrictionMessage( photoCommentingRestrictionOn ).build( language ) );
 
 			return allowanceValidationResult;
 		}
@@ -482,7 +497,7 @@ public class SecurityServiceImpl implements SecurityService {
 		final EntryRestriction restrictionOn = restrictionService.getUserRankVotingRestrictionOn( voter.getId(), time );
 		if ( restrictionOn != null ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
-			result.failValidation( restrictionService.getRestrictionMessage( restrictionOn ).build( language ) );
+			result.failValidation( restrictionService.getUserRestrictionMessage( restrictionOn ).build( language ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;
