@@ -28,9 +28,6 @@
 		.language {
 			padding: 2px;
 		}
-		.selectedLanguage {
-			border: 1px solid #bbbbbb;
-		}
 	</style>
 
 </head>

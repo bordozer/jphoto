@@ -195,7 +195,7 @@ public class PageTemplateServiceImpl implements PageTemplateService {
 			final LanguageWrapper wrapper = new LanguageWrapper( lang );
 			wrapper.setTitle( translatorService.translate( lang.getName(), lang ) );
 			if ( language == lang ) {
-				wrapper.setStyle( "selectedLanguage" );
+				wrapper.setStyle( "block-shadow" );
 				wrapper.setTitle( translatorService.translate( "$1 - selected UI language", lang, translatorService.translate( lang.getName(), lang ) ) );
 			}
 			uiLanguages.add( wrapper );
