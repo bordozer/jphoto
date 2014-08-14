@@ -141,7 +141,7 @@ public class PhotoListEntryController {
 
 		photoEntry.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
 
-		photoEntry.setShowAdminFlag_Restricted( isSuperAdminUser && isPhotoRestricted( photo ) );
+		photoEntry.setShowAdminFlag_Restricted( isPhotoRestricted( photo ) );
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 

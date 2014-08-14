@@ -96,7 +96,9 @@ public abstract class AbstractPhotoListFactory {
 		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return !services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+				return ! services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime )
+					|| services.getSecurityService().userOwnThePhoto( accessor, photoId )
+					;
 			}
 		} );
 
