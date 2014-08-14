@@ -43,6 +43,7 @@ public class PhotoEntryDTO {
 
 	private boolean userOwnThePhoto;
 	private List<PhotoBookmarkIcon> photoBookmarkIcons;
+	private boolean showAdminFlag_Restricted;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -215,6 +216,14 @@ public class PhotoEntryDTO {
 
 	public void setShowAdminFlag_Nude( final boolean showAdminFlag_Nude ) {
 		this.showAdminFlag_Nude = showAdminFlag_Nude;
+	}
+
+	public void setShowAdminFlag_Restricted( final boolean showAdminFlag_Restricted ) {
+		this.showAdminFlag_Restricted = showAdminFlag_Restricted;
+	}
+
+	public boolean isShowAdminFlag_Restricted() {
+		return showAdminFlag_Restricted;
 	}
 
 	public boolean isUserOwnThePhoto() {

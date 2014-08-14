@@ -11,6 +11,7 @@ import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoPreviewService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -92,6 +93,9 @@ public class PhotoListEntryController {
 	@Autowired
 	private FavoritesService favoritesService;
 
+	@Autowired
+	private RestrictionService restrictionService;
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
@@ -135,7 +139,9 @@ public class PhotoListEntryController {
 
 		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
 
-		photoEntry.setShowAdminFlag_Nude( photo.isContainsNudeContent() && isSuperAdminUser );
+		photoEntry.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
+
+		photoEntry.setShowAdminFlag_Restricted( isSuperAdminUser && isPhotoRestricted( photo ) );
 
 		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
 
@@ -151,6 +157,15 @@ public class PhotoListEntryController {
 		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );
 
 		return photoEntry;
+	}
+
+	private boolean isPhotoRestricted( final Photo photo ) {
+		final Date currentTime = dateUtilsService.getCurrentTime();
+		return restrictionService.isPhotoOfTheDayRestrictedOn( photo.getId(), currentTime )
+			|| restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photo.getId(), currentTime )
+			|| restrictionService.isPhotoBeingInTopRestrictedOn( photo.getId(), currentTime )
+			|| restrictionService.isUserPhotoAppraisalRestrictedOn( photo.getId(), currentTime )
+			;
 	}
 
 	private String getPhotoUploadDate( final Photo photo, final Language language ) {

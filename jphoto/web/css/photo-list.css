@@ -146,3 +146,13 @@
 	/*background: red;*/
 	/*border: 1px solid red;*/
 }
+
+.admin-special-flag-restriction {
+	/*width: 240px;*/
+	background-image:url('/images/icons24/admin-special-flag-restriction.png');
+	background-repeat:no-repeat;
+	background-size: 16px 16px;
+	background-position: 220px 413px;
+	/*background: red;*/
+	/*border: 1px solid red;*/
+}
