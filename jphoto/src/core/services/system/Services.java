@@ -7,6 +7,7 @@ import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -111,6 +112,8 @@ public interface Services {
 	PhotoListCriteriasService getPhotoListCriteriasService();
 
 	GroupOperationService getGroupOperationService();
+
+	RestrictionService getRestrictionService();
 
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

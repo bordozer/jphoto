@@ -12,8 +12,6 @@ import ui.context.EnvironmentContext;
 import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PhotoList;
 
-import java.util.List;
-
 public abstract class AbstractPhotoListFactory {
 
 	protected PhotoListCriterias criterias;
@@ -22,11 +20,13 @@ public abstract class AbstractPhotoListFactory {
 	protected Services services;
 	protected final User user;
 
-	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
+	protected abstract PhotoListMetrics filterOutRestrictedPhotos( final SqlSelectIdsResult selectIdsResult );
 
 	protected abstract String getLinkToFullList();
 
 	protected abstract boolean showPaging();
+
+	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
 
 	public AbstractPhotoListFactory( final User user, final Services services ) {
 		this.services = services;
@@ -35,23 +35,21 @@ public abstract class AbstractPhotoListFactory {
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language ) {
 
-		final SqlIdsSelectQuery selectQuery = services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlSelectIdsResult selectResult = services.getPhotoService().load( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 
-		final SqlSelectIdsResult selectResult = services.getPhotoService().load( selectQuery );
+		final PhotoListMetrics metrics = filterOutRestrictedPhotos( selectResult );
 
-		final List<Integer> photoIds = selectResult.getIds();
-
-		final PhotoList photoList = new PhotoList( photoIds, photoListTitle.getPhotoListTitle().build( language ), showPaging() );
+		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), photoListTitle.getPhotoListTitle().build( language ), showPaging() );
 
 		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText( criterias ) );
 		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( EnvironmentContext.getLanguage() ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
-		photoList.setPhotoGroupOperationMenuContainer( photoIds.size() > 0 ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotoGroupOperationMenuContainer( metrics.getPhotoIds().size() > 0 ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
 
 		photoList.setPhotoListId( photoListId );
 
-		pagingModel.setTotalItems( selectResult.getRecordQty() );
+		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
 	}

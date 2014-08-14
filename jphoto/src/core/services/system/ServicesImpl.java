@@ -7,6 +7,7 @@ import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
@@ -158,6 +159,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private GroupOperationService groupOperationService;
+
+	@Autowired
+	private RestrictionService restrictionService;
 
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -392,6 +396,11 @@ public class ServicesImpl implements Services {
 		return groupOperationService;
 	}
 
+	@Override
+	public RestrictionService getRestrictionService() {
+		return restrictionService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -579,6 +588,10 @@ public class ServicesImpl implements Services {
 
 	public void setGroupOperationService( final GroupOperationService groupOperationService ) {
 		this.groupOperationService = groupOperationService;
+	}
+
+	public void setRestrictionService( final RestrictionService restrictionService ) {
+		this.restrictionService = restrictionService;
 	}
 
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {

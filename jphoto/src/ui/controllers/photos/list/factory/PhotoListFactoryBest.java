@@ -3,8 +3,14 @@ package ui.controllers.photos.list.factory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
+import sql.SqlSelectIdsResult;
 
 public class PhotoListFactoryBest extends AbstractPhotoListFactory {
+
+	@Override
+	protected PhotoListMetrics filterOutRestrictedPhotos( final SqlSelectIdsResult selectIdsResult ) {
+		return new PhotoListMetrics( selectIdsResult.getIds(), selectIdsResult.getRecordQty() );
+	}
 
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
