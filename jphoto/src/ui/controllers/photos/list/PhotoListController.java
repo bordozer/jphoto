@@ -829,7 +829,8 @@ public class PhotoListController {
 		CollectionUtils.filter( ids, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! restrictionService.isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+				return ! restrictionService.isPhotoBeingInTopRestrictedOn( photoId, currentTime )
+					&& ! restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
 			}
 		} );
 		// TODO: add another photos if something was filtered && filter only TOP

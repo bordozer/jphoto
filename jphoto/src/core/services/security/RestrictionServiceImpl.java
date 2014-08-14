@@ -101,6 +101,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public boolean isPhotoShowingInPhotoGalleryRestrictedOn( final int photoId, final Date time ) {
+		return isRestrictedOn( photoId, RestrictionType.PHOTO_SHOWING_IN_PHOTO_GALLERY, time );
+	}
+
+	@Override
 	public void assertUserLoginIsNotRestricted( final User user, final Date time ) {
 		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( user.getId(), RestrictionType.USER_LOGIN, time );
 		if ( activeRestrictions != null && activeRestrictions.size() > 0 ) {
