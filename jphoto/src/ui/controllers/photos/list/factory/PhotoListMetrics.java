@@ -19,4 +19,8 @@ public class PhotoListMetrics {
 	public int getPhotosCount() {
 		return photosCount;
 	}
+
+	public boolean hasPhotos() {
+		return photoIds != null && photoIds.size() > 0;
+	}
 }

@@ -48,7 +48,7 @@ public abstract class AbstractPhotoListFactory {
 		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( EnvironmentContext.getLanguage() ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
-		photoList.setPhotoGroupOperationMenuContainer( metrics.getPhotoIds().size() > 0 ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
 
 		photoList.setPhotoListId( photoListId );
 
