@@ -32,6 +32,7 @@ public class RestrictionHistoryEntryDTO {
 
 	private String status;
 	private String entryLink;
+	private String entryLinkUrl;
 
 	private String entryImage;
 	private String restrictionEntryTypeName;
@@ -202,6 +203,14 @@ public class RestrictionHistoryEntryDTO {
 
 	public String getEntryLink() {
 		return entryLink;
+	}
+
+	public String getEntryLinkUrl() {
+		return entryLinkUrl;
+	}
+
+	public void setEntryLinkUrl( final String entryLinkUrl ) {
+		this.entryLinkUrl = entryLinkUrl;
 	}
 
 	public String getEntryImage() {

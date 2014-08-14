@@ -135,7 +135,7 @@ public class RestrictionController {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();
 
 		dto.setId( restriction.getId() );
-		dto.setEntryLink( getEntryLink( restriction.getEntry().getId(), restriction.getRestrictionType() ) );
+
 		dto.setRestrictionName( translatorService.translate( restriction.getRestrictionType().getName(), getLanguage() ) );
 		dto.setRestrictionIcon( String.format( "%s/%s", urlUtilsService.getSiteImagesPath(), restriction.getRestrictionType().getIcon() ) );
 
@@ -152,7 +152,7 @@ public class RestrictionController {
 		dto.setCreationDate( dateUtilsService.formatDate( restriction.getCreatingTime() ) );
 		dto.setCreationTime( dateUtilsService.formatTimeShort( restriction.getCreatingTime() ) );
 
-		initRestrictionEntryImage( restriction, dto );
+		initEntrySpecificData( restriction, dto );
 
 		initCssClassAndStatus( restriction, dto );
 
@@ -176,10 +176,14 @@ public class RestrictionController {
 		return dto;
 	}
 
-	private void initRestrictionEntryImage( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
+	private void initEntrySpecificData( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
 		switch ( restriction.getRestrictionEntryType() ) {
 			case USER:
 				final User user = ( User ) restriction.getEntry();
+
+				dto.setEntryLink( entityLinkUtilsService.getUserCardLink( user, getLanguage() ) );
+				dto.setEntryLinkUrl( urlUtilsService.getUserCardLink( user.getId() ) );
+
 				final UserAvatar userAvatar = userService.getUserAvatar( user.getId() );
 				dto.setEntryImage( userAvatar.getUserAvatarFileUrl() );
 				dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.USER.getName(), getLanguage() ) );
@@ -187,20 +191,15 @@ public class RestrictionController {
 				break;
 			case PHOTO:
 				final Photo photo = ( Photo ) restriction.getEntry();
+
+				dto.setEntryLink( entityLinkUtilsService.getPhotoCardLink( photo, getLanguage() ) );
+				dto.setEntryLinkUrl( urlUtilsService.getPhotoCardLink( photo.getId() ) );
+
 				dto.setEntryImage( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 				dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.PHOTO.getName(), getLanguage() ) );
 
 				break;
 		}
-	}
-
-	private String getEntryLink( final int entryId, final RestrictionType restrictionType ) {
-
-		if ( RestrictionType.FOR_USERS.contains( restrictionType ) ) {
-			return entityLinkUtilsService.getUserCardLink( userService.load( entryId ), getLanguage() );
-		}
-
-		return entityLinkUtilsService.getPhotoCardLink( photoService.load( entryId ), getLanguage() );
 	}
 
 	private String getFormattedTimeDifference( final Date timeFrom, final Date timeTo ) {

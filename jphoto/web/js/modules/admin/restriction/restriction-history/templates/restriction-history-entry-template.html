@@ -1,12 +1,14 @@
 <div class="block-shadow block-border restriction-history-entry-container <%=cssClass%>" style="width: 500px; display: inline-block; margin: 5px;" >
 
 	<div style="float: left; width: 120px; text-align: center; padding-top: 20px;">
-		<img src="<%=entryImage%>" alt="<%=restrictionName%>" width="70" title="<%=restrictionEntryTypeName%>">
+		<a href="<%=entryLinkUrl%>"><img src="<%=entryImage%>" alt="<%=restrictionName%>" width="70" title="<%=restrictionEntryTypeName%>"></a>
+		<br />
+		<%=restrictionEntryTypeName%>
 	</div>
 
 	<div style="float: left; width: 370px;">
 		<div class="block-border restriction-history-entry-header">
-			<%=entryLink%> - <%=restrictionEntryTypeName%>
+			<%=entryLink%>
 			<br />
 			<img src="<%=restrictionIcon%>" alt="<%=restrictionName%>" width="16" height="16" title="<%=restrictionName%>">
 			<b><%=restrictionName%></b> - <%=status%>
