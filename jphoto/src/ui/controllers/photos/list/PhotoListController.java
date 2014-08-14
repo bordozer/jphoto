@@ -19,6 +19,7 @@ import core.services.entry.GroupOperationService;
 import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -29,6 +30,8 @@ import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,6 +117,9 @@ public class PhotoListController {
 
 	@Autowired
 	private PhotoFilterValidator photoFilterValidator;
+
+	@Autowired
+	private RestrictionService restrictionService;
 
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
@@ -796,6 +802,7 @@ public class PhotoListController {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
 			final List<Integer> photosIds = getPhotosIds( pagingModel, listData );
+
 			final PhotoList photoList = getPhotoList( photosIds, listData, criterias, EnvironmentContext.getLanguage() );
 			photoList.setPhotoListId( listCounter++ );
 
@@ -814,7 +821,25 @@ public class PhotoListController {
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 		pagingModel.setTotalItems( sqlSelectIdsResult.getRecordQty() );
 
-		return sqlSelectIdsResult.getIds();
+		final List<Integer> ids = sqlSelectIdsResult.getIds();
+
+//		final int photosCountToShow = ids.size();
+
+		final Date currentTime = dateUtilsService.getCurrentTime();
+		CollectionUtils.filter( ids, new Predicate<Integer>() {
+			@Override
+			public boolean evaluate( final Integer photoId ) {
+				return ! restrictionService.isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+			}
+		} );
+		// TODO: add another photos if something was filtered && filter only TOP
+
+		/*final int diff = ids.size() - photosCountToShow;
+		if ( diff > 0 ) {
+			addAnotherPhotosToList( diff );
+		}*/
+
+		return ids;
 	}
 
 	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {

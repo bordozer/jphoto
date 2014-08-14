@@ -86,13 +86,18 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public boolean isUserPhotoAppraisalRestrictedOn( final int userId, final Date time ) {
+		return isRestrictedOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time );
+	}
+
+	@Override
 	public boolean isPhotoOfTheDayRestrictedOn( final int photoId, final Date time ) {
 		return isRestrictedOn( photoId, RestrictionType.PHOTO_TO_BE_PHOTO_OF_THE_DAY, time );
 	}
 
 	@Override
-	public boolean isUserPhotoAppraisalRestrictedOn( final int userId, final Date time ) {
-		return isRestrictedOn( userId, RestrictionType.USER_PHOTO_APPRAISAL, time );
+	public boolean isPhotoBeingInTopRestrictedOn( final int photoId, final Date time ) {
+		return isRestrictedOn( photoId, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE, time );
 	}
 
 	@Override
