@@ -1,8 +1,7 @@
 package rest.photo.list;
 
-import core.services.translator.message.TranslatableMessage;
-
 import java.util.List;
+import java.util.Map;
 
 public class PhotoEntryDTO {
 
@@ -45,8 +44,8 @@ public class PhotoEntryDTO {
 
 	private boolean userOwnThePhoto;
 	private List<PhotoBookmarkIcon> photoBookmarkIcons;
-	private boolean showSpecialIcon_Restricted;
-	private String showSpecialIcon_RestrictedText;
+
+	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -221,22 +220,6 @@ public class PhotoEntryDTO {
 		this.showAdminFlag_Nude = showAdminFlag_Nude;
 	}
 
-	public void setShowSpecialIcon_Restricted( final boolean showSpecialIcon_Restricted ) {
-		this.showSpecialIcon_Restricted = showSpecialIcon_Restricted;
-	}
-
-	public boolean isShowSpecialIcon_Restricted() {
-		return showSpecialIcon_Restricted;
-	}
-
-	public void setShowSpecialIcon_RestrictedText( final String showSpecialIcon_RestrictedText ) {
-		this.showSpecialIcon_RestrictedText = showSpecialIcon_RestrictedText;
-	}
-
-	public String getShowSpecialIcon_RestrictedText() {
-		return showSpecialIcon_RestrictedText;
-	}
-
 	public boolean isUserOwnThePhoto() {
 		return userOwnThePhoto;
 	}
@@ -283,5 +266,13 @@ public class PhotoEntryDTO {
 
 	public void setCommentsCount( final String commentsCount ) {
 		this.commentsCount = commentsCount;
+	}
+
+	public Map<String, SpecialIconDTO> getSpecialRestrictionIcons() {
+		return specialRestrictionIcons;
+	}
+
+	public void setSpecialRestrictionIcons( final Map<String, SpecialIconDTO> specialRestrictionIcons ) {
+		this.specialRestrictionIcons = specialRestrictionIcons;
 	}
 }

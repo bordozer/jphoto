@@ -838,9 +838,7 @@ public class PhotoListController {
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 		pagingModel.setTotalItems( sqlSelectIdsResult.getRecordQty() );
 
-		final List<Integer> ids = sqlSelectIdsResult.getIds();
-
-		return ids;
+		return sqlSelectIdsResult.getIds();
 	}
 
 	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {

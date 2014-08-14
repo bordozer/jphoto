@@ -2,7 +2,6 @@ package core.services.security;
 
 import core.enums.RestrictionType;
 import core.exceptions.RestrictionException;
-import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.interfaces.Restrictable;
@@ -200,6 +199,19 @@ public class RestrictionServiceImpl implements RestrictionService {
 			;
 	}
 
+	@Override
+	public List<EntryRestriction> getPhotoAllRestrictionsOn( final int photoId, final Date currentTime ) {
+		final List<EntryRestriction> result = newArrayList();
+
+		for ( final RestrictionType restrictionType : RestrictionType.FOR_PHOTOS ) {
+			final List<EntryRestriction> restrictionsOn = getRestrictionsOn( photoId, restrictionType, currentTime );
+			if ( restrictionsOn != null && restrictionsOn.size() > 0 ) {
+				result.add( restrictionsOn.get( 0 ) );
+			}
+		}
+		return result;
+	}
+
 	private  List<EntryRestriction> getRestrictionsOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
 
 		final List<EntryRestriction> restrictions = restrictionDao.loadRestrictions( entryId, restrictionType );
@@ -240,11 +252,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 		return activeRestrictions != null && activeRestrictions.size() > 0;
 	}
 
-	private List<EntryRestriction> loadRestrictions( final int userId, final List<RestrictionType> restrictionTypes ) {
+	private List<EntryRestriction> loadRestrictions( final int entryId, final List<RestrictionType> restrictionTypes ) {
 		final List<EntryRestriction> result = newArrayList();
 
 		for ( final RestrictionType restrictionType : restrictionTypes ) {
-			result.addAll( restrictionDao.loadRestrictions( userId, restrictionType ) ); // TODO: load all in one query
+			result.addAll( restrictionDao.loadRestrictions( entryId, restrictionType ) ); // TODO: load all in one query
 		}
 
 		return result;

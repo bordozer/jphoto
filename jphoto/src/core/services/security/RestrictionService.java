@@ -53,4 +53,6 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 	TranslatableMessage getUserRestrictionMessage( EntryRestriction restriction );
 
 	TranslatableMessage getPhotoRestrictionMessage( EntryRestriction restriction );
+
+	List<EntryRestriction> getPhotoAllRestrictionsOn( final int photoId, final Date currentTime );
 }

@@ -57,9 +57,13 @@ define( ["backbone", "jquery", "underscore"
 			}
 			element_admin_flag_1.append( element_admin_flag_2 );
 
-			if ( this.model.get( 'showSpecialIcon_Restricted' ) ) {
+			_.each( this.model.get( 'specialRestrictionIcons' ), function( iconDTO ) {
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='background-image: url(/images/" + iconDTO.icon + ");'></div>" ) );
+			} );
+
+			/*if ( this.model.get( 'specialRestrictionIcons' ).length > 0 ) {
 				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='restrictions!' style='background-image: url(/images/icons24/admin-special-flag-restriction.png);'></div>" ) );
-			}
+			}*/
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
 				element_admin_flag_2.append( this.groupOperationsTemplate( modelJSON ) );
@@ -94,7 +98,7 @@ define( ["backbone", "jquery", "underscore"
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
-			, "click .admin-special-flag-restriction": "onRestrictionIconClick"
+//			, "click .admin-special-flag-restriction": "onRestrictionIconClick"
 		}
 
 		, photoContextMenuIconClick: function() {
@@ -132,10 +136,10 @@ define( ["backbone", "jquery", "underscore"
 			this.photoContextMenuIconClick();
 		}
 
-		, onRestrictionIconClick: function( evt ) {
+		/*, onRestrictionIconClick: function( evt ) {
 			evt.stopPropagation();
 			alert( this.model.get( 'showSpecialIcon_RestrictedText' ) );
-		}
+		}*/
 	} );
 
 	return { PhotoListEntryModelView:PhotoListEntryModelView };

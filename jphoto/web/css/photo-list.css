@@ -149,8 +149,9 @@
 
 .admin-special-flag-restriction {
 	position: relative;
-	left: 220px;
-	top: 413px;
+	/*display: inline-block;*/
+	left: 290px;
+	top: 370px;
 	width: 16px;
 	height: 16px;
 	background-repeat: no-repeat;

@@ -23,6 +23,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,8 +39,10 @@ import ui.userRankIcons.UserRankIconContainer;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequestMapping( "photos/{photoId}" )
@@ -163,33 +166,19 @@ public class PhotoListEntryController {
 	private void setRestrictedData( final Photo photo, final PhotoEntryDTO dto ) {
 		final Date currentTime = dateUtilsService.getCurrentTime();
 
-		final EntryRestriction restrictionOn1 = restrictionService.getPhotoOfTheDayRestrictionOn( photo.getId(), currentTime );
-		if ( restrictionOn1 != null ) {
-			dto.setShowSpecialIcon_Restricted( true );
-			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn1 ).build( getLanguage() ) );
-			return;
+		final Map<String, SpecialIconDTO> result = newHashMap();
+//		final List<String> result = newArrayList();
+		final List<EntryRestriction> restrictionsOn = restrictionService.getPhotoAllRestrictionsOn( photo.getId(), currentTime );
+		for ( final EntryRestriction restriction : restrictionsOn ) {
+			final SpecialIconDTO iconDTO = new SpecialIconDTO();
+			iconDTO.setIcon( restriction.getRestrictionType().getIcon() );
+			iconDTO.setRestrictionTypeName( translatorService.translate( "List preview special restriction icon: Restriction $1", getLanguage(), translatorService.translate( restriction.getRestrictionType().getName(), getLanguage() ) ) );
+			iconDTO.setRestrictionMessage( restrictionService.getPhotoRestrictionMessage( restriction ).build( getLanguage() ) );
+
+			result.put( String.valueOf( restriction.getRestrictionType().getId() ), iconDTO );
 		}
 
-		final EntryRestriction restrictionOn2 = restrictionService.getPhotoAppraisalRestrictionOn( photo.getId(), currentTime );
-		if ( restrictionOn2 != null ) {
-			dto.setShowSpecialIcon_Restricted( true );
-			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn2 ).build( getLanguage() ) );
-			return;
-		}
-
-		final EntryRestriction restrictionOn3 = restrictionService.getPhotoCommentingRestrictionOn( photo.getId(), currentTime );
-		if ( restrictionOn3 != null ) {
-			dto.setShowSpecialIcon_Restricted( true );
-			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn3 ).build( getLanguage() ) );
-			return;
-		}
-
-		final EntryRestriction restrictionOn4 = restrictionService.getPhotoBeingInTopRestrictedOn( photo.getId(), currentTime );
-		if ( restrictionOn4 != null ) {
-			dto.setShowSpecialIcon_Restricted( true );
-			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn4 ).build( getLanguage() ) );
-			return;
-		}
+		dto.setSpecialRestrictionIcons( result );
 	}
 
 	private String getPhotoUploadDate( final Photo photo, final Language language ) {
@@ -309,11 +298,7 @@ public class PhotoListEntryController {
 			);
 		}
 
-		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>"
-			, urlUtilsService.getPhotoCardLink( photo.getId() )
-			, photo.getNameEscaped()
-			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
-		);
+		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>", urlUtilsService.getPhotoCardLink( photo.getId() ), photo.getNameEscaped(), userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 	}
 
 	private String getPhotoAuthorLink( final Photo photo, final User accessor, final Language language ) {
