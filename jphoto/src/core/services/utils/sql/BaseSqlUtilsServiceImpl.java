@@ -17,9 +17,11 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 
 	@Override
 	public void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final PagingModel pagingModel ) {
-		final int page = pagingModel.getCurrentPage();
-		final int itemsOnPage = pagingModel.getItemsOnPage();
+		initLimitAndOffset( sqlSelectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+	}
 
+	@Override
+	public void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final int page, final int itemsOnPage ) {
 		final int firstElementIndex = PagingUtils.getPageItemStartIndex( page, itemsOnPage );
 		sqlSelectQuery.setLimit( itemsOnPage );
 		sqlSelectQuery.setOffset( firstElementIndex );

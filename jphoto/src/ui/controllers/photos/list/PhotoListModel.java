@@ -26,7 +26,9 @@ public class PhotoListModel extends AbstractGeneralModel {
 	}
 
 	public void addPhotoList( final PhotoList photoList ) {
-		photoLists.add( photoList );
+		if ( photoList != null ) {
+			photoLists.add( photoList );
+		}
 	}
 
 	public DeviceType getDeviceType() {

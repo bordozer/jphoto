@@ -5,9 +5,9 @@ import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
-public class PhotoGalleryTitle extends AbstractPhotoListTitle {
+public class PhotoListTitleGallery extends AbstractPhotoListTitle {
 
-	public PhotoGalleryTitle( final PhotoListCriterias criterias, final Services services ) {
+	public PhotoListTitleGallery( final PhotoListCriterias criterias, final Services services ) {
 		super( criterias, services );
 	}
 

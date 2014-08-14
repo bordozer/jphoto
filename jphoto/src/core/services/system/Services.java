@@ -108,5 +108,9 @@ public interface Services {
 
 	RemotePhotoCategoryService getRemotePhotoCategoryService();
 
+	PhotoListCriteriasService getPhotoListCriteriasService();
+
+	GroupOperationService getGroupOperationService();
+
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

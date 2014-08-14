@@ -9,19 +9,23 @@ import java.util.Date;
 
 public interface PhotoCriteriasSqlService {
 
-	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( PhotoListCriterias criterias, PagingModel pagingModel );
+	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( PhotoListCriterias criterias, int page, int itemsOnPage );
 
-	void addUserCriteria( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery );
+	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final PagingModel pagingModel );
 
-	void addGenreCriteria( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery );
+	void addUserCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery );
 
-	void addUploadTimeCriteria( Date timeFrom, Date timeTo, BaseSqlSelectQuery selectQuery );
+	void addGenreCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery );
 
-	void addVotingCriteria( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery );
+	void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery );
 
-	void addFilterByMembershipType( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery );
+	void addVotingCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery );
 
-	void addSortCriterias( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery );
+	void addFilterByMembershipType( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery );
 
-	void addLimitCriterias( PhotoListCriterias criterias, SqlIdsSelectQuery selectQuery, PagingModel pagingModel );
+	void addSortCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery );
+
+	void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final PagingModel pagingModel );
+
+	void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final int page, final int itemsOnPage );
 }

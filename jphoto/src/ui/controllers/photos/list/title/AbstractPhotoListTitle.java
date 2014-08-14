@@ -224,4 +224,8 @@ public abstract class AbstractPhotoListTitle {
 			.translatableString( criterias.getMembershipType().getNamePlural() )
 		;
 	}
+
+	public PhotoListCriterias getCriterias() {
+		return criterias;
+	}
 }

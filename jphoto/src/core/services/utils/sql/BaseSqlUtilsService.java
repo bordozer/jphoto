@@ -7,6 +7,8 @@ public interface BaseSqlUtilsService {
 
 	void initLimitAndOffset( BaseSqlSelectQuery sqlSelectQuery, PagingModel pagingModel );
 
+	void initLimitAndOffset( BaseSqlSelectQuery sqlSelectQuery, int page, int itemsOnPage );
+
 	SqlSelectQuery getSqlSelectQuery( String table );
 
 	SqlIdsSelectQuery getPhotosIdsSQL();

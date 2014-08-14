@@ -23,7 +23,7 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Override
-	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
+	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
 		addUserCriteria( criterias, selectQuery );
@@ -38,9 +38,14 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 
 		addSortCriterias( criterias, selectQuery );
 
-		addLimitCriterias( criterias, selectQuery, pagingModel );
+		addLimitCriterias( criterias, selectQuery, page, itemsOnPage );
 
 		return selectQuery;
+	}
+
+	@Override
+	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
+		return getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 	}
 
 	@Override
@@ -155,10 +160,15 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 
 	@Override
 	public void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final PagingModel pagingModel ) {
+		addLimitCriterias( criterias, selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage());
+	}
+
+	@Override
+	public void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final int page, final int itemsOnPage ) {
 		if ( criterias.isTopBestPhotoList() ) {
 			selectQuery.setLimit( criterias.getPhotoQtyLimit() );
 		} else {
-			baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+			baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
 		}
 	}
 

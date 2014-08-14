@@ -153,6 +153,12 @@ public class ServicesImpl implements Services {
 	@Autowired
 	private RemotePhotoCategoryService remotePhotoCategoryService;
 
+	@Autowired
+	private PhotoListCriteriasService photoListCriteriasService;
+
+	@Autowired
+	private GroupOperationService groupOperationService;
+
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
 
@@ -376,6 +382,16 @@ public class ServicesImpl implements Services {
 		return remotePhotoCategoryService;
 	}
 
+	@Override
+	public PhotoListCriteriasService getPhotoListCriteriasService() {
+		return photoListCriteriasService;
+	}
+
+	@Override
+	public GroupOperationService getGroupOperationService() {
+		return groupOperationService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -556,6 +572,15 @@ public class ServicesImpl implements Services {
 	public void setRemotePhotoCategoryService( final RemotePhotoCategoryService remotePhotoCategoryService ) {
 		this.remotePhotoCategoryService = remotePhotoCategoryService;
 	}
+
+	public void setPhotoListCriteriasService( final PhotoListCriteriasService photoListCriteriasService ) {
+		this.photoListCriteriasService = photoListCriteriasService;
+	}
+
+	public void setGroupOperationService( final GroupOperationService groupOperationService ) {
+		this.groupOperationService = groupOperationService;
+	}
+
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {
 		this.scheduledTasksExecutionService = scheduledTasksExecutionService;
 	}*/
