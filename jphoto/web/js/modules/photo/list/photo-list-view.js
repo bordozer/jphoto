@@ -57,36 +57,35 @@ define( ["backbone", "jquery", "underscore"
 			}
 			element_admin_flag_1.append( element_admin_flag_2 );
 
-			var element_admin_flag_3 = $( "<div class='admin-special-empty-flag'></div>" );
-			if ( this.model.get( 'showAdminFlag_Restricted' ) ) {
-				element_admin_flag_3 = $( "<div class='admin-special-empty-flag admin-special-flag-restriction'></div>" );
+//			var element_admin_flag_3 = $( "<div class='admin-special-empty-flag'></div>" );
+			if ( this.model.get( 'showSpecialIcon_Restricted' ) ) {
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='restrictions!'></div>" ) );
 			}
-			element_admin_flag_2.append( element_admin_flag_3 );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
-				element_admin_flag_3.append( this.groupOperationsTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.groupOperationsTemplate( modelJSON ) );
 			}
 
-			element_admin_flag_3.append( this.photoListEntryContainer( modelJSON ) );
+			element_admin_flag_2.append( this.photoListEntryContainer( modelJSON ) );
 
 			if ( this.model.get( 'showPhotoContextMenu' ) ) {
-				element_admin_flag_3.append( this.contextMenuTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.contextMenuTemplate( modelJSON ) );
 			}
 
 			if ( this.model.get( 'showStatistics' ) ) {
-				element_admin_flag_3.append( this.statisticsTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.statisticsTemplate( modelJSON ) );
 			}
 
-			element_admin_flag_3.append( this.photoNameTemplate( modelJSON ) );
+			element_admin_flag_2.append( this.photoNameTemplate( modelJSON ) );
 
-			element_admin_flag_3.append( this.authorLinkTemplate( modelJSON ) );
+			element_admin_flag_2.append( this.authorLinkTemplate( modelJSON ) );
 
 			if ( this.model.get( 'showUserRank' ) ) {
-				element_admin_flag_3.append( this.authorRankTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.authorRankTemplate( modelJSON ) );
 			}
 
 			if ( this.model.get( 'showAnonymousPeriodExpirationInfo' ) ) {
-				element_admin_flag_3.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
+				element_admin_flag_2.append( this.anonymousPeriodExpirationTimeTemplate( modelJSON ) );
 			}
 
 			this.$el.html( element );
@@ -96,6 +95,7 @@ define( ["backbone", "jquery", "underscore"
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
+			, "click .admin-special-flag-restriction": "onRestrictionIconClick"
 		}
 
 		, photoContextMenuIconClick: function() {
@@ -131,6 +131,11 @@ define( ["backbone", "jquery", "underscore"
 		, onPhotoContextMenuIconClick: function( evt ) {
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
+		}
+
+		, onRestrictionIconClick: function( evt ) {
+			evt.stopPropagation();
+			alert( this.model.get( 'showSpecialIcon_RestrictedText' ) );
 		}
 	} );
 

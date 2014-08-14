@@ -8,6 +8,8 @@ import core.services.translator.Language;
 import ui.controllers.photos.list.title.PhotoListTitleTopBest;
 import ui.elements.PhotoList;
 
+import java.util.Date;
+
 public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 	public PhotoListFactoryTopBest( final Services services, final User user ) {
@@ -15,6 +17,11 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( user );
 		photoListTitle = new PhotoListTitleTopBest( criterias, services );
+	}
+
+	@Override
+	protected boolean isPhotoRestricted( final int photoId, final Date currentTime ) {
+		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
+import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
@@ -105,45 +106,45 @@ public class PhotoListEntryController {
 
 		final boolean doesPreviewHasToBeHidden = request.getHeader( "referer" ).startsWith( urlUtilsService.getAllUsersLink() ) && securityService.isPhotoAuthorNameMustBeHidden( photo, currentUser );
 
-		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, EnvironmentContext.getLanguage() );
+		return photoListEntry( photo, currentUser, doesPreviewHasToBeHidden, getLanguage() );
 	}
 
 	public PhotoEntryDTO photoListEntry( final Photo photo, final User accessor, final boolean doesPreviewHasToBeHidden, final Language language ) {
 
-		final PhotoEntryDTO photoEntry = new PhotoEntryDTO( accessor.getId(), photo.getId() );
+		final PhotoEntryDTO dto = new PhotoEntryDTO( accessor.getId(), photo.getId() );
 
-		photoEntry.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
-		photoEntry.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
-		photoEntry.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
-		photoEntry.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language ) );
+		dto.setGroupOperationCheckbox( getGroupOperationCheckbox( photo ) );
+		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
+		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
+		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language ) );
 
-		photoEntry.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
+		dto.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
 		if ( doesPreviewHasToBeHidden ) {
-			photoEntry.setPhotoName( photo.getName() ); // escaping!
-			photoEntry.setPhotoLink( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
+			dto.setPhotoName( photo.getName() ); // escaping!
+			dto.setPhotoLink( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
 		} else {
-			photoEntry.setPhotoName( photo.getName() ); // escaping!
-			photoEntry.setPhotoLink( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
+			dto.setPhotoName( photo.getName() ); // escaping!
+			dto.setPhotoLink( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
 		}
-		photoEntry.setPhotoAuthorLink( getPhotoAuthorLink( photo, accessor, language ) );
+		dto.setPhotoAuthorLink( getPhotoAuthorLink( photo, accessor, language ) );
 
-		setPhotoStatistics( photo, photoEntry, doesPreviewHasToBeHidden, language );
+		setPhotoStatistics( photo, dto, doesPreviewHasToBeHidden, language );
 
-		setUserRank( photo, photoEntry );
+		setUserRank( photo, dto );
 
-		setPhotoAnonymousPeriodExpiration( photo, accessor, photoEntry, language );
+		setPhotoAnonymousPeriodExpiration( photo, accessor, dto, language );
 
 		final boolean userOwnThePhoto = securityService.userOwnThePhoto( accessor, photo );
 		final boolean isSuperAdminUser = securityService.isSuperAdminUser( accessor );
 
-		photoEntry.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
+		dto.setShowAdminFlag_Anonymous( securityService.isPhotoWithingAnonymousPeriod( photo ) && ( isSuperAdminUser || userOwnThePhoto ) );
 
-		photoEntry.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
+		dto.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
 
-		photoEntry.setShowAdminFlag_Restricted( isPhotoRestricted( photo ) );
+		setRestrictedData( photo, dto );
 
-		photoEntry.setUserOwnThePhoto( userOwnThePhoto );
+		dto.setUserOwnThePhoto( userOwnThePhoto );
 
 		final List<PhotoBookmarkIcon> photoBookmarkIcons = newArrayList();
 		for ( final FavoriteEntryType favoriteEntryType : FavoriteEntryType.RELATED_TO_PHOTO ) {
@@ -154,18 +155,41 @@ public class PhotoListEntryController {
 				photoBookmarkIcons.add( new PhotoBookmarkIcon( favoriteEntryTypeId ) );
 			}
 		}
-		photoEntry.setPhotoBookmarkIcons( photoBookmarkIcons );
+		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
 
-		return photoEntry;
+		return dto;
 	}
 
-	private boolean isPhotoRestricted( final Photo photo ) {
+	private void setRestrictedData( final Photo photo, final PhotoEntryDTO dto ) {
 		final Date currentTime = dateUtilsService.getCurrentTime();
-		return restrictionService.isPhotoOfTheDayRestrictedOn( photo.getId(), currentTime )
-			|| restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photo.getId(), currentTime )
-			|| restrictionService.isPhotoBeingInTopRestrictedOn( photo.getId(), currentTime )
-			|| restrictionService.isUserPhotoAppraisalRestrictedOn( photo.getId(), currentTime )
-			;
+
+		final EntryRestriction restrictionOn1 = restrictionService.getPhotoOfTheDayRestrictionOn( photo.getId(), currentTime );
+		if ( restrictionOn1 != null ) {
+			dto.setShowSpecialIcon_Restricted( true );
+			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn1 ).build( getLanguage() ) );
+			return;
+		}
+
+		final EntryRestriction restrictionOn2 = restrictionService.getPhotoAppraisalRestrictionOn( photo.getId(), currentTime );
+		if ( restrictionOn2 != null ) {
+			dto.setShowSpecialIcon_Restricted( true );
+			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn2 ).build( getLanguage() ) );
+			return;
+		}
+
+		final EntryRestriction restrictionOn3 = restrictionService.getPhotoCommentingRestrictionOn( photo.getId(), currentTime );
+		if ( restrictionOn3 != null ) {
+			dto.setShowSpecialIcon_Restricted( true );
+			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn3 ).build( getLanguage() ) );
+			return;
+		}
+
+		final EntryRestriction restrictionOn4 = restrictionService.getPhotoBeingInTopRestrictedOn( photo.getId(), currentTime );
+		if ( restrictionOn4 != null ) {
+			dto.setShowSpecialIcon_Restricted( true );
+			dto.setShowSpecialIcon_RestrictedText( restrictionService.getPhotoRestrictionMessage( restrictionOn4 ).build( getLanguage() ) );
+			return;
+		}
 	}
 
 	private String getPhotoUploadDate( final Photo photo, final Language language ) {
@@ -402,5 +426,9 @@ public class PhotoListEntryController {
 
 	public void setFavoritesService( final FavoritesService favoritesService ) {
 		this.favoritesService = favoritesService;
+	}
+
+	private Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }

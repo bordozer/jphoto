@@ -1,5 +1,7 @@
 package rest.photo.list;
 
+import core.services.translator.message.TranslatableMessage;
+
 import java.util.List;
 
 public class PhotoEntryDTO {
@@ -43,7 +45,8 @@ public class PhotoEntryDTO {
 
 	private boolean userOwnThePhoto;
 	private List<PhotoBookmarkIcon> photoBookmarkIcons;
-	private boolean showAdminFlag_Restricted;
+	private boolean showSpecialIcon_Restricted;
+	private String showSpecialIcon_RestrictedText;
 
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
@@ -218,12 +221,20 @@ public class PhotoEntryDTO {
 		this.showAdminFlag_Nude = showAdminFlag_Nude;
 	}
 
-	public void setShowAdminFlag_Restricted( final boolean showAdminFlag_Restricted ) {
-		this.showAdminFlag_Restricted = showAdminFlag_Restricted;
+	public void setShowSpecialIcon_Restricted( final boolean showSpecialIcon_Restricted ) {
+		this.showSpecialIcon_Restricted = showSpecialIcon_Restricted;
 	}
 
-	public boolean isShowAdminFlag_Restricted() {
-		return showAdminFlag_Restricted;
+	public boolean isShowSpecialIcon_Restricted() {
+		return showSpecialIcon_Restricted;
+	}
+
+	public void setShowSpecialIcon_RestrictedText( final String showSpecialIcon_RestrictedText ) {
+		this.showSpecialIcon_RestrictedText = showSpecialIcon_RestrictedText;
+	}
+
+	public String getShowSpecialIcon_RestrictedText() {
+		return showSpecialIcon_RestrictedText;
 	}
 
 	public boolean isUserOwnThePhoto() {

@@ -81,6 +81,11 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
+	public EntryRestriction getPhotoBeingInTopRestrictedOn( final int photoId, final Date time ) {
+		return getEntryRestriction( getRestrictionsOn( photoId, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE, time ) );
+	}
+
+	@Override
 	public boolean isUserLoginRestrictedOn( final int userId, final Date time ) {
 		return isRestrictedOn( userId, RestrictionType.USER_LOGIN, time );
 	}

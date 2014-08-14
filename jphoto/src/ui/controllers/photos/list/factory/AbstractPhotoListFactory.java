@@ -31,6 +31,8 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract boolean showPaging();
 
+	protected abstract boolean isPhotoRestricted( final int photoId, final Date currentTime );
+
 	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
 
 	public AbstractPhotoListFactory( final User accessor, final Services services ) {
@@ -96,9 +98,7 @@ public abstract class AbstractPhotoListFactory {
 		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime )
-					|| services.getSecurityService().userOwnThePhoto( accessor, photoId )
-					;
+				return ! isPhotoRestricted( photoId, currentTime );
 			}
 		} );
 

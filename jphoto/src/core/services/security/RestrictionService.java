@@ -26,6 +26,8 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	EntryRestriction getPhotoCommentingRestrictionOn( int photoId, Date time );
 
+	EntryRestriction getPhotoBeingInTopRestrictedOn( int photoId, Date time );
+
 	boolean isUserLoginRestrictedOn( final int userId, final Date time );
 
 	boolean isUserPhotoAppraisalRestrictedOn( final int userId, final Date time );
