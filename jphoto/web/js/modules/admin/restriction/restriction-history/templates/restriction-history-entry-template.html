@@ -1,16 +1,15 @@
-<div class="block-shadow block-border restriction-history-entry-container <%=cssClass%>" style="width: 380px; display: inline-block; margin: 5px;" >
+<div class="block-shadow block-border restriction-history-entry-container <%=cssClass%>" style="width: 500px; display: inline-block; margin: 5px;" >
 
-	<div style="float: left; width: 30px; text-align: center;">
-		#<%=id%>
-		<br />
-		<img src="<%=restrictionIcon%>" alt="<%=restrictionName%>" width="16" height="16" title="<%=restrictionName%>">
+	<div style="float: left; width: 120px; text-align: center; padding-top: 20px;">
+		<img src="<%=entryImage%>" alt="<%=restrictionName%>" width="70" title="<%=restrictionEntryTypeName%>">
 	</div>
 
-	<div style="float: left; width: 350px;">
+	<div style="float: left; width: 370px;">
 		<div class="block-border restriction-history-entry-header">
-			<%=entryLink%>
+			<%=entryLink%> - <%=restrictionEntryTypeName%>
 			<br />
-			<%=restrictionName%> - <%=status%>
+			<img src="<%=restrictionIcon%>" alt="<%=restrictionName%>" width="16" height="16" title="<%=restrictionName%>">
+			<b><%=restrictionName%></b> - <%=status%>
 		</div>
 
 		<%=dateFrom%> <sup style="font-size: 9px;"><%=timeFrom%> </sup> - <%=dateTo%> <sup style="font-size: 9px;"><%=timeTo%></sup>

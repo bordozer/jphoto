@@ -33,6 +33,9 @@ public class RestrictionHistoryEntryDTO {
 	private String status;
 	private String entryLink;
 
+	private String entryImage;
+	private String restrictionEntryTypeName;
+
 	public int getId() {
 		return id;
 	}
@@ -193,16 +196,32 @@ public class RestrictionHistoryEntryDTO {
 		this.status = status;
 	}
 
-	@Override
-	public String toString() {
-		return String.format( "#%d %s: from %s to %s", id, restrictionName, timeFrom, timeTo );
-	}
-
 	public void setEntryLink( final String entryLink ) {
 		this.entryLink = entryLink;
 	}
 
 	public String getEntryLink() {
 		return entryLink;
+	}
+
+	public String getEntryImage() {
+		return entryImage;
+	}
+
+	public void setEntryImage( final String entryImage ) {
+		this.entryImage = entryImage;
+	}
+
+	public void setRestrictionEntryTypeName( final String restrictionEntryTypeName ) {
+		this.restrictionEntryTypeName = restrictionEntryTypeName;
+	}
+
+	public String getRestrictionEntryTypeName() {
+		return restrictionEntryTypeName;
+	}
+
+	@Override
+	public String toString() {
+		return String.format( "#%d %s: from %s to %s", id, restrictionName, timeFrom, timeTo );
 	}
 }

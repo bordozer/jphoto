@@ -245,13 +245,13 @@ public class RestrictionServiceImpl implements RestrictionService {
 		return result;
 	}
 
-	private void savePhotoRestriction( final Photo photo, final Date timeFrom, final Date timeTo, final RestrictionType photoToBePhotoOfTheDay ) {
+	/*private void savePhotoRestriction( final Photo photo, final Date timeFrom, final Date timeTo, final RestrictionType photoToBePhotoOfTheDay ) {
 		final EntryRestriction<Photo> restriction = new EntryRestriction<>( photo, photoToBePhotoOfTheDay );
 		restriction.setRestrictionTimeFrom( timeFrom );
 		restriction.setRestrictionTimeTo( timeTo );
 
 		restrictionDao.saveToDB( restriction );
-	}
+	}*/
 
 	private EntryRestriction getEntryRestriction( final List<EntryRestriction> restrictions ) {
 		if ( restrictions == null || restrictions.size() == 0 ) {

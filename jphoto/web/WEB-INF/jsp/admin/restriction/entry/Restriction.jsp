@@ -40,7 +40,7 @@
 
 		</div>
 
-		<div style="float: right; width: 400px;">
+		<div style="float: right; width: 500px;">
 			<div class="restriction-area-header block-shadow block-background restriction-area-tab" style="height: 20px;">
 				${eco:translate('Restriction: Restriction history title')}
 			</div>

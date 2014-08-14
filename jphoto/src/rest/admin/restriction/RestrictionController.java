@@ -1,10 +1,12 @@
 package rest.admin.restriction;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import admin.controllers.restriction.entry.RestrictionEntryType;
 import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
+import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
+import core.general.user.User;
+import core.general.user.UserAvatar;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.translator.Language;
@@ -13,6 +15,7 @@ import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
+import core.services.utils.UserPhotoFilePathUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +55,9 @@ public class RestrictionController {
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
+
+	@Autowired
+	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
 	@RequestMapping( method = RequestMethod.GET, value = "/members/{userId}/history/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -145,6 +151,17 @@ public class RestrictionController {
 		dto.setCreatorLink( entityLinkUtilsService.getUserCardLink( restriction.getCreator(), getLanguage() ) );
 		dto.setCreationDate( dateUtilsService.formatDate( restriction.getCreatingTime() ) );
 		dto.setCreationTime( dateUtilsService.formatTimeShort( restriction.getCreatingTime() ) );
+
+		if ( RestrictionType.FOR_USERS.contains( restriction.getRestrictionType() ) ) {
+			final User user = ( User ) restriction.getEntry();
+			final UserAvatar userAvatar = userService.getUserAvatar( user.getId() );
+			dto.setEntryImage( userAvatar.getUserAvatarFileUrl() );
+			dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.USER.getName(), getLanguage() ) );
+		} else if ( RestrictionType.FOR_PHOTOS.contains( restriction.getRestrictionType() ) ) {
+			final Photo photo = ( Photo ) restriction.getEntry();
+			dto.setEntryImage( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+			dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.PHOTO.getName(), getLanguage() ) );
+		}
 
 		initCssClassAndStatus( restriction, dto );
 
