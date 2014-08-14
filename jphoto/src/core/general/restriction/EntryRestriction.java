@@ -1,5 +1,6 @@
 package core.general.restriction;
 
+import admin.controllers.restriction.entry.RestrictionEntryType;
 import core.enums.RestrictionType;
 import core.general.base.AbstractBaseEntity;
 import core.general.user.User;
@@ -28,6 +29,18 @@ public class EntryRestriction<T extends Restrictable> extends AbstractBaseEntity
 	public EntryRestriction( final T entry, final RestrictionType restrictionType ) {
 		this.entry = entry;
 		this.restrictionType = restrictionType;
+	}
+
+	public RestrictionEntryType getRestrictionEntryType() {
+		if ( RestrictionType.FOR_USERS.contains( restrictionType ) ) {
+			return RestrictionEntryType.USER;
+		}
+
+		if ( RestrictionType.FOR_PHOTOS.contains( restrictionType ) ) {
+			return RestrictionEntryType.PHOTO;
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal restrictionType: %s", restrictionType ) );
 	}
 
 	public T getEntry() {

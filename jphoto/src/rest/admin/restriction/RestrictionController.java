@@ -152,16 +152,7 @@ public class RestrictionController {
 		dto.setCreationDate( dateUtilsService.formatDate( restriction.getCreatingTime() ) );
 		dto.setCreationTime( dateUtilsService.formatTimeShort( restriction.getCreatingTime() ) );
 
-		if ( RestrictionType.FOR_USERS.contains( restriction.getRestrictionType() ) ) {
-			final User user = ( User ) restriction.getEntry();
-			final UserAvatar userAvatar = userService.getUserAvatar( user.getId() );
-			dto.setEntryImage( userAvatar.getUserAvatarFileUrl() );
-			dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.USER.getName(), getLanguage() ) );
-		} else if ( RestrictionType.FOR_PHOTOS.contains( restriction.getRestrictionType() ) ) {
-			final Photo photo = ( Photo ) restriction.getEntry();
-			dto.setEntryImage( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
-			dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.PHOTO.getName(), getLanguage() ) );
-		}
+		initRestrictionEntryImage( restriction, dto );
 
 		initCssClassAndStatus( restriction, dto );
 
@@ -183,6 +174,24 @@ public class RestrictionController {
 		}
 
 		return dto;
+	}
+
+	private void initRestrictionEntryImage( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
+		switch ( restriction.getRestrictionEntryType() ) {
+			case USER:
+				final User user = ( User ) restriction.getEntry();
+				final UserAvatar userAvatar = userService.getUserAvatar( user.getId() );
+				dto.setEntryImage( userAvatar.getUserAvatarFileUrl() );
+				dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.USER.getName(), getLanguage() ) );
+
+				break;
+			case PHOTO:
+				final Photo photo = ( Photo ) restriction.getEntry();
+				dto.setEntryImage( userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+				dto.setRestrictionEntryTypeName( translatorService.translate( RestrictionEntryType.PHOTO.getName(), getLanguage() ) );
+
+				break;
+		}
 	}
 
 	private String getEntryLink( final int entryId, final RestrictionType restrictionType ) {
