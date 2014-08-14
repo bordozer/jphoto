@@ -57,9 +57,8 @@ define( ["backbone", "jquery", "underscore"
 			}
 			element_admin_flag_1.append( element_admin_flag_2 );
 
-//			var element_admin_flag_3 = $( "<div class='admin-special-empty-flag'></div>" );
 			if ( this.model.get( 'showSpecialIcon_Restricted' ) ) {
-				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='restrictions!'></div>" ) );
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='restrictions!' style='background-image: url(/images/icons24/admin-special-flag-restriction.png);'></div>" ) );
 			}
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
