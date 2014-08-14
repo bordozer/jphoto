@@ -54,7 +54,7 @@
 
 	<script type="text/javascript">
 
-		require( ['modules/admin/restriction/restriction/restriction'], function ( func ) {
+		require( ['modules/admin/restriction/create/restriction'], function ( func ) {
 
 			var translations = {
 				timePeriod: "${eco:translate('Time period component: Time period')}"

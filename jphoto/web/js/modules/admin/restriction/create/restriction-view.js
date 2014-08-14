@@ -1,7 +1,7 @@
 define( ["backbone", "jquery", "underscore"
 		 , "components/time-range/time-range-model"
 		 , "components/time-range/time-range-view"
-		, "text!modules/admin/restriction/restriction/templates/restriction-template.html"
+		, "text!modules/admin/restriction/create/templates/restriction-template.html"
 		]
 		, function ( Backbone, $, _, TimeBoxModel, TimeBoxView, template ) {
 
