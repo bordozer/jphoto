@@ -167,7 +167,6 @@ public class PhotoListEntryController {
 		final Date currentTime = dateUtilsService.getCurrentTime();
 
 		final Map<String, SpecialIconDTO> result = newHashMap();
-//		final List<String> result = newArrayList();
 		final List<EntryRestriction> restrictionsOn = restrictionService.getPhotoAllRestrictionsOn( photo.getId(), currentTime );
 		for ( final EntryRestriction restriction : restrictionsOn ) {
 			final SpecialIconDTO iconDTO = new SpecialIconDTO();

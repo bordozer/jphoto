@@ -1,6 +1,7 @@
 package ui.controllers.photos.list.factory;
 
 import core.general.base.PagingModel;
+import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -12,11 +13,18 @@ import java.util.Date;
 
 public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
-	public PhotoListFactoryTopBest( final Services services, final User user ) {
+	public PhotoListFactoryTopBest( final User user, final Services services ) {
 		super( user, services );
 
 		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( user );
-		photoListTitle = new PhotoListTitleTopBest( criterias, services );
+		photoListTitle = getPhotoListTitle( services );
+	}
+
+	public PhotoListFactoryTopBest( final Genre genre, final User user, final Services services ) {
+		super( user, services );
+
+		criterias = services.getPhotoListCriteriasService().getForGenreTopBest( genre, user );
+		photoListTitle = getPhotoListTitle( services );
 	}
 
 	@Override
@@ -42,5 +50,9 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
+	private PhotoListTitleTopBest getPhotoListTitle( final Services services ) {
+		return new PhotoListTitleTopBest( criterias, services );
 	}
 }
