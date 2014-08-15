@@ -40,7 +40,7 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 			return false;
 		}
 
-		return services.getRestrictionService().isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
+		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
 	}
 
 	private PhotoListTitleBest getPhotoListTitle( final Services services ) {

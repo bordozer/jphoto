@@ -108,7 +108,7 @@
 				$( function () {
 					$( "#restrictEntryIFrameDivId" ).dialog( {
 						height:500
-						, width:800
+						, width:1000
 						, modal:true
 						, autoOpen:false
 					 } );
