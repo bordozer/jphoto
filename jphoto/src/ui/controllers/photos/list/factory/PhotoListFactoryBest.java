@@ -26,11 +26,6 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 	}
 
 	@Override
-	protected String getLinkToFullList() {
-		return null;
-	}
-
-	@Override
 	protected boolean showPaging() {
 		return false;
 	}

@@ -31,8 +31,6 @@ public abstract class AbstractPhotoListFactory {
 	protected User user;
 	protected Genre genre;
 
-	protected abstract String getLinkToFullList();
-
 	protected abstract boolean showPaging();
 
 	protected abstract boolean isPhotoHidden( final int photoId, final Date currentTime );
@@ -59,10 +57,6 @@ public abstract class AbstractPhotoListFactory {
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
-	}
-
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
-		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery ) {
@@ -109,5 +103,13 @@ public abstract class AbstractPhotoListFactory {
 
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
 		return services.getPhotoService().load( selectIdsQuery );
+	}
+
+	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
+		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
+	protected String getLinkToFullList() {
+		return null;
 	}
 }
