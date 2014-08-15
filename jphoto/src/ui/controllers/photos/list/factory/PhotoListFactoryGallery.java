@@ -5,12 +5,14 @@ import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
 import ui.controllers.photos.list.title.PhotoListTitleGallery;
+import utils.UserUtils;
 
 import java.util.Date;
 
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 	private boolean forceShow;
+	private User user;
 
 	public PhotoListFactoryGallery( final User accessor, final Services services ) {
 		super( accessor, services );
@@ -33,6 +35,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		photoListTitle = getPhotoListTitle( services );
 
 		forceShow = true;
+		this.user = user;
 	}
 
 	public PhotoListFactoryGallery( final User user, final Genre genre, final User accessor, final Services services ) {
@@ -42,6 +45,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		photoListTitle = getPhotoListTitle( services );
 
 		forceShow = true;
+		this.user = user;
 	}
 
 	@Override
@@ -61,6 +65,11 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
+
+		if ( UserUtils.isUsersEqual( user, accessor ) ) {
+			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
+		}
+
 		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 

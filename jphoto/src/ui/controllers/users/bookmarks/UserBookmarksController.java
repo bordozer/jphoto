@@ -171,7 +171,7 @@ public class UserBookmarksController {
 		final String listTitle = String.format( "%s: %s", entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ), translatorService.translate( entryType.getName(), EnvironmentContext.getLanguage() ) );
 
 		final PhotoList photoList = new PhotoList( photosIds, listTitle ); // TODO: do not ignore photoIconsTypes or userIconsTypes
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( null, false, EnvironmentContext.getCurrentUser() ) );
+		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( EnvironmentContext.getCurrentUser() ) );
 		model.addPhotoList( photoList );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserFavoriteEntryListBreadcrumbs( user, entryType ) );

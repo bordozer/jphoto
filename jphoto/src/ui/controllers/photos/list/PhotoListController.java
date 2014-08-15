@@ -856,7 +856,8 @@ public class PhotoListController {
 			final PhotoList photoList = getPhotoList( photosIds, listData, criterias, getLanguage() );
 			photoList.setPhotoListId( listCounter++ );
 
-			photoList.setPhotoGroupOperationMenuContainer( photosIds.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, getUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+//			photoList.setPhotoGroupOperationMenuContainer( photosIds.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, getUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
+			photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() ); // TODO: zaglushka
 
 			model.addPhotoList( photoList );
 			model.setPageTitleData( listData.getTitleData() );

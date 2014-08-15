@@ -24,19 +24,6 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 
 	@Override
 	public PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final User user ) {
-		return getPhotoListPhotoGroupOperationMenuContainer( null, false, user );
-	}
-
-	@Override
-	public PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer customGroupOperationMenuContainer, final boolean isBestPhotoList, final User user ) {
-
-		if ( isBestPhotoList ) {
-			return getNoPhotoGroupOperationMenuContainer();
-		}
-
-		if ( customGroupOperationMenuContainer != null && ! customGroupOperationMenuContainer.isEmpty() ) {
-			return customGroupOperationMenuContainer;
-		}
 
 		if ( securityService.isSuperAdminUser( user.getId() ) ) {
 			return new PhotoGroupOperationMenuContainer( getSuperAdminGroupOperationMenus() );
