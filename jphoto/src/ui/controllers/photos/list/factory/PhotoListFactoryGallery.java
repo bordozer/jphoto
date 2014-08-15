@@ -11,8 +11,6 @@ import java.util.Date;
 
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
-	private User user;
-
 	public PhotoListFactoryGallery( final User accessor, final Services services ) {
 		super( accessor, services );
 
@@ -25,6 +23,8 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForGenre( genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		this.genre = genre;
 	}
 
 	public PhotoListFactoryGallery( final User user, final User accessor, final Services services ) {
@@ -43,6 +43,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		photoListTitle = getPhotoListTitle( services );
 
 		this.user = user;
+		this.genre = genre;
 	}
 
 	@Override
@@ -60,13 +61,13 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 			return false; // TODO: should user see restricted photos in the gallery?
 		}
 
-		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+		return services.getRestrictionService().isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
 	}
 
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 
-		if ( UserUtils.isUsersEqual( user, accessor ) ) {
+		if ( user != null && UserUtils.isUsersEqual( user, accessor ) ) {
 			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
 		}
 

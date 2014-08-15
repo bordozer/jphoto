@@ -44,7 +44,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// All photos -->
 	@Override
 	public PhotoListCriterias getForAllPhotos( final User user ) {
-		return new PhotoListRegular().getPhotoListCriterias( user );
+		return new PhotoListGallery().getPhotoListCriterias( user );
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos by genre -->
 	@Override
 	public PhotoListCriterias getForGenre( final Genre genre, final User user ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( user );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( user );
 
 		criterias.setGenre( genre );
 
@@ -100,7 +100,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos by user -->
 	@Override
 	public PhotoListCriterias getForUser( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setUser( user );
 
@@ -148,7 +148,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos by user and genre -->
 	@Override
 	public PhotoListCriterias getForUserAndGenre( final User user, final Genre genre, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setUser( user );
 		criterias.setGenre( genre );
@@ -200,7 +200,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos by votingCategory -->
 	@Override
 	public PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setVotingCategory( votingCategory );
@@ -210,7 +210,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	@Override
 	public PhotoListCriterias getForVotedPhotos( final User votedUser, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setVotedUser( votedUser );
@@ -220,7 +220,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	@Override
 	public PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setVotingCategory( votingCategory );
@@ -263,7 +263,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos by Period -->
 	@Override
 	public PhotoListCriterias getForPeriod( final Date dateFrom, final Date dateTo, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 //		setDatePeriodCriterias( criterias, dateFrom, dateTo );
 
@@ -294,7 +294,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	// Photos for MembershipType -->
 	@Override
 	public PhotoListCriterias getForMembershipType( UserMembershipType membershipType, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMembershipType( membershipType );
 
@@ -343,7 +343,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	@Override
 	public PhotoListCriterias getUserCardUserPhotosLast( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setUser( user );
 		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
@@ -353,7 +353,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	@Override
 	public PhotoListCriterias getUserCardLastVotedPhotos( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListRegular().getPhotoListCriterias( accessor );
+		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setVotedUser( user );
 		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
@@ -396,7 +396,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	private abstract class AbstractPhotoListCriterias {
 
-		public abstract PhotoListCriterias getPhotoListCriterias( final User user );
+		public abstract PhotoListCriterias getPhotoListCriterias( final User accessor );
 
 		protected void addVotingDateCriteriaFromCurrentDate( final PhotoListCriterias criterias ) {
 			final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -getLastDaysForMarksCalculations() );
@@ -405,10 +405,10 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		}
 	}
 
-	private class PhotoListRegular extends AbstractPhotoListCriterias {
+	private class PhotoListGallery extends AbstractPhotoListCriterias {
 
 		@Override
-		public PhotoListCriterias getPhotoListCriterias( final User user ) {
+		public PhotoListCriterias getPhotoListCriterias( final User accessor ) {
 			final PhotoListCriterias criterias = new PhotoListCriterias();
 
 			criterias.setPhotoSort( PhotoSort.UPLOAD_TIME );
@@ -420,7 +420,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private abstract class AbstractVotePhotoListCriterias extends AbstractPhotoListCriterias {
 
 		@Override
-		public PhotoListCriterias getPhotoListCriterias( final User user ) {
+		public PhotoListCriterias getPhotoListCriterias( final User accessor ) {
 			final PhotoListCriterias criterias = new PhotoListCriterias();
 
 			criterias.setMinimalMarks( getSystemDefaultMinMarks() );
@@ -433,8 +433,8 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private class PhotoListTopBest extends AbstractVotePhotoListCriterias {
 
 		@Override
-		public PhotoListCriterias getPhotoListCriterias( final User user ) {
-			final PhotoListCriterias criterias = super.getPhotoListCriterias( user );
+		public PhotoListCriterias getPhotoListCriterias( final User accessor ) {
+			final PhotoListCriterias criterias = super.getPhotoListCriterias( accessor );
 
 			addVotingDateCriteriaFromCurrentDate( criterias );
 			criterias.setTopBestPhotoList( true );
@@ -448,12 +448,12 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private class PhotoListBestForPeriod extends AbstractVotePhotoListCriterias {
 
 		@Override
-		public PhotoListCriterias getPhotoListCriterias( final User user ) {
-			final PhotoListCriterias criterias = super.getPhotoListCriterias( user );
+		public PhotoListCriterias getPhotoListCriterias( final User accessor ) {
+			final PhotoListCriterias criterias = super.getPhotoListCriterias( accessor );
 
 			addVotingDateCriteriaFromCurrentDate( criterias );
 
-			criterias.setPhotoQtyLimit( user.getPhotosOnPage() );
+			criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 
 			return criterias;
 		}
@@ -462,10 +462,10 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private class PhotoListAbsolutelyBest extends AbstractVotePhotoListCriterias {
 
 		@Override
-		public PhotoListCriterias getPhotoListCriterias( final User user ) {
-			final PhotoListCriterias criterias = super.getPhotoListCriterias( user );
+		public PhotoListCriterias getPhotoListCriterias( final User accessor ) {
+			final PhotoListCriterias criterias = super.getPhotoListCriterias( accessor );
 
-			criterias.setPhotoQtyLimit( user.getPhotosOnPage() );
+			criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 
 			return criterias;
 		}

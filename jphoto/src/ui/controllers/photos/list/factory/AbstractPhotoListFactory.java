@@ -2,6 +2,7 @@ package ui.controllers.photos.list.factory;
 
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
+import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -27,13 +28,14 @@ public abstract class AbstractPhotoListFactory {
 	protected Services services;
 	protected final User accessor;
 
+	protected User user;
+	protected Genre genre;
+
 	protected abstract String getLinkToFullList();
 
 	protected abstract boolean showPaging();
 
 	protected abstract boolean isPhotoHidden( final int photoId, final Date currentTime );
-
-	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
 
 	public AbstractPhotoListFactory( final User accessor, final Services services ) {
 		this.services = services;
@@ -59,6 +61,10 @@ public abstract class AbstractPhotoListFactory {
 		return photoList;
 	}
 
+	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
+		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery ) {
 
 		final SqlSelectIdsResult selectResult = getPhotosId( selectIdsQuery );
@@ -66,10 +72,6 @@ public abstract class AbstractPhotoListFactory {
 		final List<Integer> selectedPhotosIds = selectResult.getIds();
 		final int selectedPhotosCount = selectedPhotosIds.size();
 		final int totalPhotosCount = selectResult.getRecordQty();
-
-		/*if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
-			return new PhotoListMetrics( selectedPhotosIds, totalPhotosCount );
-		}*/
 
 		final List<Integer> notRestrictedPhotosIds = filterOutHiddenPhotos( selectedPhotosIds );
 

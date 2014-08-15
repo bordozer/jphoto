@@ -34,7 +34,7 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 
 	boolean isPhotoOfTheDayRestrictedOn( final int photoId, final Date time );
 
-	boolean isPhotoBeingInTopRestrictedOn( final int photoId, final Date time );
+	boolean isPhotoShowingInTopBestRestrictedOn( final int photoId, final Date time );
 
 	boolean isPhotoShowingInPhotoGalleryRestrictedOn( final int photoId, final Date time );
 

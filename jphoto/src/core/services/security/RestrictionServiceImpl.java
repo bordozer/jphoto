@@ -100,7 +100,7 @@ public class RestrictionServiceImpl implements RestrictionService {
 	}
 
 	@Override
-	public boolean isPhotoBeingInTopRestrictedOn( final int photoId, final Date time ) {
+	public boolean isPhotoShowingInTopBestRestrictedOn( final int photoId, final Date time ) {
 		return isRestrictedOn( photoId, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE, time );
 	}
 

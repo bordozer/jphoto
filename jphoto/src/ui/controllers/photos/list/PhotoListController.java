@@ -44,6 +44,7 @@ import sql.builder.*;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.edit.GenreWrapper;
 import ui.controllers.photos.list.factory.AbstractPhotoListFactory;
+import ui.controllers.photos.list.factory.PhotoListFactoryBest;
 import ui.controllers.photos.list.factory.PhotoListFactoryGallery;
 import ui.controllers.photos.list.factory.PhotoListFactoryTopBest;
 import ui.controllers.photos.list.title.AbstractPhotoListTitle;
@@ -215,7 +216,12 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( getUser() );
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( getUser(), services );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( getUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
@@ -223,7 +229,7 @@ public class PhotoListController {
 
 		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
 
 		return VIEW;
 	}
@@ -285,7 +291,14 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, getUser() );
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( genre, getUser(), services );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
+
+		filterModel.setFilterGenreId( _genreId );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, getUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
@@ -297,7 +310,7 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
-		filterModel.setFilterGenreId( _genreId );
+		filterModel.setFilterGenreId( _genreId );*/
 
 		return VIEW;
 	}

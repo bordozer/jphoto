@@ -2,7 +2,6 @@ package ui.controllers.photos.list.factory;
 
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
-import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -13,12 +12,12 @@ import java.util.Date;
 
 public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
-	private User user;
 
-	public PhotoListFactoryTopBest( final User user, final Services services ) {
-		super( user, services );
 
-		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( user );
+	public PhotoListFactoryTopBest( final User accessor, final Services services ) {
+		super( accessor, services );
+
+		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( accessor );
 		photoListTitle = getPhotoListTitle( services );
 	}
 
@@ -27,6 +26,8 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForGenreTopBest( genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		this.genre = genre;
 	}
 
 	public PhotoListFactoryTopBest( final User user, final User accessor, final Services services ) {
@@ -45,6 +46,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		photoListTitle = getPhotoListTitle( services );
 
 		this.user = user;
+		this.genre = genre;
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 			return false;
 		}
 
-		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
 	}
 
 	@Override
@@ -63,17 +65,25 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 	@Override
 	protected String getLinkToFullList() {
+
+		if ( genre != null && user != null ) {
+			return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
+		}
+
+		if ( genre != null ) {
+			return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
+		}
+
+		if ( user != null ) {
+			return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+		}
+
 		return services.getUrlUtilsService().getPhotosBestInPeriodUrl( criterias.getVotingTimeFrom(), criterias.getVotingTimeTo() );
 	}
 
 	@Override
 	protected boolean showPaging() {
 		return false;
-	}
-
-	@Override
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
-		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
 
 	private PhotoListTitleTopBest getPhotoListTitle( final Services services ) {
