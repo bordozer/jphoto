@@ -35,6 +35,15 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		forceShow = true;
 	}
 
+	public PhotoListFactoryGallery( final User user, final Genre genre, final User accessor, final Services services ) {
+		super( accessor, services );
+
+		criterias = services.getPhotoListCriteriasService().getForUserAndGenre( user, genre, accessor );
+		photoListTitle = getPhotoListTitle( services );
+
+		forceShow = true;
+	}
+
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
