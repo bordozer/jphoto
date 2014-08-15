@@ -11,7 +11,6 @@ import java.util.Date;
 
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
-	private boolean forceShow;
 	private User user;
 
 	public PhotoListFactoryGallery( final User accessor, final Services services ) {
@@ -34,7 +33,6 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUser( user, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		forceShow = true;
 		this.user = user;
 	}
 
@@ -44,14 +42,13 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUserAndGenre( user, genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		forceShow = true;
 		this.user = user;
 	}
 
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
-		if ( forceShow ) {
+		if ( user != null ) {
 			return false;
 		}
 

@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
-	private boolean forceShow;
+	private User user;
 
 	public PhotoListFactoryTopBest( final User user, final Services services ) {
 		super( user, services );
@@ -35,7 +35,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUserTopBest( user, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		forceShow = true;
+		this.user = user;
 	}
 
 	public PhotoListFactoryTopBest( final User user, final Genre genre, final User accessor, final Services services ) {
@@ -44,12 +44,12 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUserAndGenreTopBest( user, genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		forceShow = true;
+		this.user = user;
 	}
 
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-		if ( forceShow ) {
+		if ( user != null ) {
 			return false;
 		}
 
