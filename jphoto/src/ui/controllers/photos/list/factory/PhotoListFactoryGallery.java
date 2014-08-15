@@ -51,16 +51,19 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
-		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
-			return false;
-		}
-
 		if ( forceShow ) {
 			return false;
 		}
 
+		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
+			return false;
+		}
+
+		if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
+			return false; // TODO: should user see restricted photos in the gallery?
+		}
+
 		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
-		//		&& ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) || services.getSecurityService().isSuperAdminUser( accessor ) )
 	}
 
 	@Override
