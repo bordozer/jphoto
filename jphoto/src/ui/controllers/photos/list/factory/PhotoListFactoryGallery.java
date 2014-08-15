@@ -17,10 +17,11 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	}
 
 	@Override
-	protected boolean isPhotoRestricted( final int photoId, final Date currentTime ) {
+	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime )
-			&& ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) || services.getSecurityService().isSuperAdminUser( accessor ) )
+			&& ! services.getSecurityService().isSuperAdminUser( accessor )
 			;
+//		&& ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) || services.getSecurityService().isSuperAdminUser( accessor ) )
 	}
 
 	@Override

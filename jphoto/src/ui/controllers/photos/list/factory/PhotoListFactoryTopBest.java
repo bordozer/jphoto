@@ -20,7 +20,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 	}
 
 	@Override
-	protected boolean isPhotoRestricted( final int photoId, final Date currentTime ) {
+	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
 	}
 

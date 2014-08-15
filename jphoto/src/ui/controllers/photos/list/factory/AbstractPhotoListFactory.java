@@ -31,7 +31,7 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract boolean showPaging();
 
-	protected abstract boolean isPhotoRestricted( final int photoId, final Date currentTime );
+	protected abstract boolean isPhotoHidden( final int photoId, final Date currentTime );
 
 	protected abstract PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer();
 
@@ -67,11 +67,11 @@ public abstract class AbstractPhotoListFactory {
 		final int selectedPhotosCount = selectedPhotosIds.size();
 		final int totalPhotosCount = selectResult.getRecordQty();
 
-		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
+		/*if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
 			return new PhotoListMetrics( selectedPhotosIds, totalPhotosCount );
-		}
+		}*/
 
-		final List<Integer> notRestrictedPhotosIds = getNotRestrictedPhotosIdsOnly( selectedPhotosIds );
+		final List<Integer> notRestrictedPhotosIds = filterOutHiddenPhotos( selectedPhotosIds );
 
 		if ( selectedPhotosCount == totalPhotosCount ) {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
@@ -85,20 +85,20 @@ public abstract class AbstractPhotoListFactory {
 			selectIdsQuery.setLimit( diff);
 
 			final List<Integer> additionalPhotosIds = getPhotosId( selectIdsQuery ).getIds();
-			notRestrictedPhotosIds.addAll( getNotRestrictedPhotosIdsOnly( additionalPhotosIds ) );
+			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds ) );
 		}
 
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
 	}
 
-	private List<Integer> getNotRestrictedPhotosIdsOnly( final List<Integer> idsToShow ) {
+	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow ) {
 		final Date currentTime = services.getDateUtilsService().getCurrentTime();
 		final List<Integer> notRestrictedIds = newArrayList( idsToShow );
 
 		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! isPhotoRestricted( photoId, currentTime );
+				return ! isPhotoHidden( photoId, currentTime );
 			}
 		} );
 

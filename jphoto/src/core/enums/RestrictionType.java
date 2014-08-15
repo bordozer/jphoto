@@ -14,15 +14,16 @@ public enum RestrictionType implements IdentifiableNameable {
 	, USER_MESSAGING( 4, "RestrictionType: User messaging", "messaging.png" )
 	, USER_PHOTO_APPRAISAL( 5, "RestrictionType: User photo appraisal", "photo_appraisal.png" )
 	, USER_VOTING_FOR_RANK_IN_GENRE( 6, "RestrictionType: User voting fo rank in genre", "voting_fot_ranks_in_genres.png" )
+
 	, PHOTO_TO_BE_PHOTO_OF_THE_DAY( 7, "RestrictionType: Photo: To be photo of the day", "photo_of_the_day.png" )
 	, PHOTO_TO_BE_BEST_IN_GENRE( 8, "RestrictionType: Photo: To show in the best photos of genre", "best_in_genre.png" )
+	, PHOTO_SHOWING_IN_PHOTO_GALLERY( 11, "RestrictionType: Photo: To show in the photo gallery", "best_in_genre.png" )
 	, PHOTO_COMMENTING( 9, "RestrictionType: Photo: Commenting", "commenting.png" )
 	, PHOTO_APPRAISAL( 10, "RestrictionType: Photo: appraisal", "photo_appraisal.png" )
-	, PHOTO_SHOWING_IN_PHOTO_GALLERY( 11, "RestrictionType: Photo: To show in the photo gallery", "best_in_genre.png" )
 	;
 
 	public final static List<RestrictionType> FOR_USERS = newArrayList( USER_LOGIN, USER_PHOTO_UPLOADING, USER_COMMENTING, USER_MESSAGING, USER_PHOTO_APPRAISAL, USER_VOTING_FOR_RANK_IN_GENRE );
-	public final static List<RestrictionType> FOR_PHOTOS = newArrayList( PHOTO_TO_BE_PHOTO_OF_THE_DAY, PHOTO_TO_BE_BEST_IN_GENRE, PHOTO_COMMENTING, PHOTO_APPRAISAL, PHOTO_SHOWING_IN_PHOTO_GALLERY );
+	public final static List<RestrictionType> FOR_PHOTOS = newArrayList( PHOTO_TO_BE_PHOTO_OF_THE_DAY, PHOTO_TO_BE_BEST_IN_GENRE, PHOTO_SHOWING_IN_PHOTO_GALLERY, PHOTO_COMMENTING, PHOTO_APPRAISAL );
 
 	private final int id;
 	private final String name;
