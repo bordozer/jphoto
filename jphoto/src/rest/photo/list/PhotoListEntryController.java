@@ -23,7 +23,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -145,7 +144,9 @@ public class PhotoListEntryController {
 
 		dto.setShowAdminFlag_Nude( isSuperAdminUser && photo.isContainsNudeContent() );
 
-		setRestrictedData( photo, dto );
+		if ( securityService.isSuperAdminUser( accessor ) || securityService.userOwnThePhoto( accessor, photo ) ) {
+			setSpecialRestrictedIcons( photo, dto );
+		}
 
 		dto.setUserOwnThePhoto( userOwnThePhoto );
 
@@ -163,7 +164,7 @@ public class PhotoListEntryController {
 		return dto;
 	}
 
-	private void setRestrictedData( final Photo photo, final PhotoEntryDTO dto ) {
+	private void setSpecialRestrictedIcons( final Photo photo, final PhotoEntryDTO dto ) {
 		final Date currentTime = dateUtilsService.getCurrentTime();
 
 		final Map<String, SpecialIconDTO> result = newHashMap();

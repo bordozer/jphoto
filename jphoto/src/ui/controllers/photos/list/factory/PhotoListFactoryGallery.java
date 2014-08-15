@@ -10,26 +10,44 @@ import java.util.Date;
 
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
-	public PhotoListFactoryGallery( final User user, final Services services ) {
-		super( user, services );
+	private boolean forceShow;
 
-		criterias = services.getPhotoListCriteriasService().getForAllPhotos( user );
-		photoListTitle = new PhotoListTitleGallery( criterias, services );
+	public PhotoListFactoryGallery( final User accessor, final Services services ) {
+		super( accessor, services );
+
+		criterias = services.getPhotoListCriteriasService().getForAllPhotos( accessor );
+		photoListTitle = getPhotoListTitle( services );
 	}
 
-	public PhotoListFactoryGallery( final Genre genre, final User user, final Services services ) {
-		super( user, services );
+	public PhotoListFactoryGallery( final Genre genre, final User accessor, final Services services ) {
+		super( accessor, services );
 
-		criterias = services.getPhotoListCriteriasService().getForGenre( genre, user );
-		photoListTitle = new PhotoListTitleGallery( criterias, services );
+		criterias = services.getPhotoListCriteriasService().getForGenre( genre, accessor );
+		photoListTitle = getPhotoListTitle( services );
+	}
+
+	public PhotoListFactoryGallery( final User user, final User accessor, final Services services ) {
+		super( accessor, services );
+
+		criterias = services.getPhotoListCriteriasService().getForUser( user, accessor );
+		photoListTitle = getPhotoListTitle( services );
+
+		forceShow = true;
 	}
 
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime )
-			&& ! services.getSecurityService().isSuperAdminUser( accessor )
-			;
-//		&& ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) || services.getSecurityService().isSuperAdminUser( accessor ) )
+
+		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
+			return false;
+		}
+
+		if ( forceShow ) {
+			return false;
+		}
+
+		return services.getRestrictionService().isPhotoBeingInTopRestrictedOn( photoId, currentTime );
+		//		&& ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) || services.getSecurityService().isSuperAdminUser( accessor ) )
 	}
 
 	@Override
@@ -45,5 +63,9 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	@Override
 	protected boolean showPaging() {
 		return true;
+	}
+
+	private PhotoListTitleGallery getPhotoListTitle( final Services services ) {
+		return new PhotoListTitleGallery( criterias, services );
 	}
 }

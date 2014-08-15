@@ -308,6 +308,19 @@ public class PhotoListController {
 	public String showPhotosByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
+		final User user = userService.load( userId );
+
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( user, getUser(), services );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+
+		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( user, getUser(), services );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage() ) );
+
+		fillFilterModelWithUserData( filterModel, user );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBreadcrumbs( user ) );
+
+		/*final int userId = assertUserExistsAndGetUserId( _userId );
 
 		final User user = userService.load( userId );
 
@@ -341,7 +354,7 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
-		fillFilterModelWithUserData( filterModel, user );
+		fillFilterModelWithUserData( filterModel, user );*/
 
 		return VIEW;
 	}
