@@ -16,8 +16,8 @@ public enum RestrictionType implements IdentifiableNameable {
 	, USER_VOTING_FOR_RANK_IN_GENRE( 6, "RestrictionType: User voting fo rank in genre", "voting_fot_ranks_in_genres.png" )
 
 	, PHOTO_TO_BE_PHOTO_OF_THE_DAY( 7, "RestrictionType: Photo: To be photo of the day", "photo_of_the_day.png" )
-	, PHOTO_TO_BE_BEST_IN_GENRE( 8, "RestrictionType: Photo: To show in the best photos of genre", "best_in_genre.png" )
-	, PHOTO_SHOWING_IN_PHOTO_GALLERY( 11, "RestrictionType: Photo: To show in the photo gallery", "best_in_genre.png" )
+	, PHOTO_TO_BE_BEST_IN_GENRE( 8, "RestrictionType: Photo: To show in the best photos of genre", "show_in_genre_top.png" )
+	, PHOTO_SHOWING_IN_PHOTO_GALLERY( 11, "RestrictionType: Photo: To show in the photo gallery", "show_in_gallery.png" )
 	, PHOTO_COMMENTING( 9, "RestrictionType: Photo: Commenting", "commenting.png" )
 	, PHOTO_APPRAISAL( 10, "RestrictionType: Photo: appraisal", "photo_appraisal.png" )
 	;
