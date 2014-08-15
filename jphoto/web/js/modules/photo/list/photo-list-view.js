@@ -61,10 +61,6 @@ define( ["backbone", "jquery", "underscore"
 				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='background-image: url(/images/" + iconDTO.icon + ");'></div>" ) );
 			} );
 
-			/*if ( this.model.get( 'specialRestrictionIcons' ).length > 0 ) {
-				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='restrictions!' style='background-image: url(/images/icons24/admin-special-flag-restriction.png);'></div>" ) );
-			}*/
-
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
 				element_admin_flag_2.append( this.groupOperationsTemplate( modelJSON ) );
 			}
