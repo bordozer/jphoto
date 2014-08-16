@@ -691,4 +691,12 @@ public class SecurityServiceImpl implements SecurityService {
 	public void setTranslatorService( final TranslatorService translatorService ) {
 		this.translatorService = translatorService;
 	}
+
+	public void setAnonymousDaysService( final AnonymousDaysService anonymousDaysService ) {
+		this.anonymousDaysService = anonymousDaysService;
+	}
+
+	public void setRestrictionService( final RestrictionService restrictionService ) {
+		this.restrictionService = restrictionService;
+	}
 }
