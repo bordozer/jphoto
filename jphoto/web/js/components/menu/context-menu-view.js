@@ -17,18 +17,17 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 		, render:function () {
 			var modelJSON = this.model.toJSON();
 
-			var element = this.$el;
-			element.html( this.contextMenuTemplate( modelJSON ) );
+			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
 			var menuId = this.model.get( 'menuId' );
 			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			var ul = $( '.entry-context-menu-items-ul', element );
+			var ul = $( '.entry-context-menu-items-ul' );
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
 
-			var menu_a = $( '#entry-context-menu-icon-a', element );
-			var menu_content = $( '#' + menuDivId, element ).html();
+			var menu_a = this.$( '#entry-context-menu-icon-a' );
+			var menu_content = this.$( '#' + menuDivId ).html();
 
 			$( function () {
 				menu_a.context_menu( {
@@ -44,12 +43,9 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 		, renderItems: function( entryMenuItemDTOs, ul_container ) {
 
-			var model = this.model;
 			for ( var i in entryMenuItemDTOs ) {
 
 				var entryMenuItemDTO = entryMenuItemDTOs[ i ];
-
-//				var menuItemId = entryMenuItemDTO[ 'menuItemId' ];
 
 				if ( entryMenuItemDTO[ 'menuTypeSeparator' ] ) {
 					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 99%;'></div></li>" );
