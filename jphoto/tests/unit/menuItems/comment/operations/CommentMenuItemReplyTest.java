@@ -52,6 +52,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ServicesImpl services = getServices( parameters.getAccessor() );
 
 		services.setSecurityService( getSecurityServiceReply( parameters ) );
+		services.setDateUtilsService( dateUtilsService );
 
 		return services;
 	}

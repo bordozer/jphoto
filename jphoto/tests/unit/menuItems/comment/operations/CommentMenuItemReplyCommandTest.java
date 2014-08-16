@@ -21,7 +21,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 		final Services services = getServicesForTest( user, false );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( String.format( "Reply to %s", user.getNameEscaped() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( testData.getComment(), user, services ).getMenuItemCommand().getMenuText(), translated( String.format( "CommentMenuItemReply: Reply to %s", user.getNameEscaped() ) ) );
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final PhotoComment comment = testData.getComment();
 		comment.setCommentAuthor( user );
 
-		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), translated( String.format( "Reply to %s ( photo's author )", user.getNameEscaped() ) ) );
+		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT, new CommentMenuItemReply( comment, user, services ).getMenuItemCommand().getMenuText(), translated( String.format( "CommentMenuItemReply: Reply to %s ( photo's author )", user.getNameEscaped() ) ) );
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final ServicesImpl services = getServicesForTest( accessor, false );
 		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
 
-		final String message = String.format( translated( "You are in the black list of %s. You can not reply." ), testData.getCommentAuthor().getNameEscaped() );
+		final String message = String.format( translated( "CommentMenuItemReply: You are in the black list of %s. You can not reply." ), testData.getCommentAuthor().getNameEscaped() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT
 			, new CommentMenuItemReply( testData.getComment(), accessor, services ).getMenuItemCommand().getMenuCommand()
 			, String.format( "showUIMessage_InformationMessage_ManualClosing( '%s' )", message  ) );

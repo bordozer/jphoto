@@ -55,6 +55,6 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	private boolean userCanCommentPhoto() {
-		return services.getSecurityService().validateUserCanCommentPhoto( accessor, getPhoto(), services.getDateUtilsService().getCurrentTime(), getLanguage() ).isValidationPassed(); // TODO: getCurrentTime()???
+		return services.getSecurityService().validateUserCanCommentPhoto( accessor, getPhoto(), services.getDateUtilsService().getCurrentTime(), getLanguage() ).isValidationPassed();
 	}
 }
