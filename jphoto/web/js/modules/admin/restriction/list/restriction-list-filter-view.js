@@ -72,6 +72,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var historyEntryTranslations = this.model.historyEntryTranslations;
 
 			var $searchResultContainer = this.$( ".search-result-container" );
+			$searchResultContainer.html( '' );
 
 			this.model.each( function( entryModel ) {
 				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
