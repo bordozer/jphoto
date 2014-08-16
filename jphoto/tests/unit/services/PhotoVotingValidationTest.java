@@ -55,13 +55,8 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
 
 		assertTrue( "User Can  Vote For His Own Photo", securityService.validateUserCanVoteForPhoto( photoAuthor, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -79,19 +74,9 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, blackListUserId ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, blackListUserId, true ) );
 
 		assertTrue( "User From Black List Of Photo Author Can Vote", securityService.validateUserCanVoteForPhoto( blackListUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -111,25 +96,10 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( false ) );
 
 		assertTrue( "Candidates Can Vote If It Is Denied On The System Level", securityService.validateUserCanVoteForPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -149,31 +119,11 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, userId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.ACTIONS_DENIED ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, userId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.ACTIONS_DENIED ) );
 
 		assertTrue( "Voting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( user, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -193,31 +143,11 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.MEMBERS_ONLY ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.MEMBERS_ONLY ) );
 
 		assertTrue( "Commenting Is Denied By Author but user can leave comment", securityService.validateUserCanVoteForPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -239,26 +169,6 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setUserId( photoAuthorId );
 		photo.setGenreId( 321 );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final UserRankService userRankService = EasyMock.createMock( UserRankService.class );
 		EasyMock.expect( userRankService.getUserRankInGenre( candidateUserId, photo.getGenreId() ) ).andReturn( userRankInGenre ).anyTimes();
 		EasyMock.expectLastCall();
@@ -270,10 +180,10 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.replay( genreService );
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.CANDIDATES_AND_MEMBERS ) );
 		securityService.setUserRankService( userRankService );
 		securityService.setGenreService( genreService );
 		securityService.setEntityLinkUtilsService( entityLinkUtilsService );
@@ -298,26 +208,6 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setUserId( photoAuthorId );
 		photo.setGenreId( 321 );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final UserRankService userRankService = EasyMock.createMock( UserRankService.class );
 		EasyMock.expect( userRankService.getUserRankInGenre( candidateUserId, photo.getGenreId() ) ).andReturn( userRankInGenre ).anyTimes();
 		EasyMock.expectLastCall();
@@ -331,10 +221,10 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.CANDIDATES_AND_MEMBERS ) );
 		securityService.setRestrictionService( restrictionService );
 		securityService.setUserRankService( userRankService );
 
@@ -359,26 +249,6 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setUserId( photoAuthorId );
 		photo.setGenreId( 321 );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final UserRankService userRankService = EasyMock.createMock( UserRankService.class );
 		EasyMock.expect( userRankService.getUserRankInGenre( candidateUserId, photo.getGenreId() ) ).andReturn( userRankInGenre ).anyTimes();
 		EasyMock.expectLastCall();
@@ -393,10 +263,10 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.CANDIDATES_AND_MEMBERS ) );
 		securityService.setRestrictionService( restrictionService );
 		securityService.setUserRankService( userRankService );
 
@@ -421,26 +291,6 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		photo.setUserId( photoAuthorId );
 		photo.setGenreId( 321 );
 
-		final UserService userService = EasyMock.createMock( UserService.class );
-		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( userService );
-
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final UserRankService userRankService = EasyMock.createMock( UserRankService.class );
 		EasyMock.expect( userRankService.getUserRankInGenre( candidateUserId, photo.getGenreId() ) ).andReturn( userRankInGenre ).anyTimes();
 		EasyMock.expectLastCall();
@@ -453,14 +303,46 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setUserService( userService );
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setUserService( getUserService( photoAuthorId, photoAuthor ) );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo, PhotoActionAllowance.CANDIDATES_AND_MEMBERS ) );
 		securityService.setRestrictionService( restrictionService );
 		securityService.setUserRankService( userRankService );
 
 		assertTrue( "Commenting must be accessible but it is not", securityService.validateUserCanVoteForPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationPassed() );
+	}
+
+	private UserService getUserService( final int photoAuthorId, final User photoAuthor ) {
+		final UserService userService = EasyMock.createMock( UserService.class );
+		EasyMock.expect( userService.load( photoAuthorId ) ).andReturn( photoAuthor ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( userService );
+		return userService;
+	}
+
+	private FavoritesService getFavoritesService( final int photoAuthorId, final int candidateUserId, final boolean value ) {
+		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
+		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( value ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( favoritesService );
+		return favoritesService;
+	}
+
+	private ConfigurationService getConfigurationService( final boolean value ) {
+		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( value ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( configurationService );
+		return configurationService;
+	}
+
+	private PhotoService getPhotoService( final Photo photo, final PhotoActionAllowance candidatesAndMembers ) {
+		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
+		EasyMock.expect( photoService.getPhotoVotingAllowance( photo ) ).andReturn( candidatesAndMembers ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( photoService );
+		return photoService;
 	}
 
 	private SecurityServiceImpl getSecurityService() {
