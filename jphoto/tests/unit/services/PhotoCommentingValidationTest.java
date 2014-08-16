@@ -53,14 +53,8 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, photoAuthorBlackListUserId ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setFavoritesService( favoritesService );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, photoAuthorBlackListUserId, true ) );
 
 		assertTrue( "User from photo author's black list Can Leave Comment", securityService.validateUserCanCommentPhoto( photoAuthorBlackListUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
@@ -78,15 +72,9 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
+		final FavoritesService favoritesService = getFavoritesService( photoAuthorId, candidateUserId, false );
 
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
+		final ConfigurationService configurationService = getConfigurationService( false );
 
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setFavoritesService( favoritesService );
@@ -108,15 +96,9 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, userId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
+		final FavoritesService favoritesService = getFavoritesService( photoAuthorId, userId, false );
 
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
+		final ConfigurationService configurationService = getConfigurationService( false );
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.ACTIONS_DENIED ).anyTimes();
@@ -144,15 +126,9 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
+		final FavoritesService favoritesService = getFavoritesService( photoAuthorId, candidateUserId, false );
 
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
+		final ConfigurationService configurationService = getConfigurationService( true );
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.MEMBERS_ONLY ).anyTimes();
@@ -180,20 +156,9 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
+		final FavoritesService favoritesService = getFavoritesService( photoAuthorId, candidateUserId, false );
 
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
+		final ConfigurationService configurationService = getConfigurationService( true );
 
 		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
 		final EntryRestriction restriction = new EntryRestriction<Photo>( photo, RestrictionType.PHOTO_COMMENTING );
@@ -205,7 +170,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setFavoritesService( favoritesService );
 		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setPhotoService( getPhotoService( photo ) );
 		securityService.setRestrictionService( restrictionService );
 
 		assertTrue( "Commenting mustn't be accessible but it is", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
@@ -224,20 +189,7 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
+		final FavoritesService favoritesService = getFavoritesService( photoAuthorId, candidateUserId, false );
 
 		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
 		final EntryRestriction restriction = new EntryRestriction<Photo>( photo, RestrictionType.PHOTO_COMMENTING );
@@ -249,8 +201,8 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 
 		final SecurityServiceImpl securityService = getSecurityService();
 		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo ) );
 		securityService.setRestrictionService( restrictionService );
 
 		assertTrue( "Commenting mustn't be accessible but it is", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
@@ -269,21 +221,6 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		photo.setId( 333 );
 		photo.setUserId( photoAuthorId );
 
-		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
-		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( false ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( favoritesService );
-
-		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
-		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( true ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( configurationService );
-
-		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoService );
-
 		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
 		EasyMock.expect( restrictionService.getUserPhotoCommentingRestrictionOn( EasyMock.anyInt(), EasyMock.<Date>anyObject() ) ).andReturn( null ).anyTimes();
 		EasyMock.expect( restrictionService.getPhotoCommentingRestrictionOn( EasyMock.anyInt(), EasyMock.<Date>anyObject() ) ).andReturn( null ).anyTimes();
@@ -291,12 +228,36 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		final SecurityServiceImpl securityService = getSecurityService();
-		securityService.setFavoritesService( favoritesService );
-		securityService.setConfigurationService( configurationService );
-		securityService.setPhotoService( photoService );
+		securityService.setFavoritesService( getFavoritesService( photoAuthorId, candidateUserId, false ) );
+		securityService.setConfigurationService( getConfigurationService( true ) );
+		securityService.setPhotoService( getPhotoService( photo ) );
 		securityService.setRestrictionService( restrictionService );
 
 		assertTrue( "Commenting must be accessible but it is not", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationPassed() );
+	}
+
+	private FavoritesService getFavoritesService( final int photoAuthorId, final int candidateUserId, final boolean value ) {
+		final FavoritesService favoritesService = EasyMock.createMock( FavoritesService.class );
+		EasyMock.expect( favoritesService.isUserInBlackListOfUser( photoAuthorId, candidateUserId ) ).andReturn( value ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( favoritesService );
+		return favoritesService;
+	}
+
+	private ConfigurationService getConfigurationService( final boolean value ) {
+		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
+		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_COMMENT_PHOTOS ) ).andReturn( value ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( configurationService );
+		return configurationService;
+	}
+
+	private PhotoService getPhotoService( final Photo photo ) {
+		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
+		EasyMock.expect( photoService.getPhotoCommentAllowance( photo ) ).andReturn( PhotoActionAllowance.CANDIDATES_AND_MEMBERS ).anyTimes();
+		EasyMock.expectLastCall();
+		EasyMock.replay( photoService );
+		return photoService;
 	}
 
 	private SecurityServiceImpl getSecurityService() {
