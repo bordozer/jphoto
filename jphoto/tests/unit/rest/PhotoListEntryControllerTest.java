@@ -10,10 +10,12 @@ import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoPreviewService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
+import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import rest.photo.list.PhotoBookmarkIcon;
 import rest.photo.list.PhotoEntryDTO;
 import rest.photo.list.PhotoListEntryController;
@@ -38,6 +40,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	private static final String ANONYMOUS_USER_NAME = "ANONYMKA";
 
 	private static final Language LANGUAGE = MENU_LANGUAGE;
+	public static final String CURRENT_TIME_ = "2014-08-16 12:50:23";
 
 	private UserMock accessor;
 	private UserMock photoAuthor;
@@ -184,7 +187,8 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final PhotoListEntryController controller = getController( testData );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE ); // doesPreviewHasToBeHidden == FALSE
 
-		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a class=\"photo-link\" href=\"http://127.0.0.1:8085/worker/photos/777/card/\" title=\"EntityLinkUtilsService: Photo #777: photo card link title\">Photo #777</a>", dto.getPhotoName() );
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "<a class=\"photo-link\" href=\"http://127.0.0.1:8085/worker/photos/777/card/\" title=\"EntityLinkUtilsService: Photo #777: photo card link title\">Photo #777</a>", dto.getPhotoLink() );
+		assertEquals( THE_VALUES_ARE_NOT_EQUAL, "Photo #777", dto.getPhotoName() );
 	}
 
 	@Test
@@ -362,6 +366,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		testData.photoWithingAnonymousPeriod = true; // TRUE
 
 		final PhotoListEntryController controller = getController( testData );
+//		controller.setDateUtilsService( getDateUtilsService() );
 		final PhotoEntryDTO dto = controller.photoListEntry( testData.photo, testData.accessor, false, LANGUAGE );
 
 		assertEquals( THE_VALUES_ARE_NOT_EQUAL, true, dto.isShowAdminFlag_Anonymous() );
@@ -488,6 +493,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		controller.setPhotoVotingService( setPhotoVotingService( testData ) );
 		controller.setPhotoPreviewService( getPhotoPreviewService( testData ) );
 		controller.setPhotoCommentService( getPhotoCommentService( testData ) );
+		controller.setRestrictionService( getRestrictionService( testData ) );
 
 		return controller;
 	}
@@ -613,6 +619,29 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		return photoCommentService;
 	}
+
+	private RestrictionService getRestrictionService( final TestData testData ) {
+		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
+
+		EasyMock.expect( restrictionService.getPhotoAllRestrictionsOn( EasyMock.anyInt(), EasyMock.<Date>anyObject() ) ).andReturn( newArrayList() ).anyTimes();
+//		EasyMock.expect( restrictionService.getPhotoRestrictionMessage( EasyMock.<EntryRestriction>anyObject() ) ).andReturn( new TranslatableMessage( "", getServices() ) ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( restrictionService );
+
+		return restrictionService;
+	}
+
+	/*private DateUtilsService getDateUtilsService() {
+		final DateUtilsService dateUtilsService = EasyMock.createMock( DateUtilsService.class );
+
+		EasyMock.expect( dateUtilsService.getCurrentTime() ).andReturn( this.dateUtilsService.parseDateTime( CURRENT_TIME_ ) ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( dateUtilsService );
+
+		return dateUtilsService;
+	}*/
 
 	private class TestData {
 

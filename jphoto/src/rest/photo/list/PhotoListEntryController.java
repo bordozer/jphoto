@@ -123,8 +123,8 @@ public class PhotoListEntryController {
 		dto.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
 		if ( doesPreviewHasToBeHidden ) {
-			dto.setPhotoName( photo.getName() ); // escaping!
-			dto.setPhotoLink( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
+			dto.setPhotoName( translatorService.translate( "Photo preview: Photo's name is hidden", language ) );
+			dto.setPhotoLink( "" );
 		} else {
 			dto.setPhotoName( photo.getName() ); // escaping!
 			dto.setPhotoLink( entityLinkUtilsService.getPhotoCardLink( photo, language ) );
@@ -411,6 +411,10 @@ public class PhotoListEntryController {
 
 	public void setFavoritesService( final FavoritesService favoritesService ) {
 		this.favoritesService = favoritesService;
+	}
+
+	public void setRestrictionService( final RestrictionService restrictionService ) {
+		this.restrictionService = restrictionService;
 	}
 
 	private Language getLanguage() {
