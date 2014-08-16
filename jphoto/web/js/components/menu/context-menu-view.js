@@ -28,10 +28,11 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
 
 			var menu_a = $( '#entry-context-menu-icon-a', element );
+			var menu_content = $( '#' + menuDivId, element ).html();
 
 			$( function () {
 				menu_a.context_menu( {
-					content:$( '#' + menuDivId ).html()
+					content: menu_content
 					  , showSpeed:400
 					  , width:350
 					  , maxHeight: entryMenuHeight
