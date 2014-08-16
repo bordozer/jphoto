@@ -52,3 +52,17 @@ public class Photo35UrlHelper extends AbstractRemotePhotoSiteUrlHelper {
 		httpClient.setCookieStore( cookieStore );
 	}
 }
+
+/*
+<script type="text/javascript">
+  var showNextBlock = "photoLibBlock";
+  showNextList("photoUser");
+  var nextListMoreOp = "&user_id=80842&show=r2";
+  var showNextListId=702437;
+</script>
+
+http://35photo.ru/show_block.php?type=getNextPageData&page=photoUser&lastId=702437&user_id=80842&show=r2
+where 702437 - last shown photoId
+80842 - userId
+
+* */

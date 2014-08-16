@@ -24,10 +24,16 @@
 
 <tags:page pageModel="${savedJobListModel.pageModel}">
 
-<script type="text/javascript" src="${eco:baseUrl()}/js/DEL_jobProgress.js"></script>
-
 <script type="text/javascript">
 	var interval = ${jobProgressInterval};
+
+	function doNothing() {}
+
+	function updateProgress( jobExecutionHistoryEntryId ) {
+		require( [ 'jquery', '/admin/js/job-execution-progress.js' ], function( $, progress ) {
+			progress.updateProgress( jobExecutionHistoryEntryId, interval, jsonRPC, doNothing );
+		});
+	}
 </script>
 
 <style type="text/css">
@@ -252,8 +258,6 @@
 									setTimeout( function () {
 										updateProgress( ${jobExecutionHistoryEntry.id}, doNothing );
 									}, interval );
-
-									function doNothing() {}
 								</script>
 							</c:if>
 
