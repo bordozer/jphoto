@@ -11,6 +11,8 @@ import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertEquals;
 
 public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest_ {
@@ -66,7 +68,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		services.setFavoritesService( getFavoritesService( accessor, isUserInBlackListOfUser ) );
 
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT
-			, new CommentMenuItemReply( testData.getComment(), accessor, services, services.getDateUtilsService().getCurrentTime() ).getMenuItemCommand().getMenuCommand()
+			, new CommentMenuItemReply( testData.getComment(), accessor, services, getTime( services ) ).getMenuItemCommand().getMenuCommand()
 			, String.format( "replyToComment( %d );", testData.getComment().getId() ) );
 	}
 
@@ -80,7 +82,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 
 		final String message = String.format( translated( "CommentMenuItemReply: You are in the black list of %s. You can not reply." ), testData.getCommentAuthor().getNameEscaped() );
 		assertEquals( EXPECTED_AND_ACTUAL_RESULTS_ARE_DIFFERENT
-			, new CommentMenuItemReply( testData.getComment(), accessor, services, services.getDateUtilsService().getCurrentTime() ).getMenuItemCommand().getMenuCommand()
+			, new CommentMenuItemReply( testData.getComment(), accessor, services, getTime( services ) ).getMenuItemCommand().getMenuCommand()
 			, String.format( "showUIMessage_InformationMessage_ManualClosing( '%s' )", message  ) );
 	}
 
@@ -88,6 +90,7 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		final ServicesImpl services = getServices( user );
 
 		services.setSecurityService( getSecurityServiceForTest( user, isCommentAuthorNameInAnonymousPeriod ) );
+		services.setDateUtilsService( dateUtilsService );
 
 		return services;
 	}
@@ -112,5 +115,9 @@ public class CommentMenuItemReplyCommandTest extends AbstractCommentMenuItemTest
 		EasyMock.replay( favoritesService );
 
 		return favoritesService;
+	}
+
+	private Date getTime( final ServicesImpl services ) {
+		return dateUtilsService.parseDateTime( "2014-05-01 18:10:13" );
 	}
 }
