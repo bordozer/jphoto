@@ -186,7 +186,7 @@ public class MenuCreationFactory {
 					menuItems.add( new CommentMenuItemEdit( photoComment, accessor, services ) );
 					break;
 				case COMMENT_REPLY:
-					menuItems.add( new CommentMenuItemReply( photoComment, accessor, services ) );
+					menuItems.add( new CommentMenuItemReply( photoComment, accessor, services, services.getDateUtilsService().getCurrentTime() ) );
 					break;
 				case MENU_ITEM_DELETE:
 					menuItems.add( new CommentMenuItemDelete( photoComment, accessor, services ) );

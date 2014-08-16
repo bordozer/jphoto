@@ -10,6 +10,8 @@ import menuItems.comment.AbstractCommentMenuItemTest_;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import java.util.Date;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -23,7 +25,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
+		assertFalse( MENU_ITEM_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ), getTime() ).isAccessibleFor() );
 	}
 
 	@Test
@@ -34,7 +36,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ), getTime() ).isAccessibleFor() );
 	}
 
 	@Test
@@ -45,7 +47,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 
 		final ReplyParameters parameters = new ReplyParameters( accessor, userCanCommentPhoto, accessorInTheBlackListOfCommentAuthor );
 
-		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ) ).isAccessibleFor() );
+		assertTrue( MENU_ITEM_SHOULD_BE_ACCESSIBLE_BUT_IT_IS_NOT, new CommentMenuItemReply( testData.getComment(), parameters.getAccessor(), getServicesReply( parameters ), getTime() ).isAccessibleFor() );
 	}
 
 	private ServicesImpl getServicesReply( final ReplyParameters parameters ) {
@@ -72,7 +74,7 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		final ValidationResult validationResult = new ValidationResult();
 		validationResult.setValidationPassed( parameters.isUserCanCommentPhoto() );
 
-		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), dateUtilsService.getCurrentTime(), AbstractTestCase.MENU_LANGUAGE ) ).andReturn( validationResult ).anyTimes();
+		EasyMock.expect( securityService.validateUserCanCommentPhoto( accessor, testData.getPhoto(), getTime(), AbstractTestCase.MENU_LANGUAGE ) ).andReturn( validationResult ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
@@ -103,5 +105,9 @@ public class CommentMenuItemReplyTest extends AbstractCommentMenuItemTest_ {
 		public boolean isAccessorInTheBlackListOfCommentAuthor() {
 			return accessorInTheBlackListOfCommentAuthor;
 		}
+	}
+
+	private Date getTime() {
+		return dateUtilsService.parseDateTime( "2014-05-12 12:13:14" );
 	}
 }

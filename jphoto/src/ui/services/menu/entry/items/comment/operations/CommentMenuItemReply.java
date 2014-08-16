@@ -9,10 +9,15 @@ import ui.services.menu.entry.items.AbstractEntryMenuItemCommand;
 import ui.services.menu.entry.items.EntryMenuOperationType;
 import ui.services.menu.entry.items.comment.AbstractCommentMenuItem;
 
+import java.util.Date;
+
 public class CommentMenuItemReply extends AbstractCommentMenuItem {
 
-	public CommentMenuItemReply( final PhotoComment photoComment, final User accessor, final Services services ) {
+	private final Date time;
+
+	public CommentMenuItemReply( final PhotoComment photoComment, final User accessor, final Services services, final Date time ) {
 		super( photoComment, accessor, services );
+		 this.time = time;
 	}
 
 	@Override
@@ -55,6 +60,6 @@ public class CommentMenuItemReply extends AbstractCommentMenuItem {
 	}
 
 	private boolean userCanCommentPhoto() {
-		return services.getSecurityService().validateUserCanCommentPhoto( accessor, getPhoto(), services.getDateUtilsService().getCurrentTime(), getLanguage() ).isValidationPassed();
+		return services.getSecurityService().validateUserCanCommentPhoto( accessor, getPhoto(), time, getLanguage() ).isValidationPassed();
 	}
 }
