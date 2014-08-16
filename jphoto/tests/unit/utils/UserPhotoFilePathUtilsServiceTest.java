@@ -43,7 +43,7 @@ public class UserPhotoFilePathUtilsServiceTest extends AbstractTestCase {
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/", userPhotoFilePathUtilsService.getPhotoImageUrl( photo ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/photos/444/preview/", userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
 
-		assertEquals( "photo/storage/path/111/preview/111_00001", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ).getPath() );
+		assertEquals( "photo/storage/path/111/preview/111_00001.jpg", userPhotoFilePathUtilsService.generatePhotoPreviewName( photo.getUserId() ).getPath() );
 		assertEquals( "photo/storage/path/111/preview/preview_name_saved_in_db.jpg", userPhotoFilePathUtilsService.getPhotoPreviewFile( photo ).getPath() );
 		assertEquals( "_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileName( userId ) );
 		assertEquals( "http://127.0.0.1:8085/worker/download/file/?filePath=photo/storage/path/111/_avatar_111.jpg", userPhotoFilePathUtilsService.getUserAvatarFileUrl( userId ) );
