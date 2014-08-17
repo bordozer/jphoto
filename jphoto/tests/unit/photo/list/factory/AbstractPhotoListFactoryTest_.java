@@ -105,8 +105,15 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = new PhotoListCriterias();
 		criterias.setPhotoSort( PhotoSort.UPLOAD_TIME );
-		criterias.setVotingTimeFrom( dateUtilsService.getDatesOffset( testData.currentTime, - 2 ) );
-		criterias.setVotingTimeTo( testData.currentTime );
+
+		if ( testData.votingTimeFrom != null ) {
+//			criterias.setVotingTimeFrom( dateUtilsService.getDatesOffset( testData.currentTime, - 2 ) );
+			criterias.setVotingTimeFrom( testData.votingTimeFrom );
+		}
+		if ( testData.votingTimeTo != null ) {
+//			criterias.setVotingTimeFrom( dateUtilsService.getDatesOffset( testData.currentTime, - 2 ) );
+			criterias.setVotingTimeTo( testData.votingTimeTo );
+		}
 
 		if ( testData.user != null ) {
 			criterias.setUser( testData.user );
@@ -125,6 +132,8 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.expect( photoListCriteriasService.getForUser( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForGenre( testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserAndGenre( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
+
+		EasyMock.expect( photoListCriteriasService.getForAbsolutelyBest( testData.accessor ) ).andReturn( criterias ).anyTimes();
 
 		EasyMock.expect( photoListCriteriasService.getLinkToFullListText( criterias ) ).andReturn( "Link To Full List Text" ).anyTimes();
 

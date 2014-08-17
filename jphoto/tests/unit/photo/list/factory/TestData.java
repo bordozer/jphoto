@@ -18,6 +18,10 @@ class TestData {
 
 	public Date currentTime;
 
+	public Date votingTimeFrom;
+
+	public Date votingTimeTo;
+
 	public List<Integer> photoIds;
 
 	public List<Pair<Integer, RestrictionType>> restrictedPhotos;
