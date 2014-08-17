@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem implements SubmenuAccesible  {
+public class PhotoAdminMovePhotoToGenreSubMenu extends AbstractPhotoMenuItem implements SubmenuAccessible {
 
 	private final List<EntryMenuData> entryMenuDatas;
 

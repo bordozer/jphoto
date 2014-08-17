@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class UserAdminSubMenuItem extends AbstractUserMenuItem implements SubmenuAccesible {
+public class UserAdminSubMenuItem extends AbstractUserMenuItem implements SubmenuAccessible {
 
 	private final List<EntryMenuData> entryMenuOperationTypes = newArrayList( new EntryMenuData( EntryMenuOperationType.ADMIN_SUB_MENU_LOCK_USER ) );
 

@@ -1,6 +1,6 @@
 package ui.services.menu.entry.items;
 
-public interface SubmenuAccesible {
+public interface SubmenuAccessible {
 
 	EntryMenu getEntrySubMenu();
 }

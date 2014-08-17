@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-public class CommentAdminSubMenuItem extends AbstractCommentMenuItem implements SubmenuAccesible {
+public class CommentAdminSubMenuItem extends AbstractCommentMenuItem implements SubmenuAccessible {
 
 	private final List<EntryMenuData> entryMenuOperationTypes = newArrayList(
 		new EntryMenuData( EntryMenuOperationType.ADMIN_MENU_ITEM_EDIT )

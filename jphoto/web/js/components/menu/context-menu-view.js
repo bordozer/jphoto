@@ -51,7 +51,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				}
 
 				var li = $( "<li class='" + entryMenuItemDTO[ 'menuCssClassBG' ] + "' style='font-size: 10px;'></li>" );
-				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
+				var menuItemElement = $( "<a class='menu-item-a' href='#' ><img src='/images/" + entryMenuItemDTO[ 'menuCommandIcon' ] + "'>&nbsp;" + entryMenuItemDTO[ 'menuCommandText' ] + "</a>" );
 				li.append( menuItemElement );
 
 				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
@@ -74,10 +74,15 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 			menuElement.click( function( evt ) {
 
+				evt.preventDefault();
+				evt.stopPropagation();
+
 				function reloadPhotoCallback() {
+
 					if ( model.get( "contextMenuEntryModel" ) != undefined ) {
 						model.get( "contextMenuEntryModel" ).refresh();
 					}
+
 					if ( callbackMessage ) {
 						showUIMessage_Notification( callbackMessage );
 					}
@@ -90,18 +95,20 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					if ( ! confirm( photoName + ': ' + Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						return;
 					}
+
 					if ( model.get( "contextMenuEntryView" ) != undefined ) {
 						model.get( "contextMenuEntryModel" ).destroy();
 						view.remove();
 						model.get( "contextMenuEntryView" ).remove();
 					}
+
 					if ( callbackMessage ) {
 						showUIMessage_Notification( callbackMessage );
 					}
 				}
 
-				evt.preventDefault();
-				evt.stopPropagation();
+				console.log( menuElement );
+				console.log( menuItemCommand );
 
 				eval( menuItemCommand );
 			});
