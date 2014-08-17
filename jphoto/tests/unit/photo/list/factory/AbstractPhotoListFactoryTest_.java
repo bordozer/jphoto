@@ -10,6 +10,7 @@ import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
+import core.services.security.SecurityService;
 import core.services.system.ServicesImpl;
 import javafx.util.Pair;
 import org.easymock.EasyMock;
@@ -29,15 +30,17 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		services.setPhotoService( getPhotoService( testData ) );
 		services.setRestrictionService( getRestrictionService( testData ) );
 		services.setUrlUtilsService( urlUtilsService );
-		services.setGroupOperationService( getGroupOperationService() );
+		services.setGroupOperationService( getGroupOperationService( testData ) );
+		services.setSecurityService( getSecurityService( testData ) );
 
 		return services;
 	}
 
-	protected GroupOperationService getGroupOperationService() {
+	protected GroupOperationService getGroupOperationService( final TestData testData ) {
 		final GroupOperationService groupOperationService = EasyMock.createMock( GroupOperationService.class );
 
 		EasyMock.expect( groupOperationService.getNoPhotoGroupOperationMenuContainer() ).andReturn( new PhotoGroupOperationMenuContainer( Collections.<PhotoGroupOperationMenu>emptyList() ) ).anyTimes();
+		EasyMock.expect( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( testData.accessor ) ).andReturn( new PhotoGroupOperationMenuContainer( Collections.<PhotoGroupOperationMenu>emptyList() ) ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( groupOperationService );
@@ -50,6 +53,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 
 		for ( final int photosId : testData.photoIds ) {
 			EasyMock.expect( restrictionService.isPhotoShowingInTopBestRestrictedOn( photosId, testData.currentTime ) ).andReturn( false ).anyTimes();
+			EasyMock.expect( restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photosId, testData.currentTime ) ).andReturn( false ).anyTimes();
 		}
 
 		EasyMock.expectLastCall();
@@ -63,6 +67,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 
 		for ( final int photosId : testData.photoIds ) {
 			EasyMock.expect( restrictionService.isPhotoShowingInTopBestRestrictedOn( photosId, testData.currentTime ) ).andReturn( isRestricted( photosId, testData.restrictedPhotos, restrictionType ) ).anyTimes();
+			EasyMock.expect( restrictionService.isPhotoShowingInPhotoGalleryRestrictedOn( photosId, testData.currentTime ) ).andReturn( isRestricted( photosId, testData.restrictedPhotos, restrictionType ) ).anyTimes();
 		}
 
 		EasyMock.expectLastCall();
@@ -116,11 +121,25 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.expect( photoListCriteriasService.getForUserTopBest( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserAndGenreTopBest( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 
+		EasyMock.expect( photoListCriteriasService.getForAllPhotos( testData.accessor ) ).andReturn( criterias ).anyTimes();
+		EasyMock.expect( photoListCriteriasService.getForUser( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
+
 		EasyMock.expect( photoListCriteriasService.getLinkToFullListText( criterias ) ).andReturn( "Link To Full List Text" ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListCriteriasService );
 
 		return photoListCriteriasService;
+	}
+
+	private SecurityService getSecurityService( final TestData testData ) {
+		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
+
+		EasyMock.expect( securityService.isSuperAdminUser( testData.accessor ) ).andReturn( isSuperAdmin( testData.accessor ) ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( securityService );
+
+		return securityService;
 	}
 }
