@@ -40,6 +40,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 		}
 
 		, renderItems: function( entryMenuItemDTOs, ul_container ) {
+			console.log( entryMenuItemDTOs );
 
 			for ( var i in entryMenuItemDTOs ) {
 
@@ -49,9 +50,8 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 99%;'></div></li>" );
 					continue;
 				}
-				var dt = new Date().getMilliseconds();
+
 				var li = $( "<li class='" + entryMenuItemDTO[ 'menuCssClassBG' ] + "' style='font-size: 10px;'></li>" );
-//				var menuItemElement = $( "<a class='" + entryMenuItemDTO[ 'menuCssUniqueClass' ] + "' href='#' ><img src='/images/" + entryMenuItemDTO[ 'menuCommandIcon' ] + "'>&nbsp;" + entryMenuItemDTO[ 'menuCommandText' ] + "</a>" );
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuItemElement );
 
@@ -108,8 +108,8 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					}
 				}
 
-				console.log( menuElement );
-				console.log( menuItemCommand );
+//				console.log( menuElement );
+//				console.log( menuItemCommand );
 
 				eval( menuItemCommand );
 			});
