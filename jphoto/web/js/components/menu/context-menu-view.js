@@ -49,9 +49,10 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 					ul_container.append( "<li><div class='floatleft block-background' style='height: 2px; margin: 2px; width: 99%;'></div></li>" );
 					continue;
 				}
-
+				var dt = new Date().getMilliseconds();
 				var li = $( "<li class='" + entryMenuItemDTO[ 'menuCssClassBG' ] + "' style='font-size: 10px;'></li>" );
-				var menuItemElement = $( "<a class='menu-item-a' href='#' ><img src='/images/" + entryMenuItemDTO[ 'menuCommandIcon' ] + "'>&nbsp;" + entryMenuItemDTO[ 'menuCommandText' ] + "</a>" );
+//				var menuItemElement = $( "<a class='" + entryMenuItemDTO[ 'menuCssUniqueClass' ] + "' href='#' ><img src='/images/" + entryMenuItemDTO[ 'menuCommandIcon' ] + "'>&nbsp;" + entryMenuItemDTO[ 'menuCommandText' ] + "</a>" );
+				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuItemElement );
 
 				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );

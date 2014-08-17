@@ -45,16 +45,18 @@ public class MenuEntryController {
 		entryMenuDTO.setEntryMenuTitle( entryMenu.getMenuTitle() );
 		entryMenuDTO.setEntryMenuHeight( String.valueOf( entryMenu.getMenuHeight() ) );
 
-		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu ) );
+		entryMenuDTO.setEntryMenuItemDTOs( getMenuItemDTOs( entryId, entryMenu, 0 ) );
 
 		return entryMenuDTO;
 	}
 
-	private List<EntryMenuItemDTO> getMenuItemDTOs( final int entryId, final EntryMenu entryMenu ) {
+	private List<EntryMenuItemDTO> getMenuItemDTOs( final int entryId, final EntryMenu entryMenu, final int deep ) {
 
 		final List<? extends AbstractEntryMenuItem> menuItems = entryMenu.getEntryMenuItems();
 
 		return Lists.transform( menuItems, new Function<AbstractEntryMenuItem, EntryMenuItemDTO>() {
+
+			int counter = 0;
 
 			@Override
 			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
@@ -62,6 +64,7 @@ public class MenuEntryController {
 				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO();
 
 				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
+				menuItemDTO.setMenuCssUniqueClass( String.format( "%s-%d-%d-%d", entryMenuItem.getMenuCssClass(), entryId, deep, counter ) );
 				menuItemDTO.setMenuCssClassBG( entryMenuItem.getMenuCssClass() );
 				menuItemDTO.setCallbackMessage( entryMenuItem.getCallbackMessage() );
 				menuItemDTO.setHasSumMenu( entryMenuItem.isSubMenu() );
@@ -69,13 +72,15 @@ public class MenuEntryController {
 				if ( entryMenuItem instanceof SubmenuAccessible ) {
 					final SubmenuAccessible submenuAccessible = ( SubmenuAccessible ) entryMenuItem;
 					final EntryMenu entrySubMenu = submenuAccessible.getEntrySubMenu();
-					menuItemDTO.setEntrySubMenuItemDTOs( getMenuItemDTOs( entryId, entrySubMenu ) );
+					menuItemDTO.setEntrySubMenuItemDTOs( getMenuItemDTOs( entryId, entrySubMenu, deep + 1 ) );
 				}
 
 				final AbstractEntryMenuItemCommand menuItemCommand = entryMenuItem.getMenuItemCommand();
 				menuItemDTO.setMenuCommand( menuItemCommand.getMenuCommand() );
 				menuItemDTO.setMenuCommandIcon( entryMenuItem.getCommandIcon() );
 				menuItemDTO.setMenuCommandText( menuItemCommand.getMenuText() );
+
+				counter++;
 
 				return menuItemDTO;
 			}

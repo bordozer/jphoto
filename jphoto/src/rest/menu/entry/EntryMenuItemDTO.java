@@ -5,7 +5,10 @@ import java.util.List;
 public class EntryMenuItemDTO {
 
 	private boolean menuTypeSeparator;
+
+	private String menuCssUniqueClass;
 	private String menuCssClassBG;
+
 	private String callbackMessage;
 
 	private String menuCommand;
@@ -14,6 +17,14 @@ public class EntryMenuItemDTO {
 
 	private boolean hasSumMenu;
 	private List<EntryMenuItemDTO> entrySubMenuItemDTOs;
+
+	public String getMenuCssUniqueClass() {
+		return menuCssUniqueClass;
+	}
+
+	public void setMenuCssUniqueClass( final String menuCssUniqueClass ) {
+		this.menuCssUniqueClass = menuCssUniqueClass;
+	}
 
 	public String getMenuCssClassBG() {
 		return menuCssClassBG;
