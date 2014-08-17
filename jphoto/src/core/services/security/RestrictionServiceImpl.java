@@ -247,7 +247,8 @@ public class RestrictionServiceImpl implements RestrictionService {
 		return activeRestrictions;
 	}
 
-	private boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
+	@Override
+	public boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
 		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( entryId, restrictionType, time );
 		return activeRestrictions != null && activeRestrictions.size() > 0;
 	}

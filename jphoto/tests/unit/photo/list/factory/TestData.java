@@ -3,10 +3,10 @@ package photo.list.factory;
 import core.enums.RestrictionType;
 import core.general.genre.Genre;
 import core.general.user.User;
+import javafx.util.Pair;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 class TestData {
 
@@ -20,10 +20,14 @@ class TestData {
 
 	public List<Integer> photoIds;
 
-	public List<Map<Integer, RestrictionType>> restrictedPhotos;
+	public List<Pair<Integer, RestrictionType>> restrictedPhotos;
 
 	TestData() {
 		accessor = new User( 111 );
 		accessor.setName( "Accessor" );
+	}
+
+	TestData( final User accessor ) {
+		this.accessor = accessor;
 	}
 }
