@@ -40,8 +40,6 @@ public class MenuEntryController {
 		final EntryMenu entryMenu = getEntryMenuInstance( entryMenuTypeId, entryId );
 
 		final EntryMenuDTO entryMenuDTO = new EntryMenuDTO( entryMenuTypeId, entryId );
-		entryMenuDTO.setMenuDivId( String.format( "%s-items", entryMenu.getMenuId() ) );
-		entryMenuDTO.setMenuId( entryMenu.getMenuId() );
 
 		entryMenuDTO.setEntryMenuTypeName( entryMenu.getEntryMenuType().getName() );
 		entryMenuDTO.setEntryMenuTitle( entryMenu.getMenuTitle() );
@@ -63,9 +61,7 @@ public class MenuEntryController {
 			@Override
 			public EntryMenuItemDTO apply( final AbstractEntryMenuItem entryMenuItem ) {
 
-				final String menuItemId = String.format( "context-menu-item-%d-%d-%d-%d", entryMenu.getEntryMenuType().getId(), entryId, counter++, deep );
-
-				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO( menuItemId );
+				final EntryMenuItemDTO menuItemDTO = new EntryMenuItemDTO();
 
 				menuItemDTO.setMenuTypeSeparator( entryMenuItem.getEntryMenuType() == EntryMenuOperationType.SEPARATOR );
 				menuItemDTO.setMenuCssClass( String.format( "%s-%d-%d", entryMenuItem.getMenuCssClass(), deep, counter ) );

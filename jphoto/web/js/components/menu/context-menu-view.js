@@ -19,15 +19,13 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
-			var menuId = this.model.get( 'menuId' );
-			var menuDivId = this.model.get( 'menuDivId' );
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
-			var ul = $( '.entry-context-menu-items-ul' );
+			var ul = this.$( '.entry-context-menu-items-ul' );
 			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
 
 			var menu_a = this.$( '#entry-context-menu-icon-a' );
-			var menu_content = this.$( '#' + menuDivId ).html();
+			var menu_content = this.$( '.entry-popup-menu' ).html();
 
 			$( function () {
 				menu_a.context_menu( {

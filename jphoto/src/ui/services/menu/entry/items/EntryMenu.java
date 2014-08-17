@@ -46,9 +46,9 @@ public class EntryMenu {
 		return menuEntry.getId();
 	}
 
-	public String getMenuId() {
+	/*public String getMenuId() {
 		return String.format( "menu_%d_%d", entryMenuType.getId(), getEntryId() );
-	}
+	}*/
 
 	public List<? extends AbstractEntryMenuItem> getEntryMenuItems() {
 		return entryMenuItems;

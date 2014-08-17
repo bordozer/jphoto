@@ -7,9 +7,6 @@ public class EntryMenuDTO {
 	private final int entryId;
 	private int entryMenuTypeId;
 
-	private String menuDivId;
-	private String menuId;
-
 	private String entryMenuTypeName;
 	private String entryMenuTitle;
 	private String entryMenuHeight;
@@ -27,22 +24,6 @@ public class EntryMenuDTO {
 
 	public int getEntryMenuTypeId() {
 		return entryMenuTypeId;
-	}
-
-	public String getMenuId() {
-		return menuId;
-	}
-
-	public void setMenuId( final String menuId ) {
-		this.menuId = menuId;
-	}
-
-	public String getMenuDivId() {
-		return menuDivId;
-	}
-
-	public void setMenuDivId( final String menuDivId ) {
-		this.menuDivId = menuDivId;
 	}
 
 	public String getEntryMenuTypeName() {
