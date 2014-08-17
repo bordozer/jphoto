@@ -9,9 +9,9 @@ import core.services.system.Services;
 import core.services.translator.Language;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
+import org.apache.commons.lang.StringUtils;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.context.EnvironmentContext;
 import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PhotoList;
 
@@ -44,14 +44,14 @@ public abstract class AbstractPhotoListFactory {
 		this.accessor = accessor;
 	}
 
-	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language ) {
+	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
 
-		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ), services.getDateUtilsService().getCurrentTime() );
+		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ), time );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), photoListTitle.getPhotoListTitle().build( language ), showPaging() );
 
 		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText( criterias ) );
-		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( EnvironmentContext.getLanguage() ) );
+		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( language ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
 		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
@@ -102,6 +102,10 @@ public abstract class AbstractPhotoListFactory {
 		} );
 
 		return notRestrictedIds;
+	}
+
+	protected String getPhotoListBottomText() {
+		return StringUtils.EMPTY;
 	}
 
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {

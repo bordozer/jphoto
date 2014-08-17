@@ -79,6 +79,15 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		return true;
 	}
 
+	@Override
+	protected String getPhotoListBottomText() {
+		if ( genre != null ) {
+			return genre.getDescription();
+		}
+
+		return super.getPhotoListBottomText();
+	}
+
 	private PhotoListTitleGallery getPhotoListTitle( final Services services ) {
 		return new PhotoListTitleGallery( criterias, services );
 	}

@@ -19,7 +19,6 @@ import core.services.entry.GroupOperationService;
 import core.services.entry.VotingCategoryService;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
-import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -175,10 +174,10 @@ public class PhotoListController {
 	public String showAllPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( getUser(), services );
-		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
 
@@ -214,7 +213,7 @@ public class PhotoListController {
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
 
@@ -240,10 +239,10 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( genre, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( genre, getUser(), services );
-		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
 
@@ -289,7 +288,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( genre, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
 
@@ -321,10 +320,10 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( user, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( user, getUser(), services );
-		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		fillFilterModelWithUserData( filterModel, user );
 
@@ -376,7 +375,7 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( user, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
 
@@ -416,10 +415,10 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( user, genre, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( user, genre, getUser(), services );
-		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );
@@ -475,7 +474,7 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( user, genre, getUser(), services );
-		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBestBreadcrumbs( user, genre ) );
 

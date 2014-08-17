@@ -63,6 +63,15 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 		return false;
 	}
 
+	@Override
+	protected String getPhotoListBottomText() {
+		if ( genre != null ) {
+			return genre.getDescription();
+		}
+
+		return super.getPhotoListBottomText();
+	}
+
 	private PhotoListTitleBest getPhotoListTitle( final Services services ) {
 		return new PhotoListTitleBest( criterias, services );
 	}
