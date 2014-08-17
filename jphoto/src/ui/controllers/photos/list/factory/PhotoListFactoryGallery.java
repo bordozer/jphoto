@@ -49,7 +49,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
-		if ( user != null ) {
+		if ( isUserCard() ) {
 			return false;
 		}
 
@@ -67,7 +67,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 
-		if ( user != null && UserUtils.isUsersEqual( user, accessor ) ) {
+		if ( isUserCard() && UserUtils.isUsersEqual( user, accessor ) ) {
 			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
 		}
 

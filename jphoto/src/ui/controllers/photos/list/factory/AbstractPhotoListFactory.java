@@ -31,9 +31,13 @@ public abstract class AbstractPhotoListFactory {
 	protected User user;
 	protected Genre genre;
 
-	protected abstract boolean showPaging();
-
 	protected abstract boolean isPhotoHidden( final int photoId, final Date currentTime );
+
+	protected boolean isUserCard() {
+		return user != null;
+	}
+
+	protected abstract boolean showPaging();
 
 	public AbstractPhotoListFactory( final User accessor, final Services services ) {
 		this.services = services;

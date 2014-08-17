@@ -294,7 +294,7 @@ public class PhotoListController {
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( genre, getUser(), services );
 		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
 
 		filterModel.setFilterGenreId( _genreId );
 
@@ -376,10 +376,18 @@ public class PhotoListController {
 	public String showPhotosByUserBest( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
-
 		final User user = userService.load( userId );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, getUser() );
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( user, getUser(), services );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
+
+		fillFilterModelWithUserData( filterModel, user );
+
+		initUserGenres( model, user );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, getUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
@@ -394,7 +402,7 @@ public class PhotoListController {
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
-		fillFilterModelWithUserData( filterModel, user );
+		fillFilterModelWithUserData( filterModel, user );*/
 
 		return VIEW;
 	}

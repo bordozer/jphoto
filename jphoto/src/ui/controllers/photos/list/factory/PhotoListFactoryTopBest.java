@@ -51,7 +51,8 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-		if ( user != null ) {
+
+		if ( isUserCard() ) {
 			return false;
 		}
 
@@ -66,7 +67,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 	@Override
 	protected String getLinkToFullList() {
 
-		if ( genre != null && user != null ) {
+		if ( genre != null && isUserCard() ) {
 			return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 		}
 
@@ -74,7 +75,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 			return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
 		}
 
-		if ( user != null ) {
+		if ( isUserCard() ) {
 			return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
 		}
 

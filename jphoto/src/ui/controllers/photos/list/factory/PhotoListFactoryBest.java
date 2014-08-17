@@ -25,14 +25,16 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 		this.genre = genre;
 	}
 
-	@Override
-	protected boolean showPaging() {
-		return false;
+	public PhotoListFactoryBest( final User user, final User accessor, final Services services ) {
+		super( accessor, services );
+
+		this.user = user;
 	}
 
 	@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-		if ( user != null ) {
+
+		if ( isUserCard() ) {
 			return false;
 		}
 
@@ -41,6 +43,11 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 		}
 
 		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
+	}
+
+	@Override
+	protected boolean showPaging() {
+		return false;
 	}
 
 	private PhotoListTitleBest getPhotoListTitle( final Services services ) {
