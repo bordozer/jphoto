@@ -477,7 +477,17 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, getUser() );
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( user, genre, getUser(), services );
+		model.addPhotoList( photoListFactoryTopBest.getPhotoList( 1, pagingModel, getLanguage() ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBestBreadcrumbs( user, genre ) );
+
+		initUserGenres( model, user );
+
+		filterModel.setFilterGenreId( _genreId );
+		fillFilterModelWithUserData( filterModel, user );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, getUser() );
 		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBestBreadcrumbs( user, genre ) );
@@ -493,7 +503,7 @@ public class PhotoListController {
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
 		filterModel.setFilterGenreId( _genreId );
-		fillFilterModelWithUserData( filterModel, user );
+		fillFilterModelWithUserData( filterModel, user );*/
 
 		return VIEW;
 	}

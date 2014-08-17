@@ -28,7 +28,20 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 	public PhotoListFactoryBest( final User user, final User accessor, final Services services ) {
 		super( accessor, services );
 
+		criterias = services.getPhotoListCriteriasService().getForUserAbsolutelyBest( user, accessor );
+		photoListTitle = getPhotoListTitle( services );
+
 		this.user = user;
+	}
+
+	public PhotoListFactoryBest( final User user, final Genre genre, final User accessor, final Services services ) {
+		super( accessor, services );
+
+		criterias = services.getPhotoListCriteriasService().getForUserAndGenreAbsolutelyBest( user, genre, accessor );
+		photoListTitle = getPhotoListTitle( services );
+
+		this.user = user;
+		this.genre = genre;
 	}
 
 	@Override
