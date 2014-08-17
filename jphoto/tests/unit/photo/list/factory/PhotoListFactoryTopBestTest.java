@@ -30,6 +30,8 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
 		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
+		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
+		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );
 
 		final ServicesImpl services = getTestServices( testData );
 
@@ -37,10 +39,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final PagingModel pagingModel = new PagingModel( services );
 		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
-		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotoListTitle() );
+		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: appraised from to 2014-08-15 - 2014-08-10", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
-		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/from/2014-08-13/to/2014-08-15/best/", photoList.getLinkToFullList() );
-		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
+		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/from/2014-08-15/to/2014-08-10/best/", photoList.getLinkToFullList() );
+		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: appraised from to 2014-08-15 - 2014-08-10", photoList.getPhotosCriteriasDescription() );
 		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 
@@ -62,10 +64,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final PagingModel pagingModel = new PagingModel( services );
 		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
-		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotoListTitle() );
+		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a>", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
 		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/members/112/best/", photoList.getLinkToFullList() );
-		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
+		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a>", photoList.getPhotosCriteriasDescription() );
 		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 
@@ -87,10 +89,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final PagingModel pagingModel = new PagingModel( services );
 		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
-		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotoListTitle() );
+		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: in category Translated entry", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
 		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/genres/222/best/", photoList.getLinkToFullList() );
-		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
+		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: in category Translated entry", photoList.getPhotosCriteriasDescription() );
 		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 
@@ -117,10 +119,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final PagingModel pagingModel = new PagingModel( services );
 		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
-		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotoListTitle() );
+		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: in category Translated entry", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
 		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/members/112/genre/222/best/", photoList.getLinkToFullList() );
-		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
+		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: in category Translated entry", photoList.getPhotosCriteriasDescription() );
 		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 
@@ -130,6 +132,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
 		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
+
+		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
+		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );
+
 		testData.restrictedPhotos = newArrayList();
 		testData.restrictedPhotos.add( new Pair<>( 2001, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
 		testData.restrictedPhotos.add( new Pair<>( 2003, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
@@ -151,6 +157,10 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 		final TestData testData = new TestData( SUPER_ADMIN_1 );
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
 		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
+
+		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
+		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );
+
 		testData.restrictedPhotos = newArrayList();
 		testData.restrictedPhotos.add( new Pair<>( 2001, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
 		testData.restrictedPhotos.add( new Pair<>( 2003, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
