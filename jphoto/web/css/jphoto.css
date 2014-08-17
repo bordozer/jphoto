@@ -649,3 +649,10 @@ table.formtable {
 	font-size: 12px;
 }
 
+.photo-card-operation-impossible {
+	float: left;
+	width: 98%;
+	margin-left: 10px;
+	font-weight: bold;
+}
+

@@ -5,6 +5,6 @@
 <%@ attribute name="validationMessage" required="true" type="java.lang.String" %>
 
 <div class="text-centered" style="width: 90%;">
-	<h6>${eco:translate(title_t)}</h6>
+	<div class="photo-card-operation-impossible">${eco:translate(title_t)}</div>
 	<span class="restriction-message">${validationMessage}</span>
 </div>
