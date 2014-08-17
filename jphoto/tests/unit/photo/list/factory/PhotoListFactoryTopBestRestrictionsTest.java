@@ -38,6 +38,7 @@ public class PhotoListFactoryTopBestRestrictionsTest extends AbstractPhotoListFa
 		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_APPRAISAL ) );
 
 		final ServicesImpl services = getTestServices( testData );
+		services.setRestrictionService( getRestrictionService( testData, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE ) );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
@@ -58,34 +59,12 @@ public class PhotoListFactoryTopBestRestrictionsTest extends AbstractPhotoListFa
 		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_APPRAISAL ) );
 
 		final ServicesImpl services = getTestServices( testData );
+		services.setRestrictionService( getRestrictionService( testData, RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE ) );
 
 		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
 		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "2000,2002,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
-	}
-
-	@Override
-	protected RestrictionService getRestrictionService( final TestData testData ) {
-		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
-
-		for ( final int photosId : testData.photoIds ) {
-			EasyMock.expect( restrictionService.isPhotoShowingInTopBestRestrictedOn( photosId, testData.currentTime ) ).andReturn( isRestricted( photosId, testData.restrictedPhotos ) ).anyTimes();
-		}
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( restrictionService );
-
-		return restrictionService;
-	}
-
-	private Boolean isRestricted( final int photosId, final List<Pair<Integer, RestrictionType>> restrictedPhotos ) {
-		for ( final Pair<Integer, RestrictionType> restrictedPhoto : restrictedPhotos ) {
-			if ( restrictedPhoto.getKey() == photosId && restrictedPhoto.getValue() == RestrictionType.PHOTO_TO_BE_BEST_IN_GENRE ) {
-				return true;
-			}
-		}
-		return false;
 	}
 }

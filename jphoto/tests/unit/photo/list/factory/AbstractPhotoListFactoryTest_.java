@@ -1,6 +1,7 @@
 package photo.list.factory;
 
 import common.AbstractTestCase;
+import core.enums.RestrictionType;
 import core.general.data.PhotoListCriterias;
 import core.general.data.PhotoSort;
 import core.general.photo.group.PhotoGroupOperationMenu;
@@ -10,11 +11,13 @@ import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.system.ServicesImpl;
+import javafx.util.Pair;
 import org.easymock.EasyMock;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Collections;
+import java.util.List;
 
 public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 
@@ -53,6 +56,28 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		return restrictionService;
+	}
+
+	protected RestrictionService getRestrictionService( final TestData testData, final RestrictionType restrictionType ) {
+		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
+
+		for ( final int photosId : testData.photoIds ) {
+			EasyMock.expect( restrictionService.isPhotoShowingInTopBestRestrictedOn( photosId, testData.currentTime ) ).andReturn( isRestricted( photosId, testData.restrictedPhotos, restrictionType ) ).anyTimes();
+		}
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( restrictionService );
+
+		return restrictionService;
+	}
+
+	private Boolean isRestricted( final int photosId, final List<Pair<Integer, RestrictionType>> restrictedPhotos, RestrictionType restrictionType ) {
+		for ( final Pair<Integer, RestrictionType> restrictedPhoto : restrictedPhotos ) {
+			if ( restrictedPhoto.getKey() == photosId && restrictedPhoto.getValue() == restrictionType ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	protected PhotoService getPhotoService( final TestData testData ) {
