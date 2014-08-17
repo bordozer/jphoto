@@ -51,7 +51,7 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 			return false;
 		}
 
-		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
+		if ( isAccessorSuperAdmin() ) {
 			return false;
 		}
 

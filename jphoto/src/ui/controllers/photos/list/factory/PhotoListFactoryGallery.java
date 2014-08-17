@@ -53,13 +53,13 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 			return false;
 		}
 
-		if ( services.getSecurityService().isSuperAdminUser( accessor ) ) {
+		if ( isAccessorSuperAdmin() ) {
 			return false;
 		}
 
-		if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
+		/*if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
 			return false; // TODO: should user see restricted photos in the gallery?
-		}
+		}*/
 
 		return services.getRestrictionService().isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
 	}

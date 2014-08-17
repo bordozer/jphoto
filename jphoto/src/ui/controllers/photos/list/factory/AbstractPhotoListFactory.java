@@ -109,6 +109,10 @@ public abstract class AbstractPhotoListFactory {
 		return services.getPhotoService().load( selectIdsQuery );
 	}
 
+	protected boolean isAccessorSuperAdmin() {
+		return services.getSecurityService().isSuperAdminUser( accessor );
+	}
+
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
