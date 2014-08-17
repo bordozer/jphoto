@@ -123,9 +123,6 @@ public class PhotoListController {
 	@Autowired
 	private PhotoFilterValidator photoFilterValidator;
 
-	@Autowired
-	private RestrictionService restrictionService;
-
 	@ModelAttribute( "photoListModel" )
 	public PhotoListModel prepareModel() {
 		final PhotoListModel model = new PhotoListModel();

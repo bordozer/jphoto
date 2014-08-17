@@ -12,8 +12,6 @@ import java.util.Date;
 
 public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
-
-
 	public PhotoListFactoryTopBest( final User accessor, final Services services ) {
 		super( accessor, services );
 
@@ -61,7 +59,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 	@Override
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language ) {
-		return pagingModel.getCurrentPage() == 1 ? super.getPhotoList( photoListId, pagingModel, language ) : null;
+		return pagingModel.getCurrentPage() <= 1 ? super.getPhotoList( photoListId, pagingModel, language ) : null;
 	}
 
 	@Override

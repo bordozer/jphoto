@@ -11,7 +11,6 @@ import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
 import core.services.utils.sql.PhotoSqlFilterServiceImpl;
 import mocks.SystemVarsServiceMock;
-import mocks.UserMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 

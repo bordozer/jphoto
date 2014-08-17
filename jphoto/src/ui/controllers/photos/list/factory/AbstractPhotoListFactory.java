@@ -46,7 +46,7 @@ public abstract class AbstractPhotoListFactory {
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language ) {
 
-		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ), services.getDateUtilsService().getCurrentTime() );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), photoListTitle.getPhotoListTitle().build( language ), showPaging() );
 
@@ -63,7 +63,7 @@ public abstract class AbstractPhotoListFactory {
 		return photoList;
 	}
 
-	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery ) {
+	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
 
 		final SqlSelectIdsResult selectResult = getPhotosId( selectIdsQuery );
 
@@ -71,7 +71,7 @@ public abstract class AbstractPhotoListFactory {
 		final int selectedPhotosCount = selectedPhotosIds.size();
 		final int totalPhotosCount = selectResult.getRecordQty();
 
-		final List<Integer> notRestrictedPhotosIds = filterOutHiddenPhotos( selectedPhotosIds );
+		final List<Integer> notRestrictedPhotosIds = filterOutHiddenPhotos( selectedPhotosIds, time );
 
 		if ( selectedPhotosCount == totalPhotosCount ) {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
@@ -85,20 +85,19 @@ public abstract class AbstractPhotoListFactory {
 			selectIdsQuery.setLimit( diff);
 
 			final List<Integer> additionalPhotosIds = getPhotosId( selectIdsQuery ).getIds();
-			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds ) );
+			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, services.getDateUtilsService().getCurrentTime() ) );
 		}
 
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
 	}
 
-	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow ) {
-		final Date currentTime = services.getDateUtilsService().getCurrentTime();
+	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow, Date time ) {
 		final List<Integer> notRestrictedIds = newArrayList( idsToShow );
 
 		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! isPhotoHidden( photoId, currentTime );
+				return ! isPhotoHidden( photoId, time );
 			}
 		} );
 
