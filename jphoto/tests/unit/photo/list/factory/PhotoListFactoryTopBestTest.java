@@ -4,6 +4,7 @@ import common.AbstractTestCase;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.general.data.PhotoSort;
+import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.services.entry.GroupOperationService;
@@ -35,7 +36,7 @@ public class PhotoListFactoryTopBestTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void galleryTest() {
+	public void galleryTopBestTest() {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
@@ -51,6 +52,31 @@ public class PhotoListFactoryTopBestTest extends AbstractTestCase {
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
 		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/from/2014-08-13/to/2014-08-15/best/", photoList.getLinkToFullList() );
 		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
+		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
+	}
+
+	@Test
+	public void galleryTopBestForGenresTest() {
+
+		final Genre genre = new Genre();
+		genre.setId( 222 );
+		genre.setName( "Glamour" );
+
+		final TestData testData = new TestData();
+		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
+		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
+		testData.genre = genre;
+
+		final ServicesImpl services = getTestServices( testData );
+
+		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryTopBest( testData.genre, testData.accessor, services );
+		final PagingModel pagingModel = new PagingModel( services );
+		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+
+		assertEquals( "Assertion fails", "Top best photo list title Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotoListTitle() );
+		assertEquals( "Assertion fails", "", photoList.getBottomText() );
+		assertEquals( "Assertion fails", "http://127.0.0.1:8085/worker/photos/genres/222/best/", photoList.getLinkToFullList() );
+		assertEquals( "Assertion fails", "Top best photo list description Top best photo list title: in category Translated entry Top best photo list title: appraised from to 2014-08-13 - 2014-08-15", photoList.getPhotosCriteriasDescription() );
 		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 
@@ -114,7 +140,18 @@ public class PhotoListFactoryTopBestTest extends AbstractTestCase {
 		criterias.setVotingTimeFrom( dateUtilsService.getDatesOffset( testData.currentTime, - 2 ) );
 		criterias.setVotingTimeTo( testData.currentTime );
 
+		if ( testData.user != null ) {
+			criterias.setUser( testData.user );
+		}
+
+		if ( testData.genre != null ) {
+			criterias.setGenre( testData.genre );
+		}
+
 		EasyMock.expect( photoListCriteriasService.getForAllPhotosTopBest( testData.accessor ) ).andReturn( criterias ).anyTimes();
+		EasyMock.expect( photoListCriteriasService.getForGenreTopBest( testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
+		EasyMock.expect( photoListCriteriasService.getForUserTopBest( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
+
 		EasyMock.expect( photoListCriteriasService.getLinkToFullListText( criterias ) ).andReturn( "Link To Full List Text" ).anyTimes();
 
 		EasyMock.expectLastCall();
