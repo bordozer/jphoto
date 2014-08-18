@@ -99,7 +99,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 							type: 'DELETE',
 							url: Backbone.JPhoto.url( '/rest/photos/' + entryId + '/' ),
 							success: function ( response ) {
-								document.location.href = Backbone.JPhoto.url( 'photos/' );
+								document.location.href = Backbone.JPhoto.url( '/photos/' );
 							},
 							error: function () {
 								showUIMessage_Error( Backbone.JPhoto.translate( "Context menu item: Server error on photo deletion" ) );
