@@ -17,12 +17,14 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 		, render:function () {
 			var modelJSON = this.model.toJSON();
 
+			var entryId = modelJSON[ 'entryId' ];
+
 			this.$el.html( this.contextMenuTemplate( modelJSON ) );
 
 			var entryMenuHeight = this.model.get( 'entryMenuHeight' );
 
 			var ul = this.$( '.entry-context-menu-items-ul' );
-			this.renderItems( modelJSON[ 'entryMenuItemDTOs' ], ul );
+			this.renderItems( entryId, modelJSON[ 'entryMenuItemDTOs' ], ul );
 
 			var menu_a = this.$( '#entry-context-menu-icon-a' );
 			var menu_content = this.$( '.entry-popup-menu' ).html();
@@ -39,8 +41,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			menu_a.click();
 		}
 
-		, renderItems: function( entryMenuItemDTOs, ul_container ) {
-			console.log( entryMenuItemDTOs );
+		, renderItems: function( entryId, entryMenuItemDTOs, ul_container ) {
 
 			for ( var i in entryMenuItemDTOs ) {
 
@@ -55,11 +56,11 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 				var menuItemElement = $( this.contextMenuItemTemplate( entryMenuItemDTO ) );
 				li.append( menuItemElement );
 
-				this.bindMenuElementClick( menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
+				this.bindMenuElementClick( entryId, menuItemElement, entryMenuItemDTO[ 'menuCommand' ], entryMenuItemDTO[ 'callbackMessage' ] );
 
 				if ( entryMenuItemDTO[ 'hasSumMenu' ] ) {
 					var ul = $( "<ul class='top-menu-item'></ul>" );
-					this.renderItems( entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ul );
+					this.renderItems( entryId, entryMenuItemDTO[ 'entrySubMenuItemDTOs' ], ul );
 					li.append( ul );
 				}
 
@@ -68,7 +69,7 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 			}
 		}
 
-		, bindMenuElementClick: function( menuElement, menuItemCommand, callbackMessage ) {
+		, bindMenuElementClick: function( entryId, menuElement, menuItemCommand, callbackMessage ) {
 
 			var model = this.model;
 			var view = this;
@@ -91,25 +92,33 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				function deletePhotoFromContextMenu() {
 
-					var photoName = model.get( "contextMenuEntryView" ).model.get( 'photoName' );
+					if ( model.get( "contextMenuEntryView" ) == undefined && confirm( Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
+						$.ajax( {
+							type: 'DELETE',
+							url: Backbone.JPhoto.url( '/rest/photos/' + entryId + '/' ),
+							success: function ( response ) {
+								document.location.href = Backbone.JPhoto.url( 'photos/' );
+							},
+							error: function () {
+								showUIMessage_Error( Backbone.JPhoto.translate( "Context menu item: Server error on photo deletion" ) );
+							}
+						} );
+						return;
+					}
 
+					var photoName = model.get( "contextMenuEntryView" ).model.get( 'photoName' );
 					if ( ! confirm( photoName + ': ' + Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						return;
 					}
 
-					if ( model.get( "contextMenuEntryView" ) != undefined ) {
-						model.get( "contextMenuEntryModel" ).destroy();
-						view.remove();
-						model.get( "contextMenuEntryView" ).remove();
-					}
+					model.get( "contextMenuEntryModel" ).destroy();
+					view.remove();
+					model.get( "contextMenuEntryView" ).remove();
 
 					if ( callbackMessage ) {
 						showUIMessage_Notification( callbackMessage );
 					}
 				}
-
-//				console.log( menuElement );
-//				console.log( menuItemCommand );
 
 				eval( menuItemCommand );
 			});
