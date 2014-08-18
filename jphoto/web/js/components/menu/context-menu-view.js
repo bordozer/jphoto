@@ -92,7 +92,9 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 
 				function deletePhotoFromContextMenu() {
 
-					if ( model.get( "contextMenuEntryView" ) == undefined && confirm( Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
+					var view = model.get( "contextMenuEntryView" );
+
+					if ( view == undefined && confirm( Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						$.ajax( {
 							type: 'DELETE',
 							url: Backbone.JPhoto.url( '/rest/photos/' + entryId + '/' ),
@@ -106,14 +108,14 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 						return;
 					}
 
-					var photoName = model.get( "contextMenuEntryView" ).model.get( 'photoName' );
+					var photoName = view.model.get( 'photoName' );
 					if ( ! confirm( photoName + ': ' + Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						return;
 					}
 
 					model.get( "contextMenuEntryModel" ).destroy();
 					view.remove();
-					model.get( "contextMenuEntryView" ).remove();
+					view.remove();
 
 					if ( callbackMessage ) {
 						showUIMessage_Notification( callbackMessage );
