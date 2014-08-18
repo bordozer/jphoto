@@ -108,13 +108,11 @@ define( ["backbone", "jquery", "underscore", 'context_menu'
 						return;
 					}
 
-					var photoName = view.model.get( 'photoName' );
-					if ( ! confirm( photoName + ': ' + Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
+					if ( ! confirm( view.model.get( 'photoName' ) + ': ' + Backbone.JPhoto.translate( "Context menu item: Delete photo?" ) ) ) {
 						return;
 					}
 
 					model.get( "contextMenuEntryModel" ).destroy();
-					view.remove();
 					view.remove();
 
 					if ( callbackMessage ) {
