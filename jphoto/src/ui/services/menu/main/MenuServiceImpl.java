@@ -351,7 +351,11 @@ public class MenuServiceImpl implements MenuService {
 	private MenuItem controlPanelMenu() {
 		final String caption = translatorService.translate( "Main menu: Control panel", getLanguage() );
 		final String link = urlUtilsService.getAdminControlPanelLink();
-		return new MenuItem( caption, link );
+
+		final MenuItem menuItem = new MenuItem( caption, link );
+		menuItem.setIcon( "menus/menu_admin_control_panel.png" );
+
+		return menuItem;
 	}
 
 	private MenuItem jobsMenu() {
@@ -399,7 +403,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getRestrictionListLink();
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-//		menuItem.setIcon( "icons24/admin-special-flag-anonymous-posting.png" );
+		menuItem.setIcon( "menus/menu_admin_restriction.png" );
 
 		return menuItem;
 	}
@@ -409,7 +413,7 @@ public class MenuServiceImpl implements MenuService {
 		final String link = urlUtilsService.getAdminSystemConfigurationListLink();
 
 		final MenuItem menuItem = new MenuItem( caption, link );
-		menuItem.setIcon( "system-configuration-default.png" );
+		menuItem.setIcon( "menus/menu_admin_settings.png" );
 
 		return menuItem;
 	}
