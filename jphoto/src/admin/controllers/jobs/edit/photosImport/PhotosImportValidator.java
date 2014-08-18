@@ -77,7 +77,7 @@ public class PhotosImportValidator extends SavedJobValidator implements Validato
 	private void validatePhotoSightCategories( final PhotosImportModel model, final Errors errors ) {
 		final List<String> photosightCategories = model.getRemotePhotoSiteCategories();
 		if ( photosightCategories == null || photosightCategories.isEmpty() ) {
-			errors.rejectValue( PhotosImportModel.PHOTOSIGHT_CATEGORIES_FORM_CONTROL, translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage()
+			errors.rejectValue( "remotePhotoSiteCategories", translatorService.translate( "Select at least one $1", EnvironmentContext.getLanguage()
 				, FormatUtils.getFormattedFieldName( "Photosight category" ) ) );
 		}
 	}

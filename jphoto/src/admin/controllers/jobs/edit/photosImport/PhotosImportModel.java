@@ -8,7 +8,6 @@ import ui.translatable.GenericTranslatableList;
 
 import java.util.List;
 
-
 public class PhotosImportModel extends DateRangableModel {
 
 	private PhotosImportSource importSource;
@@ -35,7 +34,6 @@ public class PhotosImportModel extends DateRangableModel {
 	public final static String USER_MEMBERSHIP_ID_FORM_CONTROL = "userMembershipId";
 	public final static String IMPORT_COMMENTS_FORM_CONTROL = "importComments";
 	public final static String BREAK_IMPORT_IF_ALREADY_IMPORTED_PHOTO_FOUND_FORM_CONTROL = "breakImportIfAlreadyImportedPhotoFound";
-	public static final String PHOTOSIGHT_CATEGORIES_FORM_CONTROL = "remotePhotoSiteCategories";
 
 	public final static String DELAY_BETWEEN_REQUEST_FORM_CONTROL = "delayBetweenRequest";
 	private String remotePhotoSiteUserIds;
