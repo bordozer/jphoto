@@ -1,9 +1,10 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
+		, "modules/admin/restriction/restriction-history/restriction-history-model"
 		, "modules/admin/restriction/restriction-history/restriction-history-view"
 		, "text!modules/admin/restriction/list/templates/restriction-list-filter.html"
 		, "components/user-picker/user-picker-model"
 		, "components/user-picker/user-picker-view"
-		], function ( Backbone, $, _, mass_checker, HistoryView, template, UserPickerModel, UserPickerView ) {
+		], function ( Backbone, $, _, mass_checker, HistoryModel, HistoryView, template, UserPickerModel, UserPickerView ) {
 
 	'use strict';
 
@@ -77,7 +78,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			_.each( searchResultEntryDTOs, function( entryModel ) {
 
-				var model = new RestrictionHistoryEntryModel( entryModel );
+				var model = new HistoryModel.RestrictionHistoryEntryModel( entryModel );
 
 				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
 					model: model
@@ -114,9 +115,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 	var RestrictionHistoryEntryModel = Backbone.Model.extend( {
 
-		/*initialize: function ( options ) {
-			this.url = Backbone.JPhoto.url( "/rest/admin/restrictions/members/" + options.filter.entryId + "/history/" );
-		}*/
 	});
 
 	return { RestrictionListFilterView:RestrictionListFilterView };

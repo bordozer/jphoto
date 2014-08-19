@@ -58,41 +58,32 @@ public class RestrictionController {
 	@Autowired
 	private UserPhotoFilePathUtilsService userPhotoFilePathUtilsService;
 
-	@RequestMapping( method = RequestMethod.GET, value = "/members/{userId}/history/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/history/members/{userId}/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RestrictionHistoryEntryDTO> showUserRestriction( final @PathVariable( "userId" ) int userId ) {
 		return getRestrictionHistoryEntryDTOs( restrictionService.loadUserRestrictions( userId ) );
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "/photos/{photoId}/history/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/history/photos/{photoId}/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RestrictionHistoryEntryDTO> showPhotoRestriction( final @PathVariable( "photoId" ) int photoId ) {
 		return getRestrictionHistoryEntryDTOs( restrictionService.loadPhotoRestrictions( photoId ) );
 	}
 
-	@RequestMapping( method = RequestMethod.PUT, value = "/*/{entryId}/history/{restrictionHistoryEntryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/history/{restrictionHistoryEntryId}/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public RestrictionHistoryEntryDTO inactivateRestriction( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
 		restrictionService.deactivate( restrictionDTO.getId(), EnvironmentContext.getCurrentUser(), dateUtilsService.getCurrentTime() );
 		return getRestrictionHistoryEntryDTO( restrictionService.load( restrictionDTO.getId() ) );
 	}
 
-	@RequestMapping( method = RequestMethod.DELETE, value = "/*/{entryId}/history/{restrictionHistoryEntryId}" )
+	@RequestMapping( method = RequestMethod.DELETE, value = "/history/{restrictionHistoryEntryId}/" )
 	@ResponseBody
 	public boolean deleteRestriction( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
-
-
-	/*@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public List<RestrictionHistoryEntryDTO> showEmptySearchForm() {
-//		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
-		return getRestrictionHistoryEntryDTOs( restrictionService.loadAll() );
-	}*/
-
-	@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	/*@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public RestrictionHistoryEntryDTO doSearch( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
 		return inactivateRestriction( restrictionDTO );
@@ -108,7 +99,7 @@ public class RestrictionController {
 	@ResponseBody
 	public boolean deleteRestrictionFromSearch( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
 		return restrictionService.delete( restrictionHistoryEntryId );
-	}
+	}*/
 
 	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
