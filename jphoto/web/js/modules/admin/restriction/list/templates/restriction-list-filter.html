@@ -10,7 +10,7 @@
 		<br />
 
 		<% _.each( restrictionTypesUser, function( restrictionType ) { %>
-			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-user restriction-type-id" >
+			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-user restriction-type-id" <%= _.contains( selectedUserRestrictionTypeIds, restrictionType.id ) ? "checked='checked'" :"" %> >
 			<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
 			<br />
 		<% }) %>
@@ -26,7 +26,7 @@
 		<br />
 
 		<% _.each( restrictionTypesPhoto, function( restrictionType ) { %>
-			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-photo restriction-type-id" >
+			<input type="checkbox" id="restrictionType<%=restrictionType.id%>" name="restrictionType" value="<%=restrictionType.id%>" class="restriction-type-photo restriction-type-id" <%= _.contains( selectedPhotoRestrictionTypeIds, restrictionType.id ) ? "checked='checked'" :"" %> >
 			<label for="restrictionType<%=restrictionType.id%>"><%=restrictionType.name%></label>
 			<br />
 		<% }) %>

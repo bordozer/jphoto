@@ -7,7 +7,9 @@ define( ["backbone"], function ( Backbone ) {
 			this.url = Backbone.JPhoto.url( "/rest/admin/restrictions/search/" );
 
 			this.set( {
-				selectedRestrictionStatusIds : [ 1 ]
+				selectedUserRestrictionTypeIds : [ 1, 2, 3, 4, 5, 6 ]
+				, selectedPhotoRestrictionTypeIds : [ 7, 8, 9, 10, 11 ]
+				, selectedRestrictionStatusIds : [ 1 ]
 				, restrictionTypesUser : options.restrictionTypesUser
 				, restrictionTypesPhoto : options.restrictionTypesPhoto
 				, restrictionStatuses : options.restrictionStatuses

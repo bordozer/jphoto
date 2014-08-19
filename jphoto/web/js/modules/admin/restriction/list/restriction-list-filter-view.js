@@ -49,8 +49,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			this.$el.html( this.template( modelJSON ) );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerUnselected( "restriction-type-user", "/images" );
-			massSelector.registerUnselected( "restriction-type-photo", "/images" );
+			massSelector.registerSelected( "restriction-type-user", "/images" );
+			massSelector.registerSelected( "restriction-type-photo", "/images" );
 			massSelector.registerUnselected( "restriction-status", "/images" );
 
 			this.renderUserPicker();
