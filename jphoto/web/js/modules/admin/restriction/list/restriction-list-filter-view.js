@@ -94,15 +94,21 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		onApplyClick: function ( evt ) {
+
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
+			if ( this.$( ".restriction-type-id:checked" ).length == 0 || this.$( ".restriction-status:checked" ).length == 0 ) {
+				showUIMessage_Warning( Backbone.JPhoto.ajaxService().translate( 'Restriction filter form: Check at least one Type and one Status' ) );
+				return;
+			}
+
 			var data = [];
-			$( ".restriction-type-id:checked" ).each( function () {
+			this.$( ".restriction-type-id:checked" ).each( function () {
 				data.push( { name: 'selectedRestrictionTypeIds', value: this.value } );
 			} );
 
-			$( ".restriction-status:checked" ).each( function () {
+			this.$( ".restriction-status:checked" ).each( function () {
 				data.push( { name: 'restrictionStatusIds', value: this.value } );
 			} );
 

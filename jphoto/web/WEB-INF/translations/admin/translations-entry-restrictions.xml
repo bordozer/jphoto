@@ -113,6 +113,16 @@
 	</translation>
 
 	<translation>
+		<nerd>Restriction filter form: Check at least one Type and one Status</nerd>
+		<ru><![CDATA[Выделите хотя бы один тип ограничения и один статус]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
