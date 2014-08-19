@@ -18,12 +18,14 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -37,9 +39,6 @@ public class RestrictionController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private PhotoService photoService;
 
 	@Autowired
 	private RestrictionService restrictionService;
@@ -123,22 +122,28 @@ public class RestrictionController {
 			}
 		} );
 
-		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictionService.load( restrictionTypesToShow ) ) );
-		dto.setSelectedRestrictionTypeIds( Lists.transform( restrictionTypesToShow, new Function<RestrictionType, String>() {
+		final List<RestrictionStatus> restrictionStatusesToShow = Lists.transform( filterFormDTO.getRestrictionStatusIds(), new Function<String, RestrictionStatus>() {
 			@Override
-			public String apply( final RestrictionType restrictionType ) {
-				return String.valueOf( restrictionType.getId() );
+			public RestrictionStatus apply( final String restrictionStatusId ) {
+				return RestrictionStatus.getById( restrictionStatusId );
 			}
-		} ) );
+		} );
+
+		final List<EntryRestriction> restrictions = restrictionService.load( restrictionTypesToShow );
+		CollectionUtils.filter( restrictions, new Predicate<EntryRestriction>() {
+			@Override
+			public boolean evaluate( final EntryRestriction restriction ) {
+				return restrictionStatusesToShow.contains( restrictionService.getRestrictionStatus( restriction, dateUtilsService.getCurrentTime() ) );
+			}
+		} );
+
+		dto.setSelectedRestrictionTypeIds( filterFormDTO.getSelectedRestrictionTypeIds() );
+		dto.setSelectedRestrictionStatusIds( filterFormDTO.getSelectedRestrictionTypeIds() );
+
+		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictions ) );
 
 		return dto;
 	}
-
-	/*@RequestMapping( method = RequestMethod.POST, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public RestrictionFilterFormDTO applyFilter( @RequestBody final RestrictionFilterFormDTO filterFormDTO ) {
-
-	}*/
 
 
 
@@ -165,7 +170,9 @@ public class RestrictionController {
 
 		initEntrySpecificData( restriction, dto );
 
-		initCssClassAndStatus( restriction, dto );
+		final RestrictionStatus restrictionStatus = restrictionService.getRestrictionStatus( restriction, dateUtilsService.getCurrentTime() );
+		dto.setStatus( translatorService.translate( restrictionStatus.getName(), getLanguage() ) );
+		dto.setCssClass( getCssClass( restrictionStatus ) );
 
 		dto.setActive( restriction.isActive() );
 		dto.setFinished( isFinished( restriction ) );
@@ -260,27 +267,20 @@ public class RestrictionController {
 		return timeBetween.getTime() / ( 24 * 60 * 60 * 1000 ) < 365;
 	}
 
-	private void initCssClassAndStatus( final EntryRestriction restriction, final RestrictionHistoryEntryDTO dto ) {
+	private String getCssClass( final RestrictionStatus restrictionStatus ) {
 
-		if ( ! restriction.isActive() ) {
-			dto.setStatus( translatorService.translate( RestrictionStatus.CANCELLED.getName(), getLanguage() ) );
-			dto.setCssClass( "block-background-inactive-restriction" );
-			return;
+		switch ( restrictionStatus ) {
+			case CANCELLED:
+				return "block-background-inactive-restriction";
+			case POSTPONED:
+				return "block-background-postponed-restriction";
+			case PROGRESS:
+				return "block-background";
+			case PASSED:
+				return StringUtils.EMPTY;
 		}
 
-		if ( restriction.getRestrictionTimeFrom().getTime() > dateUtilsService.getCurrentTime().getTime() ) {
-			dto.setStatus( translatorService.translate( RestrictionStatus.POSTPONED.getName(), getLanguage() ) );
-			dto.setCssClass( "block-background-postponed-restriction" );
-			return;
-		}
-
-		if ( ! isFinished( restriction ) ) {
-			dto.setStatus( translatorService.translate( RestrictionStatus.PROGRESS.getName(), getLanguage() ) );
-			dto.setCssClass( "block-background" );
-			return;
-		}
-
-		dto.setStatus( translatorService.translate( RestrictionStatus.PASSED.getName(), getLanguage() ) );
+		throw new IllegalArgumentException( String.format( "Illegal RestrictionStatus: %s", restrictionStatus ) );
 	}
 
 	private boolean isFinished( final EntryRestriction restriction ) {

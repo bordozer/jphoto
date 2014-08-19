@@ -94,6 +94,7 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 
 	@Override
 	public List<EntryRestriction> load( final List<RestrictionType> defaultTypes ) {
+
 		final String ids = StringUtils.join( Lists.transform( defaultTypes, new Function<RestrictionType, Integer>() {
 			@Override
 			public Integer apply( final RestrictionType restrictionType ) {
@@ -104,7 +105,7 @@ public class RestrictionDaoImpl extends BaseEntityDaoImpl<EntryRestriction> impl
 		final String sql = String.format( "SELECT * FROM %s WHERE %s IN ( %s ) ORDER BY %s DESC;"
 			, TABLE_RESTRICTION
 			, TABLE_RESTRICTION_COLUMN_RESTRICTION_TYPE_ID
-			, ids
+			, StringUtils.isNotEmpty( ids ) ? ids : "-1"
 			, ENTITY_ID
 		);
 

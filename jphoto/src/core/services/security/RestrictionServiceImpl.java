@@ -1,5 +1,6 @@
 package core.services.security;
 
+import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
 import core.exceptions.RestrictionException;
 import core.general.restriction.EntryRestriction;
@@ -251,6 +252,25 @@ public class RestrictionServiceImpl implements RestrictionService {
 	public boolean isRestrictedOn( final int entryId, final RestrictionType restrictionType, final Date time ) {
 		final List<EntryRestriction> activeRestrictions = getRestrictionsOn( entryId, restrictionType, time );
 		return activeRestrictions != null && activeRestrictions.size() > 0;
+	}
+
+	@Override
+	public RestrictionStatus getRestrictionStatus( final EntryRestriction restriction, final Date time ) {
+
+		if ( ! restriction.isActive() ) {
+			return RestrictionStatus.CANCELLED;
+		}
+
+		if ( restriction.getRestrictionTimeFrom().getTime() > dateUtilsService.getCurrentTime().getTime() ) {
+			return RestrictionStatus.POSTPONED;
+		}
+
+		if ( dateUtilsService.getCurrentTime().getTime() > restriction.getRestrictionTimeTo().getTime() ) {
+			return RestrictionStatus.PASSED;
+		}
+
+		return RestrictionStatus.PROGRESS;
+
 	}
 
 	private List<EntryRestriction> loadRestrictions( final int entryId, final List<RestrictionType> restrictionTypes ) {

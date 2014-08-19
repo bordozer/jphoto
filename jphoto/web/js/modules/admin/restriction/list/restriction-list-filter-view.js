@@ -95,19 +95,26 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			var selectedRestrictionTypeIds = [];
+			var data = [];
 			$( ".restriction-type-id:checked" ).each( function () {
-				selectedRestrictionTypeIds.push( { name: 'selectedRestrictionTypeIds', value: this.value } );
+				data.push( { name: 'selectedRestrictionTypeIds', value: this.value } );
+			} );
+
+			$( ".restriction-status:checked" ).each( function () {
+				data.push( { name: 'restrictionStatusIds', value: this.value } );
 			} );
 
 			this.clearSearchResult();
 
-			this.model.fetch( { data: selectedRestrictionTypeIds,  cache: false } );
+			this.model.fetch( { data: data,  cache: false } );
 		}
 	} );
 
 	var RestrictionHistoryEntryModel = Backbone.Model.extend( {
 
+		/*initialize: function ( options ) {
+			this.url = Backbone.JPhoto.url( "/rest/admin/restrictions/members/" + options.filter.entryId + "/history/" );
+		}*/
 	});
 
 	return { RestrictionListFilterView:RestrictionListFilterView };

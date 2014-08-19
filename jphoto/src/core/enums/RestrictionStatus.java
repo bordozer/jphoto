@@ -35,4 +35,8 @@ public enum RestrictionStatus implements IdentifiableNameable {
 
 		throw new IllegalArgumentException( String.format( "Illegal RestrictionStatus id: %d", id ) );
 	}
+
+	public static RestrictionStatus getById( final String restrictionStatusId ) {
+		return getById( Integer.parseInt( restrictionStatusId ) );
+	}
 }

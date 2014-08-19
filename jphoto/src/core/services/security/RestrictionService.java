@@ -1,5 +1,6 @@
 package core.services.security;
 
+import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
@@ -57,4 +58,6 @@ public interface RestrictionService extends BaseEntityService<EntryRestriction> 
 	List<EntryRestriction> getPhotoAllRestrictionsOn( final int photoId, final Date currentTime );
 
 	boolean isRestrictedOn( int entryId, RestrictionType restrictionType, Date time );
+
+	RestrictionStatus getRestrictionStatus( final EntryRestriction restriction, final Date time );
 }
