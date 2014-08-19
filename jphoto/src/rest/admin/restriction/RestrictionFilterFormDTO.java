@@ -10,10 +10,6 @@ public class RestrictionFilterFormDTO {
 
 	private List<RestrictionHistoryEntryDTO> searchResultEntryDTOs;
 
-	private List<String> selectedUserRestrictionTypeIds;
-	private List<String> selectedPhotoRestrictionTypeIds;
-	private List<String> selectedRestrictionStatusIds;
-
 	private List<CheckboxDTO> restrictionTypesUser;
 	private List<CheckboxDTO> restrictionTypesPhoto;
 	private List<CheckboxDTO> restrictionStatuses;
@@ -24,30 +20,6 @@ public class RestrictionFilterFormDTO {
 
 	public void setSearchResultEntryDTOs( final List<RestrictionHistoryEntryDTO> searchResultEntryDTOs ) {
 		this.searchResultEntryDTOs = searchResultEntryDTOs;
-	}
-
-	public List<String> getSelectedUserRestrictionTypeIds() {
-		return selectedUserRestrictionTypeIds;
-	}
-
-	public void setSelectedUserRestrictionTypeIds( final List<String> selectedUserRestrictionTypeIds ) {
-		this.selectedUserRestrictionTypeIds = selectedUserRestrictionTypeIds;
-	}
-
-	public List<String> getSelectedPhotoRestrictionTypeIds() {
-		return selectedPhotoRestrictionTypeIds;
-	}
-
-	public void setSelectedPhotoRestrictionTypeIds( final List<String> selectedPhotoRestrictionTypeIds ) {
-		this.selectedPhotoRestrictionTypeIds = selectedPhotoRestrictionTypeIds;
-	}
-
-	public List<String> getSelectedRestrictionStatusIds() {
-		return selectedRestrictionStatusIds;
-	}
-
-	public void setSelectedRestrictionStatusIds( final List<String> selectedRestrictionStatusIds ) {
-		this.selectedRestrictionStatusIds = selectedRestrictionStatusIds;
 	}
 
 	public List<CheckboxDTO> getRestrictionTypesUser() {

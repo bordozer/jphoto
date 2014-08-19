@@ -85,37 +85,23 @@ public class RestrictionController {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
-	/*@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public RestrictionHistoryEntryDTO doSearch( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
-		return inactivateRestriction( restrictionDTO );
-	}
-
-	@RequestMapping( method = RequestMethod.PUT, value = "/search/{restrictionHistoryEntryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
-	@ResponseBody
-	public RestrictionHistoryEntryDTO inactivateRestrictionFromSearch( @RequestBody final RestrictionHistoryEntryDTO restrictionDTO ) {
-		return inactivateRestriction( restrictionDTO );
-	}
-
-	@RequestMapping( method = RequestMethod.DELETE, value = "/search/{restrictionHistoryEntryId}" )
-	@ResponseBody
-	public boolean deleteRestrictionFromSearch( final @PathVariable( "restrictionHistoryEntryId" ) int restrictionHistoryEntryId ) {
-		return restrictionService.delete( restrictionHistoryEntryId );
-	}*/
-
 	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public RestrictionFilterFormDTO showEmptySearchForm( final FilterDTO filterFormDTO ) {
+
+		final List<String> selectedRestrictionTypeIds = filterFormDTO.getSelectedRestrictionTypeIds();
+		final List<String> restrictionStatusIds = filterFormDTO.getRestrictionStatusIds();
+
 		final RestrictionFilterFormDTO dto = new RestrictionFilterFormDTO();
 
-		final List<RestrictionType> restrictionTypesToShow = Lists.transform( filterFormDTO.getSelectedRestrictionTypeIds(), new Function<String, RestrictionType>() {
+		final List<RestrictionType> restrictionTypesToShow = Lists.transform( selectedRestrictionTypeIds, new Function<String, RestrictionType>() {
 			@Override
 			public RestrictionType apply( final String restrictionTypeId ) {
 				return RestrictionType.getById( restrictionTypeId );
 			}
 		} );
 
-		final List<RestrictionStatus> restrictionStatusesToShow = Lists.transform( filterFormDTO.getRestrictionStatusIds(), new Function<String, RestrictionStatus>() {
+		final List<RestrictionStatus> restrictionStatusesToShow = Lists.transform( restrictionStatusIds, new Function<String, RestrictionStatus>() {
 			@Override
 			public RestrictionStatus apply( final String restrictionStatusId ) {
 				return RestrictionStatus.getById( restrictionStatusId );
@@ -141,50 +127,35 @@ public class RestrictionController {
 		final List<GenericTranslatableEntry> photoEntries = GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries();
 		final List<GenericTranslatableEntry> statusEntries = GenericTranslatableList.restrictionStatusList( EnvironmentContext.getLanguage(), translatorService ).getEntries();
 
-		dto.setRestrictionTypesUser( Lists.transform( userEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
-			@Override
-			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
-				final CheckboxDTO checkboxDTO = new CheckboxDTO();
-
-				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
-				checkboxDTO.setLabel( translatableEntry.getName() );
-				checkboxDTO.setChecked( true );
-
-				return checkboxDTO;
-			}
-		} ) );
-
-		dto.setRestrictionTypesPhoto( Lists.transform( photoEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
-			@Override
-			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
-				final CheckboxDTO checkboxDTO = new CheckboxDTO();
-
-				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
-				checkboxDTO.setLabel( translatableEntry.getName() );
-				checkboxDTO.setChecked( true );
-
-				return checkboxDTO;
-			}
-		} ) );
-
-		dto.setRestrictionStatuses( Lists.transform( statusEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
-			@Override
-			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
-				final CheckboxDTO checkboxDTO = new CheckboxDTO();
-
-				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
-				checkboxDTO.setLabel( translatableEntry.getName() );
-				checkboxDTO.setChecked( true );
-
-				return checkboxDTO;
-			}
-		} ) );
-
-		dto.setSelectedUserRestrictionTypeIds( newArrayList( "1", "2", "3", "4", "5", "6" ) );
-		dto.setSelectedPhotoRestrictionTypeIds( newArrayList( "7", "8", "9", "10", "11" ) );
-		dto.setSelectedRestrictionStatusIds( newArrayList( "1" ) );
+		dto.setRestrictionTypesUser( Lists.transform( userEntries, function( selectedRestrictionTypeIds ) ) );
+		dto.setRestrictionTypesPhoto( Lists.transform( photoEntries, function( selectedRestrictionTypeIds ) ) );
+		dto.setRestrictionStatuses( Lists.transform( statusEntries, function( restrictionStatusIds ) ) );
 
 		return dto;
+	}
+
+	private static Function<GenericTranslatableEntry, CheckboxDTO> function( final List<String> selectedRestrictionTypeIds ) {
+		return new Function<GenericTranslatableEntry, CheckboxDTO>() {
+			@Override
+			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
+				final CheckboxDTO checkboxDTO = new CheckboxDTO();
+
+				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
+				checkboxDTO.setLabel( translatableEntry.getName() );
+				checkboxDTO.setChecked( isChecked( translatableEntry, selectedRestrictionTypeIds ) );
+
+				return checkboxDTO;
+			}
+
+			private boolean isChecked( final GenericTranslatableEntry translatableEntry, final List<String> selectedRestrictionTypeIds ) {
+				for ( final String selectedRestrictionTypeId : selectedRestrictionTypeIds ) {
+					if ( selectedRestrictionTypeId.equals( String.valueOf( translatableEntry.getId() ) ) ) {
+						return true;
+					}
+				}
+				return false;
+			}
+		};
 	}
 
 	private RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {

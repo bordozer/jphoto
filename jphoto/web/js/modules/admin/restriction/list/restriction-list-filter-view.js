@@ -44,7 +44,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderSearchForm: function() {
 
 			var modelJSON = this.model.toJSON();
-			console.log( this.model );
 
 			modelJSON.translations = this.translations;
 
