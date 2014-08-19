@@ -8,6 +8,7 @@ public class FilterDTO {
 
 	private List<String> selectedRestrictionTypeIds = newArrayList();
 	private List<String> restrictionStatusIds = newArrayList();
+	private int userId;
 
 	public List<String> getSelectedRestrictionTypeIds() {
 		return selectedRestrictionTypeIds;
@@ -23,5 +24,13 @@ public class FilterDTO {
 
 	public void setRestrictionStatusIds( final List<String> restrictionStatusIds ) {
 		this.restrictionStatusIds = restrictionStatusIds;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId( final int userId ) {
+		this.userId = userId;
 	}
 }

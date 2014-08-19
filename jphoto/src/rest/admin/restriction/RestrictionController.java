@@ -129,11 +129,16 @@ public class RestrictionController {
 			}
 		} );
 
+		final int userId = filterFormDTO.getUserId();
+		final Date time = dateUtilsService.getCurrentTime();
+
 		final List<EntryRestriction> restrictions = restrictionService.load( restrictionTypesToShow );
 		CollectionUtils.filter( restrictions, new Predicate<EntryRestriction>() {
 			@Override
 			public boolean evaluate( final EntryRestriction restriction ) {
-				return restrictionStatusesToShow.contains( restrictionService.getRestrictionStatus( restriction, dateUtilsService.getCurrentTime() ) );
+				return restrictionStatusesToShow.contains( restrictionService.getRestrictionStatus( restriction, time ) )
+					&& ( userId == 0 || restriction.getEntry().getId() == userId )
+					;
 			}
 		} );
 
@@ -144,8 +149,6 @@ public class RestrictionController {
 
 		return dto;
 	}
-
-
 
 	private RestrictionHistoryEntryDTO getRestrictionHistoryEntryDTO( final EntryRestriction restriction ) {
 		final RestrictionHistoryEntryDTO dto = new RestrictionHistoryEntryDTO();

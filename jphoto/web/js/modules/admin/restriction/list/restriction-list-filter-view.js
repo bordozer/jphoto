@@ -60,7 +60,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderUserPicker: function() {
 			var userPickerContainer = this.$( ".user-picker-container" );
 
-			var userPickerModel = new UserPickerModel.UserPickerModel( { controlName: "userPicker", initialUserId: 0 } );
+			var userPickerModel = new UserPickerModel.UserPickerModel( { controlName: "userId", initialUserId: 0 } );
 			var userPickerView = new UserPickerView.UserPickerView( { model: userPickerModel, el: userPickerContainer, callbackFunction: this.onUserPickerSelect } );
 		},
 
@@ -103,6 +103,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			$( ".restriction-status:checked" ).each( function () {
 				data.push( { name: 'restrictionStatusIds', value: this.value } );
 			} );
+
+			data.push( { name: 'userId', value: this.$( "[name='userId']" ).val() } );
 
 			this.clearSearchResult();
 
