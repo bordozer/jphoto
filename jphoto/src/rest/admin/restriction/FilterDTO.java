@@ -1,5 +1,7 @@
 package rest.admin.restriction;
 
+import core.enums.RestrictionStatus;
+
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -7,7 +9,7 @@ import static com.google.common.collect.Lists.newArrayList;
 public class FilterDTO {
 
 	private List<String> selectedRestrictionTypeIds = newArrayList();
-	private List<String> restrictionStatusIds = newArrayList();
+	private List<String> restrictionStatusIds = newArrayList( String.valueOf( RestrictionStatus.PROGRESS.getId() ) );
 	private int userId;
 
 	public List<String> getSelectedRestrictionTypeIds() {

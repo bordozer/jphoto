@@ -80,7 +80,11 @@ define( ["backbone", "jquery", "underscore"
 				return;
 			}
 
-			this.model.save();
+			this.model.save().done( _.bind( this.onSave, this ) );
+		},
+
+		onSave: function() {
+			this.render();
 		},
 
 		onDeleteClick: function( evt ) {

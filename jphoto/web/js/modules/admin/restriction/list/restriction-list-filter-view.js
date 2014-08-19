@@ -41,12 +41,15 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		renderSearchForm: function() {
+
+			this.model.set( { selectedRestrictionStatusIds: [ 1 ] }, { silent: true } );
+
 			var modelJSON = this.model.toJSON();
 
 			modelJSON.restrictionTypesUser = this.model.restrictionTypesUser;
 			modelJSON.restrictionTypesPhoto = this.model.restrictionTypesPhoto;
-			modelJSON.restrictionStatuses = this.model.restrictionStatuses;
 			modelJSON.translations = this.translations;
+			console.log( this.model );
 
 			this.$el.html( this.template( modelJSON ) );
 

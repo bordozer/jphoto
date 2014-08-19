@@ -133,9 +133,6 @@ public class RestrictionController {
 			}
 		} );
 
-		dto.setSelectedRestrictionTypeIds( filterFormDTO.getSelectedRestrictionTypeIds() );
-		dto.setSelectedRestrictionStatusIds( filterFormDTO.getSelectedRestrictionTypeIds() );
-
 		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictions ) );
 
 		return dto;
