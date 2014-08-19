@@ -56,4 +56,8 @@ public enum RestrictionType implements IdentifiableNameable {
 
 		throw new IllegalArgumentException( String.format( "Illegal RestrictionType id: %d", id ) );
 	}
+
+	public static RestrictionType getById( final String restrictionTypeId ) {
+		return getById( Integer.parseInt( restrictionTypeId ) );
+	}
 }

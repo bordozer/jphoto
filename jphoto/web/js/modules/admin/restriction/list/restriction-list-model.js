@@ -1,12 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var RestrictionSearchResultEntryModel = Backbone.Model.extend( {
-
-	});
-
-	var RestrictionListModel = Backbone.Collection.extend( {
-
-		model: RestrictionSearchResultEntryModel,
+	var RestrictionListModel = Backbone.Model.extend( {
 
 		initialize: function ( options ) {
 
@@ -16,10 +10,9 @@ define( ["backbone"], function ( Backbone ) {
 			this.restrictionTypesPhoto = options.restrictionTypesPhoto;
 			this.restrictionStatuses = options.restrictionStatuses;
 			this.translations = options.translations;
-			this.historyEntryTranslations = options.historyEntryTranslations;
 		}
 
 	 } );
 
-	return { RestrictionListModel :RestrictionListModel, RestrictionSearchResultEntryModel: RestrictionSearchResultEntryModel };
+	return { RestrictionListModel: RestrictionListModel };
 } );

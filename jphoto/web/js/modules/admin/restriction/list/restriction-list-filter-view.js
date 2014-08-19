@@ -28,7 +28,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		initTranslations: function() {
-			var historyEntryTranslations = {
+			var translations = {
 				filterButtonTitle: 'Restriction filter form: Filter button title'
 				, emptySearchResultText: 'Restriction filter form: Empty Search Result Text'
 				, filterByUserRestrictionsTitle: 'Restriction filter form: Filter by user restrictions title'
@@ -36,7 +36,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				, filterByStatusTitle: 'Restriction filter form: Filter by status title'
 			};
 
-			this.translations = Backbone.JPhoto.ajaxService().translateAll( historyEntryTranslations );
+			this.translations = Backbone.JPhoto.ajaxService().translateAll( translations );
 		},
 
 		renderSearchForm: function() {
@@ -69,15 +69,18 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		renderSearchResult: function() {
-			var historyEntryTranslations = this.model.historyEntryTranslations;
+
+			var searchResultEntryDTOs = this.model.get( 'searchResultEntryDTOs' );
 
 			var $searchResultContainer = this.$( ".search-result-container" );
 			$searchResultContainer.html( '' );
 
-			this.model.each( function( entryModel ) {
+			_.each( searchResultEntryDTOs, function( entryModel ) {
+
+				var model = new RestrictionHistoryEntryModel( entryModel );
+
 				var restrictionHistoryEntryView = new HistoryView.RestrictionHistoryEntryView( {
-					model: entryModel
-					, historyEntryTranslations: historyEntryTranslations
+					model: model
 				} );
 
 				$searchResultContainer.append( restrictionHistoryEntryView.render().$el );
@@ -93,15 +96,19 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.stopImmediatePropagation();
 
 			var selectedRestrictionTypeIds = [];
-			$( ".restriction-type-user:checked" ).each( function () {
-				selectedRestrictionTypeIds.push( this.value );
+			$( ".restriction-type-id:checked" ).each( function () {
+				selectedRestrictionTypeIds.push( { name: 'selectedRestrictionTypeIds', value: this.value } );
 			} );
 
 			this.clearSearchResult();
 
-			this.model.fetch( { cache: false } );
+			this.model.fetch( { data: selectedRestrictionTypeIds,  cache: false } );
 		}
 	} );
+
+	var RestrictionHistoryEntryModel = Backbone.Model.extend( {
+
+	});
 
 	return { RestrictionListFilterView:RestrictionListFilterView };
 });

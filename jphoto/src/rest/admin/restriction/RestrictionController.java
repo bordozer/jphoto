@@ -1,6 +1,8 @@
 package rest.admin.restriction;
 
 import admin.controllers.restriction.entry.RestrictionEntryType;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
 import core.general.photo.Photo;
@@ -21,10 +23,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -86,12 +86,12 @@ public class RestrictionController {
 
 
 
-	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
+	/*@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public List<RestrictionHistoryEntryDTO> showEmptySearchForm() {
 //		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
 		return getRestrictionHistoryEntryDTOs( restrictionService.loadAll() );
-	}
+	}*/
 
 	@RequestMapping( method = RequestMethod.PUT, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
@@ -111,15 +111,20 @@ public class RestrictionController {
 		return restrictionService.delete( restrictionHistoryEntryId );
 	}
 
-	/*@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.GET, value = "/search/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public RestrictionFilterFormDTO showEmptySearchForm() {
+	public RestrictionFilterFormDTO showEmptySearchForm( final FilterDTO filterFormDTO ) {
 		final RestrictionFilterFormDTO dto = new RestrictionFilterFormDTO();
 
-		final List<RestrictionType> defaultTypes = RestrictionType.FOR_USERS;
+		final List<RestrictionType> restrictionTypesToShow = Lists.transform( filterFormDTO.getSelectedRestrictionTypeIds(), new Function<String, RestrictionType>() {
+			@Override
+			public RestrictionType apply( final String restrictionTypeId ) {
+				return RestrictionType.getById( restrictionTypeId );
+			}
+		} );
 
-		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictionService.load( defaultTypes ) ) );
-		dto.setSelectedRestrictionTypeIds( Lists.transform( defaultTypes, new Function<RestrictionType, String>() {
+		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictionService.load( restrictionTypesToShow ) ) );
+		dto.setSelectedRestrictionTypeIds( Lists.transform( restrictionTypesToShow, new Function<RestrictionType, String>() {
 			@Override
 			public String apply( final RestrictionType restrictionType ) {
 				return String.valueOf( restrictionType.getId() );
@@ -127,6 +132,12 @@ public class RestrictionController {
 		} ) );
 
 		return dto;
+	}
+
+	/*@RequestMapping( method = RequestMethod.POST, value = "/search/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@ResponseBody
+	public RestrictionFilterFormDTO applyFilter( @RequestBody final RestrictionFilterFormDTO filterFormDTO ) {
+
 	}*/
 
 
