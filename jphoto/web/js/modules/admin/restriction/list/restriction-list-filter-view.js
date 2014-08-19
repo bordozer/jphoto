@@ -21,6 +21,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			this.initTranslations();
 
 			this.listenTo( this.model, "sync", this.renderSearchResult );
+//			this.listenTo( this.model, "add", this.renderSearchResult );
 
 			this.renderSearchForm();
 			this.clearSearchResult();
