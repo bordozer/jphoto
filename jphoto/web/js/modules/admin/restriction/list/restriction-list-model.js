@@ -6,10 +6,13 @@ define( ["backbone"], function ( Backbone ) {
 
 			this.url = Backbone.JPhoto.url( "/rest/admin/restrictions/search/" );
 
-			this.restrictionTypesUser = options.restrictionTypesUser;
-			this.restrictionTypesPhoto = options.restrictionTypesPhoto;
-			this.restrictionStatuses = options.restrictionStatuses;
-			this.translations = options.translations;
+			this.set( {
+				selectedRestrictionStatusIds : [ 1 ]
+				, restrictionTypesUser : options.restrictionTypesUser
+				, restrictionTypesPhoto : options.restrictionTypesPhoto
+				, restrictionStatuses : options.restrictionStatuses
+				, translations : options.translations
+			}, { silent: true } );
 		}
 
 	 } );
