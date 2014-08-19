@@ -1,5 +1,8 @@
 package rest.admin.restriction;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties( ignoreUnknown = true )
 public class RestrictionTypeDTO {
 
 	private final int id;

@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
+import ui.translatable.GenericTranslatableEntry;
+import ui.translatable.GenericTranslatableList;
 
 import java.util.*;
 
@@ -134,6 +136,53 @@ public class RestrictionController {
 		} );
 
 		dto.setSearchResultEntryDTOs( getRestrictionHistoryEntryDTOs( restrictions ) );
+
+		final List<GenericTranslatableEntry> userEntries = GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries();
+		final List<GenericTranslatableEntry> photoEntries = GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries();
+		final List<GenericTranslatableEntry> statusEntries = GenericTranslatableList.restrictionStatusList( EnvironmentContext.getLanguage(), translatorService ).getEntries();
+
+		dto.setRestrictionTypesUser( Lists.transform( userEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
+			@Override
+			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
+				final CheckboxDTO checkboxDTO = new CheckboxDTO();
+
+				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
+				checkboxDTO.setLabel( translatableEntry.getName() );
+				checkboxDTO.setChecked( true );
+
+				return checkboxDTO;
+			}
+		} ) );
+
+		dto.setRestrictionTypesPhoto( Lists.transform( photoEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
+			@Override
+			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
+				final CheckboxDTO checkboxDTO = new CheckboxDTO();
+
+				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
+				checkboxDTO.setLabel( translatableEntry.getName() );
+				checkboxDTO.setChecked( true );
+
+				return checkboxDTO;
+			}
+		} ) );
+
+		dto.setRestrictionStatuses( Lists.transform( statusEntries, new Function<GenericTranslatableEntry, CheckboxDTO>() {
+			@Override
+			public CheckboxDTO apply( final GenericTranslatableEntry translatableEntry ) {
+				final CheckboxDTO checkboxDTO = new CheckboxDTO();
+
+				checkboxDTO.setValue( String.valueOf( translatableEntry.getId() ) );
+				checkboxDTO.setLabel( translatableEntry.getName() );
+				checkboxDTO.setChecked( true );
+
+				return checkboxDTO;
+			}
+		} ) );
+
+		dto.setSelectedUserRestrictionTypeIds( newArrayList( "1", "2", "3", "4", "5", "6" ) );
+		dto.setSelectedPhotoRestrictionTypeIds( newArrayList( "7", "8", "9", "10", "11" ) );
+		dto.setSelectedRestrictionStatusIds( newArrayList( "1" ) );
 
 		return dto;
 	}

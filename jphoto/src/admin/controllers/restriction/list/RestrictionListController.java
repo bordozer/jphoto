@@ -33,11 +33,6 @@ public class RestrictionListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showRestrictions( final @ModelAttribute( MODEL_NAME ) RestrictionListModel model ) {
 
-		model.setRestrictionTypesUser( RestrictionController.convertToJSON( GenericTranslatableList.restrictionUserTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
-		model.setRestrictionTypesPhoto( RestrictionController.convertToJSON( GenericTranslatableList.restrictionPhotosTranslatableList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
-
-		model.setRestrictionStatuses( RestrictionController.convertToJSON( GenericTranslatableList.restrictionStatusList( EnvironmentContext.getLanguage(), translatorService ).getEntries() ) );
-
 		model.setPageTitleData( breadcrumbsAdminService.getRestrictionListBreadcrumbs() );
 
 		return VIEW;

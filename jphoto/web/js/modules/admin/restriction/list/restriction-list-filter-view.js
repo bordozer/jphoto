@@ -21,15 +21,15 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			this.initTranslations();
 
 			this.listenTo( this.model, "sync", this.renderSearchResult );
-//			this.listenTo( this.model, "add", this.renderSearchResult );
 
-			this.renderSearchForm();
+//			this.renderSearchForm();
 			this.clearSearchResult();
 
 			this.model.fetch( { cache: false } );
 		},
 
 		initTranslations: function() {
+
 			var translations = {
 				filterButtonTitle: 'Restriction filter form: Filter button title'
 				, emptySearchResultText: 'Restriction filter form: Empty Search Result Text'
@@ -44,6 +44,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderSearchForm: function() {
 
 			var modelJSON = this.model.toJSON();
+			console.log( this.model );
 
 			modelJSON.translations = this.translations;
 
@@ -69,6 +70,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		renderSearchResult: function() {
+
+			this.renderSearchForm();
 
 			var searchResultEntryDTOs = this.model.get( 'searchResultEntryDTOs' );
 

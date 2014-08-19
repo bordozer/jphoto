@@ -22,11 +22,7 @@
 
 		require( ['modules/admin/restriction/list/restriction-list'], function ( func ) {
 
-			var restrictionTypesUser = ${restrictionListModel.restrictionTypesUser};
-			var restrictionTypesPhoto = ${restrictionListModel.restrictionTypesPhoto};
-			var restrictionStatuses = ${restrictionListModel.restrictionStatuses};
-
-			func( restrictionTypesUser, restrictionTypesPhoto, restrictionStatuses, $( '#restriction-list-container' ) );
+			func( $( '#restriction-list-container' ) );
 		} );
 
 	</script>
