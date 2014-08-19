@@ -24,7 +24,12 @@ public class FilterDTO {
 	}
 
 	private ArrayList<String> getSelectedByDefaultStatuses() {
-		return newArrayList( String.valueOf( RestrictionStatus.PROGRESS.getId() ) );
+		final ArrayList<String> result = newArrayList();
+
+		result.add( String.valueOf( RestrictionStatus.PROGRESS.getId() ) );
+		result.add( String.valueOf( RestrictionStatus.POSTPONED.getId() ) );
+
+		return result;
 	}
 
 	public List<String> getSelectedRestrictionTypeIds() {
