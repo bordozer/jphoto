@@ -3,6 +3,7 @@ package rest.admin.restriction;
 import core.enums.RestrictionStatus;
 import core.enums.RestrictionType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -11,17 +12,19 @@ public class FilterDTO {
 
 	private int userId;
 
-	private List<String> selectedRestrictionTypeIds;
-	private List<String> restrictionStatusIds;
+	private List<String> selectedRestrictionTypeIds = getSelectedByDefaultTypes();
+	private List<String> restrictionStatusIds = getSelectedByDefaultStatuses();
 
-	public FilterDTO() {
-
-		selectedRestrictionTypeIds = newArrayList();
+	private List<String> getSelectedByDefaultTypes() {
+		final List<String> result = newArrayList();
 		for ( final RestrictionType restrictionType : RestrictionType.values() ) {
-			selectedRestrictionTypeIds.add( String.valueOf( restrictionType.getId() ) );
+			result.add( String.valueOf( restrictionType.getId() ) );
 		}
+		return result;
+	}
 
-		restrictionStatusIds = newArrayList( String.valueOf( RestrictionStatus.PROGRESS.getId() ) );
+	private ArrayList<String> getSelectedByDefaultStatuses() {
+		return newArrayList( String.valueOf( RestrictionStatus.PROGRESS.getId() ) );
 	}
 
 	public List<String> getSelectedRestrictionTypeIds() {
