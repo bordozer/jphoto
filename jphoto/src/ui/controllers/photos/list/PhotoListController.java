@@ -907,7 +907,8 @@ public class PhotoListController {
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 
 		final AbstractPhotoListTitle photoListTitle = listData.getPhotoListTitle();
-		final PhotoList photoList = new PhotoList( photosIds, photoListTitle.getPhotoListTitle().build( language ), showPaging );
+		final String title = String.format( "%s - <font color='red'>built by old way</font>", photoListTitle.getPhotoListTitle().build( language ) );
+		final PhotoList photoList = new PhotoList( photosIds, title, showPaging );
 
 		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText( criterias ) );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
