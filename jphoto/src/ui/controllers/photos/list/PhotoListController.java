@@ -5,8 +5,6 @@ import com.google.common.collect.Lists;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.general.data.TimeRange;
-import core.general.data.photoList.AbstractPhotoListData;
-import core.general.data.photoList.BestPhotoListData;
 import core.general.data.photoList.PhotoListData;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
@@ -323,13 +321,13 @@ public class PhotoListController {
 		final PhotoVotingCategory votingCategory = votingCategoryService.load( votingCategoryId );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, getCurrentUser() );
-		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
 
 		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
 
-		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
+		final List<PhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
@@ -366,10 +364,10 @@ public class PhotoListController {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
-		final List<AbstractPhotoListData> photoListDatas = newArrayList();
+		final List<PhotoListData> photoListDatas = newArrayList();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriod( fDateFrom, fDateTo, getCurrentUser() );
-		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBreadcrumbs( fDateFrom, fDateTo ) );
 
@@ -391,7 +389,7 @@ public class PhotoListController {
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriodBest( fDateFrom, fDateTo, getCurrentUser() );
-		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBestBreadcrumbs( fDateFrom, fDateTo ) );
 
@@ -401,7 +399,7 @@ public class PhotoListController {
 
 		data.setPhotoListTitle( new PhotoListTitleBest( criterias, services ) );
 
-		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
+		final List<PhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
@@ -413,11 +411,11 @@ public class PhotoListController {
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
-		final List<AbstractPhotoListData> photoListDatas = newArrayList();
+		final List<PhotoListData> photoListDatas = newArrayList();
 
 		if ( pagingModel.getCurrentPage() == 1 ) {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForMembershipTypeTopBest( membershipType, getCurrentUser() );
-			final AbstractPhotoListData topBestData = new BestPhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
+			final PhotoListData topBestData = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 
@@ -427,7 +425,7 @@ public class PhotoListController {
 		}
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( membershipType, getCurrentUser() );
-		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
 
@@ -446,13 +444,13 @@ public class PhotoListController {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, getCurrentUser() );
-		final AbstractPhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
 
 		data.setPhotoListTitle( new PhotoListTitleBest( criterias, services ) );
 
-		final List<AbstractPhotoListData> photoListDatas = newArrayList( data );
+		final List<PhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
 
@@ -653,10 +651,10 @@ public class PhotoListController {
 		return VIEW;
 	}
 
-	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<AbstractPhotoListData> photoListDatas, final PhotoFilterModel filterModel ) {
+	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<PhotoListData> photoListDatas, final PhotoFilterModel filterModel ) {
 
 		int listCounter = 0;
-		for ( final AbstractPhotoListData listData : photoListDatas ) {
+		for ( final PhotoListData listData : photoListDatas ) {
 			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
 
 			final List<Integer> photosIds = getPhotosIds( pagingModel, listData );
@@ -673,7 +671,7 @@ public class PhotoListController {
 		setDefaultOrdering( filterModel );
 	}
 
-	private List<Integer> getPhotosIds( final PagingModel pagingModel, final AbstractPhotoListData listData ) {
+	private List<Integer> getPhotosIds( final PagingModel pagingModel, final PhotoListData listData ) {
 		final SqlIdsSelectQuery selectIdsQuery = listData.getPhotoListQuery();
 
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
@@ -682,7 +680,7 @@ public class PhotoListController {
 		return sqlSelectIdsResult.getIds();
 	}
 
-	private PhotoList getPhotoList( final List<Integer> photosIds, final AbstractPhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
+	private PhotoList getPhotoList( final List<Integer> photosIds, final PhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 
@@ -713,7 +711,7 @@ public class PhotoListController {
 		return NumberUtils.convertToInt( _userId );
 	}
 
-	private void setUserOwnPhotosGroupOperationMenuContainer( final User user, final AbstractPhotoListData data ) {
+	private void setUserOwnPhotosGroupOperationMenuContainer( final User user, final PhotoListData data ) {
 		if ( UserUtils.isUsersEqual( getCurrentUser(), user ) ) {
 			data.setPhotoGroupOperationMenuContainer( new PhotoGroupOperationMenuContainer( groupOperationService.getUserOwnPhotosGroupOperationMenus() ) );
 		}
