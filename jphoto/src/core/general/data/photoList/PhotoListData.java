@@ -3,7 +3,6 @@ package core.general.data.photoList;
 import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import sql.builder.SqlIdsSelectQuery;
-import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PageTitleData;
 
 import java.util.Date;
@@ -18,8 +17,6 @@ public class PhotoListData {
 	protected Date photoRatingTimeFrom;
 	protected Date photoRatingTimeTo;
 	protected PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
-
-	private AbstractPhotoListTitle photoListTitle;
 
 	public PhotoListData( final SqlIdsSelectQuery photoListQuery ) {
 		this.photoListQuery = photoListQuery;
@@ -67,13 +64,5 @@ public class PhotoListData {
 
 	public void setPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer ) {
 		this.photoGroupOperationMenuContainer = photoGroupOperationMenuContainer;
-	}
-
-	public AbstractPhotoListTitle getPhotoListTitle() {
-		return photoListTitle;
-	}
-
-	public void setPhotoListTitle( final AbstractPhotoListTitle photoListTitle ) {
-		this.photoListTitle = photoListTitle;
 	}
 }

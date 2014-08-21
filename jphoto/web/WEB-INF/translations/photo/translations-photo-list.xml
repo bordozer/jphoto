@@ -82,16 +82,6 @@
 		<ru><![CDATA[получившие не менее ]]></ru>
 	</translation>
 
-	<!--<translation>
-		<nerd>Top best photo list title: for date</nerd>
-		<ru><![CDATA[за последние]]></ru>
-	</translation>-->
-
-	<!--<translation>
-		<nerd>Top best photo list title: appraised for the last</nerd>
-		<ru><![CDATA[за последние]]></ru>
-	</translation>-->
-
 	<translation>
 		<nerd>Top best photo list title: appraised at</nerd>
 		<ru><![CDATA[за]]></ru>
@@ -105,46 +95,6 @@
 	<translation>
 		<nerd>Top best photo list title: uploaded from to</nerd>
 		<ru><![CDATA[загруженные в период]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Photo list title</nerd>
-		<ru><![CDATA[Работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Photo list description</nerd>
-		<ru><![CDATA[Показаны работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photo list title</nerd>
-		<ru><![CDATA[Лучшие работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Best photo list description</nerd>
-		<ru><![CDATA[Показаны лучшие работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Photo gallery title: descriptions</nerd>
-		<ru><![CDATA[Показаны все работы]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Top best photo list title: appraised by member</nerd>
-		<ru><![CDATA[оцененные пользователем]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Top best photo list description: has appraised as</nerd>
-		<ru><![CDATA[категорией]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Top best photo list description: with membership type</nerd>
-		<ru><![CDATA[загруженные пользователями с типом участия]]></ru>
 	</translation>
 
 	<translation>

@@ -41,10 +41,6 @@ import sql.builder.*;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.edit.GenreWrapper;
 import ui.services.photo.listFactory.factory.AbstractPhotoListFactory;
-import ui.controllers.photos.list.title.AbstractPhotoListTitle;
-import ui.controllers.photos.list.title.PhotoListTitle;
-import ui.controllers.photos.list.title.PhotoListTitleBest;
-import ui.controllers.photos.list.title.PhotoListTitleTopBest;
 import ui.elements.PhotoList;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
@@ -325,8 +321,6 @@ public class PhotoListController {
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
 
-		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
-
 		final List<PhotoListData> photoListDatas = newArrayList( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
@@ -375,8 +369,6 @@ public class PhotoListController {
 		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
 		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
 
-		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
-
 		photoListDatas.add( data );
 
 		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
@@ -396,8 +388,6 @@ public class PhotoListController {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( fDateFrom, fDateTo );
 		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
 		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
-
-		data.setPhotoListTitle( new PhotoListTitleBest( criterias, services ) );
 
 		final List<PhotoListData> photoListDatas = newArrayList( data );
 
@@ -419,8 +409,6 @@ public class PhotoListController {
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 
-			topBestData.setPhotoListTitle( new PhotoListTitleTopBest( topBestCriterias, services ) );
-
 			photoListDatas.add( topBestData );
 		}
 
@@ -428,8 +416,6 @@ public class PhotoListController {
 		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
-
-		data.setPhotoListTitle( new PhotoListTitle( criterias, services ) );
 
 		photoListDatas.add( data );
 
@@ -447,8 +433,6 @@ public class PhotoListController {
 		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
-
-		data.setPhotoListTitle( new PhotoListTitleBest( criterias, services ) );
 
 		final List<PhotoListData> photoListDatas = newArrayList( data );
 
@@ -684,13 +668,12 @@ public class PhotoListController {
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 
-		final AbstractPhotoListTitle photoListTitle = listData.getPhotoListTitle();
-		final String title = String.format( "%s - <font color='red'>built by old way</font>", photoListTitle.getPhotoListTitle().build( language ) );
+		final String title = String.format( "<font color='red'>BUILT BY OLD WAY</font>" );
 		final PhotoList photoList = new PhotoList( photosIds, title, showPaging );
 
 		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText() );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
-		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( language ) );
+		photoList.setPhotosCriteriasDescription( "<font color='red'>BUILT BY OLD WAY</font>" );
 		photoList.setBottomText( listData.getPhotoListBottomText() );
 
 		return photoList;
