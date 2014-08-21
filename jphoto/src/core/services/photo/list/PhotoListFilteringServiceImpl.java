@@ -29,7 +29,7 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 			@Override
 			public boolean isPhotoHidden( final int photoId, final Date time ) {
 
-				if ( isAccessorSuperAdmin( accessor ) ) {
+				if ( isSuperAdmin( accessor ) ) {
 					return false;
 				}
 
@@ -58,7 +58,7 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 			@Override
 			public boolean isPhotoHidden( final int photoId, final Date time ) {
 
-				if ( isAccessorSuperAdmin( accessor ) ) {
+				if ( isSuperAdmin( accessor ) ) {
 					return false;
 				}
 
@@ -73,19 +73,19 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 		return new AbstractPhotoFilteringStrategy() {
 
 			@Override
-			public boolean isPhotoHidden( final int photoId, final Date time ) { // TODO: change test for this
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
 
-				if ( isAccessorSuperAdmin( accessor ) ) {
+				if ( isSuperAdmin( accessor ) ) {
 					return false;
 				}
 
 				final Photo photo = photoService.load( photoId );
-				return securityService.userOwnThePhoto( user, photo ) && securityService.isPhotoWithingAnonymousPeriod( photo );
+				return securityService.userOwnThePhoto( accessor, photo ) && securityService.isPhotoWithingAnonymousPeriod( photo );
 			}
 		};
 	}
 
-	private  boolean isAccessorSuperAdmin( final User user ) {
+	private  boolean isSuperAdmin( final User user ) {
 		return securityService.isSuperAdminUser( user );
 	}
 

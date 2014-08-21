@@ -22,8 +22,6 @@ public class TestData {
 
 	public boolean isRestricted;
 
-	public boolean isAuthorIsHiddenBecauseOfAnonymousPeriod;
-
 	public TestData( final DateUtilsService dateUtilsService ) {
 		currentTime = dateUtilsService.parseDateTime( "2014-08-20 18:22:01" );
 

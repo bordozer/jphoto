@@ -11,8 +11,6 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 	@Test
 	public void photoShouldBeVisibleIfAuthorIsNotHiddenBecauseOfAnonymousPeriodTest() {
 
-		testData.isAuthorIsHiddenBecauseOfAnonymousPeriod = false; // only this does matter
-
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.user, testData.accessor );
 
@@ -22,10 +20,8 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 	@Test
 	public void photoShouldNotBeVisibleIfAuthorIsHiddenBecauseOfAnonymousPeriodTest() {
 
-		testData.isAuthorIsHiddenBecauseOfAnonymousPeriod = true; // only this does matter
-
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.user, testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.accessor, testData.accessor );
 
 		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}

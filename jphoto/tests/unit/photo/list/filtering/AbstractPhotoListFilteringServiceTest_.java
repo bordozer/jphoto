@@ -34,7 +34,6 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 
 		EasyMock.expect( securityService.isSuperAdminUser( testData.accessor ) ).andReturn( isSuperAdmin( testData.accessor ) ).anyTimes();
 		EasyMock.expect( securityService.userOwnThePhoto( testData.accessor, testData.photo.getId() ) ).andReturn( testData.photo.getUserId() == testData.accessor.getId() ).anyTimes();
-		EasyMock.expect( securityService.isPhotoAuthorNameMustBeHidden( testData.photo, testData.accessor, testData.currentTime ) ).andReturn( testData.isAuthorIsHiddenBecauseOfAnonymousPeriod ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( securityService );
