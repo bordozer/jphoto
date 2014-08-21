@@ -3,6 +3,7 @@ package ui.controllers.photos.list.factory;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.system.Services;
+import utils.UserUtils;
 
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class PhotoFilter {
 		return new AbstractPhotoFilteringStrategy( accessor, services ) {
 
 			@Override
-			public boolean isPhotoHidden( final Integer photoId, final Date time ) {
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
 
 				if ( isAccessorSuperAdmin() ) {
 					return false;
@@ -37,7 +38,7 @@ public class PhotoFilter {
 		return new AbstractPhotoFilteringStrategy( accessor, services ) {
 
 			@Override
-			public boolean isPhotoHidden( final Integer photoId, final Date time ) {
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
 				return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, time );
 			}
 		};
@@ -48,7 +49,7 @@ public class PhotoFilter {
 		return new AbstractPhotoFilteringStrategy( accessor, services ) {
 
 			@Override
-			public boolean isPhotoHidden( final Integer photoId, final Date time ) {
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
 
 				if ( isAccessorSuperAdmin() ) {
 					return false;
@@ -64,8 +65,17 @@ public class PhotoFilter {
 		return new AbstractPhotoFilteringStrategy( accessor, services ) {
 
 			@Override
-			public boolean isPhotoHidden( final Integer photoId, final Date time ) {
-				return false;
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
+
+				if ( isAccessorSuperAdmin() ) {
+					return false;
+				}
+
+				if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
+					return false;
+				}
+
+				return services.getSecurityService().isPhotoWithingAnonymousPeriod( services.getPhotoService().load( photoId ), time );
 			}
 		};
 	}

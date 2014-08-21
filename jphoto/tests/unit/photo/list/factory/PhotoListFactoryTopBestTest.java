@@ -29,7 +29,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
 		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );
 
@@ -55,7 +54,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 		testData.user = user;
 
 		final ServicesImpl services = getTestServices( testData );
@@ -80,7 +78,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 		testData.genre = genre;
 
 		final ServicesImpl services = getTestServices( testData );
@@ -109,7 +106,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 		testData.user = user;
 		testData.genre = genre;
 
@@ -131,7 +127,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData();
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 
 		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
 		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );
@@ -156,7 +151,6 @@ public class PhotoListFactoryTopBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final TestData testData = new TestData( SUPER_ADMIN_1 );
 		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
-		testData.photoIds = newArrayList( 2000, 2001, 2002, 2003, 2004, 2005 );
 
 		testData.votingTimeFrom = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
 		testData.votingTimeTo = dateUtilsService.parseDateTime( "2014-08-10 01:11:12" );

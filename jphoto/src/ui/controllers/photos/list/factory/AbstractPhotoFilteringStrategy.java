@@ -10,7 +10,7 @@ public abstract class AbstractPhotoFilteringStrategy {
 	protected final User accessor;
 	protected final Services services;
 
-	public abstract boolean isPhotoHidden( final Integer photoId, final Date time );
+	public abstract boolean isPhotoHidden( final int photoId, final Date time );
 
 	protected AbstractPhotoFilteringStrategy( final User accessor, final Services services ) {
 		this.accessor = accessor;
