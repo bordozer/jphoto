@@ -53,16 +53,6 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
-	/*@Override
-	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-
-		if ( isUserCard() ) {
-			return false;
-		}
-
-		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
-	}*/
-
 	@Override
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
 		return pagingModel.getCurrentPage() <= 1 ? super.getPhotoList( photoListId, pagingModel, language, time ) : null;

@@ -48,20 +48,6 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
-	/*@Override
-	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-
-		if ( isUserCard() ) {
-			return false;
-		}
-
-		if ( isAccessorSuperAdmin() ) {
-			return false;
-		}
-
-		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
-	}*/
-
 	@Override
 	protected boolean showPaging() {
 		return false;

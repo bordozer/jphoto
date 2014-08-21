@@ -54,24 +54,6 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
-	/*@Override
-	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
-
-		if ( isUserCard() ) {
-			return false;
-		}
-
-		if ( isAccessorSuperAdmin() ) {
-			return false;
-		}
-
-		*//*if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
-			return false; // TODO: should user see restricted photos in the gallery?
-		}*//*
-
-		return services.getRestrictionService().isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
-	}*/
-
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 
