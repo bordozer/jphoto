@@ -89,15 +89,19 @@ public abstract class AbstractPhotoListFactory {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
 		}
 
-		final int photosCountToShow = criterias.getPhotoQtyLimit(); // TODO: Min( criterias.getPhotoQtyLimit(), selectedPhotosCount )
+		// TODO: Min( criterias.getPhotoQtyLimit(), selectedPhotosCount )
+		int counter = selectedPhotosCount;
+		final int photosCountToShow = criterias.getPhotoQtyLimit();
 		while( notRestrictedPhotosIds.size() < photosCountToShow ) {
 			final int diff = photosCountToShow - notRestrictedPhotosIds.size();
 
-			selectIdsQuery.setOffset( selectedPhotosCount );
+			selectIdsQuery.setOffset( counter );
 			selectIdsQuery.setLimit( diff);
 
 			final List<Integer> additionalPhotosIds = getPhotosId( selectIdsQuery ).getIds();
-			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, services.getDateUtilsService().getCurrentTime() ) );
+			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, time ) );
+
+			counter++;
 		}
 
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
