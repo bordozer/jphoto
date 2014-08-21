@@ -240,6 +240,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
+
+			@Override
+			protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+
+				if ( UserUtils.isUsersEqual( user, accessor ) ) {
+					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
+				}
+
+				return super.getGroupOperationMenuContainer();
+			}
 		};
 	}
 
