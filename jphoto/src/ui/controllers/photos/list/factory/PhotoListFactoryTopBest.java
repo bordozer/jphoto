@@ -17,6 +17,11 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		super( criterias, photoFilteringStrategy, accessor, services );
 	}
 
+	@Override
+	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
+		return pagingModel.getCurrentPage() <= 1 ? super.getPhotoList( photoListId, pagingModel, language, time ) : null;
+	}
+
 	/*public PhotoListFactoryTopBest( final User accessor, final Services services ) {
 		super( accessor, services );
 

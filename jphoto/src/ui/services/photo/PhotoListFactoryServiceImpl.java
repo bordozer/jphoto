@@ -74,6 +74,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosBestInPeriodUrl( criterias.getVotingTimeFrom(), criterias.getVotingTimeTo() );
+			}
 		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
 	}
 
@@ -130,6 +135,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
 			}
 		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
 	}
@@ -188,6 +198,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+			}
 		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
 	}
 
@@ -244,6 +259,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 			}
 		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
 	}

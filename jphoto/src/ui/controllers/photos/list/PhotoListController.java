@@ -200,8 +200,8 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel ) );
 		model.addPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel ) );
+		model.addPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
 
@@ -233,8 +233,8 @@ public class PhotoListController {
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUser( user, pagingModel ) );
 		model.addPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel ) );
+		model.addPhotoList( photoListFactoryService.galleryForUser( user, pagingModel ) );
 
 		fillFilterModelWithUserData( filterModel, user );
 
@@ -271,8 +271,8 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel ) );
 		model.addPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel ) );
+		model.addPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel ) );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );
@@ -314,6 +314,7 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		model.addPhotoList( photoListFactoryService.appraisedByUserPhotos( user, pagingModel ) );
+
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosAppraisedByUserBreadcrumbs( user ) );
 
 		return VIEW;
