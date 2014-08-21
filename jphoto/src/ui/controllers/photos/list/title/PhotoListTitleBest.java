@@ -4,6 +4,7 @@ import core.general.data.PhotoListCriterias;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 
+@Deprecated
 public class PhotoListTitleBest extends AbstractPhotoListTitle {
 
 	public PhotoListTitleBest( final PhotoListCriterias criterias, final Services services ) {

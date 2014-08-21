@@ -4,6 +4,7 @@ import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
+import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoListFilteringService;
@@ -14,11 +15,8 @@ import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
-import ui.controllers.photos.list.factory.AbstractPhotoFilteringStrategy;
-import ui.controllers.photos.list.factory.PhotoListFactoryBest;
-import ui.controllers.photos.list.factory.PhotoListFactoryGallery;
-import ui.controllers.photos.list.factory.PhotoListFactoryTopBest;
-import ui.elements.PhotoList;
+import ui.controllers.photos.list.factory.*;
+import utils.UserUtils;
 
 import java.util.Date;
 
@@ -40,7 +38,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private Services services;
 
 	@Override
-	public PhotoList gallery( final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory gallery( final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( getCurrentUser() );
 
@@ -55,11 +53,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryTopBest( final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryTopBest( final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
@@ -79,11 +77,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosBestInPeriodUrl( criterias.getVotingTimeFrom(), criterias.getVotingTimeTo() );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryBest( final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryBest( final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( getCurrentUser() );
 
@@ -98,11 +96,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForGenre( final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForGenre( final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenre( genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( getCurrentUser() );
 
@@ -117,11 +115,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+
+			@Override
+			protected String getPhotoListBottomText() {
+				return genre.getDescription(); // TODO: translate
+			}
+		};
 	}
 
 	@Override
-	public PhotoList galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreTopBest( genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
@@ -141,11 +144,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForGenreBest( final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( getCurrentUser() );
 
@@ -160,11 +163,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+
+			@Override
+			protected String getPhotoListBottomText() {
+				return genre.getDescription(); // TODO: translate
+			}
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUser( final User user, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUser( final User user, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUser( user, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -179,11 +187,21 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+
+			@Override
+			protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+
+				if ( UserUtils.isUsersEqual( user, accessor ) ) {
+					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
+				}
+
+				return super.getGroupOperationMenuContainer();
+			}
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUserTopBest( final User user, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUserTopBest( final User user, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserTopBest( user, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -203,11 +221,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUserBest( final User user, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUserBest( final User user, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -222,11 +240,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUserAndGenre( final User user, final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUserAndGenre( final User user, final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -241,11 +259,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUserAndGenreTopBest( final User user, final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -265,11 +283,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, getCurrentUser() );
 
@@ -284,11 +302,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	@Override
-	public PhotoList appraisedByUserPhotos( final User user, final PagingModel pagingModel ) {
+	public AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel ) {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( user, getCurrentUser() );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( getCurrentUser() );
@@ -304,7 +322,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
-		}.getPhotoList( 0, pagingModel, getLanguage(), getCurrentTime() );
+		};
 	}
 
 	private User getCurrentUser() {

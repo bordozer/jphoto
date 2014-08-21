@@ -5,6 +5,7 @@ import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import ui.services.breadcrumbs.items.BreadcrumbsBuilder;
 
+@Deprecated
 public class PhotoListTitleGallery extends AbstractPhotoListTitle {
 
 	public PhotoListTitleGallery( final PhotoListCriterias criterias, final Services services ) {

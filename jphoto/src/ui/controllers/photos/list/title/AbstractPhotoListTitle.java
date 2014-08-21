@@ -8,6 +8,7 @@ import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 
 import java.util.Date;
 
+@Deprecated
 public abstract class AbstractPhotoListTitle {
 
 	protected PhotoListCriterias criterias;

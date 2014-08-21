@@ -42,7 +42,7 @@ import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.edit.GenreWrapper;
-import ui.controllers.photos.list.factory.*;
+import ui.controllers.photos.list.factory.AbstractPhotoListFactory;
 import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.controllers.photos.list.title.PhotoListTitle;
 import ui.controllers.photos.list.title.PhotoListTitleBest;
@@ -170,12 +170,11 @@ public class PhotoListController {
 		return filterModel;
 	}
 
-	// all -->
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showPhotoGallery( final @ModelAttribute("photoListModel") PhotoListModel model, final @ModelAttribute("pagingModel") PagingModel pagingModel, final @ModelAttribute(PHOTO_FILTER_MODEL) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( photoListFactoryService.galleryTopBest( pagingModel ) );
-		model.addPhotoList( photoListFactoryService.gallery( pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryTopBest( pagingModel ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.gallery( pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
 
@@ -185,23 +184,21 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( photoListFactoryService.galleryBest( pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryBest( pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
 
 		return VIEW;
 	}
-	// all <--
 
-	// by genre -->
 	@RequestMapping( method = RequestMethod.GET, value = "genres/{genreId}/" )
 	public String showPhotosByGenre( final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel ) );
-		model.addPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
 
@@ -216,7 +213,7 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( photoListFactoryService.galleryForGenreBest( genre, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreBest( genre, pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
 
@@ -224,17 +221,15 @@ public class PhotoListController {
 
 		return VIEW;
 	}
-	// by genre <--
 
-	// by user -->
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/" )
 	public String showPhotosByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel ) );
-		model.addPhotoList( photoListFactoryService.galleryForUser( user, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUser( user, pagingModel ), pagingModel ) );
 
 		fillFilterModelWithUserData( filterModel, user );
 
@@ -249,7 +244,7 @@ public class PhotoListController {
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUserBest( user, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserBest( user, pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
 
@@ -259,9 +254,7 @@ public class PhotoListController {
 
 		return VIEW;
 	}
-	// by user <--
 
-	// by user and genre -->
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/genre/{genreId}/" )
 	public String showPhotosByUserByGenre( final @PathVariable( "userId" ) String _userId, final @PathVariable( "genreId" ) String _genreId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
@@ -271,8 +264,8 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel ) );
-		model.addPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel ), pagingModel ) );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );
@@ -293,7 +286,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.galleryForUserAndGenreBest( user, genre, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreBest( user, genre, pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBestBreadcrumbs( user, genre ) );
 
@@ -306,14 +299,13 @@ public class PhotoListController {
 		return VIEW;
 	}
 
-	// by user and genre <--
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/category/" )
 	public String showPhotosVotedByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( photoListFactoryService.appraisedByUserPhotos( user, pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.appraisedByUserPhotos( user, pagingModel ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosAppraisedByUserBreadcrumbs( user ) );
 
@@ -345,8 +337,6 @@ public class PhotoListController {
 
 		return VIEW;
 	}
-
-	// by date -->
 
 	@RequestMapping( method = RequestMethod.GET, value = "date/{date}/uploaded/" )
 	public String showPhotosByDate( final @PathVariable( "date" ) String date, final @ModelAttribute( "photoListModel" ) PhotoListModel model
@@ -417,9 +407,7 @@ public class PhotoListController {
 
 		return VIEW;
 	}
-	// by date <--
 
-	// by User Membership Type -->
 	@RequestMapping( method = RequestMethod.GET, value = "type/{typeId}/" )
 	public String showPhotosByMembershipType( final @PathVariable( "typeId" ) int typeId, final @ModelAttribute( "photoListModel" ) PhotoListModel model
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
@@ -470,7 +458,6 @@ public class PhotoListController {
 
 		return VIEW;
 	}
-	// by User Membership Type <--
 
 	@RequestMapping( method = RequestMethod.GET, value = "/filter/" )
 	public String searchGet( final PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel
@@ -677,7 +664,6 @@ public class PhotoListController {
 			final PhotoList photoList = getPhotoList( photosIds, listData, criterias, getLanguage() );
 			photoList.setPhotoListId( listCounter++ );
 
-//			photoList.setPhotoGroupOperationMenuContainer( photosIds.size() > 0 ? groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( listData.getPhotoGroupOperationMenuContainer(), listData instanceof BestPhotoListData, getCurrentUser() ) : groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 			photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() ); // TODO: zaglushka
 
 			model.addPhotoList( photoList );
@@ -758,6 +744,10 @@ public class PhotoListController {
 		}
 
 		return result;
+	}
+
+	private PhotoList getPhotoList( final AbstractPhotoListFactory photoListFactory, final PagingModel pagingModel ) {
+		return photoListFactory.getPhotoList( 0, pagingModel, getLanguage(), dateUtilsService.getCurrentTime() );
 	}
 
 	private Language getLanguage() {

@@ -2,16 +2,14 @@ package ui.controllers.photos.list.factory;
 
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
-import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
-import ui.controllers.photos.list.title.PhotoListTitleTopBest;
 import ui.elements.PhotoList;
 
 import java.util.Date;
 
-public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
+public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 	public PhotoListFactoryTopBest( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( criterias, photoFilteringStrategy, accessor, services );

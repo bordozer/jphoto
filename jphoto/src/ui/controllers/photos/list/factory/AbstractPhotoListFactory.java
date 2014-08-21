@@ -2,7 +2,6 @@ package ui.controllers.photos.list.factory;
 
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
-import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -13,7 +12,6 @@ import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.controllers.photos.list.title.AbstractPhotoListTitle;
 import ui.elements.PhotoList;
 
 import java.util.Date;
@@ -24,12 +22,13 @@ import static com.google.common.collect.Lists.newArrayList;
 public abstract class AbstractPhotoListFactory {
 
 	protected PhotoListCriterias criterias;
-	protected AbstractPhotoListTitle photoListTitle;
 
 	protected final User accessor;
 	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
 
 	protected final Services services;
+
+	protected abstract TranslatableMessage getTitle();
 
 	protected AbstractPhotoListFactory( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		this.accessor = accessor;
@@ -48,37 +47,34 @@ public abstract class AbstractPhotoListFactory {
 		photoList.setPhotosCriteriasDescription( getDescription().build( language ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
-		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
+		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
 
 		photoList.setPhotoListId( photoListId );
+		photoList.setBottomText( getPhotoListBottomText() );
 
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
 	}
 
-	protected boolean showPaging() {
-		return false;
-	}
-
-	protected TranslatableMessage getTitle() {
-		return photoListTitle.getPhotoListTitle();
+	protected String getLinkToFullList() {
+		return StringUtils.EMPTY;
 	}
 
 	protected TranslatableMessage getDescription() {
-		return photoListTitle.getPhotoListDescription();
+		return new TranslatableMessage( "", services );
 	}
 
 	protected String getPhotoListBottomText() {
 		return StringUtils.EMPTY;
 	}
 
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
-		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	protected boolean showPaging() {
+		return false;
 	}
 
-	protected String getLinkToFullList() {
-		return null;
+	protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
@@ -124,13 +120,5 @@ public abstract class AbstractPhotoListFactory {
 
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
 		return services.getPhotoService().load( selectIdsQuery );
-	}
-
-	protected boolean isAccessorSuperAdmin() {
-		return services.getSecurityService().isSuperAdminUser( accessor );
-	}
-
-	protected boolean isUserCard() {
-		return false; // TODO
 	}
 }

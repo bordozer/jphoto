@@ -1,16 +1,11 @@
 package ui.controllers.photos.list.factory;
 
 import core.general.data.PhotoListCriterias;
-import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
-import ui.controllers.photos.list.title.AbstractPhotoListTitle;
-import ui.controllers.photos.list.title.PhotoListTitle;
-import ui.controllers.photos.list.title.PhotoListTitleGallery;
-import utils.UserUtils;
 
-public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
+public abstract class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 	public PhotoListFactoryGallery( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( criterias, photoFilteringStrategy, accessor, services );
@@ -19,6 +14,11 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	@Override
 	protected boolean showPaging() {
 		return true;
+	}
+
+	@Override
+	protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 
 	/*public PhotoListFactoryGallery( final User accessor, final Services services ) {
@@ -65,7 +65,7 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	}*/
 
 	/*@Override
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
+	protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 
 		if ( isUserCard() && UserUtils.isUsersEqual( user, accessor ) ) {
 			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
