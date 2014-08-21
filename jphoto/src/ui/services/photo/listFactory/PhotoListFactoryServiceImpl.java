@@ -17,8 +17,6 @@ import ui.context.EnvironmentContext;
 import ui.services.photo.listFactory.factory.*;
 import utils.UserUtils;
 
-import java.util.Date;
-
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Autowired
@@ -52,6 +50,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: All photos", services );
+			}
 		};
 	}
 
@@ -76,6 +79,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosBestInPeriodUrl( criterias.getVotingTimeFrom(), criterias.getVotingTimeTo() );
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: Top best photos for last $1 days", services ).addIntegerParameter( days() );
+			}
 		};
 	}
 
@@ -94,6 +102,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}
@@ -116,8 +129,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected String getPhotoListBottomText() {
-				return genre.getDescription(); // TODO: translate
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
 			}
 		};
 	}
@@ -143,6 +156,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
+			}
 		};
 	}
 
@@ -164,8 +182,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected String getPhotoListBottomText() {
-				return genre.getDescription(); // TODO: translate
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
 			}
 		};
 	}
@@ -196,6 +214,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 				return super.getGroupOperationMenuContainer();
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
+			}
 		};
 	}
 
@@ -219,6 +242,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}
@@ -249,6 +277,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 				return super.getGroupOperationMenuContainer();
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
+			}
 		};
 	}
 
@@ -267,6 +300,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}
@@ -292,6 +330,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
+			}
 		};
 	}
 
@@ -310,6 +353,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}
@@ -330,6 +378,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}

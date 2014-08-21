@@ -30,6 +30,8 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract TranslatableMessage getTitle();
 
+	protected abstract TranslatableMessage getPhotoListBottomText();
+
 	protected AbstractPhotoListFactory( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		this.accessor = accessor;
 		this.services = services;
@@ -50,7 +52,7 @@ public abstract class AbstractPhotoListFactory {
 		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
 
 		photoList.setPhotoListId( photoListId );
-		photoList.setBottomText( getPhotoListBottomText() );
+		photoList.setBottomText( getPhotoListBottomText().build( language ) );
 
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
@@ -63,10 +65,6 @@ public abstract class AbstractPhotoListFactory {
 
 	protected TranslatableMessage getDescription() {
 		return new TranslatableMessage( "", services );
-	}
-
-	protected String getPhotoListBottomText() {
-		return StringUtils.EMPTY;
 	}
 
 	protected boolean showPaging() {
