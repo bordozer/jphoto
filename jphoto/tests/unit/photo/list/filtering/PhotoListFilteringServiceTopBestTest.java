@@ -1,8 +1,8 @@
 package photo.list.filtering;
 
-import core.services.photo.PhotoListFilteringServiceImpl;
+import core.services.photo.list.PhotoListFilteringServiceImpl;
+import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import org.junit.Test;
-import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
 
 import static junit.framework.Assert.assertEquals;
 

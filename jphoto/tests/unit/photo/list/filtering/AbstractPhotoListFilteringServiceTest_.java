@@ -1,7 +1,7 @@
 package photo.list.filtering;
 
 import common.AbstractTestCase;
-import core.services.photo.PhotoListFilteringServiceImpl;
+import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;

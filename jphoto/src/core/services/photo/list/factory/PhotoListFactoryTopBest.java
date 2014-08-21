@@ -1,4 +1,4 @@
-package ui.services.photo.listFactory.factory;
+package core.services.photo.list.factory;
 
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;

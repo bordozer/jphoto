@@ -6,6 +6,7 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
+import core.services.photo.list.PhotoListFilteringService;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;

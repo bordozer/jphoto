@@ -1,7 +1,7 @@
-package core.services.photo;
+package core.services.photo.list;
 
 import core.general.user.User;
-import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
+import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 
 public interface PhotoListFilteringService {
 

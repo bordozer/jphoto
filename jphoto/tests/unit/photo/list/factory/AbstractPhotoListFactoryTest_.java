@@ -9,15 +9,15 @@ import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoListCriteriasService;
-import core.services.photo.PhotoListFilteringService;
+import core.services.photo.list.PhotoListFilteringService;
 import core.services.photo.PhotoService;
+import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import core.services.security.RestrictionService;
 import core.services.system.ServicesImpl;
 import javafx.util.Pair;
 import org.easymock.EasyMock;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
 
 import java.util.Collections;
 import java.util.Date;

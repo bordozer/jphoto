@@ -1,4 +1,4 @@
-package ui.services.photo.listFactory;
+package core.services.photo.list;
 
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
@@ -7,12 +7,11 @@ import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.photo.PhotoListCriteriasService;
-import core.services.photo.PhotoListFilteringService;
+import core.services.photo.list.factory.*;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.services.photo.listFactory.factory.*;
 import utils.UserUtils;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {

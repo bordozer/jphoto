@@ -1,4 +1,4 @@
-package ui.services.photo.listFactory.factory;
+package core.services.photo.list.factory;
 
 import java.util.List;
 

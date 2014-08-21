@@ -1,11 +1,12 @@
-package core.services.photo;
+package core.services.photo.list;
 
 import core.general.photo.Photo;
 import core.general.user.User;
+import core.services.photo.PhotoService;
+import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
 
 import java.util.Date;
 
