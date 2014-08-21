@@ -9,7 +9,6 @@ import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
 import core.general.user.UserAvatar;
-import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
@@ -28,7 +27,10 @@ import ui.context.EnvironmentContext;
 import ui.translatable.GenericTranslatableEntry;
 import ui.translatable.GenericTranslatableList;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

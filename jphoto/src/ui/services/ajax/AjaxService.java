@@ -10,7 +10,6 @@ import ui.dtos.ComplaintMessageDTO;
 import ui.dtos.PrivateMessageSendingDTO;
 
 import java.util.List;
-import java.util.Map;
 
 public interface AjaxService {
 

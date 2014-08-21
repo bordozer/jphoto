@@ -1,7 +1,6 @@
 package rest.admin.restriction;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.json.JSONArray;
 
 import java.util.List;
 

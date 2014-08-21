@@ -5,7 +5,6 @@ import com.google.common.collect.Lists;
 import core.enums.RestrictionType;
 import core.general.restriction.EntryRestriction;
 import core.interfaces.Restrictable;
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
