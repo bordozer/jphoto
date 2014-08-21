@@ -72,16 +72,7 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 
 			@Override
 			public boolean isPhotoHidden( final int photoId, final Date time ) {
-
-				if ( isAccessorSuperAdmin( accessor ) ) {
-					return false;
-				}
-
-				if ( securityService.userOwnThePhoto( accessor, photoId ) ) {
-					return false;
-				}
-
-				return securityService.isPhotoWithingAnonymousPeriod( photoService.load( photoId ), time );
+				return securityService.isPhotoAuthorNameMustBeHidden( photoService.load( photoId ), accessor, time );
 			}
 		};
 	}

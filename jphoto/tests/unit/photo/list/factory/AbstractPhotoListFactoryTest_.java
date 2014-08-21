@@ -79,15 +79,6 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		return restrictionService;
 	}
 
-	private Boolean isRestricted( final int photosId, final List<Pair<Integer, RestrictionType>> restrictedPhotos, RestrictionType restrictionType ) {
-		for ( final Pair<Integer, RestrictionType> restrictedPhoto : restrictedPhotos ) {
-			if ( restrictedPhoto.getKey() == photosId && restrictedPhoto.getValue() == restrictionType ) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	protected PhotoService getPhotoService( final TestData testData ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
@@ -148,6 +139,15 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.replay( photoListCriteriasService );
 
 		return photoListCriteriasService;
+	}
+
+	private Boolean isRestricted( final int photosId, final List<Pair<Integer, RestrictionType>> restrictedPhotos, RestrictionType restrictionType ) {
+		for ( final Pair<Integer, RestrictionType> restrictedPhoto : restrictedPhotos ) {
+			if ( restrictedPhoto.getKey() == photosId && restrictedPhoto.getValue() == restrictionType ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private PhotoListFilteringService getPhotoListFilteringService( final TestData testData ) {

@@ -16,17 +16,22 @@ public class TestData {
 
 	User photoAuthor;
 
+	public User user;
+
 	Photo photo;
 
 	public boolean isRestricted;
+
+	public boolean isAuthorIsHiddenBecauseOfAnonymousPeriod;
 
 	public TestData( final DateUtilsService dateUtilsService ) {
 		currentTime = dateUtilsService.parseDateTime( "2014-08-20 18:22:01" );
 
 		this.accessor = new UserMock(333 );
-		this.photoAuthor = new UserMock( 1111 );
+		this.photoAuthor = new UserMock( 444 );
+		this.user = new UserMock( 555 );
 
-		this.photo = new PhotoMock( 555 );
+		this.photo = new PhotoMock( 11111 );
 		photo.setUserId( photoAuthor.getId() );
 	}
 }
