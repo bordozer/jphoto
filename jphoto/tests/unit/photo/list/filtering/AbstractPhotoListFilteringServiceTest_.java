@@ -67,11 +67,11 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 		return photoService;
 	}
 
-	protected void assertPhotoIsShown( final boolean photoHidden ) {
-		assertEquals( "Photo is shown but should be hidden", true, photoHidden );
+	protected void assertPhotoIsShown( final boolean photoIsHidden ) {
+		assertEquals( "Photo is hidden but should not be", false, photoIsHidden );
 	}
 
-	protected void assertPhotoIsHidden( final boolean photoHidden ) {
-		assertEquals( "Photo is hidden but should be shown", false, photoHidden );
+	protected void assertPhotoIsHidden( final boolean photoIsHidden ) {
+		assertEquals( "Photo is shown but should be hidden", true, photoIsHidden );
 	}
 }
