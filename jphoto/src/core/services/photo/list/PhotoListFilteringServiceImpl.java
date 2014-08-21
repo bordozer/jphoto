@@ -80,7 +80,7 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 				}
 
 				final Photo photo = photoService.load( photoId );
-				return securityService.userOwnThePhoto( accessor, photo ) && securityService.isPhotoWithingAnonymousPeriod( photo );
+				return ! securityService.userOwnThePhoto( accessor, photo ) && securityService.isPhotoWithingAnonymousPeriod( photo );
 			}
 		};
 	}
