@@ -29,6 +29,8 @@ class TestData {
 
 	public List<Pair<Integer, RestrictionType>> restrictedPhotos;
 
+	public boolean isPhotoHidden;
+
 	TestData( final User accessor ) {
 		this.accessor = accessor;
 

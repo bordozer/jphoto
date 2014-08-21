@@ -35,6 +35,7 @@
 	<bean id="userPhotoAlbumService" class="core.services.user.UserPhotoAlbumServiceImpl"/>
 	<bean id="privateMessageService" class="core.services.entry.PrivateMessageServiceImpl"/>
 	<bean id="groupOperationService" class="core.services.entry.GroupOperationServiceImpl"/>
+	<bean id="photoListFilteringService" class="core.services.photo.PhotoListFilteringServiceImpl"/>
 
 	<bean id="anonymousDaysService" class="core.services.entry.AnonymousDaysServiceImpl"/>
 	<bean id="entryMenuService" class="ui.services.menu.entry.EntryMenuServiceImpl"/>

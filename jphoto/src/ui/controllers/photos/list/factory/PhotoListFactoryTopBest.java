@@ -18,7 +18,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		photoFilteringStrategy = photoFilter.topBestFilteringStrategy();
+		photoFilteringStrategy = services.getPhotoListFilteringService().topBestFilteringStrategy();
 	}
 
 	public PhotoListFactoryTopBest( final Genre genre, final User accessor, final Services services ) {
@@ -29,7 +29,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForGenreTopBest( genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		photoFilteringStrategy = photoFilter.topBestFilteringStrategy();
+		photoFilteringStrategy = services.getPhotoListFilteringService().topBestFilteringStrategy();
 	}
 
 	public PhotoListFactoryTopBest( final User user, final User accessor, final Services services ) {
@@ -40,7 +40,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUserTopBest( user, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
+		photoFilteringStrategy = services.getPhotoListFilteringService().userCardFilteringStrategy( user, accessor );
 	}
 
 	public PhotoListFactoryTopBest( final User user, final Genre genre, final User accessor, final Services services ) {
@@ -52,7 +52,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		criterias = services.getPhotoListCriteriasService().getForUserAndGenreTopBest( user, genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
 
-		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
+		photoFilteringStrategy = services.getPhotoListFilteringService().userCardFilteringStrategy( user, accessor );
 	}
 
 	@Override

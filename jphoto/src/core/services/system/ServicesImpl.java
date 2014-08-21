@@ -163,6 +163,9 @@ public class ServicesImpl implements Services {
 	@Autowired
 	private RestrictionService restrictionService;
 
+	@Autowired
+	private PhotoListFilteringService photoListFilteringService;
+
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
 
@@ -401,6 +404,11 @@ public class ServicesImpl implements Services {
 		return restrictionService;
 	}
 
+	@Override
+	public PhotoListFilteringService getPhotoListFilteringService() {
+		return photoListFilteringService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -592,6 +600,10 @@ public class ServicesImpl implements Services {
 
 	public void setRestrictionService( final RestrictionService restrictionService ) {
 		this.restrictionService = restrictionService;
+	}
+
+	public void setPhotoListFilteringService( final PhotoListFilteringService photoListFilteringService ) {
+		this.photoListFilteringService = photoListFilteringService;
 	}
 
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {

@@ -9,16 +9,18 @@ import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoListCriteriasService;
+import core.services.photo.PhotoListFilteringService;
 import core.services.photo.PhotoService;
 import core.services.security.RestrictionService;
-import core.services.security.SecurityService;
 import core.services.system.ServicesImpl;
 import javafx.util.Pair;
 import org.easymock.EasyMock;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
+import ui.controllers.photos.list.factory.AbstractPhotoFilteringStrategy;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
@@ -32,7 +34,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		services.setRestrictionService( getRestrictionService( testData ) );
 		services.setUrlUtilsService( urlUtilsService );
 		services.setGroupOperationService( getGroupOperationService( testData ) );
-		services.setSecurityService( getSecurityService( testData ) );
+		services.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
 
 		return services;
 	}
@@ -148,20 +150,24 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		return photoListCriteriasService;
 	}
 
-	private SecurityService getSecurityService( final TestData testData ) {
+	private PhotoListFilteringService getPhotoListFilteringService( final TestData testData ) {
+		final PhotoListFilteringService photoListFilteringService = EasyMock.createMock( PhotoListFilteringService.class );
 
-		final SecurityService securityService = EasyMock.createMock( SecurityService.class );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new AbstractPhotoFilteringStrategy() {
+			@Override
+			public boolean isPhotoHidden( final int photoId, final Date time ) {
+				return testData.isPhotoHidden;
+			}
+		};
 
-		EasyMock.expect( securityService.isSuperAdminUser( testData.accessor ) ).andReturn( isSuperAdmin( testData.accessor ) ).anyTimes();
-
-		for ( final Photo photo : testData.photos ) {
-			EasyMock.expect( securityService.userOwnThePhoto( testData.accessor, photo.getId() ) ).andReturn( false ).anyTimes();
-			EasyMock.expect( securityService.isPhotoWithingAnonymousPeriod( photo, testData.currentTime ) ).andReturn( false ).anyTimes();
-		}
+		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.topBestFilteringStrategy() ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.bestFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 
 		EasyMock.expectLastCall();
-		EasyMock.replay( securityService );
+		EasyMock.replay( photoListFilteringService );
 
-		return securityService;
+		return photoListFilteringService;
 	}
 }

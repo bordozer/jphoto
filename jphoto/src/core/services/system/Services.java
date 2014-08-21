@@ -115,5 +115,7 @@ public interface Services {
 
 	RestrictionService getRestrictionService();
 
+	PhotoListFilteringService getPhotoListFilteringService();
+
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

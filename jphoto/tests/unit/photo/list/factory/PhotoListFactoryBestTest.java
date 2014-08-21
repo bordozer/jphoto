@@ -1,12 +1,10 @@
 package photo.list.factory;
 
-import core.enums.RestrictionType;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.system.ServicesImpl;
 import core.services.translator.Language;
-import javafx.util.Pair;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +12,6 @@ import ui.controllers.photos.list.factory.AbstractPhotoListFactory;
 import ui.controllers.photos.list.factory.PhotoListFactoryBest;
 import ui.elements.PhotoList;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
 
 public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
@@ -32,9 +29,9 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final ServicesImpl services = getTestServices( testData );
 
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.accessor, services );
+		final AbstractPhotoListFactory factory = new PhotoListFactoryBest( testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "Best photo list title", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
@@ -56,9 +53,9 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final ServicesImpl services = getTestServices( testData );
 
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.user, testData.accessor, services );
+		final AbstractPhotoListFactory factory = new PhotoListFactoryBest( testData.user, testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "Best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a>", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
@@ -80,9 +77,9 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final ServicesImpl services = getTestServices( testData );
 
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.genre, testData.accessor, services );
+		final AbstractPhotoListFactory factory = new PhotoListFactoryBest( testData.genre, testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "Best photo list title Top best photo list title: in category Translated entry", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
@@ -109,9 +106,9 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 
 		final ServicesImpl services = getTestServices( testData );
 
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.user, testData.genre, testData.accessor, services );
+		final AbstractPhotoListFactory factory = new PhotoListFactoryBest( testData.user, testData.genre, testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "Best photo list title Top best photo list title: of member <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: Just a user: user card link title\">Just a user</a> Top best photo list title: in category Translated entry", photoList.getPhotoListTitle() );
 		assertEquals( "Assertion fails", "", photoList.getBottomText() );
@@ -121,42 +118,18 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 	}
 
 	@Test
-	public void photoIsNotShownIfItHasSuitableRestrictionTest() {
+	public void isPhotoHiddenTest() {
 
 		final TestData testData = new TestData();
-		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
-		testData.restrictedPhotos = newArrayList();
-		testData.restrictedPhotos.add( new Pair<>( 2000, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
-		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_SHOWING_IN_PHOTO_GALLERY ) );
-		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_APPRAISAL ) );
+		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-15 11:38:45" );
+		testData.isPhotoHidden = true;
 
 		final ServicesImpl services = getTestServices( testData );
-		services.setRestrictionService( getRestrictionService( testData, RestrictionType.PHOTO_SHOWING_IN_PHOTO_GALLERY ) );
 
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.accessor, services );
+		final AbstractPhotoListFactory factory = new PhotoListFactoryBest( testData.accessor, services );
 		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
+		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
-		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004", StringUtils.join( photoList.getPhotoIds(), "," ) );
-	}
-
-	@Test
-	public void photoIsNotShownIfItHasSuitableRestriction_ButAdminTest() {
-
-		final TestData testData = new TestData( SUPER_ADMIN_1 );
-		testData.currentTime = dateUtilsService.parseDateTime( "2014-08-10 10:11:22" );
-		testData.restrictedPhotos = newArrayList();
-		testData.restrictedPhotos.add( new Pair<>( 2000, RestrictionType.PHOTO_SHOWING_IN_TOP_OF_GENRE ) );
-		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_SHOWING_IN_PHOTO_GALLERY ) );
-		testData.restrictedPhotos.add( new Pair<>( 2005, RestrictionType.PHOTO_APPRAISAL ) );
-
-		final ServicesImpl services = getTestServices( testData );
-		services.setRestrictionService( getRestrictionService( testData, RestrictionType.PHOTO_SHOWING_IN_PHOTO_GALLERY ) );
-
-		final AbstractPhotoListFactory photoListFactoryTopBest = new PhotoListFactoryBest( testData.accessor, services );
-		final PagingModel pagingModel = new PagingModel( services );
-		final PhotoList photoList = photoListFactoryTopBest.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
-
-		assertEquals( "Assertion fails", "2000,2001,2002,2003,2004,2005", StringUtils.join( photoList.getPhotoIds(), "," ) );
+		assertEquals( "Assertion fails", "", StringUtils.join( photoList.getPhotoIds(), "," ) );
 	}
 }

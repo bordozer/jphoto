@@ -26,7 +26,6 @@ public abstract class AbstractPhotoListFactory {
 	protected AbstractPhotoListTitle photoListTitle;
 
 	protected final User accessor;
-	protected final PhotoFilter photoFilter;
 	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
 
 	protected Services services;
@@ -39,8 +38,6 @@ public abstract class AbstractPhotoListFactory {
 	public AbstractPhotoListFactory( final User accessor, final Services services ) {
 		this.accessor = accessor;
 		this.services = services;
-
-		this.photoFilter = new PhotoFilter( accessor, services );
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
