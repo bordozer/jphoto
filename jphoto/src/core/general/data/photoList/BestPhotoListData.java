@@ -8,8 +8,4 @@ public class BestPhotoListData extends AbstractPhotoListData {
 		super( photoListQuery );
 	}
 
-	@Override
-	public boolean isGroupOperationEnabled() {
-		return false;
-	}
 }

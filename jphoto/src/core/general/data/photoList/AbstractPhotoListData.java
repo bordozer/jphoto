@@ -17,12 +17,9 @@ public abstract class AbstractPhotoListData {
 	protected String photoListBottomText;
 	protected Date photoRatingTimeFrom;
 	protected Date photoRatingTimeTo;
-	protected boolean isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos;
 	protected PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
 
 	private AbstractPhotoListTitle photoListTitle;
-
-	public abstract boolean isGroupOperationEnabled();
 
 	public AbstractPhotoListData( final SqlIdsSelectQuery photoListQuery ) {
 		this.photoListQuery = photoListQuery;
@@ -60,36 +57,12 @@ public abstract class AbstractPhotoListData {
 		return photoListBottomText;
 	}
 
-	public void setPhotoListBottomText( final String photoListBottomText ) {
-		this.photoListBottomText = photoListBottomText;
-	}
-
-	public Date getPhotoRatingTimeFrom() {
-		return photoRatingTimeFrom;
-	}
-
 	public void setPhotoRatingTimeFrom( final Date photoRatingTimeFrom ) {
 		this.photoRatingTimeFrom = photoRatingTimeFrom;
 	}
 
-	public Date getPhotoRatingTimeTo() {
-		return photoRatingTimeTo;
-	}
-
 	public void setPhotoRatingTimeTo( final Date photoRatingTimeTo ) {
 		this.photoRatingTimeTo = photoRatingTimeTo;
-	}
-
-	public boolean isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos() {
-		return isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos;
-	}
-
-	public void setPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos( final boolean photoPreviewMustBeHiddenForAnonymouslyPostedPhotos ) {
-		isPhotoPreviewMustBeHiddenForAnonymouslyPostedPhotos = photoPreviewMustBeHiddenForAnonymouslyPostedPhotos;
-	}
-
-	public PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
-		return photoGroupOperationMenuContainer;
 	}
 
 	public void setPhotoGroupOperationMenuContainer( final PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer ) {
