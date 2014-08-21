@@ -108,6 +108,76 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list title: Photo gallery</nerd>
+		<ru><![CDATA[]]>Фотогалерея</ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery top best for last $1 days</nerd>
+		<ru><![CDATA[Самые лучшие работы за последние $1 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery absolutely best</nerd>
+		<ru><![CDATA[Самые лучшие работы - абсолютный рейтинг]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by genre $1</nerd>
+		<ru><![CDATA[Работы категории $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by genre $1 top best for last $2 days</nerd>
+		<ru><![CDATA[Самые лучшие работы категории $1 за последние $2 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by genre $1 best for $2 days</nerd>
+		<ru><![CDATA[Лучшие работы категории $1 за последние $2 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1</nerd>
+		<ru><![CDATA[Работы пользователя $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1 top best</nerd>
+		<ru><![CDATA[Самые лучшие работы пользователя $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1 best</nerd>
+		<ru><![CDATA[Лучшие работы пользователя $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1 and genre $2</nerd>
+		<ru><![CDATA[Работы пользователя $1 из категории $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1 and genre $2 top best</nerd>
+		<ru><![CDATA[самые лучшие работы пользователя $1 из категории $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photo gallery by user $1 and genre $2 best</nerd>
+		<ru><![CDATA[Лучшие работы пользователя $1 из категории $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photos which the user $1 appraised</nerd>
+		<ru><![CDATA[Работы, за которые голосовал $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

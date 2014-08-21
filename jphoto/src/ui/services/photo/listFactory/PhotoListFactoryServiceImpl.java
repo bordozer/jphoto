@@ -10,7 +10,6 @@ import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoListFilteringService;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
-import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +64,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery top best", services );
+				return new TranslatableMessage( "Photo list title: Photo gallery top best for last $1 days", services ).addIntegerParameter( days() );
 			}
 
 			@Override
@@ -132,7 +131,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best", services ).addPhotosByGenreLinkParameter( genre );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best for last $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
 			}
 
 			@Override
@@ -156,7 +155,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days ", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
 			}
 
 			@Override
@@ -209,7 +208,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best", services ).addUserCardLinkParameter( user );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 top best", services ).addUserCardLinkParameter( user );
 			}
 
 			@Override
@@ -337,14 +336,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private User getCurrentUser() {
 		return EnvironmentContext.getCurrentUser();
-	}
-
-	private Language getLanguage() {
-		return EnvironmentContext.getLanguage();
-	}
-
-	private Date getCurrentTime() {
-		return dateUtilsService.getCurrentTime();
 	}
 
 	private int days() {
