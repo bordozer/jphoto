@@ -101,7 +101,7 @@ public abstract class AbstractPhotoListFactory {
 			final List<Integer> additionalPhotosIds = getPhotosId( selectIdsQuery ).getIds();
 			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, time ) );
 
-			counter++;
+			counter += diff;
 		}
 
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
