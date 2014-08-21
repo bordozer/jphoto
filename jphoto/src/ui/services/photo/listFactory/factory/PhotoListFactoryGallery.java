@@ -1,4 +1,4 @@
-package ui.controllers.photos.list.factory;
+package ui.services.photo.listFactory.factory;
 
 import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;

@@ -17,7 +17,7 @@ import javafx.util.Pair;
 import org.easymock.EasyMock;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
-import ui.controllers.photos.list.factory.AbstractPhotoFilteringStrategy;
+import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
 
 import java.util.Collections;
 import java.util.Date;

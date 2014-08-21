@@ -5,7 +5,7 @@ import core.general.user.User;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import ui.controllers.photos.list.factory.AbstractPhotoFilteringStrategy;
+import ui.services.photo.listFactory.factory.AbstractPhotoFilteringStrategy;
 
 import java.util.Date;
 

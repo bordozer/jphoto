@@ -1,10 +1,9 @@
-package ui.services.photo;
+package ui.services.photo.listFactory;
 
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.user.User;
-import ui.controllers.photos.list.factory.AbstractPhotoListFactory;
-import ui.elements.PhotoList;
+import ui.services.photo.listFactory.factory.AbstractPhotoListFactory;
 
 public interface PhotoListFactoryService {
 

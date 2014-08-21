@@ -1,4 +1,4 @@
-package ui.services.photo;
+package ui.services.photo.listFactory;
 
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
@@ -15,7 +15,7 @@ import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.context.EnvironmentContext;
-import ui.controllers.photos.list.factory.*;
+import ui.services.photo.listFactory.factory.*;
 import utils.UserUtils;
 
 import java.util.Date;

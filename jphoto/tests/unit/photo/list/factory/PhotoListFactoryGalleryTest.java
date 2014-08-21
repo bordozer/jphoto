@@ -1,18 +1,6 @@
 package photo.list.factory;
 
-import core.general.base.PagingModel;
-import core.general.genre.Genre;
-import core.general.user.User;
-import core.services.system.ServicesImpl;
-import core.services.translator.Language;
-import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
-import org.junit.Test;
-import ui.controllers.photos.list.factory.AbstractPhotoListFactory;
-import ui.controllers.photos.list.factory.PhotoListFactoryGallery;
-import ui.elements.PhotoList;
-
-import static junit.framework.Assert.assertEquals;
 
 public class PhotoListFactoryGalleryTest extends AbstractPhotoListFactoryTest_ {
 
