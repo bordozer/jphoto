@@ -12,6 +12,8 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForAbsolutelyBest( accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.bestFilteringStrategy();
 	}
 
 	public PhotoListFactoryBest( final Genre genre, final User accessor, final Services services ) {

@@ -28,6 +28,8 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForGenreTopBest( genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.topBestFilteringStrategy();
 	}
 
 	public PhotoListFactoryTopBest( final User user, final User accessor, final Services services ) {
