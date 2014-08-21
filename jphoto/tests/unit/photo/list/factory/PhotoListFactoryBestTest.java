@@ -1,12 +1,18 @@
 package photo.list.factory;
 
 import org.junit.Before;
+import org.junit.Test;
 
 public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 
 	@Before
 	public void setup() {
 		super.setup();
+	}
+
+	@Test
+	public void empty() {
+
 	}
 
 	/*@Test

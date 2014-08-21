@@ -4,8 +4,6 @@ import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-
 public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilteringServiceTest_ {
 
 	@Test
@@ -14,7 +12,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.galleryFilteringStrategy( testData.accessor );
 
-		assertEquals( "Assertion fails", false, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 
 	@Test
@@ -26,7 +24,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.galleryFilteringStrategy( testData.accessor );
 
-		assertEquals( "Assertion fails", false, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 
 	@Test
@@ -37,7 +35,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.galleryFilteringStrategy( testData.accessor );
 
-		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 
 	@Test
@@ -49,6 +47,6 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.galleryFilteringStrategy( testData.accessor );
 
-		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 }

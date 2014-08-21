@@ -1,12 +1,14 @@
 package photo.list.filtering;
 
 import common.AbstractTestCase;
-import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.photo.PhotoService;
+import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import org.easymock.EasyMock;
 import org.junit.Before;
+
+import static junit.framework.Assert.assertEquals;
 
 public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 
@@ -63,5 +65,13 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 		EasyMock.replay( photoService );
 
 		return photoService;
+	}
+
+	protected void assertPhotoIsShown( final boolean photoHidden ) {
+		assertEquals( "Photo is shown but should be hidden", true, photoHidden );
+	}
+
+	protected void assertPhotoIsHidden( final boolean photoHidden ) {
+		assertEquals( "Photo is hidden but should be shown", false, photoHidden );
 	}
 }

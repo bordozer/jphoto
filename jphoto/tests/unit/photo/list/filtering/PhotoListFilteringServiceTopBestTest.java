@@ -14,7 +14,7 @@ public class PhotoListFilteringServiceTopBestTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.topBestFilteringStrategy();
 
-		assertEquals( "Assertion fails", false, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 
 	@Test
@@ -25,7 +25,7 @@ public class PhotoListFilteringServiceTopBestTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.topBestFilteringStrategy();
 
-		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
 
 	@Test
@@ -49,6 +49,7 @@ public class PhotoListFilteringServiceTopBestTest extends AbstractPhotoListFilte
 		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
 		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.topBestFilteringStrategy();
 
-		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
+		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
+
 }
