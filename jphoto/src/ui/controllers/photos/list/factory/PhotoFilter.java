@@ -1,9 +1,7 @@
 package ui.controllers.photos.list.factory;
 
-import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.system.Services;
-import utils.UserUtils;
 
 import java.util.Date;
 
