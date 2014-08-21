@@ -325,6 +325,14 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "members/{userId}/category/" )
 	public String showPhotosVotedByUser( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
+		/*final int userId = assertUserExistsAndGetUserId( _userId );
+		final User user = userService.load( userId );
+
+		final AbstractPhotoListFactory photoListFactoryGallery = new PhotoListFactoryGallery( user, getUser(), services );
+		model.addPhotoList( photoListFactoryGallery.getPhotoList( 2, pagingModel, getLanguage(), services.getDateUtilsService().getCurrentTime() ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosAppraisedByUserBreadcrumbs( user ) );*/
+
 		final int userId = assertUserExistsAndGetUserId( _userId );
 
 		final User user = userService.load( userId );
