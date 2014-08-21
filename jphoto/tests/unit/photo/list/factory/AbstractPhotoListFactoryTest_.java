@@ -118,7 +118,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 			criterias.setGenre( testData.genre );
 		}
 
-		EasyMock.expect( photoListCriteriasService.getForAllPhotosTopBest( testData.accessor ) ).andReturn( criterias ).anyTimes();
+		EasyMock.expect( photoListCriteriasService.getForPhotoGalleryTopBest( testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForGenreTopBest( testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserTopBest( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserAndGenreTopBest( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
@@ -133,7 +133,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.expect( photoListCriteriasService.getForGenreBestForPeriod( testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserAndGenreAbsolutelyBest( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 
-		EasyMock.expect( photoListCriteriasService.getLinkToFullListText( criterias ) ).andReturn( "Link To Full List Text" ).anyTimes();
+		EasyMock.expect( photoListCriteriasService.getLinkToFullListText() ).andReturn( "Link To Full List Text" ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListCriteriasService );

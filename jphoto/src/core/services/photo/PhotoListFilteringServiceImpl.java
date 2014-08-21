@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import core.general.photo.Photo;
 import core.general.user.User;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
@@ -71,8 +72,14 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 		return new AbstractPhotoFilteringStrategy() {
 
 			@Override
-			public boolean isPhotoHidden( final int photoId, final Date time ) {
-				return securityService.isPhotoAuthorNameMustBeHidden( photoService.load( photoId ), accessor, time ); // it respects admin and photo author's rights
+			public boolean isPhotoHidden( final int photoId, final Date time ) { // TODO: change test for this
+
+				if ( isAccessorSuperAdmin( accessor ) ) {
+					return false;
+				}
+
+				final Photo photo = photoService.load( photoId );
+				return securityService.userOwnThePhoto( user, photo ) && securityService.isPhotoWithingAnonymousPeriod( photo );
 			}
 		};
 	}

@@ -21,7 +21,7 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 		super.setup();
 	}
 
-	@Test
+	/*@Test
 	public void galleryTest() {
 
 		final TestData testData = new TestData();
@@ -131,5 +131,5 @@ public class PhotoListFactoryBestTest extends AbstractPhotoListFactoryTest_ {
 		final PhotoList photoList = factory.getPhotoList( 0, pagingModel, Language.EN, testData.currentTime );
 
 		assertEquals( "Assertion fails", "", StringUtils.join( photoList.getPhotoIds(), "," ) );
-	}
+	}*/
 }

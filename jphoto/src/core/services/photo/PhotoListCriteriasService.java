@@ -10,11 +10,11 @@ import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias );
+	String getLinkToFullListText();
 
 	PhotoListCriterias getForAllPhotos( final User user );
 
-	PhotoListCriterias getForAllPhotosTopBest( final User user );
+	PhotoListCriterias getForPhotoGalleryTopBest( final User user );
 
 	PhotoListCriterias getForAbsolutelyBest( final User user );
 
@@ -42,11 +42,11 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getForUserAndGenreAbsolutelyBest( final User user, final Genre genre, final User accessor );
 
-	PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User accessor );
+	PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User accessor );
 
-	PhotoListCriterias getForVotedPhotos( final User votedUser, final User accessor );
+	PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor );
 
-	PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor );
+	PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor );
 
 	PhotoListCriterias getForVotingCategoryTopBest( final PhotoVotingCategory votingCategory, final User accessor );
 

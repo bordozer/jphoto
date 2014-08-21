@@ -26,7 +26,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public String getLinkToFullListText( final PhotoListCriterias topBestPhotoListCriterias ) {
+	public String getLinkToFullListText() {
 		return "PhotoList: All photos";
 	}
 
@@ -48,7 +48,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForAllPhotosTopBest( final User user ) {
+	public PhotoListCriterias getForPhotoGalleryTopBest( final User user ) {
 		return new PhotoListTopBest().getPhotoListCriterias( user );
 	}
 
@@ -199,7 +199,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 	// Photos by votingCategory -->
 	@Override
-	public PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User accessor ) {
+	public PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
@@ -209,7 +209,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForVotedPhotos( final User votedUser, final User accessor ) {
+	public PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
@@ -219,7 +219,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForVotedPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor ) {
+	public PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );

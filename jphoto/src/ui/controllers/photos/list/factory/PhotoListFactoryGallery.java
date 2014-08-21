@@ -1,5 +1,6 @@
 package ui.controllers.photos.list.factory;
 
+import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
@@ -11,7 +12,16 @@ import utils.UserUtils;
 
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
-	public PhotoListFactoryGallery( final User accessor, final Services services ) {
+	public PhotoListFactoryGallery( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+		super( criterias, photoFilteringStrategy, accessor, services );
+	}
+
+	@Override
+	protected boolean showPaging() {
+		return true;
+	}
+
+	/*public PhotoListFactoryGallery( final User accessor, final Services services ) {
 		super( accessor, services );
 
 		criterias = services.getPhotoListCriteriasService().getForAllPhotos( accessor );
@@ -52,9 +62,9 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		photoListTitle = getPhotoListTitle( services );
 
 		photoFilteringStrategy = services.getPhotoListFilteringService().userCardFilteringStrategy( user, accessor );
-	}
+	}*/
 
-	@Override
+	/*@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
 
 		if ( isUserCard() && UserUtils.isUsersEqual( user, accessor ) ) {
@@ -85,5 +95,5 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		}
 
 		return new PhotoListTitleGallery( criterias, services );
-	}
+	}*/
 }

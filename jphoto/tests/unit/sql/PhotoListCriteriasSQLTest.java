@@ -13,7 +13,6 @@ import core.general.user.UserMembershipType;
 import core.services.photo.PhotoListCriteriasServiceImpl;
 import core.services.system.ServicesImpl;
 import core.services.system.ConfigurationService;
-import ui.services.UtilsService;
 import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -48,7 +47,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotosTopBest( EnvironmentContext.getCurrentUser() );
+		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( EnvironmentContext.getCurrentUser() );
 
 		final PagingModel pagingModel = getPagingModel();
 
@@ -308,7 +307,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final PhotoVotingCategory votingCategory = new PhotoVotingCategory();
 		votingCategory.setId( 888 );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForVotedPhotos( votingCategory, user, EnvironmentContext.getCurrentUser() );
+		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, EnvironmentContext.getCurrentUser() );
 
 		final PagingModel pagingModel = getPagingModel();
 

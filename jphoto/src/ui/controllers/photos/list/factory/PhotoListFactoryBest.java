@@ -1,5 +1,6 @@
 package ui.controllers.photos.list.factory;
 
+import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.services.system.Services;
@@ -7,7 +8,16 @@ import ui.controllers.photos.list.title.PhotoListTitleBest;
 
 public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 
-	public PhotoListFactoryBest( final User accessor, final Services services ) {
+	public PhotoListFactoryBest( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+		super( criterias, photoFilteringStrategy, accessor, services );
+	}
+
+	@Override
+	protected boolean showPaging() {
+		return true;
+	}
+
+	/*public PhotoListFactoryBest( final User accessor, final Services services ) {
 		super( accessor, services );
 
 		criterias = services.getPhotoListCriteriasService().getForAbsolutelyBest( accessor );
@@ -66,5 +76,5 @@ public class PhotoListFactoryBest extends AbstractPhotoListFactory {
 
 	private PhotoListTitleBest getPhotoListTitle( final Services services ) {
 		return new PhotoListTitleBest( criterias, services );
-	}
+	}*/
 }

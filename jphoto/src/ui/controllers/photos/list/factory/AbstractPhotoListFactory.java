@@ -7,6 +7,7 @@ import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
+import core.services.translator.message.TranslatableMessage;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -28,25 +29,23 @@ public abstract class AbstractPhotoListFactory {
 	protected final User accessor;
 	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
 
-	protected Services services;
+	protected final Services services;
 
-	protected User user;
-	protected Genre genre;
-
-	protected abstract boolean showPaging();
-
-	public AbstractPhotoListFactory( final User accessor, final Services services ) {
+	protected AbstractPhotoListFactory( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		this.accessor = accessor;
 		this.services = services;
+
+		this.criterias = criterias;
+		this.photoFilteringStrategy = photoFilteringStrategy;
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
 		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ), time );
 
-		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), photoListTitle.getPhotoListTitle().build( language ), showPaging() );
+		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
 
-		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText( criterias ) );
-		photoList.setPhotosCriteriasDescription( photoListTitle.getPhotoListDescription().build( language ) );
+		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText() );
+		photoList.setPhotosCriteriasDescription( getDescription().build( language ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
 		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getPhotoGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
@@ -56,6 +55,18 @@ public abstract class AbstractPhotoListFactory {
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
+	}
+
+	protected boolean showPaging() {
+		return false;
+	}
+
+	protected TranslatableMessage getTitle() {
+		return photoListTitle.getPhotoListTitle();
+	}
+
+	protected TranslatableMessage getDescription() {
+		return photoListTitle.getPhotoListDescription();
 	}
 
 	protected String getPhotoListBottomText() {
@@ -84,7 +95,7 @@ public abstract class AbstractPhotoListFactory {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
 		}
 
-		final int photosCountToShow = criterias.getPhotoQtyLimit();
+		final int photosCountToShow = criterias.getPhotoQtyLimit(); // TODO: Min( criterias.getPhotoQtyLimit(), selectedPhotosCount )
 		while( notRestrictedPhotosIds.size() < photosCountToShow ) {
 			final int diff = photosCountToShow - notRestrictedPhotosIds.size();
 
@@ -120,6 +131,6 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	protected boolean isUserCard() {
-		return user != null;
+		return false; // TODO
 	}
 }
