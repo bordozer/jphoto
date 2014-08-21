@@ -7,29 +7,29 @@ import ui.services.photo.listFactory.factory.AbstractPhotoListFactory;
 
 public interface PhotoListFactoryService {
 
-	AbstractPhotoListFactory gallery( final PagingModel pagingModel );
+	AbstractPhotoListFactory gallery( final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryTopBest( final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryTopBest( final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryBest( final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryBest( final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForGenre( final Genre genre, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForGenre( final Genre genre, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUser( final User user, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUser( final User user, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserTopBest( final User user, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUserTopBest( final User user, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserBest( final User user, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUserBest( final User user, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserAndGenre( User user, Genre genre, PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUserAndGenre( Genre genre, PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserAndGenreTopBest( User user, Genre genre, PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUserAndGenreTopBest( User user, Genre genre, PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel );
+	AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel );
+	AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel, final User accessor );
 }
