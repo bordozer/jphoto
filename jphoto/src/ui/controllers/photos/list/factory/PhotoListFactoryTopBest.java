@@ -17,6 +17,8 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForAllPhotosTopBest( accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.topBestFilteringStrategy();
 	}
 
 	public PhotoListFactoryTopBest( final Genre genre, final User accessor, final Services services ) {
@@ -35,6 +37,8 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForUserTopBest( user, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
 	public PhotoListFactoryTopBest( final User user, final Genre genre, final User accessor, final Services services ) {
@@ -45,9 +49,11 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForUserAndGenreTopBest( user, genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
-	@Override
+	/*@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
 		if ( isUserCard() ) {
@@ -55,7 +61,7 @@ public class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		}
 
 		return services.getRestrictionService().isPhotoShowingInTopBestRestrictedOn( photoId, currentTime );
-	}
+	}*/
 
 	@Override
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {

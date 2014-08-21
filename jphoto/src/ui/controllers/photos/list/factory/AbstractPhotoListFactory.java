@@ -25,23 +25,22 @@ public abstract class AbstractPhotoListFactory {
 	protected PhotoListCriterias criterias;
 	protected AbstractPhotoListTitle photoListTitle;
 
-	protected Services services;
 	protected final User accessor;
+	protected final PhotoFilter photoFilter;
+	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
+
+	protected Services services;
 
 	protected User user;
 	protected Genre genre;
 
-	protected abstract boolean isPhotoHidden( final int photoId, final Date currentTime );
-
-	protected boolean isUserCard() {
-		return user != null;
-	}
-
 	protected abstract boolean showPaging();
 
 	public AbstractPhotoListFactory( final User accessor, final Services services ) {
-		this.services = services;
 		this.accessor = accessor;
+		this.services = services;
+
+		this.photoFilter = new PhotoFilter( accessor, services );
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
@@ -61,6 +60,18 @@ public abstract class AbstractPhotoListFactory {
 		pagingModel.setTotalItems( metrics.getPhotosCount() );
 
 		return photoList;
+	}
+
+	protected String getPhotoListBottomText() {
+		return StringUtils.EMPTY;
+	}
+
+	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
+		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
+	protected String getLinkToFullList() {
+		return null;
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
@@ -97,15 +108,11 @@ public abstract class AbstractPhotoListFactory {
 		CollectionUtils.filter( notRestrictedIds, new Predicate<Integer>() {
 			@Override
 			public boolean evaluate( final Integer photoId ) {
-				return ! isPhotoHidden( photoId, time );
+				return ! photoFilteringStrategy.isPhotoHidden( photoId, time );
 			}
 		} );
 
 		return notRestrictedIds;
-	}
-
-	protected String getPhotoListBottomText() {
-		return StringUtils.EMPTY;
 	}
 
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
@@ -116,11 +123,7 @@ public abstract class AbstractPhotoListFactory {
 		return services.getSecurityService().isSuperAdminUser( accessor );
 	}
 
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
-		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
-	}
-
-	protected String getLinkToFullList() {
-		return null;
+	protected boolean isUserCard() {
+		return user != null;
 	}
 }

@@ -9,8 +9,6 @@ import ui.controllers.photos.list.title.PhotoListTitle;
 import ui.controllers.photos.list.title.PhotoListTitleGallery;
 import utils.UserUtils;
 
-import java.util.Date;
-
 public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 	public PhotoListFactoryGallery( final User accessor, final Services services ) {
@@ -18,6 +16,8 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForAllPhotos( accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.galleryFilteringStrategy();
 	}
 
 	public PhotoListFactoryGallery( final Genre genre, final User accessor, final Services services ) {
@@ -27,6 +27,8 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForGenre( genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.galleryFilteringStrategy();
 	}
 
 	public PhotoListFactoryGallery( final User user, final User accessor, final Services services ) {
@@ -36,6 +38,8 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForUser( user, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
 	public PhotoListFactoryGallery( final User user, final Genre genre, final User accessor, final Services services ) {
@@ -46,9 +50,11 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
 		criterias = services.getPhotoListCriteriasService().getForUserAndGenre( user, genre, accessor );
 		photoListTitle = getPhotoListTitle( services );
+
+		photoFilteringStrategy = photoFilter.userCardFilteringStrategy( user );
 	}
 
-	@Override
+	/*@Override
 	protected boolean isPhotoHidden( final int photoId, final Date currentTime ) {
 
 		if ( isUserCard() ) {
@@ -59,12 +65,12 @@ public class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 			return false;
 		}
 
-		/*if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
+		*//*if ( services.getSecurityService().userOwnThePhoto( accessor, photoId ) ) {
 			return false; // TODO: should user see restricted photos in the gallery?
-		}*/
+		}*//*
 
 		return services.getRestrictionService().isPhotoShowingInPhotoGalleryRestrictedOn( photoId, currentTime );
-	}
+	}*/
 
 	@Override
 	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainer() {
