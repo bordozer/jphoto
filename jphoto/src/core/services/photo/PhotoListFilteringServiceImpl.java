@@ -89,4 +89,16 @@ public class PhotoListFilteringServiceImpl implements PhotoListFilteringService 
 	private  boolean isAccessorSuperAdmin( final User user ) {
 		return securityService.isSuperAdminUser( user );
 	}
+
+	public void setRestrictionService( final RestrictionService restrictionService ) {
+		this.restrictionService = restrictionService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
+
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
 }

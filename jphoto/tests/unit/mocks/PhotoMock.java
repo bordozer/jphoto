@@ -2,8 +2,6 @@ package mocks;
 
 import core.general.photo.Photo;
 
-import java.util.Date;
-
 public class PhotoMock extends Photo {
 
 	public PhotoMock() {
