@@ -1,5 +1,6 @@
 package core.services.photo.list;
 
+import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
@@ -440,7 +441,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, page, utilsService.getPhotosOnPage( accessor ) );
+				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, page, getAccessorPhotosOnPage() );
 			}
 
 			@Override
@@ -595,7 +596,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	@Override
 	public AbstractPhotoListFactory userCardPhotosLastAppraised( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
-		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -620,6 +621,35 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom tex: User card $1: last appraised photos", services )
 					.userCardLink( user )
+					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getFavoritesPhotosSQL( user.getId(), favoriteEntryType, page, getAccessorPhotosOnPage() );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1: bookmarked photos $2", services )
+					.userCardLink( user )
+					.translatableString( favoriteEntryType.getName() )
+					;
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: bookmarked photos $2", services )
+					.userCardLink( user )
+					.translatableString( favoriteEntryType.getName() )
 					;
 			}
 		};

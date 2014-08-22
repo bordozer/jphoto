@@ -21,7 +21,7 @@ public interface PhotoSqlHelperService {
 
 	SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo );
 
-	SqlIdsSelectQuery getFavoritesPhotosSQL( final PagingModel pagingModel, final int userId, final FavoriteEntryType entryType );
+	SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final PagingModel pagingModel, final int userId );
 

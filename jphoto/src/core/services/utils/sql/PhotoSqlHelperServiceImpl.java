@@ -82,8 +82,9 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 	// Portal Page <--
 
 	@Override
-	public SqlIdsSelectQuery getFavoritesPhotosSQL( final PagingModel pagingModel, final int userId, final FavoriteEntryType entryType ) {
-		final SqlIdsSelectQuery selectQuery = getAllPhotosForPageIdsSQL( pagingModel );
+	public SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage ) {
+		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
 
 		final SqlTable tPhotos = selectQuery.getMainTable();
 		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );

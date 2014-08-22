@@ -1,5 +1,6 @@
 package core.services.translator.message;
 
+import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;

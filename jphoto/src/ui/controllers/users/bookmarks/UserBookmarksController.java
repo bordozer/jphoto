@@ -5,10 +5,12 @@ import core.general.base.PagingModel;
 import core.general.user.User;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoService;
+import core.services.photo.list.PhotoListFactoryService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.UserService;
+import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.sql.PhotoSqlHelperService;
@@ -68,6 +70,12 @@ public class UserBookmarksController {
 	private TranslatorService translatorService;
 
 	@Autowired
+	private PhotoListFactoryService photoListFactoryService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
 	private Services services;
 
 	@ModelAttribute( "photoListModel" )
@@ -92,18 +100,22 @@ public class UserBookmarksController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/favorites/photos/" )
 	public String showFavoritePhotos( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
-		securityService.assertUserExists( _userId );
+		return getView( _userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
+	}
 
-		final int userId = NumberUtils.convertToInt( _userId );
+	@RequestMapping( method = RequestMethod.GET, value = "{userId}/bookmark/" )
+	public String showBookmarkedPhotos( @PathVariable( "userId" ) String _userId, @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return getView( _userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS );
+	}
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
-
-		return VIEW;
+	@RequestMapping( method = RequestMethod.GET, value = "{userId}/notification/comments/" )
+	public String showPhotosWithNewCommentNotification( @PathVariable( "userId" ) String _userId, @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		return getView( _userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
 	}
 
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/favorites/members/photos/" )
 	public String showPhotosOfFavoriteMembers( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
-		securityService.assertUserExists( _userId );
+		/*securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
@@ -111,35 +123,28 @@ public class UserBookmarksController {
 		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
 
 		final User user = userService.load( userId );
-		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
+		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );*/
 
 		return VIEW;
 	}
 
-	@RequestMapping( method = RequestMethod.GET, value = "{userId}/bookmark/" )
-	public String showBookmarkedPhotos( @PathVariable( "userId" ) String _userId, @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+	private String getView( final String _userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType favoriteEntryType ) {
 		securityService.assertUserExists( _userId );
 
-		final int userId = NumberUtils.convertToInt( _userId );
+		final User user = userService.load( NumberUtils.convertToInt( _userId ) );
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS );
+		final int page = pagingModel.getCurrentPage();
+		final PhotoList photoList = photoListFactoryService.userBookmarkedPhotos( user, favoriteEntryType, page, EnvironmentContext.getCurrentUser() ).getPhotoList( 0, page, EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+		pagingModel.setTotalItems( photoList.getPhotosCount() );
 
-		return VIEW;
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "{userId}/notification/comments/" )
-	public String showPhotosWithNewCommentNotification( @PathVariable( "userId" ) String _userId, @ModelAttribute( "photoListModel" ) PhotoListModel model, @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
-		securityService.assertUserExists( _userId );
-
-		final int userId = NumberUtils.convertToInt( _userId );
-
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
+		model.addPhotoList( photoList );
+		model.setPageTitleData( breadcrumbsUserService.getUserFavoriteEntryListBreadcrumbs( user, favoriteEntryType ) );
 
 		return VIEW;
 	}
 
-	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType favoriteEntryType ) {
-		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, favoriteEntryType );
+	/*private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType favoriteEntryType ) {
+//		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, favoriteEntryType );
 		initFavorites( selectQuery,  userId, model, pagingModel, favoriteEntryType );
 	}
 
@@ -158,7 +163,7 @@ public class UserBookmarksController {
 		model.addPhotoList( photoList );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserFavoriteEntryListBreadcrumbs( user, entryType ) );
-	}
+	}*/
 
 	private List<Integer> selectDataFromDB( final PagingModel pagingModel, final SqlIdsSelectQuery selectIdsQuery ) {
 		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );

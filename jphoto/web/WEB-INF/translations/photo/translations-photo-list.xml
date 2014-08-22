@@ -303,13 +303,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list title: User $1: bookmarked photos $2</nerd>
+		<ru><![CDATA[$1: $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: User $1: bookmarked photos $2</nerd>
+		<ru><![CDATA[$1: $2]]></ru>
 	</translation>
 
 	<translation>

@@ -1,5 +1,6 @@
 package core.services.photo.list;
 
+import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.user.User;
@@ -48,4 +49,6 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor );
 
 	AbstractPhotoListFactory userCardPhotosLastAppraised( final User user, final User accessor );
+
+	AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final User accessor );
 }
