@@ -18,15 +18,6 @@ public class UserSqlUtilsServiceImpl implements UserSqlUtilsService {
 	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Override
-	public SqlSelectQuery getAllUsersForPageSQL( final PagingModel pagingModel ) {
-		final SqlSelectQuery selectQuery = baseSqlUtilsService.getUsersSQL();
-
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
-
-		return selectQuery;
-	}
-
-	@Override
 	public SqlIdsSelectQuery getUserIdsForPageSQL( final PagingModel pagingModel ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getUsersIdsSQL();
 
