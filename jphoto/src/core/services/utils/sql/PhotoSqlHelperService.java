@@ -2,6 +2,9 @@ package core.services.utils.sql;
 
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
+import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
+import core.general.user.userTeam.UserTeamMember;
 import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Date;
@@ -22,7 +25,7 @@ public interface PhotoSqlHelperService {
 
 	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final PagingModel pagingModel, final int userId );
 
-	SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final int page, final int itemsOnPage );
+	SqlIdsSelectQuery getUserTeamMemberPhotosQuery( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage );
 
-	SqlIdsSelectQuery getUserPhotoAlbumLastPhotosQuery( final int userId, final int photoAlbumId, final PagingModel pagingModel );
+	SqlIdsSelectQuery getUserPhotoAlbumPhotosQuery( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage );
 }

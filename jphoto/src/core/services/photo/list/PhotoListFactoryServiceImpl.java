@@ -6,6 +6,7 @@ import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.list.factory.*;
@@ -403,7 +404,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserTeamMemberLastPhotosQuery( user.getId(), userTeamMember.getId(), 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
 			}
 
 			@Override
@@ -439,7 +440,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserTeamMemberLastPhotosQuery( user.getId(), userTeamMember.getId(), page, utilsService.getPhotosOnPage( accessor ) );
+				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, page, utilsService.getPhotosOnPage( accessor ) );
 			}
 
 			@Override
@@ -457,6 +458,69 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.userCardLink( user )
 					.userTeamMemberCardLink( userTeamMember )
 					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory userAlbumPhotosLast( final User user, final UserPhotoAlbum userPhotoAlbum, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1: the latest photos from album $2", services )
+					.userCardLink( user )
+					.userAlbumLink( userPhotoAlbum )
+					;
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: the latest photos from album $2 photos", services )
+					.userCardLink( user )
+					.userAlbumLink( userPhotoAlbum )
+					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, page, utilsService.getPhotosOnPage( accessor ) );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1: all photos from album $2", services )
+					.userCardLink( user )
+					.userAlbumLink( userPhotoAlbum )
+					;
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: all photos from album $2", services )
+					.userCardLink( user )
+					.userAlbumLink( userPhotoAlbum )
 					;
 			}
 		};

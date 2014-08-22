@@ -41,7 +41,6 @@ import ui.elements.PhotoList;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.menu.entry.items.EntryMenu;
 import ui.services.security.UsersSecurityService;
-import utils.StringUtilities;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -283,22 +282,8 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	@Override
-	public PhotoList getUserPhotoAlbumLastPhotos( final int userId, final UserPhotoAlbum userPhotoAlbum, final Map<UserPhotoAlbum, Integer> userPhotoAlbumsQtyMap ) {
-		final int photosQty = userPhotoAlbumsQtyMap.get( userPhotoAlbum );
-
-		final String photoListTitle = translatorService.translate( "User team: Last photos from album '$1' - $2 photos"
-			, EnvironmentContext.getLanguage()
-			, StringUtilities.escapeHtml( userPhotoAlbum.getName() )
-			, String.valueOf( photosQty )
-		);
-
-		final String userTeamMemberCardLink = urlUtilsService.getUserPhotoAlbumPhotosLink( userId, userPhotoAlbum.getId() );
-
-		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( userId, userPhotoAlbum.getId(), getPagingModel() );
-
-		final PhotoList customPhotoList = getCustomPhotoList( selectIdsQuery, photoListTitle, userTeamMemberCardLink );
-		customPhotoList.setPhotoListId( userPhotoAlbum.getId() );
-		return customPhotoList;
+	public AbstractPhotoListFactory getUserPhotoAlbumLastPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final User accessor ) {
+		return photoListFactoryService.userAlbumPhotosLast( user, userPhotoAlbum, accessor );
 	}
 
 	private UserCardGenreInfo getUserCardGenreInfo( final User user, final Genre genre, final User accessor ) {
@@ -321,16 +306,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return genreInfo;
 	}
 
-	private PhotoList getCustomPhotoList( final SqlIdsSelectQuery selectIdsQuery, final String photoListTitle, final String userTeamMemberCardLink ) {
-		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
-
-		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), photoListTitle, false );
-		photoList.setLinkToFullList( userTeamMemberCardLink );
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
-
-		return photoList;
-	}
-
 	private PhotoList getUserPhotosByGenrePhotoList( final User user, final Genre genre ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
@@ -347,7 +322,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return getPhotoList( 0, ids, link, title );
 	}
 
-	private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
+	/*private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, currentUser );
@@ -365,7 +340,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
 
 		return getPhotoList( 2, sqlSelectIdsResult.getIds(), linkBest, listTitle );
-	}
+	}*/
 
 	@Override
 	public PhotoList getBestUserPhotoList( final User user ) {

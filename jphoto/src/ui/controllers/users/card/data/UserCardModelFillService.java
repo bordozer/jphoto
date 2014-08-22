@@ -44,7 +44,7 @@ public interface UserCardModelFillService {
 
 	AbstractPhotoListFactory getUserTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor );
 
-	PhotoList getUserPhotoAlbumLastPhotos( final int userId, final UserPhotoAlbum userPhotoAlbum, final Map<UserPhotoAlbum, Integer> userPhotoAlbumsQtyMap );
+	AbstractPhotoListFactory getUserPhotoAlbumLastPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final User accessor );
 
 	EntryMenu getUserMenu( final User user, final User userWhoIsCallingMenu );
 

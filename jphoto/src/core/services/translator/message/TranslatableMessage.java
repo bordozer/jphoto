@@ -4,6 +4,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -79,6 +80,11 @@ public class TranslatableMessage {
 
 	public TranslatableMessage userTeamMemberCardLink( final UserTeamMember userTeamMember ) {
 		messageParameters.add( new UserTeamMemberCardLinkParameter( userTeamMember, services ) );
+		return this;
+	}
+
+	public TranslatableMessage userAlbumLink( final UserPhotoAlbum userPhotoAlbum ) {
+		messageParameters.add( new UserAlbumLinkParameter( userPhotoAlbum, services ) );
 		return this;
 	}
 

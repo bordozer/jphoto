@@ -3,29 +3,24 @@ package ui.controllers.users.photoAlbums.photos;
 import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.services.entry.GroupOperationService;
-import core.services.photo.PhotoService;
+import core.services.photo.list.PhotoListFactoryService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
-import core.services.utils.sql.PhotoSqlHelperService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sql.SqlSelectIdsResult;
-import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
 import ui.elements.PhotoList;
-import ui.services.PhotoUIService;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
 import utils.PagingUtils;
-import utils.StringUtilities;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -40,22 +35,10 @@ public class UserPhotoAlbumPhotosController {
 	private UserPhotoAlbumService userPhotoAlbumService;
 
 	@Autowired
-	private PhotoService photoService;
-
-	@Autowired
-	private PhotoUIService photoUIService;
-
-	@Autowired
 	private UtilsService utilsService;
 
 	@Autowired
 	private BreadcrumbsUserService breadcrumbsUserService;
-
-	@Autowired
-	private PhotoSqlHelperService photoSqlHelperService;
-
-	@Autowired
-	private GroupOperationService groupOperationService;
 
 	@Autowired
 	private SecurityService securityService;
@@ -65,6 +48,12 @@ public class UserPhotoAlbumPhotosController {
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private PhotoListFactoryService photoListFactoryService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@ModelAttribute( MODEL_NAME )
 	public UserPhotoAlbumPhotosModel prepareModel() {
@@ -93,18 +82,12 @@ public class UserPhotoAlbumPhotosController {
 
 		model.setPhotoAlbum( photoAlbum );
 
-		final String title = String.format( "Photo album %s", StringUtilities.escapeHtml( photoAlbum.getName() ) );
-
-		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserPhotoAlbumLastPhotosQuery( photoAlbum.getUser().getId(), photoAlbum.getId(), pagingModel );
-		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
-
-		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );
-		photoList.setBottomText( photoAlbum.getDescription() );
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );
+		final PhotoList photoList = photoListFactoryService.userAlbumPhotos( user, photoAlbum, pagingModel.getCurrentPage(), EnvironmentContext.getCurrentUser() )
+														   .getPhotoList( photoAlbum.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
 
 		model.setPhotoList( photoList );
 
-		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
+		pagingModel.setTotalItems( photoList.getPhotosCount() );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserPhotoAlbumPhotosBreadcrumbs( photoAlbum ) );
 
