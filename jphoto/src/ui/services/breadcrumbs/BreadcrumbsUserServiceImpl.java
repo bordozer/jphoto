@@ -233,7 +233,7 @@ public class BreadcrumbsUserServiceImpl implements BreadcrumbsUserService {
 		final User user = photoAlbum.getUser();
 
 		final String breadcrumbs = userAlbumListLink( user )
-			.translatableString( photoAlbum.getNameEscaped() )
+			.string( photoAlbum.getNameEscaped() )
 			.build();
 
 		return new PageTitleData( userCardTitle( user ), userCardHeader( user ), breadcrumbs );
