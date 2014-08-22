@@ -409,7 +409,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: User $1: last photos of $2 ( $3 )", services )
+				return new TranslatableMessage( "Photo list title: User $1: last photos with team member $2 ( $3 )", services )
 					.userCardLink( user )
 					.userTeamMemberCardLink( userTeamMember )
 					.translatableString( userTeamMember.getTeamMemberType().getName() )
