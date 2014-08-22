@@ -175,7 +175,6 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
 		final PhotoService photoService = services.getPhotoService();
 		final UserService userService = services.getUserService();
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
 		final User photoAuthor = userService.load( photoAuthorId );
 

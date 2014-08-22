@@ -352,7 +352,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getUserCardLastVotedPhotos( final User user, final User accessor ) {
+	public PhotoListCriterias getUserCardLastAppraisedPhotos( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
 		criterias.setVotedUser( user );

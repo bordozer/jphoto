@@ -322,61 +322,19 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		return getPhotoList( 0, ids, link, title );
 	}
 
-	/*private PhotoList getUserBestPhotosByGenrePhotoList( final User user, final Genre genre ) {
-		final User currentUser = EnvironmentContext.getCurrentUser();
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, currentUser );
-		final SqlIdsSelectQuery selectIdsQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel() );
-
-		final SqlColumnSelectable tPhotoColGenreId = new SqlColumnSelect( new SqlTable( PhotoDaoImpl.TABLE_PHOTOS ), PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
-		final SqlLogicallyJoinable genreCondition = new SqlCondition( tPhotoColGenreId, SqlCriteriaOperator.EQUALS, genre.getId(), dateUtilsService );
-		selectIdsQuery.addWhereAnd( genreCondition );
-
-		final String linkBest = urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
-
-		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
-		final String listTitle = translatorService.translate( "User card: $1: the best photos. Total $2", EnvironmentContext.getLanguage(), entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
-
-		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
-
-		return getPhotoList( 2, sqlSelectIdsResult.getIds(), linkBest, listTitle );
-	}*/
-
 	@Override
-	public AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor ) {
+	public AbstractPhotoListFactory getUserPhotoListBest( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosBest( user, accessor );
 	}
 
 	@Override
-	public AbstractPhotoListFactory getLastUserPhotoList( final User user, final User accessor ) {
+	public AbstractPhotoListFactory getUserPhotoListLast( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosLast( user, accessor );
-
-		/*final User currentUser = EnvironmentContext.getCurrentUser();
-		final List<Integer> photos = photoService.getLastUserPhotosIds( user, getPhotosInLine(), currentUser );
-
-		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "User card: Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		//		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
-
-		return getPhotoList( 4, photos, linkBest, listTitle );*/
 	}
 
 	@Override
-	public PhotoList getLastVotedPhotoList( final User user ) {
-		final List<Integer> photos = photoService.getLastVotedPhotosIds( user, getPhotosInLine(), EnvironmentContext.getCurrentUser() );
-
-		final String linkBest = urlUtilsService.getPhotosVotedByUserLink( user.getId() );
-		final String listTitle = translatorService.translate( "User card: The photos $1 has appraised recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		return getPhotoList( 5, photos, linkBest, listTitle );
-	}
-
-	@Override
-	public PhotoList getLastPhotosOfUserVisitors( final User user ) {
-		final List<Integer> photos = photoService.getLastPhotosOfUserVisitors( user, getPhotosInLine() );
-
-		final String linkBest = StringUtils.EMPTY;
-		final String listTitle = translatorService.translate( "User card: Last photos of visitors who viewed $1's photos recently", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-		return getPhotoList( 6, photos, linkBest, listTitle );
+	public AbstractPhotoListFactory getPhotoListLastAppraised( final User user, final User accessor ) {
+		return photoListFactoryService.userCardPhotosLastAppraised( user, accessor );
 	}
 
 	private PhotoList getPhotoList( final int photoListId, final List<Integer> photosIds, final String linkToFullPhotoList, final String listTitle ) {

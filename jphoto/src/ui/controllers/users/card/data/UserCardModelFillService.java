@@ -10,7 +10,6 @@ import core.services.utils.DateUtilsService;
 import ui.activity.AbstractActivityStreamEntry;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
-import ui.elements.PhotoList;
 import ui.services.menu.entry.items.EntryMenu;
 
 import java.util.List;
@@ -22,13 +21,11 @@ public interface UserCardModelFillService {
 
 	void setUserStatistic( final UserCardModel model );
 
-	AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor );
+	AbstractPhotoListFactory getUserPhotoListBest( final User user, final User accessor );
 
-	AbstractPhotoListFactory getLastUserPhotoList( final User user, final User accessor );
+	AbstractPhotoListFactory getUserPhotoListLast( final User user, final User accessor );
 
-	PhotoList getLastVotedPhotoList( final User user );
-
-	PhotoList getLastPhotosOfUserVisitors( final User user );
+	AbstractPhotoListFactory getPhotoListLastAppraised( final User user, final User accessor );
 
 	Map<Genre,UserCardGenreInfo> getUserCardGenreInfoMap( final User user, final User accessor );
 

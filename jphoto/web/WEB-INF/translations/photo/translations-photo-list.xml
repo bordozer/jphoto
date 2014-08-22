@@ -258,13 +258,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list title: User card $1: last appraised photos</nerd>
+		<ru><![CDATA[$1: последние оцененные работы]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom tex: User card $1: last appraised photos</nerd>
+		<ru><![CDATA[Показаны работы, которые $1 оценил(а) недавно]]></ru>
 	</translation>
 
 	<translation>

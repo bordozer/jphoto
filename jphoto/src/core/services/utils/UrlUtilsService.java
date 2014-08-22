@@ -118,7 +118,7 @@ public interface UrlUtilsService {
 
 	String getPhotosByMembershipBest( UserMembershipType membershipType, String url );
 
-	String getPhotosVotedByUserLink( final int userId );
+	String getPhotosAppraisedByUserLink( final int userId );
 
 	String getPhotosByUserByVotingCategoryLink( final int userId, final int votingCategoryId );
 

@@ -72,5 +72,5 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getUserCardUserPhotosLast( final User user, final User accessor );
 
-	PhotoListCriterias getUserCardLastVotedPhotos( final User user, final User accessor );
+	PhotoListCriterias getUserCardLastAppraisedPhotos( final User user, final User accessor );
 }

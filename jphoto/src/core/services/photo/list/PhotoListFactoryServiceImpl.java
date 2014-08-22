@@ -580,7 +580,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+				return services.getUrlUtilsService().getPhotosByUserLink( user.getId() );
 			}
 
 			@Override
@@ -593,8 +593,36 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory userCardPhotosLastAppraisal( final User user, final User accessor ) {
-		return null;
+	public AbstractPhotoListFactory userCardPhotosLastAppraised( final User user, final User accessor ) {
+		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, getTopPhotoListPhotosCount() );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User card $1: last appraised photos", services )
+					.userCardLink( user )
+					;
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosAppraisedByUserLink( user.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom tex: User card $1: last appraised photos", services )
+					.userCardLink( user )
+					;
+			}
+		};
 	}
 
 	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
@@ -609,3 +637,48 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		return configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
 	}
 }
+
+	/*@Override
+	public AbstractPhotoListFactory userCardPhotosOfLastVisitors( final User user, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return getQuery( user );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User card $1: last appraised photos", services )
+					.userCardLink( user )
+					;
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom tex: User card $1: last appraised photos", services )
+					.userCardLink( user )
+					;
+			}
+
+			private SqlIdsSelectQuery getQuery( final User user ) {
+				final List<Integer> userIds = photoPreviewService.getLastUsersWhoViewedUserPhotos( user.getId(), photosQty );
+				final List<Integer> photosIds = newArrayList();
+				for ( final int userId : userIds ) {
+					final int lastUserPhotoId = getLastUserPhotoId( userId );
+					if ( lastUserPhotoId > 0 ) {
+						photosIds.add( lastUserPhotoId );
+					}
+				}
+
+				return photosIds;
+			}
+		};
+	}*/

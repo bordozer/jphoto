@@ -166,7 +166,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 
 	@Override
 	public String getPhotosVotedByUserLinkUser( final User user, final Language language ) {
-		final String link = String.format( "%s", urlUtilsService.getPhotosVotedByUserLink( user.getId() ) );
+		final String link = String.format( "%s", urlUtilsService.getPhotosAppraisedByUserLink( user.getId() ) );
 		return String.format( "<a href=\"%s\" title=\"%s\">%s</a>"
 			, link
 			, translatorService.translate( "Breadcrumbs: The photos appraised by user $1", language, user.getNameEscaped() )

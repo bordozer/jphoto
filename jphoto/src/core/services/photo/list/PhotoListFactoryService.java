@@ -47,5 +47,5 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor );
 
-	AbstractPhotoListFactory userCardPhotosLastAppraisal( final User user, final User accessor );
+	AbstractPhotoListFactory userCardPhotosLastAppraised( final User user, final User accessor );
 }

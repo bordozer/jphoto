@@ -306,7 +306,7 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
-	public String getPhotosVotedByUserLink( final int userId ) {
+	public String getPhotosAppraisedByUserLink( final int userId ) {
 		return String.format( "%s/%s/%s/%s/category/", getBaseURL(), PHOTOS_URL, USERS_URL, userId );
 	}
 

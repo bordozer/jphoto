@@ -65,13 +65,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<UserPhotosByGenre> getUserPhotosByGenres( int userId );
 
-	List<Integer> getBestUserPhotosIds( final User user, final int photosQty, final User accessor );
-
-	List<Integer> getLastUserPhotosIds( final User user, final int photosQty, final User accessor );
-
 	List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor );
-
-	List<Integer> getLastPhotosOfUserVisitors( final User user, final int photosQty );
 
 	boolean movePhotoToGenreWithNotification( final int photoId, final int genreId, final User userWhoIsMoving );
 }

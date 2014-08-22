@@ -483,7 +483,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		final User user = new User();
 		user.setId( 999 );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastVotedPhotos( user, EnvironmentContext.getCurrentUser() );
+		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, EnvironmentContext.getCurrentUser() );
 
 		final PagingModel pagingModel = getPagingModel();
 
