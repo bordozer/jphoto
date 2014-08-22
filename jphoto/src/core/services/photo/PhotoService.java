@@ -42,8 +42,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	Set<Genre> getUserPhotoGenres( final int userId );
 
-	int getLastUserPhotoId( final int userId );
-
 	int getLastGenrePhotoId( final int genreId );
 
 	Date getPhotoAnonymousPeriodExpirationTime( final Photo photo );
@@ -61,4 +59,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	List<Photo> getUserPhotos( final int userId );
 
 	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
+
+	int getLastUserPhotoId( final int userId );
 }

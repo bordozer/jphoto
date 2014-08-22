@@ -317,11 +317,6 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public int getLastUserPhotoId( final int userId ) {
-		return photoDao.getLastUserPhotoId( userId );
-	}
-
-	@Override
 	public int getLastGenrePhotoId( final int genreId ) {
 		return photoDao.getLastGenrePhotoId( genreId );
 	}
@@ -432,6 +427,11 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectIdsQuery ) {
 		final SqlSelectIdsResult sqlSelectIdsResult = load( selectIdsQuery );
 		return load( sqlSelectIdsResult.getIds() );
+	}
+
+	@Override
+	public int getLastUserPhotoId( final int userId ) {
+		return photoDao.getLastUserPhotoId( userId );
 	}
 
 	private void createPhotoDBEntry( final Photo photo, final File photoImageFile, final File preview, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
