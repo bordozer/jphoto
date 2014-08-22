@@ -14,7 +14,6 @@ import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,9 +124,6 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Autowired
-	private PhotoCriteriasSqlService photoCriteriasSqlService;
 
 	@Autowired
 	private PhotoSqlFilterService photoSqlFilterService;
@@ -345,11 +341,6 @@ public class ServicesImpl implements Services {
 	}
 
 	@Override
-	public PhotoCriteriasSqlService getPhotoCriteriasSqlService() {
-		return photoCriteriasSqlService;
-	}
-
-	@Override
 	public PhotoSqlFilterService getPhotoSqlFilterService() {
 		return photoSqlFilterService;
 	}
@@ -558,10 +549,6 @@ public class ServicesImpl implements Services {
 
 	public void setBaseSqlUtilsService( final BaseSqlUtilsService baseSqlUtilsService ) {
 		this.baseSqlUtilsService = baseSqlUtilsService;
-	}
-
-	public void setPhotoCriteriasSqlService( final PhotoCriteriasSqlService photoCriteriasSqlService ) {
-		this.photoCriteriasSqlService = photoCriteriasSqlService;
 	}
 
 	public void setPhotoSqlFilterService( final PhotoSqlFilterService photoSqlFilterService ) {

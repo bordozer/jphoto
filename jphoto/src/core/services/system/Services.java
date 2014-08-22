@@ -14,7 +14,6 @@ import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import ui.services.UtilsService;
@@ -90,8 +89,6 @@ public interface Services {
 	PhotoPreviewService getPhotoPreviewService();
 
 	BaseSqlUtilsService getBaseSqlUtilsService();
-
-	PhotoCriteriasSqlService getPhotoCriteriasSqlService();
 
 	PhotoSqlFilterService getPhotoSqlFilterService();
 

@@ -36,7 +36,6 @@
 	<bean id="photoSqlHelperService" class="core.services.utils.sql.PhotoSqlHelperServiceImpl"/>
 
 	<bean id="baseSqlUtilsService" class="core.services.utils.sql.BaseSqlUtilsServiceImpl" />
-	<bean id="photoCriteriasSqlService" class="core.services.utils.sql.PhotoCriteriasSqlServiceImpl" />
 	<bean id="photoSqlFilterService" class="core.services.utils.sql.PhotoSqlFilterServiceImpl" />
 	<bean id="dataRequirementService" class="ui.services.validation.DataRequirementServiceImpl" />
 

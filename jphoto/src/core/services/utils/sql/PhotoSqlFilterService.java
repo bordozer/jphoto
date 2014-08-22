@@ -12,6 +12,8 @@ public interface PhotoSqlFilterService {
 
 	void addJoinWithPhotoVotingTable( BaseSqlSelectQuery selectQuery );
 
+	void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery );
+
 	void addFilterByMinVotedMark( BaseSqlSelectQuery selectQuery, int minMarks );
 
 	void addFilterForVotingTimeForLastNDays( BaseSqlSelectQuery selectQuery, Date timeFrom, Date timeTo );

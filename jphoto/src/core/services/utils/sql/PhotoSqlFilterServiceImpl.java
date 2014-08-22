@@ -40,6 +40,22 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 	}
 
 	@Override
+	public void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery ) {
+		final SqlTable tPhotos = selectQuery.getMainTable();
+		final SqlColumnSelect tPhotosColUploadTime = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+
+		if ( timeFrom != null && timeFrom.getTime() > 0 ) {
+			final SqlCondition moreThenDateFrom = new SqlCondition( tPhotosColUploadTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, timeFrom, dateUtilsService );
+			selectQuery.addWhereAnd( moreThenDateFrom );
+		}
+
+		if ( timeFrom != null && timeTo.getTime() > 0 ) {
+			final SqlCondition lessThenDateTo = new SqlCondition( tPhotosColUploadTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, timeTo, dateUtilsService );
+			selectQuery.addWhereAnd( lessThenDateTo );
+		}
+	}
+
+	@Override
 	public void addFilterByMinVotedMark( final BaseSqlSelectQuery selectQuery, final int minMarks ) {
 		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );

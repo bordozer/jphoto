@@ -28,28 +28,13 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 	}
 
 	@Override
-	public SqlSelectQuery getSqlSelectQuery( final String table ) {
-		return new SqlSelectQuery( new SqlTable( table ) );
-	}
-
-	@Override
 	public SqlIdsSelectQuery getPhotosIdsSQL() {
 		return new SqlIdsSelectQuery( new SqlTable( PhotoDaoImpl.TABLE_PHOTOS ) );
 	}
 
 	@Override
-	public SqlSelectQuery getUsersSQL() {
-		return getSqlSelectQuery( UserDaoImpl.TABLE_USERS );
-	}
-
-	@Override
 	public SqlIdsSelectQuery getUsersIdsSQL() {
 		return new SqlIdsSelectQuery( new SqlTable( UserDaoImpl.TABLE_USERS ) );
-	}
-
-	@Override
-	public SqlSelectQuery getGenresSQL() {
-		return getSqlSelectQuery( GenreDaoImpl.TABLE_GENRES );
 	}
 
 	@Override
@@ -62,28 +47,7 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 		return getCondition( tableName, columnName, value, SqlCriteriaOperator.EQUALS );
 	}
 
-	@Override
-	public SqlLogicallyJoinable grateOrEqualsCondition( final String tableName, final String columnName, final long value ) {
-		return getCondition( tableName, columnName, value, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO );
-	}
-
-	@Override
-	public SqlLogicallyJoinable grateThenCondition( final String tableName, final String columnName, final long value ) {
-		return getCondition( tableName, columnName, value, SqlCriteriaOperator.GRATER_THEN );
-	}
-
-	@Override
-	public SqlLogicallyJoinable lessOrEqualsCondition( final String tableName, final String columnName, final long value ) {
-		return getCondition( tableName, columnName, value, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO );
-	}
-
-	@Override
-	public SqlLogicallyJoinable lessCondition( final String tableName, final String columnName, final long value ) {
-		return getCondition( tableName, columnName, value, SqlCriteriaOperator.LESS_THEN );
-	}
-
-	@Override
-	public SqlCondition getCondition( final String tableName, final String columnName, final long value, final SqlCriteriaOperator operator ) {
+	private SqlCondition getCondition( final String tableName, final String columnName, final long value, final SqlCriteriaOperator operator ) {
 		final SqlTable table = new SqlTable( tableName );
 		final SqlColumnSelectable column = new SqlColumnSelect( table, columnName );
 

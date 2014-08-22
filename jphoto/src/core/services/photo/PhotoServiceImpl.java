@@ -17,7 +17,6 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.log.LogHelper;
 import core.services.conversion.PreviewGenerationService;
 import core.services.dao.PhotoDao;
-import core.services.dao.PhotoDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.entry.PrivateMessageService;
@@ -34,8 +33,8 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
@@ -99,7 +98,7 @@ public class PhotoServiceImpl implements PhotoService {
 	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Autowired
-	private PhotoCriteriasSqlService photoCriteriasSqlService;
+	private PhotoSqlHelperService photoSqlHelperService;
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
@@ -309,7 +308,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
 		photoSqlFilterService.addFilterByGenre( genreId, selectQuery );
-		photoCriteriasSqlService.addUploadTimeCriteria( timeFrom, timeTo, selectQuery );
+		photoSqlFilterService.addUploadTimeCriteria( timeFrom, timeTo, selectQuery );
 
 		final SqlSelectIdsResult idsResult = load( selectQuery );
 
@@ -385,7 +384,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor ) {
 		// TODO: move this to somewhere
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
-		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
+		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
 
 		return load( selectQuery ).getIds();
 	}

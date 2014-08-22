@@ -2,6 +2,7 @@ package core.services.utils.sql;
 
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
+import core.general.data.PhotoListCriterias;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -11,6 +12,8 @@ import sql.builder.SqlIdsSelectQuery;
 import java.util.Date;
 
 public interface PhotoSqlHelperService {
+
+	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL();
 

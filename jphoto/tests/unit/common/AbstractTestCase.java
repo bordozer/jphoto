@@ -8,8 +8,8 @@ import core.services.system.ServicesImpl;
 import core.services.translator.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
-import core.services.utils.sql.PhotoCriteriasSqlServiceImpl;
-import core.services.utils.sql.PhotoSqlFilterServiceImpl;
+import core.services.utils.sql.PhotoSqlFilterServiceImpl	;
+import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import mocks.SystemVarsServiceMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -24,12 +24,12 @@ public class AbstractTestCase {
 	protected final DateUtilsServiceImpl dateUtilsService;
 	protected final TranslatorServiceImpl translatorService;
 	protected final SystemVarsService systemVarsServiceMock;
-	protected final PhotoCriteriasSqlServiceImpl photoCriteriasSqlService;
 	protected final UrlUtilsServiceImpl urlUtilsService;
 	protected final UserPhotoFilePathUtilsServiceImpl userPhotoFilePathUtilsService;
 	protected final EntityLinkUtilsServiceImpl entityLinkUtilsService;
 	protected final PhotoSqlFilterServiceImpl photoSqlFilterService;
 	protected final BaseSqlUtilsServiceImpl baseSqlUtilsService;
+	protected final PhotoSqlHelperServiceImpl photoSqlHelperService;
 
 	public AbstractTestCase() {
 
@@ -54,12 +54,12 @@ public class AbstractTestCase {
 		photoSqlFilterService.setBaseSqlUtilsService( baseSqlUtilsService );
 		// photoSqlFilterService <--
 
-		// photoCriteriasSqlService -->
-		photoCriteriasSqlService = new PhotoCriteriasSqlServiceImpl();
-		photoCriteriasSqlService.setDateUtilsService( dateUtilsService );
-		photoCriteriasSqlService.setBaseSqlUtilsService( baseSqlUtilsService );
-		photoCriteriasSqlService.setPhotoSqlFilterService( photoSqlFilterService );
-		// photoCriteriasSqlService <--
+		// photoSqlHelperService -->
+		photoSqlHelperService = new PhotoSqlHelperServiceImpl();
+		photoSqlHelperService.setDateUtilsService( dateUtilsService );
+		photoSqlHelperService.setBaseSqlUtilsService( baseSqlUtilsService );
+		photoSqlHelperService.setPhotoSqlFilterService( photoSqlFilterService );
+		// photoSqlHelperService <--
 
 		// urlUtilsService -->
 		urlUtilsService = new UrlUtilsServiceImpl();
