@@ -47,13 +47,6 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 		return getCondition( tableName, columnName, value, SqlCriteriaOperator.EQUALS );
 	}
 
-	private SqlCondition getCondition( final String tableName, final String columnName, final long value, final SqlCriteriaOperator operator ) {
-		final SqlTable table = new SqlTable( tableName );
-		final SqlColumnSelectable column = new SqlColumnSelect( table, columnName );
-
-		return new SqlCondition( column, operator, value, dateUtilsService );
-	}
-
 	@Override
 	public void addDescSortByUploadTimeDesc( final BaseSqlSelectQuery selectQuery ) {
 		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
@@ -81,5 +74,12 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 		final SqlTable tUser = new SqlTable( UserDaoImpl.TABLE_USERS );
 		final SqlColumnSelectable sortColumn = new SqlColumnSelect( tUser, UserDaoImpl.TABLE_COLUMN_NAME );
 		selectQuery.addSortingAsc( sortColumn );
+	}
+
+	private SqlCondition getCondition( final String tableName, final String columnName, final long value, final SqlCriteriaOperator operator ) {
+		final SqlTable table = new SqlTable( tableName );
+		final SqlColumnSelectable column = new SqlColumnSelect( table, columnName );
+
+		return new SqlCondition( column, operator, value, dateUtilsService );
 	}
 }
