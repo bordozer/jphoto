@@ -93,7 +93,7 @@ public class UserTeamMemberCardController {
 
 		final String title = String.format( "Photos of %s", userTeamMember.getTeamMemberNameWithType() );
 
-		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserTeamMemberLastPhotosQuery( userId, userTeamMemberId, pagingModel );
+		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserTeamMemberLastPhotosQuery( userId, userTeamMemberId, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
 
 		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );

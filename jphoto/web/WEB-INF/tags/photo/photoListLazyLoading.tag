@@ -11,7 +11,7 @@
 <%@ attribute name="photoList" required="true" type="ui.elements.PhotoList" %>
 
 <c:set var="photoListTitle" value="${photoList.photoListTitle}"/>
-<c:set var="totalPhotos" value="${photoList.totalPhotos}"/>
+<c:set var="totalPhotos" value="${photoList.photosCountToShow}"/>
 
 <c:set var="groupOperationForm" value="groupOperationForm" />
 

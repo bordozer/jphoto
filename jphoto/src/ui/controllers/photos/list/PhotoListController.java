@@ -728,7 +728,11 @@ public class PhotoListController {
 	}
 
 	private PhotoList getPhotoList( final AbstractPhotoListFactory photoListFactory, final PagingModel pagingModel ) {
-		return photoListFactory.getPhotoList( 0, pagingModel, getLanguage(), dateUtilsService.getCurrentTime() );
+		final PhotoList photoList = photoListFactory.getPhotoList( 0, pagingModel.getCurrentPage(), getLanguage(), dateUtilsService.getCurrentTime() );
+
+		pagingModel.setTotalItems( photoList.getPhotosCount() );
+
+		return photoList;
 	}
 
 	private Language getLanguage() {

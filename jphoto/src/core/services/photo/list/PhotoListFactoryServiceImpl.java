@@ -6,12 +6,14 @@ import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.list.factory.*;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.sql.PhotoCriteriasSqlService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import utils.UserUtils;
@@ -29,6 +31,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Autowired
 	private PhotoCriteriasSqlService photoCriteriasSqlService;
+
+	@Autowired
+	private PhotoSqlHelperService photoSqlHelperService;
 
 	@Autowired
 	private Services services;
@@ -231,7 +236,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1", services ).addUserCardLinkParameter( user );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1", services ).userCardLink( user );
 			}
 
 			@Override
@@ -270,7 +275,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 top best", services ).addUserCardLinkParameter( user );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 top best", services ).userCardLink( user );
 			}
 
 			@Override
@@ -304,7 +309,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 best", services ).addUserCardLinkParameter( user );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 best", services ).userCardLink( user );
 			}
 
 			@Override
@@ -343,7 +348,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2", services ).addUserCardLinkParameter( accessor ).addPhotosByGenreLinkParameter( genre );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2", services ).userCardLink( accessor ).addPhotosByGenreLinkParameter( genre );
 			}
 
 			@Override
@@ -372,7 +377,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2 top best", services ).addUserCardLinkParameter( user ).addPhotosByGenreLinkParameter( genre );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2 top best", services ).userCardLink( user ).addPhotosByGenreLinkParameter( genre );
 			}
 
 			@Override
@@ -406,7 +411,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2 best", services ).addUserCardLinkParameter( user ).addPhotosByGenreLinkParameter( genre );
+				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2 best", services ).userCardLink( user ).addPhotosByGenreLinkParameter( genre );
 			}
 
 			@Override
@@ -436,12 +441,54 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services ).addUserCardLinkParameter( user );
+				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services ).userCardLink( user );
 			}
 
 			@Override
 			protected TranslatableMessage getDescription() {
 				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected TranslatableMessage getPhotoListBottomText() {
+				return new TranslatableMessage( "Photo list bottom text: ", services );
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory userTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getUserTeamMemberLastPhotosQuery( user.getId(), userTeamMember.getId(), 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1 top best photos of team member $2 ( $3 )", services )
+					.userCardLink( user )
+					.userTeamMemberCardLink( userTeamMember )
+					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					;
+			}
+
+			@Override
+			protected TranslatableMessage getDescription() {
+				return new TranslatableMessage( "", services );
+			}
+
+			@Override
+			protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+
+				if ( UserUtils.isUsersEqual( user, accessor ) ) {
+					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
+				}
+
+				return super.getGroupOperationMenuContainer();
 			}
 
 			@Override

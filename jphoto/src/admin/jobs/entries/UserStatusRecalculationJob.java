@@ -50,7 +50,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 					getLog().info( String.format( "Member %s has got new status: %s", user, UserStatus.MEMBER.getName() ) );
 
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services )
-						.addUserCardLinkParameter( user )
+						.userCardLink( user )
 						.translatableString( UserStatus.MEMBER.getName() );
 					addJobRuntimeLogMessage( translatableMessage );
 
@@ -58,7 +58,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 				} else {
 					getLog().error( String.format( "Can not update member status. Id = # %s", user ) );
 
-					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services ).addUserCardLinkParameter( user );
+					final TranslatableMessage translatableMessage = new TranslatableMessage( "UserStatusRecalculationJob: Member $1 has got new status: $2", services ).userCardLink( user );
 					addJobRuntimeLogMessage( translatableMessage );
 				}
 			}

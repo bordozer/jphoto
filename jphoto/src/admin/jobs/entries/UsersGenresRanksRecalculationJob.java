@@ -54,7 +54,7 @@ public class UsersGenresRanksRecalculationJob extends NoParametersAbstractJob {
 					getLog().info( String.format( "User %s has bees given a new rank %s in %s (the previous one was %s)", user, userNewRank, genre, userCurrentRank ) );
 
 					final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has bees given a new rank $2 in $3 ( the previous one was $4 )", services )
-						.addUserCardLinkParameter( user )
+						.userCardLink( user )
 						.addIntegerParameter( userNewRank )
 						.addPhotosByUserByGenreLinkParameter( user, genre )
 						.addIntegerParameter( userCurrentRank )

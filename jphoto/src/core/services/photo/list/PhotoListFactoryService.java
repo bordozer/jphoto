@@ -3,6 +3,7 @@ package core.services.photo.list;
 import core.general.base.PagingModel;
 import core.general.genre.Genre;
 import core.general.user.User;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 
 public interface PhotoListFactoryService {
@@ -32,4 +33,6 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel, final User accessor );
 
 	AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel, final User accessor );
+
+	AbstractPhotoListFactory userTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor );
 }

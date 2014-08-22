@@ -475,7 +475,7 @@ public class PhotoServiceImpl implements PhotoService {
 
 			final User photoAuthor = userService.load( photo.getUserId() );
 
-			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 is moved your photo '$2' to genre '$3'", services ).addUserCardLinkParameter( userWhoIsMoving ).addPhotoCardLinkParameter( photo ).addPhotosByGenreLinkParameter( genre );
+			final TranslatableMessage translatableMessage = new TranslatableMessage( "$1 is moved your photo '$2' to genre '$3'", services ).userCardLink( userWhoIsMoving ).addPhotoCardLinkParameter( photo ).addPhotosByGenreLinkParameter( genre );
 
 			privateMessageService.sendSystemNotificationMessage( photoAuthor, translatableMessage.build( photoAuthor.getLanguage() ) );
 		}

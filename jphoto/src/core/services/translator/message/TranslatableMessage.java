@@ -4,6 +4,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;
 import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
@@ -71,8 +72,13 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addUserCardLinkParameter( final User user ) {
+	public TranslatableMessage userCardLink( final User user ) {
 		messageParameters.add( new UserCardLinkParameter( user, services ) );
+		return this;
+	}
+
+	public TranslatableMessage userTeamMemberCardLink( final UserTeamMember userTeamMember ) {
+		messageParameters.add( new UserTeamMemberCardLinkParameter( userTeamMember, services ) );
 		return this;
 	}
 

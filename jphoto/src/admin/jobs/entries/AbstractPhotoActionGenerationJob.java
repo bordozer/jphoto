@@ -159,8 +159,8 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 		if ( isHasVotedUserGoingToDoTheActionForAnotherPhotoOfPhotoAuthor ) {
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for another photo of $2", services )
-				.addUserCardLinkParameter( actionCommitter )
-				.addUserCardLinkParameter( photoAuthor )
+				.userCardLink( actionCommitter )
+				.userCardLink( photoAuthor )
 				;
 			addJobRuntimeLogMessage( translatableMessage );
 
@@ -194,9 +194,9 @@ public abstract class AbstractPhotoActionGenerationJob extends AbstractDateRange
 			final User authorOfRandomPhotoFromLastVoted = userService.load( authorIdOfRandomPhotoFromLastVoted );
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 is going to do the action for photo of $2 because $3 has voted for his photos recently", services )
-				.addUserCardLinkParameter( actionCommitter )
-				.addUserCardLinkParameter( authorOfRandomPhotoFromLastVoted )
-				.addUserCardLinkParameter( photoAuthor )
+				.userCardLink( actionCommitter )
+				.userCardLink( authorOfRandomPhotoFromLastVoted )
+				.userCardLink( photoAuthor )
 				;
 			addJobRuntimeLogMessage( translatableMessage );
 

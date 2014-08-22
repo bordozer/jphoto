@@ -22,7 +22,7 @@ public interface PhotoSqlHelperService {
 
 	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final PagingModel pagingModel, final int userId );
 
-	SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final PagingModel pagingModel );
+	SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getUserPhotoAlbumLastPhotosQuery( final int userId, final int photoAlbumId, final PagingModel pagingModel );
 }

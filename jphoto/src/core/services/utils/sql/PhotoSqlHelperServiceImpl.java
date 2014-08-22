@@ -131,8 +131,9 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 	}
 
 	@Override
-	public SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final PagingModel pagingModel ) {
-		final SqlIdsSelectQuery selectQuery = getAllPhotosForPageIdsSQL( pagingModel );
+	public SqlIdsSelectQuery getUserTeamMemberLastPhotosQuery( final int userId, final int userTeamMemberId, final int page, final int itemsOnPage ) {
+		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
 
 		photoSqlFilterService.addFilterByUser( userId, selectQuery );
 

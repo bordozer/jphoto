@@ -1,6 +1,5 @@
 package core.services.photo.list.factory;
 
-import core.general.base.PagingModel;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -15,7 +14,7 @@ public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 	}
 
 	@Override
-	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
-		return pagingModel.getCurrentPage() <= 1 ? super.getPhotoList( photoListId, pagingModel, language, time ) : null;
+	public PhotoList getPhotoList( final int photoListId, final int page, final Language language, final Date time ) {
+		return page <= 1 ? super.getPhotoList( photoListId, page, language, time ) : null;
 	}
 }

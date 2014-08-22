@@ -120,7 +120,7 @@ public abstract class AbstractPhotoImportStrategy {
 			.addIntegerParameter( total )
 			.addIntegerParameter( photo.getId() )
 			.addPhotoCardLinkParameter( photo )
-			.addUserCardLinkParameter( user )
+			.userCardLink( user )
 			.addPhotosByGenreLinkParameter( genre )
 		);
 

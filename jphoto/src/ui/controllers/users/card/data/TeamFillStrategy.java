@@ -24,7 +24,7 @@ public class TeamFillStrategy extends AbstractUserCardModelFillStrategy {
 
 		final List<PhotoList> userTeamMemberPhotoListsMap = newArrayList();
 		for ( final UserTeamMember userTeamMember : userTeamMembers ) {
-			final PhotoList photoList = userCardModelFillService.getUserTeamMemberLastPhotos( getUserId(), userTeamMember, model.getTeamMemberPhotosQtyMap() );
+			final PhotoList photoList = userCardModelFillService.getUserTeamMemberLastPhotos( getUser(), userTeamMember, getCurrentUser() ).getPhotoList( userTeamMember.getId(), 1, getLanguage(), userCardModelFillService.getDateUtilsService().getCurrentTime() );
 
 			if ( photoList.hasPhotos() ) {
 				userTeamMemberPhotoListsMap.add( photoList );

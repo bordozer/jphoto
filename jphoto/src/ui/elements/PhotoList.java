@@ -24,6 +24,8 @@ public class PhotoList {
 
 	private PhotoGroupOperationMenuContainer photoGroupOperationMenuContainer;
 
+	private int photosCount;
+
 	public PhotoList( final List<Integer> photoIds, final String photoListTitle ) {
 		this( photoIds, photoListTitle, true );
 	}
@@ -50,7 +52,7 @@ public class PhotoList {
 		return photoListTitle;
 	}
 
-	public int getTotalPhotos() {
+	public int getPhotosCountToShow() {
 		return photoIds.size();
 	}
 
@@ -108,5 +110,13 @@ public class PhotoList {
 
 	public boolean hasPhotos() {
 		return photoIds != null && ! photoIds.isEmpty();
+	}
+
+	public int getPhotosCount() {
+		return photosCount;
+	}
+
+	public void setPhotosCount( final int photosCount ) {
+		this.photosCount = photosCount;
 	}
 }

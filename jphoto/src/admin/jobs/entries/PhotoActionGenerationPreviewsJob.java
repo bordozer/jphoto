@@ -20,7 +20,7 @@ public class PhotoActionGenerationPreviewsJob extends AbstractPhotoActionGenerat
 		final Date actionTime = getPhotoActionTime( photo.getUploadTime() );
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has seen photo $2 ( time: $3 )", services )
-			.addUserCardLinkParameter( user )
+			.userCardLink( user )
 			.addPhotoCardLinkParameter( photo )
 			.dateTimeFormatted( actionTime )
 			;

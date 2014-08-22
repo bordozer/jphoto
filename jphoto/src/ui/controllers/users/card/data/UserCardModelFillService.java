@@ -5,6 +5,8 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.photo.list.factory.AbstractPhotoListFactory;
+import core.services.utils.DateUtilsService;
 import ui.activity.AbstractActivityStreamEntry;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
@@ -40,7 +42,7 @@ public interface UserCardModelFillService {
 
 	void setUserPhotosByGenresPhotoList( final UserCardModel model );
 
-	PhotoList getUserTeamMemberLastPhotos( final int userId, final UserTeamMember userTeamMember, final Map<UserTeamMember, Integer> teamMemberPhotosQtyMap );
+	AbstractPhotoListFactory getUserTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor );
 
 	PhotoList getUserPhotoAlbumLastPhotos( final int userId, final UserPhotoAlbum userPhotoAlbum, final Map<UserPhotoAlbum, Integer> userPhotoAlbumsQtyMap );
 
@@ -51,4 +53,6 @@ public interface UserCardModelFillService {
 	List<UserPhotoAlbum> getUserPhotoAlbums( final int userId );
 
 	Map<Integer, Integer> setUserPhotosCountByAlbums( final int userId );
+
+	DateUtilsService getDateUtilsService();
 }

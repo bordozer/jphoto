@@ -39,7 +39,7 @@ public abstract class AbstractPhotoListFactory {
 		this.services = services;
 	}
 
-	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
+	public PhotoList getPhotoList( final int photoListId, final int page, final Language language, final Date time ) {
 		final PhotoListMetrics metrics = getPhotosIdsToShow( getSelectIdsQuery(), time );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
@@ -52,8 +52,7 @@ public abstract class AbstractPhotoListFactory {
 
 		photoList.setPhotoListId( photoListId );
 		photoList.setBottomText( getPhotoListBottomText().build( language ) );
-
-		pagingModel.setTotalItems( metrics.getPhotosCount() );
+		photoList.setPhotosCount( metrics.getPhotosCount() );
 
 		return photoList;
 	}

@@ -26,9 +26,9 @@ public class BriefOverviewFillStrategy extends AbstractUserCardModelFillStrategy
 		photoLists.add( userCardModelFillService.getLastPhotosOfUserVisitors( user ) );
 		model.setPhotoLists( photoLists );
 
-		model.setUserCardGenreInfoMap( userCardModelFillService.getUserCardGenreInfoMap( model.getUser(), EnvironmentContext.getCurrentUser() ) );
+		model.setUserCardGenreInfoMap( userCardModelFillService.getUserCardGenreInfoMap( model.getUser(), getCurrentUser() ) );
 
 		userCardModelFillService.setLastUserActivityTime( model );
-		model.setEntryMenu( userCardModelFillService.getUserMenu( user, EnvironmentContext.getCurrentUser() ) );
+		model.setEntryMenu( userCardModelFillService.getUserMenu( user, getCurrentUser() ) );
 	}
 }

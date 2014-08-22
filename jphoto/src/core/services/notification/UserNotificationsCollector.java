@@ -375,7 +375,7 @@ public abstract class UserNotificationsCollector {
 	}
 
 	private static TranslatableMessage getMessage( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {
-		return new TranslatableMessage( nerd, services ).addUserCardLinkParameter( photoAuthor ).addPhotoCardLinkParameter( photo );
+		return new TranslatableMessage( nerd, services ).userCardLink( photoAuthor ).addPhotoCardLinkParameter( photo );
 	}
 
 	private static TranslatableMessage getMessage1( final String nerd, final User photoAuthor, final Photo photo, final Services services ) {

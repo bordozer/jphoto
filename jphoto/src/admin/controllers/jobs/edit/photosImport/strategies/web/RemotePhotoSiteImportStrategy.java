@@ -545,7 +545,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		if ( foundByLoginUser != null ) {
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found. Login: $1", services )
-				.addUserCardLinkParameter( foundByLoginUser )
+				.userCardLink( foundByLoginUser )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -556,7 +556,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		if ( foundByNameUser != null ) {
 
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "Existing user found. Name: $1", services )
-				.addUserCardLinkParameter( foundByNameUser )
+				.userCardLink( foundByNameUser )
 				;
 			job.addJobRuntimeLogMessage( translatableMessage );
 
@@ -598,7 +598,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		}
 
 		final TranslatableMessage translatableMessage = new TranslatableMessage( "New user has been created: $1", services )
-			.addUserCardLinkParameter( user )
+			.userCardLink( user )
 			;
 		job.addJobRuntimeLogMessage( translatableMessage );
 

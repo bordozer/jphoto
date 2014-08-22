@@ -11,6 +11,6 @@ public class PersonalDataFillStrategy extends AbstractUserCardModelFillStrategy 
 
 	@Override
 	public void performCustomActions() {
-		model.setEntryMenu( userCardModelFillService.getUserMenu( getUser(), EnvironmentContext.getCurrentUser() ) );
+		model.setEntryMenu( userCardModelFillService.getUserMenu( getUser(), getCurrentUser() ) );
 	}
 }

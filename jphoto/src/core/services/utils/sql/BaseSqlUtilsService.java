@@ -5,11 +5,11 @@ import sql.builder.*;
 
 public interface BaseSqlUtilsService {
 
-	void initLimitAndOffset( BaseSqlSelectQuery sqlSelectQuery, PagingModel pagingModel );
+	void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final PagingModel pagingModel );
 
-	void initLimitAndOffset( BaseSqlSelectQuery sqlSelectQuery, int page, int itemsOnPage );
+	void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final int page, final int itemsOnPage );
 
-	SqlSelectQuery getSqlSelectQuery( String table );
+	SqlSelectQuery getSqlSelectQuery( final String table );
 
 	SqlIdsSelectQuery getPhotosIdsSQL();
 
@@ -21,23 +21,23 @@ public interface BaseSqlUtilsService {
 
 	SqlIdsSelectQuery getGenresIdsSQL();
 
-	SqlLogicallyJoinable equalsCondition( String tableName, String columnName, long value );
+	SqlLogicallyJoinable equalsCondition( final String tableName, final String columnName, final long value );
 
-	SqlLogicallyJoinable grateOrEqualsCondition( String tableName, String columnName, long value );
+	SqlLogicallyJoinable grateOrEqualsCondition( final String tableName, final String columnName, final long value );
 
-	SqlLogicallyJoinable grateThenCondition( String tableName, String columnName, long value );
+	SqlLogicallyJoinable grateThenCondition( final String tableName, final String columnName, final long value );
 
-	SqlLogicallyJoinable lessOrEqualsCondition( String tableName, String columnName, long value );
+	SqlLogicallyJoinable lessOrEqualsCondition( final String tableName, final String columnName, final long value );
 
-	SqlLogicallyJoinable lessCondition( String tableName, String columnName, long value );
+	SqlLogicallyJoinable lessCondition( final String tableName, final String columnName, final long value );
 
-	SqlCondition getCondition( String tableName, String columnName, long value, SqlCriteriaOperator operator );
+	SqlCondition getCondition( final String tableName, final String columnName, final long value, final SqlCriteriaOperator operator );
 
-	void addDescSortByUploadTimeDesc( BaseSqlSelectQuery selectQuery );
+	void addDescSortByUploadTimeDesc( final BaseSqlSelectQuery selectQuery );
 
-	void addSortBySumVotingMarksDesc( BaseSqlSelectQuery selectQuery );
+	void addSortBySumVotingMarksDesc( final BaseSqlSelectQuery selectQuery );
 
-	void addSortBySumVotingTimeDesc( BaseSqlSelectQuery selectQuery );
+	void addSortBySumVotingTimeDesc( final BaseSqlSelectQuery selectQuery );
 
-	void addUserSortByName( BaseSqlSelectQuery selectQuery );
+	void addUserSortByName( final BaseSqlSelectQuery selectQuery );
 }

@@ -3,6 +3,8 @@ package ui.controllers.users.card.data;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
+import core.services.translator.Language;
+import ui.context.EnvironmentContext;
 import ui.controllers.users.card.UserCardModel;
 
 public abstract class AbstractUserCardModelFillStrategy {
@@ -50,5 +52,13 @@ public abstract class AbstractUserCardModelFillStrategy {
 
 	protected int getUserId() {
 		return model.getUser().getId();
+	}
+
+	protected User getCurrentUser() {
+		return EnvironmentContext.getCurrentUser();
+	}
+
+	protected Language getLanguage() {
+		return EnvironmentContext.getLanguage();
 	}
 }
