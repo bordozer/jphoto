@@ -1,7 +1,6 @@
 package core.services.utils.sql;
 
 import core.enums.FavoriteEntryType;
-import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
@@ -50,8 +49,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 	@Override
 	public SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
+		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
 
 		final SqlTable tPhotos = selectQuery.getMainTable();
 		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
@@ -77,8 +75,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 	@Override
 	public SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final User user, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
+		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
 
 		final SqlTable tPhotos = selectQuery.getMainTable();
 		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
@@ -104,8 +101,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 	@Override
 	public SqlIdsSelectQuery getUserTeamMemberPhotosQuery( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
+		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
 
 		photoSqlFilterService.addFilterByUser( user.getId(), selectQuery );
 
@@ -129,8 +125,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 	@Override
 	public SqlIdsSelectQuery getUserPhotoAlbumPhotosQuery( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
+		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
 
 		photoSqlFilterService.addFilterByUser( user.getId(), selectQuery );
 
@@ -152,16 +147,13 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 		return selectQuery;
 	}
 
-	@Override
-	public SqlIdsSelectQuery getAllPhotosForPageIdsSQL( final PagingModel pagingModel ) {
+	private SqlIdsSelectQuery getQuery( final int page, final int itemsOnPage ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
-
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
 		return selectQuery;
 	}
 
-	@Override
-	public SqlIdsSelectQuery getAllPhotosBestIdsSQL( final int minMarks, final Date timeFrom, final Date timeTo ) {
+	private SqlIdsSelectQuery getAllPhotosBestIdsSQL( final int minMarks, final Date timeFrom, final Date timeTo ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
 		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
@@ -173,8 +165,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 		return selectQuery;
 	}
 
-	@Override
-	public SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo ) {
+	private SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo ) {
 		final SqlIdsSelectQuery selectQuery = getAllPhotosBestIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, timeTo );
 		selectQuery.setLimit( PORTAL_PAGE_BEST_PHOTOS_QTY );
 
