@@ -21,6 +21,10 @@ public class PhotoListQueryBuilder {
 		this.services = services;
 	}
 
+	public SqlIdsSelectQuery build() {
+		return query;
+	}
+
 	public PhotoListQueryBuilder filterByAuthor( final User user ) {
 		getPhotoSqlFilterService().addFilterByUser( user.getId(), query );
 		return this;
