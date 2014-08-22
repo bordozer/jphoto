@@ -1,5 +1,6 @@
 package core.services.utils.sql;
 
+import core.general.data.PhotoSort;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
@@ -30,6 +31,14 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
+	public PhotoListQueryBuilder uploaded( final Date uploadTime ) {
+		return this;
+	}
+
+	public PhotoListQueryBuilder uploaded( final Date from, final Date to ) {
+		return this;
+	}
+
 	public PhotoListQueryBuilder filterByMembershipType( final UserMembershipType userMembershipType ) {
 		final SqlTable tPhotos = query.getMainTable();
 		final SqlTable tUsers = new SqlTable( UserDaoImpl.TABLE_USERS );
@@ -47,12 +56,26 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder uploaded( final Date uploadTime ) {
+	public PhotoListQueryBuilder forPage( final int page, final int itemsOnPage ) {
+		getBaseSqlUtilsService().initLimitAndOffset( query, page, itemsOnPage );
 		return this;
 	}
 
-	public PhotoListQueryBuilder uploaded( final Date from, final Date to ) {
-		return this;
+	public PhotoListQueryBuilder sortBy( final PhotoSort sort ) {
+		switch ( sort ) {
+			case UPLOAD_TIME:
+				getBaseSqlUtilsService().addDescSortByUploadTimeDesc( query );
+				return this;
+			case SUM_MARKS:
+				getBaseSqlUtilsService().addSortBySumVotingMarksDesc( query );
+				getBaseSqlUtilsService().addDescSortByUploadTimeDesc( query );
+				return this;
+			case VOTING_TIME:
+				getBaseSqlUtilsService().addSortBySumVotingTimeDesc( query );
+				return this;
+		}
+
+		throw new IllegalArgumentException( String.format( "Illegal sort field: %s", sort ) );
 	}
 
 	private DateUtilsService getDateUtilsService() {
@@ -61,5 +84,9 @@ public class PhotoListQueryBuilder {
 
 	private PhotoSqlFilterService getPhotoSqlFilterService() {
 		return services.getPhotoSqlFilterService();
+	}
+
+	private BaseSqlUtilsService getBaseSqlUtilsService() {
+		return services.getBaseSqlUtilsService();
 	}
 }

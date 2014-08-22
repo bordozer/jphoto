@@ -36,19 +36,19 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
-		addUserCriteria( criterias, selectQuery );
+		addUserCriteria( criterias, selectQuery ); //
 
-		addGenreCriteria( criterias, selectQuery );
+		addGenreCriteria( criterias, selectQuery ); //
 
-		photoSqlFilterService.addUploadTimeCriteria( criterias.getUploadDateFrom(), criterias.getUploadDateTo(), selectQuery );
+		photoSqlFilterService.addUploadTimeCriteria( criterias.getUploadDateFrom(), criterias.getUploadDateTo(), selectQuery ); //
 
-		addFilterByMembershipType( criterias, selectQuery );
+		addFilterByMembershipType( criterias, selectQuery ); //
 
 		addVotingCriteria( criterias, selectQuery );
 
-		addSortCriterias( criterias, selectQuery );
+		addSortCriterias( criterias, selectQuery ); //
 
-		addLimitCriterias( criterias, selectQuery, page, itemsOnPage );
+		addLimitCriterias( criterias, selectQuery, page, itemsOnPage ); //
 
 		return selectQuery;
 	}
