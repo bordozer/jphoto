@@ -53,7 +53,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -77,7 +77,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -106,7 +106,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -130,7 +130,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -154,7 +154,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -183,7 +183,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -207,7 +207,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel );
+				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -241,7 +241,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -270,7 +270,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -304,7 +304,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -328,7 +328,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -357,7 +357,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -382,7 +382,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 			}
 
 			@Override
@@ -682,8 +682,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		};
 	}
 
-	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
-		return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
+		return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 	}
 
 	private int days() {

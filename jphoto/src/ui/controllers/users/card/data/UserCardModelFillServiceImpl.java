@@ -308,7 +308,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, currentUser );
-		final SqlIdsSelectQuery idsSQL = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel() );
+		final SqlIdsSelectQuery idsSQL = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, getPhotosInLine() );
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 
@@ -343,13 +343,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() );
 
 		return photoList;
-	}
-
-	private PagingModel getPagingModel() {
-		final PagingModel pagingModel = new PagingModel( services );
-		pagingModel.setCurrentPage( 1 );
-		pagingModel.setItemsOnPage( getPhotosInLine() );
-		return pagingModel;
 	}
 
 	private int getPhotosInLine() {

@@ -49,9 +49,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id "
@@ -74,9 +72,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -91,9 +87,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d OFFSET 40;", MIN_MARKS, ITEMS_ON_PAGE );
@@ -112,9 +106,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreTopBest( genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photos.genreId = '777' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
@@ -132,9 +124,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenre( genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( photos.genreId = '777' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -152,9 +142,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photos.genreId = '777' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d OFFSET 40;", getDateFrom(), getDateTo(), MIN_MARKS, ITEMS_ON_PAGE );
@@ -174,9 +162,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserTopBest( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
@@ -194,9 +180,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUser( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '999' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -214,9 +198,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d OFFSET 40;", MIN_MARK_FOR_BEST, ITEMS_ON_PAGE );
@@ -239,9 +221,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
@@ -262,9 +242,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -285,9 +263,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d OFFSET 40;", MIN_MARK_FOR_BEST, ITEMS_ON_PAGE );
@@ -309,9 +285,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingCategoryId = '888' ) AND photoVoting.userId = '999' ) GROUP BY photos.id ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -329,9 +303,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriod( fDateFrom, fDateTo, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id "
@@ -354,9 +326,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriodBest( fDateFrom, fDateTo, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id "
@@ -379,9 +349,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeTopBest( UserMembershipType.MODEL, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN users ON ( photos.userId = users.id ) INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( users.membershipType = '2' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
@@ -396,9 +364,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( UserMembershipType.MAKEUP_MASTER, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN users ON ( photos.userId = users.id ) WHERE ( users.membershipType = '3' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -413,9 +379,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( UserMembershipType.MODEL, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id "
@@ -445,9 +409,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d OFFSET 40;", MIN_MARK_FOR_BEST, ITEMS_ON_PAGE );
@@ -465,9 +427,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosLast( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '999' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -485,9 +445,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, EnvironmentContext.getCurrentUser() );
 
-		final PagingModel pagingModel = getPagingModel();
-
-		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
+		final SqlIdsSelectQuery idsSelectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photoVoting.userId = '999' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
@@ -538,12 +496,5 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 	private String getLastSecondOfDay( final Date date ) {
 		return dateUtilsService.formatDateTime( dateUtilsService.getLastSecondOfDay( date ) );
-	}
-
-	private PagingModel getPagingModel() {
-		final PagingModel pagingModel = new PagingModel( new ServicesImpl() );
-		pagingModel.setCurrentPage( CURRENT_PAGE );
-		pagingModel.setItemsOnPage( ITEMS_ON_PAGE );
-		return pagingModel;
 	}
 }

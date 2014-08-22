@@ -1,6 +1,5 @@
 package core.services.utils.sql;
 
-import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
 import core.services.dao.PhotoDaoImpl;
 import core.services.dao.PhotoVotingDaoImpl;
@@ -44,25 +43,6 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 	}
 
 	@Override
-	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
-		return getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
-	}
-
-	@Override
-	public void addUserCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		if ( criterias.getUser() != null ) {
-			photoSqlFilterService.addFilterByUser( criterias.getUser().getId(), selectQuery );
-		}
-	}
-
-	@Override
-	public void addGenreCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		if ( criterias.getGenre() != null ) {
-			photoSqlFilterService.addFilterByGenre( criterias.getGenre().getId(), selectQuery );
-		}
-	}
-
-	@Override
 	public void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery ) {
 		final SqlTable tPhotos = selectQuery.getMainTable();
 		final SqlColumnSelect tPhotosColUploadTime = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
@@ -78,8 +58,19 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 		}
 	}
 
-	@Override
-	public void addVotingCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
+	private void addUserCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
+		if ( criterias.getUser() != null ) {
+			photoSqlFilterService.addFilterByUser( criterias.getUser().getId(), selectQuery );
+		}
+	}
+
+	private void addGenreCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
+		if ( criterias.getGenre() != null ) {
+			photoSqlFilterService.addFilterByGenre( criterias.getGenre().getId(), selectQuery );
+		}
+	}
+
+	private void addVotingCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
 		final int minMarks = criterias.getMinimalMarks();
 
 		if ( ! criterias.hasVotingCriterias() ) {
@@ -120,8 +111,7 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 		}
 	}
 
-	@Override
-	public void addFilterByMembershipType( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
+	private void addFilterByMembershipType( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
 		if ( criterias.getMembershipType() == null ) {
 			return;
 		}
@@ -139,8 +129,7 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 		selectQuery.addWhereAnd( condition );
 	}
 
-	@Override
-	public void addSortCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
+	private void addSortCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
 
 		switch ( criterias.getPhotoSort() ) {
 			case UPLOAD_TIME:
@@ -158,13 +147,7 @@ public class PhotoCriteriasSqlServiceImpl implements PhotoCriteriasSqlService {
 		throw new IllegalArgumentException( String.format( "Illegal sort field: %s", criterias.getPhotoSort() ) );
 	}
 
-	@Override
-	public void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final PagingModel pagingModel ) {
-		addLimitCriterias( criterias, selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage());
-	}
-
-	@Override
-	public void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final int page, final int itemsOnPage ) {
+	private void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final int page, final int itemsOnPage ) {
 		if ( criterias.isTopBestPhotoList() ) {
 			selectQuery.setLimit( criterias.getPhotoQtyLimit() );
 		} else {

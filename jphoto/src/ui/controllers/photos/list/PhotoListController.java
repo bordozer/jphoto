@@ -317,7 +317,7 @@ public class PhotoListController {
 		final PhotoVotingCategory votingCategory = votingCategoryService.load( votingCategoryId );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
 
@@ -361,7 +361,7 @@ public class PhotoListController {
 		final List<PhotoListData> photoListDatas = newArrayList();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriod( fDateFrom, fDateTo, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBreadcrumbs( fDateFrom, fDateTo ) );
 
@@ -381,7 +381,7 @@ public class PhotoListController {
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriodBest( fDateFrom, fDateTo, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBestBreadcrumbs( fDateFrom, fDateTo ) );
 
@@ -405,7 +405,7 @@ public class PhotoListController {
 
 		if ( pagingModel.getCurrentPage() == 1 ) {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForMembershipTypeTopBest( membershipType, getCurrentUser() );
-			final PhotoListData topBestData = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel ) );
+			final PhotoListData topBestData = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 
@@ -413,7 +413,7 @@ public class PhotoListController {
 		}
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( membershipType, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
 
@@ -430,7 +430,7 @@ public class PhotoListController {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ) );
+		final PhotoListData data = new PhotoListData( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
 

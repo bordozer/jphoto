@@ -385,7 +385,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor ) {
 		// TODO: move this to somewhere
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
-		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, getPagingModel( photosQty ) );
+		final SqlIdsSelectQuery selectQuery = photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
 
 		return load( selectQuery ).getIds();
 	}
