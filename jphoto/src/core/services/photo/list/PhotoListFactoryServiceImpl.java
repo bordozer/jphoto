@@ -16,6 +16,7 @@ import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlHelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
+import ui.services.UtilsService;
 import utils.UserUtils;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
@@ -36,6 +37,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private PhotoSqlHelperService photoSqlHelperService;
 
 	@Autowired
+	private UtilsService utilsService;
+
+	@Autowired
 	private Services services;
 
 	@Override
@@ -53,11 +57,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery", services );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -82,11 +81,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery top best for last $1 days", services ).addIntegerParameter( days() );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -119,11 +113,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
@@ -148,11 +137,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
 			}
@@ -174,11 +158,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best for last $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -211,11 +190,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
 			}
@@ -237,11 +211,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery by user $1", services ).userCardLink( user );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -279,11 +248,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected String getLinkToFullList() {
 				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
 			}
@@ -310,11 +274,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 best", services ).userCardLink( user );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -352,11 +311,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
@@ -378,11 +332,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			protected TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery by user $1 and genre $2 top best", services ).userCardLink( user ).addPhotosByGenreLinkParameter( genre );
-			}
-
-			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
 			}
 
 			@Override
@@ -415,11 +364,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
 			protected TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
@@ -445,22 +389,17 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
-			}
-
-			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
 	}
 
 	@Override
-	public AbstractPhotoListFactory userTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor ) {
+	public AbstractPhotoListFactory userTeamMemberPhotosLast( final User user, final UserTeamMember userTeamMember, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
@@ -469,7 +408,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: User $1 top best photos of team member $2 ( $3 )", services )
+				return new TranslatableMessage( "Photo list title: User $1: last photos of $2 ( $3 )", services )
 					.userCardLink( user )
 					.userTeamMemberCardLink( userTeamMember )
 					.translatableString( userTeamMember.getTeamMemberType().getName() )
@@ -477,23 +416,48 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getDescription() {
-				return new TranslatableMessage( "", services );
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getUserTeamMemberCardLink( user.getId(), userTeamMember.getId() );
 			}
 
 			@Override
-			protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: the latest team member $2 photos ( member type is $3 )", services )
+					.userCardLink( user )
+					.userTeamMemberCardLink( userTeamMember )
+					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					;
+			}
+		};
+	}
 
-				if ( UserUtils.isUsersEqual( user, accessor ) ) {
-					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
-				}
+	@Override
+	public AbstractPhotoListFactory userTeamMemberPhotos( final User user, final UserTeamMember userTeamMember, final int page, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-				return super.getGroupOperationMenuContainer();
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getUserTeamMemberLastPhotosQuery( user.getId(), userTeamMember.getId(), page, utilsService.getPhotosOnPage( accessor ) );
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1: all photos of $2 ( $3 )", services )
+					.userCardLink( user )
+					.userTeamMemberCardLink( userTeamMember )
+					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					;
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: all team member $2 photos ( member type is $3 )", services )
+					.userCardLink( user )
+					.userTeamMemberCardLink( userTeamMember )
+					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					;
 			}
 		};
 	}
@@ -504,5 +468,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private int days() {
 		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+	}
+
+	private TranslatableMessage emptyTranslatableMessage() {
+		return new TranslatableMessage( "", services );
 	}
 }

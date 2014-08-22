@@ -279,7 +279,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Override
 	public AbstractPhotoListFactory getUserTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor ) {
-		return photoListFactoryService.userTeamMemberLastPhotos( user, userTeamMember, accessor );
+		return photoListFactoryService.userTeamMemberPhotosLast( user, userTeamMember, accessor );
 	}
 
 	@Override

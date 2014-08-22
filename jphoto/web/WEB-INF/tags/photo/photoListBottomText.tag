@@ -16,7 +16,7 @@
 	<div style="width: 95%; float: left; padding-left: 20px; text-align: justify">
 		<c:if test="${not empty bottomText}">
 			<br/>
-			${eco:formatPhotoCommentText(bottomText)}
+			${bottomText}
 		</c:if>
 	</div>
 </div>

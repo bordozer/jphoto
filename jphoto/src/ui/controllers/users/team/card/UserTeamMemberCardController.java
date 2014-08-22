@@ -5,19 +5,18 @@ import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoService;
+import core.services.photo.list.PhotoListFactoryService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
-import core.services.utils.sql.PhotoSqlHelperService;
+import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sql.SqlSelectIdsResult;
-import sql.builder.SqlIdsSelectQuery;
 import ui.context.EnvironmentContext;
 import ui.elements.PhotoList;
 import ui.services.UtilsService;
@@ -26,7 +25,6 @@ import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -53,13 +51,16 @@ public class UserTeamMemberCardController {
 	private BreadcrumbsUserService breadcrumbsUserService;
 
 	@Autowired
-	private PhotoSqlHelperService photoSqlHelperService;
-
-	@Autowired
 	private UserService userService;
 
 	@Autowired
 	private GroupOperationService groupOperationService;
+
+	@Autowired
+	private PhotoListFactoryService photoListFactoryService;
+
+	@Autowired
+	private DateUtilsService dateUtilsService;
 
 	@Autowired
 	private Services services;
@@ -91,19 +92,11 @@ public class UserTeamMemberCardController {
 
 		model.setUserTeamMember( userTeamMember );
 
-		final String title = String.format( "Photos of %s", userTeamMember.getTeamMemberNameWithType() );
+		final PhotoList photoList = photoListFactoryService.userTeamMemberPhotos( user, userTeamMember, pagingModel.getCurrentPage(), EnvironmentContext.getCurrentUser() ).getPhotoList( userTeamMember.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
 
-		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUserTeamMemberLastPhotosQuery( userId, userTeamMemberId, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
-		final SqlSelectIdsResult selectIdsResult = photoService.load( selectIdsQuery );
+		model.setPhotoLists( newArrayList( photoList ) );
 
-		final PhotoList photoList = new PhotoList( selectIdsResult.getIds(), title );
-
-		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( user, EnvironmentContext.getCurrentUser() ) );
-
-		final List<PhotoList> photoLists = newArrayList( photoList );
-		model.setPhotoLists( photoLists );
-
-		pagingModel.setTotalItems( selectIdsResult.getRecordQty() );
+		pagingModel.setTotalItems( photoList.getPhotosCount() );
 
 		model.setPageTitleData( breadcrumbsUserService.getUserTeamMemberCardBreadcrumbs( userTeamMember ) );
 

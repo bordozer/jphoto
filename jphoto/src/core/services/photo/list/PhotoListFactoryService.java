@@ -34,5 +34,7 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory userTeamMemberLastPhotos( final User user, final UserTeamMember userTeamMember, final User accessor );
+	AbstractPhotoListFactory userTeamMemberPhotosLast( final User user, final UserTeamMember userTeamMember, final User accessor );
+
+	AbstractPhotoListFactory userTeamMemberPhotos( final User user, final UserTeamMember userTeamMember, final int page, final User accessor );
 }

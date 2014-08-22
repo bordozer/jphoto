@@ -1,6 +1,5 @@
 package core.services.photo.list.factory;
 
-import core.general.base.PagingModel;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -29,8 +28,6 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract TranslatableMessage getTitle();
 
-	protected abstract TranslatableMessage getPhotoListBottomText();
-
 	protected AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 
 		this.photoFilteringStrategy = photoFilteringStrategy;
@@ -43,15 +40,16 @@ public abstract class AbstractPhotoListFactory {
 		final PhotoListMetrics metrics = getPhotosIdsToShow( getSelectIdsQuery(), time );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
+		photoList.setPhotoListId( photoListId );
 
 		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText() );
-		photoList.setPhotosCriteriasDescription( getDescription().build( language ) );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
 		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );
 
-		photoList.setPhotoListId( photoListId );
+		photoList.setPhotosCriteriasDescription( getCriteriaDescription().build( language ) );
 		photoList.setBottomText( getPhotoListBottomText().build( language ) );
+
 		photoList.setPhotosCount( metrics.getPhotosCount() );
 
 		return photoList;
@@ -61,7 +59,11 @@ public abstract class AbstractPhotoListFactory {
 		return StringUtils.EMPTY;
 	}
 
-	protected TranslatableMessage getDescription() {
+	protected TranslatableMessage getCriteriaDescription() {
+		return new TranslatableMessage( "", services );
+	}
+
+	protected TranslatableMessage getPhotoListBottomText() {
 		return new TranslatableMessage( "", services );
 	}
 

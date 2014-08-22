@@ -730,6 +730,10 @@ public class PhotoListController {
 	private PhotoList getPhotoList( final AbstractPhotoListFactory photoListFactory, final PagingModel pagingModel ) {
 		final PhotoList photoList = photoListFactory.getPhotoList( 0, pagingModel.getCurrentPage(), getLanguage(), dateUtilsService.getCurrentTime() );
 
+		if ( photoList == null ) {
+			return null;
+		}
+
 		pagingModel.setTotalItems( photoList.getPhotosCount() );
 
 		return photoList;

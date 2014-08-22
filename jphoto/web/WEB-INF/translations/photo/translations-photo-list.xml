@@ -173,6 +173,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list title: User $1: last photos of $2 ( $3 )</nerd>
+		<ru><![CDATA[$1: последние работы c $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: User $1: the latest team member $2 photos ( member type is $3 )</nerd>
+		<ru><![CDATA[$1: последние работы $2 ( тип участия - $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: User $1: all photos of $2 ( $3 )</nerd>
+		<ru><![CDATA[$1: работы c $2 ( $3 )]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: User $1: all team member $2 photos ( member type is $3 )</nerd>
+		<ru><![CDATA[$1: работы $2 ( тип участия - $3 )]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
