@@ -96,9 +96,6 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_PHOTOS );
-		final List<FavoriteEntryType> userIconsTypes = newArrayList();
-
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
 
 		return VIEW;
@@ -109,9 +106,6 @@ public class UserBookmarksController {
 		securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
-
-		final List<FavoriteEntryType> photoIconsTypes = newArrayList();
-		final List<FavoriteEntryType> userIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_MEMBERS );
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
 		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
@@ -128,9 +122,6 @@ public class UserBookmarksController {
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
-		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.BOOKMARKED_PHOTOS );
-		final List<FavoriteEntryType> userIconsTypes = newArrayList();
-
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS );
 
 		return VIEW;
@@ -141,9 +132,6 @@ public class UserBookmarksController {
 		securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
-
-		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
-		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
 		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
 
