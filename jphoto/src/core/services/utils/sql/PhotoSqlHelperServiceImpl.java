@@ -31,28 +31,6 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Override
-	public SqlIdsSelectQuery getAllPhotosForPageIdsSQL( final PagingModel pagingModel ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
-
-		return selectQuery;
-	}
-
-	@Override
-	public SqlIdsSelectQuery getAllPhotosBestIdsSQL( final int minMarks, final Date timeFrom, final Date timeTo ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
-
-		photoSqlFilterService.addFilterByMinVotedMark( selectQuery, minMarks );
-
-		photoSqlFilterService.addFilterForVotingTimeForLastNDays( selectQuery, timeFrom, timeTo );
-
-		return selectQuery;
-	}
-
-	// Portal Page -->
-	@Override
 	public SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL() {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
@@ -69,17 +47,6 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 	public SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom ) {
 		return getPortalPageBestPhotosIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentTime() ) );
 	}
-
-	@Override
-	public SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo ) {
-		final SqlIdsSelectQuery selectQuery = getAllPhotosBestIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, timeTo );
-		selectQuery.setLimit( PORTAL_PAGE_BEST_PHOTOS_QTY );
-
-		baseSqlUtilsService.addSortBySumVotingMarksDesc( selectQuery );
-
-		return selectQuery;
-	}
-	// Portal Page <--
 
 	@Override
 	public SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage ) {
@@ -181,6 +148,37 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 		selectQuery.addWhereAnd( condition );
 
 		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
+
+		return selectQuery;
+	}
+
+	@Override
+	public SqlIdsSelectQuery getAllPhotosForPageIdsSQL( final PagingModel pagingModel ) {
+		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+
+		return selectQuery;
+	}
+
+	@Override
+	public SqlIdsSelectQuery getAllPhotosBestIdsSQL( final int minMarks, final Date timeFrom, final Date timeTo ) {
+		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+
+		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
+
+		photoSqlFilterService.addFilterByMinVotedMark( selectQuery, minMarks );
+
+		photoSqlFilterService.addFilterForVotingTimeForLastNDays( selectQuery, timeFrom, timeTo );
+
+		return selectQuery;
+	}
+
+	@Override
+	public SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo ) {
+		final SqlIdsSelectQuery selectQuery = getAllPhotosBestIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, timeTo );
+		selectQuery.setLimit( PORTAL_PAGE_BEST_PHOTOS_QTY );
+
+		baseSqlUtilsService.addSortBySumVotingMarksDesc( selectQuery );
 
 		return selectQuery;
 	}
