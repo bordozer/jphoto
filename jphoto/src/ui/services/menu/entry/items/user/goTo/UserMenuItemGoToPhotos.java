@@ -46,6 +46,6 @@ public class UserMenuItemGoToPhotos extends AbstractUserMenuItem {
 	}
 
 	private int getPhotoQtyByUser( final int userId ) {
-		return getPhotoService().getPhotoQtyByUser( userId );
+		return getPhotoService().getPhotosCountByUser( userId );
 	}
 }

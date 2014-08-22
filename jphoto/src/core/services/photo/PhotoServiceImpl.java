@@ -265,23 +265,18 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public int getPhotoQty() {
+	public int getPhotosCount() {
 		return photoDao.getPhotoQty();
 	}
 
 	@Override
-	public int getPhotoQtyByGenre( final int genreId ) {
+	public int getPhotosCountByGenre( final int genreId ) {
 		return photoDao.getPhotoQtyByGenre( genreId );
 	}
 
 	@Override
-	public int getPhotoQtyByUser( final int userId ) {
+	public int getPhotosCountByUser( final int userId ) {
 		return photoDao.getPhotoQtyByUser( userId );
-	}
-
-	@Override
-	public List<Photo> getUserPhotos( final int userId ) {
-		return photoDao.getUserPhotos( userId );
 	}
 
 	@Override
@@ -290,7 +285,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public int getPhotoQtyByUserAndGenre( final int userId, final int genreId ) {
+	public int getPhotosCountByUserAndGenre( final int userId, final int genreId ) {
 		return photoDao.getPhotoQtyByUserAndGenre( userId, genreId );
 	}
 
@@ -300,7 +295,7 @@ public class PhotoServiceImpl implements PhotoService {
 
 		final List<Genre> genres = genreService.loadAll();
 		for ( final Genre genre : genres ) {
-			final int photosInGenre = getPhotoQtyByUserAndGenre( userId, genre.getId() );
+			final int photosInGenre = getPhotosCountByUserAndGenre( userId, genre.getId() );
 			if ( photosInGenre > 0 ) {
 				result.add( genre );
 			}
@@ -310,27 +305,7 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectIdsQuery ) {
-		final SqlSelectIdsResult sqlSelectIdsResult = load( selectIdsQuery );
-		return load( sqlSelectIdsResult.getIds() );
-	}
-
-	@Override
-	public List<Photo> loadUserPhotos( final int userId ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		final SqlTable tPhoto = selectQuery.getMainTable();
-		final SqlColumnSelectable tPhotoColUserId = new SqlColumnSelect( tPhoto, PhotoDaoImpl.TABLE_COLUMN_USER_ID );
-		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoColUserId, SqlCriteriaOperator.EQUALS, userId, dateUtilsService );
-		selectQuery.setWhere( condition );
-
-		final List<Integer> photoIds = load( selectQuery ).getIds();
-
-		return load( photoIds );
-	}
-
-	@Override
-	public int getPhotoQtyByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo ) {
+	public int getPhotosCountByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo ) {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
 
 		photoSqlFilterService.addFilterByGenre( genreId, selectQuery );
@@ -395,7 +370,7 @@ public class PhotoServiceImpl implements PhotoService {
 		final List<UserPhotosByGenre> userPhotosByGenres = newArrayList();
 		for ( final Genre genre : genres ) {
 			final UserPhotosByGenre photosByGenre = new UserPhotosByGenre( genre );
-			final int photoQtyByUserAndGenre = getPhotoQtyByUserAndGenre( userId, genre.getId() );
+			final int photoQtyByUserAndGenre = getPhotosCountByUserAndGenre( userId, genre.getId() );
 			photosByGenre.setPhotosQty( photoQtyByUserAndGenre );
 
 			userPhotosByGenres.add( photosByGenre );
@@ -446,6 +421,17 @@ public class PhotoServiceImpl implements PhotoService {
 		}
 
 		return save( photo );
+	}
+
+	@Override
+	public List<Photo> getUserPhotos( final int userId ) {
+		return photoDao.getUserPhotos( userId );
+	}
+
+	@Override
+	public List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectIdsQuery ) {
+		final SqlSelectIdsResult sqlSelectIdsResult = load( selectIdsQuery );
+		return load( sqlSelectIdsResult.getIds() );
 	}
 
 	private void createPhotoDBEntry( final Photo photo, final File photoImageFile, final File preview, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {

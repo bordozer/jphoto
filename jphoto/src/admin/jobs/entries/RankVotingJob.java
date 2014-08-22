@@ -171,7 +171,7 @@ public class RankVotingJob extends AbstractJob {
 			final Set<Genre> result = newHashSet();
 
 			for ( final Genre genre : genres ) {
-				final int photosInGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
+				final int photosInGenre = services.getPhotoService().getPhotosCountByUserAndGenre( user.getId(), genre.getId() );
 				if ( photosInGenre >= minPhotosQtyForGettingVotesForRankInGenre ) {
 					result.add( genre );
 				}

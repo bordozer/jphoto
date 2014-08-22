@@ -309,7 +309,7 @@ public class UserListController {
 		for ( final User user : users ) {
 
 			final UserListData userListData = new UserListData();
-			userListData.setPhotosByUser( photoService.getPhotoQtyByUser( user.getId() ) );
+			userListData.setPhotosByUser( photoService.getPhotosCountByUser( user.getId() ) );
 			userListData.setUserAvatar( userService.getUserAvatar( user.getId() ) );
 			userListData.setUserMenu( entryMenuService.getUserMenu( user, currentUser ) );
 

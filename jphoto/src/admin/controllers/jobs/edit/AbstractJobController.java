@@ -241,7 +241,7 @@ public abstract class AbstractJobController {
 	}
 
 	protected void addUsersAndPhotosInfo( final AbstractAdminJobModel model ) {
-		model.setPhotosTotal( photoService.getPhotoQty() );
+		model.setPhotosTotal( photoService.getPhotosCount() );
 		model.setUsersTotal( userService.getUserCount() );
 	}
 

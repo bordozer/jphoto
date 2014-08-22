@@ -110,8 +110,8 @@ public class PortalPageController {
 		for ( final Genre genre : genres ) {
 			final PortalPageGenre portalGenre = new PortalPageGenre();
 			portalGenre.setGenre( genre );
-			portalGenre.setTotal( photoService.getPhotoQtyByGenre( genre.getId() ) );
-			portalGenre.setToday( photoService.getPhotoQtyByGenreForPeriod( genre.getId(), todayFirstSecond, todayLastSecond ) );
+			portalGenre.setTotal( photoService.getPhotosCountByGenre( genre.getId() ) );
+			portalGenre.setToday( photoService.getPhotosCountByGenreForPeriod( genre.getId(), todayFirstSecond, todayLastSecond ) );
 
 			portalPageGenres.add( portalGenre );
 		}

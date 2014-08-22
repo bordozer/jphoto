@@ -38,6 +38,6 @@ public class PhotoMenuItemGoToAuthorPhotos extends AbstractPhotoGoToAuthorPhotos
 
 	@Override
 	protected int getPhotosQty() {
-		return getPhotoService().getPhotoQtyByUser( menuEntry.getUserId() );
+		return getPhotoService().getPhotosCountByUser( menuEntry.getUserId() );
 	}
 }

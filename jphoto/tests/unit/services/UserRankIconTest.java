@@ -320,7 +320,7 @@ public class UserRankIconTest extends AbstractTestCase {
 
 	private PhotoService getPhotoService( final Genre genre, final User user, final int userPhotosQtyInGenre ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosQtyInGenre ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosQtyInGenre ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 

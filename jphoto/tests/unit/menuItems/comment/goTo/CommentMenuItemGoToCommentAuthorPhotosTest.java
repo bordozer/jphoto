@@ -53,7 +53,7 @@ public class CommentMenuItemGoToCommentAuthorPhotosTest extends AbstractCommentM
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
 		EasyMock.expect( photoService.load( testData.getPhoto().getId() ) ).andReturn( testData.getPhoto() ).anyTimes();
-		EasyMock.expect( photoService.getPhotoQtyByUser( testData.getCommentAuthor().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUser( testData.getCommentAuthor().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );

@@ -152,7 +152,7 @@ public class AjaxServiceImpl implements AjaxService {
 
 		if ( userExistsInTheSystem ) {
 			remotePhotoSiteUserDTO.setUserCardLink( entityLinkUtilsService.getUserCardLink( user, EnvironmentContext.getLanguage() ) );
-			remotePhotoSiteUserDTO.setPhotosCount( photoService.getPhotoQtyByUser( user.getId() ) );
+			remotePhotoSiteUserDTO.setPhotosCount( photoService.getPhotosCountByUser( user.getId() ) );
 			remotePhotoSiteUserDTO.setUserPhotosUrl( urlUtilsService.getPhotosByUserLink( user.getId() ) );
 			remotePhotoSiteUserDTO.setUserGender( user.getGender() );
 			remotePhotoSiteUserDTO.setUserMembershipType( user.getMembershipType() );

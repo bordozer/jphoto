@@ -57,7 +57,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 
 			final User user = getRandomNonPhotosightUser( 0 );
 
-			final int userPhotosQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
+			final int userPhotosQty = services.getPhotoService().getPhotosCountByUser( user.getId() );
 
 			if ( userPhotosQty == 0 ) {
 				// no photo at all yet. This randomly selected user is about to upload his first photo in this genre
@@ -70,7 +70,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 			}
 
 			// already has photo(s) int this or another genre(s)
-			final int photosByGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
+			final int photosByGenre = services.getPhotoService().getPhotosCountByUserAndGenre( user.getId(), genre.getId() );
 			if ( photosByGenre > 0 ) {
 				// already has photo(s) in this photo category - user suitable for the category and can upload another photo of this category
 				// TODO: respect photo upload allowances
@@ -145,7 +145,7 @@ public class RandomUserGenerator extends AbstractUserGenerator {
 
 		// TODO: use photoService.getUserPhotoGenres()
 		for ( final Genre genre : genres ) {
-			final int photosInGenre = services.getPhotoService().getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
+			final int photosInGenre = services.getPhotoService().getPhotosCountByUserAndGenre( user.getId(), genre.getId() );
 			if ( photosInGenre > 0 ) {
 				result.add( genre );
 			}

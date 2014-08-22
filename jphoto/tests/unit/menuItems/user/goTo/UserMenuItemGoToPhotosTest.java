@@ -107,8 +107,8 @@ public class UserMenuItemGoToPhotosTest extends AbstractUserMenuItemTest_ {
 	private PhotoService getPhotoService( final int photosQty, final User user ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUser( user.getId() ) ).andReturn( photosQty ).anyTimes();
-		EasyMock.expect( photoService.getPhotoQtyByUser( SUPER_ADMIN_1.getId() ) ).andReturn( photosQty ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUser( user.getId() ) ).andReturn( photosQty ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUser( SUPER_ADMIN_1.getId() ) ).andReturn( photosQty ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );

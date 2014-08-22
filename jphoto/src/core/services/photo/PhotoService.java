@@ -28,25 +28,19 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	List<Photo> load( final List<Integer> photoIds );
 
-	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
+	int getPhotosCount();
 
-	List<Photo> loadUserPhotos( final int userId );
+	int getPhotosCountByGenre( final int genreId );
 
-	int getPhotoQty();
+	int getPhotosCountByUser( final int userId );
 
-	int getPhotoQtyByGenre( final int genreId );
+	int getPhotosCountByUserAndGenre( final int userId, final int genreId );
 
-	int getPhotoQtyByUser( final int userId );
-
-	List<Photo> getUserPhotos( final int userId );
+	int getPhotosCountByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo );
 
 	List<Integer> getUserPhotosIds( final int userId );
 
-	int getPhotoQtyByUserAndGenre( final int userId, final int genreId );
-
 	Set<Genre> getUserPhotoGenres( final int userId );
-
-	int getPhotoQtyByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo );
 
 	int getLastUserPhotoId( final int userId );
 
@@ -63,4 +57,8 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor );
 
 	boolean movePhotoToGenreWithNotification( final int photoId, final int genreId, final User userWhoIsMoving );
+
+	List<Photo> getUserPhotos( final int userId );
+
+	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
 }

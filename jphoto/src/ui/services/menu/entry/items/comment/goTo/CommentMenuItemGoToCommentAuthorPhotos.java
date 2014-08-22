@@ -24,7 +24,7 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentGoToA
 
 			@Override
 			public String getMenuText() {
-				final int photoQtyByUser = getPhotoService().getPhotoQtyByUser( commentAuthor.getId() );
+				final int photoQtyByUser = getPhotoService().getPhotosCountByUser( commentAuthor.getId() );
 				return getTranslatorService().translate( "PhotoMenuItem: $1: all photos ( $2 )", getLanguage(), commentAuthor.getNameEscaped(), String.valueOf( photoQtyByUser ) );
 			}
 
@@ -37,6 +37,6 @@ public class CommentMenuItemGoToCommentAuthorPhotos extends AbstractCommentGoToA
 
 	@Override
 	public int getPhotoQty() {
-		return getPhotoService().getPhotoQtyByUser( menuEntry.getCommentAuthor().getId() );
+		return getPhotoService().getPhotosCountByUser( menuEntry.getCommentAuthor().getId() );
 	}
 }

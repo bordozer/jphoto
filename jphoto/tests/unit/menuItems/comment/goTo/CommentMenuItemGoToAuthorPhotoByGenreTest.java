@@ -66,7 +66,7 @@ public class CommentMenuItemGoToAuthorPhotoByGenreTest extends AbstractCommentMe
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
 		EasyMock.expect( photoService.load( testData.getPhoto().getId() ) ).andReturn( testData.getPhoto() ).anyTimes();
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( testData.getCommentAuthor().getId(), testData.getGenre().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( testData.getCommentAuthor().getId(), testData.getGenre().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );

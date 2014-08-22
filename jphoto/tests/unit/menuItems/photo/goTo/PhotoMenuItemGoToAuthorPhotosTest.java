@@ -42,7 +42,7 @@ public class PhotoMenuItemGoToAuthorPhotosTest extends AbstractPhotoMenuItemTest
 	private PhotoService getPhotoService( final GoToParameters parameters ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUser( testData.getPhotoAuthor().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUser( testData.getPhotoAuthor().getId() ) ).andReturn( parameters.getPhotosQty() ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );

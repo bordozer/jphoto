@@ -41,6 +41,6 @@ public class CommentMenuItemGoToAuthorPhotoByGenre extends AbstractCommentGoToAu
 	@Override
 	public int getPhotoQty() {
 		final Genre genre = getGenre( menuEntry );
-		return getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() );
+		return getPhotoService().getPhotosCountByUserAndGenre( menuEntry.getCommentAuthor().getId(), genre.getId() );
 	}
 }

@@ -118,7 +118,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 
 		// TODO: duplicates UserRankServiceImpl.getVotingModel() -->
 		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
-		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( photoAuthorId, genreId );
+		final int userPhotosInGenre = photoService.getPhotosCountByUserAndGenre( photoAuthorId, genreId );
 		photoInfo.setPhotoAuthorHasEnoughPhotosInGenre( userPhotosInGenre >= minPhotosQtyForGenreRankVoting  );
 		// TODO: duplicates UserRankServiceImpl.getVotingModel() <--
 

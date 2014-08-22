@@ -70,7 +70,7 @@ public class ControlPanelController {
 	public String controlPanel( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) {
 
 		model.setUsersTotal( userService.getUserCount() );
-		model.setPhotosTotal( photoService.getPhotoQty() );
+		model.setPhotosTotal( photoService.getPhotosCount() );
 		model.setPhotoPreviewsTotal( photoPreviewService.getPreviewCount() );
 		model.setPhotoCommentsTotal( photoCommentService.getPhotoCommentsCount() );
 		model.setPrivateMessagesTotal( privateMessageService.getPrivateMessagesCount() );

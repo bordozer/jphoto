@@ -182,7 +182,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
@@ -230,7 +230,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
@@ -281,7 +281,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 
@@ -341,7 +341,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
 
-		EasyMock.expect( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
+		EasyMock.expect( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) ).andReturn( userPhotosInGenre ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoService );
 

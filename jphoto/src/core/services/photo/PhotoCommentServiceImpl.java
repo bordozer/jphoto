@@ -248,7 +248,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		photoCommentInfo.setGenre( genre );
 
 		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
-		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( commentAuthorId, genreId );
+		final int userPhotosInGenre = photoService.getPhotosCountByUserAndGenre( commentAuthorId, genreId );
 
 		photoCommentInfo.setUserHasEnoughPhotosInGenre( userPhotosInGenre >= minPhotosQtyForGenreRankVoting );
 

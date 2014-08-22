@@ -62,7 +62,7 @@ public class GenreListController {
 
 		final Map<Integer, Integer> photosByGenreMap = newHashMap();
 		for ( Genre genre : genres ) {
-			photosByGenreMap.put( genre.getId(), photoService.getPhotoQtyByGenre( genre.getId() ) );
+			photosByGenreMap.put( genre.getId(), photoService.getPhotosCountByGenre( genre.getId() ) );
 		}
 		model.setPhotosByGenreMap( photosByGenreMap );
 

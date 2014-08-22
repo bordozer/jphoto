@@ -40,7 +40,7 @@ public class PhotoMenuItemGoToAuthorPhotoByGenre extends AbstractPhotoGoToAuthor
 
 	@Override
 	protected int getPhotosQty() {
-		return getPhotoService().getPhotoQtyByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() );
+		return getPhotoService().getPhotosCountByUserAndGenre( menuEntry.getUserId(), menuEntry.getGenreId() );
 	}
 
 	private Genre getGenre() {

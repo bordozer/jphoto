@@ -70,7 +70,7 @@ public class GenreListController {
 			final Photo photo = photoService.load( lastGenrePhotoId );
 			final PhotoPreviewWrapper previewWrapper = photoUIService.getPhotoPreviewWrapper( photo, EnvironmentContext.getCurrentUser() );
 			entry.setPhotoPreviewWrapper( previewWrapper );
-			entry.setPhotosCount( photoService.getPhotoQtyByGenre( genre.getId() ) );
+			entry.setPhotosCount( photoService.getPhotosCountByGenre( genre.getId() ) );
 
 			final User photoAuthor = userService.load( photo.getUserId() );
 			entry.setGenreIconTitle( translatorService.translate( "Genre list: LAst uploaded photo. Author $1", getLanguage(), photoAuthor.getNameEscaped() ) );

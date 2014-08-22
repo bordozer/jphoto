@@ -474,7 +474,7 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 
 		final int minPhotosQtyForGenreRankVoting = configurationService.getInt( ConfigurationKey.RANK_VOTING_MIN_PHOTOS_QTY_IN_GENRE );
-		final int userPhotosInGenre = photoService.getPhotoQtyByUserAndGenre( userId, genreId );
+		final int userPhotosInGenre = photoService.getPhotosCountByUserAndGenre( userId, genreId );
 		if ( userPhotosInGenre < minPhotosQtyForGenreRankVoting ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );

@@ -56,7 +56,7 @@ public class UserGenreRankVotingController {
 
 		final List<Genre> genres = genreService.loadAll();
 		for ( final Genre genre : genres ) {
-			final int qty = photoService.getPhotoQtyByUserAndGenre( userId, genre.getId() );
+			final int qty = photoService.getPhotosCountByUserAndGenre( userId, genre.getId() );
 			if ( qty > 0 ) {
 
 				final UserCardVotingAreaModel votingAreaModel = new UserCardVotingAreaModel();

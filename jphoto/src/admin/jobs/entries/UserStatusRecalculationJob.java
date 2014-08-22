@@ -41,7 +41,7 @@ public class UserStatusRecalculationJob extends NoParametersAbstractJob {
 				continue;
 			}
 
-			final int photoQty = services.getPhotoService().getPhotoQtyByUser( user.getId() );
+			final int photoQty = services.getPhotoService().getPhotosCountByUser( user.getId() );
 			if ( photoQty >= services.getConfigurationService().getInt( ConfigurationKey.CANDIDATES_PHOTOS_QTY_TO_BECOME_MEMBER ) ) {
 				if ( userService.setUserStatus( user.getId(), UserStatus.MEMBER ) ) {
 

@@ -79,7 +79,7 @@ public class PreviewGenerationJob extends AbstractJob {
 
 		final StringBuilder builder = new StringBuilder();
 
-		totalJopOperations = services.getPhotoService().getPhotoQty(); // TODO: hack!
+		totalJopOperations = services.getPhotoService().getPhotosCount(); // TODO: hack!
 
 		final Language language = getLanguage();
 		builder.append( translatorService.translate( "Preview generation job: Preview size", language ) ).append( ": " ).append( previewSize ).append( "<br />" );
@@ -93,7 +93,7 @@ public class PreviewGenerationJob extends AbstractJob {
 		final int previewSize = jobParameters.get( SavedJobParameterKey.PARAM_PREVIEW_SIZE ).getValueInt();
 		final boolean isSkip = jobParameters.get( SavedJobParameterKey.PARAM_SKIP_PHOTO_WITH_PREVIEW ).getValueBoolean();
 
-		totalJopOperations = services.getPhotoService().getPhotoQty();
+		totalJopOperations = services.getPhotoService().getPhotosCount();
 
 		this.previewSize = previewSize;
 		this.skipPhotosWithExistingPreview = isSkip;

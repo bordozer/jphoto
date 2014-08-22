@@ -157,7 +157,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Genre> genres = genreService.loadAll();
 
 		for ( final Genre genre : genres ) {
-			if ( photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() ) > 0 || userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0 ) {
+			if ( photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() ) > 0 || userRankService.getUserRankInGenre( user.getId(), genre.getId() ) > 0 ) {
 				final UserCardGenreInfo userCardGenreInfo = getUserCardGenreInfo( user, genre, accessor );
 				photosByGenresMap.put( genre, userCardGenreInfo );
 			}
@@ -290,7 +290,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final UserCardGenreInfo genreInfo = new UserCardGenreInfo();
 
-		genreInfo.setPhotosQty( photoService.getPhotoQtyByUserAndGenre( userId, genreId ) );
+		genreInfo.setPhotosQty( photoService.getPhotosCountByUserAndGenre( userId, genreId ) );
 		genreInfo.setVotingModel( userRankService.getVotingModel( userId, genreId, accessor, dateUtilsService.getCurrentTime() ) );
 		genreInfo.setUserRankInGenre( userRankService.getUserRankInGenre( userId, genreId ) );
 
@@ -312,7 +312,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 
-		final int photosByGenre = photoService.getPhotoQtyByUserAndGenre( user.getId(), genre.getId() );
+		final int photosByGenre = photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() );
 		final String title = translatorService.translate( "User card: $1: last photos. Total $2.", EnvironmentContext.getLanguage(), translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
