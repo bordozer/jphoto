@@ -99,6 +99,11 @@ public abstract class AbstractPhotoListFactory {
 			selectIdsQuery.setLimit( diff);
 
 			final List<Integer> additionalPhotosIds = getPhotosId( selectIdsQuery ).getIds();
+
+			if ( additionalPhotosIds.size() == 0 ) {
+				break;
+			}
+
 			notRestrictedPhotosIds.addAll( filterOutHiddenPhotos( additionalPhotosIds, time ) );
 
 			counter += diff;
