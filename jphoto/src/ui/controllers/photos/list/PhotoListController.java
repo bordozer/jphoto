@@ -728,7 +728,8 @@ public class PhotoListController {
 	}
 
 	private PhotoList getPhotoList( final AbstractPhotoListFactory photoListFactory, final PagingModel pagingModel ) {
-		final PhotoList photoList = photoListFactory.getPhotoList( 0, pagingModel.getCurrentPage(), getLanguage(), dateUtilsService.getCurrentTime() );
+		final int photoListId = 0; // TODO: check if it still has influence on sth
+		final PhotoList photoList = photoListFactory.getPhotoList( photoListId, pagingModel.getCurrentPage(), getLanguage(), dateUtilsService.getCurrentTime() );
 
 		if ( photoList == null ) {
 			return null;

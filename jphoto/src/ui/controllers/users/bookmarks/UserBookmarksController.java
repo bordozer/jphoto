@@ -24,7 +24,6 @@ import ui.context.EnvironmentContext;
 import ui.controllers.photos.list.PhotoListController;
 import ui.controllers.photos.list.PhotoListModel;
 import ui.elements.PhotoList;
-import ui.services.PhotoUIService;
 import ui.services.UtilsService;
 import ui.services.breadcrumbs.BreadcrumbsUserService;
 import utils.NumberUtils;
@@ -46,9 +45,6 @@ public class UserBookmarksController {
 
 	@Autowired
 	private PhotoService photoService;
-
-	@Autowired
-	private PhotoUIService photoUIService;
 
 	@Autowired
 	private UtilsService utilsService;
@@ -103,7 +99,7 @@ public class UserBookmarksController {
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_PHOTOS );
 		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes, userIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
 
 		return VIEW;
 	}
@@ -118,7 +114,7 @@ public class UserBookmarksController {
 		final List<FavoriteEntryType> userIconsTypes = newArrayList( FavoriteEntryType.FAVORITE_MEMBERS );
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
-		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS, photoIconsTypes, userIconsTypes );
+		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
 
 		final User user = userService.load( userId );
 		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
@@ -135,7 +131,7 @@ public class UserBookmarksController {
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.BOOKMARKED_PHOTOS );
 		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS, photoIconsTypes, userIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.BOOKMARKED_PHOTOS );
 
 		return VIEW;
 	}
@@ -149,18 +145,17 @@ public class UserBookmarksController {
 		final List<FavoriteEntryType> photoIconsTypes = newArrayList( FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
 		final List<FavoriteEntryType> userIconsTypes = newArrayList();
 
-		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION, photoIconsTypes, userIconsTypes );
+		initFavorites( userId, model, pagingModel, FavoriteEntryType.NEW_COMMENTS_NOTIFICATION );
 
 		return VIEW;
 	}
 
-	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes, final List<FavoriteEntryType> userIconsTypes ) {
-		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, entryType );
-		initFavorites( selectQuery,  userId, model, pagingModel, entryType, photoIconsTypes, userIconsTypes );
+	private void initFavorites( final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType favoriteEntryType ) {
+		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getFavoritesPhotosSQL( pagingModel, userId, favoriteEntryType );
+		initFavorites( selectQuery,  userId, model, pagingModel, favoriteEntryType );
 	}
 
-	private void initFavorites( final SqlIdsSelectQuery selectQuery, final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType, final List<FavoriteEntryType> photoIconsTypes
-		, final List<FavoriteEntryType> userIconsTypes ) {
+	private void initFavorites( final SqlIdsSelectQuery selectQuery, final int userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType entryType ) {
 
 		model.clear();
 
