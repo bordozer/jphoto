@@ -20,8 +20,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractPhotoListFactory {
 
-	private final SqlIdsSelectQuery selectIdsQuery;
-
 	protected final User accessor;
 	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
 
@@ -33,9 +31,8 @@ public abstract class AbstractPhotoListFactory {
 
 	protected abstract TranslatableMessage getPhotoListBottomText();
 
-	protected AbstractPhotoListFactory( final SqlIdsSelectQuery selectIdsQuery, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+	protected AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 
-		this.selectIdsQuery = selectIdsQuery;
 		this.photoFilteringStrategy = photoFilteringStrategy;
 
 		this.accessor = accessor;
@@ -43,7 +40,7 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
-		final PhotoListMetrics metrics = getPhotosIdsToShow( selectIdsQuery, time );
+		final PhotoListMetrics metrics = getPhotosIdsToShow( getSelectIdsQuery(), time );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
 
