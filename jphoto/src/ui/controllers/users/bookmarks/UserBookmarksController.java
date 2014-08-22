@@ -115,17 +115,29 @@ public class UserBookmarksController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "{userId}/favorites/members/photos/" )
 	public String showPhotosOfFavoriteMembers( final @PathVariable( "userId" ) String _userId, final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
+		securityService.assertUserExists( _userId );
+
+		final User user = userService.load( NumberUtils.convertToInt( _userId ) );
+
+		final int page = pagingModel.getCurrentPage();
+		final PhotoList photoList = photoListFactoryService.photosOfFavoriteAuthorsOfUser( user, page, EnvironmentContext.getCurrentUser() ).getPhotoList( 0, page, EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+		pagingModel.setTotalItems( photoList.getPhotosCount() );
+
+		model.addPhotoList( photoList );
+		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
+
+		return VIEW;
 		/*securityService.assertUserExists( _userId );
 
 		final int userId = NumberUtils.convertToInt( _userId );
 
 		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( pagingModel, userId );
-		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
+//		initFavorites( selectQuery, userId, model, pagingModel, FavoriteEntryType.FAVORITE_PHOTOS );
 
 		final User user = userService.load( userId );
-		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );*/
+		model.setPageTitleData( breadcrumbsUserService.getPhotosOfUserFavoriteMembersBreadcrumb( user ) );
 
-		return VIEW;
+		return VIEW;*/
 	}
 
 	private String getView( final String _userId, final PhotoListModel model, final PagingModel pagingModel, final FavoriteEntryType favoriteEntryType ) {

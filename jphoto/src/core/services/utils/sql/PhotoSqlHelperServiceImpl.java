@@ -109,8 +109,9 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 	}
 
 	@Override
-	public SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final PagingModel pagingModel, final int userId ) {
-		final SqlIdsSelectQuery selectQuery = getAllPhotosForPageIdsSQL( pagingModel );
+	public SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final User user, final int page, final int itemsOnPage ) {
+		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
 
 		final SqlTable tPhotos = selectQuery.getMainTable();
 		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
@@ -123,7 +124,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 		final SqlColumnSelect tFavColEntryUserId = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_USER_ID );
 		final SqlColumnSelect tFavColEntryType = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_ENTRY_TYPE );
-		final SqlLogicallyJoinable con1 = new SqlCondition( tFavColEntryUserId, SqlCriteriaOperator.EQUALS, userId, dateUtilsService );
+		final SqlLogicallyJoinable con1 = new SqlCondition( tFavColEntryUserId, SqlCriteriaOperator.EQUALS, user.getId(), dateUtilsService );
 		final SqlLogicallyJoinable con2 = new SqlCondition( tFavColEntryType, SqlCriteriaOperator.EQUALS, FavoriteEntryType.FAVORITE_MEMBERS.getId(), dateUtilsService );
 		final SqlLogicallyJoinable condList = new SqlLogicallyAnd( con1, con2 );
 		selectQuery.setWhere( condList );

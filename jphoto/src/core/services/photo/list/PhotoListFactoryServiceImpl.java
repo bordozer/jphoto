@@ -655,6 +655,33 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		};
 	}
 
+	@Override
+	public AbstractPhotoListFactory photosOfFavoriteAuthorsOfUser( final User user, final int page, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoSqlHelperService.getPhotosOfUserFavoritesMembersSQL( user, page, getAccessorPhotosOnPage() );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User $1: photos of favorite authors", services )
+					.userCardLink( user )
+					;
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: User $1: photos of favorite authors", services )
+					.userCardLink( user )
+					;
+			}
+		};
+	}
+
 	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
 		return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 	}

@@ -313,13 +313,13 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list title: User $1: photos of favorite authors</nerd>
+		<ru><![CDATA[$1: работы избранных авторов]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: User $1: photos of favorite authors</nerd>
+		<ru><![CDATA[Показаны работы избранных авторов пользователя $1]]></ru>
 	</translation>
 
 	<translation>
