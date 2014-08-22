@@ -4,13 +4,13 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.services.utils.sql.PhotoSqlHelperServiceImpl;
+import core.services.utils.sql.PhotoQueryServiceImpl;
 
 import java.util.Date;
 
 public class PhotoListCriterias {
 
-	private int minimalMarks = PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK;
+	private int minimalMarks = PhotoQueryServiceImpl.MIN_POSSIBLE_MARK;
 	private int photoQtyLimit;
 
 	private Date uploadDateFrom;
@@ -31,7 +31,7 @@ public class PhotoListCriterias {
 	private PhotoSort photoSort;
 
 	public boolean hasVotingCriterias() {
-		return ! ( minimalMarks == PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK
+		return ! ( minimalMarks == PhotoQueryServiceImpl.MIN_POSSIBLE_MARK
 			 && ( votingTimeFrom == null || votingTimeFrom.getTime() == 0 ) // TODO: use DateUtilsService.isEmptyTime()
 			 && ( votingTimeTo == null || votingTimeTo.getTime() == 0 )     // TODO: use DateUtilsService.isEmptyTime()
 			 && votingCategory == null

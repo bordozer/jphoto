@@ -10,12 +10,11 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.sql.PhotoSqlHelperServiceImpl;
+import core.services.utils.sql.PhotoQueryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.PhotoUtils;
 
 import java.util.Date;
-
 
 public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService {
 
@@ -30,18 +29,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		return "PhotoList: All photos";
 	}
 
-	private boolean thereAreNoFilterCriterias( final PhotoListCriterias criterias ) {
-		return criterias.getUser() == null
-			   && criterias.getGenre() == null
-			   && dateUtilsService.isEmptyTime( criterias.getUploadDateFrom() )
-			   && dateUtilsService.isEmptyTime( criterias.getUploadDateTo() )
-			   && criterias.getMembershipType() == null
-			   && criterias.getVotingCategory() == null
-			   && criterias.getVotedUser() == null
-			;
-	}
-
-	// All photos -->
 	@Override
 	public PhotoListCriterias getForAllPhotos( final User user ) {
 		return new PhotoListGallery().getPhotoListCriterias( user );
@@ -56,9 +43,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	public PhotoListCriterias getForAbsolutelyBest( final User user ) {
 		return new PhotoListAbsolutelyBest().getPhotoListCriterias( user );
 	}
-	// All photos <--
 
-	// Photos by genre -->
 	@Override
 	public PhotoListCriterias getForGenre( final Genre genre, final User user ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( user );
@@ -88,17 +73,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForGenreAbsolutelyBest( final Genre genre, final User user ) {
-		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( user );
-
-		criterias.setGenre( genre );
-
-		return criterias;
-	}
-	// Photos by genre <--
-
-	// Photos by user -->
-	@Override
 	public PhotoListCriterias getForUser( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
@@ -114,18 +88,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
 		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
 
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setUser( user );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForUserBestForPeriod( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( accessor );
-
-		//		criterias.setMarksForLastNDays( PhotoSqlHelperServiceImpl.FROM_THE_BEFINNING_OF_TIME );
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
 		criterias.setUser( user );
 
 		return criterias;
@@ -135,7 +98,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	public PhotoListCriterias getForUserAbsolutelyBest( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
 
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
 		criterias.setUser( user );
 
 		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
@@ -143,9 +106,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 		return criterias;
 	}
-	// Photos by user <--
 
-	// Photos by user and genre -->
 	@Override
 	public PhotoListCriterias getForUserAndGenre( final User user, final Genre genre, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
@@ -163,21 +124,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
 		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
 
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setUser( user );
-		criterias.setGenre( genre );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForUserAndGenreBestForPeriod( final User user, final Genre genre, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( accessor );
-
-		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
-		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
-
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
 		criterias.setUser( user );
 		criterias.setGenre( genre );
 
@@ -188,22 +135,9 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	public PhotoListCriterias getForUserAndGenreAbsolutelyBest( final User user, final Genre genre, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
 
-		//		criterias.setMarksForLastNDays( PhotoSqlHelperServiceImpl.FROM_THE_BEFINNING_OF_TIME );
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
 		criterias.setUser( user );
 		criterias.setGenre( genre );
-
-		return criterias;
-	}
-	// Photos by user and genre <--
-
-	// Photos by votingCategory -->
-	@Override
-	public PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
-		criterias.setVotingCategory( votingCategory );
 
 		return criterias;
 	}
@@ -212,7 +146,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	public PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setVotedUser( votedUser );
 
 		return criterias;
@@ -222,7 +156,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	public PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setVotingCategory( votingCategory );
 		criterias.setVotedUser( votedUser );
 
@@ -230,53 +164,10 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForVotingCategoryTopBest( final PhotoVotingCategory votingCategory, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setVotingCategory( votingCategory );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForVotingCategoryBestForPeriod( final PhotoVotingCategory votingCategory, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setVotingCategory( votingCategory );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForVotingCategoryAbsolutelyBest( final PhotoVotingCategory votingCategory, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setVotingCategory( votingCategory );
-
-		return criterias;
-	}
-	// Photos by votingCategory <--
-
-	// Photos by Period -->
-	@Override
 	public PhotoListCriterias getForPeriod( final Date dateFrom, final Date dateTo, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 
-//		setDatePeriodCriterias( criterias, dateFrom, dateTo );
-
 		addUploadDateCriteria( criterias, dateFrom, dateTo );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForPeriodTopBest( final Date dateFrom, final Date dateTo, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( accessor );
-
-		setDatePeriodCriterias( criterias, dateFrom, dateTo );
 
 		return criterias;
 	}
@@ -289,9 +180,7 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 		return criterias;
 	}
-	// Photos by Period <--
 
-	// Photos for MembershipType -->
 	@Override
 	public PhotoListCriterias getForMembershipType( UserMembershipType membershipType, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
@@ -320,22 +209,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForMembershipTypeAbsolutelyBest( UserMembershipType membershipType, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
-
-		criterias.setMembershipType( membershipType );
-
-		return criterias;
-	}
-	// Photos for MembershipType <--
-
-	// user card -->
-	@Override
 	public PhotoListCriterias getUserCardUserPhotosBest( final User cardOwner, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
 
 		criterias.setUser( cardOwner );
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
 		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
 
 		return criterias;
@@ -357,12 +235,11 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 		criterias.setVotedUser( user );
 		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
-		criterias.setMinimalMarks( PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK );
+		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_POSSIBLE_MARK );
 		criterias.setPhotoSort( PhotoSort.VOTING_TIME );
 
 		return criterias;
 	}
-	// user card <--
 
 	protected void addUploadDateCriteria( final PhotoListCriterias criterias, final Date dateFrom, final Date dateTo ) {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( dateFrom, dateTo );
@@ -370,20 +247,9 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		criterias.setUploadDateTo( timeRangeToday.getTimeTo() );
 	}
 
-	private void setDatePeriodCriterias( final PhotoListCriterias criterias, final Date dateFrom, final Date dateTo ) {
-		addUploadDateCriteria( criterias, dateFrom, dateTo );
-
-		addVotingDateCriteria( criterias, dateFrom, dateTo );
-	}
-
 	protected void addVotingDateCriteria( final PhotoListCriterias criterias, final Date dateFrom, final Date dateTo ) {
 		criterias.setVotingTimeFrom( dateUtilsService.getFirstSecondOfDay( dateFrom ) );
 		criterias.setVotingTimeTo( dateUtilsService.getLastSecondOfDay( dateTo ) );
-	}
-
-	protected void resetVotingDateCriteria( final PhotoListCriterias criterias ) {
-		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
-		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
 	}
 
 	private int getSystemDefaultMinMarks() {

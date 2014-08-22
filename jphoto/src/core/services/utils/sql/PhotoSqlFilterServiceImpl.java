@@ -59,8 +59,8 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 	public void addFilterByMinVotedMark( final BaseSqlSelectQuery selectQuery, final int minMarks ) {
 		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
-		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoSqlHelperServiceImpl.SUM_MARK_COLUMN_ALIAS );
-		final SqlCondition havingSumMarkMoreThen = new SqlCondition( tPhotoVotingColSumMark, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, minMarks > 0 ? minMarks : PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST, dateUtilsService );
+		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
+		final SqlCondition havingSumMarkMoreThen = new SqlCondition( tPhotoVotingColSumMark, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, minMarks > 0 ? minMarks : PhotoQueryServiceImpl.MIN_MARK_FOR_BEST, dateUtilsService );
 		selectQuery.setHaving( havingSumMarkMoreThen );
 	}
 

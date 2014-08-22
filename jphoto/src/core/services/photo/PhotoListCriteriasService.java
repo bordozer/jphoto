@@ -24,13 +24,9 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user );
 
-	PhotoListCriterias getForGenreAbsolutelyBest( final Genre genre, final User user );
-
 	PhotoListCriterias getForUser( final User user, final User accessor );
 
 	PhotoListCriterias getForUserTopBest( final User user, final User accessor );
-
-	PhotoListCriterias getForUserBestForPeriod( final User user, final User accessor );
 
 	PhotoListCriterias getForUserAbsolutelyBest( final User user, final User accessor );
 
@@ -38,25 +34,13 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getForUserAndGenreTopBest( final User user, final Genre genre, final User accessor );
 
-	PhotoListCriterias getForUserAndGenreBestForPeriod( final User user, final Genre genre, final User accessor );
-
 	PhotoListCriterias getForUserAndGenreAbsolutelyBest( final User user, final Genre genre, final User accessor );
-
-	PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User accessor );
 
 	PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor );
 
 	PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor );
 
-	PhotoListCriterias getForVotingCategoryTopBest( final PhotoVotingCategory votingCategory, final User accessor );
-
-	PhotoListCriterias getForVotingCategoryBestForPeriod( final PhotoVotingCategory votingCategory, final User accessor );
-
-	PhotoListCriterias getForVotingCategoryAbsolutelyBest( final PhotoVotingCategory votingCategory, final User accessor );
-
 	PhotoListCriterias getForPeriod( final Date dateFrom, final Date dateTo, final User accessor );
-
-	PhotoListCriterias getForPeriodTopBest( final Date dateFrom, final Date dateTo, final User accessor );
 
 	PhotoListCriterias getForPeriodBest( final Date dateFrom, final Date dateTo, final User accessor );
 
@@ -65,8 +49,6 @@ public interface PhotoListCriteriasService {
 	PhotoListCriterias getForMembershipTypeTopBest( final UserMembershipType membershipType, final User accessor );
 
 	PhotoListCriterias getForMembershipTypeBestForPeriod( final UserMembershipType membershipType, final User accessor );
-
-	PhotoListCriterias getForMembershipTypeAbsolutelyBest( final UserMembershipType membershipType, final User accessor );
 
 	PhotoListCriterias getUserCardUserPhotosBest( final User cardOwner, final User accessor );
 

@@ -1,4 +1,4 @@
-<%@ tag import="core.services.utils.sql.PhotoSqlHelperServiceImpl" %>
+<%@ tag import="core.services.utils.sql.PhotoQueryServiceImpl" %>
 <%@ tag import="core.services.utils.DateUtilsServiceImpl" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

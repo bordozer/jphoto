@@ -1,6 +1,7 @@
 package sql;
 
 import common.AbstractTestCase;
+import core.services.utils.sql.PhotoQueryServiceImpl;
 import ui.context.Environment;
 import ui.context.EnvironmentContext;
 import core.general.configuration.ConfigurationKey;
@@ -11,7 +12,6 @@ import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.photo.PhotoListCriteriasServiceImpl;
 import core.services.system.ConfigurationService;
-import core.services.utils.sql.PhotoSqlHelperServiceImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	public static final int PHOTO_LIST_PHOTO_TOP_QTY = 4;
 	public static final int CURRENT_PAGE = 3;
 	public static final int ITEMS_ON_PAGE = 20;
-	public static final int MIN_MARK_FOR_BEST = PhotoSqlHelperServiceImpl.MIN_MARK_FOR_BEST;
+	public static final int MIN_MARK_FOR_BEST = PhotoQueryServiceImpl.MIN_MARK_FOR_BEST;
 
 	@Before
 	public void setup() {

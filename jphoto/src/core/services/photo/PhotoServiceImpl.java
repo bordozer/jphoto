@@ -33,8 +33,8 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
+import core.services.utils.sql.PhotoQueryService;
 import core.services.utils.sql.PhotoSqlFilterService;
-import core.services.utils.sql.PhotoSqlHelperService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
@@ -98,7 +98,7 @@ public class PhotoServiceImpl implements PhotoService {
 	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Autowired
-	private PhotoSqlHelperService photoSqlHelperService;
+	private PhotoQueryService photoQueryService;
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
@@ -384,7 +384,7 @@ public class PhotoServiceImpl implements PhotoService {
 	public List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor ) {
 		// TODO: move this to somewhere
 		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
-		final SqlIdsSelectQuery selectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
+		final SqlIdsSelectQuery selectQuery = photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
 
 		return load( selectQuery ).getIds();
 	}

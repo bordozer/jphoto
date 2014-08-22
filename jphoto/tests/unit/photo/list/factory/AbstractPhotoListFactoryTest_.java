@@ -29,7 +29,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		final ServicesImpl services = getServices();
 
 		services.setPhotoListCriteriasService( getPhotoListCriteriasService( testData ) );
-		services.setPhotoSqlHelperService( photoSqlHelperService );
+		services.setPhotoQueryService( photoSqlHelperService );
 		services.setPhotoService( getPhotoService( testData ) );
 		services.setRestrictionService( getRestrictionService( testData ) );
 		services.setUrlUtilsService( urlUtilsService );

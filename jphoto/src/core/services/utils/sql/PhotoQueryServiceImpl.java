@@ -14,7 +14,7 @@ import sql.builder.*;
 
 import java.util.Date;
 
-public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
+public class PhotoQueryServiceImpl implements PhotoQueryService {
 
 	public static final int PORTAL_PAGE_LAST_PHOTOS_QTY = 12;
 	public static final int PORTAL_PAGE_BEST_PHOTOS_QTY = 8;
@@ -288,7 +288,7 @@ public class PhotoSqlHelperServiceImpl implements PhotoSqlHelperService {
 
 		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
 
-		if ( minMarks > PhotoSqlHelperServiceImpl.MIN_POSSIBLE_MARK ) {
+		if ( minMarks > PhotoQueryServiceImpl.MIN_POSSIBLE_MARK ) {
 			photoSqlFilterService.addFilterByMinVotedMark( selectQuery, minMarks );
 		}
 

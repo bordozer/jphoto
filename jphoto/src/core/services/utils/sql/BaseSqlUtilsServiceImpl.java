@@ -58,7 +58,7 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 	public void addSortBySumVotingMarksDesc( final BaseSqlSelectQuery selectQuery ) {
 		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
-		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoSqlHelperServiceImpl.SUM_MARK_COLUMN_ALIAS );
+		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
 		selectQuery.addSortingDesc( tPhotoVotingColSumMark );
 	}
 

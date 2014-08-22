@@ -33,7 +33,7 @@
 	<bean id="tempFileUtilsService" class="core.services.utils.TempFileUtilsServiceImpl"/>
 	<bean id="predicateUtilsService" class="core.services.utils.PredicateUtilsServiceImpl"/>
 
-	<bean id="photoSqlHelperService" class="core.services.utils.sql.PhotoSqlHelperServiceImpl"/>
+	<bean id="photoQueryService" class="core.services.utils.sql.PhotoQueryServiceImpl"/>
 
 	<bean id="baseSqlUtilsService" class="core.services.utils.sql.BaseSqlUtilsServiceImpl" />
 	<bean id="photoSqlFilterService" class="core.services.utils.sql.PhotoSqlFilterServiceImpl" />

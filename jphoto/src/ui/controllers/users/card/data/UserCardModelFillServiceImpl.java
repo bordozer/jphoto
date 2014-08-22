@@ -25,7 +25,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoSqlHelperService;
+import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
@@ -84,7 +84,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private UrlUtilsService urlUtilsService;
 
 	@Autowired
-	private PhotoSqlHelperService photoSqlHelperService;
+	private PhotoQueryService photoQueryService;
 
 	@Autowired
 	private EntityLinkUtilsService entityLinkUtilsService;
@@ -304,7 +304,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, currentUser );
-		final SqlIdsSelectQuery idsSQL = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, 1, getPhotosInLine() );
+		final SqlIdsSelectQuery idsSQL = photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, getPhotosInLine() );
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 

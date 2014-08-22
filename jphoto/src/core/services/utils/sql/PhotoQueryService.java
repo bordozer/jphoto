@@ -11,7 +11,7 @@ import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Date;
 
-public interface PhotoSqlHelperService {
+public interface PhotoQueryService {
 
 	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage );
 
