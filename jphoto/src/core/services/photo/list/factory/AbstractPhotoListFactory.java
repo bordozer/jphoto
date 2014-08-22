@@ -126,4 +126,8 @@ public abstract class AbstractPhotoListFactory {
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
 		return services.getPhotoService().load( selectIdsQuery );
 	}
+
+	protected int getAccessorPhotosOnPage() {
+		return services.getUtilsService().getPhotosOnPage( accessor );
+	}
 }

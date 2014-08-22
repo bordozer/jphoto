@@ -3,6 +3,11 @@
 <translations>
 
 	<translation>
+		<nerd>$1</nerd>
+		<ru><![CDATA[$1]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>System login form: Login</nerd>
 		<ru><![CDATA[Логин]]></ru>
 	</translation>

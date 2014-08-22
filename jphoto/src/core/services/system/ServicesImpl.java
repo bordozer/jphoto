@@ -18,6 +18,7 @@ import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.UserSqlUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import ui.services.UtilsService;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.UsersSecurityService;
 
@@ -166,6 +167,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
+
+	@Autowired
+	private UtilsService utilsService;
 
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -410,6 +414,11 @@ public class ServicesImpl implements Services {
 		return photoListFilteringService;
 	}
 
+	@Override
+	public UtilsService getUtilsService() {
+		return utilsService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -605,6 +614,10 @@ public class ServicesImpl implements Services {
 
 	public void setPhotoListFilteringService( final PhotoListFilteringService photoListFilteringService ) {
 		this.photoListFilteringService = photoListFilteringService;
+	}
+
+	public void setUtilsService( final UtilsService utilsService ) {
+		this.utilsService = utilsService;
 	}
 
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {

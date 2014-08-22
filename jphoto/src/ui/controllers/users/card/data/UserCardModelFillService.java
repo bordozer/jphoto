@@ -22,7 +22,7 @@ public interface UserCardModelFillService {
 
 	void setUserStatistic( final UserCardModel model );
 
-	PhotoList getBestUserPhotoList( final User user );
+	AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor );
 
 	PhotoList getLastUserPhotoList( final User user );
 

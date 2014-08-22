@@ -113,6 +113,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list bottom text: All photos</nerd>
+		<ru><![CDATA[Показаны все работы фотогалереи]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo list title: Photo gallery top best for last $1 days</nerd>
 		<ru><![CDATA[Самые лучшие работы за последние $1 дня]]></ru>
 	</translation>
@@ -130,6 +135,11 @@
 	<translation>
 		<nerd>Photo list title: Photo gallery by genre $1 top best for last $2 days</nerd>
 		<ru><![CDATA[Самые лучшие работы категории $1 за последние $2 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Photo gallery by genre $1 top best for last $2 days</nerd>
+		<ru><![CDATA[Показаны работы из категории $1, набравшие наибольшее количество оценок за последние $2 дня]]></ru>
 	</translation>
 
 	<translation>
@@ -215,6 +225,41 @@
 	<translation>
 		<nerd>Photo list bottom text: User $1: all photos from album $2</nerd>
 		<ru><![CDATA[$1: работы из альбома $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: User card $1: the best photos</nerd>
+		<ru><![CDATA[$1: самые лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom tex: User card $1: the best photos</nerd>
+		<ru><![CDATA[$1: самые лучшие работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Top best photos for last $1 days</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы за последние $1 дня]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Photo gallery absolutely best</nerd>
+		<ru><![CDATA[Абсолютный рейтинг работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

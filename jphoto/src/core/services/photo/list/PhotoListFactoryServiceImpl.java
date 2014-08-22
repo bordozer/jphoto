@@ -61,7 +61,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: All photos", services );
 			}
 		};
@@ -90,7 +90,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Top best photos for last $1 days", services ).addIntegerParameter( days() );
 			}
 		};
@@ -114,8 +114,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery absolutely best", services );
 			}
 		};
 	}
@@ -167,8 +167,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1 top best for last $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
 			}
 		};
 	}
@@ -225,7 +225,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -254,7 +254,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -288,7 +288,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -312,7 +312,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -341,7 +341,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -365,7 +365,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			protected TranslatableMessage getPhotoListBottomText() {
+			protected TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: ", services );
 			}
 		};
@@ -404,7 +404,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+				return photoSqlHelperService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, getTopPhotoListPhotosCount() );
 			}
 
 			@Override
@@ -471,7 +471,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, getTopPhotoListPhotosCount() );
 			}
 
 			@Override
@@ -505,7 +505,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, page, utilsService.getPhotosOnPage( accessor ) );
+				return photoSqlHelperService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, page, getAccessorPhotosOnPage() );
 			}
 
 			@Override
@@ -526,6 +526,49 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		};
 	}
 
+	@Override
+	public AbstractPhotoListFactory userCardPhotosBest( final User user, final User accessor ) {
+		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, getTopPhotoListPhotosCount() );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User card $1: the best photos", services )
+					.userCardLink( user )
+					;
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom tex: User card $1: the best photos", services )
+					.userCardLink( user )
+					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor ) {
+		return null;
+	}
+
+	@Override
+	public AbstractPhotoListFactory userCardPhotosLastAppraisal( final User user, final User accessor ) {
+		return null;
+	}
+
 	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final PagingModel pagingModel ) {
 		return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel );
 	}
@@ -534,7 +577,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 	}
 
-	private TranslatableMessage emptyTranslatableMessage() {
-		return new TranslatableMessage( "", services );
+	private int getTopPhotoListPhotosCount() {
+		return configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
 	}
 }

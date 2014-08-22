@@ -17,6 +17,7 @@ import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import core.services.utils.sql.UserSqlUtilsService;
+import ui.services.UtilsService;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.UsersSecurityService;
 
@@ -117,6 +118,8 @@ public interface Services {
 	RestrictionService getRestrictionService();
 
 	PhotoListFilteringService getPhotoListFilteringService();
+
+	UtilsService getUtilsService();
 
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

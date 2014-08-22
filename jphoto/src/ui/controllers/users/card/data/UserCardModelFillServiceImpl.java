@@ -343,14 +343,16 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}*/
 
 	@Override
-	public PhotoList getBestUserPhotoList( final User user ) {
-		final User currentUser = EnvironmentContext.getCurrentUser();
+	public AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor ) {
+		return photoListFactoryService.userCardPhotosBest( user, accessor );
+
+		/*final User currentUser = EnvironmentContext.getCurrentUser();
 		final List<Integer> photos = photoService.getBestUserPhotosIds( user, getPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 		final String listTitle = translatorService.translate( "User card: The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 
-		return getPhotoList( 3, photos, linkBest, listTitle );
+		return getPhotoList( 3, photos, linkBest, listTitle );*/
 	}
 
 	@Override
