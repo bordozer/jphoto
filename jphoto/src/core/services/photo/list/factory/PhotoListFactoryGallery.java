@@ -1,14 +1,14 @@
 package core.services.photo.list.factory;
 
-import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
+import sql.builder.SqlIdsSelectQuery;
 
 public abstract class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 
-	public PhotoListFactoryGallery( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
-		super( criterias, photoFilteringStrategy, accessor, services );
+	public PhotoListFactoryGallery( final SqlIdsSelectQuery selectIdsQuery, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+		super( selectIdsQuery, photoFilteringStrategy, accessor, services );
 	}
 
 	@Override

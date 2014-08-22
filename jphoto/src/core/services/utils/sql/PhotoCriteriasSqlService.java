@@ -9,7 +9,7 @@ import java.util.Date;
 
 public interface PhotoCriteriasSqlService {
 
-	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( PhotoListCriterias criterias, int page, int itemsOnPage );
+	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final PagingModel pagingModel );
 

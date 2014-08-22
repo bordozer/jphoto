@@ -11,6 +11,7 @@ import core.services.photo.list.factory.*;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
+import core.services.utils.sql.PhotoCriteriasSqlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import utils.UserUtils;
 
@@ -26,6 +27,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private ConfigurationService configurationService;
 
 	@Autowired
+	private PhotoCriteriasSqlService photoCriteriasSqlService;
+
+	@Autowired
 	private Services services;
 
 	@Override
@@ -33,7 +37,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
-		return new PhotoListFactoryGallery( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -57,7 +61,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
-		return new PhotoListFactoryTopBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -86,7 +90,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
-		return new PhotoListFactoryBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -110,7 +114,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenre( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
-		return new PhotoListFactoryGallery( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -134,7 +138,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreTopBest( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
-		return new PhotoListFactoryTopBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -163,7 +167,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
-		return new PhotoListFactoryBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -187,7 +191,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUser( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryGallery( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -221,7 +225,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserTopBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryTopBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -250,7 +254,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -284,7 +288,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( accessor, genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( accessor, accessor );
 
-		return new PhotoListFactoryGallery( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -308,7 +312,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryTopBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -337,7 +341,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryBest( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryBest( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {
@@ -362,7 +366,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
-		return new PhotoListFactoryGallery( criterias, filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, pagingModel ), filteringStrategy, accessor, services ) {
 
 			@Override
 			protected TranslatableMessage getTitle() {

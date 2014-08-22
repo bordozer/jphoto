@@ -1,7 +1,6 @@
 package core.services.photo.list.factory;
 
 import core.general.base.PagingModel;
-import core.general.data.PhotoListCriterias;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -21,27 +20,30 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractPhotoListFactory {
 
-	protected PhotoListCriterias criterias;
+	private final SqlIdsSelectQuery selectIdsQuery;
 
 	protected final User accessor;
 	protected AbstractPhotoFilteringStrategy photoFilteringStrategy;
 
 	protected final Services services;
 
+	protected abstract SqlIdsSelectQuery getSelectIdsQuery();
+
 	protected abstract TranslatableMessage getTitle();
 
 	protected abstract TranslatableMessage getPhotoListBottomText();
 
-	protected AbstractPhotoListFactory( final PhotoListCriterias criterias, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+	protected AbstractPhotoListFactory( final SqlIdsSelectQuery selectIdsQuery, final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+
+		this.selectIdsQuery = selectIdsQuery;
+		this.photoFilteringStrategy = photoFilteringStrategy;
+
 		this.accessor = accessor;
 		this.services = services;
-
-		this.criterias = criterias;
-		this.photoFilteringStrategy = photoFilteringStrategy;
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final PagingModel pagingModel, final Language language, final Date time ) {
-		final PhotoListMetrics metrics = getPhotosIdsToShow( services.getPhotoCriteriasSqlService().getForCriteriasPagedIdsSQL( criterias, pagingModel ), time );
+		final PhotoListMetrics metrics = getPhotosIdsToShow( selectIdsQuery, time );
 
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
 
@@ -89,11 +91,9 @@ public abstract class AbstractPhotoListFactory {
 			return new PhotoListMetrics( notRestrictedPhotosIds, notRestrictedPhotosIds.size() );
 		}
 
-		// TODO: Min( criterias.getPhotoQtyLimit(), selectedPhotosCount )
 		int counter = selectedPhotosCount;
-		final int photosCountToShow = criterias.getPhotoQtyLimit();
-		while( notRestrictedPhotosIds.size() < photosCountToShow ) {
-			final int diff = photosCountToShow - notRestrictedPhotosIds.size();
+		while( notRestrictedPhotosIds.size() < selectedPhotosCount ) {
+			final int diff = selectedPhotosCount - notRestrictedPhotosIds.size();
 
 			selectIdsQuery.setOffset( counter );
 			selectIdsQuery.setLimit( diff);
