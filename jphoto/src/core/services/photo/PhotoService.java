@@ -28,9 +28,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	void updatePhoto( final Photo photo, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException;
 
-	@Deprecated
-	SqlSelectResult<Photo> load( final SqlSelectQuery selectQuery );
-
 	List<Photo> load( final List<Integer> photoIds );
 
 	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );

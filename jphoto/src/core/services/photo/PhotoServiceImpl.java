@@ -265,12 +265,6 @@ public class PhotoServiceImpl implements PhotoService {
 		return result;
 	}
 
-	@Deprecated
-	@Override
-	public SqlSelectResult<Photo> load( final SqlSelectQuery selectQuery ) { // TODO: load from cache
-		return photoDao.load( selectQuery );
-	}
-
 	@Override
 	public int getPhotoQty() {
 		return photoDao.getPhotoQty();
@@ -332,6 +326,7 @@ public class PhotoServiceImpl implements PhotoService {
 		selectQuery.setWhere( condition );
 
 		final List<Integer> photoIds = load( selectQuery ).getIds();
+
 		return load( photoIds );
 	}
 
