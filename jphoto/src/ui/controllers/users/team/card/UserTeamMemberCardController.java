@@ -3,7 +3,6 @@ package ui.controllers.users.team.card;
 import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoService;
 import core.services.photo.list.PhotoListFactoryService;
 import core.services.security.SecurityService;

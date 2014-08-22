@@ -14,7 +14,6 @@ import core.services.photo.PhotoService;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.RandomUtilsService;
 
 import java.util.Date;

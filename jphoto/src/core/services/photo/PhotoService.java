@@ -10,9 +10,7 @@ import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
-import sql.SqlSelectResult;
 import sql.builder.SqlIdsSelectQuery;
-import sql.builder.SqlSelectQuery;
 
 import java.io.File;
 import java.io.IOException;

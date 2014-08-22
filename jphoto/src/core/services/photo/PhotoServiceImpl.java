@@ -39,7 +39,6 @@ import core.services.utils.sql.PhotoSqlFilterService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
-import sql.SqlSelectResult;
 import sql.builder.*;
 
 import java.io.File;
