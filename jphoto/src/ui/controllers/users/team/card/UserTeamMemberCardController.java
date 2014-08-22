@@ -54,9 +54,6 @@ public class UserTeamMemberCardController {
 	private UserService userService;
 
 	@Autowired
-	private GroupOperationService groupOperationService;
-
-	@Autowired
 	private PhotoListFactoryService photoListFactoryService;
 
 	@Autowired
