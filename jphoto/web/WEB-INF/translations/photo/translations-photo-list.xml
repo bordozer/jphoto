@@ -264,42 +264,42 @@
 
 	<translation>
 		<nerd>Photo list bottom tex: User card $1: last appraised photos</nerd>
-		<ru><![CDATA[Показаны работы, которые $1 оценил(а) недавно]]></ru>
+		<ru><![CDATA[Показаны работы, которые $1 оценил(а) последними]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: All photos of $1</nerd>
+		<ru><![CDATA[Показаны все работы пользователя $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photo gallery by user $1 top best</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы пользователя $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photo gallery by user $1 best</nerd>
+		<ru><![CDATA[Показаны лучшие работы пользователя $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photo gallery by user $1 and genre $2</nerd>
+		<ru><![CDATA[Показаны работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photo list title: Photo gallery by user $1 and genre $2 top best</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photo gallery by user $1 and genre $2 best</nerd>
+		<ru><![CDATA[Показаны лучшие работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photos which the user $1 appraised</nerd>
+		<ru><![CDATA[Показаны работы, которые $1 оценил(а)]]></ru>
 	</translation>
 
 	<translation>

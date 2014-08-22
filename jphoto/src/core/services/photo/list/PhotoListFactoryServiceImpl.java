@@ -226,7 +226,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: All photos of $1", services ).userCardLink( user );
 			}
 		};
 	}
@@ -255,7 +255,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 top best", services );
 			}
 		};
 	}
@@ -289,7 +289,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 best", services );
 			}
 		};
 	}
@@ -313,7 +313,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2", services );
 			}
 		};
 	}
@@ -342,7 +342,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo list title: Photo gallery by user $1 and genre $2 top best", services );
 			}
 		};
 	}
@@ -366,7 +366,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2 best", services );
 			}
 		};
 	}
@@ -391,7 +391,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: ", services );
+				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services );
 			}
 		};
 	}
