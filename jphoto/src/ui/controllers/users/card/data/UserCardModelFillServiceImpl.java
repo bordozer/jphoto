@@ -345,26 +345,20 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosBest( user, accessor );
-
-		/*final User currentUser = EnvironmentContext.getCurrentUser();
-		final List<Integer> photos = photoService.getBestUserPhotosIds( user, getPhotosInLine(), currentUser );
-
-		final String linkBest = urlUtilsService.getPhotosByUserLinkBest( user.getId() );
-		final String listTitle = translatorService.translate( "User card: The very best of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
-
-		return getPhotoList( 3, photos, linkBest, listTitle );*/
 	}
 
 	@Override
-	public PhotoList getLastUserPhotoList( final User user ) {
-		final User currentUser = EnvironmentContext.getCurrentUser();
+	public AbstractPhotoListFactory getLastUserPhotoList( final User user, final User accessor ) {
+		return photoListFactoryService.userCardPhotosLast( user, accessor );
+
+		/*final User currentUser = EnvironmentContext.getCurrentUser();
 		final List<Integer> photos = photoService.getLastUserPhotosIds( user, getPhotosInLine(), currentUser );
 
 		final String linkBest = urlUtilsService.getPhotosByUserLink( user.getId() );
 		final String listTitle = translatorService.translate( "User card: Last photos of $1", EnvironmentContext.getLanguage(), user.getNameEscaped() );
 		//		photoUIService.hidePhotoPreviewForAnonymouslyPostedPhotos( photoList.getPhotoInfos() );
 
-		return getPhotoList( 4, photos, linkBest, listTitle );
+		return getPhotoList( 4, photos, linkBest, listTitle );*/
 	}
 
 	@Override

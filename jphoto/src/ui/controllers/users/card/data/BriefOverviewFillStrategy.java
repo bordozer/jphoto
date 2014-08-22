@@ -28,7 +28,7 @@ public class BriefOverviewFillStrategy extends AbstractUserCardModelFillStrategy
 		final List<PhotoList> photoLists = newArrayList();
 
 		photoLists.add( userCardModelFillService.getBestUserPhotoList( user, currentUser ).getPhotoList( 3, 1, language, currentTime ) );
-		photoLists.add( userCardModelFillService.getLastUserPhotoList( user ) );
+		photoLists.add( userCardModelFillService.getLastUserPhotoList( user, currentUser ).getPhotoList( 4, 1, language, currentTime ) );
 		photoLists.add( userCardModelFillService.getLastVotedPhotoList( user ) );
 		photoLists.add( userCardModelFillService.getLastPhotosOfUserVisitors( user ) );
 		model.setPhotoLists( photoLists );

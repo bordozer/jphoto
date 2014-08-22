@@ -561,7 +561,35 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor ) {
-		return null;
+		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosLast( user, accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			protected SqlIdsSelectQuery getSelectIdsQuery() {
+				return photoCriteriasSqlService.getForCriteriasPagedIdsSQL( criterias, 1, getTopPhotoListPhotosCount() );
+			}
+
+			@Override
+			protected TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: User card $1: the latest photos", services )
+					.userCardLink( user )
+					;
+			}
+
+			@Override
+			protected String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+			}
+
+			@Override
+			protected TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom tex: User card $1: the latest photos", services )
+					.userCardLink( user )
+					;
+			}
+		};
 	}
 
 	@Override

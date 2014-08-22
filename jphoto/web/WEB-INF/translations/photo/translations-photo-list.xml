@@ -229,12 +229,12 @@
 
 	<translation>
 		<nerd>Photo list title: User card $1: the best photos</nerd>
-		<ru><![CDATA[$1: самые лучшие работы]]></ru>
+		<ru><![CDATA[$1: лучшие работы]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list bottom tex: User card $1: the best photos</nerd>
-		<ru><![CDATA[$1: самые лучшие работы]]></ru>
+		<ru><![CDATA[Самые лучшие работы пользователя $1]]></ru>
 	</translation>
 
 	<translation>
@@ -245,6 +245,96 @@
 	<translation>
 		<nerd>Photo list bottom text: Photo gallery absolutely best</nerd>
 		<ru><![CDATA[Абсолютный рейтинг работ]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: User card $1: the latest photos</nerd>
+		<ru><![CDATA[$1: последние работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom tex: User card $1: the latest photos</nerd>
+		<ru><![CDATA[Показаны последние работы пользователя $1]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

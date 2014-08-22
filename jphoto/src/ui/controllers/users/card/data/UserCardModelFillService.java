@@ -24,7 +24,7 @@ public interface UserCardModelFillService {
 
 	AbstractPhotoListFactory getBestUserPhotoList( final User user, final User accessor );
 
-	PhotoList getLastUserPhotoList( final User user );
+	AbstractPhotoListFactory getLastUserPhotoList( final User user, final User accessor );
 
 	PhotoList getLastVotedPhotoList( final User user );
 
