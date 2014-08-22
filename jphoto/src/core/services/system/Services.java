@@ -16,7 +16,7 @@ import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoCriteriasSqlService;
 import core.services.utils.sql.PhotoSqlFilterService;
-import core.services.utils.sql.UserSqlUtilsService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import ui.services.UtilsService;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.UsersSecurityService;
@@ -95,7 +95,7 @@ public interface Services {
 
 	PhotoSqlFilterService getPhotoSqlFilterService();
 
-	UserSqlUtilsService getUserSqlUtilsService();
+	PhotoSqlHelperService getPhotoSqlHelperService();
 
 	UrlUtilsService getUrlUtilsService();
 

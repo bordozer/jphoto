@@ -16,7 +16,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.UserSqlUtilsService;
+import core.services.utils.sql.PhotoSqlHelperService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,7 +82,7 @@ public class UserListController {
 	private DateUtilsService dateUtilsService;
 	
 	@Autowired
-	private UserSqlUtilsService userSqlUtilsService;
+	private PhotoSqlHelperService photoSqlHelperService;
 	
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
@@ -122,7 +122,7 @@ public class UserListController {
 		final List<UserMembershipType> userMembershipTypeList = newArrayList( UserMembershipType.values() );
 		model.setUserMembershipType( userMembershipTypeList );
 
-		final List<User> users = selectDataFromDB( pagingModel, userSqlUtilsService.getUserIdsForPageSQL( pagingModel ) );
+		final List<User> users = selectDataFromDB( pagingModel, photoSqlHelperService.getUserIdsForPageSQL( pagingModel ) );
 
 		model.setUserList( users );
 		model.setUserListDataMap( getUserListDataMap( users ) );
@@ -147,7 +147,7 @@ public class UserListController {
 
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
-		final List<User> users = selectDataFromDB( pagingModel, userSqlUtilsService.getUsersByMembershipTypeSQL( membershipType, pagingModel ) );
+		final List<User> users = selectDataFromDB( pagingModel, photoSqlHelperService.getUsersByMembershipTypeSQL( membershipType, pagingModel ) );
 		model.setUserList( users );
 
 		model.setUserListDataMap( getUserListDataMap( users ) );
@@ -178,7 +178,7 @@ public class UserListController {
 	public String showUsersQtyWhoAddedInFavoriteMembers( final @PathVariable( "userId" ) int userId, final @ModelAttribute( "userListModel" ) UserListModel model
 		, final @ModelAttribute( "userFilterModel" ) UserFilterModel filterModel, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel ) {
 
-		final SqlIdsSelectQuery selectIdsQuery = userSqlUtilsService.getAddedToFavoritesBySQL( pagingModel, userId );
+		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getAddedToFavoritesBySQL( pagingModel, userId );
 
 		final User user = userService.load( userId );
 		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getUserIsAddedInFavoriteMembersByBreadcrumbs( user ) );
@@ -322,7 +322,7 @@ public class UserListController {
 	private void initUserFavorites( final int userId, final UserListModel model, final UserFilterModel filterModel
 		, final PagingModel pagingModel, final FavoriteEntryType entryType ) {
 
-		final SqlIdsSelectQuery selectIdsQuery = userSqlUtilsService.getUsersFavoritesSQL( pagingModel, userId, entryType );
+		final SqlIdsSelectQuery selectIdsQuery = photoSqlHelperService.getUsersFavoritesSQL( pagingModel, userId, entryType );
 
 		final User user = userService.load( userId );
 		initUserFavoritesByQuery( model, filterModel, pagingModel, selectIdsQuery, breadcrumbsUserService.getUserFavoriteEntryListBreadcrumbs( user, entryType ) );
