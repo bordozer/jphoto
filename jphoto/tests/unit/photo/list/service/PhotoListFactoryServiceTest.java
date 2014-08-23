@@ -1,6 +1,8 @@
 package photo.list.service;
 
 import common.AbstractTestCase;
+import core.services.photo.PhotoListCriteriasService;
+import core.services.photo.PhotoListCriteriasServiceImpl;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.PhotoListFilteringService;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
@@ -27,20 +29,30 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).gallery( 5, 24, testData.accessor );
 
-
-		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).gallery( 5, 16, new UserMock( 111 ) );
-
-		assertEquals( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
+		assertEquals( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 96;", factory.getSelectIdsQuery().build() );
 	}
 
 	@Test
 	public void galleryForGenreTest() {
-		final TestData testData = new TestData();
-
-		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForGenre( testData.genre, 5, 16, new UserMock( 111 ) );
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForGenre( testData.genre, 5, 16, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
+	}
+
+	@Test
+	public void galleryForUserTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUser( testData.user, 3, 36, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
+	}
+
+	@Test
+	public void galleryForUserAndGenreTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.user, testData.genre, 3, 36, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
 	}
 
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
@@ -52,14 +64,19 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	private PhotoListFilteringService getPhotoListFilteringService( final TestData testData ) {
+
 		final PhotoListFilteringService photoListFilteringService = EasyMock.createMock( PhotoListFilteringService.class );
 
-		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( new AbstractPhotoFilteringStrategy() {
+		final AbstractPhotoFilteringStrategy filteringStrategy = new AbstractPhotoFilteringStrategy() {
 			@Override
 			public boolean isPhotoHidden( final int photoId, final Date time ) {
 				return false;
 			}
-		} ).anyTimes();
+		};
+
+		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+//		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListFilteringService );

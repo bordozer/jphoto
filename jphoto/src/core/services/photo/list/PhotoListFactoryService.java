@@ -22,13 +22,13 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUser( final User user, final PagingModel pagingModel, final User accessor );
+	AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUserTopBest( final User user, final PagingModel pagingModel, final User accessor );
 
 	AbstractPhotoListFactory galleryForUserBest( final User user, final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForUserAndGenre( Genre genre, PagingModel pagingModel, final User accessor );
+	AbstractPhotoListFactory galleryForUserAndGenre( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUserAndGenreTopBest( User user, Genre genre, PagingModel pagingModel, final User accessor );
 

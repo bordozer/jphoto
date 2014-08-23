@@ -223,7 +223,7 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUser( user, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUser( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		fillFilterModelWithUserData( filterModel, user );
 
@@ -259,7 +259,7 @@ public class PhotoListController {
 		final User user = userService.load( userId );
 
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenre( genre, pagingModel, user ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		filterModel.setFilterGenreId( _genreId );
 		fillFilterModelWithUserData( filterModel, user );

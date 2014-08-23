@@ -49,7 +49,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return new PhotoListQueryBuilder( dateUtilsService ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
+				return builder().sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -125,7 +125,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return new PhotoListQueryBuilder( dateUtilsService ).filterByGenre( genre ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
+				return builder().filterByGenre( genre ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -194,15 +194,14 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUser( final User user, final PagingModel pagingModel, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUser( user, accessor );
+	public AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return builder().filterByAuthor( user ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -291,15 +290,14 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserAndGenre( final Genre genre, final PagingModel pagingModel, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( accessor, genre, accessor );
-		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( accessor, accessor );
+	public AbstractPhotoListFactory galleryForUserAndGenre( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return builder().filterByAuthor( user ).filterByGenre( genre ).forPage( page, itemsOnPage ).sortByUploadTime().getQuery();
 			}
 
 			@Override
@@ -675,6 +673,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					;
 			}
 		};
+	}
+
+	private PhotoListQueryBuilder builder() {
+		return new PhotoListQueryBuilder( dateUtilsService );
 	}
 
 	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
