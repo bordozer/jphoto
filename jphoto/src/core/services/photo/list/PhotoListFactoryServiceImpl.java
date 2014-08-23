@@ -1,7 +1,6 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
-import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
@@ -65,7 +64,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryTopBest( final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryTopBest( final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
@@ -73,7 +72,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return getQuery( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -94,7 +93,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryBest( final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryBest( final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
@@ -102,7 +101,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return getQuery( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -141,7 +140,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreTopBest( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
@@ -149,7 +148,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return getQuery( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -170,7 +169,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
@@ -178,7 +177,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return getQuery( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -227,7 +226,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserTopBest( final User user, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForUserTopBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserTopBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
@@ -235,7 +234,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -256,7 +255,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserBest( final User user, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForUserBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
@@ -264,7 +263,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -313,7 +312,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
@@ -321,7 +320,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -342,7 +341,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
 		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreAbsolutelyBest( user, genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
@@ -350,7 +349,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -366,7 +365,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PagingModel pagingModel, final User accessor ) {
+	public AbstractPhotoListFactory appraisedByUserPhotos( final User user, final int page, final int itemsOnPage, final User accessor ) {
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
@@ -375,7 +374,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override

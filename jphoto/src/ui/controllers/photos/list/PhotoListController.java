@@ -167,7 +167,7 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showPhotoGallery( final @ModelAttribute("photoListModel") PhotoListModel model, final @ModelAttribute("pagingModel") PagingModel pagingModel, final @ModelAttribute(PHOTO_FILTER_MODEL) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryTopBest( pagingModel, getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryTopBest( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.gallery( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );
@@ -178,7 +178,7 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryBest( pagingModel, getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryBest( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
 
@@ -191,7 +191,7 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
@@ -207,7 +207,7 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreBest( genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreBest( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBestBreadcrumbs( genre ) );
 
@@ -222,7 +222,7 @@ public class PhotoListController {
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserTopBest( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUser( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		fillFilterModelWithUserData( filterModel, user );
@@ -238,7 +238,7 @@ public class PhotoListController {
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserBest( user, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserBest( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
 
@@ -258,7 +258,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		filterModel.setFilterGenreId( _genreId );
@@ -280,7 +280,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreBest( user, genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreBest( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserAndGenreBestBreadcrumbs( user, genre ) );
 
@@ -299,7 +299,7 @@ public class PhotoListController {
 		final int userId = assertUserExistsAndGetUserId( _userId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.appraisedByUserPhotos( user, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.appraisedByUserPhotos( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosAppraisedByUserBreadcrumbs( user ) );
 
