@@ -167,7 +167,7 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/" )
 	public String showPhotoGallery( final @ModelAttribute("photoListModel") PhotoListModel model, final @ModelAttribute("pagingModel") PagingModel pagingModel, final @ModelAttribute(PHOTO_FILTER_MODEL) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryTopBest( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryTopBest( getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.gallery( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotoGalleryBreadcrumbs() );

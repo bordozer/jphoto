@@ -11,7 +11,7 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory gallery( final int page, final int itemsOnPage, final User accessor );
 
-	AbstractPhotoListFactory galleryTopBest( final int page, final int itemsOnPage, final User accessor );
+	AbstractPhotoListFactory galleryTopBest( final User accessor );
 
 	AbstractPhotoListFactory galleryBest( final int page, final int itemsOnPage, final User accessor );
 

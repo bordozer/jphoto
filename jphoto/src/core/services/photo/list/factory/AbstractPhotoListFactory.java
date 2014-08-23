@@ -130,4 +130,8 @@ public abstract class AbstractPhotoListFactory {
 
 		return notRestrictedIds;
 	}
+
+	public AbstractPhotoFilteringStrategy getPhotoFilteringStrategy() {
+		return photoFilteringStrategy;
+	}
 }

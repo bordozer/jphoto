@@ -14,11 +14,14 @@ import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
+import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import utils.UserUtils;
+
+import java.util.Date;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
@@ -36,6 +39,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private Services services;
@@ -64,30 +70,39 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryTopBest( final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( accessor );
+	public AbstractPhotoListFactory galleryTopBest( final User accessor ) {
+
+		final int days = days();
+
+		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
+		final Date dateTo = dateUtilsService.getCurrentTime();
+
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return builder().votingBetween( dateFrom, dateTo ).forPage( 1, getTopPhotoListPhotosCount() ).sortBySumMarks().getQuery();
 			}
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery top best for last $1 days", services ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list title: Photo gallery top best for last $1 days", services ).addIntegerParameter( days );
 			}
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosBestInPeriodUrl( criterias.getVotingTimeFrom(), criterias.getVotingTimeTo() );
+				return urlUtilsService.getPhotosBestInPeriodUrl( dateFrom, dateTo );
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Top best photos for last $1 days", services ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list bottom text: Top best photos for last $1 days ( $2 - $3 )", services )
+					.addIntegerParameter( days )
+					.dateFormatted( dateFrom )
+					.dateFormatted( dateTo )
+					;
 			}
 		};
 	}
@@ -703,6 +718,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
+		this.urlUtilsService = urlUtilsService;
 	}
 }
 
