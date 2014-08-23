@@ -72,7 +72,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, page, itemsOnPage );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -101,7 +101,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, page, itemsOnPage );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -148,7 +148,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, page, itemsOnPage );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -177,7 +177,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, page, itemsOnPage );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 			}
 
 			@Override
@@ -675,10 +675,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private PhotoListQueryBuilder builder() {
 		return new PhotoListQueryBuilder( dateUtilsService );
-	}
-
-	private SqlIdsSelectQuery getQuery( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
-		return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
 	}
 
 	private int days() {
