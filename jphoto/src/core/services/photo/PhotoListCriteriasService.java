@@ -16,19 +16,13 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getForAbsolutelyBest( final User user );
 
-	PhotoListCriterias getForGenre( final Genre genre, final User user );
-
 	PhotoListCriterias getForGenreTopBest( final Genre genre, final User user );
 
 	PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user );
 
-	PhotoListCriterias getForUser( final User user, final User accessor );
-
 	PhotoListCriterias getForUserTopBest( final User user, final User accessor );
 
 	PhotoListCriterias getForUserAbsolutelyBest( final User user, final User accessor );
-
-	PhotoListCriterias getForUserAndGenre( final User user, final Genre genre, final User accessor );
 
 	PhotoListCriterias getForUserAndGenreTopBest( final User user, final Genre genre, final User accessor );
 

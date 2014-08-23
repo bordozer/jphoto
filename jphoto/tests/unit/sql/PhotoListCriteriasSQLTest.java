@@ -78,7 +78,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
 
-	// photos by genre -->
 	@Test
 	public void photosByGenreTopBest() {
 
@@ -93,24 +92,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photos.genreId = '777' ) AND photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
-	@Test
-	public void photosByGenre() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final Genre genre = new Genre();
-		genre.setId( 777 );
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForGenre( genre, EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( photos.genreId = '777' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -132,9 +113,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
-	// photos by genre <--
 
-	// photos by user -->
 	@Test
 	public void photosByUserTopBest() {
 
@@ -149,24 +128,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '999' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
-	@Test
-	public void photosByUser() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final User user = new User();
-		user.setId( 999 );
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUser( user, EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '999' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -188,9 +149,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
-	// photos by user <--
 
-	// photos by user and genre -->
 	@Test
 	public void photosByUserAndGenreTopBest() {
 
@@ -208,27 +167,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		final String actualResult = idsSelectQuery.build();
 		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT %d;", MIN_MARK_FOR_BEST, PHOTO_LIST_PHOTO_TOP_QTY );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
-	@Test
-	public void photosByUserAndGenre() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final User user = new User();
-		user.setId( 999 );
-
-		final Genre genre = new Genre();
-		genre.setId( 777 );
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenre( user, genre, EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '999' ) AND photos.genreId = '777' ) ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
@@ -253,7 +191,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
-	// photos by user and genre <--
 
 	@Test
 	public void photosByVotingCategory() {
@@ -324,7 +261,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
 
-	// photos by membership type -->
 	@Test
 	public void photosByMembershipTopBest() {
 
@@ -379,9 +315,7 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
-	// photos by membership type <--
 
-	// user card -->
 	@Test
 	public void userCardUserPhotosBest() {
 
@@ -435,12 +369,10 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
-	// user card <--
 
 	private PhotoListCriteriasServiceImpl getPhotoListCriteriasService() {
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = new PhotoListCriteriasServiceImpl();
 		photoListCriteriasService.setConfigurationService( getConfigurationService() );
-//		photoListCriteriasService.setUtilsService( getUtilsService() );
 		photoListCriteriasService.setDateUtilsService( dateUtilsService );
 
 		return photoListCriteriasService;
@@ -455,15 +387,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		EasyMock.replay( configurationService );
 		return configurationService;
 	}
-
-	/*private UtilsService getUtilsService() {
-		final UtilsService utilsService = EasyMock.createMock( UtilsService.class );
-		EasyMock.expect( utilsService.getPhotosInLine( EnvironmentContext.getCurrentUser() ) ).andReturn( PHOTOS_IN_LINE ).anyTimes();
-		EasyMock.expectLastCall();
-		EasyMock.replay( utilsService );
-
-		return utilsService;
-	}*/
 
 	private String getDateTo() {
 		return dateUtilsService.formatDateTime( dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentDate() ) );

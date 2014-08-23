@@ -40,15 +40,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForGenre( final Genre genre, final User user ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( user );
-
-		criterias.setGenre( genre );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getForGenreTopBest( final Genre genre, final User user ) {
 		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( user );
 
@@ -63,15 +54,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( user );
 
 		criterias.setGenre( genre );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForUser( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
-
-		criterias.setUser( user );
 
 		return criterias;
 	}
@@ -98,16 +80,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 
 		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
 		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
-
-		return criterias;
-	}
-
-	@Override
-	public PhotoListCriterias getForUserAndGenre( final User user, final Genre genre, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
-
-		criterias.setUser( user );
-		criterias.setGenre( genre );
 
 		return criterias;
 	}
