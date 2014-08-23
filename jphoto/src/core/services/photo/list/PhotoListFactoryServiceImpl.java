@@ -306,7 +306,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2", services ).userCardLink( accessor ).addPhotosByGenreLinkParameter( genre );
 			}
 		};
 	}
@@ -359,7 +359,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2 best", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2 best", services ).userCardLink( accessor ).addPhotosByGenreLinkParameter( genre );
 			}
 		};
 	}
