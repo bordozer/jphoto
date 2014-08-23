@@ -16,7 +16,7 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryBest( final PagingModel pagingModel, final User accessor );
 
-	AbstractPhotoListFactory galleryForGenre( final Genre genre, final PagingModel pagingModel, final User accessor );
+	AbstractPhotoListFactory galleryForGenre( final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final PagingModel pagingModel, final User accessor );
 

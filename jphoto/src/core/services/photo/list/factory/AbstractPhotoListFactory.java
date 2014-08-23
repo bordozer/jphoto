@@ -24,11 +24,11 @@ public abstract class AbstractPhotoListFactory {
 
 	protected final Services services;
 
-	protected abstract SqlIdsSelectQuery getSelectIdsQuery();
+	public abstract SqlIdsSelectQuery getSelectIdsQuery();
 
-	protected abstract TranslatableMessage getTitle();
+	public abstract TranslatableMessage getTitle();
 
-	protected AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
+	public AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 
 		this.photoFilteringStrategy = photoFilteringStrategy;
 
@@ -55,24 +55,32 @@ public abstract class AbstractPhotoListFactory {
 		return photoList;
 	}
 
-	protected String getLinkToFullList() {
+	public String getLinkToFullList() {
 		return StringUtils.EMPTY;
 	}
 
-	protected TranslatableMessage getCriteriaDescription() {
+	public TranslatableMessage getCriteriaDescription() {
 		return new TranslatableMessage( "", services );
 	}
 
-	protected TranslatableMessage getPhotoListBottomText() {
+	public TranslatableMessage getPhotoListBottomText() {
 		return new TranslatableMessage( "", services );
 	}
 
-	protected boolean showPaging() {
+	public boolean showPaging() {
 		return false;
 	}
 
-	protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+	public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+	}
+
+	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
+		return services.getPhotoService().load( selectIdsQuery );
+	}
+
+	protected int getAccessorPhotosOnPage() {
+		return services.getUtilsService().getPhotosOnPage( accessor );
 	}
 
 	protected PhotoListMetrics getPhotosIdsToShow( final SqlIdsSelectQuery selectIdsQuery, Date time ) {
@@ -121,13 +129,5 @@ public abstract class AbstractPhotoListFactory {
 		} );
 
 		return notRestrictedIds;
-	}
-
-	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
-		return services.getPhotoService().load( selectIdsQuery );
-	}
-
-	protected int getAccessorPhotosOnPage() {
-		return services.getUtilsService().getPhotosOnPage( accessor );
 	}
 }

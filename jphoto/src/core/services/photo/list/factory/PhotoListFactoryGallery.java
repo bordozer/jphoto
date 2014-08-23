@@ -11,12 +11,12 @@ public abstract class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 	}
 
 	@Override
-	protected boolean showPaging() {
+	public boolean showPaging() {
 		return true;
 	}
 
 	@Override
-	protected PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+	public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 }

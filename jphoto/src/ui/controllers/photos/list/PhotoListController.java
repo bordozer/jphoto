@@ -192,7 +192,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel, EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );
 
