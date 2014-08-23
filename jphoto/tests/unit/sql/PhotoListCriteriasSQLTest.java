@@ -64,21 +64,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void allPhotos() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
-	@Test
 	public void allPhotosAbsolutelyBest() {
 
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();

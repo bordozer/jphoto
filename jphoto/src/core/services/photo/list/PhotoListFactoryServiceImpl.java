@@ -14,6 +14,8 @@ import core.services.photo.list.factory.*;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
+import core.services.utils.DateUtilsService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
@@ -34,18 +36,20 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private PhotoQueryService photoQueryService;
 
 	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
 	private Services services;
 
 	@Override
-	public AbstractPhotoListFactory gallery( final PagingModel pagingModel, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAllPhotos( accessor );
+	public AbstractPhotoListFactory gallery( final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			protected SqlIdsSelectQuery getSelectIdsQuery() {
-				return getQuery( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
+				return new PhotoListQueryBuilder( dateUtilsService ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override

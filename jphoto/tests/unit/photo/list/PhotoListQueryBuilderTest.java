@@ -72,4 +72,14 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 
 		assertEquals( WRONG_SQL, "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '111' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC;", queryBuilder.getQuery().build() );
 	}
+
+	@Test
+	public void photoListQueryBuilderTest_7_Test() {
+		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
+			.filterByAuthor( new UserMock( 111 ) )
+			.forPage( 3, 16 )
+			;
+
+		assertEquals( WRONG_SQL, "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '111' ) LIMIT 16 OFFSET 32;", queryBuilder.getQuery().build() );
+	}
 }

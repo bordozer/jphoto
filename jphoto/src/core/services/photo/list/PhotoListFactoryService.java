@@ -10,7 +10,7 @@ import core.services.photo.list.factory.AbstractPhotoListFactory;
 
 public interface PhotoListFactoryService {
 
-	AbstractPhotoListFactory gallery( final PagingModel pagingModel, final User accessor );
+	AbstractPhotoListFactory gallery( final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryTopBest( final PagingModel pagingModel, final User accessor );
 
