@@ -5,41 +5,53 @@ import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.dao.PhotoDaoImpl;
+import core.services.dao.PhotoVotingDaoImpl;
 import core.services.dao.UserDaoImpl;
-import core.services.system.Services;
 import core.services.utils.DateUtilsService;
 import sql.builder.*;
+import utils.PagingUtils;
 
 import java.util.Date;
 
 public class PhotoListQueryBuilder {
 
-	private final Services services;
-	private SqlIdsSelectQuery query = new SqlIdsSelectQuery( new SqlTable( PhotoDaoImpl.TABLE_PHOTOS ) );
+	private final DateUtilsService dateUtilsService;
+	private SqlIdsSelectQuery query = new SqlIdsSelectQuery( table() );
 
-	public PhotoListQueryBuilder( final Services services ) {
-		this.services = services;
+	public PhotoListQueryBuilder( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
 	}
 
-	public SqlIdsSelectQuery build() {
+	public SqlIdsSelectQuery getQuery() {
 		return query;
 	}
 
 	public PhotoListQueryBuilder filterByAuthor( final User user ) {
-		getPhotoSqlFilterService().addFilterByUser( user.getId(), query );
+		final SqlColumnSelectable column = new SqlColumnSelect( table(), PhotoDaoImpl.TABLE_COLUMN_USER_ID );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.EQUALS, user.getId(), dateUtilsService ) );
+
 		return this;
 	}
 
 	public PhotoListQueryBuilder filterByGenre( final Genre genre ) {
-		getPhotoSqlFilterService().addFilterByGenre( genre.getId(), query );
+		final SqlColumnSelectable column = new SqlColumnSelect( table(), PhotoDaoImpl.TABLE_COLUMN_GENRE_ID );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.EQUALS, genre.getId(), dateUtilsService ) );
+
 		return this;
 	}
 
-	public PhotoListQueryBuilder uploaded( final Date uploadTime ) {
+	public PhotoListQueryBuilder uploadedAt( final Date uploadTime ) {
+		final SqlColumnSelectable column = new SqlColumnSelect( table(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, dateUtilsService.getFirstSecondOfDay( uploadTime ), dateUtilsService ) );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, dateUtilsService.getLastSecondOfDay( uploadTime ), dateUtilsService ) );
+
 		return this;
 	}
 
-	public PhotoListQueryBuilder uploaded( final Date from, final Date to ) {
+	public PhotoListQueryBuilder uploadedBetween( final Date timeFrom, final Date timeTo ) {
+		final SqlColumnSelectable column = new SqlColumnSelect( table(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, dateUtilsService.getFirstSecondOfDay( timeFrom ), dateUtilsService ) );
+		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, dateUtilsService.getLastSecondOfDay( timeTo ), dateUtilsService ) );
 		return this;
 	}
 
@@ -54,43 +66,70 @@ public class PhotoListQueryBuilder {
 		query.joinTable( join );
 
 		final SqlColumnSelectable tUsersColMemberType = new SqlColumnSelect( tUsers, UserDaoImpl.TABLE_COLUMN_MEMBERSHIP_TYPE );
-		final SqlLogicallyJoinable condition = new SqlCondition( tUsersColMemberType, SqlCriteriaOperator.EQUALS, userMembershipType.getId(), getDateUtilsService() );
+		final SqlLogicallyJoinable condition = new SqlCondition( tUsersColMemberType, SqlCriteriaOperator.EQUALS, userMembershipType.getId(), dateUtilsService );
 		query.addWhereAnd( condition );
 
 		return this;
 	}
 
 	public PhotoListQueryBuilder forPage( final int page, final int itemsOnPage ) {
-		getBaseSqlUtilsService().initLimitAndOffset( query, page, itemsOnPage );
+		query.setLimit( itemsOnPage );
+		query.setOffset( PagingUtils.getPageItemStartIndex( page, itemsOnPage ) );
+
 		return this;
 	}
 
-	public PhotoListQueryBuilder sortBy( final PhotoSort sort ) {
+	public PhotoListQueryBuilder sortByUploadTime() {
+		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
+		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+		query.addSortingDesc( column );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder sortBySumMarks() {
+		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
+		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
+		query.addSortingDesc( tPhotoVotingColSumMark );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder sortByVotingTime() {
+		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+		final SqlColumnSelectable sortColumn = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
+		query.addSortingDesc( sortColumn );
+
+		return this;
+	}
+
+/*	public PhotoListQueryBuilder sortBy( final PhotoSort sort ) {
 		switch ( sort ) {
-			case UPLOAD_TIME:
-				getBaseSqlUtilsService().addDescSortByUploadTimeDesc( query );
-				return this;
 			case SUM_MARKS:
-				getBaseSqlUtilsService().addSortBySumVotingMarksDesc( query );
-				getBaseSqlUtilsService().addDescSortByUploadTimeDesc( query );
+				final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+				final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
+				final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
+				query.addSortingDesc( tPhotoVotingColSumMark );
+				// AND upload time - no return here!
+			case UPLOAD_TIME:
+				final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
+				final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+				query.addSortingDesc( column );
+
 				return this;
 			case VOTING_TIME:
-				getBaseSqlUtilsService().addSortBySumVotingTimeDesc( query );
+				final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+				final SqlColumnSelectable sortColumn = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
+				query.addSortingDesc( sortColumn );
+
 				return this;
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal sort field: %s", sort ) );
-	}
+	}*/
 
-	private DateUtilsService getDateUtilsService() {
-		return services.getDateUtilsService();
-	}
-
-	private PhotoSqlFilterService getPhotoSqlFilterService() {
-		return services.getPhotoSqlFilterService();
-	}
-
-	private BaseSqlUtilsService getBaseSqlUtilsService() {
-		return services.getBaseSqlUtilsService();
+	private static SqlTable table() {
+		return new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 	}
 }
