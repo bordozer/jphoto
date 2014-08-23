@@ -3,6 +3,7 @@ package core.services.utils.sql;
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
+import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -286,6 +287,11 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 			return;
 		}
 
+		final Date votingTimeFrom = criterias.getVotingTimeFrom();
+		final Date votingTimeTo = criterias.getVotingTimeTo();
+		final PhotoVotingCategory votingCategory = criterias.getVotingCategory();
+		final User votedUser = criterias.getVotedUser();
+
 		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
 
 		if ( minMarks > PhotoQueryServiceImpl.MIN_POSSIBLE_MARK ) {
@@ -295,27 +301,25 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tVotingColVotingTime = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
 
-		final Date votingTimeFrom = criterias.getVotingTimeFrom();
 		if ( votingTimeFrom  != null && votingTimeFrom.getTime() > 0 ) { // TODO
 			final SqlCondition moreThenDateFrom = new SqlCondition( tVotingColVotingTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, votingTimeFrom, dateUtilsService );
 			selectQuery.addWhereAnd( moreThenDateFrom );
 		}
 
-		final Date votingTimeTo = criterias.getVotingTimeTo();
 		if ( votingTimeTo != null && votingTimeTo.getTime() > 0 ) { // TODO
 			final SqlCondition lessThenDateTo = new SqlCondition( tVotingColVotingTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, votingTimeTo, dateUtilsService );
 			selectQuery.addWhereAnd( lessThenDateTo );
 		}
 
-		if ( criterias.getVotingCategory() != null ) {
+		if ( votingCategory != null ) {
 			final SqlColumnSelect tVotingColVotingCategory = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_VOTING_CATEGORY_ID );
-			final SqlCondition condition = new SqlCondition( tVotingColVotingCategory, SqlCriteriaOperator.EQUALS, criterias.getVotingCategory().getId(), dateUtilsService );
+			final SqlCondition condition = new SqlCondition( tVotingColVotingCategory, SqlCriteriaOperator.EQUALS, votingCategory.getId(), dateUtilsService );
 			selectQuery.addWhereAnd( condition );
 		}
 
-		if ( criterias.getVotedUser() != null ) {
+		if ( votedUser != null ) {
 			final SqlColumnSelect tVotingColVotedUserId = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_USER_ID );
-			final SqlCondition condition = new SqlCondition( tVotingColVotedUserId, SqlCriteriaOperator.EQUALS, criterias.getVotedUser().getId(), dateUtilsService );
+			final SqlCondition condition = new SqlCondition( tVotingColVotedUserId, SqlCriteriaOperator.EQUALS, votedUser.getId(), dateUtilsService );
 			selectQuery.addWhereAnd( condition );
 		}
 	}
