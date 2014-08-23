@@ -723,6 +723,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
 		this.urlUtilsService = urlUtilsService;
 	}
+
+	public void setServices( final Services services ) {
+		this.services = services;
+	}
 }
 
 	/*@Override
