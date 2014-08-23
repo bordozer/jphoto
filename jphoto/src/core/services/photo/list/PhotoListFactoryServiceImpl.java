@@ -173,7 +173,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
+				return urlUtilsService.getPhotosByGenreLinkBest( genre.getId() );
 			}
 
 			@Override
@@ -259,7 +259,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+				return urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 			}
 
 			@Override
@@ -345,7 +345,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
+				return urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 			}
 
 			@Override
@@ -426,7 +426,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getUserTeamMemberCardLink( user.getId(), userTeamMember.getId() );
+				return urlUtilsService.getUserTeamMemberCardLink( user.getId(), userTeamMember.getId() );
 			}
 
 			@Override
@@ -492,7 +492,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
+				return urlUtilsService.getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
 			}
 
 			@Override
@@ -555,7 +555,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+				return urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 			}
 
 			@Override
@@ -587,7 +587,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserLink( user.getId() );
+				return urlUtilsService.getPhotosByUserLink( user.getId() );
 			}
 
 			@Override
@@ -620,7 +620,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosAppraisedByUserLink( user.getId() );
+				return urlUtilsService.getPhotosAppraisedByUserLink( user.getId() );
 			}
 
 			@Override
@@ -745,7 +745,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			protected String getLinkToFullList() {
-				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
+				return urlUtilsService.getPhotosByUserLinkBest( user.getId() );
 			}
 
 			@Override

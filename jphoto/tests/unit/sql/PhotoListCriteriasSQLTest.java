@@ -41,29 +41,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void allPhotosTopBest() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForPhotoGalleryTopBest( EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id "
-													 + "FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) "
-													 + "WHERE ( ( photoVoting.votingTime >= '%s' ) "
-													 + "AND photoVoting.votingTime <= '%s' ) "
-													 + "GROUP BY photos.id "
-													 + "HAVING SUM( photoVoting.mark ) >= '%d' "
-													 + "ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime "
-													 + "DESC LIMIT %d;"
-			, getDateFrom(), getDateTo(), MIN_MARKS, PHOTO_LIST_PHOTO_TOP_QTY );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
-	@Test
 	public void allPhotosAbsolutelyBest() {
 
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();

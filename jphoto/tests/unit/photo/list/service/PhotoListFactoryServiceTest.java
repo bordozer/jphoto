@@ -7,6 +7,7 @@ import core.services.photo.list.PhotoListFilteringService;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
+import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +33,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).gallery( 5, 24, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 96;", factory.getSelectIdsQuery().build() );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 
 	@Test
@@ -39,6 +41,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForGenre( testData.genre, 5, 16, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 
 	@Test
@@ -46,6 +49,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUser( testData.user, 3, 36, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 
 	@Test
@@ -53,6 +57,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.user, testData.genre, 3, 36, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 
 	@Test
@@ -60,6 +65,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosLast( testData.user, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
+		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/", factory.getLinkToFullList() );
 	}
 
 	@Test

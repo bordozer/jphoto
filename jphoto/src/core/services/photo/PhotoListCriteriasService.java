@@ -12,8 +12,6 @@ public interface PhotoListCriteriasService {
 
 	String getLinkToFullListText();
 
-	PhotoListCriterias getForPhotoGalleryTopBest( final User user );
-
 	PhotoListCriterias getForAbsolutelyBest( final User user );
 
 	PhotoListCriterias getForGenreTopBest( final Genre genre, final User user );
