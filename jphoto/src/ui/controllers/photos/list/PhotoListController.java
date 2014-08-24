@@ -178,7 +178,7 @@ public class PhotoListController {
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryBest( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryAbsolutelyBest( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getAbsolutelyBestPhotosBreadcrumbs() );
 

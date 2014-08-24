@@ -3,17 +3,12 @@ package core.services.photo.list.factory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
+import core.services.utils.sql.PhotoListQueryBuilder;
 
-public abstract class PhotoListFactoryBest extends AbstractPhotoListFactory {
-
-	protected final int days;
-	protected final int minMarks;
+public abstract class PhotoListFactoryBest extends AbstractPhotoListFactoryBest {
 
 	public PhotoListFactoryBest( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( photoFilteringStrategy, accessor, services );
-
-		days = getDays();
-		minMarks = getMinMarks( services );
 	}
 
 	@Override
@@ -24,5 +19,10 @@ public abstract class PhotoListFactoryBest extends AbstractPhotoListFactory {
 	@Override
 	public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
 		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
+	}
+
+	@Override
+	public PhotoListQueryBuilder getTopBestBaseQuery() {
+		return super.getTopBestBaseQuery();
 	}
 }

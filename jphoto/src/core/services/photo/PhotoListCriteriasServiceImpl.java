@@ -25,15 +25,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user ) {
-		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( user );
-
-		criterias.setGenre( genre );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getForUserTopBest( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( accessor );
 

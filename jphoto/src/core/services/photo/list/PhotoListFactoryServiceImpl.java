@@ -102,14 +102,14 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryBest( final int page, final int itemsOnPage, final User accessor ) {
+	public AbstractPhotoListFactory galleryAbsolutelyBest( final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByMinimalMarks( minMarks ).forPage( page, itemsOnPage ).sortBySumMarks().getQuery();
+				return builder().filterByMinimalMarks( minMarks ).sortBySumMarks().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -182,14 +182,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreBestForPeriod( genre, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return getTopBestBaseQuery().filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -693,18 +692,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private PhotoListQueryBuilder builder() {
 		return new PhotoListQueryBuilder( dateUtilsService );
 	}
-
-	/*private int days() {
-		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-	}
-
-	private int getTopPhotoListPhotosCount() {
-		return configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
-	}
-
-	private int getMinMarksForBest() {
-		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO );
-	}*/
 
 	public void setPhotoListCriteriasService( final PhotoListCriteriasService photoListCriteriasService ) {
 		this.photoListCriteriasService = photoListCriteriasService;

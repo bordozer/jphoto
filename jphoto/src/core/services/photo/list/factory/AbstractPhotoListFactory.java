@@ -37,14 +37,6 @@ public abstract class AbstractPhotoListFactory {
 		this.services = services;
 	}
 
-	protected int getMinMarks( final Services services ) {
-		return services.getConfigurationService().getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO );
-	}
-
-	protected int getDays() {
-		return services.getConfigurationService().getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-	}
-
 	public PhotoList getPhotoList( final int photoListId, final int page, final Language language, final Date time ) {
 		final PhotoListMetrics metrics = getPhotosIdsToShow( getSelectIdsQuery(), time );
 

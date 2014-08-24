@@ -10,25 +10,14 @@ import ui.elements.PhotoList;
 
 import java.util.Date;
 
-public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
+public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactoryBest {
 
-	protected final int days;
-	protected final TimeRange timeRange;
 	protected final int photosCount;
-	protected final int minMarks;
 
 	public PhotoListFactoryTopBest( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( photoFilteringStrategy, accessor, services );
 
-		days = getDays();
-		timeRange = getTimeRange();
-
 		photosCount = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
-		minMarks = getMinMarks( services );
-	}
-
-	private TimeRange getTimeRange() {
-		return services.getPhotoVotingService().getTopBestDateRange();
 	}
 
 	@Override
@@ -36,7 +25,8 @@ public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactory {
 		return page <= 1 ? super.getPhotoList( photoListId, page, language, time ) : null;
 	}
 
+	@Override
 	public PhotoListQueryBuilder getTopBestBaseQuery() {
-		return new PhotoListQueryBuilder( services.getDateUtilsService() ).votingBetween( timeRange.getTimeFrom(), timeRange.getTimeTo() ).filterByMinimalMarks( minMarks ).forPage( 1, photosCount ).sortBySumMarks();
+		return super.getTopBestBaseQuery().forPage( 1, photosCount );
 	}
 }
