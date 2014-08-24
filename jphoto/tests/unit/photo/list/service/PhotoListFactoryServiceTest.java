@@ -2,11 +2,14 @@ package photo.list.service;
 
 import common.AbstractTestCase;
 import core.general.configuration.ConfigurationKey;
+import core.general.data.TimeRange;
+import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.PhotoListFilteringService;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
+import core.services.system.ServicesImpl;
 import core.services.translator.Language;
 import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
@@ -81,7 +84,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryTopBest( testData.accessor );
 
 		final Date timeFrom = dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentTime() );
-		final Date timeTo = dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -DAYS ) );
+		final Date timeTo = dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -DAYS + 1 ) );
 
 		final String to1 = dateUtilsService.formatDateTime( timeFrom );
 		final String from1 = dateUtilsService.formatDateTime( timeTo );
@@ -89,7 +92,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final String to2 = dateUtilsService.formatDate( timeFrom );
 		final String from2 = dateUtilsService.formatDate( timeTo );
 
-		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id ORDER BY SUM( photoVoting.mark ) DESC LIMIT 4;", from1, to1 ), factory.getSelectIdsQuery().build() );
+		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '40' ORDER BY SUM( photoVoting.mark ) DESC LIMIT 4;", from1, to1 ), factory.getSelectIdsQuery().build() );
 		assertEquals( String.format( "Photo list title: Photo gallery top best for last %s days", DAYS ), factory.getTitle().build( Language.EN ) );
 		assertEquals( String.format( "http://127.0.0.1:8085/worker/photos/from/%s/to/%s/best/", from2, to2 ), factory.getLinkToFullList() );
 	}
@@ -104,15 +107,34 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
+		final ConfigurationService configurationService = getConfigurationService( testData );
+
 		final PhotoListFactoryServiceImpl photoListFactoryService = new PhotoListFactoryServiceImpl();
 
-		photoListFactoryService.setServices( getServices() );
+		final ServicesImpl services = getServices();
+		services.setConfigurationService( configurationService );
+		services.setPhotoVotingService( getPhotoVotingService() );
+
+		photoListFactoryService.setServices( services );
 		photoListFactoryService.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
-		photoListFactoryService.setConfigurationService( getConfigurationService( testData ) );
+		photoListFactoryService.setConfigurationService( configurationService );
 		photoListFactoryService.setDateUtilsService( dateUtilsService );
 		photoListFactoryService.setUrlUtilsService( urlUtilsService );
 
 		return photoListFactoryService;
+	}
+
+	private PhotoVotingService getPhotoVotingService() {
+		final TimeRange timeRange = new TimeRange( dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -DAYS + 1 ) ), dateUtilsService.getLastSecondOfToday() );
+
+		final PhotoVotingService photoVotingService = EasyMock.createMock( PhotoVotingService.class );
+
+		EasyMock.expect( photoVotingService.getTopBestDateRange() ).andReturn( timeRange ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( photoVotingService );
+
+		return photoVotingService;
 	}
 
 	private ConfigurationService getConfigurationService( final TestData testData ) {

@@ -1,5 +1,6 @@
 package core.services.photo;
 
+import core.general.data.TimeRange;
 import core.general.data.UserRating;
 import core.general.photo.Photo;
 import core.general.user.User;
@@ -33,4 +34,6 @@ public interface PhotoVotingService {
 	int getPhotoMarksForPeriod( final int photoId, final Date timeFrom, final Date timeTo );
 
 	List<UserRating> getUserRatingForPeriod( final Date timeFrom, final Date timeTo, final int limit );
+
+	TimeRange getTopBestDateRange();
 }

@@ -6,8 +6,14 @@ import core.services.system.Services;
 
 public abstract class PhotoListFactoryBest extends AbstractPhotoListFactory {
 
+	protected final int days;
+	protected final int minMarks;
+
 	public PhotoListFactoryBest( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( photoFilteringStrategy, accessor, services );
+
+		days = getDays();
+		minMarks = getMinMarks( services );
 	}
 
 	@Override

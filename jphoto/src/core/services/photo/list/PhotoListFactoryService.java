@@ -1,6 +1,7 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -52,4 +53,6 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final User accessor );
 
 	AbstractPhotoListFactory photosOfFavoriteAuthorsOfUser( final User user, final int page, final User accessor );
+
+	TimeRange getTimeRange( int days );
 }

@@ -1,5 +1,6 @@
 package core.services.photo.list.factory;
 
+import core.general.configuration.ConfigurationKey;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.services.system.Services;
@@ -34,6 +35,14 @@ public abstract class AbstractPhotoListFactory {
 
 		this.accessor = accessor;
 		this.services = services;
+	}
+
+	protected int getMinMarks( final Services services ) {
+		return services.getConfigurationService().getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO );
+	}
+
+	protected int getDays() {
+		return services.getConfigurationService().getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 	}
 
 	public PhotoList getPhotoList( final int photoListId, final int page, final Language language, final Date time ) {

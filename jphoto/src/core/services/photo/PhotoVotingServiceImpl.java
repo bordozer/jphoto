@@ -2,7 +2,9 @@ package core.services.photo;
 
 import core.exceptions.BaseRuntimeException;
 import core.general.cache.CacheKey;
+import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoRating;
+import core.general.data.TimeRange;
 import core.general.data.UserRating;
 import core.general.photo.Photo;
 import core.general.photo.PhotoInfo;
@@ -11,6 +13,7 @@ import core.general.user.UserPhotoVote;
 import core.services.dao.PhotoVotingDao;
 import core.services.entry.ActivityStreamService;
 import core.services.system.CacheService;
+import core.services.system.ConfigurationService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.controllers.users.card.MarksByCategoryInfo;
@@ -37,6 +40,9 @@ public class PhotoVotingServiceImpl implements PhotoVotingService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@Override
 	public boolean saveUserPhotoVoting( final User user, final Photo photo, final Date votingTime, final List<UserPhotoVote> userPhotoVotes ) {
@@ -108,6 +114,12 @@ public class PhotoVotingServiceImpl implements PhotoVotingService {
 	@Override
 	public List<UserRating> getUserRatingForPeriod( final Date timeFrom, final Date timeTo, final int limit ) {
 		return photoVotingDao.getUserRatingForPeriod( timeFrom, timeTo, limit );
+	}
+
+	@Override
+	public TimeRange getTopBestDateRange() {
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		return new TimeRange( dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -days + 1 ) ), dateUtilsService.getLastSecondOfToday() );
 	}
 
 	@Override

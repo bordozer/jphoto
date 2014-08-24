@@ -3,6 +3,7 @@ package core.services.photo.list;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
@@ -20,8 +21,6 @@ import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import utils.UserUtils;
-
-import java.util.Date;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
@@ -72,18 +71,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	@Override
 	public AbstractPhotoListFactory galleryTopBest( final User accessor ) {
 
-		final int days = days();
-
-		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
-		final Date dateTo = dateUtilsService.getCurrentTime();
-
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().votingBetween( dateFrom, dateTo ).forPage( 1, getTopPhotoListPhotosCount() ).sortBySumMarks().getQuery();
+				return getTopBestBaseQuery().getQuery();
 			}
 
 			@Override
@@ -93,15 +87,15 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosBestInPeriodUrl( dateFrom, dateTo );
+				return urlUtilsService.getPhotosBestInPeriodUrl( timeRange.getTimeFrom(), timeRange.getTimeTo() );
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Top best photos for last $1 days ( $2 - $3 )", services )
 					.addIntegerParameter( days )
-					.dateFormatted( dateFrom )
-					.dateFormatted( dateTo )
+					.dateFormatted( timeRange.getTimeFrom() )
+					.dateFormatted( timeRange.getTimeTo() )
 					;
 			}
 		};
@@ -115,7 +109,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByMinimalMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO ) ).forPage( page, itemsOnPage ).sortBySumMarks().getQuery();
+				return builder().filterByMinimalMarks( minMarks ).forPage( page, itemsOnPage ).sortBySumMarks().getQuery();
 			}
 
 			@Override
@@ -155,19 +149,21 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForGenreTopBest( genre, accessor );
+
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return getTopBestBaseQuery().filterByGenre( genre ).getQuery();
 			}
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best for last $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best for last $2 days", services )
+					.addPhotosByGenreLinkParameter( genre )
+					.addIntegerParameter( days );
 			}
 
 			@Override
@@ -177,7 +173,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1 top best for last $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1 top best for last $2 days", services )
+					.addPhotosByGenreLinkParameter( genre )
+					.addIntegerParameter( days );
 			}
 		};
 	}
@@ -196,7 +194,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days() );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days );
 			}
 
 			@Override
@@ -411,7 +409,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, getTopPhotoListPhotosCount() );
+				return photoQueryService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, photosCount );
 			}
 
 			@Override
@@ -478,7 +476,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, getTopPhotoListPhotosCount() );
+				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, photosCount );
 			}
 
 			@Override
@@ -542,7 +540,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, getTopPhotoListPhotosCount() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosCount );
 			}
 
 			@Override
@@ -574,7 +572,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).forPage( 1, getTopPhotoListPhotosCount() ).sortByUploadTime().getQuery();
+				return builder().filterByAuthor( user ).forPage( 1, photosCount ).sortByUploadTime().getQuery();
 			}
 
 			@Override
@@ -607,7 +605,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, getTopPhotoListPhotosCount() );
+				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosCount );
 			}
 
 			@Override
@@ -687,17 +685,26 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		};
 	}
 
+	@Override
+	public TimeRange getTimeRange( final int days ) {
+		return new TimeRange( dateUtilsService.getDatesOffsetFromCurrentDate( -days + 1 ), dateUtilsService.getCurrentTime() );
+	}
+
 	private PhotoListQueryBuilder builder() {
 		return new PhotoListQueryBuilder( dateUtilsService );
 	}
 
-	private int days() {
+	/*private int days() {
 		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
 	}
 
 	private int getTopPhotoListPhotosCount() {
 		return configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
 	}
+
+	private int getMinMarksForBest() {
+		return configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO );
+	}*/
 
 	public void setPhotoListCriteriasService( final PhotoListCriteriasService photoListCriteriasService ) {
 		this.photoListCriteriasService = photoListCriteriasService;
