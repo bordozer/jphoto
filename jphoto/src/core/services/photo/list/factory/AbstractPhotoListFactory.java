@@ -51,7 +51,7 @@ public abstract class AbstractPhotoListFactory {
 		final PhotoList photoList = new PhotoList( metrics.getPhotoIds(), getTitle().build( language ), showPaging() );
 		photoList.setPhotoListId( photoListId );
 
-		photoList.setLinkToFullListText( services.getPhotoListCriteriasService().getLinkToFullListText() );
+		photoList.setLinkToFullListText( "PhotoList: All photos" );
 		photoList.setLinkToFullList( getLinkToFullList() );
 
 		photoList.setPhotoGroupOperationMenuContainer( metrics.hasPhotos() ? getGroupOperationMenuContainer() : services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer() );

@@ -643,7 +643,7 @@ public class PhotoListController {
 
 			final List<Integer> photosIds = getPhotosIds( pagingModel, listData );
 
-			final PhotoList photoList = getPhotoList( photosIds, listData, criterias, getLanguage() );
+			final PhotoList photoList = getPhotoList( photosIds, listData, criterias );
 			photoList.setPhotoListId( listCounter++ );
 
 			photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() ); // TODO: zaglushka
@@ -664,14 +664,14 @@ public class PhotoListController {
 		return sqlSelectIdsResult.getIds();
 	}
 
-	private PhotoList getPhotoList( final List<Integer> photosIds, final PhotoListData listData, final PhotoListCriterias criterias, final Language language ) {
+	private PhotoList getPhotoList( final List<Integer> photosIds, final PhotoListData listData, final PhotoListCriterias criterias ) {
 
 		final boolean showPaging = !criterias.isTopBestPhotoList();
 
 		final String title = String.format( "<font color='red'>BUILT BY OLD WAY</font>" );
 		final PhotoList photoList = new PhotoList( photosIds, title, showPaging );
 
-		photoList.setLinkToFullListText( photoListCriteriasService.getLinkToFullListText() );
+		photoList.setLinkToFullListText( "PhotoList: All photos" );
 		photoList.setLinkToFullList( listData.getLinkToFullList() );
 		photoList.setPhotosCriteriasDescription( "<font color='red'>BUILT BY OLD WAY</font>" );
 		photoList.setBottomText( listData.getPhotoListBottomText() );

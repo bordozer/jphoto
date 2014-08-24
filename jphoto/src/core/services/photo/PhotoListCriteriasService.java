@@ -10,8 +10,6 @@ import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	String getLinkToFullListText();
-
 	PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user );
 
 	PhotoListCriterias getForUserTopBest( final User user, final User accessor );

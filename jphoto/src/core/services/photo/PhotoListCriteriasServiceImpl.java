@@ -25,11 +25,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public String getLinkToFullListText() {
-		return "PhotoList: All photos";
-	}
-
-	@Override
 	public PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user ) {
 		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( user );
 

@@ -41,6 +41,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 96;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery", factory.getTitle().build( Language.EN ) );
 		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+//		assertEquals( StringUtils.EMPTY, factory.getPhotoList( 0, 1, Language.EN, dateUtilsService.parseDateTime( "2014-08-24 15:39:40" ) ).getLinkToFullList() ); // TODO: check this
 	}
 
 	@Test
