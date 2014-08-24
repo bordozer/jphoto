@@ -159,6 +159,8 @@ public class PhotoListQueryBuilder {
 		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
 		query.addSortingDesc( tPhotoVotingColSumMark );
 
+		sortByUploadTimeDesc();
+
 		return this;
 	}
 
