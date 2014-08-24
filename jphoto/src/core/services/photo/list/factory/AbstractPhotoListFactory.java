@@ -30,8 +30,6 @@ public abstract class AbstractPhotoListFactory {
 
 	public abstract TranslatableMessage getTitle();
 
-	protected abstract PhotoListQueryBuilder getTopBestBaseQuery();
-
 	public AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 
 		this.photoFilteringStrategy = photoFilteringStrategy;

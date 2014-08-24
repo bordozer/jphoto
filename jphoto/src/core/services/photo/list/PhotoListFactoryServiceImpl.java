@@ -52,7 +52,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -131,7 +131,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery( page, itemsOnPage ).filterByGenre( genre ).getQuery();
 			}
 
 			@Override
@@ -210,7 +210,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().filterByAuthor( user ).forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery( page, itemsOnPage ).filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -306,7 +306,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().filterByAuthor( user ).filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery( page, itemsOnPage ).filterByAuthor( user ).filterByGenre( genre ).getQuery();
 			}
 
 			@Override
