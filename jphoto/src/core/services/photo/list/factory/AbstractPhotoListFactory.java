@@ -6,6 +6,7 @@ import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +29,8 @@ public abstract class AbstractPhotoListFactory {
 	public abstract SqlIdsSelectQuery getSelectIdsQuery();
 
 	public abstract TranslatableMessage getTitle();
+
+	protected abstract PhotoListQueryBuilder getTopBestBaseQuery();
 
 	public AbstractPhotoListFactory( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 

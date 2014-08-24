@@ -2,7 +2,6 @@ package ui.controllers.users.card.data;
 
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
-import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -304,7 +303,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PhotoList getUserPhotosByGenrePhotoList( final User user, final Genre genre ) {
 		final User currentUser = EnvironmentContext.getCurrentUser();
 
-		final SqlIdsSelectQuery idsSQL = new PhotoListQueryBuilder( dateUtilsService ).filterByAuthor( user ).filterByGenre( genre ).forPage( 1, getPhotosInLine() ).sortByUploadTime().getQuery();
+		final SqlIdsSelectQuery idsSQL = new PhotoListQueryBuilder( dateUtilsService ).filterByAuthor( user ).filterByGenre( genre ).forPage( 1, getPhotosInLine() ).sortByUploadTimeDesc().getQuery();
 
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 

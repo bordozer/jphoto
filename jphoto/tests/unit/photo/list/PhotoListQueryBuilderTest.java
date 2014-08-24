@@ -31,7 +31,7 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 	@Test
 	public void photoListQueryBuilderTest_2_Test() {
 		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
-			.sortByUploadTime()
+			.sortByUploadTimeDesc()
 			;
 
 		assertEquals( WRONG_SQL, "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC;", queryBuilder.getQuery().build() );
@@ -70,7 +70,7 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
 			.filterByAuthor( new UserMock( 111 ) )
 			.filterByGenre( new GenreMock( 222 ) )
-			.sortByUploadTime()
+			.sortByUploadTimeDesc()
 			;
 
 		assertEquals( WRONG_SQL, "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '111' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC;", queryBuilder.getQuery().build() );
@@ -119,7 +119,7 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
 			.votingBetween( timeFrom, timeTo )
 			.forPage( 1, 16 )
-			.sortBySumMarks()
+			.sortBySumMarksDesc()
 			;
 
 		assertEquals( WRONG_SQL, "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '2014-08-20 00:00:00' ) AND photoVoting.votingTime <= '2014-08-23 23:59:59' ) GROUP BY photos.id ORDER BY SUM( photoVoting.mark ) DESC LIMIT 16;", queryBuilder.getQuery().build() );

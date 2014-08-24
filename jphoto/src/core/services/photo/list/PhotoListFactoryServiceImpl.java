@@ -1,7 +1,6 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
-import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
@@ -53,7 +52,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -109,7 +108,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByMinimalMarks( minMarks ).sortBySumMarks().forPage( page, itemsOnPage ).getQuery();
+				return builder().filterByMinimalMarks( minMarks ).sortBySumMarksDesc().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -132,7 +131,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByGenre( genre ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery().filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -211,7 +210,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).sortByUploadTime().forPage( page, itemsOnPage ).getQuery();
+				return getTopBestBaseQuery().filterByAuthor( user ).forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -307,7 +306,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByGenre( genre ).forPage( page, itemsOnPage ).sortByUploadTime().getQuery();
+				return getTopBestBaseQuery().filterByAuthor( user ).filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -571,7 +570,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).forPage( 1, photosCount ).sortByUploadTime().getQuery();
+				return builder().filterByAuthor( user ).forPage( 1, photosCount ).sortByUploadTimeDesc().getQuery();
 			}
 
 			@Override
