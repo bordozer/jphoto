@@ -109,14 +109,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryBest( final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAbsolutelyBest( accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return builder().filterByMinimalMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO ) ).forPage( page, itemsOnPage ).sortBySumMarks().getQuery();
 			}
 
 			@Override

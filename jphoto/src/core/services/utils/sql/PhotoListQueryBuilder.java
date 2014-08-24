@@ -75,12 +75,7 @@ public class PhotoListQueryBuilder {
 
 	public PhotoListQueryBuilder votingBetween( final Date votingTimeFrom, final Date votingTimeTo ) {
 
-		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
-		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( query.getMainTable(), BaseEntityDao.ENTITY_ID );
-		final SqlColumnSelect tPhotoVotingColPhotoId = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_PHOTO_ID );
-		final SqlJoin joinVotingTable = SqlJoin.inner( tPhotoVoting, new SqlJoinCondition( tPhotoColId, tPhotoVotingColPhotoId ) );
-		query.joinTable( joinVotingTable );
-		query.addGrouping( tPhotoColId );
+		addJoinVotingTable();
 
 		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tVotingColVotingTime = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
@@ -98,15 +93,11 @@ public class PhotoListQueryBuilder {
 		return votingBetween( dateUtilsService.getDatesOffsetFromCurrentDate( days ), dateUtilsService.getCurrentTime() );
 	}
 
-	public PhotoListQueryBuilder sortByVotingTime() {
-		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
-		final SqlColumnSelectable sortColumn = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
-		query.addSortingDesc( sortColumn );
+	public PhotoListQueryBuilder filterByMinimalMarks( final int marks ) {
 
-		return this;
-	}
-
-	public PhotoListQueryBuilder minimalMarks( final int marks ) {
+		if ( ! hasVotingTableJoin() ) {
+			addJoinVotingTable();
+		}
 
 		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
@@ -119,6 +110,10 @@ public class PhotoListQueryBuilder {
 
 	public PhotoListQueryBuilder filterByVotingCategory( final PhotoVotingCategory votingCategory ) {
 
+		if ( ! hasVotingTableJoin() ) {
+			addJoinVotingTable();
+		}
+
 		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 
 		final SqlColumnSelect tVotingColVotingCategory = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_VOTING_CATEGORY_ID );
@@ -129,6 +124,10 @@ public class PhotoListQueryBuilder {
 	}
 
 	public PhotoListQueryBuilder filterByVotedUser( final User user ) {
+
+		if ( ! hasVotingTableJoin() ) {
+			addJoinVotingTable();
+		}
 
 		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 
@@ -161,6 +160,38 @@ public class PhotoListQueryBuilder {
 		query.addSortingDesc( tPhotoVotingColSumMark );
 
 		return this;
+	}
+
+	public PhotoListQueryBuilder sortByVotingTime() {
+
+		if ( ! hasVotingTableJoin() ) {
+			addJoinVotingTable();
+		}
+
+		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+		final SqlColumnSelectable sortColumn = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
+		query.addSortingDesc( sortColumn );
+
+		return this;
+	}
+
+	private boolean hasVotingTableJoin() {
+		for ( final SqlJoin sqlJoin : query.getJoins() ) {
+			if ( sqlJoin.getJoinTable().getName().equals( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING ) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private void addJoinVotingTable() {
+		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( query.getMainTable(), BaseEntityDao.ENTITY_ID );
+		final SqlColumnSelect tPhotoVotingColPhotoId = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_PHOTO_ID );
+		final SqlJoin joinVotingTable = SqlJoin.inner( tPhotoVoting, new SqlJoinCondition( tPhotoColId, tPhotoVotingColPhotoId ) );
+		query.joinTable( joinVotingTable );
+		query.addGrouping( tPhotoColId );
 	}
 
 	private static SqlTable table() {

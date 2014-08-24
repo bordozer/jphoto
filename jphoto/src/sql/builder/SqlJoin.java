@@ -92,4 +92,8 @@ public abstract class SqlJoin implements SqlLogicallyJoinable {
 			}
 		};
 	}
+
+	public SqlTable getJoinTable() {
+		return joinTable;
+	}
 }

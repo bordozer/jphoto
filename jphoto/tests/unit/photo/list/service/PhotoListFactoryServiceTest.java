@@ -19,7 +19,9 @@ import static junit.framework.Assert.assertEquals;
 
 public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
-	public static final int DAYS = 2;
+	private static final int DAYS = 2;
+	private static final int MIN_MARKS_FOR_VERY_BEST = 40;
+
 	TestData testData;
 
 	@Before
@@ -92,6 +94,15 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "http://127.0.0.1:8085/worker/photos/from/%s/to/%s/best/", from2, to2 ), factory.getLinkToFullList() );
 	}
 
+	@Test
+	public void galleryBestTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryBest( 2, 12, testData.accessor );
+
+		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC LIMIT 12 OFFSET 12;", MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: Photo gallery absolutely best", factory.getTitle().build( Language.EN ) );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+	}
+
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
 		final PhotoListFactoryServiceImpl photoListFactoryService = new PhotoListFactoryServiceImpl();
 
@@ -110,6 +121,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).andReturn( 4 ).anyTimes();
 		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS ) ).andReturn( DAYS ).anyTimes();
+		EasyMock.expect( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_THE_BEST_PHOTO ) ).andReturn( MIN_MARKS_FOR_VERY_BEST ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
@@ -131,6 +143,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 		EasyMock.expect( photoListFilteringService.topBestFilteringStrategy() ).andReturn( filteringStrategy ).anyTimes();
 		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.bestFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListFilteringService );

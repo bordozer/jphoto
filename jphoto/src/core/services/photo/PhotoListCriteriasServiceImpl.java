@@ -30,11 +30,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForAbsolutelyBest( final User user ) {
-		return new PhotoListAbsolutelyBest().getPhotoListCriterias( user );
-	}
-
-	@Override
 	public PhotoListCriterias getForGenreTopBest( final Genre genre, final User user ) {
 		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( user );
 

@@ -254,6 +254,10 @@ public abstract class BaseSqlSelectQuery {
 		this.finalSemicolor = finalSemicolor;
 	}
 
+	public List<SqlJoin> getJoins() {
+		return joins;
+	}
+
 	public SqlSelectQuery cloneQuery() {
 		final SqlSelectQuery selectQuery = new SqlSelectQuery( mainTable );
 
