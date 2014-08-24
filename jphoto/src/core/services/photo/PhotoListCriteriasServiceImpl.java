@@ -30,16 +30,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getForGenreTopBest( final Genre genre, final User user ) {
-		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( user );
-
-		criterias.setMinimalMarks( PhotoUtils.getGenreMinBallForBest( genre, getSystemDefaultMinMarks() ) );
-		criterias.setGenre( genre );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getForGenreBestForPeriod( final Genre genre, final User user ) {
 		final PhotoListCriterias criterias = new PhotoListBestForPeriod().getPhotoListCriterias( user );
 
