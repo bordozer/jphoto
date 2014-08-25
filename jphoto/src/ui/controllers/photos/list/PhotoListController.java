@@ -379,24 +379,6 @@ public class PhotoListController {
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
 
-		/*if ( pagingModel.getCurrentPage() == 1 ) {
-			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForMembershipTypeTopBest( membershipType, getCurrentUser() );
-			final PhotoListData topBestData = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-			topBestData.setPhotoListCriterias( topBestCriterias );
-			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
-
-			photoListDatas.add( topBestData );
-		}*/
-
-		/*final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( membershipType, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
-
-		photoListDatas.add( data );
-
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
-
 		return VIEW;
 	}
 
