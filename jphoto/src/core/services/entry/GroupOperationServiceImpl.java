@@ -74,4 +74,12 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 
 		return adminGroupOperationMenus;
 	}
+
+	public void setConfigurationService( final ConfigurationService configurationService ) {
+		this.configurationService = configurationService;
+	}
+
+	public void setSecurityService( final SecurityService securityService ) {
+		this.securityService = securityService;
+	}
 }
