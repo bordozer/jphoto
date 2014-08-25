@@ -705,6 +705,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.userAlbumLink( userPhotoAlbum )
 					;
 			}
+
+			@Override
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
+			}
 		};
 	}
 

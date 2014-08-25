@@ -340,6 +340,15 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	@Test
+	public void userAlbumPhotosOwnGroupMenusTest() {
+		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
+		userPhotoAlbum.setId( 3455 );
+		userPhotoAlbum.setUser( testData.user );
+
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userAlbumPhotos( testData.accessor, userPhotoAlbum, 5, 16, testData.accessor ) );
+	}
+
+	@Test
 	public void userAlbumPhotosLastTest() {
 
 		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
