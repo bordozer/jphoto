@@ -10,7 +10,6 @@ import core.general.user.UserPhotosByGenre;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.interfaces.BaseEntityService;
 import core.interfaces.IdsSqlSelectable;
-import sql.builder.SqlIdsSelectQuery;
 
 import java.io.File;
 import java.io.IOException;
@@ -55,10 +54,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor );
 
 	boolean movePhotoToGenreWithNotification( final int photoId, final int genreId, final User userWhoIsMoving );
-
-	List<Photo> getUserPhotos( final int userId );
-
-	List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectQuery );
 
 	int getLastUserPhotoId( final int userId );
 }

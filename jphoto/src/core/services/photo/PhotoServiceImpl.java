@@ -407,17 +407,6 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public List<Photo> getUserPhotos( final int userId ) {
-		return photoDao.getUserPhotos( userId );
-	}
-
-	@Override
-	public List<Photo> loadPhotosByIdsQuery( final SqlIdsSelectQuery selectIdsQuery ) {
-		final SqlSelectIdsResult sqlSelectIdsResult = load( selectIdsQuery );
-		return load( sqlSelectIdsResult.getIds() );
-	}
-
-	@Override
 	public int getLastUserPhotoId( final int userId ) {
 		return photoDao.getLastUserPhotoId( userId );
 	}

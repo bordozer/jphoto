@@ -246,16 +246,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	}
 
 	@Override
-	public List<Photo> getUserPhotos( final int userId ) {
-		final String sql = String.format( "SELECT * FROM %s WHERE %s=:userId;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID );
-
-		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue( "userId", userId );
-
-		return jdbcTemplate.query( sql, paramSource, getRowMapper() );
-	}
-
-	@Override
 	public List<Integer> getUserPhotosIds( final int userId ) {
 		final String sql = String.format( "SELECT %s FROM %s WHERE %s=:userId;", BaseEntityDao.ENTITY_ID, TABLE_PHOTOS, TABLE_COLUMN_USER_ID );
 
