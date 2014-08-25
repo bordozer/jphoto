@@ -5,7 +5,6 @@ import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.general.user.userTeam.UserTeamMember;
 import core.services.dao.*;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,51 +101,13 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	}
 
 	@Override
-	public SqlIdsSelectQuery getUserTeamMemberPhotosQuery( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
-
-		photoSqlFilterService.addFilterByUser( user.getId(), selectQuery );
-
-		final SqlTable tPhoto = selectQuery.getMainTable();
-		final SqlTable tPhotoTeam = new SqlTable( UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM );
-
-		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhoto, BaseEntityDao.ENTITY_ID );
-		final SqlColumnSelect tPhotoTeamColPhotoId = new SqlColumnSelect( tPhotoTeam, UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM_COL_PHOTO_ID );
-
-		final SqlJoin join = SqlJoin.leftOuter( tPhotoTeam, new SqlJoinCondition( tPhotoColId, tPhotoTeamColPhotoId ) );
-		selectQuery.joinTable( join );
-
-		final SqlColumnSelectable tPhotoTeamColUserTeamMemberId = new SqlColumnSelect( tPhotoTeam, UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM_COL_USER_TEAM_MEMBER_ID );
-		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoTeamColUserTeamMemberId, SqlCriteriaOperator.EQUALS, userTeamMember.getId(), dateUtilsService );
-		selectQuery.addWhereAnd( condition );
-
-		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
-
-		return selectQuery;
-	}
-
-	@Override
 	public SqlIdsSelectQuery getUserPhotoAlbumPhotosQuery( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = getQuery( page, itemsOnPage );
-
-		photoSqlFilterService.addFilterByUser( user.getId(), selectQuery );
-
-		final SqlTable tPhoto = selectQuery.getMainTable();
-		final SqlTable tUserPhotoAlbumPhotos = new SqlTable( UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS );
-
-		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhoto, BaseEntityDao.ENTITY_ID );
-		final SqlColumnSelect tUserPhotoAlbumColPhotoId = new SqlColumnSelect( tUserPhotoAlbumPhotos, UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS_COL_PHOTO_ID );
-
-		final SqlJoin join = SqlJoin.leftOuter( tUserPhotoAlbumPhotos, new SqlJoinCondition( tPhotoColId, tUserPhotoAlbumColPhotoId ) );
-		selectQuery.joinTable( join );
-
-		final SqlColumnSelectable tUserPhotoAlbumColAlbumId = new SqlColumnSelect( tUserPhotoAlbumPhotos, UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS_COL_ALBUM_ID );
-		final SqlLogicallyJoinable condition = new SqlCondition( tUserPhotoAlbumColAlbumId, SqlCriteriaOperator.EQUALS, userPhotoAlbum.getId(), dateUtilsService );
-		selectQuery.addWhereAnd( condition );
-
-		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
-
-		return selectQuery;
+		return new PhotoListQueryBuilder( dateUtilsService )
+			.filterByAuthor( user )
+			.filterByUserAlbum( userPhotoAlbum )
+			.forPage( page, itemsOnPage )
+			.sortByUploadTimeDesc()
+			.getQuery();
 	}
 
 	@Override

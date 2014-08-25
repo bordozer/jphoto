@@ -4,10 +4,9 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.services.dao.BaseEntityDao;
-import core.services.dao.PhotoDaoImpl;
-import core.services.dao.PhotoVotingDaoImpl;
-import core.services.dao.UserDaoImpl;
+import core.general.user.userAlbums.UserPhotoAlbum;
+import core.general.user.userTeam.UserTeamMember;
+import core.services.dao.*;
 import core.services.utils.DateUtilsService;
 import sql.builder.*;
 import utils.PagingUtils;
@@ -68,6 +67,40 @@ public class PhotoListQueryBuilder {
 
 		final SqlColumnSelectable tUsersColMemberType = new SqlColumnSelect( tUsers, UserDaoImpl.TABLE_COLUMN_MEMBERSHIP_TYPE );
 		final SqlLogicallyJoinable condition = new SqlCondition( tUsersColMemberType, SqlCriteriaOperator.EQUALS, userMembershipType.getId(), dateUtilsService );
+		query.addWhereAnd( condition );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder filterByUserAlbum( final UserPhotoAlbum userPhotoAlbum ) {
+		final SqlTable tPhoto = query.getMainTable();
+		final SqlTable tUserPhotoAlbumPhotos = new SqlTable( UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS );
+
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhoto, BaseEntityDao.ENTITY_ID );
+		final SqlColumnSelect tUserPhotoAlbumColPhotoId = new SqlColumnSelect( tUserPhotoAlbumPhotos, UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS_COL_PHOTO_ID );
+
+		final SqlJoin join = SqlJoin.leftOuter( tUserPhotoAlbumPhotos, new SqlJoinCondition( tPhotoColId, tUserPhotoAlbumColPhotoId ) );
+		query.joinTable( join );
+
+		final SqlColumnSelectable tUserPhotoAlbumColAlbumId = new SqlColumnSelect( tUserPhotoAlbumPhotos, UserPhotoAlbumDaoImpl.TABLE_PHOTO_ALBUMS_COL_ALBUM_ID );
+		final SqlLogicallyJoinable condition = new SqlCondition( tUserPhotoAlbumColAlbumId, SqlCriteriaOperator.EQUALS, userPhotoAlbum.getId(), dateUtilsService );
+		query.addWhereAnd( condition );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder filterByUserTeamMember( final UserTeamMember userTeamMember ) {
+		final SqlTable tPhoto = query.getMainTable();
+		final SqlTable tPhotoTeam = new SqlTable( UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM );
+
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhoto, BaseEntityDao.ENTITY_ID );
+		final SqlColumnSelect tPhotoTeamColPhotoId = new SqlColumnSelect( tPhotoTeam, UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM_COL_PHOTO_ID );
+
+		final SqlJoin join = SqlJoin.leftOuter( tPhotoTeam, new SqlJoinCondition( tPhotoColId, tPhotoTeamColPhotoId ) );
+		query.joinTable( join );
+
+		final SqlColumnSelectable tPhotoTeamColUserTeamMemberId = new SqlColumnSelect( tPhotoTeam, UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM_COL_USER_TEAM_MEMBER_ID );
+		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoTeamColUserTeamMemberId, SqlCriteriaOperator.EQUALS, userTeamMember.getId(), dateUtilsService );
 		query.addWhereAnd( condition );
 
 		return this;

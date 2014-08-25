@@ -20,8 +20,6 @@ public interface PhotoQueryService {
 
 	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final User user, final int page, final int itemsOnPage );
 
-	SqlIdsSelectQuery getUserTeamMemberPhotosQuery( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage );
-
 	SqlIdsSelectQuery getUserPhotoAlbumPhotosQuery( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getUserIdsForPageSQL( final PagingModel pagingModel );

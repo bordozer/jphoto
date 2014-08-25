@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
 import ui.elements.PhotoList;
+import utils.UserUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -122,6 +123,14 @@ public abstract class AbstractPhotoListFactory {
 		}
 
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
+	}
+
+	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
+		if ( UserUtils.isUsersEqual( user, accessor ) ) {
+			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
+		}
+
+		return getGroupOperationMenuContainer();
 	}
 
 	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow, Date time ) {

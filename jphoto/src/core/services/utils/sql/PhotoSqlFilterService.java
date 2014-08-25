@@ -6,8 +6,6 @@ import java.util.Date;
 
 public interface PhotoSqlFilterService {
 
-	void addFilterByUser( int userId, BaseSqlSelectQuery selectQuery );
-
 	void addJoinWithPhotoVotingTable( BaseSqlSelectQuery selectQuery );
 
 	void addFilterByMinVotedMark( BaseSqlSelectQuery selectQuery, int minMarks );

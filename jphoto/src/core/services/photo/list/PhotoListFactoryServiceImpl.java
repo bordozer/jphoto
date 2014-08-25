@@ -357,18 +357,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
-
-				if ( UserUtils.isUsersEqual( user, accessor ) ) {
-					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
-				}
-
-				return super.getGroupOperationMenuContainer();
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: All photos of $1", services ).userCardLink( user );
 			}
 
 			@Override
-			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: All photos of $1", services ).userCardLink( user );
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
 			}
 		};
 	}
@@ -418,18 +413,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
-			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
-
-				if ( UserUtils.isUsersEqual( user, accessor ) ) {
-					return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
-				}
-
-				return super.getGroupOperationMenuContainer();
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 best", services );
 			}
 
 			@Override
-			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 best", services );
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
 			}
 		};
 	}
@@ -453,6 +443,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2", services ).userCardLink( accessor ).addPhotosByGenreLinkParameter( genre );
+			}
+
+			@Override
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
 			}
 		};
 	}
@@ -504,6 +499,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 and genre $2 best", services ).userCardLink( accessor ).addPhotosByGenreLinkParameter( genre );
+			}
+
+			@Override
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
 			}
 		};
 	}
@@ -562,7 +562,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserTeamMemberPhotosQuery( user, userTeamMember, 1, photosCount );
+				return new PhotoListQueryBuilder( dateUtilsService )
+					.filterByAuthor( user )
+					.filterByUserTeamMember( userTeamMember )
+					.forPage( 1, photosCount )
+					.sortByUploadTimeDesc()
+					.getQuery();
 			}
 
 			@Override
@@ -598,7 +603,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserTeamMemberPhotosQuery( user, userTeamMember, page, getAccessorPhotosOnPage() );
+				return new PhotoListQueryBuilder( dateUtilsService )
+					.filterByAuthor( user )
+					.filterByUserTeamMember( userTeamMember )
+					.forPage( page, getAccessorPhotosOnPage() )
+					.sortByUploadTimeDesc()
+					.getQuery();
 			}
 
 			@Override

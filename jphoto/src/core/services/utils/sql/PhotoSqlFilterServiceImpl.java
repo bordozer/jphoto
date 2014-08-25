@@ -1,7 +1,6 @@
 package core.services.utils.sql;
 
 import core.services.dao.BaseEntityDao;
-import core.services.dao.PhotoDaoImpl;
 import core.services.dao.PhotoVotingDaoImpl;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,6 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Override
-	public void addFilterByUser( final int userId, final BaseSqlSelectQuery selectQuery ) {
-		selectQuery.addWhereAnd( baseSqlUtilsService.equalsCondition( PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, userId ) );
-	}
 
 	@Override
 	public void addJoinWithPhotoVotingTable( final BaseSqlSelectQuery selectQuery ) {
