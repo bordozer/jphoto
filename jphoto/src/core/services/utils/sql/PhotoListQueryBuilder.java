@@ -1,5 +1,6 @@
 package core.services.utils.sql;
 
+import core.enums.FavoriteEntryType;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
@@ -103,6 +104,29 @@ public class PhotoListQueryBuilder {
 		final SqlColumnSelectable tPhotoTeamColUserTeamMemberId = new SqlColumnSelect( tPhotoTeam, UserTeamMemberDaoImpl.TABLE_PHOTO_TEAM_COL_USER_TEAM_MEMBER_ID );
 		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoTeamColUserTeamMemberId, SqlCriteriaOperator.EQUALS, userTeamMember.getId(), dateUtilsService );
 		query.addWhereAnd( condition );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder filterByAddedToBookmark( final User user, final FavoriteEntryType favoriteEntryType ) {
+		final SqlTable tPhotos = query.getMainTable();
+		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
+
+		final SqlColumnSelect tPhotosColId = new SqlColumnSelect( tPhotos, BaseEntityDao.ENTITY_ID );
+		final SqlColumnSelect tFavColEntryId = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_FAVORITE_ENTRY_ID );
+		final SqlJoinCondition joinCondition = new SqlJoinCondition( tPhotosColId, tFavColEntryId );
+		final SqlJoin join = SqlJoin.inner( tFavor, joinCondition );
+		query.joinTable( join );
+
+		final SqlColumnSelect tFavColEntryUserId = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_USER_ID );
+		final SqlColumnSelect tFavColEntryType = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_ENTRY_TYPE );
+		final SqlLogicallyJoinable con1 = new SqlCondition( tFavColEntryUserId, SqlCriteriaOperator.EQUALS, user.getId(), dateUtilsService );
+		final SqlLogicallyJoinable con2 = new SqlCondition( tFavColEntryType, SqlCriteriaOperator.EQUALS, favoriteEntryType.getId(), dateUtilsService );
+		final SqlLogicallyJoinable condList = new SqlLogicallyAnd( con1, con2 );
+		query.setWhere( condList );
+
+		final SqlColumnSelect column = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_CREATED );
+		query.addSortingDesc( column );
 
 		return this;
 	}

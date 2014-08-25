@@ -801,17 +801,18 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final User accessor ) {
+	public AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getFavoritesPhotosSQL( user.getId(), favoriteEntryType, page, getAccessorPhotosOnPage() );
-				/*return builder()
-					.filterBy
-					.getQuery();*/
+//				return photoQueryService.getFavoritesPhotosSQL( user.getId(), favoriteEntryType, page, itemsOnPage );
+				return builder()
+					.filterByAddedToBookmark( user, favoriteEntryType )
+					.forPage( page, itemsOnPage )
+					.getQuery();
 			}
 
 			@Override

@@ -146,7 +146,7 @@ public class UserBookmarksController {
 		final User user = userService.load( NumberUtils.convertToInt( _userId ) );
 
 		final int page = pagingModel.getCurrentPage();
-		final PhotoList photoList = photoListFactoryService.userBookmarkedPhotos( user, favoriteEntryType, page, EnvironmentContext.getCurrentUser() ).getPhotoList( 0, page, EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+		final PhotoList photoList = photoListFactoryService.userBookmarkedPhotos( user, favoriteEntryType, page, pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ).getPhotoList( 0, page, EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
 		pagingModel.setTotalItems( photoList.getPhotosCount() );
 
 		model.addPhotoList( photoList );

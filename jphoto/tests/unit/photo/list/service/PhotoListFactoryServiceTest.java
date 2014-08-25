@@ -1,6 +1,7 @@
 package photo.list.service;
 
 import common.AbstractTestCase;
+import core.enums.FavoriteEntryType;
 import core.enums.UserTeamMemberType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
@@ -83,6 +84,15 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User card <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest photos", factory.getTitle().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/", factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void userBookmarkedPhotosTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userBookmarkedPhotos( testData.user, FavoriteEntryType.FAVORITE_PHOTOS, 1, 20, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN favorites ON ( photos.id = favorites.favoriteEntryId ) WHERE ( favorites.userId = '112' AND favorites.entryType = '2' ) ORDER BY favorites.created DESC LIMIT 20;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: bookmarked photos FavoriteEntryType: Favorite photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( emptyLink(), factory.getLinkToFullList() );
 	}
 
 	@Test
@@ -350,7 +360,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final String from2 = dateUtilsService.formatDate( timeTo );
 	}
 
-	private String emptyLink() {
+	private static String emptyLink() {
 		return StringUtils.EMPTY;
 	}
 }
