@@ -35,7 +35,7 @@ public class BaseDaoImpl {
 
 	protected int getIntValueOrZero( final String sql, final MapSqlParameterSource paramSource ) {
 		try {
-			return jdbcTemplate.queryForInt( sql, paramSource );
+			return jdbcTemplate.queryForObject( sql, paramSource, Integer.class );
 		} catch ( EmptyResultDataAccessException e ) {
 			return 0;
 		}
@@ -43,7 +43,7 @@ public class BaseDaoImpl {
 
 	protected long getLongValueOrZero( final String sql, final MapSqlParameterSource paramSource ) {
 		try {
-			return jdbcTemplate.queryForLong( sql, paramSource );
+			return jdbcTemplate.queryForObject( sql, paramSource, Long.class );
 		} catch ( EmptyResultDataAccessException e ) {
 			return 0;
 		}
@@ -67,7 +67,7 @@ public class BaseDaoImpl {
 
 	protected boolean hasEntry( final String sql, final MapSqlParameterSource paramSource ) {
 		try {
-			return jdbcTemplate.queryForInt( sql, paramSource ) > 0;
+			return jdbcTemplate.queryForObject( sql, paramSource, Integer.class ) > 0;
 		} catch ( EmptyResultDataAccessException e ) {
 			return false;
 		}

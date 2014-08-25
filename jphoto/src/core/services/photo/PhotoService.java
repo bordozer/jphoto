@@ -56,4 +56,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	boolean movePhotoToGenreWithNotification( final int photoId, final int genreId, final User userWhoIsMoving );
 
 	int getLastUserPhotoId( final int userId );
+
+	boolean isUserPhotoImported( final int userId, final int importId );
 }

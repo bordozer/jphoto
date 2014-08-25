@@ -99,16 +99,7 @@ public class JobHelperServiceImpl implements JobHelperService {
 
 	@Override
 	public boolean doesUserPhotoExist( final int userId, final int importId ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		photoSqlFilterService.addFilterByUser( userId, selectQuery );
-
-		final SqlColumnSelectable tPhotoColName = new SqlColumnSelect( selectQuery.getMainTable(), PhotoDaoImpl.TABLE_COLUMN_IMPORT_ID );
-		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoColName, SqlCriteriaOperator.EQUALS, importId, dateUtilsService );
-		selectQuery.addWhereAnd( condition );
-
-		List<Integer> ids = photoService.load( selectQuery ).getIds();
-
-		return ids != null && ids.size() > 0;
+		return photoService.isUserPhotoImported( userId, importId );
 	}
 
 	private SqlIdsSelectQuery getFirstPhotoUploadTimeSQL() {

@@ -255,6 +255,17 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		return jdbcTemplate.query( sql, paramSource, new IdsRowMapper() );
 	}
 
+	@Override
+	public boolean isUserPhotoImported( final int userId, final int importId ) {
+		final String sql = String.format( "SELECT 1 FROM %s WHERE %s=:userId AND %s=:importId;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_IMPORT_ID );
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "userId", userId );
+		paramSource.addValue( "importId", importId );
+
+		return hasEntry( sql, paramSource );
+	}
+
 	private int getUserGenrePhotosQty( final int userId, final int genreId ) {
 		final String sql = String.format( "SELECT COUNT(id) FROM %s WHERE %s=:userId AND %s=:genreId;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_GENRE_ID );
 
@@ -262,7 +273,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( "userId", userId );
 		paramSource.addValue( "genreId", genreId );
 
-		return jdbcTemplate.queryForInt( sql, paramSource );
+		return jdbcTemplate.queryForObject( sql, paramSource, Integer.class );
 	}
 
 	private String toXml( final PhotoImportData photoImportData ) {

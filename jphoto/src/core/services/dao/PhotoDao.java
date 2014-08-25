@@ -16,7 +16,9 @@ public interface PhotoDao extends BaseEntityDao<Photo> {
 
 	int getLastUserPhotoId( final int userId );
 
-	int getLastGenrePhotoId( int genreId );
+	int getLastGenrePhotoId( final int genreId );
 
 	List<Integer> getUserPhotosIds( final int userId );
+
+	boolean isUserPhotoImported( final int userId, final int importId );
 }

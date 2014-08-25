@@ -411,6 +411,11 @@ public class PhotoServiceImpl implements PhotoService {
 		return photoDao.getLastUserPhotoId( userId );
 	}
 
+	@Override
+	public boolean isUserPhotoImported( final int userId, final int importId ) {
+		return photoDao.isUserPhotoImported( userId, importId );
+	}
+
 	private void createPhotoDBEntry( final Photo photo, final File photoImageFile, final File preview, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
 
 		photo.setFileSize( photoImageFile.length() );
