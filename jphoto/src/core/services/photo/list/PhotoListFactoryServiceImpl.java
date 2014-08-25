@@ -1,7 +1,6 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
-import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
@@ -11,7 +10,6 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.list.factory.*;
-import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
@@ -22,6 +20,8 @@ import sql.builder.SqlIdsSelectQuery;
 import utils.UserUtils;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
+
+	private static final int USER_CARD_BEST_MIN_MARKS = 1;
 
 	@Autowired
 	private PhotoListCriteriasService photoListCriteriasService;
@@ -237,7 +237,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder().filterByAuthor( user ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override
@@ -259,14 +259,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAbsolutelyBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return builder().filterByAuthor( user ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -530,7 +529,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder().filterByAuthor( user ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override

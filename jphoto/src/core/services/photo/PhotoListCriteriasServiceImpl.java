@@ -25,19 +25,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public PhotoListCriterias getForUserAbsolutelyBest( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setUser( user );
-
-		criterias.setVotingTimeFrom( dateUtilsService.getEmptyTime() );
-		criterias.setVotingTimeTo( dateUtilsService.getEmptyTime() );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getForUserAndGenreTopBest( final User user, final Genre genre, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListTopBest().getPhotoListCriterias( accessor );
 
