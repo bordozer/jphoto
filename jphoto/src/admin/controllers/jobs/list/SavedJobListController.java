@@ -215,7 +215,7 @@ public class SavedJobListController {
 		}
 		final SqlColumnSelectable sortColumn = new SqlColumnSelect( jobHistoryTable, JobExecutionHistoryDaoImpl.ENTITY_ID );
 		selectQuery.addSortingDesc( sortColumn );
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final SqlSelectIdsResult idsResult = jobExecutionHistoryService.load( selectQuery );
 

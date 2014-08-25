@@ -409,7 +409,7 @@ public class PhotoListController {
 		final User currentUser = getCurrentUser();
 
 		final SqlIdsSelectQuery selectQuery = filterData.getSelectQuery();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectQuery );
 
@@ -561,7 +561,7 @@ public class PhotoListController {
 		selectIdsQuery.addSorting( tableSortColumn, sortOrder.getSortOrder() );
 		selectIdsQuery.addSorting( tPhotosColUploadTime, SqlSortOrder.DESC );
 
-		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final User currentUser = getCurrentUser();
 

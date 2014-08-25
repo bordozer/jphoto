@@ -205,10 +205,18 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder sortByUploadTimeDesc() {
+	public PhotoListQueryBuilder sortByUploadTimeAsc() {
 		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
 		query.addSortingDesc( column );
+
+		return this;
+	}
+
+	public PhotoListQueryBuilder sortByUploadTimeDesc() {
+		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
+		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
+		query.addSortingAsc( column );
 
 		return this;
 	}

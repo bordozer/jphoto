@@ -225,7 +225,7 @@ public class UserListController {
 		}
 
 		final SqlIdsSelectQuery selectQuery = filterData.getSelectQuery();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final SqlSelectResult<User> selectResult = userService.loadByIds( selectQuery );
 
@@ -281,7 +281,7 @@ public class UserListController {
 		final SqlLogicallyJoinable where = new SqlLogicallyAnd( likeNameCondition, new SqlLogicallyOr( membershipConditions ) );
 
 		selectQuery.setWhere( where );
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final SqlSelectResult<User> selectResult = userService.loadByIds( selectQuery );
 

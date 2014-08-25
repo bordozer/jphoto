@@ -1,9 +1,6 @@
 package core.services.utils.sql;
 
-import core.general.base.PagingModel;
 import core.services.dao.GenreDaoImpl;
-import core.services.dao.PhotoDaoImpl;
-import core.services.dao.PhotoVotingDaoImpl;
 import core.services.dao.UserDaoImpl;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +13,10 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final PagingModel pagingModel ) {
-		initLimitAndOffset( sqlSelectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
-	}
-
-	@Override
 	public void initLimitAndOffset( final BaseSqlSelectQuery sqlSelectQuery, final int page, final int itemsOnPage ) {
 		final int firstElementIndex = PagingUtils.getPageItemStartIndex( page, itemsOnPage );
 		sqlSelectQuery.setLimit( itemsOnPage );
 		sqlSelectQuery.setOffset( firstElementIndex );
-	}
-
-	@Override
-	public SqlIdsSelectQuery getPhotosIdsSQL() {
-		return new SqlIdsSelectQuery( new SqlTable( PhotoDaoImpl.TABLE_PHOTOS ) );
 	}
 
 	@Override
@@ -40,33 +27,6 @@ public class BaseSqlUtilsServiceImpl implements BaseSqlUtilsService {
 	@Override
 	public SqlIdsSelectQuery getGenresIdsSQL() {
 		return new SqlIdsSelectQuery( new SqlTable( GenreDaoImpl.TABLE_GENRES ) );
-	}
-
-	@Override
-	public SqlLogicallyJoinable equalsCondition( final String tableName, final String columnName, final long value ) {
-		return getCondition( tableName, columnName, value, SqlCriteriaOperator.EQUALS );
-	}
-
-	@Override
-	public void addDescSortByUploadTimeDesc( final BaseSqlSelectQuery selectQuery ) {
-		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
-		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		selectQuery.addSortingDesc( column );
-	}
-
-	@Override
-	public void addSortBySumVotingMarksDesc( final BaseSqlSelectQuery selectQuery ) {
-		final SqlTable tPhotoVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
-		final SqlColumnSelect tPhotoVotingColMark = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_MARK );
-		final SqlColumnAggregate tPhotoVotingColSumMark = new SqlColumnAggregate( tPhotoVotingColMark, SqlFunctions.SUM, PhotoQueryServiceImpl.SUM_MARK_COLUMN_ALIAS );
-		selectQuery.addSortingDesc( tPhotoVotingColSumMark );
-	}
-
-	@Override
-	public void addSortBySumVotingTimeDesc( final BaseSqlSelectQuery selectQuery ) {
-		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
-		final SqlColumnSelectable sortColumn = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
-		selectQuery.addSortingDesc( sortColumn );
 	}
 
 	@Override

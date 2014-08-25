@@ -116,7 +116,7 @@ public class ActivityStreamController {
 
 		final SqlColumnSelectable timeCol = new SqlColumnSelect( activityStreamTable, ActivityStreamDaoImpl.TABLE_ACTIVITY_STREAM_COL_ACTIVITY_TIME );
 		selectQuery.addSortingDesc( timeCol );
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 		return selectQuery;
 	}
 }

@@ -303,7 +303,7 @@ public class PrivateMessageListController {
 
 	private List<PrivateMessage> getMessagesByQuery( final SqlIdsSelectQuery selectIdsQuery, final PagingModel pagingModel ) {
 
-		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectIdsQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final List<PrivateMessage> receivedMessages = newArrayList();
 

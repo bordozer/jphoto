@@ -10,6 +10,7 @@ import core.services.security.SecurityService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
@@ -82,11 +83,6 @@ public class JobHelperServiceImpl implements JobHelperService {
 	}
 
 	private SqlIdsSelectQuery getFirstPhotoUploadTimeSQL() {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		final SqlColumnSelectable sort = new SqlColumnSelect( selectQuery.getMainTable(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		selectQuery.addSortingAsc( sort );
-		selectQuery.setLimit( 1 );
-		return selectQuery;
+		return new PhotoListQueryBuilder( dateUtilsService ).sortByUploadTimeAsc().forPage( 1, 1 ).getQuery();
 	}
 }

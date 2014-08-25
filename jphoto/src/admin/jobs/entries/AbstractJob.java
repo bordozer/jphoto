@@ -14,6 +14,7 @@ import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.sql.BaseSqlUtilsService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import utils.ErrorUtils;
@@ -305,16 +306,13 @@ public abstract class AbstractJob extends Thread {
 	}
 
 	protected List<Integer> loadPhotoIds( final int lastPhotoQtyLimit ) {
-		final BaseSqlUtilsService baseSqlUtilsService = services.getBaseSqlUtilsService();
-
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
+		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( services.getDateUtilsService() ).sortByUploadTimeDesc();
 
 		if ( lastPhotoQtyLimit > 0 ) {
-			selectQuery.setLimit( lastPhotoQtyLimit );
+			queryBuilder.forPage( 1, lastPhotoQtyLimit );
 		}
 
-		return services.getPhotoService().load( selectQuery ).getIds();
+		return services.getPhotoService().load( queryBuilder.getQuery() ).getIds();
 	}
 
 	private void updateCurrentJobExecutionEntryStep() {

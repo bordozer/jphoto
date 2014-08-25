@@ -54,7 +54,7 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 
 		baseSqlUtilsService.addUserSortByName( selectQuery );
 
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		return selectQuery;
 	}
@@ -98,7 +98,7 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		final SqlColumnSelect tFavoritesColUserId = new SqlColumnSelect( tFavorites, FavoritesDaoImpl.TABLE_COLUMN_USER_ID );
 
 		final SqlIdsSelectQuery selectQuery = new SqlIdsSelectQuery( new SqlTable( UserDaoImpl.TABLE_USERS ), tFavoritesColUserId );
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel );
+		baseSqlUtilsService.initLimitAndOffset( selectQuery, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() );
 
 		final SqlTable tUser = selectQuery.getMainTable();
 
@@ -118,9 +118,7 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	}
 
 	private SqlIdsSelectQuery getQuery( final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-		baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
-		return selectQuery;
+		return new PhotoListQueryBuilder( dateUtilsService ).forPage( page, itemsOnPage ).getQuery();
 	}
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
