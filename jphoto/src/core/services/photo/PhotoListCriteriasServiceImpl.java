@@ -100,18 +100,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 		return criterias;
 	}
 
-	@Override
-	public PhotoListCriterias getUserCardLastAppraisedPhotos( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
-
-		criterias.setVotedUser( user );
-		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
-		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_POSSIBLE_MARK );
-		criterias.setPhotoSort( PhotoSort.VOTING_TIME );
-
-		return criterias;
-	}
-
 	protected void addUploadDateCriteria( final PhotoListCriterias criterias, final Date dateFrom, final Date dateTo ) {
 		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( dateFrom, dateTo );
 		criterias.setUploadDateFrom( timeRangeToday.getTimeFrom() );

@@ -182,24 +182,6 @@ public class PhotoListCriteriasSQLTest extends AbstractTestCase {
 		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
 	}
 
-	@Test
-	public void userCardUserLastVotedForPhotos() {
-
-		final PhotoListCriteriasServiceImpl photoListCriteriasService = getPhotoListCriteriasService();
-
-		final User user = new User();
-		user.setId( 999 );
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, EnvironmentContext.getCurrentUser() );
-
-		final SqlIdsSelectQuery idsSelectQuery = photoSqlHelperService.getForCriteriasPagedIdsSQL( criterias, CURRENT_PAGE, ITEMS_ON_PAGE );
-
-		final String actualResult = idsSelectQuery.build();
-		final String expectedResult = String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photoVoting.userId = '999' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT %d OFFSET 40;", ITEMS_ON_PAGE );
-
-		assertEquals( "Actual SQL is wrong", expectedResult, actualResult );
-	}
-
 	private PhotoListCriteriasServiceImpl getPhotoListCriteriasService() {
 		final PhotoListCriteriasServiceImpl photoListCriteriasService = new PhotoListCriteriasServiceImpl();
 		photoListCriteriasService.setConfigurationService( getConfigurationService() );

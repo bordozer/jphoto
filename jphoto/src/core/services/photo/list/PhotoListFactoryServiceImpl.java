@@ -585,14 +585,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userCardPhotosLastAppraised( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosCount );
+				return builder().filterByVotedUser( user ).sortByVotingTimeDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override

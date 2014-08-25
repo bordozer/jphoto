@@ -33,6 +33,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import org.apache.commons.io.FileUtils;
@@ -382,9 +383,8 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public List<Integer> getLastVotedPhotosIds( final User user, final int photosQty, final User accessor ) {
-		// TODO: move this to somewhere
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardLastAppraisedPhotos( user, accessor );
-		final SqlIdsSelectQuery selectQuery = photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosQty );
+		// TODO: write test!!!! IS NOT CHECKED!!!
+		final SqlIdsSelectQuery selectQuery = new PhotoListQueryBuilder( dateUtilsService ).filterByVotedUser( user ).sortByVotingTimeDesc().forPage( 1, photosQty ).getQuery();
 
 		return load( selectQuery ).getIds();
 	}
