@@ -278,7 +278,38 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list title: Photos of users with membership type $1. $2.", services ).translatableString( userMembershipType.getNamePlural() ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+				return new TranslatableMessage( "Photo list bottom text: Photos of users with membership type $1. $2.", services ).translatableString( userMembershipType.getNamePlural() ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory galleryByUserMembershipTypeTopBest( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
+
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return getBaseQuery().filterByMembershipType( userMembershipType ).getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Main menu: The best photos: " + userMembershipType.getName(), services );
+			}
+
+			@Override
+			public String getLinkToFullList() {
+				return services.getUrlUtilsService().getPhotosByMembershipBest( userMembershipType, "photos" );
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: The top best photos of users with membership type $1. $2.", services )
+					.translatableString( userMembershipType.getNamePlural() )
+					.translatableString( SORTING_BY_SUM_MARKS_DESC )
+					;
 			}
 		};
 	}

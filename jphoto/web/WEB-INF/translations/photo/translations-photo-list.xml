@@ -363,13 +363,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list title: Photos of users with membership type $1. $2.</nerd>
+		<nerd>Photo list bottom text: Photos of users with membership type $1. $2.</nerd>
 		<ru><![CDATA[Показаны работы пользователей с типом участия '$1'. $2.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: The top best photos of users with membership type $1. $2.</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы пользователей с типом участия '$1'. $2.]]></ru>
 	</translation>
 
 	<translation>
