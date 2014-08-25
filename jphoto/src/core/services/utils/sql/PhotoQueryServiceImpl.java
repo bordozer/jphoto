@@ -2,8 +2,6 @@ package core.services.utils.sql;
 
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
-import core.general.data.PhotoListCriterias;
-import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -32,27 +30,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	
 	@Autowired
 	private PhotoSqlFilterService photoSqlFilterService;
-
-	@Override
-	public SqlIdsSelectQuery getForCriteriasPagedIdsSQL( final PhotoListCriterias criterias, final int page, final int itemsOnPage ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		addUserCriteria( criterias, selectQuery );
-
-		addGenreCriteria( criterias, selectQuery );
-
-		photoSqlFilterService.addUploadTimeCriteria( criterias.getUploadDateFrom(), criterias.getUploadDateTo(), selectQuery );
-
-		addFilterByMembershipType( criterias, selectQuery );
-
-		addVotingCriteria( criterias, selectQuery );
-
-		addSortCriterias( criterias, selectQuery );
-
-		addLimitCriterias( criterias, selectQuery, page, itemsOnPage );
-
-		return selectQuery;
-	}
 
 	@Override
 	public SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL() {
@@ -266,106 +243,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		baseSqlUtilsService.addSortBySumVotingMarksDesc( selectQuery );
 
 		return selectQuery;
-	}
-
-	private void addUserCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		if ( criterias.getUser() != null ) {
-			photoSqlFilterService.addFilterByUser( criterias.getUser().getId(), selectQuery );
-		}
-	}
-
-	private void addGenreCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		if ( criterias.getGenre() != null ) {
-			photoSqlFilterService.addFilterByGenre( criterias.getGenre().getId(), selectQuery );
-		}
-	}
-
-	private void addVotingCriteria( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		final int minMarks = criterias.getMinimalMarks();
-
-		if ( ! criterias.hasVotingCriterias() ) {
-			return;
-		}
-
-		final Date votingTimeFrom = criterias.getVotingTimeFrom();
-		final Date votingTimeTo = criterias.getVotingTimeTo();
-		final PhotoVotingCategory votingCategory = criterias.getVotingCategory();
-		final User votedUser = criterias.getVotedUser();
-
-		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
-
-		if ( minMarks > PhotoQueryServiceImpl.MIN_POSSIBLE_MARK ) {
-			photoSqlFilterService.addFilterByMinVotedMark( selectQuery, minMarks );
-		}
-
-		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
-		final SqlColumnSelect tVotingColVotingTime = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );
-
-		if ( votingTimeFrom  != null && votingTimeFrom.getTime() > 0 ) { // TODO
-			final SqlCondition moreThenDateFrom = new SqlCondition( tVotingColVotingTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, votingTimeFrom, dateUtilsService );
-			selectQuery.addWhereAnd( moreThenDateFrom );
-		}
-
-		if ( votingTimeTo != null && votingTimeTo.getTime() > 0 ) { // TODO
-			final SqlCondition lessThenDateTo = new SqlCondition( tVotingColVotingTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, votingTimeTo, dateUtilsService );
-			selectQuery.addWhereAnd( lessThenDateTo );
-		}
-
-		if ( votingCategory != null ) {
-			final SqlColumnSelect tVotingColVotingCategory = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_VOTING_CATEGORY_ID );
-			final SqlCondition condition = new SqlCondition( tVotingColVotingCategory, SqlCriteriaOperator.EQUALS, votingCategory.getId(), dateUtilsService );
-			selectQuery.addWhereAnd( condition );
-		}
-
-		if ( votedUser != null ) {
-			final SqlColumnSelect tVotingColVotedUserId = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_USER_ID );
-			final SqlCondition condition = new SqlCondition( tVotingColVotedUserId, SqlCriteriaOperator.EQUALS, votedUser.getId(), dateUtilsService );
-			selectQuery.addWhereAnd( condition );
-		}
-	}
-
-	private void addFilterByMembershipType( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-		if ( criterias.getMembershipType() == null ) {
-			return;
-		}
-		final SqlTable tPhotos = selectQuery.getMainTable();
-		final SqlTable tUsers = new SqlTable( UserDaoImpl.TABLE_USERS );
-
-		final SqlColumnSelect tPhotosColUserId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_USER_ID );
-		final SqlColumnSelect tUsersColId = new SqlColumnSelect( tUsers, UserDaoImpl.ENTITY_ID );
-		final SqlJoinCondition joinCondition = new SqlJoinCondition( tPhotosColUserId, tUsersColId );
-		final SqlJoin join = SqlJoin.inner( tUsers, joinCondition );
-		selectQuery.joinTable( join );
-
-		final SqlColumnSelectable tUsersColMemberType = new SqlColumnSelect( tUsers, UserDaoImpl.TABLE_COLUMN_MEMBERSHIP_TYPE );
-		final SqlLogicallyJoinable condition = new SqlCondition( tUsersColMemberType, SqlCriteriaOperator.EQUALS, criterias.getMembershipType().getId(), dateUtilsService );
-		selectQuery.addWhereAnd( condition );
-	}
-
-	private void addSortCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery ) {
-
-		switch ( criterias.getPhotoSort() ) {
-			case UPLOAD_TIME:
-				baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
-				return;
-			case SUM_MARKS:
-				baseSqlUtilsService.addSortBySumVotingMarksDesc( selectQuery );
-				baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
-				return;
-			case VOTING_TIME:
-				baseSqlUtilsService.addSortBySumVotingTimeDesc( selectQuery );
-				return;
-		}
-
-		throw new IllegalArgumentException( String.format( "Illegal sort field: %s", criterias.getPhotoSort() ) );
-	}
-
-	private void addLimitCriterias( final PhotoListCriterias criterias, final SqlIdsSelectQuery selectQuery, final int page, final int itemsOnPage ) {
-		if ( criterias.isTopBestPhotoList() ) {
-			selectQuery.setLimit( criterias.getPhotoQtyLimit() );
-		} else {
-			baseSqlUtilsService.initLimitAndOffset( selectQuery, page, itemsOnPage );
-		}
 	}
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
