@@ -36,9 +36,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private ConfigurationService configurationService;
-
-	@Autowired
 	private Services services;
 
 	@Override
@@ -240,7 +237,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQueryForUserCard().filterByAuthor( user ).getQuery();
+				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override
@@ -533,7 +530,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).getQuery();
+				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override
@@ -565,7 +562,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQuery( 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).filterByAuthor( user ).getQuery();
+				return getBaseQuery( 1, getTopListPhotosCount() ).filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -701,10 +698,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
-	}
-
-	public void setConfigurationService( final ConfigurationService configurationService ) {
-		this.configurationService = configurationService;
 	}
 
 	public void setServices( final Services services ) {

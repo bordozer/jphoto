@@ -77,6 +77,10 @@ public abstract class AbstractPhotoListFactory {
 		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
 
+	protected int getTopListPhotosCount() {
+		return services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
+	}
+
 	protected SqlSelectIdsResult getPhotosId( final SqlIdsSelectQuery selectIdsQuery ) {
 		return services.getPhotoService().load( selectIdsQuery );
 	}
