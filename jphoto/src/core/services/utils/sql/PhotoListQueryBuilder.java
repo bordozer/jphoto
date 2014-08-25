@@ -129,10 +129,6 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder votingForLastDays( final int days ) {
-		return filterByVotingTime( dateUtilsService.getDatesOffsetFromCurrentDate( days ), dateUtilsService.getCurrentTime() );
-	}
-
 	public PhotoListQueryBuilder filterByMinimalMarks( final int marks ) {
 
 		if ( ! hasVotingTableJoin() ) {

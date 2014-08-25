@@ -58,7 +58,7 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory userAlbumPhotosLast( final User user, final UserPhotoAlbum userPhotoAlbum, final User accessor );
 
-	AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final User accessor );
+	AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory userCardPhotosBest( final User user, final User accessor );
 

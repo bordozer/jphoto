@@ -4,7 +4,6 @@ import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
-import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.dao.*;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,16 +72,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		selectQuery.addSortingDesc( column );
 
 		return selectQuery;
-	}
-
-	@Override
-	public SqlIdsSelectQuery getUserPhotoAlbumPhotosQuery( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage ) {
-		return new PhotoListQueryBuilder( dateUtilsService )
-			.filterByAuthor( user )
-			.filterByUserAlbum( userPhotoAlbum )
-			.forPage( page, itemsOnPage )
-			.sortByUploadTimeDesc()
-			.getQuery();
 	}
 
 	@Override

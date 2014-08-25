@@ -639,7 +639,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, getTopListPhotosCount() );
+				return new PhotoListQueryBuilder( dateUtilsService )
+					.filterByAuthor( user )
+					.filterByUserAlbum( userPhotoAlbum )
+					.forPage( 1, getTopListPhotosCount() )
+					.sortByUploadTimeDesc()
+					.getQuery();
 			}
 
 			@Override
@@ -666,14 +671,19 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final User accessor ) {
+	public AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, page, getAccessorPhotosOnPage() );
+				return new PhotoListQueryBuilder( dateUtilsService )
+					.filterByAuthor( user )
+					.filterByUserAlbum( userPhotoAlbum )
+					.forPage( page, itemsOnPage )
+					.sortByUploadTimeDesc()
+					.getQuery();
 			}
 
 			@Override
@@ -799,6 +809,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
 				return photoQueryService.getFavoritesPhotosSQL( user.getId(), favoriteEntryType, page, getAccessorPhotosOnPage() );
+				/*return builder()
+					.filterBy
+					.getQuery();*/
 			}
 
 			@Override

@@ -82,7 +82,7 @@ public class UserPhotoAlbumPhotosController {
 
 		model.setPhotoAlbum( photoAlbum );
 
-		final PhotoList photoList = photoListFactoryService.userAlbumPhotos( user, photoAlbum, pagingModel.getCurrentPage(), EnvironmentContext.getCurrentUser() )
+		final PhotoList photoList = photoListFactoryService.userAlbumPhotos( user, photoAlbum, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() )
 														   .getPhotoList( photoAlbum.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
 
 		model.setPhotoList( photoList );
