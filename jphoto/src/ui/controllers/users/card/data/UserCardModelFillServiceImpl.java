@@ -316,17 +316,17 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory getUserPhotoListBest( final User user, final User accessor ) {
+	public AbstractPhotoListFactory getUserCardPhotoListBest( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosBest( user, accessor );
 	}
 
 	@Override
-	public AbstractPhotoListFactory getUserPhotoListLast( final User user, final User accessor ) {
+	public AbstractPhotoListFactory getUserCardPhotoListLast( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosLast( user, accessor );
 	}
 
 	@Override
-	public AbstractPhotoListFactory getPhotoListLastAppraised( final User user, final User accessor ) {
+	public AbstractPhotoListFactory getUserCardPhotoListLastAppraised( final User user, final User accessor ) {
 		return photoListFactoryService.userCardPhotosLastAppraised( user, accessor );
 	}
 

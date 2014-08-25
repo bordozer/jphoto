@@ -21,11 +21,11 @@ public interface UserCardModelFillService {
 
 	void setUserStatistic( final UserCardModel model );
 
-	AbstractPhotoListFactory getUserPhotoListBest( final User user, final User accessor );
+	AbstractPhotoListFactory getUserCardPhotoListBest( final User user, final User accessor );
 
-	AbstractPhotoListFactory getUserPhotoListLast( final User user, final User accessor );
+	AbstractPhotoListFactory getUserCardPhotoListLast( final User user, final User accessor );
 
-	AbstractPhotoListFactory getPhotoListLastAppraised( final User user, final User accessor );
+	AbstractPhotoListFactory getUserCardPhotoListLastAppraised( final User user, final User accessor );
 
 	Map<Genre,UserCardGenreInfo> getUserCardGenreInfoMap( final User user, final User accessor );
 
