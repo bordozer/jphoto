@@ -28,7 +28,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 	protected ServicesImpl getTestServices( final TestData testData ) {
 		final ServicesImpl services = getServices();
 
-		services.setPhotoListCriteriasService( getPhotoListCriteriasService( testData ) );
+//		services.setPhotoListCriteriasService( getPhotoListCriteriasService( testData ) );
 		services.setPhotoQueryService( photoSqlHelperService );
 		services.setPhotoService( getPhotoService( testData ) );
 		services.setRestrictionService( getRestrictionService( testData ) );
@@ -65,7 +65,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		return restrictionService;
 	}
 
-	protected RestrictionService getRestrictionService( final TestData testData, final RestrictionType restrictionType ) {
+	/*protected RestrictionService getRestrictionService( final TestData testData, final RestrictionType restrictionType ) {
 		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
 
 		for ( final int photosId : testData.getPhotoIds() ) {
@@ -77,7 +77,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		EasyMock.replay( restrictionService );
 
 		return restrictionService;
-	}
+	}*/
 
 	protected PhotoService getPhotoService( final TestData testData ) {
 		final PhotoService photoService = EasyMock.createMock( PhotoService.class );
@@ -97,7 +97,7 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 		return photoService;
 	}
 
-	protected PhotoListCriteriasService getPhotoListCriteriasService( final TestData testData ) {
+	/*protected PhotoListCriteriasService getPhotoListCriteriasService( final TestData testData ) {
 		final PhotoListCriteriasService photoListCriteriasService = EasyMock.createMock( PhotoListCriteriasService.class );
 
 		final PhotoListCriterias criterias = new PhotoListCriterias();
@@ -118,13 +118,11 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 			criterias.setGenre( testData.genre );
 		}
 
-		EasyMock.expect( photoListCriteriasService.getForUserAndGenreAbsolutelyBest( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
-
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListCriteriasService );
 
 		return photoListCriteriasService;
-	}
+	}*/
 
 	private Boolean isRestricted( final int photosId, final List<Pair<Integer, RestrictionType>> restrictedPhotos, RestrictionType restrictionType ) {
 		for ( final Pair<Integer, RestrictionType> restrictedPhoto : restrictedPhotos ) {
