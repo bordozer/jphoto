@@ -31,13 +31,7 @@ Base functionality
 ADMIN functions
 
 1. Locking functionality
-	- User
-	- Photo of the day
-	- Top photos of a category
-	- Commenting
 	- Messaging
-	- Photo voting
-	- Voting for another users ranks in genre
 
 2. Archiving
 	- Photo view history
