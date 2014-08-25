@@ -1,5 +1,6 @@
 package core.services.utils.sql;
 
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
@@ -104,6 +105,10 @@ public class PhotoListQueryBuilder {
 		query.addWhereAnd( condition );
 
 		return this;
+	}
+
+	public PhotoListQueryBuilder filterByVotingTime( final TimeRange timeRange ) {
+		return filterByVotingTime( timeRange.getTimeFrom(), timeRange.getTimeTo() );
 	}
 
 	public PhotoListQueryBuilder filterByVotingTime( final Date votingTimeFrom, final Date votingTimeTo ) {

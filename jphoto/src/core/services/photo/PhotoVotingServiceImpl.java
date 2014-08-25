@@ -123,6 +123,12 @@ public class PhotoVotingServiceImpl implements PhotoVotingService {
 	}
 
 	@Override
+	public TimeRange getPortalPageBestDateRange() {
+		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS );
+		return new TimeRange( dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -days + 1 ) ), dateUtilsService.getLastSecondOfToday() );
+	}
+
+	@Override
 	public int getSummaryPhotoMark( final Photo photo ) {
 		int sumMark = 0;
 

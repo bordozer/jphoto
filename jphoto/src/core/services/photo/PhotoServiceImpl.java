@@ -31,9 +31,7 @@ import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
-import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
-import core.services.utils.sql.PhotoSqlFilterService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
@@ -86,12 +84,6 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Autowired
-	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Autowired
 	private ActivityStreamService activityStreamService;

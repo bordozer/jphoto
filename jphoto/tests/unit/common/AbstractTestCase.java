@@ -9,7 +9,6 @@ import core.services.translator.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsServiceImpl;
 import core.services.utils.sql.PhotoQueryServiceImpl;
-import core.services.utils.sql.PhotoSqlFilterServiceImpl	;
 import mocks.SystemVarsServiceMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -27,7 +26,6 @@ public class AbstractTestCase {
 	protected final UrlUtilsServiceImpl urlUtilsService;
 	protected final UserPhotoFilePathUtilsServiceImpl userPhotoFilePathUtilsService;
 	protected final EntityLinkUtilsServiceImpl entityLinkUtilsService;
-	protected final PhotoSqlFilterServiceImpl photoSqlFilterService;
 	protected final BaseSqlUtilsServiceImpl baseSqlUtilsService;
 	protected final PhotoQueryServiceImpl photoSqlHelperService;
 
@@ -48,17 +46,10 @@ public class AbstractTestCase {
 		dateUtilsService.setSystemVarsService( systemVarsServiceMock );
 		// dateUtilsService <--
 
-		// photoSqlFilterService -->
-		photoSqlFilterService = new PhotoSqlFilterServiceImpl();
-		photoSqlFilterService.setDateUtilsService( dateUtilsService );
-		photoSqlFilterService.setBaseSqlUtilsService( baseSqlUtilsService );
-		// photoSqlFilterService <--
-
 		// photoSqlHelperService -->
 		photoSqlHelperService = new PhotoQueryServiceImpl();
 		photoSqlHelperService.setDateUtilsService( dateUtilsService );
 		photoSqlHelperService.setBaseSqlUtilsService( baseSqlUtilsService );
-		photoSqlHelperService.setPhotoSqlFilterService( photoSqlFilterService );
 		// photoSqlHelperService <--
 
 		// urlUtilsService -->

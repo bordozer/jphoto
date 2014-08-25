@@ -15,7 +15,6 @@ import core.services.user.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoQueryService;
-import core.services.utils.sql.PhotoSqlFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import ui.services.UtilsService;
 import ui.services.menu.entry.EntryMenuService;
@@ -124,9 +123,6 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Autowired
-	private PhotoSqlFilterService photoSqlFilterService;
 
 	@Autowired
 	private PhotoQueryService photoQueryService;
@@ -338,16 +334,6 @@ public class ServicesImpl implements Services {
 	}
 
 	@Override
-	public PhotoSqlFilterService getPhotoSqlFilterService() {
-		return photoSqlFilterService;
-	}
-
-	@Override
-	public PhotoQueryService getPhotoQueryService() {
-		return photoQueryService;
-	}
-
-	@Override
 	public UrlUtilsService getUrlUtilsService() {
 		return urlUtilsService;
 	}
@@ -541,10 +527,6 @@ public class ServicesImpl implements Services {
 
 	public void setBaseSqlUtilsService( final BaseSqlUtilsService baseSqlUtilsService ) {
 		this.baseSqlUtilsService = baseSqlUtilsService;
-	}
-
-	public void setPhotoSqlFilterService( final PhotoSqlFilterService photoSqlFilterService ) {
-		this.photoSqlFilterService = photoSqlFilterService;
 	}
 
 	public void setPhotoQueryService( final PhotoQueryService photoQueryService ) {

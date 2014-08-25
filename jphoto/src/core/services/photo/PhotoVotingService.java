@@ -36,4 +36,6 @@ public interface PhotoVotingService {
 	List<UserRating> getUserRatingForPeriod( final Date timeFrom, final Date timeTo, final int limit );
 
 	TimeRange getTopBestDateRange();
+
+	TimeRange getPortalPageBestDateRange();
 }

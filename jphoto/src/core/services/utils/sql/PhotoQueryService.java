@@ -5,16 +5,11 @@ import core.general.base.PagingModel;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
-import core.general.user.userTeam.UserTeamMember;
 import sql.builder.SqlIdsSelectQuery;
-
-import java.util.Date;
 
 public interface PhotoQueryService {
 
 	SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL();
-
-	SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom );
 
 	SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage );
 

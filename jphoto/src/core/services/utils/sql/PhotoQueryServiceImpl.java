@@ -10,14 +10,10 @@ import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.*;
 
-import java.util.Date;
-
 public class PhotoQueryServiceImpl implements PhotoQueryService {
 
 	public static final int PORTAL_PAGE_LAST_PHOTOS_QTY = 12;
-	public static final int PORTAL_PAGE_BEST_PHOTOS_QTY = 8;
 
-	public static final int MIN_MARK_FOR_BEST = 1;
 	public static final int MIN_POSSIBLE_MARK = Integer.MIN_VALUE;
 	public static final String SUM_MARK_COLUMN_ALIAS = "sumMarks";
 
@@ -27,9 +23,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 	
-	@Autowired
-	private PhotoSqlFilterService photoSqlFilterService;
-
 	@Override
 	public SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL() {
 		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
@@ -41,11 +34,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
 
 		return selectQuery;
-	}
-
-	@Override
-	public SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom ) {
-		return getPortalPageBestPhotosIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentTime() ) );
 	}
 
 	@Override
@@ -185,27 +173,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		return selectQuery;
 	}
 
-	private SqlIdsSelectQuery getAllPhotosBestIdsSQL( final int minMarks, final Date timeFrom, final Date timeTo ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		photoSqlFilterService.addJoinWithPhotoVotingTable( selectQuery );
-
-		photoSqlFilterService.addFilterByMinVotedMark( selectQuery, minMarks );
-
-		photoSqlFilterService.addFilterForVotingTimeForLastNDays( selectQuery, timeFrom, timeTo );
-
-		return selectQuery;
-	}
-
-	private SqlIdsSelectQuery getPortalPageBestPhotosIdsSQL( final int minMarksToBeInPhotoOfTheDay, final Date timeFrom, final Date timeTo ) {
-		final SqlIdsSelectQuery selectQuery = getAllPhotosBestIdsSQL( minMarksToBeInPhotoOfTheDay, timeFrom, timeTo );
-		selectQuery.setLimit( PORTAL_PAGE_BEST_PHOTOS_QTY );
-
-		baseSqlUtilsService.addSortBySumVotingMarksDesc( selectQuery );
-
-		return selectQuery;
-	}
-
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
 	}
@@ -214,7 +181,4 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 		this.baseSqlUtilsService = baseSqlUtilsService;
 	}
 
-	public void setPhotoSqlFilterService( final PhotoSqlFilterService photoSqlFilterService ) {
-		this.photoSqlFilterService = photoSqlFilterService;
-	}
 }

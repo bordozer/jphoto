@@ -10,7 +10,6 @@ import core.services.security.SecurityService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoSqlFilterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
@@ -35,9 +34,6 @@ public class JobHelperServiceImpl implements JobHelperService {
 	@Autowired
 	private DateUtilsService dateUtilsService;
 	
-	@Autowired
-	private PhotoSqlFilterService photoSqlFilterService;
-
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 

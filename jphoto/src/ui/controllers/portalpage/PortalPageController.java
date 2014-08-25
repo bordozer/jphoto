@@ -14,6 +14,7 @@ import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -146,12 +147,15 @@ public class PortalPageController {
 	}
 
 	private List<Integer> getTheBestPhotosIds() {
-		final int minMarksTobeInPhotosOfTheDay = configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY );
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_PORTAL_PAGE_BEST_PHOTOS_FROM_PHOTOS_THAT_GOT_ENOUGH_MARKS_FOR_N_LAST_DAYS );
 
-		final Date timeFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
-		final SqlIdsSelectQuery selectQuery = photoQueryService.getPortalPageBestPhotosIdsSQL( minMarksTobeInPhotosOfTheDay, timeFrom );
-		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectQuery );
+		final SqlIdsSelectQuery query = new PhotoListQueryBuilder( dateUtilsService )
+			.filterByMinimalMarks( configurationService.getInt( ConfigurationKey.PHOTO_RATING_MIN_MARKS_TO_BE_IN_PHOTO_OF_THE_DAY ) )
+			.filterByVotingTime( photoVotingService.getPortalPageBestDateRange() )
+			.forPage( 1, 8 ) // TODO: move 8 to configuration!
+			.sortBySumMarksDesc()
+			.getQuery();
+
+		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( query );
 
 		final Date currentTime = dateUtilsService.getCurrentTime();
 		final List<Integer> ids = sqlSelectIdsResult.getIds();
