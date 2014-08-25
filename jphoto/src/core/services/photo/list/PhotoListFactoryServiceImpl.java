@@ -1,6 +1,7 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
+import core.general.configuration.ConfigurationKey;
 import core.general.data.PhotoListCriterias;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
@@ -14,7 +15,6 @@ import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
-import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +36,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
+	private ConfigurationService configurationService;
+
+	@Autowired
 	private Services services;
 
 	@Override
@@ -46,7 +49,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery( page, itemsOnPage ).getQuery();
+				return getBaseQuery( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -70,7 +73,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().getQuery();
+				return getBaseQuery().getQuery();
 			}
 
 			@Override
@@ -125,7 +128,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery( page, itemsOnPage ).filterByGenre( genre ).getQuery();
+				return getBaseQuery( page, itemsOnPage ).filterByGenre( genre ).getQuery();
 			}
 
 			@Override
@@ -149,7 +152,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().filterByGenre( genre ).getQuery();
+				return getBaseQuery().filterByGenre( genre ).getQuery();
 			}
 
 			@Override
@@ -181,7 +184,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery().filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
+				return getBaseQuery().filterByGenre( genre ).forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override
@@ -204,7 +207,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery( page, itemsOnPage ).filterByAuthor( user ).getQuery();
+				return getBaseQuery( page, itemsOnPage ).filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -231,14 +234,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserTopBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserTopBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return getBaseQueryUserBest().filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -300,7 +302,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getTopBestBaseQuery( page, itemsOnPage ).filterByAuthor( user ).filterByGenre( genre ).getQuery();
+				return getBaseQuery( page, itemsOnPage ).filterByAuthor( user ).filterByGenre( genre ).getQuery();
 			}
 
 			@Override
@@ -560,11 +562,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	public AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).forPage( 1, photosCount ).sortByUploadTimeDesc().getQuery();
+				return getBaseQuery( 1, configurationService.getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -700,6 +702,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setConfigurationService( final ConfigurationService configurationService ) {
+		this.configurationService = configurationService;
 	}
 
 	public void setServices( final Services services ) {

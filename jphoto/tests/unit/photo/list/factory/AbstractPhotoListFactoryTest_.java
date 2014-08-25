@@ -118,7 +118,6 @@ public class AbstractPhotoListFactoryTest_ extends AbstractTestCase {
 			criterias.setGenre( testData.genre );
 		}
 
-		EasyMock.expect( photoListCriteriasService.getForUserTopBest( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();
 		EasyMock.expect( photoListCriteriasService.getForUserAndGenreTopBest( testData.user, testData.genre, testData.accessor ) ).andReturn( criterias ).anyTimes();
 
 		EasyMock.expect( photoListCriteriasService.getForUserAbsolutelyBest( testData.user, testData.accessor ) ).andReturn( criterias ).anyTimes();

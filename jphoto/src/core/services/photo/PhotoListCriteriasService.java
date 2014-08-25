@@ -10,8 +10,6 @@ import java.util.Date;
 
 public interface PhotoListCriteriasService {
 
-	PhotoListCriterias getForUserTopBest( final User user, final User accessor );
-
 	PhotoListCriterias getForUserAbsolutelyBest( final User user, final User accessor );
 
 	PhotoListCriterias getForUserAndGenreTopBest( final User user, final Genre genre, final User accessor );

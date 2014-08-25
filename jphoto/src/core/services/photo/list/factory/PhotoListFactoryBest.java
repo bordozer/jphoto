@@ -22,7 +22,7 @@ public abstract class PhotoListFactoryBest extends AbstractPhotoListFactoryBest 
 	}
 
 	@Override
-	public PhotoListQueryBuilder getTopBestBaseQuery() {
-		return super.getTopBestBaseQuery();
+	public PhotoListQueryBuilder getBaseQuery() {
+		return super.getBaseQuery();
 	}
 }

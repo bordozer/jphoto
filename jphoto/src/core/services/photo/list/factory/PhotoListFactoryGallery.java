@@ -21,7 +21,7 @@ public abstract class PhotoListFactoryGallery extends AbstractPhotoListFactory {
 		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 
-	protected PhotoListQueryBuilder getTopBestBaseQuery( final int page, final int itemsOnPage ) {
+	protected PhotoListQueryBuilder getBaseQuery( final int page, final int itemsOnPage ) {
 		return new PhotoListQueryBuilder( services.getDateUtilsService() ).forPage( page, itemsOnPage ).sortByUploadTimeDesc();
 	}
 }

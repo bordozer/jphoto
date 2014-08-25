@@ -1,7 +1,6 @@
 package core.services.photo.list.factory;
 
 import core.general.configuration.ConfigurationKey;
-import core.general.data.TimeRange;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -12,12 +11,10 @@ import java.util.Date;
 
 public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactoryBest {
 
-	protected final int photosCount;
+	protected int photosCount; // TODO: delete
 
 	public PhotoListFactoryTopBest( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( photoFilteringStrategy, accessor, services );
-
-		photosCount = services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY );
 	}
 
 	@Override
@@ -26,7 +23,11 @@ public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactoryBe
 	}
 
 	@Override
-	public PhotoListQueryBuilder getTopBestBaseQuery() {
-		return super.getTopBestBaseQuery().forPage( 1, photosCount );
+	public PhotoListQueryBuilder getBaseQuery() {
+		return super.getBaseQuery().forPage( 1, services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+	}
+
+	public PhotoListQueryBuilder getBaseQueryUserBest() {
+		return super.getBaseQuery( 1 ).forPage( 1, services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ); // TODO: PHOTO_LIST_PHOTO_TOP_QTY can be replaced with apropriate parameter for a user card
 	}
 }
