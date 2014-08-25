@@ -129,27 +129,27 @@
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by genre $1</nerd>
-		<ru><![CDATA[Работы категории $1]]></ru>
+		<ru><![CDATA[Работы из раздела $1]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list bottom text: Photo gallery by genre $1. $2.</nerd>
-		<ru><![CDATA[Работы категории $1. $2.]]></ru>
+		<ru><![CDATA[Работы из раздела $1. $2.]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by genre $1 top best for last $2 days</nerd>
-		<ru><![CDATA[Самые лучшие работы категории $1 за последние $2 дня]]></ru>
+		<ru><![CDATA[Самые лучшие работы раздела $1 за последние $2 дня]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list bottom text: Photo gallery by genre $1 top best for last $2 days</nerd>
-		<ru><![CDATA[Показаны работы из категории $1, набравшие наибольшее количество оценок за последние $2 дня]]></ru>
+		<ru><![CDATA[Показаны работы из раздела $1, набравшие наибольшее количество оценок за последние $2 дня]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by genre $1 best for $2 days</nerd>
-		<ru><![CDATA[Лучшие работы категории $1 за последние $2 дня]]></ru>
+		<ru><![CDATA[Лучшие работы раздела $1 за последние $2 дня]]></ru>
 	</translation>
 
 	<translation>
@@ -169,17 +169,17 @@
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by user $1 and genre $2</nerd>
-		<ru><![CDATA[Работы пользователя $1 из категории $2]]></ru>
+		<ru><![CDATA[Работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by user $1 and genre $2 top best</nerd>
-		<ru><![CDATA[самые лучшие работы пользователя $1 из категории $2]]></ru>
+		<ru><![CDATA[Самые лучшие работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list title: Photo gallery by user $1 and genre $2 best</nerd>
-		<ru><![CDATA[Лучшие работы пользователя $1 из категории $2]]></ru>
+		<ru><![CDATA[Лучшие работы пользователя $1 из раздела $2]]></ru>
 	</translation>
 
 	<translation>

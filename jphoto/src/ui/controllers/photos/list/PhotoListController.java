@@ -214,6 +214,8 @@ public class PhotoListController {
 
 		fillFilterModelWithUserData( filterModel, user );
 
+		initUserGenres( model, user );
+
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBreadcrumbs( user ) );
 
 		return VIEW;
@@ -227,11 +229,11 @@ public class PhotoListController {
 
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserBest( user, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
-		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
-
 		fillFilterModelWithUserData( filterModel, user );
 
 		initUserGenres( model, user );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserBestBreadcrumbs( user ) );
 
 		return VIEW;
 	}
