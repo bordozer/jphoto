@@ -27,7 +27,35 @@ public class GroupOperationServiceTest extends AbstractTestCase {
 	}
 
 	@Test
-	public void usualUserTest() {
+	public void noGroupOperationMenusTest() {
+
+		final TestData testData = new TestData();
+		testData.accessor = new UserMock( 432 );
+
+		final GroupOperationServiceImpl groupOperationService = getGroupOperationService( testData );
+		final List<PhotoGroupOperationMenu> operationMenus = groupOperationService.getNoPhotoGroupOperationMenuContainer().getGroupOperationMenus();
+
+		assertTrue( operationMenus.size() == 0 );
+	}
+
+	@Test
+	public void userOwnPhotosGroupOperationMenusTest() {
+
+		final TestData testData = new TestData();
+		testData.accessor = new UserMock( 432 );
+
+		final GroupOperationServiceImpl groupOperationService = getGroupOperationService( testData );
+		final List<PhotoGroupOperationMenu> operationMenus = groupOperationService.getUserOwnPhotosGroupOperationMenus();
+
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_PHOTO_ALBUMS ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_TEAM_MEMBERS ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_NUDE_CONTENT ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.MOVE_TO_GENRE ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.DELETE_PHOTOS ) );
+	}
+
+	@Test
+	public void userCommonPhotosGroupOperationMenusTest() {
 
 		final TestData testData = new TestData();
 		testData.accessor = new UserMock( 432 );
@@ -64,7 +92,6 @@ public class GroupOperationServiceTest extends AbstractTestCase {
 
 		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_NUDE_CONTENT ) );
 		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.MOVE_TO_GENRE ) );
-		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.SEPARATOR ) );
 		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.DELETE_PHOTOS ) );
 	}
 

@@ -10,8 +10,6 @@ public interface GroupOperationService {
 
 	PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final User user );
 
-	PhotoGroupOperationMenuContainer getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( final User userCardOwner, final User accessor );
-
 	PhotoGroupOperationMenuContainer getNoPhotoGroupOperationMenuContainer();
 
 	List<PhotoGroupOperationMenu> getUserOwnPhotosGroupOperationMenus();

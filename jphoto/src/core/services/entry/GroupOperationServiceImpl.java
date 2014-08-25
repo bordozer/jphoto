@@ -7,7 +7,6 @@ import core.general.user.User;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import utils.UserUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -33,20 +32,6 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 	}
 
 	@Override
-	public PhotoGroupOperationMenuContainer getUserCardCustomPhotoListPhotoGroupOperationMenuContainer( final User userCardOwner, final User accessor ) {
-
-		if ( UserUtils.isUsersEqual( accessor, userCardOwner ) ) {
-			return new PhotoGroupOperationMenuContainer( getUserOwnPhotosGroupOperationMenus() );
-		}
-
-		if ( securityService.isSuperAdminUser( accessor.getId() ) ) {
-			return new PhotoGroupOperationMenuContainer( getSuperAdminGroupOperationMenus() );
-		}
-
-		return getNoPhotoGroupOperationMenuContainer();
-	}
-
-	@Override
 	public PhotoGroupOperationMenuContainer getNoPhotoGroupOperationMenuContainer() {
 		return new PhotoGroupOperationMenuContainer( Collections.<PhotoGroupOperationMenu>emptyList() );
 	}
@@ -58,7 +43,8 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 			, PhotoGroupOperationMenu.SEPARATOR_MENU
 			, PhotoGroupOperationMenu.ARRANGE_NUDE_CONTENT_MENU
 			, PhotoGroupOperationMenu.MOVE_TO_GENRE_MENU
-			, PhotoGroupOperationMenu.SEPARATOR_MENU, PhotoGroupOperationMenu.DELETE_PHOTOS_MENU
+			, PhotoGroupOperationMenu.SEPARATOR_MENU
+			, PhotoGroupOperationMenu.DELETE_PHOTOS_MENU
 		);
 	}
 
