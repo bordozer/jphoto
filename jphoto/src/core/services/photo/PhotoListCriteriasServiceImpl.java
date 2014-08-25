@@ -129,17 +129,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	}
 
 	@Override
-	public PhotoListCriterias getUserCardUserPhotosBest( final User cardOwner, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListAbsolutelyBest().getPhotoListCriterias( accessor );
-
-		criterias.setUser( cardOwner );
-		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_MARK_FOR_BEST );
-		criterias.setPhotoQtyLimit( accessor.getPhotosOnPage() );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getUserCardUserPhotosLast( final User user, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 

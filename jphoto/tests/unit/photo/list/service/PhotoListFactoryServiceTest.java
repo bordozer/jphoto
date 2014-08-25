@@ -122,6 +122,15 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
 	}
 
+	@Test
+	public void userCardPhotosBestTest() {
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosBest( testData.user, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: User card <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the best photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
+	}
+
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
 		final ConfigurationService configurationService = getConfigurationService( testData );
 

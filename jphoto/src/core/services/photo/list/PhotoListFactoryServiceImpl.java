@@ -240,7 +240,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQueryUserBest().filterByAuthor( user ).getQuery();
+				return getBaseQueryForUserCard().filterByAuthor( user ).getQuery();
 			}
 
 			@Override
@@ -527,14 +527,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userCardPhotosBest( final User user, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getUserCardUserPhotosBest( user, accessor );
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, 1, photosCount );
+				return builder().filterByAuthor( user ).filterByMinimalMarks( 1 ).sortBySumMarksDesc().forPage( 1, services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) ).getQuery();
 			}
 
 			@Override

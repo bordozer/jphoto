@@ -30,8 +30,6 @@ public interface PhotoListCriteriasService {
 
 	PhotoListCriterias getForMembershipTypeBestForPeriod( final UserMembershipType membershipType, final User accessor );
 
-	PhotoListCriterias getUserCardUserPhotosBest( final User cardOwner, final User accessor );
-
 	PhotoListCriterias getUserCardUserPhotosLast( final User user, final User accessor );
 
 	PhotoListCriterias getUserCardLastAppraisedPhotos( final User user, final User accessor );
