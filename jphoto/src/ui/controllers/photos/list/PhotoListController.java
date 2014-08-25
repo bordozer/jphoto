@@ -383,15 +383,6 @@ public class PhotoListController {
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
 
-		/*final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
-
-		final List<PhotoListData> photoListDatas = newArrayList( data );
-
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
-
 		return VIEW;
 	}
 
@@ -589,50 +580,6 @@ public class PhotoListController {
 		return VIEW;
 	}
 
-	private void initPhotoListData( final PhotoListModel model, final PagingModel pagingModel, final List<PhotoListData> photoListDatas, final PhotoFilterModel filterModel ) {
-
-		int listCounter = 0;
-		for ( final PhotoListData listData : photoListDatas ) {
-			final PhotoListCriterias criterias = listData.getPhotoListCriterias();
-
-			final List<Integer> photosIds = getPhotosIds( pagingModel, listData );
-
-			final PhotoList photoList = getPhotoList( photosIds, listData, criterias );
-			photoList.setPhotoListId( listCounter++ );
-
-			photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getNoPhotoGroupOperationMenuContainer() ); // TODO: zaglushka
-
-			model.addPhotoList( photoList );
-			model.setPageTitleData( listData.getTitleData() );
-		}
-
-		setDefaultOrdering( filterModel );
-	}
-
-	private List<Integer> getPhotosIds( final PagingModel pagingModel, final PhotoListData listData ) {
-		final SqlIdsSelectQuery selectIdsQuery = listData.getPhotoListQuery();
-
-		final SqlSelectIdsResult sqlSelectIdsResult = photoService.load( selectIdsQuery );
-		pagingModel.setTotalItems( sqlSelectIdsResult.getRecordQty() );
-
-		return sqlSelectIdsResult.getIds();
-	}
-
-	private PhotoList getPhotoList( final List<Integer> photosIds, final PhotoListData listData, final PhotoListCriterias criterias ) {
-
-		final boolean showPaging = !criterias.isTopBestPhotoList();
-
-		final String title = String.format( "<font color='red'>BUILT BY OLD WAY</font>" );
-		final PhotoList photoList = new PhotoList( photosIds, title, showPaging );
-
-		photoList.setLinkToFullListText( "PhotoList: All photos" );
-		photoList.setLinkToFullList( listData.getLinkToFullList() );
-		photoList.setPhotosCriteriasDescription( "<font color='red'>BUILT BY OLD WAY</font>" );
-		photoList.setBottomText( listData.getPhotoListBottomText() );
-
-		return photoList;
-	}
-
 	private void initUserGenres( final PhotoListModel model, final User user ) {
 		model.setUser( user );
 		model.setUserPhotosByGenres( photoService.getUserPhotosByGenres( user.getId() ) );
@@ -646,12 +593,6 @@ public class PhotoListController {
 	private int assertUserExistsAndGetUserId( final String _userId ) {
 		securityService.assertUserExists( _userId );
 		return NumberUtils.convertToInt( _userId );
-	}
-
-	private void setUserOwnPhotosGroupOperationMenuContainer( final User user, final PhotoListData data ) {
-		if ( UserUtils.isUsersEqual( getCurrentUser(), user ) ) {
-			data.setPhotoGroupOperationMenuContainer( new PhotoGroupOperationMenuContainer( groupOperationService.getUserOwnPhotosGroupOperationMenus() ) );
-		}
 	}
 
 	private void setDefaultOrdering( final PhotoFilterModel filterModel ) {
