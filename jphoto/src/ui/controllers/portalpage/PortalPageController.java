@@ -143,7 +143,12 @@ public class PortalPageController {
 	}
 
 	private List<Integer> getLastUploadedPhotos() {
-		return photoService.load( photoQueryService.getPortalPageLastUploadedPhotosSQL() ).getIds();
+		final SqlIdsSelectQuery query = new PhotoListQueryBuilder( dateUtilsService )
+			.forPage( 1, 12 ) // TODO: move 12 to configuration!
+			.sortByUploadTimeDesc()
+			.getQuery();
+
+		return photoService.load( query ).getIds();
 	}
 
 	private List<Integer> getTheBestPhotosIds() {

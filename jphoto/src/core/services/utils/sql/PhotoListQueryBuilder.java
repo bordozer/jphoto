@@ -113,7 +113,9 @@ public class PhotoListQueryBuilder {
 
 	public PhotoListQueryBuilder filterByVotingTime( final Date votingTimeFrom, final Date votingTimeTo ) {
 
-		addJoinVotingTable();
+		if ( ! hasVotingTableJoin() ) {
+			addJoinVotingTable();
+		}
 
 		final SqlTable tVoting = new SqlTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
 		final SqlColumnSelect tVotingColVotingTime = new SqlColumnSelect( tVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_TIME );

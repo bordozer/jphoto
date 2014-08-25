@@ -9,8 +9,6 @@ import sql.builder.SqlIdsSelectQuery;
 
 public interface PhotoQueryService {
 
-	SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL();
-
 	SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final User user, final int page, final int itemsOnPage );

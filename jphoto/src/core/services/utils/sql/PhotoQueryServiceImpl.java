@@ -22,19 +22,6 @@ public class PhotoQueryServiceImpl implements PhotoQueryService {
 	
 	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
-	
-	@Override
-	public SqlIdsSelectQuery getPortalPageLastUploadedPhotosSQL() {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
-
-		final SqlColumnSelect column = new SqlColumnSelect( selectQuery.getMainTable(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		selectQuery.addSortingDesc( column );
-		selectQuery.setLimit( PORTAL_PAGE_LAST_PHOTOS_QTY );
-
-		baseSqlUtilsService.addDescSortByUploadTimeDesc( selectQuery );
-
-		return selectQuery;
-	}
 
 	@Override
 	public SqlIdsSelectQuery getFavoritesPhotosSQL( final int userId, final FavoriteEntryType entryType, final int page, final int itemsOnPage ) {
