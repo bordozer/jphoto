@@ -208,7 +208,7 @@ public class PhotoListQueryBuilder {
 	public PhotoListQueryBuilder sortByUploadTimeAsc() {
 		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		query.addSortingDesc( column );
+		query.addSortingAsc( column );
 
 		return this;
 	}
@@ -216,7 +216,7 @@ public class PhotoListQueryBuilder {
 	public PhotoListQueryBuilder sortByUploadTimeDesc() {
 		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		query.addSortingAsc( column );
+		query.addSortingDesc( column );
 
 		return this;
 	}
