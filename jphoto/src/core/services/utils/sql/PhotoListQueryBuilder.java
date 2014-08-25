@@ -108,7 +108,7 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder filterByAddedToBookmark( final User user, final FavoriteEntryType favoriteEntryType ) {
+	public PhotoListQueryBuilder filterOnlyPhotosAddedByUserToBookmark( final User user, final FavoriteEntryType favoriteEntryType ) {
 		final SqlTable tPhotos = query.getMainTable();
 		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
 

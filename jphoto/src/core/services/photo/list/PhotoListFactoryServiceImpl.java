@@ -17,7 +17,6 @@ import core.services.utils.sql.PhotoListQueryBuilder;
 import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
-import utils.UserUtils;
 
 import java.util.Date;
 
@@ -808,9 +807,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-//				return photoQueryService.getFavoritesPhotosSQL( user.getId(), favoriteEntryType, page, itemsOnPage );
 				return builder()
-					.filterByAddedToBookmark( user, favoriteEntryType )
+					.filterOnlyPhotosAddedByUserToBookmark( user, favoriteEntryType )
 					.forPage( page, itemsOnPage )
 					.getQuery();
 			}
