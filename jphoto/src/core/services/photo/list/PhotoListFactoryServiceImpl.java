@@ -8,7 +8,6 @@ import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.list.factory.*;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
@@ -22,9 +21,6 @@ import utils.UserUtils;
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private static final int USER_CARD_BEST_MIN_MARKS = 1;
-
-	@Autowired
-	private PhotoListCriteriasService photoListCriteriasService;
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
@@ -677,10 +673,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private PhotoListQueryBuilder builder() {
 		return new PhotoListQueryBuilder( dateUtilsService );
-	}
-
-	public void setPhotoListCriteriasService( final PhotoListCriteriasService photoListCriteriasService ) {
-		this.photoListCriteriasService = photoListCriteriasService;
 	}
 
 	public void setPhotoListFilteringService( final PhotoListFilteringService photoListFilteringService ) {
