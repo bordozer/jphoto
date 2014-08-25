@@ -258,7 +258,7 @@ public class PhotoListController {
 		final Genre genre = genreService.load( genreId );
 		final User user = userService.load( userId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenreTopBest( user, genre, EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForUserAndGenre( user, genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		filterModel.setFilterGenreId( _genreId );

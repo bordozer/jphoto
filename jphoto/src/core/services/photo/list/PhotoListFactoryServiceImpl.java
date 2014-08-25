@@ -314,15 +314,14 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-		final PhotoListCriterias criterias = photoListCriteriasService.getForUserAndGenreTopBest( user, genre, accessor );
+	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getForCriteriasPagedIdsSQL( criterias, page, itemsOnPage );
+				return builder().filterByAuthor( user ).filterByGenre( genre ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override
