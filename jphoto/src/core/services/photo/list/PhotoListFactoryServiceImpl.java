@@ -6,6 +6,7 @@ import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
+import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.*;
@@ -255,6 +256,29 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.dateFormatted( timeTo )
 					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory galleryByUserMembershipType( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return getBaseQuery( page, itemsOnPage ).filterByMembershipType( userMembershipType ).getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Main menu: photos: " + userMembershipType.getName(), services );
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list title: Photos of users with membership type $1. $2.", services ).translatableString( userMembershipType.getNamePlural() ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
 			}
 		};
 	}

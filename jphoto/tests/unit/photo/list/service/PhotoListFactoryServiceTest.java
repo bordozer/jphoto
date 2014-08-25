@@ -4,6 +4,7 @@ import common.AbstractTestCase;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
 import core.general.photo.PhotoVotingCategory;
+import core.general.user.UserMembershipType;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.PhotoListFilteringService;
@@ -205,6 +206,16 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '2014-08-24 00:00:00' ) AND photoVoting.votingTime <= '2014-08-25 23:59:59' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '40' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: The best photos for period 2014-08-25 - 2014-08-24", factory.getTitle().build( Language.EN ) );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void galleryByUserMembershipTypeTest() {
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryByUserMembershipType( UserMembershipType.MODEL, 10, 24, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN users ON ( photos.userId = users.id ) WHERE ( users.membershipType = '2' ) ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Main menu: photos: UserMembershipType: model", factory.getTitle().build( Language.EN ) );
 		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 

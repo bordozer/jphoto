@@ -5,6 +5,7 @@ import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
+import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
@@ -28,6 +29,8 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory galleryUploadedInDateRange( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryUploadedInDateRangeBest( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor );
+
+	AbstractPhotoListFactory galleryByUserMembershipType( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor );
 

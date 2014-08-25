@@ -4,7 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import core.general.base.PagingModel;
 import core.general.data.PhotoListCriterias;
-import core.general.data.TimeRange;
 import core.general.data.photoList.PhotoListData;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
@@ -375,25 +374,27 @@ public class PhotoListController {
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
-		final List<PhotoListData> photoListDatas = newArrayList();
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryByUserMembershipType( membershipType, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
-		if ( pagingModel.getCurrentPage() == 1 ) {
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
+
+		/*if ( pagingModel.getCurrentPage() == 1 ) {
 			final PhotoListCriterias topBestCriterias = photoListCriteriasService.getForMembershipTypeTopBest( membershipType, getCurrentUser() );
 			final PhotoListData topBestData = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( topBestCriterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 			topBestData.setPhotoListCriterias( topBestCriterias );
 			topBestData.setLinkToFullList( urlUtilsService.getPhotosByMembershipBest( membershipType, UrlUtilsServiceImpl.PHOTOS_URL ) );
 
 			photoListDatas.add( topBestData );
-		}
+		}*/
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( membershipType, getCurrentUser() );
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipType( membershipType, getCurrentUser() );
 		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
 
 		return VIEW;
 	}
