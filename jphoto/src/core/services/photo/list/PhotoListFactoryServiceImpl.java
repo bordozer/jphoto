@@ -555,11 +555,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	public AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
-		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQuery( 1, getTopListPhotosCount() ).filterByAuthor( user ).getQuery();
+				return builder().filterByAuthor( user ).sortByUploadTimeDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
 			}
 
 			@Override
