@@ -27,6 +27,7 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +42,18 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	private static final int MIN_MARKS_FOR_VERY_BEST = 40;
 
 	private static final String A_GROUP_MENU_CAN_NOT_BE_FOUND = "A group operation menu is not provided by photo list";
+
+	private static final ArrayList<PhotoGroupOperationMenu> GROUP_OPERATION_MENUS_USER = newArrayList(
+		PhotoGroupOperationMenu.ARRANGE_PHOTO_ALBUMS
+		, PhotoGroupOperationMenu.ARRANGE_TEAM_MEMBERS
+		, PhotoGroupOperationMenu.SEPARATOR_MENU
+		, PhotoGroupOperationMenu.ARRANGE_NUDE_CONTENT_MENU
+		, PhotoGroupOperationMenu.MOVE_TO_GENRE_MENU
+		, PhotoGroupOperationMenu.SEPARATOR_MENU
+		, PhotoGroupOperationMenu.DELETE_PHOTOS_MENU
+	);
+
+	private static final ArrayList<PhotoGroupOperationMenu> GROUP_OPERATION_MENUS_EMPTY = newArrayList();
 
 	TestData testData;
 
@@ -80,7 +93,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryForUserOwnGroupMenusTest() {
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUser( testData.accessor, 3, 36, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).galleryForUser( testData.accessor, 3, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -94,7 +107,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryForUserAndGenreOwnGroupMenusTest() {
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.accessor, testData.genre, 3, 36, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.accessor, testData.genre, 3, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -138,7 +151,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		teamMember.setName( "Team model" );
 		teamMember.setUser( testData.user );
 
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userTeamMemberPhotos( testData.accessor, teamMember, 3, 36, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).userTeamMemberPhotos( testData.accessor, teamMember, 3, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -207,7 +220,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void userCardPhotosBestOwnGroupMenusTest() {
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userCardPhotosBest( testData.accessor, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).userCardPhotosBest( testData.accessor, testData.accessor ) );
 	}
 
 	@Test
@@ -221,7 +234,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryForUserBestOwnGroupMenusTest() {
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserBest( testData.accessor, 1, 36, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).galleryForUserBest( testData.accessor, 1, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -244,7 +257,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryForUserAndGenreBestOwnGroupMenusTest() {
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserAndGenreBest( testData.accessor, testData.genre, 5, 20, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).galleryForUserAndGenreBest( testData.accessor, testData.genre, 5, 20, testData.accessor ) );
 	}
 
 	@Test
@@ -345,7 +358,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		userPhotoAlbum.setId( 3455 );
 		userPhotoAlbum.setUser( testData.user );
 
-		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userAlbumPhotos( testData.accessor, userPhotoAlbum, 5, 16, testData.accessor ) );
+		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).userAlbumPhotos( testData.accessor, userPhotoAlbum, 5, 16, testData.accessor ) );
 	}
 
 	@Test
@@ -384,14 +397,8 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	private GroupOperationService getGroupOperationService( final TestData testData ) {
 		final GroupOperationService groupOperationService = EasyMock.createMock( GroupOperationService.class );
 
-		EasyMock.expect( groupOperationService.getNoPhotoGroupOperationMenuContainer() ).andReturn( new PhotoGroupOperationMenuContainer( newArrayList() ) ).anyTimes();
-		EasyMock.expect( groupOperationService.getUserOwnPhotosGroupOperationMenus() ).andReturn( newArrayList( PhotoGroupOperationMenu.ARRANGE_PHOTO_ALBUMS
-			, PhotoGroupOperationMenu.ARRANGE_TEAM_MEMBERS
-			, PhotoGroupOperationMenu.SEPARATOR_MENU
-			, PhotoGroupOperationMenu.ARRANGE_NUDE_CONTENT_MENU
-			, PhotoGroupOperationMenu.MOVE_TO_GENRE_MENU
-			, PhotoGroupOperationMenu.SEPARATOR_MENU, PhotoGroupOperationMenu.DELETE_PHOTOS_MENU
-		) ).anyTimes();
+		EasyMock.expect( groupOperationService.getNoPhotoGroupOperationMenuContainer() ).andReturn( new PhotoGroupOperationMenuContainer( GROUP_OPERATION_MENUS_EMPTY ) ).anyTimes();
+		EasyMock.expect( groupOperationService.getUserOwnPhotosGroupOperationMenus() ).andReturn( GROUP_OPERATION_MENUS_USER ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( groupOperationService );
@@ -449,7 +456,11 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		return photoListFilteringService;
 	}
 
-	private void checkGroupOperationMenus( final AbstractPhotoListFactory factory ) {
+	private void assertGroupOperationMenusIsEmpty( final AbstractPhotoListFactory factory ) {
+		assertTrue( factory.getGroupOperationMenuContainer().getGroupOperationMenus() == GROUP_OPERATION_MENUS_EMPTY );
+	}
+
+	private void assertGroupOperationMenusForUser( final AbstractPhotoListFactory factory ) {
 		final PhotoGroupOperationMenuContainer groupOperationMenuContainer = factory.getGroupOperationMenuContainer();
 		final List<PhotoGroupOperationMenu> operationMenus = groupOperationMenuContainer.getGroupOperationMenus();
 
