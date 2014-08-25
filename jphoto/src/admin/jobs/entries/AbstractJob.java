@@ -13,10 +13,8 @@ import core.log.LogHelper;
 import core.services.system.Services;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
-import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import sql.builder.SqlIdsSelectQuery;
 import utils.ErrorUtils;
 
 import java.util.Date;

@@ -14,7 +14,6 @@ import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.*;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoQueryService;
 import ui.services.UtilsService;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.security.UsersSecurityService;

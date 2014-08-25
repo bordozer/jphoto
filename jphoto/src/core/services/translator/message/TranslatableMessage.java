@@ -1,11 +1,9 @@
 package core.services.translator.message;
 
-import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
-import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.system.Services;

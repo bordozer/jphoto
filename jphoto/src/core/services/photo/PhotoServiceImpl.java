@@ -35,7 +35,7 @@ import core.services.utils.sql.PhotoListQueryBuilder;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
-import sql.builder.*;
+import sql.builder.SqlIdsSelectQuery;
 
 import java.io.File;
 import java.io.IOException;

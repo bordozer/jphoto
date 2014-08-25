@@ -1,6 +1,7 @@
 package core.services.utils.sql;
 
-import sql.builder.*;
+import sql.builder.BaseSqlSelectQuery;
+import sql.builder.SqlIdsSelectQuery;
 
 public interface BaseSqlUtilsService {
 

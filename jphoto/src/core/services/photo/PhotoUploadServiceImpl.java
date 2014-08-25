@@ -5,7 +5,7 @@ import core.general.user.User;
 import core.services.utils.DateUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import sql.builder.*;
+import sql.builder.SqlIdsSelectQuery;
 
 import java.util.Date;
 import java.util.List;

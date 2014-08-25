@@ -34,8 +34,6 @@ import utils.PagingUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.USERS_URL )
 public class UserBookmarksController {
