@@ -25,16 +25,6 @@ public class PhotoListCriteriasServiceImpl implements PhotoListCriteriasService 
 	private DateUtilsService dateUtilsService;
 
 	@Override
-	public PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor ) {
-		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
-
-		criterias.setMinimalMarks( PhotoQueryServiceImpl.MIN_POSSIBLE_MARK );
-		criterias.setVotedUser( votedUser );
-
-		return criterias;
-	}
-
-	@Override
 	public PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor ) {
 		final PhotoListCriterias criterias = new PhotoListGallery().getPhotoListCriterias( accessor );
 

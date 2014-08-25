@@ -3,6 +3,7 @@ package photo.list.service;
 import common.AbstractTestCase;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
+import core.general.photo.PhotoVotingCategory;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.PhotoListFilteringService;
@@ -11,6 +12,7 @@ import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
 import core.services.system.ServicesImpl;
 import core.services.translator.Language;
+import mocks.PhotoVotingCategoryMock;
 import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -172,6 +174,16 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).appraisedByUserPhotos( testData.user, 10, 24, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photoVoting.userId = '112' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void appraisedByUserPhotosByVotingCategoryTest() {
+		final PhotoVotingCategory votingCategory = new PhotoVotingCategoryMock( 543 );
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).appraisedByUserPhotos( testData.user, votingCategory, 10, 24, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.userId = '112' ) AND photoVoting.votingCategoryId = '543' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
 		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}

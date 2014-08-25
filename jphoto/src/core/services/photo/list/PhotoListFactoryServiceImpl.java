@@ -3,6 +3,7 @@ package core.services.photo.list;
 import core.enums.FavoriteEntryType;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
+import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -361,7 +362,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory appraisedByUserPhotos( final User user, final int page, final int itemsOnPage, final User accessor ) {
-
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
@@ -369,6 +369,29 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
 				return builder().filterByVotedUser( user ).sortByVotingTimeDesc().forPage( page, itemsOnPage ).getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services ).userCardLink( user );
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services );
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory appraisedByUserPhotos( final User user, final PhotoVotingCategory photoVotingCategory, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return builder().filterByVotedUser( user ).filterByVotingCategory( photoVotingCategory ).sortByVotingTimeDesc().forPage( page, itemsOnPage ).getQuery();
 			}
 
 			@Override

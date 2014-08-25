@@ -311,19 +311,22 @@ public class PhotoListController {
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 
 		final int userId = assertUserExistsAndGetUserId( _userId );
-
 		final User user = userService.load( userId );
 
 		final PhotoVotingCategory votingCategory = votingCategoryService.load( votingCategoryId );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, getCurrentUser() );
+		model.addPhotoList( getPhotoList( photoListFactoryService.appraisedByUserPhotos( user, votingCategory, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, getCurrentUser() );
 		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
 
 		final List<PhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
 
 		fillFilterModelWithUserData( filterModel, user );
 

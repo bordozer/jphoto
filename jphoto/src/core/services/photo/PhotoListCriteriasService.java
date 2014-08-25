@@ -1,7 +1,6 @@
 package core.services.photo;
 
 import core.general.data.PhotoListCriterias;
-import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
@@ -9,8 +8,6 @@ import core.general.user.UserMembershipType;
 import java.util.Date;
 
 public interface PhotoListCriteriasService {
-
-	PhotoListCriterias getForAppraisedByUserPhotos( final User votedUser, final User accessor );
 
 	PhotoListCriterias getForAppraisedByUserPhotos( final PhotoVotingCategory votingCategory, final User votedUser, final User accessor );
 

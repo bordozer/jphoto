@@ -3,6 +3,7 @@ package core.services.photo.list;
 import core.enums.FavoriteEntryType;
 import core.general.data.TimeRange;
 import core.general.genre.Genre;
+import core.general.photo.PhotoVotingCategory;
 import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
@@ -35,6 +36,8 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory appraisedByUserPhotos( final User user, final int page, final int itemsOnPage, final User accessor );
+
+	AbstractPhotoListFactory appraisedByUserPhotos( final User user, PhotoVotingCategory photoVotingCategory, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory userTeamMemberPhotosLast( final User user, final UserTeamMember userTeamMember, final User accessor );
 
