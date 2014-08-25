@@ -14,7 +14,6 @@ import core.services.dao.*;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
 import core.services.entry.VotingCategoryService;
-import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.list.PhotoListFactoryService;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
@@ -27,7 +26,6 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.UrlUtilsServiceImpl;
 import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoQueryService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,9 +76,6 @@ public class PhotoListController {
 	private VotingCategoryService votingCategoryService;
 
 	@Autowired
-	private PhotoListCriteriasService photoListCriteriasService;
-
-	@Autowired
 	private UtilsService utilsService;
 
 	@Autowired
@@ -98,9 +93,6 @@ public class PhotoListController {
 	@Autowired
 	private GroupOperationService groupOperationService;
 	
-	@Autowired
-	private PhotoQueryService photoQueryService;
-
 	@Autowired
 	private Services services;
 
@@ -374,7 +366,7 @@ public class PhotoListController {
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryByUserMembershipTypeTopBest( membershipType, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryByUserMembershipTypeTopBest( membershipType, EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryByUserMembershipType( membershipType, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBreadcrumbs( membershipType ) );
@@ -387,14 +379,18 @@ public class PhotoListController {
 		, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 		final UserMembershipType membershipType = UserMembershipType.getById( typeId );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, getCurrentUser() );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryByUserMembershipTypeBest( membershipType, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
+
+		/*final PhotoListCriterias criterias = photoListCriteriasService.getForMembershipTypeBestForPeriod( membershipType, getCurrentUser() );
 		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
 		data.setPhotoListCriterias( criterias );
 		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByMembershipTypeBestBreadcrumbs( membershipType ) );
 
 		final List<PhotoListData> photoListDatas = newArrayList( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
 
 		return VIEW;
 	}

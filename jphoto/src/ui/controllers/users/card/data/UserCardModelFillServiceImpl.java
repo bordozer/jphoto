@@ -11,7 +11,6 @@ import core.services.dao.ActivityStreamDaoImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.entry.GroupOperationService;
-import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryService;
@@ -21,11 +20,9 @@ import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.DateUtilsService;
-import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
-import core.services.utils.sql.PhotoQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
@@ -57,9 +54,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PhotoService photoService;
 
 	@Autowired
-	private PhotoListCriteriasService photoListCriteriasService;
-
-	@Autowired
 	private ConfigurationService configurationService;
 
 	@Autowired
@@ -82,12 +76,6 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 
 	@Autowired
 	private UrlUtilsService urlUtilsService;
-
-	@Autowired
-	private PhotoQueryService photoQueryService;
-
-	@Autowired
-	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Autowired
 	private EntryMenuService entryMenuService;

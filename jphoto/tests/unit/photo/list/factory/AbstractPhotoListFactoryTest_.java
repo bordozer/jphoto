@@ -2,13 +2,10 @@ package photo.list.factory;
 
 import common.AbstractTestCase;
 import core.enums.RestrictionType;
-import core.general.data.PhotoListCriterias;
-import core.general.data.PhotoSort;
 import core.general.photo.Photo;
 import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.services.entry.GroupOperationService;
-import core.services.photo.PhotoListCriteriasService;
 import core.services.photo.PhotoService;
 import core.services.photo.list.PhotoListFilteringService;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;

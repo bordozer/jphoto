@@ -90,16 +90,10 @@ public class PhotoServiceImpl implements PhotoService {
 	private DateUtilsService dateUtilsService;
 
 	@Autowired
-	private PhotoListCriteriasService photoListCriteriasService;
-
-	@Autowired
 	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Autowired
 	private PhotoSqlFilterService photoSqlFilterService;
-
-	@Autowired
-	private PhotoQueryService photoQueryService;
 
 	@Autowired
 	private ActivityStreamService activityStreamService;

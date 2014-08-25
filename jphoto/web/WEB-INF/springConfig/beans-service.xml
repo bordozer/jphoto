@@ -30,7 +30,6 @@
 
 	<bean id="systemConfigurationLoadService" class="core.services.system.SystemConfigurationLoadServiceImpl" />
 	<bean id="configurationService" class="core.services.system.ConfigurationServiceImpl" init-method="loadSystemConfiguration" />
-	<bean id="photoListCriteriasService" class="core.services.photo.PhotoListCriteriasServiceImpl" />
 	<bean id="securityService" class="core.services.security.SecurityServiceImpl" />
 	<bean id="userPhotoAlbumService" class="core.services.user.UserPhotoAlbumServiceImpl"/>
 	<bean id="privateMessageService" class="core.services.entry.PrivateMessageServiceImpl"/>

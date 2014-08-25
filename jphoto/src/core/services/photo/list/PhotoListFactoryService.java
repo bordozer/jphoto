@@ -32,7 +32,9 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryByUserMembershipType( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor );
 
-	AbstractPhotoListFactory galleryByUserMembershipTypeTopBest( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor );
+	AbstractPhotoListFactory galleryByUserMembershipTypeTopBest( final UserMembershipType userMembershipType, final User accessor );
+
+	AbstractPhotoListFactory galleryByUserMembershipTypeBest( final UserMembershipType userMembershipType, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor );
 

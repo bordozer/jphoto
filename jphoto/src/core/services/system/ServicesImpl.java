@@ -153,9 +153,6 @@ public class ServicesImpl implements Services {
 	private RemotePhotoCategoryService remotePhotoCategoryService;
 
 	@Autowired
-	private PhotoListCriteriasService photoListCriteriasService;
-
-	@Autowired
 	private GroupOperationService groupOperationService;
 
 	@Autowired
@@ -386,11 +383,6 @@ public class ServicesImpl implements Services {
 	}
 
 	@Override
-	public PhotoListCriteriasService getPhotoListCriteriasService() {
-		return photoListCriteriasService;
-	}
-
-	@Override
 	public GroupOperationService getGroupOperationService() {
 		return groupOperationService;
 	}
@@ -585,10 +577,6 @@ public class ServicesImpl implements Services {
 
 	public void setRemotePhotoCategoryService( final RemotePhotoCategoryService remotePhotoCategoryService ) {
 		this.remotePhotoCategoryService = remotePhotoCategoryService;
-	}
-
-	public void setPhotoListCriteriasService( final PhotoListCriteriasService photoListCriteriasService ) {
-		this.photoListCriteriasService = photoListCriteriasService;
 	}
 
 	public void setGroupOperationService( final GroupOperationService groupOperationService ) {

@@ -108,8 +108,6 @@ public interface Services {
 
 	RemotePhotoCategoryService getRemotePhotoCategoryService();
 
-	PhotoListCriteriasService getPhotoListCriteriasService();
-
 	GroupOperationService getGroupOperationService();
 
 	RestrictionService getRestrictionService();
