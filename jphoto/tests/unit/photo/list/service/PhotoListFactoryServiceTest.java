@@ -219,6 +219,11 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	@Test
+	public void galleryForUserBestOwnGroupMenusTest() {
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserBest( testData.accessor, 1, 36, testData.accessor ) );
+	}
+
+	@Test
 	public void galleryForUserAndGenreTopBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenreTopBest( testData.user, testData.genre, testData.accessor );
 
@@ -234,6 +239,11 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 20 OFFSET 80;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> best", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void galleryForUserAndGenreBestOwnGroupMenusTest() {
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserAndGenreBest( testData.accessor, testData.genre, 5, 20, testData.accessor ) );
 	}
 
 	@Test
@@ -266,8 +276,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryUploadedInDateRangeTest() {
-		final DateData dateData = new DateData();
-
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryUploadedInDateRange( dateUtilsService.parseDateTime( "2014-08-10 12:15:48" ), dateUtilsService.parseDateTime( "2014-08-14 03:42:15" ), 10, 24, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.uploadTime >= '2014-08-10 00:00:00' ) AND photos.uploadTime <= '2014-08-14 23:59:59' ) ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
