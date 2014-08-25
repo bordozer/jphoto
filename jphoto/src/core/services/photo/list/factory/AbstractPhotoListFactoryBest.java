@@ -25,7 +25,7 @@ public abstract class AbstractPhotoListFactoryBest extends AbstractPhotoListFact
 	}
 
 	protected PhotoListQueryBuilder getBaseQuery( final int minMarks ) {
-		return new PhotoListQueryBuilder( services.getDateUtilsService() ).votingBetween( timeRange.getTimeFrom(), timeRange.getTimeTo() ).filterByMinimalMarks( minMarks ).sortBySumMarksDesc();
+		return new PhotoListQueryBuilder( services.getDateUtilsService() ).filterByVotingTime( timeRange.getTimeFrom(), timeRange.getTimeTo() ).filterByMinimalMarks( minMarks ).sortBySumMarksDesc();
 	}
 
 	private TimeRange getTimeRange() {

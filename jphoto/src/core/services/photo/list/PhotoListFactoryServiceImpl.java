@@ -18,9 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 import utils.UserUtils;
 
+import java.util.Date;
+
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private static final int USER_CARD_BEST_MIN_MARKS = 1;
+	private static final String SORTING_BY_UPLOAD_TIME_DESC = "Photo list bottom text: Sorted by upload time DESC";
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
@@ -130,6 +133,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1. $2.", services ).addPhotosByGenreLinkParameter( genre ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+			}
+
+			@Override
 			public TranslatableMessage getPhotoListBottomText() {
 				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
 			}
@@ -186,8 +194,36 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			}
 
 			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photos from category $1. $2.", services ).addGenreNameParameter( genre );
+			}
+
+			@Override
 			public TranslatableMessage getPhotoListBottomText() {
-				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
+				return new TranslatableMessage( "$1", services ).string( genre.getDescription() ); // TODO: the description is untranslated!
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory galleryUploadedInDateRange( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+
+		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return getBaseQuery( page, itemsOnPage ).filterByUploadTime( timeFrom, timeTo ).getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: Photos uploaded between $1 and $2. $3.", services ).dateFormatted( timeFrom ).dateFormatted( timeTo ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: Photos uploaded between $1 and $2", services ).dateFormatted( timeFrom ).dateFormatted( timeTo );
 			}
 		};
 	}

@@ -103,7 +103,7 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 		final Date timeTo = dateUtilsService.parseDateTime( "2014-08-23 20:02:53" );
 
 		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
-			.votingBetween( timeFrom, timeTo )
+			.filterByVotingTime( timeFrom, timeTo )
 			.forPage( 1, 16 )
 			;
 
@@ -117,7 +117,7 @@ public class PhotoListQueryBuilderTest extends AbstractTestCase {
 		final Date timeTo = dateUtilsService.parseDateTime( "2014-08-23 20:02:53" );
 
 		final PhotoListQueryBuilder queryBuilder = new PhotoListQueryBuilder( dateUtilsService )
-			.votingBetween( timeFrom, timeTo )
+			.filterByVotingTime( timeFrom, timeTo )
 			.forPage( 1, 16 )
 			.sortBySumMarksDesc()
 			;

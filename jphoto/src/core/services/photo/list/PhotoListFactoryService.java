@@ -9,6 +9,8 @@ import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 
+import java.util.Date;
+
 public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory gallery( final int page, final int itemsOnPage, final User accessor );
@@ -22,6 +24,8 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final int page, final int itemsOnPage, final User accessor );
+
+	AbstractPhotoListFactory galleryUploadedInDateRange( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor );
 

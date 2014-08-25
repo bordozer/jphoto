@@ -49,7 +49,7 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder uploadedBetween( final Date timeFrom, final Date timeTo ) {
+	public PhotoListQueryBuilder filterByUploadTime( final Date timeFrom, final Date timeTo ) {
 		final SqlColumnSelectable column = new SqlColumnSelect( table(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
 		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, dateUtilsService.getFirstSecondOfDay( timeFrom ), dateUtilsService ) );
 		query.addWhereAnd( new SqlCondition( column, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, dateUtilsService.getLastSecondOfDay( timeTo ), dateUtilsService ) );
@@ -73,7 +73,7 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
-	public PhotoListQueryBuilder votingBetween( final Date votingTimeFrom, final Date votingTimeTo ) {
+	public PhotoListQueryBuilder filterByVotingTime( final Date votingTimeFrom, final Date votingTimeTo ) {
 
 		addJoinVotingTable();
 
@@ -90,7 +90,7 @@ public class PhotoListQueryBuilder {
 	}
 
 	public PhotoListQueryBuilder votingForLastDays( final int days ) {
-		return votingBetween( dateUtilsService.getDatesOffsetFromCurrentDate( days ), dateUtilsService.getCurrentTime() );
+		return filterByVotingTime( dateUtilsService.getDatesOffsetFromCurrentDate( days ), dateUtilsService.getCurrentTime() );
 	}
 
 	public PhotoListQueryBuilder filterByMinimalMarks( final int marks ) {

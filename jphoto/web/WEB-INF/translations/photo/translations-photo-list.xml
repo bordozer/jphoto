@@ -133,6 +133,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list bottom text: Photo gallery by genre $1. $2.</nerd>
+		<ru><![CDATA[Работы категории $1. $2.]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo list title: Photo gallery by genre $1 top best for last $2 days</nerd>
 		<ru><![CDATA[Самые лучшие работы категории $1 за последние $2 дня]]></ru>
 	</translation>
@@ -323,23 +328,23 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list title: Photos uploaded between $1 and $2. $3.</nerd>
+		<ru><![CDATA[Работы за период с $1 по $2. $3.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photos uploaded between $1 and $2</nerd>
+		<ru><![CDATA[Показаны работы, загруженные в период с $1 по $2.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Photos from category $1.</nerd>
+		<ru><![CDATA[Показаны работы из раздела $1.]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Sorted by upload time DESC</nerd>
+		<ru><![CDATA[Отсортированы по времени загрузки по убыванию]]></ru>
 	</translation>
 
 	<translation>

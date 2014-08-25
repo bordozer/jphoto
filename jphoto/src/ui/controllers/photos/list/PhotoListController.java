@@ -319,15 +319,6 @@ public class PhotoListController {
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
 
-		/*final PhotoListCriterias criterias = photoListCriteriasService.getForAppraisedByUserPhotos( votingCategory, user, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByUserByVotingCategoryBreadcrumbs( user, votingCategory ) );
-
-		final List<PhotoListData> photoListDatas = newArrayList( data );
-
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
-
 		fillFilterModelWithUserData( filterModel, user );
 
 		return VIEW;
@@ -361,7 +352,11 @@ public class PhotoListController {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
-		final List<PhotoListData> photoListDatas = newArrayList();
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryUploadedInDateRange( fDateFrom, fDateTo, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBreadcrumbs( fDateFrom, fDateTo ) );
+
+		/*final List<PhotoListData> photoListDatas = newArrayList();
 
 		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriod( fDateFrom, fDateTo, getCurrentUser() );
 		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
@@ -374,7 +369,7 @@ public class PhotoListController {
 
 		photoListDatas.add( data );
 
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
 
 		return VIEW;
 	}
