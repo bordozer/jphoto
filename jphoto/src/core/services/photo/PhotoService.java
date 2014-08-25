@@ -36,7 +36,7 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 
 	int getPhotosCountByUserAndGenre( final int userId, final int genreId );
 
-	int getPhotosCountByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo );
+	int getPhotosCountByGenreForPeriod( final Genre genre, final Date timeFrom, final Date timeTo );
 
 	List<Integer> getUserPhotosIds( final int userId );
 

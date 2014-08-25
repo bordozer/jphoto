@@ -111,7 +111,7 @@ public class PortalPageController {
 			final PortalPageGenre portalGenre = new PortalPageGenre();
 			portalGenre.setGenre( genre );
 			portalGenre.setTotal( photoService.getPhotosCountByGenre( genre.getId() ) );
-			portalGenre.setToday( photoService.getPhotosCountByGenreForPeriod( genre.getId(), todayFirstSecond, todayLastSecond ) );
+			portalGenre.setToday( photoService.getPhotosCountByGenreForPeriod( genre, todayFirstSecond, todayLastSecond ) );
 
 			portalPageGenres.add( portalGenre );
 		}

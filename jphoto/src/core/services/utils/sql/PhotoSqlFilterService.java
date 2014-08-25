@@ -6,13 +6,9 @@ import java.util.Date;
 
 public interface PhotoSqlFilterService {
 
-	void addFilterByGenre( int genreId, BaseSqlSelectQuery selectQuery );
-
 	void addFilterByUser( int userId, BaseSqlSelectQuery selectQuery );
 
 	void addJoinWithPhotoVotingTable( BaseSqlSelectQuery selectQuery );
-
-	void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery );
 
 	void addFilterByMinVotedMark( BaseSqlSelectQuery selectQuery, int minMarks );
 

@@ -18,11 +18,6 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 	private BaseSqlUtilsService baseSqlUtilsService;
 
 	@Override
-	public void addFilterByGenre( final int genreId, final BaseSqlSelectQuery selectQuery ) {
-		selectQuery.addWhereAnd( baseSqlUtilsService.equalsCondition( PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_GENRE_ID, genreId ) );
-	}
-
-	@Override
 	public void addFilterByUser( final int userId, final BaseSqlSelectQuery selectQuery ) {
 		selectQuery.addWhereAnd( baseSqlUtilsService.equalsCondition( PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, userId ) );
 	}
@@ -37,22 +32,6 @@ public class PhotoSqlFilterServiceImpl implements PhotoSqlFilterService {
 		final SqlJoin joinVotingTable = SqlJoin.inner( tPhotoVoting, new SqlJoinCondition( tPhotoColId, tPhotoVotingColPhotoId ) );
 		selectQuery.joinTable( joinVotingTable );
 		selectQuery.addGrouping( tPhotoColId );
-	}
-
-	@Override
-	public void addUploadTimeCriteria( final Date timeFrom, final Date timeTo, final BaseSqlSelectQuery selectQuery ) {
-		final SqlTable tPhotos = selectQuery.getMainTable();
-		final SqlColumnSelect tPhotosColUploadTime = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-
-		if ( timeFrom != null && timeFrom.getTime() > 0 ) {
-			final SqlCondition moreThenDateFrom = new SqlCondition( tPhotosColUploadTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, timeFrom, dateUtilsService );
-			selectQuery.addWhereAnd( moreThenDateFrom );
-		}
-
-		if ( timeFrom != null && timeTo.getTime() > 0 ) {
-			final SqlCondition lessThenDateTo = new SqlCondition( tPhotosColUploadTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, timeTo, dateUtilsService );
-			selectQuery.addWhereAnd( lessThenDateTo );
-		}
 	}
 
 	@Override

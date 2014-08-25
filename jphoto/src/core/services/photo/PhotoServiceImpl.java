@@ -7,7 +7,6 @@ import core.general.base.PagingModel;
 import core.general.cache.CacheKey;
 import core.general.cache.keys.UserGenreCompositeKey;
 import core.general.configuration.ConfigurationKey;
-import core.general.data.PhotoListCriterias;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeam;
@@ -34,7 +33,6 @@ import core.services.utils.ImageFileUtilsService;
 import core.services.utils.UserPhotoFilePathUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
-import core.services.utils.sql.PhotoQueryService;
 import core.services.utils.sql.PhotoSqlFilterService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -299,13 +297,10 @@ public class PhotoServiceImpl implements PhotoService {
 	}
 
 	@Override
-	public int getPhotosCountByGenreForPeriod( final int genreId, final Date timeFrom, final Date timeTo ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+	public int getPhotosCountByGenreForPeriod( final Genre genre, final Date timeFrom, final Date timeTo ) {
+		final SqlIdsSelectQuery query = new PhotoListQueryBuilder( dateUtilsService ).filterByGenre( genre ).filterByUploadTime( timeFrom, timeTo ).getQuery(); // TODO: write test!
 
-		photoSqlFilterService.addFilterByGenre( genreId, selectQuery );
-		photoSqlFilterService.addUploadTimeCriteria( timeFrom, timeTo, selectQuery );
-
-		final SqlSelectIdsResult idsResult = load( selectQuery );
+		final SqlSelectIdsResult idsResult = load( query );
 
 		return idsResult.getRecordQty();
 	}
