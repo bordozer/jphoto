@@ -10,6 +10,7 @@ import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.UserMembershipType;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoVotingService;
@@ -322,6 +323,34 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) INNER JOIN users ON ( photos.userId = users.id ) WHERE ( ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) AND users.membershipType = '3' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 16 OFFSET 64;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
 		assertEquals( "Main menu: The best photos: UserMembershipType: makeup master", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void userAlbumPhotosTest() {
+
+		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
+		userPhotoAlbum.setId( 3455 );
+		userPhotoAlbum.setUser( testData.user );
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userAlbumPhotos( testData.user, userPhotoAlbum, 5, 16, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoAlbums ON ( photos.id = photoAlbums.photoId ) WHERE ( ( photos.userId = '112' ) AND photoAlbums.photoAlbumId = '3455' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all photos from album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a>", factory.getTitle().build( Language.EN ) );
+		assertEquals( emptyLink(), factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void userAlbumPhotosLastTest() {
+
+		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
+		userPhotoAlbum.setId( 3455 );
+		userPhotoAlbum.setUser( testData.user );
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userAlbumPhotosLast( testData.user, userPhotoAlbum, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoAlbums ON ( photos.id = photoAlbums.photoId ) WHERE ( ( photos.userId = '112' ) AND photoAlbums.photoAlbumId = '3455' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest photos from album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a>", factory.getTitle().build( Language.EN ) );
+		assertEquals( "http://127.0.0.1:8085/worker/members/112/albums/3455/", factory.getLinkToFullList() );
 	}
 
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
