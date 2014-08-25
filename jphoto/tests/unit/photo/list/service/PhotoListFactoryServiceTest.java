@@ -6,8 +6,12 @@ import core.enums.UserTeamMemberType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
 import core.general.photo.PhotoVotingCategory;
+import core.general.photo.group.PhotoGroupOperationMenu;
+import core.general.photo.group.PhotoGroupOperationMenuContainer;
+import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.UserMembershipType;
 import core.general.user.userTeam.UserTeamMember;
+import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.PhotoListFilteringService;
@@ -23,13 +27,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
+import static com.google.common.collect.Lists.newArrayList;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	private static final int DAYS = 2;
 	private static final int MIN_MARKS_FOR_VERY_BEST = 40;
+
+	private static final String A_GROUP_MENU_CAN_NOT_BE_FOUND = "A group operation menu is not provided by photo list";
 
 	TestData testData;
 
@@ -47,7 +57,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 96;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
-//		assertEquals( StringUtils.EMPTY, factory.getPhotoList( 0, 1, Language.EN, dateUtilsService.parseDateTime( "2014-08-24 15:39:40" ) ).getLinkToFullList() ); // TODO: check this
 	}
 
 	@Test
@@ -69,12 +78,22 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	@Test
+	public void galleryForUserOwnGroupMenusTest() {
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUser( testData.accessor, 3, 36, testData.accessor ) );
+	}
+
+	@Test
 	public void galleryForUserAndGenreTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.user, testData.genre, 3, 36, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void galleryForUserAndGenreOwnGroupMenusTest() {
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.accessor, testData.genre, 3, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -108,6 +127,17 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoTeam ON ( photos.id = photoTeam.photoId ) WHERE ( ( photos.userId = '112' ) AND photoTeam.userTeamMemberId = '987' ) ORDER BY photos.uploadTime DESC LIMIT 28 OFFSET 28;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all photos of <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> ( UserTeamMemberType: Model )", factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void userTeamMemberPhotosOwnGroupMenusTest() {
+		final UserTeamMember teamMember = new UserTeamMember();
+		teamMember.setId( 987 );
+		teamMember.setTeamMemberType( UserTeamMemberType.MODEL );
+		teamMember.setName( "Team model" );
+		teamMember.setUser( testData.user );
+
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userTeamMemberPhotos( testData.accessor, teamMember, 3, 36, testData.accessor ) );
 	}
 
 	@Test
@@ -172,6 +202,11 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User card <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the best photos", factory.getTitle().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void userCardPhotosBestOwnGroupMenusTest() {
+		checkGroupOperationMenus( getPhotoListFactoryService( testData ).userCardPhotosBest( testData.accessor, testData.accessor ) );
 	}
 
 	@Test
@@ -290,6 +325,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		services.setConfigurationService( configurationService );
 		services.setPhotoVotingService( getPhotoVotingService() );
 		services.setUrlUtilsService( urlUtilsService );
+		services.setGroupOperationService( getGroupOperationService( testData ) );
 
 		photoListFactoryService.setServices( services );
 		photoListFactoryService.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
@@ -297,6 +333,24 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		photoListFactoryService.setDateUtilsService( dateUtilsService );
 
 		return photoListFactoryService;
+	}
+
+	private GroupOperationService getGroupOperationService( final TestData testData ) {
+		final GroupOperationService groupOperationService = EasyMock.createMock( GroupOperationService.class );
+
+		EasyMock.expect( groupOperationService.getNoPhotoGroupOperationMenuContainer() ).andReturn( new PhotoGroupOperationMenuContainer( newArrayList() ) ).anyTimes();
+		EasyMock.expect( groupOperationService.getUserOwnPhotosGroupOperationMenus() ).andReturn( newArrayList( PhotoGroupOperationMenu.ARRANGE_PHOTO_ALBUMS
+			, PhotoGroupOperationMenu.ARRANGE_TEAM_MEMBERS
+			, PhotoGroupOperationMenu.SEPARATOR_MENU
+			, PhotoGroupOperationMenu.ARRANGE_NUDE_CONTENT_MENU
+			, PhotoGroupOperationMenu.MOVE_TO_GENRE_MENU
+			, PhotoGroupOperationMenu.SEPARATOR_MENU, PhotoGroupOperationMenu.DELETE_PHOTOS_MENU
+		) ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( groupOperationService );
+
+		return groupOperationService;
 	}
 
 	private PhotoVotingService getPhotoVotingService() {
@@ -340,12 +394,24 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 		EasyMock.expect( photoListFilteringService.topBestFilteringStrategy() ).andReturn( filteringStrategy ).anyTimes();
 		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
+		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.accessor, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 		EasyMock.expect( photoListFilteringService.bestFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoListFilteringService );
 
 		return photoListFilteringService;
+	}
+
+	private void checkGroupOperationMenus( final AbstractPhotoListFactory factory ) {
+		final PhotoGroupOperationMenuContainer groupOperationMenuContainer = factory.getGroupOperationMenuContainer();
+		final List<PhotoGroupOperationMenu> operationMenus = groupOperationMenuContainer.getGroupOperationMenus();
+
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_PHOTO_ALBUMS ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_TEAM_MEMBERS ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.ARRANGE_NUDE_CONTENT ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.MOVE_TO_GENRE ) );
+		assertTrue( A_GROUP_MENU_CAN_NOT_BE_FOUND, containsMenu( operationMenus, PhotoGroupOperationType.DELETE_PHOTOS ) );
 	}
 
 	private class DateData {
@@ -362,5 +428,16 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	private static String emptyLink() {
 		return StringUtils.EMPTY;
+	}
+
+	private boolean containsMenu( final List<PhotoGroupOperationMenu> operationMenus, final PhotoGroupOperationType operationType ) {
+
+		for ( final PhotoGroupOperationMenu photoGroupOperationMenu : operationMenus ) {
+			if ( photoGroupOperationMenu.getPhotoGroupOperation() == operationType ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

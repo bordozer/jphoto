@@ -627,6 +627,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.translatableString( userTeamMember.getTeamMemberType().getName() )
 					;
 			}
+
+			@Override
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
+			}
 		};
 	}
 
@@ -731,6 +736,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom tex: User card $1: the best photos", services )
 					.userCardLink( user )
 					;
+			}
+
+			@Override
+			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
+				return getPhotoGroupOperationMenuContainerForUserCard( user );
 			}
 		};
 	}

@@ -125,12 +125,12 @@ public abstract class AbstractPhotoListFactory {
 		return new PhotoListMetrics( notRestrictedPhotosIds, totalPhotosCount );
 	}
 
-	protected PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
+	public PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
 		if ( UserUtils.isUsersEqual( user, accessor ) ) {
 			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
 		}
 
-		return getGroupOperationMenuContainer();
+		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
 	}
 
 	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow, Date time ) {
