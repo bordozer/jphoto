@@ -61,23 +61,6 @@ public class JobHelperServiceImpl implements JobHelperService {
 	}
 
 	@Override
-	public Date getFirstPhotoUploadTime( final int userId ) {
-		final SqlIdsSelectQuery selectQuery = getFirstPhotoUploadTimeSQL();
-		photoSqlFilterService.addFilterByUser( userId, selectQuery );
-
-		final SqlSelectIdsResult photoIds = photoService.load( selectQuery );
-
-		final List<Integer> photoIdsIds = photoIds.getIds();
-
-		if ( photoIdsIds.size() == 0 ) {
-			return dateUtilsService.getDatesOffsetFromCurrentDate( -365 );
-		}
-
-		final Photo theFirstUploadedPhoto = photoService.load( photoIdsIds.get( 0 ) );
-		return theFirstUploadedPhoto.getUploadTime();
-	}
-
-	@Override
 	public boolean getAnonymousOption( final int userId, final int genreId, final Date uploadTime ) {
 		final boolean forceAnonymousPosting = securityService.forceAnonymousPosting( userId, genreId, uploadTime );
 

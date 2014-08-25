@@ -151,7 +151,7 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: today";
 		final String period2 = "photo uploading: day";
 		final int limitPhotosQty = getDailyLimitPhotosQty();
-		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedTodayPhotosIds( photoAuthor.getId() );
+		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedTodayPhotosIds( photoAuthor );
 
 		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), services.getDateUtilsService().getFirstSecondOfTomorrow() );
 	}
@@ -165,7 +165,7 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: this week";
 		final String period2 = "photo uploading: week";
 		final int limitPhotosQty = getWeeklyLimitPhotosQty();
-		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedThisWeekPhotosIds( photoAuthor.getId() );
+		final List<Integer> uploadedPhotosIds = services.getPhotoUploadService().getUploadedThisWeekPhotosIds( photoAuthor );
 
 		addPhotoQtyLimitDescription( photoUploadDescriptions, period1, period2, limitPhotosQty, uploadedPhotosIds.size(), services.getDateUtilsService().getFirstSecondOfNextMonday() );
 	}
@@ -214,7 +214,7 @@ public abstract class AbstractPhotoUploadAllowance {
 		final String period1 = "photo uploading: today";
 		final String period2 = "photo uploading: day";
 		final int uploadSizeLimit = getDailyLimitUploadSize();
-		final long uploadedSummarySize = services.getPhotoUploadService().getUploadedTodayPhotosSummarySize( photoAuthor.getId() );
+		final long uploadedSummarySize = services.getPhotoUploadService().getUploadedTodayPhotosSummarySize( photoAuthor );
 
 		getPhotoSizeLimitDescription( photoUploadDescriptions, period1, period2, uploadSizeLimit, services.getImageFileUtilsService().getFileSizeInKb( uploadedSummarySize ), services.getDateUtilsService().getFirstSecondOfTomorrow() );
 	}
@@ -350,7 +350,7 @@ public abstract class AbstractPhotoUploadAllowance {
 	}
 
 	private float getUploadedThisWeekInKB() {
-		return services.getImageFileUtilsService().getFileSizeInKb( services.getPhotoUploadService().getUploadedThisWeekPhotosSummarySize( photoAuthor.getId() ) );
+		return services.getImageFileUtilsService().getFileSizeInKb( services.getPhotoUploadService().getUploadedThisWeekPhotosSummarySize( photoAuthor ) );
 	}
 
 	private void setNextPhotoUploadTime( final Date nextTime ) {

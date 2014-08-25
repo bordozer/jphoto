@@ -135,7 +135,7 @@ public class PhotoCategoryHandlerController {
 
 		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), getLanguage(), services );
 
-		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user.getId() ) );
+		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user ) );
 		uploadAllowance.setGenre( genre );
 		uploadAllowance.setFileSize( fileSize );
 

@@ -12,7 +12,5 @@ public interface JobHelperService {
 
 	void initPhotoNudeContentOption( final Photo photo );
 
-	Date getFirstPhotoUploadTime( int userId );
-
 	boolean doesUserPhotoExist( final int userId, final int importId );
 }

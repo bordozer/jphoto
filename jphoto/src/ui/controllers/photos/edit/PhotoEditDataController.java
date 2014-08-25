@@ -257,7 +257,7 @@ public class PhotoEditDataController {
 
 		final AbstractPhotoUploadAllowance uploadAllowance = UploadDescriptionFactory.getInstance( user, EnvironmentContext.getCurrentUser(), EnvironmentContext.getLanguage(), services );
 
-		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user.getId() ) );
+		uploadAllowance.setUploadThisWeekPhotos( photoUploadService.getUploadedThisWeekPhotos( user ) );
 		uploadAllowance.setSkipGenreSelectionInfo( true );
 
 		return uploadAllowance;

@@ -1,10 +1,9 @@
 package core.services.photo;
 
 import core.general.photo.Photo;
-import core.services.dao.PhotoDaoImpl;
+import core.general.user.User;
 import core.services.utils.DateUtilsService;
-import core.services.utils.sql.BaseSqlUtilsService;
-import core.services.utils.sql.PhotoSqlFilterService;
+import core.services.utils.sql.PhotoListQueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.*;
 
@@ -19,49 +18,40 @@ public class PhotoUploadServiceImpl implements PhotoUploadService {
 	@Autowired
 	private DateUtilsService dateUtilsService;
 
-	@Autowired
-	private BaseSqlUtilsService baseSqlUtilsService;
-
-	@Autowired
-	private PhotoSqlFilterService photoSqlFilterService;
-
 	@Override
-	public List<Integer> getUploadedTodayPhotosIds( final int userId ) {
-		return getPhotoIds( userId, dateUtilsService.getFirstSecondOfToday() );
+	public List<Integer> getUploadedTodayPhotosIds( final User user ) {
+		return getPhotoIds( user, dateUtilsService.getFirstSecondOfToday() );
 	}
 
 	@Override
-	public List<Integer> getUploadedThisWeekPhotosIds( final int userId ) {
-		return getPhotoIds( userId, dateUtilsService.getFirstSecondOfLastMonday() );
+	public List<Integer> getUploadedThisWeekPhotosIds( final User user ) {
+		return getPhotoIds( user, dateUtilsService.getFirstSecondOfLastMonday() );
 	}
 
 	@Override
-	public List<Photo> getUploadedThisWeekPhotos( final int userId ) {
-		return photoService.load( getUploadedThisWeekPhotosIds( userId ) );
+	public List<Photo> getUploadedThisWeekPhotos( final User user ) {
+		return photoService.load( getUploadedThisWeekPhotosIds( user ) );
 	}
 
 	@Override
-	public long getUploadedThisWeekPhotosSummarySize( final int userId ) {
-		return getSummaryPhotoSize( getUploadedThisWeekPhotosIds( userId ) );
+	public long getUploadedThisWeekPhotosSummarySize( final User user ) {
+		return getSummaryPhotoSize( getUploadedThisWeekPhotosIds( user ) );
 	}
 
 	@Override
-	public long getUploadedTodayPhotosSummarySize( final int userId ) {
-		return getSummaryPhotoSize( getUploadedTodayPhotosIds( userId ) );
+	public long getUploadedTodayPhotosSummarySize( final User user ) {
+		return getSummaryPhotoSize( getUploadedTodayPhotosIds( user ) );
 	}
 
-	private List<Integer> getPhotoIds( final int userId, final Date haveingUploadTimeMoreThen ) {
-		final SqlIdsSelectQuery selectQuery = baseSqlUtilsService.getPhotosIdsSQL();
+	private List<Integer> getPhotoIds( final User user, final Date uploadedSince ) {
 
-		final SqlColumnSelectable tPhotoColUploadTime = new SqlColumnSelect( selectQuery.getMainTable(), PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
-		final SqlLogicallyJoinable condition = new SqlCondition( tPhotoColUploadTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, haveingUploadTimeMoreThen, dateUtilsService );
-		selectQuery.setWhere( condition );
+		final SqlIdsSelectQuery query = new PhotoListQueryBuilder( dateUtilsService )
+			.filterByAuthor( user )
+			.filterByUploadTime( uploadedSince, dateUtilsService.getCurrentTime() )
+			.sortByUploadTimeDesc()
+			.getQuery();
 
-		photoSqlFilterService.addFilterByUser( userId, selectQuery );
-
-		selectQuery.addSortingDesc( tPhotoColUploadTime );
-
-		return photoService.load( selectQuery ).getIds();
+		return photoService.load( query ).getIds();
 	}
 
 	private long getSummaryPhotoSize( final List<Integer> photoIds ) {
