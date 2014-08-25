@@ -30,16 +30,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private PhotoListFilteringService photoListFilteringService;
 
 	@Autowired
-	private ConfigurationService configurationService;
-
-	@Autowired
 	private PhotoQueryService photoQueryService;
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private UrlUtilsService urlUtilsService;
 
 	@Autowired
 	private Services services;
@@ -86,7 +80,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosBestInPeriodUrl( timeRange.getTimeFrom(), timeRange.getTimeTo() );
+				return services.getUrlUtilsService().getPhotosBestInPeriodUrl( timeRange.getTimeFrom(), timeRange.getTimeTo() );
 			}
 
 			@Override
@@ -167,7 +161,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosByGenreLinkBest( genre.getId() );
+				return services.getUrlUtilsService().getPhotosByGenreLinkBest( genre.getId() );
 			}
 
 			@Override
@@ -254,7 +248,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosByUserLinkBest( user.getId() );
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
 			}
 
 			@Override
@@ -340,7 +334,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
+				return services.getUrlUtilsService().getPhotosByUserByGenreLinkBest( user.getId(), genre.getId() );
 			}
 
 			@Override
@@ -421,7 +415,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getUserTeamMemberCardLink( user.getId(), userTeamMember.getId() );
+				return services.getUrlUtilsService().getUserTeamMemberCardLink( user.getId(), userTeamMember.getId() );
 			}
 
 			@Override
@@ -487,7 +481,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
+				return services.getUrlUtilsService().getUserPhotoAlbumPhotosLink( user.getId(), userPhotoAlbum.getId() );
 			}
 
 			@Override
@@ -550,7 +544,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosByUserLinkBest( user.getId() );
+				return services.getUrlUtilsService().getPhotosByUserLinkBest( user.getId() );
 			}
 
 			@Override
@@ -582,7 +576,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosByUserLink( user.getId() );
+				return services.getUrlUtilsService().getPhotosByUserLink( user.getId() );
 			}
 
 			@Override
@@ -615,7 +609,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public String getLinkToFullList() {
-				return urlUtilsService.getPhotosAppraisedByUserLink( user.getId() );
+				return services.getUrlUtilsService().getPhotosAppraisedByUserLink( user.getId() );
 			}
 
 			@Override
@@ -700,20 +694,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		this.photoListFilteringService = photoListFilteringService;
 	}
 
-	public void setConfigurationService( final ConfigurationService configurationService ) {
-		this.configurationService = configurationService;
-	}
-
 	public void setPhotoQueryService( final PhotoQueryService photoQueryService ) {
 		this.photoQueryService = photoQueryService;
 	}
 
 	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
 		this.dateUtilsService = dateUtilsService;
-	}
-
-	public void setUrlUtilsService( final UrlUtilsService urlUtilsService ) {
-		this.urlUtilsService = urlUtilsService;
 	}
 
 	public void setServices( final Services services ) {

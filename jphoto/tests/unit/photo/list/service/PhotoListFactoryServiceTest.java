@@ -119,12 +119,12 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final ServicesImpl services = getServices();
 		services.setConfigurationService( configurationService );
 		services.setPhotoVotingService( getPhotoVotingService() );
+		services.setUrlUtilsService( urlUtilsService );
 
 		photoListFactoryService.setServices( services );
 		photoListFactoryService.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
-		photoListFactoryService.setConfigurationService( configurationService );
+//		photoListFactoryService.setConfigurationService( configurationService );
 		photoListFactoryService.setDateUtilsService( dateUtilsService );
-		photoListFactoryService.setUrlUtilsService( urlUtilsService );
 
 		return photoListFactoryService;
 	}
