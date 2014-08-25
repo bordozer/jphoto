@@ -88,7 +88,7 @@ public class UserTeamMemberCardController {
 
 		model.setUserTeamMember( userTeamMember );
 
-		final PhotoList photoList = photoListFactoryService.userTeamMemberPhotos( user, userTeamMember, pagingModel.getCurrentPage(), EnvironmentContext.getCurrentUser() ).getPhotoList( userTeamMember.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
+		final PhotoList photoList = photoListFactoryService.userTeamMemberPhotos( user, userTeamMember, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ).getPhotoList( userTeamMember.getId(), pagingModel.getCurrentPage(), EnvironmentContext.getLanguage(), dateUtilsService.getCurrentTime() );
 
 		model.setPhotoLists( newArrayList( photoList ) );
 

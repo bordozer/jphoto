@@ -11,8 +11,6 @@ import java.util.Date;
 
 public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactoryBest {
 
-	protected int photosCount; // TODO: delete
-
 	public PhotoListFactoryTopBest( final AbstractPhotoFilteringStrategy photoFilteringStrategy, final User accessor, final Services services ) {
 		super( photoFilteringStrategy, accessor, services );
 	}

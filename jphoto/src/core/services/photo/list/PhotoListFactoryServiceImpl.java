@@ -562,10 +562,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return new PhotoListQueryBuilder( dateUtilsService )
+				return builder()
 					.filterByAuthor( user )
 					.filterByUserTeamMember( userTeamMember )
-					.forPage( 1, photosCount )
+					.forPage( 1, getTopListPhotosCount() )
 					.sortByUploadTimeDesc()
 					.getQuery();
 			}
@@ -596,17 +596,17 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory userTeamMemberPhotos( final User user, final UserTeamMember userTeamMember, final int page, final User accessor ) {
+	public AbstractPhotoListFactory userTeamMemberPhotos( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return new PhotoListQueryBuilder( dateUtilsService )
+				return builder()
 					.filterByAuthor( user )
 					.filterByUserTeamMember( userTeamMember )
-					.forPage( page, getAccessorPhotosOnPage() )
+					.forPage( page, itemsOnPage )
 					.sortByUploadTimeDesc()
 					.getQuery();
 			}
@@ -639,7 +639,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, photosCount );
+				return photoQueryService.getUserPhotoAlbumPhotosQuery( user, userPhotoAlbum, 1, getTopListPhotosCount() );
 			}
 
 			@Override
