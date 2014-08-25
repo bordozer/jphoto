@@ -356,21 +356,6 @@ public class PhotoListController {
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBreadcrumbs( fDateFrom, fDateTo ) );
 
-		/*final List<PhotoListData> photoListDatas = newArrayList();
-
-		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriod( fDateFrom, fDateTo, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBreadcrumbs( fDateFrom, fDateTo ) );
-
-		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( fDateFrom, fDateTo );
-		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
-		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
-
-		photoListDatas.add( data );
-
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );*/
-
 		return VIEW;
 	}
 
@@ -378,18 +363,9 @@ public class PhotoListController {
 		final Date fDateFrom = dateUtilsService.parseDate( dateFrom );
 		final Date fDateTo = dateUtilsService.parseDate( dateTo );
 
-		final PhotoListCriterias criterias = photoListCriteriasService.getForPeriodBest( fDateFrom, fDateTo, getCurrentUser() );
-		final PhotoListData data = new PhotoListData( photoQueryService.getForCriteriasPagedIdsSQL( criterias, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage() ) );
-		data.setPhotoListCriterias( criterias );
-		data.setTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBestBreadcrumbs( fDateFrom, fDateTo ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryUploadedInDateRangeBest( fDateFrom, fDateTo, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
-		final TimeRange timeRangeToday = dateUtilsService.getTimeRangeFullDays( fDateFrom, fDateTo );
-		data.setPhotoRatingTimeFrom( timeRangeToday.getTimeFrom() );
-		data.setPhotoRatingTimeTo( timeRangeToday.getTimeTo() );
-
-		final List<PhotoListData> photoListDatas = newArrayList( data );
-
-		initPhotoListData( model, pagingModel, photoListDatas, filterModel );
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByPeriodBestBreadcrumbs( fDateFrom, fDateTo ) );
 
 		return VIEW;
 	}

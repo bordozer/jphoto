@@ -328,13 +328,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list title: Photos uploaded between $1 and $2. $3.</nerd>
-		<ru><![CDATA[Работы за период с $1 по $2. $3.]]></ru>
+		<nerd>Photo list title: Photos uploaded between $1 and $2</nerd>
+		<ru><![CDATA[Работы за период с $1 по $2]]></ru>
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photos uploaded between $1 and $2</nerd>
-		<ru><![CDATA[Показаны работы, загруженные в период с $1 по $2.]]></ru>
+		<nerd>Photo list bottom text: Photos uploaded between $1 and $2. $3.</nerd>
+		<ru><![CDATA[Показаны работы, загруженные в период с $1 по $2. $3.]]></ru>
 	</translation>
 
 	<translation>
@@ -345,6 +345,31 @@
 	<translation>
 		<nerd>Photo list bottom text: Sorted by upload time DESC</nerd>
 		<ru><![CDATA[Отсортированы по времени загрузки по убыванию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Sorted by sum marks DESC</nerd>
+		<ru><![CDATA[Отсортированы по к-ву набранных за период оценок по убыванию]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: The best photos for period $1 - $2</nerd>
+		<ru><![CDATA[Лучшие работы за $1 - $2]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: The best photos for period $1 - $2. $3.</nerd>
+		<ru><![CDATA[Показаны лучшие работы за период с $1 по $2. $3.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
 	</translation>
 
 	<translation>

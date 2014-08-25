@@ -88,7 +88,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryTopBest( testData.accessor );
 
-		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '40' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", dateData.from1, dateData.to1 ), factory.getSelectIdsQuery().build() );
+		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '40' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 4;", dateData.from1, dateData.to1 ), factory.getSelectIdsQuery().build() );
 		assertEquals( String.format( "Photo list title: Photo gallery top best for last %s days", DAYS ), factory.getTitle().build( Language.EN ) );
 		assertEquals( String.format( "http://127.0.0.1:8085/worker/photos/from/%s/to/%s/best/", dateData.from2, dateData.to2 ), factory.getLinkToFullList() );
 	}
@@ -108,15 +108,13 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForGenreBest( testData.genre, 2, 12, testData.accessor );
 
-		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) AND photos.genreId = '222' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 12 OFFSET 12;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
+		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) AND photos.genreId = '222' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 12 OFFSET 12;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> best for 2 days", factory.getTitle().build( Language.EN ) );
 		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 
 	@Test
 	public void galleryForUserTopBestTest() {
-		final DateData dateData = new DateData();
-
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserTopBest( testData.user, 5, 20, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
@@ -185,6 +183,28 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.userId = '112' ) AND photoVoting.votingCategoryId = '543' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void galleryUploadedInDateRangeTest() {
+		final DateData dateData = new DateData();
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryUploadedInDateRange( dateData.timeFrom, dateData.timeTo, 10, 24, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.uploadTime >= '2014-08-25 00:00:00' ) AND photos.uploadTime <= '2014-08-24 23:59:59' ) ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: Photos uploaded between 2014-08-25 and 2014-08-24", factory.getTitle().build( Language.EN ) );
+		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
+	}
+
+	@Test
+	public void galleryUploadedInDateRangeBestTest() {
+		final DateData dateData = new DateData();
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryUploadedInDateRangeBest( dateData.timeFrom, dateData.timeTo, 10, 24, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '2014-08-24 00:00:00' ) AND photoVoting.votingTime <= '2014-08-25 23:59:59' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '40' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: The best photos for period 2014-08-25 - 2014-08-24", factory.getTitle().build( Language.EN ) );
 		assertEquals( StringUtils.EMPTY, factory.getLinkToFullList() );
 	}
 

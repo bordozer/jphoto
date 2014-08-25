@@ -27,6 +27,8 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryUploadedInDateRange( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor );
 
+	AbstractPhotoListFactory galleryUploadedInDateRangeBest( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor );
+
 	AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForUserTopBest( final User user, final int page, final int itemsOnPage, final User accessor );

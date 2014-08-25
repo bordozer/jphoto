@@ -23,7 +23,9 @@ import java.util.Date;
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private static final int USER_CARD_BEST_MIN_MARKS = 1;
+
 	private static final String SORTING_BY_UPLOAD_TIME_DESC = "Photo list bottom text: Sorted by upload time DESC";
+	private static final String SORTING_BY_SUM_MARKS_DESC = "Photo list bottom text: Sorted by sum marks DESC";
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
@@ -146,7 +148,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
@@ -218,12 +219,42 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photos uploaded between $1 and $2. $3.", services ).dateFormatted( timeFrom ).dateFormatted( timeTo ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+				return new TranslatableMessage( "Photo list title: Photos uploaded between $1 and $2", services ).dateFormatted( timeFrom ).dateFormatted( timeTo );
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos uploaded between $1 and $2", services ).dateFormatted( timeFrom ).dateFormatted( timeTo );
+				return new TranslatableMessage( "Photo list bottom text: Photos uploaded between $1 and $2. $3.", services ).dateFormatted( timeFrom ).dateFormatted( timeTo ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory galleryUploadedInDateRangeBest( final Date timeFrom, final Date timeTo, final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.bestFilteringStrategy( accessor );
+
+		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return getBaseQuery().forPage( page, itemsOnPage ).getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: The best photos for period $1 - $2", services )
+					.dateFormatted( timeFrom )
+					.dateFormatted( timeTo )
+					;
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: The best photos for period $1 - $2. $3.", services )
+					.dateFormatted( timeFrom )
+					.dateFormatted( timeTo )
+					.translatableString( SORTING_BY_SUM_MARKS_DESC )
+					;
 			}
 		};
 	}
