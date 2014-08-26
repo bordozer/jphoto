@@ -15,8 +15,6 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.entry.GroupOperationService;
 import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryServiceImpl;
-import core.services.photo.list.PhotoListFilteringService;
-import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
 import core.services.system.ServicesImpl;
@@ -499,7 +497,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		services.setUserService( getUserService( testData ) );
 
 		photoListFactoryService.setServices( services );
-		photoListFactoryService.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
 //		photoListFactoryService.setConfigurationService( configurationService );
 		photoListFactoryService.setDateUtilsService( dateUtilsService );
 
@@ -556,29 +553,6 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		EasyMock.replay( configurationService );
 
 		return configurationService;
-	}
-
-	private PhotoListFilteringService getPhotoListFilteringService( final TestData testData ) {
-
-		final PhotoListFilteringService photoListFilteringService = EasyMock.createMock( PhotoListFilteringService.class );
-
-		final AbstractPhotoFilteringStrategy filteringStrategy = new AbstractPhotoFilteringStrategy() {
-			@Override
-			public boolean isPhotoHidden( final int photoId, final Date time ) {
-				return false;
-			}
-		};
-
-		EasyMock.expect( photoListFilteringService.galleryFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
-		EasyMock.expect( photoListFilteringService.topBestFilteringStrategy() ).andReturn( filteringStrategy ).anyTimes();
-		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.user, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
-		EasyMock.expect( photoListFilteringService.userCardFilteringStrategy( testData.accessor, testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
-		EasyMock.expect( photoListFilteringService.bestFilteringStrategy( testData.accessor ) ).andReturn( filteringStrategy ).anyTimes();
-
-		EasyMock.expectLastCall();
-		EasyMock.replay( photoListFilteringService );
-
-		return photoListFilteringService;
 	}
 
 	private void assertGroupOperationMenusEmpty( final AbstractPhotoListFactory factory ) {

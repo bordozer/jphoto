@@ -1,7 +1,7 @@
 package photo.list.filtering;
 
-import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
+import core.services.photo.list.filtering.UserCardFilteringStrategy;
 import org.junit.Test;
 
 public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilteringServiceTest_ {
@@ -9,8 +9,7 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 	@Test
 	public void photoShouldBeVisibleForUsualUserIfPhotoNotWithinAnonymousPeriodTest() {
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.user, testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( testData.user, testData.accessor, getServices() );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -21,8 +20,7 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 		testData.isPhotoWithingAnonymousPeriod = true;
 		testData.accessor = SUPER_ADMIN_1;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.accessor, testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( testData.user, testData.accessor, getServices() );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -33,8 +31,7 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 		testData.isPhotoWithingAnonymousPeriod = true;
 		testData.accessor = testData.photoAuthor;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.accessor, testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( testData.user, testData.accessor, getServices() );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -44,8 +41,7 @@ public class PhotoListFilteringServiceUserCardTest extends AbstractPhotoListFilt
 
 		testData.isPhotoWithingAnonymousPeriod = true;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.userCardFilteringStrategy( testData.accessor, testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( testData.user, testData.accessor, getServices() );
 
 		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}

@@ -1,7 +1,7 @@
 package photo.list.filtering;
 
-import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.photo.list.factory.AbstractPhotoFilteringStrategy;
+import core.services.photo.list.filtering.BestFilteringStrategy;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
@@ -11,8 +11,7 @@ public class PhotoListFilteringServiceBestTest extends AbstractPhotoListFilterin
 	@Test
 	public void photoShouldBeVisibleForUsualUserIfThePhotoIsNotRestrictedTest() {
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.bestFilteringStrategy( testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getServices( testData ) );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -23,8 +22,7 @@ public class PhotoListFilteringServiceBestTest extends AbstractPhotoListFilterin
 		testData.accessor = SUPER_ADMIN_1;
 		testData.isRestricted = true;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.bestFilteringStrategy( testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getServices( testData ) );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -34,8 +32,7 @@ public class PhotoListFilteringServiceBestTest extends AbstractPhotoListFilterin
 
 		testData.isRestricted = true;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.bestFilteringStrategy( testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getServices( testData ) );
 
 		assertEquals( "Assertion fails", true, filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -46,8 +43,7 @@ public class PhotoListFilteringServiceBestTest extends AbstractPhotoListFilterin
 		testData.accessor = testData.photoAuthor;
 		testData.isRestricted = true;
 
-		final PhotoListFilteringServiceImpl filteringService = getPhotoListFilteringService( testData );
-		final AbstractPhotoFilteringStrategy filteringStrategy = filteringService.bestFilteringStrategy( testData.accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( testData.accessor, getServices( testData ) );
 
 		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}

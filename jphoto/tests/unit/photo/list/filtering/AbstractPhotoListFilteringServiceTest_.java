@@ -2,9 +2,10 @@ package photo.list.filtering;
 
 import common.AbstractTestCase;
 import core.services.photo.PhotoService;
-import core.services.photo.list.PhotoListFilteringServiceImpl;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
+import core.services.system.Services;
+import core.services.system.ServicesImpl;
 import org.easymock.EasyMock;
 import org.junit.Before;
 
@@ -21,14 +22,14 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 		testData = new TestData( dateUtilsService );
 	}
 
-	protected PhotoListFilteringServiceImpl getPhotoListFilteringService( final TestData testData ) {
-		final PhotoListFilteringServiceImpl photoListFilteringService = new PhotoListFilteringServiceImpl();
+	protected Services getServices( final TestData testData ) {
+		final ServicesImpl services = new ServicesImpl();
 
-		photoListFilteringService.setSecurityService( getSecurityService( testData ) );
-		photoListFilteringService.setRestrictionService( getRestrictionService( testData ) );
-		photoListFilteringService.setPhotoService( getPhotoService( testData ) );
+		services.setSecurityService( getSecurityService( testData ) );
+		services.setRestrictionService( getRestrictionService( testData ) );
+		services.setPhotoService( getPhotoService( testData ) );
 
-		return photoListFilteringService;
+		return services;
 	}
 
 	private SecurityService getSecurityService( final TestData testData ) {

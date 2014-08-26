@@ -34,7 +34,6 @@
 	<bean id="userPhotoAlbumService" class="core.services.user.UserPhotoAlbumServiceImpl"/>
 	<bean id="privateMessageService" class="core.services.entry.PrivateMessageServiceImpl"/>
 	<bean id="groupOperationService" class="core.services.entry.GroupOperationServiceImpl"/>
-	<bean id="photoListFilteringService" class="core.services.photo.list.PhotoListFilteringServiceImpl"/>
 	<bean id="photoListFactoryService" class="core.services.photo.list.PhotoListFactoryServiceImpl"/>
 
 	<bean id="anonymousDaysService" class="core.services.entry.AnonymousDaysServiceImpl"/>

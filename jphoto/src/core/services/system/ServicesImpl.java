@@ -6,7 +6,6 @@ import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
 import core.services.photo.*;
-import core.services.photo.list.PhotoListFilteringService;
 import core.services.remotePhotoSite.RemotePhotoCategoryService;
 import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
@@ -153,9 +152,6 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private RestrictionService restrictionService;
-
-	@Autowired
-	private PhotoListFilteringService photoListFilteringService;
 
 	@Autowired
 	private UtilsService utilsService;
@@ -379,11 +375,6 @@ public class ServicesImpl implements Services {
 	}
 
 	@Override
-	public PhotoListFilteringService getPhotoListFilteringService() {
-		return photoListFilteringService;
-	}
-
-	@Override
 	public UtilsService getUtilsService() {
 		return utilsService;
 	}
@@ -567,10 +558,6 @@ public class ServicesImpl implements Services {
 
 	public void setRestrictionService( final RestrictionService restrictionService ) {
 		this.restrictionService = restrictionService;
-	}
-
-	public void setPhotoListFilteringService( final PhotoListFilteringService photoListFilteringService ) {
-		this.photoListFilteringService = photoListFilteringService;
 	}
 
 	public void setUtilsService( final UtilsService utilsService ) {
