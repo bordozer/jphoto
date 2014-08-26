@@ -303,8 +303,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photo gallery by user $1 and genre $2 best</nerd>
-		<ru><![CDATA[Показаны лучшие работы пользователя $1 из раздела $2]]></ru>
+		<nerd>Photo list bottom text: The best photos by user $1 and genre $2 which got at least $3 marks</nerd>
+		<ru><![CDATA[Показаны лучшие работы пользователя $1 из раздела $2, набравшие зотя бы  $3 балл]]></ru>
 	</translation>
 
 	<translation>
