@@ -368,8 +368,8 @@ z
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photos of users with membership type $1. $2.</nerd>
-		<ru><![CDATA[Показаны работы пользователей с типом участия '$1'. $2.]]></ru>
+		<nerd>Photo list bottom text: Photos of users with membership type $1</nerd>
+		<ru><![CDATA[Показаны работы пользователей с типом участия '$1']]></ru>
 	</translation>
 
 	<translation>

@@ -314,7 +314,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos of users with membership type $1. $2.", services ).translatableString( userMembershipType.getNamePlural() ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+				return new TranslatableMessage( "Photo list bottom text: Photos of users with membership type $1", services )
+					.translatableString( userMembershipType.getNamePlural() )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
+					;
 			}
 		};
 	}
