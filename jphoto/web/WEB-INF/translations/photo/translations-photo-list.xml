@@ -248,8 +248,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photo gallery absolutely best</nerd>
-		<ru><![CDATA[Абсолютный рейтинг работ]]></ru>
+		<nerd>Photo list bottom text: Photo gallery absolutely best which got at least $1 marks.</nerd>
+		<ru><![CDATA[Абсолютный рейтинг работ. Показаны работы, набравшие больше всего баллов (но не менее $1) за всю историю существования клуба.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Sorted by total marks.</nerd>
+		<ru><![CDATA[Отсортированы по набранным баллам по убыванию.]]></ru>
 	</translation>
 
 	<translation>

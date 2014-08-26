@@ -220,6 +220,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 12 OFFSET 12;", MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery absolutely best", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Photo gallery absolutely best which got at least 40 marks.<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );

@@ -115,7 +115,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery absolutely best", services );
+				return new TranslatableMessage( "Photo list bottom text: Photo gallery absolutely best which got at least $1 marks.", services )
+					.addIntegerParameter( minMarks )
+					.lineBreakHtml()
+					.translatableString( "Photo list bottom text: Sorted by total marks." )
+					;
 			}
 		};
 	}
