@@ -556,7 +556,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo list title: Photo gallery by user $1 and genre $2 top best", services );
+				return new TranslatableMessage( "Photo list bottom text: Top best photos by user $1 and genre $2 which got at least $3 marks", services )
+					.userCardLink( accessor )
+					.addPhotosByGenreLinkParameter( genre )
+					.addIntegerParameter( USER_CARD_BEST_MIN_MARKS )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_TOTAL_MARKS )
+					;
 			}
 		};
 	}
