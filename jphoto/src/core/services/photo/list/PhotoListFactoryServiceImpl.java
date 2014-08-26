@@ -614,12 +614,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services ).userCardLink( user );
+				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services )
+					.userCardLink( user )
+					;
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services );
+				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services )
+					.userCardLink( user )
+					;
 			}
 		};
 	}
