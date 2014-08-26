@@ -354,7 +354,7 @@ z
 
 	<translation>
 		<nerd>Photo list bottom text: Sorted by sum marks DESC</nerd>
-		<ru><![CDATA[Отсортированы по к-ву набранных за период оценок по убыванию.]]></ru>
+		<ru><![CDATA[Отсортированы по к-ву набранных за период баллов по убыванию.]]></ru>
 	</translation>
 
 	<translation>
@@ -363,8 +363,8 @@ z
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: The best photos for period $1 - $2. $3.</nerd>
-		<ru><![CDATA[Показаны лучшие работы за период с $1 по $2. $3.]]></ru>
+		<nerd>Photo list bottom text: The best photos which got at least $1 marks in period $2 - $3</nerd>
+		<ru><![CDATA[Показаны работы, набравшие больше всего баллов (но не менее $1) за период $2 - $3]]></ru>
 	</translation>
 
 	<translation>

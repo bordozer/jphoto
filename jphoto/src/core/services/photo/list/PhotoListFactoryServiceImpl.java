@@ -285,9 +285,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: The best photos for period $1 - $2. $3.", services )
+				return new TranslatableMessage( "Photo list bottom text: The best photos which got at least $1 marks in period $2 - $3", services )
+					.addIntegerParameter( minMarks )
 					.dateFormatted( timeFrom )
 					.dateFormatted( timeTo )
+					.lineBreakHtml()
 					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
 			}

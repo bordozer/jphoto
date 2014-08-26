@@ -352,7 +352,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.uploadTime >= '2014-08-10 00:00:00' ) AND photos.uploadTime <= '2014-08-14 23:59:59' ) ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photos uploaded between 2014-08-10 and 2014-08-14", factory.getTitle().build( Language.EN ) );
-		assertEquals( "Photo list bottom text: Photos uploaded between 2014-08-10 and 2014-08-14. <br />.Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Photos uploaded between 2014-08-10 and 2014-08-14<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
@@ -366,6 +366,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 24 OFFSET 216;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
 		assertEquals( String.format( "Photo list title: The best photos for period %s - %s", dateData.from2, dateData.to2 ), factory.getTitle().build( Language.EN ) );
+		assertEquals( String.format( "Photo list bottom text: The best photos which got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
