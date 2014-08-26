@@ -245,6 +245,28 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
+	public SqlIdsSelectQuery getPhotosOfUserFavoritesMembers( final User user, final int page, final int itemsOnPage ) {
+		final SqlIdsSelectQuery selectQuery = new PhotoListQueryBuilder( dateUtilsService ).forPage( page, itemsOnPage ).sortByUploadTimeDesc().getQuery();
+
+		final SqlTable tPhotos = selectQuery.getMainTable();
+		final SqlTable tFavor = new SqlTable( FavoritesDaoImpl.TABLE_FAVORITES );
+
+		final SqlColumnSelect tPhotosColUserId = new SqlColumnSelect( tPhotos, PhotoDaoImpl.TABLE_COLUMN_USER_ID );
+		final SqlColumnSelect tFavColEntryId = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_FAVORITE_ENTRY_ID );
+		final SqlJoinCondition joinCondition = new SqlJoinCondition( tPhotosColUserId, tFavColEntryId );
+		final SqlJoin join = SqlJoin.inner( tFavor, joinCondition );
+		selectQuery.joinTable( join );
+
+		final SqlColumnSelect tFavColEntryUserId = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_USER_ID );
+		final SqlColumnSelect tFavColEntryType = new SqlColumnSelect( tFavor, FavoritesDaoImpl.TABLE_COLUMN_ENTRY_TYPE );
+		final SqlLogicallyJoinable con1 = new SqlCondition( tFavColEntryUserId, SqlCriteriaOperator.EQUALS, user.getId(), dateUtilsService );
+		final SqlLogicallyJoinable con2 = new SqlCondition( tFavColEntryType, SqlCriteriaOperator.EQUALS, FavoriteEntryType.FAVORITE_MEMBERS.getId(), dateUtilsService );
+		final SqlLogicallyJoinable condList = new SqlLogicallyAnd( con1, con2 );
+		selectQuery.setWhere( condList );
+
+		return selectQuery;
+	}
+
 	private boolean hasVotingTableJoin() {
 		for ( final SqlJoin sqlJoin : query.getJoins() ) {
 			if ( sqlJoin.getJoinTable().getName().equals( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING ) ) {

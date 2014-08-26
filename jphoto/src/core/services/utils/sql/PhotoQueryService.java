@@ -2,13 +2,10 @@ package core.services.utils.sql;
 
 import core.enums.FavoriteEntryType;
 import core.general.base.PagingModel;
-import core.general.user.User;
 import core.general.user.UserMembershipType;
 import sql.builder.SqlIdsSelectQuery;
 
 public interface PhotoQueryService {
-
-	SqlIdsSelectQuery getPhotosOfUserFavoritesMembersSQL( final User user, final int page, final int itemsOnPage );
 
 	SqlIdsSelectQuery getUserIdsForPageSQL( final PagingModel pagingModel );
 

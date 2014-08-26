@@ -469,6 +469,23 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertGroupOperationMenusEmpty( factory );
 	}
 
+	@Test
+	public void photosOfFavoriteAuthorsOfUserTest() {
+
+		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
+		userPhotoAlbum.setId( 3455 );
+		userPhotoAlbum.setUser( testData.user );
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).photosOfFavoriteAuthorsOfUser( testData.user, 1, 25, testData.accessor );
+
+		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN favorites ON ( photos.userId = favorites.favoriteEntryId ) WHERE ( favorites.userId = '112' AND favorites.entryType = '1' ) ORDER BY photos.uploadTime DESC LIMIT 25;", factory.getSelectIdsQuery().build() );
+		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: photos of favorite authors", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: photos of favorite authors<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
+		assertEquals( emptyLink(), factory.getLinkToFullList() );
+
+		assertGroupOperationMenusDefault( factory );
+	}
+
 	private PhotoListFactoryServiceImpl getPhotoListFactoryService( final TestData testData ) {
 		final ConfigurationService configurationService = getConfigurationService( testData );
 
