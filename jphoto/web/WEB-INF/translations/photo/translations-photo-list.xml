@@ -343,8 +343,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: The best photos from category $1. $2.</nerd>
-		<ru><![CDATA[Показаны самые лучшие работы из раздела $1. $2.]]></ru>
+		<nerd>Photo list bottom text: The best photos from category $1 which got at least $2 marks in period $3 - $4</nerd>
+		<ru><![CDATA[Показаны работы из раздела $1, набравшие больше всего баллов (но не менее $2) за период $3 - $4]]></ru>
 	</translation>
 z
 	<translation>

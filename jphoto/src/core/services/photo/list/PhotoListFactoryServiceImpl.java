@@ -212,13 +212,20 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days", services ).addPhotosByGenreLinkParameter( genre ).addIntegerParameter( days );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 best for $2 days", services )
+					.addPhotosByGenreLinkParameter( genre )
+					.addIntegerParameter( days )
+					;
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: The best photos from category $1. $2.", services )
+				return new TranslatableMessage( "Photo list bottom text: The best photos from category $1 which got at least $2 marks in period $3 - $4", services )
 					.addGenreNameParameter( genre )
+					.addIntegerParameter( minMarks )
+					.dateFormatted( timeRange.getTimeFrom() )
+					.dateFormatted( timeRange.getTimeTo() )
+					.lineBreakHtml()
 					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
 			}
