@@ -154,7 +154,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQuery().filterByGenre( genre ).getQuery();
+				return getBaseQuery()
+					.filterByGenre( genre )
+					.getQuery();
 			}
 
 			@Override
@@ -293,7 +295,9 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return getBaseQuery().filterByMembershipType( userMembershipType ).getQuery();
+				return getBaseQuery()
+					.filterByMembershipType( userMembershipType )
+					.getQuery();
 			}
 
 			@Override
@@ -378,7 +382,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder()
+					.filterByAuthor( user )
+					.filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS )
+					.sortBySumMarksDesc()
+					.forPage( 1, getTopListPhotosCount() )
+					.getQuery();
 			}
 
 			@Override
@@ -462,7 +471,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByGenre( genre ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder()
+					.filterByAuthor( user )
+					.filterByGenre( genre )
+					.filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS )
+					.sortBySumMarksDesc()
+					.forPage( 1, getTopListPhotosCount() )
+					.getQuery();
 			}
 
 			@Override
@@ -724,7 +739,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS ).sortBySumMarksDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder().filterByAuthor( user )
+					.filterByMinimalMarks( USER_CARD_BEST_MIN_MARKS )
+					.sortBySumMarksDesc()
+					.forPage( 1, getTopListPhotosCount() )
+					.getQuery();
 			}
 
 			@Override
@@ -761,7 +780,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByAuthor( user ).sortByUploadTimeDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder()
+					.filterByAuthor( user )
+					.sortByUploadTimeDesc()
+					.forPage( 1, getTopListPhotosCount() )
+					.getQuery();
 			}
 
 			@Override
@@ -793,7 +816,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public SqlIdsSelectQuery getSelectIdsQuery() {
-				return builder().filterByVotedUser( user ).sortByVotingTimeDesc().forPage( 1, getTopListPhotosCount() ).getQuery();
+				return builder()
+					.filterByVotedUser( user )
+					.sortByVotingTimeDesc()
+					.forPage( 1, getTopListPhotosCount() )
+					.getQuery();
 			}
 
 			@Override

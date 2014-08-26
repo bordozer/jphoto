@@ -22,7 +22,7 @@ public abstract class PhotoListFactoryTopBest extends AbstractPhotoListFactoryBe
 
 	@Override
 	public PhotoListQueryBuilder getBaseQuery() {
-		return super.getBaseQuery().forPage( 1, services.getConfigurationService().getInt( ConfigurationKey.PHOTO_LIST_PHOTO_TOP_QTY ) );
+		return super.getBaseQuery().forPage( 1, getTopListPhotosCount() );
 	}
 
 	/*public PhotoListQueryBuilder getBaseQueryForUserCard() {

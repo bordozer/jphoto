@@ -344,7 +344,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryUploadedInDateRangeBest( dateData.timeFrom, dateData.timeTo, 10, 24, testData.accessor );
 
 		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 24 OFFSET 216;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
-		assertEquals( "Photo list title: The best photos for period 2014-08-25 - 2014-08-24", factory.getTitle().build( Language.EN ) );
+		assertEquals( String.format( "Photo list title: The best photos for period %s - %s", dateData.from2, dateData.to2 ), factory.getTitle().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
@@ -531,14 +531,14 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	private class DateData {
 
-		final Date timeFrom = dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentTime() );
-		final Date timeTo = dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -DAYS + 1 ) );
+		final Date timeFrom = dateUtilsService.getFirstSecondOfDay( dateUtilsService.getDatesOffsetFromCurrentDate( -DAYS + 1 ) );
+		final Date timeTo = dateUtilsService.getLastSecondOfDay( dateUtilsService.getCurrentTime() );
 
-		final String to1 = dateUtilsService.formatDateTime( timeFrom );
-		final String from1 = dateUtilsService.formatDateTime( timeTo );
+		final String to1 = dateUtilsService.formatDateTime( timeTo );
+		final String from1 = dateUtilsService.formatDateTime( timeFrom );
 
-		final String to2 = dateUtilsService.formatDate( timeFrom );
-		final String from2 = dateUtilsService.formatDate( timeTo );
+		final String to2 = dateUtilsService.formatDate( timeTo );
+		final String from2 = dateUtilsService.formatDate( timeFrom );
 	}
 
 	private static String emptyLink() {
