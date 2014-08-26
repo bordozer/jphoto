@@ -175,7 +175,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1 top best for last $2 days", services )
-					.addPhotosByGenreLinkParameter( genre )
+					.addGenreNameParameter( genre )
 					.addIntegerParameter( days );
 			}
 
@@ -187,7 +187,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Top best photos by genre $1 that got at least $2 marks in period $3 - $4", services )
-					.addPhotosByGenreLinkParameter( genre )
+					.addGenreNameParameter( genre )
 					.addIntegerParameter( minMarks )
 					.dateFormatted( timeRange.getTimeFrom() )
 					.dateFormatted( timeRange.getTimeTo() )
