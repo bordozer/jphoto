@@ -329,7 +329,7 @@
 
 	<translation>
 		<nerd>Photo list bottom text: User $1: bookmarked photos $2</nerd>
-		<ru><![CDATA[$1: $2]]></ru>
+		<ru><![CDATA[Показаны работы, которые $1 добавил(а) в $2]]></ru>
 	</translation>
 
 	<translation>
@@ -393,8 +393,8 @@ z
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Photo list bottom text: Sorted by adding to bookmark time DESC</nerd>
+		<ru><![CDATA[Отсортированы по времени добавления по убыванию]]></ru>
 	</translation>
 
 	<translation>

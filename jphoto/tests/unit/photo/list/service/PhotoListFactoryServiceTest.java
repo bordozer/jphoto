@@ -140,6 +140,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN favorites ON ( photos.id = favorites.favoriteEntryId ) WHERE ( favorites.userId = '112' AND favorites.entryType = '2' ) ORDER BY favorites.created DESC LIMIT 20;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: bookmarked photos FavoriteEntryType: Favorite photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: bookmarked photos FavoriteEntryType: Favorite photos<br />Photo list bottom text: Sorted by adding to bookmark time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );

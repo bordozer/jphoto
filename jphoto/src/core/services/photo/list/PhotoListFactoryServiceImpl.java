@@ -966,6 +966,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom text: User $1: bookmarked photos $2", services )
 					.userCardLink( user )
 					.translatableString( favoriteEntryType.getName() )
+					.lineBreakHtml()
+					.translatableString( "Photo list bottom text: Sorted by adding to bookmark time DESC" )
 					;
 			}
 		};
