@@ -479,7 +479,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 best", services );
+				return new TranslatableMessage( "Photo list bottom text: The best photos of user $1 best which got at least $2 marks", services )
+					.addUserCardLinkParameter( user.getId() )
+					.addIntegerParameter( USER_CARD_BEST_MIN_MARKS )
+					.lineBreakHtml()
+					.translatableString( PHOTO_LIST_BOTTOM_TEXT_SORTED_BY_TOTAL_MARKS )
+					;
 			}
 
 			@Override
