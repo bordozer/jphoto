@@ -9,7 +9,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 	@Test
 	public void photoShouldBeVisibleForUsualUserIfThePhotoIsNotRestrictedTest() {
 
-		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getServices() );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getTestServices( testData ) );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -20,7 +20,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		testData.accessor = SUPER_ADMIN_1;
 		testData.isRestricted = true;
 
-		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getServices() );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getTestServices( testData ) );
 
 		assertPhotoIsShown( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -30,7 +30,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 
 		testData.isRestricted = true;
 
-		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getServices() );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getTestServices( testData ) );
 
 		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}
@@ -41,7 +41,7 @@ public class PhotoListFilteringServiceGalleryTest extends AbstractPhotoListFilte
 		testData.isRestricted = true;
 		testData.accessor = testData.photoAuthor;
 
-		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getServices() );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new GalleryFilteringStrategy( testData.accessor, getTestServices( testData ) );
 
 		assertPhotoIsHidden( filteringStrategy.isPhotoHidden( testData.photo.getId(), testData.currentTime ) );
 	}

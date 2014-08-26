@@ -22,7 +22,7 @@ public class AbstractPhotoListFilteringServiceTest_ extends AbstractTestCase {
 		testData = new TestData( dateUtilsService );
 	}
 
-	protected Services getServices( final TestData testData ) {
+	protected Services getTestServices( final TestData testData ) {
 		final ServicesImpl services = new ServicesImpl();
 
 		services.setSecurityService( getSecurityService( testData ) );
