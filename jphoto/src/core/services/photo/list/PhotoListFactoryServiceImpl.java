@@ -975,7 +975,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory photosOfFavoriteAuthorsOfUser( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.galleryFilteringStrategy( accessor );
+		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.userCardFilteringStrategy( user, accessor );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
