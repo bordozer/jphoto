@@ -48,7 +48,7 @@ public class UserRankInGenreVotingValidationResultTest extends AbstractTestCase 
 
 		assertFalse( VALIDATION_IS_PASSED_BUT_SHOULD_NOT_BE, validationResult.isValidationPassed() );
 		assertTrue( VOTING_SHOULD_NOT_BE_ACCESSIBLE_BUT_IT_IS, validationResult.isUiVotingIsInaccessible() );
-		assertEquals( validationResult.getValidationMessage(), translated( "ValidationResult: You are not logged in." ) );
+		assertEquals( validationResult.getValidationMessage(), translated( "ValidationResult: You are not logged in" ) );
 	}
 
 	@Test

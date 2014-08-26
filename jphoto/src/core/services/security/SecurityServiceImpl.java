@@ -423,7 +423,7 @@ public class SecurityServiceImpl implements SecurityService {
 		if ( ! UserUtils.isLoggedUser( voter ) ) {
 			final UserRankInGenreVotingValidationResult result = new UserRankInGenreVotingValidationResult();
 			result.setValidationPassed( false );
-			result.setValidationMessage( translatorService.translate( "ValidationResult: You are not logged in.", language ) );
+			result.setValidationMessage( translatorService.translate( "ValidationResult: You are not logged in", language ) );
 			result.setUiVotingIsInaccessible( true );
 
 			return result;

@@ -3,7 +3,7 @@
 <translations>
 
 	<translation>
-		<nerd>ValidationResult: You are not logged in.</nerd>
+		<nerd>ValidationResult: You are not logged in</nerd>
 		<ru><![CDATA[Вы не авторизированы]]></ru>
 	</translation>
 
