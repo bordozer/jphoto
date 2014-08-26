@@ -57,7 +57,7 @@ public class ActivityVotingForUserRankInGenre extends AbstractActivityStreamEntr
 	protected TranslatableMessage getActivityTranslatableText() {
 
 		return new TranslatableMessage( "activity stream entry: voted for rank of $1 in category $2 ( $3 )", services )
-			.addUserCardLinkParameter( userVotedForId )
+			.userCardLink( userVotedForId )
 			.addPhotosByUserByGenreLinkParameter( userVotedForId, genreId )
 			.string( getPoints() )
 			;

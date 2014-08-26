@@ -78,7 +78,7 @@ public class ActivityFavoriteAction extends AbstractActivityStreamEntry {
 				case FRIENDS:
 				case BLACKLIST:
 				case NEW_PHOTO_NOTIFICATION:
-				return new TranslatableMessage( services ).addUserCardLinkParameter( favoriteEntryId );
+				return new TranslatableMessage( services ).userCardLink( favoriteEntryId );
 			case FAVORITE_PHOTOS:
 				case BOOKMARKED_PHOTOS:
 				case NEW_COMMENTS_NOTIFICATION:

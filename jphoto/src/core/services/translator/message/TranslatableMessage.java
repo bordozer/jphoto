@@ -103,7 +103,7 @@ public class TranslatableMessage {
 		return this;
 	}
 
-	public TranslatableMessage addUserCardLinkParameter( final int userId ) {
+	public TranslatableMessage userCardLink( final int userId ) {
 		messageParameters.add( new UserCardLinkParameter( getUser( userId ), services ) );
 		return this;
 	}
