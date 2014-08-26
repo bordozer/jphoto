@@ -338,10 +338,10 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photos from category $1.</nerd>
-		<ru><![CDATA[Показаны работы из раздела $1.]]></ru>
+		<nerd>Photo list bottom text: The best photos from category $1. $2.</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы из раздела $1. $2.]]></ru>
 	</translation>
-
+z
 	<translation>
 		<nerd>Photo list bottom text: Sorted by upload time DESC</nerd>
 		<ru><![CDATA[Отсортированы по времени загрузки по убыванию]]></ru>

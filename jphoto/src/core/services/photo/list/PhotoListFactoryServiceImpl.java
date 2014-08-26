@@ -196,7 +196,10 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos from category $1. $2.", services ).addGenreNameParameter( genre );
+				return new TranslatableMessage( "Photo list bottom text: The best photos from category $1. $2.", services )
+					.addGenreNameParameter( genre )
+					.translatableString( SORTING_BY_SUM_MARKS_DESC )
+					;
 			}
 
 			@Override

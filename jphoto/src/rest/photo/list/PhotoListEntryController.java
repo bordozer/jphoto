@@ -2,6 +2,7 @@ package rest.photo.list;
 
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
@@ -204,12 +205,13 @@ public class PhotoListEntryController {
 		photoEntry.setTodayMarks( getTodayMarks( photo ) );
 		photoEntry.setTodayMarksTitle( translatorService.translate( "Photo preview: The photo's today's marks", language ) );
 
-		photoEntry.setPeriodMarks( getPeriodMarks( photo ) );
-		final int period = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
+		final TimeRange dateRange = photoVotingService.getTopBestDateRange();
+		photoEntry.setPeriodMarks( photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateRange.getTimeFrom(), dateRange.getTimeTo() ) );
+
 		photoEntry.setPeriodMarksTitle( translatorService.translate( "Photo preview: The photo's marks for period from $1 to $2"
 			, language
-			, dateUtilsService.formatDate( dateUtilsService.getDatesOffsetFromCurrentDate( -period ) )
-			, dateUtilsService.formatDate( dateUtilsService.getCurrentTime() )
+			, dateUtilsService.formatDate( dateRange.getTimeFrom() )
+			, dateUtilsService.formatDate( dateRange.getTimeTo() )
 		));
 
 		final String totalMarksTitle = translatorService.translate( "Photo preview: The photo's total marks", language );
@@ -259,12 +261,6 @@ public class PhotoListEntryController {
 
 	private int getTodayMarks( final Photo photo ) {
 		return photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateUtilsService.getFirstSecondOfToday(), dateUtilsService.getLastSecondOfToday() );
-	}
-
-	private int getPeriodMarks( final Photo photo ) {
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
-		return photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateFrom, dateUtilsService.getLastSecondOfToday() );
 	}
 
 	private int getTotalMarks( final Photo photo ) {

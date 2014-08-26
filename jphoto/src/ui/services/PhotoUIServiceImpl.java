@@ -165,10 +165,9 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		final int photoId = photo.getId();
 		final PhotoInfo photoInfo = new PhotoInfo( photo );
 
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		final Date dateFrom = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days );
 		final Date lastSecondOfToday = dateUtilsService.getLastSecondOfToday();
-		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateFrom, lastSecondOfToday ) ); // TODO: reset this at midnight
+		final TimeRange dateRange = photoVotingService.getTopBestDateRange();
+		photoInfo.setTopBestMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateRange.getTimeFrom(), dateRange.getTimeTo() ) ); // TODO: reset this at midnight
 
 		photoInfo.setTodayMarks( photoVotingService.getPhotoMarksForPeriod( photoId, dateUtilsService.getFirstSecondOfToday(), lastSecondOfToday ) ); // TODO: reset this at midnight
 

@@ -1,11 +1,13 @@
 package ui.services.breadcrumbs;
 
 import core.general.configuration.ConfigurationKey;
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationType;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
+import core.services.photo.PhotoVotingService;
 import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.Language;
@@ -40,6 +42,9 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 
 	@Autowired
 	private ConfigurationService configurationService;
+
+	@Autowired
+	private PhotoVotingService photoVotingService;
 
 	@Autowired
 	private Services services;
@@ -260,11 +265,8 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	private String getForPeriodBreadcrumb( final String nerd ) {
-		final int days = configurationService.getInt( ConfigurationKey.PHOTO_RATING_CALCULATE_MARKS_FOR_THE_BEST_PHOTOS_FOR_LAST_DAYS );
-		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
-		final Date dateTo = dateUtilsService.getCurrentDate();
-
-		return translatorService.translate( nerd, getLanguage(), dateUtilsService.formatDate( dateFrom ), dateUtilsService.formatDate( dateTo ) );
+		final TimeRange dateRange = photoVotingService.getTopBestDateRange();
+		return translatorService.translate( nerd, getLanguage(), dateUtilsService.formatDate( dateRange.getTimeFrom() ), dateUtilsService.formatDate( dateRange.getTimeTo() ) );
 	}
 
 	private BreadcrumbsBuilder userCardLink( final User user ) {
