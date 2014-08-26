@@ -145,12 +145,16 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1. $2.", services ).addPhotosByGenreLinkParameter( genre ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
+				return new TranslatableMessage( "Photo list title: Photo gallery by genre $1", services )
+					.addGenreNameParameter( genre )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
+					;
 			}
 
 			@Override
 			public TranslatableMessage getPhotoListBottomText() {
-				return new TranslatableMessage( "$1", services ).string( genre.getDescription() );
+				return new TranslatableMessage( "$1", services ).string( genre.getDescription() ); // TODO: translations!
 			}
 		};
 	}
