@@ -26,6 +26,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	private static final String SORTING_BY_UPLOAD_TIME_DESC = "Photo list bottom text: Sorted by upload time DESC";
 	private static final String SORTING_BY_SUM_MARKS_DESC = "Photo list bottom text: Sorted by sum marks DESC";
+	private static final String PHOTO_LIST_BOTTOM_TEXT_SORTED_BY_TOTAL_MARKS = "Photo list bottom text: Sorted by total marks.";
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
@@ -121,7 +122,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom text: Photo gallery absolutely best which got at least $1 marks.", services )
 					.addIntegerParameter( minMarks )
 					.lineBreakHtml()
-					.translatableString( "Photo list bottom text: Sorted by total marks." )
+					.translatableString( PHOTO_LIST_BOTTOM_TEXT_SORTED_BY_TOTAL_MARKS )
 					;
 			}
 		};
@@ -408,7 +409,11 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: All photos of $1", services ).userCardLink( user );
+				return new TranslatableMessage( "Photo list bottom text: All photos of $1", services )
+					.userCardLink( user )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
+					;
 			}
 
 			@Override
@@ -446,7 +451,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by user $1 top best", services );
+				return new TranslatableMessage( "Photo list bottom text: Top best photos by user $1 which got at least $2 marks", services )
+					.addUserCardLinkParameter( user.getId() )
+					.addIntegerParameter( USER_CARD_BEST_MIN_MARKS )
+					.lineBreakHtml()
+					.translatableString( PHOTO_LIST_BOTTOM_TEXT_SORTED_BY_TOTAL_MARKS )
+					;
 			}
 		};
 	}

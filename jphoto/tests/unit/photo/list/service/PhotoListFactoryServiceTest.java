@@ -21,6 +21,7 @@ import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
 import core.services.system.ServicesImpl;
 import core.services.translator.Language;
+import core.services.user.UserService;
 import mocks.PhotoVotingCategoryMock;
 import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
@@ -93,6 +94,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: All photos of <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );
@@ -246,6 +248,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> top best", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Top best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/best/", factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );
@@ -462,6 +465,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		services.setPhotoVotingService( getPhotoVotingService() );
 		services.setUrlUtilsService( urlUtilsService );
 		services.setGroupOperationService( getGroupOperationService( testData ) );
+		services.setUserService( getUserService( testData ) );
 
 		photoListFactoryService.setServices( services );
 		photoListFactoryService.setPhotoListFilteringService( getPhotoListFilteringService( testData ) );
@@ -469,6 +473,17 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		photoListFactoryService.setDateUtilsService( dateUtilsService );
 
 		return photoListFactoryService;
+	}
+
+	private UserService getUserService( final TestData testData ) {
+		final UserService userService = EasyMock.createMock( UserService.class );
+
+		EasyMock.expect( userService.load( testData.user.getId() ) ).andReturn( testData.user ).anyTimes();
+
+		EasyMock.expectLastCall();
+		EasyMock.replay( userService );
+
+		return userService;
 	}
 
 	private GroupOperationService getGroupOperationService( final TestData testData ) {
