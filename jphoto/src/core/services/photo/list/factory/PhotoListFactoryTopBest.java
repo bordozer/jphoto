@@ -1,6 +1,5 @@
 package core.services.photo.list.factory;
 
-import core.general.configuration.ConfigurationKey;
 import core.general.user.User;
 import core.services.system.Services;
 import core.services.translator.Language;

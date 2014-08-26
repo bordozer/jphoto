@@ -243,8 +243,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Top best photos for last $1 days ( $2 - $3 )</nerd>
-		<ru><![CDATA[Показаны самые лучшие работы за последние $1 дня ( $2 - $3 )]]></ru>
+		<nerd>Photo list bottom text: Top best photos that got $1 marks in period $2 - $3</nerd>
+		<ru><![CDATA[Показаны самые лучшие работы, набравшие не менее $1 баллов за период $2 - $3]]></ru>
 	</translation>
 
 	<translation>
