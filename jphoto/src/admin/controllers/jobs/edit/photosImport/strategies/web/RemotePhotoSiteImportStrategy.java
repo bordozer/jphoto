@@ -26,6 +26,7 @@ import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.DocumentException;
+import sun.print.resources.serviceui_es;
 import utils.NumberUtils;
 import utils.StringUtilities;
 
@@ -587,10 +588,12 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		user.setName( userName );
 		user.setMembershipType( parameters.getMembershipType() );
 		user.setGender( parameters.getUserGender() );
-		user.setSelfDescription( String.format( "A user of %s: %s ( %s )"
+		user.setSelfDescription( String.format( "A user of %s: %s ( %s ). Created at %s"
 			, remoteContentHelper.getRemotePhotoSiteHost()
 			, remoteUser.getId()
-			, remoteContentHelper.getUserCardUrl( remoteUser.getId(), 1 ) )
+			, remoteContentHelper.getUserCardUrl( remoteUser.getId(), 1 )
+			, services.getDateUtilsService().formatDateTimeShort( services.getDateUtilsService().getCurrentTime() )
+			)
 		);
 
 		if ( ! services.getUserService().save( user ) ) {
