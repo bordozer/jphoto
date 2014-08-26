@@ -10,11 +10,8 @@ import java.util.Date;
 
 public class UserCardFilteringStrategy extends AbstractPhotoFilteringStrategy {
 
-	private final User user;
-
-	public UserCardFilteringStrategy( final User user, final User accessor, final Services services ) {
+	public UserCardFilteringStrategy( final User accessor, final Services services ) {
 		super( accessor, services );
-		this.user = user;
 	}
 
 	@Override
