@@ -57,7 +57,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: All photos", services );
+				return new TranslatableMessage( "Photo list bottom text: All photos", services ).string( ". " ).translatableString( SORTING_BY_UPLOAD_TIME_DESC );
 			}
 		};
 	}
