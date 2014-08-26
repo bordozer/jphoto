@@ -127,7 +127,8 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosLast( testData.user, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
-		assertEquals( "Photo list title: User card <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list title: User card User card owner: the latest photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom tex: User card User card owner: the latest photos", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/", factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );
@@ -325,7 +326,8 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosLastAppraised( testData.user, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photoVoting.userId = '112' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
-		assertEquals( "Photo list title: User card <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: last appraised photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list title: User card User card owner: last appraised photos", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom tex: User card User card owner: last appraised photos", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/photos/members/112/category/", factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );

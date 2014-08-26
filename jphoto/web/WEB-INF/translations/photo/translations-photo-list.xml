@@ -259,7 +259,7 @@
 
 	<translation>
 		<nerd>Photo list bottom tex: User card $1: the latest photos</nerd>
-		<ru><![CDATA[Показаны последние работы пользователя $1]]></ru>
+		<ru><![CDATA[Последние работы пользователя $1]]></ru>
 	</translation>
 
 	<translation>
@@ -269,7 +269,7 @@
 
 	<translation>
 		<nerd>Photo list bottom tex: User card $1: last appraised photos</nerd>
-		<ru><![CDATA[Показаны работы, которые $1 оценил(а) последними]]></ru>
+		<ru><![CDATA[Последние оцененные пользователем $1 работы]]></ru>
 	</translation>
 
 	<translation>
