@@ -764,7 +764,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: User $1: the latest photos from album $2", services )
+				return new TranslatableMessage( "Photo list title: User $1: album $2", services )
 					.userCardLink( user )
 					.userAlbumLink( userPhotoAlbum )
 					;
@@ -803,7 +803,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: User $1: all photos from album $2", services )
+				return new TranslatableMessage( "Photo list title: User $1: album $2", services )
 					.userCardLink( user )
 					.userAlbumLink( userPhotoAlbum )
 					;
@@ -814,6 +814,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom text: User $1: all photos from album $2", services )
 					.userCardLink( user )
 					.userAlbumLink( userPhotoAlbum )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
 					;
 			}
 

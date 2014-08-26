@@ -213,18 +213,13 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list title: User $1: the latest photos from album $2</nerd>
+		<nerd>Photo list title: User $1: album $2</nerd>
 		<ru><![CDATA[$1: альбом $2]]></ru>
 	</translation>
 
 	<translation>
 		<nerd>Photo list bottom text: User $1: the latest photos from album $2 photos</nerd>
 		<ru><![CDATA[$1: последние работы из альбома $2]]></ru>
-	</translation>
-
-	<translation>
-		<nerd>Photo list title: User $1: all photos from album $2</nerd>
-		<ru><![CDATA[$1: работы из альбома $2]]></ru>
 	</translation>
 
 	<translation>
