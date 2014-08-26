@@ -18,8 +18,8 @@ import core.services.photo.list.PhotoListFactoryServiceImpl;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.photo.list.filtering.BestFilteringStrategy;
 import core.services.photo.list.filtering.GalleryFilteringStrategy;
+import core.services.photo.list.filtering.HideAnonymousPhotosFilteringStrategy;
 import core.services.photo.list.filtering.TopBestFilteringStrategy;
-import core.services.photo.list.filtering.UserCardFilteringStrategy;
 import core.services.system.ConfigurationService;
 import core.services.system.ServicesImpl;
 import core.services.translator.Language;
@@ -96,7 +96,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUser( testData.user, 3, 36, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: All photos of <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
@@ -114,7 +114,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserAndGenreTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenre( testData.user, testData.genre, 3, 36, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) ORDER BY photos.uploadTime DESC LIMIT 36 OFFSET 72;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
@@ -132,7 +132,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void userCardPhotosLastTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosLast( testData.user, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( photos.userId = '112' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User card User card owner: the latest photos", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom tex: User card User card owner: the latest photos", factory.getCriteriaDescription().build( Language.EN ) );
@@ -164,7 +164,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userTeamMemberPhotos( testData.user, teamMember, 2, 28, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoTeam ON ( photos.id = photoTeam.photoId ) WHERE ( ( photos.userId = '112' ) AND photoTeam.userTeamMemberId = '987' ) ORDER BY photos.uploadTime DESC LIMIT 28 OFFSET 28;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all photos of <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> ( UserTeamMemberType: Model )", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
@@ -194,7 +194,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userTeamMemberPhotosLast( testData.user, teamMember, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoTeam ON ( photos.id = photoTeam.photoId ) WHERE ( ( photos.userId = '112' ) AND photoTeam.userTeamMemberId = '987' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: last photos with team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> ( UserTeamMemberType: Model )", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )", factory.getCriteriaDescription().build( Language.EN ) );
@@ -265,7 +265,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserTopBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserTopBest( testData.user, 5, 20, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> top best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Top best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
@@ -278,7 +278,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void userCardPhotosBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userCardPhotosBest( testData.user, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User card User card owner: the best photos", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom tex: User card User card owner: the best photos", factory.getCriteriaDescription().build( Language.EN ) );
@@ -296,7 +296,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserBest( testData.user, 1, 36, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photos.userId = '112' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 36;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: The best photos of user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> best which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
@@ -314,7 +314,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserAndGenreTopBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenreTopBest( testData.user, testData.genre, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> top best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: Top best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
@@ -327,7 +327,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	public void galleryForUserAndGenreBestTest() {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryForUserAndGenreBest( testData.user, testData.genre, 5, 20, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photos.userId = '112' ) AND photos.genreId = '222' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '1' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC LIMIT 20 OFFSET 80;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photo gallery by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> best", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: The best photos by user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/111/card/\" title=\"EntityLinkUtilsService: Accessor: user card link title\">Accessor</a> and genre <a class='photo-category-link' href=\"http://127.0.0.1:8085/worker/photos/genres/222/\" title=\"Breadcrumbs: All photos in category 'Translated entry'\">Translated entry</a> which got at least 1 marks<br />Photo list bottom text: Sorted by total marks.", factory.getCriteriaDescription().build( Language.EN ) );
@@ -460,7 +460,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userAlbumPhotos( testData.user, userPhotoAlbum, 5, 16, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoAlbums ON ( photos.id = photoAlbums.photoId ) WHERE ( ( photos.userId = '112' ) AND photoAlbums.photoAlbumId = '3455' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all photos from album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a><br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
@@ -487,7 +487,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userAlbumPhotosLast( testData.user, userPhotoAlbum, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoAlbums ON ( photos.id = photoAlbums.photoId ) WHERE ( ( photos.userId = '112' ) AND photoAlbums.photoAlbumId = '3455' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a>", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest photos from album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: null\">null</a> photos", factory.getCriteriaDescription().build( Language.EN ) );
@@ -505,7 +505,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).photosOfFavoriteAuthorsOfUser( testData.user, 1, 25, testData.accessor );
 
-		assertTrue( factory.getPhotoFilteringStrategy() instanceof UserCardFilteringStrategy );
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN favorites ON ( photos.userId = favorites.favoriteEntryId ) WHERE ( favorites.userId = '112' AND favorites.entryType = '1' ) ORDER BY photos.uploadTime DESC LIMIT 25;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: photos of favorite authors", factory.getTitle().build( Language.EN ) );
 		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: photos of favorite authors<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );

@@ -8,9 +8,9 @@ import core.services.system.Services;
 
 import java.util.Date;
 
-public class UserCardFilteringStrategy extends AbstractPhotoFilteringStrategy {
+public class HideAnonymousPhotosFilteringStrategy extends AbstractPhotoFilteringStrategy {
 
-	public UserCardFilteringStrategy( final User accessor, final Services services ) {
+	public HideAnonymousPhotosFilteringStrategy( final User accessor, final Services services ) {
 		super( accessor, services );
 	}
 

@@ -12,8 +12,8 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.*;
 import core.services.photo.list.filtering.BestFilteringStrategy;
 import core.services.photo.list.filtering.GalleryFilteringStrategy;
+import core.services.photo.list.filtering.HideAnonymousPhotosFilteringStrategy;
 import core.services.photo.list.filtering.TopBestFilteringStrategy;
-import core.services.photo.list.filtering.UserCardFilteringStrategy;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
 import core.services.utils.DateUtilsService;
@@ -387,7 +387,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUser( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
@@ -419,7 +419,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserTopBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -457,7 +457,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserBest( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
@@ -490,7 +490,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserAndGenre( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
@@ -523,7 +523,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserAndGenreTopBest( final User user, final Genre genre, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -563,7 +563,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory galleryForUserAndGenreBest( final User user, final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
 
@@ -651,7 +651,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userTeamMemberPhotosLast( final User user, final UserTeamMember userTeamMember, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -692,7 +692,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userTeamMemberPhotos( final User user, final UserTeamMember userTeamMember, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
@@ -735,7 +735,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userAlbumPhotosLast( final User user, final UserPhotoAlbum userPhotoAlbum, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -774,7 +774,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userAlbumPhotos( final User user, final UserPhotoAlbum userPhotoAlbum, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
@@ -815,7 +815,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userCardPhotosBest( final User user, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -856,7 +856,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory userCardPhotosLast( final User user, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
 
@@ -962,7 +962,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Override
 	public AbstractPhotoListFactory photosOfFavoriteAuthorsOfUser( final User user, final int page, final int itemsOnPage, final User accessor ) {
-		final AbstractPhotoFilteringStrategy filteringStrategy = new UserCardFilteringStrategy( accessor, services );
+		final AbstractPhotoFilteringStrategy filteringStrategy = new HideAnonymousPhotosFilteringStrategy( accessor, services );
 
 		return new PhotoListFactoryGallery( filteringStrategy, accessor, services ) {
 
