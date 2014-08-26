@@ -3,6 +3,7 @@ package rest;
 import common.AbstractTestCase;
 import core.enums.FavoriteEntryType;
 import core.general.configuration.ConfigurationKey;
+import core.general.data.TimeRange;
 import core.general.user.User;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
@@ -15,7 +16,6 @@ import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.user.UserService;
-import core.services.utils.DateUtilsService;
 import rest.photo.list.PhotoBookmarkIcon;
 import rest.photo.list.PhotoEntryDTO;
 import rest.photo.list.PhotoListEntryController;
@@ -40,7 +40,6 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 	private static final String ANONYMOUS_USER_NAME = "ANONYMKA";
 
 	private static final Language LANGUAGE = MENU_LANGUAGE;
-	public static final String CURRENT_TIME_ = "2014-08-16 12:50:23";
 
 	private UserMock accessor;
 	private UserMock photoAuthor;
@@ -591,6 +590,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 
 		EasyMock.expect( photoVotingService.getPhotoMarksForPeriod( EasyMock.anyInt(), EasyMock.anyObject( Date.class ), EasyMock.anyObject( Date.class ) ) ).andReturn( 21 ).anyTimes();
 		EasyMock.expect( photoVotingService.getSummaryPhotoMark( testData.photo ) ).andReturn( 43 ).anyTimes();
+		EasyMock.expect( photoVotingService.getTopBestDateRange() ).andReturn( new TimeRange( dateUtilsService.parseDateTime( "2014-05-24 00:00:00" ), dateUtilsService.parseDateTime( "2014-05-26 23:59:59" ) ) ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( photoVotingService );
