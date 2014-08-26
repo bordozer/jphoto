@@ -309,7 +309,22 @@
 
 	<translation>
 		<nerd>Photo list bottom text: Photos which the user $1 appraised</nerd>
-		<ru><![CDATA[Показаны работы, которые $1 оценил(а)]]></ru>
+		<ru><![CDATA[Показаны работы, которые $1 оценил(а) ($2)]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list title: Photos which the user $1 appraised as $2</nerd>
+		<ru><![CDATA[Работы, в которых $1 оценил(а) '$2'.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Sorted by voting time DESC</nerd>
+		<ru><![CDATA[Отсортированы по времени голосованию по убыванию.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Photos which the user $1 appraised as $2</nerd>
+		<ru><![CDATA[Показаны работы, в которых $1 оценил(а) '$2']]></ru>
 	</translation>
 
 	<translation>

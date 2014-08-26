@@ -27,6 +27,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private static final String SORTING_BY_UPLOAD_TIME_DESC = "Photo list bottom text: Sorted by upload time DESC";
 	private static final String SORTING_BY_SUM_MARKS_DESC = "Photo list bottom text: Sorted by sum marks DESC";
 	private static final String SORTING_BY_TOTAL_MARKS = "Photo list bottom text: Sorted by total marks.";
+	public static final String SORTING_BY_VOTING_TIME = "Photo list bottom text: Sorted by voting time DESC";
 
 	@Autowired
 	private PhotoListFilteringService photoListFilteringService;
@@ -623,6 +624,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services )
 					.userCardLink( user )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_VOTING_TIME )
 					;
 			}
 		};
@@ -641,12 +644,20 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised", services ).userCardLink( user );
+				return new TranslatableMessage( "Photo list title: Photos which the user $1 appraised as $2", services )
+					.userCardLink( user )
+					.addPhotoVotingCategoryParameterParameter( photoVotingCategory )
+					;
 			}
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised", services );
+				return new TranslatableMessage( "Photo list bottom text: Photos which the user $1 appraised as $2", services )
+					.userCardLink( user )
+					.addPhotoVotingCategoryParameterParameter( photoVotingCategory )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_VOTING_TIME )
+					;
 			}
 		};
 	}

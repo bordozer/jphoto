@@ -334,7 +334,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( photoVoting.userId = '112' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
-		assertEquals( "Photo list bottom text: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getCriteriaDescription().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised<br />Photo list bottom text: Sorted by voting time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
@@ -346,7 +346,8 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).appraisedByUserPhotos( testData.user, votingCategory, 10, 24, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) WHERE ( ( photoVoting.userId = '112' ) AND photoVoting.votingCategoryId = '543' ) GROUP BY photos.id ORDER BY photoVoting.votingTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
-		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list title: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised as Translated entry", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Photos which the user <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a> appraised as Translated entry<br />Photo list bottom text: Sorted by voting time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
