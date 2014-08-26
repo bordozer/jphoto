@@ -90,6 +90,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.addIntegerParameter( minMarks )
 					.dateFormatted( timeRange.getTimeFrom() )
 					.dateFormatted( timeRange.getTimeTo() )
+					.string( ". " )
+					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
 			}
 		};
@@ -178,6 +180,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.addIntegerParameter( minMarks )
 					.dateFormatted( timeRange.getTimeFrom() )
 					.dateFormatted( timeRange.getTimeTo() )
+					.string( ". " )
+					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
 
 			}
@@ -316,8 +320,12 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: The top best photos of users with membership type $1. $2.", services )
+				return new TranslatableMessage( "Photo list bottom text: The top best photos of users with membership type $1 which got at least $2 masks in period $3 - $4", services )
 					.translatableString( userMembershipType.getNamePlural() )
+					.addIntegerParameter( minMarks )
+					.dateFormatted( timeRange.getTimeFrom() )
+					.dateFormatted( timeRange.getTimeTo() )
+					.string( ". " )
 					.translatableString( SORTING_BY_SUM_MARKS_DESC )
 					;
 			}
