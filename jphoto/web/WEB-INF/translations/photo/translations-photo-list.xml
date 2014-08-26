@@ -214,7 +214,7 @@
 
 	<translation>
 		<nerd>Photo list title: User $1: the latest photos from album $2</nerd>
-		<ru><![CDATA[$1: последние работы из альбома $2]]></ru>
+		<ru><![CDATA[$1: альбом $2]]></ru>
 	</translation>
 
 	<translation>
