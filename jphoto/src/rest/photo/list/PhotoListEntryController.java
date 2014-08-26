@@ -120,6 +120,8 @@ public class PhotoListEntryController {
 		dto.setPhotoUploadDate( getPhotoUploadDate( photo, language ) );
 		dto.setPhotoCategory( getPhotoCategory( photo.getGenreId(), language ) );
 		dto.setPhotoImage( getPhotoPreview( photo, accessor, doesPreviewHasToBeHidden, language ) );
+		dto.setPhotoCardLink( urlUtilsService.getPhotoCardLink( photo.getId() ) );
+		setNudeContent( photo, accessor, dto );
 
 		dto.setShowPhotoContextMenu( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_PHOTO_MENU ) );
 
@@ -163,6 +165,18 @@ public class PhotoListEntryController {
 		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
 
 		return dto;
+	}
+
+	private void setNudeContent( final Photo photo, final User accessor, final PhotoEntryDTO dto ) {
+		final boolean hidePreviewBecauseOfNudeContent = securityUIService.isPhotoHasToBeHiddenBecauseOfNudeContent( photo, accessor );
+
+		dto.setHidePreviewBecauseOfNudeContent( hidePreviewBecauseOfNudeContent );
+
+		dto.setNudeContentWarning0( translatorService.translate( "Photo preview nude content: Photo contains", getLanguage() ) );
+		dto.setNudeContentWarning1( translatorService.translate( "Photo preview nude content: NUDE CONTENT", getLanguage() ) );
+		dto.setNudeContentWarning2( translatorService.translate( "Photo preview nude content: You must be at least", getLanguage() ) );
+		dto.setNudeContentWarning3( translatorService.translate( "Photo preview nude content: 18 years old", getLanguage() ) );
+		dto.setNudeContentWarning4( translatorService.translate( "Photo preview nude content: to see this", getLanguage() ) );
 	}
 
 	private void setSpecialRestrictedIcons( final Photo photo, final PhotoEntryDTO dto ) {

@@ -3,8 +3,26 @@
 	<div class="photo-list-entry-category"><%=photoCategory%></div>
 </div>
 
-<div class="photo-list-entry-preview">
-	<%=photoImage%>
-</div>
+<% if( ! hidePreviewBecauseOfNudeContent ) {%>
+	<div class="photo-list-entry-preview">
+		<%=photoImage%>
+	</div>
+<%}%>
+
+<% if( hidePreviewBecauseOfNudeContent ) {%>
+		<a href="<%=photoCardLink%>">
+	<div class="nude-content-warning">
+		<%=nudeContentWarning0%>
+		<br />
+		<span class="nude-content-warning-1"><%=nudeContentWarning1%></span>
+		<br />
+		<%=nudeContentWarning2%>
+		<br />
+		<span class="nude-content-warning-1"><%=nudeContentWarning3%></span>
+		<br />
+		<%=nudeContentWarning4%>
+	</div>
+			</a>
+<%}%>
 
 <div class="photo-list-entry-line text-centered photo-icons"></div>

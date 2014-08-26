@@ -656,3 +656,17 @@ table.formtable {
 	font-weight: bold;
 }
 
+.nude-content-warning {
+	float: left;
+	width: 98%;
+	color: #888888;
+	height: 235px;
+	margin-top: 60px;
+	text-align: center;
+	line-height: 30px;
+}
+
+.nude-content-warning-1 {
+	font-size: 24px;
+}
+

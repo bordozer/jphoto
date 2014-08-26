@@ -17,6 +17,7 @@ public class PhotoEntryDTO {
 
 	private String photoName;
 	private String photoLink;
+	private String photoCardLink;
 	private String photoAuthorLink;
 
 	private boolean showUserRank;
@@ -44,6 +45,13 @@ public class PhotoEntryDTO {
 
 	private boolean userOwnThePhoto;
 	private List<PhotoBookmarkIcon> photoBookmarkIcons;
+
+	private boolean hidePreviewBecauseOfNudeContent;
+	private String nudeContentWarning0;
+	private String nudeContentWarning1;
+	private String nudeContentWarning2;
+	private String nudeContentWarning3;
+	private String nudeContentWarning4;
 
 	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
@@ -114,6 +122,14 @@ public class PhotoEntryDTO {
 
 	public void setPhotoLink( final String photoLink ) {
 		this.photoLink = photoLink;
+	}
+
+	public String getPhotoCardLink() {
+		return photoCardLink;
+	}
+
+	public void setPhotoCardLink( final String photoCardLink ) {
+		this.photoCardLink = photoCardLink;
 	}
 
 	public String getPhotoAuthorLink() {
@@ -274,5 +290,53 @@ public class PhotoEntryDTO {
 
 	public void setSpecialRestrictionIcons( final Map<String, SpecialIconDTO> specialRestrictionIcons ) {
 		this.specialRestrictionIcons = specialRestrictionIcons;
+	}
+
+	public boolean isHidePreviewBecauseOfNudeContent() {
+		return hidePreviewBecauseOfNudeContent;
+	}
+
+	public void setHidePreviewBecauseOfNudeContent( final boolean hidePreviewBecauseOfNudeContent ) {
+		this.hidePreviewBecauseOfNudeContent = hidePreviewBecauseOfNudeContent;
+	}
+
+	public String getNudeContentWarning0() {
+		return nudeContentWarning0;
+	}
+
+	public void setNudeContentWarning0( final String nudeContentWarning0 ) {
+		this.nudeContentWarning0 = nudeContentWarning0;
+	}
+
+	public String getNudeContentWarning1() {
+		return nudeContentWarning1;
+	}
+
+	public void setNudeContentWarning1( final String nudeContentWarning1 ) {
+		this.nudeContentWarning1 = nudeContentWarning1;
+	}
+
+	public String getNudeContentWarning2() {
+		return nudeContentWarning2;
+	}
+
+	public void setNudeContentWarning2( final String nudeContentWarning2 ) {
+		this.nudeContentWarning2 = nudeContentWarning2;
+	}
+
+	public String getNudeContentWarning3() {
+		return nudeContentWarning3;
+	}
+
+	public void setNudeContentWarning3( final String nudeContentWarning3 ) {
+		this.nudeContentWarning3 = nudeContentWarning3;
+	}
+
+	public String getNudeContentWarning4() {
+		return nudeContentWarning4;
+	}
+
+	public void setNudeContentWarning4( final String nudeContentWarning4 ) {
+		this.nudeContentWarning4 = nudeContentWarning4;
 	}
 }
