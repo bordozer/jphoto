@@ -844,7 +844,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getTitle() {
 				return new TranslatableMessage( "Photo list title: User card $1: the best photos", services )
-					.userCardLink( user )
+					.string( user.getNameEscaped() )
 					;
 			}
 
@@ -856,7 +856,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
 				return new TranslatableMessage( "Photo list bottom tex: User card $1: the best photos", services )
-					.userCardLink( user )
+					.string( user.getNameEscaped() )
 					;
 			}
 
