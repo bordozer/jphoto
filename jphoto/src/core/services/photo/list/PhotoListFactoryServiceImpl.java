@@ -255,7 +255,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photos uploaded between $1 and $2. $3.", services )
+				return new TranslatableMessage( "Photo list bottom text: Photos uploaded between $1 and $2", services )
 					.dateFormatted( timeFrom )
 					.dateFormatted( timeTo )
 					.lineBreakHtml()

@@ -339,7 +339,7 @@
 
 	<translation>
 		<nerd>Photo list bottom text: Photos uploaded between $1 and $2</nerd>
-		<ru><![CDATA[Показаны работы, загруженные в период с $1 по $2]]></ru>
+		<ru><![CDATA[Показаны работы, загруженные за период $1 - $2]]></ru>
 	</translation>
 
 	<translation>
