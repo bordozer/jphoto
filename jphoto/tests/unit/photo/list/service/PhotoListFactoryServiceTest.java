@@ -346,10 +346,13 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void galleryUploadedInDateRangeTest() {
+		final DateData dateData = new DateData();
+
 		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryUploadedInDateRange( dateUtilsService.parseDateTime( "2014-08-10 12:15:48" ), dateUtilsService.parseDateTime( "2014-08-14 03:42:15" ), 10, 24, testData.accessor );
 
 		assertEquals( "SELECT photos.id FROM photos AS photos WHERE ( ( photos.uploadTime >= '2014-08-10 00:00:00' ) AND photos.uploadTime <= '2014-08-14 23:59:59' ) ORDER BY photos.uploadTime DESC LIMIT 24 OFFSET 216;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: Photos uploaded between 2014-08-10 and 2014-08-14", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: Photos uploaded between 2014-08-10 and 2014-08-14. <br />.Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
