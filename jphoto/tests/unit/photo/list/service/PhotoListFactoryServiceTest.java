@@ -405,6 +405,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoVoting ON ( photos.id = photoVoting.photoId ) INNER JOIN users ON ( photos.userId = users.id ) WHERE ( ( ( photoVoting.votingTime >= '%s' ) AND photoVoting.votingTime <= '%s' ) AND users.membershipType = '3' ) GROUP BY photos.id HAVING SUM( photoVoting.mark ) >= '%d' ORDER BY SUM( photoVoting.mark ) DESC, photos.uploadTime DESC, photos.uploadTime DESC LIMIT 16 OFFSET 64;", dateData.from1, dateData.to1, MIN_MARKS_FOR_VERY_BEST ), factory.getSelectIdsQuery().build() );
 		assertEquals( "Main menu: The best photos: UserMembershipType: makeup master", factory.getTitle().build( Language.EN ) );
+		assertEquals( String.format( "Photo list bottom text: The best photos of users with membership type UserMembershipType: makeup master plural which got at least %d marks in period %s - %s<br />Photo list bottom text: Sorted by sum marks DESC", MIN_MARKS_FOR_VERY_BEST, dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusDefault( factory );
