@@ -86,7 +86,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Top best photos that got $1 marks in period $2 - $3", services )
+				return new TranslatableMessage( "Photo list bottom text: Top best photos that got at least $1 marks in period $2 - $3", services )
 					.addIntegerParameter( minMarks )
 					.dateFormatted( timeRange.getTimeFrom() )
 					.dateFormatted( timeRange.getTimeTo() )
@@ -147,7 +147,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	}
 
 	@Override
-	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor ) {
+	public AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final User accessor ) {
 		final AbstractPhotoFilteringStrategy filteringStrategy = photoListFilteringService.topBestFilteringStrategy();
 
 		return new PhotoListFactoryTopBest( filteringStrategy, accessor, services ) {
@@ -173,9 +173,13 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: Photo gallery by genre $1 top best for last $2 days", services )
+				return new TranslatableMessage( "Photo list bottom text: Top best photos by genre $1 that got at least $2 marks in period $3 - $4", services )
 					.addPhotosByGenreLinkParameter( genre )
-					.addIntegerParameter( days );
+					.addIntegerParameter( minMarks )
+					.dateFormatted( timeRange.getTimeFrom() )
+					.dateFormatted( timeRange.getTimeTo() )
+					;
+
 			}
 		};
 	}

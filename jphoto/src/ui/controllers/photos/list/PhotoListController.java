@@ -178,7 +178,7 @@ public class PhotoListController {
 		final int genreId = assertGenreExists( _genreId );
 		final Genre genre = genreService.load( genreId );
 
-		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenreTopBest( genre, EnvironmentContext.getCurrentUser() ), pagingModel ) );
 		model.addPhotoList( getPhotoList( photoListFactoryService.galleryForGenre( genre, pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), EnvironmentContext.getCurrentUser() ), pagingModel ) );
 
 		model.setPageTitleData( breadcrumbsPhotoGalleryService.getPhotosByGenreBreadcrumbs( genre ) );

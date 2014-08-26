@@ -143,8 +143,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Photo gallery by genre $1 top best for last $2 days</nerd>
-		<ru><![CDATA[Показаны работы из раздела $1, набравшие наибольшее количество оценок за последние $2 дня]]></ru>
+		<nerd>Photo list bottom text: Top best photos by genre $1 that got at least $2 marks in period $3 - $4</nerd>
+		<ru><![CDATA[Показаны работы из раздела $1, набравшие наибольшее количество баллов ( но не менее $2 ) за период $3 - $4]]></ru>
 	</translation>
 
 	<translation>
@@ -243,8 +243,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: Top best photos that got $1 marks in period $2 - $3</nerd>
-		<ru><![CDATA[Показаны самые лучшие работы, набравшие не менее $1 баллов за период $2 - $3]]></ru>
+		<nerd>Photo list bottom text: Top best photos that got at least $1 marks in period $2 - $3</nerd>
+		<ru><![CDATA[Показаны работы, набравшие наибольшее количество баллов ( но не менее $1 ) за период $2 - $3]]></ru>
 	</translation>
 
 	<translation>

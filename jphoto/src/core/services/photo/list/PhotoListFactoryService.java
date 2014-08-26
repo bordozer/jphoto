@@ -22,7 +22,7 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryForGenre( final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
-	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final int page, final int itemsOnPage, final User accessor );
+	AbstractPhotoListFactory galleryForGenreTopBest( final Genre genre, final User accessor );
 
 	AbstractPhotoListFactory galleryForGenreBest( final Genre genre, final int page, final int itemsOnPage, final User accessor );
 
