@@ -156,6 +156,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoTeam ON ( photos.id = photoTeam.photoId ) WHERE ( ( photos.userId = '112' ) AND photoTeam.userTeamMemberId = '987' ) ORDER BY photos.uploadTime DESC LIMIT 28 OFFSET 28;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all photos of <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> ( UserTeamMemberType: Model )", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: all team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )<br />Photo list bottom text: Sorted by upload time DESC", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );
@@ -184,6 +185,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoTeam ON ( photos.id = photoTeam.photoId ) WHERE ( ( photos.userId = '112' ) AND photoTeam.userTeamMemberId = '987' ) ORDER BY photos.uploadTime DESC LIMIT 4;", factory.getSelectIdsQuery().build() );
 		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: last photos with team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> ( UserTeamMemberType: Model )", factory.getTitle().build( Language.EN ) );
+		assertEquals( "Photo list bottom text: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: the latest team member <a href=\"http://127.0.0.1:8085/worker/members/112/team/987/\" title=\"EntityLinkUtilsService: User Team member card link title: Team model ( UserTeamMemberType: Model )\">Team model</a> photos ( member type is UserTeamMemberType: Model )", factory.getCriteriaDescription().build( Language.EN ) );
 		assertEquals( "http://127.0.0.1:8085/worker/members/112/team/987/", factory.getLinkToFullList() );
 
 		assertGroupOperationMenusEmpty( factory );

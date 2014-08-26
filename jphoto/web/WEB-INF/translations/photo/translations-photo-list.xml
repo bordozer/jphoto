@@ -204,7 +204,7 @@
 
 	<translation>
 		<nerd>Photo list bottom text: User $1: all team member $2 photos ( member type is $3 )</nerd>
-		<ru><![CDATA[$1: работы $2 ( тип участия - $3 )]]></ru>
+		<ru><![CDATA[Показаны работы пользователя $1, в которых как $3 принимал(а) участие $2]]></ru>
 	</translation>
 
 	<translation>

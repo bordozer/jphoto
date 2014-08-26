@@ -734,6 +734,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.userCardLink( user )
 					.userTeamMemberCardLink( userTeamMember )
 					.translatableString( userTeamMember.getTeamMemberType().getName() )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
 					;
 			}
 
