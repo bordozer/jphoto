@@ -224,7 +224,7 @@
 
 	<translation>
 		<nerd>Photo list bottom text: User $1: all photos from album $2</nerd>
-		<ru><![CDATA[$1: работы из альбома $2]]></ru>
+		<ru><![CDATA[Показаны работы пользователя $1 из альбома $2]]></ru>
 	</translation>
 
 	<translation>
