@@ -165,11 +165,8 @@
 			</table:tddata>
 		</table:tredit>
 
-		<%--<table:trok text_t="Photo uploading: Save button" onclick="alert( ';)' ); return false;"/>--%>
 		<table:trok text_t="Photo uploading: Save button" />
 
 	</table:table>
 
 </form:form>
-
-<%--<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>--%>
