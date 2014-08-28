@@ -1,16 +1,17 @@
-define( ["backbone", "jquery", "underscore"
+define( ["backbone", "jquery", "underscore", "mass_checker"
 		, "modules/photo/upload/userTeam/user-team-model"
 		, "text!modules/photo/upload/userTeam/templates/header-template.html"
 		, "text!modules/photo/upload/userTeam/templates/list-entry-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-info-template.html"
 		, "text!modules/photo/upload/userTeam/templates/entry-edit-template.html"
-		], function ( Backbone, $, _, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
+		], function ( Backbone, $, _, mass_checker, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
 	var EntryListView = Backbone.View.extend( {
 
 		userTeamHeaderTemplate:_.template( headerTemplate ),
+		massSelectorCss: 'group-operation-checkbox-',
 
 		events: {
 			"click .create-new-user-team-member-link": "onCreateNewEntry"
@@ -39,12 +40,19 @@ define( ["backbone", "jquery", "underscore"
 
 		renderEntry: function ( teamMember ) {
 			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
+			var massSelectorCss = this.massSelectorCss;
 
 			var entryView = new EntryView( {
 				model: teamMember
+				, massSelectorCss: massSelectorCss
 			} );
 
 			this.$el.append( entryView.render().$el );
+
+			var massSelector = mass_checker.getMassChecker();
+			var css = this.massSelectorCss + teamMember.get( 'userTeamMemberId' );
+			console.log( css );
+			massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
 		},
 
 		createEntry: function() {
@@ -81,7 +89,10 @@ define( ["backbone", "jquery", "underscore"
 		userTeamMemberViewTemplate:_.template( entryInfoTemplate ),
 		userTeamMemberEditorTemplate:_.template( entryEditorTemplate ),
 
-		initialize: function() {
+		initialize: function( options ) {
+
+			this.massSelectorCss = options.massSelectorCss;
+
 			this.listenTo( this.model, "sync", this.render );
 			this.listenTo( this.model, "change", this.render );
 
@@ -104,10 +115,13 @@ define( ["backbone", "jquery", "underscore"
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
+			console.log( this.model );
 
 			modelJSON[ 'translationsDTO' ] = this.model.get( 'translationDTO' );
 
-			this.$el.html( this.userTeamListEntryTemplate( modelJSON ) );
+			this.$el.html( "" );
+
+			this.renderHeader( modelJSON );
 
 			if ( this.model.get( 'openEditor' ) ) {
 				this.$el.append( this.userTeamMemberEditorTemplate( modelJSON ) );
@@ -118,6 +132,33 @@ define( ["backbone", "jquery", "underscore"
 			}
 
 			return this;
+		},
+
+		renderHeader: function( modelJSON ) {
+			var entryDiv = $( "<div class='user-team-list-entry'></div>" );
+
+			/*entryDiv.append( "<input type='checkbox' name='userTeamMemberIds' class='user-team-member-checkbox user-team-member-checkbox-" + modelJSON.userTeamMemberId + "'"
+							+ " value='" + modelJSON.userTeamMemberId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );*/
+
+			var css = 'mass-selector-icon-' + this.massSelectorCss + modelJSON.userTeamMemberId;
+			console.log( css );
+
+			entryDiv.append( "<img class='" + css + "' width='16' height='16' /> " );
+
+			if( modelJSON.userTeamMemberId > 0 && ! modelJSON.openEditor ) {
+				entryDiv.append( "<a href='#' class='user-team-member-info' onclick='return false;' title='" + modelJSON.userTeamMemberNameTitle + "'>"
+										+ modelJSON.userTeamMemberName + "</a> - " + modelJSON.teamMemberPhotosQty + " " + modelJSON.translationsDTO.listEntryPhotos );
+			}
+
+			if( modelJSON.userTeamMemberId > 0 && modelJSON.openEditor ) {
+				entryDiv.append( modelJSON.userTeamMemberName + " - " + modelJSON.teamMemberPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
+			}
+
+			if( modelJSON.userTeamMemberId == 0 ) {
+				entryDiv.append( modelJSON.translationsDTO.newEntryDefaultName );
+			}
+
+			this.$el.append( entryDiv );
 		},
 
 		toggleInfo: function() {

@@ -14,6 +14,7 @@
 
 <%@ attribute name="userId" type="java.lang.Integer" required="true" %>
 <%@ attribute name="selectedByDefaultUserMembersIds" type="java.util.List" required="false" %>
+<%@ attribute name="groupSelectionClass" type="java.lang.String" required="false" %>
 
 <%
 	final Language language = EnvironmentContext.getLanguage();

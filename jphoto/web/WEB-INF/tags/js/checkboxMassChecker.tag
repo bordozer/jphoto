@@ -10,7 +10,6 @@
 
 <script type="text/javascript">
 
-
 	require( [ 'jquery', 'mass_checker' ], function ( $, mass_checker ) {
 
 		var massChecker = mass_checker.getMassChecker();
