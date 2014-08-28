@@ -213,7 +213,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var massSelector = mass_checker.getMassChecker();
 			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), "/images" );  // TODO: pass image path
 
-			this.onCreate( this.model );
+			this.onCreate( this.model ); // TODO: save and edit are the same
 		},
 
 		onSaveError: function( response ) {
