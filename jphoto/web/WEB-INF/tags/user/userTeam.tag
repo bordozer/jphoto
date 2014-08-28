@@ -75,7 +75,22 @@
 					, selectedUserTeamMemberIds: selectedUserTeamMemberIds
 					, groupSelectionClass: '${groupSelectionClass}'
 					, translationDTO: translationDTO
+					, onCreate: onCreate
+					, onEdit: onEdit
+					, onDelete: onDelete
 				  } );
+
+		function onCreate( teamMember ) {
+			console.log( 'onCreate: ', teamMember );
+		}
+
+		function onEdit( teamMember ) {
+			console.log( 'onEdit: ', teamMember );
+		}
+
+		function onDelete( teamMemberId ) {
+			console.log( 'onDelete: ', teamMemberId );
+		}
 	} );
 </script>
 

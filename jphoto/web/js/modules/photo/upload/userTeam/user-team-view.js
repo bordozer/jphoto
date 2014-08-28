@@ -16,7 +16,11 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			"click .create-new-user-team-member-link": "onCreateNewEntry"
 		},
 
-		initialize: function() {
+		initialize: function( options ) {
+			this.onCreate = options.onCreate;
+			this.onEdit = options.onEdit;
+			this.onDelete = options.onDelete;
+
 			this.listenTo( this.model, "add", this.renderEntry );
 
 			var model = this.model;
@@ -39,11 +43,15 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		renderEntry: function ( teamMember ) {
 			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
+			var view = this;
 
 			var massSelectorCss = this.model.groupSelectionClass;
 			var entryView = new EntryView( {
 				model: teamMember
 				, massSelectorCss: massSelectorCss
+				, onCreate: view.onCreate
+				, onEdit: view.onEdit
+				, onDelete: view.onDelete
 			} );
 
 			this.$el.append( entryView.render().$el );
@@ -56,6 +64,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		createEntry: function() {
+
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
 			var translationDTO = this.model[ 'translationDTO' ];
 
@@ -71,7 +80,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		deleteEntry: function( teamMember ) {
-			this.model.remove( teamMember.get( 'userTeamMemberId' ) );
+			var teamMemberId = teamMember.get( 'userTeamMemberId' );
+			this.model.remove( teamMemberId );
+			this.model.onDelete( teamMemberId );
 		},
 
 		onCreateNewEntry: function( evt ) {
@@ -90,8 +101,11 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		userTeamMemberEditorTemplate:_.template( entryEditorTemplate ),
 
 		initialize: function( options ) {
-
 			this.massSelectorCss = options.massSelectorCss;
+
+			this.onCreate = options.onCreate;
+			this.onEdit = options.onEdit;
+			this.onDelete = options.onDelete;
 
 			this.listenTo( this.model, "sync", this.render );
 			this.listenTo( this.model, "change", this.render );
@@ -114,6 +128,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		render: function () {
+
 			var modelJSON = this.model.toJSON();
 
 			modelJSON[ 'translationsDTO' ] = this.model.get( 'translationDTO' );
@@ -194,6 +209,11 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		onSaveSuccess: function() {
 			this.closeEditor();
 			showUIMessage_Notification( this.model.get( 'translationDTO' )[ 'dataSavedSuccessfully' ] );
+
+			var massSelector = mass_checker.getMassChecker();
+			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), "/images" );  // TODO: pass image path
+
+			this.onCreate( this.model );
 		},
 
 		onSaveError: function( response ) {

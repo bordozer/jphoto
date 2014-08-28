@@ -12,7 +12,13 @@ define( ["modules/photo/upload/userTeam/user-team-model"
 				, translationDTO: options.translationDTO
 			} );
 
-		var entryListView = new View.EntryListView( { model: entriesModel, el: options.container } );
+		var entryListView = new View.EntryListView( {
+				model: entriesModel
+				, el: options.container
+				, onCreate: options.onCreate
+				, onEdit: options.onEdit
+				, onDelete: options.onDelete
+		} );
 		entryListView.renderHeader();
 		entryListView.render();
 	}
