@@ -11,7 +11,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 	var EntryListView = Backbone.View.extend( {
 
 		userTeamHeaderTemplate:_.template( headerTemplate ),
-		massSelectorCss: 'group-operation-checkbox-',
 
 		events: {
 			"click .create-new-user-team-member-link": "onCreateNewEntry"
@@ -40,8 +39,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		renderEntry: function ( teamMember ) {
 			teamMember.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
-			var massSelectorCss = this.massSelectorCss;
 
+			var massSelectorCss = this.model.groupSelectionClass;
 			var entryView = new EntryView( {
 				model: teamMember
 				, massSelectorCss: massSelectorCss
@@ -49,10 +48,11 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			this.$el.append( entryView.render().$el );
 
-			var massSelector = mass_checker.getMassChecker();
-			var css = this.massSelectorCss + teamMember.get( 'userTeamMemberId' );
-			console.log( css );
-			massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
+			if( massSelectorCss != '' ) {
+				var massSelector = mass_checker.getMassChecker();
+				var css = massSelectorCss + teamMember.get( 'userTeamMemberId' );
+				massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
+			}
 		},
 
 		createEntry: function() {
@@ -115,7 +115,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		render: function () {
 			var modelJSON = this.model.toJSON();
-			console.log( this.model );
 
 			modelJSON[ 'translationsDTO' ] = this.model.get( 'translationDTO' );
 
@@ -137,13 +136,14 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderHeader: function( modelJSON ) {
 			var entryDiv = $( "<div class='user-team-list-entry'></div>" );
 
-			/*entryDiv.append( "<input type='checkbox' name='userTeamMemberIds' class='user-team-member-checkbox user-team-member-checkbox-" + modelJSON.userTeamMemberId + "'"
-							+ " value='" + modelJSON.userTeamMemberId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );*/
+			if( this.massSelectorCss == '' ) {
+				entryDiv.append( "<input type='checkbox' name='userTeamMemberIds' class='user-team-member-checkbox user-team-member-checkbox-" + modelJSON.userTeamMemberId + "'"
+				 + " value='" + modelJSON.userTeamMemberId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
+			}
 
-			var css = 'mass-selector-icon-' + this.massSelectorCss + modelJSON.userTeamMemberId;
-			console.log( css );
-
-			entryDiv.append( "<img class='" + css + "' width='16' height='16' /> " );
+			if( this.massSelectorCss != '' ) {
+				entryDiv.append( "<img class='" + 'mass-selector-icon-' + this.massSelectorCss + modelJSON.userTeamMemberId + "' width='16' height='16' /> " );
+			}
 
 			if( modelJSON.userTeamMemberId > 0 && ! modelJSON.openEditor ) {
 				entryDiv.append( "<a href='#' class='user-team-member-info' onclick='return false;' title='" + modelJSON.userTeamMemberNameTitle + "'>"

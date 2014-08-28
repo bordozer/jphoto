@@ -69,6 +69,6 @@
 		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
 		var translationDTO = ${translationDTO};
 
-		userTeam( ${userId}, $( '.user-team-container' ), userTeamMemberTypes, selectedUserTeamMemberIds, translationDTO );
+		userTeam( ${userId}, $( '.user-team-container' ), userTeamMemberTypes, selectedUserTeamMemberIds, '${groupSelectionClass}', translationDTO );
 	} );
 </script>
