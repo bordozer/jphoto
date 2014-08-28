@@ -69,6 +69,35 @@
 		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
 		var translationDTO = ${translationDTO};
 
-		userTeam( ${userId}, $( '.user-team-container' ), userTeamMemberTypes, selectedUserTeamMemberIds, '${groupSelectionClass}', translationDTO );
+		userTeam( { userId: ${userId}
+					, container: $( '.user-team-container' )
+					, userTeamMemberTypes: userTeamMemberTypes
+					, selectedUserTeamMemberIds: selectedUserTeamMemberIds
+					, groupSelectionClass: '${groupSelectionClass}'
+					, translationDTO: translationDTO
+				  } );
 	} );
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
