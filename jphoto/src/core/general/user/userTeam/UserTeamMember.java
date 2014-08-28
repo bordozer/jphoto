@@ -6,6 +6,8 @@ import core.general.user.User;
 import core.interfaces.Cacheable;
 import core.interfaces.Favoritable;
 import core.interfaces.Nameable;
+import core.services.translator.Language;
+import core.services.translator.TranslatorService;
 import org.apache.commons.lang.StringUtils;
 import utils.StringUtilities;
 
@@ -60,14 +62,9 @@ public class UserTeamMember extends AbstractBaseEntity implements Nameable, Favo
 		return "ERROR";
 	}
 
-	public String getTeamMemberNameWithType() {
+	public String getTeamMemberNameWithType( final TranslatorService translatorService, final Language language ) {
 		String teamMemberName = getTeamMemberName();
-
-		// TODO
-		/*if ( teamMemberUser != null ) {
-			teamMemberName = EntityLinkUtilsService.getRemoteUserCardLink( teamMemberUser, teamMemberName );
-		}*/
-		return String.format( "%s ( %s )", StringUtilities.escapeHtml( teamMemberName ), teamMemberType.getName() ); // TODO: translate teamMemberType.getName()
+		return String.format( "%s ( %s )", StringUtilities.escapeHtml( teamMemberName ), translatorService.translate( teamMemberType.getName(), language ) ); // TODO: translate teamMemberType.getName()
 	}
 
 	@Override

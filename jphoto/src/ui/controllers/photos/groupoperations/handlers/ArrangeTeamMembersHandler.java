@@ -49,7 +49,8 @@ public class ArrangeTeamMembersHandler extends AbstractGroupOperationHandler {
 
 		for ( final UserTeamMember teamMember : userTeam.getUserTeamMembers() ) {
 			final int teamMemberId = teamMember.getId();
-			final String name = String.format( "<label for=\"photoGroupOperationEntryPropertiesMap['%d_%d'].value\">%s</label>", photo.getId(), teamMemberId, teamMember.getTeamMemberNameWithType() );
+			final String translate = getTranslatorService().translate( teamMember.getTeamMemberNameWithType( getTranslatorService(), getLanguage() ), getLanguage() );
+			final String name = String.format( "<label for=\"photoGroupOperationEntryPropertiesMap['%d_%d'].value\">%s</label>", photo.getId(), teamMemberId, translate );
 
 			final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), teamMemberId, name );
 			entryProperty.setValue( userTeamService.isTeamMemberAssignedToPhoto( photo.getId(), teamMemberId ) );

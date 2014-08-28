@@ -149,7 +149,7 @@ public class EntityLinkUtilsServiceImpl implements EntityLinkUtilsService {
 		return String.format( "<a href=\"%s\" title=\"%s: %s\">%s</a>"
 			, link
 			, translatorService.translate( "EntityLinkUtilsService: User Team member card link title", language )
-			, userTeamMember.getTeamMemberNameWithType()
+			, userTeamMember.getTeamMemberNameWithType( translatorService, language )
 			, name
 		);
 	}

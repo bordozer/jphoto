@@ -115,10 +115,6 @@
 				<div style="float: left; width: 100%; padding-bottom: 10px;">
 					<user:userTeam userId="${photoGroupOperationModel.user.id}" groupSelectionClass="group-operation-checkbox-" />
 				</div>
-				<%--<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
-					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userTeamMember.id}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
-					<br />
-				</c:forEach>--%>
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">
