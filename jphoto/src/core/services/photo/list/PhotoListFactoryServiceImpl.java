@@ -846,11 +846,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					.string( user.getNameEscaped() )
 					;
 			}
-
-			@Override
-			public PhotoGroupOperationMenuContainer getGroupOperationMenuContainer() {
-				return getPhotoGroupOperationMenuContainerForUserCard( user );
-			}
 		};
 	}
 

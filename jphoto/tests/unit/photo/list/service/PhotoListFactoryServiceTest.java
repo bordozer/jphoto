@@ -289,7 +289,7 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 
 	@Test
 	public void userCardPhotosBestOwnGroupMenusTest() {
-		assertGroupOperationMenusForUser( getPhotoListFactoryService( testData ).userCardPhotosBest( testData.accessor, testData.accessor ) );
+		assertGroupOperationMenusEmpty( getPhotoListFactoryService( testData ).userCardPhotosBest( testData.accessor, testData.accessor ) );
 	}
 
 	@Test
