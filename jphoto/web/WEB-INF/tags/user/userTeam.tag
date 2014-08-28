@@ -6,13 +6,14 @@
 <%@ tag import="ui.translatable.GenericTranslatableEntry" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ tag import="rest.photo.upload.userTeam.UserTeamTranslationDTO" %>
+<%@ tag import="rest.users.team.UserTeamTranslationDTO" %>
 <%@ tag import="core.services.translator.Language" %>
 <%@ tag import="core.services.translator.TranslatorService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%@ attribute name="photoId" type="java.lang.Integer" required="true" %>
+<%@ attribute name="userId" type="java.lang.Integer" required="true" %>
+<%@ attribute name="selectedByDefaultUserMembersIds" type="java.util.List" required="false" %>
 
 <%
 	final Language language = EnvironmentContext.getLanguage();
@@ -25,6 +26,7 @@
 		jsonObjects.add( new JSONObject( entry ) );
 	}
 	final JSONArray userTeamMemberTypes = new JSONArray( jsonObjects );
+	final JSONArray selectedUserTeamMemberIdsJson = new JSONArray( selectedByDefaultUserMembersIds );
 %>
 
 <%
@@ -33,6 +35,7 @@
 
 <c:set var="baseUrl" value="${eco:baseUrl()}" />
 <c:set var="userTeamMemberTypes" value="<%=userTeamMemberTypes%>" />
+<c:set var="selectedUserTeamMemberIdsJson" value="<%=selectedUserTeamMemberIdsJson%>" />
 <c:set var="translationDTO" value="<%=new JSONObject( translationDTO )%>" />
 
 <div class="user-team-container" style="float: left; padding: 5px; width: 400px;"></div>
@@ -60,9 +63,11 @@
 
 <script type="text/javascript">
 	require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
+
 		var userTeamMemberTypes = ${userTeamMemberTypes};
+		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
 		var translationDTO = ${translationDTO};
 
-		userTeam( ${photoId}, $( '.user-team-container' ), userTeamMemberTypes, translationDTO );
+		userTeam( ${userId}, $( '.user-team-container' ), userTeamMemberTypes, selectedUserTeamMemberIds, translationDTO );
 	} );
 </script>

@@ -1,4 +1,4 @@
-package rest.photo.upload.userTeam;
+package rest.users.team;
 
 public class TeamMemberTypeDTO {
 

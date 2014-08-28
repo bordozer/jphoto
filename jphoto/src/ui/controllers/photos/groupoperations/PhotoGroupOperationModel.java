@@ -2,6 +2,7 @@ package ui.controllers.photos.groupoperations;
 
 import core.general.base.AbstractGeneralModel;
 import core.general.photo.group.PhotoGroupOperationType;
+import core.general.user.User;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 
@@ -17,6 +18,8 @@ public class PhotoGroupOperationModel extends AbstractGeneralModel {
 	public static final String FORM_CONTROL_SELECTED_PHOTO_IDS = "selectedPhotoIds";
 	public static final String FORM_CONTROL_PHOTO_ALBUM_ID = "photoAlbumId";
 	public static final String FORM_CONTROL_MOVE_TO_GENRE_ID = "moveToGenreId";
+
+	private User user;
 
 	private String photoGroupOperationId;
 
@@ -36,6 +39,14 @@ public class PhotoGroupOperationModel extends AbstractGeneralModel {
 	private List<GenreEntry> genreEntries;
 
 	private String returnUrl;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser( final User user ) {
+		this.user = user;
+	}
 
 	public String getPhotoGroupOperationId() {
 		return photoGroupOperationId;

@@ -179,6 +179,8 @@ public class PhotoEditDataController {
 
 		model.setBgColor( "#000000" );
 
+		model.setUserTeamMemberIds( newArrayList() );
+
 		model.setPageTitleData( breadcrumbsPhotoService.getUploadPhotoBreadcrumbs( photoAuthor ) );
 
 		return VIEW_EDIT_DATA;
@@ -286,8 +288,14 @@ public class PhotoEditDataController {
 			return new PhotoTeam( photo, photoTeamMembers );
 		}
 
-		for ( final String userTeamMemberId : userTeamMembers ) {
-			final UserTeamMember userTeamMember = userTeamService.load( Integer.parseInt( userTeamMemberId ) );
+		for ( final String _userTeamMemberId : userTeamMembers ) {
+			final int userTeamMemberId = NumberUtils.convertToInt( _userTeamMemberId );
+
+			if ( userTeamMemberId == 0 ) {
+				continue;
+			}
+
+			final UserTeamMember userTeamMember = userTeamService.load( userTeamMemberId );
 			final PhotoTeamMember photoTeamMember = new PhotoTeamMember();
 			photoTeamMember.setUserTeamMember( userTeamMember );
 			photoTeamMembers.add( photoTeamMember );

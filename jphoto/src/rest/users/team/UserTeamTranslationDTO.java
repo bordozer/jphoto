@@ -1,4 +1,4 @@
-package rest.photo.upload.userTeam;
+package rest.users.team;
 
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;

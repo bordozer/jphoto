@@ -10,6 +10,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
 <%@ taglib prefix="js" tagdir="/WEB-INF/tags/js" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -111,10 +112,13 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
-				<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
+				<div style="float: left; width: 100%; padding-bottom: 10px;">
+					<user:userTeam userId="${photoGroupOperationModel.user.id}" />
+				</div>
+				<%--<c:forEach var="userTeamMember" items="${photoGroupOperationModel.userTeamMembers}">
 					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userTeamMember.id}" /> <links:userTeamMemberCard userTeamMember="${userTeamMember}" /> ( ${eco:translate(userTeamMember.teamMemberType.name)} )
 					<br />
-				</c:forEach>
+				</c:forEach>--%>
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">

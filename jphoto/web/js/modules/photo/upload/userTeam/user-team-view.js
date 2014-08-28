@@ -19,7 +19,13 @@ define( ["backbone", "jquery", "underscore"
 		initialize: function() {
 			this.listenTo( this.model, "add", this.renderEntry );
 
-			this.model.fetch( {cache: false} );
+			var model = this.model;
+			var el = this.$el;
+			this.model.fetch( { cache: false, success: function (  ) {
+				_.each( model.selectedUserTeamMemberIds, function( memberId ) {
+					$( '.user-team-member-checkbox-' + memberId, el ).attr( 'checked', 'checked' );
+				} );
+			} } );
 		},
 
 		renderHeader: function () {

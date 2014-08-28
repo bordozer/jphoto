@@ -8,6 +8,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import ui.context.EnvironmentContext;
 import ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
 import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
 
@@ -50,6 +51,8 @@ public class PhotoGroupOperationController {
 		// TODO: validate operations?
 
 		model.clear();
+
+		model.setUser( EnvironmentContext.getCurrentUser() );
 
 		final String groupOperationId = model.getPhotoGroupOperationId();
 

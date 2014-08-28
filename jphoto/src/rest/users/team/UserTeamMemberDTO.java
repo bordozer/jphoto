@@ -1,4 +1,4 @@
-package rest.photo.upload.userTeam;
+package rest.users.team;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

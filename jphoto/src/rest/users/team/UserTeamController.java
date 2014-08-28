@@ -1,4 +1,4 @@
-package rest.photo.upload.userTeam;
+package rest.users.team;
 
 import core.enums.UserTeamMemberType;
 import core.general.photo.Photo;
@@ -22,11 +22,8 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/photos/{photoId}/team/" )
+@RequestMapping( "/users/{userId}/team/" )
 public class UserTeamController {
-
-	@Autowired
-	private PhotoService photoService;
 
 	@Autowired
 	private UserTeamService userTeamService;
@@ -42,8 +39,8 @@ public class UserTeamController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserTeamMemberDTO> userTeam( final @PathVariable( "photoId" ) int photoId ) {
-		return getUserTeamMemberDTOs( photoId );
+	public List<UserTeamMemberDTO> userTeam( final @PathVariable( "userId" ) int userId ) {
+		return getUserTeamMemberDTOs( userId );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
@@ -76,7 +73,6 @@ public class UserTeamController {
 
 		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( dto.getTeamMemberTypeId() );
 		teamMember.setTeamMemberType( teamMemberType );
-//		teamMember.setTeamMemberUser(  ); // TODO
 
 		userTeamService.save( teamMember );
 
@@ -85,16 +81,11 @@ public class UserTeamController {
 		dto.setTeamMemberPhotosQty( userTeamService.getTeamMemberPhotosQty( teamMember.getId() ) );
 	}
 
-	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int photoId ) {
+	private List<UserTeamMemberDTO> getUserTeamMemberDTOs( final int userId ) {
 
 		final int currentUserId = EnvironmentContext.getCurrentUserId();
 
-		final Photo photo = photoService.load( photoId );
-		final boolean isNewPhoto = photo == null;
-
-		final int userId = isNewPhoto ? currentUserId : photo.getUserId();
 		final UserTeam userTeam = userTeamService.loadUserTeam( userId );
-		final List<PhotoTeamMember> photoTeamMembers = userTeamService.getPhotoTeam( photoId ).getPhotoTeamMembers();
 
 		final List<UserTeamMemberDTO> result = newArrayList();
 
@@ -104,7 +95,6 @@ public class UserTeamController {
 			final String teamMemberName = userTeamMember.getTeamMemberName();
 			dto.setUserTeamMemberName( teamMemberName );
 
-			dto.setChecked( !isNewPhoto && isTeamMemberTookParticipationInProcess( userTeamMember, photoTeamMembers ) );
 			dto.setUserTeamMemberCardUrl( urlUtilsService.getUserTeamMemberCardLink( currentUserId, userTeamMember.getId() ) );
 
 			final String memberTypeName = translatorService.translate( userTeamMember.getTeamMemberType().getName(), getLanguage() );
@@ -124,15 +114,6 @@ public class UserTeamController {
 		}
 
 		return result;
-	}
-
-	private boolean isTeamMemberTookParticipationInProcess( final UserTeamMember userTeamMember, final List<PhotoTeamMember> photoTeamMembers ) {
-		for ( final PhotoTeamMember photoTeamMember : photoTeamMembers ) {
-			if (photoTeamMember.getUserTeamMember().equals( userTeamMember ) ) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private Language getLanguage() {
