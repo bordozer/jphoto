@@ -95,13 +95,12 @@ public class PhotoGroupOperationController {
 		for ( final String photoId : model.getSelectedPhotoIds() ) {
 			final String[] entryIds = request.getParameterValues( photoId );
 			for ( final String entryId : entryIds ) {
-				final String parameter = request.getParameter( String.format( "checkbox-%s-%s", photoId, entryId ) );
-				if ( StringUtils.isNotEmpty( parameter ) ) {
-					final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( NumberUtils.convertToInt( photoId ), NumberUtils.convertToInt( entryId ), "" );
-					entryProperty.setValue( true );
+				final String parameter = request.getParameter( String.format( "photo-%s-entry-%s", photoId, entryId ) );
 
-					selectedEntries.add( entryProperty );
-				}
+				final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( NumberUtils.convertToInt( photoId ), NumberUtils.convertToInt( entryId ), "" );
+				entryProperty.setValue( StringUtils.isNotEmpty( parameter ) && ! "false".equals( parameter ) );
+
+				selectedEntries.add( entryProperty );
 			}
 		}
 

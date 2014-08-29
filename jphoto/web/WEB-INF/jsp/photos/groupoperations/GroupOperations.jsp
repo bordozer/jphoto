@@ -75,12 +75,12 @@
 								<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 								<c:if test="${photoGroupOperationEntryProperty.photoId == photo.id}">
 									<c:set var="entryId" value="${photoGroupOperationEntryProperty.entryId}" />
-									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${entryId}'].value"/>
+									<c:set var="fieldId" value="photo-${photo.id}-entry-${entryId}"/>
 									<div id="container-${entryId}">
-										<input type="checkbox" id="${fieldId}" name="checkbox-${photo.id}-${entryId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
+										<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
 										${photoGroupOperationEntryProperty.name}
 										<br />
-										<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
+										<input type="hidden" id="${fieldId}" name="_${fieldId}" value="false">
 										<input type="hidden" id="photoId" value="${photo.id}">
 										<input type="hidden" name="${photo.id}" value="${entryId}">
 									</div>
@@ -134,13 +134,14 @@
 									var containerId = photoId + '_' + userTeamMemberId;
 
 									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
-									var id = "photoGroupOperationEntryPropertiesMap['" + containerId + "'].value";
+									var id = "photo-" + photoId + "-entry-" + userTeamMemberId;
 
 									memberContainer.append( "<input type='checkbox' id=\"" + id + "\" name=\"" + id + "\" value='true' class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>" );
 									memberContainer.append( " <label for=\"" + id + "\"><span class='label-" + userTeamMemberId + "'>" + name + "</span></label>" );
 									memberContainer.append( "<br />" );
 									memberContainer.append( "<input type='hidden' id=\"_" + id + "\" name=\"_" + id + "\" value='false'>" );
 									memberContainer.append( "<input type='hidden' id='photoId' value='" + photoId + "'>" );
+									memberContainer.append( "<input type='hidden' name='" + photoId + "' value='" + userTeamMemberId + "'>" );
 
 									$( container ).append( memberContainer );
 								}
