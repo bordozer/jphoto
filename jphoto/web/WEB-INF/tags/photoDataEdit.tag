@@ -151,7 +151,16 @@
 			<table:tdtext text_t="Photo uploading: Photo team" labelFor="photoTeamIds1"/>
 
 			<table:tddata>
-				<user:userTeam userId="${photoEditDataModel.photoAuthor.id}" selectedByDefaultUserMembersIds="${photoEditDataModel.userTeamMemberIds}" />
+
+				<script type="text/javascript">
+					function doNothing() {}
+				</script>
+
+				<user:userTeam userId="${photoEditDataModel.photoAuthor.id}"
+							   selectedByDefaultUserMembersIds="${photoEditDataModel.userTeamMemberIds}"
+							   onEditJSFunction="doNothing"
+							   onDeleteJSFunction="doNothing"
+						/>
 			</table:tddata>
 		</table:tredit>
 
