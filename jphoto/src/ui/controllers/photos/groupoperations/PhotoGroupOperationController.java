@@ -2,6 +2,7 @@ package ui.controllers.photos.groupoperations;
 
 import core.general.photo.group.PhotoGroupOperationType;
 import core.services.system.Services;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
@@ -11,9 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 import ui.controllers.photos.groupoperations.handlers.AbstractGroupOperationHandler;
 import ui.services.breadcrumbs.BreadcrumbsPhotoGalleryService;
+import utils.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @SessionAttributes( PhotoGroupOperationController.MODEL_NAME )
 @Controller
@@ -86,8 +91,22 @@ public class PhotoGroupOperationController {
 			return VIEW;
 		}
 
+		final List<PhotoGroupOperationEntryProperty> selectedEntries = newArrayList();
+		for ( final String photoId : model.getSelectedPhotoIds() ) {
+			final String[] entryIds = request.getParameterValues( photoId );
+			for ( final String entryId : entryIds ) {
+				final String parameter = request.getParameter( String.format( "checkbox-%s-%s", photoId, entryId ) );
+				if ( StringUtils.isNotEmpty( parameter ) ) {
+					final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( NumberUtils.convertToInt( photoId ), NumberUtils.convertToInt( entryId ), "" );
+					entryProperty.setValue( true );
+
+					selectedEntries.add( entryProperty );
+				}
+			}
+		}
+
 		final AbstractGroupOperationHandler groupOperationHandler = AbstractGroupOperationHandler.getInstance( model.getPhotoGroupOperationType(), model, services );
-		model.setOperationResults( groupOperationHandler.performGroupOperations() );
+		model.setOperationResults( groupOperationHandler.performGroupOperations( selectedEntries ) );
 
 		return VIEW_DONE;
 	}

@@ -77,11 +77,12 @@
 									<c:set var="entryId" value="${photoGroupOperationEntryProperty.entryId}" />
 									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${entryId}'].value"/>
 									<div id="container-${entryId}">
-										<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
+										<input type="checkbox" id="${fieldId}" name="checkbox-${photo.id}-${entryId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
 										${photoGroupOperationEntryProperty.name}
 										<br />
 										<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
 										<input type="hidden" id="photoId" value="${photo.id}">
+										<input type="hidden" name="${photo.id}" value="${entryId}">
 									</div>
 								</c:if>
 							</c:forEach>

@@ -51,15 +51,13 @@ public abstract class AbstractGroupOperationHandler {
 		setPhotoGroupOperationEntries();
 	}
 
-	final public List<GroupOperationResult> performGroupOperations() {
+	final public List<GroupOperationResult> performGroupOperations( final List<PhotoGroupOperationEntryProperty> selectedEntries ) {
 		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
 		final SecurityService securityService = services.getSecurityService();
 		final User currentUser = getUser();
 
 		final List<GroupOperationResult> operationResults = newArrayList();
-
-		final Map<String, PhotoGroupOperationEntryProperty> photoGroupOperationEntryPropertiesMap = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		for ( final Photo photo : getPhotos() ) {
 
@@ -68,9 +66,7 @@ public abstract class AbstractGroupOperationHandler {
 				continue;
 			}
 
-			for ( final String entryKey : photoGroupOperationEntryPropertiesMap.keySet() ) {
-
-				final PhotoGroupOperationEntryProperty entryProperty = photoGroupOperationEntryPropertiesMap.get( entryKey );
+			for ( final PhotoGroupOperationEntryProperty entryProperty : selectedEntries ) {
 
 				if ( entryProperty == null ) {
 					continue;
