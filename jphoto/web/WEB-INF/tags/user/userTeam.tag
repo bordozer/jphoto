@@ -15,6 +15,8 @@
 <%@ attribute name="userId" type="java.lang.Integer" required="true" %>
 <%@ attribute name="selectedByDefaultUserMembersIds" type="java.util.List" required="false" %>
 <%@ attribute name="groupSelectionClass" type="java.lang.String" required="false" %>
+<%@ attribute name="onEditJSFunction" type="java.lang.String" required="false" %>
+<%@ attribute name="onDeleteJSFunction" type="java.lang.String" required="false" %>
 
 <%
 	final Language language = EnvironmentContext.getLanguage();
@@ -75,22 +77,9 @@
 					, selectedUserTeamMemberIds: selectedUserTeamMemberIds
 					, groupSelectionClass: '${groupSelectionClass}'
 					, translationDTO: translationDTO
-					, onCreate: onCreate
-					, onEdit: onEdit
-					, onDelete: onDelete
+					, onEdit: ${onEditJSFunction}
+					, onDelete: ${onDeleteJSFunction}
 				  } );
-
-		function onCreate( teamMember ) {
-			console.log( 'onCreate: ', teamMember );
-		}
-
-		function onEdit( teamMember ) {
-			console.log( 'onEdit: ', teamMember );
-		}
-
-		function onDelete( teamMemberId ) {
-			console.log( 'onDelete: ', teamMemberId );
-		}
 	} );
 </script>
 

@@ -51,7 +51,7 @@
 					<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 					<c:set var="isGroupOperationAccessible" value="${photoGroupOperationEntry.groupOperationAccessible}"/>
 
-					<div class="block-border photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
+					<div class="block-border photo-container photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
 						<div class="floatleft text-centered" style="height: auto; min-height: 230px;" onclick="toggleCheckbox( '${photo.id}' );">
 
@@ -75,13 +75,14 @@
 								<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 								<c:if test="${photoGroupOperationEntryProperty.photoId == photo.id}">
 									<c:set var="entryId" value="${photoGroupOperationEntryProperty.entryId}" />
-
 									<c:set var="fieldId" value="photoGroupOperationEntryPropertiesMap['${photo.id}_${entryId}'].value"/>
-
-									<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
-									${photoGroupOperationEntryProperty.name}
-									<br />
-									<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
+									<div id="container-${entryId}">
+										<input type="checkbox" id="${fieldId}" name="${fieldId}" value="true" class="group-operation-checkbox-${entryId} checkbox-${photo.id}" <c:if test="${photoGroupOperationEntryProperty.value}">checked</c:if> />
+										${photoGroupOperationEntryProperty.name}
+										<br />
+										<input type="hidden" id="_${fieldId}" name="_${fieldId}" value="false">
+										<input type="hidden" id="photoId" value="${photo.id}">
+									</div>
 								</c:if>
 							</c:forEach>
 
@@ -112,9 +113,60 @@
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
+				<script type="text/javascript">
+
+
+					function onEdit( teamMember ) {
+
+						var name = teamMember.get( 'userTeamMemberName' ) + " ( " + teamMember.get( 'teamMemberTypeName' ) + " )";
+						var userTeamMemberId = teamMember.get( 'userTeamMemberId' );
+
+						require( [ 'jquery' ], function ( $ ) {
+							$( ".photo-container" ).each( function( index, container ) {
+
+								var label = $( '.label-' + userTeamMemberId, container );
+
+								if ( label.length > 0 ) {
+									label.text( name );
+								} else {
+									var photoId = $( '#photoId', container );
+									var containerId = photoId + '_' + userTeamMemberId;
+
+									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
+
+									memberContainer.append( "<input type='checkbox' id='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value' "
+											+ "name='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value' value='true' "
+											+ "class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>"
+									);
+
+									memberContainer.append( "<label for='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value'>"
+											+ "<span class='label-" + userTeamMemberId + "'>" + name + "</span></label>"
+									);
+									console.log( memberContainer );
+									container.append( memberContainer );
+								}
+							});
+						} );
+					}
+
+					function onDelete( teamMemberId ) {
+						require( [ 'jquery' ], function ( $ ) {
+							$( ".photo-container" ).each( function( index, container ) {
+								$( '#container-' + teamMemberId, container ).remove();
+							});
+						} );
+					}
+
+				</script>
+
 				<div style="float: left; width: 100%; padding-bottom: 10px;">
-					<user:userTeam userId="${photoGroupOperationModel.user.id}" groupSelectionClass="group-operation-checkbox-" />
+					<user:userTeam userId="${photoGroupOperationModel.user.id}"
+								   groupSelectionClass="group-operation-checkbox-"
+								   onEditJSFunction="onEdit"
+								   onDeleteJSFunction="onDelete"
+							/>
 				</div>
+
 			</c:if>
 
 			<c:if test="${photoGroupOperationType == 'ARRANGE_NUDE_CONTENT'}">

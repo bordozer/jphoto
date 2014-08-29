@@ -1,7 +1,6 @@
 package core.services.photo.list;
 
 import core.enums.FavoriteEntryType;
-import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
@@ -982,11 +981,6 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 					;
 			}
 		};
-	}
-
-	@Override
-	public TimeRange getTimeRange( final int days ) {
-		return new TimeRange( dateUtilsService.getDatesOffsetFromCurrentDate( -days + 1 ), dateUtilsService.getCurrentTime() );
 	}
 
 	private PhotoListQueryBuilder builder() {

@@ -69,6 +69,4 @@ public interface PhotoListFactoryService {
 	AbstractPhotoListFactory userBookmarkedPhotos( final User user, final FavoriteEntryType favoriteEntryType, final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory photosOfFavoriteAuthorsOfUser( final User user, final int page, final int itemsOnPage, final User accessor );
-
-	TimeRange getTimeRange( int days );
 }

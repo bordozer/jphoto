@@ -17,7 +17,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		initialize: function( options ) {
-			this.onCreate = options.onCreate;
 			this.onEdit = options.onEdit;
 			this.onDelete = options.onDelete;
 
@@ -49,7 +48,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entryView = new EntryView( {
 				model: teamMember
 				, massSelectorCss: massSelectorCss
-				, onCreate: view.onCreate
 				, onEdit: view.onEdit
 				, onDelete: view.onDelete
 			} );
@@ -103,7 +101,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		initialize: function( options ) {
 			this.massSelectorCss = options.massSelectorCss;
 
-			this.onCreate = options.onCreate;
 			this.onEdit = options.onEdit;
 			this.onDelete = options.onDelete;
 
@@ -213,7 +210,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var massSelector = mass_checker.getMassChecker();
 			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), "/images" );  // TODO: pass image path
 
-			this.onCreate( this.model ); // TODO: save and edit are the same
+			if ( this.onEdit != undefined ) {
+				this.onEdit( this.model ); // TODO: save and edit are the same
+			}
 		},
 
 		onSaveError: function( response ) {
@@ -289,6 +288,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			}
 
 			this.model.destroy();
+			if ( this.onDelete != undefined ) {
+				this.onDelete( this.model.get( 'userTeamMemberId' ) );
+			}
 		},
 
 		onSaveDataClick: function( evt ) {
