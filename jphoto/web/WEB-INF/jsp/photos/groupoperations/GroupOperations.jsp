@@ -122,28 +122,23 @@
 						var userTeamMemberId = teamMember.get( 'userTeamMemberId' );
 
 						require( [ 'jquery' ], function ( $ ) {
-							$( ".photo-container" ).each( function( index, container ) {
-
+							$( ".photo-container" ).each( function( index, _container ) {
+								var container = $( _container );
 								var label = $( '.label-' + userTeamMemberId, container );
 
 								if ( label.length > 0 ) {
 									label.text( name );
 								} else {
-									var photoId = $( '#photoId', container );
+									var photoId = $( '#photoId', container ).val();
 									var containerId = photoId + '_' + userTeamMemberId;
 
 									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
+									var id = "photoGroupOperationEntryPropertiesMap[" + containerId + "].value";
 
-									memberContainer.append( "<input type='checkbox' id='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value' "
-											+ "name='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value' value='true' "
-											+ "class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>"
-									);
+									memberContainer.append( "<input type='checkbox' id='" + id + "' name='" + id + "' value='true' class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>" );
+									memberContainer.append( "<label for='" + id + "'><span class='label-" + userTeamMemberId + "'>" + name + "</span></label>" );
 
-									memberContainer.append( "<label for='photoGroupOperationEntryPropertiesMap[\'" + containerId + "\'].value'>"
-											+ "<span class='label-" + userTeamMemberId + "'>" + name + "</span></label>"
-									);
-									console.log( memberContainer );
-									container.append( memberContainer );
+									$( container ).append( memberContainer );
 								}
 							});
 						} );
