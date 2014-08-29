@@ -54,6 +54,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			this.$el.append( entryView.render().$el );
 
+			// TODO: duoplicates!
 			if( massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
 				var css = massSelectorCss + teamMember.get( 'userTeamMemberId' );
@@ -125,7 +126,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		render: function () {
-
 			var modelJSON = this.model.toJSON();
 
 			modelJSON[ 'translationsDTO' ] = this.model.get( 'translationDTO' );
@@ -140,6 +140,13 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				this.$( '.user-team-member-name' ).select();
 			} else if ( this.model.get( 'openInfo' ) ) {
 				this.$el.append( this.userTeamMemberViewTemplate( modelJSON ) );
+			}
+
+			// TODO: duoplicates!
+			if( this.massSelectorCss != '' ) {
+				var massSelector = mass_checker.getMassChecker();
+				var css = this.massSelectorCss + this.model.get( 'userTeamMemberId' );
+				massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
 			}
 
 			return this;
