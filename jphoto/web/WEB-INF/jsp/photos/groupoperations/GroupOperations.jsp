@@ -133,10 +133,13 @@
 									var containerId = photoId + '_' + userTeamMemberId;
 
 									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
-									var id = "photoGroupOperationEntryPropertiesMap[" + containerId + "].value";
+									var id = "photoGroupOperationEntryPropertiesMap['" + containerId + "'].value";
 
-									memberContainer.append( "<input type='checkbox' id='" + id + "' name='" + id + "' value='true' class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>" );
-									memberContainer.append( "<label for='" + id + "'><span class='label-" + userTeamMemberId + "'>" + name + "</span></label>" );
+									memberContainer.append( "<input type='checkbox' id=\"" + id + "\" name=\"" + id + "\" value='true' class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>" );
+									memberContainer.append( " <label for=\"" + id + "\"><span class='label-" + userTeamMemberId + "'>" + name + "</span></label>" );
+									memberContainer.append( "<br />" );
+									memberContainer.append( "<input type='hidden' id=\"_" + id + "\" name=\"_" + id + "\" value='false'>" );
+									memberContainer.append( "<input type='hidden' id='photoId' value='" + photoId + "'>" );
 
 									$( container ).append( memberContainer );
 								}

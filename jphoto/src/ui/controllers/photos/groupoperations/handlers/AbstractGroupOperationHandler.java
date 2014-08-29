@@ -110,6 +110,7 @@ public abstract class AbstractGroupOperationHandler {
 		final UserPhotoFilePathUtilsService userPhotoFilePathUtilsService = services.getUserPhotoFilePathUtilsService();
 
 		final List<PhotoGroupOperationEntry> photoGroupOperationEntries = newArrayList();
+
 		for ( final String _photoId : model.getSelectedPhotoIds() ) {
 			final int photoId = NumberUtils.convertToInt( _photoId );
 			if ( ! photoService.exists( photoId ) ) {

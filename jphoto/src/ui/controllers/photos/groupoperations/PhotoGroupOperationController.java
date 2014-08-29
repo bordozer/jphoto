@@ -48,8 +48,6 @@ public class PhotoGroupOperationController {
 	@RequestMapping( method = RequestMethod.POST, value = "/" )
 	public String showSelectedPhotos( final @ModelAttribute( MODEL_NAME ) PhotoGroupOperationModel model, final HttpServletRequest request ) {
 
-		// TODO: validate operations?
-
 		model.clear();
 
 		model.setUser( EnvironmentContext.getCurrentUser() );
@@ -80,7 +78,7 @@ public class PhotoGroupOperationController {
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/confirm/" )
-	public String addToAlbum( @Valid final @ModelAttribute( MODEL_NAME ) PhotoGroupOperationModel model, final BindingResult result ) {
+	public String addToAlbum( @Valid final @ModelAttribute( MODEL_NAME ) PhotoGroupOperationModel model, final BindingResult result, final HttpServletRequest request ) {
 
 		model.setBindingResult( result );
 		if ( result.hasErrors() ) {
