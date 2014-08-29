@@ -338,6 +338,21 @@
 	</translation>
 
 	<translation>
+		<nerd>$1 task(s) have been activated</nerd>
+		<ru><![CDATA[$1 задач(и) было активировано]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 task(s) have been deactivated</nerd>
+		<ru><![CDATA[$1 задач(и)было деактивировано]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>$1 task(s) have been deleted</nerd>
+		<ru><![CDATA[$1 задач было удалено]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>
