@@ -50,9 +50,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			this.$el.html( this.template( modelJSON ) );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerSelected( "restriction-type-user", "/images" );  // TODO: pass image path
-			massSelector.registerSelected( "restriction-type-photo", "/images" ); // TODO: pass image path
-			massSelector.registerUnselected( "restriction-status", "/images" );   // TODO: pass image path
+			massSelector.registerSelected( "restriction-type-user", Backbone.JPhoto.imageFolder() );
+			massSelector.registerSelected( "restriction-type-photo", Backbone.JPhoto.imageFolder() );
+			massSelector.registerUnselected( "restriction-status", Backbone.JPhoto.imageFolder() );
 
 			this.renderUserPicker();
 		},

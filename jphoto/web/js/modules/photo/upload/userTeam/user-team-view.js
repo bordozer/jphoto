@@ -58,7 +58,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			if( massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
 				var css = massSelectorCss + teamMember.get( 'userTeamMemberId' );
-				massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
+				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
 			}
 		},
 
@@ -146,7 +146,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			if( this.massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
 				var css = this.massSelectorCss + this.model.get( 'userTeamMemberId' );
-				massSelector.registerUnselected( css, "/images" );  // TODO: pass image path
+				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
 			}
 
 			return this;
@@ -215,7 +215,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			showUIMessage_Notification( this.model.get( 'translationDTO' )[ 'dataSavedSuccessfully' ] );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), "/images" );  // TODO: pass image path
+			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), Backbone.JPhoto.imageFolder() );
 
 			if ( this.onEdit != undefined ) {
 				this.onEdit( this.model ); // TODO: save and edit are the same

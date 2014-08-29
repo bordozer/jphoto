@@ -18,6 +18,10 @@ define( [ 'backbone', 'underscore' ], function ( Backbone, _ ) {
 			return this.options.ajaxService;
 		},
 
+		imageFolder: function() {
+			return this.options.imageFolder;
+		},
+
 		translate: function( nerd ) {
 			return this.options.ajaxService.translate( nerd );
 		}

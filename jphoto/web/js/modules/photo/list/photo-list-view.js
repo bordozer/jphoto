@@ -58,7 +58,7 @@ define( ["backbone", "jquery", "underscore"
 			element_admin_flag_1.append( element_admin_flag_2 );
 
 			_.each( this.model.get( 'specialRestrictionIcons' ), function( iconDTO ) {
-				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='background-image: url(/images/" + iconDTO.icon + ");'></div>" ) );
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='background-image: url(/" + Backbone.JPhoto.imageFolder() + "/" + iconDTO.icon + ");'></div>" ) );
 			} );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {

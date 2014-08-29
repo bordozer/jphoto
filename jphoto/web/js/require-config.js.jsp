@@ -108,6 +108,7 @@ var require = {
 		var options = {
 			baseUrl: '${baseUrl}'
 			, ajaxService: jsonRPC.ajaxService
+			, imageFolder: '${eco:imageFolderURL()}'
 		};
 
 		core( options );
