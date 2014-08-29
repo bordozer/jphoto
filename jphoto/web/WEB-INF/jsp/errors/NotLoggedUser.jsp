@@ -22,8 +22,6 @@
 <c:set var="pageModel" value="<%=pageModel%>" />
 <c:set var="exceptionMessage" value="${exceptionModel.exceptionMessage}" />
 
-<c:set var="messageTranslated" value="${eco:translate( title ) }" />
-
 <tags:page pageModel="${pageModel}">
 
 	<div class="errorHandlingMessage">
@@ -34,7 +32,7 @@
 		<br />
 		<br />
 
-		<html:img id="accessdenied" src="icons128/accessdenied.png" width="128" height="128" alt="${messageTranslated}" />
+		<html:img id="accessdenied" src="icons128/accessdenied.png" width="128" height="128" alt="${title}" />
 	</div>
 
 </tags:page>
