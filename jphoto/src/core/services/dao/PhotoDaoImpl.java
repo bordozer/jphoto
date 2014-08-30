@@ -263,7 +263,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( "userId", userId );
 		paramSource.addValue( "importId", importId );
 
-		return hasEntry( sql, paramSource );
+		return getEntryOrNull( sql, paramSource, new IdsRowMapper() ) != null;
 	}
 
 	private int getUserGenrePhotosQty( final int userId, final int genreId ) {
