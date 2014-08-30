@@ -51,19 +51,17 @@
 					<c:set var="photo" value="${photoGroupOperationEntry.photo}"/>
 					<c:set var="isGroupOperationAccessible" value="${photoGroupOperationEntry.groupOperationAccessible}"/>
 
-					<div class="block-border photo-container photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 300px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
+					<div class="block-border photo-container photo-container-${photo.id}" style="position: relative; display: inline-block; vertical-align: top; min-height: 400px; height: auto; width: ${width}%; ${isGroupOperationAccessible ? "" : "border: 1px solid red;" } padding: 5px; margin: 5px;">
 
-						<div class="floatleft text-centered" style="height: auto; min-height: 230px;" onclick="toggleCheckbox( '${photo.id}' );">
+						<div class="floatleft text-centered" style="height: auto; min-height: 320px; padding-bottom: 5px;" onclick="toggleCheckbox( '${photo.id}' );">
 
 							<links:photoCard id="${photo.id}">
-								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: middle;" title="${photo.nameEscaped}"/>
+								<img src="${photoGroupOperationEntry.photoPreviewImgUrl}" class="photo-preview-image" style="vertical-align: top;" title="${photo.nameEscaped}"/>
 							</links:photoCard>
-							<br/>
-							<br/>
 
 						</div>
 
-						<div class="floatleft" style="text-align: center;">
+						<div class="floatleft" style="text-align: center; padding-bottom: 10px;">
 							<photo:photoCard photo="${photo}"/>
 						</div>
 
