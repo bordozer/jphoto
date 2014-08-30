@@ -23,7 +23,6 @@ public class GroupOperationServiceImpl implements GroupOperationService {
 
 	@Override
 	public PhotoGroupOperationMenuContainer getPhotoListPhotoGroupOperationMenuContainer( final User user ) {
-
 		if ( securityService.isSuperAdminUser( user.getId() ) ) {
 			return new PhotoGroupOperationMenuContainer( getSuperAdminGroupOperationMenus() );
 		}

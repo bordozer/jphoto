@@ -125,11 +125,12 @@ public abstract class AbstractPhotoListFactory {
 	}
 
 	public PhotoGroupOperationMenuContainer getPhotoGroupOperationMenuContainerForUserCard( final User user ) {
+
 		if ( UserUtils.isUsersEqual( user, accessor ) ) {
 			return new PhotoGroupOperationMenuContainer( services.getGroupOperationService().getUserOwnPhotosGroupOperationMenus() );
 		}
 
-		return services.getGroupOperationService().getNoPhotoGroupOperationMenuContainer();
+		return services.getGroupOperationService().getPhotoListPhotoGroupOperationMenuContainer( accessor );
 	}
 
 	private List<Integer> filterOutHiddenPhotos( final List<Integer> idsToShow, Date time ) {
