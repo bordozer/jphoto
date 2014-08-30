@@ -6,7 +6,20 @@
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
 <%@ attribute name="userPhotosByGenres" required="true" type="java.util.List" %>
 
+<c:set var="separator" value="&nbsp;&middot;&nbsp" />
+
 <c:if test="${not empty userPhotosByGenres}">
+
+	<style type="text/css">
+		.user-photos {
+			display: inline-block;
+			width: auto;
+			padding-right: 10px;
+			padding-left: 10px;
+			text-wrap: avoid;
+			height: 25px;
+		}
+	</style>
 
 	<c:set var="total" value="0" />
 	<c:forEach var="userPhotosByGenre" items="${userPhotosByGenres}">
@@ -15,19 +28,17 @@
 
 	<div style="float: left; width: 100%; text-align: center;">
 
-		<links:userPhotos user="${user}" /> ( ${total} ) &nbsp;-&nbsp;
+		<div class="user-photos"><links:userPhotos user="${user}" /> ( ${total} )</div> ${separator}
 
 		<c:forEach var="userPhotosByGenre" items="${userPhotosByGenres}" varStatus="status">
 
 			<c:set var="genre" value="${userPhotosByGenre.genre}" />
 			<c:set var="photosQty" value="${userPhotosByGenre.photosQty}" />
 
-			<div style="display: inline-block; width: auto; text-wrap: avoid;">
-				<links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )
-			</div>
+			<div class="user-photos"><links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )</div>
 
 			<c:if test="${not status.last}">
-				&nbsp;-&nbsp;
+				${separator}
 			</c:if>
 
 		</c:forEach>
