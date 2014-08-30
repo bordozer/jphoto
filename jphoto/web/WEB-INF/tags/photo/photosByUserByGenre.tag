@@ -22,7 +22,9 @@
 			<c:set var="genre" value="${userPhotosByGenre.genre}" />
 			<c:set var="photosQty" value="${userPhotosByGenre.photosQty}" />
 
-			<links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )
+			<div style="display: inline-block; width: auto; text-wrap: avoid;">
+				<links:photosByUserByGenre user="${user}" genre="${genre}"/> ( ${photosQty} )
+			</div>
 
 			<c:if test="${not status.last}">
 				&nbsp;-&nbsp;
