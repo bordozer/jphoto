@@ -29,6 +29,10 @@ public class BaseDaoImpl {
 		return entries.get( 0 );
 	}
 
+	protected boolean hasEntries( final String sql, final MapSqlParameterSource paramSource, final RowMapper rowMapper ) {
+		return getEntryOrNull( sql, paramSource, rowMapper) != null;
+	}
+
 	protected boolean existsInt( final String sql, final MapSqlParameterSource paramSource ) {
 		return getIntValueOrZero( sql, paramSource ) > 0;
 	}
