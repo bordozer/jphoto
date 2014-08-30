@@ -257,13 +257,13 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 	@Override
 	public boolean isUserPhotoImported( final int userId, final int importId ) {
-		final String sql = String.format( "SELECT 1 FROM %s WHERE %s=:userId AND %s=:importId;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_IMPORT_ID );
+		final String sql = String.format( "SELECT 1 FROM %s WHERE %s=:userId AND %s=:importId LIMIT 1;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_IMPORT_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
 		paramSource.addValue( "importId", importId );
 
-		return hasEntries( sql, paramSource, new IdsRowMapper() );
+		return hasEntry( sql, paramSource );
 	}
 
 	private int getUserGenrePhotosQty( final int userId, final int genreId ) {
