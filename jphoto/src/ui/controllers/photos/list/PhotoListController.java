@@ -556,7 +556,7 @@ public class PhotoListController {
 
 		final SqlSelectIdsResult selectResult = photoService.load( selectIdsQuery );
 
-		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Search result", getLanguage() ) );
+		final PhotoList photoList = new PhotoList( selectResult.getIds(), translatorService.translate( "Photo list: Search result", getLanguage() ) );
 		photoList.setPhotoGroupOperationMenuContainer( groupOperationService.getPhotoListPhotoGroupOperationMenuContainer( currentUser ) );
 		model.addPhotoList( photoList );
 
