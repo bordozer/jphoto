@@ -218,6 +218,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo data / Photo team / Entry info / Icon: Can not delete this entry</nerd>
+		<ru><![CDATA[отмечен(а) как участник съемок одной или более работ. Вы не можете его(ее) удалить.]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo data / Photo team / Entry edit / Icon: Cancel</nerd>
 		<ru><![CDATA[Закрыть]]></ru>
 	</translation>

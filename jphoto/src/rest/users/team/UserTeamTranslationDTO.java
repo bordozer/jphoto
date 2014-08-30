@@ -16,6 +16,7 @@ public class UserTeamTranslationDTO {
 	private final String entryInfoIconTitleCard;
 	private final String entryInfoIconTitleEdit;
 	private final String entryInfoIconTitleDelete;
+	private final String entryInfoIconTitleCanNotDelete;
 
 	private final String entryEditIconCancelCard;
 	private final String entryEditIconSaveCard;
@@ -44,6 +45,7 @@ public class UserTeamTranslationDTO {
 		entryInfoIconTitleCard = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Card", language );
 		entryInfoIconTitleEdit = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Edit", language );
 		entryInfoIconTitleDelete = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Delete", language );
+		entryInfoIconTitleCanNotDelete = translatorService.translate( "Photo data / Photo team / Entry info / Icon: Can not delete this entry", language );
 
 		entryEditIconCancelCard = translatorService.translate( "Photo data / Photo team / Entry edit / Icon: Cancel", language );
 		entryEditIconSaveCard = translatorService.translate( "Photo data / Photo team / Entry edit / Icon: Save", language );
@@ -90,6 +92,10 @@ public class UserTeamTranslationDTO {
 
 	public String getEntryInfoIconTitleDelete() {
 		return entryInfoIconTitleDelete;
+	}
+
+	public String getEntryInfoIconTitleCanNotDelete() {
+		return entryInfoIconTitleCanNotDelete;
 	}
 
 	public String getEntryEditIconCancelCard() {

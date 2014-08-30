@@ -115,6 +115,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			"click .user-team-member-info": "onToggleInfo",
 			"click .user-team-member-edit": "onToggleEditor",
 			"click .user-team-member-delete": "onEntryDelete",
+			"click .user-team-member-can-not-delete": "onCanNotDeleteClick",
 			"change .user-team-member-checkbox": "onToggleCheckbox",
 
 			"keydown .user-team-member-data": "onDataChange",
@@ -251,6 +252,13 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.stopImmediatePropagation();
 
 			this.deleteEntry();
+		},
+
+		onCanNotDeleteClick: function( evt ) {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+
+			showUIMessage_Information( this.model.get( 'userTeamMemberName' ) + ' ' + this.model.get( 'translationDTO' ).entryInfoIconTitleCanNotDelete );
 		},
 
 		onToggleCheckbox: function( evt ) {
