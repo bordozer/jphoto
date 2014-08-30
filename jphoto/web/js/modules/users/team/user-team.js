@@ -1,5 +1,5 @@
-define( ["modules/photo/upload/userTeam/user-team-model"
-		, "modules/photo/upload/userTeam/user-team-view"
+define( ["modules/users/team/user-team-model"
+		, "modules/users/team/user-team-view"
 		, "jquery"], function ( Model, View, $ ) {
 
 	function init( options ) {

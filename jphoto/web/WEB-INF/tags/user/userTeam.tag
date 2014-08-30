@@ -65,7 +65,7 @@
 </style>
 
 <script type="text/javascript">
-	require( ['modules/photo/upload/userTeam/user-team'], function ( userTeam ) {
+	require( ['modules/users/team/user-team'], function ( userTeam ) {
 
 		var userTeamMemberTypes = ${userTeamMemberTypes};
 		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};

@@ -1,9 +1,9 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
-		, "modules/photo/upload/userTeam/user-team-model"
-		, "text!modules/photo/upload/userTeam/templates/header-template.html"
-		, "text!modules/photo/upload/userTeam/templates/list-entry-template.html"
-		, "text!modules/photo/upload/userTeam/templates/entry-info-template.html"
-		, "text!modules/photo/upload/userTeam/templates/entry-edit-template.html"
+		, "modules/users/team/user-team-model"
+		, "text!modules/users/team/templates/header-template.html"
+		, "text!modules/users/team/templates/list-entry-template.html"
+		, "text!modules/users/team/templates/entry-info-template.html"
+		, "text!modules/users/team/templates/entry-edit-template.html"
 		], function ( Backbone, $, _, mass_checker, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
