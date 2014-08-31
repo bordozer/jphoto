@@ -25,6 +25,7 @@ public class CachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadStra
 
 	@Override
 	public List<RemotePhoto> download() throws IOException {
+
 		final List<RemotePhoto> result = newArrayList();
 
 		for ( final RemotePhotoData remotePhotoData : remotePhotosData ) {

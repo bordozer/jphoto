@@ -27,7 +27,6 @@ public class NotCachedRemotePhotosDownloadStrategy extends RemotePhotosDownloadS
 
 	@Override
 	public List<RemotePhoto> download() throws IOException {
-
 		remotePhotoSiteCacheXmlUtils.prepareUserGenreFolders( remoteUser, remotePhotosData );
 
 		return downloadAndCacheRemoteImages( remotePhotosData );

@@ -61,8 +61,8 @@ public class Photo35ContentDataExtractor extends AbstractRemotePhotoSitePageCont
 
 	@Override
 	public String getPhotoIdRegex( final String remotePhotoSiteUserId ) {
-		// <a href="http://babakfatholahi.35photo.ru/photo_740647/"><img src="http://35photo.ru/photos_col/r2/148/740647_500r.jpg" width="280"></img></a>
-		return String.format( "<a href=\"http://%s.%s/photo_(.+?)/", remotePhotoSiteUserId, getHost() );
+		// <div><a href="http://babakfatholahi.35photo.ru/photo_740647/"><img src="http://35photo.ru/photos_col/r2/148/740647_500r.jpg" width="280"></img></a>
+		return String.format( "<div><a href=\"http://%s.%s/photo_(.+?)/", remotePhotoSiteUserId, getHost() );
 	}
 
 	@Override
