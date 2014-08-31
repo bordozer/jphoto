@@ -94,7 +94,7 @@
 							<div class="user-picker-container" style="float: left; width: 100%;"></div>
 							<script type="text/javascript">
 								require( ['components/user-picker/user-picker'], function ( userPicker ) {
-									userPicker( "userIdToCleanup", 10870, onSelectUser, $( '.user-picker-container' ) );
+									userPicker( "userIdToCleanup", 0, onSelectUser, $( '.user-picker-container' ) );
 								} );
 
 								function onSelectUser( user ) {
