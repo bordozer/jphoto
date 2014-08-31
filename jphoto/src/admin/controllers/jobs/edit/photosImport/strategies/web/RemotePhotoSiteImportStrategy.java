@@ -159,7 +159,6 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			filterOutPhotosWithWrongCategories( photosToImportData );
 
 			final RemotePhotoDownloader photoDownloader = new RemotePhotoDownloader( job, remoteUser, photosToImportData, xmlUtils, remoteContentHelper, importParameters.getImportSource(), services );
-
 			cachedUserPhotosData.addAll( photoDownloader.getNotCachedRemotePhotosData() );
 			xmlUtils.recreateUserCacheFile( remoteUser, cachedUserPhotosData, services.getDateUtilsService() );
 

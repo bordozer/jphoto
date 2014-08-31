@@ -1,12 +1,13 @@
 package admin.controllers.control;
 
 import core.general.cache.CacheKey;
+import core.general.user.User;
 import core.services.entry.PrivateMessageService;
 import core.services.photo.PhotoCommentService;
 import core.services.photo.PhotoPreviewService;
 import core.services.photo.PhotoService;
+import core.services.security.SecurityService;
 import core.services.system.CacheService;
-import core.services.translator.TranslatorService;
 import core.services.user.UserService;
 import core.services.utils.SystemVarsService;
 import core.services.utils.UrlUtilsService;
@@ -17,7 +18,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ui.context.EnvironmentContext;
 import ui.services.breadcrumbs.BreadcrumbsAdminService;
+import utils.NumberUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping( value = "control-panel" )
@@ -37,9 +43,6 @@ public class ControlPanelController {
 	private SystemVarsService systemVarsService;
 
 	@Autowired
-	private TranslatorService translatorService;
-
-	@Autowired
 	private CacheService cacheService;
 
 	@Autowired
@@ -56,6 +59,9 @@ public class ControlPanelController {
 
 	@Autowired
 	private PrivateMessageService privateMessageService;
+
+	@Autowired
+	private SecurityService securityService;
 
 	@ModelAttribute( MODEL_NAME )
 	public ControlPanelModel prepareModel() {
@@ -86,13 +92,23 @@ public class ControlPanelController {
 		return getRedirectUrl();
 	}
 
-	/*@RequestMapping( method = RequestMethod.POST, value = "/reload-translations/" )
-	public String reloadTranslations( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) throws DocumentException {
+	@RequestMapping( method = RequestMethod.POST, value = "/cleanup-user/" )
+	public String reloadTranslations( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model, final HttpServletRequest request ) {
 
-		translatorService.initTranslations();
+		final String userPickerId = request.getParameter( "userIdToCleanup" );
+		securityService.assertUserExists( userPickerId );
+
+		final int userId = NumberUtils.convertToInt( userPickerId );
+
+		securityService.assertSuperAdminAccess( EnvironmentContext.getCurrentUser() );
+
+		final List<Integer> photosIds = photoService.getUserPhotosIds( userId );
+		for ( final Integer photosId : photosIds ) {
+			photoService.delete( photosId );
+		}
 
 		return getRedirectUrl();
-	}*/
+	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/clear-cache/" )
 	public String clearSystemCache( final @ModelAttribute( MODEL_NAME ) ControlPanelModel model ) throws DocumentException {

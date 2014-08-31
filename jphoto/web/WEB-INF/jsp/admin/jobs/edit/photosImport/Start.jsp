@@ -103,7 +103,7 @@
 												} );
 
 												function callbackFunction( user ) {
-													console.log( 'callback: ', user.userId );
+
 												}
 											</script>
 										</table:td>

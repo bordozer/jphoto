@@ -58,6 +58,26 @@
 	</translation>
 
 	<translation>
+		<nerd>Control panel: Delete user photos</nerd>
+		<ru><![CDATA[Удаление работ пользователя]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Control panel: Delete user photos?</nerd>
+		<ru><![CDATA[Удалить ВСЕ работы пользователя?]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Control panel: delete photos</nerd>
+		<ru><![CDATA[Удалить работы]]></ru>
+	</translation>
+
+	<translation>
+		<nerd></nerd>
+		<ru><![CDATA[]]></ru>
+	</translation>
+
+	<translation>
 		<nerd></nerd>
 		<ru><![CDATA[]]></ru>
 	</translation>

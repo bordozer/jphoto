@@ -9,6 +9,7 @@
 
 <jsp:useBean id="controlPanelModel" type="admin.controllers.control.ControlPanelModel" scope="request"/>
 <c:set var="tabWidth" value="450" />
+<c:set var="containerWidth" value="30%" />
 
 <tags:page pageModel="${controlPanelModel.pageModel}">
 
@@ -16,7 +17,7 @@
 
 		<div class="floatleft">
 
-			<div class="floatleft" style="width: 30%;">
+			<div class="floatleft" style="width: ${containerWidth};">
 				<table:table width="${tabWidth}">
 
 					<table:separatorInfo colspan="2" title="${eco:translate('Control panel: System tab')}" />
@@ -43,7 +44,7 @@
 				</table:table>
 			</div>
 
-			<div class="floatleft" style="width: 30%;">
+			<div class="floatleft" style="width: ${containerWidth};">
 				<table:table width="${tabWidth}">
 
 					<table:separatorInfo colspan="3" title="${eco:translate('Control panel: Statistics tab')}" />
@@ -78,6 +79,31 @@
 						<table:td cssClass="textright">${eco:translate('Control panel: Private messages total')}</table:td>
 						<table:td>${controlPanelModel.privateMessagesTotal}</table:td>
 						<table:td></table:td>
+					</table:tr>
+
+				</table:table>
+			</div>
+
+			<div class="floatleft" style="width: ${containerWidth};">
+				<table:table width="${tabWidth}">
+
+					<table:separatorInfo colspan="1" title="${eco:translate('Control panel: Delete user photos')}" />
+
+					<table:tr>
+						<table:td>
+							<div class="user-picker-container" style="float: left; width: 100%;"></div>
+							<script type="text/javascript">
+								require( ['components/user-picker/user-picker'], function ( userPicker ) {
+									userPicker( "userIdToCleanup", 10870, onSelectUser, $( '.user-picker-container' ) );
+								} );
+
+								function onSelectUser( user ) {
+
+								}
+							</script>
+							<html:submitButton id="cleanup-user" caption_t="Control panel: delete photos"
+											   onclick="return submitControlPanelForm( 'cleanup-user', '${eco:translate('Control panel: Delete user photos?')}' );"/>
+						</table:td>
 					</table:tr>
 
 				</table:table>
