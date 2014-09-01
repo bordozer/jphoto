@@ -64,16 +64,18 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		createAlbum: function() {
 
+			var model = this.model;
 			var translationDTO = this.model[ 'translationDTO' ];
 
 			var albumModel = new Model.AlbumModel( {
 				  userAlbumId: 0
-				, userId: 0
+				, userId: model.userId
 				, albumName: ''
 				, checked: true
 				, openEditor: true
 				, translationDTO: translationDTO
 			} );
+			console.log( albumModel );
 			this.model.add( albumModel );
 		},
 

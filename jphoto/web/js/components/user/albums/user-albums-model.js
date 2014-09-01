@@ -9,6 +9,10 @@ define( ["backbone"], function ( Backbone ) {
 		, hasUnsavedChanged: false
 		, translationDTO: []
 
+		, initialize: function ( options ) {
+			this.userId = options.userId;
+		}
+
 		, defaults: function() {
 			return {
 				openEditor: false
@@ -24,6 +28,7 @@ define( ["backbone"], function ( Backbone ) {
 
 		initialize: function ( options ) {
 			this.url = Backbone.JPhoto.url( "rest/users/" + options.userId + "/albums/" );
+			this.userId = options.userId;
 			this.selectedAlbumIds = options.selectedAlbumIds;
 			this.groupSelectionClass = options.groupSelectionClass;
 			this.translationDTO = options.translationDTO;
