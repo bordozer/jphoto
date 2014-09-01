@@ -170,7 +170,12 @@
 			<table:tdtext text_t="Photo uploading: Photo albums" labelFor="photoAlbumIds1"/>
 
 			<table:tddata>
-				<form:checkboxes items="${photoEditDataModel.userPhotoAlbums}" path="photoAlbumIds" itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="true"/>
+				<%--<form:checkboxes items="${photoEditDataModel.userPhotoAlbums}" path="photoAlbumIds" itemLabel="name" itemValue="id" delimiter="<br/>" htmlEscape="true"/>--%>
+				<user:userAlbums userId="${photoEditDataModel.photoAuthor.id}"
+					selectedIds="${photoEditDataModel.photoAlbumIds}"
+					onEditJSFunction="doNothing"
+					onDeleteJSFunction="doNothing"
+				/>
 			</table:tddata>
 		</table:tredit>
 

@@ -274,7 +274,11 @@ public class PhotoEditDataController {
 		final List<UserPhotoAlbum> result = newArrayList();
 
 		for ( final String photoAlbumId : photoAlbumIds ) {
-			result.add( userPhotoAlbumService.load( Integer.parseInt( photoAlbumId ) ) );
+			final int albumId = NumberUtils.convertToInt( photoAlbumId );
+			if ( albumId == 0 ) {
+				continue;
+			}
+			result.add( userPhotoAlbumService.load( albumId ) );
 		}
 
 		return result;

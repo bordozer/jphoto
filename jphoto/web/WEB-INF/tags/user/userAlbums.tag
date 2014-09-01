@@ -2,18 +2,22 @@
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="org.json.JSONObject" %>
+<%@ tag import="org.json.JSONArray" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ attribute name="userId" type="java.lang.Integer" required="true" %>
+<%@ attribute name="selectedIds" type="java.util.List" required="false" %>
 <%@ attribute name="groupSelectionClass" type="java.lang.String" required="false" %>
 <%@ attribute name="onEditJSFunction" type="java.lang.String" required="false" %>
 <%@ attribute name="onDeleteJSFunction" type="java.lang.String" required="false" %>
 
 <%
+	final JSONArray selectedIdsJson = new JSONArray( selectedIds );
 	final UserAlbumTranslationDTO translationDTO = new UserAlbumTranslationDTO( ApplicationContextHelper.getTranslatorService(), EnvironmentContext.getLanguage() );
 %>
 <c:set var="translationDTO" value="<%=new JSONObject( translationDTO )%>" />
+<c:set var="selectedIdsJson" value="<%=selectedIdsJson%>" />
 
 <style type="text/css">
 
@@ -42,7 +46,7 @@
 
 	require( ['components/user/albums/user-albums'], function ( func ) {
 
-		var selectedAlbumIds = [];
+		var selectedAlbumIds = ${selectedIdsJson};
 		var translationDTO = ${translationDTO};
 
 		func( { userId: ${userId}

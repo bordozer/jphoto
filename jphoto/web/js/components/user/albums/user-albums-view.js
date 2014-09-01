@@ -156,7 +156,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entryDiv = $( "<div class='user-album-list-entry'></div>" );
 
 			if( this.massSelectorCss == '' ) {
-				entryDiv.append( "<input type='checkbox' name='userAlbumsIds' class='user-album-checkbox user-album-checkbox-" + modelJSON.userAlbumId + "'"
+				entryDiv.append( "<input type='checkbox' name='photoAlbumIds' class='user-album-checkbox user-album-checkbox-" + modelJSON.userAlbumId + "'"
 				 + " value='" + modelJSON.userAlbumId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
 			}
 
