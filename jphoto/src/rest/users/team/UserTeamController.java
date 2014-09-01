@@ -5,7 +5,6 @@ import core.general.photo.Photo;
 import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
-import core.services.photo.PhotoService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
 import core.services.user.UserTeamService;

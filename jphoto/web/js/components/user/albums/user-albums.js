@@ -4,21 +4,21 @@ define( ["components/user/albums/user-albums-model"
 
 	function init( options ) {
 
-		var entriesModel = new Model.EntriesModel( {
+		var albumsModel = new Model.AlbumsModel( {
 				userId: options.userId
 				, selectedAlbumIds: options.selectedAlbumIds
 				, groupSelectionClass: options.groupSelectionClass
 				, translationDTO: options.translationDTO
 			} );
 
-		var entryListView = new View.EntryListView( {
-				model: entriesModel
+		var albumListView = new View.AlbumListView( {
+				model: albumsModel
 				, el: options.container
 				, onEdit: options.onEdit
 				, onDelete: options.onDelete
 		} );
-		entryListView.renderHeader();
-		entryListView.render();
+		albumListView.renderHeader();
+		albumListView.render();
 	}
 
 	return init;

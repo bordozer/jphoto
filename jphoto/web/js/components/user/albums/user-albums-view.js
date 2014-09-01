@@ -7,7 +7,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 	'use strict';
 
-	var EntryListView = Backbone.View.extend( {
+	var AlbumListView = Backbone.View.extend( {
 
 		headerTemplate:_.template( headerTemplate ),
 
@@ -45,14 +45,14 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var view = this;
 
 			var massSelectorCss = this.model.groupSelectionClass;
-			var entryView = new EntryView( {
+			var albumView = new AlbumView( {
 				model: album
 				, massSelectorCss: massSelectorCss
 				, onEdit: view.onEdit
 				, onDelete: view.onDelete
 			} );
 
-			this.$el.append( entryView.render().$el );
+			this.$el.append( albumView.render().$el );
 
 			// TODO: duplicates!
 			if( massSelectorCss != '' ) {
@@ -66,8 +66,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			var translationDTO = this.model[ 'translationDTO' ];
 
-			var albumModel = new Model.EntryModel( {
+			var albumModel = new Model.AlbumModel( {
 				  userAlbumId: 0
+				, userId: 0
 				, albumName: ''
 				, checked: true
 				, openEditor: true
@@ -91,7 +92,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 	});
 
 
-	var EntryView = Backbone.View.extend({
+	var AlbumView = Backbone.View.extend({
 
 		infoViewTemplate:_.template( entryInfoTemplate ),
 		editorTemplate:_.template( entryEditorTemplate ),
@@ -331,5 +332,5 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 	});
 
-	return { EntryListView: EntryListView };
+	return { AlbumListView: AlbumListView };
 });

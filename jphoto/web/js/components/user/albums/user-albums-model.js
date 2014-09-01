@@ -1,6 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var EntryModel = Backbone.Model.extend( {
+	var AlbumModel = Backbone.Model.extend( {
 
 		idAttribute: 'userAlbumId',
 
@@ -16,9 +16,9 @@ define( ["backbone"], function ( Backbone ) {
 		}
 	});
 
-	var EntriesModel = Backbone.Collection.extend( {
+	var AlbumsModel = Backbone.Collection.extend( {
 
-		model: EntryModel,
+		model: AlbumModel,
 		userTeamMemberTypes: [],
 		translationDTO: [],
 
@@ -34,5 +34,5 @@ define( ["backbone"], function ( Backbone ) {
 		}
 	});
 
-	return { EntriesModel:EntriesModel, EntryModel: EntryModel };
+	return { AlbumsModel:AlbumsModel, AlbumModel: AlbumModel };
 } );

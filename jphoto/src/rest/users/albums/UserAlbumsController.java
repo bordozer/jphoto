@@ -49,6 +49,12 @@ public class UserAlbumsController {
 		return dto;
 	}
 
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{userAlbumId}" )
+	@ResponseBody
+	public boolean deleteUserTeamMember( final @PathVariable( "userAlbumId" ) int userAlbumId ) {
+		return userPhotoAlbumService.delete( userAlbumId );
+	}
+
 	private List<UserAlbumDTO> getUserAlbumDTOs( final int userId ) {
 		final ArrayList<UserAlbumDTO> result = newArrayList();
 
