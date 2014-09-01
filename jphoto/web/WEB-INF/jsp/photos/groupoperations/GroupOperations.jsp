@@ -124,7 +124,6 @@
 			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
 				<script type="text/javascript">
 
-
 					function onEdit( teamMember ) {
 
 						var name = teamMember.get( 'userTeamMemberName' ) + " ( " + teamMember.get( 'teamMemberTypeName' ) + " )";
@@ -139,7 +138,6 @@
 									label.text( name );
 								} else {
 									var photoId = $( '#photoId', container ).val();
-									var containerId = photoId + '_' + userTeamMemberId;
 
 									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
 									var id = "photo-" + photoId + "-entry-" + userTeamMemberId;
