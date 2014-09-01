@@ -5,6 +5,7 @@
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table" %>
 <%@ taglib prefix="photo" tagdir="/WEB-INF/tags/photo" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/user" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <jsp:useBean id="photoEditDataModel" type="ui.controllers.photos.edit.PhotoEditDataModel" scope="request"/>
@@ -47,5 +48,13 @@
 	</form:form>
 
 	<tags:springErrorHighliting bindingResult="${photoEditDataModel.bindingResult}"/>
+
+	<user:userAlbums userId="${photoUploadAllowance.photoAuthor.id}"
+				onEditJSFunction="doNothing"
+				onDeleteJSFunction="doNothing"
+			/>
+	<script type="text/javascript">
+		function doNothing() {}
+	</script>
 
 </tags:page>

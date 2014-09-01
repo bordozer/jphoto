@@ -22,7 +22,7 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Controller
-@RequestMapping( "/users/{userId}/team/" )
+@RequestMapping( "/users/{userId}/team" )
 public class UserTeamController {
 
 	@Autowired
