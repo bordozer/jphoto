@@ -52,7 +52,7 @@
 		func( { userId: ${userId}
 					, container: $( '.user-album-container' )
 					, selectedAlbumIds: selectedAlbumIds
-					, groupSelectionClass: ''
+					, groupSelectionClass: '${groupSelectionClass}'
 					, translationDTO: translationDTO
 					, onEdit: ${onEditJSFunction}
 					, onDelete: ${onDeleteJSFunction}
