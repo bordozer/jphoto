@@ -67,7 +67,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
 			var translationDTO = this.model[ 'translationDTO' ];
 
-			var teamMember = new Model.EntryModel( {
+			var teamMember = new Model.EditableListEntryModel( {
 				  userTeamMemberId: 0
 				, userTeamMemberName: ''
 				, checked: true

@@ -1,6 +1,6 @@
 define( ["backbone"], function ( Backbone ) {
 
-	var EntryModel = Backbone.Model.extend( {
+	var EditableListEntryModel = Backbone.Model.extend( {
 
 		idAttribute: 'entryId',
 
@@ -17,18 +17,19 @@ define( ["backbone"], function ( Backbone ) {
 		}
 	});
 
-	var EntriesModel = Backbone.Collection.extend( {
+	var EditableListModel = Backbone.Collection.extend( {
 
-		model: EntryModel,
+		model: EditableListEntryModel,
 		userTeamMemberTypes: [],
 		translationDTO: [],
 
 		initialize: function ( options ) {
 			this.url = Backbone.JPhoto.url( "/rest/users/" + options.userId + "/team/" );
+			this.translationDTO = options.translationDTO;
+			this.groupSelectionClass = options.groupSelectionClass;
+
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
 			this.selectedUserTeamMemberIds = options.selectedUserTeamMemberIds;
-			this.groupSelectionClass = options.groupSelectionClass;
-			this.translationDTO = options.translationDTO;
 		},
 
 		refresh: function() {
@@ -36,5 +37,5 @@ define( ["backbone"], function ( Backbone ) {
 		}
 	});
 
-	return { EntriesModel:EntriesModel, EntryModel: EntryModel };
+	return { EditableListModel:EditableListModel, EditableListEntryModel: EditableListEntryModel };
 } );

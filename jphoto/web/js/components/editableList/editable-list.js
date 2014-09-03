@@ -4,7 +4,7 @@ define( ["components/editableList/editable-list-model"
 
 	function init( options ) {
 
-		var entriesModel = new Model.EntriesModel( {
+		var editableListModel = new Model.EditableListModel( {
 				userId: options.userId
 				, userTeamMemberTypes: options.userTeamMemberTypes
 				, selectedUserTeamMemberIds: options.selectedUserTeamMemberIds
@@ -13,7 +13,7 @@ define( ["components/editableList/editable-list-model"
 			} );
 
 		var entryListView = new View.EntryListView( {
-				model: entriesModel
+				model: editableListModel
 				, el: options.container
 				, onEdit: options.onEdit
 				, onDelete: options.onDelete
