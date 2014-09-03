@@ -12,6 +12,7 @@ define( ["components/editableList/entries/team/user-team-model"
 			, groupSelectionClass: options.groupSelectionClass
 			, translationDTO: options.translationDTO
 		});
+		console.log( editableListModel );
 
 		var editableListView = new View.EntryListView( {
 				model: editableListModel
