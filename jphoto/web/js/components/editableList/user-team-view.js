@@ -57,7 +57,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			// TODO: duoplicates!
 			if( massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
-				var css = massSelectorCss + teamMember.get( 'userTeamMemberId' );
+				var css = massSelectorCss + teamMember.get( 'entryId' );
 				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
 			}
 		},
@@ -79,7 +79,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		deleteEntry: function( teamMember ) {
-			var teamMemberId = teamMember.get( 'userTeamMemberId' );
+			var teamMemberId = teamMember.get( 'entryId' );
 			this.model.remove( teamMemberId );
 			this.model.onDelete( teamMemberId );
 		},
@@ -146,7 +146,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			// TODO: duoplicates!
 			if( this.massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
-				var css = this.massSelectorCss + this.model.get( 'userTeamMemberId' );
+				var css = this.massSelectorCss + this.model.get( 'entryId' );
 				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
 			}
 
@@ -157,24 +157,24 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entryDiv = $( "<div class='user-team-list-entry'></div>" );
 
 			if( this.massSelectorCss == '' ) {
-				entryDiv.append( "<input type='checkbox' name='userTeamMemberIds' class='user-team-member-checkbox user-team-member-checkbox-" + modelJSON.userTeamMemberId + "'"
-				 + " value='" + modelJSON.userTeamMemberId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
+				entryDiv.append( "<input type='checkbox' name='userTeamMemberIds' class='user-team-member-checkbox user-team-member-checkbox-" + modelJSON.entryId + "'"
+				 + " value='" + modelJSON.entryId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
 			}
 
 			if( this.massSelectorCss != '' ) {
-				entryDiv.append( "<img class='" + 'mass-selector-icon-' + this.massSelectorCss + modelJSON.userTeamMemberId + "' width='16' height='16' /> " );
+				entryDiv.append( "<img class='" + 'mass-selector-icon-' + this.massSelectorCss + modelJSON.entryId + "' width='16' height='16' /> " );
 			}
 
-			if( modelJSON.userTeamMemberId > 0 && ! modelJSON.openEditor ) {
+			if( modelJSON.entryId > 0 && ! modelJSON.openEditor ) {
 				entryDiv.append( "<a href='#' class='user-team-member-info' onclick='return false;' title='" + modelJSON.userTeamMemberNameTitle + "'>"
 										+ modelJSON.userTeamMemberName + "</a> - " + modelJSON.teamMemberPhotosQty + " " + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
-			if( modelJSON.userTeamMemberId > 0 && modelJSON.openEditor ) {
+			if( modelJSON.entryId > 0 && modelJSON.openEditor ) {
 				entryDiv.append( modelJSON.userTeamMemberName + " - " + modelJSON.teamMemberPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
-			if( modelJSON.userTeamMemberId == 0 ) {
+			if( modelJSON.entryId == 0 ) {
 				entryDiv.append( modelJSON.translationsDTO.newEntryDefaultName );
 			}
 
@@ -216,7 +216,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			showUIMessage_Notification( this.model.get( 'translationDTO' )[ 'dataSavedSuccessfully' ] );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userTeamMemberId' ), Backbone.JPhoto.imageFolder() );
+			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'entryId' ), Backbone.JPhoto.imageFolder() );
 
 			if ( this.onEdit != undefined ) {
 				this.onEdit( this.model ); // TODO: save and edit are the same
@@ -279,7 +279,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		onCloseEditorWithoutChanges: function() {
 
-			if ( this.model.get( 'userTeamMemberId' ) > 0 ) {
+			if ( this.model.get( 'entryId' ) > 0 ) {
 				this.closeEditor(); // close editor of an existing team member
 				return;
 			}
@@ -304,7 +304,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			this.model.destroy();
 			if ( this.onDelete != undefined ) {
-				this.onDelete( this.model.get( 'userTeamMemberId' ) );
+				this.onDelete( this.model.get( 'entryId' ) );
 			}
 		},
 
@@ -327,7 +327,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				return;
 			}
 
-			if ( this.model.get( 'userTeamMemberId' ) > 0 ) {
+			if ( this.model.get( 'entryId' ) > 0 ) {
 				this.closeEditor(); // discard unsaved changes of an existing team member
 				return;
 			}

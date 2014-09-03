@@ -2,7 +2,7 @@ define( ["backbone"], function ( Backbone ) {
 
 	var EntryModel = Backbone.Model.extend( {
 
-		idAttribute: 'userTeamMemberId',
+		idAttribute: 'entryId',
 
 		openInfo: false
 		, openEditor: false
