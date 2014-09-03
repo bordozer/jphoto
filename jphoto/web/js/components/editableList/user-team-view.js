@@ -1,9 +1,9 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
-		, "components/user/team/user-team-model"
-		, "text!components/user/team/templates/header-template.html"
-		, "text!components/user/team/templates/list-entry-template.html"
-		, "text!components/user/team/templates/entry-info-template.html"
-		, "text!components/user/team/templates/entry-edit-template.html"
+		, "components/editableList/user-team-model"
+		, "text!components/editableList/templates/header-template.html"
+		, "text!components/editableList/templates/list-entry-template.html"
+		, "text!components/editableList/templates/entry-info-template.html"
+		, "text!components/editableList/templates/entry-edit-template.html"
 		], function ( Backbone, $, _, mass_checker, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';

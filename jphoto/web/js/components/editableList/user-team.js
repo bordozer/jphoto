@@ -1,5 +1,5 @@
-define( ["components/user/team/user-team-model"
-		, "components/user/team/user-team-view"
+define( ["components/editableList/user-team-model"
+		, "components/editableList/user-team-view"
 		, "jquery"], function ( Model, View, $ ) {
 
 	function init( options ) {
