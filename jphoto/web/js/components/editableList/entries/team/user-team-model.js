@@ -18,6 +18,9 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
 			this.selectedUserTeamMemberIds = options.selectedUserTeamMemberIds;
+
+			this.groupSelectionClass = options.groupSelectionClass;
+			this.translationDTO = options.translationDTO;
 		}
 	});
 

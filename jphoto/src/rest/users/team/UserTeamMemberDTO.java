@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserTeamMemberDTO {
 
-	private int userTeamMemberId;
+	private int entryId;
 	private String userTeamMemberName;
 	private boolean checked;
 	private String userTeamMemberCardUrl;
@@ -19,16 +19,16 @@ public class UserTeamMemberDTO {
 	public UserTeamMemberDTO() {
 	}
 
-	public UserTeamMemberDTO( final int userTeamMemberId ) {
-		this.userTeamMemberId = userTeamMemberId;
+	public UserTeamMemberDTO( final int entryId ) {
+		this.entryId = entryId;
 	}
 
-	public int getUserTeamMemberId() {
-		return userTeamMemberId;
+	public int getEntryId() {
+		return entryId;
 	}
 
-	public void setUserTeamMemberId( final int userTeamMemberId ) {
-		this.userTeamMemberId = userTeamMemberId;
+	public void setEntryId( final int entryId ) {
+		this.entryId = entryId;
 	}
 
 	public String getUserTeamMemberName() {
@@ -97,6 +97,6 @@ public class UserTeamMemberDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "#%d: '%s'", userTeamMemberId, userTeamMemberName );
+		return String.format( "#%d: '%s'", entryId, userTeamMemberName );
 	}
 }

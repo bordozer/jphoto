@@ -8,6 +8,7 @@ define( ["components/editableList/entries/team/user-team-model"
 			userId: options.userId
 			, userTeamMemberTypes: options.userTeamMemberTypes
 			, selectedUserTeamMemberIds: options.selectedUserTeamMemberIds
+
 			, groupSelectionClass: options.groupSelectionClass
 			, translationDTO: options.translationDTO
 		});

@@ -65,7 +65,7 @@ public class UserTeamController {
 		final UserTeamMember teamMember = new UserTeamMember();
 
 		teamMember.setUser( EnvironmentContext.getCurrentUser() );
-		teamMember.setId( dto.getUserTeamMemberId() );
+		teamMember.setId( dto.getEntryId() );
 		teamMember.setName( dto.getUserTeamMemberName() );
 
 		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( dto.getTeamMemberTypeId() );
@@ -73,7 +73,7 @@ public class UserTeamController {
 
 		userTeamService.save( teamMember );
 
-		dto.setUserTeamMemberId( teamMember.getId() );
+		dto.setEntryId( teamMember.getId() );
 		dto.setTeamMemberTypeName( translatorService.translate( teamMemberType.getName(), getLanguage() ) );
 		dto.setTeamMemberPhotosQty( userTeamService.getTeamMemberPhotosQty( teamMember.getId() ) );
 	}
