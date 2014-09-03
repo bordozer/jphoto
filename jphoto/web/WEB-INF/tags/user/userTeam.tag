@@ -65,21 +65,21 @@
 </style>
 
 <script type="text/javascript">
-	require( ['components/editableList/editable-list'], function ( userTeam ) {
+	require( ['components/editableList/entries/team/user-team'], function ( userTeam ) {
 
 		var userTeamMemberTypes = ${userTeamMemberTypes};
 		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
 		var translationDTO = ${translationDTO};
 
 		userTeam( { userId: ${userId}
-					, container: $( '.user-team-container' )
-					, userTeamMemberTypes: userTeamMemberTypes
-					, selectedUserTeamMemberIds: selectedUserTeamMemberIds
-					, groupSelectionClass: '${groupSelectionClass}'
-					, translationDTO: translationDTO
-					, onEdit: ${onEditJSFunction}
-					, onDelete: ${onDeleteJSFunction}
-				  } );
+			, container: $( '.user-team-container' )
+			, userTeamMemberTypes: userTeamMemberTypes
+			, selectedUserTeamMemberIds: selectedUserTeamMemberIds
+			, groupSelectionClass: '${groupSelectionClass}'
+			, translationDTO: translationDTO
+			, onEdit: ${onEditJSFunction}
+			, onDelete: ${onDeleteJSFunction}
+		  } );
 	} );
 </script>
 
