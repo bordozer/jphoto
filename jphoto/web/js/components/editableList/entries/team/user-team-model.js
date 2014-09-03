@@ -19,7 +19,6 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 			this.url = Backbone.JPhoto.url( "/rest/users/" + options.userId + "/team/" );
 
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
-			this.selectedUserTeamMemberIds = options.selectedUserTeamMemberIds;
 		}
 	});
 

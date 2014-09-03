@@ -68,13 +68,13 @@
 	require( ['components/editableList/entries/team/user-team'], function ( userTeam ) {
 
 		var userTeamMemberTypes = ${userTeamMemberTypes};
-		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
+		var selectedIds = ${selectedUserTeamMemberIdsJson};
 		var translationDTO = ${translationDTO};
 
 		userTeam( { userId: ${userId}
 			, container: $( '.user-team-container' )
 			, userTeamMemberTypes: userTeamMemberTypes
-			, selectedUserTeamMemberIds: selectedUserTeamMemberIds
+			, selectedIds: selectedIds
 			, groupSelectionClass: '${groupSelectionClass}'
 			, translationDTO: translationDTO
 			, onEdit: ${onEditJSFunction}

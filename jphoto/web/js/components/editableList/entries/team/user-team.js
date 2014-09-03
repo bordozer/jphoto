@@ -7,7 +7,7 @@ define( ["components/editableList/entries/team/user-team-model"
 		var editableListModel = new Model.UserTeamModel( {
 			userId: options.userId
 			, userTeamMemberTypes: options.userTeamMemberTypes
-			, selectedUserTeamMemberIds: options.selectedUserTeamMemberIds
+			, selectedIds: options.selectedIds
 
 			, groupSelectionClass: options.groupSelectionClass
 			, translationDTO: options.translationDTO
