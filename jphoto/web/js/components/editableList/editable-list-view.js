@@ -1,5 +1,5 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
-		, "components/editableList/user-team-model"
+		, "components/editableList/editable-list-model"
 		, "text!components/editableList/templates/header-template.html"
 		, "text!components/editableList/templates/list-entry-template.html"
 		, "text!components/editableList/templates/entry-info-template.html"

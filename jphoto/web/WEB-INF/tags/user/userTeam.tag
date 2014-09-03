@@ -65,7 +65,7 @@
 </style>
 
 <script type="text/javascript">
-	require( ['components/editableList/user-team'], function ( userTeam ) {
+	require( ['components/editableList/editable-list'], function ( userTeam ) {
 
 		var userTeamMemberTypes = ${userTeamMemberTypes};
 		var selectedUserTeamMemberIds = ${selectedUserTeamMemberIdsJson};
