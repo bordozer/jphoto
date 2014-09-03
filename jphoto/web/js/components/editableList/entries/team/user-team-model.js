@@ -14,13 +14,12 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 		model: UserTeamMemberModel,
 
 		initialize: function ( options ) {
+			UserTeamModel.__super__.initialize.apply( this, arguments );
+
 			this.url = Backbone.JPhoto.url( "/rest/users/" + options.userId + "/team/" );
 
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
 			this.selectedUserTeamMemberIds = options.selectedUserTeamMemberIds;
-
-			this.groupSelectionClass = options.groupSelectionClass;
-			this.translationDTO = options.translationDTO;
 		}
 	});
 

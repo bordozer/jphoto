@@ -22,7 +22,8 @@ define( [ "backbone" ], function ( Backbone ) {
 		translationDTO: [],
 
 		initialize: function ( options ) {
-
+			this.groupSelectionClass = options.groupSelectionClass;
+			this.translationDTO = options.translationDTO;
 		},
 
 		refresh: function() {
