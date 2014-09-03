@@ -2,9 +2,7 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 
 	var UserTeamMemberModel = EditableListModel.EditableListEntryModel.extend( {
 
-		defaults: _.extend( {}, EditableListModel.EditableListEntryModel.prototype.defaults
-				, { teamMemberTypeId: 1 }
-		)
+		defaults: _.extend( {}, EditableListModel.EditableListEntryModel.prototype.defaults, { teamMemberTypeId: 1 } )
 	});
 
 	var UserTeamModel = EditableListModel.EditableListModel.extend( {
@@ -20,5 +18,5 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 		}
 	});
 
-	return { UserTeamModel:UserTeamModel };
+	return { UserTeamModel:UserTeamModel, UserTeamMemberModel: UserTeamMemberModel };
 });

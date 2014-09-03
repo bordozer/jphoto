@@ -1,5 +1,5 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
-		, "components/editableList/editable-list-model"
+		, "components/editableList/entries/team/user-team-model"
 		, "text!components/editableList/templates/header-template.html"
 		, "text!components/editableList/templates/list-entry-template.html"
 		, "text!components/editableList/templates/entry-info-template.html"
@@ -67,7 +67,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
 			var translationDTO = this.model[ 'translationDTO' ];
 
-			var teamMember = new Model.EditableListEntryModel( {
+			var teamMember = new Model.UserTeamMemberModel( {
 				  userTeamMemberId: 0
 				, userTeamMemberName: ''
 				, checked: true
