@@ -1,8 +1,6 @@
 package rest.users.team;
 
 import core.enums.UserTeamMemberType;
-import core.general.photo.Photo;
-import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.Language;
