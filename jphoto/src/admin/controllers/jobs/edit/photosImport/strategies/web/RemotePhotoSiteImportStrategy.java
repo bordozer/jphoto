@@ -210,7 +210,10 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 		final Matcher matcher = pattern.matcher( userPageContent );
 
 		while ( matcher.find() && ! job.hasJobFinishedWithAnyResult() ) {
-			result.add( NumberUtils.convertToInt( matcher.group( 1 ) ) );
+			final int photoId = NumberUtils.convertToInt( matcher.group( 1 ) );
+			if ( ! result.contains( photoId ) ) {
+				result.add( photoId );
+			}
 		}
 
 		return result;
