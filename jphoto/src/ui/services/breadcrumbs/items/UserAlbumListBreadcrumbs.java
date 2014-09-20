@@ -15,6 +15,6 @@ public class UserAlbumListBreadcrumbs extends AbstractBreadcrumb {
 
 	@Override
 	public String getValue( final Language language ) {
-		return getEntityLinkUtilsService().getUserPhotoAlbumListLink( user.getId(), language );
+		return getEntityLinkUtilsService().getUserPhotoAlbumsWithPreviewsLink( user.getId(), language );
 	}
 }

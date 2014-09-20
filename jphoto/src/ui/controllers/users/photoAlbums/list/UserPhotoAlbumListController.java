@@ -56,6 +56,9 @@ public class UserPhotoAlbumListController {
 	public String albumList( final @ModelAttribute( MODEL_NAME ) UserPhotoAlbumListModel model ) {
 
 		final User user = model.getUser();
+
+		securityService.assertUserEqualsToCurrentUser( user );
+
 		final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadAllForEntry( user.getId() );
 		model.setUserPhotoAlbums( userPhotoAlbums );
 

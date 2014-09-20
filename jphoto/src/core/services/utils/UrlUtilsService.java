@@ -76,6 +76,8 @@ public interface UrlUtilsService {
 
 	String getUserPhotoAlbumListLink( final int userId );
 
+	String getUserPhotoAlbumsWithPreviewsLink( final int userId );
+
 	String getUserPhotoAlbumPhotosLink( final int userId, final int albumId );
 
 	String getUserDisableLink( final int userId );

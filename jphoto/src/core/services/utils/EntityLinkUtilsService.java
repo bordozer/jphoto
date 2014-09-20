@@ -53,6 +53,8 @@ public interface EntityLinkUtilsService {
 
 	String getUserPhotoAlbumListLink( int userId, final Language language );
 
+	String getUserPhotoAlbumsWithPreviewsLink( int userId, final Language language );
+
 	String getPhotosVotedByUserLinkUser( final User user, final Language language );
 
 	String getUserPhotoAlbumPhotosLink( UserPhotoAlbum photoAlbum, final Language language );

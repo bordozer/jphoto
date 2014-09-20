@@ -201,6 +201,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getUserPhotoAlbumsWithPreviewsLink( final int userId ) {
+		return String.format( "%s/%s/%s/card/albums/", getBaseURL(), USERS_URL, userId );
+	}
+
+	@Override
 	public String getUserPhotoAlbumPhotosLink( final int userId, final int albumId ) {
 		return String.format( "%s/%s/%d/albums/%d/", getBaseURL(), USERS_URL, userId, albumId );
 	}
