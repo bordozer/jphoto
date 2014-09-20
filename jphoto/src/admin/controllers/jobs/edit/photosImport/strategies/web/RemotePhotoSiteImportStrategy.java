@@ -452,7 +452,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 				remotePhotoData.setName( String.format( "%s #%d", photoName, photoNumberInSeries ) );
 
 				final RemotePhotoSiteSeries series = remotePhotoSiteImage.getSeries();
-				series.setName( photoName );
+				series.setName( String.format( "%s ( #%d )", photoName, series.getId() ) );
 
 				remotePhotoData.setRemotePhotoSiteSeries( series );
 			} else {
