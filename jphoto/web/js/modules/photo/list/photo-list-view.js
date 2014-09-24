@@ -94,14 +94,12 @@ define( ["backbone", "jquery", "underscore"
 
 		, events: {
 			"click .photo-context-menu-icon": "onPhotoContextMenuIconClick"
-//			, "click .admin-special-flag-restriction": "onRestrictionIconClick"
 		}
 
 		, photoContextMenuIconClick: function() {
 			var photoId = this.model.get( 'photoId' );
 
 			var menuElement = $( '.context-menu-photo-' + photoId, this.$el );
-//			console.log( 'Initializing a context menu for ', photoId, menuElement );
 
 			var photoContextMenuModel = new ContextMenuModel.ContextMenuModel( { entryId: photoId, entryMenuTypeId: 1, contextMenuEntryModel : this.model, contextMenuEntryView : this } );
 			var photoContextMenuView = new ContextMenuView.ContextMenuView( { model: photoContextMenuModel, el: menuElement } );
@@ -116,12 +114,11 @@ define( ["backbone", "jquery", "underscore"
 
 			_.each( this.model.get( 'photoBookmarkIcons' ), function( photoBookmarkIcon ) {
 
-				var container = $( '<div style="display: inline-block; margin-right: 3px;"></div>', el );
+				var container = $( '<div style="display: inline-block; margin-right: 3px;"></div>' );
+				iconsContainer.append( container );
 
 				var entryIconModel = new EntryIconModel.EntryIconModel( { userId: model.get( 'userId' ), bookmarkEntryId: model.get( 'photoId' ), bookmarkEntryTypeId: photoBookmarkIcon[ 'favoriteEntryTypeId' ] } );
 				var entryIconView = new EntryIconView.EntryIconView( { model: entryIconModel, el: container } );
-
-				iconsContainer.append( container );
 
 				entryIconModel.fetch( { cache: false } );
 			});
@@ -131,11 +128,6 @@ define( ["backbone", "jquery", "underscore"
 			evt.stopPropagation();
 			this.photoContextMenuIconClick();
 		}
-
-		/*, onRestrictionIconClick: function( evt ) {
-			evt.stopPropagation();
-			alert( this.model.get( 'showSpecialIcon_RestrictedText' ) );
-		}*/
 	} );
 
 	return { PhotoListEntryModelView:PhotoListEntryModelView };

@@ -7,6 +7,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.restriction.EntryRestriction;
 import core.general.user.User;
+import core.log.LogHelper;
 import core.services.entry.FavoritesService;
 import core.services.entry.GenreService;
 import core.services.photo.PhotoCommentService;
@@ -100,6 +101,8 @@ public class PhotoListEntryController {
 	@Autowired
 	private RestrictionService restrictionService;
 
+	private final LogHelper log = new LogHelper( PhotoListEntryController.class );
+
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
 	public PhotoEntryDTO photoListEntry( final @PathVariable( "photoId" ) int photoId, final HttpServletRequest request ) {
@@ -163,6 +166,8 @@ public class PhotoListEntryController {
 			}
 		}
 		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
+
+		log.debug( String.format( "Rendering photo list entry #%d: %s", photo.getId(), photo.getName() ) );
 
 		return dto;
 	}
