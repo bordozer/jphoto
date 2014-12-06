@@ -3,13 +3,17 @@ package ui.controllers.users.card;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
+import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.entry.ActivityStreamService;
+import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
 import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.UrlUtilsServiceImpl;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import org.springframework.stereotype.Controller;
@@ -24,6 +28,7 @@ import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Iterator;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -37,6 +42,9 @@ public class UserCardController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private PhotoService photoService;
 
 	@Autowired
 	private UserCardValidator userCardValidator;
@@ -155,8 +163,20 @@ public class UserCardController {
 			int itemsCount = 0;
 
 			switch ( cardTab ) {
+				case PHOTOS_OVERVIEW:
+					if ( photoService.getPhotosCountByUser( userId ) == 0 ) {
+						continue;
+					}
+					break;
 				case ALBUMS:
-					itemsCount = userPhotoAlbumService.loadAllForEntry( userId ).size();
+					final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadAllForEntry( userId );
+					CollectionUtils.filter( userPhotoAlbums, new Predicate<UserPhotoAlbum>() {
+						@Override
+						public boolean evaluate( final UserPhotoAlbum userPhotoAlbum ) {
+							return userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() ) > 0;
+						}
+					} );
+					itemsCount = userPhotoAlbums.size();
 					if ( itemsCount == 0 ) {
 						continue;
 					}
