@@ -157,12 +157,22 @@ public class UserCardController {
 			switch ( cardTab ) {
 				case ALBUMS:
 					itemsCount = userPhotoAlbumService.loadAllForEntry( userId ).size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
 					break;
 				case TEAM:
 					itemsCount = userTeamService.loadUserTeam( userId ).getUserTeamMembers().size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
 					break;
 				case ACTIVITY_STREAM:
 					itemsCount = activityStreamService.getUserActivities( userId ).size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
+					break;
 			}
 
 			userCardTabDTOs.add( new UserCardTabDTO( cardTab, itemsCount ) );
