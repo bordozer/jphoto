@@ -118,6 +118,11 @@ public class UserCardController {
 		return tab.isDefaultTab() ? VIEW_BRIEF : VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )
+	public String userTech() {
+		return UrlUtilsServiceImpl.UNDER_CONSTRUCTION_VIEW;
+	}
+
 	private void userCardTab( final String _userId, final UserCardTab userCardTab, final UserCardModel model, final PagingModel pagingModel ) {
 
 		securityService.assertUserExists( _userId );
@@ -141,10 +146,5 @@ public class UserCardController {
 		fillStrategy.fillModel();
 
 		model.setPageTitleData( breadcrumbsUserService.getUserCardBreadcrumbs( user, userCardTab ) );
-	}
-
-	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )
-	public String userTech() {
-		return UrlUtilsServiceImpl.UNDER_CONSTRUCTION_VIEW;
 	}
 }
