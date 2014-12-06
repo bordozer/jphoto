@@ -3,9 +3,12 @@ package ui.controllers.users.card;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
+import core.services.entry.ActivityStreamService;
 import core.services.security.SecurityService;
 import core.services.system.Services;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
+import core.services.user.UserTeamService;
 import core.services.utils.UrlUtilsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
@@ -21,6 +24,9 @@ import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 @Controller
 @RequestMapping( UrlUtilsServiceImpl.USERS_URL )
@@ -46,6 +52,15 @@ public class UserCardController {
 
 	@Autowired
 	private Services services;
+
+	@Autowired
+	private UserTeamService userTeamService;
+
+	@Autowired
+	private UserPhotoAlbumService userPhotoAlbumService;
+
+	@Autowired
+	private ActivityStreamService activityStreamService;
 
 	@InitBinder
 	protected void initBinder( WebDataBinder binder ) {
@@ -107,11 +122,14 @@ public class UserCardController {
 		final int userId = NumberUtils.convertToInt( _userId );
 		final DeviceType deviceType = EnvironmentContext.getDeviceType();
 
+		final User user = userService.load( userId );
+
 		model.clear();
 		model.setDeviceType( deviceType );
-		model.setSelectedUserCardTab( userCardTab );
 
-		final User user = userService.load( userId );
+		model.setSelectedUserCardTab( userCardTab );
+		model.setUserCardTabDTOs( getUserCardTabDTOs( user ) );
+
 		model.setUser( user );
 
 		model.setEditingUserDataIsAccessible( securityService.userCanEditUserData( EnvironmentContext.getCurrentUser(), user ) );
@@ -125,5 +143,31 @@ public class UserCardController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )
 	public String userTech() {
 		return UrlUtilsServiceImpl.UNDER_CONSTRUCTION_VIEW;
+	}
+
+	private List<UserCardTabDTO> getUserCardTabDTOs( final User user ) {
+		final int userId = user.getId();
+
+		final List<UserCardTabDTO> userCardTabDTOs = newArrayList();
+
+		for ( final UserCardTab cardTab : UserCardTab.values() ) {
+
+			int itemsCount = 0;
+
+			switch ( cardTab ) {
+				case ALBUMS:
+					itemsCount = userPhotoAlbumService.loadAllForEntry( userId ).size();
+					break;
+				case TEAM:
+					itemsCount = userTeamService.loadUserTeam( userId ).getUserTeamMembers().size();
+					break;
+				case ACTIVITY_STREAM:
+					itemsCount = activityStreamService.getUserActivities( userId ).size();
+			}
+
+			userCardTabDTOs.add( new UserCardTabDTO( cardTab, itemsCount ) );
+		}
+
+		return userCardTabDTOs;
 	}
 }

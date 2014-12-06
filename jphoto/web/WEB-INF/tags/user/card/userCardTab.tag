@@ -1,4 +1,3 @@
-<%@ tag import="core.enums.UserCardTab" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,11 +7,11 @@
 <%@ taglib prefix="links" tagdir="/WEB-INF/tags/links" %>
 
 <%@ attribute name="user" required="true" type="core.general.user.User" %>
+<%@ attribute name="userCardTabDTOs" required="true" type="java.util.List" %>
 <%@ attribute name="selectedTab" required="true" type="core.enums.UserCardTab" %>
 
 <c:set var="userCardLink" value="<%=ApplicationContextHelper.getUrlUtilsService().getUserCardLink( user.getId() )%>" />
-<c:set var="userCardTabs" value="<%=UserCardTab.values()%>" />
-<c:set var="userCardTabsLen" value="<%=UserCardTab.values().length%>" />
+<c:set var="userCardTabsLen" value="<%=userCardTabDTOs.size()%>" />
 
 <style type="text/css">
 	.userCardTab {
@@ -29,12 +28,16 @@
 
 <div class="block-border tabHeader">
 
-	<c:forEach var="userCardTab" items="${userCardTabs}">
+	<c:forEach var="userCardTabDTO" items="${userCardTabDTOs}">
 
+		<c:set var="userCardTab" value="${userCardTabDTO.userCardTab}" />
 		<c:set var="isSelectedTab" value="${selectedTab == userCardTab}" />
 
 		<div class="userCardTab block-border${isSelectedTab ? " block-background" : ""}">
 			<a href="${userCardLink}${userCardTab.key}/">${eco:translate(userCardTab.name)}</a>
+			<c:if test="${userCardTabDTO.itemsOnTab > 0}">
+				( ${userCardTabDTO.itemsOnTab} )
+			</c:if>
 		</div>
 
 	</c:forEach>

@@ -18,7 +18,7 @@
 
 	<tags:contextMenuJs />
 
-	<user:userCardTab user="${user}" selectedTab="${userCardModel.selectedUserCardTab}" />
+	<user:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
 
 	<userCardTabs:userPersonalData user="${user}" editingUserDataIsAccessible="${editingUserDataIsAccessible}" lastUserActivityTime="${userCardModel.lastUserActivityTime}" entryMenu="${userCardModel.entryMenu}" />
 

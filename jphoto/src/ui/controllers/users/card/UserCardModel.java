@@ -52,6 +52,7 @@ public class UserCardModel extends AbstractGeneralModel {
 	private Date lastUserActivityTime;
 
 	private UserCardTab selectedUserCardTab;
+	private List<UserCardTabDTO> userCardTabDTOs;
 	private List<UserPhotosByGenre> userPhotosByGenres;
 
 	private EntryMenu entryMenu;
@@ -215,6 +216,14 @@ public class UserCardModel extends AbstractGeneralModel {
 
 	public void setSelectedUserCardTab( final UserCardTab selectedUserCardTab ) {
 		this.selectedUserCardTab = selectedUserCardTab;
+	}
+
+	public List<UserCardTabDTO> getUserCardTabDTOs() {
+		return userCardTabDTOs;
+	}
+
+	public void setUserCardTabDTOs( final List<UserCardTabDTO> userCardTabDTOs ) {
+		this.userCardTabDTOs = userCardTabDTOs;
 	}
 
 	public List<PhotoList> getPhotoLists() {

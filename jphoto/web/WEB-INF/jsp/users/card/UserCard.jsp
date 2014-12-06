@@ -19,7 +19,7 @@
 
 	<tags:contextMenuJs />
 
-	<userCard:userCardTab user="${user}" selectedTab="${userCardModel.selectedUserCardTab}" />
+	<userCard:userCardTab user="${user}" userCardTabDTOs="${userCardModel.userCardTabDTOs}" selectedTab="${userCardModel.selectedUserCardTab}" />
 
 	<div class="floatleft" style="margin: 0 auto; margin-top: 30px;">
 
