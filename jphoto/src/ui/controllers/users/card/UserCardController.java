@@ -3,7 +3,6 @@ package ui.controllers.users.card;
 import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.user.User;
-import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.entry.ActivityStreamService;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
@@ -12,8 +11,6 @@ import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.UrlUtilsServiceImpl;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.DeviceType;
 import org.springframework.stereotype.Controller;
@@ -28,8 +25,6 @@ import utils.NumberUtils;
 import utils.PagingUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Iterator;
-import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -136,7 +131,7 @@ public class UserCardController {
 		model.setDeviceType( deviceType );
 
 		model.setSelectedUserCardTab( userCardTab );
-		model.setUserCardTabDTOs( getUserCardTabDTOs( user ) );
+		model.setUserCardTabDTOs( userCardModelFillService.getUserCardTabDTOs( user ) );
 
 		model.setUser( user );
 
@@ -151,53 +146,5 @@ public class UserCardController {
 	@RequestMapping( method = RequestMethod.GET, value = "/{userId}/tech/" )
 	public String userTech() {
 		return UrlUtilsServiceImpl.UNDER_CONSTRUCTION_VIEW;
-	}
-
-	private List<UserCardTabDTO> getUserCardTabDTOs( final User user ) {
-		final int userId = user.getId();
-
-		final List<UserCardTabDTO> userCardTabDTOs = newArrayList();
-
-		for ( final UserCardTab cardTab : UserCardTab.values() ) {
-
-			int itemsCount = 0;
-
-			switch ( cardTab ) {
-				case PHOTOS_OVERVIEW:
-					if ( photoService.getPhotosCountByUser( userId ) == 0 ) {
-						continue;
-					}
-					break;
-				case ALBUMS:
-					final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadAllForEntry( userId );
-					CollectionUtils.filter( userPhotoAlbums, new Predicate<UserPhotoAlbum>() {
-						@Override
-						public boolean evaluate( final UserPhotoAlbum userPhotoAlbum ) {
-							return userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() ) > 0;
-						}
-					} );
-					itemsCount = userPhotoAlbums.size();
-					if ( itemsCount == 0 ) {
-						continue;
-					}
-					break;
-				case TEAM:
-					itemsCount = userTeamService.loadUserTeam( userId ).getUserTeamMembers().size();
-					if ( itemsCount == 0 ) {
-						continue;
-					}
-					break;
-				case ACTIVITY_STREAM:
-					itemsCount = activityStreamService.getUserActivities( userId ).size();
-					if ( itemsCount == 0 ) {
-						continue;
-					}
-					break;
-			}
-
-			userCardTabDTOs.add( new UserCardTabDTO( cardTab, itemsCount ) );
-		}
-
-		return userCardTabDTOs;
 	}
 }

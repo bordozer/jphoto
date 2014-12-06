@@ -8,8 +8,10 @@ import core.general.user.userTeam.UserTeamMember;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.utils.DateUtilsService;
 import ui.activity.AbstractActivityStreamEntry;
+import ui.controllers.users.card.UserCardController;
 import ui.controllers.users.card.UserCardGenreInfo;
 import ui.controllers.users.card.UserCardModel;
+import ui.controllers.users.card.UserCardTabDTO;
 import ui.services.menu.entry.items.EntryMenu;
 
 import java.util.List;
@@ -52,4 +54,6 @@ public interface UserCardModelFillService {
 	Map<Integer, Integer> setUserPhotosCountByAlbums( final int userId );
 
 	DateUtilsService getDateUtilsService();
+
+	List<UserCardTabDTO> getUserCardTabDTOs( final User user );
 }

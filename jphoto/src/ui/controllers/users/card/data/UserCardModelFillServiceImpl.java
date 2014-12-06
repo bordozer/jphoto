@@ -1,5 +1,6 @@
 package ui.controllers.users.card.data;
 
+import core.enums.UserCardTab;
 import core.general.base.PagingModel;
 import core.general.configuration.ConfigurationKey;
 import core.general.genre.Genre;
@@ -16,7 +17,6 @@ import core.services.photo.PhotoVotingService;
 import core.services.photo.list.PhotoListFactoryService;
 import core.services.photo.list.factory.AbstractPhotoListFactory;
 import core.services.system.ConfigurationService;
-import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.DateUtilsService;
@@ -24,14 +24,14 @@ import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.*;
 import ui.activity.AbstractActivityStreamEntry;
 import ui.context.EnvironmentContext;
-import ui.controllers.users.card.UserCardGenreInfo;
-import ui.controllers.users.card.UserCardModel;
-import ui.controllers.users.card.UserStatistic;
+import ui.controllers.users.card.*;
 import ui.elements.PhotoList;
 import ui.services.menu.entry.EntryMenuService;
 import ui.services.menu.entry.items.EntryMenu;
@@ -348,5 +348,54 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	@Override
 	public DateUtilsService getDateUtilsService() {
 		return dateUtilsService;
+	}
+
+	@Override
+	public List<UserCardTabDTO> getUserCardTabDTOs( final User user ) {
+		final int userId = user.getId();
+
+		final List<UserCardTabDTO> userCardTabDTOs = newArrayList();
+
+		for ( final UserCardTab cardTab : UserCardTab.values() ) {
+
+			int itemsCount = 0;
+
+			switch ( cardTab ) {
+				case PHOTOS_OVERVIEW:
+					if ( photoService.getPhotosCountByUser( userId ) == 0 ) {
+						continue;
+					}
+					break;
+				case ALBUMS:
+					final List<UserPhotoAlbum> userPhotoAlbums = userPhotoAlbumService.loadAllForEntry( userId );
+					CollectionUtils.filter( userPhotoAlbums, new Predicate<UserPhotoAlbum>() {
+						@Override
+						public boolean evaluate( final UserPhotoAlbum userPhotoAlbum ) {
+							return userPhotoAlbumService.getUserPhotoAlbumPhotosQty( userPhotoAlbum.getId() ) > 0;
+						}
+					} );
+					itemsCount = userPhotoAlbums.size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
+					break;
+				case TEAM:
+					itemsCount = userTeamService.loadUserTeam( userId ).getUserTeamMembers().size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
+					break;
+				case ACTIVITY_STREAM:
+					itemsCount = activityStreamService.getUserActivities( userId ).size();
+					if ( itemsCount == 0 ) {
+						continue;
+					}
+					break;
+			}
+
+			userCardTabDTOs.add( new UserCardTabDTO( cardTab, itemsCount ) );
+		}
+
+		return userCardTabDTOs;
 	}
 }
