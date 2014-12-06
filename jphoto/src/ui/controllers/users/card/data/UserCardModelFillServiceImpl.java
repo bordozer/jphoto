@@ -20,6 +20,7 @@ import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.user.*;
 import core.services.utils.DateUtilsService;
+import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
 import core.services.utils.sql.BaseSqlUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
@@ -102,7 +103,7 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 	private PhotoListFactoryService photoListFactoryService;
 
 	@Autowired
-	private Services services;
+	private EntityLinkUtilsService entityLinkUtilsService;
 
 	@Override
 	public void setUserAvatar( final UserCardModel model ) {
@@ -296,7 +297,11 @@ public class UserCardModelFillServiceImpl implements UserCardModelFillService {
 		final List<Integer> ids = photoService.load( idsSQL ).getIds();
 
 		final int photosByGenre = photoService.getPhotosCountByUserAndGenre( user.getId(), genre.getId() );
-		final String title = translatorService.translate( "User card: $1: last photos. Total $2.", EnvironmentContext.getLanguage(), translatorService.translateGenre( genre, currentUser.getLanguage() ), String.valueOf( photosByGenre ) );
+		final String title = translatorService.translate( "User card: $1: last photos. Total $2."
+			, EnvironmentContext.getLanguage()
+			, entityLinkUtilsService.getPhotosByUserByGenreLink( user, genre, currentUser.getLanguage() )
+			, String.valueOf( photosByGenre )
+		);
 
 		final String link = urlUtilsService.getPhotosByUserByGenreLink( user.getId(), genre.getId() );
 
