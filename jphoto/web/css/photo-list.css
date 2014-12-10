@@ -148,10 +148,11 @@
 }
 
 .admin-special-flag-restriction {
-	position: relative;
+	/*position: relative;*/
+	position: absolute;
 	/*display: inline-block;*/
 	left: 290px;
-	top: 370px;
+	/*top: 370px;*/
 	width: 16px;
 	height: 16px;
 	background-repeat: no-repeat;

@@ -19,6 +19,7 @@ import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -101,6 +102,9 @@ public class PhotoListEntryController {
 	@Autowired
 	private RestrictionService restrictionService;
 
+	@Autowired
+	private UserPhotoAlbumService userPhotoAlbumService;
+
 	private final LogHelper log = new LogHelper( PhotoListEntryController.class );
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
@@ -166,6 +170,8 @@ public class PhotoListEntryController {
 			}
 		}
 		dto.setPhotoBookmarkIcons( photoBookmarkIcons );
+
+		dto.setMemberOfAlbum( ! userPhotoAlbumService.loadPhotoAlbums( photo.getId() ).isEmpty() );
 
 		log.debug( String.format( "Rendering photo list entry #%d: %s", photo.getId(), photo.getName() ) );
 
@@ -313,7 +319,11 @@ public class PhotoListEntryController {
 			);
 		}
 
-		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>", urlUtilsService.getPhotoCardLink( photo.getId() ), photo.getNameEscaped(), userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo ) );
+		return String.format( "<a href='%s' title='%s'><img src='%s' class='photo-preview-image block-border'/></a>"
+			, urlUtilsService.getPhotoCardLink( photo.getId() )
+			, photo.getNameEscaped()
+			, userPhotoFilePathUtilsService.getPhotoPreviewUrl( photo )
+		);
 	}
 
 	private String getPhotoAuthorLink( final Photo photo, final User accessor, final Language language ) {

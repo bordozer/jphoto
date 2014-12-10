@@ -55,6 +55,8 @@ public class PhotoEntryDTO {
 
 	protected Map<String, SpecialIconDTO> specialRestrictionIcons;
 
+	private boolean memberOfAlbum;
+
 	public PhotoEntryDTO( final int userId, final int photoId ) {
 		this.userId = userId;
 		this.photoId = photoId;
@@ -338,5 +340,13 @@ public class PhotoEntryDTO {
 
 	public void setNudeContentWarning4( final String nudeContentWarning4 ) {
 		this.nudeContentWarning4 = nudeContentWarning4;
+	}
+
+	public boolean isMemberOfAlbum() {
+		return memberOfAlbum;
+	}
+
+	public void setMemberOfAlbum( final boolean memberOfAlbum ) {
+		this.memberOfAlbum = memberOfAlbum;
 	}
 }

@@ -57,8 +57,14 @@ define( ["backbone", "jquery", "underscore"
 			}
 			element_admin_flag_1.append( element_admin_flag_2 );
 
+			var top = 280;
+			if ( this.model.get( 'memberOfAlbum' ) ) {
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' style=\"top: " + top + "px; background-image: url('" + Backbone.JPhoto.imageFolder() + "/photo-list-entry-album.png');\"></div>" ) );
+			}
+
 			_.each( this.model.get( 'specialRestrictionIcons' ), function( iconDTO ) {
-				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='background-image: url(" + Backbone.JPhoto.imageFolder() + "/" + iconDTO.icon + ");'></div>" ) );
+				top = top + 20;
+				element_admin_flag_2.append( $( "<div class='admin-special-flag-restriction' title='" + iconDTO.restrictionTypeName + "' style='top: " + top + "px; background-image: url(" + Backbone.JPhoto.imageFolder() + "/" + iconDTO.icon + ");'></div>" ) );
 			} );
 
 			if ( this.model.get( 'isGroupOperationEnabled' ) ) {
