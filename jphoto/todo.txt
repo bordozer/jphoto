@@ -50,3 +50,7 @@ Technical debt
 - Basic kwaqua tests
 - Missing Breadcrumbs new implementation
 - User picker Front/Back end
+
+
+Known bugs
+- Photo import: selected photo categoriea are not saved theirs states
