@@ -3,10 +3,12 @@ package ui.services.menu.main;
 import core.enums.FavoriteEntryType;
 import core.enums.PrivateMessageType;
 import core.general.configuration.ConfigurationKey;
+import core.general.data.TimeRange;
 import core.general.genre.Genre;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.services.entry.GenreService;
+import core.services.photo.PhotoVotingService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
@@ -46,6 +48,9 @@ public class MenuServiceImpl implements MenuService {
 
 	@Autowired
 	private ConfigurationService configurationService;
+
+	@Autowired
+	private PhotoVotingService photoVotingService;
 
 	@Override
 	public Map<MenuItem, List<MenuItem>> getMenuElements( final User user ) {
@@ -103,10 +108,11 @@ public class MenuServiceImpl implements MenuService {
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
 		final List<MenuItem> menuItems = newArrayList();
 
+//		menuItems.add( photosPopular() );
 		menuItems.add( photosAbsoluteBest() );
-
 		menuItems.add( photosTodayBest() );
 		menuItems.add( photosYesterdayBest() );
+
 		final MenuItem bestPhotos = photosPeriodBest( 3 );
 		menuItems.add( bestPhotos );
 		menuItems.add( photosWeekBest() );
@@ -651,10 +657,10 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem photosPeriodBest( final int days ) {
-		final Date dateFrom = dateUtilsService.getDatesOffsetFromCurrentDate( -days );
-		final Date dateTo = dateUtilsService.getCurrentDate();
+		final TimeRange dateRange = photoVotingService.getTopBestDateRange();
 		final String caption = translatorService.translate( "Main menu: Best for $1 days", getLanguage(), String.valueOf( days ) );
-		final String link = urlUtilsService.getPhotosBestInPeriodUrl( dateFrom, dateTo );
+		final String link = urlUtilsService.getPhotosBestInPeriodUrl( dateRange.getTimeFrom(), dateRange.getTimeTo() );
+
 		return new MenuItem( caption, link );
 	}
 
