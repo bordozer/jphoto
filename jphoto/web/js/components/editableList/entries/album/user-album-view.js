@@ -26,12 +26,12 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 
 		, renderNewEntryForm: function () {
-			var model = this.model;
+
 			var translationDTO = this.model[ 'translationDTO' ];
 
 			var albumModel = new Model.UserAlbumsModel( {
 				  entryId: 0
-				, userId: model.userId
+				, userId: this.model.userId
 				, albumName: ''
 				, checked: true
 				, openEditor: true

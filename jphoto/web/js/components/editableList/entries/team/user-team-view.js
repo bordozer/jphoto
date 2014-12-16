@@ -12,8 +12,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		renderEntry: function ( entry ) {
 
 			entry.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
-			var view = this;
 
+			var view = this;
 			var entryView = new EntryView( {
 				model: entry
 				, massSelectorCss: this.model.groupSelectionClass
@@ -27,6 +27,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 
 		, renderNewEntryForm: function () {
+
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
 			var translationDTO = this.model[ 'translationDTO' ];
 
