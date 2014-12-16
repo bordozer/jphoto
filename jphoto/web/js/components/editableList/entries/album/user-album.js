@@ -26,7 +26,6 @@ define( [ "jquery"
 			, onDelete: options.onDelete
 		} );
 		userAlbumsEntryListView.renderHeader();
-//		userAlbumsEntryListView.render();
 	}
 
 	return init;

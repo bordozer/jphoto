@@ -62,7 +62,7 @@ public class UserAlbumsController {
 
 		for ( final UserPhotoAlbum album : albums ) {
 			final UserAlbumDTO dto = new UserAlbumDTO();
-			dto.setUserAlbumId( album.getId() );
+			dto.setEntryId( album.getId() );
 			dto.setUserId( userId );
 			dto.setAlbumName( album.getName() ); // TODO: escaping
 			dto.setAlbumLink( urlUtilsService.getUserPhotoAlbumPhotosLink( userId, album.getId() ) );
@@ -76,14 +76,14 @@ public class UserAlbumsController {
 
 	private void doSaveUserAlbum( final UserAlbumDTO dto ) {
 		final UserPhotoAlbum album = new UserPhotoAlbum();
-		album.setId( dto.getUserAlbumId() );
+		album.setId( dto.getEntryId() );
 		album.setName( dto.getAlbumName() );
 		album.setUser( userService.load( dto.getUserId() ) );
 		album.setDescription( "" ); // TODO
 
 		userPhotoAlbumService.save( album );
 
-		dto.setUserAlbumId( album.getId() );
+		dto.setEntryId( album.getId() );
 		dto.setAlbumPhotosQty( getPhotosQty( album ) );
 	}
 

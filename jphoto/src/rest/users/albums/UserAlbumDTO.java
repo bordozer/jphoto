@@ -5,18 +5,18 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserAlbumDTO {
 
-	private int userAlbumId;
+	private int entryId;
 	private int userId;
 	private String albumName;
 	private String albumLink;
 	private int albumPhotosQty;
 
-	public void setUserAlbumId( final int userAlbumId ) {
-		this.userAlbumId = userAlbumId;
+	public int getEntryId() {
+		return entryId;
 	}
 
-	public int getUserAlbumId() {
-		return userAlbumId;
+	public void setEntryId( int entryId ) {
+		this.entryId = entryId;
 	}
 
 	public void setUserId( final int userId ) {

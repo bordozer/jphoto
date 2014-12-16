@@ -27,7 +27,6 @@ define( [ "jquery"
 				, onDelete: options.onDelete
 		} );
 		userTeamEntryListView.renderHeader();
-		userTeamEntryListView.render();
 	}
 
 	return init;

@@ -40,6 +40,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		renderEntry: function ( entry ) {
+
 			this.$el.append( this.entryCompositeView.renderEntry( entry ).$el );
 
 			var massSelectorCss = this.model.groupSelectionClass;

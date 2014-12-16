@@ -30,7 +30,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var translationDTO = this.model[ 'translationDTO' ];
 
 			var albumModel = new Model.UserAlbumsModel( {
-				  userAlbumId: 0
+				  entryId: 0
 				, userId: model.userId
 				, albumName: ''
 				, checked: true
@@ -43,7 +43,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 
 		, deleteEntry: function ( entry ) {
-			var entryId = entry.get( 'userAlbumId' );
+			var entryId = entry.get( 'entryId' );
 
 			this.model.remove( entryId );
 			this.model.onDelete( entryId );
@@ -101,7 +101,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			// TODO: duplicates!
 			if( this.massSelectorCss != '' ) {
 				var massSelector = mass_checker.getMassChecker();
-				var css = this.massSelectorCss + this.model.get( 'userAlbumId' );
+				var css = this.massSelectorCss + this.model.get( 'entryId' );
 				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
 			}
 
@@ -112,20 +112,20 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entryDiv = $( "<div class='user-album-list-entry'></div>" );
 
 			if( this.massSelectorCss == '' ) {
-				entryDiv.append( "<input type='checkbox' name='photoAlbumIds' class='user-album-checkbox user-album-checkbox-" + modelJSON.userAlbumId + "'"
-				 + " value='" + modelJSON.userAlbumId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
+				entryDiv.append( "<input type='checkbox' name='photoAlbumIds' class='user-album-checkbox user-album-checkbox-" + modelJSON.entryId + "'"
+				 + " value='" + modelJSON.entryId + "' " + ( modelJSON.checked ? "checked='checked'" : "" ) + " />" );
 			}
 
 			if( this.massSelectorCss != '' ) {
-				entryDiv.append( "<img class='" + 'mass-selector-icon-' + this.massSelectorCss + modelJSON.userAlbumId + "' width='16' height='16' /> " );
+				entryDiv.append( "<img class='" + 'mass-selector-icon-' + this.massSelectorCss + modelJSON.entryId + "' width='16' height='16' /> " );
 			}
 
-			if( modelJSON.userAlbumId > 0 && ! modelJSON.openEditor ) {
+			if( modelJSON.entryId > 0 && ! modelJSON.openEditor ) {
 				entryDiv.append( "<a href='#' class='user-album-info' onclick='return false;' title='" + modelJSON.albumName + "'>" + modelJSON.albumName + "</a> - "
 										 + modelJSON.albumPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
-			if( modelJSON.userAlbumId > 0 && modelJSON.openEditor ) {
+			if( modelJSON.entryId > 0 && modelJSON.openEditor ) {
 				entryDiv.append( modelJSON.albumName + " - " + modelJSON.albumPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
@@ -166,7 +166,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			showUIMessage_Notification( this.model.get( 'translationDTO' )[ 'dataSavedSuccessfully' ] );
 
 			var massSelector = mass_checker.getMassChecker();
-			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'userAlbumId' ), Backbone.JPhoto.imageFolder() );
+			massSelector.registerUnselected( this.massSelectorCss + this.model.get( 'entryId' ), Backbone.JPhoto.imageFolder() );
 
 			if ( this.onEdit != undefined ) {
 				this.onEdit( this.model ); // TODO: save and edit are the same
@@ -229,7 +229,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 		onCloseEditorWithoutChanges: function() {
 
-			if ( this.model.get( 'userAlbumId' ) > 0 ) {
+			if ( this.model.get( 'entryId' ) > 0 ) {
 				this.closeEditor(); // close editor of an existing album
 				return;
 			}
@@ -254,7 +254,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			this.model.destroy();
 			if ( this.onDelete != undefined ) {
-				this.onDelete( this.model.get( 'userAlbumId' ) );
+				this.onDelete( this.model.get( 'entryId' ) );
 			}
 		},
 
@@ -277,7 +277,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				return;
 			}
 
-			if ( this.model.get( 'userAlbumId' ) > 0 ) {
+			if ( this.model.get( 'entryId' ) > 0 ) {
 				this.closeEditor(); // discard unsaved changes of an existing album
 				return;
 			}
