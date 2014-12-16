@@ -1,10 +1,10 @@
 package rest.editableList.albums;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import rest.editableList.EditableListEntryDTO;
+import rest.editableList.AbstractEditableListEntryDTO;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserAlbumDTO extends EditableListEntryDTO {
+public class UserAlbumDTO extends AbstractEditableListEntryDTO {
 
 	private String albumName;
 	private String albumLink;

@@ -3,15 +3,15 @@ package rest.editableList;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public abstract class EditableListEntryDTO {
+public abstract class AbstractEditableListEntryDTO {
 
 	protected int entryId;
 	protected int userId;
 
-	public EditableListEntryDTO() {
+	public AbstractEditableListEntryDTO() {
 	}
 
-	public EditableListEntryDTO( int entryId ) {
+	public AbstractEditableListEntryDTO( int entryId ) {
 		this.entryId = entryId;
 	}
 

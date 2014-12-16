@@ -1,10 +1,10 @@
 package rest.editableList.team;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import rest.editableList.EditableListEntryDTO;
+import rest.editableList.AbstractEditableListEntryDTO;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserTeamMemberDTO extends EditableListEntryDTO {
+public class UserTeamMemberDTO extends AbstractEditableListEntryDTO {
 
 	private String userTeamMemberName;
 	private boolean checked;
