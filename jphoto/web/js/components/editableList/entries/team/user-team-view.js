@@ -14,10 +14,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			entry.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
 			var view = this;
 
-			var massSelectorCss = this.model.groupSelectionClass;
 			var entryView = new EntryView( {
 				model: entry
-				, massSelectorCss: massSelectorCss
+				, massSelectorCss: this.model.groupSelectionClass
 				, onEdit: view.onEdit
 				, onDelete: view.onDelete
 			} );

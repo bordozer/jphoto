@@ -1,7 +1,7 @@
 define( [ "components/editableList/editable-list-model" ], function ( EditableListModel ) {
 
 	var UserAlbumModel = EditableListModel.EditableListEntryModel.extend( {
-		defaults: _.extend( {}, EditableListModel.EditableListEntryModel.prototype.defaults, { teamMemberTypeId: 1 } )
+		defaults: _.extend( {}, EditableListModel.EditableListEntryModel.prototype.defaults, {} )
 	} );
 
 	var UserAlbumsModel = EditableListModel.EditableListModel.extend( {
@@ -12,8 +12,6 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 			UserAlbumsModel.__super__.initialize.apply( this, arguments );
 
 			this.url = Backbone.JPhoto.url( "/rest/users/" + options.userId + "/albums/" );
-
-			this.userTeamMemberTypes = options.userTeamMemberTypes;
 		}
 	} );
 

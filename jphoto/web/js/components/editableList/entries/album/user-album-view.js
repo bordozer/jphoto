@@ -9,6 +9,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 	var UserAlbumCompositeView = Backbone.View.extend( {
 
 		renderEntry: function ( entry ) {
+
+			entry.set( { translationDTO: this.model[ 'translationDTO' ] } );
+
 			var view = this;
 			var entryView = new AlbumView( {
 				model: entry
