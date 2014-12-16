@@ -44,19 +44,19 @@
 
 <script type="text/javascript">
 
-	require( ['components/user/albums/user-albums'], function ( func ) {
+	require( ['components/editableList/entries/album/user-album'], function ( func ) {
 
 		var selectedAlbumIds = ${selectedIdsJson};
 		var translationDTO = ${translationDTO};
 
 		func( { userId: ${userId}
-					, container: $( '.user-album-container' )
-					, selectedAlbumIds: selectedAlbumIds
-					, groupSelectionClass: '${groupSelectionClass}'
-					, translationDTO: translationDTO
-					, onEdit: ${onEditJSFunction}
-					, onDelete: ${onDeleteJSFunction}
-				  } );
+			, container: $( '.user-album-container' )
+			, selectedAlbumIds: selectedAlbumIds
+			, groupSelectionClass: '${groupSelectionClass}'
+			, translationDTO: translationDTO
+			, onEdit: ${onEditJSFunction}
+			, onDelete: ${onDeleteJSFunction}
+		} );
 	} );
 
 </script>

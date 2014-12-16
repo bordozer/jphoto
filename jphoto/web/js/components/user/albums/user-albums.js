@@ -1,6 +1,7 @@
-define( ["components/user/albums/user-albums-model"
-		, "components/user/albums/user-albums-view"
-		, "jquery"], function ( Model, View, $ ) {
+define( [ "jquery"
+	, "components/user/albums/user-albums-model"
+	, "components/user/albums/user-albums-view"
+], function ( $, Model, View ) {
 
 	function init( options ) {
 

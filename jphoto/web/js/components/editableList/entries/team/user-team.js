@@ -1,8 +1,8 @@
 define( [ "jquery"
 	, "components/editableList/entries/team/user-team-model"
-	, "components/editableList/editable-list-view"
 	, "components/editableList/entries/team/user-team-view"
-], function ( $, Model, View, CompositeView ) {
+	, "components/editableList/editable-list-view"
+], function ( $, Model, CompositeView, View ) {
 
 	function init( options ) {
 
@@ -19,15 +19,15 @@ define( [ "jquery"
 			model: userTeamModel
 		});
 
-		var editableListView = new View.EntryListView( {
+		var userTeamEntryListView = new View.EntryListView( {
 				model: userTeamModel
 				, el: options.container
 				, entryCompositeView: userTeamCompositeView
 				, onEdit: options.onEdit
 				, onDelete: options.onDelete
 		} );
-		editableListView.renderHeader();
-		editableListView.render();
+		userTeamEntryListView.renderHeader();
+		userTeamEntryListView.render();
 	}
 
 	return init;

@@ -1,10 +1,9 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
 	, "components/editableList/entries/team/user-team-model"
-	, "text!components/editableList/templates/header-template.html"
-	, "text!components/editableList/templates/list-entry-template.html"
-	, "text!components/editableList/templates/entry-info-template.html"
-	, "text!components/editableList/templates/entry-edit-template.html"
-], function ( Backbone, $, _, mass_checker, Model, headerTemplate, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
+	, "text!components/editableList/entries/team/templates/list-entry-template.html"
+	, "text!components/editableList/entries/team/templates/entry-info-template.html"
+	, "text!components/editableList/entries/team/templates/entry-edit-template.html"
+], function ( Backbone, $, _, mass_checker, Model, listEntryTemplate, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
@@ -28,7 +27,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			return this;
 		}
 
-		,renderNewEntryForm: function () {
+		, renderNewEntryForm: function () {
 			var userTeamMemberTypes = this.model[ 'userTeamMemberTypes' ];
 			var translationDTO = this.model[ 'translationDTO' ];
 
@@ -46,8 +45,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 
 		, deleteEntry: function ( entry ) {
-			console.log( 'Delete entry', entry );
-
 			var entryId = entry.get( 'entryId' );
 
 			this.model.remove( entryId );

@@ -1,73 +1,32 @@
 define( ["backbone", "jquery", "underscore", "mass_checker"
-		, "components/user/albums/user-albums-model"
-		, "text!components/user/albums/templates/header-template.html"
-		, "text!components/user/albums/templates/album-info-template.html"
-		, "text!components/user/albums/templates/album-edit-template.html"
-		], function ( Backbone, $, _, mass_checker, Model, headerTemplate, entryInfoTemplate, entryEditorTemplate ) {
+	, "components/editableList/entries/album/user-album-model"
+	, "text!components/editableList/entries/album/templates/album-info-template.html"
+	, "text!components/editableList/entries/album/templates/album-edit-template.html"
+], function ( Backbone, $, _, mass_checker, Model, entryInfoTemplate, entryEditorTemplate ) {
 
 	'use strict';
 
-	var AlbumListView = Backbone.View.extend( {
+	var UserAlbumCompositeView = Backbone.View.extend( {
 
-		headerTemplate:_.template( headerTemplate ),
-
-		events: {
-			"click .create-new-user-album-link": "onCreateNewAlbum"
-		},
-
-		initialize: function( options ) {
-
-			this.onEdit = options.onEdit;
-			this.onDelete = options.onDelete;
-
-			this.listenTo( this.model, "add", this.renderEntry );
-
-			var model = this.model;
-			var el = this.$el;
-			this.model.fetch( { cache: false, success: function (  ) {
-				_.each( model.selectedAlbumIds, function( memberId ) {
-					$( '.user-album-checkbox-' + memberId, el ).attr( 'checked', 'checked' );
-				} );
-			} } );
-		},
-
-		renderHeader: function () {
-			var modelJSON = this.model.toJSON();
-
-			var translationsDTO = this.model[ 'translationDTO' ];
-			modelJSON[ 'headerTitleCreateNewAlbumButtonTitle' ] = translationsDTO[ 'headerTitleCreateNewAlbumButtonTitle' ];
-
-			this.$el.html( this.headerTemplate( modelJSON ) );
-		},
-
-		renderEntry: function ( album ) {
-			album.set( { translationDTO: this.model[ 'translationDTO' ] } );
+		renderEntry: function ( entry ) {
 			var view = this;
-
-			var massSelectorCss = this.model.groupSelectionClass;
-			var albumView = new AlbumView( {
-				model: album
-				, massSelectorCss: massSelectorCss
+			var entryView = new AlbumView( {
+				model: entry
+				, massSelectorCss: this.model.groupSelectionClass
 				, onEdit: view.onEdit
 				, onDelete: view.onDelete
 			} );
 
-			this.$el.append( albumView.render().$el );
+			this.$el.append( entryView.render().$el );
 
-			// TODO: duplicates!
-			if( massSelectorCss != '' ) {
-				var massSelector = mass_checker.getMassChecker();
-				var css = massSelectorCss + album.get( 'userAlbumId' );
-				massSelector.registerUnselected( css, Backbone.JPhoto.imageFolder() );
-			}
-		},
+			return this;
+		}
 
-		createAlbum: function() {
-
+		, renderNewEntryForm: function () {
 			var model = this.model;
 			var translationDTO = this.model[ 'translationDTO' ];
 
-			var albumModel = new Model.AlbumModel( {
+			var albumModel = new Model.UserAlbumsModel( {
 				  userAlbumId: 0
 				, userId: model.userId
 				, albumName: ''
@@ -76,22 +35,17 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				, translationDTO: translationDTO
 			} );
 			this.model.add( albumModel );
-		},
 
-		deleteEntry: function( album ) {
-			var albumId = album.get( 'userAlbumId' );
-			this.model.remove( albumId );
-			this.model.onDelete( albumId );
-		},
-
-		onCreateNewAlbum: function( evt ) {
-			evt.preventDefault();
-			evt.stopImmediatePropagation();
-
-			this.createAlbum();
+			return this;
 		}
-	});
 
+		, deleteEntry: function ( entry ) {
+			var entryId = entry.get( 'userAlbumId' );
+
+			this.model.remove( entryId );
+			this.model.onDelete( entryId );
+		}
+	} );
 
 	var AlbumView = Backbone.View.extend({
 
@@ -333,5 +287,5 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 	});
 
-	return { AlbumListView: AlbumListView };
-});
+	return { UserAlbumCompositeView: UserAlbumCompositeView };
+} );
