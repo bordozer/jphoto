@@ -30,6 +30,7 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 	private static final String SORTING_BY_SUM_MARKS_DESC = "Photo list bottom text: Sorted by sum marks DESC";
 	private static final String SORTING_BY_TOTAL_MARKS = "Photo list bottom text: Sorted by total marks.";
 	public static final String SORTING_BY_VOTING_TIME = "Photo list bottom text: Sorted by voting time DESC";
+	public static final String SORTING_BY_PREVIEWS_COUNT = "Photo list bottom text: Sorted by previews count DESC";
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
@@ -58,6 +59,36 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 				return new TranslatableMessage( "Photo list bottom text: All photos.", services )
 					.lineBreakHtml()
 					.translatableString( SORTING_BY_UPLOAD_TIME_DESC )
+					;
+			}
+		};
+	}
+
+	@Override
+	public AbstractPhotoListFactory galleryLastPopular( final int page, final int itemsOnPage, final User accessor ) {
+		final AbstractPhotoFilteringStrategy filteringStrategy = new BestFilteringStrategy( accessor, services );
+
+		return new PhotoListFactoryBest( filteringStrategy, accessor, services ) {
+
+			@Override
+			public SqlIdsSelectQuery getSelectIdsQuery() {
+				return new PhotoListQueryBuilder( services.getDateUtilsService() )
+					.filterByPreviewTime( timeRange )
+					.sortByPreviewsCountDesc()
+					.forPage( page, itemsOnPage )
+					.getQuery();
+			}
+
+			@Override
+			public TranslatableMessage getTitle() {
+				return new TranslatableMessage( "Photo list title: Most popular fot last $1 days photos", services ).addIntegerParameter( days );
+			}
+
+			@Override
+			public TranslatableMessage getCriteriaDescription() {
+				return new TranslatableMessage( "Photo list bottom text: All photos.", services )
+					.lineBreakHtml()
+					.translatableString( SORTING_BY_PREVIEWS_COUNT )
 					;
 			}
 		};

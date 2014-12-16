@@ -9,11 +9,15 @@ import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.dao.*;
+import core.services.photo.PhotoPreviewServiceImpl;
 import core.services.utils.DateUtilsService;
 import sql.builder.*;
 import utils.PagingUtils;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class PhotoListQueryBuilder {
 
@@ -153,6 +157,28 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
+	public PhotoListQueryBuilder filterByPreviewTime( final TimeRange timeRange ) {
+		return filterByPreviewTime( timeRange.getTimeFrom(), timeRange.getTimeTo() );
+	}
+
+	public PhotoListQueryBuilder filterByPreviewTime( final Date votingTimeFrom, final Date votingTimeTo ) {
+
+		if ( ! hasPreviewsTableJoin() ) {
+			addJoinPreviewsTable();
+		}
+
+		final SqlTable tPreviews = new SqlTable( PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW );
+		final SqlColumnSelect tPreviewsColViewTime = new SqlColumnSelect( tPreviews, PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW_COLUMN_PREVIEW_TIME );
+
+		final SqlCondition moreThenDateFrom = new SqlCondition( tPreviewsColViewTime, SqlCriteriaOperator.GREATER_THAN_OR_EQUAL_TO, dateUtilsService.getFirstSecondOfDay( votingTimeFrom ), dateUtilsService );
+		query.addWhereAnd( moreThenDateFrom );
+
+		final SqlCondition lessThenDateTo = new SqlCondition( tPreviewsColViewTime, SqlCriteriaOperator.LESS_THAN_OR_EQUAL_TO, dateUtilsService.getLastSecondOfDay( votingTimeTo ), dateUtilsService );
+		query.addWhereAnd( lessThenDateTo );
+
+		return this;
+	}
+
 	public PhotoListQueryBuilder filterByMinimalMarks( final int marks ) {
 
 		if ( ! hasVotingTableJoin() ) {
@@ -213,6 +239,35 @@ public class PhotoListQueryBuilder {
 		return this;
 	}
 
+	public PhotoListQueryBuilder sortByPreviewsCountDesc() {
+
+		if ( ! hasPreviewsTableJoin() ) {
+			addJoinPreviewsTable();
+		}
+
+		final SqlTable tPhotos = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
+
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( tPhotos, UserDaoImpl.ENTITY_ID );
+
+		final SqlTable tPreviews = new SqlTable( PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW );
+//		final SqlColumnSelect tPreviewsColPhotoId = new SqlColumnSelect( tPreviews, PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW_COLUMN_PHOTO_ID );
+
+//		final SqlJoin join2 = SqlJoin.inner( tPreviews, new SqlJoinCondition( tPhotoColId, tPreviewsColPhotoId ) );
+//		query.joinTable( join2 );
+
+		final SqlColumnSelect tPreviewsColId = new SqlColumnSelect( tPreviews, PhotoCommentDaoImpl.ENTITY_ID );
+		final SqlColumnSelectable tableSortColumn = new SqlColumnAggregate( tPreviewsColId, SqlFunctions.COUNT, "viewsCount" );
+
+		final List<SqlBuildable> groupBy2 = newArrayList();
+		groupBy2.add( tPhotoColId );
+
+		query.setGroupColumns( groupBy2 );
+
+		query.addSorting( tableSortColumn, SqlSortOrder.DESC );
+
+		return this;
+	}
+
 	public PhotoListQueryBuilder sortByUploadTimeDesc() {
 		final SqlTable fPhoto = new SqlTable( PhotoDaoImpl.TABLE_PHOTOS );
 		final SqlColumnSelect column = new SqlColumnSelect( fPhoto, PhotoDaoImpl.TABLE_COLUMN_UPLOAD_TIME );
@@ -267,9 +322,17 @@ public class PhotoListQueryBuilder {
 		return selectQuery;
 	}
 
+	private boolean hasPreviewsTableJoin() {
+		return hasJoinedTable( PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW );
+	}
+
 	private boolean hasVotingTableJoin() {
+		return hasJoinedTable( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING );
+	}
+
+	private boolean hasJoinedTable( final String tablePhotoVoting ) {
 		for ( final SqlJoin sqlJoin : query.getJoins() ) {
-			if ( sqlJoin.getJoinTable().getName().equals( PhotoVotingDaoImpl.TABLE_PHOTO_VOTING ) ) {
+			if ( sqlJoin.getJoinTable().getName().equals( tablePhotoVoting ) ) {
 				return true;
 			}
 		}
@@ -283,6 +346,15 @@ public class PhotoListQueryBuilder {
 		final SqlColumnSelect tPhotoVotingColPhotoId = new SqlColumnSelect( tPhotoVoting, PhotoVotingDaoImpl.TABLE_PHOTO_VOTING_PHOTO_ID );
 		final SqlJoin joinVotingTable = SqlJoin.inner( tPhotoVoting, new SqlJoinCondition( tPhotoColId, tPhotoVotingColPhotoId ) );
 		query.joinTable( joinVotingTable );
+		query.addGrouping( tPhotoColId );
+	}
+
+	private void addJoinPreviewsTable() {
+		final SqlTable tPhotoPreviews = new SqlTable( PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW );
+		final SqlColumnSelect tPhotoColId = new SqlColumnSelect( query.getMainTable(), BaseEntityDao.ENTITY_ID );
+		final SqlColumnSelect tPhotoPreviewsColPhotoId = new SqlColumnSelect( tPhotoPreviews, PhotoPreviewDaoImpl.TABLE_PHOTO_PREVIEW_COLUMN_PHOTO_ID );
+		final SqlJoin joinPreviewsTable = SqlJoin.inner( tPhotoPreviews, new SqlJoinCondition( tPhotoColId, tPhotoPreviewsColPhotoId ) );
+		query.joinTable( joinPreviewsTable );
 		query.addGrouping( tPhotoColId );
 	}
 

@@ -13,6 +13,8 @@ public interface BreadcrumbsPhotoGalleryService {
 
 	PageTitleData getPhotoGalleryBreadcrumbs();
 
+	PageTitleData getLastPopularPhotosBreadcrumbs();
+
 	PageTitleData getAbsolutelyBestPhotosBreadcrumbs();
 
 	PageTitleData getPhotosByGenreBreadcrumbs( final Genre genre );

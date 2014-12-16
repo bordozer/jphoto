@@ -18,6 +18,8 @@ public interface PhotoListFactoryService {
 
 	AbstractPhotoListFactory galleryTopBest( final User accessor );
 
+	AbstractPhotoListFactory galleryLastPopular( final int page, final int itemsOnPage, final User accessor );
+
 	AbstractPhotoListFactory galleryAbsolutelyBest( final int page, final int itemsOnPage, final User accessor );
 
 	AbstractPhotoListFactory galleryForGenre( final Genre genre, final int page, final int itemsOnPage, final User accessor );

@@ -60,6 +60,15 @@ public class BreadcrumbsPhotoGalleryServiceImpl implements BreadcrumbsPhotoGalle
 	}
 
 	@Override
+	public PageTitleData getLastPopularPhotosBreadcrumbs() {
+		final String breadcrumbs = photoGalleryLink()
+			.translatableString( MenuService.MAIN_MENU_LATEST_POPULAR_PHOTOS )
+			.build();
+
+		return new PageTitleData( pageTitle(), pageHeader(), breadcrumbs );
+	}
+
+	@Override
 	public PageTitleData getAbsolutelyBestPhotosBreadcrumbs() {
 
 		final String breadcrumbs = photoGalleryLink()

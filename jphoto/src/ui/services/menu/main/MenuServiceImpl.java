@@ -639,7 +639,7 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	private MenuItem photosPopular() {
-		final String caption = translatorService.translate( "Main menu: Latest popular photos", getLanguage() );
+		final String caption = translatorService.translate( MAIN_MENU_LATEST_POPULAR_PHOTOS, getLanguage() );
 		final String link = urlUtilsService.getLatestPopularPhotosURL();
 		return new MenuItem( caption, link );
 	}

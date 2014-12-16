@@ -162,6 +162,16 @@ public class PhotoListController {
 		return VIEW;
 	}
 
+	@RequestMapping( method = RequestMethod.GET, value = "/popular/" )
+	public String popularPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
+
+		model.addPhotoList( getPhotoList( photoListFactoryService.galleryLastPopular( pagingModel.getCurrentPage(), pagingModel.getItemsOnPage(), getCurrentUser() ), pagingModel ) );
+
+		model.setPageTitleData( breadcrumbsPhotoGalleryService.getLastPopularPhotosBreadcrumbs() );
+
+		return VIEW;
+	}
+
 	@RequestMapping( method = RequestMethod.GET, value = "/best/" )
 	public String showAbsoluteBestPhotos( final @ModelAttribute( "photoListModel" ) PhotoListModel model, final @ModelAttribute( "pagingModel" ) PagingModel pagingModel, final @ModelAttribute( PHOTO_FILTER_MODEL ) PhotoFilterModel filterModel ) {
 

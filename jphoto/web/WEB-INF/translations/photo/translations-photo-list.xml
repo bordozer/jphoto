@@ -123,6 +123,11 @@
 	</translation>
 
 	<translation>
+		<nerd>Photo list title: Most popular fot last $1 days photos</nerd>
+		<ru><![CDATA[Самые популярные работы за последние $1 дня]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo list title: Photo gallery absolutely best</nerd>
 		<ru><![CDATA[Самые лучшие работы - абсолютный рейтинг]]></ru>
 	</translation>
@@ -315,6 +320,11 @@
 	<translation>
 		<nerd>Photo list bottom text: Sorted by voting time DESC</nerd>
 		<ru><![CDATA[Отсортированы по времени голосованию по убыванию.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: Sorted by previews count DESC</nerd>
+		<ru><![CDATA[Отсортированы по поличеству просмотров.]]></ru>
 	</translation>
 
 	<translation>
