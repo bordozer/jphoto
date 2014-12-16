@@ -65,6 +65,7 @@
 </style>
 
 <script type="text/javascript">
+
 	require( ['components/editableList/entries/team/user-team'], function ( userTeam ) {
 
 		var userTeamMemberTypes = ${userTeamMemberTypes};

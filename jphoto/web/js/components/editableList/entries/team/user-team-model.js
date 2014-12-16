@@ -3,7 +3,7 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 	var UserTeamMemberModel = EditableListModel.EditableListEntryModel.extend( {
 
 		defaults: _.extend( {}, EditableListModel.EditableListEntryModel.prototype.defaults, { teamMemberTypeId: 1 } )
-	});
+	} );
 
 	var UserTeamModel = EditableListModel.EditableListModel.extend( {
 
@@ -16,7 +16,7 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 
 			this.userTeamMemberTypes = options.userTeamMemberTypes;
 		}
-	});
+	} );
 
-	return { UserTeamModel:UserTeamModel, UserTeamMemberModel: UserTeamMemberModel };
-});
+	return { UserTeamModel: UserTeamModel, UserTeamMemberModel: UserTeamMemberModel };
+} );
