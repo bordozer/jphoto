@@ -62,6 +62,11 @@ public class UrlUtilsServiceImpl implements UrlUtilsService {
 	}
 
 	@Override
+	public String getLatestPopularPhotosURL() {
+		return String.format( "%s/%s/popular/", getBaseURL(), PHOTOS_URL );
+	}
+
+	@Override
 	public String getPhotosByUserLink( final int userId ) {
 		return String.format( "%s/%s/%s/%s/", getBaseURL(), PHOTOS_URL, USERS_URL, userId );
 	}

@@ -22,6 +22,8 @@ public interface UrlUtilsService {
 
 	String getAllPhotosLink();
 
+	String getLatestPopularPhotosURL();
+
 	String getPhotosByUserLink( final int userId );
 
 	String getPhotosByUserLinkBest( final int userId );

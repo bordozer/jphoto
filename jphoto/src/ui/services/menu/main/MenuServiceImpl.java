@@ -108,7 +108,7 @@ public class MenuServiceImpl implements MenuService {
 	private void createBestPhotosMenu( final Map<MenuItem, List<MenuItem>> menus ) {
 		final List<MenuItem> menuItems = newArrayList();
 
-//		menuItems.add( photosPopular() );
+		menuItems.add( photosPopular() );
 		menuItems.add( photosAbsoluteBest() );
 		menuItems.add( photosTodayBest() );
 		menuItems.add( photosYesterdayBest() );
@@ -635,6 +635,12 @@ public class MenuServiceImpl implements MenuService {
 		final Date lastSecondOfMonth = dateUtilsService.getLastSecondOfMonth();
 		final String link = urlUtilsService.getPhotosUploadedInPeriodUrl( firstSecondOfMonth, lastSecondOfMonth );
 
+		return new MenuItem( caption, link );
+	}
+
+	private MenuItem photosPopular() {
+		final String caption = translatorService.translate( "Main menu: Latest popular photos", getLanguage() );
+		final String link = urlUtilsService.getLatestPopularPhotosURL();
 		return new MenuItem( caption, link );
 	}
 
