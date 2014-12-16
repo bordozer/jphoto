@@ -1,4 +1,4 @@
-package rest.users.team;
+package rest.editableList.team;
 
 public class TeamMemberTypeDTO {
 

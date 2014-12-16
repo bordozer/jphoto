@@ -1,4 +1,4 @@
-<%@ tag import="rest.users.albums.UserAlbumTranslationDTO" %>
+<%@ tag import="rest.editableList.albums.UserAlbumTranslationDTO" %>
 <%@ tag import="ui.context.ApplicationContextHelper" %>
 <%@ tag import="ui.context.EnvironmentContext" %>
 <%@ tag import="org.json.JSONObject" %>

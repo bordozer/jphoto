@@ -1,4 +1,4 @@
-package rest.users.albums;
+package rest.editableList.albums;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

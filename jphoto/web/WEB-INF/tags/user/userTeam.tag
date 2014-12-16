@@ -6,7 +6,7 @@
 <%@ tag import="ui.translatable.GenericTranslatableEntry" %>
 <%@ tag import="java.util.List" %>
 <%@ tag import="static com.google.common.collect.Lists.newArrayList" %>
-<%@ tag import="rest.users.team.UserTeamTranslationDTO" %>
+<%@ tag import="rest.editableList.team.UserTeamTranslationDTO" %>
 <%@ tag import="core.services.translator.Language" %>
 <%@ tag import="core.services.translator.TranslatorService" %>
 <%@ taglib prefix="eco" uri="http://taglibs" %>

@@ -1,4 +1,4 @@
-package rest.users.team;
+package rest.editableList.team;
 
 import core.enums.UserTeamMemberType;
 import core.general.user.userTeam.UserTeam;

@@ -1,4 +1,4 @@
-package rest.users.albums;
+package rest.editableList.albums;
 
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.services.translator.Language;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ui.context.EnvironmentContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;

@@ -1,4 +1,4 @@
-package rest.users.team;
+package rest.editableList.team;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

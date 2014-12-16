@@ -1,4 +1,4 @@
-package rest.users.albums;
+package rest.editableList.albums;
 
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;

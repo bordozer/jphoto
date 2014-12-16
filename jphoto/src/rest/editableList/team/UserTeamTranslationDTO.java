@@ -1,4 +1,4 @@
-package rest.users.team;
+package rest.editableList.team;
 
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
