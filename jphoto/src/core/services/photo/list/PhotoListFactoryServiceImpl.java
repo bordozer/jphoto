@@ -86,7 +86,8 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getCriteriaDescription() {
-				return new TranslatableMessage( "Photo list bottom text: All photos.", services )
+				return new TranslatableMessage( "Photo list bottom text: The most popular photos for last $1 days", services )
+					.addIntegerParameter( days )
 					.lineBreakHtml()
 					.translatableString( SORTING_BY_PREVIEWS_COUNT )
 					;

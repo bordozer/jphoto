@@ -324,7 +324,12 @@
 
 	<translation>
 		<nerd>Photo list bottom text: Sorted by previews count DESC</nerd>
-		<ru><![CDATA[Отсортированы по поличеству просмотров.]]></ru>
+		<ru><![CDATA[Отсортированы по поличеству просмотров по убыванию.]]></ru>
+	</translation>
+
+	<translation>
+		<nerd>Photo list bottom text: The most popular photos for last $1 days</nerd>
+		<ru><![CDATA[Показаны работы, набравшие наибольшее количество просмотров за последние $1 дня.]]></ru>
 	</translation>
 
 	<translation>
