@@ -1,12 +1,11 @@
 package rest.editableList.team;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import rest.editableList.EditableListEntryDTO;
 
 @JsonIgnoreProperties( ignoreUnknown = true )
-public class UserTeamMemberDTO {
+public class UserTeamMemberDTO extends EditableListEntryDTO {
 
-	private int entryId;
-	private int userId;
 	private String userTeamMemberName;
 	private boolean checked;
 	private String userTeamMemberCardUrl;
@@ -18,26 +17,11 @@ public class UserTeamMemberDTO {
 	private String siteMemberLink;
 
 	public UserTeamMemberDTO() {
+		super();
 	}
 
 	public UserTeamMemberDTO( final int entryId ) {
-		this.entryId = entryId;
-	}
-
-	public int getEntryId() {
-		return entryId;
-	}
-
-	public void setEntryId( final int entryId ) {
-		this.entryId = entryId;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId( int userId ) {
-		this.userId = userId;
+		super( entryId );
 	}
 
 	public String getUserTeamMemberName() {
