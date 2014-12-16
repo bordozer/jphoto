@@ -16,9 +16,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		initialize: function( options ) {
 			this.entryCompositeView = options.entryCompositeView;
 
-			this.onEdit = options.onEdit;
-			this.onDelete = options.onDelete;
-
 			this.listenTo( this.model, "add", this.renderEntry );
 
 			var model = this.model;

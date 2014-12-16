@@ -17,14 +17,14 @@ define( [ "jquery"
 
 		var userTeamCompositeView = new CompositeView.UserTeamCompositeView( {
 			model: userTeamModel
+			, onEdit: options.onEdit
+			, onDelete: options.onDelete
 		});
 
 		var userTeamEntryListView = new View.EntryListView( {
-				model: userTeamModel
-				, el: options.container
-				, entryCompositeView: userTeamCompositeView
-				, onEdit: options.onEdit
-				, onDelete: options.onDelete
+			model: userTeamModel
+			, el: options.container
+			, entryCompositeView: userTeamCompositeView
 		} );
 		userTeamEntryListView.renderHeader();
 	}

@@ -9,7 +9,12 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 	var UserTeamCompositeView = Backbone.View.extend( {
 
-		renderEntry: function ( entry ) {
+		initialize: function( options ) {
+			this.onEdit = options.onEdit;
+			this.onDelete = options.onDelete;
+		}
+
+		, renderEntry: function ( entry ) {
 
 			entry.set( { userTeamMemberTypes: this.model[ 'userTeamMemberTypes' ], translationDTO: this.model[ 'translationDTO' ] } );
 

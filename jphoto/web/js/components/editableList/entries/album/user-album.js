@@ -16,14 +16,14 @@ define( [ "jquery"
 
 		var userAlbumCompositeView = new CompositeView.UserAlbumCompositeView( {
 			model: userAlbumsModel
+			, onEdit: options.onEdit
+			, onDelete: options.onDelete
 		});
 
 		var userAlbumsEntryListView = new View.EntryListView( {
 			model: userAlbumsModel
 			, el: options.container
 			, entryCompositeView: userAlbumCompositeView
-			, onEdit: options.onEdit
-			, onDelete: options.onDelete
 		} );
 		userAlbumsEntryListView.renderHeader();
 	}
