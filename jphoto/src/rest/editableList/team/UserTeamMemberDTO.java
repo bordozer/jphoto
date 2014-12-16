@@ -6,7 +6,6 @@ import rest.editableList.AbstractEditableListEntryDTO;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserTeamMemberDTO extends AbstractEditableListEntryDTO {
 
-	private String userTeamMemberName;
 	private boolean checked;
 	private String userTeamMemberCardUrl;
 	private int teamMemberTypeId;
@@ -22,14 +21,6 @@ public class UserTeamMemberDTO extends AbstractEditableListEntryDTO {
 
 	public UserTeamMemberDTO( final int entryId ) {
 		super( entryId );
-	}
-
-	public String getUserTeamMemberName() {
-		return userTeamMemberName;
-	}
-
-	public void setUserTeamMemberName( final String userTeamMemberName ) {
-		this.userTeamMemberName = userTeamMemberName;
 	}
 
 	public boolean isChecked() {
@@ -90,6 +81,6 @@ public class UserTeamMemberDTO extends AbstractEditableListEntryDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "User ID: %d, TEam member: %d '%s'", userId, entryId, userTeamMemberName );
+		return String.format( "User ID: %d, TEam member: %d '%s'", userId, entryId, entryName );
 	}
 }

@@ -7,6 +7,7 @@ public abstract class AbstractEditableListEntryDTO {
 
 	protected int entryId;
 	protected int userId;
+	protected String entryName;
 
 	public AbstractEditableListEntryDTO() {
 	}
@@ -29,5 +30,13 @@ public abstract class AbstractEditableListEntryDTO {
 
 	public int getUserId() {
 		return userId;
+	}
+
+	public String getEntryName() {
+		return entryName;
+	}
+
+	public void setEntryName( String entryName ) {
+		this.entryName = entryName;
 	}
 }

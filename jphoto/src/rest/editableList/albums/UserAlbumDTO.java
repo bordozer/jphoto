@@ -6,7 +6,6 @@ import rest.editableList.AbstractEditableListEntryDTO;
 @JsonIgnoreProperties( ignoreUnknown = true )
 public class UserAlbumDTO extends AbstractEditableListEntryDTO {
 
-	private String albumName;
 	private String albumLink;
 	private int albumPhotosQty;
 
@@ -16,14 +15,6 @@ public class UserAlbumDTO extends AbstractEditableListEntryDTO {
 
 	public UserAlbumDTO( final int entryId ) {
 		super( entryId );
-	}
-
-	public void setAlbumName( final String albumName ) {
-		this.albumName = albumName;
-	}
-
-	public String getAlbumName() {
-		return albumName;
 	}
 
 	public void setAlbumLink( final String albumLink ) {
@@ -44,6 +35,6 @@ public class UserAlbumDTO extends AbstractEditableListEntryDTO {
 
 	@Override
 	public String toString() {
-		return String.format( "User: %d, album: %d '%s'", userId, entryId, albumName );
+		return String.format( "User: %d, album: %d '%s'", userId, entryId, entryName );
 	}
 }

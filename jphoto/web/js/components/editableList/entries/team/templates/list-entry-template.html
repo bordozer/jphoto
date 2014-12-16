@@ -3,11 +3,11 @@
 	<input type="checkbox" name="userTeamMemberIds" class="user-team-member-checkbox user-team-member-checkbox-<%-userTeamMemberId%>" value="<%-userTeamMemberId%>" <%- checked ?  "checked='checked'" : "" %> >
 
 	<% if ( entryId > 0 && ! openEditor ) { %>
-		<a href="#" class="user-team-member-info" onclick="return false;" title="<%-userTeamMemberNameTitle%>"><%-userTeamMemberName%></a> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>
+		<a href="#" class="user-team-member-info" onclick="return false;" title="<%-userTeamMemberNameTitle%>"><%-entryName%></a> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>
 	<% } %>
 
 	<% if ( entryId > 0 && openEditor ) { %>
-		<%-userTeamMemberName%> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>
+		<%-entryName%> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>
 	<% } %>
 
 	<% if ( entryId == 0 ) { %>

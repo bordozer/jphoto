@@ -37,7 +37,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entry = new Model.UserAlbumModel( {
 				  entryId: 0
 				, userId: this.model.userId
-				, albumName: ''
+				, entryName: ''
 				, checked: true
 				, openEditor: true
 				, translationDTO: translationDTO
@@ -126,12 +126,12 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			}
 
 			if( modelJSON.entryId > 0 && ! modelJSON.openEditor ) {
-				entryDiv.append( "<a href='#' class='user-album-info' onclick='return false;' title='" + modelJSON.albumName + "'>" + modelJSON.albumName + "</a> - "
+				entryDiv.append( "<a href='#' class='user-album-info' onclick='return false;' title='" + modelJSON.entryName + "'>" + modelJSON.entryName + "</a> - "
 										 + modelJSON.albumPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
 			if( modelJSON.entryId > 0 && modelJSON.openEditor ) {
-				entryDiv.append( modelJSON.albumName + " - " + modelJSON.albumPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
+				entryDiv.append( modelJSON.entryName + " - " + modelJSON.albumPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
 			this.$el.append( entryDiv );
@@ -157,7 +157,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		bindModel: function(  ) {
-			this.model.set( { albumName: this.$( '.user-album-name' ).val() }, { silent: true } );
+			this.model.set( { entryName: this.$( '.user-album-name' ).val() }, { silent: true } );
 		},
 
 		save: function() {
@@ -213,7 +213,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			showUIMessage_Information( this.model.get( 'albumName' ) + ' ' + this.model.get( 'translationDTO' ).entryInfoIconTitleCanNotDelete );
+			showUIMessage_Information( this.model.get( 'entryName' ) + ' ' + this.model.get( 'translationDTO' ).entryInfoIconTitleCanNotDelete );
 		},
 
 		onToggleCheckbox: function( evt ) {
@@ -253,7 +253,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				return;
 			}
 
-			if ( ! confirm( this.model.get( 'albumName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
+			if ( ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
 				return;
 			}
 
@@ -267,7 +267,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'albumName' ) + ': ' + this.model.get( 'translationDTO' )[ 'saveChangesConfirmation' ] ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'saveChangesConfirmation' ] ) ) {
 				return;
 			}
 
@@ -278,7 +278,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'albumName' ) + ': ' + this.model.get( 'translationDTO' )[ 'discardChangesConfirmation' ] ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'discardChangesConfirmation' ] ) ) {
 				return;
 			}
 

@@ -40,7 +40,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				entryId: 0
 				, userId: this.model.userId
 				, userTeamMemberId: 0
-				, userTeamMemberName: ''
+				, entryName: ''
 				, checked: true
 				, openEditor: true
 				, userTeamMemberTypes: userTeamMemberTypes
@@ -132,12 +132,12 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			}
 
 			if( modelJSON.entryId > 0 && ! modelJSON.openEditor ) {
-				entryDiv.append( "<a href='#' class='user-team-member-info' onclick='return false;' title='" + modelJSON.userTeamMemberNameTitle + "'>"
-										+ modelJSON.userTeamMemberName + "</a> - " + modelJSON.teamMemberPhotosQty + " " + modelJSON.translationsDTO.listEntryPhotos );
+				entryDiv.append( "<a href='#' class='user-team-member-info' onclick='return false;' title='" + modelJSON.entryNameTitle + "'>"
+										+ modelJSON.entryName + "</a> - " + modelJSON.teamMemberPhotosQty + " " + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
 			if( modelJSON.entryId > 0 && modelJSON.openEditor ) {
-				entryDiv.append( modelJSON.userTeamMemberName + " - " + modelJSON.teamMemberPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
+				entryDiv.append( modelJSON.entryName + " - " + modelJSON.teamMemberPhotosQty + ' ' + modelJSON.translationsDTO.listEntryPhotos );
 			}
 
 			if( modelJSON.entryId == 0 ) {
@@ -167,7 +167,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		},
 
 		bindModel: function(  ) {
-			this.model.set( { userTeamMemberName: this.$( '.user-team-member-name' ).val() }, { silent: true } );
+			this.model.set( { entryName: this.$( '.user-team-member-name' ).val() }, { silent: true } );
 			this.model.set( { teamMemberTypeId: this.$( 'input[name=teamMemberTypeId]:checked' ).val() }, { silent: true } );
 		},
 
@@ -224,7 +224,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			showUIMessage_Information( this.model.get( 'userTeamMemberName' ) + ' ' + this.model.get( 'translationDTO' ).entryInfoIconTitleCanNotDelete );
+			showUIMessage_Information( this.model.get( 'entryName' ) + ' ' + this.model.get( 'translationDTO' ).entryInfoIconTitleCanNotDelete );
 		},
 
 		onToggleCheckbox: function( evt ) {
@@ -264,7 +264,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				return;
 			}
 
-			if ( ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
+			if ( ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'deleteEntryConfirmation' ] ) ) {
 				return;
 			}
 
@@ -278,7 +278,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'saveChangesConfirmation' ] ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'saveChangesConfirmation' ] ) ) {
 				return;
 			}
 
@@ -289,7 +289,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			evt.preventDefault();
 			evt.stopImmediatePropagation();
 
-			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'userTeamMemberName' ) + ': ' + this.model.get( 'translationDTO' )[ 'discardChangesConfirmation' ] ) ) {
+			if ( this.model.get( 'hasUnsavedChanged' ) && ! confirm( this.model.get( 'entryName' ) + ': ' + this.model.get( 'translationDTO' )[ 'discardChangesConfirmation' ] ) ) {
 				return;
 			}
 

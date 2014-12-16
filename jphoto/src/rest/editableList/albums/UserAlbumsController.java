@@ -64,7 +64,7 @@ public class UserAlbumsController {
 			final UserAlbumDTO dto = new UserAlbumDTO();
 			dto.setEntryId( album.getId() );
 			dto.setUserId( userId );
-			dto.setAlbumName( album.getName() ); // TODO: escaping
+			dto.setEntryName( album.getName() ); // TODO: escaping
 			dto.setAlbumLink( urlUtilsService.getUserPhotoAlbumPhotosLink( userId, album.getId() ) );
 			dto.setAlbumPhotosQty( getPhotosQty( album ) );
 
@@ -77,7 +77,7 @@ public class UserAlbumsController {
 	private void doSaveUserAlbum( final UserAlbumDTO dto ) {
 		final UserPhotoAlbum album = new UserPhotoAlbum();
 		album.setId( dto.getEntryId() );
-		album.setName( dto.getAlbumName() );
+		album.setName( dto.getEntryName() );
 		album.setUser( userService.load( dto.getUserId() ) );
 		album.setDescription( "" ); // TODO
 

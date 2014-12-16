@@ -126,7 +126,7 @@
 
 					function onEdit( teamMember ) {
 
-						var name = teamMember.get( 'userTeamMemberName' ) + " ( " + teamMember.get( 'teamMemberTypeName' ) + " )";
+						var name = teamMember.get( 'entryName' ) + " ( " + teamMember.get( 'teamMemberTypeName' ) + " )";
 						var userTeamMemberId = teamMember.get( 'userTeamMemberId' );
 
 						require( [ 'jquery' ], function ( $ ) {

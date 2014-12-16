@@ -70,7 +70,7 @@ public class UserTeamController {
 
 		teamMember.setUser( userService.load( dto.getUserId() ) );
 		teamMember.setId( dto.getEntryId() );
-		teamMember.setName( dto.getUserTeamMemberName() );
+		teamMember.setName( dto.getEntryName() );
 
 		final UserTeamMemberType teamMemberType = UserTeamMemberType.getById( dto.getTeamMemberTypeId() );
 		teamMember.setTeamMemberType( teamMemberType );
@@ -94,7 +94,7 @@ public class UserTeamController {
 			final UserTeamMemberDTO dto = new UserTeamMemberDTO( userTeamMember.getId() );
 
 			final String teamMemberName = userTeamMember.getTeamMemberName();
-			dto.setUserTeamMemberName( teamMemberName );
+			dto.setEntryName( teamMemberName );
 
 			dto.setUserTeamMemberCardUrl( urlUtilsService.getUserTeamMemberCardLink( currentUserId, userTeamMember.getId() ) );
 
