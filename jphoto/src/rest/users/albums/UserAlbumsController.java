@@ -31,32 +31,33 @@ public class UserAlbumsController {
 
 	@RequestMapping( method = RequestMethod.GET, value = "/", produces = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public List<UserAlbumDTO> userTeam( final @PathVariable( "userId" ) int userId ) {
+	public List<UserAlbumDTO> userAlbums( final @PathVariable( "userId" ) int userId ) {
 		return getUserAlbumDTOs( userId );
 	}
 
 	@RequestMapping( method = RequestMethod.POST, value = "/", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserAlbumDTO createUserTeamMember( @RequestBody final UserAlbumDTO dto ) {
+	public UserAlbumDTO createUserAlbum( @RequestBody final UserAlbumDTO dto ) {
 		doSaveUserAlbum( dto );
 		return dto;
 	}
 
-	@RequestMapping( method = RequestMethod.PUT, value = "/{userAlbumId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
+	@RequestMapping( method = RequestMethod.PUT, value = "/{entryId}", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE )
 	@ResponseBody
-	public UserAlbumDTO saveUserTeamMember( @RequestBody final UserAlbumDTO dto ) {
+	public UserAlbumDTO saveUserAlbum( @RequestBody final UserAlbumDTO dto ) {
 		doSaveUserAlbum( dto );
 		return dto;
 	}
 
-	@RequestMapping( method = RequestMethod.DELETE, value = "/{userAlbumId}" )
+	@RequestMapping( method = RequestMethod.DELETE, value = "/{entryId}" )
 	@ResponseBody
-	public boolean deleteUserTeamMember( final @PathVariable( "userAlbumId" ) int userAlbumId ) {
-		return userPhotoAlbumService.delete( userAlbumId );
+	public boolean deleteUserAlbum( final @PathVariable( "entryId" ) int entryId ) {
+		return userPhotoAlbumService.delete( entryId );
 	}
 
 	private List<UserAlbumDTO> getUserAlbumDTOs( final int userId ) {
-		final ArrayList<UserAlbumDTO> result = newArrayList();
+
+		final List<UserAlbumDTO> result = newArrayList();
 
 		final List<UserPhotoAlbum> albums = userPhotoAlbumService.loadAllForEntry( userId );
 

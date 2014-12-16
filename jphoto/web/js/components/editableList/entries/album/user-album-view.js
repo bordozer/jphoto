@@ -13,7 +13,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			entry.set( { translationDTO: this.model[ 'translationDTO' ] } );
 
 			var view = this;
-			var entryView = new AlbumView( {
+			var entryView = new EntryView( {
 				model: entry
 				, massSelectorCss: this.model.groupSelectionClass
 				, onEdit: view.onEdit
@@ -29,7 +29,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 
 			var translationDTO = this.model[ 'translationDTO' ];
 
-			var albumModel = new Model.UserAlbumsModel( {
+			var entry = new Model.UserAlbumModel( {
 				  entryId: 0
 				, userId: this.model.userId
 				, albumName: ''
@@ -37,7 +37,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 				, openEditor: true
 				, translationDTO: translationDTO
 			} );
-			this.model.add( albumModel );
+			this.model.add( entry );
 
 			return this;
 		}
@@ -50,7 +50,7 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 		}
 	} );
 
-	var AlbumView = Backbone.View.extend({
+	var EntryView = Backbone.View.extend({
 
 		infoViewTemplate:_.template( entryInfoTemplate ),
 		editorTemplate:_.template( entryEditorTemplate ),

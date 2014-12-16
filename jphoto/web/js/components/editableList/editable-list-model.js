@@ -11,17 +11,21 @@ define( [ "backbone" ], function ( Backbone ) {
 
 		, defaults: function() {
 			return {
-				openEditor: false
+				userId: 0
+				, openEditor: false
 			};
 		}
 	});
 
 	var EditableListModel = Backbone.Collection.extend( {
 
+		userId: 0,
 		userTeamMemberTypes: [],
 		translationDTO: [],
 
 		initialize: function ( options ) {
+			this.userId = options.userId;
+
 			this.selectedIds = options.selectedIds;
 			this.groupSelectionClass = options.groupSelectionClass;
 			this.translationDTO = options.translationDTO;

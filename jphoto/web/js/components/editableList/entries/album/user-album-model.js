@@ -11,7 +11,7 @@ define( [ "components/editableList/editable-list-model" ], function ( EditableLi
 		initialize: function ( options ) {
 			UserAlbumsModel.__super__.initialize.apply( this, arguments );
 
-			this.url = Backbone.JPhoto.url( "/rest/users/" + options.userId + "/albums/" );
+			this.url = Backbone.JPhoto.url( "rest/users/" + options.userId + "/albums/" );
 		}
 	} );
 

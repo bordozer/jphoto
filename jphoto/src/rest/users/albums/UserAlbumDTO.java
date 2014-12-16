@@ -50,4 +50,9 @@ public class UserAlbumDTO {
 	public int getAlbumPhotosQty() {
 		return albumPhotosQty;
 	}
+
+	@Override
+	public String toString() {
+		return String.format( "User: %d, album: %d '%s'", userId, entryId, albumName );
+	}
 }

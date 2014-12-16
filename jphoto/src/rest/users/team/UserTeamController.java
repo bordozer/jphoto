@@ -5,6 +5,7 @@ import core.general.user.userTeam.UserTeam;
 import core.general.user.userTeam.UserTeamMember;
 import core.services.translator.Language;
 import core.services.translator.TranslatorService;
+import core.services.user.UserService;
 import core.services.user.UserTeamService;
 import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.UrlUtilsService;
@@ -21,6 +22,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Controller
 @RequestMapping( "/users/{userId}/team" )
 public class UserTeamController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private UserTeamService userTeamService;
@@ -64,7 +68,7 @@ public class UserTeamController {
 
 		final UserTeamMember teamMember = new UserTeamMember();
 
-		teamMember.setUser( EnvironmentContext.getCurrentUser() );
+		teamMember.setUser( userService.load( dto.getUserId() ) );
 		teamMember.setId( dto.getEntryId() );
 		teamMember.setName( dto.getUserTeamMemberName() );
 

@@ -32,7 +32,9 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var translationDTO = this.model[ 'translationDTO' ];
 
 			var entry = new Model.UserTeamMemberModel( {
-				  userTeamMemberId: 0
+				entryId: 0
+				, userId: this.model.userId
+				, userTeamMemberId: 0
 				, userTeamMemberName: ''
 				, checked: true
 				, openEditor: true
