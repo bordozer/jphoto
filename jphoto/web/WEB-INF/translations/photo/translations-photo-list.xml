@@ -328,8 +328,8 @@
 	</translation>
 
 	<translation>
-		<nerd>Photo list bottom text: The most popular photos for last $1 days</nerd>
-		<ru><![CDATA[Показаны работы, набравшие наибольшее количество просмотров за последние $1 дня.]]></ru>
+		<nerd>Photo list bottom text: The most popular photos for period $1 - $2.</nerd>
+		<ru><![CDATA[Показаны работы, набравшие наибольшее количество просмотров за период $1 - $2.]]></ru>
 	</translation>
 
 	<translation>

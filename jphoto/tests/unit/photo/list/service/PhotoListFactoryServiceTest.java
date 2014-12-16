@@ -219,6 +219,21 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	}
 
 	@Test
+	public void galleryLastPopularTest() {
+		final DateData dateData = new DateData();
+
+		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).galleryLastPopular( 2, 12, testData.accessor );
+
+		assertTrue( factory.getPhotoFilteringStrategy() instanceof BestFilteringStrategy );
+		assertEquals( String.format( "SELECT photos.id FROM photos AS photos INNER JOIN photoPreview ON ( photos.id = photoPreview.photoId ) WHERE ( ( photoPreview.previewTime >= '%s' ) AND photoPreview.previewTime <= '%s' ) GROUP BY photos.id ORDER BY COUNT( photoPreview.id ) DESC LIMIT 12 OFFSET 12;", dateData.from1, dateData.to1 ), factory.getSelectIdsQuery().build() );
+		assertEquals( String.format( "Photo list title: Most popular fot last %d days photos", DAYS ), factory.getTitle().build( Language.EN ) );
+		assertEquals( String.format( "Photo list bottom text: The most popular photos for period %s - %s.<br />Photo list bottom text: Sorted by previews count DESC", dateData.from2, dateData.to2 ), factory.getCriteriaDescription().build( Language.EN ) );
+		assertEquals( emptyLink(), factory.getLinkToFullList() );
+
+		assertGroupOperationMenusForUserThenAdmin( factory );
+	}
+
+	@Test
 	public void galleryForGenreTopBestTest() {
 		final DateData dateData = new DateData();
 
