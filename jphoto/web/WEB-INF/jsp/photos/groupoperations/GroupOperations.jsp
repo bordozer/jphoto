@@ -104,24 +104,7 @@
 
 			<h3>${eco:translate('Group operation details')}:</h3>
 
-			<c:if test="${photoGroupOperationType == 'ARRANGE_PHOTO_ALBUMS'}">
-				<%--<c:forEach var="userPhotoAlbum" items="${photoGroupOperationModel.userPhotoAlbums}">
-					<js:checkboxMassChecker checkboxClass="group-operation-checkbox-${userPhotoAlbum.id}" /> ${userPhotoAlbum.name}
-					<br />
-				</c:forEach>--%>
-				<script type="text/javascript">
-					function doNothing(){}
-				</script>
-				<div style="float: left; width: 100%; padding-bottom: 10px;">
-					<user:userAlbums userId="${photoGroupOperationModel.user.id}"
-						groupSelectionClass="group-operation-checkbox-"
-						onEditJSFunction="doNothing"
-						onDeleteJSFunction="doNothing"
-					/>
-				</div>
-			</c:if>
-
-			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
+			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS' or photoGroupOperationType == 'ARRANGE_PHOTO_ALBUMS'}">
 				<script type="text/javascript">
 
 					function onEdit( entry ) {
@@ -165,13 +148,26 @@
 
 				</script>
 
-				<div style="float: left; width: 100%; padding-bottom: 10px;">
-					<user:userTeam userId="${photoGroupOperationModel.user.id}"
-								   groupSelectionClass="group-operation-checkbox-"
-								   onEditJSFunction="onEdit"
-								   onDeleteJSFunction="onDelete"
-							/>
-				</div>
+
+				<c:if test="${photoGroupOperationType == 'ARRANGE_PHOTO_ALBUMS'}">
+					<div style="float: left; width: 100%; padding-bottom: 10px;">
+						<user:userAlbums userId="${photoGroupOperationModel.user.id}"
+							groupSelectionClass="group-operation-checkbox-"
+							onEditJSFunction="onEdit"
+							onDeleteJSFunction="onDelete"
+						/>
+					</div>
+				</c:if>
+
+				<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
+					<div style="float: left; width: 100%; padding-bottom: 10px;">
+						<user:userTeam userId="${photoGroupOperationModel.user.id}"
+									   groupSelectionClass="group-operation-checkbox-"
+									   onEditJSFunction="onEdit"
+									   onDeleteJSFunction="onDelete"
+								/>
+					</div>
+				</c:if>
 
 			</c:if>
 
