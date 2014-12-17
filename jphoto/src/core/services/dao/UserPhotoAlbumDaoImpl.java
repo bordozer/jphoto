@@ -101,15 +101,28 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 	}
 
 	@Override
+	public List<Integer> loadAlbumPhotoIds( int albumId ) {
+		final String sql = String.format( "SELECT p.%1$s FROM %2$s p WHERE p.%1$s IN ( SELECT pa.%4$s FROM %3$s pa WHERE pa.%5$s = :albumId )"
+				, ENTITY_ID
+				, PhotoDaoImpl.TABLE_PHOTOS
+				, TABLE_PHOTO_ALBUMS
+				, TABLE_PHOTO_ALBUMS_COL_PHOTO_ID
+				, TABLE_PHOTO_ALBUMS_COL_ALBUM_ID
+		);
+
+		return jdbcTemplate.query( sql, new MapSqlParameterSource( "albumId", albumId ), new IdsRowMapper() );
+	}
+
+	@Override
 	public List<UserPhotoAlbum> loadAllUserPhotoAlbums( final int userId ) {
-		final String sql = String.format( "SELECT * FROM %s WHERE %s=:userId", TABLE_USER_PHOTO_ALBUM, TABLE_USER_PHOTO_ALBUM_COL_USER_ID );
+		final String sql = String.format( "SELECT * FROM %s WHERE %s= :userId", TABLE_USER_PHOTO_ALBUM, TABLE_USER_PHOTO_ALBUM_COL_USER_ID );
 
 		return jdbcTemplate.query( sql, new MapSqlParameterSource( "userId", userId ), new UserPhotoAlbumMapper() );
 	}
 
 	@Override
 	public void deletePhotoFromAllAlbums( final int photoId ) {
-		final String sql = String.format( "DELETE FROM %s WHERE %s=:photoId", TABLE_PHOTO_ALBUMS, TABLE_PHOTO_ALBUMS_COL_PHOTO_ID );
+		final String sql = String.format( "DELETE FROM %s WHERE %s= :photoId", TABLE_PHOTO_ALBUMS, TABLE_PHOTO_ALBUMS_COL_PHOTO_ID );
 
 		jdbcTemplate.update( sql, new MapSqlParameterSource( "photoId", photoId ) );
 	}
@@ -122,7 +135,7 @@ public class UserPhotoAlbumDaoImpl extends BaseEntityDaoImpl<UserPhotoAlbum> imp
 		deletePhotoFromAllAlbums( photoId );
 
 		for ( final UserPhotoAlbum photoAlbum : photoAlbums ) {
-			final String sql = String.format( "INSERT INTO %s( %s, %s) VALUES( :photoId, :albumId );"
+			final String sql = String.format( "INSERT INTO %s( %s, %s ) VALUES( :photoId, :albumId );"
 				, TABLE_PHOTO_ALBUMS
 				, TABLE_PHOTO_ALBUMS_COL_PHOTO_ID
 				, TABLE_PHOTO_ALBUMS_COL_ALBUM_ID

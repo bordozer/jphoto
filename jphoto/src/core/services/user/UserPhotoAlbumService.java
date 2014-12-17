@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface UserPhotoAlbumService extends BaseEntityService<UserPhotoAlbum>, IdsSqlSelectable, AllEntriesByIdLoadable<UserPhotoAlbum> {
 
+	List<Integer> loadAlbumPhotoIds( final int albumId );
+
 	boolean savePhotoAlbums( final Photo photo, final List<UserPhotoAlbum> photoAlbums );
 
 	List<UserPhotoAlbum> loadPhotoAlbums( final int photoId );

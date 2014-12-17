@@ -42,6 +42,11 @@ public class UserPhotoAlbumServiceImpl implements UserPhotoAlbumService {
 	}
 
 	@Override
+	public List<Integer> loadAlbumPhotoIds( int albumId ) {
+		return userPhotoAlbumDao.loadAlbumPhotoIds( albumId );
+	}
+
+	@Override
 	public boolean savePhotoAlbums( final Photo photo, final List<UserPhotoAlbum> photoAlbums ) {
 		return userPhotoAlbumDao.savePhotoAlbums( photo, photoAlbums );
 	}

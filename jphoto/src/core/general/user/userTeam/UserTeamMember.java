@@ -69,7 +69,7 @@ public class UserTeamMember extends AbstractBaseEntity implements Nameable, Favo
 
 	@Override
 	public int hashCode() {
-		return user.hashCode();
+		return 31 * user.getId();
 	}
 
 	public int getHashCode() {

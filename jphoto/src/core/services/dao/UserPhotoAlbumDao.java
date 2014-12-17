@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface UserPhotoAlbumDao extends BaseEntityDao<UserPhotoAlbum> {
 
+	List<Integer> loadAlbumPhotoIds( final int albumId );
+
 	List<UserPhotoAlbum> loadAllUserPhotoAlbums( final int userId );
 
 	void deletePhotoFromAllAlbums( final int photoId );

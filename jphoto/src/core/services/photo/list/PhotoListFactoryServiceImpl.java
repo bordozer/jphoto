@@ -1,9 +1,12 @@
 package core.services.photo.list;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import core.enums.FavoriteEntryType;
 import core.general.genre.Genre;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
+import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
@@ -15,12 +18,19 @@ import core.services.photo.list.filtering.HideAnonymousPhotosFilteringStrategy;
 import core.services.photo.list.filtering.TopBestFilteringStrategy;
 import core.services.system.Services;
 import core.services.translator.message.TranslatableMessage;
+import core.services.user.UserPhotoAlbumService;
+import core.services.user.UserTeamService;
 import core.services.utils.DateUtilsService;
+import core.services.utils.EntityLinkUtilsService;
 import core.services.utils.sql.PhotoListQueryBuilder;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.builder.SqlIdsSelectQuery;
 
-import java.util.Date;
+import java.util.*;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
@@ -34,6 +44,15 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private UserPhotoAlbumService userPhotoAlbumService;
+
+	@Autowired
+	private EntityLinkUtilsService entityLinkUtilsService;
+
+	@Autowired
+	private UserTeamService userTeamService;
 
 	@Autowired
 	private Services services;
@@ -822,10 +841,29 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 
 			@Override
 			public TranslatableMessage getTitle() {
-				return new TranslatableMessage( "Photo list title: User $1: album $2", services )
-					.userCardLink( user )
-					.userAlbumLink( userPhotoAlbum )
+
+				final Set<PhotoTeamMember> photoTeamMembers = newHashSet();
+				for ( final int photoId : userPhotoAlbumService.loadAlbumPhotoIds( userPhotoAlbum.getId() ) ) {
+					photoTeamMembers.addAll( userTeamService.getPhotoTeam( photoId ).getPhotoTeamMembers() );
+				}
+
+				final TranslatableMessage result = new TranslatableMessage( "Photo list title: User $1: album $2", services )
+						.userCardLink( user )
+						.userAlbumLink( userPhotoAlbum )
 					;
+
+				if ( photoTeamMembers.size() > 0 ) {
+					final List<String> photoTeamMembersNames = Lists.transform( newArrayList( photoTeamMembers ), new Function<PhotoTeamMember, String>() {
+						@Override
+						public String apply( final PhotoTeamMember teamMember ) {
+							return entityLinkUtilsService.getUserTeamMemberCardLink( teamMember.getUserTeamMember(), accessor.getLanguage() );
+						}
+					} );
+					final String albumMembers = StringUtils.join( photoTeamMembersNames, ", " );
+					result.string( " " ).addTranslatableMessageParameter( new TranslatableMessage( "( Team: $1 )", services ).string( albumMembers ) );
+				}
+
+				return result;
 			}
 
 			@Override

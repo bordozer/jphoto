@@ -228,6 +228,11 @@
 	</translation>
 
 	<translation>
+		<nerd>( Team: $1 )</nerd>
+		<ru><![CDATA[( Команда: $1 )]]></ru>
+	</translation>
+
+	<translation>
 		<nerd>Photo list bottom text: User $1: all photos from album $2</nerd>
 		<ru><![CDATA[Показаны работы пользователя $1 из альбома $2]]></ru>
 	</translation>
