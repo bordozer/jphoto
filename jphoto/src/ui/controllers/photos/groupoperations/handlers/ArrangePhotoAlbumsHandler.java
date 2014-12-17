@@ -45,7 +45,7 @@ public class ArrangePhotoAlbumsHandler extends AbstractGroupOperationHandler {
 		final Map<String, PhotoGroupOperationEntryProperty> map = model.getPhotoGroupOperationEntryPropertiesMap();
 
 		for ( final UserPhotoAlbum userPhotoAlbum : userPhotoAlbums ) {
-			final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), userPhotoAlbum.getId(), entityLinkUtilsService.getUserPhotoAlbumPhotosLink( userPhotoAlbum, getLanguage() ) );
+			final PhotoGroupOperationEntryProperty entryProperty = new PhotoGroupOperationEntryProperty( photo.getId(), userPhotoAlbum.getId(), userPhotoAlbum.getName() );
 			entryProperty.setValue( userPhotoAlbumService.isPhotoInAlbum( photo.getId(), userPhotoAlbum.getId() ) );
 
 			final String key = String.format( "%d_%d", photo.getId(), userPhotoAlbum.getId() );
