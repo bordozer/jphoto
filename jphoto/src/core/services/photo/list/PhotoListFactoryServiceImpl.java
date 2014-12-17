@@ -1062,6 +1062,18 @@ public class PhotoListFactoryServiceImpl implements PhotoListFactoryService {
 		this.dateUtilsService = dateUtilsService;
 	}
 
+	public void setUserPhotoAlbumService( UserPhotoAlbumService userPhotoAlbumService ) {
+		this.userPhotoAlbumService = userPhotoAlbumService;
+	}
+
+	public void setEntityLinkUtilsService( EntityLinkUtilsService entityLinkUtilsService ) {
+		this.entityLinkUtilsService = entityLinkUtilsService;
+	}
+
+	public void setUserTeamService( UserTeamService userTeamService ) {
+		this.userTeamService = userTeamService;
+	}
+
 	public void setServices( final Services services ) {
 		this.services = services;
 	}

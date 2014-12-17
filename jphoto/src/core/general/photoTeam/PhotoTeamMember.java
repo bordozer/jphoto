@@ -35,11 +35,6 @@ public class PhotoTeamMember {
 		return 31 * userTeamMember.getId();
 	}
 
-	/*@Override
-	public int compare( PhotoTeamMember o1, PhotoTeamMember o2 ) {
-		return o1.getUserTeamMember().getName().compareToIgnoreCase( o2.getUserTeamMember().getName() );
-	}*/
-
 	@Override
 	public boolean equals( Object o ) {
 

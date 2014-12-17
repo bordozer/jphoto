@@ -5,10 +5,13 @@ import core.enums.FavoriteEntryType;
 import core.enums.UserTeamMemberType;
 import core.general.configuration.ConfigurationKey;
 import core.general.data.TimeRange;
+import core.general.photo.Photo;
 import core.general.photo.PhotoVotingCategory;
 import core.general.photo.group.PhotoGroupOperationMenu;
 import core.general.photo.group.PhotoGroupOperationMenuContainer;
 import core.general.photo.group.PhotoGroupOperationType;
+import core.general.photoTeam.PhotoTeam;
+import core.general.photoTeam.PhotoTeamMember;
 import core.general.user.UserMembershipType;
 import core.general.user.userAlbums.UserPhotoAlbum;
 import core.general.user.userTeam.UserTeamMember;
@@ -23,7 +26,10 @@ import core.services.photo.list.filtering.TopBestFilteringStrategy;
 import core.services.system.ConfigurationService;
 import core.services.system.ServicesImpl;
 import core.services.translator.Language;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
+import core.services.user.UserTeamService;
+import core.services.utils.EntityLinkUtilsService;
 import mocks.PhotoVotingCategoryMock;
 import org.apache.commons.lang.StringUtils;
 import org.easymock.EasyMock;
@@ -469,11 +475,20 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 	@Test
 	public void userAlbumPhotosTest() {
 
+		final int photoAlbum = 3455;
+
+		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
+		EasyMock.expect( userPhotoAlbumService.loadAlbumPhotoIds( photoAlbum ) ).andReturn( newArrayList() ).anyTimes();
+		EasyMock.replay( userPhotoAlbumService );
+
 		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
-		userPhotoAlbum.setId( 3455 );
+		userPhotoAlbum.setId( photoAlbum );
 		userPhotoAlbum.setUser( testData.user );
 
-		final AbstractPhotoListFactory factory = getPhotoListFactoryService( testData ).userAlbumPhotos( testData.user, userPhotoAlbum, 5, 16, testData.accessor );
+		final PhotoListFactoryServiceImpl photoListFactoryService = getPhotoListFactoryService( testData );
+		photoListFactoryService.setUserPhotoAlbumService( userPhotoAlbumService );
+
+		final AbstractPhotoListFactory factory = photoListFactoryService.userAlbumPhotos( testData.user, userPhotoAlbum, 5, 16, testData.accessor );
 
 		assertTrue( factory.getPhotoFilteringStrategy() instanceof HideAnonymousPhotosFilteringStrategy );
 		assertEquals( "SELECT photos.id FROM photos AS photos LEFT OUTER JOIN photoAlbums ON ( photos.id = photoAlbums.photoId ) WHERE ( ( photos.userId = '112' ) AND photoAlbums.photoAlbumId = '3455' ) ORDER BY photos.uploadTime DESC LIMIT 16 OFFSET 64;", factory.getSelectIdsQuery().build() );
@@ -482,6 +497,46 @@ public class PhotoListFactoryServiceTest extends AbstractTestCase {
 		assertEquals( emptyLink(), factory.getLinkToFullList() );
 
 		assertGroupOperationMenusForUserThenAdmin( factory );
+	}
+
+	@Test
+	public void userAlbumPhotosWithMembersTest() {
+		final int photoAlbumId = 3455;
+		final int photoInAlbumId_1 = 1;
+		final int photoInAlbumId_2 = 2;
+
+		final UserTeamMember userTeamMember = new UserTeamMember();
+		userTeamMember.setId( 123 );
+
+		final PhotoTeamMember photoTeamMember = new PhotoTeamMember();
+		photoTeamMember.setUserTeamMember( userTeamMember );
+
+		final EntityLinkUtilsService entityLinkUtilsService = EasyMock.createMock( EntityLinkUtilsService.class );
+		EasyMock.expect( entityLinkUtilsService.getUserTeamMemberCardLink( userTeamMember, Language.EN ) ).andReturn( "UserTeamMember link" ).anyTimes();
+		EasyMock.replay( entityLinkUtilsService );
+
+		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
+		EasyMock.expect( userPhotoAlbumService.loadAlbumPhotoIds( photoAlbumId ) ).andReturn( newArrayList( photoInAlbumId_1, photoInAlbumId_2 ) ).anyTimes();
+		EasyMock.replay( userPhotoAlbumService );
+
+		final UserTeamService userTeamService = EasyMock.createMock( UserTeamService.class );
+		EasyMock.expect( userTeamService.getPhotoTeam( photoInAlbumId_1 ) ).andReturn( new PhotoTeam( new Photo(), newArrayList( photoTeamMember ) ) ).anyTimes();
+		EasyMock.expect( userTeamService.getPhotoTeam( photoInAlbumId_2 ) ).andReturn( new PhotoTeam( new Photo(), newArrayList( photoTeamMember ) ) ).anyTimes();
+		EasyMock.replay( userTeamService );
+
+		final PhotoListFactoryServiceImpl photoListFactoryService = getPhotoListFactoryService( testData );
+		photoListFactoryService.setUserTeamService( userTeamService );
+		photoListFactoryService.setUserPhotoAlbumService( userPhotoAlbumService );
+		photoListFactoryService.setEntityLinkUtilsService( entityLinkUtilsService );
+
+		final UserPhotoAlbum userPhotoAlbum = new UserPhotoAlbum();
+		userPhotoAlbum.setId( photoAlbumId );
+		userPhotoAlbum.setName( "The album" );
+		userPhotoAlbum.setUser( testData.user );
+
+		final AbstractPhotoListFactory factory = photoListFactoryService.userAlbumPhotos( testData.user, userPhotoAlbum, 5, 16, testData.accessor );
+
+		assertEquals( "Photo list title: User <a class=\"member-link\" href=\"http://127.0.0.1:8085/worker/members/112/card/\" title=\"EntityLinkUtilsService: User card owner: user card link title\">User card owner</a>: album <a href=\"http://127.0.0.1:8085/worker/members/112/albums/3455/\" title\"EntityLinkUtilsService: User photo album link title: The album\">The album</a> ( Team: UserTeamMember link )", factory.getTitle().build( Language.EN ) );
 	}
 
 	@Test
