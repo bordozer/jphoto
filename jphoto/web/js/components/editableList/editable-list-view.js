@@ -21,8 +21,8 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var model = this.model;
 			var el = this.$el;
 			this.model.fetch( { cache: false, success: function (  ) {
-				_.each( model.selectedIds, function( memberId ) {
-					$( '.user-team-member-checkbox-' + memberId, el ).attr( 'checked', 'checked' );
+				_.each( model.selectedIds, function( entryId ) {
+					$( '.user-team-member-checkbox-' + entryId, el ).attr( 'checked', 'checked' );
 				} );
 			} } );
 		},

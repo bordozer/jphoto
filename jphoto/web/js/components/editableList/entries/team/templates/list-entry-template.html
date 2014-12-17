@@ -1,6 +1,6 @@
 <div class="user-team-list-entry">
 
-	<input type="checkbox" name="userTeamMemberIds" class="user-team-member-checkbox user-team-member-checkbox-<%-userTeamMemberId%>" value="<%-userTeamMemberId%>" <%- checked ?  "checked='checked'" : "" %> >
+	<input type="checkbox" name="userTeamMemberIds" class="user-team-member-checkbox user-team-member-checkbox-<%-entryId%>" value="<%-entryId%>" <%- checked ?  "checked='checked'" : "" %> >
 
 	<% if ( entryId > 0 && ! openEditor ) { %>
 		<a href="#" class="user-team-member-info" onclick="return false;" title="<%-userTeamMemberNameTitle%>"><%-entryName%></a> - <%- teamMemberPhotosQty %> <%- translationsDTO.listEntryPhotos %>

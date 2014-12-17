@@ -39,7 +39,6 @@ define( ["backbone", "jquery", "underscore", "mass_checker"
 			var entry = new Model.UserTeamMemberModel( {
 				entryId: 0
 				, userId: this.model.userId
-				, userTeamMemberId: 0
 				, entryName: ''
 				, checked: true
 				, openEditor: true

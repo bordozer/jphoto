@@ -124,30 +124,30 @@
 			<c:if test="${photoGroupOperationType == 'ARRANGE_TEAM_MEMBERS'}">
 				<script type="text/javascript">
 
-					function onEdit( teamMember ) {
+					function onEdit( entry ) {
 
-						var name = teamMember.get( 'entryName' ) + " ( " + teamMember.get( 'teamMemberTypeName' ) + " )";
-						var userTeamMemberId = teamMember.get( 'userTeamMemberId' );
+						var entryId = entry.get( 'entryId' );
+						var entryName = entry.get( 'entryName' );
 
 						require( [ 'jquery' ], function ( $ ) {
 							$( ".photo-container" ).each( function( index, _container ) {
 								var container = $( _container );
-								var label = $( '.label-' + userTeamMemberId, container );
+								var label = $( '.label-' + entryId, container );
 
 								if ( label.length > 0 ) {
-									label.text( name );
+									label.text( entryName );
 								} else {
 									var photoId = $( '#photoId', container ).val();
 
-									var memberContainer = $( "<div id='container-" + userTeamMemberId + "'></div>" );
-									var id = "photo-" + photoId + "-entry-" + userTeamMemberId;
+									var memberContainer = $( "<div id='container-" + entryId + "'></div>" );
+									var id = "photo-" + photoId + "-entry-" + entryId;
 
-									memberContainer.append( "<input type='checkbox' id=\"" + id + "\" name=\"" + id + "\" value='true' class='group-operation-checkbox-" + userTeamMemberId + " checkbox-" + photoId + "'>" );
-									memberContainer.append( " <label for=\"" + id + "\"><span class='label-" + userTeamMemberId + "'>" + name + "</span></label>" );
+									memberContainer.append( "<input type='checkbox' id=\"" + id + "\" name=\"" + id + "\" value='true' class='group-operation-checkbox-" + entryId + " checkbox-" + photoId + "'>" );
+									memberContainer.append( " <label for=\"" + id + "\"><span class='label-" + entryId + "'>" + entryName + "</span></label>" );
 									memberContainer.append( "<br />" );
 									memberContainer.append( "<input type='hidden' id=\"_" + id + "\" name=\"_" + id + "\" value='false'>" );
 									memberContainer.append( "<input type='hidden' id='photoId' value='" + photoId + "'>" );
-									memberContainer.append( "<input type='hidden' name='" + photoId + "' value='" + userTeamMemberId + "'>" );
+									memberContainer.append( "<input type='hidden' name='" + photoId + "' value='" + entryId + "'>" );
 
 									$( container ).append( memberContainer );
 								}
@@ -155,10 +155,10 @@
 						} );
 					}
 
-					function onDelete( teamMemberId ) {
+					function onDelete( entryId ) {
 						require( [ 'jquery' ], function ( $ ) {
 							$( ".photo-container" ).each( function( index, container ) {
-								$( '#container-' + teamMemberId, container ).remove();
+								$( '#container-' + entryId, container ).remove();
 							});
 						} );
 					}
