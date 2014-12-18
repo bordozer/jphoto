@@ -124,7 +124,7 @@ public abstract class AbstractPhotoImportStrategy {
 			.addPhotosByGenreLinkParameter( genre )
 		);
 
-		log.debug( String.format( "Photo %s is generated for user %s", photo.getNameEscaped(), user.getNameEscaped() ) );
+		log.debug( String.format( "Photo %s is generated for user %s", photo.getName(), user.getName() ) );
 	}
 
 	public Services getServices() {

@@ -150,6 +150,8 @@ public class PhotoServiceImpl implements PhotoService {
 		try {
 			final File preview = previewGenerationService.generatePreviewSync( photoAuthor, copiedToUserFolderFile );
 			createPhotoDBEntry( photo, copiedToUserFolderFile, preview, photoTeam, photoAlbums );
+
+			log.debug( String.format( "User %s has been uploaded photo '%s'", userService.load( photo.getUserId() ).getName(), photo.getName() ) );
 			if ( preview == null ) {
 				throw new IOException( String.format( "Can not generate photo preview for '%s'", copiedToUserFolderFile.getCanonicalPath() ) );
 			}
