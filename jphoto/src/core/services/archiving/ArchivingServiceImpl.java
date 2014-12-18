@@ -24,7 +24,7 @@ public class ArchivingServiceImpl implements ArchivingService {
 
 	@Override
 	public void archivePhotosAppraisalsOlderThen( final int days ) {
-
+		// TODO: blu: do not forget implement this
 	}
 
 	@Override
