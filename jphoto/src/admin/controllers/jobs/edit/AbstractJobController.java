@@ -318,6 +318,8 @@ public abstract class AbstractJobController {
 				return new ActivityStreamCleanupJob( jobEnvironment );
 			case JOB_EXECUTION_HISTORY_CLEAN_UP:
 				return new JobExecutionHistoryCleanupJob( jobEnvironment );
+			case ARCHIVING:
+				return new ArchivingJob( jobEnvironment );
 		}
 
 		throw new IllegalArgumentException( String.format( "Illegal SavedJobType: %s", jobType ) );

@@ -59,10 +59,6 @@ public class PhotoStorageSynchronizationJob extends NoParametersAbstractJob {
 	}
 
 	@Override
-	public void initJobParameters( final Map<SavedJobParameterKey, CommonProperty> jobParameters ) {
-	}
-
-	@Override
 	public SavedJobType getJobType() {
 		return SavedJobType.PHOTO_STORAGE_SYNCHRONIZATION;
 	}

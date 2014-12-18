@@ -4,6 +4,7 @@ public enum SavedJobType {
 
 	PREVIEW_GENERATION( 4, "SavedJobType: Photo previews generation", JobListTab.SYSTEM_JOBS, "previews", "previewGeneration.png" )
 	, REINDEX( 11, "SavedJobType: Recreate indexes and constraints", JobListTab.SYSTEM_JOBS, "reindex", "reindex.png" )
+	, ARCHIVING( 17, "SavedJobType: Archiving", JobListTab.SYSTEM_JOBS, "archiving", "archiving.png" )
 	, USER_STATUS( 7, "SavedJobType: User status recalculation", JobListTab.RECALCULATION, "user-status", "userStatusRecalculation.png" )
 	, USER_GENRES_RANKS_RECALCULATING( 5, "SavedJobType: Members ranks in genres recalculation", JobListTab.RECALCULATION, "genreRank", "userGenreRankRecalculation.png" )
 	, PHOTO_RATING( 10, "SavedJobType: Photo rating for period recalculation", JobListTab.RECALCULATION, "photoRating", "photoRatingRecalculation.png" )

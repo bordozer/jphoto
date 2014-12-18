@@ -82,4 +82,9 @@
 		<ru><![CDATA[Комплексная задача]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>SavedJobType: Archiving</nerd>
+		<ru><![CDATA[Архивирование]]></ru>
+	</translation>
+
 </translations>

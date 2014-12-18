@@ -460,12 +460,6 @@ public class ReindexJob extends NoParametersAbstractJob {
 		return tables.size();
 	}
 
-		@Override
-	public void initJobParameters( final Map<SavedJobParameterKey, CommonProperty> jobParameters ) {
-		super.initJobParameters( jobParameters );
-//		totalJopOperations = // TODO!!!
-	}
-
 	@Override
 	public SavedJobType getJobType() {
 		return SavedJobType.REINDEX;

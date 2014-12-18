@@ -30,6 +30,7 @@
 	<bean id="photosightImportValidator" class="admin.controllers.jobs.edit.photosImport.PhotosImportValidator"/>
 	<bean id="activityStreamCleanupJobValidator" class="admin.controllers.jobs.edit.activityStream.ActivityStreamCleanupJobValidator"/>
 	<bean id="jobExecutionHistoryCleanupJobValidator" class="admin.controllers.jobs.edit.jobExecutionHistoryCleanup.JobExecutionHistoryCleanupJobValidator"/>
+	<bean id="archivingJobJobValidator" class="admin.controllers.jobs.edit.archiving.ArchivingJobJobValidator"/>
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
