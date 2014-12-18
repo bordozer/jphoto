@@ -48,4 +48,6 @@
 
 	<bean name="translationsDao" class="core.services.dao.TranslationsDaoImpl"/>
 
+	<bean name="archivingDao" class="core.services.dao.ArchivingDaoImpl"/>
+
 </beans>

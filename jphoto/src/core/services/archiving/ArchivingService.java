@@ -2,9 +2,9 @@ package core.services.archiving;
 
 public interface ArchivingService {
 
-	void archivePhotosPreviews( final int olderThen );
+	void archivePhotosPreviewsOlderThen( final int days );
 
-	void archivePhotosAppraisals( final int olderThen );
+	void archivePhotosAppraisalsOlderThen( final int days );
 
-	void archivePhotos( final int olderThen );
+	void archivePhoto( final int photoId );
 }

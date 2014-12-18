@@ -7,8 +7,12 @@ import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
 import core.services.archiving.ArchivingService;
+import core.services.photo.PhotoService;
 import core.services.translator.message.TranslatableMessage;
+import core.services.utils.DateUtilsService;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
@@ -35,25 +39,49 @@ public class ArchivingJob extends AbstractJob {
 	@Override
 	protected void runJob() throws Throwable {
 
-		final ArchivingService archivingService = services.getArchivingService();
-
 		if ( previewsArchivingEnabled ) {
-			archivingService.archivePhotosPreviews( archivePreviewsOlderThen );
+			archivePhotoPreviews();
 		}
 
 		increment();
 
 		if ( appraisalArchivingEnabled ) {
-			archivingService.archivePhotosAppraisals( archiveAppraisalOlderThen );
+			archivePhotoAppraisal();
 		}
 
 		increment();
 
 		if ( photosArchivingEnabled ) {
-			archivingService.archivePhotos( archivePhotosOlderThen );
+			archivePhotos();
 		}
 
 		increment();
+	}
+
+	private void archivePhotoPreviews() {
+		services.getArchivingService().archivePhotosPreviewsOlderThen( archivePreviewsOlderThen );
+	}
+
+	private void archivePhotoAppraisal() {
+		services.getArchivingService().archivePhotosAppraisalsOlderThen( archiveAppraisalOlderThen );
+	}
+
+	private void archivePhotos() {
+
+		final DateUtilsService dateUtilsService = services.getDateUtilsService();
+		final ArchivingService archivingService = services.getArchivingService();
+		final PhotoService photoService = services.getPhotoService();
+
+		log.debug( String.format( "About to archive photos uploaded earlie then %s", dateUtilsService.formatDateTime( dateUtilsService.getFirstSecondOfTheDayNDaysAgo( archivePhotosOlderThen - 1 ) ) ) );
+
+		final Date time = dateUtilsService.getFirstSecondOfTheDayNDaysAgo( archivePhotosOlderThen );
+		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
+		for ( final int photoId : photoIdsToArchive ) {
+
+			archivingService.archivePhoto( photoId );
+
+			log.debug( String.format( "Archiving photo #%d", photoId ) );
+		}
 	}
 
 	@Override

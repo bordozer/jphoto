@@ -26,6 +26,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -264,6 +265,20 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		paramSource.addValue( "importId", importId );
 
 		return hasEntry( sql, paramSource );
+	}
+
+	@Override
+	public List<Integer> getPhotosIdsUploadedEarlieThen( final Date time ) {
+		final String sql = String.format( "SELECT %s FROM %s WHERE %s <= :time;"
+			, ENTITY_ID
+			, TABLE_PHOTOS
+			, TABLE_COLUMN_UPLOAD_TIME
+		);
+
+		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
+		paramSource.addValue( "time", time );
+
+		return jdbcTemplate.query( sql, paramSource, new IdsRowMapper() );
 	}
 
 	private int getUserGenrePhotosQty( final int userId, final int genreId ) {

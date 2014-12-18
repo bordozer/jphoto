@@ -58,4 +58,6 @@ public interface PhotoService extends BaseEntityService<Photo>, IdsSqlSelectable
 	int getLastUserPhotoId( final int userId );
 
 	boolean isUserPhotoImported( final int userId, final int importId );
+
+	List<Integer> getPhotosIdsUploadedEarlieThen( final Date time );
 }

@@ -1,19 +1,43 @@
 package core.services.archiving;
 
+import core.log.LogHelper;
+import core.services.dao.ArchivingDao;
+import core.services.photo.PhotoService;
+import core.services.utils.DateUtilsService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
+
 public class ArchivingServiceImpl implements ArchivingService {
 
+	@Autowired
+	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private PhotoService photoService;
+
+	@Autowired
+	private ArchivingDao archivingDao;
+
+	private final LogHelper log = new LogHelper( ArchivingServiceImpl.class );
+
 	@Override
-	public void archivePhotosPreviews( final int olderThen ) {
+	public void archivePhotosPreviewsOlderThen( final int days ) {
+		archivingDao.deletePhotosPreviewsOlderThen( getFirstSecondOfTheDayNDaysAgo( days ) );
+	}
+
+	@Override
+	public void archivePhotosAppraisalsOlderThen( final int days ) {
 
 	}
 
 	@Override
-	public void archivePhotosAppraisals( final int olderThen ) {
+	public void archivePhoto( final int photoId ) {
+		log.debug( String.format( "Archiving photo #%d", photoId ) );
 
 	}
 
-	@Override
-	public void archivePhotos( final int olderThen ) {
-
+	private Date getFirstSecondOfTheDayNDaysAgo( final int days ) {
+		return dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days - 1 );
 	}
 }
