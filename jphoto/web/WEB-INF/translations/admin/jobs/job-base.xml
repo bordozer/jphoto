@@ -333,18 +333,18 @@
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Each action generates one of selected favorite entries randomly</nerd>
+		<ru><![CDATA[Генерирование случайным образом одной из выбранных закладок]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Enter $1</nerd>
+		<ru><![CDATA[Введите $1]]></ru>
 	</translation>
 
 	<translation>
-		<nerd></nerd>
-		<ru><![CDATA[]]></ru>
+		<nerd>Select at least one $1</nerd>
+		<ru><![CDATA[Выберите хотя бы одно значение: $1]]></ru>
 	</translation>
 
 	<translation>
