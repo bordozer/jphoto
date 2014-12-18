@@ -144,7 +144,7 @@ public abstract class AbstractRemotePhotoSiteUrlHelper {
 		return null;
 	}
 
-	private  String getRemotePageContent( final String remotePhotoSiteUserId, final String pageUrl ) {
+	public String getRemotePageContent( final String remotePhotoSiteUserId, final String pageUrl ) {
 
 		final DefaultHttpClient httpClient = new DefaultHttpClient();
 

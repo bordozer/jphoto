@@ -2,7 +2,6 @@ package core.services.archiving;
 
 import core.log.LogHelper;
 import core.services.dao.ArchivingDao;
-import core.services.photo.PhotoService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,9 +11,6 @@ public class ArchivingServiceImpl implements ArchivingService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private PhotoService photoService;
 
 	@Autowired
 	private ArchivingDao archivingDao;
