@@ -23,7 +23,7 @@ public class ArchivingServiceImpl implements ArchivingService {
 
 	@Override
 	public void archivePhotosPreviewsOlderThen( final int days ) {
-		archivingDao.deletePhotosPreviewsOlderThen( getFirstSecondOfTheDayNDaysAgo( days ) );
+		archivingDao.deletePhotosPreviewsOlderThen( getArchiveStartDate( days ) );
 	}
 
 	@Override
@@ -37,7 +37,8 @@ public class ArchivingServiceImpl implements ArchivingService {
 		// TODO: blu: do not forget implement this
 	}
 
-	private Date getFirstSecondOfTheDayNDaysAgo( final int days ) {
+	@Override
+	public Date getArchiveStartDate( final int days ) {
 		return dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days - 1 );
 	}
 }
