@@ -38,8 +38,8 @@ public enum ConfigurationKey {
 
 	, PHOTO_UPLOAD_FILE_ALLOWED_EXTENSIONS( 400, "image/jpeg", true, ConfigurationDataType.ARRAY_OF_STRINGS, ConfigurationUnit.EMPTY, ConfigurationTab.PHOTO_UPLOAD, "Allowed uploaded photo file formats separated by comma" )
 	, PHOTO_UPLOAD_ADDITIONAL_SIZE_WEEKLY_LIMIT_PER_RANK_KB( 401, "100", false, ConfigurationDataType.INTEGER, ConfigurationUnit.KILOBYTE, ConfigurationTab.PHOTO_UPLOAD, "Additional summary photos size for file uploading for each rank in photo category per week" )
-	, PHOTO_UPLOAD_MIN_WIDTH( 410, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
-	, PHOTO_UPLOAD_MIN_HEIGHT( 411, "500", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image height" )
+	, PHOTO_UPLOAD_MIN_WIDTH( 410, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image width" )
+	, PHOTO_UPLOAD_MIN_HEIGHT( 411, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo min image height" )
 	, PHOTO_UPLOAD_MAX_WIDTH( 402, "1800", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image width" )
 	, PHOTO_UPLOAD_MAX_HEIGHT( 403, "1200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.PHOTO_UPLOAD, "Photo max image height" )
 	, PHOTO_UPLOAD_ANONYMOUS_PERIOD( 407, "1", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.PHOTO_UPLOAD, "Anonymous period" ) // TODO: use an hours instead of days
@@ -108,7 +108,7 @@ public enum ConfigurationKey {
 	, ADMIN_JOB_HISTORY_ITEMS_ON_PAGE( 1023, "50", false, ConfigurationDataType.INTEGER, ConfigurationUnit.ITEM, ConfigurationTab.ADMIN, "Job history items on page" )
 	, ADMIN_REMOTE_PHOTO_SITE_IMPORT_JOB_IMPORT_NUDE_CONTENT( 1025, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photosight import: select by default categories that may contains nude content" )
 	, ADMIN_PHOTO_PREVIEW_DENSITY( 1026, "72", true, ConfigurationDataType.INTEGER, ConfigurationUnit.DPI, ConfigurationTab.ADMIN, "Photo preview density" )
-	, ADMIN_PHOTO_PREVIEW_DIMENSION( 1027, "200", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.ADMIN, "Photo preview dimension" )
+	, ADMIN_PHOTO_PREVIEW_DIMENSION( 1027, "300", true, ConfigurationDataType.INTEGER, ConfigurationUnit.PIXEL, ConfigurationTab.ADMIN, "Photo preview dimension" )
 	, ADMIN_PHOTO_FILE_IMPORT_DEFAULT_DIR( 1028, "", true, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.ADMIN, "Photo file import default dir" )
 
 	, EMAILING_ENABLED( 1300, "0", false, ConfigurationDataType.YES_NO, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "Emailing enabled" )
