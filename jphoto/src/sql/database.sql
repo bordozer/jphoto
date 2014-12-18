@@ -12,8 +12,6 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
-USE `jphoto_v1`;
-
 #
 # Structure for the `users` table :
 #
