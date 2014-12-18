@@ -72,7 +72,7 @@ public class ArchivingJob extends AbstractJob {
 		final ArchivingService archivingService = services.getArchivingService();
 		final PhotoService photoService = services.getPhotoService();
 
-		log.debug( String.format( "About to archive photos uploaded earlie then %s", dateUtilsService.formatDateTime( dateUtilsService.getFirstSecondOfTheDayNDaysAgo( archivePhotosOlderThen - 1 ) ) ) );
+		log.debug( String.format( "About to archiving photos uploaded earlie then %s", dateUtilsService.formatDateTime( dateUtilsService.getFirstSecondOfTheDayNDaysAgo( archivePhotosOlderThen - 1 ) ) ) );
 
 		final Date time = archivingService.getArchiveStartDate( archivePhotosOlderThen );
 		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
