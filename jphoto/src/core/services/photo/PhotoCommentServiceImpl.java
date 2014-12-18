@@ -5,13 +5,13 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.interfaces.ArchivableEntry;
 import core.services.dao.PhotoCommentDao;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.notification.NotificationService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
-import core.services.translator.TranslatorService;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
 import core.services.utils.DateUtilsService;
@@ -296,10 +296,8 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	}
 
 	@Override
-	public boolean archive( final PhotoComment photoComment ) {
-		photoComment.setId( 0 );
-
-		return photoCommentDao.archive( photoComment );
+	public boolean archive( final ArchivableEntry entry ) {
+		return photoCommentDao.archive( entry );
 	}
 
 	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {

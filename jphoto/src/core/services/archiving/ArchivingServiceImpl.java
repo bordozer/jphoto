@@ -58,7 +58,6 @@ public class ArchivingServiceImpl implements ArchivingService {
 		final List<PhotoComment> answers = photoCommentService.loadAnswersOnComment( parentCommentsId );
 		for ( final PhotoComment answer : answers ) {
 			commentsToArchive.add( answer );
-
 			processAnswers( answer.getId(), commentsToArchive );
 		}
 	}

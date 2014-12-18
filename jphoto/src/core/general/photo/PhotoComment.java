@@ -2,12 +2,13 @@ package core.general.photo;
 
 import core.general.base.AbstractBaseEntity;
 import core.general.user.User;
+import core.interfaces.ArchivableEntry;
 import core.interfaces.Cacheable;
 import ui.services.menu.entry.items.PopupMenuAssignable;
 
 import java.util.Date;
 
-public class PhotoComment extends AbstractBaseEntity implements Cacheable, PopupMenuAssignable {
+public class PhotoComment extends AbstractBaseEntity implements Cacheable, PopupMenuAssignable, ArchivableEntry {
 
 	private int photoId;
 	private User commentAuthor; // TODO: replace with UserId
