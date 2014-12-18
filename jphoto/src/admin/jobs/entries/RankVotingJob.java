@@ -38,7 +38,6 @@ public class RankVotingJob extends AbstractJob {
 		final RandomGenresGenerator genresGenerator = new RandomGenresGenerator();
 
 		final UserRankService userRankService = services.getUserRankService();
-		final EntityLinkUtilsService entityLinkUtilsService = services.getEntityLinkUtilsService();
 
 		while( ! isFinished() && ! hasJobFinishedWithAnyResult() ) {
 			counter++;
@@ -85,16 +84,6 @@ public class RankVotingJob extends AbstractJob {
 
 			services.getUsersSecurityService().saveLastUserActivityTime( votingUser.getId(), votingTime );
 
-//			getLog().debug( String.format( "User %s is voting for %s in genre %s (mark %s)", votingUser.getId(), beingVotedUser.getId(), genreId, accessibleVotingPoints ) );
-
-			/*final Language language = getLanguage();
-			addJobRuntimeLogMessage( services.getTranslatorService().translate( "User $1 has voted for $2's rank in $3 ( $4 )"
-				, language
-				, entityLinkUtilsService.getRemoteUserCardLink( votingUser, language )
-				, entityLinkUtilsService.getRemoteUserCardLink( beingVotedUser, language )
-				, entityLinkUtilsService.getPhotosByUserByGenreLink( beingVotedUser, genre, language )
-				, String.valueOf( randomVotingPoints ) )
-			);*/
 			final TranslatableMessage translatableMessage = new TranslatableMessage( "User $1 has voted for $2's rank in $3 ( $4 )", services )
 				.userCardLink( votingUser )
 				.userCardLink( beingVotedUser )
