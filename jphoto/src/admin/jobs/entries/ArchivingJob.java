@@ -80,7 +80,7 @@ public class ArchivingJob extends AbstractJob {
 
 			archivingService.archivePhoto( photoId );
 
-			log.debug( String.format( "Archiving photo #%d", photoId ) );
+			log.debug( String.format( "Photo #%d has been archived", photoId ) );
 		}
 	}
 
