@@ -18,6 +18,7 @@ public enum ConfigurationTab {
 	, CACHE( "cache", "ConfigurationTab: Cache" )
 	, ADMIN( "admin", "ConfigurationTab: Admin" )
 	, EMAILING( "emailing", "ConfigurationTab: Emailing" )
+	, ARCHIVING( "archiving", "ConfigurationTab: Archiving" )
 	;
 
 	private final String key;

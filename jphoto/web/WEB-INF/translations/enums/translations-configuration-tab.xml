@@ -82,4 +82,9 @@
 		<ru><![CDATA[Почтовый сервер]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>ConfigurationTab: Archiving</nerd>
+		<ru><![CDATA[Архивация]]></ru>
+	</translation>
+
 </translations>

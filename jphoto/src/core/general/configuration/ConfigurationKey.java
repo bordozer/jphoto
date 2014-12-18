@@ -121,6 +121,10 @@ public enum ConfigurationKey {
 	, EMAILING_SMTP_SERVER_TIMEOUT( 1305, "5000", false, ConfigurationDataType.STRING, ConfigurationUnit.MILLISECOND, ConfigurationTab.EMAILING, "SMTP server timeout, milliseconds" )
 	, EMAILING_SMTP_SERVER_USER( 1306, "jphoto@pop3.ru", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server user" )
 	, EMAILING_SMTP_SERVER_PASSWORD( 1307, "jphoto2003", false, ConfigurationDataType.STRING, ConfigurationUnit.EMPTY, ConfigurationTab.EMAILING, "SMTP server password" )
+
+	, ARCHIVING_PREVIEWS( 1400, "14", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.ARCHIVING, "Who viewed the photo: DELETE information older then" )
+	, ARCHIVING_VOTES( 1401, "14", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.ARCHIVING, "Who apprised the photo: archive information older then" )
+	, ARCHIVING_PHOTOS( 1402, "30", false, ConfigurationDataType.INTEGER, ConfigurationUnit.DAY, ConfigurationTab.ARCHIVING, "Archive photos uploaded earlie then" )
 	;
 
 	private final int id;
