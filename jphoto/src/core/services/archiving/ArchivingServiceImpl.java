@@ -34,7 +34,7 @@ public class ArchivingServiceImpl implements ArchivingService {
 	@Override
 	public void archivePhoto( final int photoId ) {
 		log.debug( String.format( "Archiving photo #%d", photoId ) );
-
+		// TODO: blu: do not forget implement this
 	}
 
 	private Date getFirstSecondOfTheDayNDaysAgo( final int days ) {
