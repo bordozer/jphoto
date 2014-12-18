@@ -25,7 +25,7 @@ public class PhotosightUrlHelper extends AbstractRemotePhotoSiteUrlHelper {
 
 	@Override
 	public String getUserCardUrl( final String remotePhotoSiteUserId, final int pageNumber ) {
-		return String.format( "http://www.%s/users/%s/?pager=%d", getRemotePhotoSiteHost(),remotePhotoSiteUserId, pageNumber );
+		return String.format( "http://www.%s/users/%s/?pager=%d", getRemotePhotoSiteHost(), remotePhotoSiteUserId, pageNumber );
 	}
 
 	@Override
