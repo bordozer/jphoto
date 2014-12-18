@@ -38,4 +38,6 @@
 	<bean id="baseSqlUtilsService" class="core.services.utils.sql.BaseSqlUtilsServiceImpl" />
 	<bean id="dataRequirementService" class="ui.services.validation.DataRequirementServiceImpl" />
 
+	<bean id="archivingService" class="core.services.archiving.ArchivingServiceImpl" />
+
 </beans>

@@ -2,6 +2,7 @@ package core.services.system;
 
 import admin.services.jobs.*;
 import admin.services.services.SqlUtilsService;
+import core.services.archiving.ArchivingService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
@@ -106,6 +107,8 @@ public interface Services {
 	RestrictionService getRestrictionService();
 
 	UtilsService getUtilsService();
+
+	ArchivingService getArchivingService();
 
 	//	ScheduledTasksExecutionService getScheduledTasksExecutionService(); // TODO: mustn't be here because it has init method that uses Services
 }

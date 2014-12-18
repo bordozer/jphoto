@@ -2,6 +2,7 @@ package core.services.system;
 
 import admin.services.jobs.*;
 import admin.services.services.SqlUtilsService;
+import core.services.archiving.ArchivingService;
 import core.services.conversion.PreviewGenerationService;
 import core.services.entry.*;
 import core.services.mail.MailService;
@@ -155,6 +156,9 @@ public class ServicesImpl implements Services {
 
 	@Autowired
 	private UtilsService utilsService;
+
+	@Autowired
+	private ArchivingService archivingService;
 
 //	@Autowired
 //	private ScheduledTasksExecutionService scheduledTasksExecutionService;
@@ -379,6 +383,11 @@ public class ServicesImpl implements Services {
 		return utilsService;
 	}
 
+	@Override
+	public ArchivingService getArchivingService() {
+		return archivingService;
+	}
+
 	/*@Override
 	public ScheduledTasksExecutionService getScheduledTasksExecutionService() {
 		return scheduledTasksExecutionService;
@@ -562,6 +571,10 @@ public class ServicesImpl implements Services {
 
 	public void setUtilsService( final UtilsService utilsService ) {
 		this.utilsService = utilsService;
+	}
+
+	public void setArchivingService( final ArchivingService archivingService ) {
+		this.archivingService = archivingService;
 	}
 
 	/*public void setScheduledTasksExecutionService( final ScheduledTasksExecutionService scheduledTasksExecutionService ) {

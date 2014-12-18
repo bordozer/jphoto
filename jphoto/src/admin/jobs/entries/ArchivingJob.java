@@ -6,6 +6,7 @@ import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
 import core.log.LogHelper;
+import core.services.archiving.ArchivingService;
 import core.services.translator.message.TranslatableMessage;
 
 import java.util.Map;
@@ -16,6 +17,7 @@ public class ArchivingJob extends AbstractJob {
 
 	private static final String YES = "Yes";
 	private static final String NO = "No";
+	private static final int OPERATIONS_COUNT = 3;
 
 	private boolean previewsArchivingEnabled;
 	private int archivePreviewsOlderThen;
@@ -33,6 +35,25 @@ public class ArchivingJob extends AbstractJob {
 	@Override
 	protected void runJob() throws Throwable {
 
+		final ArchivingService archivingService = services.getArchivingService();
+
+		if ( previewsArchivingEnabled ) {
+			archivingService.archivePhotosPreviews( archivePreviewsOlderThen );
+		}
+
+		increment();
+
+		if ( appraisalArchivingEnabled ) {
+			archivingService.archivePhotosAppraisals( archiveAppraisalOlderThen );
+		}
+
+		increment();
+
+		if ( photosArchivingEnabled ) {
+			archivingService.archivePhotos( archivePhotosOlderThen );
+		}
+
+		increment();
 	}
 
 	@Override
@@ -49,6 +70,8 @@ public class ArchivingJob extends AbstractJob {
 
 	@Override
 	public void initJobParameters( Map<SavedJobParameterKey, CommonProperty> jobParameters ) {
+
+		totalJopOperations = OPERATIONS_COUNT;
 
 		previewsArchivingEnabled = jobParameters.get( SavedJobParameterKey.PREVIEWS_ARCHIVING_ENABLED ).getValueBoolean();
 		archivePreviewsOlderThen = services.getConfigurationService().getInt( ConfigurationKey.ARCHIVING_PREVIEWS );
