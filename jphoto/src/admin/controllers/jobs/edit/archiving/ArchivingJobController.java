@@ -2,7 +2,12 @@ package admin.controllers.jobs.edit.archiving;
 
 import admin.controllers.jobs.edit.AbstractAdminJobModel;
 import admin.controllers.jobs.edit.AbstractJobController;
+import admin.jobs.entries.ArchivingJob;
 import admin.jobs.enums.SavedJobType;
+import core.enums.SavedJobParameterKey;
+import core.general.base.CommonProperty;
+import core.general.configuration.ConfigurationKey;
+import core.services.system.ConfigurationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Map;
 
 @SessionAttributes( ArchivingJobController.JOB_MODEL_NAME )
 @Controller
@@ -23,6 +29,9 @@ public class ArchivingJobController extends AbstractJobController {
 
 	@Autowired
 	private ArchivingJobJobValidator archivingJobJobValidator;
+
+	@Autowired
+	private ConfigurationService configurationService;
 
 	@InitBinder
 	protected void initBinder( final WebDataBinder binder ) {
@@ -76,17 +85,44 @@ public class ArchivingJobController extends AbstractJobController {
 	}
 
 	@Override
-	protected void showFormCustomAction( AbstractAdminJobModel model ) {
+	protected void showFormCustomAction( final AbstractAdminJobModel model ) {
+		final ArchivingJobJobModel aModel = ( ArchivingJobJobModel ) model;
 
+		final int archivePreviewsOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_PREVIEWS );
+		final int archiveAppraisalOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_VOTES );
+		final int photosOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_PHOTOS );
+
+		aModel.setArchivePreviewsOlderThen( archivePreviewsOlderThen );
+		aModel.setArchiveAppraisalOlderThen( archiveAppraisalOlderThen );
+		aModel.setArchivePhotosOlderThen( photosOlderThen );
+
+		aModel.setPreviewsArchivingEnabled( archivePreviewsOlderThen > 0 );
+		aModel.setAppraisalArchivingEnabled( archiveAppraisalOlderThen > 0 );
+		aModel.setPhotosArchivingEnabled( photosOlderThen > 0 );
 	}
 
 	@Override
-	protected void initJobFromModel( AbstractAdminJobModel model ) {
+	protected void initJobFromModel( final AbstractAdminJobModel model ) {
+		final ArchivingJob job = ( ArchivingJob ) model.getJob();
+		final ArchivingJobJobModel aModel = ( ArchivingJobJobModel ) model;
 
+		job.setArchivePreviewsOlderThen( aModel.getArchivePreviewsOlderThen() );
+		job.setArchiveAppraisalOlderThen( aModel.getArchiveAppraisalOlderThen() );
+		job.setArchivePhotosOlderThen( aModel.getArchivePreviewsOlderThen() );
+
+		job.setPreviewsArchivingEnabled( aModel.isPreviewsArchivingEnabled() );
+		job.setAppraisalArchivingEnabled( aModel.isAppraisalArchivingEnabled() );
+		job.setPhotosArchivingEnabled( aModel.isPhotosArchivingEnabled() );
 	}
 
 	@Override
-	protected void initModelFromSavedJob( AbstractAdminJobModel model, int savedJobId ) {
+	protected void initModelFromSavedJob( final AbstractAdminJobModel model, int savedJobId ) {
+		final ArchivingJobJobModel aModel = ( ArchivingJobJobModel ) model;
+
+		final Map<SavedJobParameterKey,CommonProperty> savedJobParametersMap = savedJobService.getSavedJobParametersMap( savedJobId );
+		aModel.setPreviewsArchivingEnabled( savedJobParametersMap.get( SavedJobParameterKey.PREVIEWS_ARCHIVING_ENABLED ).getValueBoolean() );
+		aModel.setAppraisalArchivingEnabled( savedJobParametersMap.get( SavedJobParameterKey.APPRAISAL_ARCHIVING_ENABLED ).getValueBoolean() );
+		aModel.setPhotosArchivingEnabled( savedJobParametersMap.get( SavedJobParameterKey.PHOTOS_ARCHIVING_ENABLED ).getValueBoolean() );
 
 	}
 
