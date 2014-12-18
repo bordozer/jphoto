@@ -2,6 +2,7 @@ package core.services.photo;
 
 import core.general.photo.PhotoComment;
 import core.general.user.User;
+import core.interfaces.Archivable;
 import core.interfaces.BaseEntityService;
 import ui.controllers.comment.edit.PhotoCommentInfo;
 import ui.services.menu.entry.items.EntryMenuData;
@@ -9,7 +10,7 @@ import ui.services.menu.entry.items.EntryMenuData;
 import java.util.Date;
 import java.util.List;
 
-public interface PhotoCommentService extends BaseEntityService<PhotoComment> {
+public interface PhotoCommentService extends BaseEntityService<PhotoComment>, Archivable {
 
 	String BEAN_NAME = "photoCommentService";
 

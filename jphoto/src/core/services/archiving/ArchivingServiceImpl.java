@@ -1,16 +1,24 @@
 package core.services.archiving;
 
+import core.general.photo.PhotoComment;
 import core.log.LogHelper;
 import core.services.dao.ArchivingDao;
+import core.services.photo.PhotoCommentService;
 import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class ArchivingServiceImpl implements ArchivingService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
+
+	@Autowired
+	private PhotoCommentService photoCommentService;
 
 	@Autowired
 	private ArchivingDao archivingDao;
@@ -29,8 +37,30 @@ public class ArchivingServiceImpl implements ArchivingService {
 
 	@Override
 	public void archivePhoto( final int photoId ) {
+
 		log.debug( String.format( "Archiving photo #%d", photoId ) );
-		// TODO: blu: do not forget implement this
+
+		final List<PhotoComment> commentsToArchive = newArrayList();
+
+		final List<Integer> rootCommentsIds = photoCommentService.loadRootCommentsIds( photoId );
+		for ( final Integer rootCommentsId : rootCommentsIds ) {
+			commentsToArchive.add( photoCommentService.load( rootCommentsId ) );
+
+			processAnswers( rootCommentsId, commentsToArchive );
+		}
+
+		for ( final PhotoComment photoComment : commentsToArchive ) {
+			photoCommentService.archive( photoComment );
+		}
+	}
+
+	private void processAnswers( final Integer parentCommentsId, final List<PhotoComment> commentsToArchive ) {
+		final List<PhotoComment> answers = photoCommentService.loadAnswersOnComment( parentCommentsId );
+		for ( final PhotoComment answer : answers ) {
+			commentsToArchive.add( answer );
+
+			processAnswers( answer.getId(), commentsToArchive );
+		}
 	}
 
 	@Override

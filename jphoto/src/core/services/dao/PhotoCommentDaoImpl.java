@@ -301,6 +301,11 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 		}
 	}
 
+	@Override
+	public boolean archive( final PhotoComment photoComment ) {
+		return false;
+	}
+
 	class PhotoCommentMapper implements RowMapper<PhotoComment> {
 
 		@Override

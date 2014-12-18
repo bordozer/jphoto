@@ -1,11 +1,12 @@
 package core.services.dao;
 
 import core.general.photo.PhotoComment;
+import core.interfaces.Archivable;
 
 import java.util.Date;
 import java.util.List;
 
-public interface PhotoCommentDao extends BaseEntityDao<PhotoComment> {
+public interface PhotoCommentDao extends BaseEntityDao<PhotoComment>, Archivable {
 
 	List<Integer> loadAllIds( final int photoId );
 

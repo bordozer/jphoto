@@ -69,9 +69,6 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	@Autowired
 	private ActivityStreamService activityStreamService;
 
-	@Autowired
-	private TranslatorService translatorService;
-
 	@Override
 	public boolean save( final PhotoComment entry ) {
 
@@ -296,6 +293,13 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	@Override
 	public boolean exists( final PhotoComment entry ) {
 		return photoCommentDao.exists( entry );
+	}
+
+	@Override
+	public boolean archive( final PhotoComment photoComment ) {
+		photoComment.setId( 0 );
+
+		return photoCommentDao.archive( photoComment );
 	}
 
 	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {
