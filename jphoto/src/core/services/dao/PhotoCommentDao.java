@@ -6,7 +6,7 @@ import core.interfaces.Archivable;
 import java.util.Date;
 import java.util.List;
 
-public interface PhotoCommentDao extends BaseEntityDao<PhotoComment>, Archivable {
+public interface PhotoCommentDao extends BaseEntityDao<PhotoComment> {
 
 	List<Integer> loadAllIds( final int photoId );
 

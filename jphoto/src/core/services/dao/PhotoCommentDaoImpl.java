@@ -90,7 +90,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public List<Integer> loadAllIds( final int photoId ) {
-		final String sql = String.format( "SELECT * FROM %s WHERE %s=:photoId ORDER BY %s", TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, TABLE_COLUMN_CREATION_TIME );
+		final String sql = String.format( "SELECT * FROM %s WHERE %s=:photoId ORDER BY %s", getTableName(), TABLE_COLUMN_PHOTO_ID, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "photoId", photoId );
@@ -101,7 +101,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public List<Integer> loadRootCommentsIds( final int photoId ) {
 		final String sql = String.format( "SELECT * FROM %s WHERE %s=:photoId AND %s=0  ORDER BY %s"
-			, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, TABLE_COLUMN_REPLY_TO_COMMENT_ID, TABLE_COLUMN_CREATION_TIME );
+			, getTableName(), TABLE_COLUMN_PHOTO_ID, TABLE_COLUMN_REPLY_TO_COMMENT_ID, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "photoId", photoId );
@@ -112,7 +112,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public List<Integer> loadUserCommentsIds( final int userId ) {
 		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s=:userId ORDER BY %4$s DESC;"
-			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_CREATION_TIME );
+			, ENTITY_ID, getTableName(), TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
@@ -124,7 +124,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public List<Integer> loadCommentsToUserPhotosIds( final int userId ) {
 		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %7$s <> :userId ORDER BY %3$s DESC, %6$s DESC;"
 			, ENTITY_ID
-			, TABLE_COMMENTS
+			, getTableName()
 			, TABLE_COLUMN_PHOTO_ID
 			, PhotoDaoImpl.TABLE_PHOTOS
 			, PhotoDaoImpl.TABLE_COLUMN_USER_ID
@@ -141,7 +141,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public List<Integer> loadUnreadCommentsToUserIds( final int userId ) {
 		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL ORDER BY %8$s DESC;"
-			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME, TABLE_COLUMN_CREATION_TIME );
+			, ENTITY_ID, getTableName(), TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
@@ -152,7 +152,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public List<Integer> loadAnswersOnCommentIds( final int commentId ) {
 		final String sql = String.format( "SELECT * FROM %s WHERE %s=:commentId ORDER BY %s"
-			, TABLE_COMMENTS, TABLE_COLUMN_REPLY_TO_COMMENT_ID, TABLE_COLUMN_CREATION_TIME );
+			, getTableName(), TABLE_COLUMN_REPLY_TO_COMMENT_ID, TABLE_COLUMN_CREATION_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "commentId", commentId );
@@ -162,7 +162,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public void setCommentReadTime( final int commentId, final Date time ) {
-		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s=:commentId", TABLE_COMMENTS, TABLE_COLUMN_READ_TIME, ENTITY_ID );
+		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s=:commentId", getTableName(), TABLE_COLUMN_READ_TIME, ENTITY_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "commentId", commentId );
@@ -176,7 +176,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public int getUnreadCommentsQty( final int userId ) {
 		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL;"
-			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
+			, ENTITY_ID, getTableName(), TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
@@ -187,7 +187,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	@Override
 	public List<Integer> getUnreadCommentsIds( final int userId ) {
 		final String sql = String.format( "SELECT %1$s FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId AND %7$s IS NULL;"
-			, ENTITY_ID, TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
+			, ENTITY_ID, getTableName(), TABLE_COLUMN_PHOTO_ID, PhotoDaoImpl.TABLE_PHOTOS, PhotoDaoImpl.TABLE_COLUMN_USER_ID, TABLE_COLUMN_AUTHOR_ID, TABLE_COLUMN_READ_TIME );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "userId", userId );
@@ -199,7 +199,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public int getWrittenCommentsQty( final int userId ) {
 		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s = :userId;"
 			, ENTITY_ID                         // 1
-			, TABLE_COMMENTS                    // 2
+			, getTableName()                    // 2
 			, TABLE_COLUMN_AUTHOR_ID            // 3
 		);
 
@@ -213,7 +213,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public int getReceivedCommentsQty( final int userId ) {
 		final String sql = String.format( "SELECT COUNT( %1$s ) FROM %2$s WHERE %3$s IN ( SELECT %1$s FROM %4$s WHERE %5$s=:userId ) AND %6$s <> :userId;"
 			, ENTITY_ID                         // 1
-			, TABLE_COMMENTS                    // 2
+			, getTableName()                    // 2
 			, TABLE_COLUMN_PHOTO_ID             // 3
 			, PhotoDaoImpl.TABLE_PHOTOS         // 4
 			, PhotoDaoImpl.TABLE_COLUMN_USER_ID // 5
@@ -254,7 +254,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 
 	@Override
 	public void deletePhotoComments( final int photoId ) {
-		final String sql = String.format( "DELETE FROM %s WHERE %s=:photoId", TABLE_COMMENTS, TABLE_COLUMN_PHOTO_ID );
+		final String sql = String.format( "DELETE FROM %s WHERE %s=:photoId", getTableName(), TABLE_COLUMN_PHOTO_ID );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "photoId", photoId );
@@ -266,7 +266,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public int getPhotoCommentsCount( final int photoId ) {
 		final String sql = String.format( "SELECT COUNT( %s ) FROM %s WHERE %s = :photoId;"
 			, ENTITY_ID
-			, TABLE_COMMENTS
+			, getTableName()
 			, TABLE_COLUMN_PHOTO_ID
 		);
 
@@ -280,7 +280,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public int getPhotoCommentsCount() {
 		final String sql = String.format( "SELECT COUNT( %s ) FROM %s;"
 			, ENTITY_ID
-			, TABLE_COMMENTS
+			, getTableName()
 		);
 
 		return getIntValueOrZero( sql, new MapSqlParameterSource() );
@@ -290,7 +290,7 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 	public void markAllUnreadCommentAsRead( final int userId ) {
 		final List<Integer> unreadCommentsIds = getUnreadCommentsIds( userId );
 
-		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s IN ( %s )", TABLE_COMMENTS, TABLE_COLUMN_READ_TIME, ENTITY_ID, StringUtils.join( unreadCommentsIds, "," ) );
+		final String sql = String.format( "UPDATE %s SET %s=:readTime WHERE %s IN ( %s )", getTableName(), TABLE_COLUMN_READ_TIME, ENTITY_ID, StringUtils.join( unreadCommentsIds, "," ) );
 
 		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue( "readTime", dateUtilsService.getCurrentTime() );
@@ -300,11 +300,6 @@ public class PhotoCommentDaoImpl extends BaseEntityDaoImpl<PhotoComment> impleme
 		for ( final int commentsId : unreadCommentsIds ) {
 			cacheService.expire( CacheKey.PHOTO_COMMENT, commentsId );
 		}
-	}
-
-	@Override
-	public boolean archive( final ArchivableEntry entry ) {
-		return false;
 	}
 
 	class PhotoCommentMapper implements RowMapper<PhotoComment> {

@@ -60,7 +60,7 @@ public class GenerationMonitor {
 	}
 
 	public int getPercentage() {
-		if ( current == 0 ) {
+		if ( current == 0 || total == 0 ) {
 			return 0;
 		}
 		return NumberUtils.floor( 100 * current / total );
