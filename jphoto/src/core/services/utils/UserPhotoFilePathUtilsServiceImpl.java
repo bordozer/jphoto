@@ -185,7 +185,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		return String.format( "%s/%s/%s"
 			, systemFilePathUtilsService.getSystemPhotoDir().getPath()
 			, String.valueOf( userId ).substring( 0, 1 )
-			, String.valueOf( userId ).substring( 0, 3 )
+			, String.valueOf( userId ).length() > 3 ? String.valueOf( userId ).substring( 0, 3 ) : String.valueOf( userId )
 		);
 	}
 
