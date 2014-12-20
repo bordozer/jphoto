@@ -186,7 +186,11 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	}
 
 	private String getUserBasePhotoStoragePath( int userId ) {
-		return String.format( "%s/%s", systemFilePathUtilsService.getSystemPhotoDir().getPath(), String.valueOf( userId ).substring( 0, 1 ) );
+		return String.format( "%s/%s/%s"
+			, systemFilePathUtilsService.getSystemPhotoDir().getPath()
+			, String.valueOf( userId ).substring( 0, 1 )
+			, String.valueOf( userId ).substring( 0, 3 )
+		);
 	}
 
 	private  String generateUserPhotoFileName( final User user ) {
