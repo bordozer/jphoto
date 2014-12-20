@@ -29,7 +29,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 
 	@Override
 	public File getUserPhotoDir( final int userId ) {
-		return getUserPhotoStoragePath( userId );
+		return new File( getUserBasePhotoStoragePath( userId ), String.valueOf( userId ) );
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 	@Override
 	public void createUserPhotoDirIfNeed( final int userId ) {
 
-		final File userPhotoDir = getUserPhotoStoragePath( userId );
+		final File userPhotoDir = new File( getUserBasePhotoStoragePath( userId ), String.valueOf( userId ) );
 		if ( !userPhotoDir.exists() ) {
 			userPhotoDir.mkdir();
 		}
@@ -179,10 +179,6 @@ public class UserPhotoFilePathUtilsServiceImpl implements UserPhotoFilePathUtils
 		}
 
 		return userPhotoImageFile;
-	}
-
-	private File getUserPhotoStoragePath( int userId ) {
-		return new File( getUserBasePhotoStoragePath( userId ), String.valueOf( userId ) );
 	}
 
 	private String getUserBasePhotoStoragePath( int userId ) {
