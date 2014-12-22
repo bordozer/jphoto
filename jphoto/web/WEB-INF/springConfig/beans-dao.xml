@@ -15,7 +15,7 @@
 	<bean name="photoDao" class="core.services.dao.PhotoDaoImpl"/>
 
 	<bean id="photoCommentDao" class="core.services.dao.PhotoCommentDaoImpl"/>
-	<bean id="photoCommentArchDao" class="core.services.dao.PhotoCommentDaoArchImpl"/>
+	<bean id="photoCommentArchDao" class="core.services.archiving.PhotoCommentDaoArchImpl"/>
 
 	<bean id="photoPreviewDao" class="core.services.dao.PhotoPreviewDaoImpl"/>
 

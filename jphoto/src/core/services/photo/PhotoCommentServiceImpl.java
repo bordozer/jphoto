@@ -5,9 +5,7 @@ import core.general.genre.Genre;
 import core.general.photo.Photo;
 import core.general.photo.PhotoComment;
 import core.general.user.User;
-import core.interfaces.ArchivableEntry;
 import core.services.dao.PhotoCommentDao;
-import core.services.dao.PhotoCommentDaoArchImpl;
 import core.services.entry.ActivityStreamService;
 import core.services.entry.GenreService;
 import core.services.notification.NotificationService;
@@ -69,9 +67,6 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Autowired
 	private ActivityStreamService activityStreamService;
-
-	@Autowired
-	private PhotoCommentDaoArchImpl photoCommentArchDao;
 
 	@Override
 	public boolean save( final PhotoComment entry ) {
@@ -297,11 +292,6 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 	@Override
 	public boolean exists( final PhotoComment entry ) {
 		return photoCommentDao.exists( entry );
-	}
-
-	@Override
-	public boolean archive( final ArchivableEntry entry ) {
-		return photoCommentArchDao.archive( entry );
 	}
 
 	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {

@@ -1,7 +1,6 @@
 package core.services.dao;
 
 import core.general.photo.PhotoComment;
-import core.interfaces.Archivable;
 
 import java.util.Date;
 import java.util.List;
