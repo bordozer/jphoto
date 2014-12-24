@@ -277,6 +277,12 @@ public class SecurityServiceImpl implements SecurityService {
 	public ValidationResult validateUserCanCommentPhoto( final User user, final Photo photo, final Date time, final Language language ) {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
+		if ( photo.isArchived() ) { // TODO: cover this by unit test
+			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo is archived", language ) );
+
+			return allowanceValidationResult;
+		}
+
 		if ( isSuperAdminUser( user.getId() ) ) {
 			return allowanceValidationResult;
 		}
@@ -359,6 +365,12 @@ public class SecurityServiceImpl implements SecurityService {
 
 		if ( UserUtils.isUsersEqual( user, photoAuthor ) ) {
 			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: This is your own photo", language ) );
+
+			return allowanceValidationResult;
+		}
+
+		if ( photo.isArchived() ) { // TODO: cover this by unit test
+			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo is archived", language ) );
 
 			return allowanceValidationResult;
 		}

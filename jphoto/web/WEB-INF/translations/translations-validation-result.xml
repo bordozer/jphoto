@@ -27,6 +27,11 @@
 		<ru><![CDATA[Автор разрешил комментирование только членам клуба]]></ru>
 	</translation>
 
+	<translation>
+		<nerd>ValidationResult: The photo is archived</nerd>
+		<ru><![CDATA[Работа загружена много времени назад и уже была перемещена в архив]]></ru>
+	</translation>
+
 
 
 

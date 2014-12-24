@@ -79,7 +79,8 @@ public class ArchivingJob extends AbstractJob {
 
 		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
 
-		setTotalJopOperations( photoIdsToArchive.size() );
+		archivingService.archivePhoto( photoService.load( 361853 ) );
+		/*setTotalJopOperations( photoIdsToArchive.size() );
 
 		for ( final int photoId : photoIdsToArchive ) {
 
@@ -94,7 +95,7 @@ public class ArchivingJob extends AbstractJob {
 			}
 
 			log.debug( String.format( "Photo %s has been archived", photo ) );
-		}
+		}*/
 	}
 
 	@Override
