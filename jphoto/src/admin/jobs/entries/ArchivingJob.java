@@ -5,6 +5,7 @@ import admin.jobs.enums.SavedJobType;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
+import core.general.photo.Photo;
 import core.log.LogHelper;
 import core.services.archiving.ArchivingService;
 import core.services.photo.PhotoService;
@@ -76,11 +77,23 @@ public class ArchivingJob extends AbstractJob {
 
 		log.debug( String.format( "About to archiving photos uploaded earlie then %s", dateUtilsService.formatDateTime( time ) ) );
 
-		for ( final int photoId : photoService.getPhotosIdsUploadedEarlieThen( time ) ) {
+		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
 
-			archivingService.archivePhoto( photoId );
+		setTotalJopOperations( photoIdsToArchive.size() );
 
-			log.debug( String.format( "Photo #%d has been archived", photoId ) );
+		for ( final int photoId : photoIdsToArchive ) {
+
+			final Photo photo = photoService.load( photoId );
+
+			archivingService.archivePhoto( photo );
+
+			increment();
+
+			if ( hasJobFinishedWithAnyResult() ) {
+				break;
+			}
+
+			log.debug( String.format( "Photo %s has been archived", photo ) );
 		}
 	}
 

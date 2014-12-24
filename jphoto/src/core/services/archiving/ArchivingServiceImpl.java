@@ -44,13 +44,13 @@ public class ArchivingServiceImpl implements ArchivingService {
 	}
 
 	@Override
-	public void archivePhoto( final int photoId ) {
+	public void archivePhoto( final Photo photo ) {
 
-		/*log.debug( String.format( "Archiving photo #%d", photoId ) );
+		log.debug( String.format( "Archiving photo %s", photo ) );
 
 		final List<Integer> commentsToArchive = newArrayList();
 
-		final List<Integer> rootCommentsIds = photoCommentService.loadRootCommentsIds( photoId );
+		final List<Integer> rootCommentsIds = photoCommentService.loadRootCommentsIds( photo.getId() );
 		for ( final int rootCommentsId : rootCommentsIds ) {
 
 			commentsToArchive.add( rootCommentsId );
@@ -67,9 +67,9 @@ public class ArchivingServiceImpl implements ArchivingService {
 			photoCommentService.delete( photoCommentId );
 		}
 
-		final Photo photo = photoService.load( photoId );
 		photo.setArchived( true );
-		photoService.save( photo );*/
+
+		photoService.save( photo );
 	}
 
 	private void processAnswers( final Integer parentCommentsId, final List<Integer> commentsToArchive ) {

@@ -125,6 +125,7 @@ CREATE TABLE `photos` (
   `imageLocationTypeId` tinyint(4) NOT NULL,
   `imageSourceId` tinyint(4) NOT NULL,
   `importData` text,
+  `isArchived` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`,`keywords`),
   UNIQUE KEY `idx_id` (`id`) USING BTREE,
   KEY `fk_photos_genreId_genres_id` (`genreId`),
@@ -132,7 +133,7 @@ CREATE TABLE `photos` (
   KEY `idx_uploadTime` (`uploadTime`) USING BTREE,
   CONSTRAINT `fk_photos_genreId_genres_id` FOREIGN KEY (`genreId`) REFERENCES `genres` (`id`),
   CONSTRAINT `fk_photos_userId_users_id` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=308952 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=364368 DEFAULT CHARSET=utf8;
 
 #
 # Structure for the `comments` table :
@@ -156,6 +157,27 @@ CREATE TABLE `comments` (
   CONSTRAINT `fk_comments_authorId_users_id` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_comments_photoId_photos_id` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1337585 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
+
+
+DROP TABLE IF EXISTS `comments_archive`;
+
+CREATE TABLE `comments_archive` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `photoId` int(11) NOT NULL,
+  `authorId` int(11) NOT NULL,
+  `replyToCommentId` int(11) DEFAULT NULL,
+  `commentText` text NOT NULL,
+  `creationTime` timestamp NOT NULL DEFAULT '1970-01-01 03:00:01',
+  `readtime` timestamp NULL DEFAULT '1970-01-01 03:00:01',
+  `deleted` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `idx_id` (`id`) USING BTREE,
+  KEY `fk_comments_photoId_photos_id_arch` (`photoId`),
+  KEY `fk_comments_authorId_users_id_arch` (`authorId`),
+  CONSTRAINT `fk_comments_authorId_users_id_arch` FOREIGN KEY (`authorId`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_comments_photoId_photos_id_arch` FOREIGN KEY (`photoId`) REFERENCES `photos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18023 DEFAULT CHARSET=utf8 AVG_ROW_LENGTH=5461;
+
 
 #
 # Structure for the `favorites` table :

@@ -1,5 +1,7 @@
 package core.services.archiving;
 
+import core.general.photo.Photo;
+
 import java.util.Date;
 
 public interface ArchivingService {
@@ -8,7 +10,7 @@ public interface ArchivingService {
 
 	void archivePhotosAppraisalsOlderThen( final int days );
 
-	void archivePhoto( final int photoId );
+	void archivePhoto( final Photo photo );
 
 	Date getArchiveStartDate( int days );
 }

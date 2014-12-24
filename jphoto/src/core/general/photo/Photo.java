@@ -49,6 +49,8 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 
 	private PhotoImportData photoImportData;
 
+	private boolean archived;
+
 	@Override
 	public String getName() {
 		return name;
@@ -238,6 +240,14 @@ public class Photo extends AbstractBaseEntity implements Nameable, Favoritable, 
 	@Override
 	public int hashCode() {
 		return getId();
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived( final boolean archived ) {
+		this.archived = archived;
 	}
 
 	@Override

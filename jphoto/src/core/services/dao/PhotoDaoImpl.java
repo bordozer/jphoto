@@ -58,6 +58,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	public final static String TABLE_COLUMN_IMAGE_LOCATION_TYPE_ID = "imageLocationTypeId";
 	public final static String TABLE_COLUMN_IMAGE_SOURCE_ID = "imageSourceId";
 	public final static String TABLE_COLUMN_IMPORT_DATA = "importData";
+	public final static String TABLE_COLUMN_IS_ARCHIVED = "isArchived";
 
 	public static final Map<Integer, String> fields = newLinkedHashMap();
 	public static final Map<Integer, String> updatableFields = newLinkedHashMap();
@@ -101,6 +102,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		fields.put( 22, TABLE_COLUMN_PHOTO_PREVIEW_NAME );
 		fields.put( 23, TABLE_COLUMN_IMAGE_SOURCE_ID );
 		fields.put( 24, TABLE_COLUMN_IMPORT_DATA );
+		fields.put( 25, TABLE_COLUMN_IS_ARCHIVED );
 	}
 
 	static {
@@ -114,6 +116,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		updatableFields.put( 12, TABLE_COLUMN_EMAIL_ABOUT_NEW_COMMENT );
 		updatableFields.put( 14, TABLE_COLUMN_VOTING_ALLOWANCE );
 		updatableFields.put( 15, TABLE_COLUMN_IS_ANONYMOUS_POSTING );
+		updatableFields.put( 25, TABLE_COLUMN_IS_ARCHIVED );
 	}
 
 	@Override
@@ -379,6 +382,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 			result.setImageDimension( new Dimension( rs.getInt( TABLE_COLUMN_IMAGE_WIDTH ), rs.getInt( TABLE_COLUMN_IMAGE_HEIGHT ) ) );
 
 			result.setPhotoImportData( fromXML( rs.getString( TABLE_COLUMN_IMPORT_DATA ) ) );
+
+			result.setArchived( rs.getBoolean( TABLE_COLUMN_IS_ARCHIVED ) );
 
 			return result;
 		}
