@@ -226,6 +226,8 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 		paramSource.addValue( TABLE_COLUMN_IMPORT_DATA, toXml( entry.getPhotoImportData() ) );
 
+		paramSource.addValue( TABLE_COLUMN_IS_ARCHIVED, entry.isArchived() );
+
 		return paramSource;
 	}
 
