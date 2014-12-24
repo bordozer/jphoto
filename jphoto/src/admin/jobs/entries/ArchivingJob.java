@@ -82,6 +82,8 @@ public class ArchivingJob extends AbstractJob {
 		getGenerationMonitor().setCurrent( 0 );
 		getGenerationMonitor().setTotal( photoIdsToArchive.size() );
 
+		setTotalJopOperations( photoIdsToArchive.size() );
+
 		for ( final int photoId : photoIdsToArchive ) {
 
 			final Photo photo = photoService.load( photoId );
