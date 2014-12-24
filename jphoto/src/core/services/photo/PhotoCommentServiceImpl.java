@@ -73,7 +73,7 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 		final boolean isNew = entry.isNew();
 
-		final boolean isSaved = photoCommentDao.saveToDB( entry );
+		final boolean isSaved = getPhotoCommentDao().saveToDB( entry );
 
 		if ( ! isSaved ) {
 			return false;
@@ -95,52 +95,52 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Override
 	public PhotoComment load( final int commentId ) {
-		return photoCommentDao.load( commentId );
+		return getPhotoCommentDao().load( commentId );
 	}
 
 	@Override
 	public List<PhotoComment> loadAll( final int photoId ) {
-		return loadByIds( photoCommentDao.loadAllIds( photoId ) );
+		return loadByIds( getPhotoCommentDao().loadAllIds( photoId ) );
 	}
 
 	@Override
 	public List<Integer> loadRootCommentsIds( final int photoId ) {
-		return photoCommentDao.loadRootCommentsIds( photoId );
+		return getPhotoCommentDao().loadRootCommentsIds( photoId );
 	}
 
 	@Override
 	public List<PhotoComment> loadCommentsWithoutParent( final int photoId ) {
-		return loadByIds( photoCommentDao.loadRootCommentsIds( photoId ) );
+		return loadByIds( getPhotoCommentDao().loadRootCommentsIds( photoId ) );
 	}
 
 	@Override
 	public List<PhotoComment> loadAnswersOnComment( final int commentId ) {
-		return loadByIds( photoCommentDao.loadAnswersOnCommentIds( commentId ) );
+		return loadByIds( getPhotoCommentDao().loadAnswersOnCommentIds( commentId ) );
 	}
 
 	@Override
 	public void setCommentReadTime( final int commentId, final Date time ) {
-		photoCommentDao.setCommentReadTime( commentId, time );
+		getPhotoCommentDao().setCommentReadTime( commentId, time );
 	}
 
 	@Override
 	public int getUnreadCommentsQty( final int userId ) {
-		return photoCommentDao.getUnreadCommentsQty( userId );
+		return getPhotoCommentDao().getUnreadCommentsQty( userId );
 	}
 
 	@Override
 	public List<Integer> loadUserCommentsIds( final int userId ) {
-		return photoCommentDao.loadUserCommentsIds( userId );
+		return getPhotoCommentDao().loadUserCommentsIds( userId );
 	}
 
 	@Override
 	public List<Integer> loadCommentsToUserPhotosIds( final int userId ) {
-		return photoCommentDao.loadCommentsToUserPhotosIds( userId );
+		return getPhotoCommentDao().loadCommentsToUserPhotosIds( userId );
 	}
 
 	@Override
 	public List<Integer> loadUnreadCommentsToUserIds( final int userId ) {
-		return photoCommentDao.loadUnreadCommentsToUserIds( userId );
+		return getPhotoCommentDao().loadUnreadCommentsToUserIds( userId );
 	}
 
 	private List<PhotoComment> loadByIds( final List<Integer> ids ) {
@@ -153,17 +153,17 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Override
 	public boolean delete( final int entryId ) {
-		return photoCommentDao.delete( entryId );
+		return getPhotoCommentDao().delete( entryId );
 	}
 
 	@Override
 	public int getPhotoCommentsCount( final int photoId ) {
-		return photoCommentDao.getPhotoCommentsCount( photoId );
+		return getPhotoCommentDao().getPhotoCommentsCount( photoId );
 	}
 
 	@Override
 	public int getPhotoCommentsCount() {
-		return photoCommentDao.getPhotoCommentsCount();
+		return getPhotoCommentDao().getPhotoCommentsCount();
 	}
 
 	private void saveLastUserCommentTime( final User commentAuthor ) {
@@ -276,22 +276,22 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 
 	@Override
 	public void deletePhotoComments( final int photoId ) {
-		photoCommentDao.deletePhotoComments( photoId );
+		getPhotoCommentDao().deletePhotoComments( photoId );
 	}
 
 	@Override
 	public void markAllUnreadCommentAsRead( final int userId ) {
-		photoCommentDao.markAllUnreadCommentAsRead( userId );
+		getPhotoCommentDao().markAllUnreadCommentAsRead( userId );
 	}
 
 	@Override
 	public boolean exists( final int entryId ) {
-		return photoCommentDao.exists( entryId );
+		return getPhotoCommentDao().exists( entryId );
 	}
 
 	@Override
 	public boolean exists( final PhotoComment entry ) {
-		return photoCommentDao.exists( entry );
+		return getPhotoCommentDao().exists( entry );
 	}
 
 	private List<PhotoCommentInfo> loadChildrenPhotoComments( final PhotoComment parentComment, final List<EntryMenuData> entryMenuDataList, final User accessor ) {
@@ -306,6 +306,10 @@ public class PhotoCommentServiceImpl implements PhotoCommentService {
 		}
 
 		return commentInfos;
+	}
+
+	protected PhotoCommentDao getPhotoCommentDao() {
+		return photoCommentDao;
 	}
 
 	private Date getCurrentTime() {

@@ -9,10 +9,7 @@ import core.general.photo.PhotoPreview;
 import core.general.user.User;
 import core.log.LogHelper;
 import core.services.entry.GenreService;
-import core.services.photo.PhotoCommentService;
-import core.services.photo.PhotoPreviewService;
-import core.services.photo.PhotoService;
-import core.services.photo.PhotoVotingService;
+import core.services.photo.*;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.user.UserRankService;
@@ -59,6 +56,9 @@ public class PhotoCardController {
 
 	@Autowired
 	private PhotoCommentService photoCommentService;
+
+	@Autowired
+	private PhotoCommentArchService photoCommentArchService;
 
 	@Autowired
 	private PhotoVotingService photoVotingService;
@@ -125,7 +125,7 @@ public class PhotoCardController {
 		final Genre genre = genreService.load( photo.getGenreId() );
 		model.setGenre( genre );
 
-		model.setRootCommentsIds( photoCommentService.loadRootCommentsIds( photoId ) );
+		model.setRootCommentsIds( photo.isArchived() ? photoCommentArchService.loadRootCommentsIds( photoId ) : photoCommentService.loadRootCommentsIds( photoId ) );
 
 		final User currentUser = EnvironmentContext.getCurrentUser();
 		final int loggedUserId = currentUser.getId();

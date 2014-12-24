@@ -14,6 +14,7 @@
 	<bean id="genreService" class="core.services.entry.GenreServiceImpl"/>
 	<bean id="photoService" class="core.services.photo.PhotoServiceImpl"/>
 	<bean id="photoCommentService" class="core.services.photo.PhotoCommentServiceImpl"/>
+	<bean id="photoCommentArchService" class="core.services.photo.PhotoCommentArchServiceImpl"/>
 	<bean id="votingCategoryService" class="core.services.entry.VotingCategoryServiceImpl"/>
 	<bean id="votingService" class="core.services.photo.PhotoVotingServiceImpl"/>
 	<bean id="favoritesService" class="core.services.entry.FavoritesServiceImpl"/>

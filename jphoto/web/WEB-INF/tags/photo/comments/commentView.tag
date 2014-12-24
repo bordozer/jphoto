@@ -49,6 +49,7 @@
 	<c:set var="ownPhotoStyle" value="block-background"/>
 </c:if>--%>
 
+<c:set var="photo" value="${commentInfo.photo}"/>
 <c:set var="photoAuthor" value="${commentInfo.photoAuthor}"/>
 <c:set var="photoAuthorId" value="${photoAuthor.id}"/>
 <c:set var="commentAuthor" value="${comment.commentAuthor}"/>
@@ -60,6 +61,28 @@
 <c:set var="commentReadTime" value="${comment.readTime.time}"/>
 
 <div id="${fullCommentDivId}" class="floatleft" style="margin-bottom: 10px; ${useAnimation ? "display: none;" : ""}">
+
+	<c:if test="${photo.archived}">
+
+		<c:set var="hasAvatar" value="${commentAuthorAvatar.hasAvatar}" />
+
+		<div class="floatleft block-border" style="margin-left: 10px; padding: 5px;">
+
+			<c:if test="${hasAvatar}">
+				<div style="display: inline-block; width: 90px;">
+					<img id="avatar_${commentAuthor.id}" src="${commentAuthorAvatarUrl}" height="50" alt="${eco:translate1('Comment view: $1 - avatar', eco:escapeHtml(commentAuthor.name))}" />
+				</div>
+			</c:if>
+
+			<div style="display: inline-block; width: ${hasAvatar ? '75' : '95'}%; height: 100%; vertical-align: middle; margin-left: 10px;">
+				${eco:formatDateTimeShort(comment.creationTime)}
+				<br />
+				${eco:formatPhotoCommentText(comment.commentText)}
+			</div>
+		</div>
+	</c:if>
+
+<c:if test="${not photo.archived}">
 
 	<div class="floatleft photoCommentContainerInner block-border">
 
@@ -109,7 +132,6 @@
 
 			<c:if test="${not empty commentInfo and not empty commentInfo.entryMenu.entryMenuItems}">
 				/
-				<%--<tags:entryMenu entryMenu="${commentInfo.entryMenu}" />--%>
 				<tags:contextMenu entryId="${comment.id}" entryMenuType="<%=EntryMenuType.COMMENT%>" />
 			</c:if>
 
@@ -156,6 +178,9 @@
 
 		<div class="${commentEndAnchor}${commentId}"></div>
 	</div>
+
+</c:if>
+
 </div>
 
 <script type="text/javascript">
