@@ -1,8 +1,6 @@
 package services;
 
 import common.AbstractTestCase;
-import ui.context.Environment;
-import ui.context.EnvironmentContext;
 import core.exceptions.AccessDeniedException;
 import core.exceptions.NudeContentException;
 import core.exceptions.notFound.GenreNotFoundException;
@@ -23,7 +21,8 @@ import core.services.user.UserService;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
-import ui.services.security.SecurityUIService;
+import ui.context.Environment;
+import ui.context.EnvironmentContext;
 import ui.services.security.SecurityUIServiceImpl;
 
 import java.util.List;

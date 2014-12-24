@@ -91,4 +91,24 @@ public class ArchivingServiceImpl implements ArchivingService {
 	public Date getArchiveStartDate( final int days ) {
 		return dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days - 1 );
 	}
+
+	public void setPhotoService( final PhotoService photoService ) {
+		this.photoService = photoService;
+	}
+
+	public void setDateUtilsService( final DateUtilsService dateUtilsService ) {
+		this.dateUtilsService = dateUtilsService;
+	}
+
+	public void setPhotoCommentService( final PhotoCommentService photoCommentService ) {
+		this.photoCommentService = photoCommentService;
+	}
+
+	public void setArchivingDao( final ArchivingDao archivingDao ) {
+		this.archivingDao = archivingDao;
+	}
+
+	public void setPhotoCommentArchDao( final PhotoCommentDaoArchImpl photoCommentArchDao ) {
+		this.photoCommentArchDao = photoCommentArchDao;
+	}
 }
