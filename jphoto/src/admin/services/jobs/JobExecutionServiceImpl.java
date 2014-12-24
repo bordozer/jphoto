@@ -9,7 +9,6 @@ import admin.jobs.general.JobProgressDTO;
 import admin.jobs.general.JobStatusChangeStrategy;
 import admin.jobs.general.SavedJob;
 import core.log.LogHelper;
-import core.services.system.ConfigurationService;
 import core.services.system.Services;
 import core.services.translator.TranslatorService;
 import core.services.utils.DateUtilsService;
@@ -28,9 +27,6 @@ public class JobExecutionServiceImpl implements JobExecutionService {
 
 	@Autowired
 	private DateUtilsService dateUtilsService;
-
-	@Autowired
-	private ConfigurationService configurationService;
 
 	@Autowired
 	private JobExecutionHistoryService jobExecutionHistoryService;

@@ -2,6 +2,8 @@ package admin.jobs.entries;
 
 import admin.jobs.JobRuntimeEnvironment;
 import admin.jobs.enums.SavedJobType;
+import admin.services.jobs.JobExecutionHistoryEntry;
+import admin.services.jobs.JobExecutionHistoryService;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
 import core.general.configuration.ConfigurationKey;
@@ -72,6 +74,7 @@ public class ArchivingJob extends AbstractJob {
 		final DateUtilsService dateUtilsService = services.getDateUtilsService();
 		final ArchivingService archivingService = services.getArchivingService();
 		final PhotoService photoService = services.getPhotoService();
+		final JobExecutionHistoryService jobExecutionHistoryService = services.getJobExecutionHistoryService();
 
 		final Date time = archivingService.getArchiveStartDate( archivePhotosOlderThen );
 
@@ -79,10 +82,8 @@ public class ArchivingJob extends AbstractJob {
 
 		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
 
-		getGenerationMonitor().setCurrent( 0 );
-		getGenerationMonitor().setTotal( photoIdsToArchive.size() );
-
-		setTotalJopOperations( photoIdsToArchive.size() );
+		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
+		jobExecutionHistoryService.updateTotalJobSteps( historyEntry.getId(), photoIdsToArchive.size() + 2 );
 
 		for ( final int photoId : photoIdsToArchive ) {
 

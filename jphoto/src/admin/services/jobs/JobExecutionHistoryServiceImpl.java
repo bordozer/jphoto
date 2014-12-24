@@ -3,7 +3,6 @@ package admin.services.jobs;
 import admin.jobs.enums.JobExecutionStatus;
 import core.enums.SavedJobParameterKey;
 import core.general.base.CommonProperty;
-import core.services.utils.DateUtilsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import sql.SqlSelectIdsResult;
 import sql.builder.SqlIdsSelectQuery;
@@ -16,9 +15,6 @@ public class JobExecutionHistoryServiceImpl implements JobExecutionHistoryServic
 
 	@Autowired
 	private JobExecutionHistoryDao jobExecutionHistoryDao;
-
-	@Autowired
-	private DateUtilsService dateUtilsService;
 
 	@Override
 	public List<JobExecutionHistoryEntry> getJobExecutionHistoryEntries() {
