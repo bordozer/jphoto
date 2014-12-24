@@ -89,7 +89,9 @@ public class ArchivingJob extends AbstractJob {
 
 			final Photo photo = photoService.load( photoId );
 
-			archivingService.archivePhoto( photo );
+			if ( ! photo.isArchived() ) {
+				archivingService.archivePhoto( photo );
+			}
 
 			increment();
 
