@@ -31,6 +31,7 @@
 			<tx:method name="sendActivityNotificationMessage"/>
 			<tx:method name="sendNotificationAboutErrorToAdmins"/>
 			<tx:method name="saveActivity"/>
+			<tx:method name="archivePhoto"/>
 		</tx:attributes>
 	</tx:advice>
 
@@ -97,6 +98,11 @@
 	<aop:config>
 		<aop:pointcut id="saveActivity" expression="execution(* core.services.entry.ActivityStreamService.save*(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="saveActivity"/>
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="archivePhoto" expression="execution(* core.services.archiving.ArchivingService.archivePhoto(..))"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="archivePhoto"/>
 	</aop:config>
 
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
