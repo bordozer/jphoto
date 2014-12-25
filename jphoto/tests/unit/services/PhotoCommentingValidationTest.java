@@ -15,6 +15,7 @@ import core.services.security.SecurityServiceImpl;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
+import mocks.UserMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -234,6 +235,47 @@ public class PhotoCommentingValidationTest extends AbstractTestCase {
 		securityService.setRestrictionService( restrictionService );
 
 		assertTrue( "Commenting must be accessible but it is not", securityService.validateUserCanCommentPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationPassed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeCommentedByAdminTest() {
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Commented", securityService.validateUserCanCommentPhoto( SUPER_ADMIN_1, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeCommentedByPhotoAuthorTest() {
+
+		final UserMock photoAuthor = new UserMock();
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setUserId( photoAuthor.getId() );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Commented", securityService.validateUserCanCommentPhoto( photoAuthor, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeCommentedByUsualUserTest() {
+
+		final UserMock photoAuthor = new UserMock();
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Commented", securityService.validateUserCanCommentPhoto( photoAuthor, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	private FavoritesService getFavoritesService( final int photoAuthorId, final int candidateUserId, final boolean value ) {

@@ -19,6 +19,7 @@ import core.services.translator.Language;
 import core.services.translator.message.TranslatableMessage;
 import core.services.user.UserRankService;
 import core.services.user.UserService;
+import mocks.UserMock;
 import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
@@ -311,6 +312,47 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		securityService.setUserRankService( userRankService );
 
 		assertTrue( "Commenting must be accessible but it is not", securityService.validateUserCanVoteForPhoto( candidateUser, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationPassed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeVoteddByAdminTest() {
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Voted", securityService.validateUserCanCommentPhoto( SUPER_ADMIN_1, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeVotedByPhotoAuthorTest() {
+
+		final UserMock photoAuthor = new UserMock();
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setUserId( photoAuthor.getId() );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Voted", securityService.validateUserCanCommentPhoto( photoAuthor, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
+	}
+
+	@Test
+	public void archivedPhotoCanNotBeVotedByUsualUserTest() {
+
+		final UserMock photoAuthor = new UserMock();
+
+		final Photo photo = new Photo();
+		photo.setId( 333 );
+		photo.setArchived( true );
+
+		final SecurityServiceImpl securityService = getSecurityService();
+
+		assertTrue( "Archived Photo Can Not Be Voted", securityService.validateUserCanCommentPhoto( photoAuthor, photo, dateUtilsService.getCurrentTime(), Language.EN ).isValidationFailed() );
 	}
 
 	private UserService getUserService( final int photoAuthorId, final User photoAuthor ) {
