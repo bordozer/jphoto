@@ -410,11 +410,6 @@ public class PhotoServiceImpl implements PhotoService {
 		return photoDao.isUserPhotoImported( userId, importId );
 	}
 
-	@Override
-	public List<Integer> getPhotosIdsUploadedEarlieThen( final Date time ) {
-		return photoDao.getPhotosIdsUploadedEarlieThen( time );
-	}
-
 	private void createPhotoDBEntry( final Photo photo, final File photoImageFile, final File preview, final PhotoTeam photoTeam, final List<UserPhotoAlbum> photoAlbums ) throws SaveToDBException {
 
 		photo.setFileSize( photoImageFile.length() );

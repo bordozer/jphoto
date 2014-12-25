@@ -92,6 +92,11 @@ public class ArchivingServiceImpl implements ArchivingService {
 		return dateUtilsService.getFirstSecondOfTheDayNDaysAgo( days - 1 );
 	}
 
+	@Override
+	public List<Integer> getNotArchivedPhotosIdsUploadedAtOrEarlieThen( final Date time ) {
+		return archivingDao.getNotArchivedPhotosIdsUploadedAtOrEarlieThen( time );
+	}
+
 	public void setPhotoService( final PhotoService photoService ) {
 		this.photoService = photoService;
 	}

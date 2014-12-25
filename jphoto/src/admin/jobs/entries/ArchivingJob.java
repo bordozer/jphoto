@@ -80,7 +80,7 @@ public class ArchivingJob extends AbstractJob {
 
 		log.debug( String.format( "About to archiving photos uploaded earlie then %s", dateUtilsService.formatDateTime( time ) ) );
 
-		final List<Integer> photoIdsToArchive = photoService.getPhotosIdsUploadedEarlieThen( time );
+		final List<Integer> photoIdsToArchive = archivingService.getNotArchivedPhotosIdsUploadedAtOrEarlieThen( time );
 
 		final JobExecutionHistoryEntry historyEntry = jobExecutionHistoryService.load( jobId );
 		jobExecutionHistoryService.updateTotalJobSteps( historyEntry.getId(), photoIdsToArchive.size() + 2 );
@@ -93,13 +93,13 @@ public class ArchivingJob extends AbstractJob {
 				archivingService.archivePhoto( photo );
 			}
 
+			log.debug( String.format( "Photo %s has been archived", photo ) );
+
 			increment();
 
 			if ( hasJobFinishedWithAnyResult() ) {
 				break;
 			}
-
-			log.debug( String.format( "Photo %s has been archived", photo ) );
 		}
 	}
 

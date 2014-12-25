@@ -272,20 +272,6 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 		return hasEntry( sql, paramSource );
 	}
 
-	@Override
-	public List<Integer> getPhotosIdsUploadedEarlieThen( final Date time ) {
-		final String sql = String.format( "SELECT %s FROM %s WHERE %s <= :time;"
-			, ENTITY_ID
-			, TABLE_PHOTOS
-			, TABLE_COLUMN_UPLOAD_TIME
-		);
-
-		final MapSqlParameterSource paramSource = new MapSqlParameterSource();
-		paramSource.addValue( "time", time );
-
-		return jdbcTemplate.query( sql, paramSource, new IdsRowMapper() );
-	}
-
 	private int getUserGenrePhotosQty( final int userId, final int genreId ) {
 		final String sql = String.format( "SELECT COUNT(id) FROM %s WHERE %s=:userId AND %s=:genreId;", TABLE_PHOTOS, TABLE_COLUMN_USER_ID, TABLE_COLUMN_GENRE_ID );
 
