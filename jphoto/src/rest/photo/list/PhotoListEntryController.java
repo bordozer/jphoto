@@ -442,6 +442,10 @@ public class PhotoListEntryController {
 		this.restrictionService = restrictionService;
 	}
 
+	public void setUserPhotoAlbumService( final UserPhotoAlbumService userPhotoAlbumService ) {
+		this.userPhotoAlbumService = userPhotoAlbumService;
+	}
+
 	private Language getLanguage() {
 		return EnvironmentContext.getLanguage();
 	}

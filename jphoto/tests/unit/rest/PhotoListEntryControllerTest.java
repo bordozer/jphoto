@@ -15,6 +15,7 @@ import core.services.security.RestrictionService;
 import core.services.security.SecurityService;
 import core.services.system.ConfigurationService;
 import core.services.translator.Language;
+import core.services.user.UserPhotoAlbumService;
 import core.services.user.UserService;
 import rest.photo.list.PhotoBookmarkIcon;
 import rest.photo.list.PhotoEntryDTO;
@@ -493,6 +494,7 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		controller.setPhotoPreviewService( getPhotoPreviewService( testData ) );
 		controller.setPhotoCommentService( getPhotoCommentService( testData ) );
 		controller.setRestrictionService( getRestrictionService( testData ) );
+		controller.setUserPhotoAlbumService( getUserPhotoAlbumService() );
 
 		return controller;
 	}
@@ -624,7 +626,6 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		final RestrictionService restrictionService = EasyMock.createMock( RestrictionService.class );
 
 		EasyMock.expect( restrictionService.getPhotoAllRestrictionsOn( EasyMock.anyInt(), EasyMock.<Date>anyObject() ) ).andReturn( newArrayList() ).anyTimes();
-//		EasyMock.expect( restrictionService.getPhotoRestrictionMessage( EasyMock.<EntryRestriction>anyObject() ) ).andReturn( new TranslatableMessage( "", getServices() ) ).anyTimes();
 
 		EasyMock.expectLastCall();
 		EasyMock.replay( restrictionService );
@@ -632,16 +633,16 @@ public class PhotoListEntryControllerTest extends AbstractTestCase {
 		return restrictionService;
 	}
 
-	/*private DateUtilsService getDateUtilsService() {
-		final DateUtilsService dateUtilsService = EasyMock.createMock( DateUtilsService.class );
+	private UserPhotoAlbumService getUserPhotoAlbumService() {
+		final UserPhotoAlbumService userPhotoAlbumService = EasyMock.createMock( UserPhotoAlbumService.class );
 
-		EasyMock.expect( dateUtilsService.getCurrentTime() ).andReturn( this.dateUtilsService.parseDateTime( CURRENT_TIME_ ) ).anyTimes();
+		EasyMock.expect( userPhotoAlbumService.loadPhotoAlbums( EasyMock.anyInt() ) ).andReturn( newArrayList() ).anyTimes();
 
 		EasyMock.expectLastCall();
-		EasyMock.replay( dateUtilsService );
+		EasyMock.replay( userPhotoAlbumService );
 
-		return dateUtilsService;
-	}*/
+		return userPhotoAlbumService;
+	}
 
 	private class TestData {
 
