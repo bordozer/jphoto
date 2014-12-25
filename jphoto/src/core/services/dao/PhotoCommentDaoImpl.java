@@ -3,7 +3,6 @@ package core.services.dao;
 import core.general.cache.CacheEntryFactory;
 import core.general.cache.CacheKey;
 import core.general.photo.PhotoComment;
-import core.interfaces.ArchivableEntry;
 import core.services.dao.mappers.IdsRowMapper;
 import core.services.system.CacheService;
 import core.services.user.UserService;
