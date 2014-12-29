@@ -278,7 +278,7 @@ public class SecurityServiceImpl implements SecurityService {
 		final ValidationResult allowanceValidationResult = new ValidationResult();
 
 		if ( photo.isArchived() ) { // TODO: cover this by unit test
-			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo is archived", language ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo had been uploaded more then $1 days ago and has been archived", language, configurationService.getString( ConfigurationKey.ARCHIVING_PHOTOS ) ) );
 
 			return allowanceValidationResult;
 		}
@@ -370,7 +370,7 @@ public class SecurityServiceImpl implements SecurityService {
 		}
 
 		if ( photo.isArchived() ) { // TODO: cover this by unit test
-			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo is archived", language ) );
+			allowanceValidationResult.failValidation( translatorService.translate( "ValidationResult: The photo had been uploaded more then $1 days ago and has been archived", language, configurationService.getString( ConfigurationKey.ARCHIVING_PHOTOS ) ) );
 
 			return allowanceValidationResult;
 		}
