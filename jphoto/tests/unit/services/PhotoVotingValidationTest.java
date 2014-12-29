@@ -374,6 +374,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 	private ConfigurationService getConfigurationService( final boolean value ) {
 		final ConfigurationService configurationService = EasyMock.createMock( ConfigurationService.class );
 		EasyMock.expect( configurationService.getBoolean( ConfigurationKey.CANDIDATES_CAN_VOTE_FOR_PHOTOS ) ).andReturn( value ).anyTimes();
+		EasyMock.expect( configurationService.getString( ConfigurationKey.ARCHIVING_PHOTOS ) ).andReturn( "90" ).anyTimes();
 		EasyMock.expectLastCall();
 		EasyMock.replay( configurationService );
 		return configurationService;
@@ -391,6 +392,7 @@ public class PhotoVotingValidationTest extends AbstractTestCase {
 		final SecurityServiceImpl securityService = new SecurityServiceImpl();
 
 		securityService.setTranslatorService( translatorService );
+		securityService.setConfigurationService( getConfigurationService( false ) );
 
 		return securityService;
 	}
