@@ -70,6 +70,9 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 	private PhotoCommentService photoCommentService;
 
 	@Autowired
+	private PhotoCommentArchService photoCommentArchService;
+
+	@Autowired
 	private PhotoPreviewService photoPreviewService;
 
 	@Autowired
@@ -130,7 +133,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 		photoInfo.setUserCanDeletePhoto( securityService.userCanDeletePhoto( accessor, photo ) );
 
 		photoInfo.setSuperAdminUser( securityService.isSuperAdminUser( accessor.getId() ) );
-		photoInfo.setCommentsCount( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
+		photoInfo.setCommentsCount( photo.isArchived() ? photoCommentArchService.getPhotoCommentsCount( photo.getId() ) : photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 
 		photoInfo.setShowStatisticInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC ) );
 		photoInfo.setShowUserRankInGenreInPhotoList( configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_USER_RANK_IN_GENRE ) );
