@@ -220,6 +220,11 @@ public class PhotoListEntryController {
 	}
 
 	private void setPhotoStatistics( final Photo photo, final PhotoEntryDTO photoEntry, final boolean doesPreviewHasToBeHidden, final Language language ) {
+
+		if ( photo.isArchived() ) {
+			return;
+		}
+
 		final boolean showPhotoStatistics = configurationService.getBoolean( ConfigurationKey.PHOTO_LIST_SHOW_STATISTIC );
 		photoEntry.setShowStatistics( showPhotoStatistics );
 
@@ -234,10 +239,10 @@ public class PhotoListEntryController {
 		photoEntry.setPeriodMarks( photoVotingService.getPhotoMarksForPeriod( photo.getId(), dateRange.getTimeFrom(), dateRange.getTimeTo() ) );
 
 		photoEntry.setPeriodMarksTitle( translatorService.translate( "Photo preview: The photo's marks for period from $1 to $2"
-			, language
-			, dateUtilsService.formatDate( dateRange.getTimeFrom() )
-			, dateUtilsService.formatDate( dateRange.getTimeTo() )
-		));
+				, language
+				, dateUtilsService.formatDate( dateRange.getTimeFrom() )
+				, dateUtilsService.formatDate( dateRange.getTimeTo() )
+		) );
 
 		final String totalMarksTitle = translatorService.translate( "Photo preview: The photo's total marks", language );
 		final int totalMarks = getTotalMarks( photo );
@@ -251,35 +256,35 @@ public class PhotoListEntryController {
 		// Previews
 		final String previewsCount = String.valueOf( photoPreviewService.getPreviewCount( photo.getId() ) );
 		photoEntry.setPreviewsIcon( String.format( "<img src='%s/photo_preview_views_icon.png' height='8' title='%s'>"
-			, urlUtilsService.getSiteImagesPath()
-			, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
-			)
+						, urlUtilsService.getSiteImagesPath()
+						, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
+				)
 		);
 		if ( doesPreviewHasToBeHidden ) {
 			photoEntry.setPreviewsCount( String.format( "<span title='%s'>%s</span>"
-				, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
-				, previewsCount
-				)
+							, translatorService.translate( "Photo preview: Previews count: $1", language, previewsCount )
+							, previewsCount
+					)
 			);
 		} else {
 			photoEntry.setPreviewsCount( String.format( "<a href='%s' title='%s'>%s</a>"
-				, urlUtilsService.getPhotoPreviewsListLink( photo.getId() )
-				, translatorService.translate( "Photo preview: Show preview history", language )
-				, previewsCount
+					, urlUtilsService.getPhotoPreviewsListLink( photo.getId() )
+					, translatorService.translate( "Photo preview: Show preview history", language )
+					, previewsCount
 			) );
 		}
 
 		// Comments
 		final String commentsCount = String.valueOf( photoCommentService.getPhotoCommentsCount( photo.getId() ) );
 		photoEntry.setCommentsIcon( String.format( "<img src='%s/photo_preview_comments_icon.png' height='8' title='%s'>"
-			, urlUtilsService.getSiteImagesPath()
-			, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
-			)
+						, urlUtilsService.getSiteImagesPath()
+						, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
+				)
 		);
 		photoEntry.setCommentsCount( String.format( "<span title='%s'>%s</span>"
-			, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
-			, commentsCount
-			)
+						, translatorService.translate( "Photo preview: Comments count: $1", language, commentsCount )
+						, commentsCount
+				)
 		);
 
 	}
