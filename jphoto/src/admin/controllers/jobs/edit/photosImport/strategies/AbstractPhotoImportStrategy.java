@@ -36,6 +36,8 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractPhotoImportStrategy {
 
+	private static final int PERCENTAGE_OF_PROBABILITY_THAT_PHOTO_HAS_AN_ALBUM = 40;
+
 	protected final AbstractJob job;
 	protected final Services services;
 	protected final LogHelper log;
@@ -237,6 +239,10 @@ public abstract class AbstractPhotoImportStrategy {
 		}
 
 		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
+		if ( randomUtilsService.getRandomInt( 0, 100 ) < PERCENTAGE_OF_PROBABILITY_THAT_PHOTO_HAS_AN_ALBUM ) {
+			return Collections.<UserPhotoAlbum>emptyList();
+		}
+
 		return randomUtilsService.getRandomNUniqueListElements( userPhotoAlbums, randomUtilsService.getRandomInt( 0, 3 ) );
 	}
 }
