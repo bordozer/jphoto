@@ -383,7 +383,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			final ImageToImportData imageToImportData = new ImageToImportData( imageToImport );
 			imageToImportData.setUser( localUser );
 			imageToImportData.setName( remotePhotoData.getName() );
-			imageToImportData.setRemotePhotoSiteSeries( remotePhotoData.getRemotePhotoSiteSeries() );
+			imageToImportData.setRemotePhotoSiteSeries( newArrayList( remotePhotoData.getRemotePhotoSiteSeries() ) );
 
 			final RemotePhotoSiteCategory photosightCategory = remotePhotoData.getRemotePhotoSiteCategory();
 			final DateUtilsService dateUtilsService = services.getDateUtilsService();

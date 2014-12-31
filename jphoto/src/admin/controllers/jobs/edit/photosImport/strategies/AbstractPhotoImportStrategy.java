@@ -27,6 +27,7 @@ import core.services.utils.DateUtilsService;
 import core.services.utils.RandomUtilsService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -102,7 +103,7 @@ public abstract class AbstractPhotoImportStrategy {
 
 		switch ( imageToImport.getPhotoImageLocationType() ) {
 			case FILE:
-				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
+				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getRandomPhotoAlbums( user ) );
 				break;
 			default:
 				final PhotoImportData photoImportData = new PhotoImportData( imageToImport.getPhotosImportSource(), photoToImportData.getRemoteUserId(), photoToImportData.getRemotePhotoId() );
@@ -198,29 +199,36 @@ public abstract class AbstractPhotoImportStrategy {
 
 	private List<UserPhotoAlbum> getPhotoAlbumsAssignTo( final ImageToImportData photoToImport, final User user ) {
 
-		final RemotePhotoSiteSeries remotePhotoSiteSeries = photoToImport.getRemotePhotoSiteSeries();
+		final List<RemotePhotoSiteSeries> remotePhotoSiteSeries = photoToImport.getRemotePhotoSiteSeries();
 
-		if ( remotePhotoSiteSeries == null ) {
+		if ( remotePhotoSiteSeries == null || remotePhotoSiteSeries.size() == 0 ) {
 			return newArrayList();
 		}
 
-		final UserPhotoAlbum existingPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( user, remotePhotoSiteSeries.getName() );
-		if ( existingPhotoAlbum != null ) {
-			log.debug( String.format( "The photo will be added to the existing album with name '%s'", existingPhotoAlbum.getName() ) );
-			return newArrayList( existingPhotoAlbum );
+		final ArrayList<UserPhotoAlbum> userPhotoAlbums = newArrayList();
+
+		for ( final RemotePhotoSiteSeries album : remotePhotoSiteSeries ) {
+
+			final UserPhotoAlbum existingPhotoAlbum = services.getUserPhotoAlbumService().loadPhotoAlbumByName( user, album.getName() );
+			if ( existingPhotoAlbum != null ) {
+				log.debug( String.format( "The photo will be added to the existing album with name '%s'", existingPhotoAlbum.getName() ) );
+				return newArrayList( existingPhotoAlbum );
+			}
+
+			final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
+			photoAlbum.setName( album.getName() );
+			photoAlbum.setUser( user );
+			photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
+
+			services.getUserPhotoAlbumService().save( photoAlbum );
+
+			userPhotoAlbums.add( photoAlbum );
 		}
 
-		final UserPhotoAlbum photoAlbum = new UserPhotoAlbum();
-		photoAlbum.setName( remotePhotoSiteSeries.getName() );
-		photoAlbum.setUser( user );
-		photoAlbum.setDescription( String.format( "The album unites multiple images from photo card of remote site" ) );
-
-		services.getUserPhotoAlbumService().save( photoAlbum );
-
-		return newArrayList( photoAlbum );
+		return userPhotoAlbums;
 	}
 
-	/*private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
+	private List<UserPhotoAlbum> getRandomPhotoAlbums( final User user ) {
 
 		final List<UserPhotoAlbum> userPhotoAlbums = services.getUserPhotoAlbumService().loadAllForEntry( user.getId() );
 
@@ -228,6 +236,7 @@ public abstract class AbstractPhotoImportStrategy {
 			return Collections.<UserPhotoAlbum>emptyList();
 		}
 
-		return services.getRandomUtilsService().getRandomNUniqueListElements( userPhotoAlbums, 3 );
-	}*/
+		final RandomUtilsService randomUtilsService = services.getRandomUtilsService();
+		return randomUtilsService.getRandomNUniqueListElements( userPhotoAlbums, randomUtilsService.getRandomInt( 0, 3 ) );
+	}
 }

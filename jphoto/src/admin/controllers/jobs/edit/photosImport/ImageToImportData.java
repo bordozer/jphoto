@@ -4,6 +4,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 
 import java.util.Date;
+import java.util.List;
 
 public class ImageToImportData {
 
@@ -19,7 +20,7 @@ public class ImageToImportData {
 
 	private String remoteUserId;
 	private int remotePhotoId;
-	private RemotePhotoSiteSeries remotePhotoSiteSeries;
+	private List<RemotePhotoSiteSeries> remotePhotoSiteSeries;
 
 	public ImageToImportData( final ImageToImport imageToImport ) {
 		this.imageToImport = imageToImport;
@@ -93,11 +94,11 @@ public class ImageToImportData {
 		this.remotePhotoId = remotePhotoId;
 	}
 
-	public void setRemotePhotoSiteSeries( final RemotePhotoSiteSeries remotePhotoSiteSeries ) {
+	public void setRemotePhotoSiteSeries( final List<RemotePhotoSiteSeries> remotePhotoSiteSeries ) {
 		this.remotePhotoSiteSeries = remotePhotoSiteSeries;
 	}
 
-	public RemotePhotoSiteSeries getRemotePhotoSiteSeries() {
+	public List<RemotePhotoSiteSeries> getRemotePhotoSiteSeries() {
 		return remotePhotoSiteSeries;
 	}
 

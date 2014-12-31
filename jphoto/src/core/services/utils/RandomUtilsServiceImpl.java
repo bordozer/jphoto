@@ -7,6 +7,7 @@ import core.general.photo.Photo;
 import core.general.user.User;
 import core.general.user.UserMembershipType;
 import core.interfaces.Identifiable;
+import core.log.LogHelper;
 import core.services.photo.PhotoService;
 import core.services.security.SecurityService;
 import org.apache.commons.collections15.CollectionUtils;
@@ -31,6 +32,8 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 	@Autowired
 	private SecurityService securityService;
+
+	private final LogHelper log = new LogHelper( RandomUtilsServiceImpl.class );
 
 	@Override
 	public PhotoActionAllowance getRandomPhotoAllowance() {
@@ -264,6 +267,11 @@ public class RandomUtilsServiceImpl implements RandomUtilsService {
 
 			chosenIds.add( randomUserTeamMember.getId() );
 			i++;
+
+			if ( i > items.size() * 10 ) {
+				log.warn( "RandomUtilsService.getRandomNUniqueListElements(): risk of infinity cycle. Breaking..." );
+				break;
+			}
 		}
 
 		CollectionUtils.filter( clone, new Predicate<T>() {
