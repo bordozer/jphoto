@@ -109,7 +109,7 @@ public abstract class AbstractPhotoImportStrategy {
 				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), getPhotoTeam( photo, user ), getRandomPhotoAlbums( user ) );
 				break;
 			default:
-				final PhotoImportData photoImportData = new PhotoImportData( imageToImport.getPhotosImportSource(), photoToImportData.getRemoteUserId(), photoToImportData.getRemotePhotoId() );
+				final PhotoImportData photoImportData = new PhotoImportData( imageToImport.getPhotosImportSource(), photoToImportData.getRemoteUserId(), photoToImportData.getRemoteUserName(), photoToImportData.getRemotePhotoId() );
 				photo.setPhotoImportData( photoImportData );
 				services.getPhotoService().uploadNewPhoto( photo, imageToImport.getImageFile(), imageToImport.getPhotoImageUrl(), getPhotoTeam( photo, user ), getPhotoAlbumsAssignTo( photoToImportData, user ) );
 				break;

@@ -120,7 +120,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 
 	private void importRemotePhotoSiteUserPhotos( final RemoteUser remoteUser ) throws IOException, SaveToDBException {
 
-		logger.logUserImportImportStart( remoteUser.getId() );
+		logger.logUserImportImportStart( remoteUser.getId(), remoteUser.getName() );
 
 		final User user = findExistingOrCreateUser( remoteUser, importParameters );
 		if ( user == null ) {
@@ -404,6 +404,7 @@ public class RemotePhotoSiteImportStrategy extends AbstractPhotoImportStrategy {
 			imageToImportData.setPhotoKeywords( keywords );
 			imageToImportData.setUploadTime( remotePhotoData.getUploadTime() );
 			imageToImportData.setRemoteUserId( remotePhoto.getRemotePhotoData().getRemoteUser().getId() );
+			imageToImportData.setRemoteUserName( remotePhoto.getRemotePhotoData().getRemoteUser().getName() );
 			imageToImportData.setRemotePhotoId( remotePhoto.getRemotePhotoData().getPhotoId() );
 
 			photosToImport.add( new RemotePhotoSiteDBEntry( remotePhoto, imageToImportData ) );

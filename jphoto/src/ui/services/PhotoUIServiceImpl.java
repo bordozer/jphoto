@@ -143,7 +143,7 @@ public class PhotoUIServiceImpl implements PhotoUIService {
 			final AbstractRemotePhotoSiteUrlHelper remotePhotoSiteUrlHelper = AbstractRemotePhotoSiteUrlHelper.getInstance( photoImportData.getPhotosImportSource() );
 
 			photoInfo.setRemoteSourceLink( String.format( "<a href='http://%1$s' target='_blank'>%1$s</a>", remotePhotoSiteUrlHelper.getRemotePhotoSiteHost() ) );
-			photoInfo.setRemoteUserLink( remotePhotoSiteUrlHelper.getRemoteUserCardLink( photoImportData.getRemoteUserId() ) );
+			photoInfo.setRemoteUserLink( remotePhotoSiteUrlHelper.getRemoteUserCardLink( photoImportData.getRemoteUserId(), photoImportData.getRemoteUserName() ) );
 			photoInfo.setRemotePhotoLink( String.format( "<a href='%s' target='_blank'>%s</a>"
 				, remotePhotoSiteUrlHelper.getPhotoCardUrl( photoImportData.getRemoteUserId(), photoImportData.getRemotePhotoId() )
 				, photo.getNameEscaped()

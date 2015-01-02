@@ -26,7 +26,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -66,6 +65,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 	private static final String PHOTO_IMPORT_DATA_ROOT_ELEMENT = "photo";
 	private static final String PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID = "importSourceId";
 	private static final String PHOTO_IMPORT_DATA_REMOTE_USER_ID = "remoteUserId";
+	private static final String PHOTO_IMPORT_DATA_REMOTE_USER_NAME = "remoteUserName";
 	private static final String PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID = "remotePhotoId";
 
 	@Autowired
@@ -293,6 +293,7 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 		rootElement.addElement( PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID ).addText( String.valueOf( photoImportData.getPhotosImportSource().getId() ) );
 		rootElement.addElement( PHOTO_IMPORT_DATA_REMOTE_USER_ID ).addText( String.valueOf( photoImportData.getRemoteUserId() ) );
+		rootElement.addElement( PHOTO_IMPORT_DATA_REMOTE_USER_NAME ).addText( String.valueOf( photoImportData.getRemoteUserName() ) );
 		rootElement.addElement( PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID ).addText( String.valueOf( photoImportData.getRemotePhotoId() ) );
 
 		return document.asXML();
@@ -316,9 +317,10 @@ public class PhotoDaoImpl extends BaseEntityDaoImpl<Photo> implements PhotoDao {
 
 		final PhotosImportSource photosImportSource = PhotosImportSource.getById( rootElement.element( PHOTO_IMPORT_DATA_IMPORT_SOURCE_ID ).getText() );
 		final String remoteUserId = rootElement.element( PHOTO_IMPORT_DATA_REMOTE_USER_ID ).getText();
+		final String remoteUserName = rootElement.element( PHOTO_IMPORT_DATA_REMOTE_USER_NAME ) != null ? rootElement.element( PHOTO_IMPORT_DATA_REMOTE_USER_NAME ).getText() : "";
 		final int remotePhotoId = Integer.parseInt( rootElement.element( PHOTO_IMPORT_DATA_REMOTE_PHOTO_ID ).getText() );
 
-		return new PhotoImportData( photosImportSource, remoteUserId, remotePhotoId );
+		return new PhotoImportData( photosImportSource, remoteUserId, remoteUserName, remotePhotoId );
 	}
 
 	private class PhotoMapper implements RowMapper<Photo> {

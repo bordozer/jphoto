@@ -21,13 +21,13 @@ public class PhotosImportLogger {
 		this.services = services;
 	}
 
-	public void logUserImportImportStart( final String remoteUserId ) {
+	public void logUserImportImportStart( final String remoteUserId, final String remoteUserName ) {
 		new LogMessenger() {
 			@Override
 			TranslatableMessage getMessage() {
 				return new TranslatableMessage( "Remote photos import: $1 $2: starting import", services )
 					.link( remoteContentHelper.getRemotePhotoSiteHost() )
-					.string( remoteContentHelper.getRemoteUserCardLink( remoteUserId ) )
+					.string( remoteContentHelper.getRemoteUserCardLink( remoteUserId, remoteUserName ) )
 					;
 			}
 		}.log();
