@@ -124,6 +124,13 @@ public class ArchivingJobController extends AbstractJobController {
 		aModel.setAppraisalArchivingEnabled( savedJobParametersMap.get( SavedJobParameterKey.APPRAISAL_ARCHIVING_ENABLED ).getValueBoolean() );
 		aModel.setPhotosArchivingEnabled( savedJobParametersMap.get( SavedJobParameterKey.PHOTOS_ARCHIVING_ENABLED ).getValueBoolean() );
 
+		final int archivePreviewsOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_PREVIEWS );
+		final int archiveAppraisalOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_VOTES );
+		final int photosOlderThen = configurationService.getInt( ConfigurationKey.ARCHIVING_PHOTOS );
+
+		aModel.setArchivePreviewsOlderThen( archivePreviewsOlderThen );
+		aModel.setArchiveAppraisalOlderThen( archiveAppraisalOlderThen );
+		aModel.setArchivePhotosOlderThen( photosOlderThen );
 	}
 
 	@Override
