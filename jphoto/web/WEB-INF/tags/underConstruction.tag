@@ -3,4 +3,4 @@
 
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html" %>
 
-<html:img id="thePageIsUnderConstructionImg" src="underconstruction.gif" width="360" height="360" alt="${eco:translate('The page is under construction...')}" />
+<html:img id="thePageIsUnderConstructionImg" src="underconstruction.gif" width="360" height="360" alt="${eco:translate('The page is under construction')}" />
