@@ -21,7 +21,7 @@
 
 	<table:table width="600">
 
-		<table:separatorInfo colspan="${colspan}" title="${eco:translate2('Voting for $1\\\'s rank in category $2', eco:escapeHtml(user.name), eco:translateGenre(genre.id) )}" />
+		<table:separatorInfo colspan="${colspan}" title="${eco:translate2('Voting for $1 rank in category $2', eco:userCardLink(user), eco:photosByUserByGenreLink( user, genre) )}" />
 
 		<c:set var="prevVotingTime" value="0"/>
 
@@ -75,7 +75,7 @@
 
 	<br />
 
-	${eco:translate('* The rank could not correspond gotten voces due to ranks in categories are recalculated at midnight everyday.')}
+	* ${eco:translate('The rank could not correspond gotten voices due to ranks in categories are recalculated periodically.')}
 
 	<div class="footerseparator"></div>
 

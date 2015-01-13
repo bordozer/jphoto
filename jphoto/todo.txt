@@ -34,9 +34,7 @@ ADMIN functions
 	- Messaging
 
 2. Archiving
-	- Photo view history
 	- Photo voting history
-	- Voting for user rank in genre history (?)
 
 3. Clean up:
 	- Photo view history

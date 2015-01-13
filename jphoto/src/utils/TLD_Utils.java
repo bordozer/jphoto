@@ -87,6 +87,10 @@ public class TLD_Utils {
 		return ApplicationContextHelper.getEntityLinkUtilsService().getPhotosByUserByGenreLink( user, genre, EnvironmentContext.getCurrentUser().getLanguage() );
 	}
 
+	public static String userCardLink( final User user ) {
+		return ApplicationContextHelper.getEntityLinkUtilsService().getUserCardLink( user, EnvironmentContext.getCurrentUser().getLanguage() );
+	}
+
 	public static String getProjectName() {
 		return ApplicationContextHelper.getSystemVarsService().getProjectName();
 	}

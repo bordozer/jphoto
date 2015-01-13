@@ -210,6 +210,12 @@
 	</function>
 
 	<function>
+		<name>userCardLink</name>
+		<function-class>utils.TLD_Utils</function-class>
+		<function-signature>java.lang.String userCardLink(core.general.user.User)</function-signature>
+	</function>
+
+	<function>
 		<name>projectName</name>
 		<function-class>utils.TLD_Utils</function-class>
 		<function-signature>java.lang.String getProjectName()</function-signature>
