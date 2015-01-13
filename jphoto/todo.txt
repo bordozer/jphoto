@@ -19,11 +19,17 @@ Base functionality
 	- Rewrite commenting
 
 5. Messaging
-	- Rewrite Front/Back end
+	- Redesign it totally
 
 6. Complain functionality
-	- Photo complain
-	- Comment complain
+	- One universal feedback to admin
+		- Photo:
+			- Publishing photo without right owning
+		- Comment:
+			- Spam
+			- Offending
+			- Custom
+			- Delete unused context menus and tests
 
 7. Portal page
 
@@ -38,6 +44,11 @@ ADMIN functions
 
 3. Clean up:
 	- Voting for user rank in genre history (if necessary)
+
+IDEAS FOR NEW FUNCTIONALITY
+
+- Photo gallery: Define photo categories show to in user settings
+- Adding to black list: option 'do not show HIS photos to ME' and 'do not MINE photos to HIM'. User settings: default values for the option
 
 
 Technical debt
