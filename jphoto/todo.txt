@@ -57,6 +57,7 @@ Technical debt
 - Basic kwaqua tests
 - Missing Breadcrumbs new implementation
 - User picker Front/Back end
+- BOOTSTRAP
 
 
 Known bugs
