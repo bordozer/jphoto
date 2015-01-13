@@ -34,12 +34,10 @@ ADMIN functions
 	- Messaging
 
 2. Archiving
-	- Photo voting history
+	- Photo voting history (split saving on 'latest' and 'old' and moving old records to archive)
 
 3. Clean up:
-	- Photo view history
-	- Photo voting history
-	- Voting for user rank in genre history (?)
+	- Voting for user rank in genre history (if necessary)
 
 
 Technical debt
@@ -51,4 +49,4 @@ Technical debt
 
 
 Known bugs
-- Photo import: selected photo categoriea are not saved theirs states
+- Photo import: selected photo categories are not saved theirs states
